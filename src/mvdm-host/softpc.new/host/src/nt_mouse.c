@@ -65,7 +65,7 @@ IMPORT word         savedtextoffset,savedtextsegment;
 #line 59
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
-#line 70
+#line 73
 
 
 LOCAL BOOL           mouse_state;
@@ -117,7 +117,7 @@ FORWARD void   ScaleToWindowedVirtualCoordinates(IS16 *,IS16 *,MOUSE_VECTOR *);
 FORWARD void   host_m2p_ratio(word *,word *,word *,word *);
 FORWARD void   host_x_range(word *,word *,word *,word *);
 FORWARD void   host_y_range(word *,word *,word *,word *);
-#line 121
+#line 124
 FORWARD void   EmulateCoordinates(half_word,IS16,IS16,IS16 *,IS16 *);
 FORWARD void   AssembleCallMask(MOUSE_CALL_MASK *);
 FORWARD void   FullscTextPtr(int, int);
@@ -125,16 +125,19 @@ FORWARD void   WindowedGraphicsScale(half_word,IS16,IS16,IS16 *,IS16 *);
 FORWARD void   dummy(short *,short *,unsigned short *);
 FORWARD void   LimitCoordinates(half_word,IS16 *,IS16 *);
 #ifdef X86GFX
-#line 128
+#line 131
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
-#line 132
+#line 135
 FORWARD void   TextScale(IS16 *,IS16 *,IS16 *, IS16 *);
 
 void LazyMouseInterrupt();
 VOID MouseEoiHook(int IrqLine, int CallCount);
 BOOLEAN bSuspendMouseInterrupts=FALSE;
 
+#ifdef JAPAN
+extern int is_us_mode();
+#endif // JAPAN
 
 GLOBAL   HOSTMOUSEFUNCS   the_mouse_funcs =
 {
@@ -181,7 +184,8 @@ LOCAL half_word TextOrGraphicsModeLUT[] =
    NOTHING,      GRAPHICS_MODE,GRAPHICS_MODE,GRAPHICS_MODE
    };
 
-
+#define DEFAULT_VIDEO_MODE 0x14
+half_word Max_Standard_Mode = 0x13;
 LOCAL int VirtualScrCtrLUTx[] =
    {
    319,         // mode 0
@@ -203,7 +207,10 @@ LOCAL int VirtualScrCtrLUTx[] =
    319,         // mode 10
    319,         // mode 11
    319,         // mode 12
-   159          // mode 13
+   159,         // mode 13
+   319          // Unknown Mode (default to mode 12)
+                // NOTE, we really needs to find out what is the resolution for
+                // the non-standard mode
    };
 LOCAL int VirtualScrCtrLUTy[] =
    {
@@ -226,7 +233,10 @@ LOCAL int VirtualScrCtrLUTy[] =
    174,        // mode 10
    239,        // mode 11
    239,        // mode 12
-   99          // mode 13
+   99,         // mode 13
+   239         // Unknown Mode (deault to mode 12)
+               // NOTE, we really needs to find out what is the resolution for
+               // the non-standard mode
    };
 
 //
@@ -319,7 +329,14 @@ void dummy(short *pooh1,short *pooh2, unsigned short *pooh3)
 
 GLOBAL BOOL mouse_in_use()
 {
+#if defined(NEC_98)
+#line 336
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 338
 return(mouse_state == INSTALLED && in_text_mode() == FALSE);
+#endif // !NEC_98
+#line 340
 }
 
 GLOBAL void mouse_reset()
@@ -330,10 +347,10 @@ if(mvdm_softpc_mouse_route_active())
    bFunctionZeroReset = TRUE;
    }
 #ifdef X86GFX
-#line 328
+#line 345
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /*X86GFX */
-#line 374
+#line 397
 
 //
 // Set the default Mickey to pixel ratios
@@ -350,10 +367,10 @@ m2pY = 16;
 GLOBAL void mouse_set_position IFN2(USHORT, newx, USHORT, newy)
 {
 #ifdef X86GFX
-#line 390
+#line 413
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
-#line 403
+#line 426
 
 
 //
@@ -365,20 +382,20 @@ GLOBAL void mouse_set_position IFN2(USHORT, newx, USHORT, newy)
 //
 
 if((sc.ScreenState == WINDOWED && bPointerOff) || mvdm_softpc_mouse_route_active())
-#line 414
+#line 437
    {
    if(mvdm_softpc_mouse_route_active()) bFunctionZeroReset = FALSE;
-#line 415
+#line 438
    newF4x = (IS16)newx;
    newF4y = (IS16)newy;
    bFunctionFour = TRUE;
    return;
    }
 #ifdef X86GFX
-#line 421
+#line 444
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
-#line 493
+#line 516
 }
 
 GLOBAL void mouse_cursor_display()
@@ -397,10 +414,10 @@ GLOBAL void mouse_cursor_mode_change()
 GLOBAL	void host_mouse_conditional_off_enabled(void)
 {
 #ifdef X86GFX
-#line 511
+#line 534
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 528
+#line 551
 
 
 }
@@ -415,38 +432,38 @@ VOID host_os_mouse_pointer(MOUSE_CURSOR_STATUS *mcs,MOUSE_CALL_MASK *call_mask,
                            MOUSE_VECTOR *counter)
 {
 #ifdef X86GFX
-#line 542
+#line 565
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
-#line 544
+#line 567
 
 host_ica_lock(); // synch with the event thread
 
 if(!mvdm_softpc_mouse_apply(mcs,counter,&old_x,&old_y,&bPointerInSamePlace,
                           bFunctionZeroReset,&bFunctionFour,&newF4x,&newF4y))
 {
-#line 547
+#line 570
 GetNextMouseEvent();
 
 #ifdef X86GFX
-#line 550
+#line 573
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
-#line 557
+#line 580
    {
    ScaleToWindowedVirtualCoordinates(&mcs->position.x,&mcs->position.y,counter);
    }
 }
 (void)mvdm_softpc_wow_page_domain_publish_cursor((long)mcs->position.x,
                                                  (long)mcs->position.y);
-#line 560
+#line 583
 
 //
 // Create a condition mask for use by any call back installed
 // by the application.
 //
 
-#line 566
+#line 589
 AssembleCallMask(call_mask);
 
 //
@@ -455,7 +472,7 @@ AssembleCallMask(call_mask);
 
 mcs->button_status=os_pointer_data.button_l | os_pointer_data.button_r<<1;
 
-#line 574
+#line 597
 host_ica_unlock();  // synch with the event thread
 
 
@@ -477,10 +494,10 @@ if(bPointerInSamePlace)
 else
    {
 #ifdef X86GFX
-#line 595
+#line 618
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
-#line 597
+#line 620
 
    //
    // The mouse has moved.
@@ -489,10 +506,10 @@ else
    *call_mask |= 1;
 
 #ifdef X86GFX
-#line 605
+#line 628
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif	   // X86GFX
-#line 701
+#line 732
    }
 
 
@@ -506,10 +523,10 @@ else
 //
 
 #ifdef X86GFX
-#line 714
+#line 745
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
-#line 719
+#line 750
 }
 
 //==============================================================================
@@ -641,10 +658,10 @@ old_r_button = os_pointer_data.button_r;
 }
 
 #ifdef X86GFX
-#line 850
+#line 881
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
-#line 1040
+#line 1077
 
 //=========================================================================
 // Function to scale mouse coordinates as returned by the event loop
@@ -663,7 +680,12 @@ half_word video_mode,textorgraphics;
 SAVED SHORT last_text_good_x = 0, last_text_good_y = 0;
 
 sas_load(0x449,&video_mode);
-
+#ifdef JAPAN
+video_mode = (is_us_mode()) ? video_mode : ( (video_mode == 0x72) ? 0x12 : 3);
+#endif // JAPAN
+if (video_mode > Max_Standard_Mode) {
+    video_mode = DEFAULT_VIDEO_MODE;
+}
 //
 // Follow different code paths if the user has the system pointer
 // hidden or displayed.
@@ -696,7 +718,7 @@ if(!bPointerOff)
 	 }
       else
 	 {
-	 *outx = ConsoleTextCellToVPCellLUT[os_pointer_data.x];
+         *outx = (IS16)ConsoleTextCellToVPCellLUT[os_pointer_data.x];
 	 last_text_good_x = *outx;
 	 }
       if(os_pointer_data.y > 87)
@@ -705,7 +727,7 @@ if(!bPointerOff)
 	 }
       else
 	 {
-	 *outy = ConsoleTextCellToVPCellLUT[os_pointer_data.y];
+         *outy = (IS16)ConsoleTextCellToVPCellLUT[os_pointer_data.y];
 	 last_text_good_y = *outy;
 	 }
       }
@@ -790,8 +812,8 @@ else
       // No recorded movement of the mouse.
       //
 
-      *outx = old_x;
-      *outy = old_y;
+      *outx = (IS16)old_x;
+      *outy = (IS16)old_y;
       counter->x = counter->y = 0;
       bPointerInSamePlace = TRUE;
       }
@@ -1122,6 +1144,7 @@ switch(vm)
    //
    case(0x11):
    case(0x12):
+   case(DEFAULT_VIDEO_MODE):
       {
       if(confine.bF7)
          {
@@ -1305,6 +1328,10 @@ switch(vm)
 
 void WindowedGraphicsScale(half_word vm,IS16 iX,IS16 iY,IS16 *oX, IS16 *oY)
 {
+//#if !defined(i386) && defined(JAPAN) //DEC-J Dec. 21 1993 TakeS
+//in use of $disp.sys, mouse cursor cannot move correctly.
+//if( is_us_mode() ){
+//#endif // _ALPHA_ && JAPAN
 switch(vm)
    {
    //
@@ -1323,10 +1350,14 @@ switch(vm)
       // must divide the y value by 2 to scale appropriately.
       //
 
-      iY >> 1;
+      iY >>= 1;
       break;
       }
    }
+//#if !defined(i386) && defined(JAPAN) //DEC-J Dec. 21 1993 TakeS
+//}else
+//  iY >>= 1;
+//#endif // _ALPHA_ && JAPAN
 //
 // prepare the cartesian coordinate values to return.
 //
@@ -1346,10 +1377,10 @@ switch(vm)
 void host_show_pointer()
 {
 #ifdef X86GFX
-#line 1741
+#line 1792
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
-#line 1774
+#line 1832
 }
 
 //===========================================================================
@@ -1363,10 +1394,10 @@ void host_show_pointer()
 void host_hide_pointer()
 {
 #ifdef X86GFX
-#line 1787
+#line 1845
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
-#line 1822
+#line 1887
 }
 
 //=========================================================================
@@ -1452,7 +1483,7 @@ void MouseHide(void)
 {
 
 ModifyMenuW(hM,IDM_POINTER,MF_BYCOMMAND,IDM_POINTER,
-	   wszDisplayMouseMenuStr);
+            wszDisplayMouseMenuStr);
 
 //
 // Clip the pointer to a region inside the console window
@@ -1469,7 +1500,7 @@ void MouseDisplay(void)
 {
 
 ModifyMenuW(hM,IDM_POINTER,MF_BYCOMMAND,IDM_POINTER,
-	  wszHideMouseMenuStr);
+            wszHideMouseMenuStr);
 
 //
 // Let the pointer move anywhere on the screen
@@ -1768,12 +1799,12 @@ if (tR.top != WarpClientRect.top ||
   {
    CToS(&tR);
 
-#line 2223
+#line 2288
 #ifdef MONITOR
-#line 2224
+#line 2289
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif    //MONITOR
-#line 2244
+#line 2309
 
    //
    // Clip the pointer to the new client rectangle, and retrive
@@ -1877,10 +1908,10 @@ os_pointer_data.y=0;
 host_ica_unlock();
 }
 #ifdef X86GFX
-#line 2347
+#line 2412
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
-#line 2399
+#line 2486
 
 //===========================================================================
 // Function to display the text cursor image for fullscreen text mode.
@@ -1893,10 +1924,10 @@ host_ica_unlock();
 void FullscTextPtr(int x,int y)
 {
 #ifdef X86GFX
-#line 2411
+#line 2498
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
-#line 2479
+#line 2566
 }
 
 //==============================================================================
@@ -1909,6 +1940,7 @@ void host_x_range(word *blah, word *blah2,word *CX,word *DX)
 confine.bF7 = TRUE;
 confine.xmin = *CX;
 confine.xmax = *DX;
+VirtualScrCtrLUTx[DEFAULT_VIDEO_MODE] = (*CX + *DX) / 2;
 
 //
 // Force a mouse interrupt to make it happen.
@@ -1927,6 +1959,7 @@ void host_y_range(word *blah, word *blah2,word *CX,word *DX)
 confine.bF8 = TRUE;
 confine.ymin = *CX;
 confine.ymax = *DX;
+VirtualScrCtrLUTy[DEFAULT_VIDEO_MODE] = (*CX + *DX) / 2;
 
 //
 // Force a mouse interrupt to make it happen.

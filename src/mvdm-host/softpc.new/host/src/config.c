@@ -57,8 +57,15 @@
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif  //HUNTER
-#line 60
+#if defined(NEC_98)
+#line 61
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 63
 
+#ifdef ARCX86
+#include "rom.h"
+#endif /* ARCX86 */
 
 /*================================================================
 External references
@@ -69,7 +76,7 @@ IMPORT ULONG xmsMemorySize;
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 112
+#line 118
 
 
 PIF_DATA pfdata; /* data structure for holding all the relavent information
@@ -94,19 +101,22 @@ int  nShortKeys;
 GLOBAL SHORT Npx_enabled = TRUE;        //For Jazz CPU support
 GLOBAL BOOL IdleDisabledFromPIF = FALSE;//Flag showing idledetection wishes
 GLOBAL UTINY number_of_floppy = 0;	// number of floppy drives
+#ifdef ARCX86
+GLOBAL BOOL UseEmulationROM = FALSE;   // For ARCx86 system
+#endif /* ARCX86 */
 
+#if defined(NEC_98)
+#line 147
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 154
 
 /*================================================================
 Local defines
 ================================================================*/
-/* command definitions for read_profile_int */
 
-#define PROFILE_LPT_AUTOCLOSE_DELAY 0
-#define PROFILE_COM_AUTOCLOSE_DELAY 1
-#define PROFILE_LPT_AUTOFLUSH_DELAY 2
-#define PROFILE_COM_SYNCWRITE	    3
-#define PROFILE_COM_TXBUFFER_SIZE   4
-#define PROFILE_MAX_INDEX	    PROFILE_COM_TXBUFFER_SIZE + 1
+#define PROFILE_LPT (0)
+#define PROFILE_COM (1)
 
 #define EMBITSET        0x4
 
@@ -151,7 +161,7 @@ VOID process_pif_exe (char *PifName)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 194
+#line 206
 
     GetPIFData(&pfdata, PifName);
 
@@ -173,6 +183,9 @@ VOID process_pif_exe (char *PifName)
     */
     nShortKeys = 0;
     ReserveKey = 0;
+    Shortkey.Modifier = 0;
+    Shortkey.ScanCode = 0;
+
     if (DosSessionId || (pfdata.AppHasPIFFile && pfdata.SubSysId == SUBSYS_DOS))
     {
 	ReserveKey = pfdata.reskey;
@@ -184,7 +197,7 @@ VOID process_pif_exe (char *PifName)
 	if (ReserveKey || nShortKeys)
 	    SetConsoleKeyShortcuts(TRUE,
 				   ReserveKey,
-				   (nShortKeys) ? &Shortkey : NULL,
+                                   &Shortkey,
 				   nShortKeys
 				  );
     }
@@ -196,7 +209,7 @@ VOID process_pif_exe (char *PifName)
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif  /* X86GFX */
-#line 278
+#line 293
 
 }
 
@@ -204,8 +217,13 @@ VOID process_pif_exe (char *PifName)
 void DisablePIFKeySetup(void)
 {
     /* only doing this if the application was launched from a new console */
-    if (ReserveKey || nShortKeys)
-	SetConsoleKeyShortcuts(TRUE, 0, (APPKEY *)0, 0);
+    if (ReserveKey || nShortKeys) {
+        APPKEY ShortKey;
+            Shortkey.Modifier = 0;
+            Shortkey.ScanCode = 0;
+
+        SetConsoleKeyShortcuts(TRUE, 0, &ShortKey, 0);
+    } 
 }
 
 /* Turn on the PIF reserved & shortcut keys - on resume */
@@ -215,12 +233,18 @@ void EnablePIFKeySetup(void)
     if (ReserveKey || nShortKeys)
 	SetConsoleKeyShortcuts(TRUE,
 			       ReserveKey,
-			       (nShortKeys) ? &Shortkey : NULL,
+                               &Shortkey,
 			       nShortKeys
 			       );
 
 }
 
+
+#if defined(NEC_98)
+#line 324
+#error Unsupported NEC PC-98 configuration
+#endif //NEC_98
+#line 458
 
 GLOBAL VOID config( VOID )
 {
@@ -238,10 +262,44 @@ GLOBAL VOID config( VOID )
     char    achPIF[] = ".pif";
     ULONG dpmiMemorySize, vdmMemorySize;
 
+#if defined(NEC_98)
+#line 476
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 530
+
+#ifdef ARCX86
+    {
+        HKEY    hSystemKey;
+        UCHAR   identifier[256];
+        ULONG   identifierSize = 256;
+
+        if (RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+                         "HARDWARE\\DESCRIPTION\\System",
+                         0,
+                         KEY_QUERY_VALUE,
+                         &hSystemKey) == ERROR_SUCCESS)
+        {
+            if (RegQueryValueEx(hSystemKey,
+                                "Identifier",
+                                NULL,
+                                NULL,
+                                (LPBYTE)identifier,
+                                &identifierSize) == ERROR_SUCCESS)
+            {
+                if (strstr(identifier, "ARCx86")) {
+                    UseEmulationROM = TRUE;
+                }
+            }
+            RegCloseKey(hSystemKey);
+        }
+    }
+#endif /* ARCX86 */
+
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 331
+#line 571
 
          /*
           *  Set the window title to a unique string, to get
@@ -259,7 +317,10 @@ GLOBAL VOID config( VOID )
             SetConsoleTitle(UniqueTitle);
             }
         else {
-            strcpy(Title, "Hidden Console of WOW VDM");
+            // vdm for wow
+            sprintf(Title, "Hidden Console of WOW VDM - %lx.%lx",
+                   WowSessionId,
+                   NtCurrentPeb()->ProcessParameters->ConsoleHandle);
             }
 
 
@@ -286,7 +347,7 @@ GLOBAL VOID config( VOID )
         GetPIF.CmdSize = 0;
         GetPIF.AppName = NULL;
         GetPIF.AppLen = 0;
-        GetPIF.iTask    = DosSessionId;
+        GetPIF.iTask      = VDMForWOW && !fSeparateWow ? WowSessionId : DosSessionId;
 	GetPIF.Desktop	  = NULL;
         GetPIF.DesktopLen = 0;
         GetPIF.ReservedLen = (VDMForWOW) ? 0 : RESERVED_LENGTH;
@@ -303,6 +364,10 @@ GLOBAL VOID config( VOID )
             GetPIF.Title    = NULL;
             GetPIF.TitleLen = 0;
             }
+#ifdef JAPAN
+        // only take win31j extention if we are running from a new console.
+        pfdata.IgnoreWIN31JExtention = (DosSessionId) ? 0 : 1;
+#endif // JAPAN
 
 	PifName[0] = '\0';
 	pfdata.IgnoreTitleInPIF = 0;
@@ -354,6 +419,42 @@ GLOBAL VOID config( VOID )
         pfdata.AppHasPIFFile = PifName[0] ? 1 : 0;
 
         if(VDMForWOW){
+#ifdef JAPAN
+        if (!GetPIF.PifLen || !(pch = strchr(PifName, ' '))) {
+                // when wow starts, kernel32(GetNextVDMCommand) does not
+                // provide pif relate information.
+                // we must get it from cmdline. kksuzuka #1008 related
+                if ((pch = strstr(GetCommandLine(), "-a ")) && pch[3]) {
+                    pch += 3;      // skip over "-a "
+                    strcpy(PifName, pch);
+                    if (i = strlen(PifName)) {
+                        strcpy(&PifName[i - strlen(achPIF)], achPIF);
+                dw = GetFullPathNameOem(PifName,
+                                    MAX_PATH + 1,
+                            CurDir,
+                            &pch
+                                    );
+                        if (dw != 0 && dw <= MAX_PATH) {
+                    dw = GetFileAttributesOem(CurDir);
+                if (dw == (DWORD)(-1) ||
+                                (dw & FILE_ATTRIBUTE_DIRECTORY)) {
+                    dw = SearchPathOem(NULL,
+                           pch,
+                           NULL,
+                           MAX_PATH + 1,
+                           PifName,
+                           &pch
+                           );
+                if (dw == 0 || dw > MAX_PATH)
+                    PifName[0] = '\0';
+                }
+                else
+                    strcpy(PifName, CurDir);
+                }
+                    }
+                }
+            }
+#endif // JAPAN
             DosSessionId = 0;            // Wow has hidden console !
             pfdata.IgnoreCmdLineInPIF =
 	    pfdata.IgnoreTitleInPIF =
@@ -362,6 +463,11 @@ GLOBAL VOID config( VOID )
         }
 
         process_pif_exe(PifName);
+
+#if defined(NEC_98)
+#line 736
+#error Unsupported NEC PC-98 configuration
+#endif
 
         sas_term ();
 
@@ -378,7 +484,7 @@ GLOBAL VOID config( VOID )
             // XMS to satisfy win16 apps looking at the real machine size
             //
             emsMemorySize = 0;
-            xmsMemorySize = 8192;
+            xmsMemorySize = XMS_DEFAULT_MEMORY_SIZE;
 	    dpmiMemorySize = DPMI_DEFAULT_MEMORY_SIZE_FOR_WOW;
         } else {
 
@@ -420,7 +526,7 @@ GLOBAL VOID config( VOID )
 #ifdef i386
 #error Unsupported i386 kernel VDM memory-size profile
 #else
-#line 510
+#line 813
 	 vdmMemorySize = GetVDMSize(VDMForWOW);
 
 	 // Extend the vdm size if the user asks for it through a .PIF.
@@ -438,7 +544,7 @@ GLOBAL VOID config( VOID )
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 530
+#line 833
 
 	sas_init(vdmMemorySize*ONEKB);
 
@@ -456,7 +562,7 @@ GLOBAL VOID config( VOID )
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 549
+#line 899
 
            //  Now see if we can get the console window handle
         if (!VDMForWOW)  {
@@ -492,6 +598,12 @@ GLOBAL VOID config( VOID )
 	for (i = 0, hostID = C_FLOPPY_A_DEVICE; i < MAX_FLOPPY; i++, hostID++)
 	    if ((gfi_floppy_active(hostID, 1, NULL)) == C_CONFIG_OP_OK)
 		number_of_floppy++;
+
+#if defined(NEC_98)
+#line 936
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 948
 }
 
 GLOBAL VOID *
@@ -553,37 +665,34 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
                 case C_COM1_NAME:
                         strcpy (values->string, "COM1");
-			values->index = (short)read_profile_int(PROFILE_COM_AUTOCLOSE_DELAY);
+                        values->index = (short)read_profile_int(PROFILE_COM);
                         return ((VOID *) values->string);
 
                 case C_COM2_NAME:
                         strcpy (values->string, "COM2");
-			values->index = (short)read_profile_int(PROFILE_COM_AUTOCLOSE_DELAY);
+                        values->index = (short)read_profile_int(PROFILE_COM);
                         return ((VOID *) values->string);
 
                 case C_COM3_NAME:
                         strcpy (values->string, "COM3");
-			values->index = (short)read_profile_int(PROFILE_COM_AUTOCLOSE_DELAY);
+                        values->index = (short)read_profile_int(PROFILE_COM);
                         return ((VOID *) values->string);
 
                 case C_COM4_NAME:
                         strcpy (values->string, "COM4");
-			values->index = (short)read_profile_int(PROFILE_COM_AUTOCLOSE_DELAY);
+                        values->index = (short)read_profile_int(PROFILE_COM);
                         return ((VOID *) values->string);
 
                 case C_LPT1_NAME:
                         strcpy (values->string, "LPT1");
-			values->index = (short)read_profile_int(PROFILE_LPT_AUTOCLOSE_DELAY);
                         return ((VOID *) values->string);
 
                 case C_LPT2_NAME:
                         strcpy (values->string, "LPT2");
-			values->index = (short)read_profile_int(PROFILE_LPT_AUTOCLOSE_DELAY);
                         return ((VOID *) values->string);
 
                 case C_LPT3_NAME:
                         strcpy (values->string, "LPT3");
-			values->index = (short)read_profile_int(PROFILE_LPT_AUTOCLOSE_DELAY);
                         return ((VOID *) values->string);
 
 
@@ -594,7 +703,7 @@ config_inquire(UTINY hostID, ConfigValues *values)
                         return ((VOID *)values->index);
 
                 case C_AUTOFLUSH_DELAY:
-			values->index = read_profile_int(PROFILE_LPT_AUTOFLUSH_DELAY); //Delay in secs
+                        values->index = (short)read_profile_int(PROFILE_LPT); //Delay in secs
                         return((VOID *)values->index);
 
 //::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -618,15 +727,7 @@ config_inquire(UTINY hostID, ConfigValues *values)
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 738
-
-		case C_COM_SYNCWRITE:
-		    values->index = (short)read_profile_int(PROFILE_COM_SYNCWRITE);
-		    return ((VOID *)values->index);
-
-		case C_COM_TXBUFFER_SIZE:
-		    values->index = (short)read_profile_int(PROFILE_COM_TXBUFFER_SIZE);
-		    return ((VOID *)values->index);
+#line 1099
 
                 default:        /* ie everything else */
                         /* fail */
@@ -677,7 +778,7 @@ config_activate(UTINY hostID, BOOL reqState)
         UNREFERENCED_FORMAL_PARAMETER(hostID);
         UNREFERENCED_FORMAL_PARAMETER(reqState);
 
-        /* do bugger all */
+        /* do all */
 }
 
 GLOBAL char *   host_expand_environment_vars IFN1(const char *, string)
@@ -703,7 +804,7 @@ void host_runtime_init()
 #ifdef MONITOR
 #error Excluded unsupported monitor floating-point status
 #else
-#line 844
+#line 1197
     runtime_status.npx_enabled = TRUE;
 #endif
 }
@@ -724,6 +825,7 @@ short host_runtime_inquire IFN1(UTINY, what)
 #endif
                         ;
         }
+        return FALSE;
 }
 
 void host_runtime_set IFN2(UTINY, what, SHORT, val)
@@ -752,7 +854,7 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 971
+#line 1325
 
 /*
  * ===========================================================================
@@ -763,7 +865,7 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 1103
+#line 1457
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::: Read auto close time ::::::::::::::::::::::::::::*/
@@ -771,73 +873,52 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
 
 #define APPNAME "Dos Emulation"
 
-/* These are entries uder "WOW" section in the system registry to control
- * LPT and COM devices behaviors.
- *
- * "PrinterAutoClose=n" -- the printer port will be closed if there are
- *			   not activities on the port for n seconds
- * "CommsAutoClose=n"	-- the comm port will be closed(suspended" if there
- *			   there are not activities on the port for
- *			   n s. 0 means auto close is disabled.
- * "LPT_timeout=n"	-- the printer port will be flushed every n seconds
- * "COM_SyncWrite=[0,1]" -- if 0, write to comm port(tx) if performed in
- *			    async way(using overlapped i/o). If 1, then
- *			    data will be written to the port in synchrounously.
- * "COM_TxBuffer_Size=n" -- comm tx queue buffer size. It also used to control
- *			    the tx threshold -- setting the buffer size to
- *			    1 effectively disables tx queuing.
- */
 struct { char *keyword; int def; } ProfileStrings[] =
 {
     { "PrinterAutoClose", 15 },
-    { "CommsAutoClose", 0 },
-    { "LPT_timeout", 15},
-    { "COM_SyncWrite", },
-    { "COM_TxBuffer_Size", 200}
+    { "CommsAutoClose", 10 }
 };
 
 int read_profile_int(int index)
 {
     CHAR  CmdLine[100];
+    PCHAR KeywordName;
     ULONG CmdLineSize = 100;
-    HKEY  hWowKey;
-    int   Value;
+    HKEY  LPTKey;
 
-    ASSERT((unsigned int) index < PROFILE_MAX_INDEX);
-    /* make sure we have right index constants */
-    ASSERT(PROFILE_LPT_AUTOCLOSE_DELAY == 0 &&
-	   PROFILE_COM_AUTOCLOSE_DELAY == 1 &&
-	   PROFILE_LPT_AUTOFLUSH_DELAY == 2 &&
-	   PROFILE_COM_SYNCWRITE       == 3 &&
-	   PROFILE_COM_TXBUFFER_SIZE == 4);
+    /*.............................................. Get auto close times */
+
+    if (index == PROFILE_COM)
+        return(ProfileStrings[PROFILE_COM].def);
+
+    /* LPT autoclose default moved from win.ini to registry */
 
     if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,
 		       "SYSTEM\\CurrentControlSet\\Control\\WOW",
 		       0,
 		       KEY_QUERY_VALUE,
-		       &hWowKey
+                       &LPTKey
 		     ) != 0)
     {
-	/* wow key doesn't exist, use default value */
-	return(ProfileStrings[index].def);
+        return(ProfileStrings[PROFILE_LPT].def);
     }
 
-    if (RegQueryValueEx (hWowKey,
-			 ProfileStrings[index].keyword,
+    KeywordName = "LPT_timeout" ;
+
+    if (RegQueryValueEx (LPTKey,
+                         KeywordName,
 			 NULL,
 			 NULL,
 			 (LPBYTE)&CmdLine,
 			 &CmdLineSize) != 0)
     {
-	/* if the value doesn't exist, use the default value */
-	Value = ProfileStrings[index].def;
+        RegCloseKey (LPTKey);
+        return(ProfileStrings[PROFILE_LPT].def);
     }
-    else
-	Value = (int)atoi(CmdLine);
 
-    RegCloseKey (hWowKey);
+    RegCloseKey (LPTKey);
 
-    return Value;
+    return ((int) atoi(CmdLine));
 }
 
 
@@ -858,7 +939,7 @@ boolean get_lim_configuration_data(PLIM_CONFIG_DATA buffer)
 #ifdef MONITOR
 #error Excluded original conditional branch
 #endif
-#line 1215
+#line 1548
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::: Get VDM Memory Size :::::::::::::::::::::::::::::*/
@@ -938,3 +1019,10 @@ GetDefaultVDMSize ( BOOL fwow )
     else
         return 16L * 1024L;
 }
+
+#if defined(NEC_98)
+#line 1629
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1715
+

@@ -39,10 +39,12 @@ LOCAL void ms_not_a_bop (void);
 GLOBAL half_word io_get_spare_slot (void);
 GLOBAL void io_release_spare_slot (half_word);
 #else
-#line 41
+#line 42
 #error Unsupported excluded original configuration
 #endif
-#line 51
+#line 52
+
+extern void illegal_bop(void);
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::: Local data structures */
 
@@ -73,12 +75,12 @@ GLOBAL void ms_bop ()		    /* called from MS_bop_5 ie bop 0x55 */
 
 LOCAL void ms_not_a_bop()
 {
-#line 81
+#line 84
 #ifndef PROD
-#line 82
+#line 85
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 88
+#line 91
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -210,12 +212,12 @@ WORD FreeVddAdapter(HANDLE hVdd)
    return 0;
 }
 
+#ifndef NEC_98
 #ifdef MONITOR
-#line 220
+#line 224
 #error Excluded original conditional branch
 #endif /* MONITOR */
-#line 222
-
+#endif // !NEC98
 
 /*** VDDInstallIOHook - This service is provided for VDDs to hook the
  *			IO ports they are responsible for.
@@ -272,10 +274,10 @@ BOOL VDDInstallIOHook (
    WORD              wAdapter;
    PVDD_IO_PORTRANGE pPRange;
 #ifdef MONITOR
-#line 279
+#line 283
 #error Excluded original conditional branch
 #endif
-#line 281
+#line 285
 
 
       // check parameters
@@ -326,10 +328,10 @@ BOOL VDDInstallIOHook (
           for (w = pPRange->First; w <= pPRange->Last; w++)
             {
 #ifdef MONITOR
-#line 331
+#line 335
 #error Excluded original conditional branch
 #endif
-#line 344
+#line 350
               if (!io_connect_port(w, (half_word)wAdapter, IO_READ_WRITE))
                  {
                   // if one of the port connects failed
@@ -358,11 +360,13 @@ BOOL VDDInstallIOHook (
           i--;
           }
 
+#ifndef NEC_98
 #ifdef MONITOR
-#line 373
+#line 380
 #error Excluded original conditional branch
 #endif /* MONITOR */
-#line 382
+#endif // !NEC_98
+#line 390
    return TRUE;
 }
 
@@ -392,10 +396,10 @@ VOID VDDDeInstallIOHook (
     WORD w;
     WORD wAdapter;
 #ifdef MONITOR
-#line 411
+#line 419
 #error Excluded original conditional branch
 #endif
-#line 413
+#line 421
 
 
     wAdapter = FreeVddAdapter(hVdd);
@@ -409,20 +413,22 @@ VOID VDDDeInstallIOHook (
           for (w = pPortRange->First; w <= pPortRange->Last; w++)
             {
 #ifdef MONITOR
-#line 426
+#line 434
 #error Excluded original conditional branch
 #endif
-#line 439
+#line 449
               io_disconnect_port(w, (half_word)wAdapter);
               }
           pPortRange++;
 	  }
 
+#ifndef NEC_98
 #ifdef MONITOR
-#line 445
+#line 456
 #error Excluded original conditional branch
 #endif	/* MONITOR */
-#line 454
+#endif // !NEC_98
+#line 466
 }
 
 
@@ -841,6 +847,22 @@ BOOL VDDSetDMA (
         pDcp->status.all = (BYTE) pDmaInfo->status;
         }
 
+    //
+    // If DMA count is 0xffff and autoinit is enabled, we need to
+    // reload the count and address.
+    //
+
+    if ((pDcp->current_count[Chan][0] == (half_word) 0xff) &&
+        (pDcp->current_count[Chan][1] == (half_word) 0xff)) {
+
+        if (pDcp->mode[Chan].bits.auto_init != 0) {
+            pDcp->current_count[Chan][0] = pDcp->base_count[Chan][0];
+            pDcp->current_count[Chan][1] = pDcp->base_count[Chan][1];
+
+            pDcp->current_address[Chan][0] = pDcp->base_address[Chan][0];
+            pDcp->current_address[Chan][1] = pDcp->base_address[Chan][1];
+        }
+    }
 
     return TRUE;
 }

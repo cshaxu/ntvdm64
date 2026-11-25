@@ -86,13 +86,16 @@ long host_read_resource(int type, char *name, byte *addr, int maxsize, int displ
                 /* seek to end to get size */
                 size = _lseek (file_fd, 0L, 2);
 
-                if (size > maxsize)     // corrupted file???
-                    return(0);
-
+                /* Check if the size is valid         */
                 /* Seek back to start before reading! */
-                _lseek (file_fd, 0L, 0);
 
-                _read(file_fd,addr,size);
+                if (size > maxsize || 0 > _lseek (file_fd, 0L, 0))  {
+                    /* Don't forget to close the handle */
+                    _close (file_fd);
+                    return(0);
+                }
+
+                size=_read(file_fd,addr,size);
                 _close(file_fd);
         }
 
@@ -114,7 +117,7 @@ long size;              /* Quantity of data to write */
         char *hff_ret;
         extern char *host_find_file(char *name, char *path, int disp_err);
 
-#line 110
+#line 113
         type = 0; // To stop unreferenced formal parameter errors
 
         host_block_timer ();
@@ -142,11 +145,11 @@ long size;              /* Quantity of data to write */
                         host_error (EG_REZ_UPDATE,ERR_CONT,name);
 #endif
 
-#line 137
+#line 140
                         /* Continuing => try to create a new file */
                         file_fd = _open(name,O_RDWR|O_CREAT,S_IREAD|S_IWRITE);
 
-#line 140
+#line 143
                         if (file_fd != -1)
                         {
                                 _write (file_fd, addr, size);

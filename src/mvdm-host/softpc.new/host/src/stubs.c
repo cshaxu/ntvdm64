@@ -1,6 +1,10 @@
 #undef ANSI     // until file tidied or better still, lost
 
+#include <nt.h>
+#include <ntrtl.h>
+#include <nturtl.h>
 #include <windows.h>
+#include <vdm.h>
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
@@ -44,7 +48,11 @@ double x;
 #line 56
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif	//MONITOR
-#line 242
+#line 249
+
+
+
+
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ASSERT CODE */
 
@@ -132,10 +140,10 @@ decode_files_init()
 }
 
 #ifdef ALPHA
-#line 329
+#line 340
 #error Unsupported excluded original configuration
 #endif
-#line 341
+#line 352
 
 #ifdef CPU_40_STYLE
 
@@ -159,10 +167,10 @@ GLOBAL void host_sigio_event IPT0()
 
 #ifndef GENERIC_NPX
 #ifndef CPU_40_STYLE
-#line 364
+#line 375
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
-#line 385
+#line 396
 #endif /* GENERIC_NPX */
 #endif
 
@@ -226,12 +234,12 @@ getsdosunit()
         return(1);
 }
 
-#line 448
+#line 459
 #ifdef NOT_IN_USE
-#line 449
+#line 460
 #error Unsupported excluded original configuration
 #endif
-#line 460
+#line 471
 
 int host_timer_2_frig_factor = 20;
 
@@ -303,18 +311,18 @@ getIntelRegistersPointer()
     return(0);
 }
 
-#line 531
+#line 542
 #if  0
-#line 532
+#line 543
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 543
+#line 556
 
-#line 546
+#line 557
 int FlatAddress[1];
 int Ldt[1];
 int VdmTib;
-#line 549
+#line 560
 int VdmTibStruct;
 
 void DispatchInterrupts()
@@ -322,10 +330,10 @@ void DispatchInterrupts()
 }
 
 #else //MONITOR
-#line 556
+#line 567
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif  //MONITOR
-#line 569
+#line 580
 
 
 #ifndef MONITOR
@@ -342,7 +350,8 @@ void DispatchInterrupts()
 
 VOID
 cpu_createthread(
-    HANDLE Thread
+    HANDLE Thread,
+    PVDM_TIB VdmTib
     )
 /*++
 
@@ -354,6 +363,8 @@ Routine Description:
 Arguments:
 
     Thread -- Supplies a thread handle
+
+    VdmContext -- Supplies a pointer to a vdm context
 
 Return Value:
 

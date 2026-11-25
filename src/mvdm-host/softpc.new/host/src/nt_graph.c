@@ -90,7 +90,14 @@ extern int  ega_int_enable;
 #endif
 #line 80
 
+#if defined(NEC_98)
+#line 82
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 93
 extern byte  *video_copy;
+#endif // !NEC_98
+#line 95
 
 static int flush_count = 0;	 /*count of graphic ticks since last flush*/
 static BOOL presentation_updated = FALSE;
@@ -98,18 +105,18 @@ static BOOL presentation_updated = FALSE;
 // DIB_PAL_INDICES shouldn't be used, use CreateDIBSECTION to get better
 // performance characteristics.
 
-#line 88
+#line 101
 #define DIB_PAL_INDICES 2
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: EXPORTS */
 
-#line 92
+#line 105
 SCREEN_DESCRIPTION sc;
 
-#line 94
+#line 107
 #ifdef BIGWIN
 int             horiz_lut[256];
-#line 96
+#line 109
 #endif
 int             host_screen_scale;
 int             host_display_depth = 8;
@@ -122,11 +129,26 @@ PBITMAPINFO     VGADIB;
 
 void            (*paint_screen)();
 BOOL            FunnyPaintMode;
+#if defined(NEC_98)
+#line 122
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 124
 
+#if defined(JAPAN) || defined(KOREA)
+// mskkbug#2002: lotus1-2-3 display garbage
+// refer from nt_fulsc.c:ResetConsoleState()
+BOOL            CurNowOff = FALSE;
+#endif // JAPAN || KOREA
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::: Paint functions */
 
 static PAINTFUNCS std_mono_paint_funcs =
 {
+#if defined(NEC_98)
+#line 135
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 148
         nt_text,
         nt_cga_mono_graph_std,
         nt_cga_mono_graph_std,
@@ -137,15 +159,20 @@ static PAINTFUNCS std_mono_paint_funcs =
         nt_vga_mono_graph_std,
         nt_vga_mono_med_graph_std,
         nt_vga_mono_hi_graph_std,
-#line 123
+#line 158
 #ifdef V7VGA
         nt_v7vga_mono_hi_graph_std,
-#line 125
+#line 160
 #endif /* V7VGA */
 };
 
 static PAINTFUNCS big_mono_paint_funcs =
 {
+#if defined(NEC_98)
+#line 166
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 179
         nt_text,
         nt_cga_mono_graph_big,
         nt_cga_mono_graph_big,
@@ -156,15 +183,20 @@ static PAINTFUNCS big_mono_paint_funcs =
         nt_vga_mono_graph_big,
         nt_vga_mono_med_graph_big,
         nt_vga_mono_hi_graph_big,
-#line 140
+#line 189
 #ifdef V7VGA
         nt_v7vga_mono_hi_graph_big,
-#line 142
+#line 191
 #endif /* V7VGA */
 };
 
 static PAINTFUNCS huge_mono_paint_funcs =
 {
+#if defined(NEC_98)
+#line 197
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 210
         nt_text,
         nt_cga_mono_graph_huge,
         nt_cga_mono_graph_huge,
@@ -175,15 +207,20 @@ static PAINTFUNCS huge_mono_paint_funcs =
         nt_vga_mono_graph_huge,
         nt_vga_mono_med_graph_huge,
         nt_vga_mono_hi_graph_huge,
-#line 157
+#line 220
 #ifdef V7VGA
         nt_v7vga_mono_hi_graph_huge,
-#line 159
+#line 222
 #endif /* V7VGA */
 };
 
 static PAINTFUNCS std_colour_paint_funcs =
 {
+#if defined(NEC_98)
+#line 228
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 241
         nt_text,
         nt_cga_colour_med_graph_std,
         nt_cga_colour_hi_graph_std,
@@ -194,15 +231,20 @@ static PAINTFUNCS std_colour_paint_funcs =
         nt_vga_graph_std,
         nt_vga_med_graph_std,
         nt_vga_hi_graph_std,
-#line 174
+#line 251
 #ifdef V7VGA
         nt_v7vga_hi_graph_std,
-#line 176
+#line 253
 #endif /* V7VGA */
 };
 
 static PAINTFUNCS big_colour_paint_funcs =
 {
+#if defined(NEC_98)
+#line 259
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 272
         nt_text,
         nt_cga_colour_med_graph_big,
         nt_cga_colour_hi_graph_big,
@@ -213,15 +255,20 @@ static PAINTFUNCS big_colour_paint_funcs =
         nt_vga_graph_big,
         nt_vga_med_graph_big,
         nt_vga_hi_graph_big,
-#line 191
+#line 282
 #ifdef V7VGA
         nt_v7vga_hi_graph_big,
-#line 193
+#line 284
 #endif /* V7VGA */
 };
 
 static PAINTFUNCS huge_colour_paint_funcs =
 {
+#if defined(NEC_98)
+#line 290
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 303
         nt_text,
         nt_cga_colour_med_graph_huge,
         nt_cga_colour_hi_graph_huge,
@@ -232,23 +279,28 @@ static PAINTFUNCS huge_colour_paint_funcs =
         nt_vga_graph_huge,
         nt_vga_med_graph_huge,
         nt_vga_hi_graph_huge,
-#line 208
+#line 313
 #ifdef V7VGA
         nt_v7vga_hi_graph_huge,
-#line 210
+#line 315
 #endif /* V7VGA */
 };
 
-#line 213
+#line 318
 #ifdef MONITOR
-#line 214
+#line 320
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#line 264
+#line 371
 #endif /* MONITOR */
-#line 265
+#line 372
 
 static INITFUNCS mono_init_funcs =
 {
+#if defined(NEC_98)
+#line 376
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 389
         nt_init_text,
         nt_init_cga_mono_graph,
         nt_init_cga_mono_graph,
@@ -261,6 +313,11 @@ static INITFUNCS mono_init_funcs =
 
 static INITFUNCS colour_init_funcs =
 {
+#if defined(NEC_98)
+#line 402
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 415
         nt_init_text,
         nt_init_cga_colour_med_graph,
         nt_init_cga_colour_hi_graph,
@@ -272,11 +329,11 @@ static INITFUNCS colour_init_funcs =
 };
 
 #ifdef MONITOR
-#line 291
+#line 427
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#line 302
+#line 439
 #endif /* MONITOR */
-#line 303
+#line 440
 
 /*::::::::::::::::::::::::::::::::::::::::::::::: Adaptor function protocol */
 
@@ -421,7 +478,10 @@ extern BYTE     Red[];
 extern BYTE     Green[];
 extern BYTE     Blue[];
 
-GLOBAL BOOL	host_stream_io_enabled = FALSE;
+#ifndef NEC_98
+GLOBAL boolean  host_stream_io_enabled = FALSE;
+#endif // !NEC_98
+#line 587
 
 GLOBAL COLOURTAB defaultColours =
     {
@@ -506,10 +566,20 @@ GLOBAL VOID closeGraphicsBuffer IFN0()
 
                 MouseDetachMenuItem(TRUE);
 
+#if defined(NEC_98)
+#line 672
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 682
 		if( !SetConsoleActiveScreenBuffer( sc.OutputHandle ) ){
 			assert2( NO, "VDM: SCASB() failed:%#x H=%#x",
 			 	GetLastError(), sc.OutputHandle );
                 }
+#if defined(NEC_98)
+#line 687
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 694
 
                 /*
                  *  Cleanup ALL handles associated with screen buffer
@@ -537,11 +607,11 @@ GLOBAL VOID closeGraphicsBuffer IFN0()
                 CloseHandle(sc.ConsoleBufInfo.hMutex);
                 sc.ConsoleBufInfo.hMutex = 0;
 #ifdef X86GFX
-#line 563
+#line 721
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
-#line 570
+#line 728
 #endif /* X86GFX */
-#line 571
+#line 729
 	}
 } /* end of closeGraphicsBuffer() */
 
@@ -567,10 +637,10 @@ void nt_init_screen(void)
     static boolean  already_called = FALSE;
 
 #ifdef X86GFX
-#line 596
+#line 754
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 598
+#line 756
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_init_screen\n");
 
     /* If an error occurs before the user interface has been initialised then
@@ -589,26 +659,45 @@ void nt_init_screen(void)
 
     /*:::::::::::::::::::::::::::::::::::::::::: Allocate video copy buffer */
 
+#if defined(NEC_98)
+#line 775
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 778
 #ifdef MONITOR
-#line 617
+#line 779
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
-#line 619
+#line 781
     if(!video_copy) video_copy = (byte *) host_malloc(0x20000);
 #endif
-#line 621
+#line 783
 
     /*::::::::::::::::::::::::::::::::: Allocate DAC and EGA planes buffers */
 
     if(!EGA_planes) EGA_planes = (byte *) host_malloc(4*EGA_PLANE_SIZE);
     if(!DAC) DAC = (PC_palette *) host_malloc(sizeof(PC_palette) * VGA_DAC_SIZE);
+#endif // !NEC_98
+#line 789
 
+#if defined(NEC_98)
+#line 791
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 793
     if (video_copy == NULL || EGA_planes == NULL || DAC == NULL)
+#endif // !NEC_98
+#line 795
 	host_error(EG_MALLOC_FAILURE, ERR_QUIT, "");
 
     /* Set current screen height to prevent the window changing shape between
        init_screen and init_adaptor */
 
+#if defined(NEC_98)
+#line 801
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 803
     video_adapter = (half_word) config_inquire(C_GFX_ADAPTER, NULL);
     switch (video_adapter)
     {
@@ -620,11 +709,20 @@ void nt_init_screen(void)
             current_height = EGA_WIN_HEIGHT;  current_width = EGA_WIN_WIDTH;
             break;
     }
+#endif // !NEC_98
+#line 815
 
     /*::::::::::::::::: Setup the screen dimensions for the initial adaptor */
 
+#if defined(NEC_98)
+#line 819
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 821
     host_set_screen_scale((SHORT) config_inquire(C_WIN_SIZE, NULL));
     set_screen_sizes(video_adapter);
+#endif // !NEC_98
+#line 824
 
     /*:::: Set pixel values to be used for FG and BG (mainly in mono modes) */
 
@@ -636,11 +734,11 @@ void nt_init_screen(void)
 }
 
 #ifdef MONITOR
-#line 660
+#line 835
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#line 685
+#line 860
 #endif /* MONITOR */
-#line 686
+#line 861
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::: Initialise adaptor ::::::::::::::::::::::::::::*/
@@ -674,6 +772,7 @@ void nt_change_mode(void)
 
     /*:::::::::::::::::::: Setup update vectors and initialise paint system */
 
+#ifndef NEC_98
     switch(video_adapter)
     {
         /*::::::::::::::::::::::::::::::::::::::::::::::: CGA mode selected */
@@ -692,6 +791,8 @@ void nt_change_mode(void)
             sub_note_trace0(ALL_ADAPT_VERBOSE,"**** Unknown video adaptor ****");
             break;
     }
+#endif // !NEC_98
+#line 914
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -716,11 +817,11 @@ void nt_clear_screen(void)
     if(sc.ScreenBufHandle) return;
 
 #ifndef X86GFX
-#line 761
+#line 938
     if (sc.ScreenState == FULLSCREEN)   // don't want sudden screen clears
         return;
 #endif
-#line 764
+#line 941
 
     /*::::::::::::::::::::::::::::: Get information on current screen size */
 
@@ -740,11 +841,11 @@ void nt_clear_screen(void)
                               ScreenInfo.dwSize.X * ScreenInfo.dwSize.Y,
                               coord,&nCharWritten);
 #ifdef MONITOR
-#line 783
+#line 961
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#line 789
+#line 968
 #endif
-#line 790
+#line 969
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -760,29 +861,29 @@ static void publish_text_update(void)
     }
 }
 
-#line 796
+#line 975
 void nt_flush_screen(void)
 {
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_flush_screen");
 
-#line 846
+#line 1029
     if (sc.ScreenState == FULLSCREEN && sc.ModeType == TEXT) {
         mvdm_softpc_text_video_flush(publish_text_update);
         return;
     }
 
-#line 800
+#line 979
     if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE &&
 	!get_mode_change_required())
-#line 802
+#line 981
 #ifdef X86GFX
-#line 803
+#line 982
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 801
-#line 805
+#line 980
+#line 984
             (void)(*update_alg.calc_update)();
-#line 806
+#line 985
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -804,29 +905,35 @@ void nt_mark_screen_refresh(void)
 void nt_graphics_tick(void)
 {
 
-#line 828
+#ifndef NEC_98
+#line 1008
     if (CntrlHandlerState & CNTRL_VDMBLOCKED) return;
     if (!mvdm_softpc_text_video_sync_route())
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
-#line 827
+#line 1007
     if (sc.ScreenState == STREAM_IO) {
 	if (++flush_count == TICKS_PER_FLUSH){
 	    stream_io_update();
             if (!NtvdmConsoleUpdateTextConfiguration(sc.ColPalette))
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
-#line 830
+#line 1010
 	    flush_count = 0;
 	}
 	return;
     }
+#endif // !NEC_98
+#line 1015
 
-#line 835
+#line 1016
 #ifdef EGG
+#ifndef NEC_98
     if((video_adapter == EGA) || (video_adapter == VGA))
     {
         /* two timer ticks since mode_change_required became true ?
            (really need same stuff for CGA, but not done yet)
            Now just delay screen update, & only if display REALLY changed */
+#endif // !NEC_98
+#line 1024
 
 	/*
 	** When VGA registers get hit during a mode change, postpone
@@ -857,19 +964,34 @@ void nt_graphics_tick(void)
             if(++flush_count == TICKS_PER_FLUSH)
             {
 
+#if defined(NEC_98)
+#line 1055
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1061
                 if(update_vlt || get_palette_change_required())
                     set_the_vlt();
 
                 if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE)
-#line 875
+#endif // !NEC_98
+#line 1066
 #ifdef X86GFX
-#line 876
+#line 1067
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 878
+#if defined(NEC_98)
+#line 1070
+#error Unsupported NEC PC-98 configuration
+#endif // !NEC_98
+#line 1072
                         (void)(*update_alg.calc_update)();
+#if defined(NEC_98)
+#line 1074
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1079
 
-#line 880
+#line 1080
                 ega_tick_delay = EGA_TICK_DELAY;
 
 		/* batch cursor changes as some naffola apps (Word) change
@@ -878,16 +1000,19 @@ void nt_graphics_tick(void)
 		if (CursorResizeNeeded)
 		    make_cursor_change();
 
-#line 888
+#line 1088
                 flush_count = 0;
                 publish_text_update();
-#line 889
+#line 1089
              }
         }
+#ifndef NEC_98
     }
     else
-#line 893
+#endif // !NEC_98
+#line 1095
 #endif /* EGG */
+#ifndef NEC_98
     {
         /*:::::::::: Update the screen as required for mda and cga and herc */
 
@@ -896,21 +1021,22 @@ void nt_graphics_tick(void)
             if(update_vlt) set_the_vlt();
 
             if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE)
-#line 902
+#line 1105
 #ifdef X86GFX
-#line 903
+#line 1106
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 905
+#line 1108
                     (void)(*update_alg.calc_update)();
 
-#line 907
+#line 1110
             flush_count = 0;
             publish_text_update();
-#line 908
+#line 1111
         }
     }
-#line 910
+#endif // !NEC_98
+#line 1114
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -921,7 +1047,7 @@ void nt_start_update(void)
 {
    ntvdm_console_graphics_begin_update();
    presentation_updated = TRUE;
-#line 918
+#line 1122
    IDLE_video();
 }
 
@@ -933,13 +1059,13 @@ void nt_end_update(void) {
    draw_v7ptr();
    ntvdm_console_graphics_end_update();
 }
-#line 926
+#line 1130
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::: Scroll screen up :::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 931
+#line 1135
 boolean nt_scroll_up(int tlx, int tly, int brx, int bry, int amount, int col)
 {
     CONSOLE_SCREEN_BUFFER_INFO ScreenInfo;
@@ -959,7 +1085,7 @@ boolean nt_scroll_up(int tlx, int tly, int brx, int bry, int amount, int col)
         return(FALSE);     //Screen buffer undefined or in graphics mode
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-#line 950
+#line 1154
 #ifdef BIGWIN
         tlx = SCALE(tlx);
         tly = SCALE(tly);
@@ -968,7 +1094,7 @@ boolean nt_scroll_up(int tlx, int tly, int brx, int bry, int amount, int col)
 
         /* odd numbers don't multiply by 1.5 very accurately */
         amount = SCALE(amount);
-#line 958
+#line 1162
 #endif
 
 
@@ -1034,7 +1160,7 @@ boolean nt_scroll_down(int tlx,int tly,int brx,int bry,int amount,int col)
 
     if(sc.ScreenBufHandle) return(FALSE);
 
-#line 1023
+#line 1227
 #ifdef BIGWIN
         tlx = SCALE(tlx);
         tly = SCALE(tly);
@@ -1043,7 +1169,7 @@ boolean nt_scroll_down(int tlx,int tly,int brx,int bry,int amount,int col)
 
         /* odd numbers don't multiply by 1.5 very accurately */
         amount = SCALE(amount);
-#line 1031
+#line 1235
 #endif
     if (sc.ModeType == GRAPHICS)
         return(FALSE);  // don't think console can scroll graphics
@@ -1090,10 +1216,15 @@ boolean nt_scroll_down(int tlx,int tly,int brx,int bry,int amount,int col)
 /*::::::::::::::::::::::::: Paint cursor :::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 1077
+#line 1281
 void nt_paint_cursor IFN3(int, cursor_x, int, cursor_y, half_word, attr)
 {
+#if defined(NEC_98)         // NEC {
+#line 1284
+#error Unsupported NEC PC-98 configuration
+#else                                                           // NEC
     COORD CursorPos;
+#endif                                                          // NEC
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::: Guess where we are */
 
@@ -1102,6 +1233,11 @@ void nt_paint_cursor IFN3(int, cursor_x, int, cursor_y, half_word, attr)
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Update cursor */
 
+#if defined(NEC_98)
+#line 1300
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1329
     if(is_cursor_visible() && (get_screen_height() > cursor_y))
     {
 
@@ -1111,10 +1247,13 @@ void nt_paint_cursor IFN3(int, cursor_x, int, cursor_y, half_word, attr)
 	{
 	    /*...................................... Set new cursor postion */
 
-	    CursorPos.X = cursor_x;  CursorPos.Y = cursor_y;
+            CursorPos.X = (SHORT)cursor_x;
+        CursorPos.Y = (SHORT)cursor_y;
 	    SetConsoleCursorPosition(sc.OutputHandle,CursorPos);
 	}
     }
+#endif // !NEC_98
+#line 1344
 }
 
 void nt_cursor_size_changed(int lo, int hi)	 
@@ -1151,7 +1290,18 @@ void make_cursor_change(void)
 	    if(get_cursor_height())
 	    {
 		/* value has to be percentage of block filled */
+#if (defined(JAPAN) || defined(KOREA)) && !defined(NEC_98)
+                // support Dosv cursor
+                if ( !is_us_mode() ) {
+                    CursorInfo.dwSize = ( (get_cursor_height() ) * 100)/(get_cursor_height()+get_cursor_start());
+                    //DbgPrint("Char height=%d\n", get_char_height() );
+                }
+                else {
 		CursorInfo.dwSize = (get_cursor_height() * 100)/get_char_height();
+                }
+#else // !JAPAN
+                CursorInfo.dwSize = (get_cursor_height() * 100)/get_char_height();
+#endif // !JAPAN
    		/* %age may be too small on smaller fonts, check size */
 		fontsize.X = fontsize.Y = 0;
 
@@ -1214,6 +1364,11 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
     switch((int) mode)
     {
 
+#if defined(NEC_98)
+#line 1455
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1544
         /* CGA modes (40 columns). */
         case TEXT_40_FUN:
             assert1(NO,"Funny text mode selected %s",get_mode_string(mode));
@@ -1290,7 +1445,7 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
             sc.ModeType = GRAPHICS;
             if(get_256_colour_mode())
             {
-#line 1276
+#line 1620
 #ifdef V7VGA
                 if (get_seq_chain4_mode())
                 {
@@ -1298,18 +1453,18 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
                     (*nt_init_funcs->vga_hi_graph)();
                 }
                 else
-#line 1283
+#line 1627
 #endif /* V7VGA */
                 {
                     if (get_chain4_mode())
                     {
-#line 1287
+#line 1631
 #ifdef MONITOR
-#line 1288
+#line 1632
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#line 1294
+#line 1638
 #endif /* MONITOR */
-#line 1295
+#line 1639
                             paint_screen = nt_paint_funcs->vga_graph;
                     }
                     else
@@ -1353,6 +1508,8 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
             (*nt_init_funcs->ega_lo_graph)();
             break;
 
+#endif // !NEC_98
+#line 1683
         default:
             assert1(NO,"bad mode for host paint routine selection %d\n",(int)mode);
             paint_screen = dummy_paint_screen;
@@ -1360,17 +1517,17 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
     }
 
 #ifdef X86GFX
-#line 1345
+#line 1690
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
-#line 1371
+#line 1718
 #else
 
     /*................................................... Apply mode change */
-#line 1374
+#line 1721
     check_win_size(height);
-#line 1375
+#line 1722
 #endif  /* X86GFX */
-#line 1376
+#line 1723
     current_mode = mode;
 }
 
@@ -1444,12 +1601,20 @@ static void select_paint_routines(void)
 {
     /*::::::::::::::::::::::::::::::::::::::::::: Display trace information */
 
+#ifndef NEC_98
     sub_note_trace2((CGA_HOST_VERBOSE | EGA_HOST_VERBOSE),
                     "select_paint_routine scale=%d depth=%d",
                     get_screen_scale(), host_display_depth);
+#endif // !NEC_98
+#line 1801
 
     /*::::::::::::::::::::::::::::::::::::::::::::::: Select paint routines */
 
+#if defined(NEC_98)
+#line 1805
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1813
     if(host_display_depth > 1)
     {
         if (get_screen_scale() == 2)
@@ -1472,14 +1637,16 @@ static void select_paint_routines(void)
 
         nt_init_funcs = &mono_init_funcs;
     }
+#endif // !NEC_98
+#line 1836
 }
 
 #ifdef MONITOR
-#line 1480
+#line 1839
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#line 1491
+#line 1852
 #endif /* MONITOR */
-#line 1492
+#line 1853
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::::: Prepare surface :::::::::::::::::::::::::::::*/
@@ -1540,7 +1707,7 @@ half_word reverser(register half_word value)
 /*::::::::::::::::::::::::: Check window size ::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 1552
+#line 1913
 static void check_win_size(register int height)
 {
     register int width;
@@ -1551,6 +1718,11 @@ static void check_win_size(register int height)
 
     /*:::::::::::::::::::::::::::::::::::::::::::::: Calculate screen width */
 
+#if defined(NEC_98)
+#line 1924
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1926
     if(sas_hw_at(vd_video_mode) > 0x10)
     {
 	if(alpha_num_mode())
@@ -1563,13 +1735,15 @@ static void check_win_size(register int height)
     }
     else
        width = CGA_WIN_WIDTH;
+#endif // !NEC_98
+#line 1939
 
     if (paint_screen == nt_paint_funcs->v7vga_hi_graph)
         width = get_bytes_per_line();
-#line 1575
+#line 1940
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Resize window */
 
-#line 1577
+#line 1942
     if (sc.ModeType == TEXT)
     {
 	if((current_mode_type != TEXT) ||
@@ -1599,7 +1773,10 @@ static void check_win_size(register int height)
 	{
 	    sc.PC_W_Width = SCALE(width);
 	    sc.PC_W_Height = SCALE(height*get_host_pix_height());
+#ifndef NEC_98
 	    graphicsResize();
+#endif // !NEC_98
+#line 1974
 
 	    current_height = height;
 	    current_width = width;
@@ -1609,6 +1786,11 @@ static void check_win_size(register int height)
 	}
     }
 
+#if defined(NEC_98)
+#line 1984
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1986
     sc.CharHeight = current_char_height;
 
     /*::::::::::::::::::::::::::::::::::::::::::: Display trace information */
@@ -1623,9 +1805,18 @@ static void check_win_size(register int height)
 /*::::::::::::::::::::::::::: Set the VLT ??? ::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 1630
+#if defined(NEC_98)
+#line 2001
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 2038
 void set_the_vlt(void)
 {
+#if defined(NEC_98)
+#line 2041
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 2078
     PALETTEENTRY vga_color[VGA_DAC_SIZE];
     int i, ind;
     byte mask, top_bit;
@@ -1647,7 +1838,7 @@ void set_the_vlt(void)
                 vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ? DAC[ind].red : DAC[ind].red * 4);
                 vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ? DAC[ind].green : DAC[ind].green * 4);
                 vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ? DAC[ind].blue : DAC[ind].blue * 4);
-#line 1653
+#line 2099
             }
 
             /*..................... Apply new colours to output palette */
@@ -1708,19 +1899,26 @@ void set_the_vlt(void)
                 vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ? DAC[ind].red : DAC[ind].red * 4);
                 vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ? DAC[ind].green : DAC[ind].green * 4);
                 vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ? DAC[ind].blue : DAC[ind].blue * 4);
-#line 1713
+#line 2159
             }
 
             SetPaletteEntries(sc.ColPalette, 0, VGA_DAC_SIZE, &vga_color[0]);
         }
 
         if (sc.ModeType == TEXT) NtvdmConsoleTextColours(vga_color);
-#line 1718
+#line 2164
         set_palette_change_required(FALSE);
     }
+#endif // !NEC_98
+#line 2167
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::: Display changes */
 
+#if defined(NEC_98)
+#line 2171
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 2230
     if (sc.ScreenBufHandle)             // only sensible in gfx context
     {
 	/*
@@ -1734,6 +1932,8 @@ void set_the_vlt(void)
         if(!SetConsolePalette(sc.ScreenBufHandle, sc.ColPalette, SYSPAL_STATIC))
 	    assert1( NO, "SetConsolePalette() failed:%#x\n", GetLastError() );
     }
+#endif // !NEC_98
+#line 2244
 
     update_vlt = FALSE;
 }
@@ -1743,14 +1943,28 @@ void set_the_vlt(void)
 /*::::::: Set screen sizes - update the screen description structure :::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#if defined(NEC_98)
+#line 2254
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 2256
 static void set_screen_sizes(int adaptor)
+#endif // !NEC_98
+#line 2258
 {
+#if defined(NEC_98)
+#line 2260
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 2265
     UNUSED(adaptor);
 
     sc.PC_W_Width = SCALE(CGA_WIN_WIDTH);
     sc.PC_W_Height = SCALE(CGA_WIN_HEIGHT);
     sc.CharWidth = CGA_CHAR_WIDTH;
     sc.CharHeight = CGA_CHAR_HEIGHT;
+#endif // !NEC_98
+#line 2272
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -1884,17 +2098,17 @@ VOID windowSize IFN4( int, w, int, h, int, top, int, left )
 {
 	SMALL_RECT WinSize;
 
-	WinSize.Top    = top;
-	WinSize.Left   = left;
+        WinSize.Top    = (SHORT)top;
+        WinSize.Left   = (SHORT)left;
 	WinSize.Bottom = top  + h - 1;
 	WinSize.Right  = left + w - 1;
 
-#line 1891
+#line 2410
 #ifndef	PROD
-#line 1892
+#line 2411
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1894
+#line 2413
 	if( !SetConsoleWindowInfo( sc.OutputHandle, TRUE, &WinSize ) )
 		assert3( NO, "VDM: SetConsoleWindowInfo() w=%d h=%d failed:%#x",
 			w, h, GetLastError() );
@@ -1910,13 +2124,13 @@ VOID bufferSize IFN2( int, w, int, h )
 {
 	COORD      ScrSize;
 
-	ScrSize.X = w;
-	ScrSize.Y = h;
+        ScrSize.X = (SHORT)w;
+        ScrSize.Y = (SHORT)h;
 #ifndef	PROD
-#line 1912
+#line 2431
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1914
+#line 2433
 	if( !SetConsoleScreenBufferSize( sc.OutputHandle, ScrSize ) )
 		assert3( NO, "VDM: SetCons...BufferSize() w=%d h=%d failed:%#x",
 			w, h, GetLastError() );
@@ -1953,6 +2167,19 @@ VOID resizeWindow IFN2( int, w, int, h )
 		oldB;		/* present buffer size	*/
         CONSOLE_SCREEN_BUFFER_INFO bufferInfo;                               
 
+#if defined(JAPAN) || defined(KOREA)
+        // Clipping Window height
+        if ( GetConsoleCP() != 437 ) {
+        // if ( !is_us_mode() ) {  // Didn't come BOP
+            if( h > 25 ){
+                /* Shouldn't get this anymore said Tim */
+#ifdef JAPAN_DBG
+                DbgPrint( "NTVDM: resizeWindow() clipping height:%d->25\n", h  );
+#endif
+                h = 25;
+            }
+        } else
+#endif // JAPAN || KOREA
 	if( h > 50 ){
 		/* Shouldn't get this anymore said Tim */
 		assert1( NO, "VDM: resizeWindow() clipping height:%d", h  );
@@ -1969,11 +2196,11 @@ VOID resizeWindow IFN2( int, w, int, h )
 	oldW.Y  = bufferInfo.srWindow.Bottom - bufferInfo.srWindow.Top  + 1;
 	oldB    = bufferInfo.dwSize;
 #ifndef	PROD
-#line 1966
+#line 2498
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
-#line 1970
+#line 2502
 #endif
-#line 1971
+#line 2503
 	/*
 	 * Reduce window width and height as necessary:
 	 */
@@ -1996,10 +2223,10 @@ VOID resizeWindow IFN2( int, w, int, h )
 			assert1( NO, "VDM: GetConsoleScreenBufferInfo() failed:%#x",
 				GetLastError() );
 #ifndef	PROD
-#line 1993
+#line 2525
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1995
+#line 2527
 	}
 	/*
 	** Clip requested values to Window maximum and
@@ -2018,6 +2245,11 @@ VOID resizeWindow IFN2( int, w, int, h )
 	} else
 		newTop = 0;
 
+#if defined(NEC_98)
+#line 2546
+#error Unsupported NEC PC-98 configuration
+#endif // !NEC_98
+#line 2548
 	/*
 	 * Check if we need to enlarge the window now.
 	 * Settle for old top and left if they were smaller.
@@ -2040,7 +2272,14 @@ VOID resizeWindow IFN2( int, w, int, h )
 */
 
 //Used by the text paint functions
+#if defined(NEC_98)
+#line 2571
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 2573
 GLOBAL int now_height = 80, now_width = 50;
+#endif // !NEC_98
+#line 2575
 
 void textResize(void)
 {
@@ -2072,7 +2311,13 @@ void graphicsResize(void)
         DWORD    headerSize;
         LPBITMAPINFO     infoStructPtr;
 
-#line 2069
+#if defined(NEC_98)
+#line 2607
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 2611
+#endif // !NEC_98
+#line 2612
 
         /* Destroy previous data. */
 	closeGraphicsBuffer(); /* Tim Oct 92 */
@@ -2084,6 +2329,11 @@ void graphicsResize(void)
          * Create a `BITMAPINFO' structure - sc.PC_W_Width pixels x
          * sc.PC_W_Height pixels x sc.BitsPerPixel bits-per-pixel.
          */
+#if defined(NEC_98)
+#line 2624
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 2632
         headerSize = CreateSpcDIB(sc.PC_W_Width,
                                   sc.PC_W_Height,
                                   sc.BitsPerPixel,
@@ -2091,6 +2341,8 @@ void graphicsResize(void)
                                   0,
                                   (COLOURTAB *) NULL,
                                   &infoStructPtr);
+#endif // !NEC_98
+#line 2640
 
         /* Initialise the console info structure. */
         sc.ConsoleBufInfo.dwBitMapInfoLength = headerSize;
@@ -2119,16 +2371,36 @@ void graphicsResize(void)
             set_palette_change_required(TRUE);
         }
 
+#if defined(NEC_98)
+#line 2669
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 2671
 	/* save the handle away to a useful place */
         MouseDetachMenuItem(TRUE);
         sc.ActiveOutputBufferHandle = sc.ScreenBufHandle;
         MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
+#if defined(NEC_98)
+#line 2676
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 2678
 
         /*
          * Make it the current screen buffer, which resizes the window
          * on the display.
          */
+#if defined(NEC_98)
+#line 2684
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 2695
         SetConsoleActiveScreenBuffer(sc.ScreenBufHandle);
+#if defined(NEC_98)
+#line 2697
+#error Unsupported NEC PC-98 configuration
+#endif // !NEC_98
+#line 2705
 
         /*
          * Get a pointer to the last line of the bitmap to build
@@ -2285,20 +2557,20 @@ void nt_mode_select_changed(int dummy)
 {
     UNUSED(dummy);
 #ifndef PROD
-#line 2281
+#line 2861
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 2283
+#line 2863
 }
 
 void nt_color_select_changed(int dummy)
 {
     UNUSED(dummy);
 #ifndef PROD
-#line 2289
+#line 2869
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 2291
+#line 2871
 }
 
 void nt_screen_address_changed(int lo, int hi)
@@ -2311,6 +2583,7 @@ void nt_screen_address_changed(int lo, int hi)
 
 void nt_scroll_complete()        { }
 
+#ifndef NEC_98
 void host_stream_io_update(half_word * buffer, word count)
 {
     DWORD dwBytesWritten;
@@ -2323,6 +2596,13 @@ void host_stream_io_update(half_word * buffer, word count)
 		  );
     flush_count = 0;
 }
+#endif // !NEC_98
+#line 2897
+#if defined(NEC_98)
+#line 2898
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 2900
 
 extern void disable_stream_io(void); /* DIVERGENCE(MVDM-HOST-DIV-907): video state owner. */
 extern void nt_cursor_size_changed(int, int);

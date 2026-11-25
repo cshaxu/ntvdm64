@@ -588,7 +588,7 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
      * chunk.
      */
     if ((Address & PAGE_MASK) ||
-        (headerPtr->flags & HDR_VALID_ALLOC != HDR_VALID_ALLOC))
+        ((headerPtr->flags & HDR_VALID_ALLOC) != HDR_VALID_ALLOC))
     {
         always_trace0("Tried to free invalid address");
         return(STATUS_MEMORY_NOT_ALLOCATED);
@@ -791,7 +791,7 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
      * chunk.
      */
     if ((OriginalAddress & PAGE_MASK) ||
-        (headerPtr->flags & HDR_VALID_ALLOC != HDR_VALID_ALLOC))
+        ((headerPtr->flags & HDR_VALID_ALLOC) != HDR_VALID_ALLOC))
     {
         always_trace0("Tried to reallocate invalid address");
         return(STATUS_MEMORY_NOT_ALLOCATED);
@@ -948,6 +948,8 @@ OUTPUT:
     IntelAddress    - the intel address the block is mapped to.
 ================================================================================
 )*/
+
+extern void VdmSetPhysRecStructs (ULONG, ULONG, ULONG);
 GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
                                          ULONG, Size,
                                          PULONG, IntelAddress)
@@ -955,10 +957,10 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
     IU32 alignfix;
 
 #ifdef DEBUG_MEM
-#line 937
+#line 939
 #error Unsupported excluded original configuration
 #endif
-#line 940
+#line 942
 
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmAddVirtualMemory before initialisation");
@@ -976,13 +978,13 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
 
     /* step 1 - reserve the intel address space */
 
-#line 957
+#line 959
     if (VdmAllocateVirtualMemory(IntelAddress,Size,FALSE) != STATUS_SUCCESS)
         return (STATUS_NO_MEMORY);
 
     /* step 2 - flush the caches */
 
-#line 962
+#line 964
     sas_overwrite_memory(*IntelAddress, Size);
 
     /* step 3 - replace the PhysicalPageREC.translation entries */
@@ -995,10 +997,10 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
     *IntelAddress += alignfix;
 
 #ifdef DEBUG_MEM
-#line 974
+#line 976
 #error Unsupported excluded original configuration
 #endif
-#line 979
+#line 981
 
     return(STATUS_SUCCESS);
 }
@@ -1019,10 +1021,10 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
     NTSTATUS status;
 
 #ifdef DEBUG_MEM
-#line 999
+#line 1001
 #error Unsupported excluded original configuration
 #endif
-#line 1004
+#line 1006
 
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmRemoveVirtualMemory before initialisation");
@@ -1044,20 +1046,20 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
     /* step 2 - reset the PhysicalPageREC.translation entries */
 
 #ifdef DEBUG_MEM
-#line 1025
+#line 1027
 #error Unsupported excluded original configuration
 #endif
-#line 1029
+#line 1031
     VdmSetPhysRecStructs(HostAddress, IntelAddress, Size);
     ADDRESS_TO_HEADER(IntelAddress+intelMem)->flags &= ~HDR_REMAP_FLAG;
 
     /* step 3 - free the reserved intel address space */
 
 #ifdef DEBUG_MEM
-#line 1035
+#line 1037
 #error Unsupported excluded original configuration
 #endif
-#line 1039
+#line 1041
     return VdmFreeVirtualMemory(IntelAddress);
 }
 
@@ -1099,10 +1101,10 @@ LOCAL SECTION_HEADER *addHeaderEntry IFN5(SECTION_HEADER *, prevHeader,
     IU32     commitSize;
 
 #ifndef PROD
-#line 1080
+#line 1082
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
-#line 1085
+#line 1087
 
     /* Commit and zero table header entries if necessary. */
     exclusiveHeaderPages((IHPE) newHeader, (IHPE) prevHeader,
@@ -1114,10 +1116,12 @@ LOCAL SECTION_HEADER *addHeaderEntry IFN5(SECTION_HEADER *, prevHeader,
                                (DWORD) MEM_COMMIT,
 			       (DWORD) PAGE_READWRITE);
 
+#ifdef DEBUG_MEM
 	if(retAddr != commitAddr)
 	{
 	    printf("V.Allocate failed (%xh) [%lxh :%xh]\n",GetLastError(),commitAddr,commitSize);
 	}
+#endif
 
 
         if (retAddr == commitAddr)
@@ -1318,10 +1322,10 @@ LOCAL void exclusiveChunkPages IFN4(SECTION_HEADER *, chunkHeader,
                         allocAddr,
                         allocSize);
 #ifdef DEBUG_MEM
-#line 1300
+#line 1304
 #error Unsupported excluded original configuration
 #endif
-#line 1304
+#line 1308
 }
 
 /*
@@ -1369,10 +1373,10 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
             lastPage;               /* Last page that needs committing. */
 
 #ifndef PROD
-#line 1351
+#line 1355
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
-#line 1358
+#line 1362
 
     /*
      * Work out first and last pages of new memory block that need to be
@@ -1386,13 +1390,13 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
  * Also insufficient anyway in general case
  */
 #ifdef PIG
-#line 1371
+#line 1375
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
-#line 1373
+#line 1377
     lastPage = currentAllocLastPage;
 #endif
-#line 1375
+#line 1379
 
     /*
      * Now check to see if first or last pages of this allocation are already
@@ -1431,10 +1435,10 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
 
 
 #ifdef DEBUG_MEM
-#line 1413
+#line 1417
 #error Unsupported excluded original configuration
 #endif DEBUG_MEM
-#line 1454
+#line 1458
 
 
 #endif /* CPU_40_STYLE */

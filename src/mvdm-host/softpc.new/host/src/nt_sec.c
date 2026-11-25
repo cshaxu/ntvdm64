@@ -39,9 +39,13 @@
  * ==========================================================================
  */
 
-
-
+extern void VdmTrapcHandler(void);
 IMPORT int DisplayErrorTerm(int, DWORD, char *, int);
+#if defined(NEC_98)
+#line 45
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 55
 
 /***************************************************************************
  * Function:                                                               *
@@ -60,6 +64,11 @@ IMPORT int DisplayErrorTerm(int, DWORD, char *, int);
  ***************************************************************************/
 GLOBAL VOID LoseRegenMemory(VOID)
 {
+#if defined(NEC_98)
+#line 74
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 115
     int a = 0xa0000;
     ULONG len = 0x20000;
     NTSTATUS status;
@@ -71,6 +80,8 @@ GLOBAL VOID LoseRegenMemory(VOID)
                                 MEM_RELEASE);
     if (!NT_SUCCESS(status))
         DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);
+#endif // !NEC_98
+#line 127
 }
 
 
@@ -92,6 +103,11 @@ GLOBAL VOID LoseRegenMemory(VOID)
  ***************************************************************************/
 GLOBAL VOID RegainRegenMemory(VOID)
 {
+#if defined(NEC_98)
+#line 149
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 201
     int regen = 0xa0000;
     ULONG len = 0x20000;
     HANDLE processHandle;
@@ -109,12 +125,18 @@ GLOBAL VOID RegainRegenMemory(VOID)
                                 PAGE_EXECUTE_READWRITE);
     if (! NT_SUCCESS(status) )
         DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);
+#endif // !NEC_98
+#line 219
 }
 
 
-#line 115
+#line 222
 #ifdef X86GFX
-#line 116
+#line 223
 #error DIVERGENCE MVDM-HOST-DIV-593: X86GFX branch is not selected
 #endif //X86GFX
-#line 159
+#line 269
+#if defined(NEC_98)
+#line 270
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98

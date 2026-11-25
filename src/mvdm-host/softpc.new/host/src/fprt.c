@@ -11,7 +11,7 @@
 
 void OutputString(char *);
 
-int _CRTAPI1 printf(const char *str, ...)
+int __cdecl printf(const char *str, ...)
 {
 #ifndef PROD
 #line 15
@@ -55,7 +55,7 @@ VOID InputString(char *str, int len)
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-int _CRTAPI2 fprintf(FILE *tf, const char *str, ...)
+int __cdecl fprintf(FILE *tf, const char *str, ...)
 {
 #ifndef PROD
 #line 147
@@ -80,7 +80,7 @@ char *nt_gets(char *buffer)
 }
 
 #ifndef HUNTER
-char * _CRTAPI1 fgets(char *buffer, int len, FILE *input_stream)
+char * __cdecl fgets(char *buffer, int len, FILE *input_stream)
 {
     int blen;
 
@@ -114,24 +114,24 @@ char * _CRTAPI1 fgets(char *buffer, int len, FILE *input_stream)
     return(buffer);
 }
 
-char * _CRTAPI1 gets(char *buffer)
+char * __cdecl gets(char *buffer)
 {
     return(nt_fgets(buffer, 500, (void *) 0));
 }
 
-int _CRTAPI1 puts(const char *buffer)
+int __cdecl puts(const char *buffer)
 {
     OutputString((char *)buffer);
     return(1);
 }
 
-size_t _CRTAPI1 fwrite(const void *buf, size_t size, size_t len, FILE *stream)
+size_t __cdecl fwrite(const void *buf, size_t size, size_t len, FILE *stream)
 {
-    char    *tmp_buf;		// Screw the compiler into avoiding const chk
+    char    *tmp_buf;		// force the compiler into avoiding const chk
 
     tmp_buf = (char *)((DWORD)buf);
 
-    tmp_buf[len] = 0;		// Bullshit write into a const ptr!
+    tmp_buf[len] = 0;		// write into a const ptr!
 #ifndef PROD
 #line 229
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.

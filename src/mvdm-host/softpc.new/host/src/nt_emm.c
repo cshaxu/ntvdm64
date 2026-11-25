@@ -368,6 +368,9 @@ DESCRIPTION	: Mapping achieved by simply copying data from the
 
 =========================================================================
 */
+
+extern NTSTATUS VdmMapDosMemory(ULONG, ULONG, ULONG);
+
 int host_map_page(short EM_page_no, unsigned short segment)
 
 /*   IN 
@@ -391,10 +394,10 @@ unsigned short	segment;	 segment in physical address space to
 				 EMM_PAGE_SIZE / INTEL_PAGE_SIZE
 				 );
 #ifdef EMM_DEBUG
-#line 359
+#line 362
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
-#line 362
+#line 365
 	if (NT_SUCCESS(Status)) {
 	    return(SUCCESS);
 	}
@@ -420,6 +423,9 @@ DESCRIPTION	: Unmapping achieved by simply copying data from Intel
 
 =========================================================================
 */
+
+extern NTSTATUS VdmUnmapDosMemory(ULONG, ULONG);
+
 int host_unmap_page(unsigned short segment, short EM_page_no)
 
 /*   IN  
@@ -438,10 +444,10 @@ short		EM_page_no 	Expanded Memory page currently
 			 EM_starting_page_no;
 
 #ifdef EMM_DEBUG
-#line 405
+#line 411
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
-#line 408
+#line 414
 	Status = VdmUnmapDosMemory(DosIntelPageNo,
 				   EMM_PAGE_SIZE / INTEL_PAGE_SIZE
 				   );
@@ -625,7 +631,7 @@ unsigned short	src_seg 	source segment address
 	if (em_moves(from, to, length) != SUCCESS)
 		return(FAILURE);
 
-#line 590
+#line 596
 	return(SUCCESS);
 }
 
@@ -651,7 +657,7 @@ unsigned short	src_seg 	source segment address
 	if (em_loads(from, to, length) != SUCCESS)
 		return(FAILURE);
 
-#line 614
+#line 620
 	return(SUCCESS);
 }
 
@@ -677,7 +683,7 @@ unsigned short	src_page 	source page number
 	if (em_stores(to, from, length) != SUCCESS)
 		return(FAILURE);
 
-#line 638
+#line 644
 	return(SUCCESS);
 }
 
@@ -755,7 +761,7 @@ unsigned short	src_seg		 source segment address
 		return(FAILURE);
 	}
 
-#line 712
+#line 718
 	free(temp);
 
 	return(SUCCESS);
@@ -790,7 +796,7 @@ unsigned short	src_seg 	source segment address
 		free(temp);
 		return(FAILURE);
 	}
-#line 743
+#line 749
 	EM_memcpy(to, pointer, length);
 
 	free(temp);

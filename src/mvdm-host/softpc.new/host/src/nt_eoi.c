@@ -458,30 +458,6 @@ void ica_reset_interrupt_state(void)
     host_ica_unlock();
 }
 
-
-/*
- * Handle callout from DPMI to say that an app has asked DPMI to switch it
- * to protected mode. We use this as an indicator that a protected mode app
- * will work with the Iret Hook system. If an app does it's own thing with
- * selectors et al, the BOP table will be hidden, swallowed and generally
- * lost. Attempts then to transfer control to it will fault.
- * Known examples of such unfriendliness are the DOS Lotus 123 r3 series.
- */
-VOID EnableEmulatorIretHooks(void)
-{
-   ; // obsolete
-}
-
-/*
- * The app is closing - turn off the Iret Hooks in case the next app is
- * iret hook unfriendly. If it's a friendly app, we'll be called again
- * via the Enable... routine above.
- */
-VOID DisableEmulatorIretHooks(void)
-{
-   ; // obsolete
-}
-
 //
 // Retry DelayInts (not iret hooks!)
 //
@@ -490,11 +466,11 @@ VOID DisableEmulatorIretHooks(void)
 VOID ica_RestartInterrupts(ULONG IrqLine)
 {
 #ifdef MONITOR
-#line 501
+#line 477
 #error Excluded unsupported monitor interrupt restart
-#line 510
+#line 486
 #else
-#line 511
+#line 487
     host_ica_lock();
 
     DelayIrqLine &= ~IrqLine;
@@ -503,12 +479,12 @@ VOID ica_RestartInterrupts(ULONG IrqLine)
 
     host_ica_unlock();
 #endif
-#line 519
+#line 495
 }
 
 #ifdef MONITOR
-#line 522
+#line 498
 #error Excluded unsupported monitor IRET table
-#line 545
+#line 521
 #endif /* MONITOR */
 #line 546

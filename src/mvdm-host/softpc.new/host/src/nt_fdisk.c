@@ -189,6 +189,11 @@ typedef struct _FDISKDATA {
     DWORD	    align_factor;
     USHORT	    owner_pdb;
     CHAR	    device_name[MAX_FDISK_NAME];
+#if defined(NEC_98)
+#line 193
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 195
 }   FDISKDATA, *PFDISKDATA;
 
 
@@ -303,7 +308,7 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY disk_geometry)
 			       );
     status = NtOpenFile(
 			&fd,
-			FILE_READ_ATTRIBUTES | SYNCHRONIZE,
+                        FILE_READ_ATTRIBUTES | SYNCHRONIZE | FILE_READ_DATA,
 			&fdisk_obj,
 			&io_status_block,
 			FILE_SHARE_READ | FILE_SHARE_WRITE,
@@ -345,6 +350,12 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY disk_geometry)
 	max_align_factor = align_info.AlignmentRequirement;
 
 
+#if defined(NEC_98)
+#line 352
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 405
+
     /* get BPB, it will fail if the drive is not a FAT partition */
     status = NtFsControlFile(fd,
 			     0,
@@ -363,6 +374,8 @@ BOOL nt_fdisk_init(BYTE drive, PBPB bpb, PDISK_GEOMETRY disk_geometry)
     }
 
     *bpb = ((PBOOTSECTOR)&boot_sector_first_0x24_bytes)->bpb;
+#endif // !NEC_98
+#line 425
 
 
     // enlarge the table
@@ -402,12 +415,21 @@ ULONG nt_fdisk_read(
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
-    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE))
+#if defined(NEC_98)
+#line 465
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 468
+    if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, FALSE)) {
 	return(disk_read(fdisk_data->fdisk_fd,
 			 offset,
 			 size,
 			 buffer));
+    } else {
+        return FALSE;
 }
+}
+
 
 
 ULONG nt_fdisk_write(
@@ -422,6 +444,11 @@ ULONG nt_fdisk_write(
 
     if ((fdisk_data = get_fdisk_data(drive)) == NULL)
 	return 0;
+#if defined(NEC_98)
+#line 493
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 496
 
     if (get_fdisk_handle(fdisk_data, *pusCurrentPDB, TRUE)) {
 	// must lock the drive. This is very important.
@@ -461,7 +488,7 @@ BOOL nt_fdisk_verify(
 			       NULL
 			       ));
     }
-
+    return(FALSE);
 }
 
 
@@ -530,7 +557,7 @@ BOOL get_fdisk_handle(PFDISKDATA fdisk_data, USHORT pdb, BOOL auto_lock)
 					   0
 					   );
 	if (fdisk_data->fdisk_fd != INVALID_HANDLE_VALUE) {
-	    fdisk_data->auto_locked = auto_lock;
+            fdisk_data->auto_locked = auto_lock ? TRUE : FALSE;
 	    fdisk_data->owner_pdb = pdb;
 	    fdisk_open_count++;
 	    (*(pFDAccess))++;

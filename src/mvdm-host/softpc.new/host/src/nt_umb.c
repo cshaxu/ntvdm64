@@ -66,6 +66,12 @@ PUMBNODE    UMBList;
 
 HANDLE	    UMBSectionHandle;
 
+#if defined(NEC_98)
+#line 70
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 73
+
 // This function allocate a address space from the UMB area.
 // Depends on the requester, this function changes the given address
 // space reservation/commitment and ownership states of the block.
@@ -96,10 +102,10 @@ DWORD	*Size
 {
 
 #ifdef MONITOR
-#line 99
+#line 104
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 101
+#line 106
 
     PUMBNODE	UMB;
     LARGE_INTEGER SectionOffset;
@@ -123,10 +129,10 @@ DWORD	*Size
 		    sas_connect_memory(UMB->Base, UMB->Base + UMB->Size - 1, SAS_RAM);
 
 #else
-#line 124
+#line 129
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
-#line 136
+#line 141
 		    UMB->Owner = UMB_OWNER_RAM;
 		}
 		UMB = UMB->Next;
@@ -159,10 +165,10 @@ DWORD	*Size
 		return FALSE;
 	    }
 #ifdef MONITOR
-#line 168
+#line 173
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 186
+#line 191
 	    // return the block address
 	    *Address = (PVOID)UMB->Base;
 	    break;
@@ -195,10 +201,10 @@ DWORD	*Size
 	    // on MIPS, rom blocks are BIOS and VIDEO. No reason to change it
 	    return FALSE;
 #else
-#line 218
+#line 223
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
-#line 255
+#line 260
 
 	case UMB_OWNER_ROM:
 	// case to excluede a UMB
@@ -215,12 +221,12 @@ DWORD	*Size
 	    if (UMB == NULL) {
 		return FALSE;
 	    }
-#line 271
+#line 276
 #ifdef	MONITOR
-#line 272
+#line 277
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 291
+#line 296
 	    UMB->Owner = UMB_OWNER_ROM;
 	    break;
 
@@ -250,10 +256,10 @@ DWORD	Size
 {
 
 #ifdef MONITOR
-#line 320
+#line 325
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 323
+#line 328
 
     PUMBNODE    UMB;
     LARGE_INTEGER   SectionOffset;
@@ -283,10 +289,10 @@ DWORD	Size
 #ifndef	MONITOR
 	    sas_connect_memory(UMB->Base, UMB->Base + UMB->Size - 1, SAS_RAM);
 #else
-#line 352
+#line 357
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
-#line 365
+#line 370
 	    UMB->Owner = UMB_OWNER_RAM;
 	    xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
 	    break;
@@ -295,10 +301,10 @@ DWORD	Size
 #ifndef	MONITOR
 	    sas_connect_memory(dwBase, dwBase + Size - 1, SAS_RAM);
 #else
-#line 373
+#line 378
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
-#line 405
+#line 410
 	    UMB->Owner = UMB_OWNER_RAM;
 	    xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
 	    break;
@@ -320,10 +326,10 @@ DWORD	Size
 {
 
 #ifdef MONITOR
-#line 426
+#line 431
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 431
+#line 436
 
     PUMBNODE    UMB;
     DWORD   dwBase;
@@ -344,10 +350,10 @@ DWORD	Size
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_RAM);
 #else
-#line 451
+#line 456
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
-#line 503
+#line 508
 
     return TRUE;
 }
@@ -362,10 +368,10 @@ DWORD	Size
 )
 {
 #ifdef MONITOR
-#line 517
+#line 522
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 523
+#line 528
 
     PUMBNODE UMB;
     DWORD   dwBase;
@@ -387,10 +393,10 @@ DWORD	Size
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_VDD);
 #else
-#line 544
+#line 549
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
-#line 580
+#line 585
 
      return TRUE;
 }
@@ -410,10 +416,10 @@ BOOL
 GetUMBForEMM(VOID)
 {
 #ifdef MONITOR
-#line 599
+#line 604
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 616
+#line 621
     return TRUE;
 }
 // This function reserves an address space for VDD
@@ -429,10 +435,10 @@ PUMBNODE  UMB
 {
 
 #ifdef MONITOR
-#line 631
+#line 636
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 636
+#line 641
 
     while (UMB != NULL) {
 	if (UMB->Owner == UMB_OWNER_NONE &&
@@ -454,10 +460,10 @@ PUMBNODE  UMB
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_VDD);
 #else
-#line 657
+#line 662
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
-#line 682
+#line 687
     return TRUE;
 }
 
@@ -473,10 +479,10 @@ WORD	    Owner
 )
 {
 #ifdef MONITOR
-#line 697
+#line 702
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 701
+#line 706
 
     DWORD SizeBefore, SizeAfter;
     PUMBNODE	UMBBefore, UMBAfter;
@@ -521,10 +527,10 @@ WORD	    Owner
     }
 
 #ifdef MONITOR
-#line 745
+#line 750
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 796
+#line 801
     return UMBBefore;
 }
 
@@ -576,7 +582,7 @@ InitUMBList(VOID)
 }
 
 #else
-#line 847
+#line 852
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 #line 1120

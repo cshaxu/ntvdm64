@@ -252,8 +252,10 @@ foreach(name IN LISTS names)
   list(APPEND oemuni_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/host/src/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/host/src/sources.inc")
 list(REMOVE_DUPLICATES names)
+# The PC CCPU worker uses nt_emm.c. XP selects the other providers only for NEC_98 or MONITOR.
+list(REMOVE_ITEM names "nt_98grf.c" "nt_cgw.c" "nt_vsync.c" "x86_emm.c")
 set(host_objects)
 foreach(name IN LISTS names)
   set(flags "${profile_13}")

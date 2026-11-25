@@ -18,7 +18,7 @@ This line causes this file to be build with a checkin of NT_PIF.H
 #include "insignia.h"
 #include "host_def.h"
 
-#include <pif.h>
+#include "../../../inc/pif.h"
 #include "nt_pif.h"
 #include "nt_reset.h"
 #include <oemuni.h>
@@ -31,7 +31,11 @@ This line causes this file to be build with a checkin of NT_PIF.H
  //
 static char *pchConfigFile=NULL;
 static char *pchAutoexecFile=NULL;
+#ifdef DBCS
+VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName, BOOL bFreMem);
+#else // !DBCS
 VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName);
+#endif // !DBCS
 
 DWORD dwWNTPifFlags;
 UCHAR WNTPifFgPr = 100;
@@ -40,7 +44,16 @@ UCHAR WNTPifBgPr = 100;
 char achSlash[]     ="\\";
 char achConfigNT[]  ="config.nt";
 char achAutoexecNT[]="autoexec.nt";
+#ifdef JAPAN
+char achConfigUS[] = "config.us";
+unsigned short fSBCSMode = 0;
+#endif // JAPAN
 
+#if defined(NEC_98)         
+#line 53
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 57
 
 /*  GetPIFConfigFile
  *
@@ -53,11 +66,20 @@ char achAutoexecNT[]="autoexec.nt";
  *
  *         char *pchFile - destination for path\file name
  *
+#ifdef DBCS
+ *         BOOLEAN bFreMem  - TRUE  keep allocate buffer
+ *                            FALSE free allocate buffer
+#endif // DBCS
+ *
  *  The input buffer must be at least MAX_PATH + 8.3 BaseName in len
  *
  *  This routine cannot fail, but it may return a bad file name!
  */
+#ifdef DBCS
+VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName, BOOL bFreMem)
+#else // !DBCS
 VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName)
+#endif // !DBCS
 {
    DWORD dw;
    char  **ppch;
@@ -68,20 +90,31 @@ VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName)
       {
        dw = NtvdmGetSystemDirectoryA(pchFileName, MAX_PATH);
        if (!dw || dw >= MAX_PATH) return;
-#line 70
+#line 92
        if (*(pchFileName+dw-1) != achSlash[0])
            strcat(pchFileName, achSlash);
+#ifdef JAPAN
+       strcat(pchFileName, bConfig ? (fSBCSMode ? achConfigUS : achConfigNT)
+					  : achAutoexecNT);
+#else // !JAPAN
        strcat(pchFileName, bConfig ? achConfigNT : achAutoexecNT);
-#line 73
+#endif // !JAPAN
        }
    else {
        dw = ExpandEnvironmentStringsOem(*ppch, pchFileName, MAX_PATH+12);
        if (!dw || dw > MAX_PATH+12 ||
            !mvdm_softpc_config_path_to_ansi(pchFileName, MAX_PATH+12)) {
-#line 77
+#line 104
            *pchFileName = '\0';
            }
-#line 81
+#ifdef DBCS
+       if (!bFreMem) {
+#endif // DBCS
+       free(*ppch);
+       *ppch = NULL;
+#ifdef DBCS
+       }
+#endif // DBCS
        }
 }
 
@@ -110,21 +143,33 @@ BOOL GetPIFData(PIF_DATA * pd, char *PifName)
 {
     DWORD dw;
     CHAR  achDef[]="\\_default.pif";
-    PIFEXTHDR		exthdr;
-    STDPIF		pif286;
-    W386PIF30		ext386;
-    W286PIF30		ext286;
-    WNTPIF31		extWNT;
-    WENHPIF40		extWin95;
+    PIFEXTHEADER        exthdr;
+    PIFOLD286STR        pif286;
+    PIF386EXT           ext386;
+    PIF286EXT30         ext286;
+    PIFWNTEXT           extWNT;
+    WORD      IdleSensitivity = (WORD)-1;
+
+#if defined(NEC_98)         
+#line 150
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 153
     HFILE		filehandle;
     char                pathBuff[MAX_PATH*2];
-    BOOL		bGot386, bGotWin95;
+    BOOL                bGot386;
     int 		index;
     char		*CmdLine;
-    WORD		IdleSensitivity;
+#ifdef JAPAN
+    PIFAXEXT		extAX;
+    BOOL		bGotNTConfigAutoexec;
+#endif // JAPAN
 
      CmdLine = NULL;
      dwWNTPifFlags = 0;
+#ifdef JAPAN
+     bGotNTConfigAutoexec = FALSE;
+#endif // JAPAN
 
      //
      // set the defaults in case of error or in case we can't find
@@ -135,7 +180,7 @@ BOOL GetPIFData(PIF_DATA * pd, char *PifName)
         // if no PifName, use %windir%\_default.pif
     if (!*PifName) {
         dw = NtvdmGetWindowsDirectoryA(pathBuff, sizeof(pathBuff) - sizeof(achDef));
-#line 134
+#line 190
         if (!dw || dw > sizeof(pathBuff) - sizeof(achDef)) {
             return FALSE;            // give it up... use default settings
             }
@@ -188,7 +233,6 @@ if (_lread(filehandle,(LPSTR)&exthdr,sizeof(exthdr)) == -1)
 if (!strcmp(exthdr.extsig, STDHDRSIG))
    {
    bGot386 = FALSE;
-   bGotWin95 = FALSE;
    while (exthdr.extnxthdrfloff != LASTHEADER)
        {
               //
@@ -224,7 +268,7 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
               //
               // Get 386 extensions
               //
-	 else if (!strcmp(exthdr.extsig, W386HDRSIG30))
+         else if (!strcmp(exthdr.extsig, W386HDRSIG))
            {
              if(_llseek(filehandle, exthdr.extfileoffset, 0) == -1  ||
                 _lread(filehandle,(LPSTR)&ext386,sizeof(ext386)) == -1)
@@ -237,22 +281,31 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
              pd->emsreq=ext386.PfMinEMMK;
              pd->xmsdes=ext386.PfMaxXmsK;
              pd->xmsreq=ext386.PfMinXmsK;
-	     if (!bGotWin95 && ext386.PfFPriority < 100) {
+
+
+             //
+             // If we don't have a valid idle sensitivity slider bar settings use the
+             // value from 386 extensions.
+             //
+             if (IdleSensitivity > 100) {
+                 if (ext386.PfFPriority < 100) {
                  WNTPifFgPr = (UCHAR)ext386.PfFPriority;   // Foreground priority
                  }
-	     if (!bGotWin95 && ext386.PfBPriority < 50) {
+                 if (ext386.PfBPriority < 50) {
                  WNTPifBgPr = (UCHAR)ext386.PfBPriority;        // Background priority
                  WNTPifBgPr <<= 1;                           // set def 50 to 100
                  }
+
+                  pd->idledetect = (char)((ext386.PfW386Flags >> 12) & 1);
+                  }
+
              pd->reskey = (char)((ext386.PfW386Flags >> 5) & 0x7f); // bits 5 - 11 are reskeys
              pd->menuclose = (char)(ext386.PfW386Flags & 1);        // bottom bit sensitive
              pd->ShortScan = ext386.PfHotKeyScan;    // scan code of shortcut key
              pd->ShortMod = ext386.PfHotKeyShVal;    // modifier code of shortcut key
-	     if (!bGotWin95)
-		pd->idledetect = (char)((ext386.PfW386Flags >> 12) & 1);
              pd->fullorwin  = (WORD)((ext386.PfW386Flags & fFullScreen) >> 3);
              bPifFastPaste = (ext386.PfW386Flags & fINT16Paste) != 0;
-	     CmdLine = ext386.PfW386params;
+             CmdLine = ext386.params;
              }
                   //
                   // Get Windows Nt extensions
@@ -266,7 +319,7 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
                 return FALSE;
                 }
 
-	     dwWNTPifFlags = extWNT.nt31Prop.dwWNTFlags;
+             dwWNTPifFlags = extWNT.dwWNTFlags;
              pd->SubSysId = (char) (dwWNTPifFlags & NTPIF_SUBSYSMASK);
 
 	     /* take autoexec.nt and config.nt from .pif file
@@ -275,58 +328,97 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
 	     */
 	     if (!pd->IgnoreConfigAutoexec)
 		{
+#ifdef JAPAN
+		// if we got private config and autoexec
+		// from nt extention, ignore win31j extention
+		bGotNTConfigAutoexec = TRUE;
+		fSBCSMode = 0;
+#endif // JAPAN
 		free(pchConfigFile);
 		free(pchAutoexecFile);
-#line 273
+#line 343
 		pchConfigFile = ch_malloc(PIFDEFPATHSIZE);
-		extWNT.nt31Prop.achConfigFile[PIFDEFPATHSIZE-1] = '\0';
+		extWNT.achConfigFile[PIFDEFPATHSIZE-1] = '\0';
 		if (pchConfigFile) {
-		    strcpy(pchConfigFile, extWNT.nt31Prop.achConfigFile);
+		    strcpy(pchConfigFile, extWNT.achConfigFile);
 		    }
 
 		pchAutoexecFile = ch_malloc(PIFDEFPATHSIZE);
-		extWNT.nt31Prop.achAutoexecFile[PIFDEFPATHSIZE-1] = '\0';
+		extWNT.achAutoexecFile[PIFDEFPATHSIZE-1] = '\0';
 		if (pchAutoexecFile) {
-		    strcpy(pchAutoexecFile, extWNT.nt31Prop.achAutoexecFile);
+		    strcpy(pchAutoexecFile, extWNT.achAutoexecFile);
 		    }
 		}
 
 	     }
+
 		//
-		// Get Win95 extenstion
+                  // Get Window 4.0 enhanced pif. Right now we only care about the
+                  // idle sensitivity slider bar because its not beiong mapped into
+                  // the 386 idle\polling stuff. For next release we need to integrate
+                  // this section better.
 		//
-	else if (!strcmp(exthdr.extsig, WENHHDRSIG40))
-	   {
-		bGotWin95 = TRUE;
+         else if (!strcmp(exthdr.extsig, WENHHDRSIG40)) {
+             WENHPIF40 wenhpif40;
+
 		if(_llseek(filehandle, exthdr.extfileoffset, 0) == -1 ||
-		   _lread(filehandle,(LPSTR)&extWin95, sizeof(extWin95)) == -1)
+                _lread(filehandle,(LPSTR)&wenhpif40,sizeof(wenhpif40)) == -1)
 		    {
 		    _lclose(filehandle);
 		    return FALSE;
 		    }
-		IdleSensitivity = extWin95.tskProp.wIdleSensitivity;
-		if (IdleSensitivity < 10) {
-		    // disable idle detection completely
-		    pd->idledetect = 0;
+
+
+             //
+             // On current systems user is not able to manipulate
+             //    ext386.PfFPriority,
+             //    ext386.PfBPriority,
+             //    ext386.PfW386Flags fPollingDetect.
+             //
+             // Instead the idle sensitivity slider bar is used, and overrides 386ext
+             // idle settings.
+             //
+
+             if (wenhpif40.tskProp.wIdleSensitivity <= 100) {
+                 IdleSensitivity =  wenhpif40.tskProp.wIdleSensitivity;
+
+                 // Sensitivity default is 50, scale to default ntvdm idle detection.
+                 WNTPifBgPr = WNTPifFgPr = (100 - IdleSensitivity) << 1;
+
+                 // Idle detection on or off.
+                 if (IdleSensitivity > 0) {
+                     pd->idledetect = 1;
 		    }
-		else if (IdleSensitivity > 50 && IdleSensitivity <= 100) {
-			//
-			// 10 <= priority <= 100 (yeild rate = 90% ~ 0%)
-			//
-			WNTPifFgPr =
-			WNTPifBgPr = 10 + (100 - IdleSensitivity) * 9 / 5;
 		    }
-		else {
-			WNTPifFgPr =
-			WNTPifBgPr = 100;
-		}
-		// TSK_BACKGROUND means "do not suspend the application
-		// when it is running in background"
-		if (!(extWin95.tskProp.flTsk & TSK_BACKGROUND)) {
-		    WNTPifBgPr = 10;
 		    }
 
+
+#ifdef	JAPAN
+	  // only read in win31j extention if
+	  // (1). we are running in a new console
+	  // (2). no private config/autoexec was given in the pif
+	  else if (!bGotNTConfigAutoexec &&
+		   !pd->IgnoreWIN31JExtention &&
+		   !strcmp(exthdr.extsig, AXEXTHDRSIG))
+	     {
+	     if(_llseek(filehandle, exthdr.extfileoffset, 0) == -1 ||
+		_lread(filehandle,(LPSTR)&extAX, PIFAXEXTSIZE) == -1)
+                {
+                _lclose(filehandle);
+                return FALSE;
 	     }
+
+		fSBCSMode = extAX.fSBCSMode;
+#ifdef JAPAN_DBG
+                DbgPrint( "NTVDM: GetPIFData: fsSBCSMode = %d\n", fSBCSMode );
+#endif
+	     }
+#endif // JAPAN
+#if defined(NEC_98)         
+#line 421
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 439
          }  // while !lastheader
 
    /* pif file handling strategies on NT:
@@ -358,7 +450,7 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
    if (DosSessionId ||
        (pfdata.AppHasPIFFile && pd->SubSysId == SUBSYS_DOS))
 	{
-	if (pif286.appname[0] && !pd->IgnoreTitleInPIF) {
+        if (pif286.name[0] && !pd->IgnoreTitleInPIF) {
 	    /* grab wintitle from the pif file. Note that the title
 	       in the pif file is not a NULL terminated string. It always
 	       starts from a non-white character then the real
@@ -366,10 +458,10 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
 	       append with SPACE characters. The total length is 30 characters.
 	    */
 	    for (index = 29; index >= 0; index-- )
-		if (pif286.appname[index] != ' ')
+                if (pif286.name[index] != ' ')
 		    break;
             if (index >= 0 && (pd->WinTitle = ch_malloc(MAX_PATH + 1))) {
-		RtlMoveMemory(pd->WinTitle, pif286.appname, index + 1);
+                RtlMoveMemory(pd->WinTitle, pif286.name, index + 1);
 		pd->WinTitle[index + 1] = '\0';
 	    }
 	}
@@ -430,6 +522,11 @@ void SetPifDefaults(PIF_DATA *pd)
      pd->StartFile = NULL;
      pd->StartDir = NULL;
      pd->SubSysId = SUBSYS_DEFAULT;
+#if defined(NEC_98)         
+#line 543
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 545
 }
 
 /*

@@ -53,12 +53,22 @@
 
 #include "trace.h"
 #include "nt_event.h"
+#if defined(NEC_98)
+#line 55
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 58
 
 
 
-extern VOID (*pW32HungAppNotifyThread)(UINT);
+extern DWORD (*pW32HungAppNotifyThread)(UINT);
 int error_window_options = 0;
 
+#if defined(NEC_98)
+#line 65
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 67
 VOID SuspendTimerThread(VOID);
 VOID ResumeTimerThread(VOID);
 
@@ -88,7 +98,7 @@ int ErrorDialogBox(char *message, char *Edit, DWORD dwOptions);
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv);
 int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi);
 LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam);
-#line 89
+#line 96
 void SwpButtons(HWND hDlg, DWORD dwOptions);
 void SwpDosDialogs(HWND hDlg, HWND hWndCon,HWND SwpInsert, UINT SwpFlags);
 DWORD OemMessageToAnsiMessage(CHAR *, CHAR *);
@@ -105,20 +115,20 @@ ULONG WOWpSysErrorBox(LPSTR,LPSTR,USHORT,USHORT,USHORT);
 
 
 #ifdef host_error_ext
-#line 105
+#line 112
 #error Unsupported excluded original configuration
 #endif
-#line 107
+#line 114
 SHORT host_error_ext(int error_num, int options, ErrDataPtr data)
 {
     return host_error(error_num, options, NULL);
 }
 
 #ifdef host_error
-#line 113
+#line 120
 #error Unsupported excluded original configuration
 #endif
-#line 115
+#line 122
 SHORT host_error(int error_num, int options, char *extra_char);
 
 #ifdef host_error_conf
@@ -148,15 +158,16 @@ int DisplayErrorTerm(int ErrorNo,	/* Softpc Error number */
                      int Lineno)            /* LIne number of error */
 {
     char Msg[EHS_MSG_LEN];
+    CHAR FormatStr[EHS_MSG_LEN]="%s %lxh";
     DWORD errno, len;
 
     UNUSED(ErrorNo);    //Always internal error
 
 #ifndef PROD
-#line 149
+#line 157
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 152
+#line 160
 
     // assume NT error if either of top two bits set (err or warning).
     // this means we'll confuse some of the lesser NT errors but we get a
@@ -176,7 +187,12 @@ int DisplayErrorTerm(int ErrorNo,	/* Softpc Error number */
                         NULL
                         );
     if (!len) {
-        sprintf(Msg, "%s %lxh", szSysErrMsg, OSErrno);
+        LoadString(GetModuleHandle(NULL),
+                   ED_FORMATSTR0,
+                   FormatStr,
+                   sizeof(FormatStr)/sizeof(CHAR));
+
+        sprintf(Msg, FormatStr, szSysErrMsg, OSErrno);
         }
 
     return(host_error(EHS_SYSTEM_ERROR, ERR_QUIT, Msg));
@@ -200,10 +216,10 @@ SHORT host_error(int error_num, int options, char *extra_char)
 
 
 #ifndef PROD
-#line 195
+#line 208
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 200
+#line 213
 
     ErrorDialogBox(message, NULL, RMB_ICON_STOP | RMB_ABORT | RMB_IGNORE);
 
@@ -499,7 +515,7 @@ DWORD OemMessageToAnsiMessage(CHAR *pBuff, CHAR *pMsg)
  *
  */
 BOOL CALLBACK GetThreadTopLevelWindow(HWND hWnd, LPARAM lParam)
-#line 495
+#line 508
 {
    PDWORD pdw = (PDWORD)lParam;
 
@@ -573,10 +589,17 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
 
 
     //
-    // spin off a separate thread, why ?
-    // For DOS, to avoid suspended threads during full screen switching
-    // For Wow required for task termination if user chooses terminate.
+    // if this dialog has an edit window, then we have to use our own
+    // dialog, which contains an edit box, and we MUST do it from
+    // a separate thread, to avoid problems with full screen switching.
+    // Editwnd is only used for Pif file options see cmdpif.
     //
+    // If no editwnd then we can use the systems harderror thread
+    // which is safe to do without a secondary thread.
+    //
+
+
+    if (dwOptions & RMB_EDIT) {
     dw = 5;
     do {
        hThread = CreateThread(NULL,           // security
@@ -589,50 +612,33 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
        if (hThread)
            break;
        else
-           Sleep(2000);
-       } while (dw--);
+             Sleep(5000);
 
+       } while (dw--);
+       }
     if (hThread)  {
         do {
             dw = WaitForSingleObject(hThread, 1000);
            } while (dw == WAIT_TIMEOUT && !edgi.dwReply);
         CloseHandle(hThread);
+        }
+    else {
+        ErrorDialogBoxThread(&edgi);
+        }
+
         ResumeTimerThread();
 
+    if (edgi.dwReply == RMB_ABORT) {
+        //
+        // if current thread is a wow task, then invoke wow32 to kill it.
+        //
 
-        if (edgi.dwReply == RMB_ABORT)
-               //
-               // The wow termination will occur via the ErrorDialogBoxThread
-               // as it calls the HungAppNotifyThread. Befotrewe return give
-               // wow a chance to set up for termination.
-               //
-            if (VDMForWOW) {
-               Sleep(10);
+        if (VDMForWOW &&  NtCurrentTeb()->WOW32Reserved && pW32HungAppNotifyThread)  {
+            (*pW32HungAppNotifyThread)(0);
                }
-
-               //
-               // If a dos app terminate now!
-               //
             else {
                TerminateVDM();
                }
-        }
-
-    else {
-#ifndef PROD
-#line 615
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-#line 619
-        ResumeTimerThread();
-
-        //
-        // If we can't create a thread, we are in a pretty bad way
-        //    wow: ignore error, since not alllowed to kill WOW ssystem
-        //    dos: terminate the VDM
-        //
-        if (!VDMForWOW)
-            TerminateVDM();
         }
 
     bCalled--;
@@ -654,14 +660,20 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
  *        IDB_QUIT, IDB_CONTINUE
  */
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
-#line 649
+#line 652
 {
     int    i;
     ERRORDIALOGINFO *pedgi = pv;
     char *pch;
     char *pLast;
+#ifdef DBCS
+    static char *pTemplate  = "ERRORPANEL";
+    static char *pTemplate2 = "ERRORPANEL2";
+    LANGID LangID;
+#endif // DBCS
 
 
+#ifndef DBCS // kksuzuka:#4003 don't need isgraph check
         // skip leading white space
     pch = pedgi->Title;
     while (*pch && !isgraph(*pch)) {
@@ -679,34 +691,42 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
        pch++;
        }
    *pLast = '\0';
+#endif // !DBCS
 
 
-    if (VDMForWOW)  {
-        i = WowErrorDialogEvents(pedgi);
-        }
-    else {
+    if (pedgi->dwOptions & RMB_EDIT) {
         if (pedgi->hWndCon != HWND_DESKTOP) {
             SetForegroundWindow(pedgi->hWndCon);
             }
 
+#ifdef DBCS
+        LangID = GetSystemDefaultLangID();
+        // KKFIX 10/19/96
+        if ((BYTE)LangID == 0x04) {  // Chinese
+            pTemplate = pTemplate2;
+        }
+#endif // DBCS
         i = MvdmDosFaultDialog(RMB_ABORT, GetModuleHandle(NULL),
+#ifdef DBCS
+                           (LPCTSTR)pTemplate,
+#else // !DBCS
                            "ERRORPANEL",
+#endif // !DBCS
                            GetDesktopWindow(),
                            (DLGPROC) ErrorDialogEvents,
                            (LPARAM) pedgi
                            );
         }
+    else {
+        i = WowErrorDialogEvents(pedgi);
+        }
 
-   if (i == RMB_ABORT || i == -1) {
+    if (i == -1) {
        pedgi->dwReply = RMB_ABORT;
-       if (VDMForWOW && pW32HungAppNotifyThread)  {
-           (*pW32HungAppNotifyThread)(0);   // we won't return from this
-           }
        }
    else {
        pedgi->dwReply = i;
        }
-
 
    return 0;
 }
@@ -716,10 +736,11 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
 
 
 LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam)
-#line 710
+#line 727
 {
     ERRORDIALOGINFO *pedgi;
     CHAR  szBuff[MAX_PATH];
+    CHAR  FormatStr[EHS_MSG_LEN];
     int i;
     LPSTR  lpstr;
     LONG  l;
@@ -771,9 +792,19 @@ LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam)
 
                 // set app title text
             if (*pedgi->Title) {
+
+                if (!LoadString(GetModuleHandle(NULL),
+                               strlen(pedgi->Title) < 80 ? ED_FORMATSTR1:ED_FORMATSTR2,
+                               FormatStr,
+                               sizeof(FormatStr)/sizeof(CHAR))) {
+                   strcpy(FormatStr, "%s");
+                   }
+
                 sprintf(szBuff,
-                        strlen(pedgi->Title) < 80 ? "\n%s" : "%s",
-                        pedgi->Title);
+                        FormatStr,
+                        pedgi->Title
+                        );
+
                 SetWindowText(GetDlgItem(hDlg,IDE_APPTITLE), szBuff);
                 }
 
@@ -1010,16 +1041,20 @@ int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi)
 {
    CHAR  szTitle[MAX_PATH];
    CHAR  szMsg[EHS_MSG_LEN];
+   CHAR  FormatStr[EHS_MSG_LEN]="%s\n";
    USHORT wButt1, wButt2, wButt3;
 
    if (*pedgi->Title) {
-       sprintf(szMsg, "%s\n", pedgi->Title);
+       LoadString(GetModuleHandle(NULL), ED_FORMATSTR3,
+                   FormatStr, sizeof(FormatStr)/sizeof(CHAR));
+       sprintf(szMsg, FormatStr, pedgi->Title);
        }
    else {
        szMsg[0] = '\0';
        }
 
    strcat(szMsg, pedgi->message);
+   if (pedgi->dwOptions & RMB_ABORT) { // abort means terminate which uses "close" button.
    strcat(szMsg, " ");
 
    if (!LoadString(GetModuleHandle(NULL), ED_WOWPROMPT,
@@ -1028,10 +1063,13 @@ int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi)
         szTitle[0] = '\0';
         }
    strcat(szMsg, szTitle);
+      }
+   if (!LoadString(GetModuleHandle(NULL),
+                   VDMForWOW ? ED_WOWTITLE : ED_DOSTITLE,
+                   szTitle,
+                   sizeof(szTitle) - 1
+                   ))
 
-
-   if (!LoadString(GetModuleHandle(NULL), ED_WOWTITLE,
-                  szTitle, sizeof(szTitle) - 1))
        {
         szTitle[0] = '\0';
         }
@@ -1067,11 +1105,38 @@ int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi)
 }
 
 
+/*
+ * The next values should be in the same order
+ * with the ones in IDOK and STR_OK lists
+ */
+#define  SEB_USER_OK         0  /* Button with "OK".     */
+#define  SEB_USER_CANCEL     1  /* Button with "Cancel"  */
+#define  SEB_USER_ABORT      2  /* Button with "&Abort"   */
+#define  SEB_USER_RETRY      3  /* Button with "&Retry"   */
+#define  SEB_USER_IGNORE     4  /* Button with "&Ignore"  */
+#define  SEB_USER_YES        5  /* Button with "&Yes"     */
+#define  SEB_USER_NO         6  /* Button with "&No"      */
+#define  SEB_USER_CLOSE      7  /* Button with "&Close"   */
 
+static USHORT rgsTranslateButton[] =
+{  SEB_USER_OK,
+   SEB_USER_CANCEL,
+   SEB_USER_YES,
+   SEB_USER_NO,
+   SEB_USER_ABORT,
+   SEB_USER_RETRY,
+   SEB_USER_IGNORE,
+   SEB_USER_CLOSE
+};
 
+#define SEB_XBTN(wBtn) \
+((0 == (wBtn)) || ((wBtn) > sizeof(rgsTranslateButton)/sizeof(rgsTranslateButton[0])) ? \
+(wBtn) : \
+(rgsTranslateButton[(wBtn)-1]+1))
 
-
-
+#define SEB_TRANSLATE(wBtn) \
+((wBtn) & SEB_DEFBUTTON ? SEB_XBTN((wBtn) & ~SEB_DEFBUTTON) | SEB_DEFBUTTON  : \
+SEB_XBTN(wBtn))
 
 /*++
  *  WOWpSysErrorBox
@@ -1091,11 +1156,13 @@ ULONG WOWpSysErrorBox(
     USHORT wBtn3)
 {
     NTSTATUS Status;
-    ULONG dwParameters[4];
+    ULONG dwParameters[MAXIMUM_HARDERROR_PARAMETERS];
     ULONG dwResponse;
     ANSI_STRING AnsiString;
     UNICODE_STRING UnicodeTitle;
     UNICODE_STRING UnicodeMessage;
+    char szDesktop[10];   // only needs to be big enough for "Default"
+    DWORD dwUnused;
 
     RtlInitAnsiString(&AnsiString, szTitle);
     RtlAnsiStringToUnicodeString(&UnicodeTitle, &AnsiString, TRUE);
@@ -1103,10 +1170,26 @@ ULONG WOWpSysErrorBox(
     RtlInitAnsiString(&AnsiString, szMessage);
     RtlAnsiStringToUnicodeString(&UnicodeMessage, &AnsiString, TRUE);
 
-    dwParameters[0] = ((ULONG)TRUE << 16) | (ULONG) wBtn1;
-    dwParameters[1] = ((ULONG)wBtn2 << 16) | (ULONG) wBtn3;
+    dwParameters[0] = ((ULONG)TRUE << 16) | (ULONG) SEB_TRANSLATE(wBtn1);
+    dwParameters[1] = ((ULONG)SEB_TRANSLATE(wBtn2) << 16) | (ULONG) SEB_TRANSLATE(wBtn3);
     dwParameters[2] = (ULONG)&UnicodeTitle;
     dwParameters[3] = (ULONG)&UnicodeMessage;
+
+    ASSERT(4 < MAXIMUM_HARDERROR_PARAMETERS);
+
+    if (GetUserObjectInformation(
+            GetThreadDesktop( GetCurrentThreadId() ),
+            UOI_NAME,
+            szDesktop,
+            sizeof(szDesktop),
+            &dwUnused
+            ) &&
+        RtlEqualMemory(szDesktop, "Default", 8)) {
+
+        dwParameters[HARDERROR_PARAMETERS_FLAGSPOS] = HARDERROR_FLAGS_DEFDESKTOPONLY;
+    } else {
+        dwParameters[HARDERROR_PARAMETERS_FLAGSPOS] = 0;
+    }
 
     //
     // OR in 0x10000000 to force the hard error through even if
@@ -1115,7 +1198,7 @@ ULONG WOWpSysErrorBox(
 
     Status = wow_raise_hard_error(
         STATUS_VDM_HARD_ERROR | 0x10000000,
-        4,
+        MAXIMUM_HARDERROR_PARAMETERS,
         1 << 2 | 1 << 3,
         dwParameters,
         0,
@@ -1127,7 +1210,6 @@ ULONG WOWpSysErrorBox(
 
     return NT_SUCCESS(Status) ? dwResponse : 0;
 }
-
 
 /*
  *  Exported routine for wow32 to invoke a system error box
@@ -1165,10 +1247,10 @@ ULONG WOWSysErrorBox(
 
 
 #ifndef PROD
-#line 1158
+#line 1237
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1170
+#line 1249
 
 VOID RcErrorBoxPrintf(UINT wId, CHAR *szMsg)
 {

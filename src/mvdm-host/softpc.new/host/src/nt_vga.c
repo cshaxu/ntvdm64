@@ -513,7 +513,7 @@ void nt_vga_med_graph_std(int offset, int screen_x, int screen_y,
 
     /* Display the new image. */
     rect.Left = screen_x << 3;
-    rect.Top = screen_y;
+    rect.Top = (SHORT)screen_y;
     rect.Right = rect.Left + (width << 3) - 1;
     rect.Bottom = rect.Top + height - 1;
 
@@ -647,7 +647,7 @@ void nt_vga_med_graph_big(int offset, int screen_x, int screen_y,
 
     /* Display the new image. */
     rect.Left = SCALE(screen_x << 3);
-    rect.Top = SCALE(screen_y);
+    rect.Top = (SHORT)SCALE(screen_y);
     rect.Right = rect.Left + SCALE(width << 3) - 1;
     rect.Bottom = rect.Top + SCALE(height) - 1;
 
@@ -790,7 +790,7 @@ void nt_vga_med_graph_huge(int offset, int screen_x, int screen_y,
 
     /* Display the new image. */
     rect.Left = SCALE(screen_x << 3);
-    rect.Top = SCALE(screen_y);
+    rect.Top = (SHORT)SCALE(screen_y);
     rect.Right = rect.Left + SCALE(width << 3) - 1;
     rect.Bottom = rect.Top + SCALE(height) - 1;
 
@@ -906,7 +906,7 @@ void nt_vga_hi_graph_std(int offset, int screen_x, int screen_y,
 
     /* Display the new image. */
     rect.Left = screen_x << 3;
-    rect.Top = screen_y;
+    rect.Top = (SHORT)screen_y;
     rect.Right = rect.Left + (width << 3) - 1;
     rect.Bottom = rect.Top + height - 1;
 
@@ -1065,7 +1065,7 @@ void nt_vga_hi_graph_big(int offset, int screen_x, int screen_y,
 
     /* Display the new image. */
     rect.Left = SCALE(screen_x << 3);
-    rect.Top = local_screen_y;
+    rect.Top = (SHORT)local_screen_y;
     rect.Right = rect.Left + SCALE(width << 3) - 1;
     rect.Bottom = rect.Top + draw_height - 1;
 
@@ -1188,7 +1188,7 @@ void nt_vga_hi_graph_huge(int offset, int screen_x, int screen_y,
 
     /* Display the new image. */
     rect.Left = SCALE(screen_x << 3);
-    rect.Top = SCALE(screen_y);
+    rect.Top = (SHORT)SCALE(screen_y);
     rect.Right = rect.Left + SCALE(width << 3) - 1;
     rect.Bottom = rect.Top + SCALE(height) - 1;
 
@@ -1392,8 +1392,8 @@ void nt_v7vga_hi_graph_std(int offset, int screen_x, int screen_y,
     RelMutex(sc.ConsoleBufInfo.hMutex);
 
     /* Display the new image. */
-    rect.Left = screen_x;
-    rect.Top = screen_y;
+    rect.Left = (SHORT)screen_x;
+    rect.Top = (SHORT)screen_y;
     rect.Right = rect.Left + width - 1;
     rect.Bottom = rect.Top + height - 1;
 
@@ -1518,7 +1518,7 @@ void nt_v7vga_hi_graph_big(int offset, int screen_x, int screen_y,
 
     /* Display the new image. */
     rect.Left = SCALE(screen_x);
-    rect.Top = local_screen_y;
+    rect.Top = (SHORT)local_screen_y;
     rect.Right = rect.Left + SCALE(width) - 1;
     rect.Bottom = rect.Top + local_height - 1;
 

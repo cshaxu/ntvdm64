@@ -45,10 +45,25 @@
 #endif /* MONITOR */
 #line 46
 
+#if defined(JAPAN) || defined(KOREA)
+#include "video.h"
+#endif
+
+#if defined(NEC_98)
+#line 52
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 94
+
 /* Externs */
 
 
 extern char *image_buffer;
+#if defined(NEC_98)
+#line 100
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 103
 
 /* Statics */
 
@@ -76,15 +91,23 @@ static unsigned int cga_med_graph_lut1_huge[256];
 // for risc we have 4 bytes per character because of vga interleaving
 //
 #ifdef MONITOR
-#line 78
+#line 130
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
-#line 80
+#line 132
 #define TEXT_INCVAL 4
 #endif
-#line 82
+#line 134
 
+#if (defined(JAPAN) || defined(KOREA)) && defined(i386)
+#undef TEXT_INCVAL
+#endif // (JAPAN || KOREA) && i386
 
+#if defined(NEC_98)
+#line 140
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 165
 
 
 
@@ -102,17 +125,34 @@ void nt_init_text()
     sub_note_trace0(HERC_HOST_VERBOSE, "nt_init_text");
 
 #ifdef X86GFX
-#line 101
+#line 182
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif	//X86GFX
-#line 103
+#line 184
     closeGraphicsBuffer(); /* Tim Oct 92 */
 
 #ifdef MONITOR
-#line 106
+#line 190
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif  //MONITOR
-#line 112
+#line 197
+#if defined(JAPAN) || defined(KOREA)
+#ifndef NEC_98
+// change Vram addres to DosVramPtr from B8000
+    if ( !is_us_mode() ) {
+#ifdef i386
+        set_screen_ptr( (byte *)DosvVramPtr );
+#endif // i386
+        set_char_height( 19 );
+#ifdef JAPAN_DBG
+#ifdef i386
+        DbgPrint( "NTVDM: nt_init_text() sets VRAM %x, set char_height 19\n", DosvVramPtr );
+#endif // i386
+#endif
+    }
+#endif // !NEC_98
+#line 212
+#endif // JAPAN || KOREA
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -153,15 +193,15 @@ void nt_init_cga_colour_med_graph()
                         byte3 = ( i & 0x30 ) >> 4;
                         byte4 = ( i & 0xC0 ) >> 6;
 
-#line 152
+#line 253
 #ifdef BIGEND
-#line 153
+#line 254
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /* BIGEND */
-#line 188
+#line 289
 
 #ifdef LITTLEND
-#line 190
+#line 291
                         cga_med_graph_hi_nyb[i]
                                 = ( byte3 << 24 ) | ( byte3 << 16)
                                         | ( byte4 << 8 ) | byte4;
@@ -217,6 +257,7 @@ void nt_init_cga_colour_hi_graph()
         sc.BitsPerPixel = MONO_BITS_PER_PIXEL;
 }
 
+#ifndef NEC_98
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::: Output CGA text :::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -232,6 +273,13 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
     SMALL_RECT WriteRegion;
     PBYTE   to;
     PBYTE   pScreenText = get_chain2_screen_ptr(ScreenOffset);
+#if defined(JAPAN) && defined(i386)
+    int TEXT_INCVAL = (!is_us_mode() &&
+                      (sas_hw_at_no_check(DosvModePtr) == 0x73)) ? 4 : 2;
+#endif // JAPAN && i386
+#if defined(KOREA) && defined(i386)
+    int TEXT_INCVAL = 2;
+#endif // KOREA && i386
 
     /*:::::::::::::::::::::::::::::::::::::::::::: Output trace information */
 
@@ -303,7 +351,7 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
 	// the size of each cell was defined by TEXT_INCVAL
 	//
 
-#line 352
+#line 461
 	/*::::::::::::::::::::::::::::::::::::::::::::: Construct output buffer */
 	//Start location of repaint region
     to = &textBuffer[(ScreenY*now_width + ScreenX) * TEXT_INCVAL];
@@ -315,15 +363,15 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
                 pScreenText + cell * 8, TEXT_INCVAL);
         pScreenText += get_offset_per_line() * 4;
         to += now_width * TEXT_INCVAL;
-#line 362
+#line 471
     }
 
 
 #line 365 "nt_cga.c"
     /*:::::::::::::::::::::::::::::::::::::::::::::: Calculate write region */
 
-    WriteRegion.Left = ScreenX;
-    WriteRegion.Top = ScreenY;
+    WriteRegion.Left = (SHORT)ScreenX;
+    WriteRegion.Top = (SHORT)ScreenY;
 
     WriteRegion.Bottom = WriteRegion.Top + height - 1;
     WriteRegion.Right = WriteRegion.Left + clen - 1;
@@ -354,6 +402,8 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
     }
 
 }   /* end of nt_text() */
+#endif // !NEC_98
+#line 509
 
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -476,8 +526,8 @@ void nt_cga_colour_med_graph_std(int offset, int screen_x, int screen_y,
     RelMutex(sc.ConsoleBufInfo.hMutex);
 
     /* Display the new image. */
-    rect.Left = screen_x;
-    rect.Top = screen_y;
+    rect.Left = (SHORT)screen_x;
+    rect.Top = (SHORT)screen_y;
     rect.Right = rect.Left + (len << 3) - 1;
     rect.Bottom = rect.Top + (height << 1) - 1;
 
@@ -757,8 +807,8 @@ void nt_cga_colour_hi_graph_std(int offset, int screen_x, int screen_y,
     RelMutex(sc.ConsoleBufInfo.hMutex);
 
     /* Display the new image. */
-    rect.Left = screen_x;
-    rect.Top = screen_y;
+    rect.Left = (SHORT)screen_x;
+    rect.Top = (SHORT)screen_y;
     rect.Right = rect.Left + (len << 3) - 1;
     rect.Bottom = rect.Top + (height << 1) - 1;
 
@@ -927,7 +977,13 @@ void nt_cga_colour_hi_graph_huge(int offset, int screen_x, int screen_y,
 }
 
 #ifdef MONITOR
-#line 972
+#line 1082
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 1194
+#line 1304
+#if defined(NEC_98)
+#line 1305
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 2889
+

@@ -55,12 +55,22 @@
 #include "nt_reset.h"
 #include "nt_eoi.h"
 #include "nt_event.h"
+#if defined(NEC_98)
+#line 59
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 64
 
 /*
  * ==========================================================================
  * Macros
  * ==========================================================================
  */
+#if defined(NEC_98)
+#line 71
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 73
 #define SUSP_FAILURE            0xffffffff
 
 
@@ -68,6 +78,9 @@
 // A bunch of imports
 //
 extern DISPLAY_MODE choose_mode[];
+#ifdef JAPAN
+extern BOOL VDMForWOW;         // 32bit IME disable and enable for RAID #1085
+#endif // JAPAN
 
 
 
@@ -81,7 +94,14 @@ extern DISPLAY_MODE choose_mode[];
 GLOBAL DWORD stateLength;
 
 /* Video save block pointer. */
+#if defined(NEC_98)
+#line 97
+#error Unsupported NEC PC-98 configuration
+#else // NEC_98
+#line 99
 GLOBAL PVIDEO_HARDWARE_STATE_HEADER videoState;
+#endif // NEC_98
+#line 101
 GLOBAL PVOID textState; // Tim Oct 92.
 
 /* Name of the shared video block. */
@@ -89,10 +109,10 @@ GLOBAL WCHAR_STRING videoSection;
 GLOBAL WCHAR_STRING textSection; // Tim Oct 92
 
 #ifdef X86GFX
-#line 92
+#line 108
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 96
+#line 119
 
 /* Flag to stop host_simulates on this thread executing timer tick code. */
 GLOBAL BOOL NoTicks;
@@ -120,10 +140,16 @@ GLOBAL BOOL Frozen256Packed = FALSE;  // use packed 256 mode paint routine
 /* Variable that indicates if we are in a non-standard VGA mode. */
 LOCAL BOOL inAFunnyMode = FALSE;
 LOCAL BOOL ModeSetBatch = FALSE;
+LOCAL BOOL HandShakeInProgress = FALSE;
 
 /* Storage for the frozen-window thread handle. */
 LOCAL HANDLE freezeHandle = (HANDLE)0;
 
+#if defined(NEC_98)
+#line 152
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 166
 
 
 /*
@@ -137,19 +163,46 @@ LOCAL HANDLE freezeHandle = (HANDLE)0;
 
 LOCAL VOID getCursorInfo(word *, half_word *, half_word *, half_word *);
 LOCAL VOID setCursorInfo(word, half_word, half_word, half_word);
+#if defined(NEC_98)
+#line 180
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 182
 LOCAL VOID windowedToFullScreen(SHORT, BOOL);
+#endif // !NEC_98
+#line 184
 LOCAL VOID fullScreenToWindowed(VOID);
+#if defined(NEC_98)
+#line 186
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 188
 LOCAL VOID syncHardwareToVGAEmulation(SHORT);
+#endif // !NEC_98
+#line 190
 LOCAL VOID syncVGAEmulationToHardware(VOID);
 LOCAL BOOL funnyMode(VOID);
 LOCAL VOID freezeWindow(VOID);
-#line 146
+#line 193
 #ifndef PROD
-#line 147
+#line 194
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
-#line 150
+#line 197
 
+#if defined(NEC_98)
+#line 199
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 202
+
+#define ScreenSwitchErrorExit()  {               \
+    if (HandShakeInProgress) {         \
+        SetEvent(hErrorHardwareEvent); \
+        HandShakeInProgress = FALSE;   \
+    }                                  \
+    ErrorExit();                       \
+}
 /*
  * ==========================================================================
  * Global functions
@@ -165,9 +218,14 @@ GLOBAL VOID doNullRegister()
 {
 	DWORD dummylen;
         PVOID dummyptr;
-        COORD dummycoord;
+    COORD dummycoord = {0};
 
-        if( !RegisterConsoleVDM( CONSOLE_UNREGISTER_VDM,
+#if defined(NEC_98)
+#line 228
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 243
+    if (!RegisterConsoleVDM( CONSOLE_UNREGISTER_VDM,
                                  NULL,
 	                         NULL,
                                  NULL,
@@ -182,11 +240,16 @@ GLOBAL VOID doNullRegister()
 	  )
 		ErrorExit();
 #ifdef X86GFX
-#line 183
+#line 258
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 185
+#line 260
 
+#if defined(NEC_98)
+#line 262
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 268
 }
 
 /*
@@ -208,27 +271,26 @@ GLOBAL VOID initTextSection(VOID)
     textBufferSize.Y = 50;
 
 #ifdef X86GFX
-#line 207
+#line 289
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
-#line 223
+#line 305
     sc.ScreenState = WINDOWED;
 #endif
-#line 225
+#line 307
 
-    if( !RegisterConsoleVDM( VDMForWOW ?
+    if (!RegisterConsoleVDM( VDMForWOW ?
                                 CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,
 #ifdef X86GFX
-#line 229
+#line 311
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
-#line 232
+#line 315
 			     NULL,
 			     NULL,
+                             NULL,
 #endif
-#line 235
-                             NULL,            // sectionname no longer used
-                             0,               // sectionnamelen no longer used
+                             0,
 	                     &stateLength,
                              (PVOID *) &videoState,
                              NULL,            // sectionname no longer used
@@ -239,23 +301,32 @@ GLOBAL VOID initTextSection(VOID)
     )
 	ErrorExit();
 
+#if defined(NEC_98)
+#line 331
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 333
 #ifdef X86GFX
-#line 248
+#line 334
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 253
+#line 343
 
 } /* end initTextSection() */
 
 #ifdef X86GFX
-#line 257
+#line 347
 #error Unsupported excluded original configuration
 #endif /* X86GFX */
-#line 1559
+#line 2045
 
-#line 1560
+#line 2046
 #ifdef PLANEDUMPER
-#line 1561
+#line 2047
 #error Unsupported excluded original configuration
 #endif
-#line 1612
+#line 2095
+#if defined(NEC_98)
+#line 2096
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98

@@ -33,10 +33,18 @@
 #include "trace.h"
 #include "video.h"
 #include "debug.h"
+#if defined(NEC_98)
+#line 36
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 45
 
+void host_ica_lock(void);
+void host_ica_unlock(void);
 
 IMPORT ULONG GetPerfCounter(VOID);
 
+#ifndef NEC_98
 ULONG FreqT2    = 0;
 BOOL  PpiState  = FALSE;
 BOOL  T2State   = FALSE;
@@ -44,6 +52,8 @@ ULONG LastPpi   = 0;
 ULONG FreqPpi   = 0;
 ULONG ET2TicCount=0;
 ULONG PpiCounting  = 0;
+#endif // !NEC_98
+#line 60
 
 HANDLE hBeepDevice = 0;
 ULONG BeepCloseCount = 0;
@@ -89,10 +99,17 @@ if( host_runtime_inquire(C_SOUND_ON))
 }
 
 
+static BOOL InSessionZero(void)
+{
+    DWORD session;
+    return ProcessIdToSessionId(GetCurrentProcessId(), &session) && session == 0;
+}
+
  /*  assumes caller holds ica lock */
 
 VOID InitSound( BOOL bInit)
 {
+    if( InSessionZero() ) {
     if (!bInit) {
         host_ica_lock();
         LazyBeep(0L, 0L);
@@ -104,6 +121,7 @@ VOID InitSound( BOOL bInit)
         return;
         }
 }
+}
 
 
 HANDLE OpenBeepDevice(void)
@@ -113,6 +131,10 @@ HANDLE OpenBeepDevice(void)
     NTSTATUS Status;
     IO_STATUS_BLOCK IoStatus;
     HANDLE hBeep;
+
+    if (!InSessionZero()) {
+        return( INVALID_HANDLE_VALUE );
+    }
 
     RtlInitUnicodeString( &NameString, DD_BEEP_DEVICE_NAME_U );
     InitializeObjectAttributes( &ObjectAttributes,
@@ -136,12 +158,12 @@ HANDLE OpenBeepDevice(void)
                            );
 
     if (!NT_SUCCESS( Status )) {
-#line 138
+#line 158
 #ifndef PROD
-#line 139
+#line 159
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 141
+#line 161
         hBeep = INVALID_HANDLE_VALUE;
     }
 
@@ -187,6 +209,9 @@ VOID LazyBeep(ULONG Freq, ULONG Duration)
          BeepLastDuration  = Duration;
          }
 
+      if (!InSessionZero()) {
+          Beep( Freq, Duration );
+      } else {
       if (!hBeepDevice) {
           hBeepDevice = OpenBeepDevice();
           }
@@ -208,7 +233,7 @@ VOID LazyBeep(ULONG Freq, ULONG Duration)
                              );
 
       BeepCloseCount = 1000;
-
+      }
       }
 
 
@@ -223,6 +248,7 @@ VOID LazyBeep(ULONG Freq, ULONG Duration)
  */
 void PlaySound(BOOL bPulsedPpi)
 {
+#ifndef NEC_98
   if (PpiState && T2State && FreqT2) {
       LazyBeep(FreqT2, INFINITE);
       }
@@ -235,6 +261,8 @@ void PlaySound(BOOL bPulsedPpi)
   else {
       LazyBeep(0,0);
       }
+#endif // !NEC_98
+#line 259
 }
 
 
@@ -250,6 +278,7 @@ void host_timer2_waveform(int delay,
                           int lohi,
                           int repeat)
 {
+#ifndef NEC_98
     ULONG ul;
 
     if (loclocks == INFINITE || hiclocks == INFINITE) {
@@ -272,6 +301,8 @@ void host_timer2_waveform(int delay,
         }
 
     PlaySound(FALSE);
+#endif // !NEC_98
+#line 298
 }
 
 
@@ -281,6 +312,7 @@ void host_timer2_waveform(int delay,
  */
 void HostPpiState(BYTE PortValue)
 {
+#ifndef NEC_98
    BOOL   bPpi;
 
    host_ica_lock();
@@ -298,6 +330,8 @@ void HostPpiState(BYTE PortValue)
        }
 
     host_ica_unlock();
+#endif // !NEC_98
+#line 326
 }
 
 
@@ -305,6 +339,7 @@ void HostPpiState(BYTE PortValue)
 
 void PulsePpi(void)
 {
+#ifndef NEC_98
     static ULONG PpiTicStart=0;
     static ULONG PpiCycles  =0;
     ULONG  ul,Elapsed;
@@ -381,6 +416,8 @@ void PulsePpi(void)
     LastPpi = ul;
     PpiCycles = 0;
 
+#endif // !NEC_98
+#line 411
 }
 
 
@@ -394,6 +431,7 @@ Called by:      The SoftPC timer.
 
 void PlayContinuousTone(void)
 {
+#ifndef NEC_98
    ULONG Elapsed;
 
    host_ica_lock();
@@ -411,6 +449,7 @@ void PlayContinuousTone(void)
 
    PlaySound(FALSE);
 
+   if (InSessionZero()) {
    if (!BeepLastFreq && !BeepLastDuration &&
        BeepCloseCount && !--BeepCloseCount)
      {
@@ -419,6 +458,14 @@ void PlayContinuousTone(void)
            hBeepDevice = 0;
            }
        }
+   }
 
     host_ica_unlock();
+#endif // !NEC_98
+#line 455
 }
+
+#if defined(NEC_98)
+#line 458
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98

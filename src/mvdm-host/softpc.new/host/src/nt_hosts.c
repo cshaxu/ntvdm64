@@ -31,6 +31,9 @@
 #endif /*HUNTER*/
 #line 31
 
+#if defined(JAPAN) || defined(KOREA)
+#include "video.h"
+#endif // JAPAN || KOREA
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::: Global variables */
 
 HANDLE InstHandle;
@@ -38,6 +41,20 @@ HANDLE InstHandle;
 
 CONSOLE_CURSOR_INFO StartupCursor;
 
+#ifdef DBCS
+#if defined(JAPAN) || defined(KOREA)
+UINT ConsoleInputCP;
+UINT ConsoleOutputCP;
+DWORD ConsoleNlsMode;         // 32bit IME disable and enable
+
+// for GetStringBitmap() in video.c
+HDC hdcVDM;
+HFONT hFont16;
+HFONT hFont24;
+
+#endif // JAPAN || KOREA
+extern BOOL VDMForWOW;
+#endif // DBCS
 /*:::::::::::::::::::::::::::::::::::::::: Fast graphics associated defines */
 
 BYTE Red[] = {	 0,   0,   0,	0, 128, 128, 128, 192, 128,   0,   0,
@@ -62,11 +79,16 @@ PSTR String(WORD StrResID);
 void InitScreenDesc(void);
 
 #ifdef HUNTER
-#line 63
+#line 80
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 65
+#line 82
 
+#if defined(JAPAN) || defined(KOREA)
+// Create 24dot font
+void CreateVDMFont( HDC hdc );
+void GetLogFont( int size, LOGFONT *lplf );
+#endif // JAPAN || KOREA
 HANDLE   SCS_hStdIn=0;
 HANDLE   SCS_hStdOut=0;
 HANDLE   SCS_hStdErr=0;
@@ -104,19 +126,135 @@ void SetupConsoleMode(void)
 {
     DWORD mode;
 
+#ifdef DBCS
+#include "error.h"
+
+    LANGID LangID;
+
+    LangID = GetSystemDefaultLangID();
+
+    //if ((LangID == 0x404 || LangID == 0x804) && !VDMForWOW) {
+    //Chinese
+    if (((BYTE)LangID == 0x04) && !VDMForWOW) {
+        if (GetConsoleCP() != 437) {
+
+            CONSOLE_SCREEN_BUFFER_INFO ScreenInfo;
+            COORD coord;
+            DWORD nCharWritten;
+
+            //host_error(ED_UNSUPPORT_CP, ERR_QUIT, "");
+
+    /*::::::::::::::::::::::::::::: Get information on current screen size */
+
+            GetConsoleScreenBufferInfo(sc.OutputHandle,&ScreenInfo);
+
+    /*::::::::::::::::::::::::::::::::::::::::::::::::::: Clear characters */
+
+            coord.X = coord.Y = 0;
+            
+            SetConsoleCursorPosition(sc.OutputHandle, coord);
+
+            FillConsoleOutputCharacter(sc.OutputHandle, ' ',
+                          ScreenInfo.dwSize.X * ScreenInfo.dwCursorPosition.Y,
+                                coord,&nCharWritten);
+
+            SetConsoleCP(437);
+            SetConsoleOutputCP(437);
+
+        }
+    }
+#endif
+#if defined(JAPAN) || defined(KOREA)
+#ifdef i386
+#ifndef NEC_98
+    {
+        extern int FromConsoleOutputFlag;
+        
+        FromConsoleOutputFlag = FALSE;
+    }
+#endif // !NEC_98
+#line 172
+#endif // i386
+    // 32bit IME disable
+    if ( !VDMForWOW ) {
+      if ( GetConsoleNlsMode( sc.InputHandle, &ConsoleNlsMode ) ) {
+        //DbgPrint( "NTVDM: GetConsoleMode %x, %08x\n", sc.InputHandle, ConsoleNlsMode );
+        if ( SetConsoleNlsMode( sc.InputHandle, ConsoleNlsMode | NLS_IME_DISABLE ) ) {
+            //DbgPrint( "NTVDM: 32bit IME disable %08x Success\n", ConsoleNlsMode | NLS_IME_DISABLE );
+        }
+        else {
+            DbgPrint( "NTVDM: SetConsoleNlsMode Error %08x\n", GetLastError() );
+        }
+      }
+    }
+    /*::::::::::::::::::::::::::::::::::::::::::: Set console input/output code page */
+#ifndef NEC_98
+
+    ConsoleInputCP = GetConsoleCP();
+    ConsoleOutputCP = GetConsoleOutputCP();
+
+    {
+	static int FirstStartFlag = TRUE;
+
+	if ( FirstStartFlag ) {
+
+            if ( !VDMForWOW ) {
+#ifdef JAPAN_DBG
+                DbgPrint("NTVDM: Create hdc for NTFONT\n" );
+#endif
+                hdcVDM = CreateDC( "DISPLAY", NULL, NULL, NULL );
+                CreateVDMFont( hdcVDM );
+                //SelectObject( hdcVDM, GetStockObject(OEM_FIXED_FONT) );
+            }
+	    FirstStartFlag = FALSE;
+	}
+	else {
+	    if ( BOPFromDispFlag ) {
+		if ( ConsoleInputCP == 437 && ConsoleOutputCP == 437 ) {
+ 		    //DbgPrint( "CP473->437, DBCSVectorReset\n" );
+                    SetDBCSVector( 437 );
+                    SetVram();
+		}
+		else if ( ConsoleInputCP != 437 && ConsoleOutputCP != 437 ) {
+		    //DbgPrint( "CP932->932, DBCSVectorSet\n" );
+                    SetDBCSVector( ConsoleInputCP );
+                    SetVram();
+		}
+		else {
+		    DbgPrint( "NTVDM: InputCP != OutputCP \n" );
+		}
+	    }
+	    else {
+                SetConsoleCP( 437 );
+                SetConsoleOutputCP( 437 );
+
+                SetDBCSVector( 437 );
+                SetVram();
+	    }
+	}
+    }
+#endif // !NEC_98
+#line 232
+#endif // JAPAN || KOREA
     /*::::::::::::::::::::::::::::::::::::::::::: Set console input mode */
 
     if(!GetConsoleMode(sc.InputHandle, &sc.OrgInConsoleMode))
 	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+#ifndef NEC_98
     mode = sc.OrgInConsoleMode &
 	   ~(ENABLE_PROCESSED_INPUT | ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
     if (!host_stream_io_enabled)
 	mode |= (ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
     mode = (mode | ENABLE_EXTENDED_FLAGS) & ~ENABLE_QUICK_EDIT_MODE;
 
+#else //NEC_98
+#line 243
+#error Unsupported NEC PC-98 configuration
+#endif //NEC_98
+#line 246
     /*.............................................. Set new console mode */
 
-#line 114
+#line 248
     if(!SetConsoleMode(sc.InputHandle,mode))
 	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
     /*::::::::::::::::::::::::::::::::::::::::::: Set console output mode */
@@ -126,7 +264,14 @@ void SetupConsoleMode(void)
 
     /*.............................................. Set new console mode */
 
+#if defined(NEC_98)
+#line 258
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 261
     if(!stdoutRedirected && !host_stream_io_enabled)
+#endif // !NEC_98
+#line 263
     {
 	mode = sc.OrgOutConsoleMode &
 	       ~(ENABLE_WRAP_AT_EOL_OUTPUT | ENABLE_PROCESSED_OUTPUT);
@@ -162,7 +307,7 @@ SECURITY_ATTRIBUTES sa;
 
     /*::::::::::::::::::::::::::::::::::::::::::: Get console output handle */
 
-#line 159
+#line 298
     if((sc.OutputHandle = GetStdHandle(STD_OUTPUT_HANDLE)) == INVALID_HANDLE_VALUE)
 	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
     //
@@ -181,7 +326,7 @@ SECURITY_ATTRIBUTES sa;
     /*:::::::::::::::::::::::::::::: check out if stdin has been redirected */
 
     if(GetFileType(sc.InputHandle) != FILE_TYPE_CHAR)
-#line 177
+#line 316
     {
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
        sa.lpSecurityDescriptor = NULL;
@@ -201,7 +346,7 @@ SECURITY_ATTRIBUTES sa;
 
     if(GetFileType(sc.OutputHandle) != FILE_TYPE_CHAR)
     {
-#line 196
+#line 335
        stdoutRedirected = TRUE;
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
        sa.lpSecurityDescriptor = NULL;
@@ -215,7 +360,7 @@ SECURITY_ATTRIBUTES sa;
        else {
           SetStdHandle (STD_OUTPUT_HANDLE,sc.OutputHandle);
           SetStdHandle (STD_ERROR_HANDLE,sc.OutputHandle);
-#line 209
+#line 348
        }
     }
 
@@ -229,10 +374,10 @@ SECURITY_ATTRIBUTES sa;
     SetupConsoleMode();
 
 #ifdef HUNTER
-#line 222
+#line 361
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /*HUNTER*/
-#line 224
+#line 363
 
     /*::::::::::::::::::::::::::: Tell console to post us a closedown event */
 
@@ -304,7 +449,61 @@ the control of Trapper.
 ============================================================================*/
 
 #ifdef HUNTER
-#line 295
+#line 434
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 344
+#if defined(JAPAN) || defined(KOREA)
+// Create 24dot font
+void GetLogFont( int size, LOGFONT *lplf )
+{
+
+#ifdef JAPAN_DBG
+    DbgPrint("NTVDM: GetLogFont %d\n", size );
+#endif
+    strcpy( lplf->lfFaceName, "Terminal" );
+
+    if ( size == 16 ) {
+        lplf->lfHeight = 18;
+        lplf->lfWidth = 8;
+    }
+    else if ( size == 24 ) {
+        lplf->lfHeight = 27;
+        lplf->lfWidth = 12;
+    }
+    lplf->lfEscapement  = 0;
+    lplf->lfOrientation = 0;
+    lplf->lfWeight      = 0; // default
+    lplf->lfItalic      = 0;
+    lplf->lfUnderline   = 0;
+    lplf->lfStrikeOut   = 0;
+#if defined(JAPAN)
+    lplf->lfCharSet        = SHIFTJIS_CHARSET;
+#elif defined(KOREA) // JAPAN
+    lplf->lfCharSet        = HANGEUL_CHARSET;
+#endif // KOREA
+    lplf->lfOutPrecision   = OUT_DEFAULT_PRECIS;
+    lplf->lfClipPrecision  = CLIP_DEFAULT_PRECIS;
+    lplf->lfQuality        = DEFAULT_QUALITY;
+    lplf->lfPitchAndFamily = FIXED_PITCH | FF_DONTCARE;
+
+    return;
+}
+
+void CreateVDMFont( HDC hdc )
+{
+    LOGFONT logfont;
+
+#ifdef JAPAN_DBG
+    DbgPrint("NTVDM: CreateVDMFont\n" );
+#endif
+
+    GetLogFont( 16, &logfont );
+    hFont16 = CreateFontIndirect( &logfont );
+    assert0( hFont16 != 0, "CreateVDMFont fail\n" );
+
+    GetLogFont( 24, &logfont );
+    hFont24 = CreateFontIndirect( &logfont );
+    assert0( hFont24 != 0, "CreateVDMFont fail\n" );
+
+}
+#endif // JAPAN || KOREA

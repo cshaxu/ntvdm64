@@ -745,7 +745,7 @@ HANDLE get_drive_handle(UTINY drive, USHORT pdb, BOOL auto_lock)
 					       );
 	if (flp->diskette_fd != INVALID_HANDLE_VALUE) {
 	    floppy_open_count++;
-	    flp->auto_locked = auto_lock;
+	    flp->auto_locked = auto_lock ? TRUE : FALSE;
 	    flp->owner_pdb = pdb;
 	    (*(pFDAccess))++;
 	    break;
@@ -951,7 +951,7 @@ nt_rflop_command
 		get_drive_handle(drive, *pusCurrentPDB, auto_lock);
 #line 1038
 		if (!nt_floppy_media_check(drive)) {
-		    fdc_parms.auto_lock = auto_lock;
+		    fdc_parms.auto_lock = auto_lock ? TRUE : FALSE;
 		    fdc_parms.command_block = command_block;
 		    fdc_parms.result_block = result_block;
 		    fdc_parms.owner_pdb = *pusCurrentPDB;
@@ -1834,10 +1834,10 @@ set_floppy_parms IFN1(FLP, flp)
 {
 	int index = flp->flop_type + density_state;
 
-	flp->secs_per_trk = 
+	flp->secs_per_trk = (IU16)
 		floppy_tksc [index].secs_per_trk;
 
-	flp->trks_per_disk = 
+	flp->trks_per_disk = (IU16)
 		floppy_tksc [index].trks_per_disk;
 
 	flp->max_track = flp->trks_per_disk - 1;

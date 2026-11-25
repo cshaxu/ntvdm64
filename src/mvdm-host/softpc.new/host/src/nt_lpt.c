@@ -7,7 +7,6 @@
 #include "host_def.h"
 #include <malloc.h>
 
-
 /*
  *	Name:			nt_lpt.c
  *	Derived From:		Sun 2.0 sun4_lpt.c
@@ -73,10 +72,16 @@ Work outstanding on this module,
 #include "sas.h"
 #include "printer.h"
 #ifndef PROD
-#line 76
+#line 75
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 78
+#line 77
+
+#if defined(NEC_98)
+#line 79
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 82
 
 boolean flushBuffer IFN1(int, adapter);
 #ifdef MONITOR
@@ -89,12 +94,18 @@ extern  sys_addr lp16BitPrtCount;
 extern  sys_addr lp16BitPrtId;
 boolean host_print_buffer(int adapter);
 #endif
+#endif // !NEC_98
+#line 95
 
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::: Macros ::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-#line 95
+#if defined(NEC_98)
+#line 101
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 104
 #ifdef MONITOR
 
 sys_addr lpt_status_addr;
@@ -105,14 +116,22 @@ sys_addr lpt_status_addr;
 			(sas_store_no_check(lpt_status_addr+(adap), (val)))
 
 #else /* MONITOR */
-#line 105
+#line 114
 #error Non-MONITOR printer status provider is not supported
 #endif /* MONITOR */
-#line 110
+#endif // !NEC_98
+#line 120
 
+#if defined(NEC_98)         
+#line 122
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 126
 #define KBUFFER_SIZE 1024	// Buffering macros
 #define HIGH_WATER 1020
 #define DIRECT_ACCESS_HIGH_WATER    1020
+#endif // !NEC_98
+#line 130
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::: Structure for host specific state data ::::::::::::::::*/
@@ -134,8 +153,16 @@ typedef struct
     BOOLEAN no_device_attached;
 } HOST_LPT;
 
+#if defined(NEC_98)         
+#line 152
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 154
 HOST_LPT host_lpt[NUM_PARALLEL_PORTS];
+#endif // !NEC_98
+#line 156
 
+#ifndef NEC_98
 #ifdef MONITOR
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -147,6 +174,7 @@ HOST_LPT host_lpt[NUM_PARALLEL_PORTS];
 GLOBAL void host_printer_setup_table(sys_addr table_addr, word nPorts, word * portAddr)
 {
     lpt_status_addr = table_addr + 3 * NUM_PARALLEL_PORTS;
+
     //  Now fill in the TIB entries for printer_info
     MonitorInitializePrinterInfo (nPorts,
 				  portAddr,
@@ -155,20 +183,34 @@ GLOBAL void host_printer_setup_table(sys_addr table_addr, word nPorts, word * po
 				  (LPBYTE)(table_addr),
 				  (LPBYTE)(lpt_status_addr)
 				 );
-
-
 }
 
 #endif /* MONITOR */
+#endif // !NEC_98
+#line 182
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::: Set auto close trigger :::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 
+#if defined(NEC_98)
+#line 189
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 191
 VOID host_set_inactivate_counter(int adapter)
+#endif // !NEC_98
+#line 193
 {
+#if defined(NEC_98)
+#line 195
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 197
     FAST HOST_LPT *lpt = &host_lpt[adapter];
+#endif // !NEC_98
+#line 199
     int close_in_ms;				// Flush rate in milliseconds
 
     /*::::::::::::::::::::::::::::::::::::::::::::::: Is auto close enabled */
@@ -195,11 +237,25 @@ VOID host_set_inactivate_counter(int adapter)
 /*::::::::::::::::::::::::::::: Open printer :::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#if defined(NEC_98)
+#line 226
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 228
 SHORT host_lpt_open(int adapter, BOOLEAN direct_access)
+#endif // !NEC_98
+#line 230
 {
     DWORD BytesReturn;
 
+#if defined(NEC_98)
+#line 234
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 236
     FAST HOST_LPT *lpt = &host_lpt[adapter];	 // Adapter control structure
+#endif // !NEC_98
+#line 238
     CHAR *lptName;				 // Adapter filename
 
     if (!direct_access)
@@ -212,15 +268,21 @@ SHORT host_lpt_open(int adapter, BOOLEAN direct_access)
     /*::::::::::::::::::::::::::::::::::::::::: Get printer name for Config */
 
     /* use a different device name for DONGLE support */
+#if defined(NEC_98)
+#line 251
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 255
     lptName = (CHAR *) config_inquire((UTINY)((direct_access ? C_VDMLPT1_NAME :
 								C_LPT1_NAME)
 					      + adapter), NULL);
 
 #ifndef PROD
-#line 218
+#line 260
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 220
+#endif // !NEC_98
+#line 263
 
     if ((lpt->kBuffer = (byte *)host_malloc (KBUFFER_SIZE)) == NULL) {
         // dont put a popup here as the caller of this routine handles it
@@ -250,10 +312,10 @@ SHORT host_lpt_open(int adapter, BOOLEAN direct_access)
         host_free (lpt->kBuffer);
 	// UIF needed to inform user that the open attempt failed
 #ifndef PROD
-#line 249
+#line 292
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 251
+#line 294
 	if (direct_access && GetLastError() == ERROR_FILE_NOT_FOUND)
 	    lpt->no_device_attached = TRUE;
 
@@ -270,18 +332,36 @@ SHORT host_lpt_open(int adapter, BOOLEAN direct_access)
 	return FALSE;
     }
     lpt->active = TRUE;
+#if defined(NEC_98)
+#line 311
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 313
     set_lpt_status(adapter, 0);
+#endif // !NEC_98
+#line 315
     lpt->direct_access = direct_access;
     if (lpt->direct_access) {
 	lpt->flushThreshold = DIRECT_ACCESS_HIGH_WATER;
+#ifndef NEC_98
 #ifdef MONITOR
 	MonitorEnablePrinterDirectAccess((WORD)adapter, lpt->handle, TRUE);
 #endif
+#endif // !NEC_98
+#line 323
     }
+
 
     /*:::::::::::::::::::::::::::::::::::::::::: Setup auto close counters */
 
+#if defined(NEC_98)
+#line 329
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 331
     host_set_inactivate_counter(adapter);
+#endif // !NEC_98
+#line 333
 
     return(TRUE);
 }
@@ -296,15 +376,23 @@ GLOBAL void host_lpt_close_all(void)
     FAST HOST_LPT *lpt;
     FAST int i;
 
+
     /*::::::::::: Scan through printer adapters updating auto flush counters */
 
 
+#if defined(NEC_98)
+#line 352
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 355
     for(i=0, lpt = &host_lpt[0]; i < NUM_PARALLEL_PORTS; i++, lpt++)
     {
 
 	if(lpt->active)
 	    host_lpt_close(i);	       /* Close printer port */
     }
+#endif // !NEC_98
+#line 362
 }
 
 
@@ -312,21 +400,43 @@ GLOBAL void host_lpt_close_all(void)
 /*:::::::::::::::::::::::::::: Close printer :::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#if defined(NEC_98)
+#line 370
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 372
 VOID host_lpt_close(int adapter)
+#endif // !NEC_98
+#line 374
 {
     DWORD   BytesReturn;
 
+#if defined(NEC_98)
+#line 378
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 380
     FAST HOST_LPT *lpt = &host_lpt[adapter];
 
     if (lpt->direct_access)
 	printer_is_being_closed(adapter);
+#endif // !NEC_98
+#line 385
 
+
+#if defined(NEC_98)
+#line 388
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 390
 #ifdef MONITOR
     if (sas_hw_at_no_check(lp16BitPrtId) == adapter){
         host_print_buffer (adapter);
         sas_store_no_check(lp16BitPrtId,0xff);
     }
 #endif
+#endif // !NEC_98
+#line 397
     /*::::::::::::::::::::::::::::::::::::::::: Is the printer port active */
 
     if(lpt->active)
@@ -335,30 +445,43 @@ VOID host_lpt_close(int adapter)
 	** Tim June 92. Flush output buffer to get the last output out.
 	** If there's an error I think we've got to ignore it.
 	*/
+#if defined(NEC_98)
+#line 406
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 408
 	(void)flushBuffer(adapter);
+#endif // !NEC_98
+#line 410
 
+#ifndef NEC_98
 #ifndef PROD
-#line 335
+#line 413
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 337
-
 #ifdef MONITOR
 	if (lpt->direct_access)
 	    MonitorEnablePrinterDirectAccess((WORD)adapter, lpt->handle, FALSE);
 #endif
+#endif // !NEC_98
+#line 420
         CloseHandle(lpt->handle);     /* Close printer port */
         host_free (lpt->kBuffer);
 	lpt->handle = (HANDLE) -1;    /* Mark device as closed */
 
 	lpt->active = FALSE;	      /* Deactive printer port */
+#if defined(NEC_98)
+#line 426
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 428
         set_lpt_status(adapter, 0);           /* Reset port status */
-
 #ifndef PROD
-#line 350
+#line 430
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 352
+#endif // !NEC_98
+#line 433
     }
 }
 
@@ -367,11 +490,19 @@ VOID host_lpt_close(int adapter)
 /*:::::::::::: Return the status of the lpt channel for an adapter :::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#if defined(NEC_98)
+#line 442
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 447
 GLOBAL ULONG host_lpt_status(int adapter)
 {
     return(get_lpt_status(adapter));
 }
+#endif // !NEC_98
+#line 452
 
+#ifndef NEC_98
 GLOBAL UCHAR host_read_printer_status_port(int adapter)
 {
     FAST HOST_LPT *lpt = &host_lpt[adapter];
@@ -379,7 +510,7 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
     DWORD   BytesReturn;
 
 
-#line 372
+#line 461
     if(!lpt->active)
     {
 	/*:::::::::::::::::::::::::::: Port inactive, attempt to reopen it */
@@ -387,17 +518,17 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
 	if(!host_lpt_open(adapter, TRUE))
 	{
 #ifndef PROD
-#line 379
+#line 468
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 381
+#line 470
 	    set_lpt_status(adapter, HOST_LPT_BUSY);
 	    return(FALSE);	     /* exit, printer not active !!!! */
 	}
     }
     if (lpt->bytesInBuffer)
 	flushBuffer(adapter);
-#line 387
+#line 476
     if (!DeviceIoControl(lpt->handle,
 		     IOCTL_VDM_PAR_READ_STATUS_PORT,
 		     NULL,		    // no input buffer
@@ -409,17 +540,20 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
                      )) {
 
 #ifndef PROD
-#line 398
+#line 487
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 401
-#line 403
+#line 490
+#line 492
         PrinterStatus = 0;
     }
-#line 405
+#line 494
     return(PrinterStatus);
 }
+#endif // !NEC_98
+#line 497
 
+#ifndef NEC_98
 BOOLEAN host_set_lpt_direct_access(int adapter, BOOLEAN direct_access)
 {
     DWORD   BytesReturn;
@@ -432,6 +566,8 @@ BOOLEAN host_set_lpt_direct_access(int adapter, BOOLEAN direct_access)
 	set_lpt_status(adapter, HOST_LPT_BUSY);
     return (lpt->active);
 }
+#endif // !NEC_98
+#line 512
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::: Print a byte ::::::::::::::::::::::::::::::::::*/
@@ -453,11 +589,26 @@ BOOLEAN host_set_lpt_direct_access(int adapter, BOOLEAN direct_access)
 ** Input parameter is the parallel port adapter number 0=LPT1
 ** Return value of TRUE means write was OK.
 */
+#if defined(NEC_98)
+#line 534
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 536
 boolean flushBuffer IFN1( int, adapter )
+#endif // !NEC_98
+#line 538
 {
+#if defined(NEC_98)
+#line 540
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 542
 	FAST HOST_LPT *lpt = &host_lpt[adapter];
+#endif // !NEC_98
+#line 544
 	DWORD BytesWritten;
 
+#ifndef NEC_98
 	if (lpt->direct_access) {
 	    DeviceIoControl(lpt->handle,
 			    IOCTL_VDM_PAR_WRITE_DATA_PORT,
@@ -473,16 +624,18 @@ boolean flushBuffer IFN1( int, adapter )
 	    return TRUE;
 
 	}
+#endif // !NEC_98
+#line 563
 
 
 	if( !WriteFile( lpt->handle, lpt->kBuffer,
 	                lpt->bytesInBuffer, &BytesWritten, NULL )
 	  ){
 #ifndef PROD
-#line 467
+#line 569
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 469
+#line 571
 		lpt->bytesInBuffer = 0;
 		return(FALSE);
 	}else{
@@ -502,7 +655,6 @@ boolean flushBuffer IFN1( int, adapter )
                 }
 		return( TRUE );
 	}
-
 }	/* end of flushBuffer() */
 
 /*
@@ -511,22 +663,57 @@ boolean flushBuffer IFN1( int, adapter )
 ** Return value of TRUE means OK, return FALSE means did a flush and
 ** it failed.
 */
+#if defined(NEC_98)
+#line 599
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 601
 boolean toBuffer IFN2( int, adapter, BYTE, b )
+#endif // !NEC_98
+#line 603
 {
+#if defined(NEC_98)
+#line 605
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 607
 	HOST_LPT *lpt = &host_lpt[adapter];
+#endif // !NEC_98
+#line 609
 	boolean status = TRUE;
 
 	lpt->kBuffer[lpt->bytesInBuffer++] = b;
 
 	if( lpt->bytesInBuffer >= lpt->flushThreshold ){
+#if defined(NEC_98)
+#line 615
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 617
 		status = flushBuffer( adapter );
+#endif // !NEC_98
+#line 619
 	}
 	return( status );
 }	/* end of toBuffer() */
 
+#if defined(NEC_98)
+#line 624
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 626
 GLOBAL BOOL host_print_byte(int adapter, byte value)
+#endif // !NEC_98
+#line 628
 {
+#if defined(NEC_98)
+#line 630
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 632
     FAST HOST_LPT *lpt = &host_lpt[adapter];
+#endif // !NEC_98
+#line 634
 
     /*:::::::::::::::::::::::::::::::::::::::::::: Is the printer active ? */
 
@@ -534,32 +721,49 @@ GLOBAL BOOL host_print_byte(int adapter, byte value)
     {
 	/*:::::::::::::::::::::::::::: Port inactive, attempt to reopen it */
 
+#if defined(NEC_98)
+#line 642
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 648
 	if(!host_lpt_open(adapter, FALSE))
 	{
 #ifndef PROD
-#line 523
+#line 651
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 525
+#line 653
 	    set_lpt_status(adapter, HOST_LPT_BUSY);
 	    return(FALSE);	     /* exit, printer not active !!!! */
 	}
+#endif // !NEC_98
+#line 657
     }
+#ifndef NEC_98
 #if defined(MONITOR)
     if (lpt->direct_access) {
 	MonitorPrinterWriteData((WORD)adapter, value);
     }
     else
 #endif
+#endif // !NEC_98
+#line 666
 	 {
 
 	/*:::::::::::::::::::::::::::::::::::::::::::::::: Send byte to printer */
 
+#if defined(NEC_98)
+#line 671
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 677
 	if(toBuffer(adapter, (BYTE) value) == FALSE)
 	{
 		set_lpt_status(adapter, HOST_LPT_BUSY);
 		return(FALSE);
 	}
+#endif // !NEC_98
+#line 683
     }
 
     /*::::::::::::::::::::::::::: Update idle and activate control variables */
@@ -578,13 +782,30 @@ GLOBAL BOOL host_print_byte(int adapter, byte value)
 
 GLOBAL void host_lpt_heart_beat(void)
 {
+#if defined(NEC_98)
+#line 702
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 704
     FAST HOST_LPT *lpt = &host_lpt[0];
+#endif // !NEC_98
+#line 706
     int i;
 
+#if defined(NEC_98)
+#line 709
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 715
 
     /*::::::::::: Scan through printer adapters updating auto close counters */
 
 
+#if defined(NEC_98)
+#line 720
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 726
     for(i=0; i < NUM_PARALLEL_PORTS; i++, lpt++)
     {
 
@@ -596,6 +817,8 @@ GLOBAL void host_lpt_heart_beat(void)
 	    host_lpt_close(i);	    /* Close printer port */
 	}
     }
+#endif // !NEC_98
+#line 738
 }
 
 
@@ -603,45 +826,67 @@ GLOBAL void host_lpt_heart_beat(void)
 /*::::::::::::::::::::: Flush the printer port ::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 587
+#line 745
 #if 0
-#line 588
+#line 753
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 595
+#line 761
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::: Reset the printer port ::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#if defined(NEC_98)
+#line 767
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 773
 GLOBAL void host_reset_print(int adapter)
 {
     if(host_lpt[adapter].active)
 	host_lpt_close(adapter);	    /* Close printer port */
 }
+#endif // !NEC_98
+#line 779
 
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::: host_print_auto_feed :::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-
+#ifndef NEC_98
 GLOBAL void host_print_auto_feed(int adapter, BOOL value)
 {
     UNREFERENCED_FORMAL_PARAMETER(adapter);
     UNREFERENCED_FORMAL_PARAMETER(value);
 }
+#else //NEC_98
+#line 791
+#error Unsupported NEC PC-98 configuration
+#endif //NEC_98
+#line 796
 
 #ifdef MONITOR
 
+#if defined(NEC_98)
+#line 800
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 804
 GLOBAL boolean host_print_buffer(int adapter)
 {
     FAST HOST_LPT *lpt = &host_lpt[adapter];
+#endif // !NEC_98
+#line 808
     word cb;
     byte i,ch;
 
+#ifndef NEC_98
     cb = sas_w_at_no_check(lp16BitPrtCount);
     if (!cb)
 	return (TRUE);
+#endif // !NEC_98
+#line 816
 
     /*:::::::::::::::::::::::::::::::::::::::::::: Is the printer active ? */
 
@@ -649,18 +894,32 @@ GLOBAL boolean host_print_buffer(int adapter)
     {
 	/*:::::::::::::::::::::::::::: Port inactive, attempt to reopen it */
 
+#if defined(NEC_98)
+#line 824
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 826
 	if(!host_lpt_open(adapter, FALSE))
+#endif // !NEC_98
+#line 828
 	{
 #ifndef PROD
-#line 638
+#line 830
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 640
+#if defined(NEC_98)
+#line 833
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 835
 	    set_lpt_status(adapter, HOST_LPT_BUSY);
+#endif // !NEC_98
+#line 837
 	    return(FALSE);	     /* exit, printer not active !!!! */
 	}
     }
 
+#ifndef NEC_98
     if (!lpt->direct_access) {
 	/*:::::::::::::::::::::::::::::::::::::::::::::::: Send byte to printer */
 
@@ -679,6 +938,9 @@ GLOBAL boolean host_print_buffer(int adapter)
 	ASSERT(cb == 0);
 	return FALSE;
     }
+#endif // !NEC_98
+#line 861
+
     /*::::::::::::::::::::::::::: Update idle and activate control variables */
 
     lpt->inactive_counter = 0; /* Reset inactivity counter */
@@ -690,28 +952,37 @@ GLOBAL boolean host_print_buffer(int adapter)
 
 GLOBAL void host_lpt_dos_open(int adapter)
 {
+#ifndef NEC_98
     FAST HOST_LPT *lpt = &host_lpt[adapter];
 
     lpt->dos_opened = TRUE;
+#endif // !NEC_98
+#line 878
 }
 
 GLOBAL void host_lpt_dos_close(int adapter)
 {
+#ifndef NEC_98
     FAST HOST_LPT *lpt = &host_lpt[adapter];
 
     if (lpt->active)
         host_lpt_close(adapter);       /* Close printer port */
     lpt->dos_opened = FALSE;
+#endif // !NEC_98
+#line 889
 }
 
 GLOBAL void host_lpt_flush_initialize()
 {
+#ifndef NEC_98
     FAST HOST_LPT *lpt;
     FAST int i;
 
     for(i=0, lpt = &host_lpt[0]; i < NUM_PARALLEL_PORTS; i++, lpt++)
         lpt->dos_opened = FALSE;
 
+#endif // !NEC_98
+#line 901
 }
 
 #endif /* PRINTER */

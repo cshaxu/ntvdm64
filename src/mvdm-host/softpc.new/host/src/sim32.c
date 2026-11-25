@@ -46,6 +46,7 @@
 #include "nt_mem.h"
 #line 40
 #endif /* CPU_40_STYLE */
+#include "nt_vdd.h"
 
 /********************************************************/
 /* IMPORTS & EXPORTS */
@@ -56,6 +57,7 @@ GLOBAL BOOL Sim32FreeVDMPointer (double_word, word, UTINY *, BOOL);
 GLOBAL BOOL Sim32GetVDMMemory (double_word, word, UTINY *, BOOL);
 GLOBAL BOOL Sim32SetVDMMemory (double_word, word, UTINY *, BOOL);
 GLOBAL sys_addr sim32_effective_addr (double_word, BOOL);
+GLOBAL sys_addr sim32_effective_addr_ex (word, double_word, BOOL);
 
 GLOBAL UTINY *sas_alter_size(sys_addr);
 GLOBAL UTINY *host_sas_init(sys_addr);
@@ -69,7 +71,7 @@ IMPORT ULONG Sas_wrap_mask;
 
 
 
-#line 64
+#line 66
 #ifndef MONITOR
 //
 // Pointer to a scratch video buffer. Updated by sim32 routines
@@ -146,6 +148,13 @@ BOOL SetVideoMemory(ULONG iaddr)
                         return (d);\
                 }\
         }
+#define convert_addr_ex(a,b,c,d,e) \
+        { \
+                if ((a = sim32_effective_addr_ex (b,c,d)) == (sys_addr)-1)\
+                {\
+                        return (e);\
+                }\
+        }
 
 /********************************************************/
 /*      The actual sim32 interfaces, most of these routines can be more or less mapped directly
@@ -154,7 +163,7 @@ BOOL SetVideoMemory(ULONG iaddr)
  *      WARNING: This routine returns a pointer into M, and
  *               WILL NOT work for backward M.
  */
-#line 148
+#line 157
 UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
 {
         sys_addr iaddr;
@@ -172,6 +181,47 @@ UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
         return (NtGetPtrToLinAddrByte(iaddr));
 }
 
+/*
+ *  See Sim32pGetVDMPointer
+ *
+ *  This call must be maintaned as is because it is exported for VDD's
+ *  in product 1.0.
+ */
+#line 180
+UCHAR *ExpSim32GetVDMPointer IFN3(double_word, addr, double_word, size, UCHAR, pm)
+{
+        return Sim32pGetVDMPointer(addr, (UCHAR)pm);
+}
+
+
+GLOBAL BOOL Sim32FlushVDMPointer IFN4(double_word, addr, word, size, UTINY *, buff, BOOL, pm)
+{
+        sys_addr iaddr;
+        convert_addr (iaddr, addr, pm, 0);
+
+//STF - need sas_wrap_mask with PE....iaddr &= Sas_wrap_mask;
+
+#ifndef MONITOR
+        if (IsVideoMemory(iaddr) && !SetVideoMemory(iaddr)) {
+            return FALSE;
+            }
+#endif   //MONITOR
+
+
+#ifndef CCPU
+        sas_overwrite_memory(iaddr, (ULONG)size);
+#endif
+        return (TRUE);
+}
+
+
+/********************************************************/
+/*      The actual sim32 interfaces, most of these routines can be more or less mapped directly
+ *      to existing routines in sas or gmi.
+ *
+ *      WARNING: This routine returns a pointer into M, and
+ *               WILL NOT work for backward M.
+ */
 /* XP debugger ABI. The zero V86 address identifies this SAS allocation. */
 extern int mvdm_softpc_guest_memory_range_valid(uint32_t address,
     uint32_t byte_count, int write);
@@ -199,34 +249,89 @@ PVOID WINAPI VdmMapFlat(USHORT selector, ULONG offset, VDM_MODE mode)
     return NtGetPtrToLinAddrByte(address);
 }
 
-/*
- *  See Sim32pGetVDMPointer
- *
- *  This call must be maintaned as is because it is exported for VDD's
- *  in product 1.0.
- */
-#line 171
-UCHAR *ExpSim32GetVDMPointer IFN3(double_word, addr, double_word, size, UCHAR, pm)
+#line 235
+BOOL
+VdmUnmapFlat(
+    USHORT seg,
+    ULONG off,
+    PVOID buffer,
+    VDM_MODE mode
+    )
 {
-        return Sim32pGetVDMPointer(addr, (UCHAR)pm);
+    // Just a placeholder in case we ever need it
+    return TRUE;
 }
 
 
-GLOBAL BOOL Sim32FlushVDMPointer IFN4(double_word, addr, word, size, UTINY *, buff, BOOL, pm)
+BOOL
+VdmFlushCache(
+    USHORT seg,
+    ULONG off,
+    ULONG size,
+    VDM_MODE mode
+    )
 {
-        sys_addr iaddr;
-        convert_addr (iaddr, addr, pm, 0);
+
+    sys_addr iaddr;
+    if (!size) {
+        DbgBreakPoint();
+        return FALSE;
+    }
+
+    convert_addr_ex (iaddr, seg, off, (mode == VDM_PM), 0);
 
 //STF - need sas_wrap_mask with PE....iaddr &= Sas_wrap_mask;
 
 #ifndef MONITOR
-        if (IsVideoMemory(iaddr) && !SetVideoMemory(iaddr)) {
-            return FALSE;
-            }
+    if (IsVideoMemory(iaddr) && !SetVideoMemory(iaddr)) {
+        return FALSE;
+        }
 #endif   //MONITOR
 
 
-        sas_overwrite_memory(iaddr, (ULONG)size);
+    //
+#ifndef CCPU
+    // Now call the emulator to inform it that memory has changed.
+    //
+    // Note that sas_overwrite_memory is PAGE GRANULAR, so using
+    // it to flush a single LDT descriptor has a horrendous impact on
+    // performance, since up to 511 other descriptors are also
+    // thrown away.
+    //
+    // So perform an optimization here by keying off the size.
+    // The dpmi code has been written to flush 1 descriptor at
+    // a time, so use the sas_store functions in this case to
+    // flush it.
+    //
+
+    if (size <= 8) {
+        UCHAR Buffer[8];
+        PUCHAR pBytes;
+        USHORT i;
+        //
+        // Small flush - avoid sas_overwrite_memory().
+        // Note that the sas_store functions optimize out calls
+        // that simply replace a byte with an identical byte. So this
+        // code copies out the bytes to a buffer, copies in zeroes,
+        // and then copies the original bytes back in.
+        //
+        pBytes = NtGetPtrToLinAddrByte(iaddr);
+        for (i=0; i<size; i++) {
+            Buffer[i] = *pBytes++;
+            sas_store(iaddr+i, 0);
+        }
+        sas_stores(iaddr, Buffer, size);
+
+    } else {
+
+        //
+        // normal path - flushes PAGE GRANULAR
+        //
+        sas_overwrite_memory(iaddr, size);
+
+    }
+#endif
+
         return (TRUE);
 }
 
@@ -261,44 +366,41 @@ GLOBAL BOOL Sim32SetVDMMemory IFN4(double_word, addr, word, size, UTINY *, buff,
 
 /********************************************************/
 /* Support routines for sim32 above */
-#line 226
+#line 349
 GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
 {
-    word seg, off;
+    return sim32_effective_addr_ex((word)(addr >> 16), (word)addr, pm);
+}
+
+/********************************************************/
+/* Support routines for sim32 above */
+GLOBAL sys_addr sim32_effective_addr_ex IFN3(word, seg, double_word, off, BOOL, pm)
+{
     double_word descr_addr;
     CPU_DESCR entry;
 
-    seg = (word)(addr>>16);
-    off = (word)(addr & 0xffff);
-
-    if (pm == FALSE)
-    {
-	return ((double_word)seg << 4) + off;
-    }
-    else
-    {
-	if ( selector_outside_GDT_LDT(seg, &descr_addr) == 1 )
-	{
-	/*
-	This should not happen, but is a check the real effective_addr
-	includes. Return error -1.
-	*/
+    if (pm == FALSE) {
+        return ((double_word)seg << 4) + off;
+    } else {
+        if ( selector_outside_GDT_LDT(seg, &descr_addr) == 1 ) {
+            /*
+            This should not happen, but is a check the real effective_addr
+            includes. Return error -1.
+            */
 #ifndef PROD
-#error Unsupported excluded original configuration
+            printf("NTVDM:sim32:effective addr: Error for addr %#x:%#x)\n", seg, off);
+            HostDebugBreak();
 #endif
-#line 251
             return ((sys_addr)-1);
-	}
-	else
-	{
-	    read_descriptor_linear(descr_addr, &entry);
-	    return entry.base + off;
-	}
+        } else {
+            read_descriptor_linear(descr_addr, &entry);
+            return entry.base + off;
+        }
     }
 }
 
 
-#line 262
+#line 412
 /********************************************************/
 /* Microsoft extensions to sas interface */
 LOCAL IMEMBLOCK *imap_start=NULL, *imap_end=NULL;
@@ -320,7 +422,7 @@ GLOBAL IMEMBLOCK *sas_mem_map ()
                         check_malloc (imap_start, 1, IMEMBLOCK);
                         imap_start->Next = NULL;
                         imap_end = imap_start;
-                        imap_end->Type = mem_type;
+                        imap_end->Type = (IU8) mem_type;
                         imap_end->StartAddress = iaddr;
                         continue;
                 }
@@ -331,7 +433,7 @@ GLOBAL IMEMBLOCK *sas_mem_map ()
                         check_malloc (imap_end->Next, 1,IMEMBLOCK);
                         imap_end = imap_end->Next;
                         imap_end->Next = NULL;
-                        imap_end->Type =mem_type;
+                        imap_end->Type = (IU8) mem_type;
                         imap_end->StartAddress = iaddr;
                 }
         }
@@ -358,18 +460,18 @@ GLOBAL void sas_clear_map()
 
 LOCAL UTINY *reserve_for_sas = NULL;
 
-#line 321
+#line 471
 #ifndef CPU_40_STYLE
-#line 322
+#line 472
 #error Non-CPU40 SIM32 memory provider is not supported
-#line 421
+#line 571
 #else /* CPU_40_STYLE */
-#line 422
+#line 572
 
 
 // Intel space allocation and deallocation control function for the A4 CPU
 
-#line 426
+#line 576
 GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
 {
 
@@ -377,25 +479,25 @@ GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
     if(!(Start_of_M_area = InitIntelMemory(size)))
     {
 	/* Initialise function failed, exit */
-#line 433
+#line 583
 #ifndef PROD
-#line 434
+#line 584
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
-#line 437
+#line 587
        (void)mvdm_softpc_terminate_current_session(0u, 0u);
        return(NULL);
-#line 438
+#line 588
     }
 
-#line 440
+#line 590
     Length_of_M_area = size;
     return(Start_of_M_area);
 }
 
 
-#line 445
+#line 595
 GLOBAL UTINY *host_sas_term()
 {
     /* Has any Intel memory been allocated ? */
@@ -412,6 +514,6 @@ GLOBAL UTINY *host_sas_term()
 }
 
 #endif /* CPU_40_STYLE */
-#line 461
+#line 611
 
 #endif /* SIM32 */

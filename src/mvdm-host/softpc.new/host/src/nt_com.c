@@ -40,7 +40,6 @@
 #include <nt_timer.h>
 #include <nt_eoi.h>
 
-
 /*:::::::::::::::::::::::::::::::::::::::::::::: Standard host com interface */
 
 GLOBAL void host_com_init(int);
@@ -53,12 +52,6 @@ GLOBAL void host_com_reset(int);
 GLOBAL void host_com_lock(int adapter);
 GLOBAL void host_com_unlock(int adapter);
 GLOBAL int host_com_open(int);
-
-#if 0
-#line 57
-#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
-#endif
-#line 60
 
 /* autoflush stub */
 GLOBAL void host_setup_aflush (int);
@@ -111,18 +104,14 @@ typedef enum { XOFF_TRIGGER, TIMER_TRIGGER, TXFULL_TRIGGER, CLOSE_TRIGGER } FLUS
 #define ADAPTER_REAL      1             /* Real comm port device */
 #define ADAPTER_SUSPENDED 2             /* Real device suspended */
 
-typedef struct _COM_STATES {
-    UCHAR   Break;
-    UCHAR   DTR;
-    UCHAR   RTS;
-    UCHAR   Parity;
-    UCHAR   StopBits;
-    UCHAR   DataBits;
-    DWORD   BaudRate;
-}COM_STATES, *PCOM_STATES;
-
-
 #define ESCAPECHAR ((UCHAR)(-1))
+
+#if defined(NEC_98)
+#line 109
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 114
+
 typedef struct _host_com
 {
     HANDLE handle;              /* Device handle */
@@ -201,13 +190,6 @@ typedef struct _host_com
 
     DWORD RXThreadID;           /* RX thread ID */
     HANDLE RXThreadHandle;      /* RX thread handle */
-    COM_STATES	ComStates;	/* Com device states as we know it */
-    int     SuspendTimeoutTicks; /* auto close ticks setting */
-    int     SuspendTickCounter; /* auto close tick counter */
-    BOOL    SyncWrite;		/* TRUE if we should write data synchrounously */
-    BOOL    Suspended;		/* TRUE if the port has been suspended */
-    BOOL    Suspending; 	/* TRUE when the port is being suspended */
-    DWORD   TickCount;
 
 } HOST_COM, *PHOST_COM;
 
@@ -303,10 +285,13 @@ boolean host_com_check_adapter(int adapter)
 }
 #endif
 
+GLOBAL void SyncBaseLineSettings(int, DIVISOR_LATCH *, LINE_CONTROL_REG *);
+
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::: Open comms port ::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /* Called first time port is written to ! */
+
 
 GLOBAL CPU int host_com_open(int adapter)
 {
@@ -315,7 +300,6 @@ GLOBAL CPU int host_com_open(int adapter)
     LINE_CONTROL_REG LCR_reg;       /* Current LCR status */
     int i;
     DCB LocalDCB;
-    ConfigValues    ComConfigValues;
 
     CURRENT_ADAPTER();              /* Define and setup pointer to adapter */
 
@@ -343,10 +327,8 @@ GLOBAL CPU int host_com_open(int adapter)
     }
 
     /*::::::::::::::::::::::::::: We have a vaild adapter so try to open it */
-    config_inquire((UTINY)(C_COM1_NAME + adapter),
-		   &ComConfigValues);
-#line 346
-    current->handle = CreateFile(ComConfigValues.string,
+
+    current->handle = CreateFile((CHAR*)config_inquire((UTINY)(C_COM1_NAME+adapter),NULL),
 				 GENERIC_READ | GENERIC_WRITE, 0, NULL,
 				 OPEN_EXISTING,
 				 FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED,
@@ -354,7 +336,7 @@ GLOBAL CPU int host_com_open(int adapter)
 
     /*............................................... Validate open attempt */
 
-#line 354
+#line 339
     if(current->handle == (HANDLE) -1)
     {
 	always_trace1("Cannot open comms port '%s'\n",
@@ -371,7 +353,6 @@ GLOBAL CPU int host_com_open(int adapter)
 	return(FALSE);
     }
 
-
     /* allocate rx buffer and initialize rx queue size */
 
     current->buffer = (UCHAR *) malloc(BUFFER_SIZE);
@@ -382,7 +363,7 @@ GLOBAL CPU int host_com_open(int adapter)
     }
     current->rxwindow_size = DEFAULT_RXWINDOW_SIZE;
     current->bytes_in_rxwindow = 0;
-    current->SyncWrite = (BOOL)config_inquire(C_COM_SYNCWRITE, NULL);
+
     /*:: Find out which ICA controller and line are used by this comms port */
 
     com_int_data(adapter, &current->controller, &current->line);
@@ -390,10 +371,10 @@ GLOBAL CPU int host_com_open(int adapter)
     /*::::::::::::::::::::::::::::::: Enable IRET hooks for comms interrupt */
 
 #ifdef MONITOR
-#line 389
+#line 373
 #error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected
 #endif
-#line 391
+#line 375
 
     /*:::::::::::::::::::::: Create objects used to control comms activity */
 
@@ -402,7 +383,6 @@ GLOBAL CPU int host_com_open(int adapter)
     current->RXEvent = CreateEvent(NULL,TRUE,FALSE,NULL);
     current->EvtHandle = CreateEvent(NULL,TRUE,FALSE,NULL);
     current->DWOVInx = 0;
-
     //Create objects used to control multipe overlapping writes
     for(i=0; i < MAX_PENDING_WRITES; i++)
     {
@@ -424,13 +404,16 @@ GLOBAL CPU int host_com_open(int adapter)
     current->SignalRXThread = (DWORD) 0;
     /*:::::::::::::::::::::::::::::::::::::::::::: Get TX buffer thresholds */
 
-    current->max_tx_threshold = (short)config_inquire(C_COM_TXBUFFER_SIZE, NULL);
-    if (!current->max_tx_threshold || current->max_tx_threshold > TX_MAX_BUFFER)
+    current->max_tx_threshold = getenv("TXBUFFER") ?
+				atoi(getenv("TXBUFFER")) :
+				TX_MAX_BUFFER;
+
+    if(current->max_tx_threshold > TX_MAX_BUFFER)
 	current->max_tx_threshold = TX_MAX_BUFFER;
 
     //Setup other delayed write control variables
-    if (current->max_tx_threshold == 1)
-	current->tx_threshold = 0;
+
+    current->tx_threshold = 1;		// Current threshold setting
     current->tx_flush_count = 0;        // No. of flushs of below size
     /*::::::::::::::::::::::::::: Extended control variables used by adaper */
 
@@ -481,34 +464,21 @@ GLOBAL CPU int host_com_open(int adapter)
     LocalDCB.fBinary = 1;                        /* Run in RAW mode */
     LocalDCB.fOutxCtsFlow = FALSE;               /* Disable CTS */
     LocalDCB.fOutxDsrFlow = FALSE;               /* Disable DSR */
+#if defined(NEC_98)
+#line 465
+#error Unsupported NEC PC-98 configuration
+#else // !NEC_98
+#line 474
     LocalDCB.fDtrControl = DTR_CONTROL_DISABLE;
     LocalDCB.fOutX = FALSE;                      /* Disable XON/XOFF */
     LocalDCB.fInX = FALSE;
     LocalDCB.fRtsControl = RTS_CONTROL_DISABLE;
+#endif // !NEC_98
+#line 479
 
     LocalDCB.XonChar = XON_CHARACTER;    /* Define XON/XOFF chars */
     LocalDCB.XoffChar = XOFF_CHARACTER;
     LocalDCB.fErrorChar = FALSE;                 /* Turn off error char replacement */
-    /* if we are resuming the device, initialize DCB parameters to
-     * what they were before suspended
-     */
-    if (current->Suspended) {
-	LocalDCB.BaudRate = current->ComStates.BaudRate;
-	LocalDCB.Parity = current->ComStates.Parity;
-	LocalDCB.StopBits = current->ComStates.StopBits;
-	LocalDCB.ByteSize = current->ComStates.DataBits;
-	LocalDCB.fParity = (LocalDCB.Parity == NOPARITY);
-    }
-    /* initialize the ComStates by copying data from DCB */
-    else {
-	current->ComStates.BaudRate = current->dcbBeforeOpen.BaudRate;
-	current->ComStates.Parity = current->dcbBeforeOpen.Parity;
-	current->ComStates.StopBits = current->dcbBeforeOpen.StopBits;
-	current->ComStates.DataBits = current->dcbBeforeOpen.ByteSize;
-	current->ComStates.Break = 0;
-    }
-    ASSERT(LocalDCB.BaudRate != 0);
-
     /*::::::::::::::::::::::::::::::::::: Sync base to current line settings */
 
     if(!SyncLineSettings(NULL, &(LocalDCB), &divisor_latch, &LCR_reg))
@@ -565,41 +535,9 @@ GLOBAL CPU int host_com_open(int adapter)
 
     SetCommTimeouts(current->handle,&comout);
 
-    /* restore device states in case of resume */
-    if (current->Suspended) {
-	/* break line */
-	if (current->ComStates.Break)
-	    SetCommBreak(current->handle);
-	else
-	    ClearCommBreak(current->handle);
-	/* Data Terminal Ready line */
-	if (current->ComStates.DTR)
-	    EscapeCommFunction(current->handle, SETDTR);
-	else
-	    EscapeCommFunction(current->handle, CLRDTR);
-	/* Request To Send line */
-	if (current->ComStates.RTS)
-	    EscapeCommFunction(current->handle, SETRTS);
-	else
-	    EscapeCommFunction(current->handle, CLRRTS);
+    /*::::::::::::::::::::::::::::::::::::::::::::: Setup RTS and DTR states */
 
-	/* parity, stop bits and data bits */
-	FastCommSetLineControl(current->handle,
-		   current->ComStates.StopBits,
-		   current->ComStates.Parity,
-		   current->ComStates.DataBits
-		  );
-	/* baud rate */
-	FastCommSetBaudRate(current->handle, current->ComStates.BaudRate);
-
-	/* we are no longer in suspended state */
-	current->Suspended = FALSE;
-
-    }
-    else {
-	/*::::::::::::::::::::::::::::::::::::::::::::: Setup RTS and DTR states */
 	setup_RTSDTR(adapter);
-    }
 
     /*::::::::::::::::::::::::::::::::::::::::::::::: Create Comms RX thread */
 
@@ -615,10 +553,7 @@ GLOBAL CPU int host_com_open(int adapter)
 	current->ReOpenCounter = REOPEN_DELAY;   /* Delay next open attempt */
 	return(FALSE);
     }
-    /* reset the counter */
-    current->SuspendTimeoutTicks = ComConfigValues.index * 1000;
-    current->SuspendTickCounter =  current->SuspendTimeoutTicks;
-    current->TickCount = 0;
+
     return(TRUE);
 }
 
@@ -652,24 +587,14 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
     {
 	always_trace1("Closing comms port %d\n",adapter);
 
-	/* only touch the device if we own the device */
-	if (current->type == ADAPTER_REAL) {
 	    /*....... Flush any delayed writes and wait for writes to complete */
-	    if (current->no_tx_chars)
-		FlushTXBuffer(adapter,CLOSE_TRIGGER);
+
+	if(current->no_tx_chars) FlushTXBuffer(adapter,CLOSE_TRIGGER);
+
 	    WaitForMultipleObjects(MAX_PENDING_WRITES,current->TXEvent,TRUE,INFINITE);
-	    /* reset DCB to whatever it was before open */
-	    if (current->dcbValid) {
-		SetCommState(current->handle, &current->dcbBeforeOpen);
-		current->dcbValid = FALSE;
-	    }
 
-	}
+	/*........................................ Reset base comms adatper */
 
-
-	/* keep the base adapter states intact if we are suspending the device */
-	if (!current->Suspending)
-	    /*........................................ Reset base comms adatper */
 	    com_init(adapter);		 /* Initialise base comms adapter */
 
 	/*................................................. Close RX thread */
@@ -689,8 +614,6 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 
 	    current->RXThreadHandle = NULL;  // Mark thread as closed
 	}
-	/* now it is safe to close the device */
-	CloseHandle(current->handle); current->handle = NULL;
 
 	/*............... Delete RX critical section and RX control objects */
 
@@ -713,13 +636,22 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 
 	current->XOFFEvent = current->RXEvent = current->EvtHandle = NULL;
 
+	/*.............................................. Close Comms device */
+
+	/* reset DCB to whatever it was before open */
+	if (current->dcbValid) {
+	    SetCommState(current->handle, &current->dcbBeforeOpen);
+	    current->dcbValid = FALSE;
+	}
+	CloseHandle(current->handle); current->handle = NULL;
+
 	/*.......................... Disable IRET hooks for comms interrupt */
 
 #ifdef MONITOR
-#line 713
+#line 652
 #error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected
 #endif
-#line 715
+#line 654
 
 	/*. This makes sure that the next access to the port will reopen it */
 	current->ReOpenCounter = 0;
@@ -727,20 +659,6 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 	free(current->buffer);
 	current->buffer = NULL;
 	current->type = ADAPTER_NULL;   /* Mark adapter as closed */
-     }
-     else if (current->Suspended) {
-	/* the application is terminating while the port is suspended.
-	 * first we turn the disable-open on so that we will not try
-	 * to physical touch the port. Then we call base to reset the
-	 * adapter
-	 */
-
-	BOOL	DisableOpen;
-	DisableOpen = disable_open[adapter];
-	disable_open[adapter] = TRUE;
-	com_init(adapter);
-	disable_open[adapter] = DisableOpen;
-	current->Suspended = FALSE;
     }
 }
 
@@ -748,12 +666,12 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 /*:::::::::::::::: Request from base for character :::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 743
+#line 668
 #ifdef FIFO_ON
-#line 744
+#line 669
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #endif
-#line 778
+#line 702
 
 GLOBAL RXCPU VOID host_com_read IFN3(int, adapter, UTINY *, data, int *, error)
 {
@@ -763,7 +681,7 @@ GLOBAL RXCPU VOID host_com_read IFN3(int, adapter, UTINY *, data, int *, error)
     BOOL MoreToProcess = TRUE;
     /*::::::::::::::::::::::::::::::::::::::::: Dealing with NULL adapter ? */
 
-    if(current->type != ADAPTER_REAL && !host_com_open(adapter))
+    if(current->type == ADAPTER_NULL && !host_com_open(adapter))
 	return;                             /* Exit, unable to open adapter */
 
     /*::::::::::::::::::::::: Get next character from input character queue */
@@ -821,7 +739,6 @@ GLOBAL RXCPU VOID host_com_read IFN3(int, adapter, UTINY *, data, int *, error)
 
     /* Tell comms idle system that there has been comms activity */
     IDLE_comlpt();
-    current->SuspendTickCounter = current->SuspendTimeoutTicks;
 }
 
 /*:::::::::::::::::::::::::: Comms read returned to application by the base */
@@ -868,14 +785,13 @@ GLOBAL RXCPU void host_com_write IFN2(int, adapter, char, data)
 
     /*:::::::::::::::::::::::::::::::::: Are we dealing with a NULL adapter */
 
-    if(current->type != ADAPTER_REAL && !host_com_open(adapter))
+    if(current->type == ADAPTER_NULL && !host_com_open(adapter))
 	return;                             /* Exit, unable to open adapter */
 
     if(data == XOFF_CHARACTER || data == XON_CHARACTER)
 	sub_note_trace1(HOST_COM_VERBOSE,"XO%s sent",data == XOFF_CHARACTER ? "FF" : "N");
 
     /*::::::::::::::::::::::::::::::::::::::::: Is the user sending an XOFF */
-
 
     if(data == XOFF_CHARACTER)
     {
@@ -888,14 +804,6 @@ GLOBAL RXCPU void host_com_write IFN2(int, adapter, char, data)
     /*::::::::::: Tell comms idle system that there has been comms activity */
 
     IDLE_comlpt();
-    current->SuspendTickCounter = current->SuspendTimeoutTicks;
-    /* tell base that the tx holding register is empty */
-    tx_holding_register_empty(adapter);
-    /* async write mode -> tell base that the tx shift register is empty
-     * sync mode -> FlushTxBuffer will do the signaling.
-     */
-    if (!current->SyncWrite)
-	tx_shift_register_empty(adapter);
 }
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::: Write data to driver */
@@ -947,13 +855,9 @@ void SendDataToDriver(int adapter, char data)
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Display error */
 
 #ifndef PROD
-#line 971
+#line 885
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 974
-    /* tell base that the tx shift register is empty */
-    tx_shift_register_empty(adapter);
-
 }
 
 
@@ -1017,7 +921,7 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 
     /*:::::::::::::::::::::::::::::::::: Are we dealing with a null adapter */
 
-    if(current->type != ADAPTER_REAL)
+    if(current->type == ADAPTER_NULL)
     {
 	// Attempt to open adapter !
 
@@ -1028,7 +932,6 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 	}
     }
     /*:::::::::::::::::::::::::::::::::::::::::::::: Identify ioctl request */
-
 
     switch(request)
     {
@@ -1046,40 +949,36 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 	case HOST_COM_SBRK:         /* Set BREAK */
 	    sub_note_trace0(HOST_COM_VERBOSE, "set BREAK");
 	    SetCommBreak(current->handle);
-	    current->ComStates.Break = 1;
 	    break;
 
 	case HOST_COM_CBRK:        /* Clear BREAK */
 	    sub_note_trace0(HOST_COM_VERBOSE, "clear BREAK");
 	    ClearCommBreak(current->handle);
-	    current->ComStates.Break = 0;
 	    break;
 
 	/*::::::::::::::::::::::::::::::::::::::::: Process baud rate change */
 
 	case HOST_COM_BAUD:
 
-#line 1082
+#line 990
 	    if (!FastCommSetBaudRate(current->handle, arg))
-#line 1083
+#line 991
 	    {
 		sprintf(BaudRateStr, "(%ld)", arg);
 		host_error(EHS_UNSUPPORTED_BAUD, ERR_CONT, BaudRateStr);
 		always_trace1("set BAUD failed - SetBaudRate:%d", arg);
 	    }
-	    current->ComStates.BaudRate = (DWORD)arg;
 
 	    break;
 
 	/*:::::::::::::::::::::::::::::::::::::::: Process DTR line requests */
 
-#line 1094
+#line 1001
 	case HOST_COM_SDTR:                 /* Set DTR line */
 	    //printf("Set DTR\n");
 	    sub_note_trace0(HOST_COM_VERBOSE, "set DTR");
 	    if(!EscapeCommFunction (current->handle, SETDTR))
 		sub_note_trace0(HOST_COM_VERBOSE, "set DTR FAILED");
-	    current->ComStates.DTR = 1;
 	    break;
 
 	case HOST_COM_CDTR:                 /* Clear DTR line */
@@ -1087,7 +986,6 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 	    sub_note_trace0(HOST_COM_VERBOSE, "clear DTR");
 	    if(!EscapeCommFunction (current->handle, CLRDTR))
 		sub_note_trace0(HOST_COM_VERBOSE, "clear DTR FAILED");
-	    current->ComStates.DTR = 0;
 	    break;
 
 	/*::::::::::::::::::::::::::::::::::::::::::::::::: flush comms port */
@@ -1103,7 +1001,6 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 	    sub_note_trace0(HOST_COM_VERBOSE, "clear RTS");
 	    if(!EscapeCommFunction (current->handle, CLRRTS))
 		sub_note_trace0(HOST_COM_VERBOSE, "clear RTS FAILED");
-	    current->ComStates.RTS = 0;
 	    break;
 
 	case HOST_COM_SRTS:
@@ -1111,7 +1008,6 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 	    sub_note_trace0(HOST_COM_VERBOSE, "set RTS");
 	    if(!EscapeCommFunction (current->handle, SETRTS))
 		sub_note_trace0(HOST_COM_VERBOSE, "set RTS FAILED");
-	    current->ComStates.RTS = 1;
 	    break;
 
 	/*::::::::::::::::::::::::::::::::::: Return status of the RX buffer */
@@ -1135,12 +1031,10 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 		if(MSR.bits.DSR)  current->modem_status |= HOST_COM_MODEM_DSR;
 		if(MSR.bits.RLSD) current->modem_status |= HOST_COM_MODEM_RLSD;
 	    }
-	    else
+	    else if ( FastGetCommModemStatus(current->handle, current->ModemEvent,
+				       &ModemState))
 	    {
 		//.......................Get modem data from the serial driver ?
-
-		FastGetCommModemStatus(current->handle, current->ModemEvent,
-				       &ModemState);
 
 		if(ModemState & MS_CTS_ON)
 		    current->modem_status |= HOST_COM_MODEM_CTS;
@@ -1197,7 +1091,7 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 
 		always_trace1("set STOPBITS failed- FastCommGetLineControl:%d",arg);
 	    }
-	    current->ComStates.StopBits = StopBits;
+
 	    break;
 
 	/*:::::::::::::::::::::::::::::::::::::::::::::::::::::: Setup parity */
@@ -1241,7 +1135,6 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 
 		always_trace1("set STOPBITS failed- FastCommGetLineControl:%d",arg);
 	    }
-	    current->ComStates.Parity = Parity;
 	    break;
 
 	/*::::::::::::::::::::::::::::::::::::::::::::::::::: Setup data bits */
@@ -1260,7 +1153,7 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 
 		always_trace1("set STOPBITS failed- FastCommGetLineControl:%d",arg);
 	    }
-	    current->ComStates.DataBits = DataBits;
+
 	    break;
 
 	/*::::::::::::::::::::::::::::::::::::::: Unrecognised host_com ioctl */
@@ -1273,7 +1166,6 @@ GLOBAL RXCPU void host_com_ioctl IFN3(int, adapter, int, request, long, arg)
 
     /* Tell comms idle system that there has been comms activity */
     IDLE_comlpt();
-    current->SuspendTickCounter = current->SuspendTimeoutTicks;
 }
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::: Host comms reset ????? */
@@ -1294,8 +1186,6 @@ GLOBAL void host_com_reset IFN1(int, adapter)
 
     //Enable error displaying
     host_com[adapter].DisplayError = TRUE;
-    host_com[adapter].Suspended = FALSE;
-    host_com[adapter].Suspending = FALSE;
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: Autoflush */
@@ -1413,7 +1303,7 @@ DWORD CPU nt_poll_comms IFN1(DWORD, adapter)
     CURRENT_ADAPTER();                  /* Setup ptr to current adapter */
     DWORD EvtMask;                      /* Comms event mask */
     ULONG SignalledObj = (ULONG) -1;
-    HANDLE WaitTable[3];
+    HANDLE WaitTable[2];
     HANDLE SetCommEvt;                  /* Handle used by FastSetCommEvent */
 
     BOOL CheckDriverForChars = FALSE;   /* Check driver for characters */
@@ -1423,6 +1313,7 @@ DWORD CPU nt_poll_comms IFN1(DWORD, adapter)
 
     WaitTable[0] = current->EvtHandle;
     WaitTable[1] = current->RXControlObject;
+
 
     /*:::::::::::::::::::::::::::::::::::::::::::::::: Setup comm wait mask */
 
@@ -1445,7 +1336,7 @@ DWORD CPU nt_poll_comms IFN1(DWORD, adapter)
 					&SignalledObj))
 	    {
 		// Error getting comms/CPU thread event ?
-#line 1465
+#line 1363
 		DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 	    }
 	}
@@ -1471,7 +1362,6 @@ DWORD CPU nt_poll_comms IFN1(DWORD, adapter)
 	       (2). XOFF is in progress
 	     */
 	}
-
 	if (SignalledObj == 0 || current->bytes_in_rxwindow == 0)
 	    GetCharsFromDriver(adapter);
 	/*:::::::::::::::::::::::::::::::: Is there data to pass to the base */
@@ -1586,7 +1476,7 @@ BOOL RX RemoveCompletedXOFFs(int adapter)
 void RXCPU host_com_lock(int adapter)
 {
     CURRENT_ADAPTER();
-    if(current->type != ADAPTER_REAL) return;	/* Exit, NULL adapter */
+    if(current->type == ADAPTER_NULL) return;  /* Exit, NULL adapter */
 
     EnterCriticalSection(&current->AdapterLock);
     current->AdapterLockCnt++;
@@ -1600,7 +1490,7 @@ void RXCPU host_com_unlock(int adapter)
 {
     CURRENT_ADAPTER();
 
-    if(current->type != ADAPTER_REAL || current->AdapterLockCnt == 0)
+    if(current->type == ADAPTER_NULL || current->AdapterLockCnt == 0)
 	return; /* Exit, NULL adapter */
 
     current->AdapterLockCnt--;
@@ -1634,7 +1524,6 @@ GLOBAL void CPU host_com_heart_beat()
 {
     register int adapter;        /* Adapter no of adapter being processed */
     register HOST_COM *current;  /* Ptr to current adapter being processed */
-    DWORD   TickCount;
 
     /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
@@ -1646,7 +1535,7 @@ GLOBAL void CPU host_com_heart_beat()
 	{
 	    if(current->ReOpenCounter) current->ReOpenCounter--;
 	}
-	else if (current->type == ADAPTER_REAL)
+	else
 	{
 	    if(current->no_tx_chars) FlushTXBuffer(adapter,TIMER_TRIGGER);
 	    current->tx_heart_beat_count++;
@@ -1663,35 +1552,6 @@ GLOBAL void CPU host_com_heart_beat()
 	    //Update RX flush trigger counter
 	    if(--current->RXFlushTrigger < 0)
 	       current->RXFlushTrigger = RXFLUSHTRIGGER;
-	    /* if auto close is enable, decrement the counter and
-	     * suspend the adapter is time out
-	     */
-
-	    if (current->SuspendTimeoutTicks) {
-		TickCount = GetTickCount();
-
-		if (current->TickCount) {
-		    current->SuspendTickCounter -= TickCount - current->TickCount;
-		}
-		else {
-		    /* we have not yet initialize the tick count yet,
-		     * presume that it is 55ms
-		     */
-		    current->SuspendTickCounter -= 55;
-		}
-		current->TickCount = TickCount;
-
-		/* time out, suspend the port */
-		if (current->SuspendTickCounter <= 27) {
-		    /* make sure host_com_close won't reset the adapter because
-		     * we want to keep the adapter current states
-		     */
-		    current->Suspending = TRUE;
-		    host_com_close(adapter);
-		    current->Suspended = TRUE;
-		    current->Suspending = FALSE;
-		}
-	    }
 	}
     }
 }
@@ -1709,33 +1569,6 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 
     ScaleTXThreshold(current, FlushReason);
 
-    if (current->SyncWrite) {
-	if (!WriteFile(current->handle, current->TXBuffer,
-		       current->no_tx_chars, &BytesWritten,
-		       &current->DWOV[0])) {
-	    error = GetLastError();
-	    if (error == ERROR_IO_PENDING) {
-		if (!GetOverlappedResult(current->handle,
-					 &current->DWOV[0],
-					 &BytesWritten,
-					 TRUE))
-		    error = GetLastError();
-		else
-		    error = ERROR_SUCCESS;
-	    }
-	}
-	if (error != ERROR_SUCCESS) {
-	    ClearCommError(current->handle, &error, NULL);
-#ifndef PROD
-#line 1746
-#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
-#endif
-#line 1748
-	}
-	tx_shift_register_empty(adapter);
-	current->no_tx_chars = 0;
-	return;
-    }
     /*...Clear pending writes on the OV structure that we are about to use*/
 
     if(current->DWOV[current->DWOVInx].hEvent)
@@ -1752,10 +1585,10 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	}
 
 #ifndef PROD
-#line 1769
+#line 1611
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1772
+#line 1614
 
     }
     else
@@ -1775,10 +1608,10 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	{
 	    ClearCommError(current->handle,&error,NULL);
 #ifndef PROD
-#line 1791
+#line 1633
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1794
+#line 1636
 	}
     }
 
@@ -1845,8 +1678,8 @@ void ScaleTXThreshold(register HOST_COM *current,FLUSHTYPE FlushReason)
 	    if(current->tx_heart_beat_count <= 3 &&
 	       current->tx_flush_count++ == TX_SCALING_TRIGGER)
 	    {
-		current->tx_threshold = current->tx_threshold*2 > current->max_tx_threshold
-					? current->max_tx_threshold
+		current->tx_threshold = current->tx_threshold*2 > TX_MAX_BUFFER
+					? TX_MAX_BUFFER
 					: current->tx_threshold*2;
 
 		//printf("[%dF]",current->tx_threshold);
@@ -1921,7 +1754,7 @@ void CPU host_com_poll(int adapter)
 
     /*:::::::::::::::::::::::::::::::::: Are we dealing with a null adapter */
 
-    if(current->type != ADAPTER_REAL && !host_com_open(adapter))
+    if(current->type == ADAPTER_NULL && !host_com_open(adapter))
 	return;                             /* Exit, unable to open adapter */
 
     /*::::::::::::::::: Has an XOFF character stop the generation of ints */
@@ -1980,7 +1813,7 @@ void CPU host_com_da_int_change(int adapter, int data_int_state, int data_state)
 
     /*:::::::::::::::::::::::::::::::::: Are we dealing with a null adapter */
 
-    if(current->type != ADAPTER_REAL)
+    if(current->type == ADAPTER_NULL)
     {
 	// Only attempt to open a null adapter if data available interrupts
 	// are being enabled
@@ -2157,7 +1990,7 @@ void CPU EmptyRXBuffer(int adapter)
 
 
 #if 0
-#line 2172
+#line 2014
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 2207

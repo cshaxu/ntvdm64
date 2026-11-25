@@ -39,30 +39,33 @@ static char SccsID[]="@(#)sun4_a3cpu.c	1.2 5/24/91 Copyright Insignia Solutions 
 #line 39
 GLOBAL	quick_event_delays	host_delays;
 GLOBAL	host_addr Start_of_M_area;
+#ifdef CPU_40_STYLE
 GLOBAL	IHPE Length_of_M_area;
-#line 42
+#else
+GLOBAL  IU32 Length_of_M_area;
+#endif
 #ifdef A2CPU
-#line 43
+#line 47
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif
-#line 47
+#line 51
 
-#line 48
+#line 52
 #ifdef I286
-#line 49
+#line 53
 #error Unsupported excluded original configuration
 #endif
-#line 56
+#line 60
 
 #define setBASE(base, value) base = (0xff000000 | (value & 0xffffff))
 #define setLIMIT(limit, value) limit = value
 
-#line 60
+#line 64
 #ifndef PROD
-#line 61
+#line 65
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 63
+#line 67
 
 
 
@@ -86,12 +89,12 @@ void	host_simulate()
 {
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
 
-#line 86
+#line 90
 #ifdef _ALPHA_
-#line 87
+#line 91
 #error Unsupported excluded original configuration
 #endif
-#line 101
+#line 105
 
     cpu_simulate ();
 
@@ -103,7 +106,7 @@ void	host_simulate()
 	Host_set_hw_int: Cause a hardware interrupt to be generated. For
 	software cpu this just means setting a bit in cpu_interrupt_map.
 */
-#line 112
+#line 116
 void	host_set_hw_int()
 {
 	cpu_interrupt(CPU_HW_INT, 0);
@@ -119,13 +122,13 @@ void	host_set_hw_int()
 void	host_clear_hw_int()
 {
 #ifndef CCPU
-#line 127
+#line 131
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif /* not CCPU */
-#line 136
+#line 140
 }
 #endif
-#line 138
+#line 142
 
 
 #ifdef CCPU
@@ -135,10 +138,10 @@ void host_cpu_init() {}
 #endif
 
 #ifdef A3CPU
-#line 147
+#line 151
 #error Excluded unsupported A3CPU configuration
 #endif /* A3CPU */
-#line 197
+#line 201
 
 void host_cpu_reset()
 {
@@ -207,7 +210,7 @@ LOCAL void initNtCpuRegInfo IFN6(
 
 
 
-#line 265
+#line 269
 GLOBAL void InitNtCpuInfo IFN0()
 {
     BOOL *gdp_bool;
@@ -218,40 +221,40 @@ GLOBAL void InitNtCpuInfo IFN0()
     /* Horrible hack, part 1. InNanoCpu is a BOOL, so GLOBAL_InNanoCpu */
     /* is not an l-value, hence we can't take its address. */
 #ifdef ALPHA
-#line 275
+#line 279
 #error Unsupported excluded original configuration
 #else /* ALPHA */
-#line 277
+#line 281
     nt_cpu_info.in_nano_cpu = (BOOL *)&GLOBAL_InNanoCpu;
 #endif /* ALPHA */
-#line 279
+#line 283
 #ifndef PROD
-#line 280
+#line 284
 #error Unsupported excluded original configuration
 #endif
-#line 286
+#line 290
 
-#line 287
+#line 291
     nt_cpu_info.universe = &GLOBAL_CurrentUniverse;
 
     /* Variables needed to get the value SP or ESP. */
 
     /* Horrible hack, part 2: as for InNanoCpu, so for stackIsBig. */
 #ifdef ALPHA
-#line 293
+#line 297
 #error Unsupported excluded original configuration
 #else /* ALPHA */
-#line 295
+#line 299
     nt_cpu_info.stack_is_big = (BOOL *)&GLOBAL_stackIsBig;
 #endif /* ALPHA */
-#line 297
+#line 301
 #ifndef PROD
-#line 298
+#line 302
 #error Unsupported excluded original configuration
 #endif
-#line 304
+#line 308
 
-#line 305
+#line 309
     nt_cpu_info.nano_esp = &GLOBAL_nanoEsp;
     nt_cpu_info.host_sp = &GLOBAL_HSP;
     nt_cpu_info.ss_base = &GLOBAL_notionalSsBase;
@@ -266,7 +269,7 @@ GLOBAL void InitNtCpuInfo IFN0()
     nt_cpu_info.ss = &GLOBAL_SsSel;
 
     /* EIP & flags, neither of which are likely to be very reliable. */
-    nt_cpu_info.eip = &GLOBAL_CleanedRec;
+    nt_cpu_info.eip = (IU32 *)&GLOBAL_CleanedRec;
     nt_cpu_info.flags = &GLOBAL_EFLAGS;
 
     nt_cpu_info.cr0 = &GLOBAL_R_CR0;

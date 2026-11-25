@@ -6,6 +6,8 @@
 #include "insignia.h"
 #include "host_def.h"
 #include <nt_thred.h>
+#include <nt_pif.h>
+#include "idetect.h"
 
 #ifndef MONITOR
 #include <gdpvar.h>
@@ -69,7 +71,7 @@ DATA OBJECTS      : None
 #include "config.h"
 #include "cntlbop.h"
 #include "compat/include/mvdm_softpc_wow_page_domain.h"
-#line 71
+#line 74
 #include "host_bop.h"
 #include "demexp.h"
 #include "xmsexp.h"
@@ -80,6 +82,7 @@ DATA OBJECTS      : None
 #include "nt_eoi.h"
 #include <nt_com.h>
 #include "yoda.h"
+#include "nt_vdd.h"
 
 
 /* [3.1.2 DECLARATIONS]                                                 */
@@ -101,6 +104,7 @@ DATA OBJECTS      : None
 //
 
 typedef ULONG (*MYFARPROC)();
+typedef BOOL (*W32INITPROC)(VOID);
 
 /* [5.1.3 PROCEDURE() DECLARATIONS]                 */
 
@@ -121,6 +125,11 @@ VOID to_com_driver(VOID);
 VOID call_ica_hw_interrupt(int, half_word, int);
 VOID ica_enable_iret_hook(int, int, int);
 VOID ica_iret_hook_called(int);
+#if defined(NEC_98)
+#line 129
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 131
 
 /*
 [7.1 INTERMODULE DATA DEFINITIONS]              */
@@ -148,12 +157,10 @@ control_bop_array host_bop_table[] =
 void MS_bop_0(void) {
     ULONG DemCmd;
 
-    DemCmd = (ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
-                                         1,
-                                         FALSE
-                                         ));
-    DemDispatch( DemCmd );
+    DemCmd = (ULONG)(*(PUCHAR)VdmMapFlat(getCS(), getIP(), VDM_V86));
     setIP((USHORT)(getIP() + 1));
+
+    DemDispatch( DemCmd );
 
     // we need to prevent the idle system from going off on intensive file
     // reads. However, we don't want to disable it for continuous 'Get Time'
@@ -166,7 +173,9 @@ void MS_bop_0(void) {
 HANDLE hWOWDll;
 
 MYFARPROC WOWDispatchEntry;
-MYFARPROC WOWInitEntry;
+W32INITPROC WOWInitEntry;
+FARPROC WOWEnterVxDMutex=NULL;
+FARPROC WOWLeaveVxDMutex=NULL;
 VOID (*pW32HungAppNotifyThread)(UINT) = NULL;
 
 static BOOL WowModeInitialized = FALSE;
@@ -177,10 +186,10 @@ void MS_bop_1(void) {
         TerminateVDM();
         return;
     }
-#line 174
+#line 183
     if (!WowModeInitialized) {
-    //Load the WOW DLL
-    if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
+    hWOWDll = SafeLoadLibrary("WOW32");
+    if (hWOWDll == NULL)
     {
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -190,7 +199,7 @@ void MS_bop_1(void) {
     }
 
     // Get the init entry point and dispatch entry point
-    if ((WOWInitEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Init")) == NULL)
+    if ((WOWInitEntry = (W32INITPROC)GetProcAddress(hWOWDll, "W32Init")) == NULL)
     {
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -208,6 +217,14 @@ void MS_bop_1(void) {
         FreeLibrary(hWOWDll);
         TerminateVDM();
         return;
+    }
+
+    WOWEnterVxDMutex = GetProcAddress(hWOWDll, "EnterVxDMutex");
+
+    WOWLeaveVxDMutex = GetProcAddress(hWOWDll, "LeaveVxDMutex");
+
+    if (WOWEnterVxDMutex) {
+        (*WOWEnterVxDMutex)();
     }
 
     //Get Comms functions
@@ -263,18 +280,19 @@ void MS_bop_1(void) {
 #else
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 278
+#line 295
 }
 
 
 // XMS BOP
 void MS_bop_2(void) {
-    XMSDispatch((ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
-                                            1,
-                                            FALSE
-                                            )));
+    ULONG XmsCmd;
 
+    XmsCmd = (ULONG)(*(PUCHAR)VdmMapFlat(getCS(), getIP(), VDM_V86));
     setIP((USHORT)(getIP() + 1));
+
+    XMSDispatch(XmsCmd);
+
 }
 
 
@@ -306,11 +324,11 @@ void MS_bop_4(void)
     IMPORT BOOL CmdDispatch(ULONG);
     extern int mvdm_vm_command_enter(IU32 service);
 
-#line 319
+#line 335
     sas_load( ((ULONG)getCS()<<4) + getIP(), &Command);
     setIP((USHORT)(getIP() + 1));
     if (mvdm_vm_command_enter(Command)) return;
-#line 320
+#line 339
     CmdDispatch((ULONG) Command);
 }
 
@@ -348,7 +366,7 @@ ULONG DefaultVrInitialized() {
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
-#line 372
+#line 390
 MYFARPROC VrDispatch;
 MYFARPROC VrInitialized = DefaultVrInitialized;
 MYFARPROC VrReadNamedPipe;
@@ -446,7 +464,7 @@ returnError:
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 470
+#line 488
     }
 
     //
@@ -546,7 +564,7 @@ closeAndReturnError:
 
     if (hVdmRedir != NULL) FreeLibrary(hVdmRedir);
     hVdmRedir = NULL;
-#line 568
+#line 586
     return FALSE;
 }
 
@@ -627,7 +645,7 @@ void MS_bop_A(void)
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 649
+#line 667
 }
 
 
@@ -662,7 +680,7 @@ void MS_bop_D(void)
 #ifdef MONITOR
 #error Excluded unsupported monitor IRET BOP
 #else
-#line 699
+#line 717
     illegal_bop();
 #endif
 
@@ -695,14 +713,46 @@ void MS_bop_F(void)
 {
     extern void kb_setup_vectors(void);
 
+#if defined(NEC_98)
+#line 750
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 754
 
     kb_setup_vectors();
+
+    //
+    // Set idle counter settings, we set this each time we read pif file since
+    // Defaults (from static code init):
+    //     WNTPifFgPr = 100, with range of 0 to 200.
+    //     minConsecutiveTicks = 50
+    //     minFailedPolls = 8  
+    //
+
+    {
+    int minTicks, minPolls;
+
+    // higher pri, requires more minimum consecutive ticks, and more minimum polls
+    // scale minTicks where 50 == 100%
+    // scale minPolls where 8 == 100%
+    minTicks = (WNTPifFgPr >> 2) + 25; 
+     
+    minPolls = (WNTPifFgPr << 3) / 100;
+    if (minPolls < 4) {
+        minPolls +=4;
+        }
+
+    idle_set(minPolls, minTicks);
+    }
 
 
 #ifdef MONITOR
 #error Excluded original conditional branch
 #endif
-#line 746
+#line 793
+
+#endif // !NEC_98
+#line 795
 
     /*
      * Now that spckbd is loaded, and the ivt rom vectors are hooked
@@ -889,4 +939,4 @@ void ISV_DispatchCall (void)
 #ifdef i386
 #error DIVERGENCE MVDM-HOST-DIV-601: unsupported hardware-host FPU save path
 #endif  //i386
-#line 961
+#line 1008

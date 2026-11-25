@@ -181,11 +181,16 @@ ERROR RECOVERY    :     errors are ignored
 #include "nt_eoi.h"
 #include "nt_event.h"
 
-
+#if defined(NEC_98)
 #line 182
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 187
+
+#line 188
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::: INTERMODULE EXPORTS */
 
-#line 184
+#line 190
 IMPORT void ReinitIdealTime(struct host_timeval *);
 THREAD_DATA ThreadInfo;
 CRITICAL_SECTION TimerTickCS;
@@ -206,10 +211,10 @@ void CreepAdjust(LARGE_INTEGER DiffTime);
 void DemHeartBeat(void);
 
 #ifndef MONITOR
-#line 204
+#line 210
 void quick_tick_recalibrate(void);
 #endif
-#line 206
+#line 212
 
 void rtc_init(void);
 void RtcTick(struct host_timeval *time);
@@ -244,22 +249,20 @@ BOOL   bUpdateRtc;
 
 
 
-
-#line 241
 #if defined (MONITOR) && defined (X86GFX)
-#line 242
+#line 247
 #error Excluded unsupported monitor timer switch state
 #endif
-#line 244
+#line 249
 
 
 
-#line 247
+#line 252
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::: NT timer initialise ::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 251
+#line 256
 void host_timer_init(void)
 {
 
@@ -335,15 +338,22 @@ VOID InitPerfCounter(VOID)
 
 
   NtQueryPerformanceCounter(&li, &liFreq);
-  /* we assumed the frequency never goes beyond 4Ghz(32bits)
+  /*
+   * we assumed the frequency never goes beyond 4Ghz(32bits)
    * if it does someday, this assumption must be removed
    * and code must be rewritten
    */
   ASSERT(liFreq.HighPart == 0);
+
   ulFreqSec = liFreq.LowPart;
   ulFreqHusec = liFreq.LowPart / 10000;
 
 }
+
+
+
+
+
 
 //
 // returns perf counter in 100's usecs (0.1 millisec)
@@ -372,7 +382,7 @@ void GetPerfCounterUsecs(struct host_timeval *time, PLARGE_INTEGER pliTime)
     // get time in secs and usecs
   NtQueryPerformanceCounter(&liSecs, NULL);
   liSecs = RtlExtendedLargeIntegerDivide(liSecs, ulFreqSec, &liUsecs.LowPart);
-  liUsecs.QuadPart = Int32x32To64(liUsecs.LowPart, 1000000);
+  liUsecs.QuadPart = UInt32x32To64(liUsecs.LowPart, 1000000);
   liUsecs = RtlExtendedLargeIntegerDivide(liUsecs, ulFreqSec, NULL);
 
     // fill in time if specified
@@ -400,11 +410,11 @@ void host_timer_event()
         unsigned char FgBgPriority;
 
 #ifdef X86GFX
-#line 391
+#line 403
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
-#line 398
+#line 410
 #endif /* X86GFX */
-#line 399
+#line 411
 
         host_graphics_tick();               // video graphics stuff
 
@@ -428,20 +438,25 @@ void host_timer_event()
         }
 
 #ifndef MONITOR
-#line 422
+#line 434
    quick_tick_recalibrate();
 #endif
-#line 415
+#line 436
 
 
 
-#line 427
+#line 439
 #ifdef YODA
-#line 428
+#line 440
 #error Excluded unsupported YODA configuration
 #endif
-#line 430
+#line 442
 
+#if defined(NEC_98)
+#line 444
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 446
     host_com_heart_beat();              //  com  device
 
     host_lpt_heart_beat();              //  printer devuce
@@ -454,6 +469,11 @@ void host_timer_event()
 
     PlayContinuousTone();               // sound emulation
 
+#if defined(NEC_98)
+#line 459
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 465
 }
 
 
@@ -499,21 +519,24 @@ VOID host_init_bda_timer(void)
        *     sas_storew(TIMER_HIGH, (BDA >> 16) & 0xffff);
        *     sas_store(TIMER_OVFL,  0x01);
        */
+#ifndef NEC_98
     * (word *)(Start_of_M_area + TIMER_HIGH)      = (word)(Ticks >> 16);
     * (word *)(Start_of_M_area + TIMER_LOW)       = (word)Ticks;
     * (half_word *)(Start_of_M_area + TIMER_OVFL) = (half_word)0;
+#endif // !NEC_98
+#line 515
 
 
     // reset the Real Time Clock
     rtc_init();
 
 #ifndef MONITOR
-#line 497
+#line 521
     q_event_init();
 #endif
-#line 488
+#line 523
 
-#line 500
+#line 524
 }
 
 
@@ -532,15 +555,15 @@ void host_GetSysTime(struct host_timeval *time)
 {
     LARGE_INTEGER liTime;
 
-#line 518
+#line 542
         // Don't call kernel unless we have to.
-#line 519
+#line 543
     if (bDoingTicInterrupt) {
         liTime = RtlExtendedLargeIntegerDivide(
                                         CurrHeartBeat,
                                         1000000,
                                         &time->tv_usec);
-#line 524
+#line 548
         time->tv_sec = liTime.LowPart;
         }
     else {
@@ -588,13 +611,13 @@ DWORD HeartBeatThread(PVOID pv)
 
    try {
 
-#line 571
+#line 595
 #ifdef MONITOR
-#line 572
+#line 596
 #error Excluded unsupported monitor timer lock setup
-#line 578
+#line 602
 #endif
-#line 578
+#line 603
 
 
        //
@@ -606,7 +629,7 @@ DWORD HeartBeatThread(PVOID pv)
        // boosted priority starving the heartbeat thread. Winbench 311
        // shows this problem when doing polylines test.
        //
-#line 590
+#line 614
       SetThreadPriority(ThreadInfo.HeartBeat.Handle,
                         !(dwWNTPifFlags & COMPAT_TIMERTIC)
                            ? THREAD_PRIORITY_TIME_CRITICAL
@@ -614,20 +637,20 @@ DWORD HeartBeatThread(PVOID pv)
                         );
 
 #ifdef X86GFX
-#line 597
+#line 621
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
-#line 606
+#line 630
 #endif
-#line 607
+#line 631
 
-#line 608
+#line 632
 #ifdef MONITOR
-#line 609
+#line 633
 #error Excluded unsupported monitor timer lock release
 #endif
-#line 612
+#line 635
 
-#line 612
+#line 636
       dwRet = Win32_host_timer();
 
       }
@@ -640,32 +663,35 @@ DWORD HeartBeatThread(PVOID pv)
 
 
 #ifdef PIG
-#line 624
+#line 648
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
-#line 626
+#line 650
+
+
+#if _MSC_FULL_VER >= 13008827
+#pragma warning(push)
+#pragma warning(disable:4715)                   // Not all control paths return (due to infinite loop)
+#endif
 
 DWORD Win32_host_timer(void)
 {
     NTSTATUS      status;
 #ifdef PIG
-#line 631
+#line 661
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
-#line 633
+#line 663
     LONG          DelayPeriod;
     LARGE_INTEGER DiffTime;
     LARGE_INTEGER SystemTickIntv;
     LARGE_INTEGER SecIntv;
-    LARGE_INTEGER HalfSysIntv;
     LARGE_INTEGER CreepIntv;
-
 
     struct host_timeval time;
 
     DelayPeriod = 50000;
     SystemTickIntv.QuadPart  = SYSTEM_TICK_INTV;
-    HalfSysIntv.QuadPart  = SYSTEM_TICK_INTV/2;
     SecIntv.QuadPart  = SYSTEM_TICK_INTV*18;
     CreepIntv.QuadPart  = Int32x32To64(SYSTEM_TICK_INTV, 1200);   // >1 hr
 
@@ -674,7 +700,6 @@ DWORD Win32_host_timer(void)
     while(1)  {
        status = DelayHeartBeat(DelayPeriod);
        if (!status) {   // reinitialize counters
-HBresume:
            host_ica_lock();
            host_init_bda_timer();
            DelayPeriod = SYSTEM_TICK_INTV - 6000;
@@ -689,6 +714,7 @@ HBresume:
         *  since it only happens every few hundred years.
         */
        GetPerfCounterUsecs(&time, &CurrHeartBeat);
+
 
         /*
          *  Increment the cumulative counter
@@ -708,39 +734,39 @@ HBresume:
          *  Calculate Next Delay Period, based on how far
          *  behind we are. ie CurrTime - CumTime.
          */
+
        DiffTime.QuadPart = CurrHeartBeat.QuadPart - CumUSec.QuadPart;
 
        if (DiffTime.QuadPart > SecIntv.QuadPart)
          {
           DelayPeriod = 13000;
           }
-       else if (DiffTime.QuadPart > SYSTEM_TICK_INTV)
+       else if (DiffTime.QuadPart >= SystemTickIntv.QuadPart)
          {
           DelayPeriod = SYSTEM_TICK_INTV/3;
           }
-       else if (DiffTime.QuadPart >= HalfSysIntv.QuadPart)
+       else if (DiffTime.QuadPart >= Int32x32To64(SYSTEM_TICK_INTV, -1))
          {
-          DiffTime.QuadPart = (LONGLONG)SYSTEM_TICK_INTV - DiffTime.QuadPart;
-          DelayPeriod = DiffTime.LowPart - 6000;
+          DiffTime.QuadPart = SystemTickIntv.QuadPart - DiffTime.QuadPart/2;
+          DelayPeriod = DiffTime.LowPart;
           }
        else {
-          DelayPeriod = SYSTEM_TICK_INTV - 6000 - DiffTime.LowPart;
+          DelayPeriod = SYSTEM_TICK_INTV * 2;
           }
-
 
 
          /*
           * Update the VirtualTimerHardware
           */
 #ifdef PIG
-#line 713
+#line 740
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 718
+#line 745
 #else
-#line 719
+#line 746
        time_tick();
 #endif /* PIG */
-#line 721
+#line 748
 
 
           /*
@@ -767,6 +793,10 @@ HBresume:
    return(1);
 }
 
+#if _MSC_FULL_VER >= 13008827
+#pragma warning(pop)
+#endif
+
 
 /*
  *  DelayHeartBeat
@@ -785,15 +815,14 @@ NTSTATUS DelayHeartBeat(LONG Delay)
      NTSTATUS status;
      LARGE_INTEGER liDelay;
 
-
      liDelay.QuadPart  = Int32x32To64(Delay, -10);
 
 #ifdef MONITOR
-#line 769
+#line 799
 #error Excluded unsupported monitor heartbeat wait
-#line 819
+#line 849
 #else          // ndef MONITOR
-#line 820
+#line 850
 //
 // On Risc platforms we only have to deal with the
 // HeartBeat Resume\Suspend objects so things are much simpler
@@ -814,13 +843,13 @@ NTSTATUS DelayHeartBeat(LONG Delay)
              }
          }
 
-#line 840
+#line 870
 #endif
 
-#line 842
+#line 872
          // alerted to die
      if (status == STATUS_ALERTED)  {
-#line 844
+#line 874
          CloseHandle(ThreadInfo.HeartBeat.Handle);
          ThreadInfo.HeartBeat.Handle = NULL;
          ThreadInfo.HeartBeat.ID = 0;
@@ -828,9 +857,9 @@ NTSTATUS DelayHeartBeat(LONG Delay)
          }
 
 
-#line 851
+#line 881
       // Must be an error, announce it to the world
-#line 852
+#line 882
      DisplayErrorTerm(EHS_FUNC_FAILED, status,__FILE__,__LINE__);
      TerminateVDM();
      return status;

@@ -32,6 +32,7 @@
 #include "nt_reset.h"
 #line 33
 #include "config.h"
+#include "sndblst.h"
 #include <nt_vdd.h>   // DO NOT USE vddsvc.h
 #include <nt_vddp.h>
 #include <host_emm.h>
@@ -41,7 +42,7 @@
 #include "compat/include/system_root.h"
 #include "compat/include/wow_registry.h"
 
-#line 41
+#line 42
 PMEM_HOOK_DATA MemHookHead = NULL;
 PVDD_USER_HANDLERS UserHookHead= NULL;
 
@@ -89,13 +90,16 @@ void scs_init(int argc, char **argv)
 
     if(!DBGInit (argc,argv)) {
 #ifndef PROD
-#line 87
+#line 89
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 90
+#line 92
         TerminateVDM();
     }
 
+    //
+    // have dpmi do the interrupt dispatching
+    //
     DpmiEnableIntHooks();
 }
 
@@ -103,6 +107,8 @@ void scs_init(int argc, char **argv)
 // This routine contains the Dos Emulation initialisation code, called from
 // main(). We currently do not support container files.
 //
+
+extern boolean lim_page_frame_init(PLIM_CONFIG_DATA);
 
 
 InitialiseDosEmulation(int argc, char **argv)
@@ -116,6 +122,9 @@ InitialiseDosEmulation(int argc, char **argv)
     CHAR  buffer[MAX_PATH*2];
 #ifdef LIM
     LIM_CONFIG_DATA lim_config_data;
+#endif
+#ifdef FE_SB
+    LANGID   LcId = GetSystemDefaultLangID();
 #endif
 
     //
@@ -131,10 +140,10 @@ InitialiseDosEmulation(int argc, char **argv)
 #ifndef i386
     fVirtualInt |=  MIPS_BIT_MASK;
 #else
-#line 126
+#line 138
 #error Unsupported excluded original configuration
 #endif
-#line 128
+#line 140
     fVirtualInt &= ~VDM_BREAK_DEBUGGER;
     sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);
 
@@ -147,10 +156,10 @@ InitialiseDosEmulation(int argc, char **argv)
     //
     TlsDirectError = TlsAlloc();
 #ifndef PROD
-#line 139
+#line 152
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 142
+#line 155
 
 
     // SetupInstallableVDD ();
@@ -159,7 +168,13 @@ InitialiseDosEmulation(int argc, char **argv)
     reset();
 
     SetupInstallableVDD ();
+
+    //
+    // Initialize internal SoundBlaster VDD after the intallable VDDs
+    //
+
     SbInitialize ();
+
     /* reserve lim block after all vdd are installed.
        the pif file settings tell us if it is necessary to
        reserve the block
@@ -191,14 +206,35 @@ InitialiseDosEmulation(int argc, char **argv)
 
      /*................................................. Load DOSEM code */
 
-#line 169
+#line 201
      dw = NtvdmGetSystemDirectoryA(buffer, sizeof(buffer));
      if (!dw || dw >= sizeof(buffer)) {
          host_error(EG_OWNUP, ERR_QUIT, "NTVDM:InitialiseDosEmulation fails");
          TerminateVDM();
          }
 
+#ifdef FE_SB
+        switch (LcId) {
+            case MAKELANGID(LANG_JAPANESE,SUBLANG_DEFAULT):
+                strcat (buffer,NTIO_411);
+                break;
+            case MAKELANGID(LANG_KOREAN,SUBLANG_DEFAULT):
+                strcat (buffer,NTIO_412);
+                break;
+            case MAKELANGID(LANG_CHINESE,SUBLANG_CHINESE_TRADITIONAL):
+                strcat (buffer,NTIO_404);
+                break;
+            case MAKELANGID(LANG_CHINESE,SUBLANG_CHINESE_SIMPLIFIED):
+            case MAKELANGID(LANG_CHINESE,SUBLANG_CHINESE_HONGKONG):
+                strcat (buffer,NTIO_804);
+                break;
+            default:
+                strcat (buffer,NTIO_409);
+                break;
+        }
+#else
      strcat(buffer, "\\ntio.sys");
+#endif
 
      hFile = CreateFile(buffer,
                         GENERIC_READ,
@@ -213,10 +249,10 @@ InitialiseDosEmulation(int argc, char **argv)
          BytesRead )
         {
 #ifndef PROD
-#line 190
+#line 243
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 192
+#line 245
          host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);
          if (hFile != INVALID_HANDLE_VALUE) {
              CloseHandle(hFile);
@@ -232,10 +268,10 @@ InitialiseDosEmulation(int argc, char **argv)
         {
 
 #ifndef PROD
-#line 207
+#line 260
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 209
+#line 262
           host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);
           CloseHandle(hFile);
           return (-1);
@@ -288,7 +324,7 @@ InitialiseDosEmulation(int argc, char **argv)
 void AddSystemFiles(void)
 {
    /* The host boot drive must remain untouched. */
-#line 313
+#line 383
 }
 
 
@@ -320,10 +356,15 @@ void AddSystemFiles(void)
 			     )\
 			    )
 
+#ifdef DBCS
+    extern void GetPIFConfigFiles(int, char *, int);
+#else // !DBCS
+    extern void GetPIFConfigFiles(int, char *);
+#endif // !DBCS
+
 boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
 {
-    char config_sys_pathname[MAX_PATH+12];
-#line 347
+    char config_sys_pathname[MAX_PATH+13];
     HANDLE  handle;
     DWORD   file_size, bytes_read, size;
     char    *buffer, *ptr;
@@ -341,7 +382,11 @@ boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
     parsing_error = FALSE;
 
     /* if we can not find config.nt, we can not go on */
+#ifdef DBCS
+    GetPIFConfigFiles(TRUE, config_sys_pathname, TRUE);
+#else // !DBCS
     GetPIFConfigFiles(TRUE, config_sys_pathname);
+#endif // !DBCS
     if (*config_sys_pathname == '\0')
 	return FALSE;
 
@@ -483,8 +528,8 @@ boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
 
 		if (base_segment >= 0x1000 && base_segment <= 0x4000)
 		    /* round down the segment to  EMM_PAGE_SIZE boundary */
-		    base_segment = ((((ULONG)base_segment * 16) / EMM_PAGE_SIZE)
-				     * EMM_PAGE_SIZE) / 16;
+                    base_segment = (short)(((((ULONG)base_segment * 16) / EMM_PAGE_SIZE)
+                                     * EMM_PAGE_SIZE) / 16);
 		else
 		    parsing_error = TRUE;
 		break;
@@ -530,10 +575,10 @@ boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
     lim_data->use_all_umb = !ram_flag_found;
 
 #ifdef EMM_DEBUG
-#line 553
+#line 633
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
-#line 556
+#line 636
 
     return TRUE;
 }
@@ -558,7 +603,14 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     reserve_umb_status = FALSE;
 
     /* specificaly ask for 0xE0000 */
+#if defined(NEC_98)
+#line 661
+#error Unsupported NEC PC-98 configuration
+#else // !NEC_98
+#line 663
     page_frame = 0xE0000;
+#endif // !NEC_98
+#line 665
     /* primary page frames are always EMM_PAGE_SIZE * 4 */
     size = EMM_PAGE_SIZE * 4;
     reserve_umb_status = ReserveUMB(UMB_OWNER_EMM, (PVOID *)&page_frame, &size);
@@ -572,10 +624,10 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     }
     if (!reserve_umb_status) {
 #ifdef EMM_DEBUG
-#line 594
+#line 678
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
-#line 596
+#line 680
 	return FALSE;
     }
     page_table[0] = (short)(page_frame / 16);
@@ -586,8 +638,9 @@ unsigned short get_lim_page_frames(USHORT * page_table,
 
     total_phys_pages = 4;
 
+#ifndef NEC_98
     /* now add back fill page frames */
-    for (i = lim_data->backfill / EMM_PAGE_SIZE; i != 0 ; i--) {
+    for (i = (USHORT)(lim_data->backfill / EMM_PAGE_SIZE); i != 0 ; i--) {
 	page_table[total_phys_pages++] = base_segment;
 	base_segment += EMM_PAGE_SIZE / 16;
     }
@@ -605,12 +658,14 @@ unsigned short get_lim_page_frames(USHORT * page_table,
 		break;
 	}
     }
+#endif // !NEC_98
+#line 711
 
 #ifdef EMM_DEBUG
-#line 627
+#line 713
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
-#line 631
+#line 717
     return total_phys_pages;
 }
 #endif	/* LIM */
@@ -628,18 +683,18 @@ PCHAR  pszName,pszValue;
 FILETIME ft;
 PCHAR  pKeyName = "SYSTEM\\CurrentControlSet\\Control\\VirtualDeviceDrivers";
 
-#line 648
+#line 734
     if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,
                        pKeyName,
 		       0,
 		       KEY_QUERY_VALUE,
 		       &VDDKey
 		     ) != ERROR_SUCCESS){
-#line 655
+#line 741
         return;
     }
 
-#line 658
+#line 744
     pszName = "VDD";
 
         // get size of VDD value
@@ -1057,12 +1112,12 @@ void nt_std_handle_notification (BOOL fIsRedirection)
 
     stdoutRedirected = fIsRedirection;
 
-#line 1075
+#line 1161
 #ifdef X86GFX
-#line 1076
+#line 1162
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
-#line 1110
+#line 1196
 }
 
 /*** VDDInstallUserHook

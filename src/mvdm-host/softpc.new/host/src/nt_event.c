@@ -57,6 +57,7 @@
 #include "nt_event.h"
 #include "nt_vdd.h"
 #include "nt_timer.h"
+#include "nt_sb.h"
 
 #include "host.h"
 #include "host_hfx.h"
@@ -68,6 +69,11 @@
 #include "nt_uis.h"
 
 #include "ntcheese.h"
+#if defined(NEC_98)
+#line 73
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 75
 #include "nt_reset.h"
 #include "nt_fulsc.h"
 #include <vdm.h>
@@ -75,6 +81,10 @@
 #include "nt_com.h"
 #include "nt_pif.h"
 #include "yoda.h"
+#if defined(NEC_98)
+#line 83
+#error Unsupported NEC PC-98 configuration
+#endif  // NEC_98
 #include "nt_ega.h"
 #include "compat/include/mvdm_softpc_mouse_guest.h"
 #include "compat/include/mvdm_softpc_event_thread.h"
@@ -88,7 +98,7 @@ extern BOOL nt_init_called;
 extern unsigned PendingKeyboardHistory(void);
 extern void Reset6805and8042(void);
 extern mvdm_keyboard_history nt_keyboard_history;
-#line 78
+#line 89
 /*================================================================
 External references.
 ================================================================*/
@@ -108,15 +118,20 @@ WORD   BWVKey = 0;
 char   achES[]="EyeStrain";
 #endif
 #ifdef YODA
-#line 97
+#line 108
 #error Excluded unsupported YODA configuration
 #endif
-#line 99
+#line 110
 BOOL   stdoutRedirected=FALSE;
 ULONG  CntrlHandlerState=0;
 
 IMPORT void RestoreKbdLed(void);
 
+#if defined(JAPAN) || defined(KOREA)
+extern UINT ConsoleInputCP;
+extern UINT ConsoleOutputCP;
+extern DWORD ConsoleNlsMode;
+#endif // JAPAN || KOREA
 
 /*::::::::::::::::::::::::::::::::::: Key history control variables/defines */
 
@@ -126,7 +141,7 @@ static PKEY_EVENT_RECORD key_history;
 static key_history_count;
 static INPUT_RECORD first_returned_key;
 
-#line 112
+#line 128
 int GetHistoryKeyEvent(PKEY_EVENT_RECORD LastKeyEvent, int KeyNumber);
 void update_key_history(INPUT_RECORD *InputRecords, DWORD RecordsRead);
 void InitKeyHistory();
@@ -161,6 +176,11 @@ DWORD ToggleKeyState = NUMLOCK_ON;   // default state on dos boot up
 
 void AltUpDownUp(void);
 
+#if defined(NEC_98)
+#line 163
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 173
 
 /*::::::::::::::::::::::::::::::::::: Key message passing control variables */
 
@@ -194,10 +214,10 @@ ULONG event_thread_blocked_reason = 0xFFFFFFFF;
 
 HCURSOR cur_cursor = NULL;     /* Current cursor handle */
 #ifdef X86GFX
-#line 179
+#line 206
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 181
+#line 208
 
 
 /*@ACW========================================================================
@@ -311,12 +331,12 @@ void nt_start_event_thread(void)
 void nt_remove_event_thread(void)
 {
     /* Must make sure that the thread has terminated */
-#line 294
+#line 321
     if (!VDMForWOW && ThreadInfo.EventMgr.Handle)  {
-#line 299
+#line 326
         (void)mvdm_softpc_event_thread_alert_and_join(ThreadInfo.EventMgr.Handle,
                                                    nt_init_called);
-#line 296
+#line 323
         }
 }
 
@@ -355,6 +375,7 @@ DWORD ConsoleEventThread(PVOID pv)
 
 
 
+
 DWORD nt_event_loop(void)
 {
     DWORD RecordsRead;
@@ -375,12 +396,12 @@ DWORD nt_event_loop(void)
     /* the console input handle shouldn't get changed during the lifetime
        of the ntvdm
     */
-#line 356
+#line 384
     Events[0] = hConsoleSuspend;
     Events[1] = GetConsoleInputWaitHandle(); ////sc.InputHandle
     /*:::::::::::::::::::::::::::::::::::::::::::::: Get and process events */
 
-#line 358
+#line 386
     while (TRUE) {
 
         //
@@ -413,9 +434,9 @@ DWORD nt_event_loop(void)
                 update_key_history(&InputRecord[0], RecordsRead);
                 }
             else {
-#line 391
+#line 419
                 if (ntvdm_worker_lifecycle_input_terminal()) return 0;
-#line 390
+#line 418
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
                 break; //Read from console failed
                 }
@@ -435,9 +456,9 @@ DWORD nt_event_loop(void)
            //
         else {
            if (!NT_SUCCESS(status)) {
-#line 410
+#line 438
                 if (ntvdm_worker_lifecycle_input_terminal()) return 0;
-#line 409
+#line 437
                 DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);
                 }
            return 0;
@@ -455,11 +476,17 @@ DWORD nt_event_loop(void)
                       DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);
                   break;
 
-#line 421
+#line 449
               case MOUSE_EVENT:
+#if defined(NEC_98)
+#line 451
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 456
                   nt_process_mouse(&InputRecord[loop].Event.MouseEvent);
+#endif // !NEC_98
+#line 458
                   break;
-
 
               case KEY_EVENT:
 
@@ -479,14 +506,14 @@ DWORD nt_event_loop(void)
                                return (0);
                            }
 
-#line 445
+#line 479
                        if (!mvdm_keyboard_history_begin(&nt_keyboard_history))
                            DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_INVALID_DATA,__FILE__,__LINE__);
-#line 444
+#line 478
                        nt_process_keys(&InputRecord[loop].Event.KeyEvent);
                        mvdm_keyboard_history_end(&nt_keyboard_history);
 
-#line 446
+#line 480
                   } while (++loop < RecordsRead &&
                            InputRecord[loop].EventType == KEY_EVENT);
                   loop--;
@@ -513,9 +540,9 @@ DWORD nt_event_loop(void)
               }
            }
 
-#line 475
+#line 511
 
-#line 478
+#line 512
         }
 
     return 0;
@@ -533,10 +560,10 @@ void update_key_history(register INPUT_RECORD *InputRecords,
         {
 
             //Transfer key event to history buffer
-#line 496
+#line 530
         if (!mvdm_keyboard_history_record(&nt_keyboard_history))
             DisplayErrorTerm(EHS_FUNC_FAILED,ERROR_ARITHMETIC_OVERFLOW,__FILE__,__LINE__);
-#line 495
+#line 529
         *key_history_tail = InputRecords->Event.KeyEvent;
 
         //Update ptrs to history buffer
@@ -570,11 +597,11 @@ int GetHistoryKeyEvent(PKEY_EVENT_RECORD LastKeyEvent, int KeyNumber)
     int KeyReturned = FALSE;
     int KeysBeforeWrap = key_history_tail-key_history;
 
-#line 529
+#line 563
     KeyNumber = mvdm_keyboard_history_age(&nt_keyboard_history,KeyNumber);
     if (!KeyNumber) return FALSE;
 
-#line 528
+#line 562
     if(key_history_count >= KeyNumber)
     {
     if(KeysBeforeWrap < KeyNumber)
@@ -602,9 +629,9 @@ void InitKeyHistory()
 {
     key_history_head = key_history_tail = key_history;
     key_history_count = 0;
-#line 556
+#line 590
     memset(&nt_keyboard_history,0,sizeof(nt_keyboard_history));
-#line 555
+#line 589
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -645,12 +672,11 @@ void nt_process_focus(PFOCUS_EVENT_RECORD FocusEvent)
         MouseOutOfFocus();      /* turn off mouse 'attachment' */
 
 #ifndef PROD
-#line 595
+#line 629
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 597
+#line 631
     }
-
 
 
 }
@@ -680,15 +706,16 @@ Ammended to do Alt key processing.
           // consrv sends when it gets an initmenu, and indicates
           // that a sys menu is coming up, and we are losing kbd focus
        case WM_INITMENU:
-          AltUpDownUp();
+
       /* stop cursor cliping */
       MouseSystemMenuON();
           break;
 
-            // consrv sends when it gets a MENUSELECT with
-            // HIWORD(wParam) == MF_MAINMENU (0xffff). I think
-            // it means we are regaining kbd focus
+            // 
+            // consrv sends when sys menu is done and we regain keyboard focus
+            // 
        case WM_MENUSELECT:
+        AltUpDownUp(); // resync key states
         MouseSystemMenuOFF();
           break;
 
@@ -696,10 +723,10 @@ Ammended to do Alt key processing.
           {
           BOOL bIcon;
 
-          VDMConsoleOperation(VDM_IS_ICONIC,&bIcon);
 
           /* is the SoftPC window NOT an icon? */
-          if(!bIcon)
+          if(VDMConsoleOperation(VDM_IS_ICONIC,&bIcon) &&
+             !bIcon)
             {
             if(bPointerOff) /* if the pointer is not visible */
                {
@@ -808,8 +835,8 @@ void SyncToggleKeys(WORD wVirtualKeyCode, DWORD dwControlKeyState)
             {
              nt_key_down_action(&fake_shift);
              }
-         else if ((CurrKeyState & SHIFT_PRESSED) &&
-                   !(ToggleKeyState & SHIFT_PRESSED) )
+         else if (!(CurrKeyState & SHIFT_PRESSED) &&
+                   (ToggleKeyState & SHIFT_PRESSED) )
             {
              nt_key_up_action(&fake_shift);
              }
@@ -841,6 +868,7 @@ void SyncToggleKeys(WORD wVirtualKeyCode, DWORD dwControlKeyState)
              nt_key_down_action(&fake_scroll);
              nt_key_up_action(&fake_scroll);
              }
+
 }
 
 
@@ -866,7 +894,7 @@ void SyncToggleKeys(WORD wVirtualKeyCode, DWORD dwControlKeyState)
  */
 void AltUpDownUp(void)
 {
-
+   ULONG ControlKeyState = 0;
    Sleep(100);
    if (WaitKbdHdw(0xffffffff))
        return;
@@ -896,12 +924,59 @@ void AltUpDownUp(void)
 
        }
 
+#if defined(NEC_98)
+#line 880
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 885
    RaiseAllDownKeys();
+#if defined(NEC_98)
+#line 887
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 892
 
+    //
+    // resync the control key states in case they changed since we last had the kbd focus.
+    //
+
+    if (GetKeyState(VK_CAPITAL) & 1) {
+        ControlKeyState |= CAPSLOCK_ON;
+    }
+
+    if (GetKeyState(VK_NUMLOCK) & 1) {
+        ControlKeyState |= NUMLOCK_ON;
+    }
+
+    if (GetKeyState(VK_SCROLL) & 1) {
+        ControlKeyState |= SCROLLLOCK_ON;
+    }
+
+    if ((ControlKeyState & CAPSLOCK_ON) != (ToggleKeyState & CAPSLOCK_ON)) {
+        nt_key_down_action(&fake_caps);
+        nt_key_up_action(&fake_caps);
+    }
+
+    if ((ControlKeyState & NUMLOCK_ON) != (ToggleKeyState & NUMLOCK_ON)) {
+        nt_key_down_action(&fake_numlck);
+        nt_key_up_action(&fake_numlck);
+    }
+
+    if ((ControlKeyState & SCROLLLOCK_ON) != (ToggleKeyState & SCROLLLOCK_ON)) {
+        nt_key_down_action(&fake_scroll);
+        nt_key_up_action(&fake_scroll);
+    }
+
+    ToggleKeyState = ControlKeyState;
    HostReleaseKbd();
 
 }
 
+#if defined(NEC_98)
+#line 930
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 985
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::: Process event, Class registered message handler :::::::::::::::::*/
@@ -911,7 +986,31 @@ void AltUpDownUp(void)
 
 VOID nt_process_keys(PKEY_EVENT_RECORD KeyEvent)
 {
-
+#ifdef KOREA
+    // For Korean 103 keyboard layout support.
+    if (!is_us_mode() && GetConsoleOutputCP() != 437) {
+        switch(KeyEvent->wVirtualKeyCode) {
+            case VK_MENU:
+            case VK_CONTROL:
+                if (KeyEvent->dwControlKeyState & ENHANCED_KEY)
+                    KeyEvent->dwControlKeyState &= ~ENHANCED_KEY;
+                break;
+            case VK_HANGEUL:
+                if (KeyEvent->wVirtualScanCode == 0xF2)
+                    KeyEvent->wVirtualScanCode = 0x38;
+                break;
+            case VK_HANJA:
+                if (KeyEvent->wVirtualScanCode == 0xF1)
+                    KeyEvent->wVirtualScanCode = 0x1D;
+                break;
+        }
+    }
+#endif
+#if defined(NEC_98)
+#line 1015
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1027
     // Check the last toggle key states, for change
     if ((ToggleKeyState & TOGGLEKEYBITS)
          != (KeyEvent->dwControlKeyState & TOGGLEKEYBITS))
@@ -920,6 +1019,11 @@ VOID nt_process_keys(PKEY_EVENT_RECORD KeyEvent)
          ToggleKeyState = KeyEvent->dwControlKeyState & TOGGLEKEYBITS;
          }
 
+#if defined(NEC_98)
+#line 1036
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1056
     /*............................... Maintain shift states in case of pastes */
 
     if(KeyEvent->bKeyDown) {
@@ -938,26 +1042,48 @@ VOID nt_process_keys(PKEY_EVENT_RECORD KeyEvent)
 
         switch(KeyEvent->wVirtualKeyCode) {
 #ifdef YODA
-#line 886
+#line 1074
 #error Excluded unsupported YODA configuration
-#line 891
+#line 1079
 #endif
-#line 892
+#line 1080
 
         case VK_SHIFT:
+#if defined(NEC_98)
+#line 1083
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1085
             fake_shift = *KeyEvent;
             break;
 
         case VK_MENU:
             fake_alt = *KeyEvent;
+#if defined(NEC_98)
+#line 1091
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1093
             break;
 
         case VK_CONTROL:
             fake_ctl = *KeyEvent;
+#if defined(NEC_98)
+#line 1098
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1100
         break;
+#if defined(NEC_98) // Bug Fix
+#line 1102
+#error Unsupported NEC PC-98 configuration
+#else // !NEC_98
+#line 1120
         }
 
         nt_key_down_action(KeyEvent);
+#endif // !NEC_98
+#line 1124
 
     } else {    /* ! KeyEvent->bKeyDown */
 
@@ -970,13 +1096,19 @@ VOID nt_process_keys(PKEY_EVENT_RECORD KeyEvent)
               * 25-Aug-1992 Jonle
               * Also SysRq/Printscreen key. Simon May 93
               */
-         if (KeyEvent->wVirtualKeyCode == VK_CANCEL ||
-             KeyEvent->wVirtualKeyCode == VK_SNAPSHOT )
+         if (KeyEvent->wVirtualKeyCode == VK_CANCEL)
             {
              nt_key_down_action(KeyEvent);
          }
 
+#if defined(NEC_98)
+#line 1142
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1209
          nt_key_up_action(KeyEvent);   /* Key up */
+#endif // !NEC_98
+#line 1211
 
     }   /* ! KeyEvent->bKeyDown */
 
@@ -995,9 +1127,16 @@ void nt_key_down_action(PKEY_EVENT_RECORD KeyEvent)
     ATcode = KeyMsgToKeyCode(KeyEvent);
 
     if(ATcode)
+#if defined(NEC_98) // Bug Fix
+#line 1230
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1255
        (*host_key_down_fn_ptr)(ATcode);
+#endif // !NEC_98
+#line 1257
 
-#line 946
+#line 1258
 }
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -1010,10 +1149,15 @@ void nt_key_up_action(PKEY_EVENT_RECORD KeyEvent)
 
     ATcode = KeyMsgToKeyCode(KeyEvent);
 
+#if defined(NEC_98)
+#line 1271
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1287
     if(ATcode)
        (*host_key_up_fn_ptr)(ATcode);
 
-#line 961
+#line 1290
 }
 
 
@@ -1030,7 +1174,7 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
     POINT mouse_pos;
     UCHAR mouse_button_left, mouse_button_right;
 
-#line 977
+#line 1306
     host_ica_lock();
 
     if (NoMouseTics) {
@@ -1069,10 +1213,10 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
      * mouse interrupt handler code.
      */
 #ifdef X86GFX
-#line 1015
+#line 1344
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 1017
+#line 1346
     {
     ULONG maxWidth = sc.PC_W_Width,
           maxHeight = sc.PC_W_Height;
@@ -1162,10 +1306,10 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
  */
 BOOL MoreMouseEvents(void)
 {
-#line 1107
+#line 1436
  return MouseEBufNxtEvtInx != MouseEBufNxtFreeInx ||
         mvdm_softpc_mouse_pending(mvdm_softpc_mouse_current());
-#line 1107
+#line 1436
 }
 
 
@@ -1193,6 +1337,11 @@ void GetNextMouseEvent(void)
 
 }
 
+#if defined(NEC_98)
+#line 1464
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1511
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::Flush all outstanding mouse events :::::::::::::::::::::*/
@@ -1202,9 +1351,9 @@ void FlushMouseEvents(void)
 {
      host_ica_lock();
      MouseEBufNxtEvtInx = MouseEBufNxtFreeInx = 0;
-#line 1144
+#line 1521
      mvdm_softpc_mouse_cancel(mvdm_softpc_mouse_current());
-#line 1143
+#line 1520
      host_ica_unlock();
 }
 
@@ -1272,11 +1421,11 @@ GLOBAL void GetScaleEvent(void)
 
 
 #ifdef YODA
-#line 1210
+#line 1587
 #error Excluded unsupported YODA configuration
-#line 1241
+#line 1618
 #endif
-#line 1242
+#line 1619
 
 
 // Host funcs to support base keyboard Mods. (Prevents Windows calls from
@@ -1363,16 +1512,16 @@ BOOL CntrlHandler(ULONG CtrlType)
        case CTRL_LOGOFF_EVENT:
        case CTRL_SHUTDOWN_EVENT:
 #ifndef PROD
-#line 1328
+#line 1705
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
-#line 1332
+#line 1709
 #endif
-#line 1333
+#line 1710
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
-#line 1337
+#line 1714
                 host_applClose();
                 ExitVDM(FALSE,0);
-#line 1334
+#line 1711
                 ExitProcess(0);
                 return FALSE;
                 }
@@ -1388,11 +1537,11 @@ BOOL CntrlHandler(ULONG CtrlType)
             break;
 
 #ifndef PROD
-#line 1349
+#line 1726
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
-#line 1351
+#line 1728
 #endif
-#line 1352
+#line 1729
        }
     return TRUE;
 }
@@ -1429,6 +1578,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::: Turn off sound */
     InitSound(FALSE);
+    SbCloseDevices();
 
     /*::::::::::::::::::::::::::::::::::::::::::::: Block the event thread */
 
@@ -1448,29 +1598,37 @@ BOOL CntrlHandler(ULONG CtrlType)
             }
 
 
-#line 1408
+#line 1786
         mvdm_softpc_text_video_pause();
         /*::::::::::::::::::::::::::::::::: Flush screen output, reset console */
 
-#line 1413
+#line 1801
         mouse_pointer_route_changed(FALSE);
 
-#line 1410
+#ifndef NEC_98
 	if (sc.ScreenState == STREAM_IO)
-#line 1411
+#line 1790
 	    stream_io_update();
-#line 1412
+#line 1791
 	else {
-#line 1402
-#line 1407
+#endif // !NEC_98
+#line 1793
+#if defined(NEC_98)
+#line 1794
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1780
+#line 1785
                 for (dw = 0; dw < EGA_TICK_DELAY && get_mode_change_required(); ++dw)
                     host_graphics_tick();
-#line 1414
+#line 1805
 		(*update_alg.calc_update)();
-#line 1418
+#line 1810
             if (sc.ModeType == TEXT && !NtvdmConsoleUpdateText(sc.ColPalette))
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
-#line 1415
+#line 1806
+#endif // !NEC_98
+#line 1807
 	    // Put Console back the way it was when we started up
 	    ResetConsoleState();
 
@@ -1479,15 +1637,21 @@ BOOL CntrlHandler(ULONG CtrlType)
 	       ;
 
 #ifdef MONITOR
-#line 1423
+#line 1815
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 1425
+#if defined(NEC_98)
+#line 1818
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1823
 
 	    /* If keeping window open when exiting and fullscreen, return to desktop */
 	    /* Transition made simple as VDM de-registered from console */
-#line 1432
+	    #ifndef NEC_98
 	}
+#endif // !NEC_98
+#line 1833
 
         // Turn off PIF Reserved & ShortCut Keys
         DisablePIFKeySetup();
@@ -1514,6 +1678,41 @@ BOOL CntrlHandler(ULONG CtrlType)
         if(!SetConsoleMode(sc.OutputHandle,sc.OrgOutConsoleMode))
             DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 
+#if defined(JAPAN) || defined(KOREA)
+        // 32bit IME status restore
+        if ( SetConsoleNlsMode( sc.InputHandle, ConsoleNlsMode & (~NLS_IME_DISABLE)) ) {
+#ifdef JAPAN_DBG
+            DbgPrint( "NTVDM: 32bit IME status restore %08x success\n", ConsoleNlsMode );
+#endif
+        }
+        else {
+            DbgPrint( "NTVDM: SetConsoleNlsMode Error %08x\n", GetLastError() );
+        }
+
+        // Set cursor mode
+        if ( !SetConsoleCursorMode( sc.OutputHandle,
+                                    TRUE,            // Bringing
+                                    TRUE             //  Double byte cursor
+                                         ) ) {
+#ifdef JAPAN_DBG
+            DbgPrint( "NTVDM: SetConsoleCursorMode Error\n" );
+#endif
+        }
+
+    // NtConsoleFlag, for full screen graphics app running second time.
+    // NtConsoleFlag is in $NtDisp
+#ifndef NEC_98
+    {
+        sys_addr FlagAddr;
+        extern word NtConsoleFlagSeg;
+        extern word NtConsoleFlagOff;
+
+        FlagAddr = effective_addr( NtConsoleFlagSeg, NtConsoleFlagOff );
+        sas_store( FlagAddr, 0x01 );
+    }
+#endif // !NEC_98
+#line 1892
+#endif // JAPAN || KOREA
         if (!(CntrlHandlerState & CNTRL_SHELLCOUNT) &&
             CntrlHandlerState & CNTRL_SYSTEMROOTCONSOLE) {
             TerminateVDM();
@@ -1525,12 +1724,15 @@ BOOL CntrlHandler(ULONG CtrlType)
         MouseDetachMenuItem(FALSE);
         }
 
+#ifndef NEC_98
     // clear kbd state flags in biosdata area
     sas_store (kb_flag,0);
     sas_store (kb_flag_1,0);
     sas_store (kb_flag_2,0);
     sas_store (kb_flag_3,KBX);
     sas_store (alt_input,0);
+#endif // !NEC_98
+#line 1912
 
 
     /*::: Suspend timer thread */
@@ -1548,15 +1750,15 @@ BOOL CntrlHandler(ULONG CtrlType)
     fEventThreadBlock = TRUE;
 
     CntrlHandlerState |= CNTRL_VDMBLOCKED;
-#line 1495
+#line 1931
     if (!VDMForWOW && !ntvdm_console_set_active(FALSE))
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
-#line 1493
+#line 1929
 #ifndef PROD
-#line 1494
+#line 1930
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1496
+#line 1932
 
 }
 
@@ -1575,13 +1777,14 @@ void nt_resume_event_thread(void)
         return;
         }
 
-#line 1516
+#line 1953
     if (!ntvdm_console_set_active(TRUE))
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 
-#line 1514
+#line 1950
     /* re-enable stream io if the application is terminating */
 
+#ifndef NEC_98
     if (event_thread_blocked_reason == 1 &&
 	StreamIoSwitchOn && !host_stream_io_enabled) {
 	/* renew the screen buffer and window size */
@@ -1592,21 +1795,23 @@ void nt_resume_event_thread(void)
 
 	enable_stream_io();
 #ifdef X86GFX
-#line 1526
+#line 1963
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
-#line 1528
+#line 1965
 #endif
-#line 1529
+#line 1966
 
     }
+#endif // !NEC_98
+#line 1969
     nt_init_event_thread();  // does nothing if init already
 
     CntrlHandlerState &= ~CNTRL_VDMBLOCKED;
 #ifndef PROD
-#line 1535
+#line 1973
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1537
+#line 1975
 
     // Setup Console modes
     SetupConsoleMode();
@@ -1623,11 +1828,16 @@ void nt_resume_event_thread(void)
     // Send notification message for VDDs */
     VDDResumeUserHook();
 
+#ifndef NEC_98
     if (sc.ScreenState != STREAM_IO) {
+#endif // !NEC_98
+#line 1994
 	DoFullScreenResume();
 	MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
+#ifndef NEC_98
     }
-#line 1557
+#endif // !NEC_98
+#line 1999
     ResumeTimerThread(); /* Restart timer thread */
 
     // set kbd state flags in biosdata area
@@ -1636,6 +1846,12 @@ void nt_resume_event_thread(void)
         }
 
     KbdResume();
+#ifdef JAPAN
+#ifndef NEC_98
+    SetModeForIME();
+#endif // !NEC_98
+#line 2011
+#endif // JAPAN
 
     SetEvent(hConsoleWait);               /* Restart event thread */
 }
@@ -1647,96 +1863,21 @@ SyncBiosKbdLedToKbdDevice(
     void
     )
 {
-   NTSTATUS Status;
-   UNICODE_STRING UnicodeString;
-   OBJECT_ATTRIBUTES ObjAttr;
-   IO_STATUS_BLOCK IoStatus;
-   KEYBOARD_INDICATOR_PARAMETERS kip;
-   KEYBOARD_UNIT_ID_PARAMETER kuid;
-   HANDLE hKeyboard = 0;
-   HANDLE KeyboardEvent = 0;
-   ULONG ControlKeyState;
+    unsigned char KbdLed = 0;
 
-   unsigned char KbdLed;
-
-
-   ControlKeyState = ToggleKeyState & (CAPSLOCK_ON | NUMLOCK_ON | SCROLLLOCK_ON);
-
-   RtlInitUnicodeString(&UnicodeString, DD_KEYBOARD_DEVICE_NAME_U L"0");
-   InitializeObjectAttributes(&ObjAttr, &UnicodeString, 0, NULL, NULL);
-
-   Status = NtCreateFile(&hKeyboard,
-                         FILE_READ_DATA | SYNCHRONIZE,
-                         &ObjAttr,
-                         &IoStatus,
-                         NULL, 0, 0, FILE_OPEN_IF, 0, NULL, 0
-                         );
-
-    if (!NT_SUCCESS(Status)) {
-        hKeyboard = 0;
-        goto GiveUp;
-        }
-    else {
-        KeyboardEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
-        if (!KeyboardEvent) {
-            goto GiveUp;
-            }
+    ToggleKeyState = 0;
+    if (GetKeyState(VK_CAPITAL) & 1) {
+        ToggleKeyState |= CAPSLOCK_ON;
+        KbdLed |= CAPS_STATE;
         }
 
-    kuid.UnitId = 0;
-    Status = NtDeviceIoControlFile(hKeyboard,
-                                   KeyboardEvent,
-                                   NULL, NULL,     // apcrtn, apccontext
-                                   &IoStatus,
-                                   IOCTL_KEYBOARD_QUERY_INDICATORS,
-                                   &kuid, sizeof(kuid),
-                                   &kip, sizeof(kip)
-                                   );
-
-   if (!NT_SUCCESS(Status)) {
-       goto GiveUp;
+    if (GetKeyState(VK_NUMLOCK) & 1) {
+        ToggleKeyState |= NUMLOCK_ON;
+        KbdLed |= NUM_STATE;
        }
 
-
-   Status = NtWaitForSingleObject(KeyboardEvent, FALSE, NULL);
-   if (Status != STATUS_SUCCESS) {
-       goto GiveUp;
-       }
-
-
-   ControlKeyState = 0;
-   if (kip.LedFlags & KEYBOARD_CAPS_LOCK_ON) {
-       ControlKeyState |= CAPSLOCK_ON;
-       }
-
-   if (kip.LedFlags & KEYBOARD_NUM_LOCK_ON) {
-       ControlKeyState |= NUMLOCK_ON;
-       }
-
-   if (kip.LedFlags & KEYBOARD_SCROLL_LOCK_ON) {
-       ControlKeyState |= SCROLLLOCK_ON;
-       }
-
-GiveUp:
-
-   if (hKeyboard) {
-       NtClose(hKeyboard);
-       }
-
-   if (KeyboardEvent) {
-       NtClose(KeyboardEvent);
-       }
-
-
-   ToggleKeyState = ControlKeyState;
-   KbdLed = 0;
-   if (ToggleKeyState & NUMLOCK_ON) {
-       KbdLed |= NUM_STATE;
-       }
-   if (ToggleKeyState & CAPSLOCK_ON) {
-       KbdLed |= CAPS_STATE;
-       }
-   if (ToggleKeyState & SCROLLLOCK_ON) {
+    if (GetKeyState(VK_SCROLL) & 1) {
+        ToggleKeyState |= SCROLLLOCK_ON;
        KbdLed |= SCROLL_STATE;
        }
 
@@ -1745,7 +1886,6 @@ GiveUp:
 
    return;
 }
-
 
 
 #define NUMBBIRECS 32
@@ -1802,18 +1942,18 @@ VOID ReturnBiosBufferKeys(VOID)
 
                   // normal case
          else if (InputRecord[i].Event.KeyEvent.wVirtualScanCode)  {
-#line 1732
+#line 2103
              if (first_returned_key.EventType != KEY_EVENT ||
                  first_returned_key.Event.KeyEvent.bKeyDown ||
                  first_returned_key.Event.KeyEvent.wVirtualScanCode != InputRecord[i].Event.KeyEvent.wVirtualScanCode ||
                  first_returned_key.Event.KeyEvent.wVirtualKeyCode != InputRecord[i].Event.KeyEvent.wVirtualKeyCode ||
                  ((first_returned_key.Event.KeyEvent.dwControlKeyState ^ InputRecord[i].Event.KeyEvent.dwControlKeyState) & ENHANCED_KEY)) {
-#line 1731
+#line 2102
              InputRecord[i].Event.KeyEvent.bKeyDown = FALSE;
              InputRecord[i-1] = InputRecord[i];
              i--;
              }
-#line 1734
+#line 2105
              InputRecord[i--].Event.KeyEvent.bKeyDown = TRUE;
              }
 
@@ -1901,16 +2041,16 @@ VOID ReturnBiosBufferKeys(VOID)
 
 
 
-#line 1822
+#line 2193
         first_returned_key.EventType = 0;
 
              /*  If buffer is full or
               *     bios buffer is empty and got stuff in buffer
               *     Write it out
               */
-#line 1829
+#line 2200
         if ((BufferHead == BufferTail && i != NUMBBIRECS - 1) || i < 1)
-#line 1826
+#line 2197
             {
              WriteConsoleInputVDMW(sc.InputHandle,
                                    &InputRecord[i+1],
@@ -1943,10 +2083,16 @@ void ReturnUnusedKeyEvents(int UnusedKeyEvents)
 
     /* Return keys to console input buffer */
 
-#line 1856
+#line 2227
     if(UnusedKeyEvents)
     {
-#line 1858
+        //
+        // Make sure we only retrieve the max number of events that we recorded.
+        //
+
+        if (UnusedKeyEvents > MAX_KEY_EVENTS) {
+            UnusedKeyEvents = MAX_KEY_EVENTS;
+        }
     for(KeyToRtn = 1, KeyInx = UnusedKeyEvents-1;
         KeyToRtn <= UnusedKeyEvents &&
         GetHistoryKeyEvent(&InputRecords[KeyInx].Event.KeyEvent,KeyToRtn);
@@ -1958,11 +2104,11 @@ void ReturnUnusedKeyEvents(int UnusedKeyEvents)
     if(KeyToRtn > 1) {
     if(!WriteConsoleInputVDMW(sc.InputHandle,
         &InputRecords[KeyInx+1],KeyToRtn-1,&RecsWrt))
-#line 1867
+#line 2245
         always_trace0("Console write failed\n");
     else if(RecsWrt) first_returned_key = InputRecords[KeyInx+1];
     }
-#line 1868
+#line 2246
     }
 
     /* Clear down key history buffer and event queue */
@@ -1981,9 +2127,9 @@ void cmdPushExitInConsoleBuffer (void)
         }
     CntrlHandlerState |= CNTRL_PUSHEXIT;
 
-#line 1891
+#line 2269
     ExitThread(mvdm_softpc_request_console_exit());
-#line 1903
+#line 2281
 }
 
 
@@ -1991,18 +2137,18 @@ void cmdPushExitInConsoleBuffer (void)
 /*:::::: Calculate no. of keys to return to console input buffer :::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 1910
+#line 2288
 extern int keys_in_6805_buff(int *part_key_transferred);
 
 int CalcNumberOfUnusedKeyEvents()
 {
     int part_key_transferred;
     unsigned pending = PendingKeyboardHistory();
-#line 1915
+#line 2293
 
     //Get the number of keys in the 6805 buffer
     Reset6805and8042();
-#line 1917
+#line 2295
     return (pending + KeyQueue.KeyCount);
-#line 1918
+#line 2296
 }

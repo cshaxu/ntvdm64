@@ -18,6 +18,11 @@
 // Somehow this has to end up being loaded rather than compiled in...
 //
 #define UNDEFINED 0
+#if defined(NEC_98)
+#line 22
+#error Unsupported NEC PC-98 configuration
+#endif //NEC_98
+#line 36
 
 /*@ACW=======================================================================
 
@@ -33,6 +38,11 @@ scancode values for the regular keys just to make life a little more fun!
 
 ============================================================================*/
 
+#if defined(NEC_98)
+#line 52
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 311
 BYTE Scan1ToKeynum[] =
 {
     // Keynum		Scancode	US encoding
@@ -107,7 +117,7 @@ BYTE Scan1ToKeynum[] =
     119,		//  0x42	F8
     120,		//  0x43	F9
     121,		//  0x44	F10
-    126,		//  0x45	Break Key
+    90, 		//  0x45	Numlock and Pause both have ScanCode 45
     125,		//  0x46	Scroll Lock
     91,			//  0x47	Keypad Home 7
     96,			//  0x48	Keypad Up 8
@@ -128,8 +138,14 @@ BYTE Scan1ToKeynum[] =
     122,		//  0x57	F11
     123,		//  0x58	F12
     UNDEFINED,		//  0x59	
+#ifdef	JAPAN
+// Use 45,56,59,65-69 for Japanese extend key No.
+    65,			//  0x5a	AX keyboard MUHENKAN
+    66,			//  0x5b	AX keyboard HENKAN
+#else // !JAPAN
     UNDEFINED,		//  0x5a	
     UNDEFINED,		//  0x5b	
+#endif // !JAPAN
     UNDEFINED,		//  0x5c	
     UNDEFINED,		//  0x5d
     UNDEFINED,		//  0x5e
@@ -150,6 +166,23 @@ BYTE Scan1ToKeynum[] =
     UNDEFINED,		//  0x6d	
     UNDEFINED,		//  0x6e	
     UNDEFINED,		//  0x6f	
+#ifdef	JAPAN
+    69,			//  0x70	106 keyboard KATAKANA
+    UNDEFINED,		//  0x71	
+    UNDEFINED,		//  0x72	
+    56,	  		//  0x73	AX/106 keyboard "RO"
+    UNDEFINED,		//  0x74	
+    UNDEFINED,		//  0x75	
+    UNDEFINED,		//  0x76	
+    59,			//  0x77	106 keyboard ZENKAKU
+    UNDEFINED,		//  0x78
+    67,			//  0x79	106 keyboard HENKAN
+    UNDEFINED,		//  0x7a
+    68,			//  0x7b	106 keyboard MUHENKAN
+    UNDEFINED,		//  0x7c	
+    45,			//  0x7d	106 keyboard yen mark
+    UNDEFINED,		//  0x7e	
+#else
     UNDEFINED,		//  0x70	
     UNDEFINED,		//  0x71	
     UNDEFINED,		//  0x72	
@@ -165,6 +198,7 @@ BYTE Scan1ToKeynum[] =
     94,       		//  0x7c	Extended kbd (IBM 122 key)
     14,			//  0x7d	Extended kbd (IBM 122 key)
     107,		//  0x7e	Brazilian ABNT numpad .
+#endif
     UNDEFINED,		//  0x7f
     UNDEFINED,		//  0x80
     UNDEFINED,		//  0x81
@@ -272,6 +306,8 @@ BYTE Scan1ToKeynumExtended[] =
     76,			//  0x53	Extended 53 Delete
 
 };
+#endif // !NEC_98
+#line 575
 
 
 
@@ -411,10 +447,37 @@ BYTE KeyMsgToKeyCode(PKEY_EVENT_RECORD KeyEvent)
 {
     /*:::::::::::::::::::::::::::::::::::: do we need the enhanced key set ? */
 
+#if defined(NEC_98)
+#line 715
+#error Unsupported NEC PC-98 configuration
+#endif // !NEC_98
+#line 719
+
+    // Both Pause and Numlock have ScanCode==0x45,
+    // so simple table lookup by ScanCode doesn't work
+    // use wVirtualKeyCode to check for Pause
+    if(KeyEvent->wVirtualScanCode == 0x45 && KeyEvent->wVirtualKeyCode == VK_PAUSE) {
+       return 126;
+    }
+
     if(!(KeyEvent->dwControlKeyState & ENHANCED_KEY))
     {
-
+#ifdef	JAPAN
+	/* Check CTRL-ALT-DEL key */
+	if  (KeyEvent->wVirtualScanCode==0x53
+	&&  (KeyEvent->dwControlKeyState & RIGHT_ALT_PRESSED
+	||   KeyEvent->dwControlKeyState & LEFT_ALT_PRESSED)
+	&&  (KeyEvent->dwControlKeyState & RIGHT_CTRL_PRESSED
+	||   KeyEvent->dwControlKeyState & LEFT_CTRL_PRESSED)){
+		return(0);
+	}
+#endif // JAPAN
 	/*............................... the regular keyset is what we need */
+#if defined(NEC_98)
+#line 741
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 787
 
         return  KeyEvent->wVirtualScanCode >= sizeof(Scan1ToKeynum)
 		   ? 0
@@ -422,7 +485,23 @@ BYTE KeyMsgToKeyCode(PKEY_EVENT_RECORD KeyEvent)
     }
     else
     {
+#ifdef	JAPAN
+	/* Check CTRL-ALT-DEL key */
+	if(KeyEvent->wVirtualScanCode==0x53
+	&&(KeyEvent->dwControlKeyState & RIGHT_ALT_PRESSED
+	|| KeyEvent->dwControlKeyState & LEFT_ALT_PRESSED)
+	&&(KeyEvent->dwControlKeyState & RIGHT_CTRL_PRESSED
+	|| KeyEvent->dwControlKeyState & LEFT_CTRL_PRESSED)){
+		return(0);
+	}
+#endif // JAPAN
         /*.................................. we do need the extended key set */
+
+#if defined(NEC_98)
+#line 807
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 816
 
 
         return  KeyEvent->wVirtualScanCode >= sizeof(Scan1ToKeynumExtended)
@@ -585,14 +664,14 @@ BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD pKeyEvent)
 
               // some keys get mapped to different scan codes (NUMPAD)
               // so get matching scan code
-            pKeyEvent->wVirtualScanCode  = MapVirtualKey(pKeyEvent->wVirtualKeyCode,0);
+            pKeyEvent->wVirtualScanCode  = (USHORT)MapVirtualKey(pKeyEvent->wVirtualKeyCode,0);
             }
         }
 
 
       // Get a Virtual KeyCode, if we don't have one yet
     if (!pKeyEvent->wVirtualKeyCode)  {
-        pKeyEvent->wVirtualKeyCode = MapVirtualKey(pKeyEvent->wVirtualScanCode,3);
+        pKeyEvent->wVirtualKeyCode = (USHORT)MapVirtualKey(pKeyEvent->wVirtualScanCode,3);
         if (!pKeyEvent->wVirtualKeyCode) {
              return FALSE;
              }

@@ -19,19 +19,23 @@ Author:
 Revision History:
 
 --*/
-
+#include <nt.h>
+#include <ntrtl.h>
+#include <nturtl.h>
 #include <windows.h>
 #include <excpt.h>
 #include <stdlib.h>
+#include <vdm.h>
 #include "nt_timer.h"
 #include "monregs.h"
 
-#line 29
+#line 32
 typedef struct _ThreadStartUpParameters {
         LPTHREAD_START_ROUTINE lpStartAddress;
         LPVOID                 lpParameter;
 } THREADSTARTUPPARAMETERS, *PTHREADSTARTUPPARAMETERS;
 
+VOID cpu_createthread(HANDLE Thread, PVDM_TIB VdmTib);
 DWORD ThreadStartupRoutine(PVOID pv);
 
 
@@ -91,16 +95,19 @@ Return Value:
         );
 
     if (Thread) {
+        PVDM_TIB VdmTib;
+
+        VdmTib = (PVDM_TIB)NtCurrentTeb()->Vdm;
 /****************************** STF ********************************/
 #if defined(CCPU) || defined(PIG)
         ccpu386newthread();
 #endif
 /****************************** STF ********************************/
 #ifdef MONITOR
-#line 99
+#line 106
 #error Excluded original conditional branch
 #endif
-#line 101
+#line 108
         if (!(dwCreationFlags & CREATE_SUSPENDED))
             ResumeThread(Thread);
 
@@ -157,14 +164,14 @@ Return Value:
 #if defined(CCPU) || defined(PIG)
     extern void __cdecl ccpu386exitthread(void);
     opennt_prepare_thread_exit();
-#line 155
+#line 162
     ccpu386exitthread();
 #endif
 /****************************** STF ********************************/
 #ifdef MONITOR
-#line 159
+#line 166
 #error Excluded original conditional branch
 #endif
-#line 161
+#line 168
     ExitThread(dwExitCode);
 }
