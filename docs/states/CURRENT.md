@@ -3,7 +3,7 @@
 ## Current Work
 
 **Active: M0 T485 S1** (Ordinary Mode). Windows XP NTVDM baseline upgrade.
-S1 establishes the component inventory, candidate provenance and feasibility.
+S1 establishes the component inventory, candidate provenance and feasibility. The [ordered migration ledger](../etc/evidence/t485-s1/README.md) covers existing components. XP-only additions pass to the next T unless required by an existing batch.
 
 ## Active Packet
 
@@ -32,3 +32,11 @@ S1 establishes the component inventory, candidate provenance and feasibility.
 - [T483](../history/m0-t483-closure.md).
 - [T482](../history/m0-t482-closure.md).
 - [T481](../history/m0-t481-closure.md).
+
+## Current Technical Baseline
+
+The T484 S7 package in the active packet remains the runtime baseline. T485 S1 P1 catalogues 159 migration batches and 3,986 tracked files.
+
+## Recent Governance
+
+Existing-component batches can include a required provider from another component. XP-only additions with independent scope are reserved for the next T.

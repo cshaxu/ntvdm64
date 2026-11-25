@@ -26,6 +26,8 @@ compatibility repairs. Admitted as M0 T485 under [Current](../states/CURRENT.md)
 5. Preserve existing DOS, Win16/WOW, graphics, input, worker, service and launch
    capabilities, and explicitly resolve migration, installation and rollback.
 
+The [ordered migration ledger](../etc/evidence/t485-s1/README.md) covers existing mirror components in host, non-MVDM and guest order. Defer XP-only components to the next T unless a current batch demonstrates a necessary dependency.
+
 ## Acceptance
 
 Bind all tests to the selected coherent package and guest identities. Cover

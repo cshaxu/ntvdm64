@@ -1,5 +1,7 @@
 # Supporting Material
 
+[T485 S1 migration batches](evidence/t485-s1/README.md) indexes the three existing mirror components and their pinned file-level XP path matches.
+
 [T484 S4 guest-copy ownership](evidence/t484-s4-guest-copy-ownership.md) records shared copying, stable ownership, local-directory cleanup and task-suffix regularization.
 
 [T484 S4 multi-dialog preparation](evidence/t484-s4-multi-dialog-preparation.md) records six real paths and CMD program-group contracts.
@@ -1986,3 +1988,7 @@ post-publication targeted checks.
 - [T484 S5 standard and NT-only PIF layouts](evidence/t484-s5-pif-layouts.md).
 - [T484 S5 shared Windows launch INI editor](evidence/t484-s5-shared-ini.md).
 - [T484 S6 clean CMD build and Full acceptance](evidence/t484-s6-clean-cmd-acceptance.md).
+
+[T484 delivery reconciliation](evidence/t484-delivery-reconciliation.md) records the build and release baseline inherited by T485.
+
+[T484 S7 DOS error dialog](evidence/t484-s7-dos-error-dialog-mouse.md) records the accepted mouse behavior in that package.
