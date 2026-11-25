@@ -47,7 +47,7 @@ copy /b /y "%PROBES%\xms-%SOURCE%\U35.COM" "%OUTPUT%\U35.COM" >nul
 if errorlevel 1 exit /b %errorlevel%
 copy /b /y "%PROBES%\xms-%STARTUP%\X35UMB.SYS" "%OUTPUT%\X35UMB.SYS" >nul
 if errorlevel 1 exit /b %errorlevel%
-"%CACHE%\xms_profile_builder.exe" "%OUTPUT%" "%RUNTIME%" %OPTION%
+call "%~dp0prepare-memory-pif.cmd" "%OUTPUT%" xms "%RUNTIME%" %OPTION%
 exit /b %errorlevel%
 :ems
 for %%F in (E30.COM D30.COM P30.COM) do (
@@ -56,7 +56,7 @@ for %%F in (E30.COM D30.COM P30.COM) do (
 )
 call "%~dp0prepare-memory-pif.cmd" "%RUNTIME%"
 if errorlevel 1 exit /b %errorlevel%
-"%CACHE%\pure_dos_pif_builder.exe" "%RUNTIME%"
+call "%~dp0prepare-memory-pif.cmd" "%RUNTIME%" pure
 exit /b %errorlevel%
 :usage
 echo Usage: build-memory-probes.cmd ems output runtime 1>&2

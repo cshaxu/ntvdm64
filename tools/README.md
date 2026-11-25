@@ -116,8 +116,8 @@ startup-fault variants. Reserved INT15 keeps its original low-DOS behavior.
 The output directory must be new and below this repository's build directory.
 Runtime paths keep the caller's original spelling and must fit the original
 PIF64-byte path fields. These commands do not launch the tests or edit guest
-installation files. The remaining pure DOS and XMS writers are available
-through the `memory-profiles` fixture group.
+installation files. EMS, pure DOS and XMS share the same PIF template
+and CMD preparation. The `memory-profiles` fixture group builds their guest probes.
 
 | Directory | Responsibility |
 | --- | --- |

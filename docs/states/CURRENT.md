@@ -30,6 +30,8 @@ interpreter-free acceptance stage.
 
 ## Current Progress
 
+S5 P2 consolidates pure DOS and XMS through the same CMD/PIF owner and retires two native writers. Five variants are byte-identical and two differ only in unused legacy string tails. Actual pure DOS and XMS cases passed. The cached host build and host/addon hashes match the existing release. [Evidence](../etc/evidence/t484-s5-pure-xms-pif-consolidation.md).
+
 S5 P1 consolidates EMS profile generation through the current PIF editor and CMD. Native field tests, byte equivalence, two real EMS cases and a released-tool EMS case passed. All fourteen addons were verified and only PIF.EXE changed. The two host publication sets retained all eleven hashes. [Evidence](../etc/evidence/t484-s5-ems-pif-consolidation.md).
 
 S4 P46 moves the two remaining matrix preparation chains to existing CMD tools and separates profile caches by installation path. Win31 passed all fourteen cases. Win95 startup passed all four configurations, and the supported scheduling controls matched the old preparation. The driver-disabled DOS timeout reproduced with both. Cached full build and both host publication identities verified. [Evidence](../etc/evidence/t484-s4-matrix-preparation.md).

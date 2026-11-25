@@ -1,7 +1,6 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][string]$Observer,
-    [Parameter(Mandatory)][string]$Builder,
     [Parameter(Mandatory)][string]$Probe,
     [Parameter(Mandatory)][string]$LogPrefix,
     [string]$PackageRoot='O:\winnt'
@@ -9,7 +8,7 @@ param(
 $ErrorActionPreference='Stop'
 if ($LogPrefix -notmatch '^[a-z0-9-]+$') { throw 'Invalid prefix' }
 $Observer=(Resolve-Path $Observer).Path
-$Builder=(Resolve-Path $Builder).Path
+$prepare=(Resolve-Path "$PSScriptRoot/../prepare-memory-pif.cmd").Path
 $Probe=(Resolve-Path $Probe).Path
 $PackageRoot=(Resolve-Path $PackageRoot).Path
 $programs=@('run16.exe','ntvdm.exe','ntsrv.exe') | ForEach-Object {Join-Path $PackageRoot $_}
@@ -32,8 +31,8 @@ try {
         if ((Processes).Count) {throw 'Previous runtime remains'}
         $dir=Join-Path $root $name
         New-Item -ItemType Directory $dir | Out-Null
-        & $Builder $dir --oem-paths
-        if($LASTEXITCODE){throw 'PIF builder failed'}
+        & $prepare $dir pure --oem-paths
+        if($LASTEXITCODE){throw 'PIF preparation failed'}
         Copy-Item -LiteralPath (Join-Path $dir 'P30.PIF') -Destination $runtimePif
         foreach($pair in @(@('config.nt','P30.NT'),@('autoexec.nt','P30AUTO.NT'))) {
             $source=Join-Path $PackageRoot $pair[0]

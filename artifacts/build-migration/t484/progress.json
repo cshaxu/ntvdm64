@@ -1,27 +1,17 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f29c60bf6ac382566385234d7b2752ed30e1752a",
+  "head": "7b300276d5b319d57b6a75aa40a251ebfe43e9c6",
   "worktree_status": [
-    " M assets/release/PIF.EXE",
-    " M assets/release/addon-manifest.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M src/addon/pif/README.md",
-    " M src/addon/pif/pif.c",
-    " M test/integration/verify-ccpu-alu-guest.ps1",
-    " M test/integration/verify-ccpu-sign-flags-guest.ps1",
-    " M test/integration/verify-ccpu-transfer-guest.ps1",
-    " M test/integration/verify-original-ems-probe.ps1",
-    " D test/observation/ems_pif_builder.c",
+    " D test/observation/pure_dos_pif_builder.c",
+    " D test/observation/xms_profile_builder.c",
     " M tools/README.md",
+    " M tools/audit/Verify-T420S37PifPaths.ps1",
     " M tools/build-memory-probes.cmd",
     " M tools/build/fixtures/CMakeLists.txt",
-    " M tools/build/fixtures/cpu-guest-probes.cmake",
-    " M tools/build/fixtures/guest-probes.cmake",
-    " M tools/prepare-ems-test.cmd",
-    "?? docs/etc/evidence/t484-s5-ems-pif-consolidation.md",
-    "?? test/observation/fixtures/memory-profile.pif",
-    "?? tools/prepare-memory-pif.cmd"
+    " M tools/prepare-memory-pif.cmd",
+    "?? docs/etc/evidence/t484-s5-pure-xms-pif-consolidation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -602,12 +592,14 @@
       "state": "changed",
       "current_sha256": "172662a8119a98ce056f4e6a6f10d8bab7cedee6f29bac43ad6217d9b0ce5bc4",
       "revisions": [
+        "7b300276d5b319d57b6a75aa40a251ebfe43e9c6",
         "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-cpu-guest.md",
-        "docs/etc/evidence/t484-s3-logon-reader.md"
+        "docs/etc/evidence/t484-s3-logon-reader.md",
+        "docs/etc/evidence/t484-s5-ems-pif-consolidation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -623,12 +615,14 @@
       "state": "changed",
       "current_sha256": "427ce138628ee89ab23ab6847ccd9b45ce9b6067aa0181fdb67f3365d387c965",
       "revisions": [
+        "7b300276d5b319d57b6a75aa40a251ebfe43e9c6",
         "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-cpu-guest.md",
-        "docs/etc/evidence/t484-s3-logon-reader.md"
+        "docs/etc/evidence/t484-s3-logon-reader.md",
+        "docs/etc/evidence/t484-s5-ems-pif-consolidation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -644,12 +638,14 @@
       "state": "changed",
       "current_sha256": "21725ea25860e8edc78877bcc25daa8c9eb0f4f406866d9f31d571595fdfb660",
       "revisions": [
+        "7b300276d5b319d57b6a75aa40a251ebfe43e9c6",
         "60fa2b9fd59e5b53e35efa16412da68a2bfea1ce",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-cpu-guest.md",
-        "docs/etc/evidence/t484-s3-logon-reader.md"
+        "docs/etc/evidence/t484-s3-logon-reader.md",
+        "docs/etc/evidence/t484-s5-ems-pif-consolidation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -806,12 +802,14 @@
       "state": "changed",
       "current_sha256": "ddf30347b8066773e646e72682a7ac18c293143d4888b4148a41bf23f43f6496",
       "revisions": [
+        "7b300276d5b319d57b6a75aa40a251ebfe43e9c6",
         "21d580674d15186a4f9c19954ece674221461a6d",
         "07754446a3b6e3655a23de2e49dc351a9e1e1a13"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-cpu-guest.md",
-        "docs/etc/evidence/t484-s3-ems-environment.md"
+        "docs/etc/evidence/t484-s3-ems-environment.md",
+        "docs/etc/evidence/t484-s5-ems-pif-consolidation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -6684,6 +6682,12 @@
     }
   ],
   "commits": {
+    "7b300276d5b319d57b6a75aa40a251ebfe43e9c6": {
+      "subject": "T484 S5 P1: consolidate EMS profile generation in PIF",
+      "evidence": [
+        "docs/etc/evidence/t484-s5-ems-pif-consolidation.md"
+      ]
+    },
     "f29c60bf6ac382566385234d7b2752ed30e1752a": {
       "subject": "T484: close S4 and admit S5 preparation consolidation",
       "evidence": []
