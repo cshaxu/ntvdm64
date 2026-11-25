@@ -78,7 +78,7 @@ DWORD package_manifest_rows(const wchar_t *path)
 {
     static const char *names[] = {"run16.exe", "ntsrv.exe", "ntcon.exe",
         "ntvdm.exe", "ntvwm.exe", "ntmon.exe", "WOW32.DLL", "VDMREDIR.DLL",
-        "nthook32.dll", "nthook64.dll", "VCDEX.DLL", "NTVDMD.DLL"};
+        "nthook32.dll", "nthook64.dll", "VCDEX.DLL", "NTVDMD.DLL", "VJOY.DLL"};
     static const char *keys[] = {"Name", "RelativePath", "Sha256", "Machine",
         "PackageId", "InputSha256"};
     char input[16385], rows[ARRAYSIZE(names)][6][128], key[32], expected[128];
@@ -130,7 +130,7 @@ DWORD package_manifest_rows(const wchar_t *path)
     } while (take(&p, ','));
     if (!take(&p, ']')) goto close;
     space(&p);
-    if (*p || (seen != 1023 && seen != 2047 && seen != ((1u << ARRAYSIZE(names)) - 1u))) goto close;
+    if (*p || (seen != 1023 && seen != 2047 && seen != 4095 && seen != ((1u << ARRAYSIZE(names)) - 1u))) goto close;
     for (i = 0; i < count; ++i)
         printf("%s %s %s %s %s\n", rows[i][0], rows[i][3], rows[i][4], rows[i][2], rows[i][5]);
     error = ferror(stdout) ? ERROR_WRITE_FAULT : ERROR_SUCCESS;

@@ -45,18 +45,19 @@
 #endif
 #line 42
 #include "emm.h"
+#include "sndblst.h"
 
 #ifdef SEGMENTATION
-#line 45
+#line 46
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 52
+#line 53
 
 IMPORT VOID host_applClose IPT0();
 IMPORT VOID host_terminate IPT0();
 IMPORT VOID SbTerminate IPT0();
 
-#line 56
+#line 57
 void terminate()
 {
 	SAVED BOOL already_called_terminate = FALSE;
@@ -64,7 +65,7 @@ void terminate()
 
 	IMPORT VOID ntvdm_worker_lifecycle_authorize_exit IPT0();
 	ntvdm_worker_lifecycle_authorize_exit();
-#line 61
+#line 62
 	if (already_called_terminate)
 	{
 		assert0( NO, "Error: terminate called twice - exiting" );
@@ -72,39 +73,40 @@ void terminate()
 	}
 	else
 		already_called_terminate = TRUE;
-	SbTerminate();
 
 #ifdef MSWDVR
-#line 70
+#line 71
 #error Unsupported excluded original configuration
 #endif
-#line 72
+#line 73
 
 #ifdef SWIN_SNDBLST_NULL
-#line 74
+#line 75
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
+#else
+        SbTerminate();
 #endif /* SWIN_SNDBLST_NULL */
-#line 76
+#line 79
 
 #ifdef GISP_SVGA
-#line 78
+#line 81
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
-#line 82
+#line 85
 
 	/* terminate COM and LPT devices */
 #ifdef  PC_CONFIG
-#line 85
+#line 88
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #else
-#line 89
+#line 92
 	for (i = 0 ; i < NUM_PARALLEL_PORTS; i++)
-		config_activate(C_LPT1_NAME + i, FALSE);
+                config_activate((IU8)(C_LPT1_NAME + i), FALSE);
 
 	for (i = 0 ; i < NUM_SERIAL_PORTS; i++)
-		config_activate(C_COM1_NAME + i, FALSE);
+                config_activate((IU8)(C_COM1_NAME + i), FALSE);
 #endif
-#line 95
+#line 98
 
 	/* Update the cmos.ram file */
 	cmos_update();
@@ -113,12 +115,12 @@ void terminate()
 
 	gvi_term();	/* close down the video adaptor */
 
-#line 103
+#line 106
 #ifndef NTVDM
-#line 104
+#line 107
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 106
+#line 109
 
 #ifdef LIM
 	host_deinitialise_EM(); /* free memory or file used by EM */
@@ -126,36 +128,36 @@ void terminate()
 
 	config_activate(C_FLOPPY_A_DEVICE, FALSE);
 #ifdef FLOPPY_B
-#line 113
+#line 116
 #error Unsupported excluded original configuration
 #endif /* FLOPPY_B */
-#line 115
+#line 118
 #ifdef SLAVEPC
-#line 116
+#line 119
 #error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
-#line 118
+#line 121
 
 	/*
 	 * Do any cpu-specific termination bits.
 	 */
 #ifdef CPU_30_STYLE
-#line 123
+#line 126
 #error Excluded original CPU_30_STYLE branch
 #endif
-#line 125
+#line 128
 
 #ifdef NOVELL
-#line 127
+#line 130
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
-#line 129
+#line 132
 
 #ifdef LICENSING
-#line 131
+#line 134
 #error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.
 #endif
-#line 133
+#line 136
 	/*
 	 * Do any host-specific termination bits.
 	 */

@@ -275,3 +275,5 @@ setEFLAGS,279
 setEIP,280
 VdmDbgAttach,281
 VdmMapFlat,282
+VdmParametersInfo,283
+VdmGetParametersInfoError,284

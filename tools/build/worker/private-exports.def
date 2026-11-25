@@ -134,3 +134,5 @@ setEFLAGS=_ntvdm_debug_setEFLAGS@4
 setEIP=_ntvdm_debug_setEIP@4
 VdmDbgAttach
 VdmMapFlat=_VdmMapFlat@12
+VdmParametersInfo
+VdmGetParametersInfoError

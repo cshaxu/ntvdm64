@@ -81,6 +81,8 @@ if not defined Vcdex set "Vcdex=%BuildCache%\VCDEX.DLL"
 set "comma="
 call :image NTVDMD.DLL "%BuildCache%\NTVDMD.DLL" x86 332
 if errorlevel 1 goto fail
+call :image VJOY.DLL "%BuildCache%\VJOY.DLL" x86 332
+if errorlevel 1 goto fail
 call :image VCDEX.DLL "%Vcdex%" x86 332
 if errorlevel 1 goto fail
 call :choose run16.exe "%NativeLauncher%"

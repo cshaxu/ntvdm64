@@ -13,8 +13,8 @@ The source baseline for every batch is Windows XP SP1 (5.1.2600.1106), local win
 1. Inventory the present host and guest baseline against an identified Windows
    XP NTVDM edition, including all guest components, build and runtime bindings,
    interfaces, source and binary provenance, and compatibility differences.
-   Determine availability and rights under the [source policy](../etc/operations/policy/source-policy.md)
-   before acquiring or integrating any source or guest components.
+   Use the pinned SP1 tree under the project owner's recorded T485 decision.
+   Identify the source revision and the selected medium for each guest replacement.
 2. Plan and implement the baseline transition across the runtime and all guest
    components as a coherent package. Record each component's selected XP
    counterpart, compatibility, deployment identity and any unavailable or
@@ -40,7 +40,7 @@ Bind all tests to the selected coherent package and guest identities. Cover
 real DOS and Win16 applications, audio output and lifecycle, LFN creation,
 enumeration, rename and error handling, long/non-ASCII paths, concurrency,
 startup and shutdown, and regressions against the pre-upgrade baseline. Record
-unsupported or unavailable components and unresolved rights or source gaps
+unsupported or unavailable components and missing source or media
 without claiming the upgrade complete. Existing guest-immutability and source
 rules apply unless the owner separately authorizes a specific change.
 

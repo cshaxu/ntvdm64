@@ -137,7 +137,7 @@ for %%I in (%names%) do if not exist "%stage%\%%~I" (
 :copied
 set "binary=%stage%"
 if exist "%stage%\system32\run16.exe" (
-  for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe WOW32.DLL VDMREDIR.DLL NTVDMD.DLL) do if exist "%stage%\%%I" goto fail
+  for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe WOW32.DLL VDMREDIR.DLL NTVDMD.DLL VJOY.DLL) do if exist "%stage%\%%I" goto fail
   set "binary=%stage%\system32"
 )
 set "testdest=%stage%\tests"

@@ -73,7 +73,7 @@ foreach(name IN LISTS names)
   list(APPEND disks_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/support/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/support/sources.inc")
 list(REMOVE_ITEM names "xt.c")
 list(REMOVE_DUPLICATES names)
 set(support_objects)

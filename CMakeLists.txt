@@ -74,7 +74,7 @@ if(NTVDM_ARCHITECTURE STREQUAL "x86")
     "-DNTVDM_USE_CCACHE=${NTVDM_USE_CCACHE}" "-DNTVDM_CCACHE_EXECUTABLE=${NTVDM_CCACHE_EXECUTABLE}"
     COMMAND_ERROR_IS_FATAL ANY)
   add_custom_target(worker COMMAND cmd /d /c "${_worker_tree}/run-ninja-parallel.cmd"
-    ntvdm.exe VCDEX.DLL VDMREDIR.dll NTVDMD.DLL nthook32.dll
+    ntvdm.exe VCDEX.DLL VDMREDIR.dll NTVDMD.DLL VJOY.DLL nthook32.dll
     ntvwm.exe ntcon.exe ntmon.exe run16.exe ntsrv.exe
     BYPRODUCTS "${_worker_tree}/ntvdm.lib"
     USES_TERMINAL)

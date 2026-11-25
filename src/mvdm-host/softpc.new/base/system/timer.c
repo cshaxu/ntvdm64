@@ -114,6 +114,8 @@ ULONG EoiPending=0;
 ULONG EoiIntsPending=0;
 ULONG EoiDelayInUse=0;
 int ticks_blocked = 0;
+BOOL JoyTimeLatchPending = FALSE;
+USHORT JoyTimeCountCounterZero;
 #else /* NTVDM */
 #line 114
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
@@ -1029,8 +1031,11 @@ LOCAL void readCounter IFN0()
 	    *  by IdealInterval, and not RealTime. We must give
 	    *  real time granularity
 	    */
-	countread = pcu == &timers[0] ? RealTimeCountCounterZero
-				      : pcu->Count;
+	countread = pcu == &timers[0] ? (JoyTimeLatchPending ?
+                                        JoyTimeCountCounterZero :
+                                        RealTimeCountCounterZero)
+                                      : pcu->Count;
+    JoyTimeLatchPending = FALSE;
 	if (pcu->bcd == BCD)
 	    countread = bin_to_bcd(countread);
 
@@ -2110,6 +2115,33 @@ unsigned long updateCount(void)
 
      return wrap;
 }
+
+unsigned short GetLastTimer0Count(void)
+{
+    return RealTimeCountCounterZero;
+}
+
+unsigned short LatchAndGetTimer0Count(void)
+{
+    controlWordReg(0);
+    return RealTimeCountCounterZero;
+}
+
+void SetNextTimer0Count(unsigned short val)
+{
+    JoyTimeCountCounterZero = val;
+    JoyTimeLatchPending = TRUE;
+    return;
+}
+
+unsigned long GetTimer0InitialCount(void)
+{
+    return timers[0].initialCount;
+}
+
+
+
+
 
 
 #else

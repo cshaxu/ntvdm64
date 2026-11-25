@@ -24,6 +24,7 @@
 #include "dma.h"
 #include "nt_vdd.h"
 #include "nt_vddp.h"
+#include "nt_uis.h"
 
 
 #ifdef ANSI
@@ -545,6 +546,59 @@ BOOL VDDReleaseIrqLine (
         SetLastError(ERROR_INVALID_PARAMETER);
 
     return(Status);
+}
+
+
+BOOL
+HostUndefinedIo(
+    WORD IoAddress
+    )
+/*
+ * HostUndefinedIo
+ *
+ * Called when the client code has issued an I/O instruction to
+ * an address that has the default I/O handler. Instead of just
+ * ignoring it, this routine tries to dynamically load a predefined
+ * VDD to handle it.
+ *
+ * entry:  WORD IoAddress - address of target of IN or OUT
+ *
+ * exit:   TRUE - a VDD was loaded to handle the I/O, the caller
+ *                should retry the operation
+ *         FALSE - either the address is unknown, or an attempt
+ *                 to load the corresponding VDD failed earlier.
+ *
+ */
+{
+    HANDLE hVDD;
+    static BOOL bTriedVJoy = FALSE;
+    static BOOL bTriedVSndblst = FALSE;
+    BOOL bReturn = FALSE;
+
+
+    if (IoAddress == 0x201) {
+        //
+        // Try the Joystick VDD
+        //
+        if (!bTriedVJoy) {
+            bTriedVJoy = TRUE;
+
+            if ((hVDD = SafeLoadLibrary("VJOY.DLL")) == NULL){
+                RcErrorDialogBox(ED_LOADVDD, "VJOY.DLL", NULL);
+            } else {
+                bReturn = TRUE;
+            }
+        }
+
+    } else {
+
+#if 0
+#error XP disables the SoundBlaster VDD
+#endif
+
+    }
+
+    return bReturn;
 }
 
 

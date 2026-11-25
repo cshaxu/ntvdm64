@@ -9,10 +9,44 @@
 
 #define _NT_VDD
 
+#if DBG
+#error Unsupported debug VDD tracing configuration
+#else
+#define VDM_TRACE(Type, wData, lData) TRUE
+#endif
+
 typedef enum {
     VDM_V86,
     VDM_PM
 } VDM_MODE;
+
+typedef enum {
+    VDM_NO_ERROR,
+    VDM_ERROR_INVALID_BUFFER_SIZE,
+    VDM_ERROR_INVALID_FUNCTION,
+} VDM_ERROR_TYPE;
+
+typedef enum {
+    VDM_GET_TICK_COUNT,
+    VDM_GET_TIMER0_INITIAL_COUNT,
+    VDM_GET_LAST_UPDATED_TIMER0_COUNT,
+    VDM_LATCH_TIMER0_COUNT,
+    VDM_SET_NEXT_TIMER0_COUNT,
+} VDM_INFO_TYPE;
+
+BOOL
+VdmParametersInfo(
+    VDM_INFO_TYPE infotype,
+    PVOID pBuffer,
+    ULONG cbBufferSize
+    );
+
+VDM_INFO_TYPE
+VdmGetParametersInfoError(
+    VOID
+    );
+
+
 
 PVOID
 WINAPI VdmMapFlat(
