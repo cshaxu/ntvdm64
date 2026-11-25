@@ -1,17 +1,16 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "f384f6aab45f202ecd8bacd3fb6511fbdcabdee7",
+  "head": "958b969b582f1422c8873f68173d601323018b77",
   "worktree_status": [
     " M artifacts/build-migration/t484/dispositions.json",
     " M docs/etc/README.md",
     " M docs/states/CURRENT.md",
-    " M test/build/Test-PackageIdentityTool.ps1",
-    " M test/observation/isolated_package_cleanup.ps1",
-    " M test/observation/test-product-version-environment.ps1",
-    " M tools/audit/Invoke-ProductVerification.ps1",
-    " M tools/audit/Verify-ProductVersions.mjs",
-    " M tools/build/native/stage-runtime.cmd.in",
-    "?? docs/etc/evidence/t484-s4-product-control-preparation.md"
+    " M test/integration/multitask/verify-win31-empty-profile.ps1",
+    " M test/integration/multitask/verify-win31-progman-dde.ps1",
+    " M test/integration/multitask/verify-win95-launch-matrix.ps1",
+    " M tools/prepare-guest-witness.cmd",
+    " M tools/select-guest-launch.cmd",
+    "?? docs/etc/evidence/t484-s4-win31-profile-preparation.md"
   ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
@@ -2088,6 +2087,7 @@
       "state": "changed",
       "current_sha256": "598fa1bb28d99fb14641766b3442ed1e13f7e29cb51c982588e5463e555776a7",
       "revisions": [
+        "958b969b582f1422c8873f68173d601323018b77",
         "919a1ce7adcd6b79237b0d07ef67a1da29692663",
         "9617bb1044d034368c6362ea65cecfbf6cc3498e",
         "9fcf67eee0f6be324819a4ec9972b3107d2e91f5",
@@ -2108,6 +2108,7 @@
         "docs/etc/evidence/t484-s4-guest-copy-ownership.md",
         "docs/etc/evidence/t484-s4-native-output-preparation.md",
         "docs/etc/evidence/t484-s4-physical-stage.md",
+        "docs/etc/evidence/t484-s4-product-control-preparation.md",
         "docs/etc/evidence/t484-s4-stage-identity-refresh.md",
         "docs/etc/evidence/t484-s4-win31-monitor-preparation.md"
       ],
@@ -4157,6 +4158,7 @@
       "state": "changed",
       "current_sha256": "ae3f1ae1b5bade35cac33753ae2cd0af379d7d297f8261e6553d67161f99e7ef",
       "revisions": [
+        "958b969b582f1422c8873f68173d601323018b77",
         "5c06b5e0dee67f950ca15543f71fcab1d239b323",
         "a9553db754706abe3567c5b60878b7445478bb1c",
         "33374544fc858d7e9d3dadf1e1acd183b7bffbcd",
@@ -4166,7 +4168,8 @@
         "docs/etc/evidence/t484-s3-direct-package-identity.md",
         "docs/etc/evidence/t484-s3-dynamic-compiler-retirement.md",
         "docs/etc/evidence/t484-s3-presentation-contracts.md",
-        "docs/etc/evidence/t484-s3-version-runtime.md"
+        "docs/etc/evidence/t484-s3-version-runtime.md",
+        "docs/etc/evidence/t484-s4-product-control-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -4633,12 +4636,14 @@
       "state": "changed",
       "current_sha256": "b67155bd257a4e89f60d58e12662644afa73444e341fb473b4413b443fc7f62e",
       "revisions": [
+        "958b969b582f1422c8873f68173d601323018b77",
         "60d414d7f2e75a292241ef09caefb353d16915d8",
         "a944e3517dbbcab6cc7e766db5643cb187807780"
       ],
       "evidence": [
         "docs/etc/evidence/t484-s3-version-native.md",
-        "docs/etc/evidence/t484-s3-version-runtime.md"
+        "docs/etc/evidence/t484-s3-version-runtime.md",
+        "docs/etc/evidence/t484-s4-product-control-preparation.md"
       ],
       "completion": "migrated-delivered",
       "decision": {
@@ -6668,6 +6673,12 @@
     }
   ],
   "commits": {
+    "958b969b582f1422c8873f68173d601323018b77": {
+      "subject": "T484 S4 P44: prepare Product Control fixtures through CMD",
+      "evidence": [
+        "docs/etc/evidence/t484-s4-product-control-preparation.md"
+      ]
+    },
     "f384f6aab45f202ecd8bacd3fb6511fbdcabdee7": {
       "subject": "T484 S4 P43: prepare DOS identity compatibility tests through CMD",
       "evidence": [

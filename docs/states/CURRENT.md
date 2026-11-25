@@ -29,6 +29,8 @@ and publication migration is now admitted. Final interpreter-free clean acceptan
 
 ## Current Progress
 
+S4 P45 moves both Win31 profile test callers to shared CMD preparation and the current launcher. Enhanced empty-profile and DDE passed; Standard DDE passed. Cached full build and both published package identities verified. [Evidence](../etc/evidence/t484-s4-win31-profile-preparation.md).
+
 S4 P44 moves Product Control fixture preparation to CMD. Cached full build, package identity tests and the complete Control gate passed. Both published host packages retained all eleven hashes. [Evidence](../etc/evidence/t484-s4-product-control-preparation.md).
 
 S4 P43 moves DOS identity package and guest preparation into existing CMD/native owners. Both real DOSONLY cases collected the earlier task-pairing evidence. Windows retirement still times out. [Evidence](../etc/evidence/t484-s4-dos-identity-preparation.md).
@@ -48,7 +50,7 @@ S1 inventory/design and S2 native host migration are closed. The
 the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S6 clean,
 interpreter-free end-to-end acceptance have not completed.
 
-S4 deliveries through P44 are recorded; detailed results and limitations remain in
+S4 deliveries through P45 are recorded; detailed results and limitations remain in
 these records. Shared primitives alone never close an unverified caller.
 
 | P | Delivered scope and evidence |
@@ -99,7 +101,7 @@ these records. Shared primitives alone never close an unverified caller.
 | [P215 inline C# retirement](../etc/evidence/t484-s3-dynamic-compiler-retirement.md) | Retired3 obsolete samplers; EDIT uses existing native Userenv reader and real logon case passes. Unchanged inherited-environment case fails on both old/new scripts. Frozen319/355;24 supplemental preparation chains remain. |
 | [P216 historical compiler retirement](../etc/evidence/t484-s3-historical-compiler-retirement.md) | Retired5 obsolete compiler scripts; current mouse callback assertions moved to CMD/native and pass, real DPMI suite passes,14 addon raw/release hashes match. Frozen319/355 and24 supplemental chains remain. |
 
-Current census: **355/355 disposed,0 pending**, plus4 supplemental
+Current census: **355/355 disposed,0 pending**, plus2 supplemental
 preparation chains (overlapping scopes, not additive file counts).
 
 P217 retires four superseded Win31 setup scripts and three duplicate tests;

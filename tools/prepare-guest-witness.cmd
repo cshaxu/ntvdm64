@@ -1,7 +1,7 @@
 @echo off
-rem Owned install, evidence owner, package/input image, prompts|controller|load, options.
+rem Owned install, evidence owner, package/input image, prompts|controller|load|empty-profile, options.
 setlocal EnableExtensions DisableDelayedExpansion
-if not "%~4"=="prompts" if not "%~4"=="controller" if not "%~4"=="load" exit /b 2
+if not "%~4"=="prompts" if not "%~4"=="controller" if not "%~4"=="load" if not "%~4"=="empty-profile" exit /b 2
 if "%~4"=="load" if not "%~5"=="pair" if not "%~5"=="none" if not "%~5"=="only" exit /b 2
 set "DEST=%~f1"
 set "TASK=%~f2"
@@ -12,6 +12,7 @@ set /p "OWNER="<"%DEST%\.ntvdm64-guest-owner"
 if /i not "%OWNER%"=="%TASK%" exit /b 2
 if not exist "%TASK%\" exit /b 2
 for %%I in ("%~dp0..") do set "ROOT=%%~fI"
+if "%~4"=="empty-profile" goto empty-profile
 if "%~4"=="controller" call "%~dp0prepare-test-inputs.cmd" -GuestPatch "%DEST%" "%TASK%" "%~f3" VMTEST.EXE
 if errorlevel 1 exit /b 1
 if "%~4"=="prompts" if not "%~5"=="none" if not "%~5"=="empty" if not "%~5"=="seed" exit /b 2
@@ -41,4 +42,15 @@ if "%~4"=="load" if "%~5"=="only" set "VALUE=%DEST%\PATCH\ONLY.PIF"
 "%ROOT%\build\.ninja\fixtures-x64\guest-ini.exe" "%DEST%\WIN.INI" "%TASK%\editor-%KEY%.candidate" set windows "%KEY%" "%VALUE%"
 if errorlevel 1 exit /b 1
 copy /b /y "%TASK%\editor-%KEY%.candidate" "%DEST%\WIN.INI" >nul
+exit /b %errorlevel%
+
+:empty-profile
+if not "%~3"=="profile" if not "%~3"=="dde" exit /b 2
+if not "%~5"=="" exit /b 2
+if exist "%DEST%\PROGMAN.INI\" exit /b 2
+call "%~dp0build-fixtures.cmd" x86 win31-matrix
+if errorlevel 1 exit /b 1
+call "%~dp0prepare-test-inputs.cmd" "%TASK%" "%ROOT%\build\.ninja\fixtures-x86\guest-probes\win31-matrix\%~3.exe" "%~3.exe"
+if errorlevel 1 exit /b 1
+type nul >"%DEST%\PROGMAN.INI"
 exit /b %errorlevel%

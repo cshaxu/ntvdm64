@@ -12,12 +12,14 @@ $copy=& "$repo/test/integration/ntvdm64-386/New-Win31ProbeCopy.ps1" `
  -InstallSource $InstallSource -InstallRoot 'O:/tmp/q31' -OutputRoot $OutputRoot
 $dest=$copy.Destination;$task=$copy.Task
 try {
- [IO.File]::WriteAllBytes("$dest/PROGMAN.INI",[byte[]]@())
- & "$repo/tools/build-fixtures.cmd" x86 win31-matrix
- if($LASTEXITCODE){throw 'Win16 profile witness assembly failed'}
- Copy-Item -LiteralPath "$repo/build/.ninja/fixtures-x86/guest-probes/win31-matrix/profile.exe" -Destination "$task/profile.exe"
+ & "$repo/tools/prepare-guest-witness.cmd" $dest $task profile empty-profile *> "$task/profile-preparation.log"
+ if($LASTEXITCODE){throw 'Win16 empty profile preparation failed'}
+ $mode=if($Case.StartsWith('std-')){1}else{2}
+ $dos=[int]$Case.EndsWith('1')
+ & "$repo/tools/select-guest-launch.cmd" $dest $task 31 $dos 0 install $mode *> "$task/select.log"
+ if($LASTEXITCODE){throw 'Cannot prepare the Win31 launcher profile'}
  & "$repo/test/integration/win31_runtime_matrix_test.ps1" -PackageRoot $PackageRoot -InstallRoot $dest `
-  -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/profile.exe" -Cases $Case
+  -Observer $Observer -OutputRoot "$task/runtime" -WindowsProbeImage "$task/profile.exe" -Cases $Case -PreparedProfile
  $result=[IO.File]::ReadAllBytes("$dest/PATCH/APITEST.BIN")
  if($result.Length -ne 18){throw 'Wrong profile witness size'}
  $r=0..8 | ForEach-Object {[BitConverter]::ToUInt16($result,2*$_)}

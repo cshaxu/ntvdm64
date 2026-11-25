@@ -1978,3 +1978,4 @@ post-publication targeted checks.
 - [T484 S4 Win95 identity preparation](evidence/t484-s4-win95-identity-preparation.md).
 - [T484 S4 DOS identity preparation](evidence/t484-s4-dos-identity-preparation.md).
 - [T484 S4 Product Control test preparation](evidence/t484-s4-product-control-preparation.md).
+- [T484 S4 Win31 profile test preparation](evidence/t484-s4-win31-profile-preparation.md).

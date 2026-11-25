@@ -1,7 +1,12 @@
 @echo off
-rem Owned install, evidence owner, 31|95, DOSONLY, multitask, install|select
+rem Owned install, evidence owner, 31|95, DOSONLY, multitask, install|select, optional Win31 mode 1|2
 setlocal EnableExtensions DisableDelayedExpansion
-if not "%~7"=="" exit /b 2
+if not "%~8"=="" exit /b 2
+if not "%~7"=="" if not "%~3"=="31" exit /b 2
+if not "%~7"=="" if not "%~7"=="1" if not "%~7"=="2" exit /b 2
+if "%~7"=="1" if not "%~5"=="0" exit /b 2
+set "MODE=2"
+if "%~7"=="1" set "MODE=1"
 if not "%~6"=="install" if not "%~6"=="select" exit /b 2
 if not "%~3"=="31" if not "%~3"=="95" exit /b 2
 for %%V in ("%~4" "%~5") do if not "%%~V"=="0" if not "%%~V"=="1" exit /b 2
@@ -28,9 +33,9 @@ mkdir "%TASK%\selector" || exit /b 1
 ) >"%TASK%\selector\run16.cmd"
 if errorlevel 1 exit /b 1
 (
- if "%~3"=="31" echo 2
+ if "%~3"=="31" echo %MODE%
  echo %~4
- echo %~5
+ if not "%MODE%"=="1" echo %~5
 ) >"%TASK%\select-input.txt"
 if errorlevel 1 exit /b 1
 set "PATH=%TASK%\selector;%PATH%"

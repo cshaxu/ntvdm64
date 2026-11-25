@@ -1327,14 +1327,14 @@
     "evidence": "docs/etc/evidence/t484-s3-matrix-profile.md"
   },
   "test/integration/multitask/verify-win31-empty-profile.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "Retained focused profile/DDE regression, not direct Full entry. Existing win31-matrix CMD target replaces NASM; exact output bytes and cache verified. Shared runtime preparation remains pending.",
-    "evidence": "docs/etc/evidence/t484-s3-profile-dde.md"
+    "status": "migrated-delivered",
+    "reason": "P45 shares CMD witness staging and current Win31 launcher selection. Isolated profile and DDE runtime checks passed.",
+    "evidence": "docs/etc/evidence/t484-s4-win31-profile-preparation.md"
   },
   "test/integration/multitask/verify-win31-progman-dde.ps1": {
-    "status": "supplemental-native-producer-pending-staging",
-    "reason": "Retained focused profile/DDE regression, not direct Full entry. Existing win31-matrix CMD target replaces NASM; exact output bytes and cache verified. Shared runtime preparation remains pending.",
-    "evidence": "docs/etc/evidence/t484-s3-profile-dde.md"
+    "status": "migrated-delivered",
+    "reason": "P45 shares CMD witness staging and current Win31 launcher selection. Isolated profile and DDE runtime checks passed.",
+    "evidence": "docs/etc/evidence/t484-s4-win31-profile-preparation.md"
   },
   "test/integration/multitask/verify-win95-guest-only.ps1": {
     "status": "supplemental-native-producer-delivered",
