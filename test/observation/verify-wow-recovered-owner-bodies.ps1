@@ -1,6 +1,8 @@
 param(
     [string]$OriginalRoot = 'O:/repos.external/OpenNT',
     [switch]$InputOnly,
+    [switch]$ProbeOnly,
+    [string]$XpRoot = 'O:/repos.external/winxpscodes',
     [string]$RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 )
 $ErrorActionPreference = 'Stop'
@@ -17,6 +19,22 @@ function Body([string]$text, [string]$name) {
     if ($matches.Count -ne 1) { throw "Expected one complete body: $name" }
     return $matches[0].Value
 }
+if (!$InputOnly) {
+    $xpProbe = @(git -C $XpRoot show 7e945f1167eb589f1d451d54b9a561877feceea9)
+    if ($LASTEXITCODE) { throw 'Pinned XP probe blob unavailable' }
+    $originalProbe = $xpProbe -join "`n"
+    $mirrorProbe = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/non-mvdm/base/ntos/ex/probe.c'))
+    if ($mirrorProbe -match '(?<!\r)\n') { throw 'Non-original LF in probe.c' }
+    $mirrorProbe = $mirrorProbe.Replace("`r`n", "`n")
+    $marker = "VOID`nProbeForWrite ("
+    if (!$originalProbe.Contains($marker) -or !$mirrorProbe.Contains($marker) -or
+        $originalProbe.Substring($originalProbe.IndexOf($marker)).TrimEnd() -cne
+        $mirrorProbe.Substring($mirrorProbe.IndexOf($marker)).TrimEnd()) {
+        throw 'Unregistered XP-owner body change: ProbeForWrite / ProbeForRead'
+    }
+    Write-Output 'XP SP1 owner bodies verified: ProbeForWrite / ProbeForRead'
+}
+if ($ProbeOnly) { return }
 $inputSource = Read-Pinned 'input.c' 'B7656BCA55E892A42BA825BE0324211450AD298C40717E1AE5A889D084467529'
 $classSource = Read-Pinned 'class.c' '82528443BC5F6C227E0E14FE8A9DBC928BA735F98CF3891744C20C8E1604939A'
 $checks = @(
@@ -51,23 +69,6 @@ foreach ($check in $checks) {
     Write-Output "Original owner body verified: $($check.Name)"
 }
 if ($InputOnly) { return }
-$probePath = Join-Path $OriginalRoot 'base/ntos/ex/probe.c'
-if ((Get-FileHash -LiteralPath $probePath -Algorithm SHA256).Hash -ne
-    '0D1CAE414B609C624E6BDF04FA28EBD84FF38DBB9687A63D8BC9E840C2F2372B') {
-    throw 'Original probe.c identity changed'
-}
-$originalProbe = [IO.File]::ReadAllText($probePath)
-$mirrorProbe = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/non-mvdm/base/ntos/ex/probe.c'))
-if ($mirrorProbe -match '(?<!\r)\n') { throw 'Non-original LF in probe.c' }
-$marker = '#undef ProbeForRead'
-if (!$originalProbe.Contains($marker) -or !$mirrorProbe.Contains($marker) -or
-    $originalProbe.Substring($originalProbe.IndexOf($marker)).TrimEnd() -cne
-    $mirrorProbe.Substring($mirrorProbe.IndexOf($marker)).TrimEnd()) {
-    throw 'Unregistered original-owner body change: ProbeForRead'
-}
-Write-Output 'Original owner body verified: ProbeForRead'
-Write-Output 'Five owner bodies match pinned OpenNT after registered boundary adaptations.'
-
 $userPath = Join-Path $OriginalRoot 'windows/core/ntuser/inc/user.h'
 if ((Get-FileHash -LiteralPath $userPath -Algorithm SHA256).Hash -ne
     'ADCF0AC89C4779D9B7908610976F4A47D2385403EDC37496C8AB004B016CF6C1') {
