@@ -133,6 +133,9 @@ IMPORT BOOL bBiosOwnsKbdHdw; // our kbd bios code owns the Keyboard Mutex
 word KbdInt09Seg;
 word KbdInt09Off;
 
+extern void xmsEnableA20Wrapping(void);
+extern void xmsDisableA20Wrapping(void);
+
 #undef LOCAL
 #define LOCAL
 
@@ -146,20 +149,39 @@ BOOL bDelayIntPending = FALSE;
 BOOL bForceDelayInts = FALSE;
 LOCAL BOOL kbd_output_data_read = FALSE;
 LOCAL BOOL kbd_output_irq_acknowledged = FALSE;
-#line 138
+#line 141
 ULONG LastKbdInt=0;
 
-// The Brazilian ABNT keyboard has 104 keys, 2 more than 'usual'
+// Support for extended keyboards has been added to the tables in this file:
 //
-// Key Number   Set 1   Set 2   Set 3   Character
-// ----------   ------ ------- -------  ---------------
-//     56        0x73    0x51    0x51   NumPad .
-//    107        0x7E    0x6D    0x7B   / ? Degree Sign
+// * THE BRAZILIAN ABNT keyboard has 104 keys, 2 more than 'usual'
+//   0x73 ?/ø key, to left of right-Shift
+//   0x7E Numpad . key, below Numpad + key
+//
+//                  Scancode values                      Comment tag
+//   Key Number   Set 1  Set 2  Set 3   Character        for tables
+//   ----------   ------ ------ ------  ---------------  -----------
+//    56 (0x38)    0x73   0x51   0x51   / ? Degree Sign    *56
+//   107 (0x6B)    0x7E   0x6D   0x7B   NumPad .           *107
+//
+// * THE ITALIAN BAV keyboard has two 'extra' keys, 0x7C (00) and 0x7E (000)
+//   0x7C Numpad 0 key to left of 00/Ins and 000/Del keys.
+//   0x7E Numpad Nul key, below Numpad + key
+//   (This is an IBM standard 122-key keyboard, it may not be specifically
+//   Italian).
+//
+//                  Scancode values                      Comment tag
+//   Key Number   Set 1  Set 2  Set 3   Character        for tables
+//   ----------   ------ ------ ------  ---------------  -----------
+//    94 (0x5E)    0x7C   0x68   0x68   NumPad 0           *94
+//   107 (0x6B)    0x7E   0x6D   0x7B   Nul                *107
 // 
 // See also ..\..\host\src\nt_keycd.c and
 //          ..\..\..\dos\v86\cmd\keyb\keybi9c.asm
 //
-#define BRAZILIAN_ABNT_KBD
+// The changes I made to the tables in this file are tagged on the relevant
+// lines by comments (*56), (*94) and/or (*107) as appropriate.
+//                                                                - IanJa.
 
 #endif	/* NTVDM */
 
@@ -195,15 +217,22 @@ ULONG LastKbdInt=0;
 #define KEY_DOWN_EVENT 1
 #define KEY_UP_EVENT 2
 
+#if defined(NEC_98)
+#line 209
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 211
 #define DEFAULT_SCAN_CODE_SET 2
+#endif   //NEC_98
+#line 213
 
-#line 188
+#line 214
 #ifdef REAL_KBD
-#line 189
+#line 215
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register.
-#line 191
+#line 217
 #endif
-#line 192
+#line 218
 
 /*
  * Globally available function pointers
@@ -212,10 +241,16 @@ GLOBAL VOID ( *host_key_down_fn_ptr )();
 GLOBAL VOID ( *host_key_up_fn_ptr )();
 
 #ifndef NTVDM
-#line 200
+#line 226
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
-#line 202
+#line 228
+
+
+
+#if defined(KOREA)
+extern BOOL bIgnoreExtraKbdDisable; // To fix HaNa spread sheet IME hot key problem
+#endif
 
 /*
  * 6805 code buffer:
@@ -262,19 +297,19 @@ GLOBAL VOID ( *host_key_up_fn_ptr )();
 #define	BUFF_6805_PMAX	512
 #define	BUFF_6805_PMASK	(BUFF_6805_PMAX - 1)
 #else
-#line 248
+#line 280
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 251
+#line 283
 #endif	/* NTVDM */
-#line 252
+#line 284
 
 #ifndef macintosh
 static half_word buff_6805[BUFF_6805_PMAX];
 #else
-#line 256
+#line 288
 #error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.
 #endif /* macintosh */
-#line 258
+#line 290
 static int buff_6805_in_ptr,buff_6805_out_ptr;
 
 #ifdef NTVDM
@@ -285,11 +320,11 @@ void Reset6805and8042(void);
 #endif
 
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
-#line 268
+#line 300
 #error Excluded unsupported GISP_CPU configuration
-#line 272
+#line 304
 #endif /* IRET_HOOKS && GISP_CPU */
-#line 273
+#line 305
 
 /* 
    20.5.92 MG
@@ -312,6 +347,11 @@ LOCAL	BOOL	sent_overrun=FALSE;
 #ifndef macintosh
 
 #ifndef REAL_KBD
+#if defined(NEC_98)
+#line 328
+#error Unsupported platform configuration
+#else   //NEC_98
+#line 338
 /* make arrays */
 static int *make_sizes;
 static half_word *make_arrays [134];
@@ -323,16 +363,25 @@ static half_word *break_arrays [134];
 /* set 3 key states (eg. typematic, make/break, make only, typematic make/break) */
 
 static half_word set_3_key_state [127];
+#endif    //NEC_98
+#line 350
 #endif	/* REAL_KBD */
 
+#if defined(NEC_98)
+#line 353
+#error Unsupported platform configuration
+#else   //NEC_98
+#line 359
 static int key_down_count [127];
+#endif  //NEC_98
+#line 361
 
 #else	/* macintosh */
-#line 311
+#line 363
 #error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.
-#line 324
+#line 376
 #endif	/* macintosh */
-#line 325
+#line 377
 
 /* anomalous state handling variables */
 half_word *anomalous_array;
@@ -346,15 +395,16 @@ int held_event_key[HELD_EVENT_MAX];
 int held_event_type[HELD_EVENT_MAX];
 
 #ifdef NTVDM 	/* JonLe NTVDM Mod:remove repeat related vars */
-int scan_code_6805_size,key_set;
+int scan_code_6805_size;
+half_word key_set;
 int input_port_val;
 int waiting_for_next_code, waiting_for_next_8042_code, num_lock_on;
 #else
-#line 342
+#line 395
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 345
+#line 399
 #endif	/* NTVDM */
-#line 346
+#line 400
 int shift_on, l_shift_on, r_shift_on;
 int ctrl_on, l_ctrl_on, r_ctrl_on;
 int alt_on, l_alt_on, r_alt_on;
@@ -369,32 +419,37 @@ half_word *scan_code_6805_array;
 #ifdef PM
 int gate_a20_status;
 #ifndef NTVDM
-#line 360
+#line 414
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 362
+#line 416
 #endif
 
 #ifndef NTVDM
-#line 365
+#line 419
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 367
+#line 421
 
 half_word current_light_pattern;
 
 #ifdef macintosh
-#line 371
+#line 425
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
-#line 384
+#line 438
 #else
 
-#line 386
+#line 440
 half_word scan_codes_temp_area[300];
 
 #ifndef REAL_KBD
 /* Data Tables */
 
+#if defined(NEC_98)
+#line 446
+#error Unsupported platform configuration
+#else   //NEC_98
+#line 476
 /*
  * The meaning of the keytype values as far as I can tell (IanJa) :
  *
@@ -411,26 +466,17 @@ static half_word keytypes[127] =
   0,0,0,0,0,0,0,0,0,0,  /* 20-29 */
   0,0,0,0,0,0,0,0,0,0,  /* 30-39 */
   0,0,0,0,0,0,0,0,0,0,  /* 40-49 */
-#line 407
-#ifdef BRAZILIAN_ABNT_KBD
-  0,0,0,0,0,0,0,0,0,6,  /* 50-59 */
-#else
-#line 410
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 412
+#ifdef	JAPAN
+#line 493
+#error Unsupported platform configuration
+#else // !JAPAN
+  0,0,0,0,0,0,0,0,0,6,  /* 50-59 (*56) */
   0,0,1,6,1,6,6,6,6,6,  /* 60-69 */
+#endif // !JAPAN
   6,6,6,6,6,2,2,6,6,2,  /* 70-79 */
   2,2,6,2,2,2,2,6,6,2,  /* 80-89 */
-  0,0,0,0,6,3,0,0,0,0,  /* 90-99 */
-#line 416
-#ifdef BRAZILIAN_ABNT_KBD
-  0,0,0,0,0,0,0,0,1,6,  /* 100-109 */
-#else
-#line 419
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 421
+  0,0,0,0,0,3,0,0,0,0,  /* 90-99 (*94) */
+  0,0,0,0,0,0,0,0,1,6,  /* 100-109 (*107) */
   0,6,0,0,0,0,0,0,0,0,  /* 110-119 */
   0,0,0,0,4,0,5         /* 120-126 */
 };
@@ -445,6 +491,8 @@ static int set_1_make_sizes [13]=
   1,			/* Alt Case 4 size */
   4			/* Case 5 ctrled size */
 };
+#endif   //NEC_98
+#line 518
 
 static int set_2_make_sizes [13]=
 { 1,2,2,2,4,8,		/* categories 1 to 6 inclusive */
@@ -468,6 +516,11 @@ static int set_3_make_sizes [13]=
   1			/* Case 5 ctrled size */
 };
 
+#if defined(NEC_98)
+#line 542
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 555
 static int set_1_break_sizes [13]=
 { 1,2,2,2,4,0,		/* categories 1 to 6 inclusive */
   0,			/* size for error case - non existant key */
@@ -478,6 +531,8 @@ static int set_1_break_sizes [13]=
   1,			/* Alt Case 4 size */
   0			/* Case 5 ctrled size */
 };
+#endif    //NEC_98
+#line 566
 
 static int set_2_break_sizes [13]=
 { 2,3,3,3,6,0,		/* categories 1 to 6 inclusive */
@@ -503,25 +558,27 @@ static int set_3_break_sizes [13]=
 
 #endif
 
+/*
+ * Map Scancode Set 2 into Scancode Set 1 values: index into this table with
+ * a scancode set 2 to get the corresponding scancode set 1 value.
+ * Non-existent Set 2 scancodes have entry == Set 2 value (trans_8042[x] == x)
+ */
 static half_word trans_8042 [256] =
-{ 0xff,0x43,0x02,0x3f,0x3d,0x3b,0x3c,0x58,0x08,0x44,0x42,0x40,0x3e,0x0f,0x29,0x0f,		/* 00-0f */
-  0x10,0x38,0x2a,0x13,0x1d,0x10,0x02,0x17,0x18,0x19,0x2c,0x1f,0x1e,0x11,0x03,0x1f,		/* 10-1f */
-  0x20,0x2e,0x2d,0x20,0x12,0x05,0x04,0x27,0x28,0x39,0x2f,0x21,0x14,0x13,0x06,0x2f,		/* 20-2f */
-  0x30,0x31,0x30,0x23,0x22,0x15,0x07,0x37,0x38,0x39,0x32,0x24,0x16,0x08,0x09,0x3f,		/* 30-3f */
-  0x40,0x33,0x25,0x17,0x18,0x0b,0x0a,0x47,0x48,0x34,0x35,0x26,0x27,0x19,0x0c,0x4f,		/* 40-4f */
-#line 499
-#ifdef BRAZILIAN_ABNT_KBD
-  0x50,0x73,0x28,0x53,0x1a,0x0d,0x56,0x57,0x3a,0x36,0x1c,0x1b,0x5c,0x2b,0x5e,0x5f,		/* 50-5f */
-  0x60,0x56,0x62,0x63,0x64,0x65,0x0e,0x67,0x68,0x4f,0x6a,0x4b,0x47,0x7e,0x6e,0x6f,		/* 60-6f */
-#else
-#line 503
-#error Non-NTVDM keyboard table profile is not supported
-#line 505
-#endif
-#line 506
+{ 0xff,0x43,0x02,0x3f,0x3d,0x3b,0x3c,0x58,0x64,0x44,0x42,0x40,0x3e,0x0f,0x29,0x59,		/* 00-0f */
+  0x65,0x38,0x2a,0x70,0x1d,0x10,0x02,0x5A,0x66,0x71,0x2c,0x1f,0x1e,0x11,0x03,0x5b,		/* 10-1f */
+  0x20,0x2e,0x2d,0x20,0x12,0x05,0x04,0x5c,0x68,0x39,0x2f,0x21,0x14,0x13,0x06,0x5d,		/* 20-2f */
+  0x69,0x31,0x30,0x23,0x22,0x15,0x07,0x5e,0x6a,0x72,0x32,0x24,0x16,0x08,0x09,0x5f,		/* 30-3f */
+  0x6b,0x33,0x25,0x17,0x18,0x0b,0x0a,0x60,0x6c,0x34,0x35,0x26,0x27,0x19,0x0c,0x61,		/* 40-4f */
+  0x6d,0x73,0x28,0x74,0x1a,0x0d,0x62,0x6e,0x3a,0x36,0x1c,0x1b,0x75,0x2b,0x6e,0x76,		/* 50-5f */
+  0x55,0x56,0x77,0x78,0x79,0x7a,0x0e,0x7b,0x7c,0x4f,0x7d,0x4b,0x47,0x7e,0x7f,0x6f,    		/* 60-6f */
   0x52,0x53,0x50,0x4c,0x4d,0x48,0x01,0x45,0x57,0x4e,0x51,0x4a,0x37,0x49,0x46,0x54,		/* 70-7f */
   0x80,0x81,0x82,0x41,0x54,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,		/* 80-8f */
+#ifdef	JAPAN
+#line 607
+#error Unsupported platform configuration
+#else // !JAPAN
   0x90,0x91,0x92,0x93,0x94,0x95,0x96,0x97,0x98,0x99,0x9a,0x9b,0x9c,0x9d,0x9e,0x9f,		/* 90-9f */
+#endif // !JAPAN
   0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,		/* a0-af */
   0xb0,0xb1,0xb2,0xb3,0xb4,0xb5,0xb6,0xb7,0xb8,0xb9,0xba,0xbb,0xbc,0xbd,0xbe,0xbf,		/* b0-bf */
   0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,		/* c0-cf */
@@ -531,29 +588,18 @@ static half_word trans_8042 [256] =
 };
 
 #ifndef REAL_KBD
+/*
+ * Index with Scancode Set 3 to get keyboard position number.
+ */
 static half_word set_3_reverse_lookup [256]=
 { 0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x70,0x6e,0x00,0x00,0x00,0x00,0x10,0x01,0x71,		/* 00-0f */
   0x00,0x3a,0x2c,0x2d,0x1e,0x11,0x02,0x72,0x00,0x3c,0x2e,0x20,0x1f,0x12,0x03,0x73,		/* 10-1f */
   0x00,0x30,0x2f,0x21,0x13,0x05,0x04,0x74,0x00,0x3d,0x31,0x22,0x15,0x14,0x06,0x75,		/* 20-2f */
   0x00,0x33,0x32,0x24,0x23,0x16,0x07,0x76,0x00,0x3e,0x34,0x25,0x17,0x08,0x09,0x77,		/* 30-3f */
   0x00,0x35,0x26,0x18,0x19,0x0b,0x0a,0x78,0x00,0x36,0x37,0x27,0x28,0x1a,0x0c,0x79,		/* 40-4f */
-#line 524
-#ifdef BRAZILIAN_ABNT_KBD
-  0x00,0x38,0x29,0x2a,0x1b,0x0d,0x7a,0x7c,0x40,0x39,0x2b,0x1c,0x1d,0x00,0x7b,0x7d,		/* 50-5f */
-#else
-#line 527
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 529
-  0x54,0x4f,0x7e,0x53,0x4c,0x51,0x0f,0x4b,0x00,0x5d,0x59,0x5c,0x5b,0x56,0x50,0x55,		/* 60-6f */
-#line 530
-#ifdef BRAZILIAN_ABNT_KBD
-  0x63,0x68,0x62,0x61,0x66,0x60,0x5a,0x5f,0x00,0x6c,0x67,0x6b,0x6a,0x65,0x64,0x00,		/* 70-7f */
-#else
-#line 533
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 535
+  0x00,0x38,0x29,0x2a,0x1b,0x0d,0x7a,0x7c,0x40,0x39,0x2b,0x1c,0x1d,0x00,0x7b,0x7d,		/* 50-5f (*56) */
+  0x54,0x4f,0x7e,0x53,0x4c,0x51,0x0f,0x4b,0x5e,0x5d,0x59,0x5c,0x5b,0x56,0x50,0x55,		/* 60-6f (*94) */
+  0x63,0x68,0x62,0x61,0x66,0x60,0x5a,0x5f,0x00,0x6c,0x67,0x6b,0x6a,0x65,0x64,0x00,		/* 70-7f (*107) */
   0x00,0x00,0x00,0x00,0x69,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,		/* 80-8f */
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,		/* 90-9f */
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,		/* a0-af */
@@ -564,103 +610,66 @@ static half_word set_3_reverse_lookup [256]=
   0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00 		/* f0-ff */
 };
 
+/*
+ * index by key number to get default key state:
+ *   0 = not a key, 1 = typematic,  2 = make/break,  3 = make only
+ */
 static half_word set_3_default_key_state [127]=
-{ 0x00,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x00,0x01,		/* 00-0f */
+{ 0x00,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,		/* 00-0f */
   0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x02,0x01,		/* 10-1f */
   0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x02,0x01,0x01,0x01,		/* 20-2f */
-#line 549
-#ifdef BRAZILIAN_ABNT_KBD
-  0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x02,0x02,0x00,0x02,0x01,0x03,0x00,		/* 30-3f */
-#else
-#line 552
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 554
+  0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x01,0x02,0x02,0x00,0x02,0x01,0x03,0x00,		/* 30-3f (*56) */
   0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x03,0x01,0x00,0x00,0x01,		/* 40-4f */
-  0x03,0x03,0x00,0x01,0x01,0x03,0x03,0x00,0x00,0x01,0x03,0x03,0x03,0x03,0x00,0x03,		/* 50-5f */
-#line 556
-#ifdef BRAZILIAN_ABNT_KBD
-  0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x01,0x03,0x03,0x00,0x03,0x00,		/* 60-6f */
-#else
-#line 559
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 561
+  0x03,0x03,0x00,0x01,0x01,0x03,0x03,0x00,0x00,0x01,0x03,0x03,0x03,0x03,0x03,0x03,		/* 50-5f */
+  0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x01,0x01,0x03,0x00,0x03,0x00,		/* 60-6f (*107) */
   0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03,0x03           		/* 70-7d */
 };
 
+/*
+ * Index by key number, to get scancode set 1 (0 if none)
+ */
+#if defined(NEC_98)
+#line 661
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 680
 static half_word most_set_1_make_codes [127]=
-{ 0x00,0x29,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x00,0x0e,		/* 00-0f */
+{ 0x00,0x29,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x7d,0x0e,		/* 00-0f */
   0x0f,0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1a,0x1b,0x2b,0x3a,0x1e,		/* 10-1f */
   0x1f,0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x2b,0x1c,0x2a,0x56,0x2c,0x2d,		/* 20-2f */
-#line 568
-#ifdef BRAZILIAN_ABNT_KBD
-  0x2e,0x2f,0x30,0x31,0x32,0x33,0x34,0x35,0x73,0x36,0x1d,0x00,0x38,0x39,0x38,0x00,		/* 30-3f */
-#else
-#line 571
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 573
+  0x2e,0x2f,0x30,0x31,0x32,0x33,0x34,0x35,0x73,0x36,0x1d,0x00,0x38,0x39,0x38,0x00,		/* 30-3f (*56) */
   0x1d,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x52,0x53,0x00,0x00,0x4b,		/* 40-4f */
-  0x47,0x4f,0x00,0x48,0x50,0x49,0x51,0x00,0x00,0x4d,0x45,0x47,0x4b,0x4f,0x00,0x35,		/* 50-5f */
-#line 575
-#ifdef BRAZILIAN_ABNT_KBD
-  0x48,0x4c,0x50,0x52,0x37,0x49,0x4d,0x51,0x53,0x4a,0x4e,0x7e,0x1c,0x00,0x01,0x00,		/* 60-6f */
-#else
-#line 578
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 580
+  0x47,0x4f,0x00,0x48,0x50,0x49,0x51,0x00,0x00,0x4d,0x45,0x47,0x4b,0x4f,0x7c,0x35,		/* 50-5f */
+  0x48,0x4c,0x50,0x52,0x37,0x49,0x4d,0x51,0x53,0x4a,0x4e,0x7e,0x1c,0x00,0x01,0x00,		/* 60-6f (*107) */
   0x3b,0x3c,0x3d,0x3e,0x3f,0x40,0x41,0x42,0x43,0x44,0x57,0x58,0x00,0x46,0x00			/* 70-7e */
 };
+#endif    //NEC_98
+#line 691
 
 static half_word most_set_2_make_codes [127]=
-{ 0x00,0x0e,0x16,0x1e,0x26,0x25,0x2e,0x36,0x3d,0x3e,0x46,0x45,0x4e,0x55,0x00,0x66,		/* 00-0f */
+{ 0x00,0x0e,0x16,0x1e,0x26,0x25,0x2e,0x36,0x3d,0x3e,0x46,0x45,0x4e,0x55,0x6a,0x66,		/* 00-0f */
   0x0d,0x15,0x1d,0x24,0x2d,0x2c,0x35,0x3c,0x43,0x44,0x4d,0x54,0x5b,0x5d,0x58,0x1c,		/* 10-1f */
+#ifdef	JAPAN
+#line 696
+#error Unsupported platform configuration
+#else // !JAPAN
   0x1b,0x23,0x2b,0x34,0x33,0x3b,0x42,0x4b,0x4c,0x52,0x5d,0x5a,0x12,0x61,0x1a,0x22,		/* 20-2f */
-#line 587
-#ifdef BRAZILIAN_ABNT_KBD
-  0x21,0x2a,0x32,0x31,0x3a,0x41,0x49,0x4a,0x51,0x59,0x14,0x00,0x11,0x29,0x11,0x00,		/* 30-3f */
-#else
-#line 590
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 592
+  0x21,0x2a,0x32,0x31,0x3a,0x41,0x49,0x4a,0x51,0x59,0x14,0x00,0x11,0x29,0x11,0x00,		/* 30-3f (*56) */
   0x14,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x70,0x71,0x00,0x00,0x6b,		/* 40-4f */
-  0x6c,0x69,0x00,0x75,0x72,0x7d,0x7a,0x00,0x00,0x74,0x77,0x6c,0x6b,0x69,0x00,0x4a,		/* 50-5f */
-#line 594
-#ifdef BRAZILIAN_ABNT_KBD
-  0x75,0x73,0x72,0x70,0x7c,0x7d,0x74,0x7a,0x71,0x7b,0x79,0x6d,0x5a,0x00,0x76,0x00,		/* 60-6f */
-#else
-#line 597
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 599
+#endif // !JAPAN
+  0x6c,0x69,0x00,0x75,0x72,0x7d,0x7a,0x00,0x00,0x74,0x77,0x6c,0x6b,0x69,0x68,0x4a,		/* 50-5f */
+  0x75,0x73,0x72,0x70,0x7c,0x7d,0x74,0x7a,0x71,0x7b,0x79,0x6d,0x5a,0x00,0x76,0x00,		/* 60-6f (*107) */
   0x05,0x06,0x04,0x0c,0x03,0x0b,0x83,0x0a,0x01,0x09,0x78,0x07,0x00,0x7e,0x00			/* 70-7e */
 };
 
 static half_word most_set_3_make_codes [127]=
-{ 0x00,0x0e,0x16,0x1e,0x26,0x25,0x2e,0x36,0x3d,0x3e,0x46,0x45,0x4e,0x55,0x00,0x66,		/* 00-0f */
+{ 0x00,0x0e,0x16,0x1e,0x26,0x25,0x2e,0x36,0x3d,0x3e,0x46,0x45,0x4e,0x55,0x5d,0x66,		/* 00-0f */
   0x0d,0x15,0x1d,0x24,0x2d,0x2c,0x35,0x3c,0x43,0x44,0x4d,0x54,0x5b,0x5c,0x14,0x1c,		/* 10-1f */
   0x1b,0x23,0x2b,0x34,0x33,0x3b,0x42,0x4b,0x4c,0x52,0x53,0x5a,0x12,0x13,0x1a,0x22,		/* 20-2f */
-#line 606
-#ifdef BRAZILIAN_ABNT_KBD
-  0x21,0x2a,0x32,0x31,0x3a,0x41,0x49,0x4a,0x51,0x59,0x11,0x00,0x19,0x29,0x39,0x00,		/* 30-3f */
-#else
-#line 609
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 611
+  0x21,0x2a,0x32,0x31,0x3a,0x41,0x49,0x4a,0x51,0x59,0x11,0x00,0x19,0x29,0x39,0x00,		/* 30-3f (*56) */
   0x58,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x67,0x64,0x00,0x00,0x61,		/* 40-4f */
-  0x6e,0x65,0x00,0x63,0x60,0x6f,0x6d,0x00,0x00,0x6a,0x76,0x6c,0x6b,0x69,0x00,0x77,		/* 50-5f */
-#line 613
-#ifdef BRAZILIAN_ABNT_KBD
-  0x75,0x73,0x72,0x70,0x7e,0x7d,0x74,0x7a,0x71,0x84,0x7c,0x7b,0x79,0x00,0x08,0x00,		/* 60-6f */
-#else
-#line 616
-#error Non-NTVDM keyboard table profile is not supported
-#endif
-#line 618
+  0x6e,0x65,0x00,0x63,0x60,0x6f,0x6d,0x00,0x00,0x6a,0x76,0x6c,0x6b,0x69,0x68,0x77,		/* 50-5f */
+  0x75,0x73,0x72,0x70,0x7e,0x7d,0x74,0x7a,0x71,0x84,0x7c,0x7b,0x79,0x00,0x08,0x00,		/* 60-6f (*107) */
   0x07,0x0f,0x17,0x1f,0x27,0x2f,0x37,0x3f,0x47,0x4f,0x56,0x5e,0x57,0x5f,0x62			/* 70-7e */
 };
 
@@ -746,14 +755,14 @@ static half_word buff_overrun_6805 [4]=
 };
 
 #endif /* macintosh */
-#line 703
+#line 802
 
 #ifdef SECURE /* { */
-#line 705
+#line 804
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
-#line 786
+#line 885
 #endif /* SECURE } */
-#line 787
+#line 886
 
 LOCAL VOID calc_buff_6805_left IPT0();
 LOCAL VOID do_host_key_down IPT1( int,key );
@@ -767,11 +776,11 @@ LOCAL INT buffer_status_8042 IPT0();
 #endif
 
 #ifdef SECURE /* { */
-#line 800
+#line 899
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
-#line 904
+#line 1003
 #endif /* SECURE } */
-#line 905
+#line 1004
 
 /*
  * 6805 code buffer access procedures
@@ -819,14 +828,14 @@ LOCAL VOID add_to_6805_buff IFN2(half_word,code,int, immediate)
 	 /* queue at start */
 	 buff_6805_out_ptr = (buff_6805_out_ptr - 1) & BUFF_6805_PMASK;
          nt_keyboard_history.device[buff_6805_out_ptr]=0; /* DIV-317: response, not user input. */
-#line 951
+#line 1050
 	 buff_6805[buff_6805_out_ptr]=code;
 	 }
       else
 	 {
 	 /* queue at end */
         nt_keyboard_history.device[buff_6805_in_ptr]=nt_keyboard_history.active; /* DIV-317 */
-#line 956
+#line 1055
 	buff_6805[buff_6805_in_ptr]=code;
 	buff_6805_in_ptr = (buff_6805_in_ptr + 1) & BUFF_6805_PMASK;
 	}
@@ -848,7 +857,7 @@ ch=buff_6805[buff_6805_out_ptr];
 #ifdef NTVDM
 	nt_keyboard_history.translated=nt_keyboard_history.device[buff_6805_out_ptr]; /* DIV-317 */
 	nt_keyboard_history.device[buff_6805_out_ptr]=0;
-#line 975
+#line 1074
 	key_marker_buffer[buff_6805_out_ptr]=0;
 #endif
 
@@ -872,11 +881,11 @@ LOCAL VOID clear_buff_6805 IFN0()
 	   not grabbing it from the global allocation. */
 
 #ifdef macintosh
-#line 998
+#line 1097
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
-#line 1001
+#line 1100
 #endif /* macintosh */
-#line 1002
+#line 1101
 
 	buff_6805_in_ptr=buff_6805_out_ptr;
 	free_6805_buff_size=BUFF_6805_VMAX;
@@ -886,7 +895,7 @@ LOCAL VOID clear_buff_6805 IFN0()
 
     /* Clear key marker buffer */
     mvdm_keyboard_history_clear_ring(&nt_keyboard_history); /* DIV-317 */
-#line 1010
+#line 1109
     {
 	register int loop = sizeof(key_marker_buffer) / sizeof(unsigned char);
 	while(--loop >= 0) key_marker_buffer[loop] = 0;
@@ -910,7 +919,14 @@ LOCAL VOID mark_key_codes_6805_buff IFN1(int, start)
 	if(start)
 	{
 	    start_offset = buff_6805_in_ptr;
+#if defined(NEC_98)
+#line 1133
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 1135
 	    if(++key_marker_value > 127) key_marker_value = 1;
+#endif   //NEC_98
+#line 1137
 	}
 	else
 	{
@@ -943,7 +959,7 @@ LOCAL VOID mark_key_codes_6805_buff IFN1(int, start)
  * and also clears down these buffers 
  */
 
-#line 1066
+#line 1169
 GLOBAL int keys_in_6805_buff(int *part_key_transferred)
 {
     int keys_in_buffer = held_event_count;  /* key to yet processed by adapter */
@@ -1004,13 +1020,13 @@ GLOBAL unsigned PendingKeyboardHistory(void)
         output_full && !kbd_output_data_read,waiting_for_upcode);
 }
 
-#line 1119
+#line 1222
 void Reset6805and8042(void)
 {
     int key;
     int cancel_irq = output_full && nt_keyboard_history.output; /* DIV-321 */
 
-#line 1123
+#line 1226
     /* Reset 6805 */
 
     buff_6805_out_ptr=0;
@@ -1023,11 +1039,18 @@ void Reset6805and8042(void)
     //line after the following function call (DAB)
     //host_kb_light_on(7);
 
+#if defined(NEC_98)
+#line 1239
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 1245
     for(key = 0; key < 127; key++)
     {
 	set_3_key_state [key] = set_3_default_key_state[key];
 	key_down_count[key]=0;
     }
+#endif  //NEC_98
+#line 1251
 
     waiting_for_next_code=waiting_for_next_8042_code=FALSE;
 
@@ -1038,14 +1061,27 @@ void Reset6805and8042(void)
 
     /* Reset 8042 */
 
+#if defined(NEC_98)
+#line 1262
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 1264
     kbd_status = 0x14;
+#endif   //NEC_98
+#line 1266
     cmd_byte_8042 = 0x45;
     keyboard_disabled = keyboard_interface_disabled = FALSE;
     op_port_remembered_bits = 0xc;
 
     pending_8042 = output_full = in_anomalous_state = FALSE;
-#line 1156
+#if defined(NEC_98)
+#line 1272
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 1275
     int_enabled = translating = TRUE;
+#endif   //NEC_98
+#line 1277
     scanning_discontinued = FALSE;
     held_event_count = 0;
 
@@ -1053,7 +1089,7 @@ void Reset6805and8042(void)
     //host_kb_light_off (5);
     num_lock_on = TRUE;
     mvdm_keyboard_reset_pending_irq(cancel_irq);
-#line 1163
+#line 1283
 }
 
 #endif /* NTVDM */
@@ -1103,6 +1139,10 @@ LOCAL VOID init_key_arrays IFN0()
 {
 int key;
 half_word *next_free, *extra_ptr, *extra_bk_ptr;
+#ifdef  JAPAN
+#line 1333
+#error Unsupported platform configuration
+#endif // JAPAN
 
 sure_note_trace1(AT_KBD_VERBOSE,"Keyboard key set initialisation: key set %d",key_set);
 next_free = scan_codes_temp_area;
@@ -1111,7 +1151,14 @@ switch (key_set)
 	case 1:
 		make_sizes=set_1_make_sizes;
 		break_sizes=set_1_break_sizes;
+#if defined(NEC_98)
+#line 1346
+#error Unsupported platform configuration
+#else   //NEC_98
+#line 1348
 		for (key=0;key<127;key++)
+#endif  //NEC_98
+#line 1350
 			{
 			switch (keytypes[key])
 				{
@@ -1136,10 +1183,24 @@ switch (key_set)
 		extra_bk_ptr=set_1_extra_bk_codes;
 		break;
 	case 2:
+#ifndef NEC_98
+#ifdef	JAPAN
+#line 1376
+#error Unsupported platform configuration
+#endif // JAPAN
+#endif    //NEC_98
+#line 1383
 		make_sizes=set_2_make_sizes;
 		break_sizes=set_2_break_sizes;
 		for (key=0;key<127;key++)
 			{
+#ifndef NEC_98
+#ifdef	JAPAN
+#line 1389
+#error Unsupported platform configuration
+#endif // JAPAN
+#endif    //NEC_98
+#line 1427
 			switch (keytypes[key])
 				{
 				case 0:
@@ -1182,6 +1243,7 @@ switch (key_set)
 		break;
 	} /* end of switch */
 
+#ifndef NEC_98
 	make_arrays[124]=extra_ptr;
 	extra_ptr+=make_sizes[4];
 	make_arrays[126]=extra_ptr;
@@ -1217,6 +1279,8 @@ switch (key_set)
 	extra_bk_ptr+=break_sizes[11];
 	break_arrays[CASE_5_CTRLED_ARRAY]=extra_bk_ptr;
 	extra_bk_ptr+=break_sizes[12];
+#endif   //NEC_98
+#line 1506
 } /* end of init_key_arrays () */
 
 
@@ -1224,17 +1288,17 @@ switch (key_set)
 
 GLOBAL VOID host_key_down IFN1(int,key)
 #ifdef SECURE /* { */
-#line 1333
+#line 1513
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
-#line 1351
+#line 1531
 #endif /* SECURE } */
-#line 1352
+#line 1532
 {
 if (scanning_discontinued)
 	{
 	held_event_type[held_event_count]=KEY_DOWN_EVENT;
         nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */
-#line 1356
+#line 1536
 	held_event_key[held_event_count++]=key;
 
 	/* check for held event buffer overflow (SHOULD never happen) */
@@ -1258,26 +1322,26 @@ else if (!keyboard_disabled) {
            }
     }
 #else
-#line 1379
+#line 1559
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1383
+#line 1563
 #endif
-#line 1384
+#line 1564
 }
 
 GLOBAL VOID host_key_up IFN1(int,key)
 #ifdef SECURE /* { */
-#line 1388
+#line 1568
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
-#line 1406
+#line 1586
 #endif /* SECURE } */
-#line 1407
+#line 1587
 {
 if (scanning_discontinued)
 	{
 	held_event_type[held_event_count]=KEY_UP_EVENT;
         nt_keyboard_history.held[held_event_count]=nt_keyboard_history.active; /* DIV-317 */
-#line 1411
+#line 1591
 	held_event_key[held_event_count++]=key;
 
 	/* check for held event buffer overflow (SHOULD never happen) */
@@ -1290,11 +1354,11 @@ if (scanning_discontinued)
 #ifdef NTVDM
 else if (!keyboard_disabled && key_down_count[key]) {
 #else
-#line 1423
+#line 1603
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1425
+#line 1605
 #endif
-#line 1426
+#line 1606
 #ifdef NTVDM
        LastKeyDown = -1;
 #endif
@@ -1335,11 +1399,11 @@ if (!keyboard_disabled)
 #ifdef NTVDM
 		mark_key_codes_6805_buff(TRUE);
 #else
-#line 1466
+#line 1646
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1473
+#line 1653
 #endif	/* NTVDM */
-#line 1474
+#line 1654
 		keytype=keytypes[key];
 		overrun=FALSE;
 		if (in_anomalous_state)
@@ -1528,14 +1592,14 @@ if (!keyboard_disabled)
 		    }
 
 #ifndef NTVDM	/* JonLe NTVDM Mod */
-#line 1662
+#line 1842
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1671
+#line 1856
 #else
-#line 1672
+#line 1857
 		mark_key_codes_6805_buff(FALSE);
 #endif	/* NTVDM */
-#line 1674
+#line 1859
 
 		if (free_6805_buff_size < BUFF_6805_VMAX) 
 		    {
@@ -1543,10 +1607,10 @@ if (!keyboard_disabled)
 		    }
 
 #ifndef NTVDM
-#line 1681
+#line 1866
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
-#line 1683
+#line 1868
 
 	} /* end of if not disabled */
 } /* end of do_host_key_down */
@@ -1563,30 +1627,30 @@ sure_note_trace1(AT_KBD_VERBOSE,"key up:%d",key);
 if (!keyboard_disabled)
 	{
 #ifdef DEMO_COPY
-#line 1699
+#line 1884
 #error Unsupported excluded original configuration
 #endif
-#line 1701
+#line 1886
 	if( key_down_count[key] == 0){
 		/*
 		** This will ignore extra key ups.
 		*/
 #ifndef PROD
-#line 1706
+#line 1891
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1708
+#line 1893
 	}
 	else 
 	{
 		key_down_count[key] =  0;
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-#line 1714
+#line 1899
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1718
+#line 1903
 #endif	/* NTVDM */
-#line 1719
+#line 1904
 
 		keytype=keytypes[key];
 		overrun=FALSE;
@@ -1605,6 +1669,7 @@ if (!keyboard_disabled)
 					break;
 				case 2:
 					temp_arr_size=0;
+                                        temp_arr_array=(half_word *) -1;
 					if (in_anomalous_state && (anom_key == key))
 						{
 						in_anomalous_state=FALSE;
@@ -1638,8 +1703,10 @@ if (!keyboard_disabled)
 					scan_code_6805_size=temp_arr_size;
 					scan_code_6805_array=temp_arr_array;
 					break;
+
 				case 3:
 					temp_arr_size=0;
+                                        temp_arr_array=(half_word *) -1;
 					if (in_anomalous_state && (anom_key == key))
 						{
 						in_anomalous_state = FALSE;
@@ -1668,6 +1735,7 @@ if (!keyboard_disabled)
 					scan_code_6805_size=temp_arr_size;
 					scan_code_6805_array=temp_arr_array;
 					break;
+
 				case 4:
 					if (shift_on || ctrl_on || alt_on)
 						{
@@ -1763,14 +1831,14 @@ LOCAL VOID AddTo6805BuffImm IFN1(half_word,code)
 {
   add_to_6805_buff(code,IMMEDIATE_OUTPUT);
   output_full = FALSE;
-#line 1895
+#line 2084
   KbdData = -1;
 }
 #else
-#line 1898
+#line 2087
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 1900
+#line 2089
 
 LOCAL VOID cmd_to_6805 IFN1(half_word,cmd_code)
 {
@@ -1802,8 +1870,11 @@ if (waiting_for_next_code)
 				 else
 					{
                                          AddTo6805BuffImm(ACK_CODE);
+#ifndef NEC_98
 					 key_set=cmd_code;
 					 init_key_arrays();
+#endif   //NEC_98
+#line 2124
 					}
 				}
 			break;
@@ -1811,7 +1882,7 @@ if (waiting_for_next_code)
 			sure_note_trace2(AT_KBD_VERBOSE,"Keyboard key type change: key 0x%x, new type %d",cmd_code,set_3_key_type_change_dest);
                         AddTo6805BuffImm(ACK_CODE);
 			key_to_change=set_3_reverse_lookup[cmd_code];
-			set_3_key_state[key_to_change]=set_3_key_type_change_dest;
+			set_3_key_state[key_to_change]=(half_word)set_3_key_type_change_dest;
 			break;
 		case SET_STATUS_INDICATORS_SEQUENCE:
 			if ((cmd_code & 0xf8) == 0)
@@ -1819,30 +1890,30 @@ if (waiting_for_next_code)
 			sure_note_trace1(AT_KBD_VERBOSE,"Changing kbd lights to :%x",cmd_code);
 			AddTo6805BuffImm(ACK_CODE);
 #ifdef NTVDM
-			host_kb_light_on ((cmd_code & 0x07) | 0xf0);
+			host_kb_light_on ((IU8)((cmd_code & 0x07) | 0xf0));
 #else
-#line 1950
+#line 2141
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1953
+#line 2144
 #endif
-#line 1954
+#line 2145
 			}
 			break;
 		case SET_RATE_DELAY_SEQUENCE:
 #ifndef NTVDM	/* JonLe Mod */
-#line 1958
+#line 2149
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1971
+#line 2162
 #else	/* NTVDM */
 
-#line 1973
+#line 2164
 			if ((cmd_code & 0x80)==0)
 			{
                         AddTo6805BuffImm(ACK_CODE);
 			}
 
 #endif	/* NTVDM */
-#line 1979
+#line 2170
 			break;
 		}
 		waiting_for_next_code = FALSE;
@@ -1871,11 +1942,11 @@ if (waiting_for_next_code)
 			}
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-#line 2007
+#line 2198
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2010
+#line 2201
 #endif	/* NTVDM */
-#line 2011
+#line 2202
 
 		keyboard_disabled=TRUE;
 		sure_note_trace0(AT_KBD_VERBOSE,"Keyboard disabled");
@@ -1890,10 +1961,10 @@ if (waiting_for_next_code)
                 AddTo6805BuffImm(ACK_CODE);
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-#line 2025
+#line 2216
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
-#line 2027
+#line 2218
 
 		keyboard_disabled=FALSE;
 		sure_note_trace0(AT_KBD_VERBOSE,"Keyboard enabled");
@@ -1930,10 +2001,10 @@ if (waiting_for_next_code)
                 AddTo6805BuffImm(ACK_CODE);
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-#line 2063
+#line 2254
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
-#line 2065
+#line 2256
 
 		next_code_sequence_number=SCAN_CODE_CHANGE_SEQUENCE;
 		held_event_count=0;
@@ -1962,11 +2033,11 @@ if (waiting_for_next_code)
 			}
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-#line 2093
+#line 2284
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2096
+#line 2287
 #endif	/* NTVDM */
-#line 2097
+#line 2288
 		keyboard_disabled=FALSE;
 		sure_note_trace0(AT_KBD_VERBOSE,"Keyboard set to default (and enabled)");
 		break;
@@ -1978,10 +2049,10 @@ if (waiting_for_next_code)
                 AddTo6805BuffImm(ACK_CODE);
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-#line 2108
+#line 2299
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
-#line 2110
+#line 2301
 
 		next_code_sequence_number=SET_3_KEY_TYPE_SET_SEQUENCE;
 		held_event_count=0;
@@ -2005,29 +2076,29 @@ if (waiting_for_next_code)
 	default :
 		/* unrecognised code */
 #ifdef	JOKER
-#line 2133
+#line 2324
 #error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #else	/* JOKER */
-#line 2135
+#line 2326
 		AddTo6805BuffImm(RESEND_CODE);
 #endif	/* JOKER */
-#line 2137
+#line 2328
 		break;
 
 #else
-#line 2140
+#line 2331
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register.
-#line 2143
+#line 2334
 #endif
-#line 2144
+#line 2335
 	} /* end of switch */
 #ifndef REAL_KBD
 }
 #else
-#line 2148
+#line 2339
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register.
 #endif
-#line 2150
+#line 2341
 
 #ifndef REAL_KBD
 if (scanning_discontinued && !waiting_for_next_code)
@@ -2037,7 +2108,7 @@ if (scanning_discontinued && !waiting_for_next_code)
 		for (i=0;i<held_event_count;i++)
 			{
                         nt_keyboard_history.active=nt_keyboard_history.held[i]; /* DIV-317 */
-#line 2158
+#line 2349
 			switch (held_event_type[i])
 				{
 				case KEY_DOWN_EVENT:
@@ -2050,17 +2121,17 @@ if (scanning_discontinued && !waiting_for_next_code)
 			}
 		}
         nt_keyboard_history.active=0; /* DIV-317: later internal actions have no raw origin. */
-#line 2169
+#line 2360
 	scanning_discontinued=FALSE;
 	}
 #endif
 
 #ifndef NTVDM
-#line 2174
+#line 2365
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2178
+#line 2369
 #endif
-#line 2179
+#line 2370
 
 } /* end of cmd_to_6805 */
 
@@ -2087,7 +2158,7 @@ LOCAL VOID KbdIntDelay(VOID)
        // before invoking the next interrupt.
        //
    if (bKbdEoiPending || kbd_output_irq_acknowledged)
-#line 2205
+#line 2396
        return;
 
 
@@ -2095,7 +2166,14 @@ LOCAL VOID KbdIntDelay(VOID)
        bKbdEoiPending = TRUE;
 
        if (!bForceDelayInts) {
+#if defined(NEC_98)
+#line 2404
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 2406
            kbd_status |= 1;
+#endif   //NEC_98
+#line 2408
            ica_hw_interrupt(KEYBOARD_INT_ADAPTER, KEYBOARD_INT_LINE, 1);
            }
        else {
@@ -2134,7 +2212,7 @@ LOCAL VOID KbdIntDelay(VOID)
 void KbdEOIHook(int IrqLine, int CallCount)
 {
 
-#line 2251
+#line 2446
    if (!bKbdEoiPending)  // sanity
        return;
 
@@ -2143,26 +2221,26 @@ void KbdEOIHook(int IrqLine, int CallCount)
        return;
        }
 
-#line 2259
+#line 2454
    bKbdIntHooked = KbdInt09Off != *(word *)(Start_of_M_area+0x09*4) ||
                    KbdInt09Seg != *(word *)(Start_of_M_area+0x09*4+2);
 
    bBiosBufferSpace = bBiosOwnsKbdHdw &&
                       (bios_buffer_size() < (bPifFastPaste ? 8 : 2));
 
-#line 2266
+#line 2461
    bKbdEoiPending = FALSE;
    kbd_output_irq_acknowledged = CallCount >= 0;
 
    if (CallCount < 0 || !output_full || kbd_output_data_read) {
        output_full = FALSE;
-#line 2268
+#line 2463
        bForceDelayInts = TRUE;
        continue_output();
        bForceDelayInts = FALSE;
    }
 
-#line 2272
+#line 2467
    if (!bBiosOwnsKbdHdw)
         HostReleaseKbd();
 }
@@ -2175,7 +2253,7 @@ LOCAL VOID do_q_int(char scancode)
    nt_keyboard_history.output=nt_keyboard_history.translated; /* DIV-317 */
    kbd_output_data_read = FALSE;
    kbd_output_irq_acknowledged = FALSE;
-#line 2281
+#line 2476
    output_full = TRUE;
    output_contents = scancode;
 
@@ -2183,20 +2261,31 @@ LOCAL VOID do_q_int(char scancode)
 }
 
 #else   /* NTVDM */
-#line 2288
+#line 2483
 #error Excluded unsupported non-NTVDM alternative
-#line 2360
+#line 2559
 #endif	/* NTVDM */
-#line 2361
+#line 2560
 
 
 LOCAL VOID cmd_to_8042  IFN1(half_word,cmd_code)
 {
 int code_to_send,code_to_send_valid;
 
+#if defined(NEC_98)
+#line 2567
+#error Unsupported platform configuration
+#endif    //NEC_98
+#line 2570
+
 sure_note_trace1(AT_KBD_VERBOSE,"8042 received cmd:0x%x",cmd_code);
 
 code_to_send_valid = FALSE;
+#if defined(NEC_98)
+#line 2575
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 2645
 if (waiting_for_next_8042_code)
 	{
 	switch (next_8042_code_sequence_number)
@@ -2254,10 +2343,10 @@ if (waiting_for_next_8042_code)
 				      /* call xms function to deal with A20 */
 				      xmsDisableA20Wrapping();
 #else
-#line 2427
+#line 2702
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
-#line 2429
+#line 2704
 				      gate_a20_status = 1;
 					}
 				   }
@@ -2268,17 +2357,17 @@ if (waiting_for_next_8042_code)
 #ifdef NTVDM
 				      xmsEnableA20Wrapping();
 #else
-#line 2439
+#line 2714
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
-#line 2441
+#line 2716
 				      gate_a20_status = 0;
 				      }
 #else
-#line 2444
+#line 2719
 #error Unsupported excluded original configuration
 #endif /* PM */
-#line 2446
+#line 2721
 				   }
 #endif /* JOKER */
 
@@ -2293,10 +2382,10 @@ if (waiting_for_next_8042_code)
 #ifdef PM
 				op_port_remembered_bits=cmd_code & 0x2e;
 #else
-#line 2460
+#line 2735
 #error Unsupported excluded original configuration
 #endif /* PM */
-#line 2462
+#line 2737
 				}
 			else
 				{
@@ -2332,6 +2421,11 @@ if (!waiting_for_next_8042_code)
 			break;
 		case 0xad:
 			/* Disable keyboard interface */
+#if defined(KOREA)
+                        // To fix HaNa spread sheet IME hot key problem
+                        if( bIgnoreExtraKbdDisable )
+                            break;
+#endif
 			cmd_byte_8042 |= 0x10;
 			keyboard_interface_disabled=TRUE;
 			break;
@@ -2347,7 +2441,7 @@ if (!waiting_for_next_8042_code)
 			/* Read Input Port */
 			/* But don't cause an interrupt */
 			code_to_send=input_port_val; /* DIVERGENCE(MVDM-HOST-DIV-359) */
-#line 2511
+#line 2791
 			code_to_send_valid=TRUE;
 			break;
 		case 0xd0:
@@ -2401,19 +2495,19 @@ if (!waiting_for_next_8042_code)
 				/* pulse the reset line */
 #ifdef PM
 #ifndef NTVDM
-#line 2564
+#line 2844
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 2566
+#line 2846
 #ifdef CPU_30_STYLE
-#line 2567
+#line 2847
 #error Unsupported excluded original configuration
 #else /* CPU_30_STYLE */
-#line 2569
+#line 2849
 				cpu_interrupt(CPU_HW_RESET, 0);
-#line 2571
+#line 2851
 #endif /* CPU_30_STYLE */
-#line 2572
+#line 2852
 #endif
 				sure_note_trace0(AT_KBD_VERBOSE,"CPU RESET via keyboard");
 				}
@@ -2428,6 +2522,8 @@ else
 	waiting_for_next_8042_code=FALSE;
 	}
 
+#endif    //NEC_98
+#line 2867
 	
 /*Is there a valid code to put in the 8042 output buffer? Values written 
   to the 8042 output buffer as a conseqence of a 8042 command do not
@@ -2443,17 +2539,17 @@ if (code_to_send_valid)
          *  since we no longer clear output_full in the Kbd_inb routine
          */
         output_full = FALSE;
-#line 2601
+#line 2882
         KbdData = -1;
         output_contents = (char)code_to_send;
         kbd_status |= 1;
-#line 2602
+#line 2883
 #else /* NTVDM else */
-#line 2603
+#line 2884
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2610
+#line 2891
 #endif /* end of NTVDM else */
-#line 2611
+#line 2892
 	}
 
 } /* end of cmd_to_8042 */
@@ -2491,7 +2587,7 @@ if (translating)
 		else {
 			waiting_for_upcode=TRUE;
                         nt_keyboard_history.prefix=nt_keyboard_history.translated; /* DIV-317 */
-#line 2647
+#line 2928
 			}
 		}
 	else
@@ -2513,13 +2609,13 @@ else
 return (code);
 } /* end of translate_6805_8042 */
 
-#line 2668
+#line 2949
 #ifdef HUNTER
-#line 2669
+#line 2950
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
-#line 2707
+#line 2988
 #endif /* HUNTER */
-#line 2708
+#line 2989
 
 /*
 ** Returns number of chars in buffer.
@@ -2527,13 +2623,13 @@ return (code);
 *  This needs to be global for HUNTER, but only needs be local otherwise.
 */
 #ifdef HUNTER
-#line 2715
+#line 2996
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #else
-#line 2717
+#line 2998
 LOCAL INT
 #endif
-#line 2719
+#line 3000
 buffer_status_8042 IFN0()
 {
 	if (!pending_8042 && !keyboard_interface_disabled && !output_full)
@@ -2571,7 +2667,7 @@ if(!output_full)
 	if (pending_8042)
 		{
                 pending_8042=FALSE;
-#line 2756
+#line 3037
                 do_q_int(pending_8042_value);
 		}
 	else
@@ -2608,7 +2704,7 @@ GLOBAL VOID KbdResume(VOID)
     bKbdEoiPending = FALSE;
     kbd_output_data_read = FALSE;
     kbd_output_irq_acknowledged = FALSE;
-#line 2790
+#line 3071
     bKbdIntHooked = FALSE;
     bBiosBufferSpace = TRUE;
     if (!keyboard_interface_disabled && output_full)
@@ -2619,11 +2715,11 @@ GLOBAL VOID KbdResume(VOID)
 
 
 #ifndef NTVDM
-#line 2800
+#line 3081
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2817
+#line 3098
 #endif
-#line 2818
+#line 3099
 
 GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
 {
@@ -2646,6 +2742,11 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
          }
 #endif
 
+#if defined(NEC_98)
+#line 3122
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 3130
 	port &= 0x64;
 
 	if (port==0x64)
@@ -2653,12 +2754,19 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
 		*val = kbd_status;
 	}
 	else									/* port == 0x60 */
+#endif    //NEC_98
+#line 3138
 
 #ifdef NTVDM	/* JonLe NTVDM Mod */
 
         {
 
         *val=KbdData;
+#if defined(NEC_98)
+#line 3145
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 3147
         kbd_status &= 0xfe;
         kbd_output_data_read = TRUE;
         if (kbd_output_irq_acknowledged && output_full) {
@@ -2667,7 +2775,9 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
             continue_output();
             bForceDelayInts = FALSE;
         }
-#line 2854
+#line 3148
+#endif   //NEC_98
+#line 3149
         sure_note_trace1(AT_KBD_VERBOSE,"scan code read:0x%x",*val);
 
 
@@ -2680,11 +2790,11 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
          HostReleaseKbd();
 
 #else	/* not NTVDM */
-#line 2866
+#line 3161
 #error Excluded unsupported non-NTVDM alternative
-#line 2931
+#line 3230
 #endif	/* NTVDM */
-#line 2932
+#line 3231
 
 	sure_note_trace2(AT_KBD_VERBOSE,"...kbd_inb(%#x) returns %#x", port, *val);
 
@@ -2703,6 +2813,11 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
      }
 #endif	/* NTVDM */
 
+#if defined(NEC_98)
+#line 3250
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 3258
 	port &= 0x64;
 	if (port == 0x64)
 	{
@@ -2721,14 +2836,16 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
 		else
 			cmd_to_6805(val);
 	}
+#endif // NEC_98
+#line 3277
 
 #ifndef NTVDM	/* JonLe NTVDM Mod */
-#line 2970
+#line 3279
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2974
+#line 3283
 #else   /* NTVDM */
 
-#line 2976
+#line 3285
     bForceDelayInts = TRUE;
 	continue_output();
     bForceDelayInts = FALSE;
@@ -2737,59 +2854,70 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
              HostReleaseKbd();
 
 #endif	/* NTVDM */
-#line 2984
+#line 3293
 
 } /*end of kbd_outb */
 
 #ifndef NTVDM
-#line 2988
+#line 3297
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 3034
+#line 3343
 #endif /* ! NTVDM */
-#line 3035
+#line 3344
 
 #ifdef SEGMENTATION
-#line 3037
+#line 3346
 #error Excluded unsupported SEGMENTATION configuration
-#line 3043
+#line 3352
 #endif
-#line 3044
+#line 3353
 
 GLOBAL VOID AT_kbd_post IFN0()
 {
+#if defined(NEC_98)
+#line 3357
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 3359
 	kbd_status = 0x14;
+#endif   //NEC_98
+#line 3361
 
 #ifndef NTVDM
-#line 3050
+#line 3363
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 3052
+#line 3365
 #endif
-#line 3053
+#line 3366
 }
 
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
-#line 3056
+#line 3369
 #error Excluded unsupported GISP_CPU configuration
-#line 3095
+#line 3408
 #endif /* IRET_HOOKS && GISP_CPU */
-#line 3096
+#line 3409
 
 #ifndef NTVDM
-#line 3098
+#line 3411
 #error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
-#line 3202
+#line 3543
 #else	/* NTVDM */
-#line 3203
+#line 3544
 
 GLOBAL VOID AT_kbd_init()
 {
-       int i;
+       IU16 i;
 
        sure_note_trace0(AT_KBD_VERBOSE,"AT Keyboard initialisation");
 
        clear_buff_6805 ();
+#if defined(NEC_98)
+#line 3553
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 3571
        key_set=2;
-
        i = 127;
        while (i--)
           set_3_key_state [i] = set_3_default_key_state [i];
@@ -2799,7 +2927,7 @@ GLOBAL VOID AT_kbd_init()
        cmd_byte_8042=0x45;
        op_port_remembered_bits=0xc;
 
-#line 3222
+#line 3581
        int_enabled = translating = TRUE;
 
        io_define_inb(AT_KEYB_ADAPTOR, kbd_inb);
@@ -2807,7 +2935,8 @@ GLOBAL VOID AT_kbd_init()
 
        for (i=KEYBA_PORT_START;i<=KEYBA_PORT_END;i+=2)
                io_connect_port(i, AT_KEYB_ADAPTOR, IO_READ_WRITE);
-
+#endif //NEC_98
+#line 3589
        init_key_arrays();
 
        num_lock_on = TRUE;
@@ -2820,4 +2949,9 @@ GLOBAL VOID AT_kbd_init()
 
 } /* end of AT_kbd_init */
 #endif	/* NTVDM */
+
+#if defined(NEC_98)
+#line 3603
+#error Unsupported platform configuration
+#endif    //NEC_98
 #line 3242

@@ -31,7 +31,7 @@ foreach(name IN LISTS names)
   list(APPEND bios_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/keymouse/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/keymouse/sources.inc")
 list(REMOVE_DUPLICATES names)
 set(keymouse_objects)
 foreach(name IN LISTS names)

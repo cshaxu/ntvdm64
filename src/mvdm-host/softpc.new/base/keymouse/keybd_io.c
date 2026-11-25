@@ -89,6 +89,7 @@
 #include "debug.h"
 #include "idetect.h"
 
+extern void host_simulate();
 
 /*
  * ============================================================================
@@ -102,7 +103,7 @@
  * ============================================================================
  */
 
-#line 104
+#line 105
 #define SHIFT_KEY_SIZE 8
 #define ALT_TABLE_SIZE 36
 
@@ -168,17 +169,17 @@ LOCAL word rcpu_nop_segment = RCPU_NOP_SEGMENT,
 LOCAL word rcpu_poll_segment = RCPU_POLL_SEGMENT,
 	   rcpu_poll_offset  = RCPU_POLL_OFFSET;
 #else /* GISP_SVGA */
-#line 169
+#line 170
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
-#line 185
-
 #line 186
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
+
 #line 187
+#if defined(IRET_HOOKS) && defined(GISP_CPU)
+#line 188
 #error Excluded unsupported GISP_CPU configuration
 #endif /* IRET_HOOKS && GISP_CPU */
-#line 189
+#line 190
 
 #ifdef NTVDM
 
@@ -222,16 +223,20 @@ extern word *pShortIdle;
 extern word *pIdleNoActivity;
 
 
+// STREAM_IO codes are disabled on NEC_98.
+#ifndef NEC_98
 extern half_word * stream_io_buffer;
 extern word * stream_io_dirty_count_ptr;
 extern word stream_io_buffer_size;
 extern sys_addr stream_io_bios_busy_sysaddr;
+#endif // !NEC_98
+#line 240
 
 #else
-#line 238
+#line 242
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
-#line 240
+#line 244
 
 /*
  * Mix in global defined data as well.
@@ -244,10 +249,10 @@ GLOBAL word rcpu_int1C_off = USER_TIMER_INT_OFFSET;
 GLOBAL word rcpu_int4A_seg = RCPU_INT4A_SEGMENT;
 GLOBAL word rcpu_int4A_off = RCPU_INT4A_OFFSET;
 #else /* GISP_SVGA */
-#line 252
+#line 256
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
-#line 260
+#line 264
 
 GLOBAL word dummy_int_seg = 0;
 GLOBAL word dummy_int_off = 0;
@@ -258,6 +263,11 @@ GLOBAL word int13h_vector_seg;
 GLOBAL word int13h_caller_off;
 GLOBAL word int13h_caller_seg;
 #endif /* NTVDM */
+#if defined(JAPAN) && defined(NTVDM) && !defined(NEC_98)
+#line 275
+#error Unsupported platform configuration
+#endif // JAPAN, NTVDM, !NEC_98
+#line 278
 
 #if defined(NTVDM) && defined(MONITOR)
 /*
@@ -537,18 +547,18 @@ LOCAL VOID check_indicators IFN1(IBOOL, eoi)
 #endif
 
 #ifdef	GISP_CPU
-#line 549
+#line 557
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
-#line 558
+#line 566
 #else	/* not NTVDM nor GISP_CPU */
-#line 559
+#line 567
 #error Unsupported excluded original configuration
 #endif	/* NTVDM or GISP_CPU */
-#line 583
+#line 591
 
 			/* turn off update indicator and error flag	*/
-			sas_store_no_check (kb_flag_2, sas_hw_at_no_check(kb_flag_2) & ~(KB_PR_LED + KB_ERR));
+			sas_store_no_check (kb_flag_2, (IU8)(sas_hw_at_no_check(kb_flag_2) & ~(KB_PR_LED + KB_ERR)));
 		}
 	}
 }
@@ -593,7 +603,7 @@ LOCAL VOID K26A IFN0()
 LOCAL VOID K26 IFN0()
 {
 	/* Reset last char H.C. flag */
-	sas_store_no_check(kb_flag_3, sas_hw_at_no_check(kb_flag_3) & ~(LC_E0 + LC_E1));
+	sas_store_no_check(kb_flag_3, (IU8)(sas_hw_at_no_check(kb_flag_3) & ~(LC_E0 + LC_E1)));
 
 	/* (same as K26A()) */
 	outb(0x20, 0x20);
@@ -602,23 +612,23 @@ LOCAL VOID K26 IFN0()
 
 
 #ifndef NTVDM
-#line 639
+#line 647
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else	/* NTVDM */
-#line 657
+#line 665
 
 void INT15(void);
 word sp_int15_handler_seg = 0;
 word sp_int15_handler_off = 0;
 
 #endif	/* NTVDM */
-#line 663
+#line 671
 
 #ifndef NTVDM
-#line 665
+#line 673
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else   /* NTVDM */
-#line 669
+#line 677
 /* NTVDM code size is too large, change this often used macro
  * to a function, as the call overhead is not justified
  */
@@ -629,7 +639,7 @@ void BEEP(char *message)
     K26A();
 }
 #endif	/* NTVDM */
-#line 679
+#line 687
 
 
 
@@ -652,10 +662,10 @@ void BEEP(char *message)
 ** highly speed sensitive!
 */
 #ifndef NTVDM
-#line 701
+#line 709
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else   /* NTVDM */
-#line 732
+#line 740
 
 
 /* <tur> NT's PutInBuffer seems to be slightly different to PutInBufferFunc above. */
@@ -680,7 +690,7 @@ void NtPutInBuffer(half_word s, half_word v)
                 sas_store_no_check(BIOS_VAR_START + buffer_tail, v);
                 sas_store_no_check(BIOS_VAR_START + buffer_tail+1, s);
                 sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);
-#line 756
+#line 764
                 setAX(0x9102);
                 INT15();
       K26();
@@ -692,16 +702,16 @@ void NtPutInBuffer(half_word s, half_word v)
 
 #define PUT_IN_BUFFER(s, v) NtPutInBuffer(s,v); return
 #endif	/* NTVDM */
-#line 767
+#line 775
 
 
 /* <tur 17-Jun-93> Eurrgh; macros with embedded "return"s! */
 
 #ifndef NTVDM
-#line 772
+#line 780
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* !NTVDM */
-#line 774
+#line 782
 
 LOCAL VOID CheckAndPutInBufferFunc IFN2(half_word, s,half_word, v)
 {
@@ -711,13 +721,13 @@ LOCAL VOID CheckAndPutInBufferFunc IFN2(half_word, s,half_word, v)
 	}
 	else {
 #ifndef NTVDM
-#line 783
+#line 791
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM */
-#line 785
+#line 793
 		NtPutInBuffer(s, v);
 #endif /* !NTVDM */
-#line 787
+#line 795
 	}
 }
 
@@ -729,7 +739,7 @@ LOCAL VOID PAUSE IFN0()
 	word   CS_save;        /* tmp. store for CS value      */
 	word   IP_save;        /* tmp. store for IP value      */
 
-	sas_store_no_check(kb_flag_1, sas_hw_at_no_check(kb_flag_1) | HOLD_STATE);
+	sas_store_no_check(kb_flag_1, (IU8)(sas_hw_at_no_check(kb_flag_1) | HOLD_STATE));
 
 	outb(KEYBA_STATUS_CMD, ENA_KBD);
 	outb(0x20, 0x20);
@@ -740,12 +750,12 @@ LOCAL VOID PAUSE IFN0()
 	FREEKBDHDW();
 
 	do {
-#line 809
+#line 817
 #if defined(IRET_HOOKS)  && defined(GISP_CPU)
-#line 810
+#line 818
 #error Excluded unsupported GISP_CPU configuration
 #endif /* IRET_HOOKS && GISP_CPU */
-#line 812
+#line 820
 
 
 #if defined(NTVDM)
@@ -764,10 +774,10 @@ LOCAL VOID PAUSE IFN0()
 }
 
 #ifndef NTVDM
-#line 830
+#line 838
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 832
+#line 840
 
 /*
 ** All exits from keyboard_int() call this first.
@@ -775,10 +785,10 @@ LOCAL VOID PAUSE IFN0()
 LOCAL void exit_from_kbd_int IFN0()
 {
 #ifndef NTVDM
-#line 839
+#line 847
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 843
+#line 851
 	note_trace0( BIOS_KB_VERBOSE, "KBD BIOS - END" );
 	setIF( 0 );
 	FREEKBDHDW();	/* JonLe NTVDM Mod */
@@ -812,10 +822,10 @@ void keyboard_int IFN0()
             }
 #endif
 #ifndef NTVDM
-#line 876
+#line 884
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 881
+#line 889
 	setIF(0);
         note_trace0(BIOS_KB_VERBOSE,"KBD BIOS start");
 
@@ -836,7 +846,7 @@ void keyboard_int IFN0()
            */
         if (getTF()) {
             IP_save = getIP();
-            setIP(IP_save + 4);  /* adavance by 4 bytes, pop ax, jmp iret_com */
+            setIP((IU16)(IP_save + 4));  /* adavance by 4 bytes, pop ax, jmp iret_com */
             host_simulate();
             setIP(IP_save);
             code = getAL();
@@ -861,14 +871,14 @@ void keyboard_int IFN0()
 
 	if ( code == KB_RESEND )					/* check for resend	*/
 	{
-		sas_store_no_check (kb_flag_2, sas_hw_at_no_check(kb_flag_2) | KB_FE);
+		sas_store_no_check (kb_flag_2, (IU8)(sas_hw_at_no_check(kb_flag_2) | KB_FE));
 		K26();
 		exit_from_kbd_int();return;
 	}
 
 	if( code == KB_ACK )						/* check for acknowledge	*/
 	{
-		sas_store_no_check (kb_flag_2, sas_hw_at_no_check(kb_flag_2) | KB_FA);
+		sas_store_no_check (kb_flag_2, (IU8)(sas_hw_at_no_check(kb_flag_2) | KB_FA));
 		K26();
 		exit_from_kbd_int();return;
 	}
@@ -888,12 +898,12 @@ void keyboard_int IFN0()
 		if ( sas_hw_at_no_check(kb_flag) & RD_ID )	/* is read_id flag on	*/
 		{
 			if( code == ID_1 )				/* is this the 1st ID char.	*/
-				sas_store_no_check (kb_flag_3, sas_hw_at_no_check(kb_flag_3) | LC_AB);
-			sas_store_no_check (kb_flag_3, sas_hw_at_no_check(kb_flag_3) & ~RD_ID);
+				sas_store_no_check (kb_flag_3, (IU8)(sas_hw_at_no_check(kb_flag_3) | LC_AB));
+			sas_store_no_check (kb_flag_3, (IU8)(sas_hw_at_no_check(kb_flag_3) & ~RD_ID));
 		}
 		else
 		{
-			sas_store_no_check (kb_flag_3, sas_hw_at_no_check(kb_flag_3) & ~LC_AB);
+			sas_store_no_check (kb_flag_3, (IU8)(sas_hw_at_no_check(kb_flag_3) & ~LC_AB));
 			if( code != ID_2A )				/* is this the 2nd ID char.	*/
 			{
 				if( code == ID_2 )
@@ -901,7 +911,7 @@ void keyboard_int IFN0()
 					/* should we set NUM LOCK	*/
 					if( last_kb_flag_3 & SET_NUM_LK )
 					{
-						sas_store_no_check (kb_flag, sas_hw_at_no_check(kb_flag) | NUM_STATE);
+						sas_store_no_check (kb_flag, (IU8)(sas_hw_at_no_check(kb_flag) | NUM_STATE));
 						check_indicators(1);
 					}
 				}
@@ -911,7 +921,7 @@ void keyboard_int IFN0()
 					exit_from_kbd_int();return;
 				}
 			}
-			sas_store_no_check (kb_flag_3, sas_hw_at_no_check(kb_flag_3) | KBX);	/* enhanced kbd found	*/
+			sas_store_no_check (kb_flag_3, (IU8)(sas_hw_at_no_check(kb_flag_3) | KBX));	/* enhanced kbd found	*/
 		}
 		K26();
 		exit_from_kbd_int();return;
@@ -919,14 +929,14 @@ void keyboard_int IFN0()
 
 	if( code == MC_E0 )						/* general marker code?	*/
 	{
-		sas_store_no_check(kb_flag_3, sas_hw_at_no_check(kb_flag_3) | ( LC_E0 + KBX ));
+		sas_store_no_check(kb_flag_3, (IU8)(sas_hw_at_no_check(kb_flag_3) | ( LC_E0 + KBX )));
 		K26A();
 		exit_from_kbd_int();return;
 	}
 
 	if( code == MC_E1 )						/* the pause key ?	*/
 	{
-		sas_store_no_check (kb_flag_3, sas_hw_at_no_check (kb_flag_3) | ( LC_E1 + KBX ));
+		sas_store_no_check (kb_flag_3, (IU8)(sas_hw_at_no_check (kb_flag_3) | ( LC_E1 + KBX )));
 		K26A();
 		exit_from_kbd_int();return;
 	}
@@ -969,7 +979,7 @@ void keyboard_int IFN0()
 	{
 		if( code_save & 0x80 )					/* check for break code	*/
 		{
-			sas_store_no_check(kb_flag_1, sas_hw_at_no_check(kb_flag_1) & ~SYS_SHIFT);
+			sas_store_no_check(kb_flag_1, (IU8)(sas_hw_at_no_check(kb_flag_1) & ~SYS_SHIFT));
 			K26A();
 			/* call recursive CPU to call INT 15	*/
 			setAX(0x8501);
@@ -981,7 +991,7 @@ void keyboard_int IFN0()
 			K26();
 			exit_from_kbd_int();return;
 		}
-		sas_store_no_check (kb_flag_1, sas_hw_at_no_check(kb_flag_1) | SYS_SHIFT);
+		sas_store_no_check (kb_flag_1, (IU8)(sas_hw_at_no_check(kb_flag_1) | SYS_SHIFT));
 		K26A();
 		/* call recursive CPU to call INT 15	*/
 		setAX(0x8500);
@@ -1001,19 +1011,19 @@ void keyboard_int IFN0()
 		{
 			if (mask >= SCROLL_SHIFT)			/* is this a toggle key	*/
 			{
-				sas_store_no_check (kb_flag_1, sas_hw_at_no_check(kb_flag_1) & ~mask);
+				sas_store_no_check (kb_flag_1, (IU8)(sas_hw_at_no_check(kb_flag_1) & ~mask));
 				K26();
 				exit_from_kbd_int();return;
 			}
 
-			sas_store_no_check (kb_flag, sas_hw_at_no_check(kb_flag) & ~mask);	/* turn off shift bit	*/
+			sas_store_no_check (kb_flag, (IU8)(sas_hw_at_no_check(kb_flag) & ~mask));	/* turn off shift bit	*/
 			if( mask >= CTL_SHIFT)				/* alt or ctl ?		*/
 			{
 				if( sas_hw_at_no_check (kb_flag_3) & LC_E0 )			/* 2nd alt or ctl ?	*/
-					sas_store_no_check (kb_flag_3, sas_hw_at_no_check(kb_flag_3) & ~mask);
+					sas_store_no_check (kb_flag_3, (IU8)(sas_hw_at_no_check(kb_flag_3) & ~mask));
 				else
-					sas_store_no_check (kb_flag_1, sas_hw_at_no_check(kb_flag_1) & ~(mask >> 2));
-				sas_store_no_check (kb_flag, sas_hw_at_no_check(kb_flag) | ((((sas_hw_at_no_check(kb_flag) >>2 ) | sas_hw_at(kb_flag_1)) << 2) & (ALT_SHIFT + CTL_SHIFT)));
+					sas_store_no_check (kb_flag_1, (IU8)(sas_hw_at_no_check(kb_flag_1) & ~(mask >> 2)));
+				sas_store_no_check (kb_flag, (IU8)(sas_hw_at_no_check(kb_flag) | ((((sas_hw_at_no_check(kb_flag) >>2 ) | sas_hw_at(kb_flag_1)) << 2) & (ALT_SHIFT + CTL_SHIFT))));
 			}
 			if(code != (ALT_KEY + 0x80))			/* alt shift release ?	*/
 			{
@@ -1038,13 +1048,13 @@ void keyboard_int IFN0()
 		/* SHIFT MAKE FOUND, DETERMINE SET OR TOGGLE	*/
 		if( mask < SCROLL_SHIFT )
 		{
-			sas_store_no_check (kb_flag, sas_hw_at_no_check(kb_flag) | mask);
+			sas_store_no_check (kb_flag, (IU8)(sas_hw_at_no_check(kb_flag) | mask));
 			if ( mask & (CTL_SHIFT + ALT_SHIFT) )
 			{
 				if( sas_hw_at_no_check(kb_flag_3) & LC_E0 )	/* one of the new keys ?*/
-					sas_store_no_check(kb_flag_3, sas_hw_at_no_check(kb_flag_3) | mask);		/* set right, ctl alt	*/
+					sas_store_no_check(kb_flag_3, (IU8)(sas_hw_at_no_check(kb_flag_3) | mask));		/* set right, ctl alt	*/
 				else
-					sas_store_no_check (kb_flag_1,sas_hw_at_no_check(kb_flag_1) | (mask >> 2));	/* set left, ctl alt	*/
+					sas_store_no_check (kb_flag_1, (IU8)(sas_hw_at_no_check(kb_flag_1) | (mask >> 2)));	/* set left, ctl alt	*/
 			}
 			K26();
 			exit_from_kbd_int();return;
@@ -1075,8 +1085,8 @@ void keyboard_int IFN0()
 				K26();
 				exit_from_kbd_int();return;
 			}
-			sas_store_no_check (kb_flag_1, sas_hw_at_no_check(kb_flag_1) | mask);				/* set and toggle flags	*/
-			sas_store_no_check ( kb_flag, sas_hw_at_no_check(kb_flag) ^ mask);
+			sas_store_no_check (kb_flag_1, (IU8)(sas_hw_at_no_check(kb_flag_1) | mask));				/* set and toggle flags	*/
+			sas_store_no_check ( kb_flag, (IU8)(sas_hw_at_no_check(kb_flag) ^ mask));
 			if( mask & (CAPS_SHIFT + NUM_SHIFT + SCROLL_SHIFT) )
 				check_indicators(1);
 
@@ -1096,7 +1106,7 @@ label1:	/* TEST FOR HOLD STATE */
 	if( sas_hw_at_no_check(kb_flag_1) & HOLD_STATE )		/* in hold state ?	*/
 	{
 		if( code != NUM_KEY )
-			sas_store_no_check (kb_flag_1, sas_hw_at_no_check(kb_flag_1) & ~HOLD_STATE);
+			sas_store_no_check (kb_flag_1, (IU8)(sas_hw_at_no_check(kb_flag_1) & ~HOLD_STATE));
 		K26();
 		exit_from_kbd_int();return;
 	}
@@ -1114,13 +1124,13 @@ label2:	/* NOT IN HOLD STATE	*/
 		if( (sas_hw_at_no_check(kb_flag) & CTL_SHIFT ) && (code == DEL_KEY) )
                 {
 #ifndef NTVDM
-#line 1179
+#line 1187
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
-#line 1181
+#line 1189
                         K26();
 #endif
-#line 1183
+#line 1191
 			exit_from_kbd_int();return;
 		}
 		/* IN ALTERNATE SHIFT, RESET NOT FOUND	*/
@@ -1144,9 +1154,9 @@ label2:	/* NOT IN HOLD STATE	*/
 		{
 			if( sas_hw_at_no_check(kb_flag_3) & LC_E0 )	/* one of the new keys ?	*/
 			{
-                                PUT_IN_BUFFER((code + 80), 0 );
+                                PUT_IN_BUFFER((IU8)(code + 80), 0 );
                         }
-			sas_store_no_check (alt_input, sas_hw_at_no_check(alt_input) * 10 + i);
+			sas_store_no_check (alt_input, (IU8)(sas_hw_at_no_check(alt_input) * 10 + i));
 			K26();
 			exit_from_kbd_int();return;
 		}
@@ -1165,12 +1175,12 @@ label2:	/* NOT IN HOLD STATE	*/
                 }
 		if( code < BS_KEY )
 		{
-                        PUT_IN_BUFFER((code + 118), 0);
+                        PUT_IN_BUFFER((IU8)(code + 118), 0);
                 }
 		/* TRANSLATE ALTERNATE SHIFT PSEUDO SCAN CODES	*/
 		if((code == F11_M) || (code == F12_M) )		/* F11 or F12		*/
 		{
-                        PUT_IN_BUFFER((code + 52), 0 );
+                        PUT_IN_BUFFER((IU8)(code + 52), 0 );
                 }
 		if( sas_hw_at_no_check(kb_flag_3) & LC_E0 )	/* one of the new keys ?*/
 		{
@@ -1180,7 +1190,7 @@ label2:	/* NOT IN HOLD STATE	*/
                         }
 			if( code == DEL_KEY )
 			{
-				PUT_IN_BUFFER(( code + 80), 0 );
+				PUT_IN_BUFFER((IU8)( code + 80), 0 );
                         }
 			if( code == KEY_PAD_SLASH )
 			{
@@ -1195,7 +1205,7 @@ label2:	/* NOT IN HOLD STATE	*/
                 }
 		if( code <= F10_KEY )
 		{
-			PUT_IN_BUFFER( (code + 45), 0 );
+			PUT_IN_BUFFER( (IU8)(code + 45), 0 );
                 }
 		K26();
 		exit_from_kbd_int();return;
@@ -1272,7 +1282,7 @@ label2:	/* NOT IN HOLD STATE	*/
 
 				exec_sw_interrupt(int05_seg, int05_off);
 
-				sas_store_no_check (kb_flag_3, sas_hw_at_no_check(kb_flag_3)& ~(LC_E0 + LC_E1));
+				sas_store_no_check (kb_flag_3, (IU8)(sas_hw_at_no_check(kb_flag_3)& ~(LC_E0 + LC_E1)));
 				exit_from_kbd_int();return;
 			}
 		}
@@ -1434,7 +1444,11 @@ void kb_idle_poll()
     */
 void keyboard_io()
 {
-#line 1496
+#ifdef JAPAN
+#line 1505
+#error Unsupported platform configuration
+#endif // JAPAN
+#line 1521
    switch (getAH()) {
            /*
             * The 16 bit thread has not reached idle status yet
@@ -1443,10 +1457,10 @@ void keyboard_io()
      case 0:
        WaitIfIdle();
 #ifndef NTVDM
-#line 1504
+#line 1529
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
-#line 1509
+#line 1534
        break;
 
            /*
@@ -1460,9 +1474,9 @@ void keyboard_io()
              * App is starting a waitio
              */
      case 2:
-#line 1522
+#line 1547
        IDLE_waitio();
-#line 1523
+#line 1548
        break;
 
             /*
@@ -1472,24 +1486,35 @@ void keyboard_io()
        host_kb_light_on (getAL());
        break;
      }
+#if defined(JAPAN)  && !defined(NEC_98)
+#line 1558
+#error Unsupported platform configuration
+#endif // JAPAN && !NEC_98
+#line 1573
 }
 
 #else
-#line 1535
+#line 1576
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 1842
+#line 1883
 
 #ifdef SEGMENTATION
-#line 1844
+#line 1885
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 1851
+#line 1892
 
 void keyboard_post()
 {
 
      /* Set up BIOS keyboard variables */
+
+#if defined(NEC_98)
+#line 1899
+#error Unsupported platform configuration
+#else    //NEC_98
+#line 1958
 
 /* Initialize the keyboard table pointers */
 	shift_keys = K6;
@@ -1513,6 +1538,8 @@ void keyboard_post()
 	sas_store_no_check (kb_flag_2,2);
 	sas_store_no_check (kb_flag_3,KBX);
 	sas_store_no_check (alt_input,0);
+#endif    //NEC_98
+#line 1982
 }
 
 void keyboard_init()
@@ -1523,12 +1550,12 @@ void keyboard_init()
 	*/
         host_kb_init();
 
-#line 1889
+#line 1992
 #if defined(CPU_40_STYLE) && !defined (NTVDM)
-#line 1890
+#line 1993
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
-#line 1892
+#line 1995
 }
 
 
@@ -1558,7 +1585,7 @@ void kb_setup_vectors(void)
    KbdSeg     = getDS();
    phy_base   = effective_addr(getCS(), getSI());
    pkio_table = (word *)(Start_of_M_area + phy_base);
-#line 1920
+#line 2023
 
       /* IDLE variables */
     sas_loadw((sys_addr)(phy_base + 12 * sizeof(word)), &w);
@@ -1608,7 +1635,7 @@ void kb_setup_vectors(void)
    ** version only has two entries; for 40 column text mode and 80
    ** column text mode.
    */
-#line 1969
+#line 2072
    useHostInt10  = *pkio_table++;
    sas_store_no_check((sys_addr)(phy_base + useHostInt10), getNtScreenState());
    babyModeTable = (int10_seg << 4) + *pkio_table++;
@@ -1630,26 +1657,41 @@ void kb_setup_vectors(void)
    TimerInt08Off = *pkio_table++;
    int13h_vector_seg = KbdSeg;
    int13h_caller_seg = KbdSeg;
+
+#if defined(JAPAN) && !defined(NEC_98)
+#line 2095
+#error Unsupported platform configuration
+#endif // JAPAN & !NEC_98
+#line 2097
+
    int13h_vector_off = *pkio_table++;
    int13h_caller_off = *pkio_table++;
+// STREAM_IO codes are disabled on NEC_98.
+#ifndef NEC_98
    stream_io_buffer_size = *pkio_table++;
    stream_io_buffer = (half_word *)(Start_of_M_area + effective_addr(*pkio_table++, 0));
    stream_io_dirty_count_ptr = (word *)(Start_of_M_area + effective_addr(KbdSeg, *pkio_table++));
-#line 1995
+#line 2105
    stream_io_bios_busy_sysaddr = effective_addr(KbdSeg, *pkio_table++);
+#ifdef JAPAN
+#line 2107
+#error Unsupported platform configuration
+#endif // JAPAN
+#endif    //NEC_98
+#line 2110
 #ifndef PROD
-#line 1997
+#line 2111
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 2001
+#line 2115
    TimerInt1CSeg = KbdSeg;
    TimerInt1COff = dummy_int_off;
 
 #else    /* ndef MONITOR */
-#line 2005
+#line 2119
 #error Unsupported excluded non-MONITOR keyboard initialization
 #endif /* MONITOR */
-#line 2025
+#line 2143
 
     sas_loadw(0x09*4,     &KbdInt09Off);
     sas_loadw(0x09*4 + 2, &KbdInt09Seg);
@@ -1676,10 +1718,10 @@ void UpdateKbdInt15(word Seg,word Off)
     if(int15Off != sp_int15_handler_off || int15Seg != sp_int15_handler_seg)
       {
 #ifndef PROD
-#line 2051
+#line 2169
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 2053
+#line 2171
        sp_int15_handler_off = sp_int15_handler_seg = 0;
        return;
        }
