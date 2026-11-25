@@ -71,3 +71,23 @@ cleanup and applicable DOS/WOW/Win3.x regressions. Bind receipts to exact guest,
 package and driver settings. Keep code 1's existing approved boundary separate.
 Do not reuse predecessor diagnostic job exit 0 as runtime success; those jobs
 only prove owned cleanup, except separately identified normal-shutdown controls.
+
+## Proposed S sequence
+
+Only S1 is active. The 159 directory batches remain independently accountable inside the following packets. The batch IDs refer to the ordered migration ledger above.
+
+| S | Batches | Deliverable |
+| --- | --- | --- |
+| S1 | Inventory | Finish candidate SKU/build, provenance, permitted inputs and immutable guest media qualification. Map the eleven current images to their inputs. State feasibility, missing inputs and rollback baseline. |
+| S2 | H001-H008 | Host debug, DOS COMMAND/DEM, DPMI32, fax and shared headers. Establish the first complete directory reconciliation in H001. |
+| S3 | H009-H022 | SoftPC base, including CPU, devices, video and input. Exercise CPU/DPMI and display/input boundaries. |
+| S4 | H023-H036 | SoftPC host, VDD, redirector, WOW32 and XMS. Verify host bindings and paired guest interfaces. |
+| S5 | N001-N012 | Base/NT, Win32, fonts, OLE and network support. Preserve required callers and ABI. |
+| S6 | N013-N026 | Private/public declarations and USER support. Check actual compile and link consumers. |
+| S7 | G001-G033 | DOS tools, COMMAND, devices, kernel, headers and redirector. Verify DOS boot, EXEC and filesystem behavior. |
+| S8 | G034-G048 | DOSX, SIM16, firmware, guest VDD counterparts and utilities. Verify matched immutable images and host handoffs. |
+| S9 | G049-G075 | First WOW16 group through multimedia. Verify Win16 startup, USER/GDI interfaces and audio calls. |
+| S10 | G076-G097 | Remaining WOW16 packages from OLE through Write. Reconcile all 159 batch dispositions. |
+| S11 | Package and capabilities | Resolve and demonstrate DOS audio, DOS LFN, Win95 Shell localized PIF creation and the separate restart-to-DOS lifecycle. Verify coherent host/guest identities, product regression, deployment and rollback before T closure. |
+
+Qualify H001 against the XP debug build graph, including daytona, nec_98, dirs and sources.inc. The six ancestor files booked in H001 have root scope. Retire obsolete paths after confirming XP ownership and updating users. Apply the same three-way reconciliation throughout. A later batch providing an indispensable interface may supply named files early. Credit each file once, record the lead delivery and reconcile the remainder at its normal turn. Independent XP components go to the next T. Report completed batches, files resolved and outstanding dependencies for each S. Apply the active delivery gates to code changes.
