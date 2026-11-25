@@ -138,7 +138,7 @@ foreach(name IN LISTS names)
   list(APPEND comms_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/dos/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/dos/sources.inc")
 list(REMOVE_DUPLICATES names)
 set(dos_objects)
 foreach(name IN LISTS names)
