@@ -28,15 +28,18 @@ ULONG FASTCALL WS32ShellExecute (PVDMFRAME pFrame);
 ULONG FASTCALL WS32FindExecutable (PVDMFRAME pFrame);
 ULONG FASTCALL WS32ExtractIcon (PVDMFRAME pFrame);
 
+LONG  APIENTRY WOWRegDeleteKey(HKEY hKey, LPCSTR lpszSubKey);
+
 ULONG ConvertToWin31Error(ULONG ul);
 LPSZ  Remove_Classes (LPSZ psz);
 
-WORD W32ShellExecuteCallBack (LPSZ lpszCmdLine, WORD fuCmdShow);
+WORD W32ShellExecuteCallBack (LPSZ lpszCmdLine, WORD fuCmdShow, LPSZ lpszNewDir);
 
 typedef struct _DROPALIAS {
    struct _DROPALIAS FAR *lpNext;
    HAND32 h32;
    HAND16 h16;
+   DWORD  dwFlags;
 } DROPALIAS, *LPDROPALIAS;
 
 #define HDROP_H16         0x0001
@@ -48,4 +51,5 @@ typedef struct _DROPALIAS {
 HAND16 CopyDropFilesFrom32(HANDLE h32);
 HANDLE CopyDropFilesFrom16(HAND16 h16);
 DWORD  DropFilesHandler(HAND16 h16, HANDLE h32, UINT flInput);
+BOOL   FindAndReleaseHDrop16 (HAND16 h16);
 

@@ -42,6 +42,10 @@
 
 #define iszWowFaxLocalPort         0x10a
 
+#define iszMisMatchedBinary        0x10b
+#define iszMisMatchedBinaryTitle   0x10c
+#define iszExceedGDIHandleLimit    0x10d
+
 //
 // Macro to fetch critical string pointer based on name without preceeding isz
 //

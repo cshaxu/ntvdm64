@@ -96,9 +96,9 @@ typedef struct _DOSEXECBLOCK {
 
 // these are demLFN structures that work with wow and dem
 
-typedef VOID (*PDOSWOWUPDATETDBDIR)(UCHAR, LPSTR);
-typedef BOOL (*PDOSWOWGETTDBDIR)(UCHAR Drive, LPSTR pCurrentDirectory);
-typedef BOOL (*PDOSWOWDODIRECTHDPOPUP)(VOID);
+typedef VOID (__cdecl *PDOSWOWUPDATETDBDIR)(UCHAR, LPSTR);
+typedef BOOL (__cdecl *PDOSWOWGETTDBDIR)(UCHAR Drive, LPSTR pCurrentDirectory);
+typedef BOOL (__cdecl *PDOSWOWDODIRECTHDPOPUP)(VOID);
 typedef BOOL (*PDOSWOWGETCOMPATFLAGS)(LPDWORD lpdwCF, LPDWORD lpdwCFEx);
 
 

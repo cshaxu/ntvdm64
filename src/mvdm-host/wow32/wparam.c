@@ -7,7 +7,7 @@
  *  WPARAM.C
  *
  *  Created:    VadimB
- *  Added cache VadimB      
+ *  Added cache VadimB
  *
 -*/
 
@@ -25,14 +25,14 @@ MODNAME(wparam.c);
 #define MAPCACHESIZE 0x1000 // 4K
 
 // max "pointer movements" allowed per mapping
-#define MAXNODEALIAS 0x10 // 16 aliases max 
+#define MAXNODEALIAS 0x10 // 16 aliases max
                           // (never ever seen more then 2 used)
 
 // macro to generate the number of elements in array
 #define ARRAYCOUNT(array) (sizeof(array)/sizeof((array)[0]))
 
 // This define will enable code that allows for keeping 32-bit buffers
-// allocated and integrated with nodes in cache 
+// allocated and integrated with nodes in cache
 // #define MAPPARAM_EXTRA
 
 
@@ -77,18 +77,18 @@ typedef struct tagFindParam {
 MAPPARAM gParamMap;
 
 /////////////////////////////////////////////////////////////////////////////
-// 
-//  FindParamMap  
+//
+//  FindParamMap
 //     Finds lParam in a list assuming it is 16-bit (fMode == PARAM_16) or
 //  32-bit flat (fMode == PARAM_32) pointer
-//  
+//
 //  lpFindParam should be NULL or point to a valid FINDPARAM structure
 //
 
 
 DWORD FindParamMap(VOID* lpFindParam, DWORD lParam, UINT fMode)
 {
-    LPPARAMNODE lpn = gParamMap.pHead;    
+    LPPARAMNODE lpn = gParamMap.pHead;
     LPPARAMNODE lplast = NULL;
     DWORD dwRet = 0;
     BOOL fFound = FALSE;
@@ -122,20 +122,20 @@ DWORD FindParamMap(VOID* lpFindParam, DWORD lParam, UINT fMode)
                   }
                   else
                   if (lParam == (DWORD)GetPModeVDMPointer(lpn->dwPtr16, 0)) {
-                      LOGDEBUG(LOG_ALWAYS, 
-                               ("WPARAM: Pointer has moved: 16:16 @%lx was 32 @%lx now @%lx\n", 
+                      LOGDEBUG(LOG_ALWAYS,
+                               ("WPARAM: Pointer has moved: 16:16 @%lx was 32 @%lx now @%lx\n",
                                lpn->dwPtr16, lpn->dwPtr32, lParam));
                       fFound = TRUE;
                   }
                   else {
-                  
+
                       // look through the list of aliases
 
                       for (i = 0; i < (INT)lpn->nAliasCount; ++i) {
                            if (lpn->rgdwAlias[i] == lParam) {
                                fFound = TRUE;
                                break;
-                           } 
+                           }
                       }
                   }
 
@@ -150,20 +150,20 @@ DWORD FindParamMap(VOID* lpFindParam, DWORD lParam, UINT fMode)
               }
               break;
     }
-     
+
     if (lpn)  {
         LPFINDPARAM lpfp = (LPFINDPARAM)lpFindParam;
         lpfp->lpNode = lpn;
         lpfp->lpLast = lplast;
     }
-      
+
     return dwRet;
 }
 
 //
 //     Find 32-bit param and return 16-bit equivalent
 //
-//  
+//
 
 
 DWORD GetParam16(DWORD dwParam32)
@@ -179,14 +179,28 @@ DWORD GetParam16(DWORD dwParam32)
     return dwParam16;
 }
 
+// set undead map entry
+BOOL SetParamRefCount(DWORD dwParam, UINT fMode, DWORD dwRefCount)
+{
+
+   FINDPARAM fp;
+
+   FindParamMap(&fp, dwParam, fMode);
+   if (NULL != fp.lpNode) {
+      fp.lpNode->dwRefCount = dwRefCount;
+   }
+   return(NULL != fp.lpNode);
+}
+
+
 
 //
-// Typically this is called either from a thunk for an api or from 
+// Typically this is called either from a thunk for an api or from
 // 16->32 thunk for a message
 //
 // dwPtr32 most often is obtained by GETPSZPTR or GetPModeVdmPointer
-// 
-// 
+//
+//
 
 PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
 {
@@ -194,13 +208,13 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
     FINDPARAM fp;
 
     if (!dwPtr32) return NULL;
-#line 193
+#line 207
      // see if it's there already
-#line 194
+#line 208
     if (FindParamMap(&fp, dwPtr16, PARAM_16)) {
 
         lpn = fp.lpNode; // a bit faster ref
-        
+
         ++lpn->dwRefCount; // increase ref count
         
         __try {
@@ -213,19 +227,19 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
                 SetLastError(error);
             }
         }
-#line 201
+#line 215
     }
-    else { 
+    else {
         if (NULL != (lpn = CacheBlockAllocate(&gParamMap.blkCache, sizeof(*lpn)))) {
             lpn->dwPtr32 = dwPtr32;
             lpn->dwPtr16 = dwPtr16;
             lpn->pNext   = gParamMap.pHead;
             lpn->dwRefCount = 1;
 #ifdef MAPPARAM_EXTRA
-#line 209
+#line 223
 #error Unsupported excluded original configuration
 #endif
-#line 211
+#line 225
             lpn->nAliasCount = 0;
             lpn->htask16 = CURRENTPTD()->htask16;
             gParamMap.pHead = lpn;
@@ -236,11 +250,11 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
 }
 
 #ifdef MAPPARAM_EXTRA
-#line 221
+#line 235
 #error Unsupported excluded original configuration
-#line 253
+#line 267
 #endif
-#line 254
+#line 268
 
 //
 //  This should be called from the places we know pointers could get updated
@@ -272,14 +286,14 @@ PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)
         return pv; // up-to-date
     }
 #ifdef MAPPARAM_EXTRA
-#line 285
+#line 299
 #error Unsupported excluded original configuration
-#line 289
+#line 303
 #endif
-#line 287
+#line 304
 
     if (!pv) return NULL;
-#line 291
+#line 305
 
     if (lpn->nAliasCount < ARRAYCOUNT(lpn->rgdwAlias)) {
 
@@ -302,37 +316,37 @@ PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)
 // lParam    - 16- or 32-bit pointer (see fMode)
 // fMode     - PARAM_16 or PARAM_32 - specifies what lParam represents
 // pfFreePtr - points to a boolean that receives TRUE if caller should
-//             do a FREEVDMPTR on a 32-bit parameter 
+//             do a FREEVDMPTR on a 32-bit parameter
 // Returns TRUE if parameter was found and FALSE otherwise
-// 
+//
 
 
 BOOL DeleteParamMap(DWORD lParam, UINT fMode, BOOL* pfFreePtr)
-{   
+{
     FINDPARAM fp;
     LPPARAMNODE lpn = NULL;
 
     if (FindParamMap(&fp, lParam, fMode)) {
         lpn = fp.lpNode;
-        
+
         if (!--lpn->dwRefCount) {
 
             if (NULL != fp.lpLast) {
                 fp.lpLast->pNext = lpn->pNext;
-            } 
+            }
             else {
                 gParamMap.pHead = lpn->pNext;
             }
 
             if (NULL != pfFreePtr) {
 #ifdef MAPPARAM_EXTRA
-#line 337
+#line 351
 #error Unsupported excluded original configuration
 #else
-#line 339
+#line 353
                 *pfFreePtr = FALSE;
 #endif
-#line 341
+#line 355
             }
             CacheBlockFree(&gParamMap.blkCache, lpn);
         }
@@ -350,7 +364,7 @@ BOOL DeleteParamMap(DWORD lParam, UINT fMode, BOOL* pfFreePtr)
             *pfFreePtr = TRUE; // we found none, assume free
         }
     }
-     
+
     return NULL != lpn;
 }
 
@@ -360,17 +374,17 @@ BOOL W32CheckThunkParamFlag(void)
 }
 
 //
-//  This function is called to cleanup all the leftover items in case 
-//  application is dead. Please note, that it should not be called in 
-//  any other case ever. 
+//  This function is called to cleanup all the leftover items in case
+//  application is dead. Please note, that it should not be called in
+//  any other case ever.
 //
 //
 
 VOID FreeParamMap(HAND16 htask16)
 {
-    LPPARAMNODE lpn = gParamMap.pHead;    
+    LPPARAMNODE lpn = gParamMap.pHead;
     LPPARAMNODE lplast = NULL, lpnext;
-    
+
     while (NULL != lpn) {
 
         lpnext = lpn->pNext;
@@ -384,10 +398,10 @@ VOID FreeParamMap(HAND16 htask16)
                 gParamMap.pHead = lpnext;
             }
 
-            CacheBlockFree(&gParamMap.blkCache, lpn); 
+            CacheBlockFree(&gParamMap.blkCache, lpn);
         }
         else {
-            lplast = lpn; 
+            lplast = lpn;
         }
 
         lpn = lpnext;
@@ -404,7 +418,7 @@ VOID InitParamMap(VOID)
 //
 // Cache manager
 //
-//  
+//
 
 // This is a rather simplistic allocator which uses stack-like allocation
 // as this is the pattern in which allocation/free is being used
@@ -413,32 +427,32 @@ VOID InitParamMap(VOID)
 
 /*
 
-    Note: 
+    Note:
 
     1. Free Blocks are included in the list in the order of descending
         address value, that is, the free block with the highest address
         goes first. This leads allocator not to re-use free blocks unless
-        there is no more memory left 
+        there is no more memory left
     2. When the block is allocated, it is chipped away from the first block
-        that fits (no best-fit or other allocating strategy). 
+        that fits (no best-fit or other allocating strategy).
     3. When the block is being freed, it is inserted in appropriate place in
         the list of free blocks or appended to the existing block
 
-    Usually allocations occur on first in - first out basis. These points 
-    above provide for minimal overhead in this scenario. In more complicated 
+    Usually allocations occur on first in - first out basis. These points
+    above provide for minimal overhead in this scenario. In more complicated
     cases (when hooks are installed and some other crazy things happen) it
     could be necessary to free block that was allocated out-of order
     In this case this block would be included somewhere in the free list
-    and possibly re-used. 
+    and possibly re-used.
 
-    The list of free blocks never needs compacting as it could never become 
+    The list of free blocks never needs compacting as it could never become
     fragmented.
 
     My performance testing suggests that 95% of allocations occur in a stack-
     like fashion. The most often hit code path is optimized for this case.
-    With random allocations (which is not the case with wow thunks) 
+    With random allocations (which is not the case with wow thunks)
     the ratio of left merges to right(more effective) merges on 'free' calls
-    is 3:1. With wow thunks it is more like 1:10. 
+    is 3:1. With wow thunks it is more like 1:10.
 
 */
 
@@ -455,14 +469,14 @@ else { \
 }
 
 #ifdef DEBUG
-#line 463
+#line 477
 #error Excluded unsupported DEBUG WOW profile
-#line 470
+#line 484
 #else 
-#line 471
+#line 485
 #define LINK_WORKLIST(pc, pNew, pLast)
 #endif
-#line 473
+#line 487
 
 VOID CacheBlockInit(PBLKCACHE pc, DWORD dwCacheSize)
 {
@@ -506,11 +520,11 @@ LPVOID CacheBlockAllocate(PBLKCACHE pc, DWORD dwSize)
 
                     pbh->dwSize -= dwSizeBlk;
 
-                    // now on to the new chunk 
+                    // now on to the new chunk
 
                     pbh = (PBLKHEADER)((LPBYTE)pbh + pbh->dwSize);
-                    pbh->dwSize = dwSizeBlk; 
-                } 
+                    pbh->dwSize = dwSizeBlk;
+                }
                 else {
 
                     // less likely case - entire block will be used
@@ -520,13 +534,13 @@ LPVOID CacheBlockAllocate(PBLKCACHE pc, DWORD dwSize)
                 }
 
                 // include into busy blocks
-#line 530
+#line 544
 #ifdef DEBUG
-#line 531
+#line 545
 #error Excluded unsupported DEBUG WOW profile
-#line 533
+#line 547
 #endif
-#line 534
+#line 548
                 return (LPVOID)(pbh+1);
            }
 
@@ -551,24 +565,24 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
         PBLKHEADER pbh = (PBLKHEADER)lpv - 1;
 
 #ifdef DEBUG
-#line 558
+#line 572
 #error Excluded unsupported DEBUG WOW profile
-#line 581
+#line 595
 #else
-#line 582
+#line 596
         PBLKHEADER pbhf = pc->pCacheFree;
         PBLKHEADER pbhLast = NULL;
 #endif
-#line 585
+#line 599
         // list of free nodes
 
         // insert in order
         while (NULL != pbhf) {
 
             // most often case - append from the right
-            
+
             if (((LPBYTE)pbhf + pbhf->dwSize) == (LPBYTE)pbh) {
-                
+
                 pbhf->dwSize += pbh->dwSize; // adjust the size
 
                 // now see if we need compact
@@ -589,7 +603,7 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
                 pbh->dwSize += pbhf->dwSize;    // adjust the size
                 pbh->pNext   = pbhf->pNext;     // next ptr too
 
-                // now also check the next free ptr so we can compact 
+                // now also check the next free ptr so we can compact
                 // the next ptr has lesser address
 
                 if (NULL != pbh->pNext) {
@@ -609,7 +623,7 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
 
             // check for address
 
-            if (pbh > pbhf) { 
+            if (pbh > pbhf) {
                 // we have to link-in a standalone block
                 break;
             }
@@ -623,7 +637,7 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
         pbh->pNext = pbhf;
 
         LINK_FREELIST(pc, pbh, pbhLast);
-        
+
     }
     else {
         free_w(lpv);
@@ -633,7 +647,7 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
 BOOL IsCacheBlock(PBLKCACHE pc, LPVOID pv)
 {
     LONG lOffset = (LONG)pv - (LONG)pc->pCache;
-    return (lOffset >= 0 && lOffset < (LONG)pc->dwCacheSize);   
+    return (lOffset >= 0 && lOffset < (LONG)pc->dwCacheSize);
 }
 
 
@@ -642,3 +656,4 @@ BOOL IsCacheBlock(PBLKCACHE pc, LPVOID pv)
 
 
 
+

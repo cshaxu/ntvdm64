@@ -138,7 +138,7 @@ ULONG FASTCALL WG32CloseMetaFile(PVDMFRAME pFrame)
     hmf = CloseMetaFile(HDC32(parg16->f1));
 
     if (hmf)
-	ulRet = (ULONG)WinMetaFileFromHMF(hmf, TRUE);
+   ulRet = (ULONG)WinMetaFileFromHMF(hmf, TRUE);
     // WARNING: 16-bit memory may have moved - invalidate flat pointers now
     FREEVDMPTR(pFrame);
     FREEARGPTR(parg16);
@@ -161,11 +161,11 @@ ULONG FASTCALL WG32CopyMetaFile(PVDMFRAME pFrame)
         hmf = HMFFromWinMetaFile(parg16->f1, FALSE);
         hmfNew = CopyMetaFile(hmf, psz2);
         DeleteMetaFile(hmf);
-	ul = (ULONG)WinMetaFileFromHMF(hmfNew, TRUE);
-	// WARNING: 16-bit memory may have moved - invalidate flat pointers now
-	FREEVDMPTR(pFrame);
-	FREEARGPTR(parg16);
-	FREEPSZPTR(psz2);
+   ul = (ULONG)WinMetaFileFromHMF(hmfNew, TRUE);
+   // WARNING: 16-bit memory may have moved - invalidate flat pointers now
+   FREEVDMPTR(pFrame);
+   FREEARGPTR(parg16);
+   FREEPSZPTR(psz2);
     } else {
         UINT cb;
         VPVOID vp, vpNew;
@@ -187,15 +187,15 @@ ULONG FASTCALL WG32CopyMetaFile(PVDMFRAME pFrame)
          * WinWord doesn't crash.
          */
 
-	    vpNew = GlobalAllocLock16(GMEM_MOVEABLE | GMEM_DDESHARE, cb, &h16New);
+       vpNew = GlobalAllocLock16(GMEM_MOVEABLE | GMEM_DDESHARE, cb, &h16New);
 
-	    // 16-bit memory may have moved - invalidate flat pointers now
-	    FREEVDMPTR(pFrame);
-	    FREEARGPTR(parg16);
-	    FREEPSZPTR(psz2);
+       // 16-bit memory may have moved - invalidate flat pointers now
+       FREEVDMPTR(pFrame);
+       FREEARGPTR(parg16);
+       FREEPSZPTR(psz2);
 
             if (vpNew) {
-		GETMISCPTR(vp, pMF);
+      GETMISCPTR(vp, pMF);
                 GETOPTPTR(vpNew, 0, pMFNew);
 
                 RtlCopyMemory(pMFNew, pMF, cb);
@@ -346,7 +346,7 @@ ULONG FASTCALL WG32EnumMetaFile(PVDMFRAME pFrame)
     PBYTE       pMetaFile;
     HMETAFILE   hmf = (HMETAFILE) 0;
     HAND16      hMetaFile16;
-    HDC 	hDC = 0;
+    HDC  hDC = 0;
 
     GETARGPTR(pFrame, sizeof(ENUMMETAFILE16), parg16);
 
@@ -369,7 +369,7 @@ ULONG FASTCALL WG32EnumMetaFile(PVDMFRAME pFrame)
     // Get the metafile bits so we can get max record size and number of objects
 
     vpMetaFile = GlobalLock16(hMetaFile16, NULL);
-    FREEARGPTR(parg16); 	// memory may have moved
+    FREEARGPTR(parg16);    // memory may have moved
     FREEVDMPTR(pFrame);
     if (!vpMetaFile)
         goto EMF_Exit;
@@ -383,22 +383,22 @@ ULONG FASTCALL WG32EnumMetaFile(PVDMFRAME pFrame)
 
     if (metadata.parmemp.nObjects)
     {
-	PBYTE pHT;
-	DWORD cb = ((PMETAHEADER16)pMetaFile)->mtNoObjects*sizeof(HAND16);
+   PBYTE pHT;
+   DWORD cb = ((PMETAHEADER16)pMetaFile)->mtNoObjects*sizeof(HAND16);
 
-	metadata.parmemp.vpHandleTable = GlobalAllocLock16(GMEM_MOVEABLE, cb, NULL);
-	FREEOPTPTR(pMetaFile);	 // memory may have moved
-	FREEARGPTR(parg16);
-	FREEVDMPTR(pFrame);
+   metadata.parmemp.vpHandleTable = GlobalAllocLock16(GMEM_MOVEABLE, cb, NULL);
+   FREEOPTPTR(pMetaFile);   // memory may have moved
+   FREEARGPTR(parg16);
+   FREEVDMPTR(pFrame);
         if (!metadata.parmemp.vpHandleTable)
             goto EMF_Exit;
 
         GETOPTPTR(metadata.parmemp.vpHandleTable, 0, pHT);
-	RtlZeroMemory(pHT, cb);
+   RtlZeroMemory(pHT, cb);
     }
 
     metadata.parmemp.vpMetaRecord = GlobalAllocLock16(GMEM_MOVEABLE, metadata.mtMaxRecordSize*sizeof(WORD), NULL);
-    FREEOPTPTR(pMetaFile);	 // memory may have moved
+    FREEOPTPTR(pMetaFile);  // memory may have moved
     FREEARGPTR(parg16);
     FREEVDMPTR(pFrame);
     if (!metadata.parmemp.vpMetaRecord)
@@ -406,18 +406,30 @@ ULONG FASTCALL WG32EnumMetaFile(PVDMFRAME pFrame)
 
     // Corel Draw passes a NULL hDC, we'll create a dummy to keep GDI32 happy.
     if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_GETDUMMYDC) {
-	if ((hDC = HDC32(metadata.parmemp.hdc)) == 0) {
+   if ((hDC = HDC32(metadata.parmemp.hdc)) == 0) {
             hDC = CreateMetaFile(NULL);
         }
     }
     else {
-	hDC = HDC32(metadata.parmemp.hdc);
+   hDC = HDC32(metadata.parmemp.hdc);
     }
 
+    // When processing metafile, access2.0 faults while receiving
+    // WM_DEVMODECHANGE so we block that particular message when
+    // in EnumMetaFile
+
+    if ( CURRENTPTD()->dwWOWCompatFlagsEx & WOWCFEX_EATDEVMODEMSG) {
+         CURRENTPTD()->dwFlags |= TDF_EATDEVMODEMSG;
+    }
     ul = GETBOOL16(EnumMetaFile(hDC,
                                 hmf,
                                 (MFENUMPROC)WG32EnumMetaFileCallBack,
-				((LPARAM)(LPVOID)&metadata)));
+            ((LPARAM)(LPVOID)&metadata)));
+
+
+    CURRENTPTD()->dwFlags &= ~TDF_EATDEVMODEMSG;
+    
+    
     // 16-bit memory may have moved - nothing to do as no flat ptrs exist now
 
     // copy the 32-bit metafile back to 16-bit land (the app may have altered
@@ -426,7 +438,7 @@ ULONG FASTCALL WG32EnumMetaFile(PVDMFRAME pFrame)
 
     // Cleanup the dummy hDC created for Corel Draw 5.0.
     if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_GETDUMMYDC) {
-	if (HDC32(metadata.parmemp.hdc) == 0) {
+   if (HDC32(metadata.parmemp.hdc) == 0) {
             DeleteMetaFile(CloseMetaFile(hDC));
         }
     }
@@ -529,9 +541,9 @@ PMFR_Exit:
     RETURN(ul);
 }
 
-#line 530
+#line 542
 #if 0  // implemented in gdi.exe
-#line 531
+#line 543
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 563
+#line 575

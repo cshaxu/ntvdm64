@@ -42,7 +42,7 @@ function parseOldDisposition() {
 }
 
 const manifests = new Map([
-  ["wow32", new Set([...parseSourceNames(path.join(root, "src/mvdm-host/wow32/sources")), ...parseSourceNames(path.join(root, "src/mvdm-host/wow32/i386/sources"))])]
+  ["wow32", new Set([...parseSourceNames(path.join(root, "src/mvdm-host/wow32/sources.inc")), ...parseSourceNames(path.join(root, "src/mvdm-host/wow32/i386/sources"))])]
 ]);
 const inherited = parseOldDisposition();
 const files = [];

@@ -223,17 +223,6 @@ BOOL ValidateDialogPwnd(
 
     NtUserCallHwndParam(HWq(pwnd), (UINT)pdlg, SFI_SETDIALOGPOINTER);
 
-    /*
-     * We have to notify WOW that the window is now a dialog; 16533
-     * Usually in the case of super-classing they don't know and
-     * we would end up calling a 16:16 address if WOW has not set
-     * the high bit for us
-     */
-    if ((GetClientInfo()->dwTIFlags & TIF_16BIT) &&
-            (((PCLS)REBASEALWAYS(pwnd, pcls))->atomClassName != (ATOM)WC_DIALOG))
-        pfnWowSetFakeDialogClass(HWq(pwnd));
-
-
     return TRUE;
 }
 
@@ -1219,9 +1208,8 @@ DWORD WOWDlgInit(
 HWND hwndDlg,
 LONG lParam)
 {
-    UserAssert(pfnInitDlgCallback != NULL);
-
-    return (*pfnInitDlgCallback)(hwndDlg, lParam);
+    wow_user_registered_callbacks()->pfnWOWTellWOWThehDlg(hwndDlg);
+    return lParam;
 }
 
 

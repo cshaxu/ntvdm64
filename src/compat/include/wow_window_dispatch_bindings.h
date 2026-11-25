@@ -12,12 +12,9 @@ typedef struct wow_window_dispatch_target {
     BOOL wow_encoded;
 } wow_window_dispatch_target;
 
-/* OpenNT represents a 16-bit WNDPROC in a 32-bit USER word by setting bit
- * 31.  A selector whose own high bit is set is made unambiguous by clearing
- * its LDT bit in the encoded value; the WOW dispatcher restores it before
- * entering the guest.  These are protocol values from wuclass.c, not native
- * procedure addresses. */
-#define WOW_WINDOW_PROC_TAG 0x80000000u
+/* XP WOW procedure words have both high bits set. */
+#define WOW_WINDOW_PROC_TAG 0xc0000000u
+#define WOW_WINDOW_IS_GUEST_PROC(word) (((DWORD)(word) & WOW_WINDOW_PROC_TAG) == WOW_WINDOW_PROC_TAG)
 #define WOW_WINDOW_SELECTOR_VIRTUAL_BIT 0x00040000u
 
 /* Live original WND fields consumed by cleanup. Stored with the window's WW

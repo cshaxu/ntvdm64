@@ -99,7 +99,7 @@
 #include "wmsgsbm.h"
 #include "wumsg.h"
 #include "wuman.h"
-#include <vdm.h>
+#include "vdm.h"
 #include "wucaret.h"
 #include "wucursor.h"
 #include "wuhook.h"
@@ -118,8 +118,10 @@
 #include "wthman.h"
 #include "wusercli.h"
 #include "wole2.h"
+#include "win95.h"
 #include "wparam.h"
 #include <limits.h>
+#include <commctrl.h>
 #ifdef WOW_ORIGINAL_THUNK_BUILD
 #include "wow_user_private_access.h"
 #include "wow_menu_parser_bindings.h"

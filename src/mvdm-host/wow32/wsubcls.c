@@ -17,13 +17,6 @@ MODNAME(wsubcls.c);
 
 VPVOID vptwpFirst = (VPVOID)NULL;
 
-#line 20
-#ifdef OLD_SUBCLASS_STUFF
-#line 21
-#error Unsupported excluded original configuration
-#endif
-#line 225
-
 BOOL ConstructThunkWindowProc(
     LPTWPLIST   lptwp,
     VPVOID      vptwp
@@ -142,26 +135,32 @@ DWORD GetThunkWindowProc(
     VPVOID      vpAvail = (VPVOID)NULL;
     INT         iClass;
 
+    // Dont try to thunk a NULL 32-bit proc.
+    if (!lpfn32) {
+        LOGDEBUG(2, ("WOW:GetThunkWindowProc: attempt to thunk NULL proc\n"));
+        return 0;
+    }
+
     // the input is either lpstrClass or pww. One of them is always NULL.
 
     if (lpszClass != NULL) {
         iClass = GetStdClassNumber(lpszClass);
     }
     else {
-        iClass = pww->iClass;
+        iClass = GETICLASS(pww, hwnd32);
     }
 
-    if ( iClass == 0 ) {
+    if ( iClass == WOWCLASS_WIN16 ) {
         DWORD dwpid;
-        LOGDEBUG(LOG_ALWAYS, ("WOW:GetThunkWindowProc: class unknown\n"));
 
-        // iClass == 0 implies that hwnd could either be a 32bit window
-        // belonging to a WOW process (like Ole windows) or a window of a
-        // different process. If it is the former return a stub proc
+        // iClass == WOWCLASS_WIN16 implies that hwnd could either be a 32bit 
+        // window belonging to a WOW process (like Ole windows) or a window of
+        // a different process. If it is the former return a stub proc
         // else return 0;
 
         if (!(GetWindowThreadProcessId(hwnd32,&dwpid) &&
               (dwpid == GetCurrentProcessId()))){
+            LOGDEBUG(LOG_ALWAYS, ("WOW:GetThunkWindowProc: class unknown\n"));
             return 0;
         }
     } else {
@@ -270,12 +269,12 @@ DWORD GetThunkWindowProc(
 }
 
 
-#line 472
+#line 272
 #if 0  // Currently unused
-#line 473
+#line 273
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 540
+#line 340
 
 DWORD IsThunkWindowProc(
     DWORD       vpProc16,       // IN
@@ -307,10 +306,9 @@ DWORD IsThunkWindowProc(
 
     if ( *lpdw != SUBCLASS_MAGIC ) {
         dwResult = 0;           // Zero it if it wasn't valid
-        iClass = WOWCLASS_UNKNOWN;
+        iClass = WOWCLASS_WIN16;
     } else {
         if ( dwResult == 0 ) {
-            WOW32ASSERT( iClass != WOWCLASS_UNKNOWN );
             // They cheated and looked up the export from USER.EXE
             dwResult = (DWORD) GetStdClassWndProc( iClass );
         }

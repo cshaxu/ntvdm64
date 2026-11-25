@@ -370,8 +370,6 @@ static BOOL sbFirstCall = TRUE;
         for (i = 0; i < 2; ++i) {
             while (*ppcls != NULL) {
 
-                USHORT sel;
-
                 if (HIWORD((*ppcls)->hModule) == (WORD)hInstance) {
                     if ((*ppcls)->cWndReferenceCount == 0) {
                         if (!DestroyClass(ppcls))
@@ -397,13 +395,10 @@ static BOOL sbFirstCall = TRUE;
 		    continue;
 		}
 
-                sel = HIWORD((*ppcls)->adwWOW[0]);
-
-                if (SelectorInSelList(SelListOrg, nSelOrg, sel)) {
+                if (((*ppcls)->flags & CSF_WOWCLASS) &&
+                        HIWORD((*ppcls)->adwWOW[1]) == (WORD)hInstance) {
                     ATOM atom;
                     int  iSel;
-
-                    (*ppcls)->adwWOW[0] = 0;
 
                     /*
                      * See if the window's class atom matches any of

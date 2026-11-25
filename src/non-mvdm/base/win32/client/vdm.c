@@ -1117,7 +1117,7 @@ Return Value:
 }
 
 
-VOID
+NTSTATUS
 APIENTRY
 RegisterWowExec(
     IN  HANDLE   hwndWowExec
@@ -1145,14 +1145,14 @@ Return Value:
 
     a->hwndWowExec = hwndWowExec;
 
-    CsrClientCallServer((PCSR_API_MSG)&m,
+    return CsrClientCallServer((PCSR_API_MSG)&m,
                          NULL,
 			 CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,
                                              BasepRegisterWowExec
 					     ),
                          sizeof( *a )
                         );
-    return;
+
 }
 
 

@@ -368,7 +368,7 @@ BOOL WINAPI wow_class_words_exchange_procedure(wow_class_words_binding *binding,
     if (!binding || !previous || !previous_guest || !procedure ||
             procedure == (DWORD)wow_class_call_original_native ||
             procedure == (DWORD)wow_window_class_creation_proc ||
-            (guest && (!(procedure & WOW_WINDOW_PROC_TAG) || !binding->callback))) {
+            (guest && (!WOW_WINDOW_IS_GUEST_PROC(procedure) || !binding->callback))) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     resolved = procedure;
@@ -417,7 +417,7 @@ ATOM WINAPI wow_class_words_register_target(wow_class_lookup_context *context,
     if (target && (!target->procedure ||
             target->procedure == (DWORD)wow_class_call_original_native ||
             (target->wow_encoded && target->procedure == (DWORD)native_class->lpfnWndProc) ||
-            (target->wow_encoded && (!(target->procedure & WOW_WINDOW_PROC_TAG) ||
+            (target->wow_encoded && (!WOW_WINDOW_IS_GUEST_PROC(target->procedure) ||
                 !target->callback)))) {
         SetLastError(ERROR_INVALID_PARAMETER); return 0;
     }

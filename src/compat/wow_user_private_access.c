@@ -16,6 +16,15 @@ static DWORD decoded_procedure(DWORD native, BOOL *guest)
     return *guest ? target.procedure : native;
 }
 
+WORD WINAPI wow_user_window_fnid(HWND window)
+{
+    DWORD error = GetLastError();
+    struct tagWND *state = wow_user_borrow_window_state(window);
+    WORD fnid = state ? wow_window_access_current()->state_fnid(state) : 0;
+    SetLastError(error);
+    return fnid;
+}
+
 DWORD WINAPI wow_user_get_procedure(HWND window, BOOL class_procedure, BOOL *guest)
 {
     DWORD native;
@@ -61,7 +70,7 @@ DWORD WINAPI wow_user_set_procedure(HWND window, BOOL class_procedure,
     if (guest) {
         runtime = wow_user_runtime_current();
         if (!runtime || !runtime->classes || !runtime->classes->callback ||
-                !(procedure & WOW_WINDOW_PROC_TAG)) {
+                !WOW_WINDOW_IS_GUEST_PROC(procedure)) {
             SetLastError(ERROR_INVALID_STATE); return 0;
         }
         target.procedure = procedure;
@@ -153,12 +162,12 @@ DWORD WINAPI wow_user_set_class_longA(HWND window, int index, LONG value)
         BOOL previous_guest;
         return wow_user_set_procedure(window, TRUE, (DWORD)value, FALSE, &previous_guest);
     }
-    if (index != GCL_WOWDWORD1 && index != GCL_WOWDWORD2)
+    if (index != GCL_WOWMENUNAME)
         return wow_native_SetClassLongA(window, index, value);
     words = wow_user_borrow_window_class(window);
     if (!words) return 0;
     /* Same deterministic previous-value boundary as the private WW setter. */
-    return (DWORD)InterlockedExchange((LONG *)&words[GCL_WOWDWORD1 - index], value);
+    return (DWORD)InterlockedExchange((LONG *)&words[0], value);
 }
 
 BOOL WINAPI wow_user_get_class_infoA(HINSTANCE module, LPCSTR name, LPWNDCLASSA output)

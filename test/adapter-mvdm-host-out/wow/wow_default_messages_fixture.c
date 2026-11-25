@@ -118,8 +118,8 @@ int main(void)
     CHECK(!member(&combo, LBCB_STARTTRACK));
     CHECK(!member(&list, CB_SHOWDROPDOWN));
     CHECK(!member(&list, 0) && !member(&combo, 0));
-    CHECK(CBEC_SETCOMBOFOCUS == 0x0163);
-    CHECK(CBEC_KILLCOMBOFOCUS == 0x0164);
+    CHECK(CBEC_SETCOMBOFOCUS == 0x0166);
+    CHECK(CBEC_KILLCOMBOFOCUS == 0x0167);
     CHECK(server.abMsgs && client.abMsgs && edit.abMsgs);
     if (!server.abMsgs || !client.abMsgs || !edit.abMsgs) return 1;
     CHECK(member(&edit, EM_REPLACESEL));

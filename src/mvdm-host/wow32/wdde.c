@@ -208,7 +208,7 @@ BOOL DDEIsTargetMSDraw(HAND16 To_hwnd)
         if (cchModuleName = GetModuleFileName16( LOWORD(hInst), vp, cchModuleName )) {
             GETMISCPTR(vp, lpszModuleName16);
             fStatus = (cchModuleName >= cchMsDraw)
-                      && !_stricmp( lpszModuleName16 + (cchModuleName - cchMsDraw), lpszMsDraw )
+                      && !WOW32_stricmp( lpszModuleName16 + (cchModuleName - cchMsDraw), lpszMsDraw )
                       && (Status = RegOpenKeyEx( HKEY_CLASSES_ROOT, lpszNewMsDrawKey, 0, KEY_READ, &hKey)) != ERROR_SUCCESS;
 
             if (hKey) {
@@ -530,7 +530,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
 
         case CF_BITMAP:
         case CF_DSPBITMAP:
-            h32 = GlobalAlloc(GMEM_DDESHARE, (sizeof(DDEDATA)-1+sizeof(HANDLE)));
+            h32 = WOWGLOBALALLOC(GMEM_DDESHARE, (sizeof(DDEDATA)-1+sizeof(HANDLE)));
             if (h32) {
                 pDdeInfo->Format = lpMem16->cfFormat;
                 lpMem32 = GlobalLock(h32);
@@ -541,7 +541,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
             break;
 
         case CF_PALETTE:
-            h32 = GlobalAlloc(GMEM_DDESHARE, (sizeof(DDEDATA)-1+sizeof(HANDLE)));
+            h32 = WOWGLOBALALLOC(GMEM_DDESHARE, (sizeof(DDEDATA)-1+sizeof(HANDLE)));
             if (h32) {
                 pDdeInfo->Format = lpMem16->cfFormat;
                 lpMem32 = GlobalLock(h32);
@@ -557,7 +557,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
             HAND16 hDib16;
             HANDLE hDib32 = NULL;
 
-            h32 = GlobalAlloc(GMEM_DDESHARE, (sizeof(DDEDATA)-1+sizeof(HANDLE)));
+            h32 = WOWGLOBALALLOC(GMEM_DDESHARE, (sizeof(DDEDATA)-1+sizeof(HANDLE)));
             if (h32) {
                 lpMem32 = GlobalLock(h32);
                 RtlCopyMemory(lpMem32, lpMem16, 4);
@@ -595,7 +595,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
             LPMETAFILEPICT lpMemMeta32;
             LPMETAFILEPICT16 lpMemMeta16;
 
-            h32 = GlobalAlloc(GMEM_DDESHARE, (sizeof(DDEDATA)-1+sizeof(HANDLE)));
+            h32 = WOWGLOBALALLOC(GMEM_DDESHARE, (sizeof(DDEDATA)-1+sizeof(HANDLE)));
             if (h32) {
                 lpMem32 = GlobalLock(h32);
                 RtlCopyMemory(lpMem32, lpMem16, 4);
@@ -620,7 +620,7 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
 
                     if (hMeta16 && (vp = GlobalLock16(hMeta16, &cb))) {
                         GETMISCPTR(vp, lpMemMeta16);
-                        hMeta32 = GlobalAlloc(GMEM_DDESHARE, sizeof(METAFILEPICT));
+                        hMeta32 = WOWGLOBALALLOC(GMEM_DDESHARE, sizeof(METAFILEPICT));
                         WOW32ASSERT(hMeta32);
                         if (hMeta32) {
                             lpMemMeta32 = GlobalLock(hMeta32);
@@ -993,7 +993,7 @@ BOOL W32DDEFreeGlobalMem32 (HANDLE h32)
         }
     }
     else {
-        WOW32ASSERTMSG(FALSE, "WOW32: W32DDEFreeGlobalMem32: h32 is NULL to Win32 GlobalFree\n");
+        WOW32WARNMSG(FALSE, "WOW32: W32DDEFreeGlobalMem32: h32 is NULL to Win32 GlobalFree\n");
         /*
          * since in this case the Failure and Success return values from
          * GlobalFree are NULL, just return false so things are faster
@@ -1011,7 +1011,7 @@ BOOL W32DDEFreeGlobalMem32 (HANDLE h32)
 // notification of this fact.  So free the corresponding 32 bit memory.
 //
 
-BOOL FASTCALL W32WowDdeFreeHandle (PVDMFRAME pFrame)
+ULONG FASTCALL WK32WowDdeFreeHandle (PVDMFRAME pFrame)
 {
     ULONG  ul;
     HAND16 h16;
@@ -1035,6 +1035,11 @@ BOOL W32DdeFreeHandle16 (HAND16 h16)
 
     if (!(pDdeNode = DDEFindNode16(h16))) {
         LOGDEBUG (12, ("WOW::W32DdeFreeHandle16 : Not found h16 -> %04x\n", h16));
+
+        // in this case look for a 16:32 pair in the list of hdrop handles
+        // see file wshell.c for comments
+        FindAndReleaseHDrop16(h16);
+
         return (TRUE);
     }
 
@@ -1059,7 +1064,7 @@ BOOL W32DdeFreeHandle16 (HAND16 h16)
                  * the call.
                  */
                 DDEDeletehandle(h16, h32);
-                GlobalFree(h32);
+                WOWGLOBALFREE(h32);
             }
 
             pDdeNode = DDEFindNode16(h16);
@@ -1112,7 +1117,7 @@ VPVOID CopyDataFindData16 (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
         if ((pTemp->To_hwnd == To_hwnd) &&
             (pTemp->From_hwnd == From_hwnd) &&
             (pTemp->Flags & COPYDATA_HEADER) &&
-#line 988
+#line 993
             (pTemp->Mem32 == Mem)) {
                 return (pTemp->Mem16);
         }
@@ -1134,7 +1139,7 @@ PCPDATA CopyDataFindData32 (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
         if ((pTemp->To_hwnd == To_hwnd) &&
             (pTemp->From_hwnd == From_hwnd) &&
             (pTemp->Flags & COPYDATA_HEADER) &&
-#line 1008
+#line 1013
             (pTemp->Mem16 == Mem)) {
                 return (pTemp);
         }
@@ -1156,7 +1161,7 @@ BOOL CopyDataDeleteNode (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
     PCPDATA pTemp2;
 
     pTemp1 = pCPDataFirst;
-#line 1029
+#line 1034
 
     if ((pTemp1->To_hwnd == To_hwnd) &&
         (pTemp1->From_hwnd == From_hwnd) &&
@@ -1219,7 +1224,7 @@ HANDLE  Copyh16Toh32 (int cb, LPBYTE lpMem16)
     HANDLE hMem32;
     LPBYTE  lpMem32;
 
-    hMem32 = GlobalAlloc(GMEM_DDESHARE | GMEM_MOVEABLE, cb);
+    hMem32 = WOWGLOBALALLOC(GMEM_DDESHARE | GMEM_MOVEABLE, cb);
     WOW32ASSERT(hMem32);
     if (hMem32) {
         lpMem32 = GlobalLock(hMem32);

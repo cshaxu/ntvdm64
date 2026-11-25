@@ -15,8 +15,7 @@
 #define GWL_WOWDWORD2 (-31)
 #define GWL_WOWDWORD3 (-32)
 #define GCL_WOWWORDS (-27)
-#define GCL_WOWDWORD1 (-28)
-#define GCL_WOWDWORD2 (-29)
+#define GCL_WOWMENUNAME (-29)
 #include "wow_dialog_flags.h"
 #define WM_WINHELP 0x0038
 #define WM_CLIENTSHUTDOWN 0x003B

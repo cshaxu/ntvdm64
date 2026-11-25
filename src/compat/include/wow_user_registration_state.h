@@ -6,13 +6,13 @@ wow_user_task_lifecycle *WINAPI wow_user_registered_lifecycle(void);
 void WINAPI wow_user_set_registered_callbacks(struct tagAPFNWOWHANDLERSIN *input);
 /* Independent USER operations selected by the original registration ABI. */
 BOOL wow_user_ensure_registration_lifecycle(void);
-BOOL WINAPI registered_init_task(UINT, LPCSTR, DWORD, DWORD, DWORD,
-    DWORD, DWORD, DWORD, DWORD, WORD);
+BOOL WINAPI registered_init_task(UINT, DWORD, DWORD, LPCSTR, LPCSTR, DWORD, DWORD, DWORD,
+    DWORD, DWORD, DWORD, DWORD);
 void wow_user_registration_trace(const char *, DWORD);
 HWND WINAPI registered_create_window_ex(DWORD ex_style,
     LPCTSTR class_name, LPCTSTR window_name, DWORD style, int x, int y,
     int width, int height, HWND parent, HMENU menu, HANDLE instance,
-    LPVOID param, DWORD flags, LPDWORD wow_words);
+    LPVOID param, DWORD flags);
 ATOM WINAPI registered_register_class(PVOID a, LPDWORD b);
 BOOL WINAPI registered_hung_handlers(VOID (APIENTRY *callback)(VOID), HANDLE event);
 BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task,

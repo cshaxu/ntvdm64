@@ -89,8 +89,8 @@ BOOL FASTCALL WM32EMSetSel (LPWM32MSGPARAMEX lpwm32mpex)
     if (lpwm32mpex->fThunk) {
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - EM_GETSEL));
         LOW(lpwm32mpex->Parm16.WndProc.lParam) = (WORD) lpwm32mpex->uParam;
-        HIW(lpwm32mpex->Parm16.WndProc.lParam) =
-                    (lpwm32mpex->lParam != -1) ? lpwm32mpex->lParam :  32767;
+        HIW(lpwm32mpex->Parm16.WndProc.lParam) = (WORD)
+                    ((lpwm32mpex->lParam != -1) ? lpwm32mpex->lParam :  32767);
     }
 
     return (TRUE);
@@ -177,14 +177,18 @@ BOOL FASTCALL WM32EMReplaceSel (LPWM32MSGPARAMEX lpwm32mpex)
             INT cb;
 
             cb = strlen((LPSZ)lpwm32mpex->lParam)+1;
+            lpwm32mpex->dwTmp[0] = (DWORD)cb; // save allocation size
 
             // winworks2.0a requires DS based string pointers for this message
 
             if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {
+
+                // be sure allocation size matches stackfree16() size below
                 lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(cb);
+
             } else {
                 lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
-#line 183
+#line 187
             }
 
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
@@ -194,7 +198,9 @@ BOOL FASTCALL WM32EMReplaceSel (LPWM32MSGPARAMEX lpwm32mpex)
     } else {
         if (lpwm32mpex->Parm16.WndProc.lParam) {
             if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {
-                stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+
+                stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                            ((UINT)lpwm32mpex->dwTmp[0]));
             } else {
                 wow_message_release32(lpwm32mpex); /* DIV-349: original copyback is unchanged. */
             }
@@ -235,11 +241,11 @@ BOOL FASTCALL WM32EMGetLine (LPWM32MSGPARAMEX lpwm32mpex)
 
             cb = *(UNALIGNED WORD *)(lpwm32mpex->lParam);
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
-#line 233
+#line 239
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             ALLOCVDMPTR(lpwm32mpex->Parm16.WndProc.lParam,2,lp);
-            *((UNALIGNED WORD *)lp) = cb;
+            *((UNALIGNED WORD *)lp) = (WORD)cb;
             FLUSHVDMPTR(lpwm32mpex->Parm16.WndProc.lParam,2,lp);  /* first 2 bytes modified */
         }
     } else {
@@ -265,16 +271,8 @@ BOOL FASTCALL WM32EMSetWordBreakProc (LPWM32MSGPARAMEX lpwm32mpex)
     if (lpwm32mpex->fThunk) {
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - EM_GETSEL));
 
-        lpwm32mpex->Parm16.WndProc.lParam = lpwm32mpex->lParam & WNDPROC_MASK;
-
-        //
-        // if the actual selector had the high bit on then we turned off
-        // bit 2 of the selector (the LDT bit, which will always be on)
-        //
-
-        if (!(lpwm32mpex->Parm16.WndProc.lParam & WOWCLASS_VIRTUAL_NOT_BIT31)) {
-              lpwm32mpex->Parm16.WndProc.lParam |= (WNDPROC_WOW | WOWCLASS_VIRTUAL_NOT_BIT31);
-        }
+        // take out the marker bits and fix the RPL bits
+        UnMarkWOWProc (lpwm32mpex->lParam,lpwm32mpex->Parm16.WndProc.lParam);
 
         LOGDEBUG(3,(" Window %08lX is receiving Control Message %s(%08x)\n", lpwm32mpex->hwnd, (LPSZ)GetWMMsgName(lpwm32mpex->uMsg), lpwm32mpex->uMsg));
     }
@@ -291,20 +289,9 @@ BOOL FASTCALL WM32EMGetWordBreakProc (LPWM32MSGPARAMEX lpwm32mpex)
         LOGDEBUG(3,(" Window %08lX is receiving Control Message %s(%08x)\n", lpwm32mpex->hwnd, (LPSZ)GetWMMsgName(lpwm32mpex->uMsg), lpwm32mpex->uMsg));
     }
     else {
-        //
-        // FEATURE-O-RAMA
-        //
-        // if the selector already has the high bit on then turn off bit 2
-        // of the selector (the LDT bit, which should always be on).  we
-        // need a way to not blindly strip off the high bit in our wndproc.
-        //
 
-        if (lpwm32mpex->lReturn & WNDPROC_WOW) {
-            WOW32ASSERT(lpwm32mpex->lReturn & WOWCLASS_VIRTUAL_NOT_BIT31);
-            lpwm32mpex->lReturn &= ~WOWCLASS_VIRTUAL_NOT_BIT31;
-        }
-
-        lpwm32mpex->lReturn = lpwm32mpex->lReturn | WNDPROC_WOW;
+        // Mark the address as WOW Proc and store the high bits in the RPL field
+        MarkWOWProc (lpwm32mpex->lReturn,lpwm32mpex->lReturn);
     }
 
 
@@ -324,7 +311,7 @@ BOOL FASTCALL WM32EMSetTabStops (LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - EM_GETSEL));
         if (lpwm32mpex->uParam != 0) {
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->uParam * sizeof(WORD)));
-#line 321
+#line 308
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             putintarray16((VPINT16)lpwm32mpex->Parm16.WndProc.lParam, (INT)lpwm32mpex->uParam, (LPINT)lpwm32mpex->lParam);
@@ -382,7 +369,7 @@ BOOL FASTCALL  WM32CBAddString (LPWM32MSGPARAMEX lpwm32mpex)
 
     if ( lpwm32mpex->fThunk ) {
         if (!(pww = lpwm32mpex->pww)) {
-            if (pww = FindPWW (lpwm32mpex->hwnd, WOWCLASS_UNKNOWN))
+            if (pww = FindPWW (lpwm32mpex->hwnd))
                 lpwm32mpex->pww = pww;
             else
                 return FALSE;
@@ -405,8 +392,8 @@ BOOL FASTCALL  WM32CBAddString (LPWM32MSGPARAMEX lpwm32mpex)
         //
 
         lpwm32mpex->dwParam =
-            (pww->dwStyle & (CBS_OWNERDRAWFIXED | CBS_OWNERDRAWVARIABLE)) &&
-            !(pww->dwStyle & CBS_HASSTRINGS);
+            (pww->style & (CBS_OWNERDRAWFIXED | CBS_OWNERDRAWVARIABLE)) &&
+            !(pww->style & CBS_HASSTRINGS);
 
         if ( !lpwm32mpex->dwParam ) {        // if strings are used
             if (lpwm32mpex->lParam) {
@@ -414,7 +401,7 @@ BOOL FASTCALL  WM32CBAddString (LPWM32MSGPARAMEX lpwm32mpex)
 
                 cb = strlen((LPSZ)lpwm32mpex->lParam)+1;
                 lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
-#line 410
+#line 397
                 if (!(lpwm32mpex->Parm16.WndProc.lParam))
                     return FALSE;
                 putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
@@ -462,7 +449,7 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
                 if (lParam) {
                     lpwm32mpex->Parm16.WndProc.lParam = lParam;
                     lpwm32mpex->dwParam = WOW_TEXT_ACTIVE | WOW_TEXT_MAPPED;
-#line 456
+#line 443
                     return (TRUE);
                 }
             }
@@ -472,7 +459,7 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;
-#line 464
+#line 451
             putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
         }
     } else {
@@ -480,12 +467,12 @@ BOOL FASTCALL  WM32CBDir (LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->dwParam = 0;
         if (owned & WOW_TEXT_MAPPED) {
             DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL);
-#line 469
+#line 456
             return TRUE;
-#line 471
+#line 458
         }
         if (!(owned & WOW_TEXT_ACTIVE)) return TRUE;
-#line 472
+#line 459
         if (lpwm32mpex->Parm16.WndProc.lParam)
             free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
     }
@@ -508,7 +495,7 @@ BOOL FASTCALL WM32CBGetLBText (LPWM32MSGPARAMEX lpwm32mpex)
         INT cb;
 
         if (!(pww = lpwm32mpex->pww)) {
-            if (pww = FindPWW (lpwm32mpex->hwnd, WOWCLASS_UNKNOWN))
+            if (pww = FindPWW (lpwm32mpex->hwnd))
                 lpwm32mpex->pww = pww;
             else
                 return FALSE;
@@ -531,8 +518,8 @@ BOOL FASTCALL WM32CBGetLBText (LPWM32MSGPARAMEX lpwm32mpex)
         //
 
         lpwm32mpex->dwParam =
-            (pww->dwStyle & (CBS_OWNERDRAWFIXED | CBS_OWNERDRAWVARIABLE)) &&
-            !(pww->dwStyle & CBS_HASSTRINGS);
+            (pww->style & (CBS_OWNERDRAWFIXED | CBS_OWNERDRAWVARIABLE)) &&
+            !(pww->style & CBS_HASSTRINGS);
 
         //
         // Determine the size of the buffer to allocate on the 16-bit side
@@ -569,7 +556,7 @@ BOOL FASTCALL WM32CBGetLBText (LPWM32MSGPARAMEX lpwm32mpex)
             // See comment on similar code below
 
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
-#line 555
+#line 542
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             GETVDMPTR((lpwm32mpex->Parm16.WndProc.lParam), sizeof(BYTE), lpT);
@@ -609,7 +596,7 @@ BOOL FASTCALL WM32CBGetDropDownControlRect (LPWM32MSGPARAMEX lpwm32mpex)
     if ( lpwm32mpex->fThunk ) {
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - CB_GETEDITSEL));
         lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));
-#line 594
+#line 581
         if (!(lpwm32mpex->Parm16.WndProc.lParam))
             return FALSE;
     } else {
@@ -631,7 +618,13 @@ BOOL FASTCALL WM32CBGetDropDownControlRect (LPWM32MSGPARAMEX lpwm32mpex)
 
 BOOL FASTCALL  WM32CBComboFocus (LPWM32MSGPARAMEX lpwm32mpex)
 {
+#if (CBEC_SETCOMBOFOCUS != 0x166)
+#error The USER Guys changed CBEC_SETCOMBOFOCUS again
+#endif
 
+#if (CBEC_KILLCOMBOFOCUS != 0x167)
+#error The USER Guys changed CBEC_KILLCOMBOFOCUS again
+#endif    
 
     if (lpwm32mpex->fThunk) {
         lpwm32mpex->Parm16.WndProc.wMsg =
@@ -690,7 +683,7 @@ BOOL FASTCALL WM32LBGetText (LPWM32MSGPARAMEX lpwm32mpex)
         INT cb;
 
         if (!(pww = lpwm32mpex->pww)) {
-            if (pww = FindPWW (lpwm32mpex->hwnd, WOWCLASS_UNKNOWN))
+            if (pww = FindPWW (lpwm32mpex->hwnd))
                 lpwm32mpex->pww = pww;
             else
                 return FALSE;
@@ -712,8 +705,8 @@ BOOL FASTCALL WM32LBGetText (LPWM32MSGPARAMEX lpwm32mpex)
         //
 
         lpwm32mpex->dwParam =
-            (pww->dwStyle & (LBS_OWNERDRAWFIXED | LBS_OWNERDRAWVARIABLE)) &&
-            !(pww->dwStyle & LBS_HASSTRINGS);
+            (pww->style & (LBS_OWNERDRAWFIXED | LBS_OWNERDRAWVARIABLE)) &&
+            !(pww->style & LBS_HASSTRINGS);
 
         if (lpwm32mpex->dwParam) {    // if this listbox takes handles
             cb = 4;
@@ -744,13 +737,13 @@ BOOL FASTCALL WM32LBGetText (LPWM32MSGPARAMEX lpwm32mpex)
             BYTE *lpT;
 
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
-#line 728
+#line 721
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
 
-            // The reason for this code to be here is that sometimes thunks 
+            // The reason for this code to be here is that sometimes thunks
             // are executed on a buffer that has not been initialized, e.g.
-            // if the hooks are installed by a wow app. That means we will 
+            // if the hooks are installed by a wow app. That means we will
             // alloc 16-bit buffer while thunking (boils down to uninitialized
             // data buffer and will try to copy the buffer back while unthunking
             // overwriting the stack sometimes (as user allocates temp bufs from
@@ -806,10 +799,19 @@ BOOL FASTCALL  WM32LBGetTextLen (LPWM32MSGPARAMEX lpwm32mpex)
         //                                               - nanduri
 
         if (CURRENTPTD()->dwWOWCompatFlags &  WOWCF_LB_NONNULLLPARAM) {
+
+            // be sure allocation size matches stackfree16() size below
             LPBYTE lpT = (LPBYTE)stackalloc16(0x2);  // just an even number
+
             lpwm32mpex->Parm16.WndProc.lParam = (LONG)lpT;
             GETVDMPTR(lpT, 0x2, lpT);
             *lpT = '\0';
+        }
+    } else {
+        if (CURRENTPTD()->dwWOWCompatFlags &  WOWCF_LB_NONNULLLPARAM) {
+            if(lpwm32mpex->Parm16.WndProc.lParam) {
+                stackfree16((VPVOID)lpwm32mpex->Parm16.WndProc.lParam, 0x2);
+            }
         }
     }
 
@@ -833,7 +835,7 @@ BOOL FASTCALL WM32LBDir (LPWM32MSGPARAMEX lpwm32mpex)
         if (lpwm32mpex->lParam) {
             cb = strlen((LPSTR)lpwm32mpex->lParam)+1;
             if (!(vp = wow_message_heap32(lpwm32mpex, malloc16(cb)))) {
-#line 816
+#line 818
                 LOGDEBUG(0,(" WOW32.DLL : WM32LBDir() :: Could not allocate memory for string, ChandanC\n"));
                 WOW32ASSERT(vp);
                 return FALSE;
@@ -865,7 +867,7 @@ BOOL FASTCALL WM32LBGetSelItems (LPWM32MSGPARAMEX lpwm32mpex)
 
             cb = lpwm32mpex->uParam * sizeof(WORD);
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
-#line 847
+#line 849
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
 
@@ -891,7 +893,7 @@ BOOL FASTCALL WM32LBSetTabStops (LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - LB_ADDSTRING + 1));
         if (lpwm32mpex->uParam != 0) {
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->uParam * sizeof(WORD)));
-#line 872
+#line 874
             if (!(lpwm32mpex->Parm16.WndProc.lParam))
                 return FALSE;
             putintarray16((VPRECT16)lpwm32mpex->Parm16.WndProc.lParam, (INT)lpwm32mpex->uParam, (LPINT)lpwm32mpex->lParam);
@@ -914,7 +916,7 @@ BOOL FASTCALL WM32LBGetItemRect (LPWM32MSGPARAMEX lpwm32mpex)
     if ( lpwm32mpex->fThunk ) {
         lpwm32mpex->Parm16.WndProc.wMsg = (WORD) (WM_USER + (lpwm32mpex->uMsg - LB_ADDSTRING + 1));
         lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(RECT16)));
-#line 894
+#line 896
         if (!(lpwm32mpex->Parm16.WndProc.lParam))
             return FALSE;
     } else {
@@ -944,7 +946,7 @@ BOOL FASTCALL WM32LBAddString (LPWM32MSGPARAMEX lpwm32mpex)
 
     if ( lpwm32mpex->fThunk ) {
         if (!(pww = lpwm32mpex->pww)) {
-            if (pww = FindPWW (lpwm32mpex->hwnd, WOWCLASS_UNKNOWN))
+            if (pww = FindPWW (lpwm32mpex->hwnd))
                 lpwm32mpex->pww = pww;
             else
                 return FALSE;
@@ -966,8 +968,8 @@ BOOL FASTCALL WM32LBAddString (LPWM32MSGPARAMEX lpwm32mpex)
         //
 
         lpwm32mpex->dwParam =
-            (pww->dwStyle & (LBS_OWNERDRAWFIXED | LBS_OWNERDRAWVARIABLE)) &&
-            !(pww->dwStyle & LBS_HASSTRINGS);
+            (pww->style & (LBS_OWNERDRAWFIXED | LBS_OWNERDRAWVARIABLE)) &&
+            !(pww->style & LBS_HASSTRINGS);
 
         if ( !lpwm32mpex->dwParam ) {   // if this listbox takes strings
             if (lpwm32mpex->lParam) {
@@ -975,7 +977,7 @@ BOOL FASTCALL WM32LBAddString (LPWM32MSGPARAMEX lpwm32mpex)
 
                 cb = strlen((LPSZ)lpwm32mpex->lParam)+1;
                 lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(cb));
-#line 954
+#line 956
                 if (!(lpwm32mpex->Parm16.WndProc.lParam))
                     return FALSE;
                 putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);

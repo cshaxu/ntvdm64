@@ -16,7 +16,7 @@ typedef enum ParamMode {
   PARAM_32
 } ParamMode;
 
-/* 
+/*
  *   FindParamMap
  *
  *      lpFindParam is for wparam.c use (set to NULL)
@@ -38,9 +38,12 @@ DWORD GetParam16(DWORD dwParam32);
 
 BOOL W32CheckThunkParamFlag(void);
 
-VOID FreeParamMap(HAND16 htask16);  
+VOID FreeParamMap(HAND16 htask16);
 
-// Add dwPtr16 mapping for a parameter, which is allocated 
+BOOL SetParamRefCount(DWORD dwParam, UINT fMode, DWORD dwRefCount);
+
+
+// Add dwPtr16 mapping for a parameter, which is allocated
 // size of the buffer is cbExtra and 32-bit pointer to the buffer
 // is returned
 
@@ -61,17 +64,17 @@ typedef struct tagBlkHeader *PBLKHEADER;
 
 typedef struct tagBlkHeader {
     PBLKHEADER pNext;
-    DWORD dwSize; // block size 
+    DWORD dwSize; // block size
 } BLKHEADER, *PBLKHEADER;
 
 typedef struct tagBlkCache {
 	LPBYTE pCache;
-#line 69
+#line 72
 #ifdef DEBUG
-#line 70
+#line 73
 #error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #endif
-#line 72
+#line 75
 	PBLKHEADER pCacheFree;
 	DWORD dwCacheSize;
 	DWORD dwFlags;
@@ -86,3 +89,4 @@ VOID     CacheBlockInit      (PBLKCACHE pc, DWORD dwCacheSize);
 /////////////////////////////////////////////////////////////////
 
 
+

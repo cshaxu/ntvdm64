@@ -1336,6 +1336,40 @@ BOOL WINAPI wow_original_edit_callbacks_ready(void)
     }
     return TRUE;
 }
+static int aiClassWow[] = {
+    WOWCLASS_SCROLLBAR,
+    WOWCLASS_ICONTITLE,
+    WOWCLASS_MENU,
+    WOWCLASS_DESKTOP,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_SWITCHWND,
+    WOWCLASS_BUTTON,
+    WOWCLASS_COMBOBOX,
+    WOWCLASS_COMBOLBOX,
+    WOWCLASS_DIALOG,
+    WOWCLASS_EDIT,
+    WOWCLASS_LISTBOX,
+    WOWCLASS_MDICLIENT,
+    WOWCLASS_STATIC,
+    WOWCLASS_WIN16,    // 2A9
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,     // 2B1
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16
+    };
+
 void WINAPI wow_original_registration_exchange(struct tagAPFNWOWHANDLERSIN *input,
     struct tagAPFNWOWHANDLERSOUT *output)
 {
@@ -1345,6 +1379,7 @@ void WINAPI wow_original_registration_exchange(struct tagAPFNWOWHANDLERSIN *inpu
     /* Pinned USER.EXE publishes WOW 0400 with WOWDBG layout (init.c).
      * The shared view uses that checked layout, including 16-byte handles. */
     output->dwBldInfo = 0x84000000u;
+    output->aiWowClass = aiClassWow;
     output->pfnCsCreateWindowEx = registered_create_window_ex;
     output->pfnDirectedYield = registered_directed_yield;
     output->pfnFreeDDEData = provider->free_dde_data;

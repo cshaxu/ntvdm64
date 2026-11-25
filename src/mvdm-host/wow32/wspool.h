@@ -21,6 +21,14 @@ ULONG FASTCALL   WG32EndSpoolPage (PVDMFRAME pFrame);
 ULONG FASTCALL   WG32CloseJob (PVDMFRAME pFrame);
 ULONG FASTCALL   WG32WriteSpool (PVDMFRAME pFrame);
 ULONG FASTCALL   WG32DeleteJob (PVDMFRAME pFrame);
+ULONG FASTCALL   WG32SpoolFile (PVDMFRAME pFrame);
+
+typedef struct _tagWOWSpool {
+    HANDLE hFile;
+    HANDLE hPrinter;
+    BOOL   fOK;
+    WORD   prn16;
+} WOWSPOOL;
 
 typedef struct _DLLENTRYPOINTS {
     char    *name;
@@ -57,10 +65,10 @@ BOOL    GetDriverName (char *psz, char *szDriver);
 BOOL    LoadLibraryAndGetProcAddresses(char *name, DLLENTRYPOINTS *p, int i);
 
 #ifdef i386
-#line 60
+#line 68
 #error Excluded unsupported i386 WOW header profile
 #else
-#line 62
+#line 70
 #define SafeLoadLibrary(name) LoadLibrary(name)
 #endif
-#line 64
+#line 72

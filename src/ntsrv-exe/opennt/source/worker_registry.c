@@ -653,7 +653,10 @@ DWORD OpenNtBaseServiceStartVdmWorker(OPENNT_BASE_CONNECTION *connection,DWORD p
         admission.binary,&command,&size))error=GetLastError();
     (void)OpenNtBaseBindVdmConfig(previous);
     if(error)goto done;
-    startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=(WORD)show;
+    if(show!=SW_SHOWDEFAULT) {
+        startup.dwFlags=STARTF_USESHOWWINDOW;
+        startup.wShowWindow=(WORD)show;
+    }
     flags=CREATE_UNICODE_ENVIRONMENT |
         (admission.binary==BINARY_TYPE_DOS ? DETACHED_PROCESS : CREATE_NO_WINDOW);
     error=broker_worker_start_admitted(connection,pid,generation,reservation,image,

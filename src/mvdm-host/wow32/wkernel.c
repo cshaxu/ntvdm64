@@ -1,4 +1,4 @@
-/*++
+ /*++
  *
  *  WOW v1.0
  *
@@ -27,107 +27,6 @@ static PSZ W32PrivateProfileFileName(PSZ filename, CHAR path[MAX_PATH])
 }
 
 #line 20
-ULONG FASTCALL WK32RegOpenKey32(PVDMFRAME pFrame)
-{
-    HKEY  hKey, hKeyTmp;
-    PSZ   pszKey;
-    PHKEY phKey;
-    register PREGOPENKEY3216 parg16;
-    ULONG ulRet;
-  
-    GETARGPTR(pFrame, sizeof(REGOPENKEY3216), parg16);
-    hKey = (HKEY) FETCHDWORD(parg16->hKey);
-    GETPSZPTR(parg16->lpszSubKey, pszKey);
-    GETVDMPTR(parg16->phkResult, sizeof(*phKey), phKey);
-
-    ulRet = RegOpenKey(hKey, pszKey, &hKeyTmp);
-
-    STOREDWORD(*phKey, hKeyTmp);
-    FREEVDMPTR(phKey);
-    FREEPSZPTR(pszKey);
-    FREEARGPTR(parg16);
-
-    return ulRet;
-
-}
-
-ULONG FASTCALL WK32RegEnumKey32(PVDMFRAME pFrame)
-{
-    HKEY  hKey;
-    DWORD dwSubKey;
-    PSZ   pszName;
-    DWORD cchName;
-    register PREGENUMKEY3216 parg16;
-    ULONG ulRet;
-  
-    GETARGPTR(pFrame, sizeof(REGENUMKEY3216), parg16);
-    hKey = (HKEY) FETCHDWORD(parg16->hKey);
-    dwSubKey = FETCHDWORD(parg16->iSubKey);
-    GETPSZPTR(parg16->lpszName, pszName);
-    cchName = FETCHDWORD(parg16->cchName);
-    ulRet = RegEnumKey(hKey, dwSubKey, pszName, cchName);
-
-    FREEPSZPTR(pszName);
-    FREEARGPTR(parg16);
-
-    return ulRet;
-}
-
-ULONG FASTCALL WK32RegEnumValue32(PVDMFRAME pFrame)
-{
-    HKEY  hKey;
-    DWORD dwValue, cchValueTmp, dwTypeTmp, cbDataTmp;
-    PSZ   pszValue;
-    LPDWORD lpcchValue;
-    LPDWORD lpdwType;
-    LPBYTE  lpbData;
-    LPDWORD lpcbData;
-    register PREGENUMVALUE3216 parg16;
-    ULONG ulRet;
-  
-    GETARGPTR(pFrame, sizeof(REGENUMVALUE3216), parg16);
-    hKey = (HKEY) FETCHDWORD(parg16->hKey);
-    dwValue = FETCHDWORD(parg16->iValue);
-    GETPSZPTR(parg16->lpszValue, pszValue);
-    GETVDMPTR(parg16->lpcchValue, sizeof(*lpcchValue), lpcchValue);
-    cchValueTmp = FETCHDWORD(*lpcchValue);
-    GETVDMPTR(parg16->lpdwType, sizeof(*lpdwType), lpdwType);
-    dwTypeTmp = FETCHDWORD(*lpdwType);
-    GETMISCPTR(parg16->lpbData, lpbData);
-    GETVDMPTR(parg16->lpcbData, sizeof(*lpcbData), lpcbData);
-    cbDataTmp = FETCHDWORD(*lpcbData);
-
-    ulRet = RegEnumValue(hKey, dwValue, pszValue, &cchValueTmp,
-                         NULL, &dwTypeTmp, lpbData, &cbDataTmp);
-
-    STOREDWORD(*lpcchValue, cchValueTmp);
-    STOREDWORD(*lpdwType, dwTypeTmp);
-    STOREDWORD(*lpcbData, cbDataTmp);
-
-    FREEVDMPTR(lpcbData);
-    FREEMISCPTR(lpbData);
-    FREEVDMPTR(lpdwType);
-    FREEVDMPTR(lpcchValue);
-    FREEPSZPTR(pszValue);
-    FREEARGPTR(parg16);
-
-    return ulRet;
-}
-
-ULONG FASTCALL WK32RegCloseKey32(PVDMFRAME pFrame)
-{
-    HKEY  hKey;
-    register PREGCLOSEKEY3216 parg16;
-    ULONG ulRet;
-  
-    GETARGPTR(pFrame, sizeof(REGCLOSEKEY3216), parg16);
-    hKey = (HKEY) FETCHDWORD(parg16->hKey);
-    ulRet = RegCloseKey(hKey);
-
-    FREEARGPTR(parg16);
-
-    return ulRet;
-}
 
 ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
 {
@@ -149,7 +48,7 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
     strcpy(szLowercase, pszFilename);
-    _strlwr(szLowercase);
+    WOW32_strlwr(szLowercase);
 
     fIsWinIni = IS_WIN_INI(szLowercase);
 
@@ -158,7 +57,7 @@ ULONG FASTCALL WK32WritePrivateProfileString(PVDMFRAME pFrame)
         pszSection &&
         pszKey &&
         pszValue &&
-        !_stricmp(pszSection, szDevices) &&
+        !WOW32_stricmp(pszSection, szDevices) &&
         IsFaxPrinterWriteProfileString(pszSection, pszKey, pszValue)) {
 
         ul = TRUE;
@@ -205,15 +104,22 @@ ULONG FASTCALL WK32WriteProfileString(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f2, pszKey);
     GETPSZPTR(parg16->f3, pszValue);
 
-    // Trying to install or change default printer to fax printer?
-    if (pszSection &&
-        pszKey &&
-        pszValue &&
-        !_stricmp(pszSection, szDevices) &&
-        IsFaxPrinterWriteProfileString(pszSection, pszKey, pszValue)) {
+    // For WinFax Lite install hack. Bug #126489  See wow32fax.c
+    if(!gbWinFaxHack) { 
 
-        ul = TRUE;
-        goto Done;
+        // Trying to install or change default printer to fax printer?
+        if (pszSection &&
+            pszKey &&
+            pszValue &&
+            !WOW32_stricmp(pszSection, szDevices) &&
+            IsFaxPrinterWriteProfileString(pszSection, pszKey, pszValue)) {
+    
+            ul = TRUE;
+            goto Done;
+        }
+ 
+    } else {
+        IsFaxPrinterWriteProfileString(pszSection, pszKey, pszValue);
     }
 
     ul = GETBOOL16( WriteProfileString(
@@ -246,6 +152,9 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
     PSZ pszDefault;
     PSZ pszReturnBuffer;
     UINT cchMax;
+#ifdef FE_SB
+    PSZ pszTmp = NULL;
+#endif // FE_SB
     register PGETPROFILESTRING16 parg16;
 
     GETARGPTR(pFrame, sizeof(GETPROFILESTRING16), parg16);
@@ -254,6 +163,18 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f3, pszDefault);
     ALLOCVDMPTR(parg16->f4, parg16->f5, pszReturnBuffer);
     cchMax = INT32(parg16->f5);
+#ifdef FE_SB
+    //
+    // For those applications that expect sLongDate contains
+    // windows 3.1J picture format string.
+    //
+    if (GetSystemDefaultLangID() == 0x411 &&
+            !lstrcmpi(pszSection, "intl") && !lstrcmpi(pszKey, "sLongDate")) {
+
+        pszTmp = pszKey;
+        pszKey = "sLongDate16";
+    }
+#endif // FE_SB
 
     if (IS_EMBEDDING_SECTION( pszSection ) &&
         !WasSectionRecentlyUpdated() ) {
@@ -266,7 +187,7 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
 
     } else if (pszSection &&
                pszKey &&
-               !_stricmp(pszSection, szDevices) &&
+               !WOW32_stricmp(pszSection, szDevices) &&
                IsFaxPrinterSupportedDevice(pszKey)) {
 
         ul = GETINT16(GetFaxPrinterProfileString(pszSection, pszKey, pszDefault, pszReturnBuffer, cchMax));
@@ -282,55 +203,61 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
 
 
     //
-    // Win3.1/Win95 compatibility:  Zap any trailing blanks in pszDefault
-    // with nulls, but only if the default string was returned.  To detect
+    // Win3.1/Win95 compatibility:  Zap the first trailing blank in pszDefault
+    // with null, but only if the default string was returned.  To detect
     // the default string being returned we need to ignore trailing blanks.
-    //
-    // Because of the high usage of this API, we only zap trailing blanks
-    // if a compatibility bit is turned on.
     //
     // This code is duplicated in thunks for GetProfileString and
     // GetPrivateProfileString, update both if you make changes.
     //
 
-    if ((CURRENTPTD()->dwWOWCompatFlagsEx & WOWCFEX_ZAPGPPSDEFBLANKS) &&
-        pszDefault &&
-        pszKey
-        ) {
+    if ( pszDefault && pszKey )  {
 
         int  n, nLenDef;
 
         //
-        // If the returned string is a prefix of the default string...
-        // ul is strlen(pszReturnBuffer)
+        // Is the default the same as the returned string up to any NULLs?
         //
-
-        nLenDef = strlen(pszDefault);
-
-        if (nLenDef > (int)ul &&
-            RtlEqualMemory(pszDefault, pszReturnBuffer, ul)) {
-
+        nLenDef = 0;
+        n=0;
+        while (
+            (pszDefault[nLenDef] == pszReturnBuffer[n]) &&
+            pszReturnBuffer[n]
+            ) {
+            
+            n++;
+            nLenDef++;
+        }
+        
+        //
+        // Did we get out of the loop because we're at the end of the returned string?
+        //
+        if ( '\0' != pszReturnBuffer[n] ) {
             //
-            // And the only difference is trailing blanks...
+            // No.  The strings are materially different - fall out.
             //
-
-            for (n = (int)ul; n < nLenDef; n++) {
-
-                if (' ' != pszDefault[n]) {
-                    break;
-                }
-
-#ifdef DBCS
-#line 314
-#error Unsupported excluded original configuration
-#endif
-#line 318
+        }
+        else {
+            //
+            // Ok, the strings are identical to the end of the returned string.
+            // Is the default string spaces out to the end?
+            //
+            while ( ' ' == pszDefault[nLenDef] ) {
+                nLenDef++;
             }
-
-            if (n >= nLenDef) {
-
-                char szBuf[512];
-
+            
+            //
+            // The last thing was not a space.  If it was a NULL, then the app
+            // passed in a string with trailing NULLs as default.  (Otherwise
+            // the two strings are materially different and we do nothing.)
+            //
+            if ( '\0' == pszDefault[nLenDef] ) {
+                
+                char szBuf[4];  // Some random, small number of chars to get.
+                                // If the string is long, we'll get only 3 chars
+                                // (and NULL), but so what? - we only need to know if
+                                // we got a default last time...
+                
                 //
                 // The returned string is the same as the default string
                 // without trailing blanks, but this might be coincidence,
@@ -339,7 +266,7 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
                 // being used.
                 //
 
-                if (0 == GetProfileString(pszSection, pszKey, "", szBuf, sizeof szBuf)) {
+                if (0 == GetProfileString(pszSection, pszKey, "", szBuf, sizeof(szBuf))) {
 
                     //
                     // Zap first trailing blank in pszDefault with null.
@@ -352,15 +279,22 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
         }
     }
 
-#line 345
-#ifdef DEBUG
-#line 346
-#error Excluded unsupported DEBUG WOW profile
-#endif
-#line 372
-
 
 FlushAndReturn:
+#ifdef FE_SB
+    if ( pszTmp )
+        pszKey = pszTmp;
+
+    if (CURRENTPTD()->dwWOWCompatFlagsFE & WOWCF_FE_USEUPPER) { // for WinWrite
+        if (pszSection && !lstrcmpi(pszSection, "windows") &&
+             pszKey && !lstrcmpi(pszKey, "device")) {
+            CharUpper(pszReturnBuffer);
+        }
+        if (pszSection && !lstrcmpi(pszSection, "devices") && pszKey) {
+            CharUpper(pszReturnBuffer);
+        }
+    }
+#endif // FE_SB
     FLUSHVDMPTR(parg16->f4, (ul + (pszSection && pszKey) ? 1 : 2), pszReturnBuffer);
     FREEPSZPTR(pszSection);
     FREEPSZPTR(pszKey);
@@ -379,14 +313,15 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     PSZ pszDefault;
     PSZ pszReturnBuffer;
     PSZ pszFilename;
-#line 393
-    DWORD cFlagsEx;
     UINT cchMax;
+#ifdef FE_SB
+    PSZ pszTmp = NULL;
+#endif // FE_SB
     register PGETPRIVATEPROFILESTRING16 parg16;
     CHAR szLowercase[MAX_PATH];
     CHAR szPackageProfile[MAX_PATH];
 
-#line 398
+#line 313
     GETARGPTR(pFrame, sizeof(GETPRIVATEPROFILESTRING16), parg16);
     GETPSZPTR(parg16->f1, pszSection);
     GETPSZPTR(parg16->f2, pszKey);
@@ -410,7 +345,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     //                                (offset of returnbuffer);
     //                                                           - nanduri
 
-#line 421
+#line 336
     if (!(cchMax = INT32(parg16->f5))) {
         if (pszKey == (PSZ)NULL) {
             if (pszReturnBuffer != (PSZ)NULL) {
@@ -422,10 +357,21 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
 
     strcpy(szLowercase, pszFilename);
-    _strlwr(szLowercase);
+    WOW32_strlwr(szLowercase);
 
     if (IS_WIN_INI( szLowercase )) {
-
+#ifdef FE_SB
+        //
+        // For those applications that expect sLongDate contains
+        // windows 3.1J picture format string.
+        //
+        if (GetSystemDefaultLangID() == 0x411 &&
+            lstrcmpi( pszSection, "intl") == 0 &&
+            lstrcmpi( pszKey, "sLongDate") == 0) {
+            pszTmp = pszKey;
+            pszKey = "sLongDate16";
+        }
+#endif // FE_SB
         if (IS_EMBEDDING_SECTION( pszSection ) &&
             !WasSectionRecentlyUpdated() ) {
             if( pszKey == NULL ) {
@@ -437,7 +383,7 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
 
         } else if (pszSection &&
                    pszKey &&
-                   !_stricmp(pszSection, szDevices) &&
+                   !WOW32_stricmp(pszSection, szDevices) &&
                    IsFaxPrinterSupportedDevice(pszKey)) {
 
             ul = GETINT16(GetFaxPrinterProfileString(pszSection, pszKey, pszDefault, pszReturnBuffer, cchMax));
@@ -455,117 +401,142 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
 
     
     // start comaptibility hacks
-    cFlagsEx = CURRENTPTD()->dwWOWCompatFlagsEx;
-    if(cFlagsEx & (WOWCFEX_ZAPGPPSDEFBLANKS | WOWCFEX_SAYITSNOTTHERE)) {
-
-        //
-        // Win3.1/Win95 compatibility:  Zap any trailing blanks in pszDefault
-        // with nulls, but only if the default string was returned.  To detect
-        // the default string being returned we need to ignore trailing blanks.
-        //
-        // Because of the high usage of this API, we only zap trailing blanks
-        // if a compatibility bit is turned on.
-        //
-        // This code is duplicated in thunks for GetProfileString and
-        // GetPrivateProfileString, update both if you make changes.
-        //
-
-        if ((cFlagsEx & WOWCFEX_ZAPGPPSDEFBLANKS) && pszDefault && pszKey) {
-
-            int  n, nLenDef;
-
-            //
-            // If the returned string is a prefix of the default string...
-            // ul is strlen(pszReturnBuffer)
-            //
-
-            nLenDef = strlen(pszDefault);
-
-            if (nLenDef > (int)ul &&
-                RtlEqualMemory(pszDefault, pszReturnBuffer, ul)) {
-
-                //
-                // And the only difference is trailing blanks...
-                //
-
-                for (n = (int)ul; n < nLenDef; n++) {
     
-                    if (' ' != pszDefault[n]) {
-                        break;
-                    }
+    
+    //
+    // Win3.1/Win95 compatibility:  Zap the first trailing blank in pszDefault
+    // with null, but only if the default string was returned.  To detect
+    // the default string being returned we need to ignore trailing blanks.
+    //
+    // This code is duplicated in thunks for GetProfileString and
+    // GetPrivateProfileString, update both if you make changes.
+    //
 
-#ifdef DBCS
-#line 505
-#error Unsupported excluded original configuration
-#endif
-#line 509
-                }
+    if ( pszDefault && pszKey )  {
 
-                if (n >= nLenDef) {
+        int  n, nLenDef;
 
-                    char szBuf[512];
+        //
+        // Is the default the same as the returned string up to any NULLs?
+        //
+        nLenDef = 0;
+        n=0;
+        while (
+            (pszDefault[nLenDef] == pszReturnBuffer[n]) &&
+            pszReturnBuffer[n]
+            ) {
+            
+            n++;
+            nLenDef++;
+        }
+        
+        //
+        // Did we get out of the loop because we're at the end of the returned string?
+        //
+        if ( '\0' != pszReturnBuffer[n] ) {
+            //
+            // No.  The strings are materially different - fall out.
+            //
+        }
+        else {
+            //
+            // Ok, the strings are identical to the end of the returned string.
+            // Is the default string spaces out to the end?
+            //
+            while ( ' ' == pszDefault[nLenDef] ) {
+                nLenDef++;
+            }
+            
+            //
+            // The last thing was not a space.  If it was a NULL, then the app
+            // passed in a string with trailing NULLs as default.  (Otherwise
+            // the two strings are materially different and we do nothing.)
+            //
+            if ( '\0' == pszDefault[nLenDef] ) {
+                
+                char szBuf[4];  // Some random, small number of chars to get.
+                                // If the string is long, we'll get only 3 chars
+                                // (and NULL), but so what? - we only need to know if
+                                // we got a default last time...
+                
+                //
+                // The returned string is the same as the default string
+                // without trailing blanks, but this might be coincidence,
+                // so see if a call with empty pszDefault returns anything.
+                // If it does, we don't zap because the default isn't
+                // being used.
+                //
+                if (0 == GetProfileString(pszSection, pszKey, "", szBuf, sizeof(szBuf))) {
 
                     //
-                    // The returned string is the same as the default string
-                    // without trailing blanks, but this might be coincidence,
-                    // so see if a call with empty pszDefault returns anything.
-                    // If it does, we don't zap because the default isn't
-                    // being used.
+                    // Zap first trailing blank in pszDefault with null.
                     //
 
-                    if (0 == GetPrivateProfileString(pszSection, pszKey, "", szBuf, sizeof szBuf, W32PrivateProfileFileName(pszFilename, szPackageProfile))) {
-
-                        //
-                        // Zap first trailing blank in pszDefault with null.
-                        //
-
-                        pszDefault[ul] = 0;
-                        FLUSHVDMPTR(parg16->f3 + ul, 1, pszDefault + ul);
-                    }
+                    pszDefault[ul] = 0;
+                    FLUSHVDMPTR(parg16->f3 + ul, 1, pszDefault + ul);
                 }
             }
         }
+    }
 
+    
+    if( CURRENTPTD()->dwWOWCompatFlagsEx & WOWCFEX_SAYITSNOTTHERE ) {
+    
         // CrossTalk 2.2 gets hung in a loop while trying to match a printer in
         // their xtalk.ini file with a printer name in the PrintDlg listbox.  
         // There is a bug in their code for handling this that gets exposed by
         // the fact that NT PrintDlg listboxes do not include the port name as
         // Win3.1 & Win'95 do.  We avoid the buggy code altogether with this 
         // hack by telling them that the preferred printer isn't stored in 
-        // xtalk.ini. See bug #43168  a-craigj
+        // xtalk.ini. See bug #43168  a-craigj        
+        // Maximizer 5.0 has similar problem. it tries to parse 
+        // print driver location however, allocates too small buffer. See
+        // Whistler bug 288491
+         
+        if(!WOW32_stricmp(pszSection, "Printer")) {
+           if((WOW32_strstr(szLowercase, "xtalk.ini")   && !WOW32_stricmp(pszKey, "Device")) ||  // CrossTalk 2.2
+              (WOW32_strstr(szLowercase, "bclwdde.ini") && !WOW32_stricmp(pszKey, "Driver")) ){   // Maximizer 5             
+              strcpy(pszReturnBuffer, pszDefault);
+              ul = strlen(pszReturnBuffer);
+           }
+        }
 
-        if(cFlagsEx & WOWCFEX_SAYITSNOTTHERE) {
-            if(strstr(szLowercase, "xtalk.ini")) {
-                if(!_stricmp(pszSection, "Printer")) {
-                    if(!_stricmp(pszKey, "Device")) {
-                        strcpy(pszReturnBuffer, pszDefault);
-                        ul = strlen(pszReturnBuffer);
-                    }
-                }
+        // WHISTLER RAID BUG # 379253  05/06/2001 - alexsm
+        // National Geographic Explorer needed the oppisite of the above. The app 
+        // was checking for a QTWVideo string, which contained a path to a quicktime
+        // driver. Without the key, the app wouldn't play video. It's not really a
+        // SAYITSNOTTHERE, more of a SAYITISTHERE, but this saves on compat bits.
+        if(!WOW32_stricmp(pszSection, "mci")) {
+            if((WOW32_strstr(szLowercase, "system.ini") && !WOW32_stricmp(pszKey, "QTWVideo"))) {
+                CHAR szMCIQTW[] = "\\system\\mciqtw.drv";
+                CHAR szQTWVideo[MAX_PATH + sizeof(szMCIQTW) / sizeof(CHAR)];          // make sure there's room for the new string (max_path + pszMCIQTW)
+
+                GetSystemWindowsDirectory(szQTWVideo, MAX_PATH);
+                strcat(szQTWVideo, szMCIQTW);
+                strncpy(pszReturnBuffer, szQTWVideo, cchMax - 1);
+                *(pszReturnBuffer + (cchMax - 1))  = '\0';
+                ul = strlen(szQTWVideo);
             }
         }
+
     }
 
-#line 556
-#ifdef DEBUG
-#line 557
-#error Excluded unsupported DEBUG WOW profile
-#endif
-#line 583
-
-
 FlushAndReturn:
+#ifdef FE_SB
+    if ( pszTmp )
+        pszKey = pszTmp;
+#endif // FE_SB
     if (ul) {
         FLUSHVDMPTR(parg16->f4, (ul + (pszSection && pszKey) ? 1 : 2), pszReturnBuffer);
         LOGDEBUG(8,("GetPrivateProfileString returns '%s'\n", pszReturnBuffer));
     }
 
-#line 591
+#line 521
 #ifdef DEBUG
-#line 592
+#line 522
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
-#line 635
+#line 565
 
     FREEPSZPTR(pszSection);
     FREEPSZPTR(pszKey);
@@ -624,14 +595,15 @@ ULONG FASTCALL WK32GetProfileInt(PVDMFRAME pFrame)
     //
 
     if ((CURRENTPTD()->dwWOWCompatFlagsEx & WOWCFEX_PIXELMETRICS) &&
-        !_stricmp(psz1, "Windows") &&
-        !_stricmp(psz2, "BorderWidth") &&
+        !WOW32_stricmp(psz1, "Windows") &&
+        !WOW32_stricmp(psz2, "BorderWidth") &&
         ((INT)ul < 0)) {
 
         HDC hDC = CreateDC("DISPLAY", NULL, NULL, NULL);
-        ul = (ULONG) (-(INT)ul * GetDeviceCaps(hDC, LOGPIXELSY)/(72*20));
-        DeleteDC(hDC);
-
+        if ( !hDC ) {
+            ul = (ULONG) (-(INT)ul * GetDeviceCaps(hDC, LOGPIXELSY)/(72*20));
+            DeleteDC(hDC);
+        }
     }
 
     FREEPSZPTR(psz1);
@@ -649,7 +621,7 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     PSZ psz2;
     PSZ psz4;
     CHAR szPackageProfile[MAX_PATH];
-#line 717
+#line 648
     register PGETPRIVATEPROFILEINT16 parg16;
 
     GETARGPTR(pFrame, sizeof(GETPRIVATEPROFILEINT16), parg16);
@@ -657,15 +629,32 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f2, psz2);
     GETPSZPTR(parg16->f4, psz4);
 
-#line 724
+#line 655
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
-
+    
     ul = GETWORD16(GetPrivateProfileInt(
     psz1,
     psz2,
     INT32(parg16->f3),
     W32PrivateProfileFileName(psz4, szPackageProfile)
     ));
+
+    // jarbats
+    // sierra's setup faults overwriting video/sound buffer
+    // limits. by returning videospeed as non-existent
+    // we force it to use the default videospeed path,not the optimized
+    // "bad" path code.
+    // this is matching with setup.exe in the registry which is not specific
+    // enough. post-beta2 enhance matching process to match version resources
+
+
+    if( (CURRENTPTD()->dwWOWCompatFlagsEx & WOWCFEX_SAYITSNOTTHERE) &&
+        !WOW32_stricmp(psz4, "sierra.ini") &&
+        !WOW32_stricmp(psz1, "Config") &&
+        !WOW32_stricmp(psz2, "VideoSpeed")
+        ) {                   
+         ul = parg16->f3;                   
+    }
 
     FREEPSZPTR(psz1);
     FREEPSZPTR(psz2);
@@ -684,7 +673,7 @@ ULONG FASTCALL WK32GetModuleFileName(PVDMFRAME pFrame)
     HANDLE hT;
     INT cch;
 
-#line 749
+#line 697
     GETARGPTR(pFrame, sizeof(GETMODULEFILENAME16), parg16);
     cch = INT32(parg16->f3);
 
@@ -693,14 +682,20 @@ ULONG FASTCALL WK32GetModuleFileName(PVDMFRAME pFrame)
         RETURN(0);
     }
 
-#line 750
+#line 698
     ALLOCVDMPTR(parg16->f2, parg16->f3, psz2);
+    //
+    // ShellExecute DDE returns (HINST)33 when DDE is used
+    // to satisfy a request.  This looks like a task alias
+    // to ISTASKALIAS but it's not.
+    //
 
-#line 752
-    if ( ISTASKALIAS(parg16->f1) ) {
+    if ( ISTASKALIAS(parg16->f1) && 33 != parg16->f1) {
         ul = GetHtaskAliasProcessName(parg16->f1,psz2,INT32(parg16->f3));
     } else {
-        hT = (parg16->f1) ? (HMODULE32(parg16->f1)) : GetModuleHandle(NULL) ;
+        hT = (parg16->f1 && (33 != parg16->f1))
+                 ? (HMODULE32(parg16->f1))
+                 : GetModuleHandle(NULL) ;
         ul = GETINT16(GetModuleFileName(hT, psz2, INT32(parg16->f3)));
     }
 
@@ -711,16 +706,16 @@ ULONG FASTCALL WK32GetModuleFileName(PVDMFRAME pFrame)
 }
 
 
-ULONG FASTCALL WK32FreeResource(PVDMFRAME pFrame)
+ULONG FASTCALL WK32WOWFreeResource(PVDMFRAME pFrame)
 {
     ULONG ul;
-    register PFREERESOURCE16 parg16;
+    register PWOWFREERESOURCE16 parg16;
 
-    GETARGPTR(pFrame, sizeof(FREERESOURCE16), parg16);
+    GETARGPTR(pFrame, sizeof(*parg16), parg16);
 
     ul = GETBOOL16(FreeResource(
-    HCURSOR32(parg16->f1)
-    ));
+                       HCURSOR32(parg16->f1)
+                       ));
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -761,4 +756,47 @@ ULONG FASTCALL WK32GetDriveType(PVDMFRAME pFrame)
 
     FREEARGPTR(parg16);
     RETURN(ul);
+}
+
+/* WK32TermsrvGetWindowsDir - Front end to TermsrvGetWindowDirectory.
+ *
+ *
+ * Entry - pszPath   - Pointer to return buffer for path (ascii)
+ *         usPathLen - Size of path buffer (bytes)
+ *
+ * Exit
+ *     SUCCESS
+ *       True
+ *
+ *     FAILURE
+ *       False
+ *
+ */
+ULONG FASTCALL WK32TermsrvGetWindowsDir(PVDMFRAME pFrame)
+{
+    PTERMSRVGETWINDIR16 parg16;
+    PSTR    psz;
+    NTSTATUS Status = 0;
+    USHORT   usPathLen;
+
+    //
+    // Get arguments.
+    //
+    GETARGPTR(pFrame, sizeof(TERMSRVGETWINDIR16), parg16);
+    psz = SEGPTR(FETCHWORD(parg16->pszPathSegment),
+                 FETCHWORD(parg16->pszPathOffset));
+    usPathLen = FETCHWORD(parg16->usPathLen);
+    FREEARGPTR(parg16);
+
+    Status = NtvdmGetWindowsDirectoryA(psz, usPathLen);
+
+    // If this is a long path name then get the short one
+    // Otherwise it will return the same path
+
+    GetShortPathNameA(psz, psz, (DWORD)Status);
+
+    // Get the real size.
+    Status = lstrlen(psz);
+
+    return(NT_SUCCESS(Status));
 }

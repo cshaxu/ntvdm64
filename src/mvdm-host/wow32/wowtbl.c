@@ -17,17 +17,17 @@
 --*/
 #include "precomp.h"
 #pragma hdrstop
+#ifdef FE_IME
+#include "winnls32.h"
+#include "wownls.h"
+#include "wnman.h"
+#endif // FE_IME
+#ifdef FE_SB // suports WIFE API (MiscGetEUDCLeadByteRange)
+#include "wowwife.h"
+#include "wwmman.h"
+#endif // FE_SB
 
-
-
-
-
-
-
-
-
-
-
+#include "wowit.h"
 
 MODNAME(wowtbl.c);
 
@@ -67,29 +67,36 @@ W32 aw32WOW[] = {
     {W32FUN((LPFNW32)-1,                 "TABLESEPARATOR",            0,      0)},
 
 #include "wcmdgtbl.h"
-    {W32FUN((LPFNW32)-1,                 "TABLESEPARATOR",            0,      0)}
+    {W32FUN((LPFNW32)-1,                 "TABLESEPARATOR",            0,      0)},
+#ifdef FE_SB
+#ifdef FE_IME
+#include "wntbl2.h"
+    {W32FUN((LPFNW32)-1,                 "TABLESEPARATOR",            0,      0)},
+#endif // FE_IME
+#include "wwmtbl2.h"
+    {W32FUN((LPFNW32)-1,                 "TABLESEPARATOR",            0,      0)},
+#endif // !FE_SB
 };
 
 
 TABLEOFFSETS tableoffsets;
 
-#ifdef DEBUG_OR_WOWPROFILE
-#line 77
-#error Excluded unsupported WOW profiling configuration
-#endif
-#line 79
+// REMOVECODE Remove comments below before shipping NT 5.  See Also WOW32Unimplemented95API in wow32.c and wowtbl.h
+// #ifdef DEBUG_OR_WOWPROFILE
+INT cAPIThunks;
+// #endif
 
-#line 80
+#line 89
 #ifdef WOWPROFILE
-#line 81
+#line 90
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 83
+#line 92
 
 
 VOID InitThunkTableOffsets(VOID)
 {
-    UINT    current;
+    WORD    current;
     WORD    offsetarray[(MOD_LAST - MOD_KERNEL) / FUN_MASK + 1];
     UINT    i;
 
@@ -116,12 +123,18 @@ VOID InitThunkTableOffsets(VOID)
     tableoffsets.toolhelp = offsetarray[MOD_TOOLHELP / FUN_MASK];
     tableoffsets.mmedia = offsetarray[MOD_MMEDIA / FUN_MASK];
     tableoffsets.commdlg = offsetarray[MOD_COMMDLG / FUN_MASK];
+#ifdef FE_IME
+    tableoffsets.winnls = offsetarray[MOD_WINNLS / FUN_MASK];
+#endif // FE_IME
+#ifdef FE_SB
+    tableoffsets.wifeman = offsetarray[MOD_WIFEMAN / FUN_MASK];
+#endif // FE_SB
 
 #ifdef DEBUG_OR_WOWPROFILE
-#line 116
+#line 131
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 118
+#line 133
 
 }
 
@@ -129,7 +142,7 @@ VOID InitThunkTableOffsets(VOID)
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-#line 125
+#line 141
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 261
+#line 197

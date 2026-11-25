@@ -17,17 +17,20 @@
 
 MODNAME(walias.c);
 
+extern CRITICAL_SECTION gcsWOW;
+extern PTD gptdTaskHead;
+
 //BUGBUG - this must be removed once MM_MCISYSTEM_STRING is defined in MMSYSTEM.H.
 #ifndef MM_MCISYSTEM_STRING
     #define MM_MCISYSTEM_STRING 0x3CA
 #endif
 
-#line 25
+#line 28
 #ifdef  DEBUG
-#line 26
+#line 29
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 28
+#line 31
 
 typedef struct _stdclass {
     LPSTR   lpszClassName;
@@ -80,7 +83,7 @@ INT GetStdClassNumber(
         // They passed us a string
 
         for ( i = WOWCLASS_BUTTON; i < NUMEL(stdClasses); i++ ) {
-            if ( _stricmp(pszClass, stdClasses[i].lpszClassName) == 0 ) {
+            if ( WOW32_stricmp(pszClass, stdClasses[i].lpszClassName) == 0 ) {
                 return( i );
             }
         }
@@ -92,14 +95,14 @@ INT GetStdClassNumber(
             if ( stdClasses[i].aClassAtom == 0 ) {
                 // RegisterWindowMessage is an undocumented way of determining
                 // an atom value in the context of the server-side heap.
-                stdClasses[i].aClassAtom = RegisterWindowMessage(stdClasses[i].lpszClassName);
+                stdClasses[i].aClassAtom = (ATOM)RegisterWindowMessage(stdClasses[i].lpszClassName);
             }
             if ( (ATOM)LOWORD(pszClass) == stdClasses[i].aClassAtom ) {
                 return( i );
             }
         }
     }
-    return( WOWCLASS_UNKNOWN );
+    return( WOWCLASS_WIN16 );  // private 16-bit class created by the app
 }
 
 // Returns a 32 window proc given a class index
@@ -109,7 +112,7 @@ WNDPROC GetStdClassWndProc(
 ) {
     WNDPROC lpfn32;
 
-    if ( iClass < WOWCLASS_UNKNOWN || iClass > WOWCLASS_MAX ) {
+    if ( iClass < WOWCLASS_WIN16 || iClass > WOWCLASS_MAX ) {
         WOW32ASSERT(FALSE);
         return( NULL );
     }
@@ -124,7 +127,7 @@ WNDPROC GetStdClassWndProc(
 
         if ( f ) {
             VPVOID  vp;
-	    DWORD UNALIGNED * lpdw;
+       DWORD UNALIGNED * lpdw;
 
             lpfn32 = wc.lpfnWndProc;
             stdClasses[iClass].lpfnWndProc = lpfn32;
@@ -153,15 +156,15 @@ DWORD GetStdClassThunkProc(
     INT     iClass
 ) {
     DWORD   dwResult;
-    INT     iOrdinal;
+    SHORT   iOrdinal;
     PARM16  Parm16;
 
-    if ( iClass < WOWCLASS_UNKNOWN || iClass > WOWCLASS_MAX ) {
+    if ( iClass < WOWCLASS_WIN16 || iClass > WOWCLASS_MAX ) {
         WOW32ASSERT(FALSE);
         return( 0 );
     }
 
-    iOrdinal = stdClasses[iClass].iOrdinal;
+    iOrdinal = (SHORT)stdClasses[iClass].iOrdinal;
 
     if ( iOrdinal == 0 ) {
         return( (DWORD)NULL );
@@ -185,68 +188,6 @@ DWORD GetStdClassThunkProc(
         stdClasses[iClass].vpfnWndProc = dwResult;
     }
     return( dwResult );
-}
-
-PWW FindPWW(HANDLE h32, INT iClass)
-{
-
-    PWW pww;
-    CHAR szClassName[16];
-
-    if (!h32) {
-        return (PWW) NULL;
-    }
-    else {
-        try {
-            pww = (PWW) GetWindowLong(h32, GWL_WOWWORDS);
-        }
-        except (EXCEPTION_ACCESS_VIOLATION == GetExceptionCode()) {
-            pww = (PWW) NULL;
-        }
-
-        if (pww) {
-            if (WOWCLASS_UNKNOWN == pww->iClass &&
-                !(pww->flState & WWSTATE_ICLASSISSET)) {
-
-                if (WOWCLASS_UNKNOWN == iClass &&
-                    GetClassName(h32, szClassName, sizeof(szClassName))) {
-
-                    iClass = GetStdClassNumber(szClassName);
-
-                }
-
-                if (WOWCLASS_UNKNOWN != iClass) {
-                    SETWL(h32, GWL_WOWiClassAndflState,
-                            MAKECLASSANDSTATE(iClass, pww->flState | WWSTATE_ICLASSISSET));
-                } else {
-                    SETWL(h32, GWL_WOWiClassAndflState,
-                            MAKECLASSANDSTATE(pww->iClass, pww->flState | WWSTATE_ICLASSISSET));
-                }
-            }
-        }
-        else {
-            LOGDEBUG(2,("WOW::FindPWW(): *** Invalid hwnd32 %08x\n", h32));
-        }
-    }
-
-    return (pww);
-}
-
-PWC FindPWC(HANDLE h32)
-{
-    PWC pwc;
-
-    try {
-        pwc = (PWC) GetClassLong(h32, GCL_WOWWORDS);
-        WOW32ASSERT(pwc);
-    }
-    except (EXCEPTION_ACCESS_VIOLATION == GetExceptionCode()) {
-        pwc = (PWC) NULL;
-        LOGDEBUG(LOG_ALWAYS,("WOW::FindPWC(): *** Invalid hwnd32 %08x\n", h32));
-        WOW32ASSERT(FALSE);
-    }
-
-    return (pwc);
 }
 
 /*
@@ -273,19 +214,17 @@ PWC FindClass16(LPCSTR pszClass, HAND16 hInst)
 
 
 
-#line 273
+#line 214
 #ifdef DEBUG
-#line 274
+#line 215
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 407
+#line 348
 
-
-extern PTD gptdTaskHead;
 
 PTD ThreadProcID32toPTD(DWORD dwThreadID, DWORD dwProcessID)
 {
-    PTD ptd;
+    PTD ptd, ptdThis;
     PWOAINST pWOA;
 
     //
@@ -294,9 +233,11 @@ PTD ThreadProcID32toPTD(DWORD dwThreadID, DWORD dwProcessID)
     // to the corresponding WinOldAp PTD.
     //
 
-    ptd = CURRENTPTD();
+    ptdThis = CURRENTPTD();
 
-    pWOA = ptd->pWOAList;
+    EnterCriticalSection(&ptdThis->csTD);
+
+    pWOA = ptdThis->pWOAList;
 
     while (pWOA && pWOA->dwChildProcessID != dwProcessID) {
         pWOA = pWOA->pNext;
@@ -306,12 +247,18 @@ PTD ThreadProcID32toPTD(DWORD dwThreadID, DWORD dwProcessID)
 
         ptd = pWOA->ptdWOA;
 
+        LeaveCriticalSection(&ptdThis->csTD);
+
     } else {
+
+        LeaveCriticalSection(&ptdThis->csTD);
 
         //
         // We didn't find a WinOldAp PTD to return, see
         // if the thread ID matches one of our app threads.
         //
+
+        EnterCriticalSection(&gcsWOW);
 
         ptd = gptdTaskHead;
 
@@ -319,6 +266,7 @@ PTD ThreadProcID32toPTD(DWORD dwThreadID, DWORD dwProcessID)
             ptd = ptd->ptdNext;
         }
 
+        LeaveCriticalSection(&gcsWOW);
     }
 
     return ptd;
@@ -330,17 +278,21 @@ PTD Htask16toPTD(
 ) {
     PTD  ptd;
 
+    EnterCriticalSection(&gcsWOW);
+
     ptd = gptdTaskHead;
 
     while(ptd) {
 
         if ( ptd->htask16 == htask16 ) {
-            return( ptd );
+            break;
         }
         ptd = ptd->ptdNext;
     }
 
-    return((PTD)NULL);
+    LeaveCriticalSection(&gcsWOW);
+
+    return ptd;
 }
 
 
@@ -428,6 +380,8 @@ ULONG GetGCL_HMODULE(HWND hwnd)
 
         ptd = CURRENTPTD();
 
+        EnterCriticalSection(&ptd->csTD);
+
         pWOA = ptd->pWOAList;
         while (pWOA && pWOA->dwChildProcessID != dwProcessID) {
             pWOA = pWOA->pNext;
@@ -441,6 +395,8 @@ ULONG GetGCL_HMODULE(HWND hwnd)
             ul = (ULONG) gUser16hInstance;
             WOW32ASSERT(ul);
         }
+
+        LeaveCriticalSection(&ptd->csTD);
     }
     else {
         ul = (ULONG)GETHMOD16(ul);      // 32-bit hmod is HMODINST32
@@ -530,7 +486,7 @@ WORD WOWHandle16 (HANDLE h32, WOW_HANDLE_TYPE htype)
     }
 }
 
-#line 658
+#line 614
 PVOID gpGdiHandleInfo = (PVOID)-1;
 
 //WARNING: This structure must match ENTRY in ntgdi\inc\hmgshare.h
@@ -560,6 +516,98 @@ HANDLE hConvert16to32(int h16)
 
     return((HANDLE)h32);
 }
+
+
+// Implemented as temporary fix for Whistler Bug #435401
+// Should be fixed for Blackcomb or sooner
+extern HANDLE hmodWOW32;
+
+HAND16 hConvert32to16(DWORD h32)
+{
+    PARM16 Parm16;
+    VPVOID vp = 0;    
+
+    // see if handle is over 14-bits
+    if(LOWORD(h32) > 0x00003FFF) {
+       char szErrorMessage[512];
+       char szTitle[512];
+       char szModName[9];
+       PTDB pTDB;
+
+       pTDB = (PVOID)SEGPTR(CURRENTPTD()->htask16,0);
+
+       RtlCopyMemory(szModName, pTDB->TDB_ModName, sizeof(szModName)-1);
+       szModName[sizeof(szModName)-1] = 0;
+       if (!LoadString(hmodWOW32, iszApplication,
+               szTitle, sizeof(szTitle)/sizeof(CHAR)))
+       {
+           szTitle[0] = 0;
+       }
+       strcat(szTitle, szModName);
+
+       LoadString(hmodWOW32,
+                  iszExceedGDIHandleLimit,
+                  szErrorMessage,
+                  sizeof szErrorMessage);
+
+       // The GDI32 handle allocation has gone over the 16K threshhold
+       // This thread is toast.
+       WOWSysErrorBox(szTitle, szErrorMessage, SEB_OK | SEB_DEFBUTTON, 0, 0);
+
+       LOGDEBUG(LOG_ALWAYS,
+                ("GDI32 handle limit exceeded for Task %04X \n",
+                CURRENTPTD()->htask16));
+
+       CallBack16(RET_FORCETASKEXIT, &Parm16, 0, &vp);
+
+       // this should never return
+       return(0);
+    }
+
+    // everything is hunky dory
+    return((HAND16)(((DWORD) (h32)) << 2));
+}
+
+// We probably don't need to worry about this buffer being too small since we're
+// really only interested in the predefined standard classes which tend to
+// be rather short-named.
+#define MAX_CLASSNAME_LEN  64
+
+// There is a time frame (from when an app calls CreateWindow until USER32 gets
+// a message at one of its WndProc's for the window - see FritzS) during which
+// the fnid (class type) can't be set officially for the window.  If the
+// GETICLASS macro is invoked during this period, it will be unable to find the
+// iClass for windows created on any of the standard control classes using the
+// fast fnid index method (see walias.h).  Once the time frame is passed, the
+// fast fnid method will work fine for these windows.
+//
+// This is manifested in apps that set CBT hooks and try to subclass the
+// standard classes while in their hook proc.  See bug #143811.
+
+INT GetIClass(PWW pww, HWND hwnd)
+{
+    INT   iClass;
+    DWORD dwClassAtom;
+    WORD fnid = wow_user_window_fnid(hwnd) & 0xfff;
+
+    if (fnid >= FNID_START && fnid <= FNID_END) {
+        iClass = pfnOut.aiWowClass[fnid - FNID_START];
+    }
+    else {
+
+       iClass = WOWCLASS_WIN16;       // default return: app private class           
+   
+       dwClassAtom = GetClassLong(hwnd, GCW_ATOM);
+   
+       if(dwClassAtom) {
+           iClass = GetStdClassNumber((PSZ)dwClassAtom);
+       }
+    }
+
+    return(iClass);
+}
+
+
 
 /* DIVERGENCE(MVDM-HOST-DIV-908): scalar projections of the original class table. */
 LPCSTR WINAPI wow_original_class_name(UINT index)

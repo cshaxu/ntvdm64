@@ -10,7 +10,8 @@ void WINAPI wow_message_release32(struct _WM32MSGPARAMEX *);
 struct _TD;
 typedef struct wow_message_stack {
     struct _TD *task;
-    DWORD cursor, init;
+    DWORD cursor;
+    INT allocations;
     WORD task16;
     BOOL completed;
 } wow_message_stack;

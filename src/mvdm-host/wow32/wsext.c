@@ -150,8 +150,8 @@ NOTE:
   Also, never update structures in 16 bit land if the 32 bit call fails.
 
   Be aware that the GETxxxPTR macros return the CURRENT selector-to-flat_memory
-  mapping.  Calls to some 32-bit functions may indirectly cause callbacks into 
-  16-bit code.  These may cause 16-bit memory to move due to allocations 
+  mapping.  Calls to some 32-bit functions may indirectly cause callbacks into
+  16-bit code.  These may cause 16-bit memory to move due to allocations
   made in 16-bit land.  If the 16-bit memory does move, the corresponding 32-bit
   ptr in WOW32 needs to be refreshed to reflect the NEW selector-to-flat_memory
   mapping.
@@ -541,14 +541,14 @@ ULONG FASTCALL WWS32WSAStartup(PVDMFRAME pFrame)
     STOREWORD( wsaData16->wVersion, WWS32ThreadVersion );
     STOREWORD( wsaData16->wHighVersion, MAKEWORD(1, 1) );
 
-    description = "Windows NT 16-bit Windows Sockets";
-    RtlCopyMemory( wsaData16->szDescription, 
-                   description, 
+    description = "16-bit Windows Sockets";
+    RtlCopyMemory( wsaData16->szDescription,
+                   description,
                    strlen(description) + 1 );
 
     systemStatus = "Running.";
-    RtlCopyMemory( wsaData16->szSystemStatus, 
-                   systemStatus, 
+    RtlCopyMemory( wsaData16->szSystemStatus,
+                   systemStatus,
                    strlen(systemStatus) + 1 );
 
     STOREWORD( wsaData16->iMaxSockets, 0xFFFF );
@@ -877,7 +877,7 @@ WWS32DefaultBlockingHook (
     )
 {
     MSG msg;
-    BOOLEAN retrievedMessage;
+    BOOL retrievedMessage;
 
     //
     // Get the next message for this thread, if any.

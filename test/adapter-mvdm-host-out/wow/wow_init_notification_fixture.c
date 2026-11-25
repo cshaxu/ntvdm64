@@ -50,9 +50,9 @@ int __cdecl mvdm_softpc_wow_page_domain_client_desktop_ready(void)
 { return 1; }
 static BOOL initialize_task(void)
 {
-    return output.pfnInitTask(0x0400, "APP.EXE", 0x1234, 0, 0x5678,
+    return output.pfnInitTask(0x0400, 0, 0, "APP.EXE", NULL, 0x80001234u, 0, 0x5678,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
-        (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_HIDE);
+        (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT);
 }
 DWORD WINAPI wow_fixture_NtvdmReportWowStartup(ULONG request, USHORT task, BOOL bind)
 {

@@ -155,15 +155,15 @@ DWORD OpenNtBaseServiceRegisterWowExec(OPENNT_BASE_CONNECTION *connection,
     OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
     DWORD window_pid=0;
     NTSTATUS status;
-    if (!connection || !window) return ERROR_INVALID_PARAMETER;
+    if (!connection) return ERROR_INVALID_PARAMETER;
     if (!OpenNtBaseServicePeer(connection,pid,generation)) return ERROR_ACCESS_DENIED;
     EnterCriticalSection(&connection->service->lock);
     /* A copied HWND is only an untrusted identity, never authority. Only the
      * reservation-bound WOW worker may register its own native window. The
      * original server retains the window/thread/process-sequence policy. */
     if (!connection->process.fVDM || !connection->wow ||
-            !GetWindowThreadProcessId((HWND)(ULONG_PTR)window,&window_pid) ||
-            window_pid!=pid) {
+            (window && (!GetWindowThreadProcessId((HWND)(ULONG_PTR)window,&window_pid) ||
+            window_pid!=pid))) {
         LeaveCriticalSection(&connection->service->lock);
         return ERROR_ACCESS_DENIED;
     }

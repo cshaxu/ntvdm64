@@ -29,7 +29,7 @@ BOOL W32CheckDibColorIndices(LPBITMAPINFOHEADER lpbmi);
 
 // VGA colors
 RGBQUAD rgbVGA[] = {
-//    Blue  Green   Red   
+//    Blue  Green   Red
       0x00, 0x00, 0x00, 0,    // 0  ; black
       0x00, 0x00, 0x80, 0,    // 1  ; dark red
       0x00, 0x80, 0x00, 0,    // 2  ; dark green
@@ -46,7 +46,7 @@ RGBQUAD rgbVGA[] = {
       0xff, 0x00, 0xff, 0,    // d  ; magenta
       0xff, 0xff, 0x00, 0,    // e  ; cyan
       0xff, 0xff, 0xff, 0     // f  ; white
-};                        
+};
 
 RGBQUAD rgb4[] = {
       0xc0, 0xdc, 0xc0, 0,    // 8
@@ -179,29 +179,30 @@ HDC W32HandleDibDrv (PVPVOID vpbmi16)
         }
 
         //
-        // detect a clinical case of bitedit screwing around dib.drv 
-        // 
+        // detect a clinical case of bitedit screwing around dib.drv
+        //
         // code below is using dib macros declared in wdib.h
         // namely:
         //      DibNumColors - yields max number of colors in dib
         //      DibColors    - yields pointer to a dib color table
-        //  
+        //
         // Function W32CheckDibColorIndices checks to see if DIB color
         // table looks like a number (defined usually by biClrImportant)
         // of WORD indices in a sequential order (0, 1, 2, ...)
-        // if this is the case, app is trying to use undocumented feature 
-        // of DIB.DRV that turns color matching off in this case. 
+        // if this is the case, app is trying to use undocumented feature
+        // of DIB.DRV that turns color matching off in this case.
         // Since we cannot enforce that rule, we approximate it by filling
         // color table by a number of known (and always same) entries
-        // When blitting occurs, no color matching will be performed (when 
+        // When blitting occurs, no color matching will be performed (when
         // both target and destination are of this very nature).
-        // For no reason at all we fill color table with vga colors. 
-        // Sequential indices could have worked just as well. 
-        //    
+        // For no reason at all we fill color table with vga colors.
+        // Sequential indices could have worked just as well.
+        //
         // Modifications are made to memory pointed to by lpbmi32
 
         if (W32CheckDibColorIndices((LPBITMAPINFOHEADER)lpbmi32)) {
-            INT i, nColors;
+            BYTE i;
+            INT nColors;
             LPBITMAPINFOHEADER lpbmi = (LPBITMAPINFOHEADER)lpbmi32;
             LPRGBQUAD lprgbq = (LPRGBQUAD)DibColors(lpbmi);
 
@@ -217,14 +218,14 @@ HDC W32HandleDibDrv (PVPVOID vpbmi16)
                 case 4:
                     RtlCopyMemory(lprgbq, rgbVGA, sizeof(rgbVGA));
                     break;
-                    
+
                 case 8:
                     RtlCopyMemory(lprgbq,     rgbVGA,   8*sizeof(RGBQUAD));
                     RtlCopyMemory(lprgbq+248, rgbVGA+8, 8*sizeof(RGBQUAD));
                     RtlCopyMemory(lprgbq+8,   rgb4,   2*sizeof(RGBQUAD));
                     RtlCopyMemory(lprgbq+246, rgb4+2, 2*sizeof(RGBQUAD));
                     for (i = 10; i < 246; ++i) {
-                        lprgbq[i].rgbBlue = i; 
+                        lprgbq[i].rgbBlue = i;
                         lprgbq[i].rgbGreen= 0;
                         lprgbq[i].rgbRed  = 0;
                         lprgbq[i].rgbReserved = 0;
@@ -233,7 +234,7 @@ HDC W32HandleDibDrv (PVPVOID vpbmi16)
 
                 default: // this should never happen
                     break;
-            }            
+            }
         }
 
         if (WriteFile (hfile,
@@ -317,10 +318,10 @@ HDC W32HandleDibDrv (PVPVOID vpbmi16)
         }
 
 #else
-#line 320
+#line 321
 #error Excluded unsupported i386 WOW DIB profile
 #endif
-#line 322
+#line 323
 
         // Finally set the selectors to the new DIB
         Parm16.WndProc.wParam = HIWORD(vpbmi16);
@@ -341,16 +342,16 @@ HDC W32HandleDibDrv (PVPVOID vpbmi16)
 
         // Store all the relevant information so that DeleteDC could
         // free all the resources later.
-        if (W32AddDibInfo(hdcMem, 
-                          hfile, 
-                          hsec, 
+        if (W32AddDibInfo(hdcMem,
+                          hfile,
+                          hsec,
                           nAlignmentSpace,
-                          pvBits, 
-                          pvIntelBits, 
-                          hbm, 
+                          pvBits,
+                          pvIntelBits,
+                          hbm,
                           OriginalSelLimit,
                           (USHORT)OriginalFlags,
-                          (USHORT)((HIWORD(vpbmi16)))) == FALSE) 
+                          (USHORT)((HIWORD(vpbmi16)))) == FALSE)
             goto hdd_err;
 
 
@@ -363,7 +364,7 @@ hdd_err:;
     finally {
         if (!bRet) {
 
-            if (hdcMem) {    
+            if (hdcMem) {
                 DeleteDC (hdcMem);
                 hdcMem = NULL;
             }
@@ -395,7 +396,7 @@ BOOL W32AddDibInfo (
     )
 {
     PDIBINFO pdi;
-    
+
     if ((pdi = malloc_w (sizeof (DIBINFO))) == NULL)
         return FALSE;
 
@@ -512,7 +513,7 @@ HDC W32FindAndLockDibInfo (USHORT sel)
 
 //
 //  This function is called from krnl386 if GlobalReAlloc or GlobalFree is
-//  trying to operate on memory which we suspect is dib-mapped. It finds 
+//  trying to operate on memory which we suspect is dib-mapped. It finds
 //  dib by original selector and restores it, thus allowing respective function
 //  to succeede. Bitedit is the app that does globalrealloc before DeleteDC
 //
@@ -545,7 +546,7 @@ ULONG FASTCALL WK32FindAndReleaseDib(PVDMFRAME pvf)
                 LOGDEBUG(LOG_ALWAYS, ("\nWOW: FindAndReleaseDib failed (lock count!)\n"));
                 return FALSE;
             }
-            
+
             return W32FreeDibInfoHandle(pdi, pdiLast);
         }
 
@@ -566,7 +567,7 @@ BOOL W32CheckDibColorIndices(LPBITMAPINFOHEADER lpbmi)
     if (lpbmi->biClrImportant) {
         nColors = min(nColors, (WORD)lpbmi->biClrImportant);
     }
-    
+
     for (i = 0; i < nColors; ++i) {
         if (*lpw++ != i) {
             return FALSE;
@@ -664,10 +665,10 @@ ULONG FASTCALL WG32CreateDIBSection(PVDMFRAME pFrame)
         }
 
 #else
-#line 665
+#line 666
 #error Excluded unsupported i386 WOW DIB profile
 #endif
-#line 667
+#line 668
 
         // Create a selector array for the bits backed by pvIntelBits
 
@@ -691,7 +692,7 @@ ULONG FASTCALL WG32CreateDIBSection(PVDMFRAME pFrame)
             goto cds_err;
         }
 
-#ifndef i386 
+#ifndef i386
         // okay, that was successful - map the descriptors properly
 
         if (!VdmAddDescriptorMapping(HIWORD(pvBits32),
@@ -702,8 +703,8 @@ ULONG FASTCALL WG32CreateDIBSection(PVDMFRAME pFrame)
             goto cds_err;
         }
 #endif
-        
-        LOGDEBUG(LOG_ALWAYS, ("\nWOW:CreateDIBSection: [16:16 %x] [Intel %x] [Flat %x]\n", 
+
+        LOGDEBUG(LOG_ALWAYS, ("\nWOW:CreateDIBSection: [16:16 %x] [Intel %x] [Flat %x]\n",
                              pvBits32, pvIntelBits, pvBits));
 
         ul = GETHBITMAP16(hbm32);
@@ -711,7 +712,7 @@ ULONG FASTCALL WG32CreateDIBSection(PVDMFRAME pFrame)
         // Add it to the list used for cleanup at DeleteObject time.
 
         if ((pdi = malloc_w (sizeof (DIBSECTIONINFO))) != NULL) {
-            pdi->di_hbm         = (HBITMAP)(HAND16)hbm32;
+            pdi->di_hbm         = hbm32;
             pdi->di_pv16        = pvBits32;
 #ifndef i386
             pdi->di_newIntelDib = pvIntelBits;
@@ -860,4 +861,3 @@ BOOL W32CheckAndFreeDibSectionInfo (HBITMAP hbm)
     }
     return FALSE;
 }
-

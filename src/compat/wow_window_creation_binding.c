@@ -110,7 +110,7 @@ static BOOL enroll_created_window(HWND window, const CREATESTRUCTA *request,
      * A guest class procedure remains guest-owned in either case. */
     if (native && (!original_creator || !recovered_control_procedure(target.procedure)) &&
             (!target.wow_encoded && (HIWORD(target.procedure) == wow_window_access_current()->layout()->procedure_handle_tag ||
-            !(target.procedure & WOW_WINDOW_PROC_TAG)))) {
+            !WOW_WINDOW_IS_GUEST_PROC(target.procedure)))) {
         target.procedure = (DWORD)GetWindowLongA(window, GWL_WNDPROC);
         target.wow_encoded = FALSE;
         if (!target.procedure) {
@@ -712,7 +712,7 @@ HWND WINAPI wow_user_create_window_ex(DWORD ex_style, LPCTSTR class_name,
      * than silently changing their meaning at the public USER32 boundary. */
     if (!binding || !binding->thread || !binding->thread->ppi ||
             !binding->thread->ppi->classes || !binding->classes ||
-            !binding->classes->get_version || !class_name || !input_words ||
+            !binding->classes->get_version || !class_name ||
             flags != wow_window_access_current()->layout()->ansi_creation_flag) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return NULL;
@@ -751,10 +751,10 @@ HWND WINAPI wow_user_create_window_ex(DWORD ex_style, LPCTSTR class_name,
     if (converted) HeapFree(GetProcessHeap(), 0, converted);
     if (!atom) return NULL;
 
-    /* OpenNT's _CreateWindowEx sends precisely WND_CNT_WOWDWORDS (three
-     * DWORDs) to the private server.  Do not read a whole WW from the caller;
-     * the remaining native view is initialized by the creation hook. */
-    CopyMemory(wow_window_access_current()->words(words), input_words,
+    /* XP creation starts with zeroed WOW words. Legacy callers may supply
+     * the three-word prefix; native state is filled during enrollment. */
+    if (input_words)
+        CopyMemory(wow_window_access_current()->words(words), input_words,
             wow_window_access_current()->layout()->word_count * sizeof(DWORD));
     request.dwExStyle = ex_style;
     request.lpszClass = (LPCSTR)class_name;

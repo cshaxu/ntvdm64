@@ -10,7 +10,7 @@ ULONG FASTCALL   WK32GetCurrentDirectory(PVDMFRAME pFrame);
 ULONG FASTCALL   WK32SetCurrentDirectory(PVDMFRAME pFrame);
 ULONG FASTCALL   WK32GetCurrentDate(PVDMFRAME pFrame);
 ULONG FASTCALL   WK32DeviceIOCTL(PVDMFRAME pFrame);
-ULONG FASTCALL   W32GetFlatAddressArray(PVDMFRAME pFrame);
+ULONG FASTCALL   WK32WOWGetFlatAddressArray(PVDMFRAME pFrame);
 
 ULONG DosWowSetDefaultDrive (UCHAR);
 ULONG DosWowGetCurrentDirectory (UCHAR, LPSTR);

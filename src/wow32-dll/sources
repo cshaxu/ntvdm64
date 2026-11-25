@@ -7,7 +7,7 @@
 # ABI.
 
 TARGET=WOW32.DLL
-ORIGINAL_MANIFEST=../../mvdm/wow32/sources
+ORIGINAL_MANIFEST=../mvdm-host/wow32/sources.inc
 ORIGINAL_DEF=../../mvdm/wow32/wow32.def
 ORIGINAL_RESOURCE=../../mvdm/wow32/wow32.rc
 

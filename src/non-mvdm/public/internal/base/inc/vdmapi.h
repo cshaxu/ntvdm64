@@ -134,7 +134,7 @@ CmdBatNotification(
     IN ULONG    fBeginEnd
 );
 
-VOID
+NTSTATUS
 APIENTRY
 RegisterWowExec(
     IN HANDLE   hwndWowExec

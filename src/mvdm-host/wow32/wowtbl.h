@@ -33,6 +33,12 @@ typedef struct {
     WORD    toolhelp;
     WORD    mmedia;
     WORD    commdlg;
+#ifdef FE_IME
+    WORD    winnls;
+#endif // FE_IME
+#ifdef FE_SB
+    WORD    wifeman;
+#endif // FE_SB
 } TABLEOFFSETS;
 typedef TABLEOFFSETS UNALIGNED *PTABLEOFFSETS;
 
@@ -41,9 +47,9 @@ VOID InitThunkTableOffsets(VOID);
 
 extern TABLEOFFSETS tableoffsets;
 
-#line 44
+
 #ifdef DEBUG_OR_WOWPROFILE
-#line 45
+#line 52
 #error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif
-#line 59
+#line 66

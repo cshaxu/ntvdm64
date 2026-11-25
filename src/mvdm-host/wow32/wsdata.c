@@ -187,7 +187,7 @@ ULONG FASTCALL WWS32gethostbyname(PVDMFRAME pFrame)
 {
     ULONG ul;
     register PGETHOSTBYNAME16 parg16;
-    PHOSTENT hostent32;
+    PHOSTENT hostent32 = NULL;
     PHOSTENT16 hostent16;
     PSZ name32 = NULL;
     PSZ name16;
@@ -204,19 +204,19 @@ ULONG FASTCALL WWS32gethostbyname(PVDMFRAME pFrame)
     
     if(name16) {
         name32 = malloc_w(strlen(name16)+1);
-        strcpy(name32, name16);
+        if ( name32 ) {
+          strcpy(name32, name16);
+          hostent32 = (PHOSTENT) (*wsockapis[WOW_GETHOSTBYNAME].lpfn)( name32 );
+          free_w(name32);
+        }
     }
 
-    hostent32 = (PHOSTENT) (*wsockapis[WOW_GETHOSTBYNAME].lpfn)( name32 );
 
     // Note: 16-bit callbacks resulting from above function
     //       call may have caused 16-bit memory movement
     FREEVDMPTR(name16);
     FREEARGPTR(parg16);
 
-    if(name32) {
-        free_w(name32);
-    }
 
     if ( hostent32 != NULL ) {
 
@@ -237,9 +237,6 @@ ULONG FASTCALL WWS32gethostbyname(PVDMFRAME pFrame)
 
         ul = 0;
     }
-
-    FREEVDMPTR( name32 );
-    FREEARGPTR(parg16);
 
     RETURN(ul);
 
@@ -337,7 +334,7 @@ ULONG FASTCALL WWS32WSAAsyncGetHostByAddr(PVDMFRAME pFrame)
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
     context->RundownState = 0;
-#line 338
+#line 335
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -444,7 +441,7 @@ ULONG FASTCALL WWS32WSAAsyncGetHostByName(PVDMFRAME pFrame)
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
     context->RundownState = 0;
-#line 442
+#line 439
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -519,7 +516,7 @@ WWS32PostAsyncGetHost (
     if ( context == NULL ) {
         return TRUE;
     }
-#line 514
+#line 511
 
     //
     // If the call was successful, copy the 32-bit buffer to the
@@ -761,7 +758,7 @@ ULONG FASTCALL WWS32getprotobyname(PVDMFRAME pFrame)
 {
     ULONG ul;
     register PGETPROTOBYNAME16 parg16;
-    PPROTOENT protoent32;
+    PPROTOENT protoent32 = NULL;
     PPROTOENT16 protoent16;
     PSZ name32 = NULL;
     PBYTE name16;
@@ -777,19 +774,19 @@ ULONG FASTCALL WWS32getprotobyname(PVDMFRAME pFrame)
 
     if(name16) {
         name32 = malloc_w(strlen(name16)+1);
-        strcpy(name32, name16);
+        if ( name32 ) {
+             strcpy(name32, name16);
+             protoent32 = (PPROTOENT) (*wsockapis[WOW_GETPROTOBYNAME].lpfn)( name32 );
+             free_w( name32 );
+        }
     }
 
-    protoent32 = (PPROTOENT) (*wsockapis[WOW_GETPROTOBYNAME].lpfn)( name32 );
+    
 
     // Note: 16-bit callbacks resulting from above function
     //       call may have caused 16-bit memory movement
     FREEVDMPTR(name16);
     FREEARGPTR(parg16);
-
-    if(name32) {
-        free_w( name32 );
-    }
 
     if ( protoent32 != NULL ) {
 
@@ -810,9 +807,6 @@ ULONG FASTCALL WWS32getprotobyname(PVDMFRAME pFrame)
 
         ul = 0;
     }
-
-    FREEVDMPTR(name16);
-    FREEARGPTR(parg16);
 
     RETURN(ul);
 
@@ -910,7 +904,7 @@ ULONG FASTCALL WWS32WSAAsyncGetProtoByName(PVDMFRAME pFrame)
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
     context->RundownState = 0;
-#line 902
+#line 896
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1014,7 +1008,7 @@ ULONG FASTCALL WWS32WSAAsyncGetProtoByNumber(PVDMFRAME pFrame)
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
     context->RundownState = 0;
-#line 1003
+#line 997
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1088,7 +1082,7 @@ WWS32PostAsyncGetProto (
     if ( context == NULL ) {
         return TRUE;
     }
-#line 1074
+#line 1068
 
     //
     // If the call was successful, copy the 32-bit buffer to the
@@ -1414,7 +1408,7 @@ ULONG FASTCALL WWS32WSAAsyncGetServByPort(PVDMFRAME pFrame)
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
     context->RundownState = 0;
-#line 1397
+#line 1391
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1523,7 +1517,7 @@ ULONG FASTCALL WWS32WSAAsyncGetServByName(PVDMFRAME pFrame)
     context->Buffer16Length = parg16->BufferLength;
     context->ThreadSerialNumber = WWS32ThreadSerialNumber;
     context->RundownState = 0;
-#line 1503
+#line 1497
 
     //
     // Enter a critical section to synchronize access to the context block
@@ -1600,7 +1594,7 @@ WWS32PostAsyncGetServ (
     if ( context == NULL ) {
         return TRUE;
     }
-#line 1577
+#line 1571
 
     //
     // If the call was successful, copy the 32-bit buffer to the
@@ -1799,12 +1793,12 @@ BytesInServent32 (
 
 ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
 {
-#line 1775
+#line 1769
     ULONG ul;
     register PWSACANCELASYNCREQUEST16 parg16;
     HANDLE asyncTaskHandle32;
     PWINSOCK_ASYNC_CONTEXT_BLOCK context;
-#line 1777
+#line 1771
 
     if ( !WWS32IsThreadInitialized ) {
         SetLastError( WSANOTINITIALISED );
@@ -1812,7 +1806,7 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
     }
 
     GETARGPTR(pFrame, sizeof(WSACANCELASYNCREQUEST16), parg16);
-#line 1784
+#line 1778
 
     asyncTaskHandle32 = WWS32FindAsyncTaskHandle32(
                             GETWORD16( parg16->hAsyncTaskHandle ),
@@ -1832,13 +1826,13 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
         }
         RETURN(ul);
     }
-#line 1787
+#line 1781
 
     FREEARGPTR(parg16);
 
     ul = (ULONG) SOCKET_ERROR;
     SetLastError( WSAEINVAL );
-#line 1792
+#line 1786
 
     RETURN(ul);
 
@@ -1941,7 +1935,7 @@ WWS32CancelAsyncRequestsForTask(
         }
     }
 } // WWS32CancelAsyncRequestsForTask
-#line 1796
+#line 1790
 
 
 PWINSOCK_ASYNC_CONTEXT_BLOCK
@@ -1982,7 +1976,7 @@ WWS32FindAndRemoveAsyncContext (
                 return NULL;
             }
 
-#line 1824
+#line 1818
 
             //
             // Found a match.  Remove it from the global list, leave

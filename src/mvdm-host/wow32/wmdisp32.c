@@ -1,3 +1,4 @@
+
 /*++
 
  *
@@ -17,78 +18,229 @@
 
 #include "precomp.h"
 #include "wow_message_lifetime.h"
-#line 19
+#line 20
 #pragma hdrstop
+#ifdef FE_IME
+#include "wownls.h"
+#include "ime.h"
+#endif // FE_IME
+#include "prshtp.h"
 
 MODNAME(wmdisp32.c);
 
 __declspec(thread) BOOL fThunkDDEmsg = TRUE;
-#line 24
-BOOL fDDEAckFree = FALSE;
 
 extern WORD msgFINDREPLACE;  // see WCOMMDLG.C
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-#line 29
+#line 34
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 31
+#line 36
 
-LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
-    VPWNDPROC vpWndProc16,  // Next WndProc to call or NULL if default
+
+BOOL W32Win16DlgProcEx(HWND hdlg, UINT uMsg, UINT uParam, LONG lParam,
+    VPWNDPROC vpDlgProc16,  // Next WndProc to call or NULL if default
     PWW pww)    // hwnd's PWW if already known or NULL
 {
     BOOL fSuccess;
-    PWC  pwc;
-    LONG ulReturn;
-#line 39
     register PTD ptd;
-    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
-    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): before construction. */
-    wow_message_stack_enter(&stack);
-    __try {
-#line 41
+    WM32MSGPARAMEX wm32mpex;
     BOOL   fMessageNeedsThunking;
-#line 42
-#ifdef DEBUG
-#line 43
-#error Excluded unsupported DEBUG WOW profile
-#endif
-#line 45
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-#line 47
-#error Excluded unsupported WOW profiling configuration
+    DWORD dwTics;
 #endif
-#line 48
 
-#line 50
     ptd = CURRENTPTD();
 
-#line 52
-    vpWndProc16 &= WNDPROC_MASK;
+    WOW32ASSERT(vpDlgProc16);
 
-    //
-    // if the actual selector had the high bit on then we turned off
-    // bit 2 of the selector (the LDT bit, which will always be on)
-    //
-
-    if (!((DWORD)vpWndProc16 & WOWCLASS_VIRTUAL_NOT_BIT31)) {
-        vpWndProc16 |= (WNDPROC_WOW | WOWCLASS_VIRTUAL_NOT_BIT31);
-    }
+    // take out the marker bits and fix the RPL bits
+    UnMarkWOWProc (vpDlgProc16,vpDlgProc16);
 
     // If the app has GP Faulted we don't want to pass it any more input
     // This should be removed when USER32 does clean up on task death so
     // it doesn't call us - mattfe june 24 92 HACK32
 
     if (ptd->dwFlags & TDF_IGNOREINPUT) {
-        LOGDEBUG(6,("    W32Win16WndProc Ignoring Input Messsage %04X\n",uMsg));
-        WOW32ASSERTMSG(!gfIgnoreInputAssertGiven,
-                       "WCD32CommonDialogProc: TDF_IGNOREINPUT hack was used, shouldn't be, "
+        LOGDEBUG(6,("    W32Dlg16WndProc Ignoring Input Messsage %04X\n",uMsg));
+        WOW32ASSERTMSG(gfIgnoreInputAssertGiven,
+                       "W32Dlg16WndProc: TDF_IGNOREINPUT hack was used, shouldn't be, "
+                       "please email DaveHart with repro instructions.  Hit 'g' to ignore this "
+                       "and suppress this assertion from now on.\n");
+        gfIgnoreInputAssertGiven = TRUE;
+        return FALSE;
+    }
+
+    wm32mpex.Parm16.WndProc.hwnd   = GETHWND16(hdlg);
+    wm32mpex.Parm16.WndProc.wMsg   = (WORD)uMsg;
+    wm32mpex.Parm16.WndProc.wParam = (WORD)uParam;
+    wm32mpex.Parm16.WndProc.lParam = (LONG)lParam;
+    wm32mpex.Parm16.WndProc.hInst  = 0;   // Forces AX = SS on WndProc entry,
+                                          // for Win 3.1 compatibility.
+
+    fMessageNeedsThunking =  (uMsg < 0x400) &&
+                                  (aw32Msg[uMsg].lpfnM32 != WM32NoThunking);
+
+    if (fMessageNeedsThunking) {
+        LOGDEBUG(3,("%04X (%s)\n", CURRENTPTD()->htask16, (aw32Msg[uMsg].lpszW32)));
+
+#ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+        dwTics = GetWOWTicDiff(0L);
+#endif
+        wm32mpex.fThunk = THUNKMSG;
+        wm32mpex.hwnd = hdlg;
+        wm32mpex.uMsg = uMsg;
+        wm32mpex.uParam = uParam;
+        wm32mpex.lParam = lParam;
+        wm32mpex.pww = pww;
+        wm32mpex.fFree = TRUE;
+        wm32mpex.lpfnM32 = aw32Msg[uMsg].lpfnM32;
+        if (!(wm32mpex.lpfnM32)(&wm32mpex)) {
+            LOGDEBUG(LOG_ERROR,("    W32Win16DlgProcEx ERROR: cannot thunk 32-bit message %04x\n", uMsg));
+            goto Error;
+        }
+
+#ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+        if( !fWMsgProfRT ) {  // only if not profiling round trip
+            aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);
+        }
+#endif
+
+    }
+    else {
+        LOGDEBUG(6,("    No Thunking was required for the 32-bit message %s(%04x)\n", (LPSZ)GetWMMsgName(uMsg), uMsg));
+    }
+
+    BlockWOWIdle(FALSE);
+
+    fSuccess = CallBack16(RET_WNDPROC, &wm32mpex.Parm16, vpDlgProc16, (PVPVOID)&wm32mpex.lReturn);
+
+    BlockWOWIdle(TRUE);
+
+    // the callback function of a dialog is of type FARPROC whose return value
+    // is of type 'int'. Since dx:ax is copied into lReturn in the above
+    // CallBack16 call, we need to zero out the hiword, otherwise we will be
+    // returning an erroneous value.
+
+    wm32mpex.lReturn = (LONG)((SHORT)(LOWORD(wm32mpex.lReturn)));
+
+    if (fMessageNeedsThunking) {
+
+#ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+        if( !fWMsgProfRT ) {  // only if not round trip profiling
+            dwTics = GetWOWTicDiff(0L);
+        }
+#endif // WOWPROFILE
+
+
+        //
+        // if you send a message to a dialog what gets returned
+        // to the caller is the dlg's msgresult window long.
+        // app dialog functions will call
+        //     SetWindowLong(hdlg, DWL_MSGRESULT, n);
+        // during message processing so the right thing gets returned.
+        // scottlu says we only need to do this for wm_gettext, it's
+        // the only message whose result is an output count.
+        //
+
+        if (uMsg == WM_GETTEXT  &&  wm32mpex.lReturn != 0) {
+            wm32mpex.lReturn = GetWindowLong(hdlg, DWL_MSGRESULT);
+        }
+
+        wm32mpex.fThunk = UNTHUNKMSG;
+        (wm32mpex.lpfnM32)(&wm32mpex);
+
+#ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+        aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);
+        aw32Msg[uMsg].cCalls++;   // increment # times message passed
+#endif // WOWPROFILE
+
+    }
+
+    if (!fSuccess)
+        goto Error;
+
+Done:
+
+    return wm32mpex.lReturn;
+
+Error:
+    LOGDEBUG(6,("    W32Win16DlgProcEx WARNING: cannot call back, using default message handling\n"));
+    wm32mpex.lReturn = 0;
+    goto Done;
+}
+
+
+
+
+
+
+
+
+LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
+    VPWNDPROC vpWndProc16,  // Next WndProc to call or NULL if default
+    PWW pww)    // hwnd's PWW if already known or NULL
+{
+    BOOL fSuccess;
+    LONG ulReturn;
+#line 184
+    register PTD ptd;
+    WM32MSGPARAMEX wm32mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
+    wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): before construction. */
+    wow_message_stack_enter(&stack);
+    __try {
+#line 186
+    BOOL   fMessageNeedsThunking;
+//#ifdef DEBUG
+//    CHAR szClassName[80];
+//#endif
+
+#ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 48
+#error Excluded unsupported WOW profiling configuration
+#endif
+#line 194
+
+#line 195
+    ptd = CURRENTPTD();
+
+    WOW32ASSERT(vpWndProc16);
+
+    // take out the marker bits and fix the RPL bits
+    UnMarkWOWProc (vpWndProc16,vpWndProc16);
+
+
+    //
+    // If the app has GP Faulted we don't want to pass it any more input
+    // This should be removed when USER32 does clean up on task death so
+    // it doesn't call us - mattfe june 24 92 HACK32
+    //
+    // It's not a problem if the callback is going to a 16:16 proc in user.exe
+    // like DefWindowProc.
+    //
+
+    if (ptd->dwFlags & TDF_IGNOREINPUT &&
+        HIWORD(vpWndProc16) != HIWORD(gpfn16GetProcModule)) {
+
+        LOGDEBUG(6,("    W32Win16WndProcEx Ignoring Input Messsage %04X\n",uMsg));
+        WOW32ASSERTMSG(gfIgnoreInputAssertGiven,
+                       "W32Win16WndProcEx: TDF_IGNOREINPUT hack was used, shouldn't be, "
                        "please email DaveHart with repro instructions.  Hit 'g' to ignore this "
                        "and suppress this assertion from now on.\n");
         gfIgnoreInputAssertGiven = TRUE;
         goto SilentError;
+    }
+
+    //
+    // Don't send WM_DEVMODECHANGE if TDF_EATDEVMODEMSG is set
+    // access2.0 faults if it is in EnumMetaFile and receives WM_DEVMODECHANGE
+    // while in it whistler bug 189703
+    //
+
+    if (( ptd->dwFlags & TDF_EATDEVMODEMSG ) && ( uMsg == WM_DEVMODECHANGE )) {
+        return 0;
     }
 
     //
@@ -97,29 +249,47 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 
     if (!pww) {
         if (!(pww = (PWW) GetWindowLong(hwnd, GWL_WOWWORDS))) {
-            LOGDEBUG(LOG_ALWAYS,("WOW :: W32Win16WndProc ERROR: GetWindowLong(0x%x, GWL_WOWWORDS) fails\n", hwnd));
+            LOGDEBUG(LOG_ALWAYS,("WOW :: W32Win16WndProcEx ERROR: GetWindowLong(0x%x, GWL_WOWWORDS) fails\n", hwnd));
             goto Error;
         }
     }
+#ifdef FE_IME
+    if (( uMsg == WM_IME_REPORT ) && ( uParam == IR_STRINGEX )) {
+        HANDLE hInstance;
 
-    if (WOWCLASS_UNKNOWN == pww->iClass) {
-        if (pwc = FindPWC(hwnd)) {
-            SETWL(hwnd, GWL_WOWvpfnWndProc, pwc->vpfnWndProc);
-            SETWL(hwnd, GWL_WOWiClassAndflState,
-                    MAKECLASSANDSTATE(WOWCLASS_WIN16, pww->flState | WWSTATE_ICLASSISSET));
-
-            LOGDEBUG(7,("Grovelled Class Name = %s\n",
-                (GetClassName(hwnd, szClassName, sizeof(szClassName)) ? szClassName : "Unknown")));
-        }
-        else {
-            LOGDEBUG(LOG_ALWAYS,("WOW :: W32Win16WndProc : FindPWC(0x%8.8x) fails\n", hwnd));
-        }
+        hInstance = (HANDLE)(ULONG)GetWindowLong(hwnd, GWL_HINSTANCE);
+        hInstance = (HANDLE)(ULONG)VALIDHMOD(hInstance);
+        if (W32GetExpWinVer(hInstance) < 0x030a)
+            return 0;
     }
 
-    if (WOWCLASS_UNKNOWN == pww->iClass) {
-        LOGDEBUG(LOG_ALWAYS,("WOW :: W32Win16WndProc ERROR: cannot find 16-bit class for window %08lx\n", hwnd));
-        goto Error;
+    //
+    // Don't dispatch Version 4.0 IMM Messages to 16bit apps.
+    //
+    // WM_IME_STARTCOMPOSITION         0x010D
+    // WM_IME_ENDCOMPOSITION           0x010E
+    // WM_IME_COMPOSITION              0x010F
+    // WM_IME_SETCONTEXT               0x0281
+    // WM_IME_NOTIFY                   0x0282
+    // WM_IME_CONTROL                  0x0283
+    // WM_IME_COMPOSITIONFULL          0x0284
+    // WM_IME_SELECT                   0x0285
+    // WM_IME_CHAR                     0x0286
+    // WM_IME_SYSTEM                   0x0287
+    //
+    if ((( uMsg >= WM_IME_STARTCOMPOSITION ) && ( uMsg <= WM_IME_COMPOSITION )) ||
+        (( uMsg >= WM_IME_SETCONTEXT ) && (uMsg <= WM_IME_SYSTEM ))) {
+
+        // Korean Edit conrol need to dispatch new IMM messages.
+        if ( !(GetStdClassWndProc(WOWCLASS_EDIT) && GetSystemDefaultLangID()==0x412) ) {
+             HANDLE hInstance;
+             hInstance = (HANDLE)(ULONG)GetWindowLong(hwnd, GWL_HINSTANCE);
+             hInstance = (HANDLE)(ULONG)VALIDHMOD(hInstance);
+             if (W32GetExpWinVer(hInstance) < 0x0400)
+                 goto Error;
+        }
     }
+#endif // FE_IME
 
     // This message is WIN32 only.  It is sent by WOW32 during the processing
     // of an EM_SETSEL in WU32Send/PostMessage.  If an MLE is subclassed the
@@ -142,29 +312,29 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
             CallWindowProc(EditWndProc, hwnd, EM_SCROLLCARET, 0, 0);
         }
         else {
-            LOGDEBUG(LOG_ALWAYS,("    W32Win16WndProc ERROR: cannot find 32-bit EditWindowProc\n"));
+            LOGDEBUG(LOG_ALWAYS,("    W32Win16WndProcEx ERROR: cannot find 32-bit EditWindowProc\n"));
         }
         stack.completed = TRUE; /* DIV-349: successful native-only notification. */
-#line 130
+#line 305
         return 0;   // notification message, no return code
     }
-
+   
     // Thunk this 32 bit message to 16 bit message
 
     LOGDEBUG(6,("    Thunking window %x message %s\n", hwnd, GetWMMsgName(uMsg)));
-#line 136
+#line 311
 #ifdef DEBUG
-#line 137
+#line 312
 #error Excluded unsupported DEBUG WOW profile
-#line 140
+#line 315
 #endif
-#line 141
+#line 316
 
     wm32mpex.Parm16.WndProc.hwnd   = GETHWND16(hwnd);
     wm32mpex.Parm16.WndProc.wMsg   = (WORD)uMsg;
     wm32mpex.Parm16.WndProc.wParam = (WORD)uParam;
     wm32mpex.Parm16.WndProc.lParam = (LONG)lParam;
-    wm32mpex.Parm16.WndProc.hInst  = (WORD)pww->hInstance;
+    wm32mpex.Parm16.WndProc.hInst  = LOWORD(pww->hModule);
 
     // An app can send one of its private class windows a message say 401.
     // This message will not be thunked in WMSG16.C because the
@@ -178,10 +348,10 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
         LOGDEBUG(6,("%04X (%s)\n", ptd->htask16, (aw32Msg[uMsg].lpszW32)));
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-#line 160
+#line 335
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 162
+#line 337
         wm32mpex.fThunk = THUNKMSG;
         wm32mpex.hwnd = hwnd;
         wm32mpex.uMsg = uMsg;
@@ -193,21 +363,17 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
         ulReturn = (wm32mpex.lpfnM32)(&wm32mpex);
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-#line 173
+#line 348
 #error Excluded unsupported WOW profiling configuration
-#line 176
+#line 351
 #endif
-#line 177
+#line 352
 
         if (!ulReturn) {
-            LOGDEBUG(LOG_ALWAYS,("    W32Win16WndProc ERROR: cannot thunk 32-bit message %s (%x)\n", GetWMMsgName(uMsg), uMsg));
+            LOGDEBUG(LOG_ALWAYS,("    W32Win16WndProcEx ERROR: cannot thunk 32-bit message %s (%x)\n", GetWMMsgName(uMsg), uMsg));
             goto Error;
         }
     }
-
-
-    if (!vpWndProc16)
-        vpWndProc16 = pww->vpfnWndProc;
 
     if (vpWndProc16 == (VPVOID)NULL) {
         WOW32ASSERT(vpWndProc16);
@@ -218,10 +384,10 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 
     BlockWOWIdle(FALSE);
 
-#line 197
+#line 368
     fSuccess = CallBack16(RET_WNDPROC, &wm32mpex.Parm16, vpWndProc16, (PVPVOID)&wm32mpex.lReturn);
 
-#line 199
+#line 370
     BlockWOWIdle(TRUE);
 
     // During CreateWindow some apps draw their own non-client area and don't
@@ -238,32 +404,32 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     // UnThunk this 32 bit message
 
     LOGDEBUG(6,("    UnThunking window %x message %s\n", hwnd, (LPSZ)GetWMMsgName(uMsg)));
-#line 215
+#line 386
 #ifdef DEBUG
-#line 216
+#line 387
 #error Excluded unsupported DEBUG WOW profile
-#line 219
+#line 390
 #endif
-#line 220
+#line 391
 
     if (fMessageNeedsThunking) {
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-#line 224
+#line 395
 #error Excluded unsupported WOW profiling configuration
-#line 227
+#line 398
 #endif
-#line 228
+#line 399
 
         wm32mpex.fThunk = UNTHUNKMSG;
         (wm32mpex.lpfnM32)(&wm32mpex);
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-#line 233
+#line 404
 #error Excluded unsupported WOW profiling configuration
-#line 235
+#line 406
 #endif
-#line 236
+#line 407
 
     }
 
@@ -272,17 +438,17 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     }
 
     stack.completed = TRUE; /* DIV-349: original unthunk completed successfully. */
-#line 243
+#line 414
     return (wm32mpex.lReturn);
 
 Error:
-    LOGDEBUG(LOG_ALWAYS,("    W32Win16WndProc ERROR: cannot call back, using default message handling\n"));
+    LOGDEBUG(LOG_ALWAYS,("    W32Win16WndProcEx ERROR: cannot call back, using default message handling\n"));
 SilentError:
     return DefWindowProc(hwnd, uMsg, uParam, lParam);
     } __finally {
         wow_message_finish32(&wm32mpex, &stack);
     }
-#line 249
+#line 420
 }
 
 
@@ -392,13 +558,13 @@ SilentError:
 BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
 {
 
-#line 358
+#line 529
 #if 0
-#line 359
+#line 530
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#line 381
+#line 552
 #endif
-#line 382
+#line 553
 
     //
     // Return FALSE, so if for some reason this routine gets used
@@ -408,13 +574,15 @@ BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
     return FALSE;
 }
 
-#line 391
+#line 562
 #ifdef DEBUG         // see the macro WM32UNDOCUMENTED
-#line 392
+#line 563
 #error Excluded unsupported DEBUG WOW profile
-#line 410
+#line 581
 #endif
-#line 411
+#line 582
+
+
 
 // This function thunks the messages,
 //
@@ -436,7 +604,7 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
     if (lpwm32mpex->fThunk) {
         lpwm32mpex->lpfnM32 = WM32Create; /* DIVERGENCE(MVDM-HOST-DIV-349): also the direct CBT caller. */
 
-#line 431
+#line 604
         if (HIWORD(lParam)) {
 
             // BUGBUG -- The assumption here is that GlobalAlloc will never
@@ -455,7 +623,7 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
                     if (!(vpClass = malloc16(cb)))
                         goto Error;
                     lpwm32mpex->dwTmp[0] = vpClass; /* DIV-349: before a throwing copy. */
-#line 448
+#line 621
                     putstr16(vpClass, lParam->lpszClass, cb);
                 }
             }
@@ -465,7 +633,7 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
                 if (!(vpName = malloc16(cb)))
                     goto Error;
                 lpwm32mpex->dwTmp[1] = vpName; /* DIV-349: completed acquisition. */
-#line 456
+#line 629
                 putstr16(vpName, lParam->lpszName, cb);
             }
 
@@ -475,7 +643,7 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
                     return FALSE;   // Window is dead
             }
 
-            if (lParam->lpCreateParams && (lpwm32mpex->pww->dwExStyle & WS_EX_MDICHILD) ) {
+            if (lParam->lpCreateParams && (lpwm32mpex->pww->ExStyle & WS_EX_MDICHILD) ) {
                 // This works because wm32mdicreate thunk doesn't use any
                 // parameters except lParam
 
@@ -489,18 +657,19 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
                 wm32mpexT.fFree = lpwm32mpex->fFree;
                 wm32mpexT.Parm16.WndProc.lParam = 0;
                 if (!WM32MDICreate(&wm32mpexT)) goto Error;
-#line 479
+#line 652
                 lpwm32mpex->dwParam = wm32mpexT.dwParam;
                 lpwm32mpex->dwTmp[2] = wm32mpexT.dwTmp[0];
-#line 480
+#line 653
                 vpCreateParams = wm32mpexT.Parm16.WndProc.lParam;
                 lpwm32mpex->dwTmp[3] = vpCreateParams;
-#line 481
+#line 654
             }
             else {
                 vpCreateParams = (VPVOID)lParam->lpCreateParams;
             }
 
+            // be sure allocation size matches stackfree16() size below
             if (!(lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(sizeof(CREATESTRUCT16))))
                 return FALSE;
 
@@ -515,7 +684,7 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
 
 
             // BUGBUG 08-Apr-91 JeffPar -- What if hModule is for a 32-bit task?
-#line 500
+#line 674
             pcws16->hInstance    = GETHINST16(lParam->hInstance);
             pcws16->hMenu    = GETHMENU16(lParam->hMenu);
             pcws16->hwndParent   = GETHWND16(lParam->hwndParent);
@@ -534,7 +703,7 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
           Error:
             LOGDEBUG(LOG_ALWAYS,(" !!!! WM32Create, WM_CREATE thunking failed !!!! Window %08lX ", lpwm32mpex->hwnd));
             wow_message_release32(lpwm32mpex); /* DIV-349: consume captured keys. */
-#line 519
+#line 693
             return (FALSE);
 
             // do some clean up
@@ -554,8 +723,8 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
 
             wow_message_release32(lpwm32mpex);
 
-#line 572
-            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                        sizeof(CREATESTRUCT16));
         }
 
         return TRUE;
@@ -644,31 +813,35 @@ BOOL FASTCALL WM32SetText(LPWM32MSGPARAMEX lpwm32mpex)
     INT cb;
 
 
-#line 661
+#line 836
     if (lpwm32mpex->fThunk) {
-#line 662
+#line 837
         if (lpwm32mpex->lParam) {
 
             LONG lParam = (LONG)GetParam16(lpwm32mpex->lParam);
             if (lParam) {
                 lpwm32mpex->Parm16.WndProc.lParam = lParam;
                 lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;
-#line 667
+#line 842
                 return (TRUE);
             }
- 
+
             cb = strlen((LPSZ)lpwm32mpex->lParam)+1;
+            lpwm32mpex->dwTmp[0] = (DWORD)cb;
 
             // winworks2.0a requires DS based string pointers for this message
             if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {
+
+                // be sure allocation size matches stackfree16() size below
                 if (!(lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(cb)))
                     return FALSE;
+
             } else {
                 if (!(lpwm32mpex->Parm16.WndProc.lParam = malloc16(cb)))
                     return FALSE;
             }
             lpwm32mpex->dwParam = WOW_TEXT_ACTIVE;
-#line 680
+#line 859
             putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
         }
     }
@@ -676,16 +849,17 @@ BOOL FASTCALL WM32SetText(LPWM32MSGPARAMEX lpwm32mpex)
 // BUGBUG 09-Apr-91 -- Should I copy back?
         if (!lpwm32mpex->dwParam) return TRUE;
         lpwm32mpex->dwParam = 0;
-#line 685
+#line 864
         if (DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL)) {
-#line 686
+#line 865
             return TRUE;
         }
 
-#line 689
+#line 868
         if (lpwm32mpex->Parm16.WndProc.lParam) {
             if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {
-                stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+                stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                            ((UINT)lpwm32mpex->dwTmp[0]));
             } else {
                 free16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
             }
@@ -722,11 +896,14 @@ BOOL FASTCALL WM32GetText(LPWM32MSGPARAMEX lpwm32mpex)
             // msworks 2.0a.
             //
 
-            lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(lpwm32mpex->Parm16.WndProc.wParam);
+            // be sure allocation size matches stackfree16() size below
+            lpwm32mpex->dwTmp[0] = (DWORD)lpwm32mpex->Parm16.WndProc.wParam;
+            lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(lpwm32mpex->dwTmp[0]);
+
         } else {
             lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex,
                 malloc16(lpwm32mpex->Parm16.WndProc.wParam));
-#line 731
+#line 914
         }
         if (!lpwm32mpex->Parm16.WndProc.lParam) return FALSE;
 
@@ -734,7 +911,7 @@ BOOL FASTCALL WM32GetText(LPWM32MSGPARAMEX lpwm32mpex)
         // non-zero fill to detect people who write more than they
         // say that they do!
         //
-#line 737
+#line 920
         GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, lpwm32mpex->Parm16.WndProc.wParam, psz);
         RtlFillMemory(psz, lpwm32mpex->Parm16.WndProc.wParam, 0xff);
         FLUSHVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, lpwm32mpex->Parm16.WndProc.wParam, psz);
@@ -814,7 +991,8 @@ BOOL FASTCALL WM32GetText(LPWM32MSGPARAMEX lpwm32mpex)
             getstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, cb);
 
             if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {
-                stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+                stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                            ((UINT)lpwm32mpex->dwTmp[0]));
             } else {
                 wow_message_release32(lpwm32mpex); /* DIV-349: captured heap key. */
             }
@@ -840,6 +1018,43 @@ BOOL FASTCALL WM32EraseBkGnd(LPWM32MSGPARAMEX lpwm32mpex)
 
     return (TRUE);
 }
+
+
+
+
+// This function thunks the message
+//
+//  WM_CHANGEUISTATE
+//  WM_UPDATEUISTATE
+//  WM_QUERYUISTATE
+//
+
+BOOL FASTCALL WM32xxxUIState(LPWM32MSGPARAMEX lpwm32mpex)
+{
+
+    // just copy the wParam into the lParam
+    if (lpwm32mpex->fThunk) {
+        lpwm32mpex->Parm16.WndProc.lParam = (LONG)lpwm32mpex->uParam;
+        lpwm32mpex->Parm16.WndProc.wParam = 0;
+
+        // this is here because there is talk that they might extend this
+        // message to use lParam -- heck, they didn't even tell us that they
+        // implemented this message in the first place!! (shame on shell!!)
+        WOW32WARNMSG((lpwm32mpex->lParam == 0),
+                     ("WOW::WM32xxxUIState:lParam != 0. Better investigate!\n"));
+    }
+
+    // now just reverse the process
+    else {
+        lpwm32mpex->uParam = (UINT)lpwm32mpex->Parm16.WndProc.lParam;
+        lpwm32mpex->lParam = 0;
+    }
+
+    return (TRUE);
+}
+
+
+
 
 
 // This function thunks the messages,
@@ -878,13 +1093,19 @@ BOOL FASTCALL WM32GetMinMaxInfo(LPWM32MSGPARAMEX lpwm32mpex)
 
     if (lpwm32mpex->fThunk) {
         if (lParam) {
+
+            // be sure allocation size matches stackfree16() size below
             lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(sizeof(POINT16)*5);
+
             UnThunkWMGetMinMaxInfo16(lpwm32mpex->Parm16.WndProc.lParam, lParam);
         }
     }
     else {
-        ThunkWMGetMinMaxInfo16(lpwm32mpex->Parm16.WndProc.lParam, &lParam)
-        stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+        ThunkWMGetMinMaxInfo16(lpwm32mpex->Parm16.WndProc.lParam, &lParam);
+        if(lpwm32mpex->Parm16.WndProc.lParam) {
+            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                        sizeof(POINT16)*5);
+        }
     }
 
     return(TRUE);
@@ -906,6 +1127,24 @@ BOOL FASTCALL WM32NCPaint(LPWM32MSGPARAMEX lpwm32mpex)
     }
     return (TRUE);
 }
+
+
+
+// This function thunks the messages,
+//
+//  WM_NCDESTROY
+//
+
+BOOL FASTCALL WM32NCDestroy(LPWM32MSGPARAMEX lpwm32mpex)
+{
+
+    // destroy any timers associated with this window
+    if (!lpwm32mpex->fThunk) {
+        FreeWindowTimers16(lpwm32mpex->hwnd);
+    }
+    return (TRUE);
+}
+
 
 // This function thunks the messages,
 //
@@ -971,6 +1210,8 @@ BOOL FASTCALL WM32DrawItem(LPWM32MSGPARAMEX lpwm32mpex)
 
     if (lpwm32mpex->fThunk) {
         if (lParam) {
+
+            // be sure allocation size matches stackfree16() size below
             lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(sizeof(DRAWITEMSTRUCT16));
             putdrawitem16(lpwm32mpex->Parm16.WndProc.lParam, lParam);
         }
@@ -978,7 +1219,8 @@ BOOL FASTCALL WM32DrawItem(LPWM32MSGPARAMEX lpwm32mpex)
     else {
         // BUGBUG 08-Apr-91 JeffPar -- Reflect changes back to 32-bit structure?
         if (lpwm32mpex->Parm16.WndProc.lParam)
-            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                        sizeof(DRAWITEMSTRUCT16));
     }
 
     return(TRUE);
@@ -1035,6 +1277,8 @@ BOOL FASTCALL WM32MeasureItem(LPWM32MSGPARAMEX lpwm32mpex)
                 cSize = XTALKHACK+sizeof(MEASUREITEMSTRUCT16);
             }
 
+            // be sure allocation size matches stackfree16() size below
+            lpwm32mpex->dwTmp[0] = cSize;            
             if ( !(lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(cSize)) )
                 return FALSE;
 
@@ -1077,7 +1321,8 @@ BOOL FASTCALL WM32MeasureItem(LPWM32MSGPARAMEX lpwm32mpex)
 
             FREEVDMPTR(pmis16);
 
-            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                        ((UINT)lpwm32mpex->dwTmp[0]));
         }
     }
 
@@ -1107,6 +1352,7 @@ BOOL FASTCALL WM32DeleteItem(LPWM32MSGPARAMEX lpwm32mpex)
             // memory is dword-aligned or not however, so dwords must always
             // be paranoidly stored with the STOREDWORD/STORELONG macros -JTP
 
+            // be sure allocation size matches stackfree16() size below
             lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(sizeof(DELETEITEMSTRUCT16));
             GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, sizeof(DELETEITEMSTRUCT16), pdes16);
 
@@ -1122,7 +1368,8 @@ BOOL FASTCALL WM32DeleteItem(LPWM32MSGPARAMEX lpwm32mpex)
     }
     else {
         if (lpwm32mpex->Parm16.WndProc.lParam)
-            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                        sizeof(DELETEITEMSTRUCT16));
     }
 
     return(TRUE);
@@ -1179,6 +1426,7 @@ BOOL FASTCALL WM32CompareItem(LPWM32MSGPARAMEX lpwm32mpex)
             // memory is dword-aligned or not however, so dwords must always
             // be paranoidly stored with the STOREDWORD/STORELONG macros -JTP
 
+            // be sure allocation size matches stackfree16() size below
             lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(sizeof(COMPAREITEMSTRUCT16));
             putcompareitem16(lpwm32mpex->Parm16.WndProc.lParam, lParam);
         }
@@ -1186,11 +1434,60 @@ BOOL FASTCALL WM32CompareItem(LPWM32MSGPARAMEX lpwm32mpex)
     else {
         // BUGBUG 08-Apr-91 JeffPar -- Reflect changes back to 32-bit structure?
         if (lpwm32mpex->Parm16.WndProc.lParam)
-            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                        sizeof(COMPAREITEMSTRUCT16));
     }
 
     return (TRUE);
 }
+
+
+
+
+// This function thunks the messages,
+//
+//  WM_SIZING
+//
+
+BOOL FASTCALL WM32Sizing(LPWM32MSGPARAMEX lpwm32mpex)
+{
+    VPRECT16   vpRect16;
+
+
+    if (lpwm32mpex->fThunk) {
+
+        if (lpwm32mpex->lParam) {
+
+            // be sure allocation size matches stackfree16() size below
+            vpRect16 = (VPVOID)stackalloc16(sizeof(RECT16));
+
+            if(vpRect16) {
+                putrect16(vpRect16, (LPRECT)lpwm32mpex->lParam);
+
+                lpwm32mpex->Parm16.WndProc.lParam = (LONG)vpRect16;
+            }
+        }
+    }
+    else {
+
+        if (lpwm32mpex->lParam) {
+
+            vpRect16 = (VPVOID)lpwm32mpex->Parm16.WndProc.lParam;
+
+            if(vpRect16) {
+                getrect16(vpRect16, (LPRECT)lpwm32mpex->lParam);
+
+                stackfree16(vpRect16, sizeof(RECT16));
+            }
+        }
+    }
+
+    return (TRUE);
+}
+
+
+
+
 
 
 // This function thunks the messages,
@@ -1218,8 +1515,10 @@ BOOL FASTCALL WM32NCCalcSize(LPWM32MSGPARAMEX lpwm32mpex)
             else
                 cb = sizeof(RECT16);
 
-
+            // be sure allocation size matches stackfree16() size below
+            lpwm32mpex->dwTmp[0] = cb;
             vp = (VPVOID)stackalloc16(cb);
+
             lpwm32mpex->Parm16.WndProc.lParam = (LONG)vp;
 
             putrect16((VPRECT16)vp, (LPRECT)lParam);
@@ -1259,7 +1558,9 @@ BOOL FASTCALL WM32NCCalcSize(LPWM32MSGPARAMEX lpwm32mpex)
 
 
         }
-        stackfree16(vp);
+        if(vp) {
+            stackfree16(vp, ((UINT)lpwm32mpex->dwTmp[0]));
+        }
     }
 
     return (TRUE);
@@ -1385,6 +1686,9 @@ BOOL FASTCALL WM32MenuSelect(LPWM32MSGPARAMEX lpwm32mpex)
 }
 
 
+
+
+
 // This function thunks the messages,
 //
 //  WM_MENUCHAR
@@ -1457,7 +1761,7 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
 
     lpwm32mpex->lpfnM32 = WM32MDICreate;
     __try {
-#line 1457
+#line 1767
     if (lpwm32mpex->fThunk) {
         if (lParam) {
 
@@ -1471,7 +1775,7 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
                     if (!(vp = malloc16(cb)))
                         goto Error;
                     lpwm32mpex->dwParam = vp; /* DIV-349: before copying class. */
-#line 1469
+#line 1779
                     putstr16(vp, lParam->szClass, cb);
                 }
             }
@@ -1490,7 +1794,7 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
                 if (!(vp = malloc16(cb)))
                     goto Error;
                 lpwm32mpex->dwTmp[0] = vp; /* DIV-349: before copying title. */
-#line 1486
+#line 1796
                 putstr16(vp, lParam->szTitle, cb);
             }
             else {
@@ -1504,7 +1808,7 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
             // be paranoidly stored with the STOREDWORD/STORELONG macros -JTP
 
             if (!(lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(MDICREATESTRUCT16))))) /* DIV-349 */
-#line 1499
+#line 1809
                 goto Error;
 
             GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, sizeof(MDICREATESTRUCT16), pmcs16);
@@ -1522,14 +1826,14 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
             FREEVDMPTR(pmcs16);
 
             completed = TRUE; /* DIV-349: transfer ownership to the caller. */
-#line 1515
+#line 1825
             return (TRUE);
 
           Error:
             LOGDEBUG(LOG_ALWAYS,(" !!!! WM32MDICreate, WM_MDICREATE thunking failed !!!! Window %08lX ", lpwm32mpex->hwnd));
             wow_message_free16(&lpwm32mpex->dwParam, TRUE); /* DIV-349: original error order. */
             wow_message_free16(&lpwm32mpex->dwTmp[0], FALSE);
-#line 1521
+#line 1831
             return FALSE;
         }
     }
@@ -1539,24 +1843,24 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
 
             //  if HIWORD(class) is zero, class is an atom, else a pointer.
 
-#line 1536
+#line 1846
             if (HIW16(lpwm32mpex->dwParam)) {
                 wow_message_free16(&lpwm32mpex->dwParam, FALSE);
             }
 
 
-#line 1541
+#line 1851
             lpwm32mpex->lReturn = (LONG)HWND32(LOWORD(lpwm32mpex->lReturn));
             wow_message_free16(&lpwm32mpex->dwTmp[1], FALSE); /* DIV-349: preserve result conversion order. */
         }
     }
 
-#line 1546
+#line 1856
     return (TRUE);
     } __finally { /* DIV-349: nested construction can escape before transfer. */
         if (!completed) wow_message_unwind32(lpwm32mpex);
     }
-#line 1547
+#line 1857
 }
 
 
@@ -1691,18 +1995,18 @@ BOOL FASTCALL WM32SizeClipBoard(LPWM32MSGPARAMEX lpwm32mpex)
 
 
     if (lpwm32mpex->fThunk) {
-#line 1681
+#line 1991
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
         vp = GlobalAllocLock16(GMEM_MOVEABLE, (lpwm32mpex->uMsg == WM_SIZECLIPBOARD) ?
                                sizeof(RECT) : sizeof(PAINTSTRUCT),  &hMem16);
         lpwm32mpex->dwParam = vp; /* DIV-349: before either lock/copy can escape. */
         lpwm32mpex->dwTmp[2] = hMem16;
-#line 1685
+#line 1995
         if (vp) {
             if (lp = (LPRECT) GlobalLock((HANDLE) lpwm32mpex->lParam)) {
                 __try { /* DIV-349: native lock has its own owner. */
-#line 1687
+#line 1997
                 if (lpwm32mpex->uMsg == WM_SIZECLIPBOARD) {
                     PUTRECT16(vp, lp);
                 }
@@ -1718,7 +2022,7 @@ BOOL FASTCALL WM32SizeClipBoard(LPWM32MSGPARAMEX lpwm32mpex)
 
             GlobalUnlock16(hMem16);
             lpwm32mpex->dwTmp[0] = 1; /* DIV-349: normal release must lock by stable handle. */
-#line 1701
+#line 2011
         }
         else {
             hMem16 = 0;
@@ -1750,7 +2054,7 @@ BOOL FASTCALL WM32AskCBFormatName(LPWM32MSGPARAMEX lpwm32mpex)
 
     if (lpwm32mpex->fThunk) {
         lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->Parm16.WndProc.wParam));
-#line 1732
+#line 2042
         if (lpwm32mpex->Parm16.WndProc.lParam) {
             putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, lpwm32mpex->uParam);
         }
@@ -1798,14 +2102,14 @@ BOOL FASTCALL WM32DDEInitiate(LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
         lpwm32mpex->Parm16.WndProc.lParam = lpwm32mpex->lParam;
         lpwm32mpex->dwTmp[3] = WI32DDEAddInitiator((HAND16)lpwm32mpex->Parm16.WndProc.wParam);
-#line 1779
+#line 2089
     }
     else {
         if (lpwm32mpex->dwTmp[3]) {
             lpwm32mpex->dwTmp[3] = 0;
             WI32DDEDeleteInitiator((HAND16)lpwm32mpex->Parm16.WndProc.wParam);
         }
-#line 1782
+#line 2092
     }
 
     return (TRUE);
@@ -1860,67 +2164,144 @@ BOOL FASTCALL WM32DDEAck(LPWM32MSGPARAMEX lpwm32mpex)
                                            (HAND16)GETHWND16(lpwm32mpex->hwnd),
                                            (HANDLE) lHi);
 
-                if (pDdeNode) {
-#line 1837
-                    if (pDdeNode->DdeMsg == WM_DDE_EXECUTE) {
+                if (!pDdeNode) {
 
-                        HIW(lpwm32mpex->Parm16.WndProc.lParam) = pDdeNode->hMem16;
+                    //
+                    // When ShellExecute does DDE_EXECUTE to open a document,
+                    // we don't see its Win32 PostMessage calls so we have no
+                    // record of the conversation.  This is our first opportunity
+                    // to rectify that, the context of WU32GetMessage thunking
+                    // a WM_DDE_ACK message.  We could also get here for other
+                    // kinds of ACKs, fortunately the Win32 message alone gives
+                    // enough context to distinguish the various flavors, unlike
+                    // the Win16 WM_DDE_ACK.
+                    //
 
-                        if (lpwm32mpex->fFree) {
-                            if (lHi) {
-                                if (pDdeNode->DdeFlags & DDE_EXECUTE_FREE_MEM) {
-                                    LOGDEBUG (12, ("WOW::W32DDEAck : Freeing EXECUTE pair h16 = %04x, h32 = %08x\n",
-                                                                        pDdeNode->hMem16, lHi));
-                                    W32UnMarkDDEHandle (pDdeNode->hMem16);
-                                    GlobalUnlockFree16(GlobalLock16(pDdeNode->hMem16, NULL));
-                                    if (DDEDeletehandle(pDdeNode->hMem16, (HANDLE) lHi)) {
-                                        GlobalFree((HANDLE)lHi);
-                                    }
-                                    else {
-                                        LOGDEBUG (0, ("WOW::DDE Ack : Ack can't find 16 - 32 aliasing :  %04x, %04x, %04x, %08lx, %08lx\n", lpwm32mpex->hwnd, lpwm32mpex->uMsg, lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->Parm16.WndProc.lParam, lHi)
-);
-                                    }
+                    if (lpwm32mpex->lParam >= 0xc0000000) {
+
+                        //
+                        // ack responding to initiate
+                        //
+
+                        lpwm32mpex->Parm16.WndProc.lParam = lpwm32mpex->lParam;
+                    }
+
+                    if (lHi > 0xffff) {
+
+                        //
+                        // ack responding to execute: global handle in hiword
+                        //
+
+                        HAND16 h16 = 0;
+                        DWORD cb;
+                        VPVOID vp;
+                        LPBYTE lpMem16, lpMem32;
+                        DDEINFO DdeInfo;
+
+                        if (!lpwm32mpex->fFree) {
+                            cb = GlobalSize((HANDLE)lHi);
+                            vp = GlobalAllocLock16(GMEM_DDESHARE, cb, &h16);
+                            if (vp) {
+                                GETMISCPTR(vp, lpMem16);
+                                lpMem32 = GlobalLock((HANDLE)lHi);
+                                RtlCopyMemory(lpMem16, lpMem32, cb);
+                                GlobalUnlock((HANDLE)lHi);
+                                GlobalUnlock16(h16);
+                                FREEMISCPTR(lpMem16);
+
+                                DdeInfo.Msg = WM_DDE_EXECUTE;
+                                DdeInfo.Format = 0;
+                                DdeInfo.Flags = DDE_PACKET;
+                                DdeInfo.h16 = 0;
+
+                                DDEAddhandle(
+                                    lpwm32mpex->Parm16.WndProc.wParam,
+                                    GETHWND16(lpwm32mpex->hwnd),
+                                    h16,
+                                    (HANDLE)lHi,
+                                    &DdeInfo
+                                    );
+
+                                pDdeNode = DDEFindAckNode (
+                                           (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
+                                           (HAND16)GETHWND16(lpwm32mpex->hwnd),
+                                           (HANDLE) lHi);
+
+                                WOW32ASSERTMSG(pDdeNode, "WM32DDEAck: Can't find just-added DDE node.\n");
+                            }
+                        }
+
+                        lpwm32mpex->Parm16.WndProc.lParam = MAKELONG(LOWORD(lLo), h16);
+
+                    } else {
+
+                        //
+                        // All other acks have same form: status in loword and
+                        // item atom in hiword.
+                        //
+
+                        lpwm32mpex->Parm16.WndProc.lParam = MAKELONG(LOWORD(lLo), lHi);
+                    }
+
+                }
+
+                if (pDdeNode && pDdeNode->DdeMsg == WM_DDE_EXECUTE) {
+
+                    HIW(lpwm32mpex->Parm16.WndProc.lParam) = pDdeNode->hMem16;
+
+                    if (lpwm32mpex->fFree) {
+                        if (lHi) {
+                            if (pDdeNode->DdeFlags & DDE_EXECUTE_FREE_MEM) {
+                                LOGDEBUG (12, ("WOW::W32DDEAck : Freeing EXECUTE pair h16 = %04x, h32 = %08x\n",
+                                                                    pDdeNode->hMem16, lHi));
+                                W32UnMarkDDEHandle (pDdeNode->hMem16);
+                                GlobalUnlockFree16(GlobalLock16(pDdeNode->hMem16, NULL));
+                                if (DDEDeletehandle(pDdeNode->hMem16, (HANDLE) lHi)) {
+                                    WOWGLOBALFREE((HANDLE)lHi);
                                 }
                                 else {
-                                    if (pDdeNode->DdeFlags & DDE_EXECUTE_FREE_H16) {
-                                        W32UnMarkDDEHandle (pDdeNode->hMem16);
-                                        GlobalUnlockFree16(GlobalLock16(pDdeNode->hMem16, NULL));
-
-                                        HIW(lpwm32mpex->Parm16.WndProc.lParam) = pDdeNode->h16;
-                                    }
-
-                                    if (DDEDeletehandle(pDdeNode->hMem16, (HANDLE) lHi)) {
-                                        GlobalFree((HANDLE)lHi);
-                                    }
-                                    else {
-                                        LOGDEBUG (0, ("WOW::DDE Ack : Ack can't find 16 - 32 aliasing :  %04x, %04x, %04x, %08lx, %08lx\n", lpwm32mpex->hwnd, lpwm32mpex->uMsg, lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->Parm16.WndProc.lParam, lHi)
-);
-                                    }
-
-
+                                    LOGDEBUG (0, ("WOW::DDE Ack : Ack can't find 16 - 32 aliasing :  %04x, %04x, %04x, %08lx, %08lx\n",
+                                                  lpwm32mpex->hwnd,
+                                                  lpwm32mpex->uMsg,
+                                                  lpwm32mpex->Parm16.WndProc.wParam,
+                                                  lpwm32mpex->Parm16.WndProc.lParam,
+                                                  lHi
+                                                  ));
                                 }
                             }
                             else {
-                                LOGDEBUG (2, ("WOW::W32DDEAck : h32 is NULL \n"));
-                                WOW32ASSERT (FALSE);
+                                if (pDdeNode->DdeFlags & DDE_EXECUTE_FREE_H16) {
+                                    W32UnMarkDDEHandle (pDdeNode->hMem16);
+                                    GlobalUnlockFree16(GlobalLock16(pDdeNode->hMem16, NULL));
+
+                                    HIW(lpwm32mpex->Parm16.WndProc.lParam) = pDdeNode->h16;
+                                }
+
+                                if (DDEDeletehandle(pDdeNode->hMem16, (HANDLE) lHi)) {
+                                    WOWGLOBALFREE((HANDLE)lHi);
+                                }
+                                else {
+                                    LOGDEBUG (0, ("WOW::DDE Ack : Ack can't find 16 - 32 aliasing :  %04x, %04x, %04x, %08lx, %08lx\n",
+                                                  lpwm32mpex->hwnd,
+                                                  lpwm32mpex->uMsg,
+                                                  lpwm32mpex->Parm16.WndProc.wParam,
+                                                  lpwm32mpex->Parm16.WndProc.lParam,
+                                                  lHi
+                                                  ));
+                                }
+
+
                             }
                         }
+                        else {
+                            LOGDEBUG (2, ("WOW::W32DDEAck : h32 is NULL \n"));
+                            WOW32ASSERT (FALSE);
+                        }
                     }
-                    else {
-                        LOGDEBUG (2, ("WOW::DDE Ack : Ack received for bogus Execute :  %04x, %04x, %04x, %08lx, %08lx\n", lpwm32mpex->hwnd, lpwm32mpex->uMsg, lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->Parm16.WndProc.lParam, lHi));
-                    }
-                } else {
-                    LOGDEBUG (2, ("WOW::DDE Ack : Ack received for bogus Execute :  %04x, %04x, %04x, %08lx, %08lx\n", lpwm32mpex->hwnd, lpwm32mpex->uMsg, lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->Parm16.WndProc.lParam, lHi));
-                    // We will get here when thunking a
-                    // WM_DDE_ACK message when dispatching to a message 
-                    // filter hookproc and both parties of the DDE
-                    // conversation are 32 bit and thus not in the WOW dde
-                    // tables. Only fire this assert in the case where we
-                    // are thunking this message for calling a windproc.
-                    WOW32ASSERT(! lpwm32mpex->fFree);
-                    HIW(lpwm32mpex->Parm16.WndProc.lParam) = 0;
                 }
-
+                else {
+                    LOGDEBUG (2, ("WOW::DDE Ack : Ack received unexpectedly :  %x, %04x, %04x, %08lx, %08lx\n", lpwm32mpex->hwnd, lpwm32mpex->uMsg, lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->Parm16.WndProc.lParam, lHi));
+                }
             }
 
             LOW(lpwm32mpex->Parm16.WndProc.lParam) = (WORD) lLo;
@@ -1983,9 +2364,9 @@ BOOL FASTCALL WM32DDEAdvise(LPWM32MSGPARAMEX lpwm32mpex)
     DDEINFO     DdeInfo;
 
 
-#line 1958
+#line 2346
     if (lpwm32mpex->fThunk) {
-#line 1959
+#line 2347
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
@@ -2001,7 +2382,7 @@ BOOL FASTCALL WM32DDEAdvise(LPWM32MSGPARAMEX lpwm32mpex)
                 RtlCopyMemory(lpMem16, lpMem32, sizeof(DDEADVISE));
                 GlobalUnlock((HANDLE) lLo);
                 GlobalUnlock16(h16);
-                DdeInfo.Msg = lpwm32mpex->uMsg;
+                DdeInfo.Msg = LOW(lpwm32mpex->uMsg);
                 DdeInfo.Format = 0;
                 DdeInfo.Flags = DDE_PACKET;
                 DdeInfo.h16 = 0;
@@ -2014,13 +2395,13 @@ BOOL FASTCALL WM32DDEAdvise(LPWM32MSGPARAMEX lpwm32mpex)
                     if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);
                     return (FALSE);
                 }
-#line 1983
+#line 2371
                 LOW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
             }
             else {
                 if (fThunkDDEmsg) FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);
                 return (FALSE);
-#line 1984
+#line 2372
             }
         }
 
@@ -2060,9 +2441,9 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
     DDEINFO DdeInfo;
 
 
-#line 2023
+#line 2411
     if (lpwm32mpex->fThunk) {
-#line 2024
+#line 2412
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
@@ -2075,8 +2456,8 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
         } else {
             DDECONVERSION Conversion;
             Conversion.Count = 0;
-#line 2034
-            DdeInfo.Msg = lpwm32mpex->uMsg;
+#line 2422
+            DdeInfo.Msg = LOW(lpwm32mpex->uMsg);
             h16 = DDECopyhData16((HAND16)GETHWND16(lpwm32mpex->hwnd),
                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
                                  (HANDLE) lLo,
@@ -2089,7 +2470,7 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
 
             if (!h16) {
 Error:
-#line 2046
+#line 2434
                 if (fThunkDDEmsg) {
                     FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);
                 }
@@ -2113,7 +2494,7 @@ Error:
                 goto Error;
             }
 
-#line 2064
+#line 2452
             LOW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
         }
 
@@ -2157,9 +2538,9 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
     DDEINFO DdeInfo;
 
 
-#line 2107
+#line 2495
     if (lpwm32mpex->fThunk) {
-#line 2108
+#line 2496
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
@@ -2182,8 +2563,8 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
         } else {
             DDECONVERSION Conversion;
             Conversion.Count = 0;
-#line 2128
-            DdeInfo.Msg = lpwm32mpex->uMsg;
+#line 2516
+            DdeInfo.Msg = LOW(lpwm32mpex->uMsg);
             h16 = DDECopyhData16((HAND16)GETHWND16(lpwm32mpex->hwnd),
                                  (HAND16)lpwm32mpex->Parm16.WndProc.wParam,
                                  (HANDLE) lLo,
@@ -2197,7 +2578,7 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
 
             if (!h16) {
 Error:
-#line 2141
+#line 2529
                 if (fThunkDDEmsg) {
                     FreeDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam);
                 }
@@ -2219,7 +2600,7 @@ Error:
                 goto Error;
             }
 
-#line 2157
+#line 2545
             LOW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
         }
 
@@ -2248,7 +2629,7 @@ Error:
 
 // This function thunks the messages,
 //
-//  WM_EXECUTE
+//  WM_DDE_EXECUTE
 //
 
 BOOL FASTCALL WM32DDEExecute(LPWM32MSGPARAMEX lpwm32mpex)
@@ -2261,9 +2642,9 @@ BOOL FASTCALL WM32DDEExecute(LPWM32MSGPARAMEX lpwm32mpex)
     DDEINFO DdeInfo;
 
 
-#line 2198
+#line 2586
     if (lpwm32mpex->fThunk) {
-#line 2199
+#line 2587
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
         if (h16 = DDEFindPair16((HAND16)GETHWND16(lpwm32mpex->hwnd),
@@ -2279,7 +2660,7 @@ BOOL FASTCALL WM32DDEExecute(LPWM32MSGPARAMEX lpwm32mpex)
                 GlobalUnlock((HANDLE) lpwm32mpex->lParam);
                 GlobalUnlock16(h16);
 
-                DdeInfo.Msg = lpwm32mpex->uMsg;
+                DdeInfo.Msg = LOW(lpwm32mpex->uMsg);
                 DdeInfo.Format = 0;
                 DdeInfo.Flags = DDE_PACKET;
                 DdeInfo.h16 = 0;
@@ -2292,7 +2673,7 @@ BOOL FASTCALL WM32DDEExecute(LPWM32MSGPARAMEX lpwm32mpex)
                     return (FALSE);
                 }
 
-#line 2224
+#line 2612
                 HIW(lpwm32mpex->Parm16.WndProc.lParam) = h16;
             }
         }
@@ -2406,6 +2787,10 @@ BOOL FASTCALL WM32Destroy (LPWM32MSGPARAMEX lpwm32mpex)
 }
 
 
+
+
+
+
 // This function thunks the messages,
 //  WM_DROPFILES
 
@@ -2417,6 +2802,25 @@ BOOL FASTCALL WM32DropFiles(LPWM32MSGPARAMEX lpwm32mpex)
 
     return (TRUE);
 }
+
+
+
+
+
+
+// This function thunks the messages,
+//  WM_PRINT
+//  WM_PRINTCLIENT
+
+BOOL FASTCALL WM32PrintClient(LPWM32MSGPARAMEX lpwm32mpex)
+{
+    if (lpwm32mpex->fThunk) {
+        return (BOOL)(lpwm32mpex->Parm16.WndProc.wParam = GETHDC16(lpwm32mpex->uParam));
+    }
+
+    return (TRUE);
+}
+
 
 
 
@@ -2493,13 +2897,19 @@ BOOL FASTCALL WM32WindowPosChanging (LPWM32MSGPARAMEX lpwm32mpex)
 
 
     if (lpwm32mpex->fThunk) {
+
+        // be sure allocation size matches stackfree16() size below
         lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(sizeof(WINDOWPOS16));
+
         putwindowpos16( (VPWINDOWPOS16)lpwm32mpex->Parm16.WndProc.lParam, lParam );
 
     }
     else {
         getwindowpos16( (VPWINDOWPOS16)lpwm32mpex->Parm16.WndProc.lParam, lParam );
-        stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam);
+        if(lpwm32mpex->Parm16.WndProc.lParam) {
+            stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
+                        sizeof(WINDOWPOS16));
+        }
     }
 
     return (TRUE);
@@ -2524,28 +2934,28 @@ BOOL FASTCALL WM32CopyData (LPWM32MSGPARAMEX lpwm32mpex)
     DWORD owned;
 
 
-#line 2454
+#line 2871
     if (lpwm32mpex->fThunk) {
-#line 2455
+#line 2872
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
         if (vpCDS16 = CopyDataFindData16 (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->lParam)) {
             lpwm32mpex->Parm16.WndProc.lParam = vpCDS16;
-#line 2459
+#line 2876
         }
         else {
           captured = *(PCOPYDATASTRUCT)lpwm32mpex->lParam;
           lpCDS32 = &captured;
           lpwm32mpex->dwTmp[1] = (DWORD)captured.lpData;
-#line 2461
+#line 2878
             vpCDS16 = GlobalAllocLock16(GMEM_DDESHARE, sizeof(COPYDATASTRUCT), &h16);
             lpwm32mpex->Parm16.WndProc.lParam = vpCDS16;
             if (!vpCDS16) goto CopyDataFailed;
             lpwm32mpex->dwParam = WOW_COPY_HEADER;
-#line 2462
+#line 2879
             if (vpCDS16) {
                 GETMISCPTR(vpCDS16, lpCDS16);
-#line 2465
+#line 2882
                 lpCDS16->dwData = lpCDS32->dwData;
                 if (lpCDS16->cbData = lpCDS32->cbData) {
 
@@ -2555,19 +2965,19 @@ BOOL FASTCALL WM32CopyData (LPWM32MSGPARAMEX lpwm32mpex)
                     lpwm32mpex->dwTmp[0] = vpData16;
                     if (!vpData16) goto CopyDataFailed;
                     lpwm32mpex->dwParam |= WOW_COPY_DATA;
-#line 2471
+#line 2888
                     GETMISCPTR(vpData16, lpMem16);
-#line 2472
+#line 2889
                     if (lpMem16 && lpCDS32->lpData) {
                         RtlCopyMemory(lpMem16, lpCDS32->lpData, lpCDS32->cbData);
                         if (!CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpData16, lpwm32mpex->dwTmp[1], 0)) goto CopyDataFailed;
                         lpwm32mpex->dwParam |= WOW_COPY_DATA_NODE;
-#line 2475
+#line 2892
                     }
-#line 2476
+#line 2893
                     FREEMISCPTR(lpMem16);
 
-#line 2478
+#line 2895
                     GETMISCPTR(vpCDS16, lpCDS16);
                     lpCDS16->lpData = (PVOID) vpData16;
                 }
@@ -2580,7 +2990,7 @@ BOOL FASTCALL WM32CopyData (LPWM32MSGPARAMEX lpwm32mpex)
             lpwm32mpex->Parm16.WndProc.lParam = vpCDS16;
             if (!CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpCDS16, lpwm32mpex->lParam, COPYDATA_HEADER)) goto CopyDataFailed;
             lpwm32mpex->dwParam |= WOW_COPY_HEADER_NODE;
-#line 2489
+#line 2906
         }
     }
     else {
@@ -2592,7 +3002,7 @@ BOOL FASTCALL WM32CopyData (LPWM32MSGPARAMEX lpwm32mpex)
             CopyDataDeleteNode(GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->lParam);
         if (owned & WOW_COPY_DATA) GlobalUnlockFree16(lpwm32mpex->dwTmp[0]);
         if (owned & WOW_COPY_HEADER) GlobalUnlockFree16(lpwm32mpex->Parm16.WndProc.lParam);
-#line 2503
+#line 2920
     }
 
     return (TRUE);
@@ -2600,7 +3010,7 @@ BOOL FASTCALL WM32CopyData (LPWM32MSGPARAMEX lpwm32mpex)
 CopyDataFailed:
     SetLastError(ERROR_NOT_ENOUGH_MEMORY);
     return FALSE;
-#line 2506
+#line 2923
 }
 
 // This function thunks the message,
@@ -2612,14 +3022,13 @@ BOOL FASTCALL WM32WinHelp (LPWM32MSGPARAMEX lpwm32mpex)
 {
     static WORD msgWinHelp = 0;
     if (lpwm32mpex->fThunk) {
-#line 2517
-        lpwm32mpex->Parm16.WndProc.wMsg   = msgWinHelp ? msgWinHelp : (msgWinHelp = RegisterWindowMessage("WM_WINHELP"));
+        lpwm32mpex->Parm16.WndProc.wMsg   = msgWinHelp ? msgWinHelp : (msgWinHelp = (WORD)RegisterWindowMessage("WM_WINHELP"));
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
         if (lpwm32mpex->lParam) {
             // lpwm32mpex->lParam is LPHLP - however we need only the firstword,ie the size of data
 
             HAND16  hMem16 = 0;
-#line 2523
+#line 2940
             VPVOID  vp;
             LPBYTE  lpT;
             WORD cb;
@@ -2632,7 +3041,7 @@ BOOL FASTCALL WM32WinHelp (LPWM32MSGPARAMEX lpwm32mpex)
             }
             lpwm32mpex->Parm16.WndProc.lParam = hMem16;
             lpwm32mpex->dwParam = vp;
-#line 2535
+#line 2952
         }
     }
     else {
@@ -2657,6 +3066,300 @@ BOOL FASTCALL WM32MMCalcScroll (LPWM32MSGPARAMEX lpwm32mpex)
     }
 
     return (TRUE);
+}
+
+// Calculate the size of the structure passed with WM_NOTIFY based
+// on the code field in NMHDR.
+// NOTE: Do NOT rely on the documentation for the size of the struct passed in
+//       lParam.  In some cases the struct is actually part of a larger struct
+//       and we need to copy all of it. See PSN_xxxx codes in comctl32\prsht.c
+//       They are documented to be NMHDR but are really a PSHNOTIFY which has
+//       NMHDR as the first field.  Also watch for some of the WIDE UNICODE
+//       char cases -- the struct may or may not be the same size as the ANSI
+//       version of the struct.
+// Heaven help us when they start adding more of these codes!
+
+
+UINT GetNMHDRextensionSize(LPNMHDR pnmhdr32)
+{
+#ifdef DEBUG
+    char  szLabel[40] = "    WOW:WM_NOTIFY code: ";
+#endif
+
+
+    // Caller already checked against NM_LAST.
+    if (pnmhdr32->code >= LVN_LAST) {
+        LOGDEBUG(2,("%sLVN_ %x\n", szLabel, pnmhdr32->code));
+        switch (pnmhdr32->code) {
+
+            case LVN_ITEMCHANGING:
+            case LVN_ITEMCHANGED:
+            case LVN_INSERTITEM:
+            case LVN_DELETEITEM:
+            case LVN_DELETEALLITEMS:
+            case LVN_COLUMNCLICK:
+            case LVN_BEGINDRAG:
+            case LVN_BEGINRDRAG:
+            case LVN_HOTTRACK:
+                return sizeof(NM_LISTVIEW);
+
+            case LVN_BEGINLABELEDITA:
+            case LVN_ENDLABELEDITA:
+            case LVN_GETDISPINFOA:
+            case LVN_SETDISPINFOA:
+            case LVN_BEGINLABELEDITW:
+            case LVN_ENDLABELEDITW:
+            case LVN_GETDISPINFOW:
+            case LVN_SETDISPINFOW:
+                return sizeof(LV_DISPINFO);
+
+            case LVN_KEYDOWN:
+                return sizeof(LV_KEYDOWN);
+
+            case LVN_ODCACHEHINT:
+                return sizeof(NM_CACHEHINT);
+
+            case LVN_ODFINDITEMA:
+            case LVN_ODFINDITEMW:
+                return sizeof(NM_FINDITEM);
+
+            case LVN_ODSTATECHANGED:
+                return sizeof(NM_ODSTATECHANGE);
+
+            case LVN_ITEMACTIVATE:
+                return sizeof(NMKEY);
+
+            default:
+                goto unknown_nmhdr_code;
+        }
+    }
+
+    if (pnmhdr32->code >= PSN_LAST) {
+        LOGDEBUG(2,("%sPSN_ %x\n", szLabel, pnmhdr32->code));
+        switch (pnmhdr32->code) {
+            case PSN_SETACTIVE:
+            case PSN_KILLACTIVE:
+            case PSN_APPLY:
+            case PSN_RESET:
+            case PSN_HELP:
+            case PSN_WIZBACK:
+            case PSN_WIZNEXT:
+            case PSN_WIZFINISH:
+            case PSN_QUERYCANCEL:
+            case PSN_TRANSLATEACCELERATOR:
+            case PSN_QUERYINITIALFOCUS:
+            case PSN_HASHELP:          // this one "is dead" - RaymondC
+                return sizeof(PSHNOTIFY);
+
+            case PSN_GETOBJECT:
+                return sizeof(NMOBJECTNOTIFY);
+
+            case PSN_LASTCHANCEAPPLY:  // this is undocumented
+                return sizeof(NMHDR);  // (in widows\inc\prshtp.h)
+
+            default:
+                goto unknown_nmhdr_code;
+        }
+    }
+
+    if (pnmhdr32->code >= HDN_LAST) {
+        LOGDEBUG(2,("%sHDN_ %x\n", szLabel, pnmhdr32->code));
+        switch (pnmhdr32->code) {
+            case HDN_ITEMCHANGINGA:
+            case HDN_ITEMCHANGEDA:
+            case HDN_ITEMCLICKA:
+            case HDN_DIVIDERDBLCLICKA:
+            case HDN_BEGINTRACKA:
+            case HDN_ENDTRACKA:
+            case HDN_TRACKA:
+            case HDN_ITEMCHANGINGW:
+            case HDN_ITEMCHANGEDW:
+            case HDN_ITEMCLICKW:
+            case HDN_DIVIDERDBLCLICKW:
+            case HDN_BEGINTRACKW:
+            case HDN_ENDTRACKW:
+            case HDN_TRACKW:
+            case HDN_BEGINDRAG:
+            case HDN_ENDDRAG:
+            case HDN_ITEMDBLCLICKA:
+            case HDN_ITEMDBLCLICKW:
+                return sizeof(HD_NOTIFY);
+
+            case HDN_GETDISPINFOA:
+            case HDN_GETDISPINFOW:
+                return sizeof(NMHDDISPINFO);
+
+            default:
+                goto unknown_nmhdr_code;
+        }
+    }
+
+    if (pnmhdr32->code >= TVN_LAST) {
+        LOGDEBUG(2,("%sTVN_ %x\n", szLabel, pnmhdr32->code));
+        switch (pnmhdr32->code) {
+            case TVN_SELCHANGINGA:
+            case TVN_SELCHANGEDA:
+            case TVN_ITEMEXPANDINGA:
+            case TVN_ITEMEXPANDEDA:
+            case TVN_BEGINDRAGA:
+            case TVN_BEGINRDRAGA:
+            case TVN_DELETEITEMA:
+            case TVN_SELCHANGINGW:
+            case TVN_SELCHANGEDW:
+            case TVN_ITEMEXPANDINGW:
+            case TVN_ITEMEXPANDEDW:
+            case TVN_BEGINDRAGW:
+            case TVN_BEGINRDRAGW:
+            case TVN_DELETEITEMW:
+            case TVN_SINGLEEXPAND:
+                return sizeof(NM_TREEVIEW);
+
+            case TVN_GETDISPINFOA:
+            case TVN_SETDISPINFOA:
+            case TVN_BEGINLABELEDITA:
+            case TVN_ENDLABELEDITA:
+            case TVN_GETDISPINFOW:
+            case TVN_SETDISPINFOW:
+            case TVN_BEGINLABELEDITW:
+            case TVN_ENDLABELEDITW:
+                return sizeof(TV_DISPINFO);
+
+            case TVN_KEYDOWN:
+                return sizeof(TV_KEYDOWN);
+
+            case TVN_GETINFOTIPA:
+            case TVN_GETINFOTIPW:
+                return sizeof(NMTVGETINFOTIP);
+
+            default:
+                goto unknown_nmhdr_code;
+        }
+    }
+
+    if (pnmhdr32->code >= TTN_LAST) {
+        LOGDEBUG(2,("%sTTN_ %x\n", szLabel, pnmhdr32->code));
+        switch (pnmhdr32->code) {
+            case TTN_NEEDTEXTA:        // (aka TTN_GETDISPINFO)
+                return sizeof(TOOLTIPTEXTA);
+
+            case TTN_NEEDTEXTW:
+                return sizeof(TOOLTIPTEXTW);
+
+            case TTN_SHOW:
+            case TTN_POP:
+                return sizeof(NMHDR);
+
+            default:
+                goto unknown_nmhdr_code;
+        }
+    }
+
+    if (pnmhdr32->code >= TCN_LAST) {
+        LOGDEBUG(2,("%sTCN_ %x\n", szLabel, pnmhdr32->code));
+        switch (pnmhdr32->code) {
+            case TCN_KEYDOWN:
+                return sizeof(TC_KEYDOWN);
+
+            case TCN_SELCHANGE:
+            case TCN_SELCHANGING:
+                return sizeof(NMHDR);
+
+            default:
+                goto unknown_nmhdr_code;
+        }
+    }
+
+    if (pnmhdr32->code >= UDN_LAST) {
+        LOGDEBUG(2,("%sUDN_ %x\n", szLabel, pnmhdr32->code));
+        switch (pnmhdr32->code) {
+            case UDN_DELTAPOS:
+                return sizeof(NM_UPDOWN);
+
+            default:
+                goto unknown_nmhdr_code;
+        }
+    }
+
+unknown_nmhdr_code:
+    LOGDEBUG(LOG_ALWAYS, ("WOW:GetNMHDRextensionSize unknown nmhdr->code: %d!\n", pnmhdr32->code));
+    WOW32ASSERT(FALSE);
+    return sizeof(NMHDR);  // the first field of most of the structs is NMHDR
+}
+
+
+
+
+
+//
+// This function thunks the 32-bit message WM_NOTIFY.  This message existed
+// but was undocumented in Win3.1.  Win95 thunks it by translating lParam
+// from a flat to 16:16 pointer without thunking the contents.  That's tricky
+// for us since on RISC we can't map random linear memory into the VDM without
+// a lot of overhead. We'll use the code field in NMHDR to calculate the size
+// of the passed structure.
+//
+BOOL FASTCALL WM32Notify(LPWM32MSGPARAMEX lpwm32mpex)
+{
+    LPNMHDR pnmhdr32;
+    LPNMHDR pnmhdr16;
+
+    if (lpwm32mpex->fThunk) {
+
+        pnmhdr32 = (LPNMHDR) lpwm32mpex->Parm16.WndProc.lParam;
+
+        // Save the original 32-bit flat pointer for unthunking.
+        lpwm32mpex->dwTmp[0] = (DWORD) pnmhdr32;
+
+        // If this 32bit message came from WOW, we have the original
+        // 16:16 lparam squirrelled away. (mapped to the original 32-bit lParam)
+        // Note: If the mapping is found, the ref count gets incremented.
+        lpwm32mpex->Parm16.WndProc.lParam = (LONG)GetParam16(lpwm32mpex->lParam);
+
+        // if we don't already have a 16:16 ptr for this -- create one
+        // This means we are seeing this message for the 1st time -- coming
+        // from the 32-bit world.
+        if ( ! lpwm32mpex->Parm16.WndProc.lParam) {
+            if (pnmhdr32->code >= NM_LAST) {
+                lpwm32mpex->dwParam = sizeof(NMHDR);
+            }
+            else {
+                lpwm32mpex->dwParam = GetNMHDRextensionSize(pnmhdr32);
+            }
+
+            // be sure allocation size matches stackfree16() size below
+            lpwm32mpex->dwTmp[1] = (DWORD)lpwm32mpex->dwParam;
+            lpwm32mpex->Parm16.WndProc.lParam = stackalloc16(lpwm32mpex->dwTmp[1]);
+            GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, lpwm32mpex->dwParam, pnmhdr16);
+            CopyMemory(pnmhdr16, pnmhdr32, lpwm32mpex->dwParam);
+            FREEVDMPTR(pnmhdr16);
+
+        // else don't allocate (or free) another 16:16 ptr
+        } else {
+
+            // set to FALSE so we don't free this thing too soon
+            lpwm32mpex->fFree = FALSE;
+        }
+
+    } else {
+
+        if (lpwm32mpex->fFree) {
+            GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, lpwm32mpex->dwParam, pnmhdr16);
+            // retrieve original 32-bit pointer
+            pnmhdr32 = (LPNMHDR) lpwm32mpex->dwTmp[0];
+            CopyMemory(pnmhdr32, pnmhdr16, lpwm32mpex->dwParam);
+            FREEVDMPTR(pnmhdr16);
+            if(lpwm32mpex->Parm16.WndProc.lParam) {
+                stackfree16(lpwm32mpex->Parm16.WndProc.lParam, lpwm32mpex->dwTmp[1]);
+            }
+        } else {
+
+            // Decrement the ref count. If the ref count goes to zero, the
+            // mapping is nuked.
+            DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL);
+        }
+    }
+
+    return TRUE;
 }
 
 // This function thunks the 32-bit message WM_NOTIFYWOW.
@@ -2701,6 +3404,209 @@ BOOL FASTCALL WM32Thunk16To32(LPWM32MSGPARAMEX lpwm32mpex)
 {
     return (TRUE);
 }
+#ifdef FE_IME
+//
+// This function thunks the messages,
+//
+//  WM_IME_REPORT
+
+/*
+BOOL FASTCALL WM32IMEReport (HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
+          PWORD pwMsgNew, PWORD pwParamNew, PLONG plParamNew,
+          PLONG plReturn, BOOL fThunk, LPWM32MSGPARAMEX lpwm32mpex)
+*/
+BOOL FASTCALL WM32IMEReport (LPWM32MSGPARAMEX lpwm32mpex)
+{
+//lpwm32mpex->hwnd
+//lpwm32mpex->uMsg
+//lpwm32mpex->uParam
+//lpwm32mpex->lParam
+//lpwm32mpex->Param16.WndProc.wMsg
+//lpwm32mpex->Param16.WndProc.wParam
+//lpwm32mpex->Param16.WndProc.lParam
+//&lpwm32mpex->lReturn
+//lpwm32mpex->fThunk
+//
+
+    INT     cb;
+    INT     i;
+    HMEM16  hMem16 = 0;
+    LPBYTE  lpMem32 = 0;
+    LPBYTE  lpMem16 = 0;
+    VPVOID  vp;
+
+
+    if (lpwm32mpex->fThunk) {
+   if (lpwm32mpex->uParam == IR_STRING) {
+       lpMem32 = GlobalLock((HANDLE)lpwm32mpex->lParam);
+            if (lpMem32 == NULL)
+                goto Err;
+
+       cb = strlen( lpMem32 ) + 1;
+       if (!(lpwm32mpex->Parm16.WndProc.lParam = GlobalAllocLock16(GMEM_MOVEABLE | GMEM_SHARE | GMEM_ZEROINIT, cb, &hMem16 )))
+      goto Err;
+       putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, lpMem32, cb);
+            LOW( lpwm32mpex->Parm16.WndProc.lParam ) = hMem16;
+            HIW( lpwm32mpex->Parm16.WndProc.lParam ) = 0;         // must be zero
+            GlobalUnlock( (HANDLE)lpwm32mpex->lParam );
+            GlobalUnlock16( hMem16 );
+   }
+        /**** IR_STRINGEX ****/
+        else if ( lpwm32mpex->uParam == IR_STRINGEX ) {
+            LPSTRINGEXSTRUCT    pss32;
+            PSTRINGEXSTRUCT16  pss16;
+
+            lpMem32 = GlobalLock((HANDLE)lpwm32mpex->lParam);
+            if (lpMem32 == NULL)
+                goto Err;
+
+            pss32 = (LPSTRINGEXSTRUCT)lpMem32;
+
+            cb = pss32->dwSize;
+            if ( cb >= ( 64 * K )) {
+                // It's problem !
+                LOGDEBUG(0,(" WOW:: WM_IME_REPORT:IR_STRINGEX data size must be less than 64K on WOW. cb = %d\n", cb ));
+                /** goto Err; **/
+            }
+            // Shuld I pack size of this structure ?
+       if (!(vp = GlobalAllocLock16(GMEM_MOVEABLE | GMEM_SHARE | GMEM_ZEROINIT, cb, &hMem16 )))
+      return FALSE;
+
+            GETVDMPTR(vp, cb, lpMem16 );
+            pss16 = (PSTRINGEXSTRUCT16)lpMem16;
+
+            STOREDWORD( pss16->dwSize, pss32->dwSize );
+            STOREWORD( pss16->uDeterminePos, pss32->uDeterminePos );
+            STOREWORD( pss16->uDetermineDelimPos, pss32->uDetermineDelimPos );
+            STOREWORD( pss16->uYomiPos, pss32->uYomiPos );
+            STOREWORD( pss16->uYomiDelimPos, pss32->uYomiDelimPos );
+
+            if ( pss32->uDeterminePos ) {
+                cb = strlen( (LPBYTE)&lpMem32[ pss32->uDeterminePos ] );
+                RtlCopyMemory( &lpMem16[ pss16->uDeterminePos ],
+                               &lpMem32[ pss32->uDeterminePos ], cb + 1 );
+                if ( pss32->uDetermineDelimPos ) {
+                    for ( i = 0; pss32->uDetermineDelimPos + i * sizeof(INT) < pss32->dwSize; i++ ) {
+                        WORDOF16( lpMem16[ pss16->uDetermineDelimPos ], i ) = (WORD)
+                        INTOF( lpMem32[ pss32->uDetermineDelimPos ], i );
+                        if ( INTOF( lpMem32[ pss32->uDetermineDelimPos ], i ) >= cb )
+                            break;
+                    }
+                }
+            }
+
+            if ( pss32->uYomiPos ) {
+                cb = strlen( (LPBYTE)&lpMem32[ pss32->uYomiPos ] );
+                RtlCopyMemory( &lpMem16[ pss16->uYomiPos ],
+                               &lpMem32[ pss32->uYomiPos ], cb + 1 );
+                if ( pss32->uYomiDelimPos ) {
+                    for ( i = 0; pss32->uYomiDelimPos + i * sizeof(INT) < pss32->dwSize; i++ ) {
+                        WORDOF16( lpMem16[ pss16->uYomiDelimPos ], i ) = (WORD)
+                        INTOF( lpMem32[ pss32->uYomiDelimPos ], i );
+                        if ( INTOF( lpMem32[ pss32->uYomiDelimPos ], i ) >= cb )
+                            break;
+                    }
+                }
+            }
+
+            FLUSHVDMPTR(vp, cb, lpMem16);
+            FREEVDMPTR(lpMem16);
+
+            LOW( lpwm32mpex->Parm16.WndProc.lParam ) = hMem16;
+            HIW( lpwm32mpex->Parm16.WndProc.lParam ) = 0;         // must be zero
+            GlobalUnlock( (HANDLE)lpwm32mpex->lParam );
+            GlobalUnlock16( hMem16 );
+        }
+        /**** IR_UNDETERMINE ****/
+   else if (lpwm32mpex->uParam == IR_UNDETERMINE) {
+            PUNDETERMINESTRUCT16  pus16;
+            LPUNDETERMINESTRUCT    pus32;
+
+            lpMem32 = GlobalLock( (HANDLE)lpwm32mpex->lParam );
+            if (lpMem32 == NULL)
+                goto Err;
+
+            pus32 = (LPUNDETERMINESTRUCT)lpMem32;
+            cb = pus32->dwSize;
+
+            if ( cb >= ( 64 * K )) {
+                // It's problem !
+                LOGDEBUG(0,(" WOW:: WM_IME_REPORT:IR_UNDETERMINE data size must be less than 64K on WOW. cb = %d\n", cb ));
+                /** goto Err; **/
+            }
+       if (!( vp = GlobalAllocLock16(GMEM_MOVEABLE | GMEM_SHARE | GMEM_ZEROINIT, cb, &hMem16 )))
+      goto Err;
+
+            GETVDMPTR(vp, cb, lpMem16 );
+            pus16 = (PUNDETERMINESTRUCT16)lpMem16;
+
+            STOREDWORD( pus16->dwSize,            (pus32)->dwSize );
+            STOREWORD( pus16->uDefIMESize,        (pus32)->uDefIMESize );
+            STOREWORD( pus16->uDefIMEPos,         (pus32)->uDefIMEPos );
+            STOREWORD( pus16->uUndetTextLen,      (pus32)->uUndetTextLen );
+            STOREWORD( pus16->uUndetTextPos,      (pus32)->uUndetTextPos );
+            STOREWORD( pus16->uUndetAttrPos,      (pus32)->uUndetAttrPos );
+            STOREWORD( pus16->uCursorPos,         (pus32)->uCursorPos );
+            STOREWORD( pus16->uDeltaStart,        (pus32)->uDeltaStart );
+            STOREWORD( pus16->uDetermineTextLen,  (pus32)->uDetermineTextLen );
+            STOREWORD( pus16->uDetermineTextPos,  (pus32)->uDetermineTextPos );
+            STOREWORD( pus16->uDetermineDelimPos, (pus32)->uDetermineDelimPos );
+            STOREWORD( pus16->uYomiTextLen,       (pus32)->uYomiTextLen );
+            STOREWORD( pus16->uYomiTextPos,       (pus32)->uYomiTextPos );
+            STOREWORD( pus16->uYomiDelimPos,      (pus32)->uYomiDelimPos );
+
+
+            // dada copy
+            RtlCopyMemory( &lpMem16[ sizeof(UNDETERMINESTRUCT) ],
+                      &lpMem32[ sizeof(UNDETERMINESTRUCT) ],
+                      cb - sizeof( UNDETERMINESTRUCT ));
+
+            //adjustment
+            if ( pus32->uDetermineDelimPos ) {
+                cb = pus32->uDetermineTextLen;
+                for ( i = 0; pus32->uDetermineDelimPos + i * sizeof(INT) < pus32->dwSize; i++ ) {
+                    INTOF( lpMem16[ pus16->uDetermineDelimPos ], i ) = 0;
+                    WORDOF16( lpMem16[ pus16->uDetermineDelimPos ], i ) = (WORD)
+                    INTOF( lpMem32[ pus32->uDetermineDelimPos ], i );
+                    if ( INTOF( lpMem32[ pus32->uDetermineDelimPos ], i ) >= cb )
+                        break;
+                }
+            }
+            if ( pus32->uYomiDelimPos ) {
+                cb = pus32->uYomiTextLen;
+                for ( i = 0; pus32->uYomiDelimPos + i * sizeof(INT) < pus32->dwSize; i++ ) {
+                    INTOF( lpMem16[ pus16->uYomiDelimPos ], i ) = 0;
+                    WORDOF16( lpMem16[ pus16->uYomiDelimPos ], i ) = (WORD)
+                    INTOF( lpMem32[ pus32->uYomiDelimPos ], i );
+                    if ( INTOF( lpMem32[ pus32->uYomiDelimPos ], i ) >= cb )
+                        break;
+                }
+            }
+
+            FLUSHVDMPTR(vp, cb, lpMem16);
+            FREEVDMPTR(lpMem16);
+
+            LOW( lpwm32mpex->Parm16.WndProc.lParam ) = hMem16;
+            HIW( lpwm32mpex->Parm16.WndProc.lParam ) = 0;         // must be zero
+            GlobalUnlock( (HANDLE)lpwm32mpex->lParam );
+            GlobalUnlock16( hMem16 );
+
+   }
+    }
+    else { // fThunk
+   if (lpwm32mpex->Parm16.WndProc.lParam) {
+       GlobalUnlockFree16(GlobalLock16(LOW(lpwm32mpex->Parm16.WndProc.lParam), NULL));
+        }
+    }
+    return (TRUE);
+
+Err:
+    if ( lpMem32 && lpwm32mpex->lParam )
+        GlobalUnlock( (HANDLE)lpwm32mpex->lParam );
+    return FALSE;
+
+}
+#endif  // FE_IME
 
 /* DIVERGENCE(MVDM-HOST-DIV-903): original message lifetime ownership. */
 #include "compat/include/wow_worker_state.h"
@@ -2768,7 +3674,7 @@ void WINAPI wow_message_stack_enter(wow_message_stack *scope)
     PTD ptd = CURRENTPTD();
     scope->task = ptd;
     scope->cursor = ptd ? ptd->vpCBStack : 0;
-    scope->init = ptd ? ptd->dwFlags & TDF_INITCALLBACKSTACK : 0;
+    scope->allocations = ptd ? ptd->cStackAlloc16 : 0;
     scope->task16 = ptd ? ptd->htask16 : 0;
     scope->completed = FALSE;
     SetLastError(error);
@@ -2784,7 +3690,7 @@ void WINAPI wow_message_stack_leave(wow_message_stack *scope, BOOL abnormal)
         if (ptd && ptd == scope->task && ptd->htask16 == scope->task16) {
             ptd->vpCBStack = scope->cursor;
             if (!(ptd->dwFlags & TDF_IGNOREINPUT))
-                ptd->dwFlags = (ptd->dwFlags & ~TDF_INITCALLBACKSTACK) | scope->init;
+                ptd->cStackAlloc16 = scope->allocations;
         }
     }
     SetLastError(error);

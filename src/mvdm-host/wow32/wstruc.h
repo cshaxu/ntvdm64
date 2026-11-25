@@ -211,23 +211,6 @@
 #define PUTNEWTEXTMETRIC16(vp,p)        putnewtextmetric16(FETCHDWORD(vp), p)
 #define PUTOUTLINETEXTMETRIC16(vp,c,p)  putoutlinetextmetric16(vp,c,p)
 
-#define GETLOGPALETTE16(vp,p) {\
-            INT cb;\
-            PLOGPALETTE16 plp16;\
-            GETVDMPTR(vp, sizeof(LOGPALETTE16), plp16);\
-            cb = FETCHWORD(plp16->palNumEntries);\
-            cb = sizeof(LOGPALETTE) + ((cb - 1) * sizeof(PALETTEENTRY));\
-            if( p=malloc_w(cb) )\
-                RtlCopyMemory(p,plp16,cb);\
-            FREEVDMPTR(plp16);\
-        }
-#define FREELOGPALETTE16(p) {if (p) free_w(p);}
-
-#define ALLOCPALETTEENTRY16(c,p)    p=malloc_w(c*sizeof(PALETTEENTRY))
-#define GETPALETTEENTRY16(vp,c,p)   getpaletteentry16(FETCHDWORD(vp), c, ALLOCPALETTEENTRY16(c, p))
-#define PUTPALETTEENTRY16(vp,c,p)   putpaletteentry16(FETCHDWORD(vp), c, p)
-#define FREEPALETTEENTRY16(p)       {if (p) free_w(p);}
-
 #define ALLOCHANDLETABLE16(c,p)     p=malloc_w(c*sizeof(HANDLE))
 #define GETHANDLETABLE16(vp,c, p)   gethandletable16(FETCHDWORD(vp), c, p)
 #define PUTHANDLETABLE16(vp,c, p)   puthandletable16(FETCHDWORD(vp), c, p)
@@ -285,18 +268,15 @@ VOID   putenumlogfont16(VPENUMLOGFONT16 vpelf, LPENUMLOGFONT lpelf);
 VOID   puttextmetric16(VPTEXTMETRIC16 vptm, LPTEXTMETRIC lptm);
 VOID   putnewtextmetric16(VPNEWTEXTMETRIC16 vpntm, LPNEWTEXTMETRIC lpntm);
 VOID   putoutlinetextmetric16(VPOUTLINETEXTMETRIC16 vpotm, INT cb, LPOUTLINETEXTMETRIC lpotm);
-VOID   getlogpalette16(VPLOGPALETTE16 vplp, LPLOGPALETTE lplp);
-VOID   getpaletteentry16(VPPALETTEENTRY16 vppe, INT c, LPPALETTEENTRY lpp);
-VOID   putpaletteentry16(VPPALETTEENTRY16 vppe, INT c, LPPALETTEENTRY lpp);
 VOID   gethandletable16(VPWORD vpht, UINT c, LPHANDLETABLE lpht);
 VOID   puthandletable16(VPWORD vpht, UINT c, LPHANDLETABLE lpht);
 VOID   putkerningpairs16(VPWORD vp, UINT cb, LPKERNINGPAIR lp);
 
 #ifdef NOTUSED
-#line 296
+#line 276
 #error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register.
 #endif
-#line 298
+#line 278
 INT    GetBMI16Size(PVPVOID vpbmi16, WORD fuColorUse, LPDWORD lpdwClrUsed);
 INT    GetBMI32Size(LPBITMAPINFO lpbmi32, WORD fuColorUse);
 LPBITMAPINFO       CopyBMI16ToBMI32(PVPVOID vpbmi16, LPBITMAPINFO lpbmi32, WORD fuColorUse);
@@ -308,6 +288,8 @@ VOID    putwindowpos16( VPWINDOWPOS16 vpwp, LPWINDOWPOS lpwp );
 VOID    W32CopyMsgStruct(VPMSG16 vpmsg16, LPMSG lpmsg, BOOL fThunk16To32);
 VOID    getpaintstruct16(VPVOID vp, LPPAINTSTRUCT lp);
 VOID    putpaintstruct16(VPVOID vp, LPPAINTSTRUCT lp);
+VOID FASTCALL getmenuiteminfo16(VPVOID vp, LPMENUITEMINFO pmii32);
+VOID FASTCALL putmenuiteminfo16(VPVOID vp, LPMENUITEMINFO pmii32);
 
 LPDEVMODE ThunkDevMode16to32(VPDEVMODE31 vpdm16);
 BOOL      ThunkDevMode32to16(VPDEVMODE31 vpdm16, LPDEVMODE lpdm32, UINT nBytes);

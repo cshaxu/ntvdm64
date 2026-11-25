@@ -464,7 +464,7 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const struct _WW *words,
     DWORD error, process_id = 0, thread_id;
     if (!words) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if (target && (!target->procedure ||
-            (target->wow_encoded && (!target->callback || !(target->procedure & WOW_WINDOW_PROC_TAG))) ||
+            (target->wow_encoded && (!target->callback || !WOW_WINDOW_IS_GUEST_PROC(target->procedure))) ||
             target->procedure == (DWORD)wow_window_class_creation_proc)) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
@@ -1244,7 +1244,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
     ULONG saved_callback[2];
     BOOL callback_published = FALSE;
     if (!result || !procedure ||
-            ((procedure & WOW_WINDOW_PROC_TAG) && !callback)) {
+            (WOW_WINDOW_IS_GUEST_PROC(procedure) && !callback)) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
@@ -1263,7 +1263,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
     /* Original client.c dispatches native procedures without entering WOW.
      * Keep the window alive, but do not make a native callback wait for the
      * guest CPU or publish a guest callback window it does not consume. */
-    if (!(procedure & WOW_WINDOW_PROC_TAG)) {
+    if (!WOW_WINDOW_IS_GUEST_PROC(procedure)) {
         __try {
             if (!prepare_creation_menu(window, message, lp, binding)) return FALSE;
             wow_window_note_native_procedure(window, (WNDPROC)procedure, FALSE);
@@ -1347,7 +1347,7 @@ BOOL WINAPI wow_window_dispatch_immutable(HWND window, UINT message, WPARAM wp,
     BOOL dispatched = FALSE;
     DWORD error = GetLastError();
     if (!result || !target || !target->wow_encoded ||
-            !(target->procedure & WOW_WINDOW_PROC_TAG) || !target->callback) {
+            !WOW_WINDOW_IS_GUEST_PROC(target->procedure) || !target->callback) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     /* This target is an immutable native entry's original guest identity,
@@ -1422,7 +1422,7 @@ BOOL WINAPI wow_window_procedure_adopt_native(HWND input, DWORD procedure, DWORD
     LONG old;
     WNDPROC entrance;
     BOOL held, result = FALSE;
-    if (!previous || !(procedure & WOW_WINDOW_PROC_TAG) || !runtime || !runtime->thread ||
+    if (!previous || !WOW_WINDOW_IS_GUEST_PROC(procedure) || !runtime || !runtime->thread ||
             !runtime->classes || !runtime->classes->callback) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }

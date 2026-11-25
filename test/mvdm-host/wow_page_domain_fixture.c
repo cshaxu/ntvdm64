@@ -1855,8 +1855,8 @@ static void verify_original_modal_task(void)
          * direct USER16 query.  Do not manufacture a native window here:
          * original xxxInitTask does not own or publish arbitrary host windows;
          * their external graph path is covered by window-borrow separately. */
-        BORROW_CHECK(outputs.pfnInitTask(0x0400,"INITIAL.EXE",0x4323,0,0x6a77u,
-            0,0,200,100,SW_HIDE));
+        BORROW_CHECK(outputs.pfnInitTask(0x0400,0, 0, "INITIAL.EXE", NULL,0x80004323u,0,0x6a77u,
+            0,0,200,100));
         BORROW_CHECK(initial_publication_notifications == 1u);
         BORROW_CHECK(mvdm_softpc_wow_page_domain_window_handle(
             LOWORD(GetDesktopWindow())) == (ULONG)(ULONG_PTR)GetDesktopWindow());

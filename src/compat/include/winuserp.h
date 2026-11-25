@@ -13,6 +13,14 @@
 
 #include <windows.h>
 
+/* XP SP1 private USER flags used by WOW32 drawing and menu thunks. */
+#define WF_DIALOG_WINDOW 0x00010000
+#define WS_EX_VALID40 (0x0000003fL | WS_EX_MDICHILD | WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE | \
+    WS_EX_CONTEXTHELP | WS_EX_TOOLWINDOW | WS_EX_RIGHT | WS_EX_LEFT | WS_EX_RTLREADING | \
+    WS_EX_LEFTSCROLLBAR | WS_EX_CONTROLPARENT | WS_EX_STATICEDGE | WS_EX_APPWINDOW)
+#define DST_TYPEMASK    0x0007
+#define MFT_NONSTRING       0x00000904L
+
 /* Only the selected USER kernel slices need these declaration dependencies.
  * Ordinary WOW/FAX clients retain their original private header owners. */
 #if defined(WOW_ORIGINAL_TASK_ORDER) || defined(WOW_USER_OBJECT_FLAGS_ONLY)

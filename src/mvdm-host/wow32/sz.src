@@ -37,9 +37,13 @@ iszApplication            "Application: "
 
 iszOLEMemAllocFailedFatal "The Win 16 Subsystem was unable to allocate memory for this DDE transaction, shutting down the conversation."
 iszOLEMemAllocFailed      "The Win 16 Subsystem was unable to allocate memory for this DDE transaction."
+iszExceedGDIHandleLimit   "The Win 16 Subsystem has insufficent resources to continue running. Click on OK, close your applications, and restart your machine."
+
 
 // Localizers, the following string must match IDS_LOCALMONITOR in
 // \nt\private\windows\spooler\monitors\local\localmon.rc
 
 iszWowFaxLocalPort        "Local Port"
 
+iszMisMatchedBinaryTitle  "Binary does not match processor"
+iszMisMatchedBinary       "Module %s was not intended to run on this machine."

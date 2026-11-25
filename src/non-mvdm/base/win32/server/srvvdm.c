@@ -587,6 +587,17 @@ BaseSrvRegisterWowExec(
     Status = RtlEnterCriticalSection( &BaseSrvWOWCriticalSection );
     ASSERT( NT_SUCCESS( Status ) );
 
+    if (!b->hwndWowExec) {
+        if (!WOWHead || WOWHead->SequenceNumber != CSR_SERVER_QUERYCLIENTTHREAD()->Process->SequenceNumber) {
+            Status = STATUS_INVALID_HANDLE;
+        } else if (WOWHead->WOWRecord) {
+            Status = STATUS_MORE_PROCESSING_REQUIRED;
+        } else {
+            BaseSrvFreeWOWHead();
+        }
+        goto Cleanup;
+    }
+
     //
     // Do a run-time link to PostMessageA and GetWindowThreadProcessId
     // which we'll use to post messages to WowExec.

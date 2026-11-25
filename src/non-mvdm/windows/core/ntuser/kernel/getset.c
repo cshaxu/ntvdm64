@@ -295,6 +295,7 @@ WCHAR *WINAPI wow_original_refresh_window_state(struct tagWND *state,
     words->dwExStyle = info->dwExStyle;
     words->hInstance = (HANDLE)(ULONG_PTR)module;
     if (state) {
+        words->state = state->state;
         if (name) {
             previous = state->strName.Buffer;
             state->strName.Buffer = name;

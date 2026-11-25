@@ -30,7 +30,12 @@
 #include <vdmdbg.h>
 #undef _X86_
 #line 30
+#include <wingdip.h>     // GACF_ app compat flags
+#include <shlobj.h>      // CSIDL_COMMON_STARTMENU etc
+#include <userenv.h>     // GetAllUsersProfilesDirectory and etc
 #include "wowfax.h"
+#include "demexp.h"
+#include "wshimdb.h"
 VOID WINAPI W32ExitWowProcess(DWORD exit_code)
 {
     exit_code = NtvdmAuthorizeExit(exit_code);
@@ -40,13 +45,18 @@ VOID WINAPI W32ExitWowProcess(DWORD exit_code)
 #include "wow_idle_hook_binding.h"
 #include <compat/include/wow_registry.h>
 
-#line 32
+#line 37
 extern void UnloadNetworkFonts( UINT id );
 
 MODNAME(wkman.c);
 
 BOOL GetWOWShortCutInfo (PULONG Bufsize, PVOID Buf);
 extern void FreeTaskFormFeedHacks(HAND16 h16);
+
+BOOL WOWSortEnvironmentStrings(PSZ pszEnv);
+
+void WK32ChangeDisplayMode(DWORD dmBitsPerPel);
+void WK32RevertDisplayMode(void);
 
 // Global DATA
 
@@ -56,27 +66,30 @@ extern void FreeTaskFormFeedHacks(HAND16 h16);
 // app.  We pass them on to user32's InitTask.
 //
 
-DWORD   dwLastHotkey = 0;
+DWORD   dwLastHotkey;
 DWORD   dwLastX = (DWORD) CW_USEDEFAULT;
 DWORD   dwLastY = (DWORD) CW_USEDEFAULT;
 DWORD   dwLastXSize = (DWORD) CW_USEDEFAULT;
 DWORD   dwLastYSize = (DWORD) CW_USEDEFAULT;
 
-HWND    ghwndShell = (HWND)0;           // WOWEXEC Window Handle
-HANDLE  ghInstanceUser32 = (HANDLE)0;
+HWND    ghwndShell;           // WOWEXEC Window Handle
+HANDLE  ghInstanceUser32;
 
-HAND16  ghShellTDB = 0;                 // WOWEXEC TDB
-HANDLE  ghevWowExecMsgWait = (HANDLE)0;
+HAND16  ghShellTDB;                 // WOWEXEC TDB
+HANDLE  ghevWowExecMsgWait;
 HANDLE  ghevWaitHungAppNotifyThread = (HANDLE)-1;  // Syncronize App Termination to Hung App NotifyThread
 HANDLE  ghNotifyThread = (HANDLE)-1;        // Notification Thread Handle
 HANDLE  ghHungAppNotifyThread = (HANDLE)-1; // HungAppNotification ThreadHandle
-PTD gptdTaskHead = NULL;            // Linked List of TDs
+PTD gptdTaskHead;                   // Linked List of TDs
 CRITICAL_SECTION gcsWOW;            // WOW Critical Section used when updating task linked list
 CRITICAL_SECTION gcsHungApp;        // HungApp Critical Section used when VDM_WOWHUNGAPP bit
 
-HMODCACHE ghModCache[CHMODCACHE]= { 0 };    // avoid callbacks to get 16-bit hMods
+HMODCACHE ghModCache[CHMODCACHE];   // avoid callbacks to get 16-bit hMods
 
-HANDLE ghTaskCreation = NULL;     // hThread from task creation (see Yield)
+volatile HANDLE ghTaskCreation;     // hThread from task creation (see WK32SyncTask)
+                                    // touched by parent and child threads during task init
+HANDLE ghTaskAppHelp;      // hProcess from apphelp 
+BOOL   gfTaskContinue;     // indicates whether child thread should continue without waiting for apphelp 
 
 VPVOID  vpnum_tasks;                // Pointer to KDATA variables (KDATA.ASM)
 PWORD16 pCurTDB;                    // Pointer to KDATA variables
@@ -86,8 +99,6 @@ VPVOID  vpLockTDB;                  // Pointer to KDATA variables
 VPVOID  vptopPDB = 0;               // KRNL PDB
 DOSWOWDATA DosWowData;              // structure that keeps linear pointer to
                                     // DOS internal variables.
-
-
 
 //
 // List of known DLLs used by WK32WowIsKnownDLL, called by 16-bit LoadModule.
@@ -116,12 +127,6 @@ PSZ pszProgmanExeSysDirPath;          // "c:\winnt\system32\progman.exe"
 char szWOAWOW32[] = "-WoAWoW32";
 
 //
-// String that represents section in win.ini which we notify the shell 
-// of having been changed if setup ran 
-// 
-char szExtensions[] = "Extensions";
-
-//
 // WOW GDI/CSR batching limit.
 //
 
@@ -137,6 +142,24 @@ static char szCaption[TOOLONGLIMIT + WARNINGMSGLENGTH];
 static char szMsgBoxText[TOOLONGLIMIT + WARNINGMSGLENGTH];
 
 extern HANDLE hmodWOW32;
+
+/*
+ * These are used to clean up DelayFree arrray
+ *
+ */
+
+extern LPVOID glpvDelayFree[];
+extern DWORD  gdwDelayFree;
+
+
+
+/*
+ * This function is living inside dpmi32/i386 and is used when we need to force dpmi linear memory allocation
+ * via the compat flag
+ *
+ */
+
+extern VOID DpmiSetIncrementalAlloc(BOOL);
 
 
 /* WK32WaitEvent - First API called by app, courtesy the C runtimes
@@ -165,17 +188,17 @@ ULONG FASTCALL WK32WaitEvent(PVDMFRAME pFrame)
  *
  */
 
-ULONG FASTCALL WK32KernelTrace(PVDMFRAME pFrame)
+ULONG FASTCALL WK32WOWKernelTrace(PVDMFRAME pFrame)
 {
 #ifdef DEBUG
-#line 159
+#line 182
 #error Excluded unsupported DEBUG WOW profile
-#line 200
+#line 223
 #else
-#line 201
+#line 224
     UNREFERENCED_PARAMETER(pFrame);
 #endif
-#line 203
+#line 226
     return TRUE;
 }
 
@@ -191,7 +214,7 @@ DWORD ParseHotkeyReserved(
 
     dw = 0;
 
-    if ((pch = strstr(pchReserved, "hotkey")) != NULL) {
+    if ((pch = WOW32_strstr(pchReserved, "hotkey")) != NULL) {
         pch += strlen("hotkey");
         pch++;
         dw = atoi(pch);
@@ -223,6 +246,16 @@ DWORD ParseHotkeyReserved(
  *
  *
  */
+
+// these two functions are imported from ntvdm.exe and housed in
+// dos\\command\\cmdenv.c
+//
+extern VOID __cdecl cmdCheckTempInit(VOID);
+extern LPSTR __cdecl cmdCheckTemp(LPSTR lpszzEnv);
+
+CHAR szProcessHistoryVar[] = "__PROCESS_HISTORY";
+CHAR szCompatLayerVar   [] = "__COMPAT_LAYER";
+CHAR szShimFileLogVar   [] = "SHIM_FILE_LOG";
 
 ULONG FASTCALL WK32WowGetNextVdmCommand (PVDMFRAME pFrame)
 {
@@ -302,8 +335,7 @@ SkipWowExec:
         // need call ExitVDM to cleanup. Next we go back to look for more
         // commands.
         //
-        if ((! fSeparateWow) && strstr(VDMInfo.AppName, "wowexec.exe")) {
-#line 330
+        if ((! fSeparateWow) && WOW32_strstr(VDMInfo.AppName, "wowexec.exe")) {
             ExitVDM(OPENNT_WOW_STARTUP_NOOP_EXIT, VDMInfo.iTask);
             goto SkipWowExec;
         }
@@ -325,8 +357,8 @@ SkipWowExec:
          VDMInfo.CurDirectoryLen > (ULONG)pWowInfo->CurDirSize )
        {
 
-        // We return the size specified, but assume that WOWEXEC will double 
-	// it when allocating memory to allow for the string conversion/
+        // We return the size specified, but assume that WOWEXEC will double
+        // it when allocating memory to allow for the string conversion/
         // expansion that might happen for international versions of NT.
         // See below where we uppercase and convert to OEM characters.
 
@@ -428,25 +460,37 @@ SkipWowExec:
         // variables in mixed case - to be compatible with MS-DOS
         // Also convert environment to OEM character set
 
+        // another thing that we do here is a fixup to temp/tmp variables
+        // which  occurs via the provided ntvdm functions
+
+
         if (pszEnv32) {
+
+            cmdCheckTempInit();
 
             for (pszTemp = pszEnv32;*pszTemp;pszTemp += (strlen(pszTemp) + 1)) {
 
+                PSZ pEnv;
+
                 // The MS-DOS Environment is OEM
 
-                CharToOem(pszTemp,pszEnv);
+                if (NULL == (pEnv = cmdCheckTemp(pszTemp))) {
+                   pEnv = pszTemp;
+                }
+
+                CharToOem(pEnv,pszEnv);
 
                 // Ignore the NT specific Environment variables that start ==
 
                 if (*pszEnv != '=') {
-                    if (pTemp = strchr(pszEnv,'=')) {
+                    if (pTemp = WOW32_strchr(pszEnv,'=')) {
                         *pTemp = '\0';
 
                         // don't uppercase "windir" as it is lowercase for
                         // Win 3.1 and MS-DOS apps.
 
-                       if (pTemp-pszEnv != 6 || strncmp(pszEnv, "windir", 6))
-                           _strupr(pszEnv);
+                       if (pTemp-pszEnv != 6 || WOW32_strncmp(pszEnv, "windir", 6))
+                           WOW32_strupr(pszEnv);
                        *pTemp = '=';
                     }
                 }
@@ -462,7 +506,7 @@ SkipWowExec:
     if (pszEnv32) {
         free_w(pszEnv32);
     }
-	  
+
     FLUSHVDMPTR(parg16->lpWowInfo, sizeof(WOWINFO), pWowInfo);
     FLUSHVDMPTR((ULONG)pWowInfo->lpCmdLine, pWowInfo->CmdLineSize, pszCmd);
 
@@ -475,6 +519,322 @@ SkipWowExec:
 }
 
 
+#if 0
+
+// this version inserts process history
+
+ULONG FASTCALL WK32WowGetNextVdmCommand (PVDMFRAME pFrame)
+{
+
+    ULONG ul;
+    PSZ pszEnv16, pszEnv, pszCurDir, pszCmd, pszAppName, pszEnv32, pszTemp;
+    register PWOWGETNEXTVDMCOMMAND16 parg16;
+    PWOWINFO pWowInfo;
+    VDMINFO VDMInfo;
+    PCHAR   pTemp;
+    CHAR    szSiReservedBuf[128];
+
+    GETARGPTR(pFrame, sizeof(WOWGETNEXTVDMCOMMAND16), parg16);
+    GETVDMPTR(parg16->lpWowInfo, sizeof(WOWINFO), pWowInfo);
+    GETVDMPTR(pWowInfo->lpCmdLine, pWowInfo->CmdLineSize, pszCmd);
+    GETVDMPTR(pWowInfo->lpAppName, pWowInfo->AppNameSize, pszAppName);
+    GETVDMPTR(pWowInfo->lpEnv, pWowInfo->EnvSize, pszEnv);
+    GETVDMPTR(pWowInfo->lpCurDir, pWowInfo->CurDirSize, pszCurDir);
+
+    pszEnv16 = pszEnv;
+
+    // if we have a real environment pointer and size then
+    // malloc a 32 bit buffer. Note that the 16 bit buffer should
+    // be twice the size.
+
+    VDMInfo.Enviornment = pszEnv;
+    pszEnv32 = NULL;
+
+    if (pWowInfo->EnvSize != 0) {
+       if (pszEnv32 = malloc_w(pWowInfo->EnvSize)) {
+            VDMInfo.Enviornment = pszEnv32;
+       }
+    }
+
+
+SkipWowExec:
+
+    VDMInfo.CmdLine = pszCmd;
+    VDMInfo.CmdSize = pWowInfo->CmdLineSize;
+    VDMInfo.AppName = pszAppName;
+    VDMInfo.AppLen = pWowInfo->AppNameSize;
+    VDMInfo.PifFile = NULL;
+    VDMInfo.PifLen = 0;
+    VDMInfo.CurDrive = 0;
+    VDMInfo.EnviornmentSize = pWowInfo->EnvSize;
+    VDMInfo.ErrorCode = TRUE;
+    VDMInfo.VDMState =  fSeparateWow ? ASKING_FOR_SEPWOW_BINARY : ASKING_FOR_WOW_BINARY;
+    VDMInfo.iTask = 0;
+    VDMInfo.StdIn = 0;
+    VDMInfo.StdOut = 0;
+    VDMInfo.StdErr = 0;
+    VDMInfo.CodePage = 0;
+    VDMInfo.TitleLen = 0;
+    VDMInfo.DesktopLen = 0;
+    VDMInfo.CurDirectory = pszCurDir;
+    VDMInfo.CurDirectoryLen = pWowInfo->CurDirSize;
+    VDMInfo.Reserved = szSiReservedBuf;
+    VDMInfo.ReservedLen = sizeof(szSiReservedBuf);
+
+    ul = GetNextVDMCommand (&VDMInfo);
+
+    if (ul) {
+
+        //
+        // BaseSrv will return TRUE with CmdSize == 0 if no more commands
+        //
+        if (VDMInfo.CmdSize == 0) {
+            pWowInfo->CmdLineSize = 0;
+            goto CleanUp;
+        }
+
+        //
+        // If wowexec is the appname then we don't want to pass it back to
+        // the existing instance of wowexec in a shared VDM since it will
+        // basically do nothing but load and exit. Since it is not run we
+        // need call ExitVDM to cleanup. Next we go back to look for more
+        // commands.
+        //
+        if ((! fSeparateWow) && WOW32_strstr(VDMInfo.AppName, "wowexec.exe")) {
+            ExitVDM(WOWVDM, VDMInfo.iTask);
+            goto SkipWowExec;
+        }
+
+    }
+
+
+    //
+    // WOWEXEC will initially call with a guess of the correct environment
+    // size. If he did not allocate enough then we will return the appropriate
+    // size so that he can try again. WOWEXEC knows that we will require a
+    // buffer twice the size specified. The environment can be up to 64k since
+    // 16 bit LoadModule can only take a selector pointer to the environment.
+    //
+
+    if ( VDMInfo.EnviornmentSize > pWowInfo->EnvSize         ||
+         VDMInfo.CmdSize > (USHORT)pWowInfo->CmdLineSize     ||
+         VDMInfo.AppLen > (USHORT)pWowInfo->AppNameSize      ||
+         VDMInfo.CurDirectoryLen > (ULONG)pWowInfo->CurDirSize )
+       {
+
+        // We return the size specified, but assume that WOWEXEC will double
+        // it when allocating memory to allow for the string conversion/
+        // expansion that might happen for international versions of NT.
+        // See below where we uppercase and convert to OEM characters.
+        DWORD dwEnvSize = 2 * (VDMInfo.EnviornmentSize +
+                               VDMInfo.AppLen +
+                               strlen(szProcessHistoryVar) + 2);
+        if (0 == HIWORD(dwEnvSize)) {
+            // Fit in a Word!
+            pWowInfo->EnvSize = (WORD)(dwEnvSize / 2);
+        } else {
+            // Make it the max size (see 16 bit globalrealloc)
+            pWowInfo->EnvSize = (65536-17)/2;
+        }
+
+        // Pass back other correct sizes required
+        pWowInfo->CmdLineSize = VDMInfo.CmdSize;
+        pWowInfo->AppNameSize = VDMInfo.AppLen;
+        pWowInfo->CurDirSize = (USHORT)VDMInfo.CurDirectoryLen;
+        ul = FALSE;
+    }
+
+    if ( ul ) {
+
+        //
+        // Boost the hour glass
+        //
+
+        ShowStartGlass (10000);
+
+        //
+        // Save away wShowWindow, hotkey and startup window position from
+        // the STARTUPINFO structure.  We'll pass them over to UserSrv during
+        // the new app's InitTask call.  The assumption here is that this
+        // will be the last GetNextVDMCommand call before the call to InitTask
+        // by the newly-created task.
+        //
+
+        dwLastHotkey = ParseHotkeyReserved(VDMInfo.Reserved);
+
+        if (VDMInfo.StartupInfo.dwFlags & STARTF_USESHOWWINDOW) {
+            pWowInfo->wShowWindow =
+              (VDMInfo.StartupInfo.wShowWindow  == SW_SHOWDEFAULT)
+              ? SW_SHOW : VDMInfo.StartupInfo.wShowWindow ;
+        } else {
+            pWowInfo->wShowWindow = SW_SHOW;
+        }
+
+        if (VDMInfo.StartupInfo.dwFlags & STARTF_USEPOSITION) {
+            dwLastX = VDMInfo.StartupInfo.dwX;
+            dwLastY = VDMInfo.StartupInfo.dwY;
+        } else {
+            dwLastX = dwLastY = (DWORD) CW_USEDEFAULT;
+        }
+
+        if (VDMInfo.StartupInfo.dwFlags & STARTF_USESIZE) {
+            dwLastXSize = VDMInfo.StartupInfo.dwXSize;
+            dwLastYSize = VDMInfo.StartupInfo.dwYSize;
+        } else {
+            dwLastXSize = dwLastYSize = (DWORD) CW_USEDEFAULT;
+        }
+
+        LOGDEBUG(4, ("WK32WowGetNextVdmCommand: HotKey: %u\n"
+                     "    Window Pos:  (%u,%u)\n"
+                     "    Window Size: (%u,%u)\n",
+                     dwLastHotkey, dwLastX, dwLastY, dwLastXSize, dwLastYSize));
+
+
+        // 20-Jan-1994 sudeepb
+        // Following callout is for inheriting the directories for the new
+        // task. After this we mark the CDS's to be invalid which will force
+        // new directories to be pickedup on need basis. See bug#1995 for
+        // details.
+
+        W32RefreshCurrentDirectories (pszEnv32);
+
+        // Save iTask
+        // When Server16 does the Exec Call we can put this Id into task
+        // Structure.  When the WOW app dies we can notify Win32 using this
+        // taskid so if any apps are waiting they will get notified.
+
+        iW32ExecTaskId = VDMInfo.iTask;
+
+        //
+        // krnl expects ANSI strings!
+        //
+
+        OemToChar(pszCmd, pszCmd);
+        OemToChar(pszAppName, pszAppName);
+
+        //
+        // So should the current directory be OEM or Ansi?
+        //
+
+
+        pWowInfo->iTask = VDMInfo.iTask;
+        pWowInfo->CurDrive = VDMInfo.CurDrive;
+        pWowInfo->EnvSize = (USHORT)VDMInfo.EnviornmentSize;
+
+
+        // Uppercase the Environment KeyNames but leave the environment
+        // variables in mixed case - to be compatible with MS-DOS
+        // Also convert environment to OEM character set
+
+        // another thing that we do here is a fixup to temp/tmp variables
+        // which  occurs via the provided ntvdm functions
+
+
+        if (pszEnv32) {
+            LPSTR pszProcessHistory = NULL; // null at first
+            int   nProcessHistoryVarLen = strlen(szProcessHistoryVar);
+
+            cmdCheckTempInit();
+
+            for (pszTemp = pszEnv32;*pszTemp;pszTemp += (strlen(pszTemp) + 1)) {
+
+                PSZ pEnv;
+
+                // The MS-DOS Environment is OEM
+
+                if (NULL == (pEnv = cmdCheckTemp(pszTemp))) {
+                   pEnv = pszTemp;
+                }
+
+                //
+                // check for process history variable
+                //
+
+                if (szProcessHistoryVar[0] == *pszTemp) { // quick check first
+                   //
+                   // might be a __process_history
+                   //
+                   if (NULL != (pTemp = WOW32_strchr(pszTemp, '=')) &&
+                       (int)(pTemp - pszTemp) == nProcessHistoryVarLen &&
+                       !WOW32_strnicmp(pszTemp, szProcessHistoryVar, nProcessHistoryVarLen)) {
+                          pszProcessHistory = pszTemp;
+
+                          // now skip the rest for this item and go to
+                          // the next one. This var will be added later
+                          // since we do not touch pszEnv we won't be
+                          // adding this env var at this time
+
+                          continue; // go all the way back and resume for loop
+
+                   }
+                }
+
+
+                CharToOem(pEnv,pszEnv);
+
+                // Ignore the NT specific Environment variables that start ==
+
+                if (*pszEnv != '=') {
+                    if (pTemp = WOW32_strchr(pszEnv,'=')) {
+                        *pTemp = '\0';
+
+                        // don't uppercase "windir" as it is lowercase for
+                        // Win 3.1 and MS-DOS apps.
+
+                       if (pTemp-pszEnv != 6 || WOW32_strncmp(pszEnv, "windir", 6))
+                           WOW32_strupr(pszEnv);
+                       *pTemp = '=';
+                    }
+                }
+                pszEnv += (strlen(pszEnv) + 1);
+            }
+
+            // now add in the process history var
+            // we have a pointer to it in the pszProcessHistory space
+            if (NULL != pszProcessHistory) {
+               // copy the variable
+               CharToOem(pszProcessHistory, pszEnv);
+               // advance the pointer
+               pszEnv += strlen(pszEnv);
+               // add semicolon
+               *pszEnv++ = ';';
+            }
+            else {
+               CharToOem(szProcessHistoryVar, pszEnv);
+               pszEnv += strlen(pszEnv); // skip over the name
+               // put in an equal sign
+               *pszEnv++ = '=';
+            }
+            // copy app name if there
+            CharToOem(pszAppName, pszEnv);
+            pszEnv += strlen(pszEnv) + 1;
+
+            // Environment is Double NULL terminated
+            *pszEnv = '\0';
+
+            // now sort it
+            WOWSortEnvironmentStrings(pszEnv16);
+
+        }
+    }
+
+  CleanUp:
+    if (pszEnv32) {
+        free_w(pszEnv32);
+    }
+
+    FLUSHVDMPTR(parg16->lpWowInfo, sizeof(WOWINFO), pWowInfo);
+    FLUSHVDMPTR((ULONG)pWowInfo->lpCmdLine, pWowInfo->CmdLineSize, pszCmd);
+
+    FREEVDMPTR(pszCmd);
+    FREEVDMPTR(pszEnv);
+    FREEVDMPTR(pszCurDir);
+    FREEVDMPTR(pWowInfo);
+    FREEARGPTR(parg16);
+    RETURN(ul);
+}
+
+#endif
 
 /*++
 
@@ -515,14 +875,10 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
     HANDLE hThread;
 
 #if FASTBOPPING
-#line 541
 #error Unsupported excluded original configuration
 #else
-#line 566
-#line 543
     vpStack = VDMSTACK();
 #endif
-#line 545
 
 
     pFrame->wRetID = RET_TASKSTARTED;
@@ -542,8 +898,12 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
 
         WOW32ASSERTMSG(FALSE, "\nWOW32: WK32WOWInitTask ERROR - Main Thread Returning - Contact DaveHart\n");
         W32ExitWowProcess(EXIT_FAILURE);
-#line 565
     }
+
+    //
+    // VadimB: remember parent's TDB
+    //
+
 
     hThread = host_CreateThread(NULL,
                                 8192,
@@ -556,15 +916,34 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
     ((PTDB)SEGPTR(pFrame->wTDB,0))->TDB_ThreadID = dwThreadId;
 
     if ( hThread ) {
-         ghTaskCreation = hThread;
+
+        WOW32VERIFY(DuplicateHandle(
+                        GetCurrentProcess(),
+                        hThread,
+                        GetCurrentProcess(),
+                        (HANDLE *) &ghTaskCreation,
+                        0,
+                        FALSE,
+                        DUPLICATE_SAME_ACCESS
+                        ));
+
     }
 
 #ifdef DEBUG
-#line 582
-#error Excluded unsupported DEBUG WOW profile
-#line 595
+    {
+        char szModName[9];
+
+        RtlCopyMemory(szModName, ((PTDB)SEGPTR(pFrame->wTDB,0))->TDB_ModName, 8);
+        szModName[8] = 0;
+
+        LOGDEBUG( hThread ? LOG_IMPORTANT : LOG_ALWAYS,
+            ("\nWK32WOWInitTask: %s task %04x %s\n",
+                hThread ? "created" : "ERROR failed to create",
+                pFrame->wTDB,
+                szModName
+            ));
+    }
 #endif
-#line 596
 
     return hThread ? TRUE : FALSE;
 }
@@ -598,41 +977,6 @@ ULONG FASTCALL WK32Yield(PVDMFRAME pFrame)
 
     UNREFERENCED_PARAMETER(pFrame);
 
-    if (ghTaskCreation) {
-        DWORD dw;
-        HANDLE ThreadEvents[2];
-
-        ResumeThread(ghTaskCreation);
-        ThreadEvents[1] = ghTaskCreation;
-        ghTaskCreation = NULL;
-        ThreadEvents[0] = ghevWaitCreatorThread;
-
-        dw = WaitForMultipleObjects(2, ThreadEvents, FALSE, INFINITE);
-        if (dw != WAIT_OBJECT_0) {
-            if (dw == -1 && GetLastError() == ERROR_INVALID_HANDLE) {
-
-                //
-                // The new task managed to go away before we entered
-                // WaitForMultipleObjects.  No problem.  Wait on the
-                // auto-reset ghevWaitCreatorThread event to reset
-                // it.
-                //
-
-                WOW32VERIFY(WAIT_OBJECT_0 ==
-                    WaitForSingleObject(ghevWaitCreatorThread, INFINITE));
-
-            } else {
-                WOW32ASSERTMSGF(TRUE,
-                ("\nWK32Yield: ERROR WaitInitTask %08X error %08X\n\n", dw, GetLastError()));
-                ResetEvent(ghevWaitCreatorThread);
-            }
-
-        }
-
-        LOGDEBUG(2,("WK32Yield: Creator thread %04X now yielding\n", pFrame->wTDB));
-    }
-
-
     BlockWOWIdle(TRUE);
 
     (pfnOut.pfnYieldTask)();
@@ -641,6 +985,119 @@ ULONG FASTCALL WK32Yield(PVDMFRAME pFrame)
 
 
     RETURN(0);
+}
+
+
+/*++
+ WK32WowSyncNewTask - 
+
+ Routine Description:
+
+      Sync parent and child thread with apphelp (child thread
+      could potentially be blocked by apphelp)
+      
+ EXIT
+  for parent thread nothing
+  for child thread 
+      0  - continue running the app
+      1  - wait in a loop
+     -1  - exit the thread, user selected not to run this app 
+                          , app is hard blocked
+--*/
+
+ULONG FASTCALL WK32WowSyncTask(PVDMFRAME pFrame)
+{
+    PTDB ptdb;
+
+    //
+    // Parent task (thread) comes here from loader
+    // -ghTaskCreation is set to child thread handle
+    // in Wk32WowInitTask, so it is guaranteed to be non NULL.
+    // -when child task (thread) signals it from W32Thread and
+    // parent returns immediately "never" going to the second 
+    // part of this function
+ 
+    if (ghTaskCreation) {
+        DWORD dw;
+        HANDLE ThreadEvents[2];
+
+        ThreadEvents[0] = ghevWaitCreatorThread;
+        ThreadEvents[1] = ghTaskCreation;
+        ghTaskCreation = NULL;
+        WOW32VERIFY( ResumeThread(ThreadEvents[1]) != (DWORD)-1 );  // ghTaskCreation
+
+        dw = WaitForMultipleObjects(2, ThreadEvents, FALSE, INFINITE);
+        if (dw != WAIT_OBJECT_0) {
+            WOW32ASSERTMSGF(FALSE,
+                ("\nWK32SyncNewTask: ERROR WaitInitTask %d gle %d\n\n", dw, GetLastError())
+                );
+            ResetEvent(ghevWaitCreatorThread);
+        }
+
+        CloseHandle(ThreadEvents[1]);  // ghTaskCreation
+
+        WK32Yield(pFrame);
+        return 0;
+    }
+
+    //
+    // Child task (thread) comes here from StartWowTask 
+    // - ghTaskCreation is NULL, so it skips the first part
+    // of this function.
+    //
+    // -ghTaskAppHelp if set (in CheckAppHelpInfo) means wait for user input
+    // to decide whether to run the task.
+    // otherwise if gfTaskContinue is FALSE either zzzInitTask failed or AppHelpGetNtvdmInfo
+    // told us to exit without showing AppHelp dialog
+    // -if WaitForSingleObject timed out, return to 16bit to process hardware interrupts
+    // then come back try again, apphelp is still waiting for user input
+
+    if (ghTaskAppHelp) {
+        DWORD dwResult;
+
+        dwResult = WaitForSingleObject(ghTaskAppHelp,10);
+        if (WAIT_TIMEOUT == dwResult) {
+            return 1;  // back to 16-bit to loop and try again
+        }
+        if (WAIT_OBJECT_0 == dwResult &&
+            GetExitCodeProcess(ghTaskAppHelp,&dwResult)  &&
+            0 == dwResult)
+          {
+            gfTaskContinue = FALSE;
+        }
+        CloseHandle(ghTaskAppHelp);
+        ghTaskAppHelp = NULL;
+    }
+
+    // 
+    // gfTaskContinue is FALSE if user decided to abort the app (return -1)
+    // otherwise continue to the app code (return 0)
+    // 
+
+    if (!gfTaskContinue) {
+        return -1;
+    }
+
+    //
+    // App is ready to run
+    // if this app requires 256 color display mode, set it now
+    //
+
+    ptdb = (PTDB)SEGPTR(pFrame->wTDB,0);
+    if (ptdb->TDB_WOWCompatFlagsEx & WOWCFEX_DISPMODE256){
+        WK32ChangeDisplayMode(8);
+    }
+
+    // 
+    // Some apps need to start from the exe file's directory
+    // Whistler bug 281759
+           
+    if (CURRENTPTD()->dwWOWCompatFlags2 & WOWCF2_RESETCURDIR) {
+        CURRENTPTD()->dwWOWCompatFlags2 &= ~WOWCF2_RESETCURDIR;
+        DosWowSetCurrentDirectory((LPSTR)ptdb->TDB_Directory);
+    }            
+            
+    return 0;
 }
 
 
@@ -685,7 +1142,7 @@ ULONG FASTCALL WK32OldYield(PVDMFRAME pFrame)
 --*/
 
 LRESULT CALLBACK WowOriginalForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)
-#line 716
+#line 1170
 {
     PARM16  Parm16;
 
@@ -736,10 +1193,7 @@ ULONG FASTCALL WK32WowSetIdleHook(PVDMFRAME pFrame)
 
         ptd->hIdleHook = wow_user_idle_hook_for_current();
 
-#line 769
-        if (ptd->hIdleHook == NULL) {
-            OutputDebugString("\nWK32WowSetIdleHook : ERROR failed to Set Idle Hook Proc\n\n");
-        }
+        WOW32ASSERTMSG(ptd->hIdleHook, "\nWK32WowSetIdleHook : ERROR failed to Set Idle Hook Proc\n\n");
     }
     RETURN(0);
 }
@@ -792,17 +1246,18 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     PWOWINITTASK16 pArg16;
     PTDB     ptdb;
 #if FASTBOPPING
-#line 824
+#line 1276
 #error Unsupported excluded original configuration
-#line 824
+#line 1276
 #else
-#line 825
+#line 1277
     USHORT SaveIp;
 #endif
-#line 827
+#line 1279
 
-    td.hThread = NULL;
+    RtlZeroMemory(&td, sizeof(TD));
 
+    InitializeCriticalSection(&td.csTD);
 
     if (gptdShell == NULL) {
 
@@ -811,13 +1266,14 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         // boot.
         //
 
+        DeleteCriticalSection(&CURRENTPTD()->csTD);
         free_w( (PVOID) CURRENTPTD() );
         gptdShell = &td;
 
     } else if (pptdWOA) {
 
         //
-        // See WK32ILoadModule32
+        // See WK32WOWLoadModule32
         //
 
         *pptdWOA = &td;
@@ -826,7 +1282,6 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 
     CURRENTPTD() = &td;
 
-    td.dwFlags = TDF_INITCALLBACKSTACK;
     if (fBoot) {
         td.htask16 = 0;
         td.hInst16 = 0;
@@ -836,13 +1291,13 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
             VPVOID vpStack;
 
 #if FASTBOPPING
-#line 863
+#line 1316
 #error Unsupported excluded original configuration
 #else
-#line 865
+#line 1318
             vpStack = VDMSTACK();
 #endif
-#line 867
+#line 1320
 
             GETFRAMEPTR(vpStack, pFrame);
 
@@ -851,16 +1306,16 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         }
 
 #if FASTBOPPING
-#line 875
+#line 1328
 #error Unsupported excluded original configuration
-#line 877
+#line 1330
 #else
-#line 878
+#line 1331
         SaveIp = getIP();
         host_simulate();
         setIP(SaveIp);
 #endif
-#line 882
+#line 1335
 
     }
 
@@ -879,7 +1334,6 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         ptdb->TDB_ThreadID = td.dwThreadID;
     }
 
-    td.CommDlgTd = NULL;
     EnterCriticalSection(&gcsWOW);
     td.ptdNext = gptdTaskHead;
     gptdTaskHead = &td;
@@ -892,36 +1346,6 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     //
     //  NOTE - Add YOUR Per Task Init Code HERE
     //
-
-    //
-    // Initialize WOW compatibility flags from registry.
-    //
-
-    td.dwWOWCompatFlags = W32ReadWOWCompatFlags(td.htask16, &td.dwWOWCompatFlagsEx);
-
-//
-// We now inherit the WOW compatibility flags from the parent's TDB. Right
-// now We are only interested in inheriting the WOWCF_UNIQUEHDCHWND flag
-// in order to really fix a bug with MS Publisher. Each Wizard and Cue Cards
-// that ship with mspub is its own task and would require MANY new
-// compatibility flag entries in the registry. This mechanism allows anything
-// spawned from an app that has WOWCF_UNIQUEHDCHWND to have
-// WOWCF_UNIQUEHDCHWND.
-    if (ptdb->TDB_WOWCompatFlags & LOWORD(WOWCF_UNIQUEHDCHWND)) {
-        td.dwWOWCompatFlags |= LOWORD(WOWCF_UNIQUEHDCHWND);
-    }
-
-    ptdb->TDB_WOWCompatFlags = LOWORD(td.dwWOWCompatFlags);
-    ptdb->TDB_WOWCompatFlags2 = HIWORD(td.dwWOWCompatFlags);
-    ptdb->TDB_WOWCompatFlagsEx = LOWORD(td.dwWOWCompatFlagsEx);
-    ptdb->TDB_WOWCompatFlagsEx2 = HIWORD(td.dwWOWCompatFlagsEx);
-
-#ifndef i386
-    // Enable the special VDMAllocateVirtualMemory strategy in NTVDM.
-    if (td.dwWOWCompatFlagsEx & WOWCFEX_FORCEINCDPMI) {
-        SetWOWforceIncrAlloc(TRUE);
-    }
-#endif
 
     td.hIdleHook = NULL;
 
@@ -960,7 +1384,10 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 
     {
         DWORD    dwExpWinVer;
-        BYTE     lpFileName[9]; // modname = 8bytes + nullchar
+        DWORD    dwCompatFlags;
+        BYTE     szModName[9]; // modname = 8bytes + nullchar
+        BYTE     szBaseFileName[9]; // 8.3 filename minus .3
+        LPSTR    pszBaseName;
         CHAR     szFilePath[256];
         LPBYTE   lpModule;
         PWOWINITTASK16 pArg16;
@@ -968,7 +1395,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         WORD     wPathOffset;
         BYTE     bImageNameLength;
         ULONG    ulLength;
-        BOOL     bRet;
+        BOOL     fRet;
         DWORD    dw;
         HANDLE   hThread;
 
@@ -978,9 +1405,10 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         td.hMod16 = ptdb->TDB_pModule;
         hThread = (HANDLE)ptdb->TDB_hThread;
         dwExpWinVer = FETCHDWORD(pArg16->dwExpWinVer);
-        RtlCopyMemory(lpFileName, ptdb->TDB_ModName, 8);
-        FREEVDMPTR(ptdb);
-        lpFileName[8] = (BYTE)0;
+        RtlCopyMemory(szModName, ptdb->TDB_ModName, 8);
+        dwCompatFlags = *((DWORD *)&ptdb->TDB_CompatFlags);
+        
+        szModName[8] = (BYTE)0;
 
 #define NE_PATHOFFSET   10      // Offset to file path stuff
 
@@ -1003,10 +1431,11 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
                                 szFilePath,
                                 bImageNameLength );
 
+        wcImageName[bImageNameLength] = L'\0';
         RtlInitUnicodeString(&uImageName, wcImageName);
 
         LOGDEBUG(2,("WOW W32Thread: setting image name to %ws\n",
-                    uImageName.Buffer));
+                    wcImageName));
 
         RtlAssociatePerThreadCurdir( &rptc, NULL, &uImageName, NULL );
 
@@ -1016,51 +1445,126 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         // Add this task to the list of 16-bit tasks
         //
 
-        AddTaskSharedList(td.htask16, td.hMod16, lpFileName, szFilePath);
+        AddTaskSharedList(td.htask16, td.hMod16, szModName, szFilePath);
 
-        // At this point we know both the module and the filename,
-        // check that against known setup names
+        //
+        // Get the base part of the filename, no path or extension,
+        // for InitTask to use looking for setup program names.
+        // Often this is the same as the module name, to shortcut
+        // redundant checks we only pass the base filename if it
+        // differs from the module name.
+        //
 
-	    if (W32IsSetupProgram(lpFileName, szFilePath)) {
-            LOGDEBUG(2, ("Running known setup program %s\n", szFilePath));
-	        td.dwFlags |= TDF_SETUPAPPLICATION;
-	    }
-	
-        
+        if (!(pszBaseName = WOW32_strrchr(szFilePath, '\\'))) {
+            WOW32ASSERTMSG(FALSE, "W32Thread assumed path was fully qualified, no '\\'.\n");
+        }
+        pszBaseName++; // skip over backslash to point at start of base filename.
+        RtlCopyMemory(szBaseFileName, pszBaseName, sizeof(szBaseFileName) - 1);
+        szBaseFileName[sizeof(szBaseFileName) - 1] = 0;
+        if (pszBaseName = WOW32_strchr(szBaseFileName, '.')) {
+            *pszBaseName = 0;
+        }
+        if (!WOW32_strcmp(szBaseFileName, szModName)) {
+            pszBaseName = NULL;
+        } else {
+            pszBaseName = szBaseFileName;
+        }
+
+
+        //
+        // Initialize WOW compatibility flags from the database
+        //
+        //
+        gfTaskContinue = CheckAppHelpInfo(&td,szFilePath,szModName);
+
+        //
+        // We now inherit the WOW compatibility flags from the parent's TDB. Right
+        // now We are only interested in inheriting the WOWCF_UNIQUEHDCHWND flag
+        // in order to really fix a bug with MS Publisher. Each Wizard and Cue Cards
+        // that ship with mspub is its own task and would require MANY new
+        // compatibility flag entries in the registry. This mechanism allows anything
+        // spawned from an app that has WOWCF_UNIQUEHDCHWND to have
+        // WOWCF_UNIQUEHDCHWND.
+        if (ptdb->TDB_WOWCompatFlags & LOWORD(WOWCF_UNIQUEHDCHWND)) {
+            td.dwWOWCompatFlags |= LOWORD(WOWCF_UNIQUEHDCHWND);
+        }
+
+        // Exchange setup and Return of Arcade module names conflict (bootstrp)
+        // so set GACF_HACKWINFLAGS if it is specified in WOWCF2_
+        // Whistler bug 384201
+
+        if (td.dwWOWCompatFlags2 & WOWCF2_HACKWINFLAGS) {
+            ptdb->TDB_CompatFlags |= LOWORD(GACF_HACKWINFLAGS);
+        }
+
+        // 
+        // Some apps need to start from the exe file's directory
+        // Whistler bug 281759 (check wowsynctask also)
+
+        if(td.dwWOWCompatFlags2 & WOWCF2_RESETCURDIR) {         
+           if (pszBaseName = WOW32_strrchr(szFilePath, '\\')) {
+               *pszBaseName = 0;
+               WOW32_strncpy(ptdb->TDB_Directory,szFilePath,64);
+           }
+           ptdb->TDB_Directory[64]='\0';
+        }             
+
+        ptdb->TDB_WOWCompatFlags = LOWORD(td.dwWOWCompatFlags);
+        ptdb->TDB_WOWCompatFlags2 = HIWORD(td.dwWOWCompatFlags);
+        ptdb->TDB_WOWCompatFlagsEx = LOWORD(td.dwWOWCompatFlagsEx);
+        ptdb->TDB_WOWCompatFlagsEx2 = HIWORD(td.dwWOWCompatFlagsEx);
+#ifdef FE_SB
+        ptdb->TDB_WOWCompatFlagsJPN = LOWORD(td.dwWOWCompatFlagsFE);
+        ptdb->TDB_WOWCompatFlagsJPN2 = HIWORD(td.dwWOWCompatFlagsFE);
+#endif  // FE_SB
+
+       // Enable the special VDMAllocateVirtualMemory strategy in NTVDM.
+       if (td.dwWOWCompatFlagsEx & WOWCFEX_FORCEINCDPMI) {
+#ifdef i386
+           DpmiSetIncrementalAlloc(TRUE);
+#else
+           SetWOWforceIncrAlloc(TRUE);
+#endif
+       }
+       
+       FREEVDMPTR(ptdb);
+
         // Init task forces us to the active task in USER
         // and does ShowStartGlass, so new app gets focus correctly
         dw = 0;
         do {
             if (dw) {
                 Sleep(dw * 50);
-                }
+            }
 
-            bRet = (pfnOut.pfnInitTask)(dwExpWinVer,
-                                        lpFileName,
-                                        td.htask16,
+            fRet = (pfnOut.pfnInitTask)(dwExpWinVer,
+                                        dwCompatFlags,
+                                        td.dwUserWOWCompatFlags,
+                                        szModName,
+                                        pszBaseName,
+                                        td.htask16 | HTW_IS16BIT,
                                         dwLastHotkey,
                                         fSeparateWow ? 0 : td.VDMInfoiTaskID,
                                         dwLastX,
                                         dwLastY,
                                         dwLastXSize,
-                                        dwLastYSize,
-                                        SW_SHOW   /* unused */
+                                        dwLastYSize
                                         );
-            } while (dw++ < 6 && !bRet);
+        } while (dw++ < 6 && !fRet);
 
-
-        if (!bRet) {
+        if (!fRet) {
             LOGDEBUG(LOG_ALWAYS,
                      ("\n%04X task, PTD address %08X InitTaskFailed\n",
                      td.htask16,
                      &td)
                      );
-
-            W32DestroyTask(&td);
-            host_ExitThread(EXIT_FAILURE);
+            if(ghTaskAppHelp) {
+               CloseHandle(ghTaskAppHelp);
+               ghTaskAppHelp = NULL;
+               gfTaskContinue = FALSE;
             }
+        }
 
-#line 1082
         dwLastHotkey = 0;
         dwLastX = dwLastY = dwLastXSize = dwLastYSize = (DWORD) CW_USEDEFAULT;
 
@@ -1103,14 +1607,14 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     WOW32ASSERT(pFrame->wTDB == td.htask16);
 
 #if FASTBOPPING
-#line 1124
+#line 1626
 #error Unsupported excluded original configuration
 #else
-#line 1158
-#line 1126
+#line 1660
+#line 1628
     SETVDMSTACK(vpInitialSSSP);
 #endif
-#line 1128
+#line 1630
     pFrame->wRetID = RET_RETURN;
 
 
@@ -1144,50 +1648,50 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     BlockWOWIdle(FALSE);
 
 #ifdef DEBUG
-#line 1161
+#line 1663
 #error Excluded unsupported DEBUG WOW profile
-#line 1171
+#line 1673
 #endif
-#line 1172
+#line 1674
 
 #if NO_W32TRYCALL
-#line 1174
+#line 1676
 #error Excluded unsupported NO_W32TRYCALL WOW profile
-#line 1178
+#line 1680
 #endif
-#line 1179
+#line 1681
 #if FASTBOPPING
-#line 1180
+#line 1683
 #error Unsupported excluded original configuration
-#line 1182
+#line 1685
 #else
-#line 1183
+#line 1686
         SaveIp = getIP();
         host_simulate();
         setIP(SaveIp);
 #endif
-#line 1187
+#line 1690
 #if NO_W32TRYCALL
-#line 1188
+#line 1691
 #error Excluded unsupported NO_W32TRYCALL WOW profile
-#line 1191
+#line 1694
 #endif
-#line 1192
+#line 1695
     //
     //  We should Never Come Here, an app should get terminated via calling wk32killtask thunk
     //  not by doing an unsimulate call.
     //
 
 #ifdef DEBUG
-#line 1198
+#line 1701
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 1200
+#line 1703
     if (IsDebuggerAttached() && (flOptions & OPT_DEBUG)) {
         DbgBreakPoint();
     }
 #endif
-#line 1204
+#line 1707
 
     W32DestroyTask(&td);
     host_ExitThread(EXIT_SUCCESS);
@@ -1208,7 +1712,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
  *
  */
 
-VOID FASTCALL WK32KillTask(PVDMFRAME pFrame)
+ULONG FASTCALL WK32WOWKillTask(PVDMFRAME pFrame)
 {
     UNREFERENCED_PARAMETER(pFrame);
 
@@ -1216,6 +1720,7 @@ VOID FASTCALL WK32KillTask(PVDMFRAME pFrame)
     W32DestroyTask(CURRENTPTD());
     RemoveTaskSharedList();
     host_ExitThread(EXIT_SUCCESS);
+    return 0;  // to quiet compiler, never executed.
 }
 
 
@@ -1253,6 +1758,8 @@ DWORD W32RemoteThread(VOID)
     OBJECT_ATTRIBUTES   obja;
     VPVOID      vpStack;
 
+    RtlZeroMemory(&td, sizeof(TD));
+
     // turn the timer thread off to resync dos time
     if (nWOWTasks != 1)
         SuspendTimerThread();
@@ -1265,13 +1772,13 @@ DWORD W32RemoteThread(VOID)
         NULL
         );
     if ( !NT_SUCCESS(Status) ) {
-#line 1281
+#line 1787
 #if DBG
-#line 1282
+#line 1788
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1284
+#line 1790
 #endif
-#line 1285
+#line 1791
         return( 0 );
     }
 
@@ -1292,13 +1799,13 @@ DWORD W32RemoteThread(VOID)
                 &ThreadInfo.ClientId );
 
     if ( !NT_SUCCESS(Status) ) {
-#line 1305
+#line 1811
 #if DBG
-#line 1306
+#line 1812
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1308
+#line 1814
 #endif
-#line 1309
+#line 1815
         return( 0 );
     }
 
@@ -1306,15 +1813,17 @@ DWORD W32RemoteThread(VOID)
 
     Status = NtClose( hThread );
     if ( !NT_SUCCESS(Status) ) {
-#line 1316
+#line 1822
 #if DBG
-#line 1317
+#line 1823
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1319
+#line 1825
 #endif
-#line 1320
+#line 1826
         return( 0 );
     }
+
+    InitializeCriticalSection(&td.csTD);
 
     CURRENTPTD() = &td;
 
@@ -1335,15 +1844,13 @@ DWORD W32RemoteThread(VOID)
     vcSave.Eip   = getIP();
     vcSave.Esp   = getSP();
 #if FASTBOPPING
-#line 1342
+#line 1850
 #error Unsupported excluded original configuration
-#line 1347
+#line 1855
 #endif
-#line 1348
+#line 1856
 
     wPrevTDB = *pCurTDB;
-
-    td.dwFlags = TDF_INITCALLBACKSTACK;
 
     //
     // Now prepare for the callback.  Set the registers such that it looks
@@ -1359,18 +1866,18 @@ DWORD W32RemoteThread(VOID)
     setDI( (WORD)vcRemote.Edi );
     setBP( (WORD)vcRemote.Ebp );
 #if FASTBOPPING
-#line 1367
+#line 1873
 #error Unsupported excluded original configuration
-#line 1372
+#line 1878
 #else
-#line 1373
+#line 1879
     setIP( (WORD)vcRemote.Eip );
     setSP( (WORD)vcRemote.Esp );
     setSS( (WORD)vcRemote.SegSs );
     setCS( (WORD)vcRemote.SegCs );
     vpStack = VDMSTACK();
 #endif
-#line 1379
+#line 1885
 
     //
     // Initialize Per Task Data
@@ -1402,37 +1909,42 @@ DWORD W32RemoteThread(VOID)
     //   Start Callback
     //
 #if FASTBOPPING
-#line 1410
+#line 1916
 #error Unsupported excluded original configuration
-#line 1412
+#line 1918
 #else
-#line 1413
+#line 1919
     host_simulate();
     setIP((WORD)vcSave.Eip);
 #endif
-#line 1416
+#line 1922
 
     //
-    //  We should Never Come Here, an app should get terminated via calling wk32killtask thunk
+    //  We should Never Come Here, an app should get terminated via calling wk32wowkilltask thunk
     //  not by doing an unsimulate call.
     //
 
 #ifdef DEBUG
-#line 1423
+#line 1929
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 1425
+#line 1931
     if (IsDebuggerAttached() && (flOptions & OPT_DEBUG)) {
         DbgBreakPoint();
     }
 #endif
-#line 1428
+#line 1935
 
-#line 1430
+#line 1936
     W32DestroyTask(&td);
     host_ExitThread(EXIT_SUCCESS);
     return 0;
 }
+
+//
+// lives in dos/dem/demlfn.c
+//
+extern VOID __cdecl demLFNCleanup(VOID);
 
 /* W32FreeTask - Per Task Cleanup
  *
@@ -1449,7 +1961,7 @@ DWORD W32RemoteThread(VOID)
  *
  */
 VOID WowOriginalFreeTask( PTD ptd )
-#line 1450
+#line 1961
 {
     PWOAINST pWOA, pWOANext;
 
@@ -1458,12 +1970,14 @@ VOID WowOriginalFreeTask( PTD ptd )
     if (nWOWTasks < 2)
         SuspendTimerThread();
 
-#ifndef i386
     // Disable the special VDMAllocateVirtualMemory strategy in NTVDM.
     if (CURRENTPTD()->dwWOWCompatFlagsEx & WOWCFEX_FORCEINCDPMI) {
+#ifdef i386
+        DpmiSetIncrementalAlloc(FALSE);
+#else
         SetWOWforceIncrAlloc(FALSE);
-    }
 #endif
+    }
 
     // Free all DCs owned by the current task
 
@@ -1512,35 +2026,31 @@ VOID WowOriginalFreeTask( PTD ptd )
     // Remove idle hook, if any has been installed.
 
     if (ptd->hIdleHook != NULL) {
-#line 1513
+#line 2026
         ptd->hIdleHook = NULL;
     }
 
     // Free Special thunking list for this task (wparam.c)
 
     FreeParamMap(ptd->htask16);
-     
+
+    // cleanup lfn search handles and other lfn-related stuff
+    demLFNCleanup();
+
     // Free WinOldAp tracking structures for this thread.
 
-    pWOA = ptd->pWOAList;
-    while (pWOA) {
-        pWOANext = pWOA->pNext;
-        free_w(pWOA);
-        pWOA = pWOANext;
-    }
+    EnterCriticalSection(&ptd->csTD);
 
-    // if this was a setup application - notify shell to resync win.ini 
-    // with registry settings
-
-    if (ptd->dwFlags & TDF_SETUPAPPLICATION) {
-        HWND hwndShell = GetShellWindow();
-
-        LOGDEBUG(2, ("Setup Application is done, notifying shell\n"));
-
-        if (hwndShell) {
-            SendMessage(hwndShell, WM_WININICHANGE, 0, (LPARAM)(LPVOID)szExtensions);
+    if (pWOA = ptd->pWOAList) {
+        ptd->pWOAList = NULL;
+        while (pWOA) {
+            pWOANext = pWOA->pNext;
+            free_w(pWOA);
+            pWOA = pWOANext;
         }
     }
+
+    LeaveCriticalSection(&ptd->csTD);
 }
 
 
@@ -1558,7 +2068,7 @@ VOID WowOriginalFreeTask( PTD ptd )
  *
  */
 
-VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
+ULONG FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
 {
     PWOWKILLREMOTETASK16 pArg16;
     WORD        wSavedTDB;
@@ -1578,17 +2088,17 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
     vcRemote.Edi   = getDI();
     vcRemote.Ebp   = getBP();
 #if FASTBOPPING
-#line 1578
+#line 2087
 #error Unsupported excluded original configuration
-#line 1590
+#line 2099
 #else
-#line 1591
+#line 2100
     vcRemote.Eip   = getIP();
     vcRemote.Esp   = getSP();
     vcRemote.SegSs = getSS();
     vcRemote.SegCs = getCS();
 #endif
-#line 1596
+#line 2105
 
     W32FreeTask(CURRENTPTD());
 
@@ -1624,11 +2134,11 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
         setIP( (WORD)vcSave.Eip );
         setSP( (WORD)vcSave.Esp );
 #if FASTBOPPING
-#line 1631
+#line 2140
 #error Unsupported excluded original configuration
-#line 1636
+#line 2145
 #endif
-#line 1637
+#line 2146
     } else {
         //
         // Decrement the count of 16-bit tasks so that the last one,
@@ -1660,6 +2170,7 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
     FREEARGPTR(pArg16);
 
     host_ExitThread(EXIT_SUCCESS);
+    return 0;  // never executed, keep compiler happy.
 }
 
 
@@ -1714,14 +2225,16 @@ VOID W32DestroyTask( PTD ptd)
 
     // Remove this task from the linked list of tasks
 
-#line 1723
+#line 2233
     WK32DeleteTask(ptd);
 
     // Close This Apps Thread Handle
 
-    if (ptd->hThread)
+    if (ptd->hThread) {
         CloseHandle( ptd->hThread );
+    }
 
+    DeleteCriticalSection(&ptd->csTD);
 }
 
 /***************************************************************************\
@@ -1737,10 +2250,32 @@ void WK32DeleteTask(
     PTD ptdDelete)
 {
     PTD ptd, ptdPrev;
+    int i;
 
     EnterCriticalSection(&gcsWOW);
     ptd = gptdTaskHead;
     ptdPrev = NULL;
+
+    /*
+     * If this app changed display settings revert back
+     *
+     */
+    if(ptdDelete->dwWOWCompatFlagsEx & WOWCFEX_DISPMODE256){
+       WK32RevertDisplayMode();
+    }
+
+    /*
+     * If cleanup environment data
+     *
+     */
+
+    if (ptdDelete->pWowEnvData != NULL) {
+        free_w(ptdDelete->pWowEnvData);
+    }
+
+    if (ptdDelete->pWowEnvDataChild != NULL) {
+        free_w(ptdDelete->pWowEnvDataChild);
+    }
 
     /*
      * Find the task to delete
@@ -1762,6 +2297,23 @@ void WK32DeleteTask(
     } else {
         gptdTaskHead = ptd->ptdNext;
     }
+
+
+    /*
+     *  Clean up DelayFree array in wkmem.c wk32virtualfree
+     *
+     */
+
+    for (i=0; i < 4 ;i++) {
+
+         if( NULL != glpvDelayFree[i]) {
+            VirtualFree(glpvDelayFree[i],
+            0,
+            MEM_RELEASE);
+            glpvDelayFree[i] = NULL;
+         }
+    }
+
     LeaveCriticalSection(&gcsWOW);
 }
 
@@ -1790,16 +2342,32 @@ ULONG FASTCALL WK32RegisterShellWindowHandle(PVDMFRAME pFrame)
 {
     register PWOWREGISTERSHELLWINDOWHANDLE16 parg16;
     WNDCLASS wc;
+    NTSTATUS Status;
 
     GETARGPTR(pFrame, sizeof(WOWREGISTERSHELLWINDOWHANDLE16), parg16);
 
 // gwFirstCmdShow is no longer used, and is available.
-#line 1802
+#line 2354
 #if 0
-#line 1803
+#line 2355
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 1805
+#line 2357
+
+    if (ghwndShell) {
+
+        //
+        // The shared WOW is calling to deregister right before it
+        // shuts down.
+        //
+
+        WOW32ASSERT( !fSeparateWow );
+        WOW32ASSERT( !parg16->hwndShell );
+
+        Status = RegisterWowExec(NULL);
+
+        return NT_SUCCESS(Status);
+    }
 
     ghwndShell = HWND32(parg16->hwndShell);
     ghShellTDB = pFrame->wTDB;
@@ -1814,7 +2382,7 @@ ULONG FASTCALL WK32RegisterShellWindowHandle(PVDMFRAME pFrame)
     // Fritz, when you get called about this it means that the GetClassInfo()
     // call above is returning with lpWC->hInstance == 0 instead of hModuser32.
     WOW32ASSERTMSGF((ghInstanceUser32),
-                    ("WOW Error ghInstanceUser32 == NULL! Call FritzS\n"));
+                    ("WOW Error ghInstanceUser32 == NULL! Contact user folks\n"));
 
     //
     // If this is the shared WOW VDM, register the WowExec window handle
@@ -1840,7 +2408,7 @@ ULONG FASTCALL WK32RegisterShellWindowHandle(PVDMFRAME pFrame)
 
 
 //
-// Worker routine for WK32LoadModule32
+// Worker routine for WK32WOWLoadModule32
 //
 
 VOID FASTCALL CleanupWOAList(HANDLE hProcess)
@@ -1848,9 +2416,13 @@ VOID FASTCALL CleanupWOAList(HANDLE hProcess)
     PTD ptd;
     PWOAINST *ppWOA, pWOAToFree;
 
+    EnterCriticalSection(&gcsWOW);
+
     ptd = gptdTaskHead;
 
     while (ptd) {
+
+        EnterCriticalSection(&ptd->csTD);
 
         ppWOA = &(ptd->pWOAList);
         while (*ppWOA && (*ppWOA)->hChildProcess != hProcess) {
@@ -1873,17 +2445,537 @@ VOID FASTCALL CleanupWOAList(HANDLE hProcess)
 
             free_w(pWOAToFree);
 
-            return;
+            LeaveCriticalSection(&ptd->csTD);
+
+            break;   // no need to look at other tasks.
 
         }
 
+        LeaveCriticalSection(&ptd->csTD);
+
         ptd = ptd->ptdNext;
     }
+
+    LeaveCriticalSection(&gcsWOW);
+}
+
+// finds the environment variable pszName in environment block
+// pointed to by pszEnv, *ppszVal receives the pointer to the value
+// of the variable, if ppszVal is not NULL
+
+PSZ WOWFindEnvironmentVar(PSZ pszName, PSZ pszEnv, PSZ* ppszVal)
+{
+   int nNameLen = strlen(pszName);
+   PSZ pTemp; // ptr to '='
+
+   if (NULL != pszEnv) {
+
+      while ('\0' != *pszEnv) {
+         // check the first char to be speedy
+         if (*pszName == *pszEnv) {
+            // compare the rest
+
+            if (NULL != (pTemp = WOW32_strchr(pszEnv, '=')) &&
+                (int)(pTemp - pszEnv) == nNameLen &&
+                !WOW32_strnicmp(pszEnv, pszName, nNameLen)) {
+                // found it
+                if (NULL != ppszVal) {
+                   *ppszVal = pTemp + 1; // next char
+                }
+                return(pszEnv);
+            }
+         }
+
+         pszEnv += strlen(pszEnv) + 1;
+      }
+   }
+   return(NULL); // not found
+}
+
+//
+// returns size in characters
+// of an env block
+// pStrCount receives the number of env strings
+//
+DWORD WOWGetEnvironmentSize(PSZ pszEnv, LPDWORD pStrCount)
+{
+   PSZ pTemp = pszEnv;
+   DWORD dwCount = 0;
+
+   while ('\0' != *pTemp) {
+      ++dwCount;
+      pTemp += strlen(pTemp) + 1;
+   }
+   ++pTemp;
+
+   if (NULL != pStrCount) {
+      *pStrCount = dwCount;
+   }
+   return(DWORD)(pTemp - pszEnv);
+}
+
+BOOL WOWSortEnvironmentStrings(PSZ pszEnv)
+{
+   // we sort the strings as needed for CreateProcess
+   // we implement bubble-sort which is an in-place sort using pointers
+   DWORD dwStrCount;
+   DWORD dwEnvSize = WOWGetEnvironmentSize(pszEnv, &dwStrCount);
+   PSZ*  rgpEnv; // array of env ptrs
+   INT*  rgLen; // length
+   int   i, nLen;
+   PSZ   pTemp, pEnv;
+   PSZ   pEnd;
+   BOOL  fSwap;
+
+   // now we have the size and string count, allocate array of ptrs
+   rgpEnv = (PSZ*)malloc_w(sizeof(PSZ) * dwStrCount);
+   if (NULL == rgpEnv) {
+      return(FALSE);
+   }
+
+   rgLen  = (INT*)malloc_w(sizeof(INT) * dwStrCount);
+   if (NULL == rgLen) {
+      free_w(rgpEnv);
+      return(FALSE);
+   }
+
+   pEnv = (PSZ)malloc_w(dwEnvSize);
+   if (NULL == pEnv) {
+      free_w(rgpEnv);
+      free_w(rgLen);
+      return(FALSE);
+   }
+
+   // setup the pointers
+
+   for (pTemp = pszEnv, i = 0; '\0' != *pTemp; pTemp += strlen(pTemp) + 1, ++i) {
+      rgpEnv[i] = pTemp;
+      pEnd = WOW32_strchr(pTemp, '=');
+      rgLen[i] = (NULL == pEnd) ? strlen(pTemp) : (INT)(pEnd - pTemp);
+   }
+
+
+   // bubble - sort the strings using the pointers
+
+   do {
+
+      fSwap = FALSE;
+      for (i = 0; i < (int)dwStrCount - 1; ++i) {
+         // compare length, if no match use the longer string
+         nLen = __max(rgLen[i], rgLen[i+1]);
+         if (WOW32_strncmp(rgpEnv[i], rgpEnv[i+1], nLen) > 0) {
+            fSwap = TRUE;
+            pTemp = rgpEnv[i+1];
+            rgpEnv[i+1] = rgpEnv[i];
+            rgpEnv[i] = pTemp;
+            nLen = rgLen[i+1];
+            rgLen[i+1] = rgLen[i];
+            rgLen[i] = nLen;
+         }
+      }
+
+   } while (fSwap);
+
+   //
+   // now we have sorted the strings, have them rewritten in the buffer --
+   //
+   for (pTemp = pEnv, i = 0; i < (INT)dwStrCount; ++i) {
+      strcpy(pTemp, rgpEnv[i]);
+      pTemp += strlen(pTemp) + 1;
+   }
+   *pTemp = '\0';
+
+   // now copy the env whole
+   RtlCopyMemory(pszEnv, pEnv, dwEnvSize);
+
+   // we are done now
+
+   free_w(pEnv);
+   free_w(rgLen);
+   free_w(rgpEnv);
+   return(TRUE);
 }
 
 
+BOOL WOWIsEnvVar(PSZ pszEnv, PSZ pszVarName, INT nNameLen)
+{
+    return !WOW32_strnicmp(pszEnv, pszVarName, nNameLen) && (*(pszEnv + nNameLen) == '=');
+}
+
+
+//
+// Inherit parent environment, sanitizing it for all the "interesting" things
+//
+
+PSZ WOWCreateEnvBlock(PSZ pszParentEnv)
+{
+
+    LPSTR pszProcessHistory = WOWFindEnvironmentVar(szProcessHistoryVar, pszParentEnv, NULL);
+    LPSTR pszCompatLayer    = WOWFindEnvironmentVar(szCompatLayerVar,    pszParentEnv, NULL);
+    LPSTR pszShimFileLog    = WOWFindEnvironmentVar(szShimFileLogVar,    pszParentEnv, NULL);
+
+    INT   nLenCompatLayer     = strlen(szCompatLayerVar);
+    INT   nLenProcessHistory  = strlen(szProcessHistoryVar);
+    INT   nLenShimFileLog     = strlen(szShimFileLogVar);
+    INT   nLen;
+
+    PSZ   pszNewEnv;
+    PSZ   pTemp, pNew;
+
+    DWORD dwSize;
+
+    dwSize = WOWGetEnvironmentSize(pszParentEnv, NULL);
+
+    if (NULL != pszProcessHistory) {
+        dwSize -= strlen(pszProcessHistory) + 1;
+    }
+
+    if (NULL != pszCompatLayer) {
+        dwSize -= strlen(pszCompatLayer)    + 1;
+    }
+
+    if (NULL != pszShimFileLog) {
+        dwSize -= strlen(pszShimFileLog)    + 1;
+    }
+
+    //
+    // allocate env block
+    // filter out all the existing process_history and compat layer vars
+    //
+    pNew =
+    pszNewEnv = (PSZ)malloc_w(dwSize);
+    if (NULL == pszNewEnv) {
+        return NULL;
+    }
+
+   // copy the env
+    for (pTemp = pszParentEnv; '\0' != *pTemp; ) {
+
+        nLen = strlen(pTemp);
+        if (!WOWIsEnvVar(pTemp, szProcessHistoryVar, nLenProcessHistory) &&
+            !WOWIsEnvVar(pTemp, szCompatLayerVar,    nLenCompatLayer) &&
+            !WOWIsEnvVar(pTemp, szShimFileLogVar,    nLenShimFileLog)) {
+            //
+            // copy variable
+            //
+            strcpy(pNew, pTemp);
+            pNew += nLen + 1;
+        }
+        pTemp += nLen + 1;
+    }
+
+    *pNew = '\0'; // done
+
+    return pszNewEnv;
+
+}
+
+#if 0
+
+//
+// fn to create environment -- code to filter certain environment variables
+// is located here, currently not used
+//
+// pszEnv - this is where most of the vars come from, except if ProcessHistory
+// var is specified separately
+// pszEnvWowApp -- this is where compat_layer and such come from
+//
+PSZ WOWCreateEnvBlock(PSZ pszEnvWowApp, PSZ pszEnv, PSZ pszProcessHistoryVal)
+{
+   // this will :
+   // retrieve __PROCESS_HISTORY
+   //          __COMPAT_LAYER
+   //          SHIM_FILE_LOG
+   // carry those over into the environment and insert them at the
+   // appropriate place
+   LPSTR pszProcessHistory = (NULL == pszProcessHistoryVal) ?
+                                 WOWFindEnvironmentVar(szProcessHistoryVar, pszEnvWowApp, NULL) :
+                                 pszProcessHistoryVal;
+   LPSTR pszCompatLayer    = WOWFindEnvironmentVar(szCompatLayerVar,    pszEnvWowApp, NULL);
+   LPSTR pszShimFileLog    = WOWFindEnvironmentVar(szShimFileLogVar,    pszEnvWowApp, NULL);
+
+   //
+   // get env size first
+   //
+   DWORD dwSize    = WOWGetEnvironmentSize(pszEnv, NULL); // size that we might need to expand
+   DWORD dwNewSize = dwSize;
+
+   PSZ pszNewEnv;
+   PSZ pTemp, pNew;
+   INT nLen;
+   INT nLenCompatLayer       = strlen(szCompatLayerVar);
+   INT nLenProcessHistory    = strlen(szProcessHistoryVar);
+   INT nLenShimFileLog       = strlen(szShimFileLogVar);
+   INT nLenCompatLayerVar    = 0;
+   INT nLenProcessHistoryVar = 0;
+   INT nLenShimFileLogVar    = 0;
+   CHAR szCompatLayer[MAX_PATH + sizeof(szCompatLayerVar) + 1]; // buffer space for the compat layer + length of varname
+
+   //
+   // so we have the environment
+   // expand it -- be safe here, allocate extra just in case
+   //
+   if (NULL != pszProcessHistory) {
+      nLenProcessHistoryVar = strlen(pszProcessHistory);
+      dwNewSize += nLenProcessHistoryVar + 1;
+   }
+
+   if (NULL == pszCompatLayer && fSeparateWow) { // if separate wow and no appcompat layer in child --
+      nLen = wsprintf(szCompatLayer, "%s=", szCompatLayerVar);
+      nLenCompatLayerVar = (INT)GetEnvironmentVariable(szCompatLayerVar,
+                                                       szCompatLayer + nLen,
+                                                       MAX_PATH);
+      if (nLenCompatLayerVar && nLenCompatLayerVar <= MAX_PATH) {
+         pszCompatLayer = szCompatLayer;
+      }
+   }
+
+   if (NULL != pszCompatLayer) {
+      nLenCompatLayerVar = strlen(pszCompatLayer);
+      dwNewSize += nLenCompatLayerVar + 1;
+   }
+
+   if (NULL != pszShimFileLog) {
+      nLenShimFileLogVar = strlen(pszShimFileLog);
+      dwNewSize += nLenShimFileLogVar + 1;
+   }
+
+   // allocate env block
+   // filter out all the existing process_history and compat layer vars
+   pNew =
+   pszNewEnv = (PSZ)malloc_w(dwNewSize);
+   if (NULL == pszNewEnv) {
+      return(NULL);
+   }
+
+   // copy the env
+   for (pTemp = pszEnv; '\0' != *pTemp; ) {
+
+      nLen = strlen(pTemp);
+      if (WOW32_strnicmp(pTemp, szProcessHistoryVar, nLenProcessHistory) &&
+          WOW32_strnicmp(pTemp, szCompatLayerVar, nLenCompatLayer) &&
+          WOW32_strnicmp(pTemp, szShimFileLogVar, nLenShimFileLog)
+          ) {
+         // copy variable
+         strcpy(pNew, pTemp);
+         pNew += nLen + 1;
+      }
+      pTemp += nLen + 1;
+   }
+
+   // now copy vars
+   if (NULL != pszProcessHistory) {
+      strcpy(pNew, pszProcessHistory);
+      pNew += nLenProcessHistoryVar + 1;
+   }
+   if (NULL != pszCompatLayer) {
+      strcpy(pNew, pszCompatLayer);
+      pNew += nLenCompatLayerVar + 1;
+   }
+
+   if (NULL != pszShimFileLog) {
+      strcpy(pNew, pszShimFileLog);
+      pNew += nLenShimFileLogVar + 1;
+   }
+
+   *pNew = '\0'; // final touch
+
+   if (!WOWSortEnvironmentStrings(pszNewEnv)) {
+      free_w(pszNewEnv);
+      return(NULL);
+   }
+
+   return(pszNewEnv);
+}
+
+#endif // 0
+
+
+ULONG FASTCALL WK32WowPassEnvironment(PVDMFRAME pFrame)
+{
+   PWOWPASSENVIRONMENT16 parg16;
+   PDOSEXECBLOCK pParmBlk;      // exec param block
+   PBYTE pExe;                  // parameter, passed from 16-bit
+   PDOSPDB pDosPDB;
+   PSZ pszEnvParentTask = NULL; // parent task env, the one that has __process_history
+   PSZ pszEnvParent = NULL;     // parent env -- the one that has everything else
+   PSZ pszEnv;                  // "forged" environment, 32-bit
+   PSZ pszEnvTask;              // pointer to 16-bit task env -- the one that is passed back
+   WORD wExeFlags;              // exe flags wow16\inc\newexe.inc
+   WORD wExe16;                 // selector for exe header
+   BYTE TDB_Flags = 0;          // tdb flags for the parent task
+   DWORD dwEnvSize;             // new environment size
+   DWORD dwSize;                // 16-bit memory block size
+   HMEM16 hMemEnv;              // 16-bit memory selector
+   PSZ pCmdLine = NULL;         // command line tail
+   PSZ pModuleFileName;         // module filename, obtained from wExe16
+   PSZ pProcessHistoryVar = NULL;  // process history, obtained from pszEnvParentTask
+   PSZ pProcessHistory = NULL;     // process history, working ptr
+   PSZ pTemp;                   // temp var, used while writing to the env
+   DWORD nSizeModuleFileName;   // module file name variable size
+   DWORD nSizeCmdLine = 0;      // command line tail size
+   BOOL fFreeEnv = TRUE;        // free temp env flag (in case of failure, we use parent env)
+   USHORT uCmdLineStart = 0;    // return value, offset of the command tail
+   BOOL fCopy2 = TRUE;          // copy mod filename twice
+
+   // get arg ptr
+   GETARGPTR(pFrame, sizeof(*parg16), parg16);
+
+   // retrieve arguments from 16-bit land
+   wExe16 = FETCHWORD(parg16->pExe);
+   pExe = (PBYTE)SEGPTR(wExe16, 0);
+   GETVDMPTR(FETCHDWORD(parg16->pParmBlk), sizeof(DOSEXECBLOCK), pParmBlk);
+   GETPSZPTR(FETCHDWORD(pParmBlk->lpcmdline), pCmdLine); // pointer
+   pDosPDB = SEGPTR(FETCHWORD(parg16->cur_DOS_PDB), 0);
+
+    if (*pCurTDB) { // extract Parent task environment info
+       PTDB pTDB;
+
+       pTDB = (PTDB)SEGPTR(*pCurTDB, 0); // tdb in windows
+       if (NULL != pTDB && TDB_SIGNATURE == pTDB->TDB_sig) {
+          // valid tdb, retrieve env ptr
+#if 0
+
+          pPSP = (PDOSPDB)SEGPTR(pTDB->TDB_PDB, 0); // psp
+          if (NULL != pPSP) {
+             pszEnvParentTask = (PSZ)SEGPTR(pPSP->PDB_environ, 0);
+          }
+#endif
+
+          TDB_Flags = pTDB->TDB_flags; // flags
+       }
+   }
+
+/* // dump various helpful info
+
+   if (NULL != pszEnv) {
+      LOGDEBUG(0, ("pszEnv = %lx\n", pszEnv));
+   }
+
+   LOGDEBUG(0, ("pExe = %lx\n", pExe));
+   LOGDEBUG(0, ("pParmBlk = %lx\n", pParmBlk));
+   LOGDEBUG(0, ("pDosPDB = %lx\n", pDosPDB));
+   LOGDEBUG(0, ("pWinPDB = %lx\n", pWinPDB));
+
+*/
+
+   // determine which environment segment we will use as a template
+   if (0 != pParmBlk->envseg) {
+      // aha - envseg is passed from above
+      pszEnvParent = SEGPTR(pParmBlk->envseg, 0);
+   }
+   else {
+      // no env seg -- use default one from kernel
+      pszEnvParent = SEGPTR(pDosPDB->PDB_environ, 0);
+   }
+
+   //
+   // get module filename from the exe header
+   //
+   pModuleFileName = SEGPTR(wExe16, (*(WORD *)SEGPTR(wExe16, 10)) + 8);
+   nSizeModuleFileName = strlen(pModuleFileName) + 1;
+
+
+   //
+   // Create Child environment cookies using our own cookies and some other hints
+   //
+   CreateWowChildEnvInformation(pszEnvParent);
+
+   //
+   // form the environment block
+   //
+   pszEnv = WOWCreateEnvBlock(pszEnvParent);
+
+   // now see if we're out of memory
+   if (NULL == pszEnv) {
+      pszEnv = pszEnvParent; // no worse than before, use parent
+      fFreeEnv = FALSE;
+   }
+
+   // now pszEnv is the right "merged" environment
+   // measure how big it is
+   dwSize =
+   dwEnvSize =  WOWGetEnvironmentSize(pszEnv, NULL);
+
+   // now let us deal with command line
+   wExeFlags = *(PUSHORT)(pExe+NE_FLAGS_OFFSET);
+   if (wExeFlags & NEPROT) {
+
+      if (TDB_Flags & TDBF_OS2APP) {
+
+         // now measure both strings
+         nSizeCmdLine  = strlen(pCmdLine) + 1;
+         nSizeCmdLine += strlen(pCmdLine + nSizeCmdLine) + 1;
+         dwSize += nSizeCmdLine + 1;
+         fCopy2 = FALSE;
+      }
+      else {
+         // dos app executed this
+         nSizeCmdLine = *pCmdLine++; // move to the next char
+         // also update original value
+         ++pParmBlk->lpcmdline;
+
+         dwSize += nSizeCmdLine + 1;
+      }
+   }
+   else {
+      dwSize += 3; // room for magic word and nul
+      fCopy2 = FALSE;
+   }
+
+   dwSize += nSizeModuleFileName * 2; // we need to have that twice
+
+   // allocate memory
+
+   hMemEnv = WOWGlobalAlloc16(GMEM_FIXED, dwSize);
+   if (!hMemEnv) {
+      //  we are dead!
+      goto exit_passenv;
+   }
+
+   pTemp =
+   pszEnvTask = SEGPTR(hMemEnv, 0); // fixed memory
+
+   RtlCopyMemory (pTemp, pszEnv, dwEnvSize); // done with env
+   pTemp += dwEnvSize; // adjust
+
+   // env is followed by
+   if (!(wExeFlags & NEPROT)) {
+      // we store 1 \0
+      *pTemp++ = '\x1';
+      *pTemp++ = '\0';
+   }
+
+   // copy stuff
+   RtlCopyMemory(pTemp, pModuleFileName, nSizeModuleFileName);
+   pTemp += nSizeModuleFileName;
+
+   // see where cmd line should start
+   uCmdLineStart = (USHORT)(pTemp - pszEnvTask);
+
+   // second copy of the same
+   if (fCopy2) {
+      RtlCopyMemory(pTemp, pModuleFileName, nSizeModuleFileName);
+      pTemp += nSizeModuleFileName;
+   }
+
+   RtlCopyMemory(pTemp, pCmdLine, nSizeCmdLine);
+   *(pTemp + nSizeCmdLine + 1) = '\0';
+
+exit_passenv:
+   if (fFreeEnv) {
+      free_w(pszEnv);
+   }
+
+   FREEARGPTR(parg16);
+   return(MAKELONG(hMemEnv, uCmdLineStart));
+}
+
+
+
+
 /*++
- WK32LoadModule32
+ WK32WOWLoadModule32
 
  Routine Description:
     Exec a 32 bit Process
@@ -1906,7 +2998,7 @@ VOID FASTCALL CleanupWOAList(HANDLE hProcess)
 --*/
 
 
-ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
+ULONG FASTCALL WK32WOWLoadModule32(PVDMFRAME pFrame)
 {
     static PSZ pszExplorerFullPathUpper = NULL;         // "C:\WINNT\EXPLORER.EXE"
 
@@ -1923,7 +3015,12 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
     PROCESS_INFORMATION ProcessInformation;
     STARTUPINFO StartupInfo;
     char CmdLine[2*MAX_PATH];
+    char szOut[2*MAX_PATH];
+    char szMsgBoxText[4*MAX_PATH];
     register PWOWLOADMODULE16 parg16;
+    PTD ptd;
+    PSZ pszEnv = NULL; // environment ptr for new process
+    WCHAR* pwszEnv = NULL; // environment ptr, unicode
 
     GETARGPTR(pFrame, sizeof(WOWLOADMODULE16), parg16);
     GETPSZPTR(parg16->lpWinOldAppCmd, pszWinOldAppCmd);
@@ -2019,14 +3116,14 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
         pszModuleName = NULL;
 
         pSrc = pbCmdLine + 2;
-        pch = strchr(pSrc, '\r');
+        pch = WOW32_strchr(pSrc, '\r');
         if (!pch || (i = pch - pSrc) >= MAX_PATH) {
             ulRet = 23;
             goto lm32Exit;
             }
 
         pSrc = pch + 1;
-        pch = strchr(pSrc, '\n');
+        pch = WOW32_strchr(pSrc, '\n');
         if (!pch || (i = pch - pSrc) >= MAX_PATH) {
             ulRet = 23;
             goto lm32Exit;
@@ -2064,9 +3161,9 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
             // once again c:\winnt\control.exe(progman.exe).  Fix that.
             //
 
-            if (!_stricmp(pszModuleName, pszControlExeWinDirPath) ||
+            if (!WOW32_stricmp(pszModuleName, pszControlExeWinDirPath) ||
                 (fProgman = TRUE,
-                 !_stricmp(pszModuleName, pszProgmanExeWinDirPath))) {
+                 !WOW32_stricmp(pszModuleName, pszProgmanExeWinDirPath))) {
 
                 strcpy(CmdLine, fProgman
                                  ? pszProgmanExeSysDirPath
@@ -2139,6 +3236,23 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
     if (pCmdShow)
         FREEVDMPTR(pCmdShow);
 
+    // we have a problem here -- we need to pass on our environment
+    // which is in tdb -- get a pointer to it now
+    if (*pCurTDB) {
+       PTDB pTDB = (PTDB)SEGPTR(*pCurTDB, 0); // tdb in windows
+       PDOSPDB pPSP; // psp pointer
+
+       if (NULL != pTDB && TDB_SIGNATURE == pTDB->TDB_sig) {
+          // valid tdb, retrieve env ptr
+          pPSP = (PDOSPDB)SEGPTR(pTDB->TDB_PDB, 0); // psp
+          if (NULL != pPSP) {
+             pszEnv = (PSZ)SEGPTR(pPSP->PDB_environ, 0);
+          }
+       }
+    }
+
+
+    pwszEnv = WOWForgeUnicodeEnvironment(pszEnv, CURRENTPTD()->pWowEnvData);
 
     CreateProcessStatus = CreateProcess(
                             NULL,
@@ -2146,13 +3260,18 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
                             NULL,               // security
                             NULL,               // security
                             FALSE,              // inherit handles
-                            CREATE_NEW_CONSOLE | CREATE_DEFAULT_ERROR_MODE,
-                            NULL,               // environment strings
+                            CREATE_UNICODE_ENVIRONMENT |
+                                CREATE_NEW_CONSOLE |
+                                CREATE_DEFAULT_ERROR_MODE,
+                            pwszEnv,             // environment strings
                             NULL,               // current directory
                             &StartupInfo,
                             &ProcessInformation
                             );
 
+    if (NULL != pwszEnv) {
+        WOWFreeUnicodeEnvironment(pwszEnv);
+    }
 
     if (CreateProcessStatus) {
         DWORD WaitStatus;
@@ -2221,8 +3340,14 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
             WOW32ASSERT(pWOAInst);
 
             if (pWOAInst) {
-                pWOAInst->pNext = CURRENTPTD()->pWOAList;
-                CURRENTPTD()->pWOAList = pWOAInst;
+
+                ptd = CURRENTPTD();
+
+                EnterCriticalSection(&ptd->csTD);
+
+                pWOAInst->pNext = ptd->pWOAList;
+                ptd->pWOAList = pWOAInst;
+
                 pWOAInst->dwChildProcessID = ProcessInformation.dwProcessId;
                 pWOAInst->hChildProcess = ProcessInformation.hProcess;
 
@@ -2256,7 +3381,7 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
                     // comparison.
                     //
 
-                    _strupr(pWOAInst->szModuleName);
+                    WOW32_strupr(pWOAInst->szModuleName);
 
                     //
                     // HACK -- PackRat can't run Explorer in one
@@ -2294,13 +3419,13 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
                             RtlCopyMemory(pszExplorerFullPathUpper, pszWindowsDirectory, nLenWin);
                             pszExplorerFullPathUpper[nLenWin] = '\\';
                             RtlCopyMemory(&pszExplorerFullPathUpper[nLenWin+1], szExplorerDotExe, nLenExpl+1);
-                            _strupr(pszExplorerFullPathUpper);
+                            WOW32_strupr(pszExplorerFullPathUpper);
                         }
 
                     }
 
                     if (pszExplorerFullPathUpper &&
-                        ! strcmp(pWOAInst->szModuleName, pszExplorerFullPathUpper)) {
+                        ! WOW32_strcmp(pWOAInst->szModuleName, pszExplorerFullPathUpper)) {
 
                         GetWindowThreadProcessId(
                             GetShellWindow(),
@@ -2318,6 +3443,7 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
 
                 }
 
+                LeaveCriticalSection(&ptd->csTD);
             }
 
             if (pszModuleName) {
@@ -2347,6 +3473,35 @@ ULONG FASTCALL WK32LoadModule32(PVDMFRAME pFrame)
         case ERROR_BAD_EXE_FORMAT:
             ulRet = 11;
             break;
+
+        // put up warning that they're trying to load a binary intended for
+        // a different platform
+        case ERROR_EXE_MACHINE_TYPE_MISMATCH:
+
+            // attempt to find the end of the module name path
+            pch = CmdLine;
+            while((*pch != ' ') && (*pch != '//') && (*pch != '\0')) {
+               pch++;
+            }
+            *pch = '\0';
+            LoadString(hmodWOW32,
+                       iszMisMatchedBinary,
+                       szMsgBoxText,
+                       sizeof szMsgBoxText);
+
+            sprintf(szOut, szMsgBoxText, CmdLine);
+
+            LoadString(hmodWOW32,
+                       iszMisMatchedBinaryTitle,
+                       szMsgBoxText,
+                       sizeof szMsgBoxText);
+
+            MessageBox(NULL,
+                       szOut,
+                       szMsgBoxText,
+                       MB_OK | MB_ICONEXCLAMATION);
+
+            // fall through to default case
 
         default:
             ulRet = 0; // no memory
@@ -2441,20 +3596,20 @@ ULONG FASTCALL WK32WOWQueryPerformanceCounter(PVDMFRAME pFrame)
 ULONG FASTCALL WK32WOWOutputDebugString(PVDMFRAME pFrame)
 {
     PSZ psz1;
-    register POUTPUTDEBUGSTRING16 parg16;
+    register PWOWOUTPUTDEBUGSTRING16 parg16;
 
-    GETARGPTR(pFrame, sizeof(OUTPUTDEBUGSTRING16), parg16);
+    GETARGPTR(pFrame, sizeof(*parg16), parg16);
     GETPSZPTRNOLOG(parg16->vpString, psz1);
 
 #ifdef DEBUG            // So we can intermingle LOGGER output & WOW Logging
-#line 2452
+#line 3606
 #error Excluded unsupported DEBUG WOW profile
-#line 2471
+#line 3625
 #else
-#line 2472
+#line 3626
     OutputDebugString(psz1);
 #endif
-#line 2474
+#line 3628
     FREEPSZPTR(psz1);
     FREEARGPTR(parg16);
     RETURN(0);
@@ -2658,7 +3813,7 @@ DWORD WowMsgBoxThread(VOID *pv)
     if (pWowMsgBox16->pszMsg) {
         GETPSZPTR(pWowMsgBox16->pszMsg, pszMsg);
         szMsg[MAX_PATH*2 - 1] = '\0';
-        strncpy(szMsg, pszMsg, MAX_PATH*2 - 1);
+        WOW32_strncpy(szMsg, pszMsg, MAX_PATH*2 - 1);
         FREEPSZPTR(pszMsg);
     } else {
         szMsg[0] = '\0';
@@ -2667,7 +3822,7 @@ DWORD WowMsgBoxThread(VOID *pv)
     if (pWowMsgBox16->pszTitle) {
         GETPSZPTR(pWowMsgBox16->pszTitle, pszTitle);
         szTitle[MAX_PATH - 1] = '\0';
-        strncpy(szTitle, pszTitle, MAX_PATH);
+        WOW32_strncpy(szTitle, pszTitle, MAX_PATH);
         FREEPSZPTR(pszTitle);
     } else {
         szTitle[0] = '\0';
@@ -2707,7 +3862,7 @@ DWORD WowMsgBoxThread(VOID *pv)
 
 --*/
 
-VOID FASTCALL WK32WowMsgBox(PVDMFRAME pFrame)
+ULONG FASTCALL WK32WowMsgBox(PVDMFRAME pFrame)
 {
     PWOWMSGBOX16 pWowMsgBox16;
     DWORD Tid;
@@ -2728,10 +3883,14 @@ VOID FASTCALL WK32WowMsgBox(PVDMFRAME pFrame)
         }
 
     FREEARGPTR(pWowMsgBox16);
-    return;
+    return 0;
 }
 
 
+
+#ifdef debug
+UINT  gLasthtaskKill = 0;
+#endif
 
 /*++
 
@@ -2756,10 +3915,12 @@ VOID FASTCALL WK32WowMsgBox(PVDMFRAME pFrame)
   NEVER RETURNS - Goes away when WOW is killed
 
 --*/
+
 DWORD W32HungAppNotifyThread(UINT htaskKill)
 {
     PTD ptd;
     LPWORD pLockTDB;
+    WORD  hTask16;
     DWORD dwThreadId;
     int nMsgBoxChoice;
     PTDB pTDB;
@@ -2792,6 +3953,28 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
 
     }
 
+    // If we are seeing this notification for a second time, these selectors
+    // probably don't match -- which means this 16-bit context is really messed
+    // up.  We'd better prevent it from doing any 16-bit callbacks at this point
+    // or it will result in a crash dlg for the user & will kill the VDM & any
+    // other 16-bit apps (tasks) running in this VDM.
+    // This situation will occur if the call to WaitForSingleObject() (following
+    // the call to SendMessageTimeout() below) actually times-out rather than
+    // complete.  The thread will actually be dead by the time *this* function
+    // gets called again with a now-invalid TDB struct.  This situation appears
+    // to result from clicking End Task from the task manager or somehow trying
+    // to kill a not-hung 16-bit task via external means.  Bug #408188
+    if(HIWORD(ptd->vpStack) != HIWORD(ptd->vpCBStack)) {
+
+#ifdef debug
+        // sanity check to make sure this only happens for the same task
+        WOW32ASSERTMSG((htaskKill == gLasthtaskKill),
+                       ("WOW: Unexpected mis-matched selector case\n"));
+        gLasthtaskKill = 0;
+#endif
+        return 0;
+    }
+
     // point to LockTDB
 
     GETVDMPTR(vpLockTDB, 2, pLockTDB);
@@ -2806,22 +3989,40 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
         // and then posting a message to the app we want to kill
 
         if ( ptd != NULL) {
-            *pLockTDB = ptd->htask16;
+            hTask16 = ptd->htask16;
+
         }
         else {
             // htaskKill == 0
             // Kill the Active Task
-            *pLockTDB = *pCurTDB;
+            hTask16 = *pCurTDB;
         }
 
-        pTDB = (PTDB)SEGPTR(*pLockTDB, 0);
+        pTDB = (PTDB)SEGPTR(hTask16, 0);
 
         WOW32ASSERTMSGF( pTDB && pTDB->TDB_sig == TDB_SIGNATURE,
                 ("W32HungAppNotifyThread: TDB sig doesn't match, TDB %x htaskKill %x pTDB %x.\n",
-                 *pLockTDB, htaskKill, pTDB));
+                 hTask16, htaskKill, pTDB));
 
         dwThreadId = pTDB->TDB_ThreadID;
 
+        //
+        // if the task to be killed is this task end immediately
+        //
+        if (dwThreadId == GetCurrentThreadId()) {
+            EnterCriticalSection(&gcsHungApp);
+            *pNtVDMState |= VDM_WOWHUNGAPP;
+            LeaveCriticalSection(&gcsHungApp);
+            call_ica_hw_interrupt( KEYBOARD_ICA, KEYBOARD_LINE, 1 );
+
+            //
+            // return to 16 bit to process int 9.
+            //
+
+            return 0;
+            }
+
+        *pLockTDB = hTask16;
         SendMessageTimeout(ghwndShell, WM_WOWEXECHEARTBEAT, 0, 0, SMTO_BLOCK,1*1000,&dwResult);
 
         //
@@ -2839,15 +4040,21 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
             ExitThread(EXIT_SUCCESS);
         }
 
+#ifdef debug
+        gLasthtaskKill = htaskKill;
+#endif
+
         // Failed
         //
         // Probably means the current App is looping in 16 bit land not
         // responding to input.
 
         // Warn the User if its a different App than the one he wants to kill
+        // Don't do this if WOWEXEC is the hung app, since users don't know
+        // what that is.
 
 
-        if (*pLockTDB != *pCurTDB && *pCurTDB) {
+        if (*pLockTDB != *pCurTDB && gptdShell->htask16 != *pCurTDB && *pCurTDB) {
 
             pTDB = (PTDB)SEGPTR(*pCurTDB, 0);
 
@@ -2891,7 +4098,7 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                     );
 
             if (nMsgBoxChoice == IDCANCEL) {
-#line 2910
+#line 4116
                  ExitThread(ERROR_CANCELLED);
             }
         }
@@ -2959,14 +4166,14 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                  EnterCriticalSection(&gcsHungApp);
                  *pNtVDMState &= ~VDM_WOWHUNGAPP;
                  LeaveCriticalSection(&gcsHungApp);
-#line 2977
+#line 4183
                  ExitThread(ERROR_CANCELLED);
             }
 
             LOGDEBUG(LOG_ALWAYS, ("W32HungAppNotifyThread: Destroying WOW Process\n"));
 
             W32ExitWowProcess(0);
-#line 2984
+#line 4190
         }
 
         LOGDEBUG(LOG_ALWAYS,("W32HungAppNotifyThread: Success with Keyboard Interrupt\n"));
@@ -2976,7 +4183,7 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
         LOGDEBUG(LOG_ALWAYS,("W32HungAppNotifyThread: Task already Terminated \n"));
         ExitThread(ERROR_CANCELLED);
 
-#line 2992
+#line 4198
     }
 
     ExitThread(EXIT_SUCCESS);
@@ -2997,7 +4204,7 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
     The apps thread that we want to kill
 
  EXIT
-  DOES NOT RETURN - The task will exit and wind up in WK32KillTask which
+  DOES NOT RETURN - The task will exit and wind up in WK32WOWKillTask which
   will cause that thread to Exit.
 
 --*/
@@ -3012,7 +4219,7 @@ VOID APIENTRY W32EndTask(VOID)
     CallBack16(RET_FORCETASKEXIT, &Parm16, 0, &vp);
 
     //
-    //  We should Never Come Here, an app should get terminated via calling wk32killtask thunk
+    //  We should Never Come Here, an app should get terminated via calling wk32wowkilltask thunk
     //  not by doing an unsimulate call
     //
 
@@ -3118,249 +4325,6 @@ ULONG W32GetAppCompatFlags(HTASK16 hTask16)
 }
 
 
-//
-//  W32ReadWOWSetupNames    -
-// 
-//  Reads names of the setup apps from the registry and remembers them
-//  rgpszSetupPrograms is an array of up to 32 pointers to strings that
-//  are parts of known setup program's names or module names. 
-//  
-//  The registry key HKEY_LOCAL_MACHINE\\Software\\Microsoft\\Windows NT\\CurrentVersion\\WOW\\SetupPrograms
-//  contains value SetupProgramNames (Binary) in the format of double-0 
-//  terminated list of strings. This value is loaded and stored for the 
-//  length of time that wow is running. 
-//
-
-#define MAX_SETUP_PROGRAMS 32
-PSZ rgpszSetupPrograms[MAX_SETUP_PROGRAMS];
-
-VOID W32InitWOWSetupNames(VOID)
-{
-    CHAR* pszSetupProgramsKey = 
-        "Software\\Microsoft\\Windows NT\\CurrentVersion\\WOW\\SetupPrograms";
-    CHAR* pszSetupProgramsValue = "SetupProgramNames";
-    HKEY  hKey = 0;
-    LONG  lError;
-    DWORD dwRegValueType;
-    ULONG ulSize = 0;
-    PSZ   pszSetupPrograms = NULL;
-    
-    lError = RegOpenKeyEx(
-                HKEY_LOCAL_MACHINE,
-                pszSetupProgramsKey,
-                0,
-                KEY_QUERY_VALUE,
-                &hKey);
-    if (ERROR_SUCCESS != lError) {
-        LOGDEBUG(0, ("W32ReadWOWSetupNames: Unable to open key %s (%lx)", pszSetupProgramsKey, lError));
-        goto Cleanup;
-    }
-
-    lError = RegQueryValueEx(
-                hKey,
-                pszSetupProgramsValue,
-                NULL,
-                &dwRegValueType,
-                NULL,
-                &ulSize);
-    if (ERROR_SUCCESS != lError || 
-        (REG_BINARY != dwRegValueType && REG_MULTI_SZ != dwRegValueType)) {
-        LOGDEBUG(0, ("W32ReadWOWSetupNames: RegQueryValueEx failed %lx\n", lError));
-        goto Cleanup;
-    }
-
-    if (NULL == (pszSetupPrograms = malloc_w(ulSize))) {
-        LOGDEBUG(0, ("W32ReadWOWSetupNames: Failed to allocate memory for the list of names\n"));
-        goto Cleanup;
-    }
-
-    // if here, then memory was allocated and key exists
-    lError = RegQueryValueEx(
-                hKey,
-                pszSetupProgramsValue,
-                NULL,
-                &dwRegValueType,
-                pszSetupPrograms,
-                &ulSize);
-    if (ERROR_SUCCESS != lError) {
-        // free what we've got
-        free_w(pszSetupPrograms);
-        goto Cleanup;
-    }
-
-    //
-    // parse the setup programs list so that 
-    // every string (up to max-1) is pointed to by rgpszSetupPrograms
-    // 
-    {
-        register PSZ pch = pszSetupPrograms;
-        register INT nCount = 0;
-
-	    while (*pch && nCount < (MAX_SETUP_PROGRAMS-1)) {
-            // all strings are converted to lower-case
-
-	        rgpszSetupPrograms[nCount++] = _strlwr(pch);
-	        pch += strlen(pch) + 1;    // advance the string
-	    }
-
-        // the entry at the end is NULL always as global vars are 0-filled 
-        // by default
-
-    }
-        	
-Cleanup:
-
-    if (hKey) {
-        RegCloseKey(hKey);
-    }
-}
-
-
-//  W32IsSetupProgram - 
-//
-//  Attempts to determine if current task is a setup program
-//  by looking up name of the module or the filename against the
-//  list of the known setup names.
-//
-//
-
-BOOL W32IsSetupProgram(PSZ pszModName, PSZ pszFileName) 
-{
-    INT     i;
-    CHAR    szName[256];
-    PSZ     rgArg[] = { pszModName, pszFileName };
-    INT     iArg;
-
-    // loop through pszModName and pszFileName 
-     
-    // The rgArg is array of pointers to arguments which
-    // are searched for a matching setup name substring
-
-    for (iArg = 0; iArg < sizeof(rgArg)/sizeof(rgArg[0]); ++iArg) {
-
-	    _strlwr(strcpy(szName, rgArg[iArg]));
-	
-	    for (i = 0; NULL != rgpszSetupPrograms[i]; ++i) {
-	        if (NULL != strstr(szName, rgpszSetupPrograms[i])) {
-	            return TRUE;
-	        }
-	    }
-    }
-
-    return FALSE;
-}
-
-
-//*****************************************************************************
-// W32ReadWOWCompatFlags -
-//
-//    Returns the WOW-specific compatibility flags for the specified task.
-//    Called during thread initialization to set td.dwWOWCompatFlags.
-//    These are not to be confused with the 16-bit kernel's compatibility
-//    flags.
-//
-//    Flag values are defined in wow32.h.
-//
-//*****************************************************************************
-
-ULONG W32ReadWOWCompatFlags(HTASK16 htask16, DWORD *pdwWOWCompatFlagsEx)
-{
-    LONG lError;
-    HKEY hKey = 0;
-    char szModName[9];
-    char szHexAsciiFlags[22];
-    DWORD dwType = REG_SZ;
-    DWORD cbData = sizeof(szHexAsciiFlags);
-    ULONG ul = 0;
-    char *pch;
-
-    *pdwWOWCompatFlagsEx = 0;
-
-    lError = RegOpenKeyEx(
-        HKEY_LOCAL_MACHINE,
-        "Software\\Microsoft\\Windows NT\\CurrentVersion\\WOW\\Compatibility",
-        0,
-        KEY_QUERY_VALUE,
-        &hKey
-        );
-
-    if (ERROR_SUCCESS != lError) {
-        LOGDEBUG(0,("W32ReadWOWCompatFlags: RegOpenKeyEx failed, error %ld.\n", lError));
-        goto Cleanup;
-    }
-
-    //
-    // Fetch the EXE's module name into szModName, trimming trailing blanks.
-    //
-
-    RtlCopyMemory(
-        szModName,
-        ((PTDB)SEGPTR(CURRENTPTD()->htask16,0))->TDB_ModName,
-        8
-        );
-    szModName[8] = 0;
-
-    pch = &szModName[8];
-    while (*(--pch) == ' ') {
-        *pch = 0;
-    }
-
-    lError = RegQueryValueEx(
-        hKey,
-        szModName,
-        0,
-        &dwType,
-        szHexAsciiFlags,
-        &cbData
-        );
-
-    if (ERROR_SUCCESS != lError) {
-
-        //
-        // This module name doesn't have any compatibility flags.
-        //
-
-        goto Cleanup;
-    }
-
-    WOW32ASSERTMSGF(REG_SZ == dwType, ("W32ReadWOWCompatFlags(%s): RegQueryValueEx returned type %lx, must be REG_SZ.\n", szModName, dwType));
-    if (REG_SZ != dwType) {
-        goto Cleanup;
-    }
-
-    if (!(pch = strstr(szHexAsciiFlags, "0x"))) {
-        goto BadFormat;
-    }
-    pch += 2;  // skip "0x"
-
-    if (!NT_SUCCESS(RtlCharToInteger(pch, 16, &ul))) {
-        goto BadFormat;
-    }
-
-    if (pch = strstr(pch, " 0x")) {
-        pch += 3;  // skip " 0x"
-
-        if (!NT_SUCCESS(RtlCharToInteger(pch, 16, pdwWOWCompatFlagsEx))) {
-            goto BadFormat;
-        }
-    }
-
-    LOGDEBUG(0,("WOW: Compatibility flags for %s are %08x %08x\n", szModName, ul, *pdwWOWCompatFlagsEx));
-
-    goto Cleanup;
-
-BadFormat:
-    LOGDEBUG(0,("W32ReadWOWCompatFlags(%s): Unable to interpret '%s' as hex.\n", szModName, szHexAsciiFlags));
-
-Cleanup:
-    if (hKey) {
-        RegCloseKey(hKey);
-    }
-
-    return ul;
-}
-
-
 //*****************************************************************************
 // This is called from COMM.drv via WowCloseComPort in kernel16, whenever
 // a com port needs to be released.
@@ -3369,97 +4333,65 @@ Cleanup:
 //                                                                   - Nanduri
 //*****************************************************************************
 
-VOID FASTCALL WK32WowCloseComPort(PVDMFRAME pFrame)
+ULONG FASTCALL WK32WowCloseComPort(PVDMFRAME pFrame)
 {
     register PWOWCLOSECOMPORT16 parg16;
 
     GETARGPTR(pFrame, sizeof(WOWCLOSECOMPORT16), parg16);
     host_com_close((INT)parg16->wPortId);
     FREEARGPTR(parg16);
+    return 0;  // quiet compiler, not used.
 }
 
 
 //*****************************************************************************
-// Some apps keep a file open and delete it.   Then rename another file to
-// the old name.   On NT since the orignal object is still open the second
-// rename fails.
-// To get around this problem we rename the file before deleteing it
-// this allows the second rename to work
+// WK32WowDelFile
+// The call to demFileDelete will handle the case where there there is an
+// open handle to the file. In case it fails, we try hacking around the case
+// where a font file being held by GDI32.
 //*****************************************************************************
 
 DWORD FASTCALL WK32WowDelFile(PVDMFRAME pFrame)
 {
     PSZ psz1;
     PWOWDELFILE16 parg16;
-    CHAR wowtemp[MAX_PATH];
-    CHAR tmpfile[MAX_PATH];
-    PSZ pFileName;
-    DWORD retval = 0xffff;
+    DWORD retval;
 
     GETARGPTR(pFrame, sizeof(WOWFILEDEL16), parg16);
     GETVDMPTR(parg16->lpFile, 1, psz1);
 
-    // Rename the file to a temp name and then delete it
-
     LOGDEBUG(fileoclevel,("WK32WOWDelFile: %s \n",psz1));
 
-    tmpfile[0] = '\0';
+    retval = demFileDelete(psz1);
 
-    if( DeleteFileOem( psz1 ) ) {
-        //
-        // See if the file has really disappeared
-        //
-        if( GetFileAttributesOem( psz1 ) != 0xFFFFFFFF ) {
+    switch(retval) {
+        case 0:
+        case ERROR_FILE_NOT_FOUND:
+        case ERROR_PATH_NOT_FOUND:
+            break;
 
-            //
-            // The file didn't really go away, even though DeleteFileOem()
-            //   returned success.  This may be because a handle to the file
-            //   is still open.
-            //
-            if (GetFullPathNameOem(psz1,MAX_PATH,wowtemp,&pFileName)) {
-                if ( pFileName )
-                   *(pFileName) = 0;
-                if (GetTempFileNameOem(wowtemp,"WOW",0,tmpfile)) {
-                    if (MoveFileExOem(psz1,tmpfile, MOVEFILE_REPLACE_EXISTING)) {
-                        if(DeleteFileOem(tmpfile)) {
-                            retval = 0;
-                        } else {
-                            MoveFileOem(tmpfile,psz1);
-                        }
-                    }
-                }
+        default:
+            // Some Windows Install Programs copy a .FON font file to a temp
+            // directory use the font during installation and then try to delete
+            // the font - without calling RemoveFontResource();   GDI32 Keeps the
+            // Font file open and thus the delete fails.
+
+            // What we attempt here is to assume that the file is a FONT file
+            // and try to remove it before deleting it, since the above delete
+            // has already failed.
+
+            if ( RemoveFontResourceOem(psz1) ) {
+                LOGDEBUG(fileoclevel,("WK32WOWDelFile: RemoveFontResource on %s \n",psz1));
+                SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
             }
 
-        } else {
-            retval = 0;
-        }
+            if(DeleteFileOem(psz1)) {
+                retval = 0;
+            }
     }
 
-    if (retval != 0) {
-
-        if( tmpfile[0] ) {
-            DeleteFileOem(tmpfile);
-        }
-
-        // Some Windows Install Programs copy a .FON font file to a temp
-        // directory use the font during installation and then try to delete
-        // the font - without calling RemoveFontResource();   GDI32 Keeps the
-        // Font file open and thus the delete fails.
-
-        // What we attempt here is to assume that the file is a FONT file
-        // and try to remove it before deleting it, since the above delete
-        // has already failed.
-
-        if ( RemoveFontResourceOem(psz1) ) {
-            LOGDEBUG(fileoclevel,("WK32WOWDelFile: RemoveFontResource on %s \n",psz1));
-            SendMessage(HWND_BROADCAST, WM_FONTCHANGE, 0, 0);
-        }
-
-        if(!DeleteFileOem(psz1)) {
-            retval = (GetLastError() | 0xffff0000 );
-        }else {
-            retval = 0;
-        }
+    if ( retval ) {
+        retval |= 0xffff0000;
     }
 
     FREEVDMPTR(psz1);
@@ -3474,7 +4406,7 @@ DWORD FASTCALL WK32WowDelFile(PVDMFRAME pFrame)
 //
 //*****************************************************************************
 
-VOID FASTCALL WK32WOWNotifyWOW32(PVDMFRAME pFrame)
+ULONG FASTCALL WK32WOWNotifyWOW32(PVDMFRAME pFrame)
 {
     register PWOWNOTIFYWOW3216 parg16;
 
@@ -3494,6 +4426,8 @@ VOID FASTCALL WK32WOWNotifyWOW32(PVDMFRAME pFrame)
     IsDebuggerAttached();
 
     FREEARGPTR(parg16);
+
+    return 0;
 }
 
 //*****************************************************************************
@@ -3502,12 +4436,24 @@ VOID FASTCALL WK32WOWNotifyWOW32(PVDMFRAME pFrame)
 // file i/o routines.
 //*****************************************************************************
 
+extern VOID __cdecl demWOWLFNInit(PWOWLFNINIT pLFNInit);
+extern VOID __cdecl DosWowUpdateTDBDir(UCHAR Drive, LPSTR pszDir);
+extern BOOL __cdecl DosWowGetTDBDir(UCHAR Drive, LPSTR pCurrentDirectory);
+extern BOOL __cdecl DosWowDoDirectHDPopup(VOID);
+#if 0
+extern BOOL DosWowGetCompatFlags(LPDWORD, LPDWORD);
+#endif
+//
+//  Function returns TRUE if we should do the popup
+//  and FALSE if we should not
+//
 
 ULONG FASTCALL WK32DosWowInit(PVDMFRAME pFrame)
 {
     register PWOWDOSWOWINIT16 parg16;
     PDOSWOWDATA pDosWowData;
     PULONG  pTemp;
+    WOWLFNINIT LFNInit;
 
     GETARGPTR(pFrame, sizeof(WOWDOSWOWINIT16), parg16);
 
@@ -3533,6 +4479,37 @@ ULONG FASTCALL WK32DosWowInit(PVDMFRAME pFrame)
                                         FETCHDWORD(pDosWowData->lpSCS_ToSync));
     DosWowData.lpSftAddr = (DWORD) GetRModeVDMPointer(
                                         FETCHDWORD(pDosWowData->lpSftAddr));
+    DosWowData.lpExterr = (DWORD) GetRModeVDMPointer(
+                                        FETCHDWORD(pDosWowData->lpExterr));
+    DosWowData.lpExterrActionClass = (DWORD) GetRModeVDMPointer(
+                                        FETCHDWORD(pDosWowData->lpExterrActionClass));
+
+/*    // right here we shall make a dynamic check to see if wow is running on
+    // Winterm Server and if so -- whether we need to thunk GetWindowsDirectory
+    {
+        PDWORD UNALIGNED pdwWinTermFlags;
+        GETVDMPTR(FETCHDWORD(parg16->lpdwWinTermFlags), sizeof(DWORD), pdwWinTermFlags);
+
+        if (IsTerminalServer()) {
+           *pdwWinTermFlags |= WINTERM_SERVER;
+        }
+
+
+    }
+*/
+
+
+
+    // excellent chance to have us let ntvdm know we're lfn aware and alive
+
+    LFNInit.pDosWowUpdateTDBDir    = DosWowUpdateTDBDir;
+    LFNInit.pDosWowGetTDBDir       = DosWowGetTDBDir;
+    LFNInit.pDosWowDoDirectHDPopup = DosWowDoDirectHDPopup;
+#if 0
+    LFNInit.pDosWowGetCompatFlags  = DosWowGetCompatFlags;
+#endif
+
+    demWOWLFNInit(&LFNInit);
 
     FREEARGPTR(parg16);
     return (0);
@@ -3593,7 +4570,7 @@ VOID WK32InitWowIsKnownDLL(HANDLE hKeyWow)
         // strings case-sensitive in WK32WowIsKnownDLL.
         //
 
-        _strlwr(pszKnownDLL);
+        WOW32_strlwr(pszKnownDLL);
 
         //
         // Parse the KnownDLL string into apszKnownDLL array.
@@ -3611,7 +4588,7 @@ VOID WK32InitWowIsKnownDLL(HANDLE hKeyWow)
                 apszKnownDLL[MAX_KNOWN_DLLS-1] = NULL;
                 break;
             }
-            pch = strchr(pch, ' ');
+            pch = WOW32_strchr(pch, ' ');
             if (!pch) {
                 break;
             }
@@ -3749,9 +4726,9 @@ ULONG FASTCALL WK32WowIsKnownDLL(PVDMFRAME pFrame)
         // "c:\winnt\system32\control.exe".  Same for progman.exe.
         //
 
-        if (!_stricmp(pszPath, pszControlExeWinDirPath) ||
+        if (!WOW32_stricmp(pszPath, pszControlExeWinDirPath) ||
             (fProgman = TRUE,
-             !_stricmp(pszPath, pszProgmanExeWinDirPath))) {
+             !WOW32_stricmp(pszPath, pszProgmanExeWinDirPath))) {
 
             VPVOID vp;
 
@@ -3800,7 +4777,7 @@ ULONG FASTCALL WK32WowIsKnownDLL(PVDMFRAME pFrame)
         // path.
         //
 
-        if (strchr(pszPath, '\\') || strchr(pszPath, ':') || strlen(pszPath) > 12) {
+        if (WOW32_strchr(pszPath, '\\') || WOW32_strchr(pszPath, ':') || strlen(pszPath) > 12) {
             // LOGDEBUG(0,("WowIsKnownDLL: %s has a path, not checking.\n", pszPath));
             goto Cleanup;
         }
@@ -3809,9 +4786,9 @@ ULONG FASTCALL WK32WowIsKnownDLL(PVDMFRAME pFrame)
         // Make a lowercase copy of the path.
         //
 
-        strncpy(szLowercasePath, pszPath, sizeof(szLowercasePath));
+        WOW32_strncpy(szLowercasePath, pszPath, sizeof(szLowercasePath));
         szLowercasePath[sizeof(szLowercasePath)-1] = 0;
-        _strlwr(szLowercasePath);
+        WOW32_strlwr(szLowercasePath);
 
 
         //
@@ -3827,7 +4804,7 @@ ULONG FASTCALL WK32WowIsKnownDLL(PVDMFRAME pFrame)
             // and szLowercasePath.
             //
 
-            if (!strcmp(szLowercasePath, *ppsz)) {
+            if (!WOW32_strcmp(szLowercasePath, *ppsz)) {
 
                 //
                 // We found the DLL in the list, now build up
@@ -3844,8 +4821,57 @@ ULONG FASTCALL WK32WowIsKnownDLL(PVDMFRAME pFrame)
                 *pvpszKnownDLLPath = malloc16(cbKnownDLLPath);
 
                 if (*pvpszKnownDLLPath) {
+#ifndef _X86_
+                    HANDLE hFile;
+#endif
 
                     GETPSZPTRNOLOG(*pvpszKnownDLLPath, pszKnownDLLPath);
+
+#ifndef _X86_
+                    // On RISC platforms, wx86 support tells 32-bit apps that
+                    // the system dir is SYS32X86 instead of SYSTEM32.  This
+                    // allows us to keep the x86 binaries separate from the
+                    // native RISC binaries in the SYSTEM32 dir.  It also
+                    // prevents x86 setup programs from clobbering the native
+                    // RISC binaries & replacing them with an x86 version in the
+                    // SYSTEM32 dir.  Unfortunately several "32-bit" programs
+                    // have 16-bit components (Most notably Outlook forms
+                    // support).  These 16-bit components will also be copied to
+                    // the SYS32X86 dir.  This is not a problem unless the
+                    // binary shows up in our KnownDLLs list. This code attempts
+                    // to locate KnownDLLs in the SYS32X86 dir on RISC machines
+                    // before looking in the SYSTEM32 dir. See bug #321335.
+                    strcpy(pszKnownDLLPath, pszWindowsDirectory);
+                    strcat(pszKnownDLLPath, "\\SYS32X86\\");
+                    strcat(pszKnownDLLPath, szLowercasePath);
+
+                    // see if this knowndll exists in the sys32x86 dir
+                    hFile = CreateFile(pszKnownDLLPath,
+                                       GENERIC_READ,
+                                       FILE_SHARE_READ,
+                                       NULL,
+                                       OPEN_EXISTING,
+                                       FILE_ATTRIBUTE_NORMAL,
+                                       NULL);
+
+                    if(hFile != INVALID_HANDLE_VALUE) {
+
+                         CloseHandle(hFile);
+
+                         //Yep, that's what we'll go with
+                         LOGDEBUG(0,("WowIsKnownDLL: %s known -=> %s\n",
+                                    pszPath,
+                                    pszKnownDLLPath));
+                         FLUSHVDMPTR(*pvpszKnownDLLPath,
+                                     cbKnownDLLPath,
+                                     pszKnownDLLPath);
+                         FREEPSZPTR(pszKnownDLLPath);
+
+                         ul = 1;  // return success, meaning is known dll
+                         goto Cleanup;
+                    }
+                    // otherwise we just fall through & use system32 dir
+#endif  // ifndef _X86_
 
                     strcpy(pszKnownDLLPath, pszSystemDirectory);
                     strcat(pszKnownDLLPath, "\\");
@@ -3962,15 +4988,31 @@ CleanseSharedList(
 
         hProcess = OpenProcess( SYNCHRONIZE, FALSE, lpsp->dwProcessId );
         if ( hProcess == NULL ) {
-            if ( lpspPrev ) {
-                lpspPrev->dwNextProcess = lpsp->dwNextProcess;
-            } else {
-                lpstm->dwFirstProcess = lpsp->dwNextProcess;
-            }
-            lpsp->dwType = SMO_AVAILABLE;
+           // cleanup tasks for this process first
+           LPSHAREDTASK lpst;
+           DWORD dwTaskOffset;
+
+           dwTaskOffset = lpsp->dwFirstTask; // this is an offset of the first task
+           while (dwTaskOffset) {
+
+              lpst = (LPSHAREDTASK)((CHAR*)lpstm + dwTaskOffset);
+              // log this removal
+              LOGDEBUG(0, ("CleanseSharedList: Forceful removal of a dead task %s\n", lpst->szFilePath));
+
+              dwTaskOffset = lpst->dwNextTask;
+              lpst->dwType = SMO_AVAILABLE;
+           }
+
+           if ( lpspPrev ) {
+              lpspPrev->dwNextProcess = lpsp->dwNextProcess;
+           } else {
+               lpstm->dwFirstProcess = lpsp->dwNextProcess;
+           }
+           lpsp->dwType = SMO_AVAILABLE;
+
         } else {
-            CloseHandle( hProcess );
-            lpspPrev = lpsp;        // only update lpspPrev if lpsp is valid
+           CloseHandle( hProcess );
+           lpspPrev = lpsp;        // only update lpspPrev if lpsp is valid
         }
         dwOffset = lpsp->dwNextProcess;
     }
@@ -4057,6 +5099,11 @@ RemoveProcessSharedList(
         // Is this the guy to remove?
 
         if ( lpsp->dwProcessId == dwCurrentId ) {
+           // so we're removing this process from the shared list
+
+
+
+
             if ( lpspPrev ) {
                 lpspPrev->dwNextProcess = lpsp->dwNextProcess;
             } else {
@@ -4246,14 +5293,14 @@ CHAR   chDrive, achEnvDrive[] = "=?:";
     if (lpszzEnv) {
         while(*lpszzEnv) {
             if(*lpszzEnv == '=' &&
-                    (chDrive = toupper(*(lpszzEnv+1))) >= 'A' &&
+                    (chDrive = (CHAR)toupper(*(lpszzEnv+1))) >= 'A' &&
                     chDrive <= 'Z' &&
                     (*(PCHAR)((ULONG)lpszzEnv+2) == ':')) {
                 lpszVal = (PCHAR)((ULONG)lpszzEnv + 4);
                 achEnvDrive[1] = chDrive;
                 SetEnvironmentVariable (achEnvDrive,lpszVal);
             }
-            lpszzEnv = strchr(lpszzEnv,'\0');
+            lpszzEnv = WOW32_strchr(lpszzEnv,'\0');
             lpszzEnv++;
         }
         *(PUCHAR)DosWowData.lpSCS_ToSync = (UCHAR)0xff;
@@ -4299,12 +5346,12 @@ ULONG FASTCALL WK32CheckUserGdi(PVDMFRAME pFrame)
 
     strcpy(szPath + cb, "\\GDI.EXE");
 
-    if (_stricmp(szPath, psz) == 0)
+    if (WOW32_stricmp(szPath, psz) == 0)
         goto Success;
 
     strcpy(szPath + cb, "\\USER.EXE");
 
-    if (_stricmp(szPath, psz) == 0)
+    if (WOW32_stricmp(szPath, psz) == 0)
         goto Success;
 
     ul = 0;
@@ -4339,16 +5386,17 @@ ULONG FASTCALL WK32ExitKernel(PVDMFRAME pFrame)
 
     GETARGPTR(pFrame, sizeof(*parg16), parg16);
 
-    WOW32ASSERTMSG(
+    WOW32ASSERTMSGF(
         ! parg16->wExitCode,
-        "\n"
-        "WOW ERROR:  ExitKernel called on 16-bit side with nonzero argument.\n"
-        "==========  Please contact DaveHart or another WOW developer.\n"
-        "\n\n"
-        );
+        ("\n"
+         "WOW ERROR:  ExitKernel(0x%x) called on 16-bit side.\n"
+         "==========  Please contact DaveHart or another WOW developer.\n"
+         "\n\n",
+         parg16->wExitCode
+        ));
 
     W32ExitWowProcess(parg16->wExitCode);
-#line 4364
+#line 5411
 
     return 0;   // Never executed, here to avoid compiler warning.
 }
@@ -4374,7 +5422,7 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
         FALSE,
         ("\n"
          "WOW ERROR:  FatalExit(0x%x) called by 16-bit WOW kernel.\n"
-         "==========  Contact DaveHart or the doswow alias.\n"
+         "==========  Contact the DOSWOW alias.\n"
          "\n\n",
          FETCHWORD(parg16->f1)
         ));
@@ -4382,7 +5430,7 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
     // Sometimes we get this with no harm done (app bug)
  
     W32ExitWowProcess(parg16->f1);
-#line 4398
+#line 5445
 
     return 0;   // Never executed, here to avoid compiler warning.
 }
@@ -4396,11 +5444,11 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 //
 
 #ifdef DEBUG
-#line 4411
+#line 5460
 #error Excluded unsupported DEBUG WOW profile
-#line 4478
+#line 5581
 #endif
-#line 4479
+#line 5582
 
 
 //
@@ -4453,7 +5501,10 @@ WowGetProductNameVersion(
     PSZ pszProductName,
     DWORD cbProductName,
     PSZ pszProductVersion,
-    DWORD cbProductVersion
+    DWORD cbProductVersion,
+    PSZ pszParamName,
+    PSZ pszParam,
+    DWORD cbParam
     )
 {
     DWORD dwZeroMePlease;
@@ -4464,6 +5515,8 @@ WowGetProductNameVersion(
     LPSTR pVersion;
     DWORD cbVersion;
     BOOL fRet;
+    DWORD cbParamValue;
+    LPSTR pParamValue;
 
     fRet = (
         (cbVerInfo = GetFileVersionInfoSize(pszExePath, &dwZeroMePlease)) &&
@@ -4474,10 +5527,18 @@ WowGetProductNameVersion(
         MyVerQueryValue(lpVerInfo, "ProductVersion", &pVersion, &cbVersion) &&
         cbVersion <= cbProductVersion
         );
+    if (fRet && NULL != pszParamName && NULL != pszParam) {
+       fRet = MyVerQueryValue(lpVerInfo, pszParamName, &pParamValue, &cbParamValue) &&
+              cbParamValue <= cbParam;
+    }
+
 
     if (fRet) {
         strcpy(pszProductName, pName);
         strcpy(pszProductVersion, pVersion);
+        if (NULL != pszParamName && NULL != pszParam) {
+           strcpy(pszParam, pParamValue);
+        }
     }
 
     if (lpVerInfo) {
@@ -4487,6 +5548,8 @@ WowGetProductNameVersion(
     return fRet;
 }
 
+
+#if 0    // currently unused
 //
 // This routine is simpler to use if you are doing an exact match
 // against a particular name/version pair.
@@ -4512,9 +5575,9 @@ WowDoNameVersionMatch(
         (lpVerInfo = malloc_w(cbVerInfo)) &&
         GetFileVersionInfo(pszExePath, 0, cbVerInfo, lpVerInfo) &&
         MyVerQueryValue(lpVerInfo, "ProductName", &pName, &dwJunk) &&
-        ! _stricmp(pszProductName, pName) &&
+        ! WOW32_stricmp(pszProductName, pName) &&
         MyVerQueryValue(lpVerInfo, "ProductVersion", &pVersion, &dwJunk) &&
-        ! _stricmp(pszProductVersion, pVersion)
+        ! WOW32_stricmp(pszProductVersion, pVersion)
         );
 
     if (lpVerInfo) {
@@ -4523,271 +5586,9 @@ WowDoNameVersionMatch(
 
     return fRet;
 }
+#endif
 
 
-//
-// WowShouldWeSayWin95 is called by 16-bit GetVersion when the caller's
-// has WOWCFEX_GETVERSIONHACK.  GetVersion passes us the fully qualified path
-// to the EXE.
-//
-// This routine returns zero if the true (Win 3.1) version should be
-// returned, or it returns in the low word the value to be returned
-// in the low word from GetVersion.
-//
-// We look at the version resources of that EXE to see
-// if it's InstallSHIELD build 3.00.087.0 or earlier.  If it is, we
-// lie and tell them the 16-bit Windows version is 3.95.  We do this
-// because prior to build 3.00.088.0 of InstallSHIELD, the logic for
-// detecting a newshell (explorer) system was to check if the 16-bit
-// Windows version was 3.95, as it is for Win95.  Thanks to Samir Metha
-// (samir@installshield.com), newer versions of InstallSHIELD work on
-// NT 4.0 without this hack.                         -- DaveHart
-//
-// Extended to allow Netscape PowerPack 1.0's SmartMarks setup to
-// get version 3.95 as well.  Lovely.  -- DaveHart 15-Nov-95
-//
-// Generalized to do different things based on module name, added
-// support for MS Ancient Lands, MS Dangerous Creatures, MS Complete
-// NBA Basketball 1994, and MS Complete Baseball 1995.  Moved some
-// version resource code to worker routines above.  -- DaveHart 8-Feb-96
-//
-
-ULONG FASTCALL WK32WowShouldWeSayWin95(PVDMFRAME pFrame)
-{
-    PWOWSHOULDWESAYWIN9516 parg16;
-    PSZ pszFilename;
-    ULONG ulRet = 0;
-    CHAR szModName[9];
-    PSZ pch;
-    static WORD wLastCallerDS = 0;    // One entry cache.
-    static ULONG ulLastRet = 0;
-
-
-    GETARGPTR(pFrame, sizeof(*parg16), parg16);
-    GETPSZPTR(parg16->pszFilename, pszFilename);
-
-    //
-    // Our decision is based on calling module, so if this call
-    // is from the same module (as indicated by DS) as the last,
-    // we can return the same value as last time.
-    //
-
-    if (wLastCallerDS == parg16->wCallerDS) {
-        LOGDEBUG(LOG_WARNING,
-                 ("WowShouldWeSayWin95 returning cached value 0x%x for  DS %x",
-                  ulLastRet, parg16->wCallerDS));
-        ulRet = ulLastRet;
-        goto Cleanup;
-    }
-
-    RtlCopyMemory(szModName, ((PTDB)SEGPTR(pFrame->wTDB,0))->TDB_ModName, 8);
-    szModName[8] = 0;
-    pch = &szModName[8];
-    while (*(--pch) == ' ') {
-        *pch = 0;
-    }
-
-    LOGDEBUG(LOG_WARNING,
-             ("WowShouldWeSayWin95 DS %x modname '%s' filename '%s'\n",
-              parg16->wCallerDS, szModName, pszFilename));
-
-    if (!strcmp(szModName, "ISSET_SE")) {         // InstallShield setup kit
-
-        CHAR szName[16];
-        CHAR szVersion[16];
-        CHAR szVerSubstring[4];
-        DWORD dwSubVer;
-
-        if (! WowGetProductNameVersion(pszFilename, szName, sizeof szName,
-                                       szVersion, sizeof szVersion) ||
-            _stricmp(szName, "InstallSHIELD")) {
-
-            //
-            // Couldn't find version info
-            //
-
-            goto BeHonest;
-        }
-
-        //
-        // InstallShield _Setup SDK_ setup.exe shipped
-        // with VC++ 4.0 is stamped 2.20.903.0 but also
-        // needs to be lied to about it being Win95.
-        // According to samir@installshield.com versions
-        // 2.20.903.0 through 2.20.905.0 need this.
-        // We'll settle for 2.20.903* - 2.20.905*
-        // These are based on the 3.0 codebase but
-        // bear the 2.20.x version stamps.
-        //
-
-        if (RtlEqualMemory(szVersion, "2.20.90", 7) &&
-            ('3' == szVersion[7] ||
-             '4' == szVersion[7] ||
-             '5' == szVersion[7]) ) {
-
-               goto SayWin95;
-        }
-
-        //
-        // We want to lie in GetVersion if the version stamp on
-        // the InstallShield setup.exe is 3.00.xxx.0, where
-        // xxx is 000 through 087.  Later versions know how
-        // to detect NT.
-        //
-
-        if (! RtlEqualMemory(szVersion, "3.00.", 5)) {
-
-            goto BeHonest;
-        }
-
-        RtlCopyMemory(szVerSubstring, &szVersion[5], 3);
-        szVerSubstring[3] = 0;
-        RtlCharToInteger(szVerSubstring, 10, &dwSubVer);
-
-        if (dwSubVer >= 88) {
-            goto BeHonest;
-        } else {
-            goto SayWin95;
-        }
-
-    } else if (!strcmp(szModName, "NCSETUP")) {         // NetScape SmartMarks setup
-
-        //
-        // Check if it's Netscape PowerPack 1.0 setup by comparing
-        // the date and time with the faulty 1.0 version timestamps.
-        // Unfortunately there are no version stamps on this program.
-        // Fortunately the beta PowerPack 2.0/SmartMarks 2.0 has fixed
-        // the bug and doesn't need this hack.
-        //
-
-        HANDLE hfile;
-        FILETIME ftThisFile;
-
-        hfile = CreateFile(
-                    pszFilename,
-                    GENERIC_READ,
-                    FILE_SHARE_READ | FILE_SHARE_WRITE,
-                    NULL,
-                    OPEN_EXISTING,
-                    FILE_ATTRIBUTE_NORMAL,
-                    0
-                    );
-
-        if (hfile) {
-
-            GetFileTime(hfile, NULL, NULL, &ftThisFile);
-            CloseHandle(hfile);
-
-            //
-            // The SmartMarks setup.exe included on the
-            // PowerPack 1.0 CD and downloadable from
-            // Netscape as SM10R2.EXE
-            // has the timestamp hard-coded below.  The
-            // developers (actually at firstfloor.com)
-            // assure me that this is the only faulty
-            // version out there.
-            //
-            // The values below equate to 1-Sep-95 2:00:20pm
-            //
-
-            if (ftThisFile.dwHighDateTime == 0x1ba78ad &&
-                ftThisFile.dwLowDateTime == 0xf28b4a00) {
-
-                goto SayWin95;
-
-            }
-
-        }
-
-        goto BeHonest;
-
-    } else if (!strcmp(szModName, "EXPLORE")) {         // MS Ancient Lands and
-                                                        // Dangerous Creatures
-        if (WowDoNameVersionMatch(
-                pszFilename,
-                "Microsoft Exploration Series",
-                "1.0")) {
-
-            goto SayWin95;
-        } else {
-            goto BeHonest;
-        }
-
-    } else if (!strcmp(szModName, "BBALL")) {         // MS Complete NBA Basketball 1994
-                                                      // MS Complete Baseball 1995
-        if (WowDoNameVersionMatch(
-                pszFilename,
-                "Microsoft Complete NBA Basketball",
-                "1994") ||
-            WowDoNameVersionMatch(
-                pszFilename,
-                "Microsoft Complete Baseball",
-                "1995")) {
-
-            goto SayWin95;
-        } else {
-            goto BeHonest;
-        }
-
-    } else {
-
-        DWORD flOptionsSave;
-
-        //
-        // Since this hack has potential to break apps that depend on Win95 16-bit
-        // functionality we don't provide, specific version checks are included for
-        // the module names above.  If you add the WOWCFEX_GETVERSIONHACK bit to
-        // the compatibility section for a new module name, you should also add
-        // a version check or other mechanism to be sure that only the intended
-        // app gets the hacked version returned.
-        //
-
-        flOptionsSave = flOptions;
-        flOptions |= OPT_DEBUG;
-        LOGDEBUG(LOG_ALWAYS, ("Should add version-resource checking to WK32WowShouldWeSayWin95 for %s.\n", szModName));
-        flOptions = flOptionsSave;
-        goto SayWin95;
-    }
-
-SayWin95:
-    ulRet = 0x5f03;  // 3.95
-
-BeHonest:
-    wLastCallerDS = parg16->wCallerDS;
-    ulLastRet = ulRet;
-
-    LOGDEBUG(LOG_WARNING, ("WowShouldWeSayWin95 returning %x.\n", ulRet));
-
-Cleanup:
-    FREEPSZPTR(pszFilename);
-    FREEARGPTR(parg16);
-
-    return ulRet;
-}
-
-
-//
-// GetVersionEx is exported from the 16-bit kernel of Win95 for
-// convenience of 16-bit setup programs.  It is simply a Win16
-// wrapper for the Win32 GetVersionEx.
-//
-
-ULONG FASTCALL WK32GetVersionEx(PVDMFRAME pFrame)
-{
-    PGETVERSIONEX16 parg16;
-    POSVERSIONINFO posvi;
-    ULONG ulRet;
-
-    GETARGPTR(pFrame, sizeof(*parg16), parg16);
-    GETMISCPTR(parg16->lpVersionInfo, posvi);
-
-    ulRet = GetVersionEx(posvi);
-
-    FREEMISCPTR(posvi);
-    FREEARGPTR(parg16);
-
-    return ulRet;
-}
 
 
 //
@@ -4813,8 +5614,11 @@ ULONG FASTCALL WK32WowGetModuleHandle(PVDMFRAME pFrame)
     GETPSZPTR(parg16->lpszModuleName, pszModuleName);
 
     ptd = CURRENTPTD();
+
+    EnterCriticalSection(&ptd->csTD);
+
     pWOA = ptd->pWOAList;
-    while (pWOA && strcmp(pszModuleName, pWOA->szModuleName)) {
+    while (pWOA && WOW32_strcmp(pszModuleName, pWOA->szModuleName)) {
         pWOA = pWOA->pNext;
     }
 
@@ -4826,46 +5630,11 @@ ULONG FASTCALL WK32WowGetModuleHandle(PVDMFRAME pFrame)
         ul = 0;
     }
 
-    return ul;
-}
-
-
-//
-// GetShortPathName is exported from the 16-bit kernel on NT to
-// support booting WOW with a long-named windows directory.
-// It is simply a Win16 wrapper for the Win32 GetShortPathName.
-// It may well be found useful by 16-bit setup programs, although
-// so far no effort has been made to document it, or for that
-// matter GetVersionEx, which at least exists in the same form
-// on Win95.
-//
-// -- DaveHart 15-Feb-96
-//
-
-ULONG FASTCALL WK32GetShortPathName(PVDMFRAME pFrame)
-{
-    PGETSHORTPATHNAME16 parg16;
-    PSZ pszLongPath, pszShortPath;
-    ULONG ul;
-
-    GETARGPTR(pFrame, sizeof(*parg16), parg16);
-    GETPSZPTR(parg16->pszLongPath, pszLongPath);
-    if (parg16->pszShortPath == parg16->pszLongPath) {
-        pszShortPath = pszLongPath;
-    } else {
-        GETVDMPTR(parg16->pszShortPath, parg16->cchShortPath, pszShortPath);
-    }
-
-    ul = GetShortPathName(pszLongPath, pszShortPath, parg16->cchShortPath);
-
-    FLUSHVDMPTR(parg16->pszShortPath, ul+1, pszShortPath);
-
-    FREEVDMPTR(pszShortPath);  // Safe even if no GETVDMPTR
-    FREEPSZPTR(pszLongPath);
-    FREEARGPTR(parg16);
+    LeaveCriticalSection(&ptd->csTD);
 
     return ul;
 }
+
 
 //
 // This function is called by kernel31's CreateTask after it's
@@ -4892,6 +5661,756 @@ ULONG FASTCALL WK32WowReserveHtask(PVDMFRAME pFrame)
     FREEARGPTR(parg16);
 
     return ul;
+}
+
+/*
+ * This function is called by kernel31 to dispatch a wow lfn api call
+ * the responsible party here is in dem code and all we have to do is to
+ * - retrieve it's frame pointer
+ *
+ *
+ */
+
+ULONG FASTCALL WK32WOWLFNEntry(PVDMFRAME pFrame)
+{
+   PWOWLFNFRAMEPTR16 parg16;
+   LPVOID lpUserFrame;
+   ULONG ul;
+
+   GETARGPTR(pFrame, sizeof(*parg16), parg16);
+
+   // now retrieve a flat pointer
+
+   GETMISCPTR(parg16->lpUserFrame, lpUserFrame);
+
+   ul = demWOWLFNEntry(lpUserFrame);
+
+   FREEMISCPTR(lpUserFrame);
+   FREEARGPTR(parg16);
+
+   return(ul);
+}
+
+
+//
+// This function is called by kernel31 to start or stop the
+// shared WOW shutdown timer.
+//
+
+ULONG FASTCALL WK32WowShutdownTimer(PVDMFRAME pFrame)
+{
+    PWOWSHUTDOWNTIMER16 parg16;
+
+    GETARGPTR(pFrame, sizeof(*parg16), parg16);
+
+    if (parg16->fEnable) {
+
+        //
+        // When this thunk is called with fEnable == 1, to turn on the shutdown
+        // timer, it is initially called on the task that is shutting down.  Since
+        // we want to be on WowExec's thread so SetTimer will work right, in this
+        // case we post a message to WowExec asking it to call this API again, but
+        // on the right thread.
+        //
+
+        if (ghShellTDB != pFrame->wTDB) {
+            PostMessage(ghwndShell, WM_WOWEXECSTARTTIMER, 0, 0);
+        } else {
+#ifdef WX86
+            TermWx86System();
+#endif
+
+            SetTimer(ghwndShell, 1, dwSharedWowTimeout, NULL);
+        }
+
+    } else {
+
+        //
+        // A task was started before the timer expired, kill it.
+        //
+
+        WOW32ASSERTMSG(ghShellTDB == pFrame->wTDB, "WowShutdownTimer(0) called on non-WowExec thread\n");
+
+        KillTimer(ghwndShell, 1);
+    }
+
+    FREEARGPTR(parg16);
+
+    return 0;
+}
+
+
+//
+// This function is called by kernel31 to shrink the process's
+// working set to a minimum.
+//
+
+ULONG FASTCALL WK32WowTrimWorkingSet(PVDMFRAME pFrame)
+{
+    SetProcessWorkingSetSize(ghProcess, 0xffffffff, 0xffffffff);
+
+    return 0;
+}
+
+//
+// IsQuickBooksVersion2 used by WK32SetAppCompatFlags below.
+//
+
+BOOL FASTCALL IsQuickBooksVersion2(WORD pModule)
+{
+    BOOL fRet;
+    PSZ pszModuleFileName;
+    HANDLE hEXE;
+    HANDLE hSec = 0;
+    PVOID pEXE = NULL;
+    PIMAGE_DOS_HEADER pMZ;
+    PIMAGE_OS2_HEADER pNE;
+    PBYTE pNResTab;
+    DWORD cbVerInfo;
+    DWORD dwJunk;
+
+    fRet = FALSE;
+
+    //
+    // see wow16\inc\newexe.inc, NEW_EXE1 struct, ne_pfileinfo
+    // is at offset 10, a near pointer within the segment referenced
+    // by hmod.  This points to kernel.inc's OPENSTRUC which has
+    // the filename buffer at offset 8.
+    //
+
+    pszModuleFileName = SEGPTR(pModule, (*(WORD *)SEGPTR(pModule, 10)) + 8);
+
+    hEXE = CreateFile(
+        pszModuleFileName,
+        GENERIC_READ,
+        FILE_SHARE_READ | FILE_SHARE_WRITE,
+        NULL,   // security
+        OPEN_EXISTING,
+        0,      // flags & attributes
+        NULL
+        );
+
+    if (INVALID_HANDLE_VALUE == hEXE) {
+        goto Cleanup;
+    }
+
+    hSec = CreateFileMapping(
+        hEXE,
+        NULL,   // security
+        PAGE_READONLY,
+        0,      // max size hi
+        0,      // max size lo  both zero == file size
+        NULL    // name
+        );
+
+    if ( ! hSec) {
+        goto Cleanup;
+    }
+
+    pEXE = MapViewOfFile(
+        hSec,
+        FILE_MAP_READ,
+        0,      // offset hi
+        0,      // offset lo
+        0       // size to map   zero == entire file
+        );
+
+    // if MapViewOfFile failed assume it is not QuickBooks 2.0
+    if (!pEXE ) {
+        goto Cleanup;
+    }
+
+    pMZ = pEXE;
+
+    if (IMAGE_DOS_SIGNATURE != pMZ->e_magic) {
+        WOW32ASSERTMSG(IMAGE_DOS_SIGNATURE == pMZ->e_magic, "WOW IsQuickBooks MZ sig.\n");
+        goto Cleanup;
+    }
+
+    pNE = (PVOID) ((PBYTE)pEXE + pMZ->e_lfanew);
+
+    if (IMAGE_OS2_SIGNATURE != pNE->ne_magic) {
+        WOW32ASSERTMSG(IMAGE_OS2_SIGNATURE == pNE->ne_magic, "WOW IsQuickBooks NE sig.\n");
+        goto Cleanup;
+    }
+
+    pNResTab = (PBYTE)pEXE + pNE->ne_nrestab;
+
+    //
+    // The first entry in the non-resident names table is
+    // the NE description specified in the .DEF file.
+    // We have the culprit if it matches the string below,
+    // note the initial 'R' is a length byte, 0x52 bytes follow,
+    // so we compare 0x53.
+    //
+    // Of course Intuit is full of clever programmers, so this
+    // description string still appears in QBW.EXE v3.1 and probably
+    // later.  Thankfully someone there thought to add version
+    // resources between v2 and v3, so if there are version
+    // resources we'll say it's not v2.
+    //
+
+    fRet = RtlEqualMemory(
+        pNResTab,
+        "RQuickBooks for Windows Version 2.  Copyright 1993 Intuit Inc. All rights reserved.",
+        0x53
+        );
+
+    if (fRet) {
+        cbVerInfo = GetFileVersionInfoSize(pszModuleFileName, &dwJunk);
+        fRet = !cbVerInfo;
+    }
+
+  Cleanup:
+
+    if (pEXE) {
+        UnmapViewOfFile(pEXE);
+    }
+
+    if (hSec) {
+        CloseHandle(hSec);
+    }
+
+    if (INVALID_HANDLE_VALUE != hEXE) {
+        CloseHandle(hEXE);
+    }
+
+    return fRet;
+}
+
+
+// the code below is stolen (with some enhancements) from
+// then original WOWShouldWeSayWin95
+//
+
+BOOL FASTCALL fnInstallShieldOverrideVersionFlag(PTDB pTDB)
+{
+   CHAR szModName[9];
+   PCHAR pch;
+   CHAR szName[16];
+   CHAR szVersion[16];
+   CHAR szVerSubstring[4];
+   DWORD dwSubVer;
+   PSTR pszFileName;
+
+   RtlCopyMemory(szModName, pTDB->TDB_ModName, 8);
+   for (pch = &szModName[7]; ' ' == *pch && pch >= szModName; --pch);
+   *++pch = '\0';
+
+   if (WOW32_stricmp(szModName, "ISSET_SE")) {
+      return(FALSE);
+   }
+
+   // now having the pTDB retrieve module file name from pExe
+   // this guy's sitting in TDB_pModule -- and we know it's a real thing
+   // not an alias
+
+   //
+   // see wow16\inc\newexe.inc, NEW_EXE1 struct, ne_pfileinfo
+   // is at offset 10, a near pointer within the segment referenced
+   // by hmod.  This points to kernel.inc's OPENSTRUC which has
+   // the filename buffer at offset 8.
+   //
+   pszFileName = SEGPTR(pTDB->TDB_pModule, (*(WORD *)SEGPTR(pTDB->TDB_pModule, 10)) + 8);
+
+   if (!WowGetProductNameVersion(pszFileName,
+                                 szName,
+                                 sizeof(szName),
+                                 szVersion,
+                                 sizeof(szVersion),
+                                 NULL, NULL, 0) ||
+      WOW32_stricmp(szName, "InstallSHIELD")) {
+      return(FALSE);
+   }
+
+   //
+   // now we definitely know it's installshield and it's version is in szVersion
+   //
+
+
+   //
+   // InstallShield _Setup SDK_ setup.exe shipped
+   // with VC++ 4.0 is stamped 2.20.903.0 but also
+   // needs to be lied to about it being Win95.
+   // According to samir@installshield.com versions
+   // 2.20.903.0 through 2.20.905.0 need this.
+   // We'll settle for 2.20.903* - 2.20.905*
+   // These are based on the 3.0 codebase but
+   // bear the 2.20.x version stamps.
+   //
+
+   if (RtlEqualMemory(szVersion, "2.20.90", 7) &&
+       ('3' == szVersion[7] ||
+        '4' == szVersion[7] ||
+        '5' == szVersion[7]) ) {
+       return(TRUE);
+   }
+
+   //
+   // We want to lie in GetVersion if the version stamp on
+   // the InstallShield setup.exe is 3.00.xxx.0, where
+   // xxx is 000 through 087.  Later versions know how
+   // to detect NT.
+   //
+
+   if (!RtlEqualMemory(szVersion, "3.00.", 5)) {
+      return(FALSE);
+   }
+
+   RtlCopyMemory(szVerSubstring, &szVersion[5], 3);
+   szVerSubstring[3] = 0;
+   RtlCharToInteger(szVerSubstring, 10, &dwSubVer);
+
+   if (dwSubVer >= 88 && dwSubVer != 101) {
+      return(FALSE);
+   }
+
+   return(TRUE); // version 3.00.000 - 3.00.087
+}
+
+BOOL FASTCALL fnInstallTimelineOverrideVersionFlag(PTDB pTDB)
+{
+   CHAR szModName[9];
+   PCHAR pch;
+   CHAR szName[64];
+   CHAR szVersion[16];
+   CHAR szFileVersion[16];
+   PSTR pszFileName;
+
+   RtlCopyMemory(szModName, pTDB->TDB_ModName, 8);
+   for (pch = &szModName[7]; ' ' == *pch && pch >= szModName; --pch);
+   *++pch = '\0';
+
+   if (WOW32_stricmp(szModName, "INSTBIN")) { // instbin is an installer for
+      return(FALSE);
+   }
+
+   // now having the pTDB retrieve module file name from pExe
+   // this guy's sitting in TDB_pModule -- and we know it's a real thing
+   // not an alias
+
+   //
+   // see wow16\inc\newexe.inc, NEW_EXE1 struct, ne_pfileinfo
+   // is at offset 10, a near pointer within the segment referenced
+   // by hmod.  This points to kernel.inc's OPENSTRUC which has
+   // the filename buffer at offset 8.
+   //
+   pszFileName = SEGPTR(pTDB->TDB_pModule, (*(WORD *)SEGPTR(pTDB->TDB_pModule, 10)) + 8);
+
+   // now retrieve version resources
+   if (!WowGetProductNameVersion(pszFileName,
+                                 szName,
+                                 sizeof(szName),
+                                 szVersion,
+                                 sizeof(szVersion),
+                                 "FileVersion",
+                                 szFileVersion,
+                                 sizeof(szFileVersion)) ||
+      WOW32_stricmp(szName, "Symantec Install for Windows Applications")) {
+      return(FALSE);
+   }
+
+   // so it is Symantec install -- check versions
+
+   if (!WOW32_stricmp(szVersion, "3.4") && !WOW32_stricmp(szFileVersion, "3.4.1.1")) {
+      return(FALSE);
+   }
+
+
+   return(TRUE); // we can munch on Win95 -- this is not the same install as
+                 // used in timeline application
+}
+
+
+typedef BOOL (FASTCALL *PFNOVERRIDEVERSIONFLAG)(PTDB);
+
+PFNOVERRIDEVERSIONFLAG rgOverrideFns[] = {
+   fnInstallShieldOverrideVersionFlag,
+   fnInstallTimelineOverrideVersionFlag
+};
+
+
+// this function is to be used when we set "3.1" compat flag in the registry
+// then we call these functions to override the flag if function returns true
+// if returns TRUE then the version flag is set to 95
+// if returns FALSE then the version flag is left to what it was in the registry
+
+BOOL IsOverrideVersionFlag(PTDB pTDB)
+{
+   int i;
+   BOOL fOverride = FALSE;
+
+   for (i = 0; i < sizeof(rgOverrideFns)/sizeof(rgOverrideFns[0]) && !fOverride; ++i) {
+       fOverride = (*rgOverrideFns[i])(pTDB);
+   }
+
+   return(fOverride);
+
+}
+
+
+//
+// This function replaces the original assembler in
+// kernel31\miscapi.asm.  It's the same, except it special-cases
+// some flags based on more than just the module name (for
+// example version stamps).
+//
+// Note that we're still running on the creator thread,
+// so CURRENTPTD() refers to the parent of the app we're
+// looking up flags for.
+//
+
+ULONG FASTCALL WK32SetAppCompatFlags(PVDMFRAME pFrame)
+{
+    PSETAPPCOMPATFLAGS16 parg16;
+    DWORD dwAppCompatFlags = 0;
+    PTDB  pTDB;
+    char  szModName[9];
+    char  szAppCompatFlags[12];  // 0x00000000
+
+    GETARGPTR(pFrame, sizeof(*parg16), parg16);
+
+    pTDB = (PVOID)SEGPTR(parg16->TDB,0);
+
+    //
+    // Hacks don't apply to 4.0 or above
+    //
+
+    if (pTDB->TDB_ExpWinVer < 0x400) {
+
+        RtlCopyMemory(szModName, pTDB->TDB_ModName, sizeof(szModName)-1);
+        szModName[sizeof(szModName)-1] = 0;
+
+
+        szAppCompatFlags[0] = 0;
+
+        if (GetProfileString(
+                "Compatibility",
+                szModName,
+                "",
+                szAppCompatFlags,
+                sizeof(szAppCompatFlags))) {
+
+            dwAppCompatFlags = strtoul(szAppCompatFlags, NULL, 0);
+        }
+
+        //
+        // SOME hacks don't apply to 3.1 or above
+        //
+        // one hack (enumeration of helv ) is valid for 30a as well
+        // see bug 41092
+
+        if (pTDB->TDB_ExpWinVer == 0x30a) {
+            dwAppCompatFlags &= GACF_31VALIDMASK | GACF_ENUMHELVNTMSRMN | GACF_HACKWINFLAGS;
+        }
+        else if (pTDB->TDB_ExpWinVer > 0x30a) {
+            dwAppCompatFlags &= GACF_31VALIDMASK | GACF_HACKWINFLAGS;
+        }
+
+
+
+
+        //
+        // Intuit QuickBooks 2.0 needs to have GACF_RANDOM3XUI turned on,
+        // but later versions don't want it on.  Win9x prompts the user with
+        // a warning that leads to a help file that tells the user to turn
+        // on this bit using a little tool if they're using QBW v2.  We are
+        // going to just do the right thing by looking at the Description
+        // field of the EXE header for a string we expect only to find in
+        // v2, and if it's there turn on GACF_RANDOM3XUI.
+        //
+
+        if (pTDB->TDB_ExpWinVer == 0x30a &&
+            RtlEqualMemory(szModName, "QBW", 4)) {
+
+            if (IsQuickBooksVersion2(pTDB->TDB_pModule)) {
+
+                dwAppCompatFlags |= GACF_RANDOM3XUI;
+            }
+
+        }
+
+
+        // this code checks to see that ISSET_SE in adobe premier 4.2
+        // is told that it's running on Win95
+        if (IsOverrideVersionFlag(pTDB)) {
+           dwAppCompatFlags &= ~GACF_WINVER31;
+        }
+
+        LOGDEBUG(LOG_ALWAYS, ("WK32SetAppCompatFlags '%s' got %x (%s).\n",
+                              szModName, dwAppCompatFlags, szAppCompatFlags));
+    }
+
+    FREEARGPTR(parg16);
+
+    return dwAppCompatFlags;
+}
+
+
+//
+// This function is called by mciavi32 to facilitate usage of a 16-bit mciavi
+// instead
+//
+//
+BOOL WOWUseMciavi16(VOID)
+{
+   return((BOOL)(CURRENTPTD()->dwWOWCompatFlagsEx & WOWCFEX_USEMCIAVI16));
+}
+
+VOID WOWExitVdm(ULONG iWowTask)
+{
+   if (ALL_TASKS == iWowTask) {
+      // meltdown
+      RemoveProcessSharedList();
+   }
+
+   ExitVDM(WOWVDM, iWowTask);
+}
+
+#if 0
+BOOL DosWowGetCompatFlags(LPDWORD lpdwCF, LPDWORD lpdwCFEx)
+{
+   if (NULL != lpdwCF) {
+      *lpdwCF = CURRENTPTD()->dwWOWCompatFlags;
+   }
+   if (NULL != lpdwCFEx) {
+      *lpdwCFEx = CURRENTPTD()->dwWOWCompatFlagsEx;
+   }
+
+   return(TRUE);
+}
+#endif
+
+typedef struct {
+      LPCSTR pszMatchPath;
+      int   cbMatchPathLen;
+      PSZ   pszMapPath;
+      int   cbMapPathLen;
+      int   dwCLSID;
+}
+MATCHMAPPATH,*PMATCHMAPPATH;
+
+#define WOWCSIDL_AllUsers   -1
+
+
+const CHAR szStartMenu[]         =  "\\startm~1";
+const CHAR szAllUsers[]          =  "\\alluse~1";
+const CHAR szDesktop[]           =  "\\desktop";
+const CHAR szAllUsersStartMenu[] =  "\\Profiles\\All Users\\Start Menu\\Programs";
+
+const CHAR szSystem[]            =  "\\System";
+#define CBSZSYSTEM (sizeof(szSystem)/sizeof(CHAR)-1)          
+
+MATCHMAPPATH MatchMapPath[ ]=
+{
+
+ {szStartMenu,
+  sizeof(szStartMenu)/sizeof(CHAR)-1,      //strlen(szStartMenu) == sizeof(szStartMenu)-1
+  NULL,
+  0,
+  CSIDL_COMMON_STARTMENU
+ },
+ {szAllUsers,
+  sizeof(szAllUsers)/sizeof(CHAR)-1,        //strlen(szAllUsers) == sizeof(szAllUsers)-1
+  NULL,
+  0,
+  WOWCSIDL_AllUsers
+ },
+ {szDesktop,
+  sizeof(szDesktop)/sizeof(CHAR)-1,
+  NULL,
+  0,
+  CSIDL_COMMON_DESKTOPDIRECTORY
+ },
+ {szAllUsersStartMenu,
+  sizeof(szAllUsersStartMenu)/sizeof(CHAR)-1,
+  NULL,
+  0,
+  CSIDL_COMMON_PROGRAMS
+ }
+
+};
+
+PSZ SyncSysFile[] ={
+      "\\user.exe",
+      "\\ole2.dll",
+      "\\olesvr.dll",
+      "\\compobj.dll",
+      "\\storage.dll",
+      "\\commdlg.dll",
+      "\\mmsystem.dll",
+      "\\gdi.exe"      
+// add the rest of the 16-bit system binaries
+};
+
+DWORD cbWinDirLen;
+DWORD cbSystemDirLen;
+
+VOID W32Init9xSpecialPath(
+                       )
+{
+  char szBuf[ MAX_PATH ];
+  int cb;
+  PMATCHMAPPATH pMatchMapPath;
+
+     pMatchMapPath = MatchMapPath + sizeof(MatchMapPath)/sizeof(MATCHMAPPATH);
+    
+     while(pMatchMapPath-- != MatchMapPath) {
+         szBuf[0]='\0';
+         if (pMatchMapPath->dwCLSID > 0) {
+             SHGetSpecialFolderPath(NULL,
+                                    szBuf,
+                                    pMatchMapPath->dwCLSID,
+                                    FALSE
+                                    );
+             }
+         else
+         if (WOWCSIDL_AllUsers == pMatchMapPath->dwCLSID) {
+             cb = sizeof(szBuf);
+             GetAllUsersProfileDirectory(szBuf, &cb);
+             }
+
+         GetShortPathName(szBuf,szBuf,sizeof(szBuf));
+
+         cb=strlen(szBuf)+1;
+
+         if (1 < cb){
+             LPSTR lpStr=NULL;
+             lpStr=malloc_w_or_die(cb);
+             strcpy(lpStr,szBuf);
+             pMatchMapPath->pszMapPath=lpStr;
+             pMatchMapPath->cbMapPathLen=cb;
+             }
+         else {
+             pMatchMapPath->pszMapPath=NULL;
+             pMatchMapPath->cbMapPathLen=0;
+             }
+         }
+
+         //
+         // Lower case windows directory and get its length
+         //
+
+         _strlwr(pszWindowsDirectory);
+         cbWinDirLen=strlen(pszWindowsDirectory);
+         cbSystemDirLen = strlen(pszSystemDirectory);
+}
+
+
+BOOL W32Map9xSpecialPath(PSZ lp9xPathName,
+                      PSZ lpMapPathName
+                      )
+{
+ PSZ lpPathName=lp9xPathName;
+ PMATCHMAPPATH lpMMPath;
+
+    if( !_strnicmp(lpPathName,pszWindowsDirectory,cbWinDirLen) && lpPathName[cbWinDirLen] == '\\') {
+
+       lpMMPath = MatchMapPath + sizeof(MatchMapPath)/sizeof(MATCHMAPPATH);
+       while(lpMMPath-- != MatchMapPath) {
+
+           // move lpPathName past windowsdirectory
+           lpPathName=lp9xPathName+cbWinDirLen;
+
+           if ( lpMMPath->pszMapPath ){
+
+               if (!WOW32_strnicmp( lpPathName,lpMMPath->pszMatchPath, lpMMPath->cbMatchPathLen) &&
+                   (!lpPathName[lpMMPath->cbMatchPathLen] || lpPathName[lpMMPath->cbMatchPathLen]=='\\'))
+                 {
+                   memcpy( lpMapPathName,
+                           lpMMPath->pszMapPath,
+                           lpMMPath->cbMapPathLen
+                         );
+
+                   // move lpPathName past MatchPath
+                   lpPathName+=lpMMPath->cbMatchPathLen;
+
+                   // copy rest of lpPathName after cbMapPathLen
+
+                   strcpy(lpMapPathName+lpMMPath->cbMapPathLen-1,
+                          lpPathName
+                         );
+                   
+                   LOGDEBUG(LOG_WARNING, ("Mapping 9x<%s> to NT<%s>\n",lp9xPathName,lpMapPathName));
+                   return TRUE;
+                   }
+               }
+           }
+
+       if (CURRENTPTD()->dwWOWCompatFlags2 & WOWCF2_SYNCSYSFILE) {
+
+           PSZ *ppszSyncSysFile;
+
+           lpPathName = lp9xPathName + cbWinDirLen;
+           if (!WOW32_strnicmp(lpPathName,szSystem,CBSZSYSTEM) && lpPathName[CBSZSYSTEM]=='\\') {                                           
+               
+               lpPathName += CBSZSYSTEM; // mv past "%windir%\system"
+               ppszSyncSysFile = SyncSysFile + sizeof(SyncSysFile)/sizeof(PSZ);
+               
+               while (ppszSyncSysFile-- != SyncSysFile) {
+               
+                   if (!WOW32_stricmp(lpPathName,*ppszSyncSysFile)){
+                       memcpy(lpMapPathName,pszSystemDirectory,cbSystemDirLen);
+                       strcpy(lpMapPathName+cbSystemDirLen,lpPathName);
+                       LOGDEBUG(LOG_WARNING, ("Mapping System<%s> to System32<%s>\n",lp9xPathName,lpMapPathName));
+                       return TRUE;
+                       }
+                   }
+               }
+           }
+
+       }
+
+    return FALSE;
+}
+
+
+DWORD    dmOldBitsPerPel=0;
+DWORD    dmChangeCount=0;
+
+/*
+ * WK32ChangeDisplayMode
+ * WK32RevertDisplayMode
+ * - changes display settings for apps automatically
+ *   both assume that they get called only for apps with
+ *   wow compat flag WOWCFEX_256DISPMODE.
+ * - global variables dmOldBitsPerPel and dwChangeCount
+ *   are protected by critical sections in functions that
+ *   call WK32ChangeDisplayMode and WK32RevertDisplayMode
+ *
+ */
+
+
+void WK32ChangeDisplayMode(DWORD dmBitsPerPel) {
+
+    DEVMODEA dm;
+
+    if (EnumDisplaySettingsA(NULL, ENUM_CURRENT_SETTINGS, &dm)) {
+       if (!dmChangeCount++) {
+          dmOldBitsPerPel = dm.dmBitsPerPel;
+       }
+
+       if (dmBitsPerPel != dm.dmBitsPerPel) {
+          dm.dmBitsPerPel = dmBitsPerPel;
+          ChangeDisplaySettingsA(&dm, CDS_FULLSCREEN);
+       }
+    }
+
+}
+
+
+void WK32RevertDisplayMode(void) {
+     DEVMODEA dm;
+
+     if (dmChangeCount &&
+         !--dmChangeCount &&
+         EnumDisplaySettingsA(NULL, ENUM_CURRENT_SETTINGS, &dm) &&
+         dm.dmBitsPerPel <= 8 &&
+         dmOldBitsPerPel > dm.dmBitsPerPel)
+       {
+         dm.dmBitsPerPel = dmOldBitsPerPel;
+         ChangeDisplaySettingsA(&dm, CDS_FULLSCREEN);
+     }
 }
 
 /* DIVERGENCE(MVDM-HOST-DIV-902): original TD queries for B callbacks. */

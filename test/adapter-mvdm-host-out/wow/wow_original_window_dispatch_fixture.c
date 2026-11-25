@@ -26,9 +26,10 @@ static DWORD WINAPI guest_callback(HWND hwnd, UINT msg, UINT wp, LONG lp, DWORD 
 int __cdecl main(void)
 {
     wow_window_dispatch_view view = {window, words, guest_callback};
-    CHECK(!((DWORD)native_proc & 0x80000000));
+    CHECK(!WOW_WINDOW_IS_GUEST_PROC(native_proc));
+    CHECK(!WOW_WINDOW_IS_GUEST_PROC(0x81234567u));
     CHECK((DWORD)DispatchClientMessage(&view, WM_USER + 7, 0x4321, -17, (DWORD)native_proc) == 0x89abcdef);
-    expected_proc = 0x81234567;
+    expected_proc = 0xc1234567;
     CHECK((DWORD)DispatchClientMessage(&view, WM_USER + 7, 0x4321, -17, expected_proc) == 0x76543210);
     expected_proc = 0xf2304567;
     CHECK((DWORD)DispatchClientMessage(&view, WM_USER + 7, 0x4321, -17, expected_proc) == 0x76543210);

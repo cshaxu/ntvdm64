@@ -94,7 +94,7 @@ static void live_dispatch_cleanup(wow_cleanup_context *ctx, int cleanup_mode)
     WNDCLASSEXA wc={sizeof(wc)};
     CREATESTRUCTA creation={0};
     UNICODE_STRING name;
-    DWORD class_words[2]={0x12350020,0}, procedure;
+    DWORD class_words[2]={0x12350020,0x99990000}, procedure;
     WW words={0};
     wow_window_dispatch_target target={0x92350020,live_callback,TRUE};
     wow_window_words_binding *borrow;
@@ -175,9 +175,10 @@ static void live_dispatch_cleanup(wow_cleanup_context *ctx, int cleanup_mode)
         CHECK(SendMessageA(child,WM_USER+42,0,0)==0 && live_callbacks==before);
         CHECK(GetWindowLongA(helper,GWL_WNDPROC)==helper_proc);
     } else if (cleanup_mode==1) {
+        live->pcls->flags |= CSF_WOWCLASS;
         segment.ns_handle=0x1234;
         CHECK(wow_user_cleanup_bound((HANDLE)0x9999,0,&segment,1,ctx));
-        CHECK(live->pcls->lpfnWndProc==DefWindowProcW && live->pcls->adwWOW[0]==0);
+        CHECK(live->pcls->lpfnWndProc==DefWindowProcW && live->pcls->adwWOW[0]==class_words[0]);
         later=wow_window_create_boundA(ctx->thread,atom,&creation,&words,NULL);
         CHECK(later!=NULL);
         if (later) {
@@ -219,7 +220,7 @@ int __cdecl main(void)
     wow_cleanup_context ctx={0};
     WNDCLASSEXA wc={sizeof(wc)};
     UNICODE_STRING name;
-    DWORD words[2]={0x12350020,0x87654321};
+    DWORD words[2]={0x12350020,0x99994321};
     NEMODULESEG segment={0};
     resource_object menus[3], cursor={0}, accel={0};
     BYTE and_mask[128], xor_mask[128]={0};
@@ -286,10 +287,13 @@ int __cdecl main(void)
     window_view.lpfnWndProc=(WNDPROC)0x92350020;
     foreign_view.lpfnWndProc=(WNDPROC)0x92350020;
     window_view.procedure_is_guest=TRUE; foreign_view.procedure_is_guest=TRUE;
+    CHECK(_WOWCleanup((HANDLE)0x9998,0,&segment,1,&ctx));
+    CHECK(entry->adwWOW[0]==words[0] && entry->lpfnWndProc!=DefWindowProcW);
+    entry->flags |= CSF_WOWCLASS;
     CHECK(_WOWCleanup((HANDLE)0x9999,0,&segment,1,&ctx));
     CHECK(window_view.lpfnWndProc==DefWindowProcA);
     CHECK(foreign_view.lpfnWndProc==(WNDPROC)0x92350020);
-    CHECK(entry->adwWOW[0]==0 && entry->lpfnWndProc==DefWindowProcW);
+    CHECK(entry->adwWOW[0]==words[0] && entry->lpfnWndProc==DefWindowProcW);
 
     window_view.lpfnWndProc=wndproc;
     window_view.serverSideProc=TRUE;

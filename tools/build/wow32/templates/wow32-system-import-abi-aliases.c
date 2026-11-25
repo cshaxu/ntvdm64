@@ -63,3 +63,6 @@
 #pragma comment(linker, "/alternatename:__imp__RtlUnicodeToMultiByteSize@12=__imp__RtlUnicodeToMultiByteSize")
 #pragma comment(linker, "/alternatename:_RtlIsNameLegalDOS8Dot3@12=_RtlIsNameLegalDOS8Dot3")
 #pragma comment(linker, "/alternatename:__imp__RtlIsNameLegalDOS8Dot3@12=__imp__RtlIsNameLegalDOS8Dot3")
+#pragma comment(linker, "/alternatename:_ApphelpGetNTVDMInfo@32=_ApphelpGetNTVDMInfo")
+#pragma comment(linker, "/alternatename:_ApphelpShowDialog@8=_ApphelpShowDialog")
+#pragma comment(linker, "/alternatename:_Ssync_ANSI_UNICODE_Struct_For_WOW@12=_Ssync_ANSI_UNICODE_Struct_For_WOW")

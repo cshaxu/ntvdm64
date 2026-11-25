@@ -103,11 +103,11 @@ BOOL wow_user_ensure_registration_lifecycle(void)
 HWND WINAPI registered_create_window_ex(DWORD ex_style,
     LPCTSTR class_name, LPCTSTR window_name, DWORD style, int x, int y,
     int width, int height, HWND parent, HMENU menu, HANDLE instance,
-    LPVOID param, DWORD flags, LPDWORD wow_words)
+    LPVOID param, DWORD flags)
 {
     HWND result = wow_user_create_window_ex(ex_style, class_name, window_name,
         style, x, y, width, height, parent, menu, instance, param, flags,
-        wow_words);
+        NULL);
     DWORD error=GetLastError();
     wow_user_registration_trace("CreateWindowEx", (DWORD)(ULONG_PTR)result);
     SetLastError(error);
@@ -219,15 +219,16 @@ VOID WINAPI registered_fill_window(HWND parent, HWND window, HDC dc,
 }
 
 
-VOID WINAPI wow_user_register_wow_exec(HANDLE window)
+LONG WINAPI wow_user_register_wow_exec(HANDLE window)
 {
-    VOID WINAPI RegisterWowExec(HANDLE);
+    LONG WINAPI RegisterWowExec(HANDLE);
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     DWORD full;
+    if (!window) return RegisterWowExec(NULL);
     if (!binding || !binding->thread || !binding->thread->ppi ||
             !binding->thread->ppi->objects) {
         SetLastError(ERROR_CALL_NOT_IMPLEMENTED);
-        return;
+        return STATUS_INVALID_HANDLE;
     }
     /* Registration requires a live owned window, unlike original message
      * conversion's intentional fallback for a departed DDE peer. */
@@ -236,13 +237,13 @@ VOID WINAPI wow_user_register_wow_exec(HANDLE window)
     /* WK32RegisterShellWindowHandle supplies HWND32, a sign-extended WORD.
      * Resolve it through the existing USER handle owner before the original
      * BaseClient sends it to BaseSrv. Never weaken broker PID validation. */
-    if (!full) return;
+    if (!full) return STATUS_INVALID_HANDLE;
     if ((DWORD)(ULONG_PTR)window != (DWORD)(LONG)(SHORT)LOWORD(window) &&
             (DWORD)(ULONG_PTR)window != full) {
         SetLastError(ERROR_INVALID_WINDOW_HANDLE);
-        return;
+        return STATUS_INVALID_HANDLE;
     }
-    RegisterWowExec((HANDLE)(ULONG_PTR)full);
+    return RegisterWowExec((HANDLE)(ULONG_PTR)full);
 }
 
 const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void)
@@ -300,7 +301,7 @@ static LRESULT call_previous_window_proc(WNDPROC procedure, HWND window,
      * worker's WOW target. Keep the original registered callback as owner. */
     if (!wow_native_class_resolve_procedure((DWORD)procedure, &resolved)) return 0;
     if (resolved != (DWORD)procedure ||
-            !((DWORD)(ULONG_PTR)procedure & WOW_WINDOW_PROC_TAG)) {
+            !WOW_WINDOW_IS_GUEST_PROC((DWORD)(ULONG_PTR)procedure)) {
         wow_user_native_call call;
         BOOL restored;
         DWORD error = GetLastError();

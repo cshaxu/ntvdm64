@@ -124,7 +124,7 @@ VOID    W32UnMarkDDEHandle (HAND16 hMem16);
 HANDLE  DDEFindPair32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 hMem16);
 HAND16  DDEFindPair16(HAND16 To_hwnd, HAND16 From_hwnd, HANDLE hMem32);
 BOOL    W32DDEFreeGlobalMem32 (HANDLE h32);
-BOOL FASTCALL    W32WowDdeFreeHandle (PVDMFRAME pFrame);
+ULONG FASTCALL WK32WowDdeFreeHandle (PVDMFRAME pFrame);
 BOOL    W32DdeFreeHandle16 (HAND16 h16);
 PHDDE   DDEFindNode16 (HAND16 h16);
 PHDDE   DDEFindNode32 (HANDLE h32);
@@ -137,3 +137,4 @@ BOOL    DDEIsTargetMSDraw(HAND16 To_hwnd);
 HAND16  Copyh32Toh16 (int cb, LPBYTE lpMem32);
 HANDLE  Copyh16Toh32 (int cb, LPBYTE lpMem16);
 VOID    FixMetafile32To16 (LPMETAFILEPICT lpMemMeta32, LPMETAFILEPICT16 lpMemMeta16);
+

@@ -43,6 +43,13 @@ WOWRegDeleteKey(
 #define WIN16_ERROR_ACCESS_DENIED     8L
 #endif
 
+//
+// Flags for DROPALIAS's dwFlags member
+//
+
+#define ALLOC_H32 0x0001L
+#define ALLOC_H16 0x0002L
+
 ULONG FASTCALL WS32DoEnvironmentSubst(PVDMFRAME pFrame)
 {
     //
@@ -97,8 +104,8 @@ ULONG FASTCALL WS32DoEnvironmentSubst(PVDMFRAME pFrame)
 
         RtlCopyMemory(psz, pszExpanded, cchExpanded);
 
-        WOW32ASSERT((cchExpanded - 1) == strlen(psz));
         LOGDEBUG(0,("WS32DoEnvironmentSubst output: '%s'\n", psz));
+        WOW32ASSERT((cchExpanded - 1) == strlen(psz));
 
         FLUSHVDMPTR(parg16->vpsz, (USHORT)cchExpanded, psz);
         ul = MAKELONG((WORD)(cchExpanded - 1), TRUE);
@@ -316,9 +323,10 @@ ULONG FASTCALL WS32RegDeleteKey(PVDMFRAME pFrame)
 
 
 LONG
+APIENTRY
 WOWRegDeleteKey(
-    IN HKEY hKey,
-    IN LPCTSTR lpszSubKey
+    HKEY hKey,
+    LPCSTR lpszSubKey
     )
 
 /*++
@@ -494,9 +502,9 @@ ULONG FASTCALL WS32RegSetValue(PVDMFRAME pFrame)
            psz1 =  Remove_Classes (psz2);
         }
 
-        ul = RegSetValue (HKEY_CLASSES_ROOT, 
-                          psz1, 
-                          REG_SZ, 
+        ul = RegSetValue (HKEY_CLASSES_ROOT,
+                          psz1,
+                          REG_SZ,
                           lpszData,
                           lstrlen(lpszData));
 
@@ -510,7 +518,7 @@ ULONG FASTCALL WS32RegSetValue(PVDMFRAME pFrame)
                          psz2,
                          REG_SZ,
                          lpszData,
-                         lstrlen(lpszData)); 
+                         lstrlen(lpszData));
     }
 
     ul = ConvertToWin31Error(ul);
@@ -553,6 +561,17 @@ ULONG FASTCALL WS32RegQueryValue(PVDMFRAME pFrame)
     }
 
     cbOriginalValue = cbValue = FETCHDWORD(*lpcbValue);
+
+#ifdef FE_SB         // for Lotus 123 by v-kenich 94.Aug.27
+                    // Lotus doesn't set value to *lpcb in one case
+                    // in other case set 80
+                    // so when not set, assume 80 and set 80 in this field
+    if (CURRENTPTD()->dwWOWCompatFlagsFE & WOWCF_FE_FORCEREGQRYLEN) {
+          if (cbValue > 80) {
+             cbOriginalValue = cbValue = 80;
+          }
+    }
+#endif // FE_SB
 
     // Fix MSTOOLBR.DLL unintialized cbValue by forcing it to be less than 64K
     // Win 3.1 Registry values are always less than 64K.
@@ -748,7 +767,7 @@ ULONG FASTCALL WS32DragFinish(PVDMFRAME pFrame)
     //
 
     if (h32 = FREEHDROP16(parg16->f1)) {
-        DragFinish(h32);
+            DragFinish(h32);
     }
 
     FREEARGPTR(parg16);
@@ -804,6 +823,8 @@ ULONG FASTCALL WS32ShellExecute (PVDMFRAME pFrame)
     GETPSZPTR(parg16->f4, psz4);
     GETPSZPTR(parg16->f5, psz5);
 
+    UpdateDosCurrentDirectory( DIR_DOS_TO_NT);
+
     ul = GETHINST16(WOWShellExecute (
             HWND32(parg16->f1),
             psz2,
@@ -811,7 +832,7 @@ ULONG FASTCALL WS32ShellExecute (PVDMFRAME pFrame)
             psz4,
             psz5,
             parg16->f6,
-            (LPFNWOWSHELLEXECCB) W32ShellExecuteCallBack
+            (LPVOID) W32ShellExecuteCallBack
             ));
 
     FREEPSZPTR(psz2);
@@ -822,20 +843,201 @@ ULONG FASTCALL WS32ShellExecute (PVDMFRAME pFrame)
     RETURN(ul);
 }
 
+/*
+ * This is an equivalent of a nasty win'95 style hack that prevents us from
+ * launching things from winexec that are lfn-based
+ * Unfortunate as it is -- this alone can't save us in all the cases -- it
+ * just allows for a fix to ole-based method (another method should be
+ * employed to fix winexec)
+ *
+ * The code was stolen from base/client/process.c
+ * with win95's method being to try CreateProcess instead of SearchPath within
+ * the inner loop.
+ *
+ * Parameters:
+ *    lpstrParsed  -- destination string which upon successful return will contain
+ *               1. Short path for an exe file
+ *               2. The rest of the cmdline in an appropriate order
+ *    lpszCmdLine  -- command line for an app with parameters
+ *    cchParsed    -- character count for the lpstrParsed string
+ *
+ *    fConvert     -- if TRUE, path is going to be converted to its short
+ *                    form, if FALSE -- it is going to be quoted for winexec
+ *                    not to stumble upon it.
+ *
+ */
 
-WORD W32ShellExecuteCallBack (LPSZ lpszCmdLine, WORD fuCmdShow)
+ULONG WS32ParseCmdLine(
+   PBYTE lpstrParsed,
+   LPSZ lpszCmdLine,
+   ULONG cchstrParsed,
+   BOOL fConvert)
+{
+   BOOL  fQuote = FALSE;      // was there a quote ?
+   PCHAR psz = lpszCmdLine;   // original ptr to the command line
+   CHAR  szFileName[MAX_PATH];// exe filename in its final form (from szCmd)
+   CHAR  szCmd[MAX_PATH];     // command that is being built from lpszCmdLine
+   PCHAR pszCmd = szCmd;
+   CHAR  c;
+   DWORD dwLength, dwLengthFileName, dwLengthCmdTail;
+   DWORD dwError = ERROR_SUCCESS;
+
+   WOW32ASSERTMSGF(lstrlen(lpszCmdLine) < sizeof(szCmd)/sizeof(szCmd[0]),
+                   ("WOW::WS32ParseCmdLine -- cmd line too long\n"));
+
+   c = *psz;
+
+   while(TRUE) {
+
+      if ('\"' == c) {
+         fQuote = !fQuote; // state variable -- flip quoting
+      }
+      else {
+
+         // now check for space chars
+         // the condition here is: if it is outside of a quote -- then
+         // space is a delimiter. Another condition is an end of a string
+
+         if (((' ' == c || '\t' == c) && !fQuote) || ('\0' == c)) {
+
+            // delimiter -- now try for a file search
+
+            *pszCmd = '\0';
+
+            dwLengthFileName = SearchPath(NULL,
+                                          szCmd,
+                                          ".exe",
+                                          sizeof(szFileName)/sizeof(szFileName[0]),
+                                          szFileName,
+                                          NULL);
+
+            // return value is length in chars
+            if (!dwLengthFileName || dwLengthFileName > sizeof(szFileName)/sizeof(szFileName[0])) {
+               // oops -- we have found none
+               // so remember the error
+               dwError = ERROR_FILE_NOT_FOUND;
+               if ('\0' == c) {
+                  break; // end of the string
+               }
+            }
+            else {
+               // szFileName is what we need
+               dwError = ERROR_SUCCESS;
+               break;
+            }
+
+         }
+
+         *pszCmd++ = c; // copy the character over and continue
+                        // Hack alert! szCmd is MAX_PATH -- we don't check
+                        // for overrun since shell's CmdLine buffer is also
+                        // MAX_PATH long. This may change in the future,
+                        // watch out!
+      }
+
+      // now move to the next char
+      c = *++psz;
+   }
+
+
+   if (ERROR_SUCCESS != dwError) {
+      return(dwError);
+   }
+
+   dwLengthCmdTail = strlen(psz);
+
+   // now
+   // psz points to a delimiter char that we have terminated our search on.
+   // the part before this char -- is exe filename
+   // the part after this char --  cmdline tail
+
+   if (fConvert) {
+      // now we go converting first
+      dwLength = GetShortPathName(szFileName, lpstrParsed, cchstrParsed);
+      if (!dwLength || dwLength > cchstrParsed-1) {
+         LOGDEBUG(0, ("WS32ParseCmdLine: Can't convert to the short name\n"));
+         WOW32ASSERT(FALSE);
+         return(GetLastError());
+      }
+
+      if (dwLength + dwLengthCmdTail > cchstrParsed - 1) {
+         LOGDEBUG(0, ("WS32ParseCmdLine: Buffer too short for cmdline tail\n"));
+         WOW32ASSERT(FALSE);
+         return(ERROR_INSUFFICIENT_BUFFER);
+      }
+   }
+   else {
+      // now here we just insert quotes around the filename -- unless there
+      // already were some quotes surrounding it
+
+      if (dwLengthFileName + 2 > cchstrParsed - 1) {
+         LOGDEBUG(0, ("WS32ParseCmdLine: Buffer too short for quoted filename\n"));
+         WOW32ASSERT(FALSE);
+         return(ERROR_INSUFFICIENT_BUFFER);
+      }
+
+      *lpstrParsed++ = '\"';
+      lstrcpyn(lpstrParsed, szFileName, dwLengthFileName+1);
+      lstrcat(lpstrParsed, "\"");
+   }
+
+   lstrcat(lpstrParsed, psz);
+
+   return(ERROR_SUCCESS);
+}
+
+extern DWORD __cdecl demSetCurrentDirectoryGetDrive(LPSTR lpDirectoryName, PUINT pDriveNum);
+extern DWORD __cdecl demLFNGetCurrentDirectory(UINT  DriveNum, LPSTR lpDirectoryName);
+
+
+WORD W32ShellExecuteCallBack (LPSZ lpszCmdLine, WORD fuCmdShow, LPSZ lpszNewDir)
 {
     PBYTE lpstr16;
     PARM16 Parm16;
     ULONG ul = 0;
     VPVOID vpstr16;
+    CHAR szCurrentDirectory[MAX_PATH];
+    UINT Drive;
+    DWORD dwStatus;
+    BOOL fRestoreDir;
+
+    // what +5 is doing here ? The reasoning is like this :
+    // generated short path could never be longer than the original (long path)
+    //
+    ULONG cchstr16 = lstrlen(lpszCmdLine) + 5;
 
     UpdateDosCurrentDirectory(DIR_NT_TO_DOS);
 
-    if (vpstr16 = malloc16 (lstrlen(lpszCmdLine)+1)) {
+    // we're given a current directory here --
+    // so we see if this matches our current directory
+    // demSetCurrentDirectoryLong(
+    dwStatus = demLFNGetCurrentDirectory(0, szCurrentDirectory);
+    fRestoreDir = NT_SUCCESS(dwStatus);
+
+    dwStatus = demSetCurrentDirectoryGetDrive(lpszNewDir, &Drive);
+    if (NT_SUCCESS(dwStatus)) {
+       DosWowSetDefaultDrive((UCHAR)Drive);
+    }
+
+    if (vpstr16 = malloc16 (cchstr16)) { // .exe, remember ?
         GETMISCPTR (vpstr16, lpstr16);
         if (lpstr16) {
-            lstrcpy (lpstr16, lpszCmdLine);
+            // we cannot simply copy the command line here -- although memory
+            // that was allocated is going to be sufficient.
+            // Problem is that winexec will choke when the program name
+            // is denoted as Long File Name -- which is the case with new Office
+            // applications. The rule should be -- whatever comes into land16
+            // should be in a form of a short file name.
+            // mind you that vpstr16 is big enough for both the long and
+            // short name -- so this code requires no memory realloc
+
+            // now we need to have
+
+            ul = WS32ParseCmdLine(lpstr16, lpszCmdLine, cchstr16, TRUE);
+            if (ERROR_SUCCESS != ul) {
+               WOW32ASSERTMSGF(FALSE, ("WS32ParseCmdLine failed: 0x%lx\n", ul));
+               lstrcpy (lpstr16, lpszCmdLine);
+            }
 
             Parm16.WndProc.wParam = fuCmdShow;
             Parm16.WndProc.lParam = vpstr16;
@@ -844,6 +1046,13 @@ WORD W32ShellExecuteCallBack (LPSZ lpszCmdLine, WORD fuCmdShow)
         }
 
         free16(vpstr16);
+    }
+
+    if (fRestoreDir) {
+       dwStatus = demSetCurrentDirectoryGetDrive(szCurrentDirectory, &Drive);
+       if (NT_SUCCESS(dwStatus)) {
+          DosWowSetDefaultDrive((UCHAR)Drive);
+       }
     }
 
     return (LOWORD(ul));
@@ -949,7 +1158,7 @@ LPSZ Remove_Classes (LPSZ psz)
     LPSZ lpsz;
     LPSZ lpsz1;
 
-    if (!_stricmp (".classes", psz)) {
+    if (!WOW32_stricmp (".classes", psz)) {
         if (lpsz = malloc_w (1)) {
             *lpsz = '\0';
             return (lpsz);
@@ -957,10 +1166,10 @@ LPSZ Remove_Classes (LPSZ psz)
     }
     else {
         if (*psz) {
-            lpsz = strchr (psz, '\\');
+            lpsz = WOW32_strchr (psz, '\\');
             if (lpsz) {
                 *lpsz = '\0';
-                if (!_stricmp (".classes", lpsz)) {
+                if (!WOW32_stricmp (".classes", lpsz)) {
                     *lpsz = '\\';
                     if (lpsz1 = malloc_w (strlen(lpsz+1)+1)) {
                         strcpy (lpsz1, (lpsz+1));
@@ -981,8 +1190,8 @@ LPSZ Remove_Classes (LPSZ psz)
             return (psz);
         }
     }
+    return (psz);
 }
-
 
 //****************************************************************************
 // DropFilesHandler -
@@ -996,26 +1205,57 @@ LPSZ Remove_Classes (LPSZ psz)
 
 LPDROPALIAS glpDropAlias = NULL;
 
+LPDROPALIAS DropFilesFind(DWORD h, UINT fInput, LPDROPALIAS* ppPrev)
+{
+   LPDROPALIAS lpT = glpDropAlias;
+   LPDROPALIAS lpTPrev = NULL;
+
+   WOW32ASSERT(h);
+   WOW32ASSERT((!!(fInput & HDROP_H16)) ^ (!!(fInput & HDROP_H32)));
+
+   while (NULL != lpT) {
+      if (fInput & HDROP_H16) {
+         if ((lpT->h16 & ~1) == (((HAND16)h) & ~1)) {
+            break;
+         }
+      }
+      else if (fInput & HDROP_H32) {
+         if (lpT->h32 == (HANDLE)h) {
+            break;
+         }
+      }
+
+      lpTPrev = lpT;
+      lpT = lpT->lpNext;
+   }
+
+   if (ppPrev) {
+      *ppPrev = lpTPrev;
+   }
+
+   return(lpT);
+}
+
+
+
+
 DWORD DropFilesHandler(HAND16 h16, HANDLE h32, UINT flInput)
 {
     LPDROPALIAS lpT;
-    LPDROPALIAS lpTprev = (LPDROPALIAS)NULL;
+    LPDROPALIAS lpTprev;
     DWORD       dwRet = 0;
 
-    WOW32ASSERT((h16) || (h32));
+    // assert if specified both or neither handle or flag
 
-    //
-    // Look for the handle
-    //
-    for (lpT = glpDropAlias; lpT != (LPDROPALIAS)NULL; lpT = lpT->lpNext) {
-         if (((flInput & HDROP_H16) && ((lpT->h16 & ~1) == (h16 & ~ 1))) ||
-              ((flInput & HDROP_H32) && lpT->h32 == h32)) {
-             break;
-         }
-         else if (flInput & HDROP_FREEALIAS) {
-             lpTprev = lpT;
-         }
-    }
+    WOW32ASSERT((h16) || (h32));
+    WOW32ASSERT((!!(flInput & HDROP_H32)) ^ (!!(flInput & HDROP_H16)));
+
+
+    // find handle
+
+    lpT = DropFilesFind(flInput & HDROP_H16 ? (DWORD)h16 : (DWORD)h32,
+                        flInput,
+                        &lpTprev);
 
     //
     // if not found, create the alias if requested
@@ -1026,6 +1266,7 @@ DWORD DropFilesHandler(HAND16 h16, HANDLE h32, UINT flInput)
             lpT->h16 = h16;
             lpT->h32 = h32;
             lpT->lpNext = glpDropAlias;
+            lpT->dwFlags = 0;
             glpDropAlias = lpT;
             flInput |= HDROP_COPYDATA;
         }
@@ -1040,8 +1281,10 @@ DWORD DropFilesHandler(HAND16 h16, HANDLE h32, UINT flInput)
         if (flInput & HDROP_COPYDATA) {
             if (h32) {
                 dwRet = (DWORD) (lpT->h16 = CopyDropFilesFrom32(h32));
+                lpT->dwFlags |= ALLOC_H16;
             } else {
                 dwRet = (DWORD) (lpT->h32 = CopyDropFilesFrom16(h16));
+                lpT->dwFlags |= ALLOC_H32;
             }
         }
         else if (flInput & HDROP_FREEALIAS) {
@@ -1064,6 +1307,61 @@ DWORD DropFilesHandler(HAND16 h16, HANDLE h32, UINT flInput)
 
     return (dwRet);
 }
+
+
+//
+//  FindAndReleaseHDrop16
+//  Called from the 16-bit GlobalFree to see if we need to free alias
+//    associated with this handle
+//  The actual call is made through the wowddeglobalfree
+//  Function frees 32-bit handle (or disposes of it using DragFinish
+//    for consistency) but 16-bit handle is freed elsewere
+//
+BOOL FindAndReleaseHDrop16 (HAND16 h16)
+{
+
+   LPDROPALIAS lpT;
+   LPDROPALIAS lpTPrev;
+
+   if (NULL != (lpT = DropFilesFind(h16, HDROP_H16, &lpTPrev))) {
+       // found, now free 32-bit handle, but not 16-bit one
+       // this assert will fire if we had not allocated 32-bit handle but
+       // app tried to free the 16-bit equivalent instead
+
+       LOGDEBUG(LOG_ALWAYS, ("HDrop16: removing handle 16:%lx 32:%lx\n",
+                       (DWORD)h16,
+                       (DWORD)lpT->h32));
+
+       if (lpT->dwFlags & ALLOC_H32) {
+           LOGDEBUG(LOG_ALWAYS, ("HDROP16: h32 allocated through OLE\n"));
+           WOWGLOBALFREE((HANDLE)lpT->h32);
+       }
+       else { // this handle was not allocated - but rather retrieved via old
+              // style dropfiles mechanism
+           LOGDEBUG(LOG_ALWAYS, ("HDrop16: h32 retrieved from shell\n"));
+           DragFinish((HDROP)lpT->h32);
+       }
+
+       // now unlink
+       if (NULL != lpTPrev) {
+           lpTPrev->lpNext = lpT->lpNext;
+       }
+       else {
+           glpDropAlias = lpT->lpNext;
+       }
+
+       // unmark 16-bit memory as being dde...
+
+       W32UnMarkDDEHandle(h16);
+
+       // free the list item
+       free_w(lpT);
+   }
+
+   return(NULL != lpT);
+}
+
+
 
 //****************************************************************************
 // CopyDropFilesStruct -
@@ -1097,7 +1395,7 @@ HAND16 CopyDropFilesFrom32(HANDLE h32)
             lpdfs16->pFiles = sizeof(DROPFILESTRUCT16);
             lpdfs16->x = (SHORT) lpdfs32->pt.x;
             lpdfs16->y = (SHORT) lpdfs32->pt.y;
-            lpdfs16->fNC = lpdfs32->fNC;
+            lpdfs16->fNC = (SHORT) lpdfs32->fNC;
 
             if (lpdfs32->fWide) {
                 RtlUnicodeToMultiByteN(((PCHAR)lpdfs16)+lpdfs16->pFiles,
@@ -1120,6 +1418,15 @@ HAND16 CopyDropFilesFrom32(HANDLE h32)
 
             GlobalUnlock((HANDLE)h32);
             hRet = hMem;
+
+
+            // and before we return - mark this memory as being suspect for
+            // stray mapping release
+            // This function in wdde.c marks arena with GAH_PHANTOM flag
+            // we will destroy the alias when the globalfree is called either
+            // from 16-bit shell api DragFinish or from 16-bit ReleaseStgMedium
+
+            W32MarkDDEHandle(hMem);
         }
         else {
             GlobalUnlockFree16(vp);
@@ -1138,25 +1445,25 @@ HAND16 CopyDropFilesFrom32(HANDLE h32)
 
 HANDLE CopyDropFilesFrom16(HAND16 h16)
 {
-    HANDLE h32;
+    HANDLE h32 = 0;
     ULONG cbSize16;
     UINT cbSize32;
     VPVOID vp;
-                                    
+
     if (vp = GlobalLock16(h16, &cbSize16)) {
         LPDROPFILESTRUCT lpdfs32;
         PDROPFILESTRUCT16 lpdfs16;
 
         GETMISCPTR(vp, lpdfs16);
-                                
+
         cbSize32 = 2*sizeof(TCHAR) + sizeof(DROPFILESTRUCT) +
                    (cbSize16 - sizeof(DROPFILESTRUCT16));
-                                 
-        if (h32 = GlobalAlloc(GMEM_DDESHARE|GMEM_MOVEABLE|GMEM_ZEROINIT,
-                                cbSize32)){
-                                  
+
+        if (h32 = WOWGLOBALALLOC(GMEM_DDESHARE|GMEM_MOVEABLE|GMEM_ZEROINIT,
+                                 cbSize32)){
+
             lpdfs32 = (LPDROPFILESTRUCT)GlobalLock(h32);
-                                   
+
             lpdfs32->pFiles = sizeof(DROPFILESTRUCT);
             lpdfs32->pt.x = (LONG) lpdfs16->x;
             lpdfs32->pt.y = (LONG) lpdfs16->y;

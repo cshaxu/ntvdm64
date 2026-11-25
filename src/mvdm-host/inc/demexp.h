@@ -17,12 +17,12 @@
 BOOL DemInit (int argc, char *argv[]);
 BOOL DemDispatch(ULONG iSvc);
 VOID demCloseAllPSPRecords (VOID);
-DWORD demFileDelete (LPSTR lpFile);
+DWORD __cdecl demFileDelete (LPSTR lpFile);
 DWORD __cdecl demFileFindFirst (PVOID pDTA, LPSTR lpFile, USHORT usSearchAttr);
 DWORD __cdecl demFileFindNext (PVOID pDTA);
 ULONG __cdecl demClientErrorEx (HANDLE hFile, CHAR chDrive, BOOL bSetRegs);
 UCHAR demGetPhysicalDriveType(UCHAR DriveNum);
-ULONG demWOWLFNEntry(PVOID pUserFrame);
+ULONG __cdecl demWOWLFNEntry(PVOID pUserFrame);
 
 #define SIZEOF_DOSSRCHDTA 43
 

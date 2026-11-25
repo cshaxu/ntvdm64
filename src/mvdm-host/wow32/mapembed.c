@@ -84,7 +84,7 @@ Return Value:
 #endif
 #line 94
 
-    if (!strcmp(FileName, szWinDotIni)) {
+    if (!WOW32_strcmp(FileName, szWinDotIni)) {
         Result = TRUE;
         goto Done;
     }
@@ -104,7 +104,7 @@ Return Value:
     WOW32ASSERTMSG(pszWinIniFullPath && pszWinIniFullPath[0],
                    "WOW32 ERROR pszWinIniFullPath not initialized.\n");
 
-    Result = !_stricmp( pszWinIniFullPath, BufferForFullPath );
+    Result = !WOW32_stricmp( pszWinIniFullPath, BufferForFullPath );
 
 Done:
     return Result;
@@ -387,16 +387,16 @@ Return Value:
     lpClass = KeyName;
     szLine = Value;
 
-    if (!(lpClassName=strchr(szLine, ',')))
+    if (!(lpClassName=WOW32_strchr(szLine, ',')))
         return;
     // get the server name and null terminate the class name
-    if (!(lpServer=strchr(++lpClassName, ','))) {
+    if (!(lpServer=WOW32_strchr(++lpClassName, ','))) {
         return;
     }
     *lpServer++ = '\0';
 
     // null terminate the server
-    if (!(lpT=strchr(lpServer, ','))) {
+    if (!(lpT=WOW32_strchr(lpServer, ','))) {
         return;
     }
     *lpT++ = '\0';

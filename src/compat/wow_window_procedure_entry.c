@@ -53,7 +53,7 @@ WNDPROC WINAPI wow_window_entry_for_guest(const wow_window_dispatch_target *targ
     ULONG immediate, relative;
     SYSTEM_INFO system;
     if (!target || !target->wow_encoded ||
-            !(target->procedure & WOW_WINDOW_PROC_TAG) || !target->callback) {
+            !WOW_WINDOW_IS_GUEST_PROC(target->procedure) || !target->callback) {
         SetLastError(ERROR_INVALID_PARAMETER); return NULL;
     }
     AcquireSRWLockShared(&entry_lock);

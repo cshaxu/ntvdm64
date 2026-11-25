@@ -45,10 +45,7 @@
 
 include ks386.inc
 include bop.inc
-include wow.inc
-include callconv.inc
-include vint.inc
-include vdmtb.inc
+include wowtd.inc
 
 if DBG
 DEBUG   equ 1
@@ -61,31 +58,23 @@ ifdef WOWPROFILE
 DEBUG_OR_WOWPROFILE equ 1
 endif
 
-;   If ON All APIs performand with Try Except (decreases performance)
-FASTCALL equ 1
+include wow.inc
+include callconv.inc
+include vint.inc
+include vdmtib.inc
+
 
         EXTRN   __imp__CurrentMonitorTeb:DWORD
-        EXTRN   __imp__ExpVdmTib:DWORD
         EXTRN   __imp__FlatAddress:DWORD
 
 _TEXT   SEGMENT PARA PUBLIC 'CODE'
         ASSUME  DS:NOTHING, ES:NOTHING, SS:FLAT, FS:NOTHING, GS:NOTHING
 
         EXTRNP _DispatchInterrupts,0
-
-if NO_W32TRYCALL
-   if FASTCALL
         EXTRNP @W32PatchCodeWithLpfnw32, 2
-   else
-        EXTRNP _W32PatchCodeWithLpfnw32, 2
-   endif
-else
-  ifdef FASTCALL
-          EXTRNP @W32TryCall, 2
-  else    ; FASTCALL
-          EXTRNP _W32TryCall, 2
-  endif
-endif
+        EXTRNP @InterpretThunk, 2
+
+        EXTRNP _Ssync_WOW_CommDlg_Structs, 3
 
 ifdef DEBUG
         EXTRNP _logargs,2
@@ -106,9 +95,6 @@ _WowpLockPrefixTable    label dword
         dd offset FLAT:_wowlock5
         dd offset FLAT:_wowlock6
         dd 0
-_DATA   ENDS
-
-_DATA   SEGMENT
 
 Stack16     LABEL   DWORD
 _savesp16 DW  0
@@ -190,12 +176,15 @@ cPublicProc _WOWBopEntry,0
                                                 ; should be moved to fame
         pushfd                                  ; Save them flags
 
-        ; we make here the assumption that the c compiler always keeps the 
+        ; we make here the assumption that the c compiler always keeps the
         ; direction flag clear. We clear it here instead of restoring it
         ; from the context for performance
         cld
 
-        mov     ebx, dword ptr [__imp__ExpVdmTib]      ; get pointer to contexts
+        mov     eax,KGDT_R3_TEB OR RPL_MASK     ; restore flat FS
+        mov     fs,ax
+        mov     ebx, dword ptr fs:[PcTeb]
+        mov     ebx, dword ptr [ebx].TeVdm      ; get pointer to contexts
 
         ;
         ; start saving some of the 16-bit context
@@ -241,6 +230,9 @@ wbe10:
         push    edi
         push    ebp
 
+cPublicFpo 6,0                 ; locals, params
+                               ; we only save 3 but FastWOWCallbackCall
+                               ; saves 3 as well
 
         ; Set up flat segment registers
 
@@ -255,9 +247,10 @@ wbe10:
 
         ; Update the CURRENTPTD->vpStack
         mov     eax,fs:[PcTeb]
-        mov     ecx,[eax+TbWOW32Reserved]
+        mov     ecx,[eax+TbWOW32Reserved] ; move CURRENTPTD into ecx
         mov     esi, [Stack16]
-        mov     dword ptr [ecx],esi         ; PTD->vpStack = vpCurrentStack
+        mov     dword ptr [ecx],esi       ; PTD->vpStack = vpCurrentStack
+
 
         ; Convert the 16:16 SS:SP pointer into a 32-bit flat pointer
         ; DI = 16-bit SS, put there by kernel
@@ -268,13 +261,19 @@ wbe10:
 
         mov     edx, dword ptr [__imp__FlatAddress]
         add     esi, dword ptr [edx+edi*4]
-
         ; esi is now a flat pointer to the frame
 
+        mov     eax,dword ptr [ecx+cbOffCOMMDLGTD]  ; ecx = CURRENTPTD
+        cmp     eax,0                               ; eax = PTD->PCOMMDLGTD
+        jnz     SsyncCommDlg16to32
+
+SsyncContinue1:
+
+
 ifdef DEBUG
-	push	ecx
-	stdCall _logargs,<3,esi>
-	pop	ecx
+        push    ecx
+        stdCall _logargs,<3,esi>
+        pop     ecx
 endif
 
 
@@ -283,39 +282,46 @@ endif
         mov     edx, dword ptr [esi].vf_wCallID
 
         ; esi = pFrame
-if NO_W32TRYCALL
         mov     [ecx].WtdFastWowEsp, esp
         test    edx, 0ffff0000h
-        jnz     short @f
-   ifdef FASTCALL
-        mov     ecx, esi  ; ecx  = pFrame & edx = lpfnW32
-        call    @W32PatchCodeWithLpfnw32@8
-   else
-        stdCall _W32PatchCodeWithLpfnw32, <esi, edx>
-   endif
-        mov     edx, eax
+        mov     eax, edx
+        jnz     MakeCall
+ifdef DEBUG
+        imul    edx, size W32
+else
+.errnz  (size W32 - 4)
+        shl     edx, 2
+endif
+        mov     edx, dword ptr [_aw32WOW + edx]    ; eax = aw32WOW[edx].lpfnW32
+        test    edx, 0ffff0000h                    ; check for intthunk (hiword 0)
+        jnz     @f
+        mov     eax, @InterpretThunk@8
+        jmp     MakeCall
 @@:
         mov     ecx, esi  ; ecx  = pFrame & edx = lpfnW32
-        call    edx
-ApiReturnAddress:
-else
-  ifdef FASTCALL
+        call    @W32PatchCodeWithLpfnw32@8
+MakeCall:
         mov     ecx, esi  ; ecx  = pFrame & edx = lpfnW32
-        call    @W32TryCall@8
-  else
-        stdCall _W32TryCall,<esi,edx>
-  endif
-endif
+        call    eax
+
+ApiReturnAddress:
 
 ;
 ; IMPORTANT NOTE: Upon retruned from wow32 worker routine, the
 ;   non-volatile registers may be destroyed if it is returned via
 ;   try-except handler.
 ;
+
         mov     ebx, dword ptr [__imp__CurrentMonitorTeb]
         mov     ecx,fs:[PcTeb]
         mov     [ebx], ecx  ; Tell NTVDM which is the active thread
-        mov     ecx,[ecx+TbWOW32Reserved]
+        mov     ecx,[ecx+TbWOW32Reserved]          ; move CURRENTPTD into ecx
+
+        mov     ebx,dword ptr [ecx+cbOffCOMMDLGTD]  ; ecx = CURRENTPTD
+        cmp     ebx,0                               ; ebx = PTD->PCOMMDLGTD
+        jnz     SsyncCommDlg32to16
+
+SsyncContinue2:
 
 ifdef DEBUG
         push    ecx
@@ -332,7 +338,8 @@ ifdef DEBUG
         pop     eax
         pop     ecx
 endif
-        mov     ebx, dword ptr [__imp__ExpVdmTib]
+        mov     ebx, dword ptr fs:[PcTeb]
+        mov     ebx, dword ptr [ebx].TeVdm      ; get pointer to contexts
 
         push    dword ptr [ebx].VtVdmContext.CsEFlags   ;get 16-bit flags
         popfd   ; in case the direction flag was set
@@ -436,6 +443,10 @@ wl80:   pop     ecx     ; points to ptd->vpStack
         mov     dword ptr [ebx].VtMonitorContext.CsEsp,esp
         mov     [ecx].WtdFastWowEsp,esp
 
+        pushfd
+        and     dword ptr [esp], 0ffffbfffH
+        popfd
+
         ;
         ; switch to 16-bit stack (probably an interrupt stack)
         ;
@@ -462,7 +473,6 @@ wl80:   pop     ecx     ; points to ptd->vpStack
         mov     ebx,_saveebx
         mov     ecx,_saveecx
         mov     edx,_saveedx
-
         iretd
 
 wbegetretaddress:
@@ -474,10 +484,44 @@ wbegetretaddress:
 
         jmp     wbe10
 
+SsyncCommDlg16to32:
+
+        push    ecx   ; save CURRENTPTD
+
+        push    dword ptr [esi+cbOffwThunkCSIP]  ; esi = pFrame
+        push    1                                ; 16to32 flag
+        push    eax                              ; pComDlgTD
+        call    _Ssync_WOW_CommDlg_Structs@12
+
+        pop     ecx
+        jmp     SsyncContinue1
+
+SsyncCommDlg32to16:
+        push    ecx   ; save CURRENTPTD
+        push    eax   ; preserve API return value
+
+        ; build a flat ptr to pFrame
+        mov     esi, [ecx]
+        and     esi, 0FFFFh                 ; esi = 16-bit sp
+                                            ; edi should already be set
+
+        mov     edx, dword ptr [__imp__FlatAddress]
+        add     esi, dword ptr [edx+edi*4] ; esi = pframe
+
+        push    dword ptr [esi+cbOffwThunkCSIP]  ; esi = pFrame
+        push    0                                ; 32to16 flag
+        push    ebx                              ; pComDlgTD
+        call    _Ssync_WOW_CommDlg_Structs@12
+
+        pop     eax
+        pop     ecx
+        jmp     SsyncContinue2
 
 stdENDP _WOWBopEntry
 
-if NO_W32TRYCALL
+
+
+
 cPublicProc _PostExceptionHandler,0
         assume ds:_DATA
 
@@ -526,7 +570,13 @@ stdENDP _PostExceptionHandler
 cPublicProc _W32SetExceptionContext,1
         assume ds:_DATA
 
-        mov     ecx, dword ptr [__imp__ExpVdmTib]
+        push    fs      ; I don;t think we need this, just in case
+        mov     ecx,KGDT_R3_TEB OR RPL_MASK     ; restore flat FS
+        mov     fs,cx
+        mov     ecx, fs:[PcTeb]
+        mov     ecx, dword [ecx].TeVdm
+        pop     fs
+
         mov     edx, [esp+4]            ; (edx) = Context Record
         mov     ecx, dword ptr [ecx].VtMonitorContext.CsEsp
         mov     [edx].CsEsp, ecx
@@ -574,7 +624,6 @@ cPublicProc _IsW32WorkerException, 0
 
 stdENDP _IsW32WorkerException
 
-endif   ; NO_W32TRYCALL
 
 _TEXT   ends
 
@@ -614,7 +663,8 @@ cPublicProc _FastWOWCallbackCall,0
         push    edi
         push    ebx
 
-        mov     ebx, dword ptr [__imp__ExpVdmTib]
+        mov     ebx, fs:[PcTeb]
+        mov     ebx, dword ptr [ebx].TeVdm
 
         ; translate the interrupt flag to the virtual interrupt flag
 
@@ -636,7 +686,7 @@ fe20:
         mov     _saveebp32, ebp
 
         mov     ecx, fs:[PcTeb]
-        mov     ecx, [ecx].TbWOW32Reserved
+        mov     ecx, [ecx].TbWOW32Reserved       ; move CURRENTPTD into ecx
         mov     [ebx].VtMonitorContext.CsEsp,esp
         mov     [ecx].WtdFastWowEsp,esp
 
@@ -644,15 +694,19 @@ fe20:
         pop     ecx
         mov     [ebx].VtMonitorContext.CsEflags,ecx
 
+        pushfd
+        and     dword ptr [esp], 0ffffbfffH
+        popfd
+
         ; switch to vdm stack
         push    _savess16
         push    word ptr 0
         push    _savesp16
         lss     esp, [esp]
 
-	; before going to 16 bit, patch ebp to zero the high bits
-	; hijaak pro app is relying upon hiword of ebp being 0
-	and     ebp, 0ffffh
+        ; before going to 16 bit, patch ebp to zero the high bits
+        ; hijaak pro app is relying upon hiword of ebp being 0
+        and     ebp, 0ffffh
 
         ; put flags, cs, and ip onto the 16-bit stack so we can iret to krnl286
 
@@ -661,6 +715,7 @@ fe20:
         push    _saveip16
 
         ; return to krnl286
+
         iretd
 
 
@@ -706,6 +761,9 @@ fe80:   pop     eax
         pushfd
         pop     ecx
         mov     [ebx].VtMonitorContext.CsEflags,ecx
+        pushfd
+        and     dword ptr [esp], 0ffffbfffH
+        popfd
 
 
         ; switch to vdm stack
@@ -715,15 +773,16 @@ fe80:   pop     eax
 
         ; put flags, cs, and ip onto the 16-bit stack so we can iret to krnl286
 
-	; before interrupts are dispatched, patch ebp to zero the high bits
-	; hijaak pro app is relying upon hiword of ebp being 0
-	and     ebp, 0ffffh
+        ; before interrupts are dispatched, patch ebp to zero the high bits
+        ; hijaak pro app is relying upon hiword of ebp being 0
+        and     ebp, 0ffffh
 
         push    dword ptr [ebx].VtVdmContext.CsEflags
         push    dword ptr [ebx].VtVdmContext.CsSegCs
         push    dword ptr [ebx].VtVdmContext.CsEip
 
         ; return to krnl or interrupt routine
+
         iretd
 
 
@@ -756,7 +815,12 @@ cPublicProc _FastWOWCallbackRet,0
         mov     ebx,KGDT_R3_DATA OR RPL_MASK
         mov     ds,bx
         assume ds:_DATA
-        mov     ebx, dword ptr [__imp__ExpVdmTib]
+
+        mov     ebx, KGDT_R3_TEB OR RPL_MASK
+        mov     fs, bx
+        mov     ebx, fs:[PcTeb]
+        mov     ebx, dword ptr [ebx].TeVdm
+
         pushfd
         pop     eax
         mov     dword ptr [ebx].VtVdmContext.CsEFlags,eax
@@ -776,10 +840,10 @@ fwcbr10:
 
         ; refresh CURRENTPTD->vpStack with the current stack
 
-        mov     ecx, KGDT_R3_TEB OR RPL_MASK
-        mov     fs, cx
+        ;mov     ecx, KGDT_R3_TEB OR RPL_MASK
+        ;mov     fs, cx
         mov     eax, fs:[PcTeb]
-        mov     ecx, [eax+TbWOW32Reserved]
+        mov     ecx, [eax+TbWOW32Reserved] ; move CURRENTPTD into ecx
 
         mov     _savess16,ss
         mov     _savesp16,sp
@@ -888,4 +952,3 @@ stdENDP _FastBopSetVDMStack
 _TEXT   ends
 
         end
-

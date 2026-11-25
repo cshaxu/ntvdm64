@@ -23,15 +23,10 @@ WBP W32WordBreakProc = NULL;
 
 extern DWORD fThunkStrRtns;
 
-
-/* Called By Kernel When Initialization is Complete */
-
-ULONG FASTCALL WU32FinalUserInit(PVDMFRAME pFrame)
-{
-    UNREFERENCED_PARAMETER(pFrame);
-    return TRUE;
-}
-
+extern WORD gwKrnl386CodeSeg1;
+extern WORD gwKrnl386CodeSeg2;
+extern WORD gwKrnl386CodeSeg3;
+extern WORD gwKrnl386DataSeg1;
 
 ULONG FASTCALL WU32ExitWindows(PVDMFRAME pFrame)
 // BUGBUG mattfe 4-mar-92, this routine should not return if we close down
@@ -56,22 +51,22 @@ WORD gUser16CS = 0;
 
 ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
 {
-    ULONG ul;
+    ULONG ul = 0;
     register PNOTIFYWOW16 parg16;
 
     GETARGPTR(pFrame, sizeof(NOTIFYWOW16), parg16);
 
     switch (FETCHWORD(parg16->Id)) {
-        case FUN_LOADACCELERATORS:
+        case NW_LOADACCELERATORS:
             ul = WU32LoadAccelerators(FETCHDWORD(parg16->pData));
             break;
 
-        case FUN_LOADICON:
-        case FUN_LOADCURSOR:
+        case NW_LOADICON:
+        case NW_LOADCURSOR:
             ul = (ULONG) W32CheckIfAlreadyLoaded(parg16->pData, FETCHWORD(parg16->Id));
             break;
 
-        case FUN_WINHELP:
+        case NW_WINHELP:
             {
                 // this call is made from IWinHelp in USER.exe to find the
                 // '16bit' help window if it exists.
@@ -91,20 +86,33 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
             }
             break;
 
-        case FUN_FINALUSERINIT:
+        case NW_KRNL386SEGS:
             {
-#line 94
+                PKRNL386SEGS pKrnl386Segs;
+                
+                GETVDMPTR(parg16->pData, sizeof(KRNL386SEGS), pKrnl386Segs);
+
+                gwKrnl386CodeSeg1 = pKrnl386Segs->CodeSeg1;
+                gwKrnl386CodeSeg2 = pKrnl386Segs->CodeSeg2;
+                gwKrnl386CodeSeg3 = pKrnl386Segs->CodeSeg3;
+                gwKrnl386DataSeg1 = pKrnl386Segs->DataSeg1;
+            }
+            break;
+
+        case NW_FINALUSERINIT:
+            {
+#line 102
                 static BYTE CallCsrFlag = 0;
                 extern DWORD   gpsi;
                 PUSERCLIENTGLOBALS pfinit16;
                 WORD UNALIGNED *pwMaxDWPMsg;
                 PBYTE pDWPBits;
-#line 99
+#line 107
 #ifdef DEBUG
-#line 100
+#line 108
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 104
+#line 112
 
                 GETVDMPTR(parg16->pData, sizeof(USERCLIENTGLOBALS), pfinit16);
                 GETVDMPTR(pfinit16->lpwMaxDWPMsg, sizeof(WORD), pwMaxDWPMsg);
@@ -127,32 +135,50 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                     FLUSHVDMCODEPTR((ULONG)pfinit16->lpgpsi, sizeof(DWORD), lpT);
                     FREEVDMPTR(lpT);
                 }
+
+
                 if (pfinit16->lpCsrFlag) {
                     BYTE **lpT;
                     GETVDMPTR(pfinit16->lpCsrFlag, sizeof(DWORD), lpT);
                     *lpT = (LPSTR)mvdm_softpc_wow_page_domain_guest_csr_flag(); /* DIVERGENCE(MVDM-HOST-DIV-300): guest byte. */
-#line 130
+#line 140
                     FLUSHVDMCODEPTR((ULONG)pfinit16->lpCsrFlag, sizeof(DWORD), lpT);
                     FREEVDMPTR(lpT);
                 }
 
-                if (HIWORD(pfinit16->dwBldInfo) != HIWORD(pfnOut.dwBldInfo)) {
-                    MessageBeep(0);
-                    MessageBoxA(NULL, "user.exe and user32.dll are mismatched.",
-                            "WOW Error", MB_OK | MB_ICONEXCLAMATION);
+                if (pfinit16->lpHighestAddress) {
+                    DWORD *lpT;
+                    SYSTEM_INFO info;
+
+                    GETVDMPTR(pfinit16->lpHighestAddress, sizeof(DWORD), lpT);
+                    GetSystemInfo(&info);
+                    *lpT = (DWORD)(ULONG_PTR)info.lpMaximumApplicationAddress;
+                    FLUSHVDMCODEPTR((ULONG)pfinit16->lpHighestAddress, sizeof(DWORD), lpT);
+                    FREEVDMPTR(lpT);
                 }
+
+
+                /* No longer required now that user32 & user.exe are separate
+     DEAD CODE  if (HIWORD(pfinit16->dwBldInfo) != HIWORD(pfnOut.dwBldInfo)) {
+     DEAD CODE      MessageBeep(0);
+     DEAD CODE      MessageBoxA(NULL, "user.exe and user32.dll are mismatched.",
+     DEAD CODE                  "WOW Error", MB_OK | MB_ICONEXCLAMATION);
+     DEAD CODE  }
+                */
 
                 *pwMaxDWPMsg = (pfnOut.pfnWowGetDefWindowProcBits)(pDWPBits, pfinit16->cbDWPBits);
 
                 FLUSHVDMCODEPTR(pfinit16->lpwMaxDWPMsg, sizeof(WORD), pwMaxDWPMsg);
                 FLUSHVDMCODEPTR(pfinit16->lpDWPBits, pfinit16->cbDWPBits, pDWPBits);
 
-#line 145
+#line 177
 #ifdef DEBUG
-#line 146
+#line 178
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 170
+#line 202
+
+                gpfn16GetProcModule = pfinit16->pfnGetProcModule;
 
                 //
                 // Return value tells User16 whether to thunk
@@ -191,13 +217,13 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
 }
 
 
-ULONG FASTCALL WU32WordBreakProc(PVDMFRAME pFrame)
+ULONG FASTCALL WU32WOWWordBreakProc(PVDMFRAME pFrame)
 {
     PSZ         psz1;
     ULONG ul;
-    register PWORDBREAKPROC16 parg16;
+    register PWOWWORDBREAKPROC16 parg16;
 
-    GETARGPTR(pFrame, sizeof(WORDBREAKPROC16), parg16);
+    GETARGPTR(pFrame, sizeof(*parg16), parg16);
     GETPSZPTR(parg16->lpszEditText, psz1);
 
     ul = (*W32WordBreakProc)(psz1, parg16->ichCurrentWord, parg16->cbEditText,

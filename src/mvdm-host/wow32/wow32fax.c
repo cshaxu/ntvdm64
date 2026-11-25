@@ -7,6 +7,58 @@
 //
 //****************************************************************************
 
+
+//****************************************************************************
+// This expalins how all this works (sort of) using WinFax as example.
+// Install:
+//  1. App calls WriteProfileString("devices","WINFAX","WINFAX,Com1:")
+//     to register a "printer" in Win.ini a-la Win3.1
+//  2. Our thunks of WritexxxProfileString() look for the "devices" string
+//     and pass the call to IsFaxPrinterWriteProfileString(lpszSection,lpszKey,
+//     lpszString).
+//  3. If lpszKey ("WINFAX" in this case) is in our supported fax drivers list
+//     (See Reg\SW\MS\WinNT\CurrentVersion\WOW\WOWFax\SupportedFaxDrivers)
+//     (by call to IsFaxPrinterSupportedDevice()), we call InstallWowFaxPrinter
+//     to add the printer the NT way -- via AddPrinter().
+//  4. To set up the call to AddPrinter, we copy WOWFAX.DLL and WOWFAXUI.DLL to
+//     the print spooler driver directory (\NT\system32\spool\drivers\w32x86\2)
+//  5. We next call AddPrinterDriver to register the wowfax driver.
+//  6. We then call wow32!DoAddPrinterStuff which launches a new thread,
+//     wow32!AddPrinterThread, which calls winspool.drv!AddPrinter() for us. The
+//     PrinterInfo.pPrinterName = the 16-bit fax driver name,"WINFAX" in this
+//     case.  WinSpool.drv then does a RPC call into the spooler.
+//  7. During the AddPrinter() call, the spooler calls back into the driver to
+//     get driver specific info.  These callbacks are handled by our WOWFAX
+//     driver in the spooler's process.  They essentially callback into WOW
+//     via wow32!WOWFaxWndProc().
+//  8. WOWFaxWndProc() passes the callback onto WOW32FaxHandler, which calls
+//     back to wowexec!FaxWndProc().
+//  9. FaxWndProc then calls the 16-bit LoadLibrary() to open the 16-bit fax
+//     driver (WinFax.drv in this case).
+// 10. The messages sent to FaxWndProc tell it which exported function it needs
+//     call in the 16-bit driver on behalf of the spooler.
+// 11. Any info the spooler wants to pass to the 16-bit driver or get from it
+//     essentially goes through the mechanism in steps 7 - 10.
+// Now you know (sort of).
+//****************************************************************************
+//
+// Notes on what allows us to support a 16-bit fax driver:
+// Essentially we have to know in advance which API's an app will call in the
+// driver so we can handle the thunks.  It turns out that fax drivers only
+// need to export a small essential list of API's:
+//    Control, Disable, Enable, BitBlt, ExtDeviceMode, DeviceCapabilities
+// (see mvdm\inc\wowfax.h\_WOWFAXINFO16 struct (all the PASCAL declarations)
+//  and mvdm\wow16\test\shell\wowexfax.c\FaxWndProc() )
+// The list is way too big to support 16-bit printer & display drivers.
+// If a 16-bit fax driver exports these API's there's a pretty good chance
+// we can support it in WOW. Other issues to look into: the dlgproc's the
+// driver export's, any obsolete Win 3.0 API's that the NT spooler won't know
+// how to call.
+//
+//****************************************************************************
+
+
+
 #include "precomp.h"
 #pragma hdrstop
 #define WOWFAX_INC_COMMON_CODE
@@ -17,6 +69,12 @@
 #include "winspool.h"
 
 MODNAME(wowfax.c);
+
+typedef struct _WOWADDPRINTER {
+    LPVOID  pPrinterStuff;
+    INT     iCode;
+    BOOL    bRet;
+} WOWADDPRINTER, *PWOWADDPRINTER;
 
 //****************************************************************************
 // globals -
@@ -45,7 +103,7 @@ VOID SortedInsert(LPSTR lpElement, LPSTR *alpList)
     LPSTR lpTmp, lpSwap;
 
     while (*alpList) {
-        if (_stricmp(lpElement, *alpList) < 0) {
+        if (WOW32_stricmp(lpElement, *alpList) < 0) {
             break;
         }
         alpList++;
@@ -101,7 +159,7 @@ LPSTR *GetSupportedFaxDrivers(UINT *uCount)
 {
     HKEY  hKey = 0;
     DWORD dwType;
-    DWORD cbBufSize;
+    DWORD cbBufSize=0;
     LPSTR lpSupFaxDrvBuf = NULL;
     LPSTR *alpSupFaxDrvList = NULL;
 
@@ -131,13 +189,17 @@ LPSTR *GetSupportedFaxDrivers(UINT *uCount)
     if (*uCount = BuildStrList(lpSupFaxDrvBuf, NULL)) {
         // Build an array of pointers to the start of the strings in the list.
         alpSupFaxDrvList = (LPSTR *) malloc_w(*uCount * sizeof(LPSTR));
-#line 135
+#line 192
         if (alpSupFaxDrvList) {
-#line 134
+#line 191
             RtlZeroMemory(alpSupFaxDrvList, *uCount * sizeof(LPSTR));
-#line 136
+#line 193
             // Fill the array with string starting points.
+            RtlZeroMemory(alpSupFaxDrvList, *uCount * sizeof(LPSTR));
             BuildStrList(lpSupFaxDrvBuf, alpSupFaxDrvList);
+        }
+        else {
+            goto GSFD_error;
         }
     }
     goto GSFD_exit;
@@ -152,7 +214,7 @@ GSFD_exit:
             free_w(lpSupFaxDrvBuf);
         }
     }
-#line 146
+#line 207
     if (hKey) {
         RegCloseKey(hKey);
     }
@@ -201,7 +263,8 @@ LONG WowFaxWndProc(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam)
             CloseHandle(hMap);
         }
         LOGDEBUG(0,("WowFaxWndProc failed to setup shared data mapping!\n"));
-        WOW32ASSERT(FALSE);
+        // WOW32ASSERT(FALSE);  // turn this off - Procomm tries to install
+                                // this many times.
     }
     else {
 
@@ -230,7 +293,7 @@ ULONG WOW32FaxHandler(UINT iFun, LPSTR lpIn)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 227
+#line 289
 
     switch (iFun) {
         case WM_DDRV_SUBCLASS:
@@ -364,6 +427,20 @@ ULONG WOW32FaxHandler(UINT iFun, LPSTR lpIn)
             // fall through;
 
         case WM_DDRV_STARTDOC:
+            // WowFax (EasyFax Ver2.0) support...
+            GETVDMPTR(lpT->lpinfo16, sizeof(WOWFAXINFO16), lpT16);
+            if (lpT16) {
+                WideCharToMultiByte(CP_ACP, 0,
+                                    lpT->szDocName,
+                                    lstrlenW(lpT->szDocName) + 1,
+                                    lpT16->szDocName,
+                                    sizeof(lpT16->szDocName),
+                                    NULL, NULL);
+            }
+            lpT->retvalue = CallWindowProc( gfaxinfo.proc16,
+                                hwnd, lpT->msg, lpT->hdc, (LPARAM)lpT->lpinfo16);
+            break;
+
         case WM_DDRV_ENDDOC:
             lpT->retvalue = CallWindowProc( gfaxinfo.proc16,
                                 hwnd, lpT->msg, lpT->hdc, (LPARAM)lpT->lpinfo16);
@@ -542,7 +619,19 @@ DWORD DeviceCapsHandler(LPWOWFAXINFO lpfaxinfo)
                 break;
 
             default:
+#ifdef FE_SB // for buggy fax driver such as CB-FAX Pro (Bother Corp.)
+                try {
+                    RtlCopyMemory(lpDest, lpSrc, lpWFI16->cData);
+                } except(EXCEPTION_EXECUTE_HANDLER) {
+                    // What can I do for the exception... ????
+                    // Anyway, we don't want to die.....
+                    #if DBG
+                    LOGDEBUG(0,("Exception during copying some data\n"));
+                    #endif
+                }
+#else // !FE_SB
                 RtlCopyMemory(lpDest, lpSrc, lpWFI16->cData);
+#endif // !FE_SB
                 break;
         }
         free16((VPVOID)lpWFI16->lpOut);
@@ -803,7 +892,11 @@ BOOL ConvertGdiInfo(LPGDIINFO16 lpginfo16, PGDIINFO lpginfo, BOOL fTo16)
 ULONG FASTCALL WG32DMBitBlt( PVDMFRAME pFrame)
 {
     register PDMBITBLT16 parg16;
+#ifdef DBCS /* wowfax support */
+    register PDEV_BITMAP16   pbm16;
+#else // !DBCS
     register PBITMAP16   pbm16;
+#endif /* !DBCS */
     LPBYTE  lpDest, lpSrc;
     UINT    cBytes;
     LPBYTE  lpbits, lpbitsEnd;
@@ -811,7 +904,11 @@ ULONG FASTCALL WG32DMBitBlt( PVDMFRAME pFrame)
     LOGDEBUG(0,("WG32DMBitBlt\n"));
 
     GETARGPTR(pFrame, sizeof(DMBITBLT16), parg16);
+#ifdef DBCS /* wowfax support */
+    GETVDMPTR(parg16->pbitmapdest, sizeof(DEV_BITMAP16), pbm16);
+#else // !DBCS
     GETVDMPTR(parg16->pbitmapdest, sizeof(BITMAP16), pbm16);
+#endif /* !DBCS */
     GETVDMPTR(pbm16->bmBits, 0, lpDest);
 
     WOW32ASSERT(glpfaxinfoCur != NULL);
@@ -819,6 +916,213 @@ ULONG FASTCALL WG32DMBitBlt( PVDMFRAME pFrame)
     lpbitsEnd = (LPBYTE)lpbits + glpfaxinfoCur->bmHeight *
                                            glpfaxinfoCur->bmWidthBytes;
 
+#ifdef DBCS /* wowfax support */
+    lpSrc  = (LPBYTE)lpbits + (parg16->srcx / glpfaxinfoCur->bmPixPerByte) +
+                              (parg16->srcy * glpfaxinfoCur->bmWidthBytes);
+
+    if (lpSrc >= lpbits) {
+
+        WORD    extx,exty,srcx,srcy,desty,destx;
+
+        extx  = FETCHWORD(parg16->extx);
+        exty  = FETCHWORD(parg16->exty);
+        srcx  = FETCHWORD(parg16->srcx);
+        srcy  = FETCHWORD(parg16->srcy);
+        destx = FETCHWORD(parg16->destx);
+        desty = FETCHWORD(parg16->desty);
+
+        #if DBG
+        LOGDEBUG(10,("\n"));
+        LOGDEBUG(10,("bmType         = %d\n",pbm16->bmType));
+        LOGDEBUG(10,("bmWidth        = %d\n",pbm16->bmWidth));
+        LOGDEBUG(10,("bmHeight       = %d\n",pbm16->bmHeight));
+        LOGDEBUG(10,("bmWidthBytes   = %d\n",pbm16->bmWidthBytes));
+        LOGDEBUG(10,("bmPlanes       = %d\n",pbm16->bmPlanes));
+        LOGDEBUG(10,("bmBitsPixel    = %d\n",pbm16->bmBitsPixel));
+        LOGDEBUG(10,("bmBits         = %x\n",pbm16->bmBits));
+        LOGDEBUG(10,("bmWidthPlances = %d\n",pbm16->bmWidthPlanes));
+        LOGDEBUG(10,("bmlpPDevice    = %x\n",pbm16->bmlpPDevice));
+        LOGDEBUG(10,("bmSegmentIndex = %d\n",pbm16->bmSegmentIndex));
+        LOGDEBUG(10,("bmScanSegment  = %d\n",pbm16->bmScanSegment));
+        LOGDEBUG(10,("bmFillBytes    = %d\n",pbm16->bmFillBytes));
+        LOGDEBUG(10,("\n"));
+        LOGDEBUG(10,("bmWidthBytesSrc= %d\n",glpfaxinfoCur->bmWidthBytes));
+        LOGDEBUG(10,("\n"));
+        LOGDEBUG(10,("extx           = %d\n",extx));
+        LOGDEBUG(10,("exty           = %d\n",exty));
+        LOGDEBUG(10,("srcx           = %d\n",srcx));
+        LOGDEBUG(10,("srcy           = %d\n",srcy));
+        LOGDEBUG(10,("destx          = %d\n",destx));
+        LOGDEBUG(10,("desty          = %d\n",desty));
+        LOGDEBUG(10,("\n"));
+        #endif
+
+        if (pbm16->bmSegmentIndex) {
+
+            SHORT  WriteSegment;
+            SHORT  WriteOffset;
+            SHORT  Segment=0,SegmentMax=0;
+            LPBYTE DstScan0,SrcScan0;
+            UINT   cBytesInLastSegment;
+            INT    RestLine = (INT) exty;
+
+            WriteSegment = desty / pbm16->bmScanSegment;
+            WriteOffset  = desty % pbm16->bmScanSegment;
+
+            if (WriteOffset) {
+                WriteSegment += 1;
+            }
+
+            #if DBG
+            LOGDEBUG(10,("WriteSegment      = %d\n",WriteSegment));
+            LOGDEBUG(10,("WriteOffset       = %d\n",WriteOffset));
+            LOGDEBUG(10,("\n"));
+            LOGDEBUG(10,("lpDest            = %x\n",lpDest));
+            LOGDEBUG(10,("\n"));
+            #endif
+
+            SegmentMax = exty / pbm16->bmScanSegment;
+            if ( exty % pbm16->bmScanSegment) {
+                SegmentMax += 1;
+            }
+
+            cBytes = glpfaxinfoCur->bmWidthBytes * pbm16->bmScanSegment;
+            lpDest = lpDest + destx + (WriteSegment * 0x10000L) +
+                                      (WriteOffset  * pbm16->bmWidthBytes);
+
+            #if DBG
+            LOGDEBUG(10,("SourceBitmap      = %x\n",lpSrc));
+            LOGDEBUG(10,("DestinationBitmap = %x\n",lpDest));
+            LOGDEBUG(10,("SegmentMax        = %d\n",SegmentMax));
+            LOGDEBUG(10,("\n"));
+            LOGDEBUG(10,("cBytes            = %d\n",cBytes));
+            LOGDEBUG(10,("\n"));
+            #endif
+
+            if ((DWORD)glpfaxinfoCur->bmWidthBytes == (DWORD)pbm16->bmWidthBytes) {
+
+                try {
+                    for( Segment = 1,DstScan0 = lpDest,SrcScan0 = lpSrc;
+                         Segment < SegmentMax;
+                         Segment++,DstScan0 += 0x10000L,
+                         SrcScan0 += cBytes,RestLine -= pbm16->bmScanSegment ) {
+
+                        #if DBG
+                        LOGDEBUG(10,("%d ",Segment-1));
+                        #endif
+
+                        RtlCopyMemory(DstScan0,SrcScan0,cBytes);
+                        RtlZeroMemory(DstScan0+cBytes,pbm16->bmFillBytes);
+                    }
+
+                    #if DBG
+                    LOGDEBUG(10,("%d\n",Segment-1));
+                    #endif
+
+                    if( RestLine > 0 ) {
+                       cBytesInLastSegment = RestLine * pbm16->bmWidthBytes;
+
+                       #if DBG
+                       LOGDEBUG(10,("RestLine            = %d\n",RestLine));
+                       LOGDEBUG(10,("cBytesInLastSegment = %d\n",cBytes));
+                       #endif
+
+                       // do for last segment..
+                       RtlCopyMemory(DstScan0,SrcScan0,cBytesInLastSegment);
+                    }
+
+                } except(EXCEPTION_EXECUTE_HANDLER) {
+                    #if DBG
+                    LOGDEBUG(10,("Exception during copying image\n"));
+                    #endif
+                }
+
+            } else if ((DWORD)glpfaxinfoCur->bmWidthBytes > (DWORD)pbm16->bmWidthBytes) {
+
+                SHORT Line;
+                UINT  cSrcAdvance = glpfaxinfoCur->bmWidthBytes;
+                UINT  cDstAdvance = pbm16->bmWidthBytes;
+
+                try {
+                    for( Segment = 1,DstScan0 = lpDest,SrcScan0 = lpSrc;
+                         Segment < SegmentMax;
+                         Segment++,DstScan0 += 0x10000L,
+                         SrcScan0 += cBytes,RestLine -= pbm16->bmScanSegment ) {
+
+                        LPBYTE DstScanl = DstScan0;
+                        LPBYTE SrcScanl = SrcScan0;
+
+                        #if DBG
+                        LOGDEBUG(10,("%d ",Segment-1));
+                        #endif
+
+                        for( Line = 0;
+                             Line < pbm16->bmScanSegment;
+                             Line++,DstScanl += cDstAdvance,SrcScanl += cSrcAdvance ) {
+
+                            RtlCopyMemory(DstScanl,SrcScanl,cDstAdvance);
+                        }
+                    }
+
+                    #if DBG
+                    LOGDEBUG(10,("%d\n",Segment-1));
+                    #endif
+
+                    if( RestLine > 0 ) {
+
+                        LPBYTE DstScanl = DstScan0;
+                        LPBYTE SrcScanl = SrcScan0;
+
+                        for( Line = 0;
+                             Line < RestLine;
+                             Line++,DstScanl += cDstAdvance,SrcScanl += cSrcAdvance ) {
+
+                            RtlCopyMemory(DstScanl,SrcScanl,cDstAdvance);
+                        }
+                    }
+                } except(EXCEPTION_EXECUTE_HANDLER) {
+                    #if DBG
+                    LOGDEBUG(10,("Exception during copying image\n"));
+                    #endif
+                }
+            } else {
+                WOW32ASSERT(FALSE);
+            }
+
+        } else {
+
+            lpDest = lpDest + destx + desty * pbm16->bmWidthBytes;
+
+            if ((DWORD)glpfaxinfoCur->bmWidthBytes  == (DWORD)pbm16->bmWidthBytes) {
+                cBytes =  parg16->exty * glpfaxinfoCur->bmWidthBytes;
+                if (cBytes > (UINT)(pbm16->bmHeight * pbm16->bmWidthBytes)) {
+                    cBytes = pbm16->bmHeight * pbm16->bmWidthBytes;
+                    WOW32ASSERT(FALSE);
+                }
+                if ((lpSrc + cBytes) <= lpbitsEnd) {
+                    RtlCopyMemory(lpDest, lpSrc, cBytes);
+                }
+            } else {
+                int i;
+
+                // we need to transfer bits one partial scanline at a time
+                WOW32ASSERT((DWORD)pbm16->bmHeight <= (DWORD)glpfaxinfoCur->bmHeight);
+                WOW32ASSERT((DWORD)parg16->exty <= (DWORD)pbm16->bmHeight);
+
+                cBytes = ((DWORD)pbm16->bmWidthBytes < (DWORD)glpfaxinfoCur->bmWidthBytes) ?
+                                 pbm16->bmWidthBytes :        glpfaxinfoCur->bmWidthBytes;
+
+                for (i = 0; i < parg16->exty; i++) {
+                     if ((lpSrc + cBytes) <= lpbitsEnd) {
+                         RtlCopyMemory(lpDest, lpSrc, cBytes);
+                     }
+                     lpDest += pbm16->bmWidthBytes;
+                     lpSrc  += glpfaxinfoCur->bmWidthBytes;
+                }
+            }
+        }
+    }
+#else // !DBCS
     lpDest = lpDest + parg16->destx + parg16->desty * pbm16->bmWidthBytes;
     lpSrc = (LPBYTE)lpbits + (parg16->srcx / glpfaxinfoCur->bmPixPerByte) +
                                  parg16->srcy * glpfaxinfoCur->bmWidthBytes;
@@ -855,6 +1159,7 @@ ULONG FASTCALL WG32DMBitBlt( PVDMFRAME pFrame)
 
 
     }
+#endif /* !DBCS */
     return (ULONG)TRUE;
 }
 
@@ -863,7 +1168,10 @@ PSZ StrDup(PSZ szStr)
     PSZ  pszTmp;
 
     pszTmp = malloc_w(strlen(szStr)+1);
-    return(strcpy(pszTmp, szStr));
+    if(pszTmp ) {
+       return(strcpy(pszTmp, szStr));
+    }
+    return NULL;
 }
 
 PSZ BuildPath(PSZ szPath, PSZ szFileName)
@@ -876,6 +1184,103 @@ PSZ BuildPath(PSZ szPath, PSZ szFileName)
     return(StrDup(szTmp));
 }
 
+//**************************************************************************
+// AddPrinterThread -
+//
+//  Worker thread to make the AddPrinter call into the spooler.
+//
+//**************************************************************************
+
+VOID AddPrinterThread(PWOWADDPRINTER pWowAddPrinter)
+{
+
+    HANDLE result = (HANDLE)(*spoolerapis[pWowAddPrinter->iCode].lpfn)(NULL, 2,
+                                           pWowAddPrinter->pPrinterStuff);
+    if (result) {
+        if (pWowAddPrinter->iCode == WOW_AddPrinter) {
+            (*spoolerapis[WOW_ClosePrinter].lpfn)(result);
+        }
+        pWowAddPrinter->bRet = TRUE;
+    }
+    else {
+        if (GetLastError() == ERROR_PRINTER_ALREADY_EXISTS) {
+            pWowAddPrinter->bRet = TRUE;
+        }
+        else {
+#ifdef DBG
+            LOGDEBUG(0,("AddPrinterThread, AddPrinterxxx call failed: 0x%X\n", GetLastError()));
+#endif
+            pWowAddPrinter->bRet = FALSE;
+        }
+    }
+}
+
+//**************************************************************************
+// DoAddPrinterStuff -
+//
+// Spin a worker thread to make the AddPrinterxxx calls into
+// spooler. This is needed to prevent a deadlock when spooler
+// RPC's to spoolss.
+//
+// This thread added for bug #107426.
+//**************************************************************************
+
+BOOL DoAddPrinterStuff(LPVOID pPrinterStuff, INT iCode)
+{
+    WOWADDPRINTER   WowAddPrinter;
+    HANDLE          hWaitObjects;
+    DWORD           dwEvent, dwUnused;
+    MSG             msg;
+
+    // Spin the worker thread.
+    WowAddPrinter.pPrinterStuff = pPrinterStuff;
+    WowAddPrinter.iCode = iCode;
+    WowAddPrinter.bRet  = FALSE;
+    if (hWaitObjects = CreateThread(NULL, 0,
+                                    (LPTHREAD_START_ROUTINE)AddPrinterThread,
+                                    &WowAddPrinter, 0, &dwUnused)) {
+
+        // Pump messages while we wait for AddPrinterThread to finish.
+        for (;;) {
+            dwEvent = MsgWaitForMultipleObjects(1,
+                                                &hWaitObjects,
+                                                FALSE,
+                                                INFINITE,
+                                                QS_ALLEVENTS | QS_SENDMESSAGE);
+
+            if (dwEvent == WAIT_OBJECT_0 + 0) {
+
+                // Worker thread done.
+                break;
+
+            }
+            else {
+                // pump messages so the callback into wowexec!FaxWndProc doesn't
+                // get hung
+                while (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE)) {
+                    TranslateMessage(&msg);
+                    DispatchMessage(&msg);
+                }
+            }
+        }
+        CloseHandle(hWaitObjects);
+    }
+    else {
+        LOGDEBUG(0,
+              ("DoAddPrinterStuff, CreateThread on AddPrinterThread failed\n"));
+    }
+
+    return WowAddPrinter.bRet;
+}
+
+//**************************************************************************
+// InstallWowFaxPrinter -
+//
+//  Installs the WowFax 32-bit print driver when a 16-bit fax printer
+//  installation is detected.
+//
+//**************************************************************************
+
 BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
 {
     CHAR  szTmp[MAX_PATH];
@@ -885,9 +1290,7 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
     PRINTER_INFO_2 PrinterInfo;
     PORT_INFO_1 PortInfo;
     HKEY hKey = 0, hSubKey = 0;
-    BOOL bRetVal;
-    HANDLE hPrinter;
-#line 882
+    BOOL bRetVal=FALSE;
 
     LOGDEBUG(0,("InstallWowFaxPrinter, Section = %s, Key = %s, String = %s\n", szSection, szKey, szString));
 
@@ -905,7 +1308,7 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
             RegCloseKey(hSubKey);
 
             // Dynamically link to spooler API's
-            if (!(*spoolerapis[WOW_GetPrinterDriverDirectory].lpfn)) {
+            if (!(spoolerapis[WOW_GetPrinterDriverDirectory].lpfn)) {
                 if (!LoadLibraryAndGetProcAddresses("WINSPOOL.DRV", spoolerapis, WOW_SPOOLERAPI_COUNT)) {
                     LOGDEBUG(0,("InstallWowFaxPrinter, Unable to load WINSPOOL API's\n"));
                     return(FALSE);
@@ -919,25 +1322,48 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
                 LOGDEBUG(0,("InstallWowFaxPrinter, GetPrinterDriverDirectory failed: 0x%X\n", GetLastError()));
                 return(FALSE);
             }
- 
+
             // This is a dummy. We've no data file, but spooler won't take NULL.
             DriverInfo.pDataFile = BuildPath(szTmp, WOWFAX_DLL_NAME_A);
 
+            if ( !DriverInfo.pDataFile ) {
+              goto IWFP_error;
+            }
+
             DriverInfo.pDriverPath = BuildPath(szTmp, WOWFAX_DLL_NAME_A);
+
+            if ( !DriverInfo.pDriverPath ) {
+              goto IWFP_error;
+            }
             LOGDEBUG(0,("InstallWowFaxPrinter, pDriverPath = %s\n", DriverInfo.pDataFile));
             szSrcPath = BuildPath(pszSystemDirectory, WOWFAX_DLL_NAME_A);
+            
+            if ( !szSrcPath ) {
+              goto IWFP_error;
+            }
+
             CopyFile(szSrcPath, DriverInfo.pDriverPath, FALSE);
             free_w(szSrcPath);
 
             DriverInfo.pConfigFile = BuildPath(szTmp, WOWFAXUI_DLL_NAME_A);
             szSrcPath = BuildPath(pszSystemDirectory, WOWFAXUI_DLL_NAME_A);
+            
+            if ( !szSrcPath ) {
+              goto IWFP_error;
+            }
+ 
             CopyFile(szSrcPath, DriverInfo.pConfigFile, FALSE);
             free_w(szSrcPath);
 
             // Install the printer driver.
             DriverInfo.cVersion = 1;
             DriverInfo.pName = "Windows 3.1 Compatible Fax Driver";
-            if ((bRetVal = (*spoolerapis[WOW_AddPrinterDriver].lpfn)(NULL, 2, &DriverInfo)) == FALSE) {
+            if ((bRetVal = DoAddPrinterStuff((LPVOID)&DriverInfo,
+                                             WOW_AddPrinterDriver)) == FALSE) {
+
+                // if the driver is already installed, it won't hurt to install
+                // it a second time.  This might be necessary if the user is
+                // upgrading from WinFax Lite to WinFax Pro.
                 bRetVal = (GetLastError() == ERROR_PRINTER_DRIVER_ALREADY_INSTALLED);
             }
 
@@ -947,7 +1373,7 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
                 PrinterInfo.pPrinterName = szKey;
 
                 LOGDEBUG(0,("InstallWowFaxPrinter, pPrinterName = %s\n", PrinterInfo.pPrinterName));
- 
+
                 // Use private API to add a NULL port. Printer guys need to fix
                 // redirection to NULL bug.
                 RtlZeroMemory(&PortInfo, sizeof(PORT_INFO_1));
@@ -963,24 +1389,28 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
                 PrinterInfo.pDriverName     = "Windows 3.1 Compatible Fax Driver";
                 PrinterInfo.pPrintProcessor = "WINPRINT";
                 PrinterInfo.pDatatype       = "RAW";
-                if ((hPrinter = (HANDLE)(*spoolerapis[WOW_AddPrinter].lpfn)(NULL, 2, &PrinterInfo)) == 0) {
-                    bRetVal = (GetLastError() == ERROR_PRINTER_ALREADY_EXISTS);
-                }
-                else {
-                    (*spoolerapis[WOW_ClosePrinter].lpfn)(hPrinter);
-                }
-#line 960
+                bRetVal = DoAddPrinterStuff((LPVOID)&PrinterInfo,
+                                            WOW_AddPrinter);
 #ifdef DBG
 #error Unsupported excluded original configuration
 #endif
-#line 965
+#line 1387
             }
             else {
                 LOGDEBUG(0,("InstallWowFaxPrinter, AddPrinterDriver failed: 0x%X\n", GetLastError()));
             }
-            free_w(DriverInfo.pDataFile);
-            free_w(DriverInfo.pDriverPath);
-            free_w(DriverInfo.pConfigFile);
+IWFP_error: 
+            if ( DriverInfo.pDataFile ) { 
+                 free_w(DriverInfo.pDataFile);
+            }
+
+            if ( DriverInfo.pDriverPath ) {
+                 free_w(DriverInfo.pDriverPath);
+            }
+
+            if ( DriverInfo.pConfigFile) {
+                 free_w(DriverInfo.pConfigFile);
+            }
 
             return(bRetVal);
         }
@@ -1001,32 +1431,98 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
     return(FALSE);
 }
 
+// Come here if szSection=="devices" or if gbWinFaxHack==TRUE
 BOOL IsFaxPrinterWriteProfileString(PSZ szSection, PSZ szKey, PSZ szString)
 {
-    BOOL  Result;
+    BOOL  Result = FALSE;
 
     // Don't install if trying to clear an entry.
     if (*szString == '\0') {
-        Result = FALSE;
         goto Done;
     }
 
     // Trying to install a fax printer?
     LOGDEBUG(0,("IsFaxPrinterWriteProfileString, Section = devices, Key = %s\n", szKey));
 
+    // Is the WinFax Lite hack enabled?
+    if(gbWinFaxHack) {
+
+        // if ("WINFAX", "modem", "xxx") we know the WinFax install program
+        // has had a chance to copy "WinFax.drv" to the hard drive.  So
+        // now we can call AddPrinter which can callback into WinFax.drv to
+        // its hearts content.
+        if(!WOW32_strcmp(szSection, szWINFAX) && !WOW32_stricmp(szKey, szModem)) {
+
+            // Our hack has run its course.  We set this before making the call
+            // to AddPrinter because it calls back into WinFax.drv which calls
+            // WriteProfileString()!
+            gbWinFaxHack = FALSE;
+
+            // Call into the spooler to add our driver to the registry.
+            if (!InstallWowFaxPrinter(szDevices, szWINFAX, szWINFAXCOMx)) {
+                WOW32ASSERTMSG(FALSE,
+                               "Install of generic fax printer failed.\n");
+            }
+        }
+        Result = TRUE;
+        goto Done;
+    }
+
     // Is it one of the fax drivers we recognize?
     if (IsFaxPrinterSupportedDevice(szKey)) {
+
+        // Time to enable the WinFax Lite hack?
+        // if("devices", "WINFAX", "WINFAX,COMx:") we need to avoid the call to
+        // InstallWOWFaxPrinter() at this time -- the install program hasn't
+        // copied the driver to the hard drive yet!!  This causes loadLibrary
+        // of WinFax.drv to fail when the spooler tries to callback into it.
+        // We also don't want this particular call to WriteProfileString to
+        // really be written to the registry -- we let the later call to
+        // AddPrinter take care of all the registration stuff.
+        if(!WOW32_strcmp(szKey, szWINFAX)        &&
+           !WOW32_strncmp(szString, szWINFAX, 6) &&
+           (szString[6] == ',')) {
+
+            VPVOID vpPathName;
+            PSZ    pszPathName;
+            char   szFileName[32];
+
+            // get the install program file name
+            // be sure allocation size matches stackfree16() size below
+            if(vpPathName = stackalloc16(MAX_PATH)) {
+                GetModuleFileName16(CURRENTPTD()->hMod16, vpPathName, MAX_PATH);
+                GETVDMPTR(vpPathName, MAX_PATH, pszPathName);
+                _splitpath(pszPathName,NULL,NULL,szFileName,NULL);
+
+                // WinFax Lite is "INSTALL", WinFax Pro 4.0 is "SETUP"
+                if(!WOW32_stricmp(szINSTALL, szFileName)) {
+
+                    strcpy(szWINFAXCOMx, szString); // save the port string
+                    gbWinFaxHack = TRUE;            // enable the hack
+                    Result = TRUE;
+                    stackfree16(vpPathName, MAX_PATH);
+                    goto Done;     // skip the call to InstallWowFaxPrinter
+                }
+                // No hack needed for WinFax Pro 4.0, the driver is copied
+                // to the hard disk long before they update win.ini
+                else {
+                    stackfree16(vpPathName, MAX_PATH);
+                }
+            }
+        }
+
         if (!InstallWowFaxPrinter(szSection, szKey, szString)) {
             WOW32ASSERTMSG(FALSE, "Install of generic fax printer failed.\n");
         }
         Result = TRUE;
-    } else {
-        Result = FALSE;
     }
 
 Done:
     return Result;
 }
+
+
+
 
 BOOL IsFaxPrinterSupportedDevice(PSZ pszDevice)
 {
@@ -1035,9 +1531,16 @@ BOOL IsFaxPrinterSupportedDevice(PSZ pszDevice)
     // Trying to read from a fax printer entry?
     LOGDEBUG(0,("IsFaxPrinterSupportedDevice, Device = %s\n", pszDevice));
 
+    //If initialization of SupFaxDrv failed with memory exhaust
+    //which isn't very likely to happen
+
+    if (!SupFaxDrv ) {
+        return FALSE;
+    }
+
     // Is it one of the fax drivers we recognize?
     for (i = 0; i < uNumSupFaxDrv; i++) {
-        iNotFound =  _stricmp(pszDevice, SupFaxDrv[i]);
+        iNotFound =  WOW32_stricmp(pszDevice, SupFaxDrv[i]);
         if (iNotFound > 0) continue;
         if (iNotFound == 0) {
             LOGDEBUG(0,("IsFaxPrinterSupportedDevice returns TRUE\n"));
@@ -1069,7 +1572,8 @@ DWORD GetFaxPrinterProfileString(PSZ szSection, PSZ szKey, PSZ szDefault, PSZ sz
     if (hKey) {
         RegCloseKey(hKey);
     }
-    WOW32ASSERTMSGF(FALSE, ("GetFaxPrinterProfileString Failed. Section = %s, Key = %s\n", szSection, szKey));
+    WOW32WARNMSG(FALSE, ("GetFaxPrinterProfileString Failed. Section = %s, Key = %s\n", szSection, szKey));
     strcpy(szRetBuf, szDefault);
     return(strlen(szDefault));
 }
+

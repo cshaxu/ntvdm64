@@ -73,7 +73,7 @@ ATOM WINAPI wow_class_client_register(wow_class_client_context *context,
 ATOM WINAPI wow_class_client_register_guest(wow_class_client_context *context,
     WNDCLASSA *wc, DWORD *words)
 {
-    if (!wc || !((DWORD)wc->lpfnWndProc & WOW_WINDOW_PROC_TAG)) {
+    if (!wc || !WOW_WINDOW_IS_GUEST_PROC((DWORD)wc->lpfnWndProc)) {
         SetLastError(ERROR_INVALID_PARAMETER); return 0;
     }
     return register_class(context, wc, words, TRUE);

@@ -926,7 +926,7 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                 vp = GlobalLock16(hMem16, &cb);
                 if (vp) {
                     GETMISCPTR(vp, lpMem16);
-                    hMem32 = GlobalAlloc(GMEM_DDESHARE, sizeof(METAFILEPICT));
+                    hMem32 = WOWGLOBALALLOC(GMEM_DDESHARE,sizeof(METAFILEPICT));
                     WOW32ASSERT(hMem32);
                     if (hMem32) {
                         lpMem32 = GlobalLock(hMem32);
@@ -1261,14 +1261,13 @@ VOID InitCBFormats ()
     CFOLEObjectDescriptor = RegisterClipboardFormat ("Object Descriptor");
     CFOLELinkSrcDescriptor = RegisterClipboardFormat ("Link Source Descriptor");
 
-#line 1215
+#ifndef DBCS
 #ifdef DEBUG
-#line 1216
+#line 1217
 #error Excluded unsupported DEBUG WOW profile
-#line 1226
-#endif
 #line 1227
-
+#endif
+#endif // !DBCS
 
 }
 
@@ -1277,5 +1276,5 @@ HGLOBAL W32ConvertObjDescriptor(HANDLE hMem, UINT flag)
 {
     extern HGLOBAL WINAPI wow_ole_convert_descriptor(HANDLE, UINT);
     return wow_ole_convert_descriptor(hMem, flag);
-#line 1245
+#line 1246
 }

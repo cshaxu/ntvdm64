@@ -75,7 +75,8 @@ ATOM _RegisterClassEx(
         }
     }
 
-    pcls = InternalRegisterClassEx(pwc, fnid, dwFlags);
+    pcls = InternalRegisterClassEx(pwc, fnid, dwFlags |
+        ((PtiCurrent()->TIF_flags & TIF_16BIT) ? CSF_WOWCLASS : 0));
 
     if (pcls != NULL) {
         PTHREADINFO ptiCurrent = PtiCurrent();

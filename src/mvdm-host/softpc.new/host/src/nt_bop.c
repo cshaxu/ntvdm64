@@ -104,7 +104,7 @@ DATA OBJECTS      : None
 //
 
 typedef ULONG (*MYFARPROC)();
-typedef BOOL (*W32INITPROC)(VOID);
+typedef BOOL (WINAPI *W32INITPROC)(BOOL);
 
 /* [5.1.3 PROCEDURE() DECLARATIONS]                 */
 
@@ -263,7 +263,7 @@ void MS_bop_1(void) {
 
 
     // Call the init routine
-    if ((*WOWInitEntry)() == FALSE || !mvdm_softpc_wow_page_domain_activate_wow_context())
+    if ((*WOWInitEntry)(fMeowWOW) == FALSE || !mvdm_softpc_wow_page_domain_activate_wow_context())
     {
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.

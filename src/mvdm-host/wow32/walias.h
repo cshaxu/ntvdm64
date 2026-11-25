@@ -20,34 +20,6 @@ typedef HANDLE HAND32;
 #include "compat/include/wow_gdi_alias.h"
 
 
-/* WOW class/handle type identifiers (see WARNING below)
- */
-#line 24
-#define WOWCLASS_UNKNOWN    0   // here begin our "window handle" classes
-#define WOWCLASS_WIN16      1
-#define WOWCLASS_BUTTON     2
-#define WOWCLASS_COMBOBOX   3
-#define WOWCLASS_EDIT       4
-#define WOWCLASS_LISTBOX    5
-#define WOWCLASS_MDICLIENT  6
-#define WOWCLASS_SCROLLBAR  7
-#define WOWCLASS_STATIC     8
-#define WOWCLASS_DESKTOP    9
-#define WOWCLASS_DIALOG     10
-#define WOWCLASS_ICONTITLE  11
-#define WOWCLASS_MENU       12
-#define WOWCLASS_SWITCHWND  13
-#define WOWCLASS_COMBOLBOX  14
-#define WOWCLASS_MAX        14  // Always equal to the last value used.
-
-#define WOWCLASS_NOTHUNK    0xFF // not an actual class index
-//
-// WARNING! The above sequence and values must be maintained otherwise the
-// table in WMSG16.C for message thunking must be changed.  Same goes for
-// table in WALIAS.C.
-//
-
-
 //
 //
 // The WC structure is present in every CLS structure in the system,
@@ -59,28 +31,9 @@ typedef HANDLE HAND32;
 // offset defined below.
 //
 
-typedef struct _WC {        /* wcd */
-    VPWNDPROC vpfnWndProc;  // 16-bit window proc address
-    VPSZ      vpszMenu;     // pointer to original copy of menu name, if any
-} WC, *PWC, **PPWC;
-
-#define GCL_WOWvpfnWndProc  GCL_WOWDWORD1
-#define GCL_WOWvpszMenu     GCL_WOWDWORD2
-
 #define SETWC(hwnd, nIndex, l)  SetClassLong(hwnd, nIndex, l)
 
-#define GWL_WOWiClassAndflState         GWL_WOWDWORD1
-#define GWL_WOWvpfnWndProc              GWL_WOWDWORD2
-#define GWL_WOWvpfnDlgProc              GWL_WOWDWORD3
-
 #define SETWL(hwnd, nIndex, l)          SetWindowLong(hwnd, nIndex, l)
-#define MAKECLASSANDSTATE(class,state)  MAKELONG((class),(state))
-
-// defines for flState of WW struct.
-
-#define WWSTATE_ICLASSISSET     0x00000001
-#define WWSTATE_FAKEDIALOGCLASS 0x00000002
-
 
 typedef struct _HDW {
     struct _HDW *Next;      // pointer to next hDDE alias
@@ -108,20 +61,20 @@ typedef struct _HDW {
 //
 
 #ifdef DEBUG
-#line 109
+#line 63
 #error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #else
-#line 125
+#line 79
 #define THREADID32(htask16)  ((htask16)                                       \
                                   ? ((PTDB)SEGPTR((htask16),0))->TDB_ThreadID \
                                   : 0)
 #endif
-#line 129
+#line 83
 
 #define HTASK32(htask16)           (Htask16toThreadID32(htask16))
 #define GETHTASK16(htask32)        (ThreadID32toHtask16((DWORD)htask32))
 
-#define ISINST16(h32)              (((INT)(h32) & 0x0000ffff) != 0)
+#define ISINST16(h32)              (((INT)(h32) & 0x0000fffe) != 0)
 #define HMODINST32(h16)            ((HANDLE) MAKELONG(h16, GetExePtr16(h16)))
 #define GETHINST16(h32)            ((HAND16)(INT)(h32))
 #define GETHMOD16(h32)             ((HAND16)(INT)(HIWORD(h32)))
@@ -133,34 +86,6 @@ typedef struct _HDW {
 #define ISRES16(h32)               ((INT)(h32)&1)
 #define HRES32(p)                  ((p)?(HANDLE)((INT)(p)|1):(HANDLE)NULL)
 #define GETHRES16(h32)             ((PRES)((INT)(h32)&~1))
-
-//
-// USER handle mapping WARNING:
-//
-// When using any of the following macros, beware:
-//
-// Macro                 Safe function call equivalent
-// --------------------- -----------------------------
-// USER32                GetUser32
-// HWND32                GetHwnd32
-// HMENU32               GetHmenu32
-//
-// The macro versions of the USER handle mapping functions evaluate their
-// argument twice, so be extra careful to avoid the following type of
-// error:
-//
-// h32 = HWND32(callback16(...));      // WRONG!!
-//
-// The above statement calls CreateWindows twice!  Instead use the equivalent
-// function call from the table above, which is safe for arguments that must
-// only be evaluated once:
-//
-// h32 = GetHwnd32(callback16(...));   // Correct
-//
-// Use the macro form only when it's safe to evaluate the argument twice:
-//
-// h32 = HWND32(h16);                  // Correct
-//
 
 #define USER32(h16)                ((HAND32)(INT)(SHORT)(h16))
 #define USER16(h32)                ((HAND16)h32)
@@ -180,7 +105,7 @@ typedef struct _HDW {
 #define GDI32(h16)                 mvdm_wow_gdi_handle_to_native((HAND16)(h16))
 #define GDI16(h32)                 ((HAND16)mvdm_wow_gdi_handle_from_native((HANDLE)(h32)))
 
-#line 192
+#line 118
 #define HGDI16(hobj32)             GDI16((HAND32)(hobj32))
 
 #define HDC32(hdc16)               GDI32((HAND16)(hdc16))
@@ -189,31 +114,24 @@ typedef struct _HDW {
 
 #define HFONT32(hobj16)            GDI32((HAND16)(hobj16))
 #define GETHFONT16(hobj32)         GDI16((HAND32)(hobj32))
-#define FREEHFONT16(hobj16)
 
 #define HMETA32(hobj16)            ((HANDLE)HMFFromWinMetaFile((HAND16)(hobj16),FALSE))
 #define GETHMETA16(hobj32)         ((HAND16)WinMetaFileFromHMF((HMETAFILE)(hobj32),FALSE))
-#define FREEHMETA16(hobj16)
 
 #define HRGN32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHRGN16(hobj32)          GDI16((HAND32)(hobj32))
-#define FREEHRGN16(hobj16)
 
 #define HBITMAP32(hobj16)          GDI32((HAND16)(hobj16))
 #define GETHBITMAP16(hobj32)       GDI16((HAND32)(hobj32))
-#define FREEHBITMAP16(hobj16)
 
 #define HBRUSH32(hobj16)           GDI32((HAND16)(hobj16))
 #define GETHBRUSH16(hobj32)        GDI16((HAND32)(hobj32))
-#define FREEHBRUSH16(hobj16)
 
 #define HPALETTE32(hobj16)         GDI32((HAND16)(hobj16))
 #define GETHPALETTE16(hobj32)      GDI16((HAND32)(hobj32))
-#define FREEHPALETTE16(hobj16)
 
 #define HPEN32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHPEN16(hobj32)          GDI16((HAND32)(hobj32))
-#define FREEHPEN16(hobj16)
 
 #define HOBJ32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHOBJ16(hobj32)          GDI16((HAND32)(hobj32))
@@ -238,6 +156,9 @@ typedef struct _HDW {
 #define GETHDWP16(hdwp32)          GetPrn16((HAND32)(hdwp32))
 #define FREEHDWP16(h16)            FreePrn((HAND16)(h16))
 
+#define COLOR32(clr)               (COLORREF)( ( ((DWORD)(clr) >= 0x03000000) &&  \
+                                                 (HIWORD(clr) != 0x10ff) )        \
+                                               ? ((clr) & 0xffffff) : (clr) )
 
 /*
  * MultiMedia handle mappings - MikeTri 12-May-1992
@@ -276,9 +197,9 @@ INT     GetStdClassNumber(PSZ pszClass);
 WNDPROC GetStdClassWndProc(DWORD iClass);
 DWORD   GetStdClassThunkProc(INT iClass);
 
-PWC     FindPWC (HANDLE h32);
 PWC     FindClass16 (LPCSTR pszClass, HINST16 hInst16);
-PWW     FindPWW (HAND32 h32, INT iClass);
+#define FindPWC(h32) (PWC) GetClassLong((h32), GCL_WOWWORDS)
+#define FindPWW(h32) (PWW) GetWindowLong((h32), GWL_WOWWORDS)
 
 HAND16  GetMMedia16 (HANDLE h32, INT iClass);  //MultiMedia additions - MikeTri 12-May-1992
 HANDLE  GetMMedia32 (HAND16 h16);
@@ -291,15 +212,6 @@ VOID    FreeWinsock16 (HAND16 h16);
 BOOL    MessageNeedsThunking (UINT uMsg);
 
 DWORD   Htask16toThreadID32(HTASK16 htask16);
-
-/* Dialog function data
- */
-
-typedef struct _DLGDATA {   /* dlgdata */
-    VPPROC  vpfnDlgProc;    // 16-bit dialog function
-    DWORD   dwUserInitParam;    // user init param, if any
-} DLGDATA, *PDLGDATA;
-
 
 /* Data structure used in thunking LB_GETTEXT special case
  */
@@ -316,7 +228,6 @@ typedef union _MSGTHUNKBUFFER {
     DELETEITEMSTRUCT   delitem;
     COMPAREITEMSTRUCT  cmpitem;
     RECT               rect;
-    DLGDATA            dlgdata;
     CREATESTRUCT       cstruct;
     WINDOWPOS          winpos;
     CLIENTCREATESTRUCT clcstruct;
@@ -334,7 +245,7 @@ typedef union _MSGTHUNKBUFFER {
     THUNKTEXTDWORD     thkdword;                            // LB_GETTEXT w/no HASSTRINGS
     struct { DWORD header, data, flags; } copydata;
     DWORD ownershipFlags;
-#line 343
+#line 253
 } MSGTHUNKBUFFER, *LPMSGTHUNKBUFFER;
 
 typedef struct _MSGPARAMEX *LPMSGPARAMEX;
@@ -356,7 +267,7 @@ typedef struct _MSGPARAMEX {
     BOOL fThunkSucceeded;
     PVOID ddePostConversion;
     BOOL ddePostPacked;
-#line 361
+#line 271
 } MSGPARAMEX;
 
 #define MSG16NEEDSTHUNKING(lpmpex) ((lpmpex)->iClass != WOWCLASS_NOTHUNK)
@@ -413,3 +324,25 @@ ULONG GetGCL_HMODULE(HWND hwnd);
                                         (dwLocal == (DWORD) WU32PostMessage))
 
 ULONG WOW32FaxHandler(UINT iFun, LPSTR lpIn);
+
+
+INT GetIClass(PWW pww, HWND hwnd);
+
+/*
+//
+// if it's a standard class (fast method) ? 
+//    return it :
+// else if the window is initialized ?
+//    we know it's a private app class : else get the class the hard way
+//
+// Note: GetiClassTheHardWay() may stiil return a standard class.  See walias.c
+//
+
+#define GETICLASS(pww, hwnd) (                                                 \
+(((((PWW)pww)->fnid & 0xfff) >= FNID_START) &&                                 \
+                                   ((((PWW)pww)->fnid & 0xfff) <= FNID_END)) ? \
+    (pfnOut.aiWowClass[(((PWW)pww)->fnid & 0xfff) - FNID_START]) :             \
+((((PWW)pww)->state2 & WINDOW_IS_INITIALIZED) ?                                \
+    WOWCLASS_WIN16 : GetiClassTheHardWay(hwnd)) )
+*/
+#define GETICLASS(pww, hwnd) GetIClass(pww, hwnd)

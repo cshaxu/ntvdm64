@@ -6,7 +6,6 @@
  */
 #define WOW_ORIGINAL_CLIENT_DISPATCH
 #include "wow_window_dispatch_bindings.h"
-#define WNDPROC_WOW WOW_WINDOW_PROC_TAG
 
 
 /***************************************************************************\
@@ -38,7 +37,7 @@ LONG DispatchClientMessage(
      * More complicate then regular CALLPROC_WOWCHECK() we want to get the
      * PWW so wow doesn't have to
      */
-    if (WNDPROC_WOW & (DWORD)pfn) {
+    if (WOW_WINDOW_IS_GUEST_PROC(pfn)) {
         return (*pfnWowWndProcEx)(HW(pwnd), message, wParam, lParam, (DWORD)pfn, pwnd->adwWOW);
     } else {
         return ((WNDPROC)pfn)(HW(pwnd), message, wParam, lParam);

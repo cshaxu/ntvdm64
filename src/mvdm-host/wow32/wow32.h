@@ -44,10 +44,25 @@
 #include <nt.h>
 #include <ntrtl.h>
 #include <nturtl.h>
-
+#include <vdm.h>
 #include <windows.h>
 #include <winuserp.h>
 #include <shellapi.h>
+#include <tsappcmp.h>
+
+/***** ifdef( DEBUG || WOWPROFILE ) *****/
+#ifdef DEBUG
+#ifndef WOWPROFILE
+#define WOWPROFILE   // DEBUG => WOWPROFILE
+#endif // !WOWPROFILE
+#endif // DEBUG
+
+#ifdef WOWPROFILE
+#ifndef DEBUG_OR_WOWPROFILE
+#define DEBUG_OR_WOWPROFILE
+#endif
+#endif // WOWPROFILE
+
 
 #include <wow.h>
 
@@ -97,63 +112,45 @@
 
 #define WOWVDM          TRUE
 
-/***** ifdef( DEBUG || WOWPROFILE ) *****/
-#line 95
-#ifdef DEBUG
-#line 96
-#error DEBUG WOW32 profile is not supported
-#endif // DEBUG
-#line 100
-
-#line 101
-#ifdef WOWPROFILE
-#line 102
-#error WOW profiling is not supported
-#endif // WOWPROFILE
-#line 106
-
-
-#line 125
-
 
 /*                        DO NOT CHANGE THE SIZES OF THESE TABLES WITHOUT
 **                        CHANGING I386\FASTWOW.ASM!
 */
 typedef struct _PA32 {
     PW32 lpfnA32;       // Array Address
-#line 132
+#line 115
 #ifdef DEBUG_OR_WOWPROFILE
-#line 133
+#line 116
 #error WOW profiling is not supported
 #endif // DEBUG_OR_WOWPROFILE
-#line 136
+#line 119
 } PA32, *PPA32;
 
 
 
 
-#line 141
+#line 124
 #ifdef DEBUG_OR_WOWPROFILE
-#line 142
+#line 125
 #error WOW profiling is not supported
 #else              // non-profile RETAIL
-#line 145
+#line 128
 #define  W32FUN(fn,name,mod,size)   fn
 #define  W32MSGFUN(fn,name)         fn
 #endif
-#line 148
+#line 131
 
 
 
-#line 151
+#line 134
 #ifdef DEBUG_OR_WOWPROFILE
-#line 152
+#line 135
 #error WOW profiling is not supported
 #else  // RETAIL ONLY
-#line 154
+#line 137
 #define W32TAB(fn,name,size)    fn
 #endif
-#line 156
+#line 139
 
 
 /* Per-thread data
@@ -168,26 +165,25 @@ typedef struct _PA32 {
 
 #define WOWCD_ISCHOOSEFONT 1
 #define WOWCD_ISOPENFILE   2
+#define WOWCD_NOSSYNC      4
 
 //
 // Used for COMMDLG thunk support
 //
 
 typedef struct _COMMDLGTD {
-    HWND16  hdlg;
-    VPVOID  vpfnHook;
-    VPVOID  vpData;
-    ULONG   ExtendedErr;
+    HWND16  hdlg;              // hwnd of dialog & hwndOwner for Find/Replace
+    VPVOID  vpData;            // vp to 16-bit struct passed to ComDlg API
+    PVOID   pData32;           // ptr to 32-bit ANSI version of above struct
+    VPVOID  vpfnHook;          // vp to 16-bit hook proc specified by app
     union {
-        VPVOID  vpfnSetupHook;
-        PVOID   pRes;
+        VPVOID  vpfnSetupHook; // vp to 16-bit hook proc (print setup only)
+        PVOID   pRes;          // ptr to 16-bit template resource
     };
-    HWND16  SetupHwnd;
-    struct  _COMMDLGTD *Previous;
-    PVOID   pData32;
+    HWND16  SetupHwnd;            // for Print Setup Dialogs only
+    struct  _COMMDLGTD *Previous; // for Find/Replace & nested dlg situations
     ULONG   Flags;
 } COMMDLGTD, *PCOMMDLGTD;
-
 
 //
 // WOAINST
@@ -202,35 +198,84 @@ typedef struct _WOAINST {
 } WOAINST, *PWOAINST;
 
 
+
+//
+// Structure to reflect WOW environment values
+//
+
+typedef struct tagWOWENVDATA {
+
+    PSZ   pszCompatLayer;       // fully-formed compat layer variable
+    PSZ   pszCompatLayerVal;    // pointer to the value part
+
+    PSZ   pszProcessHistory;    // fully-formed process history variable
+    PSZ   pszProcessHistoryVal; // pointer to the value part
+
+    PSZ   pszShimFileLog;       // file log variable
+    PSZ   pszShimFileLogVal;
+
+    //
+    // buffer that we use for the accomulated process history,
+    // this buffer contains just the values from cumulative use of process history
+    // in wow chain
+    //
+    PSZ   pszCurrentProcessHistory;
+
+} WOWENVDATA, *PWOWENVDATA;
+
+
 //
 // TD.dwFlags bit definitions
 //
 
-#define TDF_INITCALLBACKSTACK  0x00000001
+// #define TDF_INITCALLBACKSTACK  0x00000001  // no longer needed
+#define TDF_EATDEVMODEMSG      0x00000001
 #define TDF_IGNOREINPUT        0x00000002
 #define TDF_FORCETASKEXIT      0x00000004
 #define TDF_TASKCLEANUPDONE    0x00000008
-#define TDF_SETUPAPPLICATION   0x00000010
 
-typedef struct _TD {           /* td */
-    VPVOID      vpStack;           // 16-bit stack  MUST BE FIRST!!!
-    VPVOID      vpCBStack;         // 16-bit callback frame
-    DWORD       FastWowEsp;        // offset must match mvdm\inc\vdmtb.inc
-    struct _TD *ptdNext;           // Pointer to Next PTD
-    DWORD       dwFlags;           // TDF_ values above
-    INT         VDMInfoiTaskID;    // SCS Task ID != 0 if task Exec'd form 32 bit program
-    PCOMMDLGTD  CommDlgTd;         // COMMDLG support - jvert 5-Jan-1993
-    DWORD       dwWOWCompatFlags;  // WOW Compatibility flags
-    DWORD       dwWOWCompatFlagsEx;// Extended WOW Compatibility flags
-    DWORD       dwThreadID;        // ID of the thread
-    HANDLE      hThread;           // Thread Handle
-    HHOOK       hIdleHook;         // Hook handle for USER idle notification
-    HRGN        hrgnClip;          // used by GetClipRgn()
-    ULONG       ulLastDesktophDC;  // remembers last desktop DC for GetDC(0)
-    PWOAINST    pWOAList;          // One per active winoldap child
-    HAND16      htask16;           // 16-bit kernel task handle - unique across VDMs
-    HAND16      hInst16;           // 16-bit instance handle for this task
-    HAND16      hMod16;            // 16-bit module handle for this task
+// NOTE:  vpCBStack must not be referenced outside of CallBack16(),
+//        stackalloc16(), & stackfree16()!!!!
+//        See NOTES in walloc16.c\stackalloc16()
+typedef struct _TD {                  /* td */
+    VPVOID      vpStack;              // 16-bit stack  MUST BE FIRST!!!
+    VPVOID      vpCBStack;            // 16-bit callback frame (see NOTE above)
+    DWORD       FastWowEsp;           // offset must match private\inc\vdmtib.inc
+    PCOMMDLGTD  CommDlgTd;            // offset must match mvdm\inc\wowtd.h
+    struct _TD *ptdNext;              // Pointer to Next PTD
+    DWORD       dwFlags;              // TDF_ values above
+    INT         VDMInfoiTaskID;       // SCS Task ID != 0 if task Exec'd form 32 bit program
+    DWORD       dwWOWCompatFlags;     // WOW Compatibility flags
+    DWORD       dwWOWCompatFlagsEx;   // Extended WOW Compatibility flags
+    DWORD       dwUserWOWCompatFlags; // Extra User specific WOW Compatibility flags
+    DWORD       dwWOWCompatFlags2;    // Extra WOW Compatibility flags
+#ifdef FE_SB
+    DWORD       dwWOWCompatFlagsFE;   // Extended WOW Compatibility flags2
+#endif // FE_SB
+    DWORD       dwThreadID;           // ID of the thread
+    HANDLE      hThread;              // Thread Handle
+    HHOOK       hIdleHook;            // Hook handle for USER idle notification
+    HRGN        hrgnClip;             // used by GetClipRgn()
+    ULONG       ulLastDesktophDC;     // remembers last desktop DC for GetDC(0)
+    INT         cStackAlloc16;        // for tracking stackalloc16() memory alloc's
+    PWOAINST    pWOAList;             // One per active winoldap child
+    HAND16      htask16;              // 16-bit kernel task handle - unique across VDMs
+    HAND16      hInst16;              // 16-bit instance handle for this task
+    HAND16      hMod16;               // 16-bit module handle for this task
+
+    //
+    // these "interesting" variables are set for the current task
+    //
+    PWOWENVDATA pWowEnvData;          // pointer to wow environment data
+
+    //
+    // Variable is used to pass information from parent task (during pass_environment)
+    // to the child (in W32Thread) - normally should be NULL after init phase
+    //
+    PWOWENVDATA pWowEnvDataChild;
+
+
+    CRITICAL_SECTION csTD;            // protects this particular TD, esp. WOA list
 } TD, *PTD;
 
 
@@ -260,41 +305,41 @@ typedef struct _TD {           /* td */
 #define FILTER_WINSOCK  0x00000080
 #define FILTER_VERBOSE  0x00000100
 #define FILTER_COMMDLG  0x00000200
+#ifdef FE_IME
+#define FILTER_WINNLS   0x00000400
+#endif
+#ifdef FE_SB
+#define FILTER_WIFEMAN  0x00000800
+#endif
 
 /* Global data
  */
-#line 265
+#line 302
 #ifdef DEBUG
-#line 266
+#line 303
 #error DEBUG WOW32 profile is not supported
 #endif
-#line 270
+#line 307
 extern INT    flOptions;    // command-line options (see OPT_*)
-#line 271
+#line 308
 #ifdef DEBUG
-#line 272
+#line 309
 #error DEBUG WOW32 profile is not supported
 #endif
-#line 275
+#line 312
 extern HANDLE hHostInstance;
-#line 276
+#line 313
 #ifdef DEBUG
-#line 277
+#line 314
 #error DEBUG WOW32 profile is not supported
 #endif
-#line 280
-#ifdef i386
-#line 281
-#error i386 kernel WOW profile is not supported
-#endif
-#line 283
 
-#line 284
+#line 318
 #ifdef DEBUG
-#line 285
+#line 319
 #error DEBUG WOW32 profile is not supported
 #endif
-#line 291
+#line 325
 
 
 /* WOW global data
@@ -303,7 +348,6 @@ extern UINT   iW32ExecTaskId;   // Base Task ID of Task Being Exec'd
 extern UINT   nWOWTasks;    // # of WOW tasks running
 extern BOOL   fBoot;        // TRUE During Boot Process
 extern HANDLE  ghevWaitCreatorThread; // Used to Syncronize creation of a new thread
-extern WORD   iWOWTaskCur;  // ID of current task running
 extern BOOL   fWowMode;     // see comment in wow32.c
 extern HANDLE hWOWHeap;
 extern DECLSPEC_IMPORT BOOL fSeparateWow;   // imported from ntvdm, FALSE if shared WOW VDM.
@@ -313,6 +357,11 @@ extern DECLSPEC_IMPORT DWORD FlatAddress[];    // Base address of each selector 
 extern DECLSPEC_IMPORT LPDWORD SelectorLimit;  // Limit of each selector in LDT (x86 only)
 extern PTD *  pptdWOA;
 extern PTD    gptdShell;
+extern char szWINFAX[];
+extern char szINSTALL[];
+extern char szModem[];
+extern char szWINFAXCOMx[];
+extern BOOL gbWinFaxHack;
 extern char szEmbedding[];
 extern char szServerKey[];
 extern char szPicture[];
@@ -333,8 +382,12 @@ extern PSTR pszWinIniFullPath;
 extern PSTR pszWindowsDirectory;
 extern PSTR pszSystemDirectory;
 extern BOOL gfIgnoreInputAssertGiven;
-
-
+#ifdef FE_SB
+extern char szSystemMincho[];
+extern char szMsMincho[];
+#endif
+extern DWORD dwSharedWowTimeout;
+extern DWORD gpfn16GetProcModule;
 
 #ifndef _X86_
 extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
@@ -362,16 +415,13 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 
 #define EXCEPTION_WOW32_ASSERTION   0x9898
 
-#line 358
+#line 400
 #ifdef DEBUG
-#line 359
+#line 401
 #error DEBUG WOW32 profile is not supported
 #else
-#line 418
-#ifndef i386
 #undef  MODNAME
-#define MODNAME(module)     static DWORD no_extra_semicolon_on_mipsfree
-#endif  // MIPS
+#define MODNAME(module)
 #define WOW32ASSERT(exp)
 #define WOW32VERIFY(exp) (exp)
 #define WOW32ASSERTMSG(exp,msg)
@@ -380,27 +430,27 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 #define WOW32WARNMSGF(exp,msg)
 #define WOW32APIWARN(exp,msg)
 #endif
-#line 430
+#line 470
 
-#line 431
+#line 471
 #ifdef DEBUG
-#line 432
+#line 472
 #error DEBUG WOW32 profile is not supported
 #else
-#line 434
+#line 474
 #define LOGARGS(l,v)
 #endif
-#line 436
+#line 476
 
-#line 437
+#line 477
 #ifdef DEBUG
-#line 438
+#line 478
 #error DEBUG WOW32 profile is not supported
 #else
-#line 440
+#line 480
 #define LOGRETURN(l,v,r)
 #endif
-#line 442
+#line 482
 
 //
 // Macros used to eliminate compiler warning generated when formal
@@ -420,10 +470,10 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 //
 
 #ifndef UNREFERENCED_PARAMETER
-#line 461
+#line 501
 #error Unsupported excluded original configuration
 #endif
-#line 465
+#line 505
 
 #define SIZE_BOGUS      256
 
@@ -463,26 +513,26 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 
 /* Simulator wrapper macros
  */
-#line 504
+#line 544
 #ifndef _X86_  // emulated CPU
 #define VDMSTACK()      (((ULONG)getSS()<<16)|getSP())
 #define SETVDMSTACK(vp)     {setSS(HIW(vp)); setSP(LOW(vp));}
 #else          // X86
-#line 508
+#line 548
 #error Native x86 WOW stack profile is not supported
 #endif
-#line 511
+#line 551
 
 // Use FlatAddress array exported by ntvdm instead of Sim32GetVDMPointer.
 
-#line 514
+#line 554
 #ifndef _X86_
 #define INTEL_MEMORY_BASE ((DWORD)IntelMemoryBase)
 #else
-#line 517
+#line 557
 #error Native x86 WOW stack profile is not supported
 #endif
-#line 519
+#line 559
 
 #define GetPModeVDMPointerMacro(Address, Count)                               \
     (                                                                         \
@@ -501,16 +551,16 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
         (void *)(INTEL_MEMORY_BASE + (((Address) & 0xFFFF0000) >> 12) +       \
                  ((Address) & 0xFFFF))
 
-#line 537
+#line 577
 #ifdef DEBUG
-#line 538
+#line 578
 #error DEBUG WOW32 profile is not supported
 #else
-#line 541
+#line 581
     PVOID FASTCALL GetPModeVDMPointerAssert(DWORD Address);
     #define GetPModeVDMPointer(vp, count) GetPModeVDMPointerAssert((vp))
 #endif
-#line 544
+#line 584
 
 
 #define SEGPTR(seg,off)     GetPModeVDMPointer(((ULONG)seg<<16)|off, 0)
@@ -558,15 +608,15 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 
 
 #ifndef i386
-#line 591
+#line 631
 #ifdef DEBUG
-#line 592
+#line 632
 #error DEBUG WOW32 profile is not supported
 #endif
-#line 596
+#line 636
 #endif
 
-#line 598
+#line 638
 #ifndef DEBUG
 #define FREEARGPTR(p)
 #define FREEOPTPTR(p)
@@ -577,44 +627,83 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 #define FREEVDMPTR(p)
 #define FREEOPTPTR(p)
 #else
-#line 608
+#line 648
 #error DEBUG WOW pointer cleanup profile is not supported
 #endif
-#line 617
+#line 657
 
 #define RETURN(ul)      return ul
 
 
+#ifdef DBCS // MUST fix for FE NT
+#define FIX_318197_NOW
+#endif
+
+
+#ifdef FIX_318197_NOW
+
+#define WOW32_strupr(psz)             CharUpperA(psz)
+#define WOW32_strlwr(psz)             CharLowerA(psz)
+#define WOW32_strcmp(psz1, psz2)      lstrcmpA(psz1, psz2)
+#define WOW32_stricmp(psz1, psz2)     lstrcmpiA(psz1, psz2)
+#define WOW32_strncpy(psz1, psz2, n)  lstrcpyn(psz1, psz2, n)
+
+char* WOW32_strchr(const char* psz, int c);
+char* WOW32_strrchr(const char* psz, int c);
+char* WOW32_strstr(const char* str1, const char* str2);
+int   WOW32_strncmp(const char* str1, const char* str2, size_t n);
+int   WOW32_strnicmp(const char* str1, const char* str2, size_t n);
+
+#else
+
+#define WOW32_strupr(psz)             _strupr(psz)
+#define WOW32_strlwr(psz)             _strlwr(psz)
+#define WOW32_strcmp(psz1, psz2)      strcmp(psz1, psz2)
+#define WOW32_stricmp(psz1, psz2)     _stricmp(psz1, psz2)
+#define WOW32_strncpy(psz1, psz2, n)  strncpy(psz1, psz2, n)
+
+#define WOW32_strchr(psz,c)           strchr(psz,c)
+#define WOW32_strrchr(psz,c)          strrchr(psz,c)
+#define WOW32_strstr(psz1, psz2)      strstr(psz1, psz2)
+#define WOW32_strncmp(psz1, psz2, n)  strncmp(psz1, psz2, n)
+#define WOW32_strnicmp(psz1, psz2, n) _strnicmp(psz1, psz2, n)
+
+#endif
+
+
+
+
 /* Function prototypes
  */
-BOOL    W32Init(VOID);
+BOOL    W32Init(BOOL fMEoW);
 VOID    W32Dispatch(VOID);
 INT     W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi);
 BOOLEAN W32DllInitialize(PVOID DllHandle,ULONG Reason,PCONTEXT Context);
 BOOL IsDebuggerAttached(VOID);
 
-ULONG FASTCALL   W32GetFastAddress( PVDMFRAME pFrame );
-ULONG FASTCALL   W32GetFastCbRetAddress( PVDMFRAME pFrame );
-ULONG FASTCALL   W32GetTableOffsets( PVDMFRAME pFrame );
-ULONG FASTCALL   W32GetFlatAddressArray( PVDMFRAME pFrame );
+ULONG FASTCALL   WK32WOWGetFastAddress( PVDMFRAME pFrame );
+ULONG FASTCALL   WK32WOWGetFastCbRetAddress( PVDMFRAME pFrame );
+ULONG FASTCALL   WK32WOWGetTableOffsets( PVDMFRAME pFrame );
+ULONG FASTCALL   WK32WOWGetFlatAddressArray( PVDMFRAME pFrame );
 PTD     ThreadProcID32toPTD(DWORD ThreadID, DWORD dwProcessID);
 PTD     Htask16toPTD( HAND16 );
 HTASK16 ThreadID32toHtask16(DWORD ThreadID32);
 PVOID   WOWStartupFailed(VOID);
+LPSTR  ThunkStr16toStr32(LPSTR pdst32, VPVOID vpsrc16, int cChars, BOOL bMulti);
 
-#line 638
+#line 717
 #ifdef DEBUG
-#line 639
+#line 718
 #error DEBUG WOW32 profile is not supported
 #endif
-#line 644
+#line 723
 
-#line 645
+#line 724
 #ifdef DEBUG_OR_WOWPROFILE
-#line 646
+#line 725
 #error WOW profiling is not supported
 #endif
-#line 649
+#line 728
 
 BOOL    IsDebuggerAttached(VOID);
 
@@ -623,19 +712,71 @@ BOOL    IsDebuggerAttached(VOID);
 //
 
 ULONG FASTCALL   WOW32UnimplementedAPI(PVDMFRAME pFrame);
+ULONG FASTCALL   WOW32Unimplemented95API(PVDMFRAME pFrame);
 
-#line 658
+// for tracking memory leaks
 #ifdef DEBUG
-#line 659
+#define DEBUG_MEMLEAK 1
+#else  // non-DEBUG
+#ifdef MEMLEAK
+#define DEBUG_MEMLEAK 1
+#endif // MEMLEAK
+#endif // DEBUG
+
+#ifdef DEBUG_MEMLEAK
+VOID  WOW32DebugMemLeak(PVOID lp, ULONG size, DWORD fHow);
+VOID  WOW32DebugReMemLeak(PVOID lpNew, PVOID lpOrig, ULONG size, DWORD fHow);
+VOID  WOW32DebugFreeMem(PVOID lp);
+VOID  WOW32DebugCorruptionCheck(PVOID lp, DWORD size);
+DWORD WOW32DebugGetMemSize(PVOID lp);
+HGLOBAL WOW32DebugGlobalAlloc(UINT flags, DWORD dwSize);
+HGLOBAL WOW32DebugGlobalReAlloc(HGLOBAL h32, DWORD dwSize, UINT flags);
+HGLOBAL WOW32DebugGlobalFree(HGLOBAL h32);
+#define WOWGLOBALALLOC(f,s)        WOW32DebugGlobalAlloc(f,(s))
+#define WOWGLOBALREALLOC(h,s,f)    WOW32DebugGlobalReAlloc(h,(s),f)
+#define WOWGLOBALFREE(h)           WOW32DebugGlobalFree(h)
+#define ML_MALLOC_W      0x00000001
+#define ML_MALLOC_W_ZERO 0x00000002
+#define ML_REALLOC_W     0x00000004
+#define ML_MALLOC_WTYPE  (ML_MALLOC_W | ML_MALLOC_W_ZERO | ML_REALLOC_W)
+#define ML_GLOBALALLOC   0x00000010
+#define ML_GLOBALREALLOC 0x00000020
+#define ML_GLOBALTYPE    (ML_GLOBALREALLOC | ML_GLOBALALLOC)
+#define TAILCHECK        (4 * sizeof(CHAR))  // for heap tail corruption check
+typedef struct _tagMEMLEAK {
+    struct _tagMEMLEAK *lpmlNext;
+    PVOID               lp;
+    DWORD               size;
+    UINT                fHow;
+    ULONG               Count;
+    PVOID               CallersAddress;
+} MEMLEAK, *LPMEMLEAK;
+#else  // non-DEBUG_MEMLEAK
+#define TAILCHECK                  0
+#define WOWGLOBALALLOC(f,s)        GlobalAlloc(f,(s))
+#define WOWGLOBALREALLOC(h,f,s)    GlobalReAlloc(h, f,(s))
+#define WOWGLOBALFREE(h)           GlobalFree(h)
+#endif // DEBUG_MEMLEAK
+
+#line 782
+#ifdef DEBUG
+#line 783
 #error DEBUG WOW32 profile is not supported
 #else
-#line 668
+#line 793
     #define LOCALAPI              WOW32UnimplementedAPI
     #define NOPAPI                WOW32UnimplementedAPI
     #define UNIMPLEMENTEDAPI      WOW32UnimplementedAPI
+    #define UNIMPLEMENTED95API    WOW32UnimplementedAPI
     #define WK32WOWPARTYBYNUMBER  UNIMPLEMENTEDAPI
 #endif
-#line 673
+#line 799
+
+//Terminal Server
+PTERMSRVCORINIFILE gpfnTermsrvCORIniFile;
+
+
+
 
 
 #endif // ifndef _DEF_WOW32_  THIS SHOULD BE THE LAST LINE IN THIS FILE

@@ -83,15 +83,13 @@ static void procedure_encoding(void)
         wow_class_client_context context={&classes,0x030a,get_version,callback,&thread,NULL};
         WNDCLASSA wc={0};
         DWORD words[2]={guest[i],0};
-        DWORD encoded=guest[i] | WOW_WINDOW_PROC_TAG;
+        DWORD encoded=(guest[i] & ~0x00060000u) | ((guest[i] & WOW_WINDOW_PROC_TAG) >> 13) | WOW_WINDOW_PROC_TAG;
         DWORD decoded;
         ATOM atom;
         wow_class_words_binding *binding;
         wow_window_dispatch_target target;
         /* Exactly WU32RegisterClass's producer contract, followed by the
          * original W32Win16WndProcEx decoding contract. */
-        if (guest[i] & WOW_WINDOW_PROC_TAG)
-            encoded &= ~WOW_WINDOW_SELECTOR_VIRTUAL_BIT;
         wc.lpfnWndProc=(WNDPROC)encoded;wc.hInstance=module;
         wc.lpszClassName="S2_WOW_PROC_ENCODING";
         atom=wow_class_client_register_guest(&context,&wc,words);
@@ -101,9 +99,8 @@ static void procedure_encoding(void)
         CHECK(binding && wow_class_words_target(binding,&target));
         if (binding) {
             CHECK(target.procedure==encoded);
-            decoded=target.procedure & ~WOW_WINDOW_PROC_TAG;
-            if (!(decoded & WOW_WINDOW_SELECTOR_VIRTUAL_BIT))
-                decoded |= WOW_WINDOW_PROC_TAG | WOW_WINDOW_SELECTOR_VIRTUAL_BIT;
+            decoded=(target.procedure & ~WOW_WINDOW_PROC_TAG) |
+                ((target.procedure & 0x00060000u) << 13) | 0x00060000u;
             CHECK(decoded==guest[i]);
             wow_class_words_release(binding);
         }

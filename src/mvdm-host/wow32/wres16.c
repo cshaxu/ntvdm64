@@ -83,7 +83,16 @@ VOID FreeRes16(PRES presFree)
             break;
         presPrev = pres;
     }
-    WOW32ASSERT(pres);  // not finding a pres would be rather distressing
+
+    // Changed from WOW32ASSERT by cmjones  11/3/97
+    // This might be a bogus warning in that USER32!SplFreeResource() calls
+    // W32FreeResource() twice on certain types of resources.  The Warning
+    // might be raised on the 2nd call after the resource was just freed.
+    // The only known occurances are at the start of the Winstone '94 
+    // Quattro Pro test.  This can safely be ignored if you see SplFreeResource
+    // in the stack dump.
+    WOW32WARNMSG((pres),("WOW::FreeRes16:Possible lost resource.\n"));
+
     if (pres) {
         presPrev->presNext = pres->presNext;
         if (pres->pbResData)
@@ -129,11 +138,28 @@ PRES FindResource16(HMOD16 hmod16, LPSZ lpszName, LPSZ lpszType)
         LOGDEBUG(5,("    Finding resource %lx, type %s(%lx)\n",
                  lpszName, GetResourceType(lpszType), lpszType));
     } else {
+#ifdef FE_SB
+        if (CURRENTPTD()->dwWOWCompatFlagsFE & WOWCF_FE_ARIRANG20_PRNDLG) {
+       /*
+        * In case of Korean Arirang2.0 word processor, it use wrong dialog ID
+        * for Print or Print setup dialog. See dialog box ID on awpfont.dll.
+        */
+            if (!WOW32_strcmp(lpszName, "PRINTDLGTEMP"))
+                vpszName = (VPSZ) 2;
+            else if(!WOW32_strcmp(lpszName, "PRNSETUPDLGTEMP"))
+                vpszName = (VPSZ) 1;
+            else goto NOT_ARIRANG20;
+        } else {  // original code
+NOT_ARIRANG20:
+#endif
         cb = strlen(lpszName)+1;
         if (vpszName = GlobalAllocLock16(GMEM_MOVEABLE, cb, NULL))
             putstr16(vpszName, lpszName, cb);
         LOGDEBUG(5,("    Finding resource \"%s\", type %s(%lx)\n",
                  lpszName, GetResourceType(lpszType), lpszType));
+#ifdef FE_SB
+        }
+#endif
     }
 
     if (vpszName) {
@@ -146,16 +172,12 @@ PRES FindResource16(HMOD16 hmod16, LPSZ lpszName, LPSZ lpszType)
             }
         }
         if (vpszType) {
-            PCBVDMFRAME pCBFrame;
-
             Parm16.WndProc.wParam = hmod16;
             Parm16.WndProc.lParam = vpszName;
             Parm16.WndProc.wMsg = LOWORD(vpszType);
             Parm16.WndProc.hwnd = HIWORD(vpszType);
             CallBack16(RET_FINDRESOURCE, &Parm16, 0, &vp);
-            pCBFrame = CBFRAMEPTR(CURRENTPTD()->vpCBStack);
-            wExpWinVer = pCBFrame->wGenUse1;
-            FREEVDMPTR(pCBFrame);
+            wExpWinVer = LOWORD(Parm16.WndProc.lParam);
             if (HIWORD(vpszType))
                 GlobalUnlockFree16(vpszType);
         }
@@ -220,11 +242,9 @@ LPBYTE LockResource16(register PRES pres)
     CallBack16(RET_LOCKRESOURCE, &Parm16, 0, &vp);
 
     if (vp) {
-        PCBVDMFRAME pCBFrame;
 
         // Get size of 16-bit resource
-        pCBFrame = CBFRAMEPTR(CURRENTPTD()->vpCBStack);
-        cb16 = pCBFrame->wGenUse2 | (LONG)pCBFrame->wGenUse1 << 16;
+        cb16 = Parm16.WndProc.lParam;
 
         LOGDEBUG(5,("    Locking/converting resource type %s(%lx)\n",
              GetResourceType(pres->lpszResType), pres->lpszResType));
@@ -501,6 +521,17 @@ DWORD ConvertDialog16(PBYTE pdlg32, VPBYTE vpdlg16, DWORD cb, DWORD cb16)
         cbAnsi = strlen(pdlg16)+1;      // then szTypeFace
         if (VALIDPUT(pdlg32)) {
             RtlMultiByteToUnicodeN((LPWSTR)pdlg32, MAXULONG, (PULONG)&cbUni, pdlg16, cbAnsi);
+#ifdef FE_SB
+            // orignal source should be fixed.
+            // We can't convert right Unicode string from Broken FaceName
+            // string.
+            // Converted Unicode String should be NULL terminated.
+            // 1994.11.12 V-HIDEKK
+            if( cbUni && ((LPWSTR)pdlg32)[cbUni/sizeof(WCHAR)-1] ){
+                LOGDEBUG(0,("    ConvertDialog16: WARNING: BAD FaceName String\n      End of Unicode String (%04x)\n", ((LPWSTR)pdlg32)[cbUni/2-1]));
+                ((LPWSTR)pdlg32)[cbUni/sizeof(WCHAR)-1] = 0;
+            }
+#endif // FE_SB
         } else {
             cbUni = cbAnsi * sizeof(WCHAR);
         }

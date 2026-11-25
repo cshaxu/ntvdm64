@@ -20,19 +20,25 @@ MODNAME(wuser31.c);
 
 ULONG FASTCALL WU32DlgDirSelectComboBoxEx(PVDMFRAME pFrame)
 {
-    ULONG ul;
-    PSZ psz2;
+    ULONG    ul;
+    PSZ      psz2;
+    VPVOID   vp;
     register PDLGDIRSELECTCOMBOBOXEX16 parg16;
 
     GETARGPTR(pFrame, sizeof(DLGDIRSELECTCOMBOBOXEX16), parg16);
     GETVDMPTR(parg16->f2, INT32(parg16->f3), psz2);
+    vp = parg16->f2;
 
+    // note: this calls back to 16-bit code and could invalidate the flat ptrs
     ul = GETBOOL16(DlgDirSelectComboBoxEx(
     HWND32(parg16->f1),
     psz2,
-    INT32(parg16->f3),
-    WORD32(parg16->f4)      // we zero-extend window IDs everywhere
+    INT32(parg16->f3), 
+    WORD32(parg16->f4) // we zero-extend window IDs everywhere
     ));
+
+    // special case to keep common dialog structs in sync (see wcommdlg.c)
+    Check_ComDlg_pszptr(CURRENTPTD()->CommDlgTd, vp);
 
     FLUSHVDMPTR(parg16->f2, INT32(parg16->f3), psz2);
     FREEVDMPTR(psz2);
@@ -45,10 +51,12 @@ ULONG FASTCALL WU32DlgDirSelectEx(PVDMFRAME pFrame)
 {
     ULONG ul;
     PSZ psz2;
+    VPVOID vp;
     register PDLGDIRSELECTEX16 parg16;
 
     GETARGPTR(pFrame, sizeof(DLGDIRSELECTEX16), parg16);
     GETVDMPTR(parg16->f2, INT32(parg16->f3), psz2);
+    vp = parg16->f2;
 
     ul = GETBOOL16(DlgDirSelectEx(
     HWND32(parg16->f1),
@@ -57,27 +65,12 @@ ULONG FASTCALL WU32DlgDirSelectEx(PVDMFRAME pFrame)
     WORD32(parg16->f4)
     ));
 
+    // special case to keep common dialog structs in sync (see wcommdlg.c)
+    Check_ComDlg_pszptr(CURRENTPTD()->CommDlgTd, vp);
+
     FLUSHVDMPTR(parg16->f2, INT32(parg16->f3), psz2);
     FREEVDMPTR(psz2);
     FREEARGPTR(parg16);
-    RETURN (ul);
-}
-
-
-ULONG FASTCALL WU32EnableScrollBar(PVDMFRAME pFrame)
-{
-    ULONG ul = 0;
-
-    register PENABLESCROLLBAR16 parg16;
-
-    GETARGPTR(pFrame, sizeof(ENABLESCROLLBAR16), parg16);
-
-    ul = GETBOOL16(EnableScrollBar(HWND32(parg16->f1),
-                                   WORD32(parg16->f2),
-                                   WORD32(parg16->f3)));
-
-    FREEARGPTR(parg16);
-
     RETURN (ul);
 }
 
@@ -99,18 +92,6 @@ ULONG FASTCALL WU32GetClipCursor(PVDMFRAME pFrame)
 }
 
 
-ULONG FASTCALL WU32GetCursor(PVDMFRAME pFrame)
-{
-    ULONG ul;
-
-    UNREFERENCED_PARAMETER(pFrame);
-
-    ul = GETHCURSOR16(GetCursor());
-
-    RETURN (ul);
-}
-
-
 ULONG FASTCALL WU32GetDCEx(PVDMFRAME pFrame)
 {
     ULONG ul;
@@ -125,59 +106,6 @@ ULONG FASTCALL WU32GetDCEx(PVDMFRAME pFrame)
 
     if (ul)
         StoreDC(htask16, parg16->f1, (HAND16)ul);
-
-    FREEARGPTR(parg16);
-
-    RETURN (ul);
-}
-
-
-ULONG FASTCALL WU32GetMessageExtraInfo(PVDMFRAME pFrame)
-{
-    ULONG ul = 0;
-
-    UNREFERENCED_PARAMETER(pFrame);
-
-    ul = GETLONG16(GetMessageExtraInfo());
-
-    RETURN (ul);
-}
-
-
-ULONG FASTCALL WU32GetOpenClipboardWindow(PVDMFRAME pFrame)
-{
-    ULONG ul;
-
-    ul = GETHWND16(wow_user_window_public_guest_handle(GetOpenClipboardWindow()));
-
-#line 151
-    RETURN (ul);
-}
-
-
-ULONG FASTCALL WU32IsMenu(PVDMFRAME pFrame)
-{
-    ULONG ul;
-    register PISMENU16 parg16;
-
-    GETARGPTR(pFrame, sizeof(ISMENU16), parg16);
-
-    ul = GETBOOL16(IsMenu(HMENU32(parg16->f1)));
-
-    FREEARGPTR(parg16);
-
-    RETURN (ul);
-}
-
-
-ULONG FASTCALL WU32LockWindowUpdate(PVDMFRAME pFrame)
-{
-    ULONG ul;
-    register PLOCKWINDOWUPDATE16 parg16;
-
-    GETARGPTR(pFrame, sizeof(LOCKWINDOWUPDATE16), parg16);
-
-    ul = GETBOOL16(LockWindowUpdate(HWND32(parg16->f1)));
 
     FREEARGPTR(parg16);
 
@@ -457,12 +385,12 @@ ULONG FASTCALL WU32SystemParametersInfo(PVDMFRAME pFrame)
 
 
     default:
-#line 457
+#line 386
 #ifdef DEBUG
-#line 458
+#line 387
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 465
+#line 394
         break;
     }
 
@@ -661,12 +589,12 @@ ULONG FASTCALL WU32SystemParametersInfo(PVDMFRAME pFrame)
 
 
     default:
-#line 663
+#line 592
 #ifdef DEBUG
-#line 664
+#line 593
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 671
+#line 600
         break;
     }
 
@@ -724,54 +652,15 @@ ULONG FASTCALL WU32GetWindowPlacement(PVDMFRAME pFrame)
 
 
 
-
-
 ULONG FASTCALL WU32GetFreeSystemResources(PVDMFRAME pFrame)
 {
-    register PGETFREESYSTEMRESOURCES16 parg16;
-    ULONG ul = 0;
+    ULONG ul = 90;
 
-    GETARGPTR(pFrame, sizeof(GETFREESYSTEMRESOURCES16), parg16);
-
-
-#ifdef APRIL15  // Win32 doesn't have GetFreeSystemResources
-#line 739
-#error Unsupported excluded original configuration
-#else
-#line 745
-
-    ul = 90;
-
-#endif
-#line 749
-
-    FREEARGPTR(parg16);
+    UNREFERENCED_PARAMETER( pFrame );
 
     RETURN (ul);
 }
 
-
-ULONG FASTCALL WU32GetQueueStatus(PVDMFRAME pFrame)
-{
-    ULONG ul = 0;
-
-#if 0
-#line 761
-#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#else
-#line 765
-    register PGETQUEUESTATUS16 parg16;
-    GETARGPTR(pFrame, sizeof(GETQUEUESTATUS16), parg16);
-
-    ul = GetQueueStatus((UINT)parg16->f1);
-
-    FREEARGPTR(parg16);
-
-#endif
-#line 773
-
-    RETURN (ul);
-}
 
 ULONG FASTCALL WU32ExitWindowsExec(PVDMFRAME pFrame)
 {
@@ -913,17 +802,26 @@ ULONG FASTCALL WU32MapWindowPoints(PVDMFRAME pFrame)
 
     GETARGPTR(pFrame, sizeof(MAPWINDOWPOINTS16), parg16);
     p3 = STACKORHEAPALLOC(parg16->f4 * sizeof(POINT), sizeof(BufferT), BufferT);
-    getpoint16(parg16->f3, parg16->f4, p3);
 
-    MapWindowPoints(
-        HWND32(parg16->f1),
-        HWND32(parg16->f2),
-        p3,
-        INT32(parg16->f4)
-    );
 
-    PUTPOINTARRAY16(parg16->f3, parg16->f4, p3);
-    STACKORHEAPFREE(p3, BufferT);
+    if ( p3 ) {
+         getpoint16(parg16->f3, parg16->f4, p3);
+
+         MapWindowPoints(
+           HWND32(parg16->f1),
+           HWND32(parg16->f2),
+           p3,
+           INT32(parg16->f4)
+           );
+
+           PUTPOINTARRAY16(parg16->f3, parg16->f4, p3);
+           STACKORHEAPFREE(p3, BufferT);
+    }
+    else {
+        FREEARGPTR(parg16);
+        RETURN(0);
+    }
+         
     FREEARGPTR(parg16);
 
     RETURN(1);

@@ -31,22 +31,24 @@
 #include "wmmtbl.h"
 #include "wsocktbl.h"
 #include "wthtbl.h"
+#include "wowit.h"
 #include <stdarg.h>
 #include <ntlpcapi.h>
-#line 33
+#line 34
 #include <ntcsrdll.h>
 #define SHAREWOW_MAIN
 #include <sharewow.h>
 #include <compat/include/wow_registry.h>
 
+#include <tsappcmp.h>
 
-#line 38
+
+#line 41
 /* Function Prototypes */
-#line 39
+#line 42
 DWORD   W32SysErrorBoxThread2(PTDB pTDB);
 VOID    StartDebuggerForWow(VOID);
 BOOLEAN LoadCriticalStringResources(void);
-
 
 extern DECLSPEC_IMPORT ULONG *ExpLdt;
 #define LDT_DESC_PRESENT 0x8000
@@ -58,11 +60,11 @@ MODNAME(wow32.c);
 
 // for logging iloglevel to a file
 #ifdef DEBUG
-#line 54
+#line 56
 #error Excluded unsupported DEBUG WOW profile
-#line 58
+#line 60
 #endif
-#line 59
+#line 61
 
 /*  iloglevel = 16 MAX the world (all 16 bit kernel internal calls
  *  iloglevel = 14 All internal WOW kernel Calls
@@ -70,43 +72,36 @@ MODNAME(wow32.c);
  *  iloglevel = 5  Returns From Calls
  *  iloglevel = 3  Calling Parameters
  */
-INT     flOptions = 0;           // command line optin
+INT     flOptions;           // command line optin
 #ifdef DEBUG
-#line 68
-#error Excluded unsupported DEBUG WOW profile
 #line 70
+#error Excluded unsupported DEBUG WOW profile
+#line 72
 #endif
-#line 71
+#line 73
 
 HANDLE  hmodWOW32;
-HANDLE  hHostInstance = 0;
+HANDLE  hHostInstance;
 #ifdef DEBUG
-#line 75
-#error Excluded unsupported DEBUG WOW profile
 #line 77
-#endif
-#line 78
-#ifdef i386
+#error Excluded unsupported DEBUG WOW profile
 #line 79
-#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
-#line 81
 
 #ifdef DEBUG
-#line 83
+#line 82
 #error Excluded unsupported DEBUG WOW profile
-#line 91
+#line 90
 #endif
-#line 92
+#line 95
 
 UINT    iW32ExecTaskId = (UINT)-1;    // Base Task ID of Task Being Exec'd
-WORD    iWOWTaskCur = 0;        // pTDB of currently running task ID
-UINT    nWOWTasks = 0 ;         // # of WOW tasks running
+UINT    nWOWTasks;              // # of WOW tasks running
 BOOL    fBoot = TRUE;           // TRUE During the Boot Process
 HANDLE  ghevWaitCreatorThread = (HANDLE)-1; // Used to Syncronize creation of a new thread
 
 
-BOOL    fWowMode = FALSE;   // Flag used to determine wow mode.
+BOOL    fWowMode;   // Flag used to determine wow mode.
                 // currently defaults to FALSE (real mode wow)
                 // This is used by the memory access macros
                 // to properly form linear addresses.
@@ -121,12 +116,18 @@ DWORD  dwSharedProcessOffset;
 HANDLE hWOWHeap;
 HANDLE ghProcess;       // WOW Process Handle
 PFNWOWHANDLERSOUT pfnOut;
-PTD *  pptdWOA = NULL;
-PTD    gptdShell = NULL;
+PTD *  pptdWOA;
+PTD    gptdShell;
 DWORD  fThunkStrRtns;           // used as a BOOL
-BOOL   gfDebugExceptions = FALSE;  // set to 1 in debugger to
-                                   // enable debugging of W32Exception
-BOOL   gfIgnoreInputAssertGiven = FALSE;
+BOOL   gfDebugExceptions;  // set to 1 in debugger to
+                           // enable debugging of W32Exception
+BOOL   gfIgnoreInputAssertGiven;
+DWORD  dwSharedWowTimeout;
+
+WORD   gwKrnl386CodeSeg1;  // code segs of krnl386.exe
+WORD   gwKrnl386CodeSeg2;
+WORD   gwKrnl386CodeSeg3;
+WORD   gwKrnl386DataSeg1;
 
 #ifndef _X86_
 PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
@@ -134,6 +135,14 @@ PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 
 
 DWORD   gpsi = 0;
+DWORD gpfn16GetProcModule;
+
+/* for WinFax Lite install hack -- see wow32fax.c */
+char szWINFAX[] =  "WINFAX";
+char szModem[] =   "modem";
+char szINSTALL[] = "INSTALL";
+char szWINFAXCOMx[80];
+BOOL gbWinFaxHack = FALSE;
 
 #define TOOLONGLIMIT     _MAX_PATH
 #define WARNINGMSGLENGTH 255
@@ -160,22 +169,37 @@ char szDrWtsn32[] =         "drwtsn32";
 PSTR pszWinIniFullPath;
 PSTR pszWindowsDirectory;
 PSTR pszSystemDirectory;
+BOOL gbDBCSEnable = FALSE;
+#ifdef FE_SB
+char szSystemMincho[] = {(char) 0xbc, (char) 0xbd, (char) 0xc3, (char) 0xd1,
+                         (char) 0x96, (char) 0xbe, (char) 0x92, (char) 0xa9,
+                         (char) 0 };
+char szMsMincho[] = { (char) 0x82, (char) 0x6c, (char) 0x82, (char) 0x72,
+                      (char) 0x20, (char) 0x96, (char) 0xbe, (char) 0x92,
+                      (char) 0xa9, (char) 0};
+#endif
 
 extern BOOL GdiReserveHandles(VOID);
 extern CRITICAL_SECTION VdmLoadCritSec;
 extern LIST_ENTRY TimerList;
 
-#line 159
+#line 184
 extern PVOID GdiQueryTable();
 extern PVOID gpGdiHandleInfo;
 
-#line 162
+#line 187
 #if defined (_X86_)
-#line 163
+#line 188
 #error Unsupported excluded original configuration
-#line 180
+#line 205
 #endif
-#line 181
+#line 206
+
+PVOID pfnGetVersionExA;            // Used with Version Lie hack. Function pointer to GetVersionExA
+                                   // See WK32GetProcAddress32W in wkgthunk.c
+PVOID pfnCreateDirectoryA;         // Used with GtCompCreateDirectoryA in wkgthunk.c
+
+PVOID pfnLoadLibraryA;             // Used with GtCompLoadLibraryA in wkgthunk.c
 
 BOOLEAN
 W32DllInitialize(
@@ -204,6 +228,7 @@ Return Value:
 --*/
 
 {
+    HMODULE hKrnl32dll;
     UNREFERENCED_PARAMETER(Context);
 
     hmodWOW32 = DllHandle;
@@ -243,6 +268,7 @@ Return Value:
         if (!LoadCriticalStringResources()) {
             MessageBox(NULL, "The Win16 subsystem could not load critical string resources from wow32.dll, terminating.",
                        "Win16 subsystem load failure", MB_ICONEXCLAMATION | MB_OK);
+            return FALSE;
         }
 
         //
@@ -250,10 +276,41 @@ Return Value:
         //
 
 
-#line 256
+#line 289
         W32EWExecer();
 
         InitializeListHead(&TimerList);
+
+        if (IsTerminalServer()) {
+            //
+            // Load tsappcmp.dll
+            //
+            HANDLE dllHandle = LoadLibrary (TEXT("tsappcmp.dll"));
+
+            if (dllHandle) {
+
+
+                gpfnTermsrvCORIniFile = (PTERMSRVCORINIFILE) GetProcAddress(
+                                                                dllHandle,
+                                                                "TermsrvCORIniFile"
+                                                                );
+                ASSERT(gpfnTermsrvCORIniFile != NULL);
+            }
+
+        }
+
+        //
+        // WHISTLER RAID BUG 366613
+        // Used for redirecting WK32GetProcAddress32W call on GetVersionExA
+        //
+        hKrnl32dll = GetModuleHandle("Kernel32.dll");
+        if(hKrnl32dll)
+        {
+            pfnGetVersionExA        =  GetProcAddress(hKrnl32dll, "GetVersionExA");
+            pfnCreateDirectoryA     =  GetProcAddress(hKrnl32dll, "CreateDirectoryA");
+            pfnLoadLibraryA         =  GetProcAddress(hKrnl32dll, "LoadLibraryA");
+        }
+        
         break;
 
     case DLL_THREAD_ATTACH:
@@ -268,7 +325,7 @@ Return Value:
          * Tell base he can nolonger callback to us.
          */
         RegisterWowBaseHandlers(NULL);
-
+        DeleteCriticalSection(&VdmLoadCritSec);
         HeapDestroy (hWOWHeap);
         break;
 
@@ -301,11 +358,12 @@ Return Value:
 --*/
 
 {
-    int n;
+    int i, n;
     PSZ psz, pszStringBuffer;
     DWORD cbTotal;
     DWORD cbUsed;
     DWORD cbStrLen;
+    DWORD rgdwStringOffset[CRITICAL_STRING_COUNT];
 
     //
     // Allocate too much memory for strings (maximum possible) at first,
@@ -334,14 +392,31 @@ Return Value:
             return FALSE;
         }
 
-        aszCriticalStrings[n] = psz;
+        rgdwStringOffset[n] = cbUsed;
 
-        psz += cbStrLen + 1;
+        psz    += cbStrLen + 1;
         cbUsed += cbStrLen + 1;
 
     }
 
-    realloc_w(pszStringBuffer, cbUsed, HEAP_REALLOC_IN_PLACE_ONLY);
+    // Now, alloc a smaller buffer of the correct size
+    // Note: HeapRealloc(IN_PLACE) won't work because allocations are 
+    //       page-sorted by size -- meaning that changing the size will cause
+    //       the memory to move to a new page.
+    psz = malloc_w(cbUsed);
+
+    // copy the strings into the smaller buffer
+    // if we can't alloc the smaller buffer, just go with the big one
+    if (psz) {
+       RtlCopyMemory(psz, pszStringBuffer, cbUsed);
+       free_w(pszStringBuffer);
+       pszStringBuffer = psz;
+    }
+
+    // save the offsets in the critical string array
+    for (i = 0; i < n; i++) {
+       aszCriticalStrings[i] = pszStringBuffer + rgdwStringOffset[i];
+    }
 
     return TRUE;
 }
@@ -445,7 +520,6 @@ BOOL W32EWExecData(DWORD fnid, LPSTR lpData, DWORD cb)
 }
 
 
-
 /* W32Init - Initialize WOW support
  *
  * ENTRY
@@ -455,27 +529,23 @@ BOOL W32EWExecData(DWORD fnid, LPSTR lpData, DWORD cb)
  */
 
 
-BOOL W32Init(VOID)
+BOOL W32Init(BOOL fMEoW)
 {
     HKEY  WowKey;
 #ifdef DEBUG
-#line 464
+#line 545
 #error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
-#line 467
+#line 548
 #endif
-#line 468
+#line 549
     DWORD cb;
     DWORD dwType;
     PTD ptd;
     PFNWOWHANDLERSIN pfnIn;
     LPVOID lpSharedTaskMemory;
-#line 473
-#ifdef _X86_
-#line 474
-#error Unsupported excluded original configuration
-#endif                                             // UP.
-#line 476
+    LANGID LangID;
 
+    UNREFERENCED_PARAMETER(fMEoW);
 #ifndef _X86_
     //
     // This is the one and only call to Sim32GetVDMPointer in WOW32.
@@ -494,6 +564,13 @@ BOOL W32Init(VOID)
 
     ShowStartGlass(10000);
 
+    LangID = GetSystemDefaultLangID();
+    if (PRIMARYLANGID(LangID) == LANG_JAPANESE ||
+        PRIMARYLANGID(LangID) == LANG_KOREAN   ||
+        PRIMARYLANGID(LangID) == LANG_CHINESE    ) {
+        gbDBCSEnable = TRUE;
+    }
+
     //
     // Set up a global WindowsDirectory to be used by other WOW functions.
     //
@@ -505,16 +582,16 @@ BOOL W32Init(VOID)
         if (!NtvdmGetSystemDirectoryA(szBuf, sizeof szBuf)) {
             return FALSE;
         }
-#line 504
+#line 591
         GetShortPathName(szBuf, szBuf, sizeof szBuf);
         cb = strlen(szBuf) + 1;
         pszSystemDirectory = malloc_w_or_die(cb);
         RtlCopyMemory(pszSystemDirectory, szBuf, cb);
 
-        if (!NtvdmGetWindowsDirectoryA(szBuf, sizeof szBuf)) {
-            return FALSE;
+        if(!NtvdmGetWindowsDirectoryA(szBuf, sizeof szBuf) ) {
+           WOW32ASSERTMSG(FALSE, "WOW32: couldnt get windows directory, terminating.\n");
+           WOWStartupFailed();  // never returns.
         }
-#line 510
         GetShortPathName(szBuf, szBuf, sizeof szBuf);
         cb = strlen(szBuf) + 1;
         pszWindowsDirectory = malloc_w_or_die(cb);
@@ -528,6 +605,8 @@ BOOL W32Init(VOID)
 
     // Give USER32 our entry points
 
+    RtlZeroMemory(&pfnIn, sizeof(pfnIn));
+
     pfnIn.pfnLocalAlloc = W32LocalAlloc;
     pfnIn.pfnLocalReAlloc = W32LocalReAlloc;
     pfnIn.pfnLocalLock = W32LocalLock;
@@ -535,7 +614,6 @@ BOOL W32Init(VOID)
     pfnIn.pfnLocalSize = W32LocalSize;
     pfnIn.pfnLocalFree = W32LocalFree;
     pfnIn.pfnGetExpWinVer = W32GetExpWinVer;
-    pfnIn.pfnInitDlgCb = W32InitDlg;
     pfnIn.pfn16GlobalAlloc = W32GlobalAlloc16;
     pfnIn.pfn16GlobalFree = W32GlobalFree16;
     pfnIn.pfnEmptyCB = W32EmptyClipboard;
@@ -546,9 +624,15 @@ BOOL W32Init(VOID)
     pfnIn.pfnUnlockResource = W32UnlockResource;
     pfnIn.pfnSizeofResource = W32SizeofResource;
     pfnIn.pfnWowWndProcEx = (PFNWOWWNDPROCEX)W32Win16WndProcEx;
+    pfnIn.pfnWowDlgProcEx = (PFNWOWDLGPROCEX)W32Win16DlgProcEx;
     pfnIn.pfnWowEditNextWord = W32EditNextWord;
-    pfnIn.pfnWowSetFakeDialogClass = SetFakeDialogClass;
     pfnIn.pfnWowCBStoreHandle = WU32ICBStoreHandle;
+    pfnIn.pfnGetProcModule16 = WOWGetProcModule16;
+    pfnIn.pfnWowMsgBoxIndirectCallback = WowMsgBoxIndirectCallback;
+    pfnIn.pfnWowIlstrsmp = WOWlstrcmp16;
+    pfnIn.pfnWOWTellWOWThehDlg = WOWTellWOWThehDlg;
+    pfnIn.pfnWowTask16SchedNotify = NULL;
+
 
     gpsi = UserRegisterWowHandlers(&pfnIn, &pfnOut);
 
@@ -573,6 +657,8 @@ BOOL W32Init(VOID)
 
     RtlZeroMemory(ptd, sizeof(*ptd));
 
+    InitializeCriticalSection(&ptd->csTD);
+
     // Create Global Wait Event - Used During Task Creation To Syncronize with New Thread
 
     if (!(ghevWaitCreatorThread = CreateEvent(NULL, FALSE, FALSE, NULL))) {
@@ -587,18 +673,54 @@ BOOL W32Init(VOID)
                KEY_QUERY_VALUE,
                &WowKey
              ) != 0){
-#line 582
+#line 681
         LOGDEBUG(0,("    W32INIT ERROR: Registry Opening failed\n"));
-#line 600
+#line 735
         WowKey = NULL;
-#line 584
+#line 683
     }
+
+    //
+    // If present, read the SharedWowTimeout value and convert
+    // from seconds to milliseconds, which is what SetTimer
+    // uses.  Maximum interval for SetTimer is 0x7fffffff.
+    // No need to enforce a minimum, as SetTimer treats a
+    // zero timeout as a one millsecond timeout.
+    //
+
+    cb = sizeof(dwSharedWowTimeout);
+    if ( ! RegQueryValueEx(WowKey,
+              "SharedWowTimeout",
+              NULL,
+              &dwType,
+              (LPBYTE) &dwSharedWowTimeout,
+              &cb) && REG_DWORD == dwType) {
+
+        //
+        // Prevent overflow in the conversion to millseconds below.
+        // This caps the timeout to 2,147,483 seconds, or 24.8 days.
+        //
+
+        dwSharedWowTimeout = min( dwSharedWowTimeout,
+                                  (0x7fffffff / 1000) );
+
+    } else {
+
+        //
+        // Didn't find SharedWowTimeout value or it's the wrong type.
+        //
+
+        dwSharedWowTimeout = 1 * 60 * 60;  // 1 hour in seconds
+    }
+
+    dwSharedWowTimeout *= 1000;
+
 
     //
     // If present (it usually isn't) read ThunkNLS value entry.
     //
 
-#line 590
+#line 725
     cb = sizeof(fThunkStrRtns);
     if (RegQueryValueEx(WowKey,
             "ThunkNLS",
@@ -606,7 +728,7 @@ BOOL W32Init(VOID)
             &dwType,
             (LPBYTE) &fThunkStrRtns,
             &cb) || dwType != REG_DWORD) {
-#line 597
+#line 732
 
         //
         // Didn't find the registry value or it's the wrong type,
@@ -614,20 +736,32 @@ BOOL W32Init(VOID)
         // US.
         //
 
-#line 604
+#line 739
         fThunkStrRtns = GetSystemDefaultLCID() !=
                             MAKELCID(
                                 MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US),
                                 SORT_DEFAULT
                                 );
+    } else {
+
+        //
+        // We did find a ThunkNLS value in the registry, warn on debug builds
+        // to save testers and developers who turn it on for one bug but forget
+        // to turn it back off.
+        //
+
+#ifdef DEBUG
+        OutputDebugString("WOW Warning:  ThunkNLS registry value overriding default NLS tranlation.\n");
+#endif
+
     }
 
 #ifdef DEBUG
-#line 612
+#line 759
 #error Excluded unsupported DEBUG WOW profile
-#line 672
+#line 819
 #endif
-#line 673
+#line 820
 
     //
     // Initialize list of known DLLs used by WK32WowIsKnownDLL
@@ -636,16 +770,8 @@ BOOL W32Init(VOID)
 
     WK32InitWowIsKnownDLL(WowKey);
 
-#line 681
+#line 828
     RegCloseKey (WowKey);
-
-    // 
-    // Initialize list of app names known to be setup applications
-    //
-    //
-
-#line 688
-    W32InitWOWSetupNames();
 
     //
     // Initialize param mapping cache
@@ -684,11 +810,11 @@ BOOL W32Init(VOID)
     ghProcess = NtCurrentProcess();
 
 #ifdef DEBUG
-#line 727
+#line 867
 #error Excluded unsupported DEBUG WOW profile
-#line 744
+#line 876
 #endif
-#line 745
+#line 885
 
     // Initialize ClipBoard formats structure.
 
@@ -709,6 +835,16 @@ BOOL W32Init(VOID)
 
     SetPriorityClass(ghProcess, NORMAL_PRIORITY_CLASS);
 
+#ifdef DEBUG_MEMLEAK
+    // for memory leak support
+    InitializeCriticalSection(&csMemLeak);
+#endif
+
+    // 9x Special Path Map Initialization
+    // i.e. c:\winnt\startm~1 will be c:\documents and settings\all users\start menu
+
+    W32Init9xSpecialPath();
+
     return TRUE;
 }
 
@@ -718,18 +854,18 @@ BOOL W32Init(VOID)
  *
  */
 #ifdef DEBUG_OR_WOWPROFILE
-#line 774
+#line 924
 #error Excluded unsupported WOW profiling configuration
-#line 777
+#line 927
 #endif
-#line 778
+#line 928
 
 #ifdef DEBUG_OR_WOWPROFILE // define symbols for API profiling only (debugger extension)
-#line 780
+#line 930
 #error Excluded unsupported WOW profiling configuration
-#line 783
+#line 932
 #endif // WOWPROFILE
-#line 784
+#line 933
 
 
 /* WOW32UnimplementedAPI - Error Thunk is Not Implemented
@@ -747,44 +883,46 @@ BOOL W32Init(VOID)
 ULONG FASTCALL WOW32UnimplementedAPI(PVDMFRAME pFrame)
 {
 #ifdef DEBUG
-#line 801
+#line 950
 #error Excluded unsupported DEBUG WOW profile
-#line 811
+#line 967
 #else
-#line 812
+#line 968
     UNREFERENCED_PARAMETER(pFrame);
 #endif
-#line 814
+#line 970
     return FALSE;
 }
 
 
 #ifdef DEBUG
-#line 819
+#line 1009
 #error Excluded unsupported DEBUG WOW profile
-#line 870
+#line 1060
 #endif // DEBUG
-#line 871
+#line 1061
 
 
-LPFNW32 FASTCALL W32PatchCodeWithLpfnw32(PVDMFRAME pFrame , INT iFun )
+LPFNW32 FASTCALL W32PatchCodeWithLpfnw32(PVDMFRAME pFrame , LPFNW32 lpfnW32 )
 {
-    LPFNW32 lpfnW32;
     VPVOID vpCode;
     LPBYTE lpCode;
+#ifdef DEBUG
+    INT iFun = pFrame->wCallID;
+#endif
 
 #ifdef DEBUG_OR_WOWPROFILE
-#line 880
+#line 1072
 #error Excluded unsupported WOW profiling configuration
-#line 894
+#line 1087
 #endif
-#line 895
+#line 1088
 
     //
     // just return the thunk function if called in real mode
     //
     if (!fWowMode) {
-        return aw32WOW[iFun].lpfnW32;
+        goto Done;
     }
 
     // the thunk looks like so.
@@ -808,23 +946,34 @@ LPFNW32 FASTCALL W32PatchCodeWithLpfnw32(PVDMFRAME pFrame , INT iFun )
     WOW32ASSERT(*(PWORD16)(lpCode) == HIWORD(iFun));
     WOW32ASSERT(*(PWORD16)(lpCode+0x3) == LOWORD(iFun));
 
-    lpfnW32 = aw32WOW[iFun].lpfnW32;
-    iFun = (DWORD)lpfnW32;
-
-    *((PWORD16)lpCode) = HIWORD(iFun);
+    *((PWORD16)lpCode) = HIWORD((DWORD)lpfnW32);
     lpCode += 0x3;                                // seek to the 2nd word (the loword)
-    *((PWORD16)lpCode) = LOWORD(iFun);
+    *((PWORD16)lpCode) = LOWORD((DWORD)lpfnW32);
 
     FLUSHVDMCODEPTR(vpCode, 0x2 + 0x3, lpCode);
     FREEVDMPTR(lpCode);
 
+  Done:
     return lpfnW32;
 
 }
 
 
-/* W32Dispatch - Recipient of all WOW16 API calls
+/* W32Dispatch - Recipient of all WOW16 API calls (sort of)
  *
+ * "sort of" means that the word "all" above hasn't been true since 8/93:
+ *  1. Most calls to the 16-bit kernel are handled by krnl386.exe on the
+ *     16-bit side (this has always been true).
+ *  2. There are several User API's that are thunked on the 16-bit side by
+ *     User32.dll code on x86 platforms.
+ *  3. A FEW (only MulDiv?) GDI API's are thunked by GDI.exe in 16-bit land.
+ *  4. On CHECKED x86 builds & ALL RISC builds, all API's not subject to the
+ *     above exceptions are dispatched through this function.
+ *  5. On x86 FREE platforms, API calls are dispatched from fastwow.asm
+ *  - That's about it -- until we change it again, in which case this note
+ *    could be terribly misleading.     cmjones  10/08/97
+ *
+ * Having said that:
  * This routine dispatches to the relavant WOW thunk routine via
  * jump tables wktbl.c wutbl.c wgtbl.c based on a function id on the 16 bit
  * stack.
@@ -841,22 +990,23 @@ VOID W32Dispatch()
 {
     INT iFun;
     ULONG ulReturn;
+    DWORD dwThunkCSIP;
     BOOL fStackEstablished = FALSE;
     VPVOID vpCurrentStack = 0; // DIV-348: filter arguments precede setup too
     register PTD ptd = NULL;
-#line 959
+#line 1164
     register PVDMFRAME pFrame;
 #ifdef DEBUG_OR_WOWPROFILE
-#line 961
+#line 1166
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 963
+#line 1168
 
 #ifdef  WOWPROFILE
-#line 965
+#line 1170
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 967
+#line 1172
 
     //
     // WARNING: DO NOT ADD ANYTHING TO THIS FUNCTION UNLESS YOU ADD THE SAME
@@ -883,38 +1033,48 @@ VOID W32Dispatch()
         ptd->vpStack = vpCurrentStack;              // Save 16 bit ss:sp
         fStackEstablished = TRUE;                 // DIV-337
 
-#line 992
+        // ssync 16-bit & 32-bit common dialog structs (see wcommdlg.c)
+        if(ptd->CommDlgTd) {
+            dwThunkCSIP = (DWORD)(pFrame->wThunkCSIP);
+            Ssync_WOW_CommDlg_Structs(ptd->CommDlgTd, w16to32, dwThunkCSIP);
+        }
+
         WOW32ASSERT( FIELD_OFFSET(TD,vpStack) == 0 );
-        WOW32ASSERT( FIELD_OFFSET(TEB,WOW32Reserved) == 0xC0 );
+
+        LOGARGS(3,pFrame);                              // Perform Function Logging
 
         iFun = pFrame->wCallID;
 
 #ifdef DEBUG_OR_WOWPROFILE
-#line 998
+#line 1210
 #error Excluded unsupported WOW profiling configuration
-#line 1000
+#line 1211
 #endif
-#line 1001
-        iWOWTaskCur = pFrame->wTDB;                     // Record the task's current ID
-
         if (ISFUNCID(iFun)) {
 #ifdef DEBUG
-#line 1005
+#line 1214
 #error Excluded unsupported DEBUG WOW profile
-#line 1010
+#line 1219
 #endif
-#line 1011
-            iFun = (INT)W32PatchCodeWithLpfnw32(pFrame, iFun);
+            iFun = (INT)aw32WOW[iFun].lpfnW32;
+
+            if ( ! HIWORD(iFun)) {
+#ifdef WOWPROFILE // For API profiling only (debugger extension)
+                dwTics = GetWOWTicDiff(0L);
+#endif // WOWPROFILE
+                ulReturn = InterpretThunk(pFrame, iFun);
+                goto AfterApiCall;
+            } else {
+                W32PatchCodeWithLpfnw32(pFrame, (LPFNW32)iFun);
+            }
         }
 
 
-        LOGARGS(3,pFrame);                              // Perform Function Logging
-
 #ifdef WOWPROFILE // For API profiling only (debugger extension)
-#line 1018
+#line 1235
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
-#line 1020
+#line 1237
 
         //
         // WARNING: DO NOT ADD ANYTHING TO THIS FUNCTION UNLESS YOU ADD THE SAME
@@ -923,18 +1083,20 @@ VOID W32Dispatch()
         //
         ulReturn = wow_user_invoke_thunk((LPFNW32)iFun, pFrame); // DIV-296
 
-#ifdef DEBUG_OR_WOWPROFILE
-#line 1029
-#error Excluded unsupported WOW profiling configuration
-#endif
-#line 1031
+    AfterApiCall:
+
+        // ssync 16-bit & 32-bit common dialog structs (see wcommdlg.c)
+        if(ptd->CommDlgTd) {
+            Ssync_WOW_CommDlg_Structs(ptd->CommDlgTd, w32to16, dwThunkCSIP);
+        }
+
 
 #ifdef WOWPROFILE // For API profiling only (debugger extension)
-#line 1033
+#line 1255
 #error Excluded unsupported WOW profiling configuration
-#line 1038
+#line 1260
 #endif // WOWPROFILE
-#line 1039
+#line 1261
 
         FREEVDMPTR(pFrame);                                                     // Set the 16-bit return code
         GETFRAMEPTR(ptd->vpStack, pFrame);
@@ -944,11 +1106,11 @@ VOID W32Dispatch()
         pFrame->wDX = HIW(ulReturn);
 
 #ifdef DEBUG
-#line 1048
+#line 1270
 #error Excluded unsupported DEBUG WOW profile
-#line 1060
+#line 1282
 #endif // DEBUG
-#line 1061
+#line 1283
 
         FREEVDMPTR(pFrame);
 
@@ -960,7 +1122,7 @@ VOID W32Dispatch()
             ptd->vpStack = vpCurrentStack;
             SETVDMSTACK(ptd->vpStack);
         }
-#line 1068
+#line 1290
     }
     //
     // WARNING: DO NOT ADD ANYTHING TO THIS FUNCTION UNLESS YOU ADD THE SAME
@@ -971,11 +1133,11 @@ VOID W32Dispatch()
 
 
 #if NO_W32TRYCALL
-#line 1078
+#line 1300
 #error Excluded unsupported NO_W32TRYCALL WOW profile
-#line 1124
+#line 1346
 #else
-#line 1125
+#line 1300
 
 /* W32TryCall - Called from FASTWOW to do a TryExcept Around API Calls
  *
@@ -1038,7 +1200,7 @@ INT W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi)
     WORD wDebugButton;
 
 
-#line 1186
+#line 1382
     if (!gfDebugExceptions) {
 
         //
@@ -1133,7 +1295,7 @@ INT W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi)
                         sizeof(AeAutoDebugString)-1
                         ) ) {
 
-                    if ( !strcmp(AeAutoDebugString,"1") ) {
+                    if ( !WOW32_strcmp(AeAutoDebugString,"1") ) {
                         AeAutoDebug = TRUE;
                     }
                 }
@@ -1150,7 +1312,7 @@ INT W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi)
     //
 
     if (AeAutoDebug &&
-        !_strnicmp(AeDebuggerCmdLine, szDrWtsn32, (sizeof szDrWtsn32) - 1)) {
+        !WOW32_strnicmp(AeDebuggerCmdLine, szDrWtsn32, (sizeof szDrWtsn32) - 1)) {
 
         wDebugButton = 0;
         AeAutoDebug = FALSE;
@@ -1175,7 +1337,7 @@ INT W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi)
     strcpy(szModule, CRITSTR(TheWin16Subsystem));
     RtlPcToFileHeader(pexi->ExceptionRecord->ExceptionAddress, (PVOID *)&hModule);
     GetModuleFileName(hModule, szModule, sizeof(szModule));
-    pszModuleFilePart = strrchr(szModule, '\\');
+    pszModuleFilePart = WOW32_strrchr(szModule, '\\');
     if (pszModuleFilePart) {
         pszModuleFilePart++;
     } else {
@@ -1222,6 +1384,7 @@ INT W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi)
         case EXCEPTION_FLT_STACK_CHECK:
         case EXCEPTION_FLT_UNDERFLOW:
             pszErrorFormatString = CRITSTR(CausedFloatException);
+            break;
 
         default:
             pszErrorFormatString = CRITSTR(CausedException);
@@ -1370,11 +1533,11 @@ KillTask:
 
 
 #ifdef DEBUG
-#line 1517
+#line 1714
 #error Excluded unsupported DEBUG WOW profile
-#line 1639
+#line 1836
 #endif // DEBUG
-#line 1640
+#line 1837
 
 
 BOOL IsDebuggerAttached(VOID)
@@ -1424,7 +1587,7 @@ Return Value:
                      NULL
                      );
 
-        fDebuggerAttached = NT_SUCCESS(Status) && MyDebugPort;
+        fDebuggerAttached = NT_SUCCESS(Status) && (MyDebugPort != NULL);
 
     }
 
@@ -1488,10 +1651,10 @@ PVOID FASTCALL
 GetPModeVDMPointerAssert(
     DWORD Address
 #ifdef DEBUG
-#line 1753
+#line 1950
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 1755
+#line 1952
     )
 /*++
 
@@ -1511,10 +1674,13 @@ Return Value:
 
 {
 #ifdef DEBUG
-#line 1774
+#line 1971
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 1776
+#line 1973
+
+    // what to do if this assert fires??  Currently "nothing" seems to work OK.
+    WOW32WARNMSG((ExpLdt),("WOW::GetPModeVDMPointerAssert: ExpLdt == NULL\n"));
 
     //
     // Check to see if the descriptor is marked present
@@ -1561,44 +1727,44 @@ Return Value:
 
 
 #ifdef DEBUG
-#line 1822
+#line 2022
 #error Excluded unsupported DEBUG WOW profile
-#line 1860
+#line 2060
 #else
-#line 1861
+#line 2061
     return GetPModeVDMPointerMacro(Address, 0);  // No limit check on free build.
 #endif // DEBUG
-#line 1863
+#line 2063
 }
 
 
 
 
-ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
+ULONG FASTCALL WK32WOWGetFastAddress( PVDMFRAME pFrame )
 {
 #if FASTBOPPING
-#line 1871
+#line 2071
 #error Excluded unsupported FASTBOPPING host profile
 #else
-#line 1873
+#line 2073
     return 0;
 #endif
-#line 1875
+#line 2075
 }
 
-ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
+ULONG FASTCALL WK32WOWGetFastCbRetAddress( PVDMFRAME pFrame )
 {
 #if FASTBOPPING
-#line 1880
+#line 2080
 #error Excluded unsupported FASTBOPPING host profile
 #else
-#line 1882
+#line 2082
     return( 0L );
 #endif
-#line 1884
+#line 2084
 }
 
-ULONG FASTCALL W32GetTableOffsets( PVDMFRAME pFrame )
+ULONG FASTCALL WK32WOWGetTableOffsets( PVDMFRAME pFrame )
 {
     PWOWGETTABLEOFFSETS16 parg16;
     PTABLEOFFSETS   pto16;
@@ -1613,67 +1779,92 @@ ULONG FASTCALL W32GetTableOffsets( PVDMFRAME pFrame )
 
     FREEARGPTR(parg16);
 
-#line 1901
+#line 2101
 #if FASTBOPPING
-#line 1902
+#line 2102
 #error Unsupported excluded original configuration
 #endif
-#line 1904
+#line 2104
 
     return 1;
 }
 
-ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
+ULONG FASTCALL WK32WOWGetFlatAddressArray( PVDMFRAME pFrame )
 {
 #if FASTBOPPING
-#line 1911
+#line 2111
 #error Excluded unsupported FASTBOPPING host profile
 #else
-#line 1913
+#line 2113
     return 0;
 #endif
-#line 1915
+#line 2115
 }
 
 
 #ifdef DEBUG
-#line 1919
+#line 2119
 #error Excluded unsupported DEBUG WOW profile
-#line 2250
+#line 2462
 #endif // DEBUG
-#line 2251
+#line 2463
+
+
+
 
 PVOID FASTCALL malloc_w (ULONG size)
 {
     PVOID pv;
 
-    pv = HeapAlloc(hWOWHeap, 0, size);
+    pv = HeapAlloc(hWOWHeap, 0, size + TAILCHECK);
     WOW32ASSERTMSG(pv, "WOW32: malloc_w failing, returning NULL\n");
+
+#ifdef DEBUG_MEMLEAK
+    WOW32DebugMemLeak(pv, size, ML_MALLOC_W);
+#endif
+
     return pv;
+
 }
+
+
+DWORD FASTCALL size_w (PVOID pv)
+{
+    DWORD  dwSize;
+
+    dwSize = HeapSize(hWOWHeap, 0, pv) - TAILCHECK;
+
+    return(dwSize);
+
+}
+
 
 PVOID FASTCALL malloc_w_zero (ULONG size)
 {
     PVOID pv;
 
-    pv = HeapAlloc(hWOWHeap, HEAP_ZERO_MEMORY, size);
+    pv = HeapAlloc(hWOWHeap, HEAP_ZERO_MEMORY, size + TAILCHECK);
     WOW32ASSERTMSG(pv, "WOW32: malloc_w_zero failing, returning NULL\n");
+
+#ifdef DEBUG_MEMLEAK
+    WOW32DebugMemLeak(pv, size, ML_MALLOC_W_ZERO);
+#endif
     return pv;
 }
 
-PVOID FASTCALL realloc_w (PVOID p, ULONG size, DWORD dwFlags)
-{
-    PVOID pv;
 
-    pv = HeapReAlloc(hWOWHeap, dwFlags, p, size);
-    WOW32ASSERTMSG(pv, "WOW32: realloc_w failing, returning NULL\n");
-    return pv;
-}
 
 VOID FASTCALL free_w (PVOID p)
 {
+
+#ifdef DEBUG_MEMLEAK
+    WOW32DebugFreeMem(p);
+#endif
+
     HeapFree(hWOWHeap, 0, (LPSTR)(p));
 }
+
+
 
 //
 // malloc_w_or_die is for use by *initialization* code only, when we
@@ -1694,6 +1885,104 @@ PVOID FASTCALL malloc_w_or_die(ULONG size)
     return pv;
 }
 
+
+
+LPSTR malloc_w_strcpy_vp16to32(VPVOID vpstr16, BOOL bMulti, INT cMax)
+{
+
+    return(ThunkStr16toStr32(NULL, vpstr16, cMax, bMulti));
+}
+
+
+
+
+LPSTR ThunkStr16toStr32(LPSTR pdst32, VPVOID vpsrc16, INT cChars, BOOL bMulti)
+/*++
+   Thunks a 16-bit string to a 32-bit ANSI string.
+
+   bMulti == TRUE means we are thunking a multi-string which is a list of NULL
+             *separated* strings that *terminate* with a double NULL.
+
+   Notes: If the original 32-bit buffer is too small to contain the new string,
+          it will be free'd and a new 32-bit buffer will be allocated.  If a new
+          32-bit buffer can't be allocated, the ptr to the original 32-bit
+          buffer is returned with no changes to the contents.
+
+   Returns: ptr to the original 32-bit buffer
+            OR ptr to a new 32-bit buffer if the original buffer was too small
+            OR NULL if psrc is NULL.
+--*/
+{
+    PVOID  pbuf32;
+    LPSTR  psrc16;
+    INT    buf16size, iLen;
+    INT    buf32size = 0;
+
+
+    GETPSZPTR(vpsrc16, psrc16);
+
+    if(!psrc16) {
+
+        // the app doesn't want a buffer for this anymore
+        // (this is primarily for comdlg support)
+        if(pdst32) {
+            free_w(pdst32);
+        }
+        return(NULL);
+    }
+
+    if(bMulti) {
+        iLen = Multi_strlen(psrc16) + 1;
+    } else {
+        iLen = (INT)(strlen(psrc16) + 1);
+    }
+    buf16size = max(cChars, iLen);
+
+    if(pdst32) {
+        buf32size = (INT)size_w(pdst32);
+    }
+
+    // if 32-bit buffer is too small, NULL, or invalid -- alloc a bigger buffer
+    if((buf32size < buf16size) || (!pdst32) || (buf32size == 0xFFFFFFFF)) {
+
+        if(pbuf32 = malloc_w(buf16size)) {
+
+            // now copy to the new 32-bit buffer
+            if(bMulti) {
+                Multi_strcpy(pbuf32, psrc16);
+            } else {
+                strcpy(pbuf32, psrc16);
+            }
+
+            // get rid of the old buffer
+            if(pdst32) {
+                free_w(pdst32);
+            }
+
+            pdst32 = pbuf32;
+        }
+        else {
+            WOW32ASSERTMSG(0, "WOW32: ThunkStr16toStr32: malloc_w failed!\n");
+        }
+    }
+
+    // else just use the original 32-bit buffer (99% of the time)
+    else if(pdst32) {
+        if(bMulti) {
+            Multi_strcpy(pdst32, psrc16);
+        } else {
+            strcpy(pdst32, psrc16);
+        }
+    }
+
+    FREEPSZPTR(psrc16);
+
+    return(pdst32);
+}
+
+
+
+
 //
 // WOWStartupFailed puts up a fatal error box and terminates WOW.
 //
@@ -1703,7 +1992,7 @@ PVOID WOWStartupFailed(VOID)
     char szCaption[256];
     char szMsgBoxText[1024];
 
-#line 2312
+#line 2647
     LoadString(hmodWOW32, iszStartupFailed, szMsgBoxText, sizeof szMsgBoxText);
     LoadString(hmodWOW32, iszSystemError, szCaption, sizeof szCaption);
 
@@ -1713,18 +2002,249 @@ PVOID WOWStartupFailed(VOID)
         MB_SETFOREGROUND | MB_TASKMODAL | MB_ICONSTOP | MB_OK | MB_DEFBUTTON1);
 
     W32ExitWowProcess(EXIT_FAILURE);
-#line 2322
+#line 2657
     return (PVOID)NULL;
 }
 
 
+
+#ifdef FIX_318197_NOW
+
+char*
+WOW32_strchr(
+    const char* psz,
+    int         c
+    )
+{
+    if (gbDBCSEnable) {
+        unsigned int cc;
+
+        for (; (cc = *psz); psz++) {
+            if (IsDBCSLeadByte((BYTE)cc)) {
+                if (*++psz == '\0') {
+                    return NULL;
+                }
+                if ((unsigned int)c == ((cc << 8) | *psz) ) {    // DBCS match
+                    return (char*)(psz - 1);
+                }
+            }
+            else if ((unsigned int)c == cc) {
+                return (char*)psz;      // SBCS match
+            }
+        }
+
+        if ((unsigned int)c == cc) {    // NULL match
+            return (char*)psz;
+        }
+
+        return NULL;
+    }
+    else {
+        return strchr(psz, c);
+    }
+}
+
+char*
+WOW32_strrchr(
+    const char* psz,
+    int         c
+    )
+{
+    if (gbDBCSEnable) {
+        char*        r = NULL;
+        unsigned int cc;
+
+        do {
+            cc = *psz;
+            if (IsDBCSLeadByte((BYTE)cc)) {
+                if (*++psz) {
+                    if ((unsigned int)c == ((cc << 8) | *psz) ) {    // DBCS match
+                        r = (char*)(psz - 1);
+                    }
+                }
+                else if (!r) {
+                    // return pointer to '\0'
+                    r = (char*)psz;
+                }
+            }
+            else if ((unsigned int)c == cc) {
+                r = (char*)psz;    // SBCS match
+            }
+        } while (*psz++);
+
+        return r;
+    }
+    else {
+        return strrchr(psz, c);
+    }
+}
+
+char*
+WOW32_strstr(
+    const char* str1,
+    const char* str2
+    )
+{
+    if (gbDBCSEnable) {
+        char *cp, *endp;
+        char *s1, *s2;
+
+        cp = (char*)str1;
+        endp = (char*)str1 + strlen(str1) - strlen(str2);
+
+        while (*cp && (cp <= endp)) {
+            s1 = cp;
+            s2 = (char*)str2;
+
+            while ( *s1 && *s2 && (*s1 == *s2) ) {
+                s1++;
+                s2++;
+            }
+
+            if (!(*s2)) {
+                return cp;    // success!
+            }
+
+            cp = CharNext(cp);
+        }
+
+        return NULL;
+    }
+    else {
+        return strstr(str1, str2);
+    }
+}
+
+int
+WOW32_strncmp(
+    const char* str1,
+    const char* str2,
+    size_t      n
+    )
+{
+    if (gbDBCSEnable) {
+        int retval;
+
+        if (n == 0) {
+            return 0;
+        }
+
+        retval = CompareStringA( GetThreadLocale(),
+                                 LOCALE_USE_CP_ACP,
+                                 str1,
+                                 n,
+                                 str2,
+                                 n );
+        if (retval == 0) {
+            //
+            // The caller is not expecting failure.  Try the system
+            // default locale id.
+            //
+            retval = CompareStringA( GetSystemDefaultLCID(),
+                                     LOCALE_USE_CP_ACP,
+                                     str1,
+                                     n,
+                                     str2,
+                                     n );
+        }
+
+        if (retval == 0) {
+            if (str1 && str2) {
+                //
+                // The caller is not expecting failure.  We've never had a
+                // failure indicator before.  We'll do a best guess by calling
+                // the C runtimes to do a non-locale sensitive compare.
+                //
+                return strncmp(str1, str2, n);
+            }
+            else if (str1) {
+                return 1;
+            }
+            else if (str2) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        }
+
+        return retval - 2;
+    }
+    else {
+        return strncmp(str1, str2, n);
+    }
+}
+
+int
+WOW32_strnicmp(
+    const char* str1,
+    const char* str2,
+    size_t      n
+    )
+{
+    if (gbDBCSEnable) {
+        int retval;
+
+        if (n == 0) {
+            return 0;
+        }
+
+        retval = CompareStringA( GetThreadLocale(),
+                                 LOCALE_USE_CP_ACP | NORM_IGNORECASE,
+                                 str1,
+                                 n,
+                                 str2,
+                                 n );
+        if (retval == 0) {
+            //
+            // The caller is not expecting failure.  Try the system
+            // default locale id.
+            //
+            retval = CompareStringA( GetSystemDefaultLCID(),
+                                     LOCALE_USE_CP_ACP | NORM_IGNORECASE,
+                                     str1,
+                                     n,
+                                     str2,
+                                     n );
+        }
+
+        if (retval == 0) {
+            if (str1 && str2) {
+                //
+                // The caller is not expecting failure.  We've never had a
+                // failure indicator before.  We'll do a best guess by calling
+                // the C runtimes to do a non-locale sensitive compare.
+                //
+                return _strnicmp(str1, str2, n);
+            }
+            else if (str1) {
+                return 1;
+            }
+            else if (str2) {
+                return -1;
+            }
+            else {
+                return 0;
+            }
+        }
+
+        return retval - 2;
+    }
+    else {
+        return _strnicmp(str1, str2, n);
+    }
+}
+
+#endif
+
+
 //****************************************************************************
 #ifdef DEBUG_OR_WOWPROFILE
-#line 2328
+#line 2894
 #error Excluded unsupported WOW profiling configuration
-#line 2376
+#line 2945
 #endif  // DEBUG_OR_WOWPROFILE
-#line 2377
+#line 2902
 
 /* DIVERGENCE(MVDM-HOST-DIV-911): original thunk state and frame projections. */
 #include "wow_thunk_provider.h"
@@ -1760,3 +2280,6 @@ INT WINAPI wow_original_dispatch_exception(DWORD code, PEXCEPTION_POINTERS info,
     return disposition;
 }
 
+#ifdef DEBUG_MEMLEAK
+#error Excluded unsupported DEBUG_MEMLEAK WOW profile
+#endif

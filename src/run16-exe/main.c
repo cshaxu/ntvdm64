@@ -355,7 +355,8 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
      * launcher passes only the already-projected environment and show state. */
     service_start_attempted=TRUE;
     result=OpenNtBaseClientStartVdmWorker(unicode_environment.Buffer,
-        unicode_environment.Length/sizeof(WCHAR),startup.wShowWindow,
+        unicode_environment.Length/sizeof(WCHAR),
+        (startup.dwFlags & STARTF_USESHOWWINDOW) ? startup.wShowWindow : SW_SHOWDEFAULT,
         frontend_capability,&worker.hProcess,&parent_wait);
     if(result)goto done;
     resumed = TRUE;

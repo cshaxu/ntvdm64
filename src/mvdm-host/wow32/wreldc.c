@@ -97,7 +97,6 @@ BOOL ReleaseCachedDCs(HAND16 htask16, HAND16 hwnd16, HAND16 hdc16,
                  // reset the state evenif ReleaseDC failed
 
                  lpT->flState = 0;
-                 FREEHDC16(hdcTemp);
                  if (!(--iReleasedDCs))
                      break;
              }
@@ -149,7 +148,6 @@ BOOL FreeCachedDCs(HAND16 htask16)
              }
 
              lpT->flState = 0;
-             FREEHDC16(hdcTemp);
          }
     }
 

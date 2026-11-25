@@ -60,7 +60,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT message, UINT wp, LONG lp, VPWNDPROC proc
         if (selected) {
             DeleteFileA(arm);
             call.cursor = CURRENTPTD()->vpCBStack;
-            call.init = CURRENTPTD()->dwFlags & TDF_INITCALLBACKSTACK;
+            call.init = (DWORD)CURRENTPTD()->cStackAlloc16;
             call.slot = 32u;
             live_call = &call;
         }
@@ -82,7 +82,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT message, UINT wp, LONG lp, VPWNDPROC proc
                     GetCurrentProcessId(), GetCurrentThreadId(), CURRENTPTD()->htask16, call.phase,
                     call.key, call.slot, call.before, call.slot < 32u ? vahdr[call.slot] & 1u : 0u,
                     call.cursor, CURRENTPTD()->vpCBStack, call.init,
-                    CURRENTPTD()->dwFlags & TDF_INITCALLBACKSTACK, call.injected, !completed);
+                    (DWORD)CURRENTPTD()->cStackAlloc16, call.injected, !completed);
                 WriteFile(file, line, bytes, &written, NULL);
                 CloseHandle(file);
             }

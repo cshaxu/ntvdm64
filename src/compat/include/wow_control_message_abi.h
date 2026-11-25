@@ -1,12 +1,9 @@
 #ifndef WOW_CONTROL_MESSAGE_ABI_H
 #define WOW_CONTROL_MESSAGE_ABI_H
 
-/* Original OpenNT winuserp.h control messages, evaluated with the selected
- * NT4 WINVER>=0x0400 winuser.h CB_MSGMAX (0x0162), not the host SDK's
- * growing public message range. These numbers connect original WOW thunks
- * and recovered USER controls; they are not modern private control APIs. */
-#define CBEC_SETCOMBOFOCUS 0x0163
-#define CBEC_KILLCOMBOFOCUS 0x0164
+/* XP WOW message dispatch slots shared with the recovered USER controls. */
+#define CBEC_SETCOMBOFOCUS 0x0166
+#define CBEC_KILLCOMBOFOCUS 0x0167
 #ifndef LBCB_CARETON
 #define LBCB_CARETON 0x01A3
 #define LBCB_CARETOFF 0x01A4

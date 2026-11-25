@@ -12,6 +12,7 @@ DWORD WINAPI wow_user_set_class_longA(HWND, int, LONG);
  * USER owns the real WND slot and its CPD decoding; only our immutable entry
  * is decoded on return. Original CLS retains its class behavior and the
  * original address-only native normalization. Origin survives FFFF collisions. */
+WORD WINAPI wow_user_window_fnid(HWND);
 DWORD WINAPI wow_user_get_procedure(HWND, BOOL class_procedure, BOOL *guest);
 DWORD WINAPI wow_user_set_procedure(HWND, BOOL class_procedure, DWORD,
     BOOL guest, BOOL *previous_guest);
@@ -20,7 +21,7 @@ BOOL WINAPI wow_user_unregister_classA(LPCSTR, HINSTANCE);
 DWORD WINAPI wow_native_GetWindowThreadProcessId(HWND, LPDWORD);
 LRESULT WINAPI wow_user_call_window_procA(WNDPROC, HWND, UINT, WPARAM, LPARAM);
 LRESULT WINAPI wow_user_call_window_procW(WNDPROC, HWND, UINT, WPARAM, LPARAM);
-VOID WINAPI wow_user_register_wow_exec(HANDLE);
+LONG WINAPI wow_user_register_wow_exec(HANDLE);
 #include "wow_startup_exit.h"
 DWORD WINAPI NtvdmAuthorizeExit(DWORD exit_code);
 VOID WINAPI W32ExitWowProcess(DWORD exit_code);

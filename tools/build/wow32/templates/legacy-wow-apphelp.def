@@ -1,0 +1,4 @@
+LIBRARY APPHELP.DLL
+EXPORTS
+    ApphelpGetNTVDMInfo
+    ApphelpShowDialog

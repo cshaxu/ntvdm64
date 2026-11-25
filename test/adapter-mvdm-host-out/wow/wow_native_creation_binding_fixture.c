@@ -637,14 +637,13 @@ static void verify_live_cpd_guest_origin(wow_class_client_context *client, DWORD
     wow_class_words_binding *binding;
     wow_window_dispatch_target target = {0};
     WW window_words = {0};
-    DWORD words[2] = {token & ~WOW_WINDOW_PROC_TAG, 0}, previous;
+    DWORD words[2] = {(token & ~WOW_WINDOW_PROC_TAG) |
+        ((token & 0x00060000u) << 13) | 0x00060000u, 0}, previous;
     BOOL previous_guest;
     HWND window;
     ATOM atom;
     unsigned before;
     DWORD saved_target = collision_target;
-    if (!(words[0] & WOW_WINDOW_SELECTOR_VIRTUAL_BIT))
-        words[0] |= WOW_WINDOW_PROC_TAG | WOW_WINDOW_SELECTOR_VIRTUAL_BIT;
     request.hInstance = instance; request.lpfnWndProc = (WNDPROC)token;
     request.lpszClassName = "S3_LIVE_CPD_GUEST_ORIGIN";
     /* Exactly the same numeric word is a known guest registration first,

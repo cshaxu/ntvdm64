@@ -57,8 +57,8 @@ set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/sinit011.c"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/sinit012.c"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/sinit013.c"
-  "${CMAKE_SOURCE_DIR}/src/mvdm-host/vdd/samples/mscdex/vdd/sources"
-  "${CMAKE_SOURCE_DIR}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/vdd/mscdex/vdd/sources"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/vdd/mscdex/vdd/vcdex.def"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/sas.h"
   "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/gvi.h"
@@ -88,7 +88,7 @@ if(NTVDM_ARCHITECTURE STREQUAL "x86")
       "-DNTVDM_USE_CCACHE=${NTVDM_USE_CCACHE}" "-DNTVDM_CCACHE_EXECUTABLE=${NTVDM_CCACHE_EXECUTABLE}"
     DEPENDS "${_worker_tree}/ntvdm.lib"
       "${CMAKE_SOURCE_DIR}/tools/build/wow32/CMakeLists.txt"
-      "${CMAKE_SOURCE_DIR}/src/mvdm-host/wow32/sources"
+      "${CMAKE_SOURCE_DIR}/src/mvdm-host/wow32/sources.inc"
       "${CMAKE_SOURCE_DIR}/src/mvdm-host/wow32/wow32.def"
     VERBATIM)
   add_custom_target(wow32
