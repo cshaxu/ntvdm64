@@ -129,7 +129,7 @@ try {
         # This strengthens ordering without depending on unsupported history.
         $dos=Get-Content "$prefix.observer.line-01.console.txt" -Raw
         $mem=Get-Content "$prefix.observer.line-03.console.txt" -Raw
-        if($dos -notmatch 'Microsoft\(R\) Windows NT DOS' -or
+        if($dos -notmatch 'Microsoft\(R\) Windows (?:NT )?DOS' -or
            $mem -notmatch 'bytes total conventional memory' -or
            $screen -notmatch '(?m)^\[\d+\] S6-PARENT-RETURN\r?$') {
             throw 'Missing real DOS/MEM output or executed parent-return marker'

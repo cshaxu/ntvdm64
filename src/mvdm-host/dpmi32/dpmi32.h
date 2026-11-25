@@ -312,7 +312,7 @@ typedef struct _IDT_ENTRY {
                                       (AB_DPL3|AB_PRESENT|AB_DATA))         \
             )
 
-#ifdef _X86_
+#if defined(_X86_) && !defined(CCPU)
 #define FLUSH_SELECTOR_CACHE(SelStart, SelCount) TRUE
 #else
 #define FLUSH_SELECTOR_CACHE(SelStart, SelCount) FlushSelectorCache(SelStart, SelCount)
@@ -761,7 +761,7 @@ DpmiGetDebugRegisters(
 // Descriptor managagment
 //
 
-#ifdef _X86_
+#if defined(_X86_) && !defined(CCPU)
 BOOL
 DpmiSetX86Descriptor(
     USHORT  SelStart,

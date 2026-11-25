@@ -527,7 +527,7 @@ static int s33_first_command_page_kept_text(const char *raw_path,const char *exp
             if(version)break;
             in_page=1;banner=0;version=0;
         } else if(in_page) {
-            if(strstr(line,"Microsoft(R) Windows NT DOS"))banner=1;
+            if(strstr(line,"Microsoft(R) Windows NT DOS") || strstr(line,"Microsoft(R) Windows DOS"))banner=1;
             if(strstr(line,expected))version=1;
         }
     }
@@ -1015,7 +1015,8 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
         CloseHandle(job);ClosePseudoConsole(pty);CloseHandle(write_pipe);
         WaitForSingleObject(thread,3000);CloseHandle(raw_log);
         dirty=s34_prompt_has_directory_tail(argv[3]);
-        entered=log_contains(argv[3],"Microsoft(R) Windows NT DOS");
+        entered=log_contains(argv[3],"Microsoft(R) Windows NT DOS") ||
+                log_contains(argv[3],"Microsoft(R) Windows DOS");
         printf("s34-child-after-dir=%lu final=%lu entered-dos=%d dirty-prompt=%d\n",
             wait,code,entered,dirty);
         return directory_complete && wait==WAIT_TIMEOUT && entered && dirty==0 ? 0 : 1;

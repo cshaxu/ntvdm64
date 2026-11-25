@@ -1,4 +1,5 @@
 """Verify immutable guest inputs in an isolated product test package."""
+import csv
 import hashlib
 import json
 from pathlib import Path, PurePosixPath
@@ -7,8 +8,8 @@ import zipfile
 
 
 def main():
-    if len(sys.argv) != 3:
-        raise SystemExit("usage: verify-guest-media.py PACKAGE_ROOT MANIFEST")
+    if len(sys.argv) not in (3, 4):
+        raise SystemExit("usage: verify-guest-media.py PACKAGE_ROOT MANIFEST [PACKAGE_RECEIPT]")
     root = Path(sys.argv[1]).resolve(strict=True)
     manifest = json.loads(Path(sys.argv[2]).read_text(encoding="utf-8"))
     if manifest.get("schema") != "ntvdm64.guest-archive.v1" or not manifest.get("files"):
@@ -45,6 +46,17 @@ def main():
             raise ValueError("invalid VCDEX host path")
         host_hash = row["Sha256"]
     failures = []
+    guest_hashes = {}
+    if len(sys.argv) == 4:
+        with Path(sys.argv[3]).open(encoding="utf-8-sig", newline="") as receipt:
+            for row in csv.DictReader(receipt):
+                if row["role"] == "guest":
+                    key = row["path"].replace("\\", "/").casefold()
+                    if PurePosixPath(key).parts != ("system32", PurePosixPath(key).name) or key in guest_hashes:
+                        raise ValueError(f"invalid guest receipt path: {key}")
+                    guest_hashes[key] = row["sha256"]
+        if not guest_hashes:
+            raise ValueError("empty guest receipt")
     checked = 0
     seen = set()
     for entry in manifest["files"]:
@@ -65,11 +77,17 @@ def main():
         if key in configurable:
             continue
         digest = hashlib.sha256(target.read_bytes()).hexdigest()
-        expected = host_hash if key == "system32/vcdex.dll" and host_hash else entry["sha256"]
+        expected = host_hash if key == "system32/vcdex.dll" and host_hash else guest_hashes.get(key, entry["sha256"])
         if digest.casefold() != expected.casefold():
             failures.append(f"hash mismatch: {relative}")
             continue
         checked += 1
+    for key in guest_hashes.keys() - seen:
+        target = root / key
+        if not target.is_file() or hashlib.sha256(target.read_bytes()).hexdigest() != guest_hashes[key].casefold():
+            failures.append(f"missing or mismatched receipt file: {key}")
+        else:
+            checked += 1
     if failures:
         print("\n".join(failures), file=sys.stderr)
         raise SystemExit(1)

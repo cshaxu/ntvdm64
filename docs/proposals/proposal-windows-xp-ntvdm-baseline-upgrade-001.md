@@ -34,6 +34,8 @@ The owner authorized direct use of the pinned XP source for this migration and i
 
 ## Acceptance
 
+Track the Full cadence against the 159 ordered directory batches. Record the cumulative batch count and package identity in each delivery receipt. For each delivery, run the cached full build, publish to both locations, run targeted tests, commit and push in that order. When a delivery reaches or crosses a multiple of ten batches, also run the Full suite on the published package before committing and pushing. At 24 delivered batches the owner requested an immediate Full checkpoint. The next scheduled checkpoint is 30/159. Record failed gates and verify the corrected package before claiming Full acceptance.
+
 Ship the project-linked binaries built from the pinned XP source and approved host adaptations. Use the selected retail media for ABI and behavior comparisons. Record both hashes when comparing images. Byte equality is a delivery requirement only when explicitly requested for that component and baseline. For H001 the owner accepted the SP1 NTVDMD.DLL build and the SP3 debugger event comparison.
 
 Bind all tests to the selected coherent package and guest identities. Cover

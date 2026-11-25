@@ -203,6 +203,7 @@ Return Value:
 #line 201
         ULONG Eip, Esp;
         USHORT Cs, Ss;
+        USHORT clientDs = getDS(), clientEs = getES();
 
         Eip = getEIP();
         Esp = getESP();
@@ -214,6 +215,9 @@ Return Value:
         zeroFlag = getZF();
 #line 210
 
+        /* Real-mode DOS can reload the same selector with a paragraph base. */
+        if (getDS() == clientDs) setDS(clientDs);
+        if (getES() == clientEs) setES(clientEs);
         setEIP(Eip);
         setESP(Esp);
         setCS(Cs);

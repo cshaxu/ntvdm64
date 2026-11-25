@@ -11,9 +11,11 @@ param(
     [string]$FrontendObserver,
     [string]$NativeSurvivorFixture,
     [ValidateRange(1000,60000)][int]$ObservationTimeoutMs = 20000,
+    [switch]$XpGuestMedia,
     [switch]$OrdinaryFrontend
 )
 $ErrorActionPreference = 'Stop'
+$commandBanner = if ($XpGuestMedia) { 'Microsoft(R) Windows DOS' } else { 'Microsoft(R) Windows NT DOS' }
 if ($env:MVDM_OBSERVER_WINDOW_INPUT -and $env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne '1' -and
     $env:MVDM_OBSERVER_CAF_OWNED_CONSOLE -ne '1') {
     throw 'Window input tests require a private desktop or an explicitly owned Console; no product process was started.'
@@ -144,7 +146,7 @@ $matrix = @(
     # Interactive COMMAND delegates these native built-ins through the
     # original BOP 54:08 path, hence the modern cmd.exe banner is the actual
     # Console witness.  Direct COMMAND /c remains a DOS COMMAND witness.
-    @{ Name='empty'; Text="exit`r"; Code=0; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=1 },
+    @{ Name='empty'; Text="exit`r"; Code=0; ConsoleMarkers=@($commandBanner); ConsoleMarkerCount=1 },
     @{ Name='native-zero'; Text="ver`rexit`r"; Code=0; ConsoleMarkers=@('Microsoft Windows [Version') },
     @{ Name='native-interactive-return'; Supplemental=$true; Text="cmd.exe /d`recho NATIVE-INTERACTIVE-OK`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('Microsoft Windows [Version','bytes total conventional memory'); ExactConsoleLines=@('NATIVE-INTERACTIVE-OK') },
     @{ Name='native-surviving-client'; Supplemental=$true; RootFrontend=$true; Args=@((Join-Path $runtimeFixtureRoot 'SURVIVE.EXE')); Text="survivor`r"; LineDelayMs=1000; Code=37; ConsoleMarkers=@('NATIVE-PARENT-EXIT-37','NATIVE-SURVIVOR-INPUT-OK') },
@@ -156,7 +158,7 @@ $matrix = @(
     # A nested COMMAND consumes the preceding exit and recreates its input
     # loop.  Pace complete lines so the next key sequence is not offered while
     # the original keyboard queue is between those two owners.
-    @{ Name='nested-empty'; Text="command`rexit`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('Microsoft(R) Windows NT DOS'); ConsoleMarkerCount=2 },
+    @{ Name='nested-empty'; Text="command`rexit`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@($commandBanner); ConsoleMarkerCount=2 },
     @{ Name='nested-mem'; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); SequentialMemLines=@(3,5,7) },
     @{ Name='nested-mem-typeahead'; Supplemental=$true; Typeahead=$true; Text="command`rcommand`rmem`rexit`rmem`rexit`rmem`rexit`r"; LineDelayMs=0; Code=1; ConsoleMarkers=@('bytes total conventional memory'); WitnessCommands=@('mem','mem','mem'); WitnessLines=@(3,5,7) },
     @{ Name='interactive-native-dos-return'; Supplemental=$true; Text="cmd`rrun16 command`rmem`rexit`recho window-native-return`rexit`rmem`rexit`r"; LineDelayMs=1000; Code=1; ConsoleMarkers=@('bytes total conventional memory'); ConsoleMarkerCount=2; ExactConsoleLines=@('window-native-return') },

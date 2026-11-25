@@ -6,6 +6,7 @@ param(
     [Parameter(Mandatory)][string]$LogRoot,
     [ValidateSet('Product','Control','Full')][string]$Suite='Full',
     [string]$GuestFixture,
+    [switch]$XpGuestMedia,
     [string]$Dos4gwFixtureRoot='O:\WINNT',
     [string]$Dos4gwPif='O:\WINNT\DOS4GW.PIF',
     [string]$WindowObserver,
@@ -133,6 +134,14 @@ if(Test-Path -LiteralPath (Join-Path $runtimeBinary 'VCDEX.DLL')){
     }
     $packageNames+='VCDEX.DLL'
 }elseif(Test-Path -LiteralPath (Join-Path $cache 'VCDEX.DLL')){throw 'VCDEX build input missing from runtime'}
+foreach($name in 'NTVDMD.DLL','VJOY.DLL'){
+    $path=Join-Path $runtimeBinary $name
+    $input=Join-Path $cache $name
+    if((Test-Path $path) -or (Test-Path $input)){
+        if(!(Test-Path $path) -or !(Test-Path $input) -or (Get-IsolatedFileSha256 $path) -ne (Get-IsolatedFileSha256 $input)){throw "Build cache/runtime mismatch: $name"}
+        $packageNames+=$name
+    }
+}
 $manifest=foreach($name in $packageNames){
     $path=Join-Path $runtimeBinary $name
     $bytes=[IO.File]::ReadAllBytes($path);$pe=[BitConverter]::ToInt32($bytes,60)
@@ -183,8 +192,9 @@ function Invoke-ShortRuntime([scriptblock]$Body) {
 try {
     if ($Suite -ne 'Control') {
         Invoke-Gate 'guest-media' {
+            $receipt=if($XpGuestMedia){"$repo/docs/etc/evidence/t485-s1/h001-h008-package22.csv"}
             & $Python "$repo/test/observation/verify-guest-media.py" `
-                $runtime "$repo/assets/winnt-guest-manifest.json" *> "$log/guest-media.txt"
+                $runtime "$repo/assets/winnt-guest-manifest.json" @($receipt | Where-Object {$_}) *> "$log/guest-media.txt"
             if($LASTEXITCODE){throw 'Guest media contract failed; inspect guest-media.txt'}
         }
     }
@@ -274,7 +284,7 @@ try {
                             $env:MVDM_OBSERVER_CAF_OUTER_COMMAND='"'+(Join-Path $runtimeBinary 'run16.exe')+'"'
                         }
                         if($InputPolicy -eq 'Observed'){$env:MVDM_OBSERVER_MILESTONE_INPUT='1'}
-                        & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $log -LogPrefix "$mode-17" -GuestFixturePath $GuestFixture -OrdinaryFrontend
+                        & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $log -LogPrefix "$mode-17" -XpGuestMedia:$XpGuestMedia -GuestFixturePath $GuestFixture -OrdinaryFrontend
                     }finally{
                         Remove-Item Env:MVDM_OBSERVER_MILESTONE_INPUT -ErrorAction SilentlyContinue
                         if($mode -eq 'Window' -and $WindowOwnedConsole){

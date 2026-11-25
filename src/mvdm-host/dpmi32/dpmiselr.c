@@ -232,7 +232,7 @@ Return Value:
 }
 
 
-#ifndef _X86_
+#if !defined(_X86_) || defined(CCPU)
 VOID
 FlushSelectorCache(
     USHORT  SelStart,
@@ -242,18 +242,22 @@ FlushSelectorCache(
     DECLARE_LocalVdmContext;
     USHORT SelEnd;
     USHORT Sel;
+#if !defined(CCPU)
     USHORT i;
+#endif
 
-    VdmTraceEvent(VDMTR_TYPE_DPMI | DPMI_GENERIC, SelStart, SelCount);
+    DBGTRACE(VDMTR_TYPE_DPMI | DPMI_GENERIC, SelStart, SelCount);
 
     //
     // The emulator compiles LDT entries, so we need to flush them
     // out
     //
 
+#if !defined(CCPU)
     for (i = 0, Sel = SelStart; i < SelCount; i++, Sel += 8) {
         VdmFlushCache(LdtSel, Sel & SEL_INDEX_MASK, 8, VDM_PM);
     }
+#endif
 
     SelEnd = SelStart + SelCount*8;
 

@@ -41,7 +41,7 @@ foreach($case in $Cases) {
         # in this test-only worker substitution. Preserve the real siblings;
         # the deliberately substituted worker below remains the test peer.
         $siblings=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
-            'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
+            'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','NTVDMD.DLL','nthook32.dll','nthook64.dll')
         foreach($name in @(@($image)+$siblings | Select-Object -Unique)) {
             Copy-Item -LiteralPath (Join-Path $PackageRoot $name) -Destination $casePackageRoot
         }
@@ -62,7 +62,7 @@ foreach($case in $Cases) {
         if(Test-Path -LiteralPath $casePackageRoot){throw 'Require a fresh rejection fixture package'}
         $null=New-Item -ItemType Directory -Path $casePackageRoot
         $inputs=@($image,'run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
-            'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
+            'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','NTVDMD.DLL','nthook32.dll','nthook64.dll')
         foreach($name in @($inputs | Select-Object -Unique)) {
             $source=Join-Path $PackageRoot $name
             $destination=Join-Path $casePackageRoot $name
