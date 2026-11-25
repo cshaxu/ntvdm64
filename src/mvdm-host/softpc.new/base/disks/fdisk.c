@@ -1549,6 +1549,7 @@ GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 
 GLOBAL VOID fdisk_outb IFN2(io_addr, port, UTINY, value)
 {
+#ifndef NEC_98
 	dt0(DHW, 0, "(\n")
 		switch (port)
 	{
@@ -1558,10 +1559,10 @@ GLOBAL VOID fdisk_outb IFN2(io_addr, port, UTINY, value)
 		 * byte access to sector buffer is not a good idea
 		 */
 #ifndef PROD
-#line 1583
+#line 1584
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1585
+#line 1586
 		break;
 	case TFPCMP:
 		dt2(DHW | PORTIO, 0, "outb to port %x(hex),val %x(hex)\n",
@@ -1614,37 +1615,39 @@ GLOBAL VOID fdisk_outb IFN2(io_addr, port, UTINY, value)
 		dt0(DHW | PORTIO, 0, "\n")
 	}
 	dt0(DHW, 0, ")\n")
+#endif // !NEC_98
+#line 1639
 }
 
 GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 {
 #ifdef BIGEND
-#line 1642
+#line 1644
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
-#line 1644
+#line 1646
 		switch (port)
 	{
 	case TFBASE:
 #if 0
-#line 1648
+#line 1650
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
-#line 1651
+#line 1653
 		dt1(DHW | PORTIO, OUTW_TRACE_HNDL, "outw to sector buffer",
 		    (unsigned) value)
 #endif
-#line 1654
+#line 1656
 
 #ifdef LITTLEND
 			rmac(&value, IOWRITE);
 #endif
 
 #ifdef BIGEND
-#line 1660
+#line 1662
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
-#line 1663
+#line 1665
 
 			break;
 	default:
@@ -1659,6 +1662,7 @@ GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 
 GLOBAL VOID fdisk_ioattach IFN0()
 {
+#ifndef NEC_98
 	unsigned short  ncyls;
 	unsigned char   nheads;
 	unsigned char   nsects;
@@ -1692,23 +1696,23 @@ GLOBAL VOID fdisk_ioattach IFN0()
 		 * patch 'ROM' table for drive type 0 with appropriate number
 		 * of cylinders
 		 */
-		ncyls = drives[0].maxcyl + 1;
-		nheads = drives[0].maxhead + 1;
-		nsects = drives[0].maxsect + 1;
+		ncyls = (unsigned short)(drives[0].maxcyl + 1);
+		nheads = (unsigned char)(drives[0].maxhead + 1);
+		nsects = (unsigned char)(drives[0].maxsect + 1);
 #ifdef REAL_ROM
-#line 1714
+#line 1717
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
-#line 1716
+#line 1719
 		patch_rom(DPB0, (unsigned char) (ncyls & 0xff));
 		patch_rom(DPB0+1, (unsigned char) (ncyls >> 8));
 		patch_rom(DPB0+2, nheads);
 		patch_rom(DPB0+0xe, nsects);
 #ifdef REAL_ROM
-#line 1721
+#line 1724
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
-#line 1723
+#line 1726
 		dt1(DHW | IOAD, 0, "drive 0 wiredup, total cyls %d\n",
 		    (unsigned) ncyls)
 	}
@@ -1724,30 +1728,33 @@ GLOBAL VOID fdisk_ioattach IFN0()
 		 * patch 'ROM' table for drive type 0 with appropriate number
 		 * of cylinders
 		 */
-		ncyls = drives[1].maxcyl + 1;
-		nheads = drives[1].maxhead + 1;
-		nsects = drives[1].maxsect + 1;
+		ncyls = (unsigned short)(drives[1].maxcyl + 1);
+		nheads = (unsigned char)(drives[1].maxhead + 1);
+		nsects = (unsigned char)(drives[1].maxsect + 1);
 #ifdef REAL_ROM
-#line 1742
+#line 1745
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
-#line 1744
-		patch_rom(DPB1, ncyls & 0xff);
-		patch_rom(DPB1 + 1, (ncyls >> 8));
+#line 1747
+		patch_rom(DPB1, (unsigned char)(ncyls & 0xff));
+		patch_rom(DPB1 + 1, (unsigned char)((ncyls >> 8)));
 		patch_rom(DPB1+2, nheads);
 		patch_rom(DPB1+0xe, nsects);
 #ifdef REAL_ROM
-#line 1749
+#line 1752
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
-#line 1751
+#line 1754
 		dt1(DHW | IOAD, 0, "drive 1 wiredup, total cyls %d\n",
 		    (unsigned) ncyls)
 	}
+#endif // !NEC_98
+#line 1758
 }
 
 GLOBAL VOID fdisk_iodetach IFN0()
 {
+#ifndef NEC_98
 	io_addr         p;
 
 	/*
@@ -1767,19 +1774,19 @@ GLOBAL VOID fdisk_iodetach IFN0()
 		 */
 		drives[0].wiredup = 0;
 #ifdef REAL_ROM
-#line 1777
+#line 1782
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
-#line 1779
+#line 1784
 		patch_rom(DPB0, 0);
 		patch_rom(DPB0 + 1, 0);
 		patch_rom(DPB0 + 2, 0);
 		patch_rom(DPB0 + 0xe, 0);
 #ifdef REAL_ROM
-#line 1784
+#line 1789
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
-#line 1786
+#line 1791
 		dt0(DHW | IOAD, 0, "drive 0 unplugged\n")
 	}
 	if (drives[1].physattached)
@@ -1791,21 +1798,23 @@ GLOBAL VOID fdisk_iodetach IFN0()
 		 */
 		drives[1].wiredup = 0;
 #ifdef REAL_ROM
-#line 1797
+#line 1802
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
-#line 1799
+#line 1804
 		patch_rom(DPB1, 0);
 		patch_rom(DPB1 + 1, 0);
 		patch_rom(DPB1 + 2, 0);
 		patch_rom(DPB1 + 0xe, 0);
 #ifdef REAL_ROM
-#line 1804
+#line 1809
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
-#line 1806
+#line 1811
 		dt0(DHW | IOAD, 0, "drive 1 unplugged\n")
 	}
+#endif // !NEC_98
+#line 1814
 }
 
 GLOBAL VOID fdisk_physattach IFN1(int,driveno)
@@ -1818,7 +1827,7 @@ GLOBAL VOID fdisk_physattach IFN1(int,driveno)
 	drives[driveno].driveid = driveno;
 	drives[driveno].physattached = 0;
 
-	if (!*((CHAR *) config_inquire(C_HARD_DISK1_NAME + driveno, NULL)))
+	if (!*((CHAR *) config_inquire((IU8)(C_HARD_DISK1_NAME + driveno), NULL)))
 		return;
 
 	/*
@@ -1843,12 +1852,12 @@ GLOBAL VOID fdisk_physattach IFN1(int,driveno)
 	fast_disk_bios_attach(driveno);
 }
 
-#line 1845
+#line 1851
 #ifdef macintosh
-#line 1846
+#line 1852
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif /* macintosh */
-#line 1861
+#line 1867
 
 GLOBAL VOID fdisk_reset IFN0()
 {

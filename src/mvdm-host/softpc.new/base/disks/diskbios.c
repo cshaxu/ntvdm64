@@ -1,3 +1,8 @@
+#if defined(NEC_98)
+#line 2
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 7
 #include "insignia.h"
 #include "host_def.h"
 
@@ -16,13 +21,13 @@
 */
 
 #ifdef SCCSID
-#line 19
+#line 25
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
-#line 21
+#line 27
 
 #ifdef SEGMENTATION
-#line 23
+#line 29
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -30,7 +35,7 @@
 
 
 #endif
-#line 30
+#line 36
 
 /* includes */
 #include <stdio.h>
@@ -49,6 +54,11 @@
 #include "dsktrace.h"
 #include "idetect.h"
 #include "debug.h"
+#if defined(NEC_98)
+#line 55
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 57
 
 /* disk status BIOS variable location */
 #define DISK_STATUS1 0x474
@@ -71,6 +81,11 @@
 #define ERROR_CLEAR 0x00
 #define ERROR_READ_ONLY_MEDIA 0x03 /* this is really only for floppies but it has the desired effect on DOS */
 
+#if defined(NEC_98)
+#line 80
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 137
 /* command parameters structure */
 /* use ints to allow the compiler to chose the fastest type */
 typedef struct _com
@@ -110,10 +125,10 @@ LOCAL int maxsectors, maxoffset;
 LOCAL int tfstatus;
 
 #ifndef PROD
-#line 109
+#line 176
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 114
+#line 181
 
 /*
 * non-zero if drive 1 does not exist
@@ -155,6 +170,11 @@ LOCAL void enable_disk_interrupts IPT0();
 
 LOCAL void hd_reset IPT2(int, drive, int, diag);
 
+#if defined(NEC_98)
+#line 223
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 232
 /********************************************************/
 /* POST & DEBUG defines*/
 
@@ -214,6 +234,11 @@ DESCRIPTION	  : 	reads the CMOS to see if any disks.
 
 void disk_post IFN0()
 {
+#if defined(NEC_98)
+#line 292
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 383
 	UTINY diag;
 	UTINY disks;
 	UTINY ndisks;
@@ -322,8 +347,10 @@ void disk_post IFN0()
 	else
 	{
 		sas_store (HF_NUM, 0);
-		wcmos (CMOS_DIAG, diag | HF_FAIL);
+		wcmos (CMOS_DIAG, (UTINY)(diag | HF_FAIL));
 	}
+#endif // !NEC_98
+#line 494
 }
 
 
@@ -347,7 +374,7 @@ LOCAL void hd_reset IFN2(int, drive, int, diag)
 	/*
 	 * set up drive id
 	 */
-	setDL (0x80 + drive);
+	setDL ((UCHAR)(0x80 + drive));
 
 	/*
 	 * set the drive parameters
@@ -362,14 +389,14 @@ LOCAL void hd_reset IFN2(int, drive, int, diag)
 	disk_io ();
 
 	if (getCF () && !drive)
-		wcmos (CMOS_DIAG, diag | HF_FAIL);
+		wcmos (CMOS_DIAG, (UTINY)(diag | HF_FAIL));
 }
 
 #ifndef PROD
-#line 366
+#line 536
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif				/* nPROD */
-#line 562
+#line 731
 
 
 /********************************************************/
@@ -378,11 +405,16 @@ LOCAL void hd_reset IFN2(int, drive, int, diag)
 #ifdef ANSI
 LOCAL void (*disk_func[]) (void) =
 #else
-#line 570
+#line 739
 #error Unsupported excluded original configuration
 #endif
-#line 572
+#line 741
 {
+#if defined(NEC_98)
+#line 743
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 767
 	disk_reset,		/* 0x00 */
 	return_status,		/* 0x01 */
 	disk_read,		/* 0x02 */
@@ -406,43 +438,71 @@ LOCAL void (*disk_func[]) (void) =
 	diagnostics,		/* 0x14 */
 	read_dasd,		/* 0x15 */
 	/* 0x16 - 0x19 are all floppy commands */
+#endif // !NEC_98
+#line 791
 };
 
 #ifndef PROD
-#line 599
+#line 822
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
-#line 625
+#line 849
 
 /* Fixed disk BIOS mainline */
 void disk_io IFN0()
 {
 	register int BIOS_command;
+#if defined(NEC_98)
+#line 855
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 858
 #ifndef PROD
-#line 631
+#line 862
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 633
+#if defined(NEC_98)
+#line 866
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 892
 
-
+#ifndef NEC_98
 	IDLE_disk();
+#endif // !NEC_98
+#line 896
 
 
 	/* what function to perform ? */
 	/* what command ?? */
+#if defined(NEC_98)
+#line 901
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 903
 	BIOS_command = getAH ();
+#endif // !NEC_98
+#line 905
 
 #ifndef PROD
-#line 643
+#line 907
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
-#line 659
+#line 933
 
+#ifndef NEC_98
 	/* clear up the status before we kick off */
 	/* but only if this is NOT a read status command */
 	if (BIOS_command != 0x01)
 		wstatus (STATUS_CLEAR);
+#endif // !NEC_98
+#line 940
 
+#if defined(NEC_98)
+#line 942
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 993
 	/* setup our command structure from the remaining registers */
 	com.drive = getDL () & 0x7f;
 	com.sectors = getAL ();
@@ -452,7 +512,10 @@ void disk_io IFN0()
 	com.start_sector = getCL () & 0x3f;
 	com.xfersegment = getES () + ((getBX ()) >> 4);
 	com.xferoffset = getBX () & 0x0f;
+#endif // !NEC_98
+#line 1003
 
+#ifndef NEC_98
 	/* DMA boundary check */
 	if (BIOS_command == 0x0a || BIOS_command == 0x0b)
 	{
@@ -464,7 +527,14 @@ void disk_io IFN0()
 		maxsectors = 128;
 		maxoffset = 0;
 	}
+#endif // !NEC_98
+#line 1017
 
+#if defined(NEC_98)
+#line 1019
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1031
 	/* call our function if sensible ie the drive requested exists */
 	/* and the BIOS command is in a sensible range */
 	if (check_drive (com.drive)
@@ -477,7 +547,14 @@ void disk_io IFN0()
 	{
 		badcmd ();
 	}
+#endif // !NEC_98
+#line 1044
 
+#if defined(NEC_98)
+#line 1046
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1064
 	/* setup the applications return */
 	if (BIOS_command != 0x15)
 		setAH (rstatus ());
@@ -490,22 +567,31 @@ void disk_io IFN0()
 		 * of a device.
 		 */
 #ifndef PROD
-#line 712
+#line 1076
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
-#line 718
+#line 1082
 		setCF (1);	/* cmd fails */
 	}
 	else
 		setCF (0);	/* cmd ok */
         dt2(DBIOS|CALL, 0, "CF=%c, status=%x(hex)\n",
 		getCF()?'T':'F',(unsigned)rstatus())
+#endif // !NEC_98
+#line 1089
 }
 
 /*0x?? badcommand catch all */
 LOCAL void badcmd IFN0()
 {
+#if defined(NEC_98)
+#line 1095
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1097
 	wstatus (STATUS_BAD_COMMAND);
+#endif // !NEC_98
+#line 1099
 }
 
 /*0x00 reset the hard disk system */
@@ -551,6 +637,11 @@ LOCAL void return_status IFN0()
 /*0x02 disk read sector(s) */
 LOCAL void disk_read IFN0()
 {
+#if defined(NEC_98)
+#line 1145
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1245
 	long offset; 
 	host_addr inbuf;
 	sys_addr pdata;
@@ -589,17 +680,24 @@ LOCAL void disk_read IFN0()
 	}
 	wstatus (STATUS_CLEAR);
 	setAL ((unsigned char) com.sectors);
+#endif // !NEC_98
+#line 1284
 }
 
 /*0x03 disk write sector(s) */
 LOCAL void disk_write IFN0()
 {
+#if defined(NEC_98)
+#line 1290
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1389
 	long offset;
 	host_addr outbuf;
 	sys_addr pdata;
 
 	/* check for read_only disk */
-	if (!config_get_active(C_HARD_DISK1_NAME + com.drive))
+	if (!config_get_active((IU8)(C_HARD_DISK1_NAME + com.drive)))
 	{
 		werror (ERROR_READ_ONLY_MEDIA);	/* floppy write prot */
 		wstatus (STATUS_ERROR);
@@ -637,8 +735,15 @@ LOCAL void disk_write IFN0()
 	}
 	wstatus (STATUS_CLEAR);
 	setAL ((unsigned char) com.sectors);
+#endif // !NEC_98
+#line 1433
 }
 
+#if defined(NEC_98)
+#line 1436
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1478
 /*0x04 disk verify sector */
 LOCAL void disk_verify IFN0()
 {
@@ -692,12 +797,12 @@ LOCAL void get_drive_params IFN0()
 			setDL (1);
 
 		/* number of heads 0 - max */
-		setDH (dpb[com.drive].heads - 1);
+		setDH ((UCHAR)(dpb[com.drive].heads - 1));
 
 		/* number of cylinders is max addressable - 0th - diagnostic */
 		maxcylinder = dpb[com.drive].cyls - 2;
-		setCH (maxcylinder & 0xff);
-		setCL (dpb[com.drive].sectors | ((maxcylinder >> 8) << 6));
+		setCH ((UCHAR)(maxcylinder & 0xff));
+		setCL ((UCHAR) (dpb[com.drive].sectors | ((maxcylinder >> 8) << 6)));
 
 		/* we are happy */
 		wstatus (STATUS_CLEAR);
@@ -824,8 +929,8 @@ LOCAL void read_dasd IFN0()
 
 	/* set the number of blocks */
 	blocks = (dpb[com.drive].cyls - 1) * dpb[com.drive].heads * dpb[com.drive].sectors;
-	setCX (blocks / 256);
-	setDX (blocks % 256);
+	setCX ((UCHAR)(blocks / 256));
+	setDX ((UCHAR)(blocks % 256));
 
 	/* fixed disk exists */
 	setAH (3);
@@ -859,14 +964,14 @@ LOCAL UTINY rcmos IFN1(int, index)
 {
 	UTINY value;
 
-	cmos_outb (CMOS_PORT, index);
+	cmos_outb (CMOS_PORT, (UTINY)index);
 	cmos_inb (CMOS_DATA, &value);
 	return value;
 }
 
 LOCAL void wcmos IFN2(int,index,UTINY,value)
 {
-	cmos_outb (CMOS_PORT, index);
+	cmos_outb (CMOS_PORT, (UTINY)index);
 	cmos_outb (CMOS_DATA, value);
 }
 
@@ -887,7 +992,7 @@ LOCAL void getdpb IFN1(int, drive)
 	/* read IVT to get address of disk parameter block */
 	offset = sas_w_at(ivt);
 	segment = sas_w_at(ivt + 2);
-	pdpb = effective_addr ((unsigned long) segment, offset);
+	pdpb = effective_addr ((unsigned short) segment, offset);
 
 	/* read the relevant params */
 	dpb[drive].cyls = sas_w_at(pdpb);
@@ -1021,10 +1126,14 @@ GLOBAL void fast_disk_bios_detach IFN1(int, drive)
 }
 
 
-#line 1245
+#line 1860
 #ifdef WDCTRL_BOP
-#line 1246
+#line 1861
 #error Unsupported excluded original configuration
 #endif	/* WDCTRL_BOP */
-#line 1475
-#line 1195
+
+
+#if defined(NEC_98)
+#line 2093
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98

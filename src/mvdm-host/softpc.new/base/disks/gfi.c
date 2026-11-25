@@ -183,7 +183,7 @@ IFN2(FDC_CMD_BLOCK *,command_block,FDC_RESULT_BLOCK *,result_block)
 
 	ret_stat = (*gfi_function_table[get_type_drive(command_block)].command_fn)(command_block, result_block);
 
-    return(ret_stat);
+    return((SHORT)ret_stat);
 }
 
 
@@ -344,7 +344,7 @@ gfi_attach_adapter IFN2(UTINY, adapter, BOOL, attach)
 #endif /* SLAVEPC */
 #line 353
 
-	config_activate(C_FLOPPY_A_DEVICE + adapter, attach);
+	config_activate((UTINY)(C_FLOPPY_A_DEVICE + adapter), attach);
 }
 
 #ifdef SEGMENTATION
@@ -370,5 +370,5 @@ GLOBAL VOID gfi_init IFN0()
 	host_runtime_set(C_FLOPPY_SERVER, GFI_REAL_DISKETTE_SERVER);
 
 	for (i = 0; i < MAX_DISKETTES; i++)
-		gfi_empty_active(C_FLOPPY_A_DEVICE+i,TRUE,NULL);
+		gfi_empty_active((UTINY)(C_FLOPPY_A_DEVICE+i),TRUE,NULL);
 }

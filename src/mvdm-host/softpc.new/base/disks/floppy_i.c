@@ -1,5 +1,12 @@
+#if defined(NEC_98)
+#line 2
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 7
 #include "insignia.h"
 #include "host_def.h"
+
+extern void host_simulate();
 /*
  * SoftPC Revision 3.0
  *
@@ -31,10 +38,10 @@
 
 
 #ifdef SEGMENTATION
-#line 34
+#line 42
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 41
+#line 49
 
 #include <stdio.h>
 #include TypesH
@@ -54,21 +61,36 @@
 #include "debug.h"
 
 #include "tape_io.h"
+#if defined(NEC_98)
+#line 69
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 71
 
 #ifdef NTVDM
 extern UTINY number_of_floppy;
 
 #endif	/* NTVDM */
 
+#if defined(NEC_98)
+#line 78
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 163
 #ifndef	PROD
-#line 67
+#line 164
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
-#line 293
+#line 507
 
 
 void diskette_io()
 {
+#if defined(NEC_98)
+#line 512
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 524
 	/*
 	 *	Check for valid call and use secondary functions to
 	 *	perform the required operation
@@ -79,13 +101,20 @@ void diskette_io()
 	 */
 	half_word diskette_status;
 	int op = getAH(), drive = getDL();
+#endif // !NEC_98
+#line 535
 
 #ifndef	PROD
-#line 309
+#line 537
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 312
+#line 540
 
+#if defined(NEC_98)
+#line 542
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 553
 #ifndef	JOKER
 	/*
 	 *	Enable interrupts
@@ -99,24 +128,35 @@ void diskette_io()
 	 *	if operation is out of range
 	 */
 
+#if defined(NEC_98)
+#line 567
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 571
 	if (!fl_operation_in_range(op))
 		op = FL_FNC_ERR;
+#endif // !NEC_98
+#line 574
 
 	/*
 	 *	If the drive number is applicable in the operation, check it
 	 */
 
+#ifndef NEC_98
 	if (op != FL_DISK_RESET && op != FL_DISK_STATUS && op != FL_DISK_PARMS)
 #ifdef NTVDM
 		if (drive >= number_of_floppy)
 #else
-#line 337
+#line 584
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
-#line 339
+#line 586
 			op = FL_FNC_ERR;
+#endif // !NEC_98
+#line 588
 
 
+#ifndef NEC_98
 	/*
 	 *	Save previous diskette status, initialise current diskette
 	 *	status to OK
@@ -125,20 +165,34 @@ void diskette_io()
 	sas_load(FLOPPY_STATUS, &diskette_status);
 	setAH(diskette_status);
 	sas_store(FLOPPY_STATUS, FS_OK);
+#endif // !NEC_98
+#line 600
 
 	/*
 	 *	Do the operation
 	 */
 
+#if defined(NEC_98)
+#line 606
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 608
 	(*fl_fnc_tab[op])(drive);
+#endif // !NEC_98
+#line 610
 
 
+#if defined(NEC_98)
+#line 613
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 618
 
 #ifndef	PROD
-#line 360
+#line 620
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 363
+#line 623
 }
 
 
@@ -155,7 +209,7 @@ void diskette_int()
 
 	note_trace0(FLOPBIOS_VERBOSE, "diskette_int()");
 	sas_load(SEEK_STATUS, &seek_status);
-	sas_store(SEEK_STATUS, seek_status | SS_INT_OCCURRED);
+	sas_store(SEEK_STATUS, (IU8)(seek_status | SS_INT_OCCURRED));
 
 	outb(ICA0_PORT_0, END_INTERRUPT);
 
@@ -179,10 +233,10 @@ void diskette_int()
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
-#line 403
+#line 663
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
-#line 406
+#line 666
 
 	host_simulate();
 
@@ -195,10 +249,10 @@ void diskette_int()
 
 
 #ifdef SEGMENTATION
-#line 418
+#line 678
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 425
+#line 685
 
 void diskette_post()
 {
@@ -206,17 +260,29 @@ void diskette_post()
 	 *	This routine performs the diskette BIOS initialisation
 	 *	functionality in the POST.
 	 */
+#if defined(NEC_98)
+#line 693
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 696
 	half_word diskette_id_reg, hf_cntrl, interrupt_mask;
-#line 433
+#line 697
 #ifndef NTVDM
-#line 434
+#line 698
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 436
+#line 700
 	EQUIPMENT_WORD equip_flag;
+#endif // !NEC_98
+#line 702
 
 	note_trace0(FLOPBIOS_VERBOSE, "diskette_post()");
 
+#if defined(NEC_98)
+#line 706
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 728
 	/*
 	 *	Set the diskette data rate to 250 kbs (low density)
 	 */
@@ -252,11 +318,18 @@ void diskette_post()
 			hf_cntrl |= DC_DUAL;
 		sas_store(DRIVE_CAPABILITY, hf_cntrl);
 
-#line 475
+#line 763
 #ifndef NTVDM	/* prevent floppies showing up in bios data area */
-#line 476
+#line 764
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
-#line 495
+#line 783
 	}
+#endif // !NEC_98
+#line 785
 }
+
+#if defined(NEC_98)
+#line 788
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98

@@ -60,7 +60,7 @@ foreach(name IN LISTS names)
   list(APPEND system_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/disks/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/disks/sources.inc")
 list(REMOVE_DUPLICATES names)
 set(disks_objects)
 foreach(name IN LISTS names)

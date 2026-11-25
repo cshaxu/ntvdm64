@@ -285,6 +285,7 @@ void fla_ndma_req_rd IFN2(char *,buf,int,n)
 
 void fla_inb IFN2(io_addr, port, half_word *,value)
 {
+#ifndef NEC_98
 
 
     note_trace0_no_nl(FLA_VERBOSE, "fla_inb() "); 
@@ -428,10 +429,10 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
 			break;
 	}
 #ifndef PROD
-#line 437
+#line 438
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 443
+#line 444
     }
     else
     {
@@ -443,11 +444,14 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
     fla_busy = FALSE;
 
 
+#endif // !NEC_98
+#line 456
 }
 
 
 void fla_outb IFN2(io_addr, port, half_word, value)
 {
+#ifndef NEC_98
     int i;
     DOR new_dor;
 
@@ -702,14 +706,16 @@ void fla_outb IFN2(io_addr, port, half_word, value)
     }
 
 #ifndef PROD
-#line 713
+#line 716
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 716
+#line 719
 
     fla_busy = FALSE;
 
 
+#endif // !NEC_98
+#line 724
 }
 
 
@@ -809,10 +815,10 @@ static void fla_atomicxqt IFN0()
 }
 
 #else    /* NTVDM */
-#line 819
+#line 823
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif    /* NTVDM */
-#line 895
+#line 899
 
 
 static void fdc_request_write_data_to_cpu IFN0()
@@ -1038,7 +1044,7 @@ static void fla_ndma_bump_sectid IFN0()
 	int i;
 
 	i = get_c0_sector(fdc_command_block) + 1;
-	put_c0_sector(fdc_command_block, i);
+	put_c0_sector(fdc_command_block, ((unsigned char)i));
 }
 
 static void fla_ndma_unbump_sectid IFN0()
@@ -1046,17 +1052,18 @@ static void fla_ndma_unbump_sectid IFN0()
 	int i;
 
 	i = get_c0_sector(fdc_command_block) - 1;
-	put_c0_sector(fdc_command_block, i);
+	put_c0_sector(fdc_command_block, ((unsigned char)i));
 }
 
 #ifdef SEGMENTATION
-#line 1132
+#line 1136
 #error Excluded unsupported SEGMENTATION configuration
 #endif
-#line 1139
+#line 1143
 
 void fla_init IFN0()
 {
+#ifndef NEC_98
     io_addr i;
 
     note_trace0(FLA_VERBOSE, "fla_init() called");
@@ -1090,4 +1097,6 @@ void fla_init IFN0()
 
     fla_ndma = FALSE;
     fla_busy = FALSE;
+#endif // !NEC_98
+#line 1181
 }

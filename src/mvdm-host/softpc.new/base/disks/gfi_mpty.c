@@ -235,7 +235,7 @@ gfi_empty_command
 #line 228
       }
 
-   return (ret_stat);
+   return ((SHORT)ret_stat);
    }
 
 
