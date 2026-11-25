@@ -189,6 +189,12 @@ LOCAL void Increment_Address IPT4(unsigned short *,seg_or_page,
 #endif
 #line 182
 
+#if defined(NEC_98)
+#line 184
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 186
+
 void (*emm_func[]) () = {
 	Get_Status,
 	Get_Page_Frame_Address,
@@ -221,25 +227,25 @@ void (*emm_func[]) () = {
 	Prepare_Expanded_Memory_HW_For_Warm_Boot,
 	Enable_Disable_OSE_Function_Set_Functions
 #ifndef PROD
-#line 215
+#line 219
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 218
+#line 222
 	};
 
 #ifndef PROD
-#line 221
+#line 225
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 258
+#line 262
 
 /* Defintion of this is non-standard */
 
 #ifndef min
-#line 262
+#line 266
 #error Unsupported configuration: min must be provided by the host headers
 #endif
-#line 264
+#line 268
 
 /*
 ===========================================================================
@@ -262,7 +268,14 @@ GLOBAL void emm_io IFN0()
 {	
 	int func_num; 
 
+#if defined(NEC_98)
+#line 291
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 293
 	if(getAH() >= MIN_FUNC_NO && getAH() <= MAX_FUNC_NO) {
+#endif // !NEC_98
+#line 295
 
 		func_num = getAH() - MIN_FUNC_NO;
 
@@ -270,17 +283,23 @@ GLOBAL void emm_io IFN0()
 		func_names[func_num],getAX(),getBX(),getCX(),getDX());
 
 #ifdef EMM_DEBUG
-#line 294
+#line 302
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
-#line 298
+#if defined(NEC_98)
+#line 307
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 312
 		(*emm_func[func_num])();	
+#endif // !NEC_98
+#line 314
 
 #ifdef EMM_DEBUG
-#line 301
+#line 316
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
-#line 305
+#line 320
 
 		if (getAH() != SUCCESS) {
 			sure_note_trace5(LIM_VERBOSE, "func %s failed - AX %#x BX %#x CX %#x DX %#x\n",
@@ -298,7 +317,7 @@ GLOBAL void emm_io IFN0()
 }
 
 #ifdef SEGMENTATION
-#line 322
+#line 337
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -306,7 +325,7 @@ GLOBAL void emm_io IFN0()
 
 
 #endif
-#line 329
+#line 344
 
 /*
 ===========================================================================
@@ -332,30 +351,30 @@ GLOBAL void emm_init IFN0()
 	short	total_pages;
 
 #ifdef GISP_SVGA
-#line 354
+#line 369
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
-#line 366
+#line 381
 
 #ifdef	SUN_VA
-#line 368
+#line 383
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
-#line 374
+#line 389
 	
 #if	defined(SUN_VA) || defined(NTVDM)
 	SHORT limSize, backFill;
 #endif
-#line 378
+#line 393
 
 	segment68 = getDS();
 	offset68 = getDX();
 
 #ifdef	SUN_VA
-#line 383
+#line 398
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif	/* SUN_VA	*/
-#line 436
+#line 451
 #ifdef NTVDM	/* Similar to SUN_VA but without command line sizing */
 	if ((limSize = (SHORT)config_inquire(C_LIM_SIZE, NULL)) && get_no_phys_pages())
 	{
@@ -376,7 +395,7 @@ GLOBAL void emm_init IFN0()
 	}
 
 #endif	/* NTVDM */
-#line 456
+#line 471
 
 	total_pages = get_total_pages();
 	setBX(total_pages);
@@ -388,17 +407,17 @@ GLOBAL void emm_init IFN0()
 	{
 		dma_lim_setup();
 #if defined(A2CPU) && defined(DELTA)
-#line 467
+#line 482
 #error Excluded unsupported A2CPU configuration
 #endif /* A2CPU && DELTA */
-#line 469
+#line 484
 	}	
 	return;
 }	
 	
 
 #ifdef SEGMENTATION
-#line 475
+#line 490
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -406,7 +425,7 @@ GLOBAL void emm_init IFN0()
 
 
 #endif
-#line 482
+#line 497
 
 /*
 ===========================================================================
@@ -781,8 +800,8 @@ LOCAL void Restore_Page_Map IFN0()
 {
 	short	handle_no,	
 		pages_out[MAX_NO_PAGES],	/* pages to map out	*/
-		pages_in[MAX_NO_PAGES],		/* pages to map in	*/
-		i;				/* loop counter		*/
+		pages_in[MAX_NO_PAGES];		/* pages to map in	*/
+    unsigned char i;				/* loop counter		*/
 
 	handle_no = getDX();
 
@@ -974,8 +993,8 @@ LOCAL void Get_Set_Page_Map IFN0()
 			dst_offset;	/* offset of destination array	*/
 	unsigned char	sub_func;	/* sub-function code		*/
 	short	pages_out[MAX_NO_PAGES],/* pages to map out		*/
-		pages_in[MAX_NO_PAGES],	/* pages to map in		*/
-		no_phys_pages,		/* no. of phys. pages available	*/
+		pages_in[MAX_NO_PAGES];	/* pages to map in		*/
+    unsigned short no_phys_pages,		/* no. of phys. pages available	*/
 		i;			/* loop counter			*/
 
 	sub_func = getAL();
@@ -1001,13 +1020,13 @@ LOCAL void Get_Set_Page_Map IFN0()
 			for(i = 0; i < no_phys_pages; i++)
 			{
 				if(pages_out[i] != EMPTY)
-					if(unmap_page(i) != SUCCESS)
+					if(unmap_page((UCHAR)i) != SUCCESS)
 					{
 						setAH(EMM_HW_ERROR);
 						return;
 					}
 				if(pages_in[i] != EMPTY)
-					if(map_page(pages_in[i], i) != SUCCESS)
+					if(map_page(pages_in[i], (UCHAR)i) != SUCCESS)
 					{
 						setAH(EMM_HW_ERROR);
 						return;
@@ -1057,8 +1076,8 @@ LOCAL void Get_Set_Partial_Page_Map IFN0()
 			dst_offset;	/* offset of destination array	*/
 	unsigned char	sub_func;	/* sub-function code		*/
 	short	pages_out[MAX_NO_PAGES],/* pages to map out		*/
-		pages_in[MAX_NO_PAGES],	/* pages to map in		*/
-		no_phys_pages,		/* no. of phys. pages available */
+		pages_in[MAX_NO_PAGES];	/* pages to map in		*/
+    unsigned short no_phys_pages,		/* no. of phys. pages available */
 		i;			/* loop counter			*/
 
 	sub_func = getAL();
@@ -1087,13 +1106,13 @@ LOCAL void Get_Set_Partial_Page_Map IFN0()
 			for(i = 0; i < no_phys_pages; i++)
 			{
 				if(pages_out[i] != EMPTY)
-					if(unmap_page(i) != SUCCESS)
+					if(unmap_page((UCHAR)i) != SUCCESS)
 					{
 						setAH(EMM_HW_ERROR);
 						return;
 					}
 				if(pages_in[i] != EMPTY)
-					if(map_page(pages_in[i], i) != SUCCESS)
+					if(map_page(pages_in[i], (UCHAR)i) != SUCCESS)
 					{
 						setAH(EMM_HW_ERROR);
 						return;
@@ -1628,7 +1647,7 @@ LOCAL void Alter_Page_Map_And_Jump IFN0()
 	 * Push flags and segment:offset of target address onto stack
 	 * to enable iret in driver to transfer control
 	 */
-	push_word((word)getSTATUS());
+	push_word((word)(getSTATUS()));
 	push_word(jmp_segment);
 	push_word(jmp_offset);
 
@@ -2063,8 +2082,8 @@ LOCAL void Move_Exchange_Memory_Region IFN0()
 	while (length>0) {
 		int min_src, min_dst;
 
-		min_src = (type & 2) ? min(EMM_PAGE_SIZE - src_offset, length) : length;
-		min_dst = (type & 1) ? min(EMM_PAGE_SIZE - dst_offset, length) : length;
+		min_src = (type & 2) ? min((unsigned long)(EMM_PAGE_SIZE - src_offset), length) : length;
+		min_dst = (type & 1) ? min((unsigned long)(EMM_PAGE_SIZE - dst_offset), length) : length;
 			
 		data_block_size = min(min_src, min_dst);
 
@@ -2074,8 +2093,8 @@ LOCAL void Move_Exchange_Memory_Region IFN0()
 			return;
 		}
 
-		Increment_Address(&src_seg_page, &src_offset, data_block_size, (type & 2));
-		Increment_Address(&dst_seg_page, &dst_offset, data_block_size, (type & 1));
+		Increment_Address(&src_seg_page, &src_offset, data_block_size, (unsigned char)(type & 2));
+		Increment_Address(&dst_seg_page, &dst_offset, data_block_size, (unsigned char)(type & 1));
 		length -= data_block_size;
 
 	}
@@ -2118,7 +2137,7 @@ LOCAL void Increment_Address IFN4(unsigned short *,seg_or_page,
 			(*seg_or_page)++;
 			*offset = 0;
 		} else {
-			*offset += increment_by;
+			*offset += (unsigned short)increment_by;
 		}
 	} else {
 		/* Conventional memory */
@@ -2128,10 +2147,10 @@ LOCAL void Increment_Address IFN4(unsigned short *,seg_or_page,
 			/* Make new segment value as high as possible, to
 			 * minimise chances of further segment wrap */
 			address = (*seg_or_page << 4) + *offset + increment_by;	
-			*seg_or_page = address >> 4;
-			*offset = address & 0xf;
+			*seg_or_page = (unsigned short)(address >> 4);
+			*offset = (unsigned short)(address & 0xf);
 		} else {
-			*offset += increment_by;
+			*offset += (unsigned short)increment_by;
 		}
 	}
 }
@@ -2258,10 +2277,10 @@ LOCAL void Get_Hardware_Configuration_Array IFN0()
 
 			write_intel_word(segment, offset, get_no_altreg_sets());
 #else
-#line 2333
+#line 2348
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 2335
+#line 2350
 
 			offset += 2;
 			write_intel_word(segment, offset, context_save_area_size);
@@ -2402,7 +2421,7 @@ LOCAL void Alternate_Map_Register_Support IFN0()
 		    if (alt_map_segment && alt_map_offset)
 			save_map(-1, alt_map_segment, alt_map_offset, 0, 0);
 		}
-		setBL(map_register);
+		setBL((unsigned char)map_register);
 		setAH(EMM_SUCCESS);
 		break;
 
@@ -2448,7 +2467,7 @@ LOCAL void Alternate_Map_Register_Support IFN0()
 
 	case 3:
 		if (allocate_altreg_set(&map_register)) {
-		    setBL(map_register);
+		    setBL((unsigned char)map_register);
 		    setAH(EMM_SUCCESS);
 		}
 		else {
@@ -2494,10 +2513,10 @@ LOCAL void Alternate_Map_Register_Support IFN0()
     return;
 
 #else
-#line 2567
+#line 2582
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 2665
+#line 2680
 
 }
 
@@ -2619,18 +2638,22 @@ GLOBAL void reset_emm_funcs IFN0()
 	alt_map_segment = 0;
 	alt_map_offset  = 0;
 #ifndef NTVDM
-#line 2786
+#line 2801
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 2788
+#line 2803
 
 	return;
 }
 
 #ifndef PROD
-#line 2793
+#line 2808
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
-#line 2833
+#if defined(NEC_98)
+#line 2849
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 2865
 #endif /* LIM */
-#line 2587
+#line 2602

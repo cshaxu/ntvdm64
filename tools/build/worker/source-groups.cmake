@@ -15,7 +15,7 @@ foreach(name IN LISTS names)
   list(APPEND ccpu_objects "${object}")
 endforeach()
 
-worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/bios/sources")
+worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/bios/sources.inc")
 list(REMOVE_DUPLICATES names)
 set(bios_objects)
 foreach(name IN LISTS names)

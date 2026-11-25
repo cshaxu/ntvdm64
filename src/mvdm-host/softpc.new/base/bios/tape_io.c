@@ -1,3 +1,7 @@
+#if defined(JAPAN) && defined(i386)
+#error Unsupported Japanese DOS/V BIOS configuration
+#endif // JAPAN && i386
+#line 7
 #include "insignia.h"
 #include "host_def.h"
 /*
@@ -17,18 +21,21 @@
 
 
 #ifdef SEGMENTATION
-#line 20
-#error Excluded unsupported SEGMENTATION configuration
 #line 26
+#error Excluded unsupported SEGMENTATION configuration
+#line 32
 #endif
 
 /*
  *    O/S include files.
  */
-#line 31
+#line 37
 #include <stdio.h>
 #include TypesH
-
+#if defined(JAPAN) && defined(i386)
+#error Unsupported Japanese DOS/V BIOS configuration
+#endif // JAPAN && i386
+#line 42
 /*
  * SoftPC include files
  */
@@ -36,7 +43,7 @@
 #include CpuH
 #include "sas.h"
 #include "xms.h"
-#line 40
+#line 48
 #include "ios.h"
 #include "bios.h"
 #include "tape_io.h"
@@ -48,12 +55,18 @@
 #include "debug.h"
 #include "quick_ev.h"
 
+extern void xmsEnableA20Wrapping(void);
+extern void xmsDisableA20Wrapping(void);
 
-#line 52
+#line 62
 #define ONE_MEGABYTE    (1024 * 1024)
 #define SIXTY_FOUR_K    (64 * 1024)
 #define	WRAP_AREA(addr) (addr) >= ONE_MEGABYTE && (addr) < ONE_MEGABYTE + SIXTY_FOUR_K
 
+#if defined(JAPAN) && defined(i386)
+#error Unsupported Japanese DOS/V BIOS configuration
+#endif // JAPAN && i386
+#line 78
 LOCAL q_ev_handle wait_event_handle = (q_ev_handle)0;
 
 /* Call back routine that needs to set a user's flag byte */
@@ -71,11 +84,11 @@ void cassette_io()
 {
 #ifdef PM
 #ifndef	CPU_30_STYLE
-#line 73
+#line 95
 IMPORT void retrieve_descr_fields IPT4(half_word *, AR, sys_addr *, base,
-	word *, limit, sys_addr, descr_addr);
+	sys_addr *, limit, sys_addr, descr_addr);
 #endif	/* not CPU_30_STYLE */
-#line 76
+#line 98
 half_word cmos_u_m_s_hi;
 half_word cmos_u_m_s_lo;
 sys_addr gdt;
@@ -83,38 +96,38 @@ sys_addr  source;
 sys_addr  source_base;
 sys_addr  target;
 #if (!defined(PROD) || !defined(CPU_30_STYLE))
-#line 83
-word      source_limit;
-word      target_limit;
+#line 105
+sys_addr      source_limit;
+sys_addr      target_limit;
 #endif
-#line 86
+#line 108
 sys_addr  target_base;
 sys_addr byte_count;   /* Max size is 0x8000 * 2 = 10000 */
 #ifdef CPU_30_STYLE
-#line 89
+#line 111
 #error Excluded unsupported CPU30 descriptor path
 #else
-#line 92
+#line 114
 half_word source_AR;
 half_word target_AR;
 #endif /* CPU_30_STYLE */
-#line 95
+#line 117
 #endif /* PM */
-#line 96
+#line 118
 
 	half_word	mask,		/* interrupt mask			*/
 			alarm;		/* value read from alarm register	*/	
 
-#line 100
+#line 122
 #if defined(NTVDM) && defined(MONITOR)
-#line 101
+#line 123
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM & MONITOR */
-#line 103
+#line 125
         /*
          *	Determine function
          */
-#line 106
+#line 128
 	switch ( getAH() )
 	{
 	case INT15_DEVICE_OPEN:
@@ -122,17 +135,17 @@ half_word target_AR;
         case INT15_PROGRAM_TERMINATION:
         case INT15_REQUEST_KEY:
         case INT15_DEVICE_BUSY:
-		setAH( 0 );   
+		setAH( 0 );
                 setCF( 0 );
                 break;
 
 	case INT15_EMS_DETERMINE:
-#line 118
+#line 140
 #if 0 /* I'm sure we've all had enough of this one */
-#line 119
+#line 141
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 121
+#line 143
 #ifdef PM
                 outb(CMOS_PORT, CMOS_U_M_S_LO);
                 inb(CMOS_DATA, &cmos_u_m_s_lo);
@@ -140,14 +153,22 @@ half_word target_AR;
                 inb(CMOS_DATA, &cmos_u_m_s_hi);
                 setAH(cmos_u_m_s_hi);
                 setAL(cmos_u_m_s_lo);
+#if defined(JAPAN) && defined(i386)
+#error Unsupported Japanese DOS/V BIOS configuration
+#endif // JAPAN && i386
+#line 156
 #else
-#line 129
+#line 157
 #error Unsupported excluded original configuration
 #endif /* PM */
-#line 131
+#line 159
 		break;
         case INT15_MOVE_BLOCK:
 #ifdef PM
+#if defined(JAPAN) && defined(i386)
+#error Unsupported Japanese DOS/V BIOS configuration
+#endif // JAPAN && i386
+#line 248
                /* Unlike the real PC we don't have to go into protected
                   mode in order to address memory above 1MB, thanks to
                   the wonders of C this function becomes much simpler
@@ -157,19 +178,19 @@ half_word target_AR;
                source = gdt + 0x10;   /* see layout in bios listing */
                target = gdt + 0x18;
 
-#line 143
+#line 257
 #ifdef CPU_30_STYLE
-#line 144
+#line 258
 #error Excluded unsupported CPU_30_STYLE configuration
 #else /* CPU_30_STYLE */
-#line 157
+#line 271
 		/* retrieve descriptor information for source */
 		retrieve_descr_fields(&source_AR, &source_base, &source_limit, source);
 
 		/* retrieve descriptor information for target */
 		retrieve_descr_fields(&target_AR, &target_base, &target_limit, target);
 #endif /* CPU_30_STYLE */
-#line 163
+#line 277
 
 		/* make word count into a byte count */
 		byte_count = getCX() << 1;
@@ -197,7 +218,7 @@ half_word target_AR;
 #else
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
-#line 192
+#line 306
 		}
 		else
 			sas_move_words_forward ( source_base, target_base, byte_count >> 1);
@@ -208,10 +229,10 @@ half_word target_AR;
 		setZF(1);
 		setIF(1);
 #else
-#line 202
+#line 316
 #error Unsupported excluded original configuration
 #endif
-#line 205
+#line 319
 		break;
 
         case INT15_VIRTUAL_MODE:
@@ -274,20 +295,20 @@ half_word target_AR;
 		setDS(getES());
 
 #else
-#line 267
+#line 381
 #error Unsupported excluded original configuration
 #endif	/* PM */
-#line 270
+#line 384
                 break;
 
 	case INT15_INTERRUPT_COMPLETE:
 		break;
 	case INT15_CONFIGURATION:
 #if defined(NTVDM) && defined(MONITOR)
-#line 276
+#line 390
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
-#line 279
+#line 393
 		setES( getCS() );
 		setBX( CONF_TABLE_OFFSET );
 #endif
@@ -295,27 +316,31 @@ half_word target_AR;
 		setCF( 0 );
 		break;
 
-#line 286
+#line 400
 #ifdef	SPC486
-#line 287
+#line 401
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
-#line 294
+#line 408
 
 	/* Keyboard intercept 0x4f, wait_event 83, wait 86 are all no longer
 	 * passed through from ROM.
 	 */
 
+#ifdef JAPAN
+#error Unsupported Japanese DOS/V BIOS configuration
+#endif // JAPAN
+#line 428
 	default:
 		/*
 		 *	All other functions invalid.
 		 */			
-#line 303
+#line 432
 #ifndef	PROD
-#line 304
+#line 433
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
-#line 313
+#line 442
 
 		/* Fall through */
 
@@ -327,6 +352,10 @@ half_word target_AR;
 		setAH(INT15_INVALID);
 		break;
 	}
-#line 324
+#line 453
 }
 
+#if defined(JAPAN) && defined(i386)
+#error Unsupported Japanese DOS/V BIOS configuration
+#endif // JAPAN && i386
+#line 553

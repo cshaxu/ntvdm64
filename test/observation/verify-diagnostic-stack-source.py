@@ -72,7 +72,7 @@ static unsigned unexpected(void){abort();return 0;}
 #define xmsEnableA20Wrapping() unexpected()
 #define sas_move_words_forward(...) unexpected()
 #define sas_disable_20_bit_wrapping() unexpected()
-static void retrieve_descr_fields(unsigned char*a,unsigned long*b,word*c,unsigned long d){abort();}
+static void retrieve_descr_fields(unsigned char*a,unsigned long*b,unsigned long*c,unsigned long d){abort();}
 """
         text = text.replace('#define PROD 1', '#define PROD 1' + extra)
     if 'illegal-op-' in script:

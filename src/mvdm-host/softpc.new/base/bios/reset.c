@@ -155,7 +155,16 @@ int soft_reset = 0;
  * ============================================================================
  */
 
+extern void npx_reset IPT0();
+extern void cmos_clear_shutdown_byte IPT0();
+
 extern word msw;
+
+#if defined(NEC_98)
+#line 153
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 169
 
 IMPORT	CHAR	*host_get_version IPT0();
 IMPORT	CHAR	*host_get_unpublished_version IPT0();
@@ -163,7 +172,7 @@ IMPORT	CHAR	*host_get_years IPT0();
 IMPORT	CHAR	*host_get_copyright IPT0();
 
 #ifdef PIG
-#line 155
+#line 176
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 
@@ -173,9 +182,14 @@ IMPORT	CHAR	*host_get_copyright IPT0();
 #define IO_ROM_SEG    0x69   /* User Stack Pointer(SS) */
 #define IO_ROM_INIT   0x67   /* User Stack Pointer(SP) */
 
-#line 164
+#line 185
 static void setup_ivt()
 {
+#if defined(NEC_98)
+#line 188
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 327
 	IUH count;
 
 	/* make all vectors between 0 and 78 (apart from
@@ -210,13 +224,13 @@ static void setup_ivt()
 	sas_storew(int_addr(0xE), DISKETTE_INT_OFFSET);
 	sas_storew(int_addr(0xE) + 2, DISKETTE_INT_SEGMENT);
 #ifdef	GISP_SVGA
-#line 200
+#line 361
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
-#line 210
+#line 371
 #else		/* GISP_SVGA */
 	sas_storew(int_addr(0x10), VIDEO_IO_OFFSET);
 	sas_storew(int_addr(0x10) + 2, VIDEO_IO_SEGMENT);
-#line 213
+#line 374
 #endif		/* GISP_SVGA */
 	sas_storew(int_addr(0x11), EQUIPMENT_OFFSET);
 	sas_storew(int_addr(0x11) + 2, EQUIPMENT_SEGMENT);
@@ -277,6 +291,8 @@ static void setup_ivt()
 	sas_storew(int_addr(0x76) + 2, D11_INT_SEGMENT);   
 	sas_storew(int_addr(0x77), D11_INT_OFFSET);   
 	sas_storew(int_addr(0x77) + 2, D11_INT_SEGMENT);   
+#endif // !NEC_98
+#line 435
 }
 
 /* Low Switch Settings */
@@ -299,31 +315,31 @@ static void setup_ivt()
 #define MDA_OR_MULTI 0x3
 #define EGA_INSTALLED 0x0
 
-#line 295
+#line 457
 static void ppi_get_switches(low,high)
 half_word *low, *high;
 {
 	half_word low_switches = 0, high_switches = 0;
 
 #ifdef	NPX
-#line 301
+#line 463
 #error Unsupported excluded original configuration
-#line 319
+#line 481
 #else
-#line 320
+#line 482
 	low_switches |= (RAM_256KB | PPI_CO_PROCESSOR_NOT_PRESENT | NO_LOOP_ON_POST);
 #endif
-#line 322
+#line 484
 
 #ifdef FLOPPY_B
-#line 324
+#line 486
 #error Unsupported excluded original configuration
-#line 329
+#line 491
 #else
-#line 330
+#line 492
 	high_switches |= (PPI_ONE_DRIVE);
 #endif
-#line 332
+#line 494
 
 
     /* set the value of the high switches from the config settings */
@@ -331,12 +347,12 @@ half_word *low, *high;
     switch((ULONG)config_inquire(C_GFX_ADAPTER, NULL))
     {
     case CGA:
-#line 339
+#line 501
 #ifdef CGAMONO
-#line 340
+#line 502
 #error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register.
 #endif
-#line 342
+#line 504
 	high_switches |= (PPI_CGA_80_COLUMN);
 	break;
     case MDA:
@@ -351,12 +367,12 @@ half_word *low, *high;
 	break;
 #endif
     case HERCULES:
-#line 356
+#line 518
 #ifdef HERC
-#line 357
+#line 519
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
-#line 359
+#line 521
     default:
 	break;
     }
@@ -383,35 +399,36 @@ GLOBAL CHAR *get_copyright IFN0()
 
 
 
-#line 385
+#line 547
 #ifndef PROD
-#line 386
+#line 548
 #error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
-#line 507
+#line 669
 #endif /* PROD */
-#line 508
+#line 670
 
 void reset()
 {
 #ifndef	NTVDM
-#line 512
+#line 674
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 517
+#line 679
 #endif /* NTVDM */
 	EQUIPMENT_WORD equip_flag;
 	half_word low_switches, high_switches;
-	SHORT gfxAdapt;
+        LONG gfxAdapt;
 	int adapter;
-#line 522
+#ifndef NEC_98
+#line 685
 #ifdef PM
 	half_word status_byte;
 	half_word cmos_shutdown;
 	sys_addr user_stack;
 	word temp_word;
-#line 527
+#line 690
 #ifdef NTVDM
         half_word cmos_diskette;
-#line 529
+#line 692
 #endif
 
 	/* iff not first time thru find out reset cause */
@@ -502,11 +519,11 @@ void reset()
 				setAX(temp_word);
 				user_stack += 2;
 				sas_loadw(user_stack, &temp_word);
-#line 619
+#line 782
 #ifndef CPU_30_STYLE
-#line 621
+#line 784
 #endif /* CPU_30_STYLE */
-#line 622
+#line 785
 				setIP(temp_word);
 				user_stack += 2;
 				sas_loadw(user_stack, &temp_word);
@@ -532,7 +549,7 @@ void reset()
 				** stored double word.
 				*/
 #ifdef	NPX
-#line 647
+#line 810
 #error Excluded unsupported NPX configuration
 #endif	/* NPX */
 				outb(ICA0_PORT_0, (half_word)0x11);
@@ -569,11 +586,11 @@ void reset()
 		
 			    /* fake up jump to indicated point */
 			    sas_loadw(effective_addr(BIOS_VAR_SEGMENT, IO_ROM_INIT), &temp_word);
-#line 683
+#line 846
 #ifndef CPU_30_STYLE
-#line 685
+#line 848
 #endif /* CPU_30_STYLE */
-#line 686
+#line 849
 			    setIP(temp_word);
 			    sas_loadw(effective_addr(BIOS_VAR_SEGMENT, IO_ROM_SEG), &temp_word);
 			    setCS(temp_word);
@@ -592,11 +609,11 @@ void reset()
 		}
 	}
 #ifdef DPMI
-#line 704
+#line 867
 #error Excluded unsupported DPMI configuration
-#line 706
+#line 869
 #endif /* DPMI */
-#line 707
+#line 870
 #endif /* PM */
 
 	/*
@@ -606,24 +623,26 @@ void reset()
     reset_paint_routines();
         
 	cmos_write_byte(CMOS_DISKETTE,
-		(half_word) gfi_drive_type(0) << 4 | gfi_drive_type(1));
+                (IU8)((half_word) gfi_drive_type(0) << 4 | gfi_drive_type(1)));
+#endif // !NEC_98
+#line 881
 
 	/*
 	 * NTVDM: if soft reset We will never get here...
 	 */
-#line 721
+#line 885
 #ifndef NTVDM
-#line 722
+#line 886
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 764
+#line 928
 #endif /* NTVDM */
 
 	/*
 	 * Shutdown ODI network driver in case it was running
 	 */
-#line 769
+#line 933
 #ifdef NOVELL
-#line 770
+#line 934
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
 
@@ -631,25 +650,42 @@ void reset()
  
 #ifndef HostProcessClipData
 #ifdef MSWDVR
-#line 777
+#line 941
 #error Excluded unsupported MSWDVR configuration
 #endif
 #endif
 
-#if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))
+#if defined(NEC_98)
+#line 946
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 950
+#if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX)) || defined(ARCX86)
+#ifdef ARCX86
+    if (UseEmulationROM)
+#endif
+    {
 	/* Clear out the bottom 32K of memory. */
 	sas_fills (0, '\0', 640L * 1024L);
 
 	/* Now set up the interrupt vector table. */
 	setup_ivt();
-#endif /* !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX)) */
+    }
+#endif /* !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX)) || defined(ARCX86) */
+#endif // !NEC_98
+#line 963
 
 #ifndef NTVDM
-#line 790
+#line 965
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 798
+#line 973
 #endif /* NTVDM */
 
+#if defined(NEC_98)
+#line 976
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 979
 	ica0_init();
 	ica0_post();
 	ica1_init();
@@ -662,13 +698,18 @@ void reset()
 	 * indicates the existance ( or otherwise ) of a co-processor, such as
 	 * an 8087 floating point chip.
 	 */
-#line 812
+#line 991
 #ifdef IPC
-#line 813
+#line 992
 #error Unsupported excluded original configuration
 #endif /* IPC */
-#line 815
+#line 994
 
+#if defined(NEC_98)
+#line 996
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1011
 	cmos_init();
 	cmos_post();
 
@@ -679,10 +720,10 @@ void reset()
 #ifdef PRINTER
 	equip_flag.bits.printer_count = NUM_PARALLEL_PORTS;
 #else /* PRINTER */
-#line 826
+#line 1021
 #error Unsupported excluded original configuration
 #endif /* PRINTER */
-#line 828
+#line 1023
 	equip_flag.bits.game_io_present = FALSE;
 	equip_flag.bits.rs232_count = NUM_SERIAL_PORTS;
 	equip_flag.bits.ram_size = 0;
@@ -698,9 +739,9 @@ void reset()
                 equip_flag.bits.max_diskette++;
 	}
 #else
-#line 843
+#line 1038
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 850
+#line 1045
 #endif /* NTVDM */
 
 	sas_storew(EQUIP_FLAG, equip_flag.all);
@@ -708,74 +749,108 @@ void reset()
 	/* Load up the amount of memory into the BIOS. */
 	sas_storew(MEMORY_VAR, host_get_memory_size());
 
-	gfxAdapt = (ULONG)config_inquire(C_GFX_ADAPTER, NULL);
+        gfxAdapt = (LONG)config_inquire(C_GFX_ADAPTER, NULL);
 
-#line 859
+#line 1054
 #ifdef GISP_SVGA
-#line 860
+#line 1055
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
-#line 867
+#line 1062
 #endif          /* GISP_SVGA */
 
 	gvi_init((half_word) gfxAdapt);
-#line 870
+#endif // !NEC_98
+#line 1066
+
+#line 1067
 #ifdef PIG
-#line 871
+#line 1068
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 873
+#line 1070
 #endif
 
 	SWTMR_init_funcptrs ();
+#ifndef NEC_98
 	time_of_day_init();		
+#endif // !NEC_98
+#line 1076
 	timer_init();
 	timer_post();
 	keyboard_init();
+#if defined(NEC_98)
+#line 1080
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1082
 	keyboard_post();
+#ifndef NEC_98
 	AT_kbd_init();
+#endif // !NEC_98
+#line 1086
 	AT_kbd_post();
 
 	video_init();
 
-#line 886
+#line 1090
 #ifdef SWIN_SNDBLST_NULL
-#line 887
+#line 1091
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
 #endif /* SWIN_SNDBLST_NULL */
 
+#ifndef NEC_98
 #ifndef NTVDM	/* No signon for NTVDM - transparent integration */
-#line 891
+#line 1096
 #error Excluded unsupported non-NTVDM BIOS signon profile
-#line 984
+#line 1189
 #endif	/* NTVDM */
-#line 985
+#line 1190
 
 	/* Now search for extra ROM modules */
 	search_for_roms();
+#endif // !NEC_98
+#line 1194
 
 	/* Now initialise the other BIOS handlers */
-#line 990
+#line 1196
 #if defined (GEN_DRVR) || defined (CDROM)
-#line 991
+#line 1197
 #error Unsupported excluded original configuration
 #endif /* GEN_DRVR || CDROM */
-#line 993
+#line 1199
 
+#if defined(NEC_98)
+#line 1201
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 1203
 	for (adapter = 0; adapter < NUM_SERIAL_PORTS; adapter++)
+#endif // !NEC_98
+#line 1205
 	{
 		com_init(adapter);
+#ifndef NEC_98
 		com_post(adapter);
+#endif // !NEC_98
+#line 1210
 	}
 
 #ifdef NPX
-#line 1001
+#line 1213
 #error Unsupported excluded original configuration
 #endif
-#line 1003
+#line 1215
 	dma_init();
 	dma_post();
+#ifndef NEC_98
 	fla_init();
 	mouse_init();
 	hda_init();
+#else  // NEC_98
+#line 1222
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 1224
+
 
 #ifdef PRINTER
 	for (adapter = 0; adapter < NUM_PARALLEL_PORTS;adapter++)
@@ -786,31 +861,31 @@ void reset()
 #endif /* PRINTER */
 
 #if	defined(DELTA) && defined(A2CPU)
-#line 1018
+#line 1235
 #error Excluded unsupported A2CPU configuration
 #endif /* DELTA && A2CPU */
 
 #ifdef SOFTWIN_API
-#line 1022
+#line 1239
 #error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
-#line 1024
+#line 1241
 #endif
 
-#line 1026
+#line 1243
 #ifdef HUNTER
-#line 1027
+#line 1244
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
-#line 1029
+#line 1246
 #endif
-#line 1030
+#line 1247
 
 #ifdef LIM
 #if !defined(SUN_VA) && !defined(NTVDM)
-#line 1033
+#line 1250
 #error Unsupported non-NTVDM LIM reset profile
-#line 1062
+#line 1279
 #endif /* !SUN_VA & !NTVDM */
-#line 1063
+#line 1280
 
 #endif /* LIM */
 
@@ -819,7 +894,7 @@ void reset()
 #endif
 
 #ifndef	NTVDM
-#line 1071
+#line 1288
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
@@ -842,12 +917,12 @@ void reset()
 
 
 	/* Now perform any other initialisation of DOS Drivers */
-#line 1093
+#line 1310
 #ifdef HFX
-#line 1094
+#line 1311
 #error Unsupported excluded original configuration
 #endif
-#line 1096
+#line 1313
 }
 
 /*(
@@ -871,3 +946,7 @@ GLOBAL void reset_bios_flags IFN0()
 	/* clear shut down byte */
 	cmos_clear_shutdown_byte();
 }
+#if defined(NEC_98)
+#line 1337
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98

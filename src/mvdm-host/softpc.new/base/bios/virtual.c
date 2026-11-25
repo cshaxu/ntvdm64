@@ -1,5 +1,5 @@
 #include "insignia.h"
-#include "host_def.h" 
+#include "host_def.h"
 /*
  *
  * Title	: virtual.c
@@ -21,12 +21,9 @@
  *    O/S include files.
  */
 #include <stdio.h>
-#line 21
-#if defined(NTVDM) && defined(MONITOR)
-#line 22
-#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#endif
-#line 24
+#include <malloc.h>
+
+extern void ClearInstanceDataMarking(void);
 
 #include TypesH
 #include StringH
@@ -44,11 +41,10 @@
 #include "error.h"
 #include "debug.h"
 
-extern VOID ClearInstanceDataMarking(VOID);
 #line 38
 
 /*
-   This file implements the Non-Intel Driver Data Block (NIDDB) Manager. This 
+   This file implements the Non-Intel Driver Data Block (NIDDB) Manager. This
    service allows Insignia DOS Device Drivers or TSRs with C code and data to
    operate correctly under the Virtual Machines of Windows 3.x Enhanced Mode.
    Essentially the Device Driver informs this manager of the C (or Non-Intel)
@@ -104,7 +100,7 @@ extern VOID ClearInstanceDataMarking(VOID);
 
       (*my_handle)->my_var_1 = 1;
       (*my_handle)->my_var_2 = 2;
-   
+
    The NIDDB Manager will call the create_callback function during the initial
    NIDDB_Allocate_Instance_Data call (initial_instance is TRUE) or during the
    creation of each Virtual Machine (initial_instance is FALSE). Typically the
@@ -140,7 +136,7 @@ extern VOID ClearInstanceDataMarking(VOID);
    implementation and clarify it's responses to conflicting requests.
 
    1) Only a very small number of data areas are expected to be allocated, there
-   being only a few Insignia device drivers. Hence a very small fixed table is 
+   being only a few Insignia device drivers. Hence a very small fixed table is
    used to hold each allocated handle. This avoids the slightly more complex
    use of linked lists.
 
@@ -159,7 +155,7 @@ extern VOID ClearInstanceDataMarking(VOID);
 		      not be moved or have entries re-assigned. A zero entry
 		      indicates that the handle is free for allocation. It in
 		      effect holds the current pointers for the exported handles.
-      
+
       snapshot_ptrs   Fixed length table of snapshot pointers.
                       While initial allocation is in progress, this table mirrors
 		      the master_ptrs table. Once instancing starts the table
@@ -169,7 +165,7 @@ extern VOID ClearInstanceDataMarking(VOID);
 
       instance_size   Fixed length table of byte sizes.
 		      Holds data area size for each allocated data area.
-      
+
       create_callback      Fixed length table of function pointers.
 			   Holds create callback function pointer for each
 			   allocated data area. A zero value indicates no
@@ -186,16 +182,16 @@ extern VOID ClearInstanceDataMarking(VOID);
 		      associated instance_ptrs. It is indexed via the BIOS
 		      virtualising byte value. It hooks together the Virtual
 		      Machine messages and our native data area allocations.
-      
+
       instance_ptrs   Fixed length table which is dynamically allocated for
 		      each new instance, its layout and meaning follows that of
 		      the master_ptrs, except the pointers are to the instance
 		      copy of the data areas. When an instance is swapped to, the
 		      pointers held here are copied to master_ptrs.
-      
+
       allocation_allowed   Boolean which controls Device Driver allocation and
 			   deallocation requests.
-   
+
    And an overview of the functions employed (minus error handling):-
 
       NIDDB_Allocate_Instance_Data
@@ -512,7 +508,7 @@ LOCAL void delete_NIDDB IFN1
 
    /* Ensure instance is active (for terminate callback). */
 #line 500
-   swap_NIDDB(record_id);
+   swap_NIDDB((IU8)record_id);
 
    instance_ptr = vrecs[record_id].vr_pinst_tbl;
 
@@ -617,7 +613,7 @@ GLOBAL IHP *NIDDB_Allocate_Instance_Data IFN3
       if ( master_ptrs[i] == (IHP)0 )
 	 break;   /* found empty slot */
       }
-   
+
    if ( i == MAX_INSTANCES )
       {
       /* No free slot */
@@ -653,7 +649,7 @@ GLOBAL void NIDDB_Deallocate_Instance_Data IFN1
    if ( !allocation_allowed )
       {
       /*
-	 We are still managing instances for Windows, or at least we think we 
+	 We are still managing instances for Windows, or at least we think we
 	 are. Has the user escaped from Windows without our VxD being informed,
 	 or is the Insignia Device Driver giving us a bum steer?
        */
@@ -749,7 +745,7 @@ virtual_device_trap IFN0()
       if ( allocate_NIDDB(getEBX(), &new_vb) )
 	 {
 	 /* Make new instance active (for create callback) */
-	 swap_NIDDB(new_vb);
+	 swap_NIDDB((IU8)new_vb);
 
 	 /* Copy instance data and action create callback */
 	 copy_instance_data(vrecs[new_vb].vr_pinst_tbl, snapshot_ptrs);
@@ -771,7 +767,7 @@ virtual_device_trap IFN0()
       if ( allocate_NIDDB(getEBX(), &new_vb) )
 	 {
 	 /* Make new instance active (for create callback) */
-	 swap_NIDDB(new_vb);
+	 swap_NIDDB((IU8)new_vb);
 
 	 /* Copy instance data and action create callback */
 	 copy_instance_data(vrecs[new_vb].vr_pinst_tbl, snapshot_ptrs);

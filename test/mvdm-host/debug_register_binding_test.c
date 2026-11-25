@@ -237,10 +237,9 @@ int main(void)
     {
         ULONG base, limit, access, address;
         BYTE narrow_access;
-        USHORT narrow_limit;
         supplied.base = 0x12345000; supplied.limit = 0x23456; supplied.AR = 0x1f2;
-        retrieve_descr_fields(&narrow_access, &base, &narrow_limit, 0x80);
-        CHECK(base == supplied.base && narrow_access == 0xf2 && narrow_limit == 0x3456);
+        retrieve_descr_fields(&narrow_access, &base, &limit, 0x80);
+        CHECK(base == supplied.base && narrow_access == 0xf2 && limit == supplied.limit);
         CHECK(mvdm_softpc_protected_segment(8, &base, &limit, &access));
         CHECK(base == supplied.base && limit == supplied.limit && access == supplied.AR);
         CHECK(!mvdm_softpc_protected_segment(8, NULL, &limit, &access));

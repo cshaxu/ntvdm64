@@ -66,7 +66,7 @@ PURPOSE			: Supply a BOP FF function for implementation
 #endif
 #line 60
 
-static control_bop_array base_bop_table[] = 
+static control_bop_array base_bop_table[] =
 {
 #ifdef SECURE
 #line 64
@@ -131,7 +131,7 @@ PROCEDURE	  : 	control_bop()
 
 PURPOSE		  : 	Execute a BOP FF control function.
 		
-PARAMETERS	  : 	AH - Host type.  
+PARAMETERS	  : 	AH - Host type.
 			AL - Function code
 			(others are function specific)
 			
@@ -152,10 +152,10 @@ ERROR RECOVERY	  :	No call made
 =========================================================================
 */
 
-void control_bop IFN0()
+void control_bop IPT0()
 {
-    unsigned short host_type;
-    
+    unsigned long host_type;
+
 /*
  * If the host type is generic then look up the function in the
  * base bop table, otherwise see if the function is specific to the
