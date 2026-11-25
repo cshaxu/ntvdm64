@@ -16,8 +16,8 @@ The workspace was clean at admission; this delivery changes documents only.
 | S1 (research complete) | DIR-ordered build/generation/publication inventory, actual callers/outputs, architectures, toolchain bootstrap and migration design. | [Inventory/design](../evidence/t484-s1-build-inventory.md);355 migration candidates are not355 proved live calls. |
 | S2 (complete) | CMD entry and host configuration/build/code-generation chain. | All eleven host images; preserved ABI/source selections/cache invalidation; no hidden forbidden interpreter. |
 | S3 (complete) | Authored addon producers and dependent test-binary compilation; shared setup consolidation. | Every addon output accounted for; no original guest rebuild or test binary in release. |
-| S4 (active) | CMD staging, manifests, hashes and publication; retire migrated wrappers and repair callers. | Complete host/addon sets, nonzero failures and no mixed package reported successful. |
-| S5 (owner-approved, planned) | Consolidate native preparation tools: reuse PIF.EXE, unify INI editing, remove superseded producers and build targets. | Fewer duplicate implementations/executables; callers and basic coverage preserved; post-cleanup CMD-only build/publication evidence and reviewed delivery. |
+| S4 (complete) | CMD staging, manifests, hashes and publication; retire migrated wrappers and repair callers. | Complete host/addon sets, nonzero failures and no mixed package reported successful. |
+| S5 (active) | Consolidate native preparation tools: reuse PIF.EXE, unify INI editing, remove superseded producers and build targets. | Fewer duplicate implementations/executables; callers and basic coverage preserved; post-cleanup CMD-only build/publication evidence and reviewed delivery. |
 | S6 | Clean/cached end-to-end validation and migration acceptance. | Clean bootstrap, no-op/changed-input rebuilds, outside-repo invocation, prerequisite/component/publication failure cases, relevant regression, verified publication and pushed delivery. |
 | S7 (owner-approved, planned) | Release captured mouse before a Window-mode fault decision dialog. | Ignore/Terminate dialogs are mouse-accessible; capture is released before display; focused lifecycle verification and normal product delivery complete. |
 
@@ -80,9 +80,10 @@ validation. No product source or published asset changes at admission.
 Owner direction on 2026-11-24: prioritize reuse of the existing PIF utility,
 merge INI handling, and do not replace scattered scripts with scattered C
 programs. Owner reordered the stages: complete this cleanup as S5 before
-S6 final migration acceptance; the mouse-dialog work remains S7. Active S4 remains the
-only admitted execution packet. This section schedules work; it does not
-claim the cleanup is implemented or authorize unrelated code changes now.
+S6 final migration acceptance. The mouse-dialog work remains S7.
+S4 closed with [P46](../evidence/t484-s4-matrix-preparation.md).
+S5 is the only active execution packet. This plan does not claim the
+consolidation is implemented.
 
 ### Scope and execution order
 

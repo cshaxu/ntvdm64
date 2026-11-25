@@ -2,30 +2,31 @@
 
 ## Current Work
 
-**Active: M0 T484 S4** (Ordinary Mode). Owner requested continuous execution
-through T484 closure. S3 addon/test producers are closed; S4 package
-and publication migration is now admitted. Final interpreter-free clean acceptance remains S6.
+**Active: M0 T484 S5** (Ordinary Mode). S4 closed after P46
+`5b88ee331` was pushed with both final matrix preparation chains verified.
+S5 consolidates native preparation ownership. S6 remains the clean
+interpreter-free acceptance stage.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T484 S4, Ordinary Mode. |
-| Admission And Approval | Owner: 准入新t任务！要求构建脚步去除python powershell javascript 仅使用cmd. |
-| Original Owner Request | Admit unified build/release; CMD-only build scripts, removing Python, PowerShell and JavaScript dependencies. |
-| Objective | Migrate required runtime configuration, isolated package preparation, manifests and publication to CMD/native ownership; retire obsolete wrappers and preserve identity, failure and cleanup contracts. |
+| Identifier Mode | M0 T484 S5, Ordinary Mode. |
+| Admission And Approval | Owner approved continuous T484 execution and directed reuse of the existing PIF and SYSTEM.INI utilities. [Sequenced S5 scope](../etc/operations/t484-cmd-build-release-plan.md#s5-consolidate-native-preparation-tools). |
+| Original Owner Request | Use CMD for build scripting and consolidate native preparation tools by extending the existing editors instead of creating duplicate tools. |
+| Objective | Retire redundant native fixture producers and use the existing PIF and guest INI owners for their formats. Preserve observable fixture behavior and real callers. |
 | Candidate Proposal | [Unified build/release](../proposals/proposal-unified-build-cmd-release-001.md) |
-| Reference Baseline | T483 closure e74afba09; product P85 9e7eb19c0, package100b16d9-992d-4e2c-8d99-66a4e891dd26. |
-| Files And ABI Surface | Build/publication/staging scripts and caller preparation; no product ABI change or original guest rebuild. |
-| Applicable Rules | CMD-only project build scripting, existing layers, source-owner inventories and caches, immutable original guest, truthful failures. |
-| Verification | Verify actual shared staging, host/addon publication and failure cases; targeted tests, coherent dual release hashes, governance and commit/push. Final clean interpreter-free acceptance remains S6. |
-| Expected Markers | Single package owner, complete manifests, exact image identities, CMD/native production without hidden forbidden interpreters. |
-| Asset Needs | Existing source/toolchains and approved assets only. |
-| Non-goals | No runtime redesign, mirror audit, original guest rebuild or wholesale standalone test/audit language conversion. |
-| Similar-Issue Sweep | Nested interpreters, configure hooks, generated commands, post-link steps, manifest/hash tools, addon/test producers and clean bootstrap. |
-| Reporting Requirements | Separate admission, inventory, implementation and delivery; count remaining forbidden-interpreter build edges and output coverage. |
-| Stop Conditions | No forbidden interpreter behind CMD or another script mode; no parallel build graph or stale output as clean-build proof. |
-| Exit Criteria | Required configuration, staging and publication chains use CMD/native; callers repaired, rollback/failure checks pass, coherent dual release verified and delivery pushed. |
+| Reference Baseline | P46 `5b88ee331`, [final S4 evidence](../etc/evidence/t484-s4-matrix-preparation.md), and the delivered S4 native package and INI preparation changes. |
+| Files And ABI Surface | Authored PIF and INI editors, CMD preparation, selected test fixtures and their build targets. Preserve product ABI and original guest images. |
+| Applicable Rules | CMD-only build scripting, LF for authored files, source and architecture rules, and verification of actual product-facing changes. |
+| Verification | Record the DIR-ordered producers and active callers. Verify retained PIF layouts and fields, INI byte/section behavior, dependent focused runtime cases, cached full build, publication hashes and delivery. |
+| Expected Markers | One normal writer per format, malformed or separately meaningful layout fixtures explicitly scoped, superseded targets and callers removed, and no new interpreter dependency. |
+| Asset Needs | Existing released tools, project-written fixtures and a coherent published product package. |
+| Non-goals | No original guest rebuild, broad guest runtime redesign, general scripting in a native tool or forced merger of unrelated binary-binding contracts. |
+| Similar-Issue Sweep | Existing and newly migrated PIF/INI producers, fixed CONFIG.NT/AUTOEXEC.NT generation, and native binary-binding fixtures. |
+| Reporting Requirements | Report before/after executable, parser, source line, build target and caller counts, along with retained unique fixture coverage and validation limits. |
+| Stop Conditions | Pause changes that would alter a fixture's intentional format coverage or require unapproved changes to mirror code or production behavior. |
+| Exit Criteria | Consolidated owners exercise their actual consumers; redundant implementations and references are removed; applicable tests, cached build, publication and push are verified. |
 
 ## Current Progress
 
@@ -49,8 +50,9 @@ S4 P38 closes shared Win31 matrix preparation with CMD monitor copy and identity
 
 S1 inventory/design and S2 native host migration are closed. The
 [execution plan](../etc/operations/t484-cmd-build-release-plan.md) retains
-the complete task scope. [S3 is closed](../etc/evidence/t484-s3-closure.md); S4 is active and S6 clean,
-interpreter-free end-to-end acceptance have not completed.
+the complete task scope. [S3](../etc/evidence/t484-s3-closure.md) and
+[S4](../etc/evidence/t484-s4-matrix-preparation.md) are closed. S5 is active.
+S6 clean, interpreter-free end-to-end acceptance remains pending.
 
 S4 deliveries through P46 are recorded; detailed results and limitations remain in
 these records. Shared primitives alone never close an unverified caller.
@@ -122,6 +124,15 @@ and22 published hashes unchanged; no changed product images required
 republication. Other test producers remain pending. Static candidate counts
 are not live-edge counts or completion evidence. Detailed runs, limitations,
 source profiles and delivery identities belong to the linked evidence.
+
+## S4 Closure Record
+
+[P46 and final S4 matrix evidence](../etc/evidence/t484-s4-matrix-preparation.md)
+record the last delivery, pushed as 5b88ee331. All 355 frozen candidates
+and the supplemental staging chains have a disposition. The published
+host sets were hash-verified. Recorded Win95 runtime limitations remain
+open within their stated boundaries. Clean acceptance of the final
+consolidated build and publication graph remains S6.
 
 ## S3 Closure Record
 
