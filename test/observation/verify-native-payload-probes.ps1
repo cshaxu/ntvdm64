@@ -43,9 +43,27 @@ try{
   Owned "unpaired-$kind-empty" $exe '--invalid' 15 1
  }
  $build=Join-Path $repo 'build/.ninja/fixtures-x64'
- $exe=Join-Path $build 'mixed-batch-pif.exe';$images+=$exe
- Owned pif $exe ('"'+$root+'/probe.pif" "PROBE.EXE"') 15
- Owned pif-existing $exe ('"'+$root+'/probe.pif" "PROBE.EXE"') 15 65
+ $editor=Join-Path $repo 'assets/release/PIF.EXE';$images+=$editor
+ $fixtures=Join-Path $PSScriptRoot 'fixtures'
+ $copy='/d /s /c ""'+$repo+'/tools/prepare-test-inputs.cmd" "'+$root+'" '
+ $standard=$copy+'"'+$fixtures+'/standard-profile.pif" probe.pif"'
+ Owned pif-template $env:ComSpec $standard 30
+ Owned pif $editor ('update "'+$root+'/probe.pif" --program PROBE.EXE') 15
+ $hash=(Get-FileHash "$root/probe.pif").Hash
+ Owned pif-existing $env:ComSpec $standard 30 2
+ if((Get-FileHash "$root/probe.pif").Hash -ne $hash -or (Get-Item "$root/probe.pif").Length -ne 391){throw 'Standard PIF layout or overwrite protection changed'}
+ Owned pif-read $editor ('show "'+$root+'/probe.pif"') 15
+ $fields=Get-Content "$root/pif-read.stdout.txt"
+ if($fields -cnotcontains 'PROGRAM=PROBE.EXE' -or $fields -cmatch '^(W386|NT31)\.'){throw 'Standard PIF fields changed'}
+ foreach($flag in 0,1){
+  $leaf="nt31-$flag.pif"
+  Owned "pif-nt-template-$flag" $env:ComSpec ($copy+'"'+$fixtures+'/nt31-profile.pif" '+$leaf+'"') 30
+  Owned "pif-nt-update-$flag" $editor ('update "'+$root+'/'+$leaf+'" --program MEM.EXE --arguments /? --nt31-flags '+$flag) 15
+  Owned "pif-nt-read-$flag" $editor ('show "'+$root+'/'+$leaf+'"') 15
+  $fields=Get-Content "$root/pif-nt-read-$flag.stdout.txt"
+  if((Get-Item "$root/$leaf").Length -ne 555 -or $fields -cnotcontains 'PROGRAM=MEM.EXE' -or $fields -cnotcontains 'ARGUMENTS=/?' -or
+     $fields -cnotcontains ('NT31.FLAGS=0x{0:X8}' -f $flag) -or $fields -cmatch '^W386\.'){throw 'NT-only PIF layout or fields changed'}
+ }
  foreach($name in 'probe','console-snapshot'){
   $exe=Join-Path $build "mouse-tools/$name.exe";$images+=$exe
   Owned "mouse-$name-empty" $exe '' 15 64

@@ -1,7 +1,17 @@
 {
   "baseline": "ec5b074859bc091ec685d81a7a8603ed416c3cea",
-  "head": "55098c8c6dffe219d87152b2f5eb13d9585a83c6",
-  "worktree_status": [],
+  "head": "e940c54c18726e3c5a6809636b337b6f4434ce01",
+  "worktree_status": [
+    " M docs/etc/README.md",
+    " M docs/states/CURRENT.md",
+    " D test/observation/dos_observation_pif.c",
+    " D test/observation/mixed_batch_pif.c",
+    " M test/observation/verify-native-payload-probes.ps1",
+    " M tools/build/fixtures/native-probes.cmake",
+    "?? docs/etc/evidence/t484-s5-pif-layouts.md",
+    "?? test/observation/fixtures/nt31-profile.pif",
+    "?? test/observation/fixtures/standard-profile.pif"
+  ],
   "scope": "355 original candidates; mechanical states are not completion",
   "counts": {
     "changed": 163,
@@ -6673,6 +6683,10 @@
     }
   ],
   "commits": {
+    "e940c54c18726e3c5a6809636b337b6f4434ce01": {
+      "subject": "T484 S5 P3: restore valid migration tracker JSON",
+      "evidence": []
+    },
     "55098c8c6dffe219d87152b2f5eb13d9585a83c6": {
       "subject": "T484 S5 P3: generate keyboard profiles with the shared PIF editor",
       "evidence": [
