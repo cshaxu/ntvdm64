@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
+#include <wchar.h>
 #include "host_rrr.h"
 #include "nt_uis.h"
 #ifndef MVDM_NLS_EXPECT_CAPACITY
@@ -12,7 +13,7 @@
 typedef char nls_capacity_abi[(MVDM_NLS_EXPECT_CAPACITY==MAX_PATH && sizeof(void *)==4)?1:-1];
 extern void nls_init(void),host_nls_get_msg(int,char *,int);
 extern char szDoomMsg[MAX_PATH],szSysErrMsg[MAX_PATH];
-extern char szHideMouseMenuStr[64],szDisplayMouseMenuStr[64];
+extern wchar_t wszHideMouseMenuStr[64],wszDisplayMouseMenuStr[64];
 static unsigned checks,failures;
 #define CHECK(x) do {++checks;if(!(x)){++failures;fprintf(stderr,"FAIL %d: %s\n",__LINE__,#x);}}while(0)
 int main(void)
@@ -21,8 +22,8 @@ int main(void)
     static const int ids[]={EHS_SYSTEM_ERROR,SM_HIDE_MOUSE,SM_DISPLAY_MOUSE};
     nls_init();
     CHECK(strcmp(szSysErrMsg,"NTVDM has encountered a System Error")==0);
-    CHECK(strcmp(szHideMouseMenuStr,"&Hide Mouse Pointer")==0);
-    CHECK(strcmp(szDisplayMouseMenuStr,"&Display Mouse Pointer")==0);
+    CHECK(wcscmp(wszHideMouseMenuStr,L"&Hide Mouse Pointer")==0);
+    CHECK(wcscmp(wszDisplayMouseMenuStr,L"&Display Mouse Pointer")==0);
     memset(expected,0,sizeof(expected));
     CHECK(FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM,0,ERROR_NOT_ENOUGH_MEMORY,0,expected,sizeof(expected),0)>0);
     CHECK(strcmp(expected,szDoomMsg)==0);

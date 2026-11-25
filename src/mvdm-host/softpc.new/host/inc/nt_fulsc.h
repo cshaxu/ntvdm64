@@ -11,6 +11,12 @@
  * ==========================================================================
  */
 
+#if defined(NEC_98)
+#line 15
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 17
+
 /*
  * ==========================================================================
  * Macros
@@ -30,7 +36,14 @@
 #define NUM_AC_REGS	21
 #define NUM_DAC_REGS	256
 
+#if defined(NEC_98)
+#line 38
+#error Unsupported NEC PC-98 configuration
+#else // NEC_98
+#line 40
 #define STATELENGTH		sizeof(VIDEO_HARDWARE_STATE_HEADER)
+#endif // NEC_98
+#line 42
 #define LATCHLENGTH		4
 #define RGBLENGTH		3
 #define PLANELENGTH		0x10000
@@ -75,10 +88,10 @@
 #define AC_MODE_CONTROL_REG	16
 
 #ifndef PROD
-#line 78
+#line 86
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else /* !PROD */
-#line 98
+#line 106
 #define FullScreenTrace0(s)
 #define FullScreenTrace1(s ,p0)
 #define FullScreenTrace2(s, p0, p1)
@@ -89,7 +102,7 @@
 #define FullScreenTrace7(s, p0, p1, p2, p3, p4, p5, p6)
 #define FullScreenTrace8(s, p0, p1, p2, p3, p4, p5, p6, p7)
 #endif /* !PROD */
-#line 108
+#line 116
 
 /*
  * ==========================================================================
@@ -119,12 +132,12 @@ typedef struct
  */
 IMPORT HANDLE MainThread;
 IMPORT DWORD stateLength;
-#line 137
+#line 145
 #ifdef X86GFX
-#line 138
+#line 146
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
-#line 142
+#line 155
 IMPORT PVOID textState; //Tim Nov 92.
 IMPORT WCHAR_STRING videoSection;
 IMPORT WCHAR_STRING textSection;
@@ -132,22 +145,22 @@ IMPORT BOOL NoTicks;
 IMPORT HANDLE StartTToG;
 IMPORT HANDLE EndTToG;
 IMPORT BOOL BiosModeChange;
-#line 149
+#line 162
 #ifndef PROD
-#line 150
+#line 163
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #endif /* PROD */
-#line 152
+#line 165
 
 extern DWORD savedScreenState;
 extern BOOL  ConsoleInitialised;
 extern BOOL  ConsoleNoUpdates;
-#line 156
+#line 169
 #ifdef X86GFX
-#line 157
+#line 170
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif /* X86GFX */
-#line 160
+#line 173
 extern BOOL blocked_in_gfx_mode;
 
 
@@ -161,14 +174,12 @@ IMPORT VOID ConsoleInit(VOID);
 IMPORT VOID GfxReset(VOID);
 IMPORT VOID ResetConsoleState(VOID);
 IMPORT VOID InitTToG(VOID);
-IMPORT VOID TextToGraphics(VOID);
+IMPORT VOID SwitchToFullScreen(BOOL);
 IMPORT VOID CheckForFullscreenSwitch(VOID);
 IMPORT UTINY getNtScreenState(VOID);
 IMPORT BOOL hostModeChange(VOID);
 IMPORT VOID DoFullScreenResume(VOID);
 IMPORT VOID GfxCloseDown(VOID);
-IMPORT VOID FreezeWinTitle(VOID);
-IMPORT VOID UnFreezeWinTitle(VOID);
 
 IMPORT VOID TextSectionName(WCHAR **, ULONG *);
 IMPORT VOID VideoSectionName(WCHAR **, ULONG *);
@@ -185,17 +196,17 @@ IMPORT HANDLE GetDetectEvent(VOID);
 IMPORT VOID ResetConsoleState IPT0();
 IMPORT int  getModeType(VOID);
 
-#line 197
+#line 208
 #ifdef X86GFX
-#line 198
+#line 209
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
-#line 246
+#line 257
 
 
-#line 248
+#line 259
 #ifdef X86GFX
-#line 249
+#line 260
 #error DIVERGENCE MVDM-HOST-DIV-584: hardware X86GFX declarations are not selected
 #endif
 #line 254

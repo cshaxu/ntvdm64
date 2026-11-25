@@ -42,8 +42,8 @@ char szSysErrMsg[MAX_PATH]="";
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 43
-char szHideMouseMenuStr[64];
-char szDisplayMouseMenuStr[64];
+wchar_t wszHideMouseMenuStr[64];
+wchar_t wszDisplayMouseMenuStr[64];
 
 
 
@@ -104,16 +104,16 @@ void nls_init(void)
 #endif
 #line 107
 	 ||
-	!LoadString(GetModuleHandle(NULL),
+	!LoadStringW(GetModuleHandle(NULL),
 		   SM_HIDE_MOUSE,
-		   szHideMouseMenuStr,
-		   sizeof(szHideMouseMenuStr)/sizeof(char)
+		   wszHideMouseMenuStr,
+		   sizeof(wszHideMouseMenuStr)/sizeof(wchar_t)
 		   )
 	 ||
-	!LoadString(GetModuleHandle(NULL),
+	!LoadStringW(GetModuleHandle(NULL),
 		    SM_DISPLAY_MOUSE,
-		    szDisplayMouseMenuStr,
-		    sizeof(szDisplayMouseMenuStr)/sizeof(char)
+		    wszDisplayMouseMenuStr,
+		    sizeof(wszDisplayMouseMenuStr)/sizeof(wchar_t)
 		    ))
            {
             RaiseException((DWORD)STATUS_INSUFFICIENT_RESOURCES,

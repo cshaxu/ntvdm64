@@ -1399,7 +1399,7 @@ if(!bMouseMenuItemAdded)
    //
 
    hM = ConsoleMenuControl(hBuff,IDM_POINTER,IDM_POINTER);
-   AppendMenu(hM,MF_STRING,IDM_POINTER,szHideMouseMenuStr);
+   AppendMenuW(hM,MF_STRING,IDM_POINTER,wszHideMouseMenuStr);
    bMouseMenuItemAdded=TRUE;
 
    //
@@ -1451,8 +1451,8 @@ hOld = hBuff;
 void MouseHide(void)
 {
 
-ModifyMenu(hM,IDM_POINTER,MF_BYCOMMAND,IDM_POINTER,
-	   (LPTSTR)szDisplayMouseMenuStr);
+ModifyMenuW(hM,IDM_POINTER,MF_BYCOMMAND,IDM_POINTER,
+	   wszDisplayMouseMenuStr);
 
 //
 // Clip the pointer to a region inside the console window
@@ -1468,8 +1468,8 @@ bPointerOff=TRUE;
 void MouseDisplay(void)
 {
 
-ModifyMenu(hM,IDM_POINTER,MF_BYCOMMAND,IDM_POINTER,
-	  (LPTSTR)szHideMouseMenuStr);
+ModifyMenuW(hM,IDM_POINTER,MF_BYCOMMAND,IDM_POINTER,
+	  wszHideMouseMenuStr);
 
 //
 // Let the pointer move anywhere on the screen

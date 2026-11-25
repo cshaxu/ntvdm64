@@ -111,15 +111,22 @@ typedef struct
 
 #ifdef BIGWIN
 
+#if defined(NEC_98)         
+#line 112
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 115
 #define SCALE(value) ((host_screen_scale * (value)) >> 1)
 #define UNSCALE(value) (((value) << 1) / host_screen_scale)
+#endif // !NEC_98
+#line 118
 #define MAX_SCALE(value) ((value) << 1)
 
 #else   /* BIGWIN */
-#line 116
+#line 121
 #error Unsupported excluded original configuration
 #endif /* BIGWIN */
-#line 122
+#line 127
 
 /*@ACW=======================================================================
 Define to access the Console Window handle from VDMConsoleOperation.
@@ -239,6 +246,11 @@ extern BOOL                 FunnyPaintMode;
 
 typedef struct
 {
+#if defined(NEC_98)         
+#line 247
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 260
         void (*cga_text)();
         void (*cga_med_graph)();
         void (*cga_hi_graph)();
@@ -256,6 +268,11 @@ typedef struct
 
 typedef struct
 {
+#if defined(NEC_98)         
+#line 278
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 291
         void (*cga_text)();
         void (*cga_med_graph)();
         void (*cga_hi_graph)();
@@ -389,12 +406,17 @@ extern void nt_v7vga_mono_hi_graph_big(int offset, int screen_x, int screen_y,
 extern void nt_v7vga_mono_hi_graph_huge(int offset, int screen_x, int screen_y,
                          int width, int height);
 #endif /* V7VGA */
+#if defined(NEC_98)         
+#line 425
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 471
 
 #ifdef MONITOR
-#line 393
+#line 473
 #error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #endif /* MONITOR */
-#line 414
+#line 494
 
 void high_stretch3(unsigned char *buffer, int length);
 void high_stretch4(unsigned char *buffer, int length);
@@ -424,10 +446,10 @@ int get_screen_scale IFN0();
 void SetupConsoleMode(void);
 
 #ifdef MONITOR
-#line 443
+#line 523
 #error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #endif /* MONITOR */
-#line 447
+#line 527
 
 void do_new_cursor(void);
 void textResize(void);
@@ -440,7 +462,10 @@ extern word int10_seg;
 extern word int10_caller;
 extern word useHostInt10;
 extern word changing_mode_flag;
+#ifndef NEC_98
 extern boolean host_stream_io_enabled;
+#endif // !NEC_98
+#line 542
 
 
 // from nt_ega.c

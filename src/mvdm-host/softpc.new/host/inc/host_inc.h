@@ -45,7 +45,9 @@
 #define USHORT	NT_USHORT
 #define ULONG	NT_ULONG
 #define UINT	NT_UINT
+#undef INT
 #define INT 	NT_INT
+#undef BOOL
 #define BOOL	NT_BOOL
 #define FLOAT	NT_FLOAT
 //#define DOUBLE	NT_DOUBLE
@@ -67,9 +69,9 @@
 #include <nt_extra.h>
 
 #else   /* !NTVDM */
-#line 70
+#line 72
 #error Unsupported excluded original configuration
 #endif   /* !NTVDM */
-#line 73
+#line 75
 
 #endif  /* _HOST_INC_H */

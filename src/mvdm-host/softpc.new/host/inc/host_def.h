@@ -104,11 +104,25 @@ extern	quick_event_delays	host_delays;
 *	system parameter defines				*
 \***************************************************************/
 #ifndef NUM_PARALLEL_PORTS
+#if defined(NEC_98)
+#line 102
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 104
 #define NUM_PARALLEL_PORTS	3
+#endif // !NEC_98
+#line 106
 #endif /* NUM_PARALLEL_PORTS */
 
 #ifndef NUM_SERIAL_PORTS
+#if defined(NEC_98)
+#line 110
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 112
 #define NUM_SERIAL_PORTS	4
+#endif // !NEC_98
+#line 114
 #endif /* NUM_SERIAL_PORTS */
 
 /***************************************************************\
@@ -144,7 +158,7 @@ extern	quick_event_delays	host_delays;
 
 #define NTVDM	// To enable NT specific base code.
 
-#line 142
+#line 150
 #define PM
 
 #if !defined(MONITOR) && !defined(PROD)
@@ -212,6 +226,9 @@ void InitSound(BOOL);
 
 // from config.c
 extern unsigned char PifFgPriPercent;
+#ifdef ARCX86
+extern BOOL UseEmulationROM;
+#endif
 
 // fomr unix.c
 void WakeUpNow(void);

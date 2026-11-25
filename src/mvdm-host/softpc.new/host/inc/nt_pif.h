@@ -43,6 +43,9 @@ typedef struct
    char IgnoreCmdLineInPIF;
    char IgnoreConfigAutoexec;
    char SubSysId;
+#ifdef JAPAN
+   char IgnoreWIN31JExtention;
+#endif // JAPAN
    } PIF_DATA;
 
 /*================================================================
@@ -95,10 +98,10 @@ with no file open to edit; thus taken as default.
 */
 #define DEFAULTXMSLMT        0xffff
 #else
-#line 98
+#line 101
 #error Unsupported excluded original configuration
 #endif
-#line 101
+#line 104
 
 #define DEFAULTVIDMEM        TEXTMODE
 #define DEFAULTDISPUS        PF_WINDOWED
@@ -144,7 +147,11 @@ extern DWORD dwWNTPifFlags;
 
 void DisablePIFKeySetup(void);
 void EnablePIFKeySetup(void);
+#ifdef DBCS
+VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName, BOOL bFreMem);
+#else // !DBCS
 VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName);
+#endif // !DBCS
 BOOL GetPIFData(PIF_DATA * pd, char *PifName);
 
 extern BOOL IdleDisabledFromPIF;
@@ -153,3 +160,20 @@ extern UCHAR WNTPifFgPr;
 extern UCHAR WNTPifBgPr;
 extern PIF_DATA pfdata;
 extern BOOL bPifFastPaste;
+#ifdef JAPAN
+
+#pragma pack (1)
+typedef struct
+    {
+    unsigned short fSBCSMode;	    // if 1 then then run the app in SBCS mode
+    } PIFAXEXT;
+
+#pragma pack()
+
+#define AXEXTHDRSIG	"AX WIN 3.0 PRIV"
+#define PIFAXEXTSIZE	sizeof(PIFAXEXT)
+#endif // JAPAN
+#if defined(NEC_98) 
+#line 176
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98

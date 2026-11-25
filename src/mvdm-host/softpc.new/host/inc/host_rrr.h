@@ -42,8 +42,8 @@ extern char szSysErrMsg[];
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
 #line 43
-extern char szHideMouseMenuStr[];
-extern char szDisplayMouseMenuStr[];
+extern wchar_t wszHideMouseMenuStr[];
+extern wchar_t wszDisplayMouseMenuStr[];
 
 
 

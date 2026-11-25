@@ -88,29 +88,31 @@ typedef unsigned int         IUH;	    /* Host register sized unsigned quantity *
 #endif
 #line 91
 
+#ifndef STRINGIFY
 #define STRINGIFY(x)	#x
+#endif
 
 #if !defined(_WINDOWS_) && !defined(NT_INCLUDED)   /* Types already defined by windows */
-#line 95
+#line 97
 #error Unsupported excluded original configuration
 #endif
-#line 98
+#line 100
 
 #ifndef NULL
-#line 100
+#line 102
 #error Unsupported excluded original configuration
 #endif
-#line 102
+#line 104
 
 #ifndef BOOL
 #ifdef NT_INCLUDED
-#line 105
+#line 107
 #error Unsupported excluded original configuration
 #else
-#line 109
+#line 111
 #define BOOL UINT
 #endif
-#line 111
+#line 113
 #endif
 
 /*
@@ -225,5 +227,6 @@ typedef unsigned int         IUH;	    /* Host register sized unsigned quantity *
 
 #endif  /* ANSI */
 
+#pragma warning (3:4013)
 
 #endif /* _INSIGNIA_H */
