@@ -1,7 +1,7 @@
 {
   "schema": "ntvdm64.guest-archive.v1",
   "baseline_sha256": "539a910247c5478bde19fb2a431cd4c5ab26355cdc46f8160f49b23f060b495b",
-  "archive_sha256": "61c79cbd7651a1c8c79af9fb77e46c21e1e0981ccaa0d62acae017f6a91c0924",
+  "archive_sha256": "16bcfc214086d71f24c0717f89928732e908c269b76501d8acfbc21e66fc5603",
   "added": [
     "WINNT/EDIT.COM",
     "WINNT/EDIT.HLP",
@@ -145,9 +145,9 @@
     },
     {
       "path": "WINNT/SYSTEM32/GDI.EXE",
-      "bytes": 21504,
-      "sha256": "dfd5dc0236cad81be49070ac00cae78891985af395fa92755a621bd9c82bf3ce",
-      "source": "preserved-approved-baseline-zip",
+      "bytes": 24576,
+      "sha256": "4b9bfeadc6ef5daa48b4861d109355e6bc57e3754b3ec96a5690400cd97e6431",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "GDI",
       "imports": [
@@ -193,8 +193,8 @@
     {
       "path": "WINNT/SYSTEM32/KEYBOARD.DRV",
       "bytes": 2000,
-      "sha256": "c34d7d8d71453dd7567c6db28958a0d4d11e4b198cfc436f4d430d93a5a3584c",
-      "source": "preserved-approved-baseline-zip",
+      "sha256": "7a5740602ef47292583b3ef7f9cc39cb43d3e430cd7b472a84198c6fe3fdd3d4",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "KEYBOARD",
       "imports": [
@@ -212,9 +212,9 @@
     },
     {
       "path": "WINNT/SYSTEM32/KRNL386.EXE",
-      "bytes": 85824,
-      "sha256": "d404576899cc11d23f368f2b30554e6108657cd37809837b341fd37e6b1a7af4",
-      "source": "preserved-approved-baseline-zip",
+      "bytes": 92224,
+      "sha256": "ed5f8afa0f1dbac7af8fbb4ea95f622bb0e85c95fa81d6533145e692d9c4aa38",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "KERNEL",
       "imports": []
@@ -299,8 +299,8 @@
     {
       "path": "WINNT/SYSTEM32/SHELL.DLL",
       "bytes": 5120,
-      "sha256": "b5c132c76b5106be713b2e1b1e519ec9f540a39fcb8efca5ccaa42f16ecca04f",
-      "source": "preserved-approved-baseline-zip",
+      "sha256": "988e406ad8dfa8ebafae9ff86c9631cef97045892813fad570f85f9bbeb44f71",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "SHELL",
       "imports": [
@@ -310,8 +310,8 @@
     {
       "path": "WINNT/SYSTEM32/SOUND.DRV",
       "bytes": 1744,
-      "sha256": "d5932cbd4e0155a07d4d0f64c0f8afcdc3aefe90e06e7265c6651b10c2f03801",
-      "source": "preserved-approved-baseline-zip",
+      "sha256": "4133e6095cdc2a17bd98dc8a845f3738670dfd1a1dc8fcb9ba900b77d9b18efb",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "SOUND",
       "imports": [
@@ -321,8 +321,8 @@
     {
       "path": "WINNT/SYSTEM32/SYSTEM.DRV",
       "bytes": 3360,
-      "sha256": "32d88d68fd5dae0f37766db04742caa912c9a4c7193d15a1e99e617ff6f794a3",
-      "source": "preserved-approved-baseline-zip",
+      "sha256": "104b6ba95431995bc808768819926246078c2353b2ef10baff99ab07ecdba1c9",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "SYSTEM",
       "imports": [
@@ -331,9 +331,9 @@
     },
     {
       "path": "WINNT/SYSTEM32/USER.EXE",
-      "bytes": 50048,
-      "sha256": "6746088f2a87cd366e4ff5da424b39b5bd91586d5f7570afbf3c05bca94e935c",
-      "source": "preserved-approved-baseline-zip",
+      "bytes": 47872,
+      "sha256": "f7323a28ea709ff05ea0f57268a4bc69400627a7912599fc4beb1ea3f67fcd06",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "USER",
       "imports": [
@@ -343,18 +343,18 @@
     },
     {
       "path": "WINNT/SYSTEM32/VGA.DRV",
-      "bytes": 2112,
-      "sha256": "943c2e3499e64157d11c81c85db7586e13af623044880876b390fbfcfac3cfb6",
-      "source": "preserved-approved-baseline-zip",
+      "bytes": 2176,
+      "sha256": "4aa6b6f6598829ba9a02c0abf2de1b622d43b8944824407fc8b03c78b72522e8",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "DISPLAY",
       "imports": []
     },
     {
       "path": "WINNT/SYSTEM/WFWNET.DRV",
-      "bytes": 15744,
-      "sha256": "4c321d43511f845ec1a95518507133d1cf4cf3993bae422037dba95ce6258cca",
-      "source": "preserved-approved-baseline-zip",
+      "bytes": 13600,
+      "sha256": "1ba8df58077ba09b7e3087ccd0503a494d6a6270c046b1e25f2a39331797759e",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "WFWNET",
       "imports": [
@@ -365,8 +365,8 @@
     {
       "path": "WINNT/SYSTEM32/WINSPOOL.EXE",
       "bytes": 2112,
-      "sha256": "e4e787340f124476090ed0f22837d7d7acab37fd7bbe49db46cae9ac4944d535",
-      "source": "preserved-approved-baseline-zip",
+      "sha256": "b54af935980e4fc146deabdc34cfe62aeb931d4571f35f9dcfcf4ea3d332973b",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "WINSPOOL",
       "imports": [
@@ -375,16 +375,15 @@
     },
     {
       "path": "WINNT/SYSTEM32/WOWEXEC.EXE",
-      "bytes": 14480,
-      "sha256": "38ef366eb55aecc63183f32493b837cb4bdf059d969dd27185fce6266cdc074d",
-      "source": "preserved-approved-baseline-zip",
+      "bytes": 10368,
+      "sha256": "ab405391d6fc7fe8b1770f4ef95b3191642ce6885a5672e7ce6554ab7bacd562",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "WOWEXEC",
       "imports": [
         "KERNEL",
         "GDI",
         "USER",
-        "SHELL",
         "KEYBOARD"
       ]
     },
@@ -414,9 +413,9 @@
     },
     {
       "path": "WINNT/SYSTEM/TIMER.DRV",
-      "bytes": 4288,
-      "sha256": "4567fa8b0a10a7b3de47c9366e0a1acfeaf55d1e12387e76c89bbf474b914e5d",
-      "source": "src\\mvdm\\wow16\\timer\\TIMER.DRV",
+      "bytes": 4048,
+      "sha256": "8219968dd335fed31f617ec146d65fbf9d5c10681076d3f762b7d1ec264ebdbf",
+      "source": "XP Professional SP3 x86, T485 H033",
       "format": "NE",
       "module": "TIMER",
       "imports": [
