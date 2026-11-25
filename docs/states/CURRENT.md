@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T485 S3** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. Both installed locations match the twelve-image manifest. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). H012 and H013 bring the total to 13/159. H014 debug is next. See the [H012–H013 receipt](../etc/evidence/t485-s1/h012-h013.md).
+**Active: M0 T485 S3** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. Both installed locations match the twelve-image manifest. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). H014 brings the total to 14/159. H015 disks is next. See the [H014 receipt](../etc/evidence/t485-s1/h014.md).
 
 ## Active Packet
 
@@ -29,7 +29,7 @@
 
 ## Current Technical Baseline
 
-The S3 product25 package is installed. Product24 at e75ceacc0 is the H011 rollback baseline. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. The owner approved local source use on the OpenNT basis. The owner selected English x86 Professional SP3 media. The 61 direct matches were independently verified on the selected disc. Source/media ABI compatibility is verified per batch. The project owner has approved XP source use and ordinary project delivery for all T485 batches. H001 build ownership is traced.
+The S3 product26 package is installed. Commit 556821789 contains the previous product25 package. T485 S1 catalogues 159 batches and 3,986 tracked files. P4 verifies eleven rollback images at both locations. The candidate declares 5.1.2600.1106. Its README reports leaked provenance. The owner approved local source use on the OpenNT basis. The owner selected English x86 Professional SP3 media. The 61 direct matches were independently verified on the selected disc. Source/media ABI compatibility is verified per batch. The project owner has approved XP source use and ordinary project delivery for all T485 batches. H001 build ownership is traced.
 
 ## Recent Governance
 

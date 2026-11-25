@@ -13,14 +13,16 @@ worker_unit("obj/tests/cvidc_vector_binding_fixture.obj" "${NTVDM_REPO}/test/mvd
 worker_unit("obj/tests/cvidc_sas_fixture.obj" "${NTVDM_REPO}/test/mvdm-host/cvidc_sas_fixture.c" "${profile_5}")
 worker_unit("obj/tests/x87_layout_fixture.obj" "${NTVDM_REPO}/test/mvdm-host/x87_layout_fixture.c" "${profile_1}")
 worker_unit("obj/tests/cvidc_vector_provider_stubs.obj" "generated/cvidc_vector_provider_stubs.c" "${profile_1}")
-worker_unit("obj/base-debug/debuggng.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/debug/debuggng.c" "${profile_1}")
-worker_unit("obj/base-debug/ega_dump.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/debug/ega_dump.c" "${profile_1}")
-worker_unit("obj/base-debug/btrace.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/debug/btrace.c" "${profile_1}")
-worker_unit("obj/base-debug/trace.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/debug/trace.c" "${profile_1}")
-worker_unit("obj/base-debug/profile.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/debug/profile.c" "${profile_1}")
-worker_unit("obj/base-debug/pigyoda.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/debug/pigyoda.c" "${profile_1}")
-worker_unit("obj/base-debug/yoda.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/debug/yoda.c" "${profile_1}")
-worker_unit("obj/base-debug/dasm.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/debug/dasm.c" "${profile_1}")
+set(debug_dir "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/debug")
+worker_original_sources(debug_common "${debug_dir}/sources.inc")
+worker_original_sources(debug_x86 "${debug_dir}/sources.inc" i386_SOURCES)
+set(debug_objects)
+foreach(name IN LISTS debug_common debug_x86)
+  get_filename_component(stem "${name}" NAME_WE)
+  set(object "obj/base-debug/${stem}.obj")
+  worker_unit("${object}" "${debug_dir}/${name}" "${profile_1}")
+  list(APPEND debug_objects "${object}")
+endforeach()
 worker_unit("obj/host/ntvdm_entry.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/obj.vdm/ntvdm.c" "${profile_13}")
 worker_resource("obj/host/softpc-resource.res" "${CMAKE_BINARY_DIR}/generated/softpc-embedded-roms.rc" "/nologo /d PROD /I \"${NTVDM_REPO}/src/lib-nxvm\" /I \"${NTVDM_REPO}/src\" /I \"${NTVDM_REPO}/src/non-mvdm/ds/netapi/xactsrv\" /I \"${NTVDM_REPO}/src/compat/include\" /I \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/base/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/windows/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/ds/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/net/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/private/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/ds/netapi/rpcxlate\" /I \"${NTVDM_REPO}/src/non-mvdm/private/windows/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/ddk/inc\" /I \"${NTVDM_REPO}/src/mvdm-host/inc\" /I \"${NTVDM_REPO}/src/compat/include/generated/x86/prod\" /I \"${NTVDM_REPO}/src/mvdm-host/xms.486\" /I \"${NTVDM_REPO}/src/mvdm-host/dpmi32\" /I \"${NTVDM_REPO}/src/mvdm-host/vdmredir\" /I \"${NTVDM_REPO}/src/mvdm-host/softpc.new/base/ccpu386\" /I \"${NTVDM_REPO}/src/mvdm-host/softpc.new/host/inc\" /I \"${NTVDM_REPO}/src/mvdm-host/softpc.new/base/cvidc\" /I \"${NTVDM_REPO}/src/mvdm-host/dos/dem\" /I \"${NTVDM_REPO}/src/mvdm-host/softpc.new/base/inc\"")
 worker_unit("obj/adapter-win32/console_client.obj" "${NTVDM_REPO}/src/ntvdm-exe/win32/console_client.c" "${profile_19}")
@@ -753,7 +755,7 @@ worker_archive("original-mvdm-host-suballoc.lib"
 worker_archive("original-mvdm-host-oemuni.lib"
   "${oemuni_objects}")
 worker_archive("original-softpc-base-trace.lib"
-  "obj/base-debug/debuggng.obj" "obj/base-debug/ega_dump.obj" "obj/base-debug/btrace.obj" "obj/base-debug/trace.obj" "obj/base-debug/profile.obj" "obj/base-debug/pigyoda.obj" "obj/base-debug/yoda.obj" "obj/base-debug/dasm.obj")
+  "${debug_objects}")
 worker_archive("original-softpc-host-roots.lib"
   "${host_objects}" "obj/host/ntvdm_entry.obj")
 worker_archive("original-softpc-host-fixture-roots.lib"

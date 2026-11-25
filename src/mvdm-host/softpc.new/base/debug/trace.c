@@ -74,47 +74,47 @@ void get_lar()
 #line 84
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 87
+#line 89
 }
 
 #endif
 
-#line 91
+#line 93
 #if !defined(PROD) && defined(SPC386)
-#line 92
+#line 94
 #error Unsupported excluded original configuration
 #endif /* !PROD && SPC386 */
-#line 243
+#line 245
 
 void trace(error_msg, dump_info)
 char *error_msg;
 int  dump_info;
 {
 #ifndef PROD
-#line 249
+#line 251
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #else	/* PROD */
-#line 461
+#line 463
 	UNUSED(error_msg);
 	UNUSED(dump_info);
 #endif	/* PROD */
-#line 464
+#line 466
 }
 
 void trace_init()
 {
-#line 468
+#line 470
 #if !defined(PROD) || defined(HUNTER)
-#line 469
+#line 471
 #error Unsupported excluded original configuration
 #endif /* !PROD || HUNTER */
-#line 493
+#line 495
 }
 
 /* Get the code for 4.0 style CPUs */
 #ifndef PROD
-#line 497
+#line 499
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
-#line 559
+#line 561
 
