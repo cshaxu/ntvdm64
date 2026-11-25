@@ -1,7 +1,5 @@
 LIBRARY VDMREDIR
 
-DESCRIPTION 'WOW Network Support - LanMan, NetBIOS, DLC'
-
 EXPORTS
     VrDispatch
     VrInitialized

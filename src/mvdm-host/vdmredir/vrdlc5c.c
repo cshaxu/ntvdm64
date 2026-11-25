@@ -259,7 +259,7 @@ DOS_ADAPTER Adapters[DOS_DLC_MAX_ADAPTERS];
 
 //
 // all functions in DLCAPI.DLL are now called indirected through function pointer
-// create these stupid typedefs to avoid compiler warnings
+// create these typedefs to avoid compiler warnings
 //
 
 typedef ACSLAN_STATUS (*ACSLAN_FUNC_PTR)(IN OUT PLLC_CCB, OUT PLLC_CCB*);
@@ -641,7 +641,7 @@ Return Value:
                 // the following is safe - it is a single byte write
                 //
 
-                pOutputCcb->uchDlcStatus = status;
+                pOutputCcb->uchDlcStatus = (char)status;
 
                 //
                 // the 'immediate' case is now complete, and control can be
@@ -785,7 +785,7 @@ Routine Description:
     the IVT or is close enough to the end of a segment that the address would
     wrap then we return an error
 
-    This is a moronic test, but we do it for compatibility (just in case an
+    This is a useless test, but we do it for compatibility (just in case an
     app tests for the specific error code). There are a million other addresses
     in DOS memory that need to be checked. The tests in this routine will only
     protect against scribbling over the interrupt vectors, but would allow e.g.

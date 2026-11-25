@@ -677,7 +677,7 @@ Return Value:
 
         //
         // count the number of buffers being freed. Hopefully, the application
-        // hasn't screwed over our terminating NULL pointer
+        // hasn't chenged over our terminating NULL pointer
         //
 
         while (pNextBuffer) {
@@ -805,7 +805,7 @@ Return Value:
     // a DOS buffer
     //
 
-    WORD dataLeft;
+    WORD dataLeft = 0;
 
     //
     // calculate the number of DOS buffers required to hold the data frame

@@ -88,7 +88,7 @@ Return Value:
 --*/
 
 {
-    BOOL ok;
+    BOOL ok = TRUE;
 
 #line 90
 #if DBG
@@ -120,5 +120,5 @@ Return Value:
     // basically, nothing to do
     //
 
-    return ok;
+    return (BOOLEAN)ok;
 }

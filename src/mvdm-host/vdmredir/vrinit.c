@@ -633,8 +633,10 @@ Return Value:
         DBGPRINT("VrEoiAndDismissInterrupt\n");
     }
 
+#ifndef NEC_98
     line = -1;
     SoftPcEoi(1, &line);    // non-specific EOI to slave PIC
+#endif
 
     line = -1;
     SoftPcEoi(0, &line);    // non-specific EOI to master PIC

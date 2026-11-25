@@ -159,7 +159,7 @@ Return Value:
         if (ch == '/') {
             ch = '\\';
         } else {
-            ch = toupper(ch);
+            ch = (char)toupper(ch);
 
         }
         if (ch == '\\') {

@@ -95,7 +95,7 @@ typedef LPDWORD ULPDWORD;
 #define NETWORK_LINE    5
 #else
 #define NETWORK_ICA     ICA_SLAVE
-#define NETWORK_LINE    2
+#define NETWORK_LINE    3   /* XP SP3 Professional REDIR.EXE installs INT 73h. */
 #endif
 
 //
