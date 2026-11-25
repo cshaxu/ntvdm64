@@ -21,6 +21,13 @@
 #endif
 #include <windows.h>
 #include <winternl.h>
+
+/* XP ntpsapi.h and ntexapi.h process drive-map query. */
+#define ProcessDeviceMap ((PROCESSINFOCLASS)23)
+#define DOSDEVICE_DRIVE_REMOVABLE 2
+#define DOSDEVICE_DRIVE_FIXED 3
+#define DOSDEVICE_DRIVE_CDROM 5
+#define DOSDEVICE_DRIVE_RAMDISK 6
 #include "wow_user_declarations.h"
 /* Finite original ntdef/ntexapi/ntnls declarations absent from the public
  * Win32 headers. Private NLS/process information is exposed only as opaque
@@ -142,6 +149,12 @@ typedef short CSHORT;
 
 #ifndef NT_SUCCESS
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)
+#endif
+#ifndef STATUS_UNMAPPABLE_CHARACTER
+#define STATUS_UNMAPPABLE_CHARACTER ((NTSTATUS)0xC0000162L)
+#endif
+#ifndef STATUS_SEVERITY_WARNING
+#define STATUS_SEVERITY_WARNING 2
 #endif
 #ifndef STATUS_NO_MEMORY
 #define STATUS_NO_MEMORY ((NTSTATUS)0xC0000017L)

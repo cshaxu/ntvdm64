@@ -39,12 +39,68 @@ typedef struct _OPENNT_OBJECT_NAME_INFORMATION {
     UNICODE_STRING Name;
 } OPENNT_OBJECT_NAME_INFORMATION, *POPENNT_OBJECT_NAME_INFORMATION;
 
+typedef struct _FILE_DIRECTORY_INFORMATION {
+    ULONG NextEntryOffset;
+    ULONG FileIndex;
+    LARGE_INTEGER CreationTime;
+    LARGE_INTEGER LastAccessTime;
+    LARGE_INTEGER LastWriteTime;
+    LARGE_INTEGER ChangeTime;
+    LARGE_INTEGER EndOfFile;
+    LARGE_INTEGER AllocationSize;
+    ULONG FileAttributes;
+    ULONG FileNameLength;
+    WCHAR FileName[1];
+} FILE_DIRECTORY_INFORMATION, *PFILE_DIRECTORY_INFORMATION;
+
+typedef struct _FILE_BASIC_INFORMATION {
+    LARGE_INTEGER CreationTime;
+    LARGE_INTEGER LastAccessTime;
+    LARGE_INTEGER LastWriteTime;
+    LARGE_INTEGER ChangeTime;
+    ULONG FileAttributes;
+} FILE_BASIC_INFORMATION, *PFILE_BASIC_INFORMATION;
+
+typedef struct _FILE_NETWORK_OPEN_INFORMATION {
+    LARGE_INTEGER CreationTime;
+    LARGE_INTEGER LastAccessTime;
+    LARGE_INTEGER LastWriteTime;
+    LARGE_INTEGER ChangeTime;
+    LARGE_INTEGER AllocationSize;
+    LARGE_INTEGER EndOfFile;
+    ULONG FileAttributes;
+} FILE_NETWORK_OPEN_INFORMATION, *PFILE_NETWORK_OPEN_INFORMATION;
+
 typedef enum _ADAPTER_FILE_INFORMATION_CLASS {
     FileBothDirectoryInformation = 3,
+    FileBasicInformation = 4,
+    FileDispositionInformation = 13,
     FileAlignmentInformation = 17
 } ADAPTER_FILE_INFORMATION_CLASS;
 
+#pragma push_macro("DeleteFile")
+#undef DeleteFile
+typedef struct _FILE_DISPOSITION_INFORMATION {
+    BOOLEAN DeleteFile;
+} FILE_DISPOSITION_INFORMATION, *PFILE_DISPOSITION_INFORMATION;
+#pragma pop_macro("DeleteFile")
+
+NTSYSAPI NTSTATUS NTAPI NtQueryFullAttributesFile(
+    POBJECT_ATTRIBUTES ObjectAttributes, PFILE_NETWORK_OPEN_INFORMATION FileInformation);
+
+NTSYSAPI NTSTATUS NTAPI NtSetInformationFile(
+    HANDLE FileHandle, POPENNT_IO_STATUS_BLOCK IoStatusBlock,
+    PVOID FileInformation, ULONG Length, ADAPTER_FILE_INFORMATION_CLASS FileInformationClass);
+
+typedef struct _FILE_FS_ATTRIBUTE_INFORMATION {
+    ULONG FileSystemAttributes;
+    LONG MaximumComponentNameLength;
+    ULONG FileSystemNameLength;
+    WCHAR FileSystemName[1];
+} FILE_FS_ATTRIBUTE_INFORMATION, *PFILE_FS_ATTRIBUTE_INFORMATION;
+
 typedef enum _ADAPTER_FS_INFORMATION_CLASS {
+    FileFsAttributeInformation = 5,
     FileFsDeviceInformation = 4
 } ADAPTER_FS_INFORMATION_CLASS;
 

@@ -49,11 +49,13 @@ USHORT  nDrives = 0;
 CHAR    IsAPresent = TRUE;
 CHAR    IsBPresent = TRUE;
 
+
 /* demSetDefaultDrive - Set the default drive
  *
  *
- * Entry - Client (DL)    Drive to be set
+ * Entry -
  *     Client (DS:SI) Current Directory on that drive
+ *     Client (dl) Zero based DriveNum
  *
  * Exit  - SUCCESS
  *      Client (CY) = 0
@@ -63,11 +65,15 @@ CHAR    IsBPresent = TRUE;
  *      Client (CY) = 1
  *      Current Drive Not Set
  *
- *
  * Notes:
- *  Unlike DOS/CRUISER NT just keeps one current directory for a thread.
- *  So here this routine gets the drive to be set default as well as
- *  the current direcotry on that drive and NT does the job in one shot.
+ *  The DOS keeps a current directory for each of the drives,
+ *  However winnt keeps only one current Drive, Directory per
+ *  process, and it is cmd.exe which associates a current
+ *  directory for each of the drive.
+
+
+
+
  */
 
 VOID demSetDefaultDrive (VOID)
@@ -76,21 +82,71 @@ LPSTR   lpPath;
 
     lpPath = (LPSTR)GetVDMAddr (getDS(),getSI());
 
-    if(*(PCHAR)lpPath != (CHAR)(getDL()+'A')){
-       demPrintMsg(MSG_DEFAULT_DRIVE);
-       setCF(1);
-       setAX(1);
-       return;
-    }
 
-    if (SetCurrentDirectoryOem (lpPath) == FALSE){
-        demClientError(INVALID_HANDLE_VALUE, *lpPath);
-        return;
-    }
+// only in sp4
+#ifdef NOVELL_NETWARE_SETERRORMODE
 
-    setCF(0);
+    //
+    // For removable drives check for media\volume info to avoid triggering
+    // hard errors when no media is present. There exists win32 code
+    // (e.g novell netware redir vdd) which is known to clobber our error
+    // mode setting.
+    //
+    // 16-Jul-1997 Jonle
+    //
+
+    {
+
+    UCHAR DriveType;
+    CHAR DriveNum;
+
+    DriveNum = (CHAR)getDL();
+
+    DriveType = demGetPhysicalDriveType(DriveNum);
+    if (DriveType == DRIVE_REMOVABLE || DriveType == DRIVE_CDROM) {
+        VOLINFO VolInfo;
+
+          //
+          // if No Media in drive, the drive is still valid,
+          // but the win32 curdir is still the old one.
+          //
+
+        if (!GetMediaId(DriveNum, &VolInfo)) {
+            if (GetLastError() == ERROR_INVALID_DRIVE) {
+                setCF(1);
+                }
+            else {
+                setCF(0);
+                }
+            return;
+            }
+        }
+    }
+#endif
+
+
+    if (!SetCurrentDirectoryOem(lpPath) && GetLastError() == ERROR_INVALID_DRIVE) {
+
+        //
+        // Only return error if drive was invalid, the DOS doesn't check
+        // for curdir when changing drives. Note that a number of old dos
+        // apps will walk all of the drives, and do setdefaultdrive,
+        // to determine the valid drives letters. The SetCurrentDirectoryOem
+        // causes ntio to touch the drive and verify that the dir exists.
+        // This is a significant performance problem for removable media
+        // and network drives, but we have no choice since locking the
+        // current dir for this drive is mandatory for winnt.
+        //
+
+        setCF(1);
+        }
+    else {
+        setCF(0);
+        }
+
     return;
 }
+
 
 /* demGetBootDrive - Get the boot drive
  *
@@ -108,6 +164,20 @@ LPSTR   lpPath;
 
 VOID demGetBootDrive (VOID)
 {
+#if defined(NEC_98)                                    // NTBUG #98466
+    CHAR szBootDir[MAX_PATH];
+    BYTE Drive = 1;     // default it to 'A:'
+    UINT retCode;
+
+    retCode = GetSystemDirectory(szBootDir,MAX_PATH);
+    if (retCode == 0 || retCode > MAX_PATH){
+        // error: can't get path
+        goto DefaultBootDrive;
+    }
+    szBootDir[2] = '\\';
+    szBootDir[3] = '\0';
+
+#else  // !NEC_98
     HKEY hKey;
     DWORD retCode;
     DWORD dwType, cbData = MAX_PATH;
@@ -139,6 +209,7 @@ VOID demGetBootDrive (VOID)
         // error: can't find key
         goto DefaultBootDrive;
     }
+#endif // NEC_98
 
     if (GetDriveType(szBootDir) != DRIVE_FIXED) {
         // error: drive is not a valid boot drive
@@ -234,104 +305,34 @@ demGetPhysicalDriveType(
 //
 // worker function for DemGetDrives
 //
-UCHAR GetPhysicalDriveType(UCHAR DriveNum)
+UCHAR
+DosDeviceDriveTypeToPhysicalDriveType(
+      UCHAR DeviceDriveType
+      )
 {
+   switch (DeviceDriveType) {
+        case DOSDEVICE_DRIVE_REMOVABLE:
+            return DRIVE_REMOVABLE;
 
-    NTSTATUS Status;
-    HANDLE Handle;
-    UCHAR  uchRet;
-    OBJECT_ATTRIBUTES Obja;
-    IO_STATUS_BLOCK IoStatusBlock;
-    OEM_STRING OemString;
-    UNICODE_STRING UniString;
-    UNICODE_STRING FileName;
-    FILE_FS_DEVICE_INFORMATION DeviceInfo;
-    CHAR  RootName[] = "A:\\";
-    WCHAR wRootName[sizeof(RootName)*sizeof(WCHAR)];
+        case DOSDEVICE_DRIVE_FIXED:
+            return DRIVE_FIXED;
 
-    OemString.Buffer = RootName;
-    OemString.Length = sizeof(RootName) - 1;
-    OemString.MaximumLength = sizeof(RootName);
-    UniString.Buffer = wRootName;
-    UniString.MaximumLength = sizeof(wRootName);
+        case DOSDEVICE_DRIVE_CDROM:
+            return DRIVE_CDROM;
 
-    RootName[0] = 'A' + DriveNum;
-    Status = RtlOemStringToUnicodeString(&UniString,&OemString,FALSE);
-    if (!NT_SUCCESS(Status) ||
-        !RtlDosPathNameToNtPathName_U(wRootName, &FileName, NULL, NULL) )
-       {
-        return DRIVE_UNKNOWN;
+        case DOSDEVICE_DRIVE_RAMDISK:
+            return DRIVE_RAMDISK;
+
         }
 
-    uchRet = DRIVE_UNKNOWN;
-    InitializeObjectAttributes(&Obja,
-                               &FileName,
-                               OBJ_CASE_INSENSITIVE,
-                               NULL,
-                               NULL
-                               );
+   //case DOSDEVICE_DRIVE_REMOTE:
+   //case DOSDEVICE_DRIVE_UNKNOWN:
+   //default:
 
-    //
-    // Open the file, excluding directories
-    //
-    FileName.Length -= sizeof(WCHAR);
-    Status = NtOpenFile(
-                &Handle,
-                FILE_READ_ATTRIBUTES | SYNCHRONIZE,
-                &Obja,
-                &IoStatusBlock,
-                FILE_SHARE_READ | FILE_SHARE_WRITE,
-                FILE_SYNCHRONOUS_IO_NONALERT | FILE_NON_DIRECTORY_FILE
-                );
 
-        // subst drives are not physical drives (actually dirs)
-    if (!NT_SUCCESS(Status)) {
-        goto GPDExitClean;
-        }
-
-    //
-    // Determine if this is a network or disk file system. If it
-    // is a disk file system determine if this is removable or not
-    //
-
-    Status = NtQueryVolumeInformationFile(
-                Handle,
-                &IoStatusBlock,
-                &DeviceInfo,
-                sizeof(DeviceInfo),
-                FileFsDeviceInformation
-                );
-
-    NtClose(Handle);
-    if (!NT_SUCCESS(Status) ||
-        DeviceInfo.Characteristics & FILE_REMOTE_DEVICE)
-       {
-        goto GPDExitClean;
-        }
-
-    switch ( DeviceInfo.DeviceType ) {
-
-        case FILE_DEVICE_CD_ROM:
-        case FILE_DEVICE_CD_ROM_FILE_SYSTEM:
-            uchRet = DRIVE_CDROM;
-            break;
-
-        case FILE_DEVICE_VIRTUAL_DISK:
-            uchRet = DRIVE_RAMDISK;
-            break;
-
-        case FILE_DEVICE_DISK:
-        case FILE_DEVICE_DISK_FILE_SYSTEM:
-            uchRet = DeviceInfo.Characteristics & FILE_REMOVABLE_MEDIA
-                      ? DRIVE_REMOVABLE : DRIVE_FIXED;
-            break;
-        }
-
-GPDExitClean:
-    RtlFreeHeap(RtlProcessHeap(), 0, FileName.Buffer);
-
-    return uchRet;
+   return DRIVE_UNKNOWN;
 }
+
 
 
 
@@ -355,69 +356,61 @@ GPDExitClean:
 
 VOID demGetDrives (VOID)
 {
-    UCHAR    DriveType;
+    NTSTATUS Status;
     UCHAR    DriveNum;
-    char     RootName[]="?:\\";
+    UCHAR    DriveType;
     BOOL     bCounting;
 
-    //
-    // Initialize the local drive list with Drive type
-    //
-    DriveNum = 0;
+    PROCESS_DEVICEMAP_INFORMATION ProcessDeviceMapInfo;
+
+    Status = NtQueryInformationProcess( NtCurrentProcess(),
+                                        ProcessDeviceMap,
+                                        &ProcessDeviceMapInfo.Query,
+                                        sizeof(ProcessDeviceMapInfo.Query),
+                                        NULL
+                                      );
+    if (!NT_SUCCESS(Status)) {
+        RtlZeroMemory( &ProcessDeviceMapInfo, sizeof(ProcessDeviceMapInfo));
+        }
 
     //
-    // Use win32 for A and B, to prevent the fs from trying to
-    // read floppy drives. Make a special check for subst drives
-    // which get returned as DRIVE_FIXED. (subst drives don't qualify
-    // as physical drives).
+    // A and B are special cases.
+    // if A doesn't exist means b also doesn't exist
     //
-    do {
 
-        RootName[0] = 'A' + DriveNum;
-        DriveType = GetDriveTypeOem(RootName);
+    PhysicalDriveTypes[0] = DosDeviceDriveTypeToPhysicalDriveType(
+                                        ProcessDeviceMapInfo.Query.DriveType[0]
+                                        );
 
-        switch (DriveType) {
-            case DRIVE_NO_ROOT_DIR:
-            case DRIVE_REMOTE:
-                 DriveType = DRIVE_UNKNOWN;
-                 break;
-
-            case DRIVE_FIXED:  // check for substd drive ...
-                 DriveType = GetPhysicalDriveType(DriveNum);
-                 break;
-            }
-
-        PhysicalDriveTypes[DriveNum] = DriveType;
-
-        } while (++DriveNum < 2);
-
-
-        // if A doesn't exist means b also doesn't exist
-    DriveType = PhysicalDriveTypes[0];
-    if (DriveType == DRIVE_UNKNOWN) {
+    if (PhysicalDriveTypes[0] == DRIVE_UNKNOWN) {
         IsAPresent = FALSE;
         IsBPresent = FALSE;
         }
 
-    DriveType = PhysicalDriveTypes[1];
-    if (DriveType == DRIVE_UNKNOWN) {
+
+    PhysicalDriveTypes[1] = DosDeviceDriveTypeToPhysicalDriveType(
+                                  ProcessDeviceMapInfo.Query.DriveType[1]
+                                  );
+
+    if (PhysicalDriveTypes[1] == DRIVE_UNKNOWN) {
         IsBPresent = FALSE;
         }
 
+    DriveNum = 2;
     nDrives = 2;
     bCounting = TRUE;
 
     do {
-        DriveType = GetPhysicalDriveType(DriveNum);
 
-        RootName[0] = 'A' + DriveNum;
+        PhysicalDriveTypes[DriveNum] = DosDeviceDriveTypeToPhysicalDriveType(
+                                            ProcessDeviceMapInfo.Query.DriveType[DriveNum]
+                                            );
 
-        PhysicalDriveTypes[DriveNum] = DriveType;
         if (bCounting) {
-            if (DriveType == DRIVE_REMOVABLE ||
-                DriveType == DRIVE_FIXED ||
-                DriveType == DRIVE_CDROM ||
-                DriveType == DRIVE_RAMDISK )
+            if (PhysicalDriveTypes[DriveNum] == DRIVE_REMOVABLE ||
+                PhysicalDriveTypes[DriveNum] == DRIVE_FIXED ||
+                PhysicalDriveTypes[DriveNum] == DRIVE_CDROM ||
+                PhysicalDriveTypes[DriveNum] == DRIVE_RAMDISK )
               {
                 nDrives++;
                 }
@@ -426,11 +419,13 @@ VOID demGetDrives (VOID)
                 }
             }
 
-      } while (++DriveNum < 26);
+        } while (++DriveNum < 26);
+
 
     setAX(nDrives);
     setCF(0);
     return;
+
 }
 
 

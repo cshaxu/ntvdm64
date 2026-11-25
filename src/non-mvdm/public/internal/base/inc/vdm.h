@@ -91,8 +91,9 @@ typedef struct _VdmVirtualIca{
 
 
 #if defined(i386)
-#error Unsupported excluded original configuration
-#line 97
+#define VDM_PM_IRETBOPSEG  0x147
+#define VDM_PM_IRETBOPOFF  0x6
+#define VDM_PM_IRETBOPSIZE 8
 #else
 #line 98
 #define VDM_PM_IRETBOPSEG  0xd3

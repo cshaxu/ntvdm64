@@ -4,6 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#define CCPU 1
+#define DECLARE_LocalVdmContext
+#define DBGTRACE(...) ((void)0)
+#define EFLAGS_RF_MASK 0x10000u
+#define getMODE() (msw & MSW_PE)
 #define MSW_PE 1u
 #define EFLAGS_NT_MASK 0x4000u
 #define LDT_SIZE 8192u
@@ -12,7 +17,7 @@ static ULONG flags, msw, cs, ss, ds, es, fs, gs, eip, esp, cpl;
 static ULONG Cpu40GdtShadowAddress, gdt, idt;
 static BOOL valid_idt;
 static unsigned writes, reentries, bad_order;
-#define getSS() ss
+#define getSS() ((USHORT)ss)
 #define getSP() ((USHORT)esp)
 #define getMSW() msw
 #define getEFLAGS() flags
@@ -33,8 +38,8 @@ static void setMSW(ULONG value) {
 #define setGS(v) (writes++, gs=(v))
 #define setEIP(v) (writes++, eip=(v))
 #define setESP(v) (writes++, esp=(v))
-static PCHAR Sim32GetVDMPointer(ULONG address, ULONG size, UCHAR pm) {
-    if (address != 0x10000020u || size != 0 || pm != 0) ++bad_order;
+static PCHAR VdmMapFlat(USHORT segment, ULONG offset, ULONG pm) {
+    if (segment != 0x1000 || offset != 0x20 || pm != 0) ++bad_order;
     return (PCHAR)frame;
 }
 static void c_setGDT_BASE_LIMIT(ULONG base, USHORT limit) {
@@ -69,18 +74,18 @@ int main(void) {
     memcpy(frame+12,&cs0,2);
     /* Exhaust every low FLAGS combination, including NT absent/present,
      * both IF states, every IOPL and arithmetic/direction flags. */
-    for(test=0;test<65536+2;test++) {
-        input=test<65536 ? test : 0x7297u;
+    for(test=0;test<131072+2;test++) {
+        input=test<131072 ? test : 0x7297u;
         flags=input; msw=0x10; ss=0x1000; esp=0x20;
         cs=ds=es=fs=gs=0x1000; cpl=0; eip=0;
         writes=reentries=bad_order=0; gdt=idt=0;
-        valid_idt=test!=65536;
-        Cpu40GdtShadowAddress=test==65537 ? 0 : 0x11000;
+        valid_idt=test!=131072;
+        Cpu40GdtShadowAddress=test==131073 ? 0 : 0x11000;
         switch_to_protected_mode();
         if (!valid_idt) {
             failed += flags!=input || msw!=0x10 || writes || reentries;
         } else {
-            failed += flags!=(input & ~EFLAGS_NT_MASK) || msw!=0x11 ||
+            failed += flags!=(input & ~(EFLAGS_NT_MASK | EFLAGS_RF_MASK)) || msw!=0x11 ||
                 cs!=cs0 || ss!=ss0 || ds!=ds0 || es || fs || gs ||
                 eip!=ip0 || esp!=sp0 || cpl!=3 || reentries!=1 ||
                 idt!=0x22000 || gdt!=Cpu40GdtShadowAddress;

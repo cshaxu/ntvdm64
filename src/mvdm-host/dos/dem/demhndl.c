@@ -31,6 +31,8 @@ extern BOOL IsVdmRedirLoaded(VOID);
  * Entry - Client (AX:BP) File Handle
  *         Client (CX:DX) File position (if -1 no seek needed before closing
  *                        the handle.
+ *         (VadimB)
+ *         Client (es:di) SFT ptr - this is implied in abort.asm code
  *
  * Exit
  *         SUCCESS
@@ -98,7 +100,7 @@ USHORT  usDX,usCX;
  * Entry - Client (AX:BP) File Handle
  *         Client (CX)    Count to read
  *         Client (DS:DX) Buffer Address
- *         Client (BX:SI) = current file pointer location. 
+ *         Client (BX:SI) = current file pointer location.
  *         ZF = 1 if seek is not needed prior to read.
  *
  * Exit
@@ -253,7 +255,7 @@ readSuccessExit:
  * Entry - Client (AX:BP) File Handle
  *         Client (CX)    Count to write
  *         Client (DS:DX) Buffer Address
- *         Client (BX:SI) = current file pointer location. 
+ *         Client (BX:SI) = current file pointer location.
  *         ZF = 1 if seek is not needed prior to write.
  *
  * Exit
@@ -344,11 +346,11 @@ mvdm_guest_location_lease bufferLease;
            lpBuf,
            (DWORD)getCX(),
            &dwBytesWritten,
-	   NULL) == FALSE){
+           NULL) == FALSE){
 
-	// If disk is full then we should return 0 byte written and CF is clear
-	dwErrCode = GetLastError();
-	if(dwErrCode == ERROR_DISK_FULL) {
+        // If disk is full then we should return 0 byte written and CF is clear
+        dwErrCode = GetLastError();
+        if(dwErrCode == ERROR_DISK_FULL) {
 
 	    (void)mvdm_guest_location_release(&bufferLease, FALSE);
 #line 322
@@ -357,7 +359,7 @@ mvdm_guest_location_lease bufferLease;
 	    return;
 	}
 
-	SetLastError(dwErrCode);
+        SetLastError(dwErrCode);
 
 writeFailureExit:
     (void)mvdm_guest_location_release(&bufferLease, FALSE);
@@ -427,6 +429,15 @@ DWORD   dwLoc;
 }
 
 
+#if 0
+
+/*
+ * Completely moved to demlfn.c
+ *
+ *
+ *
+ */
+
 /* demFileTimes - Change or Get File date and times
  *
  * GET TIME (Client(BL) = 0)
@@ -463,21 +474,21 @@ DWORD   dwLoc;
  *
  *          Hard Error Exit
  *              Client(CF) = 1
- *		Client(AX) = 0FFFFh
+ *              Client(AX) = 0FFFFh
  *
  * GET TIME For device (Client(BL) = 2)
  *
  *          Entry
  *              Client(AX:BP)
- *		    NT Handle  - not in use
+ *                  NT Handle  - not in use
  *
  *          Exit
  *              SUCCESS
  *                  Client(CF) = 0
- *		    Client(CX) = Current time
- *		    Client(DX) = Curren  date
- *		FAILURE
- *		    None
+ *                  Client(CX) = Current time
+ *                  Client(DX) = Curren  date
+ *              FAILURE
+ *                  None
  *
  */
 
@@ -487,32 +498,32 @@ HANDLE  hFile;
 WORD    wDate,wTime;
 FILETIME LastWriteTime,ftTemp;
 SYSTEMTIME stCurrentTime;
-UCHAR	uchOpt = 0;
+UCHAR   uchOpt = 0;
 
     uchOpt = getBL();
     if(uchOpt != 2)
-	hFile = GETHANDLE(getAX(),getBP());
+        hFile = GETHANDLE(getAX(),getBP());
 
     if(uchOpt != 1){
 
-	if(!uchOpt) {
-	    if(GetFileTime (hFile,NULL,NULL,&LastWriteTime) == -1){
-		demClientError(hFile, (CHAR)-1);
-		return;
-	    }
-	}
-	else {		// Device case. We should return current time
-	    GetSystemTime(&stCurrentTime);
-	    SystemTimeToFileTime(&stCurrentTime, &LastWriteTime);
+        if(!uchOpt) {
+            if(GetFileTime (hFile,NULL,NULL,&LastWriteTime) == -1){
+                demClientError(hFile, (CHAR)-1);
+                return;
+            }
+        }
+        else {          // Device case. We should return current time
+            GetSystemTime(&stCurrentTime);
+            SystemTimeToFileTime(&stCurrentTime, &LastWriteTime);
 
-	}
+        }
 
-	FileTimeToLocalFileTime (&LastWriteTime,&ftTemp);
-	if(FileTimeToDosDateTime(&ftTemp,
+        FileTimeToLocalFileTime (&LastWriteTime,&ftTemp);
+        if(FileTimeToDosDateTime(&ftTemp,
                                  (LPWORD)&wDate,
                                  (LPWORD)&wTime) == FALSE){
             demPrintMsg(MSG_TIMEDATE);
-	    setCF(0);
+            setCF(0);
             return;
         }
 
@@ -528,9 +539,9 @@ UCHAR	uchOpt = 0;
     if (DosDateTimeToFileTime(wDate,
                               wTime,
                               &LastWriteTime) == FALSE){
-	demPrintMsg(MSG_TIMEDATE);
-	setCF(0);
-	return;
+        demPrintMsg(MSG_TIMEDATE);
+        setCF(0);
+        return;
     }
     LocalFileTimeToFileTime (&LastWriteTime,&ftTemp);
 
@@ -543,6 +554,9 @@ UCHAR	uchOpt = 0;
     return;
 }
 
+#endif
+
+
 /* DemCommit -- Commit File(Flush file buffers)
  *
  * Entry - Client (AX:BP) File Handle
@@ -550,7 +564,7 @@ UCHAR	uchOpt = 0;
  * Exit
  *         SUCCESS
  *           Client (CY)    = 0
- *	     buffer flushed
+ *           buffer flushed
  *
  *         FAILURE
  *           Client (CY) = 1
@@ -579,7 +593,7 @@ VOID demCommit(VOID)
 
    Input:   Client (AX:BP) = 32bits NT file handle
    Output:  Client ZF = 1 if new data or EOF
-		   CF = 1 if EOF
+                   CF = 1 if EOF
 */
 
 
@@ -595,14 +609,14 @@ VOID demPipeFileDataEOF(VOID)
 
     DataEOF = cmdPipeFileDataEOF(hFile, &fEOF);
     if (fEOF) {
-	//EOF, get file size, max size = 32bits
-	FileSizeLow = GetFileSize(hFile, &FileSizeHigh);
-	setAX((WORD)(FileSizeLow / 0x10000));
-	setBP((WORD)FileSizeLow);
-	setCF(1);		    // EOF is encountered
+        //EOF, get file size, max size = 32bits
+        FileSizeLow = GetFileSize(hFile, &FileSizeHigh);
+        setAX((WORD)(FileSizeLow / 0x10000));
+        setBP((WORD)FileSizeLow);
+        setCF(1);                   // EOF is encountered
     }
     else
-	setCF(0);
+        setCF(0);
     setZF(DataEOF ? 0 : 1);
 }
 
@@ -619,11 +633,12 @@ VOID demPipeFileEOF(VOID)
 
     hFile = GETHANDLE(getAX(), getBP());
     if (cmdPipeFileEOF(hFile)) {
-	FileSizeLow = GetFileSize(hFile, &FileSizeHigh);
-	setAX((WORD)(FileSizeLow / 0x10000));	// file size in 32bits
-	setBP((WORD)FileSizeLow);
-	setCF(1);		    //EOF is encountered
+        FileSizeLow = GetFileSize(hFile, &FileSizeHigh);
+        setAX((WORD)(FileSizeLow / 0x10000));   // file size in 32bits
+        setBP((WORD)FileSizeLow);
+        setCF(1);                   //EOF is encountered
     }
     else
-	setCF(0);
+        setCF(0);
 }
+

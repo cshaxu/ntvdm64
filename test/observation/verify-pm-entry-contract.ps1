@@ -6,7 +6,7 @@ if (!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
     throw 'Fresh build-owned evidence root required'
 }
 New-Item -ItemType Directory -Path $out | Out-Null
-$source=Join-Path $repo 'src/mvdm-host/dpmi32/i386/dpmi386.c'
+$source=Join-Path $repo 'src/mvdm-host/dpmi32/modesw.c'
 $fixture=Join-Path $repo 'test/mvdm-host/dpmi/pm_entry_contract_fixture.c'
 & "$repo/tools/build-fixtures.cmd" x86 pm-entry-contract *> "$out/build.log"
 if ($LASTEXITCODE) { throw 'Native PM entry fixture build failed' }

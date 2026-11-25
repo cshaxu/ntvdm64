@@ -48,6 +48,7 @@ PVDD_USER_HANDLERS UserHookHead= NULL;
 extern BOOL CMDInit (int argc,char *argv[]);
 extern BOOL XMSInit (int argc,char *argv[]);
 extern BOOL DBGInit (int argc,char *argv[]);
+extern VOID DpmiEnableIntHooks (VOID);
 extern DWORD TlsDirectError;
 extern VOID FloppyTerminatePDB(USHORT PDB);
 extern VOID FdiskTerminatePDB(USHORT PDB);
@@ -94,6 +95,8 @@ void scs_init(int argc, char **argv)
 #line 90
         TerminateVDM();
     }
+
+    DpmiEnableIntHooks();
 }
 
 //
@@ -108,7 +111,7 @@ InitialiseDosEmulation(int argc, char **argv)
     DWORD    FileSize;
     DWORD    BytesRead;
     DWORD    dw;
-    ULONG    fVirtualInt;
+    ULONG    fVirtualInt, fTemp;
     host_addr  pDOSAddr;
     CHAR  buffer[MAX_PATH*2];
 #ifdef LIM
@@ -132,6 +135,7 @@ InitialiseDosEmulation(int argc, char **argv)
 #error Unsupported excluded original configuration
 #endif
 #line 128
+    fVirtualInt &= ~VDM_BREAK_DEBUGGER;
     sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);
 
     io_init();
@@ -155,6 +159,7 @@ InitialiseDosEmulation(int argc, char **argv)
     reset();
 
     SetupInstallableVDD ();
+    SbInitialize ();
     /* reserve lim block after all vdd are installed.
        the pif file settings tell us if it is necessary to
        reserve the block
@@ -171,6 +176,18 @@ InitialiseDosEmulation(int argc, char **argv)
 #endif
 
      scs_init(argc, argv);           // Initialise single command shell
+
+     //
+     // Routines called in scs_init may have added bits to the vdmstate flags.
+     // read it in so we can preserve the state
+     //
+
+     sas_loads((ULONG)FIXED_NTVDMSTATE_LINEAR,
+              (PCHAR)&fTemp,
+              FIXED_NTVDMSTATE_SIZE
+              );
+
+     fVirtualInt |= fTemp;
 
      /*................................................. Load DOSEM code */
 

@@ -18,42 +18,24 @@ Author:
 Notes:
 
     Moved from dpmi32\i386
-    
+
 Revision History:
 
-    09-Feb-1994 (daveh) 
+    09-Feb-1994 (daveh)
         Modified to be the common front end for the memory allocation.  Calls
         processor specific code to do actual allocation
-        
+
 --*/
 #include "precomp.h"
 #pragma hdrstop
 #include "softpc.h"
 #include <malloc.h>
 
-//
-// Xmem structure
-//
-typedef struct _Xmem {
-    PVOID Address;
-    ULONG Length;
-    struct _Xmem * Prev;
-    struct _Xmem * Next;
-    WORD Owner;
+MEM_DPMI XmemHead = { NULL, 0, &XmemHead, &XmemHead, 0};
 
-} XMEM_BLOCK, *PXMEM_BLOCK;
-
-XMEM_BLOCK  XmemHead = { NULL, 0, &XmemHead, &XmemHead, 0};
-
-#define DELETE_BLOCK(BLK)   (BLK->Prev)->Next = BLK->Next;\
-                (BLK->Next)->Prev = BLK->Prev
-
-#define INSERT_BLOCK(BLK)   BLK->Next = XmemHead.Next; BLK->Prev= XmemHead.Next->Prev;\
-                (XmemHead.Next)->Prev = BLK; XmemHead.Next = BLK
-
-VOID
+PMEM_DPMI
 DpmiAllocateXmem(
-    VOID
+    ULONG BlockSize
     )
 /*++
 
@@ -73,14 +55,13 @@ Return Value:
 
 --*/
 {
-    ULONG BlockAddress, BlockSize;
+    ULONG BlockAddress;
     NTSTATUS Status;
-    PXMEM_BLOCK XmemBlock;
+    PMEM_DPMI XmemBlock;
 
     //
     // Get a block of memory from NT (any base address)
     //
-    BlockSize = ((ULONG)getBX() << 16) | getCX();
     BlockAddress = 0;
     Status = DpmiAllocateVirtualMemory(
         (PVOID)&BlockAddress,
@@ -88,45 +69,34 @@ Return Value:
         );
 
     if (!NT_SUCCESS(Status)) {
-        setCF(1);
-#line 92
 #if DBG
 #line 93
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 95
-        return;
+        return NULL;
     }
-    XmemBlock = malloc(sizeof(XMEM_BLOCK));
+    XmemBlock = malloc(sizeof(MEM_DPMI));
     if (!XmemBlock) {
-        setCF(1);
         DpmiFreeVirtualMemory(
             (PVOID)&BlockAddress,
             &BlockSize
             );
-        return;
+        return NULL;
     }
     XmemBlock->Address = (PVOID)BlockAddress;
     XmemBlock->Length = BlockSize;
-    XmemBlock->Owner = getDX();
-    INSERT_BLOCK(XmemBlock);
+    XmemBlock->Owner = CurrentPSPSelector;
+    XmemBlock->Sel = 0;
+    XmemBlock->SelCount = 0;
+    INSERT_BLOCK(XmemBlock, XmemHead);
 
-    //
-    // Return the information about the block
-    //
-    setBX((USHORT)(BlockAddress >> 16));
-    setCX((USHORT)(BlockAddress & 0x0000FFFF));
-    //
-    // Use xmem block addresss as handle
-    //
-    setSI((USHORT)((ULONG)XmemBlock >> 16));
-    setDI((USHORT)((ULONG)XmemBlock & 0x0000FFFF));
-    setCF(0);
+    return XmemBlock;
+
 }
 
-VOID
+BOOL
 DpmiFreeXmem(
-    VOID
+    PMEM_DPMI XmemBlock
     )
 /*++
 
@@ -144,12 +114,10 @@ Return Value:
 
 --*/
 {
-    PXMEM_BLOCK XmemBlock;
     NTSTATUS Status;
     PVOID BlockAddress;
     ULONG BlockSize;
 
-    XmemBlock = (PVOID)(((ULONG)getSI() << 16) | getDI());
 
     BlockAddress = XmemBlock->Address;
     BlockSize = XmemBlock->Length;
@@ -160,26 +128,90 @@ Return Value:
         );
 
     if (!NT_SUCCESS(Status)) {
-        setCF(1);
-#line 161
 #if DBG
 #line 162
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 164
-        return;
+        return FALSE;
     }
 
     DELETE_BLOCK(XmemBlock);
 
     free(XmemBlock);
-    setCF(0);
-    return;
+    return TRUE;
 }
 
-VOID
+BOOL
+DpmiIsXmemHandle(
+    PMEM_DPMI XmemBlock
+    )
+/*++
+
+Routine Description:
+
+    This routine verifies that the given handle is a valid xmem handle.
+
+Arguments:
+
+    Handle to be verified.
+
+Return Value:
+
+    TRUE if handle is valid, FALSE otherwise.
+
+--*/
+{
+    PMEM_DPMI p1;
+
+    p1 = XmemHead.Next;
+
+    while(p1 != &XmemHead) {
+        if (p1 == XmemBlock) {
+            return TRUE;
+        }
+        p1 = p1->Next;
+    }
+    return FALSE;
+}
+
+PMEM_DPMI
+DpmiFindXmem(
+    USHORT Sel
+    )
+/*++
+
+Routine Description:
+
+    This routine finds a block of "extended" memory based on its Selector
+    field.
+
+Arguments:
+
+    None.
+
+Return Value:
+
+    None.
+
+--*/
+{
+    PMEM_DPMI p1;
+
+    p1 = XmemHead.Next;
+
+    while(p1 != &XmemHead) {
+        if (p1->Sel == Sel) {
+            return p1;
+        }
+        p1 = p1->Next;
+    }
+    return NULL;
+}
+
+BOOL
 DpmiReallocateXmem(
-    VOID
+    PMEM_DPMI OldBlock,
+    ULONG NewSize
     )
 /*++
 
@@ -198,12 +230,9 @@ Return Value:
 
 --*/
 {
-    PXMEM_BLOCK OldBlock;
-    ULONG BlockAddress, NewSize;
+    ULONG BlockAddress;
     NTSTATUS Status;
 
-    OldBlock = (PVOID)(((ULONG)getSI() << 16) | getDI());
-    NewSize = (((ULONG)getBX() << 16) | getCX());
 
     BlockAddress = 0;
     Status = DpmiReallocateVirtualMemory(
@@ -213,29 +242,18 @@ Return Value:
         &NewSize
         );
 
-#line 210
-    if (!Status) {
-#line 211
-        setCF(1);
-#line 212
+    if (!NT_SUCCESS(Status)) {
 #if DBG
 #line 213
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 215
-        return;
+        return FALSE;
     }
 
     OldBlock->Address = (PVOID)BlockAddress;
     OldBlock->Length = NewSize;
-    
-    //
-    // Return the information about the block
-    //
-    setBX((USHORT)(BlockAddress >> 16));
-    setCX((USHORT)(BlockAddress & 0x0000FFFF));
-  
-    setCF(0);
+
+    return TRUE;
 }
 
 VOID
@@ -258,18 +276,15 @@ Return Value:
     FALSE if unable to release the memory
 --*/
 {
-    PXMEM_BLOCK p1, p2;
+    PMEM_DPMI p1, p2;
     NTSTATUS Status;
     PVOID BlockAddress;
     ULONG BlockSize;
-    WORD  selClientPSP;
-
 
     p1 = XmemHead.Next;
-    selClientPSP = getDX();
 
     while(p1 != &XmemHead) {
-        if (p1->Owner == selClientPSP) {
+        if (p1->Owner == CurrentPSPSelector) {
             BlockAddress = p1->Address;
             BlockSize = p1->Length;
 
@@ -311,18 +326,18 @@ Routine Description:
 Arguments:
 
     none
-    
+
 Return Value:
 
     None.
 
 --*/
 {
-    PXMEM_BLOCK p1, p2;
+    PMEM_DPMI p1, p2;
     NTSTATUS Status;
     PVOID BlockAddress;
     ULONG BlockSize;
-    
+
     p1 = XmemHead.Next;
     while(p1 != &XmemHead) {
         BlockAddress = p1->Address;

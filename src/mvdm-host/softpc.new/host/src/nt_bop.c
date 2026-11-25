@@ -308,10 +308,10 @@ void MS_bop_4(void)
 
 #line 319
     sas_load( ((ULONG)getCS()<<4) + getIP(), &Command);
+    setIP((USHORT)(getIP() + 1));
     if (mvdm_vm_command_enter(Command)) return;
 #line 320
     CmdDispatch((ULONG) Command);
-    setIP((USHORT)(getIP() + 1));
 }
 
 

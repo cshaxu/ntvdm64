@@ -78,10 +78,10 @@ DWORD package_manifest_rows(const wchar_t *path)
 {
     static const char *names[] = {"run16.exe", "ntsrv.exe", "ntcon.exe",
         "ntvdm.exe", "ntvwm.exe", "ntmon.exe", "WOW32.DLL", "VDMREDIR.DLL",
-        "nthook32.dll", "nthook64.dll", "VCDEX.DLL"};
+        "nthook32.dll", "nthook64.dll", "VCDEX.DLL", "NTVDMD.DLL"};
     static const char *keys[] = {"Name", "RelativePath", "Sha256", "Machine",
         "PackageId", "InputSha256"};
-    char input[16385], rows[11][6][128], key[32], expected[128];
+    char input[16385], rows[ARRAYSIZE(names)][6][128], key[32], expected[128];
     HANDLE file;
     LARGE_INTEGER length;
     DWORD size, error = ERROR_INVALID_DATA;
@@ -101,7 +101,7 @@ DWORD package_manifest_rows(const wchar_t *path)
     if (!take(&p, '[')) goto close;
     do {
         unsigned int fields = 0;
-        if (count == 11 || !take(&p, '{')) goto close;
+        if (count == ARRAYSIZE(names) || !take(&p, '{')) goto close;
         do {
             if (!text(&p, key, sizeof(key)) || !take(&p, ':')) goto close;
             for (j = 0; j < 6 && strcmp(key, keys[j]); ++j) {}
@@ -119,8 +119,8 @@ DWORD package_manifest_rows(const wchar_t *path)
             } else if (!text(&p, rows[count][j], sizeof(rows[0][0]))) goto close;
         } while (take(&p, ','));
         if (fields != 63 || !take(&p, '}')) goto close;
-        for (i = 0; i < 11 && _stricmp(rows[count][0], names[i]); ++i) {}
-        if (i == 11 || (seen & (1u << i))) goto close;
+        for (i = 0; i < ARRAYSIZE(names) && _stricmp(rows[count][0], names[i]); ++i) {}
+        if (i == ARRAYSIZE(names) || (seen & (1u << i))) goto close;
         seen |= 1u << i;
         if (sprintf_s(expected, sizeof(expected), "system32\\%s", rows[count][0]) < 0 ||
             _stricmp(expected, rows[count][1]) || !digest(rows[count][2]) ||
@@ -130,7 +130,7 @@ DWORD package_manifest_rows(const wchar_t *path)
     } while (take(&p, ','));
     if (!take(&p, ']')) goto close;
     space(&p);
-    if (*p || (seen != 1023 && seen != 2047)) goto close;
+    if (*p || (seen != 1023 && seen != 2047 && seen != ((1u << ARRAYSIZE(names)) - 1u))) goto close;
     for (i = 0; i < count; ++i)
         printf("%s %s %s %s %s\n", rows[i][0], rows[i][3], rows[i][4], rows[i][2], rows[i][5]);
     error = ferror(stdout) ? ERROR_WRITE_FAULT : ERROR_SUCCESS;

@@ -29,6 +29,13 @@ try {
         ConvertTo-Json | Set-Content "$out\vdd-hashes.json"
     $start = [Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute = $false; $start.CreateNoWindow = $true
+    . "$PSScriptRoot/../observation/logon-environment.ps1"
+    $entries = Read-TestLogonEnvironment "$repo/build/.ninja/fixtures-x64/logon-environment.exe" "$out/environment-process.json"
+    $start.EnvironmentVariables.Clear()
+    foreach ($entry in $entries) {
+        $at = $entry.IndexOf('=', 1)
+        $start.EnvironmentVariables[$entry.Substring(0, $at)] = $entry.Substring($at + 1)
+    }
     $start.EnvironmentVariables['TEMP'] = $runtime; $start.EnvironmentVariables['TMP'] = $runtime
     $start.EnvironmentVariables['PATH'] = "$runtime\system32;$env:SystemRoot\System32"
     $start.EnvironmentVariables['NTVDM_EXPORT_TEST_TRACE'] = "$out\trace.txt"
@@ -41,6 +48,9 @@ try {
     if (!(Test-Path "$out\trace.txt") -or (Get-Content "$out\trace.txt" -Raw) -notmatch 'PASS NTVDM export name/ordinal query/allocate/reallocate/free') { throw 'Live VDD export witness missing' }
     if ((Get-Content "$out\trace.txt" -Raw) -notmatch 'PASS failed reallocation preserves allocation and free space') { throw 'Live VDD failed-reallocation witness missing' }
     $trace = Get-Content "$out\trace.txt" -Raw
+    if ($trace -notmatch 'EVENT received break and matching SAS base' -or
+        $trace -notmatch 'PASS XP debug event writeback') { throw 'Live debugger event/writeback witness missing' }
+    if ($trace -notmatch 'PASS XP debugger register round trip') { throw 'Live register witness missing' }
     if ($trace -match '(?m)^FAIL ' -or $trace -notmatch 'PASS export query at matching task termination') { throw 'Live VDD task-lifecycle witness failed' }
     'PASS live NTVDM VDD export witness and MEM completion' | Set-Content "$out\result.txt"
 } finally {

@@ -19,8 +19,6 @@ mvdm_vm_rundown *mvdm_softpc_exit_rundown = &rundown;
 void host_ica_lock(void) {}
 void host_ica_unlock(void) {}
 int c_getVM(void) { return vm_mode; }
-uint16_t c_getIP(void) { return ip; }
-void c_setIP(uint16_t value) { ip = value; }
 void CALLF(unsigned long target[2])
 { ++calls; return_ip = ip; far_target[0] = target[0]; far_target[1] = target[1]; ip = (uint16_t)target[0]; }
 static DWORD admission_thread;
@@ -64,8 +62,6 @@ const mvdm_cpu_access *mvdm_cpu_access_current(void)
     provider.ica_lock = host_ica_lock;
     provider.ica_unlock = host_ica_unlock;
     provider.virtual_mode = c_getVM;
-    provider.ip = c_getIP;
-    provider.set_ip = c_setIP;
     provider.call_far = CALLF;
     return &provider;
 }
@@ -89,9 +85,9 @@ int main(void)
     CHECK(!mvdm_vm_command_enter(8) && !calls && ip == 0xffff);
     vm_mode = 1;
     CHECK(mvdm_vm_command_enter(8) && calls == 1);
-    CHECK(return_ip == 0 && far_target[0] == 0x5678 && far_target[1] == 0x1234 && ip == 0x5678);
+    CHECK(return_ip == 0xffff && far_target[0] == 0x5678 && far_target[1] == 0x1234 && ip == 0x5678);
     ip = 17;
-    CHECK(mvdm_vm_command_enter(10) && calls == 2 && return_ip == 18);
+    CHECK(mvdm_vm_command_enter(10) && calls == 2 && return_ip == 17);
     mvdm_vm_ingress_reset();
     CHECK(!mvdm_vm_command_enter(8) && calls == 2 && ip == 0x5678);
     admission_thread = GetCurrentThreadId();

@@ -65,13 +65,6 @@
 include segdefs.inc
 include gendefs.inc
 include pmdefs.inc
-if VCPI
-include dxvcpi.inc
-endif
-include smartdrv.inc
-IFDEF   ROM
-include dxrom.inc
-ENDIF
 
 include hostdata.inc
 include dpmi.inc
@@ -94,50 +87,23 @@ WIN386_DOSX     equ     0001h           ;Win/386 init/exit really DOSX flag
 ; -------------------------------------------------------
 
         extrn   InitDosExtender:NEAR
-;        extrn   ReleaseXmemHeap:NEAR
         extrn   RestoreRMIntrVectors:NEAR
-        extrn   InitXmemHeap:NEAR
-        extrn   AllocateLDTSelector:NEAR
         extrn   SaveRMIntrVectors:NEAR
         extrn   EnterRealMode:NEAR
         extrn   EnterProtectedMode:NEAR
         extrn   InitializeOEM:NEAR
         extrn   TerminateOEM:NEAR
-        extrn   AllocateSelector:NEAR
-        extrn   FreeSelector:NEAR
 externNP        NSetSegmentAccess
         extrn   DupSegmentDscr:NEAR
-IFDEF WOW
-        extrn   RmUnsimulateProc:FAR
-        extrn   Wow16TransitionToUserMode:near
-        extrn   Wow16CopyEhStack:near
-        extrn   Wow16CopyIretStack:near
-ENDIF
-if NOT VCPI
+
         extrn   EMMEnable:NEAR
-endif
 
-if VCPI
-externNP   FreeEMSHandle
-endif
-        extrn   AllocateXmem32:NEAR
-
-IFNDEF ROM
-ifdef WOW
+ifdef WOW_x86
         externFP NSetSegmentDscr
 else
         externFP NSetGDTSegmentDscr
-ENDIF; wow
-ENDIF; rom
+ENDIF; WOW_x86
 
-IFDEF ROM
-        extrn   ROMEntry:NEAR
-        extrn   ROMCleanUp:NEAR
-        extrn   ROMInitLDT:NEAR
-        extrn   InvokeROMChild:NEAR
-ENDIF
-
-        extrn   FreeMemByOwner:NEAR
         extrn   PMIntr19:NEAR
         extrn   PMIntr13:NEAR
         extrn   PMIntr31:NEAR
@@ -145,77 +111,40 @@ ENDIF
         extrn   PMIntr25:NEAR
         extrn   PMIntr26:NEAR
         extrn   PMIntr4B:NEAR
-        extrn   PMIntr70:NEAR
         extrn   PMIntrDos:NEAR
         extrn   PMIntrMisc:NEAR
         extrn   PMIntrVideo:NEAR
         extrn   PMIntrMouse:NEAR
         extrn   PMIntrIgnore:NEAR
-        extrn   PMInt2FHandler:NEAR
         extrn   PMIntrEntryVector:NEAR
         extrn   PMFaultEntryVector:NEAR
-        extrn   PMReservedEntryVector:NEAR
-        extrn   TrapInvalidOpcode:NEAR
-        extrn   TrapDoubleFault:NEAR
-        extrn   TrapExtensionOverrun:NEAR
-        extrn   TrapInvalidTss:NEAR
-        extrn   TrapSegmentNotPresent:NEAR
-        extrn   TrapStackOverrun:NEAR
-        extrn   TrapGP:NEAR
-        extrn   TrapPageFault:NEAR
-        extrn   FarParaToLDTSelector:FAR
-        extrn   WowHwIntrEntryVector:NEAR
-        extrn   Wow16HwIntrReflector:NEAR
-IFNDEF WOW
-        extrn   FreeXmemHeap:NEAR
-ENDIF
+ifdef      NEC_98    ;
+        extrn   PMIntr11dummy:NEAR
+        extrn   PMIntrPrinter:NEAR
+        extrn   PMIntrCalTi:NEAR
+        extrn   PMIntrGraph:NEAR
+endif   ;NEC_98   ;
 
 ; -------------------------------------------------------
 ;           DATA SEGMENT DEFINITIONS
 ; -------------------------------------------------------
 
-DXSTACK segment
-
-extrn   rgw0Stack:WORD
-extrn   rgw2FStack:WORD
-
-DXSTACK ends
-
 ; -------------------------------------------------------
 
 DXDATA  segment
-ifdef NOT_NTVDM_NOT
-        extrn   fHPVectra:BYTE
-endif
         extrn   A20EnableCount:WORD
         extrn   lpfnUserMouseHandler:DWORD
         extrn   lpfnUserPointingHandler:DWORD
         extrn   f286_287:BYTE
 
-if VCPI
-        extrn   fVCPI:BYTE
-        extrn   segBootPmode:WORD
-endif
         extrn   cDPMIClients:WORD
         extrn   selCurrentHostData:WORD
         extrn   segCurrentHostData:WORD
 
-        extrn   fDebug:BYTE
-        extrn   lmaIdt:DWORD
-
-ifdef WOW
-        extrn   rgwWowStack:word
+ifdef WOW_x86
         extrn   FastBop:fword
-        extrn   WowTransitionToUserMode:WORD
-        extrn   WowCopyEhStack:WORD
-        extrn   WowCopyIretStack:WORD
-        extrn   PMReservedReflector:near
 endif
-        extrn   PMFaultVector:DWORD
-        extrn   PMIntelVector:DWORD
-        extrn   RmHwISR:DWORD
         extrn   DpmiFlags:WORD
-        extrn   HwIntHandlers:WORD
 
         org     0
 
@@ -250,10 +179,9 @@ bReflStack      db  CB_REFLSTACK dup (?)
 endif
 
 ;----------------------------------------------------------------------------
-; The following stack is used for hw interrupts on platforms (e.g. x86) where
+; The following stack is used for hw interrupts while booting where
 ; the kernel or ntvdm switches the stack before an interrupt is reflected.
 ;----------------------------------------------------------------------------
-IFDEF WOW
 CB_HWINTRSTACK  =   1000h
 if DBG
 bHwIntrStack    db  CB_HWINTRSTACK dup (0AAh)
@@ -262,13 +190,12 @@ bHwIntrStack    db  CB_HWINTRSTACK dup (?)
 endif
         public  pbHwIntrStack
 pbHwIntrStack   dw  bHwIntrStack + CB_HWINTRSTACK
-ENDIF ; WOW
 
 pbReflStack     dw  bReflStack + CB_REFLSTACK
 
 npEHStackLimit  dw      offset DGROUP:rgwStack
 npEHStacklet    dw      offset DGROUP:rgwStack
-selEHStack      dw      SEL_STACK_ALIAS OR STD_RING
+selEHStack      dw      0
 
         public  cdscGDTMax, selGDTFree, segGDT, selGDT
 
@@ -293,9 +220,8 @@ bpGDTcb         dw      ?
 bpGDTbase       dd      ?
 
 
-        public  cdscIDTMax, segIDT, selIDT
+        public  segIDT, selIDT
 
-cdscIDTMax      dw      CDSCIDTDEFAULT
 segIDT          dw      0
 selIDT          dw      0
 
@@ -309,10 +235,6 @@ bpIDTbase       dd      ?
 
 bpRmIVT         dq      0FFFFh  ;This is the segment descriptor for the real
                                 ; mode interrupt vector table.
-
-        public  selDOSScr
-
-selDOSScr       dw      0       ;Scratch selector used for DOS mapping
 
         public  lpfnXMSFunc
 
@@ -362,12 +284,15 @@ segDXData       dw      ?               ;holds real mode paragraph address
                                         ; of the data segment
 ENDIF
 
-ifdef NOT_NTVDM_NOT
-        public  fMicroChannel
+ifdef      NEC_98
+        public  fPCH98
 
-fMicroChannel   db      0       ;NZ if running on a Micro Channel system
-endif
+fPCH98          db      0       ;NZ if running on a Micro Channel system
 
+        public  fNHmode
+
+fNHmode         db      0       ;NZ if running on a Hmode system
+endif   ;!NEC_98
         public  fFaultAbort, ExitCode
 
 fFaultAbort     db      0       ;NZ if terminating due to unrecoverable fault
@@ -379,20 +304,12 @@ fEMbit          db      0FFh    ;MSW EM bit at startup (FF = not checked yet)
         public fUsingHMA
 fUsingHMA       db      0
 
-if NTDEBUG
-        public fDebugTrace
-fDebugTrace     db      0
-endif
-
 ; The one and only Task State Segment is here (it's too small to allocate
 ; a block for it in extended memory)
 
         public  sysTSS
 
 sysTSS  TSS286  <>
-
-        public HighestDxSel
-HighestDxSel dw 0
 
 ; After initialization is complete, the following buffers (rgbXfrBuf0 and
 ; rgbXfrBuf1) are used to transfer data between real mode address space
@@ -429,10 +346,7 @@ rgbXfrBuf1  db      CB_XFRBUF1 dup (?)
 npXfrBuf0   dw      offset DGROUP:rgbXfrBuf0
 npXfrBuf1   dw      offset DGROUP:rgbXfrBuf1
 
-ifdef FLATAPIXLAT
 DtaBuffer   dw      128 dup (0) ; used as the dta for PM if dta changed
-endif
-IFNDEF ROM      ;--------------------------------------------------------
 
 ; Parameter block for passing to DOS EXEC call to run the child
 ; program.
@@ -447,8 +361,6 @@ fcb1_seg        dw  DXDATA
                 dw  OFFSET EXEC_FCB1
 fcb2_seg        dw  DXDATA
 
-ENDIF   ;ROM    ---------------------------------------------------------
-
 
 ; The following variables are used during reading the relocation table
 ; from the exe file and relocating the child program.
@@ -461,22 +373,11 @@ fhExeFile       dw      ?       ;DOS file handle for the exe file
 clpRelocItem    dw      ?       ;number of relocation items in the exe file
 plpRelocItem    dw      ?       ;pointer to next relocation item in the table
 
-        public  SMRTDRVDelta, SMRTDRVName
-
-SMRTDRVDelta    SD_IOCTL_WR_GrwShrk <,0>        ; Struc to IOCTL write SMARTDRV
-SMRTDRVName     db      SD_DEV_NAME             ; Name for smart drive opens
-
 szDebugHello    label   byte
 if      DEBUG
         db      'DOSX: Beginning protected mode initialization.',13,10,0
 endif
         db      0
-
-IFDEF   ROM
-        public  PrevInt2FHandler
-
-PrevInt2FHandler dd     ?       ;previous real mode Int 2F handler
-ENDIF
 
 FreeMem dw      0
 
@@ -495,13 +396,6 @@ DXCODE  segment
         extrn   ER_REALMEM:BYTE
         extrn   RMDefaultInt24Handler:FAR
 
-if VCPI
-
-externNP        QEMM386Trap
-
-endif
-
-IFNDEF  ROM
         public  segDXCode, segDXData, selDgroup
 
 segDXCode       dw      ?       ;holds the real mode paragraph address
@@ -512,16 +406,9 @@ segDXData       dw      ?       ;holds the real mode paragraph address
 selDgroup       dw      ?       ;holds the paragraph address/selector for
                                 ; DGROUP depending on the current mode
 
-        public  PrevInt2FHandler, PrevInt69Handler
+        public  PrevInt2FHandler
 
 PrevInt2FHandler dd     ?       ;previous real mode Int 2F handler
-PrevInt69Handler dd     ?       ;previous HP Vectra A & A+ keyboard interrupt
-
-ENDIF
-
-IFDEF   ROM
-externFP        NSetSegmentDscr
-ENDIF
 
 DXCODE  ends
 
@@ -529,22 +416,8 @@ DXCODE  ends
 DXPMCODE    segment
 
         extrn   CodeEndPM:NEAR
-        extrn   WowHwIntDispatchProc:WORD
 
         org     0
-
-IFDEF   ROM     ;--------------------------------------------------------
-
-        extrn   segRomDXCODE:ABS
-
-        public  selDgroupPM, segDXCodePM
-
-selDgroupPM     dw      SEL_DXDATA OR STD_RING  ;This variable contains the
-                                                ; data segment selector
-segDXCodePM     dw      segRomDXCODE    ;This variable contains the paragraph
-                                        ; address of the real mode code segment
-
-ELSE    ;ROM    ---------------------------------------------------------
 
         public  selDgroupPM, segDXCodePM, segDXDataPM
 
@@ -554,16 +427,7 @@ segDXCodePM     dw      ?       ;This variable contains the paragraph
                                 ; address of the real mode code segment
 segDXDataPM     dw      ?       ;This variable contains the paragraph
                                 ; address of the data segment
-ENDIF   ;ROM    ---------------------------------------------------------
-
-
-IFNDEF  ROM
 externFP        NSetSegmentDscr
-ENDIF
-
-IFDEF WOW
-        extrn   WowReservedReflector:WORD
-ENDIF
 
 DXPMCODE    ends
 
@@ -587,22 +451,11 @@ BeginLowSegment
 
 start:
 
-IFDEF   ROM     ;--------------------------------------------------------
-
-        call    ROMEntry                ;setup special ROM environment
-        assume  ds:DGROUP
-
-        mov     ax,ds                   ;code below expects DGROUP in ax
-
-ELSE    ;ROM    ---------------------------------------------------------
-
 ; Set up the initial segment registers.
 
         mov     ax,DGROUP
         mov     ds,ax
         assume  ds:DGROUP
-
-ENDIF   ;ROM    ---------------------------------------------------------
 
         mov     segPSP,es       ;save the PSP segment address
 
@@ -646,12 +499,6 @@ ENDIF   ;ROM    ---------------------------------------------------------
 
         jcxz    Allow_Startup   ;if cx still == 0, keep going (we ignore
                                 ;  all the other possible return values)
-if      VCPI
-
-        cCall   QEMM386Trap
-        je      Allow_Startup
-
-endif   ; VCPI
 
         mov     ExitCode,2      ;  otherwise we should abort now
         jmp     RealModeCleanUp
@@ -668,7 +515,7 @@ Allow_Startup:
 ; Save the state of the MSW EM bit (Emulate Math coprocessor), and turn
 ; it off (win87em wants it off).
 
-ifndef WOW
+ifndef WOW_x86
         smsw    ax
 
         out1    <What to do about this?>
@@ -683,7 +530,7 @@ ifndef WOW
         and     al,not 04h
         lmsw    ax
 @@:
-endif ; wow
+endif ; WOW_x86
 ; Switch the machine into protected mode.
 
         FCLI
@@ -703,18 +550,6 @@ if      DEBUG
         Trace_Out "*******************************************************************************"
         Trace_Out "*******************************************************************************"
 endif
-;
-; The following code MUST appear in both the retail and debug versions.
-; It uses a side effect of the WDEB386 conditional breakpoint command
-; to cause WDEB386 to initialize its copy of the protected mode IDT
-; register. [ERH] 06-Dec-1990
-;
-        cmp     fDebug,0
-        je      @F
-        lea     si,szDebugHello
-        mov     ax,0F001h       ; WDEB386 conditional breakpoint
-        int     41h
-@@:
 
         assume  ds:DGROUP,es:NOTHING
 
@@ -744,8 +579,12 @@ ENDIF
         dec     cx                      ; CX = 0FFFFh
 
         push    ax
-        mov     ax,es
-        DPMIBOP PassTableAddress
+        push    cx
+        mov     ax,es                   ; LDT selector
+        lsl     cx,ax                   ; LDT size
+        mov     di,SEL_USER and SELECTOR_INDEX
+        DPMIBOP InitLDT
+        pop     cx
         pop     ax
 
 ;
@@ -754,109 +593,44 @@ ENDIF
 ;
         cCall   NSetSegmentDscr,<SEL_SCR0,ax,ax,ax,cx,STD_DATA>
         cCall   NSetSegmentDscr,<SEL_SCR1,ax,ax,ax,cx,STD_DATA>
+ifndef WOW_x86
+        mov     dx,40h*16
+        cCall   NSetGDTSegmentDscr,<040h,ax,dx,ax,cx,STD_DATA>
+endif
 
-; Place all descriptors beginning at SEL_USER on a linked list of
-; free descriptors.  A descriptor is identified as being free by
-; being on this list, and also by having the access rights byte set
-; to 0.  The cbLimit field of the descriptor is used as the link to
-; the next descriptor on the list.  Note: the GDT was initialized
-; to 0 above, so the access rights byte is already 0 on these.
-
-        mov     di,SEL_USER and SELECTOR_INDEX
-        mov     selGDTFree,di           ;init head of free list pointer
-        mov     dx,cdscGDTMax
-        shl     dx,3
-        jnc     @F
-        dec     dx
-@@:
-        mov     ax,di                   ;pointer to current descriptor
-igdt50: add     ax,8                    ;point to following one
-        mov     es:[di].cbLimit,ax      ;store as link in this descriptor
-        jc      igdt58                  ;in case of segment wrap around
-        cmp     ax,dx                   ;are we at the end of the table
-        jnc     igdt58                  ;if so, then get out of loop
-        mov     di,ax                   ;point at the next one
-        jmp     igdt50                  ;and repeat
-
-; We just set the link field of the last one in the list to point to
-; a bogus location.  So we need to go back and set it to 0 to indicate
-; end of list.
-
-igdt58: mov     es:[di].cbLimit,0
-
-
-IFDEF   ROM
-
-; Initialize the predefined LDT descriptors/selectors for the ROM version.
-; This has to be done now since the ROM Image Builder starts allocating
-; at SEL_USER.
-
-        call    ROMInitLDT
-
-ENDIF
-
-
-; Allocate a scratch selector for DOS mapping
-
-
-        call    AllocateLDTSelector
-        mov     selDOSScr,ax
-
-        FSTI                             ;don't need ints disabled
-
-; Initialize the extended memory heap
-
-;        call    InitXmemHeap
-
-IFDEF WOW
-; Bop to initialize 32 bit support.  Eventually this needs to be done
-; on mips too.
+; Bop to initialize 32 bit support.
 
         push    es
         mov     ax,SEL_DXCODE OR STD_RING
         mov     es,ax
         assume  es:DXCODE
-        push    SEL_DXPMCODE OR STD_RING
-        push    offset DXPMCODE:FarParaToLDTSelector
-        push    SEL_DXCODE OR STD_RING
-        push    SEL_DXDATA OR STD_RING
+        mov     di, sp                          ;original stack offset
+
         push    ds
         push    offset DGROUP:DtaBuffer
-        push    segDXCode
-        push    segDXCode
-        push    offset DXCODE:RmUnsimulateProc
-        push    word ptr CB_STKFRAME
         push    ds
         push    offset DGROUP:pbReflStack
         push    ds
         push    offset DGROUP:rgbXfrBuf1
         push    ds
         push    offset DGROUP:rgbXfrBuf0
-        push    segDXData
-        mov     si,sp
+
+        mov     si,sp                           ;pass stack offset
         FBOP    BOP_DPMI,InitDosx,FastBop
-        add     sp,34
+        mov     sp, di                          ;restore stack
         pop     es
         assume es:nothing
-ENDIF
-IFNDEF  ROM     ;--------------------------------------------------------
+
+        call    AllocateExceptionStack
+        FSTI                             ;don't need ints disabled
 
 ; Shrink the size of our real mode code segment to throw away init code.
 
         SwitchToRealMode
 
-if VCPI
-        mov     bx,segBootPmode
-        add     bx,CBPAGE386 shr 4
-        cmp     fVCPI,0
-        jne     @F
-endif
         mov     bx,(offset CodeEnd) + 15
         shr     bx,4
         add     bx,segDXCode
-if VCPI
-@@:
-endif
         sub     bx,segPSP
         push    es
         mov     es,segPSP
@@ -867,8 +641,6 @@ endif
         mov     FreeMem,bx
         SwitchToProtectedMode
 
-ENDIF   ;ROM    ---------------------------------------------------------
-
 ; Initialize the OEM layer.  This can allocate DOS memory, so it goes
 ; after the final program shrink.
 
@@ -878,6 +650,7 @@ if1
 %OUT    InitializeOEM can fail!!!!!
 endif
 
+        FBOP    BOP_DPMI,ResetLDTUserBase,FastBop
 
 ; Exec the child application
 
@@ -885,12 +658,12 @@ endif
         FSTI
 ;; bugbug hack ...... williamh
 ;; turn off A20 line before we terminate and keep resident.
-	cmp	A20EnableCount, 0
-	jz	A20IsOff
+        cmp     A20EnableCount, 0
+        jz      A20IsOff
 @@:
-	xmssvc	6
-	dec	A20EnableCount
-	jnz	@B
+        xmssvc  6
+        dec     A20EnableCount
+        jnz     @B
 A20IsOff:
 
         mov     ax,segPSP
@@ -912,24 +685,10 @@ A20IsOff:
 help:   int     3                       ; should never get here
         jmp     help
 
-IFDEF   ROM     ;--------------------------------------------------------
-
-        call    InvokeROMChild                  ;setup ROM child environment
-                                                ;  and invoke the child app
-
-        ;DOS will transfer directly to ChildTerminationHandler if child
-        ;does a DOS Exit call, comes back here if child app returns (usually
-        ;an init error).  The registers may be in a strange state here so be
-        ;careful....
-
-ELSE    ;ROM    ---------------------------------------------------------
-
         lea     bx, exec_par_blk
         lea     dx, EXEC_PROGNAME
         xor     al, al
         dossvc  4bh
-
-ENDIF   ;ROM    ---------------------------------------------------------
 
 ; If we get here, the EXEC failed for some reason!
 
@@ -965,16 +724,9 @@ strt88:
         public  DosxTerminationHandler
 DosxTerminationHandler:
 
-IFDEF   ROM
-        GetRMDataSeg
-        mov     ds,ax
-        mov     es,ax
-        mov     ss,ax
-ELSE
         mov     ds,selDgroup
         mov     es,selDgroup
         mov     ss,selDgroup                    ;make sure we know where the
-ENDIF
         mov     sp,offset DGROUP:rgwStack       ;  stack is when we get here
 
         assume  ds:DGROUP,es:DGROUP
@@ -1030,6 +782,7 @@ CTH_Not286And287:
 ; Check if the PS/2 Pointing Device Handler Address has been set and
 ; disable it if so.
 
+ifndef NEC_98
         mov     ax,word ptr lpfnUserPointingHandler
         or      ax,word ptr lpfnUserPointingHandler+2
         jz      @f
@@ -1037,6 +790,7 @@ CTH_Not286And287:
         xor     bh,bh
         int     15h
 @@:
+endif   ;!NEC_98
 
 ; Hmmm, we have HP mouse code in dxhpbios.asm, but no clean up here...
 
@@ -1049,13 +803,6 @@ normal_exit:
 ; Release the space being used for the descriptor tables and
 ; the protected mode code segment.
 
-if VCPI
-        cmp     fVCPI,0         ;space not in himem area if under VCPI
-        jz      @f
-        call    FreeEmsHandle   ;under VCPI, we free EMS memory this way
-        jmp     short chtm90
-@@:
-endif
 ;
 ; If we have allocated an extended memory block, then free it.
 ; If we have allocated the HMA, then free it.
@@ -1079,10 +826,6 @@ RealModeCleanUp:
 
 ; Disable A20 if it was left enabled (normally 1 on 386 systems, 0 on 286)
 
-if VCPI
-        cmp     fVCPI,0         ;don't diddle A20 if under VCPI
-        jnz     A20Okay
-endif
         mov     cx,A20EnableCount
         jcxz    A20Okay
 @@:     xmssvc  6
@@ -1090,15 +833,12 @@ endif
 A20Okay:
 
 ; Restore the MSW EM bit (Emulate Math coprocessor) to its initial state
-ifndef WOW
+ifndef WOW_x86
         inc     fEMbit          ;if fEMbit = FF, we never got far 'nuff to
         jz      @f              ;  change it
         dec     fEMbit
 
         smsw    ax
-if      VCPI
-        out1    <What to do about this? FreeEMSHandle may put us in real mode.>
-endif   ; VCPI
         test    al,01h                  ;in V86 mode?
         jnz     @f                      ;  can't do the lmsw if so
         or      al,fEMbit
@@ -1110,33 +850,9 @@ endif
         mov     bx,segPSP
         dossvc  50h
 
-; Restore SmartDrv cache size if it was shrunk
-
-        cmp     [SMRTDRVDelta.SD_I_W_GS_Size],0
-        je      short NoSmartReset
-
-        mov     dx,offset DGROUP:SMRTDRVName
-        mov     ax,3D02h
-        int     21h
-        jc      short NoSmartReset
-
-        mov     bx,ax
-        mov     [SMRTDRVDelta.SD_I_W_FuncGS],SD_IOCTL_WR_Grow_Cache
-        mov     dx,offset DGROUP:SMRTDRVDelta
-        mov     cx,SIZE SD_IOCTL_WR_GrwShrk
-        mov     ax,4403h
-        int     21h
-
-        mov     ax,3E00H
-        int     21h
-
-NoSmartReset:
-
 ; Reenable a friendly EMM driver if we disabled it at startup
 
-if NOT VCPI
         call    EMMEnable
-endif
 
 ; Restore real mode interrupt vectors
 
@@ -1152,24 +868,10 @@ endif
         mov     ax,252Fh
         int     21h
 
-IFNDEF  ROM
-ifdef NOT_NTVDM_NOT
-        test    fHPVectra,HP_CLASSIC
-        jz      @f
-
-        mov     ax,2569h
-        lds     dx,PrevInt69Handler     ;HP Vectra A & A+ keyboard slime
-        int     21h
-endif
-ENDIF
 @@:
         pop     ds
         assume  ds:DGROUP
 
-
-IFDEF   ROM                             ;Do any ROM specific clean up
-        call    ROMCleanUp
-ENDIF
 
 ; We have cleaned up after ourselves, so now we can quit.
 
@@ -1182,6 +884,18 @@ ENDIF
         jnz     @f              ;  that we have forced
         dossvc  4Dh             ;get child exit status if we haven't forced it
 @@:
+ifdef      NEC_98
+        push    ax
+        push    es                      ; Dec IN_BIOS(0:456)
+        mov     ax, 0040h
+        mov     es, ax
+        test    byte ptr es:[0], 20h    ; check suspend/redume
+        jz      @f
+        dec     byte ptr es:[056h]      ; for Y55
+@@:
+        pop     es
+        pop     ax
+endif   ;NEC_98
         dossvc  4Ch             ;say goodnight Gracy...
 
 ; -------------------------------------------------------
@@ -1215,13 +929,9 @@ ChildTerminationHandler:
 
         ; free xmem allocated to this client
         SwitchToProtectedMode
-        mov     ax,[SelCurrentHostData]
-        mov     es,ax
-        mov     bx,es:[HdSelPSP]                ; get "owner"
-        call    FreeMemByOwner
 
         mov     dx, selPspChild
-        DPMIBOP TerminateApp
+        FBOP    BOP_DPMI,TerminateApp,FastBop
 
         test    DpmiFlags,DPMI_32BIT
         jz      cth05
@@ -1233,17 +943,15 @@ ChildTerminationHandler:
 cth05:  cmp     cDPMIClients,0
         jne     cth10
 
+;
+; Reset the exception stack pointer to indicate free'd memory
+;
+        mov     selEHStack,0
 
-;
-; Reset the exception stack pointer
-;
-        mov     selEHStack,SEL_STACK_ALIAS OR STD_RING
-        
 ;
 ; Give back the xms memory
 ;
         FCLI
-        FBOP    BOP_DPMI,FreeAllXmem,FastBop
 
         call    ReInitIdt
         push    0
@@ -1316,6 +1024,12 @@ DisplayErrorMsg proc    far
 
 ; Set a text mode (normally 3, but possibly 7)
 
+ifdef      NEC_98
+        mov     ah,41h          ;
+        int     18h
+        mov     ah,0Ch          ;
+        int     18h
+else    ;!NEC_98
         mov     ax,0003h        ;set video mode 3
         int     10h
         mov     ah,0Fh          ;get video mode
@@ -1325,6 +1039,7 @@ DisplayErrorMsg proc    far
         mov     ax,0007h        ;no, must be mode 7
         int     10h
 @@:
+endif   ;!NEC_98
 
 ; Display the msg
 
@@ -1391,343 +1106,71 @@ ReInitIdt proc near
 ; interrupt reflector entry vector.
 
         xor     di,di
-ifndef WOW
-        mov     dx,offset DXPMCODE:PMFaultEntryVector   ;the 1st 32 go here
-        mov     cx,32
-iidt15: mov     es:[di].offDest,dx
-        mov     es:[di].selDest,SEL_EH or EH_RING
-        mov     es:[di].cwParam,0
-        mov     es:[di].arbGate,STD_INTR
-        mov     es:[di].rsvdGate,0
-        add     dx,3
-        add     di,8
-        loop    iidt15
 
-        mov     dx,offset DXPMCODE:PMIntrEntryVector+(32*3) ; the rest go here
-        mov     cx,070h - 32
-ELSE
-        mov     dx,offset DXPMCODE:PMIntrEntryVector
-        mov     cx,8
-
-iidt16: mov     es:[di].offDest,dx
-        mov     es:[di].selDest,SEL_DXPMCODE or STD_RING
-        mov     es:[di].cwParam,0
-        mov     es:[di].arbGate,STD_TRAP
-        mov     es:[di].rsvdGate,0
-        add     dx,3
-        add     di,8
-        loop    iidt16
-
-        mov     dx,offset DXPMCODE:WowHwIntrEntryVector
-        mov     cx,8
-
-iidt17: mov     es:[di].offDest,dx
-        mov     es:[di].selDest,SEL_DXPMCODE or STD_RING
-        mov     es:[di].cwParam,0
-        mov     es:[di].arbGate,STD_INTR
-        mov     es:[di].rsvdGate,0
-        add     dx,8
-        add     di,8
-        loop    iidt17
-
-        mov     dx,offset DXPMCODE:PMIntrEntryVector + 3 * 16
-        mov     cx,070h - 16
-ENDIF
-
-iidt20: mov     es:[di].offDest,dx
-        mov     es:[di].selDest,SEL_DXPMCODE or STD_RING
-        mov     es:[di].cwParam,0
-        mov     es:[di].arbGate,STD_TRAP
-        mov     es:[di].rsvdGate,0
-        add     dx,3
-        add     di,8
-        loop    iidt20
-
-        mov     dx,offset DXPMCODE:WowHwIntrEntryVector + 8*8
-        mov     cx,8
-iidt22: mov     es:[di].offDest,dx
-        mov     es:[di].selDest,SEL_DXPMCODE or STD_RING
-        mov     es:[di].cwParam,0
-        mov     es:[di].arbGate,STD_INTR
-        mov     es:[di].rsvdGate,0
-        add     dx,8
-        add     di,8
-        loop    iidt22
-
-        mov     dx,offset DXPMCODE:PmIntrEntryVector + 078h * 3
-        mov     cx,cdscIdtMax
-        sub     cx,078h
+        mov     dx,offset DXPMCODE:PmIntrEntryVector
+        mov     cx,256
 iidt23: mov     es:[di].offDest,dx
         mov     es:[di].selDest,SEL_DXPMCODE or STD_RING
         mov     es:[di].cwParam,0
-        mov     es:[di].arbGate,STD_TRAP
+        mov     es:[di].arbGate,STD_TRAP   ; BUGBUG- int gates not set up
         mov     es:[di].rsvdGate,0
-        add     dx,3
+        add     dx,5
         add     di,8
         loop    iidt23
 
-;
-; Set up the hw interrupt entry points
-;
-        mov     dx,offset DXPMCODE:PmIntrEntryVector + 8*3
-        mov     si,offset HwIntHandlers
-        mov     cx,8
-iidt24: mov     [si],dx
-        mov     word ptr [si + 2],0
-        mov     word ptr [si + 4],SEL_DXPMCODE OR STD_RING
-        mov     word ptr [si + 6],0
-        add     si,8
-        add     dx,3
-        loop    iidt24
-
-        mov     cx,8
-        mov     dx,offset DXPMCODE:PmIntrEntryVector + 070h * 3
-iidt24a: mov    [si],dx
-        mov     word ptr [si + 2],0
-        mov     word ptr [si + 4],SEL_DXPMCODE OR STD_RING
-        mov     word ptr [si + 6],0
-        add     si,8
-        add     dx,3
-        loop    iidt24a
-
 ; Now, fix up the ones that don't point to the interrupt reflector.
-IFDEF WOW
+IFDEF WOW_x86
         mov     es:[1h*8].offDest,offset PMIntrIgnore
         mov     es:[3h*8].offDest,offset PMIntrIgnore
+ifdef      NEC_98
+        mov     es:[11h*8].offDest,offset PMIntr11dummy
+        mov     es:[18h*8].offDest,offset PMIntrVideo
+        mov     es:[1ah*8].offDest,offset PMIntrPrinter
+        mov     es:[1bh*8].offDest,offset PMIntr13
+        mov     es:[1ch*8].offDest,offset PMIntrCalTi
+        mov     es:[1dh*8].offDest,offset PMIntrGraph
+        mov     es:[1fh*8].offDest,offset PMIntrMisc
+else    ;!NEC_98
         mov     es:[10h*8].offDest,offset PMIntrVideo
         mov     es:[13h*8].offDest,offset PMIntr13
         mov     es:[15h*8].offDest,offset PMIntrMisc
         mov     es:[19h*8].offDest,offset PMIntr19
+endif   ;!NEC_98
 ENDIF
 
         mov     es:[21h*8].offDest,offset DXPMCODE:PMIntrDos
         mov     es:[25h*8].offDest,offset DXPMCODE:PMIntr25
         mov     es:[26h*8].offDest,offset DXPMCODE:PMIntr26
         mov     es:[28h*8].offDest,offset DXPMCODE:PMIntr28
-        mov     es:[2Fh*8].offDest,offset DXPMCODE:PMInt2FHandler
         mov     es:[30h*8].offDest,offset DXPMCODE:PMIntrIgnore
         mov     es:[31h*8].offDest,offset DXPMCODE:PMIntr31
         mov     es:[33h*8].offDest,offset DXPMCODE:PMIntrMouse
         mov     es:[41h*8].offDest,offset DXPMCODE:PMIntrIgnore
 
-if DEBUG   ;-------------------------------------------------------------
-
-        cmp     fTraceBug,0
-        jz      @f
-        mov     es:[41h*8].offDest,offset DXCODE:PMDebugInt
-        mov     es:[41h*8].selDest,SEL_DXCODE or STD_RING
-@@:
-endif   ;DEBUG  ---------------------------------------------------------
-
-ifndef WOW
+ifndef WOW_x86
         mov     es:[4Bh*8].offDest,offset DXPMCODE:PMIntr4B
+ifdef      NEC_98
+;  Sound BIOS Int D2h handler
+        mov     es:[0D2h*8].offDest,offset DXPMCODE:PMIntrSound
 
-ifdef NOT_NTVDM_NOT
-        ;  HP Extended BIOS System Call handler
-        test    fHPVectra,0ffh          ;only do this for an HP Vectra
-        jz      NoHPBios
-
-; Supposedly the system driver is going to force the HP Bios to
-; use interrupt 6Fh while Windows is running, so we don't need to
-; search for the moveable HP Bios interrupt--just use Int 6Fh.
-;        mov     es:[6Fh*8].offDest,offset HPxBios
-NoHPBios:
+;  extended DOS Int DCh handler (KANA/KANJI)
+        mov     es:[0DCh*8].offDest,offset DXPMCODE:PMIntrExDos
+endif   ;!NEC_98
 endif
+;
+; Set up the IDT, and dpmi32 state
+;
+        mov     ax,es                   ; Idt selector
+        mov     bx,VDM_INT_16
+        DPMIBOP InitIDT
 
-endif
-        mov     HwIntHandlers[8*8],offset DXPMCODE:PMIntr70
-ifdef WOW
-        .386p
-        xor     di,di
+        mov     ax,5                    ; handler increment
+        mov     cx,SEL_DXPMCODE OR STD_RING
         mov     dx,offset DXPMCODE:PmFaultEntryVector
-        movzx   edx,dx
-        mov     cx,32
-iidt25:
-        push    dword ptr VDM_INT_INT_GATE
-        push    di
-        push    SEL_EH OR STD_RING
-        push    edx
-        push    SEL_DXDATA OR STD_RING
-        push    dword ptr (offset DXDATA:rgw0Stack)
-        DPMIBOP SetFaultHandler
-        add     sp,18
-        inc     di
-        add     dx,3
-        loop    iidt25
 
-;
-; Set up all of the "gates" between 0 and 7 to be trap gates
-;
-        mov     cx,8
-        mov     bx,0
-        xor     di,di
+        DPMIBOP InitExceptionHandlers
 
-iidt30:
-        push    word ptr (VDM_INT_TRAP_GATE OR VDM_INT_16)
-        push    di
-        push    es:[bx].selDest
-        push    es:[bx].rsvdGate        ; high half of handler address
-        push    es:[bx].offDest         ; low half of handler address
-        DPMIBOP SetProtectedModeInterrupt
-        add     sp,10
-        inc     di
-        add     bx,8
-        loop    iidt30
-;
-; Set up all of the "gates" between 8 and F to be int gates
-;
-        mov     cx,8
-
-iidt40:
-        push    word ptr (VDM_INT_INT_GATE OR VDM_INT_16)
-        push    di
-        push    es:[bx].selDest
-        push    es:[bx].rsvdGate        ; high half of handler address
-        push    es:[bx].offDest         ; low half of handler address
-        DPMIBOP SetProtectedModeInterrupt
-        add     sp,10
-        inc     di
-        add     bx,8
-        loop    iidt40
-;
-; Set up all of the "gates" between 10 and 70 to be trap gates
-;
-        mov     cx,70h - 10h
-
-iidt50:
-        push    word ptr (VDM_INT_TRAP_GATE OR VDM_INT_16)
-        push    di
-        push    es:[bx].selDest
-        push    es:[bx].rsvdGate        ; high half of handler address
-        push    es:[bx].offDest         ; low half of handler address
-        DPMIBOP SetProtectedModeInterrupt
-        add     sp,10
-        inc     di
-        add     bx,8
-        loop    iidt50
-
-;
-; Set up the "gates" for the hardware interrupts to be int gates
-;
-        mov     cx,8
-iidt60:
-        push    word ptr (VDM_INT_INT_GATE OR VDM_INT_16)
-        push    di
-        push    es:[bx].selDest
-        push    es:[bx].rsvdGate        ; high half of handler address
-        push    es:[bx].offDest         ; low half of handler address
-        DPMIBOP SetProtectedModeInterrupt
-        add     sp,10
-        inc     di
-        add     bx,8
-        loop    iidt60
-;
-; Set up the rest of the "gates" to be trap gates
-        mov     cx,0ffh - 78h
-iidt70:
-        push    word ptr (VDM_INT_TRAP_GATE OR VDM_INT_16)
-        push    di
-        push    es:[bx].selDest
-        push    es:[bx].rsvdGate        ; high half of handler address
-        push    es:[bx].offDest         ; low half of handler address
-        DPMIBOP SetProtectedModeInterrupt
-        add     sp,10
-        inc     di
-        add     bx,8
-        loop    iidt70
-
-
-        .286p
-
-;
-; Put the 16 bit hanlders into PMFaultVector
-;
-        mov     dx,offset PMReservedEntryVector
-        mov     bx,offset PMFaultVector
-        mov     cx,32
-iidt75: mov     [bx],dx
-        mov     word ptr [bx +4],SEL_DXPMCODE OR STD_RING
-        add     bx,8
-IFNDEF WOW
-        add     dx,3
-%out BUGBUG ERROR! Should NEVER see this
-ELSE
-        add     dx,5
-ENDIF
-        loop    iidt75
-
-        mov     word ptr (PMFaultVector + 8*06h),offset TrapInvalidOpcode
-        mov     word ptr (PMFaultVector + 8*08h),offset TrapDoubleFault
-        mov     word ptr (PMFaultVector + 8*09h),offset TrapExtensionOverrun
-        mov     word ptr (PMFaultVector + 8*0Ah),offset TrapInvalidTss
-        mov     word ptr (PMFaultVector + 8*0bh),offset TrapSegmentNotPresent
-        mov     word ptr (PMFaultVector + 8*0ch),offset TrapStackOverrun
-        mov     word ptr (PMFaultVector + 8*0dh),offset TrapGP
-        mov     word ptr (PMFaultVector + 8*0eh),offset TrapPageFault
-
-;
-; Put back the 16 bit transition code
-;
-        call    AllocateSelector
-        mov     bx,ax
-        mov     ax,cs
-        call    DupSegmentDscr
-        cCall   NSetSegmentAccess,<bx,STD_DATA>
-        mov     es,bx
-        assume  es:DXPMCODE
-
-        mov     [WowTransitionToUserMode],offset DXPMCODE:Wow16TransitionToUserMode
-        mov     [WowCopyEhStack],offset DXPMCODE:Wow16CopyEhStack
-        mov     [WowCopyIretStack],offset DXPMCODE:Wow16CopyIretStack
-        mov     [WowReservedReflector],offset DXPMCODE:PMReservedReflector
-        mov     [WowHwIntDispatchProc], offset DXPMCODE:Wow16HwIntrReflector
-        assume  es:nothing
-        mov     ax,es
-        call    FreeSelector
-        xor     ax,ax
-        mov     es,ax
-
-        .286p
-endif
-
-;
-;       Restore hooked RM handlers
-;
-        push    ds
-        mov     bx,SEL_DXCODE OR STD_RING
-        mov     ds,bx
-        assume  ds:DXCODE
-        mov     bx,segDXCode
-        pop     ds
-        assume ds:DGROUP
-
-        push    SEL_RMIVT or STD_RING       ;selector to real mode int table
-        pop     es
-        xor     di, di
-        mov     cx,78h                      ;last possible hooked interrupt+1
-
-iidt80:
-        cmp     word ptr RmHwISR[di],0      ;is this a hooked int?
-        jnz     @f                          ;jif yes
-        cmp     word ptr RmHwISR[di+2],0    ;is this a hooked int?
-        jz      iidt85                      ;jif no
-@@:
-        mov     ax,es:[di + 2]
-        cmp     ax,bx                       ; if it isn't really hooked,
-        jne     iidt84                      ; don't change it
-
-        mov     ax,word ptr RmHwISR[di]     ;get offset of old RM vector
-        mov     es:[di],ax
-        mov     ax,word ptr RmHwISR[di+2]   ;get segment of old RM vector
-        mov     es:[di+2],ax
-iidt84: xor     ax,ax
-        mov     word ptr RmHwISR[di],ax     ; forget old handler
-        mov     word ptr RmHwISR[di+2],ax   ; forget old handler
-iidt85:
-        add     di,4
-        loop    iidt80
-
-IFDEF WOW
+IFDEF WOW_x86
 ; make the stacks 16 bit again
 
         cCall NSetSegmentAccess,<selDgroupPM,STD_DATA>
@@ -1749,35 +1192,16 @@ ReInitIdt endp
 ReInitGdt proc near
 
         push    ax
-        push    dx
+        push    cx
         push    di
-        push    es
 
-        mov     dx,cdscGDTMax
-        shl     dx,3
-        jnc     @f
-        dec     dx
-@@:
-        mov     ax,HighestDxSel
-        and     ax,NOT SELECTOR_TI
-        add     ax,8
-        mov     selGDTFree,ax
-        mov     es,selGDT
+        mov     ax,selGDT               ; LDT selector
+        lsl     cx,ax                   ; LDT size
+        mov     di,SEL_USER and SELECTOR_INDEX
+        DPMIBOP InitLDT
 
-rig30:  mov     di,ax
-        add     ax,8
-        mov     word ptr es:[di],ax         ; set limit as link to next
-        mov     word ptr es:[di + 2],0
-        mov     word ptr es:[di + 4],0
-        mov     word ptr es:[di + 6],0
-        jc      rig40
-        cmp     ax,dx
-        jnc     rig40
-        jmp     rig30
-
-rig40:  pop     es
         pop     di
-        pop     dx
+        pop     cx
         pop     ax
         ret
 ReInitGdt endp
@@ -1794,14 +1218,18 @@ ReInitGdt endp
         public  AllocateExceptionStack
 AllocateExceptionStack proc near
 
+        cmp     selEHStack, 0           ;have we allocated one already
+        jnz     aes_ok                  ;yes, return no carry
+
         xor     bx,bx
         mov     dx,bx
         mov     cx,1000h                ;length of block
-        call    AllocateXmem32
+        mov     ax, 501h
+        push    ds
+        FBOP    BOP_DPMI, Int31Call, FastBop
         jc      @F
 
-        call    AllocateSelector
-        or      ax,STD_RING
+        mov     ax, SEL_USER_STACK or STD_RING
         mov     selEHStack,ax
 
         cCall   NSetSegmentDscr,<ax,bx,cx,0,0fffh,STD_DATA>
@@ -1820,6 +1248,15 @@ AllocateExceptionStack proc near
         mov     word ptr [bx],0DEADh
         pop     ds
         mov     npEHStacklet, bx
+
+        push    es
+        mov     ax, selEHStack
+        mov     es, ax
+        mov     bx, npEHStackLimit
+        DPMIBOP InitPmStackInfo
+        pop     es
+
+aes_ok:
         clc
 @@:
         ret

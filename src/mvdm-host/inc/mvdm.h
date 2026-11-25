@@ -66,8 +66,10 @@ typedef DWORD UNALIGNED *PDWORD16;
 #define MAKEDWORD(l0,h0,l1,h1)	((DWORD)MAKEWORD(l0,h0)|((DWORD)MAKEWORD(l1,h1)<<16))
 #define GETBYTE(p)	*((PBYTE)p)++
 #ifdef	i386
-#line 74
-#error Excluded unsupported historical i386 SDK profile
+#define FETCHWORD(s)	((WORD)(s))
+#define FETCHDWORD(s)	((DWORD)(s))
+#define STOREWORD(d,s)	(WORD)d=(WORD)s
+#define STOREDWORD(d,s) (DWORD)d=(DWORD)s
 #else
 #line 79
 #define FETCHWORD(s)  (*(UNALIGNED WORD *)&(s))

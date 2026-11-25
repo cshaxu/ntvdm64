@@ -76,19 +76,13 @@ static void monitor_printer_close(WORD adapter)
 const mvdm_monitor_provider mvdm_original_monitor_provider = {
     &VdmTib, monitor_printer_view, monitor_printer_close
 };
-#line 43
 
-
-VOID
-DpmiFatalExceptionHandler(
-    UCHAR XNumber, 
-    PCHAR VdmStackPointer
-    );
-
-#line 51
-VOID
-DpmiSetProtectedmodeInterrupt(
-    VOID
+BOOL
+SetProtectedModeInterrupt(
+    USHORT IntNumber,
+    USHORT Sel,
+    ULONG Offset,
+    USHORT Flags
     )
 
 /*++
@@ -103,40 +97,104 @@ Routine Description:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
 
     PVDM_INTERRUPTHANDLER Handlers = DpmiInterruptHandlers;
-    USHORT IntNumber;
-    PCHAR StackPointer;
 
-    StackPointer = Sim32GetVDMPointer(((((ULONG)getSS()) << 16) | getSP()),
-        0,
-        (UCHAR) (getMSW() & MSW_PE)
-        );
+    if (IntNumber >= 256) {
+        return FALSE;
+    }
 
-#line 78
-    IntNumber = *(PWORD16)(StackPointer + 6);
+    if ((IntNumber >= 8 && IntNumber <= 0xf) ||
+        (IntNumber >= 0x70 && IntNumber <= 0x7f)) {
+        //
+        // Hardware Interrupt
+        //
+        Flags |= VDM_INT_INT_GATE;
+    } else {
+        //
+        // Software Interrupt
+        //
+        Flags |= VDM_INT_TRAP_GATE;
+    }
 
-    Handlers[IntNumber].Flags = *(PWORD16)(StackPointer + 8);
-    Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 4);
-    Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer);
+    if (Sel != PMReflectorSeg) {
+        //
+        // The caller is setting the PM interrupt vector to be something other
+        // than the dpmi default "end-of-the-chain" PM handler. Now we check
+        // to see if the interrupt needs to be sent up to PM when it is encountered
+        // in v86 mode.
+        //
 
-    DBGTRACE(DPMI_SET_PMODE_INT_HANDLER, IntNumber,
-                                         Handlers[IntNumber].CsSelector,
-                                         Handlers[IntNumber].Eip);
-    
-#line 88
-#ifdef i386
-#line 89
-#error Excluded unsupported VdmSetInt21Handler kernel VDM path
-#endif      //i386
-#line 107
+        if ((IntNumber == 0x1b) ||      //^Break?
+            (IntNumber == 0x1c) ||      //Timer Tick?
+            (IntNumber == 0x23) ||      //Ctrl-C?
+            (IntNumber == 0x24) ||      //Critical Error Handler?
+            (IntNumber == 0x02) ||      //Math co-processor exception used by math library routines!
+            ((IntNumber >= 0x08) && (IntNumber <= 0xf)) ||      //Hardware?
+            ((IntNumber >= 0x70) && (IntNumber <= 0x77))) {
 
-    setAX(0);
+            // Flag this so that the v86 reflector code will send it to PM
+            Flags |= VDM_INT_HOOKED;
+
+            // Mark it down low so NTIO.SYS can do the right thing
+            if ( (IntNumber == 0x1c) || (IntNumber == 8) ) {
+                *(ULONG *)(IntelBase+FIXED_NTVDMSTATE_LINEAR) |= VDM_INTS_HOOKED_IN_PM;
+            }
+        }
+    }
+
+    Handlers[IntNumber].Flags = Flags;
+    Handlers[IntNumber].CsSelector = Sel;
+    Handlers[IntNumber].Eip = Offset;
+
+    DBGTRACE((USHORT)(VDMTR_TYPE_DPMI_SI | IntNumber), Sel, Offset);
+
+#if defined(_X86_) && !defined(CCPU)
+#error Unsupported kernel VDM interrupt registration
+#endif
+
+    return TRUE;
 }
 
+
 VOID
-DpmiSetFaultHandler(
+DpmiInitIDT(
     VOID
+    )
+/*++
+
+Routine Description:
+
+    This function initializes the state of the IDT. It takes as input the
+    IDT set up by DOSX, updates the IDT's access bytes, and sets the DPMI32
+    interrupt handlers by calling SetProtectedModeInterrupt.
+
+--*/
+{
+    DECLARE_LocalVdmContext;
+    USHORT IntNumber;
+    USHORT Flags = getBX();
+
+    Idt = (PVOID)VdmMapFlat(getAX(), 0, getMODE());
+
+    for (IntNumber = 0; IntNumber<256; IntNumber++) {
+
+        SetProtectedModeInterrupt(IntNumber,
+                                  Idt[IntNumber].Selector,
+                                  (((ULONG)Idt[IntNumber].OffsetHi)<<16) +
+                                           Idt[IntNumber].OffsetLow,
+                                           Flags);
+
+    }
+
+}
+
+BOOL
+SetFaultHandler(
+    USHORT IntNumber,
+    USHORT Sel,
+    ULONG Offset
     )
 
 /*++
@@ -151,31 +209,47 @@ Routine Description:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
 
     PVDM_FAULTHANDLER Handlers = DpmiFaultHandlers;
-    USHORT IntNumber;
-    PCHAR StackPointer;
 
-    StackPointer = Sim32GetVDMPointer(((((ULONG)getSS()) << 16) | getSP()),
-        0,
-        (UCHAR) (getMSW() & MSW_PE)
-        );
+    if (IntNumber >= 32) {
+        return FALSE;
+    }
 
-#line 138
-    IntNumber = *(PWORD16)(StackPointer + 12);
+    Handlers[IntNumber].Flags = VDM_INT_INT_GATE;
+    Handlers[IntNumber].CsSelector = Sel;
+    Handlers[IntNumber].Eip = Offset;
 
-    Handlers[IntNumber].Flags = *(PDWORD16)(StackPointer + 14);
-    Handlers[IntNumber].CsSelector = *(PWORD16)(StackPointer + 10);
-    Handlers[IntNumber].Eip = *(PDWORD16)(StackPointer + 6);
-    Handlers[IntNumber].SsSelector = *(PWORD16)(StackPointer + 4);
-    Handlers[IntNumber].Esp = *(PDWORD16)(StackPointer);
+    Handlers[IntNumber].SsSelector = 0;     //BUGBUG These are obselete
+    Handlers[IntNumber].Esp = 0;            //BUGBUG These are obselete
 
 
-    DBGTRACE(DPMI_SET_FAULT_HANDLER, IntNumber,
-                                     Handlers[IntNumber].CsSelector,
-                                     Handlers[IntNumber].Eip);
-    setAX(0);
+    DBGTRACE((USHORT)(VDMTR_TYPE_DPMI_SF | IntNumber),
+             Handlers[IntNumber].CsSelector,
+             Handlers[IntNumber].Eip);
+    return TRUE;
 }
+
+VOID
+DpmiInitExceptionHandlers(
+    VOID
+    )
+{
+    DECLARE_LocalVdmContext;
+    USHORT OffsetIncr = getAX();
+    USHORT IntCount = getBX();
+    USHORT Selector = getCX();
+    ULONG Offset = (ULONG) getDX();
+    USHORT IntNumber;
+
+    for (IntNumber = 0; IntNumber < 32; IntNumber++) {
+        SetFaultHandler(IntNumber, Selector, Offset);
+        Offset += OffsetIncr;
+    }
+
+}
+
 
 VOID
 DpmiUnhandledExceptionHandler(
@@ -188,8 +262,8 @@ Routine Description:
     This function gets control when a PM fault occurs that isn't handled
     by an installed handler. The body of this function emulates Win31
     DPMI behavior, where a fault that is reflected to the end of the
-    PM fault handler chain is then reflected to the PM *interrupt* 
-    chain. 
+    PM fault handler chain is then reflected to the PM *interrupt*
+    chain.
 
 Arguments:
 
@@ -199,8 +273,8 @@ Arguments:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     PVDM_INTERRUPTHANDLER Handlers = DpmiInterruptHandlers;
-#line 176
     USHORT SegSs, SegCs;
     UCHAR XNumber;
     PCHAR VdmStackPointer;
@@ -257,10 +331,8 @@ Arguments:
         *(PDWORD16) (VdmNewStackPointer+4) = FrameCS;
 
         FrameFlags = *(PDWORD16) (VdmStackPointer+20);
-#line 232
         *(PDWORD16) (VdmNewStackPointer+8) = FrameFlags;
-#line 233
-        FrameFlags &= ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK);
+        FrameFlags &= ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK);
         *(PDWORD16) (VdmStackPointer+20) = FrameFlags;
 
         //
@@ -271,8 +343,6 @@ Arguments:
         setESP(getESP() + 8);
 
     } else {
-
-#line 245
         USHORT FrameSS, FrameSP, FrameCS, FrameIP, FrameFlags;
         FrameSS = *(PWORD16) (VdmStackPointer+14);
         FrameCS = *(PWORD16) (VdmStackPointer+8);
@@ -297,7 +367,7 @@ Arguments:
             *(PWORD16) (VdmNewStackPointer+2) = FrameCS;
 
             *(PWORD16) (VdmNewStackPointer+4) = FrameFlags;
-            FrameFlags &= ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK);
+            FrameFlags &= ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK);
             *(PWORD16) (VdmStackPointer+10) = FrameFlags;
 
             //
@@ -314,7 +384,7 @@ Arguments:
 
             FrameCS = *(PWORD16) (VdmStackPointer+2);
             FrameIP = *(PWORD16) (VdmStackPointer);
-            FrameFlags &= ~EFLAGS_INTERRUPT_MASK;
+            FrameFlags &= ~EFLAGS_IF_MASK;
 
             setSP(getSP() - 2);
 
@@ -333,7 +403,7 @@ Arguments:
 
 VOID
 DpmiFatalExceptionHandler(
-    UCHAR XNumber, 
+    UCHAR XNumber,
     PCHAR VdmStackPointer
     )
 /*++
@@ -353,6 +423,7 @@ Arguments:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     char szBuffer[255];
     USHORT FaultingCS;
     ULONG FaultingEip;
@@ -367,7 +438,7 @@ Arguments:
 
     wsprintf(szBuffer, "X#=%.02X, CS=%.04X IP=%.08X",
                             XNumber, FaultingCS, FaultingEip);
-       
+
     RcErrorDialogBox(EG_BAD_FAULT, szBuffer, NULL);
 
     //
@@ -386,7 +457,7 @@ Arguments:
 }
 
 VOID
-DpmiPassPmStackInfo(
+DpmiInitPmStackInfo(
     VOID
     )
 /*++
@@ -411,119 +482,17 @@ Notes:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
 
     LockedPMStackSel = getES();
     LockedPMStackCount = 0;
-
-#line 387
-#ifdef i386
+#if defined(_X86_) && !defined(CCPU)
 #error Excluded unsupported i386 kernel VDM stack publication
 #endif
-#line 397
 }
 
-VOID
-BeginUseLockedPMStack(
-    VOID
-    )
-/*++
-
-Routine Description:
-
-    This routine switches to the protected DPMI stack as specified by
-    the DPMI spec. We remember the original values of EIP and ESP in
-    global variables if we are at level zero. This allows us to correctly
-    return to a 32 bit routine if we are dispatching a 16-bit interrupt
-    frame.
-
-
---*/
-
-{
-    if (!LockedPMStackCount++) {
-        PMLockOrigEIP = getEIP();
-        PMLockOrigSS = getSS();
-        PMLockOrigESP = getESP();
-        setSS(LockedPMStackSel);
-        setESP(LockedPMStackOffset);
-    }
-}
-
+static BOOL BuildStackFrameWithWidth(ULONG, BOOL, PUCHAR *, ULONG *);
 BOOL
-EndUseLockedPMStack(
-    VOID
-    )
-/*++
-
-Routine Description:
-
-    This routine switches the stack back off the protected DPMI stack,
-    if we are popping off the last frame on the stack.
-
-Return Value:
-
-    TRUE if the stack was switched back, FALSE otherwise
-
---*/
-
-
-{
-
-    if (!--LockedPMStackCount) {
-        setEIP(PMLockOrigEIP);
-        setSS((WORD)PMLockOrigSS);
-        setESP(PMLockOrigESP);
-        return TRUE;
-    }
-    return FALSE;
-
-}
-
-void
-ReflectV86Int(
-    ULONG IntNumber,
-    ULONG Eflags
-    )
-/*++
-
-Routine Description:
-
-    This routine is responsible for simulating a real mode interrupt. It
-    uses the real mode IVT at 0:0.
-
-Arguments:
-
-    IntNumber - interrupt vector number
-    Eflags - client flags to save on the stack
-
-
---*/
-
-{
-    PUCHAR VdmStackPointer;
-    PWORD16 pIVT;
-    USHORT VdmSP;
-
-    VdmStackPointer = Sim32GetVDMPointer(((ULONG)getSS())<<16, 1, FALSE);
-    VdmSP = getSP() - 2;
-    *(PWORD16)(VdmStackPointer+VdmSP) = (WORD) Eflags;
-    VdmSP -= 2;
-    *(PWORD16)(VdmStackPointer+VdmSP) = (WORD) getCS();
-    VdmSP -= 2;
-    *(PWORD16)(VdmStackPointer+VdmSP) = (WORD) getIP();
-    setSP(VdmSP);
-    pIVT = (PWORD16) (IntelBase + IntNumber*4);
-    setIP(*pIVT++);
-    setCS(*pIVT);
-}
-
-#line 495
-static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame,
-    PUCHAR *pVdmStackPointer, ULONG *pNewSP);
-
-#line 494
-BOOL
-#line 495
 DpmiSwIntHandler(
     ULONG IntNumber
     )
@@ -544,84 +513,68 @@ Return Value:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     PVDM_INTERRUPTHANDLER Handlers = DpmiInterruptHandlers;
     PUCHAR VdmStackPointer;
     ULONG SaveEFLAGS;
     ULONG NewSP;
 
-    DBGTRACE(DPMI_SW_INT, IntNumber, 0, 0);
+    DBGTRACE(VDMTR_TYPE_DPMI | DPMI_SW_INT, (USHORT)IntNumber, 0);
 
-#line 522
-    if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) { 
-        return FALSE;
+    //
+    // If we're here via breakpoint, see if it belongs to NTVDM debug code.
+    //
+    if ((IntNumber == 3) &&
+        (*(ULONG *)(IntelBase+FIXED_NTVDMSTATE_LINEAR) & VDM_BREAK_DEBUGGER) &&
+        DbgBPInt()) {
+        return TRUE;
     }
 
-#line 526
-    SaveEFLAGS = getEFLAGS();
-    //BUGBUG turn off task bits
-    SaveEFLAGS &= ~0x4000;
-#line 530
 
     if (!(getMSW() & MSW_PE)) {
 
-#line 534
-        setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
-#line 533
-        ReflectV86Int(IntNumber, SaveEFLAGS);
+        EmulateV86Int((UCHAR)IntNumber);
 
     } else {
         PUCHAR VdmStackPointer;
 
         // Protect mode
+        SaveEFLAGS = getEFLAGS();
+        //BUGBUG turn off task bits
+        SaveEFLAGS &= ~EFLAGS_NT_MASK;
 
-#line 541
-        /* DIVERGENCE(MVDM-HOST-DIV-481): PushInt selects the return frame
-         * width from the registered handler flags. */
-#line 544
-        BOOL WideFrame = (Handlers[IntNumber].Flags & VDM_INT_32) != 0;
-        if (!BuildStackFrameWithWidth(3, WideFrame, &VdmStackPointer, &NewSP)) {
-#line 541
+        if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) {
             return FALSE;
         }
-
-#line 545
+        /* DIVERGENCE(MVDM-HOST-DIV-481): PushInt selects the return frame
+         * width from the registered handler flags. */
+        BOOL WideFrame = (Handlers[IntNumber].Flags & VDM_INT_32) != 0;
+        if (!BuildStackFrameWithWidth(3, WideFrame, &VdmStackPointer, &NewSP)) {
+            return FALSE;
+        }
         /* A rejected frame does not commit the monitor's flag updates. */
         setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
-#line 544
         if (WideFrame) {
 
             *(PDWORD16)(VdmStackPointer-4) =  SaveEFLAGS;
-#line 547
             *(PDWORD16)(VdmStackPointer-8) =  getCS();
-#line 548
             *(PDWORD16)(VdmStackPointer-12) = getEIP();
-#line 549
             setEIP(Handlers[IntNumber].Eip);
-#line 552
         } else {
 
             *(PWORD16)(VdmStackPointer-2) = (WORD) SaveEFLAGS;
             *(PWORD16)(VdmStackPointer-4) = (WORD) getCS();
             *(PWORD16)(VdmStackPointer-6) = (WORD) getEIP();
-#line 557
             setEIP((DWORD)LOWORD(Handlers[IntNumber].Eip));
-#line 560
         }
-
-#line 563
         setESP(NewSP);
-#line 562
         setCS(Handlers[IntNumber].CsSelector);
-
-#line 564
 #if DBG
-#line 565
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 573
     }
 
-    DBGTRACE(DPMI_DISPATCH_INT, IntNumber, 0, 0);
+    DBGTRACE(VDMTR_TYPE_DPMI | DPMI_DISPATCH_INT, (USHORT)IntNumber, 0);
     return TRUE;
 }
 
@@ -647,25 +600,25 @@ Return Value:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     PVDM_INTERRUPTHANDLER Handlers = DpmiInterruptHandlers;
     PUCHAR VdmStackPointer;
     ULONG SaveEFLAGS;
     ULONG NewSP;
 
-    DBGTRACE(DPMI_HW_INT, IntNumber, 0, 0);
-
-#line 608
-    SaveEFLAGS = getEFLAGS();
-    //BUGBUG turn off task bits
-    SaveEFLAGS &= ~0x4000;
-    setEFLAGS(SaveEFLAGS & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK));
+    DBGTRACE(VDMTR_TYPE_DPMI | DPMI_HW_INT, (USHORT)IntNumber, 0);
 
     if (!(getMSW() & MSW_PE)) {
 
-        ReflectV86Int(IntNumber, SaveEFLAGS);
+        EmulateV86Int((UCHAR)IntNumber);
 
     } else {
         PUCHAR VdmStackPointer;
+
+        SaveEFLAGS = getEFLAGS();
+        //BUGBUG turn off task bits
+        SaveEFLAGS &= ~0x4000;
+        setEFLAGS(SaveEFLAGS & ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK));
 
         BeginUseLockedPMStack();
 
@@ -696,13 +649,12 @@ Return Value:
         setCS(Handlers[IntNumber].CsSelector);
     }
 
-    DBGTRACE(DPMI_DISPATCH_INT, IntNumber, 0, 0);
+    DBGTRACE(VDMTR_TYPE_DPMI | DPMI_DISPATCH_INT, (USHORT)IntNumber, 0);
     return TRUE;
 }
 
 
 VOID
-#line 655
 DpmiIntHandlerIret16(
     VOID
     )
@@ -720,6 +672,7 @@ Routine Description:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     PUCHAR VdmStackPointer;
     ULONG NewSP;
     USHORT SegSs;
@@ -733,17 +686,12 @@ Routine Description:
     } else {
         VdmStackPointer += getSP();
     }
-
-#line 686
     //
     // Fast iret (without executing final 16-bit iret)
     //
-#line 689
-#ifdef i386
-#line 690
+#if defined(_X86_) && !defined(CCPU)
 #error Excluded unsupported i386 kernel VDM interrupt return
 #else
-#line 717
     if (EndUseLockedPMStack()) {
         ULONG NewEIP, NewEFLAGS, NewCS;
 
@@ -759,12 +707,9 @@ Routine Description:
         // Pass 6 to BuildStackFrame since 6 words = 3 dwords
         //
         if (!BuildStackFrame(6, &VdmStackPointer, &NewSP)) {
-#line 732
 #if DBG
-#line 733
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 735
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
         }
@@ -791,14 +736,11 @@ Routine Description:
         setEIP((ULONG)LOWORD(DosxIret));
 
     }
-#endif // i386
+#endif // _X86_
 
-    #line 763
-    DBGTRACE(DPMI_INT_IRET16, 0, 0, 0);
 }
 
 VOID
-#line 767
 DpmiIntHandlerIret32(
     VOID
     )
@@ -816,6 +758,7 @@ Routine Description:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     PUCHAR VdmStackPointer;
     ULONG NewSP;
     USHORT SegSs;
@@ -829,13 +772,9 @@ Routine Description:
     } else {
         VdmStackPointer += getSP();
     }
-
-#line 798
-#ifdef i386
-#line 799
+#if defined(_X86_) && !defined(CCPU)
 #error Excluded unsupported i386 kernel VDM interrupt return
 #else
-#line 822
     if (EndUseLockedPMStack()) {
         ULONG NewEIP, NewCS, NewEFLAGS;
 
@@ -845,12 +784,9 @@ Routine Description:
 
 
         if (!BuildStackFrame(3, &VdmStackPointer, &NewSP)) {
-#line 831
 #if DBG
-#line 832
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 834
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
         }
@@ -871,16 +807,13 @@ Routine Description:
 
     setCS(HIWORD(DosxIretd));
     setEIP((ULONG)LOWORD(DosxIretd));
-#endif // i386
+#endif // _X86_
 
-    #line 856
-    DBGTRACE(DPMI_INT_IRET32, 0, 0, 0);
 }
 
-#ifndef i386
+#if !defined(_X86_) || defined(CCPU)
 
 BOOL
-#line 862
 DpmiFaultHandler(
     ULONG IntNumber,
     ULONG ErrorCode
@@ -904,42 +837,44 @@ Return Value:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     PVDM_FAULTHANDLER Handlers = DpmiFaultHandlers;
     PUCHAR VdmStackPointer;
     ULONG SaveSS, SaveESP, SaveEFLAGS, SaveCS, SaveEIP;
     ULONG StackOffset;
     ULONG NewSP;
 
-    DBGTRACE(DPMI_FAULT, IntNumber, ErrorCode, 0);
+    DBGTRACE(VDMTR_TYPE_DPMI | DPMI_FAULT, (USHORT)IntNumber, ErrorCode);
 
-#line 893
+    if ((IntNumber == 1)  &&
+        (*(ULONG *)(IntelBase+FIXED_NTVDMSTATE_LINEAR) & VDM_BREAK_DEBUGGER) &&
+        DbgTraceInt()) {
+        return TRUE;
+    }
+
+    if (DbgFault(IntNumber)) {      // try the debugger
+        //
+        // exception handled via user input
+        //
+        return TRUE;
+    }
+
+    if (!(getMSW() & MSW_PE)) {
+        EmulateV86Int((UCHAR)IntNumber);
+        return TRUE;
+    }
     SaveSS = getSS();
     SaveESP = getESP();
     SaveEFLAGS = getEFLAGS();
     SaveEIP = getEIP();
     SaveCS  = getCS();
-    /* Exception dispatch clears IF/TF after emulation declines. */
-#line 900
-    if ((getMSW() & MSW_PE) && ((IntNumber == 13) || (IntNumber == 6)) &&
-            DpmiEmulateInstruction()) {
-        return TRUE;
-    }
-#line 898
-    setEFLAGS(SaveEFLAGS & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK));
-#line 899
-
-    if (!(getMSW() & MSW_PE)) {
-        ReflectV86Int(IntNumber, getEFLAGS());
-        return TRUE;
-    }
-
-#line 910
+    if ((IntNumber == 13 || IntNumber == 6) && DpmiEmulateInstruction()) return TRUE;
+    setEFLAGS(SaveEFLAGS & ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK));
 
     if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) { 
 #if defined(CPU_40_STYLE) && defined(CCPU)
         setEFLAGS(SaveEFLAGS);
 #endif
-#line 912
         return FALSE;
     }
 
@@ -953,8 +888,6 @@ Return Value:
     // Win31 has an undocumented feature of creating a 32byte area on the
     // stack. Krnl386 sticks stuff in there, so we emulate the behavior here.
     //
-
-#line 926
     setESP(getESP()-0x20);
 
     //
@@ -969,10 +902,9 @@ Return Value:
         setESP(SaveESP);
         setEFLAGS(SaveEFLAGS);
 #endif
-#line 935
         return FALSE;
     }
-                                              
+
     if (Frame32) {
         *(PDWORD16)(VdmStackPointer-4) = SaveSS;
         *(PDWORD16)(VdmStackPointer-8) = SaveESP;
@@ -995,24 +927,19 @@ Return Value:
         setEIP(LOWORD(Handlers[IntNumber].Eip));
         setSP((WORD)NewSP);
     }
-
-#line 961
     setCS(Handlers[IntNumber].CsSelector);
 
 #if DBG
-#line 964
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
-#line 973
-    DBGTRACE(DPMI_DISPATCH_FAULT, IntNumber, 0, 0);
+    DBGTRACE(VDMTR_TYPE_DPMI | DPMI_DISPATCH_FAULT, (USHORT)IntNumber, 0);
     return TRUE;
 }
 
-#endif // i386
+#endif // _X86_
 
 VOID
-#line 980
 DpmiFaultHandlerIret16(
     VOID
     )
@@ -1028,6 +955,7 @@ Routine Description:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     PUCHAR VdmStackPointer;
     USHORT SegSs;
 
@@ -1038,18 +966,13 @@ Routine Description:
     } else {
         VdmStackPointer += getSP();
     }
-
-#line 1006
     EndUseLockedPMStack();
-
-#line 1008
     setEIP((DWORD)*(PWORD16)(VdmStackPointer+2));
     setCS(*(PWORD16)(VdmStackPointer+4));
     setSTATUS(*(PWORD16)(VdmStackPointer+6));
     setSP(*(PWORD16)(VdmStackPointer+8));
     setSS(*(PWORD16)(VdmStackPointer+10));
 
-    DBGTRACE(DPMI_FAULT_IRET, 0, 0, 0);
 }
 
 VOID
@@ -1068,6 +991,7 @@ Routine Description:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     PUCHAR VdmStackPointer;
     USHORT SegSs;
 
@@ -1088,17 +1012,13 @@ Routine Description:
     setESP(*(PDWORD16)(VdmStackPointer+16));
     setSS((USHORT)*(PWORD16)(VdmStackPointer+20));
 
-    DBGTRACE(DPMI_FAULT_IRET, 0, 0, 0);
 }
 
 
-#line 1058
 static BOOL
 BuildStackFrameWithWidth(
-#line 1059
     ULONG StackUnits,
     BOOL WideFrame,
-#line 1060
     PUCHAR *pVdmStackPointer,
     ULONG *pNewSP
     )
@@ -1145,15 +1065,10 @@ Notes:
     Limit = (ULONG) (Ldt[SelIndex].HighWord.Bits.LimitHi << 16) | 
                      Ldt[SelIndex].LimitLow;
 
-    //
-    // 
-    // bugbug is this really correct?
-#line 1109
-    Limit++;
-#line 1110
     if (Ldt[SelIndex].HighWord.Bits.Granularity) {
         Limit = (Limit << 12) | 0xfff;
     }
+    if (Limit != 0xffffffff) Limit++;
 
 
     if (Ldt[SelIndex].HighWord.Bits.Default_Big) {
@@ -1161,10 +1076,7 @@ Notes:
     } else {
         VdmSp = getSP();
     }
-
-#line 1122
     if (WideFrame) {
-#line 1122
         StackOffset = StackUnits*sizeof(DWORD);
     } else {
         StackOffset = StackUnits*sizeof(WORD);
@@ -1172,7 +1084,6 @@ Notes:
 
     NewSP = VdmSp - StackOffset;
     bExpandDown = (BOOL) (Ldt[SelIndex].HighWord.Bits.Type & 4);
-#line 1129
     if ((StackOffset > VdmSp) || 
         (!bExpandDown && (VdmSp > Limit)) ||
         (bExpandDown && (NewSP < Limit))) {
@@ -1182,91 +1093,83 @@ Notes:
 
     *pNewSP = NewSP;
     VdmStackPointer = Sim32GetVDMPointer(((ULONG)SegSs)<<16, 1, TRUE);
-#line 1138
     VdmStackPointer += VdmSp;
     *pVdmStackPointer = VdmStackPointer;
     return(TRUE);
 
 }
+VOID
+DpmiHungAppIretAndExit(
+    VOID
+    )
+/*++
 
-#line 1145
+Routine Description:
+
+    This routine is called via BOP during hung app processing. The
+    Keyboard driver calls this in the context of a hw interrupt in
+    order to terminate the app. We need to "unwind" the current
+    interrupt, and transfer control to code which will execute
+    a DOS exit.
+
+--*/
+
+{
+    DECLARE_LocalVdmContext;
+
+    EndUseLockedPMStack();
+    setCS(HIWORD(DosxHungAppExit));
+    setIP(LOWORD(DosxHungAppExit));
+}
+
 BOOL
-BuildStackFrame(ULONG StackUnits, PUCHAR *pVdmStackPointer, ULONG *pNewSP)
-{
-    return BuildStackFrameWithWidth(StackUnits, Frame32, pVdmStackPointer, pNewSP);
-}
-
-#line 1144
-VOID
-#line 1145
-EnableIntHooks(
-    VOID
+DispatchPMInt(
+    UCHAR IntNumber
     )
-
 /*++
 
 Routine Description:
 
-    This routine is called during startup to install our handlers with
-    the emulator.
+    This routine is called at the end of a PM int chain. It is provided
+    for compatibility to win31/win95. On win31/win95, VMM and VxD's have
+    the opportunity to perform some functionality at the point where
+    the dpmi host is about to switch the machine to v86 mode to continue
+    the interrupt chain. Sometimes, the function is totally handled by
+    a hook at this point.
+
+    This routine provides a framework for this mechanism to allow the
+    emulation of this behavior.
 
 Arguments:
 
-    None
+    IntNumber - the interrupt# that is about to be reflected to v86 mode
 
 Return Value:
 
-    None.
+    TRUE if the interrupt was handled and control can return to the app
+    FALSE otherwise, continue the reflection to v86 mode.
 
 --*/
 
 {
-#ifndef i386
-#line 1168
-    if (fDpmiHookInts) {
-        VdmInstallHardwareIntHandler(DpmiHwIntHandler);
-        VdmInstallSoftwareIntHandler(DpmiSwIntHandler);
-        VdmInstallFaultHandler(DpmiFaultHandler);
-        fDpmiIntsHaveBeenHooked = TRUE;
+    BOOL bHandled;
+
+    switch(IntNumber) {
+
+    case 0x2f:
+
+        bHandled = PMInt2fHandler();
+        break;
+
+    default:
+        bHandled = FALSE;
     }
-#endif // i386
-#line 1175
-}
 
-
-VOID
-DisableIntHooks(
-    VOID
-    )
-
-/*++
-
-Routine Description:
-
-    This routine is called to uninstall the our interrupt and exception
-    handlers from the emulator.
-
-Arguments:
-
-    None
-
-Return Value:
-
-    None.
-
---*/
-
-{
-#ifndef i386
-#line 1202
-    if (fDpmiIntsHaveBeenHooked) {
-        VdmInstallHardwareIntHandler(NULL);
-        VdmInstallSoftwareIntHandler(NULL);
-        VdmInstallFaultHandler(NULL);
-        fDpmiIntsHaveBeenHooked = FALSE;
+    if (bHandled) {
+        SimulateIret(RESTORE_FLAGS);
     }
-#endif // i386
-#line 1209
+    return bHandled;
+
 }
 
 
@@ -1296,10 +1199,9 @@ Return Value:
     return Offset <= Limit && Increment <= Limit - Offset;
 }
 
-#ifndef i386
+#if !defined(_X86_) || defined(CCPU)
 #if defined(CPU_40_STYLE) && defined(CCPU)
 /* Read through the active CS cache and page mapping. Reject lookup failures. */
-#line 1242
 static BOOL
 DpmiMappedCodeByte(ULONG Base, ULONG Offset, PUCHAR Value)
 {
@@ -1328,7 +1230,6 @@ DpmiNextCodeByte(ULONG Offset, PULONG Length, PUCHAR Value)
     return TRUE;
 }
 #endif
-#line 1238
 BOOL
 DpmiEmulateInstruction(
     VOID
@@ -1353,16 +1254,15 @@ Return Value:
 --*/
 
 {
+    DECLARE_LocalVdmContext;
     PUCHAR pCode;
     UCHAR Opcode, Operands[2];
     ULONG SegCS = getCS(), Length = 0;
     BOOL Big = (c_getCS_AR() & 0x4000) != 0, Operand32 = Big;
     ULONG Offset = Big ? getEIP() : getIP();
-#line 1265
     BOOL bReturn = FALSE;
 
     /* Validate instruction prefixes and operands before dispatching side effects. */
-#line 1269
     if (!(getMSW() & MSW_PE) || c_getVM())
         return FALSE;
     for (;;) {
@@ -1419,7 +1319,6 @@ Return Value:
                 (Operands[0] != 0x20 && Operands[0] != 0x22) ||
                 !DpmiNextCodeByte(Offset, &Length, &Operands[1]))
                 break;
-#line 1282
             bReturn = DpmiOp0f(Operands);
             break;
 
@@ -1432,30 +1331,25 @@ Return Value:
             //
             if (!DpmiNextCodeByte(Offset, &Length, &Operands[0]))
                 break;
-#line 1295
             //
             // Look for code in dxutil.asm EnterProtectedMode
             //
-#line 1298
             if ((SegCS == DosxRmCodeSelector) &&
                 ((Operands[0] == 0xe0) ||          // mov fs, ax
                  (Operands[0] == 0xe8))            // mov gs, ax
                     ) {
-#line 1303
                 bReturn = TRUE;
             }
             break;
     }
 
-#line 1308
-    DBGTRACE(DPMI_OP_EMULATION, Opcode, (ULONG) bReturn, 0);
+    DBGTRACE(VDMTR_TYPE_DPMI | DPMI_OP_EMULATION, Opcode, (ULONG) bReturn);
     if (bReturn) {
         setEIP(Offset + Length);
         /* Like native CCPU STI, delay interrupt delivery by one instruction. */
         if (Opcode != 0xfb)
             ccpu386CompleteInstruction();
     }
-#line 1309
     return bReturn;
 }
 
@@ -1486,6 +1380,7 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     ULONG Value;
 
     switch (*pCode++) {

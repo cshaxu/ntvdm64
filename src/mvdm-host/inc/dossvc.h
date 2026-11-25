@@ -157,13 +157,15 @@ svc macro   func
 #define SVC_DEMGETCOMPUTERNAME  0x41
 #define SVC_DEMFASTREAD         0x42
 #define SVC_DEMFASTWRITE        0x43
-#define SVC_DEMCHECKPATH	0x44
+#define SVC_DEMCHECKPATH        0x44
 #define SVC_DEMSYSTEMSYMBOLOP   0x45
 #define SVC_DEMGETDPBLIST       0x46
 
-#define SVC_DEMPIPEFILEDATAEOF	0x47
-#define SVC_DEMPIPEFILEEOF	0x48
-#define SVC_DEMLASTSVC		0x49
+#define SVC_DEMPIPEFILEDATAEOF  0x47
+#define SVC_DEMPIPEFILEEOF      0x48
+#define SVC_DEMLFNENTRY         0x49
+#define SVC_SETDOSVARLOCATION   0x4A
+#define SVC_DEMLASTSVC          0x4B
 
 
 /*
@@ -176,3 +178,4 @@ svc macro   func
 
 #define ID_NTIO 1
 #define ID_NTDOS 2
+

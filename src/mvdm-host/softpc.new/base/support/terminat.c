@@ -54,6 +54,7 @@
 
 IMPORT VOID host_applClose IPT0();
 IMPORT VOID host_terminate IPT0();
+IMPORT VOID SbTerminate IPT0();
 
 #line 56
 void terminate()
@@ -71,6 +72,7 @@ void terminate()
 	}
 	else
 		already_called_terminate = TRUE;
+	SbTerminate();
 
 #ifdef MSWDVR
 #line 70

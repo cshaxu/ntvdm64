@@ -43,7 +43,6 @@ int mvdm_vm_command_enter(uint32_t service)
     if (!callback) return 0;
     /* CCPU owns the segment/stack/paging checks and real FAR return frame.
      * VMM establishes the calling VM before a product request exists. */
-    mvdm_cpu_access_current()->set_ip((uint16_t)(mvdm_cpu_access_current()->ip() + 1));
     target[0] = (uint16_t)callback;
     target[1] = callback >> 16;
     mvdm_cpu_access_current()->call_far(target);

@@ -30,6 +30,8 @@
 #line 31
 #include "sim32.h"
 #include "compat/include/mvdm_softpc_termination.h"
+#include "compat/include/mvdm_softpc_effective_address.h"
+#include <nt_vdd.h>
 #line 32
 #include "sas.h"
 #include "gmi.h"
@@ -168,6 +170,33 @@ UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
             }
 
         return (NtGetPtrToLinAddrByte(iaddr));
+}
+
+/* XP debugger ABI. The zero V86 address identifies this SAS allocation. */
+extern int mvdm_softpc_guest_memory_range_valid(uint32_t address,
+    uint32_t byte_count, int write);
+
+PVOID WINAPI VdmMapFlat(USHORT selector, ULONG offset, VDM_MODE mode)
+{
+    ULONG address;
+    if (!Start_of_M_area || !Length_of_M_area) return NULL;
+    if (mode == VDM_V86) {
+        ULONG base = (ULONG)selector << 4;
+        if (!base && !offset) return Start_of_M_area;
+        if (offset > MAXULONG - base) return NULL;
+        address = base + offset;
+    } else if (mode == VDM_PM) {
+        ULONG base, limit, access;
+        if (!selector || !mvdm_softpc_protected_segment(selector, &base,
+                &limit, &access) || offset > MAXULONG - base)
+            return NULL;
+        address = base + offset;
+    } else {
+        return NULL;
+    }
+    if (!mvdm_softpc_guest_memory_range_valid(address, 1, 1)) return NULL;
+    if (IsVideoMemory(address)) return GetVideoMemory(address);
+    return NtGetPtrToLinAddrByte(address);
 }
 
 /*

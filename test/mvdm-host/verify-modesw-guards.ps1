@@ -15,7 +15,7 @@ foreach($index in 1,2){
   & "$repo/tools/build-fixtures.cmd" x86 $target *> "$output/$target.log"
   $code=$LASTEXITCODE
   $log=Get-Content "$output/$target.log" -Raw
-  $line=@(50,98)[$index-1]
+  $line=@(110,172)[$index-1]
   if($negative){
    $diagnostic="($line): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-619"
    if(!$code -or !$log.Contains($diagnostic)){throw "Missing original rejection: $target at $line"}

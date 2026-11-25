@@ -6,6 +6,8 @@ Upgrade the project's NTVDM baseline to Windows XP, support audio and long file
 names (LFN), update all guest components, and implement necessary modern-host
 compatibility repairs. Admitted as M0 T485 under [Current](../states/CURRENT.md).
 
+The source baseline for every batch is Windows XP SP1 (5.1.2600.1106), local winxpscodes commit a2f6d7c93aa4f11efc51147566d5961c59a8ef89, tree Source/XPSP1/NT. The three-way review compares OpenNT, the current project and this SP1 tree. English XP Professional SP3 x86 is the approved binary medium and runtime reference. Differences from SP3 alone do not justify changes to SP1 source.
+
 ## Scope
 
 1. Inventory the present host and guest baseline against an identified Windows
@@ -26,9 +28,13 @@ compatibility repairs. Admitted as M0 T485 under [Current](../states/CURRENT.md)
 5. Preserve existing DOS, Win16/WOW, graphics, input, worker, service and launch
    capabilities, and explicitly resolve migration, installation and rollback.
 
-The [ordered migration ledger](../etc/evidence/t485-s1/README.md) covers existing mirror components in host, non-MVDM and guest order. Defer XP-only components to the next T unless a current batch demonstrates a necessary dependency.
+The [ordered migration ledger](../etc/evidence/t485-s1/README.md) covers existing mirror components in host, non-MVDM and guest order. Defer XP-only components to the next T unless a current batch demonstrates a necessary dependency. When XP splits existing product behavior into a separate shipped image, admit its product component and build target with that batch. H001 introduces ntvdmd-dll for NTVDMD.DLL.
+
+The owner authorized direct use of the pinned XP source for this migration and its ordinary project deliveries. Record provenance once and carry that decision through all batches. Keep the separate guest media, archive membership and binary identity checks.
 
 ## Acceptance
+
+Ship the project-linked binaries built from the pinned XP source and approved host adaptations. Use the selected retail media for ABI and behavior comparisons. Record both hashes when comparing images. Byte equality is a delivery requirement only when explicitly requested for that component and baseline. For H001 the owner accepted the SP1 NTVDMD.DLL build and the SP3 debugger event comparison.
 
 Bind all tests to the selected coherent package and guest identities. Cover
 real DOS and Win16 applications, audio output and lifecycle, LFN creation,

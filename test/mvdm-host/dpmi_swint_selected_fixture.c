@@ -6,9 +6,9 @@
 #pragma pack(push,1)
 typedef struct { USHORT CsSelector, Flags; ULONG Eip; } HANDLER;
 #pragma pack(pop)
-extern HANDLER DpmiInterruptHandlers[256];
+HANDLER DpmiInterruptHandlers[256];
 typedef struct { USHORT CsSelector, SsSelector; ULONG Eip, Esp, Flags; } FAULT_HANDLER;
-extern FAULT_HANDLER DpmiFaultHandlers[32];
+FAULT_HANDLER DpmiFaultHandlers[32];
 extern BOOL __cdecl DpmiSwIntHandler(ULONG);
 extern BOOL __cdecl DpmiFaultHandler(ULONG, ULONG);
 extern void __cdecl DpmiFaultHandlerIret32(void);
@@ -50,6 +50,21 @@ UNREACHED(setSTATUS) UNREACHED(setCR0)
 UNREACHED(VdmInstallHardwareIntHandler) UNREACHED(VdmInstallSoftwareIntHandler)
 UNREACHED(VdmInstallFaultHandler)
 UNREACHED(mvdm_softpc_report_dpmi_iret16_state)
+USHORT PMReflectorSeg, LdtMaxSel=sizeof(descriptors);
+ULONG DosxHungAppExit, RmBopFe, DosxRMReflector;
+void *Idt;
+UNREACHED(setEBX) UNREACHED(PMInt2fHandler)
+void WINAPI DbgBreakPoint(void){abort();}
+USHORT getSTATUS(void){return (USHORT)flags;}
+BOOL DbgBPInt(void){return FALSE;}
+BOOL DbgTraceInt(void){return FALSE;}
+BOOL DbgFault(ULONG number){(void)number;return FALSE;}
+void *WINAPI VdmMapFlat(USHORT selector,ULONG offset,ULONG mode)
+{
+    (void)selector;(void)mode;
+    if(offset >= sizeof(memory)) abort();
+    return memory + offset;
+}
 
 /* This fixture dispatches vector 14. The production CCPU fixture covers
  * instruction emulation for vectors 6 and 13. */
@@ -115,13 +130,16 @@ int main(int argc, char **argv){
     CHECK(!DpmiSwIntHandler(0x2a));
     CHECK(ldt_publications==0 && mock_eax==0xf0f0f0f1u && flags==0x23302);
     msw=0; flags=0x3302;
-    CHECK(!DpmiSwIntHandler(0x2a));
-    CHECK(ldt_publications==0 && mock_eax==0xf0f0f0f1u && flags==0x3302);
+    *(USHORT *)(memory+0x2a*4)=0x4567;
+    *(USHORT *)(memory+0x2a*4+2)=0x1234;
+    CHECK(DpmiSwIntHandler(0x2a));
+    CHECK(cs==0x1234 && ip==0x4567 && sp==0xfa && flags==0x3002);
+    CHECK(ldt_publications==0 && mock_eax==0xf0f0f0f1u);
     msw=1;
     flags=0x3302; mock_cf=1;
     CHECK(!DpmiSwIntHandler(0x2a));
     CHECK(ldt_publications==0 && mock_eax==0xf0f0f0f1u && mock_cf==1 && flags==0x3302);
-    puts("DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=declined");
+    puts("DPMI_INT2A_MODE_OWNER_OK v86=declined real=ivt protected=declined");
     return 0;
   }
   if(argc==2 && (!strcmp(argv[1],"--pm-fault-failure") ||
@@ -168,13 +186,13 @@ int main(int argc, char **argv){
     puts("DPMI_PM_VECTOR14_FRAME_OK");
     return 0;
   }
-  CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==0 && flags==0x4321);
+  msw=1; descriptors[2].LimitLow=0xffff; CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==0 && flags==0x4321);
   descriptors[1].HighWord.Bits.Pres=1; DpmiInterruptHandlers[0x31].CsSelector=15;
   CHECK(DpmiSwIntHandler(0x31)); CHECK(mappings==1 && dispatches==1);
   CHECK(sp==0xfa && *(USHORT *)(memory+0xfa)==0x30);
   msw=1; sp=2; descriptors[2].LimitLow=0xffff;
   CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==1 && dispatches==1);
-  puts("DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1");
+  puts("DPMI_SWINT_SELECTED_OBJECT_OK absent=1 protected=1 stack_failure=1");
   msw=0;
   flags=0x4321; ss=16;
   /* NT4 PushInt selects frame width from the installed handler, independently
@@ -226,8 +244,8 @@ int main(int argc, char **argv){
   CHECK(DpmiSwIntHandler(0x31));
   CHECK(sp==2 && *(USHORT *)(memory+2)==0x1234);
   puts("DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2");
-  /* Original CCPU BuildStackFrame increments Limit before granularity
-   * expansion and checks the old SP for normal segments. */
+  /* XP expands the inclusive segment limit before converting it to
+   * the allowed top-of-stack offset. */
   ss=0x17;cs=0x27;sp=0x101;ip=0x1234;flags=0x202;msw=1;
   descriptors[2].HighWord.Bits.Default_Big=1;
   descriptors[2].HighWord.Bits.Type=0x12;
@@ -244,10 +262,14 @@ int main(int argc, char **argv){
   CHECK(DpmiSwIntHandler(0x31)); CHECK(sp==0x101);
   descriptors[2].HighWord.Bits.Type=0x12;
   descriptors[2].HighWord.Bits.Granularity=1;descriptors[2].LimitLow=0x10;
-  ss=0x17;cs=0x27;sp=0x11fff;ip=0x1234;flags=0x202;
-  CHECK(DpmiSwIntHandler(0x31)); CHECK(sp==0x11ff3);
-  ss=0x17;cs=0x27;sp=0x12000;ip=0x1234;flags=0x202;
-  CHECK(!DpmiSwIntHandler(0x31)); CHECK(sp==0x12000);
+  ss=0x17;cs=0x27;sp=0x11000;ip=0x1234;flags=0x202;
+  CHECK(DpmiSwIntHandler(0x31)); CHECK(sp==0x10ff4);
+  ss=0x17;cs=0x27;sp=0x11001;ip=0x1234;flags=0x202;
+  CHECK(!DpmiSwIntHandler(0x31)); CHECK(sp==0x11001);
+  descriptors[2].HighWord.Bits.LimitHi=15;descriptors[2].LimitLow=0xffff;
+  ss=0x17;cs=0x27;sp=0x11000;ip=0x1234;flags=0x202;
+  CHECK(DpmiSwIntHandler(0x31)); CHECK(sp==0x10ff4);
+  descriptors[2].HighWord.Bits.LimitHi=0;
   descriptors[2].HighWord.Bits.Granularity=0;
   puts("DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2");
   /* Deliberately invalid fixture alias: real CCPU SIM32 does not return

@@ -18,10 +18,10 @@ Revision History:
 
 --*/
 
-#define DPMI_EXEC_INT(x)    DpmiSwitchToDosxStack(FALSE);   \
+#define DPMI_EXEC_INT(x)    SWITCH_TO_DOSX_RMSTACK();       \
                             DpmiPushRmInt(x);               \
                             host_simulate();                \
-                            DpmiSwitchFromDosxStack();
+                            SWITCH_FROM_DOSX_RMSTACK();
 
 //
 // VOID

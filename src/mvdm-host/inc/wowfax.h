@@ -34,6 +34,8 @@
 #define WM_DDRV_UNLOAD             (WM_USER+0x100+20)
 #define WM_DDRV_LAST               (WM_USER+0x100+20) // end DDRV range
 
+#define CCHDOCNAME 128
+
 #ifdef DEBUG
 #error T476-S1: branch not selected by product build
 
@@ -148,6 +150,7 @@ typedef struct _WOWFAXINFO16 {  /* winfo16 */
     // Since we have a max length (CCHDEVICENAME) we'll pass
     // the printer/device name in this fixed length buffer.
     char        szDeviceName[CCHDEVICENAME+1];
+    char        szDocName[CCHDOCNAME+1];
 
 } WOWFAXINFO16;
 
@@ -257,6 +260,10 @@ typedef struct _WOWFAXINFO {   /* faxi */
     // Since we have a max length (CCHDEVICENAME) we'll pass
     // the printer/device name in this fixed length buffer.
     WCHAR       szDeviceName[CCHDEVICENAME+1];
+
+    // EasyFax Ver2.0 support for JAPAN. 
+    // Also needed for Procomm+ 3 cover sheets. Bug #305665
+    WCHAR       szDocName[CCHDOCNAME+1];
 
     UINT    bmPixPerByte;
     UINT    bmWidthBytes;

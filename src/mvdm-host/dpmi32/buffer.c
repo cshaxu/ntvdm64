@@ -105,29 +105,6 @@ Return Value:
     DpmiFreeBuffer(Source, BufferLength);
 }
 
-VOID
-DpmiUnmapBuffer(
-    PUCHAR Buffer,
-    USHORT BufferLength
-    )
-/*++
-
-Routine Description:
-
-    This routine frees the buffer.
-
-Arguments:
-
-    Buffer -- Supplies the buffer
-
-Return Value:
-
-    None.
-
---*/
-{
-    DpmiFreeBuffer(Buffer, BufferLength);
-}
 
 USHORT
 DpmiCalcFcbLength(
@@ -188,20 +165,13 @@ Return Value:
     PUCHAR String;
     ULONG Limit;
 
-    String = Sim32GetVDMPointer(
-        ((ULONG)StringSeg << 16),
-        1,
-        TRUE
-        );
-
-    String += StringOff;
-
+    String = VdmMapFlat(StringSeg, StringOff, VDM_PM);
 
     //
     // Scan string for NULL
     //
 
-    GET_SELECTOR_LIMIT(StringSeg, Limit);
+    GET_SHADOW_SELECTOR_LIMIT(StringSeg, Limit);
     Limit -= StringOff;
     while (CurrentChar <= (USHORT)Limit) {
         if (String[CurrentChar] == '\0') {
@@ -238,107 +208,6 @@ Return Value:
     *Length = CurrentChar + 1;
 
     return DpmiMapAndCopyBuffer(String, (USHORT) (CurrentChar + 1));
-
-}
-
-VOID
-DpmiUnmapString(
-    PUCHAR String,
-    USHORT Length
-    )
-{
-    DpmiUnmapBuffer(String, Length);
-    return;
-}
-
-USHORT
-DpmiSegmentToSelector(
-    USHORT Segment
-    )
-/*++
-
-Routine Description:
-
-    This routine converts a specfied segment to a Data selector.  If there
-    is a approprate selector in the LDT, that is returned.  If not a new
-    selector is created.  This routine can only be called in protectedmode.
-
-Arguments:
-
-    Segment -- Segment to convert
-
-Return Value:
-
-    Selector for the specified segment
-
---*/
-{
-    USHORT ClientAX, ClientBX, ClientCS, ClientIP, ClientDS, ClientES, Selector;
-    PWORD16 Stack;
-    VSAVEDSTATE State;
-
-    ASSERT(getMSW() & MSW_PE);
-
-    DpmiSaveSegmentsAndStack(&State);
-    ClientAX = getAX();
-    ClientBX = getBX();
-    ClientCS = getCS();
-    ClientIP = getIP();
-    ClientDS = getDS();
-    ClientES = getES();
-
-    DpmiSwitchToDosxStack(TRUE);
-
-    //
-    // Make room for return address
-    //
-    setSP(getSP() - 4);
-
-    //
-    // Push a return to a bop
-    //
-    Stack = (PWORD16)Sim32GetVDMPointer(
-        ((ULONG)getSS() << 16) | getSP(),
-        1,
-        TRUE
-        );
-
-    *Stack = (USHORT)(RmBopFe & 0x0000FFFF);
-    *(Stack + 1) = DosxRmCodeSelector;
-
-    //
-    // Set up the parameters
-    //
-    setAX(Segment);
-    setBX(0xF2);
-    if (CurrentAppFlags & DPMI_32BIT) {
-        setBX(getBX() | 0xF000);
-    }
-
-    //
-    // Make the call
-    //
-    setES(0);
-    setCS((USHORT) (DosxSegmentToSelector >> 16));
-    setIP((USHORT) (DosxSegmentToSelector & 0xFFFF));
-    setDS(DosxPmDataSelector);
-
-    host_simulate();
-
-    if (!getCF()) {
-        Selector = getAX();
-    } else {
-        Selector = 0xFFF0;  // Guaranteed non-existant GDT selector
-    }
-
-    DpmiSwitchFromDosxStack();
-    setAX(ClientAX);
-    setBX(ClientBX);
-    setIP(ClientIP);
-    setCS(ClientCS);
-    DpmiRestoreSegmentsAndStack();
-
-    return Selector;
 
 }
 
@@ -444,4 +313,4 @@ Return Value:
     SmallBufferInUse = FALSE;
     LargeBufferInUseCount = 0;
 }
-
+

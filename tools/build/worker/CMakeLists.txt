@@ -57,8 +57,9 @@ if(NOT NTVDM_VSDEVCMD)
 endif()
 configure_file(run-ninja-parallel.cmd.in "${CMAKE_BINARY_DIR}/run-ninja-parallel.cmd" @ONLY)
 configure_file("../wow32/msvc-x86.cmd.in" "${CMAKE_BINARY_DIR}/msvc-x86.cmd" @ONLY)
+include("${NTVDM_REPO}/src/ntvdmd-dll/target.cmake")
 add_custom_target(product ALL DEPENDS "${CMAKE_BINARY_DIR}/ntvdm.exe"
-  "${CMAKE_BINARY_DIR}/VCDEX.DLL" "${CMAKE_BINARY_DIR}/VDMREDIR.dll"
+  "${CMAKE_BINARY_DIR}/VCDEX.DLL" "${CMAKE_BINARY_DIR}/VDMREDIR.dll" "${CMAKE_BINARY_DIR}/NTVDMD.DLL"
   "${CMAKE_BINARY_DIR}/nthook32.dll")
 
 add_custom_target(frontend-library DEPENDS

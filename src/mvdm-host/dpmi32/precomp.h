@@ -21,5 +21,16 @@ Abstract:
 #include <dpmi.h>
 #include <vint.h>
 #include <mvdm.h>
-#include <dpmidata.h>
-#include <dpmi32p.h>
+#include <dpmi32.h>
+#include <dbgsvc.h>
+#include <nt_vdd.h>
+
+#ifdef CCPU
+#define getMODE() (((getMSW() & MSW_PE) && !(getEFLAGS() & EFLAGS_VM_MASK)) ? VDM_PM : VDM_V86)
+#ifndef DECLARE_LocalVdmContext
+#define DECLARE_LocalVdmContext
+#endif
+extern ULONG Cpu40GdtShadowAddress, Cpu40LdtShadowAddress;
+VOID DpmiCpu40BindDescriptorTables(VOID);
+BOOL DpmiCpu40GetDosxIdtDescriptor(PULONG base, PUSHORT limit);
+#endif

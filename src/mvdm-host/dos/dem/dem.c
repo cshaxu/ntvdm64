@@ -10,20 +10,22 @@
 
 #line 10
 /* DemInit - DEM Initialiazation routine. (This name may change when DEM is
- *	     converted to DLL).
+ *           converted to DLL).
  *
  * Entry
- *	argc,argv - from softpc as it is.
+ *      argc,argv - from softpc as it is.
  *
  *
  * Exit
- *	None
+ *      None
  */
 
 #line 21
 PSZ pszDefaultDOSDirectory;
 
-extern VOID	TerminateVDM(VOID);
+extern VOID     TerminateVDM(VOID);
+extern VOID     dempInitLFNSupport(VOID);
+
 
 CHAR demDebugBuffer [256];
 
@@ -54,19 +56,21 @@ BOOL DemInit (int argc, char *argv[])
         return FALSE;
         }
 
+    dempInitLFNSupport();
+
     if (VDMForWOW)
         return TRUE;
 
     // Check the debugging level
     while (--argc > 0) {
-	psz = *++argv;
-	if (*psz == '-' || *psz == '/') {
-	    psz++;
-	    if(tolower(*psz) == 'd'){
-		fShowSVCMsg = DEMDOSDISP | DEMFILIO;
-		break;
-	    }
-	}
+        psz = *++argv;
+        if (*psz == '-' || *psz == '/') {
+            psz++;
+            if(tolower(*psz) == 'd'){
+                fShowSVCMsg = DEMDOSDISP | DEMFILIO;
+                break;
+            }
+        }
     }
 
 
@@ -80,3 +84,4 @@ BOOL DemInit (int argc, char *argv[])
 
     return TRUE;
 }
+

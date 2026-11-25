@@ -67,6 +67,7 @@ typedef struct _FILEFINDLIST {
     BOOLEAN        SupportReset;
     UNICODE_STRING PathName;
     UNICODE_STRING FileName;
+    BOOL           SearchOnCD;
 }FFINDLIST, *PFFINDLIST;
 
 LIST_ENTRY PspFFindHeadList= {&PspFFindHeadList, &PspFFindHeadList};
@@ -138,6 +139,7 @@ CloseOldestFileFindBuffer(
 
 BOOL
 CopyDirInfoToDosData(
+    HANDLE DirectoryHandle,
     PFFINDDOSDATA pFFindDD,
     PFILE_BOTH_DIR_INFORMATION DirectoryInfo,
     USHORT SearchAttr
@@ -178,13 +180,15 @@ NtVolumeNameToDosVolumeName(
 VOID
 FillFCBSrchBuf(
      PFFINDDOSDATA pFFindDD,
-     PSRCHBUF pSrchBuf
+     PSRCHBUF pSrchBuf,
+     BOOL     IsOnCD
      );
 
 VOID
 FillSrchDta(
      PFFINDDOSDATA pFFindDD,
-     PSRCHDTA pDta
+     PSRCHDTA pDta,
+     BOOL     IsOnCD
      );
 
 PFFINDLIST
@@ -213,6 +217,10 @@ FreeFFindList(
      PLIST_ENTRY pFFindHeadList
      );
 
+#if defined(NEC_98)
+// BUG fix for DBCS small alphabet converted to large it.
+void demCharUpper(char *);
+#endif // NEC_98
 
 /* demFindFirst - Path-Style Find First File
  *
@@ -249,13 +257,22 @@ VOID demFindFirst (VOID)
 {
     DWORD dwRet;
     PVOID pDta;
+#ifdef DBCS /* demFindFirst() for CSNW */
+    CHAR  achPath[MAX_PATH];
+#endif /* DBCS */
 
 
     LPSTR lpFile = (LPSTR) GetVDMAddr (getDS(),getDX());
 
     pDta = (PVOID) GetVDMAddr (*((PUSHORT)pulDTALocation + 1),
                                *((PUSHORT)pulDTALocation));
-
+#ifdef DBCS /* demFindFirst() for CSNW */
+    /*
+     * convert Netware path to Dos path
+     */
+    ConvNwPathToDosPath(achPath,lpFile);
+    lpFile = achPath;
+#endif /* DBCS */
     dwRet = demFileFindFirst (pDta, lpFile, getCX());
 
     if (dwRet == -1) {
@@ -288,6 +305,7 @@ DWORD demFileFindFirst (
     FFINDDOSDATA   FFindDD;
     UNICODE_STRING FileUni;
     WCHAR          wcFile[MAX_PATH + sizeof(WCHAR)];
+    BOOL           IsOnCD;
 
 
 #if DBG
@@ -304,6 +322,7 @@ DWORD demFileFindFirst (
     FileUni.MaximumLength = sizeof(wcFile);
     DemOemToUni(&FileUni, lpFile);
 
+    IsOnCD = IsCdRomFile(lpFile);
 
     //
     //  Do volume label first.
@@ -316,6 +335,7 @@ DWORD demFileFindFirst (
             if (SearchAttr != ATTR_VOLUME_ID) {
                 pFFindEntry = SearchFile(wcFile, SearchAttr, NULL, NULL);
                 if (pFFindEntry) {
+                    pFFindEntry->SearchOnCD = IsOnCD;
                     STOREDWORD(pDta->pFFindEntry,pFFindEntry);
                     STOREDWORD(pDta->FFindId,pFFindEntry->FFindId);
                     }
@@ -351,9 +371,11 @@ DWORD demFileFindFirst (
         return (DWORD)-1;
         }
 
-    FillSrchDta(&FFindDD, pDta);
+
+    FillSrchDta(&FFindDD, pDta, IsOnCD);
 
     if (pFFindEntry) {
+        pFFindEntry->SearchOnCD = IsOnCD;
         STOREDWORD(pDta->pFFindEntry,pFFindEntry);
         STOREDWORD(pDta->FFindId,pFFindEntry->FFindId);
         }
@@ -385,7 +407,7 @@ BOOL DemOemToUni(PUNICODE_STRING pUnicode, LPSTR lpstr)
         return FALSE;
         }
 
-    pUnicode->Buffer[pUnicode->Length] = UNICODE_NULL;
+    *(PWCHAR)((PUCHAR)pUnicode->Buffer + pUnicode->Length) = UNICODE_NULL;
 
     return TRUE;
 }
@@ -439,6 +461,7 @@ DWORD demFileFindNext (
     USHORT   SearchAttr;
     PFFINDLIST   pFFindEntry;
     FFINDDOSDATA FFindDD;
+    BOOL    IsOnCD;
 
     pFFindEntry = GetFFindEntryByFindId(FETCHDWORD(pDta->FFindId));
     if (!pFFindEntry ||
@@ -460,6 +483,7 @@ DWORD demFileFindNext (
 
     SearchAttr = pFFindEntry->usSrchAttr;
 
+    IsOnCD = pFFindEntry->SearchOnCD;
     //
     // Search the dir
     //
@@ -475,7 +499,7 @@ DWORD demFileFindNext (
         return GetLastError();
         }
 
-    FillSrchDta(&FFindDD, pDta);
+    FillSrchDta(&FFindDD, pDta, IsOnCD);
 
     if (!pFFindEntry) {
         STOREDWORD(pDta->FFindId,0);
@@ -520,6 +544,7 @@ VOID demFindFirstFCB (VOID)
     FFINDDOSDATA    FFindDD;
     UNICODE_STRING  FileUni;
     WCHAR           wcFile[MAX_PATH];
+    BOOL            IsOnCD;
 
 
     lpFile = (LPSTR) GetVDMAddr (getES(),getDI());
@@ -558,9 +583,11 @@ VOID demFindFirstFCB (VOID)
         return;
         }
 
-    FillFCBSrchBuf(&FFindDD, pFCBSrchBuf);
+    IsOnCD = IsCdRomFile(lpFile);
+    FillFCBSrchBuf(&FFindDD, pFCBSrchBuf, IsOnCD);
 
     if (pFFindEntry) {
+        pFFindEntry->SearchOnCD = IsOnCD;
         STOREDWORD(pDirEnt->pFFindEntry,pFFindEntry);
         STOREDWORD(pDirEnt->FFindId,pFFindEntry->FFindId);
         }
@@ -600,6 +627,7 @@ VOID demFindNextFCB (VOID)
     PDIRENT         pDirEnt;
     PFFINDLIST      pFFindEntry;
     FFINDDOSDATA    FFindDD;
+    BOOL         IsOnCD;
 
 
     pSrchBuf = (PSRCHBUF) GetVDMAddr (getDS(),getSI());
@@ -634,6 +662,7 @@ VOID demFindNextFCB (VOID)
 
     SearchAttr = getAL() ? getDL() : 0;
 
+    IsOnCD = pFFindEntry->SearchOnCD;
     //
     // Search the dir
     //
@@ -648,9 +677,10 @@ VOID demFindNextFCB (VOID)
         STOREDWORD(pDirEnt->FFindId,0);
         setAX((USHORT) GetLastError());
         setCF(1);
+        return;
         }
 
-    FillFCBSrchBuf(&FFindDD, pSrchBuf);
+    FillFCBSrchBuf(&FFindDD, pSrchBuf,IsOnCD);
 
     if (!pFFindEntry) {
         STOREDWORD(pDirEnt->FFindId,0);
@@ -1089,7 +1119,26 @@ FileFindOpen(
              // If there is no file part, but we are not looking at a device exit
              //
              if (!Len) {
-                 Status = STATUS_OBJECT_PATH_NOT_FOUND;
+
+                 //
+                 // At this point, pwcFile has been parsed to PathName and FileName.  If PathName
+                 // does not exist, the NtOpen() above will have failed and we will not be here.
+                 // PathName is formatted to  \??\c:\xxx\yyy\zzz
+                 // DOS had this "feature" that if you looked for something like c:\foobar\, you'd
+                 // get PATH_NOT_FOUND, but if you looked for c:\  or  \   you'd get NO_MORE_FILES,
+                 // so we special case this here.  If the caller is only looking for  c:\  or   \
+                 // PathName will be  \??\c:\   If the caller is looking for ANY other string,
+                 // the PathName string will be longer than strlen("\??\c:\") because the text of
+                 // any dir will be added to the end.  That's why a simple check of the string len
+                 // works at this time.
+                 //
+                 if ( PathName->Length > (sizeof( L"\\??\\c:\\")-sizeof(WCHAR))  ) {
+                     Status = STATUS_OBJECT_PATH_NOT_FOUND;
+                 }
+                 else {
+                     Status = STATUS_NO_MORE_FILES;
+                 }
+
                  goto FFOFinallyExit;
                  }
 
@@ -1373,8 +1422,8 @@ FileFindReset(
            CurrFileName.MaximumLength = (USHORT)DirectoryInfo->FileNameLength;
            CurrFileName.Buffer = DirectoryInfo->FileName;
 
-	   if (!RtlCompareUnicodeString(&LastFileName, &CurrFileName, TRUE)) {
-	       return STATUS_SUCCESS;
+           if (!RtlCompareUnicodeString(&LastFileName, &CurrFileName, TRUE)) {
+               return STATUS_SUCCESS;
                }
            }
 
@@ -1448,7 +1497,8 @@ FileFindLast(
 
 
     // the size of the dirinfo structure including the name must be a longlong.
-    while (BytesLeft > sizeof(FILE_BOTH_DIR_INFORMATION) + sizeof(LONGLONG)) {
+    while (BytesLeft > sizeof(FILE_BOTH_DIR_INFORMATION) + sizeof(LONGLONG) + MAXIMUM_FILENAME_LENGTH*sizeof(WCHAR)) {
+
 
        Status = NtQueryDirectoryFile(
                        pFFindEntry->DirectoryHandle,
@@ -1588,7 +1638,8 @@ FileFindNext(
            pFFindEntry->FindBufferNext = NULL;
            }
 
-       } while (!CopyDirInfoToDosData(pFFindDD,
+       } while (!CopyDirInfoToDosData(pFFindEntry->DirectoryHandle,
+                                      pFFindDD,
                                       DirectoryInfo,
                                       pFFindEntry->usSrchAttr
                                       ));
@@ -1596,6 +1647,29 @@ FileFindNext(
     return STATUS_SUCCESS;
 }
 
+BOOL IsVolumeNtfs(
+   HANDLE DirectoryHandle)
+{
+   union {
+      FILE_FS_ATTRIBUTE_INFORMATION AttributeInfo;
+      BYTE rgBuffer[sizeof(FILE_FS_ATTRIBUTE_INFORMATION) + MAX_PATH*sizeof(WCHAR)];
+   }  Attrib;
+   IO_STATUS_BLOCK IoStatusBlock;
+   NTSTATUS Status;
+   BOOL fNtfsVolume = TRUE;
+
+   Status = NtQueryVolumeInformationFile(DirectoryHandle,
+                                         &IoStatusBlock,
+                                         &Attrib,
+                                         sizeof(Attrib),
+                                         FileFsAttributeInformation);
+
+   if (NT_SUCCESS(Status)) {
+      fNtfsVolume = !_wcsicmp(Attrib.AttributeInfo.FileSystemName, L"Ntfs");
+   }
+
+   return(fNtfsVolume);
+}
 
 
 
@@ -1605,6 +1679,7 @@ FileFindNext(
  */
 BOOL
 CopyDirInfoToDosData(
+    HANDLE DirectoryHandle,
     PFFINDDOSDATA pFFindDD,
     PFILE_BOTH_DIR_INFORMATION DirInfo,
     USHORT SearchAttr
@@ -1679,7 +1754,27 @@ CopyDirInfoToDosData(
     OemString.Buffer[OemString.Length] = '\0';
 
     // fill in time, size and attributes
-    pFFindDD->ftLastWriteTime   = *(LPFILETIME)&DirInfo->LastWriteTime;
+
+    //
+    // bjm-11/10/97 - for directories, FAT does not update lastwritten time
+    // when things actually happen in the directory.  NTFS does.  This causes
+    // a problem for Encore 3.0 (when running on NTFS) which, at install time,
+    // gets the lastwritten time for it's directory, then compares it, at app
+    // run time, to the "current" last written time and will bail (with a "Not
+    // correctly installed" message) if they're different.  So, 16 bit apps
+    // (which can only reasonably expect FAT info), should only get creation
+    // time for this file if it's a directory.
+    //
+    // VadimB: 11/20/98 -- this hold true ONLY for apps running on NTFS and
+    // not FAT -- since older FAT partitions are then given an incorrect
+    // creation time
+
+    if ((FILE_ATTRIBUTE_DIRECTORY & DirInfo->FileAttributes) && IsVolumeNtfs(DirectoryHandle))  {
+        pFFindDD->ftLastWriteTime   = *(LPFILETIME)&DirInfo->CreationTime;
+    }
+    else {
+        pFFindDD->ftLastWriteTime   = *(LPFILETIME)&DirInfo->LastWriteTime;
+    }
     pFFindDD->dwFileSizeLow     = DirInfo->EndOfFile.LowPart;
     pFFindDD->uchFileAttributes = (UCHAR)DirInfo->FileAttributes;
 
@@ -1801,7 +1896,16 @@ FillFcbVolume(
         // truncate to dos file name length (including period)
         pch[DOS_VOLUME_NAME_SIZE + 1] = '\0';
         strcpy(achBaseName, pch);
+#ifdef DBCS
+#if defined(NEC_98)
+// BUG fix for DBCS small alphabet converted to large it.
+        demCharUpper(achBaseName);
+#else  // !NEC_98
+        CharUpper(achBaseName);
+#endif // !NEC_98
+#else // !DBCS
         _strupr(achBaseName);
+#endif // !DBCS
         *pch = '\0';
         }
     else {
@@ -1861,15 +1965,16 @@ FillFcbVolume(
 
 /* FillDtaVolume - fill Volume info in the DTA
  *
- * Entry - CHAR lpSearchName - Optional name to match with volume name
+ * Entry - CHAR lpSearchName - name to match with volume name
  *
  *
  * Exit -  SUCCESS
- *      Returns - 0
+ *      Returns - TRUE
  *      pSrchBuf is filled with volume info
  *
  *     FAILURE
- *      Returns Error Code
+ *      Returns - FALSE
+ *      sets last error code
  */
 
 BOOL FillDtaVolume(
@@ -1895,7 +2000,16 @@ BOOL FillDtaVolume(
         pch++;
         pch[DOS_VOLUME_NAME_SIZE + 1] = '\0'; // max len (including period)
         strcpy(achBaseName, pch);
+#ifdef DBCS
+#if defined(NEC_98)
+// BUG fix for DBCS small alphabet converted to large it.
+        demCharUpper(achBaseName);
+#else  // !NEC_98
+        CharUpper(achBaseName);
+#endif // !NEC_98
+#else // !DBCS
         _strupr(achBaseName);
+#endif // !DBCS
         *pch = '\0';
         }
     else {
@@ -1905,17 +2019,19 @@ BOOL FillDtaVolume(
 
     //
     // if searching for volume only the DOS uses first 3 letters for
-    // root drive path ignoring the rest of the path
-    // as long as the full path name is valid.
+    // root drive path ignoring the rest of the path, if there is no basename assume *.*
     //
     if (SearchAttr == ATTR_VOLUME_ID &&
         (pch = strchr(FullPathBuffer, '\\')) &&
         GetFileAttributes(FullPathBuffer) != 0xffffffff )
       {
         pch++;
+        if(!*pch) {
+          strcpy(achBaseName, szStartDotStar);
+          }                
         *pch = '\0';
-        strcpy(achBaseName, szStartDotStar);
-        }
+
+      }
 
     if (GetVolumeInformationOem(FullPathBuffer,
                                 achVolumeName,
@@ -2081,7 +2197,8 @@ VOID NtVolumeNameToDosVolumeName(CHAR * pDosName, CHAR * pNtName)
 
 VOID FillFCBSrchBuf(
      PFFINDDOSDATA pFFindDD,
-     PSRCHBUF pSrchBuf)
+     PSRCHBUF pSrchBuf,
+     BOOL IsOnCD)
 {
     PDIRENT     pDirEnt = &pSrchBuf->DirEnt;
     PCHAR       pDot;
@@ -2136,7 +2253,20 @@ VOID FillFCBSrchBuf(
     strncpy(pDirEnt->FileName,pSrchBuf->FileName,8);
     strncpy(pDirEnt->FileExt,pSrchBuf->FileExt,3);
 
-    pDirEnt->uchAttributes = pFFindDD->uchFileAttributes;
+    // SudeepB - 28-Jul-1997
+    //
+    // For CDFS, Win3.1/DOS/Win95, only return FILE_ATTRIBUTE_DIRECTORY (10)
+    // for directories while WinNT returns
+    // FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_READONLY (11).
+    // Some VB controls that app setups use, depend on getting
+    // FILE_ATTRIBUTE_DIRECTORY (10) only or otherwise are broken.
+    // An example of this is Cliffs StudyWare series.
+    //
+
+    if (IsOnCD && pFFindDD->uchFileAttributes == (ATTR_DIRECTORY | ATTR_READ_ONLY))
+        pDirEnt->uchAttributes = ATTR_DIRECTORY;
+    else
+        pDirEnt->uchAttributes  = pFFindDD->uchFileAttributes;
 
     STOREWORD(pDirEnt->usTime,usTime);
     STOREWORD(pDirEnt->usDate,usDate);
@@ -2162,12 +2292,25 @@ VOID FillFCBSrchBuf(
 VOID
 FillSrchDta(
      PFFINDDOSDATA pFFindDD,
-     PSRCHDTA pDta)
+     PSRCHDTA pDta,
+     BOOL IsOnCD)
 {
     USHORT   usDate,usTime;
     FILETIME ftLocal;
 
-    pDta->uchFileAttr = pFFindDD->uchFileAttributes;
+    // SudeepB - 28-Jul-1997
+    //
+    // For CDFS, Win3.1/DOS/Win95, only return FILE_ATTRIBUTE_DIRECTORY (10)
+    // for directories while WinNT returns
+    // FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_READONLY (11).
+    // Some VB controls that app setups use, depend on getting
+    // FILE_ATTRIBUTE_DIRECTORY (10) only or otherwise are broken.
+    // An example of this is Cliffs StudyWare series.
+    //
+    if (IsOnCD && pFFindDD->uchFileAttributes == (ATTR_DIRECTORY | ATTR_READ_ONLY))
+        pDta->uchFileAttr = ATTR_DIRECTORY;
+    else
+        pDta->uchFileAttr = pFFindDD->uchFileAttributes;
 
     // Convert NT File time/date to DOS time/date
     FileTimeToLocalFileTime (&pFFindDD->ftLastWriteTime,&ftLocal);
@@ -2474,3 +2617,27 @@ PPSP_FFINDLIST GetPspFFindList(USHORT CurrPsp)
 
    return NULL;
 }
+
+#if defined(NEC_98)
+// BUG fix for DBCS small alphabet in file name converted to large it.
+extern int dbcs_first[];
+
+void demCharUpper(char * pszStr)
+{
+        for(;*pszStr;)
+        {
+                if(dbcs_first[*pszStr&0xFF])
+                {
+                        pszStr++;
+                        if(*pszStr == '\0')
+                                break;
+                }
+                else
+                {
+                        if(*pszStr >= 'a' && *pszStr <= 'z')
+                                *pszStr -= 0x20;
+                }
+                pszStr++;
+        }
+}
+#endif // NEC_98

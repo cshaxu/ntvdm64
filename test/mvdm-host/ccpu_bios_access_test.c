@@ -2,6 +2,8 @@
  * No replacement paging, TLB, physical memory or BIOS implementation. */
 #include <stdio.h>
 #include <stdint.h>
+#include <windows.h>
+#include "non-mvdm/public/sdk/inc/nt_vdd.h"
 #include "ntvdm-exe/session/session.h"
 extern void sas_init(uint32_t), sas_term(void), c_cpu_init(void);
 extern void c_setPE(int), c_setPG(int), c_setVM(int), c_setCPL(uint32_t), c_setCR3(uint32_t);
@@ -80,6 +82,15 @@ int main(void)
                 c_setPG(0);
             }
     mvdm_softpc_guest_memory_end(&owner);
+    sas_term();
+    check(VdmMapFlat(0, 0, VDM_V86) == NULL, "released-map", 0, 0, 0);
+    sas_init(0x200000);
+    {
+        unsigned char *base = VdmMapFlat(0, 0, VDM_V86);
+        phy_w32(0x30000, 0x12345678);
+        check(base && base[0x30000] == 0x78, "reinitialized-map", 1, 0, 0);
+        check(VdmMapFlat(0, 0, VDM_PM) == NULL, "null-selector", 0, 0, 0);
+    }
     sas_term();
     (void)session_thread_unbind(&owner);
     (void)session_dispose(&owner);

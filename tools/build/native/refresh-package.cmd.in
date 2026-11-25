@@ -24,7 +24,7 @@ set "identity=%repo%\build\.ninja\build-tools\ntvdm-package-id.exe"
 set "hash=%repo%\assets\release\HASH.EXE"
 set "binary=%package%"
 if not exist "%package%\system32\run16.exe" goto layout
-for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe WOW32.DLL VDMREDIR.DLL) do if exist "%package%\%%I" exit /b 2
+for %%I in (run16.exe ntsrv.exe ntcon.exe ntvdm.exe ntvwm.exe ntmon.exe WOW32.DLL VDMREDIR.DLL NTVDMD.DLL) do if exist "%package%\%%I" exit /b 2
 set "binary=%package%\system32"
 :layout
 set "manifest=%package%\product-system32-manifest.json"

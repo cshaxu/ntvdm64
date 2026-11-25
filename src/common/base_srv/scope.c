@@ -8,7 +8,7 @@ static BOOL broker_package_identity(WCHAR output[BROKER_PACKAGE_ID_HEX_CHARS+1u]
     static const WCHAR hex[]=L"0123456789abcdef";
     static const WCHAR *const components[]={
         L"run16.exe",L"ntsrv.exe",L"ntcon.exe",L"ntvdm.exe",L"ntvwm.exe",
-        L"ntmon.exe",L"WOW32.DLL",L"VDMREDIR.DLL",L"nthook32.dll",L"nthook64.dll"
+        L"ntmon.exe",L"WOW32.DLL",L"VDMREDIR.DLL",L"NTVDMD.DLL",L"nthook32.dll",L"nthook64.dll"
     };
     HMODULE module=NULL;
     HRSRC resource;

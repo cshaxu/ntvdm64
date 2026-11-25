@@ -8,7 +8,7 @@
 DWORD mvdm_vm_ingress_register(uint32_t callback);
 void mvdm_vm_ingress_reset(void);
 
-/* A true result installs a CCPU far call in place of normal BOP dispatch. */
+/* The BOP has consumed its service byte. A true result installs a CCPU far call. */
 int mvdm_vm_command_enter(uint32_t service);
 
 #endif

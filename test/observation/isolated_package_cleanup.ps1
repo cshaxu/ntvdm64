@@ -14,7 +14,7 @@ function Save-IsolatedPackageManifest([string]$Runtime, [string]$Destination) {
     $rows = Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json
     $rows = @($rows)
     $expected = @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
-        'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','VCDEX.DLL')
+        'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','VCDEX.DLL','NTVDMD.DLL')
     if (!$rows.Count -or $rows.Count -gt $expected.Count -or
             @($rows | Select-Object -ExpandProperty Name -Unique).Count -ne $rows.Count) {
         throw 'Expected unique staged component records'

@@ -90,8 +90,13 @@ typedef LPDWORD ULPDWORD;
 //  If either change then NETWORK_INTERRUPT in int5c.inc must also change.
 //
 
+#if defined(NEC_98)
+#define NETWORK_ICA     ICA_MASTER
+#define NETWORK_LINE    5
+#else
 #define NETWORK_ICA     ICA_SLAVE
-#define NETWORK_LINE    6
+#define NETWORK_LINE    2
+#endif
 
 //
 // helper macros

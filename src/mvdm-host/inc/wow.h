@@ -142,6 +142,23 @@ typedef VPVOID  VPHWAVEOUT16;
 typedef VPVOID  VPTIMECALLBACK16;
 typedef VPVOID  VPTASKCALLBACK16;
 
+/* Types
+ */
+typedef ULONG   (FASTCALL *LPFNW32)(PVDMFRAME);
+
+/* Dispatch table entry
+**
+ */
+typedef struct _W32 {   /* w32 */
+    LPFNW32 lpfnW32;    // function address
+#ifdef DEBUG_OR_WOWPROFILE
+    LPSZ    lpszW32;    // function name (DEBUG version only)
+    DWORD   cbArgs;     // # of bytes of arguments (DEBUG version only)
+    DWORD   cCalls;     // # of times this API called
+    DWORD   cTics;      // sum total # of tics ellapsed for all invocations
+#endif // DEBUG_OR_WOWPROFILE
+} W32, *PW32;
+
 /* XLATOFF */
 #pragma pack(1)
 /* XLATON */
@@ -332,6 +349,11 @@ typedef struct _PARMWCB16 {       /* wcb16 */
     WORD       wArgs[8];
 } PARMWCB16;
 
+typedef struct _PARMLSTRCMP {     /* lstrcmp16 */
+    VPVOID     lpstr1;
+    VPVOID     lpstr2;
+} PARMLSTRCMP;
+
 /* PARM16 is the union of all the callback parameter structures
  */
 typedef union _PARM16 {     /* parm16 */
@@ -355,6 +377,7 @@ typedef union _PARM16 {     /* parm16 */
     PARMWOF WaveOutFunc;        // for waveOutOpen functions
     PARMWBP WordBreakProc;      // for WordBreakProc
     PARMWCB16 WOWCallback16;    // for WOWCallback16
+    PARMLSTRCMP lstrcmpParms;   // for WOWlstrcmp16 (pfnWowIlstrsmp to user32)
 } PARM16, *PPARM16;
 
 
@@ -376,7 +399,7 @@ typedef struct _VDMFRAME {  /* vf */
     WORD    wES;        // REMOVE LATER
     WORD    wBX;        // REMOVE LATER
     WORD    wBP;        // BP Chain +1
-    VPVOID  wThunkCSIP; // far return address to thunk
+    VPVOID  wThunkCSIP; // ret addr of THUNK - update wowtd.h if you move it
     DWORD   wCallID;    // internal WOW16 module/function ID
     WORD    cbArgs;     // byte count of args pushed
     VPVOID  vpCSIP;     // far return address to app
@@ -409,7 +432,14 @@ typedef struct _POINT16 {       /* pt16 */
 typedef POINT16 UNALIGNED *PPOINT16;
 typedef VPVOID VPPOINT16;
 
+/* POINTL16 is new for Win95 and is identical to Win32 POINT/POINTL structures */
 
+typedef struct _POINTL16 {       /* ptl16 */
+    LONG   x;
+    LONG   y;
+} POINTL16;
+typedef POINTL16 UNALIGNED *PPOINTL16;
+typedef VPVOID VPPOINTL16;
 
 typedef struct _RASTERIZER_STATUS16 {  /* rs16 */
     INT16   nSize;
@@ -464,6 +494,17 @@ typedef struct _RECT16 {        /* rc16 */
 } RECT16;
 typedef RECT16 UNALIGNED *PRECT16;
 typedef VPVOID VPRECT16;
+
+/* RECTL16 is new for Win95 and is identical to Win32 RECTL structure */
+
+typedef struct _RECTL16 {        /* rcl16 */
+    LONG   left;
+    LONG   top;
+    LONG   right;
+    LONG   bottom;
+} RECTL16;
+typedef RECTL16 UNALIGNED *PRECTL16;
+typedef VPVOID VPRECTL16;
 
 typedef struct _KERNINGPAIR16 {        /* k16 */
     WORD   wFirst;
@@ -630,6 +671,27 @@ typedef struct _COMSTAT16 {     /* cs16 */
 typedef COMSTAT16 UNALIGNED *PCOMSTAT16;
 typedef VPVOID VPCOMSTAT16;
 
+#ifdef FE_SB                     // wowfax support for Japanese
+typedef struct _DEV_BITMAP16 {      /* devbm16 */
+    SHORT   bmType;
+    SHORT   bmWidth;
+    SHORT   bmHeight;
+    SHORT   bmWidthBytes;
+    BYTE    bmPlanes;
+    BYTE    bmBitsPixel;
+    VPBYTE  bmBits;
+    LONG    bmWidthPlanes;
+    LONG    bmlpPDevice;
+    SHORT   bmSegmentIndex;
+    SHORT   bmScanSegment;
+    SHORT   bmFillBytes;
+    SHORT   reserved1;
+    SHORT   reserved2;
+} DEV_BITMAP16;
+typedef DEV_BITMAP16 UNALIGNED *PDEV_BITMAP16;
+typedef VPVOID VPDEV_BITMAP16;
+#endif // FE_SB
+
 typedef struct _BITMAP16 {      /* bm16 */
     SHORT   bmType;
     SHORT   bmWidth;
@@ -692,7 +754,12 @@ typedef struct _LOGPEN16 {      /* lp16 */
 typedef LOGPEN16 UNALIGNED *PLOGPEN16;
 typedef VPVOID VPLOGPEN16;
 
-typedef RGBQUAD RGBQUAD16;
+typedef struct _RGBQUAD16 {      /* rgbq16 */
+        BYTE    rgbBlue;
+        BYTE    rgbGreen;
+        BYTE    rgbRed;
+        BYTE    rgbReserved;
+} RGBQUAD16;
 typedef RGBQUAD16 UNALIGNED *PRGBQUAD16;
 typedef VPVOID VPRGBQUAD16;
 
@@ -1448,7 +1515,8 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 
 #define RET_FORCESEGMENTFAULT 36 //  Make a segment present
 
-                                //  37 FREE
+#define RET_LSTRCMP          37 // for user32 listbox code
+
                                 //  38 FREE
                                 //  39 FREE
                                 //  40 FREE
@@ -1492,7 +1560,12 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 
 #define RET_FREEDIBSEL       60
 
+#ifdef FE_SB
+#define RET_SETFNOTEPAD      61 // sync GetModuleUsage16 API for Lotus FLW
+#define RET_MAX              61
+#else // !FE_SB
 #define RET_MAX              60
+#endif // !FE_SB
 
 
 
@@ -1517,7 +1590,13 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define MOD_TOOLHELP 0x7000
 #define MOD_MMEDIA   0x8000
 #define MOD_COMMDLG  0x9000
+#ifdef FE_SB
+#define MOD_WINNLS   0xA000
+#define MOD_WIFEMAN  0xB000
+#define MOD_LAST     0xC000   // Add New Module ID before this one
+#else // !FE_SB
 #define MOD_LAST     0xA000   // Add New Module ID before this one
+#endif // !FE_SB
 
 
 /* Special Function IDs
@@ -1551,7 +1630,6 @@ Thunk       macro   mod,func,callfirst,args,val,emptybuf
         func = val
     endif
     else
-    externFP WOW16Call
     externA  __MOD_KERNEL
     externA  __MOD_DKERNEL
     externA  __MOD_USER
@@ -1565,6 +1643,10 @@ Thunk       macro   mod,func,callfirst,args,val,emptybuf
     externA  __MOD_TOOLHELP
     externA  __MOD_MMEDIA
     externA  __MOD_COMMDLG
+ifdef FE_SB
+    externA  __MOD_WINNLS
+    externA  __MOD_WIFEMAN
+endif ; FE_SB
 
 
 
@@ -1618,7 +1700,7 @@ Thunk       macro   mod,func,callfirst,args,val,emptybuf
         push  0
         endif
     endif
-        tmplabel_&func:
+        t_&func:
 
 
             push    word ptr HI_WCALLID
@@ -1629,7 +1711,7 @@ Thunk       macro   mod,func,callfirst,args,val,emptybuf
         ; and 3bytes each for the 'push ...'. We use this info in wow32
         ; to patchcodewithlpfnw32.
 
-        .erre (($ - tmplabel_&func) EQ (05h + 03h + 03h))
+        .erre (($ - t_&func) EQ (05h + 03h + 03h))
 
     cEnd <nogen>
     endif
@@ -1706,5 +1788,15 @@ endm
 CommdlgThunk macro func,args,val
     Thunk   COMMDLG,func,SetWowCommDlg,args,val
 endm
+
+ifdef FE_SB
+WINNLSThunk macro func,args,val
+    Thunk   WINNLS,func,0,args,val
+endm
+
+WifeManThunk macro func,args,val
+    Thunk   WIFEMAN,func,0,args,val
+endm
+endif ; FE_SB
 
  */

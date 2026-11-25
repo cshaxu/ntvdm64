@@ -22,6 +22,7 @@ Revision History:
 --*/
 #include "precomp.h"
 #pragma hdrstop
+#include "int21map.h"
 #include "softpc.h"
 #include "xlathlp.h"
 //
@@ -29,6 +30,7 @@ Revision History:
 //
 //#define Verbose 1
 #define MAX_SUPPORTED_DOS_CALL 0x6d
+#define DosxTranslated NULL
 
 typedef VOID (*APIXLATFUNCTION)(VOID);
 APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
@@ -70,12 +72,12 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
     NotSupportedFCB                , // 22h * Random Write
     NotSupportedFCB                , // 23h * Get File Size
     NotSupportedFCB                , // 24h * Set Relative Record
-    DosxTranslated                 , // 25h - Set interrupt vector
+    SetVector                      , // 25h - Set interrupt vector
     CreatePSP                      , // 26h - Create PSP
     NotSupportedFCB                , // 27h * Random block read
     NotSupportedFCB                , // 28h * Random block write
     ParseFilename                  , // 29h - Parse filename
-    NoTranslation                  , // 2Ah - Get date
+    GetDate                        , // 2Ah - Get date
     NoTranslation                  , // 2Bh - Set date
     NoTranslation                  , // 2Ch - Get time
     NoTranslation                  , // 2Dh - Set time
@@ -86,7 +88,7 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
     GetDevParamBlock               , // 32h - Get device parameter blk
     NoTranslation                  , // 33h - Get/Set Control-C Flag
     ReturnESBX                     , // 34h - Get Address of InDOS
-    DosxTranslated                 , // 35h - Get Interrupt Vector
+    GetVector                      , // 35h - Get Interrupt Vector
     NoTranslation                  , // 36h - Get Disk Free Space
     NoTranslation                  , // 37h - Char Oper
     GetSetCountry                  , // 38h - Get/Set Current Country
@@ -99,7 +101,7 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
     ReadWriteFile                  , // 3Fh - Read File or Device
     ReadWriteFile                  , // 40h - Write File or Device
     MapASCIIZDSDX                  , // 41h - Delete File
-    MoveFilePointer                , // 42h - Move file pointer
+    NoTranslation                  , // 42h - Move file pointer
     MapASCIIZDSDX                  , // 43h - Get/Set File Attributes
     IOCTL                          , // 44h - IOCTL
     NoTranslation                  , // 45h - Duplicate File Handle
@@ -109,7 +111,7 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
     FreeMemoryBlock                , // 49h - Free Memory Block
     ResizeMemoryBlock              , // 4Ah - Resize Memory Block
     LoadExec                       , // 4Bh - Load and Exec Program
-    Terminate                      , // 4Ch - Terminate with Ret Code
+    DosxTranslated                 , // 4Ch - Terminate with Ret Code
     NoTranslation                  , // 4Dh - Get Ret Code Child Proc
     FindFirstFileHandle            , // 4Eh - Find First File
     FindNextFileHandle             , // 4Fh - Find Next File
@@ -133,13 +135,10 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
     NoTranslation                  , // 61h - UNUSED
     GetPSP                         , // 62h - Get PSP Address
 #ifdef DBCS
-#line 136
 #error Unsupported excluded original configuration
 #else
-#line 138
     NotSupportedBetter             , // 63h - Hangool call
 #endif
-#line 140
     NotSupportedBad                , // 64h - Set Prn Flag
     GetExtendedCountryInfo         , // 65h - Get Extended Country Info
     NoTranslation                  , // 66h - Get/Set Global Code Page
@@ -172,6 +171,7 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     ULONG DosMajorCode;
     PUCHAR StackPointer;
 
@@ -196,23 +196,37 @@ Return Value:
         return; //bugbug find out what win31 does.
     }
 
-#line 199
-    if (getAX() == 0x6300) ReturnDSSI();
-    else (*ApiXlatTable[DosMajorCode])();
+    if (ApiXlatTable[DosMajorCode]) {
 
-#line 198
+        BOOL returnZero = (DosMajorCode == 6 || getAX() == 0x0c06) && getDL() == 0xff;
+        BOOL zeroFlag;
+#line 201
+        ULONG Eip, Esp;
+        USHORT Cs, Ss;
+
+        Eip = getEIP();
+        Esp = getESP();
+        Cs = getCS();
+        Ss = getSS();
+
+        if (getAX() == 0x6300) ReturnDSSI();
+        else (*ApiXlatTable[DosMajorCode])();
+        zeroFlag = getZF();
+#line 210
+
+        setEIP(Eip);
+        setESP(Esp);
+        setCS(Cs);
+        setSS(Ss);
+
+        SimulateIret(PASS_CARRY_FLAG_16);
+        if (returnZero) setZF(zeroFlag);
+#line 217
+    }
+
     // put this back in after beta 2.5
-#line 199
     DpmiFreeAllBuffers();
 
-#line 201
-#ifdef Verbose
-#line 202
-#error Unsupported excluded original configuration
-#endif
-#line 214
-
-#line 211
 }
 
 VOID
@@ -236,22 +250,11 @@ Return Value:
 
 --*/
 {
-    VSAVEDSTATE State;
-#line 237
-    BOOL ReturnZero = (getAH() == 6 || getAX() == 0x0c06) && getDL() == 0xff;
-    BOOL ZeroFlag;
+    DECLARE_LocalVdmContext;
 
-#line 236
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     DPMI_EXEC_INT(0x21);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    ZeroFlag = getZF();
-#line 241
-    DpmiSimulateIretCF();
-    if (ReturnZero) setZF(ZeroFlag);
-#line 242
 }
 
 VOID
@@ -279,20 +282,14 @@ Return Value:
 
 --*/
 {   PUCHAR String;
+    DECLARE_LocalVdmContext;
     USHORT ClientAX, ClientDX;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
 
-    // BUGBUG 32 bit??
-    String = Sim32GetVDMPointer(
-        (((ULONG)getDS()) << 16),
-        1,
-        TRUE
-        );
-
-    String += (*GetDXRegister)();
+    String = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+             + (*GetDXRegister)();
 
     //
     // Repeatedly call int 21 function 2 to display the characters
@@ -309,9 +306,6 @@ Return Value:
     setDX(ClientDX);
 
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
-
 }
 
 VOID
@@ -334,26 +328,20 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     PUCHAR PmInputBuffer, RmInputBuffer;
     USHORT BufferSeg, BufferOff, BufferLen;
     USHORT ClientDX;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
     //
     // Get a pointer to the PM buffer
     //
-    // BUGBUG 32 bit
-    PmInputBuffer = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    PmInputBuffer += (*GetDXRegister)();
+    PmInputBuffer = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+                    + (*GetDXRegister)();
 
     //
     // Get the buffer length (there are two bytes in addition to the
@@ -382,8 +370,7 @@ Return Value:
 
     setDX(ClientDX);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 
 }
 
@@ -408,6 +395,8 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
+
     if (getAL() == 0x0a) {
         BufferedKeyboardInput();
     } else {
@@ -436,12 +425,10 @@ Return Value:
 
 --*/
 {
-#line 426
 #if DBG
-#line 427
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 440
+#line 433
     NoTranslation();
 }
 
@@ -465,24 +452,19 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     PUCHAR FcbAddress, FcbBufferedAddress;
     USHORT FcbSegment, FcbOffset;
     USHORT ClientDX;
     USHORT FcbLength;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     SetDTAPointers();
     ClientDX = getDX();
 
-    FcbAddress = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    FcbAddress += (*GetDXRegister)();
+    FcbAddress = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+                 + (*GetDXRegister)();
 
     //
     // Calculate the size of the FCB
@@ -498,7 +480,7 @@ Return Value:
     // Check to see if we need to set the real dta
     //
     if (CurrentDosDta != CurrentDta)
-	SetDosDTA();
+        SetDosDTA();
 
     //
     // Make the int 21 call
@@ -522,8 +504,7 @@ Return Value:
 
     setDX(ClientDX);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 }
 
 VOID
@@ -546,22 +527,17 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT FcbLength, FcbSegment, FcbOffset;
     PUCHAR FcbAddress, FcbBufferedAddress;
     USHORT ClientDX;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
-    FcbAddress = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    FcbAddress += (*GetDXRegister)();
+    FcbAddress = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+                 + (*GetDXRegister)();
 
     //
     // Get the length of the FCB
@@ -591,8 +567,7 @@ Return Value:
     //
     setDX(ClientDX);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 }
 
 VOID
@@ -615,22 +590,17 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT FcbSegment, FcbOffset;
     PUCHAR FcbAddress, FcbBufferedAddress;
     USHORT ClientDX;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
-    FcbAddress = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    FcbAddress += (*GetDXRegister)();
+    FcbAddress = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+                 + (*GetDXRegister)();
 
     //
     // Copy the FCB (The fcb for rename is a special format, fixed size)
@@ -655,8 +625,7 @@ Return Value:
     //
     setDX(ClientDX);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 }
 
 VOID
@@ -679,22 +648,44 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT Selector;
-    VSAVEDSTATE State;
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     DPMI_EXEC_INT(0x21);
+    Selector = getDS();
     DpmiSwitchToProtectedMode();
 
-    Selector = DpmiSegmentToSelector(getDS());
-
-    DpmiRestoreSegmentsAndStack();
-
-    setDS(Selector);
+    setDS(SegmentToSelector(Selector, STD_DATA));
     (*SetBXRegister)((ULONG)getBX());
 
-    DpmiSimulateIretCF();
+}
+
+VOID
+SetVector(
+    VOID
+    )
+/*++
+
+Routine Description:
+
+    This function translates int 21 function 25
+
+Arguments:
+
+    None.
+
+Return Value:
+
+    None.
+
+--*/
+{
+    DECLARE_LocalVdmContext;
+
+    SetProtectedModeInterrupt(getAL(), getDS(), (*GetDXRegister)(),
+                              (USHORT)(Frame32 ? VDM_INT_32 : VDM_INT_16));
+
 }
 
 VOID
@@ -718,12 +709,11 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     ULONG Segment;
     USHORT ClientDX;
-    VSAVEDSTATE State;
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
     Segment = SELECTOR_TO_INTEL_LINEAR_ADDRESS(ClientDX);
@@ -739,8 +729,6 @@ Return Value:
 
     setDX(ClientDX);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 
 }
 
@@ -764,34 +752,25 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientSI, ClientDI, FcbLength, StringOff, Seg, Off;
     PUCHAR Fcb, BufferedFcb, String, BufferedString;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
+    USHORT ClientES = getES();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientSI = getSI();
     ClientDI = getDI();
 
-    Fcb = Sim32GetVDMPointer(
-        ((ULONG)getES() << 16),
-        1,
-        TRUE
-        );
-
-    Fcb += (*GetDIRegister)();
+    Fcb = Sim32GetVDMPointer(((ULONG)ClientES << 16), 1, TRUE)
+          + (*GetDIRegister)();
 
     FcbLength = DpmiCalcFcbLength(Fcb);
 
     BufferedFcb = DpmiMapAndCopyBuffer(Fcb, FcbLength);
 
-    String = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    String += (*GetSIRegister)();
+    String = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+             + (*GetSIRegister)();
 
     BufferedString = DpmiMapAndCopyBuffer(String, 20);
 
@@ -810,8 +789,8 @@ Return Value:
     setDI(ClientDI);
     setSI(ClientSI + (getSI() - StringOff));
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
+    setES(ClientES);
 }
 
 VOID
@@ -834,6 +813,7 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
 
     //
     // Win31 compatibility:
@@ -850,7 +830,6 @@ Return Value:
     setES(CurrentDtaSelector);
     setBX(CurrentDtaOffset);
     setCF(0);
-    DpmiSimulateIretCF();
 
 }
 
@@ -881,10 +860,8 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientDX;
-    VSAVEDSTATE State;
-
-    DpmiSaveSegmentsAndStack(&State);
 
     ClientDX = getDX();
     CurrentDtaOffset = ClientDX;
@@ -895,8 +872,6 @@ Return Value:
     //
     CurrentDosDta = (PUCHAR) NULL;
 
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -975,6 +950,7 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientAX, ClientDX, ClientDS, NewDtaSegment, NewDtaOffset;
 
     ASSERT((getMSW() & MSW_PE) == 0);
@@ -1042,22 +1018,17 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT Selector;
-    VSAVEDSTATE State;
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     DPMI_EXEC_INT(0x21);
+    Selector = getDS();
     DpmiSwitchToProtectedMode();
 
-    Selector = DpmiSegmentToSelector(getDS());
-
-    DpmiRestoreSegmentsAndStack();
-
-    setDS(Selector);
+    setDS(SegmentToSelector(Selector, STD_DATA));
     (*SetBXRegister)((ULONG)getBX());
 
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -1080,27 +1051,50 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT Selector;
-    VSAVEDSTATE State;
-#line 1082
-    BOOL ReturnDI = getAH() == 0x59;
+    BOOL returnDI = getAH() == 0x59;
+#line 1057
 
-#line 1081
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     DPMI_EXEC_INT(0x21);
+    Selector = getES();
     DpmiSwitchToProtectedMode();
 
-    Selector = DpmiSegmentToSelector(getES());
-
-    DpmiRestoreSegmentsAndStack();
-
-    if (ReturnDI) (*SetDIRegister)((ULONG)getDI());
+    if (returnDI) (*SetDIRegister)((ULONG)getDI());
     else (*SetBXRegister)((ULONG)getBX());
-#line 1091
-    setES(Selector);
+#line 1064
+    setES(SegmentToSelector(Selector, STD_DATA));
 
-    DpmiSimulateIretCF();
+}
+
+VOID
+GetVector(
+    VOID
+    )
+/*++
+
+Routine Description:
+
+    This function translates int 21 function 35
+
+Arguments:
+
+    None.
+
+Return Value:
+
+    None.
+
+--*/
+{
+    DECLARE_LocalVdmContext;
+    PVDM_INTERRUPTHANDLER Handlers = DpmiInterruptHandlers;
+    USHORT IntNumber = getAL();
+
+    setES(Handlers[IntNumber].CsSelector);
+    (*SetBXRegister)(Handlers[IntNumber].Eip);
+
 }
 
 VOID
@@ -1123,25 +1117,21 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
+
     if (getDX() == 0xFFFF) {
         NoTranslation();
     } else {
 
         USHORT ClientDX, Seg, Off;
         PUCHAR Country, BufferedCountry;
-        VSAVEDSTATE State;
+        USHORT ClientDS = getDS();
 
         DpmiSwitchToRealMode();
-        DpmiSaveSegmentsAndStack(&State);
         ClientDX = getDX();
 
-        Country = Sim32GetVDMPointer(
-            ((ULONG)getDS() << 16),
-            1,
-            TRUE
-            );
-
-        Country += (*GetDXRegister)();
+        Country = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+                  + (*GetDXRegister)();
 
         BufferedCountry = DpmiMapAndCopyBuffer(Country, 34);
 
@@ -1155,8 +1145,7 @@ Return Value:
         DpmiUnmapAndCopyBuffer(Country, BufferedCountry, 34);
 
         setDX(ClientDX);
-        DpmiRestoreSegmentsAndStack();
-        DpmiSimulateIretCF();
+        setDS(ClientDS);
     }
 }
 
@@ -1181,15 +1170,15 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     PUCHAR BufferedString;
     USHORT ClientDX, StringSeg, StringOff, Length;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
-    BufferedString = DpmiMapString(getDS(), (GetDXRegister)(), &Length);
+    BufferedString = DpmiMapString(ClientDS, (GetDXRegister)(), &Length);
 
     DPMI_FLAT_TO_SEGMENTED(BufferedString, &StringSeg, &StringOff);
     setDS(StringSeg);
@@ -1199,9 +1188,7 @@ Return Value:
 
     DpmiUnmapString(BufferedString, Length);
     setDX(ClientDX);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
-
+    setDS(ClientDS);
 }
 
 VOID
@@ -1225,13 +1212,13 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientCX, ClientDX, ClientAX, Function, DataSeg, DataOff, BytesToRead;
     ULONG BytesRead, TotalBytesToRead;
     PUCHAR ReadWriteData, BufferedData;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
 
     ClientCX = getCX();
     ClientDX = getDX();
@@ -1240,13 +1227,9 @@ Return Value:
 
     TotalBytesToRead = (*GetCXRegister)();
     BytesRead = 0;
-    ReadWriteData = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
 
-    ReadWriteData += (*GetDXRegister)();
+    ReadWriteData = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+                    + (*GetDXRegister)();
 
 //    while (TotalBytesToRead != BytesRead) {
     do {
@@ -1298,34 +1281,7 @@ Return Value:
         (*SetAXRegister)(BytesRead);
     }
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
-}
-
-VOID
-MoveFilePointer(
-    VOID
-    )
-/*++
-
-Routine Description:
-
-    description-of-function.
-
-Arguments:
-
-    argument-name - Supplies | Returns description of argument.
-    .
-    .
-
-Return Value:
-
-    return-value - Description of conditions needed to return value. - or -
-    None.
-
---*/
-{
-    NoTranslation();
+    setDS(ClientDS);
 }
 
 #define MAX_SUPPORTED_DOS_IOCTL_CALL 0x10
@@ -1337,22 +1293,22 @@ Return Value:
 //
 
 APIXLATFUNCTION IOCTLXlatTable[MAX_SUPPORTED_DOS_IOCTL_CALL] = {
-	 NoTranslation	  , // 00 - Get Device Data
-	 NoTranslation	  , // 01 - Set Device Data
-	 MapDSDXLenCX     , // 02 - Receive Ctrl Chr Data
-	 MapDSDXLenCX     , // 03 - Send Ctrl Chr Data
-	 MapDSDXLenCX	  , // 04 - Receive Ctrl Block Data
-	 MapDSDXLenCX	  , // 05 - Send Ctrl Block Data
-	 NoTranslation	  , // 06 - Check Input Status
-	 NoTranslation	  , // 07 - Check Output Status
-	 NoTranslation	  , // 08 - Check Block Dev Removable
-	 NoTranslation	  , // 09 - Check Block Dev Remote
-	 NoTranslation	  , // 0A - Check if Handle Remote
-	 NoTranslation	  , // 0B - Change sharing retry cnt
-	 IOCTLMap2Bytes	  , // 0C - MAP DS:DX LENGTH 2!
-	 IOCTLBlockDevs	  , // 0D - Generic IOCTL to blk dev
-	 NoTranslation	  , // 0E - Get Logical Drive Map
-	 NoTranslation	    // 0F - Set Logical Drive Map
+         NoTranslation    , // 00 - Get Device Data
+         NoTranslation    , // 01 - Set Device Data
+         MapDSDXLenCX     , // 02 - Receive Ctrl Chr Data
+         MapDSDXLenCX     , // 03 - Send Ctrl Chr Data
+         MapDSDXLenCX     , // 04 - Receive Ctrl Block Data
+         MapDSDXLenCX     , // 05 - Send Ctrl Block Data
+         NoTranslation    , // 06 - Check Input Status
+         NoTranslation    , // 07 - Check Output Status
+         NoTranslation    , // 08 - Check Block Dev Removable
+         NoTranslation    , // 09 - Check Block Dev Remote
+         NoTranslation    , // 0A - Check if Handle Remote
+         NoTranslation    , // 0B - Change sharing retry cnt
+         IOCTLMap2Bytes   , // 0C - MAP DS:DX LENGTH 2!
+         IOCTLBlockDevs   , // 0D - Generic IOCTL to blk dev
+         NoTranslation    , // 0E - Get Logical Drive Map
+         NoTranslation      // 0F - Set Logical Drive Map
 };
 
 VOID
@@ -1375,17 +1331,15 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT IoctlMinor;
 
     IoctlMinor = getAL();
 
     if (IoctlMinor >= MAX_SUPPORTED_DOS_IOCTL_CALL) {
-#line 1373
 #if DBG
-#line 1374
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 1376
         NoTranslation();
         return;
     }
@@ -1413,21 +1367,16 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     PUCHAR DirInfo, BufferedDirInfo;
     USHORT ClientSI, Seg, Off;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientSI = getSI();
 
-    DirInfo = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    DirInfo += (*GetSIRegister)();
+    DirInfo = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+              + (*GetSIRegister)();
 
     BufferedDirInfo = DpmiMapAndCopyBuffer(DirInfo, 64);
     DPMI_FLAT_TO_SEGMENTED(BufferedDirInfo, &Seg, &Off);
@@ -1439,8 +1388,7 @@ Return Value:
 
     DpmiUnmapAndCopyBuffer(DirInfo, BufferedDirInfo, 64);
     setSI(ClientSI);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 }
 
 VOID
@@ -1463,11 +1411,36 @@ Return Value:
 
 --*/
 {
-#ifdef NT_ALLOC_DOS_MEM
-#line 1454
-#error Unsupported excluded original configuration
-#endif
-#line 1471
+    DECLARE_LocalVdmContext;
+    PMEM_DPMI pMem;
+    ULONG MemSize = ((ULONG)getBX()) << 4;
+
+    pMem = DpmiAllocateXmem(MemSize);
+
+    if (pMem) {
+
+        pMem->SelCount = (USHORT) ((MemSize>>16) + 1);
+        pMem->Sel = ALLOCATE_SELECTORS(pMem->SelCount);
+
+        if (!pMem->Sel) {
+            pMem->SelCount = 0;
+            DpmiFreeXmem(pMem);
+            pMem = NULL;
+        } else {
+
+            SetDescriptorArray(pMem->Sel, (ULONG)pMem->Address, MemSize);
+
+        }
+    }
+
+    if (!pMem) {
+        setCF(1);
+        setAX(8);
+        setBX(0);
+    } else {
+        setCF(0);
+        setAX(pMem->Sel);
+    }
 }
 
 VOID
@@ -1490,12 +1463,26 @@ Return Value:
 
 --*/
 {
-#ifdef NT_ALLOC_DOS_MEM
-#line 1494
-#error Unsupported excluded original configuration
-#endif
-#line 1515
+    DECLARE_LocalVdmContext;
+    PMEM_DPMI pMem;
+    USHORT Sel = getES();
 
+    if (pMem = DpmiFindXmem(Sel)) {
+
+        while(pMem->SelCount--) {
+            FreeSelector(Sel);
+            Sel+=8;
+        }
+
+        DpmiFreeXmem(pMem);
+        setCF(0);
+
+    } else {
+
+        setCF(1);
+        setAX(9);
+
+    }
 }
 
 VOID
@@ -1518,11 +1505,32 @@ Return Value:
 
 --*/
 {
-#ifdef NT_ALLOC_DOS_MEM
-#line 1539
-#error Unsupported excluded original configuration
-#endif
-#line 1561
+    DECLARE_LocalVdmContext;
+    PMEM_DPMI pMem;
+    ULONG MemSize = ((ULONG)getBX()) << 4;
+    USHORT Sel = getES();
+
+    if (pMem = DpmiFindXmem(Sel)) {
+
+        if (DpmiReallocateXmem(pMem, MemSize)) {
+
+            SetDescriptorArray(pMem->Sel, (ULONG)pMem->Address, MemSize);
+            setCF(0);
+
+        } else {
+
+            // not enough memory
+            setCF(1);
+            setAX(8);
+
+        }
+    } else {
+
+        // invalid block
+        setCF(1);
+        setAX(9);
+
+    }
 }
 
 VOID
@@ -1549,15 +1557,15 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     PUCHAR CommandTail, BufferedString, Environment;
-    USHORT ClientDX, ClientBX, Seg, Off, Length, i, EnvironmentSel;
-    VSAVEDSTATE State;
-#line 1592
     PUCHAR LoadResult = NULL;
+#line 1559
+    USHORT ClientDX, ClientBX, Seg, Off, Length, i, EnvironmentSel;
+    USHORT ClientDS = getDS();
+    USHORT ClientES = getES();
 
-#line 1591
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
     ClientBX = getBX();
 
@@ -1574,7 +1582,7 @@ Return Value:
         //
         // Map the command string
         //
-        BufferedString = DpmiMapString(getDS(), (*GetDXRegister)(), &Length);
+        BufferedString = DpmiMapString(ClientDS, (*GetDXRegister)(), &Length);
 
         //
         // Set up the Parameter block
@@ -1599,37 +1607,23 @@ Return Value:
         //
         // CommandTail = FLAT(es:bx)
         //
-        CommandTail = Sim32GetVDMPointer(
-            ((ULONG)getES() << 16),
-            1,
-            TRUE
-            );
+        CommandTail = Sim32GetVDMPointer(((ULONG)ClientES << 16), 1, TRUE)
+                      + (*GetBXRegister)();
 
-        CommandTail += (*GetBXRegister)();
-
-#line 1643
         if (getAL() == 1) LoadResult = CommandTail + 14;
-#line 1642
+#line 1608
         if (CurrentAppFlags & DPMI_32BIT) {
             //
             // CommandTail -> string
             //
-            CommandTail = Sim32GetVDMPointer(
-                (*(PWORD16)(CommandTail + 4)) << 16,
-                1,
-                TRUE
-                ) +
-                *(PDWORD16)(CommandTail);
+            CommandTail = Sim32GetVDMPointer((*(PWORD16)(CommandTail + 4)) << 16, 1, TRUE)
+                          + *(PDWORD16)(CommandTail);
 
         } else {
             //
             // CommandTail -> string
             //
-            CommandTail = Sim32GetVDMPointer(
-                *(PDWORD16)(CommandTail + 2),
-                1,
-                TRUE
-                );
+            CommandTail = Sim32GetVDMPointer(*(PDWORD16)(CommandTail + 2), 1, TRUE);
         }
 
         CopyMemory((LargeXlatBuffer + 0x10), CommandTail, 128);
@@ -1655,16 +1649,12 @@ Return Value:
         // Save the environment selector, and make it a segment
         //
 
-        Environment = Sim32GetVDMPointer(
-            ((ULONG)CurrentPSPSelector << 16) | 0x2C,
-            1,
-            TRUE
-            );
+        Environment = Sim32GetVDMPointer(((ULONG)CurrentPSPSelector << 16) | 0x2C, 1, TRUE);
 
         EnvironmentSel = *(PWORD16)Environment;
 
         *(PWORD16)Environment =
-	    (USHORT)(SELECTOR_TO_INTEL_LINEAR_ADDRESS(EnvironmentSel) >> 4);
+            (USHORT)(SELECTOR_TO_INTEL_LINEAR_ADDRESS(EnvironmentSel) >> 4);
 
         //
         // Set up registers for the exec
@@ -1681,29 +1671,23 @@ Return Value:
         //
         // Restore the environment selector
         //
-        Environment = Sim32GetVDMPointer(
-            ((ULONG)CurrentPSPSelector << 16) | 0x2C,
-            1,
-            TRUE
-            );
+        Environment = Sim32GetVDMPointer(((ULONG)CurrentPSPSelector << 16) | 0x2C, 1, TRUE);
 
         *(PWORD16)Environment = EnvironmentSel;
 
-#line 1723
         if (LoadResult && !getCF()) CopyMemory(LoadResult, LargeXlatBuffer + 14, 8);
-#line 1721
+#line 1671
         //
         // Free translation buffer
         //
 
-#line 1725
         DpmiUnmapString(BufferedString, Length);
     }
     setDX(ClientDX);
     setBX(ClientBX);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setES(ClientES);
+    setDS(ClientDS);
 }
 
 VOID
@@ -1752,12 +1736,12 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientDX, Seg, Off, StringLength;
     PUCHAR BufferedString;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     SetDTAPointers();
     ClientDX = getDX();
 
@@ -1772,12 +1756,12 @@ Return Value:
     // Check to see if we need to set the real dta
     //
     if (CurrentDosDta != CurrentDta)
-	SetDosDTA();
+        SetDosDTA();
 
     //
     // map the string
     //
-    BufferedString = DpmiMapString(getDS(), (GetDXRegister)(), &StringLength);
+    BufferedString = DpmiMapString(ClientDS, (GetDXRegister)(), &StringLength);
 
     DPMI_FLAT_TO_SEGMENTED(BufferedString, &Seg, &Off);
     setDS(Seg);
@@ -1785,6 +1769,7 @@ Return Value:
 
     DPMI_EXEC_INT(0x21);
     DpmiSwitchToProtectedMode();
+    setDS(ClientDS);
 
     DpmiUnmapString(BufferedString, StringLength);
 
@@ -1797,8 +1782,6 @@ Return Value:
 
 
     setDX(ClientDX);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 
 }
 
@@ -1823,9 +1806,9 @@ Return Value:
 
 --*/
 {
-    VSAVEDSTATE State;
+    DECLARE_LocalVdmContext;
+
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     SetDTAPointers();
 
     //
@@ -1839,7 +1822,7 @@ Return Value:
     // Check to see if we need to set the real dta
     //
     if (CurrentDosDta != CurrentDta)
-	SetDosDTA();
+        SetDosDTA();
 
     DPMI_EXEC_INT(0x21);
     DpmiSwitchToProtectedMode();
@@ -1851,8 +1834,6 @@ Return Value:
         CopyMemory(CurrentPmDtaAddress, CurrentDta, 43);
     }
 
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -1877,18 +1858,17 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     ULONG Segment;
     USHORT ClientBX;
-    VSAVEDSTATE State;
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientBX = getBX();
 
     if (ClientBX == 0) {
         CurrentPSPSelector = ClientBX;
     } else {
-	Segment = SELECTOR_TO_INTEL_LINEAR_ADDRESS(ClientBX);
+        Segment = SELECTOR_TO_INTEL_LINEAR_ADDRESS(ClientBX);
 
         if (Segment > ONE_MB) {
 
@@ -1903,8 +1883,6 @@ Return Value:
 
     setBX(ClientBX);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -1927,9 +1905,9 @@ Return Value:
 
 --*/
 {
-    VSAVEDSTATE State;
+    DECLARE_LocalVdmContext;
+
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     //
     // Get the current psp segment to see if it changed
     //
@@ -1940,16 +1918,14 @@ Return Value:
     // If it changed get a new selector for the psp
     //
     if (getBX() !=
-	(USHORT)(SELECTOR_TO_INTEL_LINEAR_ADDRESS(CurrentPSPSelector) >> 4)
+        (USHORT)(SELECTOR_TO_INTEL_LINEAR_ADDRESS(CurrentPSPSelector) >> 4)
     ){
-        CurrentPSPSelector = DpmiSegmentToSelector(getBX());
+        CurrentPSPSelector = SegmentToSelector(getBX(), STD_DATA);
     }
 
     setBX(CurrentPSPSelector);
     setCF(0);
 
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -1973,15 +1949,12 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
 
-#line 2002
 #if DBG
-#line 2003
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2005
     setCF(1);
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -2004,17 +1977,18 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     PUCHAR SourceString, DestinationString;
     USHORT ClientDX, ClientDI, Seg, Off, SourceLength, DestinationLength;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
+    USHORT ClientES = getES();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
     ClientDI = getDI();
 
-    SourceString = DpmiMapString(getDS(), (*GetDXRegister)(), &SourceLength);
-    DestinationString = DpmiMapString(getES(), (*GetDIRegister)(), &DestinationLength);
+    SourceString = DpmiMapString(ClientDS, (*GetDXRegister)(), &SourceLength);
+    DestinationString = DpmiMapString(ClientES, (*GetDIRegister)(), &DestinationLength);
 
     DPMI_FLAT_TO_SEGMENTED(SourceString, &Seg, &Off);
     setDX(Off);
@@ -2028,8 +2002,8 @@ Return Value:
     setDX(ClientDX);
     setDI(ClientDI);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
+    setES(ClientES);
 }
 
 VOID
@@ -2052,22 +2026,17 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     PUCHAR String, BufferedString;
     USHORT ClientDX, Seg, Off, Length;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
 
-    String = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    String += (*GetDXRegister)();
+    String = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+             + (*GetDXRegister)();
 
     Length = 0;
     while (String[Length] != '\0') {
@@ -2088,25 +2057,24 @@ Return Value:
     DpmiUnmapAndCopyBuffer(String, BufferedString, Length);
 
     setDX(ClientDX);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 }
 
 #define MAX_SUPPORTED_DOS_5D_CALL 12
 
 APIXLATFUNCTION Func5DXlatTable[MAX_SUPPORTED_DOS_5D_CALL] = {
-	 NotSupportedBad    , // 0
-	 MapDPL	            , // 1
-	 NotSupportedBad    , // 2
-	 MapDPL	            , // 3
-	 MapDPL	            , // 4
-	 NotSupportedBad    , // 5
-	 NotSupportedBad    , // 6
-	 NoTranslation      , // 7
-	 NoTranslation      , // 8
-	 NoTranslation      , // 9
-	 MapDPL             , // 10
-	 NotSupportedBad      // 11
+         NotSupportedBad    , // 0
+         MapDPL             , // 1
+         NotSupportedBad    , // 2
+         MapDPL             , // 3
+         MapDPL             , // 4
+         NotSupportedBad    , // 5
+         NotSupportedBad    , // 6
+         NoTranslation      , // 7
+         NoTranslation      , // 8
+         NoTranslation      , // 9
+         MapDPL             , // 10
+         NotSupportedBad      // 11
 };
 
 VOID
@@ -2129,17 +2097,15 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT Func5DhMinor;
 
     Func5DhMinor = getAL();
 
     if (Func5DhMinor >= MAX_SUPPORTED_DOS_5D_CALL) {
-#line 2159
 #if DBG
-#line 2160
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2162
         NoTranslation();
         return;
     }
@@ -2149,10 +2115,10 @@ Return Value:
 
 #define MAX_SUPPORTED_DOS_5E_CALL 4
 APIXLATFUNCTION Func5EXlatTable[MAX_SUPPORTED_DOS_5E_CALL] = {
-	 GetMachineName,
-	 MapASCIIZDSDX,
-	 GetPrinterSetup,
-	 SetPrinterSetup
+         GetMachineName,
+         MapASCIIZDSDX,
+         GetPrinterSetup,
+         SetPrinterSetup
 };
 
 VOID
@@ -2178,17 +2144,15 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT Func5EhMinor;
 
     Func5EhMinor = getAL();
 
     if (Func5EhMinor >= MAX_SUPPORTED_DOS_5E_CALL) {
-#line 2205
 #if DBG
-#line 2206
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2208
         NoTranslation();
         return;
     }
@@ -2219,6 +2183,7 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT Func5FMinor;
 
     Func5FMinor = getAL();
@@ -2231,30 +2196,20 @@ Return Value:
     ){
         USHORT ClientSI, ClientDI, DataOff, DataSeg;
         PUCHAR Data16, BufferedData16, Data128, BufferedData128;
-        VSAVEDSTATE State;
+        USHORT ClientDS = getDS();
+        USHORT ClientES = getES();
 
         DpmiSwitchToRealMode();
-        DpmiSaveSegmentsAndStack(&State);
         ClientDI = getDI();
         ClientSI = getSI();
 
-        Data16 = Sim32GetVDMPointer(
-            ((ULONG)getDS() << 16),
-            1,
-            TRUE
-            );
-
-        Data16 += (*GetSIRegister)();
+        Data16 = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+                 + (*GetSIRegister)();
 
         BufferedData16 = DpmiMapAndCopyBuffer(Data16, 16);
 
-        Data128 = Sim32GetVDMPointer(
-            ((ULONG)getES() << 16),
-            1,
-            TRUE
-            );
-
-        Data128 += (*GetDIRegister)();
+        Data128 = Sim32GetVDMPointer(((ULONG)ClientES << 16), 1, TRUE)
+                  + (*GetDIRegister)();
 
         BufferedData128 = DpmiMapAndCopyBuffer(Data128, 128);
 
@@ -2271,17 +2226,14 @@ Return Value:
         DpmiUnmapAndCopyBuffer(Data16, BufferedData16, 16);
         DpmiUnmapAndCopyBuffer(Data128, BufferedData128, 128);
 
+        setDS(ClientDS);
+        setES(ClientES);
         setSI(ClientSI);
         setDI(ClientDI);
-        DpmiRestoreSegmentsAndStack();
-        DpmiSimulateIretCF();
     } else {
-#line 2295
 #if DBG
-#line 2296
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2298
         NoTranslation();
     }
 }
@@ -2309,12 +2261,10 @@ Return Value:
 
 --*/
 {
-#line 2325
 #if DBG
-#line 2326
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2330
+#line 2262
     NoTranslation();
 }
 
@@ -2338,22 +2288,17 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT Selector;
-    VSAVEDSTATE State;
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     DPMI_EXEC_INT(0x21);
+    Selector = getDS();
     DpmiSwitchToProtectedMode();
 
-    Selector = DpmiSegmentToSelector(getDS());
-
-    DpmiRestoreSegmentsAndStack();
-
     (*SetSIRegister)((ULONG)getSI());
-    setDS(Selector);
+    setDS(SegmentToSelector(Selector, STD_DATA));
 
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -2379,12 +2324,10 @@ Return Value:
 
 --*/
 {
-#line 2394
 #if DBG
-#line 2395
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2400
+#line 2329
     NoTranslation();
 }
 
@@ -2408,22 +2351,18 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     PUCHAR Country, BufferedCountry;
     USHORT ClientDI, Seg, Off, Length;
-    VSAVEDSTATE State;
+    USHORT ClientES = getES();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDI = getDI();
 
     Length = getCX();
-    Country = Sim32GetVDMPointer(
-        ((ULONG)getES() << 16),
-        1,
-        TRUE
-        );
 
-    Country += (*GetDIRegister)();
+    Country = Sim32GetVDMPointer(((ULONG)ClientES << 16), 1, TRUE)
+              + (*GetDIRegister)();
 
     BufferedCountry = DpmiMapAndCopyBuffer(Country, Length);
 
@@ -2433,12 +2372,11 @@ Return Value:
 
     DPMI_EXEC_INT(0x21);
     DpmiSwitchToProtectedMode();
+    setES(ClientES);
 
     DpmiUnmapAndCopyBuffer(Country, BufferedCountry, Length);
 
     setDI(ClientDI);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -2461,15 +2399,15 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     PUCHAR BufferedString;
     USHORT ClientSI, StringSeg, StringOff, Length;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientSI = getSI();
 
-    BufferedString = DpmiMapString(getDS(), (*GetSIRegister)(), &Length);
+    BufferedString = DpmiMapString(ClientDS, (*GetSIRegister)(), &Length);
 
     DPMI_FLAT_TO_SEGMENTED(BufferedString, &StringSeg, &StringOff);
     setDS(StringSeg);
@@ -2479,35 +2417,9 @@ Return Value:
 
     DpmiUnmapString(BufferedString, Length);
     setSI(ClientSI);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 }
 
-VOID
-DosxTranslated(
-    VOID
-    )
-/*++
-
-Routine Description:
-
-    description-of-function.
-
-Arguments:
-
-    argument-name - Supplies | Returns description of argument.
-    .
-    .
-
-Return Value:
-
-    return-value - Description of conditions needed to return value. - or -
-    None.
-
---*/
-{
-    // DebugBreak(); // debugbug
-}
 
 VOID
 MapDSDXLenCX(
@@ -2530,22 +2442,17 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientDX, ClientCX, DataSeg, DataOff;
     PUCHAR Data, BufferedData;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
     ClientCX = getCX();
 
-    Data = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    Data += (*GetDXRegister)();
+    Data = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+           + (*GetDXRegister)();
 
     BufferedData = DpmiMapAndCopyBuffer(Data, ClientCX);
 
@@ -2558,9 +2465,8 @@ Return Value:
 
     DpmiUnmapAndCopyBuffer(Data, BufferedData, ClientCX);
 
+    setDS(ClientDS);
     setDX(ClientDX);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -2586,23 +2492,18 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientDX, DataSeg, DataOff;
     PUCHAR Data, BufferedData;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
-    Data = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
+    Data = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE);
 
-#line 2616
     Data += (*GetDXRegister)();
-#line 2615
+#line 2503
     BufferedData = DpmiMapAndCopyBuffer(Data, 2);
 
     DPMI_FLAT_TO_SEGMENTED(BufferedData, &DataSeg, &DataOff);
@@ -2614,9 +2515,8 @@ Return Value:
 
     DpmiUnmapAndCopyBuffer(Data, BufferedData, 2);
 
+    setDS(ClientDS);
     setDX(ClientDX);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -2639,24 +2539,21 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT IoctlSubFunction, Seg, Off, ClientDX;
     PUCHAR Data, BufferedData;
     USHORT Length;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     IoctlSubFunction = getCL();
 
-#line 2658
     if (((IoctlSubFunction < 0x40) || (IoctlSubFunction > 0x42) &&
         (IoctlSubFunction < 0x60) || (IoctlSubFunction > 0x62) &&
         (IoctlSubFunction != 0x68)) && IoctlSubFunction != 0x46 && IoctlSubFunction != 0x66 && IoctlSubFunction != 0x47 && IoctlSubFunction != 0x67
     ) {
-#line 2662
 #if DBG
-#line 2663
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2665
         NoTranslation();
         return;
     }
@@ -2670,26 +2567,19 @@ Return Value:
     }
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
-    Data = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    Data += (*GetDXRegister)();
+    Data = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+           + (*GetDXRegister)();
 
     switch (IoctlSubFunction) {
-#line 2691
     case 0x46:
     case 0x66:
     case 0x47:
     case 0x67:
         Length = (IoctlSubFunction == 0x46 || IoctlSubFunction == 0x66) ? 25 : 2;
         break;
-#line 2690
+#line 2572
     case 0x40:
         //
         // Map set device params
@@ -2700,11 +2590,10 @@ Return Value:
         break;
 
     case 0x42:
-#line 2702
         Length = (Data[0] & 2) ? 7 : 5;
-#line 2697
         break;
 
+#line 2581
     case 0x60:
         //
         // Map get device params
@@ -2737,9 +2626,8 @@ Return Value:
 
     DpmiUnmapAndCopyBuffer(Data, BufferedData, Length);
 
+    setDS(ClientDS);
     setDX(ClientDX);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 }
 
 VOID
@@ -2762,18 +2650,17 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientDX, ClientDS, ClientCX, ClientAX;
     USHORT Seg, Off, NumberOfSectors, BytesPerSector;
     USHORT SectorsRead, SectorsToRead;
     PUCHAR ParameterBlock, BufferedPBlock, Data, BufferedData;
-    VSAVEDSTATE State;
 
-    DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientAX = getAX();
     ClientDX = getDX();
     ClientCX = getCX();
     ClientDS = getDS();
+    DpmiSwitchToRealMode();
 
     //
     // Find out how many bytes/sector
@@ -2798,8 +2685,7 @@ Return Value:
         setDX(ClientDX);
         setCX(ClientCX);
         DpmiSwitchToProtectedMode();
-        DpmiRestoreSegmentsAndStack();
-        DpmiSimulateIretCF();
+        setDS(ClientDS);
         return;
     }
 
@@ -2815,13 +2701,8 @@ Return Value:
     //
     // First map the parameter block
     //
-    ParameterBlock = Sim32GetVDMPointer(
-        ((ULONG)ClientDS << 16),
-        1,
-        TRUE
-        );
-
-    ParameterBlock += (*GetDXRegister)();
+    ParameterBlock = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+                     + (*GetDXRegister)();
 
     BufferedPBlock = DpmiMapAndCopyBuffer(ParameterBlock, 13);
 
@@ -2836,14 +2717,12 @@ Return Value:
 
     if (CurrentAppFlags & DPMI_32BIT) {
 
-#line 2830
         Data = Sim32GetVDMPointer(
             (*((PWORD16)(ParameterBlock + 0xd)) << 16),
             1,
             TRUE
             );
 
-#line 2836
         Data += *((PDWORD16)(BufferedPBlock + 0x9));
 
     } else {
@@ -2907,8 +2786,7 @@ Return Value:
     DpmiUnmapBuffer(BufferedPBlock,13);
     setDX(ClientDX);
     DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 
 }
 
@@ -2932,21 +2810,16 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientDX, DataSeg, DataOff;
     PUCHAR Data, BufferedData;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
-    Data = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    Data += (*GetDXRegister)();
+    Data = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+           + (*GetDXRegister)();
 
     BufferedData = DpmiMapAndCopyBuffer(Data, 22);
 
@@ -2960,8 +2833,7 @@ Return Value:
     DpmiUnmapAndCopyBuffer(Data, BufferedData, 22);
 
     setDX(ClientDX);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 }
 
 VOID
@@ -2984,21 +2856,16 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientDX, DataSeg, DataOff;
     PUCHAR Data, BufferedData;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDX = getDX();
 
-    Data = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    Data += (*GetDXRegister)();
+    Data = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+           + (*GetDXRegister)();
 
     BufferedData = DpmiMapAndCopyBuffer(Data, 16);
 
@@ -3012,8 +2879,7 @@ Return Value:
     DpmiUnmapAndCopyBuffer(Data, BufferedData, 16);
 
     setDX(ClientDX);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 }
 
 VOID
@@ -3036,22 +2902,17 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientSI, ClientCX, DataSeg, DataOff;
     PUCHAR Data, BufferedData;
-    VSAVEDSTATE State;
+    USHORT ClientDS = getDS();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientSI = getSI();
     ClientCX = getCX();
 
-    Data = Sim32GetVDMPointer(
-        ((ULONG)getDS() << 16),
-        1,
-        TRUE
-        );
-
-    Data += (*GetSIRegister)();
+    Data = Sim32GetVDMPointer(((ULONG)ClientDS << 16), 1, TRUE)
+           + (*GetSIRegister)();
 
     BufferedData = DpmiMapAndCopyBuffer(Data, ClientCX);
 
@@ -3065,8 +2926,7 @@ Return Value:
     DpmiUnmapAndCopyBuffer(Data, BufferedData, ClientCX);
 
     setSI(ClientSI);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+    setDS(ClientDS);
 }
 
 VOID
@@ -3089,21 +2949,16 @@ Return Value:
 
 --*/
 {
+    DECLARE_LocalVdmContext;
     USHORT ClientDI, DataSeg, DataOff;
     PUCHAR Data, BufferedData;
-    VSAVEDSTATE State;
+    USHORT ClientES = getES();
 
     DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
     ClientDI = getDI();
 
-    Data = Sim32GetVDMPointer(
-        ((ULONG)getES() << 16),
-        1,
-        TRUE
-        );
-
-    Data += (*GetDIRegister)();
+    Data = Sim32GetVDMPointer(((ULONG)ClientES << 16), 1, TRUE)
+           + (*GetDIRegister)();
 
     BufferedData = DpmiMapAndCopyBuffer(Data, 64);
 
@@ -3113,10 +2968,41 @@ Return Value:
     setDI(DataOff);
     DPMI_EXEC_INT(0x21);
     DpmiSwitchToProtectedMode();
-
+    setES(ClientES);
     DpmiUnmapAndCopyBuffer(Data, BufferedData, 64);
 
     setDI(ClientDI);
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
 }
+VOID
+GetDate(
+    VOID
+    )
+/*++
+
+Routine Description:
+
+    This routine maps int21 func 2A GetDate
+
+Arguments:
+
+    None.
+
+Return Value:
+
+    Client (DH) - month
+    Client (DL) - Day
+    Client (CX) - Year
+    Client (AL) - WeekDay
+
+--*/
+{
+    DECLARE_LocalVdmContext;
+    SYSTEMTIME TimeDate;
+
+    GetLocalTime(&TimeDate);
+    setDH((UCHAR)TimeDate.wMonth);
+    setDL((UCHAR)TimeDate.wDay);
+    setCX(TimeDate.wYear);
+    setAL((UCHAR)TimeDate.wDayOfWeek);
+}
+

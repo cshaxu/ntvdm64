@@ -24,7 +24,7 @@ static BOOL copy_package_siblings(PCWSTR source,PCWSTR destination)
 {
     static const WCHAR *const names[]={L"run16.exe",L"ntsrv.exe",L"ntcon.exe",
         L"ntvdm.exe",L"ntvwm.exe",L"ntmon.exe",L"WOW32.DLL",L"VDMREDIR.DLL",
-        L"nthook32.dll",L"nthook64.dll"};
+        L"NTVDMD.DLL",L"nthook32.dll",L"nthook64.dll"};
     WCHAR input[MAX_PATH],output[MAX_PATH];size_t i;
     for(i=0;i<ARRAYSIZE(names);++i) {
         if(swprintf_s(input,ARRAYSIZE(input),L"%ls%ls",source,names[i])<0 ||

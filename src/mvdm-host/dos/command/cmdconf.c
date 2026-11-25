@@ -15,6 +15,11 @@
 #include <ctype.h>
 #include <oemuni.h>
 
+#if defined(NEC_98)
+// Global stuff
+UINT saveCP;
+UINT saveOutputCP;
+#endif // NEC_98
 //
 // local stuff
 //
@@ -27,9 +32,26 @@ CHAR achCOUNTRY[] = "country";
 CHAR achREM[]     = "rem";
 CHAR achENV[]     = "/e:";
 CHAR achEOL[]     = "\r\n";
-CHAR achSET[]	  = "SET";
+CHAR achSET[]     = "SET";
 CHAR achPROMPT[]  = "PROMPT";
-CHAR achPATH[]	  = "PATH";
+CHAR achPATH[]    = "PATH";
+#ifdef JAPAN
+// device=...\$disp.sys /hs=%HardwareScroll%
+CHAR  achHARDWARESCROLL[] = "%HardwareScroll%";
+DWORD dwLenHardwareScroll;
+CHAR  achHardwareScroll[64];
+#endif // JAPAN
+#if defined(KOREA)
+// device=...\hbios.sys /k:#
+CHAR  achHBIOS[] = "hbios.sys";
+CHAR  achFontSys[] = "font_win.sys";
+CHAR  achDispSys[] = "disp_win.sys";
+DWORD dwLenHotkeyOption;
+CHAR  achHotkeyOption[80];
+BOOLEAN fKoreanCP;
+
+#define KOREAN_WANSUNG_CP 949
+#endif // KOREA
 
 DWORD dwLenSysRoot;
 CHAR  achSysRoot[64];
@@ -40,7 +62,12 @@ void  ExpandConfigFiles(BOOLEAN bConfig);
 DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwBytes);
 void  WriteFileAssert(HANDLE hFile, CHAR *pBuff, DWORD dwBytes);
 #define ISEOL(ch) ( !(ch) || ((ch) == '\n') || ((ch) == '\r'))
-
+#ifdef JAPAN
+DWORD GetHardwareScroll( PCHAR achHardwareScroll, int size );
+#endif // JAPAN
+#if defined(KOREA)
+DWORD GetHotkeyOption( PCHAR achHotkeyOption, UINT size );
+#endif // KOREA
 
 
 /** There are still many items we don't supprot for long path name
@@ -104,6 +131,29 @@ VOID cmdGetAutoexecBat (VOID)
 
      ExpandConfigFiles(FALSE);
 
+#if defined(JAPAN) || defined(KOREA)
+    // fixed: change code page problem
+#if defined(NEC_98) 
+    { 
+        if (!VDMForWOW) { // BugFix: Change IME status by Screen Saver of 16bit
+            saveCP = GetConsoleCP();
+            saveOutputCP = GetConsoleOutputCP();
+            SetConsoleCP( 932 ); 
+            SetConsoleOutputCP( 932 ); 
+        }
+    } 
+#else // !NEC_98
+
+    {
+        extern int BOPFromDispFlag;
+
+        if ( !VDMForWOW && !BOPFromDispFlag ) { // mskkbug#2756 10/15/93 yasuho
+            SetConsoleCP( 437 );
+            SetConsoleOutputCP( 437 );
+        }
+    }
+#endif // !NEC_98
+#endif // JAPAN || KOREA
      RtlInitAnsiString(&AnsiString, pchTmpAutoexecFile);
      if (!NT_SUCCESS(RtlAnsiStringToUnicodeString(&Unicode,&AnsiString,TRUE)) )
          goto ErrExit;
@@ -139,7 +189,7 @@ VOID DeleteConfigFiles(VOID)
 #line 135
         DeleteFile(pchTmpConfigFile);
 
-	free(pchTmpConfigFile);
+        free(pchTmpConfigFile);
         pchTmpConfigFile = NULL;
         }
 
@@ -152,7 +202,7 @@ VOID DeleteConfigFiles(VOID)
 #line 145
         DeleteFile(pchTmpAutoexecFile);
 
-	free(pchTmpAutoexecFile);
+        free(pchTmpAutoexecFile);
         pchTmpAutoexecFile = NULL;
         }
 
@@ -183,6 +233,35 @@ PCHAR IsConfigCommand(PCHAR pConfigCommand, int CmdLen, PCHAR pLine)
        return NULL;
 }
 
+#if defined(KOREA)
+// if it is a HBIOS related config command
+//    returns TRUE
+// else
+//    returns FALSE
+
+BOOLEAN IsHBIOSConfig(PCHAR pCommand, int CmdLen, PCHAR pLine)
+{
+  CHAR  *pch = pLine;
+  CHAR  achDevice[] = "Device";
+  CHAR  achRem[] = "REM";
+
+  while (*pch && !ISEOL(*pch)) {
+        if (!_strnicmp(pch, achRem, sizeof(achRem)-sizeof(CHAR)))
+            return (FALSE);
+
+        if (!_strnicmp(pch, achDevice, sizeof(achDevice)-sizeof(CHAR))) {
+            while (*pch && !ISEOL(*pch)) {
+                  if (!_strnicmp(pch, pCommand, CmdLen))
+                     return (TRUE);
+                  pch++;
+            }
+        }
+        pch++;
+  }
+  return (FALSE);
+
+}
+#endif
 
 
 
@@ -193,7 +272,13 @@ PCHAR IsConfigCommand(PCHAR pConfigCommand, int CmdLen, PCHAR pLine)
  *  into a temporary file.
  *
  *  - expands %SystemRoot%
- *  - adds SHELL line for config.sys
+#ifdef JAPAN
+ *  - expands %HardwareScroll%
+#endif // JAPAN
+#if defined(KOREA)
+ *  - expands HotkeyOption
+#endif // KOREA
+*  - adds SHELL line for config.sys
  *
  *  entry: BOOLEAN bConfig : TRUE  - config.sys
  *                           FALSE - autoexec.bat
@@ -212,15 +297,27 @@ void ExpandConfigFiles(BOOLEAN bConfig)
    CHAR *pPartyShell=NULL;
    CHAR achRawFile[MAX_PATH+12];
    CHAR *lpszzEnv, *lpszName;
-   CHAR cchEnv;
+   int  cchEnv;
 
+#ifdef JAPAN
+   dwLenHardwareScroll = GetHardwareScroll( achHardwareScroll, sizeof(achHardwareScroll) );
+#endif // JAPAN
+#if defined(KOREA)
+   // HBIOS.SYS is only support WanSung Codepage.
+   fKoreanCP = (GetConsoleCP() ==  KOREAN_WANSUNG_CP) ? TRUE : FALSE;
+   dwLenHotkeyOption = GetHotkeyOption( achHotkeyOption, sizeof(achHotkeyOption) );
+#endif // KOREA
    dw = NtvdmGetWindowsDirectoryA(achRawFile, sizeof(achRawFile)); /* DIVERGENCE(MVDM-HOST-DIV-158): Use the package root for guest COMMAND paths. */
    dwLenSysRoot = GetShortPathNameA(achRawFile, achSysRoot, sizeof(achSysRoot));
    if (dwLenSysRoot >= sizeof(achSysRoot)) {
-	dwLenSysRoot = 0;
-	achSysRoot[0] = '\0';
-	}
+        dwLenSysRoot = 0;
+        achSysRoot[0] = '\0';
+        }
+#ifdef DBCS
+   GetPIFConfigFiles(bConfig, achRawFile, FALSE);
+#else // !DBCS
    GetPIFConfigFiles(bConfig, achRawFile);
+#endif // !DBCS
    ppTmpFile = bConfig ? &pchTmpConfigFile : &pchTmpAutoexecFile;
 
    hRawFile = CreateFile(achRawFile,
@@ -248,8 +345,8 @@ void ExpandConfigFiles(BOOLEAN bConfig)
    // at all. This allocation simply provides the following error
    // handling easily.
    if(!bConfig) {
-	lpszzEnv = lpszzcmdEnv16 = (PCHAR)malloc(dwRawFileSize);
-	cchEnv = 0;
+        lpszzEnv = lpszzcmdEnv16 = (PCHAR)malloc(dwRawFileSize);
+        cchEnv = 0;
    }
    if (!pRawBuffer || (!bConfig && lpszzcmdEnv16 == NULL)) {
        RcErrorDialogBox(ED_INITMEMERR, achRawFile, NULL);
@@ -317,7 +414,7 @@ void ExpandConfigFiles(BOOLEAN bConfig)
                while (!isgraph(*pTmp) && !ISEOL(*pTmp)) {
                       dwRawFileSize -= sizeof(CHAR);
                       pTmp++;
-		      }
+                      }
 
                   /*  if for a third party shell (not SCS command.com)
                    *     append the whole thing thru /c parameter
@@ -334,31 +431,31 @@ void ExpandConfigFiles(BOOLEAN bConfig)
                    }
                else  {
                    dw = 0;
-		   }
+                   }
 
-	       if (!dw ||
+               if (!dw ||
                    _strnicmp(achCOMMAND,pTmp+dw,sizeof(achCOMMAND)-sizeof(CHAR)) )
                   {
                    pPartyShell = pTmp;
                    }
-	       else {
+               else {
                    do {
                       while (*pTmp != '/' && !ISEOL(*pTmp))  // save "/e:"
-			     pTmp++;
+                             pTmp++;
 
-		      if(ISEOL(*pTmp))
-			  break;
+                      if(ISEOL(*pTmp))
+                          break;
 
                       if (!_strnicmp(pTmp,achENV,sizeof(achENV)-sizeof(CHAR)))
-			  pEnvParam = pTmp;
+                          pEnvParam = pTmp;
 
-		      pTmp++;
+                      pTmp++;
 
-		      } while(1);	 // was: while (!ISEOL(*pTmp));
-					 // we have break form this loop now,
-					 // and don't need in additional macro..
+                      } while(1);        // was: while (!ISEOL(*pTmp));
+                                         // we have break form this loop now,
+                                         // and don't need in additional macro..
 
-		   }
+                   }
 
                        // skip the "shell=" line
                while (dwRawFileSize && !ISEOL(*pLine)) {
@@ -370,94 +467,122 @@ void ExpandConfigFiles(BOOLEAN bConfig)
                }  // END, really is "shell=" line!
            }
 
+#if defined(KOREA)
+
+           // If current Code page is 437(US), system won't load HBIOS related modules.
+
+           if (!fKoreanCP) {
+               if (IsHBIOSConfig(achFontSys, sizeof(achFontSys)-sizeof(CHAR), pLine)) {
+                    while (dwRawFileSize && !ISEOL(*pLine)) {
+                           pLine++;
+                           dwRawFileSize -= sizeof(CHAR);
+                    }
+                    continue;
+               }
+               if (IsHBIOSConfig(achHBIOS, sizeof(achHBIOS)-sizeof(CHAR), pLine)) {
+                    while (dwRawFileSize && !ISEOL(*pLine)) {
+                           pLine++;
+                           dwRawFileSize -= sizeof(CHAR);
+                    }
+                    continue;
+               }
+               if (IsHBIOSConfig(achDispSys, sizeof(achDispSys)-sizeof(CHAR), pLine)) {
+                    while (dwRawFileSize && !ISEOL(*pLine)) {
+                           pLine++;
+                           dwRawFileSize -= sizeof(CHAR);
+                    }
+                    continue;
+               }
+           }
+#endif // KOREA
 
        /** Filter out PROMPT, SET and PATH from autoexec.nt
-	   for environment merging. The output we prepare here is
-	   a multiple strings buffer which has the format as :
-	   "EnvName_1 NULL EnvValue_1 NULL[EnvName_n NULL EnvValue_n NULL] NULL
-	   We don't take them out from the file because command.com needs
-	   them.
-	**/
+           for environment merging. The output we prepare here is
+           a multiple strings buffer which has the format as :
+           "EnvName_1 NULL EnvValue_1 NULL[EnvName_n NULL EnvValue_n NULL] NULL
+           We don't take them out from the file because command.com needs
+           them.
+        **/
        if (!bConfig)
-	    if (!_strnicmp(pLine, achPROMPT, sizeof(achPROMPT) - 1)){
-		// prompt command found.
-		// the syntax of prompt can be eithe
-		// prompt xxyyzz	or
-		// prompt=xxyyzz
-		//
-		strcpy(lpszzEnv, achPROMPT);	// get the name
-		lpszzEnv += sizeof(achPROMPT);
-		cchEnv += sizeof(achPROMPT);
-		pTmp = pLine + sizeof(achPROMPT) - 1;
-		// skip possible white chars
-		while (!isgraph(*pTmp) && !ISEOL(*pTmp))
-		pTmp++;
-		if (*pTmp == '=') {
-		    pTmp++;
-		    while(!isgraph(*pTmp) && !ISEOL(*pTmp))
-			pTmp++;
-		}
-		while(!ISEOL(*pTmp)){
-		    *lpszzEnv++ = *pTmp++;
-		    cchEnv++;
-		}
-		// null terminate this
-		// it may be "prompt NULL NULL" for delete
-		// or "prompt NULL something NULL"
-		*lpszzEnv++ = '\0';
-		cchEnv++;
-	    }
-	    else if (!_strnicmp(pLine, achPATH, sizeof(achPATH) - 1)) {
-		    // PATH was found, it has the same syntax as
-		    // PROMPT
-		    strcpy(lpszzEnv, achPATH);
-		    lpszzEnv += sizeof(achPATH);
-		    cchEnv += sizeof(achPATH);
-		    pTmp = pLine + sizeof(achPATH) - 1;
-		    while (!isgraph(*pTmp) && !ISEOL(*pTmp))
-			pTmp++;
-		    if (*pTmp == '=') {
-			pTmp++;
-			while(!isgraph(*pTmp) && !ISEOL(*pTmp))
-			    pTmp++;
-		    }
-		    while(!ISEOL(*pTmp)) {
-			*lpszzEnv++ = *pTmp++;
-			cchEnv++;
-		    }
-		    *lpszzEnv++ = '\0';
-		    cchEnv++;
-		 }
-		 else if(!_strnicmp(pLine, achSET, sizeof(achSET) -1 )) {
-			// SET was found, first search for name
-			pTmp = pLine + sizeof(achSET) - 1;
-			while(!isgraph(*pTmp) && !ISEOL(*pTmp))
-			    *pTmp ++;
-			// get the name
-			lpszName = pTmp;
-			// looking for the '='
-			// note that the name can have white characters
-			while (!ISEOL(*lpszName) && *lpszName != '=')
-			    lpszName++;
-			if (!ISEOL(*lpszName)) {
-			    // copy the name
-			    while (pTmp < lpszName) {
-				*lpszzEnv++ = *pTmp++;
-				cchEnv++;
-			    }
-			    *lpszzEnv++ = '\0';
-			    cchEnv++;
-			    // discard the '='
-			    pTmp++;
-			    // grab the value(may be nothing
-			    while (!ISEOL(*pTmp)) {
-				*lpszzEnv++ = *pTmp++;
-				cchEnv++;
-			    }
-			    *lpszzEnv++ = '\0';
-			    cchEnv++;
-			}
-		      }
+            if (!_strnicmp(pLine, achPROMPT, sizeof(achPROMPT) - 1)){
+                // prompt command found.
+                // the syntax of prompt can be eithe
+                // prompt xxyyzz        or
+                // prompt=xxyyzz
+                //
+                strcpy(lpszzEnv, achPROMPT);    // get the name
+                lpszzEnv += sizeof(achPROMPT);
+                cchEnv += sizeof(achPROMPT);
+                pTmp = pLine + sizeof(achPROMPT) - 1;
+                // skip possible white chars
+                while (!isgraph(*pTmp) && !ISEOL(*pTmp))
+                pTmp++;
+                if (*pTmp == '=') {
+                    pTmp++;
+                    while(!isgraph(*pTmp) && !ISEOL(*pTmp))
+                        pTmp++;
+                }
+                while(!ISEOL(*pTmp)){
+                    *lpszzEnv++ = *pTmp++;
+                    cchEnv++;
+                }
+                // null terminate this
+                // it may be "prompt NULL NULL" for delete
+                // or "prompt NULL something NULL"
+                *lpszzEnv++ = '\0';
+                cchEnv++;
+            }
+            else if (!_strnicmp(pLine, achPATH, sizeof(achPATH) - 1)) {
+                    // PATH was found, it has the same syntax as
+                    // PROMPT
+                    strcpy(lpszzEnv, achPATH);
+                    lpszzEnv += sizeof(achPATH);
+                    cchEnv += sizeof(achPATH);
+                    pTmp = pLine + sizeof(achPATH) - 1;
+                    while (!isgraph(*pTmp) && !ISEOL(*pTmp))
+                        pTmp++;
+                    if (*pTmp == '=') {
+                        pTmp++;
+                        while(!isgraph(*pTmp) && !ISEOL(*pTmp))
+                            pTmp++;
+                    }
+                    while(!ISEOL(*pTmp)) {
+                        *lpszzEnv++ = *pTmp++;
+                        cchEnv++;
+                    }
+                    *lpszzEnv++ = '\0';
+                    cchEnv++;
+                 }
+                 else if(!_strnicmp(pLine, achSET, sizeof(achSET) -1 )) {
+                        // SET was found, first search for name
+                        pTmp = pLine + sizeof(achSET) - 1;
+                        while(!isgraph(*pTmp) && !ISEOL(*pTmp))
+                            *pTmp ++;
+                        // get the name
+                        lpszName = pTmp;
+                        // looking for the '='
+                        // note that the name can have white characters
+                        while (!ISEOL(*lpszName) && *lpszName != '=')
+                            lpszName++;
+                        if (!ISEOL(*lpszName)) {
+                            // copy the name
+                            while (pTmp < lpszName) {
+                                *lpszzEnv++ = *pTmp++;
+                                cchEnv++;
+                            }
+                            *lpszzEnv++ = '\0';
+                            cchEnv++;
+                            // discard the '='
+                            pTmp++;
+                            // grab the value(may be nothing
+                            while (!ISEOL(*pTmp)) {
+                                *lpszzEnv++ = *pTmp++;
+                                cchEnv++;
+                            }
+                            *lpszzEnv++ = '\0';
+                            cchEnv++;
+                        }
+                      }
 
 
        dw = WriteExpanded(hTmpFile, pLine, dwRawFileSize);
@@ -472,6 +597,9 @@ void ExpandConfigFiles(BOOLEAN bConfig)
 
     if (bConfig)  {
         UINT OemCP;
+#if defined(JAPAN) || defined(KOREA)
+        UINT ConsoleCP;
+#endif // JAPAN || KOREA
         UINT CtryId;
         CHAR szCtryId[64]; // expect "nnn" only
 
@@ -491,6 +619,11 @@ void ExpandConfigFiles(BOOLEAN bConfig)
            }
 
         OemCP = GetOEMCP();
+#if defined(JAPAN) || defined(KOREA)
+        ConsoleCP = GetConsoleOutputCP();
+        if (OemCP != ConsoleCP)
+            OemCP = ConsoleCP;
+#endif // JAPAN || KOREA
 
         sprintf(achRawFile,
                 "%s=%3.3u,%3.3u,%s\\system32\\%s.sys%s",
@@ -555,20 +688,20 @@ void ExpandConfigFiles(BOOLEAN bConfig)
     CloseHandle(hRawFile);
     free(pRawBuffer);
     if (!bConfig) {
-	// shrink(or free) the memory
-	if (cchEnv && lpszzcmdEnv16) {
-	    // doubld null terminate it
-	    lpszzcmdEnv16[cchEnv++] = '\0';
-	    // shrink the memory. If it fails, simple keep
-	    // it as is
-	    lpszzEnv = realloc(lpszzcmdEnv16, cchEnv);
-	    if (lpszzEnv != NULL)
-		lpszzcmdEnv16 = lpszzEnv;
-	}
-	else {
-	    free(lpszzcmdEnv16);
-	    lpszzcmdEnv16 = NULL;
-	}
+        // shrink(or free) the memory
+        if (cchEnv && lpszzcmdEnv16) {
+            // doubld null terminate it
+            lpszzcmdEnv16[cchEnv++] = '\0';
+            // shrink the memory. If it fails, simple keep
+            // it as is
+            lpszzEnv = realloc(lpszzcmdEnv16, cchEnv);
+            if (lpszzEnv != NULL)
+                lpszzcmdEnv16 = lpszzEnv;
+        }
+        else {
+            free(lpszzcmdEnv16);
+            lpszzcmdEnv16 = NULL;
+        }
     }
 
 }
@@ -603,6 +736,39 @@ DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwChars)
             pSave    = pch;
             dwChars -= sizeof(achSYSROOT)-sizeof(CHAR);
             }
+#ifdef JAPAN
+        // device=...\$disp.sys /hs=%HardwareScroll%
+        else if (*pch == '%' &&
+            !_strnicmp(pch, achHARDWARESCROLL, sizeof(achHARDWARESCROLL)-sizeof(CHAR)) )
+           {
+            dw = pch - pSave;
+            if (dw)  {
+                WriteFileAssert(hFile, pSave, dw);
+                }
+
+            WriteFileAssert(hFile, achHardwareScroll, dwLenHardwareScroll);
+
+            pch     += sizeof(achHARDWARESCROLL)-sizeof(CHAR);
+            pSave    = pch;
+            dwChars -= sizeof(achHARDWARESCROLL)-sizeof(CHAR);
+            }
+#endif // JAPAN
+#if defined(KOREA) // looking for hbios.sys
+        else if (fKoreanCP && *pch  == 'h' &&
+            !_strnicmp(pch, achHBIOS, sizeof(achHBIOS)-sizeof(CHAR)) )
+           {
+            dw = pch - pSave;
+            if (dw)  {
+                WriteFileAssert(hFile, pSave, dw);
+                }
+
+            WriteFileAssert(hFile, achHotkeyOption, dwLenHotkeyOption);
+
+            pch     += sizeof(achHBIOS)-sizeof(CHAR);
+            pSave    = pch;
+            dwChars -= sizeof(achHBIOS)-sizeof(CHAR);
+        }
+#endif // KOREA
         else {
             pch++;
             dwChars -= sizeof(CHAR);
@@ -643,3 +809,174 @@ void WriteFileAssert(HANDLE hFile, CHAR *pBuff, DWORD dwBytes)
       TerminateVDM();  // skip cleanup since I insist that we exit!
       }
 }
+#ifdef JAPAN
+//
+// MSKK 8/26/1993 V-KazuyS
+// Get HardwareScroll type from registry
+// this parameter also use console.
+//
+DWORD GetHardwareScroll( PCHAR achHardwareScroll, int size )
+{
+    HKEY  hKey;
+    DWORD dwType;
+    DWORD retCode;
+    CHAR  szBuf[256];
+    DWORD cbData=256L;
+    DWORD num;
+    PCHAR psz;
+
+// Get HardwareScroll type ( ON, LC or OFF ) from REGISTRY file.
+
+  // OPEN THE KEY.
+
+    retCode = RegOpenKeyEx (
+                      HKEY_LOCAL_MACHINE,         // Key handle at root level.
+                      "HARDWARE\\DEVICEMAP\\VIDEO", // Path name of child key.
+                      0,                            // Reserved.
+                      KEY_EXECUTE,                  // Requesting read access.
+                      &hKey );               // Address of key to be returned.
+
+// If retCode != 0 then we cannot find section in Register file
+    if ( retCode ) {
+#ifdef JAPAN_DBG
+        DbgPrint( "NTVDM: RegOpenKeyEx failed %xh\n", retCode );
+#endif
+        strcpy( achHardwareScroll, "off" );
+        return ( strlen("off") );
+    }
+
+    dwType = REG_SZ;
+
+// Query for line from REGISTER file
+    retCode = RegQueryValueEx(  hKey,
+                                "\\Device\\Video0",
+                                NULL,
+                                &dwType,
+                                szBuf,
+                                &cbData);
+
+    if ( retCode ) {
+#ifdef JAPAN_DBG
+        DbgPrint( "NTVDM: RegQueryValueEx failed %xh\n", retCode );
+#endif
+        strcpy( achHardwareScroll, "off" );
+        return ( strlen("off") );
+    }
+
+    RegCloseKey(hKey);
+
+#ifdef JAPAN_DBG
+    DbgPrint( "NTVDM: Get \\Device\\Video0=[%s]\n", szBuf );
+#endif
+    psz = strchr( (szBuf+1), '\\' ); // skip \\REGISTRY\\   *
+#ifdef JAPAN_DBG
+    DbgPrint( "NTVDM: skip \\registry\\ [%s]\n", psz );
+#endif
+    if ( psz != NULL )
+        psz = strchr( (psz+1), '\\' ); // skip Machine\\    *
+
+    if ( psz == NULL ) {
+#ifdef JAPAN_DBG
+        DbgPrint( "NTVDM: Illegal value[%s]h\n", szBuf );
+#endif
+        strcpy( achHardwareScroll, "off" );
+        return ( strlen("off") );
+    }
+
+    psz++;
+
+#ifdef JAPAN_DBG
+    DbgPrint( "NTVDM: Open 2nd Key=[%s]\n", psz );
+#endif
+
+    retCode = RegOpenKeyEx (
+                      HKEY_LOCAL_MACHINE,         // Key handle at root level.
+                      psz,                      // Path name of child key.
+                      0,                            // Reserved.
+                      KEY_EXECUTE,                  // Requesting read access.
+                      &hKey );               // Address of key to be returned.
+
+// If retCode != 0 then we cannot find section in Register file
+    if ( retCode ) {
+#ifdef JAPAN_DBG
+        DbgPrint( "NTVDM: RegOpenKeyEx failed %xh\n", retCode );
+#endif
+        strcpy( achHardwareScroll, "off" );
+        return ( strlen("off") );
+    }
+
+    dwType = REG_SZ;
+
+// Query for line from REGISTER file
+    retCode = RegQueryValueEx(  hKey,
+                                "ConsoleFullScreen.HardwareScroll",
+                                NULL,
+                                &dwType,
+                                szBuf,
+                                &cbData);
+
+    if ( retCode ) {
+#ifdef JAPAN_DBG
+        DbgPrint( "NTVDM: RegQueryValueEx failed %xh\n", retCode );
+#endif
+        strcpy( achHardwareScroll, "off" );
+        return ( strlen("off") );
+    }
+
+    RegCloseKey(hKey);
+
+#ifdef JAPAN_DBG
+    DbgPrint( "NTVDM: Get FullScreenHardwareScroll=[%s]\n", szBuf );
+#endif
+
+    num = ( lstrlen(szBuf)+1 > size ) ? size : lstrlen(szBuf)+1;
+    RtlCopyMemory( achHardwareScroll, szBuf, num );
+    achHardwareScroll[num] = '\0';
+
+#ifdef JAPAN_DBG
+    DbgPrint( "NTVDM: Set %HardwareScroll%=[%s]\n", achHardwareScroll );
+#endif
+
+    return num;
+}
+#endif // JAPAN
+
+#if defined(KOREA)
+/*
+ * 8/05/1996 bklee
+ * Get keyboard layout from system and set hotkey option for hbios.sys
+ * Here are hotkey options for HBIOS.SYS.
+ *
+ *      Keyboard Type    Hangul          Hanja
+ * 1        101a         r + alt         r + ctrl     : default
+ * 2        101b         r + ctrl        r + alt
+ * 3        103          Hangul          Hanja
+ * 4        84           alt + shift     ctrl + shift
+ * 5        86           Hangul          Hanja
+ * 6        101c         l shift + space l ctrl + space
+ * 7        64                                        : N/A. map to default
+ */
+
+DWORD GetHotkeyOption( PCHAR achHotkeyOption, UINT size )
+{
+      // GetKeyboardType(1) return 1 to 6 as sub-keyboard type.
+      // No 7 sub-keyboard type will be returned.
+      UINT HotkeyIndex[6] = { 4, 5, 1, 2, 6, 3 };
+      UINT SubKeyType, HotkeyOption;
+
+      if ( GetKeyboardType(0) == 8 )  { // KOREAN Keyboard layout
+
+           SubKeyType = GetKeyboardType(1);
+
+           if ( SubKeyType > 0 && SubKeyType < 7 )
+                HotkeyOption = HotkeyIndex[SubKeyType - 1];
+           else
+                HotkeyOption = 1; // Set to default.
+
+           wsprintf(achHotkeyOption, "hbios.sys /K:%d", HotkeyOption);
+      }
+      else
+           strcpy(achHotkeyOption, "hbios.sys");
+      return(strlen(achHotkeyOption));
+}
+#endif // KOREA

@@ -36,7 +36,6 @@ extern void demRead(void);
 extern void nt_key_down_action(PKEY_EVENT_RECORD);
 extern void nt_key_up_action(PKEY_EVENT_RECORD);
 extern void host_ica_lock(void), host_ica_unlock(void);
-extern void c_setIP(uint16_t);
 extern void CALLF(uint32_t target[2]);
 extern int mvdm_vm_bridge_bop_direct(uint32_t, uint32_t, uint32_t,
     uint32_t, uint32_t, int, mvdm_vm_bridge_result *);
@@ -690,10 +689,7 @@ BOOL test_cmd_dispatch(ULONG service)
     callback = c_getEDX();
     if (GetEnvironmentVariableW(L"MVDM_REAL_COMMAND", NULL, 0))
         ExitProcess(ERROR_INVALID_STATE); /* production ingress must intercept */
-    c_setIP((uint16_t)(c_getIP() + 1));
-    /* This diagnostic interposition returns through the original MS_bop_4
-     * +1 epilogue. Production admission must instead bypass that epilogue. */
-    target[0] = (uint16_t)(callback - 1);
+    target[0] = (uint16_t)callback;
     target[1] = callback >> 16;
     CALLF(target); /* original CCPU validation, stack push and segment load */
     return TRUE;

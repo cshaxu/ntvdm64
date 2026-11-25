@@ -21,22 +21,19 @@ NOTE:   Commented description of this file is in \nt\public\oak\bin\dirs.tpl
 !ENDIF
 
 
-DIRS=dos    \
+DIRS=inc \
+     dos \
      xms.486 \
-     dbg    \
-     v86    \
+     dbg \
      dpmi32 \
-     inc    \
      suballoc \
      oemuni \
      softpc.new \
-     wow32  \
-     vdmexts \
+     wow32 \
      vdmdbg \
-     vdmutils \
+     dbgdll \
      vdd \
-     fax
+     fax \
+     vdmredir
 
-
-
-OPTIONAL_DIRS=vdmredir
+OPTIONAL_DIRS=

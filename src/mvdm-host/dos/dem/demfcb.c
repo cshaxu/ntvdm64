@@ -412,7 +412,8 @@ VOID demDate16 (VOID)
 SYSTEMTIME TimeDate;
 
     GetLocalTime(&TimeDate);
-    setAX ( (USHORT) ((TimeDate.wYear << 9 ) |
+    // date is stored in a packed word: ((year-1980)*512) + (month*32) + day
+    setAX ( (USHORT) (((TimeDate.wYear-1980) << 9 ) |
 	    ((TimeDate.wMonth & 0xf) << 5 ) |
             (TimeDate.wDay & 0x1f))
 	  );

@@ -125,6 +125,14 @@ UCHAR   DriveNum;
     }
 
     if (ulSubFunc == IOCTL_CHANGEABLE){
+#ifdef	JAPAN
+	/* For MS-WORKS 2.5 */
+        if (DriveType == DRIVE_REMOTE || DriveType == DRIVE_CDROM){
+	    setCF(1);
+	    setAX(0x000f);
+	    return;
+	}
+#endif // JAPAN
         if(DriveType == DRIVE_REMOVABLE)
 	    setAX(0);
 	else
@@ -133,11 +141,18 @@ UCHAR   DriveNum;
     else {
         setAL(0);
         if (DriveType == DRIVE_REMOTE || DriveType == DRIVE_CDROM)
+#ifdef	JAPAN
+	/* For ICHITARO Ver.4 */
+            setDH(0x10);
+        else
+            setDH(0);
+#else // !JAPAN
             setDX(0x1000);
         else
             // We have to return 800 rather then 0 as Dos Based Quatrro pro
             // behaves very badly if this bit is not set. sudeepb 15-Jun-1994
             setDX(0x800);
+#endif // !JAPAN
     }
     setCF(0);
     return;
@@ -198,12 +213,30 @@ VOID demIoctlDiskGeneric (VOID)
         }
 
 
+#ifdef	JAPAN
+    /* For Ichitaro Ver.4 */
+    if (!demIsDriveFloppy(Drive) && Code==IOCTL_GETDPM){
+	CHAR	RootPathName[] = "?:\\";
+	DWORD	dwDriveType;
+	RootPathName[0] = (CHAR)('A' + getBL());
+	dwDriveType = GetDriveTypeOem(RootPathName);
+	if (dwDriveType == DRIVE_FIXED){
+	    pdms = (PDEVICE_PARAMETERS)GetVDMAddr(getSI(), getDX());
+	    pdms->DeviceType  = 5;
+	    pdms->DeviceAttrs = NON_REMOVABLE;
+	}
+    }
+#endif // JAPAN
 
     // if we don't know the drive, bail out
     if((pbds = demGetBDS(Drive)) == NULL && Code != IOCTL_GETDPM) {
+#if defined(NEC_98)
+        setAX(DOS_FILE_NOT_FOUND);
+#else  // !NEC_98
 	if (!demIsDriveFloppy(Drive))
 	    host_direct_access_error(NOSUPPORT_HARDDISK);
 	setAX(DOS_FILE_NOT_FOUND);
+#endif // !NEC_98
 	setCF(1);
 	return;
     }
@@ -503,7 +536,11 @@ VOID demIoctlDiskGeneric (VOID)
 		    pAccessCtrl = (PACCESSCTRL) GetVDMAddr(getSI(), getDX());
 		    pbds->Flags &= ~(UNFORMATTED_MEDIA);
 		    if (pAccessCtrl->AccessFlag == 0)
+#if defined(NEC_98) 
+                        pbds->Flags |= UNFORMATTED_MEDIA; 
+#else  // !NEC_98
 			pAccessCtrl->AccessFlag |= UNFORMATTED_MEDIA;
+#endif // !NEC_98
 		    break;
 
 	    default:

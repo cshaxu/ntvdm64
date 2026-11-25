@@ -16,6 +16,21 @@ Abstract:
 #ifndef _VDMDBG_
 #define _VDMDBG_
 
+#define VDMEVENT_NEEDS_INTERACTIVE  0x8000
+#define VDMEVENT_VERBOSE            0x4000
+#define VDMEVENT_PE                 0x2000
+#define VDMEVENT_ALLFLAGS           0xe000
+#define VDMEVENT_V86                0x0001
+#define VDMEVENT_PM16               0x0002
+#define SN_CODE 0                           // Protect mode code segment
+#define SN_DATA 1                           // Protect mode data segment
+#define SN_V86  2                           // V86 mode segment
+#define VDMDBG_BREAK_DOSTASK    0x00000001
+#define VDMDBG_BREAK_WOWTASK    0x00000002
+#define VDMDBG_BREAK_LOADDLL    0x00000004
+#define VDMDBG_BREAK_EXCEPTIONS 0x00000008
+#define VDMDBG_BREAK_DEBUGGER   0x00000010
+
 #ifdef __cplusplus
 #error Unsupported excluded original configuration
 #endif

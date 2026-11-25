@@ -516,7 +516,6 @@ Routine Description:
     OEM_STRING OemResult;
     PWSTR Ubuff;
     PWSTR FilePart;
-#line 519
     PWSTR *FilePartPtr;
 
     if ( ARGUMENT_PRESENT(lpFilePart) ) {
@@ -555,7 +554,6 @@ Routine Description:
     else {
         UnicodeLength = 0;
         }
-#line 550
     if ( UnicodeLength && UnicodeLength < nBufferLength ) {
         RtlInitUnicodeString(&UnicodeResult,Ubuff);
         Status = RtlUnicodeStringToOemString(&OemResult,&UnicodeResult,TRUE);
@@ -570,7 +568,6 @@ Routine Description:
                 else {
                     UnicodeResult.Length = (USHORT)((FilePart - Ubuff)*sizeof(WCHAR));
                     *lpFilePart = lpBuffer + RtlUnicodeStringToOemSize(&UnicodeResult)-1;
-#line 564
                     }
                 }
             }
@@ -588,6 +585,7 @@ Routine Description:
     RtlFreeHeap(RtlProcessHeap(), 0,Ubuff);
 
     return (DWORD)UnicodeLength;
+#line 601
 }
 
 
@@ -619,7 +617,6 @@ Routine Description:
                                     );
 
     if ( nBufferLength >= RtlUnicodeStringToOemSize(Unicode) ) {
-#line 612
         OemString.Buffer = lpBuffer;
         OemString.MaximumLength = (USHORT)min(nBufferLength,65535);
         Status = RtlUnicodeStringToOemString(&OemString,Unicode,FALSE);
@@ -635,6 +632,7 @@ Routine Description:
         ReturnValue = RtlUnicodeStringToOemSize(Unicode);
         }
     return ReturnValue;
+#line 656
 }
 
 
@@ -907,10 +905,8 @@ Routine Description:
     UnicodeFileSystemName.MaximumLength = 0;
     OemVolumeName.Buffer = lpVolumeNameBuffer;
     OemVolumeName.MaximumLength = (USHORT)nVolumeNameSize;
-#line 899
     OemFileSystemName.Buffer = lpFileSystemNameBuffer;
     OemFileSystemName.MaximumLength = (USHORT)nFileSystemNameSize;
-#line 901
 
     try {
         if ( ARGUMENT_PRESENT(lpVolumeNameBuffer) ) {
@@ -999,6 +995,7 @@ Routine Description:
         }
 
     return ReturnValue;
+#line 1018
 }
 
 
@@ -1076,7 +1073,6 @@ Routine Description:
     LPWSTR UnicodeBuffer;
     DWORD UnicodeCapacity = MAX_COMPUTERNAME_LENGTH+1;
     NTSTATUS Status;
-#line 1064
 
     //
     // Work buffer needs to be twice the size of the user's buffer
@@ -1117,12 +1113,11 @@ Routine Description:
         SetLastError(Status == STATUS_BUFFER_OVERFLOW ? ERROR_BUFFER_OVERFLOW : RtlNtStatusToDosError(Status));
         return FALSE;
     }
-#line 1098
 
     *nSize = OemString.Length;
     RtlFreeHeap(RtlProcessHeap(), 0, UnicodeBuffer);
     return(TRUE);
-
+#line 1132
 }
 
 
@@ -1159,3 +1154,4 @@ Routine Description:
         }
     return ( RemoveFontResourceW(Unicode->Buffer) );
 }
+

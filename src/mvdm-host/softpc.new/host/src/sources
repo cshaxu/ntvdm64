@@ -94,6 +94,11 @@ SOURCES=                sim32.c         \
                         fprt.c          \
 			nt_rflop.c	\
 			nt_inthk.c	\
+                        nt_sb.c      \
+                        nt_sbdsp.c      \
+                        nt_sbfm.c      \
+                        nt_sbmxr.c      \
+                        nt_sbmid.c      \
                         nt_reset.c      \
 			nt_mem.c
 

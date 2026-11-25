@@ -384,20 +384,21 @@ typedef struct _extioentry {
 #define VGA_DAC_DATA_PORT	35
 #endif
 
-#ifdef NTVDM	/* Spare slots for user supplied VDDs */
-#define SPARE_ADAPTER1		36
-#define SPARE_ADAPTER2		37
-#define SPARE_ADAPTER3		38
-#define SPARE_ADAPTER4		39
-#define SPARE_ADAPTER5		40
-#define SPARE_ADAPTER6		41
-#define SPARE_ADAPTER7		42
-#define SPARE_ADAPTER8		43
+#define SNDBLST_ADAPTER         36
+
+#ifdef NTVDM    /* Spare slots for user supplied VDDs */
+#define SPARE_ADAPTER1          37
+#define SPARE_ADAPTER2          38
+#define SPARE_ADAPTER3          39
+#define SPARE_ADAPTER4          40
+#define SPARE_ADAPTER5          41
+#define SPARE_ADAPTER6          42
+#define SPARE_ADAPTER7          43
 
 
-#define IO_MAX_NUMBER_ADAPTORS	44	/* make this equal to the highest used plus one please! */
+#define IO_MAX_NUMBER_ADAPTORS  44      /* make this equal to the highest used plus one please! */
 
-#define NUMBER_SPARE_ADAPTERS	(SPARE_ADAPTER8 - SPARE_ADAPTER1)
+#define NUMBER_SPARE_ADAPTERS   (SPARE_ADAPTER7 - SPARE_ADAPTER1)
 
 #else	/* NTVDM */
 #line 395

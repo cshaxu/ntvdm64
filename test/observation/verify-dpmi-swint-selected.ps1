@@ -15,11 +15,11 @@ New-Item -ItemType Directory $out | Out-Null
 if ($LASTEXITCODE) { throw 'Native DPMI fixture build failed' }
 $exe = "$worker/dpmi-swint-selected.exe"
 & $exe | Tee-Object -FilePath "$out/result.txt"
-if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1')) {
+if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_SELECTED_OBJECT_OK absent=1 protected=1 stack_failure=1')) {
     throw 'Selected DPMI fixture failed'
 }
 & $exe --wow-signature-mode | Tee-Object -FilePath "$out/wow-signature-mode.txt"
-if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/wow-signature-mode.txt" -SimpleMatch 'DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=declined')) {
+if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/wow-signature-mode.txt" -SimpleMatch 'DPMI_INT2A_MODE_OWNER_OK v86=declined real=ivt protected=declined')) {
     throw 'Selected DPMI INT 2A mode ownership fixture failed'
 }
 & $exe --pm-fault-failure | Tee-Object -FilePath "$out/pm-fault-failure.txt"

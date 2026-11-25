@@ -1,5 +1,7 @@
 # T485 S1 existing-component migration ledger
 
+**Current T485 decision.** The owner approved direct use of XP source for the migration, including normal project delivery to the existing origin. Earlier S1 notes on missing distribution evidence describe the status at inventory time. They do not block any T485 source batch. The package and guest identity requirements remain in effect.
+
 Local baseline 449c938a4cc190cc88df6200e381274e1a2e8f4f. Local XP candidate catalogue O:/repos.external/winxpscodes at a2f6d7c93aa4f11efc51147566d5961c59a8ef89, Source/XPSP1/NT. Compared Git tree metadata only. Exact XP build, SKU, provenance, integration rights and corresponding immutable media still require qualification.
 
 | Component | Leaf batches | Tracked files | Identical blob | Different blob | Unmatched path |
@@ -184,7 +186,7 @@ XP-only components belong to a later T. Admit a minimum dependency into the requ
 | H005 DPMI32 | G034 DOSX | Guest 486/dxstrt.asm issues BOP_DPMI InitDosx. Host dpmi32.c contains DpmiInitDosx in the dispatch table. Check entry number, initialization data and mode handoff. |
 | H028 VCDEX | G042 MSCDEXNT | Guest mscdexnt.asm explicitly loads VCDEX.DLL. XP catalogues the corresponding TSR source and VDD definition under base/mvdm/vdd/mscdex instead of vdd/samples/mscdex. Verify DLL exports, registration and a guest CD request together. |
 
-These are confirmed current interfaces and future joint-check candidates. Move a companion early only when qualification shows the current batch needs it. Each batch remains unstarted. Record its exact input blobs, affected output or historical-only disposition, companion files, compatibility test and rollback package before integration.
+H002/G004 and H005/G034 have two early source companions recorded in [H002–H004](h002-h004.md). H028/G042 remains a joint-check candidate. Move a companion early only when qualification shows the current batch needs it. Record its exact input blobs, affected output or historical-only disposition, companion files, compatibility test and rollback package before integration.
 
 For 66 unmatched current paths the file ledger also lists a relocation lead. The search retains a unique candidate matching a trailing directory plus filename (or a longer trailing path) across the XP NT catalogue. Verify the original owner and interface before promoting any lead. The exact-path counts above exclude these hints.
 
@@ -223,7 +225,7 @@ A local filename inventory of repos.external found NT4 media, including an i386 
 
 The owner supplied E:/core/collection/systems/x86_32_winnt/NT5x/mswinnt51_windowsxp and accepted SP2/SP3 binaries when SP1 is unavailable. Selected mswinnt51_en_winxpsp3home.iso for English x86 reference. SHA-256 is 9336DAF61C64839F6B53521E87D627095A9A0B54F11963E4F5A506141D48238D. The disc contains WIN51IC.SP3, and I386/PRODSPEC.INI identifies Windows XP Home Edition and English. Expanded NTVDM.EXE, WOW32.DLL and VDMREDIR.DLL each report 5.1.2600.5512. The source reference remains 5.1.2600.1106. Individual file versions may be older. SP2 Professional Chinese also lists the core I386 payload; the English Professional SP3 image produced no usable catalogue in this reader.
 
-The [SP3 binary ledger](sp3-home-media.csv) compares all 67 files in assets/winnt.zip with exact I386 filenames or their compressed media spellings. List and extract via tar, expand packed members with Windows expand.exe, then Get-FileHash over expanded file bytes. 61 matches, 12 byte-identical. Same-name candidates SOL, TASKMAN, WINMINE, WINVER and WRITE change from NE to PE. EDIT.COM changes from a flat/unrecognized file header to MZ. Qualify intended role for each before selection. QBASIC.EXE, QBASIC.HLP, WRITE.HLP, dumpbin.exe, RASAPI16.DLL and VDMEXTS.DLL had no direct I386 match. This scope does not prove absence across CABs or renamed payloads.
+The [SP3 binary ledger](sp3-home-media.csv) compares all 67 files in assets/winnt.zip with exact I386 filenames or their compressed media spellings. List and extract via tar, expand packed members with Windows expand.exe, then Get-FileHash over expanded file bytes. 61 matches, 12 byte-identical. The disc contains PE namesakes of the NE programs SOL, TASKMAN, WINMINE, WINVER and WRITE. The owner explicitly excluded all five from migration. EDIT.COM changes from a flat/unrecognized file header to MZ. Qualify EDIT.COM against its actual caller before selection. QBASIC.EXE, QBASIC.HLP, WRITE.HLP, dumpbin.exe, RASAPI16.DLL and VDMEXTS.DLL had no direct I386 match. This scope does not prove absence across CABs or renamed payloads.
 
 Reference image SHA-256 after expansion: NTVDM.EXE A0BE52E7D076ED8E33A4B5AB309CD23AD0272570C7E87FE6E3444712AD467D62, WOW32.DLL A46B15CC7F59D8109B6299EBDB278BA34B1312D757D57BB4C9A708DFA9D34710, VDMREDIR.DLL 4B1ED93D7EC31F385E2BAA1466B20E26D754AB52B4988C56F18418DFB8B0DC67. Actual host/guest ABI compatibility requires batch-specific testing. Only metadata is included in this delivery.
 

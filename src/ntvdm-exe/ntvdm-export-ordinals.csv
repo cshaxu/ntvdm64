@@ -270,3 +270,8 @@ mvdm_debug_task_retire,274
 opennt_create_cdecl_thread_named,275
 OpenNtBaseClientFindWowTask,276
 NtvdmReportWowStartup,277
+getEFLAGS,278
+setEFLAGS,279
+setEIP,280
+VdmDbgAttach,281
+VdmMapFlat,282

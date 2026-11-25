@@ -113,23 +113,7 @@
 #line 106
 
 
-/* Types
- */
-typedef ULONG   (FASTCALL *LPFNW32)(PVDMFRAME);
-
-
-/* Dispatch table entry   DO NOT CHANGE THE SIZES OF THESE TABLES WITHOUT
-**                        CHANGING I386\FASTWOW.ASM!
- */
-typedef struct _W32 {   /* w32 */
-    LPFNW32 lpfnW32;    // function address
-#line 118
-#ifdef DEBUG_OR_WOWPROFILE
-#line 119
-#error WOW profiling is not supported
-#endif // DEBUG_OR_WOWPROFILE
-#line 124
-} W32, *PW32;
+#line 125
 
 
 /*                        DO NOT CHANGE THE SIZES OF THESE TABLES WITHOUT

@@ -1,7 +1,7 @@
 # Explicit admitted composition; no cached graph is read.
 worker_unit("obj/vcdex/vcdex.obj" "${NTVDM_REPO}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.c" "${profile_18}")
 worker_resource("obj/vcdex/vcdex.res" "${NTVDM_REPO}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.rc" "/nologo")
-worker_link("VCDEX.DLL" "/nologo /dll /machine:x86 /entry:VDDInitialize@12 /base:0x2000000 /map:$out.map /def:${NTVDM_REPO}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def /implib:$out.lib /out:$out" "kernel32.lib user32.lib"
+worker_link("VCDEX.DLL" "/alternatename:_setAX@4=setAX /nologo /dll /machine:x86 /entry:VDDInitialize@12 /base:0x2000000 /map:$out.map /def:${NTVDM_REPO}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def /implib:$out.lib /out:$out" "kernel32.lib user32.lib"
   INPUTS "obj/vcdex/vcdex.obj" "obj/vcdex/vcdex.res" "ntvdm.lib" "common-root.lib"
   DEPENDS "${NTVDM_REPO}/src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.def")
 worker_unit("obj/cvidc/vglob.obj" "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c" "${profile_5}")
@@ -60,7 +60,14 @@ worker_unit("obj/adapter-basesrv/mvdm_command_native_child.obj" "${NTVDM_REPO}/s
 worker_unit("obj/adapter-basesrv/mvdm_command_binding.obj" "${NTVDM_REPO}/src/ntvdm-exe/command/source/mvdm_command_binding.c" "${profile_25}")
 worker_unit("obj/adapter-monitor/mvdm_vdm_tib.obj" "${NTVDM_REPO}/src/compat/mvdm_vdm_tib.c" "${profile_23}")
 worker_unit("obj/compat/dbg_registers.obj" "${NTVDM_REPO}/src/compat/dbg_registers.c" "${profile_24}")
-worker_unit("obj/mvdm-debugger/dbg.obj" "${NTVDM_REPO}/src/mvdm-host/dbg/dbg.c" "${profile_1}")
+worker_unit("obj/mvdm-debugger/register_exports.obj" "${NTVDM_REPO}/src/ntvdm-exe/debugger/register_exports.c" "${profile_22}")
+worker_original_sources(debugger_sources "${NTVDM_REPO}/src/mvdm-host/dbg/sources.inc")
+foreach(name IN LISTS debugger_sources)
+  get_filename_component(stem "${name}" NAME_WE)
+  set(object "obj/mvdm-debugger/${stem}.obj")
+  worker_unit("${object}" "${NTVDM_REPO}/src/mvdm-host/dbg/${name}" "${profile_1}")
+  list(APPEND debugger_objects "${object}")
+endforeach()
 worker_unit("obj/adapter-softpc/mvdm_vm_binding.obj" "${NTVDM_REPO}/src/compat/mvdm_vm_binding.c" "${profile_22}")
 worker_unit("obj/adapter-softpc/mvdm_dpmi_binding.obj" "${NTVDM_REPO}/src/ntvdm-exe/softpc/mvdm_dpmi_binding.c" "${profile_19}")
 worker_unit("obj/adapter-softpc/mvdm_softpc_firmware.obj" "${NTVDM_REPO}/src/compat/mvdm_softpc_firmware.c" "${profile_22}")
@@ -796,13 +803,13 @@ worker_archive("monitor-bindings.lib"
 worker_archive("kernel-vdm-printer.lib"
   "obj/kernel-vdm/mvdm_monitor_printer.obj")
 worker_archive("debugger-bindings.lib"
-  "obj/compat/dbg_registers.obj" "obj/mvdm-debugger/dbg.obj")
+  "obj/compat/dbg_registers.obj" ${debugger_objects} "obj/mvdm-debugger/register_exports.obj")
 worker_archive("softpc-ccpu-vector-defaults.lib"
   "obj/ccpu/fmstubs_vector_defaults.obj")
 worker_archive("softpc-activity-check.lib"
   "obj/ccpu/fmstubs_activity_check.obj")
 worker_group("original-softpc-candidate" "original-ccpu386.lib" "original-softpc-bios.lib" "original-softpc-keymouse.lib" "original-softpc-system.lib" "original-softpc-disks.lib" "original-softpc-support.lib" "original-softpc-video.lib" "original-softpc-cvidc.lib" "original-softpc-comms.lib" "original-softpc-dos.lib" "original-mvdm-dem.lib" "original-mvdm-command.lib" "original-mvdm-redir.lib" "original-mvdm-xms.lib" "original-mvdm-dpmi32.lib" "original-mvdm-host-suballoc.lib" "original-mvdm-host-oemuni.lib" "original-softpc-base-trace.lib" "original-softpc-host-roots.lib" "original-opennt-netlib.lib" "original-opennt-xactsrv.lib" "original-opennt-rtl-x86.lib" "softpc-bindings.lib" "vdmredir-dll-bindings.lib" "worker-shell.lib" "worker-command-bindings.lib" "softpc-win32-bindings.lib" "monitor-bindings.lib" "kernel-vdm-printer.lib" "debugger-bindings.lib" "session.lib" "mvdm-softpc-effective-address.lib" "softpc-ccpu-vector-defaults.lib" "softpc-activity-check.lib")
-worker_group("product-programs" "run16.exe" "ntsrv.exe" "ntvdm.exe" "ntvwm.exe" "ntcon.exe" "ntmon.exe" "VDMREDIR.dll")
+worker_group("product-programs" "run16.exe" "ntsrv.exe" "ntvdm.exe" "ntvwm.exe" "ntcon.exe" "ntmon.exe" "VDMREDIR.dll" "NTVDMD.DLL")
 worker_unit("obj/tests/ccpu_halt_reset_test.obj" "${NTVDM_REPO}/test/mvdm-host/ccpu_halt_reset_test.c" "${profile_1}")
 worker_unit("obj/tests/ccpu_host_fixture_seams.obj" "${NTVDM_REPO}/test/mvdm-host/ccpu_host_fixture_seams.c" "${profile_1}")
 worker_unit("obj/tests/ccpu_bounded_execution_fixture_seams.obj" "${NTVDM_REPO}/test/mvdm-host/ccpu_bounded_execution_fixture_seams.c" "${profile_1}")
@@ -904,7 +911,7 @@ worker_link("cvidc-vector-binding-fixture.exe" "/nologo /force:multiple /map:$ou
   INPUTS "obj/tests/cvidc_vector_binding_fixture.obj" "obj/tests/cvidc_sas_fixture.obj" "obj/tests/ccpu_host_fixture_seams.obj" "worker-base.lib" "worker-shell.lib" "worker-command-bindings.lib" "original-softpc-host-fixture-roots.lib" "original-softpc-support.lib" "original-softpc-bios.lib" "original-softpc-keymouse.lib" "original-softpc-system.lib" "original-softpc-disks.lib" "original-softpc-video.lib" "original-softpc-cvidc.lib" "original-softpc-comms.lib" "original-softpc-dos.lib" "original-mvdm-dem.lib" "original-mvdm-command.lib" "original-mvdm-xms.lib" "original-mvdm-dpmi32.lib" "original-mvdm-host-suballoc.lib" "original-mvdm-host-oemuni.lib" "original-softpc-base-trace.lib" "original-opennt-base-vdm.lib" "original-opennt-rtl-x86.lib" "softpc-fixture-bindings.lib" "vdmredir-dll-bindings.lib" "softpc-win32-bindings.lib" "monitor-bindings.lib" "kernel-vdm-printer.lib" "debugger-bindings.lib" "session.lib" "mvdm-softpc-effective-address.lib" "softpc-ccpu-vector-defaults.lib" "softpc-activity-check.lib" "original-ccpu386.lib" "obj/host/softpc-resource.res" "obj/compat/mvdm_vm_text.obj" "obj/compat/console_video_buffer.obj" "common-native-hook-installer.lib" "common-native-hook-context.lib" "base-rpc-client-core.lib" "base-rpc-client-launch.lib" "obj/worker/stub.obj" "opennt-base-bindings.lib" "common-base-srv-bindings.lib" "broker-transport.lib" "common-base-srv-transport.lib" "common-rpc.lib" "lib-rpc.lib" "common-root.lib" "common-rpc.lib" "lib-rpc.lib" "lib-pipe.lib" "lib-process-observation.lib" "lib-file.lib" "common-codec.lib" "common-console.lib" "lib-process-launch.lib" "lib-crt-compat.lib" "compat-worker-thread.lib" "lib-thread.lib" "lib-process-hook.lib" "lib-file.lib" "lib-process-image.lib" "lib-handle.lib")
 worker_link("x87-layout-fixture.exe" "/nologo /out:$out" "kernel32.lib user32.lib ntdll.lib libcmt.lib libvcruntime.lib libucrt.lib"
   INPUTS "obj/tests/x87_layout_fixture.obj")
-worker_link("VDMREDIR.dll" "/nologo /dll /entry:mvdm_vdmredir_dll_entry@12 /alternatename:_call_ica_hw_interrupt@12=call_ica_hw_interrupt /def:${NTVDM_REPO}/src/mvdm-host/vdmredir/vdmredir.def /implib:$out.lib /out:$out /map:$out.map" "kernel32.lib advapi32.lib netapi32.lib rpcrt4.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib"
+worker_link("VDMREDIR.dll" "/alternatename:_setAX@4=setAX /alternatename:_setES@4=setES /nologo /dll /entry:mvdm_vdmredir_dll_entry@12 /alternatename:_call_ica_hw_interrupt@12=call_ica_hw_interrupt /def:${NTVDM_REPO}/src/mvdm-host/vdmredir/vdmredir.def /implib:$out.lib /out:$out /map:$out.map" "kernel32.lib advapi32.lib netapi32.lib rpcrt4.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib"
   INPUTS ${redir_objects} "obj/redir/vdmredir.res" "ntvdm.lib" "vdmredir-dll-bindings.lib" "original-opennt-netlib.lib" "original-opennt-xactsrv.lib" "original-opennt-rtl-x86.lib" "common-opennt-compat.lib" "common-root.lib")
 worker_link("original-softpc-forced-closure.dll" "/nologo /dll /noentry /force:unresolved /force:multiple /out:$out /implib:$out.lib /wholearchive:original-ccpu386.lib /wholearchive:original-softpc-bios.lib /wholearchive:original-softpc-keymouse.lib /wholearchive:original-softpc-system.lib /wholearchive:original-softpc-disks.lib /wholearchive:original-softpc-support.lib /wholearchive:original-softpc-video.lib /wholearchive:original-softpc-cvidc.lib /wholearchive:original-softpc-comms.lib /wholearchive:original-softpc-dos.lib /wholearchive:original-mvdm-dem.lib /wholearchive:original-mvdm-command.lib /wholearchive:original-mvdm-xms.lib /wholearchive:original-mvdm-dpmi32.lib /wholearchive:original-mvdm-host-suballoc.lib /wholearchive:original-mvdm-host-oemuni.lib /wholearchive:original-softpc-base-trace.lib /wholearchive:original-softpc-host-roots.lib /wholearchive:softpc-bindings.lib /wholearchive:softpc-win32-bindings.lib worker-base.lib /wholearchive:monitor-bindings.lib /wholearchive:debugger-bindings.lib /wholearchive:session.lib /wholearchive:mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib" ""
   INPUTS "original-ccpu386.lib" "original-softpc-bios.lib" "original-softpc-keymouse.lib" "original-softpc-system.lib" "original-softpc-disks.lib" "original-softpc-support.lib" "original-softpc-video.lib" "original-softpc-cvidc.lib" "original-softpc-comms.lib" "original-softpc-dos.lib" "original-mvdm-dem.lib" "original-mvdm-command.lib" "original-mvdm-xms.lib" "original-mvdm-dpmi32.lib" "original-mvdm-host-suballoc.lib" "original-mvdm-host-oemuni.lib" "original-softpc-base-trace.lib" "original-softpc-host-roots.lib" "softpc-bindings.lib" "worker-shell.lib" "worker-command-bindings.lib" "softpc-win32-bindings.lib" "monitor-bindings.lib" "kernel-vdm-printer.lib" "debugger-bindings.lib" "session.lib" "mvdm-softpc-effective-address.lib" "softpc-ccpu-vector-defaults.lib"

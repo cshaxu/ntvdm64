@@ -185,10 +185,11 @@ SECURITY_ATTRIBUTES sa;
     //
 
     if (strchr(lpFileName, '/')) {
+        char ch= *lpFileName;
         lpFileName = _strdup(lpFileName);
         if (lpFileName == NULL) {
             SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-            demClientError(INVALID_HANDLE_VALUE, *lpFileName);
+            demClientError(INVALID_HANDLE_VALUE, ch);
             return;
         }
         for (dupFileName = lpFileName; *dupFileName; ++dupFileName) {
@@ -221,11 +222,6 @@ SECURITY_ATTRIBUTES sa;
         case SHARING_DENY_READ:
             dwShareMode = FILE_SHARE_WRITE;
             break;
-    // compatible mode is a special case
-    case SHARING_COMPAT:
-        dwShareMode |= FILE_SHARE_DELETE;
-        //dwDesiredAccess |= DELETE;
-        break;
     }
 
     //
@@ -274,7 +270,7 @@ SECURITY_ATTRIBUTES sa;
     while (TRUE) {
         if ((hFile = CreateFileOem(lpFileName,
                                    dwDesiredAccess,
-                                   dwShareMode,
+                                   dwShareMode | FILE_SHARE_DELETE,
                                    &sa,
                                    OPEN_EXISTING,
                                    ItsANamedPipe ? FILE_FLAG_OVERLAPPED : 0,
@@ -396,6 +392,144 @@ VOID demCreateNew (VOID)
     return;
 }
 
+
+/* demFileDelete
+ *
+ * EXPORTED FUNCTION
+ *
+ * ENTRY:
+ *      lpFile -> OEM file name to be deleted
+ *
+ * EXIT: 
+ *      returns 0 on success, DOS error code on failure
+ *
+ * NOTES:
+ * Some apps keep a file open and delete it.   Then rename another file to
+ * the old name.   On NT since the orignal object is still open the second
+ * rename fails.
+ * To get around this problem we rename the file before deleteing it
+ * this allows the second rename to work
+ *
+ * But since renaming the file is known to be expensive over the net, we try
+ * first to open the file exclusively to see if there is really any reason to
+ * rename it. If we can get a handle to it, then we should be able to skip the
+ * rename and just delete it. If we can't get a handle to it, then we try
+ * the rename trick. This should cut down our overhead for the normal case.
+ */
+
+DWORD demFileDelete (LPSTR lpFile)
+{
+    CHAR vdmtemp[MAX_PATH];
+    CHAR tmpfile[MAX_PATH];
+    PSZ pFileName;
+    HANDLE hFile;
+
+    //
+    // First, try to access the file exclusively
+    //
+
+    hFile = CreateFileOem(lpFile,
+                          DELETE,
+                          0,
+                          NULL,
+                          OPEN_EXISTING,
+                          FILE_ATTRIBUTE_NORMAL,
+                          NULL);
+
+    if (hFile != INVALID_HANDLE_VALUE) {
+        NTSTATUS status;
+        IO_STATUS_BLOCK ioStatusBlock;
+        FILE_DISPOSITION_INFORMATION fileDispositionInformation;
+        
+        // Member name "DeleteFile" conflicts with win32 definition (it
+        // becomes "DeleteFileA". 
+#undef DeleteFile
+        fileDispositionInformation.DeleteFile = TRUE;
+
+        //
+        // We got a handle to it, so there can't be any open
+        // handles to it. Set the disposition to DELETE.
+        //
+
+        status = NtSetInformationFile(hFile,
+                                      &ioStatusBlock,
+                                      &fileDispositionInformation,
+                                      sizeof(FILE_DISPOSITION_INFORMATION),
+                                      FileDispositionInformation);
+
+        CloseHandle(hFile);
+
+        if NT_SUCCESS(status) {
+            SetLastError(NO_ERROR);
+        } else {
+            SetLastError(ERROR_ACCESS_DENIED);
+        }
+    }
+
+    //
+    // Check to see if the delete went OK. If not, try renaming
+    // the file.
+    //
+    switch (GetLastError()) {
+
+    case NO_ERROR:        
+    case ERROR_FILE_NOT_FOUND:        
+    case ERROR_PATH_NOT_FOUND:        
+        // Can't find it, forget about it
+        break;
+        
+    case ERROR_SHARING_VIOLATION:
+    case ERROR_ACCESS_DENIED:
+        //
+        // The file didn't really go away because there appears to
+        // be an open handle to the file.
+        //
+        if (GetFullPathNameOem(lpFile,MAX_PATH,vdmtemp,&pFileName)) {
+            if ( pFileName )
+               *(pFileName) = 0;
+            if (GetTempFileNameOem(vdmtemp,"VDM",0,tmpfile)) {
+                if (MoveFileExOem(lpFile,tmpfile, MOVEFILE_REPLACE_EXISTING)) {
+                    if(DeleteFileOem(tmpfile)) {
+                        SetLastError(NO_ERROR);
+                    } else {
+                        MoveFileOem(tmpfile,lpFile);
+                        SetLastError(ERROR_ACCESS_DENIED);
+                    }
+                }
+            }
+        }
+        break;
+        
+    default:         
+    
+        //
+        // We couldn't open or delete the file, and it's not because of a
+        // sharing violation. Just try a last ditch effort of a
+        // plain old delete, and see if it works.
+        //
+        if(DeleteFileOem(lpFile)) {
+            SetLastError(NO_ERROR);
+        }
+    }
+
+    //
+    // Map win32 error code to DOS
+    //
+    switch(GetLastError()) {
+    
+    case NO_ERROR:
+    case ERROR_FILE_NOT_FOUND:
+    case ERROR_PATH_NOT_FOUND:
+    case ERROR_ACCESS_DENIED:
+        break;
+    default:
+        // make sure demClientError can see retval
+        SetLastError(ERROR_ACCESS_DENIED);
+    }
+
+    return GetLastError();
+}
+
 /* demDelete - Delete a file
  *
  *
@@ -417,6 +551,7 @@ VOID demCreateNew (VOID)
 VOID demDelete (VOID)
 {
 LPSTR   lpFileName;
+DWORD   retval;
 
 
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getDX());
@@ -428,7 +563,7 @@ LPSTR   lpFileName;
 #endif
 #line 426
 
-    if (DeleteFileOem (lpFileName) == FALSE){
+    if (retval = demFileDelete(lpFileName)){
         demClientError(INVALID_HANDLE_VALUE, *lpFileName);
         return;
     }
@@ -489,6 +624,20 @@ DWORD   dwAttr;
         else {
             dwAttr &= DOS_ATTR_MASK;
             }
+
+        // SudeepB - 28-Jul-1997
+        //
+        // For CDFS, Win3.1/DOS/Win95, only return FILE_ATTRIBUTE_DIRECTORY (10)
+        // for directories while WinNT returns
+        // FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_READONLY (11).
+        // Some VB controls that app setups use, depend on getting
+        // FILE_ATTRIBUTE_DIRECTORY (10) only or otherwise are broken.
+        // An example of this is Cliffs StudyWare series.
+
+        if (dwAttr == (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_READONLY)) {
+            if(IsCdRomFile(lpFileName))
+                dwAttr = FILE_ATTRIBUTE_DIRECTORY;
+        }
 
         setCX((USHORT)dwAttr);
         setCF(0);
@@ -611,22 +760,38 @@ DWORD   dwLastError;
 #line 605
     dwAttr = (DWORD)getCX();
 
-    if ((dwAttr & 0xff) == 0)
-    dwAttr = FILE_ATTRIBUTE_NORMAL;
+    // Here is some code stolen from DOS_Create (create.asm) for handling the
+    // attributes
+
+    if (flCreateType == DEM_CREATE || flCreateType == DEM_CREATE_NEW)
+        dwAttr &= 0xff;
+
+    if (dwAttr & ~(ATTR_ALL | ATTR_IGNORE | ATTR_VOLUME_ID)) {
+        setCF(1);
+        setAX(5);   //Attribute problem
+        return;
+    }
 
     /* Special case for set volume label (INT 21 Func 3CH, Attr = 8H */
 
-    if((flCreateType == DEM_CREATE) && (dwAttr == ATTR_VOLUME_ID)) {
-    if((uErr = demCreateLabel(lpFileName[DRIVEBYTE],
-        lpFileName+LABELOFF))) {
-        setCF(1);
-        setAX(uErr);
+    if((flCreateType == DEM_CREATE || flCreateType == DEM_CREATE_NEW) && (dwAttr == ATTR_VOLUME_ID)) {
+        if((uErr = demCreateLabel(lpFileName[DRIVEBYTE],
+                                  lpFileName+LABELOFF))) {
+            setCF(1);
+            setAX(uErr);
+            return;
+        }
+        setAX(0);
+        setBP(0);   // in this case handle = 0 and if we will
+        setCF(0);   // close this handle CF will be 0(!)
         return;
     }
-    setAX(0);
-    setBP(0);   // in this case handle = 0 and if we will
-    setCF(0);   // close this handle CF will be 0(!)
-    return;
+
+
+    if ((dwAttr & 0xff) == 0) {
+        dwAttr = FILE_ATTRIBUTE_NORMAL;
+    } else {
+        dwAttr &= DOS_ATTR_MASK;
     }
 
 
@@ -666,7 +831,7 @@ DWORD   dwLastError;
             // APP COMPATABILITY
             // Some WOW apps installing .TTF or .FON or Fonts fail to create
             // The file because the font is already open by GDI32 server.
-            // The Stupid install/setup programs don't gracefully handle
+            // The install/setup programs don't gracefully handle
             // this error, they bomb out of the install with retry or cancel
             // without offering the user a way to ignore the error (which
             // would be the right thing since the font already exists.
@@ -862,7 +1027,7 @@ PDOSSFT GetFreeSftEntry(PDOSSF pSfHead, PWORD usSFN)
         *usSFN += pSfHead->SFCount;
 
         ulSFLink = pSfHead->SFLink;
-        if (ulSFLink & 0xFFFF == 0xFFFF) {
+        if (LOWORD(ulSFLink) == 0xFFFF) {
             break;
         }
 
@@ -929,9 +1094,17 @@ SHORT   hDosHandle;
 
 #line 922
     pPDBFlat = (PDOSPDB) Sim32GetVDMPointer (pPDB, 0, 0);
+    
+    if ( NULL == pPDBFlat ) {
+      return (- ERROR_INVALID_HANDLE);
+    }
+
     pJFT     = (PBYTE)   Sim32GetVDMPointer (pPDBFlat->PDB_JFN_Pointer, 0, 0);
 
-
+    if ( NULL == pJFT ) {
+      return (- ERROR_INVALID_HANDLE);
+    }
+    
     //
     // Check to see if there's a free entry in the JFT.
     //
@@ -1148,7 +1321,7 @@ ULONG   ulSFLink;
     while (usSFN >= (usSFTCount = pSfFlat->SFCount)){
         usSFN = usSFN - usSFTCount;
         ulSFLink = pSfFlat->SFLink;
-        if (ulSFLink & 0xffff == 0xffff)
+        if (LOWORD(ulSFLink) == 0xffff)
             return 0;
         pSfFlat = (PDOSSF) Sim32GetVDMPointer (ulSFLink, 0, 0);
     }

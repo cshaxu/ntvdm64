@@ -30,12 +30,17 @@ Revision History:
 #line 30
 #ifdef i386
 #line 31
-#error Excluded unsupported i386 kernel VDM declarations
+#include "v86def.h"
 #endif
 #line 33
 
+#include <vdm.h>
+
 
 /* XLATON */
+extern VOID SbReinitialize(PCHAR, DWORD);
+extern BOOL SbInitialize(VOID);
+extern VOID SbTerminate(VOID);
 extern VOID nt_block_event_thread(ULONG);
 extern VOID nt_resume_event_thread(VOID);
 /* notification of PDB(Process Data Block, A.K.A PSP) termination */
@@ -45,6 +50,9 @@ extern VOID HostTerminatePDB(USHORT pdb);
 extern VOID HostFloppyReset(VOID);
 extern VOID HostFdiskReset(VOID);
 
+#if defined(NEC_98)
+extern USHORT nt_get_cursor_pos(VOID);
+#endif
 
 // unsupported services dialog box
 extern VOID host_direct_access_error(ULONG);
@@ -88,14 +96,14 @@ int RcMessageBox(USHORT wId, CHAR *msg1, CHAR *msg2, ULONG dwOptions);
 #define EG_MALLOC_FAILURE       7
 #define EG_PIF_BAD_FORMAT      18
 #define EG_PIF_STARTDIR_ERR    19
-#define	EG_PIF_STARTFILE_ERR   20
+#define EG_PIF_STARTFILE_ERR   20
 #define EG_PIF_CMDLINE_ERR     21
 #define EG_PIF_ASK_CMDLINE     22
 #define EG_ENVIRONMENT_ERR     23
 #define EG_BAD_FAULT           27
 #define EG_DOS_PROG_EXTENSION  28
 
-#define ED_BADSYSFILE		336
+#define ED_BADSYSFILE           336
 #define ED_INITMEMERR           337
 #define ED_INITTMPFILE          338
 
@@ -129,7 +137,11 @@ VOID __cdecl SetWOWforceIncrAlloc(
     );
 
 // call out to softpc to get config.sys\autoexec.bat file names
+#ifdef DBCS
+VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName, BOOL bFreMem);
+#else // !DBCS
 VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName);
+#endif // !DBCS
 
 // exported interfaces
 extern VOID    TerminateVDM (VOID);
@@ -230,7 +242,451 @@ UCHAR *__cdecl Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
 #line 225
 #ifdef i386
 #line 226
-#error Excluded unsupported i386 kernel VDM register interface
+/********** FOR V86 BUILD *************/
+
+BOOL
+ThreadSetDebugContext(
+    PULONG pDebugRegisters
+    );
+
+BOOL
+ThreadGetDebugContext(
+    PULONG pDebugRegisters
+    );
+
+// external data
+
+extern ULONG      IntelBase;        // used by memory access macros
+extern X86CONTEXT IntelRegisters;   // used by register access macros
+extern ULONG      VdmDebugLevel;    // used to control debugging
+extern ULONG      VdmFeatureBits;
+
+
+// Register access macros
+
+#ifdef LINKED_INTO_MONITOR
+
+#include <vdm.h>
+
+#define DECLARE_LocalVdmContext VDM_TIB * _LocalVdmTib = (VDM_TIB *)(NtCurrentTeb()->Vdm); \
+                                CONTEXT * _LocalVdmContext = &(*_LocalVdmTib).VdmContext
+
+#ifndef FAST_VDM_REGISTERS
+
+#define getEAX()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax)
+#define getAX()     ((USHORT)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax))
+#define getAL()     ((BYTE)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax))
+#define getAH()     ((BYTE)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax >> 8))
+#define getEBX()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx)
+#define getBX()     ((USHORT)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx))
+#define getBL()     ((BYTE)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx))
+#define getBH()     ((BYTE)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx >> 8))
+#define getECX()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx)
+#define getCX()     ((USHORT)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx))
+#define getCL()     ((BYTE)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx))
+#define getCH()     ((BYTE)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx >> 8))
+#define getEDX()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx)
+#define getDX()     ((USHORT)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx))
+#define getDL()     ((BYTE)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx))
+#define getDH()     ((BYTE)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx >> 8))
+#define getESP()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esp)
+#define getSP()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esp)
+#define getEBP()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebp)
+#define getBP()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebp)
+#define getESI()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esi)
+#define getSI()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esi)
+#define getEDI()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edi)
+#define getDI()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edi)
+#define getEIP()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eip)
+#define getIP()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eip)
+#define getCS()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegCs)
+#define getSS()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegSs)
+#define getDS()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegDs)
+#define getES()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegEs)
+#define getFS()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegFs)
+#define getGS()     ((USHORT)(*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegGs)
+#define getCF()     (((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & FLG_CARRY) ? 1 : 0)
+#define getPF()     (((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & FLG_PARITY) ? 1 : 0)
+#define getAF()     (((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & FLG_AUXILIARY) ? 1 : 0)
+#define getZF()     (((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & FLG_ZERO) ? 1 : 0)
+#define getSF()     (((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & FLG_SIGN) ? 1 : 0)
+#define getTF()     (((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & FLG_TRAP) ? 1 : 0)
+#define getIF()     (((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & FLG_INTERRUPT) ? 1 : 0)
+#define getDF()     (((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & FLG_DIRECTION) ? 1 : 0)
+#define getOF()     (((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & FLG_OVERFLOW) ? 1 : 0)
+#define getMSW()    ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).IntelMSW)
+#define getSTATUS() (USHORT)((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags)
+#define getEFLAGS() ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags)
+
+#define setEAX(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax = val;}
+
+#define setAX(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax & 0xFFFF0000) |                            ((ULONG)val & 0x0000FFFF);}
+
+#define setAH(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax & 0xFFFF00FF) |                            ((ULONG)(val << 8) & 0x0000FF00);}
+
+#define setAL(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eax & 0xFFFFFF00) |                            ((ULONG)val & 0x000000FF);}
+
+#define setEBX(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx = val ;}
+
+#define setBX(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx & 0xFFFF0000) |                            ((ULONG)val & 0x0000FFFF);}
+
+#define setBH(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx & 0xFFFF00FF) |                            ((ULONG)(val << 8) & 0x0000FF00);}
+
+#define setBL(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebx & 0xFFFFFF00) |                            ((ULONG)val & 0x000000FF);}
+
+#define setECX(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx = val ;}
+
+#define setCX(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx & 0xFFFF0000) |                            ((ULONG)val & 0x0000FFFF);}
+
+#define setCH(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx & 0xFFFF00FF) |                            ((ULONG)(val << 8) & 0x0000FF00);}
+
+#define setCL(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ecx & 0xFFFFFF00) |                            ((ULONG)val & 0x000000FF);}
+
+#define setEDX(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx = val ;}
+
+#define setDX(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx & 0xFFFF0000) |                            ((ULONG)val & 0x0000FFFF);}
+
+#define setDH(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx & 0xFFFF00FF) |                            ((ULONG)(val << 8) & 0x0000FF00);}
+
+#define setDL(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edx & 0xFFFFFF00) |                                ((ULONG)val & 0x000000FF);}
+
+#define setESP(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esp = val ;}
+
+#define setSP(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esp = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esp & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+
+#define setEBP(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebp = val;}
+
+#define setBP(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebp = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Ebp & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+
+#define setESI(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esi = val ;}
+
+#define setSI(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esi = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Esi & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+#define setEDI(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edi = val ;}
+
+#define setDI(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edi = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Edi & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+
+#define setEIP(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eip = val ;}
+
+#define setIP(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eip = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.Eip & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+
+#define setCS(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegCs = (ULONG) val & 0x0000FFFF ;}
+
+#define setSS(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegSs = (ULONG) val & 0x0000FFFF ;}
+
+#define setDS(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegDs = (ULONG) val & 0x0000FFFF ;}
+
+#define setES(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegEs = (ULONG) val & 0x0000FFFF ;}
+
+#define setFS(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegFs = (ULONG) val & 0x0000FFFF ;}
+
+#define setGS(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.SegGs = (ULONG) val & 0x0000FFFF ;}
+
+#define setCF(val)  {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & ~FLG_CARRY) |                                (((ULONG)val << FLG_CARRY_BIT) & FLG_CARRY);}
+
+#define setPF(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & ~FLG_PARITY) |                                (((ULONG)val << FLG_PARITY_BIT) & FLG_PARITY);}
+
+#define setAF(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & ~FLG_AUXILIARY) |                                (((ULONG)val << FLG_AUXILIARY_BIT) & FLG_AUXILIARY);}
+
+#define setZF(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & ~FLG_ZERO) |                                (((ULONG)val << FLG_ZERO_BIT) & FLG_ZERO);}
+
+#define setSF(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & ~FLG_SIGN) |                                (((ULONG)val << FLG_SIGN_BIT) & FLG_SIGN);}
+
+#define setIF(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & ~FLG_INTERRUPT) |                                (((ULONG)val << FLG_INTERRUPT_BIT) & FLG_INTERRUPT);}
+
+#define setDF(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & ~FLG_DIRECTION) |                                (((ULONG)val << FLG_DIRECTION_BIT) & FLG_DIRECTION);}
+
+#define setOF(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & ~FLG_OVERFLOW) |                                (((ULONG)val << FLG_OVERFLOW_BIT) & FLG_OVERFLOW);}
+
+#define setMSW(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).IntelMSW = val ;}
+
+#define setSTATUS(val) { (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags & 0xFFFF0000) | val;}
+
+#define setEFLAGS(val) { (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).VdmContext.EFlags = val;}
+
+#else // FAST_VDM_REGISTERS
+
+#define getEAX()     (_LocalVdmContext->Eax)
+#define getAX()     ((USHORT)(_LocalVdmContext->Eax))
+#define getAL()     ((BYTE)(_LocalVdmContext->Eax))
+#define getAH()     ((BYTE)(_LocalVdmContext->Eax >> 8))
+#define getEBX()    (_LocalVdmContext->Ebx)
+#define getBX()     ((USHORT)(_LocalVdmContext->Ebx))
+#define getBL()     ((BYTE)(_LocalVdmContext->Ebx))
+#define getBH()     ((BYTE)(_LocalVdmContext->Ebx >> 8))
+#define getECX()    (_LocalVdmContext->Ecx)
+#define getCX()     ((USHORT)(_LocalVdmContext->Ecx))
+#define getCL()     ((BYTE)(_LocalVdmContext->Ecx))
+#define getCH()     ((BYTE)(_LocalVdmContext->Ecx >> 8))
+#define getEDX()    (_LocalVdmContext->Edx)
+#define getDX()     ((USHORT)(_LocalVdmContext->Edx))
+#define getDL()     ((BYTE)(_LocalVdmContext->Edx))
+#define getDH()     ((BYTE)(_LocalVdmContext->Edx >> 8))
+#define getESP()    (_LocalVdmContext->Esp)
+#define getSP()     ((USHORT)_LocalVdmContext->Esp)
+#define getEBP()    (_LocalVdmContext->Ebp)
+#define getBP()     ((USHORT)_LocalVdmContext->Ebp)
+#define getESI()    (_LocalVdmContext->Esi)
+#define getSI()     ((USHORT)_LocalVdmContext->Esi)
+#define getEDI()    (_LocalVdmContext->Edi)
+#define getDI()     ((USHORT)_LocalVdmContext->Edi)
+#define getEIP()    (_LocalVdmContext->Eip)
+#define getIP()     ((USHORT)_LocalVdmContext->Eip)
+#define getCS()     ((USHORT)_LocalVdmContext->SegCs)
+#define getSS()     ((USHORT)_LocalVdmContext->SegSs)
+#define getDS()     ((USHORT)_LocalVdmContext->SegDs)
+#define getES()     ((USHORT)_LocalVdmContext->SegEs)
+#define getFS()     ((USHORT)_LocalVdmContext->SegFs)
+#define getGS()     ((USHORT)_LocalVdmContext->SegGs)
+#define getCF()     ((_LocalVdmContext->EFlags & FLG_CARRY) ? 1 : 0)
+#define getPF()     ((_LocalVdmContext->EFlags & FLG_PARITY) ? 1 : 0)
+#define getAF()     ((_LocalVdmContext->EFlags & FLG_AUXILIARY) ? 1 : 0)
+#define getZF()     ((_LocalVdmContext->EFlags & FLG_ZERO) ? 1 : 0)
+#define getSF()     ((_LocalVdmContext->EFlags & FLG_SIGN) ? 1 : 0)
+#define getTF()     ((_LocalVdmContext->EFlags & FLG_TRAP) ? 1 : 0)
+#define getIF()     ((_LocalVdmContext->EFlags & FLG_INTERRUPT) ? 1 : 0)
+#define getDF()     ((_LocalVdmContext->EFlags & FLG_DIRECTION) ? 1 : 0)
+#define getOF()     ((_LocalVdmContext->EFlags & FLG_OVERFLOW) ? 1 : 0)
+#define getMSW()     ((*(VDM_TIB *)(NtCurrentTeb()->Vdm)).IntelMSW)
+#define getSTATUS() (USHORT)(_LocalVdmContext->EFlags)
+#define getEFLAGS() (_LocalVdmContext->EFlags)
+
+#define setEAX(val) {    _LocalVdmContext->Eax = val;}
+
+#define setAX(val) {    _LocalVdmContext->Eax = (_LocalVdmContext->Eax & 0xFFFF0000) |                            ((ULONG)val & 0x0000FFFF);}
+
+#define setAH(val) {    _LocalVdmContext->Eax = (_LocalVdmContext->Eax & 0xFFFF00FF) |                            ((ULONG)(val << 8) & 0x0000FF00);}
+
+#define setAL(val) {    _LocalVdmContext->Eax = (_LocalVdmContext->Eax & 0xFFFFFF00) |                            ((ULONG)val & 0x000000FF);}
+
+#define setEBX(val) {    _LocalVdmContext->Ebx = val ;}
+
+#define setBX(val) {    _LocalVdmContext->Ebx = (_LocalVdmContext->Ebx & 0xFFFF0000) |                            ((ULONG)val & 0x0000FFFF);}
+
+#define setBH(val) {    _LocalVdmContext->Ebx = (_LocalVdmContext->Ebx & 0xFFFF00FF) |                            ((ULONG)(val << 8) & 0x0000FF00);}
+
+#define setBL(val) {    _LocalVdmContext->Ebx = (_LocalVdmContext->Ebx & 0xFFFFFF00) |                            ((ULONG)val & 0x000000FF);}
+
+#define setECX(val) {    _LocalVdmContext->Ecx = val ;}
+
+#define setCX(val) {    _LocalVdmContext->Ecx = (_LocalVdmContext->Ecx & 0xFFFF0000) |                            ((ULONG)val & 0x0000FFFF);}
+
+#define setCH(val) {    _LocalVdmContext->Ecx = (_LocalVdmContext->Ecx & 0xFFFF00FF) |                            ((ULONG)(val << 8) & 0x0000FF00);}
+
+#define setCL(val) {    _LocalVdmContext->Ecx = (_LocalVdmContext->Ecx & 0xFFFFFF00) |                            ((ULONG)val & 0x000000FF);}
+
+#define setEDX(val) {    _LocalVdmContext->Edx = val ;}
+
+#define setDX(val) {    _LocalVdmContext->Edx = (_LocalVdmContext->Edx & 0xFFFF0000) |                            ((ULONG)val & 0x0000FFFF);}
+
+#define setDH(val) {    _LocalVdmContext->Edx = (_LocalVdmContext->Edx & 0xFFFF00FF) |                            ((ULONG)(val << 8) & 0x0000FF00);}
+
+#define setDL(val) {    _LocalVdmContext->Edx = (_LocalVdmContext->Edx & 0xFFFFFF00) |                                ((ULONG)val & 0x000000FF);}
+
+#define setESP(val) {    _LocalVdmContext->Esp = val ;}
+
+#define setSP(val) {    _LocalVdmContext->Esp = (_LocalVdmContext->Esp & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+
+#define setEBP(val) {    _LocalVdmContext->Ebp = val;}
+
+#define setBP(val) {    _LocalVdmContext->Ebp = (_LocalVdmContext->Ebp & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+
+#define setESI(val) {    _LocalVdmContext->Esi = val ;}
+
+#define setSI(val) {    _LocalVdmContext->Esi = (_LocalVdmContext->Esi & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+#define setEDI(val) {    _LocalVdmContext->Edi = val ;}
+
+#define setDI(val) {    _LocalVdmContext->Edi = (_LocalVdmContext->Edi & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+
+#define setEIP(val) {    _LocalVdmContext->Eip = val ;}
+
+#define setIP(val) {    _LocalVdmContext->Eip = (_LocalVdmContext->Eip & 0xFFFF0000) |                                ((ULONG)val & 0x0000FFFF);}
+
+#define setCS(val) {    _LocalVdmContext->SegCs = (ULONG) val & 0x0000FFFF ;}
+
+#define setSS(val) {    _LocalVdmContext->SegSs = (ULONG) val & 0x0000FFFF ;}
+
+#define setDS(val) {    _LocalVdmContext->SegDs = (ULONG) val & 0x0000FFFF ;}
+
+#define setES(val) {    _LocalVdmContext->SegEs = (ULONG) val & 0x0000FFFF ;}
+
+#define setFS(val) {    _LocalVdmContext->SegFs = (ULONG) val & 0x0000FFFF ;}
+
+#define setGS(val) {    _LocalVdmContext->SegGs = (ULONG) val & 0x0000FFFF ;}
+
+#define setCF(val)  {    _LocalVdmContext->EFlags = (_LocalVdmContext->EFlags & ~FLG_CARRY) |                                (((ULONG)val << FLG_CARRY_BIT) & FLG_CARRY);}
+
+#define setPF(val) {    _LocalVdmContext->EFlags = (_LocalVdmContext->EFlags & ~FLG_PARITY) |                                (((ULONG)val << FLG_PARITY_BIT) & FLG_PARITY);}
+
+#define setAF(val) {    _LocalVdmContext->EFlags = (_LocalVdmContext->EFlags & ~FLG_AUXILIARY) |                                (((ULONG)val << FLG_AUXILIARY_BIT) & FLG_AUXILIARY);}
+
+#define setZF(val) {    _LocalVdmContext->EFlags = (_LocalVdmContext->EFlags & ~FLG_ZERO) |                                (((ULONG)val << FLG_ZERO_BIT) & FLG_ZERO);}
+
+#define setSF(val) {    _LocalVdmContext->EFlags = (_LocalVdmContext->EFlags & ~FLG_SIGN) |                                (((ULONG)val << FLG_SIGN_BIT) & FLG_SIGN);}
+
+#define setIF(val) {    _LocalVdmContext->EFlags = (_LocalVdmContext->EFlags & ~FLG_INTERRUPT) |                                (((ULONG)val << FLG_INTERRUPT_BIT) & FLG_INTERRUPT);}
+
+#define setDF(val) {    _LocalVdmContext->EFlags = (_LocalVdmContext->EFlags & ~FLG_DIRECTION) |                                (((ULONG)val << FLG_DIRECTION_BIT) & FLG_DIRECTION);}
+
+#define setOF(val) {    _LocalVdmContext->EFlags = (_LocalVdmContext->EFlags & ~FLG_OVERFLOW) |                                (((ULONG)val << FLG_OVERFLOW_BIT) & FLG_OVERFLOW);}
+
+#define setMSW(val) {    (*(VDM_TIB *)(NtCurrentTeb()->Vdm)).IntelMSW = val ;}
+
+#define setSTATUS(val) { _LocalVdmContext->EFlags = (_LocalVdmContext->EFlags & 0xFFFF0000) | val;}
+
+#define setEFLAGS(val) { _LocalVdmContext->EFlags = val;}
+
+#endif  // FAST_VDM_REGISTERS
+
+#else // not linked into monitor
+
+extern ULONG  getEAX(VOID);
+extern USHORT getAX(VOID);
+extern UCHAR  getAL(VOID);
+extern UCHAR  getAH(VOID);
+extern ULONG  getEBX(VOID);
+extern USHORT getBX(VOID);
+extern UCHAR  getBL(VOID);
+extern UCHAR  getBH(VOID);
+extern ULONG  getECX(VOID);
+extern USHORT getCX(VOID);
+extern UCHAR  getCL(VOID);
+extern UCHAR  getCH(VOID);
+extern ULONG  getEDX(VOID);
+extern USHORT getDX(VOID);
+extern UCHAR  getDL(VOID);
+extern UCHAR  getDH(VOID);
+extern ULONG  getESP(VOID);
+extern USHORT getSP(VOID);
+extern ULONG  getEBP(VOID);
+extern USHORT getBP(VOID);
+extern ULONG  getESI(VOID);
+extern USHORT getSI(VOID);
+extern ULONG  getEDI(VOID);
+extern USHORT getDI(VOID);
+extern ULONG  getEIP(VOID);
+extern USHORT getIP(VOID);
+extern USHORT getCS(VOID);
+extern USHORT getSS(VOID);
+extern USHORT getDS(VOID);
+extern USHORT getES(VOID);
+extern USHORT getFS(VOID);
+extern USHORT getGS(VOID);
+extern ULONG  getCF(VOID);
+extern ULONG  getPF(VOID);
+extern ULONG  getAF(VOID);
+extern ULONG  getZF(VOID);
+extern ULONG  getSF(VOID);
+extern ULONG  getIF(VOID);
+extern ULONG  getDF(VOID);
+extern ULONG  getOF(VOID);
+extern USHORT getMSW(VOID);
+extern USHORT getSTATUS(VOID);
+extern ULONG  getEFLAGS(VOID);
+
+extern VOID WINAPI setEAX(ULONG);
+extern VOID WINAPI setAX(USHORT);
+extern VOID setAH(UCHAR);
+extern VOID setAL(UCHAR);
+extern VOID WINAPI setEBX(ULONG);
+extern VOID setBX(USHORT);
+extern VOID setBH(UCHAR);
+extern VOID setBL(UCHAR);
+extern VOID WINAPI setECX(ULONG);
+extern VOID setCX(USHORT);
+extern VOID setCH(UCHAR);
+extern VOID setCL(UCHAR);
+extern VOID WINAPI setEDX(ULONG);
+extern VOID setDX(USHORT);
+extern VOID setDH(UCHAR);
+extern VOID setDL(UCHAR);
+extern VOID WINAPI setESP(ULONG);
+extern VOID setSP(USHORT);
+extern VOID WINAPI setEBP(ULONG);
+extern VOID setBP(USHORT);
+extern VOID WINAPI setESI(ULONG);
+extern VOID setSI(USHORT);
+extern VOID WINAPI setEDI(ULONG);
+extern VOID setDI(USHORT);
+extern VOID WINAPI setEIP(ULONG);
+extern VOID setIP(USHORT);
+extern VOID setCS(USHORT);
+extern VOID setSS(USHORT);
+extern VOID setDS(USHORT);
+extern VOID WINAPI setES(USHORT);
+extern VOID setFS(USHORT);
+extern VOID setGS(USHORT);
+extern VOID setCF(ULONG);
+extern VOID setPF(ULONG);
+extern VOID setAF(ULONG);
+extern VOID setZF(ULONG);
+extern VOID setSF(ULONG);
+extern VOID setIF(ULONG);
+extern VOID setDF(ULONG);
+extern VOID setOF(ULONG);
+extern VOID setMSW(USHORT);
+extern VOID setSTATUS(USHORT);
+extern VOID WINAPI setEFLAGS(ULONG);
+#endif
+
+//
+// Sim32 macros
+//
+
+// no action is required for this macro.
+#define Sim32FlushVDMPointer( address, size, buffer, mode ) TRUE
+
+// no action is required for this macro.
+#define Sim32FreeVDMPointer( address, size, buffer, mode) TRUE
+
+#define Sim32GetVDMMemory( address, size, buffer, mode) (memcpy(  \
+    buffer, Sim32pGetVDMPointer(address, mode), size), TRUE)
+
+#define Sim32SetVDMMemory( address, size, buffer, mode) (memcpy( \
+    Sim32pGetVDMPointer(address, mode), buffer, size), TRUE)
+
+// Address conversion macros
+
+#define RMOFF(address) (WORD)((ULONG)address & 0x0000FFFF)
+#define RMSEG(address) (WORD)(((ULONG)address - ((ULONG)address & 0x0000FFFF)) >> 4)
+#define RMSEGOFFTOLIN(seg, off) (PVOID)(IntelBase + ((ULONG)(seg) << 4) + (ULONG)(off))
+
+// Debugging Macros
+
+#define VDprint(value, arg) { if (value <= (VdmDebugLevel & VDP_LEVEL_MASK)) {\
+                                         DbgPrint arg ; }}
+
+#define VDbreak(value) { if (value <= (VDB_LEVEL_MASK & VdmDebugLevel)) {\
+                                         DbgBreakPoint(); }}
+
+#define VDP_LEVEL_MASK          0x0F
+#define VDP_LEVEL_NONE          0x0
+#define VDP_LEVEL_ERROR         0x2
+#define VDP_LEVEL_WARNING       0x4
+#define VDP_LEVEL_INFO          0x8
+
+#define VDB_LEVEL_MASK          0xF0
+#define VDB_LEVEL_NONE          0x00
+#define VDB_LEVEL_ERROR         0x20
+#define VDB_LEVEL_WARNING       0x40
+#define VDB_LEVEL_INFO          0x80
+
+//
+//  Function prototypes
+//
+
+ULONG
+DbgPrint(
+    PCH Format,
+    ...
+    );
+
+char *nt_fgets(char *buffer, int len, void *input_stream);
+char *nt_gets(char *buffer);
+
+
+#define GetVDMAddr(usSeg,usOff)  (((ULONG)usSeg << 4) + usOff)
+
+PX86CONTEXT getIntelRegistersPointer(VOID);
 #else
 #line 527
 
@@ -276,7 +732,10 @@ extern USHORT __cdecl getSI(VOID);
 extern USHORT __cdecl getDI(VOID);
 extern USHORT __cdecl getIP(VOID);
 
-extern VOID __cdecl setAX(USHORT val);
+#ifndef NTVDM_EXPORTED_SETTER
+#define NTVDM_EXPORTED_SETTER __cdecl
+#endif
+extern VOID NTVDM_EXPORTED_SETTER setAX(USHORT val);
 extern VOID __cdecl setCX(USHORT val);
 extern VOID __cdecl setDX(USHORT val);
 extern VOID __cdecl setBX(USHORT val);
@@ -296,15 +755,15 @@ extern ULONG getESI(VOID);
 extern ULONG getEDI(VOID);
 extern ULONG getEIP(VOID);
 
-extern VOID setEAX(ULONG val);
-extern VOID setECX(ULONG val);
-extern VOID setEDX(ULONG val);
-extern VOID setEBX(ULONG val);
-extern VOID setESP(ULONG val);
-extern VOID setEBP(ULONG val);
-extern VOID setESI(ULONG val);
-extern VOID setEDI(ULONG val);
-extern VOID setEIP(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setEAX(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setECX(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setEDX(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setEBX(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setESP(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setEBP(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setESI(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setEDI(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setEIP(ULONG val);
 
 extern USHORT __cdecl getES(VOID);
 extern USHORT __cdecl getCS(VOID);
@@ -313,7 +772,7 @@ extern USHORT __cdecl getDS(VOID);
 extern USHORT getFS(VOID);
 extern USHORT getGS(VOID);
 
-extern VOID __cdecl setES(USHORT val);
+extern VOID NTVDM_EXPORTED_SETTER setES(USHORT val);
 extern VOID __cdecl setCS(USHORT val);
 extern VOID __cdecl setSS(USHORT val);
 extern VOID __cdecl setDS(USHORT val);
@@ -347,7 +806,7 @@ extern VOID setZF(ULONG val);
 extern VOID setIOPL(ULONG val);
 extern VOID setNT(ULONG val);
 extern VOID setSTATUS(USHORT val);
-extern VOID setEFLAGS(ULONG val);
+extern VOID NTVDM_EXPORTED_SETTER setEFLAGS(ULONG val);
 extern VOID setMSW(USHORT val);
 
 extern ULONG getCR0(VOID);

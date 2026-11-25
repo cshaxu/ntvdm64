@@ -69,7 +69,7 @@ typedef struct TDB  {       /* tdb16 */
      WORD TDB_CompatFlags2 ;        // Upper 16 bits
      WORD TDB_CompatHandle ;    // for dBase bug
      WORD TDB_WOWCompatFlagsEx ;     // More WOW Compatibility flags
-     WORD TDB_WOWCompatFlagsEx2 ;        // Upper 16 bits  
+     WORD TDB_WOWCompatFlagsEx2 ;        // Upper 16 bits
      BYTE TDB_Free[3] ;         // Filler to keep TDB size unchanged
      BYTE TDB_cLibrary    ;     // tracks  add/del of ALL libs in system EMS
      DWORD TDB_PHT        ; // (HANDLE:OFFSET) to private handle table
@@ -89,6 +89,10 @@ typedef struct TDB  {       /* tdb16 */
      DWORD TDB_hThread	  ;	// 32-bit Thread Handle for this task
      WORD  TDB_WOWCompatFlags;  // WOW Compatibility flags
      WORD  TDB_WOWCompatFlags2; // WOW Compatibility flags
+#ifdef FE_SB
+     WORD  TDB_WOWCompatFlagsJPN;  // WOW Compatibility flags for JAPAN
+     WORD  TDB_WOWCompatFlagsJPN2; // WOW Compatibility flags for JAPAN
+#endif // FE_SB
      DWORD TDB_vpfnAbortProc;   // printer AbortProc
      BYTE TDB_LFNDirectory[260]; // Long directory name
 
@@ -98,6 +102,9 @@ typedef TDB UNALIGNED *PTDB;
 // This bit is defined for the TDB_Drive field
 #define TDB_DIR_VALID 0x80
 #define TDB_SIGNATURE 0x4454
+
+#define TDBF_OS2APP   0x8
+#define TDBF_WINOLDAP 0x1
 
 
 // NOTE TDB_ThreadID MUST be DWORD aligned or else it will fail on MIPS

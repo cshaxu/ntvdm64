@@ -4014,11 +4014,11 @@ ULONG FASTCALL WG32GetRegionData( PVDMFRAME pFrame)
     PGETREGIONDATA16 parg16;
 
     GETARGPTR(pFrame, sizeof(GETREGIONDATA16), parg16);
-    ALLOCVDMPTR(parg16->f3, (INT)parg16->f2, pb3);
+    ALLOCVDMPTR(parg16->lpRgnData, (INT)parg16->dwCount, pb3);
 
-    ul = GetRegionData(HRGN32(parg16->f1), (ULONG)(parg16->f2), (LPRGNDATA)pb3);
+    ul = GetRegionData(HRGN32(parg16->hrgn), (ULONG)(parg16->dwCount), (LPRGNDATA)pb3);
 
-    FLUSHVDMPTR(parg16->f3, (INT)parg16->f2, pb3);
+    FLUSHVDMPTR(parg16->lpRgnData, (INT)parg16->dwCount, pb3);
     FREEVDMPTR(pb3);
     FREEARGPTR(parg16);
     RETURN(ul);

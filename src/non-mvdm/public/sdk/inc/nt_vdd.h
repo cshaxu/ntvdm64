@@ -9,6 +9,18 @@
 
 #define _NT_VDD
 
+typedef enum {
+    VDM_V86,
+    VDM_PM
+} VDM_MODE;
+
+PVOID
+WINAPI VdmMapFlat(
+    USHORT selector,
+    ULONG offset,
+    VDM_MODE mode
+    );
+
 
 /**
  * IO port service prototypes and data structure definitions
