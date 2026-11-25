@@ -176,7 +176,7 @@ typedef union {
  * ============================================================================
  */
 
-extern void (*BIOS[])();
+extern void (*BIOS[]) IPT0();
 
 #ifndef bop
 #define bop(n) (*BIOS[n])()
@@ -196,9 +196,9 @@ extern void (*BIOS[])();
 #line 192
 
 #ifdef LIM
-extern void emm_init();
-extern void emm_io();
-extern void return_from_call();
+extern void emm_init IPT0();
+extern void emm_io IPT0();
+extern void return_from_call IPT0();
 #endif
 
 #ifdef SUSPEND
@@ -214,11 +214,11 @@ extern void return_from_call();
 #endif /* CDROM */
 #line 208
 
-extern void worm_init();
-extern void worm_io();
+extern void worm_init IPT0();
+extern void worm_io IPT0();
 
-extern void cmd_install();
-extern void cmd_load();
+extern void cmd_install IPT0();
+extern void cmd_load IPT0();
 
 #line 215
 #ifdef DPMI
@@ -227,31 +227,31 @@ extern void cmd_load();
 #endif
 #line 224
 
-extern void reset();
-extern void illegal_bop();
-extern void illegal_op_int();
-extern void illegal_dvr_bop();
-extern void video_io();
-extern void equipment();
-extern void memory_size();
-extern void diskette_io();
-extern void diskette_int();
-extern void disk_int();
-extern void not_supported();
-extern void rom_basic();
-extern void keyboard_io(); 
-extern void keyboard_int(); 
-extern void printer_io(); 
-extern void bootstrap(); 
-extern void time_of_day();
-extern void kb_idle_poll();
-extern void time_int();
-extern void disk_io(); 
-extern void print_screen(); 
-extern void rs232_io(); 
-extern void dummy_int();
-extern void unexpected_int();
-extern void Get_build_id();
+extern void reset IPT0();
+extern void illegal_bop IPT0();
+extern void illegal_op_int IPT0();
+extern void illegal_dvr_bop IPT0();
+extern void video_io IPT0();
+extern void equipment IPT0();
+extern void memory_size IPT0();
+extern void diskette_io IPT0();
+extern void diskette_int IPT0();
+extern void disk_int IPT0();
+extern void not_supported IPT0();
+extern void rom_basic IPT0();
+extern void keyboard_io IPT0();
+extern void keyboard_int IPT0();
+extern void printer_io IPT0();
+extern void bootstrap IPT0();
+extern void time_of_day IPT0();
+extern void kb_idle_poll IPT0();
+extern void time_int IPT0();
+extern void disk_io IPT0();
+extern void print_screen IPT0();
+extern void rs232_io IPT0();
+extern void dummy_int IPT0();
+extern void unexpected_int IPT0();
+extern void Get_build_id IPT0();
 
 #line 251
 #ifdef WIN_VTD 
@@ -261,43 +261,43 @@ extern void Get_build_id();
 #line 254
 
 #ifdef EGG
-extern void ega_video_io();
+extern void ega_video_io IPT0();
 #endif
 
-extern void re_direct();
-extern void D11_int();
-extern void int_287();
+extern void re_direct IPT0();
+extern void D11_int IPT0();
+extern void int_287 IPT0();
 
-extern void mouse_install1();
-extern void mouse_install2();
-extern void mouse_int1();
-extern void mouse_int2();
-extern void mouse_io_interrupt();
-extern void mouse_io_language();
-extern void mouse_video_io();
-extern void mouse_EM_callback();
+extern void mouse_install1 IPT0();
+extern void mouse_install2 IPT0();
+extern void mouse_int1 IPT0();
+extern void mouse_int2 IPT0();
+extern void mouse_io_interrupt IPT0();
+extern void mouse_io_language IPT0();
+extern void mouse_video_io IPT0();
+extern void mouse_EM_callback IPT0();
 
-extern void host_mouse_install1();
-extern void host_mouse_install2();
+extern void host_mouse_install1 IPT0();
+extern void host_mouse_install2 IPT0();
 
-extern void time_of_day_init();
-extern void keyboard_init();
+extern void time_of_day_init IPT0();
+extern void keyboard_init IPT0();
 
-extern void cassette_io();
+extern void cassette_io IPT0();
 
-extern void fl_operation1();
-extern void fl_operation2();
-extern void fl_operation3();
-extern void fl_reset2();
-extern void fl_dummy();
+extern void fl_operation1 IPT0();
+extern void fl_operation2 IPT0();
+extern void fl_operation3 IPT0();
+extern void fl_reset2 IPT0();
+extern void fl_dummy IPT0();
 
-extern void hda_command_check();	/* HD-dr */
+extern void hda_command_check IPT0();	/* HD-dr */
 
-extern void host_unsimulate();
+extern void host_unsimulate IPT0();
 
-extern void bootstrap1();
-extern void bootstrap2();
-extern void bootstrap3();
+extern void bootstrap1 IPT0();
+extern void bootstrap2 IPT0();
+extern void bootstrap3 IPT0();
 
 #ifdef NOVELL
 #line 295
@@ -389,31 +389,41 @@ extern void MS_bop_9(void), MS_bop_A(void), MS_bop_B(void);
 extern void MS_bop_C(void), MS_bop_D(void), MS_bop_E(void);
 extern void MS_bop_F(void);
 extern void switch_to_real_mode(void);
+#ifdef JAPAN
+extern void MS_DosV_bop(void);
+#elif defined(KOREA) // JAPAN
+extern void MS_HDos_bop(void);
+#endif // KOREA
 #endif	/* NTVDM */
 
 #ifdef GISP_CPU
-#line 394
+#line 399
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
-#line 396
+#line 401
 
 #ifdef HFX
-#line 398
+#line 403
 #error Unsupported excluded original configuration
 #endif /* HFX */
-#line 400
+#line 405
 
 #ifdef DOS_APP_LIC
-#line 402
+#line 407
 #error DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register.
 #endif
-#line 404
+#line 409
 
 IMPORT int soft_reset;
 
-#line 407
+#line 412
 #if	defined(SPC386) && defined(WDCTRL_BOP)
-#line 408
+#line 413
 #error Unsupported excluded original configuration
 #endif	/* SPC386 && WDCTRL_BOP */
+
+#if defined(NEC_98)
+#line 417
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
 #line 410

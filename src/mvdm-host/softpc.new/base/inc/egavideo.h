@@ -14,7 +14,7 @@
 #define get_EGA_cursor_no_emulate() (sas_hw_at_no_check(ega_info) & 1)
 #define set_EGA_cursor_no_emulate(val)	\
 	sas_store_no_check(ega_info,	\
-	(sas_hw_at_no_check(ega_info) & 0xfe) | (val));
+        (IU8)((sas_hw_at_no_check(ega_info) & 0xfe) | (val)));
 
 #define get_EGA_feature() (sas_hw_at_no_check(ega_info3) & 0xf0)>>4
 #define get_EGA_switches() (sas_hw_at_no_check(ega_info3) & 0xf)
@@ -69,11 +69,11 @@
 #define get_VGA_flags() sas_hw_at_no_check(VGA_FLAGS)
 #define set_VGA_flags(val) sas_store_no_check(VGA_FLAGS, (val))
 #define get_VGA_lines() (sas_hw_at_no_check(VGA_FLAGS) & 0x90)
-#define set_VGA_lines(val) sas_store_no_check(VGA_FLAGS, (sas_hw_at_no_check(VGA_FLAGS) & 0x6f) | (val))
+#define set_VGA_lines(val) sas_store_no_check(VGA_FLAGS, (IU8)((sas_hw_at_no_check(VGA_FLAGS) & 0x6f) | (val)))
 #define is_GREY()	(sas_hw_at_no_check(VGA_FLAGS) & 2)
-#define set_GREY(val)	sas_store_no_check(VGA_FLAGS, (sas_hw_at_no_check(VGA_FLAGS) & 0xfd) | (val))
+#define set_GREY(val)   sas_store_no_check(VGA_FLAGS, (IU8)((sas_hw_at_no_check(VGA_FLAGS) & 0xfd) | (val)))
 #define is_PAL_load_off() (sas_hw_at_no_check(VGA_FLAGS) & 0x80)
-#define set_PAL_load_off(val) sas_store_no_check(VGA_FLAGS, (sas_hw_at_no_check(VGA_FLAGS) & 0xf7) | (val))
+#define set_PAL_load_off(val) sas_store_no_check(VGA_FLAGS, (IU8)((sas_hw_at_no_check(VGA_FLAGS) & 0xf7) | (val)))
 #define is_MONO()	(sas_hw_at_no_check(VGA_FLAGS) & 4)
 
 /* Location of INT10 AX=1b, second stage info table */
@@ -128,8 +128,8 @@ IMPORT VOID init_vga_dac IPT1( int, table );
 #define F9x16    5
 
 typedef struct {
+        word off;
 	word seg;
-	word off;
 } NativeFontAddr;
 
 IMPORT NativeFontAddr nativeFontAddresses[6];

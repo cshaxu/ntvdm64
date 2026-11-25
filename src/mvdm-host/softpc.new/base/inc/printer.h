@@ -28,21 +28,26 @@
  * ============================================================================
  */
 
+#if defined(NEC_98)
+#line 32
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 43
 #ifdef ANSI
 extern	void printer_init(int);
 extern	void printer_post(int);
 extern	void printer_status_changed(int);
 #else
-#line 36
+#line 48
 #error Unsupported excluded original configuration
 #endif
-#line 40
+#line 52
 
 #ifdef PS_FLUSHING
-#line 42
+#line 54
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
-#line 44
+#line 56
 
 /*
  * The following 6 defines refer to the address in the BIOS data area
@@ -61,6 +66,7 @@ extern	void printer_status_changed(int);
 #if defined(NTVDM)
 extern void printer_is_being_closed(int adapter);
 #endif
-
+#endif // !NEC_98
+#line 75
 
 #endif

@@ -37,6 +37,11 @@ typedef struct _extioentry {
 #endif /* NTVDM */
 
 
+#if defined(NEC_98)
+#line 39
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 301
 /*
  * The IO address range for the Monochrome Display Adapter.
  */
@@ -45,13 +50,13 @@ typedef struct _extioentry {
 #define MDA_PORT_END            0x3BF
 
 
-#line 46
+#line 309
 #ifdef HERC
-#line 47
+#line 310
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
-#line 49
+#line 312
 #endif
-#line 50
+#line 313
 
 /*
  * Memory bounds for the colour graphics adaptor
@@ -314,13 +319,13 @@ typedef struct _extioentry {
 
 /* SoundBlaster I/O Ports */
 
-#line 312
+#line 575
 #ifdef SWIN_SNDBLST_NULL
-#line 313
+#line 576
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
-#line 317
+#line 580
 #endif
-#line 318
+#line 581
 
 /*
  * PCI configuration ports.
@@ -365,10 +370,10 @@ typedef struct _extioentry {
 #define AT_KEYB_ADAPTOR		26
 #define CMOS_ADAPTOR		27
 #ifdef HERC
-#line 362
+#line 625
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
-#line 364
+#line 627
 #if (NUM_SERIAL_PORTS > 2)
 #define COM3_ADAPTOR		29
 #define COM4_ADAPTOR		30
@@ -401,17 +406,24 @@ typedef struct _extioentry {
 #define NUMBER_SPARE_ADAPTERS   (SPARE_ADAPTER7 - SPARE_ADAPTER1)
 
 #else	/* NTVDM */
-#line 395
+#line 659
 #error Unsupported excluded original configuration
-#line 412
+#line 676
 #endif	/* NTVDM */
-#line 413
+#line 677
 #else	/* SFELLOW */
-#line 414
+#line 678
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
-#line 441
+#line 705
 #endif /*SFELLOW */
-#line 442
+#endif // !NEC_98
+#line 707
+
+#if defined(NEC_98)
+#line 709
+#error Unsupported NEC PC-98 configuration
+#endif // !NEC_98
+#line 711
 
 /*
  * The Bit masks for specifying Read/Write access when connecting ports
@@ -453,11 +465,11 @@ IMPORT void	io_define_inb
 );
 
 #ifdef SFELLOW
-#line 483
+#line 752
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
-#line 498
+#line 767
 #endif	/* SFELLOW */
-#line 499
+#line 768
 
 IMPORT void	io_define_in_routines
 (
@@ -481,11 +493,11 @@ IMPORT void	io_define_outb
 );
 
 #ifdef SFELLOW
-#line 522
+#line 791
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
-#line 537
+#line 806
 #endif	/* SFELLOW */
-#line 538
+#line 807
 
 IMPORT void	io_define_out_routines
 (
@@ -504,26 +516,26 @@ IMPORT void	io_define_out_routines
 IMPORT IBOOL	io_connect_port IPT3(io_addr, io_address, half_word, adapter,
 	half_word, mode);
 #else
-#line 556
+#line 825
 #error Unsupported excluded original configuration
-#line 558
+#line 827
 #endif	/* NTVDM */
-#line 559
+#line 828
 
 IMPORT void	io_disconnect_port IPT2(io_addr, io_address, half_word, adapter);
 IMPORT void	io_init IPT0();
 
 /* Externs and macros for io_redefine_inb/outb */
 #ifdef MAC68K
-#line 565
+#line 834
 #error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register.
-#line 567
+#line 836
 #else
-#line 568
+#line 837
 IMPORT char	Ios_in_adapter_table[];
 IMPORT char	Ios_out_adapter_table[];
 #endif
-#line 571
+#line 840
 
 IMPORT void	(*Ios_inb_function  [])
 	IPT2(io_addr, io_address, half_word *, value);

@@ -103,7 +103,14 @@ extern PC_palette *DAC;			/* Size is `VGA_DAC_SIZE' */
 #define get_colour_select()		(EGA_GRAPH.colour_select)
 #define get_top_pixel_pad()		(EGA_GRAPH.top_pixel_pad)
 #define get_mid_pixel_pad()		(EGA_GRAPH.mid_pixel_pad)
+#if defined(NEC_98)         
+#line 108
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 110
 #define get_palette_change_required()	(EGA_GRAPH.palette_change_required)
+#endif // !NEC_98
+#line 112
 #define get_palette_val(idx)		(EGA_GRAPH.palette_ind[(idx)])
 
 #define set_256_colour_mode(val)	EGA_GRAPH.colour_256 = (val)
@@ -111,7 +118,14 @@ extern PC_palette *DAC;			/* Size is `VGA_DAC_SIZE' */
 #define set_colour_select(val)		EGA_GRAPH.colour_select = (val)
 #define set_top_pixel_pad(val)		EGA_GRAPH.top_pixel_pad = (val)
 #define set_mid_pixel_pad(val)		EGA_GRAPH.mid_pixel_pad = (val)
+#if defined(NEC_98)         
+#line 120
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 122
 #define set_palette_change_required(v)	EGA_GRAPH.palette_change_required = (v)
+#endif // !NEC_98
+#line 124
 #define set_palette_val(idx,val)	EGA_GRAPH.palette_ind[(idx)] = (val)
 #define flag_palette_change_required()	EGA_GRAPH.palette_change_required = (TRUE)
 #endif

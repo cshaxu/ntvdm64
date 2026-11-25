@@ -171,21 +171,41 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 /* General Intel memory parameters */
 
 
+#if defined(NEC_98)
+#line 339
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 342
 #define BIOS_START_OFFSET	0x0000L
 #define BIOS1_END_SEGMENT	0xF000L
 #define BIOS1_END_OFFSET 	0x7000L 	/* End of 1st half of ROM */
 #define BIOS2_START_SEGMENT	0xF000L
 #define BIOS2_START_OFFSET 	0xE000L		/* 2nd half of BIOS ROM	*/
+#endif // !NEC_98
+#line 348
 #define	BAD_OP			0xC5		/* filling RAM for the use of */
 
+#if defined(NEC_98)
+#line 351
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 353
 #define	BASIC_ROM		0xFE000L	/* Start of Basic Rom */
 #define ROM_START		0xC0000L	/* Start of Expansion ROM @ 768k */
+#endif // !NEC_98
+#line 356
 
 #define FIXED_DISK_START	0xC8000L	/* Start fixed disk BIOS*/
 #define FIXED_DISK_END		0xCA000L	/* End fixed disk BIOS +1 */
 
 #define	START_SEGMENT		0xF000		/* 8088 start address */
 #define	START_OFFSET		0xFFF0
+
+#if defined(NEC_98)
+#line 364
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 367
 
 /*
  * The follwoing are the offsets for the entry points to the
@@ -204,10 +224,10 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #ifndef GISP_SVGA
 #define VIDEO_IO_OFFSET		0xF065
 #else		/* GISP_SVGA */
-#line 371
+#line 385
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA  */
-#line 374
+#line 388
 #define VIDEO_IO_RE_ENTRY	0xF06C
 #define MEMORY_SIZE_OFFSET	0xF841
 #define EQUIPMENT_OFFSET	0xF84D
@@ -296,10 +316,10 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #ifndef GISP_SVGA 
 #define EGA_ENTRY_OFF	0x0898
 #else	 	/* GISP_SVGA */
-#line 462
+#line 476
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */
-#line 464
+#line 478
 
 /* Off set info for EGA character tables */
 #define EGA_CGMN_OFF	0x2230
@@ -542,19 +562,19 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #ifdef EGG
 #define EGA_ROM_START		0xC0000L	/* start of EGA BIOS ROM */
 #ifdef STINGER
-#line 706
+#line 720
 #error Unsupported excluded original configuration
 #else		/* ~STINGER */
 #ifdef V7VGA
-#line 709
+#line 723
 #define EGA_ROM_END		0xC5000L	/* end of EGA BIOS ROM +1 */
 #else
-#line 711
+#line 725
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
-#line 713
+#line 727
 #endif		/* STINGER */
-#line 714
+#line 728
 #endif		/* EGG */
 
 #ifdef EGG
@@ -572,10 +592,10 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 
 
 #else		/* GISP_SVGA */
-#line 731
+#line 745
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
-#line 985
+#line 999
 
 /*
  * Offsets for a set of instructions that are used in virtualisation
@@ -623,15 +643,15 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 
 /* Union for accessing an entry in the Interrupt Vector table */
 #ifdef BACK_M
-#line 1032
+#line 1046
 #error Excluded unsupported BACK_M configuration
 #else /* BACK_M */
 
 #ifdef BIGEND
-#line 1060
+#line 1074
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
-#line 1070
+#line 1084
 
 #ifdef LITTLEND
 typedef union   {
@@ -645,4 +665,9 @@ typedef union   {
 		} IVT_ENTRY;
 #endif
 #endif /* BACK_M */
+
+#if defined(NEC_98)
+#line 1099
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
 #line 1083

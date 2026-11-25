@@ -19,6 +19,7 @@
  * ============================================================================
  */
 
+#ifndef NEC_98
 /* register type definitions follow: */
 
 typedef half_word BUFFER_REG;
@@ -33,10 +34,14 @@ typedef union {
 } DIVISOR_LATCH;
 #endif
 #ifdef BIGEND
-#line 36
+#line 37
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
-#line 44
+#else //NEC_98
+#line 46
+#error Unsupported NEC PC-98 configuration
+#endif //NEC_98
+#line 254
 
 #ifdef BIT_ORDER2
 typedef union {
@@ -51,18 +56,18 @@ typedef union {
       } INT_ENABLE_REG;
 #endif
 #ifdef BIT_ORDER1
-#line 58
+#line 268
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
-#line 69
+#line 279
 
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 71
+#line 281
 #error Excluded unsupported FIFO_ON configuration
 #else   /* NTVDM */
 
 #ifdef BIT_ORDER2
-#line 96
+#line 306
 typedef union {
  	half_word all;
 	struct {
@@ -73,13 +78,13 @@ typedef union {
       } INT_ID_REG;
 #endif
 #ifdef BIT_ORDER1
-#line 106
+#line 316
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
-#line 115
+#line 325
 
 #endif  /* ifdef NTVDM */
-#line 117
+#line 327
 
 #ifdef BIT_ORDER2
 typedef union {
@@ -96,10 +101,10 @@ typedef union {
       } LINE_CONTROL_REG;
 #endif
 #ifdef BIT_ORDER1
-#line 133
+#line 343
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
-#line 146
+#line 356
 
 #ifdef BIT_ORDER2
 typedef union {
@@ -115,10 +120,10 @@ typedef union {
       } MODEM_CONTROL_REG;
 #endif
 #ifdef BIT_ORDER1
-#line 161
+#line 371
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
-#line 173
+#line 383
 
 #ifdef BIT_ORDER2
 typedef union {
@@ -132,21 +137,21 @@ typedef union {
 		 HALF_WORD_BIT_FIELD tx_holding_empty:1;
 		 HALF_WORD_BIT_FIELD tx_shift_empty:1;
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 186
+#line 396
 #error Excluded unsupported FIFO_ON configuration
 #else
-#line 188
+#line 398
 		 HALF_WORD_BIT_FIELD pad:1;
 #endif
-#line 190
+#line 400
 	       } bits;
       } LINE_STATUS_REG;
 #endif
 #ifdef BIT_ORDER1
-#line 194
+#line 404
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
-#line 212
+#line 422
 
 #ifdef BIT_ORDER2
 typedef union {
@@ -163,18 +168,23 @@ typedef union {
 	       } bits;
       } MODEM_STATUS_REG;
 #endif
-#line 161
+#line 438
 #ifdef BIT_ORDER1
-#line 229
+#line 439
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
-#line 243
+#line 453
 
+#if defined(NEC_98)
+#line 455
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 481
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 245
+#line 482
 #error Excluded unsupported FIFO_ON configuration
 #endif
-#line 277
+#line 514
 
 /* register select code definitions follow: */
 
@@ -182,15 +192,17 @@ typedef union {
 #define RS232_IER	1
 #define RS232_IIR	2
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 284
+#line 521
 #error Excluded unsupported FIFO_ON configuration
 #endif
-#line 286
+#line 523
 #define RS232_LCR	3
 #define RS232_MCR	4
 #define RS232_LSR	5
 #define RS232_MSR	6
 #define RS232_SCRATCH	7
+#endif // !NEC_98
+#line 529
 
 #define RS232_COM1_TIMEOUT (BIOS_VAR_START + 0x7c)
 #define RS232_COM2_TIMEOUT (BIOS_VAR_START + 0x7d)
@@ -204,10 +216,10 @@ typedef union {
 #define NO_GO_LINE  2  /* We can't emulate requested line setup */
 
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 304
+#line 542
 #error Excluded unsupported FIFO_ON configuration
 #endif
-#line 316
+#line 554
 
 #define OFF 0
 #define ON 1
@@ -216,10 +228,10 @@ typedef union {
 	((external_state == internal_state) ? LEAVE_ALONE : external_state)
 
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 324
+#line 562
 #error Excluded unsupported FIFO_ON configuration
 #endif
-#line 326
+#line 564
 
 #define RLS_INT 3     /* receiver line status interrupt ID */
 #define RDA_INT 2     /* data available interrupt ID */
@@ -240,38 +252,44 @@ typedef union {
 #define PARITYENABLE_ON 1   /* line control setting for parity enabled */
 #define PARITYENABLE_OFF 0  /* line control setting for parity disabled */
 #else
-#line 346
+#line 584
 #error Unsupported excluded original configuration
 #endif
-#line 349
+#line 587
 
 #ifdef NTVDM
 // collision with winbase.h PARITY_ODD define
 #define EVENPARITY_ODD 0  /* line control setting for odd parity */
 #define EVENPARITY_EVEN 1 /* line control setting for even parity */
 #else
-#line 355
+#line 593
 #error Unsupported excluded original configuration
 #endif
-#line 358
+#line 596
 
 #define PARITY_STICK 1  /* line control setting for stick(y) parity */
 
 #define PARITY_FIXED 2  /* Internal state setting for fixed parity */
 
+#if defined(NEC_98)
+#line 602
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 606
 #define COM1 0
 #define COM2 1
 #if (NUM_SERIAL_PORTS > 2)
 #define COM3 2
 #define COM4 3
 #endif
-#line 280
+#endif // !NEC_98
+#line 613
 
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 371
+#line 615
 #error Excluded unsupported FIFO_ON configuration
 #endif
-#line 376
+#line 620
 
 /*
  * ============================================================================
@@ -290,26 +308,27 @@ extern void com_outb IPT2(io_addr, port, half_word, value);
 extern void com_recv_char IPT1(int, adapter);
 extern void recv_char IPT1(long, adapter);
 extern void com_modem_change IPT1(int, adapter);
-extern int com_save_rxbytes IPT2(int,n, CHAR *,buf);
-extern int com_save_txbyte IPT1(CHAR,value);
+extern void com_save_rxbytes IPT2(int,n, CHAR *,buf);
+extern void com_save_txbyte IPT1(CHAR,value);
 
 #ifdef PS_FLUSHING
-#line 398
+#line 642
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
-#line 400
+#line 644
 
 #ifdef NTVDM
 extern void com_lsr_change(int adapter);
-extern void SyncBaseLineSettings(int adapter,DIVISOR_LATCH *divisor_latch,
-		 LINE_CONTROL_REG *LCR_reg);
-extern void tx_shift_register_empty(int adapter);
-extern void tx_holding_register_empty(int adapter);
 #endif
-#line 319
+#line 648
 
+#if defined(NEC_98)
+#line 650
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 659
 #if (NUM_SERIAL_PORTS > 2)
-#line 410
+#line 660
 #define	adapter_for_port(port) \
 	(((port & 0x300) == 0x300) ? \
 		(((port & 0xf8) == 0xf8) ? COM1 : COM3) \
@@ -317,38 +336,39 @@ extern void tx_holding_register_empty(int adapter);
 		(((port & 0xf8) == 0xf8) ? COM2 : COM4))
 
 #ifdef SHORT_TRACE
-#line 417
+#line 667
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
-#line 419
+#line 669
 
 #else
-#line 421
+#line 671
 #error Unsupported excluded original configuration
 #endif /* more than 2 serial ports */
-#line 429
+#endif // !NEC_98
+#line 680
 
 #ifdef IRET_HOOKS
-#line 431
+#line 682
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
-#line 438
+#line 689
 
 /* BCN 2730 define generic macros which can be SVID3 or old style
  * in either case the structure used should be a termios
  */
 
 #ifdef SVID3_TCGET
-#line 444
+#line 695
 #error DIVERGENCE MVDM-HOST-DIV-536: SVID3_TCGET branch is not selected; see mirror register.
 #else
-#line 352
-#line 448
+#line 590
+#line 699
 #define	TCGET TCGETA
 #define	TCSET TCSETA
 #define	TCSETF TCSETAF
 #endif	/* SVID3_TCGET */
-#line 452
+#line 703
 
 #endif /* _RS232_H */
-#line 358
+#line 596

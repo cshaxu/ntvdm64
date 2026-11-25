@@ -429,7 +429,14 @@
  *	Number of floppy drives that can really be supported
  */
 
+#if defined(NEC_98)
+#line 433
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 435
 #define MAX_FLOPPY	0x02
+#endif // !NEC_98
+#line 437
 
 /*
  *	Special value of sectors transferred count
@@ -476,10 +483,10 @@ extern void diskette_io(void);
 extern void diskette_int(void);
 extern void diskette_post(void);
 #else
-#line 479
+#line 483
 #error Unsupported excluded original configuration
 #endif /* ANSI */
-#line 483
+#line 487
 
 /*
  *	Secondary external functions
@@ -500,10 +507,10 @@ extern void fl_format_set(int);
 extern void fl_set_media(int);
 extern void fl_diskette_setup(void);
 #else
-#line 503
+#line 507
 #error Unsupported excluded original configuration
 #endif /* ANSI */
-#line 517
+#line 521
 
 
 /*
@@ -515,10 +522,10 @@ extern void drive_detect(int);
 extern void translate_old(int);
 extern void GetFormatParams(int *, int *, int *, int *);
 #else
-#line 528
+#line 532
 #error Unsupported excluded original configuration
 #endif /* ANSI */
-#line 532
+#line 536
 
 
 /*
@@ -531,10 +538,10 @@ extern void host_attach_floppies (void);
 extern void host_detach_floppies (void);
 extern void host_flip_real_floppy_ind (void);
 #else
-#line 544
+#line 548
 #error Unsupported excluded original configuration
 #endif /* ANSI */
-#line 550
+#line 554
 
 /*
  *	Secondary function jump table definitions

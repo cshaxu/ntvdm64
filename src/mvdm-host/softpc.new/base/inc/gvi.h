@@ -43,7 +43,7 @@
 /*
  * Legal modes for the adapter
  */
-
+#undef TEXT
 #define TEXT	        0	/* Alpha numeric mode 80 by 25, or 40 by 25  */ 
 #define GRAPHICS	1	/* All Points Addressable 640x200 or 320x200 */
 
@@ -76,7 +76,14 @@
  * ============================================================================
  */
 
+#if defined(NEC_98)
+#line 100
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 102
 extern	void	gvi_init IPT1(half_word, v_adapter);
+#endif // !NEC_98
+#line 104
 extern	void	gvi_term IPT0();
 extern	void	recalc_screen_params IPT0();
 
@@ -109,20 +116,25 @@ extern half_word video_adapter;
  * this type of setting.
  */
 
+#if defined(NEC_98)
+#line 137
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 199
 typedef union {
         word    as_word;
         struct
         {
 #ifdef  BIT_ORDER1
-#line 137
+#line 204
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #else
-#line 141
+#line 208
                 unsigned        low_byte        : 8,
                                 top_bit         : 1,
                                 unused          : 7;
 #endif
-#line 145
+#line 212
         } as_bfld;
 } _9_BITS;
 
@@ -137,16 +149,16 @@ typedef union {
         struct
         {
 #ifdef  BIT_ORDER1
-#line 159
+#line 226
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #else
-#line 164
+#line 231
                 unsigned        low_byte        : 8,
 				med_bit		: 1,
                                 top_bit         : 1,
                                 unused          : 6;
 #endif
-#line 169
+#line 236
         } as_bfld;
 } _10_BITS;
 /*
@@ -163,12 +175,17 @@ typedef	struct {
 #ifdef VGG
 	_10_BITS screen_height;		/* Height in pc scanlines of screen	    */
 #else
-#line 185
+#line 252
 #error Unsupported excluded original configuration
 #endif
-#line 187
+#line 254
 	half_word *screen_ptr;		/* pointer to start of regen buffer	    */
 	int screen_length;		/* Number of bytes in one screenfull        */
+#if defined(NEC_98)
+#line 257
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 259
 	int display_disabled;		/* 0 if it's OK to do screen output.        */
 					/* it is used to implement the VIDEO_ENABLE */
 					/* bit in the mode select register          */
@@ -194,10 +211,27 @@ typedef	struct {
 	int host_pix_height; 		/* Height of PC pixel in host pixels	    */
 	int offset_per_line;		/* mirrors bytes_per_line for mda and cga, but can vary for ega */
 	int screen_limit;		/* number of bytes in video_copy */
+#if defined(NEC_98)
+#line 285
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 310
 } DISPLAY_GLOBS;
 
+#if defined(NEC_98)
+#line 313
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 315
 extern	DISPLAY_GLOBS	PCDisplay;
+#endif // !NEC_98
+#line 317
 
+#if defined(NEC_98)
+#line 319
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 421
 #define	set_mode_change_required(val)	PCDisplay.mode_change_required = (val)
 #define	set_word_addressing(val)	PCDisplay.word_addressing = (val)
 #define	set_offset_per_line(val)	PCDisplay.offset_per_line = (val)
@@ -262,10 +296,10 @@ extern	DISPLAY_GLOBS	PCDisplay;
 #define get_screen_height()             ((video_adapter == VGA) ? ((PCDisplay.screen_height.as_word+1)<<EGA_GRAPH.multiply_vert_by_two) : \
 							((PCDisplay.screen_height.as_word+1)*get_pc_pix_height()))
 #else
-#line 282
+#line 485
 #error Unsupported excluded original configuration
 #endif /* VGG */
-#line 284
+#line 487
 #define get_screen_height_lo()          (PCDisplay.screen_height.as_bfld.low_byte)
 #define get_screen_height_hi()          (PCDisplay.screen_height.as_bfld.top_bit)
 #define	get_screen_end()		(get_screen_start() + get_screen_length() + gvi_pc_low_regen)
@@ -285,6 +319,8 @@ extern	DISPLAY_GLOBS	PCDisplay;
 #define get_seq_chain_mode()	(PCDisplay.seq_chain_mode)
 #endif /* V7VGA */
 #endif
+#endif // !NEC_98
+#line 505
 
 /* 
  * useful macro to get character height in host pixels
@@ -296,3 +332,7 @@ extern	DISPLAY_GLOBS	PCDisplay;
  */
 
 #define gvi_pc_check_regen(addr) (addr >= gvi_pc_low_regen && addr <= gvi_pc_high_regen)
+#if defined(NEC_98)
+#line 517
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98

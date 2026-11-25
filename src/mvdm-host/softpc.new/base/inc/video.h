@@ -1,5 +1,6 @@
 /* SccsID @(#)video.h	1.24 08/19/94 Copyright Insignia Solutions Inc. */
 
+#ifndef NEC_98
 /*
  * M6845 video chip registers
  */
@@ -11,9 +12,9 @@
 #define R14_CURS_ADDRH	        14 
 #define R15_CURS_ADDRL	        15 
 
-#define M6845_INDEX_REG         (vd_addr_6845)
-#define M6845_DATA_REG          (vd_addr_6845 + 1) 
-#define M6845_MODE_REG          (vd_addr_6845 + 4)
+#define M6845_INDEX_REG         (word)(vd_addr_6845)
+#define M6845_DATA_REG          (word)(vd_addr_6845 + 1)
+#define M6845_MODE_REG          (word)(vd_addr_6845 + 4)
 
 /*
  * The individual colour adaptor registers
@@ -37,6 +38,8 @@
 
 /* 4 full scanlines is the (offset/size) of one text line PER bank */
 #define ONELINEOFF      320
+#endif // !NEC_98
+#line 42
 
 
 /*
@@ -58,6 +61,12 @@
  * intel memory position defines for data stored in bios variables
  */
 
+#if defined(NEC_98)
+#line 64
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 134
+
 #define	vd_video_mode	0x449
 #define VID_COLS	0x44A	/* vd_cols_on_screen */
 #define	VID_LEN  	0x44C	/* vd_crt_len */
@@ -72,10 +81,10 @@
 #ifdef EGG
 #define vd_rows_on_screen 0x484
 #else
-#line 75
+#line 149
 #error Unsupported excluded original configuration
 #endif
-#line 77
+#line 151
 
 extern IU8 Video_mode;	/* Shadow copy of BIOS video mode */
 
@@ -138,10 +147,10 @@ IMPORT void vga_int_1C IPT0();
 #ifdef VGG
 #define EGA_FUNC_SIZE	0x1D
 #else
-#line 139
+#line 213
 #error Unsupported excluded original configuration
 #endif
-#line 141
+#line 215
 #define CGA_FUNC_SIZE	0x14
 
 #define SET_MODE 0
@@ -183,16 +192,24 @@ IMPORT MODE_ENTRY vd_ext_graph_table[];
 #ifdef V7VGA
 #define VD_MAX_MODE	0x69
 #else
-#line 182
+#line 256
 #error Unsupported excluded original configuration
 #endif
-#line 184
+#line 258
 
 /*
  * Mode macros to distinguish between alphanumeric & graphics video modes
  */
 
+#ifdef JAPAN
+// mode73h support
+#define	alpha_num_mode() \
+    ( (sas_hw_at_no_check(vd_video_mode) < 4) || \
+      (sas_hw_at_no_check(vd_video_mode) == 7) || \
+      (!is_us_mode() && sas_hw_at_no_check(DosvModePtr) == 0x73 ) )
+#else // !JAPAN
 #define	alpha_num_mode()	(sas_hw_at_no_check(vd_video_mode) < 4 || sas_hw_at_no_check(vd_video_mode) == 7)
+#endif // !JAPAN
 #define	global_alpha_num_mode()	((Video_mode < 4) || (Video_mode == 7))
 #ifdef EGG
 #ifdef V7VGA
@@ -201,20 +218,20 @@ IMPORT MODE_ENTRY vd_ext_graph_table[];
 	((sas_hw_at_no_check(vd_video_mode) >= 0x14) && \
 	(sas_hw_at_no_check(vd_video_mode) < 0x1a)))
 #else
-#line 198
+#line 280
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
-#line 201
+#line 283
 #endif
 
 #ifdef VGG
 #ifdef V7VGA
 #define vga_256_mode()		(sas_hw_at_no_check(vd_video_mode) == 19 || (sas_hw_at_no_check(vd_video_mode) > 0x19 && sas_hw_at_no_check(vd_video_mode) < 0x1e))
 #else
-#line 207
+#line 289
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
-#line 209
+#line 291
 #endif /* VGG */
 
 /*
@@ -246,10 +263,10 @@ IMPORT unsigned char	valid_modes[];
 #ifdef V7VGA
 #define is_v7vga_mode(nm)	((nm >= 0x40 && nm <= 0x45) || (nm >= 0x60 && nm <= 0x69))
 #else
-#line 240
+#line 322
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
-#line 242
+#line 324
 
 IMPORT VOID (*bios_ch2_byte_wrt_fn) IPT2(ULONG, ch_attr, ULONG, ch_addr);
 IMPORT VOID (*bios_ch2_word_wrt_fn) IPT2(ULONG, ch_attr, ULONG, ch_addr);
@@ -287,3 +304,27 @@ IMPORT sys_addr stream_io_bios_busy_sysaddr;
 #endif /* MONITOR */
 
 #endif /* NTVDM */
+#if defined(JAPAN) || defined(KOREA)
+extern int dbcs_first[];
+#define is_dbcs_first( c ) dbcs_first[ 0xff & c ]
+
+extern int BOPFromDispFlag;
+extern sys_addr DBCSVectorAddr; // word
+extern sys_addr DosvModePtr;    // byte
+extern sys_addr DosvVramPtr;
+extern int DosvVramSize;
+
+void SetDBCSVector( int CP );
+void SetVram( void );
+int is_us_mode( void );
+void SetModeForIME( void );
+#define INT10_NOTCHANGED    0   // RAID #875
+#define INT10_SBCS          1
+#define INT10_DBCS_LEADING  2
+#define INT10_DBCS_TRAILING 4
+#define INT10_CHANGED       0x10
+extern int  Int10FlagCnt;
+extern byte Int10Flag[];
+extern byte NtInt10Flag[];
+#endif // JAPAN
+#endif // NEC98

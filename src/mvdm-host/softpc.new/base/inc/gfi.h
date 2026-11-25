@@ -34,7 +34,7 @@ typedef unsigned char FDC_RESULT_BLOCK;
 
 /* the command itself	     */
 #define get_type_cmd(ptr) (ptr[0] & 0x1f)
-#define put_type_cmd(ptr,val) ptr[0] = (ptr[0] & ~0x1f) | ((val << 0) & 0x1f)
+#define put_type_cmd(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x1f) | ((val << 0) & 0x1f))
 /* ...and the drive no	     */
 #define get_type_drive(ptr) (ptr[1] & 0x3)
 #define put_type_drive(ptr,val) ptr[1] = (ptr[1] & ~0x3) | ((val << 0) & 0x3)
@@ -45,16 +45,16 @@ typedef unsigned char FDC_RESULT_BLOCK;
 
 /* multi-track		     */
 #define get_c0_MT(ptr) ((ptr[0] & 0x80) >> 7)
-#define put_c0_MT(ptr,val) ptr[0] = (ptr[0] & ~0x80) | ((val << 7) & 0x80)
+#define put_c0_MT(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x80) | ((val << 7) & 0x80))
 /* always 1 - FM not used    */
 #define get_c0_MFM(ptr) ((ptr[0] & 0x40) >> 6)
-#define put_c0_MFM(ptr,val) ptr[0] = (ptr[0] & ~0x40) | ((val << 6) & 0x40)
+#define put_c0_MFM(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x40) | ((val << 6) & 0x40))
 /* skip data 		     */
 #define get_c0_skip(ptr) ((ptr[0] & 0x20) >> 5)
-#define put_c0_skip(ptr,val) ptr[0] = (ptr[0] & ~0x20) | ((val << 5) & 0x20)
+#define put_c0_skip(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x20) | ((val << 5) & 0x20))
 /* the command itself 	     */
 #define get_c0_cmd(ptr) (ptr[0] & 0x1f)
-#define put_c0_cmd(ptr,val) ptr[0] = (ptr[0] & ~0x1f) | ((val << 0) & 0x1f)
+#define put_c0_cmd(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x1f) | ((val << 0) & 0x1f))
 /* padding */
 #define get_c0_pad(ptr) ((ptr[1] & 0xf8) >> 3)
 #define put_c0_pad(ptr,val) ptr[1] = (ptr[1] & ~0xf8) | ((val << 3) & 0xf8)
@@ -92,16 +92,16 @@ typedef unsigned char FDC_RESULT_BLOCK;
 
 /* multi-track		     */
 #define get_c1_MT(ptr) ((ptr[0] & 0x80) >> 7)
-#define put_c1_MT(ptr,val) ptr[0] = (ptr[0] & ~0x80) | ((val << 7) & 0x80)
+#define put_c1_MT(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x80) | ((val << 7) & 0x80))
 /* always 1 - FM not used    */
 #define get_c1_MFM(ptr) ((ptr[0] & 0x40) >> 6)
-#define put_c1_MFM(ptr,val) ptr[0] = (ptr[0] & ~0x40) | ((val << 6) & 0x40)
+#define put_c1_MFM(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x40) | ((val << 6) & 0x40))
 /* padding */
 #define get_c1_pad(ptr) ((ptr[0] & 0x20) >> 5)
-#define put_c1_pad(ptr,val) ptr[0] = (ptr[0] & ~0x20) | ((val << 5) & 0x20)
+#define put_c1_pad(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x20) | ((val << 5) & 0x20))
 /* the command itself 	     */
 #define get_c1_cmd(ptr) (ptr[0] & 0x1f)
-#define put_c1_cmd(ptr,val) ptr[0] = (ptr[0] & ~0x1f) | ((val << 0) & 0x1f)
+#define put_c1_cmd(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x1f) | ((val << 0) & 0x1f))
 /* padding */
 #define get_c1_pad1(ptr) ((ptr[1] & 0xf8) >> 3)
 #define put_c1_pad1(ptr,val) ptr[1] = (ptr[1] & ~0xf8) | ((val << 3) & 0xf8)
@@ -149,7 +149,7 @@ typedef unsigned char FDC_RESULT_BLOCK;
 /* padding */
 /* padding */
 #define get_c2_pad1(ptr) ((ptr[1] & 0xf8) >> 3)
-#define put_c2_pad1(ptr,val) ptr[1] = (ptr[1] & ~0xf8) | ((val << 3) & 0xf8)
+#define put_c2_pad1(ptr,val) ptr[1] = (unsigned char)((ptr[1] & ~0xf8) | ((val << 3) & 0xf8))
 /* which head 		     */
 #define get_c2_head(ptr) ((ptr[1] & 0x4) >> 2)
 #define put_c2_head(ptr,val) ptr[1] = (ptr[1] & ~0x4) | ((val << 2) & 0x4)
@@ -184,16 +184,16 @@ typedef unsigned char FDC_RESULT_BLOCK;
 
 /* padding */
 #define get_c3_pad(ptr) ((ptr[0] & 0x80) >> 7)
-#define put_c3_pad(ptr,val) ptr[0] = (ptr[0] & ~0x80) | ((val << 7) & 0x80)
+#define put_c3_pad(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x80) | ((val << 7) & 0x80))
 /* always 1 - FM not used    */
 #define get_c3_MFM(ptr) ((ptr[0] & 0x40) >> 6)
-#define put_c3_MFM(ptr,val) ptr[0] = (ptr[0] & ~0x40) | ((val << 6) & 0x40)
+#define put_c3_MFM(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x40) | ((val << 6) & 0x40))
 /* padding */
 #define get_c3_pad1(ptr) ((ptr[0] & 0x20) >> 5)
-#define put_c3_pad1(ptr,val) ptr[0] = (ptr[0] & ~0x20) | ((val << 5) & 0x20)
+#define put_c3_pad1(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x20) | ((val << 5) & 0x20))
 /* the command itself 	     */
 #define get_c3_cmd(ptr) (ptr[0] & 0x1f)
-#define put_c3_cmd(ptr,val) ptr[0] = (ptr[0] & ~0x1f) | ((val << 0) & 0x1f)
+#define put_c3_cmd(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x1f) | ((val << 0) & 0x1f))
 /* padding */
 #define get_c3_pad2(ptr) ((ptr[1] & 0xf8) >> 3)
 #define put_c3_pad2(ptr,val) ptr[1] = (ptr[1] & ~0xf8) | ((val << 3) & 0xf8)
@@ -222,19 +222,19 @@ typedef unsigned char FDC_RESULT_BLOCK;
 
 /* padding */
 #define get_c4_pad(ptr) ((ptr[0] & 0x80) >> 7)
-#define put_c4_pad(ptr,val) ptr[0] = (ptr[0] & ~0x80) | ((val << 7) & 0x80)
+#define put_c4_pad(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x80) | ((val << 7) & 0x80))
 /* always 1 - FM not used    */
 #define get_c4_MFM(ptr) ((ptr[0] & 0x40) >> 6)
-#define put_c4_MFM(ptr,val) ptr[0] = (ptr[0] & ~0x40) | ((val << 6) & 0x40)
+#define put_c4_MFM(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x40) | ((val << 6) & 0x40))
 /* padding */
 #define get_c4_pad1(ptr) ((ptr[0] & 0x20) >> 5)
-#define put_c4_pad1(ptr,val) ptr[0] = (ptr[0] & ~0x20) | ((val << 5) & 0x20)
+#define put_c4_pad1(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x20) | ((val << 5) & 0x20))
 /* the command itself 	     */
 #define get_c4_cmd(ptr) (ptr[0] & 0x1f)
-#define put_c4_cmd(ptr,val) ptr[0] = (ptr[0] & ~0x1f) | ((val << 0) & 0x1f)
+#define put_c4_cmd(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x1f) | ((val << 0) & 0x1f))
 /* padding */
 #define get_c4_pad2(ptr) ((ptr[1] & 0xf8) >> 3)
-#define put_c4_pad2(ptr,val) ptr[1] = (ptr[1] & ~0xf8) | ((val << 3) & 0xf8)
+#define put_c4_pad2(ptr,val) ptr[1] = (unsigned char)((ptr[1] & ~0xf8) | ((val << 3) & 0xf8))
 /* which head 		     */
 #define get_c4_head(ptr) ((ptr[1] & 0x4) >> 2)
 #define put_c4_head(ptr,val) ptr[1] = (ptr[1] & ~0x4) | ((val << 2) & 0x4)
@@ -248,13 +248,13 @@ typedef unsigned char FDC_RESULT_BLOCK;
 
 /* padding */
 #define get_c5_pad(ptr) ((ptr[0] & 0xe0) >> 5)
-#define put_c5_pad(ptr,val) ptr[0] = (ptr[0] & ~0xe0) | ((val << 5) & 0xe0)
+#define put_c5_pad(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0xe0) | ((val << 5) & 0xe0))
 /* the command itself 	     */
 #define get_c5_cmd(ptr) (ptr[0] & 0x1f)
-#define put_c5_cmd(ptr,val) ptr[0] = (ptr[0] & ~0x1f) | ((val << 0) & 0x1f)
+#define put_c5_cmd(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x1f) | ((val << 0) & 0x1f))
 /* padding */
 #define get_c5_pad1(ptr) ((ptr[1] & 0xfc) >> 2)
-#define put_c5_pad1(ptr,val) ptr[1] = (ptr[1] & ~0xfc) | ((val << 2) & 0xfc)
+#define put_c5_pad1(ptr,val) ptr[1] = (unsigned char)((ptr[1] & ~0xfc) | ((val << 2) & 0xfc))
 /* drive unit */
 #define get_c5_drive(ptr) (ptr[1] & 0x3)
 #define put_c5_drive(ptr,val) ptr[1] = (ptr[1] & ~0x3) | ((val << 0) & 0x3)
@@ -277,7 +277,7 @@ typedef unsigned char FDC_RESULT_BLOCK;
 #define put_c6_HLT(ptr,val) ptr[2] = (ptr[2] & ~0xfe) | ((val << 1) & 0xfe)
 /* non-dma mode - not supp.  */
 #define get_c6_ND(ptr) (ptr[2] & 0x1)
-#define put_c6_ND(ptr,val) ptr[2] = (ptr[2] & ~0x1) | ((val << 0) & 0x1)
+#define put_c6_ND(ptr,val) ptr[2] = (unsigned char)((ptr[2] & ~0x1) | ((val << 0) & 0x1))
 
 /* 
  * Class 7 - sense drive status
@@ -299,16 +299,16 @@ typedef unsigned char FDC_RESULT_BLOCK;
 
 /* padding */
 #define get_c8_pad(ptr) ((ptr[0] & 0xe0) >> 5)
-#define put_c8_pad(ptr,val) ptr[0] = (ptr[0] & ~0xe0) | ((val << 5) & 0xe0)
+#define put_c8_pad(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0xe0) | ((val << 5) & 0xe0))
 /* the command itself 	     */
 #define get_c8_cmd(ptr) (ptr[0] & 0x1f)
-#define put_c8_cmd(ptr,val) ptr[0] = (ptr[0] & ~0x1f) | ((val << 0) & 0x1f)
+#define put_c8_cmd(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x1f) | ((val << 0) & 0x1f))
 /* padding */
 #define get_c8_pad1(ptr) ((ptr[1] & 0xf8) >> 3)
-#define put_c8_pad1(ptr,val) ptr[1] = (ptr[1] & ~0xf8) | ((val << 3) & 0xf8)
+#define put_c8_pad1(ptr,val) ptr[1] = (unsigned char)((ptr[1] & ~0xf8) | ((val << 3) & 0xf8))
 /* which head 		     */
 #define get_c8_head(ptr) ((ptr[1] & 0x4) >> 2)
-#define put_c8_head(ptr,val) ptr[1] = (ptr[1] & ~0x4) | ((val << 2) & 0x4)
+#define put_c8_head(ptr,val) ptr[1] = (unsigned char)((ptr[1] & ~0x4) | ((val << 2) & 0x4))
 /* drive unit */
 #define get_c8_drive(ptr) (ptr[1] & 0x3)
 #define put_c8_drive(ptr,val) ptr[1] = (ptr[1] & ~0x3) | ((val << 0) & 0x3)
@@ -354,19 +354,19 @@ typedef unsigned char FDC_RESULT_BLOCK;
 
 /* Termination code  */
 #define get_r1_ST0_int_code(ptr) ((ptr[0] & 0xc0) >> 6)
-#define put_r1_ST0_int_code(ptr,val) ptr[0] = (ptr[0] & ~0xc0) | ((val << 6) & 0xc0)
+#define put_r1_ST0_int_code(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0xc0) | ((val << 6) & 0xc0))
 /* End of seek cmd   */
 #define get_r1_ST0_seek_end(ptr) ((ptr[0] & 0x20) >> 5)
-#define put_r1_ST0_seek_end(ptr,val) ptr[0] = (ptr[0] & ~0x20) | ((val << 5) & 0x20)
+#define put_r1_ST0_seek_end(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x20) | ((val << 5) & 0x20))
 /* Equipment fault   */
 #define get_r1_ST0_equipment(ptr) ((ptr[0] & 0x10) >> 4)
-#define put_r1_ST0_equipment(ptr,val) ptr[0] = (ptr[0] & ~0x10) | ((val << 4) & 0x10)
+#define put_r1_ST0_equipment(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x10) | ((val << 4) & 0x10))
 /* Device not ready  */
 #define get_r1_ST0_not_ready(ptr) ((ptr[0] & 0x8) >> 3)
 #define put_r1_ST0_not_ready(ptr,val) ptr[0] = (ptr[0] & ~0x8) | ((val << 3) & 0x8)
 /* State of head     */
 #define get_r1_ST0_head_address(ptr) ((ptr[0] & 0x4) >> 2)
-#define put_r1_ST0_head_address(ptr,val) ptr[0] = (ptr[0] & ~0x4) | ((val << 2) & 0x4)
+#define put_r1_ST0_head_address(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x4) | ((val << 2) & 0x4))
 /* Which drive	     */
 #define get_r1_ST0_unit(ptr) (ptr[0] & 0x3)
 #define put_r1_ST0_unit(ptr,val) ptr[0] = (ptr[0] & ~0x3) | ((val << 0) & 0x3)
@@ -381,13 +381,13 @@ typedef unsigned char FDC_RESULT_BLOCK;
 #define put_r1_ST1_over_run(ptr,val) ptr[1] = (ptr[1] & ~0x10) | ((val << 4) & 0x10)
 /* sector not found  */
 #define get_r1_ST1_no_data(ptr) ((ptr[1] & 0x4) >> 2)
-#define put_r1_ST1_no_data(ptr,val) ptr[1] = (ptr[1] & ~0x4) | ((val << 2) & 0x4)
+#define put_r1_ST1_no_data(ptr,val) ptr[1] = (unsigned char)((ptr[1] & ~0x4) | ((val << 2) & 0x4))
 /* write protected   */
 #define get_r1_ST1_write_protected(ptr) ((ptr[1] & 0x2) >> 1)
-#define put_r1_ST1_write_protected(ptr,val) ptr[1] = (ptr[1] & ~0x2) | ((val << 1) & 0x2)
+#define put_r1_ST1_write_protected(ptr,val) ptr[1] = (unsigned char)((ptr[1] & ~0x2) | ((val << 1) & 0x2))
 /* Cannot find adress mask/ID  		*/
 #define get_r1_ST1_no_address_mark(ptr) (ptr[1] & 0x1)
-#define put_r1_ST1_no_address_mark(ptr,val) ptr[1] = (ptr[1] & ~0x1) | ((val << 0) & 0x1)
+#define put_r1_ST1_no_address_mark(ptr,val) ptr[1] = (unsigned char)((ptr[1] & ~0x1) | ((val << 0) & 0x1))
 /* Deleted data found in Read/Scan	*/
 #define get_r1_ST2_control_mark(ptr) ((ptr[2] & 0x40) >> 6)
 #define put_r1_ST2_control_mark(ptr,val) ptr[2] = (ptr[2] & ~0x40) | ((val << 6) & 0x40)
@@ -416,22 +416,22 @@ typedef unsigned char FDC_RESULT_BLOCK;
 
 /* Device fault      		*/
 #define get_r2_ST3_fault(ptr) ((ptr[0] & 0x80) >> 7)
-#define put_r2_ST3_fault(ptr,val) ptr[0] = (ptr[0] & ~0x80) | ((val << 7) & 0x80)
+#define put_r2_ST3_fault(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x80) | ((val << 7) & 0x80))
 /* Write protected diskette	*/
 #define get_r2_ST3_write_protected(ptr) ((ptr[0] & 0x40) >> 6)
 #define put_r2_ST3_write_protected(ptr,val) ptr[0] = (ptr[0] & ~0x40) | ((val << 6) & 0x40)
 /* Device is ready		*/
 #define get_r2_ST3_ready(ptr) ((ptr[0] & 0x20) >> 5)
-#define put_r2_ST3_ready(ptr,val) ptr[0] = (ptr[0] & ~0x20) | ((val << 5) & 0x20)
+#define put_r2_ST3_ready(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x20) | ((val << 5) & 0x20))
 /* Track zero found		*/
 #define get_r2_ST3_track_0(ptr) ((ptr[0] & 0x10) >> 4)
 #define put_r2_ST3_track_0(ptr,val) ptr[0] = (ptr[0] & ~0x10) | ((val << 4) & 0x10)
 /* Double sided diskette	*/
 #define get_r2_ST3_two_sided(ptr) ((ptr[0] & 0x8) >> 3)
-#define put_r2_ST3_two_sided(ptr,val) ptr[0] = (ptr[0] & ~0x8) | ((val << 3) & 0x8)
+#define put_r2_ST3_two_sided(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x8) | ((val << 3) & 0x8))
 /* Side address signal		*/
 #define get_r2_ST3_head_address(ptr) ((ptr[0] & 0x4) >> 2)
-#define put_r2_ST3_head_address(ptr,val) ptr[0] = (ptr[0] & ~0x4) | ((val << 2) & 0x4)
+#define put_r2_ST3_head_address(ptr,val) ptr[0] = (unsigned char)((ptr[0] & ~0x4) | ((val << 2) & 0x4))
 /* Which unit is selected	*/
 #define get_r2_ST3_unit(ptr) (ptr[0] & 0x3)
 #define put_r2_ST3_unit(ptr,val) ptr[0] = (ptr[0] & ~0x3) | ((val << 0) & 0x3)

@@ -72,7 +72,7 @@ typedef struct
  * ============================================================================
  */
 
-extern void control_bop();
+extern void control_bop IPT0();
 extern control_bop_array host_bop_table[];
 
 #line 72

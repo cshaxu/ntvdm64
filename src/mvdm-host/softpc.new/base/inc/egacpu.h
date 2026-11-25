@@ -89,18 +89,44 @@ typedef struct
 	UTINY	*route_reg2;
 	UTINY	*screen_ptr;
 	ULONG	rotate;
+#if defined(NEC_98)         
+#line 118
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 140
 } VGA_GLOBALS;
+#endif // !NEC_98
+#line 142
 
-#line 119
+#if defined(NEC_98)         
+#line 144
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 146
 extern struct EGA_CPU_GLOBALS
+#endif // !NEC_98
+#line 148
 {
+#if defined(NEC_98)         
+#line 150
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 152
 #ifndef	HOST_VGA_GLOBALS
 	VGA_GLOBALS	*globals;
 #endif
-#line 124
+#endif // !NEC_98
+#line 156
 	ULONG		saved_state;		/* Last value of EGA_CPU.ega_state.state */
 	ULONG		saved_mode_chain;		/* Last value of mode/chain combined */
+#if defined(NEC_98)         
+#line 159
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 161
 	MAGIC		ega_state;
+#endif // !NEC_98
+#line 163
 	ULONG		fun_or_protection;   /* true means write function is 1-3 and/or there
 						is bit protection, so latches must be used */
 	ULONG		calc_data_xor;	/* Used to recalculate data_xor_mask when the
@@ -121,13 +147,25 @@ extern struct EGA_CPU_GLOBALS
 	UTINY		seq_chain4;
 	UTINY		seq_chain;
 #endif
+#if defined(NEC_98)
+#line 184
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 186
 } EGA_CPU;
+#endif // !NEC_98
+#line 188
 
+#if defined(NEC_98)
+#line 190
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 273
 #ifndef CPU_40_STYLE	/* Vglobs done via access fns */
-#line 150
+#line 274
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #else	/* CPU_40_STYLE */
-#line 238
+#line 362
 
 extern void setVideorplane IPT1(IU8 *, value);
 extern IU8 * getVideorplane IPT0();
@@ -223,9 +261,11 @@ extern struct VideoVector C_Video;	/* in (generated) vglfunc.c */
 #define SetMarkPointers	setMarkPointers
 #endif	/* C_VID */
 #endif	/* CPU_40_STYLE */
-#line 333
+#line 457
 
 #define write_state EGA_CPU.ega_state.state
+#endif // !NEC_98
+#line 460
 
 #define UNCHAINED	0
 #define CHAIN2		1
@@ -235,6 +275,11 @@ IMPORT ULONG sr_lookup[16];
 
 #define N_WRITE_TYPES 24
 
+#if defined(NEC_98)         
+#line 470
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 486
 #ifdef CPU_40_STYLE
 extern IU32 latchval;	/* used for following latch macros */
 #define get_latch(n) \
@@ -263,15 +308,17 @@ extern IU32 latchval;	/* used for following latch macros */
 #define put_latch3(value) put_latch(3, value)
 
 #else	/* CPU_40_STYLE */
-#line 372
+#line 514
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif	/* CPU_40_STYLE */
+#endif // !NEC_98
+#line 533
 
 /*
  * macro to do the logical operations on cpu data and the latch values
  */
 
-#line 395
+#line 538
 #define do_logicals(val,latch)  (((latch) & ((val & getVideodata_and_mask()) \
 		^ getVideodata_xor_mask())) | (val & ((latch) ^ getVideolatch_xor_mask())))
 

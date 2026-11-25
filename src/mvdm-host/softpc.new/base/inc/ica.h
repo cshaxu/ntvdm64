@@ -45,11 +45,21 @@
 #define AT_CPU_MOUSE_INT      	HOST_AT_CPU_MOUSE_INT
 #define AT_CPU_MOUSE_ADAPTER	HOST_AT_CPU_MOUSE_ADAPTER
 #define	MOUSE_VEC		HOST_AT_MOUSE_INT_VEC
+#if defined(NEC_98)
+#line 49
+#error Unsupported NEC PC-98 configuration
+#endif // NEC_98
+#line 51
 #define CPU_RS232_SEC_INT   	3
 #define CPU_RS232_PRI_INT   	4
 #define CPU_DISK_INT   		5
 #define CPU_DISKETTE_INT   	6
 #define CPU_PRINTER_INT   	7
+
+#if defined(NEC_98)
+#line 58
+#error Unsupported NEC PC-98 configuration
+#endif
  
 /* Different lines for the AT */
 #define CPU_PRINTER2_INT	5
@@ -60,23 +70,23 @@
 #define CPU_RTC_INT		0
 
 #if defined (NOVELL) || defined (NOVELL_IPX)
-#line 63
-#error Unsupported excluded original configuration
-#endif
-#line 65
-
-#if defined (SWIN_HAW) 
-#line 67
-#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
-#endif
-#line 69
-
-#line 70
-#if defined (ASPI)
 #line 71
 #error Unsupported excluded original configuration
 #endif
 #line 73
+
+#if defined (SWIN_HAW) 
+#line 75
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
+#endif
+#line 77
+
+#line 78
+#if defined (ASPI)
+#line 79
+#error Unsupported excluded original configuration
+#endif
+#line 81
 
 #define CPU_AT_NPX_INT		5	/* NPX exception */
 #define CPU_AT_DISK_INT		6
@@ -94,7 +104,7 @@
 #define CPU_SW_INT_MASK         (1 << CPU_SW_INT)
 #endif /* 3.0 CPU */
 
-#line 92
+#line 100
 #define DIVIDE_OVERFLOW_INT     0
 
 #define	END_INTERRUPT	0x20
@@ -144,22 +154,23 @@ extern void ica_hw_interrupt(IU32 adapter, IU32 line_no, IS32 call_count);
 extern VDMVIRTUALICA VirtualIca[];
 
 #else   /* ndef NTVDM */
-#line 141
+#line 149
 #error Unsupported excluded original configuration
 #endif  /* NTVDM */
-#line 206
+#line 214
 
 
 #if !defined(NTVDM)
-#line 209
+#line 217
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* !NTVDM */
-#line 242
+#line 250
 
-#line 243
+#line 251
 #ifdef GISP_CPU
-#line 244
+#line 252
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif /* GISP_CPU */
-#line 255
+#line 263
 
+

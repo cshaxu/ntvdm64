@@ -2,7 +2,10 @@
 
 #ifndef _HOST_LPT_H
 #define _HOST_LPT_H
-
+#if defined(NEC_98)         // NEC {
+#line 6
+#error Unsupported NEC PC-98 configuration
+#else
 /*[
 	Name:		host_lpt.h
 	Derived From:	Base 2.0
@@ -139,10 +142,10 @@ IMPORT	UCHAR		host_read_printer_status_port(int adapter);
 #endif
 
 #ifdef PS_FLUSHING
-#line 142
+#line 157
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
-#line 145
+#line 160
 
 #if defined (NTVDM) && defined(MONITOR)
 IMPORT void host_printer_setup_table(sys_addr table_addr, word nPorts, word * lptStatusPortAddr);
@@ -162,6 +165,9 @@ IMPORT void host_printer_setup_table(sys_addr table_addr, word nPorts, word * lp
 #define LPT3			2
 
 #define	number_for_adapter(adapter)	(adapter + 1)
+
+#endif	// NEC_98                                          // NEC }
+#line 181
 
 #endif /* _HOST_LPT_H */
 

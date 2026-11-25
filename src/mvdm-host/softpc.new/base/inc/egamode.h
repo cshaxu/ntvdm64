@@ -9,6 +9,13 @@
 extern	boolean	(*choose_display_mode)();
 extern	boolean	choose_ega_display_mode();
 #ifdef VGG
+#if defined(NEC_98)         
+#line 13
+#error Unsupported NEC PC-98 configuration
+#else  // !NEC_98
+#line 17
 extern	boolean	choose_vga_display_mode();
+#endif // !NEC_98
+#line 19
 #endif
 
