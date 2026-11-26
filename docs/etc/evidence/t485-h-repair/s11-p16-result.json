@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P16",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime19",
   "reviewed_files": 37,
   "total_files": 48,
@@ -55,5 +55,8 @@
     "build/t485-s11/p16/final/raw-spool/guest-report.json",
     "build/t485-s11/p16/provider-result.txt",
     "build/t485-s11/p16/wspool-lines.json"
-  ]
+  ],
+  "commit": "014d8575c",
+  "delivered_files": 37,
+  "delivered_frozen_points": 362
 }

@@ -34,13 +34,13 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
 [P16 receipt](../etc/evidence/t485-h-repair/s11-p16-result.json):37/48files,
-362/452points final-verified:17restored,345residual owner-review,90unreviewed.
+362/452points delivered:17restored,345residual owner-review,90unreviewed.
 Current48-file census744points/7048lines;cumulative raw reduction136/4715.
 P16 fixes printer cleanup on the wrong failure branch;point count unchanged,
 +1line for original #line mapping under standing small-fix approval.
 Runtime19 cached build,dual26-hash publication,spool72/loader56/rundown353/
 environment16 and real Win16 explicit no-profile OpenJob PASS. No claim of
-physical printer success. Commit/push pending;delivered36/360 at P15.
+physical printer success. P16 delivered and pushed014d8575c;37/362 delivered.
 Nextfile38 wstruc.c. LastFull:file30 P12 runtime15 passed23/23;nextfile40
 and S closure. Earlier P1-P7 actual-preprocessor line followup remains due;
 spool-loader extraction fixture obligation resolved.

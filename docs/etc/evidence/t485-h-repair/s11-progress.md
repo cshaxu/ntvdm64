@@ -48,7 +48,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 34 | src/mvdm-host/wow32/wsext.c | 4 | P15 delivered f02c587de |
 | 35 | src/mvdm-host/wow32/wshell.c | 1 | P15 delivered f02c587de |
 | 36 | src/mvdm-host/wow32/wshimdb.c | 5 | P15 delivered f02c587de |
-| 37 | src/mvdm-host/wow32/wspool.c | 2 | P16 final-verified; commit pending |
+| 37 | src/mvdm-host/wow32/wspool.c | 2 | P16 delivered 014d8575c |
 | 38 | src/mvdm-host/wow32/wstruc.c | 3 | Pending |
 | 39 | src/mvdm-host/wow32/wuclass.c | 7 | Pending |
 | 40 | src/mvdm-host/wow32/wuclip.c | 16 | Pending |
@@ -916,3 +916,5 @@ Complete-file implementation now enters cached build,dual publication and
 final targeted acceptance;Full remains due at40 and S closure.
 
 [P16 receipt](s11-p16-result.json):runtime19 cached build,dual26-hash publication and final targeted tests PASS. Actual Win16 OpenJob confirms original explicit no-profile failure,not physical-printer acceptance. All37files/362points final-verified;17restored,345residual,90unreviewed. Spool loader fixture obligation resolved. Commit/push pending;nextfile38 wstruc.c.
+
+P16 delivered and pushed as014d8575c. All37files/362points delivered;17restored,345residual,90unreviewed. Current census744/7048,cumulative136/4715. Nextfile38 wstruc.c;S11 remains active.
