@@ -649,6 +649,7 @@ static int fixture_sim32_flush_contract(void)
     IU8 *scratch;
     int passed = 0;
     if (ScratchVideoBuffer) return 0;
+    if (!Sim32FlushVDMPointer(0x70000000u, 1, NULL, FALSE)) return 0;
     /* Same selected provider installed by mvdm_cvidc_bind_vectors. */
     Sas.Sas_overwrite_memory = c_sas_overwrite_memory;
     if (!Sim32FlushVDMPointer(0x70000000u, 1, NULL, FALSE) ||

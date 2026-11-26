@@ -693,3 +693,19 @@ nt_sbfm.c: 4/4 -> 3/5; one point reduced, one diff line added. Cumulative S7
 reduction including the required header is 860 points/7636 lines. Progress
 16/20 primary files, four remaining; next sim32.c. Residuals stay registered.
 Commit/push closes P11; no Full or N004 progress claimed.
+
+## P12 sim32.c final verification
+
+[Complete-file receipt](s7-p12-sim32.md) and [fourteen exact residuals](s7-p12-mirror-diff.json):
+19 points/107 lines -> 14 points/74 lines, reduction 5/33. The added cache
+exclusion counts its entire removed original body. Original converter body,
+xt.h and formatting restored; host mapping checks use original supervisor
+translation and existing SAS/CPU owners. No parallel descriptor implementation.
+
+Runtime15 cached build, dual thirteen-image publication, real CPU 123/0,
+high-linear/flush fixture, actual WOW, three desktops and enhanced same-window
+roundtrips, and NESticle menu/Escape passed. Win95 keeps knownExitOne, not a
+normal-exit claim. MSVC confirms explicit WINAPI is needed (C2373 otherwise).
+S7 is 17/20 primary files; three remain, next obj.vdm/ntvdm.c. Cumulative
+reduction including required P10 header: 865 points/7669 lines. Commit/push
+closes P12; no Full or N004 progress claimed.

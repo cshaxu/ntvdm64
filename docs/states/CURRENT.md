@@ -30,6 +30,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Original Owner Request | Execute the new T485 S repair sequence before resuming N004-G097, without excessive repeated verification. |
 | Similar-Issue Sweep | All exclusion masks, effective guards and selected bodies of each owned file; retain runtime ownership and failure semantics. |
 
+## S7 P12 Checkpoint
+
+[SIM32 restoration](../etc/evidence/t485-h-repair/s7-p12-sim32.md): 19 points/107
+lines to 14 points/74 lines. Fourteen necessary residuals are registered;
+newly excluded translated-cache code is counted in full. Runtime15 cached
+build, dual publication, CPU 123/0, high-linear/flush, real WOW, three desktops,
+enhanced same-window roundtrips and NESticle passed. Win95 retains knownExitOne.
+S7 is 17/20; three remain, next obj.vdm/ntvdm.c. Cumulative reduction including
+the P10 header is 865 points/7669 lines. Commit/push closes P12 only.
+
 ## S7 P11 Checkpoint
 
 [FM service admission](../etc/evidence/t485-h-repair/s7-p11-fm-service.md):

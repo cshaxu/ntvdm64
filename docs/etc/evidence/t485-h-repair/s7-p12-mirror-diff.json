@@ -1,0 +1,168 @@
+{
+  "before": {
+    "points": 19,
+    "lines": 107
+  },
+  "after": {
+    "points": 14,
+    "lines": 74
+  },
+  "source_sha256": "f77458df380bad08af6b3f46fe08f7be6c3b18e36e4131639e3697f007573a7b",
+  "new_cache_exclusion_counted_in_full": true,
+  "residuals": [
+    {
+      "old": [],
+      "new": [
+        "#include \"c_main.h\"",
+        "#include \"c_bsic.h\"",
+        "#include \"c_tlb.h\"",
+        "#include \"compat/include/mvdm_softpc_termination.h\""
+      ]
+    },
+    {
+      "old": [],
+      "new": [
+        "    if (Sas.Sas_overwrite_memory)"
+      ]
+    },
+    {
+      "old": [
+        "PVOID"
+      ],
+      "new": [
+        "PVOID WINAPI"
+      ]
+    },
+    {
+      "old": [],
+      "new": [
+        "    PHY_ADDR physical;"
+      ]
+    },
+    {
+      "old": [
+        "    if (pm && (seg == 0) && (off == 0))",
+        "    return(NULL);"
+      ],
+      "new": [
+        "    if (!Start_of_M_area || !Length_of_M_area ||",
+        "        (mode != VDM_V86 && mode != VDM_PM) || (pm && !seg)) return NULL;",
+        "    if (!pm && !seg && !off) return Start_of_M_area;"
+      ]
+    },
+    {
+      "old": [],
+      "new": [
+        "    if (iaddr < off) return NULL;",
+        "    physical = iaddr;",
+        "    if ((getPG() && !xtrn2phy(iaddr, 0, &physical)) ||",
+        "        physical >= Length_of_M_area) return NULL;"
+      ]
+    },
+    {
+      "old": [
+        "    // Now call the emulator to inform it that memory has changed.",
+        "    //",
+        "    // Note that sas_overwrite_memory is PAGE GRANULAR, so using",
+        "    // it to flush a single LDT descriptor has a horrendous impact on",
+        "    // performance, since up to 511 other descriptors are also",
+        "    // thrown away.",
+        "    //",
+        "    // So perform an optimization here by keying off the size.",
+        "    // The dpmi code has been written to flush 1 descriptor at",
+        "    // a time, so use the sas_store functions in this case to",
+        "    // flush it.",
+        "    //",
+        "",
+        "    if (size <= 8) {",
+        "        UCHAR Buffer[8];",
+        "        PUCHAR pBytes;",
+        "        USHORT i;",
+        "        //",
+        "        // Small flush - avoid sas_overwrite_memory().",
+        "        // Note that the sas_store functions optimize out calls",
+        "        // that simply replace a byte with an identical byte. So this",
+        "        // code copies out the bytes to a buffer, copies in zeroes,",
+        "        // and then copies the original bytes back in.",
+        "        //",
+        "        pBytes = NtGetPtrToLinAddrByte(iaddr);",
+        "        for (i=0; i<size; i++) {",
+        "            Buffer[i] = *pBytes++;",
+        "            sas_store(iaddr+i, 0);",
+        "        }",
+        "        sas_stores(iaddr, Buffer, size);",
+        "",
+        "    } else {",
+        "",
+        "        //",
+        "        // normal path - flushes PAGE GRANULAR",
+        "        //",
+        "        sas_overwrite_memory(iaddr, size);",
+        "",
+        "    }"
+      ],
+      "new": [
+        "#ifndef CCPU",
+        "#error Unsupported translated-code-cache configuration",
+        "#endif"
+      ]
+    },
+    {
+      "old": [
+        "    DESCR entry;"
+      ],
+      "new": [
+        "    CPU_DESCR entry;"
+      ]
+    },
+    {
+      "old": [
+        "\tif ( selector_outside_table(seg, &descr_addr) == 1 )"
+      ],
+      "new": [
+        "\tif ( selector_outside_GDT_LDT(seg, &descr_addr) == 1 )"
+      ]
+    },
+    {
+      "old": [
+        "\t    read_descriptor(descr_addr, &entry);"
+      ],
+      "new": [
+        "\t    read_descriptor_linear(descr_addr, &entry);"
+      ]
+    },
+    {
+      "old": [
+        "    DESCR entry;"
+      ],
+      "new": [
+        "    CPU_DESCR entry;"
+      ]
+    },
+    {
+      "old": [
+        "        if ( selector_outside_table(seg, &descr_addr) == 1 ) {"
+      ],
+      "new": [
+        "        if ( selector_outside_GDT_LDT(seg, &descr_addr) == 1 ) {"
+      ]
+    },
+    {
+      "old": [
+        "            read_descriptor(descr_addr, &entry);"
+      ],
+      "new": [
+        "            read_descriptor_linear(descr_addr, &entry);"
+      ]
+    },
+    {
+      "old": [
+        "       exit(0);"
+      ],
+      "new": [
+        "       (void)mvdm_softpc_terminate_current_session(0u, 0u);",
+        "       return(NULL);"
+      ]
+    }
+  ]
+}
