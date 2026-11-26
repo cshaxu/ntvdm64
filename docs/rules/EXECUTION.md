@@ -1,5 +1,14 @@
 # Execution Rules
 
+## Mandatory S closure delivery
+
+Owner update 2026-11-26: every S closure requires the full five-step delivery,
+in order: cached full build, dual-location publication, Full regression,
+commit, and push. Full must identify the final published package; targeted
+tests alone cannot close an S. Ordinary P deliveries within an S retain their
+applicable targeted-test cadence. This supersedes plans that defer all Full
+verification to a later S; previously recorded closures remain historical facts.
+
 ## Request Lifecycle
 
 1. Read the task reading set in [docs/README.md](../README.md) and re-read the

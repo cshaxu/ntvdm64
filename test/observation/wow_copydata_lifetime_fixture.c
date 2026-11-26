@@ -117,7 +117,7 @@ static void copy_bytes(void *to,const void *from,SIZE_T bytes){if(copy_fault)Rai
 #define OLDCB_DIR (WM_USER+5)
 #define TDF_INITCALLBACKSTACK 1u
 #define TDF_IGNOREINPUT 2u
-typedef struct _TD {DWORD vpCBStack,dwFlags;WORD htask16;DWORD vpStack;} TD,*PTD;
+typedef struct _TD {DWORD vpCBStack,dwFlags;WORD htask16;DWORD vpStack;INT cStackAlloc16;} TD,*PTD;
 static TD task={0,0,1,0};
 #define CURRENTPTD() (&task)
 BOOL WINAPI wow_user_worker_active(void){return TRUE;}
@@ -161,12 +161,14 @@ LONG ThunkCallWndProcHook(INT,LONG,LPCWPSTRUCT,LPHOOKSTATEDATA);
 LONG ThunkMsgFilterHook(INT,LONG,LPMSG,LPHOOKSTATEDATA);
 static VPVOID malloc16(DWORD bytes){HAND16 handle;return GlobalAllocLock16(0,bytes,&handle);}
 #define free16 GlobalUnlockFree16
-/* Original stackalloc16 is extracted; stackfree16 is originally empty. */
-#define stackfree16(vp) ((void)(vp))
+/* Both XP stack allocation and release bodies are extracted unchanged. */
+#define stackfree16(vp,cb) StackFree16(cb)
 static BOOL CallBack16(INT code,PARM16 *args,DWORD procedure,PVPVOID result);
 static BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX p){(void)p;return TRUE;}
 static struct { BOOL (FASTCALL *lpfnM32)(LPWM32MSGPARAMEX); } aw32Msg[WM_USER];
-static PWW FindPWW(HWND window,int cls){(void)window;(void)cls;return NULL;}
+static PWW FindPWW(HWND window){(void)window;return NULL;}
+static INT GetIClass(PWW words,HWND window){(void)words;(void)window;CHECK(FALSE);return 0;}
+#define GETICLASS(words,window) GetIClass(words,window)
 static BOOL (FASTCALL *apfnThunkMsg16[])(LPMSGPARAMEX)={ThunkWMMsg16,ThunkWMMsg16};
 static VOID (FASTCALL *apfnUnThunkMsg16[])(LPMSGPARAMEX)={count_normal_unthunk,count_normal_unthunk};
 #include "copydata_exact_body.h"

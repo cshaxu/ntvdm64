@@ -19,25 +19,25 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Reference Baseline | S10 runtime12 / 688ab3fa2; fixed XP objects, files.csv and 452 frozen S11 points. |
 | Verification | Whole-file original-source/exclusion/line audit; cached full build, dual publication, affected targeted tests, commit/push. Build/export/caller ABI, callback reentry/failure, DDE/clipboard rollback, procedure identity, cleanup and real Win16 applications as affected. |
 | Constraints | Original-first, preserve error exclusions and original logical lines; no original guest modification/rebuild, Computer Use, hardware fullscreen or kernel monitor. Preserve layer ownership and unrelated work. |
-| Non-goals | No N004 before S13, no speculative rewriting or second state machine. No claim of Full before S13. |
+| Non-goals | No N004 before S13, no speculative rewriting or second state machine. Full is mandatory for this S closure. |
 | Files And ABI Surface | Forty-eight S11 rows in files.csv; 452 points in points.csv. Whole-file review including coupled provider dependencies. |
 | Applicable Rules | Execution, architecture, coding, source and document authorities linked by docs/README.md. |
 | Expected Markers | Every file has exact before/after metrics, source evidence, restored or justified residual points, updated hashes and final-package delivery. |
 | Asset Needs | Existing pinned XP originals and immutable guest fixtures. |
 | Reporting Requirements | File entry/exit; non-error points/lines and cumulative totals; reviewed, restored, residual, verified and delivered counts separately. |
 | Stop Conditions | Material unapproved scope or mirror increase outside owner allowance; unexplained ABI/semantic change. |
-| Exit Criteria | All 48 assigned files and 452 points reviewed; admitted repairs delivered, no unassigned blocker; handoff S12. |
+| Exit Criteria | All 48 assigned files and 452 points reviewed; admitted repairs delivered, no unassigned blocker; final-package Full and build/publication/commit/push completed before handoff S12. |
 | Original Owner Request | Complete S6-S13 repairs before N004-G097, preserve correct original code and minimize both mirror difference metrics without excessive verification. |
 | Similar-Issue Sweep | WOW ABI/header selection, callback/resource ownership, original USER/GDI providers, task cleanup and profile/environment contracts. |
 
 ## S11 Ordered Progress
 
-[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):7/48 files,
-13/452 points final-verified:7 restored,6 evidence-backed residuals pending
-owner decision,439 unreviewed. Reviewed census44/3971 ->30/57 (-14/-3914).
-P2 runtime3 cached build,dual publication26/26,public ABI,standard-class and
-real Win16 checks PASS;P2 delivered/pushed as3bb82967a. Next:walias.h.
-Migration39/159;Full remains S13.
+[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):8/48 files,
+19/452 points final-verified:9 restored,10 residuals pending owner decision,
+433 unreviewed. P3 walias.h10/18 ->5/14;reviewed-file census54/3989 ->35/71,
+net-19/-3918. Runtime5 cached build,dual publication26/26,GDI,COPYDATA and
+real Win16 tests PASS;commit/push pending. Next:wcall32.c.
+Migration39/159;Full is required at every S closure, including S11.
 
 ## S10 Closure Record
 
@@ -49,7 +49,7 @@ Census201/102845 ->1834/2939 (+1633/-99906).
 Final runtime12 Win3.1/Win95 same-Window Alt+Enter roundtrips PASS;
 Win95 retains approved exit-one boundary. All30 file hashes/306 pending
 residuals reconcile. CAF Console/Window/Console/Window with real chords passes for COMMAND and CMD; S10 is closed.
-Migration39/159;Full remains S13.
+Migration39/159;Full remained scheduled for S13 at that historical closure.
 
 ## S9 Closure Record
 

@@ -19,7 +19,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 5 | src/mvdm-host/wow32/isvwow.h | 1 | P2 source-reviewed; format batch pending |
 | 6 | src/mvdm-host/wow32/precomp.h | 3 | P2 source-reviewed; format batch pending |
 | 7 | src/mvdm-host/wow32/walias.c | 4 | P2 delivered 3bb82967a |
-| 8 | src/mvdm-host/wow32/walias.h | 6 | Pending |
+| 8 | src/mvdm-host/wow32/walias.h | 6 | P3 final-verified; commit/push pending |
 | 9 | src/mvdm-host/wow32/wcall16.c | 4 | Pending |
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | Pending |
 | 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | Pending |
@@ -269,3 +269,59 @@ Next file remains walias.h; Full remains S13 and migration39/159.
 P2 product commit3bb82967a is pushed to origin/main. Final source checks and
 26/26 publication hashes verified;worktree clean immediately after push.
 Seven restored points and six owner-review residuals are delivered;S11 remains active.
+
+### P3 walias.h entry and local restoration
+
+File8/48, six frozen points HXP-R-04086..04091. Entry non-error census10/18.
+Whole-tree production/test search finds FREEHDC16/FREEHOBJ16 only at their
+new definitions: both removed (04088/04089 locally restored, not delivered).
+Removed redundant #line63/83/118; added the required #line21 after the alias
+include. Original DEBUG #error preserved. Local census5/14 (-5/-4).
+The header remains under whole-file review; no build is triggered yet.
+GDI original hConvert16to32 reads gpGdiHandleInfo, initialized to(PVOID)-1;
+modern alias requirements and original-provider availability remain to be
+reconciled. Message fields are used by failure cleanup and DDE post rollback;
+calling those adapters is not alone proof that the fields must remain.
+Continue complete-chain/source-failure evidence before closing the four
+remaining decisions. P2 delivered totals remain7files/13points; local P3
+restorations are not included as delivered. Including local changes, reviewed
+census reduction is19points/3918lines, versus delivered14/3914.
+### P3 walias.h whole-file conclusion
+
+Four residual points now have source/runtime evidence; two are restored.
+The actual x86 GDI32 exports GdiQueryTable but it returns NULL; the original
+16-byte ENTRYWOW roundtrip faults c0000005. The earlier absent-export rationale
+is false and has been corrected in both ledgers. Exact probe log:
+build/t485-s11/p3/gdi-original-probe.log. Message status distinguishes HWND0
+success; captured allocation keys survive partial conversions and DDE post
+failure (existing complete-body failure evidence and original alias authority).
+The four residuals remain owner decisions, not approved unchanged diffs.
+Whole-file census10/18 ->5/14; original DEBUG error retained. Build runner5420
+started for runtime4. Final line/source checks,publication,tests and delivery
+remain pending. Source-reviewed8/48 files,19/452 points:7 delivered restores,
+2 local restores,10 residuals (6 delivered),433 unreviewed. Cumulative reduction
+including local P3 is19/3918; delivered reduction14/3914. Next:wcall32.c.
+P3 line verification found the post-include anchor must be20, not21.
+Corrected before final acceptance:178 original mapped lines now match.
+Runtime4 build/publication passed but is superseded;runtime5 final rebuild
+runner12396 started. Tests must use runtime5, not the earlier package.
+
+### P3 final verification and owner rule update
+
+Final runtime5 cached build/dual publication PASS;26 hashes verified against
+its manifest. Pure LF restoration after build does not change preprocessing.
+Source audit maps178 original retained lines exactly, DEBUG exclusion intact.
+GDI alias fixture PASS. COPYDATA59,filter14,queue18 cases pass with zero errors;
+actual Win16 generic-call test PASS on runtime5. The old COPYDATA fixture lacked
+XP cStackAlloc16, used two-argument FindPWW and an empty stackfree16 macro.
+It now projects original XP StackFree16 unchanged through the existing source
+projection helper; no copied stack algorithm or product adjustment. The class
+lookup double fails if reached outside this fixture's deliberately null-window
+lookup scope. Earlier failure logs are retained; final test-result PASS supersedes.
+
+Eight files/19 frozen points final-verified:9 restored,10 owner-review residuals,
+433 unreviewed. Current reviewed-file census54/3989 ->35/71, net-19/-3918.
+P3 reduces5points/4lines (10/18 ->5/14). Commit/push pending.
+The owner now requires full five-step delivery at every S closure; this is
+updated in EXECUTION,CURRENT,and the T485 plan. Ordinary P targeted cadence
+continues; S11 closure requires Full, not a deferral until S13.

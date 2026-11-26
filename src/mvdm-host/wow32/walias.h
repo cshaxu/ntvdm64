@@ -18,6 +18,7 @@ typedef HANDLE HAND32;
 #include "wspool.h"
 #include "wowuserp.h"
 #include "compat/include/wow_gdi_alias.h"
+#line 20
 
 
 //
@@ -61,7 +62,6 @@ typedef struct _HDW {
 //
 
 #ifdef DEBUG
-#line 63
 #error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #else
 #line 79
@@ -69,7 +69,6 @@ typedef struct _HDW {
                                   ? ((PTDB)SEGPTR((htask16),0))->TDB_ThreadID \
                                   : 0)
 #endif
-#line 83
 
 #define HTASK32(htask16)           (Htask16toThreadID32(htask16))
 #define GETHTASK16(htask32)        (ThreadID32toHtask16((DWORD)htask32))
@@ -105,12 +104,10 @@ typedef struct _HDW {
 #define GDI32(h16)                 mvdm_wow_gdi_handle_to_native((HAND16)(h16))
 #define GDI16(h32)                 ((HAND16)mvdm_wow_gdi_handle_from_native((HANDLE)(h32)))
 
-#line 118
 #define HGDI16(hobj32)             GDI16((HAND32)(hobj32))
 
 #define HDC32(hdc16)               GDI32((HAND16)(hdc16))
 #define GETHDC16(hdc32)            GDI16((HAND32)(hdc32))
-#define FREEHDC16(hdc16)           mvdm_wow_gdi_handle_retire((HAND16)(hdc16))
 
 #define HFONT32(hobj16)            GDI32((HAND16)(hobj16))
 #define GETHFONT16(hobj32)         GDI16((HAND32)(hobj32))
@@ -135,7 +132,6 @@ typedef struct _HDW {
 
 #define HOBJ32(hobj16)             GDI32((HAND16)(hobj16))
 #define GETHOBJ16(hobj32)          GDI16((HAND32)(hobj32))
-#define FREEHOBJ16(hobj16)         mvdm_wow_gdi_handle_retire((HAND16)(hobj16))
 
 #define HDROP32(hobj16)            (HDROP)DropFilesHandler((HAND16)(hobj16), 0, HDROP_H16 | HDROP_ALLOCALIAS)
 #define GETHDROP16(hobj32)         (HAND16)DropFilesHandler(0, (HAND32)(hobj32), HDROP_H32 | HDROP_ALLOCALIAS)

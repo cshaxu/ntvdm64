@@ -12,6 +12,10 @@ foreach(pair IN ITEMS "walloc16|stackalloc16" "wdde|CopyDataAddNode"
   ntvdm_function_body(body "${original}/${file}.c" "${name}")
   string(APPEND bodies "${body}\n\n")
 endforeach()
+ntvdm_source_projection(copydata-stackfree.inc "${original}/walloc16.c"
+  "#ifdef DEBUG\nVOID FASTCALL StackFree16" "" "" FALSE)
+file(READ "${CMAKE_BINARY_DIR}/copydata-stackfree.inc" stackfree)
+string(APPEND bodies "${stackfree}\n\n")
 file(READ "${original}/wmsg16.c" text)
 string(REPLACE "\r\n" "\n" text "${text}")
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS "${original}/wmsg16.c")

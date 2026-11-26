@@ -31,7 +31,7 @@ ROI is qualitative: prevent actual corruption first, establish trustworthy exclu
 | S19 continuation | G076-G097, formerly planned S10. | Original scope retained. | Remaining WOW16 packages; reconcile all 159 original migration batches. |
 | S20 continuation | Package/capability closure, formerly planned S11. | Original scope retained. | Audio, LFN, Win95 localized PIF creation and separate restart-to-DOS lifecycle, coherent package, regression and rollback. |
 
-Repair S packets do not increment the 159-directory migration counter: it stays 39/159 until N004 delivers. N004 becomes 40/159 and still triggers the original Full cadence. S13 additionally requires Full irrespective of that counter. Existing G-series strict original-first policy remains unchanged.
+Repair S packets do not increment the 159-directory migration counter: it stays 39/159 until N004 delivers. N004 becomes 40/159 and still triggers the original Full cadence. Owner update 2026-11-26: every S closure additionally requires cached full build, dual publication, Full regression, commit and push irrespective of that counter. Ordinary P batches retain targeted tests. S13 retains its independent reconciliation responsibility. Existing G-series strict original-first policy remains unchanged.
 
 ## Exclusive whole-file ownership
 
