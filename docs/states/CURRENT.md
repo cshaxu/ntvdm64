@@ -33,15 +33,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S11 Ordered Progress
 
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
-[P12 receipt](../etc/evidence/t485-h-repair/s11-p12-result.json):30/48files,
-288/452points delivered:15restored,273residual owner-review,164unreviewed;
-two supplemental ABI decisions. Current48-file census753points/7093lines.
-Combined raw reduction127points/4670lines;P12 alone2/3. P11 coupled ABI
+[P13 receipt](../etc/evidence/t485-h-repair/s11-p13-result.json):31/48files,
+327/452points delivered:15restored,312residual owner-review,125unreviewed;
+two supplemental ABI decisions. Current48-file census750points/7092lines.
+Combined raw reduction130points/4671lines;P13 alone3/1. P11 coupled ABI
 normalized increment1point/2lines remains separately disclosed.
-Runtime15 cached build,dual26/26hash publication,fax135 and Full23/23 PASS.
-Win95 knownExitOne retained;both enhanced roundtrips pass all five markers.
-P12 delivered/pushed b65051565. Last Full:file30;next:file40 and S closure.
-P13 file31 wowhooks.c source-reviewed:31/48files,327/452points;15restored,312residual,125unreviewed. Current750/7092,cumulative raw130/4671. Runtime16 build,dual publication,message/COPYDATA and Product PASS;commit/push pending,delivered30/288 unchanged. [P13 receipt](../etc/evidence/t485-h-repair/s11-p13-result.json). Earlier P1-P7 linear-only line evidence must be
+Runtime16 cached build,dual26/26hash publication,message transaction191,
+COPYDATA and Product targeted verification PASS. P13 delivered/pushed
+e1824a049. Last Full:file30 P12 runtime15 passed23/23; next:file40
+and S closure. Win95 approved knownExitOne retained in that Full checkpoint.
+Next file32 wparam.c. Earlier P1-P7 linear-only line evidence must be
 rechecked with actual preprocessing before S11 closure.
 Migration39/159;S11 active.
 

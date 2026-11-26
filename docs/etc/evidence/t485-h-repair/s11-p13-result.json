@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P13",
-  "state": "final-verified-awaiting-commit-push",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime16",
   "reviewed_files": 31,
   "total_files": 48,
@@ -525,5 +525,6 @@
   },
   "full_checkpoint": "P12 file30 runtime15 passed23/23; no Full rerun P13; next file40/S closure",
   "coupled_abi_note": "Prior P11 normalized +1point/+2lines separately registered and unchanged.",
-  "line_followup": "Earlier P1-P7 actual preprocessing required before S11 closure."
+  "line_followup": "Earlier P1-P7 actual preprocessing required before S11 closure.",
+  "delivery_commit": "e1824a0499f8a7cfa7316b9d6142b79988dd3cf0"
 }

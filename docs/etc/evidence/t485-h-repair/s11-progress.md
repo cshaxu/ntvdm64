@@ -42,7 +42,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 28 | src/mvdm-host/wow32/wole2.c | 5 | P10 delivered 77e8752be |
 | 29 | src/mvdm-host/wow32/wow32.h | 1 | P11 delivered e5db62755 |
 | 30 | src/mvdm-host/wow32/wow32fax.c | 7 | P12 delivered b65051565 |
-| 31 | src/mvdm-host/wow32/wowhooks.c | 39 | P13 source-reviewed; delivery pending |
+| 31 | src/mvdm-host/wow32/wowhooks.c | 39 | P13 delivered e1824a049 |
 | 32 | src/mvdm-host/wow32/wparam.c | 4 | Pending |
 | 33 | src/mvdm-host/wow32/wsdata.c | 19 | Pending |
 | 34 | src/mvdm-host/wow32/wsext.c | 4 | Pending |
@@ -800,3 +800,7 @@ Last Full:file30. Next Full:file40 or S closure.
 P13 runtime16 cached build,dual13-image/26-hash publication,message transaction,
 COPYDATA and Product targeted verification PASS. [P13 receipt](s11-p13-result.json).
 31files/327points final-verified;commit/push pending,delivered30/288.
+
+P13 delivered/pushed e1824a0499f8a7cfa7316b9d6142b79988dd3cf0.31/48files,327/452points delivered:
+15restored,312residual,125unreviewed. Census750/7092,cumulative130/4671.
+Next file32 wparam.c. Last Full:file30;next:file40 or S closure.
