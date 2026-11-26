@@ -27,8 +27,8 @@ Full remains S13; original guest remains immutable.
 | 14 | softpc.new/base/video/ega_prts.c | 30 | Delivered d4c87dd1d |
 | 15 | softpc.new/base/video/ega_read.c | 7 | Delivered d4c87dd1d |
 | 16 | softpc.new/base/video/ega_vide.c | 308 | Delivered d4c87dd1d |
-| 17 | softpc.new/base/video/ega_writ.c | 5 | Not started |
-| 18 | softpc.new/base/video/egawrtm0.c | 20 | Not started |
+| 17 | softpc.new/base/video/ega_writ.c | 5 | Source reviewed; format delivery pending |
+| 18 | softpc.new/base/video/egawrtm0.c | 20 | Source reviewed; P6 delivery pending |
 | 19 | softpc.new/base/video/egwrtm12.c | 30 | Not started |
 | 20 | softpc.new/base/video/gfx_updt.c | 94 | Not started |
 | 21 | softpc.new/base/video/v7_ports.c | 17 | Not started |
@@ -340,3 +340,80 @@ pending. Full remains S13.
 P5 receipt:d4c87dd1d pushed to origin/main.16/30 reviewed/delivered;680/1060
 points reviewed,380 remain.522 restored/delivered,158 residuals,zero local
 restorations pending. Census815/42421 unchanged. Next ega_writ.c.
+
+## EGA write source review
+
+Seventeenth file:5 frozen points;4 original format restorations,one residual
+R02804. Fixed XP source hash verified. ev_glue.c actual fill_word_ev_glue
+usesIU16,not the original declaration IU8;setWritePointers returnsvoid.
+Retain these two declaration corrections. MEM_HANDLERS fill slot is
+unprototyped,so this review does not claim every actual call truncates its
+value. No new executable algorithm.
+
+RestoreLF/original whitespace and remove redundant#line343/727.357 matched
+original non-directive lines have exact logical positions;16 exclusion
+bodies unchanged. Whitespace/#line-stripped bytes identical. Metrics
+1/1200 ->55/122 (+54/-1078). Cumulative869/41343 versus201/102845
+(+668/-61502).17/30 reviewed,685/1060 points reviewed,375 remain;522
+restored/delivered,4 local format restorations pending,159 residuals;16
+files delivered. Next egawrtm0.c.
+
+The earlier sevid019 block-copy concern is not closed by this audit:
+Glue_writes still contains move_byte/word_fwd_ev_glue,which dispatch selected
+C-VID move providers. No claim that the generated block-copy path is globally
+unreachable. Existing CCPU SAS move fixture success has its own scope.
+The previously recorded odd-target block-copy boundary remains separate
+from these declaration/format changes.
+
+## Mode0 entry investigation
+
+Eighteenth ordered file egawrtm0.c:20 frozen points,current1/2597 non-error
+diff. No source edit yet.14 format candidates;four CHAIN2 arithmetic points
+and two addedCPU40 table-framework points need final disposition.
+Actual caller evidence:ega_writ.c selects ega_copy_b_write/ega_copy_w_write
+or ega_mode0_chn_b_write into bios_ch2_* pointers. These scalar helpers are
+not globally unused simply because C-VID owns normal CPU writes.
+The original mode0_copy_handlers/mode0_gen_handlers initialized tables remain
+a separate question:their current zero-storage replacement is not proved
+necessary just by dynamic C-VID selection. Next compare selected WRT_POINTERS
+ABI and original initializer providers before deciding restoration.
+Do not count this file or any of its20 points reviewed/delivered yet.
+
+## Mode0 source review
+
+Eighteenth file20 points:14 format and2 original-table restorations;4
+CHAIN2 scalar residuals. WRT_POINTERS fields match original prototypes;all
+initializer targets exist in the same original unit. ega_writ.c selects
+legacy handler addresses but CPU40 dispatches SetWritePointers instead of
+installing their fields. Thus dynamic EVID selection is not evidence that
+the original initialized tables must be removed. Restore XP266--318 and
+remove the extra CPU40 zero-table/non-CPU40#error framework. This restores
+previously replaced original code;all14 original exclusion bodies remain.
+
+Four scalar differences stay:ega_writ.c still sets BIOS copy/generic byte
+and word callbacks. Originalcompact addressing sends guest offset2 to
+backing4;CPU40 plane layout requires8. Odd word offset1 writes1/8 rather
+than1/4. Existing legacy fill/move algorithms are not asserted repaired by
+these scalar changes. No new layout or function added.
+
+RestoreLF/original whitespace;remove redundant#line427/472/1090.948
+matching original non-directive lines have exact logical positions.
+Metrics1/2597 ->39/54 (+38/-2543). S10 total907/38800 against201/102845
+(+706/-64045).18/30 reviewed,705/1060 points reviewed,355 remain;522
+restored/delivered,20 local restorations pending,163 residuals;16 delivered.
+This original-table restoration is substantive and triggers P6 delivery of
+the complete egawrtm0.c plus accumulated ega_writ.c changes.
+
+P6 owned cached build/publication PID5564 started2026-11-26T13:48:22+01:00;
+command and host recorded in build/t485-s10/p6/run.json. Final diff review
+confirms original table declarations/initializers restored without moving
+algorithms or adding providers. Targeted selection:actual C-VID fixture,
+MEM/NTVDMD lifecycle and real NESticle menu/Escape. Full remains S13.
+
+P6 final verification: cached full build and dual publication passed;13
+images/26 hashes match runtime6. Test PID24268 completed actual C-VID
+providers/CHAIN2/SAS assertions,real MEM/NTVDMD lifecycle and NESticle
+rendered menu plus Escape hide/restore. Governance and links passed.
+Final source hashes are in build/t485-s10/p6/source-review.json.18 files
+final-verified;20 local restorations await this commit/push. Full remains
+S13;no Windows desktop or legacy block-copy boundary closure is claimed.

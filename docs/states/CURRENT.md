@@ -32,13 +32,13 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S10 Ordered Progress
 
-[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):16/30 reviewed and
-delivered;680/1060 points reviewed,380 remain. P5 d4c87dd1d pushed to origin/main.
-522 restored/delivered;158 evidenced residuals pending owner decisions;zero
-local restorations pending. Corrected census201/102845 ->815/42421 (+614/-60424).
-P5 cached build,dual publication(26 hashes),C-VID/live MEM/NTVDMD/NESticle
-targeted tests and documentation gates passed. Evidence build/t485-s10/p5.
-Next ega_writ.c. Migration39/159;Full remains S13.
+[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):18/30 reviewed;
+705/1060 points reviewed,355 remain.16 files delivered through P5 d4c87dd1d.
+P6 restores original mode0 initialized tables and accumulated formats.
+522 restored/delivered;20 local restorations pending;163 evidenced residuals.
+Corrected census201/102845 ->907/38800 (+706/-64045).
+P6 cached build, dual publication (26 hashes) and targeted tests passed; commit/push pending. Next egwrtm12.c.
+Migration39/159;Full remains S13.
 
 ## S9 Closure Record
 

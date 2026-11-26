@@ -27,7 +27,7 @@ SUBMODULE NAME		: write mode 0
 
 SOURCE FILE NAME	: ega_write_mode0.c
 
-PURPOSE			: purpose of this submodule 
+PURPOSE			: purpose of this submodule
 
 SccsID = "@(#)ega_wrtm0.c	1.31 11/01/94 Copyright Insignia Solutions Ltd."
 		
@@ -60,7 +60,7 @@ SccsID = "@(#)ega_wrtm0.c	1.31 11/01/94 Copyright Insignia Solutions Ltd."
 -------------------------------------------------------------------------
 [1.2 DATATYPES FOR [1.1] (if not basic C types)]
 
-	STRUCTURES/TYPEDEFS/ENUMS: 
+	STRUCTURES/TYPEDEFS/ENUMS:
 		
 -------------------------------------------------------------------------
 [1.3 INTERMODULE IMPORTS]
@@ -96,9 +96,9 @@ SIGNALS ISSUED	  :	list any signals sent if relevant (else omit)
 =========================================================================
 PROCEDURE	  : 	
 
-PURPOSE		  : 
+PURPOSE		  :
 		
-PARAMETERS	   
+PARAMETERS	
 
 	name	  : 	describe contents, and legal values
 			for output parameters, indicate by "(o/p)"
@@ -151,11 +151,11 @@ IMPORT VOID fill_both_bytes IPT3( IU16, data, IU16 *, dest, ULONG, len );
 
 /* [3.1.2 DECLARATIONS]                                                 */
 
-/* [3.2 INTERMODULE EXPORTS]						*/ 
+/* [3.2 INTERMODULE EXPORTS]						*/
 
 
 /*
-5.MODULE INTERNALS   :   (not visible externally, global internally)]     
+5.MODULE INTERNALS   :   (not visible externally, global internally)]
 
 [5.1 LOCAL DECLARATIONS]						*/
 
@@ -217,13 +217,59 @@ typedef	union {
 #line 265
 #else
 #line 266
-#if defined(CPU_40_STYLE)
-WRT_POINTERS mode0_copy_handlers, mode0_gen_handlers;
-#else
-#line 266
-#error Excluded unsupported non-CPU40 writer-table profile
-#endif
-#line 319
+VOID  ega_copy_b_write(ULONG, ULONG);
+VOID  ega_copy_w_write(ULONG, ULONG);
+VOID  ega_copy_b_fill(ULONG, ULONG, ULONG);
+VOID  ega_copy_w_fill(ULONG, ULONG, ULONG);
+VOID  ega_copy_b_move_fwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
+VOID  ega_copy_b_move_bwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
+VOID  ega_copy_w_move_fwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
+VOID  ega_copy_w_move_bwd   IPT4(ULONG,  offset, ULONG, eas, ULONG, count, ULONG, src_flag );
+			
+
+VOID  ega_mode0_chn_b_write(ULONG, ULONG);
+VOID  ega_mode0_chn_w_write(ULONG, ULONG);
+VOID  ega_mode0_chn_b_fill(ULONG, ULONG, ULONG);
+VOID  ega_mode0_chn_w_fill(ULONG, ULONG, ULONG);
+VOID  ega_mode0_chn_b_move_fwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
+VOID  ega_mode0_chn_b_move_bwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
+VOID  ega_mode0_chn_w_move_fwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
+VOID  ega_mode0_chn_w_move_bwd   IPT4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag );
+
+
+WRT_POINTERS mode0_copy_handlers =
+{
+      ega_copy_b_write,
+      ega_copy_w_write
+
+#ifndef	NO_STRING_OPERATIONS
+	  ,
+      ega_copy_b_fill,
+      ega_copy_w_fill,
+      ega_copy_b_move_fwd,
+      ega_copy_b_move_bwd,
+      ega_copy_w_move_fwd,
+      ega_copy_w_move_bwd,
+
+#endif	/* NO_STRING_OPERATIONS */
+};
+
+WRT_POINTERS mode0_gen_handlers =
+{
+      ega_mode0_chn_b_write,
+      ega_mode0_chn_w_write
+
+#ifndef	NO_STRING_OPERATIONS
+	  ,
+      ega_mode0_chn_b_fill,
+      ega_mode0_chn_w_fill,
+      ega_mode0_chn_b_move_fwd,
+      ega_mode0_chn_b_move_bwd,
+      ega_mode0_chn_w_move_fwd,
+      ega_mode0_chn_w_move_bwd,
+
+#endif	/* NO_STRING_OPERATIONS */
+};
 #endif /* A_VID */
 #line 320
 
@@ -337,7 +383,6 @@ VOID
 ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 {
     ULONG lsb;
-#line 427
     USHORT *planes;
 
 	note_entrance0("ega_copy_w_fill");
@@ -385,7 +430,6 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
     }
 }
 
-#line 472
 LOCAL VOID
 ega_copy_move IFN6(UTINY *, dst, UTINY *, eas, ULONG, count, ULONG, src_flag,
 	ULONG, w, IBOOL, forward )
@@ -555,13 +599,13 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 		if( getVideoplane_enable() & 2 )
 		{
 			/*
-			 * check if set/reset function enable for this plane 
+			 * check if set/reset function enable for this plane
 			 */
 
 			if( EGA_CPU.sr_enable & 2 )
 			{
 				value = *((UTINY *) &EGA_CPU.sr_value + 1);
-				value = do_logicals( value, get_latch1 ); 
+				value = do_logicals( value, get_latch1 );
 				EGA_plane01[offset] = (byte) value;
 			}
 			else
@@ -584,7 +628,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 		if( getVideoplane_enable() & 8 )
 		{
 			/*
-			 * check if set/reset function enable for this plane 
+			 * check if set/reset function enable for this plane
 			 */
 
 			if( EGA_CPU.sr_enable & 8 )
@@ -616,7 +660,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 		{
 
 			/*
-			 * check if set/reset function enable for this plane 
+			 * check if set/reset function enable for this plane
 			 */
 
 			if(( EGA_CPU.sr_enable & 1 ))
@@ -646,7 +690,7 @@ ega_mode0_chn_b_write IFN2(ULONG, value, ULONG, offset )
 		{
 
 			/*
-			 * check if set/reset function enable for this plane 
+			 * check if set/reset function enable for this plane
 			 */
 
 			if(( EGA_CPU.sr_enable & 4 ))
@@ -1011,7 +1055,6 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	}
 }
 
-#line 1090
 LOCAL VOID
 ega_mode0_chn_move_ram_src IFN5(UTINY *, eas, LONG, count, UTINY *, ead,
 	UTINY *, EGA_plane, ULONG, plane )
@@ -1050,7 +1093,7 @@ ega_mode0_chn_move_ram_src IFN5(UTINY *, eas, LONG, count, UTINY *, ead,
 	offset |= lsb;
 
 	/*
-	 * check if set/reset function enable for this plane 
+	 * check if set/reset function enable for this plane
 	 */
 
 	if( EGA_CPU.sr_enable & ( 1 << plane ))
@@ -1136,7 +1179,7 @@ ega_mode0_chn_move_vid_src IFN7(UTINY *, eas, LONG, count, UTINY *, ead,
 	source = &EGA_plane[src_offset] + (w << 2);
 
 	/*
-	 * check if set/reset function enable for this plane 
+	 * check if set/reset function enable for this plane
 	 */
 
 	if( EGA_CPU.sr_enable & ( 1 << plane ))
@@ -1162,7 +1205,7 @@ ega_mode0_chn_move_vid_src IFN7(UTINY *, eas, LONG, count, UTINY *, ead,
 			scratch += srcinc;
 
 			valsrc = *source;
-			source += inc; 
+			source += inc;
 
 			/*
 			 * set/reset not enabled so here we go

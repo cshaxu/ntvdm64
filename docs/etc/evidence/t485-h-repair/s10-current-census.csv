@@ -15,8 +15,8 @@ src/mvdm-host/softpc.new/base/video/cga.c,5822d1a00,1,2532,54,70,19,04bc179325ed
 src/mvdm-host/softpc.new/base/video/ega_prts.c,5822d1a00,1,5944,93,93,22,1dc0e8edbdc918e4fcb71560bdd8fd1b8fa90d34ec9e43fee7004dd5dc1417c9,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/ega_read.c,5822d1a00,1,1545,76,173,25,aedefba355f2ce1a97012eb93e0ed25adda92a6c78a850a1de0090edbadcbd48,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/ega_vide.c,5822d1a00,1,5005,117,134,42,5ca34e0d540b0c686e9ed15fd6ad1e2c2b71d32076ab5b9480b04c2c27c87c6c,measured-not-audit-status
-src/mvdm-host/softpc.new/base/video/ega_writ.c,5822d1a00,1,1200,1,1200,16,929ffe2bec1a9d483943a420eba12b2565e0d83f10ab68ee0edc5af2dc9db204,measured-not-audit-status
-src/mvdm-host/softpc.new/base/video/egawrtm0.c,5822d1a00,1,2597,1,2597,14,a0468dd4f185ff0bbd415c21aab0b9f1c87ca92c22e451c7a3dd71bfde455b82,measured-not-audit-status
+src/mvdm-host/softpc.new/base/video/ega_writ.c,5822d1a00,1,1200,55,122,16,126843dadbf562e19c2faf4304059aaca244f426ea0dec47e5fe3c7ec917f502,measured-not-audit-status
+src/mvdm-host/softpc.new/base/video/egawrtm0.c,5822d1a00,1,2597,39,54,14,0be71a1589132ca8302ecb36284d7ddbf646dbe48f5150a7bf3207784427a167,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/egwrtm12.c,5822d1a00,1,2385,1,2385,11,1f73486f89761bf0498b2be76d8dcbf797fab91ec9814b1e613cb88a4e3355cc,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/gfx_updt.c,5822d1a00,1,9080,1,9080,70,e1168a624a829e284d2e5c4e6b2d474542dfa4382d5990b553906bcf213d1858,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/v7_ports.c,5822d1a00,1,1562,1,1562,1,9b50e59efa523c3b318c385451c3e805f90b53718449563afad8a08ba0423e76,measured-not-audit-status

@@ -26,8 +26,8 @@ SUBMODULE NAME		: ega_write
 SOURCE FILE NAME	: ega_write.c
 
 PURPOSE			: control the way writes to EGA memory is emulated.
-			  This module looks at the state of the EGA when it is changed 
-			  via writes to the EGA registers, and works out what to do about it. 
+			  This module looks at the state of the EGA when it is changed
+			  via writes to the EGA registers, and works out what to do about it.
 		
 		
 SccsID = @(#)ega_write.c	1.40 12/15/95 Copyright Insignia Solutions Ltd.
@@ -67,10 +67,10 @@ SccsID = @(#)ega_write.c	1.40 12/15/95 Copyright Insignia Solutions Ltd.
 extern WRT_POINTERS mode0_gen_handlers, mode0_copy_handlers;
 extern WRT_POINTERS mode1_handlers, mode2_handlers;
 
-/* [3.2 INTERMODULE EXPORTS]						*/ 
+/* [3.2 INTERMODULE EXPORTS]						*/
 
 /*
-5.MODULE INTERNALS   :   (not visible externally, global internally)]     
+5.MODULE INTERNALS   :   (not visible externally, global internally)]
 
 [5.1 LOCAL DECLARATIONS]						*/
 #ifdef SEGMENTATION
@@ -97,7 +97,7 @@ GLOBAL UTINY Last_v7_fg_bg;			/* used by {ev}ga_mask_register_changed() */
 
 
 
-
+	
 
 
 
@@ -184,7 +184,6 @@ IMPORT VOID ega_mode2_chn_w_write(ULONG, ULONG);
 
 /* Handy array to extract all 4 plane values in one go. */
 
-#line 343
 ULONG sr_lookup[16] =
 {
 #ifdef LITTLEND
@@ -540,7 +539,6 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #endif /* VGG */
 #line 726
 
-#line 727
 		default:
 			assert1( NO, "Bad write mode %d\n", EGA_CPU.write_mode );
 			break;
@@ -554,7 +552,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #endif /* VGG */
 #line 737
 
-	if(( EGA_CPU.saved_mode_chain != mode_and_chain ) 
+	if(( EGA_CPU.saved_mode_chain != mode_and_chain )
 		|| ( EGA_CPU.saved_state != state )
 #ifdef V7VGA
 		|| ( Last_v7_fg_bg != fg_bg_control)
