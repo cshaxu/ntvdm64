@@ -22,7 +22,6 @@
 #if DEVL
 // int 21h func names
 // index off of function number in ah
-#line 25
 char *scname[] = {
      "Terminate Program",
      "Read Kbd with Echo",
@@ -598,13 +597,10 @@ void SignalSegmentNotice(WORD  wType,
     *lpstr = '\0';
     dw += 2;
 
-#line 530
 #if DBG
-#line 531
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 536
 #endif
-#line 537
+#line 607
 
     // Send it to the debugger
     DbgSegmentNotice(wType, wModuleSeg, wLoadSeg, wNewSeg, lpModuleName, ach, dwImageLen);
@@ -644,12 +640,10 @@ VOID demDiskReset (VOID)
 {
     extern WORD * pFDAccess;        // defined in SoftPC.
 
-#line 611
     HostFloppyReset();
     HostFdiskReset();
     *pFDAccess = 0;
 
-#line 615
     return;
 }
 
@@ -661,7 +655,6 @@ VOID demDiskReset (VOID)
  * Exit  - None (VDM Is killed)
  */
 
-#line 626
 VOID demExitVDM ( VOID )
 {
     RcErrorDialogBox(ED_BADSYSFILE,"config.nt",NULL);

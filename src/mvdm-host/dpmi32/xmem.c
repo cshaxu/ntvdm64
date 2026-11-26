@@ -70,9 +70,9 @@ Return Value:
 
     if (!NT_SUCCESS(Status)) {
 #if DBG
-#line 93
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 75
         return NULL;
     }
     XmemBlock = malloc(sizeof(MEM_DPMI));
@@ -129,9 +129,9 @@ Return Value:
 
     if (!NT_SUCCESS(Status)) {
 #if DBG
-#line 162
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 133
         return FALSE;
     }
 
@@ -244,9 +244,9 @@ Return Value:
 
     if (!NT_SUCCESS(Status)) {
 #if DBG
-#line 213
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 247
         return FALSE;
     }
 
@@ -294,12 +294,10 @@ Return Value:
                 );
 
             if (!NT_SUCCESS(Status)) {
-#line 271
 #if DBG
-#line 272
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 274
+#line 297
                 return;
             }
             p2 = p1->Next;
@@ -349,12 +347,10 @@ Return Value:
             );
 
         if (!NT_SUCCESS(Status)) {
-#line 323
 #if DBG
-#line 324
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 326
+#line 349
             return;
         }
         p2 = p1->Next;

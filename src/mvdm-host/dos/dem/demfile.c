@@ -22,12 +22,10 @@
 
 extern PDOSSF pSFTHead;
 
-#line 25
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL LoadVdmRedir(VOID);
 extern BOOL IsVdmRedirLoaded(VOID);
 
-#line 29
 BOOL
 IsNamedPipeName(
     IN LPSTR Name
@@ -158,19 +156,15 @@ LPSTR   dupFileName;
 DWORD   dwFileSize,dwSizeHigh;
 SECURITY_ATTRIBUTES sa;
 
-#line 159
     if (getAL()){
         demPrintMsg (MSG_EAS);
         return;
     }
 
-#line 164
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getSI());
 
 #if DBG
-#line 167
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 171
 #endif
 #line 172
 
@@ -557,11 +551,9 @@ DWORD   retval;
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getDX());
 
 #if DBG
-#line 421
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 425
 #endif
-#line 426
+#line 561
 
     if (retval = demFileDelete(lpFileName)){
         demClientError(INVALID_HANDLE_VALUE, *lpFileName);
@@ -606,11 +598,9 @@ DWORD   dwAttr;
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getDX());
 
 #if DBG
-#line 470
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 474
 #endif
-#line 475
+#line 610
 
 
     if(getAL() == 0){
@@ -683,11 +673,9 @@ LPSTR   lpSrc,lpDst;
     lpDst = (LPSTR) GetVDMAddr (getES(),getDI());
 
 #if DBG
-#line 533
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 537
 #endif
-#line 538
+#line 687
 
     // DOS rename fails accross drives with 11h error code
     // This following check is OK even for UNC names and SUBST drives.
@@ -750,14 +738,11 @@ USHORT  uErr;
 DWORD   dwDesiredAccess;
 SECURITY_ATTRIBUTES sa;
 CHAR    cFOTName[MAX_PATH];
-#line 600
 BOOL    ttfOnce,IsFirst;
 DWORD   dwLastError;
 
 
-#line 604
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getSI());
-#line 605
     dwAttr = (DWORD)getCX();
 
     // Here is some code stolen from DOS_Create (create.asm) for handling the
@@ -796,11 +781,9 @@ DWORD   dwLastError;
 
 
 #if DBG
-#line 627
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 631
 #endif
-#line 632
+#line 797
 
     dwDesiredAccess = GENERIC_WRITE | GENERIC_READ;
     sa.nLength = sizeof (SECURITY_ATTRIBUTES);
@@ -976,11 +959,9 @@ CHAR    szFileName[MAX_PATH];
     sprintf(szFileName, "%c:%sNUL", cDRV, lpFileName);
 
 #if DBG
-#line 807
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 811
 #endif
-#line 812
+#line 977
 
 
     // If path exists then we always can open NUL file in this directory,
@@ -1079,7 +1060,6 @@ PBYTE*      ppJFT;
 PDOSPDB pPDBFlat;
 PBYTE   pJFT;
 PDOSSFT pSFT;
-#line 910
 USHORT  usSFN;
 WORD    JFTLength;
 SHORT   hDosHandle;
@@ -1092,7 +1072,6 @@ SHORT   hDosHandle;
     // Get the JFT.
     //
 
-#line 922
     pPDBFlat = (PDOSPDB) Sim32GetVDMPointer (pPDB, 0, 0);
     
     if ( NULL == pPDBFlat ) {
@@ -1127,7 +1106,6 @@ SHORT   hDosHandle;
     //
 
     if (!(pSFT = GetFreeSftEntry(pSFTHead, &usSFN))) {
-#line 948
         return (- ERROR_TOO_MANY_OPEN_FILES);
     }
 
@@ -1173,7 +1151,6 @@ SHORT   hDosHandle;
  *
  */
 
-#line 993
 VOID VDDAssociateNtHandle (pSFT,hFile,wAccess)
 PDOSSFT     pSFT;
 HANDLE      hFile;
@@ -1224,7 +1201,6 @@ HANDLE  ntHandle;
         pPDB = (ULONG) (*pusCurrentPDB) << 16;
     }
 
-#line 1043
     ntHandle = VDDRetrieveNtHandle(pPDB,hFile,(PVOID *)&pSFT,&pJFT);
     if (!ntHandle) {
         return(FALSE);
@@ -1296,7 +1272,6 @@ ULONG   ulSFLink;
     }
 
     // Get flat pointer to PDB
-#line 1114
     pPDBFlat = (PDOSPDB) Sim32GetVDMPointer(pPDB, 0, 0);
 
     // Check that handle is within JFT
@@ -1317,7 +1292,6 @@ ULONG   ulSFLink;
     pSfFlat =  pSFTHead;
 
     // Find the right SFT group
-#line 1134
     while (usSFN >= (usSFTCount = pSfFlat->SFCount)){
         usSFN = usSFN - usSFTCount;
         ulSFLink = pSfFlat->SFLink;

@@ -12,13 +12,10 @@
 #include <dbgsvc.h>
 
 
-#line 14
 #if DBG
-#line 15
 #error Excluded unsupported DBG profile
-#line 92
 #endif   // DBG
-#line 93
+#line 96
 
 DWORD  fShowSVCMsg = 0;
 ULONG  CurrentISVC;
@@ -121,15 +118,12 @@ BOOL DemDispatch (ULONG iSvc)
     DBGTRACE(VDMTR_TYPE_DEM + DEM_EVENT_DISPATCH, 0, iSvc);
 
     if (iSvc >= SVC_DEMLASTSVC){
-#line 202
 #if DBG
-#line 203
 #error Excluded unsupported DBG profile
-#line 205
 #endif
-#line 206
-	setCF(1);
-	return FALSE;
+#line 202
+        setCF(1);
+        return FALSE;
     }
 
     if (pHardErrPacket) {
@@ -155,7 +149,6 @@ VOID demNotYetImplemented (VOID)
     return;
 }
 
-#line 241
 VOID demSetV86KernelAddr (VOID)
 {
     // Here debugger callout has to be made for DOSKRNL symbols

@@ -54,18 +54,14 @@ ULONG iSvc;
     demRestoreHardErrInfo ();
     iSvc = CurrentISVC;
 
-#line 57
 #if DBG
-#line 58
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif // DBG
 #line 75
 
     (apfnSVC [iSvc])();
 
-#line 78
 #if DBG
-#line 79
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 88
@@ -128,12 +124,10 @@ ULONG ulErrCode;
         && ulErrCode != ERROR_WRONG_DISK )
 #endif // !JAPAN
        {
-#line 139
 #if DBG
-#line 140
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 145
+#line 153
         if (bSetRegs) {
             setAX((USHORT)ulErrCode);
             }
@@ -156,12 +150,10 @@ ULONG ulErrCode;
         ulErrCode -= ERROR_WRITE_PROTECT;
         pHardErrPacket->vhe_HrdErrCode =  (UCHAR)ulErrCode;
 
-#line 167
 #if DBG
-#line 168
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 176
+#line 184
         // Save Away Information for possible retry operation
         demSaveHardErrInfo ();
 
