@@ -24,9 +24,9 @@ Full remains S13; original guest remains immutable.
 | 11 | softpc.new/base/keymouse/keyba.c | 44 | Delivered 99c8fc6b1 |
 | 12 | softpc.new/base/keymouse/keybd_io.c | 3 | Delivered 3a3ac1248 |
 | 13 | softpc.new/base/video/cga.c | 157 | Delivered 3a3ac1248 |
-| 14 | softpc.new/base/video/ega_prts.c | 30 | Source reviewed; format delivery pending |
-| 15 | softpc.new/base/video/ega_read.c | 7 | Source reviewed; format delivery pending |
-| 16 | softpc.new/base/video/ega_vide.c | 308 | Source reviewed; P5 delivery pending |
+| 14 | softpc.new/base/video/ega_prts.c | 30 | Delivered d4c87dd1d |
+| 15 | softpc.new/base/video/ega_read.c | 7 | Delivered d4c87dd1d |
+| 16 | softpc.new/base/video/ega_vide.c | 308 | Delivered d4c87dd1d |
 | 17 | softpc.new/base/video/ega_writ.c | 5 | Not started |
 | 18 | softpc.new/base/video/egawrtm0.c | 20 | Not started |
 | 19 | softpc.new/base/video/egwrtm12.c | 30 | Not started |
@@ -336,3 +336,7 @@ markers in build/t485-s10/p5;source-review.json contains final per-file hashes.
 No executable algorithm changed;historical V86 geometry evidence is not
 presented as a new Windows desktop test.16 files final-verified;commit/push
 pending. Full remains S13.
+
+P5 receipt:d4c87dd1d pushed to origin/main.16/30 reviewed/delivered;680/1060
+points reviewed,380 remain.522 restored/delivered,158 residuals,zero local
+restorations pending. Census815/42421 unchanged. Next ega_writ.c.
