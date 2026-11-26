@@ -834,3 +834,18 @@ P10 delivery receipt: e9c12cc5e committed and pushed to origin/main.
 38/41 files delivered, three remain; 414/437 points reviewed, 23 remain.
 253 restored register points delivered. Complete census 609/2917, cumulative
 -75/-29128. Governance/links passed. Next host/inc/cfpu_def.h.
+
+## P11: final headers and XMS
+
+[Whole-file review](s9-p11-final-headers-xms.md) completes source review of 41/41 files and 437/437 points. Three files await P11 delivery; 38 files and 253 fully restored frozen points are already delivered. All 23 residual points are registered in pending decisions. Batch 3/1559 ->34/99 (+31/-1460); complete census 684/32045 ->640/1457 (-44/-30588). Build/publication/tests pending.
+
+### P11 final verification
+
+Runtime11 cached full build, dual publication and 26/26 post-test hashes passed.
+x87 layout, CCPU FIST64 16 cases, XMS allocation 138 assertions, XMS move 8
+assertions, final-package live MEM/NTVDMD and rendered NESticle/Escape passed.
+All 41 files and 437 points source-reviewed and final-verified. Frozen-point
+partition: 253 restored plus 184 evidence-backed pending residuals, zero missing.
+The [final census](s9-p11-census.csv) is 640/1457 versus baseline 684/32045:
+44 fewer points and 30588 fewer diff lines. P11 commit/push pending; S9 closure
+follows the delivery receipt. No Full claim; S13 retains that gate.

@@ -1,0 +1,13 @@
+{
+  "before": {
+    "points": 1,
+    "lines": 519,
+    "excluded": 1
+  },
+  "after": {
+    "points": 7,
+    "lines": 38,
+    "excluded": 1
+  },
+  "selected_line_checks": 201
+}

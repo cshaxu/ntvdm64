@@ -1,0 +1,17 @@
+{
+  "before": {
+    "points": 1,
+    "lines": 661,
+    "excluded": 8
+  },
+  "after": {
+    "points": 11,
+    "lines": 15,
+    "excluded": 8
+  },
+  "errors_preserved": 8,
+  "line_checks_by_mouse_profile": [
+    143,
+    175
+  ]
+}

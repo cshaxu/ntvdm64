@@ -16,8 +16,8 @@
 
 #ifdef CPU_30_STYLE
 #error Excluded original conditional branch
-#line 112
 #else /* CPU_30_STYLE */
+#line 113
 
 /*
  * ============================================================================
@@ -38,7 +38,7 @@ typedef union
         half_word low;
 #line 129
         half_word high;
-#line 134
+#line 131
         word pad;
         } byte;
     struct
@@ -73,8 +73,8 @@ typedef union
 
 #ifdef A2CPU
 #error Excluded unsupported original A2CPU register carrier
-#line 178
 #endif A2CPU
+#line 179
 
 /*
  * ============================================================================
@@ -86,8 +86,8 @@ extern word m_s_w;
 #ifndef EGATEST
 #ifdef A2CPU
 #error Excluded unsupported original A2CPU register carrier
-#line 193
 #endif A2CPU
+#line 194
 
 
 /*  common READ functions  */
@@ -144,8 +144,8 @@ extern word m_s_w;
 
 #ifdef A2CPU
 #error Excluded unsupported original A2CPU register carrier
-#line 255
 #endif A2CPU
+#line 256
 
 /*  common WRITE functions  */
 #define  setAX(val)     ((*setAX_func) (val))
@@ -200,8 +200,8 @@ extern word m_s_w;
 
 #ifdef A2CPU
 #error Excluded unsupported original A2CPU register carrier
-#line 314
 #endif A2CPU
+#line 315
 #endif EGATEST
 
 
@@ -264,8 +264,8 @@ extern word             (*getIOPL_func) ();
 
 #ifdef A2CPU
 #error Excluded unsupported original A2CPU register carrier
-#line 382
 #endif A2CPU
+#line 383
 
 
 
@@ -322,8 +322,8 @@ extern void             (*setIOPL_func) ();
 
 #ifdef A2CPU
 #error Excluded unsupported original A2CPU register carrier
-#line 443
 #endif A2CPU
+#line 444
 
 
 /*  HOST_SIMULATE function  */
@@ -338,7 +338,7 @@ extern void             (*host_simulate_func) ();
  */
 #ifdef A2CPU
 #error Excluded unsupported original A2CPU register carrier
-#line 504
 #endif A2CPU
+#line 505
 
 #endif /* CPU_30_STYLE */

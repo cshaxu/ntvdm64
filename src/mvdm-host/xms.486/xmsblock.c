@@ -211,7 +211,6 @@ ULONG MoveInfoAddress = ((ULONG)getSS() << 4) + getBP();
     // but XMS spec wants memcpy behaviour.
 
 #ifdef i386
-#line 201
 #error DIVERGENCE MVDM-HOST-DIV-594: historical i386 XMS path is not selected
 #else
 #line 203

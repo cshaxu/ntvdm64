@@ -85,9 +85,7 @@ FP80SE	sign_exp;
  * determined by whether the host is bigendian or littleendian.
  */
 
-#line 68
 #ifdef BIGEND
-#line 69
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif	/* BIGEND */
 #line 96
@@ -182,7 +180,6 @@ FP80SE	sign_exp;
 #define INV_CUBRTHUGE  1.7718548704178434e-103
 
 #else	/* !NTVDM */
-#line 187
 #error Unsupported excluded original configuration
 #endif	/* !NTVDM */
 #line 200
