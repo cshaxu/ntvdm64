@@ -68,8 +68,8 @@
  *		     another interrupt is requested. If the chip is in Automatic
  *		     EOI mode then all of the interrupts will be generated in
  *		     one burst.
- *		  
- *                5a) A further enhancement is provided such that a delay 
+ *		
+ *                5a) A further enhancement is provided such that a delay
  *                   (a number of Intel instructions) can be requested before
  *		     the interrupt takes effect. This delay applies to every
  *		     interrupt if more than one is requested.
@@ -88,7 +88,7 @@
  *		  When an unsupported mode is set, it is remembered for
  *		  diagnostic purposes, even though it is not acted upon.
  *
- * Modifications for Revision 2.0 : 
+ * Modifications for Revision 2.0 :
  *                1) Restrictions 1 and 6 are lifted. The PC-AT contains two
  *                   8259A interrupt controllers. The first (ICA 0) is in Master
  *                   mode, and the second (ICA 1) is in slave mode, and its
@@ -130,13 +130,11 @@
  */
 
 #ifdef SCCSID
-#line 133
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 135
 
 #ifdef SEGMENTATION
-#line 137
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 144
@@ -145,7 +143,6 @@
  * define hooked_irets as parts of their configuration
  */
 #if !defined(NTVDM)
-#line 149
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 153
@@ -162,9 +159,7 @@
 #include "yoda.h"
 #include "debug.h"
 
-#line 166
 #ifdef NOVELL
-#line 167
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif /* NOVELL */
 #line 169
@@ -176,7 +171,6 @@
  */
 
 #if !defined(NTVDM)
-#line 177
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 186
@@ -186,7 +180,6 @@
 #endif
 
 #ifndef PROD
-#line 192
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 194
@@ -231,7 +224,6 @@ VDMVIRTUALICA VirtualIca[2];
  */
 
 #ifdef MONITOR
-#line 235
 #error Excluded original conditional branch
 #endif
 #line 238
@@ -274,13 +266,11 @@ void
 
 
 #else   /* !NTVDM */
-#line 277
 #error Excluded unsupported non-NTVDM alternative
 #endif  /* NTVDM */
 #line 304
 
 #ifdef HOOKED_IRETS		/* iret hook related variables */
-#line 306
 #error Unsupported excluded original configuration
 #endif /* HOOKED_IRETS */
 #line 310
@@ -342,14 +332,11 @@ void
 IS32 ica_accept IPT1(IU32, adapter);
 
 #ifdef HOOKED_IRETS
-#line 368
 #error Unsupported excluded original configuration
 #endif
 #line 370
 
-#line 371
 #if !defined (NTVDM)
-#line 372
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 384
@@ -401,7 +388,6 @@ ica_eoi IFN3(IU32, adapter, IS32 *, line, IBOOL, rotate)
     }
 
 #ifndef PROD
-#line 432
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 438
@@ -453,16 +439,13 @@ ica_scan_irr IFN1(IU32, adapter)
 #if defined (NTVDM)
 
 #ifdef MONITOR
-#line 486
 #error Excluded unsupported monitor PIC interrupt ownership
 #else
 #line 488
     iret_hook_mask = (IU8)(DelayIrqLine >> (adapter << 3));
 #endif
-#line 490
 
 #else  /* !NTVDM */
-#line 492
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 495
@@ -553,16 +536,14 @@ IS32 ica_accept IFN1(IU32, adapter)
 	 * on line 7, but this is not neccessary and can cause problems
 	 * for some programs (eg DOOM with a mouse)
 	 */
-#line 582
 #if 0
-#line 583
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 585
 
 	/* Skip spurious ints. These are any that are caused by clearing an
 	 * int when the cpu has already registered that there is an int to
-	 * service. 
+	 * service.
 	 *
 	 * This used to be "#if defined(NTVDM) && defined(MONITOR)"
 	 * and tried to remove the performance impact on the monitor.
@@ -574,9 +555,7 @@ IS32 ica_accept IFN1(IU32, adapter)
     {
         line1 &= 0x07;
 
-#line 600
 #if defined(CPU_40_STYLE) && !defined (NTVDM)
-#line 601
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* CPU_40_STYLE */
 #line 611
@@ -602,7 +581,6 @@ IS32 ica_accept IFN1(IU32, adapter)
     }
 
 #ifndef PROD
-#line 633
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 639
@@ -627,7 +605,6 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
     if (asp->ica_cpu_int)
     {
 #ifndef PROD
-#line 660
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 666
@@ -646,7 +623,6 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
     if (asp->ica_master)		/* If ICA is Master */
     {
 #ifndef PROD
-#line 681
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 687
@@ -656,16 +632,13 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
          */
 
 #ifndef CPU_40_STYLE	/* No globals in the 4.0 I/F! */
-#line 693
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #line 695
 
         host_set_hw_int();
 
-#line 698
 #ifdef A2CPU
-#line 699
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif
 #line 701
@@ -679,7 +652,6 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
     else
     {				/* If ICA is Slave */
 #ifndef PROD
-#line 711
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 717
@@ -706,15 +678,14 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
 
 /*
  * ============================================================================
- * External functions 
+ * External functions
  * ============================================================================
  */
 void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
 {
 #ifndef PROD
-#line 746
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* nPROD */    
+#endif /* nPROD */
 #line 748
     IU32 adapter       = adapter_for_port(port);
     ADAPTER_STATE *asp = &adapter_state[adapter];
@@ -724,7 +695,6 @@ void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
      */
 
 #ifndef PROD
-#line 756
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 763
@@ -751,7 +721,6 @@ void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
 	host_ica_unlock();			/* free lock if supported */
 
 #ifndef PROD
-#line 786
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 792
@@ -770,7 +739,6 @@ void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
 	    {
 		*value = asp->ica_isr;
 #ifndef PROD
-#line 807
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */		
 #line 809
@@ -779,7 +747,6 @@ void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
 	    {
 		*value = asp->ica_irr;
 #ifndef PROD
-#line 814
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */		
 #line 816
@@ -788,14 +755,12 @@ void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
 	{
 	    *value = asp->ica_imr;
 #ifndef PROD
-#line 821
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* nPROD */	    
+#endif /* nPROD */	
 #line 823
 	}
 
 #ifndef PROD
-#line 826
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 832
@@ -841,16 +806,13 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
      */
 
 #if defined(NEC_98)
-#line 874
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 876
     if ((port & 0xfffe) != ICA_PORT_0)
 #endif   //NEC_98
-#line 878
     {
 #ifndef PROD
-#line 880
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 886
@@ -862,13 +824,11 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
      */
 
 #if defined(NEC_98)
-#line 894
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 896
-    if (((port & 1) == 0) && (value & 0x10))		/****  ICW1  ****/
+    if (((port & 1) == 0) && (value & 0x10))            /****  ICW1  ****/
 #endif   //NEC_98
-#line 898
     {
 	IU8 canceled;
 	host_ica_lock();
@@ -890,14 +850,13 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 
 	asp->ica_cpu_int = FALSE;	/* No CPU INT outstanding	*/
 	sequence[adapter] = 2;		/* Prepare for the rest of the sequence	*/
-
 	for (i = 0; i < 8; ++i)
 	    if (canceled & (1 << i))
 		host_EOI_hook(i + (adapter << 3), -1);
 	host_ica_unlock();
-#line 916
+#line 915
+
 #ifndef PROD
-#line 917
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 920
@@ -921,17 +880,14 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
     {
     case  0:			/* We are expecting an OCW	*/
 #if defined(NEC_98)
-#line 940
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 942
-	if (port & 1)		/* Odd address -> OCW1		*/
+        if (port & 1)           /* Odd address -> OCW1          */
 #endif   //NEC_98
-#line 944
 	{
 	    asp->ica_imr = value & 0xff;
 #ifndef PROD
-#line 947
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 953
@@ -962,7 +918,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 0:		/* Clear rotate in auto EOI	*/
 		asp->ica_mode &= ~ICA_RAEOI;
 #ifndef PROD
-#line 980
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 983
@@ -971,7 +926,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 1:		/* Non-specific EOI		*/
 		line = -1;	/* -1 -> highest priority	*/
 #ifndef PROD
-#line 988
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 991
@@ -984,7 +938,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 3:		/* Specific EOI command		*/
 		line  = value & 0x07;
 #ifndef PROD
-#line 1000
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1006
@@ -994,7 +947,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 4:		/* Set rotate in auto EOI mode	*/
 		asp->ica_mode |= ICA_RAEOI;
 #ifndef PROD
-#line 1012
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1015
@@ -1003,7 +955,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 5:		/* Rotate on non-specific EOI	*/
 		line = -1;	/* -1 -> non specific		*/
 #ifndef PROD
-#line 1020
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1023
@@ -1013,7 +964,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 6:		/* Set priority			*/
 		asp->ica_hipri = (value + 1) & 0x07;
 #ifndef PROD
-#line 1029
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1035
@@ -1022,7 +972,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 7:		/* Rotate on specific EOI	*/
 		line  = value & 0x07;
 #ifndef PROD
-#line 1040
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1046
@@ -1037,7 +986,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    {
 		asp->ica_mode = (asp->ica_mode & ~ICA_SMM) | (((IU16)value << 4) & ICA_SMM);
 #ifndef PROD
-#line 1057
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1063
@@ -1047,7 +995,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    {
 		asp->ica_mode |= ICA_POLL;
 #ifndef PROD
-#line 1069
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1072
@@ -1057,7 +1004,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    {
 		asp->ica_mode = (asp->ica_mode & ~ICA_RIS) | (((IU16)value << 11) & ICA_RIS);
 #ifndef PROD
-#line 1078
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1084
@@ -1068,16 +1014,13 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 /**/
     case  2:			/* We are expecting a ICW2		*/
 #if defined(NEC_98)
-#line 1091
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 1093
-	if (!(port & 1))	/* Should be odd address, so check	*/
+        if (!(port & 1))        /* Should be odd address, so check      */
 #endif   //NEC_98
-#line 1095
 	{
 #ifndef PROD
-#line 1097
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1101
@@ -1086,7 +1029,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	{
 	    asp->ica_base = value & ICA_BASE_MASK;
 #ifndef PROD
-#line 1106
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1112
@@ -1103,16 +1045,13 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 /**/
     case  3:			/* We are expecting a ICW3		*/
 #if defined(NEC_98)
-#line 1125
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 1127
-	if (!(port & 1))	/* Should be odd address, so check	*/
+        if (!(port & 1))        /* Should be odd address, so check      */
 #endif   //NEC_98
-#line 1129
 	{
 #ifndef PROD
-#line 1131
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1135
@@ -1121,7 +1060,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	{
 	    asp->ica_ssr = value & 0xff;
 #ifndef PROD
-#line 1140
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1146
@@ -1135,16 +1073,13 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 /**/
     case  4:			/* We are expecting a ICW4		*/
 #if defined(NEC_98)
-#line 1156
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 1158
-	if (!(port & 1))	/* Should be odd address, so check	*/
+        if (!(port & 1))        /* Should be odd address, so check      */
 #endif   //NEC_98
-#line 1160
 	{
 #ifndef PROD
-#line 1162
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1166
@@ -1154,7 +1089,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    asp->ica_mode = (asp->ica_mode & ~ICA_ICW4_MASK)
 		           | (((IU16)value << 4) &  ICA_ICW4_MASK);
 #ifndef PROD
-#line 1172
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1187
@@ -1164,7 +1098,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 
     case -1:		/* Power on but so far uninitialised	*/
 #ifndef PROD
-#line 1193
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1197
@@ -1172,7 +1105,6 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 
     default:		/* This cannot happen			*/;
 #ifndef PROD
-#line 1201
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1203
@@ -1199,7 +1131,6 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
 #endif	/* CPU_40_STYLE */
 
 #ifndef PROD
-#line 1251
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1276
@@ -1217,7 +1148,6 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
     host_ica_lock();
 
 #ifndef PROD
-#line 1290
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1297
@@ -1237,7 +1167,6 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
     asp->ica_count[line_no] += call_count;	/* Add the further requests */
 
 #ifndef PROD
-#line 1313
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1320
@@ -1257,14 +1186,11 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
      */
 
 #ifndef NTVDM
-#line 1336
 #error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #endif
 #line 1352
 
-#line 1353
 #if defined (CPU_40_STYLE) && !defined(NTVDM)
-#line 1354
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* CPU_40_STYLE */
 #line 1372
@@ -1318,7 +1244,6 @@ void SWPIC_clear_int IFN2(IU32, adapter, IU32, line_no)
     }
 
 #ifndef PROD
-#line 1422
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1428
@@ -1344,7 +1269,6 @@ void ica_hw_interrupt_cancel IFN2(IU32, adapter, IU32, line_no)
 GLOBAL IS32
 ica_intack IFN1(IU32 *, hook_address)
 #else
-#line 1450
 #error Unsupported excluded original configuration
 #endif	/* HOOKED_IRETS */
 #line 1453
@@ -1395,7 +1319,6 @@ ica_intack IFN1(IU32 *, hook_address)
 #endif	/* CPU_40_STYLE */
 
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-#line 1500
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif  /* CPU_40_STYLE */
 #line 1512
@@ -1407,9 +1330,7 @@ ica_intack IFN1(IU32 *, hook_address)
     {
 	asp = &adapter_state[ICA_MASTER];	/* also excuse to use asp */
 
-#line 1520
 #if defined(CPU_40_STYLE) &&  !defined(NTVDM)
-#line 1521
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* CPU_40_STYLE */
 #line 1532
@@ -1421,17 +1342,14 @@ ica_intack IFN1(IU32 *, hook_address)
 #if defined (NTVDM)
 
 #ifdef MONITOR
-#line 1540
 #error Excluded unsupported monitor PIC IRET address
 #else
 #line 1545
     *hook_address = 0;
 #endif
-#line 1547
 
 
 #else
-#line 1550
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* !NTVDM */
 #line 1573
@@ -1443,7 +1361,6 @@ ica_intack IFN1(IU32 *, hook_address)
 
 
 #ifndef NTVDM
-#line 1581
 #error Excluded unsupported non-NTVDM PIC profile
 #endif  /* !NTVDM */
 #line 1811
@@ -1453,36 +1370,31 @@ ica_intack IFN1(IU32 *, hook_address)
 #if defined(NTVDM)
 
 #ifdef MONITOR
-#line 1817
 #error Excluded unsupported monitor PIC IRET hook
 #else
+#line 1848
 
-#line 1849
 /*
  *  obsolete, to be removed... but the current ntvdm emulator libs ref
  * */
 
-#line 1853
 GLOBAL void
 ica_iret_hook_called IFN1(IU32, abs_line)
 {
     return; // do nothing!
 }
 #endif
-#line 1859
 
 #endif   /* NTVDM */
 
 
 #ifdef HOOKED_IRETS
-#line 1864
 #error Unsupported excluded original configuration
 #endif	/* HOOKED_IRETS */
 #line 2041
 
 
 #ifdef SEGMENTATION
-#line 2044
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 2051
@@ -1490,7 +1402,6 @@ ica_iret_hook_called IFN1(IU32, abs_line)
 #define INIT0_ICW1	(IU8)0x11	
 #define INIT0_ICW2	(IU8)0x08	
 #if defined(NEC_98)
-#line 2055
 #error Unsupported NEC PC-98 configuration
 #else     //NEC_98
 #line 2060
@@ -1501,11 +1412,10 @@ ica_iret_hook_called IFN1(IU32, abs_line)
 #define INIT0_OCW1      (IU8)0x0
 
 #else
-#line 2067
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 2076
 #endif   //NEC_98
-#line 2077
 
 void ica0_post IFN0()
 {
@@ -1522,32 +1432,28 @@ void ica0_init IFN0()
 
     /*
      * Set up the IO chip select logic for adapter 0. (Master).
-     */  
+     */
 
 #ifdef NTVDM
     io_define_inb(ICA0_ADAPTOR, ica_inb);
     io_define_outb(ICA0_ADAPTOR, ica_outb);
 #else
-#line 2099
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 2102
 
 #if defined(NEC_98)
-#line 2104
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 2106
     for(i = ICA0_PORT_START; i <= ICA0_PORT_END; i++)
 #endif   //NEC_98
-#line 2108
         io_connect_port(i, ICA0_ADAPTOR, IO_READ_WRITE);
 
     adapter_state[ICA_MASTER].ica_master = TRUE;
 
 
 #ifndef NTVDM
-#line 2114
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* !NTVDM */
 #line 2133
@@ -1557,7 +1463,6 @@ void ica0_init IFN0()
 
 #define INIT1_ICW1	(IU8)0x11	
 #if defined(NEC_98)
-#line 2139
 #error Unsupported NEC PC-98 configuration
 #else     //NEC_98
 #line 2145
@@ -1572,14 +1477,13 @@ void ica0_init IFN0()
 /* POST leaves some int lines masked out (reserved lines and RTC) */
 /* see the comment on POST setting mask bits for master ica */
 #elif ASPI
-#line 2156
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* ASPI */	
 #line 2158
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ASPI */
+#line 2160
 #endif   //NEC_98
-#line 2161
 
 
 
@@ -1599,31 +1503,27 @@ void ica1_init IFN0()
 
     /*
      * Set up the IO chip select logic for adapter 1. (Slave).
-     */  
+     */
 
 #ifdef NTVDM
     io_define_inb(ICA1_ADAPTOR, ica_inb);
     io_define_outb(ICA1_ADAPTOR, ica_outb);
 #else
-#line 2186
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 2189
 
 #if defined(NEC_98)
-#line 2191
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 2193
     for(i = ICA1_PORT_START; i <= ICA1_PORT_END; i++)
 #endif   //NEC_98
-#line 2195
         io_connect_port(i, ICA1_ADAPTOR, IO_READ_WRITE);
 
     adapter_state[ICA_SLAVE].ica_master = FALSE;
 
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-#line 2200
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* CPU_40_STYLE */
 #line 2206
@@ -1631,9 +1531,7 @@ void ica1_init IFN0()
 }
 
 
-#line 2210
 #if !defined(PROD)
-#line 2211
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 2317

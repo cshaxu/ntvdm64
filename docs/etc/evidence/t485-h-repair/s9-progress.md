@@ -751,3 +751,39 @@ P8 delivery receipt: abe34fd2a committed and pushed to origin/main.
 35/41 reviewed files are delivered, six remain; 208/437 points reviewed.
 52 restored register points delivered. Governance and links passed.
 Next ordered file: base/support/terminat.c; S9 and T485 remain active.
+
+## P9: support/terminat.c and system/ica.c
+
+terminat.c non-error 1/279 ->16/19 (+15/-260); ica.c 1/2924 ->86/96
+(+85/-2828). Batch 2/3203 ->102/115 (+100/-3088). Original LF and whitespace
+restored; previously merged formatting hunks expose residual line anchors.
+All 14/83 error exclusions remain. Original logical-line checks: terminate 48,
+PIC 860/871 across hook configurations. Full functional tokens are unchanged.
+
+Terminate retains the prototype consumed by original SbTerminate and the
+pre-device-cleanup authorization. compat's exit owner closes admission, joins
+producers and retires frontend/wake state before devices are destroyed;
+waiting until host_applClose would be too late on this path. The later close
+also serves other exits. Existing lifecycle fixture explicitly exercises both.
+PIC retains ICW1 cancellation of saved IRR/ISR under the existing lock and the
+existing EOI -1 sentinel; keyboard/PIC fixture covers cancellation versus early
+EOI. Public call_ica_hw_interrupt maps to its stdcall wrapper in exports.cmake;
+internal PIC keeps its original calling convention. No replacement algorithm.
+
+37/41 files reviewed, 35 delivered, four unreviewed. 240/437 register points
+reviewed, 197 remain. Twenty-seven format points restored locally; earlier 52
+delivered. S9 cumulative +177/-27125 from fc9492342; 40 measured files 521/2829.
+Unchanged timer.c still excluded from absolute total pending conditional mapping.
+P9 build, dual publication, related tests and delivery pending. Next timer.c.
+Evidence build/t485-s9/p9; residual functional decisions remain pending.
+
+### P9 final verification
+
+Runtime9 cached full build and dual publication passed; post-test hashes 26/26.
+Existing lifecycle tests natural-exit, natural-loss, natural-console and
+console-exit-request passed, including same-thread recursion reporting once.
+Real production keyboard/PIC provider ownership was checked by the existing
+runner; 90 assertions passed. Final-package MEM/NTVDMD and actual NESticle
+menu plus Escape hide/restore passed. Original guest and winnt.zip unchanged.
+37/41 files final-verified; S9 restored register points now 79. Five residual
+functional points remain owner decisions. P9 commit/push pending.
