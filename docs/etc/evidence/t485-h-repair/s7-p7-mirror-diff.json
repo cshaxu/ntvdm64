@@ -1,0 +1,282 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/video.c",
+  "baseline_commit": "32b505e94",
+  "original_blob": "fe51b40385ee122c42bef3edf8ef9c97bd6eb478",
+  "source_sha256": "a87c9c8e6f6e419891ae7b4f10ff2e4a596222cab328a212339c5589af390f23",
+  "before": {
+    "points": 39,
+    "lines": 121,
+    "added": 79,
+    "deleted": 42
+  },
+  "after": {
+    "points": 16,
+    "lines": 31,
+    "added": 16,
+    "deleted": 15
+  },
+  "restored_branches": [
+    {
+      "original_guard": 2258,
+      "original_software_body": [
+        2261,
+        2270
+      ],
+      "old_mask": {
+        "original": [
+          2261,
+          2270
+        ],
+        "current": [
+          2298,
+          2300
+        ]
+      }
+    },
+    {
+      "original_guard": 2372,
+      "original_software_body": [
+        2375,
+        2384
+      ],
+      "old_mask": {
+        "original": [
+          2375,
+          2384
+        ],
+        "current": [
+          2426,
+          2428
+        ]
+      }
+    },
+    {
+      "original_guard": 2929,
+      "original_software_body": [
+        2932,
+        2941
+      ],
+      "old_mask": {
+        "original": [
+          2932,
+          2941
+        ],
+        "current": [
+          3012,
+          3014
+        ]
+      }
+    }
+  ],
+  "verification": "runtime10 cached build and 13-image dual hashes passed; real WINMINE, Win3.1 standard/enhanced, Win95 strict same-window fullscreen roundtrip and NESticle passed. Win95 retains approved knownExitOne; normalExit=false. Three restored software bodies have identical selected tokens.",
+  "residuals": [
+    {
+      "id": "S7-P7-V01",
+      "xp_line": 177,
+      "added": 1,
+      "deleted": 0,
+      "original": "",
+      "candidate": "#define vd_text_mode() (vd_mode_table[sas_hw_at_no_check(vd_video_mode)])",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V02",
+      "xp_line": 1223,
+      "added": 1,
+      "deleted": 1,
+      "original": "    source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + video_pc_low_regen;",
+      "candidate": "    source = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + vd_text_mode().start_addr;",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V03",
+      "xp_line": 1476,
+      "added": 1,
+      "deleted": 1,
+      "original": "\tsource = sas_w_at_no_check(VID_ADDR)+vd_page_offset(l_col, t_row) + video_pc_low_regen;",
+      "candidate": "\tsource = sas_w_at_no_check(VID_ADDR)+vd_page_offset(l_col, t_row) + vd_text_mode().start_addr;",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V04",
+      "xp_line": 1554,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t    if((dest + 2*colsdiff) > video_pc_high_regen+1)",
+      "candidate": "\t    if((dest + 2*colsdiff) > vd_text_mode().end_addr+1)",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V05",
+      "xp_line": 1556,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t\tcolsdiff = (int)((video_pc_high_regen+1-dest)/2);",
+      "candidate": "\t\tcolsdiff = (int)((vd_text_mode().end_addr+1-dest)/2);",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V06",
+      "xp_line": 1722,
+      "added": 1,
+      "deleted": 1,
+      "original": "    boolean\t\tscreen_updated;",
+      "candidate": "    boolean\t\tscreen_updated = FALSE;",
+      "group": "definite-initialization",
+      "necessity": "sensible_text_scroll_down assigns screen_updated only when source >= get_screen_base(), then reads it in the subsequent copy loop even when that condition is false.",
+      "minimality": "Initialize the existing local FALSE; no alternative scroll algorithm.",
+      "evidence": "video.c sensible_text_scroll_down; original XP line 1722 and following conditional assignment/read",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V07",
+      "xp_line": 1741,
+      "added": 1,
+      "deleted": 1,
+      "original": "\tsource = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + video_pc_low_regen;",
+      "candidate": "\tsource = sas_w_at_no_check(VID_ADDR) + vd_page_offset(l_col, t_row) + vd_text_mode().start_addr;",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V08",
+      "xp_line": 1972,
+      "added": 1,
+      "deleted": 1,
+      "original": "\tsource = sas_w_at_no_check(VID_ADDR)+vd_page_offset(l_col, t_row)+video_pc_low_regen;\t/* top left */",
+      "candidate": "\tsource = sas_w_at_no_check(VID_ADDR)+vd_page_offset(l_col, t_row)+vd_text_mode().start_addr;\t/* top left */",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V09",
+      "xp_line": 2098,
+      "added": 1,
+      "deleted": 1,
+      "original": "\tcpos = video_pc_low_regen + vd_cursor_offset(getBH());",
+      "candidate": "\tcpos = vd_text_mode().start_addr + vd_cursor_offset(getBH());",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V10",
+      "xp_line": 2258,
+      "added": 1,
+      "deleted": 1,
+      "original": "#if ( defined(NTVDM) && defined(MONITOR) ) || defined(GISP_SVGA)/* No Ega planes... */",
+      "candidate": "#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined(GISP_SVGA)/* No Ega planes... */",
+      "group": "software-provider-selection",
+      "necessity": "Product profile_6 enables NTVDM/MONITOR for host interfaces but uses CCPU/SAS guest memory. The original monitor raw pointer is not a host-mapped guest address.",
+      "minimality": "One predicate on the original guard selects its original software else; the original raw-pointer arm remains excluded. No copied software body, helper or new state.",
+      "evidence": "tools/build/worker/profiles.cmake profile_6; original XP software else; src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V11",
+      "xp_line": 2267,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t\t\t\tsas_storew(video_pc_low_regen + cpos, (getBL() << 8) | getAL());",
+      "candidate": "\t\t\t\tsas_storew(vd_text_mode().start_addr + cpos, (getBL() << 8) | getAL());",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V12",
+      "xp_line": 2372,
+      "added": 1,
+      "deleted": 1,
+      "original": "#if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )",
+      "candidate": "#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )",
+      "group": "software-provider-selection",
+      "necessity": "Product profile_6 enables NTVDM/MONITOR for host interfaces but uses CCPU/SAS guest memory. The original monitor raw pointer is not a host-mapped guest address.",
+      "minimality": "One predicate on the original guard selects its original software else; the original raw-pointer arm remains excluded. No copied software body, helper or new state.",
+      "evidence": "tools/build/worker/profiles.cmake profile_6; original XP software else; src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V13",
+      "xp_line": 2381,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t\t\t\tsas_store(video_pc_low_regen + cpos, getAL());",
+      "candidate": "\t\t\t\tsas_store(vd_text_mode().start_addr + cpos, getAL());",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V14",
+      "xp_line": 2929,
+      "added": 1,
+      "deleted": 1,
+      "original": "#if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )",
+      "candidate": "#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )",
+      "group": "software-provider-selection",
+      "necessity": "Product profile_6 enables NTVDM/MONITOR for host interfaces but uses CCPU/SAS guest memory. The original monitor raw pointer is not a host-mapped guest address.",
+      "minimality": "One predicate on the original guard selects its original software else; the original raw-pointer arm remains excluded. No copied software body, helper or new state.",
+      "evidence": "tools/build/worker/profiles.cmake profile_6; original XP software else; src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V15",
+      "xp_line": 2938,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t\t\t\tsas_store(video_pc_low_regen + ch_addr, ch);",
+      "candidate": "\t\t\t\tsas_store(vd_text_mode().start_addr + ch_addr, ch);",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    },
+    {
+      "id": "S7-P7-V16",
+      "xp_line": 3107,
+      "added": 1,
+      "deleted": 1,
+      "original": "\t\tsas_load( video_pc_low_regen + sas_w_at_no_check(VID_ADDR)+vd_page_offset(vd_cursor_col,vd_cursor_row) + 1, &attrib);",
+      "candidate": "\t\tsas_load( vd_text_mode().start_addr + sas_w_at_no_check(VID_ADDR)+vd_page_offset(vd_cursor_col,vd_cursor_row) + 1, &attrib);",
+      "group": "bios-text-address",
+      "necessity": "video_pc_low/high_regen are also updated for adapter/extended graphics modes in ega_vide.c. A scheduled guest DOS text BIOS needs its BDA-selected text aperture, not the host adapter cached aperture; SAS performs the guest mapping.",
+      "minimality": "Use the original mode table through one expression macro only at text BIOS address sites. Keep original CHAIN2 provider and V86 dispatch; do not duplicate a per-VM video model.",
+      "evidence": "video.c vd_text_mode and text BIOS callers; ega_vide.c mode-table assignment to video_pc_low/high_regen; final Win3.1/Win95 DOS-window roundtrip",
+      "status": "final-verified-residual-owner-review"
+    }
+  ]
+}

@@ -512,3 +512,52 @@ reduction is 737 points/6757 lines. Including S6 it is 738 points/6758 lines.
 Next file is softpc.new/base/video/video.c. This P includes fixture interface
 repairs only, not weakened assertions or guest edits. Commit/push completes
 this delivery; no S7 closure or N004 admission is implied.
+
+## P7 video.c whole-file candidate
+
+Entry is 39 non-error points/121 lines against XP blob
+fe51b40385ee122c42bef3edf8ef9c97bd6eb478. Thirty format-line restorations remove
+26 format points. Three write sites had copied the original software SAS /
+CHAIN2 else body into the monitor arm and excluded the actual original else.
+The complete candidate restores those original else bodies in place, uses
+existing MVDM_STANDALONE_SAS_VIDEO to select them, and keeps the unsupported
+raw hardware-pointer arms as errors. No new helper or duplicated algorithm.
+
+BIOS text addressing still uses the original BDA mode table, because global
+video_pc_low/high_regen also follow adapter mode updates in ega_vide.c and
+cannot identify the independently scheduled guest text view. SAS performs
+actual translation; no new per-VM video store is added. The scroll-down
+screen_updated initialization remains: source below get_screen_base skips
+its original assignment but subsequent branches read it.
+
+Whole-file local candidate: 16 points/31 lines, reducing 23/90. The three new
+separated guard/address pairs are original-layout restoration, not added
+algorithms; both file metrics remain below entry. Original excluded mappings
+are updated for the selected else bodies and original hardware-pointer arms.
+Final diagnostic map has 601 anchors; production source is copied only after
+this whole-file review. No build or runtime pass claimed yet.
+
+S7 delivered remains 10/20 files and 737 points/6757 lines reduced. P7 local
+candidate would bring it to 11/20 and 760 points/6847 lines after delivery.
+
+P7 runtime10 cached build, dual publication, actual WINMINE, Win3.1 standard and enhanced gates passed; Win95/DOS4GW are still running. software-equivalence.json confirms all three restored original software bodies match the previously selected tokens. The first static comparison matched the second occurrence of a repeated guard for the third site; the comparison was corrected to ordered locations, with no product change. No final P7 delivery claimed yet.
+
+### P7 final verification and delivery checkpoint
+
+Runtime10 cached full build, dual publication and final 13-image hashes passed.
+Actual WINMINE, Win3.1 standard/enhanced and Win95 desktop gates passed; both
+enhanced systems provide all five window/fullscreen/same-window witnesses.
+NESticle menu pixels and Escape hide/restore passed. Win95 normalExit=false
+and knownExitOne=true retain the approved historical exit boundary.
+
+Final non-error mirror result is 39 points/121 lines -> 16 points/31 lines,
+reducing 23 points/90 lines. Twenty-six historical format points are restored;
+thirteen historical semantic points reconcile to the sixteen explicit final
+residuals, not thirteen restored items. The original software else bodies are
+selected in their original positions. The raw pointer arms remain excluded;
+all three selected software bodies have equal tokens to the previous code.
+Residual necessity and minimality are registered without implied approval.
+
+S7 now has 11/20 final-verified files, nine remaining, cumulative reduction
+760 points/6847 lines. Including S6: 761 points/6848 lines. Next is
+softpc.new/host/inc/host_def.h. Commit/push completes P7; S7 is still active.

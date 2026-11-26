@@ -23,3 +23,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S7 ordered repair progress](s7-progress.md) separates local review, pending verification and delivery.
 
 [S7 P6 mirror residuals](s7-p6-mirror-diff.json) records all 47 current mouse differences, upstream anchors, sizes and provider evidence; runtime acceptance remains separate.
+
+[S7 P7 video residuals](s7-p7-mirror-diff.json) records the restored original software branches and sixteen remaining differences; validation state is explicit.
