@@ -36,7 +36,7 @@ Full remains S13; original guest remains immutable.
 | 23 | softpc.new/base/video/vga_mode.c | 9 | Delivered b42c5c586 |
 | 24 | softpc.new/base/video/vga_prts.c | 24 | Delivered b42c5c586 |
 | 25 | softpc.new/host/src/nt_cga.c | 10 | Delivered b42c5c586 |
-| 26 | softpc.new/host/src/nt_event.c | 50 | Source reviewed; P10 pending |
+| 26 | softpc.new/host/src/nt_event.c | 50 | Delivered P10 d5e12bf22 |
 | 27 | softpc.new/host/src/nt_graph.c | 91 | Not started |
 | 28 | softpc.new/host/src/nt_hosts.c | 1 | Not started |
 | 29 | softpc.new/host/src/nt_mouse.c | 23 | Not started |
@@ -609,3 +609,7 @@ P10 final verification: cached full build PASS; dual publication independently
 verified 26/26 hashes. C-VID, controller/PIC (90 assertions), keyboard contracts,
 actual MEM/NTVDMD and NESticle menu/Escape all PASS on runtime10.
 Documentation governance and relative links PASS. Commit/push pending; Full S13.
+
+P10 receipt: d5e12bf22 pushed to origin/main.26/30 reviewed and delivered;
+941/1060 points reviewed,119 remain.662 restored/delivered,279 residuals,
+zero local restorations pending. Census1592/12525 unchanged. Next nt_graph.c.
