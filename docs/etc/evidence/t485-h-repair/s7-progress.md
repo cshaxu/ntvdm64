@@ -596,3 +596,67 @@ hardware CpuH body is paired as excluded; changed selection guard is counted.
 S7 final-verified progress is 12/20 files, eight remaining, cumulative reduction
 760 points/6850 lines. Including S6: 761 points/6851 lines. Next file is
 softpc.new/host/src/copy_fnc.c. Commit/push completes P8; S7 remains active.
+
+## P9 copy_fnc.c completed local audit, batched delivery pending
+
+Entry and final non-error result: 1 point/2 lines; reduction 0/0. R03222 at
+XP119 remains necessary: RtlFillMemoryUlong takes bytes (RTL i386 movemem.asm),
+not ULONG elements. gfx_updt.c scroll/fill callers require the complete span;
+original_external_memory_test.c already covers 132 alignment/length cases.
+This is source/ABI evidence; that fixture was not rerun for this audit.
+
+Removed the residual l_addr assignment after #error in the original #if0
+body XP116-117. Its existing pair now covers the error only. Reconstructed
+17 diagnostic anchors against XP blob a7e4382df393cfb1dc607074646bcf4a49ec5cb9.
+No selected statement or byte-count algorithm changed. Per owner batching
+rule, this excluded-body/line-only cleanup does not trigger a standalone
+full build; it joins the next substantive complete-file delivery.
+
+Delivered remains 12/20 files and reduction 760 points/6850 lines. One more
+file is locally audited, awaiting batch delivery. Next local audit is
+softpc.new/host/src/nt_fulsc.c; do not count copy_fnc.c as delivered yet.
+
+## P9 nt_fulsc.c whole-file candidate (with copy_fnc.c)
+
+Entry: 102 non-error points/755 lines, XP blob
+f5841ae4619b212e1fa95cdb6f6f410ce40973b6. Complete candidate: 10 points/17 lines,
+reduction 92/738. Restore original formatting, NEC/JAPAN/KOREA guard nesting,
+and original regional toDosv declaration. Preserve error-only excluded bodies
+and original diagnostic mapping. CHAIN2 retains the original comment and
+indentation; only its stride differs. No new helper or runtime state.
+
+Both software presenters need screen/cursor updates; hardware WINDOWED guards
+cannot suppress that work. keybd_io.c calls getNtScreenState for the guest
+host-INT10 handshake; this shared query remains outside hardware-only arms.
+Height changes need glyph loading because recalc_text changes geometry, not
+font bytes. CHAIN2 uses eight backing bytes per text cell, requiring a stride
+of seven after the first byte advance, not three.
+
+The source-generation check initially used the hunk-start line for the stride
+statement; it failed before production modification. Unique original statement
+matching corrected that audit-script locator; product behavior did not change.
+
+Both files are complete before the cached build. Runtime12 targets actual WOW,
+Win3.1 standard/enhanced and Win95 strict Alt+Enter round trips, and NESticle.
+No result claimed yet. Delivered remains 12/20 and reduction 760/6850; local
+batch would bring it to 14/20 and 852 points/7588 lines after delivery.
+
+### P9 final verification and delivery checkpoint
+
+Runtime12 cached full build, dual publication and final 13-image hashes passed.
+Actual WINMINE, Win3.1 standard/enhanced and Win95 desktop gates passed. Both
+enhanced systems have five exact roundtrip witnesses: window input, fullscreen
+text, returned input, second fullscreen and same KVM window. NESticle pixels
+and Escape hide/restore passed. Win95 keeps the approved knownExitOne boundary;
+normalExit=false is not misreported as normal exit. No Full rerun claimed.
+
+copy_fnc.c remains 1 point/2 lines, reduction 0/0. Its #if0 residual statement
+and diagnostic mapping are clean. nt_fulsc.c is 102/755 -> 10/17, reduction
+92 points/738 lines. Its 300 diagnostic anchors preserve original mapping.
+All 103 historical IDs reconcile to the explicit final residual register;
+they are not all marked fully restored. Eleven final residuals remain in the
+pending decision list with provider evidence and minimality.
+
+S7 final-verified progress: 14/20 files, six remaining. Cumulative reduction
+852 points/7588 lines (including S6: 853/7589). Next ordered file is
+softpc.new/host/src/nt_sb.c. Commit/push completes P9; S7 remains active.

@@ -1,0 +1,171 @@
+{
+  "verification": "runtime12 cached full build, dual 13-image hash verification, actual WOW, Win3.1 standard/enhanced, Win95 strict same-window Alt+Enter roundtrips and NESticle menu/Escape passed. Win95 retains knownExitOne with normalExit=false; no Full claimed.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "before": {
+        "points": 1,
+        "lines": 2
+      },
+      "after": {
+        "points": 1,
+        "lines": 2
+      },
+      "original_blob": "a7e4382df393cfb1dc607074646bcf4a49ec5cb9",
+      "source_sha256": "0f8dc962f570cfb5ecd616f8680a8dffb93e505df3300ec0627b3fb517dbdd23",
+      "residuals": [
+        "HXP-R-03222"
+      ],
+      "change": "Only remove statement after #error in #if0 and correct original diagnostic lines; byte-count fix unchanged."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "before": {
+        "points": 102,
+        "lines": 755,
+        "added": 375,
+        "deleted": 380
+      },
+      "after": {
+        "points": 10,
+        "lines": 17,
+        "added": 10,
+        "deleted": 7
+      },
+      "original_blob": "f5841ae4619b212e1fa95cdb6f6f410ce40973b6",
+      "source_sha256": "6d1ae42c564af2fcf751c9a4af9e946f7de7f11ec7515b920052f16e4a9967be",
+      "residuals": [
+        {
+          "id": "S7-P9-F01",
+          "xp_line": 350,
+          "added": 0,
+          "deleted": 1,
+          "original": "        if (sc.ScreenState == WINDOWED)",
+          "candidate": "",
+          "group": "software-presenters",
+          "necessity": "Both Console text and KVM Window are software presenters. The original WINDOWED-only checks omit updates, console state reconciliation or cursor port writes while the other software presenter is active.",
+          "minimality": "Remove only each hardware-era presenter restriction; retain the original shared update and cursor implementation.",
+          "evidence": "nt_fulsc.c enableUpdates/calcScreenParams/cursor functions; software frontend route; final same-window Alt+Enter witnesses",
+          "status": "final-verified-residual-owner-review"
+        },
+        {
+          "id": "S7-P9-F02",
+          "xp_line": 721,
+          "added": 0,
+          "deleted": 1,
+          "original": "    if (sc.ScreenState == WINDOWED)",
+          "candidate": "",
+          "group": "software-presenters",
+          "necessity": "Both Console text and KVM Window are software presenters. The original WINDOWED-only checks omit updates, console state reconciliation or cursor port writes while the other software presenter is active.",
+          "minimality": "Remove only each hardware-era presenter restriction; retain the original shared update and cursor implementation.",
+          "evidence": "nt_fulsc.c enableUpdates/calcScreenParams/cursor functions; software frontend route; final same-window Alt+Enter witnesses",
+          "status": "final-verified-residual-owner-review"
+        },
+        {
+          "id": "S7-P9-F03",
+          "xp_line": 805,
+          "added": 0,
+          "deleted": 1,
+          "original": "    if (sc.ScreenState == WINDOWED)",
+          "candidate": "",
+          "group": "software-presenters",
+          "necessity": "Both Console text and KVM Window are software presenters. The original WINDOWED-only checks omit updates, console state reconciliation or cursor port writes while the other software presenter is active.",
+          "minimality": "Remove only each hardware-era presenter restriction; retain the original shared update and cursor implementation.",
+          "evidence": "nt_fulsc.c enableUpdates/calcScreenParams/cursor functions; software frontend route; final same-window Alt+Enter witnesses",
+          "status": "final-verified-residual-owner-review"
+        },
+        {
+          "id": "S7-P9-F04",
+          "xp_line": 823,
+          "added": 7,
+          "deleted": 0,
+          "original": "",
+          "candidate": "\tif (charHeight != get_char_height())\n\t{\n\t    extern void load_font(sys_addr, int, int, int, int);\n\t    load_font(charHeight == 8 ? EGA_CGDDOT :\n\t              charHeight == 14 ? EGA_CGMN : EGA_HIFONT,\n\t              256, 0, 0, charHeight);\n\t}",
+          "group": "font-geometry",
+          "necessity": "A changed text character height requires matching glyph rows. recalc_text updates geometry/BDA and does not load the required font bytes.",
+          "minimality": "Call existing load_font only when height changes, using existing BIOS fonts and geometry; no duplicate font bank or loader.",
+          "evidence": "src/mvdm-host/softpc.new/base/video/ega_vide.c load_font/recalc_text; calcScreenParams",
+          "status": "final-verified-residual-owner-review"
+        },
+        {
+          "id": "S7-P9-F05",
+          "xp_line": 2111,
+          "added": 1,
+          "deleted": 0,
+          "original": "",
+          "candidate": "#endif /* X86GFX */",
+          "group": "shared-screen-query",
+          "necessity": "keybd_io.c calls getNtScreenState for the guest host-INT10 handshake even in software mode; excluding the original getter with physical display functions removes its actual provider.",
+          "minimality": "Split the existing hardware-only arm around the unchanged original getter; no copied getter or new screen state.",
+          "evidence": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c useHostInt10; nt_fulsc.c getNtScreenState",
+          "status": "final-verified-residual-owner-review"
+        },
+        {
+          "id": "S7-P9-F06",
+          "xp_line": 2123,
+          "added": 1,
+          "deleted": 0,
+          "original": "",
+          "candidate": "#ifdef X86GFX",
+          "group": "shared-screen-query",
+          "necessity": "keybd_io.c calls getNtScreenState for the guest host-INT10 handshake even in software mode; excluding the original getter with physical display functions removes its actual provider.",
+          "minimality": "Split the existing hardware-only arm around the unchanged original getter; no copied getter or new screen state.",
+          "evidence": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c useHostInt10; nt_fulsc.c getNtScreenState",
+          "status": "final-verified-residual-owner-review"
+        },
+        {
+          "id": "S7-P9-F07",
+          "xp_line": 2891,
+          "added": 1,
+          "deleted": 1,
+          "original": "        to += 3;        // skipping interleaved font planes.",
+          "candidate": "        to += 7;        // skipping interleaved font planes.",
+          "group": "chain2-stride",
+          "necessity": "Selected CHAIN2 layout uses eight backing bytes per text cell; first byte advance plus seven reaches the next character. Four-byte spacing overwrites interleaved plane data.",
+          "minimality": "Keep original copy loop and comment, change only the stride constant.",
+          "evidence": "test/mvdm-host/cvidc_vector_binding_fixture.c; base/inc/gvi.h plane mapping; controls.json CHAIN2 evidence",
+          "status": "final-verified-residual-owner-review"
+        },
+        {
+          "id": "S7-P9-F08",
+          "xp_line": 3206,
+          "added": 0,
+          "deleted": 1,
+          "original": "    if (sc.ScreenState == WINDOWED)",
+          "candidate": "",
+          "group": "software-presenters",
+          "necessity": "Both Console text and KVM Window are software presenters. The original WINDOWED-only checks omit updates, console state reconciliation or cursor port writes while the other software presenter is active.",
+          "minimality": "Remove only each hardware-era presenter restriction; retain the original shared update and cursor implementation.",
+          "evidence": "nt_fulsc.c enableUpdates/calcScreenParams/cursor functions; software frontend route; final same-window Alt+Enter witnesses",
+          "status": "final-verified-residual-owner-review"
+        },
+        {
+          "id": "S7-P9-F09",
+          "xp_line": 3253,
+          "added": 0,
+          "deleted": 1,
+          "original": "    if (sc.ScreenState == WINDOWED)",
+          "candidate": "",
+          "group": "software-presenters",
+          "necessity": "Both Console text and KVM Window are software presenters. The original WINDOWED-only checks omit updates, console state reconciliation or cursor port writes while the other software presenter is active.",
+          "minimality": "Remove only each hardware-era presenter restriction; retain the original shared update and cursor implementation.",
+          "evidence": "nt_fulsc.c enableUpdates/calcScreenParams/cursor functions; software frontend route; final same-window Alt+Enter witnesses",
+          "status": "final-verified-residual-owner-review"
+        },
+        {
+          "id": "S7-P9-F10",
+          "xp_line": 3855,
+          "added": 0,
+          "deleted": 1,
+          "original": "    if (sc.ScreenState == WINDOWED)",
+          "candidate": "",
+          "group": "software-presenters",
+          "necessity": "Both Console text and KVM Window are software presenters. The original WINDOWED-only checks omit updates, console state reconciliation or cursor port writes while the other software presenter is active.",
+          "minimality": "Remove only each hardware-era presenter restriction; retain the original shared update and cursor implementation.",
+          "evidence": "nt_fulsc.c enableUpdates/calcScreenParams/cursor functions; software frontend route; final same-window Alt+Enter witnesses",
+          "status": "final-verified-residual-owner-review"
+        }
+      ]
+    }
+  ]
+}

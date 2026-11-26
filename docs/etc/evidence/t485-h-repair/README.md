@@ -27,3 +27,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S7 P7 video residuals](s7-p7-mirror-diff.json) records the restored original software branches and sixteen remaining differences; validation state is explicit.
 
 [S7 P8 CPU header residuals](s7-p8-mirror-diff.json) records CPU40 selection and the omitted incompatible CPU30 profile definition.
+
+[S7 P9 fill/screen residuals](s7-p9-mirror-diff.json) records the two-file batch and each remaining screen adaptation.

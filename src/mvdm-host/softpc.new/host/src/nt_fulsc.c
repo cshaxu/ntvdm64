@@ -7,16 +7,16 @@
 
 /*
  * ==========================================================================
- *	Name:		nt_fulsc.c
- *	Author:		Jerry Sexton
- *	Derived From:
- *	Created On:	27th January 1992
- *	Purpose:	This module contains the code required to handle
- *			transitions between graphics and text modes, and
- *			windowed and full-screen displays for SoftPC running
- *			under the x86 monitor.
+ *      Name:           nt_fulsc.c
+ *      Author:         Jerry Sexton
+ *      Derived From:
+ *      Created On:     27th January 1992
+ *      Purpose:        This module contains the code required to handle
+ *                      transitions between graphics and text modes, and
+ *                      windowed and full-screen displays for SoftPC running
+ *                      under the x86 monitor.
  *
- *	(c)Copyright Insignia Solutions Ltd., 1992. All rights reserved.
+ *      (c)Copyright Insignia Solutions Ltd., 1992. All rights reserved.
  * ==========================================================================
  */
 
@@ -26,14 +26,14 @@
  * ==========================================================================
  */
 #ifdef X86GFX
-#line 32
+#line 29
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 33
 #endif
 #line 34
 #include <vdm.h>
 #include <stdlib.h>
 #include <string.h>
-#line 37
 #include "conapi.h"
 
 #include "xt.h"
@@ -69,27 +69,30 @@
 #if defined(NEC_98)
 #line 70
 #error Unsupported NEC PC-98 configuration
+#line 75
 #endif // NEC_98
 #line 76
 
 #if defined(X86GFX) && (defined(JAPAN) || defined(KOREA))
+#line 78
 #include "sim32.h"
 LOCAL   void CallVDM(word CS, word IP);
 #endif // X86GFX && (JAPAN || KOREA)
+#line 81
 /*
  * ==========================================================================
  * Global Data
  * ==========================================================================
  */
-GLOBAL BOOL	ConsoleInitialised = FALSE;
-GLOBAL BOOL	ConsoleNoUpdates = FALSE;
+GLOBAL BOOL     ConsoleInitialised = FALSE;
+GLOBAL BOOL     ConsoleNoUpdates = FALSE;
 #ifdef X86GFX
 #line 89
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 92
 #endif /* X86GFX */
 #line 93
 GLOBAL BOOL blocked_in_gfx_mode = FALSE;  /* need to force text mode? */
-#line 94
 #ifndef PROD
 #line 95
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
@@ -107,7 +110,7 @@ GLOBAL UTINY tempbabymode[] =
    0x50, 0x18, 0x10, 0x00, 0x10, 0x00, 0x03, 0x00, 0x02, 0x67,
    0x5f, 0x4f, 0x50, 0x82, 0x55, 0x81, 0xbf, 0x1f, 0x00, 0x4f,
    0x0d, 0x0e, 0x00, 0x00, 0x00, 0x00, 0x9c, 0x8e, 0x8f, 0x28,
-   0x1f, 0x96, 0xb9, 0xa3, 0xff, 0x00, 0x01, 0x02, 0x03, 0x04, 
+   0x1f, 0x96, 0xb9, 0xa3, 0xff, 0x00, 0x01, 0x02, 0x03, 0x04,
    0x05, 0x14, 0x07, 0x38, 0x39, 0x3a, 0x3b, 0x3c, 0x3d, 0x3e,
    0x3f, 0x0c, 0x00, 0x0f, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00,
    0x10, 0x0e, 0x00, 0xff,
@@ -146,19 +149,22 @@ LOCAL int ConVGAHeight;
 LOCAL int ConTopLine;
 
 /* saved information for console re-integration */
-LOCAL CONSOLE_SCREEN_BUFFER_INFO	 ConsBufferInfo;
+LOCAL CONSOLE_SCREEN_BUFFER_INFO         ConsBufferInfo;
 LOCAL StartupCharHeight;
 
 LOCAL half_word saved_text_lines; /* No of lines for last SelectMouseBuffer. */
 
 #if defined(JAPAN) || defined(KOREA)
+#line 152
 // #3086: VDM crash when exit 16bit apps of video mode 11h -yasuho
 LOCAL half_word saved_video_mode = 0xFF; // save previous video mode
 #endif  // JAPAN || KOREA
+#line 155
 
 #if defined(NEC_98)
 #line 157
 #error Unsupported NEC PC-98 configuration
+#line 191
 #endif // NEC_98
 #line 192
 /* Variable to check for changes in screen state. */
@@ -175,13 +181,17 @@ IMPORT VOID disable_gfx_update_routines(VOID);
 #line 203
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
+#line 205
 #if defined(NEC_98)
 #line 206
 #error Unsupported NEC PC-98 configuration
+#line 211
 #endif // NEC_98
 #line 212
 #if defined(JAPAN) || defined(KOREA)
+#line 213
 #ifdef i386
+#line 214
 #define CONSOLE_BUFSIZE (80*50*2*2)
 extern byte FromConsoleOutput[];
 extern int FromConsoleOutputFlag;
@@ -189,10 +199,12 @@ IMPORT word FullScreenResumeSeg;
 IMPORT word FullScreenResumeOff;
 IMPORT sys_addr mouseCFsysaddr;
 #endif // i386
+#line 221
 
 IMPORT BOOL CurNowOff;  // mskkbug #2002: lotus1-2-3 display garbage -yasuho
 IMPORT word textAttr;   // Console attributes will be taken over to VDM.
 #endif // JAPAN || KOREA
+#line 225
 /*
  * ==========================================================================
  * Local Function Declarations
@@ -201,6 +213,7 @@ IMPORT word textAttr;   // Console attributes will be taken over to VDM.
 #if defined(NEC_98)
 #line 231
 #error Unsupported NEC PC-98 configuration
+#line 233
 #endif // NEC_98
 #line 234
 VOID enableUpdates(VOID);
@@ -213,10 +226,13 @@ GLOBAL int getModeType(VOID);
 #ifdef X86GFX
 #line 242
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 244
 #endif /* X86GFX */
+#line 245
 #if defined(NEC_98)
 #line 246
 #error Unsupported NEC PC-98 configuration
+#line 253
 #endif // NEC_98
 #line 254
 GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight );
@@ -236,11 +252,12 @@ GLOBAL VOID nt_init_event_thread(VOID)
      * resume\block code before normally intialized
      */
     if (nt_init_called)
-	return;
+        return;
     else
         nt_init_called++;
 
 #if !defined(i386) && defined(JAPAN)
+#line 276
   // for $ias.sys to display the status on bottom line.
   if( !is_us_mode() ){
     CHAR_INFO   Buffer[80];
@@ -273,8 +290,10 @@ GLOBAL VOID nt_init_event_thread(VOID)
                        &writeRegion);
   }
 #endif // !i386 && JAPAN
+#line 308
 
 #ifndef NEC_98
+#line 310
     if (sc.ScreenState != STREAM_IO) {
 #endif // !NEC_98
 #line 312
@@ -289,21 +308,22 @@ GLOBAL VOID nt_init_event_thread(VOID)
 
         calcScreenParams (&dummy1, &dummy2);
 
-	/*
-	** Copy the console buffer to the regen buffer.
-	** Don't want to adjust the copy from top of console window, console
-	** does it itself if we resize the window. Tim September 92.
-	*/
-	copyConsoleToRegen(0, 0, VGA_WIDTH, (SHORT)ConVGAHeight);
+        /*
+        ** Copy the console buffer to the regen buffer.
+        ** Don't want to adjust the copy from top of console window, console
+        ** does it itself if we resize the window. Tim September 92.
+        */
+        copyConsoleToRegen(0, 0, VGA_WIDTH, (SHORT)ConVGAHeight);
 
-	/*
-	** Tim September 92, adjust cursor position if console window size is
-	** adjusted.
-	*/
+        /*
+        ** Tim September 92, adjust cursor position if console window size is
+        ** adjusted.
+        */
         ConsBufferInfo.dwCursorPosition.Y -= (SHORT)ConTopLine;
 
 
 #if defined(JAPAN) && !defined(NEC_98)
+#line 338
     // mskkbug#3704: DOS/V messages are not cleared when command.com starts
     // 11/14/93 yasuho  12/8/93 yasuho
     // Don't set cursor position on startup
@@ -313,35 +333,36 @@ GLOBAL VOID nt_init_event_thread(VOID)
     }
 #endif  //JAPAN & !NEC_98
 #line 346
-	/* Set up SoftPC's cursor. */
-	setVDMCursorPosition((UTINY)StartupCharHeight,
-					&ConsBufferInfo.dwCursorPosition);
-                      
+        /* Set up SoftPC's cursor. */
+        setVDMCursorPosition((UTINY)StartupCharHeight,
+                                        &ConsBufferInfo.dwCursorPosition);
+
 #line 351
-		enableUpdates();
+                enableUpdates();
 #ifndef NEC_98
+#line 353
     }
     else
-	enableUpdates();
+        enableUpdates();
 #endif // !NEC_98
 #line 357
 
     // set kbd state flags in biosdata area, according to the real kbd Leds
     if (!VDMForWOW) {
         SyncBiosKbdLedToKbdDevice();
-	// we have sync up the BIOS led states with the system, we now let the
-	// event thread go
-	ResumeThread(ThreadInfo.EventMgr.Handle);
+        // we have sync up the BIOS led states with the system, we now let the
+        // event thread go
+        ResumeThread(ThreadInfo.EventMgr.Handle);
         }
 
     KbdResume(); // JonLe Mod
 }
 
 
-#line 370
 #ifdef X86GFX
 #line 371
 #error Unsupported excluded original configuration
+#line 696
 #endif /* X86GFX */
 #line 697
 
@@ -357,33 +378,35 @@ GLOBAL VOID nt_init_event_thread(VOID)
 GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 {
     USHORT   consoleWidth,
-	     consoleHeight,
-	     vgaHeight,
-	     charHeight,
-	     scanLines;
+             consoleHeight,
+             vgaHeight,
+             charHeight,
+             scanLines;
     half_word temp;
 
     /* Get console information. */
     if (!GetConsoleScreenBufferInfo(sc.OutputHandle, &ConsBufferInfo))
-	ErrorExit();
+        ErrorExit();
 
     /* Now sync the SoftPC screen to the console. */
 #line 722
     {
-	consoleWidth = ConsBufferInfo.srWindow.Right -
-		       ConsBufferInfo.srWindow.Left + 1;
-	consoleHeight = ConsBufferInfo.srWindow.Bottom -
-			ConsBufferInfo.srWindow.Top + 1;
+        consoleWidth = ConsBufferInfo.srWindow.Right -
+                       ConsBufferInfo.srWindow.Left + 1;
+        consoleHeight = ConsBufferInfo.srWindow.Bottom -
+                        ConsBufferInfo.srWindow.Top + 1;
     }
 #ifdef X86GFX
 #line 729
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 738
 #endif
 #line 739
 
 #if defined(NEC_98)
 #line 741
 #error Unsupported NEC PC-98 configuration
+#line 744
 #else  // !NEC_98
 #line 745
     /*
@@ -391,46 +414,49 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
      * 80x22, 80x25, 80x28, 80x43 or 80x50.
      */
 #if defined(JAPAN) || defined(KOREA)
+#line 750
     // Japanese mode is only 25 lines, now.
     if ( is_us_mode() && ( GetConsoleOutputCP() == 437 ) ) {
 #endif // JAPAN || KOREA
+#line 753
     if (consoleHeight <= MID_VAL(VGA_HEIGHT_0, VGA_HEIGHT_1))
     {
-	/* 22 lines */
-	vgaHeight = VGA_HEIGHT_0;
-	scanLines = 351;
-	charHeight = 16;
+        /* 22 lines */
+        vgaHeight = VGA_HEIGHT_0;
+        scanLines = 351;
+        charHeight = 16;
     }
     else if (consoleHeight <= MID_VAL(VGA_HEIGHT_1, VGA_HEIGHT_2))
     {
-	/* 25 lines */
-	vgaHeight = VGA_HEIGHT_1;
-	scanLines = 399;
-	charHeight = 16;
+        /* 25 lines */
+        vgaHeight = VGA_HEIGHT_1;
+        scanLines = 399;
+        charHeight = 16;
     }
     else if (consoleHeight <= MID_VAL(VGA_HEIGHT_2, VGA_HEIGHT_3))
     {
-	/* 28 lines */
-	vgaHeight = VGA_HEIGHT_2;
-	scanLines = 391;
-	charHeight = 14;
+        /* 28 lines */
+        vgaHeight = VGA_HEIGHT_2;
+        scanLines = 391;
+        charHeight = 14;
     }
     else if (consoleHeight <= MID_VAL(VGA_HEIGHT_3, VGA_HEIGHT_4))
     {
-	/* 43 lines */
-	vgaHeight = VGA_HEIGHT_3;
-	scanLines = 349;
-	charHeight = 8;
+        /* 43 lines */
+        vgaHeight = VGA_HEIGHT_3;
+        scanLines = 349;
+        charHeight = 8;
     }
     else
     {
-	/* 50 lines */
-	vgaHeight = VGA_HEIGHT_4;
-	scanLines = 399;
-	charHeight = 8;
+        /* 50 lines */
+        vgaHeight = VGA_HEIGHT_4;
+        scanLines = 399;
+        charHeight = 8;
     }
 
 #if defined(JAPAN) || defined(KOREA)
+#line 790
     // Japanese mode is only 25 lines, now.  for RAID #1429
     }
     else {
@@ -439,16 +465,20 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
         scanLines = 474; // change from 399
         charHeight = 19; // change from 16
 #ifdef JAPAN_DBG
+#line 798
         DbgPrint( "NTVDM: calcScreenParams() Set Japanese 25line mode\n" );
 #endif
+#line 800
         // Get Console attributes
         textAttr = ConsBufferInfo.wAttributes;
     }
 #endif // JAPAN || KOREA
+#line 804
 #endif // !NEC_98
 #line 806
     {
 #ifndef NEC_98
+#line 808
         /* The app may have shutdown in a gfx mode - force text mode back */
         if (blocked_in_gfx_mode)
         {
@@ -460,11 +490,11 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
         }
 #endif // !NEC_98
 #line 818
-	/*
-	 * Set screen height appropriately for current window size.
-	 * Now call video routine to set the character height, updating the
-	 * BIOS RAM as it does so.
-	 */	
+        /*
+         * Set screen height appropriately for current window size.
+         * Now call video routine to set the character height, updating the
+         * BIOS RAM as it does so.
+         */
 	if (charHeight != get_char_height())
 	{
 	    extern void load_font(sys_addr, int, int, int, int);
@@ -473,17 +503,19 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 	              256, 0, 0, charHeight);
 	}
 #line 823
-	set_screen_height_recal( scanLines ); /* Tim Oct 92 */
-	recalc_text(charHeight);
+        set_screen_height_recal( scanLines ); /* Tim Oct 92 */
+        recalc_text(charHeight);
 
 #ifndef NEC_98
+#line 827
         /* badly written apps assume 25 line mode page len is 4096 */
         if (vgaHeight == 25)
             sas_storew_no_check(VID_LEN, 0x1000);
 #ifdef X86GFX
 #line 831
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
-#endif	/* X86GFX */
+#endif  /* X86GFX */
+#line 833
 #endif // !NEC_98
 #line 834
 
@@ -491,9 +523,11 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 #ifdef X86GFX
 #line 837
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 872
 #endif /* X86GFX */
 #line 873
 #ifndef NEC_98
+#line 874
     sas_storew_no_check(VID_COLS, 80);   // fixup from 40 char shutdown
 #endif // !NEC_98
 #line 876
@@ -503,20 +537,20 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 } /* end of calcScreenParams() */
 
 /***************************************************************************
- * Function:								   *
- *	ConsoleInit 							   *
- *									   *
- * Description: 							   *
- *	Does all the graphics work required on SoftPC start-up. 	   *
+ * Function:                                                               *
+ *      ConsoleInit                                                        *
+ *                                                                         *
+ * Description:                                                            *
+ *      Does all the graphics work required on SoftPC start-up.            *
  *      Will split or modify later to accomodate the SCS initialisation    *
  *      that loses the config.sys etc output.                              *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      None.                                                              *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID                                                               *
+ *                                                                         *
  ***************************************************************************/
 GLOBAL VOID ConsoleInit(VOID)
 {
@@ -529,10 +563,10 @@ GLOBAL VOID ConsoleInit(VOID)
 
     note_entrance0("ConsoleInit");
 
-#line 906
 #ifdef X86GFX
 #line 907
 #error Unsupported excluded original configuration
+#line 917
 #endif
 #line 918
     initTextSection();
@@ -543,13 +577,14 @@ GLOBAL VOID ConsoleInit(VOID)
      */
     sc.Focus = TRUE;
     sc.FocusEvent = CreateEvent((LPSECURITY_ATTRIBUTES) NULL,
-				FALSE,
-				FALSE,
-				NULL);
+                                FALSE,
+                                FALSE,
+                                NULL);
 
 #ifdef X86GFX
 #line 931
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 935
 #endif /* X86GFX */
 #line 936
 
@@ -562,6 +597,7 @@ GLOBAL VOID ConsoleInit(VOID)
 #if defined(NEC_98)
 #line 944
 #error Unsupported NEC PC-98 configuration
+#line 951
 #endif // NEC_98
 #line 952
     /*
@@ -573,6 +609,7 @@ GLOBAL VOID ConsoleInit(VOID)
 #ifdef X86GFX
 #line 959
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 1009
 #endif //X86GFX
 #line 1010
 
@@ -583,9 +620,9 @@ GLOBAL VOID ConsoleInit(VOID)
      */
     cursorLine = ConsBufferInfo.dwCursorPosition.Y;
     if (cursorLine < vgaHeight)
-	topLine = 0;
+        topLine = 0;
     else
-	topLine = cursorLine - vgaHeight + (SHORT) 1;
+        topLine = cursorLine - vgaHeight + (SHORT) 1;
 
     ConVGAHeight = vgaHeight;
     ConTopLine = topLine;
@@ -594,77 +631,81 @@ GLOBAL VOID ConsoleInit(VOID)
 #if defined(NEC_98)
 #line 1027
 #error Unsupported NEC PC-98 configuration
+#line 1035
 #endif // NEC_98
 #line 1036
 }
 
 
 /***************************************************************************
- * Function:								   *
- *	GfxReset                                                           *
- *									   *
- * Description: 							   *
- *	Called from ConsoleInit to program up the vga hardware into some   *
- *	known state. This compensates on the X86 for not initialising via  *
+ * Function:                                                               *
+ *      GfxReset                                                           *
+ *                                                                         *
+ * Description:                                                            *
+ *      Called from ConsoleInit to program up the vga hardware into some   *
+ *      known state. This compensates on the X86 for not initialising via  *
  *      our bios.    Essential for windowed running, but probably needed   *
- *	for the what-mode-am-i-in stuff as well.			   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
+ *      for the what-mode-am-i-in stuff as well.                           *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      None.                                                              *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID                                                               *
+ *                                                                         *
  ***************************************************************************/
 GLOBAL VOID GfxReset(VOID)
 {
 #ifdef X86GFX
 #line 1059
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 1086
 #endif
 #line 1087
 }
 
 /***************************************************************************
- * Function:								   *
- *	ResetConsoleState						   *
- *									   *
- * Description: 							   *
- *	Attempts to put the console window back to the state in which      *
- *      it started up.							   *
- *									   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
+ * Function:                                                               *
+ *      ResetConsoleState                                                  *
+ *                                                                         *
+ * Description:                                                            *
+ *      Attempts to put the console window back to the state in which      *
+ *      it started up.                                                     *
+ *                                                                         *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      None.                                                              *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID                                                               *
+ *                                                                         *
  ***************************************************************************/
 GLOBAL VOID ResetConsoleState(VOID)
 {
 #ifdef X86GFX
 #line 1108
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 1175
 #endif /* X86GFX */
-#line 1187
-
+#line 1176
     PCHAR_INFO to;
     ULONG videoHeight,
-	  nChars;
-    COORD	bufferCoord,
-		bufferSize;
+          nChars;
+    COORD       bufferCoord,
+                bufferSize;
     SMALL_RECT writeRegion;
 #if defined(JAPAN) && defined(i386) && !defined(NEC_98)
+#line 1183
     int skip = 0; // for mode 73h
 #endif // JAPAN & i386 & !NEC_98
 #line 1185
 
 
-    SMALL_RECT	newWin;
+    SMALL_RECT  newWin;
     BOOL itfailed = FALSE;
 
 #if (defined(JAPAN) || defined(KOREA)) && !defined(NEC_98)
+#line 1191
     // #3086: VDM crash when exit 16bit apps of video mode 11h
     // 12/8/93 yasuho
     saved_video_mode = sas_hw_at_no_check(vd_video_mode);
@@ -673,82 +714,98 @@ GLOBAL VOID ResetConsoleState(VOID)
 #if defined(NEC_98)
 #line 1196
 #error Unsupported NEC PC-98 configuration
+#line 1200
 #endif // NEC_98
 #line 1201
 #ifdef X86GFX
 #line 1202
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 1204
 #endif /* X86GFX */
 #line 1205
 
-	closeGraphicsBuffer();
+        closeGraphicsBuffer();
 
 #if defined(NEC_98)
 #line 1209
 #error Unsupported NEC PC-98 configuration
+#line 1212
 #endif // NEC_98
 #line 1213
 #ifndef NEC_98
+#line 1214
 #if !defined(JAPAN) && !defined(KOREA)
-	if (StreamIoSwitchOn && !host_stream_io_enabled) {
+#line 1215
+        if (StreamIoSwitchOn && !host_stream_io_enabled) {
 #endif // !JAPAN && !KOREA
-	    /* restore screen buffer and window size */
-	    SetConsoleScreenBufferSize(sc.OutputHandle, sc.ConsoleBuffInfo.dwSize);
-	    newWin.Top = newWin.Left = 0;
-	    newWin.Bottom = sc.ConsoleBuffInfo.srWindow.Bottom -
-			    sc.ConsoleBuffInfo.srWindow.Top;
-	    newWin.Right = sc.ConsoleBuffInfo.srWindow.Right -
-			   sc.ConsoleBuffInfo.srWindow.Left;
-	    SetConsoleWindowInfo(sc.OutputHandle, TRUE, &newWin);
+#line 1217
+            /* restore screen buffer and window size */
+            SetConsoleScreenBufferSize(sc.OutputHandle, sc.ConsoleBuffInfo.dwSize);
+            newWin.Top = newWin.Left = 0;
+            newWin.Bottom = sc.ConsoleBuffInfo.srWindow.Bottom -
+                            sc.ConsoleBuffInfo.srWindow.Top;
+            newWin.Right = sc.ConsoleBuffInfo.srWindow.Right -
+                           sc.ConsoleBuffInfo.srWindow.Left;
+            SetConsoleWindowInfo(sc.OutputHandle, TRUE, &newWin);
 #if !defined(JAPAN) && !defined(KOREA)
-	}
+#line 1226
+        }
 #endif // !JAPAN && !KOREA
+#line 1228
 #endif // !NEC_98
 #line 1229
-	/*                                                                      
-	** Tim September 92, don't resize window on way out of DOS app cos      
-	** MS (Sudeep) said so. Don't want to do the associated recalc_text()   
-	** either.                                                              
-	** This keeps the window re-sizing issue nice and simple, but there'll  
-	** be people who don't like having a DOS window size forced upon them.  
-	*/                                                                      
-#line 1236
-#if 0                                                                           
+        /*
+        ** Tim September 92, don't resize window on way out of DOS app cos
+        ** MS (Sudeep) said so. Don't want to do the associated recalc_text()
+        ** either.
+        ** This keeps the window re-sizing issue nice and simple, but there'll
+        ** be people who don't like having a DOS window size forced upon them.
+        */
+#if 0
 #line 1237
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
-#endif	//Zero
+#line 1258
+#endif  //Zero
 #line 1259
 
-#if 0
-#line 1266
+#ifndef NEC_98
+#line 1261
+#if defined(JAPAN) || defined(KOREA)
+#line 1262
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
-#endif
+#line 1314
+#endif // JAPAN || KOREA
+#line 1315
+#endif // NEC_98
 #line 1316
-	/*
-	** Tim, September 92. Put the Console cursor to the same place as the
-	** SoftPC cursor. We already do this in full-screen text mode below.
-	** Specifcally to fix weird cursor position problem with 16-bit nmake,
-	** but seems like a good safety idea anyway.
-	*/
-	getVDMCursorPosition();
+        /*
+        ** Tim, September 92. Put the Console cursor to the same place as the
+        ** SoftPC cursor. We already do this in full-screen text mode below.
+        ** Specifcally to fix weird cursor position problem with 16-bit nmake,
+        ** but seems like a good safety idea anyway.
+        */
+        getVDMCursorPosition();
 
         doNullRegister();   /* revert console back to ordinary window */
 
-#line 1326
 #ifdef X86GFX
 #line 1327
 #error Unsupported excluded original configuration
+#line 1735
 #endif /* X86GFX */
 #line 1736
 
     /*Put console's cursor back to the shape it was on startup.*/
     SetConsoleCursorInfo(sc.OutputHandle, &StartupCursor);
 #if defined(JAPAN) || defined(KOREA)
+#line 1740
     //  mskkbug#2002: lotus1-2-3 display garbage        9/24/93 yasuho
     CurNowOff = !StartupCursor.bVisible;        // adjust cursor state
 #endif  // JAPAN
+#line 1743
 
 #ifndef NEC_98
+#line 1745
     /* reset the current_* variables in nt_graph.c */
     resetWindowParams();
 #endif // !NEC_98
@@ -768,50 +825,54 @@ GLOBAL VOID ResetConsoleState(VOID)
 ***************************************************************************
 ** Tim July 92.
 */
-#line 2118
 GLOBAL UTINY getNtScreenState IFN0()
 {
-	return( (UTINY) sc.ScreenState );
+        return( (UTINY) sc.ScreenState );
 }
 
 #ifdef X86GFX
 #line 2123
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 2175
 #endif /* X86GFX */
 #line 2176
 
 /***************************************************************************
- * Function:								   *
- *	DoFullScreenResume						   *
- *									   *
- * Description: 							   *
- *	Called by SCS to restart SoftPC when a DOS application restarts    *
- *	after being suspended or starts up for the first time after SoftPC *
- *	has been booted by another application which has since terminated. *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
+ * Function:                                                               *
+ *      DoFullScreenResume                                                 *
+ *                                                                         *
+ * Description:                                                            *
+ *      Called by SCS to restart SoftPC when a DOS application restarts    *
+ *      after being suspended or starts up for the first time after SoftPC *
+ *      has been booted by another application which has since terminated. *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      None.                                                              *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID                                                               *
+ *                                                                         *
  ***************************************************************************/
 
 GLOBAL VOID DoFullScreenResume(VOID)
 {
     USHORT vgaHeight, height;
 #ifndef X86GFX
+#line 2198
     PVOID pDummy;
 #endif
+#line 2200
 #if defined(NEC_98)
 #line 2201
 #error Unsupported NEC PC-98 configuration
+#line 2206
 #endif // NEC_98
 #line 2207
 
 #ifdef X86GFX
 #line 2209
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 2309
 #endif /* X86GFX */
 #line 2310
 
@@ -821,20 +882,20 @@ GLOBAL VOID DoFullScreenResume(VOID)
 #ifdef X86GFX
 #line 2315
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 2318
 #else
 #line 2319
                              NULL,
-			     NULL,
-			     NULL,
+                             NULL,
+                             NULL,
 #endif
 #line 2323
 
                              0,               // sectionname no longer used
-			     &stateLength,
-#line 2326
+                             &stateLength,
 #ifndef X86GFX
 #line 2327
-			     &pDummy,
+                             &pDummy,
 #else
 #line 2329
 #error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register.
@@ -842,122 +903,142 @@ GLOBAL VOID DoFullScreenResume(VOID)
 #line 2331
                              NULL,            // sectionname no longer used
                              0,               // sectionname no longer used
-			     textBufferSize,
-			     (PVOID *) &textBuffer
-			   )
+                             textBufferSize,
+                             (PVOID *) &textBuffer
+                           )
     )
-	ErrorExit();
+        ErrorExit();
 
 #if defined(NEC_98)
 #line 2340
 #error Unsupported NEC PC-98 configuration
+#line 2354
 #endif // NEC_98
 #line 2355
 #if defined(NEC_98)
 #line 2356
 #error Unsupported NEC PC-98 configuration
+#line 2381
 #endif // NEC_98
 #line 2382
 #ifdef X86GFX
 #line 2383
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 2391
 #else
 #line 2392
-	/*
-	** Create graphics buffer if we need one. Tim Oct 92.
-	*/
-	if( sc.ModeType==GRAPHICS )
-		graphicsResize();
+        /*
+        ** Create graphics buffer if we need one. Tim Oct 92.
+        */
+        if( sc.ModeType==GRAPHICS )
+                graphicsResize();
 #endif
+#line 2398
 #if !defined(JAPAN) && !defined(KOREA) /* ???? NO REASON TO DO THIS STUFF TWICE ???????
                 and if this is REALY necessary, we should count
                 in the IME status line(s) (40:84) */
-	/*
-	** Tim September 92.
-	** If window size is not suitable for a DOS app, snap-to-fit
-	** appropriately. Put cursor in correct place.
+#line 2401
+        /*
+        ** Tim September 92.
+        ** If window size is not suitable for a DOS app, snap-to-fit
+        ** appropriately. Put cursor in correct place.
         ** Do the ConsoleInit() and nt_init_event_thread() type of things.
-	** Leave full-screen as it was.
-	*/
-	if (sc.ScreenState != WINDOWED) {
-	   /* Get console info, including the current cursor position. */
-	   if (!GetConsoleScreenBufferInfo(sc.OutputHandle, &ConsBufferInfo))
-		ErrorExit();
-	   /* Hard-wired for f-s resume - needs to be set properly. */
-	   height = 8;
-	   /* Set up BIOS variables etc. */
+        ** Leave full-screen as it was.
+        */
+        if (sc.ScreenState != WINDOWED) {
+           /* Get console info, including the current cursor position. */
+           if (!GetConsoleScreenBufferInfo(sc.OutputHandle, &ConsBufferInfo))
+                ErrorExit();
+           /* Hard-wired for f-s resume - needs to be set properly. */
+           height = 8;
+           /* Set up BIOS variables etc. */
 #if defined(NEC_98)
 #line 2416
 #error Unsupported NEC PC-98 configuration
+#line 2418
 #else  // !NEC_98
 #line 2419
-	   setVDMCursorPosition( (UTINY)height,
-	                         &ConsBufferInfo.dwCursorPosition);
+           setVDMCursorPosition( (UTINY)height,
+                                 &ConsBufferInfo.dwCursorPosition);
 #endif // !NEC_98
 #line 2422
-	   /* Copy the console buffer to the regen buffer. */
-	   copyConsoleToRegen(0, 0, VGA_WIDTH, (SHORT)ConVGAHeight);
-	}
+           /* Copy the console buffer to the regen buffer. */
+           copyConsoleToRegen(0, 0, VGA_WIDTH, (SHORT)ConVGAHeight);
+        }
 #endif // !JAPAN && !KOREA
+#line 2426
 
-	/*
-	** Get console window size and set up our stuff accordingly.
-	*/
+        /*
+        ** Get console window size and set up our stuff accordingly.
+        */
 #if defined(NEC_98)
 #line 2431
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 2433
 #ifdef JAPAN
+#line 2434
         // save BIOS work area 0x484 for $IAS
         {
             byte save;
 #ifndef i386
+#line 2438
             // for ichitaro
             static byte lines = 24;
 #endif // !i386
+#line 2441
 
             if ( !is_us_mode() ) {
                 save = sas_hw_at_no_check( 0x484 );
 #ifndef i386
+#line 2445
                 if( save < lines )
                   lines = save;
 #endif // !i386
+#line 2448
                 calcScreenParams( &height, &vgaHeight );
 #ifndef i386
+#line 2450
                 if( lines < sas_hw_at_no_check( 0x484 ))
                   sas_store_no_check( 0x484, lines );
 #ifdef JAPAN_DBG
+#line 2453
                 DbgPrint(" NTVDM: DoFullScreenResume() set %d lines/screen\n",
                          sas_hw_at_no_check( 0x484 ) + 1 );
 #endif
+#line 2456
 #else // i386
+#line 2457
                 sas_store( 0x484, save );
 #endif // i386
+#line 2459
             }
             else
                 calcScreenParams( &height, &vgaHeight );
         }
 #else // !JAPAN
+#line 2464
         calcScreenParams( &height, &vgaHeight );
 #endif // !JAPAN
+#line 2466
 #endif // !NEC_98
 #line 2467
 
-	/*
-	** Window resize code copied out of nt_graph.c:textResize().
-	*/
-	{
-	resizeWindow( 80, vgaHeight );
-	}
+        /*
+        ** Window resize code copied out of nt_graph.c:textResize().
+        */
+        {
+        resizeWindow( 80, vgaHeight );
+        }
 
-	/* Copy the console buffer to the regen buffer. */
+        /* Copy the console buffer to the regen buffer. */
 #if defined(NEC_98)
 #line 2477
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 2479
 #ifdef JAPAN
+#line 2480
         // for $IAS, KKCFUNC
         if ( !is_us_mode() ) {
             SHORT rows;
@@ -969,22 +1050,28 @@ GLOBAL VOID DoFullScreenResume(VOID)
             else
                 copyConsoleToRegen(0, 0, VGA_WIDTH, (SHORT)(rows+1));
 #ifdef JAPAN_DBG
+#line 2491
             DbgPrint( "NTVDM: copyConsoleToRegen (All)\n" );
 #endif
+#line 2493
         }
         else
             copyConsoleToRegen(0, 0, VGA_WIDTH, vgaHeight); // kksuzuka#4009
 #else // !JAPAN
+#line 2497
         copyConsoleToRegen(0, 0, VGA_WIDTH, vgaHeight);
 #endif // !JAPAN
+#line 2499
 #endif // !NEC_98
 #line 2500
 
-	/*
-	** Make sure cursor is not below bottom line.
-	*/
+        /*
+        ** Make sure cursor is not below bottom line.
+        */
 #ifndef NEC_98
+#line 2505
 #ifdef JAPAN
+#line 2506
         // scroll up if $IAS is loaded.
         if ( !is_us_mode() ) {
             byte rows;
@@ -993,32 +1080,41 @@ GLOBAL VOID DoFullScreenResume(VOID)
             if( ConsBufferInfo.dwCursorPosition.Y >= rows+1 ){
                 ConsBufferInfo.dwCursorPosition.Y = rows;
 #ifdef JAPAN_DBG
+#line 2514
 DbgPrint( "NTVDM: CursorPosition reset %d\n", rows );
 #endif
+#line 2516
             }
 #ifdef JAPAN_DBG
+#line 2518
 DbgPrint(" NTVDM:DoFullScreenResume() set cur pos %d,%d\n", ConsBufferInfo.dwCursorPosition.X, ConsBufferInfo.dwCursorPosition.Y );
 #endif
+#line 2520
         }
         else
 #endif // JAPAN
+#line 2523
 #endif // !NEC_98
 #line 2524
-	if( ConsBufferInfo.dwCursorPosition.Y >= vgaHeight ){
-		ConsBufferInfo.dwCursorPosition.Y = vgaHeight-1;
-	}
+        if( ConsBufferInfo.dwCursorPosition.Y >= vgaHeight ){
+                ConsBufferInfo.dwCursorPosition.Y = vgaHeight-1;
+        }
 #if defined(NEC_98)
 #line 2528
 #error Unsupported NEC PC-98 configuration
+#line 2530
 #else  // !NEC_98
 #line 2531
-	setVDMCursorPosition(( UTINY)height, &ConsBufferInfo.dwCursorPosition);
+        setVDMCursorPosition(( UTINY)height, &ConsBufferInfo.dwCursorPosition);
 #endif // !NEC_98
 #line 2533
 
 #ifndef NEC_98
+#line 2535
 #if defined(JAPAN) || defined(KOREA)
+#line 2536
 #ifdef i386
+#line 2537
     // #3741: WordStar6.0: Hilight color is changed after running in window
     // 11/27/93 yasuho
     // Also call VDM when in US mode, because we necessary restore the
@@ -1027,43 +1123,48 @@ DbgPrint(" NTVDM:DoFullScreenResume() set cur pos %d,%d\n", ConsBufferInfo.dwCur
         CallVDM(FullScreenResumeSeg, FullScreenResumeOff);
     }
 #endif // i386
+#line 2545
 #endif // JAPAN
+#line 2546
 #endif // !NEC_98
 #line 2547
 #if defined(NEC_98)
 #line 2548
 #error Unsupported NEC PC-98 configuration
+#line 2555
 #endif // !NEC_98
 #line 2556
 } /* end of DoFullScreenResume() */
 
 /***************************************************************************
- * Function:								   *
- *	GfxCloseDown        						   *
- *									   *
- * Description: 							   *
- *	Hook from host_terminate to ensure section closed so can then start*
- *      more VDMs.							   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID (Errors handled internally in CloseSection)		   *
- *									   *
+ * Function:                                                               *
+ *      GfxCloseDown                                                       *
+ *                                                                         *
+ * Description:                                                            *
+ *      Hook from host_terminate to ensure section closed so can then start*
+ *      more VDMs.                                                         *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      None.                                                              *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID (Errors handled internally in CloseSection)                   *
+ *                                                                         *
  ***************************************************************************/
 GLOBAL VOID GfxCloseDown(VOID)
 {
     /* Text and Video sections previously closed here... */
 }
 #if 0  // Forzen window is no longer supported a-stzong 5/15/01
+#line 2578
 #ifdef X86GFX
 #line 2579
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 2683
 #endif
 #line 2684
-
 #endif
+#line 2685
 
 /*
  * ==========================================================================
@@ -1072,18 +1173,18 @@ GLOBAL VOID GfxCloseDown(VOID)
  */
 
 /***************************************************************************
- * Function:								   *
- *	enableUpdates							   *
- *									   *
- * Description: 							   *
- *	Restarts the reflection of regen buffer updates to paint routines. *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
+ * Function:                                                               *
+ *      enableUpdates                                                      *
+ *                                                                         *
+ * Description:                                                            *
+ *      Restarts the reflection of regen buffer updates to paint routines. *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      None.                                                              *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID                                                               *
+ *                                                                         *
  ***************************************************************************/
 VOID enableUpdates(VOID)
 {
@@ -1092,19 +1193,19 @@ VOID enableUpdates(VOID)
 }
 
 /***************************************************************************
- * Function:								   *
- *	disableUpdates							   *
- *									   *
- * Description: 							   *
- *	Stops changes to the regen buffer being reflected to paint	   *
- *	routines.							   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
+ * Function:                                                               *
+ *      disableUpdates                                                     *
+ *                                                                         *
+ * Description:                                                            *
+ *      Stops changes to the regen buffer being reflected to paint         *
+ *      routines.                                                          *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      None.                                                              *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID                                                               *
+ *                                                                         *
  ***************************************************************************/
 VOID disableUpdates(VOID)
 {
@@ -1113,44 +1214,60 @@ VOID disableUpdates(VOID)
 }
 
 /***************************************************************************
- * Function:								   *
- *	copyConsoleToRegen						   *
- *									   *
- * Description: 							   *
- *	Copies the contents of the console buffer to the video regen	   *
- *	buffer.								   *
- *									   *
- * Parameters:								   *
- *	startCol - start column of console buffer			   *
- *	startLine - start line of console buffer			   *
- *	width - width of console buffer 				   *
- *	height - height of console buffer				   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
+ * Function:                                                               *
+ *      copyConsoleToRegen                                                 *
+ *                                                                         *
+ * Description:                                                            *
+ *      Copies the contents of the console buffer to the video regen       *
+ *      buffer.                                                            *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      startCol - start column of console buffer                          *
+ *      startLine - start line of console buffer                           *
+ *      width - width of console buffer                                    *
+ *      height - height of console buffer                                  *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID                                                               *
+ *                                                                         *
  ***************************************************************************/
 VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
-			      SHORT height)
+                              SHORT height)
 {
-    CHAR_INFO	*from;
-    COORD	 bufSize,
-		 bufCoord;
-    LONG	 nChars;
-    SMALL_RECT	 readRegion;
+    CHAR_INFO   *from;
+    COORD        bufSize,
+                 bufCoord;
+    LONG         nChars;
+    SMALL_RECT   readRegion;
 
 #ifndef NEC_98
-    register half_word	*to;
+#line 2761
+    register half_word  *to;
 #endif // !NEC_98
 #line 2763
 #ifdef X86GFX
 #line 2764
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 2768
 #endif
+#line 2769
+#ifndef NEC_98
+#line 2770
+#if defined(JAPAN) || defined(KOREA)
+#line 2771
+#ifdef i386
+#line 2772
+    register half_word *toDosv = (half_word *)FromConsoleOutput;
+#endif  // i386
+#line 2774
+#endif // JAPAN || KOREA
+#line 2775
+#endif //NEC_98
 #line 2776
 #if defined(NEC_98)
 #line 2777
 #error Unsupported NEC PC-98 configuration
+#line 2781
 #endif // NEC_98
 #line 2782
 
@@ -1169,20 +1286,20 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
     readRegion.Right = startCol + width - (SHORT) 1;
     readRegion.Bottom = startLine + height - (SHORT) 1;
     if (!ReadConsoleOutput(sc.OutputHandle,
-			   consoleBuffer,
-			   bufSize,
-			   bufCoord,
-			   &readRegion))
+                           consoleBuffer,
+                           bufSize,
+                           bufCoord,
+                           &readRegion))
        ErrorExit();
 
     /* Copy the console data to the regen buffer. */
     from = consoleBuffer;
 
-#line 2807
-#ifndef X86GFX	// on MIPS we actually want to write to the VGA bitplanes.
+#ifndef X86GFX  // on MIPS we actually want to write to the VGA bitplanes.
 #line 2808
     to = EGA_planes;
 #if defined(JAPAN)
+#line 2810
   // copy from beneath block and modified
   // save Console Output for MS-DOS/V
   // mode73h support
@@ -1237,6 +1354,7 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
   }
   skip_copy_console:
 #elif defined(KOREA) // !JAPAN
+#line 2864
   {
     register sys_addr V_vram;
 
@@ -1259,47 +1377,53 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
   }
   skip_copy_console:
 #else  // !KOREA
+#line 2886
     while(nChars--)
     {
-	*to++ = from->Char.AsciiChar;
-	*to = (half_word) from->Attributes;
-	from++;
-	to += 7;	// CHAIN2: next character is eight plane bytes away.
+        *to++ = from->Char.AsciiChar;
+        *to = (half_word) from->Attributes;
+        from++;
+        to += 7;        // skipping interleaved font planes.
     }
 #endif // !KOREA
+#line 2894
     host_mark_screen_refresh();
 #else
 #line 2896
 #error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register.
-#endif
-#line 3013
+#line 3011
+#endif //NEC_98
+#line 3012
+
 #if defined(NEC_98)
 #line 3014
 #error Unsupported NEC PC-98 configuration
+#line 3090
 #endif // NEC_98
 #line 3091
 }
 
 /***************************************************************************
- * Function:								   *
- *	getVDMCursorPosition						   *
- *									   *
- * Description: 							   *
- *	Gets the cursor position from BIOS variables and tells the console *
- *	where to place its cursor.					   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
+ * Function:                                                               *
+ *      getVDMCursorPosition                                               *
+ *                                                                         *
+ * Description:                                                            *
+ *      Gets the cursor position from BIOS variables and tells the console *
+ *      where to place its cursor.                                         *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      None.                                                              *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID                                                               *
+ *                                                                         *
  ***************************************************************************/
 VOID getVDMCursorPosition(VOID)
 {
 #if defined(NEC_98)
 #line 3111
 #error Unsupported NEC PC-98 configuration
+#line 3113
 #else  // !NEC_98
 #line 3114
     half_word currentPage;
@@ -1312,6 +1436,7 @@ VOID getVDMCursorPosition(VOID)
 #if defined(NEC_98)
 #line 3121
 #error Unsupported NEC PC-98 configuration
+#line 3134
 #else  // !NEC_98
 #line 3135
     /* Get the current video page. */
@@ -1325,77 +1450,81 @@ VOID getVDMCursorPosition(VOID)
     cursorPos.Y = (cursorWord >> 8) & (SHORT) 0xff;
 
     if ((sc.CharHeight * cursorPos.Y) > sc.PC_W_Height)
-	cursorPos.Y = (sc.PC_W_Height / sc.CharHeight) - 1;
+        cursorPos.Y = (sc.PC_W_Height / sc.CharHeight) - 1;
 #endif // !NEC_98
 #line 3148
 
     if( !stdoutRedirected ) {
-	setok = SetConsoleCursorPosition(sc.OutputHandle, cursorPos);
-	if (!setok) {
+        setok = SetConsoleCursorPosition(sc.OutputHandle, cursorPos);
+        if (!setok) {
 
-	    if (GetLastError() != ERROR_INVALID_HANDLE)	// ie. output redirected
-		ErrorExit();
-	}
+            if (GetLastError() != ERROR_INVALID_HANDLE) // ie. output redirected
+                ErrorExit();
+        }
     }
 }
 
 /***************************************************************************
- * Function:								   *
- *	setVDMCursorPosition						   *
- *									   *
- * Description: 							   *
- *	Positions SoftPC's cursor, setting the relevant BIOS variables.	   *
- *									   *
- * Parameters:								   *
- *	height		- the current character height			   *
- *	cursorPos	- the coordinates of the cursor			   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
+ * Function:                                                               *
+ *      setVDMCursorPosition                                               *
+ *                                                                         *
+ * Description:                                                            *
+ *      Positions SoftPC's cursor, setting the relevant BIOS variables.    *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      height          - the current character height                     *
+ *      cursorPos       - the coordinates of the cursor                    *
+ *                                                                         *
+ * Return value:                                                           *
+ *      VOID                                                               *
+ *                                                                         *
  ***************************************************************************/
 VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 {
     CONSOLE_CURSOR_INFO cursorInfo;
     ULONG port6845,
-    	  cursorStart,
-	  cursorEnd,
-	  colsOnScreen,
-	  videoLen,
-	  pageOffset,
-	  cursorWord;
+          cursorStart,
+          cursorEnd,
+          colsOnScreen,
+          videoLen,
+          pageOffset,
+          cursorWord;
     UTINY currentPage;
 
     /* Get cursor size. */
     if(!GetConsoleCursorInfo(sc.OutputHandle, &cursorInfo))
-	ErrorExit();
+        ErrorExit();
 
     /* Work out cursor start and end pixels. */
 #ifndef NEC_98
+#line 3192
 #if defined(JAPAN) || defined(KOREA)
+#line 3193
     if ( !is_us_mode() )
         height = 8;             // for dosv cursor
 #endif // JAPAN || KOREA
+#line 3196
 #endif // !NEC_98
 #line 3197
     cursorStart = height - (height * cursorInfo.dwSize / 100);
     if (cursorStart == height)
-	cursorStart--;
+        cursorStart--;
     cursorEnd = height - 1;
 
 #if defined(NEC_98)
 #line 3203
 #error Unsupported NEC PC-98 configuration
+#line 3205
 #else  // !NEC_98
 #line 3207
     {
 
-	/* Pass cursor size to video ports. */
-	port6845 = sas_w_at_no_check(VID_INDEX);
-	outb((io_addr) port6845, R10_CURS_START);
-	outb((io_addr) (port6845 + 1), (half_word) cursorStart);
-	outb((io_addr) port6845, R11_CURS_END);
-	outb((io_addr) (port6845 + 1), (half_word) cursorEnd);
+        /* Pass cursor size to video ports. */
+        port6845 = sas_w_at_no_check(VID_INDEX);
+        outb((io_addr) port6845, R10_CURS_START);
+        outb((io_addr) (port6845 + 1), (half_word) cursorStart);
+        outb((io_addr) port6845, R11_CURS_END);
+        outb((io_addr) (port6845 + 1), (half_word) cursorEnd);
     }
 #endif // !NEC_98
 #line 3217
@@ -1413,11 +1542,12 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 #if defined(NEC_98)
 #line 3226
 #error Unsupported NEC PC-98 configuration
+#line 3228
 #else  // !NEC_98
 #line 3229
     /* Set BIOS variables. */
     sas_storew_no_check(VID_CURMOD,
-			(word) ((cursorStart << 8) | (cursorEnd & 0xff)));
+                        (word) ((cursorStart << 8) | (cursorEnd & 0xff)));
 
     /* Work out cursor position. */
     colsOnScreen = sas_w_at_no_check(VID_COLS);
@@ -1426,6 +1556,7 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 #line 3237
     pageOffset = cursorPos->Y * colsOnScreen * 2 + (cursorPos->X << 1);
 #ifndef NEC_98
+#line 3239
     cursorWord = (currentPage * videoLen + pageOffset) / 2;
 #endif // !NEC_98
 #line 3241
@@ -1433,30 +1564,30 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 #if defined(NEC_98)
 #line 3243
 #error Unsupported NEC PC-98 configuration
+#line 3252
 #else  // !NEC_98
 #line 3254
     {
 
-	/* Send cursor position to video ports. */
-	outb((io_addr) port6845, R14_CURS_ADDRH);
-	outb((io_addr) (port6845 + 1), (half_word) (cursorWord >> 8));
-	outb((io_addr) port6845, R15_CURS_ADDRL);
-	outb((io_addr) (port6845 + 1), (half_word) (cursorWord & 0xff));
+        /* Send cursor position to video ports. */
+        outb((io_addr) port6845, R14_CURS_ADDRH);
+        outb((io_addr) (port6845 + 1), (half_word) (cursorWord >> 8));
+        outb((io_addr) port6845, R15_CURS_ADDRL);
+        outb((io_addr) (port6845 + 1), (half_word) (cursorWord & 0xff));
     }
 #endif // !NEC_98
 #line 3263
 
     /* Store cursor position in BIOS variables. */
 #ifndef NEC_98
+#line 3266
     sas_storew_no_check(VID_CURPOS + (currentPage * 2),
-			(word) ((cursorPos->Y << 8) | (cursorPos->X & 0xff)));
+                        (word) ((cursorPos->Y << 8) | (cursorPos->X & 0xff)));
 #endif // !NEC_98
 #line 3269
 
-#line 3270
     if (sc.ScreenState == WINDOWED)
     {
-#line 3272
 #ifdef MONITOR
 #line 3273
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
@@ -1469,26 +1600,28 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 VOID waitForInputFocus()
 {
     if (WaitForSingleObject(sc.FocusEvent, INFINITE))
-	ErrorExit();
-#line 3283
+        ErrorExit();
 }
 
 VOID AddTempIVTFixups()
 {
 #ifndef NEC_98
-		   /* BOP        17,   IRET */
+#line 3288
+                   /* BOP        17,   IRET */
     UTINY code[] = { 0xc4, 0xc4, 0x17, 0xcf };
 
     //location is random but should be safe until DOS is initialised!!!
-    sas_stores(0x40000, code, sizeof(code));	// new Int 17 code
-    sas_storew(0x17*4, 0);			// Int 17h offset
-    sas_storew((0x17*4) + 2, 0x4000);		// Int 17h segment
+    sas_stores(0x40000, code, sizeof(code));    // new Int 17 code
+    sas_storew(0x17*4, 0);                      // Int 17h offset
+    sas_storew((0x17*4) + 2, 0x4000);           // Int 17h segment
 #endif // !NEC_98
 #line 3296
 }
 
 #if defined(JAPAN) || defined(KOREA)
+#line 3299
 #ifdef X86GFX
+#line 3300
 /***************************************************************************
  * Function:                                                               *
  *      call 16bits subroutine                                             *
@@ -1507,6 +1640,7 @@ VOID AddTempIVTFixups()
 LOCAL  void CallVDM(word CS, word IP)
 {
 #ifndef NEC_98
+#line 3318
 
  /*****************************
  - williamh -
@@ -1569,26 +1703,29 @@ WORD    OldSP, OldIP, OldMSW;
 #line 3377
 }
 #endif  /* X86GFX */
+#line 3379
 #endif  /* JAPAN || KOREA*/
+#line 3380
 
 /***************************************************************************
- * Function:								   *
- *	getModeType							   *
- *									   *
- * Description: 							   *
+ * Function:                                                               *
+ *      getModeType                                                        *
+ *                                                                         *
+ * Description:                                                            *
  *      Look up video mode to determine whether the VGA current mode is    *
- *      graphics or text.				   		   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	int - TEXT or GRAPHICS.						   *
- *									   *
+ *      graphics or text.                                                  *
+ *                                                                         *
+ * Parameters:                                                             *
+ *      None.                                                              *
+ *                                                                         *
+ * Return value:                                                           *
+ *      int - TEXT or GRAPHICS.                                            *
+ *                                                                         *
  ***************************************************************************/
 int getModeType(VOID)
 {
 #ifndef NEC_98
+#line 3399
     half_word mode;
     int modeType;
 
@@ -1607,11 +1744,11 @@ int getModeType(VOID)
     case 0x43:
     case 0x44:
     case 0x45:
-	modeType = TEXT;
-	break;
+        modeType = TEXT;
+        break;
     default:
-	modeType = GRAPHICS;
-	break;
+        modeType = GRAPHICS;
+        break;
     }
     return(modeType);
 #endif // !NEC_98
@@ -1626,10 +1763,12 @@ int getModeType(VOID)
 #ifdef X86GFX
 #line 3431
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
+#line 3805
 #endif /* X86GFX */
 #line 3806
 
 #ifndef NEC_98
+#line 3808
 void host_enable_stream_io(void)
 {
     sc.ScreenState = STREAM_IO;
@@ -1641,21 +1780,21 @@ void host_disable_stream_io(void)
     DWORD mode;
 
     if(!GetConsoleMode(sc.InputHandle, &mode))
-	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 
     mode |= (ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT);
     if(!SetConsoleMode(sc.InputHandle,mode))
-	  DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
+          DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 
 
     if(!GetConsoleMode(sc.OutputHandle, &mode))
-	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+        DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
     if(!stdoutRedirected)
     {
-	mode &= ~(ENABLE_WRAP_AT_EOL_OUTPUT | ENABLE_PROCESSED_OUTPUT);
+        mode &= ~(ENABLE_WRAP_AT_EOL_OUTPUT | ENABLE_PROCESSED_OUTPUT);
 
        if(!SetConsoleMode(sc.OutputHandle,mode))
-	  DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
+          DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
     }
 
     ConsoleInit();
@@ -1675,10 +1814,10 @@ void host_disable_stream_io(void)
 
     /* Set up SoftPC's cursor. */
     setVDMCursorPosition((UTINY)StartupCharHeight,
-				&ConsBufferInfo.dwCursorPosition);
+                                &ConsBufferInfo.dwCursorPosition);
 
 #line 3856
-	enableUpdates();
+        enableUpdates();
 
     MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
     host_stream_io_enabled = FALSE;
@@ -1688,9 +1827,13 @@ void host_disable_stream_io(void)
 #if defined(NEC_98)
 #line 3863
 #error Unsupported NEC PC-98 configuration
+#line 3972
 #endif
+#line 3973
 
 #if defined(NEC_98)
 #line 3975
 #error Unsupported NEC PC-98 configuration
+#line 4708
 #endif  // NEC_98
+#line 4709

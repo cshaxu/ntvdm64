@@ -16,7 +16,9 @@ bwdcopy(
     )
 {
 #if 0
+#line 19
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 23
 #else
 #line 24
       int i;
@@ -25,6 +27,7 @@ bwdcopy(
       memcpy(dest - i , src - i, len);
 
 #endif
+#line 30
 }
 
 
@@ -55,7 +58,9 @@ memfill(
      memset(l_addr_in, data, len);
 
 #if 0
+#line 60
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 79
 #endif
 #line 80
 }
@@ -75,8 +80,10 @@ fwd_word_fill(
 	l_addr4 = (unsigned int *)(((unsigned int)l_addr+3) & (~3));
 	h_addr4 = (unsigned int *)(((unsigned int)h_addr) & (~3));
 #ifdef	LITTLEND
+#line 97
         data = ((data >> 8) & 0xff) | ((data << 8) & 0xff00);
 #endif
+#line 99
 	if(h_addr4 > l_addr4)
 	{
 		switch((unsigned char *)l_addr4-l_addr)
@@ -94,14 +101,17 @@ fwd_word_fill(
                 data4 = data+(data<<16);
 
 #if 0
+#line 116
 #error Excluded unsupported original constant-false fill branch
-                l_addr = (unsigned char *)l_addr4;
+#line 118
 #else
                 count = (unsigned char *)h_addr4 - (unsigned char *)l_addr4;
+#line 120
                 RtlFillMemoryUlong(l_addr4, count, data4);
                 l_addr = (unsigned char *)l_addr4;
                 l_addr += count;
 #endif
+#line 124
 
 	}
 	switch(h_addr-l_addr)
@@ -159,7 +169,9 @@ memset4(
     )
 {
 #if 0
+#line 181
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#line 185
 #else
 #line 186
 
@@ -171,4 +183,5 @@ memset4(
    RtlFillMemoryUlong(laddr, count << 2, data);
 
 #endif
+#line 195
 }
