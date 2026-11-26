@@ -32,18 +32,17 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S9 Ordered Progress
 
-[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 22/41 source-reviewed,
-19 remain; 22 final-verified and delivered through P3 f424289aa (pushed).
-P3 delivered sixteen changed files and verified four reviewed unchanged files.
-Owner-approved LF/format restoration is applied; no formatting approval remains
-pending. c_oprnd.h is reviewed and locally reduced 24/42->16/34.
-P3 batch against its starting HEAD and fixed XP: 100 points/19558 lines ->263 points/581
-lines (+163/-18977). Including disjoint delivered P1/P2 files and header,
-measured cumulative change is +164 points/-20866 lines. This is not a whole-S9
-census. Functional residuals remain registered for owner review. P3 cached full build and dual publication passed (runtime3, 26 hashes).
-CPU/debug, actual MEM/NTVDMD and NESticle targeted tests passed; P3 committed and pushed.
-Next call.c; the coupled softpc.h full review stays S12. Migration remains
-39/159. S13 retains Full. Frozen 437 points are historical, not current counts.
+[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 24/41 source-reviewed
+and final-verified; 17 remain. P3 f424289aa is pushed; P4 commit/push pending.
+P4 call.c 6/652 ->7/8 and ccpusas4.c 42/400 ->42/387: two-file batch
+48/1052 ->49/395 (+1 point/-657 lines). Disjoint measured P1-P4 change:
++165 points/-21523 lines, not a whole-S9 census. Format block growth is owner
+approved; functional residuals remain registered for review.
+Runtime4 cached full build, dual 13-image publication (26 hashes), targeted
+stack/SAS/mapping/lease/location tests and real MEM/NTVDMD/NESticle passed.
+142/437 frozen register points reviewed; 295 remain. Next ordered file fpu.c;
+softpc.h full review stays S12. Migration remains 39/159; Full stays S13.
+
 ## S8 Closure Record
 
 [S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 851/851 source-reviewed

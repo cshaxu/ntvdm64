@@ -2076,7 +2076,6 @@ int mvdm_softpc_guest_memory_acquire(uint32_t address, uint32_t byte_count,
 {
     compat_host_context *owner = compat_host_context_current();
 
-    if (owner == NULL) return 0;
     return acquire(owner, address, byte_count, access,
         lease_out, bytes_out);
 }
@@ -2085,56 +2084,46 @@ int mvdm_softpc_guest_memory_release(guest_memory_lease *lease, int commit)
 {
     compat_host_context *owner = compat_host_context_current();
 
-    if (owner == NULL) return 0;
     return release(owner, lease, commit);
+}
+
+static int copy_guest_memory(uint32_t address, uint8_t *destination,
+    uint8_t const *source, uint32_t byte_count)
+{
+    compat_host_context *owner = compat_host_context_current();
+    uint32_t offset = 0u;
+    int write = source != NULL;
+
+    if (owner == NULL || (byte_count != 0u && destination == NULL && source == NULL) ||
+        byte_count > UINT32_MAX - address) return 0;
+    while (offset < byte_count) {
+        guest_memory_lease *lease;
+        uint8_t *guest_bytes;
+        uint32_t chunk = byte_count - offset;
+
+        if (chunk > MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK)
+            chunk = MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK;
+        if (!acquire(owner, address + offset, chunk,
+            write ? GUEST_MEMORY_ACCESS_WRITE : GUEST_MEMORY_ACCESS_READ,
+            &lease, &guest_bytes)) return 0;
+        if (write) memcpy(guest_bytes, source + offset, chunk);
+        else memcpy(destination + offset, guest_bytes, chunk);
+        if (!release(owner, lease, write)) return 0;
+        offset += chunk;
+    }
+    return 1;
 }
 
 int mvdm_softpc_guest_memory_copy_from(uint32_t address, uint8_t *bytes,
     uint32_t byte_count)
 {
-    compat_host_context *owner = compat_host_context_current();
-    uint32_t offset = 0u;
-
-    if (owner == NULL || (byte_count != 0u && bytes == NULL) ||
-        byte_count > UINT32_MAX - address) return 0;
-    while (offset < byte_count) {
-        guest_memory_lease *lease;
-        uint8_t *guest_bytes;
-        uint32_t chunk = byte_count - offset;
-
-        if (chunk > MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK)
-            chunk = MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK;
-        if (!acquire(owner, address + offset, chunk,
-            GUEST_MEMORY_ACCESS_READ, &lease, &guest_bytes)) return 0;
-        memcpy(bytes + offset, guest_bytes, chunk);
-        if (!release(owner, lease, 0)) return 0;
-        offset += chunk;
-    }
-    return 1;
+    return copy_guest_memory(address, bytes, NULL, byte_count);
 }
 
 int mvdm_softpc_guest_memory_copy_to(uint32_t address, uint8_t const *bytes,
     uint32_t byte_count)
 {
-    compat_host_context *owner = compat_host_context_current();
-    uint32_t offset = 0u;
-
-    if (owner == NULL || (byte_count != 0u && bytes == NULL) ||
-        byte_count > UINT32_MAX - address) return 0;
-    while (offset < byte_count) {
-        guest_memory_lease *lease;
-        uint8_t *guest_bytes;
-        uint32_t chunk = byte_count - offset;
-
-        if (chunk > MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK)
-            chunk = MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK;
-        if (!acquire(owner, address + offset, chunk,
-            GUEST_MEMORY_ACCESS_WRITE, &lease, &guest_bytes)) return 0;
-        memcpy(guest_bytes, bytes + offset, chunk);
-        if (!release(owner, lease, 1)) return 0;
-        offset += chunk;
-    }
-    return 1;
+    return copy_guest_memory(address, NULL, bytes, byte_count);
 }
 
 int mvdm_softpc_guest_memory_move(uint32_t destination, uint32_t source,
@@ -2278,8 +2267,7 @@ int mvdm_guest_location_acquire_vm(mvdm_guest_location const *location,
         linear_base > UINT32_MAX - address) return 0;
     address += linear_base;
 
-    if (!compat_host_context_valid(instance) || instance->state != COMPAT_HOST_CONTEXT_ACTIVE) return 0;
-    return ccpu_guest_memory_acquire(instance->guest_memory, address, byte_count, access,
+    return acquire(instance, address, byte_count, access,
         &lease_out->lease, &lease_out->bytes);
 }
 
@@ -2290,8 +2278,7 @@ int mvdm_guest_location_release(mvdm_guest_location_lease *lease,
     int result;
 
     if (lease == NULL || instance == NULL || lease->lease == NULL) return 0;
-    result = compat_host_context_valid(instance) && instance->state == COMPAT_HOST_CONTEXT_ACTIVE &&
-        ccpu_guest_memory_release(instance->guest_memory, lease->lease, commit);
+    result = release(instance, lease->lease, commit);
     memset(lease, 0, sizeof(*lease));
     return result;
 }

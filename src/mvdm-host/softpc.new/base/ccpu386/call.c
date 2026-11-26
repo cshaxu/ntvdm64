@@ -37,7 +37,6 @@ CALL CPU Functions.
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Process far calls.                                                 */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-#line 40
 GLOBAL VOID
 CALLF
 #ifdef ANSI
@@ -45,7 +44,6 @@ CALLF
    IU32 op1[2]       /* offset:segment pointer */
    )
 #else
-#line 47
 #error Unsupported excluded original configuration
 #endif
 #line 50
@@ -77,11 +75,9 @@ CALLF
    ISM32 i;
 
    /* get destination (correctly typed) */
-#line 78
    new_cs = op1[1];
    new_ip = op1[0];
 
-#line 81
    if ( GET_PE() == 0 || GET_VM() == 1 )
       {
       /* Real Mode or V86 Mode */
@@ -90,7 +86,6 @@ CALLF
       validate_stack_space(USE_SP, (ISM32)NR_ITEMS_2);
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-#line 89
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 95
@@ -102,7 +97,6 @@ CALLF
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 103
    
 
       /* ALL SYSTEMS GO */
@@ -205,7 +199,6 @@ CALLF
 	 else
 	    SET_ESP(new_sp);
 
-#line 205
 	 /*
 	    FORM NEW STACK, VIZ
 	    
@@ -221,7 +214,6 @@ CALLF
 	  */
 
 	 /* push old stack values */
-#line 220
 	 spush16(old_ss);
 	 spush(old_sp);
 
@@ -260,7 +252,6 @@ IFN1(
 
    /* do ip limit check */
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-#line 258
 #error Unsupported excluded original configuration
 #else /* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 263
@@ -271,9 +262,7 @@ IFN1(
        * version of a i486.
        */
 
-#line 270
 #ifdef TAKE_PROT_MODE_LIMIT_FAULT
-#line 271
 #error Optional CCPU protected-mode limit profile is not supported
 #endif /* TAKE_PROT_MODE_LIMIT_FAULT */
 #line 279
@@ -288,7 +277,6 @@ IFN1(
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 290
 
    /* all systems go */
    spush((IU32)GET_EIP());
@@ -320,7 +308,6 @@ IFN1(
 
    /* do ip limit check */
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-#line 321
 #error Unsupported excluded original configuration
 #else /* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 326
@@ -331,9 +318,7 @@ IFN1(
        * version of a i486.
        */
 
-#line 333
 #ifdef TAKE_PROT_MODE_LIMIT_FAULT
-#line 334
 #error Optional CCPU protected-mode limit profile is not supported
 #endif /* TAKE_PROT_MODE_LIMIT_FAULT */
 #line 342
@@ -348,7 +333,6 @@ IFN1(
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 353
 
    /* all systems go */
    spush((IU32)GET_EIP());

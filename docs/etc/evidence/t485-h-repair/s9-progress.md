@@ -490,3 +490,60 @@ P3 delivery receipt: f424289aa is committed and pushed to origin/main.
 All 22 reviewed S9 files are final-verified and delivered through this batch;
 19 remain. Runtime3 and both published locations retain matching hashes.
 Functional residual owner decisions remain open; S9 and T485 remain active.
+
+## P4: call.c
+
+Entry non-error 6 points/652 lines, six excluded bodies; fixed XP is all LF,
+current source had 341 CRLF and 15 LF lines. HXP-R-00573 is the one functional
+change: after load_SS_cache, target SS.B selects SP/ESP independently of gate
+operand width. The actual CCPU stack-transition fixture independently combines
+both widths and observes stack/register/memory results and fault boundaries.
+Restore LF and remove 16 redundant line directives; 218 matching selected-path
+lines retain original positions. Result 7/8 (+1/-644), six exclusions unchanged.
+No new behavior, no new runtime pass. Residual stays in pending decisions.
+23/41 source-reviewed, 18 remain; 22 delivered. P4 one local file; including
+prior deliveries, measured cumulative +165 points/-21510 lines, not whole-S9
+census. Next ccpusas4.c; pure-format changes accumulate per owner rule.
+
+## P4 ccpusas4.c complete source review; delivery pending
+
+- Frozen HXP-R-00574--00586: all thirteen have concrete provider, ABI or
+  correctness evidence in pending-decisions.csv; none is counted restored.
+- Whole-file non-error byte-sensitive diff: 42 points/400 lines ->42/387.
+  Ten excluded branch bodies remain untouched. 1486 matching selected original
+  lines retain their XP logical line numbers; closing #line 1960 remains.
+- Unified the duplicate read/write chunk loop, preserving const input, one
+  captured owner across callbacks, zero-length behavior, access flags,
+  read-before-write lease preparation, partial earlier-chunk commits and
+  immediate failure return. Reused existing owner checks in public/location
+  wrappers. No implementation moved to B or hidden behind a new provider.
+- Original LF restored throughout; functional residuals remain pending owner
+  review. Final-code cached build, dual publication and targeted tests pending.
+- 24/41 source-reviewed, 22 delivered, 17 unreviewed. P4 two-file cumulative
+  batch: 48/1052 ->49/395 (+1 point/-657 lines). Including disjoint P1-P3 files:
+  +165 points/-21523 lines; this is not the whole-S9 census.
+
+### P4 final-code verification and delivery
+
+Cached full build and runtime4 staging passed. Thirteen host images published
+in assets/release and O:/WINNT/SYSTEM32; all 26 manifest hashes matched.
+winnt.zip and original guest inputs were not modified. The owner could test
+immediately after publication, before targeted tests completed.
+
+Current-source targeted results: CCPU stack 36/36, actual CCPU/SAS BIOS access
+123/123, guest-location exit 0, physical mapping and alias ownership pass;
+lease resource 44 checks and coordination boundary 75 checks passed, together
+with the existing session lease fixture. The coordination test covers captured
+owner across a context switch, partial earlier-chunk commits, inactive owner,
+zero length, overflow, wrong-owner and exhausted-slot failure behavior.
+Real MEM loaded the actual NTVDMD exports and passed breakpoint/trace/register
+and allocation lifecycle checks. Real DOS4GW/NESticle displayed its menu and
+passed Escape hide/restore. ROM gameplay and Full are not claimed; Full remains
+at S13 according to the admitted repair plan. Evidence: build/t485-s9/p4.
+
+24/41 files final-verified; 17 remain. 142/437 frozen register points reviewed,
+295 unreviewed. No P4 functional register point is claimed completely restored;
+all fourteen remain residual-owner-review. Two-file byte-sensitive non-error
+result is 48/1052 ->49/395 (+1/-657); cumulative measured change across disjoint
+P1-P4 files is +165/-21523. This remains distinct from a whole-S9 census.
+Next relative-path file: softpc.new/base/ccpu386/fpu.c. Commit/push pending.
