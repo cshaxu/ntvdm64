@@ -236,8 +236,7 @@ ULONG FASTCALL WWS32WSAUnhookBlockingHook(PVDMFRAME pFrame)
         RETURN((ULONG)SOCKET_ERROR);
     }
 
-    if ( (*wsockapis[WOW_WSAISBLOCKING].lpfn)( ) ) {
-#line 240
+    if ( (*wsockapis[WOW_WSAISBLOCKING].lpfn)() ) {
         SetLastError( WSAEINPROGRESS );
         RETURN((ULONG)SOCKET_ERROR);
     }

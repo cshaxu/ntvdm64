@@ -51,6 +51,7 @@ CHAR g_szShimFileLogVar[]    = "SHIM_FILE_LOG";
 #ifndef RTL_CONSTANT_STRING
 #define RTL_CONSTANT_STRING(s) { sizeof(s) - sizeof((s)[0]), sizeof(s), (s) }
 #endif
+#line 50
 
 UNICODE_STRING g_ustrProcessHistoryVar = RTL_CONSTANT_STRING(L"__PROCESS_HISTORY");
 UNICODE_STRING g_ustrCompatLayerVar    = RTL_CONSTANT_STRING(L"__COMPAT_LAYER"   );
@@ -440,32 +441,29 @@ WOWCloneEnvironment(
     PSZ     lpEnvironment
     )
 {
-    LPVOID lpEnvNew = NULL;
-    NTSTATUS Status = RtlCreateEnvironment(lpEnvironment == NULL, &lpEnvNew);
+    NTSTATUS Status    = STATUS_INVALID_PARAMETER;
+    DWORD    dwEnvSize = 0;
+    LPVOID   lpEnvNew  = NULL;
 
-    while (NT_SUCCESS(Status) && lpEnvironment && *lpEnvironment) {
-        OEM_STRING entry;
-        UNICODE_STRING text, name, value;
-        PWSTR separator;
-        size_t length = strlen(lpEnvironment);
-        if (length >= USHRT_MAX / sizeof(WCHAR)) {
-            Status = STATUS_INVALID_PARAMETER;
-            break;
-        }
-        RtlInitString(&entry, lpEnvironment);
-        Status = RtlOemStringToUnicodeString(&text, &entry, TRUE);
-        if (!NT_SUCCESS(Status)) break;
+    MEMORY_BASIC_INFORMATION MemoryInformation;
 
-        /* A drive current-directory variable starts with '='. */
-        separator = wcschr(text.Buffer + 1, L'=');
-        if (separator) {
-            name = text;
-            name.Length = (USHORT)((separator - text.Buffer) * sizeof(WCHAR));
-            RtlInitUnicodeString(&value, separator + 1);
-            Status = RtlSetEnvironmentVariable(&lpEnvNew, &name, &value);
-        }
-        RtlFreeUnicodeString(&text);
-        lpEnvironment += length + 1;
+    if (NULL == lpEnvironment) {
+        Status = RtlCreateEnvironment(TRUE, &lpEnvNew);
+    } else {
+        dwEnvSize = WOWGetEnvironmentSize(lpEnvironment, NULL);
+
+        MemoryInformation.RegionSize = (dwEnvSize + 2) * sizeof(UNICODE_NULL);
+        lpEnvNew = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY,
+                             MemoryInformation.RegionSize);
+        Status = lpEnvNew ? STATUS_SUCCESS : STATUS_NO_MEMORY;
+#line 457
+    }
+
+    if (NT_SUCCESS(Status) && NULL != lpEnvironment) {
+
+        Status = RtlOemToUnicodeN(lpEnvNew, (ULONG)MemoryInformation.RegionSize,
+                                  NULL, lpEnvironment, dwEnvSize);
+#line 472
     }
 
     if (NT_SUCCESS(Status)) {

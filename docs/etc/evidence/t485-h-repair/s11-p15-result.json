@@ -1,0 +1,79 @@
+{
+  "packet": "M0 T485 S11 P15",
+  "state": "final-verified-commit-pending",
+  "runtime": "build/t485-s11/runtime18",
+  "reviewed_files": 36,
+  "total_files": 48,
+  "reviewed_frozen_points": 360,
+  "total_frozen_points": 452,
+  "restored_frozen_points": 17,
+  "residual_frozen_points": 343,
+  "unreviewed_frozen_points": 92,
+  "batch_reduction": {
+    "points": 1,
+    "lines": 31
+  },
+  "combined_reduction": {
+    "points": 136,
+    "lines": 4716
+  },
+  "current_s11_census": {
+    "points": 744,
+    "lines": 7047
+  },
+  "file_metrics": {
+    "src/mvdm-host/wow32/wsext.c": {
+      "before": {
+        "points": 4,
+        "lines": 12,
+        "excluded": 0
+      },
+      "after": {
+        "points": 3,
+        "lines": 9,
+        "excluded": 0
+      }
+    },
+    "src/mvdm-host/wow32/wshell.c": {
+      "before": {
+        "points": 1,
+        "lines": 4
+      },
+      "after": {
+        "points": 1,
+        "lines": 4
+      }
+    },
+    "src/mvdm-host/wow32/wshimdb.c": {
+      "before": {
+        "points": 5,
+        "lines": 61,
+        "excluded": 0
+      },
+      "after": {
+        "points": 5,
+        "lines": 33,
+        "excluded": 0
+      }
+    }
+  },
+  "source_sha256": {
+    "src/mvdm-host/wow32/wsext.c": "316df4f902fa9357f99470c93d802321caeb60de3d24de5b509a1cea47a4cc8e",
+    "src/mvdm-host/wow32/wshell.c": "b9cea5c6df29f9d599818673781cc0f6b689ef6b7ca1a2819230f07f0e61718a",
+    "src/mvdm-host/wow32/wshimdb.c": "c720f2eef766dd3af8e9a225f98277b0f77fd71eecd3864ac4e05855965fb6bf"
+  },
+  "verification": {
+    "cached_full_build": "PASS",
+    "dual_publication_hashes": 26,
+    "environment_clone": "16 assertions PASS, actual production function bodies and native NTDLL",
+    "real_win16_completion": "PASS result.exit=0",
+    "full": "not run; next checkpoint file40 and S closure",
+    "original_lines": "wsext78;wshimdb165;zero mismatches"
+  },
+  "evidence": [
+    "build/t485-s11/p15/final/published-hashes.json",
+    "build/t485-s11/p15/environment-final.log",
+    "build/t485-s11/p15/final/async-final-Completion/guest-report.json"
+  ],
+  "unchanged_boundaries": "Original guest binaries not modified/rebuilt. Existing XP WINSOCK pairing retained. No new runtime state or provider."
+}

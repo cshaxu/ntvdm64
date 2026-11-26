@@ -33,17 +33,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S11 Ordered Progress
 
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
-[P14 receipt](../etc/evidence/t485-h-repair/s11-p14-result.json):33/48files,
-350/452points delivered:16restored,334residual owner-review,102unreviewed.
-Current48-file census745points/7078lines; cumulative raw reduction135/4685.
-P14 alone removes5points/14lines. Prior P11 coupled ABI normalized +1point/
-+2lines remains separately disclosed. Runtime17 cached build,dual26-hash
-host publication,original XP Winsock pairing,parameter54/rundown353 and
-actual Win16 Completion/Cancel/TaskLoss PASS. P14 delivered/pushed d64c9b2a6.
-[Guest pairing evidence](../etc/evidence/t485-h-repair/s11-p14-winsock-pairing.md).
-Next file34 wsext.c. Last Full:file30 P12 runtime15 passed23/23; next:file40
-and S closure. Earlier P1-P7 actual-preprocessor line followup and the
-spool-loader extraction fixture repair remain required before Full/closure.
+[P15 receipt](../etc/evidence/t485-h-repair/s11-p15-result.json):36/48files,
+360/452points final-verified:17restored,343residual owner-review,92unreviewed.
+Current48-file census744points/7047lines; cumulative raw reduction136/4716.
+P15 removes1point/31lines. Original bulk environment cloning restored with
+proven modern NTDLL allocator and conversion boundaries. Runtime18 cached
+full build,dual26-hash publication,environment16/16 and real Win16 Completion
+PASS. Commit/push pending;delivered33files/350points at P14 d64c9b2a6.
+Nextfile37 wspool.c. LastFull:file30 P12 runtime15 passed23/23;nextfile40
+and S closure. Earlier P1-P7 actual-preprocessor line followup and spool
+loader extraction fixture repair remain required before Full/closure.
 Migration39/159;S11 active.
 
 ## S10 Closure Record

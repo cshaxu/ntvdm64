@@ -45,9 +45,9 @@ frozen point counts as current byte-sensitive diff counts.
 | 31 | src/mvdm-host/wow32/wowhooks.c | 39 | P13 delivered e1824a049 |
 | 32 | src/mvdm-host/wow32/wparam.c | 4 | P14 delivered d64c9b2a6 |
 | 33 | src/mvdm-host/wow32/wsdata.c | 19 | P14 delivered d64c9b2a6 |
-| 34 | src/mvdm-host/wow32/wsext.c | 4 | Pending |
-| 35 | src/mvdm-host/wow32/wshell.c | 1 | Pending |
-| 36 | src/mvdm-host/wow32/wshimdb.c | 5 | Pending |
+| 34 | src/mvdm-host/wow32/wsext.c | 4 | P15 final-verified; commit pending |
+| 35 | src/mvdm-host/wow32/wshell.c | 1 | P15 final-verified; commit pending |
+| 36 | src/mvdm-host/wow32/wshimdb.c | 5 | P15 final-verified; commit pending |
 | 37 | src/mvdm-host/wow32/wspool.c | 2 | Pending |
 | 38 | src/mvdm-host/wow32/wstruc.c | 3 | Pending |
 | 39 | src/mvdm-host/wow32/wuclass.c | 7 | Pending |
@@ -850,3 +850,45 @@ rundown fixtures plus real Win16 Completion/Cancel/TaskLoss PASS.
 16restored,334residual,102unreviewed. Commit/push pending;delivered31/327.
 
 P14 delivered and pushed in d64c9b2a6. All33files/350points delivered:16restored,334qualified residual owner-review,102unreviewed. Actual48-file census745/7078; cumulative reduction135/4685. Runtime17 final package passed all three Win16 async witnesses after original XP Winsock pairing. Next file34 wsext.c; Full remains due atfile40 and S closure.
+
+### P15 file34 wsext.c
+
+4points/12lines ->3points/9lines; zero exclusions. Restore R04443 whitespace
+and redundant line240; R04444-04446 retain exact task-rundown call and existing
+critical-section scope. The production-body fixture explicitly tests lock
+retention during conversion and release after converter exception. Actual
+product preprocessing verifies78 original statements with no drift; two added
+lock statements are not mapped to identical text in another original function.
+Source review complete, format-only change accumulates without build.
+34/48files,354/452points reviewed:16restored delivered+1local,337residual,
+98unreviewed. Delivered33/350 unchanged. Census744/7075; cumulative136/4688.
+Evidence: build/t485-s11/p15/wsext-metrics.json and wsext-lines.json.
+
+### P15 file35 wshell.c
+
+1point/4lines unchanged,zero exclusions. Actual product-parameter object comparison proves original declarations select stdcall @8 imports while real DEM exports cdecl symbols. Retain R04447 in owner-review with exact object/map evidence; no source change or new runtime claim.35/48files,355/452points source-reviewed:16restored delivered+1local,338residual,97unreviewed. Delivered33/350 unchanged. Census744/7075,cumulative136/4688. Next file36 wshimdb.c.
+
+P15 file36 wshimdb.c entered at5points/61lines,zero exclusions. Not counted complete. Actual modern NTDLL control: RtlCreateEnvironment/RtlDestroyEnvironment exits0; VirtualAlloc environment passed to RtlDestroyEnvironment faults0xC0000005. This proves a real allocator boundary but does not yet justify the entire per-entry rewrite. Source unchanged pending complete-file minimality review. Evidence: build/t485-s11/p15/wshimdb-investigation.json.
+
+File36 followup: actual process-heap allocation with native RtlDestroyEnvironment passes (environment-heap.exit=0), while virtual allocation faults. A build-owned bulk-clone candidate retains original clone structure and existing RtlOemToUnicodeN, reducing5/61 to5/30 without per-entry normalization. Not applied: complete-function behavior, ABI and original-line verification remain. No completed-file count change.
+
+### P15 file36 wshimdb.c complete source review
+
+5points/61lines ->5points/33lines (-0/-28),zero exclusions. Restore original
+bulk environment clone structure and remove per-entry normalization. Native
+NTDLL allocator controls prove the necessary process-heap boundary. Retain
+the allocation-success guard and ULONG-length RtlOemToUnicodeN conversion.
+Actual production preprocessing checks165 original statements,zero drift.
+Formal native fixture extracts both production functions,16 assertions pass:
+order/duplicates/raw entries,drive entry,empty/large/inherited blocks,
+allocation failure and conversion-failure cleanup. This is bounded unit
+evidence,not final-package guest acceptance. Macro fallback and AppHelp
+arguments retain real compiler/header/link evidence. All five residual frozen
+points remain pending owner-review; partial restoration is not full removal.
+36/48files,360/452points source-reviewed;16restored delivered+1local,
+343residual,92unreviewed. Delivered33files/350points remains unchanged.
+Census744points/7047lines,cumulative reduction136points/4716lines.
+P15 batch reduction1point/31lines. Cached build/publication/targeted delivery
+follows whole-file completion;Full due atfile40 and S closure.
+
+P15 final runtime18 cached full build and dual26-hash publication PASS. Formal environment fixture16/16 and real Win16 Completion result.exit0 PASS; final package tested. [P15 receipt](s11-p15-result.json). All36files/360points final-verified:17restored,343residual,92unreviewed. Commit/push pending; nextfile37 wspool.c. No Full claim; checkpoint40 and S closure remain.

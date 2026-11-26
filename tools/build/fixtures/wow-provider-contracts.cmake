@@ -56,3 +56,12 @@ foreach(kind IN ITEMS spool_failure spool_loader_failure)
 endforeach()
 set_property(TARGET wow-provider-spool_loader_failure_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
 add_custom_target(wow-provider-contracts DEPENDS wow-provider-spool_failure wow-provider-spool_loader_failure wow-provider-winsock_rundown)
+
+ntvdm_function_body(environment_size "${owner}/wkman.c" "WOWGetEnvironmentSize")
+ntvdm_function_body(environment_clone "${owner}/wshimdb.c" "WOWCloneEnvironment")
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/environment_clone_exact.h"
+  CONTENT "${environment_size}\n${environment_clone}\n" @ONLY)
+fixture(wow-environment-clone CL "test/mvdm-host/wow32/environment_clone_fixture.c")
+set_property(TARGET wow-environment-clone_objects PROPERTY COMPILE_OPTIONS /nologo /TC /O2)
+target_include_directories(wow-environment-clone_objects PRIVATE "${CMAKE_BINARY_DIR}")
+add_dependencies(wow-provider-contracts wow-environment-clone)
