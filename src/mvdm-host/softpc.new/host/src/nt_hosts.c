@@ -254,7 +254,6 @@ void SetupConsoleMode(void)
 #line 246
     /*.............................................. Set new console mode */
 
-#line 248
     if(!SetConsoleMode(sc.InputHandle,mode))
 	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
     /*::::::::::::::::::::::::::::::::::::::::::: Set console output mode */
@@ -307,7 +306,6 @@ SECURITY_ATTRIBUTES sa;
 
     /*::::::::::::::::::::::::::::::::::::::::::: Get console output handle */
 
-#line 298
     if((sc.OutputHandle = GetStdHandle(STD_OUTPUT_HANDLE)) == INVALID_HANDLE_VALUE)
 	DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
     //
@@ -326,7 +324,6 @@ SECURITY_ATTRIBUTES sa;
     /*:::::::::::::::::::::::::::::: check out if stdin has been redirected */
 
     if(GetFileType(sc.InputHandle) != FILE_TYPE_CHAR)
-#line 316
     {
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
        sa.lpSecurityDescriptor = NULL;
@@ -346,7 +343,6 @@ SECURITY_ATTRIBUTES sa;
 
     if(GetFileType(sc.OutputHandle) != FILE_TYPE_CHAR)
     {
-#line 335
        stdoutRedirected = TRUE;
        sa.nLength = sizeof (SECURITY_ATTRIBUTES);
        sa.lpSecurityDescriptor = NULL;
@@ -360,7 +356,6 @@ SECURITY_ATTRIBUTES sa;
        else {
           SetStdHandle (STD_OUTPUT_HANDLE,sc.OutputHandle);
           SetStdHandle (STD_ERROR_HANDLE,sc.OutputHandle);
-#line 348
        }
     }
 
@@ -452,6 +447,7 @@ the control of Trapper.
 #line 434
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 483
 #if defined(JAPAN) || defined(KOREA)
 // Create 24dot font
 void GetLogFont( int size, LOGFONT *lplf )

@@ -26,6 +26,6 @@ src/mvdm-host/softpc.new/base/video/vga_prts.c,5822d1a00,1,6074,127,146,35,544fb
 src/mvdm-host/softpc.new/host/src/nt_cga.c,5822d1a00,1,1950,34,70,10,a3da7923223c7c47b088dcb1aea1fc4b36bf23360bf61de5d26a563485ac5d1f,measured-not-audit-status
 src/mvdm-host/softpc.new/host/src/nt_event.c,5822d1a00,1,4076,112,245,31,6e5ffb50359464ff7a41da96b3022d92f8ffb89217ce64ed2e1083e80a1903b0,measured-not-audit-status
 src/mvdm-host/softpc.new/host/src/nt_graph.c,5822d1a00,1,4944,182,339,59,6d4e1110064edf731c4e6c0076c679c846a966d363add7f6b963c08bf037284d,local-format-semantic-review-in-progress
-src/mvdm-host/softpc.new/host/src/nt_hosts.c,5822d1a00,1,985,1,985,6,189ecec55a893e54e8dff24ea6add7575f7fcb113e8d728c08649f502f13cd27,measured-not-audit-status
-src/mvdm-host/softpc.new/host/src/nt_mouse.c,5822d1a00,1,4106,1,4106,18,fdcf56470fc7eefe548ad285287a1ca633d5c12e3bbd1d286fbcfbaf83f111ca,measured-not-audit-status
-src/mvdm-host/softpc.new/host/src/nt_vga.c,5822d1a00,8,23,8,23,3,6a302d57e569fa95d1113d517bb4d06e12234ebb1bce31a3597580e0ab15e043,measured-not-audit-status
+src/mvdm-host/softpc.new/host/src/nt_hosts.c,5822d1a00,1,985,16,17,6,c103501be347309e2f48de90ac29e9ba8dd09ba366ce4ed777fcf5c5e8eaa4cc,source-reviewed-await-delivery
+src/mvdm-host/softpc.new/host/src/nt_mouse.c,5822d1a00,1,4106,45,97,18,47a9ae895317e4ea962582df6dedd239f6f4a750c1cd9f63b1bd9064f987374f,source-reviewed-await-delivery
+src/mvdm-host/softpc.new/host/src/nt_vga.c,5822d1a00,8,23,10,19,3,848c8d9b2f57d4525fcaf02a5b5219d77733fa0bb31db94e0af64bd3f03b7bab,source-reviewed-await-delivery

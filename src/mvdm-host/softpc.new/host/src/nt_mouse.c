@@ -53,9 +53,9 @@ GLOBAL BOOL  bPointerOff=FALSE;
 GLOBAL MOUSE_STATUS os_pointer_data;
 
 IMPORT word         DRAW_FS_POINTER_SEGMENT, DRAW_FS_POINTER_OFFSET;
-IMPORT word	    POINTER_OFF_SEGMENT, POINTER_OFF_OFFSET;
-IMPORT word	    POINTER_ON_SEGMENT, POINTER_ON_OFFSET;
-IMPORT word	    CP_X_S, CP_X_O, CP_Y_S, CP_Y_O;
+IMPORT word         POINTER_OFF_SEGMENT, POINTER_OFF_OFFSET;
+IMPORT word         POINTER_ON_SEGMENT, POINTER_ON_OFFSET;
+IMPORT word         CP_X_S, CP_X_O, CP_Y_S, CP_Y_O;
 IMPORT sys_addr     conditional_off_sysaddr;
 
 IMPORT word         F9_SEGMENT,F9_OFFSET;
@@ -77,8 +77,8 @@ RECT                 WarpBorderRect;     // in screen coordinates
 RECT                 WarpClientRect;     // in client coordinates
 
 LOCAL POINT          pMiddle; // centre point of the current Console window
-LOCAL POINT	     pLast = {0,0};
-LOCAL BOOL	     bAlertMessage=TRUE;
+LOCAL POINT          pLast = {0,0};
+LOCAL BOOL           bAlertMessage=TRUE;
 LOCAL BOOL           b256mode=FALSE;
 LOCAL int            old_x=319;    // previous pointer state (position)
 LOCAL int            old_y=99;     // in virtual coordinates.
@@ -117,7 +117,6 @@ FORWARD void   ScaleToWindowedVirtualCoordinates(IS16 *,IS16 *,MOUSE_VECTOR *);
 FORWARD void   host_m2p_ratio(word *,word *,word *,word *);
 FORWARD void   host_x_range(word *,word *,word *,word *);
 FORWARD void   host_y_range(word *,word *,word *,word *);
-#line 124
 FORWARD void   EmulateCoordinates(half_word,IS16,IS16,IS16 *,IS16 *);
 FORWARD void   AssembleCallMask(MOUSE_CALL_MASK *);
 FORWARD void   FullscTextPtr(int, int);
@@ -382,7 +381,6 @@ GLOBAL void mouse_set_position IFN2(USHORT, newx, USHORT, newy)
 //
 
 if((sc.ScreenState == WINDOWED && bPointerOff) || mvdm_softpc_mouse_route_active())
-#line 437
    {
    if(mvdm_softpc_mouse_route_active()) bFunctionZeroReset = FALSE;
 #line 438
@@ -411,7 +409,7 @@ GLOBAL void mouse_cursor_mode_change()
 }
 
 
-GLOBAL	void host_mouse_conditional_off_enabled(void)
+GLOBAL  void host_mouse_conditional_off_enabled(void)
 {
 #ifdef X86GFX
 #line 534
@@ -463,7 +461,6 @@ GetNextMouseEvent();
 // by the application.
 //
 
-#line 589
 AssembleCallMask(call_mask);
 
 //
@@ -472,7 +469,6 @@ AssembleCallMask(call_mask);
 
 mcs->button_status=os_pointer_data.button_l | os_pointer_data.button_r<<1;
 
-#line 597
 host_ica_unlock();  // synch with the event thread
 
 
@@ -508,7 +504,7 @@ else
 #ifdef X86GFX
 #line 628
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
-#endif	   // X86GFX
+#endif     // X86GFX
 #line 732
    }
 
@@ -674,7 +670,7 @@ old_r_button = os_pointer_data.button_r;
 //=========================================================================
 
 void ScaleToWindowedVirtualCoordinates(IS16 *outx,IS16 *outy,
-				       MOUSE_VECTOR *counter)
+                                       MOUSE_VECTOR *counter)
 {
 half_word video_mode,textorgraphics;
 SAVED SHORT last_text_good_x = 0, last_text_good_y = 0;
@@ -713,23 +709,23 @@ if(!bPointerOff)
       //
 
       if(os_pointer_data.x > 87)
-	 {
-	 *outx = last_text_good_x;
-	 }
+         {
+         *outx = last_text_good_x;
+         }
       else
-	 {
+         {
          *outx = (IS16)ConsoleTextCellToVPCellLUT[os_pointer_data.x];
-	 last_text_good_x = *outx;
-	 }
+         last_text_good_x = *outx;
+         }
       if(os_pointer_data.y > 87)
-	 {
-	 *outy = last_text_good_y;
-	 }
+         {
+         *outy = last_text_good_y;
+         }
       else
-	 {
+         {
          *outy = (IS16)ConsoleTextCellToVPCellLUT[os_pointer_data.y];
-	 last_text_good_y = *outy;
-	 }
+         last_text_good_y = *outy;
+         }
       }
    else // GRAPHICS_MODE
       {
@@ -747,7 +743,7 @@ if(!bPointerOff)
       //
 
       WindowedGraphicsScale(video_mode,(IS16)(os_pointer_data.x),
-			    (IS16)(os_pointer_data.y),outx,outy);
+                            (IS16)(os_pointer_data.y),outx,outy);
       }
 
    //
@@ -1586,8 +1582,8 @@ r->bottom = pt.y;
 //
 //  Function - EmulateCoordinates.
 //  Purpose  - When the mouse is hidden by the user in windowed mode, this
-//	       function generate absolute x,y values from the relative motion
-//	       of the system pointer between mouse hardware interrupts
+//             function generate absolute x,y values from the relative motion
+//             of the system pointer between mouse hardware interrupts
 //
 //  Returns  - Nothing.
 //
@@ -1683,10 +1679,10 @@ m2pY = *(short *)DX;
 //
 //  Function - WarpSystem Pointer
 //  Purpose  - Allows movement vectors to be calculated from the movement of
-//	       the operating system pointer. This function will not let the
-//	       the system pointer move out of the client area. This, plus the
-//	       warping mechanism ensures that the emulated pointer can move
-//	       forever in any given direction.
+//             the operating system pointer. This function will not let the
+//             the system pointer move out of the client area. This, plus the
+//             warping mechanism ensures that the emulated pointer can move
+//             forever in any given direction.
 //
 //  Returns  - TRUE if the system pointer has moved, FALSE if not.
 //
@@ -1799,7 +1795,6 @@ if (tR.top != WarpClientRect.top ||
   {
    CToS(&tR);
 
-#line 2288
 #ifdef MONITOR
 #line 2289
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
@@ -1890,13 +1885,13 @@ ShowConsoleCursor(sc.ActiveOutputBufferHandle, TRUE);
 void MouseSystemMenuON (void)
 {
     if (bPointerOff)
-	ClipCursor(NULL);
+        ClipCursor(NULL);
 }
 /* system menu off, restore clipping */
 void MouseSystemMenuOFF(void)
 {
     if (bPointerOff)
-	ClipCursor(&WarpBorderRect);
+        ClipCursor(&WarpBorderRect);
 }
 void ResetMouseOnBlock(void)
 {

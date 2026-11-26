@@ -38,9 +38,9 @@ Full remains S13; original guest remains immutable.
 | 25 | softpc.new/host/src/nt_cga.c | 10 | Delivered b42c5c586 |
 | 26 | softpc.new/host/src/nt_event.c | 50 | Delivered P10 d5e12bf22 |
 | 27 | softpc.new/host/src/nt_graph.c | 91 | Delivered P11 8187c5ba1 |
-| 28 | softpc.new/host/src/nt_hosts.c | 1 | Not started |
-| 29 | softpc.new/host/src/nt_mouse.c | 23 | Not started |
-| 30 | softpc.new/host/src/nt_vga.c | 4 | Not started |
+| 28 | softpc.new/host/src/nt_hosts.c | 1 | Source reviewed; P12 pending |
+| 29 | softpc.new/host/src/nt_mouse.c | 23 | Source reviewed; P12 pending |
+| 30 | softpc.new/host/src/nt_vga.c | 4 | Source reviewed; P12 pending |
 
 ## P1: ev_glue.c
 
@@ -659,3 +659,46 @@ and Escape roundtrip PASS. No Full claim. Commit/push pending.
 P11 receipt:8187c5ba1 pushed to origin/main.27/30 reviewed/delivered;
 1032/1060 points reviewed,28 remain.736 restored/delivered,296 residuals,
 zero local restorations pending. Census1773/7920. Next nt_hosts.c.
+
+## Hosts source review
+
+File28 nt_hosts.c: sole frozen point03719 retained pending owner. Actual
+conapi macro -> console_services mode RPC -> console_frontend native SET_MODE
+has no QuickEdit normalization. Original setup preserves initially-enabled
+selection, conflicting with guest mouse ownership; existing nt_event restores
+OrgInConsoleMode. Source/API evidence, not a fresh physical-click experiment.
+Restore LF and redundant anchors; add missing #line483 after final HUNTER
+exclusion.322 original matched logical lines correct;6 exclusions preserved.
+Non-error1/985 ->16/17 (+15/-968).28/30 reviewed,27 delivered;1033/1060
+points reviewed,27 remain.736 restored/delivered,297 residuals; no full point
+restoration counted for partial-format cleanup of retained03719. Local census
+1788/6952 (+1587/-95893). Pure format/line change accumulates into P12.
+Next nt_mouse.c review started; no production change there yet.
+
+## Mouse and VGA source review
+
+nt_mouse:23 points,16 format restorations and7 residuals. Actual bridge
+receives event-thread relative samples, scales once on CPU owner under ICA
+lock with selected virtual geometry, and fragments counters. Original absolute
+Console path cannot consume these samples. Reuse EmulateCoordinates reset,
+set-position and movement ordering; INT33/4 supersedes pending reset. Route
+entry seeds current guest position, not stale IRQ cache; departure retires
+original overlay after committing position. WOW direct shared cursor reader
+needs existing page-domain producer, guarded by active owner/CR3. No new
+coordinate algorithm/state.18 exclusions,1614 original logical lines correct.
+Non-error1/4106 ->45/97; same whitespace/line-stripped source.
+
+nt_vga:4 points,2 formats and2 residual bounds fixes. Original400-row cap
+rejects current640x480 full-frame caller. Wrap caller can exceed destination
+width; original do/while also requires positive height. Existing guards and
+source/destination clipping retain original painter loop; real painter fixture
+checks full frame, pitched rows, edge damage, source end and rejection. Historical
+original/clip-only negative controls support necessity, not fresh guest results.
+3 exclusions,1360 original mapped lines correct.8/23 ->10/19; no behavior change.
+
+30/30 source-reviewed;1060/1060 points,zero unreviewed.27 files delivered;
+736 restored/delivered,18 local full restorations pending,306 residuals.
+Local census1834/2939 vs201/102845 (+1633/-99906). P12 delivers hosts/mouse/vga
+together after cached build, dual publication and targeted verification.
+
+P12 final runtime12: cached build, dual publication26/26 hashes, relative\nmouse bridge, blocked tick/flush, actual packed painter, real MEM/NTVDMD\nand NESticle menu/Escape PASS. Governance/links PASS; commit/push pending.\nS10 closure still requires checking its guest transition acceptance scope.\n

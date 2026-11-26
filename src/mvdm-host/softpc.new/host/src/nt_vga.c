@@ -34,10 +34,10 @@
 #include "nt_graph.h"
 
 #line 36
-#ifdef MONITOR       
+#ifdef MONITOR
 #line 37
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#endif /* MONITOR */ 
+#endif /* MONITOR */
 #line 40
 
 IMPORT int DisplayErrorTerm(int, DWORD, char *, int);
