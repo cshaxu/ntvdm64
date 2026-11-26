@@ -829,3 +829,8 @@ winnt.zip unchanged. All 174 timer points final-verified; S9 restored total=253.
 The [complete 41-file census](s9-p10-census.csv) is directory-ordered and all
 current hashes checked, including unchanged remaining files. Prior absolute
 40-file subsets are superseded. 38/41 final-verified; P10 commit/push pending.
+
+P10 delivery receipt: e9c12cc5e committed and pushed to origin/main.
+38/41 files delivered, three remain; 414/437 points reviewed, 23 remain.
+253 restored register points delivered. Complete census 609/2917, cumulative
+-75/-29128. Governance/links passed. Next host/inc/cfpu_def.h.
