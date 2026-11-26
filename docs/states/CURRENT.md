@@ -33,7 +33,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S9 Ordered Progress
 
 [S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 30/41 source-reviewed
-and final-verified, 11 unreviewed. P5 commit/push pending. P5 six-file non-error
+and delivered through P5 810623ad1 (pushed), 11 unreviewed. P5 six-file non-error
 diff 27/1795 ->15/55 (-12 points/-1740 lines). Unified fc9492342 baseline net:
 +153 points/-23264 lines across S9; 40-file absolute census is 487/6864,
 with unchanged timer.c explicitly unmeasured pending exclusion-map review.

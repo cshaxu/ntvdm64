@@ -604,3 +604,7 @@ Absolute full-population totals still await timer.c's ordered review. This
 measurement is not additional source audit credit. Current batch remains
 27/1795 ->15/55 (-12/-1740), with all ten residual register points retained
 for owner review. Next ordered file is base/dos/emm_mngr.c.
+
+P5 receipt: 810623ad1 is committed and pushed to origin/main. All 30 reviewed
+files are delivered, 11 remain; documentation governance and relative links
+passed. Post-test publication hashes are 26/26. S9/T485 remain active.
