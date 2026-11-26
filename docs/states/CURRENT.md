@@ -36,7 +36,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 19/452 points final-verified:9 restored,10 residuals pending owner decision,
 433 unreviewed. P3 walias.h10/18 ->5/14;reviewed-file census54/3989 ->35/71,
 net-19/-3918. Runtime5 cached build,dual publication26/26,GDI,COPYDATA and
-real Win16 tests PASS;commit/push pending. Next:wcall32.c.
+real Win16 tests PASS;delivered and pushed as952408b8b. Next:wcall16.c.
 Migration39/159;Full is required at every S closure, including S11.
 
 ## S10 Closure Record

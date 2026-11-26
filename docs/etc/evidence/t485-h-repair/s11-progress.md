@@ -15,11 +15,11 @@ frozen point counts as current byte-sensitive diff counts.
 | 1 | src/mvdm-host/inc/wowcmdlg.h | 1 | Delivered0c20d5b19 |
 | 2 | src/mvdm-host/inc/wowkbd.h | 1 | Delivered0c20d5b19 |
 | 3 | src/mvdm-host/inc/wowkrn.h | 1 | Delivered0c20d5b19 |
-| 4 | src/mvdm-host/inc/wowsnd.h | 2 | P2 source-reviewed; format batch pending |
-| 5 | src/mvdm-host/wow32/isvwow.h | 1 | P2 source-reviewed; format batch pending |
-| 6 | src/mvdm-host/wow32/precomp.h | 3 | P2 source-reviewed; format batch pending |
+| 4 | src/mvdm-host/inc/wowsnd.h | 2 | P2 delivered 3bb82967a |
+| 5 | src/mvdm-host/wow32/isvwow.h | 1 | P2 delivered 3bb82967a |
+| 6 | src/mvdm-host/wow32/precomp.h | 3 | P2 delivered 3bb82967a |
 | 7 | src/mvdm-host/wow32/walias.c | 4 | P2 delivered 3bb82967a |
-| 8 | src/mvdm-host/wow32/walias.h | 6 | P3 final-verified; commit/push pending |
+| 8 | src/mvdm-host/wow32/walias.h | 6 | P3 delivered 952408b8b |
 | 9 | src/mvdm-host/wow32/wcall16.c | 4 | Pending |
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | Pending |
 | 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | Pending |
@@ -325,3 +325,10 @@ P3 reduces5points/4lines (10/18 ->5/14). Commit/push pending.
 The owner now requires full five-step delivery at every S closure; this is
 updated in EXECUTION,CURRENT,and the T485 plan. Ordinary P targeted cadence
 continues; S11 closure requires Full, not a deferral until S13.
+### P3 delivery receipt
+
+952408b8b committed and pushed; all eight reviewed files are delivered.
+The ordered list next entry is wcall16.c (four frozen points), not wcall32.c.
+Earlier next-file prose was a naming error; no out-of-order audit is claimed.
+S11 remains active:8/48 files,19/452 points;9 restored,10 owner-review
+residuals,433 unreviewed. Full remains mandatory at S closure.
