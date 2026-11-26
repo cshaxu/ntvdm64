@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 typedef uint16_t word; typedef word MOUSE_CALL_MASK;
+typedef uint16_t IU16;
 #define LOCAL static
 #define IFN0() (void)
 #define IFN1(a,b) (a b)

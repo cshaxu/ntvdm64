@@ -4,6 +4,7 @@
 #undef main
 #define LOCAL static
 #define NTVDM 1
+#define CPU_40_STYLE 1
 #define EGG 1
 #define VGG 1
 #define FALSE 0

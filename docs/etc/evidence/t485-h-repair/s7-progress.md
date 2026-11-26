@@ -388,3 +388,127 @@ and2 minimized residuals. No guest source or binary was changed. S7 totals:
 9/20 files final-verified for delivery,11remaining; cumulative reduction
 102points/904lines. Including S6:103points/905lines. Migration39/159.
 Commit/push completes P5; next ordered file is base/keymouse/mouse_io.c.
+
+## S7 P6 mouse_io.c whole-file review in progress
+
+Pinned start10003a896, XP blob51547e36d6b55391b0941d79fb59b43e91184eaf.
+The reviewed mapping metadata still carried its pre-recount641-point field;
+recomputing its actual body-only masks gives682points/6038lines
+(3017added/3021deleted), matching682 frozen dispositions. Use this live
+recount, not that stale summary field.
+
+build/t485-s7/p6/format-review.py restores whitespace outside quoted bytes
+and14 complete functions with existing real-product preprocessing evidence
+(function-preprocess/results-reviewed.json exit0, preprocessed_tokens_equal).
+Intermediate candidate is51points/224lines, down631points/5814lines. It
+exists only under build; production is unchanged and no build was started.
+Candidate equivalence evidence is historical supporting evidence, not final
+candidate verification. Remaining frameworks/semantic minimization must finish
+for the entire file before production build and delivery.
+
+Provider conclusions:
+- nt_reset.c binds working_mouse_funcs to nt_mouse.c the_mouse_funcs.
+  installed() returns mouse_state; set_graphics is empty dummy, and
+  mouse_cursor_display/undisplay are empty. Thus restoring original installed
+  host-pointer selection unchanged would skip actual guest pixel painting.
+  Restore original scaffold while selecting the CPU40 software body, rather
+  than keeping added error/else wrappers or silently deleting original branches.
+- callback push/pop uses guest-stack frames; the existing reentry fixture
+  checks nested normal returns and16-bit wrap, not arbitrary protected stacks.
+  CPU40's direct callback entry shares the proved pre-BOP IP advancement
+  contract. Preserve this bounded fix, not an invented second callback stack.
+- saved painter identity/text address prevent restoring a text cell through
+  a later graphics/page state; original_mouse_restore_dispatch_test covers
+  mode/page changes and single restore consumption. The EGA test covers
+  outside-screen/excluded areas and mode change during SAS reads, requiring
+  unconditional restoration of temporary geometry with one captured predicate.
+- route-active belongs to the existing compat mouse owner, not a new state.
+  Reuse its existing callback and virtual_swap_instance for correct VM context.
+
+Remaining work: finish the51 candidate differences in original order,
+restore original framework and provider branches where unselected, correct
+logical lines and exclusion pairing against final candidate, run existing
+mouse/callback/rendering tests and actual switching on the final package.
+Do not claim this file reviewed/delivered yet. S7 stays9/20 delivered,
+11remaining and cumulative reduction102points/904lines. The intermediate
+631/5814 reduction is NOT added to delivered statistics.
+
+### S7 P6 completed source candidate and verification start
+
+Further whole-file minimization restores seven original software-painter
+condition frames with CPU40 added to their original eligibility condition;
+removes the redundant error/else inversions; restores both original host
+pointer branches behind the CPU40 boundary; and restores NTVDM/MONITOR
+nesting for mouse_save_state declarations. The callback's redundant inner
+CPU40 branch is removed because the file already rejects other backends.
+The original CPU30/else structure and unsupported error remain. Original
+unused declaration/read and callback explanation are restored where no
+failure evidence required their removal. CPU40 direct-IP semantics remain.
+
+The final candidate is49points/187lines, reduction633points/5851lines
+against682/6038. Two former body masks are removed because their original
+code is now selected/restored; they are not used to hide framework changes.
+Scripts and receipts: build/t485-s7/p6/{format,framework,semantic,final-source}-review.
+Final source hash and451 regenerated diagnostic anchors are recorded in
+final-source-review.json. Anchors cannot be inserted inside block comments
+or macro continuation lines; restoring anchors follow conditional changes.
+
+Production mouse_io.c now contains this entire candidate. The extracted
+restore-dispatch test explicitly selects CPU_40_STYLE, matching production;
+it no longer accidentally relies on the former unconditional NTVDM else.
+Background runner PID7404 (run.json) owns cached full build, dual runtime8
+publication, existing mouse mode/geometry/restore/text/reentry tests and real
+WOW/Win3.1/Win95/DOS4GW targeted gates. No P6 result is claimed in advance.
+Delivered remains9/20 and102/904; prospective cumulative735points/6755lines
+is LOCAL until final gates, commit and push. No original guest changed.
+
+### P6 final source reconciliation (runtime9 pending)
+
+Final token-aware review removed the extra save-state blank line and added
+CPU40 explanatory comment; those do not need mirror exceptions. The completed
+candidate is 47 non-error points / 185 added-plus-deleted lines, compared with
+682 / 6038 at P6 entry: local reduction 635 points / 5853 lines. The source
+receipt has 450 regenerated diagnostic anchors. No same-token-only residual
+hunks remain. These measurements supersede the intermediate 49 / 187 above.
+
+The runtime8 product build and dual publication succeeded. Fixture failures
+were missing IU16 declarations in extracted text/callback tests and an old EGA
+signature extractor; they were not product runtime failures. Restore-dispatch
+and text-cursor passed after fixture correction. An attempted republish to the
+existing runtime8 evidence root was rejected by its fresh-root guard; it did
+not invalidate the prior hash-verified publication. Actual guest gates had not
+started when the callback fixture compilation failed.
+
+The callback fixture now declares the same uint16 type used by the original
+function; nested-frame assertions are unchanged. Owned PID7272 runs final9
+cached build, fresh runtime9 dual publication, mouse fixtures and the actual
+WOW/desktop/NESticle gates. Results live under build/t485-s7/p6/final9. No final
+result, commit or push is claimed yet. Delivered remains 9/20 files and
+102 points / 904 lines reduced. Including this local candidate would be
+737 points / 6757 lines, not yet delivered. Original guest binaries unchanged.
+
+Runtime9 cached build and dual hash-verified publication passed. All five mouse fixture groups and the real WINMINE window passed; Win3.1 standard desktop and normal exit passed. Enhanced/Win95 round trips and DOS4GW remain running. The [47-point residual register](s7-p6-mirror-diff.json) and pending-decisions.csv are synchronized. No residual is treated as approved merely because it was minimized.
+
+### P6 final verification and delivery checkpoint
+
+Runtime9 cached full build and dual hash verification of all 13 host images
+passed. Final package checks: mouse mode, EGA scaling/restore, saved painter
+and text-page restoration, text cursor and nested callback frames; real
+WINMINE; Win3.1 standard and enhanced desktop/exit; enhanced Win3.1 and Win95
+strict Alt+Enter round trips (window-input, fullscreen-text, returned input,
+second fullscreen, same-window all 1); real NESticle pixels and Escape menu
+hide/restore. Win95 normalExit=false/knownExitOne=true retains the approved
+historical boundary; this does not claim that exit code was repaired.
+
+Final mirror result: 682 points/6038 lines -> 47 points/185 lines, reducing
+635 points/5853 lines. The 47 residuals have explicit upstream anchors,
+necessity, minimality and provider evidence in s7-p6-mirror-diff.json and
+pending-decisions.csv. The 682 historical IDs are reconciled at whole-file
+level; they are not all labelled fully restored. Two formerly excluded bodies
+are restored and removed from masking; final diagnostic anchors total 450.
+
+S7 final-verified file progress is 10/20, with 10 remaining; cumulative mirror
+reduction is 737 points/6757 lines. Including S6 it is 738 points/6758 lines.
+Next file is softpc.new/base/video/video.c. This P includes fixture interface
+repairs only, not weakened assertions or guest edits. Commit/push completes
+this delivery; no S7 closure or N004 admission is implied.

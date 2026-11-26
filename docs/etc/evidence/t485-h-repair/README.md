@@ -21,3 +21,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [Repair ledger](repair-ledger.csv) overlays the frozen audit IDs with current implementation and residual-review status. [S6 setter trace](s6-setter-trace.txt) records the actual zero-limit publication counterexample.
 
 [S7 ordered repair progress](s7-progress.md) separates local review, pending verification and delivery.
+
+[S7 P6 mirror residuals](s7-p6-mirror-diff.json) records all 47 current mouse differences, upstream anchors, sizes and provider evidence; runtime acceptance remains separate.

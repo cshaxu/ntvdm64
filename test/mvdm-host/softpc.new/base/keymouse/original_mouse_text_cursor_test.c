@@ -13,6 +13,7 @@
 #define VID_ADDR 0x44e
 typedef struct { int x,y; } POINT_VALUE;
 typedef struct { POINT_VALUE top_left,bottom_right; } MOUSE_AREA;
+typedef uint16_t IU16;
 typedef uint32_t MOUSE_BYTE_ADDRESS;
 static struct { POINT_VALUE position; } cursor_status;
 static POINT_VALUE cursor_grid={8,8},save_position;
