@@ -84,7 +84,7 @@ ntvdm_source_projection(event-reset.inc "${notification_source}"
 ntvdm_source_projection(event-timer.inc "${notification_source}"
   "   /* Action Insignia" "   /* INTEL inter instruction" "" FALSE)
 ntvdm_source_projection(event-irq.inc "${notification_source}"
-  "   if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))" "#else\t/* SFELLOW */\n#line 4421" "" FALSE)
+  "   if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))" "#else\t/* SFELLOW */" "" FALSE)
 worker_unit("obj/tests/ccpu-event-consumers.obj"
   "${NTVDM_REPO}/test/mvdm-host/ccpu_event_consumers.c"
   "/nologo /TC /MT /W3 /DPROD /I\"${CMAKE_BINARY_DIR}\""

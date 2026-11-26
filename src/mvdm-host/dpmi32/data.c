@@ -125,13 +125,11 @@ USHORT WOWFreeFunc;
 // Selector limits
 //
 #if DBG
-#line 111
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
-#line 114
+#line 131
 PULONG ExpSelectorLimit = NULL;
 #endif
-#line 116
 
 //
 // Start of intel address space in process memory
@@ -155,7 +153,6 @@ ULONG DosxIntHandlerIret;
 ULONG DosxIntHandlerIretd;
 ULONG DosxRMReflector;
 
-#line 138
 /* Guest-linear descriptor images consumed separately by CCPU.  The DOSX
  * 53:00 table is a GDT source; original process-LDT publication is a
  * distinct owner. */
@@ -169,7 +166,6 @@ DpmiCpu40GetDosxIdtDescriptor(
     )
 /* WOW DOSX publishes SEL_IDT after MoveDscrTables relocates the tables.
  * Use that final descriptor in place of the 53:00 construction table. */
-#line 160
 {
     const USHORT DosxIdtSelector = 0x88u; /* pmdefs.inc, IFDEF WOW */
     PLDT_ENTRY Descriptor;
@@ -194,7 +190,7 @@ DpmiCpu40GetDosxIdtDescriptor(
     return TRUE;
 }
 #endif
-#line 138
+#line 157
 
 VDM_INTERRUPTHANDLER DpmiInterruptHandlers[256] = {0};
 VDM_FAULTHANDLER DpmiFaultHandlers[32] = {0};

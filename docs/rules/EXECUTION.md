@@ -853,3 +853,10 @@ already excluded by #error. In retained mirror branches, preserve original
 code units even when unused. Non-use is not evidence for deletion. A retained
 deviation needs concrete bug-fix, compilation/ABI, or external-integration
 boundary evidence; the adaptation relying on itself is not such evidence.
+
+Owner clarification: restoring original line endings, terminal-newline or
+formatting is approved even when a whole-file formatting difference splits
+into multiple real residual blocks. Record the byte-sensitive before/after
+counts and preserve conditional-path #line correctness. This approval does
+not authorize new behavioral differences or hiding format differences from
+the census; remaining functional adaptations keep their evidence and review.

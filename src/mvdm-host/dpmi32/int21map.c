@@ -137,8 +137,10 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
 #ifdef DBCS
 #error Unsupported excluded original configuration
 #else
+#line 140
     NotSupportedBetter             , // 63h - Hangool call
 #endif
+#line 142
     NotSupportedBad                , // 64h - Set Prn Flag
     GetExtendedCountryInfo         , // 65h - Get Extended Country Info
     NoTranslation                  , // 66h - Get/Set Global Code Page
@@ -205,6 +207,7 @@ Return Value:
         USHORT Cs, Ss;
         USHORT clientDs = getDS(), clientEs = getES();
 
+#line 204
         Eip = getEIP();
         Esp = getESP();
         Cs = getCS();
@@ -213,11 +216,11 @@ Return Value:
         if (getAX() == 0x6300) ReturnDSSI();
         else (*ApiXlatTable[DosMajorCode])();
         zeroFlag = getZF();
-#line 210
 
         /* Real-mode DOS can reload the same selector with a paragraph base. */
         if (getDS() == clientDs) setDS(clientDs);
         if (getES() == clientEs) setES(clientEs);
+#line 211
         setEIP(Eip);
         setESP(Esp);
         setCS(Cs);
@@ -1058,8 +1061,8 @@ Return Value:
     DECLARE_LocalVdmContext;
     USHORT Selector;
     BOOL returnDI = getAH() == 0x59;
-#line 1057
 
+#line 1058
     DpmiSwitchToRealMode();
     DPMI_EXEC_INT(0x21);
     Selector = getES();
@@ -1344,6 +1347,7 @@ Return Value:
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1340
         NoTranslation();
         return;
     }
@@ -1958,6 +1962,7 @@ Return Value:
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1948
     setCF(1);
 }
 
@@ -2110,6 +2115,7 @@ Return Value:
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2100
         NoTranslation();
         return;
     }
@@ -2157,6 +2163,7 @@ Return Value:
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2147
         NoTranslation();
         return;
     }
@@ -2238,6 +2245,7 @@ Return Value:
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2228
         NoTranslation();
     }
 }
@@ -2558,6 +2566,7 @@ Return Value:
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2553
         NoTranslation();
         return;
     }
@@ -2595,9 +2604,9 @@ Return Value:
 
     case 0x42:
         Length = (Data[0] & 2) ? 7 : 5;
+#line 2579
         break;
 
-#line 2581
     case 0x60:
         //
         // Map get device params

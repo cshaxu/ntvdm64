@@ -105,3 +105,383 @@ primary files and the one coupled header, measured baseline 3/3525 -> 4/1636,
 +1 point/-1889 lines. This is not the unmeasured whole-S9 census.
 Next primary file: dbgdll/excptn.c. Full remains the S13 integrated checkpoint.
 P2 delivery receipt: e7dad7b10 pushed to origin/main. S9: 2/41 delivered, 39 remain.
+
+## P3 ordered debugger review (not delivered)
+
+excptn.c: 1 point/681 lines with CRLF. All 20 frozen points have concrete
+necessity: 32 register reads/writes must use live CCPU rather than dereference
+px86 (the original CCPU provider returns NULL); one parameterized xxxDbgFault
+entry is called by dbg.c through WINAPI with ULONG. Original exception frame
+low words, high-word merges and dispatch remain unchanged. A context facade
+would add synchronization/ownership rather than remove complexity. No product
+source change has been made to this file. LF plus inline WINAPI would give
+20 points/66 lines (+19 points/-615 lines); owner approval requested before
+implementation. All 20 retained points are in pending-decisions.csv.
+
+module.c: 1/415 -> 1/2 locally. The sole adaptation is WINAPI on the two-
+argument xxxDbgNotifyNewTask; dbg.c declares and calls the matching pointer.
+segment.c: 1/451 -> 1/2 locally. The sole adaptation is WINAPI on the seven-
+argument xxxDbgSegmentNotice; matching pointer and actual call are in dbg.c.
+Both are restored to original LF, with the qualifier on the original return-
+type line. Their bodies are byte-identical to XP after removing that qualifier,
+and line counts/positions match original. Existing ABI is unchanged.
+Combined local reduction: 0 points/862 lines. No build or delivery claimed;
+pure formatting accumulates per owner policy. Residuals stay pending review.
+
+Progress: 5/41 reviewed, 36 unreviewed; 2 delivered, 2 local format restorations,
+1 unchanged file awaiting format-point-increase decision. Next dpmi32/data.c.
+P2's three parameterized ABI residuals are also now explicitly synchronized
+into pending-decisions.csv, alongside their existing repair-ledger records.
+### P3 data.c and dpmiint.h review
+
+DPMI data.c: non-error byte-sensitive 5 points/42 lines -> 3 points/38 lines.
+Only #line directives change: correct selected ExpSelectorLimit to original
+line 131, and code after the inserted CCPU helper to line 157; remove redundant
+old-baseline anchors. Removing #line from before/after yields byte-identical
+source, unchanged #error. Checked 133 matched retained original nonblank code
+and comment lines against logical positions. No algorithm changes.
+
+Cpu40GdtShadowAddress/Cpu40LdtShadowAddress have separate readers/writers in
+dpmiselr.c and ownership checks in dpmiint.c. modesw.c consumes the final IDT
+accessor, with no fallback to an obsolete construction address. Existing
+cpu40_descriptor_domain_fixture.c covers unpublished state, relocation and
+architectural limit decoding. These mechanisms remain; no new test pass is
+claimed for the local line-only change. HXP-R-00110 remains in pending decisions.
+
+DPMI dpmiint.h: 3 points/6 lines unchanged. The CCPU guard is required for the
+software backend's GetRegisterByIndex/SetRegisterByIndex used in DpmiOp0f's
+MOV CR0 paths (dpmiint.c). CCPU c_reg.h defines A_EBX=3 and A_ECX=1, proving the
+original repeated ECX entry at index 3 wrong for both read and write tables.
+All three one-line adaptations remain, with no new wrapper/state/algorithm.
+HXP-R-00165/166/167 are recorded as evidence-backed residuals. #error and line
+positions are unchanged. No build is warranted solely for this no-edit review.
+
+Progress: 7/41 reviewed, 34 unreviewed; 2 delivered, 3 local format/line files,
+1 unchanged approval-pending file (excptn.c), 1 reviewed unchanged header.
+Current three local files reduce 2 points/866 lines collectively. The full
+S9 byte census remains unmeasured. Next primary file: dpmi32/dpmimemr.c.
+### P3 dpmimemr.c review
+
+Byte-sensitive non-error diff: 6 points/27 lines -> 4 points/25 lines.
+Removed only redundant #line 261 and 277; all 196 matching nonblank original
+lines retain their exact logical positions. No #error, newline or EOF change.
+The four allocation-domain adaptations remain evidence-backed residuals:
+actual XMS object FLAGS have no i386, so XMSInit reserves its extended range
+with VdmAllocateVirtualMemory and initializes ExtMemSA over that reservation.
+The generic allocator returns STATUS_NO_MEMORY when exhausted, not the
+STATUS_NOT_IMPLEMENTED needed by the original DPMI fallback. Allocation,
+free, resize and query must use the same ExtMemSA ownership domain. Restoring
+only one operation would mix allocation owners; redirecting shared Vdm APIs
+would also affect WOW/EMS and is not an equivalent simplification.
+HXP-R-00168 through 00171 are synchronized into pending decisions.
+No new runtime pass is claimed. The change is line-only and accumulates.
+Progress: 8/41 reviewed, 33 unreviewed; 2 delivered, 4 local format/line files,
+1 unchanged approval-pending file, 1 reviewed unchanged header.
+Current local batch reduction: 4 points/868 lines. Full S9 census unmeasured.
+
+### P3 dpmimscr.c review
+
+Non-error byte-sensitive diff remains 1 point/2 lines. Actual object FLAGS
+select both _X86_ and CCPU. Original fast-BOP hardware entry consumes TEB
+VdmContext and GetFastBopEntryAddress; there is no selected implementation
+of that hardware entry. Original emulator branch returns zero BX/DX/ES to
+the guest. The single guard adjustment preserves that original contract.
+Dpmi dispatch slot 3 and initialization are the actual consumers. No source,
+#error, newline, EOF or logical-line change. HXP-R-00172 is pending decision.
+Progress: 9/41 reviewed, 32 unreviewed, 2 delivered; local reduction stays
+4 points/868 lines. Next int21map.c; its 1/6004 raw diff includes CRLF and
+excluded bodies and is not yet the non-error census.
+
+### P3 int21map.c entry measurements (review in progress)
+
+Pinned original hash verified. Framework comparison matches all conditional
+directives; 10 branches consist only of excluded bodies. Removing those
+original bodies and current error markers gives 1 point/5965 lines, including
+CRLF/LF and EOF. LF-only candidate gives 20 points/51 lines; it is not applied
+and does not include any further line-map correction. Measurement is saved
+in build/t485-s9/p3/int21map-metrics.json. Raw 1/6004 is superseded by this
+non-error count for reporting. No source change and no completed-file credit.
+Existing S38 evidence includes the actual AH59 ES:DI loss, poisoned EDI
+return check, INT21 offset/length and EXEC output witnesses. Review continues
+against current callers and source; historical tests are not final-P3 passes.
+
+### P3 int21map.c review conclusion; candidate not applied
+
+The functional residuals retain original API translation ownership:
+- AH59 uses original segment conversion with DI and width-specific zero-extension;
+  S38 recorded real ES:DI being lost and tested poisoned high EDI after repair.
+- AX6300 uses existing ReturnDSSI in the non-DBCS profile; S38 unchanged pointer
+  probes failed before and passed after this dispatch correction.
+- AH06/0C06 nonblocking input retains DOS ZF after the existing CF-only IRET;
+  S38 captured FLAGS 3246 becoming 3202 before repair.
+- DS/ES unchanged selectors need their protected caches reloaded: SetV86Exec
+  loads pseudo descriptors, whereas DpmiSwitchToProtectedMode restores CS/SS
+  only. The guard preserves translated output selectors rather than replacing
+  them with saved inputs.
+- EXEC AL1 copies the successful eight-byte SS:SP/CS:IP result back to its owner;
+  the before/after probe recorded A5 bytes versus returned stack/entry values.
+- IOCTLMap2Bytes needs the client DX/EDX offset; the original uses DS:0.
+- IOCTL metadata pairs need 25/2-byte mapping; format 42 needs 5/7 bytes instead
+  of uninitialized Length. Existing controlled device-boundary tests cover
+  these without actual disk writes.
+- Track I/O's 32-bit selector is at original ParameterBlock+13, outside the
+  13-byte bounce copy; reading it from BufferedPBlock is out of bounds.
+
+Candidate preserves all functional tokens and all ten #error branches, restores
+LF and reconciles #line. 2152 matching nonblank lines were mapped to XP positions.
+Current non-error 1/5965 -> candidate 22/52 (+21 points/-5913 lines). Owner approval
+requested before applying; file remains unchanged. This is byte-sensitive,
+including newline/EOF, not lexical-zero accounting. Pending records synchronized.
+S9: 10/41 reviewed, 31 unreviewed; 2 delivered; four local format/line files,
+two unchanged files awaiting format approval, two reviewed unchanged files.
+Local reduction remains 4 points/868 lines. Next dpmi32/precomp.h.
+
+### P3 precomp.h review
+
+Non-error byte-sensitive diff stays 1 point/10 lines, no source edit. CCPU
+getMODE must use live PE and !VM rather than host architecture or passive TEB
+context. The empty local-context macro avoids introducing the monitor-only
+VDM_TIB context into CCPU. Three shared declarations bind actual definitions
+in data.c/dpmiselr.c to dpmi32.c initialization, selector updates, dpmiint.c
+ownership checks and modesw.c IDT publication. They are private DPMI contracts,
+not duplicate algorithm providers. Keeping them here avoids repeating externs
+in consumers or moving C layout knowledge to B. HXP-R-00222 remains pending.
+The pm_entry fixture cited by old audit uses its own getMODE macro; it proves
+mode-entry ordering only, not this header's VM test. No new test pass claimed.
+Progress: 11/41 reviewed, 30 unreviewed, 2 delivered. Four local format/line
+files, two unchanged approval-pending files, three reviewed unchanged files.
+Cumulative measured changed files (six primary plus coupled softpc.h):
+16 points/4460 lines -> 13 points/1703 lines, net -3 points/-2757 lines.
+This includes delivered P1/P2 and local P3, not the complete S9 population.
+Local P3 alone remains -4 points/-868 lines. Next base/bios/slave_bs.c.
+
+### P3 BIOS slave and tape review
+
+slave_bs.c non-error byte-sensitive 5/6 -> 3/4. Removed two #line directives
+inside excluded branches, retaining post-branch anchors; 105 matching original
+nonblank code/comment lines checked. EOI correction remains: ICA1_PORT_0 owns
+OCW2 acknowledgment, while ICA1_PORT_1 updates IMR. Existing slave_bios_eoi_test
+uses actual INTACK/BIOS/PIC and checks ISR/masks/callback counts. Not rerun yet.
+
+tape_io.c non-error byte-sensitive 1/636 -> 1/635 (19 excluded branches,
+including nested directives removed with their owning excluded body). Removed
+unnecessary xms.h; actual selected xms.486/xms.h declares no descriptor helper,
+and the old cited base/inc/xms.h does not exist. Original local A20 declarations
+remain. Exact product FLAGS compile the no-header candidate successfully; only
+existing file-scope-function and unused-local warnings. No runtime claim.
+HXP-R-00500 is locally restored, not delivered. HXP-R-00501 remains necessary:
+third output is limit (not base); actual compat provider writes ULONG and BIOS
+source_limit/target_limit are sys_addr. Keep matching prototype. Current CRLF
+and redundant line anchors remain for a separately measured formatting candidate;
+no blanket byte-restoration claim. Original guest and all exclusions unchanged.
+Source review: 13/41, 28 unreviewed; delivered 2. Local changes in six files.
+Local cumulative reduction 6 points/871 lines. Across delivered P1/P2 and these
+six local files plus coupled softpc.h: net reduction 5 points/2760 lines.
+Formatting approval remains unresolved, so full S9 is not delivered.
+
+Tape formatting candidate is now fully measured: 1/635 -> 16/17, +15 points
+/-618 lines, 19 exclusions unchanged, 255 matching nonblank lines reconciled.
+Candidate only in build/t485-s9/p3/tape-format-candidate.c; approval requested.
+HXP-R-00500 is in repair-ledger as local compile-verified, pending delivery.
+
+### P3 virtual.c NIDDB review
+
+Non-error byte-sensitive 13 points/20 lines -> 3 points/9 lines. Removed
+redundant line anchors and one extra blank; 681 matching nonblank original
+lines mapped correctly. Existing behavior tokens and two exclusions unchanged.
+The original calloc instance table is not published until all children exist;
+its allocation-failure cleanup needs the added table free after freeing children.
+The existing no-retry fixture counts live allocations at every failure ordinal.
+The VM byte must be range/live-table checked before vrecs indexing and before
+same-byte early return; the existing noreturn compat failure provider is used.
+No fallback VM, second registry or allocator is introduced. Three residuals
+remain pending; HXP-R-00503 formatting restoration is local, not delivered.
+No runtime test rerun or acceptance claim. S9: 14/41 reviewed, 27 remaining,
+2 delivered; seven local files. Local reduction 16 points/882 lines; combined
+with delivered P1/P2, net reduction 15 points/2771 lines in measured changed
+files. Next softpc.new/base/ccpu386/c_bsic.c.
+
+### P3 c_bsic.c review
+
+Non-error 9 points/18 lines -> 1 point/10 lines. Removed redundant #line;
+all matching original nonblank lines retain physical/logical positions because
+each excluded original body is one line replaced by one error marker. Original
+file is LF; only appended helper had ten CRLF lines, now restored to LF too.
+The ten-line helper remains: F binds its scalar callback in mvdm_dpmi_binding.c;
+B uses the three scalar fields without importing CPU_DESCR. It calls original
+read_descriptor_linear, not a second decoder. HXP-R-00506 stays pending.
+No behavioral token change; no new runtime pass. S9 15/41 reviewed, 26 remain,
+2 delivered. Eight local files; local reduction 24 points/890 lines. Including
+delivered P1/P2, measured net reduction 23 points/2779 lines. Not full-S9 census.
+
+### P3 c_bsic.h and c_debug pair review
+
+c_bsic.h 1/2 unchanged. A real PUSHF object compile with the fixed original
+header produces C4013: c_getEFLAGS undefined, assumed extern int. That owner
+does not include external cpu4gen.h; retaining the one owner-local prototype
+avoids adding a broader CPU external API header. Log: pushf-original-header.log.
+No runtime defect is inferred solely from the warning.
+
+c_debug.c 1/778 unchanged, LF-only candidate 3/6 (+2/-772), not applied.
+Three necessary events: initial pending state, original data match, original
+instruction match. TSS match is in c_tsksw.c; c_main.c consumes/reset/cancels
+and exposes it with debug register save/restore. DR6 remains architectural
+sticky status. S38 actual CPU witnesses verify retained DR6 without spurious
+repeat delivery, exception cancellation and RF suppress-once behavior.
+c_debug.h LF restored locally: 1/92 -> 1/2; only its pending-state declaration
+remains. No behavior or #line-number change. Existing test evidence is not a
+new final-package pass. All residuals are synchronized into pending decisions.
+
+Progress: 18/41 reviewed, 23 unreviewed; 2 delivered. Nine local changed files;
+three unchanged files awaiting formatting approval (excptn.c, int21map.c,
+c_debug.c), four other reviewed unchanged files. tape_io.c has a local include
+restoration and a separate unapplied formatting candidate. Local reduction 24 points/980 lines; combined
+with P1/P2 net reduction 23 points/2869 lines among measured changed files.
+Next c_main.c. No S9 closure or whole-population byte census is claimed.
+
+### P3 c_main.c review
+
+Current non-error byte-sensitive 1 point/9173 lines is unchanged. The full
+LF/#line-only candidate is 81/213 (+80/-8960), not applied. Both original and
+current have a terminal LF; original has 4940 LF lines, current 4839 CRLF
+lines. Candidate verifies 3793 matching nonblank original logical positions;
+75 excluded bodies remain. Final selected-path compilation is still required.
+
+All 37 frozen functional records have source-reviewed dispositions in pending.
+Removing new declarations produces nine C4013 diagnostics with the existing
+product flags, including d_mem/limit_check/address_add from original operand
+macros, host_timer_event, ica_intack and load_pseudo_descr. This is declaration
+contract evidence, not an observed runtime crash. Diagnostic PID 18464 has
+finished; log is build/t485-s9/p3/c_main-original-declarations.log. This was a
+negative source-copy compile, not the final cumulative build or acceptance.
+
+The original heartbeat is a separate host thread. Atomic observe/raise/consume
+keeps the original event bits, and consuming before callback avoids erasing a
+new notification. HLT observes RESET without consuming it; the normal boundary
+consumes it. The existing auto-reset event closes the check-to-wait race and is
+owned by worker startup/teardown. PIC actually returns -1; the stale-PIC fixture
+uses the actual provider. Valid IRQs have one acknowledgement and the existing
+DPMI hook chooses DOSX or original guest dispatch.
+
+DPMI successful non-STI emulation marks the current existing simulation frame;
+ntthread consumes that mark into completion longjmp code 2. This reuses original
+TF/debug/PIC completion, while STI retains its instruction delay. DR6 remains
+sticky status, separate from one pending event; reset/cancel and restored debug
+context use actual CPU witnesses in ccpu_halt_reset_test.c. Narrow capture/apply
+providers are registered by mvdm_dpmi_binding.c, not an alternate CPU. Finally
+cleanup abandons only its matching simulation frame; the callback-abort fixture
+covers inner and outer SEH exits and frame reuse. These source/test inspections
+do not claim a fresh final-package runtime pass or every trap variant covered.
+
+Progress: 19/41 source-reviewed, 22 remain; 2 delivered. Nine local changed
+files; four unchanged files await formatting approval. c_main has no actual
+diff reduction yet. Local reduction remains 24 points/980 lines; including
+P1/P2, net reduction 23 points/2869 lines among measured changed files only.
+Next c_oprnd.h. No full-S9 current byte census or delivery completion is claimed.
+
+### P3 approved format restoration and c_oprnd.h
+
+Owner permanently approves original newline/format restoration even when a
+whole-file newline hunk splits into the smaller real residual differences.
+No behavioral increase is admitted by this exception. Applied excptn.c 1/681
+->20/66, int21map.c 1/5965->30/60, tape_io.c 1/636->23/24,
+c_debug.c 1/778->3/6 and c_main.c 1/9173->137/269. Earlier candidate counts
+are superseded: explicit anchors after conditional branches are retained so
+an inactive branch cannot skip the line restoration. Error markers and all
+non-line-control tokens are unchanged. These are local changes, not delivery.
+
+c_oprnd.h: 24/42->16/34, three excluded PIG bodies unchanged. Removed eight
+redundant line directives; 176 selected-path matching noncontinuation lines
+retain original locations. Macro continuations are kept intact. The original
+D_E5e limit sizes 94/106 disagree with its own actual F_E5e/P_E5e 108/94-byte
+transfers. Actual x87 fixtures cover exact/short segment spans, discontiguous
+pages and page protection, with no changes allowed before a failed store.
+The shared tail probe forces multi-page translation rather than treating a
+word-validated physical address as a contiguous large operand. Bit-string
+register indices are signed; the retained calculation and original address_add
+handle negative displacement and 16-bit wrapping. The existing CCPU_BIT_CASE
+matrix computes its independent oracle using int64 division and includes
+BT/BTS/BTR/BTC and 16/32-bit addresses. Nine residual records stay pending;
+no new runtime pass is claimed.
+
+Current local batch, recomputed from HEAD and fixed XP bytes: 14 files,
+70 points/18346 lines ->246 points/551 lines; +176 points/-17795 lines.
+Including disjoint delivered P1/P2 files/header: +177 points/-19684 lines.
+Formatting explains the approved point increase; no source-line count is used.
+20/41 source-reviewed, 21 remain; two delivered, fourteen local changed,
+four reviewed unchanged. No formatting approval is outstanding. Next c_tsksw.c.
+
+### P3 c_tsksw.c review
+
+HXP-R-00559/00560: non-error 1/1171 ->5/7, three excluded bodies unchanged.
+Original LF restored; removed #line inside the excluded PIG/#if0 bodies and
+one redundant anchor. 448 matching selected-path source lines retain original
+logical positions. One c_debug.h include and one pending assignment remain.
+Original TSS T bit still sets DR6.BT; pending marks this event for the common
+consumer without turning sticky DR6 into a repeated event. No second event
+owner is added. Existing debug cancellation tests are relevant shared-state
+evidence, not an independent task-switch runtime witness. No new test pass.
+21/41 source-reviewed, 20 remain, two delivered; fifteen local changed files.
+Local net +180 points/-18959 lines; with delivered disjoint P1/P2, +181/-20848.
+Next c_xcptn.c. Final cumulative build/publication/tests/commit/push pending.
+
+### P3 c_xcptn.c review and batch boundary
+
+Non-error 29/41 ->12/23, seven excluded branches unchanged. Restored the extra
+blank line (HXP-R-00562), removed 17 redundant #line directives; 437 matching
+selected-path noncontinuation lines retain original logical positions.
+Five host-hook conditionals retain braces: original syntax only conditions the
+first assignment, then unconditionally calls the nonreturning continuation,
+skipping guest dispatch even when the hook returns FALSE. The actual host hook
+explicitly returns FALSE when unhandled. This is direct control-flow evidence.
+The trace guard is also necessary: selected PROD trace.c defines trace_file
+with zero initialization, and selected trace_init has no initializer. The
+CCPU_SHOW_EXCEPTIONS environment option can otherwise enable fprintf(NULL).
+This is the precise provider evidence, rather than the older vague claim that
+logging was merely early. Eleven functional residual IDs remain pending.
+
+22/41 reviewed, 19 remain; two delivered, sixteen local changed files and four
+reviewed unchanged. P3 batch non-error 100/19558 ->263/581, net +163/-18977.
+Including delivered disjoint P1/P2, cumulative +164/-20866. Original newline
+restoration explains approved point growth. Complete current-file work is now
+ready for the cumulative cached full build, dual publication and targeted
+final-package verification. Next ordered file after P3 delivery is call.c.
+
+P3 build attempt 1 (PID 5668) terminated at CMake configuration: the IRQ
+fixture projection bound its end to the removed literal #line 4421. No product
+compile failure was observed. Updated SourceProjection to find a unique end
+after its unique start, and changed this fixture to its actual #else boundary.
+No assertion or production control flow was removed. Attempt 2 PID 5564 uses
+the same cached build root after attempt 1 terminated. Its final result is
+pending; logs and run identities are under build/t485-s9/p3.
+
+P3 cached full build attempt 2 passed; runtime3 staged from runtime2 and current
+build outputs, all thirteen images published to assets/release and
+O:/WINNT/SYSTEM32 with 26 SHA256 checks. Test attempt 1 PID 10576 stopped before
+fixture compilation because the temporary orchestrator passed a slash path to
+cmd.exe; this is a runner error, not a product failure. The corrected existing
+CMD runner is active as PID 24588. No product rebuild or republish was repeated.
+
+### P3 final verification
+
+Final package runtime3: cached full x64/x86 product build and dual thirteen-
+image publication passed; 26 hashes checked again after tests. Four targeted
+native fixtures pass: notification atomicity, extracted event consumers,
+actual CCPU HLT/reset/debug context and debug binding lifecycle. The actual
+CCPU run also verifies TSS T-bit single delivery, updating the earlier source-
+review coverage limitation. Extracted-consumer tests remain labelled as such,
+not full CPU/PIC acceptance.
+
+Real MEM/VDD: NTVDMD loaded, break events matched SAS, XP debug writeback and
+register round trip passed, name/ordinal allocation/reallocation/free and failed
+reallocation preservation passed, matching task termination and MEM exit passed.
+Real DOS4GW/NESticle: 640x400 menu pixels matched, Escape hid the menu, second
+Escape restored the same menu mask. No ROM gameplay claim. All evidence uses
+runtime3. Scripts/results are under build/t485-s9/p3; original guest unchanged.
+Documentation governance and relative links pass. S13 still owns Full.
+
+22/41 reviewed and covered by final verification; 19 remain. P3 is verified,
+with commit/push pending. Remaining functional adaptations retain owner-review
+status; this delivery does not approve their permanent retention. The measured
+P3 source batch remains 100/19558 ->263/581 (+163/-18977); no mirror change was
+needed for the test-projection repair. Next ordered file is call.c.

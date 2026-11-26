@@ -249,7 +249,6 @@ Return Value:
     //
     // sudeepb 01-Mar-1995.
 
-#line 261
     MemInfo->LargestFree = LargestFree;
     MemInfo->MaxUnlocked = LargestFree/4096;
     MemInfo->MaxLocked = 0xb61;
@@ -266,5 +265,4 @@ Return Value:
     GlobalMemoryStatus(&MemStatus);
 
     MemInfo->PageFileSize = MemStatus.dwTotalPageFile / 4096;
-#line 277
 }

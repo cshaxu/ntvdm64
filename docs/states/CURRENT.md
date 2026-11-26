@@ -32,15 +32,18 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S9 Ordered Progress
 
-[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 2/41 reviewed and
-final-verified, 39 remain; P1 1e15cd498 and P2 e7dad7b10 delivered and pushed.
-P2 restores dbgdll.c initialization with one coupled softpc.h declaration;
-three parameterized WINAPI boundaries remain. Runtime2 cached full build,
-dual publication (26 hashes), real DLL/debug callbacks and NESticle passed.
-P2 byte-sensitive batch: 2/2985 -> 4/1636. Cumulative measured two primary
-files plus header: 3/3525 -> 4/1636; whole-S9 total not yet measured.
-Next: dbgdll/excptn.c. The header's full review stays S12. Migration 39/159;
-S13 retains integrated Full. Frozen 437 points are not a current byte census.
+[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 22/41 source-reviewed,
+19 remain; 22 final-verified, two delivered (P1 1e15cd498, P2 e7dad7b10).
+P3 has sixteen locally changed files and four reviewed unchanged files.
+Owner-approved LF/format restoration is applied; no formatting approval remains
+pending. c_oprnd.h is reviewed and locally reduced 24/42->16/34.
+Local batch against HEAD and fixed XP: 100 points/19558 lines ->263 points/581
+lines (+163/-18977). Including disjoint delivered P1/P2 files and header,
+measured cumulative change is +164 points/-20866 lines. This is not a whole-S9
+census. Functional residuals remain registered for owner review. P3 cached full build and dual publication passed (runtime3, 26 hashes).
+CPU/debug, actual MEM/NTVDMD and NESticle targeted tests passed; P3 commit/push pending.
+Next call.c after P3 delivery; the coupled softpc.h full review stays S12. Migration remains
+39/159. S13 retains Full. Frozen 437 points are historical, not current counts.
 ## S8 Closure Record
 
 [S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 851/851 source-reviewed

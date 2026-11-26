@@ -144,8 +144,7 @@ DbgTaskStop(
 
 
 
-VOID
-WINAPI
+VOID WINAPI
 xxxDbgNotifyNewTask(
     LPVOID  lpvNTFrame,
     UINT    uFrameSize

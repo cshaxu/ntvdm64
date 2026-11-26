@@ -717,14 +717,12 @@ operand)
    vir_write_byte(m_la[ARG], m_pa[ARG], (IU8)ops[ARG].sng);
 
 #ifdef	PIG
-#line 705
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
 #line 708
 #define PIG_P_Yb(ARG)						\
    vir_write_byte(m_la[ARG], m_pa[ARG], (IU8)ops[ARG].sng);
 #endif	/* PIG */
-#line 711
 
 
 /* Yw == word string 'destination' addressing <<<<<<<<<<<<<<<<<<<<<<< */
@@ -767,14 +765,12 @@ operand)
    vir_write_word(m_la[ARG], m_pa[ARG], (IU16)ops[ARG].sng);
 
 #ifdef	PIG
-#line 753
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
 #line 756
 #define PIG_P_Yw(ARG)						\
    vir_write_word(m_la[ARG], m_pa[ARG], (IU16)ops[ARG].sng);
 #endif	/* PIG */
-#line 759
 
 /* Z == 'xlat' addressing form <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
@@ -1071,14 +1067,12 @@ operand)
    vir_write_dword(m_la[ARG], m_pa[ARG], (IU32)ops[ARG].sng);
 
 #ifdef	PIG
-#line 1055
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
 #line 1058
 #define PIG_P_Yd(ARG)						\
    vir_write_dword(m_la[ARG], m_pa[ARG], (IU32)ops[ARG].sng);
 #endif	/* PIG */
-#line 1061
 
 
 /*
@@ -1111,7 +1105,6 @@ operand)
 		F_Ew(0)						\
       }								\
 
-#line 1093
 #define BT_OPSd(TYPE, PAGE) \
 	if ( GET_MODE(modRM) == 3 ) {				\
 		/*						\
@@ -1144,7 +1137,6 @@ operand)
 
 /* Mm == address of memory operand <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
-#line 1125
 #define D_Mm(ARG)						\
    if ( GET_MODE(modRM) == 3 )					\
       Int6(); /* Register operand not allowed */		\

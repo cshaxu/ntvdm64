@@ -10,12 +10,9 @@
  *
  */
 
-#line 13
 #ifdef SCCSID
-#line 14
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
-#line 16
 
 /*
  *    O/S include files.
@@ -40,8 +37,6 @@ extern void ClearInstanceDataMarking(void);
 #line 36
 #include "error.h"
 #include "debug.h"
-
-#line 38
 
 /*
    This file implements the Non-Intel Driver Data Block (NIDDB) Manager. This
@@ -259,7 +254,6 @@ extern void ClearInstanceDataMarking(void);
  */
 
 /* Control Messages received by Virtual Device Drivers (Windows 3.1) */
-#line 255
 #define VxD_Sys_Critical_Init		0x00
 #define VxD_Device_Init			0x01
 #define VxD_Init_Complete		0x02
@@ -507,7 +501,6 @@ LOCAL void delete_NIDDB IFN1
    IHP *instance_ptr;
 
    /* Ensure instance is active (for terminate callback). */
-#line 500
    swap_NIDDB((IU8)record_id);
 
    instance_ptr = vrecs[record_id].vr_pinst_tbl;
@@ -534,7 +527,6 @@ LOCAL void delete_NIDDB IFN1
    /* Initialise virtual record entry */
    vrecs[record_id].vr_pinst_tbl = (IHP *)0;
    vrecs[record_id].vr_inst_handle = (IU32)0;
-#line 526
    }
 
 /* Return true if any data instance is extant */
@@ -704,7 +696,6 @@ virtual_device_trap IFN0()
    {
    int new_vb;
 
-#line 695
    switch ( getEAX() )
       {
    case VxD_Device_Init:
@@ -804,10 +795,8 @@ virtual_device_trap IFN0()
       ClearInstanceDataMarking();
 
 #ifndef NTVDM
-#line 794
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ! NTVDM */
-#line 796
 
       /* Clear our version number in case we are changing disks */
       insignia_386_version = 0;

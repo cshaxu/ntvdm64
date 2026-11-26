@@ -1964,3 +1964,6 @@
 "HXP-R-00005","src/mvdm-host/dbgdll/dbgdll.c","restored-and-delivered","S9-P2","none","s9-progress.md"
 "HXP-R-00006","src/mvdm-host/dbgdll/dbgdll.c","retained-parameterized-abi-final-verified","S9-P2","S9-residual-decision","s9-progress.md"
 "HXP-R-00007","src/mvdm-host/dbgdll/dbgdll.c","retained-parameterized-abi-final-verified","S9-P2","S9-residual-decision","s9-progress.md"
+"HXP-R-00500","src/mvdm-host/softpc.new/base/bios/tape_io.c","restored-final-verified","S9-P3-commit-pending","none","s9-progress.md; build/t485-s9/p3/tape-no-xms-compile.log"
+"HXP-R-00503","src/mvdm-host/softpc.new/base/bios/virtual.c","restored-final-verified","S9-P3-commit-pending","none","s9-progress.md; build/t485-s9/p3/virtual-metrics.json"
+"HXP-R-00562","src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c","restored-final-verified","S9-P3-commit-pending","none","s9-progress.md; c_xcptn-metrics.json: original blank line restored"

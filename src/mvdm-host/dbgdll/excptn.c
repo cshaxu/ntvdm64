@@ -290,8 +290,7 @@ BOOL DbgDivOverflow2(
 
 
 
-BOOL
-WINAPI
+BOOL WINAPI
 xxxDbgFault(
     ULONG IntNumber
     )

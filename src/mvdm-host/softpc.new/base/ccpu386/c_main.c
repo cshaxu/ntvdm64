@@ -23,7 +23,6 @@ Actual worker routines are spun off elsewhere.
 #include  <sas.h>	/* need memory(M)     */
 #include  <ccpusas4.h>	/* the cpu internal sas bits */
 #ifdef	PIG
-#line 26
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
 #line 28
@@ -36,6 +35,7 @@ Actual worker routines are spun off elsewhere.
 #include <ntthread.h>
 #endif
 
+#line 37
 #include <c_main.h>	/* C CPU definitions-interfaces */
 #include <c_addr.h>	/* C CPU address calculation contract */
 #line 38
@@ -165,14 +165,11 @@ extern void EDL_fast_bop(ULONG immed);
 #include  <xor.h>	/*     ...     */
 #include  <zfrsrvd.h>	/*     ...     */
 
-#line 155
 #ifdef CPU_486
-#line 156
 #error Unsupported excluded original configuration
-#line 162
 #endif /* CPU_486 */
-#line 163
 
+#line 164
 #define FIX_BT_BUG	/* Of course we want the bug fixed! */
 
 #define SYNCH_BOTH_WAYS	/* Do a PIG_SYNCH() on not-taken conditionals as well */
@@ -207,22 +204,18 @@ typedef union
 #define X_OFF 0
 
 #else /* BIGEND */
-#line 198
 #error Unsupported excluded original configuration
-#line 203
 #endif /* LITTLEND */
-#line 204
 
+#line 205
 /* CPU hardware interrupt definitions */
 #define CPU_HW_INT_MASK         (1 << 0)
 
 #ifdef SFELLOW
-#line 209
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
-#line 211
 #endif	/* SFELLOW */
-#line 212
 
+#line 213
 /* CPU hardware interrupt definitions */
 #define CPU_HW_INT_MASK         (1 << 0)
 
@@ -231,25 +224,21 @@ typedef union
 #define CPU_SAD_EXCEPTION_MASK          (1 << 13)
 #define CPU_RESET_EXCEPTION_MASK        (1 << 14)
 #define CPU_SIGALRM_EXCEPTION_MASK      (1 << 15)
-#line 221
 #ifdef SFELLOW
-#line 222
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
 
 #line 225
 LOCAL IU16 cpu_hw_interrupt_number;
-#line 226
 #if defined(SFELLOW)
-#line 227
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else
 #line 229
 LOCAL IUM32	cpu_interrupt_map = 0;
 #endif	/* SFELLOW */
-#line 231
 
 
+#line 233
 GLOBAL IBOOL took_relative_jump;
 extern IBOOL NpxIntrNeeded;
 GLOBAL IBOOL took_absolute_toc;
@@ -325,9 +314,7 @@ LOCAL BOOL quick_mode = FALSE;	/* true if no special processing (trap
 
 
 #ifdef	PIG
-#line 283
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 304
 #else
 
 #line 306
@@ -336,6 +323,7 @@ LOCAL BOOL quick_mode = FALSE;	/* true if no special processing (trap
 	/* No pig operations */
 
 #endif	/* PIG */
+#line 311
 /*
    Recursive CPU variables. Exception Handling.
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -356,14 +344,13 @@ LOCAL jmp_buf next_inst[FRAMES];
  * our buffer.
  */
 #ifdef	PIG
-#line 331
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 335
 #else	/* !PIG */
 #line 336
 #define	CHECK_PREFIX_LENGTH()
 #endif	/* PIG */
 
+#line 339
 /*
    The emulation register set.
    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -499,12 +486,10 @@ IMPORT VOID dispatch_q_event();
 
 #ifndef SFELLOW
 #ifdef SYNCH_TIMERS
-#line 474
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
-#line 496
 #else	/* !SYNCH_TIMERS */
-#line 497
 
+#line 498
 #define SYNCH_TICK()	/* Nothing */
 
 #define QUICK_EVENT_TICK() 				\
@@ -520,20 +505,14 @@ IMPORT VOID dispatch_q_event();
 
 #endif /* SYNCH_TIMERS */
 #else	/* SFELLOW */
-#line 513
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
-#line 536
 #endif	/* SFELLOW */
-#line 537
 
+#line 538
 #ifdef SFELLOW
-#line 539
 #error Excluded unsupported SFELLOW configuration
-#line 544
 #endif	/* SFELLOW */
-#line 545
 
-#line 547
 static BOOL debug_context_resume_check;
 GLOBAL VOID ccpu_apply_debug_context IFN1(const IU32 *, registers)
 {
@@ -600,16 +579,12 @@ GLOBAL	PHY_ADDR	SasWrapMask = 0xfffff;
 /* setup host format IP from Intel format IP */
 /*    and set up end of page marker          */
 #ifdef PIG
-#line 593
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 597
 #else /* !PIG */
 #line 598
 GLOBAL UTINY *CCPU_M;
 #ifdef BACK_M
-#line 600
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
-#line 606
 #else
 #line 607
 #define SETUP_HOST_IP(x)							\
@@ -621,6 +596,7 @@ GLOBAL UTINY *CCPU_M;
 #endif /* BACK_M */
 #endif /* PIG */
 
+#line 616
 GLOBAL INT   m_seg[3];		/* Memory Operand segment reg. index. */
 GLOBAL ULONG m_off[3];		/* Memory Operand offset. */
 GLOBAL ULONG m_la[3];		/* Memory Operand Linear Addr. */
@@ -636,11 +612,8 @@ GLOBAL ULONG m_la2[3];		/* Memory Operand(2) Linear Addr. */
 GLOBAL ULONG m_pa2[3];		/* Memory Operand(2) Physical Addr. */
 
 #if defined(PIG) && defined(SFELLOW)
-#line 631
 #error Excluded unsupported PIG configuration
-#line 637
 #endif /* PIG && SFELLOW */
-#line 638
 
 #line 639
 extern void InitNpx IPT1(IBOOL, disable);
@@ -766,38 +739,31 @@ IFN1(
    took_relative_jump = FALSE;
    took_absolute_toc = FALSE;
 #ifdef PIG
-#line 762
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 766
 #endif	/* PIG */
-#line 767
 
+#line 768
    /* somewhere for exceptions to return to */
-#line 769
 #ifdef NTVDM
-#line 770
    if (setjmp(*ccpu386ThrdExptnPtr()) == CCPU_COMPLETED_INSTRUCTION) {
       start_trap = GET_TF();
       CCPU_save_EIP = GET_EIP();
       goto HOST_INSTRUCTION_COMPLETE;
    }
-#line 771
 #else
-#line 772
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
+#line 775
 #ifdef SYNCH_TIMERS
-#line 776
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
-#line 782
 #else /* SYNCH_TIMERS */
 #line 783
    /* go slow until we are sure we can go fast */
-#line 784
    quick_mode = FALSE;
 #endif /* SYNCH_TIMERS */
 
+#line 787
    goto NEXT_INST;
 
 DO_INST:
@@ -805,7 +771,6 @@ DO_INST:
 
    /* INSIGNIA debugging */
 #ifdef	PIG
-#line 794
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else	/* PIG */
 #line 796
@@ -816,13 +781,12 @@ DO_INST:
       }
 #endif	/* !PIG */
 
+#line 803
 #ifdef	PIG
-#line 804
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 806
 #endif
-#line 807
 
+#line 808
    QUICK_EVENT_TICK();
 
    /* save beginning of the current instruction */
@@ -842,7 +806,6 @@ DO_INST:
     */
 DECODE:
 
-#line 827
    opcode = GET_INST_BYTE(p);	/* get next byte */
    /*
       NB. Each opcode is categorised by a type, instruction name
@@ -1113,17 +1076,14 @@ TYPE0F01_2:
 
 	 case 7:   /* T2 INVLPG Mm */
 
-#line 1097
 #ifdef SPC486
-#line 1098
 #error Excluded unsupported SPC486 profile
-#line 1105
 #else
 #line 1106
 	    Int6();
 #endif /* SPC486 */
-#line 1108
 
+#line 1109
 	    break;
 	    } /* end switch ( GET_XXX(modRM) ) */
 	 break;
@@ -1237,43 +1197,36 @@ TYPE0F02:
 
       case  0x08:   /* T0 INVD */
 
-#line 1222
 #ifdef SPC486
-#line 1223
 #error Excluded unsupported SPC486 profile
-#line 1228
 #else
 #line 1229
 	 Int6();
 #endif /* SPC486 */
-#line 1231
 
+#line 1232
 	 break;
 
       case  0x09:   /* T0 WBINVD */
 
-#line 1236
 #ifdef SPC486
-#line 1237
 #error Excluded unsupported SPC486 profile
-#line 1242
 #else
 #line 1243
 	 Int6();
 #endif /* SPC486 */
-#line 1245
 
+#line 1246
 	 break;
 
       case  0x0f:
 #ifdef PIG
-#line 1250
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 1253
 #else
 #line 1254
 	 Int6();
 #endif /* PIG */
+#line 1256
 	 break;
 
       case  0x20:   /* T4 MOV Rd Cd */
@@ -1358,6 +1311,7 @@ TYPE0F80:
 #ifdef SYNCH_BOTH_WAYS
 	 took_relative_jump = TRUE;
 #endif	/* SYNCH_BOTH_WAYS */
+#line 1340
 	 if (took_relative_jump)
 	 {
 		 PIG_SYNCH(CHECK_ALL);
@@ -1422,7 +1376,6 @@ TYPE0F90:
       case  0xa3:   /* T6 BT Ev Gv */
 	 inst32328 = BT;
 #ifndef FIX_BT_BUG
-#line 1404
 #error Unsupported excluded original configuration
 #endif
 #line 1406
@@ -1496,7 +1449,6 @@ TYPE0FA5:
       case  0xab:   /* T5 BTS Ev Gv */
 	 instp32328 = BTS;
 #ifndef FIX_BT_BUG
-#line 1476
 #error Unsupported excluded original configuration
 #endif
 #line 1478
@@ -1548,37 +1500,30 @@ TYPE0FAB:
 
       case  0xb0:   /* T5 CMPXCHG Eb Gb */
 
-#line 1526
 #ifdef SPC486
-#line 1527
 #error Excluded unsupported SPC486 profile
-#line 1536
 #else
 #line 1537
 	 Int6();
 #endif /* SPC486 */
-#line 1539
 
+#line 1540
 	 break;
 
       case  0xb1:   /* T5 CMPXCHG Ev Gv */
 
-#line 1544
 #ifdef SPC486
-#line 1545
 #error Excluded unsupported SPC486 profile
-#line 1566
 #else
 #line 1567
 	 Int6();
 #endif /* SPC486 */
-#line 1569
 
+#line 1570
 	 break;
 
       case  0xb2:   /* T4 LSS Gv Mp */   instp32p32 = LSS;   goto TYPEC4;
 #ifndef FIX_BT_BUG
-#line 1574
 #error Unsupported excluded original configuration
 #else
 #line 1576
@@ -1651,7 +1596,6 @@ TYPE0FAB:
       case  0xbb:   /* T5 BTC Ev Gv */
 	 instp32328 = BTC;
 #ifndef FIX_BT_BUG
-#line 1644
 #error Unsupported excluded original configuration
 #else
 #line 1646
@@ -1715,32 +1659,26 @@ TYPE0FAB:
 
       case  0xc0:   /* T8 XADD Eb Gb */
 
-#line 1705
 #ifdef SPC486
-#line 1706
 #error Excluded unsupported SPC486 profile
-#line 1716
 #else
 #line 1717
 	 Int6();
 #endif /* SPC486 */
-#line 1719
 
+#line 1720
 	 break;
 
       case  0xc1:   /* T8 XADD Ev Gv */
 
-#line 1724
 #ifdef SPC486
-#line 1725
 #error Excluded unsupported SPC486 profile
-#line 1748
 #else
 #line 1749
 	 Int6();
 #endif /* SPC486 */
-#line 1751
 
+#line 1752
 	 break;
 
       case  0xc8:   /* T1 BSWAP Hv */
@@ -1752,17 +1690,14 @@ TYPE0FAB:
       case  0xce:
       case  0xcf:
 
-#line 1763
 #ifdef SPC486
-#line 1764
 #error Excluded unsupported SPC486 profile
-#line 1780
 #else
 #line 1781
 	 Int6();
 #endif /* SPC486 */
-#line 1783
 
+#line 1784
 	 break;
 	 } /* end switch ( opcode ) 0F */
       break;
@@ -2179,7 +2114,6 @@ TYPE40:
 	  */
 	 }
 #ifdef	PIG
-#line 2200
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 2202
@@ -2222,7 +2156,6 @@ TYPE40:
 	    }
 	 }
 #ifdef	PIG
-#line 2241
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 2243
@@ -2247,7 +2180,6 @@ TYPE40:
 	 /* KNOWN BUG #1. */
 	 }
 #ifdef	PIG
-#line 2264
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 2266
@@ -2290,7 +2222,6 @@ TYPE40:
 	    }
 	 }
 #ifdef	PIG
-#line 2305
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 2307
@@ -2305,18 +2236,14 @@ TYPE70:
       D_Jb(0);
       UPDATE_INTEL_IP_USE_OP_SIZE(p);
 #ifdef PIG
-#line 2318
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 2361
 #endif	/* PIG */
 #line 2362
       (*inst32)(ops[0].sng);
       CANCEL_HOST_IP();
 
 #ifdef PIG
-#line 2366
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 2386
 #endif	/* PIG */
 #line 2387
       break;
@@ -2764,11 +2691,8 @@ TYPE9A:
 	 POPFD();
 	 }
 #ifdef PIG
-#line 2832
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 2846
 #endif /* PIG */
-#line 2847
 
 #line 2848
       quick_mode = FALSE;
@@ -3240,9 +3164,7 @@ TYPEC4:
 	  }
           immed |= ops[0].sng;
 #ifdef	PIG
-#line 3317
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 3323
 #else	/* PIG */
 #line 3324
 	  UPDATE_INTEL_IP(p);
@@ -3251,15 +3173,12 @@ TYPEC4:
 		  switch(immed)
 		  {
 #if defined(SFELLOW)
-#line 3330
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
-#line 3339
 #endif /* SFELLOW */
 #line 3340
 		  case 0xfe:
 			  c_cpu_unsimulate();
 			  /* Never returns (?) */
-#line 3343
 		  default:
 			  EDL_fast_bop(immed);
 			  break;
@@ -3274,6 +3193,7 @@ TYPEC4:
           CANCEL_HOST_IP();
 	  SYNCH_TICK();
 #endif	/* PIG */
+#line 3357
           break;
       }
       if ( GET_OPERAND_SIZE() == USE16 )
@@ -3419,11 +3339,8 @@ TYPEC4:
       PIG_SYNCH(CHECK_ALL);
       /* Dont do interrupt checks etc after an IRET */
 #ifdef PIG
-#line 3502
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 3511
 #endif /* PIG */
-#line 3512
 
 #line 3513
       goto NEXT_INST;
@@ -3561,6 +3478,7 @@ TYPED4:
       in_C = 0;
       CANCEL_HOST_IP();
 #endif	/* PIG */
+#line 3648
       SYNCH_TICK();
       break;
 
@@ -3588,11 +3506,8 @@ TYPED4:
 	}
 
 #ifdef	PIG
-#line 3675
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 3679
 #endif	/* PIG */
-#line 3680
 
 #line 3681
 	modRM = GET_INST_BYTE(p);
@@ -3617,9 +3532,7 @@ TYPEE0:
       CANCEL_HOST_IP();
 
 #ifdef PIG
-#line 3703
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 3723
 #endif	/* PIG */
 #line 3724
       break;
@@ -3648,7 +3561,6 @@ TYPEE0:
       IN8(&ops[0].sng, ops[1].sng);
       P_Fal(0);
 #ifdef PIG
-#line 3750
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 3752
@@ -3667,7 +3579,6 @@ TYPEE0:
 	 IN16(&ops[0].sng, ops[1].sng);
 	 P_Fax(0);
 #ifdef PIG
-#line 3767
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 3769
@@ -3681,7 +3592,6 @@ TYPEE0:
 	 IN32(&ops[0].sng, ops[1].sng);
 	 P_Feax(0);
 #ifdef PIG
-#line 3779
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 3781
@@ -3699,13 +3609,12 @@ TYPEE0:
       F_Fal(1);
       OUT8(ops[0].sng, ops[1].sng);
 #ifdef PIG
-#line 3795
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 3805
 #else
 #line 3806
       SYNCH_TICK();
 #endif
+#line 3808
       break;
 
    case 0xe7:   /* T6 OUTW Ib F(e)ax */
@@ -3728,7 +3637,6 @@ TYPEE0:
 	 OUT32(ops[0].sng, ops[1].sng);
 	 }
 #ifdef PIG
-#line 3830
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 3832
@@ -3778,7 +3686,6 @@ TYPEE8:
       IN8(&ops[0].sng, ops[1].sng);
       P_Fal(0);
 #ifdef	PIG
-#line 3878
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 3880
@@ -3797,7 +3704,6 @@ TYPEE8:
 	 IN16(&ops[0].sng, ops[1].sng);
 	 P_Fax(0);
 #ifdef PIG
-#line 3895
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 3897
@@ -3811,7 +3717,6 @@ TYPEE8:
 	 IN32(&ops[0].sng, ops[1].sng);
 	 P_Feax(0);
 #ifdef PIG
-#line 3907
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 3909
@@ -3829,7 +3734,6 @@ TYPEE8:
       F_Fal(1);
       OUT8(ops[0].sng, ops[1].sng);
 #ifdef	PIG
-#line 3923
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 3925
@@ -3857,7 +3761,6 @@ TYPEE8:
 	 OUT32(ops[0].sng, ops[1].sng);
 	 }
 #ifdef	PIG
-#line 3949
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 3951
@@ -3898,7 +3801,6 @@ TYPEE8:
 	 {
 	 /* RESET ends the halt state. */
 	 if ( c_cpu_event_snapshot() & CPU_RESET_EXCEPTION_MASK )
-#line 3988
 	    break;
 
 	 /* An enabled INTR ends the halt state. */
@@ -3913,11 +3815,8 @@ TYPEE8:
 	    }
 
 #ifndef	PROD
-#line 4002
 #error DIVERGENCE MVDM-HOST-DIV-502: non-PROD debug branch is not selected; see mirror register.
-#line 4007
 #endif	/* PROD */
-#line 4008
 
 #line 4009
          SYNCH_TICK();
@@ -3931,6 +3830,7 @@ TYPEE8:
 
 #endif	/* PIG */
 
+#line 4016
       break;
 
    case 0xf5:   /* T0 CMC */
@@ -4112,9 +4012,7 @@ TYPEF7_6:
       UPDATE_INTEL_IP(p);
 
 #ifdef PIG
-#line 4197
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 4202
 #endif /* PIG */
 #line 4203
       goto NEXT_INST;
@@ -4241,29 +4139,23 @@ TYPEFF_3:
     */
 
    if ( quick_mode && GET_DR(DR_DSR) == 0 )
-#line 4327
       goto DO_INST;
 
 #ifdef SYNCH_TIMERS
-#line 4330
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif /* SYNCH_TIMERS */
 HOST_INSTRUCTION_COMPLETE:
 #line 4332
    quick_mode = FALSE;
-#line 4333
 
    /* Action RESET first. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 #ifdef SYNCH_TIMERS
-#line 4336
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif /* SYNCH_TIMERS */
    if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))
 #line 4339
       {
-#line 4341
 CPU_RESTORED_RESET:
-#line 4341
       c_cpu_reset();
       doing_contributory = FALSE;
       doing_page_fault = FALSE;
@@ -4277,7 +4169,6 @@ CPU_RESTORED_RESET:
    /* Action Insignia (ie non Intel) Processing. <<<<<<<<<<<<<<< */
 
 #ifdef SYNCH_TIMERS
-#line 4354
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif /* SYNCH_TIMERS */
    if (c_cpu_take_event(CPU_SIGALRM_EXCEPTION_MASK))
@@ -4324,7 +4215,6 @@ CPU_RESTORED_RESET:
       }
 
 #ifdef SYNCH_TIMERS
-#line 4400
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif /* SYNCH_TIMERS */
 #line 4402
@@ -4343,7 +4233,6 @@ CPU_RESTORED_RESET:
 	 acknowledged_interrupt = ica_intack(&hook_address);
 	 if (acknowledged_interrupt != -1)
 	 {
-#line 4418
 	    extern BOOL host_hwint_hook IPT1(IS32, int_no);
 	    cpu_hw_interrupt_number = (IU16)acknowledged_interrupt;
 	    EXT = EXTERNAL;
@@ -4351,30 +4240,23 @@ CPU_RESTORED_RESET:
 	    if (!host_hwint_hook(acknowledged_interrupt))
 	       do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
 	    CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
-#line 4429
 	 }
 #line 4419
       }
 #else	/* SFELLOW */
-#line 4421
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
-#line 4442
 #endif	/* SFELLOW */
-#line 4443
 
+#line 4444
 #ifdef PIG
-#line 4445
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 4486
 #endif /* PIG */
-#line 4487
 
 #line 4488
 NEXT_INST:
 
    CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
 
-#line 4493
    if (debug_context_resume_check) {
       if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))
          goto CPU_RESTORED_RESET;
@@ -4390,12 +4272,10 @@ NEXT_INST:
 
 #line 4492
 #if defined(SFELLOW) && !defined(PROD)
-#line 4493
 #error Unsupported excluded original configuration
-#line 4497
 #endif	/* SFELLOW && !PROD */
-#line 4498
 
+#line 4499
    /* Reset default mode */
    SET_OPERAND_SIZE(GET_CS_AR_X());
    SET_ADDRESS_SIZE(GET_CS_AR_X());
@@ -4404,7 +4284,6 @@ NEXT_INST:
 
    SETUP_HOST_IP(p);
 
-#line 4507
    /*
       THIS IS A CHEAT.
       The Intel documentation says RF is cleared AFTER all instructions
@@ -4417,7 +4296,6 @@ NEXT_INST:
       So although we cheat we intend to have the same effect as the
       real thing.
     */
-#line 4519
    SET_RF(0);
 
    start_trap = GET_TF();
@@ -4427,7 +4305,6 @@ NEXT_INST:
 	start_trap == 0 &&
 	nr_inst_break == 0
 #ifdef PIG
-#line 4528
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 4530
@@ -4518,6 +4395,7 @@ LOCAL VOID
 
 #endif	/* SFELLOW */
 
+#line 4617
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    /* Set up new page for fast Instruction Decoding.                     */
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -4540,17 +4418,17 @@ LOCAL VOID
       p_start = *q;
 
 #ifdef	PIG
-#line 4639
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else /* PIG */
+#line 4641
 #ifdef BACK_M
-#line 4642
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 #line 4644
       return *(*q)++;
 #endif /* BACK_M */
 #endif /* PIG */
+#line 4647
       }
 
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -4562,18 +4440,15 @@ LOCAL VOID
       SAVED IBOOL first = TRUE;
 
 #ifdef	PIG
-#line 4658
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 4682
 #endif	/* PIG */
-#line 4683
 
 #line 4684
 #ifdef NTVDM
-#line 4685
       ccpu386InitThreadStuff();
 #endif
 
+#line 4688
       c_cpu_reset();
       SET_POP_DISP(0);
       doing_contributory = FALSE;
@@ -4626,9 +4501,7 @@ LOCAL VOID
 
       /* All FLAGS are cleared */
       /* NB. VM MUST BE CLEARED BEFORE SEGMENT REGISTERS ARE LOADED. */
-#line 4738
 #ifdef SPC486
-#line 4739
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 4741
@@ -4664,21 +4537,17 @@ LOCAL VOID
       load_pseudo_descr(GS_REG);
 
       SET_CR(CR_STAT, 0);
-#line 4773
 #ifdef SPC486
-#line 4774
 #error Excluded unsupported SPC486 profile
-#line 4776
 #endif /* SPC486 */
-#line 4777
 
+#line 4778
       SET_DR(DR_DAR0, 0);   /* Really Undefined */
       SET_DR(DR_DAR1, 0);   /* Really Undefined */
       SET_DR(DR_DAR2, 0);   /* Really Undefined */
       SET_DR(DR_DAR3, 0);   /* Really Undefined */
       SET_DR(DR_DSR, 0);    /* Really Undefined */
       debug_exception_pending = FALSE;
-#line 4785
       debug_context_resume_check = FALSE;
 #line 4783
       MOV_DR((IU32) DR_DCR, (IU32) 0);   /* Disable Breakpoints */
@@ -4698,9 +4567,7 @@ LOCAL VOID
 
       SET_EAX(0);
       SET_ECX(0);   /* Really Undefined */
-#line 4800
 #ifdef SPC486
-#line 4801
 #error Excluded unsupported SPC486 profile
 #else
 #line 4803
@@ -4714,14 +4581,11 @@ LOCAL VOID
       SET_EDI(0);   /* Really Undefined */
 
 
-#line 4812
 #if defined(SWITCHNPX)
-#line 4813
 #error Unsupported excluded original configuration
-#line 4815
 #endif	/* SWITCHNPX */
-#line 4816
 
+#line 4817
       if ( disableNpx )
 	 SET_ET(0);
       else
@@ -4738,7 +4602,6 @@ LOCAL VOID
    GLOBAL VOID
    c_cpu_simulate IFN0()
       {
-#line 4834
       jmp_buf *frame;
 #line 4833
       SYNCH_TICK();
@@ -4750,9 +4613,7 @@ LOCAL VOID
       frame = ccpu386SimulatePtr();
       __try {
       if ( setjmp(*frame) == 0)
-#line 4840
 #else
-#line 4841
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 4843
@@ -4760,7 +4621,6 @@ LOCAL VOID
 	 in_C = 0;
 	 ccpu(FALSE);
 	 }
-#line 4848
       } __finally {
          if (AbnormalTermination()) ccpu386AbandonSimulate(frame);
       }
@@ -4776,10 +4636,8 @@ LOCAL VOID
       debug_exception_pending = FALSE;
 #line 4855
 #ifdef NTVDM
-#line 4856
       ccpu386GotoThrdExptnPt();
 #else
-#line 4858
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 4860
@@ -4796,21 +4654,17 @@ LOCAL VOID
 #ifdef NTVDM
       ccpu386Unsimulate();
 #else
-#line 4873
 #error Unsupported excluded original configuration
-#line 4886
 #endif
 #line 4887
       }
 
 #ifdef	PIG
-#line 4890
 #error DIVERGENCE MVDM-HOST-DIV-499: PIG comparison profile is not selected; see mirror register.
-#line 4921
 #endif	/* PIG */
-#line 4922
 
 
+#line 4924
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
    /* End of application hook.                                           */
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

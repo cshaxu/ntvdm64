@@ -33,12 +33,10 @@ Exception Handling Support.
 /*
    Allow print out of exceptions or disallow it.
  */
-#line 36
 GLOBAL BOOL show_exceptions = FALSE;
 GLOBAL BOOL trap_exceptions = FALSE;
 LOCAL  BOOL first_exception = TRUE;
 
-#line 40
 #define check_exception_env()						\
 {									\
 	IMPORT char *host_getenv IPT1 (char *, name);			\
@@ -55,8 +53,6 @@ LOCAL  BOOL first_exception = TRUE;
 	first_exception = FALSE;					\
 }
 
-
-#line 56
 IMPORT FILE *trace_file;
 IMPORT IBOOL took_absolute_toc;
 
@@ -163,13 +159,11 @@ LOCAL VOID check_for_shutdown IFN1(IU16, xcode)
       c_cpu_reset();
 
 #ifdef	PIG
-#line 162
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
 
 #line 168
       /* then carry on */
-#line 169
       c_cpu_continue();   /* DOES NOT RETURN */
       }
    }
@@ -207,10 +201,8 @@ IFN3(
    EXT = source;
    check_exception_env();
 #ifdef	PIG
-#line 206
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
-#line 208
    if (show_exceptions){
 	fprintf(trace_file, "(%04x:%08x)Exception:- %d.\n",
 		       GET_CS_SELECTOR(), GET_EIP(), nmbr);
@@ -273,10 +265,8 @@ IFN3(
    EXT = INTERNAL;
    check_exception_env();
 #ifdef	PIG
-#line 266
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
-#line 268
    if (show_exceptions){
 	fprintf(trace_file, "(%04x:%08x)Exception:- %d(%04x).\n",
 		       GET_CS_SELECTOR(), GET_EIP(), nmbr, error_code);
@@ -339,10 +329,8 @@ IFN3(
    EXT = INTERNAL;
    check_exception_env();
 #ifdef	PIG
-#line 326
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
-#line 328
    if (show_exceptions){
 	if ( GET_IDT_LIMIT() != 0 ){
            fprintf(trace_file, "(%04x:%08x)Exception:- %d(%04x).\n",
@@ -406,10 +394,8 @@ IFN1(
    EXT = INTERNAL;
    check_exception_env();
 #ifdef	PIG
-#line 387
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
-#line 389
    if (show_exceptions){
         if ( GET_IDT_LIMIT() != 0 ){
            fprintf(trace_file, "(%04x:%08x)Exception:- %d.\n",
@@ -478,10 +464,8 @@ GLOBAL VOID Int0 IFN0 ()
 
    check_exception_env();
 #ifdef	PIG
-#line 453
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
-#line 455
    if (show_exceptions){
         fprintf(trace_file, "(%04x:%08x)Exception:- %d.\n",
 		       GET_CS_SELECTOR(), GET_EIP(), I0_INT_NR);
@@ -628,10 +612,8 @@ IFN2(
 
    check_exception_env();
 #ifdef	PIG
-#line 597
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
-#line 599
    if (show_exceptions){
 	fprintf(trace_file, "(%04x:%08x)Exception:- %d(%04x) CR2=%08x.\n",
            GET_CS_SELECTOR(), GET_EIP(), PF_INT_NR, page_error, GET_CR(CR_PFLA));

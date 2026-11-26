@@ -177,8 +177,7 @@ ModuleFree(
     }
 }
 
-void
-WINAPI
+void WINAPI
 xxxDbgSegmentNotice(
     WORD wType,
     WORD  wModuleSeg,
