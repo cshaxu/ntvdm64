@@ -33,16 +33,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S9 Ordered Progress
 
 [S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 22/41 source-reviewed,
-19 remain; 22 final-verified, two delivered (P1 1e15cd498, P2 e7dad7b10).
-P3 has sixteen locally changed files and four reviewed unchanged files.
+19 remain; 22 final-verified and delivered through P3 f424289aa (pushed).
+P3 delivered sixteen changed files and verified four reviewed unchanged files.
 Owner-approved LF/format restoration is applied; no formatting approval remains
 pending. c_oprnd.h is reviewed and locally reduced 24/42->16/34.
-Local batch against HEAD and fixed XP: 100 points/19558 lines ->263 points/581
+P3 batch against its starting HEAD and fixed XP: 100 points/19558 lines ->263 points/581
 lines (+163/-18977). Including disjoint delivered P1/P2 files and header,
 measured cumulative change is +164 points/-20866 lines. This is not a whole-S9
 census. Functional residuals remain registered for owner review. P3 cached full build and dual publication passed (runtime3, 26 hashes).
-CPU/debug, actual MEM/NTVDMD and NESticle targeted tests passed; P3 commit/push pending.
-Next call.c after P3 delivery; the coupled softpc.h full review stays S12. Migration remains
+CPU/debug, actual MEM/NTVDMD and NESticle targeted tests passed; P3 committed and pushed.
+Next call.c; the coupled softpc.h full review stays S12. Migration remains
 39/159. S13 retains Full. Frozen 437 points are historical, not current counts.
 ## S8 Closure Record
 

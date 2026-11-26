@@ -485,3 +485,8 @@ with commit/push pending. Remaining functional adaptations retain owner-review
 status; this delivery does not approve their permanent retention. The measured
 P3 source batch remains 100/19558 ->263/581 (+163/-18977); no mirror change was
 needed for the test-projection repair. Next ordered file is call.c.
+
+P3 delivery receipt: f424289aa is committed and pushed to origin/main.
+All 22 reviewed S9 files are final-verified and delivered through this batch;
+19 remain. Runtime3 and both published locations retain matching hashes.
+Functional residual owner decisions remain open; S9 and T485 remain active.
