@@ -39,11 +39,11 @@ supplemental ABI decision. Current48-file census784points/7443lines.
 Combined cumulative reduction90points/4320lines;P9 alone26/29.
 Runtime12 cached build,dual26/26hash publication,message191/COPYDATA59
 and Full23/23 PASS. Win95 knownExitOne retained;both enhanced roundtrips
-pass all five markers. P9 commit/push pending;delivered remains20/145.
+pass all five markers. P9 delivered/pushed 23731005a;delivered22/225.
 Additional file22 Full completed;next file30 and every S closure.
 Earlier P1-P7 linear-only line evidence must be rechecked with actual
 preprocessing before S11 closure. Migration39/159;S11 active.
-Next:wmdisp32.h after P9 delivery.
+Next:wmdisp32.h.
 
 ## S10 Closure Record
 

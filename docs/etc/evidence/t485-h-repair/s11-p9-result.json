@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P9",
-  "state": "final-verified-awaiting-commit-push",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime12",
   "reviewed_files": 22,
   "total_files": 48,
@@ -647,5 +647,6 @@
     "nonstationary_text_collisions": 5,
     "status": "local line cleanup; whole-file review and final-package delivery pending"
   },
-  "line_followup": "Earlier P1-P7 compiler-sensitive checks required before S11 closure."
+  "line_followup": "Earlier P1-P7 compiler-sensitive checks required before S11 closure.",
+  "commit": "23731005a021b3fb253fb9b698f74682f4183739"
 }

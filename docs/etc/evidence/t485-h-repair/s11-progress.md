@@ -32,8 +32,8 @@ frozen point counts as current byte-sensitive diff counts.
 | 18 | src/mvdm-host/wow32/wkernel.c | 10 | P8 delivered 874e19e83 |
 | 19 | src/mvdm-host/wow32/wkfileio.c | 6 | P8 delivered 874e19e83 |
 | 20 | src/mvdm-host/wow32/wkman.c | 22 | P8 delivered 874e19e83 |
-| 21 | src/mvdm-host/wow32/wkman.h | 1 | P9 source-reviewed; no source change |
-| 22 | src/mvdm-host/wow32/wmdisp32.c | 79 | P9 source-reviewed; delivery pending |
+| 21 | src/mvdm-host/wow32/wkman.h | 1 | P9 delivered 23731005a |
+| 22 | src/mvdm-host/wow32/wmdisp32.c | 79 | P9 delivered 23731005a |
 | 23 | src/mvdm-host/wow32/wmdisp32.h | 2 | Pending |
 | 24 | src/mvdm-host/wow32/wmsg16.c | 37 | Pending |
 | 25 | src/mvdm-host/wow32/wmsgcb.c | 5 | Pending |
@@ -631,3 +631,5 @@ P9 runtime12 cached full build and dual publication completed;26/26 published ha
 ### P9 final-package result
 
 [Runtime12 receipt](s11-p9-result.json): cached build,dual26/26hash publication,message191/COPYDATA59 and Full23/23 PASS. Both enhanced roundtrips pass all five markers; Win95 approved knownExitOne remains.22/48files,225/452points verified:12restored,213residual,227unreviewed. Current784/7443;combined reduction90/4320. Commit/push pending;no S closure.
+
+P9 delivered and pushed 23731005a021b3fb253fb9b698f74682f4183739.22/48files and225/452points delivered;12restored,213residual owner-review,227unreviewed. Full23/23 final runtime12. Next file:wmdisp32.h;next periodic Full file30 and S closure.
