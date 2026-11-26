@@ -32,7 +32,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S8 Ordered Progress
 
 [S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 735/851 reviewed,
-116 remain; 688 delivered and 47 P13 files awaiting commit/push.
+116 remain; P13 8d96fbf50 is committed and pushed, 735 files delivered.
 P13 cached build, dual publication and MEM/NTVDMD plus NESticle tests passed. Strict non-error byte-sensitive
 comparison, including CRLF/LF, EOF, blank lines and #line, is 52 points/3683
 lines -> 57 points/57 lines: 5 more points, 3626 fewer lines; 36 files byte-exact.

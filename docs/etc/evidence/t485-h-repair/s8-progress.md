@@ -1433,3 +1433,7 @@ inc/wowfax.h, wowinfo.h; softpc.new/base/ccpu386/bswap.c.
 These are explicitly outstanding format cleanup, not necessary retained code
 adaptations or complete byte restoration. Their exact hashes and counts are
 in the census. P13 runtime tests passed; no Full claim is made.
+P13 delivery receipt: commit 8d96fbf50 pushed to origin/main. Cached build,
+dual publication (26 hash checks), MEM/NTVDMD, NESticle, and documentation
+governance passed. 735/851 delivered; 116 remain. The seven explicitly listed
+format residuals remain open and are not concealed by this delivery count.
