@@ -787,3 +787,8 @@ runner; 90 assertions passed. Final-package MEM/NTVDMD and actual NESticle
 menu plus Escape hide/restore passed. Original guest and winnt.zip unchanged.
 37/41 files final-verified; S9 restored register points now 79. Five residual
 functional points remain owner decisions. P9 commit/push pending.
+
+P9 delivery receipt: 7ccebaf57 committed and pushed to origin/main.
+37/41 files reviewed, verified and delivered; four remain. 240/437 points
+reviewed, 197 remain; 79 restored register points delivered. Governance and
+links passed. Next ordered file timer.c; S9 and T485 remain active.

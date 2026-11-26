@@ -33,12 +33,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S9 Ordered Progress
 
 [S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 37/41 source-reviewed,
-35 delivered through P8 abe34fd2a; P9 two files final-verified, four unreviewed.
+37 delivered through P9 7ccebaf57; four unreviewed.
 240/437 points reviewed, 197 remain. P9 non-error 2/3203 ->102/115 (+100/-3088).
 S9 cumulative +177/-27125; 40 measured files 521/2829. Unchanged timer.c remains
-outside absolute total pending mapping. Seventy-nine restored points final-verified; 52 delivered before P9.
+outside absolute total pending mapping. Seventy-nine restored points final-verified and delivered.
 P9 cached build, dual publication (26 hashes), lifecycle/PIC and live MEM/NESticle
-passed; commit/push pending. Next base/system/timer.c.
+passed; P9 committed and pushed. Next base/system/timer.c.
 Migration remains 39/159; Full stays S13.
 
 ## S8 Closure Record
