@@ -32,11 +32,11 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S11 Ordered Progress
 
-[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):9/48 files,
-23/452 points final-verified:9 restored,14 residuals pending owner decision,
-429 unreviewed. P4 wcall16.c37/98 ->12/72;reviewed census91/4087 ->47/143,
-net-44/-3944. Runtime6 cached build,dual publication26/26,callback contracts,
-CCPU and real Win16 tests PASS;P4 delivered/pushed 9000f7c3f. Next:wcntl32.c.
+[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):10/48 files,
+56/452 points final-verified:9 restored,47 residuals pending owner decision,
+396 unreviewed. P5 wcntl32.c33/89 ->33/75;reviewed census124/4176 ->80/218,
+net-44/-3958. Runtime7 cached build,dual publication,transaction191/0 and
+real Win16 three phases PASS;P5 commit/push pending. Next:wcommdlg.c.
 Migration39/159;Full is required at every S closure, including S11.
 ## S10 Closure Record
 

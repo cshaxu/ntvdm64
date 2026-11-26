@@ -89,7 +89,9 @@ foreach(kind IN ITEMS construction transaction)
     list(APPEND pairs wcommdlg|WM32msgSHAREVIOLATION wowhooks|ThunkCbtHook
       wowhooks|GetEventMessage16 wowhooks|ThunkJournalHook wowhooks|ThunkMouseHook)
   endif()
-  set(bodies "")
+  ntvdm_source_projection(construction-stackfree.inc "${construction_owner}/walloc16.c"
+    "#ifdef DEBUG\nVOID FASTCALL StackFree16" "" "" FALSE)
+  file(READ "${CMAKE_BINARY_DIR}/construction-stackfree.inc" bodies)
   foreach(pair IN LISTS pairs)
     string(REPLACE "|" ";" parts "${pair}")
     list(GET parts 0 file)

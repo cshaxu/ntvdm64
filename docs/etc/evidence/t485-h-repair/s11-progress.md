@@ -21,7 +21,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 7 | src/mvdm-host/wow32/walias.c | 4 | P2 delivered 3bb82967a |
 | 8 | src/mvdm-host/wow32/walias.h | 6 | P3 delivered 952408b8b |
 | 9 | src/mvdm-host/wow32/wcall16.c | 4 | P4 delivered 9000f7c3f |
-| 10 | src/mvdm-host/wow32/wcntl32.c | 33 | Pending |
+| 10 | src/mvdm-host/wow32/wcntl32.c | 33 | P5 final-verified; commit/push pending |
 | 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | Pending |
 | 12 | src/mvdm-host/wow32/wdde.c | 25 | Pending |
 | 13 | src/mvdm-host/wow32/wdde.h | 4 | Pending |
@@ -389,3 +389,33 @@ unselected stack/common-dialog services fail closed; RTL uses ntdll.lib.
 No product functional modification was introduced to accommodate fixtures.
 Nine files/23 points final-verified;9 restored,14 owner-review residuals,
 429 unreviewed. Census91/4087 ->47/143, reduction44/3944. P4 delivered/pushed 9000f7c3f.
+### P5 wcntl32.c whole-file review
+
+File10/48, HXP-R-04096..04128:33 frozen points. Entry33points/89lines;
+removed14 redundant line anchors, final33/75 (-0points/-14lines), two
+#error branches unchanged,537 original source lines logically exact.
+04096 declares the lifetime provider;14 acquisition/release pairs capture
+heap keys before copying and consume them before normal/exception release.
+04109..04112 distinguish CB_DIR borrowed map references from owned heap.
+Original normal-only output unthunk is not valid exception cleanup: copying
+can fail before reaching free, and replaying unthunk can copy output twice.
+The existing call scratch and original allocation/map algorithms remain.
+No separate allocator/registry or moved complexity. All33 residual decisions
+remain pending owner; none is counted fully restored by line-anchor cleanup.
+Evidence: original/current transaction349/101 comparison in
+m0-t447-s4-message-source-audit.md; current full-body heap_transactions covers
+14 delegated controls, and combo cases exercise map and heap acquisition.
+
+Runtime7 cached full build and dual publication passed. Transaction fixture
+still used NT4 INIT flag and empty stackfree; now reuses original XP
+StackFree16 and checks cStackAlloc16. A first local run found one incorrectly
+changed test expectation: notification_proc moves the cursor directly, so
+its old-4 assertion was restored. Product code was not changed for this.
+Final runner5744 is active; final-package acceptance and commit remain pending.
+Source-reviewed10/48files,56/452points:9restored,47residual,396unreviewed.
+Census124/4176 ->80/218, reduction44points/3958lines. Delivered remains9files,
+23points and44/3944 reduction until P5 passes and is committed/pushed.
+
+P5 final runtime7:transaction191scenarios/0failures and real Win16 three
+phases/0errors/3releases PASS. Ten files/56points final-verified; commit/push
+pending. No Full claim; Full remains required for S11 closure.

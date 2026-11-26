@@ -27,7 +27,7 @@ typedef struct _TD {DWORD dwWOWCompatFlags;HAND16 htask16;DWORD vpStack,vpCBStac
 typedef struct {WORD cbData;BYTE data[14];} HLP,*LPHLP;
 #define WOWCF_DSBASEDSTRINGPOINTERS 1
 #define CURRENTPTD() current_task
-#define TDF_INITCALLBACKSTACK 1u
+/* XP tracks callback-stack allocation depth in cStackAlloc16. */
 #define TDF_IGNOREINPUT 2u
 #define THUNKMSG TRUE
 #define UNTHUNKMSG FALSE
@@ -176,7 +176,8 @@ static LRESULT CALLBACK notification_proc(HWND w,UINT m,WPARAM p,LPARAM l){
 #define FETCHWORD(v) ((WORD)(v))
 #define FETCHDWORD(v) ((DWORD)(v))
 #define FETCHLONG(v) ((LONG)(v))
-#define stackfree16(v,cb) ((void)(v),(void)(cb))
+VOID FASTCALL StackFree16(UINT);
+#define stackfree16(v,cb) StackFree16(cb)
 #undef RtlFillMemory
 #define RtlFillMemory fill_memory
 #undef RegisterWindowMessage
@@ -272,7 +273,7 @@ static void reset_case(void){
  FreeParamMap(task.htask16);memset(slots,0,sizeof(slots));memset(&words,0,sizeof(words));
  allocations=fail_at=bad_map=bad_fill=bad_foreign=0;map_fail=map_allocations=flat_release=relocated=0;
  task.dwWOWCompatFlags=0;dead_window=FALSE;++scenarios;
- task.vpStack=STACK_BASE+0xf00;task.vpCBStack=STACK_BASE+0xd00;task.dwFlags=TDF_INITCALLBACKSTACK;
+ task.vpStack=STACK_BASE+0xf00;task.vpCBStack=STACK_BASE+0xd00;task.dwFlags=0;task.cStackAlloc16=0;
  current_task=&task;worker_live=TRUE;fault_at=fault_step=release_fault_at=release_calls=0;
  native_locks=global_locks=global_unlocks=foreground_calls=0;copyout_fault=callback_fault=callback_reject=FALSE;
 }
@@ -491,23 +492,23 @@ static void cbt_transactions(void){
   __try{(void)ThunkCbtHook(HCBT_CREATEWND,1,(LONG)&cbt,&hook);}
   __except(fault_filter(GetExceptionCode())){trapped=TRUE;}
   expect((mode!=0 || trapped) && !owned() && !bad_foreign,"TRANSACTION_CBT_ABORT");
-  if(mode<2)expect(task.vpCBStack==cursor && (task.dwFlags & TDF_INITCALLBACKSTACK),"TRANSACTION_CBT_FAILED_STACK");
+  if(mode<2)expect(task.vpCBStack==cursor && (task.cStackAlloc16==0),"TRANSACTION_CBT_FAILED_STACK");
  }
 }
 static void stack_transactions(void){
  wow_message_stack scope;DWORD old;PTD_VALUE other;unsigned mode;
  for(mode=0;mode<2;++mode){
-  DWORD flags;reset_case();task.dwFlags=mode ? TDF_INITCALLBACKSTACK : 0;
+  DWORD flags;reset_case();task.cStackAlloc16=mode;
   ++scenarios;flags=task.dwFlags;old=task.vpCBStack;SetLastError(0x4498);
   expect(fixture_common_dialog_filter(0xc180,0xc180)==FALSE &&
-   task.vpCBStack==old && task.dwFlags==flags && !owned() && !allocations &&
+   task.vpCBStack==old && task.cStackAlloc16==(INT)mode && task.dwFlags==flags && !owned() && !allocations &&
    GetLastError()==0x4498,"TRANSACTION_COMMDLG_FILTER_UNCHANGED");
  }
  for(mode=0;mode<7;++mode){
   reset_case();old=task.vpCBStack;wow_message_stack_enter(&scope);(void)stackalloc16(8);
   if(mode==0)scope.completed=TRUE;
   if(mode==1)task.dwFlags|=0x80;
-  if(mode==2){task.dwFlags|=TDF_IGNOREINPUT;task.dwFlags&=~TDF_INITCALLBACKSTACK;}
+  if(mode==2){task.dwFlags|=TDF_IGNOREINPUT;task.cStackAlloc16=0;}
   if(mode==3){worker_live=FALSE;current_task=(PTD)(ULONG_PTR)1;}
   if(mode==4){other=task;current_task=&other;}
   if(mode==5)++task.htask16;
@@ -516,7 +517,7 @@ static void stack_transactions(void){
   expect(GetLastError()==0x4499,"TRANSACTION_STACK_ERROR_PRESERVED");
   if(mode==1 || mode==2 || mode==6)expect(task.vpCBStack==old,"TRANSACTION_STACK_FAILURE_RESTORE");
   else expect(task.vpCBStack!=old,"TRANSACTION_STACK_NORMAL_OR_FOREIGN_UNCHANGED");
-  if(mode==2)expect(!(task.dwFlags & TDF_INITCALLBACKSTACK) && (task.dwFlags & TDF_IGNOREINPUT),"TRANSACTION_SIGNAL_FLAGS_RETAINED");
+  if(mode==2)expect(task.cStackAlloc16==0 && (task.dwFlags & TDF_IGNOREINPUT),"TRANSACTION_SIGNAL_FLAGS_RETAINED");
   if(mode==1)expect(task.dwFlags & 0x80,"TRANSACTION_OTHER_FLAGS_RETAINED");
  }
  reset_case();old=task.vpCBStack;notification_fault=FALSE;
