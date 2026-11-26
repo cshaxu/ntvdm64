@@ -12,8 +12,6 @@
 --*/
 
 #include "precomp.h"
-#include "wow_user_object_bindings.h"
-#line 15
 #pragma hdrstop
 
 MODNAME(wuser31.c);
@@ -385,9 +383,7 @@ ULONG FASTCALL WU32SystemParametersInfo(PVDMFRAME pFrame)
 
 
     default:
-#line 386
 #ifdef DEBUG
-#line 387
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 394
@@ -589,9 +585,7 @@ ULONG FASTCALL WU32SystemParametersInfo(PVDMFRAME pFrame)
 
 
     default:
-#line 592
 #ifdef DEBUG
-#line 593
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 600

@@ -259,7 +259,6 @@ VOID DestroyTimers16(HTASK16 htask16)
 
 
 VOID WowOriginalTimerFunc(UINT index, HWND hwnd, UINT idEvent, DWORD dwTime)
-#line 262
 {
     PARM16 Parm16;
     register PTMR ptmr;

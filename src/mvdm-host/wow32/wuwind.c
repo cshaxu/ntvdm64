@@ -23,6 +23,7 @@ static DWORD DialogProcedureValue(LONG entry, BOOL *guest)
     return *guest ? target.procedure : (DWORD)entry;
 }
 
+#line 16
 #pragma hdrstop
 
 MODNAME(wuwind.c);
@@ -788,9 +789,7 @@ ULONG FASTCALL W32CreateWindow(PVDMFRAME pFrame)
     }
 #endif // FE_SB
 
-#line 781
 #ifdef DEBUG
-#line 782
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 791
@@ -1395,7 +1394,6 @@ ULONG FASTCALL WU32GetActiveWindow(PVDMFRAME pFrame)
 ULONG FASTCALL WU32GetWindowDC(PVDMFRAME pFrame)
 {
     ULONG ul;
-#line 1392
     register PGETWINDOWDC16 parg16;
     HAND16 htask16 = pFrame->wTDB;
 
@@ -1407,7 +1405,6 @@ ULONG FASTCALL WU32GetWindowDC(PVDMFRAME pFrame)
     HWND32(parg16->f1)
     ));
 
-#line 1403
     if (ul)
         StoreDC(htask16, parg16->f1, (HAND16)ul);
 
@@ -1461,7 +1458,6 @@ ULONG FASTCALL WU32GetWindowLong(PVDMFRAME pFrame)
 #if (GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20) || DWL_MSGRESULT != (0))
 #error Win16/Win32 GWL constants differ
 #endif
-#line 1456
 
 #ifndef WIN16_GWW_HINSTANCE
 #define WIN16_GWW_HINSTANCE     (-6)
@@ -1747,10 +1743,8 @@ ULONG FASTCALL WU32GetWindowWord(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets
 
 #if (GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))
-#line 1733
 #error Win16/Win32 window-word constants differ
 #endif
-#line 1735
 
     // Make sure the 16-bit app is requesting allowable offsets
 
@@ -2199,10 +2193,8 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets for GWL constants
 
 #if (GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20))
-#line 2183
 #error Win16/Win32 GWL constants differ
 #endif
-#line 2185
 
     // Make sure the 16-bit app is requesting allowable offsets
 
@@ -2225,7 +2217,6 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
                 goto defswp;
             }
             // Look to see if the new 16:16 proc is a thunk for a 32-bit proc.
-#line 2204
             dwWndProc32New = IsThunkWindowProc(LONG32(parg16->f3), &iClass );
 
             if ( dwWndProc32New != 0 ) {
@@ -2670,10 +2661,8 @@ ULONG FASTCALL WU32SetWindowWord(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets
 
 #if (GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))
-#line 2622
 #error Win16/Win32 window-word constants differ
 #endif
-#line 2624
 
     // Make sure the 16-bit app is requesting allowable offsets
 

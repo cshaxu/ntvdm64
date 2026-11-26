@@ -49,17 +49,17 @@ frozen point counts as current byte-sensitive diff counts.
 | 35 | src/mvdm-host/wow32/wshell.c | 1 | P15 delivered f02c587de |
 | 36 | src/mvdm-host/wow32/wshimdb.c | 5 | P15 delivered f02c587de |
 | 37 | src/mvdm-host/wow32/wspool.c | 2 | P16 delivered 014d8575c |
-| 38 | src/mvdm-host/wow32/wstruc.c | 3 | P17 source-reviewed; line-only delivery pending |
-| 39 | src/mvdm-host/wow32/wuclass.c | 7 | P17 source-reviewed; line-only delivery pending |
-| 40 | src/mvdm-host/wow32/wuclip.c | 16 | P17 source-reviewed; Full delivery pending |
-| 41 | src/mvdm-host/wow32/wudlg.c | 5 | P18 source-reviewed; line correction pending delivery |
-| 42 | src/mvdm-host/wow32/wuman.c | 5 | P18 reviewed; original-query trial rejected by ABI; verification pending |
-| 43 | src/mvdm-host/wow32/wumsg.c | 32 | Pending |
-| 44 | src/mvdm-host/wow32/wumsg.h | 1 | Pending |
-| 45 | src/mvdm-host/wow32/wuser.c | 5 | Pending |
-| 46 | src/mvdm-host/wow32/wuser31.c | 2 | Pending |
-| 47 | src/mvdm-host/wow32/wutmr.c | 1 | Pending |
-| 48 | src/mvdm-host/wow32/wuwind.c | 13 | Pending |
+| 38 | src/mvdm-host/wow32/wstruc.c | 3 | P17 delivered b709bd25c |
+| 39 | src/mvdm-host/wow32/wuclass.c | 7 | P17 delivered b709bd25c |
+| 40 | src/mvdm-host/wow32/wuclip.c | 16 | P17 delivered b709bd25c |
+| 41 | src/mvdm-host/wow32/wudlg.c | 5 | P18 delivered f449163ee |
+| 42 | src/mvdm-host/wow32/wuman.c | 5 | P18 delivered f449163ee |
+| 43 | src/mvdm-host/wow32/wumsg.c | 32 | P19 reviewed; line-only cleanup pending batch delivery |
+| 44 | src/mvdm-host/wow32/wumsg.h | 1 | P19 reviewed; line/format cleanup pending batch delivery |
+| 45 | src/mvdm-host/wow32/wuser.c | 5 | P19 reviewed; line/format cleanup pending batch delivery |
+| 46 | src/mvdm-host/wow32/wuser31.c | 2 | P19 reviewed; final delivery pending |
+| 47 | src/mvdm-host/wow32/wutmr.c | 1 | P19 reviewed; final delivery pending |
+| 48 | src/mvdm-host/wow32/wuwind.c | 13 | P19 reviewed; final delivery pending |
 
 ## P1 complete-file source review
 
@@ -1233,3 +1233,54 @@ frozenpoints;17restored381residual54unreviewed. Current750points/4039lines;
 cumulative reduction130points/7724lines. Final runtime25 publication and targeted
 checks are recorded in [P18 receipt](s11-p18-result.json). Full not repeated;
 last checkpoint remains40files/runtime21. Nextfile43 wumsg.c. S11 active.
+
+### P19 file43 wumsg.c
+
+Whole-file32frozen points reviewed;all residuals have grouped provider/ownership
+evidence in points and pending-decisions. No frozen point fully restored.
+Current nonerror51/149 ->45/141 (-6/-8);two exclusions unchanged. Six redundant
+line directives and one whitespace-only line removed;85unique original statements
+match final product preprocessing with zero drift. No functional change or new
+runtime claim. Accumulate before the next substantive batch or S closure.
+Reviewed43/48files430/452points:17restored413residual22unreviewed;delivered42/398.
+Current744/4031;raw cumulative reduction136/7732. LastFull40/runtime21 retained.
+Nextfile44 wumsg.h.
+
+### P19 files44-45
+
+wumsg.h1/85->1/2: originalLF/EOF restored, redundant#line17 removed;
+only matchingTLS declaration differs. All original declarations retain lines.
+wuser.c12/31->7/23: restore nativeDC call indentation,remove5 redundant#line,
+add#line2466 after existing expanded cleanup call. Final185unique original
+statements zero drift;one#error exclusion unchanged. Five frozen residuals
+have actual provider/ABI/publication evidence;no functional change.
+Reviewed45/48files436/452points:17restored419residual16unreviewed.
+Current739/3940;raw cumulative reduction141/7823. Delivered42/398unchanged.
+P19 cumulative line/format change-11points/-99lines;no premature build/test.
+Nextfile46 wuser31.c. LastFull40/runtime21.
+
+### P19 files46-48 and closure checkpoint preparation
+
+wuser31.c8/10->3/4: remove unused object-binding header and4 redundant#line;
+R04529 restored. Full actual-TU compilation passed;60original statements zero drift.
+wutmr.c1/1541->1/2: restore originalLF/EOF,retain necessary callback-body rename.
+All770original line positions remain,apart from same-line function identifier.
+wuwind.c27/82->15/71: add#line16 after carrier helper,remove12 redundant#line;
+120original statement checks zero drift. One checker collision resolved explicitly:
+XP line670 RETURN(W32CreateWindow(pFrame)) expands to the same text as line558;
+both actual logical positions are correct,not a product exception. Five#error
+exclusions retained. Typed-procedure and SetWindowText mapped-key evidence retained.
+
+All48files452frozen points reviewed:18restored434residual0unreviewed.
+Current census722points/2384lines;raw reduction158/9379 from880/11763.
+P19 six-file delta-28points/-1655lines;only format/include/line edits.
+Delivered remains42files398points until final cached build,dual publication,Full,
+commit and push. LastFull40/runtime21 remains historical;final closure pending.
+
+[P19 final-delivery receipt](s11-p19-result.json) records live verification status;
+source audit completion is not S closure.
+
+P19 final runtime26 Full23/23 PASS in595423ms;one run,no retries. Cached build
+and26published hashes PASS. Source hashes unchanged throughout Full.
+Documentation encoding issue corrected independently;governance and links PASS.
+No original guest/ZIP changes. Commit/push pending;S11 closure not yet claimed.

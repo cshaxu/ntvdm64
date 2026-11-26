@@ -14,7 +14,6 @@
 #define WOWDDE_POSTMESSAGE TRUE
 
 extern __declspec(thread) BOOL fWhoCalled;
-#line 17
 
 ULONG FASTCALL   WU32CallMsgFilter(PVDMFRAME pFrame);
 ULONG FASTCALL   WU32CallWindowProc(PVDMFRAME pFrame);

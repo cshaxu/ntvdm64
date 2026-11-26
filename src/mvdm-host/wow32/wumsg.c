@@ -32,7 +32,6 @@ __declspec(thread) BOOL fWhoCalled = FALSE;
 
 // DDE bit used in GetMessage and PeekMessage
 
-#line 33
 #define fAckReq 0x8000
 #define fRelease 0x2000
 
@@ -450,7 +449,7 @@ ULONG FASTCALL WU32DefDlgProc(PVDMFRAME pFrame)
 ULONG FASTCALL WU32DefFrameProc(PVDMFRAME pFrame)
 {
     HWND hwnd, hwnd2;
-    
+
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
 #line 431
@@ -891,9 +890,7 @@ get_next_dde_message:
     FREEVDMPTR(pFrame);
 
 
-#line 844
 #ifdef DEBUG
-#line 845
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 849
@@ -1196,9 +1193,7 @@ get_next_dde_message:
     FREEARGPTR(parg16);
     FREEVDMPTR(pFrame);
 
-#line 1140
 #ifdef DEBUG
-#line 1141
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 1145
@@ -1462,7 +1457,6 @@ ULONG FASTCALL WU32PostAppMessage(PVDMFRAME pFrame)
     .endcmt
 --*/
 
-#line 1393
 ULONG FASTCALL WU32PostMessage(PVDMFRAME pFrame)
 {
     LONG l;

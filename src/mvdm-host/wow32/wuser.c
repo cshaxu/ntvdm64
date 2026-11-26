@@ -852,10 +852,9 @@ ULONG FASTCALL WU32GetDC(PVDMFRAME pFrame)
     CURRENTPTD()->ulLastDesktophDC = 0;
     
     ul = GETHDC16(wow_native_GetDC(
-    HWND32(parg16->f1)
-    ));
+                      HWND32(parg16->f1)
+                      ));
 
-#line 856
     if (ul) {
 // Some apps such as MSWORKS and MS PUBLISHER use some wizard code that accepts
 // a hDC or a hWnd as a parameter and attempt to figure out what type of handle
@@ -1404,9 +1403,7 @@ ULONG FASTCALL WU32GrayString(PVDMFRAME pFrame)
 
        GETPSZPTR(vpstr, psz2);
 
-#line 1404
 #ifdef DOESNT_USER_DO_THIS
-#line 1405
 #error Unsupported excluded original configuration
 #endif
 #line 1415
@@ -1596,7 +1593,6 @@ ULONG FASTCALL WU32InvertRect(PVDMFRAME pFrame)
 }
 
 
-#line 1601
 ULONG FASTCALL WU32LoadBitmap(PVDMFRAME pFrame)
 {
     ULONG ul = 0;
@@ -1999,7 +1995,6 @@ ULONG FASTCALL WU32SetKeyboardState(PVDMFRAME pFrame)
 
 #define SSC_BUF_SIZE	    256
 
-#line 2003
 ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
 {
     PINT p2;
@@ -2476,6 +2471,7 @@ ModuleUnload(
                           (PNEMODULESEG)((ULONG)pNeModule + pNeModule->ne_segtab),
                           pNeModule->ne_cseg
                           );
+#line 2466
 
    RemoveHmodFromCache(hModule16);
 
