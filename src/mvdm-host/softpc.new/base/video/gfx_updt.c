@@ -30,7 +30,7 @@ PURPOSE			: Keep the host screen up to date.
 -------------------------------------------------------------------------
 [1.2 DATATYPES FOR [1.1] (if not basic C types)]
 
-	STRUCTURES/TYPEDEFS/ENUMS: 
+	STRUCTURES/TYPEDEFS/ENUMS:
 
 -------------------------------------------------------------------------
 [1.3 INTERMODULE IMPORTS]
@@ -49,10 +49,10 @@ GLOBALS		  :	describe what exported data objects are
 			update_alg - pointers to update functions contained
 			here or elsewhere - eg. host specific update stuff.
 
-			text_update() - routine to do a text update, by comparing 
+			text_update() - routine to do a text update, by comparing
 			the adaptor regen area with video_copy.
 
-			cga_graph_update() - routine to do a graphics update, by comparing 
+			cga_graph_update() - routine to do a graphics update, by comparing
 			the adaptor regen area with video_copy.
 
 			text_scroll_up/down() - scroll portion of the screen in text mode.
@@ -61,7 +61,7 @@ GLOBALS		  :	describe what exported data objects are
 [3.INTERMODULE INTERFACE DECLARATIONS]
 =========================================================================
 
-[3.1 INTERMODULE IMPORTS]						*/ 
+[3.1 INTERMODULE IMPORTS]						*/
 
 #include "insignia.h"
 #include "host_def.h"
@@ -99,18 +99,17 @@ GLOBALS		  :	describe what exported data objects are
 #include "ga_mark.h"
 #include "ga_defs.h"
 
-/*[3.2 INTERMODULE EXPORTS]						*/ 
+/*[3.2 INTERMODULE EXPORTS]						*/
 
 /*
  * Terminal type.  This is initialised to a set default which is determined
  * in host_graph.h.
  */
 
-#line 107
 int terminal_type = TERMINAL_TYPE_DEFAULT;
 
 /*
-5.MODULE INTERNALS   :   (not visible externally, global internally)]     
+5.MODULE INTERNALS   :   (not visible externally, global internally)]
 
 [5.1 LOCAL DECLARATIONS]						*/
 
@@ -333,7 +332,7 @@ static	int	search_video_copy IFN3(int, start_line,
 #ifdef VGG
 
 /*
- *	Special version of search_video_copy() for the Video 7 Extended Modes 60h & 61h 
+ *	Special version of search_video_copy() for the Video 7 Extended Modes 60h & 61h
  *	and 'undocumented' VGA mode which have chars_per_line of 90 & 94 which don't seem
  *  to be multiples of 4.  Interestingly, Zany Golf ( EGA, Mode 14 ) also ends up
  *  calling this code.
@@ -395,7 +394,7 @@ static	int	v7_search_video_copy IFN3(int, start_line,
 		              	j<<2, (int)(length)<<2, ptr-video_copy-j,bodge);
 			}
 		}
-		else 
+		else
 		{
 			add_dirty_rec((int)(2*(ptr-vcopy)/half_opl)+start_line,
 		             (j-quarter_opl-1)<<2, (int)((length)<<2), ptr-video_copy-j+quarter_opl,2+bodge);
@@ -691,10 +690,9 @@ LOCAL	boolean simple_update IFN0()
 #endif  //NEC_98
 #line 694
 	return( FALSE );
-#line 695
 }
 
-LOCAL VOID simple_update_b_move IFN4(UTINY *, laddr, UTINY *, haddr, 
+LOCAL VOID simple_update_b_move IFN4(UTINY *, laddr, UTINY *, haddr,
 				UTINY *, src, UTINY, src_type)
 {
 	UNUSED(laddr);
@@ -1200,7 +1198,7 @@ void ega_text_update IFN0()
 		to = (USHORT *)&video_copy[screen_start>>1];
 		from = (USHORT *) get_chain2_screen_ptr(screen_start);
 
-		for(i=get_screen_length()>>1;i>0;i--) 
+		for(i=get_screen_length()>>1;i>0;i--)
 		{
 			*to++ = *from;	/* char and attribute bytes */
 			from += 4;		/* planes 2,3 interleaved */
@@ -1229,7 +1227,7 @@ void ega_text_update IFN0()
 
 	setVideodirty_total(0);
 
-	if (is_cursor_visible()) 
+	if (is_cursor_visible())
 	{
 		half_word attr;
 
@@ -1312,7 +1310,7 @@ void text_update IFN0()
 		     * The host y co-ords are doubled
 		     */
 
-		    /* one or more ints of data are now selected 
+		    /* one or more ints of data are now selected
 		       but refine difference to words (i.e. characters),
 		       to avoid a glitch on the screen when typing in to
  		       a dumb terminal  */
@@ -1483,7 +1481,7 @@ cga_graph_update_unchained IFN0()
 					{
 						*to++ = *from++;
 					}
- 
+
 					l = j - k - 1;
 					to += l;
 					from += l;
@@ -1494,7 +1492,7 @@ cga_graph_update_unchained IFN0()
 				to++;
 				from++;
 			}
-		} 
+		}
 	}
 
     host_end_update();
@@ -1660,7 +1658,7 @@ cga_graph_update_chain2 IFN0()
 					to++;
 					from += 4;
 				}
-			} 
+			}
 		}
 	}
 
@@ -1782,7 +1780,7 @@ cga_graph_update_chain4 IFN0()
 					to++;
 					from += 4;
 				}
-			} 
+			}
 			/* do odd  lines */
 	
 			from = (UTINY *) get_screen_ptr(((start_line * SCAN_LINE_LENGTH) + ODD_OFFSET)<<2);
@@ -1823,7 +1821,7 @@ cga_graph_update_chain4 IFN0()
 					to++;
 					from += 4;
 				}
-			} 
+			}
 		}
 	}
 
@@ -1890,7 +1888,7 @@ cga_hi_graph_update IFN0()
 void	ega_wrap_split_graph_update IFN0()
 {
 #ifndef NEC_98
-	register	int	bpl; 
+	register	int	bpl;
 	register	int	quarter_opl;
 	register	int	screen_split;
 
@@ -1961,7 +1959,7 @@ void	ega_wrap_split_graph_update IFN0()
 void	ega_split_graph_update IFN0()
 {
 #ifndef NEC_98
-	register	int	bpl; 
+	register	int	bpl;
 	register	int	quarter_opl;
 	register	int	screen_split;
 	register	int	screen_height;
@@ -2180,7 +2178,7 @@ void	vga_graph_update IFN0()
 void	vga_split_graph_update IFN0()
 {
 #ifndef NEC_98
-	register	int	bpl; 
+	register	int	bpl;
 	register	int	quarter_opl;
 	register	int	screen_split;
 	register	int	screen_height;
@@ -2494,7 +2492,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 		colour = (attr & bg_col_mask) >> 4;
 	}
 /*
- * Reduce the width of the rectangle if any right hand area is completely 
+ * Reduce the width of the rectangle if any right hand area is completely
  * blank.
  *
  * Don't reduce the size of the scrolling region for a dumb terminal.
@@ -2506,7 +2504,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 #ifdef DUMB_TERMINAL
 #line 2480
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
-#endif /* DUMB_TERMINAL */            
+#endif /* DUMB_TERMINAL */
 #line 2483
 
 		/* originally dummy was char [2] */
@@ -2542,7 +2540,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 #ifdef DUMB_TERMINAL
 #line 2515
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
-#endif /* DUMB_TERMINAL */            
+#endif /* DUMB_TERMINAL */
 #line 2517
 
 	/* Do the host stuff */
@@ -2554,7 +2552,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	htlx = tlx	* get_pix_char_width()/2;
 
 	tly = (int)(start_offset/get_bytes_per_line());
-	htly = tly * get_host_char_height(); 
+	htly = tly * get_host_char_height();
 
 	result = host_scroll_up(htlx,htly,htlx+width/4*get_pix_char_width()-1,
 				htly+height*get_host_char_height()-1, lines*get_host_char_height(),colour);
@@ -2697,7 +2695,7 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 	htlx = tlx	* get_pix_char_width()/2;
 
 	tly = (int)(start_offset/get_bytes_per_line());
-	htly = tly * get_host_char_height(); 
+	htly = tly * get_host_char_height();
 
 	result = host_scroll_down(htlx,htly,htlx+width/4*get_pix_char_width()-1,
 			htly+height*get_host_char_height()-1, lines*get_host_char_height(),colour);
@@ -2833,7 +2831,7 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 		colour = (attr & bg_col_mask) >>4;
 	}
 /*
- * Reduce the width of the rectangle if any right hand area is completely 
+ * Reduce the width of the rectangle if any right hand area is completely
  * blank.
  *
  * Don't reduce the size of the scrolling region for a dumb terminal.
@@ -2845,7 +2843,7 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 #ifdef DUMB_TERMINAL
 #line 2808
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
-#endif /* DUMB_TERMINAL */            
+#endif /* DUMB_TERMINAL */
 #line 2811
 
 		/* originally dummy was char [2] */
@@ -2881,13 +2879,13 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 #ifdef DUMB_TERMINAL
 #line 2843
 #error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
-#endif /* DUMB_TERMINAL */            
+#endif /* DUMB_TERMINAL */
 #line 2845
 
 	/* do the host stuff */
 	start_offset = start - get_screen_start()*2 - gvi_pc_low_regen;
 	tlx = (int)(start_offset%get_bytes_per_line())*get_pix_char_width()/2;
-	tly = (int)(start_offset/get_bytes_per_line())*get_host_char_height(); 
+	tly = (int)(start_offset/get_bytes_per_line())*get_host_char_height();
 	result = host_scroll_up(tlx,tly,tlx+width/2*get_pix_char_width()-1,
 				tly+height*get_host_char_height()-1, lines*get_host_char_height(),colour);
 
@@ -3192,7 +3190,7 @@ boolean cga_graph_scroll_down IFN6(int, start, int, width, int, height,
 
 	start_offset = start - gvi_pc_low_regen;
 	tlx = (int)(start_offset%SCAN_LINE_LENGTH)*8;
-	tly = (int)(start_offset/SCAN_LINE_LENGTH)*4; 
+	tly = (int)(start_offset/SCAN_LINE_LENGTH)*4;
 
 	result = host_scroll_down(tlx,tly,tlx+width*8-1,tly+height*4-1, lines*4,colour);
 
@@ -3513,7 +3511,7 @@ boolean	dummy_scroll IFN6(int,dummy1,int,dummy2,int,dummy3,int,
 	return FALSE;
 }
 
-#ifndef REAL_VGA 
+#ifndef REAL_VGA
 
 /*---------------------  End of scrolling routines --------------------------*/
 
@@ -3842,7 +3840,6 @@ set_mark_funcs IFN0()
 			break;
 
 		default:
-#line 3858
 			assert1(NO,"Unknown marking type %d", (int) curr_mark_type);
 			break;
 #endif  //NEC_98
@@ -3921,7 +3918,7 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 	 * AJO 23/4/93
 	 * DON'T use disable_gfx_update_routines() here cos' it's a NOP
 	 * if the display is already disabled which causes bizarre problems
-	 * if a mode change is performed while disabled. 
+	 * if a mode change is performed while disabled.
 	 */
 	save_gfx_update_routines();
 	if (get_display_disabled())
@@ -3949,7 +3946,7 @@ void cursor_changed IFN2(int, x, int, y)
 #error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
 #line 3955
-} 
+}
 #endif
 
 void host_cga_cursor_has_moved IFN2(int, x, int, y)
@@ -4035,7 +4032,7 @@ GLOBAL void disable_gfx_update_routines IFN0()
 
     if (gfx_update_routines_inhibited)
 	return;
- 
+
     save_gfx_update_routines();
     inhibit_gfx_update_routines();
 }
@@ -4637,7 +4634,7 @@ void jazz_text_update()
 		     * The host y co-ords are doubled
 		     */
 
-		    /* one or more ints of data are now selected 
+		    /* one or more ints of data are now selected
 		       but refine difference to words (i.e. characters),
 		       to avoid a glitch on the screen when typing in to
  		       a dumb terminal  */
@@ -4667,7 +4664,7 @@ void jazz_text_update()
 
 	/*:::::::::::::::::::::::::::::::::::::::::::::::::: Repaint cursor */
 
-	if (is_cursor_visible()) 
+	if (is_cursor_visible())
 	{
 		half_word attr;
 

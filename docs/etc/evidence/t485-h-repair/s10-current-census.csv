@@ -18,9 +18,9 @@ src/mvdm-host/softpc.new/base/video/ega_vide.c,5822d1a00,1,5005,117,134,42,5ca34
 src/mvdm-host/softpc.new/base/video/ega_writ.c,5822d1a00,1,1200,55,122,16,126843dadbf562e19c2faf4304059aaca244f426ea0dec47e5fe3c7ec917f502,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/egawrtm0.c,5822d1a00,1,2597,39,54,14,0be71a1589132ca8302ecb36284d7ddbf646dbe48f5150a7bf3207784427a167,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/egwrtm12.c,5822d1a00,1,2385,51,77,11,fa233315a5b264ea64669454fd8c7ac2ed6d09e576332da5198fab940b9e0d5e,measured-not-audit-status
-src/mvdm-host/softpc.new/base/video/gfx_updt.c,5822d1a00,1,9080,1,9080,70,e1168a624a829e284d2e5c4e6b2d474542dfa4382d5990b553906bcf213d1858,measured-not-audit-status
-src/mvdm-host/softpc.new/base/video/v7_ports.c,5822d1a00,1,1562,1,1562,1,9b50e59efa523c3b318c385451c3e805f90b53718449563afad8a08ba0423e76,measured-not-audit-status
-src/mvdm-host/softpc.new/base/video/v7_video.c,5822d1a00,1,1077,1,1077,4,9a4cea17df339b09e93f96ad398fd55c6cce3722c1d8540bf3f2f2f20916661d,measured-not-audit-status
+src/mvdm-host/softpc.new/base/video/gfx_updt.c,5822d1a00,1,9080,277,359,70,c3c3089cb66471af3ef909d2b49e527b4b2a4d2fc19c0517940e3ac9a9afa461,measured-not-audit-status
+src/mvdm-host/softpc.new/base/video/v7_ports.c,5822d1a00,1,1562,9,10,1,c909069807e0187272b8718a2643affbc68ce0d13955f1bd4567fb1a36dc7541,measured-not-audit-status
+src/mvdm-host/softpc.new/base/video/v7_video.c,5822d1a00,1,1077,17,22,4,4c3e4975993a6b1b81c91ae6792a48f3b4ae988443c278eb79283ba272c08171,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/vga_mode.c,5822d1a00,1,1084,1,1084,28,6bd14bc19fa9ca2686862fab96be394fa4d52c9684a3ea98837dfa60def6c203,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/vga_prts.c,5822d1a00,1,6074,1,6074,35,20f4476117cabb6dc4ae19ec8d01438935558deaa3518b64351ca7b44e676fd7,measured-not-audit-status
 src/mvdm-host/softpc.new/host/src/nt_cga.c,5822d1a00,1,1950,1,1950,10,9548e68f1b6ddeede063342a85da96e8a39e9147914b9874c45b6a0d71374386,measured-not-audit-status

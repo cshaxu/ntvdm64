@@ -30,9 +30,9 @@ Full remains S13; original guest remains immutable.
 | 17 | softpc.new/base/video/ega_writ.c | 5 | Delivered a6ba6aa72 |
 | 18 | softpc.new/base/video/egawrtm0.c | 20 | Delivered a6ba6aa72 |
 | 19 | softpc.new/base/video/egwrtm12.c | 30 | Delivered 320fcbe2c |
-| 20 | softpc.new/base/video/gfx_updt.c | 94 | Not started |
-| 21 | softpc.new/base/video/v7_ports.c | 17 | Not started |
-| 22 | softpc.new/base/video/v7_video.c | 2 | Not started |
+| 20 | softpc.new/base/video/gfx_updt.c | 94 | Source reviewed; format delivery pending |
+| 21 | softpc.new/base/video/v7_ports.c | 17 | Source reviewed; format delivery pending |
+| 22 | softpc.new/base/video/v7_video.c | 2 | Source reviewed; format delivery pending |
 | 23 | softpc.new/base/video/vga_mode.c | 9 | Not started |
 | 24 | softpc.new/base/video/vga_prts.c | 24 | Not started |
 | 25 | softpc.new/host/src/nt_cga.c | 10 | Not started |
@@ -463,3 +463,62 @@ pending. Full remains S13.
 P7 receipt:320fcbe2c pushed to origin/main.19/30 reviewed/delivered;735/1060
 points reviewed,325 remain.562 restored/delivered,173 residuals,zero local
 restorations pending. Census957/36492 unchanged. Next gfx_updt.c.
+
+## Gfx source review
+
+File20 gfx_updt.c:94 points,36 format restorations and58 residuals. All
+non-error semantic differences enumerated after exclusion projection:
+57 text/CGA-chain2/scroll/jazz address-stride changes and one markset call.
+CPU40 backing uses8 bytes per text cell; IU32 scans advance2,USHORT scans4.
+Original smaller strides read/write intervening plane data. Compact
+video_copy coordinates remain unchanged;get_screen_ptr(0) equals the
+chain2 zero origin. Up/down scroll preserves direction and source/destination
+spacing; no replacement algorithm or new state. CHAIN2 graphics uses
+existing markset4 (bitmap byte/word plus chain2 string marking),rather than
+asserting and leaving stale selection. These facts justify residuals,not
+universal graphics coverage. Residuals remain pending owner decision.
+
+Restore original whitespace/LF; remove redundant #line107/695/3858.70
+original exclusions retained,3088 matched non-directive logical lines exact.
+Whitespace/line-directive-stripped bytes unchanged. Non-error1/9080 ->277/359
+(+276/-8721).Cumulative1233/27771 versus201/102845 (+1032/-75074).
+20/30 reviewed,829/1060 reviewed,231 remain;562 restored/delivered,36 local
+format restorations pending,231 residuals;19 files delivered. Pure format
+batch accumulates to next ordered v7_ports.c;no build yet.
+
+## Video7 source review
+
+File21 v7_ports.c:17 points,16 format restorations,one residual. The graphics
+controller shift mode controls256-colour display and VGA halves horizontal
+display width there;sequencer chain4 independently controls CPU memory.
+Keep pointer-scale predicate tied to actual display mode and sequencer flag.
+No claim of fresh exhaustive V7 pointer runtime coverage. RestoreLF/spacing;
+648 original logical lines match,one exclusion retained.1/1562 ->9/10.
+At this file21/30 and846/1060 reviewed;52 local restorations,232 residuals.
+Cumulative1241/26219 (+1040/-76626 against corrected baseline).
+
+File22 v7_video.c:two residuals. video.h is_v7vga_mode tests literal ranges,
+so E0 would fail before mode60 preserve-bit masking without the current mask.
+Existing mouse owner updates mode,bounds and default registers;the ordinary
+ega_vide path invokes it,so V7 must also notify after setup. Keep one mask
+and one call. RestoreLF/remove redundant #line294/298/305;four exclusions
+retained,389 original logical lines match.1/1077 ->17/22. Both files preserve
+whitespace/line-stripped content;no executable behavior changed in P8.
+
+22/30 files,848/1060 points reviewed;212 remain.562 restored/delivered,52
+local format restorations pending,234 residuals;19 files delivered.
+Census1257/25164 versus201/102845 (+1056/-77681). P8 delivers three complete
+files:gfx_updt.c,v7_ports.c,v7_video.c. Cached build,dual publication and
+C-VID/MEM/NTVDMD/NESticle targeted checks;Full remains S13.
+
+P8 owned build/publication PID6512 started2026-11-26T14:07:43+01:00;
+command/host in build/t485-s10/p8/run.json. Final per-file hashes and census
+in final-source.json. All three preserve executable content;selected
+targeted tests verify final package identity and ordinary provider/runtime
+operation,not exhaustive graphics modes. Full remains S13.
+
+P8 final verification: cached build,dual publication and26hash checks passed.
+Test PID16292 passed actual C-VID fixture,real MEM/NTVDMD lifecycle and
+NESticle rendered menu/Escape. Final source hashes in final-source.json;
+per-file line proofs in build/t485-s10/p8.22 files final-verified;52 local
+format restorations await commit/push. Full remains S13.

@@ -295,12 +295,10 @@ v7vga_extended_set_mode()
 	set_banking( 0, 0 );
 
 	if (is_bad_vid_mode(getBL()) && !is_v7vga_mode((getBL() & 0x7F)))
-#line 294
 		return;
 
 	video_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */
 
-#line 298
 	/*
 	 * The method of storing an extended video mode according to a real BIOS is
 	 * if it is an text mode then put 1 in the BIOS mode variable and store
@@ -308,7 +306,6 @@ v7vga_extended_set_mode()
 	 * If it is a graphics mode then store (mode - 4C) in the mode variable.
 	 */
 
-#line 305
 	if (video_mode < 0x40)
 	{
 		sas_store_no_check(vd_video_mode, video_mode);

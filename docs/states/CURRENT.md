@@ -32,13 +32,13 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S10 Ordered Progress
 
-[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):19/30 reviewed;
-735/1060 points reviewed,325 remain.19 files delivered through P7 320fcbe2c.
-P7 restores original mode1/2 initialized tables and formats.
-562 restored/delivered;zero local restorations pending;173 evidenced residuals.
-Corrected census201/102845 ->957/36492 (+756/-66353).
-P7 cached build, dual publication, targeted tests and push complete. Next gfx_updt.c.
-Migration39/159;Full remains S13.
+[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):22/30 reviewed;
+848/1060 points reviewed,212 remain.19 files delivered through P7 320fcbe2c.
+P8 has three complete graphics/Video7 format restorations;no behavior changes.
+562 restored/delivered;52 local restorations pending;234 evidenced residuals.
+Corrected census201/102845 ->1257/25164 (+1056/-77681).
+P8 build,dual publication and targeted tests passed;commit/push pending.
+Next vga_mode.c. Migration39/159;Full remains S13.
 
 ## S9 Closure Record
 

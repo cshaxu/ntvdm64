@@ -111,7 +111,7 @@ UTINY *wrt_bank;
 	}
 	else {
 
-	/* 
+	/*
 	   1.4.92 MG
 	   Note that we and off the top bit of the bank selects. This means
 	   that accesses to the top 512k (which we don't have) get mapped into
@@ -143,7 +143,7 @@ Input:
 		value	- the value to be written to the register
 
 Output:
-		The Extension Registers are set to the correct value, and 
+		The Extension Registers are set to the correct value, and
 		any other required actions are emulated.
 
 ----------------------------------------------------------------------
@@ -228,9 +228,9 @@ half_word       value;
 
 			/*
 			   8.6.92 MG
-			   We need to check that the pointer was disabled 
+			   We need to check that the pointer was disabled
 			   before we redraw it when it is enabled. Otherwise
-			   we can get old pointers left on the screen in 
+			   we can get old pointers left on the screen in
 			   Windows.
 			*/
 
@@ -239,20 +239,20 @@ half_word       value;
                         if ((value&0x80) != (old_value&0x80)) {
 				host_start_update ();
 				if (value & 0x80) {
-					/* Enable hardware graphics pointer */ 
+					/* Enable hardware graphics pointer */
 					draw_v7ptr();
 				}
 				else {
-					/* Disable hardware graphics pointer */ 
+					/* Disable hardware graphics pointer */
 					(*clear_v7ptr)(curr_v7ptr_x, curr_v7ptr_y);
 				}
 				host_end_update ();
 			}
 			break;
 
-		/* 
+		/*
 		   31.3.92 MG Register c1 is an undocumented DAC control
-		   register, bit 0 switches between 6 and 8 bit data in 
+		   register, bit 0 switches between 6 and 8 bit data in
 		   the DAC.
 		*/
 
@@ -325,7 +325,7 @@ half_word       value;
 					break;
 				case 2:
 					extensions_controller.foreground_latch_2 = value;
-					extensions_controller.fast_latch_load_state.as_bfld.fg_latch_load_state = 3; 
+					extensions_controller.fast_latch_load_state.as_bfld.fg_latch_load_state = 3;
 					SET_FG_LATCH( 2, value );
 					break;
 				case 3:
@@ -353,7 +353,7 @@ half_word       value;
 					break;
 				case 2:
 					put_latch2(value);
-					extensions_controller.fast_latch_load_state.as_bfld.bg_latch_load_state = 3; 
+					extensions_controller.fast_latch_load_state.as_bfld.bg_latch_load_state = 3;
 					break;
 				case 3:
 					put_latch3(value);
@@ -530,7 +530,7 @@ half_word       *value;
 			*value = extensions_controller.cursor_attrs.as.abyte & 0x89;
 			break;
 
-		/* 
+		/*
 		   31.3.92 MG Register C1 controls 6/8 bit data in the DAC.
 		*/
 
@@ -673,7 +673,7 @@ draw_v7ptr()
 
 	if (extensions_controller.cursor_attrs.as_bfld.pointer_enable)
 	{
-		curr_v7ptr_x = extensions_controller.ptr_horiz_posn_lo + 
+		curr_v7ptr_x = extensions_controller.ptr_horiz_posn_lo +
 			(extensions_controller.ptr_horiz_posn_hi.as_bfld.ptr_horiz_position << 8);
 
 
@@ -686,15 +686,15 @@ draw_v7ptr()
 			curr_v7ptr_x >>= 1;
 		}
 
-		curr_v7ptr_y = extensions_controller.ptr_vert_posn_lo + 
+		curr_v7ptr_y = extensions_controller.ptr_vert_posn_lo +
 			(extensions_controller.ptr_vert_posn_hi.as_bfld.ptr_vert_position << 8);
 
 		/*
-		 * I have never seen the pointer bank select bits used, so 
+		 * I have never seen the pointer bank select bits used, so
 		 * this is a guess as to their meaning.
 		 */
 
-	/* 
+	/*
 	   1.4.92 MG
 	   Sadly, this guess isn't correct - the pointer_bank_select bits are
 	   used to select which 256k bank the pointer data is read from. Now
@@ -705,7 +705,7 @@ draw_v7ptr()
 	   As a result, we also need to lose the top bit here. The correct
 	   way to do this would be to either support nonexistent VGA memory
 	   correctly, or to add another 512k to the memory we already use.
-	   
+	
 	   This fix is mainly to make Windows 3.1 work with its video-7
 	   driver. It stuffs bytes into the last few k of the 1Mb space on
 	   the video-7 to see if the memory exists. As we just map this
