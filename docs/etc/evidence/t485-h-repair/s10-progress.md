@@ -29,7 +29,7 @@ Full remains S13; original guest remains immutable.
 | 16 | softpc.new/base/video/ega_vide.c | 308 | Delivered d4c87dd1d |
 | 17 | softpc.new/base/video/ega_writ.c | 5 | Delivered a6ba6aa72 |
 | 18 | softpc.new/base/video/egawrtm0.c | 20 | Delivered a6ba6aa72 |
-| 19 | softpc.new/base/video/egwrtm12.c | 30 | Source reviewed; P7 delivery pending |
+| 19 | softpc.new/base/video/egwrtm12.c | 30 | Delivered 320fcbe2c |
 | 20 | softpc.new/base/video/gfx_updt.c | 94 | Not started |
 | 21 | softpc.new/base/video/v7_ports.c | 17 | Not started |
 | 22 | softpc.new/base/video/v7_video.c | 2 | Not started |
@@ -459,3 +459,7 @@ fixture,real MEM/NTVDMD lifecycle and NESticle menu/Escape. Final source hash
 in build/t485-s10/p7/final-source.json;line/metric evidence in source-candidate.json.
 Governance and relative links passed.19 files final-verified;commit/push
 pending. Full remains S13.
+
+P7 receipt:320fcbe2c pushed to origin/main.19/30 reviewed/delivered;735/1060
+points reviewed,325 remain.562 restored/delivered,173 residuals,zero local
+restorations pending. Census957/36492 unchanged. Next gfx_updt.c.
