@@ -290,11 +290,11 @@ void nt_start_event_thread(void)
     //
     if (!VDMForWOW) {
 
-	//
-	//  Register Control 'C' handler, for DOS only
-	//
-	if(!SetConsoleCtrlHandler((PHANDLER_ROUTINE)CntrlHandler,TRUE))
-	    DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
+        //
+        //  Register Control 'C' handler, for DOS only
+        //
+        if(!SetConsoleCtrlHandler((PHANDLER_ROUTINE)CntrlHandler,TRUE))
+            DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 
         ThreadInfo.EventMgr.Handle = CreateThread(NULL,
                                                   8192,
@@ -331,7 +331,6 @@ void nt_start_event_thread(void)
 void nt_remove_event_thread(void)
 {
     /* Must make sure that the thread has terminated */
-#line 321
     if (!VDMForWOW && ThreadInfo.EventMgr.Handle)  {
 #line 326
         (void)mvdm_softpc_event_thread_alert_and_join(ThreadInfo.EventMgr.Handle,
@@ -396,12 +395,11 @@ DWORD nt_event_loop(void)
     /* the console input handle shouldn't get changed during the lifetime
        of the ntvdm
     */
-#line 384
+#line 382
     Events[0] = hConsoleSuspend;
     Events[1] = GetConsoleInputWaitHandle(); ////sc.InputHandle
     /*:::::::::::::::::::::::::::::::::::::::::::::: Get and process events */
 
-#line 386
     while (TRUE) {
 
         //
@@ -542,7 +540,6 @@ DWORD nt_event_loop(void)
 
 #line 511
 
-#line 512
         }
 
     return 0;
@@ -968,7 +965,7 @@ void AltUpDownUp(void)
     }
 
     ToggleKeyState = ControlKeyState;
-   HostReleaseKbd();
+    HostReleaseKbd();
 
 }
 
@@ -1136,7 +1133,6 @@ void nt_key_down_action(PKEY_EVENT_RECORD KeyEvent)
 #endif // !NEC_98
 #line 1257
 
-#line 1258
 }
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -1157,7 +1153,6 @@ void nt_key_up_action(PKEY_EVENT_RECORD KeyEvent)
     if(ATcode)
        (*host_key_up_fn_ptr)(ATcode);
 
-#line 1290
 }
 
 
@@ -1174,7 +1169,6 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
     POINT mouse_pos;
     UCHAR mouse_button_left, mouse_button_right;
 
-#line 1306
     host_ica_lock();
 
     if (NoMouseTics) {
@@ -1563,12 +1557,12 @@ BOOL CntrlHandler(ULONG CtrlType)
     nt_init_event_thread();  // does nothing if init already
 
     /* remember the reason why we are blocked.
-     *	0 == the application is not being terminated, instead, it is
-     *	executing either a 32 bits application or command.com(TSR installed
-     *	or shell out).
-     *	1 == application is terminating.
-     *	if the application is terminating, we are safe to re-enable
-     *	stream io on nt_resume_event_thread.
+     *  0 == the application is not being terminated, instead, it is
+     *  executing either a 32 bits application or command.com(TSR installed
+     *  or shell out).
+     *  1 == application is terminating.
+     *  if the application is terminating, we are safe to re-enable
+     *  stream io on nt_resume_event_thread.
     */
     event_thread_blocked_reason = BlockFlags;
 
@@ -1598,43 +1592,41 @@ BOOL CntrlHandler(ULONG CtrlType)
             }
 
 
-#line 1786
+#line 1784
         mvdm_softpc_text_video_pause();
         /*::::::::::::::::::::::::::::::::: Flush screen output, reset console */
 
-#line 1801
+#line 1786
         mouse_pointer_route_changed(FALSE);
 
 #ifndef NEC_98
-	if (sc.ScreenState == STREAM_IO)
+        if (sc.ScreenState == STREAM_IO)
 #line 1790
-	    stream_io_update();
-#line 1791
-	else {
+            stream_io_update();
+        else {
 #endif // !NEC_98
 #line 1793
 #if defined(NEC_98)
 #line 1794
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
-#line 1780
 #line 1785
                 for (dw = 0; dw < EGA_TICK_DELAY && get_mode_change_required(); ++dw)
                     host_graphics_tick();
-#line 1805
-		(*update_alg.calc_update)();
+#line 1797
+                (*update_alg.calc_update)();
 #line 1810
             if (sc.ModeType == TEXT && !NtvdmConsoleUpdateText(sc.ColPalette))
                 DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 #line 1806
 #endif // !NEC_98
 #line 1807
-	    // Put Console back the way it was when we started up
-	    ResetConsoleState();
+            // Put Console back the way it was when we started up
+            ResetConsoleState();
 
-	    // Ensure system pointer visible.
-	    while(ShowConsoleCursor(sc.OutputHandle,TRUE) < 0)
-	       ;
+            // Ensure system pointer visible.
+            while(ShowConsoleCursor(sc.OutputHandle,TRUE) < 0)
+               ;
 
 #ifdef MONITOR
 #line 1815
@@ -1646,10 +1638,11 @@ BOOL CntrlHandler(ULONG CtrlType)
 #endif // NEC_98
 #line 1823
 
-	    /* If keeping window open when exiting and fullscreen, return to desktop */
-	    /* Transition made simple as VDM de-registered from console */
-	    #ifndef NEC_98
-	}
+            /* If keeping window open when exiting and fullscreen, return to desktop */
+            /* Transition made simple as VDM de-registered from console */
+#line 1830
+#ifndef NEC_98
+        }
 #endif // !NEC_98
 #line 1833
 
@@ -1786,14 +1779,14 @@ void nt_resume_event_thread(void)
 
 #ifndef NEC_98
     if (event_thread_blocked_reason == 1 &&
-	StreamIoSwitchOn && !host_stream_io_enabled) {
-	/* renew the screen buffer and window size */
-	if (!GetConsoleScreenBufferInfo(sc.OutputHandle,
-					&sc.ConsoleBuffInfo))
+        StreamIoSwitchOn && !host_stream_io_enabled) {
+        /* renew the screen buffer and window size */
+        if (!GetConsoleScreenBufferInfo(sc.OutputHandle,
+                                        &sc.ConsoleBuffInfo))
 
             DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 
-	enable_stream_io();
+        enable_stream_io();
 #ifdef X86GFX
 #line 1963
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
@@ -1832,8 +1825,8 @@ void nt_resume_event_thread(void)
     if (sc.ScreenState != STREAM_IO) {
 #endif // !NEC_98
 #line 1994
-	DoFullScreenResume();
-	MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
+        DoFullScreenResume();
+        MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
 #ifndef NEC_98
     }
 #endif // !NEC_98
@@ -1860,8 +1853,8 @@ void nt_resume_event_thread(void)
 
 void
 SyncBiosKbdLedToKbdDevice(
-    void
-    )
+                         void
+                         )
 {
     unsigned char KbdLed = 0;
 
@@ -1869,22 +1862,22 @@ SyncBiosKbdLedToKbdDevice(
     if (GetKeyState(VK_CAPITAL) & 1) {
         ToggleKeyState |= CAPSLOCK_ON;
         KbdLed |= CAPS_STATE;
-        }
+    }
 
     if (GetKeyState(VK_NUMLOCK) & 1) {
         ToggleKeyState |= NUMLOCK_ON;
         KbdLed |= NUM_STATE;
-       }
+    }
 
     if (GetKeyState(VK_SCROLL) & 1) {
         ToggleKeyState |= SCROLLLOCK_ON;
-       KbdLed |= SCROLL_STATE;
-       }
+        KbdLed |= SCROLL_STATE;
+    }
 
-   sas_store (kb_flag,KbdLed);
-   sas_store (kb_flag_2,(unsigned char)(KbdLed >> 4));
+    sas_store (kb_flag,KbdLed);
+    sas_store (kb_flag_2,(unsigned char)(KbdLed >> 4));
 
-   return;
+    return;
 }
 
 
@@ -2041,7 +2034,7 @@ VOID ReturnBiosBufferKeys(VOID)
 
 
 
-#line 2193
+#line 2190
         first_returned_key.EventType = 0;
 
              /*  If buffer is full or
@@ -2081,9 +2074,9 @@ void ReturnUnusedKeyEvents(int UnusedKeyEvents)
 
     first_returned_key.EventType = 0;
 
+#line 2225
     /* Return keys to console input buffer */
 
-#line 2227
     if(UnusedKeyEvents)
     {
         //
@@ -2093,19 +2086,19 @@ void ReturnUnusedKeyEvents(int UnusedKeyEvents)
         if (UnusedKeyEvents > MAX_KEY_EVENTS) {
             UnusedKeyEvents = MAX_KEY_EVENTS;
         }
-    for(KeyToRtn = 1, KeyInx = UnusedKeyEvents-1;
-        KeyToRtn <= UnusedKeyEvents &&
-        GetHistoryKeyEvent(&InputRecords[KeyInx].Event.KeyEvent,KeyToRtn);
-        KeyToRtn++,KeyInx--)
-    {
+        for(KeyToRtn = 1, KeyInx = UnusedKeyEvents-1;
+            KeyToRtn <= UnusedKeyEvents &&
+            GetHistoryKeyEvent(&InputRecords[KeyInx].Event.KeyEvent,KeyToRtn);
+            KeyToRtn++,KeyInx--)
+        {
         InputRecords[KeyInx].EventType = KEY_EVENT;
-    }
+        }
 
     if(KeyToRtn > 1) {
     if(!WriteConsoleInputVDMW(sc.InputHandle,
         &InputRecords[KeyInx+1],KeyToRtn-1,&RecsWrt))
 #line 2245
-        always_trace0("Console write failed\n");
+            always_trace0("Console write failed\n");
     else if(RecsWrt) first_returned_key = InputRecords[KeyInx+1];
     }
 #line 2246
@@ -2137,7 +2130,6 @@ void cmdPushExitInConsoleBuffer (void)
 /*:::::: Calculate no. of keys to return to console input buffer :::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 2288
 extern int keys_in_6805_buff(int *part_key_transferred);
 
 int CalcNumberOfUnusedKeyEvents()
@@ -2150,5 +2142,4 @@ int CalcNumberOfUnusedKeyEvents()
     Reset6805and8042();
 #line 2295
     return (pending + KeyQueue.KeyCount);
-#line 2296
 }

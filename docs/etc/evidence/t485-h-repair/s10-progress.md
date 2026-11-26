@@ -36,7 +36,7 @@ Full remains S13; original guest remains immutable.
 | 23 | softpc.new/base/video/vga_mode.c | 9 | Delivered b42c5c586 |
 | 24 | softpc.new/base/video/vga_prts.c | 24 | Delivered b42c5c586 |
 | 25 | softpc.new/host/src/nt_cga.c | 10 | Delivered b42c5c586 |
-| 26 | softpc.new/host/src/nt_event.c | 50 | Not started |
+| 26 | softpc.new/host/src/nt_event.c | 50 | Source reviewed; P10 pending |
 | 27 | softpc.new/host/src/nt_graph.c | 91 | Not started |
 | 28 | softpc.new/host/src/nt_hosts.c | 1 | Not started |
 | 29 | softpc.new/host/src/nt_mouse.c | 23 | Not started |
@@ -571,3 +571,41 @@ rendered menu/Escape. Final source hashes in build/t485-s10/p9/final-source.json
 P9 receipt:b42c5c586 pushed to origin/main.25/30 reviewed/delivered;891/1060
 points reviewed,169 remain.647 restored/delivered,244 residuals,zero local
 restorations pending. Census1481/16356 unchanged. Next nt_event.c.
+
+## Event source review
+
+File26 nt_event.c:50 points,15 format restorations,35 residuals. Reviewed
+actual compat event-thread,console normalization,keyboard origin providers
+and historical r1056-r1099 nt-event review series. Original Console read
+cannot consume relative KVM events or bounded scanless-to-PC expansion.
+Native wait control proves continuously-ready input starves suspension in
+original order. Origin controls show wrong unread suffix after ignored key
+release;original return controls show wrong EventType slot/count,duplicated
+release and odd-space before-array write. Keep the existing original-ring
+identity metadata and adjacent-return boundary,no new queue.
+
+Alert is not completion;retained thread handle permits joining before resource
+release. Relative pending/cancel must include remaining fragments. Terminal
+checks require authoritative lifecycle signals,not arbitrary read failure.
+Product exit belongs to authenticated frontend lifecycle,not WM_CLOSE on an
+unrelated shared local console. Display handoff drains copied frames,erases
+original mouse overlay,settles original mode,flushes final text then releases
+ownership;reacquisition precedes original queries/resume. These are concrete
+provider/lifetime boundaries,not grounds to preserve arbitrary adapter code.
+Sleep10 omission is the approved T423 responsiveness decision with bounded
+batch-cost evidence;not an original functional bug or measured product latency.
+
+RestoreLF/format and remove redundant line anchors. Correct misplaced XP
+anchors at wait-array,flush/stream/calc,closing block and key-return comments;
+prefer changing/moving existing anchors.31 exclusion bodies retained;1323
+matched original non-directive logical positions correct. Whitespace/line
+stripped content unchanged.1/4076 ->112/245 (+111/-3831).
+Census1592/12525 versus201/102845 (+1391/-90320).26/30 files,941/1060 points
+reviewed,119 remain;647 restored/delivered,15 local restorations,279 residuals.
+P10 cached build/dual publication,keyboard-controller and keyboard-contract
+fixtures,C-VID,real MEM/NTVDMD and NESticle;Full remains S13.
+
+P10 final verification: cached full build PASS; dual publication independently
+verified 26/26 hashes. C-VID, controller/PIC (90 assertions), keyboard contracts,
+actual MEM/NTVDMD and NESticle menu/Escape all PASS on runtime10.
+Documentation governance and relative links PASS. Commit/push pending; Full S13.

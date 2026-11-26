@@ -32,12 +32,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S10 Ordered Progress
 
-[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):25/30 reviewed;
-891/1060 points reviewed,169 remain.25 files delivered through P9 b42c5c586.
-P9 has three complete VGA/CGA format and logical-line restorations.
-647 restored/delivered;zero local restorations pending;244 evidenced residuals.
-Corrected census201/102845 ->1481/16356 (+1280/-86489).
-P9 build,dual publication,targeted tests and push complete. Next nt_event.c. Migration39/159;Full remains S13.
+[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):26/30 reviewed;
+941/1060 points reviewed,119 remain.25 files delivered through P9 b42c5c586.
+P10 completes nt_event format/logical-line review with no behavior change.
+647 restored/delivered;15 local restorations pending;279 evidenced residuals.
+Corrected census201/102845 ->1592/12525 (+1391/-90320).
+P10 build, dual publication (26 hashes), targeted tests and governance PASS; commit/push pending. Next nt_graph.c. Migration39/159;Full remains S13.
 
 ## S9 Closure Record
 
