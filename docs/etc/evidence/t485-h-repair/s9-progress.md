@@ -746,3 +746,8 @@ MEM/NTVDMD live export test and actual NESticle menu plus Escape hide/restore
 passed. Original guest and winnt.zip unchanged. 35/41 files final-verified;
 52 S9 restored register points verified. P8 commit/push pending; functional
 residual decisions remain listed. Evidence build/t485-s9/p8.
+
+P8 delivery receipt: abe34fd2a committed and pushed to origin/main.
+35/41 reviewed files are delivered, six remain; 208/437 points reviewed.
+52 restored register points delivered. Governance and links passed.
+Next ordered file: base/support/terminat.c; S9 and T485 remain active.

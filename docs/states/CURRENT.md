@@ -33,12 +33,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S9 Ordered Progress
 
 [S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 35/41 source-reviewed,
-32 delivered through P7 3afcbb772; P8 three files final-verified, six unreviewed.
+35 delivered through P8 abe34fd2a; six unreviewed.
 208/437 frozen points reviewed, 229 remain. P8 non-error 27/651 ->46/61
 (+19/-590); S9 cumulative +77/-24037 against fc9492342. Forty measured files
 421/5917; unchanged timer.c still awaits mapping and is outside absolute total.
-Fifty-two restored points final-verified; 50 delivered before P8.
-P8 cached build, dual publication (26 hashes), mouse restore, MEM/NTVDMD and NESticle passed; commit/push pending. Next terminat.c.
+Fifty-two restored points final-verified and delivered.
+P8 cached build, dual publication (26 hashes), mouse restore, MEM/NTVDMD and NESticle passed; P8 committed and pushed. Next terminat.c.
 Migration remains 39/159; Full stays S13.
 
 ## S8 Closure Record
