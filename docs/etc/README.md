@@ -2077,3 +2077,5 @@ post-publication targeted checks.
 - [T485 S11 WOW ordered review](evidence/t485-h-repair/s11-progress.md).
 
 [S11 P14 Winsock guest pairing](evidence/t485-h-repair/s11-p14-winsock-pairing.md) records isolated original-media compatibility evidence and pending formal publication.
+
+- [S12 ordered host-boundary repair progress](evidence/t485-h-repair/s12-progress.md).

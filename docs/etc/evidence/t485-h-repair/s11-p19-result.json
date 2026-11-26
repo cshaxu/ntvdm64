@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P19",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-pushed",
   "reviewed_files": 48,
   "total_files": 48,
   "reviewed_frozen_points": 452,
@@ -8,8 +8,8 @@
   "restored_frozen_points": 18,
   "residual_frozen_points": 434,
   "unreviewed_frozen_points": 0,
-  "delivered_files": 42,
-  "delivered_frozen_points": 398,
+  "delivered_files": 48,
+  "delivered_frozen_points": 452,
   "batch_difference_change": {
     "points": -28,
     "lines": -1655
@@ -492,5 +492,6 @@
     "NESticle menu and Escape only, no ROM/gameplay acceptance",
     "434 evidence-backed residual frozen points remain pending owner disposition",
     "Documentation encoding repaired; no product code changed after Full started"
-  ]
+  ],
+  "delivery_commit": "c205781fe31184c1cbf034824a1e165dc057e081"
 }

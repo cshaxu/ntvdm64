@@ -46,3 +46,7 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S10 closure](s10-progress.md#s10-closure) records final published-package CAF and guest witnesses.
 
 [S11 ordered progress](s11-progress.md) tracks the next 48 files and 452 points.
+
+[S11 closure](s11-progress.md#s11-closure) records runtime26 and P19 delivery.
+[S12 ordered host-boundary repair progress](s12-progress.md) starts the next
+48-file,645-point admitted repair scope.

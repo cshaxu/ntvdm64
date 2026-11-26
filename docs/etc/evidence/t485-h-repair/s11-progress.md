@@ -54,12 +54,12 @@ frozen point counts as current byte-sensitive diff counts.
 | 40 | src/mvdm-host/wow32/wuclip.c | 16 | P17 delivered b709bd25c |
 | 41 | src/mvdm-host/wow32/wudlg.c | 5 | P18 delivered f449163ee |
 | 42 | src/mvdm-host/wow32/wuman.c | 5 | P18 delivered f449163ee |
-| 43 | src/mvdm-host/wow32/wumsg.c | 32 | P19 reviewed; line-only cleanup pending batch delivery |
-| 44 | src/mvdm-host/wow32/wumsg.h | 1 | P19 reviewed; line/format cleanup pending batch delivery |
-| 45 | src/mvdm-host/wow32/wuser.c | 5 | P19 reviewed; line/format cleanup pending batch delivery |
-| 46 | src/mvdm-host/wow32/wuser31.c | 2 | P19 reviewed; final delivery pending |
-| 47 | src/mvdm-host/wow32/wutmr.c | 1 | P19 reviewed; final delivery pending |
-| 48 | src/mvdm-host/wow32/wuwind.c | 13 | P19 reviewed; final delivery pending |
+| 43 | src/mvdm-host/wow32/wumsg.c | 32 | P19 delivered c205781fe |
+| 44 | src/mvdm-host/wow32/wumsg.h | 1 | P19 delivered c205781fe |
+| 45 | src/mvdm-host/wow32/wuser.c | 5 | P19 delivered c205781fe |
+| 46 | src/mvdm-host/wow32/wuser31.c | 2 | P19 delivered c205781fe |
+| 47 | src/mvdm-host/wow32/wutmr.c | 1 | P19 delivered c205781fe |
+| 48 | src/mvdm-host/wow32/wuwind.c | 13 | P19 delivered c205781fe |
 
 ## P1 complete-file source review
 
@@ -1284,3 +1284,18 @@ P19 final runtime26 Full23/23 PASS in595423ms;one run,no retries. Cached build
 and26published hashes PASS. Source hashes unchanged throughout Full.
 Documentation encoding issue corrected independently;governance and links PASS.
 No original guest/ZIP changes. Commit/push pending;S11 closure not yet claimed.
+
+## S11 closure
+
+P19 c205781fe31184c1cbf034824a1e165dc057e081 is committed and pushed.
+All48assigned files and452frozen points reviewed and delivered:18restored,
+434evidence-backed residuals in pending-decisions,zero unreviewed or local
+restorations awaiting delivery. Current48-file nonerror census722points/2384lines
+versus880/11763: reduction158points/9379lines. P19 alone-28/-1655.
+Final runtime26 cached full build,dual26-hash publication and Full23/23 PASS
+(one run,595423ms);[receipt](s11-p19-result.json) embeds gate results and hashes.
+Win95 retains approved exit1 boundary;NESticle proves menu/Escape,not gameplay.
+P18 paired original SP3 COMMDLG retained;P19 changed no guest/ZIP bytes.
+Governance and relative links PASS;documentation-only follow-up does not repeat
+runtime tests. S11 closes and the existing plan admits S12. Migration39/159
+remains unchanged;N004 waits for S13.
