@@ -25,9 +25,7 @@ Reserved Floating Point CPU Functions.
 #include <c_reg.h>
 #include <c_xcptn.h>	/* Definition of Int16() */
 #include <fault.h>
-#line 28
 #ifdef SFELLOW
-#line 29
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
 #line 31
@@ -41,7 +39,6 @@ IU8 npxbuff[108];   /* Make it the maximum required size */
 
 IMPORT IU8 *Start_of_M_area;
 IMPORT PHY_ADDR  Length_of_M_area;
-#line 41
 IMPORT ISM32 in_C;
 IMPORT IU8 *CCPU_M;
 IMPORT IU32 Sas_wrap_mask;
@@ -4845,15 +4842,12 @@ void TakeNpxExceptionInt()
 	NpxIntrNeeded = FALSE;
 	NpxFIP = NpxExceptionEIP;
 
-#line 4844
 #ifdef	SPC486
-#line 4845
 #error Excluded unsupported SPC486 profile
 #else	/* SPC486 */
 #line 4858
 	ica_hw_interrupt (ICA_SLAVE, CPU_AT_NPX_INT, 1);
 #endif	/* SPC486 */
-#line 4860
 
 #ifndef SFELLOW
 	/* and immediately dispatch to interrupt */

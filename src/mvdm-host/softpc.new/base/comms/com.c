@@ -13,19 +13,12 @@
  */
 
 #ifdef SCCSID
-#line 16
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 18
 
 #ifdef SEGMENTATION
-#line 20
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 27
 
@@ -34,9 +27,7 @@
  */
 #include <stdio.h>
 #include <ctype.h>
-#line 33
 #if defined(NTVDM) && defined(MONITOR)
-#line 34
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 #line 36
@@ -62,9 +53,7 @@
 #include "quick_ev.h"
 #include "idetect.h"
 #include "ckmalloc.h"
-#line 58
 #ifdef GISP_CPU
-#line 59
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif /* GISP_CPU */
 #line 61
@@ -72,12 +61,11 @@
 #ifndef NEC_98
 LOCAL UTINY selectBits[4] = { 0x1f, 0x3f, 0x7f, 0xff } ;
 #endif // NEC_98
-#line 65
 
 #if defined(NEC_98)
-#line 67
 #error Unsupported NEC PC-98 configuration
 #endif
+#line 71
 
 /*
  * =====================================================================
@@ -86,7 +74,7 @@ LOCAL UTINY selectBits[4] = { 0x1f, 0x3f, 0x7f, 0xff } ;
  */
 
 /*
- * batch_size, current_count 
+ * batch_size, current_count
  *	The IRET_HOOKS parameters batch_size and curr_count are used to prevent
  *	the number of interrupts that are emulated in one batch getting too
  *	large. When we reach the batch size we'll unhook the interrupt, and
@@ -96,7 +84,6 @@ LOCAL UTINY selectBits[4] = { 0x1f, 0x3f, 0x7f, 0xff } ;
  *	running at once on a single adapter.
  */
 #if defined(NEC_98)
-#line 89
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 126
@@ -113,13 +100,7 @@ static struct ADAPTER_STATE
 	LINE_STATUS_REG line_status_reg;
 	MODEM_STATUS_REG modem_status_reg;
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 139
 #error Excluded unsupported FIFO_ON configuration
-
-
-
-
-
 #endif
 #line 146
 	half_word scratch;      /* scratch register */
@@ -139,7 +120,6 @@ static struct ADAPTER_STATE
 	int com_baud_ind;
 	int had_first_read;
 #ifdef IRET_HOOKS
-#line 163
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
 #line 168
@@ -153,15 +133,13 @@ static struct ADAPTER_STATE
 #ifdef NTVDM
 #define MODEM_STATE_CHANGE()	asp->modem_status_changed = TRUE;
 #else
-#line 178
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 180
 #endif // NEC_98
-#line 181
 
 
 #ifdef IRET_HOOKS
-#line 184
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
 #line 191
@@ -184,7 +162,6 @@ static int com_critical[NUM_SERIAL_PORTS];
 #ifndef NEC_98
 static LINE_CONTROL_REG LCRFlushMask;
 #endif // NEC_98
-#line 210
 
 /*
  *	Please note that the following arrays have been made global in order
@@ -193,7 +170,6 @@ static LINE_CONTROL_REG LCRFlushMask;
  */
 
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 218
 #error Excluded unsupported FIFO_ON configuration
 #endif
 #line 220
@@ -264,7 +240,6 @@ unsigned long TX_delay[] =
 };
 
 #ifndef PROD
-#line 287
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
 #line 290
@@ -275,13 +250,11 @@ unsigned long TX_delay[] =
  */
 
 #if !defined(PROD) || defined(SHORT_TRACE)
-#line 297
 #error Unsupported excluded original configuration
 #endif /* !PROD || SHORT_TRACE */
 #line 299
 
 #ifdef PS_FLUSHING
-#line 301
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 304
@@ -295,7 +268,6 @@ IBOOL tx_pacing_enabled = FALSE;
  * =====================================================================
  */
 #if defined(NEC_98)
-#line 314
 #error Unsupported NEC PC-98 configuration
 #else  // NEC_98
 #line 348
@@ -309,7 +281,6 @@ static void clear_interrupt IPT1(struct ADAPTER_STATE *, asp);
 static void com_flush_input IPT1(int, adapter);
 static void com_send_not_finished IPT1(int, adapter);
 #ifndef NTVDM
-#line 358
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 360
@@ -340,13 +311,11 @@ LOCAL void next_batch IPT1(long, l_adapter);
 #ifdef NTVDM
 static void lsr_change(struct ADAPTER_STATE *asp, unsigned int error);
 #ifdef FIFO_ON
-#line 387
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #endif
 #line 389
 #endif
 #endif // NEC_98
-#line 391
 
 /*
  * =====================================================================
@@ -355,7 +324,6 @@ static void lsr_change(struct ADAPTER_STATE *asp, unsigned int error);
  */
 
 #if defined(NEC_98)
-#line 399
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 455
@@ -456,12 +424,7 @@ static void generate_iir IFN1(struct ADAPTER_STATE *, asp)
 		asp->int_id_reg.bits.no_int_pending = 0;
 	}
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 552
 #error Excluded unsupported FIFO_ON configuration
-
-
-
-
 #endif
 #line 558
 	else if ( asp->tx_holding_register_empty_interrupt_state == ON )
@@ -482,10 +445,8 @@ static void generate_iir IFN1(struct ADAPTER_STATE *, asp)
 	}
 }
 #endif // NEC_98
-#line 576
 
 #if defined(NEC_98)
-#line 578
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 612
@@ -498,9 +459,8 @@ static void raise_interrupt IFN1(struct ADAPTER_STATE *, asp)
 	if ( ( asp->receiver_line_status_interrupt_state      == OFF )
 	&&   ( asp->data_available_interrupt_state            == OFF )
 	&&   ( asp->tx_holding_register_empty_interrupt_state == OFF )
-	&&   ( asp->modem_status_interrupt_state              == OFF ) 
+	&&   ( asp->modem_status_interrupt_state              == OFF )
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 623
 #error Excluded unsupported FIFO_ON configuration
 #endif
 #line 625
@@ -509,7 +469,6 @@ static void raise_interrupt IFN1(struct ADAPTER_STATE *, asp)
 #ifndef DELAYED_INTS
 		ica_hw_interrupt(0, asp->hw_interrupt_priority, 1);
 #else
-#line 630
 #error Unsupported excluded original configuration
 #endif
 #line 633
@@ -525,9 +484,8 @@ static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)
 	if ( ( asp->receiver_line_status_interrupt_state      == OFF )
 	&&   ( asp->data_available_interrupt_state            == OFF )
 	&&   ( asp->tx_holding_register_empty_interrupt_state == OFF )
-	&&   ( asp->modem_status_interrupt_state              == OFF ) 
+	&&   ( asp->modem_status_interrupt_state              == OFF )
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 647
 #error Excluded unsupported FIFO_ON configuration
 #endif
 #line 649
@@ -537,29 +495,10 @@ static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)
 	}
 }
 #endif // NEC_98
-#line 655
 
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 657
+
 #error Excluded unsupported FIFO_ON configuration
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif
 #line 677
 
@@ -575,16 +514,16 @@ static void com_flush_input IFN1(int, adapter)
 {
 	struct ADAPTER_STATE *asp = &adapter_state[adapter];
 	int finished, error_mask;
-	long input_ready = 0; 
+	long input_ready = 0;
 
 	sure_note_trace1(RS232_VERBOSE, "flushing the input for COM%c",
 		adapter+'1');
 	finished=FALSE;
-	while(!finished) 
+	while(!finished)
 	{
 		host_com_ioctl(adapter, HOST_COM_INPUT_READY,
 			(long)&input_ready);
-		if (input_ready) 
+		if (input_ready)
 		{
 			host_com_read(adapter, (UTINY *)&asp->rx_buffer,
 				&error_mask);
@@ -598,7 +537,6 @@ static void com_flush_input IFN1(int, adapter)
 }
 
 #if defined(NEC_98)
-#line 713
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 721
@@ -610,24 +548,20 @@ static void com_send_not_finished IFN1(int, adapter)
 	asp->line_status_reg.bits.tx_shift_empty=0;
 }
 #endif // NEC_98
-#line 729
 
 
 #if defined(NEC_98)
-#line 732
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 742
 #ifndef NTVDM
-#line 743
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 753
 #endif // NEC_98
-#line 754
 
 
 #if defined(NEC_98)
-#line 757
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 1095
@@ -652,7 +586,6 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 			 * Read of rx buffer
 			 */
 #ifndef NTVDM
-#line 1116
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM is defined */
 #line 1122
@@ -662,7 +595,6 @@ void com_inb IFN2(io_addr, port, half_word *, value)
             //system will return one character only. This is
             //a false assumption under NT windows.
 #endif /* !NTVDM */
-#line 1128
 			*value = asp->rx_buffer;
 		
 			adapter_was_critical =
@@ -692,7 +624,6 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 				{
 #ifdef NTVDM
 #ifdef FIFO_ON
-#line 1157
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #else /* !FIFO_ON */
 #line 1175
@@ -700,11 +631,9 @@ void com_inb IFN2(io_addr, port, half_word *, value)
                     asp->int_enable_reg.bits.data_available
                     );
 #endif /* !FIFO_ON */
-#line 1179
 #endif /* NTVDM */
 
 #ifndef NTVDM
-#line 1182
 #error Excluded unsupported non-NTVDM serial profile
 #endif /* !NTVDM */
 #line 1213
@@ -717,7 +646,6 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 				set_xmit_char_status(asp);
 			}
 #ifdef IRET_HOOKS
-#line 1222
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
 #line 1229
@@ -725,12 +653,10 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		else
 			*value = (IU8)(asp->divisor_latch.byte.LSByte);
 #ifdef SHORT_TRACE
-#line 1233
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1241
 #ifndef PROD
-#line 1242
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1253
@@ -742,12 +668,10 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		else
 			*value = (IU8)(asp->divisor_latch.byte.MSByte);
 #ifdef SHORT_TRACE
-#line 1261
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1268
 #ifndef PROD
-#line 1269
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1279
@@ -764,12 +688,10 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 
 #ifdef SHORT_TRACE
-#line 1292
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1299
 #ifndef PROD
-#line 1300
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1310
@@ -790,12 +712,10 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 
 		*value = asp->line_control_reg.all;
 #ifdef SHORT_TRACE
-#line 1327
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1334
 #ifndef PROD
-#line 1335
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1345
@@ -804,12 +724,10 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 	case RS232_MCR:
 		*value = asp->modem_control_reg.all;
 #ifdef SHORT_TRACE
-#line 1350
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1357
 #ifndef PROD
-#line 1358
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1368
@@ -825,18 +743,15 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		asp->receiver_line_status_interrupt_state = OFF;
 		clear_interrupt(asp);
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 1380
 #error Excluded unsupported FIFO_ON configuration
 #endif
 #line 1382
 	
 #ifdef SHORT_TRACE
-#line 1384
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1396
 #ifndef PROD
-#line 1397
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1423
@@ -845,7 +760,6 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 	case RS232_MSR:
 
 #ifndef NTVDM
-#line 1428
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
 #line 1449
@@ -890,16 +804,13 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		    host_com_unlock(adapter);
 		}
 #endif /* ifndef NTVDM */
-#line 1490
 
 
 #ifdef SHORT_TRACE
-#line 1493
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1500
 #ifndef PROD
-#line 1501
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1511
@@ -915,7 +826,6 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 	}
 
 #ifndef PROD
-#line 1523
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1535
@@ -938,7 +848,6 @@ void com_outb IFN2(io_addr, port, half_word, value)
 
 
 #ifndef PROD
-#line 1554
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1561
@@ -960,7 +869,6 @@ void com_outb IFN2(io_addr, port, half_word, value)
 			if ( asp->loopback_state == OFF )
 			{
 #ifdef PS_FLUSHING
-#line 1579
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 1589
@@ -968,12 +876,10 @@ void com_outb IFN2(io_addr, port, half_word, value)
 #if defined (DELAYED_INTS) || defined (NTVDM)
 				set_xmit_char_status(asp);
 #else
-#line 1593
 #error Unsupported excluded original configuration
 #endif /* DELAYED_INTS || NTVDM */
 #line 1600
 #ifdef PS_FLUSHING
-#line 1601
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 1603
@@ -990,18 +896,15 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		{
 			asp->divisor_latch.byte.LSByte = value;
 #ifndef NTVDM
-#line 1616
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 1618
 		}
 #ifdef SHORT_TRACE
-#line 1620
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1628
 #ifndef PROD
-#line 1629
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1640
@@ -1056,71 +959,38 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		{
 			asp->divisor_latch.byte.MSByte = value;
 #ifndef NTVDM
-#line 1691
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 1693
 		}
 #ifdef SHORT_TRACE
-#line 1695
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1702
 #ifndef PROD
-#line 1703
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1713
 		break;
 		
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 1716
 #error Excluded unsupported FIFO_ON configuration
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #else /* !(NTVDM && FIFO_ON) */
 #line 1744
 	case RS232_IIR:
-		/* 
+		/*
 		 * Essentially a READ ONLY register
 		 */
 #ifdef SHORT_TRACE
-#line 1749
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1756
 #ifndef PROD
-#line 1757
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1767
 		break;
 #endif /* NTVDM && FIFO_ON */
-#line 1769
 
 	case RS232_LCR:
 #ifdef NTVDM
@@ -1149,12 +1019,10 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		set_line_control(adapter, value);
 		set_break(adapter);
 #ifdef SHORT_TRACE
-#line 1797
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1804
 #ifndef PROD
-#line 1805
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1815
@@ -1162,7 +1030,6 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		
 	case RS232_MCR:
 #ifdef SHORT_TRACE
-#line 1819
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1826
@@ -1182,7 +1049,6 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		set_out1(adapter);
 		set_out2(adapter);
 #ifndef PROD
-#line 1842
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1852
@@ -1193,12 +1059,10 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		asp->line_status_reg.all = value;
 		asp->line_status_reg.bits.tx_shift_empty = (unsigned char)i;
 #ifdef SHORT_TRACE
-#line 1859
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1866
 #ifndef PROD
-#line 1867
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1877
@@ -1209,18 +1073,16 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		 * Essentially a READ ONLY register.
 		 */
 #ifdef SHORT_TRACE
-#line 1884
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 1891
 #ifndef PROD
-#line 1892
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1902
 		/* DrDOS writes to this reg after setting int on MSR change
 		 * and expects to get an interrupt back!!! So we will oblige.
-		 * Writing to this reg only seems to affect the delta bits 
+		 * Writing to this reg only seems to affect the delta bits
 		 * (bits 0-3) of the reg.
 		 */
 		if ((value & 0xf) != (asp->modem_status_reg.all & 0xf))
@@ -1251,123 +1113,10 @@ void com_outb IFN2(io_addr, port, half_word, value)
 #endif
 }
 #endif // NEC_98
-#line 1935
 
 
 #ifdef IRET_HOOKS
-#line 1938
 #error Excluded unsupported IRET_HOOKS configuration
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif /* of ifdef IRET_HOOKS */
 #line 2053
 
@@ -1378,7 +1127,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
  */
 
 #if defined(NEC_98)
-#line 2061
+
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2116
@@ -1393,7 +1142,6 @@ void com_recv_char(int adapter)
     int error;
 
 #ifdef FIFO_ON
-#line 2127
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #endif
 #line 2154
@@ -1410,13 +1158,12 @@ void com_recv_char(int adapter)
     }
 }
 #ifdef FIFO_ON
-#line 2167
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #endif
 #line 2180
 
 #else /* NTVDM */
-#line 2182
+
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 2198
@@ -1424,7 +1171,7 @@ void com_recv_char(int adapter)
 /*
  * BCN 2151 - recv_char must use long param to match add_event function prototype
  */
-GLOBAL void 
+GLOBAL void
 recv_char IFN1(long, adapt_long)
 {
 	int adapter = adapt_long;
@@ -1461,15 +1208,12 @@ recv_char IFN1(long, adapt_long)
 	
 	set_recv_char_status(asp);
 	
-#line 2239
 #ifdef DOCUMENTATION
-#line 2240
 #error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
 #endif
 #line 2261
 }
 #endif // NEC_98
-#line 2263
 
 #ifdef NTVDM
 #ifndef NEC_98
@@ -1489,7 +1233,6 @@ static void lsr_change(struct ADAPTER_STATE *asp, unsigned int new_lsr)
 */
     if (new_lsr & HOST_COM_FIFO_ERROR)
 #ifdef FIFO_ON
-#line 2282
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #else
 #line 2289
@@ -1498,11 +1241,9 @@ static void lsr_change(struct ADAPTER_STATE *asp, unsigned int new_lsr)
     else
         asp->line_status_reg.bits.parity_error = 1;
 #endif
-#line 2294
 
 }
 #endif // !NEC_98
-#line 2297
 
 void com_lsr_change(int adapter)
 {
@@ -1515,7 +1256,6 @@ void com_lsr_change(int adapter)
     if (new_lsr !=  -1)
     lsr_change(asp, new_lsr);
 #endif  // !NEC_98
-#line 2309
 }
 
 #endif /* NTVDM */
@@ -1529,7 +1269,7 @@ void com_modem_change IFN1(int, adapter)
 }
 
 #if defined(NEC_98)
-#line 2322
+
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2340
@@ -1660,10 +1400,8 @@ static void modem_change IFN1(int, adapter)
 	}
 }
 #endif // NEC_98
-#line 2467
 
 #if defined(NEC_98)
-#line 2469
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2485
@@ -1685,7 +1423,6 @@ static void set_recv_char_status IFN1(struct ADAPTER_STATE *, asp)
 	}
 }
 #endif // NEC_98
-#line 2503
 
 static void set_xmit_char_status IFN1(struct ADAPTER_STATE *, asp)
 {
@@ -1693,7 +1430,6 @@ static void set_xmit_char_status IFN1(struct ADAPTER_STATE *, asp)
 	 * Set line status register and raise interrupt
 	 */
 #if defined(NEC_98)
-#line 2510
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2514
@@ -1701,7 +1437,6 @@ static void set_xmit_char_status IFN1(struct ADAPTER_STATE *, asp)
 	asp->line_status_reg.bits.tx_shift_empty = 1;
 	raise_thre_interrupt(asp);
 #endif // NEC_98
-#line 2518
 }
 
 #ifdef NTVDM
@@ -1709,26 +1444,22 @@ GLOBAL void tx_shift_register_empty(int adapter)
 {
     struct ADAPTER_STATE *asp = &adapter_state[adapter];
 #if defined(NEC_98)
-#line 2525
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2527
     asp->line_status_reg.bits.tx_shift_empty = 1;
 #endif // NEC_98
-#line 2529
 }
 GLOBAL void tx_holding_register_empty(int adapter)
 {
     struct ADAPTER_STATE *asp = &adapter_state[adapter];
 #if defined(NEC_98)
-#line 2534
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2537
     asp->line_status_reg.bits.tx_holding_empty = 1;
     raise_thre_interrupt(asp);
 #endif // NEC_98
-#line 2540
 }
 #endif
 
@@ -1747,14 +1478,12 @@ static void set_break IFN1(int, adapter)
 	struct ADAPTER_STATE *asp = &adapter_state[adapter];
 	
 #if defined(NEC_98)
-#line 2558
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2561
 	switch ( change_state((int)asp->line_control_reg.bits.set_break,
 		asp->break_state) )
 #endif // NEC_98
-#line 2564
 	{
 	case ON:
 		asp->break_state = ON;
@@ -1777,73 +1506,65 @@ static void set_break IFN1(int, adapter)
  * AT, but are theoretically possible) */
 
 #if defined(NEC_98)
-#line 2586
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2633
 static word valid_latches[] =
-{ 
-	1, 	2, 	3, 	6, 	12, 	16, 	24, 	32, 
-	48, 	58, 	64, 	96, 	192,	384, 	768, 	857, 
-	1047, 	1536, 	2304 
+{
+	1, 	2, 	3, 	6, 	12, 	16, 	24, 	32,
+	48, 	58, 	64, 	96, 	192,	384, 	768, 	857,
+	1047, 	1536, 	2304
 };
 #endif // NEC_98
-#line 2640
 
 #if defined(NEC_98)
-#line 2642
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2665
 #if !defined(PROD) || defined(IRET_HOOKS)
-#line 2666
 #error Unsupported excluded original configuration
 #endif /* !PROD or IRET_HOOKS*/
+#line 2689
 #endif // NEC_98
-#line 2690
 
 static word speeds[] =
-{ 
-	HOST_COM_B115200, 
-	HOST_COM_B57600, 
-	HOST_COM_B38400, 
-	HOST_COM_B19200, 
-	HOST_COM_B9600, 
-	HOST_COM_B7200, 
-	HOST_COM_B4800, 
+{
+	HOST_COM_B115200,
+	HOST_COM_B57600,
+	HOST_COM_B38400,
+	HOST_COM_B19200,
+	HOST_COM_B9600,
+	HOST_COM_B7200,
+	HOST_COM_B4800,
 	HOST_COM_B3600,
-	HOST_COM_B2400, 
-	HOST_COM_B2000, 
-	HOST_COM_B1800, 
-	HOST_COM_B1200, 
-	HOST_COM_B600, 
-	HOST_COM_B300, 
-	HOST_COM_B150, 
-	HOST_COM_B134, 
+	HOST_COM_B2400,
+	HOST_COM_B2000,
+	HOST_COM_B1800,
+	HOST_COM_B1200,
+	HOST_COM_B600,
+	HOST_COM_B300,
+	HOST_COM_B150,
+	HOST_COM_B134,
 	HOST_COM_B110,
-	HOST_COM_B75, 
-	HOST_COM_B50 
+	HOST_COM_B75,
+	HOST_COM_B50
 };
 
 #if defined(NEC_98)
-#line 2715
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2718
-static int no_valid_latches = 
+static int no_valid_latches =
 	(int)(sizeof(valid_latches)/sizeof(valid_latches[0]));
 #endif // NEC_98
-#line 2721
 
 #if defined(NEC_98)
-#line 2723
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 2761
 
 
 #if defined(NEC_98)
-#line 2764
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 2773
@@ -1860,7 +1581,7 @@ static void set_baud_rate IFN1(int, adapter)
 	 * For IRET hooks, we need to determine the batch size from
 	 * the line speed, and an idea of how many quick events
 	 * we can get per second. We add one to alow us to catch-up!
-	 * Hence 
+	 * Hence
 	 * batch size = line_speed (in bits per second)
 	 *	/ number of bits in a byte
 	 *	* number of quick events ticks per second (normally 1000000)
@@ -1873,7 +1594,7 @@ static void set_baud_rate IFN1(int, adapter)
 	com_flush_input(adapter);
 
 #ifndef NTVDM
-#line 2799
+
 #error Excluded unsupported non-NTVDM serial profile
 #else /* NTVDM */
 #line 2827
@@ -1885,13 +1606,10 @@ static void set_baud_rate IFN1(int, adapter)
         */
         host_com_ioctl(adapter,HOST_COM_BAUD,115200/asp->divisor_latch.all);
 #endif /* NTVDM */
-#line 2835
 }
 #endif // NEC_98
-#line 2837
 
 #if defined(NEC_98)
-#line 2839
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 2965
@@ -1929,7 +1647,6 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 	if (newLCR.bits.parity_enabled == PARITYENABLE_OFF)
 #else
-#line 2999
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 3001
@@ -1941,7 +1658,6 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		newParity = newLCR.bits.even_parity == EVENPARITY_ODD ?
 #else
-#line 3009
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 3011
@@ -1952,7 +1668,6 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		newParity = newLCR.bits.even_parity == EVENPARITY_ODD ?
 #else
-#line 3018
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 3020
@@ -1965,7 +1680,6 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 	if (asp->line_control_reg.bits.parity_enabled == PARITYENABLE_OFF)
 #else
-#line 3029
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 3031
@@ -1977,7 +1691,6 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		parity = asp->line_control_reg.bits.even_parity == EVENPARITY_ODD ?
 #else
-#line 3039
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 3041
@@ -1988,7 +1701,6 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		parity = asp->line_control_reg.bits.even_parity == EVENPARITY_ODD ?
 #else
-#line 3048
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 3050
@@ -2010,10 +1722,8 @@ static void set_line_control IFN2(int, adapter, int, value)
 	asp->line_control_reg.all = (unsigned char)value;
 }
 #endif // NEC_98
-#line 3068
 
 #if defined(NEC_98)
-#line 3070
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 3098
@@ -2077,10 +1787,8 @@ static void set_dtr IFN1(int, adapter)
 	}
 }
 #endif // NEC_98
-#line 3158
 
 #if defined(NEC_98)
-#line 3160
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 3188
@@ -2138,7 +1846,6 @@ static void set_rts IFN1(int, adapter)
 	}
 }
 #endif // NEC_98
-#line 3242
 
 #ifndef NEC_98
 static void set_out1 IFN1(int, adapter)
@@ -2156,7 +1863,7 @@ static void set_out1 IFN1(int, adapter)
 		asp->out1_state = ON;
 		if (asp->loopback_state == OFF)
 		{
-			/* 
+			/*
 			 * In the real adapter, this modem control output
 			 * signal is not connected; so no real modem
 			 * control change is required
@@ -2175,7 +1882,7 @@ static void set_out1 IFN1(int, adapter)
 		asp->out1_state = OFF;
 		if (asp->loopback_state == OFF)
 		{
-			/* 
+			/*
 			 * In the real adapter, this modem control output
 			 * signal is not connected; so no real modem control
 			 * change is required
@@ -2213,7 +1920,7 @@ static void set_out2 IFN1(int, adapter)
 		asp->out2_state = ON;
 		if (asp->loopback_state == OFF)
 		{
-			/* 
+			/*
 			 * In the real adapter, this modem control output
 			 * signal is used to determine whether the
 			 * communications card should send interrupts; so
@@ -2242,7 +1949,7 @@ static void set_out2 IFN1(int, adapter)
 		asp->out2_state = OFF;
 		if (asp->loopback_state == OFF)
 		{
-			/* 
+			/*
 			 * In the real adapter, this modem control output signal
 			 * is used to determine whether the communications
 			 * card should send interrupts; so no real modem
@@ -2300,10 +2007,9 @@ static void set_loopback IFN1(int, adapter)
 	}
 }
 #endif // NEC_98
-#line 3403
 
 #ifdef SHORT_TRACE
-#line 3405
+
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #line 3425
@@ -2337,18 +2043,11 @@ void com2_flush_printer IFN0()
 
 
 #ifdef SEGMENTATION
-#line 3455
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 3462
 
 #if defined(NEC_98)
-#line 3464
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 3526
@@ -2422,14 +2121,7 @@ static void com_reset IFN1(int, adapter)
 	asp->out1_state = ON;
 	asp->out2_state = ON;
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 3596
 #error Excluded unsupported FIFO_ON configuration
-
-
-
-
-
-
 #endif
 #line 3604
 		
@@ -2453,28 +2145,22 @@ static void com_reset IFN1(int, adapter)
 	set_out2(adapter);
 
 #ifdef IRET_HOOKS
-#line 3625
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
 #line 3640
 }
 #endif // NEC_98
-#line 3642
 
-#line 3643
 #ifndef COM3_ADAPTOR
-#line 3644
 #error Unsupported excluded original configuration
 #endif
 #line 3646
 #ifndef COM4_ADAPTOR
-#line 3647
 #error Unsupported excluded original configuration
 #endif
 #line 3649
 
 #if defined(NEC_98)
-#line 3651
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 3657
@@ -2497,11 +2183,9 @@ static int timeout[4] = {RS232_COM1_TIMEOUT,
                          RS232_COM3_TIMEOUT,
                          RS232_COM4_TIMEOUT};
 #endif // NEC_98
-#line 3676
 
 
 #if defined(NEC_98)
-#line 3679
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 3777
@@ -2527,17 +2211,16 @@ GLOBAL VOID com_init IFN1(int, adapter)
             io_define_outb(com_adaptor[adapter],VDMForWOW ? wow_com_outb: com_outb);
         }
 #else
-#line 3799
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 3802
- 
+
 	for(i = port_start[adapter]; i <= port_end[adapter]; i++)
 		io_connect_port(i, com_adaptor[adapter], IO_READ_WRITE);
-         
+
 
 	adapter_state[adapter].hw_interrupt_priority = int_pri[adapter];
- 
+
 	/* reset adapter state */
 	host_com_reset(adapter);
 
@@ -2545,19 +2228,16 @@ GLOBAL VOID com_init IFN1(int, adapter)
 	com_reset(adapter);
 
 #ifndef NTVDM
-#line 3816
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* not NTVDM */
 #line 3819
 	host_com_disable_open(adapter,FALSE);
 	host_com_unlock(adapter);
 #endif
-#line 3822
 
 	return;
 }
 #endif // NEC_98
-#line 3826
 
 void com_post IFN1(int, adapter)
 {
@@ -2565,7 +2245,7 @@ void com_post IFN1(int, adapter)
 	sas_storew( BIOS_VAR_START + (2*adapter), port_start[adapter]);
 	sas_store(timeout[adapter] , (half_word)1 );
 }
- 
+
 void com_close IFN1(int, adapter)
 {
 #ifdef NTVDM
@@ -2573,7 +2253,6 @@ void com_close IFN1(int, adapter)
 #endif
 
 #ifndef PROD
-#line 3841
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 3845
@@ -2591,7 +2270,6 @@ void com_close IFN1(int, adapter)
 /* Com extentions - DAB (MS-project) */
 
 #if defined(NEC_98)
-#line 3859
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 3892
@@ -2612,7 +2290,6 @@ GLOBAL void SyncBaseLineSettings(int adapter,DIVISOR_LATCH *divisor_latch,
     asp->line_control_reg.bits.even_parity = (*LCR_reg).bits.even_parity;
 }
 #endif // NEC_98
-#line 3909
 
 GLOBAL void setup_RTSDTR(int adapter)
 {
@@ -2631,14 +2308,12 @@ GLOBAL int AdapterReadyForCharacter(int adapter)
     /*......................................... Are RX interrupts enabled */
 
 #if defined(NEC_98)
-#line 3927
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 3930
     if(adapter_state[adapter].line_status_reg.bits.data_ready == 0 &&
        adapter_state[adapter].data_available_interrupt_state == OFF)
 #endif // NEC_98
-#line 3933
     {
         AdapterReady = TRUE;
     }
@@ -2662,7 +2337,6 @@ GLOBAL void com_int_data(int adapter,int *controller, int *line)
 #endif /* NTVDM */
 
 #ifdef PS_FLUSHING
-#line 3956
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 3991
@@ -2675,7 +2349,6 @@ GLOBAL void com_int_data(int adapter,int *controller, int *line)
  * - comdebug - from the yoda command line....
  */
 #ifndef PROD
-#line 4000
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
 #line 4526

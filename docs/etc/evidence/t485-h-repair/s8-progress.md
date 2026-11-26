@@ -676,3 +676,90 @@ P5 reduces one non-error point/line, cumulative 69/177; newline-only total 216.
 343/851 reviewed and final-verified, 508 remain. Commit/push completes delivery.
 No Full result is claimed; verification is scoped to this format/build-selection
 batch. Next: ccpu386/stc.c. N004 remains gated on S13.
+
+### P6 CCPU directory completion
+
+P5 committed and pushed as 34e59dfaf; 343 files delivered.
+
+| File under softpc.new/base/ccpu386 | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| stc.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| stc.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| std.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| std.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sti.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sti.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| str.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| str.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| stubs.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sub.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sub.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| test.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| test.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| univer_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| verr.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| verr.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| verw.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| verw.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| wait.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| wait.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| wbinvd.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| wbinvd.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| xadd.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| xadd.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| xchg.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| xchg.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| xlat.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| xlat.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| xor.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| xor.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| zfrsrvd.c | 0/0 -> 0/0 | Original retained code; 2 unchanged excluded arms; XP diagnostic anchors |
+| zfrsrvd.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+
+All 32 files pass pinned-XP retained-source and unchanged-error checks.
+375/851 reviewed, 476 remain; 343 delivered and 32 P6 files local. Cumulative
+non-error reduction remains 69 points/177 lines; newline-only total 245.
+No new P6 build/runtime pass claimed. Next: base/comms/com.c.
+
+### P6 communications reconciliation
+
+| File under softpc.new/base | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| comms/com.c | 23/82 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| comms/daytona/makefile | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| comms/daytona/sources | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| comms/dirs | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| comms/printer.c | 10/28 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| comms/printer_.c | 4/12 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| comms/prt_scrn.c | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| comms/rs232_io.c | 5/10 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| comms/sources.inc | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| condincl.inc | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| cpu/src/evid/vglob.c | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+
+Whole-file depth-aware comparison verifies original retained nonblank code for
+all 43 P6 files, with unchanged error directives. The 42 communications points
+(132 added-plus-deleted lines) are original format restorations, not serial or
+printer algorithm changes. Source identities: build/t485-s8/p6-source-check.json.
+
+386/851 reviewed, 465 remain; 343 delivered and 43 P6 files local. Cumulative
+non-error reduction is 111 points/309 lines (42/132 local); newline-only total 247.
+P6 now enters cached build, dual publication and targeted verification.
+Next file after delivery: base/cvidc/accessfn.c.
+### P6 publication checkpoint
+
+Runtime6 cached full build and dual 13-image publication passed. All 26 published
+hash comparisons match the final manifest. All 43 file identities and original
+retained logical lines pass (p6/line-check.json); source comparison is recorded
+in p6-source-check.json. Governance passed. Final-package MEM/NTVDMD and
+DOS4GW/NESticle targeted tests are running; no test or delivery completion is
+claimed until their results and commit/push are recorded.
+### P6 final verification
+
+Final runtime6 passed real MEM/NTVDMD export/debugger/register/allocation/termination
+checks and DOS4GW/NESticle rendered menu plus Escape hide/restore. Evidence:
+build/t485-s8/p6/debug-live/trace.txt and dos4gw/nesticle.txt.graphics-result.json.
+All 43 source identities and diagnostic mappings are verified, cached full build
+and dual 13-image publication passed. Commit/push completes P6, not S8.
+386/851 final-verified, 465 remain. This batch removes 42 points/132 lines;
+cumulative reduction is 111/309, newline-only count 247. Next: base/cvidc/accessfn.c.

@@ -12,13 +12,11 @@
  */
 
 #ifdef SCCSID
-#line 15
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 17
 
 #ifdef SEGMENTATION
-#line 19
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 26
@@ -42,18 +40,15 @@
 #include "rs232.h"
 #include "idetect.h"
 
-#line 46
 static word divisors[] = { 1047,768, 384, 192, 96, 48, 24, 12, 6 };
 
 /* workaround for IP32 and Tek43xx compiler bug follows: */
 #if  defined(IP32) || defined(TK43) || defined(macintosh)
-#line 50
 #error Unsupported excluded original configuration
 #else
 #line 52
 static io_addr port;
 #endif
-#line 54
 
 static half_word value;
 
@@ -61,7 +56,6 @@ static half_word value;
 static void return_status()
 {
 #if defined(NEC_98)
-#line 61
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 63
@@ -70,7 +64,6 @@ static void return_status()
 	inb((io_addr)(port + RS232_MSR), (IU8 *)&value);
 	setAL(value);
 #endif // !NEC_98
-#line 68
 }
 
 
@@ -78,7 +71,6 @@ void rs232_io()
 {
 #ifndef NEC_98
 #ifdef BIT_ORDER2
-#line 75
    union {
       half_word all;
       struct {
@@ -89,9 +81,7 @@ void rs232_io()
       } bit;
    } parameters;
 #endif
-#line 85
 #ifdef BIT_ORDER1
-#line 86
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 #line 96
@@ -130,7 +120,7 @@ void rs232_io()
 	default:
 		break;
    }
-   
+
    /*
     * Determine function
     */
@@ -212,7 +202,7 @@ void rs232_io()
       /*
        * Wait for data to appear, or timeout(just an empirical guess)
        */
-      
+
       sas_load(timeout_location, &timeout);
       for ( j = 0; j < timeout; j++)
 	 {
@@ -224,14 +214,13 @@ void rs232_io()
 	     */
 	    value &= 0x1e;   /* keep error bits only */
 	    setAH(value);
-               
+
 	    inb((io_addr)(port + RS232_TX_RX), (IU8 *)&value);
 	    setAL(value);
-#line 228
 	    return;
 	    }
 	 }
-      
+
       /*
        * Set timeout
        */
@@ -274,7 +263,7 @@ void rs232_io()
       outb((io_addr)(port + RS232_IER), (IU8)value);
       return_status();
       break;
-   
+
    case 5:	/* EXTENDED Comms Port Control */
 	switch( getAL() )
 	{
@@ -299,6 +288,5 @@ void rs232_io()
       	break;
    }
 #endif // !NEC_98
-#line 299
 }
 

@@ -69,15 +69,12 @@
 #ifdef SCCSID
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 72
 
 #ifdef SEGMENTATION
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 81
 
 
 /*
@@ -87,9 +84,7 @@
 #include TypesH
 #include TimeH
 #ifdef SYSTEMV
-#line 90
 #error DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register.
-#line 93
 #endif
 #line 94
 
@@ -110,7 +105,6 @@
 
 #include "debug.h"
 #ifndef PROD
-#line 112
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 114
@@ -134,7 +128,6 @@
 #define CONTROL_REG_MASK	0xE0;	/* unused bits drift to HIGH */
 #define STATUS_REG_MASK		0x07;	/* unused bits drift to HIGH */
 #endif // !NEC_98
-#line 134
 
 #define DATA_OFFSET	0		/* ouput register */
 #define STATUS_OFFSET	1		/* status register */
@@ -143,10 +136,8 @@
 #ifdef	ERROR
 #undef	ERROR
 #endif
-#line 142
 
 #if defined(NEC_98)
-#line 144
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 167
@@ -169,7 +160,7 @@ LOCAL IU8 retryErrorCount = 0;   /* num status inb before clearing ERROR */
 
 static IU8 state[NUM_PARALLEL_PORTS]; /* state control variable */
 /*
- * set up arrays of all port addresses 
+ * set up arrays of all port addresses
  */
 static io_addr port_start[] = {LPT1_PORT_START,LPT2_PORT_START,LPT3_PORT_START};
 static io_addr port_end[] = {LPT1_PORT_END, LPT2_PORT_END, LPT3_PORT_END};
@@ -181,7 +172,6 @@ static sys_addr timeout_address[] = {LPT1_TIMEOUT_ADDRESS, LPT2_TIMEOUT_ADDRESS,
 static q_ev_handle handle_for_out_event[NUM_PARALLEL_PORTS];
 static q_ev_handle handle_for_outa_event[NUM_PARALLEL_PORTS];
 #endif // !NEC_98
-#line 198
 
 #ifndef NEC_98
 #if defined(NTVDM) && defined(MONITOR)
@@ -192,7 +182,6 @@ sys_addr lp16BitPrtCount;
 sys_addr lp16BitPrtBusy;
 #endif
 #endif // !NEC_98
-#line 208
 
 #define STATE_READY     0
 #define STATE_OUT       1
@@ -201,7 +190,6 @@ sys_addr lp16BitPrtBusy;
 #define STATE_DATA	3
 #define STATE_DONGLE	4
 #endif
-#line 216
 
 /*
  * State transitions:
@@ -227,22 +215,18 @@ sys_addr lp16BitPrtBusy;
  *	should be OK.
  */
 
-#line 241
 #ifdef PS_FLUSHING
-#line 242
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
-#line 244
 #endif	/* PS_FLUSHING */
 #line 245
 
 
 /*
  * ============================================================================
- * Internal functions & macros 
+ * Internal functions & macros
  * ============================================================================
  */
 
-#line 253
 #define set_low(val, bit)		val &= ~bit
 #define set_high(val, bit)		val |=  bit
 #define low_high(val1, val2, bit)	(!(val1 & bit) && (val2 & bit))
@@ -255,7 +239,6 @@ sys_addr lp16BitPrtBusy;
  * monitors.
  */
 #if defined(NEC_98)
-#line 265
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 269
@@ -277,9 +260,8 @@ static sys_addr state_addr;
 #define set_state(adap,val)	(sas_store_no_check(state_addr+(adap),(val)))
 
 #else /* NTVDM && MONITOR */
-#line 287
+
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#line 297
 #endif /* NTVDM && MONITOR */
 #line 298
 
@@ -287,18 +269,16 @@ static void printer_inb IPT2(io_addr, port, half_word *, value);
 static void printer_outb IPT2(io_addr, port, half_word, value);
 static void notbusy_check IPT1(int,adapter);
 #endif // !NEC_98
-#line 303
 
 /*
  * ============================================================================
- * External functions 
+ * External functions
  * ============================================================================
  */
 
 void printer_post IFN1(int,adapter)
 {
 #if defined(NEC_98)
-#line 313
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 315
@@ -308,17 +288,15 @@ void printer_post IFN1(int,adapter)
 	sas_storew(port_address[adapter],(word)port_start[adapter]);
 	sas_store(timeout_address[adapter], (half_word)0x14 );		/* timeout */
 #endif // !NEC_98
-#line 321
 }
 
 #if defined(NEC_98)
-#line 324
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 335
 #if defined(NTVDM) && defined(MONITOR)
-static void lpr_state_outa_event IFN1(long,adapter) 
-{ 
+static void lpr_state_outa_event IFN1(long,adapter)
+{
 	set_status(adapter, (IU8)(get_status(adapter) | ACK));
 	set_state(adapter, STATE_READY);
 }
@@ -326,26 +304,23 @@ static void lpr_state_outa_event IFN1(long,adapter)
 static void lpr_state_out_event IFN1(long,adapter)
 {
 	set_status(adapter, (IU8)(get_status(adapter) & ~ACK));
-	set_state(adapter, STATE_OUTA); 
-	handle_for_outa_event[adapter]=add_q_event_t(lpr_state_outa_event,HOST_PRINTER_DELAY,adapter); 
-} 
+	set_state(adapter, STATE_OUTA);
+	handle_for_outa_event[adapter]=add_q_event_t(lpr_state_outa_event,HOST_PRINTER_DELAY,adapter);
+}
 
 #else	/* NTVDM && MONITOR */
-#line 350
+
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#line 363
 #endif	/* NTVDM && MONITOR */
+#line 364
 #endif // !NEC_98
-#line 365
 
 #if defined(NEC_98)
-#line 367
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 369
 static void printer_inb IFN2(io_addr,port, half_word *,value)
 #endif // !NEC_98
-#line 371
 {
 #ifndef NEC_98
 	int	adapter, i;
@@ -363,23 +338,19 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 		
 	port = port & PRINTER_BIT_MASK;		/* clear unused bits */
 #endif // !NEC_98
-#line 388
 
 	switch(port)
 	{
 #if defined(NEC_98)
-#line 392
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 395
 	case DATA_OFFSET:
                 *value = output_reg[adapter];
 #endif // !NEC_98
-#line 398
 		break;
 
 #if defined(NEC_98)
-#line 401
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 407
@@ -395,7 +366,6 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 		case STATE_DATA:
 
 #endif
-#line 419
 
 		case STATE_READY:
 			notbusy_check(adapter);
@@ -411,42 +381,34 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 			break;
     	case STATE_OUT:
 			*value = get_status(adapter) | STATUS_REG_MASK;
-#line 434
 #ifndef DELAYED_INTS
 			delete_q_event(handle_for_out_event[adapter]);
                         lpr_state_out_event(adapter);
 #else
-#line 438
 #error Unsupported excluded delayed printer interrupt configuration
-#line 440
 #endif /* DELAYED INTS */
 #line 441
 			break;
     	case STATE_OUTA:
 			notbusy_check(adapter);		/* <chrisP 11Sep91> */
 			*value = get_status(adapter) | STATUS_REG_MASK;
-#line 445
 #ifndef DELAYED_INTS
 			delete_q_event(handle_for_outa_event[adapter]);
 			lpr_state_outa_event(adapter);
 #else
-#line 449
 #error Unsupported excluded delayed printer interrupt configuration
-#line 451
 #endif
 #line 452
 			break;
     	default:	
-			note_trace1(PRINTER_VERBOSE, 
-			            "<pinb() - unknown state %x>", 
+			note_trace1(PRINTER_VERBOSE,
+			            "<pinb() - unknown state %x>",
 			            get_state(adapter));
 			break;
 		}
 #endif // !NEC_98
-#line 460
 		break;
 #if defined(NEC_98)
-#line 462
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 465
@@ -456,36 +418,29 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 		negate(*value, AUTO_FEED);
 		negate(*value, SELECT_IN);
 #endif // !NEC_98
-#line 471
 		break;
 	}
 #ifndef NEC_98
 	note_trace3(PRINTER_VERBOSE, "<pinb() %x, ret %x, state %x>",
 		    port, *value, get_state(adapter));
 #endif // !NEC_98
-#line 477
 }
 
 #if defined(NEC_98)
-#line 480
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 482
 static void printer_outb IFN2(io_addr,port, half_word,value)
 #endif // !NEC_98
-#line 484
 {
 #if defined(NEC_98)
-#line 486
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 488
 	int	adapter, i;
 	half_word old_control;
 #ifdef PC_CONFIG
-#line 491
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
-#line 497
 #endif
 #line 498
 
@@ -531,15 +486,12 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 			    /* unable to open the lpt for direct access,
 			       mark the device busy */
 
-#line 541
 #if !defined(MONITOR)
-#line 542
 #error Non-MONITOR printer status is not supported
 #else /* NTVDM && !MONITOR */
 #line 544
 			set_status(adapter, 0x7F);
 #endif
-#line 546
 
 
 		    }
@@ -548,16 +500,13 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 
 	// fall through
 #endif
-#line 554
 	case STATE_OUT:
 	case STATE_OUTA:
 	case STATE_READY:
 #endif // !NEC_98
-#line 558
 		switch(port)
 		{
 #if defined(NEC_98)
-#line 561
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 564
@@ -565,14 +514,11 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #if defined(NTVDM)
 			set_state(adapter, STATE_DATA);
 #endif
-#line 568
 			/* Write char to internal buffer */
 			output_reg[adapter] = value;
 #endif // !NEC_98
-#line 571
 			break;
 #if defined(NEC_98)
-#line 573
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 614
@@ -586,23 +532,18 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 			old_control = get_control(adapter);	/* Save old value to see what's changed */
 			set_control(adapter, value);
 #endif // !NEC_98
-#line 624
 #if defined(NEC_98)
-#line 625
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 628
 			if (low_high(old_control, value, INIT_P))
 #ifdef PC_CONFIG
-#line 630
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
-#line 634
 #else
 #line 635
 				/* this was a call to host_print_doc - <chrisP 28Aug91> */
 				host_reset_print(adapter);
 #endif
-#line 638
 
 			if (toggled(old_control, value, AUTO_FEED))
 				host_print_auto_feed(adapter,
@@ -610,7 +551,6 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 
 			if (low_high(old_control, value, STROBE))
 #endif // !NEC_98
-#line 645
 			{
 #ifndef NEC_98
 #if defined(NTVDM)
@@ -625,13 +565,9 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 			    }
 #endif
 #endif // !NEC_98
-#line 659
 
-#line 660
 #ifdef PS_FLUSHING
-#line 661
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
-#line 669
 #endif	/* PS_FLUSHING */
 #line 670
 				       /*
@@ -639,7 +575,6 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 				 	* the printer
 				 	*/
 #if defined(NEC_98)
-#line 675
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 682
@@ -648,71 +583,59 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 				    		set_status(adapter, (IU8)(get_status(adapter) & ~ERROR)); /* active Low */
 				    		/* NTVDM had here(?): set_status(adapter, ACK|PEND|SELECT|ERROR); */
 				    		/* two status inbs before we clear ERROR */
-				    		retryErrorCount = 2;  
+				    		retryErrorCount = 2;
 					}
 					else
 					{
                                     		/* clear ERROR condition */
                                     		set_status(adapter, (IU8)(get_status(adapter) | ERROR));
 #if defined(NTVDM) && !defined(MONITOR)
-#line 694
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else /* NTVDM && !MONITOR */
 #line 696
 				    		set_status(adapter,
 					       	(IU8)(get_status(adapter) & ~NOTBUSY));
 #endif /* NTVDM && !MONITOR */
-#line 699
 				    		set_state(adapter, STATE_OUT);
 #ifndef DELAYED_INTS
 				    		handle_for_out_event[adapter]=add_q_event_t(lpr_state_out_event,HOST_PRINTER_DELAY,adapter);
 #endif /* DELAYED_INTS */
-#line 655
-#line 703
 					}
 #endif // !NEC_98
-#line 705
 #ifdef PS_FLUSHING
-#line 706
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 708
 			}
 #if defined(NEC_98)
-#line 710
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 713
 			else if (high_low(old_control, value, STROBE)
 				 	&& get_state(adapter) == STATE_OUT)
 #endif // !NEC_98
-#line 716
 			{
 #if defined(NEC_98)
-#line 718
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 720
 				if (value & IRQ)
 #endif // !NEC_98
-#line 722
 				{
 					/*
 					 * Application is using
 					 * interrupts, so we can't
-					 * rely on INBs being 
+					 * rely on INBs being
 					 * used to check the
 					 * printer status.
 					 */
 #if defined(NEC_98)
-#line 731
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 735
 					set_state(adapter, STATE_READY);
 					notbusy_check(adapter);
 #endif // !NEC_98
-#line 738
 				}
 			}
 
@@ -727,17 +650,13 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 
 #endif
 #endif // !NEC_98
-#line 752
 
 #ifndef NEC_98
-#line 754
 #ifndef	PROD
-#line 755
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 758
 #endif
+#line 759
 #endif // !NEC_98
-#line 760
 			break;
 		}
 #ifndef NEC_98
@@ -748,7 +667,6 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 		break;
 	}
 #endif // !NEC_98
-#line 770
 }
 
 void printer_status_changed IFN1(int,adapter)
@@ -758,29 +676,25 @@ void printer_status_changed IFN1(int,adapter)
 
 	/* check whether the printer has just changed state to NOTBUSY */
 #if defined(NEC_98)
-#line 779
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 781
 	notbusy_check(adapter);
 #endif // !NEC_98
-#line 783
 }
 
 /*
  * ============================================================================
- * Internal functions 
+ * Internal functions
  * ============================================================================
  */
 
 #if defined(NEC_98)
-#line 792
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 794
 static void notbusy_check IFN1(int,adapter)
 #endif // !NEC_98
-#line 796
 {
 	/*
 	 *	This function is used to detect when the printer
@@ -805,7 +719,6 @@ static void notbusy_check IFN1(int,adapter)
 
 	/* <chrisP 11Sep91> allow not busy at leading edge of ack pulse too */
 #if defined(NEC_98)
-#line 820
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 848
@@ -813,25 +726,19 @@ static void notbusy_check IFN1(int,adapter)
 #if defined(NTVDM)
 		  get_state(adapter) == STATE_DATA ||
 #endif
-#line 852
 		  get_state(adapter) == STATE_OUTA)
 	     &&	!(get_status(adapter) & NOTBUSY)
 	     &&	!(host_lpt_status(adapter) & HOST_LPT_BUSY))
 	{
 #if defined(NTVDM) && !defined(MONITOR)
-#line 857
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else /* NTVDM && !MONITOR */
 #line 859
 		set_status(adapter, (IU8)(get_status(adapter) | NOTBUSY));
 #endif /* NTVDM && !MONITOR */
-#line 861
 
-#line 862
 #ifndef	PROD
-#line 863
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 865
 #endif
 #line 866
 
@@ -841,16 +748,9 @@ static void notbusy_check IFN1(int,adapter)
 		}
 	}
 #endif // !NEC_98
-#line 873
 }
 #ifdef SEGMENTATION
-#line 875
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 882
 
@@ -860,7 +760,6 @@ static void notbusy_check IFN1(int,adapter)
 void printer_init IFN1(int,adapter)
 {
 #if defined(NEC_98)
-#line 889
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 903
@@ -883,7 +782,6 @@ void printer_init IFN1(int,adapter)
 	}
 	else
 #endif /* NTVDM && MONITOR */
-#line 922
 	{
 	    control_reg[adapter] = 0xEC;
 	    status_reg[adapter] = 0xDF;
@@ -908,11 +806,9 @@ void printer_init IFN1(int,adapter)
 	    set_state(adapter, STATE_READY);
 	else
 #endif /* NTVDM && MONITOR */
-#line 946
 	    state[adapter] = STATE_READY;
 
 #endif // !NEC_98
-#line 949
 } /* end of printer_init() */
 
 #if defined(NTVDM) && defined(MONITOR)
@@ -922,9 +818,7 @@ void printer_init IFN1(int,adapter)
 #ifdef ANSI
 void printer_setup_table(sys_addr table_addr)
 #else /* ANSI */
-#line 958
 #error Excluded unsupported non-ANSI printer configuration
-#line 960
 #endif /* ANSI */
 #line 961
 {
@@ -972,47 +866,34 @@ void printer_setup_table(sys_addr table_addr)
 	intel_setup = TRUE;
     }
 #endif // !NEC_98
-#line 1006
 }
-#line 1007
 #endif /* NTVDM && MONITOR */
-#line 1008
 
-#line 1009
-#endif 
-#line 1010
+#endif
 
 #ifndef NEC_98
-#line 1012
 #ifdef NTVDM
-#line 1013
 void printer_is_being_closed(int adapter)
 {
 
 #if defined(MONITOR)
 	set_state(adapter, STATE_READY);
 #else
-#line 1019
 #error Excluded unsupported non-MONITOR printer configuration
-#line 1021
 #endif
 #line 1022
 }
 
-#line 1024
 #endif
 #endif // !NEC_98
-#line 1026
 
-#line 1027
 #ifdef PS_FLUSHING
-#line 1028
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
-#line 1062
 #endif	/* PS_FLUSHING */
+#line 1063
 
 #if defined(NEC_98)
-#line 1065
+
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 837
+#line 1102

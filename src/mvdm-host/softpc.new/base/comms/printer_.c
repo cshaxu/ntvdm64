@@ -1,5 +1,4 @@
 #if defined(NEC_98)
-#line 2
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 3
@@ -26,28 +25,25 @@
  */
 
 #ifdef SCCSID
-#line 26
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 28
 
 #ifdef SEGMENTATION
-#line 30
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 37
 
 
 /*
  *    O/S include files.
  */
 #ifdef PRINTER
-#line 43
 #include <stdio.h>
 
 #include TypesH
 
-#line 47
 #ifdef SYSTEMV
-#line 48
 #error DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register.
 #endif
 #line 50
@@ -60,16 +56,14 @@
 #include "sas.h"
 #include "ios.h"
 #include "bios.h"
-#include "printer.h" 
-#include "trace.h" 
+#include "printer.h"
+#include "trace.h"
 #include "error.h"
 #include "config.h"
 #include "host_lpt.h"
 #include "idetect.h"
 
-#line 66
 #if defined(NTVDM) && defined(MONITOR)
-#line 67
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 #line 69
@@ -83,17 +77,16 @@ void    printer_bop_openclose (int);
  */
 static sys_addr port_address[] = {
 			LPT1_PORT_ADDRESS,
-			LPT2_PORT_ADDRESS, 
+			LPT2_PORT_ADDRESS,
 			LPT3_PORT_ADDRESS };
 static sys_addr timeout_address[] = {
-			LPT1_TIMEOUT_ADDRESS, 
-			LPT2_TIMEOUT_ADDRESS, 
+			LPT1_TIMEOUT_ADDRESS,
+			LPT2_TIMEOUT_ADDRESS,
 			LPT3_TIMEOUT_ADDRESS };
 
 #endif /* PRINTER */
 
 #if defined(NTVDM) && defined(MONITOR)
-#line 89
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 #line 91
@@ -113,7 +106,6 @@ void printer_io()
 {
 #ifdef PRINTER
 
-#line 107
     half_word time_out, status;
     word printer_io_address, printer_io_reg, printer_status_reg, printer_control_reg;
     boolean printer_busy = TRUE;
@@ -125,16 +117,14 @@ void printer_io()
 
     switch (bopsubfunction) {
 #ifdef MONITOR
-#line 118
 #error Excluded unsupported MONITOR printer BOP profile
 #endif
+#line 123
 
-#line 124
         case 1:
         case 2:
             /* this is the bop to track a DOS open/close on LPTn */
             printer_bop_openclose (bopsubfunction);
-#line 128
             return;
    }
 #endif
@@ -187,7 +177,7 @@ void printer_io()
 		status ^= 0x48;				/* flip the odd bit	    */
 		setAH(status);
 	        break;
-    
+
         case 1: outb(printer_control_reg, 0x08);	/* set init line low	    */
                 outb(printer_control_reg, 0x0C);	/* set init line high	    */
 		inb(printer_status_reg, &status);
@@ -207,14 +197,12 @@ void printer_io()
 	}
     }
 #endif
-#line 200
 }
 
 extern  void  host_lpt_dos_open(int);
 extern  void  host_lpt_dos_close(int);
 
 #if defined(NTVDM) && defined(MONITOR)
-#line 206
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 #line 227
