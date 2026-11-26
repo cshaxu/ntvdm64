@@ -250,12 +250,10 @@
 #ifdef VGG
 #define	MOUSE_VIDEO_MODE_MAXIMUM	0x14
 #else
-#line 253
 #error Unsupported excluded original configuration
 #endif /* VGG */
 #line 255
 #else
-#line 256
 #error Unsupported excluded original configuration
 #endif
 #line 258
@@ -792,7 +790,6 @@ IMPORT HOSTMOUSEFUNCS	*working_mouse_funcs;
 	(working_mouse_funcs->cursor_mode_change)()
 	
 #else	/* HOST_MOUSE */
-#line 791
 #error Unsupported excluded original configuration
 #endif	/* HOST_MOUSE */
 #line 813
@@ -801,13 +798,11 @@ IMPORT HOSTMOUSEFUNCS	*working_mouse_funcs;
 VOID host_enable_delta_motion IPT0();
 VOID host_disable_delta_motion IPT0();
 #ifdef X86GFX
-#line 818
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #else
 #line 820
 extern  void mouse_video_mode_changed(int new_mode);
 #endif
-#line 822
 
 #endif	/* NTVDM */
 
@@ -969,7 +964,6 @@ typedef struct
    IBOOL             MM_IN_int10_chained;
 
 #ifdef	MOUSE_16_BIT
-#line 983
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */ 
 #line 985
@@ -999,7 +993,6 @@ typedef struct
 #endif /* EGG */
 
 #ifdef HERC
-#line 1011
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 #line 1013
@@ -1111,7 +1104,6 @@ IMPORT MM_INSTANCE_DATA_HANDLE mm_handle;
 #define int10_chained              ((*mm_handle)->MM_IN_int10_chained)
 
 #ifdef	MOUSE_16_BIT
-#line 1115
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
 #endif	/* MOUSE_16_BIT */ 
 #line 1117
@@ -1140,7 +1132,6 @@ IMPORT MM_INSTANCE_DATA_HANDLE mm_handle;
 #endif /* EGG */
 
 #ifdef HERC
-#line 1142
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif /* HERC */
 #line 1144

@@ -707,3 +707,42 @@ P7 delivery receipt: 3afcbb772 is committed and pushed to origin/main.
 All 32 reviewed files are delivered; nine remain. Fifty restored S9 register
 points are final-verified and delivered. Governance and links passed; publication
 hashes remain 26/26. Next ordered file is base/inc/mouse_io.h.
+
+## P8: mouse_io.h, timeval.h, support/main.c
+
+Whole-file review in canonical order: mouse_io.h 19/23 ->10/14 (-9/-9),
+timeval.h 7/8 ->3/4 (-4/-4), main.c 1/620 ->33/43 (+32/-577).
+Counts include original LF/EOF and #line, excluding only actual #error bodies.
+Batch 27/651 ->46/61 (+19/-590). Functional source bytes are unchanged after
+line-anchor/newline/trailing-comment-whitespace normalization. All 8/2/29
+exclusions remain; selected original logical-line checks are 631/35/112.
+
+Mouse saved painter/address remains on the existing VM background record.
+mouse_io.c records it on display and consumes it through cursor_undisplay;
+current video mode/page cannot identify old saved pixels. Existing production
+body tests cover graphics/page transition, single consumption and restorer
+selection. XP nt_unix.c defines long host_time(long *); the single declaration
+adaptation matches that provider rather than modern 64-bit time_t.
+
+The main split preserves initialization before outer lifecycle activation and
+CPU execution inside its exception boundary. The outer main owns argc across
+both calls. Search finds no later production pargc reader: do not claim one.
+Its stored pointer nevertheless remains valid with the split signature; no
+new storage or execution path was added. Functional points remain pending.
+
+35/41 files reviewed, 32 delivered, six unreviewed; 208/437 frozen points reviewed,
+229 remain. Two new format restorations await verification; 50 earlier delivered.
+S9 net +77/-24037 against fc9492342; 40 measured files now 421/5917. Unchanged
+timer.c remains outside that absolute total pending its conditional mapping.
+P8 cached build/publication/targeted validation and delivery pending. Next is
+base/support/terminat.c. Evidence: build/t485-s9/p8.
+
+### P8 final verification
+
+Runtime8 cached full build, dual publication and post-test hashes 26/26 passed.
+Actual production mouse cursor bodies passed saved-position/page/graphics-mode
+transition and single-consumption controls (memory/geometry mocked). Final-package
+MEM/NTVDMD live export test and actual NESticle menu plus Escape hide/restore
+passed. Original guest and winnt.zip unchanged. 35/41 files final-verified;
+52 S9 restored register points verified. P8 commit/push pending; functional
+residual decisions remain listed. Evidence build/t485-s9/p8.

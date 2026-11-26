@@ -35,9 +35,7 @@ struct host_timezone {
     int tz_dsttime;
 };
 
-#line 38
 #ifndef NTVDM
-#line 39
 #error Unsupported excluded original configuration
 #endif
 #line 51
@@ -51,11 +49,9 @@ extern long host_time IPT1(long *, tloc);
 extern struct host_tm *host_localtime IPT1(time_t *, clock);
 
 #ifndef NTVDM
-#line 61
 #error Unsupported excluded original configuration
 #else
 #line 64
 extern void host_GetSysTime(struct host_timeval *);
 #define host_gettimeofday(timeval, timezn) host_GetSysTime((timeval))
 #endif
-#line 67

@@ -2011,3 +2011,5 @@
 "HXP-R-01017","src/mvdm-host/softpc.new/base/dos/emm_mngr.c","restored-final-verified","S9-P6","none","s9-progress.md; p6/token-comparison.json: 163154 equal selected tokens; original format restored; runtime6 cached build, dual publication and actual guest EMS Mapping/CallReturn plus NESticle passed"
 "HXP-R-01079","src/mvdm-host/softpc.new/base/inc/ica.h","restored-final-verified","S9-P7","none","s9-progress.md; original surrounding whitespace/EOF restored; p7/ica-metrics.json"
 "HXP-R-01081","src/mvdm-host/softpc.new/base/inc/ica.h","restored-final-verified","S9-P7","none","s9-progress.md; original surrounding whitespace/EOF restored; p7/ica-metrics.json"
+"HXP-R-01903","src/mvdm-host/softpc.new/base/support/main.c","restored-final-verified","S9-P8","none","s9-progress.md; original LF and comment whitespace restored; functional code unchanged"
+"HXP-R-01904","src/mvdm-host/softpc.new/base/support/main.c","restored-final-verified","S9-P8","none","s9-progress.md; original LF and comment whitespace restored; functional code unchanged"
