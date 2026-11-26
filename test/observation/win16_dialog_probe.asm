@@ -444,13 +444,13 @@ push word buffer-data
 push word 32
 api 2,36
 cmp ax,6
-jne .bad
+jne .text_length
 mov si,buffer-data
 mov di,replacement-data
 .compare:
 lodsb
 cmp al,[di]
-jne .bad
+jne .text_content
 inc di
 test al,al
 jnz .compare
@@ -462,9 +462,19 @@ push word 0
 push word 0
 api 2,111
 cmp ax,2
-jne .bad
+jne .text_lines
 inc word [text_ok-data]
 ret
+.text_length:
+or word [errors-data],0x0100
+jmp .bad
+.text_content:
+or word [errors-data],0x0200
+jmp .bad
+.text_lines:
+and ax,0x00ff
+or [errors-data],ax
+or word [errors-data],0x0400
 .bad:
 or word [errors-data],0x2000
 ret

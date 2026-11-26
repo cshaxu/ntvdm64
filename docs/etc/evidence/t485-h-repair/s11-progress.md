@@ -52,8 +52,8 @@ frozen point counts as current byte-sensitive diff counts.
 | 38 | src/mvdm-host/wow32/wstruc.c | 3 | P17 source-reviewed; line-only delivery pending |
 | 39 | src/mvdm-host/wow32/wuclass.c | 7 | P17 source-reviewed; line-only delivery pending |
 | 40 | src/mvdm-host/wow32/wuclip.c | 16 | P17 source-reviewed; Full delivery pending |
-| 41 | src/mvdm-host/wow32/wudlg.c | 5 | Pending |
-| 42 | src/mvdm-host/wow32/wuman.c | 5 | Pending |
+| 41 | src/mvdm-host/wow32/wudlg.c | 5 | P18 source-reviewed; line correction pending delivery |
+| 42 | src/mvdm-host/wow32/wuman.c | 5 | P18 reviewed; original-query trial rejected by ABI; verification pending |
 | 43 | src/mvdm-host/wow32/wumsg.c | 32 | Pending |
 | 44 | src/mvdm-host/wow32/wumsg.h | 1 | Pending |
 | 45 | src/mvdm-host/wow32/wuser.c | 5 | Pending |
@@ -1097,3 +1097,133 @@ P17 delivered and pushed b709bd25c0212707361b00aa06700fb70021477c.
 Delivered40/48files,388/452frozen points:17restored,371residual pending owner
 review,64unreviewed. Census745points/4602lines;raw cumulative reduction135/7161.
 Full checkpoint40 complete on runtime21. S11 remains active;nextfile41 wudlg.c.
+
+### P18 file41 wudlg.c
+
+Before6points/24lines,after6/25;zero#error exclusions. Add missing#line151
+following the dialog procedure carrier;actual product preprocessing matches56
+unique original statements with zero line drift. Standing small-fix approval.
+All5frozen points retain specific ABI/ownership evidence in pending-decisions;
+none is counted restored or owner-approved. Existing ISDIALOG_ENTRY exact-body
+cases cover normal,native exception and conversion rejection;not rerun or
+claimed as new runtime proof for this line-only change. Accumulate line-only
+change before next functional batch,without premature build.
+Reviewed41/48files,393/452points:17restored,376residual,59unreviewed.
+Delivered40/388 unchanged. Census745points/4603lines;raw reduction135/7160.
+Nextfile42 wuman.c. P17 Full checkpoint40 remains final verified runtime21.
+
+### P18 file42 wuman.c
+
+Raw2points/588lines ->5/8;normalized12/28 ->5/8. Restore original LF,
+original SYSTEM_BASIC_INFORMATION/NtQuerySystemInformation query and assignment;
+remove redundant#line anchors. Both#error exclusions retained. Actual product
+preprocessor exposes original ABI and38original statements have zero drift.
+R04489-R04490 locally restored;R04486-R04488 remain evidenced guest address
+publication and pending owner decision. No original guest or ZIP modification.
+Whole-file review complete;P18 includes file41 line correction and file42
+functional restoration. Cached full build/dual publication started PID28224.
+Reviewed42/48files,398/452points:19restored(2local),379residual,54unreviewed.
+Delivered40/388 unchanged. Census748points/4023lines;cumulative132/7740.
+P18 raw+3points/-579lines;normalized-7points/-19lines.
+
+P18 correction after actual compile:the original system query trial failedC2039
+because SDK SYSTEM_BASIC_INFORMATION hides MaximumUserModeAddress. Presence of
+a type/prototype in preprocessing was not sufficient ABI evidence. R04489/90
+are NOT restored;both return to pending-decisions with concrete compiler evidence.
+Retain GetSystemInfo,restore harmless original sbi/Status declarations,add
+#line146/159. No private struct copy or reserved-field indexing. Final wuman
+7points/22lines (raw2/588,normalized12/28 before). Second whole-file cached
+build/publication PID18168;firstfailed build retained,never published.
+Reviewed42/48files,398/452points:17restored,381residual,54unreviewed.
+Delivered40/388 unchanged. Current census750/4037,cumulative reduction130/7726.
+P18 raw+5points/-565lines;normalized-5points/-5lines. Prior local-restored
+figures above are superseded by this actual compile result,not delivery claims.
+
+P18 final correction:unused original sbi/Status declarations fail actual C4101;
+withdrawn rather than suppress warnings. Final wuman 7/24;
+census750/4039,cumulative reduction130/7724.
+Build13840 and dependent verification27168 own the final attempt;prior failures
+remain evidence. No frozen point fully restored;17restored/381residual/54unreviewed.
+
+P18 runtime22 cached full build and dual publication PASS;26hashes matched.
+Final original-line checks:wudlg56,wuman35,zero mismatches. Whole-file actual
+production diff is LF/#line only;ABI-restoration experiments withdrawn.
+Exact message transaction fixture PASS. First real dialog run timed out under
+inherited developer environment. Recovered latest successful path from
+t484-s3-dialog-native.md and its launch.ps1:normal Userenv. Only failed dialog
+is retried under PID15992;no rebuild,publication repeat or Full run.
+
+### P18 failed dialog follow-up
+
+Same checked-in real dialog runner times out on both previously delivered
+runtime21 and candidate runtime22, including the recovered normal-user
+environment. This does not establish the old package's exact failure cause.
+Runtime22 read-only WindowInspector capture on the test-owned private desktop
+records an Application Error: DLGPROBE access violation in ntdll.dll at
+0x77462700. The retained guest report is 42 bytes: phase0, errors0,
+initialized0. No dialog button was activated and no user desktop was used.
+Evidence: build/t485-s11/p18/final/capture-windows.txt,
+capture-guest-report.bin, dialog-capture/observer-process.json;
+baseline attempt: dialog-baseline/observer.txt. Root cause remains unresolved;
+no passing dialog result or P18 delivery claimed. Existing build, publication
+and message-transaction passes are retained; only this failed gate is retried.
+
+### P18 ABI and USER class-table repairs
+
+Runtime22 disassembly shows WOWDlgInit loading HWND into ECX before its
+indirect call, while WOWTellWOWThehDlg ends in RET4: SDK FASTCALL in the shared
+consumer header disagreed with the selected CCPU producer's empty FASTCALL
+and /Gz. The existing wow_shared_user_abi.h now brackets original wowuserp.h
+with FASTCALL=WINAPI, restoring the prior macro afterwards. Four callback
+shapes are type-checked and invoked in the existing init-notification fixture.
+No mirror addition, no new callback owner or forwarding path.
+
+After this repair runtime23 initialized and exited normally, but the independent
+dialog probe failed its multiline count. Exact failure detail is now retained:
+0xA4FF identifies EM_GETLINECOUNT returning -1 after text set/get succeeded.
+H033 introduced aiClassWow in clglobal.c with XP ordering while this not-yet-
+migrated USER cohort still defines FNID_EDIT=0x2A3: index9 selected COMBOLBOX.
+The table now matches the actual cohort's FNIDs; thirteen standard-class
+mappings are checked in the same fixture. OpenNT fixed blob
+61253b83407c25e33f3b29341efde2d4b1a948c4 non-error metric is
+1point/2705lines ->1point/2702lines (0points/-3lines), five exclusions retained.
+This is an H033 coupled repair, not N022 migration or another frozen S11 row.
+
+Runtime24 cached full build and dual publication passed. Init-notification
+including four callback shapes and thirteen class mappings passed. The real
+DLGPROBE passed all eight phases, six initializations, two modal cycles,
+rollback, keyboard and retirement. The separate CDLPROBE common-dialog gate
+still times out after phase1 before first FindText dialog creation; not passed.
+Only this remaining failed gate needs investigation. P18 remains undelivered.
+Evidence: build/t485-s11/p18/final/dialog-exception/exceptions.txt,
+wow32-disasm.txt, clglobal-metrics.json, class-core.log,
+class-dialog/result.txt and class-common-dialog/observer.txt.
+
+The remaining common-dialog timeout is now a concrete guest loader error:
+read-only common-capture-windows.txt records Call to Undefined Dynalink.
+The existing exception observer reported no access violation for this run.
+Read-only NE import/export inspection finds COMMDLG.DLL ordinal11 present,
+but its imports KERNEL500 and532 absent from the installed SP3 KRNL386.EXE.
+COMMDLG hash54A7981C5667BDE19F0D703580D40A448A0BDEC010FEFFA153004EF4870DC0D4
+is still the preserved baseline ZIP input; H033's twelve-file guest receipt
+updated KRNL386 but did not include COMMDLG. This is a concrete pairing gap;
+next verify the approved SP3 companion, without editing or rebuilding guest.
+No ZIP change, normal-dialog rerun or Full rerun is authorized by this finding
+alone; original XP replacement approval and package rules remain applicable.
+Read-only parser: build/t485-s11/p18/final/inspect-commdlg.py; current parser
+corrects its initial module-table offset error before drawing these conclusions.
+
+
+### P18 final verification
+
+[P18 receipt](s11-p18-result.json) records runtime25, cached build,26 host
+publication hashes, four callback ABI checks,thirteen class mappings, real
+eight-phase dialogs and three common dialogs. SP3 original COMMDLG resolves
+the Undefined Dynalink; only its existing ZIP member changes,69 others keep
+their exact contents. No guest rebuilt. Runtime24/25 have identical thirteen
+build-input hashes; runtime25 adds only the original guest pairing and package
+identity. Prior passes retained; no complete Full rerun. File41 wudlg6/24->6/25,
+file42 wuman2/588->7/24; normalized batch-5points/-3lines. Exclusions unchanged;
+91 original statements zero line drift. Reviewed42/48,398/452:17restored,
+381residual,54unreviewed. Census750/4039,reduction130/7724. Coupled C1 table
+adds0points and removes3lines outside this census. Commit/push pending.

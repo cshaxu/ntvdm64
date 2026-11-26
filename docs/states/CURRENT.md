@@ -44,7 +44,17 @@ hard-error6groups,real Clipboard18checkpoints and Full23/23 PASS.
 The five-parameter XP error-dialog repair adds0mirrorpoints/lines.
 Test SYSTEM staging and80x30 EDIT-return preparation corrected;original guest
 and ZIP unchanged. Prior Win95 W-key readiness timeout retained,not claimed
-repaired;focused and final Full roundtrips pass. Nextfile41:wudlg.c;lastFull checkpoint40,runtime21.
+repaired;focused and final Full roundtrips pass. P18 files41-42 reviewed;original query trial failed SDK field ABI. Retain public
+GetSystemInfo;original field failsC2039,unused locals failC4101;line mappings fixed.
+Reviewed42/48files,398/452points:17restored,381residual,54unreviewed.
+Local census750/4039,cumulative reduction130/7724;delivered40/388 unchanged.
+P18 runtime25 final-verified,commit/push pending: cached build,dual26-hash
+publication,4callback ABI/13class checks,real8-phase dialog and3common-dialog
+creations PASS. [P18 receipt](../etc/evidence/t485-h-repair/s11-p18-result.json).
+Coupled clglobal delta0points/-3lines outside48-file census. SP3 COMMDLG
+replaces only existing ZIP member;69other members unchanged and no guest rebuild.
+Full not repeated;source/fixture-identical passing evidence retained.
+Nextfile43:wumsg.c;lastFull checkpoint40,runtime21.
 P1-P7 preprocessor followup:1195 unique original statements,zero drift.
 Migration39/159;S11 active;no S closure claimed.
 

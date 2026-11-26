@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$BuildRoot,
     [switch]$CommonDialog,
+    [string]$DebugObserver,
     [string]$Nasm='nasm.exe'
 )
 # Assemble only the independently authored probe.  The immutable guest image
@@ -49,11 +50,22 @@ try {
     foreach($argument in @("$runtime\system32\run16.exe","$runtime\tests",
             "$root\observer.txt",'--wait',"$runtime\tests\$probeName.EXE",
             '--observation-timeout-ms','30000')){$start.ArgumentList.Add($argument)}
+    if($DebugObserver){
+        # Reuse the existing exception observer; diagnostic runs are not acceptance.
+        $line=(@($start.ArgumentList)|ForEach-Object {'"'+$_+'"'}) -join ' '
+        $observed=$start.FileName
+        $start.FileName=(Resolve-Path $DebugObserver).Path
+        $start.ArgumentList.Clear()
+        foreach($argument in @('--exe',$observed,$line,"$root/exceptions.txt")){$start.ArgumentList.Add($argument)}
+        Get-FileHash $DebugObserver,"$PSScriptRoot/../observation/wow_exception_observer.c"|
+            Export-Csv -NoTypeInformation "$root/debugger-inputs.csv"
+    }
+    $deadline=if($DebugObserver){135}else{35}
     $process=[Diagnostics.Process]::Start($start);$null=$process.Handle
     @{pid=$process.Id;start=$process.StartTime.ToUniversalTime().ToString('o');
-      arguments=@($start.ArgumentList);deadlineSeconds=35}|ConvertTo-Json|
+      arguments=@($start.ArgumentList);deadlineSeconds=$deadline}|ConvertTo-Json|
         Set-Content "$root\observer-process.json"
-    if(!$process.WaitForExit(35000)){throw 'Owned dialog observer deadline'}
+    if(!$process.WaitForExit($deadline*1000)){throw 'Owned dialog observer deadline'}
     $process.Refresh();$process.ExitCode|Set-Content "$root\observer-exit.txt"
     if($process.ExitCode){throw "Dialog observer exit $($process.ExitCode)"}
     $report=Get-Content "$root\observer.txt" -Raw
@@ -142,7 +154,13 @@ try {
     } finally {
         try {if($scope){Stop-IsolatedPackageScope $scope}}
         finally {
-            try {if($runtime){Remove-PhysicalRuntimeStage $runtime}}
+            try {
+                if($runtime){
+                    $interim="$runtime/tests/$probeName.BIN"
+                    if(Test-Path -LiteralPath $interim){Copy-Item $interim "$root/interim.bin" -Force}
+                    Remove-PhysicalRuntimeStage $runtime
+                }
+            }
             finally {foreach($name in $saved.Keys){[Environment]::SetEnvironmentVariable($name,$saved[$name],'Process')}}
         }
     }

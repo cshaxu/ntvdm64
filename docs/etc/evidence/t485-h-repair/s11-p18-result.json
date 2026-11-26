@@ -1,0 +1,218 @@
+{
+  "packet": "M0 T485 S11 P18",
+  "state": "final-verified-commit-pending",
+  "runtime": "build/t485-s11/runtime25",
+  "reviewed_files": 42,
+  "total_files": 48,
+  "reviewed_frozen_points": 398,
+  "total_frozen_points": 452,
+  "restored_frozen_points": 17,
+  "residual_frozen_points": 381,
+  "unreviewed_frozen_points": 54,
+  "delivered_files": 40,
+  "delivered_frozen_points": 388,
+  "batch_difference_change": {
+    "points": 5,
+    "lines": -563
+  },
+  "normalized_batch_difference_change": {
+    "points": -5,
+    "lines": -3
+  },
+  "current_s11_census": {
+    "points": 750,
+    "lines": 4039
+  },
+  "combined_reduction": {
+    "points": 130,
+    "lines": 7724
+  },
+  "file_metrics": {
+    "src/mvdm-host/wow32/wudlg.c": {
+      "before": {
+        "points": 6,
+        "lines": 24,
+        "excluded": 0
+      },
+      "after": {
+        "points": 6,
+        "lines": 25,
+        "excluded": 0
+      },
+      "lines": {
+        "checked": 56,
+        "mismatches": []
+      }
+    },
+    "src/mvdm-host/wow32/wuman.c": {
+      "before": {
+        "points": 2,
+        "lines": 588,
+        "excluded": 2
+      },
+      "after": {
+        "points": 7,
+        "lines": 24,
+        "excluded": 2
+      },
+      "lines": {
+        "checked": 35,
+        "mismatches": []
+      }
+    }
+  },
+  "coupled_clglobal": {
+    "baseline": "OpenNT blob 61253b83407c25e33f3b29341efde2d4b1a948c4",
+    "before": {
+      "points": 1,
+      "lines": 2705,
+      "excluded": 5
+    },
+    "after": {
+      "points": 1,
+      "lines": 2702,
+      "excluded": 5
+    }
+  },
+  "guest_replacement": {
+    "member": "WINNT/SYSTEM/COMMDLG.DLL",
+    "before": "54a7981c5667bde19f0d703580d40a448a0bdec010feffa153004ef4870dc0d4",
+    "after": "53fa15f8a75dbcba6c4fc51bdb8059d468df62b99622da1381cc0a4798c29e40",
+    "bytes": 32816,
+    "unchanged_members": 69,
+    "membership_unchanged": true,
+    "source": "build\\t485-sp3-pro-media\\commdlg.dll",
+    "archive_sha256": "c57c3d8a2d29856f7a3592eeafd8d25584fa1a1f0cb1f2d22da44462589796c6"
+  },
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "A4C1DB383AC388EE92AF0E2C296660D1D444DF3DE22F31223CCD543942BC868A"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "A4C1DB383AC388EE92AF0E2C296660D1D444DF3DE22F31223CCD543942BC868A"
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "18C1FA5660A55A5BAD84C88A573349A07AEB4ED1B81C3B92FB698BF6F1E172ED"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "18C1FA5660A55A5BAD84C88A573349A07AEB4ED1B81C3B92FB698BF6F1E172ED"
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "E00E015B0CE3C9E6719C5F797148E580813C5DBA8BFCBFBCBEB9B9BDEBC23F7C"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "E00E015B0CE3C9E6719C5F797148E580813C5DBA8BFCBFBCBEB9B9BDEBC23F7C"
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "208DCBB8686E3BC279649DBB6E991E94389DD9CBE3744ECB085B577B30E8E464"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "208DCBB8686E3BC279649DBB6E991E94389DD9CBE3744ECB085B577B30E8E464"
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "1F42082C9745917A7D0CE74563754366DACAD1CE81AEB1291AF888F55EAEBEA5"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "1F42082C9745917A7D0CE74563754366DACAD1CE81AEB1291AF888F55EAEBEA5"
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "8780782BDD4AAB73C2F37537D6B9EBBF741134E06C4483FA773F3541B07C4698"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "8780782BDD4AAB73C2F37537D6B9EBBF741134E06C4483FA773F3541B07C4698"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "692B99CDEE5A02A1CCE471B1DD20CE3B8DA3F9ED8FF22F29912906A59D0AC6E7"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "692B99CDEE5A02A1CCE471B1DD20CE3B8DA3F9ED8FF22F29912906A59D0AC6E7"
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "0894785296966BB52BB7DC1E928F483B8492C18828A0F470C130DEDE8EACDF64"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "0894785296966BB52BB7DC1E928F483B8492C18828A0F470C130DEDE8EACDF64"
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "519079BBB989A655E49F7CABE7CDC235F22EDF0FAE84067FBD76BC85277742FA"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "519079BBB989A655E49F7CABE7CDC235F22EDF0FAE84067FBD76BC85277742FA"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "9143B326ECF4A1DCF74838CB77A92B176E95CB0A96AC884A166C2E5F15249F0B"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "9143B326ECF4A1DCF74838CB77A92B176E95CB0A96AC884A166C2E5F15249F0B"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "0D0E15C7A886D5580B0DB95FED52932482EC2BAA4428473650A763559F970D77"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "0D0E15C7A886D5580B0DB95FED52932482EC2BAA4428473650A763559F970D77"
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "710DBD818A70EAE712BE038347E279B71EEEFF3F55DB583FE5F4BBE1579F3EC0"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "710DBD818A70EAE712BE038347E279B71EEEFF3F55DB583FE5F4BBE1579F3EC0"
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "BD135FF038D17E60A6BDE387E334DBD58039F601E4227DD56E3F65C387C46477"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "BD135FF038D17E60A6BDE387E334DBD58039F601E4227DD56E3F65C387C46477"
+    }
+  ],
+  "verification": {
+    "cached_build": "build-class.log PASS",
+    "callback_abi_and_13_classes": "class-core.log PASS",
+    "dialog": "class-dialog/result.txt PASS; runtime24 and25 identical 13 InputSha256 fields",
+    "common_dialog": "sp3-common-dialog/result.txt PASS runtime25",
+    "message_ownership": "transaction/result.json PASS retained unchanged extracted bodies/fixture; no shared-header consumer",
+    "full": "not rerun; last checkpoint runtime21 at40files, next S11 closure48",
+    "original_guest": "unmodified SP3 original replacement only"
+  },
+  "failed_attempts": [
+    "Original SYSTEM_BASIC_INFORMATION field fails C2039; unused original locals fail C4101; both trials withdrawn",
+    "runtime21 and22 dialog timeout; runtime22 wrong FASTCALL/stdcall ABI proven by disassembly and exception trace",
+    "runtime23 multiline message misclassified by H033 XP table against current USER FNIDs; runtime24 corrected",
+    "runtime24 common dialog Undefined Dynalink; old COMMDLG imports KERNEL500/532 absent from SP3 kernel; paired SP3 replacement passes",
+    "Initial final publication checked runtime25 package ID without copying new stamped hosts; resumed copies and verified all26 hashes; build inputs unchanged"
+  ],
+  "source_hashes": {
+    "src/mvdm-host/wow32/wudlg.c": "8fc4d1164615ec85822add30f7c1edc69949b79e3812e5f2d2a94792880a2b23",
+    "src/mvdm-host/wow32/wuman.c": "690b16cf39f5d26df8e2a27b81fb6cf1788dfc236808b7daa4313a36bc206ddd",
+    "src/compat/include/wow_shared_user_abi.h": "20a787f2951645e5feebf1f9ed1f6281afebea0c0e1c8def97336920810060bf",
+    "src/non-mvdm/windows/core/ntuser/client/clglobal.c": "b9d0715166d4e2cfaa073aed3a39401012764ffc9c6a13c26c91f1b745cce25b",
+    "test/adapter-mvdm-host-out/wow/wow_init_notification_fixture.c": "50d966e59d2e756161e2c2531eb3402a67fe1bb7ffdc492597e21aa9503d9d14",
+    "test/integration/verify-wow-dialog-guest.ps1": "c5e01aa422d0d4c2f98efc7b4503bd3eeaa844f5b0c79756853f0915ade49b58",
+    "test/observation/win16_dialog_probe.asm": "08d1ded3de618029dfccf9a39b0f57991ffc30bbea6e5bc228804befb2c9b12a"
+  }
+}

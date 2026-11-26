@@ -72,6 +72,26 @@ DWORD WINAPI wow_fixture_NtvdmReportWowStartup(ULONG request, USHORT task, BOOL 
 }
 static VOID WINAPI end_task(void) { }
 
+/* Actual CCPU producers use the stack ABI. Incompatible table declarations
+ * are a compile error, and indirect calls check arguments and return values. */
+static WORD WINAPI abi_module(DWORD value) { CHECK(value == 0x12345678); return 0x1357; }
+static VOID WINAPI abi_message(DWORD value, LPHELPINFO info) { CHECK(value == 0x23456789 && info == NULL); }
+static VOID WINAPI abi_dialog(HWND value) { CHECK(value == (HWND)0x3456); }
+static DWORD WINAPI abi_schedule(DWORD first, DWORD second) { CHECK(first == 0x456789ab && second == 0x56789abc); return 0x6789abcd; }
+static void check_callback_abi(void)
+{
+#pragma warning(push)
+#pragma warning(error:4113 4047)
+    PFNGETPROCMODULE16 volatile module = abi_module;
+    PFNWOWMSGBOXINDIRECTCALLBACK volatile message = abi_message;
+    PFNWOWTELLWOWTHEHDLG volatile dialog = abi_dialog;
+    PFNWOWTASK16SCHEDNOTIFY volatile schedule = abi_schedule;
+#pragma warning(pop)
+    CHECK(module(0x12345678) == 0x1357);
+    message(0x23456789, NULL);
+    dialog((HWND)0x3456);
+    CHECK(schedule(0x456789ab, 0x56789abc) == 0x6789abcd);
+}
 int __cdecl main(void)
 {
     if (!wow_control_entry_bind(&fixture_control_entry_provider) ||
@@ -86,6 +106,7 @@ int __cdecl main(void)
     void *committed;
     unsigned i;
     BOOL caught = FALSE;
+    check_callback_abi();
     CHECK(wow_window_access_bind(&wow_fixture_window_access_provider));
     CHECK(wow_task_lifecycle_bind(&wow_fixture_task_lifecycle_provider));
     CHECK(ntvdm_dpmi_initialize());
@@ -101,6 +122,19 @@ int __cdecl main(void)
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_ORIGINAL_WORKER));
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
     CHECK(UserRegisterWowHandlers(&input, &output) == 0x1000);
+    CHECK(output.aiWowClass[FNID_SCROLLBAR-FNID_START] == WOWCLASS_SCROLLBAR);
+    CHECK(output.aiWowClass[FNID_ICONTITLE-FNID_START] == WOWCLASS_ICONTITLE);
+    CHECK(output.aiWowClass[FNID_MENU-FNID_START] == WOWCLASS_MENU);
+    CHECK(output.aiWowClass[FNID_DESKTOP-FNID_START] == WOWCLASS_DESKTOP);
+    CHECK(output.aiWowClass[FNID_BUTTON-FNID_START] == WOWCLASS_BUTTON);
+    CHECK(output.aiWowClass[FNID_COMBOBOX-FNID_START] == WOWCLASS_COMBOBOX);
+    CHECK(output.aiWowClass[FNID_COMBOLISTBOX-FNID_START] == WOWCLASS_COMBOLBOX);
+    CHECK(output.aiWowClass[FNID_DIALOG-FNID_START] == WOWCLASS_DIALOG);
+    CHECK(output.aiWowClass[FNID_EDIT-FNID_START] == WOWCLASS_EDIT);
+    CHECK(output.aiWowClass[FNID_LISTBOX-FNID_START] == WOWCLASS_LISTBOX);
+    CHECK(output.aiWowClass[FNID_MDICLIENT-FNID_START] == WOWCLASS_MDICLIENT);
+    CHECK(output.aiWowClass[FNID_STATIC-FNID_START] == WOWCLASS_STATIC);
+    CHECK(output.aiWowClass[FNID_SWITCH-FNID_START] == WOWCLASS_SWITCHWND);
     CHECK(output.pfnRegisterUserHungAppHandlers(end_task, event));
     lifecycle = runtime.lifecycle;
 

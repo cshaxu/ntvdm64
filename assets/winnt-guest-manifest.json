@@ -1,7 +1,7 @@
 {
   "schema": "ntvdm64.guest-archive.v1",
   "baseline_sha256": "539a910247c5478bde19fb2a431cd4c5ab26355cdc46f8160f49b23f060b495b",
-  "archive_sha256": "6c3533b0c23226f3830b0eeeaaf841b3acd4044e837f6b24d001135b2bf54663",
+  "archive_sha256": "c57c3d8a2d29856f7a3592eeafd8d25584fa1a1f0cb1f2d22da44462589796c6",
   "added": [
     "WINNT/EDIT.COM",
     "WINNT/EDIT.HLP",
@@ -78,9 +78,9 @@
     },
     {
       "path": "WINNT/SYSTEM/COMMDLG.DLL",
-      "bytes": 32784,
-      "sha256": "54a7981c5667bde19f0d703580d40a448a0bdec010feffa153004ef4870dc0d4",
-      "source": "preserved-approved-baseline-zip",
+      "bytes": 32816,
+      "sha256": "53fa15f8a75dbcba6c4fc51bdb8059d468df62b99622da1381cc0a4798c29e40",
+      "source": "XP Professional SP3 English x86 / I386/COMMDLG.DL_; sp3-professional-media.csv",
       "format": "NE",
       "module": "COMMDLG",
       "imports": [

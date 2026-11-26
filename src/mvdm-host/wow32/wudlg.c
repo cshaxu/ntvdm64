@@ -160,6 +160,7 @@ ULONG FASTCALL WU32DialogBoxParam(PVDMFRAME pFrame)
             FREEARGPTR(parg16);
             RETURN(ul);
         }
+#line 151
     }
 
     if (!(cb16 = parg16->f6)) {

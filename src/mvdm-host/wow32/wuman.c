@@ -101,15 +101,12 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
 
         case NW_FINALUSERINIT:
             {
-#line 102
                 static BYTE CallCsrFlag = 0;
                 extern DWORD   gpsi;
                 PUSERCLIENTGLOBALS pfinit16;
                 WORD UNALIGNED *pwMaxDWPMsg;
                 PBYTE pDWPBits;
-#line 107
 #ifdef DEBUG
-#line 108
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 112
@@ -141,7 +138,6 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                     BYTE **lpT;
                     GETVDMPTR(pfinit16->lpCsrFlag, sizeof(DWORD), lpT);
                     *lpT = (LPSTR)mvdm_softpc_wow_page_domain_guest_csr_flag(); /* DIVERGENCE(MVDM-HOST-DIV-300): guest byte. */
-#line 140
                     FLUSHVDMCODEPTR((ULONG)pfinit16->lpCsrFlag, sizeof(DWORD), lpT);
                     FREEVDMPTR(lpT);
                 }
@@ -149,10 +145,12 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                 if (pfinit16->lpHighestAddress) {
                     DWORD *lpT;
                     SYSTEM_INFO info;
+#line 148
 
                     GETVDMPTR(pfinit16->lpHighestAddress, sizeof(DWORD), lpT);
                     GetSystemInfo(&info);
                     *lpT = (DWORD)(ULONG_PTR)info.lpMaximumApplicationAddress;
+#line 159
                     FLUSHVDMCODEPTR((ULONG)pfinit16->lpHighestAddress, sizeof(DWORD), lpT);
                     FREEVDMPTR(lpT);
                 }
@@ -171,9 +169,7 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                 FLUSHVDMCODEPTR(pfinit16->lpwMaxDWPMsg, sizeof(WORD), pwMaxDWPMsg);
                 FLUSHVDMCODEPTR(pfinit16->lpDWPBits, pfinit16->cbDWPBits, pDWPBits);
 
-#line 177
 #ifdef DEBUG
-#line 178
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 202
