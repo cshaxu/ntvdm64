@@ -22,7 +22,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 8 | src/mvdm-host/wow32/walias.h | 6 | P3 delivered 952408b8b |
 | 9 | src/mvdm-host/wow32/wcall16.c | 4 | P4 delivered 9000f7c3f |
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | P5 delivered 1587bccad |
-| 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | Pending |
+| 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | P6 final-verified; commit/push pending |
 | 12 | src/mvdm-host/wow32/wdde.c | 25 | Pending |
 | 13 | src/mvdm-host/wow32/wdde.h | 4 | Pending |
 | 14 | src/mvdm-host/wow32/wdib.c | 1 | Pending |
@@ -418,3 +418,31 @@ Census124/4176 ->80/218, reduction44points/3958lines. Delivered remains9files,
 
 P5 final runtime7:transaction191scenarios/0failures and real Win16 three
 phases/0errors/3releases PASS. Ten files/56points delivered and pushed as1587bccad. No Full claim; Full remains required for S11 closure.
+
+### P6 wcommdlg.c whole-file review
+
+Entry16points/44lines, eleven points04129..04139. Restore original pragma
+spacing, else comment (04130 fully restored), and four-line function signature
+layout while retaining the registered original-provider name. Remove redundant
+anchors and correct logical lines after the cleanup scope. Initial source had
++3 line drift in dialog body and common callback; final2449 original retained
+lines match, two excluded branches unchanged. Census14/28, reduction2/16.
+04129 is only partially restored: lifetime include remains necessary.
+Three original provider names compose native callbacks with existing task and
+borrow scopes plus resource-destroy binding; original algorithms remain in C.
+Message acquisition/release and initialized scratch/finally prevent partial
+SHAREVIOLATION conversion leaks and unacquired cleanup, while completion marks
+normal stack semantics. Existing transaction tests cover that allocation family;
+common-dialog call/reference and real Win16 tests will use final runtime8.
+No new queue, state machine, guest change or copied algorithm.
+
+Source-reviewed11/48files,67/452points:10restored (one local),57residual,
+385unreviewed. Delivered remains10files/56points until P6 verification/push.
+Reviewed census140/4220 ->94/246, net-46points/-3974lines; delivered reduction
+44/3958. Build/publication runner24948 active; no final-package pass yet.
+
+P6 final runtime8:cached full build,dual publication26hashes,transaction191/0,
+common-dialog7leaves/42scenarios/0errors,native template2modes/0errors and
+real Win16 three phases PASS. Eleven files/67points final-verified:10restored,
+57residual,385unreviewed. Census140/4220 ->94/246, reduction46/3974.
+P6 commit/push pending; next wdde.c. S11 Full still required before closure.

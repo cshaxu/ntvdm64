@@ -23,7 +23,7 @@ Revision History:
 #include "precomp.h"
 #include "wow_message_lifetime.h" /* DIVERGENCE(MVDM-HOST-DIV-349): call-owned share message. */
 #line 24
-#pragma hdrstop
+#pragma   hdrstop
 #include <cderr.h>
 #include <dlgs.h>
 #include <wowcmndg.h>
@@ -36,7 +36,7 @@ MODNAME(wcommdlg.c);
 #if DEBUG
 #line 45
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#else
+#else // !DEBUG
 #line 68
 
 #define WCDDUMPCHOOSECOLORDATA16(p16)
@@ -460,14 +460,10 @@ WM32msgCHOOSEFONTGETLOGFONT(LPWM32MSGPARAMEX lpwm32mpex)
 // Dialog callback hook thunks
 //
 UINT APIENTRY
-#line 490
-WowOriginalDialogProc(
-    HWND hdlg,
-    UINT uMsg,
-    WPARAM uParam,
-    LPARAM lParam
-    )
-
+WowOriginalDialogProc(HWND hdlg,
+                UINT uMsg,
+                WPARAM uParam,
+                LPARAM lParam)
 /*++
 
 Routine Description:
@@ -515,7 +511,6 @@ Routine Description:
 
 --*/
 
-#line 541
 {
     PCOMMDLGTD pTD;
 
@@ -656,6 +651,7 @@ Routine Description:
     wow_message_stack stack;
     wow_message_stack_enter(&stack);
     __try {
+#line 678
 
     // If the app has GP Faulted we don't want to pass it any more input
     // This should be removed when USER32 does clean up on task death so
@@ -684,7 +680,6 @@ Routine Description:
 
 #line 704
 #if DBG
-#line 705
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 717
@@ -750,7 +745,6 @@ Routine Description:
                 //
                 // no wow app will expect this, so don't send it.
                 //
-#line 779
                 return(FALSE);
             } else {
                 pfnThunkMsg = WM32NoThunking;
