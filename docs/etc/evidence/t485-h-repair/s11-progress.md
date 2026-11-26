@@ -40,7 +40,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 26 | src/mvdm-host/wow32/wmsgem.c | 3 | P10 delivered 77e8752be |
 | 27 | src/mvdm-host/wow32/wmsglb.c | 3 | P10 delivered 77e8752be |
 | 28 | src/mvdm-host/wow32/wole2.c | 5 | P10 delivered 77e8752be |
-| 29 | src/mvdm-host/wow32/wow32.h | 1 | P11 source-reviewed; delivery pending |
+| 29 | src/mvdm-host/wow32/wow32.h | 1 | P11 delivered e5db62755 |
 | 30 | src/mvdm-host/wow32/wow32fax.c | 7 | Pending |
 | 31 | src/mvdm-host/wow32/wowhooks.c | 39 | Pending |
 | 32 | src/mvdm-host/wow32/wparam.c | 4 | Pending |
@@ -738,3 +738,5 @@ HXP-R-04373 restored; cdecl supplemental declaration remains registered.
 29/48files,281/452points verified:13restored,268residual,171unreviewed.
 Census755/7096,combined raw reduction125/4667. Coupled normalized ABI
 increment1point/2lines separately disclosed. Commit/push pending.
+
+P11 delivered and pushed e5db627553079f73d34f6b066593469834988a44.29/48files,281/452points delivered:13restored,268residual,171unreviewed. Next file30 wow32fax.c; Full is mandatory after that whole file. S11 remains active.

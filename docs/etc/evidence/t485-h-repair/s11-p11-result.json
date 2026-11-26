@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P11",
-  "state": "final-verified-awaiting-commit-push",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime14",
   "files_reviewed": 29,
   "files_total": 48,
@@ -581,5 +581,6 @@
     "checked": 101,
     "mismatches": []
   },
-  "full": "Not rerun for P11. P10 Full passed; next file30 and S closure require Full."
+  "full": "Not rerun for P11. P10 Full passed; next file30 and S closure require Full.",
+  "commit": "e5db627553079f73d34f6b066593469834988a44"
 }
