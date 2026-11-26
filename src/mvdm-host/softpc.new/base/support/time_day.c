@@ -1,5 +1,4 @@
 #if defined(NEC_98)
-#line 2
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 7
@@ -44,19 +43,12 @@
  */
 
 #ifdef SCCSID
-#line 48
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 50
 
 #ifdef SEGMENTATION
-#line 52
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 59
 
@@ -94,14 +86,11 @@
  * ===========================================================================
  */
 #if defined(NEC_98)
-#line 94
 #error Unsupported NEC PC-98 configuration
 #else   //NEC_98
 #line 97
 
-#line 98
 #ifdef XTSFD
-#line 99
 #error Unsupported excluded original configuration
 #endif
 #line 101
@@ -114,7 +103,7 @@ BOOL UpDateInProgress(void);
 IMPORT VOID host_init_bda_timer(void);
 
 #else
-#line 110
+
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 116
@@ -125,11 +114,10 @@ LOCAL void write_host_timestamp(int, int);
 LOCAL void TimeToTicks(int, int, int, word *, word *);
 LOCAL void get_host_time(int *, int *, int *);
 #else
-#line 123
 #error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 128
 #endif   //NEC_98
-#line 129
 
 #define TICKS_PER_HOUR      65543L
 #define TICKS_PER_MIN       1092L
@@ -144,7 +132,6 @@ LOCAL void get_host_time(int *, int *, int *);
 void time_of_day()
 {
 #if defined(NEC_98)
-#line 143
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 287
@@ -163,7 +150,6 @@ void time_of_day()
      */
 
 #ifdef BSD4_2
-#line 302
 #error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif
 #line 304
@@ -183,7 +169,6 @@ void time_of_day()
             sas_store(TIMER_OVFL, 0);   /* Always write zero after read */
 
 #else   /* ! NTVDM */
-#line 320
 #error Excluded unsupported non-NTVDM alternative
 #endif /* NTVDM */
 #line 362
@@ -200,7 +185,6 @@ void time_of_day()
 	    sas_store(TIMER_OVFL, 0);
 
 #ifndef NTVDM
-#line 375
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 381
@@ -208,7 +192,6 @@ void time_of_day()
 	case 2:	/* read the real time clock	*/
 
 #ifndef NTVDM
-#line 385
 #error Excluded unsupported non-NTVDM time service profile
 #endif
 #line 389
@@ -223,7 +206,6 @@ void time_of_day()
 			setCF(0);
 		}
 #ifndef NTVDM
-#line 400
 #error Excluded unsupported non-NTVDM time service profile
 #endif
 #line 417
@@ -252,7 +234,6 @@ void time_of_day()
 	case 4:	/* read the date from the real time clock	*/
 
 #ifndef NTVDM
-#line 442
 #error Excluded unsupported non-NTVDM time service profile
 #endif
 #line 446
@@ -267,7 +248,6 @@ void time_of_day()
 			setCF(0);
 		}
 #ifndef NTVDM
-#line 457
 #error Excluded unsupported non-NTVDM time service profile
 #endif
 #line 474
@@ -299,7 +279,6 @@ void time_of_day()
 		{
 			setCF(1);
 #ifdef BSD4_2
-#line 502
 #error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif
 #line 504
@@ -333,27 +312,23 @@ void time_of_day()
 
 
 #ifdef XTSFD
-#line 534
 #error Unsupported excluded original configuration
 #else
 #line 548
         default:
             ; /* Do nothing */
 #endif
-#line 551
     }
     setAH( 0 );
 
 #ifdef BSD4_2
-#line 555
 #error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif
+#line 557
 #endif   //NEC_98
-#line 558
 }
 
 #if defined(NEC_98)
-#line 561
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 579
@@ -365,11 +340,11 @@ void time_int()
      * NT port does everything in 16 bit int08 handler
      */
 #ifndef NTVDM
-#line 587
+
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
+#line 670
 #endif   //NEC_98
-#line 671
 }
 
 /*
@@ -385,7 +360,6 @@ void time_int()
  *  to the time of day stuff is not needed
  */
 #ifndef NTVDM
-#line 686
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* ifndef NTVDM */
 #line 946
@@ -395,11 +369,10 @@ void time_of_day_init()
 {
 #ifndef NEC_98
 #ifndef NTVDM
-#line 952
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
+#line 983
 #endif   //NEC_98
-#line 984
 }
 
 

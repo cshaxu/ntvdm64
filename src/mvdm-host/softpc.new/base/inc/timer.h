@@ -77,7 +77,6 @@ extern void host_timer2_waveform IPT5(unsigned int, a, unsigned long, b,
 #ifdef NTVDM
 void HostPpiState(half_word);
 #else
-#line 80
 #error Unsupported excluded original configuration
 #endif
 #line 83
@@ -89,21 +88,17 @@ extern IU32 host_speed IPT1( IU32, ControlMachineNumber );
 
 extern void host_timer_init IPT0();
 #ifdef SWIN_MOUSE_OPTS
-#line 91
 #error Unsupported excluded original configuration
 #else
 #line 94
 extern void host_timer_setup IPT0();
 extern void generic_timer_setup IPT0();
 #endif /* SWIN_MOUSE_OPTS */
-#line 97
 extern void host_timer_shutdown IPT0();
 extern void host_timer_event IPT0();
 extern void generic_timer_event IPT0();
 
-#line 101
 #ifdef HUNTER
-#line 102
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 #line 104

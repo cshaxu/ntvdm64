@@ -28,19 +28,12 @@
  */
 
 #ifdef SCCSID
-#line 31
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 33
 
 #ifdef SEGMENTATION
-#line 35
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 42
 
@@ -78,7 +71,6 @@ int button_right = 0;	/* Current state of right button */
 int delta_x = 0, delta_y = 0;	/* Current mouse delta moves */
 
 #ifndef PROD
-#line 77
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 79
@@ -88,11 +80,11 @@ static half_word data1_reg = 0,
 		 mouse_status_reg = 0;
 
 #if defined(NEC_98)
-#line 85
+
 #error Unsupported platform configuration
 #endif    //NEC_98
 #line 96
-static half_word 
+static half_word
 		 last_button_left  = 0,
 		 last_button_right = 0;
 
@@ -110,7 +102,7 @@ static int mouse_inb_toggle = 0;
 void mouse_inb IFN2(io_addr, port, half_word *, value)
 {
 #if defined(NEC_98)
-#line 114
+
 #error Unsupported platform configuration
 #else   //NEC_98
 #line 139
@@ -135,7 +127,6 @@ void mouse_inb IFN2(io_addr, port, half_word *, value)
 		break;
 	    default :
 #ifndef PROD
-#line 160
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 165
@@ -158,23 +149,21 @@ void mouse_inb IFN2(io_addr, port, half_word *, value)
     }
 
 #ifndef PROD
-#line 184
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 189
 #endif    //NEC_98
-#line 190
 }
 
 
 void mouse_outb IFN2(io_addr, port, half_word, value)
 {
 #if defined(NEC_98)
-#line 196
+
 #error Unsupported platform configuration
 #else    //NEC_98
 #line 282
 #ifndef PROD
-#line 283
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 293
@@ -200,16 +189,15 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 
 			if ((value & 0x20) && ((mouse_mode_reg & 0x20) == 0)) {
 #ifndef PROD
-#line 315
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 320
 				/* clear the interrupt */
 				ica_clear_int(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT);
 
-				/* 
-				 * read next mouse deltas & buttons 
-				 * into the inport registers 
+				/*
+				 * read next mouse deltas & buttons
+				 * into the inport registers
 				 */
 				data1_reg = (half_word)delta_x;
 				data2_reg = (half_word)delta_y;
@@ -233,7 +221,6 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 			/* ready for next read from queue, so send interrupt */
 			else if ((mouse_mode_reg & 0x20) && ((value & 0x20)==0)){
 #ifndef PROD
-#line 349
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 354
@@ -245,7 +232,6 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 			switch (value & 0x7) {
 			case 0x0 :		/* 0 Hz INTR low */
 #ifndef PROD
-#line 362
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 366
@@ -256,10 +242,10 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 	 * In the following cases the application code is expecting to see
 	 * interrupts at the requested rate. However in practice this is only
 	 * required during initialisation(mouse_mode_reg = 0), and then a short burst
-	 * appears to be sufficient. The 15 interupts generated comes from 
+	 * appears to be sufficient. The 15 interupts generated comes from
 	 * tests with the "WINDOWS" package, which receives about 15 during
 	 * initialising, but is happy as long as it gets more than 3. The delay
-	 * is necessary otherwise the interupts are generated before the 
+	 * is necessary otherwise the interupts are generated before the
 	 * application starts looking for them.
 
 	 * Mark 2 bodge:
@@ -267,7 +253,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 	   but Windows 2.03 needs them not to keep happening even when it asks for them.
 	   So now there's a counter called loadsainterrupts set to 5 on resets, which is
 	   how many bursts will be allowed. This makes both Windows work.
-	 */  
+	 */
 			case 0x1: /* 30 Hz */
 			case 0x2: /* 50 Hz */
 			case 0x3: /* 100 Hz */
@@ -277,7 +263,6 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 			    {
 				loadsainterrupts--;
 #ifndef PROD
-#line 394
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 398
@@ -292,14 +277,12 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 				break;
 			case 0x5: /* reserved */
 #ifndef PROD
-#line 409
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 413
 				break;
 			case 0x6 :		/* 0 Hz INTR hi */
 #ifndef PROD
-#line 416
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 420
@@ -309,7 +292,6 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 				break;
 			default:
 #ifndef PROD
-#line 426
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 431
@@ -325,7 +307,6 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 		else
 		if ((address_reg & 0x07) == INTERFACE_CONTROL_REG){
 #ifndef PROD
-#line 443
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 448
@@ -345,17 +326,10 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 		address_reg = value;
 	}
 #endif    //NEC_98
-#line 464
 }
 
 #ifdef SEGMENTATION
-#line 467
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 474
 
@@ -365,14 +339,12 @@ int	Delta_x,Delta_y,left,right;
 	if(Delta_x != 0 || Delta_y != 0 || button_left != left || button_right != right)
 	{
 #if defined(NEC_98)
-#line 481
 #error Unsupported platform configuration
 #else    //NEC_98
 #line 484
 		delta_x += Delta_x;
 		delta_y += Delta_y;
 #endif   //NEC_98
-#line 487
 
 		/***
 		Mouse inport registers can only handle one byte
@@ -390,29 +362,20 @@ int	Delta_x,Delta_y,left,right;
 		button_left = left;
 		button_right = right;
 #if defined(NEC_98)
-#line 504
 #error Unsupported platform configuration
 #else    //NEC_98
 #line 512
 		ica_hw_interrupt(AT_CPU_MOUSE_ADAPTER,AT_CPU_MOUSE_INT,1);
 #endif   //NEC_98
-#line 514
 	}
 #if defined(NEC_98)
-#line 516
 #error Unsupported platform configuration
 #endif    //NEC_98
 #line 528
 }
 
 #ifdef SEGMENTATION
-#line 531
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 538
 
@@ -422,7 +385,6 @@ void mouse_init IFN0()
     IU16 p;
 
 #ifndef PROD
-#line 545
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 550
@@ -433,23 +395,19 @@ void mouse_init IFN0()
     io_define_outb(MOUSE_ADAPTOR, mouse_outb);
 
 #if defined(NEC_98)
-#line 557
 #error Unsupported platform configuration
 #else    //NEC_98
 #line 565
     for(p = MOUSE_PORT_START; p <= MOUSE_PORT_END; p++) {
 #endif   //NEC_98
-#line 567
 	io_connect_port(p, MOUSE_ADAPTOR, (IU8)IO_READ_WRITE);
 
 #ifdef KIPPER
-#line 570
 #error Unsupported excluded original configuration
 #endif
 #line 575
 
 #ifndef PROD
-#line 577
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 582

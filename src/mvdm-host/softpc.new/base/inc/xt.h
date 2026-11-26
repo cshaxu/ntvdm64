@@ -29,7 +29,6 @@ typedef enum {EIGHT_BIT, SIXTEEN_BIT, THIRTY_TWO_BIT} SIZE_SPECIFIER;
 
 
 #ifndef TRUE
-#line 32
 #error Unsupported excluded original configuration
 #endif /* ! TRUE */
 #line 35
@@ -40,7 +39,6 @@ typedef enum {EIGHT_BIT, SIXTEEN_BIT, THIRTY_TWO_BIT} SIZE_SPECIFIER;
 #define FAILURE	~SUCCESS
 
 #ifndef	NULL
-#line 42
 #error Unsupported excluded original configuration
 #endif
 #line 44
@@ -50,13 +48,11 @@ typedef enum {EIGHT_BIT, SIXTEEN_BIT, THIRTY_TWO_BIT} SIZE_SPECIFIER;
 #endif
 
 #ifdef SOFTWINDOWS
-#line 50
 #error DIVERGENCE MVDM-HOST-DIV-529: SOFTWINDOWS platform branch is not selected; see mirror register.
 #else
 #line 52
 #define SPC_PRODUCT_NAME "SoftPC"
 #endif
-#line 54
 
 /***********************************************************************\
 * host_gen.h is guarenteed to be included early in every C source file.	*
@@ -77,14 +73,13 @@ typedef enum {EIGHT_BIT, SIXTEEN_BIT, THIRTY_TWO_BIT} SIZE_SPECIFIER;
  */
 
 #ifdef CPU_30_STYLE
-#line 74
 #error Unsupported excluded original configuration
 #else /* CPU_30_STYLE */
 #line 93
 /* ========================================================== */
 
 #ifdef A2CPU
-#line 96
+
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif /* A2CPU */
 #line 104
@@ -95,7 +90,6 @@ extern sys_addr effective_addr IPT2( word, seg, word, ofs);
 
 /* ========================================================== */
 #endif /* CPU_30_STYLE */
-#line 111
 
 
 #ifdef CCPU
@@ -124,7 +118,6 @@ extern CHAR *SPC_Product_Name;		/* "SoftPC" or "SoftWindows"	*/
 
 #ifndef CPU_30_STYLE
 
-#line 139
 extern half_word pf_table[]; /* shouldn't this be in host_cpu.h ? */
 
 #endif /* CPU_30_STYLE */
@@ -134,7 +127,6 @@ extern half_word pf_table[]; /* shouldn't this be in host_cpu.h ? */
  */
  
 #ifdef ANSI
-#line 148
 extern void applInit(int, char *[]);
 extern void applClose(void);
 extern void terminate(void);

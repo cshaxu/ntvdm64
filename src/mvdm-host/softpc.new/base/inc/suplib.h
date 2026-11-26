@@ -26,7 +26,6 @@
 #ifndef PATHSEP_CHAR
 
 #ifdef macintosh
-#line 29
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif
 #line 31
@@ -36,7 +35,6 @@
 #endif
 
 #ifndef PATHSEP_CHAR
-#line 37
 #error Unsupported excluded original configuration
 #endif
 #line 39

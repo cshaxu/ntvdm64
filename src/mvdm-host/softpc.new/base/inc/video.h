@@ -9,8 +9,8 @@
 #define R11_CURS_END	        11
 #define CGA_R12_START_ADDRH	12
 #define CGA_R13_START_ADDRL	13
-#define R14_CURS_ADDRH	        14 
-#define R15_CURS_ADDRL	        15 
+#define R14_CURS_ADDRH	        14
+#define R15_CURS_ADDRL	        15
 
 #define M6845_INDEX_REG         (word)(vd_addr_6845)
 #define M6845_DATA_REG          (word)(vd_addr_6845 + 1)
@@ -39,7 +39,6 @@
 /* 4 full scanlines is the (offset/size) of one text line PER bank */
 #define ONELINEOFF      320
 #endif // !NEC_98
-#line 42
 
 
 /*
@@ -62,7 +61,6 @@
  */
 
 #if defined(NEC_98)
-#line 64
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 134
@@ -81,7 +79,6 @@
 #ifdef EGG
 #define vd_rows_on_screen 0x484
 #else
-#line 149
 #error Unsupported excluded original configuration
 #endif
 #line 151
@@ -147,7 +144,6 @@ IMPORT void vga_int_1C IPT0();
 #ifdef VGG
 #define EGA_FUNC_SIZE	0x1D
 #else
-#line 213
 #error Unsupported excluded original configuration
 #endif
 #line 215
@@ -192,7 +188,6 @@ IMPORT MODE_ENTRY vd_ext_graph_table[];
 #ifdef V7VGA
 #define VD_MAX_MODE	0x69
 #else
-#line 256
 #error Unsupported excluded original configuration
 #endif
 #line 258
@@ -218,7 +213,6 @@ IMPORT MODE_ENTRY vd_ext_graph_table[];
 	((sas_hw_at_no_check(vd_video_mode) >= 0x14) && \
 	(sas_hw_at_no_check(vd_video_mode) < 0x1a)))
 #else
-#line 280
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
 #line 283
@@ -228,7 +222,6 @@ IMPORT MODE_ENTRY vd_ext_graph_table[];
 #ifdef V7VGA
 #define vga_256_mode()		(sas_hw_at_no_check(vd_video_mode) == 19 || (sas_hw_at_no_check(vd_video_mode) > 0x19 && sas_hw_at_no_check(vd_video_mode) < 0x1e))
 #else
-#line 289
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
 #line 291
@@ -263,7 +256,6 @@ IMPORT unsigned char	valid_modes[];
 #ifdef V7VGA
 #define is_v7vga_mode(nm)	((nm >= 0x40 && nm <= 0x45) || (nm >= 0x60 && nm <= 0x69))
 #else
-#line 322
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
 #line 324

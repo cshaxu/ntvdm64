@@ -14,7 +14,7 @@
 ]*/
 
 #ifdef BIT_ORDER1
-#line 17
+
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif /* BIT_ORDER1 */
 #line 394
@@ -393,10 +393,9 @@ typedef	union
 
 /* The Sequencer Registers */
 #ifdef BIT_ORDER1
-#line 769
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif /* BIT_ORDER1 */
-#line 1352
+#line 1355
 
 #ifdef BIT_ORDER2
 struct sequencer
@@ -415,10 +414,9 @@ struct sequencer
 		} as_bfld;
 	} address;
 #else
-#line 1370
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
-#line 1382
+#line 1385
 
 	SEQ_RESET           reset;
 	CLOCKING_MODE       clocking_mode;
@@ -450,10 +448,9 @@ struct crt_controller
 		} as_bfld;
 	} address;
 #else
-#line 1413
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
-#line 1425
+#line 1429
 												 
 	byte horizontal_total;				/* NO - screen trash if wrong value	*/
 	byte horizontal_display_end;			/* YES - defines line length!!		*/
@@ -613,10 +610,9 @@ struct attribute_controller
 		} as_bfld;
 	} palette[EGA_PALETTE_SIZE];
 #else  
-#line 1584
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
-#line 1614
+#line 1620
 
 	AC_MODE_CONTROL	mode_control;
 
@@ -638,10 +634,9 @@ struct attribute_controller
 		} as_bfld;
 	} overscan_color;
 #else  
-#line 1635
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
-#line 1652
+#line 1658
 
 	COLOR_PLANE_ENABLE	color_plane_enable;
 
@@ -957,17 +952,15 @@ struct extensions_controller
 extern void set_v7_fg_latch_byte IPT2(IU8, index, IU8, value);
 #define SET_FG_LATCH(n, val)	set_v7_fg_latch_byte(n, val)
 #else
-#line 1967
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 1974
+#line 1980
 #endif /* V7VGA */
 
 #ifdef GISP_SVGA
-#line 1977
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
-#line 1980
+#line 1986
  
 /* Global data structures to import into modules
  */

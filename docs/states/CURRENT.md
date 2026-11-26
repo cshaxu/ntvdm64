@@ -31,12 +31,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Similar-Issue Sweep | Whole-file harmless restorations, normalized-exact bytes, exclusion framework and diagnostic mappings. |
 ## S8 Ordered Progress
 
-[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 513/851 final-verified,
-338 remain. P8 completed cached full build, dual 13-image publication with 26
+[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 554/851 final-verified,
+297 remain. P9 completed cached full build, dual 13-image publication with 26
 matching hashes, source/line checks, actual MEM/NTVDMD lifecycle and NESticle
 rendered-menu/Escape tests. Commit/push completes this delivery.
-Cumulative non-error reduction is 447 points/1457 lines (P8: 126/690);
-301 newline-only files separately. Next: src/mvdm-host/softpc.new/base/inc/keyboard.h.
+Cumulative non-error reduction is 626 points/2801 lines (P9: 179/1344);
+312 newline-only files separately. Next: src/mvdm-host/softpc.new/base/system/cmosnt.c.
 N004 remains gated on S13; migration stays 39/159.
 ## S7 Closure Record
 

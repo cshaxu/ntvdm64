@@ -69,7 +69,6 @@
 #define PTY_VERBOSE		0x2000000L /* Print Pesudo-terminal messages */
 #define GEN_DRVR_VERBOSE	0x4000000L /* Generic driver messages */
 #ifdef HERC
-#line 72
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
 #line 74
@@ -133,7 +132,6 @@ extern void print_back_trace(void);
 #endif /* DELTA */
 
 #else
-#line 134
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 143

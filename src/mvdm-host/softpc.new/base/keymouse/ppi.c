@@ -15,13 +15,11 @@
  */
 
 #ifdef SCCSID
-#line 18
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 20
 
 #ifdef SEGMENTATION
-#line 22
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 29
@@ -39,9 +37,7 @@
 #include "ios.h"
 #include "ppi.h"
 #include "timer.h"
-#line 43
 #ifndef PROD
-#line 44
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 46
@@ -69,7 +65,6 @@ static half_word ppi_register;
 
 static boolean gate_2_was_low = TRUE;	/* state of timer 2 gate */
 #ifndef NTVDM
-#line 70
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 72
@@ -111,7 +106,6 @@ void ppi_inb IFN2(io_addr, port, half_word *, value)
 
     note_trace2(PPI_VERBOSE, "ppi_inb() - port %x, returning val %x", port, *value);
 #endif   //NEC_98
-#line 110
 }
 
 void ppi_outb IFN2(io_addr, port, half_word, value)
@@ -142,7 +136,6 @@ void ppi_outb IFN2(io_addr, port, half_word, value)
 	 */
 
 #ifndef NTVDM
-#line 140
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 152
@@ -177,11 +170,9 @@ void ppi_outb IFN2(io_addr, port, half_word, value)
     else
 	    note_trace2(PPI_VERBOSE, "ppi_outb() - Value %x to unsupported port %x", value, port);
 #endif   //NEC_98
-#line 183
 }
 
 #ifdef SEGMENTATION
-#line 186
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 193
@@ -198,5 +189,4 @@ void ppi_init IFN0()
 
     ppi_register = 0x00;
 #endif   //NEC_98
-#line 206
 }

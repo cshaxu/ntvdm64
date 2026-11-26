@@ -43,7 +43,7 @@ typedef enum  {
 #define SAS_MAX_TYPE		SAS_DANGEROUS
 
 #else /* CPU_40_STYLE */
-#line 46
+
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif /* CPU_40_STYLE else */
 #line 58
@@ -86,11 +86,9 @@ extern void sas_term IPT0();
 
 #ifdef NTVDM
 #ifdef CCPU
-#line 97
 extern IU8 *c_GetLinAdd IPT1(IU32, lin_addr);
 #define NtGetPtrToLinAddrByte(x) c_GetLinAdd(x)
 #else /* !CCPU */
-#line 100
 extern IU8 *NtGetPtrToLinAddrByte IPT1(IU32, lin_addr);
 #endif /* CCPU */
 #endif /* NTVDM */
@@ -99,11 +97,9 @@ extern IU8 *NtGetPtrToLinAddrByte IPT1(IU32, lin_addr);
  * TEMPORARY FOR NT!!!!!
  */
 
-#line 108
 extern host_addr Start_of_M_area;       /* host addr (char *) of start of M */
 extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #else /* CPU_40_STYLE */
-#line 111
 #error DIVERGENCE MVDM-HOST-DIV-616: unsupported non-CPU40 SAS interface
 #endif /* ! CPU_40_STYLE */
 #line 272
@@ -132,20 +128,18 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 /* Memory bounds for the colour graphics adaptor */
 
 #ifdef BACK_M
-#line 297
+
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 #line 305
 
 #ifndef HERC_REGEN_BUFF
-#line 307
 #define CGA_REGEN_BUFF	0xB8000L
 #define MDA_REGEN_BUFF	0xB0000L
 #define HERC_REGEN_BUFF	0xB0000L
 #endif /* HERC_REGEN_BUFF */
 
 #endif /* BACK_M */
-#line 313
 
 #define CGA_REGEN_START	0xB8000L
 #define CGA_REGEN_END		0xBBFFFL
@@ -172,7 +166,6 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 
 
 #if defined(NEC_98)
-#line 339
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 342
@@ -182,18 +175,15 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #define BIOS2_START_SEGMENT	0xF000L
 #define BIOS2_START_OFFSET 	0xE000L		/* 2nd half of BIOS ROM	*/
 #endif // !NEC_98
-#line 348
 #define	BAD_OP			0xC5		/* filling RAM for the use of */
 
 #if defined(NEC_98)
-#line 351
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 353
 #define	BASIC_ROM		0xFE000L	/* Start of Basic Rom */
 #define ROM_START		0xC0000L	/* Start of Expansion ROM @ 768k */
 #endif // !NEC_98
-#line 356
 
 #define FIXED_DISK_START	0xC8000L	/* Start fixed disk BIOS*/
 #define FIXED_DISK_END		0xCA000L	/* End fixed disk BIOS +1 */
@@ -202,7 +192,6 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #define	START_OFFSET		0xFFF0
 
 #if defined(NEC_98)
-#line 364
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 367
@@ -224,7 +213,6 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #ifndef GISP_SVGA
 #define VIDEO_IO_OFFSET		0xF065
 #else		/* GISP_SVGA */
-#line 385
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA  */
 #line 388
@@ -316,7 +304,6 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #ifndef GISP_SVGA 
 #define EGA_ENTRY_OFF	0x0898
 #else	 	/* GISP_SVGA */
-#line 476
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 #line 478
@@ -562,19 +549,16 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 #ifdef EGG
 #define EGA_ROM_START		0xC0000L	/* start of EGA BIOS ROM */
 #ifdef STINGER
-#line 720
 #error Unsupported excluded original configuration
 #else		/* ~STINGER */
+#line 722
 #ifdef V7VGA
-#line 723
 #define EGA_ROM_END		0xC5000L	/* end of EGA BIOS ROM +1 */
 #else
-#line 725
 #error Unsupported excluded original configuration
 #endif /* V7VGA */
 #line 727
 #endif		/* STINGER */
-#line 728
 #endif		/* EGG */
 
 #ifdef EGG
@@ -592,7 +576,7 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 
 
 #else		/* GISP_SVGA */
-#line 745
+
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
 #line 999
@@ -643,12 +627,12 @@ extern  IHPE    Length_of_M_area;       /* offset of end of M */
 
 /* Union for accessing an entry in the Interrupt Vector table */
 #ifdef BACK_M
-#line 1046
+
 #error Excluded unsupported BACK_M configuration
 #else /* BACK_M */
+#line 1072
 
 #ifdef BIGEND
-#line 1074
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 #line 1084
@@ -667,7 +651,7 @@ typedef union   {
 #endif /* BACK_M */
 
 #if defined(NEC_98)
-#line 1099
+
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 1083
+#line 1246

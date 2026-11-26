@@ -29,7 +29,6 @@
  */
 
 #if defined(NEC_98)
-#line 32
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 43
@@ -38,13 +37,11 @@ extern	void printer_init(int);
 extern	void printer_post(int);
 extern	void printer_status_changed(int);
 #else
-#line 48
 #error Unsupported excluded original configuration
 #endif
 #line 52
 
 #ifdef PS_FLUSHING
-#line 54
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 56
@@ -67,6 +64,5 @@ extern	void printer_status_changed(int);
 extern void printer_is_being_closed(int adapter);
 #endif
 #endif // !NEC_98
-#line 75
 
 #endif

@@ -994,3 +994,68 @@ Registration reconciliation: c_seg.c is S6-P1-final-verified and its latest_sha2
 ### P8 final verification
 
 All 54 current source hashes and logical-line mappings passed. Cached full build and dual 13-image publication passed; all 26 destination hashes match runtime8 (build/t485-s8/p8/published-hashes.json). Actual MEM/NTVDMD lifecycle passed (debug-live/trace.txt); DOS4GW/NESticle rendered menu and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). Documentation governance passed. No Full or ROM gameplay claim. Batch reduction: 126 non-error points/690 lines; cumulative 447/1457. 513/851 final-verified, 338 remain. Commit/push completes P8; S8 remains active.
+
+### P9 headers and keymouse reconciliation
+
+P8 committed and pushed as 25af4b12d; 513 files delivered.
+
+| File under softpc.new/base | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| inc/keyboard.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/lock.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/mouse.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/ppi.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/printer.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/profile.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/quick_ev.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/rom.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/rs232.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/rtc_bios.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/sas.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/sasp.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/sndblst.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/spcfile.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/suplib.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/tape_io.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/timer.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/timestmp.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/tmstrobe.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/trace.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/umb.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/vga_dac.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/vgaports.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/video.h | 1/4 -> 0/0 | Original retained code and exclusions checked |
+| inc/virtual.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/xt.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| inc/yoda.h | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| keymouse/daytona/makefile | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| keymouse/daytona/sources | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| keymouse/dirs | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| keymouse/mouse.c | 5/14 -> 0/0 | Original retained code and exclusions checked |
+| keymouse/ppi.c | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| keymouse/sources.inc | 0/0 -> 0/0 | Original retained code and exclusions checked |
+
+All 33 files passed retained-source and unchanged-exclusion checks against the pinned XP object, plus original logical-line mapping (build/t485-s8/p9-source-check.json and p9/line-check.json). video.h restores trailing spaces on two constant definitions (1 point/4 lines). mouse.c restores five format points/14 lines; no selected statement, declaration or literal changes. Eleven newline-only files restore exact upstream bytes. No product runtime pass is claimed for P9 yet.
+
+546/851 reviewed: 513 delivered, 33 locally complete, 305 remain. Cumulative non-error reduction 453 points/1475 lines (P9 local 6/18); newline-only count 312. Next: base/support/daytona/makefile. P9 contains only format/line reconciliation and accumulates before the next delivery.
+
+### P9 support and DMA formatting
+
+| File under softpc.new/base | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| support/daytona/makefile | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| support/daytona/sources | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| support/dirs | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| support/get_env.c | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| support/ios.c | 12/32 -> 0/0 | Original retained code and exclusions checked |
+| support/sources.inc | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| support/time_day.c | 0/0 -> 0/0 | Original retained code and exclusions checked |
+| system/at_dma.c | 161/1294 -> 0/0 | Original retained code and exclusions checked |
+
+ios.c retained lines compare directly after trimming boundary whitespace. at_dma.c additionally required per-line token comparison after masking comments while preserving newlines and quoted literals; multi-character operators and macro continuation tokens remained identical. The final restored retained text is checked strictly against the pinned original, not merely token-normalized. Existing error directives are unchanged and all retained logical lines map to original lines.
+
+All 41 P9 files pass build/t485-s8/p9-source-check.json and p9/line-check.json. 554/851 reviewed: 513 delivered, 41 local, 297 remain. P9 reduction 179 points/1344 lines; cumulative 626/2801. Newline-only total remains 312. Next: base/system/cmosnt.c. Build/publication/runtime verification pending.
+
+### P9 final verification
+
+All 41 final source hashes, original retained text, unchanged exclusions and logical-line mappings passed. Cached full build and dual 13-image publication passed; 26 destination hashes match runtime9 (build/t485-s8/p9/published-hashes.json). MEM/NTVDMD lifecycle passed, including debug register writeback, allocation rollback and matching task termination (debug-live/trace.txt). DOS4GW/NESticle rendered menu and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). No Full or gameplay claim. Batch reduction 179 non-error points/1344 lines; cumulative 626/2801. 554/851 final-verified, 297 remain. Commit/push completes P9, not S8.
