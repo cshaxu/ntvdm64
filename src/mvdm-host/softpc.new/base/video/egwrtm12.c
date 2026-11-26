@@ -17,7 +17,7 @@ DOCUMENT 			: name and number
 
 RELATED DOCS		: include all relevant references
 
-DESIGNER			: J Maiden 
+DESIGNER			: J Maiden
 
 REVISION HISTORY	:
 First version		: J Maiden, SoftPC 2.0
@@ -59,7 +59,7 @@ SccsID = @(#)ega_wrtm12.c	1.20 3/9/94 Copyright Insignia Solutions Ltd.
 -------------------------------------------------------------------------
 [1.2 DATATYPES FOR [1.1] (if not basic C types)]
 
-	STRUCTURES/TYPEDEFS/ENUMS: 
+	STRUCTURES/TYPEDEFS/ENUMS:
 		
 -------------------------------------------------------------------------
 [1.3 INTERMODULE IMPORTS]
@@ -110,11 +110,11 @@ SIGNALS ISSUED	  :	NONE
 /* [3.1.2 DECLARATIONS]                                                 */
 
 
-/* [3.2 INTERMODULE EXPORTS]						*/ 
+/* [3.2 INTERMODULE EXPORTS]						*/
 
 
 /*
-5.MODULE INTERNALS   :   (not visible externally, global internally)]     
+5.MODULE INTERNALS   :   (not visible externally, global internally)]
 
 [5.1 LOCAL DECLARATIONS]						*/
 
@@ -155,20 +155,63 @@ SIGNALS ISSUED	  :	NONE
 /*
 [7.1 INTERMODULE DATA DEFINITIONS]				*/
 
-#line 156
 #ifdef A_VID
 #line 157
 #error Excluded unsupported original A_VID writer-table profile
 #line 204
 #else
 #line 205
-#if defined(CPU_40_STYLE)
-WRT_POINTERS mode1_handlers, mode2_handlers;
-#else
-#line 205
-#error Excluded unsupported non-CPU40 writer-table profile
-#endif
-#line 256
+VOID	ega_mode1_chn_b_write(ULONG, ULONG);
+VOID	ega_mode1_chn_w_write(ULONG, ULONG);
+VOID	ega_mode1_chn_b_fill(ULONG, ULONG, ULONG);
+VOID	ega_mode1_chn_w_fill(ULONG, ULONG, ULONG);
+VOID	ega_mode1_chn_b_move(ULONG, ULONG, ULONG, ULONG);
+VOID	ega_mode1_chn_w_move(ULONG, ULONG, ULONG, ULONG);
+
+VOID	ega_mode2_chn_b_write(ULONG, ULONG);
+VOID	ega_mode2_chn_w_write(ULONG, ULONG);
+VOID	ega_mode2_chn_b_fill(ULONG, ULONG, ULONG);
+VOID	ega_mode2_chn_w_fill(ULONG, ULONG, ULONG);
+VOID	ega_mode2_chn_b_move IPT4(ULONG, ead, ULONG, eas,
+				 ULONG, count, ULONG, src_flag);
+VOID	ega_mode2_chn_w_move IPT4(ULONG, ead, ULONG, eas,
+				 ULONG, count, ULONG, src_flag);
+
+WRT_POINTERS mode1_handlers =
+{
+      ega_mode1_chn_b_write,
+      ega_mode1_chn_w_write
+
+#ifndef	NO_STRING_OPERATIONS
+	  ,
+      ega_mode1_chn_b_fill,
+      ega_mode1_chn_w_fill,
+      ega_mode1_chn_b_move,
+      ega_mode1_chn_b_move,
+      ega_mode1_chn_w_move,
+      ega_mode1_chn_w_move,
+
+#endif	/* NO_STRING_OPERATIONS */
+
+};
+
+WRT_POINTERS mode2_handlers =
+{
+      ega_mode2_chn_b_write,
+      ega_mode2_chn_w_write
+
+#ifndef	NO_STRING_OPERATIONS
+	  ,
+      ega_mode2_chn_b_fill,
+      ega_mode2_chn_w_fill,
+      ega_mode2_chn_b_move,
+      ega_mode2_chn_b_move,
+      ega_mode2_chn_w_move,
+      ega_mode2_chn_w_move,
+
+#endif	/* NO_STRING_OPERATIONS */
+
+};
 #endif /* A_VID */
 #line 257
 
@@ -208,7 +251,6 @@ fill_alternate_bytes IFN3(byte *, start, byte *, end, byte, value )
 #line 288
 #define first_half(wd)      (wd & 0xff)
 #define sec_half(wd)        ((wd & 0xff00) >> 8)
-#line 290
 #endif
 
 GLOBAL VOID
@@ -238,7 +280,7 @@ fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 
 		*((UTINY *) dest) = sec_half(data);
 	}
-	else 
+	else
 	{
 		while( len-- )
 		{
@@ -282,18 +324,18 @@ ega_mode1_chn_b_write IFN2(ULONG, value, ULONG, offset )
 	if( lsb )	/* odd address, in plane 1 or 3 */
 	{
 		if( getVideoplane_enable() & 2 )
-			EGA_plane01[offset + 1] = get_latch1; 
+			EGA_plane01[offset + 1] = get_latch1;
 
 		if( getVideoplane_enable() & 8 )
-			EGA_plane23[offset + 1] = get_latch3; 
+			EGA_plane23[offset + 1] = get_latch3;
 	}
 	else		/* even address, in plane 0 or 2 */
 	{
 		if( getVideoplane_enable() & 1 )
-			EGA_plane01[offset] = get_latch0; 
+			EGA_plane01[offset] = get_latch0;
 
 		if( getVideoplane_enable() & 4 )
-			EGA_plane23[offset] = get_latch2; 
+			EGA_plane23[offset] = get_latch2;
 	}
 
 	update_alg.mark_byte( offset );
@@ -317,13 +359,13 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
 	if( lsb )	/* odd address, low byte in planes 1 and 3 */
 	{
 		if( getVideoplane_enable() & 2 )
-			EGA_plane01[offset + 1] = get_latch1; 
+			EGA_plane01[offset + 1] = get_latch1;
 
 		if( getVideoplane_enable() & 1 )
 			EGA_plane01[offset + 8] = get_latch0; 
 
 		if( getVideoplane_enable() & 8 )
-			EGA_plane23[offset + 1] = get_latch3; 
+			EGA_plane23[offset + 1] = get_latch3;
 
 		if( getVideoplane_enable() & 4 )
 			EGA_plane23[offset + 8] = get_latch2; 
@@ -331,16 +373,16 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
 	else		/* even address, low byte in planes 0 and 2 */
 	{
 		if( getVideoplane_enable() & 1 )
-			EGA_plane01[offset] = get_latch0; 
+			EGA_plane01[offset] = get_latch0;
 
 		if( getVideoplane_enable() & 2 )
-			EGA_plane01[offset + 1] = get_latch1; 
+			EGA_plane01[offset + 1] = get_latch1;
 
 		if( getVideoplane_enable() & 4 )
-			EGA_plane23[offset] = get_latch2; 
+			EGA_plane23[offset] = get_latch2;
 
 		if( getVideoplane_enable() & 8 )
-			EGA_plane23[offset + 1] = get_latch3; 
+			EGA_plane23[offset + 1] = get_latch3;
 	}
 
 	update_alg.mark_word( offset );
@@ -348,7 +390,6 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
 #line 420
 }
 
-#line 422
 /* used by both byte and word mode1 fill */
 
 LOCAL VOID
@@ -470,7 +511,7 @@ ega_mode1_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 {
 #ifndef NEC_98
   UNUSED(value);
-  
+
   note_entrance0("ega_mode1_chn_b_fill");
 
   ega_mode1_chn_fill( offset, count );
@@ -609,7 +650,6 @@ ega_mode1_chn_w_move IFN4(ULONG, ead, ULONG, eas, ULONG, count, ULONG, src_flag)
 #line 674
 }
 
-#line 676
 VOID
 ega_mode2_chn_b_write IFN2(ULONG, value, ULONG, offset )
 {
@@ -799,7 +839,7 @@ ega_mode2_chn_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	/*
 	 *	Complicated by possibility that only one of a chained pair of
 	 *	planes is write enabled, needing alternate bytes to be written.
-	 */ 
+	 */
 
 	/* starting on odd address makes it difficult, go to next one */
 
@@ -903,7 +943,7 @@ ega_mode2_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	/*
 	 *	Complicated by possibility that only one of a chained pair of
 	 *	planes is write enabled, needing alternate bytes to be written.
-	 */ 
+	 */
 
 	/* starting on odd address makes it difficult, go to next one */
 
@@ -996,7 +1036,6 @@ ega_mode2_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 #line 1056
 }
 
-#line 1058
 LOCAL VOID
 ega_mode2_chn_move_guts IFN8(UTINY *, eas, UTINY *, ead, LONG, count,
 	UTINY *, EGA_plane, ULONG, scratch, ULONG, plane, ULONG, w,
@@ -1206,7 +1245,6 @@ ega_mode2_chn_w_move IFN4(ULONG, ead, ULONG, eas, ULONG, count,
 #line 1252
 }
 
-#line 1254
 #endif
 
 #line 1256

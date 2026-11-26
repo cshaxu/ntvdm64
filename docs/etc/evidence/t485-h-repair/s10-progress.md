@@ -27,9 +27,9 @@ Full remains S13; original guest remains immutable.
 | 14 | softpc.new/base/video/ega_prts.c | 30 | Delivered d4c87dd1d |
 | 15 | softpc.new/base/video/ega_read.c | 7 | Delivered d4c87dd1d |
 | 16 | softpc.new/base/video/ega_vide.c | 308 | Delivered d4c87dd1d |
-| 17 | softpc.new/base/video/ega_writ.c | 5 | Source reviewed; format delivery pending |
-| 18 | softpc.new/base/video/egawrtm0.c | 20 | Source reviewed; P6 delivery pending |
-| 19 | softpc.new/base/video/egwrtm12.c | 30 | Not started |
+| 17 | softpc.new/base/video/ega_writ.c | 5 | Delivered a6ba6aa72 |
+| 18 | softpc.new/base/video/egawrtm0.c | 20 | Delivered a6ba6aa72 |
+| 19 | softpc.new/base/video/egwrtm12.c | 30 | Source reviewed; P7 delivery pending |
 | 20 | softpc.new/base/video/gfx_updt.c | 94 | Not started |
 | 21 | softpc.new/base/video/v7_ports.c | 17 | Not started |
 | 22 | softpc.new/base/video/v7_video.c | 2 | Not started |
@@ -421,3 +421,41 @@ S13;no Windows desktop or legacy block-copy boundary closure is claimed.
 P6 receipt:a6ba6aa72 pushed to origin/main.18/30 reviewed/delivered;705/1060
 points reviewed,355 remain.542 restored/delivered,163 residuals,zero local
 restorations pending. Census907/38800 unchanged. Next egwrtm12.c.
+
+## Mode12 source review
+
+Nineteenth file egwrtm12.c:30 points,18 format restorations,2 original-table
+restorations,10 CHAIN2 scalar residuals. Restore XP205-255 declarations and
+initialized mode1_handlers/mode2_handlers:all providers remain in this unit
+and WRT_POINTERS fields match. ega_writ.c chooses their addresses but CPU40
+installs dynamic C-VID providers through SetWritePointers; this is not a
+reason to delete original tables. No new provider,algorithm or dispatch.
+
+BIOS byte/word callbacks still call mode1/mode2 scalar writers. Current
+plane layout requires guest2->backing8 and odd word1->backing1/8; original
+compact arithmetic yields4 and1/4. Keep ten expressions across both plane
+pairs and logical/simple mode2 paths. Legacy fills/moves are not claimed
+repaired by these scalar changes. All11 original exclusion bodies retained;
+812 matching original non-directive lines have correct logical positions.
+Six redundant straight-section #line directives removed; LF restored.
+
+Non-error diff1/2385 ->51/77 (+50/-2308). Cumulative957/36492 against
+201/102845 (+756/-66353).19/30 files and735/1060 points reviewed;325 remain.
+542 restored/delivered,20 local restorations pending,173 residuals;18 files
+delivered. P7 whole-file table restoration triggers cached build,dual
+publication,C-VID provider fixture,real MEM/NTVDMD and NESticle menu/Escape.
+Full remains S13. Next gfx_updt.c after delivery.
+
+P7 owned build/publication PID10428 started2026-11-26T13:56:32+01:00;
+command/host in build/t485-s10/p7/run.json. Existing C-VID fixture covers
+the selected dynamic provider layout;it is not presented as direct runtime
+coverage of every legacy BIOS callback. Table ABI/provider availability is
+verified by final product compilation and linking. Scalar restoration
+rejection is based on actual caller selection and address-layout evidence.
+
+P7 final verification: cached build and dual publication passed;13 images/26
+hashes match runtime7. Test PID12316 passed actual C-VID selection and layout
+fixture,real MEM/NTVDMD lifecycle and NESticle menu/Escape. Final source hash
+in build/t485-s10/p7/final-source.json;line/metric evidence in source-candidate.json.
+Governance and relative links passed.19 files final-verified;commit/push
+pending. Full remains S13.

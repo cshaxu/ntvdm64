@@ -1,4 +1,4 @@
-path,baseline,before_points,before_lines,current_points,current_lines,excluded,latest_sha256,state
+﻿path,baseline,before_points,before_lines,current_points,current_lines,excluded,latest_sha256,state
 src/mvdm-host/softpc.new/base/cvidc/ev_glue.c,5822d1a00,21,1663,5,102,1,32a317ce6b913df1c09b928649a174928022a52c55cf592f8caf7796345e14e4,measured-not-audit-status
 src/mvdm-host/softpc.new/base/cvidc/evidgen.h,5822d1a00,3,8,3,8,0,265d76076d417af3aed328bb7cdc33bbdb60cebc78994c8401be0a43cda10830,measured-not-audit-status
 src/mvdm-host/softpc.new/base/cvidc/sevid000.c,5822d1a00,10,6270,64,132,0,4cb4b6d74e8411088f2749ae9e478ec8462dd019ffc480d4315d93494b60d667,measured-not-audit-status
@@ -17,7 +17,7 @@ src/mvdm-host/softpc.new/base/video/ega_read.c,5822d1a00,1,1545,76,173,25,aedefb
 src/mvdm-host/softpc.new/base/video/ega_vide.c,5822d1a00,1,5005,117,134,42,5ca34e0d540b0c686e9ed15fd6ad1e2c2b71d32076ab5b9480b04c2c27c87c6c,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/ega_writ.c,5822d1a00,1,1200,55,122,16,126843dadbf562e19c2faf4304059aaca244f426ea0dec47e5fe3c7ec917f502,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/egawrtm0.c,5822d1a00,1,2597,39,54,14,0be71a1589132ca8302ecb36284d7ddbf646dbe48f5150a7bf3207784427a167,measured-not-audit-status
-src/mvdm-host/softpc.new/base/video/egwrtm12.c,5822d1a00,1,2385,1,2385,11,1f73486f89761bf0498b2be76d8dcbf797fab91ec9814b1e613cb88a4e3355cc,measured-not-audit-status
+src/mvdm-host/softpc.new/base/video/egwrtm12.c,5822d1a00,1,2385,51,77,11,fa233315a5b264ea64669454fd8c7ac2ed6d09e576332da5198fab940b9e0d5e,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/gfx_updt.c,5822d1a00,1,9080,1,9080,70,e1168a624a829e284d2e5c4e6b2d474542dfa4382d5990b553906bcf213d1858,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/v7_ports.c,5822d1a00,1,1562,1,1562,1,9b50e59efa523c3b318c385451c3e805f90b53718449563afad8a08ba0423e76,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/v7_video.c,5822d1a00,1,1077,1,1077,4,9a4cea17df339b09e93f96ad398fd55c6cce3722c1d8540bf3f2f2f20916661d,measured-not-audit-status
