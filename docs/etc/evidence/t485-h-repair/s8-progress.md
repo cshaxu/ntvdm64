@@ -1627,3 +1627,9 @@ retains the mandatory integrated Full checkpoint; migration remains 39/159.
 All 851 S8 files are final-verified; commit/push is the remaining delivery step.
 S9 owns the separate 41 CPU/DPMI/BIOS/PIC/LIM/XMS/debug/header files. S8 review
 does not claim those semantic adaptations are resolved.
+### S8 closure receipt
+
+P14 fc9492342 is pushed to origin/main. All 851 assigned files are delivered.
+The final byte-sensitive census and runtime14 verification above are the
+closure evidence. S8 is closed; the owner-approved S9 starts with its separate
+41-file inventory. Migration remains 39/159, with N004 still gated on S13.
