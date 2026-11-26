@@ -12,9 +12,9 @@ frozen point counts as current byte-sensitive diff counts.
 
 | Order | File | Frozen points | State |
 | ---: | --- | ---: | --- |
-| 1 | src/mvdm-host/inc/wowcmdlg.h | 1 | P1 final verified; commit/push pending |
-| 2 | src/mvdm-host/inc/wowkbd.h | 1 | P1 final verified; commit/push pending |
-| 3 | src/mvdm-host/inc/wowkrn.h | 1 | P1 final verified; commit/push pending |
+| 1 | src/mvdm-host/inc/wowcmdlg.h | 1 | Delivered0c20d5b19 |
+| 2 | src/mvdm-host/inc/wowkbd.h | 1 | Delivered0c20d5b19 |
+| 3 | src/mvdm-host/inc/wowkrn.h | 1 | Delivered0c20d5b19 |
 | 4 | src/mvdm-host/inc/wowsnd.h | 2 | Pending |
 | 5 | src/mvdm-host/wow32/isvwow.h | 1 | Pending |
 | 6 | src/mvdm-host/wow32/precomp.h | 3 | Pending |
@@ -118,3 +118,8 @@ Runner16956 completed. These results supersede runtime1 for delivery.
 Current reviewed-file census14/14 vs6/3734: +8 blocks,-3720 lines. No functional
 residual from these three frozen points;14 necessary line anchors remain.
 Commit/push completes this P;Full remains S13.
+
+P1 receipt:0c20d5b19 committed and pushed;3/48 files,3/452 points delivered.
+No local source pending. Final runtime2 tests passed. Documentation gate initially
+failed because this new record lacked the top-level etc index; the receipt
+adds that index and reruns governance before its own commit. No Full claim.
