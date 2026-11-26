@@ -20,7 +20,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 6 | src/mvdm-host/wow32/precomp.h | 3 | P2 delivered 3bb82967a |
 | 7 | src/mvdm-host/wow32/walias.c | 4 | P2 delivered 3bb82967a |
 | 8 | src/mvdm-host/wow32/walias.h | 6 | P3 delivered 952408b8b |
-| 9 | src/mvdm-host/wow32/wcall16.c | 4 | Pending |
+| 9 | src/mvdm-host/wow32/wcall16.c | 4 | P4 final-verified; commit/push pending |
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | Pending |
 | 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | Pending |
 | 12 | src/mvdm-host/wow32/wdde.c | 25 | Pending |
@@ -332,3 +332,60 @@ The ordered list next entry is wcall16.c (four frozen points), not wcall32.c.
 Earlier next-file prose was a naming error; no out-of-order audit is claimed.
 S11 remains active:8/48 files,19/452 points;9 restored,10 owner-review
 residuals,433 unreviewed. Full remains mandatory at S closure.
+
+### P4 wcall16.c entry and line minimization
+
+File9/48: four frozen points HXP-R-04092..04095. Entry byte-sensitive
+non-error census37/98; nine excluded branches remain unchanged. Removed26
+line directives which set exactly the logical number already in effect;
+local census12/72 (-25points/-26lines). Evidence:
+build/t485-s11/p4/line-minimization.json; original bytes preserved in
+build/t485-s11/p4/wcall16.before. No functional changes or build yet.
+
+The real compat/wow_user_task_lifecycle.c callback_enter rejects invalid
+binding and non-resource cleanup admission. Without04092 the public DWORD
+entry returns its input size4; without04093 the BOOL entry reports TRUE.
+The existing wow_public_callback_rejection_fixture directly checks both.
+Production wow32-dll-entry-bridge.c registers the guarded original body;
+normal original cleanup occurs after host_simulate and cannot run on unwind.
+Existing original-frame/abort fixtures exercise that failure boundary.
+The precise kernel-resource whitelist and all remaining anchors still need
+whole-file conclusion before this file is counted audited or built.
+
+Delivered remains8files/19points (9restored,10residual),433unreviewed.
+Including this local format-only change, nine-file census91/4087 ->47/143,
+reduction44points/3944lines; delivered reduction remains19/3918.
+### P4 whole-file conclusion
+
+All four points have a source-backed residual decision, not an approval to
+retain unchanged. Original callback dispatch table at wow16cal.asm:131ff
+and its resource bodies599ff distinguish local/global heap, resource,
+selector/DIB, directory and handle-flag operations from application-procedure
+calls, WinExec and task termination. The cleanup scope additionally requires
+resource_cleanup_live; it is not blanket callback admission during teardown.
+Production extension_provider binds this classification and guarded original
+body. Normal original frame cleanup remains authoritative; exceptional unwind
+uses the existing guard, restoring control only while worker state is active.
+Moving the same guard into another shim or build macro would not simplify it.
+
+463 matching original source lines have exact logical line numbers after
+removing26 redundant anchors. Nine excluded branches unchanged. Non-error
+census37/98 ->12/72; reduction25/26. Source-reviewed9/48files,23/452points:
+9 restored,14 residual owner decisions,429 unreviewed. Final delivered totals
+remain8/48 and19/452 until P4 verification/commit/push. Nine-file cumulative
+census91/4087 ->47/143, net-44/-3944. Cached build/publication runner13672
+started; final runtime6 and targeted contracts/CCPU/real Win16 results pending.
+### P4 final verification
+
+Runtime6 cached full build and dual publication passed;26 publication hashes
+match. Callback extension, original multimedia and public-refusal contracts
+pass. Complete original-frame four phases and eleven abort cases pass; real
+CCPU control/selector/continuation tests pass. Actual Win16 generic-call
+integration passes on runtime6. Final result:build/t485-s11/p4/test-result.txt.
+Earlier fixture compile failures are retained, not product test failures:
+XP uses cStackAlloc16 rather than TDF_INITCALLBACKSTACK. Tests now preserve
+reserved-stack and teardown assertions with that counter. The complete TU's
+unselected stack/common-dialog services fail closed; RTL uses ntdll.lib.
+No product functional modification was introduced to accommodate fixtures.
+Nine files/23 points final-verified;9 restored,14 owner-review residuals,
+429 unreviewed. Census91/4087 ->47/143, reduction44/3944. P4 commit/push pending.

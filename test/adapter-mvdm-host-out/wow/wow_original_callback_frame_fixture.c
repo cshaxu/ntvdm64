@@ -15,6 +15,12 @@ BOOL fWowMode = TRUE;
 /* Link-only storage required by the complete translation unit's GetExePtr16;
  * this fixture never calls that service or claims its cache behavior. */
 HMODCACHE ghModCache[CHMODCACHE];
+/* Unselected services from the complete XP translation unit must never be
+ * mistaken for successful frame behavior in this resolver-only fixture. */
+VPVOID FASTCALL stackalloc16(UINT bytes) { (void)bytes; ExitProcess(94); return 0; }
+VOID FASTCALL StackFree16(UINT bytes) { (void)bytes; ExitProcess(94); }
+VOID Ssync_WOW_CommDlg_Structs(PCOMMDLGTD td, BOOL direction, VPVOID ip)
+{ (void)td; (void)direction; (void)ip; ExitProcess(94); }
 
 POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID) { return &teb; }
 USHORT __cdecl getSP(void) { return sp_value; }
@@ -82,7 +88,7 @@ int __cdecl main(void)
         ZeroMemory(&task,sizeof(task));ZeroMemory(caller,sizeof(*caller));
         ZeroMemory(outbound,sizeof(*outbound));ZeroMemory(returned,sizeof(*returned));
         task.vpStack=source_stack;task.htask16=0x1237;
-        task.dwFlags=TDF_INITCALLBACKSTACK;
+        task.cStackAlloc16=0;
         caller->wTDB=task.htask16;caller->wLocalBP=0x5678;
         resolutions=simulations=errors=0;fail_at=test;ip_value=0x1111;
         __try {

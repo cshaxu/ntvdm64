@@ -47,7 +47,7 @@ foreach(kind IN ITEMS extension mm-body rejection original-frame)
   add_custom_command(OUTPUT "${output}"
     COMMAND "${CMAKE_LINKER}" /nologo /MACHINE:X86 /OPT:REF
       "/out:${output}" "/map:${output}.map" ${objects}
-      kernel32.lib user32.lib legacy_stdio_definitions.lib
+      kernel32.lib user32.lib ntdll.lib legacy_stdio_definitions.lib
     DEPENDS ${providers} ${objects} COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(wow-extension-${kind} DEPENDS "${output}")
 endforeach()

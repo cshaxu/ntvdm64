@@ -14,7 +14,6 @@
 
 
 #include "precomp.h"
-#line 17
 #pragma hdrstop
 
 
@@ -90,7 +89,6 @@ HANDLE LocalReAlloc16(HANDLE hMem, INT cb, WORD wFlags)
 }
 
 #ifndef WOWFASTEDIT
-#line 92
 #error Unsupported excluded original configuration
 #else
 #line 126
@@ -176,7 +174,6 @@ UNLOCK2:
 }
 
 #endif  // WOWFASTEDIT
-#line 208
 
 
 WORD LocalSize16(HANDLE hMem)
@@ -548,9 +545,7 @@ BOOL WOWCallback16Ex(
          PDWORD pdwRetCode
          )
 {
-#line 577
 #ifdef DEBUG
-#line 578
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
 #line 600
@@ -583,36 +578,28 @@ BOOL WOWCallback16Ex(
 
 
 BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
-#line 630
 {
-#line 631
 #ifdef DEBUG
-#line 632
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 696
     register PTD ptd;
     register PVDMFRAME pFrame;
     register PCBVDMFRAME pCBFrame;
-#line 699
     WORD wAX;
     BOOL fComDlgSync = FALSE;
     INT  cStackAlloc16;
     VPVOID   vpCBStack;  // See NOTES in walloc16.c\stackalloc16()
 
 #if FASTBOPPING
-#line 705
 #error Unsupported excluded original configuration
 #else
 #line 706
     USHORT SaveIp;
 #endif
-#line 708
 #ifdef DEBUG
-#line 709
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 711
 
     WOW32ASSERT(iRetID != RET_RETURN && iRetID != RET_DEBUGRETURN);
 
@@ -648,7 +635,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     // Just making sure that this thread matches the current 16-bit task
 
-#line 746
     WOW32ASSERT((pFrame->wTDB == ptd->htask16) ||
                 (ptd->dwFlags & TDF_IGNOREINPUT) ||
                 (ptd->htask16 == 0));
@@ -680,7 +666,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     ptd->cStackAlloc16 = 0;
 
 #ifdef DEBUG
-#line 777
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 781
@@ -709,14 +694,11 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
         pCBFrame->wGenUse1 = (WORD)(DWORD)*pvpReturn;
     }
 
-#line 806
 #ifdef DEBUG
-#line 807
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 842
 
-#line 843
     FREEVDMPTR(pFrame);
     FLUSHVDMPTR(ptd->vpCBStack, sizeof(CBVDMFRAME), pCBFrame);
     FREEVDMPTR(pCBFrame);
@@ -724,32 +706,25 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     // Set up to use the right 16-bit stack for this thread
 
 #if FASTBOPPING
-#line 850
 #error Unsupported excluded original configuration
 #else
-#line 852
     SETVDMSTACK(ptd->vpCBStack);
 #endif
-#line 854
 
     //
     // do the callback!
     //
 
 #if FASTBOPPING
-#line 860
 #error Unsupported excluded original configuration
 #else
 #line 864
     // Time to get the IEU running task-time code again
-#line 865
     SaveIp = getIP();
-#line 866
     host_simulate();
     setIP(SaveIp);
     ptd->vpStack = VDMSTACK();
 #endif
-#line 870
 
     // after return from callback ptd->vpStack will point to PCBVDMFRAME
     ptd->vpCBStack = ptd->vpStack;
@@ -816,7 +791,6 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 
     FREEVDMPTR(pCBFrame);
 
-#line 936
     return TRUE;
 }
 

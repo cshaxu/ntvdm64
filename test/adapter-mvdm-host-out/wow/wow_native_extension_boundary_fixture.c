@@ -7,6 +7,7 @@
 #include "wow_user_native_call.h"
 #include "wow_callback_frame_lease.h"
 #include <stdio.h>
+DWORD WINAPI WK32ICallProc32(PVDMFRAME);
 
 static wow_user_runtime_thread binding;
 static wow_task_order_thread thread;

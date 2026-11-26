@@ -95,7 +95,7 @@ PVOID FASTCALL GetPModeVDMPointerAssert(DWORD address)
 {
     ++resolutions;
     if(resolutions==1)
-        expected_callback=((task.dwFlags&TDF_INITCALLBACKSTACK?task.vpStack:task.vpCBStack)-sizeof(CBVDMFRAME))&~1u;
+        expected_callback=((task.cStackAlloc16==0?task.vpStack:task.vpCBStack)-sizeof(CBVDMFRAME))&~1u;
     if(resolutions==fail_at)RaiseException(0xe4470002,0,0,NULL);
     switch(resolutions){
     case 1:if(address!=source_stack)++errors;return caller;
@@ -111,7 +111,7 @@ void __cdecl host_simulate(void)
     fixture_old_simulate();
     if(fail_at==4){
         cs_value=0x3347;pe_value=0;vm_value=1;cpl_value=0;shared_change=0xabcddcba;
-        if(variant==2)task.dwFlags|=TDF_IGNOREINPUT|TDF_INITCALLBACKSTACK;
+        if(variant==2){task.dwFlags|=TDF_IGNOREINPUT;task.cStackAlloc16=0;}
         if(variant==3)active=FALSE;
         SetLastError(0x7281);RaiseException(0xe4470002,0,0,NULL);
     }
@@ -123,7 +123,8 @@ static void reset_abort(BOOL reserved)
     ZeroMemory(outbound,sizeof(*outbound));ZeroMemory(returned,sizeof(*returned));
     task.vpStack=source_stack;task.htask16=0x1237;
     task.vpCBStack=reserved?source_stack-0x100:0;
-    task.dwFlags=reserved?TDF_FORCETASKEXIT:TDF_INITCALLBACKSTACK;
+    task.dwFlags=reserved?TDF_FORCETASKEXIT:0;
+    task.cStackAlloc16=reserved?1:0;
     caller->wTDB=task.htask16;caller->wLocalBP=0x5678;
     resolutions=simulations=errors=variant=0;active=TRUE;shared_change=0;
     ss_value=HIWORD(source_stack);sp_value=LOWORD(source_stack);ip_value=0x1111;cs_value=0x2467;
@@ -164,9 +165,10 @@ static int abort_case(const char *name)
     }else if(variant==4){
         if(exception!=0xe4470005 || output!=0xdeadbeef || errors)goto wrong;
     }else{
-        DWORD expected_flags=variant==2?old_flags|TDF_IGNOREINPUT|TDF_INITCALLBACKSTACK:old_flags;
+        DWORD expected_flags=variant==2?old_flags|TDF_IGNOREINPUT:old_flags;
         if(exception!=0xe4470002 || errors || output!=0xdeadbeef ||
                 task.vpStack!=source_stack || task.vpCBStack!=old_cursor || task.dwFlags!=expected_flags ||
+                task.cStackAlloc16!=(variant==2?0:(reserved?1:0)) ||
                 ss_value!=HIWORD(source_stack) || sp_value!=LOWORD(source_stack) || ip_value!=0x1111 ||
                 cs_value!=0x2467 || pe_value!=1 || vm_value || cpl_value!=3 ||
                 ((fail_at==1 || fail_at==4) && (shared_change!=0xabcddcba || GetLastError()!=0x7281)))goto wrong;
