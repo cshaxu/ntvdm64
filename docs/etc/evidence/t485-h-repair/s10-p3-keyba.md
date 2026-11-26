@@ -75,3 +75,6 @@ input cases. These are scoped host/device tests, not a new GUI roundtrip claim.
 C-VID fixture, real MEM/NTVDMD exports/debug/lifecycle and NESticle rendered
 menu with Escape hide/restore also passed. Evidence build/t485-s10/p3.
 No original guest or winnt.zip changes. Full remains S13. Commit/push pending.
+
+Delivery receipt:99c8fc6b1 pushed to origin/main after final governance and
+relative-link checks. P3 small-five delivery complete.

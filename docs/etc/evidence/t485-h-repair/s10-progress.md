@@ -12,16 +12,16 @@ Full remains S13; original guest remains immutable.
 | Order | File below src/mvdm-host | Frozen points | State |
 | ---: | --- | ---: | --- |
 | 1 | softpc.new/base/cvidc/ev_glue.c | 4 | Delivered f3dda8496 |
-| 2 | softpc.new/base/cvidc/evidgen.h | 3 | Source reviewed; format-only change awaiting cumulative P2 delivery |
-| 3 | softpc.new/base/cvidc/sevid000.c | 64 | Source reviewed; format-only change awaiting cumulative P2 delivery |
-| 4 | softpc.new/base/cvidc/sevid001.c | 25 | Source reviewed; format-only change awaiting cumulative P2 delivery |
-| 5 | softpc.new/base/cvidc/sevid004.c | 3 | Source reviewed; format-only change awaiting cumulative P2 delivery |
-| 6 | softpc.new/base/cvidc/sevid016.c | 4 | Source reviewed; format-only change awaiting cumulative P2 delivery |
-| 7 | softpc.new/base/cvidc/sevid017.c | 11 | Source reviewed; format-only change awaiting cumulative P2 delivery |
-| 8 | softpc.new/base/cvidc/sevid018.c | 9 | Source reviewed; unchanged; awaiting P2 receipt |
-| 9 | softpc.new/base/cvidc/sevid019.c | 3 | Source reviewed; unchanged; historical block-copy boundary recorded |
-| 10 | softpc.new/base/inc/gvi.h | 5 | Reviewed; four format points restored; one residual; P2 pending |
-| 11 | softpc.new/base/keymouse/keyba.c | 44 | Source reviewed;20 format restorations;P3 pending |
+| 2 | softpc.new/base/cvidc/evidgen.h | 3 | Delivered d406cb610 |
+| 3 | softpc.new/base/cvidc/sevid000.c | 64 | Delivered d406cb610 |
+| 4 | softpc.new/base/cvidc/sevid001.c | 25 | Delivered d406cb610 |
+| 5 | softpc.new/base/cvidc/sevid004.c | 3 | Delivered d406cb610 |
+| 6 | softpc.new/base/cvidc/sevid016.c | 4 | Delivered d406cb610 |
+| 7 | softpc.new/base/cvidc/sevid017.c | 11 | Delivered d406cb610 |
+| 8 | softpc.new/base/cvidc/sevid018.c | 9 | Delivered d406cb610 |
+| 9 | softpc.new/base/cvidc/sevid019.c | 3 | Delivered d406cb610 |
+| 10 | softpc.new/base/inc/gvi.h | 5 | Delivered d406cb610 |
+| 11 | softpc.new/base/keymouse/keyba.c | 44 | Delivered 99c8fc6b1 |
 | 12 | softpc.new/base/keymouse/keybd_io.c | 3 | Not started |
 | 13 | softpc.new/base/video/cga.c | 157 | Not started |
 | 14 | softpc.new/base/video/ega_prts.c | 30 | Not started |
@@ -180,3 +180,7 @@ hashes passed; production controller/PIC90 assertions, four keyboard contracts,
 C-VID, real MEM/NTVDMD and NESticle passed. Eleven files final-verified;
 24 restored frozen points verified (20 in P3),151 evidenced residuals,885
 unreviewed. Commit/push pending. No Full claim.
+
+P3 receipt:99c8fc6b1 committed and pushed to origin/main. Eleven files
+delivered;24 fully restored points delivered,151 residuals await decisions,
+885 unreviewed. Ordered table and master point delivery states synchronized.
