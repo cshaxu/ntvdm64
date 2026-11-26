@@ -1,4 +1,4 @@
-#include "insignia.h" 
+#include "insignia.h"
 #include "host_def.h"
 /*
  * SoftPC Version 2.0
@@ -10,8 +10,8 @@
  *		kbd_inb(port,val)
  *		int port;
  *		half_word *val;
- *				provides the next scan code from the 
- *				keyboard controller (8042), or the 
+ *				provides the next scan code from the
+ *				keyboard controller (8042), or the
  *				status byte of the controller, depending
  *				on the port accessed.
  *		kbd_outb(port,val)
@@ -175,7 +175,7 @@ ULONG LastKbdInt=0;
 //   ----------   ------ ------ ------  ---------------  -----------
 //    94 (0x5E)    0x7C   0x68   0x68   NumPad 0           *94
 //   107 (0x6B)    0x7E   0x6D   0x7B   Nul                *107
-// 
+//
 // See also ..\..\host\src\nt_keycd.c and
 //          ..\..\..\dos\v86\cmd\keyb\keybi9c.asm
 //
@@ -226,7 +226,6 @@ ULONG LastKbdInt=0;
 #endif   //NEC_98
 #line 213
 
-#line 214
 #ifdef REAL_KBD
 #line 215
 #error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register.
@@ -280,7 +279,7 @@ extern BOOL bIgnoreExtraKbdDisable; // To fix HaNa spread sheet IME hot key prob
  * 3 bytes of event data per character).
  */
 
-/* 
+/*
    18.5.92 MG !!! TEMPORARY HACK !!! To fix windows bugs in Notepad and Word,
    set the buffer to 2k. Windows crashes when the keyboard buffer overflows,
    so we delay this for as long as sensible. It will still crash if you type
@@ -326,7 +325,7 @@ void Reset6805and8042(void);
 #endif /* IRET_HOOKS && GISP_CPU */
 #line 305
 
-/* 
+/*
    20.5.92 MG
 
    Real fix for my temporary hack in the last edition of this file.
@@ -470,6 +469,7 @@ static half_word keytypes[127] =
 #line 493
 #error Unsupported platform configuration
 #else // !JAPAN
+#line 496
   0,0,0,0,0,0,0,0,0,6,  /* 50-59 (*56) */
   0,0,1,6,1,6,6,6,6,6,  /* 60-69 */
 #endif // !JAPAN
@@ -653,6 +653,7 @@ static half_word most_set_2_make_codes [127]=
 #line 696
 #error Unsupported platform configuration
 #else // !JAPAN
+#line 700
   0x1b,0x23,0x2b,0x34,0x33,0x3b,0x42,0x4b,0x4c,0x52,0x5d,0x5a,0x12,0x61,0x1a,0x22,		/* 20-2f */
   0x21,0x2a,0x32,0x31,0x3a,0x41,0x49,0x4a,0x51,0x59,0x14,0x00,0x11,0x29,0x11,0x00,		/* 30-3f (*56) */
   0x14,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x70,0x71,0x00,0x00,0x6b,		/* 40-4f */
@@ -750,7 +751,7 @@ static half_word set_3_extra_bk_codes []=
 #endif
 
 static half_word buff_overrun_6805 [4]=
-{ 
+{
   0,0xff,0,0
 };
 
@@ -956,10 +957,9 @@ LOCAL VOID mark_key_codes_6805_buff IFN1(int, start)
 
 /*
  * This function returns the number of keys in the 6805 buffers
- * and also clears down these buffers 
+ * and also clears down these buffers
  */
 
-#line 1169
 GLOBAL int keys_in_6805_buff(int *part_key_transferred)
 {
     int keys_in_buffer = held_event_count;  /* key to yet processed by adapter */
@@ -1097,7 +1097,7 @@ void Reset6805and8042(void)
 LOCAL VOID calc_buff_6805_left IFN0()
 {
 free_6805_buff_size = BUFF_6805_VMAX-((buff_6805_in_ptr - buff_6805_out_ptr) & BUFF_6805_PMASK);
-if (free_6805_buff_size<0) 
+if (free_6805_buff_size<0)
 	{
 	free_6805_buff_size=0;
 	sure_note_trace0(AT_KBD_VERBOSE,"Keyboard buffer full");
@@ -1144,6 +1144,7 @@ half_word *next_free, *extra_ptr, *extra_bk_ptr;
 #error Unsupported platform configuration
 #endif // JAPAN
 
+#line 1338
 sure_note_trace1(AT_KBD_VERBOSE,"Keyboard key set initialisation: key set %d",key_set);
 next_free = scan_codes_temp_area;
 switch (key_set)
@@ -1464,7 +1465,7 @@ if (!keyboard_disabled)
 					anomalous_size=break_sizes[R_SHIFT_ADD];
 					    }
 				    if (scan_code_6805_size+make_sizes[keytype] >free_6805_buff_size)
-					    { 
+					    {
 					    overrun=TRUE;
 					    in_anomalous_state=FALSE;
 					    }
@@ -1498,7 +1499,7 @@ if (!keyboard_disabled)
 					anomalous_size=break_sizes[R_SHIFT_ADD];
 					    }
 				    if (scan_code_6805_size+make_sizes[keytype] >free_6805_buff_size)
-					    { 
+					    {
 					    overrun=TRUE;
 					    in_anomalous_state=FALSE;
 					    }
@@ -1550,7 +1551,7 @@ if (!keyboard_disabled)
 		if (overrun)
 			{
 			if (!sent_overrun)
-				add_to_6805_buff(buff_overrun_6805[key_set], 
+				add_to_6805_buff(buff_overrun_6805[key_set],
 					QUEUED_OUTPUT);
 			sent_overrun=TRUE;
 
@@ -1601,7 +1602,7 @@ if (!keyboard_disabled)
 #endif	/* NTVDM */
 #line 1859
 
-		if (free_6805_buff_size < BUFF_6805_VMAX) 
+		if (free_6805_buff_size < BUFF_6805_VMAX)
 		    {
 		    codes_to_translate();
 		    }
@@ -1641,7 +1642,7 @@ if (!keyboard_disabled)
 #endif
 #line 1893
 	}
-	else 
+	else
 	{
 		key_down_count[key] =  0;
 
@@ -1701,8 +1702,8 @@ if (!keyboard_disabled)
 						add_codes_to_6805_buff(scan_code_6805_size,scan_code_6805_array);
 						}
 					scan_code_6805_size=temp_arr_size;
-					scan_code_6805_array=temp_arr_array;
-					break;
+                                        scan_code_6805_array=temp_arr_array;
+                                        break;
 
 				case 3:
 					temp_arr_size=0;
@@ -1733,8 +1734,8 @@ if (!keyboard_disabled)
 						add_codes_to_6805_buff(scan_code_6805_size,scan_code_6805_array);
 						}
 					scan_code_6805_size=temp_arr_size;
-					scan_code_6805_array=temp_arr_array;
-					break;
+                                        scan_code_6805_array=temp_arr_array;
+                                        break;
 
 				case 4:
 					if (shift_on || ctrl_on || alt_on)
@@ -1813,7 +1814,7 @@ if (!keyboard_disabled)
 				break;
 			} /* end of switch */
 
-		if (free_6805_buff_size < BUFF_6805_VMAX) 
+		if (free_6805_buff_size < BUFF_6805_VMAX)
 			{
 			codes_to_translate();
 			}
@@ -2212,7 +2213,6 @@ LOCAL VOID KbdIntDelay(VOID)
 void KbdEOIHook(int IrqLine, int CallCount)
 {
 
-#line 2446
    if (!bKbdEoiPending)  // sanity
        return;
 
@@ -2221,7 +2221,6 @@ void KbdEOIHook(int IrqLine, int CallCount)
        return;
        }
 
-#line 2454
    bKbdIntHooked = KbdInt09Off != *(word *)(Start_of_M_area+0x09*4) ||
                    KbdInt09Seg != *(word *)(Start_of_M_area+0x09*4+2);
 
@@ -2525,10 +2524,10 @@ else
 #endif    //NEC_98
 #line 2867
 	
-/*Is there a valid code to put in the 8042 output buffer? Values written 
+/*Is there a valid code to put in the 8042 output buffer? Values written
   to the 8042 output buffer as a conseqence of a 8042 command do not
-	generate an interrupt. Output generated by 8042 commands must be presented to 
-	the application at the next INB, failure to do so it likely to result in the 
+	generate an interrupt. Output generated by 8042 commands must be presented to
+	the application at the next INB, failure to do so it likely to result in the
   8042 being placed in an unusable state. */
 
 if (code_to_send_valid)
@@ -2609,7 +2608,6 @@ else
 return (code);
 } /* end of translate_6805_8042 */
 
-#line 2949
 #ifdef HUNTER
 #line 2950
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
@@ -2781,7 +2779,7 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
         sure_note_trace1(AT_KBD_VERBOSE,"scan code read:0x%x",*val);
 
 
-	    // Sloppy keyboard fix is not needed for the NT port. An EOI 
+	    // Sloppy keyboard fix is not needed for the NT port. An EOI
         // hook is used to control priming of the adapter.
 
         }
@@ -2831,7 +2829,7 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
 			keyboard_interface_disabled=FALSE;
 
 		kbd_status &= 0xf7;
-		if (waiting_for_next_8042_code) 
+		if (waiting_for_next_8042_code)
 			cmd_to_8042(val);
 		else
 			cmd_to_6805(val);
@@ -2927,7 +2925,6 @@ GLOBAL VOID AT_kbd_init()
        cmd_byte_8042=0x45;
        op_port_remembered_bits=0xc;
 
-#line 3581
        int_enabled = translating = TRUE;
 
        io_define_inb(AT_KEYB_ADAPTOR, kbd_inb);
@@ -2954,4 +2951,3 @@ GLOBAL VOID AT_kbd_init()
 #line 3603
 #error Unsupported platform configuration
 #endif    //NEC_98
-#line 3242

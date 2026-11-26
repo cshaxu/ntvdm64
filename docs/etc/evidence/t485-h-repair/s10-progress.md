@@ -21,7 +21,7 @@ Full remains S13; original guest remains immutable.
 | 8 | softpc.new/base/cvidc/sevid018.c | 9 | Source reviewed; unchanged; awaiting P2 receipt |
 | 9 | softpc.new/base/cvidc/sevid019.c | 3 | Source reviewed; unchanged; historical block-copy boundary recorded |
 | 10 | softpc.new/base/inc/gvi.h | 5 | Reviewed; four format points restored; one residual; P2 pending |
-| 11 | softpc.new/base/keymouse/keyba.c | 44 | Not started |
+| 11 | softpc.new/base/keymouse/keyba.c | 44 | Source reviewed;20 format restorations;P3 pending |
 | 12 | softpc.new/base/keymouse/keybd_io.c | 3 | Not started |
 | 13 | softpc.new/base/video/cga.c | 157 | Not started |
 | 14 | softpc.new/base/video/ega_prts.c | 30 | Not started |
@@ -163,3 +163,20 @@ then-current state; this receipt supersedes their pending verification state.
 P2 delivery receipt: d406cb610 committed and pushed to origin/main. Ten of30
 files delivered; four frozen points restored and delivered,127 residuals
 await decisions,929 unreviewed. Next keymouse/keyba.c.
+
+## P3 keyba source review
+
+[Whole-file review](s10-p3-keyba.md):1/5452 ->220/308. Twenty format points
+restored;24 functional residuals evidenced.11/30 files,175/1060 points reviewed,
+885 remain. Total486/57002, cumulative+285/-45861. P3 delivery pending.
+
+P3 checkpoint: owned PID1156 completed cached full build and dual publication
+of runtime3. Targeted PID12580 is running controller/PIC, keyboard contracts
+and final-package guest tests. Documentation governance/links passed. No
+P3 test pass or commit/push is claimed yet.
+
+P3 final verification: runtime3 cached build, dual13-image publication and26
+hashes passed; production controller/PIC90 assertions, four keyboard contracts,
+C-VID, real MEM/NTVDMD and NESticle passed. Eleven files final-verified;
+24 restored frozen points verified (20 in P3),151 evidenced residuals,885
+unreviewed. Commit/push pending. No Full claim.

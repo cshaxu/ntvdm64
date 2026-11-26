@@ -32,15 +32,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S10 Ordered Progress
 
-[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):10/30 source-reviewed
-and final-verified;131/1060 points reviewed,929 remain. P1 delivered f3dda8496.
-[P2 verification](../etc/evidence/t485-h-repair/s10-p2-delivery.md): seven
-format/line-only changed files and two unchanged reviews; runtime2 cached
-build, dual13-image publication,26 hashes, C-VID, live MEM/NTVDMD and
-NESticle passed. Four fully restored points verified;127 evidenced residuals
-remain pending decisions. Total201/102863 ->267/62146: +66 exposed points/
--40717 differing lines under original-format approval. P2 delivered and pushed d406cb610.
-Next keymouse/keyba.c. Migration39/159; Full remains S13.
+[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):11/30 source-reviewed;
+175/1060 points reviewed,885 remain. Ten files delivered through P2 d406cb610.
+[P3 keyba review](../etc/evidence/t485-h-repair/s10-p3-keyba.md):1/5452 ->220/308,
+20 format points restored locally and24 functional residuals evidenced.
+Twenty-four points restored/final-verified;151 residuals total. Current census
+201/102863 ->486/57002: +285 exposed blocks/-45861 lines. Whole-file P3 review
+complete; runtime3 cached build and dual publication passed. Targeted runner
+PID12580 completed:controller/PIC90, keyboard contracts,C-VID,MEM/NTVDMD and
+NESticle passed.26 final publication hashes checked. P3 commit/push pending.
+Next keybd_io.c. Migration39/159; Full remains S13.
 
 ## S9 Closure Record
 
