@@ -1,0 +1,12 @@
+{
+  "before": {
+    "blocks": 12,
+    "added": 51,
+    "deleted": 10
+  },
+  "after": {
+    "blocks": 7,
+    "added": 51,
+    "deleted": 5
+  }
+}

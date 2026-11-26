@@ -33,6 +33,11 @@ Revision History:
 #include "softpc.h"
 #include "malloc.h"
 
+extern BOOL VdmFlushCache(USHORT seg, ULONG off, ULONG size, VDM_MODE mode);
+extern VOID setLDT_SELECTOR(USHORT val);
+extern int setLDT_BASE_LIMIT(ULONG base, ULONG limit);
+
+#line 36
 #if !defined(_X86_) || defined(CCPU)
 PDESC_MAPPING pDescMappingHead = NULL;
 #endif // _X86_
@@ -229,6 +234,10 @@ Return Value:
         }
     }
 
+#line 226
+#if defined(_X86_) && !defined(CCPU)
+#error Unsupported native kernel LDT publication
+#endif
 #line 231
 }
 
@@ -243,22 +252,18 @@ FlushSelectorCache(
     DECLARE_LocalVdmContext;
     USHORT SelEnd;
     USHORT Sel;
-#if !defined(CCPU)
     USHORT i;
-#endif
 
-    DBGTRACE(VDMTR_TYPE_DPMI | DPMI_GENERIC, SelStart, SelCount);
+    VdmTraceEvent(VDMTR_TYPE_DPMI | DPMI_GENERIC, SelStart, SelCount);
 
     //
     // The emulator compiles LDT entries, so we need to flush them
     // out
     //
 
-#if !defined(CCPU)
     for (i = 0, Sel = SelStart; i < SelCount; i++, Sel += 8) {
         VdmFlushCache(LdtSel, Sel & SEL_INDEX_MASK, 8, VDM_PM);
     }
-#endif
 
     SelEnd = SelStart + SelCount*8;
 
@@ -486,6 +491,7 @@ Return Value:
     NEXT_FREE_SEL(Sel) = 0xffff;
 
     DpmiCpu40BindDescriptorTables();
+#line 482
 }
 
 VOID DpmiCpu40BindDescriptorTables(VOID)
@@ -524,6 +530,7 @@ VOID DpmiCpu40BindDescriptorTables(VOID)
 
 }
 
+#line 484
 VOID
 DpmiResetLDTUserBase(
     VOID

@@ -30,12 +30,9 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Original Owner Request | Execute the new T485 S repair sequence before resuming N004-G097, without excessive repeated verification. |
 | Similar-Issue Sweep | All exclusion masks, effective guards and selected bodies of each owned file; retain runtime ownership and failure semantics. |
 
-## S7 P1 Checkpoint
+## S7 P2 Checkpoint
 
-[S7 P1](../etc/evidence/t485-h-repair/s7-progress.md): four whole files reviewed
-and final-package verified; sixteen remain, next dpmiselr.c. Non-error mirror
-diff 56/343 to 51/267, minus five points/76 lines. Commit/push completes this
-delivery; S7 remains active.
+[S7 P1/P2](../etc/evidence/t485-h-repair/s7-progress.md): five whole files final-verified; fifteen remain, next dpmi32/i386/dpmi386.c. S7 non-error mirror reduction is ten points/81 lines. Commit/push completes P2; S7 remains active.
 
 ## S6 Closure Record
 

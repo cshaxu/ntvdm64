@@ -142,3 +142,69 @@ original caller ABI and width selection remain. Failure publishes no outputs.
 No queue, second state machine, outer dependency or guest change was added.
 Residual adaptations remain registered for owner review; verified minimization
 does not grant blanket approval to retain them.
+## S7 P2: dpmiselr.c complete local review, verification running
+
+Entry 12 points/61 non-error lines; candidate 7 points/56 lines (-5/-5), including three exact provider prototypes.
+P1 remains four delivered files; this fifth file is local and not delivered.
+R00173/R00174/R00177/R00183 retain original emulator bodies under CCPU:
+host x86 ABI does not provide the native NT kernel VDM descriptor service.
+R00175/R00184 retain the descriptor projections and DOSX binding. Original
+Ldt is a DOSX free-list/construction image, not an architectural process LDT;
+the latter starts empty so free links cannot masquerade as present descriptors.
+GDT0040 is independent of LDT0040 (S6 case186 and real WINMINE evidence).
+The paired shadow allocation is one ExtMemSA allocation; failure returns before
+publishing either address and clears LDTR. No new allocator or owner is added.
+
+R00176 restores the original kernel-publication condition boundary and
+error-only unsupported body; logical original lines226/231 are preserved.
+R00178/R00179/R00181/R00182 remove the extra CCPU guards on the original
+declaration and VdmFlushCache loop. sim32.c's existing provider already
+selects its CCPU/non-CCPU implementation; disabling the call at this caller
+has no established correctness justification.
+R00180 restores original VdmTraceEvent. dbg.c supplies it and gates recording
+on the registered debugger provider and VDM_TRACE_HISTORY. Suppressing it with
+the release DBGTRACE macro was not evidence of necessity.
+
+The local measurements are build/t485-s7/dpmiselr-mirror-diff.json, using
+pinned XP blob e8641305844f909e98746e223cd577272c6437b6. Newly restored
+error-only kernel body is masked against its original paired body, never
+counted as removed product functionality. Build/unit runner PID20512 owns
+build/t485-s7/p2; no runtime or delivery pass is claimed yet.
+The first build and 61 cases passed, but C4013 exposed implicit declarations
+for VdmFlushCache and the two existing LDTR calls. Their actual definitions
+are sim32.c and cvidc/accessfn.c (the latter delegates to c_reg.c); exact
+BOOL/VOID/int and argument prototypes are now declared at this caller.
+No algorithm, wrapper or runtime path is added. Final-code rerun PID20296
+supersedes the first build for acceptance; earlier logs are retained as
+build-before-prototypes.log and unit-before-prototypes.log.
+Final local measurement is 7 points/56 lines, reduction five points/five lines.
+All three implicit-declaration warnings disappeared in the final semantic
+build; 61 cases passed and runtime2 was dual-published. Its real guest tests
+are running. Final line-mapping audit additionally restores original logical
+lines36,482,484 around the local declarations and descriptor binder.
+This changes no selected tokens or behavior. After runtime2 tests complete,
+rebuild and republish that metadata-only correction; owner authorization
+permits retaining the runtime2 behavioral results without another runtime
+cycle for line-only changes. Record this distinction explicitly.
+
+[Current P2 measurements](s7-p2-mirror-diff.json) exclude diagnostic metadata.
+## S7 P2 final verification receipt
+
+Runtime2 passed all 61 CPU cases, real WINMINE, Win3.1 standard/enhanced,
+Win95 strict desktop/Alt+Enter round trips and DOS4GW NESticle menu/Escape.
+Win95 exit1 remains its approved boundary, not exit0 acceptance.
+Only diagnostic #line directives changed afterward; final cached build and
+dual publication produced runtime3. Its 13 images were hash checked at both
+destinations. Runtime2 behavior results are reused only for this line-only
+change under the owner's explicit authorization. No guest binary changed.
+
+Unsupported native-kernel preprocessing rejects at original logical line227.
+The initial copied response file still named dpmi32.c; the corrected response
+names dpmiselr.c and produced the required rejection. No failed experiment is
+counted as product verification.
+
+P2 reduces 12/61 to 7/56, five points/five lines.
+S7 now has five whole-file reviews and final-verified P deliveries out of20;
+fifteen remain, next dpmi32/i386/dpmi386.c. Cumulative S7 reduction10/81;
+including S6 reduction11/82. This record's P commit/push completes delivery.
+The frozen audit population remains1055 and migration remains39/159.
