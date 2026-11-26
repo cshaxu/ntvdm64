@@ -1,0 +1,4 @@
+id,path,repair_state,delivery,remaining_owner,evidence
+HXP-R-00558,src/mvdm-host/softpc.new/base/ccpu386/c_seg.c,restored-final-verified,S6-P1,none,s6-selector-investigation.md
+HXP-R-00175,src/mvdm-host/dpmi32/dpmiselr.c,coupled-fix-final-verified-residual-review,S6-P1,S7,s6-selector-investigation.md
+HXP-R-00184,src/mvdm-host/dpmi32/dpmiselr.c,coupled-fix-final-verified-residual-review,S6-P1,S7,s6-selector-investigation.md

@@ -1,0 +1,1 @@
+SET40 CS=1a7 IP=667a base=400 limit=0 access=f3

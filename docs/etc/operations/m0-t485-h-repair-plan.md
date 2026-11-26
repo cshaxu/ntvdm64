@@ -4,7 +4,7 @@
 
 Owner direction, 2026-11-26: turn the H001-H036 audit findings into ROI-ordered S packets inside the current T, before resuming N004 and later migration. This plan is supporting detail; [Current](../../states/CURRENT.md) alone selects the active S.
 
-Keep T485 S1-S4 history and S5 N001-N003 deliveries unchanged. S5 remains the only active packet and finishes its already admitted P4 DPMI/NTCON repair and published-package verification. Its old N004-N012 remainder moves to S14. Then execute S6-S13 below, followed by S14-S20. Do not start N004 while the repair exit gate is open. This is a split of the current S5 remainder, not an S nested inside another S, and not a new queued T. No S is declared complete by this planning change.
+Keep T485 S1-S4 history and S5 N001-N003 deliveries unchanged. S5 completed its P4 DPMI/NTCON repair and Full23/23. S6 completed the selector ownership repair and targeted published-package verification; S7 is now active. Its old N004-N012 remainder moves to S14. Then execute S6-S13 below, followed by S14-S20. Do not start N004 while the repair exit gate is open. This is a split of the current S5 remainder, not an S nested inside another S, and not a new queued T. No S is declared complete by this planning change.
 
 The [audit handoff](../evidence/t485-h-repair/README.md) persists the 11-file pairing findings, all 4,550 point dispositions and 1,039 file identities. Audit disposition is not repair or unconditional approval: insufficient necessity/minimality evidence remains unfinished investigation to resolve inside its assigned S, not a question handed back to the owner.
 

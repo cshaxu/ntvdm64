@@ -6,6 +6,7 @@
 #include <xt.h>
 #include <ios.h>
 #include <vint.h>
+#include <suballoc.h>
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
 #include "compat/include/mvdm_softpc_ccpu_wait.h"
@@ -907,6 +908,57 @@ static int monitor_tib_contract(void)
     return 1;
 }
 
+/* Real CCPU descriptor loads: DOSX's fixed carrier must not shadow a guest GDT. */
+static NTSTATUS committed_selector_memory(ULONG base,ULONG bytes)
+{
+    if(base<0x110000 || bytes>0x40000 || base-0x110000>0x40000-bytes)return -1;
+    return VirtualAlloc((void *)(IntelBase+base),bytes,MEM_COMMIT,PAGE_READWRITE) ? 0 : -1;
+}
+static int dosx_bios_selector(void)
+{
+    extern void DpmiCpu40BindDescriptorTables(void);
+    extern void SetShadowDescriptorEntries(USHORT, USHORT);
+    extern PVOID ExtMemSA;
+    extern void xmsMoveMemory(ULONG,ULONG,ULONG);
+    extern LDT_ENTRY *Ldt;
+    extern USHORT LdtMaxSel;
+    extern ULONG Cpu40GdtShadowAddress, Cpu40LdtShadowAddress;
+    extern ULONG c_getDS_BASE(void), c_getDS_LIMIT(void);
+    ULONG *guest=(ULONG *)c_GetPhyAdd(0x4000);
+    ZeroMemory(guest,0x100);
+    guest[0x40/4]=0x00001234; guest[0x44/4]=0x0000f205;
+    c_setPE(1);c_setCPL(0);c_setGDT_BASE_LIMIT(0x4000,0xff);
+    c_setDS(0x40);
+    if(c_getDS_BASE()!=0x50000 || c_getDS_LIMIT()!=0x1234)return 0;
+    IntelBase=(ULONG)c_GetPhyAdd(0);
+    c_sas_disable_20_bit_wrapping();
+    Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x5000);LdtMaxSel=0xf8;
+    ZeroMemory(Ldt,0x100);
+    FillMemory(&Ldt[0x40>>3],sizeof(LDT_ENTRY),0xc5);
+    Cpu40GdtShadowAddress=Cpu40LdtShadowAddress=0;
+    /* Commit only the bounded pool within this fixture's SAS reservation. */
+    ExtMemSA=SAInitialize(0x110000,0x40000,committed_selector_memory,
+        committed_selector_memory,xmsMoveMemory);
+    if(!ExtMemSA)return 0;
+    DpmiCpu40BindDescriptorTables();
+    if(!Cpu40GdtShadowAddress)return 0;
+    c_setGDT_BASE_LIMIT(Cpu40GdtShadowAddress,0xff);c_setCPL(3);
+    c_setDS(0x40);
+    if(c_getDS_BASE()!=0x400 || c_getDS_LIMIT()!=0xffff ||
+        Ldt[0x40>>3].BaseLow!=0xc5c5)return 0;
+    /* A real WOW update of LDT 0047 must not overwrite fixed GDT 0040. */
+    Ldt[0x40>>3] = ((LDT_ENTRY *)(IntelBase+Cpu40GdtShadowAddress))[0x40>>3];
+    Ldt[0x40>>3].LimitLow=0;
+    SetShadowDescriptorEntries(0x40,1);
+    c_setDS(0x40);
+    if(c_getDS_BASE()!=0x400 || c_getDS_LIMIT()!=0xffff ||
+        ((LDT_ENTRY *)(IntelBase+Cpu40LdtShadowAddress))[0x40>>3].LimitLow!=0)return 0;
+    c_setGDT_BASE_LIMIT(0x4000,0xff);
+    c_setDS(0x40);
+    if(c_getDS_BASE()!=0x50000 || c_getDS_LIMIT()!=0x1234)return 0;
+    report("PASS DOSX BIOS descriptor publication and original guest GDT0040 ownership\n");
+    return 1;
+}
 int main(int argc, char **argv) {
     session owner;
     int ok;
@@ -921,7 +973,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();c_cpu_init();
-    if(test_case==185) ok=dpmi_ownership_rejection();
+    if(test_case==186) ok=dosx_bios_selector();
+    else if(test_case==185) ok=dpmi_ownership_rejection();
     else if(test_case==183) ok=dpmi_irq_boundary();
     else if(test_case==182) ok=dpmi_decode_boundaries();
     else if(test_case==181) ok=dpmi_scalar_matrix();

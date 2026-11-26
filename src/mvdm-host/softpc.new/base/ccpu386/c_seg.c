@@ -250,14 +250,6 @@ IFN2(
    else
       {
       /* Protected Mode */
-      if (selector == 0x0040u)
-	 {
-	 SET_SR_SELECTOR(indx, selector);
-	 SET_SR_BASE(indx, 0x00000400u);
-	 load_pseudo_descr(indx);
-	 SET_SR_AR_DPL(indx, 3);
-	 }
-      else
 #line 246
       if ( selector_is_null(selector) )
 	 {

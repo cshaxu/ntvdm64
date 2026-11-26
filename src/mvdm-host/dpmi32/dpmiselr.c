@@ -219,7 +219,8 @@ Return Value:
             FlatAddress[Sel >> 3] = Base;
             if (Cpu40LdtShadowAddress)
                 ((PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress))[Sel >> 3] = Ldt[Sel >> 3];
-            if (Cpu40GdtShadowAddress)
+            /* GDT 0040 is host-owned, independent of the same LDT index. */
+            if (Cpu40GdtShadowAddress && Sel != 0x40)
                 ((PLDT_ENTRY)(IntelBase + Cpu40GdtShadowAddress))[Sel >> 3] = Ldt[Sel >> 3];
 #line 220
 #if DBG
@@ -503,6 +504,12 @@ VOID DpmiCpu40BindDescriptorTables(VOID)
         Cpu40LdtShadowAddress = Address + LDT_SIZE * sizeof(LDT_ENTRY);
         RtlCopyMemory((PVOID)(IntelBase + Cpu40GdtShadowAddress), Ldt,
             (LdtMaxSel & SEL_INDEX_MASK) + sizeof(LDT_ENTRY));
+        /* NT supplies fixed GDT 0040 before DOSX's early FSTI. Publish it
+         * only in our DOSX shadow; the reserved source slot is uninitialized. */
+        {
+            static const LDT_ENTRY BiosData = {0xffff, 0x0400, {{0, STD_DATA, 0, 0}}};
+            ((PLDT_ENTRY)(IntelBase + Cpu40GdtShadowAddress))[0x40 >> 3] = BiosData;
+        }
         /* DOSX/KRNL386's Ldt stores free-selector links in unused entries.
          * In CCPU those words would cause #GP instead of a not-present fault.
          * The process LDT starts empty; the existing descriptor setters fill it. */

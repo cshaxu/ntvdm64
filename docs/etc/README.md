@@ -2033,3 +2033,5 @@ post-publication targeted checks.
 - [N003 XP RTL migration](evidence/t485-s1/n003.md).
 
 - [S5 P4 DPMI ownership and fullscreen verification](evidence/t485-s1/s5-p4-dpmi-ownership.md).
+
+- [T485 S6 selector ownership repair](evidence/t485-h-repair/s6-selector-investigation.md).

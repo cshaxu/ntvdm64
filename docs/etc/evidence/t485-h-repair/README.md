@@ -15,3 +15,7 @@ This is an audit handoff, not repair acceptance. All points have a classificatio
 The owner now assigns repair to the [ROI-ordered S plan](../../operations/m0-t485-h-repair-plan.md), ahead of N004. [Files](files.csv) carry source hashes and exclusive primary S ownership; [points](points.csv) carry every original ID, file/line anchor, necessity, minimality and evidence locator. [Assignment counts](assignment-summary.json) check coverage. Point line anchors refer to the audit snapshot; locate latest code by source identity and content rather than blindly applying old physical lines.
 
 The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that delta without changing it. New changes since the audit must be requalified when their file starts; preserve in-flight S5 P4 and unrelated work. Later exact source/receipt identities belong in repair delivery records and the current register, not rewritten into historical test results.
+
+[S6 selector investigation](s6-selector-investigation.md) records the final repair, failed controls and S6 delivery validation.
+
+[Repair ledger](repair-ledger.csv) overlays the frozen audit IDs with current implementation and residual-review status. [S6 setter trace](s6-setter-trace.txt) records the actual zero-limit publication counterexample.
