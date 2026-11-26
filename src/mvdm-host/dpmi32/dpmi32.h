@@ -658,6 +658,9 @@ BuildStackFrame(
     ULONG *pNewSP
     );
 
+BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame,
+    PUCHAR *pVdmStackPointer, ULONG *pNewSP);
+
 VOID
 EmulateV86Int(
     UCHAR InterruptNumber

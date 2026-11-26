@@ -24,8 +24,6 @@ Revision History:
 #pragma hdrstop
 #include "softpc.h"
 #include <intapi.h>
-extern void setLDT_SELECTOR(USHORT val);
-extern int setLDT_BASE_LIMIT(ULONG base, ULONG limit);
 
 //
 // DPMI dispatch table
@@ -302,12 +300,12 @@ Notes:
 
     // Only 1 bit defined in dpmi
     CurrentAppFlags = getAX() & DPMI_32BIT;
-#line 247
-#if defined(i386)
-#line 248
-#error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
+#line 304
+#if defined(_X86_) && !defined(CCPU)
+#line 305
+#error DIVERGENCE MVDM-HOST-DIV-619: unsupported x86 kernel VDM host path
 #endif
-#line 253
+#line 310
 
     DpmiInitRegisterSize();
 

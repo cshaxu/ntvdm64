@@ -1,0 +1,46 @@
+[
+  {
+    "path": "src/mvdm-host/dpmi32/dpmi32.c",
+    "before": {
+      "points": 5,
+      "lines": 14
+    },
+    "after": {
+      "points": 4,
+      "lines": 12
+    }
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmi32.h",
+    "before": {
+      "points": 7,
+      "lines": 12
+    },
+    "after": {
+      "points": 8,
+      "lines": 15
+    }
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/stack.c",
+    "before": {
+      "points": 0,
+      "lines": 0
+    },
+    "after": {
+      "points": 4,
+      "lines": 18
+    }
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "before": {
+      "points": 44,
+      "lines": 317
+    },
+    "after": {
+      "points": 35,
+      "lines": 222
+    }
+  }
+]

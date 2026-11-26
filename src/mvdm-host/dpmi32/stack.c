@@ -165,6 +165,19 @@ BuildStackFrame(
     PUCHAR *pVdmStackPointer,
     ULONG *pNewSP
     )
+{
+    return BuildStackFrameWithWidth(StackUnits, CurrentAppFlags != 0,
+        pVdmStackPointer, pNewSP);
+}
+
+BOOL
+BuildStackFrameWithWidth(
+    ULONG StackUnits,
+    BOOL WideFrame,
+    PUCHAR *pVdmStackPointer,
+    ULONG *pNewSP
+    )
+#line 168
 /*++
 
 Routine Description:
@@ -226,7 +239,7 @@ Notes:
         VdmSp = getSP();
     }
 
-    if (CurrentAppFlags) {
+    if (WideFrame) {
         StackOffset = StackUnits*sizeof(DWORD);
     } else {
         StackOffset = StackUnits*sizeof(WORD);
@@ -242,14 +255,17 @@ Notes:
         rc = FALSE;
     }
 
-    *pNewSP = NewSP;
+    if (!rc) return FALSE;
     VdmStackPointer = VdmMapFlat(SegSs, VdmSp, VDM_PM);
+    if (!VdmStackPointer) return FALSE;
+    *pNewSP = NewSP;
     *pVdmStackPointer = VdmStackPointer;
     return rc;
 
 }
 
 
+#line 253
 VOID
 EmulateV86Int(
     UCHAR InterruptNumber

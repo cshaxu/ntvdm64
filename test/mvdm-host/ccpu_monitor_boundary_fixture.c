@@ -914,6 +914,40 @@ static NTSTATUS committed_selector_memory(ULONG base,ULONG bytes)
     if(base<0x110000 || bytes>0x40000 || base-0x110000>0x40000-bytes)return -1;
     return VirtualAlloc((void *)(IntelBase+base),bytes,MEM_COMMIT,PAGE_READWRITE) ? 0 : -1;
 }
+/* Exercise the shared original calculator, independent frame/stack widths,
+ * original ABI wrapper, and rejected frames without output/state mutation. */
+static int dpmi_shared_stack_frame(void)
+{
+    extern ULONG c_getESP(void);
+    extern BOOL BuildStackFrame(ULONG, PUCHAR *, PULONG);
+    extern BOOL BuildStackFrameWithWidth(ULONG, BOOL, PUCHAR *, PULONG);
+    unsigned big, wide, app;
+    PUCHAR pointer;
+    ULONG next;
+    for (big=0; big<2; ++big) for (wide=0; wide<2; ++wide)
+        for (app=0; app<2; ++app) {
+            dpmi_scalar_setup(FALSE, 0xffff);
+            Ldt[4].HighWord.Bits.Default_Big=big;
+            c_setSS(0x27); c_setESP(0x800); CurrentAppFlags=(USHORT)app;
+            if (!BuildStackFrameWithWidth(3, wide, &pointer, &next) ||
+                next != 0x800-3*(wide ? 4 : 2) ||
+                pointer != c_GetPhyAdd(0x800) || c_getESP()!=0x800 ||
+                CurrentAppFlags!=app) return 0;
+            if (!BuildStackFrame(3, &pointer, &next) ||
+                next != 0x800-3*(app ? 4 : 2)) return 0;
+        }
+    pointer=(PUCHAR)1; next=0x1234;
+    c_setESP(4);
+    if (BuildStackFrameWithWidth(3, TRUE, &pointer, &next) ||
+        pointer!=(PUCHAR)1 || next!=0x1234 || c_getESP()!=4) return 0;
+    Ldt[4].BaseLow=0; Ldt[4].HighWord.Bytes.BaseMid=0x30;
+    c_setSS(0x27); c_setESP(0x800);
+    if (BuildStackFrameWithWidth(3, TRUE, &pointer, &next) ||
+        pointer!=(PUCHAR)1 || next!=0x1234 || c_getESP()!=0x800) return 0;
+    report("PASS shared DPMI frame widths, original wrapper and rejection contract\n");
+    return 1;
+}
+
 static int dosx_bios_selector(void)
 {
     extern void DpmiCpu40BindDescriptorTables(void);
@@ -973,7 +1007,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();c_cpu_init();
-    if(test_case==186) ok=dosx_bios_selector();
+    if(test_case==187) ok=dpmi_shared_stack_frame();
+    else if(test_case==186) ok=dosx_bios_selector();
     else if(test_case==185) ok=dpmi_ownership_rejection();
     else if(test_case==183) ok=dpmi_irq_boundary();
     else if(test_case==182) ok=dpmi_decode_boundaries();

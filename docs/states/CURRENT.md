@@ -14,21 +14,28 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | --- | --- |
 | Identifier Mode | M0 T485 S7, Ordinary Mode |
 | Candidate Proposal | [XP migration](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) and [H repair plan](../etc/operations/m0-t485-h-repair-plan.md) |
-| Admission And Approval | Owner ordered continuous execution of S6-S13 before N004. S6 final package passed its admitted gates; S7 now begins its nineteen-file structural repair. |
-| Objective | Repair the nineteen exclusion-pairing and adjacent files in relative-path order; finish every retained difference, preserve P4/S6 fixes, minimize non-error mirror points and lines. |
+| Admission And Approval | Owner ordered continuous execution of S6-S13 before N004. S6 final package passed its admitted gates; S7 now begins its twenty-file structural repair. |
+| Objective | Repair the twenty exclusion-pairing and adjacent files in relative-path order; finish every retained difference, preserve P4/S6 fixes, minimize non-error mirror points and lines. |
 | Reference Baseline | S6 P1 package and targeted results linked in S6 closure; preceding S5 P4 Full 23/23; [audit handoff](../etc/evidence/t485-h-repair/README.md), pinned XP SP1 and three-way migration ledger. |
 | Verification | Cached full build, dual hash-verified publication, targeted selected-preprocessor/ABI and affected runtime tests; commit/push per substantive complete-file batch. Check original guards/order, unsupported arms and non-overlapping masks. Full follows the admitted cadence. |
 | Constraints | Preserve guest binaries, latest P4 fixes, original ownership, exclusion frameworks and diagnostic lines; minimal non-error mirror diff and layer dependencies. Preserve unrelated work. |
 | Non-goals | No N004 implementation before S13 closure; no blanket removal of required selector compatibility, guest patch or new state machine. |
-| Files And ABI Surface | Nineteen files assigned S7 in the H repair files.csv; 1,055 frozen audit points. Start dpmi32/dpmi32.c, then its ordered DPMI/header/input/video/WOW files and necessary coupled providers. |
+| Files And ABI Surface | Twenty files assigned S7 in the H repair files.csv; 1,055 frozen audit points. Start dpmi32/dpmi32.c, then its ordered DPMI/header/input/video/WOW files and necessary coupled providers. |
 | Applicable Rules | Execution, architecture, coding and source policies listed by docs/README.md. |
 | Expected Markers | Original condition ordering, error-only excluded bodies and correct diagnostic lines; retained semantic differences have actual provider evidence and final-package targeted validation. |
 | Asset Needs | Fixed XP source, audit control receipts and existing immutable guest fixtures. |
 | Reporting Requirements | Entry brief, file/function scope, three-way necessity evidence; before/after non-error mirror points and lines, exact tests, publication and delivery status. |
 | Stop Conditions | Unresolved failure of the selected CPU profile or scope outside admitted provider closure. |
-| Exit Criteria | All nineteen assigned files and points resolved; required cached build, dual publication, targeted tests and commit/push per substantive delivery; handoff to S8. |
+| Exit Criteria | All twenty assigned files and points resolved; required cached build, dual publication, targeted tests and commit/push per substantive delivery; handoff to S8. |
 | Original Owner Request | Execute the new T485 S repair sequence before resuming N004-G097, without excessive repeated verification. |
 | Similar-Issue Sweep | All exclusion masks, effective guards and selected bodies of each owned file; retain runtime ownership and failure semantics. |
+
+## S7 P1 Checkpoint
+
+[S7 P1](../etc/evidence/t485-h-repair/s7-progress.md): four whole files reviewed
+and final-package verified; sixteen remain, next dpmiselr.c. Non-error mirror
+diff 56/343 to 51/267, minus five points/76 lines. Commit/push completes this
+delivery; S7 remains active.
 
 ## S6 Closure Record
 

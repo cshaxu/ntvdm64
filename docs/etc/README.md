@@ -2035,3 +2035,5 @@ post-publication targeted checks.
 - [S5 P4 DPMI ownership and fullscreen verification](evidence/t485-s1/s5-p4-dpmi-ownership.md).
 
 - [T485 S6 selector ownership repair](evidence/t485-h-repair/s6-selector-investigation.md).
+
+[S7 ordered repair progress](evidence/t485-h-repair/s7-progress.md) separates local review, pending verification and delivery.

@@ -151,9 +151,11 @@ Routine Description:
 
     DBGTRACE((USHORT)(VDMTR_TYPE_DPMI_SI | IntNumber), Sel, Offset);
 
+#line 116
 #if defined(_X86_) && !defined(CCPU)
 #error Unsupported kernel VDM interrupt registration
-#endif
+#endif      //_X86_
+#line 135
 
     return TRUE;
 }
@@ -344,6 +346,7 @@ Arguments:
         setESP(getESP() + 8);
 
     } else {
+
         USHORT FrameSS, FrameSP, FrameCS, FrameIP, FrameFlags;
         FrameSS = *(PWORD16) (VdmStackPointer+14);
         FrameCS = *(PWORD16) (VdmStackPointer+8);
@@ -487,9 +490,11 @@ Notes:
 
     LockedPMStackSel = getES();
     LockedPMStackCount = 0;
+#line 470
 #if defined(_X86_) && !defined(CCPU)
 #error Excluded unsupported i386 kernel VDM stack publication
 #endif
+#line 473
 }
 
 /* DOSX initialization alone does not grant ownership of a guest VMM's CPU. */
@@ -503,7 +508,6 @@ DpmiOwnsContext(VOID)
         Cpu40LdtShadowAddress && c_getLDT_BASE() == Cpu40LdtShadowAddress;
 }
 
-static BOOL BuildStackFrameWithWidth(ULONG, BOOL, PUCHAR *, ULONG *);
 BOOL
 DpmiSwIntHandler(
     ULONG IntNumber
@@ -583,9 +587,12 @@ Return Value:
         }
         setESP(NewSP);
         setCS(Handlers[IntNumber].CsSelector);
+
+#line 555
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 564
     }
 
     DBGTRACE(VDMTR_TYPE_DPMI | DPMI_DISPATCH_INT, (USHORT)IntNumber, 0);
@@ -703,12 +710,15 @@ Routine Description:
     } else {
         VdmStackPointer += getSP();
     }
+
     //
     // Fast iret (without executing final 16-bit iret)
     //
+#line 682
 #if defined(_X86_) && !defined(CCPU)
 #error Excluded unsupported i386 kernel VDM interrupt return
 #else
+#line 710
     if (EndUseLockedPMStack()) {
         ULONG NewEIP, NewEFLAGS, NewCS;
 
@@ -724,9 +734,11 @@ Routine Description:
         // Pass 6 to BuildStackFrame since 6 words = 3 dwords
         //
         if (!BuildStackFrame(6, &VdmStackPointer, &NewSP)) {
+#line 725
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 728
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
         }
@@ -789,9 +801,11 @@ Routine Description:
     } else {
         VdmStackPointer += getSP();
     }
+#line 791
 #if defined(_X86_) && !defined(CCPU)
 #error Excluded unsupported i386 kernel VDM interrupt return
 #else
+#line 815
     if (EndUseLockedPMStack()) {
         ULONG NewEIP, NewCS, NewEFLAGS;
 
@@ -801,9 +815,11 @@ Routine Description:
 
 
         if (!BuildStackFrame(3, &VdmStackPointer, &NewSP)) {
+#line 824
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 827
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
         }
@@ -903,6 +919,7 @@ Return Value:
     // Win31 has an undocumented feature of creating a 32byte area on the
     // stack. Krnl386 sticks stuff in there, so we emulate the behavior here.
     //
+
     setESP(getESP()-0x20);
 
     //
@@ -912,10 +929,8 @@ Return Value:
     if (!BuildStackFrame(8, &VdmStackPointer, &NewSP)) {
         //BUGBUG Check for double fault
         EndUseLockedPMStack();
-#if defined(CPU_40_STYLE) && defined(CCPU)
         /* EndUseLockedPMStack restores the outer stack only at depth 0. */
         setESP(SaveESP);
-#endif
         return FALSE;
     }
 
@@ -943,11 +958,14 @@ Return Value:
         setEIP(LOWORD(Handlers[IntNumber].Eip));
         setSP((WORD)NewSP);
     }
+
     setCS(Handlers[IntNumber].CsSelector);
 
+#line 969
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 978
 
     DBGTRACE(VDMTR_TYPE_DPMI | DPMI_DISPATCH_FAULT, (USHORT)IntNumber, 0);
     return TRUE;
@@ -982,7 +1000,9 @@ Routine Description:
     } else {
         VdmStackPointer += getSP();
     }
+
     EndUseLockedPMStack();
+
     setEIP((DWORD)*(PWORD16)(VdmStackPointer+2));
     setCS(*(PWORD16)(VdmStackPointer+4));
     setSTATUS(*(PWORD16)(VdmStackPointer+6));
@@ -1031,89 +1051,6 @@ Routine Description:
 }
 
 
-static BOOL
-BuildStackFrameWithWidth(
-    ULONG StackUnits,
-    BOOL WideFrame,
-    PUCHAR *pVdmStackPointer,
-    ULONG *pNewSP
-    )
-/*++
-
-Routine Description:
-
-    This routine builds stack frames for the caller. It figures if it needs
-    to use a 16 or 32-bit frame, and adjusts SP or ESP appropriately based
-    on the number of "stack units". It also returns a flat pointer to the
-    top of the frame to the caller.
-
-Arguments:
-
-    StackUnits = number of registers needed to be saved on the frame. For
-                 example, 3 is how many elements there are on an iret frame
-                 (flags, cs, ip)
-
-Return Value:
-
-    This function returns TRUE on success, FALSE on failure
-
-    VdmStackPointer - flat address pointing to the "top" of the frame
-
-Notes:
-
-    BUGBUG This routine doesn't check for stack faults or 'UP' direction
-           stacks
---*/
-
-{
-    USHORT SegSs;
-    ULONG VdmSp;
-    PUCHAR VdmStackPointer;
-    ULONG StackOffset;
-    ULONG Limit;
-    ULONG SelIndex;
-    ULONG NewSP;
-    BOOL bExpandDown;
-
-    SegSs = getSS();
-    SelIndex = (SegSs & ~0x7)/sizeof(LDT_ENTRY);
-
-    Limit = (ULONG) (Ldt[SelIndex].HighWord.Bits.LimitHi << 16) | 
-                     Ldt[SelIndex].LimitLow;
-
-    if (Ldt[SelIndex].HighWord.Bits.Granularity) {
-        Limit = (Limit << 12) | 0xfff;
-    }
-    if (Limit != 0xffffffff) Limit++;
-
-
-    if (Ldt[SelIndex].HighWord.Bits.Default_Big) {
-        VdmSp = getESP();
-    } else {
-        VdmSp = getSP();
-    }
-    if (WideFrame) {
-        StackOffset = StackUnits*sizeof(DWORD);
-    } else {
-        StackOffset = StackUnits*sizeof(WORD);
-    }
-
-    NewSP = VdmSp - StackOffset;
-    bExpandDown = (BOOL) (Ldt[SelIndex].HighWord.Bits.Type & 4);
-    if ((StackOffset > VdmSp) || 
-        (!bExpandDown && (VdmSp > Limit)) ||
-        (bExpandDown && (NewSP < Limit))) {
-        // failed limit check
-        return FALSE;
-    }
-
-    *pNewSP = NewSP;
-    VdmStackPointer = Sim32GetVDMPointer(((ULONG)SegSs)<<16, 1, TRUE);
-    VdmStackPointer += VdmSp;
-    *pVdmStackPointer = VdmStackPointer;
-    return(TRUE);
-
-}
 VOID
 DpmiHungAppIretAndExit(
     VOID
