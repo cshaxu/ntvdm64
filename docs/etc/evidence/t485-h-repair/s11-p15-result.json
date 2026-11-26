@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P15",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime18",
   "reviewed_files": 36,
   "total_files": 48,
@@ -75,5 +75,8 @@
     "build/t485-s11/p15/environment-final.log",
     "build/t485-s11/p15/final/async-final-Completion/guest-report.json"
   ],
-  "unchanged_boundaries": "Original guest binaries not modified/rebuilt. Existing XP WINSOCK pairing retained. No new runtime state or provider."
+  "unchanged_boundaries": "Original guest binaries not modified/rebuilt. Existing XP WINSOCK pairing retained. No new runtime state or provider.",
+  "commit": "f02c587de",
+  "delivered_files": 36,
+  "delivered_frozen_points": 360
 }

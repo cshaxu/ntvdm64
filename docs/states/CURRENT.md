@@ -34,12 +34,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
 [P15 receipt](../etc/evidence/t485-h-repair/s11-p15-result.json):36/48files,
-360/452points final-verified:17restored,343residual owner-review,92unreviewed.
+360/452points delivered:17restored,343residual owner-review,92unreviewed.
 Current48-file census744points/7047lines; cumulative raw reduction136/4716.
 P15 removes1point/31lines. Original bulk environment cloning restored with
 proven modern NTDLL allocator and conversion boundaries. Runtime18 cached
 full build,dual26-hash publication,environment16/16 and real Win16 Completion
-PASS. Commit/push pending;delivered33files/350points at P14 d64c9b2a6.
+PASS. P15 delivered and pushed f02c587de;36files/360points delivered.
 Nextfile37 wspool.c. LastFull:file30 P12 runtime15 passed23/23;nextfile40
 and S closure. Earlier P1-P7 actual-preprocessor line followup and spool
 loader extraction fixture repair remain required before Full/closure.
