@@ -21,13 +21,11 @@
  */
 
 #ifdef SCCSID
-#line 24
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 26
 
 #ifdef SEGMENTATION
-#line 28
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 35
@@ -55,8 +53,8 @@
 #include "debug.h"
 
 
-/* Routines called via vector table. These are all local now;  
-** The prototype typedefs are defined in gfi.h which is now th. only 
+/* Routines called via vector table. These are all local now;
+** The prototype typedefs are defined in gfi.h which is now th. only
 ** base floppy header file needed.        GM.
 */
 
@@ -95,7 +93,7 @@ LOCAL VOID gfi_empty_init
 ** NB: This is for SoftPC (gfi); the actual closing/opening must still be
 ** done in your floppy code! Also note that deactivating the empty floppy
 ** means activating the host one, but this is never done like that.
-**                               GM. 
+**                               GM.
 */
 
 GLOBAL SHORT
@@ -149,7 +147,6 @@ gfi_empty_command
       {
    case FDC_READ_DATA:
 #ifndef	PROD
-#line 153
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 156
@@ -157,7 +154,6 @@ gfi_empty_command
 
    case FDC_WRITE_DATA:
 #ifndef	PROD
-#line 160
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 163
@@ -165,7 +161,6 @@ gfi_empty_command
 
    case FDC_READ_TRACK:
 #ifndef	PROD
-#line 167
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 170
@@ -173,16 +168,13 @@ gfi_empty_command
 
    case FDC_SPECIFY:
 #ifndef	PROD
-#line 174
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 177
       break;
 
    case FDC_READ_ID:
-#line 180
 #ifndef PROD
-#line 181
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 184
@@ -190,7 +182,6 @@ gfi_empty_command
 
    case FDC_RECALIBRATE:
 #ifndef	PROD
-#line 188
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 191
@@ -206,7 +197,6 @@ gfi_empty_command
 
    case FDC_SENSE_DRIVE_STATUS:
 #ifndef	PROD
-#line 203
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 206
@@ -214,7 +204,6 @@ gfi_empty_command
 
    case FDC_SEEK:
 #ifndef	PROD
-#line 210
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 213
@@ -222,14 +211,12 @@ gfi_empty_command
 
    case FDC_FORMAT_TRACK:
 #ifndef	PROD
-#line 217
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 220
       break;
 
 #ifndef	PROD
-#line 223
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 228

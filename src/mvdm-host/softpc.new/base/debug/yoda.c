@@ -25,14 +25,11 @@
 #define BREAKPOINTS
 
 #ifdef SEGMENTATION
-#line 28
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 35
 
-#line 36
 #ifdef SCCSID
-#line 37
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 39
@@ -53,7 +50,7 @@ void force_yoda()
 {
 }
 #ifdef NONPROD_CPU
-#line 56
+
 #error DIVERGENCE MVDM-HOST-DIV-536: NONPROD_CPU branch is not selected; see mirror register.
 #endif /* NONPROD_CPU */
 #line 67
@@ -64,9 +61,7 @@ void delta_check_I()
 #endif /* DELTA */
 #endif /* PROD */
 
-#line 74
 #ifdef	YODA
-#line 75
 #error Excluded unsupported YODA debugger profile
 #endif /* YODA */
 #line 9519

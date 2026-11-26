@@ -763,3 +763,133 @@ All 43 source identities and diagnostic mappings are verified, cached full build
 and dual 13-image publication passed. Commit/push completes P6, not S8.
 386/851 final-verified, 465 remain. This batch removes 42 points/132 lines;
 cumulative reduction is 111/309, newline-only count 247. Next: base/cvidc/accessfn.c.
+
+### P7 C-VID headers and accessors
+
+P6 committed and pushed as 6ed2d9a8b; 386 files delivered.
+
+| File under softpc.new/base/cvidc | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| accessfn.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| c2cpusad.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| ccpudefs.inc | 0/0 -> 0/0 | Already exact XP bytes |
+| cpu4gen.h | 0/0 -> 0/0 | Original retained code; 209 unchanged excluded arms; XP diagnostic anchors |
+| cpu_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cpuint_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| evid_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| evidfunc.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| evidfunc.h | 0/0 -> 0/0 | Already exact XP bytes |
+| fm_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+
+All ten files pass pinned-source retained-code and unchanged-error checks.
+396/851 reviewed, 455 remain; 386 delivered and ten P7 files local. Non-error
+reduction stays 111 points/309 lines; newline-only restorations total 254.
+No P7 build/runtime pass claimed. Next: cvidc/fpu_c.h.
+
+### P7 C-VID and debug reconciliation
+
+| File under softpc.new/base | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| cvidc/fpu_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/gdpvar.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/j_c_lang.c | 0/0 -> 0/0 | Already exact XP bytes |
+| cvidc/j_c_lang.h | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| cvidc/makefile | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/pigger_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid002.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid003.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid005.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid006.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid007.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid008.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid009.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid010.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid011.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid012.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid013.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid014.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid015.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid020.c | 0/0 -> 0/0 | Already exact XP bytes |
+| cvidc/sevid021.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid022.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid023.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid024.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid025.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid026.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid027.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid028.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid029.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sevid030.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sinit011.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sinit012.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sinit013.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/sources | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/univer_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cvidc/vglfunc.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| debug/btrace.c | 0/0 -> 0/0 | Original retained code; 3 unchanged excluded arms; XP diagnostic anchors |
+| debug/dasm.c | 0/0 -> 0/0 | Original retained code; 2 unchanged excluded arms; XP diagnostic anchors |
+| debug/daytona/makefile | 0/0 -> 0/0 | Already exact XP bytes |
+| debug/daytona/sources | 0/0 -> 0/0 | Already exact XP bytes |
+| debug/debuggng.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| debug/dirs | 0/0 -> 0/0 | Already exact XP bytes |
+| debug/ega_dump.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| debug/pigyoda.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| debug/profile.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| debug/sources.inc | 0/0 -> 0/0 | Already exact XP bytes |
+| debug/trace.c | 0/0 -> 0/0 | Original retained code; 7 unchanged excluded arms; XP diagnostic anchors |
+| debug/yoda.c | 0/0 -> 0/0 | Original retained code; 4 unchanged excluded arms; XP diagnostic anchors |
+| dirs | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| disks/daytona/makefile | 0/0 -> 0/0 | Already exact XP bytes |
+
+All 60 P7 files pass pinned-source retained-code and unchanged-error comparisons.
+446/851 reviewed, 405 remain; 386 delivered, 60 locally complete. Cumulative
+non-error reduction remains 111 points/309 lines; newline-only total 288.
+No P7 build/runtime pass claimed.
+Next: src/mvdm-host/softpc.new/base/disks/daytona/sources.
+
+### P7 disk formats and fixed ordering
+
+| File under softpc.new/base/disks | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| daytona/sources | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| dirs | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| diskbios.c | 2/6 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| fdisk.c | 95/202 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| fla.c | 57/126 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| floppy_i.c | 1/2 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| floppy.c | 36/80 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| gfi_ibm.c | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| gfi_mpty.c | 2/6 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| gfi_sflp.c | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| gfi_test.c | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| gfi.c | 17/36 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| sources.inc | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+
+The helper comparison initially used Python lexical order, which differs for
+underscore names from the recorded PowerShell path ordering. It stopped on a
+missing extracted source before completing its ledger write. The helper now uses
+the explicit ordered-paths.json extracted from the canonical checklist. Recheck
+confirmed the ledger covers exactly the first 454 entries before the final five.
+No extra file was admitted; retained-code comparison passes for all 73 P7 files.
+
+Disk restorations remove 210 points/458 lines; no disk algorithm changes.
+459/851 reviewed, 392 remain; 386 delivered and 73 locally complete. Cumulative
+non-error reduction is 321 points/767 lines (210/458 local), newline-only total 288.
+P7 enters cached build/dual publication then targeted verification. Next is
+Next file: src/mvdm-host/softpc.new/base/dos/daytona/makefile.
+### P7 publication checkpoint
+
+Runtime7 cached full build and dual 13-image publication passed; all 26 destination
+hash comparisons match. All 73 source hashes and original diagnostic mappings
+pass; documentation governance passed. Final-package MEM/NTVDMD and DOS4GW tests
+are running through p7/verify-all.ps1. No final runtime/delivery result claimed yet.
+Evidence: build/t485-s8/p7/{line-check,published-hashes,test-process}.json.
+### P7 final verification
+
+Runtime7 passed real MEM/NTVDMD export/debugger/register/allocation/termination
+checks and DOS4GW/NESticle rendered menu plus Escape hide/restore. Evidence:
+build/t485-s8/p7/debug-live/trace.txt and dos4gw/nesticle.txt.graphics-result.json.
+All 73 final source identities and diagnostic mappings passed. Cached full build
+and dual 13-image publication passed. Commit/push completes P7, not S8.
+459/851 final-verified, 392 remain. Batch reduction 210 points/458 lines;
+cumulative 321/767, newline-only count 288. Next: base/dos/daytona/makefile.

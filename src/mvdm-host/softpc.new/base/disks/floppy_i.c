@@ -1,5 +1,4 @@
 #if defined(NEC_98)
-#line 2
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 7
@@ -27,7 +26,7 @@ extern void host_simulate();
  * Author	: Ross Beresford
  *
  *
- * Notes	: 
+ * Notes	:
  *
  */
 
@@ -38,7 +37,6 @@ extern void host_simulate();
 
 
 #ifdef SEGMENTATION
-#line 42
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 49
@@ -62,7 +60,6 @@ extern void host_simulate();
 
 #include "tape_io.h"
 #if defined(NEC_98)
-#line 69
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 71
@@ -73,12 +70,10 @@ extern UTINY number_of_floppy;
 #endif	/* NTVDM */
 
 #if defined(NEC_98)
-#line 78
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 163
 #ifndef	PROD
-#line 164
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
 #line 507
@@ -87,7 +82,6 @@ extern UTINY number_of_floppy;
 void diskette_io()
 {
 #if defined(NEC_98)
-#line 512
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 524
@@ -102,16 +96,13 @@ void diskette_io()
 	half_word diskette_status;
 	int op = getAH(), drive = getDL();
 #endif // !NEC_98
-#line 535
 
 #ifndef	PROD
-#line 537
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 540
 
 #if defined(NEC_98)
-#line 542
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 553
@@ -129,14 +120,12 @@ void diskette_io()
 	 */
 
 #if defined(NEC_98)
-#line 567
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 571
 	if (!fl_operation_in_range(op))
 		op = FL_FNC_ERR;
 #endif // !NEC_98
-#line 574
 
 	/*
 	 *	If the drive number is applicable in the operation, check it
@@ -147,13 +136,11 @@ void diskette_io()
 #ifdef NTVDM
 		if (drive >= number_of_floppy)
 #else
-#line 584
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 586
 			op = FL_FNC_ERR;
 #endif // !NEC_98
-#line 588
 
 
 #ifndef NEC_98
@@ -166,30 +153,25 @@ void diskette_io()
 	setAH(diskette_status);
 	sas_store(FLOPPY_STATUS, FS_OK);
 #endif // !NEC_98
-#line 600
 
 	/*
 	 *	Do the operation
 	 */
 
 #if defined(NEC_98)
-#line 606
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 608
 	(*fl_fnc_tab[op])(drive);
 #endif // !NEC_98
-#line 610
 
 
 #if defined(NEC_98)
-#line 613
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 618
 
 #ifndef	PROD
-#line 620
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 623
@@ -233,7 +215,6 @@ void diskette_int()
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
-#line 663
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 666
@@ -249,7 +230,6 @@ void diskette_int()
 
 
 #ifdef SEGMENTATION
-#line 678
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 685
@@ -261,25 +241,20 @@ void diskette_post()
 	 *	functionality in the POST.
 	 */
 #if defined(NEC_98)
-#line 693
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 696
 	half_word diskette_id_reg, hf_cntrl, interrupt_mask;
-#line 697
 #ifndef NTVDM
-#line 698
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 700
 	EQUIPMENT_WORD equip_flag;
 #endif // !NEC_98
-#line 702
 
 	note_trace0(FLOPBIOS_VERBOSE, "diskette_post()");
 
 #if defined(NEC_98)
-#line 706
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 728
@@ -318,18 +293,16 @@ void diskette_post()
 			hf_cntrl |= DC_DUAL;
 		sas_store(DRIVE_CAPABILITY, hf_cntrl);
 
-#line 763
 #ifndef NTVDM	/* prevent floppies showing up in bios data area */
-#line 764
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 #line 783
 	}
 #endif // !NEC_98
-#line 785
 }
 
 #if defined(NEC_98)
-#line 788
+
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
+#line 1180

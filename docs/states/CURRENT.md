@@ -31,12 +31,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Similar-Issue Sweep | Whole-file harmless restorations, normalized-exact bytes, exclusion framework and diagnostic mappings. |
 ## S8 Ordered Progress
 
-[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 386/851 reviewed
-and final-verified, 465 remain. P5 34e59dfaf delivered 343 files; P6 adds 43.
-Runtime6 cached full build, dual 13-image publication/hash checks, original
+[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 459/851 reviewed
+and final-verified, 392 remain. P6 6ed2d9a8b delivered 386 files; P7 adds 73.
+Runtime7 cached full build, dual 13-image publication/hash checks, original
 source/line checks, actual MEM/NTVDMD and DOS4GW/NESticle menu roundtrip passed.
-Commit/push completes P6. Cumulative non-error reduction is 111 points/309 lines;
-247 newline-only restorations are separate. Next: base/cvidc/accessfn.c.
+Commit/push completes P7. Cumulative non-error reduction is 321 points/767 lines;
+288 newline-only restorations are separate. Next: base/dos/daytona/makefile.
 N004 remains gated on S13; migration stays 39/159.
 ## S7 Closure Record
 

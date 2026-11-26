@@ -20,7 +20,6 @@
 
 
 #ifdef SEGMENTATION
-#line 23
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 30
@@ -54,7 +53,6 @@ FORWARD IU32 get_287_sp IPT0();
 FILE *trace_file;
 
 #ifndef PROD
-#line 60
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
 #line 71
@@ -71,7 +69,6 @@ void get_lar()
 
 {
 #ifndef PROD
-#line 84
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 89
@@ -79,9 +76,8 @@ void get_lar()
 
 #endif
 
-#line 93
 #if !defined(PROD) && defined(SPC386)
-#line 94
+
 #error Unsupported excluded original configuration
 #endif /* !PROD && SPC386 */
 #line 245
@@ -91,21 +87,18 @@ char *error_msg;
 int  dump_info;
 {
 #ifndef PROD
-#line 251
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #else	/* PROD */
 #line 463
 	UNUSED(error_msg);
 	UNUSED(dump_info);
 #endif	/* PROD */
-#line 466
 }
 
 void trace_init()
 {
-#line 470
 #if !defined(PROD) || defined(HUNTER)
-#line 471
+
 #error Unsupported excluded original configuration
 #endif /* !PROD || HUNTER */
 #line 495
@@ -113,7 +106,6 @@ void trace_init()
 
 /* Get the code for 4.0 style CPUs */
 #ifndef PROD
-#line 499
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
 #line 561

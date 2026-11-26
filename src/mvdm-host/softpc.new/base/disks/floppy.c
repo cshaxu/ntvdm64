@@ -1,5 +1,4 @@
 #if defined(NEC_98)
-#line 2
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 7
@@ -53,7 +52,7 @@ extern void host_simulate();
  *
  *
  * Notes	: For a detailed description of the IBM Floppy Disk Adaptor,
- *		  and the INTEL Controller chips refer to the following 
+ *		  and the INTEL Controller chips refer to the following
  *		  documents:
  *
  *		  - IBM PC/XT Technical Reference Manual
@@ -64,7 +63,7 @@ extern void host_simulate();
  *				(Section 6-478 FDC 8272A)
  *
  * Mods:
- *      Tim September 1991. nec_term() changed two error code returns. 
+ *      Tim September 1991. nec_term() changed two error code returns.
  * 	Helps Dos give correct error messages when no floppy in drive.
  */
 
@@ -108,14 +107,12 @@ extern void host_simulate();
 
 
 #ifdef SEGMENTATION
-#line 112
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 119
 
 #include <stdio.h>
 #if defined(NEC_98)
-#line 122
 #error Unsupported NEC PC-98 configuration
 #endif //NEC_98
 #line 124
@@ -140,7 +137,6 @@ extern void host_simulate();
 #include "rtc_bios.h"
 
 #if defined(NEC_98)
-#line 145
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 193
@@ -150,7 +146,6 @@ extern void host_simulate();
  */
 
 #if defined(NEC_98)
-#line 199
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 228
@@ -183,7 +178,6 @@ void ((*(fl_fnc_tab[FL_JUMP_TABLE_SIZE])) IPT1(int, drive)) =
 	fl_set_media,
 };
 #endif // !NEC_98
-#line 257
 
 #ifdef NTVDM
 extern UTINY number_of_floppy;
@@ -192,7 +186,7 @@ extern UTINY number_of_floppy;
 /*
  *	Functions defined later
  */
- 
+
 LOCAL half_word get_parm IPT1(int, index);
 LOCAL cmos_type IPT2(int, drive, half_word *, type);
 LOCAL wait_int IPT0();
@@ -228,7 +222,6 @@ LOCAL recal IPT1(int, drive);
 LOCAL chk_stat_2 IPT0();
 
 #if defined(NEC_98)
-#line 301
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 347
@@ -369,7 +362,6 @@ void fl_disk_reset IFN1(int, drive)
 
 	setup_end(IGNORE_SECTORS_TRANSFERRED);
 #endif // !NEC_98
-#line 484
 }
 
 void fl_disk_status IFN1(int, drive)
@@ -393,7 +385,6 @@ void fl_disk_status IFN1(int, drive)
 void fl_disk_read IFN1(int, drive)
 {
 #if defined(NEC_98)
-#line 507
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 949
@@ -434,13 +425,11 @@ void fl_disk_read IFN1(int, drive)
         put_c0_MT(fdc_cmd_block, 1);
 	rd_wr_vf(drive, fdc_cmd_block, BIOS_DMA_READ);
 #endif // !NEC_98
-#line 986
 }
 
 void fl_disk_write IFN1(int, drive)
 {
 #if defined(NEC_98)
-#line 991
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 1434
@@ -481,13 +470,11 @@ void fl_disk_write IFN1(int, drive)
 	put_c1_MT(fdc_cmd_block, 1);
 	rd_wr_vf(drive, fdc_cmd_block, BIOS_DMA_WRITE);
 #endif // !NEC_98
-#line 1471
 }
 
 void fl_disk_verify IFN1(int, drive)
 {
 #if defined(NEC_98)
-#line 1476
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 1916
@@ -528,7 +515,6 @@ void fl_disk_verify IFN1(int, drive)
 	put_c0_MT(fdc_cmd_block, 1);
 	rd_wr_vf(drive, fdc_cmd_block, BIOS_DMA_VERIFY);
 #endif // !NEC_98
-#line 1953
 }
 
 /*
@@ -548,7 +534,6 @@ void GetFormatParams IFN4(int *, c, int *, h, int *, s, int *, n)
 void fl_disk_format IFN1(int, drive)
 {
 #if defined(NEC_98)
-#line 1972
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 2248
@@ -580,7 +565,7 @@ void fl_disk_format IFN1(int, drive)
 
 	/*
 	 *	Establish the default format for the size of drive, unless
-	 *	this has already been set up via previous calls to 
+	 *	this has already been set up via previous calls to
 	 *	diskette_io()
 	 */
 
@@ -633,7 +618,7 @@ void fl_disk_format IFN1(int, drive)
 
 
 			/*
-			 *	Send the remainder of the format 
+			 *	Send the remainder of the format
 			 *	parameters to the FDC
 			 */
 
@@ -660,7 +645,6 @@ void fl_disk_format IFN1(int, drive)
 	setup_end(IGNORE_SECTORS_TRANSFERRED);
 
 #endif // !NEC_98
-#line 2356
 }
 
 void fl_fnc_err IFN1(int, drive)
@@ -679,7 +663,6 @@ void fl_fnc_err IFN1(int, drive)
 	UNUSED(drive);
 	
 #if defined(NEC_98)
-#line 2374
 #error Unsupported NEC PC-98 configuration
 #else  // NEC_98
 #line 2381
@@ -687,7 +670,6 @@ void fl_fnc_err IFN1(int, drive)
 	sas_store(FLOPPY_STATUS, FS_BAD_COMMAND);
 	setCF(1);
 #endif // !NEC_98
-#line 2385
 }
 
 void fl_disk_parms IFN1(int, drive)
@@ -735,7 +717,6 @@ void fl_disk_parms IFN1(int, drive)
 	if (    (equip_flag.bits.diskette_present == 1)
 	     && (drive < number_of_floppy))
 #else
-#line 2432
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 2435
@@ -863,7 +844,7 @@ void fl_disk_parms IFN1(int, drive)
 
 
 	/*
-	 *	Arrive here if "drive" is invalid or if its type 
+	 *	Arrive here if "drive" is invalid or if its type
 	 *	could not be determined
 	 */
 
@@ -926,7 +907,6 @@ void fl_disk_type IFN1(int, drive)
 	setCF(0);
 
 #ifndef PROD
-#line 2622
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 2629
@@ -1115,7 +1095,6 @@ void fl_set_media IFN1(int, drive)
 	sys_addr dt_start = dr_type_addr;
 	sys_addr dt_end = dr_type_addr + DR_CNT * DR_SIZE_OF_ENTRY;
 #else
-#line 2814
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 2817
@@ -1211,13 +1190,13 @@ void fl_set_media IFN1(int, drive)
  * in the status byte. If they differ
  * set BIOS RATE STATUS byte to reflect old rate status
  * for this drive as it may have been altered by an
- * access to the other drive. This may result in a call 
- * to send_rate not being performed because the old 
- * rate status (possibly for the other drive) matching the 
+ * access to the other drive. This may result in a call
+ * to send_rate not being performed because the old
+ * rate status (possibly for the other drive) matching the
  * new data rate for this drive, when actually the last rate
- * attempted for this drive was different. Thus the 
- * controller for this drive is at an old rate (for low 
- * density say) and we are assuming it has been previously 
+ * attempted for this drive was different. Thus the
+ * controller for this drive is at an old rate (for low
+ * density say) and we are assuming it has been previously
  * set to the updated (high) state when it has not!
  * In all this will ensure the updated data rate being sent
  * for the drive concerned !
@@ -1264,7 +1243,6 @@ LOCAL dr_type_check IFN3(half_word, drive_type, word *, seg_ptr, word *, off_ptr
 	dt_start = dr_type_addr;
 	dt_end = dr_type_addr + DR_CNT * DR_SIZE_OF_ENTRY;
 #else
-#line 2962
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 #line 2967
@@ -1323,7 +1301,6 @@ LOCAL void translate_new IFN1(int, drive)
 #ifdef NTVDM
 	if (high_density(drive) && (drive < number_of_floppy))
 #else
-#line 3022
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 3024
@@ -1353,7 +1330,7 @@ LOCAL void translate_new IFN1(int, drive)
 void translate_old IFN1(int, drive)
 {
 	/*
-	 *	Translates diskette state locations from new 
+	 *	Translates diskette state locations from new
 	 *	architecture to compatible mode
 	 */
 	half_word hf_cntrl, disk_state, mode, drive_type;
@@ -1365,7 +1342,6 @@ void translate_old IFN1(int, drive)
 #ifdef NTVDM
 	if (high_density(drive) && (drive < number_of_floppy) && (disk_state != 0))
 #else
-#line 3062
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 #line 3064
@@ -1481,7 +1457,7 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 	int sectors_transferred;
 	word md_segment, md_offset;
 	/*
-	 *	Establish initial data rate, then loop through each 
+	 *	Establish initial data rate, then loop through each
 	 *	possible data rate
 	 */
 	translate_new(drive);
@@ -1496,7 +1472,7 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 			 *	Check CMOS value against what is really
 			 *	known about the drive
 			 */
-			/* 
+			/*
 			 * The original code here had a very bad case of "Bad-C"
 			 * if-if-else troubles, but replacing the code with
 			 * the switch statement originally intended breaks
@@ -1534,7 +1510,6 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 				dt_start = dr_type_addr;
 				dt_end = dr_type_addr + DR_CNT * DR_SIZE_OF_ENTRY;
 #else
-#line 3229
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 3232
@@ -1576,7 +1551,6 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 					else
 						md_offset += MD_TBL3_OFFSET;
 #else
-#line 3270
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 #line 3276
@@ -1596,7 +1570,6 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 				else
 					md_offset += MD_TBL3_OFFSET;
 #else
-#line 3292
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
 #line 3298
@@ -1615,7 +1588,6 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 			else
 				md_offset += MD_TBL3_OFFSET;
 #else
-#line 3313
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 3319
@@ -1684,7 +1656,6 @@ LOCAL void setup_state IFN1(int, drive)
 	{
 		sas_load(FDD_STATUS+drive, &disk_state);
 #ifndef NTVDM
-#line 3384
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM */
 #line 3443
@@ -1729,7 +1700,6 @@ LOCAL void setup_state IFN1(int, drive)
     }
 
 #endif /* NTVDM */
-#line 3484
 
 			/*
 			 *	Set up disk state with current data
@@ -1751,7 +1721,6 @@ LOCAL void setup_state IFN1(int, drive)
 		}
 	}
 #endif // !NEC_98
-#line 3505
 }
 
 LOCAL void fmt_init IFN1(int, drive)
@@ -1804,7 +1773,6 @@ LOCAL void fmt_init IFN1(int, drive)
 		}
 	}
 #endif // !NEC_98
-#line 3557
 }
 
 LOCAL med_change IFN1(int, drive)
@@ -1822,7 +1790,7 @@ LOCAL med_change IFN1(int, drive)
 			return(SUCCESS);
 
 		/*
-		 *	Media has been changed - set media state to 
+		 *	Media has been changed - set media state to
 		 *	undetermined
 		 */
 		sas_load(FDD_STATUS+drive, &disk_state);
@@ -1858,7 +1826,6 @@ LOCAL med_change IFN1(int, drive)
 	}
 	return(FAILURE);
 #endif // !NEC_98
-#line 3610
 }
 
 LOCAL void send_rate IFN1(int, drive)
@@ -1890,7 +1857,6 @@ LOCAL void send_rate IFN1(int, drive)
 		outb(DISKETTE_DCR_REG, (IU8)(disk_state >> 6));
 	}
 #endif // !NEC_98
-#line 3641
 }
 
 LOCAL chk_lastrate IFN1(int, drive)
@@ -1909,7 +1875,7 @@ LOCAL chk_lastrate IFN1(int, drive)
 	
 	sas_load(RATE_STATUS, &lastrate);
 	sas_load(FDD_STATUS+drive, &disk_state);
-	return((lastrate & RS_MASK) != (disk_state & RS_MASK) 
+	return((lastrate & RS_MASK) != (disk_state & RS_MASK)
 			? SUCCESS : FAILURE);
 }
 
@@ -1937,7 +1903,7 @@ LOCAL dma_setup IFN1(half_word, dma_mode)
 	outb(DMA_WRITE_MODE_REG, dma_mode);
 
 	/*
-	 *	Output the address to the DMA adapter as a page address 
+	 *	Output the address to the DMA adapter as a page address
 	 *	and 16 bit offset
 	 */
 	if (dma_mode == BIOS_DMA_VERIFY)
@@ -1979,7 +1945,6 @@ LOCAL dma_setup IFN1(half_word, dma_mode)
 
 	return(SUCCESS);
 #endif // !NEC_98
-#line 3729
 }
 
 LOCAL fmtdma_set IFN0()
@@ -2005,7 +1970,7 @@ LOCAL fmtdma_set IFN0()
 	outb(DMA_WRITE_MODE_REG, BIOS_DMA_WRITE);
 
 	/*
-	 *	Output the address to the DMA adapter as a page address 
+	 *	Output the address to the DMA adapter as a page address
 	 *	and 16 bit offset
 	 */
 	dma_address.all = effective_addr(getES(), getBX());
@@ -2036,22 +2001,19 @@ LOCAL fmtdma_set IFN0()
 	 *	for wrapping of the bottom 16 bits of the address
 	 */
 
-#line 3785
 #ifndef NTVDM
-#line 3786
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 3794
 
 	return(SUCCESS);
 #endif // !NEC_98
-#line 3797
 }
 
 LOCAL void nec_init IFN2(int, drive, FDC_CMD_BLOCK *, fcbp)
 {
 	/*
-	 *	This routine seeks to the requested track and 
+	 *	This routine seeks to the requested track and
 	 *	initialises the FDC for the read/write/verify
 	 *	operation.
 	 */
@@ -2070,7 +2032,7 @@ LOCAL void nec_init IFN2(int, drive, FDC_CMD_BLOCK *, fcbp)
 LOCAL void rwv_com IFN2(word, md_segment, word, md_offset)
 {
 	/*
-	 *	This routine send read/write/verify parameters to the 
+	 *	This routine send read/write/verify parameters to the
 	 *	FDC
 	 */
 	half_word md_gap;
@@ -2115,7 +2077,7 @@ LOCAL nec_term IFN0()
 		/*
 		 *	Result phase completed
 		 */
-		if ((get_r0_ST0(fl_nec_status) & 
+		if ((get_r0_ST0(fl_nec_status) &
 			(ST0_INTERRUPT_CODE_0 | ST0_INTERRUPT_CODE_1)) != 0)
 		{
 			/*
@@ -2135,35 +2097,35 @@ LOCAL nec_term IFN0()
 			else
 			{
 				/*
-				 *	Abnormal termination - set 
+				 *	Abnormal termination - set
 				 *	diskette status up accordingly
 				 */
-				if (get_r0_ST1(fl_nec_status) & 
+				if (get_r0_ST1(fl_nec_status) &
 						ST1_END_OF_CYLINDER)
 				{
 					diskette_status |= FS_SECTOR_NOT_FOUND;
 				}
-				else if (get_r0_ST1(fl_nec_status) & 
+				else if (get_r0_ST1(fl_nec_status) &
 						ST1_DATA_ERROR)
 				{
 					diskette_status |= FS_CRC_ERROR;
 				}
-				else if (get_r0_ST1(fl_nec_status) & 
+				else if (get_r0_ST1(fl_nec_status) &
 						ST1_OVERRUN)
 				{
 					diskette_status |= FS_DMA_ERROR;
 				}
-				else if (get_r0_ST1(fl_nec_status) & 
+				else if (get_r0_ST1(fl_nec_status) &
 						ST1_NO_DATA)
 				{
 					diskette_status |= FS_FDC_ERROR; /* Tim Sept 91, was FS_SECTOR_NOT_FOUND */
 				}
-				else if (get_r0_ST1(fl_nec_status) & 
+				else if (get_r0_ST1(fl_nec_status) &
 						ST1_NOT_WRITEABLE)
 				{
 					diskette_status |= FS_WRITE_PROTECTED;
 				}
-				else if (get_r0_ST1(fl_nec_status) & 
+				else if (get_r0_ST1(fl_nec_status) &
 						ST1_MISSING_ADDRESS_MARK)
 				{
 					diskette_status |= FS_BAD_ADDRESS_MARK;
@@ -2308,7 +2270,7 @@ LOCAL void setup_end IFN1(int, sectors_transferred)
 {
 	/*
 	 *	Restore MOTOR_COUNT to parameter provided in table;
-	 *	set return status values and sectors transferred, 
+	 *	set return status values and sectors transferred,
 	 *	where applicable
 	 */
 	half_word diskette_status;
@@ -2365,7 +2327,7 @@ LOCAL setup_dbl IFN1(int, drive)
 				 *	Try reading ids from cylinder 2 to
 				 *	the last cylinder on both heads. If
 				 *	the putative track number disagrees
-				 *	with what is on the disk, then 
+				 *	with what is on the disk, then
 				 *	double stepping is required
 				 */
 				if ((disk_state & DC_80_TRACK) == 0)
@@ -2385,7 +2347,7 @@ LOCAL setup_dbl IFN1(int, drive)
 						LOAD_RESULT_BLOCK;
 						sas_store(FDD_TRACK+drive,
   						    get_r0_cyl(fl_nec_status));
-						if ((track/2) != 
+						if ((track/2) !=
 					 	    get_r0_cyl(fl_nec_status))
 						{
 							disk_state |= FS_DOUBLE_STEP;
@@ -2466,7 +2428,6 @@ LOCAL half_word get_parm IFN1(int, index)
 	sas_load(effective_addr(segment, offset+index), &value);
 
 #ifndef PROD
-#line 4217
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 4243
@@ -2488,7 +2449,7 @@ LOCAL void motor_on IFN1(int, drive)
 	{
 		/*
 		 *	Notify OS that BIOS is about to wait for motor
-		 *	start up 
+		 *	start up
 		 */
 #ifndef	JOKER
 		word savedAX, savedCX, savedDX, savedCS, savedIP;
@@ -2505,7 +2466,6 @@ LOCAL void motor_on IFN1(int, drive)
 		setCS(int15_seg);
 		setIP(int15_off);
 #else
-#line 4278
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 4281
@@ -2562,7 +2522,6 @@ LOCAL void motor_on IFN1(int, drive)
 		setCS(int15_seg);
 		setIP(int15_off);
 #else
-#line 4334
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 4337
@@ -2655,7 +2614,6 @@ LOCAL turn_on IFN1(int, drive)
 	setIF(1);
 	return(FAILURE);
 #endif // !NEC_98
-#line 4426
 }
 
 LOCAL void hd_wait IFN1(int, drive)
@@ -2722,7 +2680,6 @@ LOCAL void hd_wait IFN1(int, drive)
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
-#line 4492
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 4495
@@ -2785,7 +2742,6 @@ LOCAL void nec_output IFN1(half_word, byte_value)
 	 */
 	waitf(FDC_SETTLE);
 #endif // !NEC_98
-#line 4554
 }
 
 LOCAL seek IFN2(int, drive, int, track)
@@ -2793,14 +2749,14 @@ LOCAL seek IFN2(int, drive, int, track)
 	/*
 	 *	This routine will move the head on the named drive
 	 *	to the named track. If the drive has not been accessed
-	 *	since the drive reset command was issued, the drive 
+	 *	since the drive reset command was issued, the drive
 	 *	will be recalibrated
 	 */
 	half_word seek_status, disk_track, disk_state;
 	FDC_CMD_BLOCK fdc_cmd_block[MAX_COMMAND_LEN];
 	int status;
 
-	note_trace2(FLOPBIOS_VERBOSE, "diskette_io:seek(drive=%d,track=%d)", 
+	note_trace2(FLOPBIOS_VERBOSE, "diskette_io:seek(drive=%d,track=%d)",
 							drive, track);
 
 	/*
@@ -2916,7 +2872,7 @@ LOCAL chk_stat_2 IFN0()
 		if (results() != FAILURE)
 		{
 
-			if ((get_r3_ST0(fl_nec_status) & (ST0_SEEK_END | ST0_INTERRUPT_CODE_0)) 
+			if ((get_r3_ST0(fl_nec_status) & (ST0_SEEK_END | ST0_INTERRUPT_CODE_0))
 				!= (ST0_SEEK_END | ST0_INTERRUPT_CODE_0))
 			{
 				return(SUCCESS);
@@ -2970,7 +2926,6 @@ LOCAL wait_int IFN0()
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
-#line 4738
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 #line 4741
@@ -2995,7 +2950,6 @@ LOCAL wait_int IFN0()
 	setCS(wait_int_seg);
 	setIP(wait_int_off);
 #else
-#line 4762
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 #line 4765
@@ -3007,7 +2961,8 @@ LOCAL wait_int IFN0()
 
 
 #else	/* JOKER */
-#line 4773
+
+
 #error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #endif	/* JOKER */
 #line 4789
@@ -3020,9 +2975,7 @@ LOCAL wait_int IFN0()
 	if ((seek_status & SS_INT_OCCURRED) == 0)
 	{
 
-#line 4798
 #ifdef FLOPPIES_KEEP_TRYING
-#line 4799
 #error Unsupported excluded original configuration
 #endif /* FLOPPIES_KEEP_TRYING */
 #line 4814
@@ -3061,7 +3014,7 @@ LOCAL results IFN0()
 		if (count++ >= FDC_TIME_OUT)
 		{
 			/*
-			 *	Expect to return here when there is a 
+			 *	Expect to return here when there is a
 			 *	time out (not an FDC error)
 			 */
 			sas_load(FLOPPY_STATUS, &diskette_status);
@@ -3072,7 +3025,7 @@ LOCAL results IFN0()
 			return(FAILURE);
 		}
 		inb(DISKETTE_STATUS_REG, &diskette_status_reg);
-	} while ((diskette_status_reg & (DSR_RQM | DSR_DIO)) 
+	} while ((diskette_status_reg & (DSR_RQM | DSR_DIO))
 						!= (DSR_RQM | DSR_DIO));
 
 	/*
@@ -3115,7 +3068,6 @@ LOCAL results IFN0()
 
 	return(SUCCESS);
 #endif // !NEC_98
-#line 4903
 }
 
 LOCAL read_dskchng IFN1(int, drive)
@@ -3138,7 +3090,6 @@ LOCAL read_dskchng IFN1(int, drive)
 	inb(DISKETTE_DIR_REG, &diskette_dir_reg);
 	return(((diskette_dir_reg & DIR_DISKETTE_CHANGE) != 0) ? FAILURE : SUCCESS);
 #endif // !NEC_98
-#line 4925
 }
 
 void drive_detect IFN1(int, drive)
@@ -3165,7 +3116,7 @@ void drive_detect IFN1(int, drive)
 	 */
 	note_trace1( GFI_VERBOSE, "drive_detect():start: DRIVE %x", drive );
 	motor_on(drive);
-	if (    (recal(drive) == SUCCESS) 
+	if (    (recal(drive) == SUCCESS)
              && (seek(drive, FDD_CLONK_TRACK) == SUCCESS))
 	{
 		track = FDD_JUDDER_TRACK + 1;
@@ -3233,7 +3184,6 @@ LOCAL void waitf IFN1(long, time)
 }
 
 #ifdef SEGMENTATION
-#line 5019
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 5026
@@ -3283,7 +3233,7 @@ void fl_diskette_setup IFN0()
 		
 		translate_old(drive);
 	}
-	 
+	
 	/*
 	 *	Force an immediate recalibrate
 	 */
@@ -3302,6 +3252,7 @@ void fl_diskette_setup IFN0()
 	setup_end(IGNORE_SECTORS_TRANSFERRED);
 }
 #if defined(NEC_98)
-#line 5091
+
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
+#line 5879

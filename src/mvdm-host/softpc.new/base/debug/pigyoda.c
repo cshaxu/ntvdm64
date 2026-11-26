@@ -27,9 +27,8 @@
 #include "sas.h"
 #include "trace.h"
 
-#line 30
 #ifdef PIG
-#line 31
+
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 #line 356

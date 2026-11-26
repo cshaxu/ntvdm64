@@ -25,7 +25,7 @@
  * Author	: Henry Nash / Jim Hatfield
  *
  * Notes	: For a detailed description of the IBM Floppy Disk Adaptor
- *		  and the INTEL Controller chip refer to the following 
+ *		  and the INTEL Controller chip refer to the following
  *		  documents:
  *
  *		  - IBM PC/XT Technical Reference Manual
@@ -44,13 +44,11 @@
  */
 
 #ifdef SCCSID
-#line 47
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 49
 
 #ifdef SEGMENTATION
-#line 51
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 58
@@ -79,7 +77,7 @@
 
 /*
  * ============================================================================
- * Global data 
+ * Global data
  * ============================================================================
  */
 
@@ -106,7 +104,7 @@ static void fla_ndmaxqt IPT0();
 static void fla_ndma_bump_sectid IPT0();
 
 /*
- * The command and result blocks that are used to communicate to the GFI 
+ * The command and result blocks that are used to communicate to the GFI
  * layer. The result block is filled in by gfi during the execution phase.
  */
 
@@ -152,7 +150,7 @@ static struct {
 
 static half_word fdc_command_count;
 static half_word fdc_result_count;
- 
+
 /*
  * The FLA will emulate non-DMA 8088 <==> FDC data transfers, but only allow DMA mode
  * transfers to actually be sent to the GFI (potentially the back end of the SCSI might
@@ -165,23 +163,19 @@ static half_word fdc_result_count;
 /* The following sector buffer is used for non_dma transfers */
 
 #ifdef macintosh
-#line 169
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else
 #line 171
 static char fla_ndma_buffer[8192];
 #endif
-#line 173
 static int fla_ndma_buffer_count;
 static int fla_ndma_sector_size;
 
 /*
- * The FLA stores the IBM Digital Output Register internally 
- */ 
+ * The FLA stores the IBM Digital Output Register internally
+ */
 
-#line 180
 #ifdef BIT_ORDER1
-#line 181
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 #line 194
@@ -235,7 +229,7 @@ LOCAL void fla_hw_interrupt IFN0()
 	 * but this wouldn't match the existing code. In particular
 	 * there are calls which don't seem to include setting the
 	 * fdc_int_line, and a call which sets up a quick_event to
-	 * interrupt the ICA but which sets the fdc_int_line 
+	 * interrupt the ICA but which sets the fdc_int_line
 	 * immediately.
 	 */
 }
@@ -247,7 +241,7 @@ LOCAL void fla_hw_interrupt IFN0()
  */
 
 /* This procedure is called from the host specific rfloppy routines
- * as an equivalent to dma_enquire, when the intel program has selected 
+ * as an equivalent to dma_enquire, when the intel program has selected
  * non-dma mode for the FDC (via the SPECIFY command)
  */
 
@@ -271,7 +265,7 @@ void fla_ndma_req_wt IFN2(char *,buf,int,n)
 }
 
 /* This procedure is called from the host specific rfloppy routines
- * when it wants data destined for the diskette 
+ * when it wants data destined for the diskette
  */
 
 void fla_ndma_req_rd IFN2(char *,buf,int,n)
@@ -288,7 +282,7 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
 #ifndef NEC_98
 
 
-    note_trace0_no_nl(FLA_VERBOSE, "fla_inb() "); 
+    note_trace0_no_nl(FLA_VERBOSE, "fla_inb() ");
     fla_busy = TRUE;
 
     if (port == DISKETTE_STATUS_REG)
@@ -299,7 +293,7 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
 	 * After a read of this register assert the RQM bit,
 	 * unless the 'not_reset' line is held low!
 	 */
- 
+
 	if (dor.bits.not_reset)
 	    fdc_status |= FDC_RQM;
     }
@@ -357,7 +351,7 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
 	    /*
 	     * End of result phase - clear BUSY and DIO bits of status reg
 	     */
-    
+
 	    fdc_status     &= ~FDC_BUSY;
 	    fdc_status     &= ~FDC_DIO;
 	    fdc_result_count    = 0;
@@ -395,7 +389,7 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
 	** supporting hi and lo density media, without a Dual Card the BIOS
 	** assumes that lo density media is always present.
 	** I imagine this is because a "real" PC has limited floppy device
-	** options and a hi density 3.5 inch unit will only exist with a 
+	** options and a hi density 3.5 inch unit will only exist with a
 	** dual card.
 	** This is not the case for SoftPC, any combination of floppy devices
 	** seems to be quite OK.
@@ -429,7 +423,6 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
 			break;
 	}
 #ifndef PROD
-#line 438
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 444
@@ -437,15 +430,14 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
     else
     {
 	*value = 0;
-        note_trace0_no_nl(FLA_VERBOSE, "<unknown port>"); 
+        note_trace0_no_nl(FLA_VERBOSE, "<unknown port>");
     }
 
-    note_trace2(FLA_VERBOSE, " port %x, returning %x", port, *value); 
+    note_trace2(FLA_VERBOSE, " port %x, returning %x", port, *value);
     fla_busy = FALSE;
 
 
 #endif // !NEC_98
-#line 456
 }
 
 
@@ -456,7 +448,7 @@ void fla_outb IFN2(io_addr, port, half_word, value)
     DOR new_dor;
 
 
-    note_trace2_no_nl(FLA_VERBOSE, "fla_outb(): port %x, value %x ", port, value); 
+    note_trace2_no_nl(FLA_VERBOSE, "fla_outb(): port %x, value %x ", port, value);
     fla_busy = TRUE;
 
 
@@ -525,7 +517,7 @@ void fla_outb IFN2(io_addr, port, half_word, value)
 	}
 
 	if (!(fdc_status & FDC_NDMA))
-	/* programming up a command 
+	/* programming up a command
 	 */
 	{
 	    if (gfi_fdc_description[fdc_current_command].cmd_bytes == 0)
@@ -573,12 +565,12 @@ void fla_outb IFN2(io_addr, port, half_word, value)
 	        fdc_command_block[fdc_command_count++] = value;
 	        if (fdc_command_count >= gfi_fdc_description[fdc_current_command].cmd_bytes)
 	        {
-	        /* n.b; the field 'dma_required' is a misnomer ... it                      
-	         * strictly should be 'data_required' 
+	        /* n.b; the field 'dma_required' is a misnomer ... it
+	         * strictly should be 'data_required'
 	         */
                     if (!(gfi_fdc_description[fdc_current_command].dma_required))
 		        fla_atomicxqt();
-	            else 
+	            else
 	            {
 		        if (!fla_ndma)
 		    	    fla_atomicxqt();
@@ -635,7 +627,7 @@ void fla_outb IFN2(io_addr, port, half_word, value)
 		 * Note that reset effectively has a result phase since GFI
 		 * will execute a Sense Interrupt Status command after it.
 	         */
-		        
+		
 		gfi_reset(fdc_result_block, new_dor.bits.drive_select);
 
 		fdc_status = FDC_RQM;
@@ -667,7 +659,7 @@ void fla_outb IFN2(io_addr, port, half_word, value)
 	    if ((!dor.bits.not_reset && new_dor.bits.not_reset && new_dor.bits.interrupts_enabled)
 	      ||(fdc_int_line && !dor.bits.interrupts_enabled && new_dor.bits.interrupts_enabled))
 		    fla_hw_interrupt();
-    
+
 	    /*
 	     * If any drive motor bits have changed then issue GFI calls
 	     */
@@ -706,7 +698,6 @@ void fla_outb IFN2(io_addr, port, half_word, value)
     }
 
 #ifndef PROD
-#line 716
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 719
@@ -715,7 +706,6 @@ void fla_outb IFN2(io_addr, port, half_word, value)
 
 
 #endif // !NEC_98
-#line 724
 }
 
 
@@ -747,7 +737,7 @@ void fdc_command_completed (UTINY drive, half_word fdc_command)
 {
 
     if (gfi_fdc_description[fdc_command].int_required) {
-	if (!fdc_int_line && dor.bits.interrupts_enabled) 
+	if (!fdc_int_line && dor.bits.interrupts_enabled)
 	    add_q_event_i(fla_int_call_back, HOST_FLA_DELAY, 0);
 	fdc_int_line = 1;
     }
@@ -771,14 +761,14 @@ void fdc_command_completed (UTINY drive, half_word fdc_command)
     /*
      * If there is no result phase then go back to READY.
      */
-     
+
     if (gfi_fdc_description[fdc_command].result_bytes == 0)
 	fdc_status &= ~FDC_BUSY;
     else
 	fdc_status |= FDC_DIO;
 }
 
-/* 
+/*
  * This routine will 'automatically' execute the current FDC command.
  * The GFI layer will actually perform the command/execution/result phases
  * and return any result block. The Intel program.
@@ -790,8 +780,8 @@ static void fla_atomicxqt IFN0()
 	UTINY drive;
 
 	/*
-	 * Call GFI to execute the command 
-	 */ 
+	 * Call GFI to execute the command
+	 */
 	drive = get_type_drive(fdc_command_block);
 	trap_ndma();
 
@@ -808,14 +798,14 @@ static void fla_atomicxqt IFN0()
  *	    fdc_status	   &= ~FDC_DIO;
  */
             note_trace1(FLA_VERBOSE, "fla_outb(): <gfi returns error %x>",
-                        ret_stat); 
+                        ret_stat);
 	}
 	else
 	    fdc_command_completed(drive, fdc_current_command);
 }
 
 #else    /* NTVDM */
-#line 823
+
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif    /* NTVDM */
 #line 899
@@ -836,7 +826,7 @@ static void fdc_request_read_data_from_cpu IFN0()
 
 
 /* Prepare for processor data requests.
- * i.e; based upon the current command, establish the minimum number of bytes 
+ * i.e; based upon the current command, establish the minimum number of bytes
  * likely to be involved in a transfer, based upon the N parameter.
  * Set the fla_ndma_byte_count global appropriately. Set the ndma buffer
  * count to zero, forcing a real command read to occur the first time
@@ -850,71 +840,71 @@ static void fla_ndmaxqt IFN0()
 {
 	int n;
         static int fla_ndma_sectsize[] = {128,256,512,1024,2048,4096,8192};
- 
+
         note_trace0(FLA_VERBOSE, "DOING FLA_NDMAXQT");
- 
+
         /* set the non-dma bit in the status register ...
          * this clears at the end of the execution phase
          */
- 
+
         fdc_status |= FDC_NDMA;
- 
+
         fla_ndma_buffer_count = 0;
- 
+
         switch (gfi_fdc_description[fdc_current_command].cmd_class)
         {
         case 0:         /* sector read(s)                               */
- 
+
                 n = get_c0_N(fdc_command_block);
                 if (n)
                         fla_ndma_sector_size = fla_ndma_sectsize[n];
                 else
                         fla_ndma_sector_size = get_c0_DTL(fdc_command_block);
- 
+
                 /* kick of the execution phase by issuing
                  * an interrupt
                  */
- 
+
                 fdc_request_write_data_to_cpu();
- 
+
                 break;
- 
+
         case 1:         /* sector write(s)                              */
- 
+
                 n = get_c0_N(fdc_command_block);
                 if (n)
                         fla_ndma_sector_size = fla_ndma_sectsize[n];
                 else
                         fla_ndma_sector_size = get_c0_DTL(fdc_command_block);
- 
- 
+
+
                 /* kick of the execution phase by issuing
                  * an interrupt
                  */
- 
+
                 fdc_request_read_data_from_cpu();
- 
+
                 break;
- 
+
         case 2:         /* track read                                   */
                 always_trace0("\n FLA ... non-dma read track unimplemented");
                 break;
- 
+
         case 3:         /* format track                                 */
                 always_trace0("\n FLA ... non-dma format unimplemented");
                 break;
- 
+
         default:
                 always_trace0("\n FLA ... unexpected command for non-dma");
         }
 }
- 
- 
+
+
 /*
  * peek a quick look at the 'first' sector involved in this current
  * FDC command, to establish whether abnormal termination would have occurred * with the non-DMA transfer, and flag accordingly
  */
- 
+
 void fla_ndma_sector_peep IFN1(int *,all_clear)
 /* all_clear ----->                = 0 --> time out
                                  * = 1 --> sector good
@@ -922,25 +912,25 @@ void fla_ndma_sector_peep IFN1(int *,all_clear)
                                  */
 {
         int true_command, status;
- 
+
         /* build a 'read data' command using all current command
          * parameters.
          */
- 
+
         true_command = get_type_cmd(fdc_command_block);
         put_type_cmd(fdc_command_block, FDC_READ_DATA);
-        
+
         status = gfi_fdc_command(fdc_command_block, fdc_result_block);
- 
+
 	fla_ndma_buffer_count = 0;
 
         /* repair the command block
          */
- 
+
         put_type_cmd(fdc_command_block, true_command);
- 
+
         *all_clear = 0;
- 
+
         if (status == SUCCESS)
         {
                 if (get_r1_ST0_int_code(fdc_result_block) == FDC_NORMAL_TERMINATION)
@@ -948,12 +938,12 @@ void fla_ndma_sector_peep IFN1(int *,all_clear)
                 else
                         *all_clear = 2;
         }
- 
+
 }
- 
+
 /* This routine emulates the execution phase for sector writes
  * ... Here we buffer up data destined for the diskette on a
- * 'per sector' basis (the 'sector' size being determined by the 
+ * 'per sector' basis (the 'sector' size being determined by the
  * 'N' parameter (or possibly the 'DTL' parameter (if N=0)) specified
  * within the FDC command block. If the buffer is empty, the equivalent
  * read command is issued to the GFI layer, mainly to determine whether
@@ -965,7 +955,7 @@ static void fdc_ndma_bufmgr_wt IFN1(half_word, value)
 	int status;
 	int all_clear;
 
-        note_trace1(FLA_VERBOSE, 
+        note_trace1(FLA_VERBOSE,
                     "FDC_NDMA_BUFMGR_WT called .. buffered byte = %x",
                     (unsigned int) value);
 
@@ -1037,8 +1027,8 @@ static void fdc_ndma_bufmgr_wt IFN1(half_word, value)
 		fla_ndma_buffer[fla_ndma_buffer_count++] = value;
 
 }
- 
- 
+
+
 static void fla_ndma_bump_sectid IFN0()
 {
 	int i;
@@ -1056,7 +1046,6 @@ static void fla_ndma_unbump_sectid IFN0()
 }
 
 #ifdef SEGMENTATION
-#line 1136
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 1143
@@ -1098,5 +1087,4 @@ void fla_init IFN0()
     fla_ndma = FALSE;
     fla_busy = FALSE;
 #endif // !NEC_98
-#line 1181
 }

@@ -21,22 +21,14 @@
 
 
 #ifdef SEGMENTATION
-#line 24
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 31
 
 
 
-#line 34
 #ifndef PROD
-#line 35
+
 #error DIVERGENCE MVDM-HOST-DIV-502: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 2948
-#line 37

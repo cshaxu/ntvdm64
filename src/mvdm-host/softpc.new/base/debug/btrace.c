@@ -14,19 +14,12 @@
  */
 
 #ifdef SCCSID
-#line 17
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 19
 
 #ifdef SEGMENTATION
-#line 21
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 28
 
@@ -47,10 +40,7 @@
 #include "sas.h"
 #include "trace.h"
 
-#line 46
 #ifndef PROD
-#line 47
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 194
-#line 49

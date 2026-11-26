@@ -184,13 +184,11 @@ IMPORT	void	c_cpu_simulate	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 187
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 189
 IMPORT	void	cpu_simulate	IPT0();
 #endif /*PROD*/
-#line 191
 
 #endif	/* CCPU */
 
@@ -200,13 +198,11 @@ IMPORT	void	c_cpu_interrupt	IPT2(CPU_INT_TYPE, intType, IU16, intNum);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 200
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 202
 IMPORT	void	cpu_interrupt	IPT2(CPU_INT_TYPE, intType, IU16, intNum);
 #endif /*PROD*/
-#line 204
 
 #endif	/* CCPU */
 
@@ -216,13 +212,11 @@ IMPORT	void	c_cpu_clearHwInt	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 213
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 215
 IMPORT	void	cpu_clearHwInt	IPT0();
 #endif /*PROD*/
-#line 217
 
 #endif	/* CCPU */
 
@@ -232,13 +226,11 @@ IMPORT	void	c_cpu_EOA_hook	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 226
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 228
 IMPORT	void	cpu_EOA_hook	IPT0();
 #endif /*PROD*/
-#line 230
 
 #endif	/* CCPU */
 
@@ -248,13 +240,11 @@ IMPORT	void	c_cpu_terminate	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 239
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 241
 IMPORT	void	cpu_terminate	IPT0();
 #endif /*PROD*/
-#line 243
 
 #endif	/* CCPU */
 
@@ -264,13 +254,11 @@ IMPORT	void	c_cpu_init	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 252
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 254
 IMPORT	void	cpu_init	IPT0();
 #endif /*PROD*/
-#line 256
 
 #endif	/* CCPU */
 
@@ -280,13 +268,11 @@ IMPORT	void	c_cpu_q_ev_set_count	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 265
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 267
 IMPORT	void	host_q_ev_set_count	IPT1(IU32, val);
 #endif /*PROD*/
-#line 269
 
 #endif	/* CCPU */
 
@@ -296,13 +282,11 @@ IMPORT	IU32	c_cpu_q_ev_get_count	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 278
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 280
 IMPORT	IU32	host_q_ev_get_count	IPT0();
 #endif /*PROD*/
-#line 282
 
 #endif	/* CCPU */
 
@@ -312,13 +296,11 @@ IMPORT	IU32	c_cpu_calc_q_ev_inst_for_time	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 291
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 293
 IMPORT	IU32	host_calc_q_ev_inst_for_time	IPT1(IU32, val);
 #endif /*PROD*/
-#line 295
 
 #endif	/* CCPU */
 
@@ -328,13 +310,11 @@ IMPORT	void	c_cpu_init_ios_in	IPT4(IHP, InTables, IHP, OutTables, IUH, maxAdapto
 #else	/* CCPU */
 
 #ifdef PROD
-#line 304
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 306
 IMPORT	void	cpu_init_ios_in	IPT4(IHP, InTables, IHP, OutTables, IUH, maxAdaptor, IU16, portMask);
 #endif /*PROD*/
-#line 308
 
 #endif	/* CCPU */
 
@@ -344,13 +324,11 @@ IMPORT	void	c_cpu_define_inb	IPT2(IUH, adaptor, IHP, func);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 317
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 319
 IMPORT	void	ios_define_inb	IPT2(IUH, adaptor, IHP, func);
 #endif /*PROD*/
-#line 321
 
 #endif	/* CCPU */
 
@@ -360,13 +338,11 @@ IMPORT	void	c_cpu_define_inw	IPT2(IUH, adaptor, IHP, func);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 330
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 332
 IMPORT	void	ios_define_inw	IPT2(IUH, adaptor, IHP, func);
 #endif /*PROD*/
-#line 334
 
 #endif	/* CCPU */
 
@@ -376,13 +352,11 @@ IMPORT	void	c_cpu_define_ind	IPT2(IUH, adaptor, IHP, func);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 343
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 345
 IMPORT	void	ios_define_ind	IPT2(IUH, adaptor, IHP, func);
 #endif /*PROD*/
-#line 347
 
 #endif	/* CCPU */
 
@@ -392,13 +366,11 @@ IMPORT	void	c_cpu_define_outb	IPT2(IUH, adaptor, IHP, func);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 356
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 358
 IMPORT	void	ios_define_outb	IPT2(IUH, adaptor, IHP, func);
 #endif /*PROD*/
-#line 360
 
 #endif	/* CCPU */
 
@@ -408,13 +380,11 @@ IMPORT	void	c_cpu_define_outw	IPT2(IUH, adaptor, IHP, func);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 369
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 371
 IMPORT	void	ios_define_outw	IPT2(IUH, adaptor, IHP, func);
 #endif /*PROD*/
-#line 373
 
 #endif	/* CCPU */
 
@@ -424,13 +394,11 @@ IMPORT	void	c_cpu_define_outd	IPT2(IUH, adaptor, IHP, func);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 382
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 384
 IMPORT	void	ios_define_outd	IPT2(IUH, adaptor, IHP, func);
 #endif /*PROD*/
-#line 386
 
 #endif	/* CCPU */
 
@@ -440,13 +408,11 @@ IMPORT	void	c_setAL	IPT1(IU8, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 395
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 397
 IMPORT	void	setAL	IPT1(IU8, val);
 #endif /*PROD*/
-#line 399
 
 #endif	/* CCPU */
 
@@ -456,13 +422,11 @@ IMPORT	void	c_setAH	IPT1(IU8, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 408
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 410
 IMPORT	void	setAH	IPT1(IU8, val);
 #endif /*PROD*/
-#line 412
 
 #endif	/* CCPU */
 
@@ -472,13 +436,11 @@ IMPORT	void	c_setAX	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 421
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 423
 IMPORT	void	setAX	IPT1(IU16, val);
 #endif /*PROD*/
-#line 425
 
 #endif	/* CCPU */
 
@@ -488,13 +450,11 @@ IMPORT	void	c_setEAX	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 434
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 436
 IMPORT	void	setEAX	IPT1(IU32, val);
 #endif /*PROD*/
-#line 438
 
 #endif	/* CCPU */
 
@@ -504,13 +464,11 @@ IMPORT	void	c_setBL	IPT1(IU8, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 447
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 449
 IMPORT	void	setBL	IPT1(IU8, val);
 #endif /*PROD*/
-#line 451
 
 #endif	/* CCPU */
 
@@ -520,13 +478,11 @@ IMPORT	void	c_setBH	IPT1(IU8, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 460
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 462
 IMPORT	void	setBH	IPT1(IU8, val);
 #endif /*PROD*/
-#line 464
 
 #endif	/* CCPU */
 
@@ -536,13 +492,11 @@ IMPORT	void	c_setBX	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 473
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 475
 IMPORT	void	setBX	IPT1(IU16, val);
 #endif /*PROD*/
-#line 477
 
 #endif	/* CCPU */
 
@@ -552,13 +506,11 @@ IMPORT	void	c_setEBX	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 486
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 488
 IMPORT	void	setEBX	IPT1(IU32, val);
 #endif /*PROD*/
-#line 490
 
 #endif	/* CCPU */
 
@@ -568,13 +520,11 @@ IMPORT	void	c_setCL	IPT1(IU8, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 499
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 501
 IMPORT	void	setCL	IPT1(IU8, val);
 #endif /*PROD*/
-#line 503
 
 #endif	/* CCPU */
 
@@ -584,13 +534,11 @@ IMPORT	void	c_setCH	IPT1(IU8, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 512
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 514
 IMPORT	void	setCH	IPT1(IU8, val);
 #endif /*PROD*/
-#line 516
 
 #endif	/* CCPU */
 
@@ -600,13 +548,11 @@ IMPORT	void	c_setCX	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 525
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 527
 IMPORT	void	setCX	IPT1(IU16, val);
 #endif /*PROD*/
-#line 529
 
 #endif	/* CCPU */
 
@@ -616,13 +562,11 @@ IMPORT	void	c_setECX	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 538
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 540
 IMPORT	void	setECX	IPT1(IU32, val);
 #endif /*PROD*/
-#line 542
 
 #endif	/* CCPU */
 
@@ -632,13 +576,11 @@ IMPORT	void	c_setDL	IPT1(IU8, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 551
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 553
 IMPORT	void	setDL	IPT1(IU8, val);
 #endif /*PROD*/
-#line 555
 
 #endif	/* CCPU */
 
@@ -648,13 +590,11 @@ IMPORT	void	c_setDH	IPT1(IU8, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 564
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 566
 IMPORT	void	setDH	IPT1(IU8, val);
 #endif /*PROD*/
-#line 568
 
 #endif	/* CCPU */
 
@@ -664,13 +604,11 @@ IMPORT	void	c_setDX	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 577
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 579
 IMPORT	void	setDX	IPT1(IU16, val);
 #endif /*PROD*/
-#line 581
 
 #endif	/* CCPU */
 
@@ -680,13 +618,11 @@ IMPORT	void	c_setEDX	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 590
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 592
 IMPORT	void	setEDX	IPT1(IU32, val);
 #endif /*PROD*/
-#line 594
 
 #endif	/* CCPU */
 
@@ -696,13 +632,11 @@ IMPORT	void	c_setSI	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 603
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 605
 IMPORT	void	setSI	IPT1(IU16, val);
 #endif /*PROD*/
-#line 607
 
 #endif	/* CCPU */
 
@@ -712,13 +646,11 @@ IMPORT	void	c_setESI	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 616
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 618
 IMPORT	void	setESI	IPT1(IU32, val);
 #endif /*PROD*/
-#line 620
 
 #endif	/* CCPU */
 
@@ -728,13 +660,11 @@ IMPORT	void	c_setDI	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 629
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 631
 IMPORT	void	setDI	IPT1(IU16, val);
 #endif /*PROD*/
-#line 633
 
 #endif	/* CCPU */
 
@@ -744,13 +674,11 @@ IMPORT	void	c_setEDI	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 642
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 644
 IMPORT	void	setEDI	IPT1(IU32, val);
 #endif /*PROD*/
-#line 646
 
 #endif	/* CCPU */
 
@@ -760,13 +688,11 @@ IMPORT	void	c_setSP	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 655
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 657
 IMPORT	void	setSP	IPT1(IU16, val);
 #endif /*PROD*/
-#line 659
 
 #endif	/* CCPU */
 
@@ -776,13 +702,11 @@ IMPORT	void	c_setESP	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 668
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 670
 IMPORT	void	setESP	IPT1(IU32, val);
 #endif /*PROD*/
-#line 672
 
 #endif	/* CCPU */
 
@@ -792,13 +716,11 @@ IMPORT	void	c_setBP	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 681
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 683
 IMPORT	void	setBP	IPT1(IU16, val);
 #endif /*PROD*/
-#line 685
 
 #endif	/* CCPU */
 
@@ -808,13 +730,11 @@ IMPORT	void	c_setEBP	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 694
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 696
 IMPORT	void	setEBP	IPT1(IU32, val);
 #endif /*PROD*/
-#line 698
 
 #endif	/* CCPU */
 
@@ -824,13 +744,11 @@ IMPORT	void	c_setIP	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 707
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 709
 IMPORT	void	setIP	IPT1(IU16, val);
 #endif /*PROD*/
-#line 711
 
 #endif	/* CCPU */
 
@@ -840,13 +758,11 @@ IMPORT	void	c_setEIP	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 720
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 722
 IMPORT	void	setEIP	IPT1(IU32, val);
 #endif /*PROD*/
-#line 724
 
 #endif	/* CCPU */
 
@@ -856,13 +772,11 @@ IMPORT	IUH	c_setCS	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 733
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 735
 IMPORT	IUH	setCS	IPT1(IU16, val);
 #endif /*PROD*/
-#line 737
 
 #endif	/* CCPU */
 
@@ -872,13 +786,11 @@ IMPORT	IUH	c_setSS	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 746
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 748
 IMPORT	IUH	setSS	IPT1(IU16, val);
 #endif /*PROD*/
-#line 750
 
 #endif	/* CCPU */
 
@@ -888,13 +800,11 @@ IMPORT	IUH	c_setDS	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 759
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 761
 IMPORT	IUH	setDS	IPT1(IU16, val);
 #endif /*PROD*/
-#line 763
 
 #endif	/* CCPU */
 
@@ -904,13 +814,11 @@ IMPORT	IUH	c_setES	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 772
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 774
 IMPORT	IUH	setES	IPT1(IU16, val);
 #endif /*PROD*/
-#line 776
 
 #endif	/* CCPU */
 
@@ -920,13 +828,11 @@ IMPORT	IUH	c_setFS	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 785
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 787
 IMPORT	IUH	setFS	IPT1(IU16, val);
 #endif /*PROD*/
-#line 789
 
 #endif	/* CCPU */
 
@@ -936,13 +842,11 @@ IMPORT	IUH	c_setGS	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 798
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 800
 IMPORT	IUH	setGS	IPT1(IU16, val);
 #endif /*PROD*/
-#line 802
 
 #endif	/* CCPU */
 
@@ -952,13 +856,11 @@ IMPORT	void	c_setEFLAGS	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 811
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 813
 IMPORT	void	setEFLAGS	IPT1(IU32, val);
 #endif /*PROD*/
-#line 815
 
 #endif	/* CCPU */
 
@@ -968,13 +870,11 @@ IMPORT	void	c_setSTATUS	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 824
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 826
 IMPORT	void	setSTATUS	IPT1(IU16, val);
 #endif /*PROD*/
-#line 828
 
 #endif	/* CCPU */
 
@@ -984,13 +884,11 @@ IMPORT	void	c_setIOPL	IPT1(IU8, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 837
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 839
 IMPORT	void	setIOPL	IPT1(IU8, val);
 #endif /*PROD*/
-#line 841
 
 #endif	/* CCPU */
 
@@ -1000,13 +898,11 @@ IMPORT	void	c_setMSW	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 850
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 852
 IMPORT	void	setMSW	IPT1(IU16, val);
 #endif /*PROD*/
-#line 854
 
 #endif	/* CCPU */
 
@@ -1016,13 +912,11 @@ IMPORT	void	c_setCR0	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 863
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 865
 IMPORT	void	setCR0	IPT1(IU32, val);
 #endif /*PROD*/
-#line 867
 
 #endif	/* CCPU */
 
@@ -1032,13 +926,11 @@ IMPORT	void	c_setCR2	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 876
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 878
 IMPORT	void	setCR2	IPT1(IU32, val);
 #endif /*PROD*/
-#line 880
 
 #endif	/* CCPU */
 
@@ -1048,13 +940,11 @@ IMPORT	void	c_setCR3	IPT1(IU32, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 889
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 891
 IMPORT	void	setCR3	IPT1(IU32, val);
 #endif /*PROD*/
-#line 893
 
 #endif	/* CCPU */
 
@@ -1064,13 +954,11 @@ IMPORT	void	c_setCF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 902
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 904
 IMPORT	void	setCF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 906
 
 #endif	/* CCPU */
 
@@ -1080,13 +968,11 @@ IMPORT	void	c_setPF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 915
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 917
 IMPORT	void	setPF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 919
 
 #endif	/* CCPU */
 
@@ -1096,13 +982,11 @@ IMPORT	void	c_setAF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 928
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 930
 IMPORT	void	setAF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 932
 
 #endif	/* CCPU */
 
@@ -1112,13 +996,11 @@ IMPORT	void	c_setZF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 941
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 943
 IMPORT	void	setZF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 945
 
 #endif	/* CCPU */
 
@@ -1128,13 +1010,11 @@ IMPORT	void	c_setSF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 954
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 956
 IMPORT	void	setSF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 958
 
 #endif	/* CCPU */
 
@@ -1144,13 +1024,11 @@ IMPORT	void	c_setTF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 967
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 969
 IMPORT	void	setTF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 971
 
 #endif	/* CCPU */
 
@@ -1160,13 +1038,11 @@ IMPORT	void	c_setIF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 980
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 982
 IMPORT	void	setIF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 984
 
 #endif	/* CCPU */
 
@@ -1176,13 +1052,11 @@ IMPORT	void	c_setDF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 993
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 995
 IMPORT	void	setDF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 997
 
 #endif	/* CCPU */
 
@@ -1192,13 +1066,11 @@ IMPORT	void	c_setOF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1006
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1008
 IMPORT	void	setOF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1010
 
 #endif	/* CCPU */
 
@@ -1208,13 +1080,11 @@ IMPORT	void	c_setNT	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1019
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1021
 IMPORT	void	setNT	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1023
 
 #endif	/* CCPU */
 
@@ -1224,13 +1094,11 @@ IMPORT	void	c_setRF	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1032
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1034
 IMPORT	void	setRF	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1036
 
 #endif	/* CCPU */
 
@@ -1240,13 +1108,11 @@ IMPORT	void	c_setVM	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1045
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1047
 IMPORT	void	setVM	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1049
 
 #endif	/* CCPU */
 
@@ -1256,13 +1122,11 @@ IMPORT	void	c_setAC	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1058
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1060
 IMPORT	void	setAC	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1062
 
 #endif	/* CCPU */
 
@@ -1272,13 +1136,11 @@ IMPORT	void	c_setPE	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1071
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1073
 IMPORT	void	setPE	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1075
 
 #endif	/* CCPU */
 
@@ -1288,13 +1150,11 @@ IMPORT	void	c_setMP	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1084
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1086
 IMPORT	void	setMP	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1088
 
 #endif	/* CCPU */
 
@@ -1304,13 +1164,11 @@ IMPORT	void	c_setEM	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1097
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1099
 IMPORT	void	setEM	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1101
 
 #endif	/* CCPU */
 
@@ -1320,13 +1178,11 @@ IMPORT	void	c_setTS	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1110
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1112
 IMPORT	void	setTS	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1114
 
 #endif	/* CCPU */
 
@@ -1336,13 +1192,11 @@ IMPORT	void	c_setPG	IPT1(IBOOL, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1123
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1125
 IMPORT	void	setPG	IPT1(IBOOL, val);
 #endif /*PROD*/
-#line 1127
 
 #endif	/* CCPU */
 
@@ -1352,13 +1206,11 @@ IMPORT	void	c_setLDT_SELECTOR	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1136
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1138
 IMPORT	void	setLDT_SELECTOR	IPT1(IU16, val);
 #endif /*PROD*/
-#line 1140
 
 #endif	/* CCPU */
 
@@ -1368,13 +1220,11 @@ IMPORT	void	c_setTR_SELECTOR	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1149
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1151
 IMPORT	void	setTR_SELECTOR	IPT1(IU16, val);
 #endif /*PROD*/
-#line 1153
 
 #endif	/* CCPU */
 
@@ -1384,13 +1234,11 @@ IMPORT	IU8	c_getAL	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1162
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1164
 IMPORT	IU8	getAL	IPT0();
 #endif /*PROD*/
-#line 1166
 
 #endif	/* CCPU */
 
@@ -1400,13 +1248,11 @@ IMPORT	IU8	c_getAH	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1175
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1177
 IMPORT	IU8	getAH	IPT0();
 #endif /*PROD*/
-#line 1179
 
 #endif	/* CCPU */
 
@@ -1416,13 +1262,11 @@ IMPORT	IU16	c_getAX	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1188
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1190
 IMPORT	IU16	getAX	IPT0();
 #endif /*PROD*/
-#line 1192
 
 #endif	/* CCPU */
 
@@ -1432,13 +1276,11 @@ IMPORT	IU32	c_getEAX	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1201
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1203
 IMPORT	IU32	getEAX	IPT0();
 #endif /*PROD*/
-#line 1205
 
 #endif	/* CCPU */
 
@@ -1448,13 +1290,11 @@ IMPORT	IU8	c_getBL	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1214
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1216
 IMPORT	IU8	getBL	IPT0();
 #endif /*PROD*/
-#line 1218
 
 #endif	/* CCPU */
 
@@ -1464,13 +1304,11 @@ IMPORT	IU8	c_getBH	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1227
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1229
 IMPORT	IU8	getBH	IPT0();
 #endif /*PROD*/
-#line 1231
 
 #endif	/* CCPU */
 
@@ -1480,13 +1318,11 @@ IMPORT	IU16	c_getBX	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1240
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1242
 IMPORT	IU16	getBX	IPT0();
 #endif /*PROD*/
-#line 1244
 
 #endif	/* CCPU */
 
@@ -1496,13 +1332,11 @@ IMPORT	IU32	c_getEBX	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1253
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1255
 IMPORT	IU32	getEBX	IPT0();
 #endif /*PROD*/
-#line 1257
 
 #endif	/* CCPU */
 
@@ -1512,13 +1346,11 @@ IMPORT	IU8	c_getCL	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1266
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1268
 IMPORT	IU8	getCL	IPT0();
 #endif /*PROD*/
-#line 1270
 
 #endif	/* CCPU */
 
@@ -1528,13 +1360,11 @@ IMPORT	IU8	c_getCH	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1279
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1281
 IMPORT	IU8	getCH	IPT0();
 #endif /*PROD*/
-#line 1283
 
 #endif	/* CCPU */
 
@@ -1544,13 +1374,11 @@ IMPORT	IU16	c_getCX	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1292
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1294
 IMPORT	IU16	getCX	IPT0();
 #endif /*PROD*/
-#line 1296
 
 #endif	/* CCPU */
 
@@ -1560,13 +1388,11 @@ IMPORT	IU32	c_getECX	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1305
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1307
 IMPORT	IU32	getECX	IPT0();
 #endif /*PROD*/
-#line 1309
 
 #endif	/* CCPU */
 
@@ -1576,13 +1402,11 @@ IMPORT	IU8	c_getDL	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1318
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1320
 IMPORT	IU8	getDL	IPT0();
 #endif /*PROD*/
-#line 1322
 
 #endif	/* CCPU */
 
@@ -1592,13 +1416,11 @@ IMPORT	IU8	c_getDH	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1331
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1333
 IMPORT	IU8	getDH	IPT0();
 #endif /*PROD*/
-#line 1335
 
 #endif	/* CCPU */
 
@@ -1608,13 +1430,11 @@ IMPORT	IU16	c_getDX	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1344
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1346
 IMPORT	IU16	getDX	IPT0();
 #endif /*PROD*/
-#line 1348
 
 #endif	/* CCPU */
 
@@ -1624,13 +1444,11 @@ IMPORT	IU32	c_getEDX	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1357
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1359
 IMPORT	IU32	getEDX	IPT0();
 #endif /*PROD*/
-#line 1361
 
 #endif	/* CCPU */
 
@@ -1640,13 +1458,11 @@ IMPORT	IU16	c_getSI	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1370
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1372
 IMPORT	IU16	getSI	IPT0();
 #endif /*PROD*/
-#line 1374
 
 #endif	/* CCPU */
 
@@ -1656,13 +1472,11 @@ IMPORT	IU32	c_getESI	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1383
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1385
 IMPORT	IU32	getESI	IPT0();
 #endif /*PROD*/
-#line 1387
 
 #endif	/* CCPU */
 
@@ -1672,13 +1486,11 @@ IMPORT	IU16	c_getDI	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1396
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1398
 IMPORT	IU16	getDI	IPT0();
 #endif /*PROD*/
-#line 1400
 
 #endif	/* CCPU */
 
@@ -1688,13 +1500,11 @@ IMPORT	IU32	c_getEDI	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1409
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1411
 IMPORT	IU32	getEDI	IPT0();
 #endif /*PROD*/
-#line 1413
 
 #endif	/* CCPU */
 
@@ -1704,13 +1514,11 @@ IMPORT	IU16	c_getSP	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1422
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1424
 IMPORT	IU16	getSP	IPT0();
 #endif /*PROD*/
-#line 1426
 
 #endif	/* CCPU */
 
@@ -1720,13 +1528,11 @@ IMPORT	IU32	c_getESP	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1435
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1437
 IMPORT	IU32	getESP	IPT0();
 #endif /*PROD*/
-#line 1439
 
 #endif	/* CCPU */
 
@@ -1736,13 +1542,11 @@ IMPORT	IU16	c_getBP	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1448
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1450
 IMPORT	IU16	getBP	IPT0();
 #endif /*PROD*/
-#line 1452
 
 #endif	/* CCPU */
 
@@ -1752,13 +1556,11 @@ IMPORT	IU32	c_getEBP	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1461
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1463
 IMPORT	IU32	getEBP	IPT0();
 #endif /*PROD*/
-#line 1465
 
 #endif	/* CCPU */
 
@@ -1768,13 +1570,11 @@ IMPORT	IU16	c_getIP	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1474
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1476
 IMPORT	IU16	getIP	IPT0();
 #endif /*PROD*/
-#line 1478
 
 #endif	/* CCPU */
 
@@ -1784,13 +1584,11 @@ IMPORT	IU32	c_getEIP	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1487
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1489
 IMPORT	IU32	getEIP	IPT0();
 #endif /*PROD*/
-#line 1491
 
 #endif	/* CCPU */
 
@@ -1800,13 +1598,11 @@ IMPORT	IU16	c_getCS	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1500
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1502
 IMPORT	IU16	getCS	IPT0();
 #endif /*PROD*/
-#line 1504
 
 #endif	/* CCPU */
 
@@ -1816,13 +1612,11 @@ IMPORT	IU16	c_getSS	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1513
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1515
 IMPORT	IU16	getSS	IPT0();
 #endif /*PROD*/
-#line 1517
 
 #endif	/* CCPU */
 
@@ -1832,13 +1626,11 @@ IMPORT	IU16	c_getDS	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1526
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1528
 IMPORT	IU16	getDS	IPT0();
 #endif /*PROD*/
-#line 1530
 
 #endif	/* CCPU */
 
@@ -1848,13 +1640,11 @@ IMPORT	IU16	c_getES	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1539
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1541
 IMPORT	IU16	getES	IPT0();
 #endif /*PROD*/
-#line 1543
 
 #endif	/* CCPU */
 
@@ -1864,13 +1654,11 @@ IMPORT	IU16	c_getFS	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1552
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1554
 IMPORT	IU16	getFS	IPT0();
 #endif /*PROD*/
-#line 1556
 
 #endif	/* CCPU */
 
@@ -1880,13 +1668,11 @@ IMPORT	IU16	c_getGS	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1565
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1567
 IMPORT	IU16	getGS	IPT0();
 #endif /*PROD*/
-#line 1569
 
 #endif	/* CCPU */
 
@@ -1896,13 +1682,11 @@ IMPORT	IU32	c_getEFLAGS	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1578
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1580
 IMPORT	IU32	getEFLAGS	IPT0();
 #endif /*PROD*/
-#line 1582
 
 #endif	/* CCPU */
 
@@ -1912,13 +1696,11 @@ IMPORT	IU16	c_getSTATUS	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1591
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1593
 IMPORT	IU16	getSTATUS	IPT0();
 #endif /*PROD*/
-#line 1595
 
 #endif	/* CCPU */
 
@@ -1928,13 +1710,11 @@ IMPORT	IU8	c_getIOPL	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1604
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1606
 IMPORT	IU8	getIOPL	IPT0();
 #endif /*PROD*/
-#line 1608
 
 #endif	/* CCPU */
 
@@ -1944,13 +1724,11 @@ IMPORT	IU16	c_getMSW	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1617
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1619
 IMPORT	IU16	getMSW	IPT0();
 #endif /*PROD*/
-#line 1621
 
 #endif	/* CCPU */
 
@@ -1960,13 +1738,11 @@ IMPORT	IU32	c_getCR0	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1630
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1632
 IMPORT	IU32	getCR0	IPT0();
 #endif /*PROD*/
-#line 1634
 
 #endif	/* CCPU */
 
@@ -1976,13 +1752,11 @@ IMPORT	IU32	c_getCR2	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1643
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1645
 IMPORT	IU32	getCR2	IPT0();
 #endif /*PROD*/
-#line 1647
 
 #endif	/* CCPU */
 
@@ -1992,13 +1766,11 @@ IMPORT	IU32	c_getCR3	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1656
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1658
 IMPORT	IU32	getCR3	IPT0();
 #endif /*PROD*/
-#line 1660
 
 #endif	/* CCPU */
 
@@ -2008,13 +1780,11 @@ IMPORT	IBOOL	c_getCF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1669
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1671
 IMPORT	IBOOL	getCF	IPT0();
 #endif /*PROD*/
-#line 1673
 
 #endif	/* CCPU */
 
@@ -2024,13 +1794,11 @@ IMPORT	IBOOL	c_getPF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1682
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1684
 IMPORT	IBOOL	getPF	IPT0();
 #endif /*PROD*/
-#line 1686
 
 #endif	/* CCPU */
 
@@ -2040,13 +1808,11 @@ IMPORT	IBOOL	c_getAF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1695
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1697
 IMPORT	IBOOL	getAF	IPT0();
 #endif /*PROD*/
-#line 1699
 
 #endif	/* CCPU */
 
@@ -2056,13 +1822,11 @@ IMPORT	IBOOL	c_getZF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1708
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1710
 IMPORT	IBOOL	getZF	IPT0();
 #endif /*PROD*/
-#line 1712
 
 #endif	/* CCPU */
 
@@ -2072,13 +1836,11 @@ IMPORT	IBOOL	c_getSF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1721
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1723
 IMPORT	IBOOL	getSF	IPT0();
 #endif /*PROD*/
-#line 1725
 
 #endif	/* CCPU */
 
@@ -2088,13 +1850,11 @@ IMPORT	IBOOL	c_getTF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1734
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1736
 IMPORT	IBOOL	getTF	IPT0();
 #endif /*PROD*/
-#line 1738
 
 #endif	/* CCPU */
 
@@ -2104,13 +1864,11 @@ IMPORT	IBOOL	c_getIF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1747
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1749
 IMPORT	IBOOL	getIF	IPT0();
 #endif /*PROD*/
-#line 1751
 
 #endif	/* CCPU */
 
@@ -2120,13 +1878,11 @@ IMPORT	IBOOL	c_getDF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1760
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1762
 IMPORT	IBOOL	getDF	IPT0();
 #endif /*PROD*/
-#line 1764
 
 #endif	/* CCPU */
 
@@ -2136,13 +1892,11 @@ IMPORT	IBOOL	c_getOF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1773
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1775
 IMPORT	IBOOL	getOF	IPT0();
 #endif /*PROD*/
-#line 1777
 
 #endif	/* CCPU */
 
@@ -2152,13 +1906,11 @@ IMPORT	IBOOL	c_getNT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1786
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1788
 IMPORT	IBOOL	getNT	IPT0();
 #endif /*PROD*/
-#line 1790
 
 #endif	/* CCPU */
 
@@ -2168,13 +1920,11 @@ IMPORT	IBOOL	c_getRF	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1799
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1801
 IMPORT	IBOOL	getRF	IPT0();
 #endif /*PROD*/
-#line 1803
 
 #endif	/* CCPU */
 
@@ -2184,13 +1934,11 @@ IMPORT	IBOOL	c_getVM	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1812
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1814
 IMPORT	IBOOL	getVM	IPT0();
 #endif /*PROD*/
-#line 1816
 
 #endif	/* CCPU */
 
@@ -2200,13 +1948,11 @@ IMPORT	IBOOL	c_getAC	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1825
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1827
 IMPORT	IBOOL	getAC	IPT0();
 #endif /*PROD*/
-#line 1829
 
 #endif	/* CCPU */
 
@@ -2216,13 +1962,11 @@ IMPORT	IBOOL	c_getPE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1838
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1840
 IMPORT	IBOOL	getPE	IPT0();
 #endif /*PROD*/
-#line 1842
 
 #endif	/* CCPU */
 
@@ -2232,13 +1976,11 @@ IMPORT	IBOOL	c_getMP	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1851
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1853
 IMPORT	IBOOL	getMP	IPT0();
 #endif /*PROD*/
-#line 1855
 
 #endif	/* CCPU */
 
@@ -2248,13 +1990,11 @@ IMPORT	IBOOL	c_getEM	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1864
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1866
 IMPORT	IBOOL	getEM	IPT0();
 #endif /*PROD*/
-#line 1868
 
 #endif	/* CCPU */
 
@@ -2264,13 +2004,11 @@ IMPORT	IBOOL	c_getTS	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1877
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1879
 IMPORT	IBOOL	getTS	IPT0();
 #endif /*PROD*/
-#line 1881
 
 #endif	/* CCPU */
 
@@ -2280,13 +2018,11 @@ IMPORT	IBOOL	c_getET	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1890
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1892
 IMPORT	IBOOL	getET	IPT0();
 #endif /*PROD*/
-#line 1894
 
 #endif	/* CCPU */
 
@@ -2296,13 +2032,11 @@ IMPORT	IBOOL	c_getNE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1903
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1905
 IMPORT	IBOOL	getNE	IPT0();
 #endif /*PROD*/
-#line 1907
 
 #endif	/* CCPU */
 
@@ -2312,13 +2046,11 @@ IMPORT	IBOOL	c_getWP	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1916
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1918
 IMPORT	IBOOL	getWP	IPT0();
 #endif /*PROD*/
-#line 1920
 
 #endif	/* CCPU */
 
@@ -2328,13 +2060,11 @@ IMPORT	IBOOL	c_getPG	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1929
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1931
 IMPORT	IBOOL	getPG	IPT0();
 #endif /*PROD*/
-#line 1933
 
 #endif	/* CCPU */
 
@@ -2344,13 +2074,11 @@ IMPORT	IU32	c_getGDT_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1942
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1944
 IMPORT	IU32	getGDT_BASE	IPT0();
 #endif /*PROD*/
-#line 1946
 
 #endif	/* CCPU */
 
@@ -2360,13 +2088,11 @@ IMPORT	IU16	c_getGDT_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1955
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1957
 IMPORT	IU16	getGDT_LIMIT	IPT0();
 #endif /*PROD*/
-#line 1959
 
 #endif	/* CCPU */
 
@@ -2376,13 +2102,11 @@ IMPORT	IU32	c_getIDT_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1968
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1970
 IMPORT	IU32	getIDT_BASE	IPT0();
 #endif /*PROD*/
-#line 1972
 
 #endif	/* CCPU */
 
@@ -2392,13 +2116,11 @@ IMPORT	IU16	c_getIDT_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1981
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1983
 IMPORT	IU16	getIDT_LIMIT	IPT0();
 #endif /*PROD*/
-#line 1985
 
 #endif	/* CCPU */
 
@@ -2408,13 +2130,11 @@ IMPORT	IU16	c_getLDT_SELECTOR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 1994
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 1996
 IMPORT	IU16	getLDT_SELECTOR	IPT0();
 #endif /*PROD*/
-#line 1998
 
 #endif	/* CCPU */
 
@@ -2424,13 +2144,11 @@ IMPORT	IU32	c_getLDT_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2007
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2009
 IMPORT	IU32	getLDT_BASE	IPT0();
 #endif /*PROD*/
-#line 2011
 
 #endif	/* CCPU */
 
@@ -2440,13 +2158,11 @@ IMPORT	IU32	c_getLDT_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2020
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2022
 IMPORT	IU32	getLDT_LIMIT	IPT0();
 #endif /*PROD*/
-#line 2024
 
 #endif	/* CCPU */
 
@@ -2456,13 +2172,11 @@ IMPORT	IU16	c_getTR_SELECTOR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2033
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2035
 IMPORT	IU16	getTR_SELECTOR	IPT0();
 #endif /*PROD*/
-#line 2037
 
 #endif	/* CCPU */
 
@@ -2472,13 +2186,11 @@ IMPORT	IU32	c_getTR_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2046
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2048
 IMPORT	IU32	getTR_BASE	IPT0();
 #endif /*PROD*/
-#line 2050
 
 #endif	/* CCPU */
 
@@ -2488,13 +2200,11 @@ IMPORT	IU32	c_getTR_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2059
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2061
 IMPORT	IU32	getTR_LIMIT	IPT0();
 #endif /*PROD*/
-#line 2063
 
 #endif	/* CCPU */
 
@@ -2504,13 +2214,11 @@ IMPORT	IU16	c_getTR_AR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2072
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2074
 IMPORT	IU16	getTR_AR	IPT0();
 #endif /*PROD*/
-#line 2076
 
 #endif	/* CCPU */
 
@@ -2520,13 +2228,11 @@ IMPORT	IUH	host_get_q_calib_val	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2085
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2087
 IMPORT	IUH	host_get_q_calib_val	IPT0();
 #endif /*PROD*/
-#line 2089
 
 #endif	/* CCPU */
 
@@ -2536,13 +2242,11 @@ IMPORT	IUH	host_get_jump_restart	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2098
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2100
 IMPORT	IUH	host_get_jump_restart	IPT0();
 #endif /*PROD*/
-#line 2102
 
 #endif	/* CCPU */
 
@@ -2552,13 +2256,11 @@ IMPORT	void	host_set_jump_restart	IPT1(IUH, initialVal);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2111
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2113
 IMPORT	void	host_set_jump_restart	IPT1(IUH, initialVal);
 #endif /*PROD*/
-#line 2115
 
 #endif	/* CCPU */
 
@@ -2568,13 +2270,11 @@ IMPORT	void	setEOIEnableAddr	IPT1(IU8 *, initialVal);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2124
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2126
 IMPORT	void	setEOIEnableAddr	IPT1(IU8 *, initialVal);
 #endif /*PROD*/
-#line 2128
 
 #endif	/* CCPU */
 
@@ -2584,13 +2284,11 @@ IMPORT	void	setAddProfileDataPtr	IPT1(IHP, initialVal);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2137
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2139
 IMPORT	void	setAddProfileDataPtr	IPT1(IHP, initialVal);
 #endif /*PROD*/
-#line 2141
 
 #endif	/* CCPU */
 
@@ -2600,13 +2298,11 @@ IMPORT	void	setMaxProfileDataAddr	IPT1(IHP, initialVal);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2150
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2152
 IMPORT	void	setMaxProfileDataAddr	IPT1(IHP, initialVal);
 #endif /*PROD*/
-#line 2154
 
 #endif	/* CCPU */
 
@@ -2616,13 +2312,11 @@ IMPORT	IHP	getAddProfileDataAddr	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2163
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2165
 IMPORT	IHP	getAddProfileDataAddr	IPT0();
 #endif /*PROD*/
-#line 2167
 
 #endif	/* CCPU */
 
@@ -2632,13 +2326,11 @@ IMPORT	void	PurgeLostIretHookLine	IPT1(IU16, lineNum);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2176
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2178
 IMPORT	void	PurgeLostIretHookLine	IPT1(IU16, lineNum);
 #endif /*PROD*/
-#line 2180
 
 #endif	/* CCPU */
 
@@ -2710,13 +2402,11 @@ IMPORT	IHP	c_getSadInfoTable	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2251
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2253
 IMPORT	IHP	getSadInfoTable	IPT0();
 #endif /*PROD*/
-#line 2255
 
 #endif	/* CCPU */
 
@@ -2726,13 +2416,11 @@ IMPORT	IBOOL	c_setGDT_BASE_LIMIT	IPT2(IU32, base, IU16, limit);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2264
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2266
 IMPORT	IBOOL	setGDT_BASE_LIMIT	IPT2(IU32, base, IU16, limit);
 #endif /*PROD*/
-#line 2268
 
 #endif	/* CCPU */
 
@@ -2742,13 +2430,11 @@ IMPORT	IBOOL	c_setIDT_BASE_LIMIT	IPT2(IU32, base, IU16, limit);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2277
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2279
 IMPORT	IBOOL	setIDT_BASE_LIMIT	IPT2(IU32, base, IU16, limit);
 #endif /*PROD*/
-#line 2281
 
 #endif	/* CCPU */
 
@@ -2758,13 +2444,11 @@ IMPORT	IBOOL	c_setLDT_BASE_LIMIT	IPT2(IU32, base, IU32, limit);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2290
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2292
 IMPORT	IBOOL	setLDT_BASE_LIMIT	IPT2(IU32, base, IU32, limit);
 #endif /*PROD*/
-#line 2294
 
 #endif	/* CCPU */
 
@@ -2774,13 +2458,11 @@ IMPORT	IBOOL	c_setTR_BASE_LIMIT	IPT2(IU32, base, IU32, limit);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2303
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2305
 IMPORT	IBOOL	setTR_BASE_LIMIT	IPT2(IU32, base, IU32, limit);
 #endif /*PROD*/
-#line 2307
 
 #endif	/* CCPU */
 
@@ -2790,13 +2472,11 @@ IMPORT	IBOOL	c_setTR_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2316
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2318
 IMPORT	IBOOL	setTR_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #endif /*PROD*/
-#line 2320
 
 #endif	/* CCPU */
 
@@ -2806,13 +2486,11 @@ IMPORT	IBOOL	c_setCS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2329
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2331
 IMPORT	IBOOL	setCS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #endif /*PROD*/
-#line 2333
 
 #endif	/* CCPU */
 
@@ -2822,13 +2500,11 @@ IMPORT	IBOOL	c_setSS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2342
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2344
 IMPORT	IBOOL	setSS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #endif /*PROD*/
-#line 2346
 
 #endif	/* CCPU */
 
@@ -2838,13 +2514,11 @@ IMPORT	IBOOL	c_setDS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2355
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2357
 IMPORT	IBOOL	setDS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #endif /*PROD*/
-#line 2359
 
 #endif	/* CCPU */
 
@@ -2854,13 +2528,11 @@ IMPORT	IBOOL	c_setES_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2368
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2370
 IMPORT	IBOOL	setES_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #endif /*PROD*/
-#line 2372
 
 #endif	/* CCPU */
 
@@ -2870,13 +2542,11 @@ IMPORT	IBOOL	c_setFS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2381
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2383
 IMPORT	IBOOL	setFS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #endif /*PROD*/
-#line 2385
 
 #endif	/* CCPU */
 
@@ -2886,13 +2556,11 @@ IMPORT	IBOOL	c_setGS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2394
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2396
 IMPORT	IBOOL	setGS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #endif /*PROD*/
-#line 2398
 
 #endif	/* CCPU */
 
@@ -2902,13 +2570,11 @@ IMPORT	void	c_setCS_SELECTOR	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2407
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2409
 IMPORT	void	setCS_SELECTOR	IPT1(IU16, val);
 #endif /*PROD*/
-#line 2411
 
 #endif	/* CCPU */
 
@@ -2918,13 +2584,11 @@ IMPORT	void	c_setSS_SELECTOR	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2420
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2422
 IMPORT	void	setSS_SELECTOR	IPT1(IU16, val);
 #endif /*PROD*/
-#line 2424
 
 #endif	/* CCPU */
 
@@ -2934,13 +2598,11 @@ IMPORT	void	c_setDS_SELECTOR	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2433
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2435
 IMPORT	void	setDS_SELECTOR	IPT1(IU16, val);
 #endif /*PROD*/
-#line 2437
 
 #endif	/* CCPU */
 
@@ -2950,13 +2612,11 @@ IMPORT	void	c_setES_SELECTOR	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2446
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2448
 IMPORT	void	setES_SELECTOR	IPT1(IU16, val);
 #endif /*PROD*/
-#line 2450
 
 #endif	/* CCPU */
 
@@ -2966,13 +2626,11 @@ IMPORT	void	c_setFS_SELECTOR	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2459
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2461
 IMPORT	void	setFS_SELECTOR	IPT1(IU16, val);
 #endif /*PROD*/
-#line 2463
 
 #endif	/* CCPU */
 
@@ -2982,13 +2640,11 @@ IMPORT	void	c_setGS_SELECTOR	IPT1(IU16, val);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2472
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2474
 IMPORT	void	setGS_SELECTOR	IPT1(IU16, val);
 #endif /*PROD*/
-#line 2476
 
 #endif	/* CCPU */
 
@@ -2998,13 +2654,11 @@ IMPORT	IU16	c_getCS_SELECTOR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2485
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2487
 IMPORT	IU16	getCS_SELECTOR	IPT0();
 #endif /*PROD*/
-#line 2489
 
 #endif	/* CCPU */
 
@@ -3014,13 +2668,11 @@ IMPORT	IU16	c_getSS_SELECTOR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2498
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2500
 IMPORT	IU16	getSS_SELECTOR	IPT0();
 #endif /*PROD*/
-#line 2502
 
 #endif	/* CCPU */
 
@@ -3030,13 +2682,11 @@ IMPORT	IU16	c_getDS_SELECTOR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2511
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2513
 IMPORT	IU16	getDS_SELECTOR	IPT0();
 #endif /*PROD*/
-#line 2515
 
 #endif	/* CCPU */
 
@@ -3046,13 +2696,11 @@ IMPORT	IU16	c_getES_SELECTOR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2524
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2526
 IMPORT	IU16	getES_SELECTOR	IPT0();
 #endif /*PROD*/
-#line 2528
 
 #endif	/* CCPU */
 
@@ -3062,13 +2710,11 @@ IMPORT	IU16	c_getFS_SELECTOR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2537
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2539
 IMPORT	IU16	getFS_SELECTOR	IPT0();
 #endif /*PROD*/
-#line 2541
 
 #endif	/* CCPU */
 
@@ -3078,13 +2724,11 @@ IMPORT	IU16	c_getGS_SELECTOR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2550
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2552
 IMPORT	IU16	getGS_SELECTOR	IPT0();
 #endif /*PROD*/
-#line 2554
 
 #endif	/* CCPU */
 
@@ -3094,13 +2738,11 @@ IMPORT	IU32	c_getCS_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2563
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2565
 IMPORT	IU32	getCS_BASE	IPT0();
 #endif /*PROD*/
-#line 2567
 
 #endif	/* CCPU */
 
@@ -3110,13 +2752,11 @@ IMPORT	IU32	c_getSS_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2576
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2578
 IMPORT	IU32	getSS_BASE	IPT0();
 #endif /*PROD*/
-#line 2580
 
 #endif	/* CCPU */
 
@@ -3126,13 +2766,11 @@ IMPORT	IU32	c_getDS_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2589
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2591
 IMPORT	IU32	getDS_BASE	IPT0();
 #endif /*PROD*/
-#line 2593
 
 #endif	/* CCPU */
 
@@ -3142,13 +2780,11 @@ IMPORT	IU32	c_getES_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2602
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2604
 IMPORT	IU32	getES_BASE	IPT0();
 #endif /*PROD*/
-#line 2606
 
 #endif	/* CCPU */
 
@@ -3158,13 +2794,11 @@ IMPORT	IU32	c_getFS_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2615
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2617
 IMPORT	IU32	getFS_BASE	IPT0();
 #endif /*PROD*/
-#line 2619
 
 #endif	/* CCPU */
 
@@ -3174,13 +2808,11 @@ IMPORT	IU32	c_getGS_BASE	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2628
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2630
 IMPORT	IU32	getGS_BASE	IPT0();
 #endif /*PROD*/
-#line 2632
 
 #endif	/* CCPU */
 
@@ -3190,13 +2822,11 @@ IMPORT	IU32	c_getCS_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2641
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2643
 IMPORT	IU32	getCS_LIMIT	IPT0();
 #endif /*PROD*/
-#line 2645
 
 #endif	/* CCPU */
 
@@ -3206,13 +2836,11 @@ IMPORT	IU32	c_getSS_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2654
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2656
 IMPORT	IU32	getSS_LIMIT	IPT0();
 #endif /*PROD*/
-#line 2658
 
 #endif	/* CCPU */
 
@@ -3222,13 +2850,11 @@ IMPORT	IU32	c_getDS_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2667
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2669
 IMPORT	IU32	getDS_LIMIT	IPT0();
 #endif /*PROD*/
-#line 2671
 
 #endif	/* CCPU */
 
@@ -3238,13 +2864,11 @@ IMPORT	IU32	c_getES_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2680
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2682
 IMPORT	IU32	getES_LIMIT	IPT0();
 #endif /*PROD*/
-#line 2684
 
 #endif	/* CCPU */
 
@@ -3254,13 +2878,11 @@ IMPORT	IU32	c_getFS_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2693
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2695
 IMPORT	IU32	getFS_LIMIT	IPT0();
 #endif /*PROD*/
-#line 2697
 
 #endif	/* CCPU */
 
@@ -3270,13 +2892,11 @@ IMPORT	IU32	c_getGS_LIMIT	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2706
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2708
 IMPORT	IU32	getGS_LIMIT	IPT0();
 #endif /*PROD*/
-#line 2710
 
 #endif	/* CCPU */
 
@@ -3286,13 +2906,11 @@ IMPORT	IU16	c_getCS_AR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2719
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2721
 IMPORT	IU16	getCS_AR	IPT0();
 #endif /*PROD*/
-#line 2723
 
 #endif	/* CCPU */
 
@@ -3302,13 +2920,11 @@ IMPORT	IU16	c_getSS_AR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2732
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2734
 IMPORT	IU16	getSS_AR	IPT0();
 #endif /*PROD*/
-#line 2736
 
 #endif	/* CCPU */
 
@@ -3318,13 +2934,11 @@ IMPORT	IU16	c_getDS_AR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2745
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2747
 IMPORT	IU16	getDS_AR	IPT0();
 #endif /*PROD*/
-#line 2749
 
 #endif	/* CCPU */
 
@@ -3334,13 +2948,11 @@ IMPORT	IU16	c_getES_AR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2758
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2760
 IMPORT	IU16	getES_AR	IPT0();
 #endif /*PROD*/
-#line 2762
 
 #endif	/* CCPU */
 
@@ -3350,13 +2962,11 @@ IMPORT	IU16	c_getFS_AR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2771
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2773
 IMPORT	IU16	getFS_AR	IPT0();
 #endif /*PROD*/
-#line 2775
 
 #endif	/* CCPU */
 
@@ -3366,13 +2976,11 @@ IMPORT	IU16	c_getGS_AR	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2784
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2786
 IMPORT	IU16	getGS_AR	IPT0();
 #endif /*PROD*/
-#line 2788
 
 #endif	/* CCPU */
 
@@ -3382,13 +2990,11 @@ IMPORT	IUH	c_getCPL	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2797
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2799
 IMPORT	IUH	getCPL	IPT0();
 #endif /*PROD*/
-#line 2801
 
 #endif	/* CCPU */
 
@@ -3398,13 +3004,11 @@ IMPORT	void	c_setCPL	IPT1(IUH, prot);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2810
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2812
 IMPORT	void	setCPL	IPT1(IUH, prot);
 #endif /*PROD*/
-#line 2814
 
 #endif	/* CCPU */
 
@@ -3414,13 +3018,11 @@ IMPORT	void	c_getCpuState	IPT1(TypeCpuStateRECptr, state);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2823
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2825
 IMPORT	void	getCpuState	IPT1(TypeCpuStateRECptr, state);
 #endif /*PROD*/
-#line 2827
 
 #endif	/* CCPU */
 
@@ -3430,13 +3032,11 @@ IMPORT	void	c_setCpuState	IPT1(TypeCpuStateRECptr, state);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2836
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2838
 IMPORT	void	setCpuState	IPT1(TypeCpuStateRECptr, state);
 #endif /*PROD*/
-#line 2840
 
 #endif	/* CCPU */
 
@@ -3446,13 +3046,11 @@ IMPORT	void	c_InitNanoCpu	IPT1(IU32, variety);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2849
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2851
 IMPORT	void	initNanoCpu	IPT1(IU32, variety);
 #endif /*PROD*/
-#line 2853
 
 #endif	/* CCPU */
 
@@ -3462,13 +3060,11 @@ IMPORT	void	c_PrepareBlocksToCompile	IPT1(IU32, variety);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2862
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2864
 IMPORT	void	prepareBlocksToCompile	IPT1(IU32, variety);
 #endif /*PROD*/
-#line 2866
 
 #endif	/* CCPU */
 
@@ -3478,13 +3074,11 @@ IMPORT	void	c_setRegConstraint	IPT2(IU32, regId, IU8, constraintType);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2875
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2877
 IMPORT	void	setRegConstraint	IPT2(IU32, regId, IU8, constraintType);
 #endif /*PROD*/
-#line 2879
 
 #endif	/* CCPU */
 
@@ -3494,13 +3088,11 @@ IMPORT	void	c_growRecPool	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2888
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2890
 IMPORT	void	growRecPool	IPT0();
 #endif /*PROD*/
-#line 2892
 
 #endif	/* CCPU */
 
@@ -3509,13 +3101,11 @@ IMPORT	void	growRecPool	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2900
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2902
 IMPORT	void	BpiCompileBPI	IPT1(char *, instructions);
 #endif /*PROD*/
-#line 2904
 
 #endif	/* CCPU */
 
@@ -3525,13 +3115,11 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2913
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2915
 IMPORT	void	trashIntelregisters	IPT0();
 #endif /*PROD*/
-#line 2917
 
 #endif	/* CCPU */
 
@@ -3540,13 +3128,11 @@ IMPORT	void	trashIntelregisters	IPT0();
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2925
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2927
 IMPORT	void	FmDeleteAllStructures	IPT1(IU32, newCR0);
 #endif /*PROD*/
-#line 2929
 
 #endif	/* CCPU */
 
@@ -3555,13 +3141,11 @@ IMPORT	void	FmDeleteAllStructures	IPT1(IU32, newCR0);
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2937
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2939
 IMPORT	TypeConstraintBitMapRECptr	constraintsFromUnivEpcPtr	IPT1(TypeEntryPointCacheRECptr, univ);
 #endif /*PROD*/
-#line 2941
 
 #endif	/* CCPU */
 
@@ -3570,13 +3154,11 @@ IMPORT	TypeConstraintBitMapRECptr	constraintsFromUnivEpcPtr	IPT1(TypeEntryPointC
 #else	/* CCPU */
 
 #ifdef PROD
-#line 2949
 #error Excluded unsupported non-CCPU PROD configuration
 #else /* PROD */
 #line 2951
 IMPORT	TypeConstraintBitMapRECptr	constraintsFromUnivHandle	IPT1(IU16, handle);
 #endif /*PROD*/
-#line 2953
 
 #endif	/* CCPU */
 
