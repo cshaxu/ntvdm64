@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P8",
-  "state": "final-verified-awaiting-commit-push",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime11",
   "reviewed_files": 20,
   "total_files": 48,
@@ -849,5 +849,7 @@
     "text_collision": "wkman XP4942 CHMODCACHE expands to4; equals different loop XP2311, not line drift",
     "withdrawn": "linear-only #line counter; runtime10 not final evidence",
     "follow_up": "recheck earlier P1-P7 linear-only evidence before S11 closure"
-  }
+  },
+  "commit": "874e19e8315bbb03ea0441e0dee0537da43ecc20",
+  "pushed_remote": "origin/main"
 }

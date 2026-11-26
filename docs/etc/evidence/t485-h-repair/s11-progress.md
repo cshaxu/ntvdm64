@@ -24,14 +24,14 @@ frozen point counts as current byte-sensitive diff counts.
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | P5 delivered 1587bccad |
 | 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | P6 delivered 94a576739 |
 | 12 | src/mvdm-host/wow32/wdde.c | 25 | P7 delivered f97262387 |
-| 13 | src/mvdm-host/wow32/wdde.h | 4 | P8 final-verified; commit/push pending |
-| 14 | src/mvdm-host/wow32/wdib.c | 1 | P8 final-verified; commit/push pending |
-| 15 | src/mvdm-host/wow32/wdos.c | 6 | P8 final-verified; commit/push pending |
-| 16 | src/mvdm-host/wow32/wgdi31.c | 1 | P8 final-verified; commit/push pending |
-| 17 | src/mvdm-host/wow32/winsockp.h | 3 | P8 final-verified; commit/push pending |
-| 18 | src/mvdm-host/wow32/wkernel.c | 10 | P8 final-verified; commit/push pending |
-| 19 | src/mvdm-host/wow32/wkfileio.c | 6 | P8 final-verified; commit/push pending |
-| 20 | src/mvdm-host/wow32/wkman.c | 22 | P8 final-verified; commit/push pending |
+| 13 | src/mvdm-host/wow32/wdde.h | 4 | P8 delivered 874e19e83 |
+| 14 | src/mvdm-host/wow32/wdib.c | 1 | P8 delivered 874e19e83 |
+| 15 | src/mvdm-host/wow32/wdos.c | 6 | P8 delivered 874e19e83 |
+| 16 | src/mvdm-host/wow32/wgdi31.c | 1 | P8 delivered 874e19e83 |
+| 17 | src/mvdm-host/wow32/winsockp.h | 3 | P8 delivered 874e19e83 |
+| 18 | src/mvdm-host/wow32/wkernel.c | 10 | P8 delivered 874e19e83 |
+| 19 | src/mvdm-host/wow32/wkfileio.c | 6 | P8 delivered 874e19e83 |
+| 20 | src/mvdm-host/wow32/wkman.c | 22 | P8 delivered 874e19e83 |
 | 21 | src/mvdm-host/wow32/wkman.h | 1 | Pending |
 | 22 | src/mvdm-host/wow32/wmdisp32.c | 79 | Pending |
 | 23 | src/mvdm-host/wow32/wmdisp32.h | 2 | Pending |
@@ -589,3 +589,5 @@ Final runtime11 cached full build and dual publication26/26 hashes PASS. Final v
 ### P8 final package verification
 
 Runtime11 cached full build,dual publication26/26 hashes,targeted file/conversion and task-close tests,Full23/23 PASS. Full elapsed574294ms. Both enhanced desktop roundtrips retain all five input/display/same-window markers. Win95 uses approved knownExitOne boundary. See [P8 receipt](s11-p8-result.json).20/48 files and145/452 frozen points final-verified:12restored,133owner-review residuals,307unreviewed;one supplemental ABI decision. Main cumulative reduction64points/4293lines,combined with coupled header64/4291. All48 S11 files currently810non-error points/7472lines. Commit/push pending. Next checkpoint file30 and S closure. Earlier P1-P7 line-only proof still requires compiler-sensitive recheck before S closure.
+
+P8 delivered and pushed as 874e19e83.20files/145points delivered;Full checkpoint20 complete. Next checkpoint30. Current S11 census810points/7472lines;combined cumulative reduction64/4291. Next ordered file:wkman.h;before S closure recheck earlier linear-only line evidence.
