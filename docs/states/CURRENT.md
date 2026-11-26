@@ -37,7 +37,9 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 306 residuals,zero unreviewed or local restorations pending. Cached build,
 dual publication26/26 hashes and targeted tests PASS.
 Census201/102845 ->1834/2939 (+1633/-99906).
-S10 remains active for final guest-transition closure verification.
+Final runtime12 Win3.1/Win95 same-Window Alt+Enter roundtrips PASS;
+Win95 retains approved exit-one boundary. All30 file hashes/306 pending
+residuals reconcile. S10 remains active: CAF two-start-route coverage check.
 Migration39/159;Full remains S13.
 
 ## S9 Closure Record

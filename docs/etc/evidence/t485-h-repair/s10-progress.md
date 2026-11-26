@@ -701,8 +701,31 @@ original/clip-only negative controls support necessity, not fresh guest results.
 Local census1834/2939 vs201/102845 (+1633/-99906). P12 delivers hosts/mouse/vga
 together after cached build, dual publication and targeted verification.
 
-P12 final runtime12: cached build, dual publication26/26 hashes, relative\nmouse bridge, blocked tick/flush, actual packed painter, real MEM/NTVDMD\nand NESticle menu/Escape PASS. Governance/links PASS; commit/push pending.\nS10 closure still requires checking its guest transition acceptance scope.\n
+P12 final runtime12: cached build, dual publication26/26 hashes, relative
+mouse bridge, blocked tick/flush, actual packed painter, real MEM/NTVDMD
+and NESticle menu/Escape PASS. Governance/links PASS; commit/push pending.
+S10 closure still requires checking its guest transition acceptance scope.
+
 P12 receipt:688ab3fa2 pushed to origin/main.30/30 files and1060/1060 points
 reviewed/delivered;754 restored,306 residuals,zero local restorations pending.
 Census1834/2939 unchanged. S10 remains active for final guest-transition
 closure verification; no N004 admission and no Full claim.
+
+## Final guest roundtrip checkpoint
+
+Final runtime12 from P12 was independently exercised using existing
+verify-guest-desktop-startup.ps1 with DosFullscreenRoundtrip, private desktop
+and helper-owned installation copies. Both win31-enhanced and win95 emitted
+window-input=1 fullscreen-text=1 returned-window-input=1 second-fullscreen=1
+same-window=1. Win3.1 normalExit=true;Win95 retains approved knownExitOne,
+normalExit=false,exitAccepted=true. Do not describe Win95 as normal zero exit.
+Evidence:build/t485-s10/closure/{win31-enhanced,win95}/runtime and
+roundtrip-result.txt. Runner17300 completed; no repeat launch on timeout.
+
+Independent ledger-check.json confirms30 file hashes,1060 points,754 restored,
+306 residuals and zero residuals missing from pending-decisions.csv.
+Remaining closure check: the existing enhanced roundtrip proves Alt+Enter
+within one Window, not by itself repeated CAF from both starting display
+routes. Locate/reuse the existing route test before claiming this acceptance.
+Old verify-dos-mouse-frame-publication.ps1 uses subst and cannot be used under
+current rules; no such test was launched. No product changes in this checkpoint.
