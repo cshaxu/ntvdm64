@@ -792,3 +792,40 @@ P9 delivery receipt: 7ccebaf57 committed and pushed to origin/main.
 37/41 files reviewed, verified and delivered; four remain. 240/437 points
 reviewed, 197 remain; 79 restored register points delivered. Governance and
 links passed. Next ordered file timer.c; S9 and T485 remain active.
+
+## P10: system/timer.c
+
+Completed the previously missing exclusion mapping: compare conditional anchors
+without comments/spacing, but count diff using untouched bytes. All 89 error
+branches map to the fixed XP source. Baseline timer bytes equal fc9492342.
+Before 340 points/2091 lines; after 88/88, reduction 252/2003. Original logical
+lines checked: 1613. Excluding error bodies and removing #line gives exact XP
+bytes: no remaining functional difference in this file.
+
+The old local pTimerVDMState rename was not required for product compilation.
+Directly restoring original pNtVDMState compiles with current product flags;
+C4005 reports the pre-existing shared-name collision, not a failure. The local
+original definition still expands to Start_of_M_area + FIXED_NTVDMSTATE_LINEAR,
+not the monitor projection. Both selected preprocess streams contain the same
+167484 C tokens. No added undef, extra state, duplicate path or guest change.
+The interim undef candidate was discarded before applying production changes.
+
+All 174 frozen points restored locally, including 02152/02248 previously marked
+necessary; they are absent from pending decisions and awaiting final verification
+in the repair ledger. Thirty-eight of 41 files reviewed, 37 delivered; 414/437
+points reviewed, 23 remain. Earlier restored-and-delivered count is 79.
+The complete 41-file census is now available: fixed start 684/32045, current
+609/2917, net -75/-29128. Prior 40-file absolute subsets are superseded, not
+silently reinterpreted. P10 build/publication/tests/delivery pending.
+Next ordered file: host/inc/cfpu_def.h. Evidence build/t485-s9/p10.
+
+### P10 final verification
+
+Runtime10 cached full build, dual publication and post-test hashes 26/26 passed.
+CPU notification (4096 rounds), extracted event consumers, actual HLT/reset
+boundaries and real keyboard/PIC 90 assertions passed. Final-package MEM/NTVDMD
+and actual NESticle menu with Escape hide/restore passed. Original guest and
+winnt.zip unchanged. All 174 timer points final-verified; S9 restored total=253.
+The [complete 41-file census](s9-p10-census.csv) is directory-ordered and all
+current hashes checked, including unchanged remaining files. Prior absolute
+40-file subsets are superseded. 38/41 final-verified; P10 commit/push pending.

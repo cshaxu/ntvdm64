@@ -32,14 +32,14 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S9 Ordered Progress
 
-[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 37/41 source-reviewed,
-37 delivered through P9 7ccebaf57; four unreviewed.
-240/437 points reviewed, 197 remain. P9 non-error 2/3203 ->102/115 (+100/-3088).
-S9 cumulative +177/-27125; 40 measured files 521/2829. Unchanged timer.c remains
-outside absolute total pending mapping. Seventy-nine restored points final-verified and delivered.
-P9 cached build, dual publication (26 hashes), lifecycle/PIC and live MEM/NESticle
-passed; P9 committed and pushed. Next base/system/timer.c.
-Migration remains 39/159; Full stays S13.
+[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 38/41 source-reviewed,
+37 delivered through P9 7ccebaf57; P10 timer.c final-verified, three unreviewed.
+414/437 points reviewed, 23 remain. Timer 340/2091 ->88/88 (-252/-2003), only
+#line remains after exclusions. Original macro restoration compiles; 167484
+preprocessed tokens identical. All 174 timer register points restored and verified.
+Full 41-file baseline 684/32045 ->609/2917, net -75/-29128. Prior timer mapping
+gap is closed. S9 restored total=253, final-verified; 79 delivered before P10.
+Runtime10 cached build, dual publication and CPU/PIC/MEM/NESticle passed; commit/push pending. Next host/inc/cfpu_def.h. Migration 39/159; Full remains S13.
 
 ## S8 Closure Record
 

@@ -4,20 +4,20 @@
 /*
  * SoftPC version 2.0
  *
- * Title	: Time Handler
+ * Title        : Time Handler
  *
- * Description	: Emulate the 8253 3-channel timer; invoke 'BIOS
- *		  sytem timer interrupt code', cursor flash, repeat
- *	          key processing etc.
+ * Description  : Emulate the 8253 3-channel timer; invoke 'BIOS
+ *                sytem timer interrupt code', cursor flash, repeat
+ *                key processing etc.
  *
- * Author	: Jerry Kramskoy
+ * Author       : Jerry Kramskoy
  *
- * Notes	: There is only one real time timer per process, this
- *		  module counts clock ticks and distributes calls
- *		  to the appropriate functions as required.
+ * Notes        : There is only one real time timer per process, this
+ *                module counts clock ticks and distributes calls
+ *                to the appropriate functions as required.
  *
- *		  This module is host independent - see xxxx_timer.c
- *		  where xxxx is a machine type for host dependent stuff.
+ *                This module is host independent - see xxxx_timer.c
+ *                where xxxx is a machine type for host dependent stuff.
  *
  * Mods: (r3.2) : (SCR 257). Code has been added to time_tick() to spot
  *                that video has been disabled for a period. If this is
@@ -32,15 +32,12 @@
  */
 
 #ifdef SCCSID
-#line 35
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 37
 
 #ifdef SEGMENTATION
-#line 39
 #error Excluded unsupported SEGMENTATION configuration
-#line 45
 #endif
 #line 46
 
@@ -71,13 +68,11 @@
 #include "quick_ev.h"
 
 #ifndef PROD
-#line 74
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 76
 
 #ifdef HUNTER
-#line 78
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 #line 80
@@ -118,55 +113,51 @@ int ticks_blocked = 0;
 BOOL JoyTimeLatchPending = FALSE;
 USHORT JoyTimeCountCounterZero;
 #else /* NTVDM */
-#line 117
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 119
 #endif /* NTVDM */
 #line 120
 
 #ifndef PROD
-#line 122
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 124
 
-#ifdef HUNTER			/* Only needed for HUNTER */
-#line 126
+#ifdef HUNTER                   /* Only needed for HUNTER */
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 #line 128
-int timer_int_enabled;		/* Whether Bios timer ints are required */
+int timer_int_enabled;          /* Whether Bios timer ints are required */
 
 
 /* control word format */
 
 /* Values in D54 of control word - number of bytes to read/load into counter */
-#define LATCH			0
-#define RL_LSB			1
-#define RL_MSB			2
-#define RL_LMSB			3
+#define LATCH                   0
+#define RL_LSB                  1
+#define RL_MSB                  2
+#define RL_LMSB                 3
 
 /* Values in D321 of control word - the counter mode. */
-#define INT_ON_TERMINALCOUNT	0
-#define PROG_ONESHOT			1
-#define RATE_GEN				2
-#define SQUAREWAVE_GEN			3
-#define SW_TRIG_STROBE			4
-#define HW_TRIG_STROBE			5
+#define INT_ON_TERMINALCOUNT    0
+#define PROG_ONESHOT                    1
+#define RATE_GEN                                2
+#define SQUAREWAVE_GEN                  3
+#define SW_TRIG_STROBE                  4
+#define HW_TRIG_STROBE                  5
 /* NB. 6 = RATE_GEN, 7 = SQUAREWAVE_GEN */
 
 /* Values in D0 of control word - whether prog wants to read/write binary or BCD to counter */
-#define BINARY			0
-#define BCD				1
+#define BINARY                  0
+#define BCD                             1
 
 #define INDEFINITE              (ULONG)-1
-#define STARTLO			0
-#define STARTHI			1
-#define NOREPEAT		0
-#define REPEAT			~NOREPEAT
+#define STARTLO                 0
+#define STARTHI                 1
+#define NOREPEAT                0
+#define REPEAT                  ~NOREPEAT
 
-#define WRITE_SIGNAL 	 1
-#define GATE_SIGNAL 	 2
+#define WRITE_SIGNAL     1
+#define GATE_SIGNAL      2
 
 #define UNLOCKED 0
 #define LOCKED ~UNLOCKED
@@ -179,9 +170,9 @@ int timer_int_enabled;		/* Whether Bios timer ints are required */
 /*
  * Timer read state
  */
-#define UNREAD			0	/* Timer is in normal state */
-#define READMSB			1	/* First byte of LMSB mode read, but not second yet */
-#define READSTATUS		2	/* Status latched, will read it first */
+#define UNREAD                  0       /* Timer is in normal state */
+#define READMSB                 1       /* First byte of LMSB mode read, but not second yet */
+#define READSTATUS              2       /* Status latched, will read it first */
 
 /*
  * These two figures give a timer frequency of 1.193 MHz (which is
@@ -191,15 +182,13 @@ int timer_int_enabled;		/* Whether Bios timer ints are required */
  * timer 0. Every time timer 0 wraps, the PC is interrupted by the timer.
  */
 
-#define TIMER_CLOCK_NUMER	1000
+#define TIMER_CLOCK_NUMER       1000
 #if defined(NEC_98)
-#line 186
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 189
-#define TIMER_CLOCK_DENOM	1193
+#define TIMER_CLOCK_DENOM       1193
 #endif   //NEC_98
-#line 191
 
 typedef half_word TSIGNAL;
 
@@ -207,26 +196,26 @@ typedef half_word TSIGNAL;
  * timer channel. The waveform consists of 'n' clocks at one
  * logic level, and 'm' ticks at the other logic level.
  * Which level starts the waveform is given by 'startLogicLevel'.
- *	e.g; the following waveform ...
+ *      e.g; the following waveform ...
  */
 
 typedef struct {
-	long clocksAtLoLogicLevel;
-	long clocksAtHiLogicLevel;
-	long period;
-	long startLogicLevel;
-	long repeatWaveForm;
+        long clocksAtLoLogicLevel;
+        long clocksAtHiLogicLevel;
+        long period;
+        long startLogicLevel;
+        long repeatWaveForm;
 } WAVEFORM;
 
-/*	__ __ __ __ __ __        __ __ __ __ __ __        __ __ __ __ __ __
- *			|        |	         |        |	           |
- *			|__ __ __|               |__ __ __|	           |
+/*      __ __ __ __ __ __        __ __ __ __ __ __        __ __ __ __ __ __
+ *                      |        |               |        |                |
+ *                      |__ __ __|               |__ __ __|                |
  *
  * would be described by
- *	clocksAtLoLogicLevel = 3
- *	clocksAtHiLogicLevel = 6
- *	startLogicLevel = STARTHI
- *	repeatWaveForm = TRUE;
+ *      clocksAtLoLogicLevel = 3
+ *      clocksAtHiLogicLevel = 6
+ *      startLogicLevel = STARTHI
+ *      repeatWaveForm = TRUE;
  *
  *
  * The overall state of a counter is represented by the following
@@ -237,45 +226,43 @@ typedef enum trigCond_ {LEVEL, EDGE} trigCond;
 typedef enum countload_ {AVAILABLE, USED} countload;
 
 typedef struct {
-	int			m;
-	int			bcd;
-	int			rl;
+        int                     m;
+        int                     bcd;
+        int                     rl;
 
-	STATE_FUNCTION	(*state) IPT2(int, signal, half_word, value);
-	STATE_FUNCTION	(*statePriorWt) IPT2(int, signal, half_word, value);
-	STATE_FUNCTION	(*stateOnGate) IPT2(int, signal, half_word, value);
-	UNBLOCK_FUNCTION	(*actionOnWtComplete) IPT0();
-	UNBLOCK_FUNCTION	(*actionOnGateEnabled) IPT0();
-	void		(*getTime) IPT1(struct host_timeval *, t);
+        STATE_FUNCTION  (*state) IPT2(int, signal, half_word, value);
+        STATE_FUNCTION  (*statePriorWt) IPT2(int, signal, half_word, value);
+        STATE_FUNCTION  (*stateOnGate) IPT2(int, signal, half_word, value);
+        UNBLOCK_FUNCTION        (*actionOnWtComplete) IPT0();
+        UNBLOCK_FUNCTION        (*actionOnGateEnabled) IPT0();
+        void            (*getTime) IPT1(struct host_timeval *, t);
 
-	unsigned char	outblsb;
-	unsigned char	outbmsb;
-	unsigned 	long initialCount;
-	int			readState;
-	int			countlatched;
-	unsigned char	latchvaluelsb;
-	unsigned char	latchvaluemsb;
-	unsigned char	latchstatus;
-	word		Count;
-	countload	newCount;
-	word		tickadjust;
-	struct host_timeval activationTime;
-	int		tc;
-	int		freezeCounter;
+        unsigned char   outblsb;
+        unsigned char   outbmsb;
+        unsigned        long initialCount;
+        int                     readState;
+        int                     countlatched;
+        unsigned char   latchvaluelsb;
+        unsigned char   latchvaluemsb;
+        unsigned char   latchstatus;
+        word            Count;
+        countload       newCount;
+        word            tickadjust;
+        struct host_timeval activationTime;
+        int             tc;
+        int             freezeCounter;
 
 #ifndef NTVDM
-#line 255
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 261
 #endif
 #line 262
 
-	unsigned int	delay;
+        unsigned int    delay;
 
-	trigCond	trigger;
-	TSIGNAL		gate;
-	TSIGNAL		clk;
-	WAVEFORM	out;
+        trigCond        trigger;
+        TSIGNAL         gate;
+        TSIGNAL         clk;
+        WAVEFORM        out;
 } COUNTER_UNIT;
 
 /*
@@ -374,7 +361,7 @@ LOCAL void latchStatusValue IPT0();
 LOCAL void readCounter IPT0();
 LOCAL void timestamp IPT0();
 LOCAL void outputWaveForm IPT5(unsigned int, delay, unsigned long, lowclocks,
-	unsigned long, hiclocks, int, lohi, int, repeat);
+        unsigned long, hiclocks, int, lohi, int, repeat);
 LOCAL void outputHigh IPT0();
 LOCAL void outputLow IPT0();
 LOCAL void setOutputAfterMode IPT0();
@@ -385,9 +372,7 @@ LOCAL void startCounting IPT0();
 #ifdef NTVDM
 unsigned long updateCount(void);
 #else
-#line 378
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 380
 #endif
 #line 381
 LOCAL unsigned  short bin_to_bcd IPT1(unsigned long, val);
@@ -397,34 +382,26 @@ LOCAL void Timer_init IPT0();
 LOCAL unsigned long timer_conv IPT1(word, count);
 LOCAL void issueIREQ0 IPT1(unsigned int, n);
 #ifndef NTVDM
-#line 388
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 390
 #endif
 #line 391
 #ifdef SYNCH_TIMERS
-#line 392
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #else
 #line 394
 LOCAL void IdealTimeInit IPT0();
 #endif
-#line 396
 LOCAL void updateIdealTime IPT0();
 LOCAL void getIdealTime IPT1(struct host_timeval *, t);
 #ifndef NTVDM
-#line 399
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 401
 #endif
 #line 402
 LOCAL void setTriggerCond IPT0();
 LOCAL void WtComplete IPT0();
 LOCAL void counter_init IPT1(COUNTER_UNIT *, p);
 #ifndef NTVDM
-#line 406
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 415
 #endif
 #line 416
 
@@ -432,8 +409,8 @@ LOCAL void counter_init IPT1(COUNTER_UNIT *, p);
 
 void timer_generate_int(void);
 unsigned long clocksSinceCounterUpdate(struct host_timeval *pCuurTime,
-				       struct host_timeval *pLastTime,
-				       word                *pCounter);
+                                       struct host_timeval *pLastTime,
+                                       word                *pCounter);
 void ReinitIdealTime IPT1(struct host_timeval *, t);
 void host_GetSysTime(struct host_timeval *time);
 void InitPerfCounter(void);
@@ -444,9 +421,7 @@ word                RealTimeCountCounterZero;
 
 
 #ifndef PROD
-#line 433
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 436
 #endif
 #line 437
 
@@ -459,29 +434,23 @@ word TimerInt1COff;
 
 
 #else
-#line 447
 #error Unsupported excluded original configuration
-#line 482
 #endif /* NTVDM */
 #line 483
 
-#ifndef PROD	/* Specific Timer change tracing that isn't timer_verbose */
-#line 485
+#ifndef PROD    /* Specific Timer change tracing that isn't timer_verbose */
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 488
 #endif
 #line 489
 
 #if !defined(NTVDM)
-#line 491
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 497
 #endif
 #line 498
 
 #if defined(NTVDM)
 #ifndef MONITOR
-#define pTimerVDMState ((PULONG)(Start_of_M_area + FIXED_NTVDMSTATE_LINEAR))
+#define pNtVDMState ((PULONG)(Start_of_M_area + FIXED_NTVDMSTATE_LINEAR))
 #endif
 #endif
 
@@ -507,7 +476,6 @@ void (*timer_tick_func) IPT0();
  * ============================================================================
  */
 #if defined(NEC_98)
-#line 527
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 531
@@ -515,18 +483,16 @@ void (*timer_tick_func) IPT0();
 void
 SWTMR_init_funcptrs IFN0()
 {
-	/*
-	 *  initialize access functions for SW [emulated] TIMER
-	 */
-	timer_inb_func			= SWTMR_inb;
-	timer_outb_func			= SWTMR_outb;
-	timer_gate_func			= SWTMR_gate;
-	timer_tick_func			= SWTMR_time_tick;
+        /*
+         *  initialize access functions for SW [emulated] TIMER
+         */
+        timer_inb_func                  = SWTMR_inb;
+        timer_outb_func                 = SWTMR_outb;
+        timer_gate_func                 = SWTMR_gate;
+        timer_tick_func                 = SWTMR_time_tick;
 
 #ifndef NTVDM
-#line 544
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 553
 #endif
 #line 554
 }
@@ -539,9 +505,7 @@ SWTMR_time_tick IFN0()
      * Give the idle detector a chance to see if we are really idle.
      */
 #ifndef NTVDM
-#line 564
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 566
 #endif
 #line 567
 
@@ -551,9 +515,7 @@ SWTMR_time_tick IFN0()
      */
 
 #ifndef NTVDM
-#line 574
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 583
 #endif
 #line 584
 
@@ -576,13 +538,11 @@ SWTMR_time_tick IFN0()
      */
 
 #if defined(NEC_98)
-#line 604
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 606
     pcu = &timers[2];
 #endif   //NEC_98
-#line 608
     updateCounter();
 }
 
@@ -592,9 +552,9 @@ SWTMR_time_tick IFN0()
  *
  * The Counters are used by the PC in the following ways:
  *
- *	Counter 0  -  Bios time of day function
- *	Counter 1  -  Handler memory refresh
- *	Counter 2  -  Drive Speaker Interface (plus input on PPI)
+ *      Counter 0  -  Bios time of day function
+ *      Counter 1  -  Handler memory refresh
+ *      Counter 2  -  Drive Speaker Interface (plus input on PPI)
  *
  */
 
@@ -608,23 +568,19 @@ void SWTMR_gate IFN2(io_addr, port, half_word, value)
 #ifdef  NTVDM
     host_ica_lock();
 #else
-#line 633
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 635
 
     emu_8253 (port, GATE_SIGNAL, value);
 #ifndef PROD
-#line 638
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 643
 #endif
 #line 644
 
 #ifdef NTVDM
     host_ica_unlock();
 #else
-#line 648
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 650
@@ -636,61 +592,55 @@ void SWTMR_inb IFN2(io_addr, port, half_word *, value)
 #ifdef NTVDM
     host_ica_lock();
 #else
-#line 658
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 660
 
 
 #if defined(NEC_98)
-#line 663
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 665
     pcu = &timers[port & 3];
 #endif   //NEC_98
-#line 667
-	if (!pcu->countlatched)
-		readCounter();
-	switch (pcu->readState)
-	{
-		case UNREAD:
-			switch (pcu->rl)
-			{
-			case RL_LSB:
-				*value = pcu->latchvaluelsb;
-				pcu->countlatched = 0;	/* Unlatch the value read by inb() */
-				break;
-			case RL_LMSB:
-				*value = pcu->latchvaluelsb;
-				pcu->readState = READMSB;	/* Read LSB, next in read MSB. */
-				break;
-			case RL_MSB:
-				*value = pcu->latchvaluemsb;
-				pcu->countlatched = 0;	/* Unlatch the value read by inb() */
-				break;
-			}
-			break;
-		case READMSB:
-			*value = pcu->latchvaluemsb;
-			pcu->countlatched = 0;	/* Unlatch the value read by inb() */
-			pcu->readState = UNREAD;	/* Read MSB, back to unread state. */
-			break;
-		case READSTATUS:
-			*value = pcu->latchstatus;
-			pcu->readState = UNREAD;
-			break;
-	}
+        if (!pcu->countlatched)
+                readCounter();
+        switch (pcu->readState)
+        {
+                case UNREAD:
+                        switch (pcu->rl)
+                        {
+                        case RL_LSB:
+                                *value = pcu->latchvaluelsb;
+                                pcu->countlatched = 0;  /* Unlatch the value read by inb() */
+                                break;
+                        case RL_LMSB:
+                                *value = pcu->latchvaluelsb;
+                                pcu->readState = READMSB;       /* Read LSB, next in read MSB. */
+                                break;
+                        case RL_MSB:
+                                *value = pcu->latchvaluemsb;
+                                pcu->countlatched = 0;  /* Unlatch the value read by inb() */
+                                break;
+                        }
+                        break;
+                case READMSB:
+                        *value = pcu->latchvaluemsb;
+                        pcu->countlatched = 0;  /* Unlatch the value read by inb() */
+                        pcu->readState = UNREAD;        /* Read MSB, back to unread state. */
+                        break;
+                case READSTATUS:
+                        *value = pcu->latchstatus;
+                        pcu->readState = UNREAD;
+                        break;
+        }
 #ifndef PROD
-#line 699
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 704
 #endif
 #line 705
 #ifdef NTVDM
     host_ica_unlock();
 #else
-#line 708
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 710
@@ -703,47 +653,39 @@ void SWTMR_outb IFN2(io_addr, port, half_word, value)
 #if defined(NTVDM) || defined(GISP_SVGA)
 #ifndef NEC_98
     if (port == 0x4f)   /* dead port used by PS/2 XGA bios for DAC delays */
-	return;
+        return;
 #endif   //NEC_98
-#line 721
 #ifdef NTVDM
     host_ica_lock();
 #endif
 #else
-#line 725
 #error Unsupported excluded original configuration
 #endif
 #line 727
 
 #if defined(NEC_98)
-#line 729
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 731
     port = port & TIMER_BIT_MASK;
-	if(port == 0x43)
+        if(port == 0x43)
 #endif   //NEC_98
-#line 734
-		controlWordReg(value);
-	else
-	    emu_8253 (port, WRITE_SIGNAL, value);
+                controlWordReg(value);
+        else
+            emu_8253 (port, WRITE_SIGNAL, value);
 #ifndef PROD
-#line 738
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 743
 #endif
 #line 744
 
 #ifdef NTVDM
     host_ica_unlock();
 #else
-#line 748
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 750
 
 #if defined(NEC_98)
-#line 752
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 757
@@ -751,15 +693,13 @@ void SWTMR_outb IFN2(io_addr, port, half_word, value)
 
 
 /* --------------------------------------------------------------------------- */
-/*									       */
-/* 		Return the current DOS tick value based on Timer 0	       */
-/*									       */
+/*                                                                             */
+/*              Return the current DOS tick value based on Timer 0             */
+/*                                                                             */
 /* --------------------------------------------------------------------------- */
 
 #ifndef NTVDM
-#line 767
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 771
 #endif /* NTVDM */
 #line 772
 
@@ -778,7 +718,7 @@ void ReinitIdealTime IFN1(struct host_timeval *, t)
    timers[2].activationTime =
    timers[1].activationTime =
    timers[0].activationTime =
-		  idealtime = *t;
+                  idealtime = *t;
    /*
     * Clear out extra pending interrupts
     */
@@ -799,48 +739,44 @@ void ReinitIdealTime IFN1(struct host_timeval *, t)
 /* **************************************************************************** */
 
 #ifndef NTVDM
-#line 809
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 824
 #endif
 #line 825
 
 /*
- *	emulate the 8253 chip.
+ *      emulate the 8253 chip.
  *
- *	emu_8253(port,signal,value)
+ *      emu_8253(port,signal,value)
  *
- *	port	-	port address being accessed
- *			(port & 3) gives A0,A1 lines
+ *      port    -       port address being accessed
+ *                      (port & 3) gives A0,A1 lines
  *
- *	signal	-	WRITE_SIGNAL (outb) or
- *			GATE_SIGNAL (ppi TIM2GATESPK change)
+ *      signal  -       WRITE_SIGNAL (outb) or
+ *                      GATE_SIGNAL (ppi TIM2GATESPK change)
  *
- *	value	-
- *			for WRITE_SIGNAL, value = byte being written to chip
- *			for GATE_SIGNAL,  value = GATE_SIGNAL_LOW or
- *						  GATE_SIGNAL_RISE
+ *      value   -
+ *                      for WRITE_SIGNAL, value = byte being written to chip
+ *                      for GATE_SIGNAL,  value = GATE_SIGNAL_LOW or
+ *                                                GATE_SIGNAL_RISE
  */
 
 
 LOCAL void emu_8253 IFN3(io_addr, port, int, signal, half_word, value)
 {
 
-	int A0A1;
+        int A0A1;
 
-	/* get address lines A0 and A1 */
+        /* get address lines A0 and A1 */
 #if defined(NEC_98)
-#line 851
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 853
-	A0A1 = port & 3;
+        A0A1 = port & 3;
 #endif   //NEC_98
-#line 855
 
-	/* handle the access */
-		pcu = &timers[A0A1];
-		(pcu->state)(signal,value);
+        /* handle the access */
+                pcu = &timers[A0A1];
+                (pcu->state)(signal,value);
 }
 
 
@@ -867,127 +803,125 @@ LOCAL void emu_8253 IFN3(io_addr, port, int, signal, half_word, value)
 
 LOCAL void controlWordReg IFN1(half_word, cwd)
 {
-	int rl,m,channel;
-	half_word select_bits;
+        int rl,m,channel;
+        half_word select_bits;
 
-	/* decode control word */
-	channel = (cwd & 0xc0) >> 6;
-	if(channel == READ_BACK)
-	{
-		/* decode read back command */
-		select_bits = (cwd & 0xe) >> 1;
-		/* first look for counters to latch */
-		if (!(cwd & 0x20))
-		{
-			/* count bit low so latch selected counters */
-			if (select_bits & 0x01)
-			{
-				/* counter 0 */
-				pcu = &timers[0];
-				readCounter();
-				pcu->countlatched = 1;
-			}
-			if (select_bits & 0x02)
-			{
-				/* counter 1 */
-				pcu = &timers[1];
-				readCounter();
-				pcu->countlatched = 1;
-			}
-			if (select_bits & 0x04)
-			{
-				/* counter 2 */
-				pcu = &timers[2];
-				readCounter();
-				pcu->countlatched = 1;
-			}
-		}
+        /* decode control word */
+        channel = (cwd & 0xc0) >> 6;
+        if(channel == READ_BACK)
+        {
+                /* decode read back command */
+                select_bits = (cwd & 0xe) >> 1;
+                /* first look for counters to latch */
+                if (!(cwd & 0x20))
+                {
+                        /* count bit low so latch selected counters */
+                        if (select_bits & 0x01)
+                        {
+                                /* counter 0 */
+                                pcu = &timers[0];
+                                readCounter();
+                                pcu->countlatched = 1;
+                        }
+                        if (select_bits & 0x02)
+                        {
+                                /* counter 1 */
+                                pcu = &timers[1];
+                                readCounter();
+                                pcu->countlatched = 1;
+                        }
+                        if (select_bits & 0x04)
+                        {
+                                /* counter 2 */
+                                pcu = &timers[2];
+                                readCounter();
+                                pcu->countlatched = 1;
+                        }
+                }
 
-		/* now look for the status latch */
-		if (!(cwd & 0x10))
-		{
-			/* status bit low - status to be latched */
-			if (select_bits & 0x01)
-			{
-				/* counter 0 */
-				pcu = &timers[0];
-				latchStatusValue();
-			}
-			if (select_bits & 0x02)
-			{
-				/* counter 1 */
-				pcu = &timers[1];
-				latchStatusValue();
-			}
-			if (select_bits & 0x04)
-			{
-				/* counter 2 */
-				pcu = &timers[2];
-				latchStatusValue();
-			}
-		}
-	}
-	else
-	{
-		pcu = &timers[channel];
-		rl = (cwd & 0x30) >> 4;
+                /* now look for the status latch */
+                if (!(cwd & 0x10))
+                {
+                        /* status bit low - status to be latched */
+                        if (select_bits & 0x01)
+                        {
+                                /* counter 0 */
+                                pcu = &timers[0];
+                                latchStatusValue();
+                        }
+                        if (select_bits & 0x02)
+                        {
+                                /* counter 1 */
+                                pcu = &timers[1];
+                                latchStatusValue();
+                        }
+                        if (select_bits & 0x04)
+                        {
+                                /* counter 2 */
+                                pcu = &timers[2];
+                                latchStatusValue();
+                        }
+                }
+        }
+        else
+        {
+                pcu = &timers[channel];
+                rl = (cwd & 0x30) >> 4;
 
 
-		/* are we simply latching the present count value, or are
-		 * programming up a new mode ??
-		 */
-		if (rl == LATCH)
-		{	/* latching present count value */
-			readCounter();
-			pcu->countlatched = 1;
-			return;
-		}
-		else
-		{	/* new mode */
-			if (pcu == &timers[0])
-				timer_int_enabled = FALSE;
-			pcu->countlatched = 0;
-			pcu->tc = 0;
-			pcu->tickadjust = 0;
+                /* are we simply latching the present count value, or are
+                 * programming up a new mode ??
+                 */
+                if (rl == LATCH)
+                {       /* latching present count value */
+                        readCounter();
+                        pcu->countlatched = 1;
+                        return;
+                }
+                else
+                {       /* new mode */
+                        if (pcu == &timers[0])
+                                timer_int_enabled = FALSE;
+                        pcu->countlatched = 0;
+                        pcu->tc = 0;
+                        pcu->tickadjust = 0;
 #ifndef NTVDM
-#line 968
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 970
 #endif
 #line 971
 
-			m  = (cwd & 0xe)  >> 1;
-			if(m > 5)m -= 4; /* Modes 6 and 7 don't exist - they are intepreted as modes 2 and 3 */
-			pcu->m = m;
-			setTriggerCond();
-			setOutputAfterMode();
-			pcu->bcd = cwd & 1;
-			pcu->rl = rl;
-			pcu->actionOnWtComplete = CounterBufferLoaded;
-			pcu->actionOnGateEnabled = CounterBufferLoaded;
-			pcu->statePriorWt = pcu->state;
-			pcu->state = waitingFor1stWrite;
-		}
-	}
+                        m  = (cwd & 0xe)  >> 1;
+                        if(m > 5)m -= 4; /* Modes 6 and 7 don't exist - they are intepreted as modes 2 and 3 */
+                        pcu->m = m;
+                        setTriggerCond();
+                        setOutputAfterMode();
+                        pcu->bcd = cwd & 1;
+                        pcu->rl = rl;
+                        pcu->actionOnWtComplete = CounterBufferLoaded;
+                        pcu->actionOnGateEnabled = CounterBufferLoaded;
+                        pcu->statePriorWt = pcu->state;
+                        pcu->state = waitingFor1stWrite;
+                }
+        }
 }
 
 /* latch status ready for reading */
 LOCAL void latchStatusValue IFN0()
 {
-	/*
-	*	Status byte is of format :
-	*
-	*	|OUT|Null Count|RW1|RW0|M2|M1|M0|BCD|
-	*
-	*/
+        /*
+        *       Status byte is of format :
+        *
+        *       |OUT|Null Count|RW1|RW0|M2|M1|M0|BCD|
+        *
+        */
 
-	/* NULL COUNT still only approximated. Who cares? */
+        /* NULL COUNT still only approximated. Who cares? */
         pcu->latchstatus = (unsigned char)(
-		  (pcu->out.startLogicLevel<<7)
-		| (pcu->newCount == AVAILABLE ? (1<<6) : 0)
-		| (pcu->rl<<4)
+                  (pcu->out.startLogicLevel<<7)
+                | (pcu->newCount == AVAILABLE ? (1<<6) : 0)
+                | (pcu->rl<<4)
                 | (pcu->m<<1) | (pcu->bcd));
-	pcu->readState = READSTATUS;
+        pcu->readState = READSTATUS;
 }
 
 /* set up flag establishing type of trigger condition for
@@ -996,19 +930,19 @@ LOCAL void latchStatusValue IFN0()
 
 LOCAL void setTriggerCond IFN0()
 {
-	switch (pcu->m)
-	{
-	case RATE_GEN:
-	case SQUAREWAVE_GEN:
-	case SW_TRIG_STROBE:
-	case INT_ON_TERMINALCOUNT:
-		pcu->trigger = LEVEL;
-		return;
-	case PROG_ONESHOT:
-	case HW_TRIG_STROBE:
-		pcu->trigger = EDGE;
-		return;
-	}
+        switch (pcu->m)
+        {
+        case RATE_GEN:
+        case SQUAREWAVE_GEN:
+        case SW_TRIG_STROBE:
+        case INT_ON_TERMINALCOUNT:
+                pcu->trigger = LEVEL;
+                return;
+        case PROG_ONESHOT:
+        case HW_TRIG_STROBE:
+                pcu->trigger = EDGE;
+                return;
+        }
 }
 
 
@@ -1018,56 +952,50 @@ LOCAL void loadCounter IFN0()
 {
         unsigned long modulo;
 #ifndef NTVDM
-#line 1034
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 1036
 
-	/* set counter */
-	/* get correct modulo to use for counter calculations */
-	modulo = (pcu->outbmsb << 8) | pcu->outblsb;
-	if (pcu->bcd == BCD)
-	{
-		if(modulo)
+        /* set counter */
+        /* get correct modulo to use for counter calculations */
+        modulo = (pcu->outbmsb << 8) | pcu->outblsb;
+        if (pcu->bcd == BCD)
+        {
+                if(modulo)
                         modulo = bcd_to_bin((word)modulo);
-		else
-			modulo = 10000L;
-	}
-	else
-		if(!modulo)modulo = 0x10000L;
+                else
+                        modulo = 10000L;
+        }
+        else
+                if(!modulo)modulo = 0x10000L;
 
-	/* Beware - Count and initialCount are different sizes, so don't merge the next two lines!! */
-	pcu->initialCount = modulo;
+        /* Beware - Count and initialCount are different sizes, so don't merge the next two lines!! */
+        pcu->initialCount = modulo;
         pcu->Count = (word)modulo;
 
-	/*
-	 * not at terminal count anymore, so reflect this fact by resetting
-	 * tc (which I think means "reached terminal count"
-	 */
-	pcu->tc = 0;
-	pcu->newCount = USED;
-	if(pcu == &timers[0])
-	{
-	    /* Get rid of pending interrupts - these may no longer me appropriate - eg. in Sailing */
-	    ica_hw_interrupt_cancel(ICA_MASTER,CPU_TIMER_INT);
+        /*
+         * not at terminal count anymore, so reflect this fact by resetting
+         * tc (which I think means "reached terminal count"
+         */
+        pcu->tc = 0;
+        pcu->newCount = USED;
+        if(pcu == &timers[0])
+        {
+            /* Get rid of pending interrupts - these may no longer me appropriate - eg. in Sailing */
+            ica_hw_interrupt_cancel(ICA_MASTER,CPU_TIMER_INT);
 #ifdef NTVDM
-	    RealTimeCountCounterZero = pcu->Count;
+            RealTimeCountCounterZero = pcu->Count;
 #endif
 
 #ifndef NTVDM
-#line 1069
 #error Excluded unsupported non-NTVDM timer profile
-#line 1079
 #endif
 #line 1080
 
         }
 
-#line 1083
 #if defined(NTVDM) && !defined(PROD)
-#line 1084
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#line 1088
 #endif /*NTVDM & !PROD*/
 #line 1089
 }
@@ -1076,34 +1004,32 @@ LOCAL void loadCounter IFN0()
 
 LOCAL void readCounter IFN0()
 {
-	int countread;
+        int countread;
 
-	updateCounter();
+        updateCounter();
 
 #ifdef NTVDM
-	   /*
-	    *  Timer Zero is a special case, as it is maintaned
-	    *  by IdealInterval, and not RealTime. We must give
-	    *  real time granularity
-	    */
-	countread = pcu == &timers[0] ? (JoyTimeLatchPending ?
+           /*
+            *  Timer Zero is a special case, as it is maintaned
+            *  by IdealInterval, and not RealTime. We must give
+            *  real time granularity
+            */
+        countread = pcu == &timers[0] ? (JoyTimeLatchPending ?
                                         JoyTimeCountCounterZero :
                                         RealTimeCountCounterZero)
                                       : pcu->Count;
     JoyTimeLatchPending = FALSE;
-	if (pcu->bcd == BCD)
-	    countread = bin_to_bcd(countread);
+        if (pcu->bcd == BCD)
+            countread = bin_to_bcd(countread);
 
 #else
-#line 1114
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1118
 #endif
 #line 1119
 
-	pcu->latchvaluemsb = countread >> 8;
-	pcu->latchvaluelsb = countread & 0xff;
-	sure_note_trace1(TIMER_VERBOSE,"reading count %d",pcu->Count);
+        pcu->latchvaluemsb = countread >> 8;
+        pcu->latchvaluelsb = countread & 0xff;
+        sure_note_trace1(TIMER_VERBOSE,"reading count %d",pcu->Count);
 }
 
 /* active counter (mode 0) lost its gate ... gate has now
@@ -1112,129 +1038,129 @@ LOCAL void readCounter IFN0()
  */
 LOCAL GATENABLED_FUNCTION resumeCounting0onGate IFN0()
 {
-	if (pcu->freezeCounter)
-	{
-		pcu->freezeCounter = 0;
-		timestamp();
-	}
-	if (pcu->newCount == AVAILABLE)
-		loadCounter();
-	if (!pcu->tc)
-	{
-		timestamp();
-		pcu->stateOnGate = Counting0;
-		runCount();
-	}
-	else
-		pcu->state = Counting0;
+        if (pcu->freezeCounter)
+        {
+                pcu->freezeCounter = 0;
+                timestamp();
+        }
+        if (pcu->newCount == AVAILABLE)
+                loadCounter();
+        if (!pcu->tc)
+        {
+                timestamp();
+                pcu->stateOnGate = Counting0;
+                runCount();
+        }
+        else
+                pcu->state = Counting0;
 }
 
 LOCAL GATENABLED_FUNCTION resumeCounting0 IFN0()
 {
-	int doadjust = 0;
-	if (pcu->freezeCounter)
-	{
-		pcu->freezeCounter = 0;
-		timestamp();
-	}
-	if (pcu->newCount == AVAILABLE)
-	{
-		doadjust = 1;
-		loadCounter();
-	}
-	if (!pcu->tc)
-	{
-		pcu->stateOnGate = Counting0;
-		runCount();
-	}
-	else
-	{
-		pcu->state = Counting0;
-		if (doadjust)
-			pcu->Count -= pcu->tickadjust;
-	}
+        int doadjust = 0;
+        if (pcu->freezeCounter)
+        {
+                pcu->freezeCounter = 0;
+                timestamp();
+        }
+        if (pcu->newCount == AVAILABLE)
+        {
+                doadjust = 1;
+                loadCounter();
+        }
+        if (!pcu->tc)
+        {
+                pcu->stateOnGate = Counting0;
+                runCount();
+        }
+        else
+        {
+                pcu->state = Counting0;
+                if (doadjust)
+                        pcu->Count -= pcu->tickadjust;
+        }
 }
 
 LOCAL GATENABLED_FUNCTION resumeCounting_2_3_4_onGate IFN0()
 {
-	/* for modes 2 and 3, ought to wait until counter
-	 * completes its current period, but we cant be as accurate
-	 * as that
-	 */
-	if (pcu->newCount == AVAILABLE)
-		loadCounter();
-	if (pcu->m == RATE_GEN || pcu->m == SQUAREWAVE_GEN)
-		pcu->stateOnGate = Counting_2_3;
-	else
-		pcu->stateOnGate = Counting_4_5;
-	timestamp();
-	runCount();
+        /* for modes 2 and 3, ought to wait until counter
+         * completes its current period, but we cant be as accurate
+         * as that
+         */
+        if (pcu->newCount == AVAILABLE)
+                loadCounter();
+        if (pcu->m == RATE_GEN || pcu->m == SQUAREWAVE_GEN)
+                pcu->stateOnGate = Counting_2_3;
+        else
+                pcu->stateOnGate = Counting_4_5;
+        timestamp();
+        runCount();
 }
 
 LOCAL GATENABLED_FUNCTION resumeCounting_2_3_4 IFN0()
 {
-	/* for modes 2 and 3, ought to wait until counter
-	 * completes its current period, but we cant be as accurate
-	 * as that
-	 */
-	if (pcu->newCount == AVAILABLE)
-	{
-		pcu->delay = pcu->Count;
-		loadCounter();
-	}
-	if (pcu->m == RATE_GEN || pcu->m == SQUAREWAVE_GEN)
-		pcu->stateOnGate = Counting_2_3;
-	else
-		pcu->stateOnGate = Counting_4_5;
-	runCount();
+        /* for modes 2 and 3, ought to wait until counter
+         * completes its current period, but we cant be as accurate
+         * as that
+         */
+        if (pcu->newCount == AVAILABLE)
+        {
+                pcu->delay = pcu->Count;
+                loadCounter();
+        }
+        if (pcu->m == RATE_GEN || pcu->m == SQUAREWAVE_GEN)
+                pcu->stateOnGate = Counting_2_3;
+        else
+                pcu->stateOnGate = Counting_4_5;
+        runCount();
 }
 
 
 LOCAL GATENABLED_FUNCTION runCount IFN0()
 {
-	unsigned long lowticks, hiticks;
-	unsigned long adjustedCount;	/* For count = 0 and BCD */
+        unsigned long lowticks, hiticks;
+        unsigned long adjustedCount;    /* For count = 0 and BCD */
 
-	adjustedCount = timer_conv(pcu->Count);
-	pcu->state = pcu->stateOnGate;
-	switch (pcu->m)
-	{
-	case INT_ON_TERMINALCOUNT:
-		outputWaveForm(pcu->delay,adjustedCount,
-			INDEFINITE,STARTLO,NOREPEAT);
-		return;
-	case PROG_ONESHOT:
-		loadCounter();
-		outputWaveForm(pcu->delay,adjustedCount,
-			INDEFINITE,STARTLO,NOREPEAT);
-		pcu->Count -= pcu->tickadjust;
-		return;
-	case RATE_GEN:
-		loadCounter();
-		outputWaveForm(pcu->delay,1,
-			adjustedCount-1,STARTHI,REPEAT);
-		pcu->Count -= pcu->tickadjust;
-		return;
-	case SQUAREWAVE_GEN:
-		loadCounter();
-		if (!(pcu->Count & 1))
-			lowticks = hiticks = adjustedCount >> 1;
-		else
-		{
-			lowticks = (adjustedCount - 1) >> 1;
-			hiticks = (adjustedCount + 1) >> 1;
-		}
-		outputWaveForm(pcu->delay,lowticks, hiticks,STARTHI,REPEAT);
-		pcu->Count -= pcu->tickadjust;
-		return;
-	case SW_TRIG_STROBE:
-		outputWaveForm(pcu->delay,1, adjustedCount,STARTHI,NOREPEAT);
-		return;
-	case HW_TRIG_STROBE:
-		loadCounter();
-		outputWaveForm(pcu->delay,1, adjustedCount,STARTHI,NOREPEAT);
-		return;
-	}
+        adjustedCount = timer_conv(pcu->Count);
+        pcu->state = pcu->stateOnGate;
+        switch (pcu->m)
+        {
+        case INT_ON_TERMINALCOUNT:
+                outputWaveForm(pcu->delay,adjustedCount,
+                        INDEFINITE,STARTLO,NOREPEAT);
+                return;
+        case PROG_ONESHOT:
+                loadCounter();
+                outputWaveForm(pcu->delay,adjustedCount,
+                        INDEFINITE,STARTLO,NOREPEAT);
+                pcu->Count -= pcu->tickadjust;
+                return;
+        case RATE_GEN:
+                loadCounter();
+                outputWaveForm(pcu->delay,1,
+                        adjustedCount-1,STARTHI,REPEAT);
+                pcu->Count -= pcu->tickadjust;
+                return;
+        case SQUAREWAVE_GEN:
+                loadCounter();
+                if (!(pcu->Count & 1))
+                        lowticks = hiticks = adjustedCount >> 1;
+                else
+                {
+                        lowticks = (adjustedCount - 1) >> 1;
+                        hiticks = (adjustedCount + 1) >> 1;
+                }
+                outputWaveForm(pcu->delay,lowticks, hiticks,STARTHI,REPEAT);
+                pcu->Count -= pcu->tickadjust;
+                return;
+        case SW_TRIG_STROBE:
+                outputWaveForm(pcu->delay,1, adjustedCount,STARTHI,NOREPEAT);
+                return;
+        case HW_TRIG_STROBE:
+                loadCounter();
+                outputWaveForm(pcu->delay,1, adjustedCount,STARTHI,NOREPEAT);
+                return;
+        }
 }
 
 
@@ -1242,9 +1168,9 @@ LOCAL GATENABLED_FUNCTION runCount IFN0()
 
 LOCAL void resumeAwaitGate IFN0()
 {
-	pcu->actionOnWtComplete = timererror;
-	pcu->state = awaitingGate;
-	awaitingGate(GATE_SIGNAL,pcu->gate);
+        pcu->actionOnWtComplete = timererror;
+        pcu->state = awaitingGate;
+        awaitingGate(GATE_SIGNAL,pcu->gate);
 }
 
 
@@ -1259,19 +1185,19 @@ LOCAL void resumeAwaitGate IFN0()
 
 LOCAL void setOutputAfterMode IFN0()
 {
-	switch (pcu->m)
-	{
-	case INT_ON_TERMINALCOUNT:
-		outputLow( /*INDEFINITE*/ );
-		return;
-	case PROG_ONESHOT:
-	case RATE_GEN:
-	case SQUAREWAVE_GEN:
-	case SW_TRIG_STROBE:
-	case HW_TRIG_STROBE:
-		outputHigh( /*INDEFINITE*/ );
-		return;
-	}
+        switch (pcu->m)
+        {
+        case INT_ON_TERMINALCOUNT:
+                outputLow( /*INDEFINITE*/ );
+                return;
+        case PROG_ONESHOT:
+        case RATE_GEN:
+        case SQUAREWAVE_GEN:
+        case SW_TRIG_STROBE:
+        case HW_TRIG_STROBE:
+                outputHigh( /*INDEFINITE*/ );
+                return;
+        }
 }
 
 
@@ -1281,7 +1207,7 @@ LOCAL void setOutputAfterMode IFN0()
 
 LOCAL void outputLow IFN0()
 {
-	outputWaveForm(0,INDEFINITE,0,STARTLO,NOREPEAT);
+        outputWaveForm(0,INDEFINITE,0,STARTLO,NOREPEAT);
 }
 
 
@@ -1291,55 +1217,50 @@ LOCAL void outputLow IFN0()
 
 LOCAL void outputHigh IFN0()
 {
-	outputWaveForm(0,0,INDEFINITE,STARTHI,NOREPEAT);
+        outputWaveForm(0,0,INDEFINITE,STARTHI,NOREPEAT);
 }
 
 
 /* when the wave form is deterministic, tell the sound emulation about it.
- *	delay	    	-	if <>0, don't start this waveform for
- *			 	this number of counter clocks.
- *	lowclocks	-	the #.counter clocks to stay low for
- *	hiclocks	-	the #.counter clocks to stay high for
- *	(either parameter may be INDEFINITE duration)
- *	lohi		-	0 ==> start at low logic level
- *	    		-     <>0 ==> start at high logic level
- *	repeat		-	0 ==> don't
- *			      <>0 ==> repeat.
+ *      delay           -       if <>0, don't start this waveform for
+ *                              this number of counter clocks.
+ *      lowclocks       -       the #.counter clocks to stay low for
+ *      hiclocks        -       the #.counter clocks to stay high for
+ *      (either parameter may be INDEFINITE duration)
+ *      lohi            -       0 ==> start at low logic level
+ *                      -     <>0 ==> start at high logic level
+ *      repeat          -       0 ==> don't
+ *                            <>0 ==> repeat.
  *
- *	(n.b; 1 counter clock period = 1.19318 usecs)
+ *      (n.b; 1 counter clock period = 1.19318 usecs)
  */
 
 LOCAL void outputWaveForm IFN5(unsigned int, delay, unsigned long, lowclocks,
-	unsigned long, hiclocks, int, lohi, int, repeat)
+        unsigned long, hiclocks, int, lohi, int, repeat)
 {
 #ifdef DOCUMENTATION
-#line 1332
 #error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
 #endif /* DOCUMENTATION */
 #line 1334
-	pcu->out.startLogicLevel = lohi;
-	pcu->out.repeatWaveForm = repeat;
-	pcu->out.clocksAtLoLogicLevel = lowclocks;
-	pcu->out.clocksAtHiLogicLevel = hiclocks;
-	if (repeat == REPEAT)
-		pcu->out.period = lowclocks + hiclocks;
+        pcu->out.startLogicLevel = lohi;
+        pcu->out.repeatWaveForm = repeat;
+        pcu->out.clocksAtLoLogicLevel = lowclocks;
+        pcu->out.clocksAtHiLogicLevel = hiclocks;
+        if (repeat == REPEAT)
+                pcu->out.period = lowclocks + hiclocks;
 #if defined(NEC_98)
-#line 1341
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 1343
-	if (pcu == &timers[2])
+        if (pcu == &timers[2])
 #endif   //NEC_98
-#line 1345
-	{
-		host_timer2_waveform(delay,lowclocks,hiclocks,lohi,repeat);
-	}
-	pcu->delay = 0;
+        {
+                host_timer2_waveform(delay,lowclocks,hiclocks,lohi,repeat);
+        }
+        pcu->delay = 0;
 
 #ifdef DOCUMENTATION
-#line 1351
 #error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
-#line 1360
 #endif /* DOCUMENTATION */
 #line 1361
 }
@@ -1352,21 +1273,19 @@ LOCAL void timestamp IFN0()
 #ifdef NTVDM
        /* update counter zero time stamp */
        if (pcu == &timers[0]) {
-	   host_GetSysTime(&LastTimeCounterZero);
-	   }
+           host_GetSysTime(&LastTimeCounterZero);
+           }
 #else
-#line 1374
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1377
 #endif
 #line 1378
-	/* Go and get the time since it was activated */
-	(*pcu->getTime)(&pcu->activationTime);
+        /* Go and get the time since it was activated */
+        (*pcu->getTime)(&pcu->activationTime);
 }
 
 LOCAL UNBLOCK_FUNCTION timererror IFN0()
 {
-	always_trace0("time error!!!!");
+        always_trace0("time error!!!!");
 }
 
 /* *************** COUNTER UPDATING FUNCTIONS FOR NON_IDLE COUNTERS **********/
@@ -1391,33 +1310,33 @@ LOCAL UNBLOCK_FUNCTION timererror IFN0()
 
 LOCAL STATE_FUNCTION uninit IFN2(int, signal, half_word, value)
 {
-	if (signal == GATE_SIGNAL)
-		pcu->gate = value;
+        if (signal == GATE_SIGNAL)
+                pcu->gate = value;
 }
 
 LOCAL STATE_FUNCTION awaitingGate IFN2(int, signal, half_word, value)
 {
-	switch (signal)
-	{
-	case GATE_SIGNAL:
-		pcu->gate = value;
-		if (value == GATE_SIGNAL_LOW)
-			return;
+        switch (signal)
+        {
+        case GATE_SIGNAL:
+                pcu->gate = value;
+                if (value == GATE_SIGNAL_LOW)
+                        return;
 
-		/* this is pathological ... should never have to
-		 * wait for gate for channel 0
-		 */
-		if (pcu == &timers[0])
-			timer_int_enabled = TRUE;
+                /* this is pathological ... should never have to
+                 * wait for gate for channel 0
+                 */
+                if (pcu == &timers[0])
+                        timer_int_enabled = TRUE;
 
-		(pcu->actionOnGateEnabled)();
-		return;
-	case WRITE_SIGNAL:
-		pcu->actionOnWtComplete = resumeAwaitGate;
-		pcu->statePriorWt = pcu->state;
-		waitingFor1stWrite(signal,value);
-		return;
-	}
+                (pcu->actionOnGateEnabled)();
+                return;
+        case WRITE_SIGNAL:
+                pcu->actionOnWtComplete = resumeAwaitGate;
+                pcu->statePriorWt = pcu->state;
+                waitingFor1stWrite(signal,value);
+                return;
+        }
 }
 
 /*
@@ -1430,35 +1349,35 @@ LOCAL STATE_FUNCTION awaitingGate IFN2(int, signal, half_word, value)
 
 LOCAL STATE_FUNCTION waitingFor1stWrite IFN2(int, signal, half_word, value)
 {
-	switch (signal)
-	{
-	case GATE_SIGNAL:
-		/* remember gate signal state */
-		pcu->gate = value;
-		return;
-	case WRITE_SIGNAL:
-		switch (pcu->rl)
-		{
-		case RL_LSB:
-			pcu->outblsb = value;
-			/* Zero the most signifcant byte. */
-			pcu->outbmsb = 0;
-			pcu->newCount = AVAILABLE;
-			WtComplete();
-			return;
-		case RL_LMSB:
-			pcu->outblsb = value;
-			pcu->state = waitingFor2ndWrite;
-			return;
-		case RL_MSB:
-			pcu->outbmsb = value;
-			/* Zero the least signifcant byte. */
-			pcu->outblsb = 0;
-			pcu->newCount = AVAILABLE;
-			WtComplete();
-			return;
-		}
-	}
+        switch (signal)
+        {
+        case GATE_SIGNAL:
+                /* remember gate signal state */
+                pcu->gate = value;
+                return;
+        case WRITE_SIGNAL:
+                switch (pcu->rl)
+                {
+                case RL_LSB:
+                        pcu->outblsb = value;
+                        /* Zero the most signifcant byte. */
+                        pcu->outbmsb = 0;
+                        pcu->newCount = AVAILABLE;
+                        WtComplete();
+                        return;
+                case RL_LMSB:
+                        pcu->outblsb = value;
+                        pcu->state = waitingFor2ndWrite;
+                        return;
+                case RL_MSB:
+                        pcu->outbmsb = value;
+                        /* Zero the least signifcant byte. */
+                        pcu->outblsb = 0;
+                        pcu->newCount = AVAILABLE;
+                        WtComplete();
+                        return;
+                }
+        }
 }
 
 /*
@@ -1467,18 +1386,18 @@ LOCAL STATE_FUNCTION waitingFor1stWrite IFN2(int, signal, half_word, value)
 
 LOCAL STATE_FUNCTION waitingFor2ndWrite IFN2(int, signal, half_word, value)
 {
-	switch (signal)
-	{
-	case GATE_SIGNAL:
-		/* remember gate signal state */
-		pcu->gate = value;
-		return;
-	case WRITE_SIGNAL:
-		pcu->newCount = AVAILABLE;
-		pcu->outbmsb = value;
-		WtComplete();
-		return;
-	}
+        switch (signal)
+        {
+        case GATE_SIGNAL:
+                /* remember gate signal state */
+                pcu->gate = value;
+                return;
+        case WRITE_SIGNAL:
+                pcu->newCount = AVAILABLE;
+                pcu->outbmsb = value;
+                WtComplete();
+                return;
+        }
 }
 
 
@@ -1491,60 +1410,60 @@ LOCAL STATE_FUNCTION waitingFor2ndWrite IFN2(int, signal, half_word, value)
 
 LOCAL void WtComplete IFN0()
 {
-	if (pcu->gate == GATE_SIGNAL_LOW && pcu->trigger == LEVEL)
-	{
-		pcu->state = awaitingGate;
-		awaitingGate(GATE_SIGNAL, pcu->gate);
-	}
-	else
-		(pcu->actionOnWtComplete)();
+        if (pcu->gate == GATE_SIGNAL_LOW && pcu->trigger == LEVEL)
+        {
+                pcu->state = awaitingGate;
+                awaitingGate(GATE_SIGNAL, pcu->gate);
+        }
+        else
+                (pcu->actionOnWtComplete)();
 }
 
 /* active counter (Interrupt on Terminal Count)
  * if the gate is lost, then
- *	set the output indefinitely high if at terminal count, or
- *	indefinitely low if still counting (i.e; extend current low
- *	level signal duration).
- *	if count reprogrammed during this time, this new count will be
- *	used on next trigger (gate).
+ *      set the output indefinitely high if at terminal count, or
+ *      indefinitely low if still counting (i.e; extend current low
+ *      level signal duration).
+ *      if count reprogrammed during this time, this new count will be
+ *      used on next trigger (gate).
  * else
- *	if new count programmed, stop counter on receiving 1st byte.
- *	start new count on second byte. (done by resumeCounting0())
+ *      if new count programmed, stop counter on receiving 1st byte.
+ *      start new count on second byte. (done by resumeCounting0())
  */
 
 LOCAL STATE_FUNCTION Counting0 IFN2(int, signal, half_word, value)
 {
-	pcu->actionOnGateEnabled = resumeCounting0onGate;
-	pcu->actionOnWtComplete = resumeCounting0;
+        pcu->actionOnGateEnabled = resumeCounting0onGate;
+        pcu->actionOnWtComplete = resumeCounting0;
 
-	switch (signal)
-	{
-	case GATE_SIGNAL:
-		if (value == GATE_SIGNAL_HIGH)
-			return;
-		/* we're about to freeze timer channel ...
-		 * get an up to date count. This might change the
-		 * state of the counter.
-		 */
-		updateCounter();
-		pcu->gate = value;
-		if (pcu->tc)
-			outputHigh();
-		else
-			outputLow();
-		pcu->state = awaitingGate;
-		return;
-	case WRITE_SIGNAL:
-		pcu->freezeCounter = 1;
-		updateCounter();
-		if (pcu->tc)
-			outputHigh();
-		else
-			outputLow();
-		pcu->statePriorWt = pcu->state;
-		waitingFor1stWrite(signal,value);
-		return;
-	}
+        switch (signal)
+        {
+        case GATE_SIGNAL:
+                if (value == GATE_SIGNAL_HIGH)
+                        return;
+                /* we're about to freeze timer channel ...
+                 * get an up to date count. This might change the
+                 * state of the counter.
+                 */
+                updateCounter();
+                pcu->gate = value;
+                if (pcu->tc)
+                        outputHigh();
+                else
+                        outputLow();
+                pcu->state = awaitingGate;
+                return;
+        case WRITE_SIGNAL:
+                pcu->freezeCounter = 1;
+                updateCounter();
+                if (pcu->tc)
+                        outputHigh();
+                else
+                        outputLow();
+                pcu->statePriorWt = pcu->state;
+                waitingFor1stWrite(signal,value);
+                return;
+        }
 }
 
 /* active counter (programmable One-Shot)
@@ -1554,110 +1473,110 @@ LOCAL STATE_FUNCTION Counting0 IFN2(int, signal, half_word, value)
 
 LOCAL STATE_FUNCTION Counting1 IFN2(int, signal, half_word, value)
 {
-	pcu->actionOnGateEnabled = startCounting;
-	pcu->actionOnWtComplete = resumeCounting_1_5;
+        pcu->actionOnGateEnabled = startCounting;
+        pcu->actionOnWtComplete = resumeCounting_1_5;
 
-	switch (signal)
-	{
-	case GATE_SIGNAL:
-		/* ignore transition to low on trigger.
-		 * any rising edge retriggers the counter.
-		 */
-		if (value == GATE_SIGNAL_LOW)
-			return;
-		pcu->gate = GATE_SIGNAL_HIGH;
-		pcu->stateOnGate = Counting1;
-		timestamp();
-		runCount();
-		return;
-	case WRITE_SIGNAL:
-		pcu->statePriorWt = pcu->state;
-		waitingFor1stWrite(signal,value);
-		return;
-	}
+        switch (signal)
+        {
+        case GATE_SIGNAL:
+                /* ignore transition to low on trigger.
+                 * any rising edge retriggers the counter.
+                 */
+                if (value == GATE_SIGNAL_LOW)
+                        return;
+                pcu->gate = GATE_SIGNAL_HIGH;
+                pcu->stateOnGate = Counting1;
+                timestamp();
+                runCount();
+                return;
+        case WRITE_SIGNAL:
+                pcu->statePriorWt = pcu->state;
+                waitingFor1stWrite(signal,value);
+                return;
+        }
 }
 
 LOCAL UNBLOCK_FUNCTION resumeCounting_1_5 IFN0()
 {
-	/* if terminal count has been reached, wait for the next
-	 * trigger ... any new count value programmed will be used
-	 * then.
-	 * Otherwise, even if new count is available, it still won't
-	 * be used until next trigger
-	 */
-	if (pcu->gate == GATE_SIGNAL_RISE)
-	{
-		pcu->state = Counting1;
-		if (pcu->m == HW_TRIG_STROBE)
-			pcu->state = Counting_4_5;
-		return;
-	}
+        /* if terminal count has been reached, wait for the next
+         * trigger ... any new count value programmed will be used
+         * then.
+         * Otherwise, even if new count is available, it still won't
+         * be used until next trigger
+         */
+        if (pcu->gate == GATE_SIGNAL_RISE)
+        {
+                pcu->state = Counting1;
+                if (pcu->m == HW_TRIG_STROBE)
+                        pcu->state = Counting_4_5;
+                return;
+        }
 
-	if (pcu->tc)
-		pcu->state = awaitingGate;
-	else
-	{
-		pcu->state = Counting1;
-		if (pcu->m == HW_TRIG_STROBE)
-			pcu->state = Counting_4_5;
-	}
+        if (pcu->tc)
+                pcu->state = awaitingGate;
+        else
+        {
+                pcu->state = Counting1;
+                if (pcu->m == HW_TRIG_STROBE)
+                        pcu->state = Counting_4_5;
+        }
 }
 
 LOCAL STATE_FUNCTION Counting_2_3 IFN2(int, signal, half_word, value)
 {
-	pcu->actionOnGateEnabled = resumeCounting_2_3_4_onGate;
-	pcu->actionOnWtComplete = resumeCounting_2_3_4;
+        pcu->actionOnGateEnabled = resumeCounting_2_3_4_onGate;
+        pcu->actionOnWtComplete = resumeCounting_2_3_4;
 
-	switch (signal)
-	{
-	case GATE_SIGNAL:
-		if (value == GATE_SIGNAL_HIGH)
-			return;
-		/* we're about to freeze timer channel ...
-		 * get an up to date count. This might change the
-		 * state of the counter.
-		 */
-		updateCounter();
-		pcu->gate = value;
-		outputHigh();
-		pcu->state = awaitingGate;
-		return;
-	case WRITE_SIGNAL:
-		pcu->statePriorWt = pcu->state;
-		waitingFor1stWrite(signal,value);
-		return;
-	}
+        switch (signal)
+        {
+        case GATE_SIGNAL:
+                if (value == GATE_SIGNAL_HIGH)
+                        return;
+                /* we're about to freeze timer channel ...
+                 * get an up to date count. This might change the
+                 * state of the counter.
+                 */
+                updateCounter();
+                pcu->gate = value;
+                outputHigh();
+                pcu->state = awaitingGate;
+                return;
+        case WRITE_SIGNAL:
+                pcu->statePriorWt = pcu->state;
+                waitingFor1stWrite(signal,value);
+                return;
+        }
 }
 
 LOCAL STATE_FUNCTION Counting_4_5 IFN2(int, signal, half_word, value)
 {
-	pcu->actionOnGateEnabled = resumeCounting_2_3_4_onGate;
-	pcu->actionOnWtComplete = resumeCounting_2_3_4;
-	if (pcu->m == HW_TRIG_STROBE)
-	{
-		pcu->actionOnGateEnabled = resumeCounting_1_5;
-		pcu->actionOnWtComplete = resumeCounting_1_5;
-	}
+        pcu->actionOnGateEnabled = resumeCounting_2_3_4_onGate;
+        pcu->actionOnWtComplete = resumeCounting_2_3_4;
+        if (pcu->m == HW_TRIG_STROBE)
+        {
+                pcu->actionOnGateEnabled = resumeCounting_1_5;
+                pcu->actionOnWtComplete = resumeCounting_1_5;
+        }
 
-	switch (signal)
-	{
-	case GATE_SIGNAL:
-		if (value == GATE_SIGNAL_HIGH)
-			return;
-		/* we're about to freeze timer channel ...
-		 * get an up to date count. This might change the
-		 * state of the counter.
-		 */
-		updateCounter();
-		pcu->gate = value;
-		outputHigh();
-		pcu->state = awaitingGate;
-		return;
-	case WRITE_SIGNAL:
-		pcu->statePriorWt = pcu->state;
-		waitingFor1stWrite(signal,value);
-		return;
-	}
+        switch (signal)
+        {
+        case GATE_SIGNAL:
+                if (value == GATE_SIGNAL_HIGH)
+                        return;
+                /* we're about to freeze timer channel ...
+                 * get an up to date count. This might change the
+                 * state of the counter.
+                 */
+                updateCounter();
+                pcu->gate = value;
+                outputHigh();
+                pcu->state = awaitingGate;
+                return;
+        case WRITE_SIGNAL:
+                pcu->statePriorWt = pcu->state;
+                waitingFor1stWrite(signal,value);
+                return;
+        }
 }
 
 /* ****************** UNBLOCK FUNCTIONS ************************************* */
@@ -1674,104 +1593,99 @@ LOCAL STATE_FUNCTION Counting_4_5 IFN2(int, signal, half_word, value)
 
 LOCAL UNBLOCK_FUNCTION CounterBufferLoaded IFN0()
 {
-	unsigned long lowticks, hiticks, adjustedCount;
-	pcu->actionOnWtComplete = timererror;
-	loadCounter();
+        unsigned long lowticks, hiticks, adjustedCount;
+        pcu->actionOnWtComplete = timererror;
+        loadCounter();
 
 #ifdef DOCUMENTATION
-#line 1697
 #error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
-#line 1707
 #endif /* DOCUMENTATION */
 #line 1708
 
-	if (pcu->gate != GATE_SIGNAL_LOW)
-	{
+        if (pcu->gate != GATE_SIGNAL_LOW)
+        {
 #if defined(NEC_98)
-#line 1712
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 1718
-		if (pcu == &timers[0])
-			timer_int_enabled = TRUE;
-		timestamp();
-		adjustedCount = timer_conv(pcu->Count);
-		switch (pcu->m)
-		{
-		case INT_ON_TERMINALCOUNT:
-			outputWaveForm(pcu->delay,adjustedCount,
-				INDEFINITE,STARTLO,NOREPEAT);
-			pcu->Count -= pcu->tickadjust;
-			pcu->state = Counting0;
-			return;
-		case PROG_ONESHOT:
-			outputWaveForm(pcu->delay,adjustedCount,
-				INDEFINITE,STARTLO,NOREPEAT);
-			pcu->Count -= pcu->tickadjust;
-			pcu->state = Counting1;
-			return;
-		case RATE_GEN:
-			outputWaveForm(pcu->delay,1,
-				adjustedCount-1,STARTHI,REPEAT);
-			pcu->Count -= pcu->tickadjust;
-			pcu->state = Counting_2_3;
-			return;
-		case SQUAREWAVE_GEN:
-			if (!(pcu->Count & 1))
-				lowticks = hiticks = adjustedCount >> 1;
-			else
-			{
-				lowticks = (adjustedCount - 1) >> 1;
-				hiticks = (adjustedCount + 1) >> 1;
-			}
-			outputWaveForm(pcu->delay,lowticks,
-				hiticks,STARTHI,REPEAT);
-			pcu->Count -= pcu->tickadjust;
-			pcu->state = Counting_2_3;
-			return;
-		case SW_TRIG_STROBE:
-		case HW_TRIG_STROBE:
-			outputWaveForm(pcu->delay,1,
-				adjustedCount,STARTHI,NOREPEAT);
-			pcu->Count -= pcu->tickadjust;
-			pcu->state = Counting_4_5;
-			return;
-		}
-	}
-	else
-		if (pcu == &timers[0])
-			timer_int_enabled = FALSE;
-		pcu->state = awaitingGate;
-		pcu->actionOnGateEnabled = startCounting;
-		switch (pcu->m)
-		{
-		case INT_ON_TERMINALCOUNT:
-			pcu->stateOnGate = Counting0;
-			return;
-		case PROG_ONESHOT:
-			pcu->stateOnGate = Counting1;
-			return;
-		case RATE_GEN:
-		case SQUAREWAVE_GEN:
-			pcu->stateOnGate = Counting_2_3;
-			return;
-		case SW_TRIG_STROBE:
-		case HW_TRIG_STROBE:
-			pcu->stateOnGate = Counting_4_5;
-			return;
-		}
+                if (pcu == &timers[0])
+                        timer_int_enabled = TRUE;
+                timestamp();
+                adjustedCount = timer_conv(pcu->Count);
+                switch (pcu->m)
+                {
+                case INT_ON_TERMINALCOUNT:
+                        outputWaveForm(pcu->delay,adjustedCount,
+                                INDEFINITE,STARTLO,NOREPEAT);
+                        pcu->Count -= pcu->tickadjust;
+                        pcu->state = Counting0;
+                        return;
+                case PROG_ONESHOT:
+                        outputWaveForm(pcu->delay,adjustedCount,
+                                INDEFINITE,STARTLO,NOREPEAT);
+                        pcu->Count -= pcu->tickadjust;
+                        pcu->state = Counting1;
+                        return;
+                case RATE_GEN:
+                        outputWaveForm(pcu->delay,1,
+                                adjustedCount-1,STARTHI,REPEAT);
+                        pcu->Count -= pcu->tickadjust;
+                        pcu->state = Counting_2_3;
+                        return;
+                case SQUAREWAVE_GEN:
+                        if (!(pcu->Count & 1))
+                                lowticks = hiticks = adjustedCount >> 1;
+                        else
+                        {
+                                lowticks = (adjustedCount - 1) >> 1;
+                                hiticks = (adjustedCount + 1) >> 1;
+                        }
+                        outputWaveForm(pcu->delay,lowticks,
+                                hiticks,STARTHI,REPEAT);
+                        pcu->Count -= pcu->tickadjust;
+                        pcu->state = Counting_2_3;
+                        return;
+                case SW_TRIG_STROBE:
+                case HW_TRIG_STROBE:
+                        outputWaveForm(pcu->delay,1,
+                                adjustedCount,STARTHI,NOREPEAT);
+                        pcu->Count -= pcu->tickadjust;
+                        pcu->state = Counting_4_5;
+                        return;
+                }
+        }
+        else
+                if (pcu == &timers[0])
+                        timer_int_enabled = FALSE;
+                pcu->state = awaitingGate;
+                pcu->actionOnGateEnabled = startCounting;
+                switch (pcu->m)
+                {
+                case INT_ON_TERMINALCOUNT:
+                        pcu->stateOnGate = Counting0;
+                        return;
+                case PROG_ONESHOT:
+                        pcu->stateOnGate = Counting1;
+                        return;
+                case RATE_GEN:
+                case SQUAREWAVE_GEN:
+                        pcu->stateOnGate = Counting_2_3;
+                        return;
+                case SW_TRIG_STROBE:
+                case HW_TRIG_STROBE:
+                        pcu->stateOnGate = Counting_4_5;
+                        return;
+                }
 }
 
 LOCAL void startCounting IFN0()
 {
-	timestamp();
-	runCount();
+        timestamp();
+        runCount();
 }
 
 #ifndef NTVDM
-#line 1795
 #error Excluded unsupported non-NTVDM timer profile
-#line 1859
 #endif
 #line 1860
 
@@ -1779,94 +1693,80 @@ LOCAL void startCounting IFN0()
 LOCAL void updateCounter IFN0()
 {
 #ifndef NTVDM
-#line 1865
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1867
 #endif /* NTVDM */
 #line 1868
     unsigned long wrap;
 #if defined(NEC_98)
-#line 1870
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 1872
 
-	switch (pcu->m)
-	{
-	case INT_ON_TERMINALCOUNT:
-	case RATE_GEN:
-	case SQUAREWAVE_GEN:
-		if (pcu->gate == GATE_SIGNAL_LOW)
-			return;
+        switch (pcu->m)
+        {
+        case INT_ON_TERMINALCOUNT:
+        case RATE_GEN:
+        case SQUAREWAVE_GEN:
+                if (pcu->gate == GATE_SIGNAL_LOW)
+                        return;
 #ifdef NTVDM
-		wrap = updateCount();
+                wrap = updateCount();
 #else
-#line 1883
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1885
 #endif
 #line 1886
-		if (wrap)
-			pcu->tickadjust = pcu->Count;
-		if (pcu->m == INT_ON_TERMINALCOUNT && wrap)
+                if (wrap)
+                        pcu->tickadjust = pcu->Count;
+                if (pcu->m == INT_ON_TERMINALCOUNT && wrap)
 #if defined(NEC_98)
-#line 1890
 #error Unsupported NEC PC-98 configuration
 #else   //NEC_98
 #line 1892
-			pcu->tc = 1;
+                        pcu->tc = 1;
 #endif   //NEC_98
-#line 1894
-		if (pcu == &timers[0] && wrap){
-			if (pcu->m != INT_ON_TERMINALCOUNT)
-				issueIREQ0((unsigned int)wrap);
-			else
-				issueIREQ0(1);
+                if (pcu == &timers[0] && wrap){
+                        if (pcu->m != INT_ON_TERMINALCOUNT)
+                                issueIREQ0((unsigned int)wrap);
+                        else
+                                issueIREQ0(1);
 #ifdef HUNTER
-#line 1900
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 #line 1902
 
-		}
-		return;
-	case PROG_ONESHOT:
-	case SW_TRIG_STROBE:
-	case HW_TRIG_STROBE:
-		if (pcu->tc)
-			return;
+                }
+                return;
+        case PROG_ONESHOT:
+        case SW_TRIG_STROBE:
+        case HW_TRIG_STROBE:
+                if (pcu->tc)
+                        return;
 #ifdef NTVDM
-		wrap = updateCount();
+                wrap = updateCount();
 #else
-#line 1913
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1915
 #endif
 #line 1916
-		if (wrap)
-		{
-			pcu->Count = 0;
-			pcu->tc = 1;
+                if (wrap)
+                {
+                        pcu->Count = 0;
+                        pcu->tc = 1;
 #ifdef NTVDM
-			RealTimeCountCounterZero = 0;
+                        RealTimeCountCounterZero = 0;
 #endif
 
-		}
+                }
 #ifdef HUNTER
-#line 1926
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
-#line 1929
 #endif
 #line 1930
-		return;
-	}
+                return;
+        }
 }
 
 
 #ifndef NTVDM
-#line 1936
 #error Excluded unsupported non-NTVDM timer profile
-#line 2032
 #else   /* NTVDM */
 #line 2033
 
@@ -1880,26 +1780,25 @@ void TimerGenerateMultipleInterrupts(long n)
 
 
     if (!EoiPending) {
-	EoiPending += n;
-	ica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, n);
-	}
+        EoiPending += n;
+        ica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, n);
+        }
     else {
-	if (n > 5 && (dwWNTPifFlags & COMPAT_TIMERTIC)) {
-	    n = 5;
-	    }
+        if (n > 5 && (dwWNTPifFlags & COMPAT_TIMERTIC)) {
+            n = 5;
+            }
 
-	if (EoiIntsPending/n < 19) {   // less than a second behind ?
-	    EoiIntsPending += n;
-	    }
-	else {
-	    EoiIntsPending++;
-	    }
+        if (EoiIntsPending/n < 19) {   // less than a second behind ?
+            EoiIntsPending += n;
+            }
+        else {
+            EoiIntsPending++;
+            }
 #if defined(NEC_98)
-#line 2059
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 2061
-	}
+        }
 }
 
 
@@ -1914,7 +1813,6 @@ void TimerGenerateMultipleInterrupts(long n)
 #define getIF() (GLOBAL_EFLAGS & 0x200)
 
 #endif /* !MONITOR */
-#line 2076
 
 
 /*  timer_generate_int NTVDM
@@ -1938,7 +1836,6 @@ void timer_generate_int (void)
 
 
 #if defined(NEC_98)
-#line 2099
 #error Unsupported NEC PC-98 configuration
 #else   //NEC_98
 #line 2101
@@ -1947,39 +1844,38 @@ void timer_generate_int (void)
     lo = * (word *)(Start_of_M_area+0x1c*4);
     wrap = (word) *(half_word *)(Start_of_M_area + ((ULONG)hi << 4) + lo);
     if (!getIF() || ((hi != TimerInt1CSeg || lo != TimerInt1COff) && wrap != 0xcf) ||
-	*(word *)(Start_of_M_area+0x08*4+2) != TimerInt08Seg ||
+        *(word *)(Start_of_M_area+0x08*4+2) != TimerInt08Seg ||
         *(word *)(Start_of_M_area+0x08*4)   != TimerInt08Off ||
-        (*pTimerVDMState & VDM_INT_HOOK_IN_PM))
+        (*pNtVDMState & VDM_INT_HOOK_IN_PM))
        {
-	TimerGenerateMultipleInterrupts(1);
-	}
+        TimerGenerateMultipleInterrupts(1);
+        }
     else {  /* update Bios Data Area directly */
-	++(*(double_word *)(Start_of_M_area + TIMER_LOW));
+        ++(*(double_word *)(Start_of_M_area + TIMER_LOW));
 
-	    /* Wrap at 24 hours ? */
-	if (*(double_word *)(Start_of_M_area + TIMER_LOW) == 0x1800b0)
-	   {
-	    *(word *)(Start_of_M_area + TIMER_LOW)  = 0;
-	    *(word *)(Start_of_M_area + TIMER_HIGH) = 0;
-	    *(half_word *)(Start_of_M_area+TIMER_OVFL)=1;
-	   }
+            /* Wrap at 24 hours ? */
+        if (*(double_word *)(Start_of_M_area + TIMER_LOW) == 0x1800b0)
+           {
+            *(word *)(Start_of_M_area + TIMER_LOW)  = 0;
+            *(word *)(Start_of_M_area + TIMER_HIGH) = 0;
+            *(half_word *)(Start_of_M_area+TIMER_OVFL)=1;
+           }
 
-	    /* decr motor count */
-	--(*(half_word *)(Start_of_M_area + MOTOR_COUNT));
+            /* decr motor count */
+        --(*(half_word *)(Start_of_M_area + MOTOR_COUNT));
 
-	    /*  if motor count went to zero turn off the motor */
-	if (!*(half_word *)(Start_of_M_area + MOTOR_COUNT))
-	   {
-	    *(half_word *)(Start_of_M_area + MOTOR_STATUS) &= 0xF0;
-	    fla_outb(DISKETTE_DOR_REG, 0x0C);
-	    }
+            /*  if motor count went to zero turn off the motor */
+        if (!*(half_word *)(Start_of_M_area + MOTOR_COUNT))
+           {
+            *(half_word *)(Start_of_M_area + MOTOR_STATUS) &= 0xF0;
+            fla_outb(DISKETTE_DOR_REG, 0x0C);
+            }
 
-	if (EoiDelayInUse && !(--EoiDelayInUse))  {
-	    host_DelayHwInterrupt(CPU_TIMER_INT, 0, 0xFFFFFFFF);
-	    }
-	}
+        if (EoiDelayInUse && !(--EoiDelayInUse))  {
+            host_DelayHwInterrupt(CPU_TIMER_INT, 0, 0xFFFFFFFF);
+            }
+        }
 #endif   //NEC_98
-#line 2138
 }
 
 
@@ -1995,106 +1891,89 @@ void timer_generate_int (void)
 void TimerEoiHook(int IrqLine, int CallCount)
 {
     if (EoiPending)
-	--EoiPending;
+        --EoiPending;
 
     if (CallCount < 0) {       // interrupts were canceled
-	EoiIntsPending = 0;
-	EoiPending = 0;
-	}
+        EoiIntsPending = 0;
+        EoiPending = 0;
+        }
     else if (CallCount) {
 #if defined(NEC_98)
-#line 2161
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 2163
-	EoiDelayInUse = 100;
+        EoiDelayInUse = 100;
 #endif   //NEC_98
-#line 2165
-	host_DelayHwInterrupt(CPU_TIMER_INT,
-			      0,
+        host_DelayHwInterrupt(CPU_TIMER_INT,
+                              0,
                               timer_delay_size
-			      );
-	}
+                              );
+        }
     else if (EoiIntsPending) {
 #if defined(NEC_98)
-#line 2172
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 2174
-	EoiDelayInUse = 100;
+        EoiDelayInUse = 100;
 #endif   //NEC_98
-#line 2176
-	if (host_DelayHwInterrupt(CPU_TIMER_INT,
-				  EoiIntsPending,
+        if (host_DelayHwInterrupt(CPU_TIMER_INT,
+                                  EoiIntsPending,
                                   timer_delay_size
-				  ))
-	   {
-	    EoiPending = EoiIntsPending;
-	    }
-	EoiIntsPending = 0;
-	}
+                                  ))
+           {
+            EoiPending = EoiIntsPending;
+            }
+        EoiIntsPending = 0;
+        }
     else {
-	if (EoiDelayInUse && !(--EoiDelayInUse))  {
-	    host_DelayHwInterrupt(CPU_TIMER_INT, 0, 0xFFFFFFFF);
-	    }
-	}
+        if (EoiDelayInUse && !(--EoiDelayInUse))  {
+            host_DelayHwInterrupt(CPU_TIMER_INT, 0, 0xFFFFFFFF);
+            }
+        }
 
 }
 
 #endif /* NTVDM */
-#line 2194
 
 
 #ifndef NTVDM
-#line 2197
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2236
 #endif
 #line 2237
 
 
 LOCAL void issueIREQ0 IFN1(unsigned int, n)
 {
-	IU16 int_delay;	/* delay before handling wrapped int */
+        IU16 int_delay; /* delay before handling wrapped int */
 
 #ifndef PROD
-#line 2244
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 2246
 #endif
 #line 2247
 
 #ifdef PIG
-#line 2249
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 2251
 
 #ifndef PROD
-#line 2253
 #error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
-#line 2275
 #endif
 #line 2276
 
     if (ticks_blocked == 0)
     {
 #ifndef PROD
-#line 2280
 #error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
-#line 2286
 #endif
 #line 2287
-		if (timer_int_enabled)
-		{
+                if (timer_int_enabled)
+                {
 #ifdef DELAYED_INTS
-#line 2290
 #error Unsupported excluded original configuration
-#line 2292
 #else /* !DELAYED_INTS */
 #line 2293
 
-#line 2294
 #ifdef NTVDM
                         if (n > 0) {
                             if (n <= 4) {
@@ -2112,18 +1991,15 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
                             TimerGenerateMultipleInterrupts(n);
                             }
 #else /* !NTVDM */
-#line 2311
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2340
 #endif /* !NTVDM */
 #line 2341
 #endif /* !DELAYED_INTS */
-#line 2342
-		}
+                }
     }
     else if (ticks_blocked > 0)
     {
-		ticks_blocked--;
+                ticks_blocked--;
     }
 }
 
@@ -2131,45 +2007,44 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
 
 #ifdef NTVDM
 unsigned long clocksSinceCounterUpdate(struct host_timeval *pCurrTime,
-				       struct host_timeval *pLastTime,
-				       word                *pCounter  )
+                                       struct host_timeval *pLastTime,
+                                       word                *pCounter  )
 {
      unsigned long clocks, wrap, usecs;
 #if defined(NEC_98)
-#line 2359
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 2362
 
 
-	 /*  Calculate usecs elapsed and clocks elapsed since last update
-	  *
-	  *  For NT port timer zero's IdealInterval is exact to a modulo
-	  *  of 65536, for efficiency and accuracy we stick with the exact
-	  *  number of clocks between IdealIntervals.
-	  */
+         /*  Calculate usecs elapsed and clocks elapsed since last update
+          *
+          *  For NT port timer zero's IdealInterval is exact to a modulo
+          *  of 65536, for efficiency and accuracy we stick with the exact
+          *  number of clocks between IdealIntervals.
+          */
      if (pCounter == &timers[0].Count)  { /* update quick way for IdealTime */
-	if (pCurrTime->tv_sec  != pLastTime->tv_sec ||
-	    pCurrTime->tv_usec != pLastTime->tv_usec  )
-	   {
-	    *pLastTime = *pCurrTime;
-	    return 65536/pcu->initialCount;
-	    }
-	else {
+        if (pCurrTime->tv_sec  != pLastTime->tv_sec ||
+            pCurrTime->tv_usec != pLastTime->tv_usec  )
+           {
+            *pLastTime = *pCurrTime;
+            return 65536/pcu->initialCount;
+            }
+        else {
             usecs = clocks = 0;
-	    }
-	}
-    else {		/* calc diff in usecs and clocks elapsed */
-	usecs =  (unsigned long)(pCurrTime->tv_sec - pLastTime->tv_sec);
-	if (!usecs) {
-	    usecs = pCurrTime->tv_usec - pLastTime->tv_usec;
-	    }
-	else if (usecs == 1) {
-	    usecs = 1000000L - pLastTime->tv_usec + pCurrTime->tv_usec;
-	    }
-	else {
-	    usecs = pCurrTime->tv_usec - pLastTime->tv_usec +
-		    (pCurrTime->tv_sec - pLastTime->tv_sec) * 1000000L;
+            }
+        }
+    else {              /* calc diff in usecs and clocks elapsed */
+        usecs =  (unsigned long)(pCurrTime->tv_sec - pLastTime->tv_sec);
+        if (!usecs) {
+            usecs = pCurrTime->tv_usec - pLastTime->tv_usec;
+            }
+        else if (usecs == 1) {
+            usecs = 1000000L - pLastTime->tv_usec + pCurrTime->tv_usec;
+            }
+        else {
+            usecs = pCurrTime->tv_usec - pLastTime->tv_usec +
+                    (pCurrTime->tv_sec - pLastTime->tv_sec) * 1000000L;
             }
 
          /* ... clocks elapsed 1.193180 usecs per clock
@@ -2181,34 +2056,32 @@ unsigned long clocksSinceCounterUpdate(struct host_timeval *pCurrTime,
           */
 
 #if defined(NEC_98)
-#line 2403
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 2410
         clocks =  (usecs * 1193)/1000;
 #endif   //NEC_98
-#line 2412
-	}
+        }
 
-	 /* how many times did counter wrap ? */
+         /* how many times did counter wrap ? */
     wrap = clocks/pcu->initialCount;
 
-	 /* calc ticks from elapsed clocks */
+         /* calc ticks from elapsed clocks */
     clocks = clocks && pcu->initialCount ? clocks % pcu->initialCount : 0;
     *pCounter = (word) (pcu->initialCount - clocks);
 
        /* if the count wrapped reset Last Update time stamp */
     if (wrap)  {
-	*pLastTime = *pCurrTime;
+        *pLastTime = *pCurrTime;
 
         if ((ULONG)pLastTime->tv_usec < usecs)  {
-	    pLastTime->tv_sec--;
-	    pLastTime->tv_usec = 1000000L + pLastTime->tv_usec - usecs;
-	    }
-	else  {
-	    pLastTime->tv_usec -= usecs;
-	    }
-	}
+            pLastTime->tv_sec--;
+            pLastTime->tv_usec = 1000000L + pLastTime->tv_usec - usecs;
+            }
+        else  {
+            pLastTime->tv_usec -= usecs;
+            }
+        }
 
     return wrap;
 }
@@ -2220,26 +2093,27 @@ unsigned long updateCount(void)
      struct host_timeval curr;
 
 
-	 /*
-	  * For timer zero, update real time count, time stamp
-	  */
+         /*
+          * For timer zero, update real time count, time stamp
+          */
      if (pcu == &timers[0]) {
-	 host_GetSysTime(&curr);
-	 clocksSinceCounterUpdate(&curr,
-				  &LastTimeCounterZero,
-				  &RealTimeCountCounterZero);
-	 }
+         host_GetSysTime(&curr);
+         clocksSinceCounterUpdate(&curr,
+                                  &LastTimeCounterZero,
+                                  &RealTimeCountCounterZero);
+         }
 
-	  /*
-	   *  Update the pcu count, time stamps
-	   */
+          /*
+           *  Update the pcu count, time stamps
+           */
      (*pcu->getTime)(&curr);
      wrap = clocksSinceCounterUpdate(&curr,
-				     &pcu->activationTime,
-				     &pcu->Count);
+                                     &pcu->activationTime,
+                                     &pcu->Count);
 
      return wrap;
 }
+
 
 unsigned short GetLastTimer0Count(void)
 {
@@ -2266,22 +2140,15 @@ unsigned long GetTimer0InitialCount(void)
 
 
 
-
-
-
 #else
-#line 2492
 #error Excluded unsupported non-NTVDM alternative
-#line 2611
 #endif  /* NTVDM*/
 #line 2612
 
 
 
 #ifndef NTVDM
-#line 2616
 #error Excluded unsupported non-NTVDM timer profile
-#line 2693
 #endif  /* ndef NTVDM */
 #line 2694
 
@@ -2293,8 +2160,8 @@ LOCAL unsigned  short bin_to_bcd IFN1(unsigned long, val)
     bcd = 0;
     for (i=0; i<4; i++)
     {
-	 bcd = bcd | ((m % 10) << (i << 2));
-	 m /= 10;
+         bcd = bcd | ((m % 10) << (i << 2));
+         m /= 10;
     }
     return(bcd);
 }
@@ -2309,9 +2176,9 @@ LOCAL word bcd_to_bin IFN1(word, val)
     mul = 1;
     for (i=0; i<4; i++)
     {
-	bin += (val & 0xf) * mul;
-	mul *= 10;
-	val = val >> 4;
+        bin += (val & 0xf) * mul;
+        mul *= 10;
+        val = val >> 4;
     }
     return (bin);
 }
@@ -2323,15 +2190,15 @@ LOCAL word bcd_to_bin IFN1(word, val)
 
 LOCAL unsigned long timer_conv IFN1(word, count)
 {
-	if (!count)
-	{
-		if (pcu->bcd == BCD)
-			return 10000L;
-		else
-			return 0x10000L;
-	}
-	else
-		return (unsigned long)count;
+        if (!count)
+        {
+                if (pcu->bcd == BCD)
+                        return 10000L;
+                else
+                        return 0x10000L;
+        }
+        else
+                return (unsigned long)count;
 }
 
 
@@ -2356,18 +2223,16 @@ LOCAL void getIdealTime IFN1(struct host_timeval *, t)
 
 LOCAL void updateIdealTime IFN0()
 {
-	idealtime.tv_usec += idealInterval;
-	if (idealtime.tv_usec > 1000000L)
-	{
-		idealtime.tv_usec -=1000000L;
-		idealtime.tv_sec++;
-	}
+        idealtime.tv_usec += idealInterval;
+        if (idealtime.tv_usec > 1000000L)
+        {
+                idealtime.tv_usec -=1000000L;
+                idealtime.tv_sec++;
+        }
 }
 
 #ifndef NTVDM
-#line 2775
 #error Excluded unsupported non-NTVDM timer profile
-#line 2807
 #endif /* !NTVDM */
 #line 2808
 
@@ -2377,90 +2242,72 @@ LOCAL void updateIdealTime IFN0()
  * causes this to be called iff a 80287 is being used.
  */
 
-void	axe_ticks IFN1(int, ticks)
+void    axe_ticks IFN1(int, ticks)
 {
-#ifndef	PROD
-#line 2818
+#ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 2823
-#endif	/* PROD */
+#endif  /* PROD */
 #line 2824
-		ticks_blocked = ticks;
+                ticks_blocked = ticks;
 }
 
 /*
  * Initialization code
  */
 #ifdef SEGMENTATION
-#line 2831
 #error Excluded unsupported SEGMENTATION configuration
-#line 2837
 #endif
 #line 2838
 
 #if defined(NEC_98)
-#line 2840
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 2855
 #ifdef SYNCH_TIMERS
-#line 2856
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
-#line 2864
 #else
+#line 2865
 
-#line 2866
 LOCAL void IdealTimeInit IFN0()
 {
     idealInterval = HOST_IDEAL_ALARM;
 
 #endif
-#line 2871
 
 #ifndef NTVDM
-#line 2873
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2875
 #endif
 #line 2876
 }
 #endif   //NEC_98
-#line 2878
 
 LOCAL void Timer_init IFN0()
 {
-	int i;
-	for (i=0; i<3; i++)
-		counter_init(&timers[i]);
+        int i;
+        for (i=0; i<3; i++)
+                counter_init(&timers[i]);
 #ifdef NTVDM
-	timers[0].getTime = getIdealTime;       /* Use the 'ideal' time for timer 0, ie. calls to time_tick */
-	timers[1].getTime = host_GetSysTime;    /* We don't really expect anyone to use timer 1 */
-	timers[2].getTime = host_GetSysTime;    /* Use real host time for timer 2 */
+        timers[0].getTime = getIdealTime;       /* Use the 'ideal' time for timer 0, ie. calls to time_tick */
+        timers[1].getTime = host_GetSysTime;    /* We don't really expect anyone to use timer 1 */
+        timers[2].getTime = host_GetSysTime;    /* Use real host time for timer 2 */
 #else
-#line 2889
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2892
 #endif
 #line 2893
 }
 
 LOCAL void counter_init IFN1(COUNTER_UNIT *, p)
 {
-	p->state = uninit;
-	p->initialCount = 0x10000L;	/* Avoid dividing by zero in updateCount()! */
+        p->state = uninit;
+        p->initialCount = 0x10000L;     /* Avoid dividing by zero in updateCount()! */
 #ifndef NTVDM
-#line 2900
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2902
 #endif
 #line 2903
 }
 
-#line 2905
 #if !defined (NTVDM)
-#line 2906
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2945
 #endif /* !NTVDM */
 #line 2946
 
@@ -2476,22 +2323,19 @@ void timer_init IFN0()
     io_define_outb(TIMER_ADAPTOR, timer_outb_func);
 
 #if defined(NEC_98)
-#line 2959
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 2963
     for(i = TIMER_PORT_START; i < TIMER_PORT_END; i++)
-	{
-		if( (i & 3) == 3 )
+        {
+                if( (i & 3) == 3 )
 #endif   //NEC_98
-#line 2967
-			io_connect_port(i, TIMER_ADAPTOR, IO_WRITE);		/* Control port - write only */
-		else
-        	io_connect_port(i, TIMER_ADAPTOR, IO_READ_WRITE);	/* Timer port - read/write */
-	}
+                        io_connect_port(i, TIMER_ADAPTOR, IO_WRITE);            /* Control port - write only */
+                else
+                io_connect_port(i, TIMER_ADAPTOR, IO_READ_WRITE);       /* Timer port - read/write */
+        }
 
 #if defined(NEC_98)
-#line 2973
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 2976
@@ -2500,43 +2344,36 @@ void timer_init IFN0()
     Timer_init();
 
 #ifndef NTVDM
-#line 2981
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 2983
 #else
 #line 2984
     RegisterEOIHook(CPU_TIMER_INT, TimerEoiHook);
 #endif
-#line 2986
 
         /*
-	 * Start up the host alarm system
-	 */
+         * Start up the host alarm system
+         */
 
-	host_timer_init();
+        host_timer_init();
 
 #if !defined(NTVDM)
-#line 2994
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 3015
 #endif /* !NTVDM */
 #line 3016
 }
 
-void	timer_post IFN0()
+void    timer_post IFN0()
 {
 #if defined(NEC_98)
-#line 3021
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 3023
     /* enable gates on all timer channels */
-    timer_gate(TIMER0_REG,GATE_SIGNAL_RISE);	/* start timer 1 going... */
+    timer_gate(TIMER0_REG,GATE_SIGNAL_RISE);    /* start timer 1 going... */
     timer_gate(TIMER1_REG,GATE_SIGNAL_RISE);
     timer_gate(TIMER2_REG,GATE_SIGNAL_RISE);
 
 #if defined(NEC_98)
-#line 3029
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 3047
@@ -2551,12 +2388,8 @@ void	timer_post IFN0()
     timer_outb(TIMER2_REG,0x68);
     timer_outb(TIMER2_REG,0x04);
 #endif   //NEC_98
-#line 3058
 }
 
 #ifdef DOCUMENTATION
-#line 3061
 #error Unsupported excluded original configuration
-#line 3091
 #endif /* DOCUMENTATION */
-#line 2882
