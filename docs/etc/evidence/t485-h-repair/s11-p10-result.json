@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P10",
-  "state": "final-verified-awaiting-commit-push",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime13",
   "reviewed_files": 28,
   "total_files": 48,
@@ -648,5 +648,6 @@
     }
   },
   "line_followup": "Earlier P1-P7 compiler-sensitive checks required before S11 closure.",
-  "test_fixture_repair": "Stale WW fields and XP macro dependencies repaired in existing reverse fixture; original marker macros extracted, no production change after publication. First failed build preserved in build/t485-s11/p10/final/attempt1-reverse-build-error.txt."
+  "test_fixture_repair": "Stale WW fields and XP macro dependencies repaired in existing reverse fixture; original marker macros extracted, no production change after publication. First failed build preserved in build/t485-s11/p10/final/attempt1-reverse-build-error.txt.",
+  "commit": "77e8752be61eec545b100cd9b476b1e6d0aafed3"
 }

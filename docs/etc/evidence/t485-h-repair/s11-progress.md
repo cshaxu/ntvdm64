@@ -34,12 +34,12 @@ frozen point counts as current byte-sensitive diff counts.
 | 20 | src/mvdm-host/wow32/wkman.c | 22 | P8 delivered 874e19e83 |
 | 21 | src/mvdm-host/wow32/wkman.h | 1 | P9 delivered 23731005a |
 | 22 | src/mvdm-host/wow32/wmdisp32.c | 79 | P9 delivered 23731005a |
-| 23 | src/mvdm-host/wow32/wmdisp32.h | 2 | P10 source-reviewed; delivery pending |
-| 24 | src/mvdm-host/wow32/wmsg16.c | 37 | P10 source-reviewed; delivery pending |
-| 25 | src/mvdm-host/wow32/wmsgcb.c | 5 | P10 source-reviewed; delivery pending |
-| 26 | src/mvdm-host/wow32/wmsgem.c | 3 | P10 source-reviewed; delivery pending |
-| 27 | src/mvdm-host/wow32/wmsglb.c | 3 | P10 source-reviewed; delivery pending |
-| 28 | src/mvdm-host/wow32/wole2.c | 5 | P10 source-reviewed; delivery pending |
+| 23 | src/mvdm-host/wow32/wmdisp32.h | 2 | P10 delivered 77e8752be |
+| 24 | src/mvdm-host/wow32/wmsg16.c | 37 | P10 delivered 77e8752be |
+| 25 | src/mvdm-host/wow32/wmsgcb.c | 5 | P10 delivered 77e8752be |
+| 26 | src/mvdm-host/wow32/wmsgem.c | 3 | P10 delivered 77e8752be |
+| 27 | src/mvdm-host/wow32/wmsglb.c | 3 | P10 delivered 77e8752be |
+| 28 | src/mvdm-host/wow32/wole2.c | 5 | P10 delivered 77e8752be |
 | 29 | src/mvdm-host/wow32/wow32.h | 1 | Pending |
 | 30 | src/mvdm-host/wow32/wow32fax.c | 7 | Pending |
 | 31 | src/mvdm-host/wow32/wowhooks.c | 39 | Pending |
@@ -701,3 +701,5 @@ or hide differences. Fixed48-file census independently recomputed772/7114.
 ### P10 final-package result
 
 [Runtime13 receipt](s11-p10-result.json): cached build,dual26/26hash publication,module-alias/reverse/message/COPYDATA and Full23/23 PASS. Both enhanced roundtrips pass all five markers; Win95 approved knownExitOne remains.28/48files,280/452points verified:12restored,268residual,172unreviewed. Census772/7114;combined reduction108/4649. Commit/push pending;S11 remains active.
+
+P10 delivered and pushed 77e8752be61eec545b100cd9b476b1e6d0aafed3.28/48files and280/452points delivered:12restored,268residual owner-review,172unreviewed. Full23/23 final runtime13. Extra file28 Full complete; next file wow32.h, periodic Full at file30 and S closure.

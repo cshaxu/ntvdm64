@@ -33,17 +33,17 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S11 Ordered Progress
 
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
-[P9 receipt](../etc/evidence/t485-h-repair/s11-p9-result.json):22/48 files,
-225/452 points final-verified:12restored,213residual,227unreviewed;one
-supplemental ABI decision. Current48-file census784points/7443lines.
-Combined cumulative reduction90points/4320lines;P9 alone26/29.
-Runtime12 cached build,dual26/26hash publication,message191/COPYDATA59
-and Full23/23 PASS. Win95 knownExitOne retained;both enhanced roundtrips
-pass all five markers. P9 delivered/pushed 23731005a;delivered22/225.
-Additional file22 Full completed. Owner now requires another Full immediately after current file28 (wole2.c) is complete; file30 and every S closure remain mandatory checkpoints.
+[P10 receipt](../etc/evidence/t485-h-repair/s11-p10-result.json):28/48files,
+280/452points delivered:12restored,268residual owner-review,172unreviewed;
+one supplemental ABI decision. Current48-file census772points/7114lines.
+Combined reduction108points/4649lines;P10 alone12/329.
+Runtime13 cached build,dual26/26hash publication,module-alias,reverse21,
+message191,COPYDATA59 and Full23/23 PASS. Win95 knownExitOne retained;
+both enhanced roundtrips pass all five markers. P10 delivered/pushed
+77e8752be. Additional file28 Full completed; next file30 and every S closure.
 Earlier P1-P7 linear-only line evidence must be rechecked with actual
 preprocessing before S11 closure. Migration39/159;S11 active.
-P10 files23-28 final-verified:28/48files,280/452points;12restored,268residual,172unreviewed. Census772/7114,cumulative108/4649;batch12/329. Runtime13 build,dual26-hash publication,targeted tests and Full23/23 PASS;commit/push pending,delivered22/225. See [P10 receipt](../etc/evidence/t485-h-repair/s11-p10-result.json).
+Next file29:wow32.h. No local source changes awaiting delivery.
 
 ## S10 Closure Record
 
