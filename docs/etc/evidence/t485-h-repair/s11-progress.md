@@ -1092,3 +1092,8 @@ further complete rerun is authorized merely for a failed gate.
 P17 final runtime21 Full passed23/23;receipt:s11-p17-result.json.
 All three files final-verified;26residual original points remain pending owner
 review. Commit/push pending;formal delivered total remains37/362 until push.
+
+P17 delivered and pushed b709bd25c0212707361b00aa06700fb70021477c.
+Delivered40/48files,388/452frozen points:17restored,371residual pending owner
+review,64unreviewed. Census745points/4602lines;raw cumulative reduction135/7161.
+Full checkpoint40 complete on runtime21. S11 remains active;nextfile41 wudlg.c.

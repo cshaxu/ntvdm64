@@ -35,8 +35,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
 [P17 receipt](../etc/evidence/t485-h-repair/s11-p17-result.json):40/48files,
 388/452 frozen points reviewed:17restored,371residual owner-review,64unreviewed.
-Final verification complete;commit/push pending,delivered remains37/48files,
-362/452points until P17 push. Current48-file census745points/4602lines;
+P17 delivered and pushed b709bd25c:40/48files,388/452points. Current48-file census745points/4602lines;
 cumulative raw reduction135points/7161lines. P17 raw+1point/-2446lines due
 original LF restoration;normalized-26points/-20lines. All original#error
 exclusions retained;original statement line checks zero drift.
@@ -45,9 +44,10 @@ hard-error6groups,real Clipboard18checkpoints and Full23/23 PASS.
 The five-parameter XP error-dialog repair adds0mirrorpoints/lines.
 Test SYSTEM staging and80x30 EDIT-return preparation corrected;original guest
 and ZIP unchanged. Prior Win95 W-key readiness timeout retained,not claimed
-repaired;focused and final Full roundtrips pass. Nextfile41 follows P17 push.
+repaired;focused and final Full roundtrips pass. Nextfile41:wudlg.c;lastFull checkpoint40,runtime21.
 P1-P7 preprocessor followup:1195 unique original statements,zero drift.
 Migration39/159;S11 active;no S closure claimed.
+
 ## S10 Closure Record
 
 [S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):30/30 files and

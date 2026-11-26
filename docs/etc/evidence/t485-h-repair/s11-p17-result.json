@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P17",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime21",
   "reviewed_files": 40,
   "total_files": 48,
@@ -9,8 +9,8 @@
   "restored_frozen_points": 17,
   "residual_frozen_points": 371,
   "unreviewed_frozen_points": 64,
-  "delivered_files": 37,
-  "delivered_frozen_points": 362,
+  "delivered_files": 40,
+  "delivered_frozen_points": 388,
   "batch_difference_change": {
     "points": 1,
     "lines": -2446
@@ -652,5 +652,6 @@
     ]
   },
   "final_full_evidence": "build/t485-s11/p17/revised/full-final/timings.json",
-  "win95_timeout_attempt": "One preceding runtime21 Full attempt timed out after WINDOW.BIN and W down/up, before FULL.RUN. Subsequent focused and final Full results retained; root cause not established, not claimed repaired."
+  "win95_timeout_attempt": "One preceding runtime21 Full attempt timed out after WINDOW.BIN and W down/up, before FULL.RUN. Subsequent focused and final Full results retained; root cause not established, not claimed repaired.",
+  "commit": "b709bd25c0212707361b00aa06700fb70021477c"
 }
