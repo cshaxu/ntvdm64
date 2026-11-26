@@ -661,3 +661,44 @@ All 31 reviewed files are delivered; 10 remain. Forty-eight S9 register points
 are restored and verified; remaining functional decisions stay pending.
 Documentation governance/links passed, post-test publication hashes 26/26.
 Next ordered file is base/inc/ica.h; S9 and T485 remain active.
+
+## P7: base/inc/ica.h
+
+Whole-file non-error byte-sensitive diff 20 points/23 lines ->9/10, net -11/-13.
+Restore original whitespace (01079,01081) and both deleted CPU hardware macros.
+Retain the original macro unit under its existing CPU_30_STYLE test extended
+with !CCPU. Original cpuint_c.h declares CPU_HW_RESET=0 and CPU_HW_INT=2;
+ICA's old CPU_HW_INT macro=0 must not override that enum in the selected CCPU
+owner/nt_cpu.c caller. CPU_SW_INT has no production use outside this header.
+This is an existing-condition extension, not another nested conditional path.
+01080 therefore remains a qualified residual decision after minimization.
+
+All eight #error directives remain, with original excluded bodies untouched.
+Both HOST_CPU_MOUSE_INT choices retain correct logical lines for 57 matching
+original lines each. Entire original macro unit and EOF Ctrl-Z are retained.
+32/41 reviewed, 31 delivered, nine unreviewed; 198/437 frozen points reviewed,
+239 unreviewed. P7 two format points locally restored; earlier 48 delivered.
+Cumulative net +58/-23447 relative to unified fc9492342. Cached build, dual
+publication and actual CPU/PIC/keyboard targeted tests pending. Next mouse_io.h.
+
+### P7 final verification
+
+Runtime7 cached full build and dual publication passed. Post-test 26 image
+hashes are verified against the runtime manifest. CPU notification (4096 rounds),
+event consumers, HLT/reset and actual keyboard/PIC (90 assertions) passed.
+The keyboard fixture initially failed fast during reset because it omitted
+ntvdm_dpmi_initialize; it now uses that existing product initialization, without
+replacing the PIC or reset algorithms. Real runtime7 NESticle menu and Escape
+hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). A redundant
+second invocation was rejected because the evidence directory already existed;
+it is not counted as another pass. Original guest and winnt.zip are unchanged.
+
+32/41 reviewed and final-verified, 31 delivered; P7 commit/push pending.
+Nine files remain; 198/437 frozen points reviewed, 239 remain. Restored and
+verified S9 points: 50. Residual 01080 stays pending owner decision.
+Whole-file P7 diff 20/23 ->9/10, reduction 11 points/13 lines. Since fc9492342,
+net +58 points/-23447 lines; 40 measured files now 402/6507, while unchanged
+timer.c still awaits its conditional mapping and is not included in that total.
+Owner permanently approves original-format/newline/EOF restoration even when
+it reveals additional hunk boundaries; both points and lines remain reported.
+Next file is base/inc/mouse_io.h. Evidence: build/t485-s9/p7.

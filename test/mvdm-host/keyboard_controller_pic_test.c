@@ -10,6 +10,7 @@
 #include "compat/include/mvdm_keyboard_history.h"
 extern mvdm_keyboard_history nt_keyboard_history;
 extern void Reset6805and8042(void);
+extern BOOL ntvdm_dpmi_initialize(void);
 
 extern void sas_init(PHY_ADDR), sas_term(void), c_cpu_init(void);
 extern void AT_kbd_init(void), kbd_outb(io_addr, half_word);
@@ -85,6 +86,8 @@ int main(void)
     half_word value;
     IU32 hook = 0;
     unsigned before;
+    /* Reset uses the same CPU/PIC provider binding as product startup. */
+    if (!ntvdm_dpmi_initialize()) return 3;
     session_initialize(&owner, 1);
     if (!session_activate(&owner) || !session_thread_bind(&owner)) return 2;
     sas_init(0x200000); c_cpu_init();
