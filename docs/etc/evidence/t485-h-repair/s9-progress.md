@@ -552,3 +552,55 @@ P4 delivery receipt: f57a2ce66 is committed and pushed to origin/main.
 All 24 reviewed S9 files are delivered; 17 remain. Documentation governance
 and relative-link checks passed. Post-test dual publication hashes remain
 26/26 matching. S9 and T485 remain active; next file is fpu.c.
+
+## P5: ordered remaining CPU files
+
+| File | Non-error points/lines before | After | Evidence and local result |
+| --- | --- | --- | --- |
+| fpu.c | 21/26 | 4/7 | M64I must round before mantissa conversion; remove 19 redundant line controls; 5311 matching selected original lines verified; six exclusions unchanged. |
+| iret.c | 1/653 | 2/3 | Target SS.B chooses SP/ESP; LF restored and two redundant anchors removed; 223 original lines checked; one exclusion unchanged. |
+| localfm.c | 1/21 | 1/3 | Real product flags: original fails C2079 for Sas/Video incomplete types; current succeeds. Keep two canonical includes and line 5 anchor; restore LF. |
+| ntthread.c | 2/540 | 5/36 | Preserve original TLS frame ownership with abnormal-unwind cleanup and per-frame completed-instruction reason; restore LF; 203 original lines checked. |
+| ntthread.h | 1/21 | 1/3 | Original prefix now byte-exact; preserve three owner declarations/constants used by reviewed chain. |
+| ret.c | 1/534 | 2/3 | Target SS.B chooses SP/ESP; restore LF and remove three redundant anchors; 186 original lines checked; one exclusion unchanged. |
+
+No functional tokens changed. No second state machine, new callback or outward
+provider introduced. The original M64I converter shifts the mantissa without
+rounding; original neighboring integer-store paths call npx_rint first. Existing
+real CCPU FIST64 tests cover all four guest rounding modes. For ntthread, the
+DPMI emulator marks only the active simulation frame after successful emulation
+(except STI's distinct existing timing); c_main resumes its existing instruction
+completion boundary. AbnormalTermination abandons only the matching frame.
+Existing real CCPU callback-abort tests cover nested escape, LastError, normal
+FE and reuse on multiple threads. Residual frozen IDs 00587--00596 remain
+pending owner review; none is claimed completely restored.
+
+Local batch: six files, 27/1795 ->15/55 (-12 points/-1740 lines).
+30/41 source-reviewed, 24 delivered, 11 unreviewed; 152/437 frozen register
+points reviewed, 285 unreviewed. Disjoint measured P1-P5 cumulative change is
++153 points/-23263 lines, not a whole-S9 census. Cached build, dual publication
+and targeted verification pending. Next file after delivery: base/dos/emm_mngr.c.
+
+### P5 final verification
+
+Cached full build and dual runtime5 publication passed (13 images, 26 hashes).
+Six files have identical functional bytes after LF/#line normalization.
+Final-code targeted checks: actual FIST64 16/16; actual stack 36/36; DPMI
+completion cases 177-180 all passed, including one TF trap at completed EIP
+0x1003. Real CCPU abort fixture passed nested/escaped/normal-FE reuse on three
+threads, original selector/interface and control restoration checks. Real MEM
+loaded NTVDMD and completed; real NESticle rendered its menu and passed Escape
+hide/restore. Evidence build/t485-s9/p5; Full remains S13, not claimed here.
+All 30 reviewed files are now final-verified, 11 remain; commit/push pending.
+
+The [unified S9 census](s9-p5-census.csv) now uses one start commit fc9492342.
+Forty files are measured: 334 points/30128 lines ->487 points/6864 lines.
+The remaining timer.c has three unmatched exclusion anchors and is explicitly
+unmeasured, not zero; its entire current bytes equal fc9492342, proving net
+change zero without claiming its absolute non-error counts. Therefore the
+41-file net change since that start is +153 points/-23264 lines. This supersedes
+the -23263 accumulated mixed-batch line delta above (one-line discrepancy).
+Absolute full-population totals still await timer.c's ordered review. This
+measurement is not additional source audit credit. Current batch remains
+27/1795 ->15/55 (-12/-1740), with all ten residual register points retained
+for owner review. Next ordered file is base/dos/emm_mngr.c.

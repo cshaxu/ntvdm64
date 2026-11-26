@@ -84,7 +84,6 @@ IFN1(
       /* Real Mode or V86 Mode */
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-#line 87
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 93
@@ -96,7 +95,6 @@ IFN1(
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 101
 
       /* all systems go */
       load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);
@@ -208,7 +206,6 @@ IFN1(
 	    SET_SP(new_sp);
 	 else
 	    SET_ESP(new_sp);
-#line 212
 	 stk_inc = 0;
 
 	 /* finally re-validate DS and ES segments */

@@ -17,7 +17,6 @@
 ]*/
 #include "insignia.h"
 #include "host_def.h"
-#line 20
 #include <math.h>
 #include "cfpu_def.h"
 #include "ckmalloc.h"
@@ -156,14 +155,9 @@ GLOBAL void getNpxStackRegs IPT1(FPSTACKENTRY *, dumpPtr);
 GLOBAL void setNpxStackRegs IPT1(FPSTACKENTRY *, loadPtr);
 
 /* DEFINED values */
-#line 158
 #ifndef NULL
-#line 159
 #error Unsupported excluded original configuration
 #endif
-#line 161
-#line 162
-#line 161
 #define TAG_NEGATIVE_MASK 1
 #define TAG_ZERO_MASK 2
 #define TAG_INFINITY_MASK 4
@@ -263,12 +257,9 @@ GLOBAL BOOL NpxException;
  * FPU-wide variables
 */
 
-#line 260
 #ifdef SUN4
-#line 261
 #error DIVERGENCE MVDM-HOST-DIV-536: SUN4 branch is not selected; see mirror register.
 #endif /* SUN4 */
-#line 263
 
 LOCAL IU32 NpxControl;
 LOCAL IU32 NpxStatus;
@@ -467,7 +458,6 @@ INTEL_COMP_NC
 };
 
 #ifdef BIGEND
-#line 461
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else	/* !BIGEND */
 #line 486
@@ -495,7 +485,6 @@ LOCAL FPU_I64 BCDHighNibble[] = {
 {0x0000000a, 0x00000000}
 };
 #endif	/* !BIGEND */
-#line 510
 
 
 LOCAL FPSTACKENTRY *FpatanTable[64];
@@ -1028,7 +1017,6 @@ LOCAL VOID CVTI64FPH IFN1(FPU_I64 *, as64)
 
 LOCAL VOID CVTFPHI64 IFN2(FPU_I64 *, as64, FPH *, FPPtr)
 {
-#line 1042
 	IU32    high32 = 0;
 	IU32	low32 = 0;
 	IS32	exp;
@@ -1036,7 +1024,6 @@ LOCAL VOID CVTFPHI64 IFN2(FPU_I64 *, as64, FPH *, FPPtr)
 	IU32	signbit = 0;
 
 	exp = ((FPHOST *)FPPtr)->hiword.exp;
-#line 1049
 	if (exp != 0) {
 		high32 = ((FPHOST *)FPPtr)->hiword.mant_hi;
 		low32 = ((FPHOST *)FPPtr)->mant_lo;
@@ -1293,10 +1280,8 @@ GLOBAL VOID InitNpx IFN1(IBOOL, disabled)
 #ifndef SFELLOW
 		check_malloc(FPUStackBase, 8, FPSTACKENTRY);
 #else
-#line 1305
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
 #endif	/* SFELLOW */
-#line 1307
 		first = FALSE;
 	}
 
@@ -1746,7 +1731,6 @@ IU16 exp_value;
 		   nothing except set the thing to zero.
 		*/
 #if (HOST_BIAS >= 16383)
-#line 1756
 #error Unsupported excluded original configuration
 #else
 #line 1770
@@ -1757,7 +1741,6 @@ IU16 exp_value;
 		}
 		memPtr->tagvalue |= TAG_ZERO_MASK;
 #endif
-#line 1777
 	} else {
 		if ((mantissa_hi & 0x80000000) == 0) {
 			memPtr->tagvalue |= TAG_UNSUPPORTED_MASK;
@@ -1862,9 +1845,7 @@ LOCAL VOID CalcTagword IFN1(FPSTACKENTRY *, FPPtr)
 		if (FPPtr->fpvalue == 0.0) {
 			/* It's a zero */
 			tagword |= TAG_ZERO_MASK;
-#line 1881
 #if (HOST_BIAS >= 16383)
-#line 1882
 #error Unsupported excluded original configuration
 #endif
 #line 1886

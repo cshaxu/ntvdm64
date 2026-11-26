@@ -32,16 +32,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S9 Ordered Progress
 
-[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 24/41 source-reviewed
-and final-verified; 17 remain. P4 f57a2ce66 is committed and pushed; all 24 reviewed files are delivered.
-P4 call.c 6/652 ->7/8 and ccpusas4.c 42/400 ->42/387: two-file batch
-48/1052 ->49/395 (+1 point/-657 lines). Disjoint measured P1-P4 change:
-+165 points/-21523 lines, not a whole-S9 census. Format block growth is owner
-approved; functional residuals remain registered for review.
-Runtime4 cached full build, dual 13-image publication (26 hashes), targeted
-stack/SAS/mapping/lease/location tests and real MEM/NTVDMD/NESticle passed.
-142/437 frozen register points reviewed; 295 remain. Next ordered file fpu.c;
-softpc.h full review stays S12. Migration remains 39/159; Full stays S13.
+[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 30/41 source-reviewed
+and final-verified, 11 unreviewed. P5 commit/push pending. P5 six-file non-error
+diff 27/1795 ->15/55 (-12 points/-1740 lines). Unified fc9492342 baseline net:
++153 points/-23264 lines across S9; 40-file absolute census is 487/6864,
+with unchanged timer.c explicitly unmeasured pending exclusion-map review.
+152/437 frozen register points reviewed; 285 remain. Functional residuals
+remain pending owner review. Runtime5 cached build, dual publication,
+FIST64/stack/completion/abort and real MEM/NTVDMD/NESticle verification passed.
+Next file base/dos/emm_mngr.c. softpc.h full review stays S12. Migration remains
+39/159; Full stays S13.
 
 ## S8 Closure Record
 
