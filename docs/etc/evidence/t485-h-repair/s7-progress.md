@@ -561,3 +561,38 @@ Residual necessity and minimality are registered without implied approval.
 S7 now has 11/20 final-verified files, nine remaining, cumulative reduction
 760 points/6847 lines. Including S6: 761 points/6848 lines. Next is
 softpc.new/host/inc/host_def.h. Commit/push completes P7; S7 is still active.
+
+## P8 host_def.h whole-file candidate
+
+Entry: 2 non-error points/6 lines against XP blob
+071804128d605731ac46fe325b21b07626d0479e. R03161 now selects the original
+cpu4.h else for CPU40 rather than repeating CpuH in the monitor arm. The
+unsupported hardware cpu.h arm remains #error; the original arm is now
+correctly paired, while the changed guard remains counted. R03162 cannot
+restore CPU_30_STYLE: CPU40 uses its vector/register/BOP conventions, and
+restoring CPU30 selects incompatible callbacks (including the explicitly
+excluded original CPU30 mouse callback). No new ABI or provider is added.
+
+Candidate is 2 points/3 lines, reduction 0 points/3 lines. Original first
+conditional lines 39/40/41 and all subsequent existing #line anchors remain
+unchanged logically. Original bodies/guard order outside this selection are
+untouched. The header is complete before the cached build. Runtime11 targets
+actual WOW and DOS4GW, the affected CPU/DOSX users; no repeat Full is needed.
+Delivered remains 11/20 and 760 points/6847 lines reduced until final results,
+publication, commit and push. Both residual points remain owner-review items.
+
+### P8 final verification and delivery checkpoint
+
+Runtime11 cached full build, dual publication and final 13-image hashes passed.
+Real WINMINE window and NESticle menu/Escape acceptance passed. Header fanout
+recompiled the actual CCPU/host consumers. No Full or desktop matrix rerun is
+claimed for this selection-preserving cleanup. Source newline bytes now match
+the pinned XP file; non-error metrics exclude that formatting noise.
+
+Final result: 2 points/6 lines -> 2 points/3 lines, reduction 0 points/3 lines.
+Both historical points remain explicit residual owner-review items. Original
+hardware CpuH body is paired as excluded; changed selection guard is counted.
+
+S7 final-verified progress is 12/20 files, eight remaining, cumulative reduction
+760 points/6850 lines. Including S6: 761 points/6851 lines. Next file is
+softpc.new/host/src/copy_fnc.c. Commit/push completes P8; S7 remains active.

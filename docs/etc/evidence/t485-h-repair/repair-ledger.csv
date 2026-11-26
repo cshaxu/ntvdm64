@@ -900,3 +900,5 @@
 "HXP-R-03139","src/mvdm-host/softpc.new/base/video/video.c","restored-final-verified","S7-P7","none","s7-p7-mirror-diff.json; s7-progress.md"
 "HXP-R-03140","src/mvdm-host/softpc.new/base/video/video.c","restored-final-verified","S7-P7","none","s7-p7-mirror-diff.json; s7-progress.md"
 "HXP-R-03141","src/mvdm-host/softpc.new/base/video/video.c","restored-final-verified","S7-P7","none","s7-p7-mirror-diff.json; s7-progress.md"
+"HXP-R-03161","src/mvdm-host/softpc.new/host/inc/host_def.h","minimized-final-verified-residual-review","S7-P8","owner-review","s7-p8-mirror-diff.json; s7-progress.md"
+"HXP-R-03162","src/mvdm-host/softpc.new/host/inc/host_def.h","minimized-final-verified-residual-review","S7-P8","owner-review","s7-p8-mirror-diff.json; s7-progress.md"

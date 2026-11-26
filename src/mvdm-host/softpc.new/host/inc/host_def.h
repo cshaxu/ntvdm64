@@ -36,13 +36,8 @@
 #define HOST_IDEAL_ALARM			SYSTEM_TICK_INTV
 #define YYLENG_ADJUST 0
 
-#ifdef MONITOR
-#ifndef CPU_40_STYLE
-#line 40
+#if defined(MONITOR) && !defined(CPU_40_STYLE)
 #error Excluded non-CPU40 MONITOR CPU interface
-#endif
-#line 40
-#define CpuH "cpu4.h"
 #else
 #line 42
 #define CpuH "cpu4.h"

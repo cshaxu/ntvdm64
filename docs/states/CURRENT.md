@@ -30,9 +30,9 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Original Owner Request | Execute the new T485 S repair sequence before resuming N004-G097, without excessive repeated verification. |
 | Similar-Issue Sweep | All exclusion masks, effective guards and selected bodies of each owned file; retain runtime ownership and failure semantics. |
 
-## S7 P7 Checkpoint
+## S7 P8 Checkpoint
 
-[S7 P1-P7](../etc/evidence/t485-h-repair/s7-progress.md): eleven files final-verified; nine remain, next softpc.new/host/inc/host_def.h. P7 video.c restores three original software branches and reduces non-error differences from 39 points/121 lines to 16/31. S7 cumulative reduction is 760 points/6847 lines. Runtime10 cached build, dual 13-image publication and targeted gates passed; Win95 retains the approved exit-one boundary. Residuals are registered; commit/push completes P7. S7 remains active.
+[S7 P1-P8](../etc/evidence/t485-h-repair/s7-progress.md): twelve files final-verified; eight remain, next softpc.new/host/src/copy_fnc.c. P8 host_def.h restores original CPU selection structure and reduces non-error differences from 2 points/6 lines to 2/3. S7 cumulative reduction is 760 points/6850 lines. Runtime11 cached build, dual 13-image publication and actual WOW/DOS4GW gates passed. Both residual points remain registered; commit/push completes P8. S7 remains active.
 
 ## S6 Closure Record
 

@@ -1,0 +1,35 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+  "baseline_commit": "5f8dfe7f7",
+  "original_blob": "071804128d605731ac46fe325b21b07626d0479e",
+  "source_sha256": "7108a678210b1d35fc9a23c0cd1fb25404a3bfe03c208821520f2a15176a4ebc",
+  "before": {
+    "lines": 6,
+    "points": 2
+  },
+  "after": {
+    "lines": 3,
+    "points": 2
+  },
+  "verification": "runtime11 cached full build, 13-image dual hashes, actual WINMINE and NESticle menu/Escape passed; no Full claimed.",
+  "residuals": [
+    {
+      "minimality": "Original if/else order; one guard qualifier selects original cpu4.h else. Original cpu.h arm is explicitly excluded.",
+      "id": "HXP-R-03161",
+      "deleted": 1,
+      "necessity": "MONITOR host interfaces do not make this CCPU40 product a hardware monitor. cpu4.h is the actual CPU40 interface.",
+      "evidence": "tools/build/worker/profiles.cmake; src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "added": 1,
+      "xp_line": 39
+    },
+    {
+      "minimality": "Omit only the incompatible profile definition; do not add a second CPU interface.",
+      "id": "HXP-R-03162",
+      "deleted": 1,
+      "necessity": "Defining CPU_30_STYLE selects CPU30 callback/IP conventions even though the executing engine is CCPU40; current mouse CPU30 branch is explicitly unsupported.",
+      "evidence": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c jump_to_user_subroutine; c_main.c BOP dispatch",
+      "added": 0,
+      "xp_line": 149
+    }
+  ]
+}
