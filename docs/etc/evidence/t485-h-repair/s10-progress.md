@@ -5,13 +5,13 @@ Admitted after [S9 closure](s9-progress.md#s9-closure) under the existing
 1060 frozen snapshot points. Counts below are the frozen register population,
 not current byte-sensitive diff counts. Measure each complete file at entry;
 do not substitute normalized/token counts for original-relative byte differences.
-P1 reviews the first file; no S10 file is delivered yet. Order is canonical relative path.
+P1 delivered the first file; 29 S10 files remain. Order is canonical relative path.
 Whole-file handling and targeted published-package acceptance precede delivery.
 Full remains S13; original guest remains immutable.
 
 | Order | File below src/mvdm-host | Frozen points | State |
 | ---: | --- | ---: | --- |
-| 1 | softpc.new/base/cvidc/ev_glue.c | 4 | Final verified; P1 commit/push pending |
+| 1 | softpc.new/base/cvidc/ev_glue.c | 4 | Delivered f3dda8496 |
 | 2 | softpc.new/base/cvidc/evidgen.h | 3 | Not started |
 | 3 | softpc.new/base/cvidc/sevid000.c | 64 | Not started |
 | 4 | softpc.new/base/cvidc/sevid001.c | 25 | Not started |
@@ -56,3 +56,9 @@ P1 final verification: runtime1 cached build, dual publication (26 hashes),
 actual C-VID fixture with 30 added dirty-span cases, live MEM/NTVDMD and
 NESticle/Escape passed. All census hashes match. One file final-verified;
 P1 commit/push pending. Four residuals remain owner-review items, not restored.
+
+P1 delivery receipt: f3dda8496 committed and pushed to origin/main.
+One of 30 files delivered; 4/1060 frozen points reviewed, 1056 remain.
+Non-error total=185/101302, cumulative reduction=16 points/1561 lines.
+Four evidence-backed residuals remain pending; restored frozen points=0.
+Documentation governance and links passed. Next ordered file: evidgen.h.

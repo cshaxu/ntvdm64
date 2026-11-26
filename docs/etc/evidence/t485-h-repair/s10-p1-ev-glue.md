@@ -70,3 +70,5 @@ exports, debugger and task lifecycle, and actual NESticle rendered menu with
 Escape hide/restore. The 26 destination hashes were checked again after tests.
 All 30 census source hashes match. No original guest or winnt.zip changes.
 Source and targeted verification complete; P1 commit/push pending.
+
+Delivery receipt: f3dda8496 committed and pushed to origin/main; governance and relative-link checks passed.
