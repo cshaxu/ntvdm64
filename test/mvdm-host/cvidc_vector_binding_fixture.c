@@ -88,6 +88,41 @@ static DWORD WINAPI refresh(void *unused)
     return 0;
 }
 
+static int check_chain2_marks(void)
+{
+    static IU8 marks[65536];
+    static const IU32 offsets[] = {0, 1, 2, 3, 7, 0xfffe, 0xffff};
+    IUH trace[8];
+    unsigned entry, count, i;
+    memset(trace, 0, sizeof(trace));
+    ((IUH *)Gdp)[2]=(IUH)&trace[0];
+    ((IUH *)Gdp)[3]=(IUH)&trace[0];
+    ((IUH *)Gdp)[4]=(IUH)&trace[7];
+    setVideovideo_copy(marks);
+    setVideov7_bank_vid_copy_off(0);
+    setMarkPointers(4);
+    CHECK(getVideomark_byte()==(IHP)unchained_mark_evid.b_mark);
+    CHECK(getVideomark_word()==(IHP)unchained_mark_evid.w_mark);
+    for(entry=0;entry<sizeof(offsets)/sizeof(offsets[0]);++entry)
+    for(count=0;count<=4 && offsets[entry]+count<=65536;++count) {
+        IU32 offset=offsets[entry];
+        memset(marks,0,sizeof(marks));
+        setVideodirty_total(0); setVideodirty_low(0x80001); setVideodirty_high(-1);
+        jccc_gdp=(IUH)Gdp; jccc_parm1=offset; jccc_parm2=count;
+        ((IUH (*)())getVideomark_string())(0,0,0,0);
+        CHECK(jccc_parm1==offset && jccc_parm2==count);
+        /* Independent byte-span oracle: only cells containing written bytes
+         * are dirty, including an odd last byte and the final aperture byte. */
+        for(i=0;i<sizeof(marks);++i)
+            CHECK(marks[i]==(count && i>=offset/4 && i<=(offset+count-1)/4));
+        if(count) {
+            CHECK(getVideodirty_low()==offset/4);
+            CHECK(getVideodirty_high()==(offset+count-1)/4);
+        } else CHECK(getVideodirty_total()==0 && getVideodirty_low()==0x80001);
+    }
+    return 0;
+}
+
 /* Adapted from SoftPC 1ec0d551 chain2_rule_smoke.c: same rule matrix,
  * local C-VID setup and Win32-visible failure reporting. */
 static unsigned rule_mode, rule_parity, rule_slot, rule_flag;
@@ -430,6 +465,8 @@ int main(void)
     for(test=0;test<sizeof(values)/sizeof(values[0]);test++) {
 #include "cvidc_accessor_cases.inc"
     }
+    memset(Gdp,0,65536); setup_vga_globals();
+    CHECK(check_chain2_marks()==0);
     memset(Gdp,0,65536); setup_vga_globals();
     /* Exercise every original C-VID table-selection family.  The fixture
      * verifies publication only; executing selected EGA memory routines is

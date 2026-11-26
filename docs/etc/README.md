@@ -2054,3 +2054,5 @@ post-publication targeted checks.
 [S9 final headers and XMS](evidence/t485-h-repair/s9-p11-final-headers-xms.md) records P11 source evidence, metrics and final-package checks.
 
 [S10 ordered input/video repair](evidence/t485-h-repair/s10-progress.md) tracks the next admitted whole-file review.
+
+[S10 P1 C-VID glue](evidence/t485-h-repair/s10-p1-ev-glue.md) records provider ownership, simplification and targeted verification.

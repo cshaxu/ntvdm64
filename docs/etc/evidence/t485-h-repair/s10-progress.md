@@ -5,13 +5,13 @@ Admitted after [S9 closure](s9-progress.md#s9-closure) under the existing
 1060 frozen snapshot points. Counts below are the frozen register population,
 not current byte-sensitive diff counts. Measure each complete file at entry;
 do not substitute normalized/token counts for original-relative byte differences.
-No S10 file is reviewed or delivered yet. Order is canonical relative path.
+P1 reviews the first file; no S10 file is delivered yet. Order is canonical relative path.
 Whole-file handling and targeted published-package acceptance precede delivery.
 Full remains S13; original guest remains immutable.
 
 | Order | File below src/mvdm-host | Frozen points | State |
 | ---: | --- | ---: | --- |
-| 1 | softpc.new/base/cvidc/ev_glue.c | 4 | Not started |
+| 1 | softpc.new/base/cvidc/ev_glue.c | 4 | Final verified; P1 commit/push pending |
 | 2 | softpc.new/base/cvidc/evidgen.h | 3 | Not started |
 | 3 | softpc.new/base/cvidc/sevid000.c | 64 | Not started |
 | 4 | softpc.new/base/cvidc/sevid001.c | 25 | Not started |
@@ -41,3 +41,18 @@ Full remains S13; original guest remains immutable.
 | 28 | softpc.new/host/src/nt_hosts.c | 1 | Not started |
 | 29 | softpc.new/host/src/nt_mouse.c | 23 | Not started |
 | 30 | softpc.new/host/src/nt_vga.c | 4 | Not started |
+
+## P1: ev_glue.c
+
+[Whole-file review](s10-p1-ev-glue.md): 21/1663 ->5/102 (-16/-1561).
+All four frozen points reviewed and residuals registered; zero complete frozen
+point restorations. One of 30 files reviewed; 4/1060 points reviewed, 1056 remain.
+No delivered S10 file yet. Entire 30-file baseline 201/102863 ->185/101302;
+newline/EOF and unpaired added conditional guards are counted. The three initial
+mapping failures were resolved explicitly, not dropped from the denominator.
+Cached build/dual publication complete; final-package targeted tests pending.
+
+P1 final verification: runtime1 cached build, dual publication (26 hashes),
+actual C-VID fixture with 30 added dirty-span cases, live MEM/NTVDMD and
+NESticle/Escape passed. All census hashes match. One file final-verified;
+P1 commit/push pending. Four residuals remain owner-review items, not restored.

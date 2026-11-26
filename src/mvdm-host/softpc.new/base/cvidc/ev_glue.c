@@ -18,7 +18,6 @@
 #include "host_def.h"
 
 #ifdef CCPU
-#line 21
 #include "gmi.h"
 #endif
 
@@ -795,7 +794,6 @@ setup_vga_globals IFN0()
         GLOBAL_SubrRingPtr = GLOBAL_SubrRingLowIncl;
 
 #ifndef PROD
-#line 772
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 #line 775
@@ -881,32 +879,21 @@ static void mvdm_cvidc_set_status(IU16 flags)
     c_setCF(flags & 1);
 }
 
-static void mvdm_cvidc_bind_cpu_private(void)
+void mvdm_cvidc_bind_vectors(void)
 {
 #include "cvidc_cpu_binding.inc"
 #define MVDM_BIND_PRIVATE(field, provider) CvidCpuPrivate.field = provider;
     MVDM_CVIDC_CPU_PRIVATE_SLOTS(MVDM_BIND_PRIVATE)
 #undef MVDM_BIND_PRIVATE
-}
-
-static void mvdm_cvidc_bind_cpu_public(void)
-{
-#include "cvidc_cpu_binding.inc"
-#define MVDM_BIND_PUBLIC(field, provider) Cpu.field = provider;
-    MVDM_CVIDC_CPU_PUBLIC_SLOTS(MVDM_BIND_PUBLIC)
-#undef MVDM_BIND_PUBLIC
-}
-
-void mvdm_cvidc_bind_vectors(void)
-{
-    mvdm_cvidc_bind_cpu_private();
     Cpu.Private = &CvidCpuPrivate;
     Cpu.Sas = &Sas;
     /* DIVERGENCE(MVDM-HOST-DIV-189): the generated source carrier leaves
      * this reached slot null although the selected CPU40 source supplies the
      * exact same-shaped no-cache-invalidation provider. */
     Sas.Sas_overwrite_memory = c_sas_overwrite_memory;
-    mvdm_cvidc_bind_cpu_public();
+#define MVDM_BIND_PUBLIC(field, provider) Cpu.field = provider;
+    MVDM_CVIDC_CPU_PUBLIC_SLOTS(MVDM_BIND_PUBLIC)
+#undef MVDM_BIND_PUBLIC
     mvdm_cvidc_bind_video_vector();
     Cpu.Video = (IHP)&Video;
 }

@@ -1,0 +1,14 @@
+{
+  "before": {
+    "points": 21,
+    "lines": 1663,
+    "excluded": 1
+  },
+  "after": {
+    "points": 5,
+    "lines": 102,
+    "excluded": 1
+  },
+  "functional_change": "inline the two single-caller binding wrappers; preserve assignment order and provider lists",
+  "selected_line_checks": 596
+}

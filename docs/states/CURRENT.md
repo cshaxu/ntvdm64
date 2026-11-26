@@ -32,10 +32,13 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S10 Ordered Progress
 
-[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md): 0/30 reviewed,
-0/1060 frozen points reviewed; first base/cvidc/ev_glue.c. No S10 production
-change or validation yet. S9 runtime11 is the delivered package. Migration
-remains 39/159 and Full remains S13.
+[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md): 1/30 reviewed,
+4/1060 frozen points reviewed; P1 ev_glue.c 21/1663 ->5/102 (-16/-1561).
+Thirty-file baseline 201/102863 ->185/101302. Four residual points registered;
+zero fully restored frozen points and zero delivered S10 files. Cached build
+and dual publication of runtime1, C-VID, live MEM and NESticle tests passed.
+One file final-verified; P1 commit/push pending. Next evidgen.h.
+Migration remains 39/159 and Full remains S13.
 
 ## S9 Closure Record
 
