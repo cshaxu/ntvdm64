@@ -4,6 +4,9 @@
  */
 
 
+#ifdef i386
+extern PX86CONTEXT     px86;
+#endif
 
 extern DECLSPEC_IMPORT VDMLDT_ENTRY *ExpLdt;
 #define SEGMENT_IS_BIG(sel) (ExpLdt[(sel & ~0x7)/sizeof(VDMLDT_ENTRY)].HighWord.Bits.Default_Big)

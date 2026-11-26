@@ -29,6 +29,10 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Exit Criteria | All S8 files reconciled, required batches delivered; final review and handoff to S9. |
 | Original Owner Request | Complete inserted repairs and simplification before N004-G097, without repeated unnecessary tests. |
 | Similar-Issue Sweep | Whole-file harmless restorations, normalized-exact bytes, exclusion framework and diagnostic mappings. |
+## S8 P1 Running
+
+[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 7/851 files reviewed, 844 remain. Four exact, one newline-only restoration, two original declaration restorations. Local non-error reduction 2 points/6 lines; delivery pending. Cached full build, dual 13-image hash-verified publication and real NTVDMD event/register/termination targeted test passed. Commit/push is the remaining P1 delivery step.
+
 ## S7 Closure Record
 
 [S7 closure](../etc/evidence/t485-h-repair/s7-progress.md), delivered through a1f5bff4b.

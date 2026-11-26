@@ -5,6 +5,9 @@
 #include <precomp.h>
 #pragma hdrstop
 
+#ifdef i386
+PX86CONTEXT     px86;
+#endif
 
 DWORD IntelMemoryBase;
 

@@ -2045,3 +2045,6 @@ post-publication targeted checks.
 - [S7 P12 SIM32 restoration](evidence/t485-h-repair/s7-p12-sim32.md).
 
 - [S7 P13 startup local review](evidence/t485-h-repair/s7-p13-startup-review.md).
+
+
+[S8 ordered restoration progress](evidence/t485-h-repair/s8-progress.md) records file-level restoration and delivery states.

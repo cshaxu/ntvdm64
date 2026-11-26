@@ -1058,3 +1058,5 @@
 "HXP-R-04370","src/mvdm-host/wow32/wow32.c","whole-file-final-verified-residuals-reconciled","S7-P13","S7","s7-p13-startup-review.md"
 "HXP-R-04371","src/mvdm-host/wow32/wow32.c","restored-final-verified","S7-P13","S7","s7-p13-startup-review.md"
 "HXP-R-04372","src/mvdm-host/wow32/wow32.c","restored-final-verified","S7-P13","S7","s7-p13-startup-review.md"
+"HXP-R-00003","src/mvdm-host/dbgdll/data.c","restored-final-verified","S8-P1","none","s8-progress.md"
+"HXP-R-00008","src/mvdm-host/dbgdll/dbgdll.h","restored-final-verified","S8-P1","none","s8-progress.md"
