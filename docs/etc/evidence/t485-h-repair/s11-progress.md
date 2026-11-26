@@ -1227,3 +1227,9 @@ file42 wuman2/588->7/24; normalized batch-5points/-3lines. Exclusions unchanged;
 91 original statements zero line drift. Reviewed42/48,398/452:17restored,
 381residual,54unreviewed. Census750/4039,reduction130/7724. Coupled C1 table
 adds0points and removes3lines outside this census. Commit/push pending.
+
+P18 delivery: f449163ee committed and pushed. Delivered42/48files and398/452
+frozenpoints;17restored381residual54unreviewed. Current750points/4039lines;
+cumulative reduction130points/7724lines. Final runtime25 publication and targeted
+checks are recorded in [P18 receipt](s11-p18-result.json). Full not repeated;
+last checkpoint remains40files/runtime21. Nextfile43 wumsg.c. S11 active.

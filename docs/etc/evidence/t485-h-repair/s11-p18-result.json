@@ -1,6 +1,7 @@
 {
   "packet": "M0 T485 S11 P18",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-pushed",
+  "delivery_commit": "f449163ee742c5388c185d1f1f16a517e8aa5e60",
   "runtime": "build/t485-s11/runtime25",
   "reviewed_files": 42,
   "total_files": 48,
@@ -9,8 +10,8 @@
   "restored_frozen_points": 17,
   "residual_frozen_points": 381,
   "unreviewed_frozen_points": 54,
-  "delivered_files": 40,
-  "delivered_frozen_points": 388,
+  "delivered_files": 42,
+  "delivered_frozen_points": 398,
   "batch_difference_change": {
     "points": 5,
     "lines": -563
