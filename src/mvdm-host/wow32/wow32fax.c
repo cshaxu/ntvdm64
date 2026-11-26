@@ -188,12 +188,8 @@ LPSTR *GetSupportedFaxDrivers(UINT *uCount)
     // Get the number of elements in the list
     if (*uCount = BuildStrList(lpSupFaxDrvBuf, NULL)) {
         // Build an array of pointers to the start of the strings in the list.
-        alpSupFaxDrvList = (LPSTR *) malloc_w(*uCount * sizeof(LPSTR));
-#line 192
+        alpSupFaxDrvList = (LPSTR *) malloc_w(*uCount * sizeof(LPSTR));        
         if (alpSupFaxDrvList) {
-#line 191
-            RtlZeroMemory(alpSupFaxDrvList, *uCount * sizeof(LPSTR));
-#line 193
             // Fill the array with string starting points.
             RtlZeroMemory(alpSupFaxDrvList, *uCount * sizeof(LPSTR));
             BuildStrList(lpSupFaxDrvBuf, alpSupFaxDrvList);
@@ -1200,11 +1196,13 @@ VOID AddPrinterThread(PWOWADDPRINTER pWowAddPrinter)
         if (pWowAddPrinter->iCode == WOW_AddPrinter) {
             (*spoolerapis[WOW_ClosePrinter].lpfn)(result);
         }
+#line 1191
         pWowAddPrinter->bRet = TRUE;
     }
     else {
         if (GetLastError() == (pWowAddPrinter->iCode == WOW_AddPrinterDriver ?
                                ERROR_PRINTER_DRIVER_ALREADY_INSTALLED : ERROR_PRINTER_ALREADY_EXISTS)) {
+#line 1195
             pWowAddPrinter->bRet = TRUE;
         }
         else {
@@ -1360,6 +1358,7 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
             DriverInfo.cVersion = 1;
             DriverInfo.pName = "Windows 3.1 Compatible Fax Driver";
             bRetVal = DoAddPrinterStuff((LPVOID)&DriverInfo, WOW_AddPrinterDriver);
+#line 1357
 
             if (bRetVal) {
                 // Parse out the printer name.

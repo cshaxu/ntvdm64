@@ -43,7 +43,7 @@ both enhanced roundtrips pass all five markers. P10 delivered/pushed
 77e8752be. Additional file28 Full completed; next file30 and every S closure.
 Earlier P1-P7 linear-only line evidence must be rechecked with actual
 preprocessing before S11 closure. Migration39/159;S11 active.
-P11 delivered/pushed e5db62755:29/48files,281/452points;13restored,268residual,171unreviewed. Census755/7096,cumulative raw125/4667. Coupled ABI normalized increment1point/2lines disclosed separately. Runtime14 build,dual publication,callback4/abort11 and Product PASS. [P11 receipt](../etc/evidence/t485-h-repair/s11-p11-result.json). Next file30:wow32fax.c,then Full checkpoint.
+P11 delivered/pushed e5db62755:29/48files,281/452points;13restored,268residual,171unreviewed. Census755/7096,cumulative raw125/4667. Coupled ABI normalized increment1point/2lines disclosed separately. Runtime14 build,dual publication,callback4/abort11 and Product PASS. [P11 receipt](../etc/evidence/t485-h-repair/s11-p11-result.json). P12 file30 final-verified:30/48files,288/452points;15restored,273residual,164unreviewed. Census753/7093,cumulative raw127/4670. Runtime15 build,dual26-hash publication,fax135 and Full23/23 PASS;commit/push pending,delivered29/281. [P12 receipt](../etc/evidence/t485-h-repair/s11-p12-result.json).
 
 ## S10 Closure Record
 

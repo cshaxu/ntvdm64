@@ -41,7 +41,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 27 | src/mvdm-host/wow32/wmsglb.c | 3 | P10 delivered 77e8752be |
 | 28 | src/mvdm-host/wow32/wole2.c | 5 | P10 delivered 77e8752be |
 | 29 | src/mvdm-host/wow32/wow32.h | 1 | P11 delivered e5db62755 |
-| 30 | src/mvdm-host/wow32/wow32fax.c | 7 | Pending |
+| 30 | src/mvdm-host/wow32/wow32fax.c | 7 | P12 source-reviewed; delivery pending |
 | 31 | src/mvdm-host/wow32/wowhooks.c | 39 | Pending |
 | 32 | src/mvdm-host/wow32/wparam.c | 4 | Pending |
 | 33 | src/mvdm-host/wow32/wsdata.c | 19 | Pending |
@@ -740,3 +740,26 @@ Census755/7096,combined raw reduction125/4667. Coupled normalized ABI
 increment1point/2lines separately disclosed. Commit/push pending.
 
 P11 delivered and pushed e5db627553079f73d34f6b066593469834988a44.29/48files,281/452points delivered:13restored,268residual,171unreviewed. Next file30 wow32fax.c; Full is mandatory after that whole file. S11 remains active.
+
+### P12 file30 wow32fax.c
+
+Non-error9/37->7/34, reduction2/3. Restore04375 formatting and04376
+duplicate zeroing; original XP already zeroes the array before SortedInsert.
+Five necessary residuals cover failure buffer cleanup, owned AddPrinter
+handle close and operation-correct error classification on the actual worker
+thread. Caller GetLastError cannot read worker error. No new relay/state.
+Two exclusions unchanged;actual preprocessing263 statements match original
+logical lines. Redundant anchors around duplicate zeroing removed; continuation anchors repaired.
+30/48files,288/452points reviewed:13restored-delivered,2local-restored,
+273residual,164unreviewed. Delivered29/281. Census753/7093;combined
+raw reduction127/4670;coupled P11 normalized ABI increment remains separate.
+Cached build/publication started; file30 Full mandatory before delivery.
+
+P12 runtime15 cached build and dual13-image/26-hash publication PASS.
+Fax isolated provider checks135/0 PASS; no real fax installation claim.
+Final Full running; Win3.1 standard and enhanced desktop/exit checks PASS.
+No source change after publication; commit/push remains pending.
+
+### P12 final-package result
+
+[Runtime15 receipt](s11-p12-result.json): cached build,dual26/26hash publication,fax contract and Full23/23 PASS. Both enhanced roundtrips pass five markers; Win95 knownExitOne retained.30/48files,288/452points verified:15restored,273residual,164unreviewed. Census753/7093;combined raw reduction127/4670. Commit/push pending. S11 remains active.
