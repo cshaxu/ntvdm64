@@ -6,17 +6,17 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed4/48files28/645points;restored-local7,residual-reviewed21,unreviewed617.
-Final-verified/published4files28points;commit/push pending.
+Reviewed4/48files28/645points;restored-delivered7,residual-reviewed21,unreviewed617.
+Delivered/pushed4files28points in806a8c45c;workspace receipt follows.
 Current byte-sensitive census is measured separately from frozen points.
 Local code changes exist;no S12 build,test,publication or delivery claimed.
 
 | Order | File | Frozen points | State |
 | ---: | --- | ---: | --- |
-| 1 | src/mvdm-host/dos/command/cmd.h | 4 | P1 source-reviewed; verification pending |
-| 2 | src/mvdm-host/dos/command/cmdconf.c | 2 | P1 source-reviewed; verification pending |
-| 3 | src/mvdm-host/dos/command/cmdenv.c | 2 | P1 source-reviewed; verification pending |
-| 4 | src/mvdm-host/dos/command/cmdexec.c | 20 | P1 source-reviewed; build running |
+| 1 | src/mvdm-host/dos/command/cmd.h | 4 | P1 delivered806a8c45c |
+| 2 | src/mvdm-host/dos/command/cmdconf.c | 2 | P1 delivered806a8c45c |
+| 3 | src/mvdm-host/dos/command/cmdenv.c | 2 | P1 delivered806a8c45c |
+| 4 | src/mvdm-host/dos/command/cmdexec.c | 20 | P1 delivered806a8c45c |
 | 5 | src/mvdm-host/dos/command/cmdkeyb.c | 2 | Pending |
 | 6 | src/mvdm-host/dos/command/cmdmisc.c | 8 | Pending |
 | 7 | src/mvdm-host/dos/dem/dem.c | 2 | Pending |
@@ -163,3 +163,7 @@ or package rebuild and no successful gate repeated. Full not due for this P.
 
 Files1-4 verified/published;7restored21residual617unreviewed.
 Next file5 cmdkeyb.c after P1 commit/push. No migration batch count increment.
+
+P1 delivered and pushed806a8c45c. Governance/relative links PASS.
+Current4/48files28/645points delivered;7restored21residual617unreviewed.
+No local source restorations awaiting verification. Nextfile5 cmdkeyb.c.

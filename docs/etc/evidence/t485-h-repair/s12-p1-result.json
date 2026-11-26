@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P1",
-  "state": "final-verified-published-commit-pending",
+  "state": "delivered-pushed",
   "baseline_commit": "545d04836f92313b78382744cab4bafc72555a47",
   "package": "build/t485-s12/runtime1",
   "files": [
@@ -247,5 +247,7 @@
     }
   ],
   "guest": "unchanged;not rebuilt",
-  "limits": "No S12 Full or S12 closure claimed.28frozen points differ from current byte-sensitive block count."
+  "limits": "No S12 Full or S12 closure claimed.28frozen points differ from current byte-sensitive block count.",
+  "delivery_commit": "806a8c45c942ff13d324802d1dba5614619c6b2a",
+  "governance": "PASS documentation governance and relative links"
 }
