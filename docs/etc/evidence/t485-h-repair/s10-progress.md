@@ -22,8 +22,8 @@ Full remains S13; original guest remains immutable.
 | 9 | softpc.new/base/cvidc/sevid019.c | 3 | Delivered d406cb610 |
 | 10 | softpc.new/base/inc/gvi.h | 5 | Delivered d406cb610 |
 | 11 | softpc.new/base/keymouse/keyba.c | 44 | Delivered 99c8fc6b1 |
-| 12 | softpc.new/base/keymouse/keybd_io.c | 3 | Not started |
-| 13 | softpc.new/base/video/cga.c | 157 | Not started |
+| 12 | softpc.new/base/keymouse/keybd_io.c | 3 | Source reviewed; format delivery pending |
+| 13 | softpc.new/base/video/cga.c | 157 | Source reviewed; P4 delivery pending |
 | 14 | softpc.new/base/video/ega_prts.c | 30 | Not started |
 | 15 | softpc.new/base/video/ega_read.c | 7 | Not started |
 | 16 | softpc.new/base/video/ega_vide.c | 308 | Not started |
@@ -184,3 +184,67 @@ unreviewed. Commit/push pending. No Full claim.
 P3 receipt:99c8fc6b1 committed and pushed to origin/main. Eleven files
 delivered;24 fully restored points delivered,151 residuals await decisions,
 885 unreviewed. Ordered table and master point delivery states synchronized.
+
+## Keybd IO source review
+
+Twelfth file, HXP-R-01201--01203. Baseline hash
+5d0f2e8f0de6c909fc21573fc9a1bb2497d4681d22f8f1e7fc465cc30001f68a6.
+Fixed XP input is the existing hash-checked keybd_io.c.xp snapshot.
+Reviewed BOP 5F -> kb_setup_vectors, CPU40 effective_addr, InitIntelMemory,
+and video.c/gfx_updt.c stream consumers. CPU40 returns a numeric guest-linear
+address; VirtualAlloc(NULL, ...) creates a separate host allocation. Original
+pointer casts omit its base. R01201 must construct the host table pointer;
+R01202 must pass the numeric guest address, not that host pointer, to SAS;
+R01203 must construct host stream pointers used by direct dereference.
+Changing effective_addr globally would break its SAS-address consumers.
+Three points remain evidence-backed owner decisions, not approved retention.
+This proves address-domain necessity, not arbitrary protected-mode paging
+or remapping lifetime safety of the cached stream pointers. No new lifetime
+behavior is claimed or introduced.
+
+Removed seven #line anchors whose target already equals the following logical
+line, with no intervening conditional boundary. All 32 #error bodies and
+conditional frameworks unchanged; stripping #line yields byte-identical code.
+Non-error metrics 82/90 ->75/83, reduction7/7. No function restoration.
+12/30 files source-reviewed;178/1060 frozen points reviewed,882 remain.
+24 restored points already delivered;154 residuals;11 files delivered.
+Whole S10 census201/102863 ->479/56995 (+278/-45868). This file is local
+format-only work awaiting the next accumulated delivery, not a new runtime pass.
+
+## CGA source review
+
+Thirteenth file,157 frozen points, [per-point record](s10-p4-cga-points.json).
+Fixed XP object and source hash checked by inspect-path.py. Restored156 original
+format points and LF;19 exclusion bodies unchanged. Exact non-whitespace
+line comparison and remaining diff review show no changed executable code.
+963 retained original non-directive lines have their exact XP logical lines;
+zero mismatches. Frozen physical line positions had drifted, so restoration
+used original-content alignment, not blindly applying stale offsets.
+
+R02306 retains only two explicit void prototypes for setWritePointers and
+setReadPointers(IUH), actually called by cga_init via egacpu.h macros. Both
+providers are in ev_glue.c and return void. Original implicit-int declarations
+do not describe these definitions. The prior generic word-width rationale
+and nonexistent ev_glue.h reference were removed: neither proves this point.
+No wrapper, new algorithm or conditional added. Residual remains pending.
+
+Non-error diff1/2532 ->54/70 (+53/-2462);LF recovery exposes scattered
+#line anchors. S10 cumulative201/102863 ->532/54533 (+331/-48330).
+13/30 files source-reviewed,335/1060 points reviewed,725 remain.
+24 restored/delivered,156 restored locally pending delivery,155 residuals;
+11 files delivered. P4 will deliver keybd_io.c and cga.c together. No new
+runtime success is claimed before cached build/publication/targeted tests.
+
+P4 owned cached build/publication started 2026-11-26T13:15:51+01:00, PID11304;
+command and host recorded in build/t485-s10/p4/run.json, build.log and
+publish.log. Governance PID5380. Results pending, no runtime pass claimed.
+
+P4 final verification: cached build and dual publication PASS,13 images/26
+hashes checked against runtime4/product-system32-manifest.json. Background
+runner PID14100 completed all targeted tests: C-VID setup/CHAIN2, real
+controller/PIC90 assertions with0 failures, keyboard contracts, live MEM and
+NTVDMD export/debug lifecycle, and actual NESticle menu rendering plus Escape
+hide/restore. Evidence in build/t485-s10/p4/{cvidc.log,controller.log,
+keyboard-contracts/result.json,debug-live,dos4gw}; all-tests-result.txt=PASS.
+This is targeted verification, not Full or a new Windows desktop acceptance.
+Thirteen files final-verified; P4 commit/push pending.

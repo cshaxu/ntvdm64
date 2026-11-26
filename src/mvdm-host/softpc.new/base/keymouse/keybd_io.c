@@ -103,7 +103,6 @@ extern void host_simulate();
  * ============================================================================
  */
 
-#line 105
 #define SHIFT_KEY_SIZE 8
 #define ALT_TABLE_SIZE 36
 
@@ -174,7 +173,6 @@ LOCAL word rcpu_poll_segment = RCPU_POLL_SEGMENT,
 #endif /* GISP_SVGA */
 #line 186
 
-#line 187
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
 #line 188
 #error Excluded unsupported GISP_CPU configuration
@@ -690,7 +688,6 @@ void NtPutInBuffer(half_word s, half_word v)
                 sas_store_no_check(BIOS_VAR_START + buffer_tail, v);
                 sas_store_no_check(BIOS_VAR_START + buffer_tail+1, s);
                 sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);
-#line 764
                 setAX(0x9102);
                 INT15();
       K26();
@@ -750,7 +747,6 @@ LOCAL VOID PAUSE IFN0()
 	FREEKBDHDW();
 
 	do {
-#line 817
 #if defined(IRET_HOOKS)  && defined(GISP_CPU)
 #line 818
 #error Excluded unsupported GISP_CPU configuration
@@ -1474,9 +1470,7 @@ void keyboard_io()
              * App is starting a waitio
              */
      case 2:
-#line 1547
        IDLE_waitio();
-#line 1548
        break;
 
             /*
@@ -1550,7 +1544,6 @@ void keyboard_init()
 	*/
         host_kb_init();
 
-#line 1992
 #if defined(CPU_40_STYLE) && !defined (NTVDM)
 #line 1993
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.

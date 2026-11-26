@@ -6,25 +6,25 @@
 /*
  * SoftPC Revision 3.0
  *
- * Title	: IBM Colour/Graphics Adapter simulator
+ * Title        : IBM Colour/Graphics Adapter simulator
  *
- * Description	: Simulates the IBM CGA.
+ * Description  : Simulates the IBM CGA.
  *
- * Author	: Rod MacGregor / Henry Nash
+ * Author       : Rod MacGregor / Henry Nash
  *
- * Notes	: The earlier versions of this module could run on an ADM 3E,
- *		  a dumb ANSI standard terminal, in debug mode  or in a Sun
- *		  Window. In the interests of sanity and as the versions other
- *		  than the Sun were not fully developed, they were removed. if
- *		  interested in the workings of these implementations they are
- *		  available in the SCCS file before version 2.36.
+ * Notes        : The earlier versions of this module could run on an ADM 3E,
+ *                a dumb ANSI standard terminal, in debug mode  or in a Sun
+ *                Window. In the interests of sanity and as the versions other
+ *                than the Sun were not fully developed, they were removed. if
+ *                interested in the workings of these implementations they are
+ *                available in the SCCS file before version 2.36.
  *
- *		  The supported functions are:
+ *                The supported functions are:
  *
- *			cga_init	     Initialise the subsystem
+ *                      cga_init             Initialise the subsystem
  *                      cga_term             Terminate the subsystem
- *			cga_inb	             I/P a byte from the MC6845 chip
- *			cga_outb	     O/P a byte to the MC6845 chip
+ *                      cga_inb              I/P a byte from the MC6845 chip
+ *                      cga_outb             O/P a byte to the MC6845 chip
  *
  * In the new EGA world, we use screen start instead of screen base.
  * This is also a WORD address if the adapter is in text mode.
@@ -91,10 +91,10 @@
 #include "cpu_vid.h"
 IMPORT void setWritePointers IPT0();
 IMPORT void setReadPointers IPT1(IUH, readset);
-#ifdef	EGG
+#ifdef  EGG
 #line 91
 #include "egacpu.h"
-#endif	/* EGG */
+#endif  /* EGG */
 #include "video.h"
 #include "ckmalloc.h"
 
@@ -110,17 +110,17 @@ IMPORT void setReadPointers IPT1(IUH, readset);
 
 /*
  *============================================================================
- *		Local Defines, Macros & Declarations
+ *              Local Defines, Macros & Declarations
  *============================================================================
  */
 
-#define CURSOR_NON_DISPLAY_BIT	(1 << 5)
+#define CURSOR_NON_DISPLAY_BIT  (1 << 5)
 				/* Bit in Cursor Start Register which
 				   makes the cursor invisible */
-#define	CURSOR_USED_BITS	0x1f
+#define CURSOR_USED_BITS        0x1f
 				/* Mask to clear out unused bits */
 
-static int current_mode = -1;	/* Value of Mode Select at last call    */
+static int current_mode = -1;   /* Value of Mode Select at last call    */
 
 /*
  * MC6845 Registers
@@ -132,7 +132,7 @@ static int current_mode = -1;	/* Value of Mode Select at last call    */
 #endif
 #line 125
 
-static half_word index_reg = 00 ;	/* Index register	 */
+static half_word index_reg = 00 ;       /* Index register        */
 
 /*
  * 6845 Register variables
@@ -156,7 +156,7 @@ static half_word Rf_cursor_loc_low = 0;
  * global variables peculiar to the cga
  */
 
-CGA_GLOBS	CGA_GLOBALS;
+CGA_GLOBS       CGA_GLOBALS;
 
 GLOBAL VOID (*bios_ch2_byte_wrt_fn)();
 GLOBAL VOID (*bios_ch2_word_wrt_fn)();
@@ -167,15 +167,15 @@ GLOBAL IU8 *cga_screen_buf = 0;
  * Globals used in various functions to synchronise the display
  */
 
-int cursor_over_screen = FALSE;	/* When set to TRUE the cursor is over the    */
+int cursor_over_screen = FALSE; /* When set to TRUE the cursor is over the    */
 				/* screen areas and the cursor should flash   */
 
 /*
  * Static forward declarations.
  */
 
-static void set_cga_palette	IPT2(int, screen_mode, int, res);
-static void update_cursor_shape	IPT0();
+static void set_cga_palette     IPT2(int, screen_mode, int, res);
+static void update_cursor_shape IPT0();
 
 
 #ifdef A3CPU
@@ -191,15 +191,15 @@ IMPORT READ_POINTERS Glue_reads;
 IMPORT READ_POINTERS read_glue_ptrs;
 IMPORT READ_POINTERS simple_reads;
 
-#ifdef	A2CPU
+#ifdef  A2CPU
 #line 183
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
-#endif	/* A2CPU */
+#endif  /* A2CPU */
 #line 206
 
 /*
  *==========================================================================
- * 	Global Functions
+ *      Global Functions
  *==========================================================================
  */
 
@@ -212,19 +212,19 @@ IMPORT READ_POINTERS simple_reads;
  */
 
 half_word bg_col_mask = 0x70;
-reg regen_start;		/* Regen start address                   */
+reg regen_start;                /* Regen start address                   */
 
-void cga_inb	IFN2(io_addr, address, half_word *, value)
+void cga_inb    IFN2(io_addr, address, half_word *, value)
 {
 
 #ifndef NEC_98
-static int cga_state = 0;	/* current cga status state */
+static int cga_state = 0;       /* current cga status state */
 static long state_count = 1;    /* position in that state */
-static int sub_state = 0;	/* sub state for cga state 2 */
+static int sub_state = 0;       /* sub state for cga state 2 */
 static unsigned long gmfudge = 17; /* Random number seed for pseudo-random
-                                      bitstream generator to give the state 
-                                      lengths below that 'genuine' hardware
-                                      feel to progs that require it! */
+				      bitstream generator to give the state
+				      lengths below that 'genuine' hardware
+				      feel to progs that require it! */
 register unsigned long h;
 
 /*
@@ -241,13 +241,13 @@ if ( address == 0x3DA ) {
     /*
      * Status register, simulated adapter has
      *
-     *	bit			setting
-     *	---			-------
-     *	Display enable		   1/0 Toggling each inb
-     *	Light Pen		   0
-     *	Light Pen		   0
-     * 	Vertical Sync		   1/0 Toggling each inb
-     *	4-7 Unused		   0,0,0,0
+     *  bit                     setting
+     *  ---                     -------
+     *  Display enable             1/0 Toggling each inb
+     *  Light Pen                  0
+     *  Light Pen                  0
+     *  Vertical Sync              1/0 Toggling each inb
+     *  4-7 Unused                 0,0,0,0
      *
      * The upper nibble of the byte is always set.
      * Some programs synchronise with the display by waiting for the
@@ -266,7 +266,7 @@ if ( address == 0x3DA ) {
      *
      * We do this with a 4 state machine. Each state has a count associated
      * with it to represent the relative time spent in each state. When this
-     * count is exhausted the machine moves into the next state. One Inb 
+     * count is exhausted the machine moves into the next state. One Inb
      * equals 1 count. The states are as follows:
      *     0: VS low, DE high.
      *     1: VS low, DE toggles. This works via an internal state.
@@ -275,13 +275,13 @@ if ( address == 0x3DA ) {
      *
      */
 
-    state_count --;			/* attempt relative 'timings' */
+    state_count --;                     /* attempt relative 'timings' */
     switch (cga_state) {
 
     case 0:
-	if (state_count == 0) {		/* change to next state ? */
-            h = gmfudge << 1;
-            gmfudge = (h&0x80000000L) ^ (gmfudge & 0x80000000L)? h|1 : h;
+	if (state_count == 0) {         /* change to next state ? */
+	    h = gmfudge << 1;
+	    gmfudge = (h&0x80000000L) ^ (gmfudge & 0x80000000L)? h|1 : h;
 	    state_count = s_lengths[1] + (gmfudge & 3);
 	    cga_state = 1;
 	}
@@ -289,15 +289,15 @@ if ( address == 0x3DA ) {
 	break;
 
     case 1:
-	if (state_count == 0) {		/* change to next state ? */
-            h = gmfudge << 1;
-            gmfudge = (h&0x80000000L) ^ (gmfudge & 0x80000000L)? h|1 : h;
+	if (state_count == 0) {         /* change to next state ? */
+	    h = gmfudge << 1;
+	    gmfudge = (h&0x80000000L) ^ (gmfudge & 0x80000000L)? h|1 : h;
 	    state_count = s_lengths[2] + (gmfudge & 3);
 	    cga_state = 2;
 	    sub_state = 2;
 	}
-	switch (sub_state) {		/* cycle through 0,0,1 sequence */
-	case 0:				/* to represent DE toggling */
+	switch (sub_state) {            /* cycle through 0,0,1 sequence */
+	case 0:                         /* to represent DE toggling */
 	    *value = 0xf0;
 	    sub_state = 1;
 	    break;
@@ -309,13 +309,13 @@ if ( address == 0x3DA ) {
 	    *value = 0xf1;
 	    sub_state = 0;
 	    break;
-        }
+	}
 	break;
 
     case 2:
-	if (state_count == 0) {		/* change to next state ? */
-            h = gmfudge << 1;
-            gmfudge = (h&0x80000000L) ^ (gmfudge & 0x80000000L)? h|1 : h;
+	if (state_count == 0) {         /* change to next state ? */
+	    h = gmfudge << 1;
+	    gmfudge = (h&0x80000000L) ^ (gmfudge & 0x80000000L)? h|1 : h;
 	    state_count = s_lengths[3] + (gmfudge & 3);
 	    cga_state = 3;
 	}
@@ -323,9 +323,9 @@ if ( address == 0x3DA ) {
 	break;
 
     case 3:
-	if (state_count == 0) {		/* wrap back to first state */
-            h = gmfudge << 1;
-            gmfudge = (h&0x80000000L) ^ (gmfudge & 0x80000000L)? h|1 : h;
+	if (state_count == 0) {         /* wrap back to first state */
+	    h = gmfudge << 1;
+	    gmfudge = (h&0x80000000L) ^ (gmfudge & 0x80000000L)? h|1 : h;
 	    state_count = s_lengths[0] + (gmfudge & 3);
 	    cga_state = 0;
 	}
@@ -344,18 +344,18 @@ else if ( (address & 0xFFF9) == 0x3D1)
 	    switch (index_reg) {
 
 	    case 0xE:
-	        *value = (get_cur_y() * get_chars_per_line() + get_cur_x() ) >> 8;
-	        break;
+		*value = (get_cur_y() * get_chars_per_line() + get_cur_x() ) >> 8;
+		break;
 	    case 0xF:
-	        *value = (get_cur_y() * get_chars_per_line() + get_cur_x()) & 0xff;
-	        break;
+		*value = (get_cur_y() * get_chars_per_line() + get_cur_x()) & 0xff;
+		break;
 	    case 0x10: case 0x11:
-        	*value = 0;
-        	break;
+		*value = 0;
+		break;
 	    default:
-        	note_trace1(CGA_VERBOSE,
-        	            "Read from unsupported MC6845 internal reg %x",
-        	            index_reg);
+		note_trace1(CGA_VERBOSE,
+			    "Read from unsupported MC6845 internal reg %x",
+			    index_reg);
 	    }
 	}
 else
@@ -366,17 +366,17 @@ else
 	*value = 0x00;
 #endif   //NEC_98
 #line 375
-} 
+}
 
 
-void cga_outb	IFN2(io_addr, address, half_word, value)
+void cga_outb   IFN2(io_addr, address, half_word, value)
 {
 
 /*
  * Output to a 6845 register
  */
 
-word      cur_offset;			/* The cursor position registers */
+word      cur_offset;                   /* The cursor position registers */
 static half_word last_mode  = -1;
 static half_word last_screen_length  = 25;
 static half_word video_mode;
@@ -393,14 +393,14 @@ static half_word last_max_scan_line = 7;
  * the current_mode between changes.
  */
 
-#define RESET		0x00
-#define ALPHA_80x25	0x01
-#define GRAPH		0x02
-#define BW_ENABLE	0x04
-#define GRAPH_640x200	0x10
-#define MODE_MASK	0x17
-#define BLINK_MASK	0x1F
-#define COLOR_MASK	0x3F
+#define RESET           0x00
+#define ALPHA_80x25     0x01
+#define GRAPH           0x02
+#define BW_ENABLE       0x04
+#define GRAPH_640x200   0x10
+#define MODE_MASK       0x17
+#define BLINK_MASK      0x1F
+#define COLOR_MASK      0x3F
 
     note_trace2(CGA_VERBOSE, "cga_outb: port %x value %x", address, value);
 
@@ -410,11 +410,11 @@ switch (address) {
     case 0x3D4:
     case 0x3D6:
 
-        /*
-         * Index Register
-         */
-        index_reg = value;
-        break;
+	/*
+	 * Index Register
+	 */
+	index_reg = value;
+	break;
 
     case 0x3D1:
     case 0x3D3:
@@ -433,13 +433,13 @@ switch (address) {
  * The various registers affect the position and size of the screen and the
  * image on it. The screen can be logically divided into two halves: the
  * displayed text and the rest which is the border. The border colour can
- * be changed by programming the 3D9 register. 
+ * be changed by programming the 3D9 register.
  * NB. Currently SoftPC does not obey positioning & display sizing
  * information - the display remains constant.
  * The first 8 registers (R0-R7) affect the size & position of the display;
  * their effects are as follows:
  * R0 - R3 control the horizontal display aspects & R4 - R7 the vertical.
- * 
+ *
  * The diagram below attempts to show how each is related to the screen
  * size & shape.
  *
@@ -479,7 +479,7 @@ switch (address) {
  *        R1 - active display - scan on
  *        R2 - time sync for scan off/on/off
  *        R3 - time to scan on
- *   
+ *
  *               R1
  *      -------------------------------------------------
  *      |                                               |
@@ -491,63 +491,63 @@ switch (address) {
  *
  *  The veritcal registers organise an analagous trace. The two traces are
  *  synchronised by Register 8.
- *  
+ *
  *  This is why altering these values on the PC will move the display or
  *  more likely cause garbaging of the image!
  */
 
-        switch ( index_reg ) {
-            case 0x00:
-                /*
-                 * total horizontal display (inc border)
-                 */
-                R0_horizontal_total = value;
-                break;
+	switch ( index_reg ) {
+	    case 0x00:
+		/*
+		 * total horizontal display (inc border)
+		 */
+		R0_horizontal_total = value;
+		break;
 
-            case 0x01:
-                /*
-                 * Specify the number of characters per row
-                 */
-                if (value > 80) {
-                    always_trace1("cga_outb: trying to set width %d", value);
-                    value = 80;
-                }
-                R1_horizontal_displayed = value;
+	    case 0x01:
+		/*
+		 * Specify the number of characters per row
+		 */
+		if (value > 80) {
+		    always_trace1("cga_outb: trying to set width %d", value);
+		    value = 80;
+		}
+		R1_horizontal_displayed = value;
 		set_horiz_total(value);
-                break;
+		break;
 
-            case 0x02:
-                /*
-                 * Right hand edge of displayed text
-                 * affect left_border(?), right_border(?)
-                 */
-                R2_horizontal_sync_pos = value;
-                break;
+	    case 0x02:
+		/*
+		 * Right hand edge of displayed text
+		 * affect left_border(?), right_border(?)
+		 */
+		R2_horizontal_sync_pos = value;
+		break;
 
-            case 0x03:
-                /*
-                 * Left hand edge of displayed text
-                 * affect left_border, right_border
-                 */
-                R3_horizontal_sync_width = value;
-                break;
+	    case 0x03:
+		/*
+		 * Left hand edge of displayed text
+		 * affect left_border, right_border
+		 */
+		R3_horizontal_sync_width = value;
+		break;
 
-            case 0x04:
-                /*
-                 * total vertical display (inc border)
-                 */
-                R4_vertical_total = value;
-                break;
+	    case 0x04:
+		/*
+		 * total vertical display (inc border)
+		 */
+		R4_vertical_total = value;
+		break;
 
-            case 0x05:
-                /*
-                 * Top edge of displayed text
-                 * affect top_border, bottom_border
-                 */
-                R5_vertical_total_adjust = value;
-                break;
+	    case 0x05:
+		/*
+		 * Top edge of displayed text
+		 * affect top_border, bottom_border
+		 */
+		R5_vertical_total_adjust = value;
+		break;
 
-            case 0x06:
+	    case 0x06:
 		/*
 		 * If the screen length is 0, this effectively means
 		 * don't display anything.
@@ -560,13 +560,13 @@ switch (address) {
 		}
 		else
 		{
-                    /*
-                     * Specify the screen length - in our
-                     * implementation used only in text mode.
-                     * affect top_border, bottom_border
-                     */
-                    R6_vertical_displayed = value;
-                    set_screen_length( R1_horizontal_displayed * R6_vertical_displayed * 2 );
+		    /*
+		     * Specify the screen length - in our
+		     * implementation used only in text mode.
+		     * affect top_border, bottom_border
+		     */
+		    R6_vertical_displayed = value;
+		    set_screen_length( R1_horizontal_displayed * R6_vertical_displayed * 2 );
 		}
 		/*
 		 * check if we are resetting the screen to
@@ -580,46 +580,46 @@ switch (address) {
 		}
 
 
-                break;
+		break;
 
-            case 0x07:
-                /*
-                 * bottom of displayed text
-                 * affect top_border(?), bottom_border(?)
-                 */
-                R7_vertical_sync = value;
-                break;
+	    case 0x07:
+		/*
+		 * bottom of displayed text
+		 * affect top_border(?), bottom_border(?)
+		 */
+		R7_vertical_sync = value;
+		break;
 
-            case 0x08:
-                /*
-                 * interlace of traces - hold constant
-                 */
-                R8_interlace = 2;
-                break;
+	    case 0x08:
+		/*
+		 * interlace of traces - hold constant
+		 */
+		R8_interlace = 2;
+		break;
 
-            case 0x09:
-                /*
-                 * Specify the character height - in our
-                 * implementation used only in text mode.
-                 * The actual number of pixels is one
-                 * more than this value.
-                 */
-                R9_max_scan_line_addr = value;
-                set_char_height_recal(R9_max_scan_line_addr + 1);
+	    case 0x09:
+		/*
+		 * Specify the character height - in our
+		 * implementation used only in text mode.
+		 * The actual number of pixels is one
+		 * more than this value.
+		 */
+		R9_max_scan_line_addr = value;
+		set_char_height_recal(R9_max_scan_line_addr + 1);
 		set_screen_height_recal( R6_vertical_displayed*(R9_max_scan_line_addr+1) - 1);
 		flag_mode_change_required();
 		screen_refresh_required();
-                break;
+		break;
 
-            /*
-             * A defines the cursor start scan line
-             * B defines the cursor stop scan line
-             */
-            case 0x0A:
+	    /*
+	     * A defines the cursor start scan line
+	     * B defines the cursor stop scan line
+	     */
+	    case 0x0A:
 		/* bypass redundant updates */
 		if (Ra_cursor_start != value)
 		{
-                    Ra_cursor_start = value;
+		    Ra_cursor_start = value;
 #ifdef REAL_VGA
 #line 628
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
@@ -628,11 +628,11 @@ switch (address) {
 		    update_cursor_shape();
 		}
 		break;
-            case 0x0B:
+	    case 0x0B:
 		/* bypass redundant updates */
 		if (Rb_cursor_end != (value & CURSOR_USED_BITS))
 		{
-                    Rb_cursor_end = (value & CURSOR_USED_BITS);
+		    Rb_cursor_end = (value & CURSOR_USED_BITS);
 #ifdef REAL_VGA
 #line 639
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
@@ -640,21 +640,21 @@ switch (address) {
 #line 641
 		    update_cursor_shape();
 		}
-                break;
+		break;
 
-            /*
-             * C & D define the start of the regen buffer
-             */
-            case 0x0C:
-                /*
-                 * High byte
-                 */
+	    /*
+	     * C & D define the start of the regen buffer
+	     */
+	    case 0x0C:
+		/*
+		 * High byte
+		 */
 		if (value != regen_start.byte.high)
 		{
 			regen_start.byte.high = value;
-			host_screen_address_changed(regen_start.byte.high, 
+			host_screen_address_changed(regen_start.byte.high,
 							regen_start.byte.low);
-	                set_screen_start(regen_start.X  % (short)(CGA_REGEN_LENGTH/2) );
+			set_screen_start(regen_start.X  % (short)(CGA_REGEN_LENGTH/2) );
 			screen_refresh_required();
 		}
 #ifdef REAL_VGA
@@ -662,18 +662,18 @@ switch (address) {
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
 #line 663
-                break;
+		break;
 
-            case 0x0D:
-                /*
-                 * low byte
-                 */
+	    case 0x0D:
+		/*
+		 * low byte
+		 */
 		if (value != regen_start.byte.low)
 		{
 			regen_start.byte.low = value;
-			host_screen_address_changed(regen_start.byte.high, 
+			host_screen_address_changed(regen_start.byte.high,
 							regen_start.byte.low);
-       		        set_screen_start(regen_start.X  % (short)(CGA_REGEN_LENGTH/2));
+			set_screen_start(regen_start.X  % (short)(CGA_REGEN_LENGTH/2));
 			screen_refresh_required();
 		}
 #ifdef REAL_VGA
@@ -681,116 +681,116 @@ switch (address) {
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
 #line 680
-                break;
+		break;
 
-            /*
-             * E and F define the cursor coordinates in characters
-             */
-            case 0x0E:
-                /*
-                 * High byte
-                 */
+	    /*
+	     * E and F define the cursor coordinates in characters
+	     */
+	    case 0x0E:
+		/*
+		 * High byte
+		 */
 		if (Re_cursor_loc_high != value)
 		{
 		    Re_cursor_loc_high = value;
 
 		    if(get_cga_mode() == TEXT)
-		        host_cga_cursor_has_moved(get_cur_x(), get_cur_y());
-                    cur_offset = (value << 8) | Rf_cursor_loc_low;
+			host_cga_cursor_has_moved(get_cur_x(), get_cur_y());
+		    cur_offset = (value << 8) | Rf_cursor_loc_low;
 		    cur_offset -= (word) get_screen_start();
-                    set_cur_y( cur_offset / get_chars_per_line() );
-                    set_cur_x( cur_offset % get_chars_per_line() );
+		    set_cur_y( cur_offset / get_chars_per_line() );
+		    set_cur_x( cur_offset % get_chars_per_line() );
 
 		}
-                break;
+		break;
 
-            case 0x0F:
-                /*
-                 * low byte
-                 */
+	    case 0x0F:
+		/*
+		 * low byte
+		 */
 		if (Rf_cursor_loc_low != value)
 		{
 		    Rf_cursor_loc_low = value;
 
 		    if(get_cga_mode() == TEXT)
-		        host_cga_cursor_has_moved(get_cur_x(), get_cur_y());
-                    cur_offset =  (Re_cursor_loc_high << 8) | value;
+			host_cga_cursor_has_moved(get_cur_x(), get_cur_y());
+		    cur_offset =  (Re_cursor_loc_high << 8) | value;
 		    cur_offset -= (word) get_screen_start();
-                    set_cur_y( cur_offset / get_chars_per_line());
-                    set_cur_x( cur_offset % get_chars_per_line());
+		    set_cur_y( cur_offset / get_chars_per_line());
+		    set_cur_x( cur_offset % get_chars_per_line());
 
 		}
-                break;
+		break;
 
-            default:
-                note_trace2(CGA_VERBOSE, "Unsupported 6845 reg %x=%x(write)",
-                            index_reg, value);
-        }		
-        break;
+	    default:
+		note_trace2(CGA_VERBOSE, "Unsupported 6845 reg %x=%x(write)",
+			    index_reg, value);
+	}
+	break;
 
     case 0x3D8:
-        /*
-         * Mode control register.  The first 
-         * six bits are encoded as follows:
-         *
-         * BIT      Function            Status
-         * ---       --------            ------
-         *  0      A/N 80x25 mode        Supported
-         *  1      Graphics Select        Supported
-         *  2      B/W Select            Supported
-         *  3      Enable Video            Supported
-         *  4      640x200 B/W mode        Supported
-         *  5      Change B/G intensity to blink Not Supported
-         *  6,7      Unused
-         */
+	/*
+	 * Mode control register.  The first
+	 * six bits are encoded as follows:
+	 *
+	 * BIT      Function            Status
+	 * ---       --------            ------
+	 *  0      A/N 80x25 mode        Supported
+	 *  1      Graphics Select        Supported
+	 *  2      B/W Select            Supported
+	 *  3      Enable Video            Supported
+	 *  4      640x200 B/W mode        Supported
+	 *  5      Change B/G intensity to blink Not Supported
+	 *  6,7      Unused
+	 */
 
 #ifdef HUNTER
 #line 744
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 #line 746
-        timer_video_enabled = (boolean) (value & VIDEO_ENABLE);
+	timer_video_enabled = (boolean) (value & VIDEO_ENABLE);
 
-        if (value != current_mode) {
+	if (value != current_mode) {
 
-            if (value == RESET)
-		set_display_disabled(TRUE);	/* Chip reset - do nothing */
-            else {
-                /*
-                 * Take note whether color or B/W
-                 */
+	    if (value == RESET)
+		set_display_disabled(TRUE);     /* Chip reset - do nothing */
+	    else {
+		/*
+		 * Take note whether color or B/W
+		 */
 
-                set_cga_color_select( !(value & BW_ENABLE) );
+		set_cga_color_select( !(value & BW_ENABLE) );
 
-                /*
-                 * Set up for graphics or text
-                 */
-                if (value & GRAPH) {
+		/*
+		 * Set up for graphics or text
+		 */
+		if (value & GRAPH) {
 		    set_chars_per_line(R1_horizontal_displayed<<1);
 		    set_cursor_visible(FALSE);
-                    set_cga_mode(GRAPHICS);
+		    set_cga_mode(GRAPHICS);
 		    host_set_border_colour(0);
-		    set_word_addressing(FALSE);	/* bytes per line = chars per line */
-                    set_cga_resolution( (value & GRAPH_640x200 ? HIGH : MEDIUM) );
-                    if (get_cga_resolution() == HIGH) {
-                        video_mode = 6;
+		    set_word_addressing(FALSE); /* bytes per line = chars per line */
+		    set_cga_resolution( (value & GRAPH_640x200 ? HIGH : MEDIUM) );
+		    if (get_cga_resolution() == HIGH) {
+			video_mode = 6;
 			set_pix_width(1);
-                    }
-                    else {
-                        video_mode = (get_cga_color_select() ? 4 : 5);
-			set_pix_width(2);
-                    }
-                    if (video_mode != last_mode)
-		    {
-                        host_change_mode();
-            		set_cga_palette(get_cga_mode(),get_cga_resolution());
 		    }
-                }
-                else {    /* Text, presumably */
+		    else {
+			video_mode = (get_cga_color_select() ? 4 : 5);
+			set_pix_width(2);
+		    }
+		    if (video_mode != last_mode)
+		    {
+			host_change_mode();
+			set_cga_palette(get_cga_mode(),get_cga_resolution());
+		    }
+		}
+		else {    /* Text, presumably */
 		    set_chars_per_line(R1_horizontal_displayed);
-                    set_cga_mode(TEXT);
+		    set_cga_mode(TEXT);
 		    set_cursor_visible(TRUE);
-		    set_word_addressing_recal(TRUE);	/* so that bytes per line is twice chars per line */
+		    set_word_addressing_recal(TRUE);    /* so that bytes per line is twice chars per line */
 
 		    if (value & 0x20)
 			/* blinking - not supported */
@@ -799,15 +799,15 @@ switch (address) {
 			/* using blink bit to provide 16 background colours */
 			bg_col_mask = 0xf0;
 
-                    if (value & ALPHA_80x25)
+		    if (value & ALPHA_80x25)
 		    {
-                        video_mode = (get_cga_color_select() ? 3 : 2);
+			video_mode = (get_cga_color_select() ? 3 : 2);
 			set_pix_width(1);
 			set_pix_char_width(8);
 		    }
-                    else
+		    else
 		    {
-                        video_mode = (get_cga_color_select() ? 1 : 0);
+			video_mode = (get_cga_color_select() ? 1 : 0);
 			set_pix_width(2);
 			set_pix_char_width(16);
 		    }
@@ -821,73 +821,73 @@ switch (address) {
  * avoids unnecessary mode changes, as the character height is set before we
  * know if a graphics or text mode is to be entered.
  */
-                if ( (value & VIDEO_ENABLE) && ((video_mode != last_mode) ||
-                     (last_max_scan_line != R9_max_scan_line_addr)))
+		if ( (value & VIDEO_ENABLE) && ((video_mode != last_mode) ||
+		     (last_max_scan_line != R9_max_scan_line_addr)))
 		    {
 			last_max_scan_line = R9_max_scan_line_addr;
-                        host_change_mode();        /* redo fonts etc */
-            		set_cga_palette(get_cga_mode(),get_cga_resolution());
+			host_change_mode();        /* redo fonts etc */
+			set_cga_palette(get_cga_mode(),get_cga_resolution());
 		    }
-                }
+		}
 		set_bytes_per_line(R1_horizontal_displayed<<1);
 		set_offset_per_line(get_bytes_per_line());
 
-                if (video_mode != last_mode) {
-                    if (value & VIDEO_ENABLE) {
+		if (video_mode != last_mode) {
+		    if (value & VIDEO_ENABLE) {
 			set_display_disabled(FALSE);
-                        screen_refresh_required();
-                    	last_mode = video_mode;	/* Do this here so when screen display is re-enabled we do 'pending' mode change */
-                    }
-                    else
+			screen_refresh_required();
+			last_mode = video_mode; /* Do this here so when screen display is re-enabled we do 'pending' mode change */
+		    }
+		    else
 			set_display_disabled(TRUE);
-                }
-                else if ((value & VIDEO_ENABLE)
-                  != (current_mode & VIDEO_ENABLE)) {
-                    if (value & VIDEO_ENABLE) {
+		}
+		else if ((value & VIDEO_ENABLE)
+		  != (current_mode & VIDEO_ENABLE)) {
+		    if (value & VIDEO_ENABLE) {
 			set_display_disabled(FALSE);
-                        host_flush_screen();
-                    }
-                    else
+			host_flush_screen();
+		    }
+		    else
 			set_display_disabled(TRUE);
-                }
-            }
+		}
+	    }
 
-        }
+	}
 
-        current_mode = value;
-        break;
+	current_mode = value;
+	break;
 
     case 0x3D9:
-        /* 
-         * The Color Select Register. Just save this into a
-         * variable so the machine-specific graphics s/w can
-         * see it, then call a host specific routine to act on it.
-         */
+	/*
+	 * The Color Select Register. Just save this into a
+	 * variable so the machine-specific graphics s/w can
+	 * see it, then call a host specific routine to act on it.
+	 */
 
-        if ((value & COLOR_MASK) != get_cga_colormask() ) {
-            set_cga_colormask(value & COLOR_MASK);        
-            set_cga_palette(get_cga_mode(),get_cga_resolution());
-        }
-        break;
+	if ((value & COLOR_MASK) != get_cga_colormask() ) {
+	    set_cga_colormask(value & COLOR_MASK);
+	    set_cga_palette(get_cga_mode(),get_cga_resolution());
+	}
+	break;
 
     default:
-        /*
-         * Write to an unsupported 6845 internal register
-         */
+	/*
+	 * Write to an unsupported 6845 internal register
+	 */
 
-        note_trace2(CGA_VERBOSE, "Write to unsupported 6845 reg %x=%x",
-                         address,value);
-        break;
+	note_trace2(CGA_VERBOSE, "Write to unsupported 6845 reg %x=%x",
+			 address,value);
+	break;
 
     }
-} 
+}
 
 
 /*
  * Set up the host palette & border for the current CGA screen mode and resolution
  */
 
-static void set_cga_palette	IFN2(int, screen_mode, int, res)
+static void set_cga_palette     IFN2(int, screen_mode, int, res)
 {
 #ifndef NEC_98
     /*
@@ -896,24 +896,24 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
      * since they represent a 'standard' set of colors.
      */
 
-    static PC_palette cga_text_palette[] = 
+    static PC_palette cga_text_palette[] =
     {
-	0x00, 0x00, 0x00,		/* Black	*/
-	0x22, 0x22, 0xBB,		/* Blue		*/
-	0x00, 0xAA, 0x00,		/* Green	*/
-	0x00, 0xAA, 0xAA,		/* Cyan		*/
-	0xAA, 0x00, 0x00,		/* Red		*/
-	0xAA, 0x00, 0xAA, 		/* Magenta	*/
-	0xAA, 0x88, 0x00,		/* Brown	*/
-	0xCC, 0xCC, 0xCC,		/* White	*/
-	0x55, 0x55, 0x55,		/* Grey		*/
-	0x22, 0x22, 0xEE,		/* Light Blue	*/
-	0x00, 0xEE, 0x00, 		/* Light Green	*/
-	0x00, 0xEE, 0xEE, 		/* Light Cyan	*/
-	0xEE, 0x00, 0x00,		/* Light Red	*/
-	0xEE, 0x00, 0xEE, 		/* Light Magenta*/
-	0xEE, 0xEE, 0x00,		/* Yellow	*/
-	0xFF, 0xFF, 0xFF		/* Bright White	*/
+	0x00, 0x00, 0x00,               /* Black        */
+	0x22, 0x22, 0xBB,               /* Blue         */
+	0x00, 0xAA, 0x00,               /* Green        */
+	0x00, 0xAA, 0xAA,               /* Cyan         */
+	0xAA, 0x00, 0x00,               /* Red          */
+	0xAA, 0x00, 0xAA,               /* Magenta      */
+	0xAA, 0x88, 0x00,               /* Brown        */
+	0xCC, 0xCC, 0xCC,               /* White        */
+	0x55, 0x55, 0x55,               /* Grey         */
+	0x22, 0x22, 0xEE,               /* Light Blue   */
+	0x00, 0xEE, 0x00,               /* Light Green  */
+	0x00, 0xEE, 0xEE,               /* Light Cyan   */
+	0xEE, 0x00, 0x00,               /* Light Red    */
+	0xEE, 0x00, 0xEE,               /* Light Magenta*/
+	0xEE, 0xEE, 0x00,               /* Yellow       */
+	0xFF, 0xFF, 0xFF                /* Bright White */
     };
 
 
@@ -929,36 +929,36 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
      * Medium resolution graphics, color set 1 (Green, Red, Brown)
      */
 
-    static PC_palette cga_graph_m1l[] = 
+    static PC_palette cga_graph_m1l[] =
     {
-	0x00, 0x00, 0x00,		/* Set dynamically	*/
-	0x00, 0xAA, 0x00,		/* Green		*/
-	0xAA, 0x00, 0x00,		/* Red			*/
-	0xAA, 0x88, 0x00		/* Brown		*/
+	0x00, 0x00, 0x00,               /* Set dynamically      */
+	0x00, 0xAA, 0x00,               /* Green                */
+	0xAA, 0x00, 0x00,               /* Red                  */
+	0xAA, 0x88, 0x00                /* Brown                */
     };
 
     /*
      * As above but with high intensity bit on
      */
 
-    static PC_palette cga_graph_m1h[] = 
+    static PC_palette cga_graph_m1h[] =
     {
-	0x00, 0x00, 0x00,		/* Set dynamically	*/
-	0x00, 0xEE, 0x00,		/* Green (alt Red)	*/
-	0xEE, 0x00, 0x00,		/* Red (alt Green)	*/
-	0xEE, 0xEE, 0x00		/* Yellow		*/
+	0x00, 0x00, 0x00,               /* Set dynamically      */
+	0x00, 0xEE, 0x00,               /* Green (alt Red)      */
+	0xEE, 0x00, 0x00,               /* Red (alt Green)      */
+	0xEE, 0xEE, 0x00                /* Yellow               */
     };
 
     /*
      * Medium resolution graphics, color set 2 (Cyan, Magenta, White)
      */
 
-    static PC_palette cga_graph_m2l[] = 
+    static PC_palette cga_graph_m2l[] =
     {
-	0x00, 0x00, 0x00,		/* Set dynamically	*/
-	0x00, 0xAA, 0xAA,		/* Magenta (alt Cyan)	*/
-	0xAA, 0x00, 0xAA,		/* Cyan (alt Magenta)	*/
-	0xCC, 0xCC, 0xCC		/* White		*/
+	0x00, 0x00, 0x00,               /* Set dynamically      */
+	0x00, 0xAA, 0xAA,               /* Magenta (alt Cyan)   */
+	0xAA, 0x00, 0xAA,               /* Cyan (alt Magenta)   */
+	0xCC, 0xCC, 0xCC                /* White                */
     };
 
 
@@ -966,12 +966,12 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
      * As above but with high intensity bit on
      */
 
-    static PC_palette cga_graph_m2h[] = 
+    static PC_palette cga_graph_m2h[] =
     {
-	0x00, 0x00, 0x00,		/* Set dynamically	*/
-	0x00, 0xEE, 0xEE,		/* Magenta (alt Cyan)	*/
-	0xEE, 0x00, 0xEE,		/* Cyan (alt Magenta)	*/
-	0xFF, 0xFF, 0xFF		/* White		*/
+	0x00, 0x00, 0x00,               /* Set dynamically      */
+	0x00, 0xEE, 0xEE,               /* Magenta (alt Cyan)   */
+	0xEE, 0x00, 0xEE,               /* Cyan (alt Magenta)   */
+	0xFF, 0xFF, 0xFF                /* White                */
     };
 
     /*
@@ -979,24 +979,24 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
      * This is what you get when the "Black & White" bit is on!!!
      */
 
-    static PC_palette cga_graph_m3l[] = 
+    static PC_palette cga_graph_m3l[] =
     {
-	0x00, 0x00, 0x00,		/* Set dynamically	*/
-	0x00, 0xAA, 0xAA,		/* Cyan (alt Red)	*/
-	0xAA, 0x00, 0x00,		/* Red (alt Cyan)	*/
-	0xCC, 0xCC, 0xCC		/* White		*/
+	0x00, 0x00, 0x00,               /* Set dynamically      */
+	0x00, 0xAA, 0xAA,               /* Cyan (alt Red)       */
+	0xAA, 0x00, 0x00,               /* Red (alt Cyan)       */
+	0xCC, 0xCC, 0xCC                /* White                */
     };
 
     /*
      * As above but with high intensity on
      */
 
-    static PC_palette cga_graph_m3h[] = 
+    static PC_palette cga_graph_m3h[] =
     {
-	0x00, 0x00, 0x00,		/* Set dynamically	*/
-	0x00, 0xEE, 0xEE,		/* Cyan (alt Red)	*/
-	0xEE, 0x00, 0x00,		/* Red (alt Cyan)	*/
-	0xFF, 0xFF, 0xFF		/* White		*/
+	0x00, 0x00, 0x00,               /* Set dynamically      */
+	0x00, 0xEE, 0xEE,               /* Cyan (alt Red)       */
+	0xEE, 0x00, 0x00,               /* Red (alt Cyan)       */
+	0xFF, 0xFF, 0xFF                /* White                */
     };
 
 
@@ -1004,10 +1004,10 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
      * High resolution graphics
      */
 
-    static PC_palette cga_graph_high[] = 
+    static PC_palette cga_graph_high[] =
     {
-	0x00, 0x00, 0x00,		/* Black		*/
-	0x00, 0x00, 0x00		/* Set dynamically	*/
+	0x00, 0x00, 0x00,               /* Black                */
+	0x00, 0x00, 0x00                /* Set dynamically      */
     };
 
 
@@ -1028,7 +1028,7 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
 	host_set_border_colour(get_cga_colormask() &0xf);
     }
 
-    else	/* Mode must be GRAPHICS */
+    else        /* Mode must be GRAPHICS */
     if (res == MEDIUM)
     {
 	/*
@@ -1046,28 +1046,28 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
 	 *           bit 5 of the Color Register.
 	 */
 
-	if (!get_cga_color_select() )				/* Set 3 */
-	    if (get_cga_colormask() & 0x10)		/* High  */
+	if (!get_cga_color_select() )                           /* Set 3 */
+	    if (get_cga_colormask() & 0x10)             /* High  */
 		cga_graph_med = cga_graph_m3h;
-	    else				/* Low   */
+	    else                                /* Low   */
 		cga_graph_med = cga_graph_m3l;
 	else
-	if (get_cga_colormask() & 0x20)			/* Set 2 */
-	    if (get_cga_colormask() & 0x10)		/* High  */
+	if (get_cga_colormask() & 0x20)                 /* Set 2 */
+	    if (get_cga_colormask() & 0x10)             /* High  */
 		cga_graph_med = cga_graph_m2h;
-	    else				/* Low   */
+	    else                                /* Low   */
 		cga_graph_med = cga_graph_m2l;
-	else					/* Set 1 */
-	    if (get_cga_colormask() & 0x10)		/* High  */
+	else                                    /* Set 1 */
+	    if (get_cga_colormask() & 0x10)             /* High  */
 		cga_graph_med = cga_graph_m1h;
-	    else				/* Low   */
+	    else                                /* Low   */
 		cga_graph_med = cga_graph_m1l;
 
 	/*
 	 * Load the background color from the TEXT palette
 	 */
 
-	ind = get_cga_colormask() & 15;		/* Lower 4 bits select color */
+	ind = get_cga_colormask() & 15;         /* Lower 4 bits select color */
 	cga_graph_med->red   = cga_text_palette[ind].red;
 	cga_graph_med->green = cga_text_palette[ind].green;
 	cga_graph_med->blue  = cga_text_palette[ind].blue;
@@ -1078,7 +1078,7 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
 	host_set_palette(cga_graph_med,4);
 
     }
-    else	/* Must be high resolution graphics */
+    else        /* Must be high resolution graphics */
     {
 	/*
 	 * The background is BLACK, and the foreground is selected
@@ -1096,13 +1096,13 @@ static void set_cga_palette	IFN2(int, screen_mode, int, res)
 #line 1090
 }
 
-static void update_cursor_shape	IFN0()
+static void update_cursor_shape IFN0()
 {
 #ifndef NEC_98
 	/*
-	 *	This function actions a change to the cursor shape
-	 *	when either the cursor start or cursor end registers
-	 *	are updated with DIFFERENT values.
+	 *      This function actions a change to the cursor shape
+	 *      when either the cursor start or cursor end registers
+	 *      are updated with DIFFERENT values.
 	 */
 	half_word temp_start;
 
@@ -1126,11 +1126,11 @@ static void update_cursor_shape	IFN0()
 		set_cursor_height(CGA_CURS_START);
 		set_cursor_start(0);
 	    }
-	    else if (temp_start <= Rb_cursor_end) {	/* 'normal' */
+	    else if (temp_start <= Rb_cursor_end) {     /* 'normal' */
 		set_cursor_start(temp_start);
 		set_cursor_height(Rb_cursor_end - temp_start + 1);
 	    }
-	    else {	/* wrap */
+	    else {      /* wrap */
 		set_cursor_start(0);
 		set_cursor_height(Rb_cursor_end);
 		set_cursor_start1(temp_start);
@@ -1197,20 +1197,20 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 	gvi_pc_high_regen = CGA_REGEN_END;
 	set_cursor_start(8-CGA_CURS_HEIGHT);
 	set_cursor_height(CGA_CURS_HEIGHT);
-	set_cga_color_select(FALSE);		/* B/W at switch-on */
-	set_cga_colormask(0);			/* Will be set by BIOS */
+	set_cga_color_select(FALSE);            /* B/W at switch-on */
+	set_cga_colormask(0);                   /* Will be set by BIOS */
 
 #ifndef GISP_CPU
 /* GISP CPU physically cannot perform read and/or write checks */
 
-#ifdef	JOKER
+#ifdef  JOKER
 #line 1394
 #error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
-#else	/* not JOKER */
+#else   /* not JOKER */
 #line 1400
 
 
-#ifdef A3CPU 
+#ifdef A3CPU
 #line 1403
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 
@@ -1218,7 +1218,7 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 
 
 
-#else	/* not A3CPU */
+#else   /* not A3CPU */
 #line 1413
 #ifdef A2CPU
 #line 1414
@@ -1230,9 +1230,9 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 #error Unsupported excluded CGA-only configuration
 #else
 #line 1420
-   	gmi_define_mem(SAS_VIDEO, &Glue_writes);
+	gmi_define_mem(SAS_VIDEO, &Glue_writes);
 	read_pointers = Glue_reads;
-	Glue_set_vid_wrt_ptrs( &simple_writes ); 
+	Glue_set_vid_wrt_ptrs( &simple_writes );
 	Glue_set_vid_rd_ptrs( &simple_reads );
 #endif /* not EGG or C_VID or A_VID */
 #line 1425
@@ -1250,7 +1250,7 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 	setVideochain(3);
 	SetWritePointers();
 	SetReadPointers(3);
-#endif	/* CPU_40_STYLE */
+#endif  /* CPU_40_STYLE */
 #line 1436
 
 	sas_connect_memory(gvi_pc_low_regen,gvi_pc_high_regen,(half_word)SAS_VIDEO);
@@ -1263,7 +1263,7 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 	set_word_addressing(TRUE);
 	set_screen_height(199);
 	set_screen_limit(0x4000);
-	set_horiz_total(80);			/* calculate screen params from this val, and prev 2 */
+	set_horiz_total(80);                    /* calculate screen params from this val, and prev 2 */
 	set_pix_width(1);
 	set_pix_char_width(8);
 
@@ -1277,7 +1277,7 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 	setVideoscreen_ptr(get_screen_ptr(0));
 
 	sas_fillsw(CGA_REGEN_START, (7 << 8)| ' ', CGA_REGEN_LENGTH >> 1);
-                                                /* Fill with blanks      */
+						/* Fill with blanks      */
 
 	bios_ch2_byte_wrt_fn = simple_bios_byte_wrt;
 	bios_ch2_word_wrt_fn = simple_bios_word_wrt;
@@ -1285,7 +1285,7 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 #line 1466
 }
 
-void cga_term	IFN0()
+void cga_term   IFN0()
 {
 #ifndef NEC_98
     io_addr i;
@@ -1295,7 +1295,7 @@ void cga_term	IFN0()
      */
 
     for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
-        io_disconnect_port(i, CGA_ADAPTOR);
+	io_disconnect_port(i, CGA_ADAPTOR);
     /*
      * Disconnect RAM from the adaptor
      */
@@ -1314,7 +1314,7 @@ void cga_term	IFN0()
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
 #line 1494
 #error Unsupported excluded CGA-only configuration
-#endif	/* not EGG or C_VID or A_VID */
+#endif  /* not EGG or C_VID or A_VID */
 #line 1515
-#endif	/* !NTVDM | (NTVDM & !X86GFX) */
+#endif  /* !NTVDM | (NTVDM & !X86GFX) */
 #line 1478

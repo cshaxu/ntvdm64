@@ -32,16 +32,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S10 Ordered Progress
 
-[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):11/30 source-reviewed;
-175/1060 points reviewed,885 remain. Eleven files delivered through P3 99c8fc6b1.
-[P3 keyba review](../etc/evidence/t485-h-repair/s10-p3-keyba.md):1/5452 ->220/308,
-20 format points restored locally and24 functional residuals evidenced.
-Twenty-four points restored/delivered;151 residuals total. Current census
-201/102863 ->486/57002: +285 exposed blocks/-45861 lines. Whole-file P3 review
-complete; runtime3 cached build and dual publication passed. Targeted runner
-PID12580 completed:controller/PIC90, keyboard contracts,C-VID,MEM/NTVDMD and
-NESticle passed.26 final publication hashes checked. P3 committed and pushed99c8fc6b1.
-Next keybd_io.c. Migration39/159; Full remains S13.
+[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):13/30 source-reviewed;
+335/1060 points reviewed,725 remain. Eleven files delivered through P3 99c8fc6b1.
+P4 keybd_io.c82/90 ->75/83; cga.c1/2532 ->54/70. Pure format/#line changes.
+24 points restored/delivered;156 local restorations awaiting delivery;155
+evidenced residuals pending owner decisions. Census201/102863 ->532/54533
+(+331/-48330). P4 cached build/dual-publication and targeted tests PASS;
+26 published hashes checked.13 files final-verified; commit/push pending.
+Evidence build/t485-s10/p4; no Full claim.
+Next ega_prts.c after batch delivery. Migration39/159; Full remains S13.
 
 ## S9 Closure Record
 
