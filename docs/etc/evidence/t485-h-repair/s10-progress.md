@@ -38,9 +38,9 @@ Full remains S13; original guest remains immutable.
 | 25 | softpc.new/host/src/nt_cga.c | 10 | Delivered b42c5c586 |
 | 26 | softpc.new/host/src/nt_event.c | 50 | Delivered P10 d5e12bf22 |
 | 27 | softpc.new/host/src/nt_graph.c | 91 | Delivered P11 8187c5ba1 |
-| 28 | softpc.new/host/src/nt_hosts.c | 1 | Source reviewed; P12 pending |
-| 29 | softpc.new/host/src/nt_mouse.c | 23 | Source reviewed; P12 pending |
-| 30 | softpc.new/host/src/nt_vga.c | 4 | Source reviewed; P12 pending |
+| 28 | softpc.new/host/src/nt_hosts.c | 1 | Delivered P12 688ab3fa2 |
+| 29 | softpc.new/host/src/nt_mouse.c | 23 | Delivered P12 688ab3fa2 |
+| 30 | softpc.new/host/src/nt_vga.c | 4 | Delivered P12 688ab3fa2 |
 
 ## P1: ev_glue.c
 
@@ -702,3 +702,7 @@ Local census1834/2939 vs201/102845 (+1633/-99906). P12 delivers hosts/mouse/vga
 together after cached build, dual publication and targeted verification.
 
 P12 final runtime12: cached build, dual publication26/26 hashes, relative\nmouse bridge, blocked tick/flush, actual packed painter, real MEM/NTVDMD\nand NESticle menu/Escape PASS. Governance/links PASS; commit/push pending.\nS10 closure still requires checking its guest transition acceptance scope.\n
+P12 receipt:688ab3fa2 pushed to origin/main.30/30 files and1060/1060 points
+reviewed/delivered;754 restored,306 residuals,zero local restorations pending.
+Census1834/2939 unchanged. S10 remains active for final guest-transition
+closure verification; no N004 admission and no Full claim.
