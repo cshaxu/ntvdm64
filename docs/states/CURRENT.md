@@ -36,7 +36,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 23/452 points final-verified:9 restored,14 residuals pending owner decision,
 429 unreviewed. P4 wcall16.c37/98 ->12/72;reviewed census91/4087 ->47/143,
 net-44/-3944. Runtime6 cached build,dual publication26/26,callback contracts,
-CCPU and real Win16 tests PASS;P4 commit/push pending. Next:wcntl32.c.
+CCPU and real Win16 tests PASS;P4 delivered/pushed 9000f7c3f. Next:wcntl32.c.
 Migration39/159;Full is required at every S closure, including S11.
 ## S10 Closure Record
 

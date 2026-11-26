@@ -20,7 +20,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 6 | src/mvdm-host/wow32/precomp.h | 3 | P2 delivered 3bb82967a |
 | 7 | src/mvdm-host/wow32/walias.c | 4 | P2 delivered 3bb82967a |
 | 8 | src/mvdm-host/wow32/walias.h | 6 | P3 delivered 952408b8b |
-| 9 | src/mvdm-host/wow32/wcall16.c | 4 | P4 final-verified; commit/push pending |
+| 9 | src/mvdm-host/wow32/wcall16.c | 4 | P4 delivered 9000f7c3f |
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | Pending |
 | 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | Pending |
 | 12 | src/mvdm-host/wow32/wdde.c | 25 | Pending |
@@ -388,4 +388,4 @@ reserved-stack and teardown assertions with that counter. The complete TU's
 unselected stack/common-dialog services fail closed; RTL uses ntdll.lib.
 No product functional modification was introduced to accommodate fixtures.
 Nine files/23 points final-verified;9 restored,14 owner-review residuals,
-429 unreviewed. Census91/4087 ->47/143, reduction44/3944. P4 commit/push pending.
+429 unreviewed. Census91/4087 ->47/143, reduction44/3944. P4 delivered/pushed 9000f7c3f.
