@@ -142,9 +142,7 @@ ULONG FASTCALL WU32GetClassInfo(PVDMFRAME pFrame)
             STORESHORT(pwc16->cbClsExtra, t3.cbClsExtra);
         }
 
-#line 145
 #ifdef OLD_WAY
-#line 146
 #error Unsupported excluded original configuration
 #endif
 #line 153
@@ -241,10 +239,8 @@ ULONG FASTCALL WU32GetClassLong(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets for GCL constants
 
 #if (GCL_WNDPROC != (-24) || GCL_MENUNAME != (-8))
-#line 246
 #error Win16/Win32 GCL constants differ
 #endif
-#line 248
 
     // Make sure the 16-bit app is requesting allowable offsets
 
@@ -259,9 +255,9 @@ ULONG FASTCALL WU32GetClassLong(PVDMFRAME pFrame)
         case GCL_WNDPROC:
             {
                 DWORD   dwProc32;
-#line 263
                 BOOL procedureIsGuest;
 
+#line 263
                 dwProc32 = wow_user_get_procedure(hwnd, TRUE, &procedureIsGuest);
 #line 264
 
@@ -385,10 +381,8 @@ ULONG FASTCALL WU32GetClassWord(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets
 
 #if (GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_HMODULE != (-16) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26))
-#line 383
 #error Win16/Win32 class-word constants differ
 #endif
-#line 385
 
     // Make sure the 16-bit app is requesting allowable offsets
     // (It's just assertion code, so it doesn't have to be pretty! -JTP)
@@ -627,10 +621,8 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets for GCL constants
 
 #if (GCL_MENUNAME != (-8) || GCL_WNDPROC != (-24))
-#line 623
 #error Win16/Win32 GCL constants differ
 #endif
-#line 625
 
     // Make sure the 16-bit app is requesting allowable offsets
 
@@ -648,12 +640,10 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
                 DWORD   dwWndProc32Old;
                 DWORD   dwWndProc32New;
                 PWW     pww;
-#line 643
                 BOOL previousIsGuest;
 #line 642
 
                 // Look to see if the new 16:16 proc is a thunk for a 32-bit proc.
-#line 644
                 dwWndProc32New = IsThunkWindowProc(LONG32(parg16->f3), NULL );
 
                 if ( dwWndProc32New != 0 ) {
@@ -818,10 +808,8 @@ ULONG FASTCALL WU32SetClassWord(PVDMFRAME pFrame)
     // Make sure Win32 didn't change offsets
 
 #if (GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26))
-#line 804
 #error Win16/Win32 GCW constants differ
 #endif
-#line 806
 
     // Make sure the 16-bit app is requesting allowable offsets
     // (It's just assertion code, so it doesn't have to be pretty! -JTP)

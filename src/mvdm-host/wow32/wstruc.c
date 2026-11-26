@@ -307,9 +307,7 @@ VOID putdrawitem16(VPDRAWITEMSTRUCT16 vpDI16, LPDRAWITEMSTRUCT lpDI)
     return;
 }
 
-#line 310
 #ifdef NOTUSED
-#line 311
 #error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register.
 #endif
 #line 368
@@ -382,9 +380,7 @@ INT GetBMI16Size(PVPVOID vpbmi16, WORD fuColorUse, LPDWORD lpdwClrUsed)
 
     // if this asserts it's an app bug
     // Changed assert to warning at Craig's request - DaveHart
-#line 437
 #ifdef DEBUG
-#line 438
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 442
@@ -688,9 +684,7 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
     lParam  = FETCHLONG(pmsg16->lParam);
     uParam  = INT32(wParam);              // default thunking - sign extend
 
-#line 742
 #ifdef DEBUG
-#line 743
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 759
@@ -715,6 +709,7 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
     } else if ((message == WM_SYSCOMMAND  ||
                 message == WM_COMMAND     ||
                 message == WM_COPYDATA    ||
+#line 779
                 message == WM_DROPFILES   ||
                 message == WM_HSCROLL     ||
                 message == WM_VSCROLL     ||
@@ -983,21 +978,17 @@ VOID getlogfont16(VPLOGFONT16 vplf, LPLOGFONT lplf)
         lplf->lfPitchAndFamily = plf16->lfPitchAndFamily;
 
 #if 0
-#line 1044
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
 #line 1055
 
 #if (LF_FACESIZE != 32)
-#line 1057
 #error Win16/Win32 LF_FACESIZE constants differ
 #endif
-#line 1059
 
         WOW32_strncpy(lplf->lfFaceName, (const char *)plf16->lfFaceName, LF_FACESIZE);
 
 #endif
-#line 1063
 
 
 //      if (*p2) {

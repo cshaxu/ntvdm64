@@ -4,11 +4,12 @@
 #include <windows.h>
 
 #include "nt.h"
+#include "ntexapi.h"
 #include "wow_hard_error_dialog.h"
 
 #define MVDM_WOW_HARD_ERROR_OVERRIDE UINT32_C(0x10000000)
 #define MVDM_WOW_HARD_ERROR_UNICODE_MASK ((1u << 2) | (1u << 3))
-#define MVDM_WOW_HARD_ERROR_PARAMETERS 4u
+#define MVDM_WOW_HARD_ERROR_PARAMETERS MAXIMUM_HARDERROR_PARAMETERS
 #define MVDM_WOW_HARD_ERROR_BUTTON_BASE 41000u
 #define MVDM_WOW_HARD_ERROR_MESSAGE_ID 40999u
 #define MVDM_WOW_HARD_ERROR_TEMPLATE_BYTES 2048u

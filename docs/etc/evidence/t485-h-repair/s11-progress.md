@@ -49,9 +49,9 @@ frozen point counts as current byte-sensitive diff counts.
 | 35 | src/mvdm-host/wow32/wshell.c | 1 | P15 delivered f02c587de |
 | 36 | src/mvdm-host/wow32/wshimdb.c | 5 | P15 delivered f02c587de |
 | 37 | src/mvdm-host/wow32/wspool.c | 2 | P16 delivered 014d8575c |
-| 38 | src/mvdm-host/wow32/wstruc.c | 3 | Pending |
-| 39 | src/mvdm-host/wow32/wuclass.c | 7 | Pending |
-| 40 | src/mvdm-host/wow32/wuclip.c | 16 | Pending |
+| 38 | src/mvdm-host/wow32/wstruc.c | 3 | P17 source-reviewed; line-only delivery pending |
+| 39 | src/mvdm-host/wow32/wuclass.c | 7 | P17 source-reviewed; line-only delivery pending |
+| 40 | src/mvdm-host/wow32/wuclip.c | 16 | P17 source-reviewed; Full delivery pending |
 | 41 | src/mvdm-host/wow32/wudlg.c | 5 | Pending |
 | 42 | src/mvdm-host/wow32/wuman.c | 5 | Pending |
 | 43 | src/mvdm-host/wow32/wumsg.c | 32 | Pending |
@@ -918,3 +918,177 @@ final targeted acceptance;Full remains due at40 and S closure.
 [P16 receipt](s11-p16-result.json):runtime19 cached build,dual26-hash publication and final targeted tests PASS. Actual Win16 OpenJob confirms original explicit no-profile failure,not physical-printer acceptance. All37files/362points final-verified;17restored,345residual,90unreviewed. Spool loader fixture obligation resolved. Commit/push pending;nextfile38 wstruc.c.
 
 P16 delivered and pushed as014d8575c. All37files/362points delivered;17restored,345residual,90unreviewed. Current census744/7048,cumulative136/4715. Nextfile38 wstruc.c;S11 remains active.
+
+### P17 file38 wstruc.c
+
+17points/20lines ->7points/11lines (-10/-9);five exclusions unchanged.
+Retain COPYDATA conversion selection, acquisition-owned DDE unthunk and
+explicit ordinary-message success. Each frozen point now has specific
+caller/provider evidence rather than the prior shared generic COPYDATA text.
+Remove10 redundant anchors, add original line779 after COPYDATA selector.
+Actual product preprocessing284 original statements has zero drift.
+No functional code change; accumulate line-only batch without build.
+Reviewed38/48files,365/452points:17restored,348residual,87unreviewed.
+Delivered37/362 unchanged. Census734/7039,cumulative146/4724.
+Nextfile39 wuclass.c;Full checkpoint40 and S closure remain.
+
+### P17 file39 wuclass.c
+
+19points/38lines ->8points/26lines (-11/-12);five exclusions unchanged.
+All seven frozen points retain explicit caller/provider/native ABI evidence.
+Native USER takes callable host procedures,not marked16:16 guest values;
+class binding owns logical procedure and prior provenance. The existing
+actual-WU32 typed-caller fixture includes guest0xffff collision. Owned class
+exchange rejects zero old procedure before publishing,so the failure guard
+does not drop a successful-zero owned result. No runtime implementation changes.
+Remove12 redundant anchors and move the getter anchor to its actual source
+statement. Real product preprocessing checks34 matching original statements,
+zero drift;not a claim every macro-expanded statement was compared.
+Reviewed39/48files,372/452points:17restored,355residual,80unreviewed.
+Delivered37/362 unchanged. Census723/7027,cumulative157/4736.
+P17 so far reduces21points/21lines;line-only accumulation,nextfile40 wuclip.c,
+then mandatory Full delivery checkpoint before advancing.
+
+### P17 file40 wuclip.c and forty-file checkpoint
+
+Byte-sensitive1point/2515lines ->23points/90lines;one exclusion unchanged.
+Original LF restoration exposes separated actual adaptations,standing-approved
+format correction. Normalized before28/89 ->23/90 (-5/+1). Restore LF,
+remove redundant anchors,place DEBUG continuation outside excluded branch.
+Prevent nonempty failed conversion from calling SetClipboardData withNULL,
+which would register delayed rendering;explicit guestNULL remains legitimate.
+Retain evidenced public HWND map,epoch retirement,native failure rollback
+and original OLE algorithm binding. System OLETHK32 exists,but actual prior
+NULL-callback trace proves the kernel-VDM registration mismatch;not an absent
+DLL claim. Full original algorithm already lives in C1.
+Actual preprocessor59 original statements zero drift;fixture30cases PASS.
+Reviewed40/48files,388/452points:17restored,371residual,64unreviewed.
+Delivered37/362 unchanged. Raw census745/4602,cumulative135/7161.
+P17 raw batch+1point/-2446lines;normalized batch-26points/-20lines.
+Complete-file work enters cached build,dual publication,targeted+Full.
+Nextfile41 wudlg.c only after this mandatory checkpoint delivery.
+
+### P17 final-package verification checkpoint
+
+Runtime20 cached full build and dual publication passed,26 hashes verified.
+Full23/23 passed in622134ms,including real three-desktop acceptance and
+DOS4GW/NESticle menu pixels plus Escape hide/restore. Win95 exit-one remains
+its approved boundary. Additional real Clipboard transfer initially failed
+in private-desktop mode before transfer with task check-death1067/error1401;
+not a pass or confirmed P17 regression. Reconstructed the T484 S4 successful
+shared-Clipboard/current-user-environment runner; final targeted result pending.
+Delivery remains37files/362points until that test and commit/push finish.
+
+[P1-P7 actual-preprocessor followup](s11-p17-early-lines.json) checks1195
+uniquely matching original statements across11 files,zero mismatches.
+precomp.h contains include/define aggregation,not an executable statement
+sample;its original include continuation and consumed-header contexts were
+reviewed separately. Initial ordinary-WOW flags were invalid for wkgthunk;
+reused its actual dedicated Ninja flags. No product modification for this check.
+
+Shared/current-user-environment attempt also exits1067 before Clipboard transfer.
+This contradicts a private-desktop-only explanation. An identical runtime19
+previous-delivery control is running under p17/final/baseline.ps1 (owned PID8124);
+no source/publication rollback and no passing Clipboard claim.
+
+P17 Clipboard correction: direct ZIP inspection confirms assets/winnt.zip contains
+WINNT/SYSTEM/WFWNET.DRV(13600bytes),also present in O:/WINNT/SYSTEM and
+runtime20/system. The test's TopLevelNames omitted system while copying system.ini
+that selects this driver. Fix the test copy set to include system; revert the
+unsuccessful working-directory and Empty-network experiments. No zip or guest
+modification. Diagnostic host text capture was restored and never published.
+Runtime19 reproduces the same staging failure; runtime20 Full23/23 remains valid.
+The original-network-profile retry uses p17/final/system.ps1,owned PID11448.
+Separate evidence: XP hard-error request count5 is rejected by the current
+4-parameter presenter; retain for next wudlg/error-provider review,not fixed here.
+
+P17 system-copy retry: original configured WFWNET driver now loads; guest exits0
+and reaches seven reports: phases12,8,9,10,11,1,1. InitTask,InitApp,
+MakeProcInstance,RegisterClass,CreateWindow and native peer LoadLibrary/GetProcAddress
+succeed. Original WU32OpenClipboard returns0 before transfer. Independent existing
+native clipboard-access.exe reports OpenClipboard error5 on WinSta0/Default,
+medium integrity0x2000,unrestricted token,no job UI restrictions,no opener.
+This is distinct from the corrected missing-driver preparation error.
+Owner asked to reconnect/unlock RDP,matching the last successful shared runner.
+Full remains23/23;P17 publication complete,real Clipboard/commit/push pending.
+
+### P17 owner-added XP hard-error ABI repair
+
+Owner requested repairing the observed error-dialog termination and adding core
+unit coverage before delivery. Captured request:statusD000021D,count5,mask0C,
+options0,title File Error,message Cannot find WFWNET.DRV. The five-word ABI is
+original ntexapi.h MAXIMUM_HARDERROR_PARAMETERS,including flags at index4.
+The F presenter incorrectly required4 and left recognized0; its caller then
+entered the unavailable-service termination route. Replace the local4 with the
+original ABI constant and explicitly include its ntexapi.h declaration.
+No mirror,guest,callback,state-machine or response-policy change;mirror delta0/0.
+
+Extend the existing hard-error core fixture with the complete production
+presenter body,substituting only modal display. Both flag forms accept5,
+preserve source response3 and copied title/message/template;modal failure is
+recognized with response0. Wrong counts,status,mask,options and NULL arguments
+are rejected without modal invocation. Existing four button cases remain.
+Final core run p17/hard-error-core4 passes6 groups;initial fixture build attempts
+had argument grouping,missing direct header and obsolete CRT-definition errors,
+all corrected without product workarounds. Source changes require a new final
+runtime21 cached build/dual publication and final-package targeted+Full checks.
+Runtime20 Full23/23 remains historical,not proof for this new host repair.
+
+Runtime21 cached full build and dual publication PASS. Core production presenter
+six groups PASS. Real shared Clipboard with complete SYSTEM reaches phase2:
+guest Open/Empty/Set/Close succeeds,then native peer OpenClipboard fails error5
+with no opener. Immediate independent native control opens Clipboard but
+OpenInputDesktop returns5;desktop state is not stable enough to claim a product
+regression or a successful transfer. Final-package Full is running under owned
+PID8324 at p17/revised/verify.ps1. Keep P17 undelivered until its remaining gates.
+
+Runtime21 RDP retry completed successfully using frozen probe inputs from the
+previous run:18 checkpoints,zero errors,guest-to-native and native-to-guest
+CF_TEXT transfer,rejection,deferred rendering,replacement and owner-destroy
+render-all PASS. Evidence:p17/revised/clipboard-transfer-rdp/result.txt and
+guest-report.json. This completes the Clipboard gate;task-exit rendering is
+not claimed by this case (task_exit=0). Full remains separately running.
+
+### P17 final-package Full retry
+
+Runtime21 first Full stopped at modern-edit-return after516113ms. The report
+shows launcher exit1,input delivered,EDIT menu/status,CMD echo and MEM output.
+The private Console was39columns;MEM's required 'bytes total conventional memory'
+witness was physically truncated to 'bytes total conventional mem'. This is
+a test geometry defect,not evidence of a failed EDIT return. Earlier s34 wait258
+belongs to the separate passing strict-dir gate and is not this failure.
+
+The existing runner now sets MVDM_OBSERVER_INITIAL_GEOMETRY=80,30 in its own
+child environment,using the existing observer implementation. Original screen
+and return assertions remain unchanged. No product/source/binary change.
+Same published runtime21 Full retry is owned by PID16232,script
+p17/revised/verify-retry.ps1,results under p17/revised/full-retry.
+First failed run remains retained;P17 is not yet delivered.
+
+Runtime21 Full retry failed Win95 observer timeout. WINDOW.BIN exists (14bytes),
+but FULL.RUN does not;the observer delivered W down/up and then never observed
+the required fullscreen readiness. Worker stack resolves through CCPU vir_read_word
+and physical mapping,not a crash/termination. This localizes the missing handshake
+but does not prove its root cause. Previous runtime21 Win95 case passed.
+
+Targeted serial verification first could not start:live O:/WINNT broker2156
+violated isolation preconditions. Two path-verified O:/WINNT instances were
+ended under owner permanent authorization;record:revised/released-winnt-instances.json.
+The fresh targeted run is revised/focused2/run.ps1,PID1080. No product changes.
+
+Focused2 completed:EDIT menu/status,Ctrl+Q,CMD echo,DOS MEM and launcher return
+PASS with the existing80x30 geometry. Win95 complete window/fullscreen roundtrip
+also PASS,retaining approved exit-one boundary. Seven configuration/guest-probe
+hashes match the failed run;staged NTVDM hashes differ by per-run package identity.
+The W-key readiness timeout was not reproduced and is retained as an unexplained
+single failed attempt,not declared repaired. Final same-runtime21 Full starts
+under PID25576,revised/verify-final.ps1;all prior failed runs retained.
+
+Owner clarified Full retry policy:without code changes retry failed gates only;
+retain same-package passing evidence and run any not-yet-executed gates once.
+Recorded in EXECUTION.md. Current final Full already running continues;no
+further complete rerun is authorized merely for a failed gate.
+
+P17 final runtime21 Full passed23/23;receipt:s11-p17-result.json.
+All three files final-verified;26residual original points remain pending owner
+review. Commit/push pending;formal delivered total remains37/362 until push.

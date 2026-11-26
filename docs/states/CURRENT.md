@@ -33,19 +33,21 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S11 Ordered Progress
 
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
-[P16 receipt](../etc/evidence/t485-h-repair/s11-p16-result.json):37/48files,
-362/452points delivered:17restored,345residual owner-review,90unreviewed.
-Current48-file census744points/7048lines;cumulative raw reduction136/4715.
-P16 fixes printer cleanup on the wrong failure branch;point count unchanged,
-+1line for original #line mapping under standing small-fix approval.
-Runtime19 cached build,dual26-hash publication,spool72/loader56/rundown353/
-environment16 and real Win16 explicit no-profile OpenJob PASS. No claim of
-physical printer success. P16 delivered and pushed014d8575c;37/362 delivered.
-Nextfile38 wstruc.c. LastFull:file30 P12 runtime15 passed23/23;nextfile40
-and S closure. Earlier P1-P7 actual-preprocessor line followup remains due;
-spool-loader extraction fixture obligation resolved.
-Migration39/159;S11 active.
-
+[P17 receipt](../etc/evidence/t485-h-repair/s11-p17-result.json):40/48files,
+388/452 frozen points reviewed:17restored,371residual owner-review,64unreviewed.
+Final verification complete;commit/push pending,delivered remains37/48files,
+362/452points until P17 push. Current48-file census745points/4602lines;
+cumulative raw reduction135points/7161lines. P17 raw+1point/-2446lines due
+original LF restoration;normalized-26points/-20lines. All original#error
+exclusions retained;original statement line checks zero drift.
+Runtime21 cached full build,dual26-hash publication,Clipboard30 corecases,
+hard-error6groups,real Clipboard18checkpoints and Full23/23 PASS.
+The five-parameter XP error-dialog repair adds0mirrorpoints/lines.
+Test SYSTEM staging and80x30 EDIT-return preparation corrected;original guest
+and ZIP unchanged. Prior Win95 W-key readiness timeout retained,not claimed
+repaired;focused and final Full roundtrips pass. Nextfile41 follows P17 push.
+P1-P7 preprocessor followup:1195 unique original statements,zero drift.
+Migration39/159;S11 active;no S closure claimed.
 ## S10 Closure Record
 
 [S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):30/30 files and

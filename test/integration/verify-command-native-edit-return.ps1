@@ -50,6 +50,8 @@ try {
         }
     }
     $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
+    # MEM's complete output is part of the witness; do not inherit a narrow RDP viewport.
+    $start.EnvironmentVariables['MVDM_OBSERVER_INITIAL_GEOMETRY']='80,30'
     # This lifecycle fixture uses only this package and host System32.
     # Developer toolchain PATH growth is a separate immutable-COMMAND guest
     # boundary, not input to the EDIT return contract. Affect only the child.

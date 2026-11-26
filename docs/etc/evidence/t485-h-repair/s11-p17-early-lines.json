@@ -1,0 +1,143 @@
+{
+  "method": "Actual per-unit product Ninja flags, MSVC /E; unique unexpanded original statement matches only. Not exhaustive macro-expansion equivalence.",
+  "files": [
+    {
+      "path": "src/mvdm-host/inc/wowcmdlg.h",
+      "source_sha256": "fa3f6519d37f2f1fb5266068fb6b99f670ad1e6ceb52e0604a0573442b3c617b",
+      "checked": 62,
+      "contexts": [
+        "walias.i",
+        "wcall16.i",
+        "wcntl32.i",
+        "wcommdlg.i",
+        "wdde.i",
+        "wkgthunk.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/inc/wowkbd.h",
+      "source_sha256": "9a994e0d94ae89cbf6386e5464c47f7de047a7e30e21bc438e7513f0debd9a20",
+      "checked": 9,
+      "contexts": [
+        "walias.i",
+        "wcall16.i",
+        "wcntl32.i",
+        "wcommdlg.i",
+        "wdde.i",
+        "wkgthunk.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/inc/wowkrn.h",
+      "source_sha256": "aa75ed64496b27fe2919a79ea8b47cede00ca6aff9319a334e7744439f954be4",
+      "checked": 325,
+      "contexts": [
+        "walias.i",
+        "wcall16.i",
+        "wcntl32.i",
+        "wcommdlg.i",
+        "wdde.i",
+        "wkgthunk.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/inc/wowsnd.h",
+      "source_sha256": "95367186098dabfd5b46aaacd353c46f74aacb622c983be3bb9ae24005f0440a",
+      "checked": 9,
+      "contexts": [
+        "walias.i",
+        "wcall16.i",
+        "wcntl32.i",
+        "wcommdlg.i",
+        "wdde.i",
+        "wkgthunk.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/isvwow.h",
+      "source_sha256": "bd03cd6efc7fc278ee56feea8e89d4e9fb157dd4f85206e63a24a232e83b8c62",
+      "checked": 11,
+      "contexts": [
+        "walias.i",
+        "wcall16.i",
+        "wcntl32.i",
+        "wcommdlg.i",
+        "wdde.i",
+        "wkgthunk.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/precomp.h",
+      "source_sha256": "9f4df8c1a123a71bdd24c4d3cb683dfa7205620d654192804c458855d5ec9ef6",
+      "checked": 0,
+      "contexts": [],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "source_sha256": "be0cf5e8f984dbb58e62ec98e9a2ed632fd580bc1921b764b90ce1a3ee93e2e2",
+      "checked": 85,
+      "contexts": [
+        "walias.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "source_sha256": "be6e886c889fcf601dd43a65bd278ad5110f39df010c1278da9f35479b4b5d6c",
+      "checked": 52,
+      "contexts": [
+        "walias.i",
+        "wcall16.i",
+        "wcntl32.i",
+        "wcommdlg.i",
+        "wdde.i",
+        "wkgthunk.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "source_sha256": "f19f09599db9212504e8dbb8453c687d6701795fbda4a3b9150d054b48f1867a",
+      "checked": 101,
+      "contexts": [
+        "wcall16.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "source_sha256": "1bec32bc9a08f08aa0ed58ead814b91fc694b417e7a065b2aeb28add7d58e2d6",
+      "checked": 25,
+      "contexts": [
+        "wcntl32.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "source_sha256": "85bca4ee893ee6114b3c84178fb394950898bfe7c8da45e2dfae0ed9aad21363",
+      "checked": 390,
+      "contexts": [
+        "wcommdlg.i"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.c",
+      "source_sha256": "4d9ab420d6614bc8537b509a4cb9b2494c2dfe87f0788ac1e13ea6b0758b330d",
+      "checked": 126,
+      "contexts": [
+        "wdde.i"
+      ],
+      "mismatches": []
+    }
+  ],
+  "precomp_header": "Include/define aggregation has no comparable executable statement. Its original include continuation starts at #line22; consumed headers are checked in actual product contexts.",
+  "failed_probe": "Initial wkgthunk invocation incorrectly reused ordinary WOW flags and hit original unsupported RISC #error. Repeated with its actual Ninja flags; no product change."
+}

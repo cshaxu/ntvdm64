@@ -4,9 +4,17 @@ set_property(TARGET wow-gdi-alias_objects PROPERTY COMPILE_OPTIONS /nologo /TC /
 set_property(TARGET wow-gdi-alias_objects PROPERTY FIXTURE_LIBRARIES gdi32.lib)
 if(NTVDM_ARCH STREQUAL "x86")
   fixture(wow-hard-error-decoder CL src/ntvdm-exe/win32/wow_hard_error_decoder.c
-    test/adapter-mvdm-host-out/wow/wow_hard_error_decoder_fixture.c)
+    test/adapter-mvdm-host-out/wow/wow_hard_error_decoder_fixture.c
+    test/adapter-mvdm-host-out/wow/wow_hard_error_request_fixture.c)
   target_include_directories(wow-hard-error-decoder_objects PRIVATE "${NTVDM_REPO}/src/ntvdm-exe/win32")
-  set_property(TARGET wow-hard-error-decoder_objects PROPERTY COMPILE_OPTIONS /nologo /TC /W4 /WX /DWIN32)
+  target_include_directories(wow-hard-error-decoder_objects PRIVATE
+    "${NTVDM_REPO}/src/compat/include"
+    "${NTVDM_REPO}/src/non-mvdm/public/sdk/inc"
+    "${NTVDM_REPO}/src/non-mvdm/public/internal/base/inc")
+  set_property(TARGET wow-hard-error-decoder_objects PROPERTY COMPILE_OPTIONS
+    /nologo /TC /MT /W4 /DWINNT
+    "/FI${NTVDM_REPO}/src/non-mvdm/public/sdk/inc/nt.h")
+  set_property(TARGET wow-hard-error-decoder_objects PROPERTY FIXTURE_LIBRARIES user32.lib)
   fixture(wow-hook-native-binding CL test/compat/wow_hook_native_binding_fixture.c)
   target_include_directories(wow-hook-native-binding_objects PRIVATE "${NTVDM_REPO}/src/compat/include")
   set_property(TARGET wow-hook-native-binding_objects PROPERTY COMPILE_OPTIONS /nologo /TC /O2 /W4)

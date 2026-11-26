@@ -30,6 +30,8 @@ static int check_case(const char *name, const WORD descriptors[3], UINT count,
     return 1;
 }
 
+int check_hard_error_request(void);
+
 int main(void)
 {
     static const WORD sparse[] = { SEB_CANCEL, 0u, SEB_RETRY | SEB_DEFAULT };
@@ -46,6 +48,7 @@ int main(void)
         !check_case("invalid-omitted", invalid, 2u, 2u, 3u, 0u, 3u, 0u) ||
         !check_case("implicit-first-default", no_default, 2u, 2u, 3u, 0u, 2u, 0u) ||
         mvdm_wow_hard_error_decode_buttons(empty, &buttons)) return 1;
+    if (!check_hard_error_request()) return 1;
     puts("PASS source-slot/default/cancel decoder contract");
     return 0;
 }

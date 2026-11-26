@@ -21,9 +21,9 @@ try {
     Run-Owned 'fixture' "$root/fixture.exe" '' 30
     $output=Get-Content "$root/fixture.out" -Raw
     if($output -notmatch 'PASS source-slot/default/cancel decoder contract' -or
-       ([regex]::Matches($output,'^PASS ',[Text.RegularExpressions.RegexOptions]::Multiline)).Count -ne 5){
+       ([regex]::Matches($output,'^PASS ',[Text.RegularExpressions.RegexOptions]::Multiline)).Count -ne 6){
         throw 'Missing hard-error decoder assertions'
     }
-    @("$repo/src/ntvdm-exe/win32/wow_hard_error_decoder.c","$repo/src/ntvdm-exe/win32/wow_hard_error_dialog.h","$repo/test/adapter-mvdm-host-out/wow/wow_hard_error_decoder_fixture.c")|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"
+    @("$repo/src/ntvdm-exe/win32/wow_hard_error_dialog.c","$repo/test/adapter-mvdm-host-out/wow/wow_hard_error_request_fixture.c","$repo/src/ntvdm-exe/win32/wow_hard_error_decoder.c","$repo/src/ntvdm-exe/win32/wow_hard_error_dialog.h","$repo/test/adapter-mvdm-host-out/wow/wow_hard_error_decoder_fixture.c")|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit.txt"
 }catch { $_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw }

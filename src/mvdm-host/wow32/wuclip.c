@@ -22,7 +22,6 @@ struct _CBFORMATS  ClipboardFormats;
 
 DLLENTRYPOINTS  OleStringConversion[WOW_OLESTRINGCONVERSION_COUNT] =
                                     {"ConvertObjDescriptor", NULL};
-#line 23
 
 
 
@@ -65,7 +64,6 @@ static BOOL WU32NativeClipboardWindow(HWND hwnd16, HWND *native)
     the window is found and removed. Otherwise, it is FALSE.
 --*/
 
-#line 57
 ULONG FASTCALL WU32ChangeClipboardChain(PVDMFRAME pFrame)
 {
     ULONG ul;
@@ -100,7 +98,6 @@ ULONG FASTCALL WU32ChangeClipboardChain(PVDMFRAME pFrame)
     the clipboard is closed. Otherwise, it is FALSE.
 --*/
 
-#line 87
 ULONG FASTCALL WU32CloseClipboard(PVDMFRAME pFrame)
 {
     ULONG ul;
@@ -857,7 +854,7 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                 if (parg16->f2) {
                     hMem32 = W32ConvertObjDescriptor((HANDLE) parg16->f2, CFOLE_ANSI_TO_UNICODE);
                 }
-                ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
+                ul = (!parg16->f2 || hMem32) ? (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32) : 0;
                 if (parg16->f2 && !ul) break;
 #line 837
 		WU32ICBStoreHandle(parg16->f1, parg16->f2);
@@ -889,7 +886,7 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
                 }
             }
 
-            ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
+            ul = (!parg16->f2 || hMem32) ? (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32) : 0;
             if (hMem16 && !ul) break;
 #line 868
             WU32ICBStoreHandle(parg16->f1, hMem16);
@@ -901,7 +898,7 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
             if (hMem16) {
                 hMem32 = CopyDropFilesFrom16(hMem16);
             }
-            ul = (ULONG)SetClipboardData(WORD32(parg16->f1), hMem32);
+            ul = (!hMem16 || hMem32) ? (ULONG)SetClipboardData(WORD32(parg16->f1), hMem32) : 0;
             if (hMem16 && !ul) break;
 #line 878
             WU32ICBStoreHandle(parg16->f1, hMem16);
@@ -946,7 +943,7 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
 
             }
 
-            ul = (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32);
+            ul = (!parg16->f2 || hMem32) ? (ULONG) SetClipboardData(WORD32(parg16->f1), hMem32) : 0;
 
             if (hMem16 && !ul) break;
 #line 922
@@ -1114,12 +1111,10 @@ VOID WU32ICBStoreHandle(WORD wFormat, HMEM16 hMem16)
             }
         }
     }
-#line 1071
 }
 
 
 
-#line 1075
 HMEM16 WU32ICBGetHandle(WORD wFormat)
 {
     HMEM16 hMem16 = 0;
@@ -1157,7 +1152,6 @@ HMEM16 WU32ICBGetHandle(WORD wFormat)
 
 
 
-#line 1112
 VOID W32EmptyClipboard ()
 {
     PCBNODE Temp, Temp1;
@@ -1263,11 +1257,10 @@ VOID InitCBFormats ()
 
 #ifndef DBCS
 #ifdef DEBUG
-#line 1217
 #error Excluded unsupported DEBUG WOW profile
-#line 1227
 #endif
 #endif // !DBCS
+#line 1229
 
 }
 

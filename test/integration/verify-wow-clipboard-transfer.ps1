@@ -115,7 +115,7 @@ try {
     # unrelated root-level games, documents or historical assets into the
     # short physical stage: they are neither loader inputs nor part of the
     # Clipboard contract.
-    $runtime=New-PhysicalRuntimeStage $package -TopLevelNames @('system32','system.ini','product-system32-manifest.json') -TestFiles @("$root/CLIPPRB.EXE") -NativePeers @("$root/GENHOST.DLL")
+    $runtime=New-PhysicalRuntimeStage $package -TopLevelNames @('system32','system','system.ini','product-system32-manifest.json') -TestFiles @("$root/CLIPPRB.EXE") -NativePeers @("$root/GENHOST.DLL")
     $scope=New-IsolatedPackageScope $runtime
     # Original LoadLibraryEx32W resolves its native peer through the worker
     # system directory. CMD stages the DLL there without overwriting images;

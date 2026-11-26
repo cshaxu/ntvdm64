@@ -14,13 +14,14 @@ typedef struct {short mm,xExt,yExt;WORD hMF;} METAFILEPICT16,*LPMETAFILEPICT16;
 static UINT CFOLEObjectDescriptor=0xc001,CFOLELinkSrcDescriptor=0xc002;
 #define CFOLE_ANSI_TO_UNICODE 1
 static unsigned allocations,freed,metas,meta_freed,cached,cached_handle;
-static BOOL native_accept;
+static BOOL native_accept, conversion_fail;
+static unsigned native_calls;
 static HANDLE copy_handle;
 static METAFILEPICT16 guest={MM_ANISOTROPIC,10,20,7};
-static HGLOBAL host_alloc(UINT flags,SIZE_T size){HGLOBAL h=GlobalAlloc(flags,size);if(h){++allocations;copy_handle=h;}return h;}
+static HGLOBAL host_alloc(UINT flags,SIZE_T size){HGLOBAL h;if(conversion_fail)return NULL;h=GlobalAlloc(flags,size);if(h){++allocations;copy_handle=h;}return h;}
 static HGLOBAL host_free(HGLOBAL h){HGLOBAL result=GlobalFree(h);if(!result&&h)++freed;return result;}
 static BOOL host_delete_meta(HMETAFILE h){if(h)++meta_freed;return TRUE;}
-static HANDLE host_set(UINT f,HANDLE h){(void)f;return native_accept?h:NULL;}
+static HANDLE host_set(UINT f,HANDLE h){(void)f;++native_calls;return native_accept?h:NULL;}
 static VPVOID GlobalLock16(WORD h,int *bytes){if(bytes)*bytes=sizeof(guest);return h?(VPVOID)&guest:0;}
 static void GlobalUnlock16(WORD h){(void)h;}
 static HANDLE Copyh16Toh32(int n,void *p){HANDLE h=host_alloc(GMEM_MOVEABLE,n);(void)p;return h;}
@@ -41,6 +42,7 @@ static void WU32ICBStoreHandle(WORD f,WORD h){(void)f;++cached;cached_handle=h;}
 #define WOW32ASSERT(v) ((void)0)
 #define LOGDEBUG(a,b) ((void)0)
 #define RETURN(v) return (v)
+#define WOWGLOBALALLOC host_alloc
 #define GlobalAlloc host_alloc
 #define GlobalFree host_free
 #define DeleteMetaFile host_delete_meta
@@ -67,6 +69,15 @@ int main(int argc,char **argv){
   }
   /* Fixture disposal after observation is not product cleanup evidence. */
   if(copy_handle&&allocations>freed)host_free(copy_handle);
+ }
+ conversion_fail=TRUE;native_accept=TRUE;
+ for(i=0;i<sizeof(formats)/sizeof(formats[0]);++i){
+  SETCLIPBOARDDATA16 arg={formats[i],0x55};ULONG result;
+  allocations=freed=metas=meta_freed=cached=cached_handle=native_calls=0;
+  result=WU32SetClipboardData(&arg);++cases;
+  if(result||native_calls||cached||allocations||freed||metas||meta_freed){
+   fprintf(stderr,"conversion failure became delayed rendering: format=%u\n",formats[i]);++failures;
+  }
  }
  printf("cases=%u strict=%u failures=%u\n",cases,strict,failures);
  return failures?1:0;

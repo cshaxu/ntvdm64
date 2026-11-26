@@ -18,6 +18,18 @@ point in the current file before starting the checkpoint; do not split a
 file to trigger verification. Record the completed-file count and the last
 Full checkpoint. This is additional to mandatory Full at every S closure.
 
+## Full retry scope
+
+Owner update 2026-11-26: after a Full run, when code has not changed, do not
+rerun the complete suite. Retry only failed gates and retain passing results
+for the same published package and unchanged gate inputs. If a fail-fast run
+left gates unexecuted, run those outstanding gates once; they are not passes.
+Record the initial failure, each targeted retry and package/input identity in
+one consolidated Full receipt. Full passes only when every required gate has
+passing evidence; a retry never erases a failed attempt or proves its root
+cause repaired. Documentation-only changes do not invalidate runtime evidence.
+Code changes require explicit affected-gate analysis under the existing
+verification rules, not an automatic reason to repeat unrelated passing gates.
 ## Request Lifecycle
 
 1. Read the task reading set in [docs/README.md](../README.md) and re-read the
