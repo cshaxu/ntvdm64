@@ -15,7 +15,7 @@ DESIGNER	: J.P.Box
 DATE		: April '88
 
 PURPOSE		: Contains all the routines that communicate with
-		the arrays and data structures that hold the 
+		the arrays and data structures that hold the
 		necessary Expanded Memory Manager Data.
 
 
@@ -64,9 +64,7 @@ AMMENDMENTS	:
 #ifdef LIM
 
 #ifdef SEGMENTATION
-#line 67
 #error Excluded unsupported SEGMENTATION configuration
-#line 73
 #endif
 #line 74
 
@@ -86,7 +84,6 @@ AMMENDMENTS	:
 #include "gmi.h"
 #include "debug.h"
 #ifndef PROD
-#line 91
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 93
@@ -103,7 +100,6 @@ typedef enum
 	STR_OP
 } MM_LIM_op_type;
 
-#line 106
 #ifdef NTVDM
 /*	Local Variables			*/
 static long
@@ -191,9 +187,7 @@ boolean lim_page_frame_init(PLIM_CONFIG_DATA lim_config_data)
     return TRUE;
 }
 #else
-#line 193
 #error Non-NTVDM BIOS or EMS provider is not supported
-#line 229
 #endif
 #line 230
 
@@ -245,25 +239,19 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 	}
 
 #ifdef	macintosh
-#line 279
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
-#line 283
 #endif	/* macintosh */
 #line 284
 
 	/* Initialise EMM variables	*/
 
 #ifndef NTVDM
-#line 288
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 290
 #else
 #line 291
 	EM_start = physical_page[0];
 	EM_end =  physical_page[0] + EMM_PAGE_SIZE * 4;
-#line 293
 #endif
-#line 294
 	total_pages = unallocated_pages = size * 0x100000 / EMM_PAGE_SIZE;
 
 	/* always allow max handles (Used to be 32 handles/Meg expanded mem) */
@@ -289,9 +277,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 	    return FAILURE;
 	set_no_pages(0, 0);
 #else
-#line 319
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 359
 #endif	/* NTVDM */
 #line 360
 
@@ -316,9 +302,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 			       SAS_RAM
 			       );
 #else
-#line 382
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 384
 #endif
 #line 385
 
@@ -336,7 +320,7 @@ PURPOSE		: This routine calls frees all memory allocated for the
 		expanded memory manager and resets the variables that
 		are used by the Expanded Memory Manager(EMM).
 
-RETURNED STATUS	: SUCCESS - 
+RETURNED STATUS	: SUCCESS -
 
 DESCRIPTION	: If total_pages = 0, this indicates that expanded
 		memory hasn't been initialised, so the routine simply
@@ -441,7 +425,7 @@ PURPOSE		: frees the storage space allocated to the handle number.
 RETURNED STATUS	: SUCCESS - space freed
 		  FAILURE - unable to free space
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -475,7 +459,7 @@ PURPOSE		: changes the number of pages allocated to a given handle
 RETURNED STATUS	: SUCCESS - handle reallocated
 		  FAILURE - unable to get space for new handle data
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -518,7 +502,7 @@ PURPOSE		: checks to see if the handle no. is valid - this should
 RETURNED STATUS	: TRUE	- Handle no. is valid
 		FALSE	- Handle no. is invalid
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -531,7 +515,6 @@ GLOBAL boolean handle_ok IFN1(short, handle_no)
 
     if ((unsigned short)handle_no >= (unsigned short)total_handles) {
 #else
-#line 595
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 597
@@ -555,9 +538,9 @@ FUNCTION	: set_no_pages
 
 PURPOSE		: sets the no of pages variable in the specified handle
 
-RETURNED STATUS	: 
+RETURNED STATUS	:
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -586,14 +569,14 @@ FUNCTION	: set_EMpage_no
 PURPOSE		: sets Expanded Memory page that is used for the specified
 		logical page into the handle data storage area
 
-RETURNED STATUS	: 
+RETURNED STATUS	:
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
-GLOBAL void set_EMpage_no IFN3(short, handle_no, 
-			       short, logical_page_no, 
+GLOBAL void set_EMpage_no IFN3(short, handle_no,
+			       short, logical_page_no,
 			       short, EM_page_no)
 
 {
@@ -624,14 +607,14 @@ FUNCTION	: set_map_no
 PURPOSE		: sets Expanded Memory page number in the map section of
 		the handle data storage area
 
-RETURNED STATUS	: 
+RETURNED STATUS	:
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
-GLOBAL void set_map_no IFN3(short, handle_no, 
-			    unsigned char, physical_page_no, 
+GLOBAL void set_map_no IFN3(short, handle_no,
+			    unsigned char, physical_page_no,
 			    short, EM_page_no)
 
 {
@@ -662,13 +645,13 @@ FUNCTION	: set_name
 PURPOSE		: writes a name into the name section of the handle data
 		 storage area
 
-RETURNED STATUS	: 
+RETURNED STATUS	:
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
-GLOBAL void set_name IFN2(short, handle_no, 
+GLOBAL void set_name IFN2(short, handle_no,
 		          char *, new_name)
 
 {
@@ -701,7 +684,7 @@ PURPOSE		: gets the number of pages assigned to the specified handle
 
 RETURNED STATUS	: no of pages returned
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -734,11 +717,11 @@ PURPOSE		: returns the Expanded Memory page no. used for the
 
 RETURNED STATUS	: Expanded Memory page no. returned
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
-GLOBAL short get_EMpage_no IFN2(short, handle_no, 
+GLOBAL short get_EMpage_no IFN2(short, handle_no,
 				short, logical_page_no)
 
 {
@@ -772,11 +755,11 @@ PURPOSE		: returns the Expanded Memory page no. saved in the map
 
 RETURNED STATUS	: page no. in map returned
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
-GLOBAL short get_map_no IFN2(short, handle_no, 
+GLOBAL short get_map_no IFN2(short, handle_no,
 			     unsigned char, physical_page_no)
 
 {
@@ -807,9 +790,9 @@ FUNCTION	: get_name
 
 PURPOSE		: returns a pointer to the name assigned to the given handle
 
-RETURNED STATUS	: 
+RETURNED STATUS	:
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -845,7 +828,7 @@ PURPOSE		: allocates a page from expanded memory
 RETURNED 	: >=0 = SUCCESS -  EM page no. returned
 		  <0  = FAILURE - error occured in trying to allocate page
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -873,7 +856,7 @@ PURPOSE		: frees a page of expanded memory for further use
 RETURNED 	: SUCCESS - page freed successfully
 		  FAILURE - unable to free page
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -906,11 +889,9 @@ GLOBAL int free_page IFN1(short, EM_page_no)
 }
 
 #ifndef NTVDM
-#line 968
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1070
 #endif	/* !NTVDM */
-#line 1071
+#line 1070
 
 /*
 ========================================================================
@@ -923,11 +904,11 @@ PURPOSE		: maps a page from expanded memory into Intel physical
 RETURNED 	: SUCCESS - page mapped successfully
 		  FAILURE - unable to map page
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 ========================================================================
 */
-GLOBAL int map_page IFN2(short, EM_page_no, 
+GLOBAL int map_page IFN2(short, EM_page_no,
 			 unsigned char, physical_page_no)
 
 {
@@ -952,7 +933,7 @@ GLOBAL int map_page IFN2(short, EM_page_no,
 				"phys page already mapped to page %#x",
 						EM_page_mapped[physical_page_no]);
 
-		if(EM_page_mapped[physical_page_no] == EM_page_no) 
+		if(EM_page_mapped[physical_page_no] == EM_page_no)
 		{
 			sure_note_trace0(LIM_VERBOSE,
 					"remap of same page, so do nothing");
@@ -961,19 +942,15 @@ GLOBAL int map_page IFN2(short, EM_page_no,
 		}
 
 #ifndef NTVDM
-#line 1120
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1148
 #endif
-#line 1149
+#line 1148
 
 	}
 #ifndef NTVDM
-#line 1151
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1188
 #endif
-#line 1189
+#line 1188
 	if(host_map_page(EM_page_no, segment) != SUCCESS)
 		return(FAILURE);
 
@@ -994,7 +971,7 @@ PURPOSE		: unmaps a page from Intel physical address space back to
 RETURNED 	: SUCCESS - page unmapped successfully
 		  FAILURE - error in unmapping page
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 ========================================================================
 */
@@ -1026,11 +1003,9 @@ GLOBAL int unmap_page IFN1(unsigned char, physical_page_no)
 	phys_page = physical_page_no;
 
 #ifndef NTVDM
-#line 1240
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 1246
 #endif
-#line 1247
+#line 1246
 
 	if(host_unmap_page(segment, EM_page_no) != SUCCESS)
 		return(FAILURE);
@@ -1096,13 +1071,13 @@ DESCRIPTION	: if handle_no is >= 0 the map is stored in the data area
 		  if handle_no == -1 the map is stored in the array pointed
 		  	to by dst_segment:dst_offset
 		  if handle_no == -2 only the pages specified by the segment
-		  	addresses in the src array (pointed to by 
+		  	addresses in the src array (pointed to by
 		  	src_segment:src_offset) are saved in the dst array
 		  	(pointed to by dst_segment:dst_offset).
 
 =========================================================================
 */
-GLOBAL int save_map IFN5(short, handle_no, 
+GLOBAL int save_map IFN5(short, handle_no,
 			 unsigned short, dst_segment,
 			 unsigned short, dst_offset,
 			 unsigned short, src_segment,
@@ -1134,10 +1109,9 @@ GLOBAL int save_map IFN5(short, handle_no,
 #ifdef NTVDM
 			write_intel_word(dst_segment, offset, LEAVE);
 #else
-#line 1349
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 1352
+#line 1351
 			offset += 2;
 		}
 		read_intel_word(src_segment, src_offset, (word *)&no_to_save);
@@ -1180,7 +1154,7 @@ RETURNED STATUS	: SUCCESS - Map read successfully
 
 DESCRIPTION	: A +ve handle number indicates that the map is stored
 		within the handle data area.
-		If the handle number is -ve the map will be read from the 
+		If the handle number is -ve the map will be read from the
 		data pointed to by segment:offset
 
 		Only page out - if there is a page currently mapped in and
@@ -1192,17 +1166,15 @@ DESCRIPTION	: A +ve handle number indicates that the map is stored
 =========================================================================
 */
 #ifdef ANSI
-GLOBAL int restore_map (short handle_no, 
-			unsigned short segment, 
-			unsigned short offset, 
-			short pages_out[], 
+GLOBAL int restore_map (short handle_no,
+			unsigned short segment,
+			unsigned short offset,
+			short pages_out[],
 			short pages_in[])
 #else
-#line 1411
 #error Excluded unsupported non-ANSI or LARGE_FRAME host profile
-#line 1418
 #endif	/* ANSI */
-#line 1419
+#line 1418
 {
 	short	i,		/* loop counter				*/
 		new_page,	/* page number read from map		*/
@@ -1219,10 +1191,9 @@ GLOBAL int restore_map (short handle_no,
 #ifdef NTVDM
 			if(new_page < LEAVE || new_page >= total_pages)
 #else
-#line 1434
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
-#line 1437
+#line 1436
 				return(FAILURE);
 		}
 		old_page = EM_page_mapped[i];
@@ -1230,15 +1201,14 @@ GLOBAL int restore_map (short handle_no,
 /*
 		if(old_page != EMPTY && new_page != EMPTY && old_page != new_page )
 */
-/* need to do unmap to empty state case to update the page copy in the LIM 
+/* need to do unmap to empty state case to update the page copy in the LIM
    space in case of new maps of that page to other LIM slots. */
 #ifdef NTVDM
 		if(old_page != EMPTY && old_page != new_page && new_page != LEAVE)
 #else
-#line 1448
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 1451
+#line 1450
 			pages_out[i] = old_page;
 		else
 			pages_out[i] = EMPTY;
@@ -1246,10 +1216,9 @@ GLOBAL int restore_map (short handle_no,
 #ifdef NTVDM
 		if(new_page != EMPTY && new_page != old_page && new_page != LEAVE)
 #else
-#line 1457
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 1460
+#line 1459
 			pages_in[i] = new_page;
 		else
 			pages_in[i] = EMPTY;
@@ -1283,13 +1252,13 @@ DESCRIPTION	: type - uses a bit pattern, bit 0 represents destination,
 
 =========================================================================
 */
-GLOBAL int copy_exchange_data IFN8(unsigned char, type, 
-				   short, src_handle, 
-				   unsigned short, src_seg_page, 
+GLOBAL int copy_exchange_data IFN8(unsigned char, type,
+				   short, src_handle,
+				   unsigned short, src_seg_page,
 				   unsigned short, src_offset,
-				   short, dst_handle, 
-				   unsigned short, dst_seg_page, 
-				   unsigned short, dst_offset, 
+				   short, dst_handle,
+				   unsigned short, dst_seg_page,
+				   unsigned short, dst_offset,
 				   unsigned long, length)
 
 {
@@ -1297,9 +1266,9 @@ GLOBAL int copy_exchange_data IFN8(unsigned char, type,
 			src_EMpage;	/* EM page no. of source	*/
 	int		page_no;	/* phys. page no. of mapped page*/
 
-	/* 
+	/*
 	 * First check to see if the expanded memory page is mapped
-	 * if it is - change the type to deal directly with the 
+	 * if it is - change the type to deal directly with the
 	 * physical page that it is mapped to
 	 */
 	if( type & 1)
@@ -1402,8 +1371,8 @@ GLOBAL int page_status IFN1(short, EMpage_no)
 /*
 ========================================================================
 
-FUNCTION	: phys_page_from_addr 
-		  
+FUNCTION	: phys_page_from_addr
+		
 PURPOSE		: determines the physical page number of a LIM page
 		  from its Intel address.
 		  		
@@ -1437,11 +1406,11 @@ FUNCTION	: get_total_pages
 		  get_page_seg
 		  get_map_size
 
-PURPOSE		: simply returns the reqested variables, to avoid 
+PURPOSE		: simply returns the reqested variables, to avoid
 		having to use globals
 
 
-RETURNED STATUS	: the following variables are returned , depending upon 
+RETURNED STATUS	: the following variables are returned , depending upon
 		the routine called:-
 			total_pages
 			unallocated_pages
@@ -1452,17 +1421,15 @@ RETURNED STATUS	: the following variables are returned , depending upon
 			physical_page[i]
 			map_size
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 ========================================================================
 */
 
 #ifdef SEGMENTATION
-#line 1667
 #error Excluded unsupported SEGMENTATION configuration
-#line 1675
 #endif
-#line 1676
+#line 1674
 
 GLOBAL short get_total_pages IFN0()
 {
@@ -1470,11 +1437,9 @@ GLOBAL short get_total_pages IFN0()
 }
 
 #ifdef SEGMENTATION
-#line 1681
 #error Excluded unsupported SEGMENTATION configuration
-#line 1689
 #endif
-#line 1690
+#line 1688
 
 GLOBAL short get_unallocated_pages IFN0()
 {
@@ -1486,10 +1451,9 @@ GLOBAL unsigned short get_base_address IFN0()
 #ifdef NTVDM
 	return(physical_page[0]);
 #else
-#line 1699
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 1703
+#line 1701
 }
 
 GLOBAL short get_total_handles IFN0()
@@ -1521,15 +1485,11 @@ GLOBAL short get_map_size IFN0()
 GLOBAL short get_segment_page_no(unsigned short segment)
 {
 #if defined(LARGE_FRAME) && !defined(MONITOR)
-#line 1732
 #error Excluded unsupported non-ANSI or LARGE_FRAME host profile
-#line 1739
 #else
-#line 1740
+#line 1738
 	return((segment - physical_page[0]) / EMM_PAGE_SIZE);
-#line 1741
 #endif
-#line 1742
 
 }
 GLOBAL	unsigned short get_no_altreg_sets(void)
@@ -1550,11 +1510,9 @@ GLOBAL boolean altreg_set_ok(unsigned short set)
 }
 
 #if defined (NTVDM) && defined(MONITOR) && !defined(PROD)
-#line 1760
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#line 1775
 #endif
-#line 1776
+#line 1774
 
 /* allocate a free alt mapping register set */
 
@@ -1660,14 +1618,12 @@ GLOBAL boolean activate_altreg_set(unsigned short set, short * page_in)
     return TRUE;
 }
 #endif	/* NTVDM */
-#line 1881
 
-#line 1882
+#if !defined(NTVDM) || defined(CCPU)
 #ifndef NTVDM
-#line 1881
 #error Excluded unsupported non-NTVDM LIM writeback profile
-#elif defined(CCPU)
-#line 1883
+#endif
+#line 1881
 
 /*
 ========================================================================
@@ -1676,7 +1632,7 @@ FUNCTION	: LIM_b_write,
 		  LIM_w_write,
 		  LIM_str_write
 		  patch_pages
-		  
+		
 PURPOSE		: LIM byte, word & string - called from write check
 		  failure code in the CPU when a write to a multi-mapped
 		  LIM page is detected.
@@ -1685,12 +1641,11 @@ PURPOSE		: LIM byte, word & string - called from write check
 		  		
 RETURNED STATUS	: None.
 
-DESCRIPTION	: 
+DESCRIPTION	:
 			
 ========================================================================
 */
 
-#line 1905
 LOCAL VOID
 patch_one_page_partial IFN4( sys_addr, intel_addr, sys_addr, eff_addr,
 			MM_LIM_op_type, type, ULONG, data )
@@ -1715,7 +1670,6 @@ patch_one_page_partial IFN4( sys_addr, intel_addr, sys_addr, eff_addr,
 			break;
 	}
 
-#line 1929
 	sas_overwrite_memory( eff_addr, check_len );
 }
 
@@ -1746,7 +1700,7 @@ patch_one_page_full IFN4( sys_addr, intel_addr, sys_addr, eff_addr,
 			check_len = data;
 			do
 			{
-				sas_store_no_check( eff_addr, 
+				sas_store_no_check( eff_addr,
 					sas_hw_at_no_check(
 							intel_addr ));
 				intel_addr++;
@@ -1761,7 +1715,7 @@ patch_one_page_full IFN4( sys_addr, intel_addr, sys_addr, eff_addr,
 
 LOCAL VOID
 patch_pages IFN6( MM_LIM_op_type, type, ULONG, offset,
-			SHORT, EM_page_no, SHORT, phys_page_no, 
+			SHORT, EM_page_no, SHORT, phys_page_no,
 			ULONG, data, sys_addr, intel_addr )
 
 {
@@ -1770,7 +1724,7 @@ patch_pages IFN6( MM_LIM_op_type, type, ULONG, offset,
 
 	for( cnt01 = 0; cnt01 < get_no_phys_pages(); cnt01++ )
 	{
-		if(( EM_page_mapped[cnt01] == EM_page_no ) && 
+		if(( EM_page_mapped[cnt01] == EM_page_no ) &&
 							( cnt01 != phys_page_no ))
 		{
 			eff_addr = effective_addr( get_page_seg(cnt01),
@@ -1780,7 +1734,7 @@ patch_pages IFN6( MM_LIM_op_type, type, ULONG, offset,
 
 			sure_note_trace1(LIM_VERBOSE,
 					"MM LIM write type %d", type );
-			sure_note_trace2(LIM_VERBOSE, 
+			sure_note_trace2(LIM_VERBOSE,
 					"log page 0x%x, phs page 0x%x",
 								EM_page_no, cnt01 );
 		}
@@ -1822,7 +1776,7 @@ GLOBAL VOID
 LIM_w_write IFN1( sys_addr, intel_addr )
 
 {
-	ULONG		limdata; 
+	ULONG		limdata;
 	SHORT		EM_page_no, phys_page_no;
 	word		offset;
 
@@ -1859,16 +1813,10 @@ LIM_str_write IFN2( sys_addr, intel_addr, ULONG, length )
 
 	sas_overwrite_memory( intel_addr, length );
 }
-#line 2072
 #endif	/* !NTVDM */
-#line 2073
 
-#line 2074
 #ifndef PROD
-#line 2073
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 2127
 #endif	/* !PROD	*/
-#line 2128
+#line 2126
 #endif 	/* LIM		*/
-#line 2127

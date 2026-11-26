@@ -608,3 +608,50 @@ for owner review. Next ordered file is base/dos/emm_mngr.c.
 P5 receipt: 810623ad1 is committed and pushed to origin/main. All 30 reviewed
 files are delivered, 11 remain; documentation governance and relative links
 passed. Post-test publication hashes are 26/26. S9/T485 remain active.
+
+## P6: emm_mngr.c
+
+Entry has 43 frozen points (00976--01018), not 43 current diff blocks. Initial
+projector said 99/371 by wrongly masking the original LIM writeback body while
+counting its selected CCPU copy as new. Corrected projection excludes the 23
+truly removed bodies; the additional non-NTVDM writeback diagnostic is retained
+as a profile guard, not a removed original body. Recomputed before=109/197.
+
+Restore all 42 whitespace/comment items and the exact XP LIM function body at
+its original location. Replace the artificial excluded-original/elif-copy
+framework by !defined(NTVDM)||defined(CCPU), preserving its non-NTVDM #error
+inside the selected scope. All 24 error directives are retained byte-for-byte.
+Original software patch_pages/LIM_b_write/LIM_w_write/LIM_str_write remain;
+SAS callers require this provider under CCPU. No copied host memory algorithm,
+new state or outward dependency is introduced. Final non-error=25/27,
+net -84 points/-170 lines. 1250 matching selected original lines have correct
+XP logical line numbers. The old line 1883 at the start of the restored body
+was two lines late; the body actually begins at original line 1881.
+
+Actual product compiler flags preprocess both versions successfully; all
+163154 C tokens match, including expanded values/string literals. The 42 format
+points are locally restored; 01018 is minimized and remains pending owner
+review. Cached full build, dual publication and actual guest EMS/return/NESticle
+verification remain pending. 31/41 files reviewed, 30 delivered, 10 unreviewed;
+195/437 register points reviewed, 242 unreviewed. Next ordered file after this
+whole-file delivery is base/inc/ica.h.
+
+### P6 final verification and corrected census
+
+Cached full build and dual publication passed for runtime6, all 26 image hashes
+matched. Final-package original guest INT67 Mapping passed switch, alias,
+unmap, move, exchange, window and free checks; CallReturn passed its stack/map
+marker. Both independent COM fixtures exited normally. Real DOS4GW/NESticle
+rendered its menu and passed Escape hide/restore. No original guest binary or
+winnt.zip changed; Full remains at S13. Evidence build/t485-s9/p6.
+
+The [refreshed census](s9-p6-census.csv) corrects the LIM projection in both
+fc9492342 and current views: 40 measured files 344/29954 ->413/6520; unchanged
+timer.c remains explicitly unmapped, so the full 41-file NET is +69 points and
+-23434 lines without claiming an absolute count for timer.c. This supersedes
+P5's absolute subset census; historical snapshots are not silently rewritten.
+P6 itself is 109/197 ->25/27 (-84/-170). 31/41 source-reviewed and verified,
+10 unreviewed; 195/437 frozen points reviewed, 242 unreviewed. This batch's
+42 format points are restored-final-verified, adding to six earlier S9
+restorations; 01018 remains a qualified residual owner decision. Commit/push
+pending. Next ordered file is base/inc/ica.h.

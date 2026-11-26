@@ -32,16 +32,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S9 Ordered Progress
 
-[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 30/41 source-reviewed
-and delivered through P5 810623ad1 (pushed), 11 unreviewed. P5 six-file non-error
-diff 27/1795 ->15/55 (-12 points/-1740 lines). Unified fc9492342 baseline net:
-+153 points/-23264 lines across S9; 40-file absolute census is 487/6864,
-with unchanged timer.c explicitly unmeasured pending exclusion-map review.
-152/437 frozen register points reviewed; 285 remain. Functional residuals
-remain pending owner review. Runtime5 cached build, dual publication,
-FIST64/stack/completion/abort and real MEM/NTVDMD/NESticle verification passed.
-Next file base/dos/emm_mngr.c. softpc.h full review stays S12. Migration remains
-39/159; Full stays S13.
+[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 31/41 source-reviewed
+and final-verified, 10 unreviewed; P6 commit/push pending. P6 emm_mngr.c corrected
+non-error count 109/197 ->25/27 (-84/-170). Unified baseline fc9492342:
+40 measured files 344/29954 ->413/6520; unchanged timer.c is explicitly unmapped.
+Full S9 net +69 points/-23434 lines; absolute full census awaits timer review.
+195/437 register points reviewed, 242 remain. P6 restores 42 points; S9 restored
+and verified total is 48. The minimized CCPU guard stays pending owner review.
+Runtime6 cached build, dual publication and original guest INT67 Mapping,
+CallReturn plus real NESticle verification passed. Next file base/inc/ica.h.
+Migration remains 39/159; Full stays S13.
 
 ## S8 Closure Record
 
