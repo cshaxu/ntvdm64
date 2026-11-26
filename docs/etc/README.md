@@ -2052,3 +2052,5 @@ post-publication targeted checks.
 [S9 core repair progress](evidence/t485-h-repair/s9-progress.md) records original-source recovery and ABI evidence.
 
 [S9 final headers and XMS](evidence/t485-h-repair/s9-p11-final-headers-xms.md) records P11 source evidence, metrics and final-package checks.
+
+[S10 ordered input/video repair](evidence/t485-h-repair/s10-progress.md) tracks the next admitted whole-file review.

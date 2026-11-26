@@ -849,3 +849,16 @@ partition: 253 restored plus 184 evidence-backed pending residuals, zero missing
 The [final census](s9-p11-census.csv) is 640/1457 versus baseline 684/32045:
 44 fewer points and 30588 fewer diff lines. P11 commit/push pending; S9 closure
 follows the delivery receipt. No Full claim; S13 retains that gate.
+
+## S9 closure
+
+P11 product delivery e9bc7d0b3 is committed and pushed to origin/main. All 41
+assigned files and 437 frozen points are audited and final-verified through
+P1-P11. Fully restored frozen points: 253. Evidence-backed residual points:
+184, retained in pending decisions for owner review, not counted as restored
+or implicitly approved. Unreviewed files/points: 0/0. No unassigned blocker.
+Final non-error census: 640 points/1457 lines versus 684/32045 at fc9492342;
+net reduction 44 points/30588 lines. Newline and EOF differences are included.
+P11 cached build, dual publication and targeted final-package gates passed;
+Full remains S13. S9 closes and S10 is admitted by the existing repair plan.
+Migration stays 39/159; N004 is still gated on S13.

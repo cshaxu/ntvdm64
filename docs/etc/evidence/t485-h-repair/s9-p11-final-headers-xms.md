@@ -94,3 +94,5 @@ apart from line directives/format. All 41 census hashes match current sources.
 Build/publish runner PID 12432; targeted runner PID 10224, both completed;
 all declared PASS artifacts inspected. Source review and targeted verification
 are complete; commit/push pending. Full is not claimed and remains S13.
+
+Delivery receipt: e9bc7d0b3 committed and pushed to origin/main; documentation governance and relative links passed after indexing this record.
