@@ -29,7 +29,6 @@
 #line 28
 #include <vdmdbg.h>
 #undef _X86_
-#line 30
 #include <wingdip.h>     // GACF_ app compat flags
 #include <shlobj.h>      // CSIDL_COMMON_STARTMENU etc
 #include <userenv.h>     // GetAllUsersProfilesDirectory and etc
@@ -898,6 +897,7 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
 
         WOW32ASSERTMSG(FALSE, "\nWOW32: WK32WOWInitTask ERROR - Main Thread Returning - Contact DaveHart\n");
         W32ExitWowProcess(EXIT_FAILURE);
+#line 926
     }
 
     //
@@ -1142,7 +1142,6 @@ ULONG FASTCALL WK32OldYield(PVDMFRAME pFrame)
 --*/
 
 LRESULT CALLBACK WowOriginalForegroundIdleHook(int code, WPARAM wParam, LPARAM lParam)
-#line 1170
 {
     PARM16  Parm16;
 
@@ -1192,6 +1191,7 @@ ULONG FASTCALL WK32WowSetIdleHook(PVDMFRAME pFrame)
         // Get accurate timing results with a LocalHook.
 
         ptd->hIdleHook = wow_user_idle_hook_for_current();
+#line 1222
 
         WOW32ASSERTMSG(ptd->hIdleHook, "\nWK32WowSetIdleHook : ERROR failed to Set Idle Hook Proc\n\n");
     }
@@ -1610,7 +1610,6 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #line 1626
 #error Unsupported excluded original configuration
 #else
-#line 1660
 #line 1628
     SETVDMSTACK(vpInitialSSSP);
 #endif
@@ -1772,7 +1771,6 @@ DWORD W32RemoteThread(VOID)
         NULL
         );
     if ( !NT_SUCCESS(Status) ) {
-#line 1787
 #if DBG
 #line 1788
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
@@ -1799,7 +1797,6 @@ DWORD W32RemoteThread(VOID)
                 &ThreadInfo.ClientId );
 
     if ( !NT_SUCCESS(Status) ) {
-#line 1811
 #if DBG
 #line 1812
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
@@ -1809,11 +1806,10 @@ DWORD W32RemoteThread(VOID)
         return( 0 );
     }
 
-    cpu_createthread( hThread );
+    cpu_createthread( hThread, NULL );
 
     Status = NtClose( hThread );
     if ( !NT_SUCCESS(Status) ) {
-#line 1822
 #if DBG
 #line 1823
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
@@ -1935,7 +1931,6 @@ DWORD W32RemoteThread(VOID)
 #endif
 #line 1935
 
-#line 1936
     W32DestroyTask(&td);
     host_ExitThread(EXIT_SUCCESS);
     return 0;
@@ -1961,7 +1956,6 @@ extern VOID __cdecl demLFNCleanup(VOID);
  *
  */
 VOID WowOriginalFreeTask( PTD ptd )
-#line 1961
 {
     PWOAINST pWOA, pWOANext;
 
@@ -2223,9 +2217,9 @@ VOID W32DestroyTask( PTD ptd)
         (pfnOut.pfnWOWCleanup)(HINSTRES32(ptd->hInst16), (DWORD) ptd->htask16, NULL, 0);
     }
 
+
     // Remove this task from the linked list of tasks
 
-#line 2233
     WK32DeleteTask(ptd);
 
     // Close This Apps Thread Handle
@@ -2347,7 +2341,6 @@ ULONG FASTCALL WK32RegisterShellWindowHandle(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(WOWREGISTERSHELLWINDOWHANDLE16), parg16);
 
 // gwFirstCmdShow is no longer used, and is available.
-#line 2354
 #if 0
 #line 2355
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
@@ -4098,7 +4091,6 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                     );
 
             if (nMsgBoxChoice == IDCANCEL) {
-#line 4116
                  ExitThread(ERROR_CANCELLED);
             }
         }
@@ -4166,7 +4158,6 @@ DWORD W32HungAppNotifyThread(UINT htaskKill)
                  EnterCriticalSection(&gcsHungApp);
                  *pNtVDMState &= ~VDM_WOWHUNGAPP;
                  LeaveCriticalSection(&gcsHungApp);
-#line 4183
                  ExitThread(ERROR_CANCELLED);
             }
 
@@ -5428,7 +5419,7 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
         ));
 
     // Sometimes we get this with no harm done (app bug)
- 
+
     W32ExitWowProcess(parg16->f1);
 #line 5445
 

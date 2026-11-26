@@ -218,9 +218,11 @@ host_CreateThread(
     LPDWORD lpThreadId
     );
 
+typedef struct _Vdm_Tib *PVDM_TIB;
 VOID
 __cdecl cpu_createthread(
-    HANDLE  hThread
+    HANDLE   hThread,
+    PVDM_TIB VdmTib
     );
 
 VOID

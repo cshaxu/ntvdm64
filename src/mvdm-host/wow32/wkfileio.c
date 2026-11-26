@@ -14,7 +14,6 @@
 --*/
 
 #include "precomp.h"
-#line 17
 #pragma hdrstop
 #include "dossvc.h"
 #include "demexp.h"
@@ -36,7 +35,6 @@ HMAPPEDFILEALIAS aMappedFileCache[MAX_MAPPED_FILES] = {0}; // File Handle To Map
 DWORD dwTotalCacheBytes = 0;
 DWORD dwTotalCacheAccess = 0;
 
-#line 38
 #ifdef DEBUG
 #line 39
 #error Excluded unsupported DEBUG WOW profile
@@ -590,7 +588,6 @@ ULONG FASTCALL WK32WOWFileRead (PVDMFRAME pFrame)
 
         FLUSHVDMCODEPTR(parg16->lpBuf, (WORD)dwBytesRead, pDst);
 
-#line 590
 #ifdef DEBUG
 #line 591
 #error Excluded unsupported DEBUG WOW profile
@@ -900,7 +897,6 @@ PHMAPPEDFILEALIAS pCache;
 register PWOWFILELSEEK16 parg16;
 PDOSSFT         pSFT;
 
-#line 896
 #if (FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)
 #line 897
 #error Unsupported excluded original configuration
@@ -2095,7 +2091,6 @@ ULONG FASTCALL WK32WOWFileSetAttributes(PVDMFRAME pFrame)
 {
     PWOWFILESETATTRIBUTES16 parg16;
     PSTR                    pszPath, lpFileName;
-#line 2090
     ULONG                   attributes, l, dwReturn;
     BOOL                    ItsANamedPipe = FALSE;
 

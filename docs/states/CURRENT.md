@@ -32,15 +32,19 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S11 Ordered Progress
 
-[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):12/48 files,
-92/452 points final-verified:10 restored,82 residuals pending owner decision,
-360 unreviewed. P7 wdde.c26/161 ->25/159; reviewed census166/4381 ->119/405,
-net-47/-3976. Runtime9 cached build,dual publication26hashes,DDE96/38/4/4 and
-Full23/23 PASS. Win95 retains approved knownExitOne; both enhanced desktop
-roundtrips preserve same-window/input. P7 delivered/pushed f97262387.
-Delivered12files/92points; cumulative reduction47points/3976lines.
-Full checkpoint covers files1..12; next is file20 and every S closure.
-Next after P7 delivery:wdde.h. Migration39/159; S11 remains active.
+[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
+[P8 receipt](../etc/evidence/t485-h-repair/s11-p8-result.json):20/48 files,
+145/452 frozen points final-verified:12restored,133residual pending owner,
+307unreviewed;one supplemental ABI decision. Current48-file census810points/
+7472lines. Reviewed primary census310/5119 ->246/826;reduction64/4293,
+combined with coupled header64/4291. Runtime11 cached full build,dual26hash
+publication,targeted tests and Full23/23 PASS. Win95 knownExitOne retained;
+both enhanced roundtrips pass five input/display/same-window markers.
+P8 commit/push pending;delivered remains12files/92points until push.
+Full checkpoint file20 verified;next file30 and every S closure. Earlier
+P1-P7 linear-only line evidence must be rechecked with actual preprocessing
+before S11 closure. Migration39/159;S11 active. Next:wkman.h after P8 delivery.
+
 ## S10 Closure Record
 
 [S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):30/30 files and

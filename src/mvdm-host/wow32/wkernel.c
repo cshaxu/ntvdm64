@@ -345,7 +345,6 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     //                                (offset of returnbuffer);
     //                                                           - nanduri
 
-#line 336
     if (!(cchMax = INT32(parg16->f5))) {
         if (pszKey == (PSZ)NULL) {
             if (pszReturnBuffer != (PSZ)NULL) {
@@ -531,7 +530,6 @@ FlushAndReturn:
         LOGDEBUG(8,("GetPrivateProfileString returns '%s'\n", pszReturnBuffer));
     }
 
-#line 521
 #ifdef DEBUG
 #line 522
 #error Excluded unsupported DEBUG WOW profile
@@ -629,7 +627,6 @@ ULONG FASTCALL WK32GetPrivateProfileInt(PVDMFRAME pFrame)
     GETPSZPTR(parg16->f2, psz2);
     GETPSZPTR(parg16->f4, psz4);
 
-#line 655
     UpdateDosCurrentDirectory(DIR_DOS_TO_NT);
     
     ul = GETWORD16(GetPrivateProfileInt(

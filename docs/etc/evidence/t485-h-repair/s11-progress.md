@@ -24,14 +24,14 @@ frozen point counts as current byte-sensitive diff counts.
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | P5 delivered 1587bccad |
 | 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | P6 delivered 94a576739 |
 | 12 | src/mvdm-host/wow32/wdde.c | 25 | P7 delivered f97262387 |
-| 13 | src/mvdm-host/wow32/wdde.h | 4 | Pending |
-| 14 | src/mvdm-host/wow32/wdib.c | 1 | Pending |
-| 15 | src/mvdm-host/wow32/wdos.c | 6 | Pending |
-| 16 | src/mvdm-host/wow32/wgdi31.c | 1 | Pending |
-| 17 | src/mvdm-host/wow32/winsockp.h | 3 | Pending |
-| 18 | src/mvdm-host/wow32/wkernel.c | 10 | Pending |
-| 19 | src/mvdm-host/wow32/wkfileio.c | 6 | Pending |
-| 20 | src/mvdm-host/wow32/wkman.c | 22 | Pending |
+| 13 | src/mvdm-host/wow32/wdde.h | 4 | P8 final-verified; commit/push pending |
+| 14 | src/mvdm-host/wow32/wdib.c | 1 | P8 final-verified; commit/push pending |
+| 15 | src/mvdm-host/wow32/wdos.c | 6 | P8 final-verified; commit/push pending |
+| 16 | src/mvdm-host/wow32/wgdi31.c | 1 | P8 final-verified; commit/push pending |
+| 17 | src/mvdm-host/wow32/winsockp.h | 3 | P8 final-verified; commit/push pending |
+| 18 | src/mvdm-host/wow32/wkernel.c | 10 | P8 final-verified; commit/push pending |
+| 19 | src/mvdm-host/wow32/wkfileio.c | 6 | P8 final-verified; commit/push pending |
+| 20 | src/mvdm-host/wow32/wkman.c | 22 | P8 final-verified; commit/push pending |
 | 21 | src/mvdm-host/wow32/wkman.h | 1 | Pending |
 | 22 | src/mvdm-host/wow32/wmdisp32.c | 79 | Pending |
 | 23 | src/mvdm-host/wow32/wmdisp32.h | 2 | Pending |
@@ -499,3 +499,93 @@ Full checkpoint covers files1..12; next count checkpoint is file20, plus S closu
 
 P7 delivered and pushed as f97262387. Worktree clean after delivery.
 Next:wdde.h;12files/92points delivered,47/3976 cumulative reduction.
+
+### P8 accumulating line-only batch
+
+File13 wdde.h:4/27 ->4/26, remove redundant #line95,78 original mapped
+lines without mismatch,no exclusions. Four frozen points04165..04168 remain
+pending owner: bounded per-call conversion acquisitions,COPYDATA header identity,
+initiator acquisition result,and actual conversion/rollback/mark declarations.
+Complete providers and their failed-acquisition evidence were reviewed in P7;
+this header changes no ABI or behavior and does not move types to another owner.
+
+File14 wdib.c:5/6 ->1/2, remove four redundant line anchors,579 original
+mapped lines without mismatch,two #error bodies unchanged. Point04169 retains
+DeleteObject for HBITMAP produced by CreateDIBSection; the failure path deletes
+the DC first and normal same-file retirement uses the same GDI destructor.
+CloseHandle cannot substitute for that object release.
+
+Source-reviewed14/48files,97/452points:10restored,87residual,355unreviewed.
+Census175/4414 ->124/433, reduction51points/3981lines. P8 local line-only batch
+is not built/published yet; delivered remains12files/92points,47/3976 reduction
+through P7 f97262387. Next wdos.c. No next Full required before file20 or S closure.
+
+P8 source review continues in order (all local changes remain line/format-only):
+
+| File | Before points/lines | After points/lines | Original mapped lines | Exclusions |
+| --- | ---: | ---: | ---: | ---: |
+| wdos.c | 10/16 | 7/13 | 561 | 1 |
+| wgdi31.c | 4/8 | 2/6 | 665 | 1 |
+| winsockp.h | 1/410 | 3/20 | 147 | 0 |
+| wkernel.c | 17/39 | 13/35 | 429 | 1 |
+| wkfileio.c | 17/29 | 9/21 | 1481 | 3 |
+
+All original-line checks have zero mismatch. winsockp restores original LF;
+its +2point/-390line change is covered by owner formatting approval.
+WOW /Gz and DEM cdecl callbacks/imports are evidenced by doswow.h,wkman/demlfn
+registration,actual Ninja flags and linked _dem symbols.
+Kerning copies returned entries rather than requested capacity; existing native
+font test asks count+3 and checks untouched tail. Winsock owner serial and four
+state bits support same-alias ownership and cancel/completion interleavings in
+the original context/list; existing rundown tests cover these conditions.
+Package profile selector keeps explicit filenames unchanged and uses one owned
+SYSTEM.INI shadow; system_root resolves package directory,not host Windows.
+Two old rationales corrected: module filename is NOT MULTI_SZ; its real defect
+is strlen on uninitialized/unterminated native failure output and invalid
+capacity mapping. Cache node is NOT freed by FreeMapFileCache; its lookup moves
+the node to list head,so next must be saved before that link rewrite. Original
+loop also omits tail. No functional code changed based on these corrections.
+
+Source-reviewed19/48files,123/452points:10restored,113residual,329unreviewed.
+Census224/4916 ->158/528, reduction66points/4388lines. Delivered remains
+12files/92points,47/3976 reduction. P8 seven local files await batch validation.
+Next wkman.c is file20; complete its whole audit before next big-five checkpoint.
+
+
+P8 file20 wkman.c:86/203 ->39/134, reduction47/69;23 exclusions unchanged,3437 mapped original lines exact. Original two-argument cpu_createthread restored with coupled softpc.h declaration; selected worker map resolves stubs.obj, whose original body already takes both arguments. Frozen04206 and04211 restored locally;20 residuals have provider/caller evidence recorded in points/pending. Two inherited line drifts after process-exit and idle-hook substitution corrected. Full checkpoint now due; no file21 before delivery. Source-reviewed20/48files,145/452points:12restored,133residual,307unreviewed. Main census310/5119 ->197/662, reduction113/4457. Coupled softpc.h raw newline-sensitive census1/1630 ->1/1631 (one restored original parameter line, not new behavior); combined reduction113/4456. Build/publication/Full/commit/push still pending.
+
+P8 build R1 failed before publication: restored PVDM_TIB parameter is not visible in WOW software-CPU header selection (C2146/C2081). R2 adds only a pointer typedef for the original _Vdm_Tib tag, without importing its layout. Supplemental pending S11-P8-ABI-01 records this compile evidence, outside452 frozen points. Coupled header final raw census1/1630 ->1/1632; normalized37/136 ->38/134. Combined raw reduction113points/4455lines. R2 cached full build/publication is running; not yet a pass.
+
+
+### P8 conditional-line verification correction
+
+The earlier linear #line counter incorrectly treated directives inside skipped
+branches as effective. It was insufficient evidence: real MSVC /E found501
+unique-statement mismatches in the first wkman candidate (including actual
+line187 for original return line226). That claimed minimization is withdrawn.
+Restore conditional-region and join anchors, retain unconditional reductions,
+original CPU parameter restoration and the two inherited line corrections.
+Actual per-file product MSVC flags now check wdib153,wdos113,wgdi3183,
+wkernel30,wkfileio292,wkman736 unique original statements. No actual mismatch:
+the one remaining textual collision is CHMODCACHE expanding to4 at original
+line4942, colliding with a different literal loop at2311. No guest modified.
+
+Final proposed metrics (points/lines):wdde.h4/26;wdib.c5/6;wdos.c8/14;
+wgdi31.c3/7;winsockp.h3/20;wkernel.c14/36;wkfileio.c12/24;wkman.c78/188.
+Main cumulative310/5119 ->246/826, reduction64/4293; coupled softpc.h raw
++2lines makes combined reduction64/4291. Frozen counts unchanged:
+20/48 files,145/452 reviewed,12 restored,133 residual,307 unreviewed;
+supplemental ABI-01 remains separately pending. Not final delivered yet.
+Prior P1-P7 linear-only line evidence must be rechecked using selected compiler
+preprocessing before S11 closure; their historical runtime passes remain facts.
+The runtime10 run is pre-correction evidence only. Rebuild and publish the
+corrected final package, then Full before P8 commit/push.
+
+Pre-correction runtime10 Full completed23/23 (historical only). Final branch-safe runtime11 build/publication started in p8/final. Actual product-flag include probe for04199 fails C1083 opening ntseapi.h, exit2; no security API consumer in wkman. This supplies direct compilation evidence for the existing omission. No additional production code introduced.
+
+Final runtime11 cached full build and dual publication26/26 hashes PASS. Final verification PID20732 is owned by p8/final/verify.ps1; run identity in verify-run.json. Full and targeted results pending; no P8 commit/push or file21 yet.
+
+
+### P8 final package verification
+
+Runtime11 cached full build,dual publication26/26 hashes,targeted file/conversion and task-close tests,Full23/23 PASS. Full elapsed574294ms. Both enhanced desktop roundtrips retain all five input/display/same-window markers. Win95 uses approved knownExitOne boundary. See [P8 receipt](s11-p8-result.json).20/48 files and145/452 frozen points final-verified:12restored,133owner-review residuals,307unreviewed;one supplemental ABI decision. Main cumulative reduction64points/4293lines,combined with coupled header64/4291. All48 S11 files currently810non-error points/7472lines. Commit/push pending. Next checkpoint file30 and S closure. Earlier P1-P7 line-only proof still requires compiler-sensitive recheck before S closure.

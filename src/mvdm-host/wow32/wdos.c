@@ -14,7 +14,6 @@ MODNAME(wdos.c);
 
 #include "demexp.h"
 
-#line 17
 extern DOSWOWDATA DosWowData;
 extern PWORD16 pCurTDB, pCurDirOwner;
 
@@ -1139,7 +1138,6 @@ ULONG FASTCALL WK32GetCurrentDate(PVDMFRAME pFrame)
 }
 
 
-#line 1141
 #if 0
 #line 1142
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.

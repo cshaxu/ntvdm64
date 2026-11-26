@@ -106,7 +106,6 @@ typedef struct {
 
 
 BOOL    WI32DDEAddInitiator (HAND16 Initiator);
-#line 95
 VOID    WI32DDEDeleteInitiator(HAND16 Initiator);
 BOOL    WI32DDEInitiate(HAND16 Initiator);
 BOOL    DDEDeletehandle(HAND16 h16, HANDLE h32);
