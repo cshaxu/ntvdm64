@@ -37,7 +37,7 @@ Full remains S13; original guest remains immutable.
 | 24 | softpc.new/base/video/vga_prts.c | 24 | Delivered b42c5c586 |
 | 25 | softpc.new/host/src/nt_cga.c | 10 | Delivered b42c5c586 |
 | 26 | softpc.new/host/src/nt_event.c | 50 | Delivered P10 d5e12bf22 |
-| 27 | softpc.new/host/src/nt_graph.c | 91 | Not started |
+| 27 | softpc.new/host/src/nt_graph.c | 91 | Source reviewed; P11 pending |
 | 28 | softpc.new/host/src/nt_hosts.c | 1 | Not started |
 | 29 | softpc.new/host/src/nt_mouse.c | 23 | Not started |
 | 30 | softpc.new/host/src/nt_vga.c | 4 | Not started |
@@ -613,3 +613,45 @@ Documentation governance and relative links PASS. Commit/push pending; Full S13.
 P10 receipt: d5e12bf22 pushed to origin/main.26/30 reviewed and delivered;
 941/1060 points reviewed,119 remain.662 restored/delivered,279 residuals,
 zero local restorations pending. Census1592/12525 unchanged. Next nt_graph.c.
+
+## Graph review in progress
+
+File27 nt_graph.c: frozen91 points (74 format,17 semantic). Format restored
+locally; two original logical-line anchors corrected.59 exclusions preserved;
+1642 original matched lines have correct logical positions. Project-added
+provider tail kept unchanged, not aligned against coincidental original braces.
+Non-error1/4944 ->182/339 (+181/-4605); no behavior change. Semantic
+review continues, so this file is not counted reviewed or delivered and no
+build is started. Local census1773/7920 vs201/102845 (+1572/-94925).
+Original load_font has a private eight-bank table, not a reusable copy API;
+retained copied presentation contract and actual provider review remain open.
+
+## Graph source review
+
+All91 points reviewed:74 format restorations,17 evidence-backed residuals.
+Actual console_text consumes copied original EGA font/cursor/geometry and
+resolved colours; original GDI palette may be absent after graphics retirement.
+Original load_font has private bank offsets and writes guest state, not a read
+accessor; retain bounded copied read using original selectors/planes. No ROM
+font substitution, extra accessor or second renderer is introduced.
+Original dirty count is consumed before publication; one pending notification
+coalesces completed text updates. Blocked tick avoids retired frontend ownership;
+stream configuration carries font/palette without changing guest stream mode.
+Graphics begin/end bracket existing update_depth and original Video7 overlay,
+preventing capture of partial painting or restoration of stale cursor background.
+Original gvi sequential-chain scanout and packed painter establish width/stride
+contract independently of adapted vga_mode. Original V7 C1 allows eight-bit DAC;
+original unconditional BYTE(value*4) maps64 to0, requiring both loop corrections.
+Software fullscreen has no physical framebuffer; original graphicsResize body
+must remain active. Historical r1122-r1145 controls are supporting evidence,
+not a fresh XP guest result. Existing original cursor/clear restorations remain.
+No additional semantic edits.59 excluded bodies retained;1642 original mapped
+lines correct.1/4944 ->182/339.27/30 files and1032/1060 points reviewed;28 remain.
+662 restored/delivered,74 local restorations,296 residuals. Local census1773/7920.
+P11 build/publication and actual copied-font/route,blocked tick,packed painter,
+MEM/NTVDMD and NESticle verification pending. Full stays S13.
+
+P11 final package runtime11: cached full build and dual publication PASS,
+26/26 hashes independently checked. Actual copied-font/cursor/route fixture,
+blocked tick/flush, packed painter640x480, real MEM/NTVDMD and NESticle menu
+and Escape roundtrip PASS. No Full claim. Commit/push pending.
