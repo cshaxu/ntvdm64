@@ -33,9 +33,9 @@ Full remains S13; original guest remains immutable.
 | 20 | softpc.new/base/video/gfx_updt.c | 94 | Delivered 53870c905 |
 | 21 | softpc.new/base/video/v7_ports.c | 17 | Delivered 53870c905 |
 | 22 | softpc.new/base/video/v7_video.c | 2 | Delivered 53870c905 |
-| 23 | softpc.new/base/video/vga_mode.c | 9 | Source reviewed; P9 pending |
-| 24 | softpc.new/base/video/vga_prts.c | 24 | Source reviewed; P9 pending |
-| 25 | softpc.new/host/src/nt_cga.c | 10 | Source reviewed; P9 pending |
+| 23 | softpc.new/base/video/vga_mode.c | 9 | Delivered b42c5c586 |
+| 24 | softpc.new/base/video/vga_prts.c | 24 | Delivered b42c5c586 |
+| 25 | softpc.new/host/src/nt_cga.c | 10 | Delivered b42c5c586 |
 | 26 | softpc.new/host/src/nt_event.c | 50 | Not started |
 | 27 | softpc.new/host/src/nt_graph.c | 91 | Not started |
 | 28 | softpc.new/host/src/nt_hosts.c | 1 | Not started |
@@ -567,3 +567,7 @@ P9 final verification: cached build,dual publication and26hash checks passed.
 Test PID3892 passed actual C-VID fixture,MEM/NTVDMD lifecycle and NESticle
 rendered menu/Escape. Final source hashes in build/t485-s10/p9/final-source.json.
 25 files final-verified;33 local restorations await commit/push. Full stays S13.
+
+P9 receipt:b42c5c586 pushed to origin/main.25/30 reviewed/delivered;891/1060
+points reviewed,169 remain.647 restored/delivered,244 residuals,zero local
+restorations pending. Census1481/16356 unchanged. Next nt_event.c.
