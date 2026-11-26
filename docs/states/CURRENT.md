@@ -30,6 +30,17 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Original Owner Request | Execute the new T485 S repair sequence before resuming N004-G097, without excessive repeated verification. |
 | Similar-Issue Sweep | All exclusion masks, effective guards and selected bodies of each owned file; retain runtime ownership and failure semantics. |
 
+## S7 P10 Checkpoint
+
+[Sound CLI restoration](../etc/evidence/t485-h-repair/s7-p10-sound-cli.md):
+nt_sb.c is byte-exact XP (4 points/4 lines removed); required original vdm.h
+request declarations reduce XP-relative differences by 3 points/45 lines.
+Runtime13 cached build, dual 13-image publication, CLI ABI, real WOW, Win3.1
+enhanced normal exit/strict fullscreen roundtrip and DOS4GW passed. S7 is
+15/20 primary files; five remain, next nt_sbfm.c. Cumulative reduction including
+the required header is 859 points/7637 lines. N016 is not declared migrated;
+39/159 migration progress is unchanged. Commit/push completes P10 only.
+
 ## S7 P9 Checkpoint
 
 [S7 P1-P9](../etc/evidence/t485-h-repair/s7-progress.md): fourteen files final-verified; six remain, next softpc.new/host/src/nt_sb.c. P9 cleans copy_fnc.c exclusions/lines and restores nt_fulsc.c formatting/regional structure. Batch reduction is 92 points/738 lines; cumulative S7 reduction is 852 points/7588 lines. Runtime12 cached build, dual 13-image publication, actual WOW, three desktop gates with enhanced fullscreen roundtrips, and DOS4GW passed. Win95 retains its approved exit-one boundary. Residuals are registered; commit/push completes P9. S7 remains active.

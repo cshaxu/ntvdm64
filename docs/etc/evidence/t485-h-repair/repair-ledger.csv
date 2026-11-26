@@ -1005,3 +1005,7 @@
 "HXP-R-03625","src/mvdm-host/softpc.new/host/src/nt_fulsc.c","whole-file-final-verified-residuals-reconciled","S7-P9","owner-review","s7-p9-mirror-diff.json; s7-progress.md"
 "HXP-R-03626","src/mvdm-host/softpc.new/host/src/nt_fulsc.c","whole-file-final-verified-residuals-reconciled","S7-P9","owner-review","s7-p9-mirror-diff.json; s7-progress.md"
 "HXP-R-03627","src/mvdm-host/softpc.new/host/src/nt_fulsc.c","whole-file-final-verified-residuals-reconciled","S7-P9","owner-review","s7-p9-mirror-diff.json; s7-progress.md"
+"HXP-R-03954","src/mvdm-host/softpc.new/host/src/nt_sb.c","restored-final-verified","S7-P10","none","s7-p10-sound-cli.md"
+"HXP-R-03955","src/mvdm-host/softpc.new/host/src/nt_sb.c","restored-final-verified","S7-P10","none","s7-p10-sound-cli.md"
+"HXP-R-03956","src/mvdm-host/softpc.new/host/src/nt_sb.c","restored-final-verified","S7-P10","none","s7-p10-sound-cli.md"
+"HXP-R-03957","src/mvdm-host/softpc.new/host/src/nt_sb.c","restored-final-verified","S7-P10","none","s7-p10-sound-cli.md"

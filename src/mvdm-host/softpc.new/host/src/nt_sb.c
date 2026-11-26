@@ -298,12 +298,10 @@ Return Value:
 --*/
 
 {
-#ifndef CCPU
     VDM_PM_CLI_DATA cliData;
 
     cliData.Control = PM_CLI_CONTROL_ENABLE;
     NtVdmControl(VdmPMCliControl, &cliData);
-#endif
 
     if (!PrepareWaveInitialization()) {
         return FALSE;
@@ -352,12 +350,10 @@ Return Value:
 --*/
 
 {
-#ifndef CCPU
     VDM_PM_CLI_DATA cliData;
 
     cliData.Control = PM_CLI_CONTROL_DISABLE;
     NtVdmControl(VdmPMCliControl, &cliData);
-#endif
 
     if (bDevicesActive) {
         DetachMidi();

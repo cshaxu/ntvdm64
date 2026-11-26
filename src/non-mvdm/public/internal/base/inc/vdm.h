@@ -320,6 +320,60 @@ typedef struct _VDMSET_INT21_HANDLER_DATA {
         BOOLEAN     Gate32;
 }VDMSET_INT21_HANDLER_DATA, *PVDMSET_INT21_HANDLER_DATA;
 
+typedef struct _VDMSET_LDT_ENTRIES_DATA {
+        ULONG Selector0;
+        ULONG Entry0Low;
+        ULONG Entry0Hi;
+        ULONG Selector1;
+        ULONG Entry1Low;
+        ULONG Entry1Hi;
+}VDMSET_LDT_ENTRIES_DATA, *PVDMSET_LDT_ENTRIES_DATA;
+
+typedef struct _VDMSET_PROCESS_LDT_INFO_DATA {
+        PVOID LdtInformation;
+        ULONG LdtInformationLength;
+}VDMSET_PROCESS_LDT_INFO_DATA, *PVDMSET_PROCESS_LDT_INFO_DATA;
+
+//
+// Define the action code of VDM_ADLIB_DATA
+//
+
+#define ADLIB_USER_EMULATION     0      // default action
+#define ADLIB_DIRECT_IO          1
+#define ADLIB_KERNEL_EMULATION   2
+
+typedef struct _VDM_ADLIB_DATA {
+        USHORT VirtualPortStart;
+        USHORT VirtualPortEnd;
+        USHORT PhysicalPortStart;
+        USHORT PhysicalPortEnd;
+        USHORT Action;
+}VDM_ADLIB_DATA, *PVDM_ADLIB_DATA;
+
+//
+// Definitions for Protected Mode DOS apps cli control
+//
+
+#define PM_CLI_CONTROL_DISABLE  0
+#define PM_CLI_CONTROL_ENABLE   1
+#define PM_CLI_CONTROL_CHECK    2
+#define PM_CLI_CONTROL_SET      3
+#define PM_CLI_CONTROL_CLEAR    4
+
+typedef struct _VDM_PM_CLI_DATA {
+        ULONG Control;
+}VDM_PM_CLI_DATA, *PVDM_PM_CLI_DATA;
+
+//
+// Definitions for VdmInitialize
+//
+
+typedef struct _VDM_INITIALIZE_DATA {
+        PVOID           TrapcHandler;
+        PVDMICAUSERDATA IcaUserData;
+}VDM_INITIALIZE_DATA, *PVDM_INITIALIZE_DATA;
+
+#line 324
 #if defined (_NTDEF_)
 NTSTATUS
 NtVdmControl(

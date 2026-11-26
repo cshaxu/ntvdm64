@@ -660,3 +660,17 @@ pending decision list with provider evidence and minimality.
 S7 final-verified progress: 14/20 files, six remaining. Cumulative reduction
 852 points/7588 lines (including S6: 853/7589). Next ordered file is
 softpc.new/host/src/nt_sb.c. Commit/push completes P9; S7 remains active.
+
+## P10 nt_sb.c complete local restoration
+
+[Whole-file evidence](s7-p10-sound-cli.md): 4 points/4 lines -> 0/0, byte-exact XP. Required vdm.h request declarations reduce XP-relative differences by another 3 points/45 lines without enabling services. Cached delivery is running; not counted as delivered. N016 is not declared migrated.
+
+### P10 final verification
+
+Runtime13 cached full build, dual 13-image publication, actual CLI ABI fixture,
+WOW window, Win3.1 enhanced normal exit/strict same-window fullscreen roundtrip,
+and NESticle pixel/menu/Escape evidence passed. nt_sb.c is byte-exact XP:
+4/4 -> 0/0. Coupled header XP-relative reduction is 3 points/45 lines.
+S7 primary progress is 15/20; five remain. Cumulative including the coupled
+header is 859 points/7637 lines (primary files alone 856/7592). Next is
+nt_sbfm.c. Full and N016 migration are not claimed. Commit/push closes P10.

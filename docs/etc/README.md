@@ -2037,3 +2037,5 @@ post-publication targeted checks.
 - [T485 S6 selector ownership repair](evidence/t485-h-repair/s6-selector-investigation.md).
 
 [S7 ordered repair progress](evidence/t485-h-repair/s7-progress.md) separates local review, pending verification and delivery.
+
+- [S7 P10 sound CLI restoration](evidence/t485-h-repair/s7-p10-sound-cli.md).
