@@ -42,7 +42,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 28 | src/mvdm-host/wow32/wole2.c | 5 | P10 delivered 77e8752be |
 | 29 | src/mvdm-host/wow32/wow32.h | 1 | P11 delivered e5db62755 |
 | 30 | src/mvdm-host/wow32/wow32fax.c | 7 | P12 delivered b65051565 |
-| 31 | src/mvdm-host/wow32/wowhooks.c | 39 | Pending |
+| 31 | src/mvdm-host/wow32/wowhooks.c | 39 | P13 source-reviewed; delivery pending |
 | 32 | src/mvdm-host/wow32/wparam.c | 4 | Pending |
 | 33 | src/mvdm-host/wow32/wsdata.c | 19 | Pending |
 | 34 | src/mvdm-host/wow32/wsext.c | 4 | Pending |
@@ -765,3 +765,38 @@ No source change after publication; commit/push remains pending.
 [Runtime15 receipt](s11-p12-result.json): cached build,dual26/26hash publication,fax contract and Full23/23 PASS. Both enhanced roundtrips pass five markers; Win95 knownExitOne retained.30/48files,288/452points verified:15restored,273residual,164unreviewed. Census753/7093;combined raw reduction127/4670. Commit/push pending. S11 remains active.
 
 P12 delivered and pushed b65051565cc970c32511fc10af90e717209a0c24.30/48files,288/452points delivered:15restored,273residual,164unreviewed. File30 Full checkpoint passed23/23 on runtime15; next Full at file40 or S closure. Next file31 wowhooks.c; S11 remains active.
+
+### P13 file31 wowhooks.c
+
+Entry non-error54points/174lines,2 excluded DEBUG bodies;39 frozen points.
+Whole-file review retains original hook dispatch/converters and the existing
+narrow native boundary. All39 frozen points have individual necessity and
+provider evidence in points.csv and pending-decisions.csv; none is approved
+for permanent retention by this review. No new functional code or shim.
+
+Remove four redundant line anchors; repair mouse-hook and reverse-CBT
+continuations with three precise anchors. Non-line source is bytewise
+unchanged. Result51points/173lines (-3/-1),2 exclusions unchanged.
+Actual product-parameter MSVC preprocessing checks219 stationary original
+statements with zero drift. First check detected a one-line CBT anchor error;
+it was corrected before build. Final receipt must use the corrected hash.
+
+Key retention decisions: TLS avoids cross-thread global hook-state races;
+the outer wrapper protects native window/task ownership before conversion;
+CallBack16 completion is not the hook return value; resource cleanup releases
+only completed acquisitions, including nested callback failure. MsgFilter
+memo/DDE state is restored after nested different messages. Its nested
+finalizers protect distinct fallible releases, not duplicate algorithms.
+A zero HWND is not a failed message constructor. Exact-body fixture evidence
+is service-double evidence, not proof of a real guest running every branch.
+
+31/48files,327/452points source-reviewed:15restored-delivered,312residual,
+125unreviewed. Delivered30/288 until this batch completes. Current48-file
+census750/7092;combined raw reduction130/4671. P11 normalized ABI +1/+2
+remains separately disclosed. P13 cached build/publication in progress;
+message transaction and COPYDATA targeted tests follow the final package.
+Last Full:file30. Next Full:file40 or S closure.
+
+P13 runtime16 cached build,dual13-image/26-hash publication,message transaction,
+COPYDATA and Product targeted verification PASS. [P13 receipt](s11-p13-result.json).
+31files/327points final-verified;commit/push pending,delivered30/288.

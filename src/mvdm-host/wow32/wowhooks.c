@@ -94,7 +94,6 @@ __declspec(thread) INT viCurrentHookStateDataIndex = 0;
 //*****************************************************************************
 
 
-#line 95
 LONG APIENTRY WU32SubStdHookProc01(INT nCode, LONG wParam, LONG lParam)
 {
     return WU32StdHookProc(nCode, wParam, lParam, 0x01);
@@ -459,7 +458,6 @@ BOOL W32GetHookParams(LPHOOKPARAMS lpHookParams)
 //*****************************************************************************
 
 LONG APIENTRY WowOriginalStdHookProc(INT nCode, LONG wParam, LONG lParam, INT iFunc)
-#line 459
 {
     //
     // USER will call us in WOW context. Just Verify.
@@ -1295,7 +1293,6 @@ LONG ThunkJournalHook(INT nCode, LONG wParam, LPEVENTMSG lpEventMsg,
     } __finally { wow_message_stack_leave(&stack, AbnormalTermination()); }
 #line 1233
     return lReturn;
-#line 1234
 }
 
 
@@ -1347,6 +1344,7 @@ LONG ThunkMouseHook(INT nCode, LONG wParam, LPMOUSEHOOKSTRUCT lpMHStruct,
     wow_message_stack stack; /* DIVERGENCE(MVDM-HOST-DIV-349): MOUSEHOOK stack transaction. */
     wow_message_stack_enter(&stack);
     __try {
+#line 1282
 
     // be sure allocation size matches stackfree16() size below
     vp = stackalloc16(sizeof(MOUSEHOOKSTRUCT16));
@@ -1372,7 +1370,6 @@ LONG ThunkMouseHook(INT nCode, LONG wParam, LPMOUSEHOOKSTRUCT lpMHStruct,
     } __finally { wow_message_stack_leave(&stack, AbnormalTermination()); }
 #line 1304
     return (LONG)(BOOL)LOWORD(lReturn);
-#line 1305
 }
 
 
@@ -1618,6 +1615,7 @@ LONG ThunkCbtHook16(INT nCode, LONG wParam, VPVOID lParam,
     LPARAM lParamNew;
     MSGPARAMEX mpex = {0}; /* DIVERGENCE(MVDM-HOST-DIV-344): call-owned conversion. */
     __try {
+#line 1541
 
     PMOUSEHOOKSTRUCT16   pMHStruct16;
     PCBTACTIVATESTRUCT16 pCbtAStruct16;
@@ -1711,6 +1709,7 @@ LONG ThunkCbtHook16(INT nCode, LONG wParam, VPVOID lParam,
 
                 FREEVDMPTR(pCbtCWnd16);
                 if (!mpex.fThunkSucceeded) return FALSE;
+#line 1633
                 GETVDMPTR(lParam, sizeof(*pCbtCWnd16), pCbtCWnd16);
 
                 (LONG)CbtCWnd.lpcs = mpex.lParam;

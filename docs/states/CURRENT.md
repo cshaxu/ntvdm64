@@ -41,7 +41,7 @@ normalized increment1point/2lines remains separately disclosed.
 Runtime15 cached build,dual26/26hash publication,fax135 and Full23/23 PASS.
 Win95 knownExitOne retained;both enhanced roundtrips pass all five markers.
 P12 delivered/pushed b65051565. Last Full:file30;next:file40 and S closure.
-Next file31 wowhooks.c. Earlier P1-P7 linear-only line evidence must be
+P13 file31 wowhooks.c source-reviewed:31/48files,327/452points;15restored,312residual,125unreviewed. Current750/7092,cumulative raw130/4671. Runtime16 build,dual publication,message/COPYDATA and Product PASS;commit/push pending,delivered30/288 unchanged. [P13 receipt](../etc/evidence/t485-h-repair/s11-p13-result.json). Earlier P1-P7 linear-only line evidence must be
 rechecked with actual preprocessing before S11 closure.
 Migration39/159;S11 active.
 
