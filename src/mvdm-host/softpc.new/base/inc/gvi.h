@@ -8,7 +8,7 @@
  * Author	: Henry Nash / David Rees
  *
  * Notes	: This file should be included by all external modules that
- *		  use the GVI module.  
+ *		  use the GVI module.
  */
 
 /* SccsID[]="@(#)gvi.h	1.16 06/28/93 Copyright Insignia Solutions Ltd."; */
@@ -44,7 +44,7 @@
  * Legal modes for the adapter
  */
 #undef TEXT
-#define TEXT	        0	/* Alpha numeric mode 80 by 25, or 40 by 25  */ 
+#define TEXT	        0	/* Alpha numeric mode 80 by 25, or 40 by 25  */
 #define GRAPHICS	1	/* All Points Addressable 640x200 or 320x200 */
 
 #define HIGH		0	/* APA 640x200,  2 colors		     */
@@ -240,7 +240,7 @@ extern	DISPLAY_GLOBS	PCDisplay;
 #define	set_cur_x(val)			PCDisplay.cur_x = (val)
 #define	set_cur_y(val)			PCDisplay.cur_y = (val)
 #define	set_cursor_start(val)		PCDisplay.cursor_start = (val)
-#define	inc_cursor_start()		(PCDisplay.cursor_start)++ 
+#define	inc_cursor_start()		(PCDisplay.cursor_start)++
 #define	set_cursor_height(val)		PCDisplay.cursor_height = (val)
 #define	set_cursor_start1(val)		PCDisplay.cursor_start1 = (val)
 #define	set_cursor_height1(val)		PCDisplay.cursor_height1 = (val)
@@ -305,7 +305,7 @@ extern	DISPLAY_GLOBS	PCDisplay;
 #define	get_screen_end()		(get_screen_start() + get_screen_length() + gvi_pc_low_regen)
 #define	get_screen_ptr(offs)		((PCDisplay.screen_ptr) + (offs))
 #define get_chain2_screen_ptr(offs) get_screen_ptr((((offs) & ~3L) << 1) | ((offs) & 3))
-#line 288 "gvi.h"
+#line 491 "gvi.h"
 #define get_screen_base()		((get_screen_start() << 1) + gvi_pc_low_regen)
 #ifdef VGG
 #define set_chain4_mode(val)		PCDisplay.chain4_mode = (val)
@@ -322,7 +322,7 @@ extern	DISPLAY_GLOBS	PCDisplay;
 #endif // !NEC_98
 #line 505
 
-/* 
+/*
  * useful macro to get character height in host pixels
  */
 #define get_host_char_height()		(get_char_height()*get_host_pix_height()*get_pc_pix_height())

@@ -1,0 +1,63 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid016.c",
+  "before": {
+    "points": 1,
+    "lines": 9060,
+    "excluded": 0
+  },
+  "after": {
+    "points": 4,
+    "lines": 12,
+    "excluded": 0
+  },
+  "before_sha256": "636f69cf6e11733c83e3b3bee0246cb8ef51a93a70df6e0d1dfc0870dc59dafc",
+  "after_sha256": "344f3acd5df84cd6958a036fd7d08de483bb1b64c4e5c7b949b6598218fdfe33",
+  "crlf_removed": 4530,
+  "all_original_line_positions_preserved": true,
+  "points": [
+    {
+      "id": "HXP-R-00739",
+      "xp_line": 4062,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r23))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r23))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00740",
+      "xp_line": 4070,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_1if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_1if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_1if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00741",
+      "xp_line": 4087,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00742",
+      "xp_line": 4421,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_9if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_9if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_9if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    }
+  ]
+}

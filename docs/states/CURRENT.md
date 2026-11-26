@@ -32,13 +32,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S10 Ordered Progress
 
-[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md): 1/30 reviewed,
-4/1060 frozen points reviewed; P1 ev_glue.c 21/1663 ->5/102 (-16/-1561).
-Thirty-file baseline 201/102863 ->185/101302. Four residual points registered;
-zero fully restored frozen points; one delivered S10 file. Cached build
-and dual publication of runtime1, C-VID, live MEM and NESticle tests passed.
-P1 f3dda8496 committed and pushed. Next evidgen.h.
-Migration remains 39/159 and Full remains S13.
+[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):10/30 source-reviewed
+and final-verified;131/1060 points reviewed,929 remain. P1 delivered f3dda8496.
+[P2 verification](../etc/evidence/t485-h-repair/s10-p2-delivery.md): seven
+format/line-only changed files and two unchanged reviews; runtime2 cached
+build, dual13-image publication,26 hashes, C-VID, live MEM/NTVDMD and
+NESticle passed. Four fully restored points verified;127 evidenced residuals
+remain pending decisions. Total201/102863 ->267/62146: +66 exposed points/
+-40717 differing lines under original-format approval. P2 commit/push pending.
+Next keymouse/keyba.c. Migration39/159; Full remains S13.
 
 ## S9 Closure Record
 

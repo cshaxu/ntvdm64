@@ -1,0 +1,140 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+  "before": {
+    "points": 1,
+    "lines": 6722,
+    "excluded": 0
+  },
+  "after": {
+    "points": 11,
+    "lines": 36,
+    "excluded": 0
+  },
+  "before_sha256": "178f69b9545bb9ec60797342de49c80fac263b7841a73592be3729d3b8335ce2",
+  "after_sha256": "5fa7906476b06095f1ee44d02f4f2825758384b72968216041b7dcdd2d55c5c1",
+  "crlf_removed": 3361,
+  "all_original_line_positions_preserved": true,
+  "points": [
+    {
+      "id": "HXP-R-00743",
+      "xp_line": 883,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_19if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_19if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_19if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00744",
+      "xp_line": 1234,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_24if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_24if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_24if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00745",
+      "xp_line": 1809,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r23))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r23))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00746",
+      "xp_line": 1817,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_35if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_35if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_35if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00747",
+      "xp_line": 1834,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00748",
+      "xp_line": 2168,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_43if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_43if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_43if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00749",
+      "xp_line": 2357,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_53if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_53if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_53if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00750",
+      "xp_line": 2708,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_58if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_58if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_58if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00751",
+      "xp_line": 3311,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r23))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r23))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00752",
+      "xp_line": 3319,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_69if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_69if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_69if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00753",
+      "xp_line": 3336,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    }
+  ]
+}

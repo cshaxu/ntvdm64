@@ -2056,3 +2056,18 @@ post-publication targeted checks.
 [S10 ordered input/video repair](evidence/t485-h-repair/s10-progress.md) tracks the next admitted whole-file review.
 
 [S10 P1 C-VID glue](evidence/t485-h-repair/s10-p1-ev-glue.md) records provider ownership, simplification and targeted verification.
+[S10 P2 EVID accessors](evidence/t485-h-repair/s10-p2-evidgen.md) records the original direct-accessor binding, residual evidence and format-only checkpoint.
+[S10 P2 generated readers](evidence/t485-h-repair/s10-p2-sevid000.md) records all 64 sevid000 points, original alternatives and byte-sensitive LF restoration.
+[S10 P2 backward readers](evidence/t485-h-repair/s10-p2-sevid001.md) records all 25 sevid001 points and source-line-preserving LF restoration.
+[S10 P2 generic rotation](evidence/t485-h-repair/s10-p2-sevid004.md) records three x86 rotation-field offsets and original-format recovery.
+[S10 P2 ModeX byte ownership](evidence/t485-h-repair/s10-p2-sevid016.md) records four address/local-frame points and original-format recovery.
+
+[S10 P2 ModeX word and move ownership](evidence/t485-h-repair/s10-p2-sevid017.md) records eleven plane/local-frame points and original-format recovery.
+
+[S10 P2 remaining ModeX writers](evidence/t485-h-repair/s10-p2-sevid018.md) records nine evidenced residuals with no source change.
+
+[S10 P2 Copy scalar layout](evidence/t485-h-repair/s10-p2-sevid019.md) records three scalar residuals and the separate historical block-copy limitation.
+
+[S10 P2 GVI header](evidence/t485-h-repair/s10-p2-gvi.md) records four format restorations, the retained plane macro and corrected XP line anchor.
+
+[S10 P2 delivery verification](evidence/t485-h-repair/s10-p2-delivery.md) records runtime2 publication and final-package targeted results.

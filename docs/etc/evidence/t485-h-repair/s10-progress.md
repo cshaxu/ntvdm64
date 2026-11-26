@@ -12,15 +12,15 @@ Full remains S13; original guest remains immutable.
 | Order | File below src/mvdm-host | Frozen points | State |
 | ---: | --- | ---: | --- |
 | 1 | softpc.new/base/cvidc/ev_glue.c | 4 | Delivered f3dda8496 |
-| 2 | softpc.new/base/cvidc/evidgen.h | 3 | Not started |
-| 3 | softpc.new/base/cvidc/sevid000.c | 64 | Not started |
-| 4 | softpc.new/base/cvidc/sevid001.c | 25 | Not started |
-| 5 | softpc.new/base/cvidc/sevid004.c | 3 | Not started |
-| 6 | softpc.new/base/cvidc/sevid016.c | 4 | Not started |
-| 7 | softpc.new/base/cvidc/sevid017.c | 11 | Not started |
-| 8 | softpc.new/base/cvidc/sevid018.c | 9 | Not started |
-| 9 | softpc.new/base/cvidc/sevid019.c | 3 | Not started |
-| 10 | softpc.new/base/inc/gvi.h | 5 | Not started |
+| 2 | softpc.new/base/cvidc/evidgen.h | 3 | Source reviewed; format-only change awaiting cumulative P2 delivery |
+| 3 | softpc.new/base/cvidc/sevid000.c | 64 | Source reviewed; format-only change awaiting cumulative P2 delivery |
+| 4 | softpc.new/base/cvidc/sevid001.c | 25 | Source reviewed; format-only change awaiting cumulative P2 delivery |
+| 5 | softpc.new/base/cvidc/sevid004.c | 3 | Source reviewed; format-only change awaiting cumulative P2 delivery |
+| 6 | softpc.new/base/cvidc/sevid016.c | 4 | Source reviewed; format-only change awaiting cumulative P2 delivery |
+| 7 | softpc.new/base/cvidc/sevid017.c | 11 | Source reviewed; format-only change awaiting cumulative P2 delivery |
+| 8 | softpc.new/base/cvidc/sevid018.c | 9 | Source reviewed; unchanged; awaiting P2 receipt |
+| 9 | softpc.new/base/cvidc/sevid019.c | 3 | Source reviewed; unchanged; historical block-copy boundary recorded |
+| 10 | softpc.new/base/inc/gvi.h | 5 | Reviewed; four format points restored; one residual; P2 pending |
 | 11 | softpc.new/base/keymouse/keyba.c | 44 | Not started |
 | 12 | softpc.new/base/keymouse/keybd_io.c | 3 | Not started |
 | 13 | softpc.new/base/video/cga.c | 157 | Not started |
@@ -62,3 +62,100 @@ One of 30 files delivered; 4/1060 frozen points reviewed, 1056 remain.
 Non-error total=185/101302, cumulative reduction=16 points/1561 lines.
 Four evidence-backed residuals remain pending; restored frozen points=0.
 Documentation governance and links passed. Next ordered file: evidgen.h.
+
+## P2 source-review checkpoint: evidgen.h
+
+[Whole-file review](s10-p2-evidgen.md): 3/8 ->3/8; two CRLF endings restored
+on already-added adaptation lines. Original table preserved; actual necessity
+is avoiding generated-accessor shared-scratch writes, not incompatible table
+layout. All three pending entries and the master register now carry that evidence.
+Source reviewed 2/30 files and 7/1060 points; 1053 points remain unreviewed.
+Delivered remains 1/30 files, with four final-verified residual points in P1.
+Seven reviewed residuals, zero whole-point restorations or new retain approvals.
+Total remains 185/101302, net -16/-1561. Current hash is in the
+[live census](s10-current-census.csv); P1 census remains the delivered snapshot.
+No P2 build/test/publication/commit/push yet: format-only work accumulates
+until the next whole-file batch. Next sevid000.c.
+
+## P2 source-review checkpoint: sevid000.c
+
+[Whole-file review](s10-p2-sevid000.md) and its 64-row record verify all residual
+reader adaptations against actual plane layout, original field getters and
+nested local-frame lifetime. Restore LF only: 10/6270 ->64/132 (+54/-6138),
+covered by owner approval for exposing existing residuals through original
+format restoration. No new functional differences. Source reviewed 3/30 files,
+71/1060 points; 989 unreviewed, zero fully restored frozen points, 71 residuals.
+Delivered remains 1/30. Current total 239/95164 against baseline201/102863:
+38 more exposed points, 7699 fewer differing lines. Two format-only files
+await cumulative P2 build/publication/tests/commit/push. Next sevid001.c.
+
+## P2 source-review checkpoint: sevid001.c
+
+[Backward-reader review](s10-p2-sevid001.md): all25 points reviewed, original
+LF restored; 8/6974 ->25/50 (+17/-6924), no functional change. Four of30 files
+and96/1060 points reviewed;964 unreviewed,96 residuals, zero whole-point
+restorations. Three format-only files await P2 delivery; one file is delivered.
+Thirty-file total256/88240, baseline201/102863, delta+55/-14623.
+Next sevid004.c. No P2 build/publication/test/commit/push yet.
+
+## P2 source-review checkpoint: sevid004.c
+
+[Generic-rotation review](s10-p2-sevid004.md): all three offsets justified by
+the original DWORD field and x86 low byte, with actual1..7 rotation cases in
+the existing fixture. Restore LF only:1/10358 ->3/6 (+2/-10352).
+Five of30 files,99/1060 points reviewed;961 unreviewed,99 residuals,zero
+whole-point restorations. Total258/77888 against201/102863:delta+57/-24975.
+Four format-only files await P2 delivery; one file delivered. Next sevid016.c.
+
+## P2 source-review checkpoint: sevid016.c
+
+[ModeX byte ownership](s10-p2-sevid016.md): four points reviewed, with concrete
+S_2628 to S_2629 parent-frame cleanup evidence. LF-only recovery1/9060 ->4/12
+(+3/-9048). Six of30 files,103/1060 points reviewed;957 unreviewed,103 residuals,
+zero whole-point restorations. Total261/68840, baseline201/102863,delta+60/-34023.
+Five format-only files await P2; one file delivered. Next sevid017.c.
+
+## P2 source-review checkpoint: sevid017.c
+
+[Whole-file review](s10-p2-sevid017.md): 1/6722 ->11/36 (+10/-6686),
+original LF restored without functional edits. Eleven residuals have explicit
+plane-layout or actual parent-frame evidence. Reviewed7/30 files,114/1060
+points;946 remain. Total271/62154, cumulative+70/-40709. One delivered file;
+six format-only files await P2. No new P2 runtime verification or delivery.
+
+## P2 source-review checkpoint: sevid018.c
+
+[Whole-file review](s10-p2-sevid018.md):9/32 unchanged, no format or source
+edit. Nine residuals evidenced;8/30 files and123/1060 points reviewed,937
+remain. Total271/62154, cumulative+70/-40709. Delivery remains1/30; P2 pending.
+
+## P2 source-review checkpoint: sevid019.c
+
+[Whole-file review](s10-p2-sevid019.md):3/6 unchanged. Three scalar-layout
+residuals evidenced; historical generated block-copy limitation distinguished
+from the current CCPU scalar SAS route. Reviewed9/30 files,126/1060 points;
+934 remain. Total271/62154, cumulative+70/-40709. P2 delivery pending.
+
+## P2 source-review checkpoint: gvi.h
+
+[Whole-file review](s10-p2-gvi.md):36/41 ->32/33, four whitespace points
+restored and XP491 anchor corrected. Thirteen exclusions unchanged;114
+matched original content lines checked. Reviewed10/30 files,131/1060 points,
+929 remain. Four locally restored points,127 evidenced residuals. Total267/62146,
+cumulative+66/-40717. P2 cached build and delivery now being performed;
+prior passing evidence is not a P2 acceptance claim.
+
+P2 delivery checkpoint: build/publication owner PID15628 completed; cached
+full build and runtime2 dual publication both report PASS. Documentation and
+relative-link gates passed after repairing accidental encoding drift in eight
+pre-existing documentation lines. Targeted runner PID2192 is active; final
+C-VID/live MEM/NTVDMD/NESticle results and commit/push remain pending.
+
+## P2 final verification
+
+[Delivery verification](s10-p2-delivery.md): runtime2 cached build, dual13-image
+publication,26 rechecked hashes and C-VID/live MEM/NTVDMD/NESticle passed.
+Nine P2 files final-verified;10/30 including P1. Four restored frozen points,
+127 residuals,929 unreviewed. Total267/62146, cumulative+66/-40717.
+Commit/push pending. Historical checkpoint paragraphs above retain their
+then-current state; this receipt supersedes their pending verification state.

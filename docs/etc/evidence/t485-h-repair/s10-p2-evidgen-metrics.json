@@ -1,0 +1,20 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+  "before": {
+    "points": 3,
+    "lines": 8,
+    "excluded": 0
+  },
+  "after": {
+    "points": 3,
+    "lines": 8,
+    "excluded": 0
+  },
+  "before_sha256": "7767392b882d1794d55422ca13de1ee8e34f501044c34f0c0eb1d48a67428567",
+  "after_sha256": "265d76076d417af3aed328bb7cdc33bbdb60cebc78994c8401be0a43cda10830",
+  "format_crlf_removed": 2,
+  "original_line_checks": {
+    "False": 169,
+    "True": 93
+  }
+}

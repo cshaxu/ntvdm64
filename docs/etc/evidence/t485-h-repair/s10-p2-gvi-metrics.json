@@ -1,0 +1,91 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+  "before": {
+    "points": 36,
+    "lines": 41,
+    "excluded": 13
+  },
+  "after": {
+    "points": 32,
+    "lines": 33,
+    "excluded": 13
+  },
+  "before_sha256": "a3a3899ddac141fa8d4830f02c91c3856c71fa9179cfca7af37213df2cf80c61",
+  "after_sha256": "eff83f19143e85a0364eaf10b14e5d5953b317a092864b380cc2645f36249d5d",
+  "line_check": {
+    "checked": 114,
+    "bad": []
+  },
+  "points": [
+    {
+      "id": "HXP-R-01074",
+      "batch": "H017",
+      "assigned_s": "S10",
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "current_line": "11",
+      "xp_line": "11",
+      "added": "1",
+      "deleted": "1",
+      "review_status": "restored-format-await-delivery",
+      "necessity": "Original trailing whitespace restored; no semantic reason for deviation.",
+      "minimality": "Byte-exact original line restored without changing branch selection.",
+      "evidence": "s10-p2-gvi.md; s10-p2-gvi-metrics.json"
+    },
+    {
+      "id": "HXP-R-01075",
+      "batch": "H017",
+      "assigned_s": "S10",
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "current_line": "47",
+      "xp_line": "47",
+      "added": "1",
+      "deleted": "1",
+      "review_status": "restored-format-await-delivery",
+      "necessity": "Original trailing whitespace restored; no semantic reason for deviation.",
+      "minimality": "Byte-exact original line restored without changing branch selection.",
+      "evidence": "s10-p2-gvi.md; s10-p2-gvi-metrics.json"
+    },
+    {
+      "id": "HXP-R-01076",
+      "batch": "H017",
+      "assigned_s": "S10",
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "current_line": "243",
+      "xp_line": "429",
+      "added": "1",
+      "deleted": "1",
+      "review_status": "restored-format-await-delivery",
+      "necessity": "Original trailing whitespace restored; no semantic reason for deviation.",
+      "minimality": "Byte-exact original line restored without changing branch selection.",
+      "evidence": "s10-p2-gvi.md; s10-p2-gvi-metrics.json"
+    },
+    {
+      "id": "HXP-R-01077",
+      "batch": "H017",
+      "assigned_s": "S10",
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "current_line": "307",
+      "xp_line": "491",
+      "added": "1",
+      "deleted": "0",
+      "review_status": "retain-chain2-plane-layout-cohort",
+      "necessity": "Selected CHAIN2 storage uses eight backing bytes per text cell; gfx_updt and nt_cga consume doubled logical offsets. The macro maps those offsets to the same plane storage as scalar BIOS writers.",
+      "minimality": "One shared expression; deleting it breaks actual callers and inlining it duplicates the required conversion. Correct original line resumes at XP491.",
+      "evidence": "s10-p2-gvi.md; s10-p2-gvi-metrics.json"
+    },
+    {
+      "id": "HXP-R-01078",
+      "batch": "H017",
+      "assigned_s": "S10",
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "current_line": "325",
+      "xp_line": "506",
+      "added": "1",
+      "deleted": "1",
+      "review_status": "restored-format-await-delivery",
+      "necessity": "Original trailing whitespace restored; no semantic reason for deviation.",
+      "minimality": "Byte-exact original line restored without changing branch selection.",
+      "evidence": "s10-p2-gvi.md; s10-p2-gvi-metrics.json"
+    }
+  ]
+}

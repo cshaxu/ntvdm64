@@ -1,0 +1,52 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+  "before": {
+    "points": 3,
+    "lines": 6,
+    "excluded": 0
+  },
+  "after": {
+    "points": 3,
+    "lines": 6,
+    "excluded": 0
+  },
+  "before_sha256": "c763b216c1caef24611efb43faa133423d47a193bf700a870e99ec0c2c125f6c",
+  "after_sha256": "c763b216c1caef24611efb43faa133423d47a193bf700a870e99ec0c2c125f6c",
+  "crlf_removed": 0,
+  "all_original_line_positions_preserved": true,
+  "points": [
+    {
+      "id": "HXP-R-00763",
+      "xp_line": 1299,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00764",
+      "xp_line": 1718,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-word-stride",
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(1)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Two-byte word iteration advances guest byte offset by 2."
+    },
+    {
+      "id": "HXP-R-00765",
+      "xp_line": 1736,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(3)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    }
+  ]
+}

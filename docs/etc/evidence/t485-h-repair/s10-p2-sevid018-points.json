@@ -1,0 +1,118 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+  "before": {
+    "points": 9,
+    "lines": 32,
+    "excluded": 0
+  },
+  "after": {
+    "points": 9,
+    "lines": 32,
+    "excluded": 0
+  },
+  "before_sha256": "571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471",
+  "after_sha256": "571665b9963ecccad05efebe5f1d4a03b9c1a0101d27736cb6d0a8ac1f188471",
+  "crlf_removed": 0,
+  "all_original_line_positions_preserved": true,
+  "points": [
+    {
+      "id": "HXP-R-00754",
+      "xp_line": 1172,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_77if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_77if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_77if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00755",
+      "xp_line": 1361,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_87if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_87if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_87if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00756",
+      "xp_line": 1712,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_92if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_92if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_92if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00757",
+      "xp_line": 2300,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r23))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r23))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00758",
+      "xp_line": 2308,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_103if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_103if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_103if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00759",
+      "xp_line": 2325,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00760",
+      "xp_line": 2659,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_111if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_111if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_111if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00761",
+      "xp_line": 2848,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_121if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_121if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_121if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    },
+    {
+      "id": "HXP-R-00762",
+      "xp_line": 3199,
+      "added": 2,
+      "deleted": 2,
+      "category": "retain-local-activation-correction",
+      "original": "\t{\textern\tIUH\tL21_126if_d()\t;\t\n\tIUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\t\treturnValue\t=\tL21_126if_d(v1,v2,v3,v4);\treturn(returnValue);\t}\t",
+      "current": "\tgoto L21_126if_d; /* T88: keep this activation's saved locals. */\n",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated external label helper call creates a new dispatch activation while current branch still needs current LocalIUH temporaries."
+    }
+  ]
+}

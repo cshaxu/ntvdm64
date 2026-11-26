@@ -1,0 +1,294 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+  "before": {
+    "points": 8,
+    "lines": 6974,
+    "excluded": 0
+  },
+  "after": {
+    "points": 25,
+    "lines": 50,
+    "excluded": 0
+  },
+  "before_sha256": "2b2fcf93fef5832960ab799fe86c8115fb21db495e6c3fe0414de4d0080eb0b5",
+  "after_sha256": "8b602625cd26cb1e694d9252529a7d85dfb38af10b85b92977433bdb6479e1ee",
+  "crlf_removed": 3486,
+  "all_original_line_positions_preserved": true,
+  "points": [
+    {
+      "id": "HXP-R-00711",
+      "xp_line": 1166,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "current": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00712",
+      "xp_line": 1170,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IU32\t*)&(r21)\t+\tREGLONG)\t=\t*((IU32\t*)((*((IHPE\t*)&(r1)))\t+\t*((IHPE\t*)&(r20)))\t)\t+\t*((IU32\t*)(LocalIUH+1)\t+\tREGLONG)\t;\t\t",
+      "current": "\t*((IU32\t*)&(r21)\t+\tREGLONG)\t=\t*((IU32\t*)((*((IHPE\t*)&(r1)))\t+\t*((IHPE\t*)&(r20)))\t)\t+\t((*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & ~1u) << 2) + (*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & 1u) /* T99: odd/even plane address. */\t;\t\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00713",
+      "xp_line": 1191,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00714",
+      "xp_line": 1218,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00715",
+      "xp_line": 1226,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00716",
+      "xp_line": 1228,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-4)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-8) /* T99: align the final odd/even cell. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00717",
+      "xp_line": 1478,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(3)\t;\t",
+      "current": "\t*((IUH\t*)(LocalIUH+4))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00718",
+      "xp_line": 1487,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(3) /* T99: retain the plane address A0 gap. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00719",
+      "xp_line": 1492,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r21)\t+\tREGLONG)\t;\t",
+      "current": "\t*((IU32\t*)(LocalIUH+5)\t+\tREGLONG)\t=\t*((IU32\t*)&(r21)\t+\tREGLONG) + (*((IU32\t*)(LocalIUH+1)\t+\tREGLONG) & 1u) /* T99: retain the selected odd/even lane. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00720",
+      "xp_line": 1505,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00721",
+      "xp_line": 1509,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1380)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00722",
+      "xp_line": 1517,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00723",
+      "xp_line": 1520,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(1380)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00724",
+      "xp_line": 1532,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00725",
+      "xp_line": 1550,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00726",
+      "xp_line": 1554,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1380)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00727",
+      "xp_line": 1562,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00728",
+      "xp_line": 1565,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r22))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r22))\t=\t(IS32)(1380)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00729",
+      "xp_line": 1577,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(2)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(6) /* T99: alternate plane strides 1/7. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00730",
+      "xp_line": 1585,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(3)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(7) /* T99: odd/even plane stride. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00731",
+      "xp_line": 1587,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-chain2-layout",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-4)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(-8) /* T99: align the final odd/even cell. */\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated provider must implement same 4*(a&~1)+(a&1) plane address as BIOS and painters, including odd lane and backward end alignment."
+    },
+    {
+      "id": "HXP-R-00732",
+      "xp_line": 1640,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00733",
+      "xp_line": 1644,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r21))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r21))\t=\t(IS32)(1380)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00734",
+      "xp_line": 1670,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1379)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1376)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    },
+    {
+      "id": "HXP-R-00735",
+      "xp_line": 1674,
+      "added": 1,
+      "deleted": 1,
+      "category": "retain-generated-subfield-offset",
+      "original": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1383)\t;\t",
+      "current": "\t*((IUH\t*)&(r20))\t=\t(IS32)(1380)\t;\t",
+      "conclusion": "retain-evidenced-owner-review",
+      "necessity": "Generated BYTE/WORD read uses low-order subfield of existing GDP value; big-endian subfield offsets read different bytes on x86."
+    }
+  ]
+}
