@@ -36,4 +36,4 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 
 [S7 P12 SIM32 restoration](s7-p12-sim32.md) and [fourteen exact residuals](s7-p12-mirror-diff.json) record the complete-file repair and mapping contract.
 
-[S7 P13 startup local review](s7-p13-startup-review.md) records the complete file and pending batch delivery.
+[S7 P13 final review](s7-p13-startup-review.md) records runtime16 and a1f5bff4b delivery; [S7 closure](s7-progress.md#s7-closure) admits S8.

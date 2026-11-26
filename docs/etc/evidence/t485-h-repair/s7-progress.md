@@ -720,3 +720,15 @@ P13 final source: wow32.c 18/103 -> 15/69. Batch -4/-35; S7 local 20/20, deliver
 
 
 P13 final: runtime16 build, dual publication, dispatch boundary and actual guest targeted gates passed. All 20/20 final-verified; cumulative reduction 869 points/7704 lines including P10 header. Commit/push remains the delivery step; see P13 receipt for fixture ABI fixes and Win95 boundary.
+
+## S7 closure
+
+P13 delivered and pushed as a1f5bff4b. All 20 assigned primary files have final
+whole-file dispositions and delivery receipts (P1-P13); no primary file remains
+local-only. The coupled P10 vdm.h is tracked separately and not counted twice.
+Total reduction is 869 non-error points and 7704 added-plus-deleted diff lines,
+including that header (primary-only reduction 866/7659). Retained differences
+remain in pending-decisions with necessity evidence; closure does not erase
+those residuals or label them restored. P13 final published runtime16 passed
+its required targeted gates; S13 still owns the final Full and reconciliation.
+Migration remains 39/159. Next admitted scope is S8, not N004.
