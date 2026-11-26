@@ -130,6 +130,17 @@ foreach(path IN ITEMS src/compat/include src/non-mvdm/public/sdk/inc
 endforeach()
 add_custom_target(system-fixtures DEPENDS ntioapi_facade_fixture vdm_control_fixture)
 if(NTVDM_ARCH STREQUAL "x86")
+  # Exercise the same FM object linked into the cached product, not a copy.
+  set(fm_product_object "${NTVDM_REPO}/build/.ninja/msvc-x86-release/worker/obj/host/nt_sbfm.obj")
+  fixture(fm_service_fixture LINK
+    test/mvdm-host/softpc.new/host/src/nt_sbfm_test.c src/compat/vdm_control.c)
+  foreach(path IN ITEMS src/mvdm-host/softpc.new/host/inc src/mvdm-host/softpc.new/base/inc)
+    target_include_directories(fm_service_fixture_objects PRIVATE "${NTVDM_REPO}/${path}")
+  endforeach()
+  set_property(TARGET fm_service_fixture_objects PROPERTY FIXTURE_LIBRARIES "${fm_product_object}")
+  add_custom_command(OUTPUT "${CMAKE_BINARY_DIR}/fm_service_fixture.exe" APPEND
+    DEPENDS "${fm_product_object}")
+  add_dependencies(system-fixtures fm_service_fixture)
   fixture(dos_find_layout_fixture LINKDEFAULT test/mvdm-host/dos/dem/dos_find_layout_test.c)
   set_property(TARGET dos_find_layout_fixture_objects PROPERTY COMPILE_OPTIONS
     /nologo /TC /W4 /std:c11 "/FI${NTVDM_REPO}/src/non-mvdm/public/sdk/inc/nt.h")

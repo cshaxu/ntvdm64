@@ -674,3 +674,22 @@ and NESticle pixel/menu/Escape evidence passed. nt_sb.c is byte-exact XP:
 S7 primary progress is 15/20; five remain. Cumulative including the coupled
 header is 859 points/7637 lines (primary files alone 856/7592). Next is
 nt_sbfm.c. Full and N016 migration are not claimed. Commit/push closes P10.
+
+## P11 nt_sbfm.c complete-file review
+
+[FM service evidence](s7-p11-fm-service.md): restore original lifecycle; actual
+service return controls existing FMActive. Non-error differences 4 points/4
+lines -> 3 points/5 lines. Necessary one-line increase is standing-approved.
+Original inactive branches and diagnostic lines are cleaned. Cached full
+build, dual publication and product-object lifecycle/timer fixture passed;
+final-package runtime checks are pending. Delivered remains 15/20.
+
+### P11 final verification
+
+Runtime14 cached build, dual thirteen-image publish, product FM and VDM ABI
+fixtures, actual WINMINE window, Win3.1 enhanced normal exit/strict same-window
+fullscreen roundtrip and NESticle menu/Escape pixel evidence all passed.
+nt_sbfm.c: 4/4 -> 3/5; one point reduced, one diff line added. Cumulative S7
+reduction including the required header is 860 points/7636 lines. Progress
+16/20 primary files, four remaining; next sim32.c. Residuals stay registered.
+Commit/push closes P11; no Full or N004 progress claimed.

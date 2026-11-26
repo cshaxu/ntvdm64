@@ -2039,3 +2039,5 @@ post-publication targeted checks.
 [S7 ordered repair progress](evidence/t485-h-repair/s7-progress.md) separates local review, pending verification and delivery.
 
 - [S7 P10 sound CLI restoration](evidence/t485-h-repair/s7-p10-sound-cli.md).
+
+- [S7 P11 FM service admission](evidence/t485-h-repair/s7-p11-fm-service.md).

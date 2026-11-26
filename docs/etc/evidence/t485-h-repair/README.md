@@ -31,3 +31,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S7 P9 fill/screen residuals](s7-p9-mirror-diff.json) records the two-file batch and each remaining screen adaptation.
 
 [S7 P10 sound CLI restoration](s7-p10-sound-cli.md) records original requests, required XP declarations and pending final-package verification.
+
+[S7 P11 FM service admission](s7-p11-fm-service.md) records full call-chain evidence, three minimal residuals and real product-object testing.

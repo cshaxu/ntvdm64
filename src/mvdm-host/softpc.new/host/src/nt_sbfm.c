@@ -65,40 +65,11 @@ FMStatusRead(
     )
 {
 #if 0 // This should work but doesn't (ReadFile fails)
-        // Are we expecting a state change ?
-
-        if (Timer1Started || Timer2Started) {
-             // Read the status port from the driver - this is how the
-             // driver interprets read.
-             // Well, actually don't because the WSS driver doesn't work!
-
-            if (!ReadFile(HFM, &Status, 1, &bytesRead, NULL)) {
-#if DBG
-                FormatMessageA( FORMAT_MESSAGE_ALLOCATE_BUFFER |
-                  FORMAT_MESSAGE_FROM_SYSTEM,
-                  NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-                  (char *) &lpMsgBuf, 0, NULL);
-                dprintf1(("FM read port failed: %d bytes of data read, error message: %s",
-                            bytesRead, lpMsgBuf));
-                LocalFree( lpMsgBuf ); // Free the buffer.
-#endif DBG
-                break;
-            }
-            else {
-                 // Look for state change
-
-                if (Status & 0x40) {
-                     Timer1Started = FALSE;
-                     dprintf2(("Timer 1 finished"));
-            }
-
-                if (Status & 0x20) {
-                    Timer2Started = FALSE;
-                    dprintf2(("Timer 2 finished"));
-            }
-            }
-        }
+#line 68
+#error Unsupported original inactive configuration
+#line 101
 #endif
+#line 102
         *data = Status;
 }
 
@@ -151,10 +122,13 @@ FMDataWrite(
                 if ((data & 1) && !(Status & 0x40)) {
                     dprintf2(("Timer 1 started"));
 #if 0
-                    Timer1Started = TRUE;
+#line 154
+#error Unsupported original inactive configuration
 #else
+#line 156
                     Status |= 0xC0; // simulate immediate expiry of timer1
 #endif
+#line 158
                 } else {
                     Timer1Started = FALSE;
                 }
@@ -162,10 +136,13 @@ FMDataWrite(
                 if ((data & 2) && !(Status & 0x20)) {
                     dprintf2(("Timer 2 started"));
 #if 0
-                    Timer2Started = TRUE;
+#line 165
+#error Unsupported original inactive configuration
 #else
+#line 167
                     Status |= 0xA0; // simulate immediate expiry of timer2
 #endif
+#line 169
                     Timer2Started = TRUE;
                 } else {
                     Timer2Started = FALSE;
@@ -197,15 +174,11 @@ FMPortWrite(
         if(!WriteFile(HFM, &PortData, Position * sizeof(PortData[0]),
           &bytesWritten, NULL)) {
 #if DBG
-            FormatMessageA( FORMAT_MESSAGE_ALLOCATE_BUFFER |
-              FORMAT_MESSAGE_FROM_SYSTEM, NULL, GetLastError(),
-              MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (char *) &lpMsgBuf,
-                0, NULL);
-
-            dprintf1(("FM write failed: %d bytes of data written, error message: %s",
-              bytesWritten, lpMsgBuf));
-            LocalFree( lpMsgBuf ); // Free the buffer.
+#line 200
+#error Unsupported original inactive configuration
+#line 208
 #endif //DBG
+#line 209
              return FALSE;
         }
     }
@@ -282,7 +255,6 @@ Return Value:
 --*/
 
 {
-#ifndef CCPU
     UINT rc;
     UINT FMDevice;
     VDM_ADLIB_DATA ServiceData;
@@ -307,18 +279,17 @@ Return Value:
 
             MixerSetMidiVolume(0x8);        // set to default volume
             ServiceData.Action =  ADLIB_DIRECT_IO;
-            NtVdmControl(VdmAdlibEmulation, &ServiceData);
+            FMActive = NT_SUCCESS(NtVdmControl(VdmAdlibEmulation, &ServiceData));
             dprintf2(("Direct IO access for Adlib"));
         }
     }
     if (HFM == NULL) {
         ServiceData.Action =  ADLIB_KERNEL_EMULATION;
-        NtVdmControl(VdmAdlibEmulation, &ServiceData);
+        FMActive = NT_SUCCESS(NtVdmControl(VdmAdlibEmulation, &ServiceData));
         dprintf2(("Kernel mode emulation for Adlib"));
     }
 
-    FMActive = TRUE;
-#endif
+#line 320
     return (TRUE);
 }
 
@@ -349,7 +320,6 @@ Return Value:
         MidiCloseProc(HFM);
         HFM = NULL;
     }
-#ifndef CCPU
     if (FMActive) {
         VDM_ADLIB_DATA ServiceData;
 
@@ -361,7 +331,6 @@ Return Value:
         NtVdmControl(VdmAdlibEmulation, &ServiceData);
         FMActive = FALSE;
     }
-#endif
 }
 
 

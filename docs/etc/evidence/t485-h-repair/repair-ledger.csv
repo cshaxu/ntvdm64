@@ -1009,3 +1009,7 @@
 "HXP-R-03955","src/mvdm-host/softpc.new/host/src/nt_sb.c","restored-final-verified","S7-P10","none","s7-p10-sound-cli.md"
 "HXP-R-03956","src/mvdm-host/softpc.new/host/src/nt_sb.c","restored-final-verified","S7-P10","none","s7-p10-sound-cli.md"
 "HXP-R-03957","src/mvdm-host/softpc.new/host/src/nt_sb.c","restored-final-verified","S7-P10","none","s7-p10-sound-cli.md"
+"HXP-R-03958","src/mvdm-host/softpc.new/host/src/nt_sbfm.c","guards-restored-final-verified-residuals-registered","S7-P11","S7","s7-p11-fm-service.md"
+"HXP-R-03959","src/mvdm-host/softpc.new/host/src/nt_sbfm.c","guards-restored-final-verified-residuals-registered","S7-P11","S7","s7-p11-fm-service.md"
+"HXP-R-03960","src/mvdm-host/softpc.new/host/src/nt_sbfm.c","guards-restored-final-verified-residuals-registered","S7-P11","S7","s7-p11-fm-service.md"
+"HXP-R-03961","src/mvdm-host/softpc.new/host/src/nt_sbfm.c","guards-restored-final-verified-residuals-registered","S7-P11","S7","s7-p11-fm-service.md"

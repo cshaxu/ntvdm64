@@ -30,6 +30,17 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Original Owner Request | Execute the new T485 S repair sequence before resuming N004-G097, without excessive repeated verification. |
 | Similar-Issue Sweep | All exclusion masks, effective guards and selected bodies of each owned file; retain runtime ownership and failure semantics. |
 
+## S7 P11 Checkpoint
+
+[FM service admission](../etc/evidence/t485-h-repair/s7-p11-fm-service.md):
+original device lifecycle restored; existing FMActive follows actual service
+success. Non-error diff is 4 points/4 lines to 3 points/5 lines, with three
+registered residuals. Runtime14 cached build, dual thirteen-image publication,
+product FM/VDM ABI fixtures, actual WOW, enhanced Win3.1 strict roundtrip/normal
+exit and NESticle passed. S7 is 16/20; four remain, next sim32.c. Cumulative
+reduction is 860 points/7636 lines including the P10 header. Commit/push closes
+P11 only; Full and audio capability completion are not claimed.
+
 ## S7 P10 Checkpoint
 
 [Sound CLI restoration](../etc/evidence/t485-h-repair/s7-p10-sound-cli.md):
