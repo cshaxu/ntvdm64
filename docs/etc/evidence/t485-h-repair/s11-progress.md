@@ -22,7 +22,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 8 | src/mvdm-host/wow32/walias.h | 6 | P3 delivered 952408b8b |
 | 9 | src/mvdm-host/wow32/wcall16.c | 4 | P4 delivered 9000f7c3f |
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | P5 delivered 1587bccad |
-| 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | P6 final-verified; commit/push pending |
+| 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | P6 delivered 94a576739 |
 | 12 | src/mvdm-host/wow32/wdde.c | 25 | Pending |
 | 13 | src/mvdm-host/wow32/wdde.h | 4 | Pending |
 | 14 | src/mvdm-host/wow32/wdib.c | 1 | Pending |
@@ -445,4 +445,4 @@ P6 final runtime8:cached full build,dual publication26hashes,transaction191/0,
 common-dialog7leaves/42scenarios/0errors,native template2modes/0errors and
 real Win16 three phases PASS. Eleven files/67points final-verified:10restored,
 57residual,385unreviewed. Census140/4220 ->94/246, reduction46/3974.
-P6 commit/push pending; next wdde.c. S11 Full still required before closure.
+P6 delivered/pushed 94a576739; next wdde.c. S11 Full still required before closure.

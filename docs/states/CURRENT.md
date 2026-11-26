@@ -37,7 +37,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 385 unreviewed. P6 wcommdlg.c16/44 ->14/28;reviewed census140/4220 ->94/246,
 net-46/-3974. Runtime8 cached build,dual publication26hashes,transaction191/0,
 common-dialog42/0,native template2modes and real Win16 PASS.
-P6 commit/push pending. Next:wdde.c.
+P6 delivered/pushed 94a576739. Next:wdde.c.
 Migration39/159;Full is required at every S closure, including S11.
 ## S10 Closure Record
 
