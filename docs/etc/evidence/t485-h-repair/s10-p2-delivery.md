@@ -32,3 +32,6 @@ Historical generated block-copy limitation remains explicitly distinguished
 in the sevid019 review; current SAS tests do not certify that old loop.
 Documentation governance and relative links passed before final receipt;
 they are rerun after this receipt. Commit/push pending.
+
+Final receipt: documentation governance and relative links passed after this
+record; product commit d406cb610 was pushed to origin/main. P2 is delivered.

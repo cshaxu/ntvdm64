@@ -159,3 +159,7 @@ Nine P2 files final-verified;10/30 including P1. Four restored frozen points,
 127 residuals,929 unreviewed. Total267/62146, cumulative+66/-40717.
 Commit/push pending. Historical checkpoint paragraphs above retain their
 then-current state; this receipt supersedes their pending verification state.
+
+P2 delivery receipt: d406cb610 committed and pushed to origin/main. Ten of30
+files delivered; four frozen points restored and delivered,127 residuals
+await decisions,929 unreviewed. Next keymouse/keyba.c.

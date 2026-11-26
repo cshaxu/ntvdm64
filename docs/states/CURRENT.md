@@ -39,7 +39,7 @@ format/line-only changed files and two unchanged reviews; runtime2 cached
 build, dual13-image publication,26 hashes, C-VID, live MEM/NTVDMD and
 NESticle passed. Four fully restored points verified;127 evidenced residuals
 remain pending decisions. Total201/102863 ->267/62146: +66 exposed points/
--40717 differing lines under original-format approval. P2 commit/push pending.
+-40717 differing lines under original-format approval. P2 delivered and pushed d406cb610.
 Next keymouse/keyba.c. Migration39/159; Full remains S13.
 
 ## S9 Closure Record
