@@ -402,10 +402,10 @@ Return Value:
     PLLC_CCB cancelledReceive = NULL;
 
 #if DBG
-#line 405
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 410
+#line 412
 
     IF_DEBUG(DLC_ASYNC) {
         DPUT("VrDlcHwInterrupt entered\n");
@@ -606,10 +606,10 @@ Return Value:
             }
 
 #if DBG
-#line 610
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 615
+#line 617
 
         }
 
@@ -1161,15 +1161,14 @@ Return Value:
             //
 
 #if DBG
-#line 1166
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
-#line 1187
+#line 1189
 
             GetEvent(adapterNumber);
 
 #endif
-#line 1191
         } else {
 
             //
@@ -1179,15 +1178,14 @@ Return Value:
             //
 
 #if DBG
-#line 1200
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
-#line 1225
+#line 1227
 
             RemoveDeferredReceive(adapterNumber, stationId, &GetNewEvent);
 
 #endif
-#line 1229
 
         }
 
@@ -1217,10 +1215,10 @@ Return Value:
         //
 
 #if DBG
-#line 1258
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 1274
+#line 1276
 
         IssueHardwareInterrupt();
     }
@@ -1874,16 +1872,15 @@ Return Value:
         }
 
 #if DBG
-#line 1927
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
-#line 1932
+#line 1938
 
         //DosDlcFlowControl(AdapterNumber, StationId, LLC_SET_LOCAL_BUSY_BUFFER);
         DlcFlowControl(AdapterNumber, StationId, LLC_SET_LOCAL_BUSY_USER);
 
 #endif
-#line 1937
 
     } else {
 
@@ -2280,10 +2277,10 @@ Return Value:
     ASSERT(LOBYTE(StationId) != 0);
 
 #if DBG
-#line 2333
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2344
+#line 2354
 
     pQueue = &Adapters[AdapterNumber].LocalBusyInfo[LINK_ID(StationId)].Queue;
     pLlcCcb = *pQueue;
@@ -2297,10 +2294,10 @@ Return Value:
     }
 
 #if DBG
-#line 2357
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2371
+#line 2381
 
 }
 
@@ -2507,10 +2504,10 @@ Return Value:
     }
 
 #if DBG
-#line 2577
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 2581
+#line 2593
 
     //
     // if the deferred queue is now empty, reset the state and issue the real
@@ -2557,16 +2554,15 @@ Return Value:
         }
 
 #if DBG
-#line 2627
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
-#line 2632
+#line 2644
 
         //DosDlcFlowControl(AdapterNumber, StationId, LLC_RESET_LOCAL_BUSY_BUFFER);
         DlcFlowControl(AdapterNumber, StationId, LLC_RESET_LOCAL_BUSY_USER);
 
 #endif
-#line 2637
 
         *pDeferredFramesLeft = FALSE;
 
@@ -3154,10 +3150,10 @@ Return Value:
     }
 
 #if DBG
-#line 3224
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 3233
+#line 3248
 
     return pCcb;
 }
@@ -3414,10 +3410,10 @@ Return Value:
     EnterCriticalSection(&Adapters[AdapterNumber].EventQueueCritSec);
 
 #if DBG
-#line 3489
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 3495
+#line 3514
 
     while (Adapters[AdapterNumber].QueueElements) {
         pCcb = Adapters[AdapterNumber].EventQueueHead;
@@ -3556,10 +3552,9 @@ Return Value:
                     ReleaseReceiveResources(thisCcb);
 
 #if DBG
-#line 3633
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 3635
+#line 3655
 
                     thisCcb = *pQueue;
                 } else {
@@ -3745,10 +3740,10 @@ Return Value:
 
 {
 #if DBG
-#line 3820
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 3824
+#line 3847
 
     IF_DEBUG(CRITICAL) {
         CRITDUMP(("*** INT ACK ***\n"));
@@ -3772,10 +3767,10 @@ Return Value:
     --HardwareIntsQueued;
 
 #if DBG
-#line 3847
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 3851
+#line 3874
 
     //
     // sanity check
@@ -3801,10 +3796,10 @@ Return Value:
     LeaveCriticalSection(&HardwareIntCritSec);
 
 #if DBG
-#line 3876
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 3886
+#line 3909
 
 }
 
@@ -3836,10 +3831,10 @@ Return Value:
 
 {
 #if DBG
-#line 3917
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 3921
+#line 3945
 
     IF_DEBUG(CRITICAL) {
         CRITDUMP(("*** CancelHardwareInterrupts(%d) ***\n", Count));
@@ -3863,10 +3858,10 @@ Return Value:
     HardwareIntsQueued -= Count;
 
 #if DBG
-#line 3944
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 3948
+#line 3972
 
     //
     // sanity check
@@ -3881,9 +3876,9 @@ Return Value:
     LeaveCriticalSection(&HardwareIntCritSec);
 
 #if DBG
-#line 3962
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 3972
+#line 3996
 
 }

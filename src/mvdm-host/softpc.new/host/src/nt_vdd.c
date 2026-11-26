@@ -1,10 +1,10 @@
 /********************************************************/
 /*
- *	nt_vdd.c	-	NT support for VDD DLLs
+ *      nt_vdd.c        -       NT support for VDD DLLs
  *
- *	Ade Brownlow	
+ *      Ade Brownlow
  *
- *	19/11/91
+ *      19/11/91
  *
  */
 
@@ -39,7 +39,6 @@ LOCAL void ms_not_a_bop (void);
 GLOBAL half_word io_get_spare_slot (void);
 GLOBAL void io_release_spare_slot (half_word);
 #else
-#line 42
 #error Unsupported excluded original configuration
 #endif
 #line 52
@@ -50,34 +49,32 @@ extern void illegal_bop(void);
 
 #define MAX_SLOTS (10)
 
-LOCAL void (*MS_bop_tab[MAX_SLOTS])();		/* MS bop table */
+LOCAL void (*MS_bop_tab[MAX_SLOTS])();          /* MS bop table */
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /* Microsoft BOP vectoring code references MS_bop_tab above and calls function
  * as directed by AH */
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-GLOBAL void ms_bop ()		    /* called from MS_bop_5 ie bop 0x55 */
+GLOBAL void ms_bop ()               /* called from MS_bop_5 ie bop 0x55 */
 {
-    half_word ah = getAH();		      /* get the value in AH */
+    half_word ah = getAH();                   /* get the value in AH */
 
     /*........................................Valid then call the MS function */
 
     if(ah >= MAX_SLOTS || MS_bop_tab[ah] == NULL)
-	ms_not_a_bop();
+        ms_not_a_bop();
     else
-	(*MS_bop_tab[ah])();
+        (*MS_bop_tab[ah])();
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-/*:::::	Dummy for unset AH values - stops us zipping into hyperspace :::::::::*/
+/*::::: Dummy for unset AH values - stops us zipping into hyperspace :::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 LOCAL void ms_not_a_bop()
 {
-#line 84
 #ifndef PROD
-#line 85
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 91
@@ -93,11 +90,11 @@ GLOBAL half_word get_ms_bop_index (void (*func)())
 
     for(index = 0; index < MAX_SLOTS; index++)
     {
-	if(MS_bop_tab[index] == NULL)
-	{
-	    MS_bop_tab[index] = func;
-	    break;
-	}
+        if(MS_bop_tab[index] == NULL)
+        {
+            MS_bop_tab[index] = func;
+            break;
+        }
     }
 
     return (index == MAX_SLOTS ? (half_word) 0xff : index);
@@ -214,42 +211,42 @@ WORD FreeVddAdapter(HANDLE hVdd)
 
 #ifndef NEC_98
 #ifdef MONITOR
-#line 224
 #error Excluded original conditional branch
 #endif /* MONITOR */
+#line 226
 #endif // !NEC98
 
 /*** VDDInstallIOHook - This service is provided for VDDs to hook the
- *			IO ports they are responsible for.
+ *                      IO ports they are responsible for.
  *
  * INPUT:
  *      hVDD      ; VDD Handle
  *      cPortRange; Number of VDD_IO_PORTRANGE structures
  *      pPortRange; Pointer to array of VDD_IO_PORTRANGE
- *	IOhandler : VDD handler for the ports.
+ *      IOhandler : VDD handler for the ports.
  *
  * OUTPUT
- *	SUCCESS : Returns TRUE
- *	FAILURE : Returns FALSE
- *		  GetLastError has the extended error information.
+ *      SUCCESS : Returns TRUE
+ *      FAILURE : Returns FALSE
+ *                GetLastError has the extended error information.
  *
  * NOTES:
  *      1. The first one to hook a port will get control. Subsequent
  *         requests will be failed. There is no concept of chaining
  *         the hooks.
  *
- *	2. IOHandler must atleast provide a byte read and a byte write
- *	   handler. Others can be NULL.
+ *      2. IOHandler must atleast provide a byte read and a byte write
+ *         handler. Others can be NULL.
  *
- *	3. If word or string handlers are not provided, their effect
- *	   will be emulated using byte handlers.
+ *      3. If word or string handlers are not provided, their effect
+ *         will be emulated using byte handlers.
  *
- *	4. VDDs should not hook DMA ports. NTVDM manages it for all
- *	   the clients and services are provided to perform DMA
- *	   operations and to access and modify DMA data.
+ *      4. VDDs should not hook DMA ports. NTVDM manages it for all
+ *         the clients and services are provided to perform DMA
+ *         operations and to access and modify DMA data.
  *
- *	5. VDDs should not hook video ports as well. Such a hooking
- *	   will succeed but there is no gurantee that the IO handler will
+ *      5. VDDs should not hook video ports as well. Such a hooking
+ *         will succeed but there is no gurantee that the IO handler will
  *         get called.
  *
  *      6. Each Vdd is allowed to install only one set of IO hooks
@@ -274,7 +271,6 @@ BOOL VDDInstallIOHook (
    WORD              wAdapter;
    PVDD_IO_PORTRANGE pPRange;
 #ifdef MONITOR
-#line 283
 #error Excluded original conditional branch
 #endif
 #line 285
@@ -328,7 +324,6 @@ BOOL VDDInstallIOHook (
           for (w = pPRange->First; w <= pPRange->Last; w++)
             {
 #ifdef MONITOR
-#line 335
 #error Excluded original conditional branch
 #endif
 #line 350
@@ -362,30 +357,29 @@ BOOL VDDInstallIOHook (
 
 #ifndef NEC_98
 #ifdef MONITOR
-#line 380
 #error Excluded original conditional branch
 #endif /* MONITOR */
+#line 389
 #endif // !NEC_98
-#line 390
    return TRUE;
 }
 
 
 
 /*** VDDDeInstallIOHook - This service is provided for VDDs to unhook the
- *			  IO ports they have hooked.
+ *                        IO ports they have hooked.
  *
  * INPUT:
- *	hVDD	: VDD Handle
+ *      hVDD    : VDD Handle
  *
  * OUTPUT
- *	None
+ *      None
  *
  * NOTES
  *
- *	1. On Deinstalling a hook, the defult hook is placed back on
- *	   those ports. Default hook  returns 0xff on reading
- *	   and ignores the write operations.
+ *      1. On Deinstalling a hook, the defult hook is placed back on
+ *         those ports. Default hook  returns 0xff on reading
+ *         and ignores the write operations.
  *
  */
 VOID VDDDeInstallIOHook (
@@ -396,7 +390,6 @@ VOID VDDDeInstallIOHook (
     WORD w;
     WORD wAdapter;
 #ifdef MONITOR
-#line 419
 #error Excluded original conditional branch
 #endif
 #line 421
@@ -413,22 +406,20 @@ VOID VDDDeInstallIOHook (
           for (w = pPortRange->First; w <= pPortRange->Last; w++)
             {
 #ifdef MONITOR
-#line 434
 #error Excluded original conditional branch
 #endif
 #line 449
               io_disconnect_port(w, (half_word)wAdapter);
               }
           pPortRange++;
-	  }
+          }
 
 #ifndef NEC_98
 #ifdef MONITOR
-#line 456
 #error Excluded original conditional branch
-#endif	/* MONITOR */
+#endif  /* MONITOR */
+#line 465
 #endif // !NEC_98
-#line 466
 }
 
 
@@ -601,6 +592,7 @@ HostUndefinedIo(
 #if 0
 #error XP disables the SoundBlaster VDD
 #endif
+#line 659
 
     }
 
@@ -614,12 +606,12 @@ HostUndefinedIo(
 
 
 /*** VDDRequestDMA - This service is provided for VDDs to request a DMA
- *		     transfer.
+ *                   transfer.
  *
  * INPUT:
- *	hVDD	 VDD Handle
- *	iChannel DMA Channel on which the operation to take place
- *	Buffer	 Buffer where to or from transfer to take place
+ *      hVDD     VDD Handle
+ *      iChannel DMA Channel on which the operation to take place
+ *      Buffer   Buffer where to or from transfer to take place
  *      length   Transfer Count (in bytes)
  *
  *               If Zero, returns the Current VDMA transfer count
@@ -632,12 +624,12 @@ HostUndefinedIo(
  *               GetLastError has the extended error information.
  *
  * NOTES
- *	1. This service is intended for those VDDs which do not want to
- *	   carry on the DMA operation on their own. Carrying on a DMA
- *	   operation involves understanding all the DMA registers and
- *	   figuring out what has to be copied, from where and how much.
+ *      1. This service is intended for those VDDs which do not want to
+ *         carry on the DMA operation on their own. Carrying on a DMA
+ *         operation involves understanding all the DMA registers and
+ *         figuring out what has to be copied, from where and how much.
  *
- *	2. This service will be slower than using VDDQueryDMA/VDDSetDMA and
+ *      2. This service will be slower than using VDDQueryDMA/VDDSetDMA and
  *         doing the transfer on your own.
  *
  *      3. Extended Error codes:
@@ -676,7 +668,7 @@ DWORD VDDRequestDMA (
     // if the controller or the channel is disabled, return 0
     if (pDcp->command.bits.controller_disable == 1 ||
        (pDcp->mask & (1 << Chan)) == 0)
-	return (0);
+        return (0);
 
     tCount = ((WORD)pDcp->current_count[Chan][1] << 8)
              | (WORD)pDcp->current_count[Chan][0];
@@ -685,7 +677,7 @@ DWORD VDDRequestDMA (
 
          // return requested transfer count (in bytes)
     if (!length)  {
-	 return (DWORD)Size*((DWORD)tCount + 1);
+         return (DWORD)Size*((DWORD)tCount + 1);
          }
 
     length = length/Size - 1;
@@ -719,26 +711,26 @@ DWORD VDDRequestDMA (
 
 
 /*** VDDQueryDMA -   This service is provided for VDDs to collect all the DMA
- *		     data.
+ *                   data.
  *
  * INPUT:
- *	hVDD	 VDD Handle
- *	iChannel DMA Channel for which to query
- *	Buffer	 Buffer where information will be returned
+ *      hVDD     VDD Handle
+ *      iChannel DMA Channel for which to query
+ *      Buffer   Buffer where information will be returned
  *
  * OUTPUT
- *	SUCCESS : Returns TRUE
- *	FAILURE : Returns FALSE
- *		  GetLastError has the extended error information.
+ *      SUCCESS : Returns TRUE
+ *      FAILURE : Returns FALSE
+ *                GetLastError has the extended error information.
  *
  *
  * NOTES
- *	1. This service is intended for those VDD which are doing
- *	   performance critical work. These VDD can do their own DMA
- *	   transfers and avoid one extra buffer copying which is a
- *	   overhead in using VDDRequestDMA.
+ *      1. This service is intended for those VDD which are doing
+ *         performance critical work. These VDD can do their own DMA
+ *         transfers and avoid one extra buffer copying which is a
+ *         overhead in using VDDRequestDMA.
  *
- *	2. VDDs should use VDDSetDMA to properly update the state of
+ *      2. VDDs should use VDDSetDMA to properly update the state of
  *         DMA after carrying on the operation.
  *
  *      3. Extended Error codes:
@@ -787,19 +779,19 @@ BOOL VDDQueryDMA (
 /*** VDDSetDMA - This service is provided for VDDs to set the DMA data.
  *
  * INPUT:
- *	hVDD	 VDD Handle
- *	iChannel DMA Channel for which to query
+ *      hVDD     VDD Handle
+ *      iChannel DMA Channel for which to query
  *      fDMA     Bit Mask indicating which DMA data fields are to be set
- *		    VDD_DMA_ADDR
- *		    VDD_DMA_COUNT
+ *                  VDD_DMA_ADDR
+ *                  VDD_DMA_COUNT
  *                  VDD_DMA_PAGE
  *                  VDD_DMA_STATUS
- *	Buffer	 Buffer with DMA data
+ *      Buffer   Buffer with DMA data
  *
  * OUTPUT
- *	SUCCESS : Returns TRUE
- *	FAILURE : Returns FALSE
- *		  GetLastError has the extended error information.
+ *      SUCCESS : Returns TRUE
+ *      FAILURE : Returns FALSE
+ *                GetLastError has the extended error information.
  *
  * NOTES
  *

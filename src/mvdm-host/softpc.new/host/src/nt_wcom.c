@@ -44,7 +44,6 @@ GCSfn GetCommShadowMSR;
 
 #ifndef NEC_98
 #ifndef PROD
-#line 47
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 49
@@ -52,7 +51,6 @@ GCSfn GetCommShadowMSR;
 BOOL SetupBaudRate(HANDLE FileHandle, DIVISOR_LATCH divisor_latch);
 BOOL SetupLCRData(HANDLE FileHandle, LINE_CONTROL_REG LCR_reg);
 #endif // NEC_98
-#line 53
 BOOL SyncLineSettings(HANDLE FileHandle, DCB *pdcb,
 		      DIVISOR_LATCH *divisor_latch,
 		      LINE_CONTROL_REG *LCR_reg);
@@ -63,7 +61,6 @@ BOOL SyncLineSettings(HANDLE FileHandle, DCB *pdcb,
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: UART state */
 
 #if defined(NEC_98)         
-#line 63
 #error Unsupported NEC PC-98 configuration
 #else  // NEC_98
 #line 77
@@ -80,12 +77,10 @@ static struct ADAPTER_STATE
 
 } adapter_state[NUM_SERIAL_PORTS];
 #endif // NEC_98
-#line 90
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::: WOW inb function */
 
 #if defined(NEC_98)         
-#line 94
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 156
@@ -106,7 +101,6 @@ void wow_com_inb(io_addr port, half_word *value)
 
    FileH = (HANDLE)(*GetCommHandle)((WORD)adapter);
 #ifndef PROD
-#line 173
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 176
@@ -177,7 +171,6 @@ void wow_com_inb(io_addr port, half_word *value)
     /*.......................................... Handle invalid port accesses */
 
 #ifndef PROD
-#line 243
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 246
@@ -185,12 +178,10 @@ void wow_com_inb(io_addr port, half_word *value)
 
 }
 #endif // NEC_98
-#line 250
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::: WOW outb function */
 
 #if defined(NEC_98)         
-#line 254
 #error Unsupported NEC PC-98 configuration
 #else  // NEC_98
 #line 307
@@ -211,7 +202,6 @@ void wow_com_outb(io_addr port, half_word value)
 
     FileH = (HANDLE)(*GetCommHandle)((WORD)adapter);
 #ifndef PROD
-#line 324
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 327
@@ -275,14 +265,12 @@ void wow_com_outb(io_addr port, half_word value)
     /*.......................................... Handle invalid port accesses */
 
 #ifndef PROD
-#line 387
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 390
 
 }
 #endif // NEC_98
-#line 393
 
 
 /*:::::::::::::::: Synchronise Baud/Parity/Stop bits/Data bits with real UART */
@@ -307,14 +295,12 @@ BOOL SyncLineSettings(HANDLE FileHandle,
     dcb_ptr = pdcb ? pdcb : &dcb;
 
 #if defined(NEC_98)         
-#line 417
 #error Unsupported NEC PC-98 configuration
 #else  // NEC_98
 #line 420
     // Convert BAUD rate to divisor latch setting
     divisor_latch->all = (unsigned short)(115200/dcb_ptr->BaudRate);
 #endif // NEC_98
-#line 423
 
     //Setup parity value
     LCR_reg->bits.parity_enabled = PARITYENABLE_ON;       //Default parity on
@@ -436,7 +422,7 @@ BOOL SetupBaudRate(HANDLE FileHandle, DIVISOR_LATCH divisor_latch)
 
 
 #ifndef PROD
-#line 544
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 582
 #endif // NEC_98

@@ -159,11 +159,8 @@ ERROR RECOVERY    :     errors are ignored
 #include "idetect.h"
 
 #include "debug.h"
-#line 162
 #ifndef PROD
-#line 163
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
-#line 165
 #endif
 #line 166
 
@@ -182,15 +179,12 @@ ERROR RECOVERY    :     errors are ignored
 #include "nt_event.h"
 
 #if defined(NEC_98)
-#line 182
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 187
 
-#line 188
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::: INTERMODULE EXPORTS */
 
-#line 190
 IMPORT void ReinitIdealTime(struct host_timeval *);
 THREAD_DATA ThreadInfo;
 CRITICAL_SECTION TimerTickCS;
@@ -211,10 +205,8 @@ void CreepAdjust(LARGE_INTEGER DiffTime);
 void DemHeartBeat(void);
 
 #ifndef MONITOR
-#line 210
 void quick_tick_recalibrate(void);
 #endif
-#line 212
 
 void rtc_init(void);
 void RtcTick(struct host_timeval *time);
@@ -250,19 +242,16 @@ BOOL   bUpdateRtc;
 
 
 #if defined (MONITOR) && defined (X86GFX)
-#line 247
 #error Excluded unsupported monitor timer switch state
 #endif
 #line 249
 
 
 
-#line 252
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::: NT timer initialise ::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-#line 256
 void host_timer_init(void)
 {
 
@@ -410,9 +399,7 @@ void host_timer_event()
         unsigned char FgBgPriority;
 
 #ifdef X86GFX
-#line 403
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
-#line 410
 #endif /* X86GFX */
 #line 411
 
@@ -438,22 +425,17 @@ void host_timer_event()
         }
 
 #ifndef MONITOR
-#line 434
    quick_tick_recalibrate();
 #endif
-#line 436
 
 
 
-#line 439
 #ifdef YODA
-#line 440
 #error Excluded unsupported YODA configuration
 #endif
 #line 442
 
 #if defined(NEC_98)
-#line 444
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 446
@@ -470,14 +452,13 @@ void host_timer_event()
     PlayContinuousTone();               // sound emulation
 
 #if defined(NEC_98)
-#line 459
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 465
 }
 
 
-/* 
+/*
  * Called to set up the Bios Data area time update vars.
  * and the heart beat's counters
  */
@@ -524,19 +505,15 @@ VOID host_init_bda_timer(void)
     * (word *)(Start_of_M_area + TIMER_LOW)       = (word)Ticks;
     * (half_word *)(Start_of_M_area + TIMER_OVFL) = (half_word)0;
 #endif // !NEC_98
-#line 515
 
 
     // reset the Real Time Clock
     rtc_init();
 
 #ifndef MONITOR
-#line 521
     q_event_init();
 #endif
-#line 523
 
-#line 524
 }
 
 
@@ -555,15 +532,12 @@ void host_GetSysTime(struct host_timeval *time)
 {
     LARGE_INTEGER liTime;
 
-#line 542
         // Don't call kernel unless we have to.
-#line 543
     if (bDoingTicInterrupt) {
         liTime = RtlExtendedLargeIntegerDivide(
                                         CurrHeartBeat,
                                         1000000,
                                         &time->tv_usec);
-#line 548
         time->tv_sec = liTime.LowPart;
         }
     else {
@@ -611,11 +585,8 @@ DWORD HeartBeatThread(PVOID pv)
 
    try {
 
-#line 595
 #ifdef MONITOR
-#line 596
 #error Excluded unsupported monitor timer lock setup
-#line 602
 #endif
 #line 603
 
@@ -629,7 +600,6 @@ DWORD HeartBeatThread(PVOID pv)
        // boosted priority starving the heartbeat thread. Winbench 311
        // shows this problem when doing polylines test.
        //
-#line 614
       SetThreadPriority(ThreadInfo.HeartBeat.Handle,
                         !(dwWNTPifFlags & COMPAT_TIMERTIC)
                            ? THREAD_PRIORITY_TIME_CRITICAL
@@ -637,20 +607,15 @@ DWORD HeartBeatThread(PVOID pv)
                         );
 
 #ifdef X86GFX
-#line 621
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
-#line 630
 #endif
 #line 631
 
-#line 632
 #ifdef MONITOR
-#line 633
 #error Excluded unsupported monitor timer lock release
 #endif
 #line 635
 
-#line 636
       dwRet = Win32_host_timer();
 
       }
@@ -663,7 +628,6 @@ DWORD HeartBeatThread(PVOID pv)
 
 
 #ifdef PIG
-#line 648
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 #line 650
@@ -678,7 +642,6 @@ DWORD Win32_host_timer(void)
 {
     NTSTATUS      status;
 #ifdef PIG
-#line 661
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 #line 663
@@ -759,14 +722,11 @@ DWORD Win32_host_timer(void)
           * Update the VirtualTimerHardware
           */
 #ifdef PIG
-#line 740
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#line 745
 #else
 #line 746
        time_tick();
 #endif /* PIG */
-#line 748
 
 
           /*
@@ -818,9 +778,8 @@ NTSTATUS DelayHeartBeat(LONG Delay)
      liDelay.QuadPart  = Int32x32To64(Delay, -10);
 
 #ifdef MONITOR
-#line 799
+
 #error Excluded unsupported monitor heartbeat wait
-#line 849
 #else          // ndef MONITOR
 #line 850
 //
@@ -843,13 +802,10 @@ NTSTATUS DelayHeartBeat(LONG Delay)
              }
          }
 
-#line 870
 #endif
 
-#line 872
          // alerted to die
      if (status == STATUS_ALERTED)  {
-#line 874
          CloseHandle(ThreadInfo.HeartBeat.Handle);
          ThreadInfo.HeartBeat.Handle = NULL;
          ThreadInfo.HeartBeat.ID = 0;
@@ -857,9 +813,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
          }
 
 
-#line 881
       // Must be an error, announce it to the world
-#line 882
      DisplayErrorTerm(EHS_FUNC_FAILED, status,__FILE__,__LINE__);
      TerminateVDM();
      return status;

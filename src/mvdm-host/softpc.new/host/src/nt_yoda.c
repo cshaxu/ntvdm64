@@ -37,7 +37,7 @@ AMMENDMENTS     :
 */
 
 #ifdef YODA
-#line 40
+
 #error Excluded unsupported YODA configuration
 #endif /* YODA */
 #line 1196

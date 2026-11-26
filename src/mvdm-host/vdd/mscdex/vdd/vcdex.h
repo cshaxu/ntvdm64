@@ -63,9 +63,10 @@ OpenPhysicalDrive(
 #define DEBUG_ERROR  0x80
 
 #ifdef DEBUG
+
 #error
-#line 84
 #else
+#line 85
 
 #define DebugPrint(LEVEL,STRING) {}
 #define DebugFmt(LEVEL,STRING,PARM) {}

@@ -31,12 +31,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Similar-Issue Sweep | Whole-file harmless restorations, normalized-exact bytes, exclusion framework and diagnostic mappings. |
 ## S8 Ordered Progress
 
-[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 639/851 final-verified,
-212 remain. P11 completed cached full build, dual 13-image publication with 26
+[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 688/851 final-verified,
+163 remain. P12 completed cached full build, dual 13-image publication with 26
 matching hashes, source/line checks, actual MEM/NTVDMD lifecycle and NESticle
 rendered-menu/Escape tests. Commit/push completes this delivery.
-Cumulative non-error reduction is 861 points/4845 lines (P11: 107/693);
-336 newline-only files separately. Next: src/mvdm-host/softpc.new/host/src/nt_sec.c.
+Cumulative non-error reduction is 900 points/4981 lines (P12: 39/136);
+338 newline-only files separately. Next: src/mvdm-host/vdmredir/vrinit.c.
 N004 remains gated on S13; migration stays 39/159.
 ## S7 Closure Record
 

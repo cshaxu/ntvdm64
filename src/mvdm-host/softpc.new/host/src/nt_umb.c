@@ -67,7 +67,6 @@ PUMBNODE    UMBList;
 HANDLE	    UMBSectionHandle;
 
 #if defined(NEC_98)
-#line 70
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 73
@@ -102,7 +101,6 @@ DWORD	*Size
 {
 
 #ifdef MONITOR
-#line 104
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 106
@@ -129,7 +127,6 @@ DWORD	*Size
 		    sas_connect_memory(UMB->Base, UMB->Base + UMB->Size - 1, SAS_RAM);
 
 #else
-#line 129
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 #line 141
@@ -165,7 +162,6 @@ DWORD	*Size
 		return FALSE;
 	    }
 #ifdef MONITOR
-#line 173
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 191
@@ -201,7 +197,6 @@ DWORD	*Size
 	    // on MIPS, rom blocks are BIOS and VIDEO. No reason to change it
 	    return FALSE;
 #else
-#line 223
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 #line 260
@@ -221,9 +216,8 @@ DWORD	*Size
 	    if (UMB == NULL) {
 		return FALSE;
 	    }
-#line 276
 #ifdef	MONITOR
-#line 277
+
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 296
@@ -256,7 +250,6 @@ DWORD	Size
 {
 
 #ifdef MONITOR
-#line 325
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 328
@@ -289,7 +282,6 @@ DWORD	Size
 #ifndef	MONITOR
 	    sas_connect_memory(UMB->Base, UMB->Base + UMB->Size - 1, SAS_RAM);
 #else
-#line 357
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 #line 370
@@ -301,7 +293,6 @@ DWORD	Size
 #ifndef	MONITOR
 	    sas_connect_memory(dwBase, dwBase + Size - 1, SAS_RAM);
 #else
-#line 378
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 #line 410
@@ -326,7 +317,6 @@ DWORD	Size
 {
 
 #ifdef MONITOR
-#line 431
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 436
@@ -350,7 +340,6 @@ DWORD	Size
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_RAM);
 #else
-#line 456
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 #line 508
@@ -368,7 +357,6 @@ DWORD	Size
 )
 {
 #ifdef MONITOR
-#line 522
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 528
@@ -393,7 +381,6 @@ DWORD	Size
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_VDD);
 #else
-#line 549
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 #line 585
@@ -416,7 +403,6 @@ BOOL
 GetUMBForEMM(VOID)
 {
 #ifdef MONITOR
-#line 604
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 621
@@ -435,7 +421,6 @@ PUMBNODE  UMB
 {
 
 #ifdef MONITOR
-#line 636
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 641
@@ -460,7 +445,6 @@ PUMBNODE  UMB
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_VDD);
 #else
-#line 662
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 #line 687
@@ -479,7 +463,6 @@ WORD	    Owner
 )
 {
 #ifdef MONITOR
-#line 702
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 706
@@ -527,7 +510,6 @@ WORD	    Owner
     }
 
 #ifdef MONITOR
-#line 750
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 801
@@ -582,7 +564,6 @@ InitUMBList(VOID)
 }
 
 #else
-#line 852
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
-#line 1120
+#line 1223

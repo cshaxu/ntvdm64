@@ -23,9 +23,7 @@ Revision History:
 
 --*/
 
-#line 26
 #if DBG
-#line 27
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 32
@@ -53,9 +51,7 @@ TerminateDlcEmulation(
     );
 
 
-#line 56
 #if DBG
-#line 57
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 59
@@ -90,9 +86,7 @@ Return Value:
 {
     BOOL ok = TRUE;
 
-#line 90
 #if DBG
-#line 91
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 154

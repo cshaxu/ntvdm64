@@ -1194,3 +1194,74 @@ All 37 P11 files pass strict retained-source and logical-line checks, with uncha
 ### P11 final verification
 
 All 37 final source identities, retained text, exclusions and logical-line mappings passed. Cached full build and dual 13-image publication passed; 26 destination hashes match runtime11 (build/t485-s8/p11/published-hashes.json). Actual MEM/NTVDMD load, debug register writeback, allocation rollback and matching task termination passed (debug-live/trace.txt). DOS4GW/NESticle rendered menu and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). No Full or ROM gameplay claim. P11 reduction 107 non-error points/693 lines; cumulative 861/4845. 639/851 final-verified, 212 remain. Commit/push completes P11, not S8.
+
+### P12 host tail, object metadata and VDD files
+
+P11 committed and pushed as 00fbbb932; 639 files delivered.
+
+| File under mvdm-host | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| softpc.new/host/src/nt_sec.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/host/src/nt_timer.c | 1/2 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/host/src/nt_umb.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/host/src/nt_vdd.c | 38/134 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/host/src/nt_vdm.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/host/src/nt_wcom.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/host/src/nt_yoda.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/host/src/sources.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/obj.vdm/cdefine.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/obj.vdm/daytona/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/obj.vdm/daytona/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/obj.vdm/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/obj.vdm/makefile.std | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/obj.vdm/ntvdm.src | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| softpc.new/obj.vdm/sources.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| suballoc/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| suballoc/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| suballoc/suballcp.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| suballoc/suballoc.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/mscdex/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/mscdex/vdd/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/mscdex/vdd/mscdex.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/mscdex/vdd/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/mscdex/vdd/vcdex.def | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/mscdex/vdd/vcdex.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/samples/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/samples/sample1/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/samples/sample2/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/vjoy/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/vjoy/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/vjoy/vjoy.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/vjoy/vjoy.def | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdd/vjoy/vjoy.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/daytona/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/daytona/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/daytona/vdmredir.def | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/dlstruct.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+
+nt_timer.c and nt_vdd.c restore 39 format points/136 lines with per-line token/literal/operator comparison before restoration. All 39 final files pass strict retained-source comparison, unchanged-error checks and original logical-line mapping (build/t485-s8/p12-source-check.json and p12/line-check.json). Two newline-only files restore original bytes. No selected algorithm, API or guest binary changed.
+
+678/851 reviewed: 639 delivered, 39 local, 173 remain. P12 local reduction 39 points/136 lines; cumulative 900/4981. Newline-only count 338. No P12 build/publication/runtime pass claimed. Next: vdmredir/sources.inc.
+
+### P12 redirector reconciliation
+
+| File under vdmredir | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| sources.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir.def | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vrdebug.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vrdisp.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vrdlc.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vrdlc5c.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vrdlcbuf.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vrdlcdbg.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vrdlcpst.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vrdll.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+
+All 49 P12 files pass strict retained-source, unchanged-error and logical-line checks (build/t485-s8/p12-source-check.json and p12/line-check.json). 688/851 reviewed: 639 delivered, 49 local, 163 remain. P12 reduction remains 39 points/136 lines; cumulative 900/4981. Newline-only count 338. Next: vdmredir/vrinit.c. Build/publication/runtime verification pending.
+
+### P12 final verification
+
+All 49 final source identities, retained text, exclusions and logical-line mappings passed. Cached full build and dual 13-image publication passed; 26 destination hashes match runtime12 (build/t485-s8/p12/published-hashes.json). Actual MEM/NTVDMD load, debug register writeback, allocation rollback and matching task termination passed (debug-live/trace.txt). DOS4GW/NESticle menu pixels and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). No Full or ROM gameplay claim. P12 reduction 39 non-error points/136 lines; cumulative 900/4981. 688/851 final-verified, 163 remain. Commit/push completes P12, not S8.

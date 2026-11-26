@@ -350,12 +350,10 @@ Return Value:
             }
         }
 
-#line 353
 #if DBG
-#line 354
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 358
+#line 360
 
     }
 
@@ -454,12 +452,10 @@ Return Value:
     WORD n;
     WORD bufferSize;
 
-#line 456
 #if DBG
-#line 457
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 463
+#line 467
 
     EnterCriticalSection(&BufferSemaphore);
 
@@ -560,12 +556,10 @@ Return Value:
 
             status = LLC_STATUS_SUCCESS;
 
-#line 563
 #if DBG
-#line 564
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 568
+#line 572
 
         } else {
 
@@ -643,12 +637,10 @@ Return Value:
     PLLC_DOS_BUFFER pBuffer;        // flat NT pointer
     PDOS_DLC_BUFFER_POOL pBufferPool = &aBufferPools[PoolIndex];
 
-#line 645
 #if DBG
-#line 646
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 648
+#line 653
 
     IF_DEBUG(DLC_BUFFERS) {
         DPUT2("FreeBuffers: PoolIndex=%x dpBuffer=%x\n", PoolIndex, dpBuffer);
@@ -683,12 +675,10 @@ Return Value:
         while (pNextBuffer) {
             ++pBufferPool->BufferCount;
 
-#line 682
 #if DBG
-#line 683
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 685
+#line 690
 
             pBuffer = pNextBuffer;
             pNextBuffer = (PLLC_DOS_BUFFER)READ_FAR_POINTER(&pBuffer->pNext);
@@ -709,12 +699,10 @@ Return Value:
         WRITE_DWORD(&pBuffer->pNext, pBufferPool->dpBuffer);
         pBufferPool->dpBuffer = dpBase;
 
-#line 705
 #if DBG
-#line 706
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 714
+#line 719
 
     }
 
@@ -854,12 +842,10 @@ Return Value:
             dataLeft = pFrame->NotContiguous.cbBuffer;
         }
 
-#line 853
 #if DBG
-#line 854
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 858
+#line 864
 
     } else if (dataSpace < pFrame->Contiguous.cbBuffer) {
         dataLeft = pFrame->Contiguous.cbBuffer - dataSpace;
