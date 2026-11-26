@@ -56,3 +56,51 @@ Both frozen points are final-verified restored. 1/41 reviewed and verified;
 40 unreviewed; byte-sensitive measured scope 1/540 -> 0/0. Commit/push completes
 P1 delivery. Next: src/mvdm-host/dbgdll/dbgdll.c.
 P1 delivery receipt: 1e15cd498 pushed to origin/main. 1/41 delivered; 40 remain.
+
+## P2: dbgdll/dbgdll.c and coupled original declaration
+
+Entry: raw byte-sensitive 1 point/1356 lines, four frozen points. The file
+has CRLF while pinned XP has LF. Three differences are parameterized stdcall
+boundaries: DbgDllInitialize (3 arguments; /entry:DbgDllInitialize@12),
+xxxDbgNotifyRemoteThreadAddress (2 arguments) and xxxDbgNotifyDebugged
+(1 argument), called through WINAPI pointers in dbg.c. These are unlike the
+zero-argument P1 functions; restoring default cdecl would violate stack cleanup.
+The three qualifiers remain on existing lines so original diagnostic positions
+are preserved without new #line statements. The resulting file has 3 points/6
+lines relative to XP; production algorithms are otherwise original.
+
+HXP-R-00005's old restore-#error recommendation is wrong: target.cmake selects
+/Di386 for this DLL, so #error would stop the supported build. The original
+four-line initialization branch is restored instead. Its getIntelRegistersPointer
+provider is the existing original stubs.c implementation: PROD assert0 is empty
+and it returns zero. px86 has declarations/storage but no reads in current src.
+No new pointer emulation, algorithm, callback or condition is introduced.
+
+The original API declaration in softpc.h was confined to the V86-monitor branch.
+The same declaration is exposed after v86def.h in the existing common i386
+conditional (+1 declaration line); existing #line 33 preserves subsequent
+original mapping. This is a coupled header adjustment within the owner's small
+mirror-increment allowance. Before-image retained in build/t485-s9/p2.
+
+The initial restoration helper rejected the header's CRLF anchor after restoring
+dbgdll.c; the insertion was completed preserving header CRLF before the worker
+compile. It was not a product compilation failure. Cached full build/publication
+is running. Final link, actual DLL initialization and notification tests are
+required before declaring the original initialization safe and delivered.
+P2 is local, not delivered; S9 delivered progress remains 1/41.
+### P2 final verification
+
+Runtime2 cached full build and dual publication passed (26 matching hashes).
+The real MEM worker loaded NTVDMD.DLL with restored initialization; both
+breakpoint/trace callbacks, register writeback, allocation/failure and termination
+checks passed. NESticle rendered its menu and Escape hide/restore passed.
+[Final byte-sensitive metrics](s9-p2-mirror-diff.json): dbgdll.c 1/1356 -> 3/6;
+softpc.h 1/1629 -> 1/1630. Batch 2/2985 -> 4/1636, +2 points/-1349 lines.
+The header has no #error; CRLF differences remain included. Only its coupled
+declaration is validated here; its full S12 audit remains outstanding.
+HXP-R-00005 is restored; HXP-R-00004/6/7 retain evidenced parameterized stdcall
+boundaries. No wrapper, alias, new state or alternate algorithm is added.
+S9 is 2/41 reviewed and final-verified; commit/push pending. Across both S9
+primary files and the one coupled header, measured baseline 3/3525 -> 4/1636,
++1 point/-1889 lines. This is not the unmeasured whole-S9 census.
+Next primary file: dbgdll/excptn.c. Full remains the S13 integrated checkpoint.

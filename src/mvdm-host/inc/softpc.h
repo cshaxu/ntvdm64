@@ -31,6 +31,7 @@ Revision History:
 #ifdef i386
 #line 31
 #include "v86def.h"
+PX86CONTEXT getIntelRegistersPointer(VOID);
 #endif
 #line 33
 

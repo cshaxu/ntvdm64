@@ -32,13 +32,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S9 Ordered Progress
 
-[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 1/41 reviewed and delivered, 40 remain.
-brkpt.c is byte-exact XP, 1 point/540 lines -> 0/0. Runtime1 cached build,
-dual publication (26 hashes), real breakpoint/trace writeback and NESticle
-tests passed. P1 1e15cd498 is committed and pushed; next dbgdll/dbgdll.c.
-The frozen 437-point inventory is not a byte-sensitive current diff total;
-measure actual point/line counts against pinned XP at each file entry.
-Migration remains 39/159. S13 retains the integrated Full checkpoint.
+[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 2/41 reviewed and
+final-verified, 39 remain; P1 1e15cd498 delivered, P2 commit/push pending.
+P2 restores dbgdll.c initialization with one coupled softpc.h declaration;
+three parameterized WINAPI boundaries remain. Runtime2 cached full build,
+dual publication (26 hashes), real DLL/debug callbacks and NESticle passed.
+P2 byte-sensitive batch: 2/2985 -> 4/1636. Cumulative measured two primary
+files plus header: 3/3525 -> 4/1636; whole-S9 total not yet measured.
+Next: dbgdll/excptn.c. The header's full review stays S12. Migration 39/159;
+S13 retains integrated Full. Frozen 437 points are not a current byte census.
 ## S8 Closure Record
 
 [S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 851/851 source-reviewed

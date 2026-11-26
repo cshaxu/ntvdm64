@@ -1,0 +1,30 @@
+[
+  {
+    "path": "src/mvdm-host/dbgdll/dbgdll.c",
+    "original_sha256": "8d23156eb13ee652d63b0522105a625d2de096d9002765980ddfaa31b730273d",
+    "before_sha256": "0071182ff5f5374f3fdf8bd284973d9f34b8735593dcb69abc839db4446e74e8",
+    "after_sha256": "057c24011cf361cdf936d5f6f7410db17a8ff5bbee6d59866ae57660a6d5f50f",
+    "before": {
+      "points": 1,
+      "lines": 1356
+    },
+    "after": {
+      "points": 3,
+      "lines": 6
+    }
+  },
+  {
+    "path": "src/mvdm-host/inc/softpc.h",
+    "original_sha256": "0e371b3f7e600aeb4ae76cdd371432daa6904ba50237e709cb35255982418f25",
+    "before_sha256": "b0733efca11136a72285b26c63dfcf9fe400574d4fc5c4923979beff055b3d7d",
+    "after_sha256": "21c468af44eeea9493433f17662ca18011e9f6da07379f0d552505022d994a37",
+    "before": {
+      "points": 1,
+      "lines": 1629
+    },
+    "after": {
+      "points": 1,
+      "lines": 1630
+    }
+  }
+]

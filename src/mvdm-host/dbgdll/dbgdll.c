@@ -51,6 +51,10 @@ WINAPI DbgDllInitialize(
 
     case DLL_PROCESS_ATTACH:
 
+#ifdef i386
+        // X86 Only, get pointer to Register Context Block
+        px86 = getIntelRegistersPointer();
+#endif
 
         st = NtQueryInformationProcess(
                     NtCurrentProcess(),
@@ -468,8 +472,7 @@ xxxDbgDispatch()
 
 
 
-VOID
-WINAPI
+VOID WINAPI
 xxxDbgNotifyRemoteThreadAddress(
     LPVOID  lpAddress,
     DWORD   lpBlock
@@ -478,8 +481,7 @@ xxxDbgNotifyRemoteThreadAddress(
     lpRemoteBlock   = lpBlock;
 }
 
-VOID
-WINAPI
+VOID WINAPI
 xxxDbgNotifyDebugged(
     BOOL    fNewDebugged
 ) {
