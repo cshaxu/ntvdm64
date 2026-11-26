@@ -417,3 +417,7 @@ rendered menu plus Escape hide/restore. Governance and links passed.
 Final source hashes are in build/t485-s10/p6/source-review.json.18 files
 final-verified;20 local restorations await this commit/push. Full remains
 S13;no Windows desktop or legacy block-copy boundary closure is claimed.
+
+P6 receipt:a6ba6aa72 pushed to origin/main.18/30 reviewed/delivered;705/1060
+points reviewed,355 remain.542 restored/delivered,163 residuals,zero local
+restorations pending. Census907/38800 unchanged. Next egwrtm12.c.
