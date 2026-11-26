@@ -490,3 +490,189 @@ Only latest_sha256 and delivery_state are corrected; snapshot_sha256 is immutabl
 Current hash: 5878ad3d3acf0111536339d81f8f26bb7c39dda4425000e0011abf5ca70e9405.
 CURRENT and this detailed record now both state 221/851, not the historical 12/26
 checkpoints. Source history confirms no subsequent c_seg.c product changes.
+
+### P5 ordered reconciliation through into.c
+
+P4 is committed and pushed as 4378cb179; 221 files are delivered.
+The 228 final-verified ledger entries were checked against disk: no stale hashes.
+
+| File under softpc.new/base/ccpu386 | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| div.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| enter.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| enter.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| evidgen.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| fault.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| fpu_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| gdpvar.h | 0/0 -> 0/0 | Original retained code; 1 existing excluded arms; XP diagnostic anchors |
+| idiv.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| idiv.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| imul.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| imul.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| in.c | 0/0 -> 0/0 | Original retained code; 1 existing excluded arms; XP diagnostic anchors |
+| in.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| inc.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| inc.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| into.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+
+Pinned-object source comparison passes for all 16 P5 files. No instruction algorithm
+or selected branch changed. 237/851 reviewed, 614 remain; 221 delivered, 16 local.
+Non-error reduction stays 68 points/176 lines; newline-only restorations total 124.
+No P5 build/runtime pass claimed. Next: ccpu386/into.h.
+
+### P5 ordered reconciliation through popa.c
+
+| File under softpc.new/base/ccpu386 | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| into.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| intx.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| intx.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| invd.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| invd.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| invlpg.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| invlpg.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| iret.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| jcxz.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| jcxz.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| jmp.c | 0/0 -> 0/0 | Original retained code; 3 unchanged excluded arms; XP diagnostic anchors |
+| jmp.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| jxx.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| jxx.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lahf.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lahf.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lar.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lar.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lea.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lea.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| leave.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| leave.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lgdt.c | 0/0 -> 0/0 | Original retained code; 4 unchanged excluded arms; XP diagnostic anchors |
+| lgdt.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lidt.c | 0/0 -> 0/0 | Original retained code; 2 unchanged excluded arms; XP diagnostic anchors |
+| lidt.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lldt.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| lldt.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lmsw.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lmsw.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| loopxx.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| loopxx.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lsl.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lsl.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| ltr.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| ltr.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| lxs.c | 0/0 -> 0/0 | Original retained code; 5 unchanged excluded arms; XP diagnostic anchors |
+| lxs.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| makefile | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| mov.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| mov.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| movsx.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| movsx.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| mul.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| mul.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| neg.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| neg.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| newnpx.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| nop.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| nop.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| not.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| not.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| or.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| or.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| out.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| out.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| pigger_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| pop.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| pop.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| popa.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+
+Pinned-object source comparison passes for all 76 P5 files. Existing exclusions
+and selected algorithms are unchanged. 297/851 reviewed, 554 remain; 221 delivered,
+76 local P5 files. Cumulative non-error reduction remains 68 points/176 lines;
+newline-only restorations total 175. No P5 build/runtime pass claimed.
+Next file: ccpu386/popa.h.
+
+### P5 CPU formats and original build manifest
+
+| File under softpc.new/base/ccpu386 | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| popa.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| popf.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| popf.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| push.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| push.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| pusha.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| pusha.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| pushf.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| pushf.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| rcl.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| rcl.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| rcr.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| rcr.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| ret.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| rol.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| rol.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| ror.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| ror.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| rsrvd.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| rsrvd.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sahf.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sahf.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sar.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sar.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sascdef.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sbb.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sbb.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| setxx.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| setxx.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sgdt.c | 0/0 -> 0/0 | Original retained code; 2 unchanged excluded arms; XP diagnostic anchors |
+| sgdt.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| shl.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| shl.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| shld.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| shld.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| shr.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| shr.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| shrd.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| shrd.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sidt.c | 0/0 -> 0/0 | Original retained code; 2 unchanged excluded arms; XP diagnostic anchors |
+| sidt.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sldt.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sldt.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| smsw.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| smsw.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| sources | 1/1 -> 0/0 | Exact XP metadata; provider selection explicit in existing CMake graph |
+
+HXP-R-00597 correction: the frozen claim that SOURCES was unconsumed is false.
+tools/build/worker/source-groups.cmake reads it through worker_original_sources.
+The deleted ntstubs.c entry is restored; the existing source-group composition now
+removes it before appending localfm.c. Both original providers define Gdp, Cpu and
+Video; the selected localfm.c remains the only linked vector-storage provider.
+No algorithm is moved or duplicated. The selected file list must remain unchanged
+after cached configure/build. The original snapshot disposition is retained as
+history; this final investigation supersedes its inaccurate unconsumed rationale.
+
+343/851 reviewed, 508 remain; 221 delivered, 122 local P5 files. Non-error
+reduction totals 69 points/177 lines: 68/176 delivered, 1/1 local. Newline-only
+restorations total 216. Whole sources file is complete; start P5 cached build,
+dual publication and targeted verification. Next: ccpu386/stc.c after delivery.
+### P5 final source review
+
+All 122 files pass pinned-XP retained-code comparison and original logical-line
+checks. The source selection before and after the SOURCES restoration is the
+same ordered 130-file list, including exactly one localfm.c and no ntstubs.c.
+Evidence: build/t485-s8/p5/{line-check,source-selection}.json and
+build/t485-s8/p5-source-check.json. This proves selection preservation, not yet
+runtime acceptance; cached full build and publication are still running.
+### P5 final delivery verification
+
+Runtime5 cached full build and dual 13-image publication passed; all 26 published
+hashes match. Real MEM/NTVDMD export, debugger event/register writeback, allocation
+rollback and task termination passed. DOS4GW/NESticle menu pixels and Escape
+hide/restore passed. Evidence: build/t485-s8/p5/debug-live/trace.txt,
+p5/dos4gw/nesticle.txt.graphics-result.json and p5/published-hashes.json.
+
+All 122 P5 files are final-verified; selected 130-file CCPU list is unchanged.
+P5 reduces one non-error point/line, cumulative 69/177; newline-only total 216.
+343/851 reviewed and final-verified, 508 remain. Commit/push completes delivery.
+No Full result is claimed; verification is scoped to this format/build-selection
+batch. Next: ccpu386/stc.c. N004 remains gated on S13.

@@ -1,4 +1,5 @@
 worker_original_sources(names "${NTVDM_REPO}/src/mvdm-host/softpc.new/base/ccpu386/sources")
+list(REMOVE_ITEM names "ntstubs.c") # localfm.c supplies the selected CCPU vector storage.
 list(APPEND names "localfm.c")
 list(REMOVE_DUPLICATES names)
 set(ccpu_objects)

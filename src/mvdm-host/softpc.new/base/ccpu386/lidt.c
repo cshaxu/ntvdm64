@@ -39,7 +39,6 @@ LIDT16
    IU32 op1[2]	/* src(limit:base pair) operand */
    )
 #else
-#line 42
 #error Unsupported excluded original configuration
 #endif
 #line 45
@@ -55,7 +54,6 @@ LIDT32
    IU32 op1[2]	/* src(limit:base pair) operand */
    )
 #else
-#line 57
 #error Unsupported excluded original configuration
 #endif
 #line 60

@@ -39,7 +39,6 @@ SIDT16
    IU32 op1[2]	/* dst (limit:base pair) operand */
    )
 #else
-#line 42
 #error Unsupported excluded original configuration
 #endif
 #line 45
@@ -63,7 +62,6 @@ SIDT32
    IU32 op1[2]	/* dst (limit:base pair) operand */
    )
 #else
-#line 65
 #error Unsupported excluded original configuration
 #endif
 #line 68

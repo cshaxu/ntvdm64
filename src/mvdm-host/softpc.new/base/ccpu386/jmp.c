@@ -47,7 +47,6 @@ JMPF
    IU32 op1[2]       /* offset:segment pointer */
    )
 #else
-#line 50
 #error Unsupported excluded original configuration
 #endif
 #line 53
@@ -69,7 +68,7 @@ JMPF
       /* Real Mode or V86 Mode */
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-#line 71
+
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 81
@@ -81,7 +80,6 @@ JMPF
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 89
 
       load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);
       SET_EIP(new_ip);
@@ -142,7 +140,7 @@ IFN1(
 
    /* do ip limit check */
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-#line 149
+
 #error Unsupported excluded original configuration
 #else /* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 154
@@ -173,7 +171,6 @@ IFN1(
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 181
 
    SET_EIP(offset);
    }

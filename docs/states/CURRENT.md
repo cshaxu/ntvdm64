@@ -31,14 +31,13 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Similar-Issue Sweep | Whole-file harmless restorations, normalized-exact bytes, exclusion framework and diagnostic mappings. |
 ## S8 Ordered Progress
 
-[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 221/851 reviewed
-and final-verified, 630 remain. P3 1784272b5 delivered 123 files. P4 adds 98:
-cached full build, dual 13-image hash-verified publication, source/diagnostic-line
-checks, real MEM/NTVDMD and DOS4GW/NESticle menu roundtrip all passed on runtime4.
-Commit/push completes P4. Cumulative non-error reduction is 68 points/176 lines;
-110 newline-only restorations are counted separately. Next: ccpu386/div.h.
-S6 c_seg.c file status and latest hash are reconciled to delivered f0df10cdb.
-S8 remains active; N004 stays gated on S13.
+[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 343/851 reviewed
+and final-verified, 508 remain. P4 4378cb179 delivered 221 files; P5 adds 122.
+Runtime5 cached build, dual 13-image hash-verified publication, source/line and
+130-file selection checks, actual NTVDMD/MEM and DOS4GW/NESticle tests passed.
+Commit/push completes P5. Non-error reduction totals 69 points/177 lines;
+216 newline-only restorations are separate. Next: ccpu386/stc.c.
+N004 stays gated on S13; migration remains 39/159.
 ## S7 Closure Record
 
 [S7 closure](../etc/evidence/t485-h-repair/s7-progress.md), delivered through a1f5bff4b.
