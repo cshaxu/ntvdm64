@@ -55,3 +55,4 @@ No original guest binary was modified. This is targeted acceptance, not Full.
 Both frozen points are final-verified restored. 1/41 reviewed and verified;
 40 unreviewed; byte-sensitive measured scope 1/540 -> 0/0. Commit/push completes
 P1 delivery. Next: src/mvdm-host/dbgdll/dbgdll.c.
+P1 delivery receipt: 1e15cd498 pushed to origin/main. 1/41 delivered; 40 remain.

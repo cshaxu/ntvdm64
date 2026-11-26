@@ -32,10 +32,10 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S9 Ordered Progress
 
-[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 1/41 reviewed, 40 remain; 0 delivered.
+[S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 1/41 reviewed and delivered, 40 remain.
 brkpt.c is byte-exact XP, 1 point/540 lines -> 0/0. Runtime1 cached build,
 dual publication (26 hashes), real breakpoint/trace writeback and NESticle
-tests passed. P1 commit/push pending; next dbgdll/dbgdll.c.
+tests passed. P1 1e15cd498 is committed and pushed; next dbgdll/dbgdll.c.
 The frozen 437-point inventory is not a byte-sensitive current diff total;
 measure actual point/line counts against pinned XP at each file entry.
 Migration remains 39/159. S13 retains the integrated Full checkpoint.
