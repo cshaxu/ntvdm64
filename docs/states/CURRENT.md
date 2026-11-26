@@ -32,13 +32,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S11 Ordered Progress
 
-[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):11/48 files,
-67/452 points final-verified:10 restored,57 residuals pending owner decision,
-385 unreviewed. P6 wcommdlg.c16/44 ->14/28;reviewed census140/4220 ->94/246,
-net-46/-3974. Runtime8 cached build,dual publication26hashes,transaction191/0,
-common-dialog42/0,native template2modes and real Win16 PASS.
-P6 delivered/pushed 94a576739. Next:wdde.c.
-Migration39/159;Full is required at every S closure, including S11.
+[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):12/48 files,
+92/452 points final-verified:10 restored,82 residuals pending owner decision,
+360 unreviewed. P7 wdde.c26/161 ->25/159; reviewed census166/4381 ->119/405,
+net-47/-3976. Runtime9 cached build,dual publication26hashes,DDE96/38/4/4 and
+Full23/23 PASS. Win95 retains approved knownExitOne; both enhanced desktop
+roundtrips preserve same-window/input. P7 commit/push pending.
+Delivered remains11files/67points through P6 94a576739 until P7 push.
+Full checkpoint covers files1..12; next is file20 and every S closure.
+Next after P7 delivery:wdde.h. Migration39/159; S11 remains active.
 ## S10 Closure Record
 
 [S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):30/30 files and

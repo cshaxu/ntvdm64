@@ -16,6 +16,10 @@ typedef struct { struct { WORD hwnd, wMsg, wParam; DWORD lParam; } WndProc; } PA
 #define LOW(value) (*(WORD *)&(value))
 #define HIW(value) (*((WORD *)&(value) + 1))
 #define WOW32ASSERT(test) ((void)0)
+#define WOW32WARNMSG(test, text) ((void)0)
+#define WOWGLOBALFREE(handle) GlobalFree(handle)
+#define GETMISCPTR(value, pointer) ((pointer) = (LPBYTE)(ULONG_PTR)(value))
+#define FREEMISCPTR(pointer) ((void)0)
 typedef struct _WM32MSGPARAMEX {
     HWND hwnd; UINT uMsg, uParam; LONG lParam; PARM16 Parm16;
     BOOL fThunk, fFree; LONG lReturn;
@@ -49,7 +53,7 @@ static unsigned failures, cases, live_nodes, marks, unmarks;
 static unsigned native_frees, guest_frees, meta_frees;
 static unsigned allocation_fail, last_guest, last_native;
 static BOOL reject_mark;
-static HAND16 reenter_guest;
+static HAND16 reenter_guest, released_drop;
 static BYTE marked[65536];
 static UINT packet_low, packet_high;
 static unsigned packet_frees;
@@ -152,6 +156,20 @@ static BOOL fixture_initiating(HAND16 window)
     return initiating;
 }
 
+/* XP unknown-handle cleanup is delegated to the shell drop provider.
+ * Record that delegation; unselected allocation services fail closed. */
+static VOID FindAndReleaseHDrop16(HAND16 handle)
+{
+    released_drop = handle;
+}
+static VPVOID GlobalAllocLock16(UINT flags, DWORD bytes, HAND16 *handle)
+{
+    (void)flags; (void)bytes; *handle = 0; ++failures; return 0;
+}
+static BOOL GlobalUnlock16(HAND16 handle)
+{
+    (void)handle; ++failures; return FALSE;
+}
 /* Bodies remain externally linked exactly as extracted; previous prototypes
  * carry internal linkage in this single translation-unit fixture. */
 #include "dde_alias_exact_bodies.h"
@@ -270,7 +288,7 @@ int __cdecl main(void)
     CHECK("reentry-target-once", last_guest == 18 && !marked[18]);
     CHECK("reentry-list-empty", !phDDEFirst && !live_nodes);
     marked[17] = 0;
-    CHECK("unknown-guest-free", W32DdeFreeHandle16(99));
+    CHECK("unknown-guest-free", W32DdeFreeHandle16(99) && released_drop == 99);
     CHECK("unknown-native-free", W32DDEFreeGlobalMem32(H(199)));
     CHECK("null-native-veto", !W32DDEFreeGlobalMem32(NULL));
     /* Complete original ACK body, with only packing/window/guest services

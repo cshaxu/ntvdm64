@@ -446,3 +446,53 @@ common-dialog7leaves/42scenarios/0errors,native template2modes/0errors and
 real Win16 three phases PASS. Eleven files/67points final-verified:10restored,
 57residual,385unreviewed. Census140/4220 ->94/246, reduction46/3974.
 P6 delivered/pushed 94a576739; next wdde.c. S11 Full still required before closure.
+
+### P7 wdde.c whole-file review and ten-file Full checkpoint
+
+File12/48, points04140..04164 (25). Entry26points/161lines, final25/159:
+remove two redundant line anchors,719 original retained lines map exactly,
+zero exclusions. No functional change or shifted complexity. All25 functional
+residuals remain pending owner; no point is counted restored merely by removing
+its redundant line anchor.
+
+Initiator acquisition status prevents nested failed allocation from deleting
+an older same-window initiator. Original conversion ignores inner-pair failure;
+DIB/metafile allocations need their existing per-call rollback if conversion,
+packet publication or posting fails. At most two inner metafile objects plus
+one POST packet fit the existing three slots. Existing-pair reuse acquires none.
+HDDE remains sole long-lived identity; stack records only this call's new pairs.
+Rejected mark callbacks remove the new alias; successful guest zero results are
+not rejected. Empty delete was reproduced by original-body counterexample.
+COPYDATA_HEADER prevents payload/header identity collisions in both directions.
+Evidence: actual wmdisp32/wmsg16/wumsg callers, current alias/conversion fixtures,
+and m0-t447-s4-message-source-audit.md original/candidate DDE comparisons.
+These native fixtures do not prove every guest DDE conversation.
+
+Source-reviewed12/48files,92/452points:10restored,82residual,360unreviewed.
+Census166/4381 ->119/405, reduction47points/3976lines. Delivered remains
+11files/67points and46/3974 reduction until this package passes and is pushed.
+Owner now requires Full every ten completed files in addition to every S closure.
+P7 completes current file before build and runs cached full build,dual publish,
+DDE targeted assertions and Full against runtime9, then commit/push. Pending.
+
+P7 verification update: runtime9 cached build and dual publication PASS,
+26 published image hashes checked. Initial DDE fixture compile failed on XP
+WOWGLOBAL macros and added service references; fixture-only mappings now use
+existing allocation doubles, verify unknown-handle shell-drop delegation, and
+fail closed for unselected ACK allocation services. Alias96/0,Execute38/0,
+conversion16 four cases/0 and conversion32 four cases/0 PASS. Existing conversion
+fixtures are now dependencies of wow-dde and run through its existing verifier.
+No production change was needed. Full runner24724 started 2026-11-26 16:54:38;
+Full/commit/push remain pending. Earlier failed attempts remain in p7 evidence.
+
+P7 final runtime9: Full23/23 PASS in613946ms; identical13-image runtime,
+dual publication26/26 hashes. Win3.1 standard/enhanced desktop and exits pass;
+enhanced Win3.1 and Win95 roundtrips both report window-input/fullscreen-text/
+returned-window-input/second-fullscreen/same-window=1. Win95 keeps the approved
+knownExitOne boundary (not a normal zero exit). WOW three frontiers, command
+matrices, RPC/version checks, actual EDIT return, relaunch/isolation/retirement,
+nested window and NESticle pixels plus Escape all pass. DDE96/38/4/4 assertions
+pass. No original guest modification. Governance and relative links pass.
+All12files/92points now final-verified:10restored,82owner-review residuals,
+360unreviewed; census166/4381 ->119/405, reduction47/3976. Commit/push pending.
+Full checkpoint covers files1..12; next count checkpoint is file20, plus S closure.

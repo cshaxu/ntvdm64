@@ -640,7 +640,6 @@ HANDLE  DDECopyhData32(HAND16 To_hwnd, HAND16 From_hwnd, HAND16 h16, PDDEINFO pD
                             hMF16 = FETCHWORD(lpMemMeta16->hMF);
 
                             if (!fFailed && hMF16) {
-#line 594
                                 hMF32 = (HMETAFILE) HMFFromWinMetaFile(hMF16, FALSE);
                                 pDdeInfo->Flags = DDE_METAFILE;
                                 if (!hMF32 || !DDETrackhandle(pConversion, To_hwnd, From_hwnd,
@@ -1161,7 +1160,6 @@ BOOL CopyDataDeleteNode (HWND16 To_hwnd, HWND16 From_hwnd, DWORD Mem)
     PCPDATA pTemp2;
 
     pTemp1 = pCPDataFirst;
-#line 1034
 
     if ((pTemp1->To_hwnd == To_hwnd) &&
         (pTemp1->From_hwnd == From_hwnd) &&

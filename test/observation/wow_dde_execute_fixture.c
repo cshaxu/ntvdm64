@@ -34,6 +34,7 @@ static BOOL track(PDDECONVERSION c,HWND16 to,WORD from,HAND16 h,HANDLE mem,PDDEI
 #define GlobalAllocLock16 alloc16
 #define GlobalUnlockFree16 free16
 #define GlobalAlloc alloc32
+#define WOWGLOBALALLOC(flags, bytes) GlobalAlloc(flags, bytes)
 #define GlobalLock(h) ((LPVOID)(h))
 #define GlobalUnlock(h) ((void)0)
 #define GlobalFree free32

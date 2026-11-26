@@ -9,6 +9,15 @@ tests alone cannot close an S. Ordinary P deliveries within an S retain their
 applicable targeted-test cadence. This supersedes plans that defer all Full
 verification to a later S; previously recorded closures remain historical facts.
 
+## Ten-file Full checkpoint
+
+Owner update 2026-11-26: every ten completed audit files also require the
+full five-step delivery: cached full build, dual-location publication, Full
+regression against that published package, commit, and push. Finish every
+point in the current file before starting the checkpoint; do not split a
+file to trigger verification. Record the completed-file count and the last
+Full checkpoint. This is additional to mandatory Full at every S closure.
+
 ## Request Lifecycle
 
 1. Read the task reading set in [docs/README.md](../README.md) and re-read the

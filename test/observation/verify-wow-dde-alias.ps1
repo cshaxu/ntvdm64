@@ -10,7 +10,7 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or 
 New-Item -ItemType Directory $root|Out-Null
 & "$repo/tools/build-fixtures.cmd" x86 wow-dde > "$root/build.log" 2>&1
 if($LASTEXITCODE){throw 'Native DDE build failed'}
-foreach($kind in 'alias','execute'){
+foreach($kind in 'alias','execute','conversion16','conversion32'){
     $exe="$repo/build/.ninja/fixtures-x86/wow-dde-$kind.exe"
     $p=Start-Process $exe -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$kind.stdout.log" -RedirectStandardError "$root/$kind.stderr.log"
     $null=$p.Handle
@@ -20,7 +20,7 @@ foreach($kind in 'alias','execute'){
     $p.ExitCode|Set-Content "$root/$kind.exit"
     if($p.ExitCode -ne 0){throw "DDE $kind failed"}
     $text=Get-Content "$root/$kind.stdout.log" -Raw
-    $marker=if($kind -eq 'alias'){'DDE_ALIAS cases=96 errors=0 nodes=0 guest_proof=0 transport_proof=0'}else{'DDE_EXECUTE cases=38 errors=0 modes=7 guest_proof=0'}
+    $marker=if($kind -eq 'alias'){'DDE_ALIAS cases=96 errors=0 nodes=0 guest_proof=0 transport_proof=0'}elseif($kind -eq 'execute'){'DDE_EXECUTE cases=38 errors=0 modes=7 guest_proof=0'}else{"$($kind)_errors=0 guest_proof=0"}
     if(!$text.Contains($marker) -or $text -match '(?m)^FAIL '){throw 'Incomplete current DDE assertions'}
     $text|Write-Output
     Get-FileHash $exe|ConvertTo-Json|Set-Content "$root/$kind.identity.json"
