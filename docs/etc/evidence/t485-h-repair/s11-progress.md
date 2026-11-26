@@ -18,7 +18,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 4 | src/mvdm-host/inc/wowsnd.h | 2 | P2 source-reviewed; format batch pending |
 | 5 | src/mvdm-host/wow32/isvwow.h | 1 | P2 source-reviewed; format batch pending |
 | 6 | src/mvdm-host/wow32/precomp.h | 3 | P2 source-reviewed; format batch pending |
-| 7 | src/mvdm-host/wow32/walias.c | 4 | P2 final-verified; commit/push pending |
+| 7 | src/mvdm-host/wow32/walias.c | 4 | P2 delivered 3bb82967a |
 | 8 | src/mvdm-host/wow32/walias.h | 6 | Pending |
 | 9 | src/mvdm-host/wow32/wcall16.c | 4 | Pending |
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | Pending |
@@ -266,3 +266,6 @@ Seven of48 files and13 of452 frozen points are final-verified:7 restored,
 38/237 ->16/43 (-22/-194); cumulative44/3971 ->30/57 (-14/-3914).
 Source/exclusion/#line checks and final governance run gate commit/push.
 Next file remains walias.h; Full remains S13 and migration39/159.
+P2 product commit3bb82967a is pushed to origin/main. Final source checks and
+26/26 publication hashes verified;worktree clean immediately after push.
+Seven restored points and six owner-review residuals are delivered;S11 remains active.

@@ -36,7 +36,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 13/452 points final-verified:7 restored,6 evidence-backed residuals pending
 owner decision,439 unreviewed. Reviewed census44/3971 ->30/57 (-14/-3914).
 P2 runtime3 cached build,dual publication26/26,public ABI,standard-class and
-real Win16 checks PASS;commit/push pending. Next:walias.h.
+real Win16 checks PASS;P2 delivered/pushed as3bb82967a. Next:walias.h.
 Migration39/159;Full remains S13.
 
 ## S10 Closure Record
