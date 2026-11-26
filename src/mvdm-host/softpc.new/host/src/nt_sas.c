@@ -26,14 +26,12 @@ LOCAL    UTINY *reserve_for_M = NULL;
 //
 
 #ifdef SUN_VA
-#line 29
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
 #line 32
 
-#line 33
 #ifdef HOST_SAS
-#line 34
+
 #error Unsupported excluded original configuration
 #endif /* HOST_SAS */
 #line 120
@@ -51,7 +49,6 @@ LOCAL    UTINY *reserve_for_M = NULL;
 //}
 
 #ifdef SUN_VA
-#line 134
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif /* SUN_VA */
 #line 141

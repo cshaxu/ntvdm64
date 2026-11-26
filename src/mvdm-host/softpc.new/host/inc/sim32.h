@@ -45,13 +45,12 @@ UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
 
 
 #ifdef MONITOR
-#line 48
 #error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #else
+#line 50
 /********************************************************/
 #ifdef ANSI
 /* Sas/gmi Sim32 crossovers */
-#line 53
 extern BOOL Sim32FlushVDMPointer (double_word, word, UTINY *, BOOL);
 extern BOOL Sim32FreeVDMPointer (double_word, word, UTINY *, BOOL);
 extern BOOL Sim32GetVDMMemory (double_word, word, UTINY *, BOOL);
@@ -69,7 +68,6 @@ extern IMEMBLOCK *sas_mem_map(void);
 extern void sas_clear_map(void);
 
 #else   /*ANSI*/
-#line 70
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 83
@@ -79,7 +77,6 @@ extern IMEMBLOCK *sas_mem_map ();
 extern void sas_clear_map();
 
 #endif /* MONITOR */
-#line 89
 
 /* This flag is used to signal that the cpu has gone idle due to a call to EnterIdle */
 extern BOOL cpu_flagged_idle;

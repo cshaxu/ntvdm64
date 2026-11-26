@@ -1,18 +1,17 @@
 /*
  * ==========================================================================
- *	Name:		nt_fulsc.h
- *	Author:		Jerry Sexton
- *	Derived From:
- *	Created On:	5th February 1992
- *	Purpose:	This header file contains definitions etc. for
- *			full-screen graphics modules.
+ *      Name:           nt_fulsc.h
+ *      Author:         Jerry Sexton
+ *      Derived From:
+ *      Created On:     5th February 1992
+ *      Purpose:        This header file contains definitions etc. for
+ *                      full-screen graphics modules.
  *
- *	(c)Copyright Insignia Solutions Ltd., 1992. All rights reserved.
+ *      (c)Copyright Insignia Solutions Ltd., 1992. All rights reserved.
  * ==========================================================================
  */
 
 #if defined(NEC_98)
-#line 15
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 17
@@ -25,70 +24,67 @@
 #define ErrorExit() DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 
 
-#define CURRENT_OFFSET(r)	((DWORD) (r) - (DWORD) videoState)
-#define GET_OFFSET(offset)	((BYTE *) videoState + videoState->offset)
+#define CURRENT_OFFSET(r)       ((DWORD) (r) - (DWORD) videoState)
+#define GET_OFFSET(offset)      ((BYTE *) videoState + videoState->offset)
 
-#define MID_VAL(x, y)	(x + (y - x) / 2)
+#define MID_VAL(x, y)   (x + (y - x) / 2)
 
-#define NUM_SEQ_REGS	5
-#define NUM_CRTC_REGS	25
-#define NUM_GC_REGS	9
-#define NUM_AC_REGS	21
-#define NUM_DAC_REGS	256
+#define NUM_SEQ_REGS    5
+#define NUM_CRTC_REGS   25
+#define NUM_GC_REGS     9
+#define NUM_AC_REGS     21
+#define NUM_DAC_REGS    256
 
 #if defined(NEC_98)
-#line 38
 #error Unsupported NEC PC-98 configuration
 #else // NEC_98
 #line 40
-#define STATELENGTH		sizeof(VIDEO_HARDWARE_STATE_HEADER)
+#define STATELENGTH             sizeof(VIDEO_HARDWARE_STATE_HEADER)
 #endif // NEC_98
-#line 42
-#define LATCHLENGTH		4
-#define RGBLENGTH		3
-#define PLANELENGTH		0x10000
+#define LATCHLENGTH             4
+#define RGBLENGTH               3
+#define PLANELENGTH             0x10000
 
-#define BASICSEQUENCEROFFSET	STATELENGTH
-#define BASICCRTCONTOFFSET	BASICSEQUENCEROFFSET + NUM_SEQ_REGS
-#define BASICGRAPHCONTOFFSET	BASICCRTCONTOFFSET + NUM_CRTC_REGS
-#define BASICATTRIBCONTOFFSET	BASICGRAPHCONTOFFSET + NUM_GC_REGS
-#define BASICDACOFFSET		BASICATTRIBCONTOFFSET + NUM_AC_REGS
-#define BASICLATCHESOFFSET	BASICDACOFFSET + NUM_DAC_REGS * RGBLENGTH
-#define PLANE1OFFSET		BASICLATCHESOFFSET + LATCHLENGTH
-#define PLANE2OFFSET		PLANE1OFFSET + PLANELENGTH
-#define PLANE3OFFSET		PLANE2OFFSET + PLANELENGTH
-#define PLANE4OFFSET		PLANE3OFFSET + PLANELENGTH
+#define BASICSEQUENCEROFFSET    STATELENGTH
+#define BASICCRTCONTOFFSET      BASICSEQUENCEROFFSET + NUM_SEQ_REGS
+#define BASICGRAPHCONTOFFSET    BASICCRTCONTOFFSET + NUM_CRTC_REGS
+#define BASICATTRIBCONTOFFSET   BASICGRAPHCONTOFFSET + NUM_GC_REGS
+#define BASICDACOFFSET          BASICATTRIBCONTOFFSET + NUM_AC_REGS
+#define BASICLATCHESOFFSET      BASICDACOFFSET + NUM_DAC_REGS * RGBLENGTH
+#define PLANE1OFFSET            BASICLATCHESOFFSET + LATCHLENGTH
+#define PLANE2OFFSET            PLANE1OFFSET + PLANELENGTH
+#define PLANE3OFFSET            PLANE2OFFSET + PLANELENGTH
+#define PLANE4OFFSET            PLANE3OFFSET + PLANELENGTH
 
-#define VIDEO_PAGE_SIZE	(80 * 25 * 2)	// Cols * rows * (char + attrib)
+#define VIDEO_PAGE_SIZE (80 * 25 * 2)   // Cols * rows * (char + attrib)
 
-#define BIT_PLANE_SIZE	65536
+#define BIT_PLANE_SIZE  65536
 
-#define VGA_WIDTH	80
+#define VGA_WIDTH       80
 
-#define VGA_HEIGHT_0	22
-#define VGA_HEIGHT_1	25
-#define VGA_HEIGHT_2	28
-#define VGA_HEIGHT_3	43
-#define VGA_HEIGHT_4	50
+#define VGA_HEIGHT_0    22
+#define VGA_HEIGHT_1    25
+#define VGA_HEIGHT_2    28
+#define VGA_HEIGHT_3    43
+#define VGA_HEIGHT_4    50
 
-#define MAX_TITLE_LEN	256
+#define MAX_TITLE_LEN   256
 
-#define MAX_CONSOLE_HEIGHT	50
-#define MAX_CONSOLE_WIDTH	80
-#define MAX_CONSOLE_SIZE	(MAX_CONSOLE_HEIGHT * MAX_CONSOLE_WIDTH)
+#define MAX_CONSOLE_HEIGHT      50
+#define MAX_CONSOLE_WIDTH       80
+#define MAX_CONSOLE_SIZE        (MAX_CONSOLE_HEIGHT * MAX_CONSOLE_WIDTH)
 
 #define DEF_FONT_WIDTH  8
 #define DEF_FONT_HEIGHT 8
-                         
-#define GET	FALSE
-#define SET	TRUE
 
-#define DISPLAY_TYPE	0x40
+#define GET     FALSE
+#define SET     TRUE
 
-#define AC_MODE_CONTROL_REG	16
+#define DISPLAY_TYPE    0x40
+
+#define AC_MODE_CONTROL_REG     16
 
 #ifndef PROD
-#line 86
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else /* !PROD */
 #line 106
@@ -102,7 +98,6 @@
 #define FullScreenTrace7(s, p0, p1, p2, p3, p4, p5, p6)
 #define FullScreenTrace8(s, p0, p1, p2, p3, p4, p5, p6, p7)
 #endif /* !PROD */
-#line 116
 
 /*
  * ==========================================================================
@@ -120,9 +115,9 @@ typedef struct
 /* Valid hardware state table entry. */
 typedef struct
 {
-    USHORT	LinesOnScreen;
-    COORD	Resolution;
-    COORD	FontSize;
+    USHORT      LinesOnScreen;
+    COORD       Resolution;
+    COORD       FontSize;
 } HARDWARE_STATE;
 
 /*
@@ -132,9 +127,7 @@ typedef struct
  */
 IMPORT HANDLE MainThread;
 IMPORT DWORD stateLength;
-#line 145
 #ifdef X86GFX
-#line 146
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
 #line 155
@@ -145,9 +138,7 @@ IMPORT BOOL NoTicks;
 IMPORT HANDLE StartTToG;
 IMPORT HANDLE EndTToG;
 IMPORT BOOL BiosModeChange;
-#line 162
 #ifndef PROD
-#line 163
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #endif /* PROD */
 #line 165
@@ -155,9 +146,7 @@ IMPORT BOOL BiosModeChange;
 extern DWORD savedScreenState;
 extern BOOL  ConsoleInitialised;
 extern BOOL  ConsoleNoUpdates;
-#line 169
 #ifdef X86GFX
-#line 170
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif /* X86GFX */
 #line 173
@@ -196,17 +185,13 @@ IMPORT HANDLE GetDetectEvent(VOID);
 IMPORT VOID ResetConsoleState IPT0();
 IMPORT int  getModeType(VOID);
 
-#line 208
 #ifdef X86GFX
-#line 209
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
 #line 257
 
 
-#line 259
 #ifdef X86GFX
-#line 260
 #error DIVERGENCE MVDM-HOST-DIV-584: hardware X86GFX declarations are not selected
 #endif
-#line 254
+#line 265

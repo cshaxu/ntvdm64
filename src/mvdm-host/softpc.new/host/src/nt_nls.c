@@ -38,10 +38,10 @@ The following tables and routines are defined:
 char szDoomMsg[MAX_PATH]="";
 char szSysErrMsg[MAX_PATH]="";
 #ifdef X86GFX
-#line 41
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 44
+#line 43
+
 /* Use Unicode to work properly with NT's MUI technology */
 wchar_t wszHideMouseMenuStr[64];
 wchar_t wszDisplayMouseMenuStr[64];
@@ -100,22 +100,21 @@ void nls_init(void)
                        NULL
 		       )
 #ifdef X86GFX
-#line 102
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 109
 	 ||
 	!LoadStringW(GetModuleHandle(NULL),
-		   SM_HIDE_MOUSE,
+		     SM_HIDE_MOUSE,
 		     wszHideMouseMenuStr,
 		     sizeof(wszHideMouseMenuStr)/sizeof(wchar_t)
-		   )
+		     )
 	 ||
 	!LoadStringW(GetModuleHandle(NULL),
-		    SM_DISPLAY_MOUSE,
+		     SM_DISPLAY_MOUSE,
 		     wszDisplayMouseMenuStr,
 		     sizeof(wszDisplayMouseMenuStr)/sizeof(wchar_t)
-		    ))
+		     ))
            {
             RaiseException((DWORD)STATUS_INSUFFICIENT_RESOURCES,
                            EXCEPTION_NONCONTINUABLE,

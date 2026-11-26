@@ -31,15 +31,12 @@
 #include "insignia.h"
 #include "host_def.h"
 
-#line 34
 #include "gdpvar.h"
 #include "nt_inthk.h"
 #include "debug.h"
 
-#line 38
 /* Make local symbols visible if debugging. */
 #ifndef PROD
-#line 40
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* not PROD */
 #line 42
@@ -88,7 +85,6 @@ GLOBAL BOOL host_hwint_hook IFN1(IS32, int_no)
 	returnStatus = (HWIntHandler)((ULONG) int_no);
 
 #ifndef PROD
-#line 87
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 91
@@ -118,7 +114,6 @@ GLOBAL NTSTATUS	VdmInstallHardwareIntHandler IFN1(PVOID, HardwareIntHandler)
 #ifdef CCPU
     HWIntHandler = HardwareIntHandler;
 #else
-#line 117
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif
 #line 119
@@ -148,13 +143,12 @@ GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
     BOOL returnStatus = FALSE;
 
     /* software interrupt handler defined ? */
-#line 145
     if(SWIntHandler)
     {
 	returnStatus = (SWIntHandler)((ULONG) int_no);
 
 #ifndef PROD
-#line 150
+
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 155
@@ -183,7 +177,6 @@ GLOBAL NTSTATUS	VdmInstallSoftwareIntHandler IFN1(PVOID, SoftwareIntHandler)
 #ifdef CCPU
     SWIntHandler = SoftwareIntHandler;
 #else
-#line 180
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif
 #line 182
@@ -209,26 +202,22 @@ OUTPUT:
 
 
 #if defined(CCPU) || !defined(PROD)
-#line 204
 GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
 {
     BOOL returnStatus = FALSE;
 
-#line 208
     /* exception interrupt handler defined ? */
-#line 209
     if(EXIntHandler)
     {
 	returnStatus = (EXIntHandler)((ULONG) exp_no, (ULONG) error_code);
 
 #ifndef PROD
-#line 214
+
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 219
     }
 
-#line 221
     return( returnStatus );
 }
 #endif /* CCPU */
@@ -252,7 +241,6 @@ GLOBAL NTSTATUS	VdmInstallFaultHandler IFN1(PVOID, FaultHandler)
 #ifdef CCPU
     EXIntHandler = FaultHandler;
 #else
-#line 244
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif
 #line 246

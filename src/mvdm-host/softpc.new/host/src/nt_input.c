@@ -56,9 +56,7 @@
 void nt_kb_prepare(void) {}
 
 
-#line 59
 #if NOTUSEDNOTUSED
-#line 60
 #error Unsupported excluded original configuration
 #endif
 #line 63

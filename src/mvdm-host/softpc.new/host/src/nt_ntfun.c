@@ -120,7 +120,6 @@ int RemoveCompletedIOCTLs(void **firstBlock, void **lastBlock)
         nxt = nxt->NxtStatusBlock;  // Next element to process
 
 #ifndef PROD
-#line 123
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 142
@@ -177,7 +176,6 @@ int OutputQueueSize)
     {
 	// Should display an error here
 #ifndef PROD
-#line 195
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 198
@@ -192,7 +190,6 @@ int OutputQueueSize)
     /*............................................ Check completion status */
 
 #ifndef PROD
-#line 209
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 212
@@ -222,7 +219,6 @@ ULONG  CommMask)
     {
 	// Should display an error here
 #ifndef PROD
-#line 238
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 241
@@ -237,7 +233,6 @@ ULONG  CommMask)
     /*............................................ Check completion status */
 
 #ifndef PROD
-#line 252
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 255
@@ -268,7 +263,6 @@ PULONG ModemStatus)
     {
 	// Should display an error here
 #ifndef PROD
-#line 282
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 285
@@ -283,7 +277,6 @@ PULONG ModemStatus)
     /*............................................ Check completion status */
 
 #ifndef PROD
-#line 296
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 299
@@ -337,7 +330,6 @@ PULONG SignalledObj)
 	{
 	    // Should display an error here
 #ifndef PROD
-#line 349
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 352
@@ -409,7 +401,6 @@ unsigned char EscapeChar)
 				&EscapeChar, sizeof(unsigned char),NULL,0)))
     {
 #ifndef PROD
-#line 420
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 423
@@ -425,7 +416,6 @@ unsigned char EscapeChar)
     /*............................................ Check completion status */
 
 #ifndef PROD
-#line 435
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 439

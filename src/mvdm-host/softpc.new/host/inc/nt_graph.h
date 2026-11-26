@@ -74,9 +74,7 @@ typedef struct
     BOOL        Focus;                    /* Window has Input Focus */
     HANDLE      FocusEvent;               /* Focus has changed event */
     HANDLE      ActiveOutputBufferHandle; /* The current Console screen buffer handle. */
-#line 77
 #ifdef X86GFX
-#line 78
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
 #line 80
@@ -112,18 +110,16 @@ typedef struct
 #ifdef BIGWIN
 
 #if defined(NEC_98)         
-#line 112
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 115
 #define SCALE(value) ((host_screen_scale * (value)) >> 1)
 #define UNSCALE(value) (((value) << 1) / host_screen_scale)
 #endif // !NEC_98
-#line 118
 #define MAX_SCALE(value) ((value) << 1)
 
 #else   /* BIGWIN */
-#line 121
+
 #error Unsupported excluded original configuration
 #endif /* BIGWIN */
 #line 127
@@ -247,7 +243,6 @@ extern BOOL                 FunnyPaintMode;
 typedef struct
 {
 #if defined(NEC_98)         
-#line 247
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 260
@@ -269,7 +264,6 @@ typedef struct
 typedef struct
 {
 #if defined(NEC_98)         
-#line 278
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 291
@@ -407,13 +401,11 @@ extern void nt_v7vga_mono_hi_graph_huge(int offset, int screen_x, int screen_y,
                          int width, int height);
 #endif /* V7VGA */
 #if defined(NEC_98)         
-#line 425
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 471
 
 #ifdef MONITOR
-#line 473
 #error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #endif /* MONITOR */
 #line 494
@@ -446,7 +438,6 @@ int get_screen_scale IFN0();
 void SetupConsoleMode(void);
 
 #ifdef MONITOR
-#line 523
 #error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #endif /* MONITOR */
 #line 527
@@ -465,7 +456,6 @@ extern word changing_mode_flag;
 #ifndef NEC_98
 extern boolean host_stream_io_enabled;
 #endif // !NEC_98
-#line 542
 
 
 // from nt_ega.c

@@ -1133,3 +1133,64 @@ The 23 files restore fourteen newline-only files and three format points/six lin
 ### P10 final verification
 
 All 48 final source hashes, original retained text, unchanged exclusions and logical-line mappings passed. Cached full build and dual 13-image publication passed; 26 destination hashes match runtime10 (build/t485-s8/p10/published-hashes.json). MEM/NTVDMD lifecycle passed with actual DLL load, debug writeback, allocation rollback and matching termination (debug-live/trace.txt). DOS4GW/NESticle menu pixels and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). No Full or ROM gameplay claim. P10 reduction 128 non-error points/1351 lines; cumulative 754/4152. 602/851 final-verified, 249 remain. Commit/push completes P10, not S8.
+
+### P11 remaining host headers and initial host sources
+
+P10 committed and pushed as 1e6014476; 602 files delivered.
+
+| File under softpc.new/host | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| inc/nt_fulsc.h | 18/98 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_graph.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_inthk.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_mem.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_mouse.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_pif.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_reset.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_sb.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_thred.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_timer.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_uis.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_vddp.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/ntcheese.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/sim32.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| link/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| link/nt_uis.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| link/softpc.def | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| link/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| src/cpucstbs.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| src/daytona/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| src/daytona/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| src/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| src/fprt.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| src/makefile.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| src/nt_det.c | 9/60 -> 0/0 | Original retained text and exclusions verified |
+| src/nt_ega.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| src/nt_fdisk.c | 69/492 -> 0/0 | Original retained text and exclusions verified |
+
+nt_fulsc.h, nt_det.c and nt_fdisk.c restore formatting after per-line token/literal/operator checks. No macro value, structure field order or selected statement changes. Final retained text compares strictly to the pinned XP object, with unchanged error directives and original logical-line mapping. All 27 files passed build/t485-s8/p11-source-check.json and p11/line-check.json. Nine newline-only files restore original bytes.
+
+629/851 reviewed: 602 delivered, 27 local, 222 remain. P11 local reduction 96 points/650 lines; cumulative 850/4802. Newline-only count 335. No P11 build/publication/runtime pass claimed. Next: host/src/nt_input.c.
+
+### P11 input, printer and NLS reconciliation
+
+| File under softpc.new/host/src | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| nt_input.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| nt_inthk.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| nt_lpt.c | 6/34 -> 0/0 | Original retained text and exclusions verified |
+| nt_munge.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| nt_nls.c | 5/9 -> 0/0 | Original retained text and exclusions verified |
+| nt_ntfun.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| nt_sas.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| nt_sbdsp.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| nt_sbmid.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| nt_sbmxr.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+
+All 37 P11 files pass strict retained-source and logical-line checks, with unchanged existing error directives. nt_lpt.c restores six format points/34 lines; nt_nls.c restores one blank line and four alignment points (5/9). No selected statement, macro, literal or declaration changes. nt_munge.c restores original newline bytes.
+
+639/851 reviewed: 602 delivered, 37 local, 212 remain. P11 reduction 107 points/693 lines; cumulative 861/4845. Newline-only count 336. Build/publication/runtime verification pending. Next: host/src/nt_sec.c.
+
+### P11 final verification
+
+All 37 final source identities, retained text, exclusions and logical-line mappings passed. Cached full build and dual 13-image publication passed; 26 destination hashes match runtime11 (build/t485-s8/p11/published-hashes.json). Actual MEM/NTVDMD load, debug register writeback, allocation rollback and matching task termination passed (debug-live/trace.txt). DOS4GW/NESticle rendered menu and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). No Full or ROM gameplay claim. P11 reduction 107 non-error points/693 lines; cumulative 861/4845. 639/851 final-verified, 212 remain. Commit/push completes P11, not S8.

@@ -98,7 +98,6 @@ with no file open to edit; thus taken as default.
 */
 #define DEFAULTXMSLMT        0xffff
 #else
-#line 101
 #error Unsupported excluded original configuration
 #endif
 #line 104
@@ -174,6 +173,6 @@ typedef struct
 #define PIFAXEXTSIZE	sizeof(PIFAXEXT)
 #endif // JAPAN
 #if defined(NEC_98) 
-#line 176
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
+#line 389

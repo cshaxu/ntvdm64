@@ -4,7 +4,6 @@
 #include "stdio.h"
 #include "stdarg.h"
 #ifdef HUNTER
-#line 7
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 #line 9
@@ -14,7 +13,6 @@ void OutputString(char *);
 int __cdecl printf(const char *str, ...)
 {
 #ifndef PROD
-#line 15
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 23
@@ -28,12 +26,10 @@ static HANDLE pipe=NULL;
 void OutputString(char *str)
 {
 #ifndef PROD
-#line 33
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 65
 #ifdef HUNTER
-#line 66
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 #line 69
@@ -47,7 +43,7 @@ void OutputString(char *str)
 VOID InputString(char *str, int len)
 {
 #ifndef PROD
-#line 79
+
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 140
@@ -58,7 +54,6 @@ VOID InputString(char *str, int len)
 int __cdecl fprintf(FILE *tf, const char *str, ...)
 {
 #ifndef PROD
-#line 147
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 158
@@ -133,7 +128,6 @@ size_t __cdecl fwrite(const void *buf, size_t size, size_t len, FILE *stream)
 
     tmp_buf[len] = 0;		// write into a const ptr!
 #ifndef PROD
-#line 229
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif  /* PROD */
 #line 231

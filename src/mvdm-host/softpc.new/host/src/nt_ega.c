@@ -41,7 +41,6 @@
 #include "nt_egalt.h"
 
 #ifdef MONITOR
-#line 44
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
 #line 47
@@ -190,7 +189,6 @@ void nt_init_ega_lo_graph()
                         byte7 = ( i & 0x80 ) >> 7;
 
 #ifdef BIGEND
-#line 192
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /* BIGEND */
 #line 201
@@ -228,7 +226,7 @@ void nt_init_ega_lo_graph()
 
 #ifdef BIGWIN
 #ifdef BIGEND
-#line 235
+
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /* BIGEND */
 #line 250
@@ -399,7 +397,7 @@ void nt_init_ega_med_and_hi_graph_luts()
         byte7 = (i & 0x80) >> 7;
 
 #ifdef BIGEND
-#line 417
+
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /* BIGEND */
 #line 422
@@ -423,7 +421,7 @@ void nt_init_ega_med_and_hi_graph_luts()
 
 #ifdef BIGWIN
 #ifdef BIGEND
-#line 442
+
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /*BIGEND */
 #line 448
@@ -450,7 +448,7 @@ void nt_init_ega_med_and_hi_graph_luts()
         lut3_big_ptr[3*i+2] = or_of_bytes1 << 3;
 
 #ifdef BIGEND
-#line 471
+
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /* BIGEND */
 #line 478
@@ -1643,7 +1641,6 @@ sub_note_trace5(EGA_HOST_VERBOSE,
 }
 
 #ifdef MONITOR
-#line 1667
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
 #line 2145
