@@ -40,3 +40,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 
 
 [S8 ordered restoration progress](s8-progress.md) records file-level restoration and delivery states.
+
+[S9 core repair progress](s9-progress.md) records per-file evidence and delivery.

@@ -72,7 +72,6 @@ DbgSetTemporaryBP(
 
 
 BOOL
-WINAPI
 xxxDbgBPInt(
     )
 
@@ -169,7 +168,6 @@ xxxDbgBPInt(
 
 
 BOOL
-WINAPI
 xxxDbgTraceInt(
     )
 

@@ -1958,3 +1958,5 @@
 "HXP-R-04015","src/mvdm-host/softpc.new/host/src/nt_vdd.c","restored-and-delivered","S8-P12","S8","s8-progress.md"
 "HXP-R-04016","src/mvdm-host/softpc.new/host/src/nt_vdd.c","restored-and-delivered","S8-P12","S8","s8-progress.md"
 "HXP-R-04017","src/mvdm-host/softpc.new/host/src/nt_vdd.c","restored-and-delivered","S8-P12","S8","s8-progress.md"
+"HXP-R-00001","src/mvdm-host/dbgdll/brkpt.c","restored-final-verified","S9-P1","none","s9-progress.md"
+"HXP-R-00002","src/mvdm-host/dbgdll/brkpt.c","restored-final-verified","S9-P1","none","s9-progress.md"

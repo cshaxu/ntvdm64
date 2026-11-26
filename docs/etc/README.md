@@ -2048,3 +2048,5 @@ post-publication targeted checks.
 
 
 [S8 ordered restoration progress](evidence/t485-h-repair/s8-progress.md) records file-level restoration and delivery states.
+
+[S9 core repair progress](evidence/t485-h-repair/s9-progress.md) records original-source recovery and ABI evidence.

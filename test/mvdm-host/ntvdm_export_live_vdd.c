@@ -110,11 +110,12 @@ static BOOL check_debug_event(HMODULE worker, HMODULE dll)
     query_fn debugged = (query_fn)GetProcAddress(dll, "xxxDbgIsDebuggee");
     notify_fn notify = (notify_fn)GetProcAddress(dll, "xxxDbgNotifyDebugged");
     query_fn breakpoint = (query_fn)GetProcAddress(dll, "xxxDbgBPInt");
+    query_fn trace = (query_fn)GetProcAddress(dll, "xxxDbgTraceInt");
     read_fn eax = (read_fn)GetProcAddress(worker, "getEAX");
     write_fn set_eax = (write_fn)GetProcAddress(worker, "setEAX");
     BOOL previous, ok;
     PVOID handler;
-    if (!attach || !map || !debugged || !notify || !breakpoint || !eax || !set_eax)
+    if (!attach || !map || !debugged || !notify || !breakpoint || !trace || !eax || !set_eax)
         return FALSE;
     attach();
     event_ram = map(0, 0, VDM_V86);
@@ -127,6 +128,9 @@ static BOOL check_debug_event(HMODULE worker, HMODULE dll)
     saw_break = FALSE;
     notify(TRUE);
     ok = breakpoint() && saw_break && eax() == (event_eax ^ 0x40000000u);
+    set_eax(event_eax);
+    saw_break = FALSE;
+    ok = trace() && saw_break && eax() == (event_eax ^ 0x40000000u) && ok;
     set_eax(event_eax);
     notify(previous);
     event_thread = 0;
