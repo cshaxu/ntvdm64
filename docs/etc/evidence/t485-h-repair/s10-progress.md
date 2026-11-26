@@ -729,3 +729,29 @@ within one Window, not by itself repeated CAF from both starting display
 routes. Locate/reuse the existing route test before claiming this acceptance.
 Old verify-dos-mouse-frame-publication.ps1 uses subst and cannot be used under
 current rules; no such test was launched. No product changes in this checkpoint.
+
+## S10 closure
+
+Final runtime12 CAF verification completed with verify-console-source-handoff.ps1
+and the existing terminal observer (SHA256
+64028BFB532B1A74AB11E76D3C67F40C956E0C08ED83AACA6AE831492D7034A8).
+Runner25520 completed. COMMAND.COM and native cmd.exe both returned0, emitted
+caf-three first=1 third=1 and recorded the attached-input Window CAF marker.
+The private desktop executes Console-to-Window, Window-to-Console and
+Console-to-Window with real input chords; it does not use window close as CAF.
+Evidence: build/t485-s10/closure/caf/result.json and the two stdout/raw logs.
+The helper-owned stage O:/tmp/n6D9 was removed by the runner.
+
+This complements the final guest Alt+Enter witnesses above. P1-P12 record the
+actual plane, keyboard/read-EOI, mouse reset, font/publication and painter tests.
+The separately recorded sevid019 odd-target-copy limitation is not repaired or
+claimed covered by successful SAS vectors. Win95 keeps its approved exit-one
+boundary. Full remains S13; this closure does not claim Full.
+
+All30 files and1060 frozen points are source-reviewed and delivered:754 fully
+restored,306 evidence-backed residuals pending owner decision,zero unreviewed,
+zero local restorations pending. Hash/ledger reconciliation passed. Non-error
+byte-sensitive census201 points/102845 lines ->1834/2939 (+1633/-99906),
+including newline/EOF; restored formatting exposes dispersed retained blocks.
+P12 product688ab3fa2 and receipts are pushed; no product changed during final
+acceptance. S10 closes and the authorized S11 begins; migration remains39/159.
