@@ -32,9 +32,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S11 Ordered Progress
 
-[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):0/48 files,
-0/452 points reviewed. First file:src/mvdm-host/inc/wowcmdlg.h. No local
-changes or deliveries claimed. Migration39/159; Full remains S13.
+[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):3/48 files,
+3/452 points restored and final-verified;commit/push pending,449 unreviewed.
+P1 headers6/3734 ->14/14 (+8/-3720),14 diagnostic line anchors remain.
+Final runtime2 cached build,dual publication26/26 hashes and real WOW
+generic-call/callback/resource/window tests PASS.
+Next file:src/mvdm-host/inc/wowsnd.h. Migration39/159; Full remains S13.
 
 ## S10 Closure Record
 

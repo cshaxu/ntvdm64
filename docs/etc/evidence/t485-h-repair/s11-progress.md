@@ -12,9 +12,9 @@ frozen point counts as current byte-sensitive diff counts.
 
 | Order | File | Frozen points | State |
 | ---: | --- | ---: | --- |
-| 1 | src/mvdm-host/inc/wowcmdlg.h | 1 | Pending |
-| 2 | src/mvdm-host/inc/wowkbd.h | 1 | Pending |
-| 3 | src/mvdm-host/inc/wowkrn.h | 1 | Pending |
+| 1 | src/mvdm-host/inc/wowcmdlg.h | 1 | P1 final verified; commit/push pending |
+| 2 | src/mvdm-host/inc/wowkbd.h | 1 | P1 final verified; commit/push pending |
+| 3 | src/mvdm-host/inc/wowkrn.h | 1 | P1 final verified; commit/push pending |
 | 4 | src/mvdm-host/inc/wowsnd.h | 2 | Pending |
 | 5 | src/mvdm-host/wow32/isvwow.h | 1 | Pending |
 | 6 | src/mvdm-host/wow32/precomp.h | 3 | Pending |
@@ -60,3 +60,61 @@ frozen point counts as current byte-sensitive diff counts.
 | 46 | src/mvdm-host/wow32/wuser31.c | 2 | Pending |
 | 47 | src/mvdm-host/wow32/wutmr.c | 1 | Pending |
 | 48 | src/mvdm-host/wow32/wuwind.c | 13 | Pending |
+
+## P1 complete-file source review
+
+Three files reviewed,3/452 frozen points locally restored;0 delivered,449
+unreviewed. Original XP Git a2f6d7c93aa4f11efc51147566d5961c59a8ef89 and
+files.csv hashes verified. No guest binary/source changed.
+
+| File | Before non-error points/lines | After | Disposition |
+| --- | ---: | ---: | --- |
+| inc/wowcmdlg.h | 1/397 | 0/0 | Restore LF and final DOS EOF; byte-exact XP. |
+| inc/wowkbd.h | 4/4 | 1/1 | Restore EOF; retain one line62 anchor and original NULLSTRUCT exclusion. |
+| inc/wowkrn.h | 1/3333 | 13/13 | Remove148-line local frame block; restore LF and13 anchors following the original endif. |
+
+Total6/3734 ->14/14: +8 points,-3720 lines. Standing format approval applies
+to block growth exposed by LF restoration. Frozen review points are not the
+current diff-block count. Fourteen remaining lines are diagnostic anchors,
+not new behavior or retained local algorithms.
+
+Production wkgthunk.c consumes PICALLPROC32W16; wkernel.c and wkman.c use
+WOWFREERESOURCE16/WOWOUTPUTDEBUGSTRING16, also indexed by wktbl2.h. No added
+legacy frame name has a C/C++ production consumer. The sole host test use
+of ICALLPROC32 changes to the existing identical-field ICALLPROC32W16;
+its inputs and test logic are unchanged. Legacy guest assembly names cannot
+justify this XLATOFF block: it does not generate guest declarations, and
+original guest is immutable. Removing the complete block avoids partial
+fragmentation. All13 NULLSTRUCT exclusions remain. The final anchors execute after the
+excluded arms, preserving selected original source line mapping. Cached full build/publication runner20652 started;
+final tests,commit,push pending. This is source review,not delivery.
+
+P1 final runtime1: cached fullbuild PASS; dual publication26/26 hashes PASS.
+Existing real WOW generic-call test reports three guest phases,zero errors,
+nested callbacks and three releases; actual WINMINE visible window PASS.
+No original guest rebuilt; existing independent probe target was cache-clean.
+Independent source-check.json verifies all original matched logical lines
+(199/113/1586 respectively),unchanged error directives and pinned XP hashes.
+All3 files/3 frozen points final verified; commit/push pending. No Full claim.
+
+
+P1 pre-commit correction: the first local line-anchor candidate placed anchors
+inside NULLSTRUCT; the compiler skips them in the supported selection. That
+candidate is superseded,not final acceptance. Put anchors back after endif
+(wowkbd line62;13 original anchors in wowkrn),keeping the same14/14 census.
+No functional adaptation added. Source-check.json now checks placement after
+excluded arms and selected original line mappings; discarded excluded endif
+line numbers are not claimed as selected-code verification. Final runtime2 is
+being rebuilt and republished;runtime1 test successes are candidate evidence
+only. Final-code tests/commit/push remain pending.
+
+
+P1 final acceptance: runtime2 cached fullbuild and dual publication PASS,
+26/26 published hashes verified. Final generic-call probe again passed all
+three guest phases,zero errors,nested callback counts and three releases;
+actual WINMINE visible window PASS. Evidence:build/t485-s11/p1/final.
+Runner16956 completed. These results supersede runtime1 for delivery.
+3/48 files and3/452 frozen points final-verified;449 points remain unreviewed.
+Current reviewed-file census14/14 vs6/3734: +8 blocks,-3720 lines. No functional
+residual from these three frozen points;14 necessary line anchors remain.
+Commit/push completes this P;Full remains S13.

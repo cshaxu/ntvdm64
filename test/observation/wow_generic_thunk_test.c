@@ -19,8 +19,8 @@ __declspec(noinline) DWORD __cdecl many(DWORD a0, DWORD a1, DWORD a2, DWORD a3, 
 __declspec(noinline) DWORD __cdecl except_target(void){RaiseException(0xE4730001,0,0,NULL);return 0;}
 static unsigned errors;
 static DWORD invoke(DWORD target,DWORD n,DWORD flags,BOOL reverse) {
- union {DWORD align; BYTE bytes[sizeof(VDMFRAME)+sizeof(ICALLPROC32)+32*sizeof(DWORD)];} storage;
- PVDMFRAME frame=(PVDMFRAME)storage.bytes; PICALLPROC32 a=(PICALLPROC32)&frame->bArgs; DWORD *v=(DWORD*)&a->p1; unsigned i;
+ union {DWORD align; BYTE bytes[sizeof(VDMFRAME)+sizeof(ICALLPROC32W16)+32*sizeof(DWORD)];} storage;
+ PVDMFRAME frame=(PVDMFRAME)storage.bytes; PICALLPROC32W16 a=(PICALLPROC32W16)&frame->bArgs; DWORD *v=(DWORD*)&a->p1; unsigned i;
  ZeroMemory(&storage,sizeof(storage));a->cParams=n|flags;a->lpProcAddress=target;
  for(i=0;i<n;i++)v[i]=reverse?n-i:i+1;
  return wow_original_WK32ICallProc32(frame);
