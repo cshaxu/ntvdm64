@@ -35,7 +35,6 @@ DbgPrint(
 #define VOID            void            /* Nothing */
 
 #if !defined(_WINDOWS_) && !defined(NT_INCLUDED)    /* Types already defined by windows */
-#line 38
 #error Unsupported excluded original configuration
 #endif
 #line 40
@@ -43,7 +42,6 @@ DbgPrint(
 typedef signed char     TINY;            /* 8-bit signed integer */
 
 #if !defined(_WINDOWS_) && !defined(NT_INCLUDED)    /* Types already defined by windows */
-#line 44
 #error Unsupported excluded original configuration
 #endif
 #line 47
@@ -51,7 +49,6 @@ typedef signed char     TINY;            /* 8-bit signed integer */
 typedef unsigned char   UTINY;          /* 8-bit unsigned integer */
 
 #if !defined(_WINDOWS_) && !defined(NT_INCLUDED)    /* Types already defined by windows */
-#line 51
 #error Unsupported excluded original configuration
 #endif
 #line 60
@@ -73,7 +70,7 @@ typedef unsigned long        IU32;		/* 32 bit unsigned int */
 typedef long                 ISM32;		/* 32 bit signed int */
 typedef unsigned long        IUM32;		/* 32 bit unsigned int */
 typedef void *               IHP;		/* a generic pointer type */
-typedef unsigned int         IHPE;	    /* an integer the same size as a IHP */ 
+typedef unsigned int         IHPE;	    /* an integer the same size as a IHP */
 typedef int                  ISH;	    /* Host register sized signed quantity */
 typedef unsigned int         IUH;	    /* Host register sized unsigned quantity */
 #define LONG_SHIFT	2
@@ -83,36 +80,31 @@ typedef unsigned int         IUH;	    /* Host register sized unsigned quantity *
  */
 
 #ifndef FALSE
-#line 88
 #error Unsupported excluded original configuration
 #endif
 #line 91
 
 #ifndef STRINGIFY
-#define STRINGIFY(x)	#x
+#define STRINGIFY(x)    #x
 #endif
 
 #if !defined(_WINDOWS_) && !defined(NT_INCLUDED)   /* Types already defined by windows */
-#line 97
 #error Unsupported excluded original configuration
 #endif
 #line 100
 
 #ifndef NULL
-#line 102
 #error Unsupported excluded original configuration
 #endif
 #line 104
 
 #ifndef BOOL
 #ifdef NT_INCLUDED
-#line 107
 #error Unsupported excluded original configuration
 #else
 #line 111
 #define BOOL UINT
 #endif
-#line 113
 #endif
 
 /*

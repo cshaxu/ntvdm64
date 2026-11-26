@@ -20,6 +20,7 @@ NOTE:   Commented description of this file is in \nt\bak\bin\dirs.tpl
 
 !ENDIF
 
-DIRS=base \
+DIRS=   base \
         host \
-        obj.vdm
+        obj.vdm \
+        data

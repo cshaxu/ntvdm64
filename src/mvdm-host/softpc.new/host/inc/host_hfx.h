@@ -15,8 +15,9 @@
 #ifdef SCCSID
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 18
 
 #ifdef HFX
 #error Unsupported excluded original configuration
-#line 238
 #endif /* HFX */
+#line 239

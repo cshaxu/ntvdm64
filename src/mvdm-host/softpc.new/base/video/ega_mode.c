@@ -105,7 +105,6 @@ GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to decide which mode
 #include	"host_gfx.h"
 
 #ifdef GORE
-#line 108
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
 #line 110
@@ -125,7 +124,6 @@ boolean	(*choose_display_mode)();
 
 /* [5.1.1 #DEFINES]							*/
 #ifdef SEGMENTATION
-#line 126
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 133
@@ -164,7 +162,6 @@ set_up_screen_ptr()
 	else
 		set_screen_ptr(EGA_planes);
 #endif   //NEC_98
-#line 168
 }
 
 /* -----------------------------------------------------------------------
@@ -542,11 +539,10 @@ DISPLAY_MODE	mode;
 {
 #ifndef NEC_98
 #ifndef NTVDM
-#line 545
 #error Unsupported excluded non-NTVDM video update configuration
 #endif /* NTVDM */
+#line 669
 #endif   //NEC_98
-#line 670
 }
 
 
@@ -584,7 +580,6 @@ void	ega_mode_init()
 	*/
 	set_update_routine(DUMMY_FUN);
 #endif   //NEC_98
-#line 707
 }
 
 
@@ -680,7 +675,6 @@ boolean	choose_ega_display_mode()
 
 	screen_refresh_required();
 #endif   //NEC_98
-#line 802
 	return TRUE;
 }
 

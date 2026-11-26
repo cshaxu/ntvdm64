@@ -21,6 +21,6 @@
 #define CGA_WIN_WIDTH		(80 * CGA_CHAR_WIDTH)
 #define CGA_WIN_HEIGHT		(25 * CGA_CHAR_HEIGHT)
 #if defined(NEC_98)
-#line 24
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
+#line 29

@@ -38,7 +38,6 @@ void nls_init(void);
 extern char szDoomMsg[];
 extern char szSysErrMsg[];
 #ifdef X86GFX
-#line 41
 #error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
 #line 43

@@ -18,11 +18,10 @@
 
 #ifndef NEC_98
 #ifdef SEGMENTATION
-#line 21
 #error Excluded unsupported SEGMENTATION configuration
 #endif
+#line 28
 #endif // !NEC_98
-#line 29
 
 
 /*
@@ -43,7 +42,6 @@
 #include "idetect.h"
 
 #if defined(NEC_98)
-#line 49
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 96

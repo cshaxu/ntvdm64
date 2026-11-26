@@ -258,9 +258,8 @@ SHORT host_error(int error_num, int options, char *extra_char);
 #define host_error_conf(config_panel, error_num,options,extra_char)  \
         host_error(int error_num, int options, char *extra_char)
 #else
-#line 261
+
 #error Unsupported excluded original configuration
-#line 272
 #endif
 #line 273
 
@@ -301,7 +300,6 @@ VOID RcErrorBoxPrintf(UINT wId, CHAR *szMsg);
 int RcMessageBox(UINT wId, CHAR *msg1, CHAR *msg2, ULONG dwOptions);
 
 #ifndef PROD
-#line 311
 #error Unsupported excluded original configuration
 #endif
 #line 313

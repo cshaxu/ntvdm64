@@ -22,7 +22,7 @@ REVISION HISTORY        :
 First version           : 31-Aug-89, simplified Phil's idea, and
 			  produced an interface.
 
-SUBMODULE NAME          : 
+SUBMODULE NAME          :
 
 SOURCE FILE NAME        : idetect.c
 
@@ -52,7 +52,7 @@ SccsID = @(#)idetect.c  1.11 10/11/93 Copyright Insignia Solutions Ltd.
 ---------------------------------------------------------------------
 [1.2 DATATYPES FOR [1.1] (if not basic C types)]
 
-	STRUCTURES/TYPEDEFS/ENUMS: 
+	STRUCTURES/TYPEDEFS/ENUMS:
 		
 ---------------------------------------------------------------------
 [1.3 INTERMODULE IMPORTS]
@@ -70,13 +70,13 @@ SccsID = @(#)idetect.c  1.11 10/11/93 Copyright Insignia Solutions Ltd.
 =====================================================================
 GLOBAL                  int idle_no_video
 
-PURPOSE                 cleared by gvi layer, and video bios ; 
+PURPOSE                 cleared by gvi layer, and video bios ;
 			set by this interface every time tick.
 			keeps track of video activity.
 
 GLOBAL                  int idle_no_disk
 
-PURPOSE                 cleared by disk bios ; 
+PURPOSE                 cleared by disk bios ;
 			set by this interface every time tick.
 			keeps track of video activity.
 
@@ -93,7 +93,7 @@ PROCEDURE         :     void idle_ctl((int)flag)
 
 PURPOSE           :     enable/disable idle detect.
 		
-PARAMETERS         
+PARAMETERS
 
 	flag      :     0       - disable
 			other   - enable.
@@ -107,7 +107,7 @@ PROCEDURE         :     void idetect((int)event)
 
 PURPOSE           :     idle detect interface.
 		
-PARAMETERS         
+PARAMETERS
 
 	event     :     IDLE_INIT       - initialise (clears all
 					  counters)
@@ -132,10 +132,10 @@ PROCEDURE         :     void idle_set((int)minpoll, (int)minperiod)
 
 PURPOSE           :     configure parameters for idling.
 		
-PARAMETERS         
+PARAMETERS
 
 	minpoll   :     0       - don't change
-			other   - specify minimum #.of unsuccessful kybd 
+			other   - specify minimum #.of unsuccessful kybd
 				  polls to be made in 1 time tick
 				  to qualify as an idle time period.
 	minperiod :     0       - don't change
@@ -171,7 +171,7 @@ IMPORT void WaitIfIdle(void);
 IMPORT VOID PrioWaitIfIdle(half_word);
 #endif  /* NTVDM */
 
-/* [3.2 INTERMODULE EXPORTS]                                            */ 
+/* [3.2 INTERMODULE EXPORTS]                                            */
 #include "idetect.h"
 
 /*
@@ -189,7 +189,6 @@ IMPORT VOID PrioWaitIfIdle(half_word);
 void idle_kybd_poll();
 void idle_tick();
 #else
-#line 192
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 195
@@ -201,18 +200,16 @@ void idle_tick();
    [5.2.1 INTERNAL DATA DEFINITIONS                                     */
 
 #ifndef NTVDM
-#line 203
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
+#line 215
 #include "vdm.h"
-#line 216
-  
+
 /*  NTVDM
  *  Some of our static global variables are located in 16 bit memory area
  *  so we reference as pointers, inititializaed by kb_setup_vectors
  */
 #if defined(NEC_98)
-#line 222
 #error Unsupported NEC PC-98 configuration
 #endif   //NEC_98
 #line 226
@@ -223,37 +220,30 @@ word IdleNoActivity = 0;
 
 
 #if defined(NEC_98)
-#line 233
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 235
 word *pICounter;
 #endif   //NEC_98
-#line 237
 #define i_counter (*pICounter)
 
 #if defined(NEC_98)
-#line 240
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 242
 word *pCharPollsPerTick;
 #endif   //NEC_98
-#line 244
 #define nCharPollsPerTick (*pCharPollsPerTick)
 
 #if defined(NEC_98)
-#line 247
 #error Unsupported NEC PC-98 configuration
 #else    //NEC_98
 #line 249
 word *pMinConsecutiveTicks;
 #endif   //NEC_98
-#line 251
 #define minConsecutiveTicks (*pMinConsecutiveTicks)
 
 #endif  /* NTVDM */
-#line 254
 
 /* [5.2.2 INTERNAL PROCEDURE DEFINITIONS]                               */
 
@@ -267,7 +257,6 @@ PURPOSE         :       called from keyboard BIOS as result of
 
 
 #ifndef NTVDM
-#line 267
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 #line 301
@@ -306,7 +295,6 @@ void idle_kybd_poll(void)
 	nCharPollsPerTick++;
 }
 #else
-#line 336
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 351
@@ -333,7 +321,6 @@ void idle_tick(void)
 	    ExternalWaitRequest = FALSE;
 	}
 #ifdef MONITOR
-#line 374
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 380
@@ -369,7 +356,6 @@ void idle_tick(void)
 }
 
 #else  /* NTVDM */
-#line 412
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 437
@@ -388,7 +374,6 @@ void idetect (event)
 int event;
 {
 #ifndef NTVDM
-#line 452
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 455
@@ -399,7 +384,6 @@ int event;
 	case IDLE_WAITIO:
 #ifdef NTVDM
 #ifdef MONITOR
-#line 462
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 464
@@ -407,7 +391,6 @@ int event;
                 PrioWaitIfIdle(10);
 		break;
 #else
-#line 468
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 470
@@ -420,7 +403,6 @@ int event;
 #ifdef NTVDM
                 IdleNoActivity = 1;
 #else
-#line 479
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 483
@@ -453,7 +435,6 @@ int flag;
 {
 #ifdef NTVDM
 #ifdef PIG
-#line 512
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
 #line 514
@@ -462,9 +443,7 @@ int flag;
     else
 	ienabled = (word)flag;
 #endif /* PIG */
-#line 519
 #else
-#line 520
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 #line 522

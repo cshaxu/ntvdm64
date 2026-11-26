@@ -104,14 +104,11 @@ q_event_init(
       )
 {
 #ifndef MONITOR
-#line 107
      PLIST_ENTRY Next;
      PQEV_ENTRY pqevEntry;
 
 
-#line 111
 #if DBG
-#line 112
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 117
@@ -141,13 +138,11 @@ q_event_init(
 
      host_ica_unlock();
 #endif
-#line 143
 }
 
 
 #ifndef MONITOR
 
-#line 148
 /*
  *  Caller must hold ica lock
  */
@@ -189,7 +184,6 @@ ResetCpuQevCount(
      host_q_ev_set_count(host_calc_q_ev_inst_for_time(DelayTime));
 }
 #endif
-#line 189
 
 
 
@@ -208,7 +202,6 @@ add_q_event_t(
 {
 
 #ifdef MONITOR
-#line 207
 #error Excluded unsupported quick-event hardware monitor path
 #else  /* MONITOR */
 #line 218
@@ -293,7 +286,6 @@ add_q_event_t(
 
 
 #endif
-#line 299
 }
 
 
@@ -326,7 +318,6 @@ dispatch_q_event(
     )
 {
 #ifndef MONITOR
-#line 331
         PQEV_ENTRY  pqevEntry;
         LARGE_INTEGER CurrTime;
         Q_CALLBACK_FN qevCallBack = NULL;
@@ -363,7 +354,6 @@ dispatch_q_event(
             (*qevCallBack)(Param);
             }
 #endif
-#line 367
 }
 
 
@@ -373,7 +363,6 @@ delete_q_event(
         )
 {
 #ifndef MONITOR
-#line 376
         QEVHANDLE   qevHandle;
         PLIST_ENTRY Next;
         LARGE_INTEGER CurrTime;
@@ -443,14 +432,12 @@ delete_q_event(
 
         host_ica_unlock();
 #endif
-#line 445
 }
 
 
 
 #ifndef MONITOR
 
-#line 451
 /*
  * The QuickEvent list stores time in usecs. The CPU quick event counter
  * uses Instruction Jump Counts (IJC) which tracks progress in emulated
@@ -534,7 +521,6 @@ quick_tick_recalibrate(void)
      ULONG CalibCount;
 
 #ifndef PROD
-#line 534
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 539

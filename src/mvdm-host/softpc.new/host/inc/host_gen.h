@@ -56,7 +56,7 @@ extern char *host_get_spc_home();
  *
  * 	NOTE: 	A write check for Delta needs to be added
  */
- 
+
 #define write_intel_word(s, o, v)	sas_storew(effective_addr(s,o),v)
 
 #define write_intel_byte(s, o, v)	sas_store(effective_addr(s,o),v)

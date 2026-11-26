@@ -29,13 +29,7 @@
 
 
 #ifdef SEGMENTATION
-#line 32
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 39
 
@@ -56,7 +50,6 @@
 #include "host_qev.h"
 
 #ifdef HUNTER
-#line 57
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 #line 60
@@ -78,21 +71,17 @@ void time_strobe()
     static   boolean   video_off   = FALSE;
 
 #if !defined(REAL_TIMER) && !defined(NTVDM)
-#line 78
 #error Unsupported excluded original configuration
 #endif
 #line 80
 
 #ifdef HUNTER
-#line 82
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif    
 #line 84
 
 
-#line 86
 #ifndef NTVDM
-#line 87
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 100
@@ -114,9 +103,7 @@ void time_strobe()
                 video_off = TRUE;
             }
         }
-#line 118
 #ifdef	EGA_DUMP
-#line 119
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 #line 121

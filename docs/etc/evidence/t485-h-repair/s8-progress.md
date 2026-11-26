@@ -1059,3 +1059,77 @@ All 41 P9 files pass build/t485-s8/p9-source-check.json and p9/line-check.json. 
 ### P9 final verification
 
 All 41 final source hashes, original retained text, unchanged exclusions and logical-line mappings passed. Cached full build and dual 13-image publication passed; 26 destination hashes match runtime9 (build/t485-s8/p9/published-hashes.json). MEM/NTVDMD lifecycle passed, including debug register writeback, allocation rollback and matching task termination (debug-live/trace.txt). DOS4GW/NESticle rendered menu and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). No Full or gameplay claim. Batch reduction 179 non-error points/1344 lines; cumulative 626/2801. 554/851 final-verified, 297 remain. Commit/push completes P9, not S8.
+
+### P10 system, video and directory metadata
+
+P9 committed and pushed as 1b93a8a7b; 554 files delivered.
+
+| File under softpc.new | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| base/system/cmosnt.c | 4/8 -> 0/0 | Original retained text and exclusions verified |
+| base/system/daytona/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/system/daytona/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/system/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/system/dummy_nt.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/system/idetect.c | 10/20 -> 0/0 | Original retained text and exclusions verified |
+| base/system/illegalp.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/system/qevnt.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/system/rom.c | 8/16 -> 0/0 | Original retained text and exclusions verified |
+| base/system/sources.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/system/timestrb.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/system/unexp_nt.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/unix/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/unix/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/video/daytona/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/video/daytona/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/video/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/video/ega_dmmy.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/video/ega_mode.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/video/ega_trcr.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/video/gvi.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/video/sources.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| base/video/vga_vide.c | 101/1296 -> 0/0 | Original retained text and exclusions verified |
+| base/video/video_io.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| dirs | 2/5 -> 0/0 | Original retained text and exclusions verified |
+
+cmosnt.c, idetect.c and rom.c restore boundary whitespace; vga_vide.c also restores Tab/space alignment after per-line code-token, literal and operator comparison. Final retained text and logical lines match the pinned XP source. Existing error directives are unchanged. Evidence: build/t485-s8/p10-source-check.json and p10/line-check.json (25 files).
+
+softpc.new/dirs is restored byte-exact, including the original data directory entry. Actual worker composition uses explicit paths and worker_original_sources calls for SOURCES manifests (tools/build/worker/original-sources.cmake, source-groups.cmake and units.cmake), not DIRS traversal. The data files remain under src/mvdm-guest/softpc.new/data; no guest source or binary was changed and no new build input was introduced.
+
+579/851 reviewed: 554 delivered, 25 local, 272 remain. P10 local reduction 125 points/1345 lines; cumulative 751/4146. Newline-only count remains 312. Final package build/publication/runtime verification is pending. Next: softpc.new/host/dirs.
+
+### P10 initial host headers
+
+| File under softpc.new/host | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/error.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/host_bop.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/host_emm.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/host_gen.h | 1/2 -> 0/0 | Original retained text and exclusions verified |
+| inc/host_gfx.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/host_hfx.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/host_inc.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/host_qev.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/host_rrr.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/host_trc.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/hostsync.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/insignia.h | 2/4 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_cga.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_cgalt.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_com.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_det.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_ega.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_egalt.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_eoi.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_event.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_extra.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| inc/nt_fdisk.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+
+The 23 files restore fourteen newline-only files and three format points/six lines. insignia.h uses per-line token comparison before restoration; final text comparison is strict. All 48 P10 files pass original retained-source, unchanged-error and logical-line checks (build/t485-s8/p10-source-check.json and p10/line-check.json).
+
+602/851 reviewed: 554 delivered, 48 local, 249 remain. P10 reduction 128 points/1351 lines; cumulative 754/4152. Newline-only count 326. Next: host/inc/nt_fulsc.h. Cached build, dual publication and targeted runtime checks follow; no P10 runtime pass yet.
+
+### P10 final verification
+
+All 48 final source hashes, original retained text, unchanged exclusions and logical-line mappings passed. Cached full build and dual 13-image publication passed; 26 destination hashes match runtime10 (build/t485-s8/p10/published-hashes.json). MEM/NTVDMD lifecycle passed with actual DLL load, debug writeback, allocation rollback and matching termination (debug-live/trace.txt). DOS4GW/NESticle menu pixels and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). No Full or ROM gameplay claim. P10 reduction 128 non-error points/1351 lines; cumulative 754/4152. 602/851 final-verified, 249 remain. Commit/push completes P10, not S8.

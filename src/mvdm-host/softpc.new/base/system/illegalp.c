@@ -14,7 +14,6 @@
 ]*/
 
 #ifdef SEGMENTATION
-#line 17
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 24
@@ -38,9 +37,7 @@
 #include "debug.h"
 #include "yoda.h"
 
-#line 44
 #ifndef PROD
-#line 45
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 47
@@ -54,7 +51,6 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 #ifdef	PROD
 		"CS:%04x IP:%04x OP:%02x %02x %02x %02x %02x",
 #else	/* PROD */
-#line 57
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif	/* PROD */
 #line 59
@@ -63,9 +59,7 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 		sas_hw_at(ea+3),sas_hw_at(ea+4));
 }
 
-#line 64
 #if defined(NTVDM) && defined(MONITOR)
-#line 65
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 #line 67
@@ -74,7 +68,6 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 void illegal_op()
 {
 #ifndef	PROD
-#line 72
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 77
@@ -98,20 +91,16 @@ void illegal_op_int()
 	ip = sas_hw_at(stack) + (sas_hw_at(stack+1)<<8);
 	cs = sas_hw_at(stack+2) + (sas_hw_at(stack+3)<<8);
 
-#line 97
 	where(string, cs, ip);
 
 #ifndef NTVDM
-#line 100
 #error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #else /* NTVDM */
 #line 108
 #ifdef PROD
 #if defined(MONITOR) || defined(CPU_40_STYLE)
-#line 110
         host_error(EG_BAD_OP, ERR_QU_CO_RE, string);
 #else
-#line 112
         ea = effective_addr(cs, ip);
         opcode = sas_hw_at(ea);
         if (opcode == 0x66 || opcode == 0x67)
@@ -119,10 +108,8 @@ void illegal_op_int()
         else
             host_error(EG_BAD_OP, ERR_QU_CO_RE, string);
 #endif /* MONITOR */
-#line 119
 #endif /* PROD */
 #endif /* NTVDM */
-#line 121
 
 
 
@@ -143,7 +130,6 @@ void illegal_op_int()
 void illegal_dvr_bop IFN0()
 {
 #ifndef NTVDM
-#line 141
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ! NTVDM */
 #line 187
@@ -151,7 +137,6 @@ void illegal_dvr_bop IFN0()
 
 
 #ifndef PROD
-#line 191
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* ! PROD */
 #line 396

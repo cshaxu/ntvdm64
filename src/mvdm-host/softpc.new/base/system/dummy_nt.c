@@ -14,13 +14,11 @@
  */
 
 #ifdef SCCSID
-#line 17
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 19
 
 #ifdef SEGMENTATION
-#line 21
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 28

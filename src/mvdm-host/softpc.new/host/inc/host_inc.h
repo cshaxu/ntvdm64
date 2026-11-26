@@ -69,7 +69,7 @@
 #include <nt_extra.h>
 
 #else   /* !NTVDM */
-#line 72
+
 #error Unsupported excluded original configuration
 #endif   /* !NTVDM */
 #line 75
