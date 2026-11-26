@@ -19,14 +19,11 @@ static char SccsID[]="@(#)gendrvr.h	1.4 09/24/92 Copyright Insignia Solutions Lt
 */
 
 #if defined (GEN_DRVR) || defined (CDROM)
-#line 22
 #error Unsupported excluded original configuration
 #endif /* GEN_DRVR || CDROM */
 #line 24
 
-#line 25
 #ifdef GEN_DRVR
-#line 26
 #error Unsupported excluded original configuration
 #endif /* GEN_DRVR */
 #line 28

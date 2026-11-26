@@ -64,7 +64,6 @@ typedef enum CPU_INT_TYPE CPU_INT_TYPE;
 IMPORT void		cpuEnableInterrupts IPT1(IBOOL, yes_or_no);
 
 #ifdef IRET_HOOKS
-#line 67
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
 #line 75
@@ -77,18 +76,15 @@ IMPORT void		cpuEnableInterrupts IPT1(IBOOL, yes_or_no);
  */
 
 #ifdef GISP_CPU
-#line 84
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #else
 #line 86
 #define GetInstructionPointer getEIP
 #endif
-#line 88
 extern IU32 GetStackPointer IPT0();
 
 
 #ifdef IRET_HOOKS
-#line 92
 #error Excluded unsupported IRET_HOOKS configuration
 #endif /* IRET_HOOKS */
 #line 106
@@ -117,7 +113,6 @@ GLOBAL char *a_getNpxStackReg	IPT2(IU32, reg_num, char *, buffer);
 #endif /* PROD */
 
 #ifdef PIG
-#line 131
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 #line 134

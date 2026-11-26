@@ -136,7 +136,6 @@ typedef	half_word	DMA_WORD[2];
 
 /* a DMA command */
 #ifdef BIT_ORDER1
-#line 139
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 #line 155
@@ -160,7 +159,6 @@ typedef union
 
 /* a DMA mode */
 #ifdef BIT_ORDER1
-#line 175
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 #line 188
@@ -180,7 +178,7 @@ typedef union
 #endif
 
 #if defined(NEC_98)
-#line 204
+
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 236
@@ -199,7 +197,6 @@ typedef union
 
 /* a DMA status */
 #ifdef BIT_ORDER1
-#line 251
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 #line 261
@@ -234,7 +231,6 @@ typedef struct
 	half_word	request;
 	DMA_FLIP_FLOP	first_last;
 #if defined(NEC_98)
-#line 292
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 294
@@ -259,13 +255,11 @@ typedef	struct
 
 /* the number of controllers per adaptor */
 #if defined(NEC_98)
-#line 315
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 317
 #define	DMA_ADAPTOR_CONTROLLERS	2
 #endif // !NEC_98
-#line 319
 
 /* the numbering convention for the controllers */
 #define	DMA_CONTROLLER	0
@@ -302,7 +296,6 @@ typedef	struct
 /* the channel assignments */
 #define	DMA_RESERVED_CHANNEL_0	0
 #if defined(NEC_98)
-#line 355
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 360
@@ -322,7 +315,6 @@ typedef	struct
 #define DMA_FAKE_CHANNEL_7	14
 #define DMA_REFRESH_CHANNEL	15
 #endif  // !NEC_98
-#line 376
 
 /* these masks define the redundant bits of the I/O addresses */
 #define	DMA_REDUNDANT_BITS	0x10
@@ -335,9 +327,7 @@ typedef	struct
  * of its component parts.
  * It is not used within the DMA emulation
  */
-#line 388
 #ifdef BIGEND
-#line 389
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 #line 407

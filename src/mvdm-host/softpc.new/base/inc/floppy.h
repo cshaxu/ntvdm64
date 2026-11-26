@@ -190,7 +190,6 @@
 			(rate == RS_500 ? RS_250: \
 			(rate == RS_250 ? RS_300: RS_500)))
 #else
-#line 193
 #error Unsupported excluded original configuration
 #endif
 #line 197
@@ -430,13 +429,11 @@
  */
 
 #if defined(NEC_98)
-#line 433
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 435
 #define MAX_FLOPPY	0x02
 #endif // !NEC_98
-#line 437
 
 /*
  *	Special value of sectors transferred count
@@ -483,7 +480,6 @@ extern void diskette_io(void);
 extern void diskette_int(void);
 extern void diskette_post(void);
 #else
-#line 483
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 487
@@ -507,7 +503,6 @@ extern void fl_format_set(int);
 extern void fl_set_media(int);
 extern void fl_diskette_setup(void);
 #else
-#line 507
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 521
@@ -522,7 +517,6 @@ extern void drive_detect(int);
 extern void translate_old(int);
 extern void GetFormatParams(int *, int *, int *, int *);
 #else
-#line 532
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 536
@@ -538,7 +532,6 @@ extern void host_attach_floppies (void);
 extern void host_detach_floppies (void);
 extern void host_flip_real_floppy_ind (void);
 #else
-#line 548
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 554

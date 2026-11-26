@@ -1,7 +1,7 @@
 /*
  * VPC-XT Revision 1.0
  *
- * Title	: cntlbop.h 
+ * Title	: cntlbop.h
  *
  * Description	: Definitions for use by the control bop functions.
  *
@@ -18,24 +18,22 @@
  * Structure/Data definitions
  * ============================================================================
  */
- 
+
 /*
  * Return codes from control bop type functions.
  */
 
-#line 26
 #ifndef SUCCESS
-#line 27
 #error Excluded unsupported missing SUCCESS control-BOP profile
 #endif
 #line 29
 
 #define ERR_NO_FUNCTION		1	/* Function not implemented. */
-#define ERR_WRONG_HOST		2	/* Function call was for a different 
+#define ERR_WRONG_HOST		2	/* Function call was for a different
 					   host. */
 #define ERR_INVALID_PARAMETER	3	/* Invalid parameter (out of range,
 					   malformed etc.) */
-#define ERR_WRONG_HARDWARE 	4	/* Hardware not present or 
+#define ERR_WRONG_HARDWARE 	4	/* Hardware not present or
 					   inappropriate. */
 #define ERR_OUT_OF_SPACE	5	/* Insufficient memory or disk space. */
 #define ERR_RESOURCE_SHORTAGE	6	/* Other resource shortage. */
@@ -58,11 +56,9 @@ typedef struct
 /*
  * Generic host type code used for base functions.
  */
-#define GENERIC 	1 
+#define GENERIC 	1
 
-#line 60
 #ifndef NULL
-#line 61
 #error Excluded unsupported missing NULL control-BOP profile
 #endif
 #line 63
@@ -75,9 +71,7 @@ typedef struct
 extern void control_bop IPT0();
 extern control_bop_array host_bop_table[];
 
-#line 72
 #if defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)
-#line 73
 #error Unsupported excluded original configuration
 #endif /* DUMB_TERMINAL && !SERIAL_UIF */
 #line 80

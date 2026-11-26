@@ -55,18 +55,15 @@ typedef	struct	{
 			  /* with chars_per_line not a multiple of 4 */
 #endif /* VGG */
 #endif  // !NEC_98
-#line 58
 } DIRTY_PARTS;
 
 #if defined(NEC_98)
-#line 61
 #error Unsupported NEC PC-98 configuration
 #endif  // NEC_98
 #line 66
 
 typedef enum {
 #if defined(NEC_98)
-#line 69
 #error Unsupported NEC PC-98 configuration
 #endif  // NEC_98
 #line 83
@@ -114,13 +111,11 @@ typedef enum {
 typedef struct
 {
 #if defined(NEC_98)
-#line 127
 #error Unsupported NEC PC-98 configuration
 #else   // !NEC_98
 #line 129
 	void (*init_screen) IPT0();
 #endif  // !NEC_98
-#line 131
 	void (*init_adaptor) IPT2(int,arg1, int,arg2);
 	void (*change_mode) IPT0();
 	void (*set_screen_scale) IPT1(int,arg1);
@@ -138,7 +133,6 @@ typedef struct
 						arg5,int,arg6);
 	void (*paint_cursor) IPT3(int,arg1, int,arg2, half_word,arg3);
 #ifdef GISP_SVGA 
-#line 148
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 #line 150
@@ -159,7 +153,6 @@ typedef struct
 extern VIDEOFUNCS *working_video_funcs;
 
 #if defined(NEC_98)
-#line 167
 #error Unsupported NEC PC-98 configuration
 #endif  // NEC_98
 #line 175
@@ -195,7 +188,6 @@ extern VIDEOFUNCS *working_video_funcs;
 #define host_paint_cursor(x,y,attr)\
 	(working_video_funcs->paint_cursor)(x,y,attr)
 #ifdef GISP_SVGA
-#line 207
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 #line 210
@@ -256,13 +248,11 @@ extern void (*clear_v7ptr)();	/* ptr to host routine to clear V7 h/w pointer	*/
 
 extern UPDATE_ALG update_alg;
 #if defined(NEC_98)
-#line 267
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 269
 extern byte *video_copy;
 #endif // !NEC_98
-#line 271
 extern MEM_HANDLERS vid_handlers;
 
 extern boolean text_scroll_up IPT6(int, start, int, width, int, height,
@@ -281,7 +271,6 @@ extern boolean cga_graph_scroll_down IPT6(int, start, int, width,
 extern  void	dummy_calc IPT0();
 extern	void	text_update IPT0();
 #if defined(NEC_98)
-#line 289
 #error Unsupported NEC PC-98 configuration
 #endif  // NEC_98
 #line 291
@@ -302,9 +291,7 @@ extern	void	ega_wrap_split_graph_update IPT0();
 extern	void	vga_graph_update IPT0();
 extern	void	vga_split_graph_update IPT0();
 
-#line 308
 #if defined(HERC)
-#line 309
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
 #line 311

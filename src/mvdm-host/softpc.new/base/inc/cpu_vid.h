@@ -84,16 +84,12 @@ extern MODE_TABLE mode_table;
 
 typedef struct 
 {
-#line 87
 	IU32 (*b_read) IPT1(ULONG, offset);
 	IU32 (*w_read) IPT1(ULONG, offset);
 
-#line 90
 #ifndef	NO_STRING_OPERATIONS
-#line 91
 	void (*str_read) IPT3(IU8 *, dest, ULONG, offset, ULONG, count);
 #endif	/* NO_STRING_OPERATIONS */
-#line 93
 
 } READ_POINTERS; 
 
@@ -113,9 +109,7 @@ extern void Cpu_set_vid_wrt_ptrs IPT1( WRT_POINTERS *, ptrs );
 extern void Cpu_set_vid_rd_ptrs IPT1( READ_POINTERS *, ptrs );
 #endif /* Cpu_set_vid_wrt_ptrs */
 
-#line 112
 #ifndef CPU_40_STYLE
-#line 113
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif /* CPU_40_STYLE */
 #line 127

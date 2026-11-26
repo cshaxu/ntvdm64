@@ -21,14 +21,12 @@
  */
 
 #ifdef	BIGEND
-#line 24
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 #line 63
 
 #ifdef	LITTLEND
 #ifdef	BIT_ORDER1
-#line 66
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 #line 84

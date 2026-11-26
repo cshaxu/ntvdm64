@@ -19,9 +19,7 @@
  * ============================================================================
  */
 
-#line 22
 #ifdef PC_CONFIG
-#line 23
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #endif
 #line 25
@@ -47,7 +45,6 @@ extern boolean         host_validate_pathname();
 extern boolean         host_check_rd_wt_access();
 extern boolean         host_check_read_access();
 #ifdef SUSPEND
-#line 47
 #error Unsupported excluded original configuration
 #endif
 #line 49
@@ -57,9 +54,8 @@ IMPORT VOID memset4 IPT3( IU32, data, ULONG *, laddr, ULONG, count );
 IMPORT VOID fill_alternate_bytes IPT3( IS8 *, start, IS8 *, end, IS8, value);
 IMPORT VOID fill_both_bytes IPT3( IU16, data, IU16 *, dest, ULONG, len );
 
-#line 55
 #ifdef	SETUID_ROOT
-#line 56
+
 #error DIVERGENCE MVDM-HOST-DIV-529: SETUID_ROOT platform branch is not selected; see mirror register.
 #endif	/* SETUID_ROOT */
 #line 63

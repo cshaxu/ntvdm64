@@ -20,19 +20,16 @@
 #define	NON_PROD(x)
 #define	PROD_ONLY(x)	x
 #else
-#line 23
 #error DIVERGENCE MVDM-HOST-DIV-617: unsupported alternate host profile
 #endif
 #line 26
 
 #ifndef	PROD
-#line 28
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else /* PROD */
-#line 30
+#line 295
 
 #ifdef HUNTER
-#line 297
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 #line 300
@@ -122,4 +119,3 @@
 #define	assert8_do(test,str,p1,p2,p3,p4,p5,p6,p7,p8,do)
 
 #endif /* PROD */
-#line 386

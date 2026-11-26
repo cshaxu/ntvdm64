@@ -21,7 +21,6 @@
  */
 #ifndef UNUSED
 #ifdef lint
-#line 24
 #error DIVERGENCE MVDM-HOST-DIV-536: lint branch is not selected; see mirror register.
 #else	/* !lint */
 #line 26
@@ -46,14 +45,11 @@
 #endif	/* ANSI */
 
 #ifndef TRUE
-#line 47
 #error Excluded unsupported missing TRUE base profile
 #endif
 #line 49
 
-#line 50
 #ifndef FALSE
-#line 51
 #error Excluded unsupported missing FALSE base profile
 #endif
 #line 53

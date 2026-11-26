@@ -17,7 +17,6 @@ typedef	union {
 		unsigned chained : 1;
 		unsigned text_mode : 1;
 #else
-#line 20
 #error Excluded unsupported non-VGA endian or video profile
 #endif
 #line 29
@@ -38,7 +37,6 @@ extern	struct	EGA_GLOBALS {
 	half_word		palette_ind[EGA_PALETTE_SIZE];
 	boolean		multiply_vert_by_two;
 #else
-#line 46
 #error Excluded unsupported non-VGA endian or video profile
 #endif
 #line 48
@@ -89,7 +87,6 @@ extern PC_palette *DAC;			/* Size is `VGA_DAC_SIZE' */
 #ifdef V7VGA
 #define	get_screen_split()		(((EGA_GRAPH.screen_split.as_word)+1)<<EGA_GRAPH.multiply_vert_by_two)
 #else
-#line 95
 #error Excluded unsupported non-VGA endian or video profile
 #endif /* V7VGA */
 #line 97
@@ -104,13 +101,11 @@ extern PC_palette *DAC;			/* Size is `VGA_DAC_SIZE' */
 #define get_top_pixel_pad()		(EGA_GRAPH.top_pixel_pad)
 #define get_mid_pixel_pad()		(EGA_GRAPH.mid_pixel_pad)
 #if defined(NEC_98)         
-#line 108
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 110
 #define get_palette_change_required()	(EGA_GRAPH.palette_change_required)
 #endif // !NEC_98
-#line 112
 #define get_palette_val(idx)		(EGA_GRAPH.palette_ind[(idx)])
 
 #define set_256_colour_mode(val)	EGA_GRAPH.colour_256 = (val)
@@ -119,13 +114,11 @@ extern PC_palette *DAC;			/* Size is `VGA_DAC_SIZE' */
 #define set_top_pixel_pad(val)		EGA_GRAPH.top_pixel_pad = (val)
 #define set_mid_pixel_pad(val)		EGA_GRAPH.mid_pixel_pad = (val)
 #if defined(NEC_98)         
-#line 120
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 122
 #define set_palette_change_required(v)	EGA_GRAPH.palette_change_required = (v)
 #endif // !NEC_98
-#line 124
 #define set_palette_val(idx,val)	EGA_GRAPH.palette_ind[(idx)] = (val)
 #define flag_palette_change_required()	EGA_GRAPH.palette_change_required = (TRUE)
 #endif

@@ -38,20 +38,17 @@ AMMENDMENTS	:
 	(segment / PAGE_PARA_RATIO)
 
 #else
-#line 41
 #error Unsupported excluded original configuration
 #endif
 #line 46
 
 #define MIN_FUNC_NO		0x40	/* Lowest function code		*/
 #ifndef PROD
-#line 49
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else					/* (includes trace options)	*/
 #line 51
 #define	MAX_FUNC_NO		0x5d	/* Highest function code	*/
 #endif
-#line 53
 #define NAME_LENGTH		8	/* Length of handle name	*/
 #define UNMAPPED		-1	/* EM page is not mapped in	*/
 #define	MSB	     ((IU32)0x80000000)	/* used for pagemap operations	*/
@@ -135,7 +132,6 @@ IMPORT boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_config_data);
 IMPORT unsigned short get_lim_backfill_segment(void);
 
 #if defined(MONITOR) && !defined(PROD)
-#line 136
 #error DIVERGENCE MVDM-HOST-DIV-518: MONITOR without PROD is not selected in observed consumers; see mirror register.
 #endif
 #line 139
@@ -185,7 +181,6 @@ extern int		restore_map(short handle_no, unsigned short segment,
 				    unsigned short offset,
 				    short pages_out[], short pages_in[]);
 #else /* ANSI */
-#line 185
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 187
@@ -203,9 +198,7 @@ IMPORT short	get_total_open_handles IPT0();
 IMPORT int	reallocate_handle IPT3(short, handle_no,
 				       short, old_page_count,
 				       short, new_page_count);
-#line 201
 #ifndef NTVDM
-#line 202
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 205
@@ -299,7 +292,7 @@ IMPORT int	host_exchg_EM_to_EM	IPT5(int, length,
 
 
 #if defined(X86GFX) && defined(NTVDM)
-#line 295
+
 #error DIVERGENCE MVDM-HOST-DIV-621: unsupported X86GFX EMS mapping profile
 #else /* (NTVDM AND X86GFX) */
 #line 305
@@ -310,4 +303,3 @@ IMPORT int	host_exchg_EM_to_EM	IPT5(int, length,
 #endif
 
 #endif /* (NTVDM AND X86GFX) */
-#line 312

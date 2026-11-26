@@ -8,9 +8,7 @@
  * SccsID @(#)idetect.h 1.6 08/25/93 Copyright Insignia Solutions Ltd
  */
 
-#line 11
 #ifndef NTVDM
-#line 12
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 16
@@ -44,7 +42,6 @@ extern word IdleNoActivity;
 extern word ienabled;
 
 #else
-#line 46
 #error Unsupported excluded original configuration
 #endif
 #line 50

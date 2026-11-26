@@ -3,7 +3,7 @@
  *
  * Title	: BIOS definitions
  *
- * Description	: Defintions for users of the BIOS 
+ * Description	: Defintions for users of the BIOS
  *
  * Author	: Henry Nash
  *
@@ -13,7 +13,7 @@
  *
  * Mods: (r2.21): Added an external declaration of rom_basic().
  */
- 
+
 /* SccsID[]="@(#)bios.h	1.47 06/28/95 Copyright Insignia Solutions Ltd."; */
 
 /*
@@ -23,7 +23,7 @@
  */
 
 /*
- * The following define the BOP call numbers for the BIOS functions. 
+ * The following define the BOP call numbers for the BIOS functions.
  */
 
 #define BIOS_RESET		0x0
@@ -129,7 +129,7 @@
  * The Bios Reset Flag
  */
 
-#define RESET_FLAG	BIOS_VAR_START + 0x72  
+#define RESET_FLAG	BIOS_VAR_START + 0x72
 
 #define DISK_STATUS	BIOS_VAR_START + 0x74
 #define HF_NUM		BIOS_VAR_START + 0x75
@@ -139,7 +139,7 @@
 /*
  * Bios Buffer space
  */
- 
+
 typedef union {
                  word wd;
                  struct {
@@ -147,7 +147,7 @@ typedef union {
                           half_word ch;
                         } byte;
                } KEY_OCCURRENCE;
- 
+
 #define BIOS_KB_BUFFER_START    (BIOS_VAR_START + 0x80)
 #define BIOS_KB_BUFFER_END      (BIOS_VAR_START + 0x82)
 #define BIOS_KB_BUFFER_HEAD     (BIOS_VAR_START + 0x1a)
@@ -183,14 +183,11 @@ extern void (*BIOS[]) IPT0();
 #endif /* bop */
 
 #ifdef PTY
-#line 186
 #error Unsupported excluded original configuration
 #endif
 #line 188
 
-#line 189
 #ifdef GEN_DRVR
-#line 190
 #error Unsupported excluded original configuration
 #endif
 #line 192
@@ -202,14 +199,11 @@ extern void return_from_call IPT0();
 #endif
 
 #ifdef SUSPEND
-#line 200
 #error Unsupported excluded original configuration
 #endif
 #line 202
 
-#line 203
-#ifdef CDROM 
-#line 204
+#ifdef CDROM
 #error Unsupported excluded original configuration
 #endif /* CDROM */
 #line 208
@@ -220,9 +214,7 @@ extern void worm_io IPT0();
 extern void cmd_install IPT0();
 extern void cmd_load IPT0();
 
-#line 215
 #ifdef DPMI
-#line 216
 #error Unsupported excluded original configuration
 #endif
 #line 224
@@ -253,9 +245,7 @@ extern void dummy_int IPT0();
 extern void unexpected_int IPT0();
 extern void Get_build_id IPT0();
 
-#line 251
-#ifdef WIN_VTD 
-#line 252
+#ifdef WIN_VTD
 #error Unsupported excluded original configuration
 #endif /* WIN_VTD */
 #line 254
@@ -300,56 +290,46 @@ extern void bootstrap2 IPT0();
 extern void bootstrap3 IPT0();
 
 #ifdef NOVELL
-#line 295
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
 #line 313
 
 #ifdef	MSWDVR
-#line 315
 #error Unsupported excluded original configuration
 #endif
 #line 321
 
 #ifdef	NOVELL_IPX
-#line 323
 #error Unsupported excluded original configuration
 #endif
 #line 327
 
 #ifdef	NOVELL_TCPIP
-#line 329
 #error Unsupported excluded original configuration
 #endif
 #line 332
 
 #ifdef WINSOCK
-#line 334
 #error Unsupported excluded original configuration
 #endif /* WINSOCK */
 #line 336
 
 #ifdef SWINAPI
-#line 338
 #error DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register.
 #endif /* SWINAPI */
 #line 342
 
 #if	defined(SOFTWIN_API) || defined(SWIN_HFX)
-#line 344
 #error Unsupported excluded original configuration
 #endif	/* SOFTWIN_API or SWIN_HFX */
 #line 347
 
 #if	defined(SOFTWIN_API)
-#line 349
 #error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #endif	/* SOFTWIN_API */
 #line 351
 
-#line 352
 #ifdef SWIN_HAW
-#line 353
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #endif	/* SWIN_HAW */
 #line 355
@@ -357,14 +337,12 @@ extern void bootstrap3 IPT0();
 #ifdef ANSI
 extern void host_reset(void);
 #ifndef NTVDM
-#line 359
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ! NTVDM */
 #line 361
 extern void display_string(char *);
 extern void clear_string(void);
 #else
-#line 364
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 371
@@ -373,7 +351,6 @@ extern void clear_string(void);
 extern void smeg_collect_data(void);
 extern void smeg_freeze_data(void);
 #else
-#line 376
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 379
@@ -397,33 +374,28 @@ extern void MS_HDos_bop(void);
 #endif	/* NTVDM */
 
 #ifdef GISP_CPU
-#line 399
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
 #line 401
 
 #ifdef HFX
-#line 403
 #error Unsupported excluded original configuration
 #endif /* HFX */
 #line 405
 
 #ifdef DOS_APP_LIC
-#line 407
 #error DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register.
 #endif
 #line 409
 
 IMPORT int soft_reset;
 
-#line 412
 #if	defined(SPC386) && defined(WDCTRL_BOP)
-#line 413
 #error Unsupported excluded original configuration
 #endif	/* SPC386 && WDCTRL_BOP */
+#line 415
 
 #if defined(NEC_98)
-#line 417
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 410
+#line 601

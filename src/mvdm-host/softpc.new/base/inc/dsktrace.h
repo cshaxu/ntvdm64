@@ -85,7 +85,6 @@
 /* disk tracing macro
  */
 #ifndef PROD
-#line 88
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else
 #line 101
@@ -96,13 +95,9 @@
 #define dt4(infoid,hndl,fmt,i,j,k,l) ;
 #define dt5(infoid,hndl,fmt,i,j,k,l,m) ;
 #endif
-#line 108
 
-#line 109
 #ifndef PROD
-#line 110
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #endif
 #line 118
-#line 101
 

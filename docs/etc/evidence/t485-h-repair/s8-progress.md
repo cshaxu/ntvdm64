@@ -893,3 +893,104 @@ All 73 final source identities and diagnostic mappings passed. Cached full build
 and dual 13-image publication passed. Commit/push completes P7, not S8.
 459/851 final-verified, 392 remain. Batch reduction 210 points/458 lines;
 cumulative 321/767, newline-only count 288. Next: base/dos/daytona/makefile.
+
+### P8 DOS metadata and initial common headers
+
+P7 committed and pushed as 0109ef454; 459 files delivered.
+
+| File under softpc.new/base | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| dos/daytona/makefile | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| dos/daytona/sources | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| dos/dirs | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| dos/sources.inc | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| inc/base_def.h | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| inc/bios.h | 8/16 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| inc/build_id.h | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| inc/cga.h | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| inc/chkmallc.h | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| inc/ckmalloc.h | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| inc/cmos.h | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+| inc/cmosbios.h | 0/0 -> 0/0 | Original retained code/format; existing exclusions preserved |
+
+All twelve files pass pinned-source retained-code and unchanged-error checks.
+bios.h restores eight format points/16 lines, without declaration or ABI changes.
+471/851 reviewed, 380 remain; 459 delivered and twelve P8 files local. Cumulative
+non-error reduction is 329 points/783 lines (8/16 local); newline-only total 292.
+No P8 build/runtime pass claimed.
+Next: src/mvdm-host/softpc.new/base/inc/cntlbop.h.
+
+### P8 control and EGA headers
+
+| File under softpc.new/base/inc | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| cntlbop.h | 5/10 -> 0/0 | Original retained content; existing exclusions preserved |
+| config.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| cpu_vid.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| cpu4.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| debug.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| dma.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| dsktrace.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| dterm.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| egacpu.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| egagraph.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| egamode.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| egaports.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| egaread.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+| egavideo.h | 17/72 -> 0/0 | Original retained content; existing exclusions preserved |
+| emm.h | 0/0 -> 0/0 | Original retained content; existing exclusions preserved |
+
+egavideo.h contains interior Tab/space alignment changes in comments and macro
+definitions. Before restoration these were compared after collapsing horizontal
+whitespace only where no string/character literal occurs outside comments. Final
+comparison is strict original retained nonblank content, with the unchanged error
+directives. No macro value, declaration, ABI or selected algorithm changed.
+dterm.h was restored during the first pass before a later comparison stopped;
+it is counted once as a newline-only restoration. All 27 P8 files now pass final
+retained-source comparison (build/t485-s8/p8-source-check.json).
+
+486/851 reviewed, 365 remain; 459 delivered and 27 local. Cumulative reduction
+351 points/865 lines (30/98 local); newline-only total 293. No P8 delivery yet.
+Next: base/inc/equip.h.
+
+### P8 remaining headers through keyba.h
+
+| File under softpc.new/base/inc | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| equip.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| error.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| fdisk.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| fla.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| floppy.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| ga_defs.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| ga_mark.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| gendrvr.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| get_env.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| gfi.h | 25/58 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| gfitest.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| gfx_upd.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| gisp_sas.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| gispsvga.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| gmi.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| hfx.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| host_cfg.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| host_com.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| host_gwi.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| host_lpt.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| host_nls.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| host_sas.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| host.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| hunter.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| idetect.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| ios.h | 71/534 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+| keyba.h | 0/0 -> 0/0 | Retained source matches pinned original; exclusions preserved |
+
+All 54 P8 source hashes match the current files. Final retained-source and logical-line evidence is in build/t485-s8/p8-source-check.json and p8/line-check.json. gfi.h restores 25 points/58 lines; ios.h restores 71 points/534 lines of alignment without changing macro values or declarations. Existing exclusions remain unchanged.
+
+513/851 reviewed; 338 remain. 459 are delivered and 54 are locally reviewed, awaiting P8 build/publication/runtime verification. Cumulative non-error reduction: 447 points/1457 lines, including 126/690 local. Newline-only count: 301. Next: base/inc/keyboard.h.
+
+Registration reconciliation: c_seg.c is S6-P1-final-verified and its latest_sha256 matches the current source (5878ad3d3acf0111536339d81f8f26bb7c39dda4425000e0011abf5ca70e9405). Its immutable snapshot hash is preserved. CURRENT is synchronized to the file ledger; review is not delivery.
+
+### P8 final verification
+
+All 54 current source hashes and logical-line mappings passed. Cached full build and dual 13-image publication passed; all 26 destination hashes match runtime8 (build/t485-s8/p8/published-hashes.json). Actual MEM/NTVDMD lifecycle passed (debug-live/trace.txt); DOS4GW/NESticle rendered menu and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). Documentation governance passed. No Full or ROM gameplay claim. Batch reduction: 126 non-error points/690 lines; cumulative 447/1457. 513/851 final-verified, 338 remain. Commit/push completes P8; S8 remains active.

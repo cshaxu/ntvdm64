@@ -188,7 +188,6 @@ IMPORT SHORT host_com_active IPT3(UTINY,hostID, BOOL,active, CHAR *,errString);
 IMPORT VOID host_com_close IPT1(int,adapter);
 
 #if defined(NTVDM) && defined(FIFO_ON)
-#line 191
 #error Excluded unsupported FIFO_ON configuration
 #endif
 #line 194
@@ -208,7 +207,6 @@ extern void host_com_da_int_change(int adapter, int da_int_state, int da_data_st
 #endif
 
 #ifdef PS_FLUSHING
-#line 210
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 #line 213
