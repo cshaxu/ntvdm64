@@ -309,3 +309,34 @@ with registered residuals, out of20;13 remain. dpmi386.c's native-header
 restoration obstacle remains explicitly in pending decisions, not silently
 declared upstream-invalid. Commit/push of this P completes delivery.
 Next ordered file is inc/wowusr.h. Migration remains39/159.
+## S7 P4 final-package receipt
+
+inc/wowusr.h, HXP-R-00272: removed two unconsumed added parameter-frame
+types. Actual wuman.c and wutbl2.h consumers use the distinct original
+WOWWORDBREAKPROC16. Retained code now matches pinned XP SP1 blob
+0396ec944eeb468252b419449d1fae36bf685edd; all47 conditional arms retain
+original order, and41 prior excluded bodies remain error-only. Restored
+upstream newline bytes separately, without counting them as semantic reduction.
+
+Every exclusion's error has its original logical line; its restoring #line
+is after #endif, so the selected path executes it. All47 guard logical lines
+and41 restoring-anchor positions passed the whole-file comparison in
+build/t485-s7/p4/review.py. The first candidate put restoring anchors inside
+excluded arms; final review corrected this before commit. Its runtime5
+acceptance is superseded by the rebuilt final runtime6 package.
+
+Final evidence: build/t485-s7/p4b/build-exit.txt=0, final/publish-result.txt,
+final/wow-result.txt and verification-result.txt=PASS. Cached full build,
+dual publication and all13 image hashes at assets/release and
+O:/WINNT/SYSTEM32 passed. The checked-in observe-wow-frontiers runner
+proved a live visible real WINMINE window through a helper-owned runtime.
+No execution algorithm or original guest changed. P3 DPMI/desktop/DOS4GW
+sources remain unchanged, so those unrelated tests were not repeated.
+This is targeted verification, not Full.
+
+[Final measurement](s7-p4-mirror-diff.json):1point/15lines ->0/0.
+Remaining differences are only existing exclusions and diagnostic anchors.
+No pending decision existed for R00272; its restoration is in the main ledger.
+S7:8/20 files final-verified for delivery,12remaining; reduction13points/106lines.
+Including S6:14points/107lines. Commit/push completes P4. Migration39/159.
+Next ordered file:softpc.new/base/bios/reset.c.

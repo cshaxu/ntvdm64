@@ -628,12 +628,11 @@ typedef struct _ANSIUPPERBUFF16 {       /* u437 */
 } ANSIUPPERBUFF16;
 typedef ANSIUPPERBUFF16 UNALIGNED *PANSIUPPERBUFF16;
 
-#line 529
 #ifdef NULLSTRUCT
-#line 530
+#line 632
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 534
+#line 636
 
 typedef struct _APPENDMENU16 {          /* u411 */
     VPSTR   f4;
@@ -772,12 +771,11 @@ typedef struct _CLIPCURSOR16 {          /* u16 */
 } CLIPCURSOR16;
 typedef CLIPCURSOR16 UNALIGNED *PCLIPCURSOR16;
 
-#line 672
 #ifdef NULLSTRUCT
-#line 673
+#line 775
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 677
+#line 779
 
 typedef struct _CLOSECOMM16 {           /* u207 */
     VPDWORD f2;  /* added for SetCommEventMask() support */
@@ -827,12 +825,11 @@ typedef struct _COPYRECT16 {            /* u74 */
 } COPYRECT16;
 typedef COPYRECT16 UNALIGNED *PCOPYRECT16;
 
-#line 726
 #ifdef NULLSTRUCT
-#line 727
+#line 829
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 731
+#line 833
 
 typedef struct _CREATECARET16 {         /* u163 */
     SHORT   f4;
@@ -907,19 +904,17 @@ typedef struct _CREATEICON16 {          /* u407 */
 } CREATEICON16;
 typedef CREATEICON16 UNALIGNED *PCREATEICON16;
 
-#line 805
 #ifdef NULLSTRUCT
-#line 806
+#line 908
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 810
+#line 912
 
-#line 811
 #ifdef NULLSTRUCT
-#line 812
+#line 914
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 816
+#line 918
 
 typedef struct _CREATEWINDOW16 {        /* u41 */
     VPBYTE  vpParam;
@@ -1028,12 +1023,11 @@ typedef struct _DESKTOPWNDPROC16 {      /* u305 */
 } DESKTOPWNDPROC16;
 typedef DESKTOPWNDPROC16 UNALIGNED *PDESKTOPWNDPROC16;
 
-#line 924
 #ifdef NULLSTRUCT
-#line 925
+#line 1027
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 929
+#line 1031
 
 typedef struct _DESTROYCURSOR16 {       /* u458 */
     HCUR16  f1;
@@ -1091,12 +1085,11 @@ typedef struct _DIALOGBOXPARAM16 {      /* u239 */
 } DIALOGBOXPARAM16;
 typedef DIALOGBOXPARAM16 UNALIGNED *PDIALOGBOXPARAM16;
 
-#line 986
 #ifdef NULLSTRUCT
-#line 987
+#line 1089
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 991
+#line 1093
 
 typedef struct _DISPATCHMESSAGE16 {     /* u114 */
     VPMSG16 f1;
@@ -1202,12 +1195,11 @@ typedef struct _DUMPICON16 {            /* u459 */
 } DUMPICON16;
 typedef DUMPICON16 UNALIGNED *PDUMPICON16;
 
-#line 1096
 #ifdef NULLSTRUCT
-#line 1097
+#line 1199
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1101
+#line 1203
 
 typedef struct _ENABLECOMMNOTIFICATION16 {     /* u245 */
     SHORT   f4;
@@ -1230,12 +1222,11 @@ typedef struct _ENABLEMENUITEM16 {      /* u155 */
 } ENABLEMENUITEM16;
 typedef ENABLEMENUITEM16 UNALIGNED *PENABLEMENUITEM16;
 
-#line 1123
 #ifdef NULLSTRUCT
-#line 1124
+#line 1226
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1128
+#line 1230
 
 typedef struct _ENABLEWINDOW16 {        /* u34 */
     BOOL16  f2;
@@ -1254,12 +1245,11 @@ typedef struct _ENDDIALOG16 {           /* u88 */
 } ENDDIALOG16;
 typedef ENDDIALOG16 UNALIGNED *PENDDIALOG16;
 
-#line 1146
 #ifdef NULLSTRUCT
-#line 1147
+#line 1249
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1151
+#line 1253
 
 typedef struct _ENDPAINT16 {            /* u40 */
     VPPAINTSTRUCT16 vpPaint;
@@ -1328,12 +1318,11 @@ typedef struct _EXITWINDOWSEXEC16 {     /* u246 */
 } EXITWINDOWSEXEC16;
 typedef EXITWINDOWSEXEC16 UNALIGNED *PEXITWINDOWSEXEC16;
 
-#line 1219
 #ifdef NULLSTRUCT
-#line 1220
+#line 1322
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1224
+#line 1326
 
 typedef struct _FILEPORTDLGPROC16 {     /* u346 */
     LONG    f4;
@@ -1350,12 +1339,11 @@ typedef struct _FILLRECT16 {            /* u81 */
 } FILLRECT16;
 typedef FILLRECT16 UNALIGNED *PFILLRECT16;
 
-#line 1240
 #ifdef NULLSTRUCT
-#line 1241
+#line 1343
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1245
+#line 1347
 
 typedef struct _FINDWINDOW16 {          /* u50 */
     VPSTR   f2;
@@ -1382,31 +1370,28 @@ typedef struct _FRAMERECT16 {           /* u83 */
 } FRAMERECT16;
 typedef FRAMERECT16 UNALIGNED *PFRAMERECT16;
 
-#line 1271
 #ifdef NULLSTRUCT
-#line 1272
+#line 1374
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1276
+#line 1378
 
 typedef struct _GETASYNCKEYSTATE16 {        /* u249 */
     SHORT   f1;
 } GETASYNCKEYSTATE16;
 typedef GETASYNCKEYSTATE16 UNALIGNED *PGETASYNCKEYSTATE16;
 
-#line 1282
 #ifdef NULLSTRUCT
-#line 1283
+#line 1385
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1287
+#line 1389
 
-#line 1288
 #ifdef NULLSTRUCT
-#line 1289
+#line 1391
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1293
+#line 1395
 
 typedef struct _GETCARETPOS16 {         /* u183 */
     VPPOINT16 f1;
@@ -1457,19 +1442,17 @@ typedef struct _GETCLIPBOARDFORMATNAME16 {  /* u146 */
 } GETCLIPBOARDFORMATNAME16;
 typedef GETCLIPBOARDFORMATNAME16 UNALIGNED *PGETCLIPBOARDFORMATNAME16;
 
-#line 1343
 #ifdef NULLSTRUCT
-#line 1344
+#line 1446
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1348
+#line 1450
 
-#line 1349
 #ifdef NULLSTRUCT
-#line 1350
+#line 1452
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1354
+#line 1456
 
 typedef struct _GETCOMMERROR16 {        /* u203 */
     VPCOMSTAT16 f2;
@@ -1496,12 +1479,11 @@ typedef struct _GETCONTROLBRUSH16 {     /* u326 */
 } GETCONTROLBRUSH16;
 typedef GETCONTROLBRUSH16 UNALIGNED *PGETCONTROLBRUSH16;
 
-#line 1380
 #ifdef NULLSTRUCT
-#line 1381
+#line 1483
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1385
+#line 1487
 
 typedef struct _GETCURSORPOS16 {        /* u17 */
     VPPOINT16 f1;
@@ -1513,26 +1495,23 @@ typedef struct _GETDC16 {           /* u66 */
 } GETDC16;
 typedef GETDC16 UNALIGNED *PGETDC16;
 
-#line 1396
 #ifdef NULLSTRUCT
-#line 1397
+#line 1499
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1401
+#line 1503
 
-#line 1402
 #ifdef NULLSTRUCT
-#line 1403
+#line 1505
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1407
+#line 1509
 
-#line 1408
 #ifdef NULLSTRUCT
-#line 1409
+#line 1511
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1413
+#line 1515
 
 typedef struct _GETDLGCTRLID16 {        /* u277 */
     HWND16  f1;
@@ -1561,24 +1540,22 @@ typedef struct _GETDLGITEMTEXT16 {      /* u93 */
 } GETDLGITEMTEXT16;
 typedef GETDLGITEMTEXT16 UNALIGNED *PGETDLGITEMTEXT16;
 
-#line 1441
 #ifdef NULLSTRUCT
-#line 1442
+#line 1544
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1446
+#line 1548
 
 typedef struct _GETFILEPORTNAME16 {     /* u343 */
     VPSTR   f1;
 } GETFILEPORTNAME16;
 typedef GETFILEPORTNAME16 UNALIGNED *PGETFILEPORTNAME16;
 
-#line 1452
 #ifdef NULLSTRUCT
-#line 1453
+#line 1555
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1457
+#line 1559
 
 typedef struct _GETICONID16 {           /* u455 */
     VPSTR  f2;
@@ -1586,12 +1563,11 @@ typedef struct _GETICONID16 {           /* u455 */
 } GETICONID16;
 typedef GETICONID16 UNALIGNED *PGETICONID16;
 
-#line 1464
 #ifdef NULLSTRUCT
-#line 1465
+#line 1567
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1469
+#line 1571
 
 typedef struct _GETINTERNALICONHEADER16 {   /* u372 */
     VPSTR   f2;
@@ -1626,12 +1602,11 @@ typedef struct _GETMENU16 {         /* u157 */
 } GETMENU16;
 typedef GETMENU16 UNALIGNED *PGETMENU16;
 
-#line 1503
 #ifdef NULLSTRUCT
-#line 1504
+#line 1606
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1508
+#line 1610
 
 typedef struct _GETMENUITEMCOUNT16 {        /* u263 */
     HMENU16 f1;
@@ -1678,19 +1653,17 @@ typedef struct _GETMESSAGE216 {         /* u323 */
 } GETMESSAGE216;
 typedef GETMESSAGE216 UNALIGNED *PGETMESSAGE216;
 
-#line 1554
 #ifdef NULLSTRUCT
-#line 1555
+#line 1657
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1559
+#line 1661
 
-#line 1560
 #ifdef NULLSTRUCT
-#line 1561
+#line 1663
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1565
+#line 1667
 
 typedef struct _GETNEXTDLGGROUPITEM16 {     /* u227 */
     BOOL16  f3;
@@ -1760,12 +1733,11 @@ typedef struct _GETSYSCOLOR16 {         /* u180 */
 } GETSYSCOLOR16;
 typedef GETSYSCOLOR16 UNALIGNED *PGETSYSCOLOR16;
 
-#line 1634
 #ifdef NULLSTRUCT
-#line 1635
+#line 1737
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1639
+#line 1741
 
 typedef struct _GETSYSTEMMENU16 {       /* u156 */
     BOOL16  f2;
@@ -1788,17 +1760,16 @@ typedef struct _GETTABBEDTEXTEXTENT16 {     /* u197 */
 typedef GETTABBEDTEXTEXTENT16 UNALIGNED *PGETTABBEDTEXTEXTENT16;
 
 #ifdef NULLSTRUCT
-#line 1666
+#line 1763
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1670
+#line 1767
 
-#line 1671
 #ifdef NULLSTRUCT
-#line 1672
+#line 1769
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1676
+#line 1773
 
 typedef struct _GETTOPWINDOW16 {        /* u229 */
     HWND16  f1;
@@ -1911,12 +1882,11 @@ typedef struct _GRAYSTRING16 {          /* u185 */
 } GRAYSTRING16;
 typedef GRAYSTRING16 UNALIGNED *PGRAYSTRING16;
 
-#line 1788
 #ifdef NULLSTRUCT
-#line 1789
+#line 1886
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1793
+#line 1890
 
 typedef struct _HIDECARET16 {           /* u166 */
     HWND16 f1;
@@ -1931,12 +1901,11 @@ typedef struct _HILITEMENUITEM16 {      /* u162 */
 } HILITEMENUITEM16;
 typedef HILITEMENUITEM16 UNALIGNED *PHILITEMENUITEM16;
 
-#line 1807
 #ifdef NULLSTRUCT
-#line 1808
+#line 1905
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1812
+#line 1909
 
 typedef struct _INFLATERECT16 {         /* u78 */
     SHORT f3;
@@ -1950,12 +1919,11 @@ typedef struct _INITAPP16 {         /* u5 */
 } INITAPP16;
 typedef INITAPP16 UNALIGNED *PINITAPP16;
 
-#line 1825
 #ifdef NULLSTRUCT
-#line 1826
+#line 1923
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1830
+#line 1927
 
 typedef struct _INSERTMENU16 {          /* u410 */
     VPSTR f5;
@@ -2051,12 +2019,11 @@ typedef struct _ISTWOBYTECHARPREFIX16 {     /* u51 */
 } ISTWOBYTECHARPREFIX16;
 typedef ISTWOBYTECHARPREFIX16 UNALIGNED *PISTWOBYTECHARPREFIX16;
 
-#line 1925
 #ifdef NULLSTRUCT
-#line 1926
+#line 2023
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1930
+#line 2027
 
 typedef struct _ISWINDOW16 {            /* u47 */
     HWND16 f1;
@@ -2078,12 +2045,11 @@ typedef struct _ISZOOMED16 {            /* u272 */
 } ISZOOMED16;
 typedef ISZOOMED16 UNALIGNED *PISZOOMED16;
 
-#line 1951
 #ifdef NULLSTRUCT
-#line 1952
+#line 2049
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 1956
+#line 2053
 
 typedef struct _KEYBDEVENT16 {          /* u539 */
     DWORD dwExtraInfo;
@@ -2268,12 +2234,11 @@ typedef struct _MODIFYMENU16 {          /* u414 */
 } MODIFYMENU16;
 typedef MODIFYMENU16 UNALIGNED *PMODIFYMENU16;
 
-#line 2140
 #ifdef NULLSTRUCT
-#line 2141
+#line 2238
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 2145
+#line 2242
 
 typedef struct _MOUSEEVENT16 {          /* u538 */
     DWORD dwExtraInfo;
@@ -2400,12 +2365,11 @@ typedef struct _REGISTERWINDOWMESSAGE16 {   /* u118 */
 } REGISTERWINDOWMESSAGE16;
 typedef REGISTERWINDOWMESSAGE16 UNALIGNED *PREGISTERWINDOWMESSAGE16;
 
-#line 2271
 #ifdef NULLSTRUCT
-#line 2272
+#line 2369
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 2276
+#line 2373
 
 typedef struct _RELEASEDC16 {           /* u68 */
     HDC16 f2;
@@ -2426,12 +2390,11 @@ typedef struct _REMOVEPROP16 {          /* u24 */
 } REMOVEPROP16;
 typedef REMOVEPROP16 UNALIGNED *PREMOVEPROP16;
 
-#line 2296
 #ifdef NULLSTRUCT
-#line 2297
+#line 2394
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 2301
+#line 2398
 
 typedef struct _REPLYMESSAGE16 {        /* u115 */
     LONG f1;
@@ -2955,12 +2918,11 @@ typedef struct _USERSEEUSERDO16 {       /* u216 */
 } USERSEEUSERDO16;
 typedef USERSEEUSERDO16 UNALIGNED *PUSERSEEUSERDO16;
 
-#line 2824
 #ifdef NULLSTRUCT
-#line 2825
+#line 2922
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 2829
+#line 2926
 
 typedef struct _VALIDATERECT16 {        /* u127 */
     VPRECT16 f2;
@@ -2974,12 +2936,11 @@ typedef struct _VALIDATERGN16 {         /* u128 */
 } VALIDATERGN16;
 typedef VALIDATERGN16 UNALIGNED *PVALIDATERGN16;
 
-#line 2842
 #ifdef NULLSTRUCT
-#line 2843
+#line 2940
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 2847
+#line 2944
 
 typedef struct _WINDOWFROMPOINT16 {     /* u30 */
     POINT16 f1;
@@ -3028,12 +2989,11 @@ typedef struct _WVSPRINTF16 {           /* u421 */
 } WVSPRINTF16;
 typedef WVSPRINTF16 UNALIGNED *PWVSPRINTF16;
 
-#line 2886
 #ifdef NULLSTRUCT
-#line 2887
+#line 2993
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
-#line 2891
+#line 2997
 
 typedef struct _SETWINDOWSHOOKEX16 {      /* u291 */
     HTASK16 f4;
@@ -4073,20 +4033,5 @@ typedef struct _KRNL386SEGS {   /* uclg */
 typedef KRNL386SEGS UNALIGNED *PKRNL386SEGS;
 
 /* XLATOFF */
-/* Parameter frames consumed by the current WOW thunks. */
-typedef struct _WOWGETIDFROMDIRECTORY16 { /* u534 */
-    WORD   f2;
-    VPVOID f1;
-} WOWGETIDFROMDIRECTORY16;
-typedef WOWGETIDFROMDIRECTORY16 UNALIGNED *PWOWGETIDFROMDIRECTORY16;
-
-typedef struct _WORDBREAKPROC16 {   /* wordbreakproc */
-    SHORT   action;
-    SHORT   cbEditText;
-    SHORT   ichCurrentWord;
-    VPVOID  lpszEditText;
-} WORDBREAKPROC16;
-typedef WORDBREAKPROC16 UNALIGNED *PWORDBREAKPROC16;
-
 #pragma pack()
 /* XLATON */

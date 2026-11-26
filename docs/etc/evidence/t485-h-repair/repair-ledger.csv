@@ -87,3 +87,4 @@
 "HXP-R-00219","src/mvdm-host/dpmi32/modesw.c","evidenced-residual-final-verified","S7-P3","owner-review","s7-progress.md"
 "HXP-R-00220","src/mvdm-host/dpmi32/modesw.c","evidenced-residual-final-verified","S7-P3","owner-review","s7-progress.md"
 "HXP-R-00221","src/mvdm-host/dpmi32/modesw.c","evidenced-residual-final-verified","S7-P3","owner-review","s7-progress.md"
+"HXP-R-00272","src/mvdm-host/inc/wowusr.h","restored-final-verified","S7-P4","none","s7-progress.md"

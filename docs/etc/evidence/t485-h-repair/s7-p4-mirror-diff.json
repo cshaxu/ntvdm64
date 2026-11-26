@@ -1,0 +1,15 @@
+{
+  "baseline_commit": "f3f49955adde4b1b8437d89fe8bdffee8845b4d0",
+  "original_blob": "0396ec944eeb468252b419449d1fae36bf685edd",
+  "path": "src/mvdm-host/inc/wowusr.h",
+  "conditional_arms": 47,
+  "before": {
+    "lines": 15,
+    "points": 1
+  },
+  "after": {
+    "lines": 0,
+    "points": 0
+  },
+  "excluded_arms": 41
+}

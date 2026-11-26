@@ -30,9 +30,9 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Original Owner Request | Execute the new T485 S repair sequence before resuming N004-G097, without excessive repeated verification. |
 | Similar-Issue Sweep | All exclusion masks, effective guards and selected bodies of each owned file; retain runtime ownership and failure semantics. |
 
-## S7 P3 Checkpoint
+## S7 P4 Checkpoint
 
-[S7 P1-P3](../etc/evidence/t485-h-repair/s7-progress.md): seven whole files final-verified with registered residuals; thirteen remain, next inc/wowusr.h. S7 non-error mirror reduction is twelve points/91 lines. Commit/push completes P3; S7 remains active.
+[S7 P1-P4](../etc/evidence/t485-h-repair/s7-progress.md): eight files final-verified, with residuals registered where necessary; twelve remain, next softpc.new/base/bios/reset.c. S7 non-error reduction is thirteen points/106 lines. Commit/push completes P4; S7 remains active.
 
 ## S6 Closure Record
 
