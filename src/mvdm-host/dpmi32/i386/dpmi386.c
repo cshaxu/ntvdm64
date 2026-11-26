@@ -27,6 +27,7 @@ Revision History:
 #include <softpc.h>
 #include <memory.h>
 #include <malloc.h>
+#include <nt_vdd.h>
 #include "compat/include/dpmi_host.h"
 #include "compat/include/mvdm_cpu_access.h"
 

@@ -208,3 +208,104 @@ S7 now has five whole-file reviews and final-verified P deliveries out of20;
 fifteen remain, next dpmi32/i386/dpmi386.c. Cumulative S7 reduction10/81;
 including S6 reduction11/82. This record's P commit/push completes delivery.
 The frozen audit population remains1055 and migration remains39/159.
+## S7 next file: i386/dpmi386.c
+
+Entry: two non-error points/219 lines. Original XP blob
+2d55fb7da5272e46bc20f8e53580b244e95b7eea has no conditional framework around
+the four removed functions. R00185's old blanket instruction to restore an
+excluded framework is incorrect; no invented guard/error branch is added.
+
+A complete original-function restoration was compiled in the main worktree
+with the actual CCPU product response file (owned PID19728).
+build/t485-s7/p3/restore.log and restore-exit.txt record exit2:
+PPROCESS_LDT_INFORMATION, VDMSET_LDT_ENTRIES_DATA and
+VDMSET_PROCESS_LDT_INFO_DATA are absent from the current admitted header set.
+This is a concrete current restoration obstacle, not proof that these original
+types or algorithms are wrong. Restoring that unused native-kernel function
+would require a separately reviewed original header closure.
+
+The three removed pointer providers have actual duplicate owners in the
+published ntvdm.exe map: Sim32pGetVDMPointer, ExpSim32GetVDMPointer and
+VdmMapFlat are provided by original-softpc-host-roots:sim32.obj.
+Its selected software mappings handle IntelBase and page translation;
+the hardware implementations assume native identity-addressed VDM memory.
+They cannot simply be restored alongside that owner.
+
+R00186 reads the actual emulated debug registers through the existing CPU
+provider; the original ThreadGetDebugContext does not describe that CPU.
+int31.c consumes this result for hardware-breakpoint operations; the existing
+setter also binds the CPU owner, without introducing another register store.
+
+The failed restoration was precisely withdrawn. Only the original nt_vdd.h
+include was restored; precomp.h already includes the same guarded header, so
+this is nonbehavioral and accumulates until the next substantive whole-file
+batch. Local result remains two points, now218 lines (-0/-1).
+S7 remains five delivered files; this sixth file has source findings and a
+local include-only change, not a delivery claim. Native header restoration
+is explicitly pending review with the concrete compilation evidence above.
+## S7 P3: modesw.c whole-file review and dpmi386.c include restoration
+
+modesw.c entry18 points/53 non-error lines -> candidate16/44 (-2/-9).
+Together with dpmi386.c's include restoration the candidate reduces2/10.
+Five files remain delivered; this batch has two locally reviewed files.
+
+R00204/R00205/R00207 retain the existing CPU declarations, WOW page-domain
+exit and real-mode segment-cache reset. The original single SS limit write
+cannot reset CCPU CPL and DS/ES/FS/GS caches after the PE transition.
+The selected providers are c_reg/c_seg and the existing page-domain owner,
+not a second mode implementation or copied session state.
+
+R00206/R00208/R00210/R00211 restore XP's software-first branch ordering.
+The unsupported kernel bodies remain error-only at original lines110/172;
+the caller CCPU predicate stays because host ABI does not supply kernel VDM.
+The object-contracts generator previously enforced reversed order; it now
+extracts the actual software-first branches. Positive CCPU and negative native
+kernel preprocessing assertions are retained rather than waived.
+
+R00209/R00212 retain the proved RF/NT-clear-before-PE ordering, covered by
+pm_entry_contract_fixture's131074 boundary cases (not a CPU execution claim).
+R00213 preserves DOSX GDT/IDT ownership and final descriptor selection, with
+the existing shared DpmiCpu40GetDosxIdtDescriptor provider and S6/P1/P2 real
+guest evidence. No fixed WOW selector is used to guess interrupt ownership.
+R00214-R00220 preserve PE-before-selector and SS-before-ESP ordering plus
+the existing WOW reentry boundary. Original blank separation is restored;
+logical line anchors return unchanged source to its original positions.
+R00221 retains selection of the original emulator callback IOPL preservation.
+The remaining callback/reflection functions are otherwise original;
+no unrelated failure policy or instruction support is introduced.
+
+Build runner PID21360 owns build/t485-s7/p3. Planned final gates are cached
+full build, selected/rejected guard profiles, PM entry contract and existing
+CCPU cases, followed by final-package targeted verification. No pass or
+publication is claimed at this local checkpoint.
+P3 first build stopped in object-contracts configuration, before product
+compilation: MATCHALL stored real C bodies containing semicolons in a CMake
+list and falsely rejected the branch count. The generator now matches each
+original else location109/171 separately; it neither changes selected code
+nor removes a negative assertion. build-generator-failure.log is retained.
+Corrected build PID9408 and dependent publish/runtime PID23924 supersede
+the failed runners. No product or runtime failure is inferred from the
+generator error.
+## S7 P3 final-package receipt
+
+The corrected cached full build, two selected/two rejected mode guards,
+PM-entry contract and61 CPU cases passed. The final runtime4 package was
+published and13 image hashes verified at assets/release and O:/WINNT/SYSTEM32.
+Real WINMINE, Win3.1 standard/enhanced, Win95 and DOS4GW NESticle passed.
+Both enhanced/Win95 round-trip witnesses assert window input, fullscreen text,
+return input, second fullscreen and same window. Win95 exit1 remains the
+approved boundary, not a normal-exit0 claim.
+
+P3 contains dpmi386.c's redundant original header restoration and modesw.c's
+original software-first conditions/diagnostic mappings. Selected runtime
+operations are unchanged. The generator parses each original else boundary
+individually, avoiding CMake list splitting; no assertion was removed.
+Original guest binaries are untouched.
+
+[Final measurements](s7-p3-mirror-diff.json):20points/272lines ->18/262,
+net reduction2points/10lines. S7 cumulative reduction12/91; including S6,
+13/92. Seven files have source conclusions and final verified deliveries
+with registered residuals, out of20;13 remain. dpmi386.c's native-header
+restoration obstacle remains explicitly in pending decisions, not silently
+declared upstream-invalid. Commit/push of this P completes delivery.
+Next ordered file is inc/wowusr.h. Migration remains39/159.

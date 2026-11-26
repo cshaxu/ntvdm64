@@ -25,6 +25,7 @@ Revision History:
 extern void load_pseudo_descr(int index);
 extern void c_setGDT_BASE_LIMIT(ULONG base, USHORT limit);
 extern void c_setIDT_BASE_LIMIT(ULONG base, USHORT limit);
+#line 24
 #pragma hdrstop
 #include "softpc.h"
 
@@ -105,11 +106,8 @@ Return Value:
     mvdm_softpc_wow_page_domain_leave_protected();
     setMSW(getMSW() & ~MSW_PE);
 
-#if defined(_X86_) && !defined(CCPU)
-#line 110
-#error DIVERGENCE MVDM-HOST-DIV-619: unsupported kernel V86 monitor
-#else
-#line 104
+#line 103
+#if !defined(_X86_) || defined(CCPU)
     //BUGBUG This is a workaround to reload a 64k limit into SS for the
     // emulator, now that we are in real mode.
     // Not doing this would cause the emulator to do a hardware reset
@@ -120,6 +118,11 @@ Return Value:
     load_pseudo_descr(4); /* FS */
     load_pseudo_descr(5); /* GS */
 
+#line 109
+#else
+#line 110
+#error DIVERGENCE MVDM-HOST-DIV-619: unsupported kernel V86 monitor
+#line 134
 #endif
 #line 135
 
@@ -153,19 +156,22 @@ Return Value:
     setEFLAGS((getEFLAGS() & ~(EFLAGS_RF_MASK | EFLAGS_NT_MASK)));
     setMSW(getMSW() | MSW_PE);
 
-#if defined(_X86_) && !defined(CCPU)
-#line 172
-#error DIVERGENCE MVDM-HOST-DIV-619: unsupported kernel V86 monitor
-#else
-#line 166
+#line 165
+#if !defined(_X86_) || defined(CCPU)
     //BUGBUG This is a workaround to make sure the emulator goes back
     // to privilege level 3 now that we are in protect mode.
     // Not doing this would cause an access violation in dpmi32.
     setCPL(3);
 
+#line 171
+#else
+#line 172
+#error DIVERGENCE MVDM-HOST-DIV-619: unsupported kernel V86 monitor
+#line 196
 #endif
 #line 197
 
+#line 200
     DBGTRACE(VDMTR_TYPE_DPMI | DPMI_IN_PM, 0, 0);
 }
 
@@ -207,6 +213,7 @@ Return Value:
         return;
     c_setIDT_BASE_LIMIT(idtBase, idtLimit);
     SetPMExec();
+#line 231
     setCS(*(PUSHORT)(StackPointer + 12));
     setEIP(*(PULONG)(StackPointer + 8));
     setSS(*(PUSHORT)(StackPointer + 6));
@@ -220,7 +227,9 @@ Return Value:
     setES((USHORT)0);
     setGS((USHORT)0);
     setFS((USHORT)0);
+
     (void)mvdm_softpc_wow_page_domain_reenter_protected();
+#line 246
 
 }
 
@@ -258,11 +267,13 @@ Return Value:
     LastLockedPMStackSS = getSS();
 
     SetV86Exec();
+#line 282
     setDS(*(PUSHORT)(StackPointer));
     setESP((ULONG) *(PUSHORT)(StackPointer + 2));
     setSS(*(PUSHORT)(StackPointer + 4));
     setEIP((ULONG) *(PUSHORT)(StackPointer + 6));
     setCS(*(PUSHORT)(StackPointer + 8));
+#line 288
 
 
 }
@@ -300,7 +311,9 @@ Return Value:
     LastLockedPMStackSS = getSS();
 
     SetV86Exec();
+#line 324
     setCS(DosxRmCodeSegment);
+#line 326
 
 }
 
@@ -337,6 +350,7 @@ Return Value:
     setSS(LastLockedPMStackSS);
     setESP(LastLockedPMStackESP);
     (void)mvdm_softpc_wow_page_domain_reenter_protected();
+#line 361
 }
 
 VOID
