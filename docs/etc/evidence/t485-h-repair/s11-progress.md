@@ -23,7 +23,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 9 | src/mvdm-host/wow32/wcall16.c | 4 | P4 delivered 9000f7c3f |
 | 10 | src/mvdm-host/wow32/wcntl32.c | 33 | P5 delivered 1587bccad |
 | 11 | src/mvdm-host/wow32/wcommdlg.c | 11 | P6 delivered 94a576739 |
-| 12 | src/mvdm-host/wow32/wdde.c | 25 | Pending |
+| 12 | src/mvdm-host/wow32/wdde.c | 25 | P7 delivered f97262387 |
 | 13 | src/mvdm-host/wow32/wdde.h | 4 | Pending |
 | 14 | src/mvdm-host/wow32/wdib.c | 1 | Pending |
 | 15 | src/mvdm-host/wow32/wdos.c | 6 | Pending |
@@ -496,3 +496,6 @@ pass. No original guest modification. Governance and relative links pass.
 All12files/92points now final-verified:10restored,82owner-review residuals,
 360unreviewed; census166/4381 ->119/405, reduction47/3976. Commit/push pending.
 Full checkpoint covers files1..12; next count checkpoint is file20, plus S closure.
+
+P7 delivered and pushed as f97262387. Worktree clean after delivery.
+Next:wdde.h;12files/92points delivered,47/3976 cumulative reduction.

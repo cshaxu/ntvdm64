@@ -37,8 +37,8 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 360 unreviewed. P7 wdde.c26/161 ->25/159; reviewed census166/4381 ->119/405,
 net-47/-3976. Runtime9 cached build,dual publication26hashes,DDE96/38/4/4 and
 Full23/23 PASS. Win95 retains approved knownExitOne; both enhanced desktop
-roundtrips preserve same-window/input. P7 commit/push pending.
-Delivered remains11files/67points through P6 94a576739 until P7 push.
+roundtrips preserve same-window/input. P7 delivered/pushed f97262387.
+Delivered12files/92points; cumulative reduction47points/3976lines.
 Full checkpoint covers files1..12; next is file20 and every S closure.
 Next after P7 delivery:wdde.h. Migration39/159; S11 remains active.
 ## S10 Closure Record
