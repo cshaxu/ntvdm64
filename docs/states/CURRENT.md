@@ -33,7 +33,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S9 Ordered Progress
 
 [S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 24/41 source-reviewed
-and final-verified; 17 remain. P3 f424289aa is pushed; P4 commit/push pending.
+and final-verified; 17 remain. P4 f57a2ce66 is committed and pushed; all 24 reviewed files are delivered.
 P4 call.c 6/652 ->7/8 and ccpusas4.c 42/400 ->42/387: two-file batch
 48/1052 ->49/395 (+1 point/-657 lines). Disjoint measured P1-P4 change:
 +165 points/-21523 lines, not a whole-S9 census. Format block growth is owner

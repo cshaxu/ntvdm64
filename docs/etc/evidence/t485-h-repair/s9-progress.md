@@ -547,3 +547,8 @@ all fourteen remain residual-owner-review. Two-file byte-sensitive non-error
 result is 48/1052 ->49/395 (+1/-657); cumulative measured change across disjoint
 P1-P4 files is +165/-21523. This remains distinct from a whole-S9 census.
 Next relative-path file: softpc.new/base/ccpu386/fpu.c. Commit/push pending.
+
+P4 delivery receipt: f57a2ce66 is committed and pushed to origin/main.
+All 24 reviewed S9 files are delivered; 17 remain. Documentation governance
+and relative-link checks passed. Post-test dual publication hashes remain
+26/26 matching. S9 and T485 remain active; next file is fpu.c.
