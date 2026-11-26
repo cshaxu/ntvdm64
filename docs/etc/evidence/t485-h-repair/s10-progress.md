@@ -22,8 +22,8 @@ Full remains S13; original guest remains immutable.
 | 9 | softpc.new/base/cvidc/sevid019.c | 3 | Delivered d406cb610 |
 | 10 | softpc.new/base/inc/gvi.h | 5 | Delivered d406cb610 |
 | 11 | softpc.new/base/keymouse/keyba.c | 44 | Delivered 99c8fc6b1 |
-| 12 | softpc.new/base/keymouse/keybd_io.c | 3 | Source reviewed; format delivery pending |
-| 13 | softpc.new/base/video/cga.c | 157 | Source reviewed; P4 delivery pending |
+| 12 | softpc.new/base/keymouse/keybd_io.c | 3 | Delivered 3a3ac1248 |
+| 13 | softpc.new/base/video/cga.c | 157 | Delivered 3a3ac1248 |
 | 14 | softpc.new/base/video/ega_prts.c | 30 | Not started |
 | 15 | softpc.new/base/video/ega_read.c | 7 | Not started |
 | 16 | softpc.new/base/video/ega_vide.c | 308 | Not started |
@@ -248,3 +248,7 @@ hide/restore. Evidence in build/t485-s10/p4/{cvidc.log,controller.log,
 keyboard-contracts/result.json,debug-live,dos4gw}; all-tests-result.txt=PASS.
 This is targeted verification, not Full or a new Windows desktop acceptance.
 Thirteen files final-verified; P4 commit/push pending.
+
+P4 delivery receipt:3a3ac1248 pushed to origin/main.13/30 files delivered,
+335/1060 points reviewed,725 remain;180 restored/delivered,155 residuals.
+No local restorations pending. Census532/54533 unchanged. Next ega_prts.c.
