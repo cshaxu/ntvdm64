@@ -86,9 +86,7 @@ TABLEOFFSETS tableoffsets;
 INT cAPIThunks;
 // #endif
 
-#line 89
 #ifdef WOWPROFILE
-#line 90
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 92
@@ -131,7 +129,6 @@ VOID InitThunkTableOffsets(VOID)
 #endif // FE_SB
 
 #ifdef DEBUG_OR_WOWPROFILE
-#line 131
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 133
@@ -142,7 +139,8 @@ VOID InitThunkTableOffsets(VOID)
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-#line 141
+
+
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 197
+#line 313

@@ -273,7 +273,6 @@ VOID   puthandletable16(VPWORD vpht, UINT c, LPHANDLETABLE lpht);
 VOID   putkerningpairs16(VPWORD vp, UINT cb, LPKERNINGPAIR lp);
 
 #ifdef NOTUSED
-#line 276
 #error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register.
 #endif
 #line 278

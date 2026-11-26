@@ -65,10 +65,8 @@ BOOL    GetDriverName (char *psz, char *szDriver);
 BOOL    LoadLibraryAndGetProcAddresses(char *name, DLLENTRYPOINTS *p, int i);
 
 #ifdef i386
-#line 68
 #error Excluded unsupported i386 WOW header profile
 #else
 #line 70
 #define SafeLoadLibrary(name) LoadLibrary(name)
 #endif
-#line 72

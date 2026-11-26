@@ -1437,3 +1437,193 @@ P13 delivery receipt: commit 8d96fbf50 pushed to origin/main. Cached build,
 dual publication (26 hash checks), MEM/NTVDMD, NESticle, and documentation
 governance passed. 735/851 delivered; 116 remain. The seven explicitly listed
 format residuals remain open and are not concealed by this delivery count.
+
+### P14 EOF correction and next twelve WOW files
+
+Direct byte inspection proves demdisp.c and demerror.c each had an extra LF
+after the original final DOS EOF byte 0x1A. Both are restored locally; code
+and exclusion directives are unchanged. The other five alleged residuals
+were blank lines inside #error-replaced bodies, incorrectly retained by the
+measurement projection. They require a census correction, not source edits.
+The revised projection excludes those body blank lines on both sides while
+preserving all selected-code blank lines, line endings and EOF bytes.
+
+[The next twelve files](s8-p14-byte-diff.csv), wgtbl.h through wkbtbl.h,
+change from 9 points/9 lines to 3 points/3 lines. wgtbl.h, wheap.c and
+wkbtbl.h each change 3/3 to 1/1; the remaining nine files are byte-exact.
+Original retained-source and logical-line checks pass, #error unchanged.
+747/851 reviewed, 104 remain; 735 delivered, twelve new local reviews and
+two earlier EOF corrections await the next batch. Pure formatting is
+accumulated; no new build/publication/test is claimed for P14.
+Next canonical file: the path at index 747 in the frozen S8 order.
+The prior 735-file census is being recomputed with corrected exclusion
+whitespace handling; earlier 3340/321221 -> 1767/1771 is superseded.
+Corrected 735-file census completed: 3342 points/320858 lines -> 1761 points/1761
+lines, reduction 1581/319097; 525 byte-exact files. Remaining differences in
+this reviewed scope are #line directives; no selected-code EOF/format residual
+remains after the two local EOF corrections. Counts include those local fixes
+and therefore are not entirely delivered. Next ordered file: wow32/wkernel.h.
+
+### P14 final ordered source review
+
+All remaining 116 S8 files are now reviewed in canonical relative-path order.
+The retained source matches pinned XP, original exclusion directives are unchanged,
+and logical source-line checks passed for each complete file. The four per-file
+censuses include CRLF/LF, EOF, blank lines and #line, excluding only #error bodies.
+
+- [First twelve](s8-p14-byte-diff.csv)
+- [Next twenty](s8-p14-next-byte-diff.csv)
+- [Next thirty](s8-p14-third-byte-diff.csv)
+- [Final fifty-four](s8-p14-last-byte-diff.csv)
+
+| File | Before points/lines | After points/lines |
+| --- | --- | --- |
+| src/mvdm-host/wow32/wgtbl.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wgtbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgtext.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgtext.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wheap.c | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wheap.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/win95.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/win95.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wkbdtbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wkbman.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wkbman.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wkbtbl.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wkernel.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wkfileio.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wkgthunk.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wklocal.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wkmem.c | 6/6 | 2/2 |
+| src/mvdm-host/wow32/wkmem.h | 1/1 | 1/1 |
+| src/mvdm-host/wow32/wktbl.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wktbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmmalias.c | 22/22 | 10/10 |
+| src/mvdm-host/wow32/wmmalias.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wmmedia.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmmedia.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wmmedia1.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmmedia2.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmmstru1.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmmstru2.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmmstruc.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmmstruc.h | 2/2 | 1/1 |
+| src/mvdm-host/wow32/wmmtbl.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wmmtbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmsg16.h | 6/6 | 2/2 |
+| src/mvdm-host/wow32/wmsgbm.c | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wmsgbm.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wmsgcb.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmsgem.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmsglb.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmsgsbm.c | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wmsgsbm.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wmtbl32.c | 2/2 | 1/1 |
+| src/mvdm-host/wow32/wmtbl32.h | 5/5 | 2/2 |
+| src/mvdm-host/wow32/wnman.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wnman.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wole2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wow32.def | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wowhooks.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wowtbl.c | 7/7 | 3/3 |
+| src/mvdm-host/wow32/wowtbl.h | 2/2 | 1/1 |
+| src/mvdm-host/wow32/wparam.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wreldc.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wreldc.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wres16.c | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wres16.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wres32.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wres32.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wsdynmc.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wshell.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wshimdb.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wshltbl.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wshtbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wsman.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wsman.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wsocktbl.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wspool.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wsraw.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wstbl.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wstbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wstruc.h | 2/2 | 1/1 |
+| src/mvdm-host/wow32/wsubcls.c | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wsubcls.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wthman.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wthman.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wthtbl.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wthtbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wucaret.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wucaret.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wuclass.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wuclip.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wucomm.c | 1/5540 | 2/2 |
+| src/mvdm-host/wow32/wucomm.h | 1/597 | 1/1 |
+| src/mvdm-host/wow32/wucursor.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wucursor.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wudlg.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wuhook.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wuhook.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wulang.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wulang.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wuman.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wumenu.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wumenu.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wuser.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wuser31.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wusercli.c | 2/2 | 1/1 |
+| src/mvdm-host/wow32/wusercli.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wutbl.h | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wutbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wutext.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wutext.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wutmr.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wuwind.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wwmman.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wwmman.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wwmtbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wwstbl2.h | 0/0 | 0/0 |
+| src/mvdm-host/xms.486/daytona/makefile | 0/0 | 0/0 |
+| src/mvdm-host/xms.486/daytona/sources | 0/0 | 0/0 |
+| src/mvdm-host/xms.486/dirs | 0/0 | 0/0 |
+| src/mvdm-host/xms.486/sources.inc | 0/0 | 0/0 |
+| src/mvdm-host/xms.486/xms.c | 1/206 | 0/0 |
+| src/mvdm-host/xms.486/xms.h | 1/303 | 7/7 |
+| src/mvdm-host/xms.486/xmsa20.c | 1/168 | 2/2 |
+| src/mvdm-host/xms.486/xmsdisp.c | 1/107 | 1/1 |
+| src/mvdm-host/xms.486/xmsmemr.c | 1/334 | 0/0 |
+| src/mvdm-host/xms.486/xmsmisc.c | 1/168 | 0/0 |
+| src/mvdm-host/xms.486/xmsumb.c | 1/484 | 0/0 |
+
+The 116-file subtotal is 123 points/8021 lines -> 57 points/57 lines,
+a reduction of 66 points/7964 lines. Two earlier EOF corrections are additional
+local changes. Larger CRLF replacements split into diagnostic anchors in
+wucomm.c, xms.h and xmsa20.c; their point increases are reported explicitly.
+851/851 reviewed, zero unreviewed; 735 delivered, 116 awaiting P14 delivery.
+Cached full build and dual publication run under p14/deliver.ps1; final tests,
+commit and push are pending. S8 is not closed.
+
+### P14 final verification and S8 completion audit
+
+The final 851-file byte-sensitive census is 3465 points/328879 lines before
+S8 (4ffc6a065) and 1818 points/1818 lines after: reduction 1647 points/327061
+lines. Byte-exact files increase from 250 to 606. All remaining differences
+in the projected non-error bodies are #line directives: 245 files, with no
+other retained-code, whitespace or EOF differences. The projection excludes
+#error replacement bodies including their internal whitespace, not selected
+code whitespace. The per-file current hashes are verified for all 851 rows.
+
+All 900 frozen lexical points remain in the historical repair ledger; they
+are not substituted for this current complete byte-sensitive census. No
+original guest is changed or rebuilt. The source checks preserve exclusion
+texts and original retained logical line mapping. Build-owned helper scripts
+are diagnostic evidence tools, not new production build dependencies.
+
+Runtime14 cached full build, dual publication (13 images, 26 matching hashes),
+actual MEM/NTVDMD exports and DOS4GW/NESticle rendering/Escape lifecycle all
+passed. Documentation governance passed before final receipt update and is
+rerun for delivery. This is targeted verification, not a new Full run. S13
+retains the mandatory integrated Full checkpoint; migration remains 39/159.
+All 851 S8 files are final-verified; commit/push is the remaining delivery step.
+S9 owns the separate 41 CPU/DPMI/BIOS/PIC/LIM/XMS/debug/header files. S8 review
+does not claim those semantic adaptations are resolved.

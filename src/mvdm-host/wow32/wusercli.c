@@ -653,7 +653,6 @@ ULONG FASTCALL WU32GetKeyboardState(PVDMFRAME pFrame)
         GetKeyboardState( pb1 );
     }
 #else
-#line 656
 #error Unsupported excluded original configuration
 #endif
 #line 658

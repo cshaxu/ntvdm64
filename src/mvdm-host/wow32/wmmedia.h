@@ -236,7 +236,6 @@ VOID UnThunkStatusCmd( MCIDEVICEID devID, DWORD OrigFlags,
 
 
 #if DBG
-#line 239
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 #line 271
@@ -255,7 +254,6 @@ VOID UnThunkStatusCmd( MCIDEVICEID devID, DWORD OrigFlags,
 
 
 #endif
-#line 286
 
 /* Stuff needed for MCI thunking.  Defined in MEDIA\WINMM\MCI.H but here
  * until a common place can be found

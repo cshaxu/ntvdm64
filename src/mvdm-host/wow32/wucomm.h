@@ -257,7 +257,7 @@ typedef struct _PORTTAB {
 //+++ DEBUG SUPPORT
 
 #ifdef DEBUG
-#line 260
+
 #error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #else  // endif DEBUG
 #line 282
@@ -267,7 +267,6 @@ typedef struct _PORTTAB {
 #define CommIODebug(fhCommIO, hCommIO, lpsz, cb, lpszFile)
 
 #endif // endif !DEBUG
-#line 288
 
 //--- DEBUG SUPPORT
 

@@ -31,17 +31,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Similar-Issue Sweep | Whole-file harmless restorations, normalized-exact bytes, exclusion framework and diagnostic mappings. |
 ## S8 Ordered Progress
 
-[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 735/851 reviewed,
-116 remain; P13 8d96fbf50 is committed and pushed, 735 files delivered.
-P13 cached build, dual publication and MEM/NTVDMD plus NESticle tests passed. Strict non-error byte-sensitive
-comparison, including CRLF/LF, EOF, blank lines and #line, is 52 points/3683
-lines -> 57 points/57 lines: 5 more points, 3626 fewer lines; 36 files byte-exact.
-The former 0/0 was a lexical/frozen-ledger count, not complete mirror diff.
-The historical 900/4981 reduction likewise is not a byte-sensitive total;
-735-file byte-sensitive recount: 3340 points/321221 lines -> 1767 points/1771 lines,
-net reduction 1573/319450; 525 byte-exact files. Seven earlier files retain
-non-#line format residuals, registered for correction.
-Next: src/mvdm-host/wow32/wgtbl.h. N004 remains gated on S13; migration 39/159.
+[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 851/851 source-reviewed
+and final-verified, zero unreviewed. P13 8d96fbf50 is pushed; P14 commit/push
+pending. Final non-error byte-sensitive census: 3465 points/328879 lines ->
+1818 points/1818 lines, reduction 1647/327061; 606 byte-exact files and 245
+with only #line residuals after exclusion projection. CRLF/LF and EOF count.
+All 851 latest hashes match. Runtime14 cached full build, dual 13-image
+publication (26 hashes), actual MEM/NTVDMD and NESticle tests passed.
+N004 remains gated on S13; migration stays 39/159. S8 is active through P14
+commit/push and closure; S9 is not admitted yet.
 ## S7 Closure Record
 
 [S7 closure](../etc/evidence/t485-h-repair/s7-progress.md), delivered through a1f5bff4b.

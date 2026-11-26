@@ -269,9 +269,8 @@ DWORD GetThunkWindowProc(
 }
 
 
-#line 272
 #if 0  // Currently unused
-#line 273
+
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 340

@@ -32,9 +32,7 @@ PVOID FASTCALL malloc_w_small (ULONG size)
 {
     PVOID pv = HeapAlloc(hWOWHeapSmall, 0, size);
 
-#line 35
 #ifdef DEBUG
-#line 36
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 40

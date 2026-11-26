@@ -23,7 +23,6 @@ HINFO   hiMMedia;       // MultiMedia handle alias info - MikeTri 12-May-1992
 HINFO   hiWinsock;      // Winsock handle alias info - DavidTr 4-Oct-1992
 
 #ifdef  DEBUG
-#line 26
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 28
@@ -32,7 +31,6 @@ INT iLargestListSlot;
 extern CRITICAL_SECTION    mmHandleCriticalSection;
 
 #ifdef  DEBUG
-#line 33
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 35
@@ -151,7 +149,6 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
             return NULL;
         }
 #else
-#line 150
 #error Unsupported excluded original configuration
 #endif
 #line 200
@@ -163,12 +160,10 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
         phm->h32 = NULL;
 
 #ifdef NEWALIAS
-#line 208
 #error Unsupported excluded original configuration
 #else
 #line 220
 #ifdef DEBUG
-#line 221
 #error DEBUG WOW alias accounting is not supported
 #endif
 #line 227
@@ -180,21 +175,18 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
         phm->phmNext = NULL;
         phmPrev->phmNext = phm;
 #endif
-#line 235
     }
 
     // If this a new entry, initialize it
 
     if (!phm->h32) {
 #ifdef DEBUG
-#line 241
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 246
 
         // Insure that the alias pointer is valid
 #ifdef NEWALIAS
-#line 249
 #error Unsupported excluded original configuration
 #endif
 #line 251
@@ -237,7 +229,6 @@ PHMAP FindHMap16(HAND16 h16, PHINFO phi)
     h16 >>= RES_BITS;
 
 #ifdef NEWALIAS
-#line 290
 #error Unsupported excluded original configuration
 #else
 #line 303
@@ -251,7 +242,6 @@ PHMAP FindHMap16(HAND16 h16, PHINFO phi)
     phm = phm->phmNext;
         }
 #endif
-#line 313
     if (!phm) {
         LOGDEBUG(0,("    FindHMap16 ERROR: could not find %04x\n", h16<<RES_BITS));
         return NULL;
@@ -264,7 +254,6 @@ PHMAP FindHMap16(HAND16 h16, PHINFO phi)
     }
 
 #ifdef DEBUG
-#line 325
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 330
@@ -290,7 +279,6 @@ VOID FreeHMap16(HAND16 h16, PHINFO phi)
         phm->h32 = NULL;
 
 #ifdef NEWALIAS
-#line 352
 #error Unsupported excluded original configuration
 #endif
 #line 364

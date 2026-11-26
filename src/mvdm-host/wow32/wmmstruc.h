@@ -110,7 +110,6 @@
 #define FREEJOYCAPS(p)
 #define FREEJOYINFO(p)
 #else
-#line 113
 #error Unsupported excluded original configuration
 #endif
 #line 125

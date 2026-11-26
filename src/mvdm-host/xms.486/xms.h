@@ -20,19 +20,16 @@
 */
 
 #ifdef DOS
-#line 23
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
 #line 25
 
 #ifdef OS2_16
-#line 27
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register.
 #endif
 #line 30
 
 #ifdef OS2_32
-#line 32
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
 #line 35
@@ -44,9 +41,7 @@
 #include <malloc.h>
 #include <process.h>
 
-#line 43
 #ifdef WIN_16
-#line 44
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
 #line 47
@@ -66,7 +61,6 @@
 #ifndef i386
 #define ALIGN_32
 #else
-#line 63
 #error Unsupported excluded original configuration
 #endif
 #line 65
@@ -78,13 +72,11 @@
 #endif
 
 #ifdef SIGNALS
-#line 73
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
 #line 76
 
 #ifdef OS2_32
-#line 78
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
 #line 81

@@ -65,7 +65,6 @@ VOID xmsEnableA20Wrapping(VOID)
 	*pHimemA20State = 0;
 
 #if 0 // this is not necessay because the intel space(pointed by
-#line 68
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 81
@@ -80,7 +79,6 @@ VOID xmsDisableA20Wrapping(VOID)
     if (pHimemA20State != NULL)
 	*pHimemA20State = 1;
 #if 0 // this is not necessay because the intel space(pointed by
-#line 92
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 105

@@ -49,7 +49,7 @@ extern TABLEOFFSETS tableoffsets;
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-#line 52
+
 #error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif
 #line 66
