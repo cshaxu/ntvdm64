@@ -93,6 +93,11 @@ HANDLE  hHostInstance;
 #error Excluded unsupported DEBUG WOW profile
 #line 90
 #endif
+#line 91
+
+#ifdef DEBUG_MEMLEAK
+#error Excluded unsupported DEBUG_MEMLEAK WOW profile
+#endif
 #line 95
 
 UINT    iW32ExecTaskId = (UINT)-1;    // Base Task ID of Task Being Exec'd
@@ -667,15 +672,16 @@ BOOL W32Init(BOOL fMEoW)
     }
 
 
-    if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,
+    if ((cb = RegOpenKeyEx ( HKEY_LOCAL_MACHINE,
                "SYSTEM\\CurrentControlSet\\Control\\WOW",
                0,
                KEY_QUERY_VALUE,
                &WowKey
-             ) != 0){
+             )) != 0){
 #line 681
         LOGDEBUG(0,("    W32INIT ERROR: Registry Opening failed\n"));
-#line 735
+#line 682
+        if (cb != ERROR_FILE_NOT_FOUND) return FALSE;
         WowKey = NULL;
 #line 683
     }
@@ -812,7 +818,7 @@ BOOL W32Init(BOOL fMEoW)
 #ifdef DEBUG
 #line 867
 #error Excluded unsupported DEBUG WOW profile
-#line 876
+#line 884
 #endif
 #line 885
 
@@ -896,7 +902,7 @@ ULONG FASTCALL WOW32UnimplementedAPI(PVDMFRAME pFrame)
 
 
 #ifdef DEBUG
-#line 1009
+#line 975
 #error Excluded unsupported DEBUG WOW profile
 #line 1060
 #endif // DEBUG
@@ -990,7 +996,7 @@ VOID W32Dispatch()
 {
     INT iFun;
     ULONG ulReturn;
-    DWORD dwThunkCSIP;
+    DWORD  dwThunkCSIP;
     BOOL fStackEstablished = FALSE;
     VPVOID vpCurrentStack = 0; // DIV-348: filter arguments precede setup too
     register PTD ptd = NULL;
@@ -1032,6 +1038,7 @@ VOID W32Dispatch()
         ptd = CURRENTPTD();                         // Setup Task Pointer
         ptd->vpStack = vpCurrentStack;              // Save 16 bit ss:sp
         fStackEstablished = TRUE;                 // DIV-337
+#line 1196
 
         // ssync 16-bit & 32-bit common dialog structs (see wcommdlg.c)
         if(ptd->CommDlgTd) {
@@ -1081,7 +1088,9 @@ VOID W32Dispatch()
         // STUFF TO i386/FastWOW.asm.   i386/FastWOW.ASM is used for speedy
         // thunk dispatching on retail builds.
         //
+
         ulReturn = wow_user_invoke_thunk((LPFNW32)iFun, pFrame); // DIV-296
+#line 1245
 
     AfterApiCall:
 
@@ -1136,36 +1145,9 @@ VOID W32Dispatch()
 #line 1300
 #error Excluded unsupported NO_W32TRYCALL WOW profile
 #line 1346
-#else
-#line 1300
+#endif  // NO_W32TRYCALL
+#line 1347
 
-/* W32TryCall - Called from FASTWOW to do a TryExcept Around API Calls
- *
- *
- *
- *
- *
- *
- */
-DWORD FASTCALL W32TryCall(PVDMFRAME pFrame , LPFNW32 lpfnW32 )
-{
-    DWORD ulReturn = 0;
-
-    try {
-
-        if (ISFUNCID(lpfnW32)) {
-            lpfnW32 = W32PatchCodeWithLpfnw32(pFrame, (INT)lpfnW32);
-        }
-
-        ulReturn = wow_user_invoke_thunk(lpfnW32, pFrame); // DIV-296
-
-    } except (W32Exception(GetExceptionCode(), GetExceptionInformation())) {
-    }
-    return (ulReturn);
-}
-
-#endif
-#line 1152
 
 /* W32Exception - Handle WOW32 thread exceptions
  *
@@ -2244,7 +2226,7 @@ WOW32_strnicmp(
 #error Excluded unsupported WOW profiling configuration
 #line 2945
 #endif  // DEBUG_OR_WOWPROFILE
-#line 2902
+#line 2946
 
 /* DIVERGENCE(MVDM-HOST-DIV-911): original thunk state and frame projections. */
 #include "wow_thunk_provider.h"
@@ -2279,7 +2261,12 @@ INT WINAPI wow_original_dispatch_exception(DWORD code, PEXCEPTION_POINTERS info,
     }
     return disposition;
 }
+#line 2947
 
+
+// for debugging memory leaks
 #ifdef DEBUG_MEMLEAK
+#line 2951
 #error Excluded unsupported DEBUG_MEMLEAK WOW profile
-#endif
+#line 3199
+#endif  // DEBUG_MEMLEAK

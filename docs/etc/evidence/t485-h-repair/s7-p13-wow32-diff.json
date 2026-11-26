@@ -1,0 +1,168 @@
+{
+  "path": "src/mvdm-host/wow32/wow32.c",
+  "before": {
+    "points": 18,
+    "lines": 103
+  },
+  "after": {
+    "points": 15,
+    "lines": 69
+  },
+  "sha256": "2504060f5b97de7dd609ab61afcf344f36b7fa2eb6ed8e1cbe737ab2ac95728f",
+  "hunks": [
+    {
+      "old": [],
+      "new": [
+        "#include \"wow_user_thunk_scope.h\""
+      ]
+    },
+    {
+      "old": [],
+      "new": [
+        "#include <ntlpcapi.h>"
+      ]
+    },
+    {
+      "old": [],
+      "new": [
+        "#include <compat/include/wow_registry.h>"
+      ]
+    },
+    {
+      "old": [
+        "        gpGdiHandleInfo = GdiQueryTable();"
+      ],
+      "new": []
+    },
+    {
+      "old": [
+        "        GetSystemDirectory(szBuf, sizeof szBuf);"
+      ],
+      "new": [
+        "        if (!NtvdmGetSystemDirectoryA(szBuf, sizeof szBuf)) {",
+        "            return FALSE;",
+        "        }"
+      ]
+    },
+    {
+      "old": [
+        "        if(!GetWindowsDirectory(szBuf, sizeof szBuf) ) {"
+      ],
+      "new": [
+        "        if(!NtvdmGetWindowsDirectoryA(szBuf, sizeof szBuf) ) {"
+      ]
+    },
+    {
+      "old": [
+        "    if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,"
+      ],
+      "new": [
+        "    if ((cb = RegOpenKeyEx ( HKEY_LOCAL_MACHINE,"
+      ]
+    },
+    {
+      "old": [
+        "             ) != 0){"
+      ],
+      "new": [
+        "             )) != 0){"
+      ]
+    },
+    {
+      "old": [
+        "        return FALSE;"
+      ],
+      "new": [
+        "        if (cb != ERROR_FILE_NOT_FOUND) return FALSE;",
+        "        WowKey = NULL;"
+      ]
+    },
+    {
+      "old": [
+        "    VPVOID vpCurrentStack;",
+        "    register PTD ptd;"
+      ],
+      "new": [
+        "    BOOL fStackEstablished = FALSE;",
+        "    VPVOID vpCurrentStack = 0; // DIV-348: filter arguments precede setup too",
+        "    register PTD ptd = NULL;"
+      ]
+    },
+    {
+      "old": [],
+      "new": [
+        "        fStackEstablished = TRUE;                 // DIV-337"
+      ]
+    },
+    {
+      "old": [
+        "        ulReturn = (*((LPFNW32)iFun))(pFrame);      // Dispatch to Thunk"
+      ],
+      "new": [
+        "        ulReturn = wow_user_invoke_thunk((LPFNW32)iFun, pFrame); // DIV-296"
+      ]
+    },
+    {
+      "old": [
+        "    } except (W32Exception(GetExceptionCode(), GetExceptionInformation())) {",
+        ""
+      ],
+      "new": [
+        "    } except (wow_user_dispatch_exception(GetExceptionCode(),",
+        "            GetExceptionInformation(), ptd, vpCurrentStack, fStackEstablished)) { // DIV-348",
+        "        if (fStackEstablished) { // DIVERGENCE(MVDM-HOST-DIV-348)",
+        "            ptd->vpStack = vpCurrentStack;",
+        "            SETVDMSTACK(ptd->vpStack);",
+        "        }"
+      ]
+    },
+    {
+      "old": [
+        "    ExitVDM(WOWVDM, ALL_TASKS);         // Tell Win32 All Tasks are gone.",
+        "    ExitProcess(EXIT_FAILURE);"
+      ],
+      "new": [
+        "    W32ExitWowProcess(EXIT_FAILURE);"
+      ]
+    },
+    {
+      "old": [],
+      "new": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-911): original thunk state and frame projections. */",
+        "#include \"wow_thunk_provider.h\"",
+        "VOID WINAPI wow_original_thunk_capture(wow_thunk_mode *mode)",
+        "{",
+        "    mode->who_called = fWhoCalled; mode->thunk_dde = fThunkDDEmsg;",
+        "}",
+        "VOID WINAPI wow_original_thunk_restore(const wow_thunk_mode *mode)",
+        "{",
+        "    fWhoCalled = mode->who_called; fThunkDDEmsg = mode->thunk_dde;",
+        "}",
+        "VOID WINAPI wow_original_thunk_frame(PVDMFRAME frame, wow_thunk_frame *view)",
+        "{",
+        "    view->call = frame->wCallID; view->task = frame->wTDB;",
+        "    view->ax = frame->wAX; view->args = frame->cbArgs; view->return_ip = frame->vpCSIP;",
+        "}",
+        "/* ADAPTER-WOW-099: filters run before unwind. Let the original policy write",
+        " * its kill signal on the API frame that its handler will actually resume,",
+        " * without prematurely replacing the still-live callback's frame identity. */",
+        "INT WINAPI wow_original_dispatch_exception(DWORD code, PEXCEPTION_POINTERS info,",
+        "    PTD task, VPVOID entry, BOOL established)",
+        "{",
+        "    VPVOID pending;",
+        "    INT disposition;",
+        "    if (!established) return W32Exception(code, info);",
+        "    pending = task->vpStack;",
+        "    __try {",
+        "        task->vpStack = entry;",
+        "        disposition = W32Exception(code, info);",
+        "    } __finally {",
+        "        task->vpStack = pending;",
+        "    }",
+        "    return disposition;",
+        "}"
+      ]
+    }
+  ],
+  "state": "source reviewed; final build and runtime pending"
+}

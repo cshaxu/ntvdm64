@@ -1,0 +1,116 @@
+{
+  "before": {
+    "points": 6,
+    "lines": 18,
+    "hunks": [
+      {
+        "old": [],
+        "new": [
+          "#include \"compat/include/mvdm_shadow_registry.h\""
+        ]
+      },
+      {
+        "old": [
+          "INT host_main(INT argc, CHAR **argv);  // located in base\\support\\main.c"
+        ],
+        "new": [
+          "INT host_main(INT *argc, CHAR **argv);  // located in base\\support\\main.c"
+        ]
+      },
+      {
+        "old": [
+          "__cdecl main(int argc, CHAR ** argv)"
+        ],
+        "new": [
+          "int __cdecl mvdm_softpc_prepare(int *argc, CHAR ** argv)"
+        ]
+      },
+      {
+        "old": [
+          "VOID"
+        ],
+        "new": [
+          "VOID NTAPI"
+        ]
+      },
+      {
+        "old": [
+          "    //",
+          "    // Initialize TEB->Vdm to current version number",
+          "    //",
+          "",
+          "    Index = (GetTickCount() << 16) | 0x80000000;",
+          "    Index |= sizeof(VDM_TIB) + sizeof(VDMVIRTUALICA) + sizeof(VDMICAUSERDATA);",
+          "    NtCurrentTeb()->Vdm = (PVOID)Index;"
+        ],
+        "new": [
+          "#ifdef MONITOR",
+          "#error Kernel VDM monitor initialization is excluded from the CCPU worker",
+          "#endif"
+        ]
+      },
+      {
+        "old": [],
+        "new": [
+          ""
+        ]
+      }
+    ]
+  },
+  "after": {
+    "points": 5,
+    "lines": 17,
+    "hunks": [
+      {
+        "old": [],
+        "new": [
+          "#include \"compat/include/mvdm_shadow_registry.h\""
+        ]
+      },
+      {
+        "old": [
+          "INT host_main(INT argc, CHAR **argv);  // located in base\\support\\main.c"
+        ],
+        "new": [
+          "INT host_main(INT *argc, CHAR **argv);  // located in base\\support\\main.c"
+        ]
+      },
+      {
+        "old": [
+          "__cdecl main(int argc, CHAR ** argv)"
+        ],
+        "new": [
+          "int __cdecl mvdm_softpc_prepare(int *argc, CHAR ** argv)"
+        ]
+      },
+      {
+        "old": [
+          "VOID"
+        ],
+        "new": [
+          "VOID NTAPI"
+        ]
+      },
+      {
+        "old": [
+          "    //",
+          "    // Initialize TEB->Vdm to current version number",
+          "    //",
+          "",
+          "    Index = (GetTickCount() << 16) | 0x80000000;",
+          "    Index |= sizeof(VDM_TIB) + sizeof(VDMVIRTUALICA) + sizeof(VDMICAUSERDATA);",
+          "    NtCurrentTeb()->Vdm = (PVOID)Index;"
+        ],
+        "new": [
+          "#ifdef MONITOR",
+          "#error Kernel VDM monitor initialization is excluded from the CCPU worker",
+          "#endif"
+        ]
+      }
+    ]
+  },
+  "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+  "xp_blob": "c31ff248800686e36a844a8b2e7c65e26158c9fa",
+  "sha256": "2ef9acacb1cb77d942d0fb1935da21c638bfd7ac2a97b84d80e95b81da174bbd",
+  "state": "local source audit complete; not built or delivered"
+}

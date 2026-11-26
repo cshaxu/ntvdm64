@@ -141,7 +141,7 @@ static void trace_return(struct _VDMFRAME *frame, ULONG result)
 
 /* ADAPTER-WOW-032: retain private USER aliases only for the original thunk
  * invocation. Do not catch/translate exceptions or alter frame/result state;
- * original W32Dispatch/W32TryCall remain the exception-policy owners. */
+ * original W32Dispatch remains the exception-policy owner. */
 ULONG WINAPI wow_user_invoke_thunk(wow_thunk_procedure thunk, struct _VDMFRAME *frame)
 {
     wow_user_borrow_scope scope;

@@ -252,6 +252,7 @@ CpuEnvInit(
 #ifdef MONITOR
 #error Kernel VDM monitor initialization is excluded from the CCPU worker
 #endif
+#line 250
 
     KeyValueInfo = (PKEY_VALUE_FULL_INFORMATION) NameDataBuffer;
 
@@ -335,7 +336,6 @@ CpuEnvInit(
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 334
-
 }
 
 

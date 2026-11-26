@@ -709,3 +709,14 @@ normal-exit claim. MSVC confirms explicit WINAPI is needed (C2373 otherwise).
 S7 is 17/20 primary files; three remain, next obj.vdm/ntvdm.c. Cumulative
 reduction including required P10 header: 865 points/7669 lines. Commit/push
 closes P12; no Full or N004 progress claimed.
+
+## P13 startup local review
+
+[Whole-file review](s7-p13-startup-review.md): 6/18 -> 5/17. Original diagnostic anchors corrected; five semantic residuals unchanged. 18/20 locally reviewed, 17/20 delivered; two unreviewed. Delivered reduction 865/7669, local inclusive 866/7670. No build/publication/test claim; accumulate with next complete file.
+
+P13 wkgthunk.c: 2/4 unchanged, original x86 provider established; XP line anchors corrected. 19/20 source-reviewed, 17/20 delivered. Cumulative delivered reduction 865/7669, local inclusive 866/7670. Last file: wow32.c.
+
+P13 final source: wow32.c 18/103 -> 15/69. Batch -4/-35; S7 local 20/20, delivered 17/20. Local cumulative -869/-7704, delivered -865/-7669. Owned background PID10924 performs runtime16 build/publication/targeted tests.
+
+
+P13 final: runtime16 build, dual publication, dispatch boundary and actual guest targeted gates passed. All 20/20 final-verified; cumulative reduction 869 points/7704 lines including P10 header. Commit/push remains the delivery step; see P13 receipt for fixture ABI fixes and Win95 boundary.

@@ -30,6 +30,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Original Owner Request | Execute the new T485 S repair sequence before resuming N004-G097, without excessive repeated verification. |
 | Similar-Issue Sweep | All exclusion masks, effective guards and selected bodies of each owned file; retain runtime ownership and failure semantics. |
 
+## S7 P13 Final Verification
+
+[Whole-file review](../etc/evidence/t485-h-repair/s7-p13-startup-review.md):
+ntvdm.c 6/18 -> 5/17; wkgthunk.c 2/4 unchanged; wow32.c 18/103 -> 15/69.
+20/20 source-reviewed and final-verified. Batch reduction 4/35; cumulative
+869/7704 including the P10 header. Runtime16 cached build, dual 13-image
+hash-verified publication, dispatch exception fixture, actual WOW, three
+desktops, enhanced Alt+Enter roundtrips and NESticle passed. Win95 retains
+knownExitOne. P13 commit/push is the remaining delivery step; S7 remains active
+until closure verification. Migration remains 39/159; S8 follows, not N004.
 ## S7 P12 Checkpoint
 
 [SIM32 restoration](../etc/evidence/t485-h-repair/s7-p12-sim32.md): 19 points/107

@@ -53,7 +53,12 @@ void WINAPI wow_message_unwind32(LPWM32MSGPARAMEX message)
 { (void)message;++unwinds; }
 void WINAPI wow_message_unwind16(MSGPARAMEX *message)
 { (void)message;fixture_unexpected_conversion(); }
-PWC FindPWC(HANDLE window) { (void)window;fixture_unexpected_conversion();return NULL; }
+/* XP adds interpreted thunk/common-dialog branches. This fixture intentionally
+ * exercises direct thunks without common-dialog state; reaching either is a failure. */
+ULONG FASTCALL InterpretThunk(PVDMFRAME frame, DWORD id)
+{ (void)frame; (void)id; fixture_unexpected_conversion(); return 0; }
+VOID Ssync_WOW_CommDlg_Structs(PCOMMDLGTD state, BOOL to16, VPVOID ip)
+{ (void)state; (void)to16; (void)ip; fixture_unexpected_conversion(); }
 WNDPROC GetStdClassWndProc(DWORD kind)
 { (void)kind;fixture_unexpected_conversion();return NULL; }
 BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX message)
@@ -112,8 +117,8 @@ VOID __cdecl BlockWOWIdle(BOOL blocking)
 BOOL CallBack16(WORD ret,PPARM16 args,VPPROC proc,PULONG result)
 {
     if(phase==7 || phase==8){
-        if(ret!=RET_WNDPROC || proc!=(VPPROC)0x12340056 ||
-                args->WndProc.wMsg!=WM_USER+7 || idle_unblocks!=idle_blocks+1)++errors;
+        if(ret!=RET_WNDPROC || proc!=(VPPROC)0x12370056 ||
+                args->WndProc.wMsg!=WM_USER+7 || idle_unblocks!=idle_blocks+1){++errors; printf("CALLBACK ret=%04x proc=%08lx msg=%04x idle=%u/%u\n",ret,proc,args->WndProc.wMsg,idle_blocks,idle_unblocks);}
         RaiseException(0xe4470004,0,0,NULL);
     }
     (void)ret;(void)args;(void)proc;(void)result; ++errors; return FALSE;
@@ -169,11 +174,13 @@ ULONG WINAPI wow_user_invoke_thunk(LPFNW32 thunk,PVDMFRAME supplied)
         if(sets || VDMSTACK()!=callback_stack) ++errors;
     }
     if(phase==7 || phase==8){
+        VPWNDPROC marked;
+        /* XP USER encodes both high selector bits; preserve selector RPL/TI. */
+        MarkWOWProc((VPWNDPROC)0x12370056, marked);
         callback_words.iClass=WOWCLASS_WIN16;
-        callback_words.flState=WWSTATE_ICLASSISSET;
-        callback_words.hInstance=(HANDLE)0x5678;
+        callback_words.hModule=(HANDLE)0x5678;
         (void)W32Win16WndProcEx((HWND)1,WM_USER+7,0x4567,-17,
-            (VPWNDPROC)0x92340056,&callback_words);
+            marked,&callback_words);
         ++errors; /* W32Dispatch must receive CallBack16's exception. */
     }
     return 0x1234abcd;
@@ -218,6 +225,7 @@ int __cdecl main(int argc,char **argv)
     BOOL debuggee=argc==2 && !strcmp(argv[1],"--search-debuggee");
     unsigned only=argc==2 && !strcmp(argv[1],"--abort-ignore") ? 5u :
         argc==2 && !strcmp(argv[1],"--abort-close") ? 6u : 0u;
+    setvbuf(stdout, NULL, _IONBF, 0);
     if (!wow_thunk_bind(&thunk_provider)) return 13;
     teb.WOW32Reserved=&task;
     teb.ClientId.UniqueThread=(HANDLE)1;
@@ -253,6 +261,7 @@ int __cdecl main(int argc,char **argv)
            box_enters!=dialogs || box_leaves!=dialogs || box_live) {
             printf("DISPATCH_ABORT_WRONG phase=%u logical=%08lx cpu=%08lx entryret=%04x nestedret=%04x\n",
                 phase,task.vpStack,((DWORD)cpu_ss<<16)|cpu_sp,frame->wRetID,nested_frame->wRetID);
+            printf("COUNTERS errors=%u sets=%u calls=%u dialogs=%u resumed=%u box=%u/%u/%u idle=%u/%u stack=%u/%u unwind=%u\n", errors,sets,calls,dialogs,resumed,box_enters,box_leaves,box_live,idle_blocks,idle_unblocks,stack_enters,stack_leaves,unwinds);
             return 1;
         }
         if(phase==6 && (frame->wRetID!=RET_FORCETASKEXIT || nested_frame->wRetID!=RET_ENUMWINDOWPROC)) {

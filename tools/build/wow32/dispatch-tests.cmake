@@ -7,13 +7,22 @@ wow_unit(dispatch_owner "${NTVDM_REPO}/src/mvdm-host/wow32/wow32.c"
   "${dispatch_flags} /Gy /Gw /GL")
 wow_unit(dispatch_scope "${NTVDM_REPO}/src/compat/wow_user_thunk_scope.c"
   "${cflags} /Gy /Gw /GL /Dwow_user_invoke_thunk=fixture_unused_original_invoke")
+# Match the product TD layout (FE_SB changes the task-handle offset).
 wow_unit(dispatch_fixture "${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c"
-  "${cflags} /Gy /Gw /GL /I \"${CMAKE_BINARY_DIR}/dispatch\"")
+  "${cflags} /DFE_SB /Gy /Gw /GL /I \"${CMAKE_BINARY_DIR}/dispatch\"")
 foreach(name IN ITEMS dispatch_owner dispatch_scope dispatch_fixture)
   set_property(TARGET ${name} PROPERTY EXCLUDE_FROM_ALL TRUE)
 endforeach()
 # Existing closed list only. The runner rejects retained unrelated owners.
 set(dispatch_aliases
+  "/alternatename:_Multi_strcpy@8=_fixture_unreachable_dependency"
+  "/alternatename:_WOWGetProcModule16@4=_fixture_unreachable_dependency"
+  "/alternatename:_WowMsgBoxIndirectCallback@8=_fixture_unreachable_dependency"
+  "/alternatename:_W32Init9xSpecialPath@0=_fixture_unreachable_dependency"
+  "/alternatename:_WOWTellWOWThehDlg@4=_fixture_unreachable_dependency"
+  "/alternatename:_WOWlstrcmp16@8=_fixture_unreachable_dependency"
+  "/alternatename:_W32Win16DlgProcEx@24=_fixture_unreachable_dependency"
+  "/alternatename:_Multi_strlen@4=_fixture_unreachable_dependency"
   "/alternatename:_AddProcessSharedList@0=_fixture_unreachable_dependency"
   "/alternatename:_RegisterWowBaseHandlers@4=_fixture_unreachable_dependency"
   "/alternatename:_SetFakeDialogClass@4=_fixture_unreachable_dependency"

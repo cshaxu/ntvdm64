@@ -2043,3 +2043,5 @@ post-publication targeted checks.
 - [S7 P11 FM service admission](evidence/t485-h-repair/s7-p11-fm-service.md).
 
 - [S7 P12 SIM32 restoration](evidence/t485-h-repair/s7-p12-sim32.md).
+
+- [S7 P13 startup local review](evidence/t485-h-repair/s7-p13-startup-review.md).

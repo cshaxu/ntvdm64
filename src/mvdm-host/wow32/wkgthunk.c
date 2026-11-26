@@ -226,10 +226,10 @@ ULONG FASTCALL WK32LoadLibraryEx32W(PVDMFRAME pFrame)
     PLOADLIBRARYEX32W16 parg16;
 
 #ifdef i386
-#line 28
+#line 229
 #error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
-#line 36
+#line 237
 
     GETARGPTR(pFrame, sizeof(*parg16), parg16);
     GETVDMPTR(parg16->lpszLibFile,0,psz1);
@@ -309,10 +309,10 @@ ULONG FASTCALL WK32LoadLibraryEx32W(PVDMFRAME pFrame)
     FREEARGPTR(parg16);
 
 #ifdef i386
-#line 51
+#line 316
 #error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
-#line 57
+#line 322
 
     return (ULONG)hinstance;
 }
@@ -407,8 +407,10 @@ ULONG FASTCALL WK32GetVDMPointer32W(PVDMFRAME pFrame)
 
 
 #if !defined(i386) && !defined(WOW_X86_GENERIC_CALL)
+#line 416
 #error Unsupported RISC generic thunk configuration
 #endif
+#line 457
 
 
 ULONG FASTCALL WK32ICallProc32W(PVDMFRAME pFrame)

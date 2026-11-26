@@ -35,3 +35,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S7 P11 FM service admission](s7-p11-fm-service.md) records full call-chain evidence, three minimal residuals and real product-object testing.
 
 [S7 P12 SIM32 restoration](s7-p12-sim32.md) and [fourteen exact residuals](s7-p12-mirror-diff.json) record the complete-file repair and mapping contract.
+
+[S7 P13 startup local review](s7-p13-startup-review.md) records the complete file and pending batch delivery.
