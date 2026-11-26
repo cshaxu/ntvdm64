@@ -33,17 +33,17 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S11 Ordered Progress
 
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
-[P10 receipt](../etc/evidence/t485-h-repair/s11-p10-result.json):28/48files,
-280/452points delivered:12restored,268residual owner-review,172unreviewed;
-one supplemental ABI decision. Current48-file census772points/7114lines.
-Combined reduction108points/4649lines;P10 alone12/329.
-Runtime13 cached build,dual26/26hash publication,module-alias,reverse21,
-message191,COPYDATA59 and Full23/23 PASS. Win95 knownExitOne retained;
-both enhanced roundtrips pass all five markers. P10 delivered/pushed
-77e8752be. Additional file28 Full completed; next file30 and every S closure.
-Earlier P1-P7 linear-only line evidence must be rechecked with actual
-preprocessing before S11 closure. Migration39/159;S11 active.
-P11 delivered/pushed e5db62755:29/48files,281/452points;13restored,268residual,171unreviewed. Census755/7096,cumulative raw125/4667. Coupled ABI normalized increment1point/2lines disclosed separately. Runtime14 build,dual publication,callback4/abort11 and Product PASS. [P11 receipt](../etc/evidence/t485-h-repair/s11-p11-result.json). P12 file30 final-verified:30/48files,288/452points;15restored,273residual,164unreviewed. Census753/7093,cumulative raw127/4670. Runtime15 build,dual26-hash publication,fax135 and Full23/23 PASS;commit/push pending,delivered29/281. [P12 receipt](../etc/evidence/t485-h-repair/s11-p12-result.json).
+[P12 receipt](../etc/evidence/t485-h-repair/s11-p12-result.json):30/48files,
+288/452points delivered:15restored,273residual owner-review,164unreviewed;
+two supplemental ABI decisions. Current48-file census753points/7093lines.
+Combined raw reduction127points/4670lines;P12 alone2/3. P11 coupled ABI
+normalized increment1point/2lines remains separately disclosed.
+Runtime15 cached build,dual26/26hash publication,fax135 and Full23/23 PASS.
+Win95 knownExitOne retained;both enhanced roundtrips pass all five markers.
+P12 delivered/pushed b65051565. Last Full:file30;next:file40 and S closure.
+Next file31 wowhooks.c. Earlier P1-P7 linear-only line evidence must be
+rechecked with actual preprocessing before S11 closure.
+Migration39/159;S11 active.
 
 ## S10 Closure Record
 

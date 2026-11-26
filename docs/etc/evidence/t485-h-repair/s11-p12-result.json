@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P12",
-  "state": "final-verified-awaiting-commit-push",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime15",
   "reviewed_files": 30,
   "total_files": 48,
@@ -641,5 +641,6 @@
     }
   },
   "line_followup": "Earlier P1-P7 compiler-sensitive checks required before S11 closure.",
-  "coupled_abi_note": "Prior P11 normalized +1point/+2lines remains separately registered; unchanged in this batch."
+  "coupled_abi_note": "Prior P11 normalized +1point/+2lines remains separately registered; unchanged in this batch.",
+  "delivery_commit": "b65051565cc970c32511fc10af90e717209a0c24"
 }

@@ -41,7 +41,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 27 | src/mvdm-host/wow32/wmsglb.c | 3 | P10 delivered 77e8752be |
 | 28 | src/mvdm-host/wow32/wole2.c | 5 | P10 delivered 77e8752be |
 | 29 | src/mvdm-host/wow32/wow32.h | 1 | P11 delivered e5db62755 |
-| 30 | src/mvdm-host/wow32/wow32fax.c | 7 | P12 source-reviewed; delivery pending |
+| 30 | src/mvdm-host/wow32/wow32fax.c | 7 | P12 delivered b65051565 |
 | 31 | src/mvdm-host/wow32/wowhooks.c | 39 | Pending |
 | 32 | src/mvdm-host/wow32/wparam.c | 4 | Pending |
 | 33 | src/mvdm-host/wow32/wsdata.c | 19 | Pending |
@@ -763,3 +763,5 @@ No source change after publication; commit/push remains pending.
 ### P12 final-package result
 
 [Runtime15 receipt](s11-p12-result.json): cached build,dual26/26hash publication,fax contract and Full23/23 PASS. Both enhanced roundtrips pass five markers; Win95 knownExitOne retained.30/48files,288/452points verified:15restored,273residual,164unreviewed. Census753/7093;combined raw reduction127/4670. Commit/push pending. S11 remains active.
+
+P12 delivered and pushed b65051565cc970c32511fc10af90e717209a0c24.30/48files,288/452points delivered:15restored,273residual,164unreviewed. File30 Full checkpoint passed23/23 on runtime15; next Full at file40 or S closure. Next file31 wowhooks.c; S11 remains active.
