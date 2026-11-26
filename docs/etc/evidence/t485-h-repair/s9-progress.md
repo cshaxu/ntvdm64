@@ -104,3 +104,4 @@ S9 is 2/41 reviewed and final-verified; commit/push pending. Across both S9
 primary files and the one coupled header, measured baseline 3/3525 -> 4/1636,
 +1 point/-1889 lines. This is not the unmeasured whole-S9 census.
 Next primary file: dbgdll/excptn.c. Full remains the S13 integrated checkpoint.
+P2 delivery receipt: e7dad7b10 pushed to origin/main. S9: 2/41 delivered, 39 remain.

@@ -1961,6 +1961,6 @@
 "HXP-R-00001","src/mvdm-host/dbgdll/brkpt.c","restored-and-delivered","S9-P1","none","s9-progress.md"
 "HXP-R-00002","src/mvdm-host/dbgdll/brkpt.c","restored-and-delivered","S9-P1","none","s9-progress.md"
 "HXP-R-00004","src/mvdm-host/dbgdll/dbgdll.c","retained-parameterized-abi-final-verified","S9-P2","S9-residual-decision","s9-progress.md"
-"HXP-R-00005","src/mvdm-host/dbgdll/dbgdll.c","restored-final-verified","S9-P2","none","s9-progress.md"
+"HXP-R-00005","src/mvdm-host/dbgdll/dbgdll.c","restored-and-delivered","S9-P2","none","s9-progress.md"
 "HXP-R-00006","src/mvdm-host/dbgdll/dbgdll.c","retained-parameterized-abi-final-verified","S9-P2","S9-residual-decision","s9-progress.md"
 "HXP-R-00007","src/mvdm-host/dbgdll/dbgdll.c","retained-parameterized-abi-final-verified","S9-P2","S9-residual-decision","s9-progress.md"

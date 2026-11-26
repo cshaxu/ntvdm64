@@ -33,7 +33,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S9 Ordered Progress
 
 [S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 2/41 reviewed and
-final-verified, 39 remain; P1 1e15cd498 delivered, P2 commit/push pending.
+final-verified, 39 remain; P1 1e15cd498 and P2 e7dad7b10 delivered and pushed.
 P2 restores dbgdll.c initialization with one coupled softpc.h declaration;
 three parameterized WINAPI boundaries remain. Runtime2 cached full build,
 dual publication (26 hashes), real DLL/debug callbacks and NESticle passed.
