@@ -335,6 +335,7 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
 		org_height,clen);
     }
 
+#line 442
 	// note that the sharing buffer has different format on x86 and RISC
 	// platforms. On x86, a cell is defined as:
 	//	typedef _x86cell {
@@ -355,8 +356,9 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
 	/*::::::::::::::::::::::::::::::::::::::::::::: Construct output buffer */
 	//Start location of repaint region
     to = &textBuffer[(ScreenY*now_width + ScreenX) * TEXT_INCVAL];
-    for (lines = height; lines; lines--)
-    {
+
+	for(lines = height; lines; lines--)
+	{
         int cell;
         for (cell = 0; cell < clen; cell++)
             RtlCopyMemory(to + cell * TEXT_INCVAL,
@@ -367,7 +369,7 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
     }
 
 
-#line 365 "nt_cga.c"
+#line 474 "nt_cga.c"
     /*:::::::::::::::::::::::::::::::::::::::::::::: Calculate write region */
 
     WriteRegion.Left = (SHORT)ScreenX;
@@ -393,7 +395,7 @@ void nt_text(int ScreenOffset, int ScreenX, int ScreenY,
 	*/
         assert1( NO, "VDM: InvalidateConsoleDIBits() error:%#x",
                  GetLastError() );
-        assert4( NO, "VDM: rectangle t:%d l:%d b:%d r:%d", 
+        assert4( NO, "VDM: rectangle t:%d l:%d b:%d r:%d",
                  WriteRegion.Top, WriteRegion.Left,
                  WriteRegion.Bottom, WriteRegion.Right
                );
@@ -464,7 +466,7 @@ void nt_cga_colour_med_graph_std(int offset, int screen_x, int screen_y,
 
     /*
     ** Tim Jan 93, rapid mode changes cause mismatch between update and
-    ** paint rountines. Ignore paint request when invalid parameter 
+    ** paint rountines. Ignore paint request when invalid parameter
     ** causes crash.
     */
     if( screen_y > 400 ){
@@ -562,7 +564,7 @@ void nt_cga_colour_med_graph_big(int offset, int screen_x, int screen_y,
 
     /*
     ** Tim Jan 93, rapid mode changes cause mismatch between update and
-    ** paint rountines. Ignore paint request when invalid parameter 
+    ** paint rountines. Ignore paint request when invalid parameter
     ** causes crash.
     */
     if( screen_y > 400 ){
@@ -660,7 +662,7 @@ void nt_cga_colour_med_graph_huge(int offset, int screen_x, int screen_y,
 
     /*
     ** Tim Jan 93, rapid mode changes cause mismatch between update and
-    ** paint rountines. Ignore paint request when invalid parameter 
+    ** paint rountines. Ignore paint request when invalid parameter
     ** causes crash.
     */
     if( screen_y > 400 ){

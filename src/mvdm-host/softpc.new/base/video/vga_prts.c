@@ -13,7 +13,7 @@ DOCUMENT 		: name and number
 
 RELATED DOCS		: include all relevant references
 
-DESIGNER		: 
+DESIGNER		:
 
 REVISION HISTORY	:
 First version		: February 1990, S. Frost
@@ -33,7 +33,7 @@ SccsID[]="@(#)vga_ports.c	1.67 07/18/94 Copyright Insignia Solutions Ltd.";
 
 [1.0 INCLUDE FILE NEEDED TO ACCESS THIS INTERFACE FROM OTHER SUBMODULES]
 
-	INCLUDE FILE : 
+	INCLUDE FILE :
 
 [1.1    INTERMODULE EXPORTS]
 
@@ -64,7 +64,7 @@ SccsID[]="@(#)vga_ports.c	1.67 07/18/94 Copyright Insignia Solutions Ltd.";
 [1.3 INTERMODULE IMPORTS]
      (not o/s objects or standard libs)
 
-	PROCEDURES() : 
+	PROCEDURES() :
 			io_define_inb
 			io_define_outb
 			io_redefine_inb
@@ -105,7 +105,7 @@ PARAMETERS	  :	none
 
 GLOBALS		  :	none
 
-DESCRIPTION	  : 	establish vga ports. 
+DESCRIPTION	  : 	establish vga ports.
 			initialize vga code to sensible state.
 
 ERROR INDICATIONS :	none.
@@ -122,7 +122,7 @@ PARAMETERS	  :	none
 
 GLOBALS		  :	none
 
-DESCRIPTION	  : 	remove vga ports. 
+DESCRIPTION	  : 	remove vga ports.
 			free up allocated memory etc.
 
 ERROR INDICATIONS :	none.
@@ -364,18 +364,18 @@ ERROR RECOVERY	  :	none.
 
 /* [3.1.2 DECLARATIONS]                                                 */
 
-/* [3.2 INTERMODULE EXPORTS]						*/ 
+/* [3.2 INTERMODULE EXPORTS]						*/
 
 #include	"egaports.h"
 
-#ifdef GISP_SVGA 
+#ifdef GISP_SVGA
 #line 372
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif 	/* GISP_SVGA */
 #line 374
 
 /*
-5.MODULE INTERNALS   :   (not visible externally, global internally)]     
+5.MODULE INTERNALS   :   (not visible externally, global internally)]
 
 [5.1 LOCAL DECLARATIONS]						*/
 
@@ -1377,14 +1377,14 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 
 							flag_mode_change_required();
 						}
-						if (crt_controller.crtc_overflow.as_bfld.line_compare_bit_8 != 
+						if (crt_controller.crtc_overflow.as_bfld.line_compare_bit_8 !=
 							((CRTC_OVERFLOW*)&new)->as_bfld.line_compare_bit_8)
 						{
 							/*
 							 * split screen height changed
 							 */
 
-							EGA_GRAPH.screen_split.as_bfld.med_bit = 
+							EGA_GRAPH.screen_split.as_bfld.med_bit =
 									((CRTC_OVERFLOW*)&new)->as_bfld.line_compare_bit_8;
 
 							if( !get_split_screen_used() )
@@ -1392,7 +1392,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 
 							screen_refresh_required();
 						}
-						if (crt_controller.crtc_overflow.as_bfld.vertical_display_enab_end_bit_9 != 
+						if (crt_controller.crtc_overflow.as_bfld.vertical_display_enab_end_bit_9 !=
 							((CRTC_OVERFLOW*)&new)->as_bfld.vertical_display_enab_end_bit_9)
 						{
 							/*
@@ -1451,7 +1451,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 							 * split screen height changed
 							 */
 
-							EGA_GRAPH.screen_split.as_bfld.top_bit = 
+							EGA_GRAPH.screen_split.as_bfld.top_bit =
 							    ((MAX_SCAN_LINE*)&new)->as_bfld.line_compare_bit_9;
 
 							if( !get_split_screen_used() )
@@ -1489,7 +1489,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 					break;
 				case 0xb:
 					note_entrance0("cursor end");
-#ifdef V7VGA 
+#ifdef V7VGA
 					if (crtc_9_b_protect == FALSE)
 					{
 #endif /* V7VGA */
@@ -1502,13 +1502,13 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 									"Someone is trying to use cursor skew");
 							do_new_cursor();
 						}
-#ifdef V7VGA 
+#ifdef V7VGA
 					}
 #endif /* V7VGA */
 					break;
 				case 0xc:
 					note_entrance0("start address high");
-#ifdef V7VGA 
+#ifdef V7VGA
 					if (crtc_c_protect == FALSE)
 					{
 #endif /* V7VGA */
@@ -1542,7 +1542,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 							screen_refresh_required();
 						}
 						crt_controller.start_address_high = value;
-#ifdef V7VGA 
+#ifdef V7VGA
 					}
 #endif /* V7VGA */
 					break;
@@ -1687,7 +1687,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 				case 0x17:
 					note_entrance0("mode control");
 					new.value = value;
-					if (crt_controller.mode_control.as_bfld.compatibility_mode_support != 
+					if (crt_controller.mode_control.as_bfld.compatibility_mode_support !=
 						((MODE_CONTROL*)&new)->as_bfld.compatibility_mode_support)
 					{
 						if ( (((MODE_CONTROL*)&new)->as_bfld.compatibility_mode_support) == 0)
@@ -1893,7 +1893,7 @@ MODE new_mode;
 	if (graphics_controller.mode.as_bfld.read_mode != new_mode.as_bfld.read_mode)
 	{
 		/*
-		 * read mode change 
+		 * read mode change
 		 */
 		read_state.mode = new_mode.as_bfld.read_mode;
 		ega_read_routines_update();
@@ -2192,7 +2192,7 @@ unsigned colour_dont_care;
 
 
 /*
- * The EGA mask register is written to more times than all other ports added together! 
+ * The EGA mask register is written to more times than all other ports added together!
  * To help make this register fast, we have two different routines to handle it:
  * ega_gc_mask for when the register's current value is not 0xFF, ie. masking is active
  * ega_gc_mask_ff for when the mask register = 0xFF, so masking is disabled.
@@ -2434,7 +2434,7 @@ GLOBAL VOID	v_ret_intr_status IFN0()
 
 
 /*
-	The following routine should not return a value with top bit set 
+	The following routine should not return a value with top bit set
 	until we emulate a Rev4 Video7 card.
 */
 
@@ -2726,7 +2726,7 @@ GLOBAL VOID	vga_ac_outb IFN2(io_addr,port,half_word,value)
 			/* Vote on alpha/graphics mode */
         		vote_vga_mode();
 			assert0(attribute_controller.mode_control.as_bfld.display_type == 0, "Mono display selected");
-			assert0(attribute_controller.mode_control.as_bfld.enable_line_graphics_char_codes == 0, 
+			assert0(attribute_controller.mode_control.as_bfld.enable_line_graphics_char_codes == 0,
 											"line graphics enabled");
 			break;
 		case 0x11:
@@ -2986,7 +2986,7 @@ GLOBAL VOID	vga_dac_data_outb IFN2(io_addr,port,half_word,value)
 	DAC[DAC_wr_addr].blue = value & DAC_data_mask;
 	DAC_rgb_state = DAC_RED;
 	/*
-	 * very important side affect - many progs dont touch the DAC 
+	 * very important side affect - many progs dont touch the DAC
 	 * index reg after setting it to the start of a group.
 	 */
 	DAC_wr_addr++;

@@ -21,9 +21,9 @@ src/mvdm-host/softpc.new/base/video/egwrtm12.c,5822d1a00,1,2385,51,77,11,fa23331
 src/mvdm-host/softpc.new/base/video/gfx_updt.c,5822d1a00,1,9080,277,359,70,c3c3089cb66471af3ef909d2b49e527b4b2a4d2fc19c0517940e3ac9a9afa461,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/v7_ports.c,5822d1a00,1,1562,9,10,1,c909069807e0187272b8718a2643affbc68ce0d13955f1bd4567fb1a36dc7541,measured-not-audit-status
 src/mvdm-host/softpc.new/base/video/v7_video.c,5822d1a00,1,1077,17,22,4,4c3e4975993a6b1b81c91ae6792a48f3b4ae988443c278eb79283ba272c08171,measured-not-audit-status
-src/mvdm-host/softpc.new/base/video/vga_mode.c,5822d1a00,1,1084,1,1084,28,6bd14bc19fa9ca2686862fab96be394fa4d52c9684a3ea98837dfa60def6c203,measured-not-audit-status
-src/mvdm-host/softpc.new/base/video/vga_prts.c,5822d1a00,1,6074,1,6074,35,20f4476117cabb6dc4ae19ec8d01438935558deaa3518b64351ca7b44e676fd7,measured-not-audit-status
-src/mvdm-host/softpc.new/host/src/nt_cga.c,5822d1a00,1,1950,1,1950,10,9548e68f1b6ddeede063342a85da96e8a39e9147914b9874c45b6a0d71374386,measured-not-audit-status
+src/mvdm-host/softpc.new/base/video/vga_mode.c,5822d1a00,1,1084,66,84,28,0a8435f340b78ce4bd03b94e7e1367ffb12702abfa98d551afe5ab3b804f941f,measured-not-audit-status
+src/mvdm-host/softpc.new/base/video/vga_prts.c,5822d1a00,1,6074,127,146,35,544fb850571252cabc9feb0867ff9f58d5f73f952a7027bb28779fb1a1648d24,measured-not-audit-status
+src/mvdm-host/softpc.new/host/src/nt_cga.c,5822d1a00,1,1950,34,70,10,a3da7923223c7c47b088dcb1aea1fc4b36bf23360bf61de5d26a563485ac5d1f,measured-not-audit-status
 src/mvdm-host/softpc.new/host/src/nt_event.c,5822d1a00,1,4076,1,4076,31,32b14f730cb05040d9c826efd18b1b8b47769b42637fc9d81b1141b3e9abe10e,measured-not-audit-status
 src/mvdm-host/softpc.new/host/src/nt_graph.c,5822d1a00,1,4944,1,4944,59,1adb869b68b52706dd4aa0c5891d0a6821dfcfdc45b94efb1ed5f9ddb36178d4,measured-not-audit-status
 src/mvdm-host/softpc.new/host/src/nt_hosts.c,5822d1a00,1,985,1,985,6,189ecec55a893e54e8dff24ea6add7575f7fcb113e8d728c08649f502f13cd27,measured-not-audit-status

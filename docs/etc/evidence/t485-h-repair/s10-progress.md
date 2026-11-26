@@ -33,9 +33,9 @@ Full remains S13; original guest remains immutable.
 | 20 | softpc.new/base/video/gfx_updt.c | 94 | Delivered 53870c905 |
 | 21 | softpc.new/base/video/v7_ports.c | 17 | Delivered 53870c905 |
 | 22 | softpc.new/base/video/v7_video.c | 2 | Delivered 53870c905 |
-| 23 | softpc.new/base/video/vga_mode.c | 9 | Not started |
-| 24 | softpc.new/base/video/vga_prts.c | 24 | Not started |
-| 25 | softpc.new/host/src/nt_cga.c | 10 | Not started |
+| 23 | softpc.new/base/video/vga_mode.c | 9 | Source reviewed; P9 pending |
+| 24 | softpc.new/base/video/vga_prts.c | 24 | Source reviewed; P9 pending |
+| 25 | softpc.new/host/src/nt_cga.c | 10 | Source reviewed; P9 pending |
 | 26 | softpc.new/host/src/nt_event.c | 50 | Not started |
 | 27 | softpc.new/host/src/nt_graph.c | 91 | Not started |
 | 28 | softpc.new/host/src/nt_hosts.c | 1 | Not started |
@@ -526,3 +526,44 @@ format restorations await commit/push. Full remains S13.
 P8 receipt:53870c905 pushed to origin/main.22/30 reviewed/delivered;848/1060
 points reviewed,212 remain.614 restored/delivered,234 residuals,zero local
 restorations pending. Census1257/25164 unchanged. Next vga_mode.c.
+
+## VGA and CGA source review
+
+File23 vga_mode.c:9 points,6 format restorations,3 geometry residuals.
+Historical actual-source controls r0947-r0949-vga-mode-review.json separately
+prove packed stride160 instead of640,planar160 instead of80,and missed wrap.
+The current SR4/GC5/V7FC providers and chooser retain the same separation.
+This is historical bounded source evidence,not new guest acceptance.28
+exclusions and319 matching logical lines verified.1/1084 ->66/84. At file23:
+857/1060 reviewed,203 remain;6 local restorations,237 residuals;1322/24164.
+
+File24 vga_prts.c:24 points,22 format restorations,2 cursor residuals.
+Changing only cursor-off leaves original scanline comparison false,so the
+stored byte remains stale;do_new_cursor may make it visible again. Keep
+whole-byte update and final off-bit test.35 exclusions,2204 matching logical
+lines exact.1/6074 ->127/146. At file24:881/1060 reviewed,179 remain;
+28 local restorations,239 residuals;census1448/18236.
+
+File25 nt_cga.c:10 points,5 format restorations,5 residuals. Existing text
+unpack handles8-byte CHAIN2 cells into TEXT_INCVAL destination cells with
+now_width from textResize;original contiguous80-column shortcut does not
+match backing or current dimensions. CGA pixels alternate1/7 instead of1/3.
+One existing unpack loop remains;no new algorithm. Correct stale OpenNT
+#line365 to XP474,add XP442 comment anchor and restore original blank before
+loop.10 exclusions,695 matching logical lines exact.1/1950 ->34/70.
+
+25/30 files,891/1060 points reviewed;169 remain.614 restored/delivered,33
+local restorations pending,244 residuals;22 files delivered. Census1481/16356
+versus201/102845 (+1280/-86489). P9 delivers three complete files,formats and
+line corrections only. Cached build,dual publication,C-VID/MEM/NTVDMD and
+NESticle targeted checks;Full remains S13. Next host/src/nt_event.c.
+
+P9 owned build/publication PID14340 started2026-11-26T14:17:35+01:00;
+command/host in build/t485-s10/p9/run.json. Final hashes and metrics in
+final-source.json. This batch changes original formatting/logical lines;
+historical geometry controls are not counted as new runtime tests.
+
+P9 final verification: cached build,dual publication and26hash checks passed.
+Test PID3892 passed actual C-VID fixture,MEM/NTVDMD lifecycle and NESticle
+rendered menu/Escape. Final source hashes in build/t485-s10/p9/final-source.json.
+25 files final-verified;33 local restorations await commit/push. Full stays S13.

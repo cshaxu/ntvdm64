@@ -43,7 +43,7 @@ static char SccsID[]="@(#)vga_mode.c	1.35 06/01/95 Copyright Insignia Solutions 
 -------------------------------------------------------------------------
 [1.2 DATATYPES FOR [1.1] (if not basic C types)]
 
-	STRUCTURES/TYPEDEFS/ENUMS: 
+	STRUCTURES/TYPEDEFS/ENUMS:
 
 uses	enum DISPLAY_STATE which is declared in ega_graph.pi.
 
@@ -77,7 +77,7 @@ PURPOSE		  : 	To decide which memory organisation is being used by
 			(called DISPLAY_MODE), describing each sort of memory
 			organisation.
 
-PARAMETERS	  :	none 
+PARAMETERS	  :	none
 
 GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to
 			decide which mode is being used.
@@ -118,11 +118,11 @@ GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to
 
 /* [3.1.2 DECLARATIONS]                                                 */
 
-/* [3.2 INTERMODULE EXPORTS]						*/ 
+/* [3.2 INTERMODULE EXPORTS]						*/
 
 #include	"egamode.h"
 
-#ifdef GISP_SVGA 
+#ifdef GISP_SVGA
 #line 124
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #line 126
@@ -130,7 +130,7 @@ GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to
 #line 127
 
 /*
-5.MODULE INTERNALS   :   (not visible externally, global internally)]     
+5.MODULE INTERNALS   :   (not visible externally, global internally)]
 
 [5.1 LOCAL DECLARATIONS]						*/
 
@@ -152,7 +152,7 @@ PROCEDURE	  : 	set_up_screen_ptr()
 
 PURPOSE		  : 	Decide which plane the information must come from for displaying
 
-PARAMETERS	  :	none 
+PARAMETERS	  :	none
 
 GLOBALS		  :	uses EGA_GRAPH struct, plane_mask to decide which planes are enabled
 
