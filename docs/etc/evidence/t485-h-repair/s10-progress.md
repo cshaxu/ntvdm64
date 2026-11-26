@@ -37,7 +37,7 @@ Full remains S13; original guest remains immutable.
 | 24 | softpc.new/base/video/vga_prts.c | 24 | Delivered b42c5c586 |
 | 25 | softpc.new/host/src/nt_cga.c | 10 | Delivered b42c5c586 |
 | 26 | softpc.new/host/src/nt_event.c | 50 | Delivered P10 d5e12bf22 |
-| 27 | softpc.new/host/src/nt_graph.c | 91 | Source reviewed; P11 pending |
+| 27 | softpc.new/host/src/nt_graph.c | 91 | Delivered P11 8187c5ba1 |
 | 28 | softpc.new/host/src/nt_hosts.c | 1 | Not started |
 | 29 | softpc.new/host/src/nt_mouse.c | 23 | Not started |
 | 30 | softpc.new/host/src/nt_vga.c | 4 | Not started |
@@ -655,3 +655,7 @@ P11 final package runtime11: cached full build and dual publication PASS,
 26/26 hashes independently checked. Actual copied-font/cursor/route fixture,
 blocked tick/flush, packed painter640x480, real MEM/NTVDMD and NESticle menu
 and Escape roundtrip PASS. No Full claim. Commit/push pending.
+
+P11 receipt:8187c5ba1 pushed to origin/main.27/30 reviewed/delivered;
+1032/1060 points reviewed,28 remain.736 restored/delivered,296 residuals,
+zero local restorations pending. Census1773/7920. Next nt_hosts.c.

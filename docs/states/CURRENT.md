@@ -33,10 +33,11 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S10 Ordered Progress
 
 [S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):27/30 reviewed;
-1032/1060 points reviewed,28 remain.26 files delivered through P10 d5e12bf22.
-P11 nt_graph.c whole-file review complete;74 local format restorations,17
-residuals.662 restored/delivered,296 total residuals. Build, dual publication and targeted tests PASS; commit/push pending.
-Local census201/102845 ->1773/7920 (+1572/-94925).
+1032/1060 points reviewed,28 remain.27 files delivered through P11 8187c5ba1.
+P11 nt_graph.c delivered:736 restored/delivered,296 total residuals;
+zero local restorations pending. Build, dual publication, targeted tests and
+governance PASS;8187c5ba1 committed and pushed.
+Delivered census201/102845 ->1773/7920 (+1572/-94925).
 Next nt_hosts.c after P11. Migration39/159;Full remains S13.
 
 ## S9 Closure Record
