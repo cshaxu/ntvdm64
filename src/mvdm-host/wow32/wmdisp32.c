@@ -47,6 +47,7 @@ BOOL W32Win16DlgProcEx(HWND hdlg, UINT uMsg, UINT uParam, LONG lParam,
     register PTD ptd;
     WM32MSGPARAMEX wm32mpex = {0};
     wow_message_stack stack;
+#line 45
     BOOL   fMessageNeedsThunking;
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
@@ -55,6 +56,7 @@ BOOL W32Win16DlgProcEx(HWND hdlg, UINT uMsg, UINT uParam, LONG lParam,
 
     wow_message_stack_enter(&stack);
     __try {
+#line 51
     ptd = CURRENTPTD();
 
     WOW32ASSERT(vpDlgProc16);
@@ -166,6 +168,7 @@ BOOL W32Win16DlgProcEx(HWND hdlg, UINT uMsg, UINT uParam, LONG lParam,
         goto Error;
 
     stack.completed = TRUE;
+#line 161
 Done:
 
     return wm32mpex.lReturn;
@@ -186,6 +189,7 @@ Error:
 
 
 
+#line 178
 LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     VPWNDPROC vpWndProc16,  // Next WndProc to call or NULL if default
     PWW pww)    // hwnd's PWW if already known or NULL
@@ -210,7 +214,6 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #endif
 #line 194
 
-#line 195
     ptd = CURRENTPTD();
 
     WOW32ASSERT(vpWndProc16);
@@ -329,7 +332,6 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     // Thunk this 32 bit message to 16 bit message
 
     LOGDEBUG(6,("    Thunking window %x message %s\n", hwnd, GetWMMsgName(uMsg)));
-#line 311
 #ifdef DEBUG
 #line 312
 #error Excluded unsupported DEBUG WOW profile
@@ -391,10 +393,8 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 
     BlockWOWIdle(FALSE);
 
-#line 368
     fSuccess = CallBack16(RET_WNDPROC, &wm32mpex.Parm16, vpWndProc16, (PVPVOID)&wm32mpex.lReturn);
 
-#line 370
     BlockWOWIdle(TRUE);
 
     // During CreateWindow some apps draw their own non-client area and don't
@@ -411,7 +411,6 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     // UnThunk this 32 bit message
 
     LOGDEBUG(6,("    UnThunking window %x message %s\n", hwnd, (LPSZ)GetWMMsgName(uMsg)));
-#line 386
 #ifdef DEBUG
 #line 387
 #error Excluded unsupported DEBUG WOW profile
@@ -565,7 +564,6 @@ SilentError:
 BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
 {
 
-#line 529
 #if 0
 #line 530
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
@@ -581,7 +579,6 @@ BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
     return FALSE;
 }
 
-#line 562
 #ifdef DEBUG         // see the macro WM32UNDOCUMENTED
 #line 563
 #error Excluded unsupported DEBUG WOW profile
@@ -664,7 +661,6 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
                 wm32mpexT.fFree = lpwm32mpex->fFree;
                 wm32mpexT.Parm16.WndProc.lParam = 0;
                 if (!WM32MDICreate(&wm32mpexT)) goto Error;
-#line 652
                 lpwm32mpex->dwParam = wm32mpexT.dwParam;
                 lpwm32mpex->dwTmp[2] = wm32mpexT.dwTmp[0];
 #line 653
@@ -691,7 +687,6 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
 
 
             // BUGBUG 08-Apr-91 JeffPar -- What if hModule is for a 32-bit task?
-#line 674
             pcws16->hInstance    = GETHINST16(lParam->hInstance);
             pcws16->hMenu    = GETHMENU16(lParam->hMenu);
             pcws16->hwndParent   = GETHWND16(lParam->hwndParent);
@@ -746,6 +741,7 @@ BOOL FASTCALL WM32Create(LPWM32MSGPARAMEX lpwm32mpex)
 //  WM_ACTIVATE
 //
 
+#line 762
 BOOL FASTCALL WM32Activate(LPWM32MSGPARAMEX lpwm32mpex)
 {
 
@@ -822,7 +818,6 @@ BOOL FASTCALL WM32SetText(LPWM32MSGPARAMEX lpwm32mpex)
 
 #line 836
     if (lpwm32mpex->fThunk) {
-#line 837
         if (lpwm32mpex->lParam) {
 
             LONG lParam = (LONG)GetParam16(lpwm32mpex->lParam);
@@ -858,11 +853,9 @@ BOOL FASTCALL WM32SetText(LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->dwParam = 0;
 #line 864
         if (DeleteParamMap(lpwm32mpex->Parm16.WndProc.lParam, PARAM_16, NULL)) {
-#line 865
             return TRUE;
         }
 
-#line 868
         if (lpwm32mpex->Parm16.WndProc.lParam) {
             if (CURRENTPTD()->dwWOWCompatFlags & WOWCF_DSBASEDSTRINGPOINTERS) {
                 stackfree16((VPVOID) lpwm32mpex->Parm16.WndProc.lParam,
@@ -1815,7 +1808,6 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
             // be paranoidly stored with the STOREDWORD/STORELONG macros -JTP
 
             if (!(lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(sizeof(MDICREATESTRUCT16))))) /* DIV-349 */
-#line 1809
                 goto Error;
 
             GETVDMPTR(lpwm32mpex->Parm16.WndProc.lParam, sizeof(MDICREATESTRUCT16), pmcs16);
@@ -1840,7 +1832,6 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
             LOGDEBUG(LOG_ALWAYS,(" !!!! WM32MDICreate, WM_MDICREATE thunking failed !!!! Window %08lX ", lpwm32mpex->hwnd));
             wow_message_free16(&lpwm32mpex->dwParam, TRUE); /* DIV-349: original error order. */
             wow_message_free16(&lpwm32mpex->dwTmp[0], FALSE);
-#line 1831
             return FALSE;
         }
     }
@@ -1856,13 +1847,11 @@ BOOL FASTCALL WM32MDICreate(LPWM32MSGPARAMEX lpwm32mpex)
             }
 
 
-#line 1851
             lpwm32mpex->lReturn = (LONG)HWND32(LOWORD(lpwm32mpex->lReturn));
             wow_message_free16(&lpwm32mpex->dwTmp[1], FALSE); /* DIV-349: preserve result conversion order. */
         }
     }
 
-#line 1856
     return (TRUE);
     } __finally { /* DIV-349: nested construction can escape before transfer. */
         if (!completed) wow_message_unwind32(lpwm32mpex);
@@ -2002,7 +1991,6 @@ BOOL FASTCALL WM32SizeClipBoard(LPWM32MSGPARAMEX lpwm32mpex)
 
 
     if (lpwm32mpex->fThunk) {
-#line 1991
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
         vp = GlobalAllocLock16(GMEM_MOVEABLE, (lpwm32mpex->uMsg == WM_SIZECLIPBOARD) ?
@@ -2061,7 +2049,6 @@ BOOL FASTCALL WM32AskCBFormatName(LPWM32MSGPARAMEX lpwm32mpex)
 
     if (lpwm32mpex->fThunk) {
         lpwm32mpex->Parm16.WndProc.lParam = wow_message_heap32(lpwm32mpex, malloc16(lpwm32mpex->Parm16.WndProc.wParam));
-#line 2042
         if (lpwm32mpex->Parm16.WndProc.lParam) {
             putstr16((VPSZ)lpwm32mpex->Parm16.WndProc.lParam, (LPSZ)lpwm32mpex->lParam, lpwm32mpex->uParam);
         }
@@ -2109,7 +2096,6 @@ BOOL FASTCALL WM32DDEInitiate(LPWM32MSGPARAMEX lpwm32mpex)
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
         lpwm32mpex->Parm16.WndProc.lParam = lpwm32mpex->lParam;
         lpwm32mpex->dwTmp[3] = WI32DDEAddInitiator((HAND16)lpwm32mpex->Parm16.WndProc.wParam);
-#line 2089
     }
     else {
         if (lpwm32mpex->dwTmp[3]) {
@@ -2371,9 +2357,7 @@ BOOL FASTCALL WM32DDEAdvise(LPWM32MSGPARAMEX lpwm32mpex)
     DDEINFO     DdeInfo;
 
 
-#line 2346
     if (lpwm32mpex->fThunk) {
-#line 2347
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
@@ -2448,9 +2432,7 @@ BOOL FASTCALL WM32DDEData(LPWM32MSGPARAMEX lpwm32mpex)
     DDEINFO DdeInfo;
 
 
-#line 2411
     if (lpwm32mpex->fThunk) {
-#line 2412
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
@@ -2545,9 +2527,7 @@ BOOL FASTCALL WM32DDEPoke(LPWM32MSGPARAMEX lpwm32mpex)
     DDEINFO DdeInfo;
 
 
-#line 2495
     if (lpwm32mpex->fThunk) {
-#line 2496
         UnpackDDElParam(lpwm32mpex->uMsg, lpwm32mpex->lParam, &lLo, &lHi);
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
@@ -2649,9 +2629,7 @@ BOOL FASTCALL WM32DDEExecute(LPWM32MSGPARAMEX lpwm32mpex)
     DDEINFO DdeInfo;
 
 
-#line 2586
     if (lpwm32mpex->fThunk) {
-#line 2587
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
         if (h16 = DDEFindPair16((HAND16)GETHWND16(lpwm32mpex->hwnd),
@@ -2943,12 +2921,10 @@ BOOL FASTCALL WM32CopyData (LPWM32MSGPARAMEX lpwm32mpex)
 
 #line 2871
     if (lpwm32mpex->fThunk) {
-#line 2872
         lpwm32mpex->Parm16.WndProc.wParam = GETHWND16(lpwm32mpex->uParam);
 
         if (vpCDS16 = CopyDataFindData16 (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, lpwm32mpex->lParam)) {
             lpwm32mpex->Parm16.WndProc.lParam = vpCDS16;
-#line 2876
         }
         else {
           captured = *(PCOPYDATASTRUCT)lpwm32mpex->lParam;
@@ -2974,17 +2950,14 @@ BOOL FASTCALL WM32CopyData (LPWM32MSGPARAMEX lpwm32mpex)
                     lpwm32mpex->dwParam |= WOW_COPY_DATA;
 #line 2888
                     GETMISCPTR(vpData16, lpMem16);
-#line 2889
                     if (lpMem16 && lpCDS32->lpData) {
                         RtlCopyMemory(lpMem16, lpCDS32->lpData, lpCDS32->cbData);
                         if (!CopyDataAddNode (GETHWND16(lpwm32mpex->hwnd), lpwm32mpex->Parm16.WndProc.wParam, vpData16, lpwm32mpex->dwTmp[1], 0)) goto CopyDataFailed;
                         lpwm32mpex->dwParam |= WOW_COPY_DATA_NODE;
 #line 2892
                     }
-#line 2893
                     FREEMISCPTR(lpMem16);
 
-#line 2895
                     GETMISCPTR(vpCDS16, lpCDS16);
                     lpCDS16->lpData = (PVOID) vpData16;
                 }
@@ -3035,7 +3008,6 @@ BOOL FASTCALL WM32WinHelp (LPWM32MSGPARAMEX lpwm32mpex)
             // lpwm32mpex->lParam is LPHLP - however we need only the firstword,ie the size of data
 
             HAND16  hMem16 = 0;
-#line 2940
             VPVOID  vp;
             LPBYTE  lpT;
             WORD cb;
@@ -3048,7 +3020,6 @@ BOOL FASTCALL WM32WinHelp (LPWM32MSGPARAMEX lpwm32mpex)
             }
             lpwm32mpex->Parm16.WndProc.lParam = hMem16;
             lpwm32mpex->dwParam = vp;
-#line 2952
         }
     }
     else {

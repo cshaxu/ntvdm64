@@ -32,8 +32,8 @@ frozen point counts as current byte-sensitive diff counts.
 | 18 | src/mvdm-host/wow32/wkernel.c | 10 | P8 delivered 874e19e83 |
 | 19 | src/mvdm-host/wow32/wkfileio.c | 6 | P8 delivered 874e19e83 |
 | 20 | src/mvdm-host/wow32/wkman.c | 22 | P8 delivered 874e19e83 |
-| 21 | src/mvdm-host/wow32/wkman.h | 1 | Pending |
-| 22 | src/mvdm-host/wow32/wmdisp32.c | 79 | Pending |
+| 21 | src/mvdm-host/wow32/wkman.h | 1 | P9 source-reviewed; no source change |
+| 22 | src/mvdm-host/wow32/wmdisp32.c | 79 | P9 source-reviewed; delivery pending |
 | 23 | src/mvdm-host/wow32/wmdisp32.h | 2 | Pending |
 | 24 | src/mvdm-host/wow32/wmsg16.c | 37 | Pending |
 | 25 | src/mvdm-host/wow32/wmsgcb.c | 5 | Pending |
@@ -591,3 +591,43 @@ Final runtime11 cached full build and dual publication26/26 hashes PASS. Final v
 Runtime11 cached full build,dual publication26/26 hashes,targeted file/conversion and task-close tests,Full23/23 PASS. Full elapsed574294ms. Both enhanced desktop roundtrips retain all five input/display/same-window markers. Win95 uses approved knownExitOne boundary. See [P8 receipt](s11-p8-result.json).20/48 files and145/452 frozen points final-verified:12restored,133owner-review residuals,307unreviewed;one supplemental ABI decision. Main cumulative reduction64points/4293lines,combined with coupled header64/4291. All48 S11 files currently810non-error points/7472lines. Commit/push pending. Next checkpoint file30 and S closure. Earlier P1-P7 line-only proof still requires compiler-sensitive recheck before S closure.
 
 P8 delivered and pushed as 874e19e83.20files/145points delivered;Full checkpoint20 complete. Next checkpoint30. Current S11 census810points/7472lines;combined cumulative reduction64/4291. Next ordered file:wkman.h;before S closure recheck earlier linear-only line evidence.
+
+
+### P9 file21 wkman.h
+
+1point/4lines unchanged. Point04220 retains two cdecl qualifiers: nt_eoi.obj exports _RegisterWOWIdle/_BlockWOWIdle, WOW imports same symbols under /Gz. Original unqualified prototypes change ABI. No wrapper/relocation or new mechanism. No source edit; current runtime11 build and Full evidence applies to unchanged file. Remains owner decision, not approval to retain.21/48files,146/452points source-reviewed:12restored,134residual,306unreviewed. Delivered20/145. Cumulative reduction64/4291 including coupled header;all48 current810/7472 unchanged. Next:wmdisp32.c.
+
+
+### P9 file22 wmdisp32.c ongoing review
+
+Whole-file review remains open; no file-completion or delivery count added.
+Local line-only cleanup:136points/462lines ->110points/433lines (-26/-29),
+10 excluded bodies unchanged. Actual product-parameter MSVC preprocessing
+exits0.222 original unique-text matches include five nonstationary collisions:
+class/name keys moved before copying, two added dwParam assignments matching
+another function, and WinHelp hMem16 initialization matching clipboard.
+Stationary matched statements have no remaining drift. Removes34 redundant
+anchors and adds5 precise anchors for existing dialog/entry/Activate drift.
+Non-#line content bytewise unchanged. Evidence:build/t485-s11/p9/line-cleanup-result.json
+and batch-compiler-lines.json. This is preprocessing evidence, not final build.
+
+Frozen04222/04223 cannot be dismissed as blank-line-only changes: prshtp.h
+is outside FE_IME because GetNMHDRextensionSize uses PSHNOTIFY/private PSN
+constants in the selected non-FE_IME build. Final necessity/minimality review
+remains part of this file. COPYDATA evidence must distinguish four allocation
+failures and nested ownership tests from a hypothetical USER early-reply
+capture lifetime; historical notes explicitly did not prove USER use-after-free.
+The existing source-body fixture labels itself guest_proof=0.
+
+After this entire file is complete, owner requires cached full build, dual
+publication, Full regression, commit and push immediately, before proceeding.
+
+### P9 file22 source review complete
+
+All79 frozen points retain evidence-backed residuals pending owner review; no functional restoration claimed. Main and pending ledgers updated per group. Final local metric136/462->110/433 (-26/-29),10 exclusions unchanged.22/48 files and225/452 points source-reviewed:12restored,213residual,227unreviewed. Delivered remains20/145. Current48-file census784/7443;combined local cumulative reduction90/4320, of which26/29 awaits delivery. Full required now for final package.
+
+P9 runtime12 cached full build and dual publication completed;26/26 published hashes match. Message transaction191 scenarios and COPYDATA59 scenarios pass (source-body supplementary tests). Final-package Full started under owned PID2112 at2026-11-26T18:12:09+01:00; evidence build/t485-s11/p9/final/verify-process.json and full.log. Full is not yet a pass and no P9 commit/push has occurred. Read-only48-file rescan confirms784points/7443lines.
+
+### P9 final-package result
+
+[Runtime12 receipt](s11-p9-result.json): cached build,dual26/26hash publication,message191/COPYDATA59 and Full23/23 PASS. Both enhanced roundtrips pass all five markers; Win95 approved knownExitOne remains.22/48files,225/452points verified:12restored,213residual,227unreviewed. Current784/7443;combined reduction90/4320. Commit/push pending;no S closure.
