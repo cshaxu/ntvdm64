@@ -30,9 +30,9 @@ Full remains S13; original guest remains immutable.
 | 17 | softpc.new/base/video/ega_writ.c | 5 | Delivered a6ba6aa72 |
 | 18 | softpc.new/base/video/egawrtm0.c | 20 | Delivered a6ba6aa72 |
 | 19 | softpc.new/base/video/egwrtm12.c | 30 | Delivered 320fcbe2c |
-| 20 | softpc.new/base/video/gfx_updt.c | 94 | Source reviewed; format delivery pending |
-| 21 | softpc.new/base/video/v7_ports.c | 17 | Source reviewed; format delivery pending |
-| 22 | softpc.new/base/video/v7_video.c | 2 | Source reviewed; format delivery pending |
+| 20 | softpc.new/base/video/gfx_updt.c | 94 | Delivered 53870c905 |
+| 21 | softpc.new/base/video/v7_ports.c | 17 | Delivered 53870c905 |
+| 22 | softpc.new/base/video/v7_video.c | 2 | Delivered 53870c905 |
 | 23 | softpc.new/base/video/vga_mode.c | 9 | Not started |
 | 24 | softpc.new/base/video/vga_prts.c | 24 | Not started |
 | 25 | softpc.new/host/src/nt_cga.c | 10 | Not started |
@@ -522,3 +522,7 @@ Test PID16292 passed actual C-VID fixture,real MEM/NTVDMD lifecycle and
 NESticle rendered menu/Escape. Final source hashes in final-source.json;
 per-file line proofs in build/t485-s10/p8.22 files final-verified;52 local
 format restorations await commit/push. Full remains S13.
+
+P8 receipt:53870c905 pushed to origin/main.22/30 reviewed/delivered;848/1060
+points reviewed,212 remain.614 restored/delivered,234 residuals,zero local
+restorations pending. Census1257/25164 unchanged. Next vga_mode.c.
