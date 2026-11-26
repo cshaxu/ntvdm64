@@ -32,12 +32,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S11 Ordered Progress
 
-[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):3/48 files,
-3/452 points restored and delivered in0c20d5b19 (pushed);449 unreviewed.
-P1 headers6/3734 ->14/14 (+8/-3720),14 diagnostic line anchors remain.
-Final runtime2 cached build,dual publication26/26 hashes and real WOW
-generic-call/callback/resource/window tests PASS.
-Next file:src/mvdm-host/inc/wowsnd.h. Migration39/159; Full remains S13.
+[S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md):7/48 files,
+13/452 points final-verified:7 restored,6 evidence-backed residuals pending
+owner decision,439 unreviewed. Reviewed census44/3971 ->30/57 (-14/-3914).
+P2 runtime3 cached build,dual publication26/26,public ABI,standard-class and
+real Win16 checks PASS;commit/push pending. Next:walias.h.
+Migration39/159;Full remains S13.
 
 ## S10 Closure Record
 

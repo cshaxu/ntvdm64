@@ -25,9 +25,7 @@ extern PTD gptdTaskHead;
     #define MM_MCISYSTEM_STRING 0x3CA
 #endif
 
-#line 28
 #ifdef  DEBUG
-#line 29
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 31
@@ -214,9 +212,7 @@ PWC FindClass16(LPCSTR pszClass, HAND16 hInst)
 
 
 
-#line 214
 #ifdef DEBUG
-#line 215
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 348
@@ -486,7 +482,6 @@ WORD WOWHandle16 (HANDLE h32, WOW_HANDLE_TYPE htype)
     }
 }
 
-#line 614
 PVOID gpGdiHandleInfo = (PVOID)-1;
 
 //WARNING: This structure must match ENTRY in ntgdi\inc\hmgshare.h
@@ -589,10 +584,17 @@ INT GetIClass(PWW pww, HWND hwnd)
     INT   iClass;
     DWORD dwClassAtom;
     WORD fnid = wow_user_window_fnid(hwnd) & 0xfff;
+#line 715
 
-    if (fnid >= FNID_START && fnid <= FNID_END) {
-        iClass = pfnOut.aiWowClass[fnid - FNID_START];
+    // if it is a standard class
+    if(((fnid & 0xfff) >= FNID_START) &&
+                 ((fnid & 0xfff) <= FNID_END)) {
+
+        // return the class id for this initialized window
+        iClass = pfnOut.aiWowClass[( fnid & 0xfff) - FNID_START];
+
     }
+
     else {
 
        iClass = WOWCLASS_WIN16;       // default return: app private class           
@@ -606,8 +608,6 @@ INT GetIClass(PWW pww, HWND hwnd)
 
     return(iClass);
 }
-
-
 
 /* DIVERGENCE(MVDM-HOST-DIV-908): scalar projections of the original class table. */
 LPCSTR WINAPI wow_original_class_name(UINT index)

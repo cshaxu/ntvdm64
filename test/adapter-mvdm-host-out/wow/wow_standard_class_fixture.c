@@ -81,7 +81,7 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
     WNDCLASSEXA shadow = {sizeof(shadow)};
     UNICODE_STRING shadow_name;
     DWORD shadow_words[2] = {0x12370056u, 0};
-    wow_window_dispatch_target shadow_target = {0x92370056u, unexpected_callback, TRUE};
+    wow_window_dispatch_target shadow_target = {(WOW_WINDOW_PROC_TAG | 0x12370056u), unexpected_callback, TRUE};
     wow_class_words_binding *private_class;
     ATOM shadow_atom;
     DWORD unrelated_module = 0, module_attempt;
@@ -122,7 +122,7 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
          * original standard-class target used after module unload. */
         CHECK(wow_class_words_exchange_procedure(binding,
             (DWORD)other.native.lpfnWndProc, FALSE, &old, &previous_guest));
-        CHECK(wow_class_words_exchange_procedure(binding, 0x92370056u, TRUE,
+        CHECK(wow_class_words_exchange_procedure(binding, (WOW_WINDOW_PROC_TAG | 0x12370056u), TRUE,
             &old, &previous_guest));
         entry->adwWOW[0] = 0x12370056u;
         wow_class_words_release(binding);
@@ -143,6 +143,17 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
         if (!conflict) break;
     }
     CHECK(module_attempt > 0 && module_attempt <= 0xffffu);
+    /* XP selects class procedure ownership by CSF_WOWCLASS and the high
+     * word of adwWOW[1], not by the window selector list. */
+    {
+        unsigned list;
+        for (list = 0; list < 2; ++list)
+            for (entry = list ? classes->pclsPublicList : classes->pclsPrivateList;
+                    entry; entry = entry->next) {
+                entry->flags |= CSF_WOWCLASS;
+                entry->adwWOW[1] = unrelated_module << 16;
+            }
+    }
     CHECK(_WOWCleanup((HANDLE)(ULONG_PTR)unrelated_module, 0, &selector, 1, &context));
     fprintf(stderr, "WOW_STANDARD_CLEANUP_MODULE image=%p excluded=%lu\n",
         GetModuleHandleA(NULL), unrelated_module);
@@ -151,7 +162,7 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
     if (private_class) {
         wow_window_dispatch_target restored_target;
         wow_standard_class_view button;
-        CHECK(wow_class_words_value(private_class)[0] == 0);
+        CHECK(wow_class_words_value(private_class)[0] == shadow_words[0]);
         CHECK(wow_standard_class_describe("BUTTON", &button));
         CHECK(wow_class_words_target(private_class, &restored_target));
         /* cleanup.c selects by atom for both private and public classes.
@@ -172,7 +183,7 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
         BOOL previous_guest;
         CHECK(binding != NULL);
         if (!binding) continue;
-        CHECK(entry->adwWOW[0] == 0);
+        CHECK(entry->adwWOW[0] == 0x12370056u);
         CHECK(wow_standard_class_describe(MAKEINTATOM(entry->atomClassName), &expected));
         CHECK(wow_class_words_target(binding, &snapshot));
         CHECK(snapshot.procedure == (entry->fnid == FNID_EDIT ?

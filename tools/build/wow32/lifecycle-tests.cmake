@@ -18,7 +18,12 @@ get_target_property(layout_flags obj_opennt-user_clglobal_obj COMPILE_FLAGS)
 string(REGEX MATCHALL "/I[ ]*\"[^\"]+\"" layout_includes "${layout_flags}")
 string(JOIN " " layout_includes ${layout_includes})
 string(APPEND lifecycle_flags " ${layout_includes} /I \"${NTVDM_REPO}/src/wow32-dll/include\"")
+# XP WOW callback declarations use FASTCALL empty under product /Gz.
+# Mixed /Gd fixtures must retain that existing stdcall ABI explicitly.
+string(APPEND lifecycle_flags " /DFASTCALL=__stdcall")
 set(lifecycle_original_flags "${lifecycle_flags}")
+wow_unit(lifecycle_register_exports "${NTVDM_REPO}/src/ntvdm-exe/debugger/register_exports.c" "${lifecycle_flags}")
+set_property(TARGET lifecycle_register_exports PROPERTY EXCLUDE_FROM_ALL TRUE)
 string(REPLACE "/Gz" "/Gd" lifecycle_flags "${lifecycle_flags}")
 foreach(pair IN ITEMS "seams|wow_combined_fixture_seams.c"
     "imports|wow_worker_static_imports.c" "parent|wow_page_domain_parent_stub.c"
@@ -378,14 +383,14 @@ if(EXISTS "${lifecycle_worker}/lifecycle-inputs.txt")
     list(APPEND lifecycle_direct "$<TARGET_OBJECTS:${parent}>")
   endif()
   list(APPEND lifecycle_direct
-    "$<TARGET_OBJECTS:lifecycle_imports>" "$<TARGET_OBJECTS:lifecycle_seams>"
+    "$<TARGET_OBJECTS:lifecycle_imports>" "$<TARGET_OBJECTS:lifecycle_seams>" "$<TARGET_OBJECTS:lifecycle_register_exports>"
     "$<TARGET_OBJECTS:obj_wow32-system-import-abi-aliases_obj>"
     "$<TARGET_OBJECTS:obj_wow32-parent-import-abi-aliases_obj>")
   add_custom_command(OUTPUT "${output}"
-    COMMAND "${CMAKE_LINKER}" /nologo /NODEFAULTLIB:ntvdm.lib "/out:${output}" "/map:${output}.map"
+    COMMAND "${CMAKE_LINKER}" /nologo /NODEFAULTLIB:ntvdm.lib "/alternatename:_setAX@4=_ntvdm_debug_setAX@4" "/alternatename:_setES@4=_ntvdm_debug_setES@4" "/out:${output}" "/map:${output}.map"
       ${lifecycle_direct} "$<TARGET_FILE:${provider}>" ${worker_inputs}
       "${CMAKE_BINARY_DIR}/legacy-wow-user32.lib" "${CMAKE_BINARY_DIR}/legacy-wow-kernel32.lib"
-      "${CMAKE_BINARY_DIR}/legacy-wow-ntdll.lib" version.lib comdlg32.lib rpcrt4.lib kernel32.lib
+      "${CMAKE_BINARY_DIR}/legacy-wow-ntdll.lib" "${CMAKE_BINARY_DIR}/legacy-wow-apphelp.lib" "${CMAKE_BINARY_DIR}/legacy-wow-comdlg32.lib" userenv.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib
       user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib oldnames.lib libcmt.lib libvcruntime.lib libucrt.lib
     DEPENDS ${provider} ${fixture} ${parent} lifecycle_imports lifecycle_seams wow-imports
       ${lifecycle_direct} "$<TARGET_FILE:${provider}>" ${worker_inputs}

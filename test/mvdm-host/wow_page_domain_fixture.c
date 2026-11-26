@@ -41,6 +41,7 @@ static const wow_task_cleanup_provider cleanup_provider = {
     WowOriginalFreeTask };
 #endif
 extern INT WINAPI GetStdClassNumber(LPSTR);
+extern INT WINAPI GetIClass(PWW, HWND);
 extern LPCSTR WINAPI wow_original_class_name(UINT);
 extern ATOM WINAPI wow_original_class_atom(UINT);
 extern BOOL WINAPI wow_original_class_capture(LPCSTR, PUNICODE_STRING);
@@ -247,13 +248,14 @@ extern BOOL WINAPI W32LocalUnlock(HANDLE, HANDLE);
 extern DWORD WINAPI W32LocalSize(HANDLE, HANDLE);
 extern HANDLE WINAPI W32LocalFree(HANDLE, HANDLE);
 extern ULONG WINAPI W32GetExpWinVer(HANDLE);
-extern DWORD WINAPI W32InitDlg(HWND, LONG);
+/* XP registers no legacy pfnInitDlgCb (wow32.c W32Init). */
 extern WORD WINAPI W32GlobalAlloc16(UINT, DWORD);
 extern VOID WINAPI W32GlobalFree16(WORD);
 extern VOID WINAPI W32EmptyClipboard(void);
 extern int WINAPI W32EditNextWord(LPSTR, int, int, int, DWORD);
-extern PWW WINAPI FindPWW(HANDLE, INT);
+extern LONG WINAPI wow_user_get_window_longA(HWND, int);
 extern INT WINAPI GetStdClassNumber(LPSTR);
+extern INT WINAPI GetIClass(PWW, HWND);
 static unsigned borrow_errors;
 static ULONG callback_backing, callback_teb;
 static unsigned callback_zero_count;
@@ -317,7 +319,7 @@ static void verify_full_class_projection(ULONG backing, BOOL valid)
 static DWORD WINAPI destroy_in_callback(HWND window, UINT message, UINT wp,
     LONG lp, DWORD procedure, PVOID words)
 {
-    BORROW_CHECK(procedure == 0x81234567u && words != NULL);
+    BORROW_CHECK(procedure == (WOW_WINDOW_PROC_TAG | 0x01234567u) && words != NULL);
     if (message == WM_APP + 70) {
         if (callback_cache_signal && !dialog_cache_failure) {
             HANDLE signal = OpenEventA(EVENT_MODIFY_STATE, FALSE, callback_cache_signal);
@@ -858,7 +860,7 @@ static int verify_callback_scope(ULONG teb)
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
     wow_user_task_lifecycle native_owner = {0};
     wow_user_runtime_thread runtime_binding = {0};
-    wow_window_dispatch_target target = { 0x81234567u, destroy_in_callback, TRUE };
+    wow_window_dispatch_target target = { (WOW_WINDOW_PROC_TAG | 0x01234567u), destroy_in_callback, TRUE };
     WNDPROC entry;
     HHOOK terminal;
     unsigned mode;
@@ -1060,8 +1062,10 @@ static int verify_callback_scope(ULONG teb)
                 BORROW_CHECK(iReleasedDCs == 1);
                 BORROW_CHECK(ReleaseCachedDCs(0x4321u, LOWORD(child), 0,
                     NULL, 1));
-                BORROW_CHECK(!iReleasedDCs &&
-                    mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);
+                BORROW_CHECK(!iReleasedDCs);
+                /* Alias allocated by this fixture, not owned by XP DC cache. */
+                mvdm_wow_gdi_handle_retire(dc_alias);
+                BORROW_CHECK(mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);
             }
             dc = wow_native_GetDC((HWND)(ULONG_PTR)LOWORD(child));
             dc_alias = mvdm_wow_gdi_handle_from_native(dc);
@@ -1070,8 +1074,10 @@ static int verify_callback_scope(ULONG teb)
                 BORROW_CHECK(StoreDC(0x4321u, LOWORD(child), dc_alias));
                 BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
                 BORROW_CHECK(FreeCachedDCs(0x4321u));
-                BORROW_CHECK(!iReleasedDCs &&
-                    mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);
+                BORROW_CHECK(!iReleasedDCs);
+                /* Alias allocated by this fixture, not owned by XP DC cache. */
+                mvdm_wow_gdi_handle_retire(dc_alias);
+                BORROW_CHECK(mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);
             }
             /* The compiled original VDMFRAME has task at offset 0 and
              * bArgs at 42; GETWINDOWDC16 is a WORD, GETDCEX16 is
@@ -1155,7 +1161,7 @@ static int verify_callback_scope(ULONG teb)
                 thread_teb->WOW32Reserved = task_storage;
                 dc_alias = (WORD)WU32GetDC(dc_frame);
                 thread_teb->WOW32Reserved = saved_task;
-                BORROW_CHECK(dc_alias && task_storage[13] == dc_alias);
+                BORROW_CHECK(dc_alias && task_storage[16] == dc_alias /* XP TD, production FE_SB adds three DWORDs */);
                 if (dc_alias) {
                     BORROW_CHECK(CacheReleasedDC(0x4321u, 0, dc_alias));
                     BORROW_CHECK(ReleaseCachedDCs(0x4321u, 0, 0, NULL, 1));
@@ -1432,7 +1438,7 @@ static int verify_class_registration(ULONG teb)
     thread.ptdb = &task;
     task.hTaskWow = 0x4321u;
     wc.hInstance = (HINSTANCE)0x43211234u;
-    wc.lpfnWndProc = (WNDPROC)0x81234567u;
+    wc.lpfnWndProc = (WNDPROC)(WOW_WINDOW_PROC_TAG | 0x01234567u);
     wc.lpszClassName = "S2_CCPU_CLASS_COMMIT";
     if (class_failure_signal) {
         /* Test-owned stale publication after native destruction. Do not
@@ -1687,8 +1693,12 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
                 LOWORD(full) == LOWORD(dc_original) && full != dc_original);
             BORROW_CHECK(dc_entry && dc_entry->native_window == (HWND)(INT_PTR)(SHORT)LOWORD(dc_original));
             BORROW_CHECK(ReleaseCachedDCs(0x4321u, LOWORD(dc_original), 0, NULL, 1));
-            BORROW_CHECK(!iReleasedDCs && IsWindow(window) &&
-                mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);
+            /* XP ReleaseCachedDCs clears flState and the pending count even
+             * when the old HWND has gone. It does not retire a host alias;
+             * this fixture owns the alias it explicitly allocated above. */
+            BORROW_CHECK(!iReleasedDCs && IsWindow(window) && dc_entry->state == 0);
+            mvdm_wow_gdi_handle_retire(dc_alias);
+            BORROW_CHECK(mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);
         }
         if (window && LOWORD(full) == LOWORD(old_full) && full != old_full) {
             /* Dialog roots reach this same producer with no CLS. This mode
@@ -1839,7 +1849,7 @@ static void verify_original_modal_task(void)
     inputs.pfnLocalAlloc=W32LocalAlloc;inputs.pfnLocalReAlloc=W32LocalReAlloc;
     inputs.pfnLocalLock=W32LocalLock;inputs.pfnLocalUnlock=W32LocalUnlock;
     inputs.pfnLocalSize=W32LocalSize;inputs.pfnLocalFree=W32LocalFree;
-    inputs.pfnGetExpWinVer=W32GetExpWinVer;inputs.pfnInitDlgCb=W32InitDlg;
+    inputs.pfnGetExpWinVer=W32GetExpWinVer;inputs.pfnInitDlgCb=NULL;
     inputs.pfn16GlobalAlloc=W32GlobalAlloc16;inputs.pfn16GlobalFree=W32GlobalFree16;
     inputs.pfnEmptyCB=W32EmptyClipboard;inputs.pfnWowEditNextWord=W32EditNextWord;
     inputs.pfnWowWndProcEx=destroy_in_callback;
@@ -2051,7 +2061,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
     callbacks.pfnLocalSize = W32LocalSize;
     callbacks.pfnLocalFree = W32LocalFree;
     callbacks.pfnGetExpWinVer = W32GetExpWinVer;
-    callbacks.pfnInitDlgCb = W32InitDlg;
+    callbacks.pfnInitDlgCb = NULL;
     callbacks.pfn16GlobalAlloc = W32GlobalAlloc16;
     callbacks.pfn16GlobalFree = W32GlobalFree16;
     callbacks.pfnEmptyCB = W32EmptyClipboard;
@@ -2413,7 +2423,7 @@ static void verify_unowned_window_projection(ULONG teb)
                 BOOL first_scope = wow_user_borrow_enter(&inner);
                 BORROW_CHECK(first_scope);
                 if (first_scope) {
-                    previous_words = FindPWW(window, 0);
+                    previous_words = (PWW)wow_user_get_window_longA(window, GWL_WOWWORDS);
                     BORROW_CHECK(previous_words != NULL);
                     BORROW_CHECK(wow_user_borrow_leave(&inner));
                 }
@@ -2427,9 +2437,9 @@ static void verify_unowned_window_projection(ULONG teb)
                 entered = wow_user_borrow_enter(&outer);
                 BORROW_CHECK(entered);
                 if (entered) {
-                    words = FindPWW(window, 0); /* Retained original classifier. */
+                    words = (PWW)wow_user_get_window_longA(window, GWL_WOWWORDS); /* XP FindPWW macro uses GWL_WOWWORDS. */
                     BORROW_CHECK(words == previous_words);
-                    BORROW_CHECK(words && words->iClass == GetStdClassNumber(class_name));
+                    BORROW_CHECK(words && GetIClass(words, window) == GetStdClassNumber(class_name));
                     BORROW_CHECK(words && words->dwStyle == info.dwStyle &&
                         words->dwExStyle == info.dwExStyle);
                     BORROW_CHECK(words && c_sas_dw_at(client + 144u) == words->adwWOW[0]);
@@ -2441,7 +2451,7 @@ static void verify_unowned_window_projection(ULONG teb)
                     }
                     BORROW_CHECK(mvdm_softpc_wow_page_domain_retire_handle(LOWORD(window), NULL));
                     BORROW_CHECK(!mvdm_softpc_wow_page_domain_retire_class(server));
-                    BORROW_CHECK(words && words->iClass == GetStdClassNumber(class_name));
+                    BORROW_CHECK(words && GetIClass(words, window) == GetStdClassNumber(class_name));
                     BORROW_CHECK(wow_user_borrow_leave(&outer));
                 }
             }
@@ -2795,23 +2805,23 @@ static void verify_native_window_first_subclass_case(BOOL existing_subclass)
         /* Fail ownership publication before native installation. The same
          * borrowed WW and observed identity must remain usable for retry. */
         objects.entries[LOWORD(window)].bType = TYPE_MENU;
-        BORROW_CHECK(!wow_user_set_procedure(window,FALSE,0x92340056u,TRUE,&previous_guest));
+        BORROW_CHECK(!wow_user_set_procedure(window,FALSE,(WOW_WINDOW_PROC_TAG | 0x12340056u),TRUE,&previous_guest));
         ZeroMemory(&objects.entries[LOWORD(window)], sizeof(objects.entries[0]));
         BORROW_CHECK(!GetPropW(window, L"NTVDM.WOW.WindowWords"));
         BORROW_CHECK((ULONG)GetWindowLongA(window, GWL_WNDPROC) == native_predecessor);
         BORROW_CHECK(c_sas_dw_at(backing + 76u) == class_server);
         BORROW_CHECK(wow_user_borrow_window(window) == words);
-        previous = wow_user_set_procedure(window,FALSE,0x92340056u,TRUE,&previous_guest);
+        previous = wow_user_set_procedure(window,FALSE,(WOW_WINDOW_PROC_TAG | 0x12340056u),TRUE,&previous_guest);
         BORROW_CHECK(previous == native_predecessor && !previous_guest);
         BORROW_CHECK(wow_user_borrow_window(window) == words);
         BORROW_CHECK(c_sas_dw_at(backing + 76u) == class_server);
         BORROW_CHECK(objects.entries[LOWORD(window)].pOwner == &thread);
         /* Original walias.h: GWL_WOWvpfnWndProc aliases GWL_WOWDWORD2. */
         (void)wow_user_set_window_longA(window, GWL_WOWDWORD2, 0x12340056u);
-        BORROW_CHECK((ULONG)SendMessageA(window, WM_APP + 47, 0, 0) == 0x92340056u);
+        BORROW_CHECK((ULONG)SendMessageA(window, WM_APP + 47, 0, 0) == (WOW_WINDOW_PROC_TAG | 0x12340056u));
         BORROW_CHECK(adopted_callback_calls == callbacks + 1);
         BORROW_CHECK(wow_user_set_procedure(window,FALSE,previous,FALSE,
-            &previous_guest) == 0x92340056u && previous_guest);
+            &previous_guest) == (WOW_WINDOW_PROC_TAG | 0x12340056u) && previous_guest);
         BORROW_CHECK(SendMessageA(window, WM_APP + 47, 0, 0) == 73);
         if (existing_subclass) {
             DWORD_PTR data = 1;

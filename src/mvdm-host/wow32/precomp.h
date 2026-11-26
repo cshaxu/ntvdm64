@@ -18,7 +18,6 @@
 --*/
 
 #include <stddef.h>
-#line 21
 #include <nt.h>
 #include <wow32_provider_private.h>
 #include <wow_clipboard_epoch.h>
@@ -128,4 +127,3 @@
 #undef LoadMenuIndirect
 #define LoadMenuIndirect wow_user_load_menu_indirect
 #endif
-
