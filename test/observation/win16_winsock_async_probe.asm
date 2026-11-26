@@ -68,6 +68,8 @@ mov [procedure-data],ax
 mov [procedure-data+2],dx
 or ax,dx
 jz fatal
+mov word [phase-data],100
+call checkpoint
 mov ax,[procedure-data]
 mov [wndclass+2-data],ax
 mov ax,[procedure-data+2]
@@ -81,6 +83,8 @@ push word wndclass-data
 api 2,57                         ; USER RegisterClass
 test ax,ax
 jz fatal
+mov word [phase-data],101
+call checkpoint
 push ds
 push word classname-data
 push ds
@@ -100,6 +104,8 @@ api 2,41                         ; USER CreateWindow
 test ax,ax
 jz fatal
 mov [window-data],ax
+mov word [phase-data],102
+call checkpoint
 push word 0x0101
 push ds
 push word wsadata-data

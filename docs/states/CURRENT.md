@@ -42,7 +42,13 @@ Runtime16 cached build,dual26/26hash publication,message transaction191,
 COPYDATA and Product targeted verification PASS. P13 delivered/pushed
 e1824a049. Last Full:file30 P12 runtime15 passed23/23; next:file40
 and S closure. Win95 approved knownExitOne retained in that Full checkpoint.
-Next file32 wparam.c. Earlier P1-P7 linear-only line evidence must be
+P14 files32-33 final-verified:33/48files,350/452points;16restored,
+334residual,102unreviewed. Census745/7078,cumulative135/4685.
+Runtime17 cached build,dual26-hash host publication,paired original SP3
+WINSOCK publication,parameter54/rundown353 and actual Win16
+Completion/Cancel/TaskLoss PASS. [P14 receipt](../etc/evidence/t485-h-repair/s11-p14-result.json)
+and [guest pairing](../etc/evidence/t485-h-repair/s11-p14-winsock-pairing.md).
+Commit/push pending;delivered31/327 unchanged. Earlier P1-P7 linear-only line evidence must be
 rechecked with actual preprocessing before S11 closure.
 Migration39/159;S11 active.
 

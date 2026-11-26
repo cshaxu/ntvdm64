@@ -43,8 +43,8 @@ frozen point counts as current byte-sensitive diff counts.
 | 29 | src/mvdm-host/wow32/wow32.h | 1 | P11 delivered e5db62755 |
 | 30 | src/mvdm-host/wow32/wow32fax.c | 7 | P12 delivered b65051565 |
 | 31 | src/mvdm-host/wow32/wowhooks.c | 39 | P13 delivered e1824a049 |
-| 32 | src/mvdm-host/wow32/wparam.c | 4 | Pending |
-| 33 | src/mvdm-host/wow32/wsdata.c | 19 | Pending |
+| 32 | src/mvdm-host/wow32/wparam.c | 4 | P14 source-reviewed; delivery pending |
+| 33 | src/mvdm-host/wow32/wsdata.c | 19 | P14 source-reviewed; delivery pending |
 | 34 | src/mvdm-host/wow32/wsext.c | 4 | Pending |
 | 35 | src/mvdm-host/wow32/wshell.c | 1 | Pending |
 | 36 | src/mvdm-host/wow32/wshimdb.c | 5 | Pending |
@@ -804,3 +804,47 @@ COPYDATA and Product targeted verification PASS. [P13 receipt](s11-p13-result.js
 P13 delivered/pushed e1824a0499f8a7cfa7316b9d6142b79988dd3cf0.31/48files,327/452points delivered:
 15restored,312residual,125unreviewed. Census750/7092,cumulative130/4671.
 Next file32 wparam.c. Last Full:file30;next:file40 or S closure.
+
+### P14 files32-33 parameter mapping and Winsock async
+
+wparam.c:24/47 ->22/40 (-2/-7),8 exclusions unchanged. Frozen04423
+format restored;04420-04422 retain NULL rejection, failure-atomic refresh
+and pre-refresh pin rollback with exact reference/alias/reentry evidence.
+Remove3 redundant anchors and restore original whitespace. Actual product
+preprocessing93 stationary statements has zero drift.
+
+wsdata.c:22/184 ->19/177 (-3/-7),no exclusions. All19 frozen differences
+have specific necessity recorded: six incorrect allocation-variable checks,
+owner initialization, late completion suppression, implemented cancellation
+and task rundown. Existing context/list/critical section stay authoritative.
+Move the two existing helpers after original functions and restore original
+comment; helper bodies and runtime behavior unchanged. A first layout
+candidate23/181 was rejected before application because it added a point;
+remove unnecessary anchor, final19/177. Original page-separator formfeeds
+are not compiler newlines. Actual product preprocessing checks92 original
+stationary statements with zero drift; appended helper text collisions are
+not original-source line obligations. No broad runtime coverage claim from
+service-double fixtures.
+
+Batch reduction5/14;33/48files,350/452points source-reviewed:15restored
+already delivered,1local-restored,334residual,102unreviewed. Delivered31/327
+until batch completion. Current census745/7078,cumulative raw135/4685.
+P11 normalized ABI+1/+2 unchanged/separately recorded. Build/publication
+started after both complete-file reviews. Next file34 wsext.c; Full at40
+or S closure, last Full30.
+
+P14 verification corrections: the parameter fixture still had the pre-XP
+WW.dwStyle/dwExStyle substitute and one-argument stackfree16 macro. Match
+selected XP style field/two-argument ABI and retain all original assertions;
+54 scenarios pass. This changes test doubles only, not product code. Add
+actual wcall16.h/wowuserp.h input hashes. A first hash-path typo was corrected;
+all failed attempts remain below p14/final. The rundown individual target
+is not admitted by build-fixtures.cmd. The group build exposed an unrelated spool-loader extraction fixture error (undefined ExitPath); the existing generated CMake rundown target passes 353 checks. Repair the spool fixture before Full; the whole provider group is not declared passed. Published host package unchanged.
+P14 initialization investigation: independent probe now records MakeProcInstance (100), RegisterClass (101), and CreateWindow (102) success. runtime17, runtime16 and runtime13 all stop after phase102 with startup=65535; ordinary logon environment reproduces it. No product regression attribution or async PASS is claimed. Evidence: build/t485-s11/p14/final/async-diagnostic, async-baseline, async-prior-p10 and async-logon. Existing exception observer is being used for the next diagnosis; original guest is unchanged.
+
+The existing process-tree exception observer completed its diagnostic deadline. No access-violation/heap exception record was captured; an NTVDM worker thread exited with 1067 (ERROR_PROCESS_ABORTED), while Run16 reported zero. This does not identify the cause or prove normal guest completion. See p14/final/async-debug/exceptions.txt. All owned diagnostic processes were cleaned by the runner.
+
+P14 runtime17 cached build,dual26-hash publication,parameter map and Winsock
+rundown fixtures plus real Win16 Completion/Cancel/TaskLoss PASS.
+[P14 receipt](s11-p14-result.json).33files/350points final-verified;
+16restored,334residual,102unreviewed. Commit/push pending;delivered31/327.

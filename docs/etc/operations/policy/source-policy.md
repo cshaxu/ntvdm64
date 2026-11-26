@@ -478,3 +478,12 @@ contract. Owner-approved raw mirror differences are 53 lines for nt.h
 and 24 for xactsrvp.h, offset by 14 restored lines in its seven callers.
 The B exceptions are restricted to the original dialog child-list lookup
 and the USER object ownership table in the x86 WOW32 link.
+
+### Standing owner approval: XP original replacements
+
+On 2026-11-26 the owner permanently approved all proposals to replace files
+with original XP files for this project's XP baseline migration. Such
+replacements do not require repeated owner approval. Record original input
+identity and package changes, preserve unrelated files, and perform the
+applicable delivery verification. This authorizes original-file replacement,
+not modification or rebuilding of original guest binaries.

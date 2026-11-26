@@ -1,7 +1,7 @@
 {
   "schema": "ntvdm64.guest-archive.v1",
   "baseline_sha256": "539a910247c5478bde19fb2a431cd4c5ab26355cdc46f8160f49b23f060b495b",
-  "archive_sha256": "16bcfc214086d71f24c0717f89928732e908c269b76501d8acfbc21e66fc5603",
+  "archive_sha256": "6c3533b0c23226f3830b0eeeaaf841b3acd4044e837f6b24d001135b2bf54663",
   "added": [
     "WINNT/EDIT.COM",
     "WINNT/EDIT.HLP",
@@ -389,9 +389,9 @@
     },
     {
       "path": "WINNT/SYSTEM32/WINSOCK.DLL",
-      "bytes": 2880,
-      "sha256": "629e86c59c83f66d3623388b9ed6ae9d5a664979e588a9eb45b8a54441126fd9",
-      "source": "src\\mvdm\\wow16\\winsock\\WINSOCK.DLL",
+      "bytes": 2864,
+      "sha256": "2b22a58572bb65f3fa3be137337613531d192759c48bdc4a8e37ba1911962212",
+      "source": "XP Professional SP3 I386/WINSOCK.DL_ (T485 S11 P14 paired guest repair)",
       "format": "NE",
       "module": "WINSOCK",
       "imports": [

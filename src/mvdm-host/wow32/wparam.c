@@ -93,7 +93,6 @@ DWORD FindParamMap(VOID* lpFindParam, DWORD lParam, UINT fMode)
     DWORD dwRet = 0;
     BOOL fFound = FALSE;
 
-#line 94
     switch(fMode) {
 
          case PARAM_16:
@@ -210,13 +209,12 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
     if (!dwPtr32) return NULL;
 #line 207
      // see if it's there already
-#line 208
     if (FindParamMap(&fp, dwPtr16, PARAM_16)) {
 
         lpn = fp.lpNode; // a bit faster ref
 
         ++lpn->dwRefCount; // increase ref count
-        
+
         __try {
             if (!ParamMapUpdateNode(dwPtr32, PARAM_32, lpn))
                 lpn = NULL;
@@ -472,7 +470,7 @@ else { \
 #line 477
 #error Excluded unsupported DEBUG WOW profile
 #line 484
-#else 
+#else
 #line 485
 #define LINK_WORKLIST(pc, pNew, pLast)
 #endif
@@ -534,7 +532,6 @@ LPVOID CacheBlockAllocate(PBLKCACHE pc, DWORD dwSize)
                 }
 
                 // include into busy blocks
-#line 544
 #ifdef DEBUG
 #line 545
 #error Excluded unsupported DEBUG WOW profile

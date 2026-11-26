@@ -2075,3 +2075,5 @@ post-publication targeted checks.
 [S10 P3 keyboard controller](evidence/t485-h-repair/s10-p3-keyba.md) records44 point dispositions and original-format/line recovery.
 
 - [T485 S11 WOW ordered review](evidence/t485-h-repair/s11-progress.md).
+
+[S11 P14 Winsock guest pairing](evidence/t485-h-repair/s11-p14-winsock-pairing.md) records isolated original-media compatibility evidence and pending formal publication.

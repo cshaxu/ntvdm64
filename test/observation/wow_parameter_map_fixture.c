@@ -10,7 +10,7 @@ typedef DWORD VPVOID,VPSZ,VPSTR,VPBYTE,VPRECT16,VPPROC;
 #define GlobalLock16 WOWGlobalLockSize16
 #define GlobalUnlockFree16 WOWGlobalUnlockFree16
 typedef LPSTR LPSZ,PSZ;
-typedef struct {DWORD dwStyle,dwExStyle;} WW,*PWW;
+typedef struct {DWORD style;} WW,*PWW;
 #include "../../src/compat/include/wow_control_message_abi.h"
 #include "parameter_types.h"
 #include "../../src/mvdm-host/wow32/wparam.h"
@@ -63,8 +63,9 @@ static VPVOID allocate_guest(unsigned bytes,unsigned kind){unsigned i;if(fail_gu
 static VPVOID FASTCALL malloc16(UINT bytes){return allocate_guest(bytes,1);}
 static VPVOID FASTCALL stackalloc16(UINT bytes){return allocate_guest(bytes,2);}
 static BOOL FASTCALL free16(VPVOID key){unsigned i;for(i=0;i<32;++i)if(key==0x20000000u+i*0x1000u && guest[i].kind==1){guest[i].kind=0;++guest_frees;return TRUE;}expect(FALSE,"no foreign/double guest free");return FALSE;}
-/* Original stackfree16 is empty. Count the release site, not a heap free. */
-#define stackfree16(key) ((void)(key),++stack_releases)
+/* XP release ABI takes (vp,cb). This fixture counts release sites; the actual
+ * callback-stack cursor is covered by the message-transaction fixture. */
+#define stackfree16(key,bytes) ((void)(key),(void)(bytes),++stack_releases)
 static unsigned heap_owned(void){unsigned i,n=0;for(i=0;i<32;++i)if(guest[i].kind==1)++n;return n;}
 static void putstr16(VPSZ key,LPSZ source,INT bytes){if(copy_fault){SetLastError(0x7351);RaiseException(fault_code,0,0,NULL);}memcpy(view(key),source,(size_t)bytes);}
 static void putrect16(VPRECT16 key,LPRECT rectangle){(void)key;(void)rectangle;}

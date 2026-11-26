@@ -1793,7 +1793,6 @@ BytesInServent32 (
 
 ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
 {
-#line 1769
     ULONG ul;
     register PWSACANCELASYNCREQUEST16 parg16;
     HANDLE asyncTaskHandle32;
@@ -1806,8 +1805,9 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
     }
 
     GETARGPTR(pFrame, sizeof(WSACANCELASYNCREQUEST16), parg16);
-#line 1778
 
+    //ul = GETWORD16((*wsockapis[WOW_WSACANCELASYNCREQUEST].lpfn)(
+    //                    ));
     asyncTaskHandle32 = WWS32FindAsyncTaskHandle32(
                             GETWORD16( parg16->hAsyncTaskHandle ),
                             WWS32ThreadSerialNumber
@@ -1832,13 +1832,104 @@ ULONG FASTCALL WWS32WSACancelAsyncRequest(PVDMFRAME pFrame)
 
     ul = (ULONG) SOCKET_ERROR;
     SetLastError( WSAEINVAL );
-#line 1786
 
     RETURN(ul);
 
 } // WWS32WSACancelAsyncRequest
 
 
+PWINSOCK_ASYNC_CONTEXT_BLOCK
+WWS32FindAndRemoveAsyncContext (
+    IN HANDLE AsyncTaskHandle32
+    )
+{
+    PWINSOCK_ASYNC_CONTEXT_BLOCK context;
+    PLIST_ENTRY listEntry;
+
+    RtlEnterCriticalSection( &WWS32CriticalSection );
+
+    //
+    // Walk the global list of async context blocks, looking for
+    // one that matches the specified task handle.
+    //
+
+    for ( listEntry = WWS32AsyncContextBlockListHead.Flink;
+          listEntry != &WWS32AsyncContextBlockListHead;
+          listEntry = listEntry->Flink ) {
+
+        context = CONTAINING_RECORD(
+                      listEntry,
+                      WINSOCK_ASYNC_CONTEXT_BLOCK,
+                      ContextBlockListEntry
+                      );
+
+        if ( context->AsyncTaskHandle32 == AsyncTaskHandle32 ) {
+            if ( context->RundownState & WWS32_ASYNC_RETIRED ) {
+                if ( context->RundownState & WWS32_ASYNC_CANCEL_ACTIVE ) {
+                    context->RundownState |= WWS32_ASYNC_COMPLETED;
+                    break;
+                }
+                RemoveEntryList( &context->ContextBlockListEntry );
+                RtlLeaveCriticalSection( &WWS32CriticalSection );
+                free_w( context->Buffer32 );
+                free_w( (PVOID)context );
+                return NULL;
+            }
+
+#line 1818
+
+            //
+            // Found a match.  Remove it from the global list, leave
+            // the critical section, and return the context block.
+            //
+
+            RemoveEntryList( &context->ContextBlockListEntry );
+            RtlLeaveCriticalSection( &WWS32CriticalSection );
+
+            return context;
+        }
+    }
+
+    //
+    // A matching context block was not found on the list.
+    //
+
+    RtlLeaveCriticalSection( &WWS32CriticalSection );
+
+    return NULL;
+
+} // WWS32FindAndRemoveAsyncContext
+
+
+HAND16
+WWS32GetAsyncTaskHandle16 (
+    VOID
+    )
+{
+    HAND16 asyncTaskHandle16;
+
+    // *** this routine *must* be called from within the WWS32 critical
+    //     section!
+
+    ASSERT( WWS32AsyncTaskHandleCounter != 0 );
+
+    asyncTaskHandle16 = (HAND16)WWS32AsyncTaskHandleCounter;
+
+    WWS32AsyncTaskHandleCounter++;
+
+    //
+    // 0 is an invalid task handle value; if the counter has wrapped to
+    // zero, set it to 1.
+    //
+
+    if ( WWS32AsyncTaskHandleCounter == 0 ) {
+        WWS32AsyncTaskHandleCounter = 1;
+    }
+
+    return WWS32AsyncTaskHandleCounter;
+
+} // WWS32GetAsyncTaskHandle16
+
 HANDLE
 WWS32FindAsyncTaskHandle32 (
     IN HAND16 AsyncTaskHandle16,
@@ -1935,97 +2026,3 @@ WWS32CancelAsyncRequestsForTask(
         }
     }
 } // WWS32CancelAsyncRequestsForTask
-#line 1790
-
-
-PWINSOCK_ASYNC_CONTEXT_BLOCK
-WWS32FindAndRemoveAsyncContext (
-    IN HANDLE AsyncTaskHandle32
-    )
-{
-    PWINSOCK_ASYNC_CONTEXT_BLOCK context;
-    PLIST_ENTRY listEntry;
-
-    RtlEnterCriticalSection( &WWS32CriticalSection );
-
-    //
-    // Walk the global list of async context blocks, looking for
-    // one that matches the specified task handle.
-    //
-
-    for ( listEntry = WWS32AsyncContextBlockListHead.Flink;
-          listEntry != &WWS32AsyncContextBlockListHead;
-          listEntry = listEntry->Flink ) {
-
-        context = CONTAINING_RECORD(
-                      listEntry,
-                      WINSOCK_ASYNC_CONTEXT_BLOCK,
-                      ContextBlockListEntry
-                      );
-
-        if ( context->AsyncTaskHandle32 == AsyncTaskHandle32 ) {
-            if ( context->RundownState & WWS32_ASYNC_RETIRED ) {
-                if ( context->RundownState & WWS32_ASYNC_CANCEL_ACTIVE ) {
-                    context->RundownState |= WWS32_ASYNC_COMPLETED;
-                    break;
-                }
-                RemoveEntryList( &context->ContextBlockListEntry );
-                RtlLeaveCriticalSection( &WWS32CriticalSection );
-                free_w( context->Buffer32 );
-                free_w( (PVOID)context );
-                return NULL;
-            }
-
-#line 1818
-
-            //
-            // Found a match.  Remove it from the global list, leave
-            // the critical section, and return the context block.
-            //
-
-            RemoveEntryList( &context->ContextBlockListEntry );
-            RtlLeaveCriticalSection( &WWS32CriticalSection );
-
-            return context;
-        }
-    }
-
-    //
-    // A matching context block was not found on the list.
-    //
-
-    RtlLeaveCriticalSection( &WWS32CriticalSection );
-
-    return NULL;
-
-} // WWS32FindAndRemoveAsyncContext
-
-
-HAND16
-WWS32GetAsyncTaskHandle16 (
-    VOID
-    )
-{
-    HAND16 asyncTaskHandle16;
-
-    // *** this routine *must* be called from within the WWS32 critical
-    //     section!
-
-    ASSERT( WWS32AsyncTaskHandleCounter != 0 );
-
-    asyncTaskHandle16 = (HAND16)WWS32AsyncTaskHandleCounter;
-
-    WWS32AsyncTaskHandleCounter++;
-
-    //
-    // 0 is an invalid task handle value; if the counter has wrapped to
-    // zero, set it to 1.
-    //
-
-    if ( WWS32AsyncTaskHandleCounter == 0 ) {
-        WWS32AsyncTaskHandleCounter = 1;
-    }
-
-    return WWS32AsyncTaskHandleCounter;
-
-} // WWS32GetAsyncTaskHandle16
