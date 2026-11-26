@@ -13,7 +13,7 @@ DOCUMENT 		: name and number
 
 RELATED DOCS		: include all relevant references
 
-DESIGNER		: 
+DESIGNER		:
 
 REVISION HISTORY	:
 First version		: 13 July 1988, J.Roper
@@ -48,7 +48,7 @@ static char SccsID[]="@(#)ega_ports.c	1.54 07/18/94 Copyright Insignia Solutions
 [1.3 INTERMODULE IMPORTS]
      (not o/s objects or standard libs)
 
-	PROCEDURES() : 
+	PROCEDURES() :
 			io_define_inb
 			io_define_outb
 			io_connect_port
@@ -84,7 +84,7 @@ PARAMETERS	  :	none
 
 GLOBALS		  :	none
 
-DESCRIPTION	  : 	establish ega ports. 
+DESCRIPTION	  : 	establish ega ports.
 			initialize ega code to sensible state.
 
 ERROR INDICATIONS :	none.
@@ -101,7 +101,7 @@ PARAMETERS	  :	none
 
 GLOBALS		  :	none
 
-DESCRIPTION	  : 	remove ega ports. 
+DESCRIPTION	  : 	remove ega ports.
 			free up allocated memory etc.
 
 ERROR INDICATIONS :	none.
@@ -360,7 +360,7 @@ ERROR RECOVERY	  :	none.
 #include  "ga_mark.h"
 #include  "ga_defs.h"
 
-/* [3.2 INTERMODULE EXPORTS]						*/ 
+/* [3.2 INTERMODULE EXPORTS]						*/
 
 
 /* [3.1.2 DECLARATIONS]                                                 */
@@ -376,7 +376,7 @@ IMPORT void cursor_changed IPT2(int, x, int, y);
 IMPORT void update_shift_count IPT0();
 
 /*
-5.MODULE INTERNALS   :   (not visible externally, global internally)]     
+5.MODULE INTERNALS   :   (not visible externally, global internally)]
 
 [5.1 LOCAL DECLARATIONS]						*/
 
@@ -1102,7 +1102,7 @@ boolean	in_index_state IFN0()
 /*
 ==========================================================================
 FUNCTION	:	do_new_cursor()
-PURPOSE		:	deals with the shape of the cursor according to 
+PURPOSE		:	deals with the shape of the cursor according to
 			char_height, cursor_start and cursor_end. See Tech
 			Memo 88.6.1 for details.
 EXTERNAL OBJECTS:	EGA_GRAPH.cursor_start,EGA_GRAPH.cursor_height,EGA_cursor_start1,
@@ -1209,7 +1209,7 @@ LOCAL void	do_new_cursor IFN0()
 /*
 ==========================================================================
 FUNCTION	:	do_chain_majority_decision()
-PURPOSE		:	deals with any contention regarding whether the 
+PURPOSE		:	deals with any contention regarding whether the
 			ega registers indicate that the addressing of the
 			planes is in chained mode or not. If the result
 			of the election is a new addressing mode, then
@@ -1665,7 +1665,7 @@ void	ega_seq_reset IFN2(io_addr, port, half_word, value)
 	note_entrance0("reset register");
 	sequencer.reset.as.abyte = value ;
 	if (sequencer.reset.as_bfld.asynchronous_reset==0)
-		set_bit_display_disabled(ASYNC_RESET); 
+		set_bit_display_disabled(ASYNC_RESET);
 	else
 		clear_bit_display_disabled(ASYNC_RESET);
 	if (sequencer.reset.as_bfld.synchronous_reset==0)
@@ -1753,7 +1753,7 @@ register unsigned map_selects;
 		** selects which of the two fonts to use (giving 512 chars).
 		*/
 
-		EGA_GRAPH.attrib_font_select = (sequencer.character_map_select.as_bfld.character_map_select_a != 
+		EGA_GRAPH.attrib_font_select = (sequencer.character_map_select.as_bfld.character_map_select_a !=
 						sequencer.character_map_select.as_bfld.character_map_select_b );
 		set_prim_font_index(sequencer.character_map_select.as_bfld.character_map_select_a);
 		set_sec_font_index(sequencer.character_map_select.as_bfld.character_map_select_b);
@@ -1867,14 +1867,14 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 #line 2379
 						flag_mode_change_required();
 					}
-					if (crt_controller.crtc_overflow.as_bfld.line_compare_bit_8 != 
+					if (crt_controller.crtc_overflow.as_bfld.line_compare_bit_8 !=
 						((CRTC_OVERFLOW*)&new)->as_bfld.line_compare_bit_8)
 					{
 						/*
 						 * split screen height changed
 						 */
 
-						EGA_GRAPH.screen_split.as_bfld.top_bit = 
+						EGA_GRAPH.screen_split.as_bfld.top_bit =
 								((CRTC_OVERFLOW*)&new)->as_bfld.line_compare_bit_8;
 
 						if( !get_split_screen_used() )
@@ -1890,7 +1890,7 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 					break;
 				case 9:
 					note_entrance0("max scan line");
-					if (crt_controller.maximum_scan_line.as_bfld.maximum_scan_line != 
+					if (crt_controller.maximum_scan_line.as_bfld.maximum_scan_line !=
 						((MAX_SCAN_LINE*)&new)->as_bfld.maximum_scan_line)
 					{
 						set_char_height_recal(
@@ -1901,7 +1901,7 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 					break;
 				case 10:
 					note_entrance0("cursor start");
-					if (crt_controller.cursor_start.as_bfld.cursor_start != 
+					if (crt_controller.cursor_start.as_bfld.cursor_start !=
 						((CURSOR_START*)&new)->as_bfld.cursor_start)
 					{
 						crt_controller.cursor_start.as.abyte = value;
@@ -2054,7 +2054,7 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 					break;
 				case 23:
 					note_entrance0("mode control");
-					if (crt_controller.mode_control.as_bfld.compatibility_mode_support != 
+					if (crt_controller.mode_control.as_bfld.compatibility_mode_support !=
 						((MODE_CONTROL*)&new)->as_bfld.compatibility_mode_support)
 					{
 						if ( (((MODE_CONTROL*)&new)->as_bfld.compatibility_mode_support) == 0)
@@ -2340,7 +2340,7 @@ MODE new_mode;
 	if (graphics_controller.mode.as_bfld.read_mode != new_mode.as_bfld.read_mode)
 	{
 		/*
-		 * read mode change 
+		 * read mode change
 		 */
 		read_state.mode = new_mode.as_bfld.read_mode;
 		ega_read_routines_update();
@@ -2455,7 +2455,7 @@ register unsigned colour_dont_care;
 }
 
 /*
- * The EGA mask register is written to more times than all other ports added together! 
+ * The EGA mask register is written to more times than all other ports added together!
  * To help make this register fast, we have two different routines to handle it:
  * ega_gc_mask for when the register's current value is not 0xFF, ie. masking is active
  * ega_gc_mask_ff for when the mask register = 0xFF, so masking is disabled.
@@ -2480,9 +2480,9 @@ register unsigned colour_dont_care;
 **
 )*/
 #include	"cpu_vid.h"
+
 IMPORT void Glue_set_vid_wrt_ptrs (WRT_POINTERS * handler );
 
-#line 2985
 GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 {
 #ifndef NEC_98
@@ -2561,7 +2561,6 @@ LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 	setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);
 	if( value == 0xff )
 	{
-#line 3061
 #ifndef	USE_OLD_MASK_CODE
 		ega_mask_register_changed(/*bit protection :=*/0);
 #else
@@ -2614,7 +2613,6 @@ void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 		setVideobit_prot_mask(mask);
 		setVideodata_xor_mask(~(EGA_CPU.calc_data_xor & mask));
 		setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);
-#line 3111
 #ifndef	USE_OLD_MASK_CODE
 		ega_mask_register_changed(/*bit protection :=*/1);
 #else
@@ -2705,21 +2703,21 @@ LOCAL void	ega_ac_outb IFN2(io_addr, port, half_word, value)
 			attribute_controller.palette[attribute_controller.address.as_bfld.index].as.abyte = value;
 			if(miscellaneous_output_register.as_bfld.vertical_retrace_polarity)
 			{
-				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].red = 
+				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].red =
 										get_palette_color(red,secondary_red);
-				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].green = 
+				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].green =
 										get_palette_color(green,secondary_green);
-				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].blue = 
+				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].blue =
 										get_palette_color(blue,secondary_blue);
 			}
 			else
 			{
 				/* Interpret secondary_green as intensity */
-				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].red = 
+				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].red =
 										get_palette_color(red,secondary_green);
-				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].green = 
+				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].green =
 										get_palette_color(green,secondary_green);
-				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].blue = 
+				EGA_GRAPH.palette[attribute_controller.address.as_bfld.index].blue =
 										get_palette_color(blue,secondary_green);
 			}
 			host_set_palette(EGA_GRAPH.palette,EGA_PALETTE_SIZE);
@@ -2746,7 +2744,7 @@ LOCAL void	ega_ac_outb IFN2(io_addr, port, half_word, value)
 			 */
 			 vote_ega_mode();
 			assert0(attribute_controller.mode_control.as_bfld.display_type == 0, "Mono display selected");
-			assert0(attribute_controller.mode_control.as_bfld.enable_line_graphics_char_codes == 0, 
+			assert0(attribute_controller.mode_control.as_bfld.enable_line_graphics_char_codes == 0,
 											"line graphics enabled");
 			break;
 		case 17:
@@ -2808,7 +2806,7 @@ MISC_OUTPUT_REG new;
 		ega_write_routines_update(RAM_ENABLED);
 	}
 
-	if (miscellaneous_output_register.as_bfld.vertical_retrace_polarity != 
+	if (miscellaneous_output_register.as_bfld.vertical_retrace_polarity !=
 		new.as_bfld.vertical_retrace_polarity)
 	{
 		/*
@@ -2854,7 +2852,7 @@ LOCAL void	ega_ipstat0_inb IFN2(io_addr, port, half_word *, value)
 #endif
 #line 3339
 	note_entrance1("ega_ipstat0_inb(%x)", port);
-	input_status_register_zero.as_bfld.switch_sense = 
+	input_status_register_zero.as_bfld.switch_sense =
 	
 	/* The following function call used to pass the argument
 	** miscellaneous_output_register.as_bfld.clock_select
@@ -2920,7 +2918,7 @@ LOCAL void	ega_ipstat1_inb IFN2(io_addr, port, half_word *, value)
      *
      * We do this with a 4 state machine. Each state has a count associated
      * with it to represent the relative time spent in each state. When this
-     * count is exhausted the machine moves into the next state. One Inb 
+     * count is exhausted the machine moves into the next state. One Inb
      * equals 1 count. The states are as follows:
      *     0: VS low, DE high.
      *     1: VS low, DE toggles. This works via an internal state.
@@ -3012,7 +3010,7 @@ LOCAL	void	vote_ega_mode IFN0()
 
 	votes = sequencer.memory_mode.as_bfld.alpha_mode ? 0 : 1;
 	votes += graphics_controller.miscellaneous.as_bfld.graphics_mode;
-	votes += attribute_controller.mode_control.as_bfld.graphics_mode; 
+	votes += attribute_controller.mode_control.as_bfld.graphics_mode;
 	assert1( votes == 3 || votes == 0, "Headline: Mode government returned with small majority %d", votes);
 	if ((old_votes < 2) && (votes >= 2))
 	{
@@ -3039,4 +3037,3 @@ LOCAL	void	vote_ega_mode IFN0()
 #endif /* EGG */
 #line 3558
 #endif /* REAL_VGA */
-#line 2956

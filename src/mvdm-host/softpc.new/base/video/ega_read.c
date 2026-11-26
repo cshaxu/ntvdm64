@@ -16,7 +16,7 @@ DOCUMENT 		: name and number
 
 RELATED DOCS		: include all relevant references
 
-DESIGNER		: 
+DESIGNER		:
 
 REVISION HISTORY	:
 First version		: August 1988, J. Maiden
@@ -26,7 +26,7 @@ SUBMODULE NAME		: ega
 
 SOURCE FILE NAME	: ega_read.c
 
-PURPOSE			: emulation of EGA read operations 
+PURPOSE			: emulation of EGA read operations
 
 SccsID = @(#)ega_read.c	1.32 09/07/94 Copyright Insignia Solutions Ltd.
 		
@@ -50,7 +50,7 @@ SccsID = @(#)ega_read.c	1.32 09/07/94 Copyright Insignia Solutions Ltd.
 [1.3 INTERMODULE IMPORTS]
 	 (not o/s objects or standard libs)
 
-	PROCEDURES() : 
+	PROCEDURES() :
 
 	DATA 	     : 	give name, and source module name
 
@@ -138,10 +138,10 @@ ERROR RECOVERY	  :	none.
 
 /* [3.1.2 DECLARATIONS]                                                 */
 
-/* [3.2 INTERMODULE EXPORTS]						*/ 
+/* [3.2 INTERMODULE EXPORTS]						*/
 
 /*
-5.0 MODULE INTERNALS   :   (not visible externally, global internally)]     
+5.0 MODULE INTERNALS   :   (not visible externally, global internally)]
 
 [5.1 LOCAL DECLARATIONS]						*/
 
@@ -287,7 +287,7 @@ extern IU32 read_word_ev_glue IPT1(IU32, eaOff);
 extern void read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);
 IMPORT void setReadPointers IPT1(IUH, readset);
 #line 385
-READ_POINTERS Glue_reads = 
+READ_POINTERS Glue_reads =
 {
 	read_byte_ev_glue,
 	read_word_ev_glue,
@@ -604,7 +604,7 @@ Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 #line 675
 #error Non-CPU40 video glue is not supported
 #endif	/* CPU_40_STYLE - EVID */
-#endif // NEC_98
+#endif  //NEC_98
 #line 711
 }	
 #endif /* !(NTVDM && MONITOR) */

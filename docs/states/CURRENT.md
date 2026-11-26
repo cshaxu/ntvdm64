@@ -32,14 +32,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S10 Ordered Progress
 
-[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):13/30 reviewed and
-delivered;335/1060 points reviewed,725 remain. P4 3a3ac1248 pushed to origin/main.
-P4 keybd_io.c82/90 ->75/83; cga.c1/2532 ->54/70. Pure format/#line changes.
-180 points restored/delivered;155 evidenced residuals pending owner decisions;
-zero local restorations pending. Census201/102863 ->532/54533 (+331/-48330).
-Cached build,dual publication(26 hashes),targeted tests and documentation gates
-passed; evidence build/t485-s10/p4. No Full claim.
-Next ega_prts.c. Migration39/159; Full remains S13.
+[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md):16/30 reviewed;
+680/1060 points reviewed,380 remain.13 files delivered through P4 3a3ac1248.
+P5 three EGA files complete;180 restored/delivered,342 local format restorations
+pending,158 residuals. ega_vide.c1/5005 ->117/134.
+Corrected census201/102845 ->815/42421 (+614/-60424).
+P5 cached build,dual publication(26 hashes),targeted tests passed.
+16 files final-verified;commit/push pending.
+Evidence build/t485-s10/p5;next ega_writ.c afterwards.
+Migration39/159;Full remains S13.
 
 ## S9 Closure Record
 

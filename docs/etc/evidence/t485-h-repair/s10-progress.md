@@ -24,9 +24,9 @@ Full remains S13; original guest remains immutable.
 | 11 | softpc.new/base/keymouse/keyba.c | 44 | Delivered 99c8fc6b1 |
 | 12 | softpc.new/base/keymouse/keybd_io.c | 3 | Delivered 3a3ac1248 |
 | 13 | softpc.new/base/video/cga.c | 157 | Delivered 3a3ac1248 |
-| 14 | softpc.new/base/video/ega_prts.c | 30 | Not started |
-| 15 | softpc.new/base/video/ega_read.c | 7 | Not started |
-| 16 | softpc.new/base/video/ega_vide.c | 308 | Not started |
+| 14 | softpc.new/base/video/ega_prts.c | 30 | Source reviewed; format delivery pending |
+| 15 | softpc.new/base/video/ega_read.c | 7 | Source reviewed; format delivery pending |
+| 16 | softpc.new/base/video/ega_vide.c | 308 | Source reviewed; P5 delivery pending |
 | 17 | softpc.new/base/video/ega_writ.c | 5 | Not started |
 | 18 | softpc.new/base/video/egawrtm0.c | 20 | Not started |
 | 19 | softpc.new/base/video/egwrtm12.c | 30 | Not started |
@@ -252,3 +252,87 @@ Thirteen files final-verified; P4 commit/push pending.
 P4 delivery receipt:3a3ac1248 pushed to origin/main.13/30 files delivered,
 335/1060 points reviewed,725 remain;180 restored/delivered,155 residuals.
 No local restorations pending. Census532/54533 unchanged. Next ega_prts.c.
+
+## EGA ports source review
+
+Fourteenth file:30 frozen points;29 restored format points,one evidenced
+residual R02461. Fixed XP hash verified by inspect-path.py. Actual provider
+is void setMarkPointers(IUH) in ev_glue.c, selected through egacpu.h and
+called by ega_init. The prior generic word-width rationale was incorrect
+for this file; the one-line declaration supplies the actual void signature.
+No provider logic, callback or conditional added.
+
+Restored LF/original whitespace and original blank XP2982. Removed redundant
+#line2985/3061/3111 and stale terminal#line2956.2218 matching original
+non-directive lines have exact logical positions;zero mismatches.22#error
+branches unchanged. Whitespace/#line-stripped file bytes identical.
+Metrics1/5944 ->93/93 (+92/-5851),format approval applies. S10 total624/48682
+vs201/102863 (+423/-54181).14/30 reviewed,365/1060 points reviewed,695 remain;
+180 restored/delivered,29 local format restorations pending,156 residuals.
+13 files delivered. Pure format batch may accumulate;next ega_read.c.
+
+## EGA read source review
+
+Fifteenth file:7 frozen points;6 original format restorations,one residual
+R02491. cpu_vid.h READ_POINTERS and ev_glue.c actual definitions establish
+IU32 byte/word returns,void string return and void(IUH) selector. Explicit
+return types/declaration remain; table initializer whitespace restored.
+No copied algorithm. Original LF/whitespace restored;25#error bodies unchanged.
+379 matching original non-directive lines retain exact logical positions.
+Whitespace/#line-stripped bytes unchanged.
+
+Counter correction: repeated CPU_40_STYLE else directives caused the old
+SequenceMatcher projection to map three excluded read-mode1 blocks to earlier
+read-mode0 blocks. Explicit original#line877/900/918 anchors identify the
+correct branches, whose directives match the originals. The diagnostic
+metric-code-anchored.py in build/t485-s10 reproduces this mapping and leaves
+only the declaration group as non-line source changes. Old before1/1563
+and candidate76/191 included18 excluded lines. Corrected1/1545 ->76/173,
+actual format reduction1372 lines;18-line counter correction is not a repair.
+Only ega_read.c census baseline/current row corrected here.
+S10 corrected baseline201/102845,current699/47292 (+498/-55553).
+15/30 source-reviewed,372/1060 points reviewed,688 remain;180 restored/delivered,
+35 local format restorations pending,157 residuals;13 files delivered.
+Next ega_vide.c; pending format batch has not been built or published.
+
+## EGA video source review
+
+Sixteenth file:308 frozen points;307 original format restorations,one residual
+R02590. Fixed XP object/hash verified;format candidate preserves executable
+non-whitespace bytes and all42 exclusion bodies. RestoreLF/original layout
+and add#line1473 after REAL_VGA else to fix the retained JAPAN branch mapping.
+1804 matched original non-directive lines now have exact logical positions.
+Only remaining non-line source change is twelve added V86 geometry lines.
+
+Necessity is historical real evidence,not a speculative stale-cache warning:
+T481 scanline288 records25->60 rows with physical481;scanline292 records
+virtualVDE399->479 during the font BIOS call. scanline294 candidate restores
+399 before/after with normal Windows exit;P10 c3df64bdf and T483 P69 record
+subsequent delivery. These are historical witnesses,not fresh XP acceptance.
+ios.c inb/outb uses IOVirtualised before physical adapter dispatch;gvi.h
+get_screen_height reads PCDisplay/EGA_GRAPH. Physical CRTC getters likewise
+cannot replace the active VM I/O path. Retain existing VGA+V86 scope,three
+register reads,overflow/multiplier decode and index restoration. No new
+algorithm or helper. Runtime boundary outside the existing scope is not
+claimed. R02590 remains pending owner decision despite format reduction.
+
+Metrics1/5005 ->117/134 (+116/-4871). S10 total815/42421 versus corrected
+baseline201/102845 (+614/-60424).16/30 source-reviewed,680/1060 points
+reviewed,380 remain;180 restored/delivered,342 local format restorations
+pending,158 residuals;13 files delivered. P5 will deliver the three complete
+EGA files together. Next ega_writ.c after delivery.
+
+P5 owned cached build/publication PID3912 started2026-11-26T13:32:32+01:00;
+command/host in build/t485-s10/p5/run.json. Targeted selection:C-VID actual
+provider fixture,real MEM/NTVDMD and NESticle rendered-menu/Escape tests.
+Keyboard suites omitted:only EGA whitespace/#line changed in P5; their
+production inputs and P4 passed contract are unchanged. Full remains S13.
+
+P5 final verification: cached build and dual publication passed;13 images/26
+hashes checked against runtime5 manifest. Test PID12120 completed C-VID
+selection/CHAIN2/scalar/string/SAS behavior,live MEM/NTVDMD debug lifecycle,
+and real NESticle menu pixels with Escape hide/restore. Logs and success
+markers in build/t485-s10/p5;source-review.json contains final per-file hashes.
+No executable algorithm changed;historical V86 geometry evidence is not
+presented as a new Windows desktop test.16 files final-verified;commit/push
+pending. Full remains S13.
