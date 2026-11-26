@@ -46,7 +46,7 @@ static ULONG close_printer(HANDLE h){
     SetLastError(ERROR_INVALID_PRINTER_STATE);return !close_fail;
 }
 static BOOL driver_name(char *port,char *out){(void)port;strcpy(out,"fixture");return !profile_missing;}
-static LPDEVMODE default_mode(char *name){(void)name;return NULL;}
+static LPDEVMODE default_mode(char *name){(void)name;return calloc(1,sizeof(DEVMODE));}
 static BOOL load_apis(char *name,DLLENTRYPOINTS *p,int n){(void)name;(void)p;(void)n;return FALSE;}
 #define FASTCALL __fastcall
 #define GETARGPTR(frame,size,arg) ((void)(size),(arg)=&(frame)->args)
@@ -64,6 +64,8 @@ static BOOL load_apis(char *name,DLLENTRYPOINTS *p,int n){(void)name;(void)p;(vo
 #define GetDriverName driver_name
 #define GetDefaultDevMode32 default_mode
 #define LoadLibraryAndGetProcAddresses load_apis
+#define malloc_w malloc
+#define malloc_w_strcpy_vp16to32(v,a,b) _strdup((char *)(v))
 #define free_w free
 WORD GetPrn16(HANDLE h);
 HANDLE Prn32(WORD h);
@@ -88,7 +90,7 @@ int main(void){
         check(!native_live&&!carrier_live&&!locks&&closes==1&&frees==1,"close consumes handle on success and failure");
     }
     reset();profile_missing=1;check(!open_job()&&!native_live&&!carrier_live,"no-profile original zero");
-    reset();open_fail=1;check(open_job()==ERROR_ACCESS_DENIED&&!native_live&&!starts,"open provider failure");
+    reset();open_fail=1;check(open_job()==ERROR_ACCESS_DENIED&&!native_live&&!starts&&!closes,"open provider failure does not close unowned handle");
     reset();start_fail=1;check(open_job()==ERROR_DISK_FULL,"start error preserved across cleanup");
     check(!native_live&&closes==1&&!carrier_live,"failed start retires native handle");
     /* Original LocalLock16(0) returns0. A private fresh non-discardable

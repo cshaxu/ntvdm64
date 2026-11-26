@@ -33,16 +33,17 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S11 Ordered Progress
 
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
-[P15 receipt](../etc/evidence/t485-h-repair/s11-p15-result.json):36/48files,
-360/452points delivered:17restored,343residual owner-review,92unreviewed.
-Current48-file census744points/7047lines; cumulative raw reduction136/4716.
-P15 removes1point/31lines. Original bulk environment cloning restored with
-proven modern NTDLL allocator and conversion boundaries. Runtime18 cached
-full build,dual26-hash publication,environment16/16 and real Win16 Completion
-PASS. P15 delivered and pushed f02c587de;36files/360points delivered.
-Nextfile37 wspool.c. LastFull:file30 P12 runtime15 passed23/23;nextfile40
-and S closure. Earlier P1-P7 actual-preprocessor line followup and spool
-loader extraction fixture repair remain required before Full/closure.
+[P16 receipt](../etc/evidence/t485-h-repair/s11-p16-result.json):37/48files,
+362/452points final-verified:17restored,345residual owner-review,90unreviewed.
+Current48-file census744points/7048lines;cumulative raw reduction136/4715.
+P16 fixes printer cleanup on the wrong failure branch;point count unchanged,
++1line for original #line mapping under standing small-fix approval.
+Runtime19 cached build,dual26-hash publication,spool72/loader56/rundown353/
+environment16 and real Win16 explicit no-profile OpenJob PASS. No claim of
+physical printer success. Commit/push pending;delivered36/360 at P15.
+Nextfile38 wstruc.c. LastFull:file30 P12 runtime15 passed23/23;nextfile40
+and S closure. Earlier P1-P7 actual-preprocessor line followup remains due;
+spool-loader extraction fixture obligation resolved.
 Migration39/159;S11 active.
 
 ## S10 Closure Record

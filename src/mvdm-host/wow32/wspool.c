@@ -122,16 +122,17 @@ ULONG FASTCALL   WG32OpenJob (PVDMFRAME pFrame)
                     if (!ul) {
                         (*spoolerapis[WOW_ClosePrinter].lpfn)(hnd);
                     }
+#line 122
                 }
                 else {
                     ul = GetLastError();
+                    (*spoolerapis[WOW_ClosePrinter].lpfn)(hnd);
+#line 125
                 }
 
             }
             else {
                 ul = GetLastError();
-                (*spoolerapis[WOW_ClosePrinter].lpfn)(hnd);
-#line 130
             }
         }
     }

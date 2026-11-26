@@ -48,7 +48,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 34 | src/mvdm-host/wow32/wsext.c | 4 | P15 delivered f02c587de |
 | 35 | src/mvdm-host/wow32/wshell.c | 1 | P15 delivered f02c587de |
 | 36 | src/mvdm-host/wow32/wshimdb.c | 5 | P15 delivered f02c587de |
-| 37 | src/mvdm-host/wow32/wspool.c | 2 | Pending |
+| 37 | src/mvdm-host/wow32/wspool.c | 2 | P16 final-verified; commit pending |
 | 38 | src/mvdm-host/wow32/wstruc.c | 3 | Pending |
 | 39 | src/mvdm-host/wow32/wuclass.c | 7 | Pending |
 | 40 | src/mvdm-host/wow32/wuclip.c | 16 | Pending |
@@ -894,3 +894,25 @@ follows whole-file completion;Full due atfile40 and S closure.
 P15 final runtime18 cached full build and dual26-hash publication PASS. Formal environment fixture16/16 and real Win16 Completion result.exit0 PASS; final package tested. [P15 receipt](s11-p15-result.json). All36files/360points final-verified:17restored,343residual,92unreviewed. Commit/push pending; nextfile37 wspool.c. No Full claim; checkpoint40 and S closure remain.
 
 P15 delivered and pushed as f02c587de. All36files/360points delivered;17fully restored,343qualified residual owner-review,92unreviewed. Working package runtime18, census744/7047, cumulative136/4716. Nextfile37 wspool.c; S11 remains active.
+
+### P16 file37 wspool.c
+
+2points/5lines ->2points/6lines;zero exclusions. A real prior adaptation bug:
+ClosePrinter was under OpenPrinter failure,using an unowned/uninitialized
+handle;StartDocPrinter failure leaked the successfully opened handle. Move
+the existing close to that owned failure after preserving GetLastError.
+Keep GetPrn16 allocation-failure close. No executable-line growth;one extra
+#line preserves original locations,within standing small-fix approval.
+Actual product preprocessing89 original statements,zero drift.
+Production-body spool72 assertions PASS. Fix stale test doubles to return
+an actual DEVMODE and use original guest-string copy API. Loader projection
+now includes original cleanup labels instead of truncating them;loader56
+assertions PASS including exact allocation-failure reachability. Its driver
+output buffer is not an initialized input string. Existing Winsock353 and
+environment16 checks also pass. No claim of real-printer success from mocks.
+37/48files,362/452points reviewed:17restored,345residual,90unreviewed;
+delivered36/360 unchanged. Census744/7048,cumulative136/4715.
+Complete-file implementation now enters cached build,dual publication and
+final targeted acceptance;Full remains due at40 and S closure.
+
+[P16 receipt](s11-p16-result.json):runtime19 cached build,dual26-hash publication and final targeted tests PASS. Actual Win16 OpenJob confirms original explicit no-profile failure,not physical-printer acceptance. All37files/362points final-verified;17restored,345residual,90unreviewed. Spool loader fixture obligation resolved. Commit/push pending;nextfile38 wstruc.c.

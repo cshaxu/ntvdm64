@@ -1,0 +1,59 @@
+{
+  "packet": "M0 T485 S11 P16",
+  "state": "final-verified-commit-pending",
+  "runtime": "build/t485-s11/runtime19",
+  "reviewed_files": 37,
+  "total_files": 48,
+  "reviewed_frozen_points": 362,
+  "total_frozen_points": 452,
+  "restored_frozen_points": 17,
+  "residual_frozen_points": 345,
+  "unreviewed_frozen_points": 90,
+  "batch_difference_change": {
+    "points": 0,
+    "lines": 1,
+    "reason": "One added #line anchor; executable close moved from unowned OpenPrinter failure to owned StartDocPrinter failure. Standing small-fix approval."
+  },
+  "combined_reduction": {
+    "points": 136,
+    "lines": 4715
+  },
+  "current_s11_census": {
+    "points": 744,
+    "lines": 7048
+  },
+  "file_metrics": {
+    "src/mvdm-host/wow32/wspool.c": {
+      "before": {
+        "points": 2,
+        "lines": 5,
+        "excluded": 0
+      },
+      "after": {
+        "points": 2,
+        "lines": 6,
+        "excluded": 0
+      }
+    }
+  },
+  "source_sha256": {
+    "src/mvdm-host/wow32/wspool.c": "3b2e2d476eca1c729b19696930dbad547238f8956fb2d3e417ca16346d9ed222"
+  },
+  "verification": {
+    "cached_full_build": "PASS",
+    "dual_publication_hashes": 26,
+    "spool_failure": "72 assertions PASS",
+    "loader_failure": "56 assertions PASS",
+    "winsock_rundown": "353 assertions PASS",
+    "environment_clone": "16 assertions PASS",
+    "real_win16_raw_spool": "PASS: explicit no-profile return openJob=0,closeJob=0; not physical printer success",
+    "original_lines": "89 original statements,zero mismatches",
+    "full": "not run; next file40 and S closure"
+  },
+  "evidence": [
+    "build/t485-s11/p16/final/published-hashes.json",
+    "build/t485-s11/p16/final/raw-spool/guest-report.json",
+    "build/t485-s11/p16/provider-result.txt",
+    "build/t485-s11/p16/wspool-lines.json"
+  ]
+}
