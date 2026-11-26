@@ -30,9 +30,9 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Original Owner Request | Execute the new T485 S repair sequence before resuming N004-G097, without excessive repeated verification. |
 | Similar-Issue Sweep | All exclusion masks, effective guards and selected bodies of each owned file; retain runtime ownership and failure semantics. |
 
-## S7 P4 Checkpoint
+## S7 P5 Checkpoint
 
-[S7 P1-P4](../etc/evidence/t485-h-repair/s7-progress.md): eight files final-verified, with residuals registered where necessary; twelve remain, next softpc.new/base/bios/reset.c. S7 non-error reduction is thirteen points/106 lines. Commit/push completes P4; S7 remains active.
+[S7 P1-P5](../etc/evidence/t485-h-repair/s7-progress.md): nine files final-verified, with residuals registered where necessary; eleven remain, next softpc.new/base/keymouse/mouse_io.c. S7 non-error reduction is 102 points/904 lines. Commit/push completes P5; S7 remains active.
 
 ## S6 Closure Record
 

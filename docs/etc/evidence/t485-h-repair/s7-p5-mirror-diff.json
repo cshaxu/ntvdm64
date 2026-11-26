@@ -1,0 +1,19 @@
+{
+  "verification": "runtime7 cached full build, dual publication and affected real guest startup gates passed",
+  "before": {
+    "lines": 802,
+    "points": 91
+  },
+  "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+  "after": {
+    "lines": 4,
+    "points": 2
+  },
+  "original_blob": "50bc67377477675d2670fc3387ac8863b2e01f43",
+  "baseline_commit": "e50cd23d4",
+  "residuals": [
+    "HXP-R-00447",
+    "HXP-R-00451"
+  ],
+  "excluded_bodies": 47
+}

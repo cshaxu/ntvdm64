@@ -340,3 +340,51 @@ No pending decision existed for R00272; its restoration is in the main ledger.
 S7:8/20 files final-verified for delivery,12remaining; reduction13points/106lines.
 Including S6:14points/107lines. Commit/push completes P4. Migration39/159.
 Next ordered file:softpc.new/base/bios/reset.c.
+
+## S7 P5 reset.c local whole-file checkpoint
+
+HXP-R-00408 through R00498 comprise91 frozen points. Current paired
+non-error metric is91points/802lines (400added/402deleted). Restored
+original whitespace/comments and both original IP adjustment statements.
+The only residuals are original #ifndef CPU_30_STYLE narrowed to
+#if !defined(CPU_30_STYLE) && !defined(CPU_40_STYLE), at XP lines782/846.
+Result2points/4lines, reduction89points/798lines. No new condition nesting.
+47 existing excluded bodies are retained by reviewed whole-body pairing;
+nested directives inside those bodies are not mistakenly paired twice.
+Original line anchors are restored across retained conditional boundaries.
+
+Necessity: guest dxutil.asm enrm20 pushes offset enrm50 and enrm31 stores
+offset enrm45, not an address before those labels. c_main.c's C4 and D6 BOP
+paths UPDATE_INTEL_IP before calling bop, then CANCEL_HOST_IP rather than
+adding another instruction length. Its next fetch therefore uses the callback's
+exact setIP. The global HOST_BOP_IP_FUDGE=-2 cannot be applied to these two
+CPU40 direct continuations. Original source algorithms and guest stay intact.
+Residuals R00447/R00451 are registered, not approved-away. The second was
+inside a larger formatting hunk; its partial restoration is not a wholly
+restored point. Source contract evidence is not a claim of real runtime hits.
+
+Candidate and reproducible original-relative measure are under
+build/t485-s7/p5/review.py, reset-before.json and reset-after.json. The
+baseline is pinned to e50cd23d4, source blob50bc67377477675d2670fc3387ac8863b2e01f43.
+Background build/publish/targeted startup runner PID6736 is recorded in
+build/t485-s7/p5/run.json. No P5 delivery is claimed yet. S7 delivered8/20,
+reduction13/106; this local candidate adds89/798, making prospective102/904.
+
+### S7 P5 final-package delivery receipt
+
+The same final runtime7 passed cached full build, dual publication and
+13-image hash verification. Real WINMINE, Win3.1 standard and enhanced,
+Win95 and DOS4GW/NESticle passed. Both enhanced/Win95 test invocations
+include the strict Alt+Enter round trip; NESticle has actual menu pixels
+and Escape hide/restore witnesses. Win95 normal-exit=False is the previously
+approved exit boundary, not a claim of exit0. These startup gates do not
+prove actual execution of both rare CMOS-reset continuations; their retained
+CPU40 predicate is justified by the explicit caller/provider source contract.
+Evidence is build/t485-s7/p5/final, verification-result.txt and run.json.
+
+[Final measure](s7-p5-mirror-diff.json):91points/802lines ->2points/4lines;
+reduction89points/798lines. Frozen91points reconcile as89 complete restores
+and2 minimized residuals. No guest source or binary was changed. S7 totals:
+9/20 files final-verified for delivery,11remaining; cumulative reduction
+102points/904lines. Including S6:103points/905lines. Migration39/159.
+Commit/push completes P5; next ordered file is base/keymouse/mouse_io.c.
