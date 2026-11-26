@@ -31,12 +31,13 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Similar-Issue Sweep | Whole-file harmless restorations, normalized-exact bytes, exclusion framework and diagnostic mappings. |
 ## S8 Ordered Progress
 
-[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 68/851 reviewed,
-783 remain. P1 bd86c7f40 delivered seven files. P2 completes 61 ordered
-format/metadata/line reconciliations; cached full build, dual publication and real NTVDMD/MEM targeted verification
-passed on runtime2. Non-error reduction: 17 points/57 lines total,
-2/6 delivered and 15/51 local. Fifteen newline-only files are separate.
-P2 final-verified; commit/push pending; next file follows inc/exterr.h.
+[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 123/851 reviewed,
+728 remain. P1 bd86c7f40 and P2 f7501056b delivered 68 files. P3's 55 files
+are final-verified: cached full build, dual 13-image hash-verified publication,
+real NTVDMD/MEM lifecycle and DOS4GW/NESticle menu roundtrip passed on runtime3.
+Commit/push completes P3 delivery. Non-error reduction totals 68 points/176 lines;
+P3 contributes 51/119. Thirty-three newline-only restorations are separate.
+Next file is softpc.new/base/ccpu386/aaa.c. S8 remains active; N004 stays gated.
 ## S7 Closure Record
 
 [S7 closure](../etc/evidence/t485-h-repair/s7-progress.md), delivered through a1f5bff4b.

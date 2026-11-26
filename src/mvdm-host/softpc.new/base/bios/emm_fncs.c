@@ -1,9 +1,7 @@
 #include "insignia.h"
 #include "host_def.h"
 
-#line 4
 #ifdef	SUN_VA
-#line 5
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
 #line 10
@@ -68,13 +66,7 @@ AMMENDMENTS	:
 
 
 #ifdef SEGMENTATION
-#line 71
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 78
 
@@ -95,7 +87,6 @@ AMMENDMENTS	:
 #include "timeval.h"
 #include "debug.h"
 #ifndef PROD
-#line 96
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 98
@@ -105,7 +96,6 @@ AMMENDMENTS	:
 
 /*	Global Variables		*/
 #ifdef SCCSID
-#line 104
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 106
@@ -117,7 +107,6 @@ IMPORT void dma_lim_setup IPT0();
 IMPORT void host_get_access_key IPT1(unsigned short *, access_key);
 
 #if defined(A2CPU) && defined(DELTA)
-#line 114
 #error Excluded unsupported A2CPU configuration
 #endif /* A2CPU && DELTA */
 #line 116
@@ -137,13 +126,11 @@ static unsigned short alt_map_segment,	/* segment address of map array	*/
 		      			/* in function 28		*/
 
 #ifndef NTVDM
-#line 132
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 137
 
 #ifndef PROD
-#line 139
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 142
@@ -184,13 +171,11 @@ LOCAL void Increment_Address IPT4(unsigned short *,seg_or_page,
 			      unsigned long, increment_by,
 			      unsigned char, memory_type);
 #ifndef PROD
-#line 179
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 182
 
 #if defined(NEC_98)
-#line 184
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 186
@@ -227,14 +212,12 @@ void (*emm_func[]) () = {
 	Prepare_Expanded_Memory_HW_For_Warm_Boot,
 	Enable_Disable_OSE_Function_Set_Functions
 #ifndef PROD
-#line 219
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 222
 	};
 
 #ifndef PROD
-#line 225
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 262
@@ -242,7 +225,6 @@ void (*emm_func[]) () = {
 /* Defintion of this is non-standard */
 
 #ifndef min
-#line 266
 #error Unsupported configuration: min must be provided by the host headers
 #endif
 #line 268
@@ -266,16 +248,14 @@ DESCRIPTION	: uses a function jump table to call the appropriate
 GLOBAL void emm_io IFN0()
 
 {	
-	int func_num; 
+	int func_num;
 
 #if defined(NEC_98)
-#line 291
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 293
 	if(getAH() >= MIN_FUNC_NO && getAH() <= MAX_FUNC_NO) {
 #endif // !NEC_98
-#line 295
 
 		func_num = getAH() - MIN_FUNC_NO;
 
@@ -283,20 +263,17 @@ GLOBAL void emm_io IFN0()
 		func_names[func_num],getAX(),getBX(),getCX(),getDX());
 
 #ifdef EMM_DEBUG
-#line 302
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
+#line 306
 #if defined(NEC_98)
-#line 307
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 312
 		(*emm_func[func_num])();	
 #endif // !NEC_98
-#line 314
 
 #ifdef EMM_DEBUG
-#line 316
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 #line 320
@@ -317,13 +294,7 @@ GLOBAL void emm_io IFN0()
 }
 
 #ifdef SEGMENTATION
-#line 337
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 344
 
@@ -344,20 +315,18 @@ DESCRIPTION	: DS:DX contains the segment:offset of the bop68 call
 =========================================================================
 */
 
- 
+
 GLOBAL void emm_init IFN0()
 
 {
 	short	total_pages;
 
 #ifdef GISP_SVGA
-#line 369
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 #line 381
 
 #ifdef	SUN_VA
-#line 383
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
 #line 389
@@ -365,13 +334,12 @@ GLOBAL void emm_init IFN0()
 #if	defined(SUN_VA) || defined(NTVDM)
 	SHORT limSize, backFill;
 #endif
-#line 393
 
 	segment68 = getDS();
 	offset68 = getDX();
 
 #ifdef	SUN_VA
-#line 398
+
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif	/* SUN_VA	*/
 #line 451
@@ -395,7 +363,6 @@ GLOBAL void emm_init IFN0()
 	}
 
 #endif	/* NTVDM */
-#line 471
 
 	total_pages = get_total_pages();
 	setBX(total_pages);
@@ -407,7 +374,6 @@ GLOBAL void emm_init IFN0()
 	{
 		dma_lim_setup();
 #if defined(A2CPU) && defined(DELTA)
-#line 482
 #error Excluded unsupported A2CPU configuration
 #endif /* A2CPU && DELTA */
 #line 484
@@ -417,13 +383,7 @@ GLOBAL void emm_init IFN0()
 	
 
 #ifdef SEGMENTATION
-#line 490
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 497
 
@@ -464,7 +424,7 @@ PURPOSE		: Returns the segment address where the page frame is
 RETURNED STATUS	: in AH register
 		SUCCESS - Allocation successful
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -487,7 +447,7 @@ PURPOSE		: Returns the number of unallocated (available) expanded
 RETURNED STATUS	: in AH register
 		SUCCESS - Allocation successful
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -511,11 +471,11 @@ PURPOSE		: Allocates a number of Expanded Memory Pages to the next
 RETURNED STATUS	: in AH register
 		SUCCESS - Allocation successful
 		NOT_ENOUGH_PAGES - not enough pages in the system
-		NO_MORE_PAGES - not enough free pages available  
+		NO_MORE_PAGES - not enough free pages available
 		NO_MORE_HANDLES - no more free handles available
 		EMM_HW_ERROR - memory allocation error
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -581,7 +541,7 @@ RETURNED STATUS	: in AH register
 		EMM_HW_ERROR - unable to map/unmap for some unspecified
 				reason
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -650,7 +610,7 @@ LOCAL void Map_Unmap_Handle_Pages IFN0()
 
 FUNCTION	: Deallocate_Pages
 
-PURPOSE		: Deallocates all pages assigned to the specified handle 
+PURPOSE		: Deallocates all pages assigned to the specified handle
 		number, freeing them for further use, also frees the handle
 		number itself.
 
@@ -660,7 +620,7 @@ RETURNED STATUS	: in AH register
 		MAP_SAVED - there is a map context saved in this handle
 		EMM_HW_ERROR - unable to free page or memory
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -723,7 +683,7 @@ PURPOSE		: Returns the version number of the memory manager software
 RETURNED STATUS	: in AH register
 		SUCCESS - returned successfuly
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -748,7 +708,7 @@ RETURNED STATUS	: in AH register
 		BAD_HANDLE - couldn't find specified handle
 		MAP_IN_USE - mapping already saved for this handle
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -792,7 +752,7 @@ RETURNED STATUS	: in AH register
 		NO_MAP - No map has been saved for this handle
 		EMM_HW_ERROR - error occurred in mapping or unmapping
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -842,15 +802,15 @@ LOCAL void Restore_Page_Map IFN0()
 /*
 ===========================================================================
 
-FUNCTION	: 
+FUNCTION	:
 
-PURPOSE		: 
+PURPOSE		:
 
 
 RETURNED STATUS	: in AH register
-		SUCCESS - 
+		SUCCESS -
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -871,7 +831,7 @@ PURPOSE		: Returns the number of open EMM handles
 RETURNED STATUS	: in AH register
 		SUCCESS - number returned successfuly
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -895,7 +855,7 @@ RETURNED STATUS	: in AH register
 		SUCCESS - Page count returned successfuly
 		BAD_HANDLE - couldn't find specified handle
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -928,7 +888,7 @@ PURPOSE		: Returns a list of all open handles and the number of
 RETURNED STATUS	: in AH register
 		SUCCESS - Everything ok
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -981,7 +941,7 @@ RETURNED STATUS	: in AH register
 		BAD_SUB_FUNC - Invalid sub-function
 		BAD_MAP - The contents of the map are a load of cak
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -1062,7 +1022,7 @@ RETURNED STATUS	: in AH register
 		BAD_MAP - The contents of the map are a load of cak
 
 DESCRIPTION	: Note in this implementation the size of array used for
-		storing the partial mapping context is the same as for 
+		storing the partial mapping context is the same as for
 		storing a full context as the pages that are'nt specified
 		are marked in the array as being empty
 
@@ -1148,7 +1108,7 @@ RETURNED STATUS	: in AH register
 		EMM_HW_ERROR - unable to map/unmap for some unspecified
 				reason
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -1261,7 +1221,7 @@ RETURNED STATUS	: in AH register
 		NO_MORE_PAGES - not enough free pages available
 		EMM_HW_ERROR - memory allocation error
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -1333,7 +1293,7 @@ LOCAL void Reallocate_Pages IFN0()
 
 FUNCTION	: Get_Set_Handle_Attribute
 
-PURPOSE		: 
+PURPOSE		:
 
 
 RETURNED STATUS	: in AH register
@@ -1383,7 +1343,7 @@ RETURNED STATUS	: in AH register
 		BAD_SUB_FUNC -Invalid sub-function code
 		NAME_EXISTS - Name already exists in another handle
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -1467,7 +1427,7 @@ RETURNED STATUS	: in AH register
 		BAD_SUB_FUNC - Invalid sub-function
 		HANDLE_NOT_FOUND - could not find handle with specified name
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -1553,7 +1513,7 @@ RETURNED STATUS	: in AH register
 		EMM_HW_ERROR - Unable to map or unmap for some undefined
 				reason
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -1816,7 +1776,7 @@ LOCAL void Alter_Page_Map_And_Call IFN0()
 		}
 		/*
 		 * Push segment:offset of bop68 onto stack to trap far return
-		 */	 
+		 */	
 		push_word(segment68);
 		push_word(offset68);
 		/*
@@ -1910,7 +1870,7 @@ LOCAL void Move_Exchange_Memory_Region IFN0()
 			src_end,	/* end of src within handle	*/
 			dst_start,	/* start of dest within handle	*/
 			dst_end,	/* end of dest within handle	*/
-			data_block_size,/* transfer data block size     */ 
+			data_block_size,/* transfer data block size     */
 			bytes_available;/* no. bytes to end of handle	*/
 
 	short		src_handle_no,	/* source handle number		*/
@@ -2052,7 +2012,7 @@ LOCAL void Move_Exchange_Memory_Region IFN0()
 		if(src_handle_no == dst_handle_no)
 		{
 			/*
-			 * calc start and end positions of src and dst 
+			 * calc start and end positions of src and dst
 			 * within handle
 			 */
 			src_start = (src_seg_page * EMM_PAGE_SIZE) + src_offset;
@@ -2067,17 +2027,17 @@ LOCAL void Move_Exchange_Memory_Region IFN0()
 		    			setAH(XCHG_MEM_OVERLAP);
 		    			return;
 		    		}
-		    		else 
+		    		else
 		    			overlap = TRUE;
 		    	}
 		}
 	/*
-	 * If we get here everything is ok. Copy memory a page at a time, catering 
+	 * If we get here everything is ok. Copy memory a page at a time, catering
 	 * for the fact that expanded memory pages might not be contiguous and may be
-	 * mapped into the intel address space.  Remember that Intel memory may be 
+	 * mapped into the intel address space.  Remember that Intel memory may be
 	 * treated as contiguous memory.  So an Intel address need only be incremented
 	 * if a copy spans more than one page of LIM memory.
-	 */ 
+	 */
 
 	while (length>0) {
 		int min_src, min_dst;
@@ -2118,7 +2078,7 @@ PURPOSE		: Increments an address, correctly catering for whether the address
 
 RETURNED STATUS	: None
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -2167,7 +2127,7 @@ RETURNED STATUS	: in AH register
 		SUCCESS - Everything ok
 		BAD_SUB_FUNC - The sub function is invalid
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -2246,7 +2206,7 @@ RETURNED STATUS	: in AH register
 		BAD_SUB_FUNC - invalid sub-function
 		ACCESS_DENIED - the OS has denied access to this function
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -2277,7 +2237,6 @@ LOCAL void Get_Hardware_Configuration_Array IFN0()
 
 			write_intel_word(segment, offset, get_no_altreg_sets());
 #else
-#line 2348
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 2350
@@ -2319,13 +2278,13 @@ PURPOSE		: Allocates the requested number of raw pages, in this case
 RETURNED STATUS	: in AH register
 		SUCCESS - Allocation successful
 		NOT_ENOUGH_PAGES - not enough pages in the system
-		NO_MORE_PAGES - not enough free pages available  
+		NO_MORE_PAGES - not enough free pages available
 		NO_MORE_HANDLES - no more free handles available
 		EMM_HW_ERROR - memory allocation error
 
 		BAD_FUNC_CODE - invalid function code
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -2376,7 +2335,7 @@ LOCAL void Allocate_Raw_Pages IFN0()
 
 FUNCTION	: Alternate_Map_Register_Support();
 
-PURPOSE		: provides an alternate method of saving and restoring 
+PURPOSE		: provides an alternate method of saving and restoring
 		mapping contexts
 
 RETURNED STATUS	: in AH register
@@ -2386,7 +2345,7 @@ RETURNED STATUS	: in AH register
 		BAD_SUB_FUNC - invalid sub-function code
 		ACCESS_DENIED - the OS has denied access to this function
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -2513,7 +2472,6 @@ LOCAL void Alternate_Map_Register_Support IFN0()
     return;
 
 #else
-#line 2582
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 2680
@@ -2525,10 +2483,10 @@ LOCAL void Alternate_Map_Register_Support IFN0()
 
 FUNCTION	: Prepare_Expanded_Memory_HW_For_Warm_Boot
 
-PURPOSE		: 
+PURPOSE		:
 
 RETURNED STATUS	: in AH register
-		SUCCESS - 
+		SUCCESS -
 
 DESCRIPTION	: We don't actually do anything here, we just pretend
 		 that we do
@@ -2546,7 +2504,7 @@ LOCAL void Prepare_Expanded_Memory_HW_For_Warm_Boot IFN0()
 
 FUNCTION	: Enable_Disable_OSE_Function_Set_Functions
 
-PURPOSE		: Enables or disables the functions:- 
+PURPOSE		: Enables or disables the functions:-
 			Get Expanded Memory Hardware Information,
 			Alternate Map Register Sets
 			Enable Disable OS/E Function Set Functions
@@ -2556,7 +2514,7 @@ RETURNED STATUS	: in AH register
 		BAD_SUB_FUNC - invalid sub-function code
 		ACCESS_DENIED - the OS has denied access to this function
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -2625,7 +2583,7 @@ PURPOSE		: sets up variables to their initial value, used mainly
 
 RETURNED STATUS	: none
 
-DESCRIPTION	: 
+DESCRIPTION	:
 
 =========================================================================
 */
@@ -2638,7 +2596,6 @@ GLOBAL void reset_emm_funcs IFN0()
 	alt_map_segment = 0;
 	alt_map_offset  = 0;
 #ifndef NTVDM
-#line 2801
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 2803
@@ -2647,13 +2604,11 @@ GLOBAL void reset_emm_funcs IFN0()
 }
 
 #ifndef PROD
-#line 2808
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 2848
 #if defined(NEC_98)
-#line 2849
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 2865
 #endif /* LIM */
-#line 2602

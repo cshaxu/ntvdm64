@@ -20,9 +20,7 @@
 
 typedef WORD    MMVER16;      // major (high byte), minor (low byte)
 
-#line 23
 #ifndef _INC_MMSYSTEM
-#line 24
 #error Excluded unsupported missing _INC_MMSYSTEM SDK profile
 #endif
 #line 27
@@ -774,7 +772,6 @@ typedef MMCALLPROC3216 UNALIGNED *PMMCALLPROC3216;
 
 
 #ifdef NULLSTRUCT
-#line 775
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 #line 779
@@ -811,7 +808,6 @@ typedef STACKLEAVE16 UNALIGNED *PSTACKLEAVE16;
 ------------------------------------------------------------------------------*/
 
 #ifdef NULLSTRUCT
-#line 812
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 #line 816
@@ -866,7 +862,6 @@ typedef struct _JOYSETCALIBRATION16 {          /* mm109 */
 typedef JOYSETCALIBRATION16 UNALIGNED *PJOYSETCALIBRATION16;
 
 #ifdef NULLSTRUCT
-#line 867
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 #line 871
@@ -974,7 +969,6 @@ typedef struct _MIDIOUTMESSAGE3216 {             /* mm216 */
 typedef MIDIOUTMESSAGE3216 UNALIGNED *PMIDIOUTMESSAGE3216;
 
 #ifdef NULLSTRUCT
-#line 975
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 #line 979
@@ -1058,7 +1052,6 @@ typedef struct _MIDIINMESSAGE3216 {              /* mm313 */
 typedef MIDIINMESSAGE3216 UNALIGNED *PMIDIINMESSAGE3216;
 
 #ifdef NULLSTRUCT
-#line 1059
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 #line 1063
@@ -1091,7 +1084,6 @@ typedef struct _AUXOUTMESSAGE3216 {              /* mm354 */
 typedef AUXOUTMESSAGE3216 UNALIGNED *PAUXOUTMESSAGE3216;
 
 #ifdef NULLSTRUCT
-#line 1092
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 #line 1096
@@ -1224,7 +1216,6 @@ typedef struct _WAVEOUTMESSAGE3216 {             /* mm421 */
 typedef WAVEOUTMESSAGE3216 UNALIGNED *PWAVEOUTMESSAGE3216;
 
 #ifdef NULLSTRUCT
-#line 1225
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 #line 1229
@@ -1322,7 +1313,6 @@ typedef struct _TIMEGETSYSTEMTIME16 {          /* mm601 */
 typedef TIMEGETSYSTEMTIME16 UNALIGNED *PTIMEGETSYSTEMTIME16;
 
 #ifdef NULLSTRUCT
-#line 1323
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 #line 1327

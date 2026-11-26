@@ -191,3 +191,146 @@ publish-result.txt,test-result.txt,debug-live/trace.txt}. No Full claim.
 68/851 final-verified, 783 remain. P2 reduces 15 non-error points/51 lines;
 S8 cumulative reduction 17/57 including delivered P1. Fifteen newline-only
 restorations remain separate. P2 commit/push is the final delivery step.
+
+P2 delivered and pushed as f7501056b.
+
+## P3 shared headers
+
+- src/mvdm-host/inc/intapi.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/monregs.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/netb.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/oemuni.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/pif.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/rdrexp.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/rdrsvc.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/sharewow.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/sources.inc: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/tdb16.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/usa/makefile: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/usa/makefile.inc: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/usa/sources: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/v86def.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/vint.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/vrdefld.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/vrdlctab.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/vrinit.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/vrmisc.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/vrmslot.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+- src/mvdm-host/inc/vrremote.h: 0/0 -> 0/0; fixed XP bytes verified; exact or newline-only restoration.
+
+89/851 reviewed, 762 remain. 68 delivered; 21 local P3 exact reconciliations. Non-error reduction remains 17 points/57 lines, all delivered. Eleven P3 newline restorations bring the total to 26. Next inc/wow.h requires branch-aware line reconciliation; it is not counted reviewed. No build triggered for these newline-only changes.
+
+### P3 WOW header completion
+
+| File under inc | Points/lines before -> after | Conclusion |
+| --- | --- | --- |
+| wow.h | 0/0 -> 0/0 | Twelve old line anchors corrected by +67 to exact XP positions; branches unchanged |
+| wowclip.h | 0/0 -> 0/0 | Original newline bytes |
+| wowcmpat.h | 0/0 -> 0/0 | Exact unchanged |
+| wowcomm.h | 0/0 -> 0/0 | Existing UNALIGNED error only; original retained text |
+| wowfax.h | 0/0 -> 0/0 | Three existing exclusion bodies compacted; original outer guards and XP lines |
+| wowgdi.h | 0/0 -> 0/0 | Exact unchanged |
+| wowinfo.h | 0/0 -> 0/0 | Existing UNALIGNED exclusion; remove empty/obsolete interior anchors |
+| wowmmcb.h | 0/0 -> 0/0 | Existing UNALIGNED exclusion; original retained text |
+| wowmmed.h | 0/0 -> 0/0 | Nine existing exclusions; original retained declarations and XP lines |
+| wowshell.h | 0/0 -> 0/0 | Exact unchanged |
+| wowth.h | 0/0 -> 0/0 | Original newline bytes |
+
+The wow.h anchors map to XP 1279/1280/1282, 1311/1313/1320,
+1347/1349/1359 and 1390/1392/1401; no macro or conditional changed.
+For wowfax.h and wowinfo.h the original nested bodies remain wholly excluded,
+with their original outer conditions retained. All other retained declarations
+come from fixed original bytes; no new exclusions were added. Evidence:
+build/t485-s8/wow-headers-reconcile.json and wow-nested-reconcile.json.
+
+100/851 reviewed, 751 remain; 68 delivered, 32 P3 local. Non-error reduction
+remains 17/57, all previously delivered. Newline-only total 28. No new build
+or runtime pass is claimed for this accumulated format/line batch.
+### P3 remaining shared headers and BIOS entry
+
+| File under src/mvdm-host | Points/lines before -> after | Conclusion |
+| --- | --- | --- |
+| inc/wowwife.h | 0/0 -> 0/0 | Exact unchanged |
+| inc/wowwsock.h | 0/0 -> 0/0 | Original newline bytes |
+| inc/xmsexp.h | 0/0 -> 0/0 | Original newline bytes |
+| inc/xmssvc.h | 0/0 -> 0/0 | Original newline bytes |
+| oemuni/daytona/makefile | 0/0 -> 0/0 | Exact unchanged |
+| oemuni/daytona/sources | 0/0 -> 0/0 | Exact unchanged |
+| oemuni/dirs | 2/16 -> 0/0 | Restore original comments and unconsumed directory list |
+| oemuni/oem.h | 0/0 -> 0/0 | Original newline bytes |
+| oemuni/sources.inc | 0/0 -> 0/0 | Exact unchanged |
+| softpc.new/base/bios/bios.c | 1/4 -> 0/0 | Original retained formatting and XP anchors; same 61 excluded arms |
+| softpc.new/base/bios/build_id.c | 0/0 -> 0/0 | Original newline bytes |
+| softpc.new/base/bios/cmos_bis.c | 0/0 -> 0/0 | Original retained text and same two exclusions |
+
+bios.c was matched sequentially against fixed XP: each error-only arm skips
+exactly its original body to the corresponding depth-matched else/endif;
+every other nonblank line matches original apart from indentation. The same
+comparison passes after reconstruction. No BOP entry, selected statement or
+condition was changed; no excluded body was restored. Evidence:
+build/t485-s8/bios-exclusions.json and bios-tail-reconcile.json. HXP-R-00273,
+00274 and 00359 are restored locally, not final-package certified yet.
+
+112/851 reviewed, 739 remain; 68 delivered, 44 local P3 reconciliations.
+Non-error reduction total 20 points/77 lines: delivered 17/57, local 3/20.
+Newline-only restorations total 33. P3 continues to accumulate formatting,
+metadata and diagnostic-only changes without a new build claim.
+### P3 BIOS control and EMS formatting
+
+| File under softpc.new/base/bios | Points/lines before -> after | Conclusion |
+| --- | --- | --- |
+| cntlbop.c | 0/0 -> 0/0 | Eight existing exclusions; original retained formatting and XP lines |
+| daytona/makefile | 0/0 -> 0/0 | Exact unchanged |
+| daytona/sources | 0/0 -> 0/0 | Exact unchanged |
+| dirs | 2/7 -> 0/0 | Restore unconsumed original language directory metadata |
+| emm_fncs.c | 46/92 -> 0/0 | Restore original indentation/blank lines; preserve 27 excluded arms |
+
+Sequential depth-aware original comparison passes before and after both C
+reconstructions. Every nonblank retained line equals XP apart from indentation;
+only original excluded bodies are skipped to matching conditional boundaries.
+The 46 EMS entries are formatting, not memory-algorithm modifications.
+Evidence: build/t485-s8/{cntlbop,emm}-exclusions.json and matching check scripts.
+No new runtime behavior, exclusion or build profile was introduced.
+
+117/851 reviewed, 734 remain; 68 delivered, 49 local P3 reconciliations.
+Cumulative reduction 68 points/176 lines: delivered 17/57, local 51/119.
+Newline-only total remains 33. Next: softpc.new/base/bios/equipmnt.c.
+P3 remains an accumulated format/metadata/line batch; no new test pass claimed.
+### P3 BIOS directory completion and delivery launch
+
+| File under softpc.new/base/bios | Points/lines before -> after | Conclusion |
+| --- | --- | --- |
+| equipmnt.c | 0/0 -> 0/0 | Same one excluded arm; original retained lines |
+| ill_bop.c | 0/0 -> 0/0 | Same five excluded arms; original retained lines |
+| mem_size.c | 0/0 -> 0/0 | Same two excluded arms; original retained lines |
+| rom_basc.c | 0/0 -> 0/0 | Same one excluded arm; original retained lines |
+| rtc_bios.c | 0/0 -> 0/0 | Same one excluded arm; original retained lines |
+| sources.inc | 0/0 -> 0/0 | Fixed original byte identity unchanged |
+
+Before/after depth-aware comparisons pass for all five C files. Only existing
+error bodies and diagnostic anchors differ from XP; no additional exclusion or
+selected algorithm changed. The P3 batch now contains 55 complete reconciliations
+following the 68 delivered P1/P2 files. Cached full build/dual publication runs
+through build/t485-s8/p3/deliver.ps1; tests and commit/push remain pending.
+
+123/851 reviewed, 728 remain. Reduction remains 68 points/176 lines total:
+17/57 delivered, 51/119 local P3. Newline-only total 33. Next file is
+softpc.new/base/ccpu386/aaa.c after P3 delivery.### P3 final verification
+
+All 55 files in ordered positions 69-123 are final-verified. Source comparison
+against pinned XP objects confirms original retained nonblank code and the same
+existing error directives; no excluded body is admitted. Format and diagnostic
+anchors change only as recorded above. No product algorithm or ABI changed.
+`build/t485-s8/p3/source-check.json` records final SHA256 identities.
+
+Cached full build and dual publication passed. All 13 manifest images match at
+assets/release and O:/WINNT/SYSTEM32 (26 comparisons recorded in published-hashes.json).
+Runtime3 passed the real MEM/NTVDMD export, debugger-event/register writeback,
+allocation rollback and termination witness, and the real DOS4GW/NESticle menu
+hide/restore pixel oracle. Evidence: p3/debug-live/{trace,result}.txt and
+p3/dos4gw/nesticle.txt.graphics-result.json. This is targeted acceptance, not Full.
+
+Batch reduction: 51 non-error points and 119 added-plus-deleted mirror lines.
+S8 cumulative: 68 points/176 lines; newline-only restorations: 33 files separately.
+123/851 source-reviewed and final-verified, 728 remain. Commit/push completes P3;
+next is softpc.new/base/ccpu386/aaa.c. No new retain decision was introduced.

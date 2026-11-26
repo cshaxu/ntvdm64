@@ -15,12 +15,8 @@
 
 #ifdef SEGMENTATION
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 24
 
 
 /*

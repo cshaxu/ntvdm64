@@ -17,6 +17,7 @@
 #ifndef UNALIGNED    // this makes UNALIGNED visible only to 32-bit stuff
 #error T476-S1: branch not selected by product build
 #endif
+#line 20
 
 /* XLATOFF */
 #pragma pack(1)

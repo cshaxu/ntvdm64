@@ -22,12 +22,8 @@
 
 #ifdef SEGMENTATION
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 31
 
 
 /*
@@ -45,12 +41,10 @@
 #include "sas.h"
 #include "equip.h"
 
-#line 48
 void equipment()
 {
     EQUIPMENT_WORD equip_flag;
 
     sas_loadw(EQUIP_FLAG, &equip_flag.all);
-#line 53
     setAX(equip_flag.all);
 }

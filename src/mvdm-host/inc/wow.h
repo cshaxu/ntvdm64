@@ -1273,12 +1273,12 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 
 /* Old window messages (changed from Win 3.x)
  */
-#line 1212
+#line 1279
 #ifndef WM_USER
-#line 1213
+#line 1280
 #error Excluded unsupported missing WM_USER SDK profile
 #endif
-#line 1215
+#line 1282
 
 #define OLDEM_GETSEL            (WM_USER+0)
 #define OLDEM_SETSEL            (WM_USER+1)
@@ -1308,10 +1308,10 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDEM_SETPASSWORDCHAR       (WM_USER+28)
 #define OLDEM_EMPTYUNDOBUFFER       (WM_USER+29)
 #ifndef WIN31
-#line 1244
+#line 1311
 #error Unsupported excluded original configuration
 #else
-#line 1246
+#line 1313
 #define OLDEM_GETFIRSTVISIBLELINE (WM_USER+30)
 #define OLDEM_SETREADONLY       (WM_USER+31)
 #define OLDEM_SETWORDBREAKPROC  (WM_USER+32)
@@ -1319,7 +1319,7 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDEM_GETPASSWORDCHAR   (WM_USER+34)
 #define OLDEM_MSGMAX            (WM_USER+35)
 #endif
-#line 1253
+#line 1320
 
 #define OLDBM_GETCHECK          (WM_USER+0)
 #define OLDBM_SETCHECK          (WM_USER+1)
@@ -1347,10 +1347,10 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDCB_SETITEMDATA       (WM_USER+17)
 #define OLDCB_GETDROPPEDCONTROLRECT (WM_USER+18)
 #ifndef WIN31
-#line 1280
+#line 1347
 #error Unsupported excluded original configuration
 #else
-#line 1282
+#line 1349
 #define OLDCB_SETITEMHEIGHT     (WM_USER+19)
 #define OLDCB_GETITEMHEIGHT     (WM_USER+20)
 #define OLDCB_SETEXTENDEDUI     (WM_USER+21)
@@ -1361,7 +1361,7 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDCBEC_SETCOMBOFOCUS   (WM_USER+26)    /* ;Internal */
 #define OLDCBEC_KILLCOMBOFOCUS  (WM_USER+27)    /* ;Internal */
 #endif
-#line 1292
+#line 1359
 
 #define OLDLB_ADDSTRING         (WM_USER+1)
 #define OLDLB_INSERTSTRING      (WM_USER+2)
@@ -1393,10 +1393,10 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDLB_SETANCHORINDEX        (WM_USER+29)    /* ;Internal */
 #define OLDLB_GETANCHORINDEX        (WM_USER+30)    /* ;Internal */
 #ifndef WIN31
-#line 1323
+#line 1390
 #error Unsupported excluded original configuration
 #else
-#line 1325
+#line 1392
 #define OLDLB_SETCARETINDEX     (WM_USER+31)
 #define OLDLB_GETCARETINDEX     (WM_USER+32)
 #define OLDLB_SETITEMHEIGHT     (WM_USER+33)
@@ -1406,7 +1406,7 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 #define OLDLBCB_CARETOFF        (WM_USER+37)     /* ;Internal */
 #define OLDLB_MSGMAX            (WM_USER+38)     /* ;Internal */
 #endif
-#line 1334
+#line 1401
 
 #define OLDSBM_SETPOS           (WM_USER+0)
 #define OLDSBM_GETPOS           (WM_USER+1)

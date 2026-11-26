@@ -21,6 +21,7 @@
 #ifndef UNALIGNED
 #error T476-S1: branch not selected by product build
 #endif
+#line 24
 
 extern void call_ica_hw_interrupt(int, int, int);
 

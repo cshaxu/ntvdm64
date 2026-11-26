@@ -41,7 +41,7 @@ DESCRIPTION	:
 =======================================================================
 */
 #ifdef MONITOR
-#line 44
+
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 #line 64
@@ -135,4 +135,3 @@ void rtc_int(void)
 
 
 #endif   /* NTVDM */
-#line 136

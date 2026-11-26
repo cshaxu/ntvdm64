@@ -36,7 +36,6 @@ AMENDMENTS	:
 
 
 #ifdef SEGMENTATION
-#line 39
 #error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 46
@@ -49,9 +48,7 @@ AMENDMENTS	:
 #include "ios.h"
 #include "rtc_bios.h"
 
-#line 55
 #ifndef NTVDM
-#line 56
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 126

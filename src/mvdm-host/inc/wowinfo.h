@@ -19,15 +19,6 @@
 
 #ifndef UNALIGNED
 #error T476-S1: branch not selected by product build
-
-#line 23
-
-
-#line 25
-
-
-#line 27
-
 #endif
 #line 29
 

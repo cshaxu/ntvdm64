@@ -17,19 +17,12 @@
  */
 
 #ifdef SCCSID
-#line 20
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 #line 22
 
 #ifdef SEGMENTATION
-#line 24
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
 #line 31
 
@@ -54,7 +47,6 @@
 #include "virtual.h"
 #include "gispsvga.h"
 #ifdef SWIN_HFX
-#line 53
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register.
 #endif
 #line 55
@@ -67,7 +59,6 @@ extern void get_lar IPT0();
 #ifdef CPU_40_STYLE
 #define SWAP_INSTANCE virtual_swap_instance()
 #else
-#line 64
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #line 66
@@ -76,7 +67,6 @@ extern void get_lar IPT0();
    Traps for BOP's requiring virtualisation.
  */
 #ifdef SWIN_HFX
-#line 71
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register.
 #endif
 #line 73
@@ -92,38 +82,32 @@ LOCAL void v_host_mouse_install1 IFN0() {SWAP_INSTANCE; host_mouse_install1(); }
 LOCAL void v_host_mouse_install2 IFN0() {SWAP_INSTANCE; host_mouse_install2(); }
 #endif /* XWINDOW || NTVDM */
 #ifdef HFX
-#line 85
 #error Unsupported excluded original configuration
 #endif	/* HFX */
 #line 88
 LOCAL void v_mouse_EM_callback	IFN0() { SWAP_INSTANCE; mouse_EM_callback(); }
 
 #ifdef PROFILE
-#line 91
 #error DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register.
 #endif
 #line 94
 
 #ifdef SIGNAL_PROFILING
-#line 96
 #error DIVERGENCE MVDM-HOST-DIV-529: SIGNAL_PROFILING platform branch is not selected; see mirror register.
 #endif
 #line 100
 
 #if !defined(PROD) && defined(CPU_40_STYLE)
-#line 102
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif
 #line 104
 
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-#line 106
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 #line 108
 
 #ifndef PROD
-#line 110
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 113
@@ -139,23 +123,18 @@ void (*BIOS[])() = {
 			dummy_int,   	/* BOP 01 */
 			unexpected_int,	/* BOP 02 */
 #ifdef DOS_APP_LIC
-#line 125
 #error DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register.
 #else
 #line 127
 			illegal_bop,   	/* BOP 03 */
 #endif	/* DOS_APP_LIC */
-#line 129
 #ifdef WDCTRL_BOP
-#line 130
 #error Unsupported excluded WDCTRL_BOP configuration
 #else   /* WDCTRL_BOP */
 #line 132
 			illegal_bop,	/* BOP 04 */
 #endif	/* WDCTRL_BOP */
-#line 134
 #if !defined(PROD) && defined(CPU_40_STYLE)
-#line 135
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #else
 #line 137
@@ -170,7 +149,6 @@ void (*BIOS[])() = {
 #if defined(NTVDM) || defined(CPU_40_STYLE)
 			illegal_bop,   	/* BOP 08 */
 #else /* !(NTVDM || CPU_40_STYLE) */
-#line 169
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* !(NTVDM || CPU_40_STYLE) */
 #line 171
@@ -198,7 +176,6 @@ void (*BIOS[])() = {
 /* NT port, kill vdm instance, instead of warmbooting */
 			terminate,
 #else
-#line 195
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 197
@@ -210,58 +187,47 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 1E */
 			illegal_bop,	/* BOP 1F */
 #if  defined(RDCHK) && !defined(PROD)
-#line 205
 #error Unsupported excluded original BIOS configuration
 #else
 #line 207
 			illegal_bop,	/* BOP 20 */
 #endif
-#line 209
 			Get_build_id,	/* BOP 21 */
 #ifdef WIN_VTD
-#line 211
 #error Unsupported excluded original BIOS configuration
 #else
 #line 213
 			illegal_bop,	/* BOP 22 */
 #endif /* WIN_VTD */
-#line 215
 			illegal_bop,	/* BOP 23 */
 			illegal_bop,	/* BOP 24 */
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-#line 218
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 #line 220
 			illegal_bop,	/* BOP 25 */
 #endif /* CPU_40_STYLE */
-#line 222
 			illegal_bop,	/* BOP 26 */
 			illegal_bop,	/* BOP 27 */
 			illegal_bop,	/* BOP 28 */
 			illegal_bop,	/* BOP 29 */
 			illegal_bop,	/* BOP 2A */
 #ifndef NTVDM
-#line 228
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM */
 #line 231
                         illegal_bop,    /* BOP 2B */
                         illegal_bop,    /* BOP 2C */
 #endif /* NTVDM */
-#line 234
 			illegal_bop,	/* BOP 2D */
 #ifdef HFX
-#line 236
 #error Unsupported excluded original HFX BIOS configuration
 #else
 #line 239
 			illegal_bop,	/* BOP 2E */
 			illegal_bop,	/* BOP 2F */
 #endif
-#line 242
 #ifdef DPMI
-#line 243
 #error Unsupported excluded original DPMI BIOS configuration
 #else
 #line 248
@@ -270,20 +236,8 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 32 */
 			illegal_bop,	/* BOP 33 */
 #endif /* DPMI */
-#line 253
 #ifdef NOVELL
-#line 254
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
-
-
-
-
-
-
-
-
-
-
 #else	/* NOVELL */
 #line 275
 			illegal_bop,	/* BOP 34 */
@@ -309,9 +263,9 @@ void (*BIOS[])() = {
 #ifdef EGG
 			ega_video_io,	/* BOP 42 */
 #else
-#line 297
 #error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register.
 #endif
+#line 299
 #if defined(NEC_98)
 #error Unsupported NEC PC-98 BIOS configuration
 #else  // !NEC_98
@@ -319,6 +273,7 @@ void (*BIOS[])() = {
 #ifdef JAPAN
 #error Unsupported Japanese DOS/V BIOS configuration
 #elif defined(KOREA) // !JAPAN
+#line 305
 #error Unsupported Korean DOS BIOS configuration
 #else // !KOREA
 #line 310
@@ -331,7 +286,6 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 47 */
 			illegal_bop,	/* BOP 48 */
 #ifdef DPMI
-#line 319
 #error Unsupported excluded original DPMI BIOS configuration
 #else
 #line 323
@@ -339,12 +293,10 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 4A */
 			illegal_bop,	/* BOP 4B */
 #endif /* DPMI */
-#line 327
 			illegal_bop,	/* BOP 4C */
 			illegal_bop,	/* BOP 4D */
 			illegal_bop,	/* BOP 4E */
 			illegal_bop,	/* BOP 4F */
-#line 331
 #ifdef NTVDM
 /*
    Note that this precludes SMEG and NT existing together which seems
@@ -367,7 +319,6 @@ void (*BIOS[])() = {
 			MS_bop_E,	/* BOP 5E - MS reserved */
 			MS_bop_F,	/* BOP 5F - MS reserved */
 #else
-#line 353
 #error Non-NTVDM BIOS or EMS provider is not supported
 #endif /* NTVDM */
 #line 383
@@ -375,66 +326,53 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 61 */
 			illegal_bop,	/* BOP 62 */
 #ifdef PTY
-#line 387
 #error Unsupported excluded original PTY BIOS configuration
 #else
 #line 389
 			illegal_bop,	/* BOP 63 */
 #endif
-#line 391
 			illegal_bop,	/* BOP 64 */
 #ifdef PC_CONFIG
-#line 393
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #else
 #line 395
 			illegal_bop,	/* BOP 65 */
 #endif
-#line 397
 #ifdef LIM
 			emm_init,	/* BOP 66 */
 			emm_io,		/* BOP 67 */
 			return_from_call, /* BOP 68 */
 #else			
-#line 402
 #error DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register.
 #endif			
 #line 406
 #ifdef SUSPEND
-#line 407
 #error Unsupported excluded original SUSPEND BIOS configuration
 #else
 #line 410
 			illegal_bop,	/* BOP 69 */
 			illegal_bop,	/* BOP 6A */
 #endif
-#line 413
 #ifdef GEN_DRVR
-#line 414
 #error Unsupported excluded original GEN_DRVR BIOS configuration
 #else
 #line 416
 			illegal_bop,	/* BOP 6B */
 #endif
-#line 418
 #ifdef SUSPEND
-#line 419
 #error Unsupported excluded original SUSPEND BIOS configuration
 #else
 #line 421
 			illegal_bop,	/* BOP 6C */
 #endif
-#line 423
 			illegal_bop,	/* BOP 6D */
 			illegal_bop,	/* BOP 6E */
 #ifdef CDROM
-#line 426
 #error Unsupported excluded original CDROM BIOS configuration
 #else
 #line 428
 			illegal_bop,	/* BOP 6F */
 #endif
-#line 430
 
 #if defined(NEC_98)
 #error Unsupported NEC PC-98 BIOS configuration
@@ -443,7 +381,6 @@ void (*BIOS[])() = {
 #ifdef NTVDM
                         rtc_int,        /* BOP 70 */
 #else
-#line 444
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 446
@@ -456,14 +393,12 @@ void (*BIOS[])() = {
 			D11_int,	/* BOP 77 */
 #endif // !NEC_98
 #ifndef NTVDM
-#line 455
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM */
 #line 458
 			illegal_bop,	/* BOP 78 */
 			illegal_bop,	/* BOP 79 */
 #endif /* NTVDM */
-#line 461
 			illegal_bop,	/* BOP 7A */
 			illegal_bop,	/* BOP 7B */
 			illegal_bop,	/* BOP 7C */
@@ -493,13 +428,11 @@ void (*BIOS[])() = {
 			illegal_bop,	 /* BOP 91 */
 			illegal_bop,	 /* BOP 92 */
 #else
-#line 490
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #line 494
 
 #ifdef SWINAPI
-#line 496
 #error DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register.
 #else /* SWINAPI */
 #line 500
@@ -508,12 +441,10 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 94 */
 			illegal_bop,	/* BOP 95 */
 #endif /* SWINAPI */
-#line 505
 
 			illegal_bop,	/* BOP 96 */
 			illegal_bop,	/* BOP 97 */
 #ifdef MSWDVR
-#line 509
 #error Unsupported excluded original BIOS configuration
 #else
 #line 514
@@ -522,35 +453,27 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 9A */
 			illegal_bop,	/* BOP 9B */
 #endif
-#line 519
 #if	defined(SOFTWIN_API) || defined(SWIN_HFX)
-#line 520
 #error Unsupported excluded original SoftWindows BIOS configuration
 #else
 #line 523
 			illegal_bop,	/* BOP 9C */
 			illegal_bop,	/* BOP 9D */
 #endif	/* SOFTWIN_API or SWIN_HFX */
-#line 526
 #if	defined(SOFTWIN_API)
-#line 527
 #error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #else
 #line 529
 			illegal_bop,	/* BOP 9E */
 #endif	/* SOFTWIN_API */
-#line 531
 #ifdef SWIN_HAW
-#line 532
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #else
 #line 534
 			illegal_bop,	/* BOP 9F */
 #endif /* SWIN_HAW */
-#line 536
 
 #ifdef	NOVELL_IPX
-#line 538
 #error Unsupported excluded original BIOS configuration
 #else	/* NOVELL_IPX */
 #line 543
@@ -559,10 +482,8 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP A2 */
 			illegal_bop,	/* BOP A3 */
 #endif	/* NOVELL_IPX */
-#line 548
 
 #ifdef	NOVELL_TCPIP
-#line 550
 #error Unsupported excluded original BIOS configuration
 #else	/* NOVELL_TCPIP */
 #line 553
@@ -571,21 +492,17 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP A5 */
 
 #endif	/* NOVELL_TCPIP */
-#line 558
 
 #ifdef WINSOCK
-#line 560
 #error Unsupported excluded original BIOS configuration
 #else /* WINSOCK */
 #line 563
                         illegal_bop,    /* BOP A6 */
                         illegal_bop,    /* BOP A7 */
-#endif /* WINSOCK */ 
-#line 566
-			illegal_bop,	/* BOP A8 */ 
+#endif /* WINSOCK */
+			illegal_bop,	/* BOP A8 */
 			illegal_bop,	/* BOP A9 */
 #ifdef SWIN_HFX
-#line 569
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register.
 #else
 #line 573
@@ -593,10 +510,8 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP AB */
 			illegal_bop,	/* BOP AC */
 #endif
-#line 577
 
 #ifdef	MSWDVR
-#line 579
 #error Unsupported excluded original BIOS configuration
 #else
 #line 584
@@ -605,12 +520,10 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP AF */
 			illegal_bop,	/* BOP B0 */
 #endif
-#line 589
 
 #ifdef CPU_40_STYLE
 			virtual_device_trap,	/* BOP B1 */
 #else
-#line 593
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 #line 595
@@ -640,7 +553,6 @@ void (*BIOS[])() = {
 			v_host_mouse_install1,	/* BOP C8 */ /* host_mouse_install1 */
 			v_host_mouse_install2,	/* BOP C9 */ /* host_mouse_install2 */
 #else
-#line 621
 #error Unsupported excluded original host mouse configuration
 #endif /* defined(XWINDOW) || defined(NTVDM) */
 #line 629
@@ -651,18 +563,15 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP CE */
 			illegal_bop,	/* BOP CF */
 #ifdef PROFILE
-#line 636
 #error DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register.
 #else
 #line 639
 			illegal_bop,	/* BOP D0 */
 			illegal_bop,	/* BOP D1 */
 #endif
-#line 642
 			illegal_bop,	/* BOP D2 */
 			illegal_bop,	/* BOP D3 */
 #ifdef SIGNAL_PROFILING
-#line 645
 #error DIVERGENCE MVDM-HOST-DIV-529: SIGNAL_PROFILING platform branch is not selected; see mirror register.
 #else
 #line 649
@@ -670,7 +579,6 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP D5 */
 			illegal_bop,	/* BOP D6 */
 #endif
-#line 653
 			illegal_bop,	/* BOP D7 */
 			illegal_bop,	/* BOP D8 */
 			illegal_bop,	/* BOP D9 */
@@ -706,14 +614,12 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP F7 */
 
 #ifndef PROD
-#line 688
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #else
 #line 691
 			illegal_bop,	/* BOP F8 */
 			illegal_bop,	/* BOP F9 */
 #endif
-#line 694
 #ifndef GISP_CPU
 			illegal_bop,	/* BOP FA */
 			illegal_bop,	/* BOP FB */
@@ -721,24 +627,18 @@ void (*BIOS[])() = {
 #if defined(NTVDM) && defined(MONITOR)
                         switch_to_real_mode,	/* BOP FD */
 #else
-#line 701
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM && MONITOR */
 #line 703
 #if !defined(LDBIOS) && !defined(CPU_30_STYLE)
                         host_unsimulate,/* BOP FE */
 #else
-#line 706
 #error Excluded unsupported LDBIOS or CPU30 BIOS continuation
-
-
-
-
 #endif	/* !LDBIOS && !CPU_30_STYLE */
 #line 712
 
 #else /* ndef GISP_CPU */
-#line 714
+
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_CPU alternative is not selected; see mirror register.
 #endif	/* GISP_CPU */
 #line 726
@@ -752,7 +652,6 @@ void (*BIOS[])() = {
 
 
 #ifndef PROD
-#line 736
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 #line 944

@@ -38,31 +38,8 @@
 
 #ifdef DEBUG
 #error T476-S1: branch not selected by product build
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #endif // #define(DEBUG)
+#line 66
 
 // WOWFAX component file names. Unicode and ANSII
 #define WOWFAX_DLL_NAME L"WOWFAX.DLL"
@@ -77,35 +54,8 @@
 
 #if  defined(_WOWFAX16_)
 #error T476-S1: branch not selected by product build
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#line 93
-
-
-#line 95
-
-
-#line 97
-
-
-#line 99
-
-
 #endif       // defined(wowfax16)
-#line 102
+#line 104
 
 //***************************************************************************
 // WOWFAXINFO16  common to wow16 and wow32
@@ -169,6 +119,7 @@ typedef WOWFAXINFO16 UNALIGNED FAR *LPWOWFAXINFO16;
 #ifndef _DEF_WOW32_
 #error T476-S1: branch not selected by product build
 #endif
+#line 167
 
 typedef struct _GDIINFO16{  /* gdii16 */
     short int dpVersion;
