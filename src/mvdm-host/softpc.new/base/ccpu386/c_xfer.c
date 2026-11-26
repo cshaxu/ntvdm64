@@ -141,7 +141,7 @@ IFN1(
       new_dest &= WORD_MASK;
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-#line 144
+
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 149
@@ -152,15 +152,13 @@ IFN1(
        * version of a i486.
        */
 
-#line 156
 #ifdef TAKE_PROT_MODE_LIMIT_FAILURE
-#line 157
+
 #error Optional CCPU relative-jump limit profile is not supported
 #endif /* TAKE_PROT_MODE_LIMIT_FAILURE */
 #line 174
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 176
 
    SET_EIP(new_dest);
    took_relative_jump = TRUE;
@@ -203,7 +201,6 @@ IFN6(
    AR = spr_read_byte(cs_descr_addr+5);
 
    /* validate possible types of target */
-#line 218
    switch ( super = descriptor_super_type((IU16)AR) )
       {
    case CONFORM_NOREAD_CODE:

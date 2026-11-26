@@ -84,7 +84,6 @@ IPT1(
    );
 
 #ifdef PIG
-#line 87
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 #line 94
@@ -97,7 +96,6 @@ IPT1(
    );
 
 #ifdef PIG
-#line 103
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 #line 110

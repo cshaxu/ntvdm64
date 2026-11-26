@@ -33,9 +33,8 @@ CMPXCHG CPU functions.
  */
 
 
-#line 36
 #ifdef SPC486
-#line 37
+
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 123

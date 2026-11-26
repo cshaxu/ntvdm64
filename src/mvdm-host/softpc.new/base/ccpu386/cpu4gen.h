@@ -188,7 +188,7 @@ extern	struct	CpuVector	Cpu;
 IMPORT	void	c_cpu_simulate	IPT0();
 #define	cpu_simulate	c_cpu_simulate
 #else	/* CCPU */
-#line 191
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 199
@@ -197,7 +197,7 @@ IMPORT	void	c_cpu_simulate	IPT0();
 IMPORT	void	c_cpu_interrupt	IPT2(CPU_INT_TYPE, intType, IU16, intNum);
 #define	cpu_interrupt	c_cpu_interrupt
 #else	/* CCPU */
-#line 204
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 212
@@ -206,7 +206,7 @@ IMPORT	void	c_cpu_interrupt	IPT2(CPU_INT_TYPE, intType, IU16, intNum);
 IMPORT	void	c_cpu_clearHwInt	IPT0();
 #define	cpu_clearHwInt	c_cpu_clearHwInt
 #else	/* CCPU */
-#line 217
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 225
@@ -215,7 +215,7 @@ IMPORT	void	c_cpu_clearHwInt	IPT0();
 IMPORT	void	c_cpu_EOA_hook	IPT0();
 #define	cpu_EOA_hook	c_cpu_EOA_hook
 #else	/* CCPU */
-#line 230
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 238
@@ -224,7 +224,7 @@ IMPORT	void	c_cpu_EOA_hook	IPT0();
 IMPORT	void	c_cpu_terminate	IPT0();
 #define	cpu_terminate()	c_cpu_terminate()
 #else	/* CCPU */
-#line 243
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 251
@@ -233,7 +233,7 @@ IMPORT	void	c_cpu_terminate	IPT0();
 IMPORT	void	c_cpu_init	IPT0();
 #define	cpu_init	c_cpu_init
 #else	/* CCPU */
-#line 256
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 264
@@ -242,7 +242,7 @@ IMPORT	void	c_cpu_init	IPT0();
 IMPORT	IU32	c_effective_addr	IPT2(IU16, seg, IU32, offset);
 #define	effective_addr(seg, offset)	c_effective_addr(seg, offset)
 #else	/* CCPU */
-#line 269
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 277
@@ -251,7 +251,7 @@ IMPORT	IU32	c_effective_addr	IPT2(IU16, seg, IU32, offset);
 IMPORT	void	c_cpu_q_ev_set_count	IPT1(IU32, val);
 #define	host_q_ev_set_count	c_cpu_q_ev_set_count
 #else	/* CCPU */
-#line 282
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 290
@@ -260,7 +260,7 @@ IMPORT	void	c_cpu_q_ev_set_count	IPT1(IU32, val);
 IMPORT	IU32	c_cpu_q_ev_get_count	IPT0();
 #define	host_q_ev_get_count	c_cpu_q_ev_get_count
 #else	/* CCPU */
-#line 295
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 303
@@ -269,7 +269,7 @@ IMPORT	IU32	c_cpu_q_ev_get_count	IPT0();
 IMPORT	void	c_cpu_init_ios_in	IPT4(IHP, InTables, IHP, OutTables, IUH, maxAdaptor, IU16, portMask);
 #define	cpu_init_ios_in	c_cpu_init_ios_in
 #else	/* CCPU */
-#line 308
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 316
@@ -278,7 +278,7 @@ IMPORT	void	c_cpu_init_ios_in	IPT4(IHP, InTables, IHP, OutTables, IUH, maxAdapto
 IMPORT	void	c_cpu_define_inb	IPT2(IUH, adaptor, IHP, func);
 #define	ios_define_inb	c_cpu_define_inb
 #else	/* CCPU */
-#line 321
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 329
@@ -287,7 +287,7 @@ IMPORT	void	c_cpu_define_inb	IPT2(IUH, adaptor, IHP, func);
 IMPORT	void	c_cpu_define_inw	IPT2(IUH, adaptor, IHP, func);
 #define	ios_define_inw	c_cpu_define_inw
 #else	/* CCPU */
-#line 334
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 342
@@ -296,7 +296,7 @@ IMPORT	void	c_cpu_define_inw	IPT2(IUH, adaptor, IHP, func);
 IMPORT	void	c_cpu_define_ind	IPT2(IUH, adaptor, IHP, func);
 #define	ios_define_ind	c_cpu_define_ind
 #else	/* CCPU */
-#line 347
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 355
@@ -305,7 +305,7 @@ IMPORT	void	c_cpu_define_ind	IPT2(IUH, adaptor, IHP, func);
 IMPORT	void	c_cpu_define_outb	IPT2(IUH, adaptor, IHP, func);
 #define	ios_define_outb	c_cpu_define_outb
 #else	/* CCPU */
-#line 360
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 368
@@ -314,7 +314,7 @@ IMPORT	void	c_cpu_define_outb	IPT2(IUH, adaptor, IHP, func);
 IMPORT	void	c_cpu_define_outw	IPT2(IUH, adaptor, IHP, func);
 #define	ios_define_outw	c_cpu_define_outw
 #else	/* CCPU */
-#line 373
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 381
@@ -323,7 +323,7 @@ IMPORT	void	c_cpu_define_outw	IPT2(IUH, adaptor, IHP, func);
 IMPORT	void	c_cpu_define_outd	IPT2(IUH, adaptor, IHP, func);
 #define	ios_define_outd	c_cpu_define_outd
 #else	/* CCPU */
-#line 386
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 394
@@ -332,7 +332,7 @@ IMPORT	void	c_cpu_define_outd	IPT2(IUH, adaptor, IHP, func);
 IMPORT	void	c_setAL	IPT1(IU8, val);
 #define	setAL(val)	c_setAL(val)
 #else	/* CCPU */
-#line 399
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 409
@@ -341,7 +341,7 @@ IMPORT	void	c_setAL	IPT1(IU8, val);
 IMPORT	void	c_setAH	IPT1(IU8, val);
 #define	setAH(val)	c_setAH(val)
 #else	/* CCPU */
-#line 414
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 424
@@ -350,7 +350,7 @@ IMPORT	void	c_setAH	IPT1(IU8, val);
 IMPORT	void	c_setAX	IPT1(IU16, val);
 #define	setAX(val)	c_setAX(val)
 #else	/* CCPU */
-#line 429
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 439
@@ -359,7 +359,7 @@ IMPORT	void	c_setAX	IPT1(IU16, val);
 IMPORT	void	c_setEAX	IPT1(IU32, val);
 #define	setEAX(val)	c_setEAX(val)
 #else	/* CCPU */
-#line 444
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 454
@@ -368,7 +368,7 @@ IMPORT	void	c_setEAX	IPT1(IU32, val);
 IMPORT	void	c_setBL	IPT1(IU8, val);
 #define	setBL(val)	c_setBL(val)
 #else	/* CCPU */
-#line 459
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 469
@@ -377,7 +377,7 @@ IMPORT	void	c_setBL	IPT1(IU8, val);
 IMPORT	void	c_setBH	IPT1(IU8, val);
 #define	setBH(val)	c_setBH(val)
 #else	/* CCPU */
-#line 474
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 484
@@ -386,7 +386,7 @@ IMPORT	void	c_setBH	IPT1(IU8, val);
 IMPORT	void	c_setBX	IPT1(IU16, val);
 #define	setBX(val)	c_setBX(val)
 #else	/* CCPU */
-#line 489
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 499
@@ -395,7 +395,7 @@ IMPORT	void	c_setBX	IPT1(IU16, val);
 IMPORT	void	c_setEBX	IPT1(IU32, val);
 #define	setEBX(val)	c_setEBX(val)
 #else	/* CCPU */
-#line 504
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 514
@@ -404,7 +404,7 @@ IMPORT	void	c_setEBX	IPT1(IU32, val);
 IMPORT	void	c_setCL	IPT1(IU8, val);
 #define	setCL(val)	c_setCL(val)
 #else	/* CCPU */
-#line 519
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 529
@@ -413,7 +413,7 @@ IMPORT	void	c_setCL	IPT1(IU8, val);
 IMPORT	void	c_setCH	IPT1(IU8, val);
 #define	setCH(val)	c_setCH(val)
 #else	/* CCPU */
-#line 534
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 544
@@ -422,7 +422,7 @@ IMPORT	void	c_setCH	IPT1(IU8, val);
 IMPORT	void	c_setCX	IPT1(IU16, val);
 #define	setCX(val)	c_setCX(val)
 #else	/* CCPU */
-#line 549
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 559
@@ -431,7 +431,7 @@ IMPORT	void	c_setCX	IPT1(IU16, val);
 IMPORT	void	c_setECX	IPT1(IU32, val);
 #define	setECX(val)	c_setECX(val)
 #else	/* CCPU */
-#line 564
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 574
@@ -440,7 +440,7 @@ IMPORT	void	c_setECX	IPT1(IU32, val);
 IMPORT	void	c_setDL	IPT1(IU8, val);
 #define	setDL(val)	c_setDL(val)
 #else	/* CCPU */
-#line 579
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 589
@@ -449,7 +449,7 @@ IMPORT	void	c_setDL	IPT1(IU8, val);
 IMPORT	void	c_setDH	IPT1(IU8, val);
 #define	setDH(val)	c_setDH(val)
 #else	/* CCPU */
-#line 594
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 604
@@ -458,7 +458,7 @@ IMPORT	void	c_setDH	IPT1(IU8, val);
 IMPORT	void	c_setDX	IPT1(IU16, val);
 #define	setDX(val)	c_setDX(val)
 #else	/* CCPU */
-#line 609
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 619
@@ -467,7 +467,7 @@ IMPORT	void	c_setDX	IPT1(IU16, val);
 IMPORT	void	c_setEDX	IPT1(IU32, val);
 #define	setEDX(val)	c_setEDX(val)
 #else	/* CCPU */
-#line 624
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 634
@@ -476,7 +476,7 @@ IMPORT	void	c_setEDX	IPT1(IU32, val);
 IMPORT	void	c_setSI	IPT1(IU16, val);
 #define	setSI(val)	c_setSI(val)
 #else	/* CCPU */
-#line 639
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 649
@@ -485,7 +485,7 @@ IMPORT	void	c_setSI	IPT1(IU16, val);
 IMPORT	void	c_setESI	IPT1(IU32, val);
 #define	setESI(val)	c_setESI(val)
 #else	/* CCPU */
-#line 654
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 664
@@ -494,7 +494,7 @@ IMPORT	void	c_setESI	IPT1(IU32, val);
 IMPORT	void	c_setDI	IPT1(IU16, val);
 #define	setDI(val)	c_setDI(val)
 #else	/* CCPU */
-#line 669
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 679
@@ -503,7 +503,7 @@ IMPORT	void	c_setDI	IPT1(IU16, val);
 IMPORT	void	c_setEDI	IPT1(IU32, val);
 #define	setEDI(val)	c_setEDI(val)
 #else	/* CCPU */
-#line 684
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 694
@@ -512,7 +512,7 @@ IMPORT	void	c_setEDI	IPT1(IU32, val);
 IMPORT	void	c_setSP	IPT1(IU16, val);
 #define	setSP(val)	c_setSP(val)
 #else	/* CCPU */
-#line 699
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 707
@@ -521,7 +521,7 @@ IMPORT	void	c_setSP	IPT1(IU16, val);
 IMPORT	void	c_setESP	IPT1(IU32, val);
 #define	setESP(val)	c_setESP(val)
 #else	/* CCPU */
-#line 712
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 720
@@ -530,7 +530,7 @@ IMPORT	void	c_setESP	IPT1(IU32, val);
 IMPORT	void	c_setBP	IPT1(IU16, val);
 #define	setBP(val)	c_setBP(val)
 #else	/* CCPU */
-#line 725
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 735
@@ -539,7 +539,7 @@ IMPORT	void	c_setBP	IPT1(IU16, val);
 IMPORT	void	c_setEBP	IPT1(IU32, val);
 #define	setEBP(val)	c_setEBP(val)
 #else	/* CCPU */
-#line 740
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 750
@@ -548,7 +548,7 @@ IMPORT	void	c_setEBP	IPT1(IU32, val);
 IMPORT	void	c_setIP	IPT1(IU16, val);
 #define	setIP(val)	c_setIP(val)
 #else	/* CCPU */
-#line 755
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 763
@@ -557,17 +557,16 @@ IMPORT	void	c_setIP	IPT1(IU16, val);
 IMPORT	void	c_setEIP	IPT1(IU32, val);
 #define	setEIP(val)	c_setEIP(val)
 #else	/* CCPU */
-#line 768
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 776
 
 #ifdef	CCPU
 IMPORT	IUH	c_setCS	IPT1(IU16, val);
-#line 779
 #define	setCS(val)	c_setCS(val)
 #else	/* CCPU */
-#line 781
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 789
@@ -576,7 +575,7 @@ IMPORT	IUH	c_setCS	IPT1(IU16, val);
 IMPORT	IUH	c_setSS	IPT1(IU16, val);
 #define	setSS(val)	c_setSS(val)
 #else	/* CCPU */
-#line 794
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 802
@@ -585,7 +584,7 @@ IMPORT	IUH	c_setSS	IPT1(IU16, val);
 IMPORT	IUH	c_setDS	IPT1(IU16, val);
 #define	setDS(val)	c_setDS(val)
 #else	/* CCPU */
-#line 807
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 815
@@ -594,7 +593,7 @@ IMPORT	IUH	c_setDS	IPT1(IU16, val);
 IMPORT	IUH	c_setES	IPT1(IU16, val);
 #define	setES(val)	c_setES(val)
 #else	/* CCPU */
-#line 820
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 828
@@ -603,7 +602,7 @@ IMPORT	IUH	c_setES	IPT1(IU16, val);
 IMPORT	IUH	c_setFS	IPT1(IU16, val);
 #define	setFS(val)	c_setFS(val)
 #else	/* CCPU */
-#line 833
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 841
@@ -612,7 +611,7 @@ IMPORT	IUH	c_setFS	IPT1(IU16, val);
 IMPORT	IUH	c_setGS	IPT1(IU16, val);
 #define	setGS(val)	c_setGS(val)
 #else	/* CCPU */
-#line 846
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 854
@@ -621,7 +620,7 @@ IMPORT	IUH	c_setGS	IPT1(IU16, val);
 IMPORT	void	c_setEFLAGS	IPT1(IU32, val);
 #define	setEFLAGS(val)	c_setEFLAGS(val)
 #else	/* CCPU */
-#line 859
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 867
@@ -630,7 +629,7 @@ IMPORT	void	c_setEFLAGS	IPT1(IU32, val);
 IMPORT	void	c_setSTATUS	IPT1(IU16, val);
 #define	setSTATUS(val)	c_setSTATUS(val)
 #else	/* CCPU */
-#line 872
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 880
@@ -639,7 +638,7 @@ IMPORT	void	c_setSTATUS	IPT1(IU16, val);
 IMPORT	void	c_setIOPL	IPT1(IU8, val);
 #define	setIOPL(val)	c_setIOPL(val)
 #else	/* CCPU */
-#line 885
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 893
@@ -648,7 +647,7 @@ IMPORT	void	c_setIOPL	IPT1(IU8, val);
 IMPORT	void	c_setMSW	IPT1(IU16, val);
 #define	setMSW(val)	c_setMSW(val)
 #else	/* CCPU */
-#line 898
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 906
@@ -657,7 +656,7 @@ IMPORT	void	c_setMSW	IPT1(IU16, val);
 IMPORT	void	c_setCR0	IPT1(IU32, val);
 #define	setCR0(val)	c_setCR0(val)
 #else	/* CCPU */
-#line 911
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 919
@@ -666,7 +665,7 @@ IMPORT	void	c_setCR0	IPT1(IU32, val);
 IMPORT	void	c_setCR2	IPT1(IU32, val);
 #define	setCR2(val)	c_setCR2(val)
 #else	/* CCPU */
-#line 924
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 932
@@ -675,7 +674,7 @@ IMPORT	void	c_setCR2	IPT1(IU32, val);
 IMPORT	void	c_setCR3	IPT1(IU32, val);
 #define	setCR3(val)	c_setCR3(val)
 #else	/* CCPU */
-#line 937
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 945
@@ -684,7 +683,7 @@ IMPORT	void	c_setCR3	IPT1(IU32, val);
 IMPORT	void	c_setCF	IPT1(IBOOL, val);
 #define	setCF(val)	c_setCF(val)
 #else	/* CCPU */
-#line 950
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 958
@@ -693,7 +692,7 @@ IMPORT	void	c_setCF	IPT1(IBOOL, val);
 IMPORT	void	c_setPF	IPT1(IBOOL, val);
 #define	setPF(val)	c_setPF(val)
 #else	/* CCPU */
-#line 963
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 971
@@ -702,7 +701,7 @@ IMPORT	void	c_setPF	IPT1(IBOOL, val);
 IMPORT	void	c_setAF	IPT1(IBOOL, val);
 #define	setAF(val)	c_setAF(val)
 #else	/* CCPU */
-#line 976
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 984
@@ -711,7 +710,7 @@ IMPORT	void	c_setAF	IPT1(IBOOL, val);
 IMPORT	void	c_setZF	IPT1(IBOOL, val);
 #define	setZF(val)	c_setZF(val)
 #else	/* CCPU */
-#line 989
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 997
@@ -720,7 +719,7 @@ IMPORT	void	c_setZF	IPT1(IBOOL, val);
 IMPORT	void	c_setSF	IPT1(IBOOL, val);
 #define	setSF(val)	c_setSF(val)
 #else	/* CCPU */
-#line 1002
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1010
@@ -729,7 +728,7 @@ IMPORT	void	c_setSF	IPT1(IBOOL, val);
 IMPORT	void	c_setTF	IPT1(IBOOL, val);
 #define	setTF(val)	c_setTF(val)
 #else	/* CCPU */
-#line 1015
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1023
@@ -738,7 +737,7 @@ IMPORT	void	c_setTF	IPT1(IBOOL, val);
 IMPORT	void	c_setIF	IPT1(IBOOL, val);
 #define	setIF(val)	c_setIF(val)
 #else	/* CCPU */
-#line 1028
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1036
@@ -747,7 +746,7 @@ IMPORT	void	c_setIF	IPT1(IBOOL, val);
 IMPORT	void	c_setDF	IPT1(IBOOL, val);
 #define	setDF(val)	c_setDF(val)
 #else	/* CCPU */
-#line 1041
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1049
@@ -756,7 +755,7 @@ IMPORT	void	c_setDF	IPT1(IBOOL, val);
 IMPORT	void	c_setOF	IPT1(IBOOL, val);
 #define	setOF(val)	c_setOF(val)
 #else	/* CCPU */
-#line 1054
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1062
@@ -765,7 +764,7 @@ IMPORT	void	c_setOF	IPT1(IBOOL, val);
 IMPORT	void	c_setNT	IPT1(IBOOL, val);
 #define	setNT(val)	c_setNT(val)
 #else	/* CCPU */
-#line 1067
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1075
@@ -774,7 +773,7 @@ IMPORT	void	c_setNT	IPT1(IBOOL, val);
 IMPORT	void	c_setRF	IPT1(IBOOL, val);
 #define	setRF(val)	c_setRF(val)
 #else	/* CCPU */
-#line 1080
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1088
@@ -783,7 +782,7 @@ IMPORT	void	c_setRF	IPT1(IBOOL, val);
 IMPORT	void	c_setVM	IPT1(IBOOL, val);
 #define	setVM(val)	c_setVM(val)
 #else	/* CCPU */
-#line 1093
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1101
@@ -792,7 +791,7 @@ IMPORT	void	c_setVM	IPT1(IBOOL, val);
 IMPORT	void	c_setAC	IPT1(IBOOL, val);
 #define	setAC(val)	c_setAC(val)
 #else	/* CCPU */
-#line 1106
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1114
@@ -801,7 +800,7 @@ IMPORT	void	c_setAC	IPT1(IBOOL, val);
 IMPORT	void	c_setPE	IPT1(IBOOL, val);
 #define	setPE(val)	c_setPE(val)
 #else	/* CCPU */
-#line 1119
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1127
@@ -810,7 +809,7 @@ IMPORT	void	c_setPE	IPT1(IBOOL, val);
 IMPORT	void	c_setMP	IPT1(IBOOL, val);
 #define	setMP(val)	c_setMP(val)
 #else	/* CCPU */
-#line 1132
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1140
@@ -819,7 +818,7 @@ IMPORT	void	c_setMP	IPT1(IBOOL, val);
 IMPORT	void	c_setEM	IPT1(IBOOL, val);
 #define	setEM(val)	c_setEM(val)
 #else	/* CCPU */
-#line 1145
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1153
@@ -828,7 +827,7 @@ IMPORT	void	c_setEM	IPT1(IBOOL, val);
 IMPORT	void	c_setTS	IPT1(IBOOL, val);
 #define	setTS(val)	c_setTS(val)
 #else	/* CCPU */
-#line 1158
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1166
@@ -837,7 +836,7 @@ IMPORT	void	c_setTS	IPT1(IBOOL, val);
 IMPORT	void	c_setPG	IPT1(IBOOL, val);
 #define	setPG(val)	c_setPG(val)
 #else	/* CCPU */
-#line 1171
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1179
@@ -846,7 +845,7 @@ IMPORT	void	c_setPG	IPT1(IBOOL, val);
 IMPORT	void	c_setLDT_SELECTOR	IPT1(IU16, val);
 #define	setLDT_SELECTOR(val)	c_setLDT_SELECTOR(val)
 #else	/* CCPU */
-#line 1184
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1192
@@ -855,7 +854,7 @@ IMPORT	void	c_setLDT_SELECTOR	IPT1(IU16, val);
 IMPORT	void	c_setTR_SELECTOR	IPT1(IU16, val);
 #define	setTR_SELECTOR(val)	c_setTR_SELECTOR(val)
 #else	/* CCPU */
-#line 1197
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1205
@@ -864,7 +863,7 @@ IMPORT	void	c_setTR_SELECTOR	IPT1(IU16, val);
 IMPORT	IU8	c_getAL	IPT0();
 #define	getAL()	c_getAL()
 #else	/* CCPU */
-#line 1210
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1218
@@ -873,7 +872,7 @@ IMPORT	IU8	c_getAL	IPT0();
 IMPORT	IU8	c_getAH	IPT0();
 #define	getAH()	c_getAH()
 #else	/* CCPU */
-#line 1223
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1231
@@ -882,7 +881,7 @@ IMPORT	IU8	c_getAH	IPT0();
 IMPORT	IU16	c_getAX	IPT0();
 #define	getAX()	c_getAX()
 #else	/* CCPU */
-#line 1236
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1244
@@ -891,7 +890,7 @@ IMPORT	IU16	c_getAX	IPT0();
 IMPORT	IU32	c_getEAX	IPT0();
 #define	getEAX()	c_getEAX()
 #else	/* CCPU */
-#line 1249
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1257
@@ -900,7 +899,7 @@ IMPORT	IU32	c_getEAX	IPT0();
 IMPORT	IU8	c_getBL	IPT0();
 #define	getBL()	c_getBL()
 #else	/* CCPU */
-#line 1262
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1270
@@ -909,7 +908,7 @@ IMPORT	IU8	c_getBL	IPT0();
 IMPORT	IU8	c_getBH	IPT0();
 #define	getBH()	c_getBH()
 #else	/* CCPU */
-#line 1275
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1283
@@ -918,7 +917,7 @@ IMPORT	IU8	c_getBH	IPT0();
 IMPORT	IU16	c_getBX	IPT0();
 #define	getBX()	c_getBX()
 #else	/* CCPU */
-#line 1288
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1296
@@ -927,7 +926,7 @@ IMPORT	IU16	c_getBX	IPT0();
 IMPORT	IU32	c_getEBX	IPT0();
 #define	getEBX()	c_getEBX()
 #else	/* CCPU */
-#line 1301
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1309
@@ -936,7 +935,7 @@ IMPORT	IU32	c_getEBX	IPT0();
 IMPORT	IU8	c_getCL	IPT0();
 #define	getCL()	c_getCL()
 #else	/* CCPU */
-#line 1314
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1322
@@ -945,7 +944,7 @@ IMPORT	IU8	c_getCL	IPT0();
 IMPORT	IU8	c_getCH	IPT0();
 #define	getCH()	c_getCH()
 #else	/* CCPU */
-#line 1327
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1335
@@ -954,7 +953,7 @@ IMPORT	IU8	c_getCH	IPT0();
 IMPORT	IU16	c_getCX	IPT0();
 #define	getCX()	c_getCX()
 #else	/* CCPU */
-#line 1340
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1348
@@ -963,7 +962,7 @@ IMPORT	IU16	c_getCX	IPT0();
 IMPORT	IU32	c_getECX	IPT0();
 #define	getECX()	c_getECX()
 #else	/* CCPU */
-#line 1353
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1361
@@ -972,7 +971,7 @@ IMPORT	IU32	c_getECX	IPT0();
 IMPORT	IU8	c_getDL	IPT0();
 #define	getDL()	c_getDL()
 #else	/* CCPU */
-#line 1366
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1374
@@ -981,7 +980,7 @@ IMPORT	IU8	c_getDL	IPT0();
 IMPORT	IU8	c_getDH	IPT0();
 #define	getDH()	c_getDH()
 #else	/* CCPU */
-#line 1379
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1387
@@ -990,7 +989,7 @@ IMPORT	IU8	c_getDH	IPT0();
 IMPORT	IU16	c_getDX	IPT0();
 #define	getDX()	c_getDX()
 #else	/* CCPU */
-#line 1392
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1400
@@ -999,7 +998,7 @@ IMPORT	IU16	c_getDX	IPT0();
 IMPORT	IU32	c_getEDX	IPT0();
 #define	getEDX()	c_getEDX()
 #else	/* CCPU */
-#line 1405
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1413
@@ -1008,7 +1007,7 @@ IMPORT	IU32	c_getEDX	IPT0();
 IMPORT	IU16	c_getSI	IPT0();
 #define	getSI()	c_getSI()
 #else	/* CCPU */
-#line 1418
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1426
@@ -1017,7 +1016,7 @@ IMPORT	IU16	c_getSI	IPT0();
 IMPORT	IU32	c_getESI	IPT0();
 #define	getESI()	c_getESI()
 #else	/* CCPU */
-#line 1431
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1439
@@ -1026,7 +1025,7 @@ IMPORT	IU32	c_getESI	IPT0();
 IMPORT	IU16	c_getDI	IPT0();
 #define	getDI()	c_getDI()
 #else	/* CCPU */
-#line 1444
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1452
@@ -1035,7 +1034,7 @@ IMPORT	IU16	c_getDI	IPT0();
 IMPORT	IU32	c_getEDI	IPT0();
 #define	getEDI()	c_getEDI()
 #else	/* CCPU */
-#line 1457
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1465
@@ -1044,7 +1043,7 @@ IMPORT	IU32	c_getEDI	IPT0();
 IMPORT	IU16	c_getSP	IPT0();
 #define	getSP()	c_getSP()
 #else	/* CCPU */
-#line 1470
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1478
@@ -1053,7 +1052,7 @@ IMPORT	IU16	c_getSP	IPT0();
 IMPORT	IU32	c_getESP	IPT0();
 #define	getESP()	c_getESP()
 #else	/* CCPU */
-#line 1483
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1491
@@ -1062,7 +1061,7 @@ IMPORT	IU32	c_getESP	IPT0();
 IMPORT	IU16	c_getBP	IPT0();
 #define	getBP()	c_getBP()
 #else	/* CCPU */
-#line 1496
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1504
@@ -1071,7 +1070,7 @@ IMPORT	IU16	c_getBP	IPT0();
 IMPORT	IU32	c_getEBP	IPT0();
 #define	getEBP()	c_getEBP()
 #else	/* CCPU */
-#line 1509
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1517
@@ -1080,7 +1079,7 @@ IMPORT	IU32	c_getEBP	IPT0();
 IMPORT	IU16	c_getIP	IPT0();
 #define	getIP()	c_getIP()
 #else	/* CCPU */
-#line 1522
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1530
@@ -1089,7 +1088,7 @@ IMPORT	IU16	c_getIP	IPT0();
 IMPORT	IU32	c_getEIP	IPT0();
 #define	getEIP()	c_getEIP()
 #else	/* CCPU */
-#line 1535
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1543
@@ -1098,7 +1097,7 @@ IMPORT	IU32	c_getEIP	IPT0();
 IMPORT	IU16	c_getCS	IPT0();
 #define	getCS()	c_getCS()
 #else	/* CCPU */
-#line 1548
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1556
@@ -1107,7 +1106,7 @@ IMPORT	IU16	c_getCS	IPT0();
 IMPORT	IU16	c_getSS	IPT0();
 #define	getSS()	c_getSS()
 #else	/* CCPU */
-#line 1561
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1569
@@ -1116,7 +1115,7 @@ IMPORT	IU16	c_getSS	IPT0();
 IMPORT	IU16	c_getDS	IPT0();
 #define	getDS()	c_getDS()
 #else	/* CCPU */
-#line 1574
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1582
@@ -1125,7 +1124,7 @@ IMPORT	IU16	c_getDS	IPT0();
 IMPORT	IU16	c_getES	IPT0();
 #define	getES()	c_getES()
 #else	/* CCPU */
-#line 1587
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1595
@@ -1134,7 +1133,7 @@ IMPORT	IU16	c_getES	IPT0();
 IMPORT	IU16	c_getFS	IPT0();
 #define	getFS()	c_getFS()
 #else	/* CCPU */
-#line 1600
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1608
@@ -1143,7 +1142,7 @@ IMPORT	IU16	c_getFS	IPT0();
 IMPORT	IU16	c_getGS	IPT0();
 #define	getGS()	c_getGS()
 #else	/* CCPU */
-#line 1613
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1621
@@ -1152,7 +1151,7 @@ IMPORT	IU16	c_getGS	IPT0();
 IMPORT	IU32	c_getEFLAGS	IPT0();
 #define	getEFLAGS()	c_getEFLAGS()
 #else	/* CCPU */
-#line 1626
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1634
@@ -1161,7 +1160,7 @@ IMPORT	IU32	c_getEFLAGS	IPT0();
 IMPORT	IU16	c_getSTATUS	IPT0();
 #define	getSTATUS()	c_getSTATUS()
 #else	/* CCPU */
-#line 1639
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1647
@@ -1170,7 +1169,7 @@ IMPORT	IU16	c_getSTATUS	IPT0();
 IMPORT	IU8	c_getIOPL	IPT0();
 #define	getIOPL()	c_getIOPL()
 #else	/* CCPU */
-#line 1652
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1660
@@ -1179,7 +1178,7 @@ IMPORT	IU8	c_getIOPL	IPT0();
 IMPORT	IU16	c_getMSW	IPT0();
 #define	getMSW()	c_getMSW()
 #else	/* CCPU */
-#line 1665
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1673
@@ -1188,7 +1187,7 @@ IMPORT	IU16	c_getMSW	IPT0();
 IMPORT	IU32	c_getCR0	IPT0();
 #define	getCR0()	c_getCR0()
 #else	/* CCPU */
-#line 1678
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1686
@@ -1197,7 +1196,7 @@ IMPORT	IU32	c_getCR0	IPT0();
 IMPORT	IU32	c_getCR2	IPT0();
 #define	getCR2()	c_getCR2()
 #else	/* CCPU */
-#line 1691
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1699
@@ -1206,17 +1205,16 @@ IMPORT	IU32	c_getCR2	IPT0();
 IMPORT	IU32	c_getCR3	IPT0();
 #define	getCR3()	c_getCR3()
 #else	/* CCPU */
-#line 1704
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1712
 
 #ifdef	CCPU
 IMPORT	IBOOL	c_getCF	IPT0();
-#line 1715
 #define	getCF()	c_getCF()
 #else	/* CCPU */
-#line 1717
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1725
@@ -1225,7 +1223,7 @@ IMPORT	IBOOL	c_getCF	IPT0();
 IMPORT	IBOOL	c_getPF	IPT0();
 #define	getPF()	c_getPF()
 #else	/* CCPU */
-#line 1730
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1738
@@ -1234,7 +1232,7 @@ IMPORT	IBOOL	c_getPF	IPT0();
 IMPORT	IBOOL	c_getAF	IPT0();
 #define	getAF()	c_getAF()
 #else	/* CCPU */
-#line 1743
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1751
@@ -1243,7 +1241,7 @@ IMPORT	IBOOL	c_getAF	IPT0();
 IMPORT	IBOOL	c_getZF	IPT0();
 #define	getZF()	c_getZF()
 #else	/* CCPU */
-#line 1756
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1764
@@ -1252,7 +1250,7 @@ IMPORT	IBOOL	c_getZF	IPT0();
 IMPORT	IBOOL	c_getSF	IPT0();
 #define	getSF()	c_getSF()
 #else	/* CCPU */
-#line 1769
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1777
@@ -1261,7 +1259,7 @@ IMPORT	IBOOL	c_getSF	IPT0();
 IMPORT	IBOOL	c_getTF	IPT0();
 #define	getTF()	c_getTF()
 #else	/* CCPU */
-#line 1782
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1790
@@ -1270,7 +1268,7 @@ IMPORT	IBOOL	c_getTF	IPT0();
 IMPORT	IBOOL	c_getIF	IPT0();
 #define	getIF()	c_getIF()
 #else	/* CCPU */
-#line 1795
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1803
@@ -1279,7 +1277,7 @@ IMPORT	IBOOL	c_getIF	IPT0();
 IMPORT	IBOOL	c_getDF	IPT0();
 #define	getDF()	c_getDF()
 #else	/* CCPU */
-#line 1808
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1816
@@ -1288,7 +1286,7 @@ IMPORT	IBOOL	c_getDF	IPT0();
 IMPORT	IBOOL	c_getOF	IPT0();
 #define	getOF()	c_getOF()
 #else	/* CCPU */
-#line 1821
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1829
@@ -1297,7 +1295,7 @@ IMPORT	IBOOL	c_getOF	IPT0();
 IMPORT	IBOOL	c_getNT	IPT0();
 #define	getNT()	c_getNT()
 #else	/* CCPU */
-#line 1834
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1842
@@ -1306,7 +1304,7 @@ IMPORT	IBOOL	c_getNT	IPT0();
 IMPORT	IBOOL	c_getRF	IPT0();
 #define	getRF()	c_getRF()
 #else	/* CCPU */
-#line 1847
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1855
@@ -1315,7 +1313,7 @@ IMPORT	IBOOL	c_getRF	IPT0();
 IMPORT	IBOOL	c_getVM	IPT0();
 #define	getVM()	c_getVM()
 #else	/* CCPU */
-#line 1860
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1868
@@ -1324,7 +1322,7 @@ IMPORT	IBOOL	c_getVM	IPT0();
 IMPORT	IBOOL	c_getAC	IPT0();
 #define	getAC()	c_getAC()
 #else	/* CCPU */
-#line 1873
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1881
@@ -1333,7 +1331,7 @@ IMPORT	IBOOL	c_getAC	IPT0();
 IMPORT	IBOOL	c_getPE	IPT0();
 #define	getPE()	c_getPE()
 #else	/* CCPU */
-#line 1886
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1894
@@ -1342,7 +1340,7 @@ IMPORT	IBOOL	c_getPE	IPT0();
 IMPORT	IBOOL	c_getMP	IPT0();
 #define	getMP()	c_getMP()
 #else	/* CCPU */
-#line 1899
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1907
@@ -1351,7 +1349,7 @@ IMPORT	IBOOL	c_getMP	IPT0();
 IMPORT	IBOOL	c_getEM	IPT0();
 #define	getEM()	c_getEM()
 #else	/* CCPU */
-#line 1912
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1920
@@ -1360,7 +1358,7 @@ IMPORT	IBOOL	c_getEM	IPT0();
 IMPORT	IBOOL	c_getTS	IPT0();
 #define	getTS()	c_getTS()
 #else	/* CCPU */
-#line 1925
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1933
@@ -1369,7 +1367,7 @@ IMPORT	IBOOL	c_getTS	IPT0();
 IMPORT	IBOOL	c_getET	IPT0();
 #define	getET()	c_getET()
 #else	/* CCPU */
-#line 1938
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1946
@@ -1378,7 +1376,7 @@ IMPORT	IBOOL	c_getET	IPT0();
 IMPORT	IBOOL	c_getNE	IPT0();
 #define	getNE()	c_getNE()
 #else	/* CCPU */
-#line 1951
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1959
@@ -1387,7 +1385,7 @@ IMPORT	IBOOL	c_getNE	IPT0();
 IMPORT	IBOOL	c_getWP	IPT0();
 #define	getWP()	c_getWP()
 #else	/* CCPU */
-#line 1964
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1972
@@ -1396,7 +1394,7 @@ IMPORT	IBOOL	c_getWP	IPT0();
 IMPORT	IBOOL	c_getPG	IPT0();
 #define	getPG()	c_getPG()
 #else	/* CCPU */
-#line 1977
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1985
@@ -1405,7 +1403,7 @@ IMPORT	IBOOL	c_getPG	IPT0();
 IMPORT	IU32	c_getGDT_BASE	IPT0();
 #define	getGDT_BASE()	c_getGDT_BASE()
 #else	/* CCPU */
-#line 1990
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 1998
@@ -1414,7 +1412,7 @@ IMPORT	IU32	c_getGDT_BASE	IPT0();
 IMPORT	IU16	c_getGDT_LIMIT	IPT0();
 #define	getGDT_LIMIT()	c_getGDT_LIMIT()
 #else	/* CCPU */
-#line 2003
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2011
@@ -1423,7 +1421,7 @@ IMPORT	IU16	c_getGDT_LIMIT	IPT0();
 IMPORT	IU32	c_getIDT_BASE	IPT0();
 #define	getIDT_BASE()	c_getIDT_BASE()
 #else	/* CCPU */
-#line 2016
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2024
@@ -1432,7 +1430,7 @@ IMPORT	IU32	c_getIDT_BASE	IPT0();
 IMPORT	IU16	c_getIDT_LIMIT	IPT0();
 #define	getIDT_LIMIT()	c_getIDT_LIMIT()
 #else	/* CCPU */
-#line 2029
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2037
@@ -1441,7 +1439,7 @@ IMPORT	IU16	c_getIDT_LIMIT	IPT0();
 IMPORT	IU16	c_getLDT_SELECTOR	IPT0();
 #define	getLDT_SELECTOR()	c_getLDT_SELECTOR()
 #else	/* CCPU */
-#line 2042
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2050
@@ -1450,7 +1448,7 @@ IMPORT	IU16	c_getLDT_SELECTOR	IPT0();
 IMPORT	IU32	c_getLDT_BASE	IPT0();
 #define	getLDT_BASE()	c_getLDT_BASE()
 #else	/* CCPU */
-#line 2055
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2063
@@ -1459,7 +1457,7 @@ IMPORT	IU32	c_getLDT_BASE	IPT0();
 IMPORT	IU32	c_getLDT_LIMIT	IPT0();
 #define	getLDT_LIMIT()	c_getLDT_LIMIT()
 #else	/* CCPU */
-#line 2068
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2076
@@ -1468,7 +1466,7 @@ IMPORT	IU32	c_getLDT_LIMIT	IPT0();
 IMPORT	IU16	c_getTR_SELECTOR	IPT0();
 #define	getTR_SELECTOR()	c_getTR_SELECTOR()
 #else	/* CCPU */
-#line 2081
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2089
@@ -1477,7 +1475,7 @@ IMPORT	IU16	c_getTR_SELECTOR	IPT0();
 IMPORT	IU32	c_getTR_BASE	IPT0();
 #define	getTR_BASE()	c_getTR_BASE()
 #else	/* CCPU */
-#line 2094
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2102
@@ -1486,7 +1484,7 @@ IMPORT	IU32	c_getTR_BASE	IPT0();
 IMPORT	IU32	c_getTR_LIMIT	IPT0();
 #define	getTR_LIMIT()	c_getTR_LIMIT()
 #else	/* CCPU */
-#line 2107
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2115
@@ -1495,7 +1493,7 @@ IMPORT	IU32	c_getTR_LIMIT	IPT0();
 IMPORT	IU16	c_getTR_AR	IPT0();
 #define	getTR_AR()	c_getTR_AR()
 #else	/* CCPU */
-#line 2120
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2128
@@ -1504,7 +1502,7 @@ IMPORT	IU16	c_getTR_AR	IPT0();
 IMPORT	IUH	host_get_q_calib_val	IPT0();
 #define	host_get_q_calib_val	host_get_q_calib_val
 #else	/* CCPU */
-#line 2133
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2141
@@ -1513,7 +1511,7 @@ IMPORT	IUH	host_get_q_calib_val	IPT0();
 IMPORT	IUH	host_get_jump_restart	IPT0();
 #define	host_get_jump_restart	host_get_jump_restart
 #else	/* CCPU */
-#line 2146
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2154
@@ -1522,7 +1520,7 @@ IMPORT	IUH	host_get_jump_restart	IPT0();
 IMPORT	void	host_set_jump_restart	IPT1(IUH, initialVal);
 #define	host_set_jump_restart(initialVal)	host_set_jump_restart(initialVal)
 #else	/* CCPU */
-#line 2159
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2167
@@ -1531,7 +1529,7 @@ IMPORT	void	host_set_jump_restart	IPT1(IUH, initialVal);
 IMPORT	void	setEOIEnableAddr	IPT1(IU8 *, initialVal);
 #define	setEOIEnableAddr(initialVal)	setEOIEnableAddr(initialVal)
 #else	/* CCPU */
-#line 2172
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2180
@@ -1540,7 +1538,7 @@ IMPORT	void	setEOIEnableAddr	IPT1(IU8 *, initialVal);
 IMPORT	void	setAddProfileDataPtr	IPT1(IHP, initialVal);
 #define	setAddProfileDataPtr(initialVal)	setAddProfileDataPtr(initialVal)
 #else	/* CCPU */
-#line 2185
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2193
@@ -1549,7 +1547,7 @@ IMPORT	void	setAddProfileDataPtr	IPT1(IHP, initialVal);
 IMPORT	void	setMaxProfileDataAddr	IPT1(IHP, initialVal);
 #define	setMaxProfileDataAddr(initialVal)	setMaxProfileDataAddr(initialVal)
 #else	/* CCPU */
-#line 2198
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2206
@@ -1558,7 +1556,7 @@ IMPORT	void	setMaxProfileDataAddr	IPT1(IHP, initialVal);
 IMPORT	IHP	getAddProfileDataAddr	IPT0();
 #define	getAddProfileDataAddr()	getAddProfileDataAddr()
 #else	/* CCPU */
-#line 2211
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2219
@@ -1567,7 +1565,7 @@ IMPORT	IHP	getAddProfileDataAddr	IPT0();
 IMPORT	void	PurgeLostIretHookLine	IPT2(IU16, lineNum, IU32, depth);
 #define	PurgeLostIretHookLine(lineNum, depth)	PurgeLostIretHookLine(lineNum, depth)
 #else	/* CCPU */
-#line 2224
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2232
@@ -1576,7 +1574,7 @@ IMPORT	void	PurgeLostIretHookLine	IPT2(IU16, lineNum, IU32, depth);
 IMPORT	void	ActivityCheckAfterTimeSlice	IPT0();
 #define	ActivityCheckAfterTimeSlice()	ActivityCheckAfterTimeSlice()
 #else	/* CCPU */
-#line 2237
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2245
@@ -1585,7 +1583,7 @@ IMPORT	void	ActivityCheckAfterTimeSlice	IPT0();
 IMPORT	IBOOL	CheckCsSelectorAndEipForCallFarPatching	IPT3(IU16, csSel, IU32, eip, IU32 *, pCsBase);
 #define	CheckCsSelectorAndEipForCallFarPatching(csSel, eip, pCsBase)	CheckCsSelectorAndEipForCallFarPatching(csSel, eip, pCsBase)
 #else	/* CCPU */
-#line 2250
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2258
@@ -1660,7 +1658,7 @@ struct	CpuPrivateVector	{
 IMPORT	IHP	c_getSadInfoTable	IPT0();
 #define	getSadInfoTable()	c_getSadInfoTable()
 #else	/* CCPU */
-#line 2329
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2337
@@ -1669,7 +1667,7 @@ IMPORT	IHP	c_getSadInfoTable	IPT0();
 IMPORT	IBOOL	c_setGDT_BASE_LIMIT	IPT2(IU32, base, IU16, limit);
 #define	setGDT_BASE_LIMIT(base, limit)	c_setGDT_BASE_LIMIT(base, limit)
 #else	/* CCPU */
-#line 2342
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2350
@@ -1678,7 +1676,7 @@ IMPORT	IBOOL	c_setGDT_BASE_LIMIT	IPT2(IU32, base, IU16, limit);
 IMPORT	IBOOL	c_setIDT_BASE_LIMIT	IPT2(IU32, base, IU16, limit);
 #define	setIDT_BASE_LIMIT(base, limit)	c_setIDT_BASE_LIMIT(base, limit)
 #else	/* CCPU */
-#line 2355
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2363
@@ -1687,7 +1685,7 @@ IMPORT	IBOOL	c_setIDT_BASE_LIMIT	IPT2(IU32, base, IU16, limit);
 IMPORT	IBOOL	c_setLDT_BASE_LIMIT	IPT2(IU32, base, IU32, limit);
 #define	setLDT_BASE_LIMIT(base, limit)	c_setLDT_BASE_LIMIT(base, limit)
 #else	/* CCPU */
-#line 2368
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2376
@@ -1696,7 +1694,7 @@ IMPORT	IBOOL	c_setLDT_BASE_LIMIT	IPT2(IU32, base, IU32, limit);
 IMPORT	IBOOL	c_setTR_BASE_LIMIT	IPT2(IU32, base, IU32, limit);
 #define	setTR_BASE_LIMIT(base, limit)	c_setTR_BASE_LIMIT(base, limit)
 #else	/* CCPU */
-#line 2381
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2389
@@ -1705,7 +1703,7 @@ IMPORT	IBOOL	c_setTR_BASE_LIMIT	IPT2(IU32, base, IU32, limit);
 IMPORT	IBOOL	c_setTR_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #define	setTR_BASE_LIMIT_AR(base, limit, ar)	c_setTR_BASE_LIMIT_AR(base, limit, ar)
 #else	/* CCPU */
-#line 2394
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2402
@@ -1714,7 +1712,7 @@ IMPORT	IBOOL	c_setTR_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 IMPORT	IBOOL	c_setCS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #define	setCS_BASE_LIMIT_AR(base, limit, ar)	c_setCS_BASE_LIMIT_AR(base, limit, ar)
 #else	/* CCPU */
-#line 2407
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2415
@@ -1723,7 +1721,7 @@ IMPORT	IBOOL	c_setCS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 IMPORT	IBOOL	c_setSS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #define	setSS_BASE_LIMIT_AR(base, limit, ar)	c_setSS_BASE_LIMIT_AR(base, limit, ar)
 #else	/* CCPU */
-#line 2420
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2428
@@ -1732,7 +1730,7 @@ IMPORT	IBOOL	c_setSS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 IMPORT	IBOOL	c_setDS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #define	setDS_BASE_LIMIT_AR(base, limit, ar)	c_setDS_BASE_LIMIT_AR(base, limit, ar)
 #else	/* CCPU */
-#line 2433
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2441
@@ -1741,7 +1739,7 @@ IMPORT	IBOOL	c_setDS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 IMPORT	IBOOL	c_setES_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #define	setES_BASE_LIMIT_AR(base, limit, ar)	c_setES_BASE_LIMIT_AR(base, limit, ar)
 #else	/* CCPU */
-#line 2446
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2454
@@ -1750,7 +1748,7 @@ IMPORT	IBOOL	c_setES_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 IMPORT	IBOOL	c_setFS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #define	setFS_BASE_LIMIT_AR(base, limit, ar)	c_setFS_BASE_LIMIT_AR(base, limit, ar)
 #else	/* CCPU */
-#line 2459
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2467
@@ -1759,7 +1757,7 @@ IMPORT	IBOOL	c_setFS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 IMPORT	IBOOL	c_setGS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 #define	setGS_BASE_LIMIT_AR(base, limit, ar)	c_setGS_BASE_LIMIT_AR(base, limit, ar)
 #else	/* CCPU */
-#line 2472
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2480
@@ -1768,7 +1766,7 @@ IMPORT	IBOOL	c_setGS_BASE_LIMIT_AR	IPT3(IU32, base, IU32, limit, IU16, ar);
 IMPORT	void	c_setCS_SELECTOR	IPT1(IU16, val);
 #define	setCS_SELECTOR(val)	c_setCS_SELECTOR(val)
 #else	/* CCPU */
-#line 2485
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2493
@@ -1777,7 +1775,7 @@ IMPORT	void	c_setCS_SELECTOR	IPT1(IU16, val);
 IMPORT	void	c_setSS_SELECTOR	IPT1(IU16, val);
 #define	setSS_SELECTOR(val)	c_setSS_SELECTOR(val)
 #else	/* CCPU */
-#line 2498
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2506
@@ -1786,7 +1784,7 @@ IMPORT	void	c_setSS_SELECTOR	IPT1(IU16, val);
 IMPORT	void	c_setDS_SELECTOR	IPT1(IU16, val);
 #define	setDS_SELECTOR(val)	c_setDS_SELECTOR(val)
 #else	/* CCPU */
-#line 2511
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2519
@@ -1795,7 +1793,7 @@ IMPORT	void	c_setDS_SELECTOR	IPT1(IU16, val);
 IMPORT	void	c_setES_SELECTOR	IPT1(IU16, val);
 #define	setES_SELECTOR(val)	c_setES_SELECTOR(val)
 #else	/* CCPU */
-#line 2524
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2532
@@ -1804,7 +1802,7 @@ IMPORT	void	c_setES_SELECTOR	IPT1(IU16, val);
 IMPORT	void	c_setFS_SELECTOR	IPT1(IU16, val);
 #define	setFS_SELECTOR(val)	c_setFS_SELECTOR(val)
 #else	/* CCPU */
-#line 2537
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2545
@@ -1813,7 +1811,7 @@ IMPORT	void	c_setFS_SELECTOR	IPT1(IU16, val);
 IMPORT	void	c_setGS_SELECTOR	IPT1(IU16, val);
 #define	setGS_SELECTOR(val)	c_setGS_SELECTOR(val)
 #else	/* CCPU */
-#line 2550
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2558
@@ -1822,7 +1820,7 @@ IMPORT	void	c_setGS_SELECTOR	IPT1(IU16, val);
 IMPORT	IU16	c_getCS_SELECTOR	IPT0();
 #define	getCS_SELECTOR()	c_getCS_SELECTOR()
 #else	/* CCPU */
-#line 2563
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2571
@@ -1831,7 +1829,7 @@ IMPORT	IU16	c_getCS_SELECTOR	IPT0();
 IMPORT	IU16	c_getSS_SELECTOR	IPT0();
 #define	getSS_SELECTOR()	c_getSS_SELECTOR()
 #else	/* CCPU */
-#line 2576
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2584
@@ -1840,7 +1838,7 @@ IMPORT	IU16	c_getSS_SELECTOR	IPT0();
 IMPORT	IU16	c_getDS_SELECTOR	IPT0();
 #define	getDS_SELECTOR()	c_getDS_SELECTOR()
 #else	/* CCPU */
-#line 2589
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2597
@@ -1849,7 +1847,7 @@ IMPORT	IU16	c_getDS_SELECTOR	IPT0();
 IMPORT	IU16	c_getES_SELECTOR	IPT0();
 #define	getES_SELECTOR()	c_getES_SELECTOR()
 #else	/* CCPU */
-#line 2602
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2610
@@ -1858,7 +1856,7 @@ IMPORT	IU16	c_getES_SELECTOR	IPT0();
 IMPORT	IU16	c_getFS_SELECTOR	IPT0();
 #define	getFS_SELECTOR()	c_getFS_SELECTOR()
 #else	/* CCPU */
-#line 2615
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2623
@@ -1867,7 +1865,7 @@ IMPORT	IU16	c_getFS_SELECTOR	IPT0();
 IMPORT	IU16	c_getGS_SELECTOR	IPT0();
 #define	getGS_SELECTOR()	c_getGS_SELECTOR()
 #else	/* CCPU */
-#line 2628
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2636
@@ -1876,7 +1874,7 @@ IMPORT	IU16	c_getGS_SELECTOR	IPT0();
 IMPORT	IU32	c_getCS_BASE	IPT0();
 #define	getCS_BASE()	c_getCS_BASE()
 #else	/* CCPU */
-#line 2641
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2649
@@ -1885,7 +1883,7 @@ IMPORT	IU32	c_getCS_BASE	IPT0();
 IMPORT	IU32	c_getSS_BASE	IPT0();
 #define	getSS_BASE()	c_getSS_BASE()
 #else	/* CCPU */
-#line 2654
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2662
@@ -1894,7 +1892,7 @@ IMPORT	IU32	c_getSS_BASE	IPT0();
 IMPORT	IU32	c_getDS_BASE	IPT0();
 #define	getDS_BASE()	c_getDS_BASE()
 #else	/* CCPU */
-#line 2667
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2675
@@ -1903,7 +1901,7 @@ IMPORT	IU32	c_getDS_BASE	IPT0();
 IMPORT	IU32	c_getES_BASE	IPT0();
 #define	getES_BASE()	c_getES_BASE()
 #else	/* CCPU */
-#line 2680
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2688
@@ -1912,7 +1910,7 @@ IMPORT	IU32	c_getES_BASE	IPT0();
 IMPORT	IU32	c_getFS_BASE	IPT0();
 #define	getFS_BASE()	c_getFS_BASE()
 #else	/* CCPU */
-#line 2693
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2701
@@ -1921,7 +1919,7 @@ IMPORT	IU32	c_getFS_BASE	IPT0();
 IMPORT	IU32	c_getGS_BASE	IPT0();
 #define	getGS_BASE()	c_getGS_BASE()
 #else	/* CCPU */
-#line 2706
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2714
@@ -1930,7 +1928,7 @@ IMPORT	IU32	c_getGS_BASE	IPT0();
 IMPORT	IU32	c_getCS_LIMIT	IPT0();
 #define	getCS_LIMIT()	c_getCS_LIMIT()
 #else	/* CCPU */
-#line 2719
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2727
@@ -1939,7 +1937,7 @@ IMPORT	IU32	c_getCS_LIMIT	IPT0();
 IMPORT	IU32	c_getSS_LIMIT	IPT0();
 #define	getSS_LIMIT()	c_getSS_LIMIT()
 #else	/* CCPU */
-#line 2732
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2740
@@ -1948,7 +1946,7 @@ IMPORT	IU32	c_getSS_LIMIT	IPT0();
 IMPORT	IU32	c_getDS_LIMIT	IPT0();
 #define	getDS_LIMIT()	c_getDS_LIMIT()
 #else	/* CCPU */
-#line 2745
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2753
@@ -1957,7 +1955,7 @@ IMPORT	IU32	c_getDS_LIMIT	IPT0();
 IMPORT	IU32	c_getES_LIMIT	IPT0();
 #define	getES_LIMIT()	c_getES_LIMIT()
 #else	/* CCPU */
-#line 2758
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2766
@@ -1966,7 +1964,7 @@ IMPORT	IU32	c_getES_LIMIT	IPT0();
 IMPORT	IU32	c_getFS_LIMIT	IPT0();
 #define	getFS_LIMIT()	c_getFS_LIMIT()
 #else	/* CCPU */
-#line 2771
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2779
@@ -1975,7 +1973,7 @@ IMPORT	IU32	c_getFS_LIMIT	IPT0();
 IMPORT	IU32	c_getGS_LIMIT	IPT0();
 #define	getGS_LIMIT()	c_getGS_LIMIT()
 #else	/* CCPU */
-#line 2784
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2792
@@ -1984,7 +1982,7 @@ IMPORT	IU32	c_getGS_LIMIT	IPT0();
 IMPORT	IU16	c_getCS_AR	IPT0();
 #define	getCS_AR()	c_getCS_AR()
 #else	/* CCPU */
-#line 2797
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2805
@@ -1993,7 +1991,7 @@ IMPORT	IU16	c_getCS_AR	IPT0();
 IMPORT	IU16	c_getSS_AR	IPT0();
 #define	getSS_AR()	c_getSS_AR()
 #else	/* CCPU */
-#line 2810
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2818
@@ -2002,7 +2000,7 @@ IMPORT	IU16	c_getSS_AR	IPT0();
 IMPORT	IU16	c_getDS_AR	IPT0();
 #define	getDS_AR()	c_getDS_AR()
 #else	/* CCPU */
-#line 2823
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2831
@@ -2011,7 +2009,7 @@ IMPORT	IU16	c_getDS_AR	IPT0();
 IMPORT	IU16	c_getES_AR	IPT0();
 #define	getES_AR()	c_getES_AR()
 #else	/* CCPU */
-#line 2836
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2844
@@ -2020,7 +2018,7 @@ IMPORT	IU16	c_getES_AR	IPT0();
 IMPORT	IU16	c_getFS_AR	IPT0();
 #define	getFS_AR()	c_getFS_AR()
 #else	/* CCPU */
-#line 2849
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2857
@@ -2029,7 +2027,7 @@ IMPORT	IU16	c_getFS_AR	IPT0();
 IMPORT	IU16	c_getGS_AR	IPT0();
 #define	getGS_AR()	c_getGS_AR()
 #else	/* CCPU */
-#line 2862
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2870
@@ -2038,7 +2036,7 @@ IMPORT	IU16	c_getGS_AR	IPT0();
 IMPORT	IUH	c_getCPL	IPT0();
 #define	getCPL()	c_getCPL()
 #else	/* CCPU */
-#line 2875
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2883
@@ -2047,7 +2045,7 @@ IMPORT	IUH	c_getCPL	IPT0();
 IMPORT	void	c_setCPL	IPT1(IUH, prot);
 #define	setCPL(prot)	c_setCPL(prot)
 #else	/* CCPU */
-#line 2888
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2896
@@ -2056,7 +2054,7 @@ IMPORT	void	c_setCPL	IPT1(IUH, prot);
 IMPORT	void	c_getCpuState	IPT1(TypeCpuStateRECptr, state);
 #define	getCpuState(state)	c_getCpuState(state)
 #else	/* CCPU */
-#line 2901
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2909
@@ -2065,7 +2063,7 @@ IMPORT	void	c_getCpuState	IPT1(TypeCpuStateRECptr, state);
 IMPORT	void	c_setCpuState	IPT1(TypeCpuStateRECptr, state);
 #define	setCpuState(state)	c_setCpuState(state)
 #else	/* CCPU */
-#line 2914
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2922
@@ -2074,7 +2072,7 @@ IMPORT	void	c_setCpuState	IPT1(TypeCpuStateRECptr, state);
 IMPORT	void	c_InitNanoCpu	IPT1(IU32, variety);
 #define	initNanoCpu(variety)	c_InitNanoCpu(variety)
 #else	/* CCPU */
-#line 2927
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2935
@@ -2083,7 +2081,7 @@ IMPORT	void	c_InitNanoCpu	IPT1(IU32, variety);
 IMPORT	void	c_PrepareBlocksToCompile	IPT1(IU32, variety);
 #define	prepareBlocksToCompile(variety)	c_PrepareBlocksToCompile(variety)
 #else	/* CCPU */
-#line 2940
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2948
@@ -2092,7 +2090,7 @@ IMPORT	void	c_PrepareBlocksToCompile	IPT1(IU32, variety);
 IMPORT	void	c_InitRdWrCacheAndCookies	IPT1(IU32, variety);
 #define	initRdWrCacheAndCookies(variety)	c_InitRdWrCacheAndCookies(variety)
 #else	/* CCPU */
-#line 2953
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2961
@@ -2101,7 +2099,7 @@ IMPORT	void	c_InitRdWrCacheAndCookies	IPT1(IU32, variety);
 IMPORT	void	c_ResetRdWrCacheAndCookies	IPT1(IU32, variety);
 #define	resetRdWrCacheAndCookies(variety)	c_ResetRdWrCacheAndCookies(variety)
 #else	/* CCPU */
-#line 2966
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2974
@@ -2110,7 +2108,7 @@ IMPORT	void	c_ResetRdWrCacheAndCookies	IPT1(IU32, variety);
 IMPORT	void	c_setRegConstraint	IPT2(IU32, regId, IU8, constraintType);
 #define	setRegConstraint(regId, constraintType)	c_setRegConstraint(regId, constraintType)
 #else	/* CCPU */
-#line 2979
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2987
@@ -2118,7 +2116,7 @@ IMPORT	void	c_setRegConstraint	IPT2(IU32, regId, IU8, constraintType);
 #ifdef	CCPU
 
 #else	/* CCPU */
-#line 2991
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 2999
@@ -2127,7 +2125,7 @@ IMPORT	void	c_setRegConstraint	IPT2(IU32, regId, IU8, constraintType);
 IMPORT	void	c_trashIntelRegisters	IPT0();
 #define	trashIntelregisters	c_trashIntelRegisters
 #else	/* CCPU */
-#line 3004
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 3012
@@ -2135,7 +2133,7 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #ifdef	CCPU
 
 #else	/* CCPU */
-#line 3016
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 3024
@@ -2143,7 +2141,7 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #ifdef	CCPU
 
 #else	/* CCPU */
-#line 3028
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 3036
@@ -2151,7 +2149,7 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #ifdef	CCPU
 
 #else	/* CCPU */
-#line 3040
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 3048
@@ -2159,7 +2157,7 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #ifdef	CCPU
 
 #else	/* CCPU */
-#line 3052
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 3060
@@ -2167,7 +2165,7 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #ifdef	CCPU
 
 #else	/* CCPU */
-#line 3064
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 3072
@@ -2175,12 +2173,10 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #ifdef	CCPU
 
 #else	/* CCPU */
-#line 3076
+
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 #line 3084
 
 #endif	/* _CPU4GEN_H_ */
-#line 1758
-#line 3086
 /*======================================== END ========================================*/

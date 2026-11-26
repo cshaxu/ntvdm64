@@ -37,13 +37,11 @@ Provide External Interface to CPU Registers.
 #include <Fpu_c.h>
 #include <Pigger_c.h>
 #ifdef PIG
-#line 40
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else /* PIG */
 #line 52
 #define	AR_FIXUP
 #endif /* PIG */
-#line 54
 
 /*
    Prototype our internal functions.
@@ -1199,9 +1197,7 @@ c_getVM()
    return (ISM32)GET_VM();
    }
 
-#line 1209
 #ifdef	SPC486
-#line 1210
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
 #line 1252
@@ -1370,9 +1366,7 @@ IFN1(
 
 
 
-#line 1417
 #ifdef	SPC486
-#line 1418
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
 #line 1430
@@ -1501,9 +1495,7 @@ IFN1(
    UNUSED(val);
    }
 
-#line 1555
 #ifdef	SPC486
-#line 1556
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
 #line 1616

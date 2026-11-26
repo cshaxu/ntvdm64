@@ -27,7 +27,6 @@ extern PHY_ADDR SasWrapMask;
 
 #if !defined(PIG)
 #ifdef BACK_M
-#line 30
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else	/* BACK_M */
 #line 32

@@ -202,9 +202,8 @@ LOCAL IU32 page_address[NR_TLB_SETS * NR_TLB_ENTRIES * NR_ACCESS_MODES];
    Encoded access check matrix, true indicates access failure.
  */
 
-#line 205
 #ifdef SPC486
-#line 206
+
 #error Excluded unsupported SPC486 profile
 #else
 #line 227
@@ -220,7 +219,6 @@ LOCAL BOOL access_check[4] [4] =
    };
 
 #endif /* SPC486 */
-#line 239
 
 LOCAL void deal_with_pte_cache_hit IPT1(IU32, linearAddress);
 GLOBAL void Pig_NotePDECacheAccess IPT2(IU32, linearAddress, IU32, accessBits);
@@ -257,9 +255,8 @@ flush_tlb()
 	 }
    }
 
-#line 275
 #ifdef SPC486
-#line 276
+
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 312
@@ -331,15 +328,12 @@ IFN2(
 	 /* Cache Hit <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
 	 /* check access validity */
-#line 380
 #ifdef SPC486
-#line 381
 #error Excluded unsupported SPC486 profile
 #else
 #line 383
 	 if ( access_check[access][e->mode] )
 #endif /* SPC486 */
-#line 385
 	    {
 	    /* Protection Failure */
 	    SET_CR(CR_PFLA, lin);
@@ -404,15 +398,12 @@ IFN2(
 
 
    /* check access validity */
-#line 449
 #ifdef SPC486
-#line 450
 #error Excluded unsupported SPC486 profile
 #else
 #line 452
    if ( access_check[access][comb] )
 #endif /* SPC486 */
-#line 454
       {
       /* Protection Failure */
       SET_CR(CR_PFLA, lin);
@@ -485,7 +476,6 @@ IFN2(
       {
       phy_write_dword(pte_addr, new_pte);
 #ifdef	PIG
-#line 526
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 530
@@ -495,7 +485,6 @@ IFN2(
       {
       phy_write_dword(pde_addr, new_pde);
 #ifdef	PIG
-#line 536
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 540
@@ -617,7 +606,6 @@ test_tlb()
 /* Does not take #PF and does not alter contents of TLB.              */
 /* Returns TRUE if mapping done, else FALSE.                          */
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-#line 658
 GLOBAL IBOOL
 xtrn2phy IFN3
    (
@@ -682,15 +670,12 @@ xtrn2phy IFN3
 	 /* Cache Hit */
 
 	 /* check access validity */
-#line 722
 #ifdef SPC486
-#line 723
 #error Excluded unsupported SPC486 profile
 #else
 #line 725
 	 if ( access_check[access][e->mode] )
 #endif /* SPC486 */
-#line 727
 	    {
 	    return FALSE;
 	    }
@@ -703,7 +688,6 @@ xtrn2phy IFN3
    /* Cache Miss */
 
    /* check that pde is present */
-#line 739
    pde_addr = (GET_CR(CR_PDBR) & PE_PFA_MASK) +
 	     ((lin >> DIR_SHIFT & DIR_MASK) << 2);
    pde = phy_read_dword(pde_addr);
@@ -727,15 +711,12 @@ xtrn2phy IFN3
       comb |= PG_W;   /* both tables allow write */
 
    /* check access validity */
-#line 762
 #ifdef SPC486
-#line 763
 #error Excluded unsupported SPC486 profile
 #else
 #line 765
    if ( access_check[access][comb] )
 #endif /* SPC486 */
-#line 767
       {
       return FALSE;
       }
@@ -774,7 +755,6 @@ xtrn2phy IFN3
             {
             phy_write_dword(pte_addr, new_pte);
 #ifdef	PIG
-#line 805
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 809
@@ -784,7 +764,6 @@ xtrn2phy IFN3
             IU8 mask;
             phy_write_dword(pde_addr, new_pde);
 #ifdef	PIG
-#line 815
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 820
@@ -827,7 +806,7 @@ IFN1(
    }
 
 #ifdef PIG
-#line 859
+
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 954

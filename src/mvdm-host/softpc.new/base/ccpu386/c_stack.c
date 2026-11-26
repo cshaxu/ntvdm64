@@ -27,9 +27,7 @@ Stack (and related SP/BP access) Support.
 #include <fault.h>
 #include <ccpupig.h>
 
-#line 30
 #if	defined(PIG) && !defined(PROD)
-#line 31
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* PIG && !PROD */
 #line 37
@@ -257,7 +255,6 @@ IFN1(
    }
 
 #ifdef PIG
-#line 261
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 #line 309
@@ -293,9 +290,7 @@ IFN1(
       byte_change_SP((IS32)-4);
       addr = GET_SS_BASE() + GetStackPointer();
       vir_write_word(addr, NO_PHYSICAL_MAPPING, (IU16)data);
-#line 341
 #ifdef	PIG_DONT_CHECK_OTHER_WORD_ON_STACK
-#line 342
 #error DIVERGENCE MVDM-HOST-DIV-536: PIG_DONT_CHECK_OTHER_WORD_ON_STACK branch is not selected; see mirror register.
 #endif	/* PIG_DONT_CHECK_OTHER_WORD_ON_STACK */
 #line 344
@@ -303,7 +298,6 @@ IFN1(
    }
 
 #ifdef PIG
-#line 348
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 #line 387
@@ -380,15 +374,12 @@ IFN4(
    the book says...
  */
 
-#line 460
 #ifdef SPC486
-#line 461
 #error Excluded unsupported SPC486 profile
 #else
 #line 463
 #define XX_error_code 0
 #endif
-#line 465
 
    if ( GET_OPERAND_SIZE() == USE16 )
       bytes = nr_items * 2;
@@ -562,7 +553,7 @@ IFN2(
    }
 
 #ifdef PIG
-#line 638
+
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 #line 679

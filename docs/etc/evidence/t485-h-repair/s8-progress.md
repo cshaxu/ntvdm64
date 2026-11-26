@@ -334,3 +334,159 @@ Batch reduction: 51 non-error points and 119 added-plus-deleted mirror lines.
 S8 cumulative: 68 points/176 lines; newline-only restorations: 33 files separately.
 123/851 source-reviewed and final-verified, 728 remain. Commit/push completes P3;
 next is softpc.new/base/ccpu386/aaa.c. No new retain decision was introduced.
+### P4 ASCII arithmetic files
+
+P3 is committed and pushed as 1784272b5; all 123 reviewed files are delivered.
+
+| File under softpc.new/base/ccpu386 | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| aaa.c | 0/0 -> 0/0 | Newline-only; restored exact pinned XP bytes |
+| aaa.h | 0/0 -> 0/0 | Newline-only; restored exact pinned XP bytes |
+| aad.c | 0/0 -> 0/0 | Newline-only; restored exact pinned XP bytes |
+| aad.h | 0/0 -> 0/0 | Newline-only; restored exact pinned XP bytes |
+| aam.c | 0/0 -> 0/0 | Newline-only; restored exact pinned XP bytes |
+| aam.h | 0/0 -> 0/0 | Newline-only; restored exact pinned XP bytes |
+| aas.c | 0/0 -> 0/0 | Newline-only; restored exact pinned XP bytes |
+| aas.h | 0/0 -> 0/0 | Newline-only; restored exact pinned XP bytes |
+
+Fixed Git-object SHA256 verified before copying, then final file hashes recorded
+in files.csv. No algorithm, exclusion or diagnostic mapping changed. This pure
+newline batch accumulates without immediate build. 131/851 reviewed, 720 remain;
+123 delivered, eight local P4 files. Cumulative non-error reduction stays
+68 points/176 lines; newline-only restorations total 41. Next: adc.c.
+
+### P4 ordered CPU reconciliation through c_stack.c
+
+| File under softpc.new/base/ccpu386 | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| adc.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| adc.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| add.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| add.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| and.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| and.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| arpl.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| arpl.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bound.c | 0/0 -> 0/0 | Original retained code; 1 existing excluded arms; diagnostic anchors checked |
+| bound.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bsf.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bsf.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bsr.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bsr.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bswap.c | 0/0 -> 0/0 | Original retained code; 1 existing excluded arms; diagnostic anchors checked |
+| bswap.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bt.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bt.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| btc.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| btc.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| btr.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| btr.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bts.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| bts.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_addr.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_addr.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_div64.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_div64.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_getset.c | 0/0 -> 0/0 | Original retained code; 1 existing excluded arms; diagnostic anchors checked |
+| c_intr.c | 0/0 -> 0/0 | Original retained code; 11 existing excluded arms; diagnostic anchors checked |
+| c_intr.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_main.h | 0/0 -> 0/0 | Original retained code; 3 existing excluded arms; diagnostic anchors checked |
+| c_mem.h | 0/0 -> 0/0 | Original retained code; 5 existing excluded arms; diagnostic anchors checked |
+| c_mul64.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_mul64.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_neg64.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_neg64.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_page.c | 0/0 -> 0/0 | Original retained code; 2 existing excluded arms; diagnostic anchors checked |
+| c_page.h | 0/0 -> 0/0 | Original retained code; 1 existing excluded arms; diagnostic anchors checked |
+| c_prot.c | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_prot.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_reg.c | 0/0 -> 0/0 | Original retained code; 4 existing excluded arms; diagnostic anchors checked |
+| c_reg.h | 0/0 -> 0/0 | Original retained code; 1 existing excluded arms; diagnostic anchors checked |
+| c_seg.h | 0/0 -> 0/0 | Exact XP bytes; newline-only restoration |
+| c_stack.c | 0/0 -> 0/0 | Original retained code; 6 existing excluded arms; diagnostic anchors checked |
+
+Final source comparison passes for all 53 accumulated P4 files: original retained
+nonblank code and unchanged error directives. Existing excluded bodies remain
+excluded; CPU algorithms and ABI are unchanged. Evidence: build/t485-s8/p4-source-check.json.
+176/851 reviewed, 675 remain; 123 delivered, 53 local P4 reconciliations.
+Cumulative non-error reduction remains 68 points/176 lines; newline-only total 75.
+No runtime or delivery pass claimed for P4. Next: ccpu386/c_stack.h.
+
+### P4 ordered CPU reconciliation through div.c
+
+| File under softpc.new/base/ccpu386 | Non-error points/lines before -> after | Result |
+| --- | --- | --- |
+| c_stack.h | 0/0 -> 0/0 | Original retained code; 2 unchanged excluded arms; XP diagnostic anchors |
+| c_tlb.c | 0/0 -> 0/0 | Original retained code; 11 unchanged excluded arms; XP diagnostic anchors |
+| c_tlb.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| c_tsksw.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| c_xcptn.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| c_xfer.c | 0/0 -> 0/0 | Original retained code; 2 unchanged excluded arms; XP diagnostic anchors |
+| c_xfer.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| c_xtrn.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| c_xtrn.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| call.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cbw.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cbw.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| ccpudefs.inc | 0/0 -> 0/0 | Already exact XP bytes |
+| ccpupig.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| ccpupig.h | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| ccpusas4.h | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| cdq.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cdq.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| clc.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| clc.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cld.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cld.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cli.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cli.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| clts.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| clts.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cmc.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cmc.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cmp.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cmp.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cmpxchg.c | 0/0 -> 0/0 | Original retained code; 1 unchanged excluded arms; XP diagnostic anchors |
+| cmpxchg.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cpu4gen.h | 0/0 -> 0/0 | Original retained code; 215 unchanged excluded arms; XP diagnostic anchors |
+| cpuint_c.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cwd.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cwd.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cwde.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| cwde.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| daa.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| daa.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| das.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| das.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| dec.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| dec.h | 0/0 -> 0/0 | Restored exact XP newline bytes |
+| div.c | 0/0 -> 0/0 | Restored exact XP newline bytes |
+
+Source comparison passes for all 98 accumulated P4 files against pinned XP:
+retained nonblank code matches and existing error directives are unchanged.
+No CPU algorithms or ABI changed. 221/851 reviewed, 630 remain; 123 delivered,
+98 local P4 files. Non-error reduction remains 68 points/176 lines; newline-only
+restorations total 110. P4 now enters cached build/publication, then targeted
+verification; next file is ccpu386/div.h after delivery.
+### P4 publication checkpoint
+
+Runtime4 cached full build and dual publication passed. All 26 destination/image
+hashes match the 13-image manifest. Final source and diagnostic-line checks pass
+for all 98 P4 files; original retained code, existing error directives and original
+logical lines are preserved. Documentation governance passed. Actual MEM/NTVDMD
+export, debugger event/register writeback, allocation rollback and termination
+witness passed on runtime4. DOS4GW/NESticle is running; commit/push remains pending.
+Evidence: build/t485-s8/p4/{line-check,published-hashes}.json and debug-live/trace.txt.
+### P4 final verification and register reconciliation
+
+DOS4GW/NESticle menu appearance, Escape hide and restoration passed on runtime4
+(p4/dos4gw/nesticle.txt.graphics-result.json). All P4 verification is complete;
+commit/push completes delivery. 221/851 final-verified; 630 remain. Non-error
+reduction remains 68 points/176 lines, with 110 newline-only files separately.
+
+Owner-reported register mismatch was confirmed for S6 c_seg.c: files.csv still
+contained its snapshot hash and not-repaired-by-audit despite delivery f0df10cdb.
+Only latest_sha256 and delivery_state are corrected; snapshot_sha256 is immutable.
+Current hash: 5878ad3d3acf0111536339d81f8f26bb7c39dda4425000e0011abf5ca70e9405.
+CURRENT and this detailed record now both state 221/851, not the historical 12/26
+checkpoints. Source history confirms no subsequent c_seg.c product changes.
