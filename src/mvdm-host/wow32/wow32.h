@@ -18,14 +18,12 @@
 
 #define HACK32
 
-#line 21
 #if DBG
 #line 22
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 #line 24
 
-#line 25
 #ifdef i386
 #line 26
 #error i386 kernel WOW profile is not supported
@@ -118,7 +116,6 @@
 */
 typedef struct _PA32 {
     PW32 lpfnA32;       // Array Address
-#line 115
 #ifdef DEBUG_OR_WOWPROFILE
 #line 116
 #error WOW profiling is not supported
@@ -129,7 +126,6 @@ typedef struct _PA32 {
 
 
 
-#line 124
 #ifdef DEBUG_OR_WOWPROFILE
 #line 125
 #error WOW profiling is not supported
@@ -142,7 +138,6 @@ typedef struct _PA32 {
 
 
 
-#line 134
 #ifdef DEBUG_OR_WOWPROFILE
 #line 135
 #error WOW profiling is not supported
@@ -314,21 +309,18 @@ typedef struct _TD {                  /* td */
 
 /* Global data
  */
-#line 302
 #ifdef DEBUG
 #line 303
 #error DEBUG WOW32 profile is not supported
 #endif
 #line 307
 extern INT    flOptions;    // command-line options (see OPT_*)
-#line 308
 #ifdef DEBUG
 #line 309
 #error DEBUG WOW32 profile is not supported
 #endif
 #line 312
 extern HANDLE hHostInstance;
-#line 313
 #ifdef DEBUG
 #line 314
 #error DEBUG WOW32 profile is not supported
@@ -415,7 +407,6 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 
 #define EXCEPTION_WOW32_ASSERTION   0x9898
 
-#line 400
 #ifdef DEBUG
 #line 401
 #error DEBUG WOW32 profile is not supported
@@ -432,7 +423,6 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 #endif
 #line 470
 
-#line 471
 #ifdef DEBUG
 #line 472
 #error DEBUG WOW32 profile is not supported
@@ -442,7 +432,6 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 #endif
 #line 476
 
-#line 477
 #ifdef DEBUG
 #line 478
 #error DEBUG WOW32 profile is not supported
@@ -513,7 +502,6 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 
 /* Simulator wrapper macros
  */
-#line 544
 #ifndef _X86_  // emulated CPU
 #define VDMSTACK()      (((ULONG)getSS()<<16)|getSP())
 #define SETVDMSTACK(vp)     {setSS(HIW(vp)); setSP(LOW(vp));}
@@ -525,7 +513,6 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 
 // Use FlatAddress array exported by ntvdm instead of Sim32GetVDMPointer.
 
-#line 554
 #ifndef _X86_
 #define INTEL_MEMORY_BASE ((DWORD)IntelMemoryBase)
 #else
@@ -551,7 +538,6 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
         (void *)(INTEL_MEMORY_BASE + (((Address) & 0xFFFF0000) >> 12) +       \
                  ((Address) & 0xFFFF))
 
-#line 577
 #ifdef DEBUG
 #line 578
 #error DEBUG WOW32 profile is not supported
@@ -591,7 +577,7 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 // code affected.
 //
 
-#define FLUSHVDMCODEPTR(vp,cb,p) ((void)(ULONG)(vp), (void)(USHORT)(cb), (void)(PBYTE)(p), (void)fWowMode, TRUE)
+#define FLUSHVDMCODEPTR(vp,cb,p) Sim32FlushVDMPointer( (vp), (USHORT)(cb), (PBYTE)(p), (fWowMode))
 //#define FLUSHVDMPTR(vp,cb,p)     TRUE          // BUGBUG! davehart
 #define FLUSHVDMPTR(vp,cb,p)     FLUSHVDMCODEPTR(vp,cb,p)
 
@@ -691,14 +677,12 @@ HTASK16 ThreadID32toHtask16(DWORD ThreadID32);
 PVOID   WOWStartupFailed(VOID);
 LPSTR  ThunkStr16toStr32(LPSTR pdst32, VPVOID vpsrc16, int cChars, BOOL bMulti);
 
-#line 717
 #ifdef DEBUG
 #line 718
 #error DEBUG WOW32 profile is not supported
 #endif
 #line 723
 
-#line 724
 #ifdef DEBUG_OR_WOWPROFILE
 #line 725
 #error WOW profiling is not supported

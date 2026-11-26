@@ -40,7 +40,7 @@ frozen point counts as current byte-sensitive diff counts.
 | 26 | src/mvdm-host/wow32/wmsgem.c | 3 | P10 delivered 77e8752be |
 | 27 | src/mvdm-host/wow32/wmsglb.c | 3 | P10 delivered 77e8752be |
 | 28 | src/mvdm-host/wow32/wole2.c | 5 | P10 delivered 77e8752be |
-| 29 | src/mvdm-host/wow32/wow32.h | 1 | Pending |
+| 29 | src/mvdm-host/wow32/wow32.h | 1 | P11 source-reviewed; delivery pending |
 | 30 | src/mvdm-host/wow32/wow32fax.c | 7 | Pending |
 | 31 | src/mvdm-host/wow32/wowhooks.c | 39 | Pending |
 | 32 | src/mvdm-host/wow32/wparam.c | 4 | Pending |
@@ -703,3 +703,38 @@ or hide differences. Fixed48-file census independently recomputed772/7114.
 [Runtime13 receipt](s11-p10-result.json): cached build,dual26/26hash publication,module-alias/reverse/message/COPYDATA and Full23/23 PASS. Both enhanced roundtrips pass all five markers; Win95 approved knownExitOne remains.28/48files,280/452points verified:12restored,268residual,172unreviewed. Census772/7114;combined reduction108/4649. Commit/push pending;S11 remains active.
 
 P10 delivered and pushed 77e8752be61eec545b100cd9b476b1e6d0aafed3.28/48files and280/452points delivered:12restored,268residual owner-review,172unreviewed. Full23/23 final runtime13. Extra file28 Full complete; next file wow32.h, periodic Full at file30 and S closure.
+
+### P11 file29 wow32.h
+
+Non-error69/70->52/52, reduction17/18;21 exclusions unchanged.
+Actual preprocessing101 original declarations match logical lines.
+HXP-R-04373 restored to original FLUSHVDMCODEPTR. Prior read-only lease
+rationale does not describe current SIM32 provider: buff is unused, original
+video scratch flush remains source-owned, CCPU overwrite is a no-op. Existing
+callback fixture now checks one exported call and original parameter shape
+rather than demanding a project-specific no-provider macro. No new shim.
+29/48files,281/452points reviewed:12restored-delivered,1local-restored,
+268residual,171unreviewed. Delivered28/280. Census755/7096;combined
+reduction125/4667. Cached build/publication running; runtime proof pending.
+
+P11 initial product link failed: stdcall _Sim32FlushVDMPointer@16 vs actual
+CCPU cdecl export. Coupled softpc.h existing declaration now explicitly cdecl,
+no wrapper. Supplemental S11-P11-ABI-01 records standing approval and proof.
+Raw whole-file format block1/1632 unchanged; independently normalized
+38/134->39/136 (+1point/+2lines), not hidden by raw census. This coupled
+header edit does not count as the future S12 whole-file audit. Rebuild pending.
+
+P11 runtime14 build and dual publication PASS. Original flush ABI assertion,
+callback4 and abort11 PASS. Product attempt1 could not compare WOW results
+because the disposable wrapper used nonexistent product58c instead of
+full58c; corrected wrapper reruns Product only. Production and publication
+unchanged. Runtime14 final Product result remains pending.
+
+### P11 final verification
+
+[Runtime14 receipt](s11-p11-result.json): cached full build and dual26/26
+hashes PASS; original callback4/abort11 and real Product gates PASS. Original
+HXP-R-04373 restored; cdecl supplemental declaration remains registered.
+29/48files,281/452points verified:13restored,268residual,171unreviewed.
+Census755/7096,combined raw reduction125/4667. Coupled normalized ABI
+increment1point/2lines separately disclosed. Commit/push pending.

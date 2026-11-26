@@ -1,0 +1,585 @@
+{
+  "packet": "M0 T485 S11 P11",
+  "state": "final-verified-awaiting-commit-push",
+  "runtime": "build/t485-s11/runtime14",
+  "files_reviewed": 29,
+  "files_total": 48,
+  "points_reviewed": 281,
+  "points_total": 452,
+  "restored": 13,
+  "residual": 268,
+  "unreviewed": 171,
+  "source_sha256": {
+    "src/mvdm-host/wow32/wow32.h": "829bc1567f80abae24b0973dda4cc14aa513a6c679ef333e0eba031c536ef31b",
+    "src/mvdm-host/inc/softpc.h": "6eaabcd95e1c9b18ce2f6cc5a9d1338311391a94b0934ab4188d8a3936e76358"
+  },
+  "file_metrics": {
+    "before": {
+      "points": 69,
+      "lines": 70,
+      "excluded": 21
+    },
+    "after": {
+      "points": 52,
+      "lines": 52,
+      "excluded": 21
+    },
+    "removed_redundant_anchors": [
+      21,
+      28,
+      121,
+      132,
+      145,
+      317,
+      324,
+      331,
+      418,
+      435,
+      445,
+      516,
+      528,
+      554,
+      694,
+      701
+    ]
+  },
+  "coupled_abi": {
+    "path": "src/mvdm-host/inc/softpc.h",
+    "raw_before": [
+      1,
+      1632
+    ],
+    "raw_after": [
+      1,
+      1632
+    ],
+    "normalized_before": [
+      38,
+      134
+    ],
+    "normalized_after": [
+      39,
+      136
+    ],
+    "reason": "Explicit cdecl matches actual exported CCPU provider; no wrapper",
+    "approval": "Owner standing small ABI increment approval",
+    "pending_id": "S11-P11-ABI-01"
+  },
+  "current_census": {
+    "files": 48,
+    "points": 755,
+    "lines": 7096,
+    "rows": [
+      {
+        "path": "src/mvdm-host/inc/wowcmdlg.h",
+        "sha256": "fa3f6519d37f2f1fb5266068fb6b99f670ad1e6ceb52e0604a0573442b3c617b",
+        "points": 0,
+        "lines": 0,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/inc/wowkbd.h",
+        "sha256": "9a994e0d94ae89cbf6386e5464c47f7de047a7e30e21bc438e7513f0debd9a20",
+        "points": 1,
+        "lines": 1,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/inc/wowkrn.h",
+        "sha256": "aa75ed64496b27fe2919a79ea8b47cede00ca6aff9319a334e7744439f954be4",
+        "points": 13,
+        "lines": 13,
+        "excluded": 13
+      },
+      {
+        "path": "src/mvdm-host/inc/wowsnd.h",
+        "sha256": "95367186098dabfd5b46aaacd353c46f74aacb622c983be3bb9ae24005f0440a",
+        "points": 7,
+        "lines": 7,
+        "excluded": 7
+      },
+      {
+        "path": "src/mvdm-host/wow32/isvwow.h",
+        "sha256": "bd03cd6efc7fc278ee56feea8e89d4e9fb157dd4f85206e63a24a232e83b8c62",
+        "points": 1,
+        "lines": 2,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/precomp.h",
+        "sha256": "9f4df8c1a123a71bdd24c4d3cb683dfa7205620d654192804c458855d5ec9ef6",
+        "points": 2,
+        "lines": 12,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/walias.c",
+        "sha256": "be0cf5e8f984dbb58e62ec98e9a2ed632fd580bc1921b764b90ce1a3ee93e2e2",
+        "points": 6,
+        "lines": 22,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/walias.h",
+        "sha256": "be6e886c889fcf601dd43a65bd278ad5110f39df010c1278da9f35479b4b5d6c",
+        "points": 5,
+        "lines": 14,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/wcall16.c",
+        "sha256": "f19f09599db9212504e8dbb8453c687d6701795fbda4a3b9150d054b48f1867a",
+        "points": 12,
+        "lines": 72,
+        "excluded": 9
+      },
+      {
+        "path": "src/mvdm-host/wow32/wcntl32.c",
+        "sha256": "1bec32bc9a08f08aa0ed58ead814b91fc694b417e7a065b2aeb28add7d58e2d6",
+        "points": 33,
+        "lines": 75,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/wcommdlg.c",
+        "sha256": "85bca4ee893ee6114b3c84178fb394950898bfe7c8da45e2dfae0ed9aad21363",
+        "points": 14,
+        "lines": 28,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/wdde.c",
+        "sha256": "4d9ab420d6614bc8537b509a4cb9b2494c2dfe87f0788ac1e13ea6b0758b330d",
+        "points": 25,
+        "lines": 159,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wdde.h",
+        "sha256": "85114841b76f1bbac0776b80376ee06b8b3a70b04d5730db33ea0ee67193df9c",
+        "points": 4,
+        "lines": 26,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wdib.c",
+        "sha256": "0f16698b4ebba8a6fb298c9e6c650eef4fce8230fe53021dab72307b6c9279bf",
+        "points": 5,
+        "lines": 6,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/wdos.c",
+        "sha256": "392bee0ce6fe39be5b972f60ed84de3c20a215e6abf730372f449bf8c56bfa65",
+        "points": 8,
+        "lines": 14,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/wgdi31.c",
+        "sha256": "b3130e99403ee3dfeb7ea49a0e98bdf735f017fc39f589b92b07a4b37e519e5a",
+        "points": 3,
+        "lines": 7,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/winsockp.h",
+        "sha256": "4abfea1b9561f0700338f6000ac526d2e49c47bcf29ca8e0c297a19141943fe7",
+        "points": 3,
+        "lines": 20,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wkernel.c",
+        "sha256": "91b1859464723cd83637674bdb3f48230d00f674809dcbcff5786eefc5da2a49",
+        "points": 14,
+        "lines": 36,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/wkfileio.c",
+        "sha256": "eba2840ca117a8f7ff050cb1f8fc685e77c46826b64a5471ac4e82029a4913aa",
+        "points": 12,
+        "lines": 24,
+        "excluded": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "sha256": "dd6ae74da4dab0b9ac35a6f5477009c1bdb8f37e4649cb3f1270cfedb36d2fa1",
+        "points": 78,
+        "lines": 188,
+        "excluded": 23
+      },
+      {
+        "path": "src/mvdm-host/wow32/wkman.h",
+        "sha256": "9d09d40022a03fd2ae4f597ae010a36412e4414507e548b2d17c83a8792d98b3",
+        "points": 1,
+        "lines": 4,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wmdisp32.c",
+        "sha256": "07d537fed7c6c5aaaa1a2ac74b23cce84451e55ec431df5a6644cb572429451b",
+        "points": 110,
+        "lines": 433,
+        "excluded": 10
+      },
+      {
+        "path": "src/mvdm-host/wow32/wmdisp32.h",
+        "sha256": "25620a80e69524a926e59f5f9658dac4b4b11fed065f97ff00cb5a39c7ef8010",
+        "points": 4,
+        "lines": 6,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/wmsg16.c",
+        "sha256": "df51b7b8f714fb4c30e02ca7966d52e063146d706a7c9c635c3fc5628c91cf55",
+        "points": 48,
+        "lines": 187,
+        "excluded": 3
+      },
+      {
+        "path": "src/mvdm-host/wow32/wmsgcb.c",
+        "sha256": "0e5532412f14513f1725fb01391cdd5dd4b9ad61dd532df690f9a32582b207f3",
+        "points": 9,
+        "lines": 27,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/wmsgem.c",
+        "sha256": "a8c745901ee557aecc0461c37036cb07bb6f4c9fa325d3ceda66b1c73bc72599",
+        "points": 5,
+        "lines": 8,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/wmsglb.c",
+        "sha256": "ba6997598c914947d6c80a79ec16cc329ad84943e9310704452a03e92cd1d4e4",
+        "points": 5,
+        "lines": 8,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/wole2.c",
+        "sha256": "5a17a672de16a740c35f84b4de1bd0dc891490fa4803c7d6df70dafc339743ae",
+        "points": 9,
+        "lines": 38,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/wow32.h",
+        "sha256": "829bc1567f80abae24b0973dda4cc14aa513a6c679ef333e0eba031c536ef31b",
+        "points": 52,
+        "lines": 52,
+        "excluded": 21
+      },
+      {
+        "path": "src/mvdm-host/wow32/wow32fax.c",
+        "sha256": "2219093a6255abf39179c11c617d042175157ba3492828f2a3c9a9b29cf85bf4",
+        "points": 9,
+        "lines": 37,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/wowhooks.c",
+        "sha256": "79a9f57cdf13df61525aaf9de434f07c47fec8aa3306e2a2ae5061ea13919505",
+        "points": 54,
+        "lines": 174,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/wparam.c",
+        "sha256": "c5537d7901e20b7be82593afd2ac0844bfbf5e732f36621d8f5ca1820be974ee",
+        "points": 24,
+        "lines": 47,
+        "excluded": 8
+      },
+      {
+        "path": "src/mvdm-host/wow32/wsdata.c",
+        "sha256": "c6f10d28115c8f725331dfa2c1a2d4aee1397119bc3f3662a3503e5e29f62015",
+        "points": 22,
+        "lines": 184,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wsext.c",
+        "sha256": "b754d3d60684751007f2e53a32231e9e8d507e7fe5e02f1dc8eebb76eee8c281",
+        "points": 4,
+        "lines": 12,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wshell.c",
+        "sha256": "b9cea5c6df29f9d599818673781cc0f6b689ef6b7ca1a2819230f07f0e61718a",
+        "points": 1,
+        "lines": 4,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wshimdb.c",
+        "sha256": "acc1fa6707254c6efd0a8420f644e4d96e780f1061721b3bf43c8642b08bed89",
+        "points": 5,
+        "lines": 61,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wspool.c",
+        "sha256": "a87c445f0b174ab042f5e4df5d3a61a42843f1d20f428836c55f6f6f0571cece",
+        "points": 2,
+        "lines": 5,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wstruc.c",
+        "sha256": "1753ff78348815d1dc7034eab3a8e35be82c9b2a1a4506b638a38458c6df4fac",
+        "points": 17,
+        "lines": 20,
+        "excluded": 5
+      },
+      {
+        "path": "src/mvdm-host/wow32/wuclass.c",
+        "sha256": "55dfc1ee06e8793c1a93040a10584482a335d98357811769424350cd95ed5010",
+        "points": 19,
+        "lines": 38,
+        "excluded": 5
+      },
+      {
+        "path": "src/mvdm-host/wow32/wuclip.c",
+        "sha256": "04b31a10d0870796964f872681432fd565a04f4681e98f15940a7550d7bb2e76",
+        "points": 1,
+        "lines": 2515,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/wudlg.c",
+        "sha256": "dd6e7caded711788cf97f0d459c115eaf6414d32589d97c8e2a039d13c1f42a3",
+        "points": 6,
+        "lines": 24,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wuman.c",
+        "sha256": "d1e5a59268862e37219a63b94681a453a3bfa9960b3d5e07740a65ad783815c7",
+        "points": 2,
+        "lines": 588,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/wumsg.c",
+        "sha256": "c69de8d73d50d66678c4f9644ed70848c178c7ceedd00fb6c8b960303db9d92e",
+        "points": 51,
+        "lines": 149,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/wumsg.h",
+        "sha256": "b86ffbf5c6e1d7fddbe0b0cf31079940a695018d4047fa551e383825d63671d8",
+        "points": 1,
+        "lines": 85,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wuser.c",
+        "sha256": "7fd63cc4a21cc610019232763077c9d03892827f1dfb9a39acaea867c19d91d2",
+        "points": 12,
+        "lines": 31,
+        "excluded": 1
+      },
+      {
+        "path": "src/mvdm-host/wow32/wuser31.c",
+        "sha256": "9fbb96fd80be2af1a670ccc2e5f323803058422b4448b71c2669902ddd270b95",
+        "points": 8,
+        "lines": 10,
+        "excluded": 2
+      },
+      {
+        "path": "src/mvdm-host/wow32/wutmr.c",
+        "sha256": "6e1462ca0f4e5c310775735d69d20b54fe7d81fc936191be23c6e2ddf1ec2a55",
+        "points": 1,
+        "lines": 1541,
+        "excluded": 0
+      },
+      {
+        "path": "src/mvdm-host/wow32/wuwind.c",
+        "sha256": "bd272b0dd07d588874fa6be4b2464a8898af52e5b59f8c8808937bc3ea2dd9bb",
+        "points": 27,
+        "lines": 82,
+        "excluded": 5
+      }
+    ]
+  },
+  "combined_byte_sensitive_reduction": [
+    125,
+    4667
+  ],
+  "publication": [
+    {
+      "Name": "NTVDMD.DLL",
+      "RelativePath": "system32\\NTVDMD.DLL",
+      "Sha256": "D7F30132560025AC40711B568D235DE2E0B21F7E6C0E0AB3B3A5B93FA77BE010",
+      "Machine": 332,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "86EDFEC5646138A20C97713F263F47FFC5F46E41229CD6E039CA21E22DD8D792"
+    },
+    {
+      "Name": "VJOY.DLL",
+      "RelativePath": "system32\\VJOY.DLL",
+      "Sha256": "B1B7D98906BA39F3657F38786BD78EAD338D503BFDF7530ABA495DF5F1409D0B",
+      "Machine": 332,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "F3C68D2CC2072B422FD4A42E19C22524ABC2CF6F13C240D1DF4E5A37EC34E8C8"
+    },
+    {
+      "Name": "VCDEX.DLL",
+      "RelativePath": "system32\\VCDEX.DLL",
+      "Sha256": "014E9A2C474914B01D649DFB0B8C4420727D12B7242A5DB6D40F0337A772129F",
+      "Machine": 332,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "9BE43A2EDA8E4D6B790EB04CDA4A11909A38C09860FF25083E3B2E3DCDA7F990"
+    },
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "55A881989E600AAC0A7DC4B1333FB3C194C960EB1A423C6B2317539293C31AD1",
+      "Machine": 34404,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "D2E4EADE30F5D2BE246A7643223861CFE560F3EAE896A8CC6D2330BA855B52DE"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "5A475DE6E8125ECFFDB19DB5BAACF760442FAF789DA35D85103BA0BD259282BE",
+      "Machine": 34404,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "DD40E070331FB72852FAC60F0025EE4F82B8C6B463AF2DA8A19B3618D84DD301"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "69586BE1EB5A17E24C468AD487CC4BBD97BF58D22BC538CF109F5B6FB764D349",
+      "Machine": 34404,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "A723510235B010D10C7D2D5556382F251EA3F90536A5FCBF9F0CBF0EEC4926E8"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "03FF6B48DEA943D80CA79ED400E51AF9C49AC33137DF0CA92E6CBA050F037379",
+      "Machine": 332,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "63A2D0A80F9C60D72CFD2F32DB228714FFDB8B6D8900378D2F0396DC8DFF4C86"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "80B4659C907DFC8B733C9B8E7685733D5E17CF4D50EC69E74B62D5AA7EE81E9F",
+      "Machine": 34404,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "471FF1F530F521395A017811C576CDC84255CE3F44CADBE59320A798415FC7F9"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "CF1CC8007770BD868B28FB86394355E397E938482193C2868487E0DAD6FA77FC",
+      "Machine": 34404,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "DD29E28768E71C5DA77C59DE637F68A5303BC4102935BC061F2324E48BBB413F"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "2A2FDC4252BE5F8467CCD10CC52EE58A38462F0087A0A37986E395B1914854DA",
+      "Machine": 332,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "AA31F038ADD86C7D776334AC057D47109FCFD02BD1D3F1638C40ECF8283CF513"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "0BE7F9E656F3835DBB236D16DB2C25F0F0A53BE7364FF3C0779DFC02D7EB971A",
+      "Machine": 332,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "42CDD3FD6C05141979B459075C77651A276CE45C0DD71E977EDAE430FE247786"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "4969A7FA0199055593D547BE39EAD5CC9A556006A7ED03B47010B81BF1433988",
+      "Machine": 332,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "F64CEFCD5CEDDA16F251E17B03C4E96C5C4EFBDA16AE3CE2F288DD30D4175B2C"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "12883597BA5FD0380DFEE8CF705EF112F3424E65750B0A78C1813A8002C9E6AC",
+      "Machine": 34404,
+      "PackageId": "1C9271BC-B129-4FF2-B57D-1DAF06D7F36B",
+      "InputSha256": "3DCF438C3FACE2B749DC38EF88195CB081270BDCB8D57CCBCE97C5B427226DE1"
+    }
+  ],
+  "product": {
+    "Suite": "Product",
+    "ElapsedMs": 197331,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": true,
+    "PreparationMs": 3871,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1020,
+        "CleanupMs": 316,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 16175,
+        "CleanupMs": 289,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 15043,
+        "CleanupMs": 267,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 15587,
+        "CleanupMs": 300,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 134,
+        "CleanupMs": 302,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 64301,
+        "CleanupMs": 348,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 40370,
+        "CleanupMs": 302,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 38020,
+        "CleanupMs": 321,
+        "Passed": true
+      }
+    ]
+  },
+  "frame": "WOW_ORIGINAL_FLUSH_OK argument_evaluation=1 provider_calls=1\nORIGINAL_CALLBACK_FRAME phase=0 resolve=3 simulate=1 output=1234abcd exception=00000000\nORIGINAL_CALLBACK_FRAME phase=1 resolve=1 simulate=0 output=deadbeef exception=e4470002\nORIGINAL_CALLBACK_FRAME phase=2 resolve=2 simulate=0 output=deadbeef exception=e4470002\nORIGINAL_CALLBACK_FRAME phase=3 resolve=3 simulate=1 output=deadbeef exception=e4470002\nPASS selected CallBack16 frame/re-resolution/exception propagation/output preservation\n",
+  "abort": "CALLBACK_ABORT_OK name=first-init resolve=1 simulate=0\nCALLBACK_ABORT_OK name=first-reserved resolve=1 simulate=0\nCALLBACK_ABORT_OK name=prep-init resolve=2 simulate=0\nCALLBACK_ABORT_OK name=prep-reserved resolve=2 simulate=0\nCALLBACK_ABORT_OK name=return-init resolve=3 simulate=1\nCALLBACK_ABORT_OK name=return-reserved resolve=3 simulate=1\nCALLBACK_ABORT_OK name=live-init resolve=2 simulate=1\nCALLBACK_ABORT_OK name=live-reserved resolve=2 simulate=1\nCALLBACK_ABORT_OK name=teardown resolve=2 simulate=1\nCALLBACK_ABORT_OK name=terminal resolve=2 simulate=1\nCALLBACK_ABORT_OK name=selector resolve=2 simulate=1\n",
+  "line_check": {
+    "checked": 101,
+    "mismatches": []
+  },
+  "full": "Not rerun for P11. P10 Full passed; next file30 and S closure require Full."
+}

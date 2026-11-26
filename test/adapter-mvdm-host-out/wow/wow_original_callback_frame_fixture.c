@@ -68,14 +68,27 @@ void __cdecl host_simulate(void)
     ss_value=HIWORD(return_stack);sp_value=LOWORD(return_stack);
     ip_value=0x9999;
 }
+/* Observe the original exported flush call; this fixture does not emulate SAS. */
+static unsigned flush_calls;
+static ULONG flush_address;
+static USHORT flush_size;
+static PBYTE flush_buffer;
+static BOOL flush_mode;
+BOOL __cdecl Sim32FlushVDMPointer(ULONG address, USHORT size, PBYTE buffer, BOOL mode)
+{
+    ++flush_calls;
+    flush_address=address;flush_size=size;flush_buffer=buffer;flush_mode=mode;
+    return TRUE;
+}
 int __cdecl main(void)
 {
     unsigned test, address_evaluations=0, size_evaluations=0, pointer_evaluations=0;
     if (!FLUSHVDMCODEPTR(++address_evaluations, ++size_evaluations,
             (++pointer_evaluations, (PBYTE)NULL)) ||
-        address_evaluations!=1 || size_evaluations!=1 || pointer_evaluations!=1)
+        address_evaluations!=1 || size_evaluations!=1 || pointer_evaluations!=1 || flush_calls!=1 || flush_address!=1 ||
+        flush_size!=1 || flush_buffer!=NULL || !flush_mode)
         return 91;
-    puts("WOW_DIRECT_FLUSH_OK argument_evaluation=1 no_external_provider=1");
+    puts("WOW_ORIGINAL_FLUSH_OK argument_evaluation=1 provider_calls=1");
 
     caller=VirtualAlloc(NULL,4096,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);
     outbound=VirtualAlloc(NULL,4096,MEM_COMMIT|MEM_RESERVE,PAGE_READWRITE);

@@ -21,7 +21,7 @@ try {
     $provider="$repo/build/.ninja/msvc-x86-release/wow32"
     Copy-Item "$provider/extension-original-frame.exe" "$root/fixture.exe"
     Copy-Item "$provider/extension-original-frame.exe.map" "$root/fixture.map"
-    $sources=@('src/mvdm-host/wow32/wcall16.c','src/compat/wow_callback_frame_lease.c',
+    $sources=@('src/mvdm-host/wow32/wow32.h','src/mvdm-host/inc/softpc.h','src/mvdm-host/wow32/wcall16.c','src/compat/wow_callback_frame_lease.c',
       'src/compat/wow_user_native_extension.c','test/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c')
     Run-Owned 'fixture' "$root/fixture.exe" '--verify' 30
     Run-Owned 'abort' "$root/fixture.exe" '--verify-abort' 30

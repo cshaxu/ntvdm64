@@ -43,7 +43,7 @@ both enhanced roundtrips pass all five markers. P10 delivered/pushed
 77e8752be. Additional file28 Full completed; next file30 and every S closure.
 Earlier P1-P7 linear-only line evidence must be rechecked with actual
 preprocessing before S11 closure. Migration39/159;S11 active.
-Next file29:wow32.h. No local source changes awaiting delivery.
+P11 file29 final-verified:29/48files,281/452points;13restored,268residual,171unreviewed. Census755/7096,cumulative raw125/4667. Coupled ABI adds1point/2lines after newline normalization. Runtime14 build,dual publication,callback4/abort11 and Product PASS;commit/push pending,delivered28/280. [P11 receipt](../etc/evidence/t485-h-repair/s11-p11-result.json).
 
 ## S10 Closure Record
 

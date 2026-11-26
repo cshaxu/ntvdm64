@@ -701,7 +701,7 @@ PX86CONTEXT getIntelRegistersPointer(VOID);
 
 #define RMSEGOFFTOLIN(seg, off) (PVOID)(((ULONG)(seg) << 4) + (ULONG)(off))
 
-extern BOOL     Sim32FlushVDMPointer (ULONG, USHORT, PBYTE , BOOL);
+extern BOOL __cdecl Sim32FlushVDMPointer (ULONG, USHORT, PBYTE , BOOL);
 extern BOOL     Sim32FreeVDMPointer (ULONG, USHORT, PBYTE , BOOL);
 extern BOOL     Sim32GetVDMMemory (ULONG, USHORT, PBYTE , BOOL);
 extern BOOL     Sim32SetVDMMemory (ULONG, USHORT, PBYTE , BOOL);
