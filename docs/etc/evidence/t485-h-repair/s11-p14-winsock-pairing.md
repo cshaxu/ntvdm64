@@ -44,5 +44,5 @@ permanently approved original XP file replacements on 2026-11-26; see the
 WINSOCK.DLL is now published in the existing archive member, runtime17 and
 O:/WINNT, with matching hashes. Formal package Completion, Cancel and TaskLoss
 all pass under p14/final/async-final-*. No candidate substitution is used by
-those tests. Commit and push remain pending. Non-error mirror metrics are
+those tests. Delivered and pushed in d64c9b2a6. Non-error mirror metrics are
 unchanged by the guest pairing repair.

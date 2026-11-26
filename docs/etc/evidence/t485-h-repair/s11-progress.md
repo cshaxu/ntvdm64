@@ -43,8 +43,8 @@ frozen point counts as current byte-sensitive diff counts.
 | 29 | src/mvdm-host/wow32/wow32.h | 1 | P11 delivered e5db62755 |
 | 30 | src/mvdm-host/wow32/wow32fax.c | 7 | P12 delivered b65051565 |
 | 31 | src/mvdm-host/wow32/wowhooks.c | 39 | P13 delivered e1824a049 |
-| 32 | src/mvdm-host/wow32/wparam.c | 4 | P14 source-reviewed; delivery pending |
-| 33 | src/mvdm-host/wow32/wsdata.c | 19 | P14 source-reviewed; delivery pending |
+| 32 | src/mvdm-host/wow32/wparam.c | 4 | P14 delivered d64c9b2a6 |
+| 33 | src/mvdm-host/wow32/wsdata.c | 19 | P14 delivered d64c9b2a6 |
 | 34 | src/mvdm-host/wow32/wsext.c | 4 | Pending |
 | 35 | src/mvdm-host/wow32/wshell.c | 1 | Pending |
 | 36 | src/mvdm-host/wow32/wshimdb.c | 5 | Pending |
@@ -848,3 +848,5 @@ P14 runtime17 cached build,dual26-hash publication,parameter map and Winsock
 rundown fixtures plus real Win16 Completion/Cancel/TaskLoss PASS.
 [P14 receipt](s11-p14-result.json).33files/350points final-verified;
 16restored,334residual,102unreviewed. Commit/push pending;delivered31/327.
+
+P14 delivered and pushed in d64c9b2a6. All33files/350points delivered:16restored,334qualified residual owner-review,102unreviewed. Actual48-file census745/7078; cumulative reduction135/4685. Runtime17 final package passed all three Win16 async witnesses after original XP Winsock pairing. Next file34 wsext.c; Full remains due atfile40 and S closure.

@@ -33,23 +33,17 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S11 Ordered Progress
 
 [S11 ordered list](../etc/evidence/t485-h-repair/s11-progress.md) and
-[P13 receipt](../etc/evidence/t485-h-repair/s11-p13-result.json):31/48files,
-327/452points delivered:15restored,312residual owner-review,125unreviewed;
-two supplemental ABI decisions. Current48-file census750points/7092lines.
-Combined raw reduction130points/4671lines;P13 alone3/1. P11 coupled ABI
-normalized increment1point/2lines remains separately disclosed.
-Runtime16 cached build,dual26/26hash publication,message transaction191,
-COPYDATA and Product targeted verification PASS. P13 delivered/pushed
-e1824a049. Last Full:file30 P12 runtime15 passed23/23; next:file40
-and S closure. Win95 approved knownExitOne retained in that Full checkpoint.
-P14 files32-33 final-verified:33/48files,350/452points;16restored,
-334residual,102unreviewed. Census745/7078,cumulative135/4685.
-Runtime17 cached build,dual26-hash host publication,paired original SP3
-WINSOCK publication,parameter54/rundown353 and actual Win16
-Completion/Cancel/TaskLoss PASS. [P14 receipt](../etc/evidence/t485-h-repair/s11-p14-result.json)
-and [guest pairing](../etc/evidence/t485-h-repair/s11-p14-winsock-pairing.md).
-Commit/push pending;delivered31/327 unchanged. Earlier P1-P7 linear-only line evidence must be
-rechecked with actual preprocessing before S11 closure.
+[P14 receipt](../etc/evidence/t485-h-repair/s11-p14-result.json):33/48files,
+350/452points delivered:16restored,334residual owner-review,102unreviewed.
+Current48-file census745points/7078lines; cumulative raw reduction135/4685.
+P14 alone removes5points/14lines. Prior P11 coupled ABI normalized +1point/
++2lines remains separately disclosed. Runtime17 cached build,dual26-hash
+host publication,original XP Winsock pairing,parameter54/rundown353 and
+actual Win16 Completion/Cancel/TaskLoss PASS. P14 delivered/pushed d64c9b2a6.
+[Guest pairing evidence](../etc/evidence/t485-h-repair/s11-p14-winsock-pairing.md).
+Next file34 wsext.c. Last Full:file30 P12 runtime15 passed23/23; next:file40
+and S closure. Earlier P1-P7 actual-preprocessor line followup and the
+spool-loader extraction fixture repair remain required before Full/closure.
 Migration39/159;S11 active.
 
 ## S10 Closure Record

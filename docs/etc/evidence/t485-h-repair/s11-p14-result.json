@@ -1,6 +1,6 @@
 {
   "packet": "M0 T485 S11 P14",
-  "state": "final-verified-awaiting-commit-push",
+  "state": "delivered-and-pushed",
   "runtime": "build/t485-s11/runtime17",
   "reviewed_files": 33,
   "total_files": 48,
@@ -606,5 +606,6 @@
       "O:/WINNT/SYSTEM32/WINSOCK.DLL"
     ],
     "final_test_root_prefix": "build/t485-s11/p14/final/async-final-"
-  }
+  },
+  "implementation_commit": "d64c9b2a6"
 }
