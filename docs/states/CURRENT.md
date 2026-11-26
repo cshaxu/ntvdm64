@@ -33,12 +33,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S9 Ordered Progress
 
 [S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 32/41 source-reviewed,
-31 delivered through P6 496479cdf; P7 ica.h final-verified, nine unreviewed.
+32 delivered through P7 3afcbb772; nine unreviewed.
 P7 non-error 20/23 ->9/10 (-11/-13); cumulative net +58 points/-23447 lines
-against fc9492342. 198/437 register points reviewed, 239 remain. S9 restored and verified points=50; 48 delivered before P7.
+against fc9492342. 198/437 register points reviewed, 239 remain. S9 restored and verified points=50, all delivered.
 Old hardware macros restored under the original condition extended with !CCPU;
 CCPU event enum remains authoritative. Eight #errors and original lines preserved.
-Runtime7 cached build, dual publication, CPU/PIC and real NESticle passed; commit/push pending. Next file base/inc/mouse_io.h.
+Runtime7 cached build, dual publication, CPU/PIC and real NESticle passed; P7 committed and pushed. Next file base/inc/mouse_io.h.
 Migration remains 39/159; Full stays S13.
 
 ## S8 Closure Record

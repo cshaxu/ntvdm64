@@ -702,3 +702,8 @@ timer.c still awaits its conditional mapping and is not included in that total.
 Owner permanently approves original-format/newline/EOF restoration even when
 it reveals additional hunk boundaries; both points and lines remain reported.
 Next file is base/inc/mouse_io.h. Evidence: build/t485-s9/p7.
+
+P7 delivery receipt: 3afcbb772 is committed and pushed to origin/main.
+All 32 reviewed files are delivered; nine remain. Fifty restored S9 register
+points are final-verified and delivered. Governance and links passed; publication
+hashes remain 26/26. Next ordered file is base/inc/mouse_io.h.
