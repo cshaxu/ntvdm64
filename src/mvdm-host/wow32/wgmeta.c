@@ -275,7 +275,6 @@ ULONG FASTCALL WG32DeleteMetaFile(PVDMFRAME pFrame)
 
     if (vp = GlobalLock16(parg16->f1,NULL)) {
 #ifdef PARAMETER_VALIDATION_16_RE_ENABLED
-#line 278
 #error Unsupported excluded original configuration
 #else
 #line 281
@@ -288,7 +287,6 @@ ULONG FASTCALL WG32DeleteMetaFile(PVDMFRAME pFrame)
 
         FREEVDMPTR(lpMetaData);
 #endif
-#line 290
     }
 
 
@@ -541,9 +539,8 @@ PMFR_Exit:
     RETURN(ul);
 }
 
-#line 542
 #if 0  // implemented in gdi.exe
-#line 543
+
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 575

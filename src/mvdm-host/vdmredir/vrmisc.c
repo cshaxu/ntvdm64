@@ -68,12 +68,11 @@ Return Value:
 {
     WORD DosPdb = getAX();
 
-#line 71
 #if DBG
-#line 72
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 78
+#line 79
 
     VrTerminateMailslots(DosPdb);
     VrTerminateNamedPipes(DosPdb);
@@ -104,12 +103,11 @@ Return Value:
 
 {
 
-#line 108
 #if DBG
-#line 109
+
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 114
+#line 116
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
 }

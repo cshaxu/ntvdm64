@@ -12,7 +12,7 @@
 --*/
 
 #if defined(i386) && !defined(DEBUG_OR_WOWPROFILE)
-#line 15
+
 #error Unsupported excluded original configuration
 #else
 #line 19
@@ -20,16 +20,13 @@
 #define FASTBOPPING     0
 
 #endif
-#line 23
 
 #if FASTBOPPING
-#line 25
 #error Unsupported excluded original configuration
 #endif
 #line 29
 
 #if FASTBOPPING
-#line 31
 #error Unsupported excluded original configuration
 #endif
 #line 39
@@ -42,9 +39,8 @@ extern VOID FastWowFirstCode(VOID);
 extern VOID FixLocks(VOID);
 //#endif
 
-#line 48
 #if 0
-#line 49
+
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 82

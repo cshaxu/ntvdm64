@@ -179,12 +179,10 @@ Return Value:
 {
     LPBYTE lpVdmVrInitialized;
 
-#line 182
 #if DBG
-#line 183
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 188
+#line 191
 
     //
     // if we are already initialized return TRUE. Not sure if this should

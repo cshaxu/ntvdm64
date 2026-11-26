@@ -473,14 +473,12 @@ ULONG FASTCALL WG32CreateIC(PVDMFRAME pFrame)
     len = psz1 ? strlen(psz1) : 0;
     if (len >= 7) {
 #if 0
-#line 476
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 478
 
         if (!WOW32_stricmp(psz1+len-7, "pscript")
 #if 0
-#line 481
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 485

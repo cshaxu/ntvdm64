@@ -31,13 +31,17 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Similar-Issue Sweep | Whole-file harmless restorations, normalized-exact bytes, exclusion framework and diagnostic mappings. |
 ## S8 Ordered Progress
 
-[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 688/851 final-verified,
-163 remain. P12 completed cached full build, dual 13-image publication with 26
-matching hashes, source/line checks, actual MEM/NTVDMD lifecycle and NESticle
-rendered-menu/Escape tests. Commit/push completes this delivery.
-Cumulative non-error reduction is 900 points/4981 lines (P12: 39/136);
-338 newline-only files separately. Next: src/mvdm-host/vdmredir/vrinit.c.
-N004 remains gated on S13; migration stays 39/159.
+[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md): 735/851 reviewed,
+116 remain; 688 delivered and 47 P13 files awaiting commit/push.
+P13 cached build, dual publication and MEM/NTVDMD plus NESticle tests passed. Strict non-error byte-sensitive
+comparison, including CRLF/LF, EOF, blank lines and #line, is 52 points/3683
+lines -> 57 points/57 lines: 5 more points, 3626 fewer lines; 36 files byte-exact.
+The former 0/0 was a lexical/frozen-ledger count, not complete mirror diff.
+The historical 900/4981 reduction likewise is not a byte-sensitive total;
+735-file byte-sensitive recount: 3340 points/321221 lines -> 1767 points/1771 lines,
+net reduction 1573/319450; 525 byte-exact files. Seven earlier files retain
+non-#line format residuals, registered for correction.
+Next: src/mvdm-host/wow32/wgtbl.h. N004 remains gated on S13; migration 39/159.
 ## S7 Closure Record
 
 [S7 closure](../etc/evidence/t485-h-repair/s7-progress.md), delivered through a1f5bff4b.

@@ -1265,3 +1265,171 @@ All 49 P12 files pass strict retained-source, unchanged-error and logical-line c
 ### P12 final verification
 
 All 49 final source identities, retained text, exclusions and logical-line mappings passed. Cached full build and dual 13-image publication passed; 26 destination hashes match runtime12 (build/t485-s8/p12/published-hashes.json). Actual MEM/NTVDMD load, debug register writeback, allocation rollback and matching task termination passed (debug-live/trace.txt). DOS4GW/NESticle menu pixels and Escape hide/restore passed (dos4gw/nesticle.txt.graphics-result.json). No Full or ROM gameplay claim. P12 reduction 39 non-error points/136 lines; cumulative 900/4981. 688/851 final-verified, 163 remain. Commit/push completes P12, not S8.
+
+### P13 redirector completion and initial WOW reconciliation
+
+P12 committed and pushed as b2a495baa; 688 files delivered.
+
+| File under mvdm-host | Frozen lexical points/lines before -> after (superseded below) | Result |
+| --- | --- | --- |
+| vdmredir/vrinit.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/vrmisc.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/vrmslot.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/vrnetb.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/vrputil.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| vdmredir/vrputil.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/daytona/makefile | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/daytona/makefile.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/daytona/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/dirs | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/fastwow.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/genwowit.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/i386/sources | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/intthunk.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/intthunk.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/isz.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/makefile.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/mapembed.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/mapembed.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/sources.inc | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/sz.src | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/waccel.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/waccel.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/walloc16.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/wcall16.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/wcall32.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wow32/wcall32.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+
+All 27 files pass pinned-source retained text, unchanged error directives and logical-line checks (build/t485-s8/p13-source-check.json and p13/line-check.json). Exact files stay unchanged; subset files only reconcile original blank lines and diagnostic anchors. No selected behavior or ABI changes, and no new point reduction claimed.
+
+715/851 reviewed: 688 delivered, 27 local, 136 remain. Cumulative reduction remains 900 points/4981 lines; newline-only count 338. No P13 build/publication/runtime pass claimed. Next: wow32/wcmdgtbl.h.
+
+### P13 WOW graphics reconciliation
+
+| File under wow32 | Frozen lexical points/lines before -> after (superseded below) | Result |
+| --- | --- | --- |
+| wcmdgtbl.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wcntl32.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wcommdlg.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wcuricon.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wcuricon.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wdib.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wdos.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgdi.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgdi.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgdi31.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgfont.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgfont.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgman.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgman.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgmeta.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgmeta.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgpal.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgpal.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgprnset.c | 0/0 -> 0/0 | Original retained text and exclusions verified |
+| wgprnset.h | 0/0 -> 0/0 | Original retained text and exclusions verified |
+
+All 47 P13 files pass strict retained-source, unchanged-error and logical-line checks (build/t485-s8/p13-source-check.json and p13/line-check.json). 735/851 reviewed: 688 delivered, 47 local, 116 remain. P13 point/line reduction is 0/0; cumulative remains 900/4981. Newline-only count 338. Next: wow32/wgtbl.h. Build/publication/runtime verification pending.
+
+### P13 byte-sensitive metric correction
+
+The preceding P13 0/0 tables and cumulative 900/4981 describe the frozen
+lexical ledger only. They are superseded as complete mirror-diff claims by
+[this per-file byte-sensitive comparison](s8-p13-byte-diff.csv).
+Against pinned XP, masking only bodies replaced by #error, P13 changes from
+52 points/3683 added-plus-deleted lines to 57 points/57 lines. CRLF/LF, EOF,
+blank lines and #line are retained in this comparison. There are 36 byte-exact
+files and 11 files with residual diagnostic anchors. Net change is +5 points,
+-3626 lines; it is not zero diff and not a point reduction. Restoring CRLF
+blocks exposes separate #line anchors. Points use SequenceMatcher non-equal
+opcodes with autojunk disabled and byte-preserving lines, not display hunks.
+Before revision: b2a495baa; after hashes are in the CSV.
+
+Cached build and dual publication completed; final runtime tests and delivery
+are pending. The cumulative byte-sensitive recount is incomplete: an earlier
+upstream extraction is missing. Historical totals must not be relabelled as
+byte-sensitive totals until all input hashes and exclusions are verified.
+### P13 corrected per-file non-error differences
+
+CRLF/LF and EOF are preserved; #line is included. Only #error replacement bodies are excluded.
+
+| File | Before points/lines | After points/lines |
+| --- | --- | --- |
+| src/mvdm-host/vdmredir/vrinit.c | 3/3 | 1/1 |
+| src/mvdm-host/vdmredir/vrmisc.c | 6/8 | 2/2 |
+| src/mvdm-host/vdmredir/vrmslot.c | 1/2812 | 36/36 |
+| src/mvdm-host/vdmredir/vrnetb.c | 12/13 | 4/4 |
+| src/mvdm-host/vdmredir/vrputil.c | 3/3 | 1/1 |
+| src/mvdm-host/vdmredir/vrputil.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/daytona/makefile | 0/0 | 0/0 |
+| src/mvdm-host/wow32/daytona/makefile.inc | 0/0 | 0/0 |
+| src/mvdm-host/wow32/daytona/sources | 0/0 | 0/0 |
+| src/mvdm-host/wow32/dirs | 0/0 | 0/0 |
+| src/mvdm-host/wow32/fastwow.h | 10/12 | 4/4 |
+| src/mvdm-host/wow32/genwowit.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/i386/sources | 0/0 | 0/0 |
+| src/mvdm-host/wow32/intthunk.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/intthunk.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/isz.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/makefile.inc | 0/0 | 0/0 |
+| src/mvdm-host/wow32/mapembed.c | 3/3 | 1/1 |
+| src/mvdm-host/wow32/mapembed.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/sources.inc | 0/0 | 0/0 |
+| src/mvdm-host/wow32/sz.src | 0/0 | 0/0 |
+| src/mvdm-host/wow32/waccel.c | 1/815 | 3/3 |
+| src/mvdm-host/wow32/waccel.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/walloc16.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wcall16.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wcall32.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wcall32.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wcmdgtbl.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wcntl32.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wcommdlg.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wcuricon.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wcuricon.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wdib.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wdos.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgdi.c | 4/4 | 2/2 |
+| src/mvdm-host/wow32/wgdi.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgdi31.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgfont.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgfont.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgman.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgman.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgmeta.c | 6/7 | 2/2 |
+| src/mvdm-host/wow32/wgmeta.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgpal.c | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgpal.h | 0/0 | 0/0 |
+| src/mvdm-host/wow32/wgprnset.c | 3/3 | 1/1 |
+| src/mvdm-host/wow32/wgprnset.h | 0/0 | 0/0 |
+
+Final published runtime13 passed actual MEM/NTVDMD and DOS4GW/NESticle menu
+rendering plus Escape hide/restore. Both publication locations match all 13
+manifest images (26 checks). Commit/push remains pending the corrected census.
+
+### S8 cumulative byte-sensitive recount through P13
+
+The earlier extraction blocker is resolved by reading and SHA256-verifying the
+pinned XP Git objects directly. [Current per-file census](s8-byte-diff-current.csv)
+covers exactly the first 735 canonical S8 paths, comparing S8 starting revision
+4ffc6a065 with current files. The 116 unreviewed files are not included.
+The same original exclusion projection is used before and after, with unchanged
+#error directive lists verified. All other bytes, including EOF and #line,
+are counted. SequenceMatcher opcodes with autojunk disabled define points.
+
+| Metric | Before | After | Reduction |
+| --- | --- | --- | --- |
+| Non-error points | 3340 | 1767 | 1573 |
+| Non-error added plus deleted lines | 321221 | 1771 | 319450 |
+| Byte-exact files | 173 | 525 | 352 additional |
+
+The frozen 900-point audit ledger is a separate classification inventory,
+not this complete byte-sensitive census. Restoring large newline differences
+can split a large replacement into independent diagnostic anchors; P13 has
++5 points and -3626 lines. No point reduction is claimed for P13.
+Seven already-reviewed files retain non-#line formatting differences:
+dos/dem/demdisp.c, demerror.c, demmsg.c; dpmi32/debug.c;
+inc/wowfax.h, wowinfo.h; softpc.new/base/ccpu386/bswap.c.
+These are explicitly outstanding format cleanup, not necessary retained code
+adaptations or complete byte restoration. Their exact hashes and counts are
+in the census. P13 runtime tests passed; no Full claim is made.

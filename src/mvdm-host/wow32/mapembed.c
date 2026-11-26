@@ -77,12 +77,10 @@ Return Value:
 
     BOOL    Result;
 
-#line 80
 #ifdef DEBUG
-#line 81
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 94
+#line 95
 
     if (!WOW32_strcmp(FileName, szWinDotIni)) {
         Result = TRUE;

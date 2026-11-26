@@ -113,13 +113,11 @@ Revision History:
 #define VrpAllocateMailslotStructure(n) ((PVR_MAILSLOT_INFO)LocalAlloc(LMEM_FIXED, sizeof(VR_MAILSLOT_INFO) + (n)))
 #define VrpFreeMailslotStructure(ptr)   ((void)LocalFree(ptr))
 #ifdef VR_BREAK
-#line 116
 #error Unsupported excluded original configuration
 #else
 #line 118
 #define VR_BREAKPOINT()
 #endif
-#line 120
 
 
 //
@@ -226,13 +224,10 @@ Return Value:
     DosPdb = getAX();
     Handle16 = getBX();
 
-#line 226
 #if DBG
-#line 227
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 231
 #endif
-#line 232
+#line 234
 
     if (!(ptr = VrpMapMailslotHandle16(Handle16))) {
         SET_ERROR(ERROR_INVALID_HANDLE);
@@ -304,13 +299,10 @@ Return Value:
     DWORD   MaxMessageSize, NextSize, MessageCount;
     BOOL    Ok;
 
-#line 303
 #if DBG
-#line 304
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 308
 #endif
-#line 309
+#line 312
 
     if ((ptr = VrpMapMailslotHandle16(getBX())) == NULL) {
         SET_ERROR(ERROR_INVALID_HANDLE);
@@ -382,13 +374,10 @@ Return Value:
     BOOL    Ok;
 
 
-#line 380
 #if DBG
-#line 381
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 385
 #endif
-#line 386
+#line 390
 
     //
     // grab the next 16-bit handle value. This pre-allocates the handle. If we
@@ -409,13 +398,10 @@ Return Value:
     lpName = LPSTR_FROM_WORDS(getDS(), getSI());
     NameLength = strlen(lpName);
 
-#line 406
 #if DBG
-#line 407
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 410
 #endif
-#line 411
+#line 415
 
     //
     // if the name length is less than the prefix length (\MAILSLOT\) may as
@@ -463,13 +449,10 @@ Return Value:
     // will sort the wheat from the oatbran
     //
 
-#line 458
 #if DBG
-#line 459
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 466
 #endif
-#line 467
+#line 471
 
     Handle32 = CreateMailslot(LocalMailslot,
                                 (DWORD)getBX(),     // nMaxMessageSize
@@ -479,25 +462,19 @@ Return Value:
     if (Handle32 == HANDLE_FUNCTION_FAILED) {
         SET_ERROR(VrpMapLastError());
 
-#line 476
 #if DBG
-#line 477
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 482
 #endif
-#line 483
+#line 487
 
         VrpFreeMailslotStructure(ptr);
         VrpFreeHandle16(Handle16);
     } else {
 
-#line 488
 #if DBG
-#line 489
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 492
 #endif
-#line 493
+#line 497
 
         //
         // mailslot created - fill in the VR_MAILSLOT_INFO structure -
@@ -525,13 +502,10 @@ Return Value:
                                 );
         if (!Ok) {
 
-#line 520
 #if DBG
-#line 521
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 526
 #endif
-#line 527
+#line 531
 
             ptr->MessageSize = getCX();
         }
@@ -581,13 +555,10 @@ Return Value:
 --*/
 
 {
-#line 576
 #if DBG
-#line 577
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 583
 #endif
-#line 584
+#line 589
 
     //
     // return not supported error instead of ERROR_INVALID_FUNCTION
@@ -625,13 +596,10 @@ Return Value:
     DWORD   NextSize;
     BOOL    Ok;
 
-#line 621
 #if DBG
-#line 622
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 626
 #endif
-#line 627
+#line 633
 
     if ((ptr = VrpMapMailslotHandle16(getBX())) == NULL) {
         SET_ERROR(ERROR_INVALID_HANDLE);
@@ -648,13 +616,10 @@ Return Value:
             SET_ERROR(VrpMapLastError());
         } else {
 
-#line 643
 #if DBG
-#line 644
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 647
 #endif
-#line 648
+#line 654
 
             Ok = ReadFile(Handle,
                             POINTER_FROM_WORDS(getES(), getDI()),
@@ -666,13 +631,10 @@ Return Value:
                 SET_ERROR(VrpMapLastError());
             } else {
 
-#line 659
 #if DBG
-#line 660
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 667
 #endif
-#line 668
+#line 674
 
                 setAX((WORD)BytesRead);
 
@@ -693,13 +655,10 @@ Return Value:
                     setCX((WORD)NextSize);
                 }
 
-#line 688
 #if DBG
-#line 689
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 692
 #endif
-#line 693
+#line 699
 
                 //
                 // we don't support priorities, just return 0
@@ -750,23 +709,17 @@ Return Value:
 
     Name = LPSTR_FROM_WORDS(getDS(), getSI());
 
-#line 743
 #if DBG
-#line 744
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 748
 #endif
-#line 749
+#line 756
 
     if (!VrpIsMailslotName(Name)) {
 
-#line 752
 #if DBG
-#line 753
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 756
 #endif
-#line 757
+#line 764
 
         SET_ERROR(ERROR_PATH_NOT_FOUND);
     }
@@ -787,13 +740,10 @@ Return Value:
     if (Handle == HANDLE_FUNCTION_FAILED) {
         SET_ERROR(VrpMapLastError());
 
-#line 777
 #if DBG
-#line 778
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 781
 #endif
-#line 782
+#line 789
 
     } else {
 
@@ -808,13 +758,10 @@ Return Value:
 
         Ok = SetMailslotInfo(Handle, READ_DWORD(&StructurePointer->DWMS_Timeout));
 
-#line 796
 #if DBG
-#line 797
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 806
 #endif
-#line 807
+#line 814
 
         Ok = WriteFile(Handle,
                         READ_FAR_POINTER(&StructurePointer->DWMS_Buffer),
@@ -825,23 +772,17 @@ Return Value:
         if (!Ok) {
             SET_ERROR(VrpMapLastError());
 
-#line 817
 #if DBG
-#line 818
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 821
 #endif
-#line 822
+#line 829
 
         } else {
 
-#line 825
 #if DBG
-#line 826
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 832
 #endif
-#line 833
+#line 840
 
             setCF(0);
         }
@@ -880,13 +821,10 @@ Return Value:
 --*/
 
 {
-#line 871
 #if DBG
-#line 872
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 875
 #endif
-#line 876
+#line 884
 
     VrpRemoveProcessMailslots(DosPdb);
 }
@@ -927,12 +865,10 @@ Return Value:
 {
     int     CharCount;
 
-#line 916
 #if DBG
-#line 917
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 919
+#line 928
 
     if (IS_ASCII_PATH_SEPARATOR(*Name)) {
         ++Name;
@@ -950,13 +886,10 @@ Return Value:
                 // so its not a valid mailslot name - fail it
                 //
 
-#line 936
 #if DBG
-#line 937
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 940
 #endif
-#line 941
+#line 950
 
                 return FALSE;
             }
@@ -972,26 +905,20 @@ Return Value:
             Name += 8;
             if (IS_ASCII_PATH_SEPARATOR(*Name)) {
 
-#line 956
 #if DBG
-#line 957
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 960
 #endif
-#line 961
+#line 970
 
                 return TRUE;
             }
         }
     }
 
-#line 967
 #if DBG
-#line 968
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 971
 #endif
-#line 972
+#line 981
 
     return FALSE;
 }
@@ -1035,13 +962,10 @@ Return Value:
         strcat(lpBuffer, lpName);
     }
 
-#line 1015
 #if DBG
-#line 1016
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1019
 #endif
-#line 1020
+#line 1030
 
 }
 
@@ -1142,13 +1066,10 @@ Return Value:
         }
     }
 
-#line 1120
 #if DBG
-#line 1121
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1133
 #endif
-#line 1134
+#line 1146
 
     return ptr;
 }
@@ -1192,13 +1113,10 @@ Return Value:
         }
     }
 
-#line 1177
 #if DBG
-#line 1178
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1190
 #endif
-#line 1191
+#line 1204
 
     return ptr;
 }
@@ -1241,13 +1159,10 @@ Return Value:
         }
     }
 
-#line 1233
 #if DBG
-#line 1234
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1243
 #endif
-#line 1244
+#line 1258
 
     return ptr;
 }
@@ -1282,13 +1197,10 @@ Return Value:
 {
     PVR_MAILSLOT_INFO   ptr, previous = NULL, next;
 
-#line 1278
 #if DBG
-#line 1279
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1284
 #endif
-#line 1285
+#line 1300
 
     //
     // usual type of thing - grovel through list of mailslot structures, if
@@ -1299,23 +1211,17 @@ Return Value:
     for (ptr = MailslotInfoList; ptr; ) {
         if (ptr->DosPdb == DosPdb) {
 
-#line 1295
 #if DBG
-#line 1296
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1305
 #endif
-#line 1306
+#line 1321
 
             CloseHandle(ptr->Handle32);
 
-#line 1309
 #if DBG
-#line 1310
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1319
 #endif
-#line 1320
+#line 1335
 
             //
             // remove mailslot structure from list
@@ -1429,13 +1335,10 @@ Return Value:
             for (j=1, Handle16=1; map & j; ++Handle16, j <<= 1);
             Handle16Bitmap[i] |= j;
 
-#line 1433
 #if DBG
-#line 1434
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1441
 #endif
-#line 1442
+#line 1458
 
             return Handle16;
         }
@@ -1445,13 +1348,10 @@ Return Value:
     // no free handles found. Since handles start at 1, use 0 to indicate error
     //
 
-#line 1451
 #if DBG
-#line 1452
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1456
 #endif
-#line 1457
+#line 1473
 
     return 0;
 }
@@ -1492,22 +1392,16 @@ Return Value:
 
     --Handle16;
 
-#line 1497
 #if DBG
-#line 1498
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1504
 #endif
-#line 1505
+#line 1522
 
     Handle16Bitmap[Handle16/BITSIN(DWORD)] &= ~(1 << Handle16 % BITSIN(DWORD));
 
-#line 1508
 #if DBG
-#line 1509
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1512
 #endif
-#line 1513
+#line 1530
 
 }
