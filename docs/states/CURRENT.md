@@ -32,9 +32,14 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S12 Ordered Progress
 
-[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):0/48files,
-0/645frozen points reviewed;645unreviewed. No S12 source changes or delivery.
-Nextfile1:dos/command/cmd.h. Migration39/159;N004 remains gated on S13.
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):4/48files,
+28/645frozen points reviewed;7restored-local,21residual,617unreviewed.
+P1 final verified/published4files28points;commit/push pending.
+Batch70/165->33/111 (-37points/-54lines);S12 census803/31809->766/31755.
+[P1 receipt](../etc/evidence/t485-h-repair/s12-p1-result.json):runtime1,26hashes,
+thread/capture/real EDIT return PASS;620product line witnesses zero drift.
+Nextfile5 cmdkeyb.c after submission;no Full repeated.
+Migration39/159;N004 remains gated on S13.
 
 ## S11 Closure Record
 

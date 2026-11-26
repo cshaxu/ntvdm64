@@ -529,6 +529,9 @@ BOOL cmdGetSystemrootTemp(LPSTR lpszBuffer, DWORD Length, SYSROOTTYPE SysRoot)
 #define FOUND_TMP  0x01
 #define FOUND_TEMP 0x02
 
+#define GETSYSTEMTEMPDIRECTORYAORD 125
+#define GETSYSTEMTEMPDIRECTORYWORD 126
+
 DWORD gfFoundTmp = 0;
 
 
@@ -584,6 +587,7 @@ DWORD LengthBuffer
       pfnGetSystemTempDirectoryA =
                (PFNGETSYSTEMTEMPDIRECTORYA)GetProcAddress(hUserenv,
                                                           szGetSystemTempDirectory);
+                                                          /* szGetSystemTempDirectory); */
       if (NULL != pfnGetSystemTempDirectoryA) {
          LengthTemp = LengthBuffer;
          fSysTemp = (*pfnGetSystemTempDirectoryA)(lpszBuffer, &LengthTemp);

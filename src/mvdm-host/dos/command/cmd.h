@@ -18,19 +18,15 @@
 */
 
 #ifdef DOS
-#line 21
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
-#line 23
 
 #ifdef OS2_16
-#line 25
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register.
 #endif
 #line 28
 
 #ifdef OS2_32
-#line 30
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
 #line 33
@@ -42,42 +38,34 @@
 #include <malloc.h>
 #include <process.h>
 
-#line 41
 #ifdef WIN_16
-#line 42
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
 #line 45
 
 #ifdef WIN_32
-#line 47
 #error Unsupported excluded original command host profile
 #else
 #line 54
-#define TRUE_IF_WIN32	0
+#define TRUE_IF_WIN32   0
 #endif
-#line 56
 
 #ifdef FLAT_32
-#line 58
 #error Unsupported excluded original command host profile
 #endif
 #line 64
 
 #ifdef WIN
-#line 66
 #error Unsupported excluded original command host profile
 #endif
 #line 69
 
 #ifdef SIGNALS
-#line 71
 #error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
 #line 74
 
 #ifdef OS2_32
-#line 76
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
 #line 79
@@ -124,8 +112,7 @@ typedef struct _STD_HANDLES {
     ULONG   hStdIn;
 } STD_HANDLES, *PSTD_HANDLES;
 
-#line 122
-#define PIPE_INPUT_BUFFER_SIZE	512
+#define PIPE_INPUT_BUFFER_SIZE  512
 #define PIPE_OUTPUT_BUFFER_SIZE PIPE_INPUT_BUFFER_SIZE
 #define PIPE_INPUT_TIMEOUT              55
 #define PIPE_OUTPUT_TIMEOUT     PIPE_INPUT_TIMEOUT
@@ -180,9 +167,8 @@ typedef struct  _VDMENVBLK {
 /** Command Function Prototypes */
 
 
-#line 177
-VOID   cmdComSpec		    (VOID);
-VOID   cmdGetEnv		    (VOID);
+VOID   cmdComSpec                   (VOID);
+VOID   cmdGetEnv                    (VOID);
 VOID   cmdGetNextCmd                (VOID);
 VOID   cmdGetNextCmdForSeparateWow  (VOID);
 VOID   cmdGetStdHandle              (VOID);
@@ -201,7 +187,7 @@ VOID   cmdCheckBinary               (VOID);
 VOID   cmdInitConsole               (VOID);
 VOID   nt_init_event_thread         (VOID);
 VOID   cmdExec32                    (PCHAR,PCHAR);
-VOID   cmdCreateProcess             (VOID);
+VOID   cmdCreateProcess             (PSTD_HANDLES pStdHandles);
 USHORT cmdMapCodePage               (ULONG);
 VOID    cmdCheckForPIF              (PVDMINFO);
 VOID   cmdGetConfigSys              (VOID);

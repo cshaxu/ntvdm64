@@ -13,18 +13,16 @@
 #include <softpc.h>
 #include <mvdm.h>
 #include <ctype.h>
-#line 16
 #include <oemuni.h>
 #include <wowcmpat.h>
 #include "compat/include/command_native_child.h"
 #include "compat/include/thread_start_compat.h"
 #undef CreateThread
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
-    opennt_create_void_cdecl_thread_named((attributes), (stack_bytes), \
-        (OPENNT_VOID_CDECL_THREAD_START_ROUTINE)(start_routine), (parameter), \
+    opennt_create_void_cdecl_parameter_thread_named((attributes), (stack_bytes), \
+        (OPENNT_VOID_CDECL_PARAMETER_THREAD_START_ROUTINE)(start_routine), (parameter), \
         (flags), (thread_id), #start_routine)
 #include "compat/include/command_process_binding.h"
-#include "compat/include/mvdm_shadow_registry.h"
 #line 18
 
 //*****************************************************************************
@@ -154,7 +152,6 @@ VOID cmdCheckBinary (VOID)
     PCHAR  lpCommandTail,lpTemp;
     ULONG  AppNameLen,CommandTailLen = 0;
     USHORT CommandTailOff,CommandTailSeg,usTemp;
-#line 146
     NTSTATUS       Status;
     UNICODE_STRING Unicode;
     OEM_STRING     OemString;
@@ -197,7 +194,6 @@ VOID cmdCheckBinary (VOID)
     }
 
 
-#line 188
     if (BinaryType == SCS_DOS_BINARY) {
         setCF(0);
         return;         // DOS Exe
@@ -213,7 +209,6 @@ VOID cmdCheckBinary (VOID)
 
 
     if (VDMForWOW && BinaryType == SCS_WOW_BINARY && IsFirstWOWCheckBinary) {
-#line 203
         IsFirstWOWCheckBinary = FALSE;
         setCF(0);
         return;         // Special Hack for krnl286.exe
@@ -260,7 +255,6 @@ VOID cmdCheckBinary (VOID)
         }
     }
 
-#line 249
     // copy the stub command.com name
     strcpy ((PCHAR)&pSCSInfo->SCS_ComSpec,lpszComSpec+8);
     lpTemp = (PCHAR) &pSCSInfo->SCS_ComSpec;
@@ -318,7 +312,7 @@ VOID cmdCheckBinary (VOID)
 
 #define MAX_DIR 68
 
-VOID cmdCreateProcess ( VOID )
+VOID cmdCreateProcess ( PSTD_HANDLES pStdHandles )
 {
 
     VDMINFO VDMInfoForCount;
@@ -334,11 +328,9 @@ VOID cmdCreateProcess ( VOID )
     UNICODE_STRING Unicode;
     OEM_STRING     OemString;
     LPVOID lpNewEnv=NULL;
-    PSTD_HANDLES pStdHandles;
     ULONG SnapshotStdHandles[3];
-#line 323
+#line 322
     ANSI_STRING Env_A;
-#line 324
 
     // we have one more 32 executable active
     Exe32ActiveCount++;
@@ -360,11 +352,9 @@ VOID cmdCreateProcess ( VOID )
     pStdHandles = (PSTD_HANDLES)SnapshotStdHandles;
     Status = mvdm_command_native_child_std_handles(SnapshotStdHandles);
     if (Status) {
-#line 343
+#line 341
     if ((hStd16In = (HANDLE) FETCHDWORD(pStdHandles->hStdIn)) != (HANDLE)-1)
-#line 344
         SetStdHandle (STD_INPUT_HANDLE, hStd16In);
-#line 345
 
     if ((hStd16Out = (HANDLE) FETCHDWORD(pStdHandles->hStdOut)) != (HANDLE)-1)
         SetStdHandle (STD_OUTPUT_HANDLE, hStd16Out);
@@ -372,7 +362,7 @@ VOID cmdCreateProcess ( VOID )
     if ((hStd16Err = (HANDLE) FETCHDWORD(pStdHandles->hStdErr)) != (HANDLE)-1)
         SetStdHandle (STD_ERROR_HANDLE, hStd16Err);
     }
-#line 351
+#line 349
 
     /*
      *  Warning, pEnv32 currently points to an ansi environment.
@@ -388,7 +378,7 @@ VOID cmdCreateProcess ( VOID )
     if (!Status)
         SetLastError(ERROR_INVALID_HANDLE);
     else {
-#line 363
+#line 361
     RtlInitString((PSTRING)&OemString, pCommand32);
     NtStatus = RtlOemStringToUnicodeString(&Unicode,&OemString,TRUE);
     if (NT_SUCCESS(NtStatus)) {
@@ -420,12 +410,12 @@ VOID cmdCreateProcess ( VOID )
     }
 
     }
-#line 394
+#line 391
     if (Status == FALSE)
         dwExitCode32 = GetLastError ();
     mvdm_command_native_child_finish();
 
-#line 397
+#line 394
     if (hStd16In != (HANDLE)-1)
         SetStdHandle (STD_INPUT_HANDLE, SCS_hStdIn);
 
@@ -439,12 +429,10 @@ VOID cmdCreateProcess ( VOID )
         ResumeThread (ProcessInformation.hThread);
         WaitForSingleObject(ProcessInformation.hProcess, (DWORD)-1);
         GetExitCodeProcess (ProcessInformation.hProcess, &dwExitCode32);
-#line 410
         CloseHandle (ProcessInformation.hProcess);
         CloseHandle (ProcessInformation.hThread);
     }
 
-#line 414
     if (Env_A.Buffer)
         RtlFreeAnsiString(&Env_A);
 
@@ -465,16 +453,15 @@ VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)
 
     DWORD dwThreadId;
     HANDLE hThread;
-#line 434
+    PSTD_HANDLES pStdHandles;
+#line 432
 
     pCommand32 = pCmd32;
     pEnv32 = pEnv;
-#line 437
 
     CntrlHandlerState = (CntrlHandlerState & ~CNTRL_SHELLCOUNT) |
                          (((WORD)(CntrlHandlerState & CNTRL_SHELLCOUNT))+1);
 
-#line 441
     nt_block_event_thread(0);
     fSoftpcRedirectionOnShellOut = fSoftpcRedirection;
     fBlock = TRUE;
@@ -561,7 +548,7 @@ VOID cmdExecComspec32 (VOID)
         return;
     }
     pEnv = (PCHAR)mvdm_command_native_child_environment();
-#line 517
+#line 511
 
     chDefaultDrive = (CHAR)(getAL() + 'A');
 
@@ -586,9 +573,7 @@ VOID cmdExecComspec32 (VOID)
 VOID cmdExec (VOID)
 {
 
-#line 541
     DWORD   i;
-#line 542
     DWORD   dwRet;
     PCHAR   pCommandTail;
     PCHAR   pEnv;
@@ -600,13 +585,12 @@ VOID cmdExec (VOID)
         setCF(0);
         setAL((UCHAR)GetLastError());
         return;
-#line 554
     }
     pCommandTail = (PCHAR)mvdm_command_native_child_command();
     pEnv = (PCHAR)mvdm_command_native_child_environment();
     if (pCommandTail == NULL || pEnv == NULL) {
         mvdm_command_native_child_abort();
-#line 557
+#line 551
         setCF(0);
         setAL((UCHAR)ERROR_BAD_FORMAT);
         return;
@@ -618,12 +602,11 @@ VOID cmdExec (VOID)
         cmdExec32 (pCommandTail,pEnv);
     }
     else {
-#line 568
         dwRet = GetEnvironmentVariable ("COMSPEC",Buffer,MAX_PATH);
 
         if (dwRet == 0 || dwRet >= MAX_PATH){
             mvdm_command_native_child_abort();
-#line 571
+#line 565
             setCF(0);
             setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
             return;
@@ -631,7 +614,7 @@ VOID cmdExec (VOID)
 
         if ((dwRet + 4 + strlen(pCommandTail)) >= MAX_PATH) {
             mvdm_command_native_child_abort();
-#line 577
+#line 571
             setCF(0);
             setAL((UCHAR)ERROR_BAD_ENVIRONMENT);
             return;
@@ -652,7 +635,7 @@ VOID cmdExec (VOID)
             setAL((UCHAR)ERROR_BAD_FORMAT);
             return;
         }
-#line 584
+#line 578
         cmdExec32 ((PCHAR)mvdm_command_native_child_command(),pEnv);
     }
 

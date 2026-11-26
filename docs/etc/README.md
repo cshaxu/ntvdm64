@@ -2079,3 +2079,5 @@ post-publication targeted checks.
 [S11 P14 Winsock guest pairing](evidence/t485-h-repair/s11-p14-winsock-pairing.md) records isolated original-media compatibility evidence and pending formal publication.
 
 - [S12 ordered host-boundary repair progress](evidence/t485-h-repair/s12-progress.md).
+
+[S12 P1 delivery receipt](evidence/t485-h-repair/s12-p1-result.json).

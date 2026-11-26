@@ -50,3 +50,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S11 closure](s11-progress.md#s11-closure) records runtime26 and P19 delivery.
 [S12 ordered host-boundary repair progress](s12-progress.md) starts the next
 48-file,645-point admitted repair scope.
+
+[S12 P1 delivery receipt](s12-p1-result.json).

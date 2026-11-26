@@ -1,0 +1,251 @@
+{
+  "task": "M0 T485 S12 P1",
+  "state": "final-verified-published-commit-pending",
+  "baseline_commit": "545d04836f92313b78382744cab4bafc72555a47",
+  "package": "build/t485-s12/runtime1",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "sha256": "c9aa742a60df7228c37416fe44a3662fcbfb92d7e3499f1d673a20caea240884"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "sha256": "2c0c0308a64c63a6d6201d04040ec867fe60ba75be414a7604a8082376293dd6"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "sha256": "fbb3b7f863d341ecf219042fbd252f6911986f49a9bdadc2c21486d8fc979f1a"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "sha256": "8b40302b51b63394dc3072de7d9940dfe0ddd6ac571d8f4b49fc932e72d06369"
+    }
+  ],
+  "diff": {
+    "batch_before": {
+      "points": 70,
+      "lines": 165
+    },
+    "batch_after": {
+      "points": 33,
+      "lines": 111
+    },
+    "s12_before": {
+      "points": 803,
+      "lines": 31809
+    },
+    "s12_after": {
+      "points": 766,
+      "lines": 31755
+    }
+  },
+  "progress": {
+    "files_reviewed": 4,
+    "files_total": 48,
+    "points_reviewed": 28,
+    "points_total": 645,
+    "restored": 7,
+    "residual": 21,
+    "unreviewed": 617
+  },
+  "build": {
+    "result": "PASS",
+    "log": "build\\t485-s12\\p1\\final\\build.log",
+    "owner_pid": 12380
+  },
+  "publication": {
+    "result": "PASS",
+    "locations": [
+      "assets/release",
+      "O:/WINNT/SYSTEM32"
+    ],
+    "hash_checks": [
+      {
+        "path": "assets\\release\\NTVDMD.DLL",
+        "sha256": "99932026E003254CD077D00A4BD0959302BD7BCEFC22D2CC0040181C7D5B5FCD",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+        "sha256": "99932026E003254CD077D00A4BD0959302BD7BCEFC22D2CC0040181C7D5B5FCD",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VJOY.DLL",
+        "sha256": "376ECAD2FAB9C99DAFFA9901AC5983E0FF192505F4A4EB7EE8D8967788F29E0B",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+        "sha256": "376ECAD2FAB9C99DAFFA9901AC5983E0FF192505F4A4EB7EE8D8967788F29E0B",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "394D2CBE0B286C555980B10AFB6141B9EC0AA1F8E2109870CAD5DED71FAECA2B",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+        "sha256": "394D2CBE0B286C555980B10AFB6141B9EC0AA1F8E2109870CAD5DED71FAECA2B",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "F67AE933520639EE175AABC8746B59E93E651DDF2DFFA7275523C0105C6953B8",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+        "sha256": "F67AE933520639EE175AABC8746B59E93E651DDF2DFFA7275523C0105C6953B8",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "264B5A3CC1B49FED6BCF38871A89E09A6B967928BEE68AA88F4EC51E233C54C5",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+        "sha256": "264B5A3CC1B49FED6BCF38871A89E09A6B967928BEE68AA88F4EC51E233C54C5",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "C0072F32FF2444D37C10F903A737AEE44CEE15A45D00586E86CFF6198B41A687",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+        "sha256": "C0072F32FF2444D37C10F903A737AEE44CEE15A45D00586E86CFF6198B41A687",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "295E8CADC22B345D02F7FFEEBF49FAF5E935DA2D13B312D829A5A544F30EDC17",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+        "sha256": "295E8CADC22B345D02F7FFEEBF49FAF5E935DA2D13B312D829A5A544F30EDC17",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "DA8985880364945AD44898F3933199EA1984FAE9F73302C68EFC7CAEFCB3D8FF",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+        "sha256": "DA8985880364945AD44898F3933199EA1984FAE9F73302C68EFC7CAEFCB3D8FF",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "E050F57A537DF75756A86B0AC59A149A7F85AC2C4D41C03950A3F1E29DFD355A",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+        "sha256": "E050F57A537DF75756A86B0AC59A149A7F85AC2C4D41C03950A3F1E29DFD355A",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "B35316810AD09A4BB897C0E1F5D444F3044E7B5C074F422F7237D743D15C748F",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+        "sha256": "B35316810AD09A4BB897C0E1F5D444F3044E7B5C074F422F7237D743D15C748F",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "941AA1F5FD9C76D10E7D014E718EE004EDE52EB68AFDDCF4FAA6D2D0EDB6EEF6",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+        "sha256": "941AA1F5FD9C76D10E7D014E718EE004EDE52EB68AFDDCF4FAA6D2D0EDB6EEF6",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "0A56CEBA45451D0C74942BA6838DA8BB62AD572CBD1623578CE85F68528101AE",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+        "sha256": "0A56CEBA45451D0C74942BA6838DA8BB62AD572CBD1623578CE85F68528101AE",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "0900D4878421960458DDF9D47A45B68021DDBAD51AC2D8A67D6C31D5C311042E",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+        "sha256": "0900D4878421960458DDF9D47A45B68021DDBAD51AC2D8A67D6C31D5C311042E",
+        "pass": true
+      }
+    ]
+  },
+  "verification": {
+    "product_line_mapping": [
+      {
+        "file": "cmd.h",
+        "checked": 104,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      },
+      {
+        "file": "cmdconf.c",
+        "checked": 121,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      },
+      {
+        "file": "cmdenv.c",
+        "checked": 295,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      },
+      {
+        "file": "cmdexec.c",
+        "checked": 100,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": [
+          [
+            452,
+            545,
+            "        setAL((UCHAR)GetLastError());"
+          ]
+        ]
+      }
+    ],
+    "thread_lifecycle": "PASS x86 existing real thread/session/module fixture",
+    "capture": "PASS 167 independent assertions",
+    "source_order": "PASS retry after allowing original unselected NEC_98 block",
+    "native_edit": "PASS real EDIT screen,Ctrl+Q,CMD echo,DOS MEM,launcher completion;expected existing exit1",
+    "full": "not rerun;not10files or S closure;runtime26 Full23/23 is historical only",
+    "logs": "build\\t485-s12\\p1\\final"
+  },
+  "attempts": [
+    {
+      "pid": 6040,
+      "outcome": "preprocessing script not started because cmd interpreted forward-slash relative command;no runtime test executed"
+    },
+    {
+      "pid": 15920,
+      "outcome": "preprocessing/thread/capture passed;source-order failed on original NEC_98 code between expected lines;real EDIT not executed"
+    },
+    {
+      "pid": 14616,
+      "outcome": "only failed source-order and unexecuted real EDIT run;PASS;no build or successful test rerun"
+    }
+  ],
+  "guest": "unchanged;not rebuilt",
+  "limits": "No S12 Full or S12 closure claimed.28frozen points differ from current byte-sensitive block count."
+}

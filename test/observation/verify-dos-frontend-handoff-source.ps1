@@ -30,7 +30,7 @@ $misc = Read-Source 'src/mvdm-host/dos/command/cmdmisc.c'
 $block = Region $events 'void nt_block_event_thread(ULONG BlockFlags)' 'void nt_resume_event_thread(void)'
 $resume = Region $events 'void nt_resume_event_thread(void)' 'SyncBiosKbdLedToKbdDevice('
 $execute = Region $exec 'VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)' '/* cmdExecComspec32'
-$create = Region $exec 'VOID cmdCreateProcess ( VOID )' 'VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)'
+$create = Region $exec 'VOID cmdCreateProcess ( PSTD_HANDLES pStdHandles )' 'VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)'
 
 Assert-Order 'suspend before output drain and native mode restoration' $block @(
     'SetEvent\(hConsoleSuspend\)',
@@ -68,7 +68,11 @@ $resumeStart = $events.IndexOf('void nt_resume_event_thread(void)', [StringCompa
 Assert-Order 'DOS keyboard recovery precedes input wakeup' $events.Substring($resumeStart) @(
     'SyncBiosKbdLedToKbdDevice\(\)', 'KbdResume\(\)', 'SetEvent\(hConsoleWait\)'
 )
-if ($misc -notmatch '(?s)if\(!GetNextVDMCommand\(&VDMInfo\)\).*?if\(fBlock\)\s*\{\s*nt_resume_event_thread\(\);\s*fBlock\s*=\s*FALSE;') {
+# XP retains an NEC_98 codepage block before resume. The selected CCPU
+# product does not define NEC_98; do not require removal of that original code.
+$queued = Region $misc 'if(!GetNextVDMCommand(&VDMInfo))' '// Sync VDMs enviornment variables'
+$queued = [regex]::Replace($queued, '(?ms)^[ \t]*#if defined\(NEC_98\)\r?\n.*?^[ \t]*#endif // NEC_98[^\r\n]*\r?\n', '')
+if ($queued -notmatch '(?s)if\(!GetNextVDMCommand\(&VDMInfo\)\).*?if\(fBlock\)\s*\{\s*nt_resume_event_thread\(\);\s*fBlock\s*=\s*FALSE;') {
     throw 'Queued DOS command no longer resumes the original blocked worker.'
 }
 'PASS source order: queued DOS resumes even while native parent remains alive'

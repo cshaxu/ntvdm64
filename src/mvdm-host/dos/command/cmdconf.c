@@ -181,12 +181,10 @@ ErrExit:
 VOID DeleteConfigFiles(VOID)
 {
     if (pchTmpConfigFile)  {
-#line 132
+#line 182
 #if DBG
-#line 133
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 135
         DeleteFile(pchTmpConfigFile);
 
         free(pchTmpConfigFile);
@@ -194,12 +192,9 @@ VOID DeleteConfigFiles(VOID)
         }
 
     if (pchTmpAutoexecFile) {
-#line 142
 #if DBG
-#line 143
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 145
         DeleteFile(pchTmpAutoexecFile);
 
         free(pchTmpAutoexecFile);
@@ -793,7 +788,7 @@ DWORD WriteExpanded(HANDLE hFile,  CHAR *pch, DWORD dwChars)
  *  If one occurs displays warning popup and terminates the vdm.
  *
  */
-#line 622
+#line 788
 void WriteFileAssert(HANDLE hFile, CHAR *pBuff, DWORD dwBytes)
 {
   DWORD dw;
