@@ -655,3 +655,9 @@ P6 itself is 109/197 ->25/27 (-84/-170). 31/41 source-reviewed and verified,
 42 format points are restored-final-verified, adding to six earlier S9
 restorations; 01018 remains a qualified residual owner decision. Commit/push
 pending. Next ordered file is base/inc/ica.h.
+
+P6 delivery receipt: 496479cdf is committed and pushed to origin/main.
+All 31 reviewed files are delivered; 10 remain. Forty-eight S9 register points
+are restored and verified; remaining functional decisions stay pending.
+Documentation governance/links passed, post-test publication hashes 26/26.
+Next ordered file is base/inc/ica.h; S9 and T485 remain active.

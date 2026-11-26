@@ -33,7 +33,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S9 Ordered Progress
 
 [S9 progress](../etc/evidence/t485-h-repair/s9-progress.md): 31/41 source-reviewed
-and final-verified, 10 unreviewed; P6 commit/push pending. P6 emm_mngr.c corrected
+and delivered through P6 496479cdf (pushed), 10 unreviewed. P6 emm_mngr.c corrected
 non-error count 109/197 ->25/27 (-84/-170). Unified baseline fc9492342:
 40 measured files 344/29954 ->413/6520; unchanged timer.c is explicitly unmapped.
 Full S9 net +69 points/-23434 lines; absolute full census awaits timer review.
