@@ -47,7 +47,6 @@ MODNAME(wole.c);
 **
 */
 
-#line 48
 #define MAP_SLOT_HTASK(slot)    ((HTASK16)((WORD)0xffe0 - (8 * (slot))))
 #define MAP_HTASK_SLOT(htask)   ((UINT)(((WORD)0xffe0 - (htask16))/8))
 
@@ -93,7 +92,6 @@ BOOL GetThreadIDHTASKALIAS(
                 &cid );
 
     if ( !NT_SUCCESS(Status) ) {
-#line 93
 #if DBG
 #line 94
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
@@ -121,7 +119,6 @@ BOOL GetThreadIDHTASKALIAS(
 
     Status = NtClose( hThread );
     if ( !NT_SUCCESS(Status) ) {
-#line 118
 #if DBG
 #line 119
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
@@ -315,7 +312,8 @@ UINT GetHtaskAliasProcessName(
     ULONG   LargeBufferSize = 32*1024;
     NTSTATUS status = STATUS_INFO_LENGTH_MISMATCH;
     ULONG TotalOffset;
-    UINT copied = 0;
+    ULONG copied = 0;
+#line 309
 
     dwThreadID32 = GetHtaskAlias(htask16, &dwProcessID32);
 
@@ -382,14 +380,13 @@ UINT GetHtaskAliasProcessName(
 
             if ( ProcessInfo->ImageName.Buffer ) {
 
-                ANSI_STRING name;
-                if (NT_SUCCESS(RtlUnicodeStringToAnsiString(&name, &ProcessInfo->ImageName, TRUE))) {
-                    copied = min((UINT)name.Length, cNameBufferSize - 1);
-                    memcpy(lpNameBuffer, name.Buffer, copied);
+                if (NT_SUCCESS(RtlUnicodeToMultiByteN(lpNameBuffer,
+                        cNameBufferSize - 1, &copied, ProcessInfo->ImageName.Buffer,
+                        ProcessInfo->ImageName.Length))) {
                     lpNameBuffer[copied] = 0;
-                    RtlFreeAnsiString(&name);
-                }
+                } else copied = 0;
                 break;
+#line 391
             } else {
 
                 //
@@ -407,5 +404,6 @@ UINT GetHtaskAliasProcessName(
     }
     VirtualFree(pucLargeBuffer, 0, MEM_RELEASE);
     return copied;
+#line 407
 }
 

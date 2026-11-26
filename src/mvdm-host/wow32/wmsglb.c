@@ -18,7 +18,6 @@
 MODNAME(wmsglb.c);
 
 
-#line 21
 #ifdef DEBUG
 #line 22
 #error Excluded unsupported DEBUG WOW profile
@@ -195,7 +194,6 @@ VOID FASTCALL UnThunkLBMsg16(LPMSGPARAMEX lpmpex)
 
     case LB_SETTABSTOPS:
         if (INT32(lpmpex->Parm16.WndProc.wParam) > 0) {
-#line 241
             STACKORHEAPFREE((LPINT)lpmpex->lParam, lpmpex->MsgBuffer);
         }
         break;

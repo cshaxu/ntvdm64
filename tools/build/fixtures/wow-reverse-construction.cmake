@@ -17,6 +17,20 @@ construction_region(parm "${wow}" "typedef struct _PARMWP" "} PARM16, *PPARM16;"
 reverse_slice(records "${aliases}" "typedef struct _THUNKTEXTDWORD" "#define MSG16NEEDSTHUNKING")
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/reverse_types.h"
   CONTENT "#pragma pack(push,1)\n${parm}\n#pragma pack(pop)\n${records}" @ONLY)
+# Reuse XP marker macros rather than emulating their pointer-bit contract.
+construction_read(wowuser "${NTVDM_REPO}/src/non-mvdm/public/internal/windows/inc/wowuserp.h")
+reverse_slice(marker_constants "${wowuser}" "#define WOWCLASS_RPL_MASK" "
+
+")
+reverse_slice(marker_macros "${wowuser}" "#define MarkWOWProc(vpfnProc,result)" "#else")
+construction_read(compat_flags "${NTVDM_REPO}/src/mvdm-host/inc/wowcmpat.h")
+reverse_slice(range_flag "${compat_flags}" "#define WOWCFEX_THUNKLBSELITEMRANGEEX" "
+")
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/reverse_xp_contract.h"
+  CONTENT "${marker_constants}
+${marker_macros}
+${range_flag}
+" @ONLY)
 construction_read(structures "${owner}/wstruc.h")
 reverse_slice(bodies "${structures}" "#define STACKORHEAPALLOC" "#define PUTINTARRAY16")
 construction_read(user "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/inc/user.h")

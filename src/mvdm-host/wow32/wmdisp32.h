@@ -43,14 +43,12 @@ typedef struct _WM32MSGPARAMEX {
     DWORD dwParam;
     BOOL fFree;
     DWORD dwTmp[4];
-#line 46
 } WM32MSGPARAMEX;
 
 /* Dispatch table entry
  */
 typedef struct _M32 {   /* w32 */
     LPFNM32 lpfnM32;    // function address
-#line 52
 #ifdef DEBUG_OR_WOWPROFILE
 #line 53
 #error WOW profiling is not supported
@@ -60,7 +58,6 @@ typedef struct _M32 {   /* w32 */
 
 extern  __declspec(thread) BOOL fThunkDDEmsg;
 
-#line 61
 #define WIN31_MM_CALCSCROLL  0x10AC   // WM_USER+0xCAC
 
 /* Function prototypes

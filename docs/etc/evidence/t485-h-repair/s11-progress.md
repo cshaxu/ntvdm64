@@ -34,12 +34,12 @@ frozen point counts as current byte-sensitive diff counts.
 | 20 | src/mvdm-host/wow32/wkman.c | 22 | P8 delivered 874e19e83 |
 | 21 | src/mvdm-host/wow32/wkman.h | 1 | P9 delivered 23731005a |
 | 22 | src/mvdm-host/wow32/wmdisp32.c | 79 | P9 delivered 23731005a |
-| 23 | src/mvdm-host/wow32/wmdisp32.h | 2 | Pending |
-| 24 | src/mvdm-host/wow32/wmsg16.c | 37 | Pending |
-| 25 | src/mvdm-host/wow32/wmsgcb.c | 5 | Pending |
-| 26 | src/mvdm-host/wow32/wmsgem.c | 3 | Pending |
-| 27 | src/mvdm-host/wow32/wmsglb.c | 3 | Pending |
-| 28 | src/mvdm-host/wow32/wole2.c | 5 | Pending |
+| 23 | src/mvdm-host/wow32/wmdisp32.h | 2 | P10 source-reviewed; delivery pending |
+| 24 | src/mvdm-host/wow32/wmsg16.c | 37 | P10 source-reviewed; delivery pending |
+| 25 | src/mvdm-host/wow32/wmsgcb.c | 5 | P10 source-reviewed; delivery pending |
+| 26 | src/mvdm-host/wow32/wmsgem.c | 3 | P10 source-reviewed; delivery pending |
+| 27 | src/mvdm-host/wow32/wmsglb.c | 3 | P10 source-reviewed; delivery pending |
+| 28 | src/mvdm-host/wow32/wole2.c | 5 | P10 source-reviewed; delivery pending |
 | 29 | src/mvdm-host/wow32/wow32.h | 1 | Pending |
 | 30 | src/mvdm-host/wow32/wow32fax.c | 7 | Pending |
 | 31 | src/mvdm-host/wow32/wowhooks.c | 39 | Pending |
@@ -633,3 +633,71 @@ P9 runtime12 cached full build and dual publication completed;26/26 published ha
 [Runtime12 receipt](s11-p9-result.json): cached build,dual26/26hash publication,message191/COPYDATA59 and Full23/23 PASS. Both enhanced roundtrips pass all five markers; Win95 approved knownExitOne remains.22/48files,225/452points verified:12restored,213residual,227unreviewed. Current784/7443;combined reduction90/4320. Commit/push pending;no S closure.
 
 P9 delivered and pushed 23731005a021b3fb253fb9b698f74682f4183739.22/48files and225/452points delivered;12restored,213residual owner-review,227unreviewed. Full23/23 final runtime12. Next file:wmdisp32.h;next periodic Full file30 and S closure.
+
+### P10 file23 wmdisp32.h
+
+6points/9lines ->4points/6lines (-2/-3); one exclusion unchanged. Three redundant anchors removed; actual WOW32 MSVC /E matches71 original declarations without drift. Four scratch slots plus dwParam carry five independent CREATE/MDI resources through failure; TLS extern matches native-thread conversion state. Both functional points remain owner-review residuals. No functional edit, so accumulate with next whole file.23/48files,227/452points reviewed:12restored,215residual,225unreviewed;delivered22/225. Current census782/7440;combined local reduction92/4323,including2/3 undelivered. Next wmsg16.c starts60/206,3exclusions,37frozenpoints.
+
+### P10 file24 wmsg16.c
+
+60points/206lines->48points/187lines (-12/-19),3exclusions unchanged. Remove15redundant anchors and restore two comment indents; no functional edit. Real MSVC /E matches159 original statements; two COPYDATA matches are intentionally moved lookup statements, third is original WOWGLOBALFREE macro expansion matching GlobalFree in another case.37 functional residuals retain explicit caller/ownership evidence in both ledgers; no restored functional point claimed.24/48files,264/452points reviewed:12restored,252residual,188unreviewed. Delivered22/225. Current census770/7421;combined local reduction104/4342,including14/22 undelivered. Next:wmsgcb.c.
+
+### P10 files25-27 control converters
+
+wmsgcb.c1/327->9/27 (+8/-300): restore XP LF under owner permanent
+format approval; two redundant anchors removed,1exclusion unchanged.
+Actual MSVC/E9 original statements match. CB_DIR must release by original
+message and guest key after hook changes output; failed/refused AddParamMap
+must not decrement outer reference. Five residuals remain owner review.
+wmsgem.c7/11->5/8 (-2/-3): remove three redundant anchors and added empty
+FREEPSZPTR,repair original continuation anchor143.25 original statements
+match;1exclusion unchanged. Correct old erroneous ParamMap reasons: real
+issues are text/array allocation failure and signed constructor/free mismatch.
+wmsglb.c6/10->5/8 (-1/-2): two redundant anchors removed;13 original
+statements match;1exclusion unchanged. Two allocation guards and signed
+free condition correspond to actual selected constructors and reverse21
+scenario fixture, not ParamMap. Three residuals remain owner review.
+27/48files,275/452points reviewed:12restored,263residual,177unreviewed.
+Delivered22/225. Current census775/7116;combined local reduction105/4647,
+including9/327 pending. No functional source behavior changed. Next:wole2.c.
+
+### P10 file28 module alias name
+
+wole2.c non-error mirror diff12/40 ->9/38, reduction3/2.
+Two exclusions unchanged;actual preprocessing75 unique original statements
+match logical lines. Original XP passes Unicode byte length as character
+count and reserves no NUL byte; early return also leaks the query buffer.
+Use existing bounded RtlUnicodeToMultiByteN and one query-buffer cleanup,
+removing the temporary ANSI allocation/copy/free. Five residual points remain
+owner review; final runtime evidence pending.
+28/48files,280/452points reviewed:12restored,268residual,172unreviewed.
+Delivered22/225. Census772/7114;combined reduction108/4649,including
+P10 reduction12/329 pending. Owner requires Full immediately for this batch
+before advancing to file29, in addition to file30 and every S closure.
+
+P10 delivery in progress:runtime13 cached full build and dual13-image/26-hash
+publication PASS. Module alias bounds/lifetime,reverse21,message191 and
+COPYDATA59 PASS. First reverse fixture attempt failed to compile because
+its WW and XP macro dependencies were stale; fix reuses original marker
+macros and records dependency hashes. No production change after publication.
+Final Full is running; commit/push and whole-batch delivery remain pending.
+
+P10 whole-file non-error XP-relative byte-sensitive accounting:
+
+| File | Before points/lines | After points/lines | Reduction points/lines |
+| --- | --- | --- | --- |
+| wmdisp32.h | 6/9 | 4/6 | 2/3 |
+| wmsg16.c | 60/206 | 48/187 | 12/19 |
+| wmsgcb.c | 1/327 | 9/27 | -8/300 |
+| wmsgem.c | 7/11 | 5/8 | 2/3 |
+| wmsglb.c | 6/10 | 5/8 | 1/2 |
+| wole2.c | 12/40 | 9/38 | 3/2 |
+| Batch | 92/603 | 80/274 | 12/329 |
+
+wmsgcb.c block growth comes from restoring XP LF, under the owner's
+standing formatting approval; no behavioral blocks were added to merge
+or hide differences. Fixed48-file census independently recomputed772/7114.
+
+### P10 final-package result
+
+[Runtime13 receipt](s11-p10-result.json): cached build,dual26/26hash publication,module-alias/reverse/message/COPYDATA and Full23/23 PASS. Both enhanced roundtrips pass all five markers; Win95 approved knownExitOne remains.28/48files,280/452points verified:12restored,268residual,172unreviewed. Census772/7114;combined reduction108/4649. Commit/push pending;S11 remains active.

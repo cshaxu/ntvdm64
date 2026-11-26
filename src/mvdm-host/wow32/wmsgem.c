@@ -21,7 +21,6 @@ VPVOID  WordBreakProc16 = 0;
 
 extern WBP W32WordBreakProc;
 
-#line 24
 #ifdef DEBUG
 #line 25
 #error Excluded unsupported DEBUG WOW profile
@@ -96,8 +95,8 @@ BOOL FASTCALL ThunkEMMsg16(LPMSGPARAMEX lpmpex)
                     }
                     else {
                         LOGDEBUG (0, ("WOW::WMSGEM.C: EM_REPLACESEL: Out of Memory Failure/n"));
-                        FREEPSZPTR(psz);
                         return FALSE;
+#line 143
                     }
                 }
                 FREEPSZPTR(psz);
@@ -195,11 +194,9 @@ VOID FASTCALL UnThunkEMMsg16(LPMSGPARAMEX lpmpex)
 
     case EM_SETTABSTOPS:
         if (INT32(lpmpex->Parm16.WndProc.wParam) > 0) {
-#line 238
             STACKORHEAPFREE((LPINT)lParamNew, lpmpex->MsgBuffer);
         }
         break;
-#line 241
 
     case EM_GETWORDBREAKPROC:
         if (lpmpex->lReturn) {

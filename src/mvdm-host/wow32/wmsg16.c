@@ -83,7 +83,6 @@ LPFNUNTHUNKMSG16 apfnUnThunkMsg16[] = {
 //
 
 
-#line 73
 #ifdef DEBUG
 #line 74
 #error Excluded unsupported DEBUG WOW profile
@@ -100,7 +99,6 @@ HWND FASTCALL ThunkMsg16(LPMSGPARAMEX lpmpex)
     INT iClass;
     WORD wMsg = lpmpex->Parm16.WndProc.wMsg;
 
-#line 127
     lpmpex->uMsg = wMsg;
     lpmpex->uParam = INT32(lpmpex->Parm16.WndProc.wParam);  // Sign extend
     lpmpex->lParam =lpmpex->Parm16.WndProc.lParam;
@@ -207,7 +205,6 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         {
             LONG lParamMap;
 
-#line 231
             GETPSZPTR(lParam, (LPSZ)lParamMap);
             if (lParamMap) lpmpex->MsgBuffer->ownershipFlags = WOW_TEXT_ACTIVE;
 #line 232
@@ -319,7 +316,6 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                               (sizeof(((LPHLP)NULL)->cbData) == sizeof(WORD)));
                 *plParamNew = (LONG)((*lpT > sizeof(lpmpex->MsgBuffer)) ?
                                                 malloc_w(*lpT) : lpmpex->MsgBuffer);
-#line 332
                 if (*plParamNew) {
                     RtlCopyMemory((PVOID)*plParamNew, lpT, *lpT);
                 }
@@ -730,7 +726,6 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
     case WM_DDE_INITIATE:
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
         lpmpex->MsgBuffer->ownershipFlags = WI32DDEAddInitiator((HAND16) wParam);
-#line 743
         break;
 
     case WM_DDE_ACK:
@@ -789,15 +784,13 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
-#line 794
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
                 WOWGLOBALFREE(h32);
             }
             DdeInfo.Msg = wMsg;
             h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo, pConversion);
-	    // WARNING: 16-bit memory may have moved
-#line 801
+            // WARNING: 16-bit memory may have moved
             DdeInfo.Flags = DDE_PACKET;
             DdeInfo.h16 = 0;
             if (!DDETrackhandle(pConversion, hwnd16, wParam,
@@ -845,7 +838,6 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
-#line 836
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
                 WOWGLOBALFREE(h32);
@@ -903,7 +895,6 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
-#line 882
             if (h32 = DDEFindPair32(hwnd16, wParam, (HAND16) LOWORD(lParam))) {
                 DDEDeletehandle(LOWORD(lParam), h32);
                 WOWGLOBALFREE(h32);
@@ -915,8 +906,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
             else {
                 DdeInfo.Msg = wMsg;
                 h32 = DDECopyhData32(hwnd16, wParam, (HAND16) LOWORD(lParam), &DdeInfo, pConversion);
-		// WARNING: 16-bit memory may have moved
-#line 894
+                // WARNING: 16-bit memory may have moved
                 DdeInfo.Flags = DDE_PACKET;
                 DdeInfo.h16 = 0;
                 if (!DDETrackhandle(pConversion, hwnd16, wParam,
@@ -971,7 +961,6 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         lpmpex->uParam = (LONG) FULLHWND32(wParam);
 
         if (fWhoCalled == WOWDDE_POSTMESSAGE) {
-#line 936
             vp = GlobalLock16(HIWORD(lParam), &cb);
 
             GETMISCPTR(vp, lpMem16);
@@ -1046,7 +1035,6 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         }
 
         *plParamNew = (ULONG)h32;
-#line 997
         }
         break;
 
@@ -1081,7 +1069,6 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 #line 1016
                 lpCDS32->dwData = lpCDS16->dwData;
                 if (lpCDS32->cbData = lpCDS16->cbData) {
-#line 1018
                     if (lpMem32 = malloc_w(lpCDS32->cbData)) {
                         lpmpex->MsgBuffer->copydata.data = (DWORD)lpMem32;
                         lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_DATA;
@@ -1094,9 +1081,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
                             lpmpex->MsgBuffer->copydata.flags |= WOW_COPY_DATA_NODE;
 #line 1023
                         }
-#line 1024
                         FREEMISCPTR(lpMem16);
-#line 1025
                     }
                     else goto CopyData16Failed;
 #line 1026

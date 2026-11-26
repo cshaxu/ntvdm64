@@ -12,8 +12,11 @@ typedef VPVOID *PVPVOID;
 typedef SHORT INT16;
 typedef WORD *PWORD16;
 typedef char *PSZ,*LPSZ;
-typedef struct {DWORD dwStyle;HINSTANCE hInstance;} WW,*PWW;
+typedef struct {DWORD style;HMODULE hModule;} WW,*PWW;
+static struct {DWORD dwWOWCompatFlagsEx;} thread_data;
+#define CURRENTPTD() (&thread_data)
 #include "reverse_types.h"
+#include "reverse_xp_contract.h"
 typedef EDITWORDBREAKPROCA WBP;
 static VPVOID WordBreakProc16;
 static WBP W32WordBreakProc;

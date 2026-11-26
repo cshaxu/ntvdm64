@@ -20,7 +20,6 @@
 MODNAME(wmsgcb.c);
 
 
-#line 21
 #ifdef DEBUG
 #line 22
 #error Excluded unsupported DEBUG WOW profile
@@ -100,7 +99,6 @@ BOOL FASTCALL ThunkCBMsg16(LPMSGPARAMEX lpmpex)
                 break;
 	 
             case CB_DIR:
-#line 137
                 GETPSZPTR(lpmpex->Parm16.WndProc.lParam, (LPSZ)lpmpex->lParam);
                 if (lpmpex->lParam) lpmpex->MsgBuffer->ownershipFlags = WOW_TEXT_ACTIVE;
 

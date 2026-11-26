@@ -19,13 +19,13 @@ function Run($name,$file,$Arguments,$expected,$seconds){
  if($p.ExitCode -ne $expected){throw "$name actual $($p.ExitCode), expected $expected"}
 }
 try{
- $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wstruc.h','src/mvdm-host/wow32/wstruc.c','src/mvdm-host/wow32/wmsgem.c','src/mvdm-host/wow32/wmsglb.c','src/mvdm-host/wow32/wmsg16.c','src/non-mvdm/windows/core/ntuser/inc/user.h','src/non-mvdm/windows/core/ntuser/client/lboxrare.c','test/observation/wow_reverse_construction_fixture.c','test/observation/verify-wow-reverse-construction.ps1')
+ $paths=@('src/non-mvdm/public/internal/windows/inc/wowuserp.h','src/mvdm-host/inc/wowcmpat.h','tools/build/fixtures/wow-reverse-construction.cmake','src/mvdm-host/inc/wow.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wstruc.h','src/mvdm-host/wow32/wstruc.c','src/mvdm-host/wow32/wmsgem.c','src/mvdm-host/wow32/wmsglb.c','src/mvdm-host/wow32/wmsg16.c','src/non-mvdm/windows/core/ntuser/inc/user.h','src/non-mvdm/windows/core/ntuser/client/lboxrare.c','test/observation/wow_reverse_construction_fixture.c','test/observation/verify-wow-reverse-construction.ps1')
  $paths|ForEach-Object{Get-FileHash "$repo/$_"}|Export-Csv -NoTypeInformation "$root/inputs.csv"
  & "$repo/tools/build-fixtures.cmd" x86 wow-reverse-construction *> "$root/build.log"
  if($LASTEXITCODE){throw 'Native reverse construction build failed'}
  $native="$repo/build/.ninja/fixtures-x86"
  Copy-Item "$native/wow-reverse-construction.exe" "$root/unit.exe"
- Get-FileHash "$root/unit.exe","$native/reverse_types.h","$native/reverse_exact.h"|Export-Csv -NoTypeInformation "$root/artifacts.csv"
+ Get-FileHash "$root/unit.exe","$native/reverse_types.h","$native/reverse_exact.h","$native/reverse_xp_contract.h"|Export-Csv -NoTypeInformation "$root/artifacts.csv"
  Run 'body-candidate' "$root/unit.exe" @() 0 30
  if((Get-Content "$root/body-candidate.stdout.log" -Raw) -notmatch 'REVERSE_CONSTRUCTION failures=0 scenarios=21 buffer=\d+ record=\d+'){throw 'Incomplete candidate'}
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Source changed'}}
