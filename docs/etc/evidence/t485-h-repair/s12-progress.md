@@ -6,9 +6,9 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed12/48files61/645points;restored-delivered9,restored-local3,
+Reviewed12/48files61/645points;restored-delivered12,restored-local0,
 residual-reviewed49,unreviewed584.
-Delivered/pushed10files57points through d74c534ca.
+Delivered/pushed12files61points through 3b1d831b6.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -24,8 +24,8 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 8 | src/mvdm-host/dos/dem/dem.h | 1 | P4 delivered d74c534ca |
 | 9 | src/mvdm-host/dos/dem/demgset.c | 4 | P4 delivered d74c534ca |
 | 10 | src/mvdm-host/dos/dem/demhndl.c | 12 | P4 delivered d74c534ca |
-| 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | P5 restored/verified; commit pending |
-| 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | P5 reduced/verified; commit pending |
+| 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | P5 delivered3b1d831b6 |
+| 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | P5 delivered3b1d831b6 |
 | 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | Pending |
 | 14 | src/mvdm-host/inc/dbgexp.h | 1 | Pending |
 | 15 | src/mvdm-host/inc/demexp.h | 3 | Pending |
@@ -338,3 +338,7 @@ private-desktop WINMINE window PASS. Source file is byte-exact XP;header only
 NTAPI remains. Both retain original lines and have no error exclusions.
 No Full repeat,new test framework,wrapper or guest modifications. Three frozen
 points restored;one ABI residual remains pending owner decision. Commit/push pending.
+
+P5 product/receipt delivered in3b1d831b6 and pushed. Twelvefiles61points
+delivered;12restored49residual584unreviewed. Current699/31660,reduction104/149.
+Last Full remains file10/runtime5;next file13demsrch.c.

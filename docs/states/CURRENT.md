@@ -33,13 +33,13 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S12 Ordered Progress
 
 [S12 list](../etc/evidence/t485-h-repair/s12-progress.md):12/48files,
-61/645points source-reviewed;9restored-delivered,3restored-local,49residual,
-584unreviewed. Delivered10files57points through d74c534ca.
+61/645points source-reviewed;12restored-delivered,0restored-local,49residual,
+584unreviewed. Delivered12files61points through 3b1d831b6.
 P5 LFN source/header4/8->1/2 (-3points/-6lines);source byte-exact XP,
 header retains only required NTAPI. S12 census803/31809->699/31660 (-104/-149).
 [P5 receipt](../etc/evidence/t485-h-repair/s12-p5-result.json):cached build,
 production object equivalence,dual runtime6 publication and targeted WOW PASS.
-Commit/push pending.
+Committed/pushed3b1d831b6.
 Last Full checkpoint:file10,runtime5,23/23. No successful gate repeated.
 Nextfile13demsrch.c;36files remain. Migration39/159;N004 gated on S13.
 

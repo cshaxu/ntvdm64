@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P5",
-  "state": "final-verified-published-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime6",
   "files": [
     {
@@ -692,7 +692,9 @@
     "lines": "Source byte-exact XP;header only one same-line NTAPI insertion;zero exclusions and no line drift",
     "wow": "PASS exact visible WINMINE application window and live worker in private desktop on final package;not gameplay or normal-exit acceptance",
     "full": "Not repeated;last checkpoint file10 runtime5 Full23/23",
-    "logs": "build/t485-s12/p5/final"
+    "logs": "build/t485-s12/p5/final",
+    "governance": "PASS"
   },
-  "quality_review": "Keep historical proven NTAPI stack cleanup correction;restore original pointer casts and PVOID ABI under admitted MSVC x86. Production code and relocations identical across83sections20743bytes. No new provider,state,guest edits or tests."
+  "quality_review": "Keep historical proven NTAPI stack cleanup correction;restore original pointer casts and PVOID ABI under admitted MSVC x86. Production code and relocations identical across83sections20743bytes. No new provider,state,guest edits or tests.",
+  "commit": "3b1d831b6"
 }
