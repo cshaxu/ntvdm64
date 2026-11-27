@@ -82,9 +82,12 @@ Revision History:
 
 #line 83
 #include <ntpsapi.h>
-#line 86
+#line 85
+#include <ntlpcapi.h>
 #include <ntioapi.h>
 #include <ntiolog.h>
+#line 89
+#include <ntexapi.h>
 #line 91
 #include <ntregapi.h>
 #line 94

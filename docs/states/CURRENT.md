@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall56/159 directories, H001-H036 and N001-N020. S15 runtime24 is the current
+overall56/159 directories, H001-H036 and N001-N020. S15 runtime25 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -59,13 +59,8 @@ P7 historical delivery remains indexed in this packet's evidence directory.
 
 [P10 N017 final-six](../etc/evidence/t485-s1/n017-tail.md) delivered.
 
-[P11 N018](../etc/evidence/t485-s1/n018.md) delivered: tstring.h byte-exact XP,
-no functional adaptation/exclusion. Cached build, runtime11 dual13-image26hash
-publication, RAP11/11, both lifecycle fixtures and guest NetAPI passed.
-Seven files since P9 Full24/24; no repeat Full. N018 is1/1 complete;
-overall54/159 and S15 6/14. Next N019. Current census1315files,761exact,
-769nonerror same/546different,7747points/163505lines;
-delta0files,+1exact,+1same,-1different,-1point/-522lines.1230XP/85OpenNT.
+[P11 N018](../etc/evidence/t485-s1/n018.md) delivered; detailed census and
+verification remain in its receipt.
 
 [P12 N019](../etc/evidence/t485-s1/n019.md) delivered: wowshlp.h moved to its
 XP Base path byte-exact; wowcmndg.h remains exact. Fixed the existing host
@@ -175,6 +170,16 @@ delta+1exact,+1same,-1different,-1point/-1136lines.1252XP/72OpenNT.
 N0218/17; next ntexapi.h. Overall56/159 and S15 8/14 unchanged.
 Five files audited since P21 Full24/24, three changed; no guest modification.
 
+
+[P24 N021 executive/LPC](../etc/evidence/t485-s1/n021-executive.md) delivered:
+XP declaration frameworks, original DEVL/C++ and paired NT includes restored.
+Necessary SDK/B duplicate boundaries retained; no algorithm or guest change.
+Cached build, runtime25 dual13-image26hash publication, both native capture/
+layout fixtures, service lifecycle and real guest NetAPI passed.
+Census1324files,775exact,786nonerror same/538different,7718points/152823lines;
+delta0files/0exact/0same/0different/-23points/-208lines.1254XP/70OpenNT.
+N02110/17; next ntpsapi.h. Overall56/159 and S15 8/14 unchanged. Eight audited
+files since P21 Full24/24, six changed distinct mirror files.
 
 ## S14 Closure Record
 

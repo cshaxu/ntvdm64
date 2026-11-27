@@ -22,6 +22,84 @@
 #include <windows.h>
 #include <winternl.h>
 
+/* XP ntdef.h:1019; native declaration prerequisite. */
+typedef enum _TIMER_TYPE {
+    NotificationTimer,
+    SynchronizationTimer
+    } TIMER_TYPE;
+
+/* XP ntkeapi.h:142; native declaration prerequisite. */
+typedef enum _KPROFILE_SOURCE {
+    ProfileTime,
+    ProfileAlignmentFixup,
+    ProfileTotalIssues,
+    ProfilePipelineDry,
+    ProfileLoadInstructions,
+    ProfilePipelineFrozen,
+    ProfileBranchInstructions,
+    ProfileTotalNonissues,
+    ProfileDcacheMisses,
+    ProfileIcacheMisses,
+    ProfileCacheMisses,
+    ProfileBranchMispredictions,
+    ProfileStoreInstructions,
+    ProfileFpInstructions,
+    ProfileIntegerInstructions,
+    Profile2Issue,
+    Profile3Issue,
+    Profile4Issue,
+    ProfileSpecialInstructions,
+    ProfileTotalCycles,
+    ProfileIcacheIssues,
+    ProfileDcacheAccesses,
+    ProfileMemoryBarrierCycles,
+    ProfileLoadLinkedIssues,
+    ProfileMaximum
+} KPROFILE_SOURCE;
+
+/* XP ntioapi.h:2979; native declaration prerequisite. */
+typedef enum _INTERFACE_TYPE {
+    InterfaceTypeUndefined = -1,
+    Internal,
+    Isa,
+    Eisa,
+    MicroChannel,
+    TurboChannel,
+    PCIBus,
+    VMEBus,
+    NuBus,
+    PCMCIABus,
+    CBus,
+    MPIBus,
+    MPSABus,
+    ProcessorInternal,
+    InternalPowerBus,
+    PNPISABus,
+    PNPBus,
+    MaximumInterfaceType
+}INTERFACE_TYPE, *PINTERFACE_TYPE;
+
+/* XP ntioapi.h:3038; native declaration prerequisite. */
+typedef enum _BUS_DATA_TYPE {
+    ConfigurationSpaceUndefined = -1,
+    Cmos,
+    EisaConfiguration,
+    Pos,
+    CbusConfiguration,
+    PCIConfiguration,
+    VMEConfiguration,
+    NuBusConfiguration,
+    PCMCIAConfiguration,
+    MPIConfiguration,
+    MPSAConfiguration,
+    PNPISAConfiguration,
+    SgiInternalConfiguration,
+    MaximumBusDataType
+} BUS_DATA_TYPE, *PBUS_DATA_TYPE;
+
+/* XP ntdef.h:761; native physical-address scalar ABI. */
+typedef LARGE_INTEGER PHYSICAL_ADDRESS, *PPHYSICAL_ADDRESS;
+
 /* XP public/sdk/inc/ntkeapi.h:53-57; public shared-time ABI only. */
 typedef struct _KSYSTEM_TIME {
     ULONG LowPart;

@@ -27,7 +27,7 @@ Revision History:
 #endif
 
 #ifdef __cplusplus
-#error Unsupported excluded original configuration
+extern "C" {
 #endif
 
 //
@@ -39,17 +39,18 @@ Revision History:
 #define PORT_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED | \
                          SYNCHRONIZE | 0x1)
 
-// begin_ntsrv
+// begin_ntifs begin_nthal
 
 #if defined(USE_LPC6432)
 #error Unsupported excluded original configuration
-#line 48
 #else
-#line 49
+#line 50
 #define LPC_CLIENT_ID CLIENT_ID
 #define LPC_SIZE_T SIZE_T
 #define LPC_PVOID PVOID
+#define LPC_HANDLE HANDLE
 #endif
+#line 55
 
 
 typedef struct _PORT_MESSAGE {
@@ -79,7 +80,7 @@ typedef struct _PORT_MESSAGE {
 //  UCHAR Data[];
 } PORT_MESSAGE, *PPORT_MESSAGE;
 
-// end_ntsrv
+// end_ntifs end_nthal
 
 typedef struct _PORT_DATA_ENTRY {
     LPC_PVOID Base;
@@ -107,6 +108,7 @@ typedef struct _PORT_DATA_INFORMATION {
 #define LPC_ERROR_EVENT         9
 #define LPC_CONNECTION_REQUEST 10
 
+// begin_ntifs
 
 //
 // The following bit may be placed in the Type field of a message
@@ -117,6 +119,7 @@ typedef struct _PORT_DATA_INFORMATION {
 
 #define LPC_KERNELMODE_MESSAGE  (CSHORT)0x8000
 
+// end_ntifs
 
 #define PORT_VALID_OBJECT_ATTRIBUTES (OBJ_CASE_INSENSITIVE)
 
@@ -130,20 +133,19 @@ typedef struct _PORT_DATA_INFORMATION {
 
 #if defined(USE_LPC6432)
 #error Unsupported excluded original configuration
-#line 134
 #endif
-#line 135
+#line 139
 
 typedef struct _LPC_CLIENT_DIED_MSG {
     PORT_MESSAGE PortMsg;
     LARGE_INTEGER CreateTime;
 } LPC_CLIENT_DIED_MSG, *PLPC_CLIENT_DIED_MSG;
 
-// begin_ntsrv
+// begin_ntifs
 
 typedef struct _PORT_VIEW {
     ULONG Length;
-    HANDLE SectionHandle;
+    LPC_HANDLE SectionHandle;
     ULONG SectionOffset;
     LPC_SIZE_T ViewSize;
     LPC_PVOID ViewBase;
@@ -156,7 +158,7 @@ typedef struct _REMOTE_PORT_VIEW {
     LPC_PVOID ViewBase;
 } REMOTE_PORT_VIEW, *PREMOTE_PORT_VIEW;
 
-// end_ntsrv
+// end_ntifs
 
 NTSYSCALLAPI
 NTSTATUS
@@ -181,7 +183,7 @@ NtCreateWaitablePort(
     );
 
 
-// begin_ntsrv
+// begin_ntifs
 
 NTSYSCALLAPI
 NTSTATUS
@@ -212,7 +214,7 @@ NtSecureConnectPort(
     IN OUT PULONG ConnectionInformationLength OPTIONAL
     );
 
-// end_ntsrv
+// end_ntifs
 
 NTSYSCALLAPI
 NTSTATUS
@@ -249,7 +251,7 @@ NtRequestPort(
     IN PPORT_MESSAGE RequestMessage
     );
 
-// begin_ntsrv
+// begin_ntifs
 
 NTSYSCALLAPI
 NTSTATUS
@@ -260,7 +262,7 @@ NtRequestWaitReplyPort(
     OUT PPORT_MESSAGE ReplyMessage
     );
 
-// end_ntsrv
+// end_ntifs
 
 NTSYSCALLAPI
 NTSTATUS
@@ -316,8 +318,8 @@ NtReadRequestData(
     IN PPORT_MESSAGE Message,
     IN ULONG DataEntryIndex,
     OUT PVOID Buffer,
-    IN ULONG BufferSize,
-    OUT PULONG NumberOfBytesRead OPTIONAL
+    IN SIZE_T BufferSize,
+    OUT PSIZE_T NumberOfBytesRead OPTIONAL
     );
 
 NTSYSCALLAPI
@@ -328,15 +330,15 @@ NtWriteRequestData(
     IN PPORT_MESSAGE Message,
     IN ULONG DataEntryIndex,
     IN PVOID Buffer,
-    IN ULONG BufferSize,
-    OUT PULONG NumberOfBytesWritten OPTIONAL
+    IN SIZE_T BufferSize,
+    OUT PSIZE_T NumberOfBytesWritten OPTIONAL
     );
 
 
 typedef enum _PORT_INFORMATION_CLASS {
     PortBasicInformation
 #if DEVL
-#error Unsupported excluded original configuration
+,   PortDumpInformation
 #endif
 } PORT_INFORMATION_CLASS;
 
@@ -353,7 +355,7 @@ NtQueryInformationPort(
     );
 
 #ifdef __cplusplus
-#error Unsupported excluded original configuration
+}
 #endif
 
 #endif  // _NTLPCAPI_

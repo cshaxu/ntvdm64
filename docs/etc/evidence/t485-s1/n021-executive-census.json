@@ -1,0 +1,56 @@
+{
+  "before": {
+    "files": 1324,
+    "byte_identical": 775,
+    "nonerror_identical": 786,
+    "nonerror_different": 538,
+    "nonerror_points": 7741,
+    "nonerror_lines": 153031
+  },
+  "after": {
+    "files": 1324,
+    "byte_identical": 775,
+    "nonerror_identical": 786,
+    "nonerror_different": 538,
+    "nonerror_points": 7718,
+    "nonerror_lines": 152823
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": -23,
+    "nonerror_lines": -208
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt.h",
+      "before_points": 13,
+      "before_lines": 41,
+      "after_points": 14,
+      "after_lines": 40,
+      "exclusions": 4
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "before_points": 43,
+      "before_lines": 508,
+      "after_points": 20,
+      "after_lines": 302,
+      "exclusions": 3
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "before_points": 4,
+      "before_lines": 4,
+      "after_points": 3,
+      "after_lines": 3,
+      "exclusions": 2
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1254,
+    "OpenNT": 70
+  }
+}

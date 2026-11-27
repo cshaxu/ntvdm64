@@ -2172,3 +2172,4 @@ post-publication targeted checks.
 - [N021 VDD declarations](evidence/t485-s1/n021-vdd.md).
 
 - [N021 CSR headers](evidence/t485-s1/n021-csr.md).
+- [N021 executive and LPC headers](evidence/t485-s1/n021-executive.md).

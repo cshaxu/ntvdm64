@@ -1,0 +1,585 @@
+{
+  "task": "M0 T485 S15 P24",
+  "runtime": "build/t485-s15/runtime25",
+  "build_exit": 0,
+  "inputs": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/nt.h",
+      "blob": "44268dc13f0d6a201611989fd0d662a685e8314c",
+      "sha256": "5012e22d0de17cb2a32613b6685272544e3a8cedd71cd16df1abc70fdc1accf7",
+      "xp_sha256": "c032a720d1c3f99bda0988c4f0e2dbdbfa80e507714d45ec1a85d132a922d975",
+      "raw_points": 16,
+      "raw_lines": 44,
+      "selected_original_line_mismatches": []
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntexapi.h",
+      "blob": "b9bfabc459a343f84701fc619118f2e0a7940f95",
+      "sha256": "6c1274def9212cf1db13f0a62c316e008c69b09711c18e05fe04f61a42de0db6",
+      "xp_sha256": "11cc6bca9533878f15ccbc02929bef7a5fe46fb94507920a6903531015f392aa",
+      "raw_points": 23,
+      "raw_lines": 347,
+      "selected_original_line_mismatches": []
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntlpcapi.h",
+      "blob": "e635d79201f00fe706d78f232d15180a94791f3b",
+      "sha256": "cd6684fb8f227da233934d38c70178d1ff026a6607163fdadd3133de2b75750c",
+      "xp_sha256": "15adcea456dd4788d5f768883c39a8e3d3b7df141f49e89fa682a9ddcc5925ed",
+      "raw_points": 5,
+      "raw_lines": 11,
+      "selected_original_line_mismatches": []
+    }
+  ],
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "B0176866C735A7E21455E8AF565F1A8947D1C6C0245AF7835CEC2E06AB4F13AE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "B0176866C735A7E21455E8AF565F1A8947D1C6C0245AF7835CEC2E06AB4F13AE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "B5AFE142BFD663CB6D8B1C91C172EE4947E15A627B5A1E67D8E4721EC8E2A1AB",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "B5AFE142BFD663CB6D8B1C91C172EE4947E15A627B5A1E67D8E4721EC8E2A1AB",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "9A39AF45EE19EF3A68F87220AECEDC2D0246F0B1F3A2C10A7FA1F770A908537B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "9A39AF45EE19EF3A68F87220AECEDC2D0246F0B1F3A2C10A7FA1F770A908537B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "796DF231E31C0158C49C96CD1DEC70CC6E98EAD8B225C7E3DA9CAC658F0C814D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "796DF231E31C0158C49C96CD1DEC70CC6E98EAD8B225C7E3DA9CAC658F0C814D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "6A603B3CAD592F4686B3B8F3CE8EE1A73B7E21BF897E3C1441212B68E80AC91D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "6A603B3CAD592F4686B3B8F3CE8EE1A73B7E21BF897E3C1441212B68E80AC91D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "E25CB2D19140A05C2AAB728C5C1FA7BDABDB90005548EA1BC2F835F2A89D781E",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "E25CB2D19140A05C2AAB728C5C1FA7BDABDB90005548EA1BC2F835F2A89D781E",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "575FF5AEFE00B8EEF0DA8FC9B7A077C2B46741433354587C6BCC19041B712906",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "575FF5AEFE00B8EEF0DA8FC9B7A077C2B46741433354587C6BCC19041B712906",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "DE768CDCCC34C44B3C1A0811AB47C481FB35760D5C6094BC3E5CE945F998A5F8",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "DE768CDCCC34C44B3C1A0811AB47C481FB35760D5C6094BC3E5CE945F998A5F8",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "5CC0514493A69039F61AA40C38E767C57000181E1BE871419AB26702CF397449",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "5CC0514493A69039F61AA40C38E767C57000181E1BE871419AB26702CF397449",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "25314D80CFA3DFDCA88EB7EE60196AC8450EA453984C9B19198391A6550C50B7",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "25314D80CFA3DFDCA88EB7EE60196AC8450EA453984C9B19198391A6550C50B7",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "B209B03EF9F77CB0ACD2C55584B80B291CE4E0EABFF72865251CD0B0F00DCFD0",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "B209B03EF9F77CB0ACD2C55584B80B291CE4E0EABFF72865251CD0B0F00DCFD0",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "6DAC9F55EFA4CF27803502A062B001B268C485F741DC695FAEC5D2E5EF438427",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "6DAC9F55EFA4CF27803502A062B001B268C485F741DC695FAEC5D2E5EF438427",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "57E6F361F6F2BB68C4B76CA5EB11C62269F41512A338666D7F0F63847BE28514",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "57E6F361F6F2BB68C4B76CA5EB11C62269F41512A338666D7F0F63847BE28514",
+      "pass": true
+    }
+  ],
+  "census": {
+    "before": {
+      "files": 1324,
+      "byte_identical": 775,
+      "nonerror_identical": 786,
+      "nonerror_different": 538,
+      "nonerror_points": 7741,
+      "nonerror_lines": 153031
+    },
+    "after": {
+      "files": 1324,
+      "byte_identical": 775,
+      "nonerror_identical": 786,
+      "nonerror_different": 538,
+      "nonerror_points": 7718,
+      "nonerror_lines": 152823
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": -23,
+      "nonerror_lines": -208
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nt.h",
+        "before_points": 13,
+        "before_lines": 41,
+        "after_points": 14,
+        "after_lines": 40,
+        "exclusions": 4
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+        "before_points": 43,
+        "before_lines": 508,
+        "after_points": 20,
+        "after_lines": 302,
+        "exclusions": 3
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+        "before_points": 4,
+        "before_lines": 4,
+        "after_points": 3,
+        "after_lines": 3,
+        "exclusions": 2
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1254,
+      "OpenNT": 70
+    }
+  },
+  "logs": {
+    "capture32-final.log": "native capture bits=32 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "capture64-final.log": "native capture bits=64 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "layout32-final.log": "PASS 32-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n",
+    "layout64-final.log": "PASS 64-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n"
+  },
+  "service": {
+    "Concurrency": 4,
+    "ElapsedMs": 6313,
+    "ObserverHash": "AD6A887C6F14960E387D4664B9FA0A2FD8F6A1210032FF2FFF360FD7D10FD779",
+    "FixtureHash": "5C2389FDADB514C3942B48D37DCFB889CF7ED4B1F40335B540CD8F7FA680285B",
+    "Cases": [
+      {
+        "Case": "frontend-chains",
+        "ElapsedMs": 867,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-instances",
+        "ElapsedMs": 873,
+        "Result": "PASS"
+      },
+      {
+        "Case": "parent-resume-origin",
+        "ElapsedMs": 875,
+        "Result": "PASS"
+      },
+      {
+        "Case": "io-authority",
+        "ElapsedMs": 874,
+        "Result": "PASS"
+      },
+      {
+        "Case": "route-cancellation",
+        "ElapsedMs": 453,
+        "Result": "PASS"
+      },
+      {
+        "Case": "prepared-native-root-loss",
+        "ElapsedMs": 511,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-stop",
+        "ElapsedMs": 603,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-reconnect",
+        "ElapsedMs": 604,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-delegated",
+        "ElapsedMs": 549,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait",
+        "ElapsedMs": 811,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-root-loss",
+        "ElapsedMs": 723,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-request-loss",
+        "ElapsedMs": 724,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-worker-loss",
+        "ElapsedMs": 601,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-rundown",
+        "ElapsedMs": 510,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-return",
+        "ElapsedMs": 550,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-after-return",
+        "ElapsedMs": 551,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-nested-return",
+        "ElapsedMs": 497,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-pending-command",
+        "ElapsedMs": 513,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-increment",
+        "ElapsedMs": 518,
+        "Result": "PASS"
+      },
+      {
+        "Case": "launcher-completed-rundown",
+        "ElapsedMs": 521,
+        "Result": "PASS"
+      },
+      {
+        "Case": "completed-worker-loss",
+        "ElapsedMs": 504,
+        "Result": "PASS"
+      },
+      {
+        "Case": "wow-start-late-query",
+        "ElapsedMs": 676,
+        "Result": "PASS"
+      },
+      {
+        "Case": "default",
+        "ElapsedMs": 706,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-authority",
+        "ElapsedMs": 706,
+        "Result": "PASS"
+      },
+      {
+        "Case": "shared-worker-residency",
+        "ElapsedMs": 575,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-command",
+        "ElapsedMs": 467,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-worker",
+        "ElapsedMs": 598,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-gui",
+        "ElapsedMs": 601,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close",
+        "ElapsedMs": 601,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-completion-barrier",
+        "ElapsedMs": 432,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-order",
+        "ElapsedMs": 507,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-root-loss",
+        "ElapsedMs": 514,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-prepare-pending",
+        "ElapsedMs": 515,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-worker-then-console",
+        "ElapsedMs": 459,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-console-then-worker",
+        "ElapsedMs": 467,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-late-worker-close",
+        "ElapsedMs": 496,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-exit-then-console",
+        "ElapsedMs": 492,
+        "Result": "PASS"
+      },
+      {
+        "Case": "console-then-worker-exit",
+        "ElapsedMs": 435,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-console-exit",
+        "ElapsedMs": 452,
+        "Result": "PASS"
+      },
+      {
+        "Case": "preparing-worker-exit",
+        "ElapsedMs": 461,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-terminate",
+        "ElapsedMs": 535,
+        "Result": "PASS"
+      },
+      {
+        "Case": "unfinished-worker-exit",
+        "ElapsedMs": 516,
+        "Result": "PASS"
+      }
+    ]
+  },
+  "guest": {
+    "mode": "netapi",
+    "exit_code": 0,
+    "elapsed_ms": 13429
+  },
+  "omissions": [
+    {
+      "name": "NtQuerySystemInformation",
+      "start": 1659,
+      "end": 1667,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_LOOKASIDE_INFORMATION",
+      "start": 1600,
+      "end": 1610,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_REGISTRY_QUOTA_INFORMATION",
+      "start": 1373,
+      "end": 1377,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_EXCEPTION_INFORMATION",
+      "start": 1360,
+      "end": 1365,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_THREAD_INFORMATION",
+      "start": 1304,
+      "end": 1316,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_PROCESS_INFORMATION",
+      "start": 1262,
+      "end": 1296,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_PERFORMANCE_INFORMATION",
+      "start": 1185,
+      "end": 1260,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_PROCESSOR_PERFORMANCE_INFORMATION",
+      "start": 1117,
+      "end": 1124,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_BASIC_INFORMATION",
+      "start": 1095,
+      "end": 1107,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_TIMEOFDAY_INFORMATION",
+      "start": 1085,
+      "end": 1093,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_INFORMATION_CLASS",
+      "start": 969,
+      "end": 1036,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "NtQueryTimerResolution",
+      "start": 719,
+      "end": 726,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "NtQuerySystemTime",
+      "start": 704,
+      "end": 709,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "EVENT_BASIC_INFORMATION",
+      "start": 304,
+      "end": 307,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "EVENT_INFORMATION_CLASS",
+      "start": 296,
+      "end": 298,
+      "reason": "actual compiler duplicate declaration in SDK/B owner"
+    },
+    {
+      "name": "SYSTEM_INTERRUPT_INFORMATION",
+      "start": 1581,
+      "end": 1588,
+      "reason": "DEM DEVL actual compiler C2011 duplicate with Windows SDK winternl.h"
+    }
+  ],
+  "exclusions": {
+    "ntexapi.h": [
+      {
+        "condition": "((b'#ifndef _NTEXAPI_', 0, 0), (b'#ifdef _MAC', 0, 0))",
+        "original_start": 1883,
+        "original_end": 1885
+      },
+      {
+        "condition": "((b'#ifndef _NTEXAPI_', 0, 0), (b'#if defined(REMOTE_BOOT)', 0, 0))",
+        "original_start": 1868,
+        "original_end": 1876
+      },
+      {
+        "condition": "((b'#ifndef _NTEXAPI_', 0, 0), (b'#if defined(USER_SHARED_DATA)', 0, 0))",
+        "original_start": 2104,
+        "original_end": 2139
+      }
+    ],
+    "ntlpcapi.h": [
+      {
+        "condition": "((b'#ifndef _NTLPCAPI_', 0, 0), (b'#if defined(USE_LPC6432)', 0, 0))",
+        "original_start": 44,
+        "original_end": 49
+      },
+      {
+        "condition": "((b'#ifndef _NTLPCAPI_', 0, 0), (b'#if defined(USE_LPC6432)', 1, 0))",
+        "original_start": 135,
+        "original_end": 138
+      }
+    ]
+  },
+  "initial_failures": "probe.log: SDK/B duplicate declarations and missing prerequisites; build.log: DEM selects DEVL, invalidating old exclusions. Corrected and rebuilt final sources.",
+  "Full": "Not repeated: eight audited files since P21, six changed distinct mirror files"
+}
