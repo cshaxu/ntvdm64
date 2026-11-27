@@ -32,14 +32,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S12 Ordered Progress
 
-[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):30/48files,
-369/645points final-verified;220restored,149residual,276unreviewed.
-[P10 receipt](../etc/evidence/t485-h-repair/s12-p10-result.json):cached build,
-dual26hash publication,503line witnesses and runtime11 Full23/23 PASS.
-Product38b11ba6c pushed;30files369points delivered,zero local restorations pending.
-S12census803/31809->671/19668 (-132points/-12141lines).
-Next31nt_eoi.c;18files remain. Last Full:file30,runtime11,23/23;
-no Full rerun. Migration39/159;N004 gated on S13.
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):35/48files,
+523/645points final-verified;358restored165residual122unreviewed.
+[P11 receipt](../etc/evidence/t485-h-repair/s12-p11-result.json):runtime12 cached
+build,dual26hash publication,514line witnesses and targeted gates PASS.
+Test-only CPU initialization repaired;failed external-memory gate retry PASS.
+Commit/push pending;last delivered30files369points38b11ba6c.
+Census803/31809->684/10260 (-119points/-21549lines).
+Next36nt_pif.c;13files remain. Last Full:file30,runtime11;not rerun.
+Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
 

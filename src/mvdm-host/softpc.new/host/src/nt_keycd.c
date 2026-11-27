@@ -1,4 +1,4 @@
-/*************************************************************************** 
+/***************************************************************************
  *									   *
  *  MODULE	: nt_keycd.c						   *
  *									   *
@@ -19,17 +19,16 @@
 //
 #define UNDEFINED 0
 #if defined(NEC_98)
-#line 22
 #error Unsupported NEC PC-98 configuration
 #endif //NEC_98
-#line 36
 
+#line 37
 /*@ACW=======================================================================
 
 Microsoft now use scan code set 1 as their base scan code set. This means that
-we had to change ours also. Not only that, two tables are needed now: one to 
+we had to change ours also. Not only that, two tables are needed now: one to
 hold the regular keyset, the other to hold the ENHANCED key options. Scan code
-set 1 differs to scan code set 3 in that some scan codes are the same for 
+set 1 differs to scan code set 3 in that some scan codes are the same for
 different keystrokes. So when an enhanced bit is set in the KEY_EVENT_RECORD.
 dwControlKeyState, a second (very sparse) table is substituted for the regular
 one.
@@ -39,7 +38,6 @@ scancode values for the regular keys just to make life a little more fun!
 ============================================================================*/
 
 #if defined(NEC_98)
-#line 52
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
 #line 311
@@ -49,7 +47,7 @@ BYTE Scan1ToKeynum[] =
 
 
     UNDEFINED,		//  0x0		
-    110,		//  0x1		Escape 
+    110,		//  0x1		Escape
     2,			//  0x2		1 !
     3,			//  0x3		2 @
     4,			//  0x4		3 #
@@ -298,7 +296,7 @@ BYTE Scan1ToKeynumExtended[] =
     79,			//  0x4b	Extended 4b Left
     UNDEFINED,		//  0x4c	
     89,			//  0x4d	Extended 4d Right
-    UNDEFINED,		//  0x4e	 
+    UNDEFINED,		//  0x4e	
     81,			//  0x4f	Extended 4f End
     84,			//  0x50	Extended 50 Down
     86,			//  0x51	Extended 51 Page Down
@@ -307,7 +305,6 @@ BYTE Scan1ToKeynumExtended[] =
 
 };
 #endif // !NEC_98
-#line 575
 
 
 
@@ -448,11 +445,10 @@ BYTE KeyMsgToKeyCode(PKEY_EVENT_RECORD KeyEvent)
     /*:::::::::::::::::::::::::::::::::::: do we need the enhanced key set ? */
 
 #if defined(NEC_98)
-#line 715
 #error Unsupported NEC PC-98 configuration
 #endif // !NEC_98
-#line 719
 
+#line 720
     // Both Pause and Numlock have ScanCode==0x45,
     // so simple table lookup by ScanCode doesn't work
     // use wVirtualKeyCode to check for Pause
@@ -474,12 +470,11 @@ BYTE KeyMsgToKeyCode(PKEY_EVENT_RECORD KeyEvent)
 #endif // JAPAN
 	/*............................... the regular keyset is what we need */
 #if defined(NEC_98)
-#line 741
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 787
 
         return  KeyEvent->wVirtualScanCode >= sizeof(Scan1ToKeynum)
+#line 789
 		   ? 0
                    : Scan1ToKeynum[KeyEvent->wVirtualScanCode];
     }
@@ -498,13 +493,12 @@ BYTE KeyMsgToKeyCode(PKEY_EVENT_RECORD KeyEvent)
         /*.................................. we do need the extended key set */
 
 #if defined(NEC_98)
-#line 807
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 816
 
 
         return  KeyEvent->wVirtualScanCode >= sizeof(Scan1ToKeynumExtended)
+#line 819
 		   ? 0
                    : Scan1ToKeynumExtended[KeyEvent->wVirtualScanCode];
     }

@@ -36,9 +36,11 @@
 #include "nt_reset.h"
 #include "nt_eoi.h"
 
-#line 43
+// from monitor.lib
+HANDLE ThreadLookUp(PVOID);
+extern PVOID CurrentMonitorTeb;
+
 // from nt_timer.c
-#line 44
 extern ULONG GetPerfCounter(VOID);
 
 
@@ -47,12 +49,10 @@ ULONG UndelayIrqLine=0;
 ULONG DelayIrqLine=0xffffffff;  // all ints are blocked until, spckbd loaded
 
 #ifdef MONITOR
-#line 52
 #error Excluded original conditional branch
-#line 55
 #endif
-#line 56
 
+#line 57
 HANDLE hWowIdleEvent = INVALID_HANDLE_VALUE;
 
 /*
@@ -63,7 +63,6 @@ static EOIHOOKPROC EoiHooks[16]={NULL};  // must be init to NULL
 
 
 #ifndef MONITOR
-#line 67
 void DelayIrqQuickEvent(long param);
 q_ev_handle DelayHandle[16];
 #define pNtVDMState ((PULONG)(Start_of_M_area + FIXED_NTVDMSTATE_LINEAR))
@@ -72,7 +71,6 @@ LARGE_INTEGER BlockTime = {0,0};
 extern LARGE_INTEGER CurrHeartBeat;
 void host_TimeStamp(PLARGE_INTEGER pliTime);
 #endif
-#line 75
 
 
 /*
@@ -100,11 +98,9 @@ BlockWOWIdle(
        *pNtVDMState |= VDM_WOWBLOCKED;
 
 #ifndef MONITOR
-#line 102
        BlockTime = CurrHeartBeat;
 #endif
 
-#line 105
        }
    else {
        *pNtVDMState &= ~VDM_WOWBLOCKED;
@@ -112,7 +108,6 @@ BlockWOWIdle(
 
 
 #ifndef MONITOR
-#line 112
        if (BlockTime.QuadPart &&
            (CurrHeartBeat.QuadPart >= BlockTime.QuadPart + SYSTEM_TICK_INTV/2))
           {
@@ -123,7 +118,6 @@ BlockWOWIdle(
            return;
            }
 #endif
-#line 122
        }
 
    host_ica_unlock();
@@ -203,12 +197,9 @@ BOOL RemoveEOIHook(int IrqLine, EOIHOOKPROC EoiHookProc)
 VOID host_EOI_hook(int IrqLine, int CallCount)
 {
      if ((ULONG)IrqLine >= sizeof(EoiHooks)/sizeof(EOIHOOKPROC)) {
-#line 201
 #if DBG
-#line 202
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 204
          return;
          }
 
@@ -240,14 +231,11 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
    ULONG  IrqLine;
 
 #ifdef MONITOR
-#line 235
 #error Excluded unsupported delayed-interrupt monitor declarations
-#line 237
 #else
 #line 238
    ULONG TicCount;
 #endif
-#line 240
 
    host_ica_lock();
 
@@ -265,11 +253,8 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
            Delay = 1000;
            }
 
-#line 257
 #ifdef MONITOR
-#line 258
 #error Excluded unsupported delayed-interrupt monitor dispatch
-#line 277
 #else
 
 #line 279
@@ -297,18 +282,14 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
                                                 IrqLineNum
                                                 );
 
-#line 303
         //
         // Keep Wow Tasks active
         //
-#line 306
         WOWIdle(TRUE);
 
 
 
-#line 310
 #endif
-#line 311
         }
 
 
@@ -330,9 +311,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
 
 
 
-#line 332
 #ifndef MONITOR
-#line 333
 /*
  * QuickEvent call back function
  *
@@ -350,7 +329,6 @@ void DelayIrqQuickEvent(long param)
 
 }
 #endif
-#line 350
 
 
 
@@ -383,14 +361,12 @@ void InitializeIcaLock(void)
 
 
 #ifdef MONITOR
-#line 382
 #error Excluded original conditional branch
-#line 404
 #endif
-#line 405
 
 
 
+#line 408
 // The following routines are used to support IRET hooks. If an interrupt
 // uses an IRET hook then the ICA will not generate a interrupt of that
 // type until the IRET hook has been called.
@@ -400,7 +376,6 @@ void InitializeIcaLock(void)
 
 void SoftPcEoi(int Adapter, int* Line) {
     IS32 pic_line = *Line;
-#line 416
     ica_eoi(Adapter, &pic_line, 0);
     *Line = (int)pic_line;
 #line 417
@@ -446,10 +421,8 @@ void ica_reset_interrupt_state(void)
     VirtualIca[ICA_SLAVE].ica_cpu_int  = FALSE;
 
 #ifdef MONITOR
-#line 459
 #error Excluded original conditional branch
 #endif
-#line 461
     DelayIrqLine  = 0;
 
     //Tell CPU to remove any pending interrupts
@@ -466,9 +439,7 @@ void ica_reset_interrupt_state(void)
 VOID ica_RestartInterrupts(ULONG IrqLine)
 {
 #ifdef MONITOR
-#line 477
 #error Excluded unsupported monitor interrupt restart
-#line 486
 #else
 #line 487
     host_ica_lock();
@@ -479,12 +450,8 @@ VOID ica_RestartInterrupts(ULONG IrqLine)
 
     host_ica_unlock();
 #endif
-#line 495
 }
 
 #ifdef MONITOR
-#line 498
 #error Excluded unsupported monitor IRET table
-#line 521
 #endif /* MONITOR */
-#line 546

@@ -22,11 +22,10 @@
 #ifdef CPU_40_STYLE
 
 #if defined(DBG)
-#line 25
 #error Unsupported excluded original configuration
 #endif
-#line 28
 
+#line 29
 /* Need all of the following to include nt.h and windows.h in the same file. */
 #include <nt.h>
 #include <ntrtl.h>
@@ -47,11 +46,10 @@
 
 /* Make local symbols visible if debugging. */
 #ifdef DEBUG_MEM
-#line 47
 #error Unsupported excluded original configuration
 #endif /* DEBUG_MEM */
-#line 52
 
+#line 53
 /* Macros and typedefs. */
 
 /* Entry in header table describing sections of memory. */
@@ -172,11 +170,10 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
     SECTION_HEADER  *entryPtr;      /* Header entry for real mode area. */
 
 #ifdef DEBUG_MEM
-#line 173
 #error Unsupported excluded original configuration
 #endif
-#line 176
 
+#line 177
     /*
      * Setup the value to initalise allocated memory with
      */
@@ -205,10 +202,8 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
         return((IU8 *) NULL);
     }
 #ifdef DEBUG_MEM
-#line 205
 #error Unsupported excluded original configuration
 #endif
-#line 207
     commitShift = 0;
     for (temp = commitGran; temp > 1; temp >>= 1)
 	commitShift++;
@@ -224,7 +219,7 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
         return((IU8 *) NULL);
     }
 
-    /* 
+    /*
      * Allocate the bottom 1 megabyte plus the 20-bit wrap area. Round this
      * to an Intel page boundary as this is the granularity of this system.
      */
@@ -258,11 +253,11 @@ GLOBAL IU8 *InitIntelMemory IFN1(IU32, MaxIntelMemorySize)
         FreeIntelMemory();
         return((IU8 *) NULL);
     }
+#line 252
     /*
      * Initialise linked list with pointers to initial 1M and remaining free
      * space and store initial size of free space.
      */
-#line 256
     entryPtr = addHeaderEntry((SECTION_HEADER *) NULL, (SECTION_HEADER *) NULL,
 			      SECT_ALLOC, intelMem, initialCommitSize);
 
@@ -291,12 +286,11 @@ OUTPUT:
 GLOBAL	VOID FreeIntelMemory IFN0()
 {
 #ifdef DEBUG_MEM
-#line 284
 #error Unsupported excluded original configuration
 #endif
     mvdm_softpc_physical_mapping_release();
-#line 286
 
+#line 287
     /* Free Intel memory */
     VirtualFree (intelMem, 0, MEM_RELEASE);
 
@@ -334,10 +328,8 @@ GLOBAL  VOID SetWOWforceIncrAlloc IFN1(IBOOL, iEnable)
         WOWforceIncrAlloc = 0;
     }
 #ifdef DEBUG_MEM
-#line 324
 #error Unsupported excluded original configuration
 #endif
-#line 326
 }
 
 
@@ -376,11 +368,10 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
     IU32    commitSize;
 
 #ifdef DEBUG_MEM
-#line 364
 #error Unsupported excluded original configuration
 #endif
-#line 367
 
+#line 368
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmAllocateVirtualMemory before initialisation");
 
@@ -396,10 +387,8 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
     if ((WOWforceIncrAlloc != 0) && lastAllocPtr
                              && (GetCurrentThreadId() == WOWforceIncrAlloc)) {
 #ifdef DEBUG_MEM
-#line 383
 #error Unsupported excluded original configuration
 #endif
-#line 385
         headerPtr = lastAllocPtr;
     } else {
         headerPtr = &headerTable[0];
@@ -461,11 +450,10 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
     *INTELAddress = ((ULONG) (IHPE) headerPtr->address) - (ULONG) intelMem;
 
 #ifdef DEBUG_MEM
-#line 446
 #error Unsupported excluded original configuration
 #endif
-#line 454
 
+#line 455
     return(STATUS_SUCCESS);
 }
 
@@ -488,10 +476,8 @@ GLOBAL NTSTATUS VdmCommitVirtualMemory IFN2(ULONG, INTELAddress,
     IHP     retAddr;
 
 #ifdef DEBUG_MEM
-#line 477
 #error Unsupported excluded original configuration
 #endif
-#line 479
 
     retAddr = VirtualAlloc((LPVOID) (intelMem + INTELAddress),
 			   (DWORD) Size,
@@ -526,10 +512,8 @@ GLOBAL NTSTATUS VdmDeCommitVirtualMemory IFN2(ULONG, INTELAddress,
 					     ULONG, Size)
 {
 #ifdef DEBUG_MEM
-#line 513
 #error Unsupported excluded original configuration
 #endif
-#line 515
 
 
     sas_overwrite_memory(INTELAddress, Size);
@@ -572,10 +556,8 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
     assert0(memInit, "Called VdmFreeVirtualMemory before initialisation");
 
 #ifdef DEBUG_MEM
-#line 557
 #error Unsupported excluded original configuration
 #endif
-#line 559
 
     /* Calculate chunk address */
     Address = INTELAddress + (ULONG)intelMem;
@@ -662,11 +644,10 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
 
 
 #ifdef DEBUG_MEM
-#line 645
 #error Unsupported excluded original configuration
 #endif
-#line 649
 
+#line 650
     return(STATUS_SUCCESS);
 }
 
@@ -718,11 +699,10 @@ GLOBAL NTSTATUS VdmQueryFreeVirtualMemory IFN2(PULONG, FreeBytes,
     *LargestFreeBlock = (ULONG) maxFree;
 
 #ifdef DEBUG_MEM
-#line 701
 #error Unsupported excluded original configuration
 #endif
-#line 704
 
+#line 705
     return(STATUS_SUCCESS);
 }
 
@@ -759,11 +739,10 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
 
 
 #ifdef DEBUG_MEM
-#line 741
 #error Unsupported excluded original configuration
 #endif
-#line 744
 
+#line 745
     /* Round NewSize up to a multiple of 4K. */
     if (NewSize & PAGE_MASK)
 	NewSize = (NewSize + PAGE_MASK) & (~PAGE_MASK);
@@ -907,7 +886,6 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
     }
 
 #ifdef DEBUG_MEM
-#line 888
 #error Unsupported excluded original configuration
 #endif
 #line 893
@@ -957,11 +935,10 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
     IU32 alignfix;
 
 #ifdef DEBUG_MEM
-#line 939
 #error Unsupported excluded original configuration
 #endif
-#line 942
 
+#line 943
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmAddVirtualMemory before initialisation");
 
@@ -978,13 +955,11 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
 
     /* step 1 - reserve the intel address space */
 
-#line 959
     if (VdmAllocateVirtualMemory(IntelAddress,Size,FALSE) != STATUS_SUCCESS)
         return (STATUS_NO_MEMORY);
 
     /* step 2 - flush the caches */
 
-#line 964
     sas_overwrite_memory(*IntelAddress, Size);
 
     /* step 3 - replace the PhysicalPageREC.translation entries */
@@ -993,15 +968,14 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
     ADDRESS_TO_HEADER(*IntelAddress+intelMem)->flags |= HDR_REMAP_FLAG;
 
     /* adjust IntelAddress if HostAddress not DWORD aligned */
-    
+
     *IntelAddress += alignfix;
 
 #ifdef DEBUG_MEM
-#line 976
 #error Unsupported excluded original configuration
 #endif
-#line 981
 
+#line 982
     return(STATUS_SUCCESS);
 }
 
@@ -1021,11 +995,10 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
     NTSTATUS status;
 
 #ifdef DEBUG_MEM
-#line 1001
 #error Unsupported excluded original configuration
 #endif
-#line 1006
 
+#line 1007
     /* Make sure memory system is initialised. */
     assert0(memInit, "Called VdmRemoveVirtualMemory before initialisation");
 
@@ -1046,7 +1019,6 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
     /* step 2 - reset the PhysicalPageREC.translation entries */
 
 #ifdef DEBUG_MEM
-#line 1027
 #error Unsupported excluded original configuration
 #endif
 #line 1031
@@ -1056,7 +1028,6 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
     /* step 3 - free the reserved intel address space */
 
 #ifdef DEBUG_MEM
-#line 1037
 #error Unsupported excluded original configuration
 #endif
 #line 1041
@@ -1101,11 +1072,10 @@ LOCAL SECTION_HEADER *addHeaderEntry IFN5(SECTION_HEADER *, prevHeader,
     IU32     commitSize;
 
 #ifndef PROD
-#line 1082
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
-#line 1087
 
+#line 1088
     /* Commit and zero table header entries if necessary. */
     exclusiveHeaderPages((IHPE) newHeader, (IHPE) prevHeader,
                          (IHPE) nextHeader, &commitAddr, &commitSize);
@@ -1117,7 +1087,7 @@ LOCAL SECTION_HEADER *addHeaderEntry IFN5(SECTION_HEADER *, prevHeader,
 			       (DWORD) PAGE_READWRITE);
 
 #ifdef DEBUG_MEM
-	if(retAddr != commitAddr)
+    if(retAddr != commitAddr)
 	{
 	    printf("V.Allocate failed (%xh) [%lxh :%xh]\n",GetLastError(),commitAddr,commitSize);
 	}
@@ -1129,7 +1099,7 @@ LOCAL SECTION_HEADER *addHeaderEntry IFN5(SECTION_HEADER *, prevHeader,
         else
             return((SECTION_HEADER *) NULL);
     }
-    
+
     /* Fill in header's fields. */
     newHeader->flags = HDR_VALID_FLAG;
     if (allocFree == SECT_ALLOC)
@@ -1301,7 +1271,7 @@ LOCAL void exclusiveChunkPages IFN4(SECTION_HEADER *, chunkHeader,
 
     /* Find next allocated chunk. */
     nextHeader = chunkHeader->next;
-    while ((nextHeader != NULL) && 
+    while ((nextHeader != NULL) &&
      (Commit?SECTION_IS_UNCOMMITTED(nextHeader):SECTION_IS_FREE(nextHeader)))
         nextHeader = nextHeader->next;
 
@@ -1322,7 +1292,6 @@ LOCAL void exclusiveChunkPages IFN4(SECTION_HEADER *, chunkHeader,
                         allocAddr,
                         allocSize);
 #ifdef DEBUG_MEM
-#line 1304
 #error Unsupported excluded original configuration
 #endif
 #line 1308
@@ -1373,11 +1342,10 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
             lastPage;               /* Last page that needs committing. */
 
 #ifndef PROD
-#line 1355
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
-#line 1362
 
+#line 1363
     /*
      * Work out first and last pages of new memory block that need to be
      * committed.
@@ -1390,13 +1358,10 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
  * Also insufficient anyway in general case
  */
 #ifdef PIG
-#line 1375
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
-#line 1377
     lastPage = currentAllocLastPage;
 #endif
-#line 1379
 
     /*
      * Now check to see if first or last pages of this allocation are already
@@ -1435,10 +1400,8 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
 
 
 #ifdef DEBUG_MEM
-#line 1417
 #error Unsupported excluded original configuration
 #endif DEBUG_MEM
-#line 1458
 
 
 #endif /* CPU_40_STYLE */

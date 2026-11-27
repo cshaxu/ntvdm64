@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed30/48files369/645points;restored-final-verified220,restored-local0,
-residual-final-verified149,residual-local0,unreviewed276.
+Reviewed35/48files523/645points;restored-final-verified358,restored-local0,
+residual-final-verified165,residual-local0,unreviewed122.
 Delivered/pushed30files369points through 38b11ba6c.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
@@ -44,11 +44,11 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 28 | src/mvdm-host/softpc.new/host/src/nt_com.c | 90 | P10 delivered 38b11ba6c |
 | 29 | src/mvdm-host/softpc.new/host/src/nt_cpu.c | 2 | P10 delivered 38b11ba6c |
 | 30 | src/mvdm-host/softpc.new/host/src/nt_emm.c | 29 | P10 delivered 38b11ba6c |
-| 31 | src/mvdm-host/softpc.new/host/src/nt_eoi.c | 2 | Pending |
-| 32 | src/mvdm-host/softpc.new/host/src/nt_error.c | 26 | Pending |
-| 33 | src/mvdm-host/softpc.new/host/src/nt_keycd.c | 7 | Pending |
-| 34 | src/mvdm-host/softpc.new/host/src/nt_mem.c | 8 | Pending |
-| 35 | src/mvdm-host/softpc.new/host/src/nt_msscs.c | 111 | Pending |
+| 31 | src/mvdm-host/softpc.new/host/src/nt_eoi.c | 2 | P11 whole-file local audit |
+| 32 | src/mvdm-host/softpc.new/host/src/nt_error.c | 26 | P11 whole-file local audit |
+| 33 | src/mvdm-host/softpc.new/host/src/nt_keycd.c | 7 | P11 whole-file local audit |
+| 34 | src/mvdm-host/softpc.new/host/src/nt_mem.c | 8 | P11 whole-file local audit |
+| 35 | src/mvdm-host/softpc.new/host/src/nt_msscs.c | 111 | P11 whole-file local audit; build running |
 | 36 | src/mvdm-host/softpc.new/host/src/nt_pif.c | 14 | Pending |
 | 37 | src/mvdm-host/softpc.new/host/src/nt_reset.c | 34 | Pending |
 | 38 | src/mvdm-host/softpc.new/host/src/nt_rez.c | 1 | Pending |
@@ -616,3 +616,90 @@ P10 product 38b11ba6c pushed. Delivered30/48files369/645points;220restored,
 149residual,276unreviewed,zero local restorations awaiting delivery.
 Runtime11 Full23/23 and dual26hash publication retained;no Full rerun.
 Current671/19668,reduction132points12141lines;next31nt_eoi.c.
+
+## P11 file31 local whole-file audit
+
+nt_eoi.c36points51lines ->6points10lines, reduction30/41. R03379 restores
+unused original monitor declarations; R03380 retains the typed int/long pointer
+boundary: vrinit.c owns int, ica.h requires IS32*, insignia.h defines long,
+and ica.c writes the selected line back. All8error exclusions unchanged.
+Source audit complete;final preprocessing/build/publication pending. No behavior
+change;declaration/line-only batch may accumulate. Census641/19627; cumulative
+reduction162/12182. Reviewed31files371points;220restored delivered plus1local;
+149residual verified plus1local;274unreviewed. Delivered30/48,369/645.
+Next32nt_error.c;lastFullruntime11 unchanged,not rerun.
+
+## P11 files32-33 local whole-file audit
+
+nt_error.c1/2514 ->10/16;20format restorations,6retained ABI/provider points.
+CreateThread requires WINAPI. DOS modal wrapper transfers real input ownership;
+WOW presenter retains five-word XP hard-error and real response semantics.
+No C-token changes;7error exclusions unchanged. Product preprocessing154original
+line witnesses PASS. nt_eoi.c preprocessing50witnesses PASS,zero mismatch.
+nt_keycd.c1/1347 ->5/9;5format restorations,2retained bounds fixes: >= rejects
+index133/84 at table size whereas original > reads one past. Actual-object
+keycode_object_contract_fixture.c is the existing relevant coverage;not rerun yet.
+No C-token changes;5error exclusions unchanged. Final keycode line check pending.
+Batch38/3912 ->21/35, reduction17points3877lines. Census654/15791,
+cumulative149points16018lines. Reviewed33/48files404/645points;restored220verified
+plus26local,residual149verified plus9local,241unreviewed. Delivered30/369unchanged.
+Declaration/format-only batch accumulates;no Full rerun. Next34nt_mem.c.
+
+## P11 file34 local whole-file audit
+
+nt_mem.c1/2773 ->21/26,5format restored,3mapping-owner boundaries retained.
+Original void VdmSetPhysRecStructs cannot report allocation failure;existing B
+preallocates slots before InitIntelMemory success and removes aliases before
+VirtualFree. No C-token change;26exclusions unchanged. Repeated DEBUG_MEM
+conditions exceeded old metric matcher assumptions: original #line anchors now
+individually bind all26excluded bodies,without altering production exclusions.
+Evidence:build/t485-s12/p11/nt_mem-exclusion-anchors.json and nt_mem.c-result.json.
+Current674/13044; cumulative reduction129points18765lines. Reviewed34/48,
+412/645points;restored220verified+31local,residual149verified+12local,233unreviewed.
+Delivered30/369 unchanged. Pure declaration/format batch continues;next35nt_msscs.c.
+
+P11 final selected-product preprocessing:nt_eoi50,nt_error154,nt_keycd54,
+nt_mem131 original line witnesses;389total,zero mismatches. This is source/line
+verification only,not cached full build,publication or runtime acceptance.
+
+## P11 file35 and delivery start
+
+nt_msscs.c1/2872 ->11/88;107format restorations,4residual points.
+R03797 partially restores original registry error dialog:only missing optional key
+is silent;out-of-memory and other open errors report original ED_REGVDD. dwType
+holds status before its original value query overwrites it. No new state/provider.
+R03764/R03766 retain package directory/registry boundaries;R03767 keeps no-op
+instead of original native boot-root IO.SYS/MSDOS.SYS creation. No synthetic guards.
+All10error exclusions retained. Entire five-file batch finished before cached
+build owner9780 starts(final/build.ps1). Build,publication,targeted tests pending.
+Five-file batch40/9557 ->53/149;format recovery splits old whole-file hunks,
+net+13points/-9408lines. S12census684/10260,reduction119points21549lines.
+Reviewed35/48files523/645points:restored220verified+138local,residual149verified
++16local,122unreviewed. Delivered30/369unchanged. Next36nt_pif.c after delivery.
+
+P11 build attempt1 owner9780 terminated:PowerShell Stop treated resource-tool
+stderr ntvdm.src as NativeCommandError. No source diagnosis or build pass claimed.
+Retry2 owner14228 redirects stdout/stderr inside CMD and checks actual exit code;
+source unchanged. Initial log/error retained. No Full launched.
+
+P11 build retry14228 PASS;five-file product preprocessing514witnesses,zero errors.
+Stagingruntime12 PASS. Publication1080 stopped at missing Get-FileHash module;
+retry26660 refused nonfresh staging root. Resume22996 reused verified staged
+manifest and completed both locations;26hashchecks PASS under test owner28492.
+Actual complete SetupInstallableVDD extracted into build-only fixture passes11cases
+(optional absence,four real errors,success,query/allocation/load failures,cleanup).
+Physical-mapping-observation PASS. Original-external-memory failed C0000602 after
+original add;fixture omitted production ntvdm_dpmi_initialize. Test-only change
+adds canonical execution header and one real initializer assertion after GDP setup.
+Retry15948 rebuilds/retests only this failed fixture,then runs outstanding hard-error
+and real guest FCB gates. Product bytes unchanged;no Full rerun. Initial failures
+retained;do not claim test repair verified before retry exits.
+
+External-memory retry exits0 after production initializer;actual SAS reversed-page
+loads/stores/move,EMS cross-window copy,allocation grow/shrink,exports,DIB sharing
+and teardown all PASS. Product unchanged. Owner15948 continues unrun gates.
+
+P11 final runtime12 cached build,dual26hash publication,514line witnesses,VDD11cases,
+physical mapping,external memory retry,hard-error six groups and real guest FCB PASS.
+Receipt:s12-p11-result.json. All35files523points final-verified;358restored165residual,
+122unreviewed. Commit/push pending. Full not rerun;next file36nt_pif.c.

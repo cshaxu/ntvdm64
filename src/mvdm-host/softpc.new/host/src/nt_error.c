@@ -13,20 +13,20 @@
 /*
  * SoftPC Revision 2.0
  *
- * Title	: General Error Handler
+ * Title        : General Error Handler
  *
- * Description	: General purpose error handler.  It handles both
- *		  general SoftPC errors (error numbers 0 - 999) and
- *		  host specific errors (error numbers >= 1000)
+ * Description  : General purpose error handler.  It handles both
+ *                general SoftPC errors (error numbers 0 - 999) and
+ *                host specific errors (error numbers >= 1000)
  *
- * Author(s)	: Dave Bartlett (based on module by John Shanly)
+ * Author(s)    : Dave Bartlett (based on module by John Shanly)
  *
- * Parameters	: int used to index an array of error messages
- *		  held in message.c, and a bit mask indicating
- *		  the user's possible options:
+ * Parameters   : int used to index an array of error messages
+ *                held in message.c, and a bit mask indicating
+ *                the user's possible options:
  *                    Quit, Reset, Continue, Setup
  *
- */ 
+ */
 
 
 #include <sys/types.h>
@@ -54,21 +54,18 @@
 #include "trace.h"
 #include "nt_event.h"
 #if defined(NEC_98)
-#line 55
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 58
 
 
 
+#line 61
 extern DWORD (*pW32HungAppNotifyThread)(UINT);
 int error_window_options = 0;
 
 #if defined(NEC_98)
-#line 65
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 67
 VOID SuspendTimerThread(VOID);
 VOID ResumeTimerThread(VOID);
 
@@ -89,7 +86,7 @@ char achPERIOD[]=". ";
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: STDOUT macro */
 
-#define ERRORMSG	      OutputDebugString
+#define ERRORMSG              OutputDebugString
 #define HIDEDLGITM(d,b)       ShowWindow(GetDlgItem(d,b),SW_HIDE);
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -98,7 +95,6 @@ int ErrorDialogBox(char *message, char *Edit, DWORD dwOptions);
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv);
 int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi);
 LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam);
-#line 96
 void SwpButtons(HWND hDlg, DWORD dwOptions);
 void SwpDosDialogs(HWND hDlg, HWND hWndCon,HWND SwpInsert, UINT SwpFlags);
 DWORD OemMessageToAnsiMessage(CHAR *, CHAR *);
@@ -115,20 +111,16 @@ ULONG WOWpSysErrorBox(LPSTR,LPSTR,USHORT,USHORT,USHORT);
 
 
 #ifdef host_error_ext
-#line 112
 #error Unsupported excluded original configuration
 #endif
-#line 114
 SHORT host_error_ext(int error_num, int options, ErrDataPtr data)
 {
     return host_error(error_num, options, NULL);
 }
 
 #ifdef host_error
-#line 120
 #error Unsupported excluded original configuration
 #endif
-#line 122
 SHORT host_error(int error_num, int options, char *extra_char);
 
 #ifdef host_error_conf
@@ -152,7 +144,7 @@ ERRORFUNCS *working_error_funcs = &nt_error_funcs;
 /*:::::::::::::::::::::: Display error, terminate ::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-int DisplayErrorTerm(int ErrorNo,	/* Softpc Error number */
+int DisplayErrorTerm(int ErrorNo,       /* Softpc Error number */
                      DWORD OSErrno,         /* OS Error number */
                      char *Filename,        /* File name of file containing err */
                      int Lineno)            /* LIne number of error */
@@ -164,18 +156,17 @@ int DisplayErrorTerm(int ErrorNo,	/* Softpc Error number */
     UNUSED(ErrorNo);    //Always internal error
 
 #ifndef PROD
-#line 157
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 160
 
+#line 161
     // assume NT error if either of top two bits set (err or warning).
     // this means we'll confuse some of the lesser NT errors but we get a
     // second chance if the mapping fails.
     if (OSErrno & 0xc0000000)
-	errno = RtlNtStatusToDosError(OSErrno);
+        errno = RtlNtStatusToDosError(OSErrno);
     else
-	errno = OSErrno;
+        errno = OSErrno;
 
            // Now get message from system
     len = FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM,
@@ -216,11 +207,10 @@ SHORT host_error(int error_num, int options, char *extra_char)
 
 
 #ifndef PROD
-#line 208
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 213
 
+#line 214
     ErrorDialogBox(message, NULL, RMB_ICON_STOP | RMB_ABORT | RMB_IGNORE);
 
     return ERR_CONT;
@@ -515,7 +505,6 @@ DWORD OemMessageToAnsiMessage(CHAR *pBuff, CHAR *pMsg)
  *
  */
 BOOL CALLBACK GetThreadTopLevelWindow(HWND hWnd, LPARAM lParam)
-#line 508
 {
    PDWORD pdw = (PDWORD)lParam;
 
@@ -600,21 +589,21 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
 
 
     if (dwOptions & RMB_EDIT) {
-    dw = 5;
-    do {
-       hThread = CreateThread(NULL,           // security
+       dw = 5;
+       do {
+          hThread = CreateThread(NULL,           // security
                        0,                     // stack size
                        ErrorDialogBoxThread,  // start address
                        &edgi,                 // thread argument
                        0,                     // flags
                        &dwThreadID            // gets thread ID
                        );
-       if (hThread)
-           break;
-       else
+          if (hThread)
+             break;
+          else
              Sleep(5000);
 
-       } while (dw--);
+          } while (dw--);
        }
     if (hThread)  {
         do {
@@ -626,7 +615,7 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
         ErrorDialogBoxThread(&edgi);
         }
 
-        ResumeTimerThread();
+    ResumeTimerThread();
 
     if (edgi.dwReply == RMB_ABORT) {
         //
@@ -635,10 +624,10 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
 
         if (VDMForWOW &&  NtCurrentTeb()->WOW32Reserved && pW32HungAppNotifyThread)  {
             (*pW32HungAppNotifyThread)(0);
-               }
-            else {
-               TerminateVDM();
-               }
+            }
+        else {
+            TerminateVDM();
+            }
         }
 
     bCalled--;
@@ -660,7 +649,6 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
  *        IDB_QUIT, IDB_CONTINUE
  */
 DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
-#line 652
 {
     int    i;
     ERRORDIALOGINFO *pedgi = pv;
@@ -722,11 +710,11 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
         }
 
     if (i == -1) {
-       pedgi->dwReply = RMB_ABORT;
-       }
-   else {
-       pedgi->dwReply = i;
-       }
+        pedgi->dwReply = RMB_ABORT;
+        }
+    else {
+        pedgi->dwReply = i;
+        }
 
    return 0;
 }
@@ -736,7 +724,6 @@ DWORD WINAPI ErrorDialogBoxThread(VOID *pv)
 
 
 LONG APIENTRY ErrorDialogEvents(HWND hDlg,WORD wMsg,LONG wParam,LONG lParam)
-#line 727
 {
     ERRORDIALOGINFO *pedgi;
     CHAR  szBuff[MAX_PATH];
@@ -953,7 +940,7 @@ void SwpButtons(HWND hDlg, DWORD dwOptions)
                       xOrg, yClientPos, 0,0,
                       SWP_NOSIZE | SWP_NOZORDER);
          xOrg += xIncr;
-	 }
+         }
      else {
          ShowWindow(GetDlgItem(hDlg,IDB_CONTINUE), SW_HIDE);
          }
@@ -963,12 +950,12 @@ void SwpButtons(HWND hDlg, DWORD dwOptions)
                       xOrg, yClientPos, 0,0,
                       SWP_NOSIZE | SWP_NOZORDER);
          xOrg += xIncr;
-	 // if we have edit control, its button is awlays
-	 // the default button
-	 SendMessage(hDlg, DM_SETDEFID,
-		     (WPARAM)IDB_OKEDIT,
-		     (LPARAM)0);
-	 }
+         // if we have edit control, its button is awlays
+         // the default button
+         SendMessage(hDlg, DM_SETDEFID,
+                     (WPARAM)IDB_OKEDIT,
+                     (LPARAM)0);
+         }
      else {
          ShowWindow(GetDlgItem(hDlg,IDB_OKEDIT), SW_HIDE);
          }
@@ -1055,14 +1042,14 @@ int WowErrorDialogEvents(ERRORDIALOGINFO *pedgi)
 
    strcat(szMsg, pedgi->message);
    if (pedgi->dwOptions & RMB_ABORT) { // abort means terminate which uses "close" button.
-   strcat(szMsg, " ");
+      strcat(szMsg, " ");
 
-   if (!LoadString(GetModuleHandle(NULL), ED_WOWPROMPT,
+      if (!LoadString(GetModuleHandle(NULL), ED_WOWPROMPT,
                   szTitle, sizeof(szTitle) - 1))
-       {
-        szTitle[0] = '\0';
-        }
-   strcat(szMsg, szTitle);
+         {
+          szTitle[0] = '\0';
+          }
+      strcat(szMsg, szTitle);
       }
    if (!LoadString(GetModuleHandle(NULL),
                    VDMForWOW ? ED_WOWTITLE : ED_DOSTITLE,
@@ -1247,11 +1234,10 @@ ULONG WOWSysErrorBox(
 
 
 #ifndef PROD
-#line 1237
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1249
 
+#line 1250
 VOID RcErrorBoxPrintf(UINT wId, CHAR *szMsg)
 {
     CHAR message[EHS_MSG_LEN];

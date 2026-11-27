@@ -1,0 +1,212 @@
+{
+  "task": "M0 T485 S12 P11",
+  "state": "final-verified-commit-pending",
+  "package": "build/t485-s12/runtime12",
+  "files": {
+    "src/mvdm-host/softpc.new/host/src/nt_eoi.c": "9897bad2ba8313203a02869cae5b723a56a523f5e4914f26eadb5c18e119181b",
+    "src/mvdm-host/softpc.new/host/src/nt_error.c": "16a2e2b00e83bc9d89b73dd6904ed6ec5583add784b11e3cf4a1adc45ea8bf7b",
+    "src/mvdm-host/softpc.new/host/src/nt_keycd.c": "e2bde180c2b2ed04ee2344010a27ba0001f4e6a883f103393634f31cf95ae1d5",
+    "src/mvdm-host/softpc.new/host/src/nt_mem.c": "735bb68473233683a4d636def0f40ab61fc36c5fb2435a4fc7219168a66801fb",
+    "src/mvdm-host/softpc.new/host/src/nt_msscs.c": "7f5efb9b4553601ff3d8d5ad86e78d446b050682fd543f68f2e769b23fe0f734"
+  },
+  "diff": {
+    "before": {
+      "points": 40,
+      "lines": 9557
+    },
+    "after": {
+      "points": 53,
+      "lines": 149
+    },
+    "s12_current": {
+      "points": 684,
+      "lines": 10260
+    },
+    "s12_reduction": {
+      "points": 119,
+      "lines": 21549
+    }
+  },
+  "line_witnesses": [
+    {
+      "file": "nt_eoi.c",
+      "checked": 50,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "nt_error.c",
+      "checked": 154,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "nt_keycd.c",
+      "checked": 54,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "nt_mem.c",
+      "checked": 131,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "nt_msscs.c",
+      "checked": 125,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    }
+  ],
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "B25A5CA03443DE7C77EA4DCFAF704431C141EB79F41327BB672276F394784922",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "B25A5CA03443DE7C77EA4DCFAF704431C141EB79F41327BB672276F394784922",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "52A807214DF81CBCE854EBDA90190516C6945502F820D149C28E3A2EAE77D757",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "52A807214DF81CBCE854EBDA90190516C6945502F820D149C28E3A2EAE77D757",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "AE8FD38F54BF46ABFFFA5617E7FD42D587789B5336C329433227D32307607BB1",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "AE8FD38F54BF46ABFFFA5617E7FD42D587789B5336C329433227D32307607BB1",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "626AB9C1E42D114343E4DA513EB61D9D212F1BD48D884BF17C139244ADBE24D9",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "626AB9C1E42D114343E4DA513EB61D9D212F1BD48D884BF17C139244ADBE24D9",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "BE7BC53769E09AE40CC3FA83E1E26D8AB73A5E6D3CC64CE5B1C009B58DBCDC57",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "BE7BC53769E09AE40CC3FA83E1E26D8AB73A5E6D3CC64CE5B1C009B58DBCDC57",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "1559813C6F53C9C4670B34A6064290B37CE416D8B6110101162756C6350ECC0D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "1559813C6F53C9C4670B34A6064290B37CE416D8B6110101162756C6350ECC0D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "6D5A41576A2C9A393CB447DBB1FB6A361BA34D5099B228B30A129938CC6A9042",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "6D5A41576A2C9A393CB447DBB1FB6A361BA34D5099B228B30A129938CC6A9042",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "98CF2F3ABC2783F9D28B7BF5B385DAF866B68F2FC5EA747469D0420E00D877EB",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "98CF2F3ABC2783F9D28B7BF5B385DAF866B68F2FC5EA747469D0420E00D877EB",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "24151B802BB88C8E02EBD98215AF58ADA9E71276B6E4620622F5755E646E11A8",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "24151B802BB88C8E02EBD98215AF58ADA9E71276B6E4620622F5755E646E11A8",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "8585FD6182573AC3A2CA0945AAF2E903A92C6E18FEB76C9F16184CA35D3DDC2E",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "8585FD6182573AC3A2CA0945AAF2E903A92C6E18FEB76C9F16184CA35D3DDC2E",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "2E40D023DB36F1E2A4DFF724DE21EBDA74E0970239C4D672121BD6E03E10A2AF",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "2E40D023DB36F1E2A4DFF724DE21EBDA74E0970239C4D672121BD6E03E10A2AF",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "0A689C617CAB896783B3472113D40323A9A9C438AC1A2C5C24BAF51380569B6E",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "0A689C617CAB896783B3472113D40323A9A9C438AC1A2C5C24BAF51380569B6E",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "C88560E08A6BE37E8C274F85D4B4723D5A939D741B40133633D64EDBD28D1B75",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "C88560E08A6BE37E8C274F85D4B4723D5A939D741B40133633D64EDBD28D1B75",
+      "pass": true
+    }
+  ],
+  "tests": {
+    "vdd_complete_function": "11 cases PASS",
+    "physical_mapping": "PASS",
+    "external_memory_initial": "C0000602 missing formal CPU provider binding in test",
+    "external_memory_retry": {
+      "name": "original-external-memory-test",
+      "exit": 0,
+      "sha256": "CF4A5EED945D17F8BD15996D0BAE8B1AB027DD51F07F0C1699A8B1786BBBFABC"
+    },
+    "hard_error": "PASS",
+    "real_guest_fcb": "PASS",
+    "full": "not rerun;last P10 runtime11;next file40 checkpoint"
+  },
+  "attempts": [
+    "build wrapper stderr failure;CMD retry PASS",
+    "publication module failure;resume staged manifest PASS",
+    "external-memory test-only initializer fix;retry PASS"
+  ]
+}
