@@ -32,15 +32,14 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S12 Ordered Progress
 
-[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):20/48files,
-107/645points final-verified;18restored,89residual,538unreviewed.
-[P7 receipt](../etc/evidence/t485-h-repair/s12-p7-result.json):cached full build,
-dual publication26/26hashes,51original-line witnesses and runtime8 Full23/23 PASS.
-Initial NTVDMD ABI restoration attempt failed and was corrected before final
-publication. P7 committed/pushed c1b02e99f;20files107points delivered.
-S12 census803/31809->691/29775 (-112points/-2034lines).
-Next21vdmredir.h;28files remain. Last Full:file20,runtime8,23/23.
-Migration39/159;N004 gated on S13.
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):24/48files,
+129/645points final-verified;26restored,103residual,516unreviewed.
+[P8 receipt](../etc/evidence/t485-h-repair/s12-p8-result.json):cached build,
+dual26hash publication,223line witnesses,OEM/async fixtures and real DOS FCB
+PASS. Commit/push pending;last delivered20files107points c1b02e99f.
+S12census803/31809->686/27172 (-117points/-4637lines).
+Next25oemuni/process.c;24files remain. Last Full:file20,runtime8,23/23;
+no Full rerun for this targeted P. Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
 

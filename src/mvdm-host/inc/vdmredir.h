@@ -53,13 +53,10 @@ Revision History:
 //
 
 #if DBG
-#line 56
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
-#line 58
 #define PRIVATE static
 #endif
-#line 60
 
 //
 // unaligned data pointer types. These produce exactly the same code as memory
@@ -68,7 +65,6 @@ Revision History:
 //
 
 #ifdef UNALIGNED_VDM_POINTERS
-#line 68
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
 #line 72
@@ -161,14 +157,11 @@ typedef LPDWORD ULPDWORD;
 // UNALIGNED pointers then the RISC processor can handle non-aligned data
 //
 #ifdef i386
-#line 156
 #error Excluded unsupported i386 configuration
 #else
 #ifdef UNALIGNED_VDM_POINTERS
-#line 159
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
-#line 161
 #define READ_WORD(addr)                 (((WORD)READ_BYTE(addr)) | (((WORD)READ_BYTE((LPBYTE)(addr)+1)) << 8))
 #endif  // UNALIGNED_VDM_POINTERS
 #endif  // i386
@@ -180,14 +173,11 @@ typedef LPDWORD ULPDWORD;
 // UNALIGNED pointers then the RISC processor can handle non-aligned data
 //
 #ifdef i386
-#line 172
 #error Excluded unsupported i386 configuration
 #else
 #ifdef UNALIGNED_VDM_POINTERS
-#line 175
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
-#line 177
 #define READ_DWORD(addr)                (((DWORD)READ_WORD(addr)) | (((DWORD)READ_WORD((LPWORD)(addr)+1)) << 16))
 #endif  // UNALIGNED_VDM_POINTERS
 #endif  // i386
@@ -205,14 +195,11 @@ typedef LPDWORD ULPDWORD;
 // then the MIPS (&other RISCs) can generate code to handle this situation
 //
 #ifdef i386
-#line 194
 #error Excluded unsupported i386 configuration
 #else
 #ifdef UNALIGNED_VDM_POINTERS
-#line 197
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
-#line 199
 #define WRITE_WORD(addr, value) \
             {\
                 ((LPBYTE)(addr))[0] = LOBYTE(value); \
@@ -228,14 +215,11 @@ typedef LPDWORD ULPDWORD;
 // then the MIPS (&other RISCs) can generate code to handle this situation
 //
 #ifdef i386
-#line 214
 #error Excluded unsupported i386 configuration
 #else
 #ifdef UNALIGNED_VDM_POINTERS
-#line 217
 #error Excluded unsupported UNALIGNED_VDM_POINTERS configuration
 #else
-#line 219
 #define WRITE_DWORD(addr, value) \
             { \
                 ((LPBYTE)(addr))[0] = LOBYTE(LOWORD((DWORD)(value))); \
@@ -421,10 +405,9 @@ typedef struct _VR_ASYNC_DISPOSITION {
 //
 
 #ifdef i386
-#line 404
 #error Excluded unsupported i386 configuration
 #else
-#line 414
+#line 419
 LPVOID _inlinePointerFromWords(WORD seg, WORD off);
 #endif
 
@@ -437,10 +420,9 @@ LPVOID _inlinePointerFromWords(WORD seg, WORD off);
 #define CONVERT_ADDRESS(seg, off, size, mode) _inlineConvertAddress((WORD)(seg), (WORD)(off), (WORD)(size), (BOOLEAN)(mode))
 
 #ifdef i386
-#line 426
 #error Excluded unsupported i386 configuration
 #else
-#line 436
+#line 441
 extern LPVOID _inlineConvertAddress(WORD Seg, WORD Off, WORD Size, BOOLEAN Pm);
 #endif
 

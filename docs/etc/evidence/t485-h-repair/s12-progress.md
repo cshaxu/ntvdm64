@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed20/48files107/645points;restored-final-verified18,restored-local0,
-residual-final-verified89,unreviewed538.
+Reviewed24/48files129/645points;restored-final-verified26,restored-local0,
+residual-final-verified103,unreviewed516.
 Delivered/pushed20files107points through c1b02e99f.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
@@ -34,10 +34,10 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 18 | src/mvdm-host/inc/mvdm.h | 2 | P7 delivered c1b02e99f |
 | 19 | src/mvdm-host/inc/softpc.h | 28 | P7 delivered c1b02e99f |
 | 20 | src/mvdm-host/inc/suballoc.h | 1 | P7 delivered c1b02e99f |
-| 21 | src/mvdm-host/inc/vdmredir.h | 1 | Pending |
-| 22 | src/mvdm-host/inc/vrnetapi.h | 1 | Pending |
-| 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | Pending |
-| 24 | src/mvdm-host/oemuni/file.c | 19 | Pending |
+| 21 | src/mvdm-host/inc/vdmredir.h | 1 | P8 final verified; commit/push pending |
+| 22 | src/mvdm-host/inc/vrnetapi.h | 1 | P8 final verified; commit/push pending |
+| 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | P8 final verified; commit/push pending |
+| 24 | src/mvdm-host/oemuni/file.c | 19 | P8 final verified; commit/push pending |
 | 25 | src/mvdm-host/oemuni/process.c | 65 | Pending |
 | 26 | src/mvdm-host/softpc.new/host/src/config.c | 38 | Pending |
 | 27 | src/mvdm-host/softpc.new/host/src/nt_bop.c | 16 | Pending |
@@ -464,3 +464,57 @@ Commit/push pending. Next21vdmredir.h;28files remain;S12 remains active.
 
 P7 product committed/pushed c1b02e99f. Twentyfiles107points delivered;
 18restored89residual538unreviewed. Work proceeds to file21vdmredir.h.
+
+
+## P8 files21-23 redirector headers
+
+vdmredir.h22/23->4/5,12exclusions unchanged. R00264 retains slavePICline3,
+paired with unchanged original SP3 guest SHA256
+8ecf05026ec3b12b93a0809040e45a43902b16f4a392305be21b2a8417850126.
+Installed identity rechecked;H032 actual INT72 timeout/INT73 successful async
+callbacks is hard runtime evidence. Remove redundant line directives only.
+vrnetapi.h1/301->0/0:byte-exact original LF/EOF restored,R00265 local restoration.
+vrnmpipe.h4/6->1/2:one exclusion preserved;R00266 opaque state remains for
+asynchronous staging beyond guest lease. Reviewed submission/failure,completion,
+no-ANR and callback disposal paths. Existing fixture covers payload-before-count,
+failed writes and stale epoch. No claim these tests reran in P8 yet.
+
+Batch27/330->5/7,reduction22points323lines. S12current669/29452,
+reduction134points2357lines. Reviewed23files110points:18restored-delivered,
+1restored-local,91residual,535unreviewed. Delivered20files107points through
+c1b02e99f. All local edits format/line-only;accumulate as authorized.
+Next24oemuni/file.c;25files remain. Last Fullfile20/runtime8 unaffected.
+
+
+## P8 file24 OEM file thunks
+
+Whole-file nonerror1/2323->18/43. Restore LF and original FE_SB framework;
+five excluded FE_SB bodies now use#error. Production source-groups selects
+profile_1 and fixtures select oem_test_profile,neither definesFE_SB. WOW/Gz
+FE_SB belongs to different units. Selected DBCS fixes remain;restore original
+file-part pointer-base addition after computing OEM byte offset. No extra helper.
+R00275/276/278/279/283/285/293 framework/format restored;12residual points retain
+byte-capacity,required-size and conversion-failure fixes with explicit existing
+CP932 assertions. No claim of final fixture success until it runs.
+
+P8 allfourfiles28/2653->23/50 (-5points/-2603lines). S12current686/27172,
+reduction117points4637lines. Reviewed24files129points:18restored-delivered,
+8restored-local,103residual,516unreviewed. Delivered20files107points.
+Owner11864 runs cached full build then actual OEM/redirector preprocessing.
+Dual publication and targeted OEM/async/real guest verification follow. Last
+Fullruntime8/file20 remains valid;no Full repeat atfile24. Next25process.c.
+
+
+### P8 final verification
+
+[Receipt](s12-p8-result.json):cached full build,dual26hash publication and223
+original-line witnesses PASS. Existing OEM family/failure/DBCS fixtures,
+asynchronous publication fixture and actual runtime9 DOS FCB guest PASS.
+Broad oem-tests aggregate failed unrelated pif-fault layout and font-retry DEM
+constant declarations. Selected three OEM targets passed;not an aggregate
+pass. Carry those stale test dependencies into process.c/S13 reconciliation.
+No Full rerun;last file20runtime8 Full23/23 retained. One added zero-length
+statement falsely matched a later original statement in audit helper;corrected
+classification without product rebuild. Initial failed audit retained.
+All24files129points final-verified,26restored103residual516unreviewed.
+Mirror total686/27172,reduction117/4637. Commit/push pending;next25process.c.

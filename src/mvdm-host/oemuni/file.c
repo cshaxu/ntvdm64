@@ -510,6 +510,10 @@ Routine Description:
 
     NTSTATUS Status;
     ULONG UnicodeLength;
+#ifdef FE_SB
+#error Excluded unsupported FE_SB OEM file profile
+#endif
+#line 517
     UNICODE_STRING UnicodeString;
     UNICODE_STRING UnicodeResult;
     OEM_STRING OemString;
@@ -546,7 +550,12 @@ Routine Description:
                         Ubuff,
                         FilePartPtr
                         );
+#ifdef FE_SB
+#error Excluded unsupported FE_SB OEM file profile
+#else
+#line 558
     UnicodeLength >>= 1;
+#endif
     if ( UnicodeLength && UnicodeLength < MAX_PATH ) {
         RtlInitUnicodeString(&UnicodeResult,Ubuff);
         UnicodeLength = RtlUnicodeStringToOemSize(&UnicodeResult)-1;
@@ -554,11 +563,16 @@ Routine Description:
     else {
         UnicodeLength = 0;
         }
+#line 560
     if ( UnicodeLength && UnicodeLength < nBufferLength ) {
         RtlInitUnicodeString(&UnicodeResult,Ubuff);
         Status = RtlUnicodeStringToOemString(&OemResult,&UnicodeResult,TRUE);
         if ( NT_SUCCESS(Status) ) {
+#ifdef FE_SB
+#error Excluded unsupported FE_SB OEM file profile
+#else
             RtlMoveMemory(lpBuffer,OemResult.Buffer,UnicodeLength+1);
+#endif
             RtlFreeOemString(&OemResult);
 
             if ( ARGUMENT_PRESENT(lpFilePart) ) {
@@ -566,8 +580,14 @@ Routine Description:
                     *lpFilePart = NULL;
                     }
                 else {
+#ifdef FE_SB
+#error Excluded unsupported FE_SB OEM file profile
+#else
                     UnicodeResult.Length = (USHORT)((FilePart - Ubuff)*sizeof(WCHAR));
-                    *lpFilePart = lpBuffer + RtlUnicodeStringToOemSize(&UnicodeResult)-1;
+                    *lpFilePart = (PSZ)(RtlUnicodeStringToOemSize(&UnicodeResult)-1);
+#endif
+#line 583
+                    *lpFilePart = *lpFilePart + (ULONG)lpBuffer;
                     }
                 }
             }
@@ -585,7 +605,6 @@ Routine Description:
     RtlFreeHeap(RtlProcessHeap(), 0,Ubuff);
 
     return (DWORD)UnicodeLength;
-#line 601
 }
 
 
@@ -616,7 +635,12 @@ Routine Description:
                                     Unicode->Buffer
                                     );
 
+#ifdef FE_SB
+#error Excluded unsupported FE_SB OEM file profile
+#else
     if ( nBufferLength >= RtlUnicodeStringToOemSize(Unicode) ) {
+#endif
+#line 638
         OemString.Buffer = lpBuffer;
         OemString.MaximumLength = (USHORT)min(nBufferLength,65535);
         Status = RtlUnicodeStringToOemString(&OemString,Unicode,FALSE);
@@ -628,11 +652,13 @@ Routine Description:
             ReturnValue = OemString.Length;
             }
         }
+#ifndef FE_SB
     else {
         ReturnValue = RtlUnicodeStringToOemSize(Unicode);
         }
+#endif
+
     return ReturnValue;
-#line 656
 }
 
 
@@ -995,7 +1021,6 @@ Routine Description:
         }
 
     return ReturnValue;
-#line 1018
 }
 
 
@@ -1074,6 +1099,7 @@ Routine Description:
     DWORD UnicodeCapacity = MAX_COMPUTERNAME_LENGTH+1;
     NTSTATUS Status;
 
+#line 1094
     //
     // Work buffer needs to be twice the size of the user's buffer
     //
@@ -1114,10 +1140,11 @@ Routine Description:
         return FALSE;
     }
 
+#line 1128
     *nSize = OemString.Length;
     RtlFreeHeap(RtlProcessHeap(), 0, UnicodeBuffer);
     return(TRUE);
-#line 1132
+
 }
 
 

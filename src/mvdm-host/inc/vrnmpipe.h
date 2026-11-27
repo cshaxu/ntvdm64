@@ -262,15 +262,11 @@ typedef struct _DOS_ASYNC_NAMED_PIPE_INFO {
     DWORD   BytesTransferred;   // actual number of bytes read/written
     LPWORD  pBytesTransferred;  // flat-32 pointer to returned read/write count in VDM
     LPWORD  pErrorCode;         // flat-32 pointer to returned error code in VDM
-#line 265
     DWORD   ANR;                // 16:16 address of ANR
     DWORD   Semaphore;          // 16:16 address of 'semaphore' in VDM
-#line 267
 #if DBG
-#line 268
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 270
     PVOID   PrivateAsyncState;
 #line 270
 } DOS_ASYNC_NAMED_PIPE_INFO, *PDOS_ASYNC_NAMED_PIPE_INFO;

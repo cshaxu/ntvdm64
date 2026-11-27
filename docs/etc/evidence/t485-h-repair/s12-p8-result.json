@@ -1,0 +1,268 @@
+{
+  "task": "M0 T485 S12 P8",
+  "state": "final-verified-commit-pending",
+  "package": "build/t485-s12/runtime9",
+  "files": {
+    "src/mvdm-host/inc/vdmredir.h": "162dbb02ebb6ce2446be0e35a648f94195e854015ae25b4535cff06f30d1d68d",
+    "src/mvdm-host/inc/vrnetapi.h": "4c39b46b4bb8af2b5c0a402c126da74c1ce9e4db5fed8ffd0034b85d3a52c43b",
+    "src/mvdm-host/inc/vrnmpipe.h": "29c7d39dd5ada63c85beb5bb5cc04183beeb4da611faea90ea78de8e9bb0e3e1",
+    "src/mvdm-host/oemuni/file.c": "8e6aabba33de970e17768eea666c8bd3b819e248796e8614538854de16698c98"
+  },
+  "diff": {
+    "before": {
+      "points": 28,
+      "lines": 2653
+    },
+    "after": {
+      "points": 23,
+      "lines": 50
+    },
+    "s12_current": {
+      "points": 686,
+      "lines": 27172
+    },
+    "s12_reduction": {
+      "points": 117,
+      "lines": 4637
+    }
+  },
+  "review": {
+    "restored": [
+      "HXP-R-00265",
+      "HXP-R-00275",
+      "HXP-R-00276",
+      "HXP-R-00278",
+      "HXP-R-00279",
+      "HXP-R-00283",
+      "HXP-R-00285",
+      "HXP-R-00293"
+    ],
+    "residual": [
+      "HXP-R-00264",
+      "HXP-R-00266",
+      "HXP-R-00277",
+      "HXP-R-00280",
+      "HXP-R-00281",
+      "HXP-R-00282",
+      "HXP-R-00284",
+      "HXP-R-00286",
+      "HXP-R-00287",
+      "HXP-R-00288",
+      "HXP-R-00289",
+      "HXP-R-00290",
+      "HXP-R-00291",
+      "HXP-R-00292"
+    ],
+    "reviewed_files": 24,
+    "reviewed_points": 129,
+    "restored_total": 26,
+    "residual_total": 103,
+    "unreviewed": 516
+  },
+  "verification": {
+    "build": "PASS cached full",
+    "publication": [
+      {
+        "path": "assets\\release\\NTVDMD.DLL",
+        "sha256": "6B3D2581157D805A063BE70E15FD7A93C05E07723F1A4DA460D0FBD8957F487A",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+        "sha256": "6B3D2581157D805A063BE70E15FD7A93C05E07723F1A4DA460D0FBD8957F487A",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VJOY.DLL",
+        "sha256": "2037A1C455B36106D469EA428EF55088BC044115DDEF02F30D588E90815177A5",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+        "sha256": "2037A1C455B36106D469EA428EF55088BC044115DDEF02F30D588E90815177A5",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "7969CA758347633F5ED9822662071C7A8C30E96D913816F992363AD6FEC74F43",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+        "sha256": "7969CA758347633F5ED9822662071C7A8C30E96D913816F992363AD6FEC74F43",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "556026380ACB6C401A301820888294BCC3F6F9CE37BD616E4735EA5A0705EE94",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+        "sha256": "556026380ACB6C401A301820888294BCC3F6F9CE37BD616E4735EA5A0705EE94",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "2F03C2827BED518AD695D5E345A5D2092B01AF130AE9E699C47D324680B9C05A",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+        "sha256": "2F03C2827BED518AD695D5E345A5D2092B01AF130AE9E699C47D324680B9C05A",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "5B9EB364DB2C2B0CD32E79D52551802603631A5E1F2A31FC60D360870B9D8194",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+        "sha256": "5B9EB364DB2C2B0CD32E79D52551802603631A5E1F2A31FC60D360870B9D8194",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "3A91A97CB596CD37BD932406AA1001EC822D22FD0F3C51B879A7804A5B835D2B",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+        "sha256": "3A91A97CB596CD37BD932406AA1001EC822D22FD0F3C51B879A7804A5B835D2B",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "A6A61DE8B4FE9F22C369C727ABF575067C4100C687A8F71723029E47A0F336BC",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+        "sha256": "A6A61DE8B4FE9F22C369C727ABF575067C4100C687A8F71723029E47A0F336BC",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "199F657733F8B3AA8085151FF5BC0A08DE6D57AE007F82F0BE17E319997D6240",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+        "sha256": "199F657733F8B3AA8085151FF5BC0A08DE6D57AE007F82F0BE17E319997D6240",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "1E01048D21AF5FD8DCB36188DB8E95D4F5E4C4AFAF9DC1B92C49106636AD9821",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+        "sha256": "1E01048D21AF5FD8DCB36188DB8E95D4F5E4C4AFAF9DC1B92C49106636AD9821",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "00ED106E759512147E90912F9416017EBA9E24A33A59229F48EED194B5B068C9",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+        "sha256": "00ED106E759512147E90912F9416017EBA9E24A33A59229F48EED194B5B068C9",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "595D9192CECE703305F128E9C102376C3D5A46974EE4033A04D2BAE7A9E7AE72",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+        "sha256": "595D9192CECE703305F128E9C102376C3D5A46974EE4033A04D2BAE7A9E7AE72",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "503FA945B33BC7CDF46B3FE8E2031C01D3228C11B977F15604D36CEE709944D5",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+        "sha256": "503FA945B33BC7CDF46B3FE8E2031C01D3228C11B977F15604D36CEE709944D5",
+        "pass": true
+      }
+    ],
+    "lines": [
+      {
+        "file": "vdmredir.h",
+        "checked": 9,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      },
+      {
+        "file": "vrnetapi.h",
+        "checked": 20,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      },
+      {
+        "file": "vrnmpipe.h",
+        "checked": 47,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      },
+      {
+        "file": "oem-file.c",
+        "checked": 147,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": [
+          [
+            589,
+            565,
+            "        UnicodeLength = 0;"
+          ]
+        ]
+      }
+    ],
+    "oem": [
+      {
+        "case": "family",
+        "exit": 0,
+        "sha256": "FCC48A9BF6828EE3507DFA690FB90456CDFFAEE4C2649FFE59CEEB271A1C81CC"
+      },
+      {
+        "case": "failure",
+        "exit": 0,
+        "sha256": "DC49C0CE67CE657D9C807E30A40E7A74C3F7A98D8874FBCED7BB8A2B9A323DAF"
+      },
+      {
+        "case": "dbcs",
+        "exit": 0,
+        "sha256": "11F52A2CF0EB2887CA98AAD6257DEFE032405D2D9349718F6C4D03AC6E5CF2FF"
+      }
+    ],
+    "async": "PASS existing production staging fixture; see async.log",
+    "guest": "PASS actual final-package DOS FCB test; see fcb.log",
+    "full": "Not repeated; last Full runtime8/file20 passed23/23; current P uses targeted scope",
+    "logs": "build\\t485-s12\\p8\\final"
+  },
+  "attempts": [
+    {
+      "owner": 11864,
+      "result": "Cached build/preprocessing PASS"
+    },
+    {
+      "owner": 23908,
+      "result": "Line checker falsely paired added zero-length guard with later original statement; no publication/test started"
+    },
+    {
+      "owner": 25080,
+      "result": "223original witnesses zero drift;dual publication PASS. Broad oem-tests build failed stale unrelated PIF-layout and DEM-constant fixture dependencies;not an aggregate pass"
+    },
+    {
+      "owner": 10968,
+      "result": "Only selected family/failure/dbcs targets and outstanding async/guest gates run;no product rebuild or republication"
+    }
+  ]
+}
