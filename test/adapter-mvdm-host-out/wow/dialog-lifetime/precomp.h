@@ -25,6 +25,8 @@ C_ASSERT(sizeof(DLG) == 40);
 #define WFDIALOGWINDOW 1u
 #undef WFDESTROYED
 #define WFDESTROYED 2u
+#define WFMSGBOX 4u
+#define KERNEL_INT_PTR_TO_INT_PTR(v) ((INT_PTR)(v))
 #define TestWF(window, flag) ((window)->style & (flag))
 #define SetWF(window, flag) ((window)->style |= (flag))
 #define ClrWF(window, flag) ((window)->style &= ~(flag))
@@ -63,6 +65,8 @@ C_ASSERT(sizeof(DLG) == 40);
 #define SendMessage fixture_send
 #undef PostMessage
 #define PostMessage fixture_post
+#define NotifyWinEvent fixture_notify_event
+VOID WINAPI fixture_notify_event(DWORD, HWND, LONG, LONG);
 #undef IsDialogMessage
 #define IsDialogMessage fixture_dialog_message
 #define TranslateMessage fixture_translate
@@ -110,7 +114,7 @@ ULONG_PTR NtUserGetThreadState(int);
 ULONG_PTR NtUserCallNoParam(int);
 HWND InternalCreateDialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND, DLGPROC, LONG, UINT);
 INT_PTR InternalDialogBox(HANDLE, LPDLGTEMPLATE, HWND, DLGPROC, LPARAM, UINT);
-int PASCAL DialogBox2(HWND, HWND, BOOL, BOOL);
+INT_PTR DialogBox2(HWND, HWND, BOOL, BOOL);
 BOOL EndDialog(HWND, INT_PTR);
 VOID SetDialogPointer(PWND, LONG);
 #endif

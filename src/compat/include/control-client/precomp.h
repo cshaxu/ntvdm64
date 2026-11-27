@@ -152,6 +152,9 @@ WORD DbcsCombine(HWND, WORD);
 /* Original w32inc/w32wow64.h non-WOW64 pointer conversion. */
 #define KPVOID_TO_PVOID(p) (p)
 #define KHANDLE_TO_HANDLE(h) ((HANDLE)(h))
+#define KHWND_TO_HWND(h) ((HWND)(h))
+#define KERNEL_LRESULT_TO_LRESULT(v) ((LRESULT)(v))
+#define KERNEL_INT_PTR_TO_INT_PTR(v) ((INT_PTR)(v))
 #ifndef CW_FLAGS_ANSI
 #define CW_FLAGS_ANSI 0x00000001
 #endif
@@ -216,6 +219,12 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 #ifndef FUNCLOG2
 #define FUNCLOG2(...)
 #endif
+#ifndef FUNCLOG1
+#define FUNCLOG1(...)
+#endif
+#ifndef FUNCLOG3
+#define FUNCLOG3(...)
+#endif
 #ifndef RIPMSG0
 #define FUNCLOG6(...)
 #define FUNCLOG4(...)
@@ -275,6 +284,19 @@ int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW,
 INT_PTR WINAPI InternalDialogBox(HANDLE, LPDLGTEMPLATE, HWND, DLGPROC, LPARAM, UINT);
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_DEFAULT
+/* Retain original helper bodies without defining SDK dllimport symbols. */
+#undef GetDlgCtrlID
+#undef SetDlgItemInt
+#undef CheckDlgButton
+#undef GetDlgItemInt
+#undef CheckRadioButton
+#undef IsDlgButtonChecked
+#define GetDlgCtrlID wow_original_GetDlgCtrlID
+#define SetDlgItemInt wow_original_SetDlgItemInt
+#define CheckDlgButton wow_original_CheckDlgButton
+#define GetDlgItemInt wow_original_GetDlgItemInt
+#define CheckRadioButton wow_original_CheckRadioButton
+#define IsDlgButtonChecked wow_original_IsDlgButtonChecked
 /* Keep original public-shaped bodies distinct from both SDK imports and
  * the adapter that selects recovered versus untouched native dialogs. */
 #undef DefDlgProcA
@@ -319,6 +341,14 @@ PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
 #define RealAdjustWindowRectEx _AdjustWindowRectEx
 #define MIRRORED_HWND(hwnd) ((GetWindowLongW(hwnd, GWL_EXSTYLE) & WS_EX_LAYOUTRTL) != 0)
 #define NtUserGetForegroundWindow GetForegroundWindow
+#define NtUserSetWindowLongPtr NtUserSetWindowLong
+#define IS_IME_ENABLED() GetSystemMetrics(SM_IMMENABLED)
+#ifndef WFMSGBOX
+#define WFMSGBOX 0x0020
+#endif
+#define PUSIF_SNAPTO 0x00000002
+#undef TEST_PUSIF
+#define TEST_PUSIF(flag) ((gpsi->PUSIFlags & (flag)) != 0)
 #undef _MonitorFromWindow
 #define _MonitorFromWindow(window, flags) wow_dialog_monitor(MonitorFromWindow(HWq(window), flags))
 #define _MonitorFromPoint(point, flags) wow_dialog_monitor(MonitorFromPoint(point, flags))

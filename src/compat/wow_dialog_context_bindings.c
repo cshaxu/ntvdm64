@@ -33,6 +33,7 @@ BOOL WINAPI wow_dialog_capture_context(wow_dialog_context *context, BOOL font)
         sizeof(value.server.atomSysClass));
     if (!SystemParametersInfoW(SPI_GETSNAPTODEFBUTTON, 0, &value.server.fSnapTo, 0) ||
             !SystemParametersInfoW(SPI_GETWORKAREA, 0, &value.server.rcWork, 0)) return FALSE;
+    if (value.server.fSnapTo) value.server.PUSIFlags |= 0x00000002u; /* XP PUSIF_SNAPTO. */
     if (!SystemParametersInfoW(SPI_GETKEYBOARDPREF, 0, &value.server.bKeyboardPref, 0) ||
             !SystemParametersInfoW(SPI_GETKEYBOARDCUES, 0, &keyboard_cues, 0)) return FALSE;
     /* XP user.h PUSIF_KEYBOARDCUES. Other UI flags come from the shared capture. */

@@ -72,6 +72,8 @@ int __cdecl main(void)
     CHECK(context.server.screen_rect.right == 1234 &&
         context.server.screen_rect.bottom == 987);
     CHECK(context.server.dmLogPixels > 0 && context.server.hMsgFont);
+    CHECK(SystemParametersInfoW(SPI_GETSNAPTODEFBUTTON, 0, &snap, 0));
+    CHECK(!!(context.server.PUSIFlags & 0x02) == !!snap);
     CHECK(SystemParametersInfoW(SPI_GETKEYBOARDPREF, 0, &snap, 0));
     CHECK(context.server.bKeyboardPref == snap);
     CHECK(SystemParametersInfoW(SPI_GETKEYBOARDCUES, 0, &snap, 0));

@@ -14,6 +14,7 @@ static HWND active, focus;
 static unsigned failures, locks, unlocks, enables, disables, destroys;
 static unsigned shows, idles, posts, zaps, waits, foregrounds, peeks;
 static unsigned sequence, hidden_at, posted_at, destroyed_at;
+static unsigned dialog_started, dialog_ended;
 static BOOL fail_create, end_on_create, quit_message, owner_foreground;
 static int reposted_quit;
 static HWND create_owner;
@@ -53,6 +54,7 @@ static void reset(void)
     locks = unlocks = enables = disables = destroys = 0;
     shows = idles = posts = zaps = waits = foregrounds = peeks = 0;
     sequence = hidden_at = posted_at = destroyed_at = 0;
+    dialog_started = dialog_ended = 0;
     fail_create = end_on_create = quit_message = owner_foreground = FALSE;
     reposted_quit = -1; create_owner = NULL;
     retirement_edge = RETIRE_NONE; retirement_flags = 0;
@@ -65,6 +67,13 @@ PWND ValidateHwnd(HWND hwnd)
     return NULL;
 }
 PWND RevalidateHwnd(HWND hwnd) { return ValidateHwnd(hwnd); }
+VOID WINAPI fixture_notify_event(DWORD event, HWND hwnd, LONG object, LONG child_id)
+{
+    CHECK(hwnd == DIALOG_WINDOW && object == OBJID_WINDOW && child_id == 0);
+    if (event == EVENT_SYSTEM_DIALOGSTART) ++dialog_started;
+    else if (event == EVENT_SYSTEM_DIALOGEND) ++dialog_ended;
+    else CHECK(FALSE);
+}
 BOOL ValidateDialogPwnd(PWND window)
 { return window == &dialog.wnd && dialog.pdlg != NULL; }
 PWND GetTopLevelWindow(PWND window)
@@ -203,6 +212,7 @@ int main(void)
     CHECK(disables == 1 && enables == 1 && shows == 1 && idles == 1);
     CHECK(posts == 1 && destroys == 1 && hidden_at < posted_at && posted_at < destroyed_at);
     CHECK(foregrounds == 1 && waits == 0 && !locks && !unlocks);
+    CHECK(dialog_started == 1 && dialog_ended == 1);
 
     reset(); owner.style |= WS_DISABLED; CHECK(modal(OWNER) == 73);
     CHECK(disables == 1 && enables == 0 && state.fDisabled);

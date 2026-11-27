@@ -33,6 +33,7 @@ BOOL WINAPI wow_user_wait_message(void) { REJECT(); }
 BOOL WINAPI wow_native_SetWindowPos(HWND w, HWND a, int x, int y, int cx, int cy, UINT f) { REJECT(); }
 BOOL WINAPI wow_native_ShowWindow(HWND w, int s) { REJECT(); }
 BOOL WINAPI wow_native_EnableWindow(HWND w, BOOL e) { REJECT(); }
+BOOL WINAPI wow_native_SetDlgItemTextW(HWND w, int id, LPCWSTR text) { REJECT(); }
 BOOL WINAPI wow_native_SetForegroundWindow(HWND w) { REJECT(); }
 BOOL WINAPI wow_native_SetCursorPos(int x, int y) { REJECT(); }
 int WINAPI wow_native_ShowCursor(BOOL s) { REJECT(); }

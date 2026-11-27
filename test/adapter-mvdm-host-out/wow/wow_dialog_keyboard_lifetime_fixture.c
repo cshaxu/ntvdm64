@@ -50,7 +50,10 @@ static void callback(enum fault_point point)
     if (kill_dialog || w == &target.wnd) dialog.spwndChild = NULL;
     if ((kill_dialog || w == &target.wnd) && IsWindow(native_target))
         CHECK(DestroyWindow(native_target));
-    if (kill_dialog) dialog_storage.pdlg = NULL;
+    if (kill_dialog) {
+        ClrWF(w, WFDIALOGWINDOW);
+        dialog_storage.pdlg = NULL;
+    }
 }
 PWND WINAPI wow_window_client_validate_window(HWND w)
 {
@@ -70,6 +73,8 @@ MONITORINFO *WINAPI wow_dialog_monitor(HMONITOR monitor)
 { (void)monitor; CHECK(FALSE); return NULL; }
 MONITORINFO *WINAPI wow_dialog_primary_monitor(void)
 { CHECK(FALSE); return NULL; }
+VOID WINAPI wow_native_NotifyWinEvent(DWORD event, HWND w, LONG object, LONG child_id)
+{ CHECK(event == EVENT_OBJECT_DEFACTIONCHANGE && w == dialog.head.h && object == OBJID_CLIENT && child_id == 0); }
 void WINAPI FreeLookasideEntry(PLOOKASIDE pool, PVOID value)
 { (void)pool; (void)value; CHECK(FALSE); }
 BOOL _IsChild(PWND parent, PWND child)

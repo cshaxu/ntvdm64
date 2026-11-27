@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime45 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime46 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -150,22 +150,10 @@ per-file/global census and original baseline transitions.
 cached build, dual publication, controls/lifecycle/SOL and Full24/24. This is
 the latest Full checkpoint; its receipt retains all census and initial failures.
 
-[P37 N022 combo initialization](../etc/evidence/t485-s1/n022-comboini.md)
-delivered runtime42: exact XP641-line original plus existing29-line info provider.
-Cached build, dual13-image26hash, control39/39, window-borrow and SOL Options pass.
-N0228/39; overall57/159; S15 9/14. Census1329files,781exact,792nonerror same/
-537different,7853points/117785lines; delta0files/0exact/0same/0different/0points/
--1246lines.1274XP/55OpenNT. One mirror since P36 Full. Sequence correction:
-P36 next-file pointer skipped combodir.c; restore that pending DIR entry next,
-before dlgbegin.c. It is not counted as migrated.
-
-[P38 N022 combo directory](../etc/evidence/t485-s1/n022-combodir.md) delivered
-runtime43: exact205-line XP source, one paired HWND selection helper and caller.
-Cached build, dual13-image26hash, control39/39, real combo file/directory selection
-and SOL Options pass. N0229/39; overall57/159; S15 9/14. Census1329files,782exact,
-793nonerror same/536different,7852points/117354lines; delta0files/+1exact/+1same/
--1different/-1point/-431lines.1275XP/54OpenNT. Four changed mirrors since P36 Full.
-The missed DIR entry is delivered.
+[P37 combo initialization](../etc/evidence/t485-s1/n022-comboini.md) and
+[P38 combo directory](../etc/evidence/t485-s1/n022-combodir.md) are delivered.
+Their receipts retain source identities, ordered-DIR correction, package/tests,
+complete census and checkpoint counts. No guest changes.
 
 [P39 N022 dialog creation](../etc/evidence/t485-s1/n022-dlgbegin-review.md)
 delivers runtime44: XP creation/font/monitor/UI algorithm and paired interfaces.
@@ -182,7 +170,16 @@ guard. Cached build, dual13-image26hash, control40/40, real CCPU window-borrow
 and SOL Options pass. N02211/39; overall57/159; S15 9/14.
 Census1329files,782exact,793nonerror same/536different,7866points/117406lines;
 delta0files/0exact/0same/0different/-3points/-6lines.1277XP/52OpenNT.
-One changed mirror; eight since P36 Full24/24. Next dlgmgr.c. No guest change.
+One changed mirror; eight since P36 Full24/24. No guest change.
+
+[P41 N022 dialog manager](../etc/evidence/t485-s1/n022-dlgmgr.md) delivers
+runtime46: whole XP algorithms, restored helpers and original focus validation;
+test-only source guards removed. Cached build, dual13-image26hash, control40/40,
+real CCPU window-borrow and SOL Options pass; fixture build retries retained.
+N02212/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
+536different,7822points/117106lines; delta0files/0exact/0same/0different/
+-44points/-300lines.1278XP/51OpenNT. Nine mirrors since P36 Full24/24.
+Next dlgmgr2.c; its completion reaches the ten-file Full checkpoint.
 
 ## S14 Closure Record
 

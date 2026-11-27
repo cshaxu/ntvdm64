@@ -78,7 +78,7 @@ control_unit(native_getset_reader "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuse
 control_unit(native_getset_client "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/ntstubs.c" "/I \"${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/dialog-getset\" /DWOW_NATIVE_DIALOG_PROCEDURE_OWNER /FI \"${NTVDM_REPO}/src/compat/include/wow_dialog_procedure_bindings.h\" /DWOW_ORIGINAL_DIALOG_GETSET")
 control_unit(native_getset_server "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/kernel/getset.c" "/I \"${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/dialog-getset\" /DWOW_NATIVE_DIALOG_PROCEDURE_OWNER /FI \"${NTVDM_REPO}/src/compat/include/wow_dialog_procedure_bindings.h\"")
 control_unit(modal_lifetime_fixture "${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_dialog_lifetime_fixture.c" "")
-control_unit(modal_lifetime_body "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/dlgmgr.c" "/I \"${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/dialog-lifetime\"")
+control_unit(modal_lifetime_body "${CMAKE_BINARY_DIR}/dialog-modal-original.c" "/I \"${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/dialog-lifetime\"")
 control_unit(modal_lifetime_end "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/dlgend.c" "/I \"${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/dialog-lifetime\"")
 control_unit(navigation_fixture "${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_dialog_navigation_fixture.c" "")
 control_unit(navigation_graph "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/winmgr.c" "/DWOW_ORIGINAL_EDIT_CLIENT /I \"${NTVDM_REPO}/src/compat/include/control-client\"")
