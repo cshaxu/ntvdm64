@@ -8,7 +8,7 @@ each file before delivery. Default original valid;retains need real evidence.
 
 Reviewed30/48files369/645points;restored-final-verified220,restored-local0,
 residual-final-verified149,residual-local0,unreviewed276.
-Delivered/pushed25files194points through c3dca3705.
+Delivered/pushed30files369points through 38b11ba6c.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -39,11 +39,11 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | P8 delivered e25380fe2 |
 | 24 | src/mvdm-host/oemuni/file.c | 19 | P8 delivered e25380fe2 |
 | 25 | src/mvdm-host/oemuni/process.c | 65 | P9 delivered c3dca3705 |
-| 26 | src/mvdm-host/softpc.new/host/src/config.c | 38 | P10 final verified; commit/push pending |
-| 27 | src/mvdm-host/softpc.new/host/src/nt_bop.c | 16 | P10 final verified; commit/push pending |
-| 28 | src/mvdm-host/softpc.new/host/src/nt_com.c | 90 | P10 final verified; commit/push pending |
-| 29 | src/mvdm-host/softpc.new/host/src/nt_cpu.c | 2 | P10 final verified; commit/push pending |
-| 30 | src/mvdm-host/softpc.new/host/src/nt_emm.c | 29 | P10 final verified; commit/push pending |
+| 26 | src/mvdm-host/softpc.new/host/src/config.c | 38 | P10 delivered 38b11ba6c |
+| 27 | src/mvdm-host/softpc.new/host/src/nt_bop.c | 16 | P10 delivered 38b11ba6c |
+| 28 | src/mvdm-host/softpc.new/host/src/nt_com.c | 90 | P10 delivered 38b11ba6c |
+| 29 | src/mvdm-host/softpc.new/host/src/nt_cpu.c | 2 | P10 delivered 38b11ba6c |
+| 30 | src/mvdm-host/softpc.new/host/src/nt_emm.c | 29 | P10 delivered 38b11ba6c |
 | 31 | src/mvdm-host/softpc.new/host/src/nt_eoi.c | 2 | Pending |
 | 32 | src/mvdm-host/softpc.new/host/src/nt_error.c | 26 | Pending |
 | 33 | src/mvdm-host/softpc.new/host/src/nt_keycd.c | 7 | Pending |
@@ -611,3 +611,8 @@ checker form-feed error retained;checker-only fix,no product rebuild. All
 30files369points final-verified:220restored149residual276unreviewed.
 Current671/19668,reduction132points12141lines. Commit/push pending;
 last delivered25files194points c3dca3705. Next31nt_eoi.c.
+
+P10 product 38b11ba6c pushed. Delivered30/48files369/645points;220restored,
+149residual,276unreviewed,zero local restorations awaiting delivery.
+Runtime11 Full23/23 and dual26hash publication retained;no Full rerun.
+Current671/19668,reduction132points12141lines;next31nt_eoi.c.

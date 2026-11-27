@@ -2,7 +2,7 @@
 
 Files26-30 are reviewed in canonical DIR order. All175frozen points have a
 conclusion:149restored,26evidence-backed residuals remain for owner decision.
-Final runtime11 Full23/23 passed; see s12-p10-result.json. Commit/push pending.
+Final runtime11 Full23/23 passed; see s12-p10-result.json. Product commit 38b11ba6c is pushed.
 
 | File | Before nonerror points/lines | After | Restored frozen points | Residual |
 | --- | ---: | ---: | ---: | ---: |
@@ -62,7 +62,7 @@ for unchanged code; retry only failed gates and execute outstanding gates once.
 
 Scale below is the frozen point's original added/deleted size, not the current
 file's aggregate difference. Details and source chains are synchronized in
-points.csv and pending-decisions.csv. Final verification is complete; commit/push pending.
+points.csv and pending-decisions.csv. Final verification is complete; product commit 38b11ba6c is pushed.
 
 | Point | File | XP line | Frozen scale | Disposition |
 | --- | --- | ---: | --- | --- |

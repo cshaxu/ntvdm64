@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P10",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime11",
   "files": {
     "src/mvdm-host/softpc.new/host/src/config.c": "9f7215ea20acb8d3e017ee01f03165387916b870b9bba9fd80bee2d8f9d72bc1",
@@ -540,5 +540,7 @@
   ],
   "boundaries": [
     "Win95 retains owner-approved exit-code1 boundary; desktop/exit/restart acceptance does not claim its root cause fixed."
-  ]
+  ],
+  "product_commit": "38b11ba6c",
+  "push": "origin/main confirmed"
 }
