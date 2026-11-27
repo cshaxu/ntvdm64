@@ -1,0 +1,359 @@
+{
+  "task": "M0 T485 S15 P31",
+  "runtime": "build/t485-s15/runtime32",
+  "source_hashes": {
+    "src/compat/include/wow_bitmap_native.h": "02a41044249cfb8e5a8797a011da6e2fd1578e1157d99f0c1a9dd96191070a3e",
+    "src/non-mvdm/windows/core/ntuser/client/cldib.c": "4038cdfc91878a8c973bbcfb953b4c4bd21655910044f5a06f56997c592b3e78",
+    "test/adapter-mvdm-host-out/wow/wow_bitmap_binding_fixture.c": "53da228f3ed791445ab5d10f679fae9346dd62b048a6f7de08d5cb1a03c4ea23",
+    "test/observation/verify-wow32-registration-surface.ps1": "181fbd5dc230b8b6a1bf9e03b20c78d5c102b7883095a9d06b57948c82da93d6"
+  },
+  "review": {
+    "file": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+    "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+    "xp_blob": "f28888fd055d42c70c4252e10ff93f501e78b1ac",
+    "current_sha256": "4038cdfc91878a8c973bbcfb953b4c4bd21655910044f5a06f56997c592b3e78",
+    "retained_difference": "precomp.h -> compat/include/wow_bitmap_native.h",
+    "error_exclusions": 0,
+    "line_directives": 0,
+    "original_line_mapping": "one-for-one include replacement; every other raw byte matches XP",
+    "behavior": [
+      "original guarded scaling failure",
+      "original rounded 8-bit palette quantization",
+      "original WORD narrowing and unused parameter annotation"
+    ],
+    "filter_provider": "XP windows/core/w32inc/w32err.h retail W32ExceptionHandler(FALSE, flags) = EXCEPTION_EXECUTE_HANDLER; no SetLastError",
+    "validation": "cached build, dual publication, targeted and Full24/24 passed"
+  },
+  "census": {
+    "before": {
+      "files": 1325,
+      "byte_identical": 777,
+      "nonerror_identical": 788,
+      "nonerror_different": 537,
+      "nonerror_points": 7798,
+      "nonerror_lines": 131529
+    },
+    "after": {
+      "files": 1325,
+      "byte_identical": 777,
+      "nonerror_identical": 788,
+      "nonerror_different": 537,
+      "nonerror_points": 7798,
+      "nonerror_lines": 130239
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 0,
+      "nonerror_lines": -1290
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+        "before_points": 1,
+        "before_lines": 1292,
+        "after_points": 1,
+        "after_lines": 2,
+        "exclusions": 0
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1264,
+      "OpenNT": 61
+    }
+  },
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "3468DF348F98E09F9C958EF6DF08E2219B09CA800936CBA305A42CE801A55D17",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "3468DF348F98E09F9C958EF6DF08E2219B09CA800936CBA305A42CE801A55D17",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "693F0F82B37AEA648013B5A3A8E066AF22E237AA26A2F6370293EC989BF032D6",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "693F0F82B37AEA648013B5A3A8E066AF22E237AA26A2F6370293EC989BF032D6",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "472F0BDD2ACE00E5AE596E87D97BEE215A4BC3A8483EC583F2F3460E1C4F10EA",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "472F0BDD2ACE00E5AE596E87D97BEE215A4BC3A8483EC583F2F3460E1C4F10EA",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "A36399D11FAB1912BB1787574B7EC3A6C2E3B338A4BC69D51E5DF454A51EC7EE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "A36399D11FAB1912BB1787574B7EC3A6C2E3B338A4BC69D51E5DF454A51EC7EE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "F68DD6CF341E2FA9365146B13E898C66C3AE6592FE9088EFBBA041037BC1DE89",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "F68DD6CF341E2FA9365146B13E898C66C3AE6592FE9088EFBBA041037BC1DE89",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "1AAE15EE17F7D4E6C0ADB0B45197C0234592C6DBB155F0B1B566D6C28C945FEF",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "1AAE15EE17F7D4E6C0ADB0B45197C0234592C6DBB155F0B1B566D6C28C945FEF",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "2156E5B330FA411B288AB34B4027CB663FE404E19631139482AC543436309FEB",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "2156E5B330FA411B288AB34B4027CB663FE404E19631139482AC543436309FEB",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "75730652E5968B9C184E5A1890EAC42689743CD61BEE59D440A579BA0BD89324",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "75730652E5968B9C184E5A1890EAC42689743CD61BEE59D440A579BA0BD89324",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "489DDF62FF89F69F1B5F13E3BDA38CCA51DE53953159DB8BC35634B5F193CCC8",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "489DDF62FF89F69F1B5F13E3BDA38CCA51DE53953159DB8BC35634B5F193CCC8",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "C1698A5B4985BA18E6BE74811EBEFADCB02B93233BBF2CB09FE2BF489FCF6CF8",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "C1698A5B4985BA18E6BE74811EBEFADCB02B93233BBF2CB09FE2BF489FCF6CF8",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "BD0F56812EE8346ED84E81DE184877DB55166055BFCB918040B2933E3C9D4565",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "BD0F56812EE8346ED84E81DE184877DB55166055BFCB918040B2933E3C9D4565",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "CE56C6369DDEEBAA3BB51DD4631B82434F2E3E130CD999EF6DE0EB69E4B4BF87",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "CE56C6369DDEEBAA3BB51DD4631B82434F2E3E130CD999EF6DE0EB69E4B4BF87",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "35EA4164C61E3BD542F8A080E650B3C2826C4809CD30D3028C78A1882256FEEA",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "35EA4164C61E3BD542F8A080E650B3C2826C4809CD30D3028C78A1882256FEEA",
+      "pass": true
+    }
+  ],
+  "targeted": {
+    "bitmap-tests/binding-run.stdout.log": "XP_DIB_SCALING_OK rounding=43 invalid-pixels=false last-error=preserved\nWOW_BITMAP_BINDING_OK nested=30 parallel=4x50 named=2 missing=2 gdi-before=0 gdi-after=0\n",
+    "bitmap-tests/binding_failure-run.stdout.log": "WOW_BITMAP_BINDING_FAILURE_OK locks=2 screen=10/10\n",
+    "registration-final.log": "{\n  \"result\": \"WOW32_REGISTRATION_SURFACE_OK\",\n  \"evidenceKind\": \"ABI slot assignment audit; not callback/runtime acceptance\",\n  \"inputSlots\": 25,\n  \"outputSlots\": 20,\n  \"unboundUnusedOutputSlots\": [\n    \"pfnWOWModuleUnload\"\n  ],\n  \"pinnedBuildInfo\": \"84000000\"\n}\n"
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 668408,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": true,
+    "PreparationMs": 28692,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1323,
+        "CleanupMs": 364,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-standard",
+        "ElapsedMs": 50204,
+        "CleanupMs": 328,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-enhanced",
+        "ElapsedMs": 83433,
+        "CleanupMs": 309,
+        "Passed": true
+      },
+      {
+        "Gate": "win95",
+        "ElapsedMs": 113489,
+        "CleanupMs": 329,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-sol-options",
+        "ElapsedMs": 24833,
+        "CleanupMs": 345,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 18354,
+        "CleanupMs": 311,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 17949,
+        "CleanupMs": 314,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 18078,
+        "CleanupMs": 293,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 171,
+        "CleanupMs": 307,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 64901,
+        "CleanupMs": 358,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 39404,
+        "CleanupMs": 345,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 36109,
+        "CleanupMs": 323,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14156,
+        "CleanupMs": 315,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 8758,
+        "CleanupMs": 309,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 1361,
+        "CleanupMs": 368,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12042,
+        "CleanupMs": 318,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 34553,
+        "CleanupMs": 319,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 40004,
+        "CleanupMs": 331,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3982,
+        "CleanupMs": 316,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7572,
+        "CleanupMs": 335,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9437,
+        "CleanupMs": 321,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3348,
+        "CleanupMs": 291,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7364,
+        "CleanupMs": 330,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20575,
+        "CleanupMs": 305,
+        "Passed": true
+      }
+    ]
+  },
+  "build_exit": 0,
+  "initial_static_failure": "Exception: O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-wow-bitmap-bindings.ps1:21\nLine |\n  21 |      if ($p.ExitCode) { throw \"$name failed: $($p.ExitCode)\" }\n     |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | registration failed: 1\n\n\n"
+}

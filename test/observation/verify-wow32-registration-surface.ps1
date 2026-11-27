@@ -28,7 +28,7 @@ $registrationCode = $registrationOwnerText + [Environment]::NewLine +
     (Get-Content -LiteralPath $compatState -Raw)
 $inputFields = @(Get-StructPfnFields $headerText 'tagAPFNWOWHANDLERSIN')
 $outputFields = @(Get-StructPfnFields $headerText 'tagAPFNWOWHANDLERSOUT')
-if ($inputFields.Count -ne 21) { throw "Expected 21 original input slots, found $($inputFields.Count)." }
+if ($inputFields.Count -ne 25) { throw "Expected 25 XP input slots, found $($inputFields.Count)." }
 if ($outputFields.Count -ne 20) { throw "Expected 20 original output slots, found $($outputFields.Count)." }
 
 $inputAssignments = @([regex]::Matches($wowText, '\bpfnIn\.(pfn[A-Za-z0-9_]+)\s*=') |
@@ -36,7 +36,16 @@ $inputAssignments = @([regex]::Matches($wowText, '\bpfnIn\.(pfn[A-Za-z0-9_]+)\s*
 $outputAssignments = @([regex]::Matches($registrationOwnerText, '\boutput->(pfn[A-Za-z0-9_]+)\s*=') |
     ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
 $missingInput = @(Compare-Object $inputFields $inputAssignments -PassThru | Where-Object { $_ -in $inputFields })
-$missingOutput = @(Compare-Object $outputFields $outputAssignments -PassThru | Where-Object { $_ -in $outputFields })
+# N020 P19 retains the XP module slot, but the selected four-argument
+# cleanup ABI still owns module cleanup. Require the unused slot to stay zero.
+$unboundOutput = @('pfnWOWModuleUnload')
+if (!$registrationOwnerText.Contains('ZeroMemory(output, sizeof(*output));') -or
+    $outputAssignments -contains $unboundOutput[0] -or
+    $wowText -match 'pfnOut\.pfnWOWModuleUnload') {
+    throw 'Unused XP module callback no longer has its recorded zero/unconsumed contract.'
+}
+$missingOutput = @(Compare-Object $outputFields $outputAssignments -PassThru |
+    Where-Object { $_ -in $outputFields -and $_ -notin $unboundOutput })
 if ($missingInput.Count -ne 0) { throw "Original input slots not assigned by W32Init: $($missingInput -join ', ')" }
 if ($missingOutput.Count -ne 0) { throw "Provider output slots not assigned: $($missingOutput -join ', ')" }
 if (-not $registrationCode.Contains('wow_input_handlers = *input;')) { throw 'Provider does not retain the original input callback record.' }
@@ -65,6 +74,6 @@ foreach ($entry in @(
     evidenceKind = 'ABI slot assignment audit; not callback/runtime acceptance'
     inputSlots = $inputFields.Count
     outputSlots = $outputFields.Count
-    explicitFailureOutputSlots = @()
+    unboundUnusedOutputSlots = $unboundOutput
     pinnedBuildInfo = '84000000'
 } | ConvertTo-Json

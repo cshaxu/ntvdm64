@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: cldib.c
 *
-* Copyright (c) 1985-95, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 *
 * 09-26-95 ChrisWil  Ported dib-scale code.
@@ -131,7 +131,7 @@ int SmartStretchDIBits(
             *lpbiNew            = lpbi->bmiHeader;
             lpbiNew->biWidth    = dxD;
             lpbiNew->biHeight   = dyD;
-            lpbiNew->biBitCount = bpp;
+            lpbiNew->biBitCount = (WORD)bpp;
             lpBitsNew = (LPBYTE)lpbiNew          +
                         sizeof(BITMAPINFOHEADER) +
                         (256 * sizeof(RGBQUAD));
@@ -249,17 +249,25 @@ BOOL ScaleDIB(
         x0  = 0;
     }
 
-    ScaleProc[iSrc][iDst](pal,
-                          pbSrc,
-                          WidthBytesSrc,
-                          x0,
-                          y0,
-                          sdx,
-                          sdy,
-                          pbDst,
-                          WidthBytesDst,
-                          dxDst,
-                          dyDst);
+    /*
+     * Make sure we don't croak on a bad bitmap since this can hose winlogon
+     * if it's the desktop wallpaper.
+     */
+    try {
+        ScaleProc[iSrc][iDst](pal,
+                              pbSrc,
+                              WidthBytesSrc,
+                              x0,
+                              y0,
+                              sdx,
+                              sdy,
+                              pbDst,
+                              WidthBytesDst,
+                              dxDst,
+                              dyDst);
+    } except (W32ExceptionHandler(FALSE, RIP_WARNING)) {
+        return FALSE;
+    }
 
     return TRUE;
 }
@@ -492,6 +500,8 @@ VOID Scale2424(
     UINT     sy;
     COLORREF rgb;
 
+    UNREFERENCED_PARAMETER(pal);
+
     for (sy=y0, y=0; y < dyDst; y++, sy+=sdy) {
 
         pb = pbSrc + (WidthBytesSrc * (sy / FX1));
@@ -625,7 +635,7 @@ _inline VOID InitDst8(
     }
 
     for (b=0; b < 256; b++) {
-        bmap[b] = (b * 5) / 255;
+        bmap[b] = (b * 5 + 128) / 255;
         gmap[b] = 6 * bmap[b];
         rmap[b] = 36 * bmap[b];
     }

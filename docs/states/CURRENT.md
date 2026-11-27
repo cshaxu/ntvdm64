@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime31 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime32 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -159,6 +159,15 @@ delta0files/0exact/0same/0different,+14points/-3693lines.1263XP/62OpenNT.
 N0221/39 complete; overall57/159, S15 9/14. Nine mirror files since P26 Full24/24;
 next cldib.c triggers Full. Paired user.h/server.c remain OpenNT until migrated.
 Original guest unchanged.
+
+[P31 N022 bitmap](../etc/evidence/t485-s1/n022-dib.md) delivered runtime32:
+XP scaling exception handling and rounded palette conversion retained;
+only the existing host include differs (1point/2lines, -1290lines).
+Cached build, dual13-image26hash publication, native bitmap/registration
+checks and Full24/24 passed. N0222/39; overall57/159; S15 9/14.
+Census1325files,777exact,788nonerror same/537different,7798points/130239lines;
+delta0files/0exact/0same/0different/0points/-1290lines.1264XP/61OpenNT.
+Ten-file checkpoint resets to zero. Next clglobal.c, in DIR order.
 
 ## S14 Closure Record
 

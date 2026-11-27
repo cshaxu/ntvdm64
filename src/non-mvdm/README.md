@@ -3047,3 +3047,7 @@ vdmdbg.h declarations and vddsvc.h public contracts. Eleven setter WINAPI
 bindings match actual published stdcall exports; original rejected branches
 and diagnostic lines remain. [Final SDK evidence](../../docs/etc/evidence/t485-s1/n021-final.md)
 records all17 pinned directory identities, final delivery and residuals.
+
+T485 S15 P31 restores XP cldib.c byte-for-byte except its existing public
+bitmap host include. The retail FALSE exception filter is bound in B; all
+scaling algorithms remain original. [Bitmap evidence](../../docs/etc/evidence/t485-s1/n022-dib.md).

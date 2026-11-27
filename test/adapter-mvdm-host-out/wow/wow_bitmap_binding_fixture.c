@@ -25,6 +25,33 @@ static DWORD WINAPI parallel_convert(void *start)
     GdiFlush();
     return 0;
 }
+BOOL ScaleDIB(LPBITMAPINFOHEADER, LPVOID, LPBITMAPINFOHEADER, LPVOID);
+static int xp_scaling(void)
+{
+    struct { BITMAPINFOHEADER h; DWORD palette[256]; } src = {0}, dst = {0};
+    BYTE pixels[16], output[8] = {0};
+    void *unreadable;
+    unsigned i;
+    src.h.biSize = dst.h.biSize = sizeof(BITMAPINFOHEADER);
+    src.h.biWidth = src.h.biHeight = 4;
+    dst.h.biWidth = dst.h.biHeight = 2;
+    src.h.biPlanes = dst.h.biPlanes = 1;
+    src.h.biBitCount = 4;
+    dst.h.biBitCount = 8;
+    src.palette[1] = RGB(26, 26, 26);
+    memset(pixels, 0x11, sizeof(pixels));
+    CHECK(ScaleDIB(&src.h, pixels, &dst.h, output));
+    for (i = 0; i < 2; ++i)
+        CHECK(output[i * 4] == 43 && output[i * 4 + 1] == 43);
+    unreadable = VirtualAlloc(NULL, 4096, MEM_RESERVE | MEM_COMMIT, PAGE_NOACCESS);
+    CHECK(unreadable);
+    SetLastError(0x1234);
+    CHECK(!ScaleDIB(&src.h, unreadable, &dst.h, output));
+    CHECK(GetLastError() == 0x1234);
+    CHECK(VirtualFree(unreadable, 0, MEM_RELEASE));
+    puts("XP_DIB_SCALING_OK rounding=43 invalid-pixels=false last-error=preserved");
+    return 0;
+}
 int __cdecl main(void)
 {
     struct { BITMAPINFOHEADER header; DWORD colors[2]; DWORD bits; } resource;
@@ -93,6 +120,7 @@ int __cdecl main(void)
         SelectObject(dc, previous);
         CHECK(DeleteDC(dc) && DeleteObject(bitmap));
     }
+    CHECK(xp_scaling() == 0);
     wow_bitmap_bindings_shutdown();
     wow_bitmap_bindings_shutdown();
     printf("WOW_BITMAP_BINDING_OK nested=30 parallel=4x50 named=2 missing=2 gdi-before=%lu gdi-after=%lu\n", before, after);
