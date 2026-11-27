@@ -22,19 +22,20 @@ int main(void)
     const WORD required[] = { WM_CLOSE, WM_GETTEXT, WM_SETTEXT, WM_PAINT,
         WM_NCCREATE, WM_NCCALCSIZE, WM_NCHITTEST, WM_SYSCOMMAND,
         WM_WINDOWPOSCHANGED, WM_CTLCOLORSTATIC, WM_MOUSEWHEEL, WM_PRINT,
-        0x003b, 0x022a, 0x022b, 0x0313 };
+        0x003b, 0x022a, 0x022b, 0x0313, WM_APPCOMMAND, WM_XBUTTONUP,
+        WM_NCXBUTTONUP, WM_UNICHAR, WM_QUERYUISTATE, WM_UAHINIT };
     const WORD absent[] = { WM_NULL, WM_CREATE, WM_DESTROY, WM_USER };
 
     static const wow_default_message_provider provider = { InitMessageTables, wow_default_message_copy, wow_default_message_reset };
     if (!wow_default_messages_bind(&provider)) return 9;
     memset(storage, 0xa5, sizeof(storage));
     if (wow_private_user_get_def_window_proc_bits(NULL, 101) != 0) return 1;
-    if (wow_private_user_get_def_window_proc_bits(bits, WM_PRINT / 8) != 0) return 2;
+    if (wow_private_user_get_def_window_proc_bits(bits, WM_UAHINIT / 8) != 0) return 2;
     for (index = 0; index < sizeof(storage); ++index)
         if (storage[index] != 0xa5) return 3;
     memset(bits, 0, 101);
     max_message = wow_private_user_get_def_window_proc_bits(bits, 101);
-    if (max_message != WM_PRINT) return 4;
+    if (max_message != WM_UAHINIT) return 4;
     for (index = 0; index < ARRAYSIZE(required); ++index)
         if (!(bits[required[index] >> 3] & (1u << (required[index] & 7))))
             return 5;
@@ -45,10 +46,10 @@ int main(void)
     /* The original merge assumes zeroed input; the boundary establishes
      * that precondition and preserves the caller's trailing bytes. */
     memset(storage, 0xa5, sizeof(storage));
-    if (wow_private_user_get_def_window_proc_bits(bits, 101) != WM_PRINT)
+    if (wow_private_user_get_def_window_proc_bits(bits, 101) != WM_UAHINIT)
         return 8;
     if (storage[0] != 0xa5 || storage[102] != 0xa5) return 9;
-    for (index = WM_PRINT / 8u + 1u; index < 101; ++index)
+    for (index = WM_UAHINIT / 8u + 1u; index < 101; ++index)
         if (bits[index] != 0xa5) return 10;
     for (index = 0; index < ARRAYSIZE(absent); ++index)
         if (absent[index] <= max_message &&

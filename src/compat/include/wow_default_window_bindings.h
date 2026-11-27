@@ -9,8 +9,9 @@ typedef struct wow_default_context {
         COLORREF argbSystem[WOW_EDIT_COLOR_COUNT];
         UINT uiShellMsg;
         int gclBorder;
+        UINT BitCount;
+        HBRUSH hbrGray;
     } server;
-    struct { UINT BitCount; } screen;
 } wow_default_context;
 extern __declspec(thread) wow_default_context *wow_default_current;
 BOOL WINAPI wow_default_capture_context(wow_default_context *, UINT);
@@ -43,10 +44,9 @@ LONG WINAPI wow_default_CsSendMessage(HWND, UINT, WPARAM, LPARAM,
 #define DefWindowProcWorker wow_original_default_window_proc
 #define gSharedInfo wow_default_message_state
 #define gpsi (&wow_default_current->server)
-#define oemInfo (wow_default_current->screen)
 #define SYSRGB(index) (wow_default_current->server.argbSystem[COLOR_##index])
 #define ahbrSystem wow_edit_system_brushes
-#define ghbrGray wow_edit_gray_brush
+#define SYSHBRUSH(index) (wow_edit_system_brushes[(index)])
 #define SetTaskmanWindow wow_default_ensure_shell_message
 #undef CsSendMessage
 #define CsSendMessage wow_default_CsSendMessage

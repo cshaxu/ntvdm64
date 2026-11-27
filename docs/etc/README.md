@@ -2191,3 +2191,5 @@ post-publication targeted checks.
 - [S15 P32 N022 globals and message metadata](evidence/t485-s1/n022-globals.md).
 
 - [S15 P33 N022 menu migration](evidence/t485-s1/n022-menu.md).
+
+- [S15 P34 N022 message migration](evidence/t485-s1/n022-message.md).

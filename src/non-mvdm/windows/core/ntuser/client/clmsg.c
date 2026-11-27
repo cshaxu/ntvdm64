@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: ClMsg.c
 *
-* Copyright (c) 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * Includes the mapping table for messages when calling the server.
 *
@@ -12,98 +12,111 @@
 #undef FindNCHit
 #include "non-mvdm/windows/core/ntuser/rtl/userrtl.h"
 #define FindNCHit wow_default_find_nc_hit
+#line 12
 #pragma hdrstop
 
 
 #define fnINDESTROYCLIPBRD      fnDWORD
 #define fnOUTDWORDDWORD         fnDWORD
+#define fnPOWERBROADCAST        fnDWORD
+#define fnLOGONNOTIFY           fnKERNELONLY
+#define fnINLPKDRAWSWITCHWND    fnKERNELONLY
 
 #define MSGFN(func) fn ## func
 #define FNSCSENDMESSAGE CFNSCSENDMESSAGE
 
+#line 23
 #define PROTOS_ONLY
 #include "messages.h"
 #undef PROTOS_ONLY
-#line 23
-#ifdef DEBUG
-#line 24
-#error Unsupported original DEBUG branch
+#line 25
+
+#if DBG
+#error Unsupported original DBG branch
 #endif
-#line 26
-#line 270
-#ifdef FE_SB // SendMessageWorker()
-#line 271
-#error Unsupported FE_SB original branch
-#endif // FE_SB
-#line 274
 
-#line 327
-#ifdef FE_IME // SendMessageWorker()
-#line 328
-#error Excluded unsupported original FE_IME branch
-#endif // FE_IME
-#line 331
-#ifdef FE_SB // SendMessageWorker()
-#line 332
-#error Unsupported FE_SB original branch
-#else
-#line 356
-#endif // FE_SB
-#line 364
+#define BEGIN_CALLWINPROC(fInsideHook, lRet)                            \
+    PCLIENTTHREADINFO pcti = GetClientInfo()->pClientThreadInfo;        \
+    BOOL fCallBack = ((pcti!=NULL) &&                                   \
+             TEST_BOOL_FLAG(pcti->CTIF_flags, CTIF_INCALLBACKMESSAGE)); \
+    RTL_CALLER_ALLOCATED_ACTIVATION_CONTEXT_STACK_FRAME ActivationFrame \
+        = {                                                             \
+            sizeof(ActivationFrame),                                    \
+    RTL_CALLER_ALLOCATED_ACTIVATION_CONTEXT_STACK_FRAME_FORMAT_WHISTLER \
+        };                                                              \
+    fInsideHook = FALSE;                                                \
+                                                                        \
+    if (!fCallBack) {                                                   \
+        RtlActivateActivationContextUnsafeFast(                         \
+            &ActivationFrame,                                           \
+            pActCtx);                                                   \
+                                                                        \
+        fInsideHook = _BeginIfHookedUserApiHook();                      \
+    }                                                                   \
+                                                                        \
+    __try {                                                             \
 
-#line 373
-#ifndef LATER
-#line 374
-#line 400
-#ifdef FE_SB // SendMessageWorker()
-#line 401
-#error Excluded unsupported original FE_SB branch
-#else
-#line 413
-#endif // FE_SB
-#line 415
-#line 416
-#ifdef FE_SB // SendMessageWorker()
-#line 417
-#error Excluded unsupported original FE_SB branch
-#else
-#line 429
-#endif // FE_SB
-#line 431
-#line 433
-#ifdef FE_SB // SendMessageWorker()
-#line 434
-#error Excluded unsupported original FE_SB branch
-#else
-#line 447
-#endif // FE_SB
-#line 449
-#endif
-#line 452
+#define END_CALLWINPROC(fInsideHook)                                    \
+    } __finally {                                                       \
+        if (!fCallBack) {                                               \
+            if (fInsideHook) {                                          \
+                _EndUserApiHook();                                      \
+            }                                                           \
+            RtlDeactivateActivationContextUnsafeFast(                   \
+                &ActivationFrame);                                      \
+        }                                                               \
+    }
 
-#line 453
-#ifdef FE_SB // SendMessageWorker()
-#line 454
-#error Unsupported FE_SB original branch
-#else
-#line 467
-#endif // FE_SB
-#line 470
-
-#line 546
-/***************************************************************************\
-* DefWindowProcWorker
-*
-* Handles any messages that can be dealt with wholly on the client and
-* passes the rest to the server.
-*
-* 03-31-92 DarrinM      Created.
-\***************************************************************************/
 
 #if defined(WOW_ORIGINAL_DEFAULT_WINDOW)
+#line 252
+WORD
+GetMouseKeyState(void)
+{
+    WORD keystate;
 
-#line 555
-LONG DefWindowProcWorker(
+    /*
+     * Note that it is more efficient to call GetKeyState for each
+     * key than to call GetKeyboardState, since the keys we are testing
+     * are cached and don't require a trip to the kernel to fetch.
+     */
+
+#define TESTANDSETKEYSTATE(x)            \
+    if (GetKeyState(VK_##x) & 0x8000) {  \
+        keystate |= MK_##x;              \
+    }
+
+    keystate = 0;
+    TESTANDSETKEYSTATE(LBUTTON)
+    TESTANDSETKEYSTATE(RBUTTON)
+    TESTANDSETKEYSTATE(MBUTTON)
+    TESTANDSETKEYSTATE(XBUTTON1)
+    TESTANDSETKEYSTATE(XBUTTON2)
+    TESTANDSETKEYSTATE(SHIFT)
+    TESTANDSETKEYSTATE(CONTROL)
+
+    return keystate;
+}
+
+#line 1271
+LRESULT DefWindowProcWorker(
+    PWND pwnd,
+    UINT message,
+    WPARAM wParam,
+    LPARAM lParam,
+    DWORD fAnsi)
+{
+    if (ghmodUserApiHook) {
+        if (fAnsi) {
+            return DefWindowProcA(HWq(pwnd), message, wParam, lParam);
+        } else {
+            return DefWindowProcW(HWq(pwnd), message, wParam, lParam);
+        }
+    }
+    return RealDefWindowProcWorker(pwnd, message, wParam, lParam, fAnsi);
+}
+
+LRESULT RealDefWindowProcWorker(
     PWND pwnd,
     UINT message,
     WPARAM wParam,
@@ -114,20 +127,13 @@ LONG DefWindowProcWorker(
     int icolBack;
     int icolFore;
     PWND pwndParent;
-#line 566
-#ifdef FE_IME
-#line 567
-#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
+#line 1302
+
+#if DBG
+#error Unsupported original DBG branch
 #endif
+#line 1309
 
-#line 572
-#ifdef DEBUG
-#line 573
-#error Excluded unsupported original DEBUG default-window path
-#endif
-
-
-#line 580
     if (FDEFWINDOWMSG(message, DefWindowMsgs)) {
         return CsSendMessage(hwnd, message, wParam, lParam, 0L,
                 FNID_DEFWINDOWPROC, fAnsi);
@@ -144,6 +150,10 @@ LONG DefWindowProcWorker(
      */
 
     switch (message) {
+#ifdef LAME_BUTTON
+#error Unsupported original LAME_BUTTON branch
+#endif // LAME_BUTTON
+#line 1349
 
     case WM_HELP:
         {
@@ -181,22 +191,86 @@ LONG DefWindowProcWorker(
      * Default handling for WM_CONTEXTMENU support
      */
     case WM_RBUTTONUP:
-        lParam = MAKELONG(LOWORD(lParam) + pwnd->rcClient.left, HIWORD(lParam) + pwnd->rcClient.top);
+        if (TestWF(pwnd, WEFLAYOUTRTL)) {
+            lParam = MAKELONG(pwnd->rcClient.right - GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) + pwnd->rcClient.top);
+        } else {
+            lParam = MAKELONG(GET_X_LPARAM(lParam) + pwnd->rcClient.left, GET_Y_LPARAM(lParam) + pwnd->rcClient.top);
+        }
         SendMessageWorker(pwnd, WM_CONTEXTMENU, (WPARAM)hwnd, lParam, fAnsi);
         break;
+
+    case WM_APPCOMMAND:
+        if (TestwndChild(pwnd)) {
+            /*
+             * Bubble the message to the parent
+             */
+            pwndParent = REBASEPWND(pwnd, spwndParent);
+            return SendMessageW(HW(pwndParent), WM_APPCOMMAND, wParam, lParam);
+        } else {
+            /*
+             * Call the server side to send the shell hook HSHELL_APPCOMMAND
+             */
+            return CsSendMessage(hwnd, WM_APPCOMMAND, wParam, lParam, 0L, FNID_DEFWINDOWPROC, fAnsi);
+        }
+        break;
+
+    /*
+     * Default handling for WM_APPCOMMAND support
+     */
+    case WM_NCXBUTTONUP:
+    case WM_XBUTTONUP:
+        {
+            WORD cmd;
+            WORD keystate;
+            LPARAM lParamAppCommand;
+
+            switch (GET_XBUTTON_WPARAM(wParam)) {
+            case XBUTTON1:
+                cmd = APPCOMMAND_BROWSER_BACKWARD;
+                break;
+
+            case XBUTTON2:
+                cmd = APPCOMMAND_BROWSER_FORWARD;
+                break;
+
+            default:
+                cmd = 0;
+                break;
+            }
+
+            if (cmd == 0) {
+                break;
+            }
+
+            cmd |= FAPPCOMMAND_MOUSE;
+            if (message == WM_XBUTTONUP) {
+                keystate = GET_KEYSTATE_WPARAM(wParam);
+            } else {
+                keystate = GetMouseKeyState();
+            }
+
+            lParamAppCommand = MAKELPARAM(keystate, cmd);
+            SendMessageWorker(pwnd, WM_APPCOMMAND, (WPARAM)hwnd, lParamAppCommand, fAnsi);
+            break;
+        }
 
     case WM_WINDOWPOSCHANGED: {
         PWINDOWPOS ppos = (PWINDOWPOS)lParam;
 
         if (!(ppos->flags & SWP_NOCLIENTMOVE)) {
+            POINT pt = {pwnd->rcClient.left, pwnd->rcClient.top};
             pwndParent = REBASEPWND(pwnd, spwndParent);
-            SendMessageWorker(pwnd, WM_MOVE, FALSE,
-                    MAKELONG(pwnd->rcClient.left - pwndParent->rcClient.left,
-                    pwnd->rcClient.top  - pwndParent->rcClient.top), fAnsi);
+
+            if (pwndParent != _GetDesktopWindow()) {
+                pt.x -= pwndParent->rcClient.left;
+                pt.y -= pwndParent->rcClient.top;
+            }
+
+            SendMessageWorker(pwnd, WM_MOVE, FALSE, MAKELPARAM(pt.x, pt.y), fAnsi);
         }
 
         if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) return 0;
-#line 647
+#line 1464
         if ((ppos->flags & SWP_STATECHANGE) || !(ppos->flags & SWP_NOCLIENTSIZE)) {
             UINT cmd;
             RECT rc;
@@ -226,7 +300,7 @@ LONG DefWindowProcWorker(
 
     case WM_MOUSEACTIVATE: {
         PWND pwndT;
-        LONG lt;
+        LRESULT lt;
 
         /*
          * GetChildParent returns either a kernel pointer or NULL.
@@ -247,7 +321,8 @@ LONG DefWindowProcWorker(
         }
 
     case WM_CTLCOLORSCROLLBAR:
-        if ((oemInfo.BitCount < 8) || (SYSRGB(3DHILIGHT) != SYSRGB(SCROLLBAR)) ||
+        if ((gpsi->BitCount < 8) ||
+            (SYSRGB(3DHILIGHT) != SYSRGB(SCROLLBAR)) ||
             (SYSRGB(3DHILIGHT) == SYSRGB(WINDOW)))
         {
             /*
@@ -259,7 +334,7 @@ LONG DefWindowProcWorker(
 
             SetBkColor((HDC)wParam, SYSRGB(3DHILIGHT));
             SetTextColor((HDC)wParam, SYSRGB(3DFACE));
-            return((LRESULT)ghbrGray);
+            return((LRESULT)gpsi->hbrGray);
         }
 
         icolBack = COLOR_3DHILIGHT;
@@ -303,12 +378,14 @@ LONG DefWindowProcWorker(
         icolFore = COLOR_WINDOWTEXT;
 
       SetColor:
+      {
         SetBkColor((HDC)wParam, gpsi->argbSystem[icolBack]);
         SetTextColor((HDC)wParam, gpsi->argbSystem[icolFore]);
-        return (LONG)ahbrSystem[icolBack];
+        return (LRESULT)(SYSHBRUSH(icolBack));
+      }
 
     case WM_NCHITTEST:
-        return FindNCHit(pwnd, lParam);
+        return FindNCHit(pwnd, (LONG)lParam);
 
     case WM_GETTEXT:
         if (wParam != 0) {
@@ -333,7 +410,7 @@ LONG DefWindowProcWorker(
                     cchSrc = WCSToMB(lpszText,
                                      cchSrc,
                                      (LPSTR *)&lpName,
-                                     (wParam - 1),
+                                     (UINT)(wParam - 1),
                                      FALSE);
 
                     lpName[cchSrc] = '\0';
@@ -376,6 +453,20 @@ LONG DefWindowProcWorker(
         }
         return 0L;
 
+    case WM_QUERYDRAGICON:
+        /*
+         * If the window is WIN40COMPAT or has a kernel side procedure
+         * do not attempt to look into the instance module
+         */
+        if (TestWF(pwnd, WFWIN40COMPAT) || TestWF(pwnd, WFSERVERSIDEPROC)) {
+            return 0;
+        }
+        /*
+         * For old apps, like the VB3 ones, try to load the icon from resources
+         * This is how Win95 does.
+         */
+        return CsSendMessage(hwnd, message, wParam, lParam, 0L, FNID_DEFWINDOWPROC, fAnsi);
+
     case WM_QUERYOPEN:
     case WM_QUERYENDSESSION:
     case WM_DEVICECHANGE:
@@ -383,9 +474,10 @@ LONG DefWindowProcWorker(
         return TRUE;
 
     case WM_KEYDOWN:
-        if (wParam == VK_F10)
+        if (wParam == VK_F10) {
             return CsSendMessage(hwnd, message, wParam, lParam, 0L,
                     FNID_DEFWINDOWPROC, fAnsi);
+        }
         break;
 
     case WM_SYSKEYDOWN:
@@ -393,6 +485,12 @@ LONG DefWindowProcWorker(
                 (wParam == VK_ESCAPE))
             return CsSendMessage(hwnd, message, wParam, lParam, 0L,
                     FNID_DEFWINDOWPROC, fAnsi);
+        break;
+
+    case WM_UNICHAR:
+        if (wParam == UNICODE_NOCHAR) {
+            return FALSE;
+        }
         break;
 
     case WM_CHARTOITEM:
@@ -434,19 +532,22 @@ LONG DefWindowProcWorker(
         LPRECT lprc = (LPRECT)lParam;
 
         shi.hwnd = (HWND)wParam;
-        CopyRect(&(shi.rc),(LPRECT)lParam);
+        shi.rc.left = MAKELONG(lprc->left, lprc->top);
+        shi.rc.top = MAKELONG(lprc->right, lprc->bottom);
+
         if (gpsi->uiShellMsg == 0)
             SetTaskmanWindow(NULL);
-        SendMessageWorker(pwnd, gpsi->uiShellMsg, HSHELL_GETMINRECT,
-                (LPARAM)&shi, fAnsi);
-        //
-        // Now convert the RECT back from two POINTS structures into two POINT
-        // structures.
-        //
-        lprc->left   = (SHORT)LOWORD(shi.rc.left);  // Sign extend
-        lprc->top    = (SHORT)HIWORD(shi.rc.left);  // Sign extend
-        lprc->right  = (SHORT)LOWORD(shi.rc.top);   // Sign extend
-        lprc->bottom = (SHORT)HIWORD(shi.rc.top);   // Sign extend
+        if (SendMessageWorker(pwnd, gpsi->uiShellMsg, HSHELL_GETMINRECT,
+                (LPARAM)&shi, fAnsi)) {
+            //
+            // Now convert the RECT back from two POINTS structures into two POINT
+            // structures.
+            //
+            lprc->left   = (SHORT)LOWORD(shi.rc.left);  // Sign extend
+            lprc->top    = (SHORT)HIWORD(shi.rc.left);  // Sign extend
+            lprc->right  = (SHORT)LOWORD(shi.rc.top);   // Sign extend
+            lprc->bottom = (SHORT)HIWORD(shi.rc.top);   // Sign extend
+        }
         break;
         }
 
@@ -455,27 +556,34 @@ LONG DefWindowProcWorker(
             return(TestWF(pwnd, WFANSICREATOR) ? NFR_ANSI : NFR_UNICODE);
         break;
 
-#line 905
-#if defined(FE_IME) // DefWindowProcWorker()
-#line 906
-#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
-#endif
+    case WM_IME_KEYDOWN:
+        if (fAnsi)
+            PostMessageA(hwnd, WM_KEYDOWN, wParam, lParam);
+        else
+            PostMessageW(hwnd, WM_KEYDOWN, wParam, lParam);
+        break;
 
-#line 1210
+    case WM_IME_KEYUP:
+        if (fAnsi)
+            PostMessageA(hwnd, WM_KEYUP, wParam, lParam);
+        else
+            PostMessageW(hwnd, WM_KEYUP, wParam, lParam);
+        break;
+
+#line 2133
     }
 
     return 0;
 
-#line 1214
-#ifdef DEBUG
-#line 1215
-#error Excluded unsupported original DEBUG default-window close
+#if DBG
+#error Unsupported original DBG branch
 #endif
-#line 1217
 }
-#endif
 
-#line 1315
+
+#endif
+#line 2260
+
 /***************************************************************************\
 * _ClientGetListboxString
 *
@@ -495,90 +603,31 @@ LONG DefWindowProcWorker(
 DWORD WINAPI _ClientGetListboxString(
     PWND pwnd,
     UINT msg,
-    DWORD wParam,
+    WPARAM wParam,
     LPSTR lParam, // May be a unicode or ANSI string
-    DWORD xParam,
+    ULONG_PTR xParam,
     PROC xpfn)
 {
-    return ((GENERICPROC)xpfn)(pwnd, msg, wParam, (LPARAM)lParam, xParam);
+    return ((DWORD)((GENERICPROC)xpfn)(pwnd, msg, wParam, (LPARAM)lParam, xParam));
 }
-
-#line 1563
-#define CCHCAPTIONMAX 80
-#line 1650
-#if 0
-#line 1651
-#error Excluded original disabled WMCTLCOLOR handler
-#endif
-#line 1677
-
-#line 1678
-
-/******************************Public*Routine******************************\
-*
-*
-* History:
-* 15-Feb-1996 -by- Corneliu Lupu [clupu]
-* Wrote it.
-\**************************************************************************/
-
-LONG fnKERNELONLY(
-    HWND hwnd,
-    UINT msg,
-    DWORD wParam,
-    LONG lParam,
-    DWORD xParam,
-    DWORD xpfn,
-    BOOL bAnsi)
-{
-    RIPMSG0(RIP_WARNING,
-            "Message sent from client to kernel for a process "
-            "which has only kernel side\n" );
-
-    return 0L;
-}
-#line 1719
-#ifdef FE_SB // DispatchMessageWorker()
-#line 1720
-#error Unsupported FE_SB original branch
-#endif // FE_SB
-#line 1722
-
-#line 1777
-#ifdef FE_SB // DispatchMessageWorker()
-#line 1778
-#error Unsupported FE_SB original branch
-#else
-#line 1790
-#endif // FE_SB
-#line 1793
-
-#line 1803
-#ifdef FE_SB // DispatchMessageWorker()
-#line 1804
-#error Unsupported FE_SB original branch
-#else
-#line 1841
-#endif // FE_SB
-#line 1853
 
 #if defined(WOW_ORIGINAL_CLIENT_CPD)
-#line 1907
-/***********************************************************************\
-* GetCPD
-*
-* This function calls the server to allocate a CPD structure.
-*
-* History:
-* 11-15-94 JimA         Created.
-\***********************************************************************/
-
-#line 1916
-DWORD GetCPD(
-    PVOID pWndOrCls,
+#line 2588
+ULONG_PTR GetCPD(
+    KERNEL_PVOID pWndOrCls,
     DWORD options,
-    DWORD dwData)
+    ULONG_PTR dwData)
 {
     return NtUserGetCPD(HW(pWndOrCls), options, dwData);
 }
+
 #endif
+#line 2596
+#ifdef BUILD_WOW6432
+#error Unsupported original BUILD_WOW6432 branch
+#endif
+#line 2629
+#ifdef GENERIC_INPUT
+#error Unsupported original GENERIC_INPUT branch
+#endif
+

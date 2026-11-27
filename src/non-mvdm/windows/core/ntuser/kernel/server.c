@@ -507,6 +507,7 @@ CONST WORD gawEditWndProc[] = {
  * This array is for all the messages that need to be passed straight
  * across to the server for handling.
  */
+#line 594
 CONST WORD gawDefWindowMsgs[] = {
     WM_GETHOTKEY,
     WM_SETHOTKEY,
@@ -522,31 +523,38 @@ CONST WORD gawDefWindowMsgs[] = {
     WM_DRAWITEM,
     WM_KEYF1,
     WM_ISACTIVEICON,
-    WM_QUERYDRAGICON,
     WM_NCCREATE,
     WM_SETICON,
     WM_NCCALCSIZE,
     WM_NCPAINT,
     WM_NCACTIVATE,
     WM_NCMOUSEMOVE,
+    WM_NCRBUTTONUP,
     WM_NCRBUTTONDOWN,
+#ifndef LAME_BUTTON
     WM_NCLBUTTONDOWN,
+#endif // !LAME_BUTTON
     WM_NCLBUTTONUP,
     WM_NCLBUTTONDBLCLK,
     WM_KEYUP,
     WM_SYSKEYUP,
+#ifndef LAME_BUTTON
     WM_SYSCHAR,
     WM_SYSCOMMAND,
+#endif // !LAME_BUTTON
     WM_QUERYDROPOBJECT,
     WM_CLIENTSHUTDOWN,
     WM_SYNCPAINT,
     WM_PRINT,
     WM_GETICON,
-    WM_QUERYDRAGICON,
     WM_CONTEXTMENU,
     WM_SYSMENU,
     WM_INPUTLANGCHANGEREQUEST,
     WM_INPUTLANGCHANGE,
+    WM_UPDATEUISTATE,
+    WM_NCUAHDRAWCAPTION,
+    WM_NCUAHDRAWFRAME,
+    WM_UAHINIT,
     0
 };
 
@@ -555,6 +563,7 @@ CONST WORD gawDefWindowMsgs[] = {
  * code by the client.  DefWindowProcWorker returns 0 for all messages
  * that aren't in this array or the one above.
  */
+#line 649
 CONST WORD gawDefWindowSpecMsgs[] = {
     WM_ACTIVATE,
     WM_GETTEXT,
@@ -568,7 +577,12 @@ CONST WORD gawDefWindowSpecMsgs[] = {
     WM_VKEYTOITEM,
     WM_CHARTOITEM,
     WM_KEYDOWN,
+#ifdef LAME_BUTTON
+#error Unsupported original LAME_BUTTON branch
+#endif // LAME_BUTTON
+#line 666
     WM_SYSKEYDOWN,
+    WM_UNICHAR,
     WM_DROPOBJECT,
     WM_WINDOWPOSCHANGING,
     WM_WINDOWPOSCHANGED,
@@ -581,16 +595,34 @@ CONST WORD gawDefWindowSpecMsgs[] = {
     WM_CTLCOLORDLG,
     WM_CTLCOLORSCROLLBAR,
     WM_NCHITTEST,
+#ifdef LAME_BUTTON
+#error Unsupported original LAME_BUTTON branch
+#endif // LAME_BUTTON
+#line 683
+    WM_NCXBUTTONUP,
     WM_CTLCOLORSTATIC,
     WM_NOTIFYFORMAT,
     WM_DEVICECHANGE,
     WM_POWERBROADCAST,
     WM_MOUSEWHEEL,
-#ifdef FE_IME
-#error
-#line 596
-#endif
-#line 597
+    WM_XBUTTONUP,
+    WM_IME_KEYDOWN,
+    WM_IME_KEYUP,
+    WM_IME_CHAR,
+    WM_IME_COMPOSITION,
+    WM_IME_STARTCOMPOSITION,
+    WM_IME_ENDCOMPOSITION,
+    WM_IME_COMPOSITIONFULL,
+    WM_IME_SETCONTEXT,
+    WM_IME_CONTROL,
+    WM_IME_NOTIFY,
+    WM_IME_SELECT,
+    WM_IME_SYSTEM,
+    WM_LPKDRAWSWITCHWND,
+    WM_QUERYDRAGICON,
+    WM_CHANGEUISTATE,
+    WM_QUERYUISTATE,
+    WM_APPCOMMAND,
     0
 };
 

@@ -13,6 +13,7 @@ LONG WINAPI wow_original_default_window_proc(PWND, UINT, WPARAM, LPARAM, DWORD);
 /* Actual clmsg and rtl/wow bodies. Dispatch/graph inputs are explicit
  * boundary doubles; this is not native USER or guest acceptance. */
 SHAREDINFO wow_default_message_state;
+HMODULE ghmodUserApiHook;
 __declspec(thread) wow_default_context *wow_default_current;
 HBRUSH wow_edit_system_brushes[WOW_EDIT_COLOR_COUNT];
 HBRUSH wow_edit_gray_brush;
@@ -76,6 +77,16 @@ int __cdecl main(void)
     CHECK(GetBkColor(dc)==RGB(11,22,33) && GetTextColor(dc)==RGB(44,55,66));
     CHECK(wow_original_default_window_proc(&child,WM_KEYDOWN,VK_F10,0,FALSE)==71 && native_calls==1);
     CHECK(wow_original_default_window_proc(&child,WM_USER+8,0,0,FALSE)==0);
+    /* XP client gates remain original; actual icon ownership is native USER. */
+    CHECK(wow_original_default_window_proc(&child,WM_QUERYDRAGICON,0,0,FALSE)==0);
+    CHECK(native_calls==1);
+    ClrWF(&child,WFWIN40COMPAT);
+    SetWF(&child,WFSERVERSIDEPROC);
+    CHECK(wow_original_default_window_proc(&child,WM_QUERYDRAGICON,0,0,FALSE)==0);
+    CHECK(native_calls==1);
+    ClrWF(&child,WFSERVERSIDEPROC);
+    CHECK(wow_original_default_window_proc(&child,WM_QUERYDRAGICON,0,0,FALSE)==71);
+    CHECK(native_calls==2);
     destroy_on_move=TRUE;
     (void)wow_original_default_window_proc(&child,WM_WINDOWPOSCHANGED,0,(LPARAM)&position,FALSE);
     CHECK(last_message==WM_MOVE && TestWF(&child,WFDESTROYED));

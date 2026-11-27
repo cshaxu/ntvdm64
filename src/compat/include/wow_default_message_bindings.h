@@ -39,6 +39,19 @@
 #define WM_SYSTIMER                     0x0118
 #endif
 
+/* XP winuserp.h message values used by the original default tables. */
+#ifndef WM_LPKDRAWSWITCHWND
+#define WM_LPKDRAWSWITCHWND             0x008C
+#endif
+#ifndef WM_NCUAHDRAWCAPTION
+#define WM_NCUAHDRAWCAPTION             0x00AE
+#endif
+#ifndef WM_NCUAHDRAWFRAME
+#define WM_NCUAHDRAWFRAME               0x00AF
+#endif
+#ifndef WM_UAHINIT
+#define WM_UAHINIT                      0x031B
+#endif
 /* Original table storage is opaque to B; only original-layout providers
  * and their original consumers may dereference it. */
 struct tagSHAREDINFO;

@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime35 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime37 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -146,14 +146,8 @@ delta0files/+1exact/+1same/-1different/+11points/-1266lines.1262XP/63OpenNT.
 N02117/17 complete; overall57/159, S15 9/14. Six mirror files completed since
 P26 Full24/24. Next N022 USER client in DIR order; original guest unchanged.
 
-[P30 N022 button](../etc/evidence/t485-s1/n022-button.md) delivers XP button,
-paired layout/message prerequisites and native UI-state binding. Cached full
-build, runtime31 dual13-image26hash, controls38/38 and real SOL Options pass.
-Census1325files,777exact,788nonerror same/537different,7798points/131529lines;
-delta0files/0exact/0same/0different,+14points/-3693lines.1263XP/62OpenNT.
-N0221/39 complete; overall57/159, S15 9/14. Nine mirror files since P26 Full24/24;
-next cldib.c triggers Full. Paired user.h/server.c remain OpenNT until migrated.
-Original guest unchanged.
+[P30 N022 button](../etc/evidence/t485-s1/n022-button.md) delivered runtime31;
+its receipt retains the paired ABI, tests, census and checkpoint counts.
 
 [P31 N022 bitmap](../etc/evidence/t485-s1/n022-dib.md) delivered runtime32:
 XP scaling exception handling and rounded palette conversion retained;
@@ -181,6 +175,14 @@ resource/validation/RTL and real SOL Options passed. N0224/39; overall57/159;
 S15 9/14. Census1329files,781exact,792nonerror same/537different,
 7807points/126894lines; delta0files/0exact/0same/0different,+2points/-819lines.
 1270XP/59OpenNT. Nine mirrors since P31 Full; next clmsg.c triggers Full.
+
+[P34 N022 messages](../etc/evidence/t485-s1/n022-message.md) delivered runtime37:
+XP default dispatch and paired tables/ABI, native IMM/UI/icon owner boundaries.
+Cached build, dual13-image26hash, controls39/39 including one corrected test
+retry passed; Full24/24 runtime36 retained after timestamp-only proof. N0225/39; overall57/159; S15 9/14.
+Census1329files,781exact,792nonerror same/537different,
+7821points/126901lines; delta0files/0exact/0same/0different,
++14points/+7lines.1271XP/58OpenNT. Ten-file checkpoint resets.
 
 ## S14 Closure Record
 

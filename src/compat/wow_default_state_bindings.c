@@ -21,6 +21,7 @@ BOOL WINAPI wow_default_capture_context(wow_default_context *context, UINT messa
     if (message == WM_CTLCOLOR ||
             (message >= WM_CTLCOLORMSGBOX && message <= WM_CTLCOLORSTATIC)) {
         if (!wow_edit_drawing_ready()) return FALSE;
+        context->server.hbrGray = wow_edit_gray_brush;
         for (i = 0; i < WOW_EDIT_COLOR_COUNT; ++i)
             context->server.argbSystem[i] = GetSysColor(i);
         if (message == WM_CTLCOLORSCROLLBAR) {
@@ -33,7 +34,7 @@ BOOL WINAPI wow_default_capture_context(wow_default_context *context, UINT messa
             if (planes <= 0 || bits <= 0) {
                 SetLastError(ERROR_INVALID_DATA); return FALSE;
             }
-            context->screen.BitCount = (UINT)planes * (UINT)bits;
+            context->server.BitCount = (UINT)planes * (UINT)bits;
         }
     }
     SetLastError(error);

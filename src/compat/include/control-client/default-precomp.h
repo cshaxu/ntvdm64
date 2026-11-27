@@ -3,6 +3,7 @@
 /* OPENNT-HOST-089/090: finite environment for the original clmsg worker.
  * No EDIT context or native private USER layout belongs to this entry. */
 #include "wow_user_client_view_layout.h"
+#include <windowsx.h>
 #define WOW_ORIGINAL_CLIENT_HANDLES
 #include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_CLIENT_HANDLES
@@ -17,6 +18,8 @@ typedef int (WINAPI *GENERICPROC)();
 #define GetChildParent(pwnd) (TestwndChild(pwnd) ? pwnd->spwndParent : NULL)
 #define DO_DROPFILE 0x454C4946L
 #define WFMAXIMIZED             0x0F01
+/* XP user.h: ExStyle byte 2, WS_EX_LAYOUTRTL; retained WND offset unchanged. */
+#define WEFLAYOUTRTL            0x0A40
 #define SWP_STATECHANGE     0x8000
 #define SWP_NOCLIENTSIZE    0x0800
 #define SWP_NOCLIENTMOVE    0x1000
@@ -24,4 +27,6 @@ typedef int (WINAPI *GENERICPROC)();
 #define WCSToMB(pUnicodeString, cbUnicodeChar, ppAnsiString, nAnsiChar, bAllocateMem) \
     WCSToMBEx(0, pUnicodeString, cbUnicodeChar, ppAnsiString, nAnsiChar, bAllocateMem)
 BOOL _GetClientRect(PWND, LPRECT);
+extern HMODULE ghmodUserApiHook;
+LRESULT RealDefWindowProcWorker(PWND, UINT, WPARAM, LPARAM, DWORD);
 #endif

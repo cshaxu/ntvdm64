@@ -57,8 +57,7 @@ BOOL WINAPI wow_window_words_creation_facts(wow_window_words_binding *binding,
 LONG WINAPI wow_default_CsSendMessage(HWND window, UINT message, WPARAM wp,
     LPARAM lp, DWORD extra, DWORD function, BOOL ansi)
 {
-    if (message == WM_UPDATEUISTATE || message == WM_CHANGEUISTATE ||
-            message == WM_QUERYUISTATE) {
+    if (message != WM_CTLCOLORSTATIC) {
         CHECK(window == state.head.h && wp == 73 && lp == 91 && extra == 0 &&
             function == FNID_DEFWINDOWPROC && ansi == 1);
         CHECK(GetLastError() == 456);
@@ -233,10 +232,16 @@ int main(void)
         caught = TRUE;
     }
     CHECK(caught && native_calls == 2 && !wow_default_current);
-    /* XP controls must use the one native UI-state owner. No name lock,
+    /* XP controls must use the native UI-state/IME owner. No name lock,
      * original default callback or surviving snapshot on return/exception. */
     {
-        const UINT ui_messages[] = {WM_UPDATEUISTATE, WM_CHANGEUISTATE, WM_QUERYUISTATE};
+        const UINT ui_messages[] = {
+            WM_UPDATEUISTATE, WM_CHANGEUISTATE, WM_QUERYUISTATE,
+            WM_IME_CHAR, WM_IME_COMPOSITION,
+            WM_IME_STARTCOMPOSITION, WM_IME_ENDCOMPOSITION, WM_IME_NOTIFY,
+            WM_IME_REQUEST, WM_IME_SYSTEM, WM_IME_SETCONTEXT, WM_IME_SELECT,
+            WM_IME_COMPOSITIONFULL
+        };
         int before = calls, native_before = native_calls;
         native_raises = FALSE;
         for (i = 0; i < ARRAYSIZE(ui_messages); ++i) {
@@ -244,7 +249,7 @@ int main(void)
             CHECK(wow_default_window_proc(&state, ui_messages[i], 73, 91, 1) == 124);
             CHECK(calls == before && !locked && !wow_default_current);
         }
-        CHECK(native_calls == native_before + 3);
+        CHECK(native_calls == native_before + ARRAYSIZE(ui_messages));
         native_raises = TRUE;
         caught = FALSE;
         __try {

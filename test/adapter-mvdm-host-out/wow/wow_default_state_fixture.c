@@ -7,10 +7,13 @@ __declspec(thread) wow_default_context *wow_default_current;
 static int failures;
 #define CHECK(x) do { if (!(x)) { ++failures; printf("FAIL %d: %s\n", __LINE__, #x); } } while (0)
 
-int main(void)
+int __cdecl main(void)
 {
     wow_default_context context;
     unsigned i;
+    static const wow_default_message_provider provider = {
+        InitMessageTables, wow_default_message_copy, wow_default_message_reset };
+    CHECK(wow_default_messages_bind(&provider));
     SetLastError(456);
     CHECK(wow_default_capture_context(&context, WM_CTLCOLOREDIT));
     CHECK(GetLastError() == 456 && !wow_default_current);
@@ -18,10 +21,10 @@ int main(void)
     for (i = 0; i < WOW_EDIT_COLOR_COUNT; ++i)
         CHECK(context.server.argbSystem[i] == GetSysColor(i) &&
             wow_edit_system_brushes[i] == GetSysColorBrush(i));
-    CHECK(wow_edit_gray_brush != NULL);
+    CHECK(wow_edit_gray_brush != NULL && context.server.hbrGray == wow_edit_gray_brush);
     SetLastError(789);
     CHECK(wow_default_capture_context(&context, WM_CTLCOLORSCROLLBAR));
-    CHECK(context.screen.BitCount > 0 && GetLastError() == 789);
+    CHECK(context.server.BitCount > 0 && GetLastError() == 789);
     {
         int border = -1;
         CHECK(SystemParametersInfoW(SPI_GETBORDER, 0, &border, 0));

@@ -1,0 +1,64 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 781,
+    "nonerror_identical": 792,
+    "nonerror_different": 537,
+    "nonerror_points": 7807,
+    "nonerror_lines": 126894
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 781,
+    "nonerror_identical": 792,
+    "nonerror_different": 537,
+    "nonerror_points": 7821,
+    "nonerror_lines": 126901
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 14,
+    "nonerror_lines": 7
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "before_points": 1,
+      "before_lines": 2033,
+      "after_points": 15,
+      "after_lines": 1997,
+      "exclusions": 6
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_points": 1,
+      "before_lines": 4693,
+      "after_points": 1,
+      "after_lines": 4693,
+      "exclusions": 17
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_points": 1,
+      "before_lines": 5161,
+      "after_points": 1,
+      "after_lines": 5161,
+      "exclusions": 24
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "before_points": 1,
+      "before_lines": 2967,
+      "after_points": 1,
+      "after_lines": 3010,
+      "exclusions": 15
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1271,
+    "OpenNT": 58
+  }
+}

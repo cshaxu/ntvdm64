@@ -1386,8 +1386,8 @@ void DrawDiagonal(HDC hdc, LPRECT lprc, HBRUSH hbrTL, HBRUSH hbrBR, UINT flags);
 void FillTriangle(HDC hdc, LPRECT lprc, HBRUSH hbr, UINT flags);
 
 BOOL   _ClientFreeLibrary(HANDLE hmod);
-DWORD  _ClientGetListboxString(PWND pwnd, UINT msg, DWORD wParam, LPSTR lParam,
-        DWORD xParam, PROC xpfn);
+DWORD  _ClientGetListboxString(PWND pwnd, UINT msg, WPARAM wParam, LPSTR lParam,
+        ULONG_PTR xParam, PROC xpfn);
 #line 1326
 
 

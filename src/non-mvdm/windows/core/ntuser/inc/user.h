@@ -2542,7 +2542,7 @@ extern HBRUSH   ghbrGray;
 #endif
 #if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
 #line 2543
-DWORD GetCPD(PVOID pWndOrCls, DWORD options, DWORD dwData);
+ULONG_PTR GetCPD(KERNEL_PVOID pWndOrCls, DWORD options, ULONG_PTR dwData);
 
 BOOL TestWindowProcess(PWND pwnd);
 DWORD GetAppCompatFlags(PTHREADINFO pti);

@@ -65,12 +65,25 @@ static LONG invoke_default(wow_window_words_binding *binding, struct tagWND * st
     struct tagWND * locked;
     LONG result = 0;
     DWORD error = GetLastError();
-    /* Native USER owns UI-state propagation and input-modality policy.
-     * Do not maintain a second copy in the retained original WND view. */
-    if (message == WM_UPDATEUISTATE || message == WM_CHANGEUISTATE ||
-            message == WM_QUERYUISTATE)
+    /* Native USER owns UI-state propagation and its IMM context. The
+     * retained WND is not a native IMEUI/CLIENTINFO object. */
+    switch (message) {
+    case WM_UPDATEUISTATE:
+    case WM_CHANGEUISTATE:
+    case WM_QUERYUISTATE:
+    case WM_IME_CHAR:
+    case WM_IME_COMPOSITION:
+    case WM_IME_STARTCOMPOSITION:
+    case WM_IME_ENDCOMPOSITION:
+    case WM_IME_NOTIFY:
+    case WM_IME_REQUEST:
+    case WM_IME_SYSTEM:
+    case WM_IME_SETCONTEXT:
+    case WM_IME_SELECT:
+    case WM_IME_COMPOSITIONFULL:
         return wow_default_CsSendMessage(wow_window_access_current()->window_handle(state),
             message, wp, lp, 0, wow_window_access_current()->default_function, ansi);
+    }
     if (message != WM_GETTEXT && message != WM_GETTEXTLENGTH)
         return default_provider(state, message, wp, lp, ansi);
     /* The original caller's ThreadLock equivalent already retains this

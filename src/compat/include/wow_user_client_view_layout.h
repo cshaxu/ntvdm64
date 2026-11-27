@@ -3,6 +3,7 @@
 
 #include <windows.h>
 #include <stddef.h>
+#include "non-mvdm/public/internal/windows/inc/w32w64.h"
 
 /* Fixed x86 NT4 USER client ABI, not the current host USER internals. Keep
  * the original structure bodies in their original mirror owner. This header
