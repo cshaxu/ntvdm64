@@ -2031,6 +2031,7 @@ post-publication targeted checks.
 - [N002 XP user-buffer probe](evidence/t485-s1/n002.md).
 
 - [N003 XP RTL migration](evidence/t485-s1/n003.md).
+- [N004 XP BaseClient migration](evidence/t485-s1/n004.md).
 
 - [S5 P4 DPMI ownership and fullscreen verification](evidence/t485-s1/s5-p4-dpmi-ownership.md).
 

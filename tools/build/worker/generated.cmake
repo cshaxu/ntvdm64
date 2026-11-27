@@ -55,4 +55,4 @@ ntvdm_source_projection(text-video-owner.inc "${NTVDM_REPO}/src/mvdm-host/softpc
 ntvdm_guest_memory_projection(guest-memory-coordination.c "#line 1960")
 ntvdm_guest_memory_projection(guest-memory-coordination-core.c "#define MVDM_SOFTPC_GUEST_MEMORY_COPY_CHUNK")
 ntvdm_source_projection(generated/base-request-owner.inc "${NTVDM_REPO}/src/non-mvdm/base/win32/client/vdm.c"
-  "/* DIVERGENCE(NON-MVDM-DIV-BASE-REQUEST)" "#line 304" "" FALSE)
+  "/* DIVERGENCE(NON-MVDM-DIV-BASE-REQUEST)" "VOID\nAPIENTRY\nVDMOperationStarted" "" FALSE)

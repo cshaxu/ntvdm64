@@ -1,0 +1,229 @@
+{
+  "measurement": {
+    "before_vs_OpenNT": {
+      "points": 1,
+      "lines": 6087,
+      "exclusions": [
+        {
+          "original": [
+            260,
+            267
+          ],
+          "current_error": 291,
+          "guard": "#ifdef _MIPS_"
+        },
+        {
+          "original": [
+            1085,
+            1148
+          ],
+          "current_error": 1195,
+          "guard": "#ifdef OLD_CFG_BASED"
+        }
+      ]
+    },
+    "after_vs_XP": {
+      "points": 16,
+      "lines": 239,
+      "exclusions": [
+        {
+          "original": [
+            266,
+            273
+          ],
+          "current_error": 284,
+          "guard": "#ifdef MIPS"
+        },
+        {
+          "original": [
+            1129,
+            1192
+          ],
+          "current_error": 1223,
+          "guard": "#ifdef OLD_CFG_BASED"
+        }
+      ]
+    },
+    "delta_points": 15,
+    "delta_lines": -5848,
+    "rule": "byte sensitive LF lines, retain EOF/#line/conditions; exclude only two proved error bodies"
+  },
+  "points": [
+    {
+      "id": "N004-01",
+      "xp_line": 21,
+      "local_line": 21,
+      "added": 5,
+      "removed": 2,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "standalone ABI includes",
+      "evidence": "Full basedll/apcompat assumes an entire Kernel32 build; selected objects use existing native ABI headers. Full build passes with actual product selections.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-02",
+      "xp_line": 25,
+      "local_line": 28,
+      "added": 15,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "original prototypes and classifier selection",
+      "evidence": "Use original vdm.h; retain existing standalone last-error and classifier boundary. No native Kernel32 replacement.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-03",
+      "xp_line": 275,
+      "local_line": 286,
+      "added": 1,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "original line restoration",
+      "evidence": "Restores line 275 inside the selected else branch after excluded MIPS body; conditional frame unchanged.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-04",
+      "xp_line": 327,
+      "local_line": 339,
+      "added": 77,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "command selection and request owner",
+      "evidence": "Existing C request-layout decode and command-state helpers feed the sole B transport. Existing request lifecycle fixture verifies exact sizes, completion and cleanup.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-05",
+      "xp_line": 452,
+      "local_line": 541,
+      "added": 3,
+      "removed": 1,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "paired WOW transport pending N006",
+      "evidence": "Current srvvdm.c and BaseDecodeVdmRequest use ConsoleHandle=-1 to select WOW. Revisit with paired XP server, not independently.",
+      "disposition": "retained existing boundary pending paired review"
+    },
+    {
+      "id": "N004-06",
+      "xp_line": 793,
+      "local_line": 884,
+      "added": 4,
+      "removed": 1,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "WOW exit and startup-no-op identity",
+      "evidence": "Current server exit selector and existing startup-no-op marker remain required; paired N006 review.",
+      "disposition": "retained existing boundary pending paired review"
+    },
+    {
+      "id": "N004-07",
+      "xp_line": 1193,
+      "local_line": 1224,
+      "added": 1,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "original line restoration",
+      "evidence": "Restores line 1193 after excluded OLD_CFG_BASED body.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-08",
+      "xp_line": 1194,
+      "local_line": 1226,
+      "added": 1,
+      "removed": 100,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "package config provider",
+      "evidence": "Existing compat/base_vdm_config.c owns immutable package paths; native WOW registry templates are not product inputs. XP default reservation adopted.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-09",
+      "xp_line": 2252,
+      "local_line": 2185,
+      "added": 2,
+      "removed": 1,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "private process-parameters ABI",
+      "evidence": "Existing private PEB carrier supplies process-owned DesktopInfo; cannot cast its layout as native PRTL_USER_PROCESS_PARAMETERS.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-10",
+      "xp_line": 2340,
+      "local_line": 2274,
+      "added": 4,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "classifier object boundary",
+      "evidence": "Preserve original BaseIsDosApplication in classifier objects; do not link command-only dependencies into classifier.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-11",
+      "xp_line": 2403,
+      "local_line": 2341,
+      "added": 4,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "command object boundary",
+      "evidence": "Existing command object composes XP config construction and controls; native API object is separate.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-12",
+      "xp_line": 2505,
+      "local_line": 2447,
+      "added": 2,
+      "removed": 1,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "package image boundary",
+      "evidence": "OpenNtBaseVdmImageEnd handles the bound package path instead of assuming a literal system32/ntvdm suffix; actual lifecycle fixture covers spaces and session arguments.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-13",
+      "xp_line": 2695,
+      "local_line": 2638,
+      "added": 4,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "native path implementation boundary",
+      "evidence": "Keep original native path functions in source; standalone objects import host Kernel32 APIs, not duplicate them.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-14",
+      "xp_line": 3067,
+      "local_line": 3014,
+      "added": 4,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "environment object boundary",
+      "evidence": "Original environment functions remain shared by command/environment objects; environment-only object explicitly selects this profile.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-15",
+      "xp_line": 3376,
+      "local_line": 3327,
+      "added": 4,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "native path implementation boundary",
+      "evidence": "Keep unused XP long-path functions intact in full native composition; exclude from standalone object selection.",
+      "disposition": "retained necessary boundary"
+    },
+    {
+      "id": "N004-16",
+      "xp_line": 4007,
+      "local_line": 3963,
+      "added": 2,
+      "removed": 0,
+      "file": "src/non-mvdm/base/win32/client/vdm.c",
+      "purpose": "native path selection close",
+      "evidence": "Closes same native API selection; retains XP original trailing content.",
+      "disposition": "retained necessary boundary"
+    }
+  ]
+}

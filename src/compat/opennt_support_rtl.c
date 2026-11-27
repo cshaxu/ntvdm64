@@ -101,6 +101,8 @@ static OPENNT_SUPPORT_THREAD_STATE *opennt_support_thread(void)
             state->Parameters.ImagePathName.Length = (USHORT)(imageCharacters * sizeof(WCHAR));
         state->Parameters.ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
         state->Parameters.WindowFlags = startup.dwFlags;
+        /* GetStartupInfo strings remain owned by the process. */
+        RtlInitUnicodeString(&state->Parameters.DesktopInfo, startup.lpDesktop);
         if (state->Parameters.Environment == NULL) (void)OpenNtRtlRefreshEnvironmentSnapshot();
         state->Peb.ProcessParameters = &state->Parameters;
         state->Peb.ProcessHeap = GetProcessHeap();

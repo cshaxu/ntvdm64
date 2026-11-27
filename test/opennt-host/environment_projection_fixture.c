@@ -16,6 +16,8 @@ int main(void)
     UNICODE_STRING explicitUnicode;
     UNICODE_STRING clonedUnicode;
     BOOL ok;
+    MEMORY_BASIC_INFORMATION memory;
+    PVOID explicitAllocation, clonedAllocation;
 
     if (mvdm_base_vdm_environment_prepare(NULL) ||
         GetLastError() != ERROR_INVALID_PARAMETER) return 1;
@@ -39,7 +41,18 @@ int main(void)
     ok = explicitUnicode.Length == clonedUnicode.Length &&
         memcmp(explicitUnicode.Buffer, clonedUnicode.Buffer,
             explicitUnicode.Length) == 0;
+    explicitAllocation = explicitUnicode.Buffer;
+    clonedAllocation = clonedUnicode.Buffer;
+    if (!VirtualQuery(explicitAllocation, &memory, sizeof(memory)) ||
+        memory.Type != MEM_PRIVATE || memory.AllocationBase != explicitAllocation) return 8;
     (void)BaseDestroyVDMEnvironment(&explicitAnsi, &explicitUnicode);
     (void)BaseDestroyVDMEnvironment(&clonedAnsi, &clonedUnicode);
+    if (!VirtualQuery(explicitAllocation, &memory, sizeof(memory)) ||
+        memory.State != MEM_FREE) return 9;
+    if (!VirtualQuery(clonedAllocation, &memory, sizeof(memory)) ||
+        memory.State != MEM_FREE) return 10;
+    SetLastError(ERROR_SUCCESS);
+    if (BaseCreateVDMEnvironment(NULL, NULL, &explicitUnicode) ||
+        GetLastError() != ERROR_INVALID_PARAMETER) return 11;
     return ok ? 0 : 6;
 }

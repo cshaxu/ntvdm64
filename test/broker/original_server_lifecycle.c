@@ -690,7 +690,7 @@ int main(int argc, char **argv)
         }
         CHECK(BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_DOS,&commandLine,&reserve));
         CHECK(!wcscmp(commandLine.Buffer,L"\"O:\\package with spaces\\ntvdm.exe\" -f"));
-        CHECK(reserve==16*1024*1024);
+        CHECK(reserve==32*1024*1024);
         CHECK(HeapFree(GetProcessHeap(),0,commandLine.Buffer));
         CHECK(BaseGetVdmConfigInfo(NULL,0x12ab,BINARY_TYPE_DOS,&commandLine,&reserve));
         CHECK(!wcscmp(commandLine.Buffer,L"\"O:\\package with spaces\\ntvdm.exe\" -f -i12ab"));

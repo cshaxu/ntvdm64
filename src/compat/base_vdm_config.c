@@ -47,7 +47,7 @@ BOOL BaseGetVDMKeyword(LPWSTR keyword, LPSTR output, LPDWORD capacity,
     if (length>=*capacity) return FALSE;
     memcpy(output,value,length+1);
     *capacity=(DWORD)length;
-    *vdmSize=16L*1024L*1024L; /* Original BaseGetVDMKeyword reservation. */
+    *vdmSize=32L*1024L*1024L; /* XP BaseGetVDMKeyword reservation. */
     return TRUE;
 }
 

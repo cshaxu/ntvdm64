@@ -615,7 +615,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous, PWSTR command, int s
             result = ERROR_BUSY;
         goto done;
     }
-    if (type != SCS_32BIT_BINARY)
+    if (type != SCS_32BIT_BINARY && type != SCS_64BIT_BINARY)
     {
         result = ERROR_NOT_SUPPORTED;
         goto done;

@@ -8,7 +8,7 @@ static BOOL read_dos(char *out, DWORD *size)
 {
     DWORD reserve = 0;
     BOOL result = BaseGetVDMKeyword(CMDLINE, out, size, DOSSIZE, &reserve);
-    if (result) CHECK(reserve == 16UL * 1024 * 1024);
+    if (result) CHECK(reserve == 32UL * 1024 * 1024);
     return result;
 }
 static DWORD WINAPI independent_thread(void *unused)

@@ -14,6 +14,12 @@ struct _BASE_API_MSG;
 #include "base_transport.h"
 void BaseDecodeVdmRequest(void *, ULONG, ULONG, ntvdm_base_request *);
 void BaseReadVdmCommandState(const ntvdm_base_request *, LONG, ntvdm_base_command_state *);
+#ifndef STATUS_ACCESS_DENIED
+#define STATUS_ACCESS_DENIED ((NTSTATUS)0xC0000022L)
+#endif
+#ifndef STATUS_OBJECT_PATH_INVALID
+#define STATUS_OBJECT_PATH_INVALID ((NTSTATUS)0xC0000039L)
+#endif
 #ifndef STATUS_PORT_DISCONNECTED
 #define STATUS_PORT_DISCONNECTED ((NTSTATUS)0xC0000037L)
 #endif

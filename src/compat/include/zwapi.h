@@ -17,4 +17,11 @@ NTSYSAPI NTSTATUS NTAPI ZwQueryVirtualMemory(HANDLE ProcessHandle,
     PVOID BaseAddress, ULONG MemoryInformationClass, PVOID MemoryInformation,
     SIZE_T MemoryInformationLength, PSIZE_T ReturnLength);
 
+/* XP BaseCreate/DestroyVDMEnvironment uses the equivalent Nt entry names. */
+NTSYSAPI NTSTATUS NTAPI NtAllocateVirtualMemory(HANDLE ProcessHandle,
+    PVOID *BaseAddress, ULONG_PTR ZeroBits, PSIZE_T RegionSize,
+    ULONG AllocationType, ULONG Protect);
+NTSYSAPI NTSTATUS NTAPI NtFreeVirtualMemory(HANDLE ProcessHandle,
+    PVOID *BaseAddress, PSIZE_T RegionSize, ULONG FreeType);
+
 #endif

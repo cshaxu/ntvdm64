@@ -158,7 +158,7 @@ worker_unit("obj/opennt-xactsrv/convert.obj" "${NTVDM_REPO}/src/non-mvdm/ds/neta
 worker_unit("obj/opennt-xactsrv/xsunicod.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/xactsrv/xsunicod.c" "${profile_32}")
 worker_unit("obj/opennt-xactsrv/auxdata.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/rap/auxdata.c" "${profile_32}")
 worker_unit("obj/opennt-xactsrv/parmnum.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/rap/parmnum.c" "${profile_32}")
-worker_unit("obj/opennt-base-vdm/vdm.obj" "${NTVDM_REPO}/src/non-mvdm/base/win32/client/vdm.c" "${profile_30}")
+worker_unit("obj/opennt-base-vdm/vdm.obj" "${NTVDM_REPO}/src/non-mvdm/base/win32/client/vdm.c" "${profile_30} /DOPENNT_BASE_CLIENT_VDM_ENVIRONMENT")
 worker_unit("obj/opennt-base-client/client.obj" "${NTVDM_REPO}/src/non-mvdm/base/win32/client/vdm.c" "${profile_33}")
 worker_unit("obj/opennt-base-client/classifier.obj" "${NTVDM_REPO}/src/non-mvdm/base/win32/client/vdm.c" "${profile_34}")
 worker_unit("obj/opennt-base-client/capture.obj" "${NTVDM_REPO}/src/non-mvdm/base/ntdll/csrutil.c" "${profile_35}")

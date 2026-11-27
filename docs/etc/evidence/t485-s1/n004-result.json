@@ -1,0 +1,1068 @@
+{
+  "task": "M0 T485 S14 P1 N004",
+  "status": "verified for S14 P1 delivery",
+  "delivered_directories_after_commit": 40,
+  "total_directories": 159,
+  "runtime": "build/t485-s14/runtime2",
+  "build_exit": 0,
+  "build_pid": 25012,
+  "dual_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "2C110FDAF64AD46C880838325BC8520C48068CA4E07C9DCB183937045C532D85",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "2C110FDAF64AD46C880838325BC8520C48068CA4E07C9DCB183937045C532D85",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "61A2773226C3EA317D520C19C1EC56DE465A5CD1B7E104D3E8535827C27EAD3D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "61A2773226C3EA317D520C19C1EC56DE465A5CD1B7E104D3E8535827C27EAD3D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "0FE4EE37FE768141700D749684361AB5D3056075D1678A5ECDE4102B929838DF",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "0FE4EE37FE768141700D749684361AB5D3056075D1678A5ECDE4102B929838DF",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "56B5A852116D45835854DD66C5C9DC0D19A37DA34DE84406F628FB946B324E33",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "56B5A852116D45835854DD66C5C9DC0D19A37DA34DE84406F628FB946B324E33",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "A5EBE47BEC800CCFA7809F99694BFB4DD91B016892836E0BF5954BA18FA7C74F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "A5EBE47BEC800CCFA7809F99694BFB4DD91B016892836E0BF5954BA18FA7C74F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "23AAB086743505A5765CB1DDFF6044B309335B94F738C39194B19EE052F2494B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "23AAB086743505A5765CB1DDFF6044B309335B94F738C39194B19EE052F2494B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "D546F03902F4863DE39CAE351B5857929DDDECF509F2A7DE40C2E1D9BD1F97BB",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "D546F03902F4863DE39CAE351B5857929DDDECF509F2A7DE40C2E1D9BD1F97BB",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "49BD37E5B043855A3B72D56EB6A7090D653564173F96328351260C9CC4EF5ED5",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "49BD37E5B043855A3B72D56EB6A7090D653564173F96328351260C9CC4EF5ED5",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "1ABD4CABA525270A873AA6A9F49D2EACD534C644D3B121B8197F531AE8FDCD97",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "1ABD4CABA525270A873AA6A9F49D2EACD534C644D3B121B8197F531AE8FDCD97",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "4916CB81736020DF6492653709BB376A29D82E6F2C4DB5D01A42F2660813E889",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "4916CB81736020DF6492653709BB376A29D82E6F2C4DB5D01A42F2660813E889",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "4AD2B170DDBB9F4D233CB86C00B5F1400DE8C008F5D958956DCD06687643B50F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "4AD2B170DDBB9F4D233CB86C00B5F1400DE8C008F5D958956DCD06687643B50F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "5612566BBE523D8C1D6E0120FF75B543BC4A2485355C190685E41F134D7C10B0",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "5612566BBE523D8C1D6E0120FF75B543BC4A2485355C190685E41F134D7C10B0",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "7A843BFC9B795FA3B4BD4CC2A58553D7CEE339CB9B6533F28E1FE42268E62BBE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "7A843BFC9B795FA3B4BD4CC2A58553D7CEE339CB9B6533F28E1FE42268E62BBE",
+      "pass": true
+    }
+  ],
+  "full": {
+    "passing_gates": 23,
+    "first_attempt": {
+      "Suite": "Full",
+      "ElapsedMs": 357296,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": true,
+      "PreparationMs": 25253,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1282,
+          "CleanupMs": 421,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-standard",
+          "ElapsedMs": 40759,
+          "CleanupMs": 298,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-enhanced",
+          "ElapsedMs": 69540,
+          "CleanupMs": 354,
+          "Passed": true
+        },
+        {
+          "Gate": "win95",
+          "ElapsedMs": 92413,
+          "CleanupMs": 370,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 17211,
+          "CleanupMs": 306,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 15678,
+          "CleanupMs": 376,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 16242,
+          "CleanupMs": 333,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 138,
+          "CleanupMs": 316,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 64847,
+          "CleanupMs": 322,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 10054,
+          "CleanupMs": 405,
+          "Passed": false
+        }
+      ]
+    },
+    "continuation": {
+      "Suite": "Full",
+      "ElapsedMs": 266955,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": true,
+      "PreparationMs": 21690,
+      "Gates": [
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 35767,
+          "CleanupMs": 331,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 38755,
+          "CleanupMs": 320,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14362,
+          "CleanupMs": 402,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 9562,
+          "CleanupMs": 347,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 1244,
+          "CleanupMs": 390,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12302,
+          "CleanupMs": 354,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 33299,
+          "CleanupMs": 384,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 40488,
+          "CleanupMs": 367,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3254,
+          "CleanupMs": 353,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 8445,
+          "CleanupMs": 391,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10310,
+          "CleanupMs": 321,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3458,
+          "CleanupMs": 335,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7593,
+          "CleanupMs": 348,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 21085,
+          "CleanupMs": 322,
+          "Passed": true
+        }
+      ]
+    },
+    "retained_gates": [
+      "guest-media",
+      "win31-standard",
+      "win31-enhanced",
+      "win95",
+      "startup-presentation",
+      "console-font-restore",
+      "console-input-batch",
+      "ntvdm-export-ordinals",
+      "wow-frontiers"
+    ],
+    "consolidated_gates": [
+      "guest-media",
+      "win31-standard",
+      "win31-enhanced",
+      "win95",
+      "startup-presentation",
+      "console-font-restore",
+      "console-input-batch",
+      "ntvdm-export-ordinals",
+      "wow-frontiers",
+      "Console-17",
+      "Window-17",
+      "rpc",
+      "native-gui",
+      "version-negatives",
+      "strict-dir",
+      "modern-edit-return",
+      "cooked-return",
+      "rapid-relaunch",
+      "interactive-relaunch",
+      "session-isolation",
+      "retirement-wiring",
+      "nested-window-handoff",
+      "dos4gw-nesticle"
+    ],
+    "failure": "runtime1 Console native-seven rejected XP SCS_64BIT_BINARY in Run16; stable retry failed and S13 control passed",
+    "repair": "Run16 accepts both original native binary classifications using same existing launch path",
+    "reuse_evidence": "build/t485-s14/n004/repair-package-comparison.json; all other 12 images equivalent except named metadata; earlier nine gates do not traverse changed native-class acceptance",
+    "console_case_reuse": [
+      "empty",
+      "native-zero",
+      "missing"
+    ],
+    "win95_boundary": "approved exit-one boundary; desktop and roundtrip pass, no zero-exit claim"
+  },
+  "targeted": {
+    "environment_projection": 0,
+    "guest_environment": 0,
+    "base_config_x86": 0,
+    "base_config_x64": 0,
+    "classifier_path_x86_cases": 3,
+    "classifier_path_x64_cases": 3,
+    "original_server_lifecycle": {
+      "fixture": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-server-lifecycle-test.exe",
+      "exit": 0,
+      "pid": 2988,
+      "media": [
+        {
+          "source": "dos/v86/cmd/mem/mem.exe",
+          "target": "MEM.EXE",
+          "sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB"
+        },
+        {
+          "source": "wow16/kernel31/retail3/krnl386.exe",
+          "target": "system32/KRNL386.exe",
+          "sha256": "BCED7650A5B5D7AC25955AB2A21BC53FF06DE1C35B25FAD0690390135B093A03"
+        },
+        {
+          "source": "wow16/write/WRITE.EXE",
+          "target": "system32/WRITE.EXE",
+          "sha256": "08EE1659788880FB593815FF9609BFE76743C1182D05E6702764BF3DFF68B30B"
+        }
+      ],
+      "sha256": "BABA4DB59EC408B3F859B6F55A1A55EF113EAEFE15863225192783804AE7F71E"
+    }
+  },
+  "mirror": {
+    "before_vs_OpenNT": {
+      "points": 1,
+      "lines": 6087,
+      "exclusions": [
+        {
+          "original": [
+            260,
+            267
+          ],
+          "current_error": 291,
+          "guard": "#ifdef _MIPS_"
+        },
+        {
+          "original": [
+            1085,
+            1148
+          ],
+          "current_error": 1195,
+          "guard": "#ifdef OLD_CFG_BASED"
+        }
+      ]
+    },
+    "after_vs_XP": {
+      "points": 16,
+      "lines": 239,
+      "exclusions": [
+        {
+          "original": [
+            266,
+            273
+          ],
+          "current_error": 284,
+          "guard": "#ifdef MIPS"
+        },
+        {
+          "original": [
+            1129,
+            1192
+          ],
+          "current_error": 1223,
+          "guard": "#ifdef OLD_CFG_BASED"
+        }
+      ]
+    },
+    "delta_points": 15,
+    "delta_lines": -5848,
+    "rule": "byte sensitive LF lines, retain EOF/#line/conditions; exclude only two proved error bodies"
+  },
+  "paired_basemsg": {
+    "original_blob": "54dcb0fdca14692d46cfc7c1fb5db2cf6b1314c0",
+    "before": {
+      "points": 1,
+      "lines": 578
+    },
+    "after": {
+      "points": 1,
+      "lines": 580
+    },
+    "batch_change": {
+      "points": 1,
+      "lines": 2
+    },
+    "source_sha256": "230c6f64f36c5c6965dffb834e90a49fcb66878b23f517d356e04b79faa9c656"
+  },
+  "package_equivalence": [
+    {
+      "name": "NTVDMD.DLL",
+      "equal_except_named_metadata": true,
+      "before_size": 16896,
+      "after_size": 16896,
+      "masked_before": [
+        [
+          264,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          12692,
+          4,
+          "export timestamp"
+        ],
+        [
+          12116,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          14532,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          264,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          12692,
+          4,
+          "export timestamp"
+        ],
+        [
+          12116,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          14532,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "VJOY.DLL",
+      "equal_except_named_metadata": true,
+      "before_size": 6144,
+      "after_size": 6144,
+      "masked_before": [
+        [
+          232,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          2660,
+          4,
+          "export timestamp"
+        ],
+        [
+          2632,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          4292,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          232,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          2660,
+          4,
+          "export timestamp"
+        ],
+        [
+          2632,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          4292,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "VCDEX.DLL",
+      "equal_except_named_metadata": true,
+      "before_size": 10752,
+      "after_size": 10752,
+      "masked_before": [
+        [
+          240,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          6532,
+          4,
+          "export timestamp"
+        ],
+        [
+          6484,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          8388,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          240,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          6532,
+          4,
+          "export timestamp"
+        ],
+        [
+          6484,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          8388,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "run16.exe",
+      "equal_except_named_metadata": false,
+      "before_size": 378368,
+      "after_size": 378368,
+      "masked_before": [
+        [
+          256,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          215236,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          374908,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          256,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          215236,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          374908,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "ntsrv.exe",
+      "equal_except_named_metadata": true,
+      "before_size": 479232,
+      "after_size": 479232,
+      "masked_before": [
+        [
+          256,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          301604,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          475260,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          256,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          301604,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          475260,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "ntcon.exe",
+      "equal_except_named_metadata": true,
+      "before_size": 424448,
+      "after_size": 424448,
+      "masked_before": [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          252164,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          420988,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          252164,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          420988,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "ntvdm.exe",
+      "equal_except_named_metadata": true,
+      "before_size": 2255360,
+      "after_size": 2255360,
+      "masked_before": [
+        [
+          280,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          1920548,
+          4,
+          "export timestamp"
+        ],
+        [
+          1783580,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          1983368,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          280,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          1920548,
+          4,
+          "export timestamp"
+        ],
+        [
+          1783580,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          1983368,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "ntvwm.exe",
+      "equal_except_named_metadata": true,
+      "before_size": 393728,
+      "after_size": 393728,
+      "masked_before": [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          227812,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          390268,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          227812,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          390268,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "ntmon.exe",
+      "equal_except_named_metadata": true,
+      "before_size": 169984,
+      "after_size": 169984,
+      "masked_before": [
+        [
+          256,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          148212,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          166524,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          256,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          148212,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          166524,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "WOW32.DLL",
+      "equal_except_named_metadata": true,
+      "before_size": 745472,
+      "after_size": 745472,
+      "masked_before": [
+        [
+          312,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          662580,
+          4,
+          "export timestamp"
+        ],
+        [
+          651268,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          708228,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          312,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          662580,
+          4,
+          "export timestamp"
+        ],
+        [
+          651268,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          708228,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "equal_except_named_metadata": true,
+      "before_size": 274944,
+      "after_size": 274944,
+      "masked_before": [
+        [
+          288,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          259412,
+          4,
+          "export timestamp"
+        ],
+        [
+          125268,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          266948,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          288,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          259412,
+          4,
+          "export timestamp"
+        ],
+        [
+          125268,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          266948,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "nthook32.dll",
+      "equal_except_named_metadata": true,
+      "before_size": 282112,
+      "after_size": 282112,
+      "masked_before": [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          269476,
+          4,
+          "export timestamp"
+        ],
+        [
+          134772,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          276092,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          269476,
+          4,
+          "export timestamp"
+        ],
+        [
+          134772,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          276092,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    },
+    {
+      "name": "nthook64.dll",
+      "equal_except_named_metadata": true,
+      "before_size": 328192,
+      "after_size": 328192,
+      "masked_before": [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          309860,
+          4,
+          "export timestamp"
+        ],
+        [
+          168916,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          324732,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "masked_after": [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          309860,
+          4,
+          "export timestamp"
+        ],
+        [
+          168916,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          324732,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ]
+    }
+  ],
+  "source_hashes": {
+    "src/compat/base_vdm_config.c": "1f3995dd3ecfd34332ef1475fd6625c88af81a0a589fc82fd0514a4cb6f598f4",
+    "src/compat/include/base_classifier.h": "fe2f2f0d55a90f0bd3e3221cfa0d5709e72523dde237f9bff06dceb98c9a912d",
+    "src/compat/include/base_client.h": "82ee4b167d999d73ebbbf262bf455d069b2f2e12cf18e29cc03ebab69ab19054",
+    "src/compat/include/opennt_support_thread.h": "1ffb544d2291ddaf72fae85b2a217fb593b109a04c9dc8e02d070cca405e2b66",
+    "src/compat/include/zwapi.h": "dc08be2eb2500885220901864cd422dc6343308fa50c0d29a006d050a83e5f9f",
+    "src/compat/opennt_support_rtl.c": "c80f80b889a686cac671990c66321d3c36c808c867e3aadae37e4d2967a06512",
+    "src/non-mvdm/README.md": "a9ac6e382adfe2f63c982261d0d9b38630856d5a0a03f389a716cab991679140",
+    "src/non-mvdm/base/win32/client/vdm.c": "c78522e418b3e3769cf6def10d7e77be29ac3474bcdac8f9d3a49560a5137381",
+    "src/non-mvdm/base/win32/inc/basemsg.h": "230c6f64f36c5c6965dffb834e90a49fcb66878b23f517d356e04b79faa9c656",
+    "src/run16-exe/main.c": "9031770632761a39af0346e663b3f124991bc5e83ce11f9e1e16eafb873ab57a",
+    "test/broker/original_server_lifecycle.c": "037c613600f20ce2619f783ac7b26e2c8e6a5a2cf737dec94eaad87cf05eb358",
+    "test/compat/base_vdm_config.c": "01a64d8bd3b3f5e964cfad0d8915b9f0735e5f6812c53a948f7aceb0d1f22230",
+    "test/opennt-host/environment_projection_fixture.c": "b82b6d023721da8004e26f961065d56f13d1d836a9464d043181b4298f39e915",
+    "tools/build/OriginalVdmConfig.cmake": "6e2edbf6fcccaa2745c506dcb0a968c89cacb2ebc2064e458e99ad616a7cf19b",
+    "tools/build/worker/generated.cmake": "7d87ec804be3858953f0b93b24e774398bfef748f01378e2edd24dd49bf08f32",
+    "tools/build/worker/units.cmake": "4deff0178760435aacb6696e75a72fef2bec2ac5a18f8883c04e6f6f129e7b46",
+    "src/non-mvdm/base/win32/client/vdm.h": "ae6fbba6cc8a5f8e1932588d4fb69d765145bb1fc8d3c1d0dc2eba0cc927f411"
+  }
+}

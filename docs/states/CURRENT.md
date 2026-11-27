@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S14** (Ordinary Mode). Resume N004-N012 after
 [S13 closure](../etc/evidence/t485-h-repair/s13-closure.md).
-Migration delivered39/159 directories: H001-H036 and N001-N003.
+Migration delivered40/159 directories: H001-H036 and N001-N004.
 The owner approved continuous execution; the [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S15-S20 and all remaining migration/capability obligations.
 
@@ -32,12 +32,17 @@ retains S15-S20 and all remaining migration/capability obligations.
 
 ## S14 Progress
 
-0/9 directories delivered in this S. Next N004:
-`src/non-mvdm/base/win32/client/vdm.c` (one existing file).
-Three-way inventory says both project and XP changed from OpenNT.
-Audit all existing retained adaptations, actual callers and XP changes before
-editing. N004 is the40/159 Full checkpoint, not yet delivered.
-
+1/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
+and [receipt](../etc/evidence/t485-s1/n004-result.json): XP vdm.c plus required
+original vdm.h; paired WOW registration field leads N005. Cached full build,
+dual13-image26hash publication, targeted tests and consolidated Full23/23 pass.
+First Full exposed Run16's rejection of XP's PE64 classification; one native
+acceptance condition now admits both32/64 through the existing launch path.
+Nine unaffected Full passes and three Console cases were retained; only failed
+and unexecuted cases continued. Runtime2 is the current published package.
+Nonerror vdm.c diff: OpenNT1point/6087lines -> XP16points/239lines; original LF
+restoration exposes residual points. Paired basemsg.h adds0points/2lines.
+S14 P1 is this N004 delivery. Next N005: Base declarations, in directory order.
 ## S13 Closure Record
 
 [Closure](../etc/evidence/t485-h-repair/s13-closure.md) and
@@ -56,21 +61,53 @@ no new runtime2 Full execution is claimed. Actual Win3.1 standard/enhanced and
 Win95 desktops pass; both enhanced Alt+Enter roundtrips preserve one KVM window.
 Win95 known exit-one boundary remains explicit. Product4a849ef9e is pushed.
 
-## Previous Delivery Evidence
+## S1 Closure Record
 
-- [S1 inventory and media](../etc/evidence/t485-s1/README.md).
-- [S2 H001-H008](../etc/evidence/t485-s1/h005-h008.md).
-- [S3 H009-H022](../etc/evidence/t485-s1/h022.md).
-- [S4 H023-H036](../etc/evidence/t485-s1/s4-closure.md).
-- [S5 N001-N003 and startup repairs](../etc/evidence/t485-s1/s5-p4-dpmi-ownership.md).
-- [S6 selector](../etc/evidence/t485-h-repair/s6-selector-investigation.md).
-- [S7 structural repairs](../etc/evidence/t485-h-repair/s7-progress.md).
-- [S8 format restoration](../etc/evidence/t485-h-repair/s8-progress.md).
-- [S9 CPU boundaries](../etc/evidence/t485-h-repair/s9-progress.md).
-- [S10 input/display](../etc/evidence/t485-h-repair/s10-progress.md).
-- [S11 WOW](../etc/evidence/t485-h-repair/s11-progress.md).
-- [S12 COMMAND/DEM/redirector](../etc/evidence/t485-h-repair/s12-progress.md).
-- [S13 detailed attempts](../etc/evidence/t485-h-repair/s13-progress.md).
+[Inventory, media qualification, H001 ABI evidence and rollback](../etc/evidence/t485-s1/README.md).
+
+## S2 Closure Record
+
+[H001-H008 delivery](../etc/evidence/t485-s1/h005-h008.md).
+
+## S3 Closure Record
+
+[H009-H022 delivery](../etc/evidence/t485-s1/h022.md).
+
+## S4 Closure Record
+
+[H023-H036 closure](../etc/evidence/t485-s1/s4-closure.md).
+
+## S5 Closure Record
+
+[S5 P4 repair and closure](../etc/evidence/t485-s1/s5-p4-dpmi-ownership.md).
+
+## S6 Closure Record
+
+[S6 selector ownership repair](../etc/evidence/t485-h-repair/s6-selector-investigation.md).
+
+## S7 Closure Record
+
+[S7 closure](../etc/evidence/t485-h-repair/s7-progress.md).
+
+## S8 Closure Record
+
+[S8 progress](../etc/evidence/t485-h-repair/s8-progress.md).
+
+## S9 Closure Record
+
+[S9 closure](../etc/evidence/t485-h-repair/s9-progress.md).
+
+## S10 Closure Record
+
+[S10 progress](../etc/evidence/t485-h-repair/s10-progress.md).
+
+## S11 Closure Record
+
+[S11 closure](../etc/evidence/t485-h-repair/s11-progress.md).
+
+## S12 Closure Record
+
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md).
 
 ## Recent M0 Closures
 
@@ -78,6 +115,11 @@ Win95 known exit-one boundary remains explicit. Product4a849ef9e is pushed.
 - [T483](../history/m0-t483-closure.md).
 - [T482](../history/m0-t482-closure.md).
 - [T481](../history/m0-t481-closure.md).
+
+## Recent Governance
+
+S14 N004 restores the required governance section omitted by the prior
+status compaction; the current delivery rechecks structure and links.
 
 ## Current Technical Baseline
 

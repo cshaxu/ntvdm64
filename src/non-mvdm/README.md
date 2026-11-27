@@ -2770,3 +2770,14 @@ Non-error user.h45points/110lines ->45points/113lines (+0points/+3lines), R2750.
 S20 P15: original C dialog and getset clients select original DIALOG layout
 after WND exists; B dialog-state interface only passes opaque DLG pointers.
 Non-error usercli45points/115lines ->45points/123lines (+0points/+8lines), R2751.
+
+## T485 S14 N004 XP BaseClient
+
+base/win32/client/vdm.c now follows fixed XP SP1 blob
+3286f88c2d8079d5e789bde9e866e4f6773dc243. Required vdm.h is the exact XP
+blob8b9fb21a07e34b93f56e4d3b8f857eadb7b06503. Existing standalone object
+selections, package configuration and paired pre-N006 WOW transport remain
+explicit. The N005 basemsg.h lead adds XP RegisterWowExec.ConsoleHandle.
+[Migration evidence](../../docs/etc/evidence/t485-s1/n004.md) and the
+[residual diff register](../../docs/etc/evidence/t485-s1/n004-diff.json) record
+original identities, remaining boundaries and final delivery status.
