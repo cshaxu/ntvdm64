@@ -1,0 +1,241 @@
+{
+  "task": "M0 T485 S15 P7 N016 final six",
+  "runtime": "build/t485-s15/runtime7",
+  "build_exit": 0,
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "5957C2FC057145082126D6691CE849CBB2F979B2DC40BD2520B2C8BED0E16F57",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "5957C2FC057145082126D6691CE849CBB2F979B2DC40BD2520B2C8BED0E16F57",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "53AE5E6B707004316935EAB0D614144592F15261352621A4451FC9B601DF36EC",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "53AE5E6B707004316935EAB0D614144592F15261352621A4451FC9B601DF36EC",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "51E4DC993F81E404EE29F2F381D995B38FFC364D250D15E5D2D4744BFB61B73C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "51E4DC993F81E404EE29F2F381D995B38FFC364D250D15E5D2D4744BFB61B73C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "0BA1EC5849469A43B9B53D623B407C23220A946479513EF8B9CF4A4C58FB669E",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "0BA1EC5849469A43B9B53D623B407C23220A946479513EF8B9CF4A4C58FB669E",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "4FF076FA46B202FD2868DB2137E9649B74C48495DF8ECF7D7D6D82F549FB95A1",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "4FF076FA46B202FD2868DB2137E9649B74C48495DF8ECF7D7D6D82F549FB95A1",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "1001C9DE35E940843EC4ADCBB88B7E34694CC6DB747CCBB0790FA9C03A1F6B8C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "1001C9DE35E940843EC4ADCBB88B7E34694CC6DB747CCBB0790FA9C03A1F6B8C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "22DF9D9612471255AF2E242D8B18B6920693C31AF0D464508C5CC2D4ADE57730",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "22DF9D9612471255AF2E242D8B18B6920693C31AF0D464508C5CC2D4ADE57730",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "51A0FB4961C655E4BD09630C8410DA39938AA781988CC4CD57188155D5004E8B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "51A0FB4961C655E4BD09630C8410DA39938AA781988CC4CD57188155D5004E8B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "74A5990EC19EC25E663DA1FA9767D0242290BE0F8D8B87A99C36EE4F0FE61D5B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "74A5990EC19EC25E663DA1FA9767D0242290BE0F8D8B87A99C36EE4F0FE61D5B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "3642305A2A9D242FA2C8C6E401D8B7FFD459269AB84C026C678CE987344D9991",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "3642305A2A9D242FA2C8C6E401D8B7FFD459269AB84C026C678CE987344D9991",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "5CDF0B5540114D2F0ADD9C90F7E2CAF3303C0E40C94C6BB4F2C106EF50B03520",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "5CDF0B5540114D2F0ADD9C90F7E2CAF3303C0E40C94C6BB4F2C106EF50B03520",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "C49DDC0BD22F98BBDD64F5638B82E11ECB4E4FF5C198A77AEC0E3EB4895DF427",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "C49DDC0BD22F98BBDD64F5638B82E11ECB4E4FF5C198A77AEC0E3EB4895DF427",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "3915470AAD91770742F3ED7416E9BEAFC06ABE04E2810E296FF2C93444D46B83",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "3915470AAD91770742F3ED7416E9BEAFC06ABE04E2810E296FF2C93444D46B83",
+      "pass": true
+    }
+  ],
+  "base_dispatch": "140 assertions PASS",
+  "rpc_reply": "PASS",
+  "command": "PASS missing: 0\nPASS native-seven: 0\nPASS native-eof: 0\nPASS mem: 1\nPASS guest-seven: 7\nPASS command-c-mem: 0\nPASS direct-seven: 7\n",
+  "original_lifecycle": "PASS: Check output-only fields omitted; Update original scalar inputs composed without resource values\nPASS: GetNext envelope excludes uninitialized output fields, validates truncation/generation and preallocates reply\nPASS: original DOS/WOW worker command construction, package path spaces, session ID and config rejection\nPASS XP capture bounds, pointer registration, overflow and nested local-message scope\nPASS: original stream copy/alias/close calls use receipt translation and actual pipe data\nPASS: original wait pair retains notification semantics, non-inheritance, original close and failed-delivery cleanup\nPASS: CheckVDM rejects unterminated text/environment and empty present buffers; original single-NUL empty environment accepted\nPASS: GetNext capacity overflow refused before mutation, storage zeroed, reply preallocated and release repeat-safe\nPASS: original PIF writes terminators despite zero returned lengths; copied payload preserves them\nPASS: native CheckVDM payload rejects USHORT overflow and capacity-only input without mutation\nPASS: nine source startup scalars roundtrip without native pointers/handles; absent and invalid forms checked\nPASS: original pair-wait delivery failure closes the created server event synchronously\nPASS: original partial stream failure retains mixed source/destination fields; no helper rollback\nPASS: original distinct/aliased stream delivery, duplicate alias close and cleared repeat cleanup\nPASS: original partial stream failure rolls back actual receipt without closing sender file\nPASS: production dispatch rejects unbound/short/long/unknown requests without consuming first-VDM state; trusted identity replaces input\nPASS: original BaseCheckVDM command/environment/startup capture, server ownership and allocation failure\nPASS: original shared-WOW admission rejects absent/wrong scope, accepts matching logon and undoes launch\nPASS: original DOS/WOW generation registration and termination cleanup, wrong generation/role rejection and repeat cleanup\nPASS: request-thread isolation, nested restoration and explicit unbind\nPASS: concurrent removal waits for original service lookup unlock\nPASS: real exited process remains referenced until explicit registered cleanup\nPASS: registered process ownership, duplicate/missing/pinned removal, empty teardown and sequence exhaustion\nPASS: original first-VDM, record/command/directory capacity, dispatch/completion, parent/worker events, reentry, empty-WOW, cleanup\n",
+  "wow": "OBSERVED WINMINE.EXE (not gameplay acceptance)\n\nresult=timeout\nexit=0x53504354\nsample-ms=4113\npid=21464 image=O:\\tmp\\nE17\\SYSTEM32\\ntvdm.exe alive=1\nwindow=0000000001260178 class=Minesweeper visible=1 text=Minesweeper\nwindow-utf16=0000000001260178 visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072\nwindow-geometry=0000000001260178 outer-ok=1 outer=-2,-45,235,-6 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900014 style=34CA0000 exstyle=00000100\nwindow-placement=0000000001260178 ok=1 iconic=1 show=2 normal=-2,-45,504,323\nwindow=0000000002840834 class=WOWFaxClass visible=0 text=\nwindow-utf16=0000000002840834 visible=0 class=0057004F00570046006100780043006C006100730073 text=\nwindow-geometry=0000000002840834 outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100\nwindow-placement=0000000002840834 ok=1 iconic=0 show=1 normal=0,0,136,39\nwindow=00000000046103CC class=WOWExecClass visible=0 text=WOWExec\nwindow-utf16=00000000046103CC visible=0 class=0057004F005700450078006500630043006C006100730073 text=0057004F00570045007800650063\nwindow-geometry=00000000046103CC outer-ok=1 outer=26,26,1306,761 client-ok=1 client=0,0,1264,696 dpi=96 class-brush=0000000000900010 style=06CF0000 exstyle=00000100\nwindow-placement=00000000046103CC ok=1 iconic=0 show=1 normal=26,26,1306,761\nwindow=0000000005F600AA class=IME visible=0 text=Default IME\nwindow-utf16=0000000005F600AA visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045\nwindow-geometry=0000000005F600AA outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000\nwindow-placement=0000000005F600AA ok=1 iconic=0 show=1 normal=0,0,0,0\nwindow=0000000002D106E0 class=IME visible=0 text=Default IME\nwindow-utf16=0000000002D106E0 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045\nwindow-geometry=0000000002D106E0 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000\nwindow-placement=0000000002D106E0 ok=1 iconic=0 show=1 normal=0,0,0,0\nsample-ms=8061\npid=21464 image=O:\\tmp\\nE17\\SYSTEM32\\ntvdm.exe alive=1\nwindow=0000000001260178 class=Minesweeper visible=1 text=Minesweeper\nwindow-utf16=0000000001260178 visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072\nwindow-geometry=0000000001260178 outer-ok=1 outer=-2,-45,235,-6 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900014 style=34CA0000 exstyle=00000100\nwindow-placement=0000000001260178 ok=1 iconic=1 show=2 normal=-2,-45,504,323\nwindow=0000000002840834 class=WOWFaxClass visible=0 text=\nwindow-utf16=0000000002840834 visible=0 class=0057004F00570046006100780043006C006100730073 text=\nwindow-geometry=0000000002840834 outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100\nwindow-placement=0000000002840834 ok=1 iconic=0 show=1 normal=0,0,136,39\nwindow=00000000046103CC class=WOWExecClass visible=0 text=WOWExec\nwindow-utf16=00000000046103CC visible=0 class=0057004F005700450078006500630043006C006100730073 text=0057004F00570045007800650063\nwindow-geometry=00000000046103CC outer-ok=1 outer=26,26,1306,761 client-ok=1 client=0,0,1264,696 dpi=96 class-brush=0000000000900010 style=06CF0000 exstyle=00000100\nwindow-placement=00000000046103CC ok=1 iconic=0 show=1 normal=26,26,1306,761\nwindow=0000000005F600AA class=IME visible=0 text=Default IME\nwindow-utf16=0000000005F600AA visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045\nwindow-geometry=0000000005F600AA outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000\nwindow-placement=0000000005F600AA ok=1 iconic=0 show=1 normal=0,0,0,0\nwindow=0000000002D106E0 class=IME visible=0 text=Default IME\nwindow-utf16=0000000002D106E0 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045\nwindow-geometry=0000000002D106E0 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000\nwindow-placement=0000000002D106E0 ok=1 iconic=0 show=1 normal=0,0,0,0\nsample-ms=12065\npid=21464 image=O:\\tmp\\nE17\\SYSTEM32\\ntvdm.exe alive=1\nwindow=0000000001260178 class=Minesweeper visible=1 text=Minesweeper\nwindow-utf16=0000000001260178 visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072\nwindow-geometry=0000000001260178 outer-ok=1 outer=-2,-45,235,-6 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900014 style=34CA0000 exstyle=00000100\nwindow-placement=0000000001260178 ok=1 iconic=1 show=2 normal=-2,-45,504,323\nwindow=0000000002840834 class=WOWFaxClass visible=0 text=\nwindow-utf16=0000000002840834 visible=0 class=0057004F00570046006100780043006C006100730073 text=\nwindow-geometry=0000000002840834 outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100\nwindow-placement=0000000002840834 ok=1 iconic=0 show=1 normal=0,0,136,39\nwindow=00000000046103CC class=WOWExecClass visible=0 text=WOWExec\nwindow-utf16=00000000046103CC visible=0 class=0057004F005700450078006500630043006C006100730073 text=0057004F00570045007800650063\nwindow-geometry=00000000046103CC outer-ok=1 outer=26,26,1306,761 client-ok=1 client=0,0,1264,696 dpi=96 class-brush=0000000000900010 style=06CF0000 exstyle=00000100\nwindow-placement=00000000046103CC ok=1 iconic=0 show=1 normal=26,26,1306,761\nwindow=0000000005F600AA class=IME visible=0 text=Default IME\nwindow-utf16=0000000005F600AA visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045\nwindow-geometry=0000000005F600AA outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000\nwindow-placement=0000000005F600AA ok=1 iconic=0 show=1 normal=0,0,0,0\nwindow=0000000002D106E0 class=IME visible=0 text=Default IME\nwindow-utf16=0000000002D106E0 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045\nwindow-geometry=0000000002D106E0 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000\nwindow-placement=0000000002D106E0 ok=1 iconic=0 show=1 normal=0,0,0,0\nsample-ms=16055\npid=21464 image=O:\\tmp\\nE17\\SYSTEM32\\ntvdm.exe alive=1\nwindow=0000000001260178 class=Minesweeper visible=1 text=Minesweeper\nwindow-utf16=0000000001260178 visible=1 class=004D0069006E00650073007700650065007000650072 text=004D0069006E00650073007700650065007000650072\nwindow-geometry=0000000001260178 outer-ok=1 outer=-2,-45,235,-6 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000900014 style=34CA0000 exstyle=00000100\nwindow-placement=0000000001260178 ok=1 iconic=1 show=2 normal=-2,-45,504,323\nwindow=0000000002840834 class=WOWFaxClass visible=0 text=\nwindow-utf16=0000000002840834 visible=0 class=0057004F00570046006100780043006C006100730073 text=\nwindow-geometry=0000000002840834 outer-ok=1 outer=0,0,136,39 client-ok=1 client=0,0,120,0 dpi=96 class-brush=0000000000000000 style=04CF0000 exstyle=00000100\nwindow-placement=0000000002840834 ok=1 iconic=0 show=1 normal=0,0,136,39\nwindow=00000000046103CC class=WOWExecClass visible=0 text=WOWExec\nwindow-utf16=00000000046103CC visible=0 class=0057004F005700450078006500630043006C006100730073 text=0057004F00570045007800650063\nwindow-geometry=00000000046103CC outer-ok=1 outer=26,26,1306,761 client-ok=1 client=0,0,1264,696 dpi=96 class-brush=0000000000900010 style=06CF0000 exstyle=00000100\nwindow-placement=00000000046103CC ok=1 iconic=0 show=1 normal=26,26,1306,761\nwindow=0000000005F600AA class=IME visible=0 text=Default IME\nwindow-utf16=0000000005F600AA visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045\nwindow-geometry=0000000005F600AA outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000\nwindow-placement=0000000005F600AA ok=1 iconic=0 show=1 normal=0,0,0,0\nwindow=0000000002D106E0 class=IME visible=0 text=Default IME\nwindow-utf16=0000000002D106E0 visible=0 class=0049004D0045 text=00440065006600610075006C007400200049004D0045\nwindow-geometry=0000000002D106E0 outer-ok=1 outer=0,0,0,0 client-ok=1 client=0,0,0,0 dpi=96 class-brush=0000000000000000 style=8C000000 exstyle=00000000\nwindow-placement=0000000002D106E0 ok=1 iconic=0 show=1 normal=0,0,0,0\n\n",
+  "census": {
+    "before": {
+      "files": 1319,
+      "byte_identical": 750,
+      "nonerror_identical": 755,
+      "nonerror_different": 564,
+      "nonerror_points": 7751,
+      "nonerror_lines": 190572
+    },
+    "after": {
+      "files": 1315,
+      "byte_identical": 750,
+      "nonerror_identical": 755,
+      "nonerror_different": 560,
+      "nonerror_points": 7747,
+      "nonerror_lines": 176175
+    },
+    "delta": {
+      "files": -4,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": -4,
+      "nonerror_points": -4,
+      "nonerror_lines": -14397
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/base/win32/client/vdm.c",
+        "before_points": 16,
+        "before_lines": 235,
+        "after_points": 16,
+        "after_lines": 234,
+        "action": "paired-caller",
+        "raw_before": [
+          17,
+          309
+        ],
+        "raw_after": [
+          17,
+          308
+        ]
+      },
+      {
+        "path": "src/non-mvdm/public/internal/base/inc/winbase.x",
+        "before_points": 1,
+        "before_lines": 11840,
+        "action": "retired-absent-xp",
+        "after_points": 0,
+        "after_lines": 0
+      },
+      {
+        "path": "src/non-mvdm/public/internal/base/inc/winbasep.x",
+        "before_points": 1,
+        "before_lines": 646,
+        "action": "retired-absent-xp",
+        "after_points": 0,
+        "after_lines": 0
+      },
+      {
+        "path": "src/non-mvdm/public/internal/base/inc/winnls.w",
+        "before_points": 0,
+        "before_lines": 0,
+        "action": "xp-byte-exact-relocation",
+        "after_points": 0,
+        "after_lines": 0,
+        "new_path": "src/non-mvdm/base/published/winnls.w"
+      },
+      {
+        "path": "src/non-mvdm/public/internal/base/inc/winnls.x",
+        "before_points": 1,
+        "before_lines": 1816,
+        "action": "retired-absent-xp",
+        "after_points": 0,
+        "after_lines": 0
+      },
+      {
+        "path": "src/non-mvdm/public/internal/base/inc/winss.h",
+        "before_points": 1,
+        "before_lines": 94,
+        "action": "retired-absent-xp",
+        "after_points": 0,
+        "after_lines": 0
+      },
+      {
+        "path": "src/non-mvdm/public/internal/base/inc/winsvc.x",
+        "before_points": 0,
+        "before_lines": 0,
+        "action": "xp-byte-exact-relocation",
+        "after_points": 0,
+        "after_lines": 0,
+        "new_path": "src/non-mvdm/published/genxwin/winsvc.x"
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1212,
+      "OpenNT": 103
+    }
+  },
+  "Full": "Not repeated; six inventory files and one paired mirror caller since P6 Full24/24"
+}

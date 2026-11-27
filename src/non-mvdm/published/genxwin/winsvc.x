@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0010    // Increment this if a change has global effects
 
-Copyright (c) 1995-1996  Microsoft Corporation
+Copyright (c) 1995-1998  Microsoft Corporation
 
 Module Name:
 
@@ -88,29 +88,43 @@ extern "C" {
 //
 // Controls
 //
-#define SERVICE_CONTROL_STOP           0x00000001
-#define SERVICE_CONTROL_PAUSE          0x00000002
-#define SERVICE_CONTROL_CONTINUE       0x00000003
-#define SERVICE_CONTROL_INTERROGATE    0x00000004
-#define SERVICE_CONTROL_SHUTDOWN       0x00000005
+#define SERVICE_CONTROL_STOP                   0x00000001
+#define SERVICE_CONTROL_PAUSE                  0x00000002
+#define SERVICE_CONTROL_CONTINUE               0x00000003
+#define SERVICE_CONTROL_INTERROGATE            0x00000004
+#define SERVICE_CONTROL_SHUTDOWN               0x00000005
+#define SERVICE_CONTROL_PARAMCHANGE            0x00000006
+#define SERVICE_CONTROL_NETBINDADD             0x00000007
+#define SERVICE_CONTROL_NETBINDREMOVE          0x00000008
+#define SERVICE_CONTROL_NETBINDENABLE          0x00000009
+#define SERVICE_CONTROL_NETBINDDISABLE         0x0000000A
+#define SERVICE_CONTROL_DEVICEEVENT            0x0000000B
+#define SERVICE_CONTROL_HARDWAREPROFILECHANGE  0x0000000C
+#define SERVICE_CONTROL_POWEREVENT             0x0000000D
+#define SERVICE_CONTROL_SESSIONCHANGE          0x0000000E
 
 //
 // Service State -- for CurrentState
 //
-#define SERVICE_STOPPED                0x00000001
-#define SERVICE_START_PENDING          0x00000002
-#define SERVICE_STOP_PENDING           0x00000003
-#define SERVICE_RUNNING                0x00000004
-#define SERVICE_CONTINUE_PENDING       0x00000005
-#define SERVICE_PAUSE_PENDING          0x00000006
-#define SERVICE_PAUSED                 0x00000007
+#define SERVICE_STOPPED                        0x00000001
+#define SERVICE_START_PENDING                  0x00000002
+#define SERVICE_STOP_PENDING                   0x00000003
+#define SERVICE_RUNNING                        0x00000004
+#define SERVICE_CONTINUE_PENDING               0x00000005
+#define SERVICE_PAUSE_PENDING                  0x00000006
+#define SERVICE_PAUSED                         0x00000007
 
 //
 // Controls Accepted  (Bit Mask)
 //
-#define SERVICE_ACCEPT_STOP            0x00000001
-#define SERVICE_ACCEPT_PAUSE_CONTINUE  0x00000002
-#define SERVICE_ACCEPT_SHUTDOWN        0x00000004
+#define SERVICE_ACCEPT_STOP                    0x00000001
+#define SERVICE_ACCEPT_PAUSE_CONTINUE          0x00000002
+#define SERVICE_ACCEPT_SHUTDOWN                0x00000004
+#define SERVICE_ACCEPT_PARAMCHANGE             0x00000008
+#define SERVICE_ACCEPT_NETBINDCHANGE           0x00000010
+#define SERVICE_ACCEPT_HARDWAREPROFILECHANGE   0x00000020
+#define SERVICE_ACCEPT_POWEREVENT              0x00000040
+#define SERVICE_ACCEPT_SESSIONCHANGE           0x00000080
 
 //
 // Service Control Manager object specific access types
@@ -156,18 +170,78 @@ extern "C" {
                                         SERVICE_INTERROGATE          | \
                                         SERVICE_USER_DEFINED_CONTROL)
 
+//
+// Service flags for QueryServiceStatusEx
+//
+#define SERVICE_RUNS_IN_SYSTEM_PROCESS  0x00000001
+
+//
+// Info levels for ChangeServiceConfig2 and QueryServiceConfig2
+//
+#define SERVICE_CONFIG_DESCRIPTION     1
+#define SERVICE_CONFIG_FAILURE_ACTIONS 2
+
+//
+// Service description string
+//
+typedef struct _SERVICE_DESCRIPTION% {
+    LPTSTR%     lpDescription;
+} SERVICE_DESCRIPTION%, *LPSERVICE_DESCRIPTION%;
+
+//
+// Actions to take on service failure
+//
+typedef enum _SC_ACTION_TYPE {
+        SC_ACTION_NONE          = 0,
+        SC_ACTION_RESTART       = 1,
+        SC_ACTION_REBOOT        = 2,
+        SC_ACTION_RUN_COMMAND   = 3
+} SC_ACTION_TYPE;
+
+typedef struct _SC_ACTION {
+    SC_ACTION_TYPE  Type;
+    DWORD           Delay;
+} SC_ACTION, *LPSC_ACTION;
+
+typedef struct _SERVICE_FAILURE_ACTIONS% {
+    DWORD       dwResetPeriod;
+    LPTSTR%     lpRebootMsg;
+    LPTSTR%     lpCommand;
+    DWORD       cActions;
+#ifdef MIDL_PASS
+    [size_is(cActions)]
+#endif
+    SC_ACTION * lpsaActions;
+} SERVICE_FAILURE_ACTIONS%, *LPSERVICE_FAILURE_ACTIONS%;
+
 
 //
 // Handle Types
 //
 
-typedef HANDLE      SC_HANDLE;
+DECLARE_HANDLE(SC_HANDLE);
 typedef SC_HANDLE   *LPSC_HANDLE;
 
-typedef DWORD       SERVICE_STATUS_HANDLE;
+DECLARE_HANDLE(SERVICE_STATUS_HANDLE);
 
 //
-// Service Status Structure
+// Info levels for QueryServiceStatusEx
+//
+
+typedef enum _SC_STATUS_TYPE {
+        SC_STATUS_PROCESS_INFO      = 0
+} SC_STATUS_TYPE;
+
+//
+// Info levels for EnumServicesStatusEx
+//
+typedef enum _SC_ENUM_TYPE {
+        SC_ENUM_PROCESS_INFO        = 0
+} SC_ENUM_TYPE;
+
+
+//
+// Service Status Structures
 //
 
 typedef struct _SERVICE_STATUS {
@@ -180,6 +254,17 @@ typedef struct _SERVICE_STATUS {
     DWORD   dwWaitHint;
 } SERVICE_STATUS, *LPSERVICE_STATUS;
 
+typedef struct _SERVICE_STATUS_PROCESS {
+    DWORD   dwServiceType;
+    DWORD   dwCurrentState;
+    DWORD   dwControlsAccepted;
+    DWORD   dwWin32ExitCode;
+    DWORD   dwServiceSpecificExitCode;
+    DWORD   dwCheckPoint;
+    DWORD   dwWaitHint;
+    DWORD   dwProcessId;
+    DWORD   dwServiceFlags;
+} SERVICE_STATUS_PROCESS, *LPSERVICE_STATUS_PROCESS;
 
 
 //
@@ -187,11 +272,16 @@ typedef struct _SERVICE_STATUS {
 //
 
 typedef struct _ENUM_SERVICE_STATUS% {
-    LPTSTR%        lpServiceName;
-    LPTSTR%        lpDisplayName;
-    SERVICE_STATUS ServiceStatus;
+    LPTSTR%           lpServiceName;
+    LPTSTR%           lpDisplayName;
+    SERVICE_STATUS    ServiceStatus;
 } ENUM_SERVICE_STATUS%, *LPENUM_SERVICE_STATUS%;
 
+typedef struct _ENUM_SERVICE_STATUS_PROCESS% {
+    LPTSTR%                   lpServiceName;
+    LPTSTR%                   lpDisplayName;
+    SERVICE_STATUS_PROCESS    ServiceStatusProcess;
+} ENUM_SERVICE_STATUS_PROCESS%, *LPENUM_SERVICE_STATUS_PROCESS%;
 
 //
 // Structures for the Lock API functions
@@ -263,6 +353,12 @@ typedef VOID (WINAPI *LPHANDLER_FUNCTION)(
     DWORD    dwControl
     );
 
+typedef DWORD (WINAPI *LPHANDLER_FUNCTION_EX)(
+    DWORD    dwControl,
+    DWORD    dwEventType,
+    LPVOID   lpEventData,
+    LPVOID   lpContext
+    );
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -284,6 +380,15 @@ ChangeServiceConfig%(
     LPCTSTR%     lpServiceStartName,
     LPCTSTR%     lpPassword,
     LPCTSTR%     lpDisplayName
+    );
+
+WINADVAPI
+BOOL
+WINAPI
+ChangeServiceConfig2%(
+    SC_HANDLE    hService,
+    DWORD        dwInfoLevel,
+    LPVOID       lpInfo
     );
 
 WINADVAPI
@@ -357,6 +462,22 @@ EnumServicesStatus%(
 WINADVAPI
 BOOL
 WINAPI
+EnumServicesStatusEx%(
+    SC_HANDLE                  hSCManager,
+    SC_ENUM_TYPE               InfoLevel,
+    DWORD                      dwServiceType,
+    DWORD                      dwServiceState,
+    LPBYTE                     lpServices,
+    DWORD                      cbBufSize,
+    LPDWORD                    pcbBytesNeeded,
+    LPDWORD                    lpServicesReturned,
+    LPDWORD                    lpResumeHandle,
+    LPCTSTR%                   pszGroupName
+    );
+
+WINADVAPI
+BOOL
+WINAPI
 GetServiceKeyName%(
     SC_HANDLE               hSCManager,
     LPCTSTR%                lpDisplayName,
@@ -419,6 +540,17 @@ QueryServiceConfig%(
 WINADVAPI
 BOOL
 WINAPI
+QueryServiceConfig2%(
+    SC_HANDLE   hService,
+    DWORD       dwInfoLevel,
+    LPBYTE      lpBuffer,
+    DWORD       cbBufSize,
+    LPDWORD     pcbBytesNeeded
+    );
+
+WINADVAPI
+BOOL
+WINAPI
 QueryServiceLockStatus%(
     SC_HANDLE                       hSCManager,
     LPQUERY_SERVICE_LOCK_STATUS%    lpLockStatus,
@@ -446,11 +578,31 @@ QueryServiceStatus(
     );
 
 WINADVAPI
+BOOL
+WINAPI
+QueryServiceStatusEx(
+    SC_HANDLE           hService,
+    SC_STATUS_TYPE      InfoLevel,
+    LPBYTE              lpBuffer,
+    DWORD               cbBufSize,
+    LPDWORD             pcbBytesNeeded
+    );
+
+WINADVAPI
 SERVICE_STATUS_HANDLE
 WINAPI
 RegisterServiceCtrlHandler%(
     LPCTSTR%             lpServiceName,
     LPHANDLER_FUNCTION   lpHandlerProc
+    );
+
+WINADVAPI
+SERVICE_STATUS_HANDLE
+WINAPI
+RegisterServiceCtrlHandlerEx%(
+    LPCTSTR%                lpServiceName,
+    LPHANDLER_FUNCTION_EX   lpHandlerProc,
+    LPVOID                  lpContext
     );
 
 WINADVAPI
@@ -474,7 +626,7 @@ WINADVAPI
 BOOL
 WINAPI
 StartServiceCtrlDispatcher%(
-    LPSERVICE_TABLE_ENTRY%    lpServiceStartTable
+    CONST SERVICE_TABLE_ENTRY% *lpServiceStartTable
     );
 
 

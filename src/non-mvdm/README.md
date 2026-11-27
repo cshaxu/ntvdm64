@@ -2913,3 +2913,10 @@ N016 positions6-11 are delivered; VDM and later fragments remain open.
 VDM C/assembly declarations use XP pointer-table layout. The original winbase
 published template moves to base/published. [ABI and delivery evidence](../../docs/etc/evidence/t485-s1/n016-vdm.md).
 N016 positions12-15 are delivered; six later files remain.
+
+### T485 S15 N016 completion
+
+The remaining published templates use their XP paths; obsolete OpenNT x-files
+and winss.h are retired. Callers use the existing XP ntcsrmsg declarations.
+[N016 final six and delivery](../../docs/etc/evidence/t485-s1/n016-tail.md).
+All21 original N016 inventory files are reconciled; no unrelated XP files imported.

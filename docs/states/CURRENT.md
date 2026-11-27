@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall51/159 directories, H001-H036 and N001-N015. S15 runtime6 is the current
+overall52/159 directories, H001-H036 and N001-N016. S15 runtime7 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-3/14 directories delivered; next N016. P1 N013 relocated DLC declarations;
+4/14 directories delivered; next N017. P1 N013 relocated DLC declarations;
 P2 N014 relocated PMVDM and passed Full24/24 at directory50.
 [P3 N015](../etc/evidence/t485-s1/n015.md) migrated five DDK declarations,
 including DLC's XP SDK path. Cached full build, runtime3 dual13-image26hash
@@ -70,6 +70,16 @@ N016 now15/21 delivered,6remaining; overall51/159 and S15 3/14 remain.
 Next winbase.x. Current census1319files,750exact,755nonerror same/564different,
 7751points/190572lines; P6delta0files,+2exact,+2same,-2different,
 -1point/-1547lines;1210XP/109OpenNT. P5 census remains historical.
+
+[P7 N016 tail](../etc/evidence/t485-s1/n016-tail.md) delivered: four obsolete
+files retired, two templates XP byte-exact relocated, five redundant winss
+includes removed. Cached build, runtime7 dual13-image26hash publication,
+BASE140assertions, original lifecycle, real RPC reply, COMMAND7cases and
+WOW WINMINE window passed. Seven audited mirror files since P6 Full24/24;
+no repeat Full. N016 is21/21 complete; overall52/159 and S15 4/14. Next N017.
+Current census1315files,750exact,755nonerror same/560different,
+7747points/176175lines; delta-4files,0exact,0same,-4different,-4points/-14397lines.
+1212XP/103OpenNT; retirement accounts for14396lines, caller reduction1line.
 
 ## S14 Closure Record
 

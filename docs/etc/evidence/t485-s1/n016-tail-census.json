@@ -1,0 +1,98 @@
+{
+  "before": {
+    "files": 1319,
+    "byte_identical": 750,
+    "nonerror_identical": 755,
+    "nonerror_different": 564,
+    "nonerror_points": 7751,
+    "nonerror_lines": 190572
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 750,
+    "nonerror_identical": 755,
+    "nonerror_different": 560,
+    "nonerror_points": 7747,
+    "nonerror_lines": 176175
+  },
+  "delta": {
+    "files": -4,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": -4,
+    "nonerror_points": -4,
+    "nonerror_lines": -14397
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "before_points": 16,
+      "before_lines": 235,
+      "after_points": 16,
+      "after_lines": 234,
+      "action": "paired-caller",
+      "raw_before": [
+        17,
+        309
+      ],
+      "raw_after": [
+        17,
+        308
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winbase.x",
+      "before_points": 1,
+      "before_lines": 11840,
+      "action": "retired-absent-xp",
+      "after_points": 0,
+      "after_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winbasep.x",
+      "before_points": 1,
+      "before_lines": 646,
+      "action": "retired-absent-xp",
+      "after_points": 0,
+      "after_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winnls.w",
+      "before_points": 0,
+      "before_lines": 0,
+      "action": "xp-byte-exact-relocation",
+      "after_points": 0,
+      "after_lines": 0,
+      "new_path": "src/non-mvdm/base/published/winnls.w"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winnls.x",
+      "before_points": 1,
+      "before_lines": 1816,
+      "action": "retired-absent-xp",
+      "after_points": 0,
+      "after_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winss.h",
+      "before_points": 1,
+      "before_lines": 94,
+      "action": "retired-absent-xp",
+      "after_points": 0,
+      "after_lines": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winsvc.x",
+      "before_points": 0,
+      "before_lines": 0,
+      "action": "xp-byte-exact-relocation",
+      "after_points": 0,
+      "after_lines": 0,
+      "new_path": "src/non-mvdm/published/genxwin/winsvc.x"
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1212,
+    "OpenNT": 103
+  }
+}

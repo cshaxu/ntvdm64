@@ -1,0 +1,36 @@
+[
+  {
+    "old_path": "src/non-mvdm/public/internal/base/inc/winbase.x",
+    "action": "retired-absent-xp",
+    "sha256": "41a71dd265d27af56df9f5135ec7cb68149f8a55e63946bf8fb5ac8c0cf90152"
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/base/inc/winbasep.x",
+    "action": "retired-absent-xp",
+    "sha256": "73d579d36fc22961ab8ee75d800f658709cee759bd1086ff4af185baa5ec997b"
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/base/inc/winnls.x",
+    "action": "retired-absent-xp",
+    "sha256": "33c8246dfa8576ae7590416e281978c95bab6b2ad7e5280fb255ca2c6fc8062b"
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/base/inc/winss.h",
+    "action": "retired-absent-xp",
+    "sha256": "3e6308c51d093958c8698e47612ba65f59278bae3f05276dffb02d9232f08d48"
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/base/inc/winnls.w",
+    "path": "src/non-mvdm/base/published/winnls.w",
+    "action": "xp-byte-exact-relocation",
+    "xp_path": "Source/XPSP1/NT/base/published/winnls.w",
+    "blob": "7f306c2f772f0e36bcd6063197e0cff2b106687c"
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/base/inc/winsvc.x",
+    "path": "src/non-mvdm/published/genxwin/winsvc.x",
+    "action": "xp-byte-exact-relocation",
+    "xp_path": "Source/XPSP1/NT/published/genxwin/winsvc.x",
+    "blob": "986d9be0f1731bd8c5407ffd0003e59857d8ab4d"
+  }
+]

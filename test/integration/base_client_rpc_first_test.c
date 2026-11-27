@@ -12,7 +12,6 @@ static const common_frontend_key forged_frontend={0x7fffffff,0x7fffffff};
 #include <nt.h>
 #include <ntlpcapi.h>
 #include <ntcsrmsg.h>
-#include <winss.h>
 #include "non-mvdm/base/win32/inc/basemsg.h"
 #include "non-mvdm/base/win32/inc/basevdm.h"
 #include <vdmapi.h>
