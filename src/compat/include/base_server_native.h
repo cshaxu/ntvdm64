@@ -21,7 +21,7 @@
 #define STATUS_BAD_IMPERSONATION_LEVEL ((NTSTATUS)0xC00000A5L)
 #endif
 struct _CSR_API_MSG;
-BOOLEAN CsrValidateMessageBuffer(const struct _CSR_API_MSG *, const void *const *, ULONG, ULONG);
+BOOLEAN NTAPI CsrValidateMessageBuffer(const struct _CSR_API_MSG *, const void *const *, ULONG, ULONG);
 #include <nt_event_declarations.h>
 NTSTATUS NTAPI NtCreateEvent(PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, EVENT_TYPE, BOOLEAN);
 NTSTATUS NTAPI NtSetEvent(HANDLE, PLONG);

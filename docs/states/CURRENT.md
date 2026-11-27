@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall56/159 directories, H001-H036 and N001-N020. S15 runtime22 is the current
+overall56/159 directories, H001-H036 and N001-N020. S15 runtime24 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -57,14 +57,7 @@ P7 historical delivery remains indexed in this packet's evidence directory.
 
 [P9 N017 middle-ten](../etc/evidence/t485-s1/n017-middle.md) delivered; Full24/24 passed.
 
-[P10 N017 final-six](../etc/evidence/t485-s1/n017-tail.md) delivered: all six
-original XP paths/declarations restored, four byte-exact and two only#error.
-Cached build, runtime10 dual13-image26hash publication, RAP11/11, lifecycle
-and real guest NetAPI passed. Six files since P9 Full24/24; no repeat Full.
-N017 is19/19 complete; overall53/159 and S15 5/14. Next N018.
-Current census1315files,760exact,768nonerror same/547different,
-7748points/164027lines; delta0files,+4exact,+6same,-6different,-6points/-3856lines.
-1229XP/86OpenNT. P9 census remains historical.
+[P10 N017 final-six](../etc/evidence/t485-s1/n017-tail.md) delivered.
 
 [P11 N018](../etc/evidence/t485-s1/n018.md) delivered: tstring.h byte-exact XP,
 no functional adaptation/exclusion. Cached build, runtime11 dual13-image26hash
@@ -171,6 +164,17 @@ initial failures retained. N0215/17; next ntcsrdll.h. Overall56/159, S15 8/14.
 Census1324files,774exact,785nonerror same/539different,7742points/154167lines;
 delta0files,0exact,0same,0different,+1point/-475lines.1251XP/73OpenNT.
 Two changed mirror files since P21 Full24/24; no guest change.
+
+[P23 N021 CSR](../etc/evidence/t485-s1/n021-csr.md) delivered: client/message
+headers verified XP exact; server header restored XP exact. B validation
+provider signature now matches XP NTAPI. Corrected NT4-era fixture sizes.
+Cached build, runtime24 dual13-image26hash publication, capture3475 each on
+x86/x64, both layout fixtures, service lifecycle and guest NetAPI passed.
+Global1324files,775exact,786nonerror same/538different,7741points/153031lines;
+delta+1exact,+1same,-1different,-1point/-1136lines.1252XP/72OpenNT.
+N0218/17; next ntexapi.h. Overall56/159 and S15 8/14 unchanged.
+Five files audited since P21 Full24/24, three changed; no guest modification.
+
 
 ## S14 Closure Record
 

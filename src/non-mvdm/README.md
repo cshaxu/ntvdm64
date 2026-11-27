@@ -3020,3 +3020,7 @@ limitations are evidenced for their paired N021 migration.
 nt_vdd.h restores XP order/linkage and preserves the stdcall map ABI and CCPU
 real cache functions. Paired DPMI keeps its VM-aware mode override.
 [Evidence](../../docs/etc/evidence/t485-s1/n021-vdd.md). N0215/17 delivered.
+
+S15 P23: N021 CSR server declarations now match XP SP1 byte-for-byte;
+client/message headers remain exact. B validation provider uses original NTAPI.
+Runtime24 dual-published and CSR layout/capture/service/guest tests passed.

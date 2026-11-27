@@ -475,7 +475,8 @@ static int detached_reservation(OPENNT_BASE_SERVICE *service,HANDLE self,ULONG b
     void *wire,*answer;
     char app[]="MEM.EXE",cmd[]="MEM.EXE\r\n",directory[]="C:\\",environment[]="X=Y\0";
     CHECK(OpenNtBaseServiceConnect(service,self,&connection,&generation)==ERROR_SUCCESS);
-    CHECK(OpenNtBaseServiceRegisterWowExec(connection,GetCurrentProcessId(),generation,0)==ERROR_INVALID_PARAMETER);
+    /* A fresh connection has no WOW worker authority, even for clearing HWND. */
+    CHECK(OpenNtBaseServiceRegisterWowExec(connection,GetCurrentProcessId(),generation,0)==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseServiceRegisterWowExec(connection,GetCurrentProcessId(),generation+1,
         (DWORD)(ULONG_PTR)GetDesktopWindow())==ERROR_ACCESS_DENIED);
     CHECK(OpenNtBaseServiceRegisterWowExec(connection,GetCurrentProcessId(),generation,
@@ -1031,6 +1032,30 @@ notification_cleanup:
     return 0;
 }
 
+/* Native peer for XP's real WOWEXEC window identity and reuse check. */
+static int wow_window_child(DWORD parent)
+{
+    WCHAR name[80],caption[80];
+    HWND window;
+    HANDLE ready;
+    MSG message;
+    swprintf_s(name,80,L"Local\\ntvdm-wow-fixture-%lu",parent);
+    swprintf_s(caption,80,L"ntvdm-wow-fixture-%lu",GetCurrentProcessId());
+    ready=OpenEventW(EVENT_MODIFY_STATE,FALSE,name);
+    if(!ready)return 1;
+    window=CreateWindowExW(0,L"STATIC",caption,0,0,0,0,0,HWND_MESSAGE,NULL,NULL,NULL);
+    if(!window || !SetTimer(window,1,15000,NULL) || !SetEvent(ready)) {
+        if(window)DestroyWindow(window);
+        CloseHandle(ready);return 1;
+    }
+    CloseHandle(ready);
+    while(GetMessageW(&message,NULL,0,0)>0) {
+        if(message.message==WM_TIMER)break;
+        TranslateMessage(&message);DispatchMessageW(&message);
+    }
+    DestroyWindow(window);return 0;
+}
+
 int main(int argc,char **argv)
 {
     OPENNT_BASE_SERVICE *service=NULL;
@@ -1046,6 +1071,12 @@ int main(int argc,char **argv)
     HANDLE console=NULL;
     char command[MAX_PATH+32];
     BASE_API_MSG check={0},reply={0},update={0},get={0};
+    char wowDesktop[512],getDesktop[512],stationName[128],desktopName[128];
+    DWORD desktopBytes;
+    unsigned wowGetPhase;
+    HANDLE wowWindowReady=NULL;
+    WCHAR wowWindowName[80];
+    HWND wowExecWindow;
     char cmd[]="MEM.EXE\r\n",app[]="MEM.EXE",directory[]="C:\\",environment[]="X=Y\0\0";
     char getCmd[128]={0},getApp[128]={0},getEnv[128]={0},getPif[MAX_PATH]={0},getDirectory[MAX_PATH]={0};
     void *wire=NULL,*answer=NULL,*updateWire=NULL,*updateAnswer=NULL,*getWire=NULL,*getAnswer=NULL;
@@ -1073,6 +1104,8 @@ int main(int argc,char **argv)
         fputs("EXPECTED runner-failure with owned child\n",stderr);
         return 91;
     }
+    if(argc==3 && !strcmp(argv[1],"--wow-window-child"))
+        return wow_window_child(strtoul(argv[2],NULL,10));
     if(argc==2 && !strcmp(argv[1],"--frontend-chains"))return fixture_frontend_chains();
     if(argc==2 && !strcmp(argv[1],"--frontend-instances"))return fixture_frontend_instances();
     if(argc==2 && !strcmp(argv[1],"--io-authority"))return fixture_io_authority();
@@ -2749,6 +2782,14 @@ int main(int argc,char **argv)
         launcherGeneration,wowFrontend)==ERROR_ALREADY_EXISTS);
     CHECK(OpenNtBaseServiceAcquireConsoleContext(launcher,GetCurrentProcessId(),
         launcherGeneration,wowFrontend,&wowContext)==ERROR_SUCCESS && wowContext);
+    /* XP shared WOW is keyed by the caller's actual window station/desktop. */
+    CHECK(GetUserObjectInformationA(GetProcessWindowStation(),UOI_NAME,
+        stationName,sizeof(stationName),&desktopBytes));
+    CHECK(GetUserObjectInformationA(GetThreadDesktop(GetCurrentThreadId()),UOI_NAME,
+        desktopName,sizeof(desktopName),&desktopBytes));
+    CHECK(sprintf_s(wowDesktop,sizeof(wowDesktop),"%s\\%s",stationName,desktopName)>0);
+    check.u.CheckVDM.Desktop=wowDesktop;
+    check.u.CheckVDM.DesktopLen=(ULONG)strlen(wowDesktop)+1;
     check.u.CheckVDM.BinaryType=BINARY_TYPE_WIN16;
     check.u.CheckVDM.ConsoleHandle=OPENNT_BASE_CONSOLE_EXISTING;
     CHECK(OpenNtBaseEncodeCheckCommand(&check,8,launcherGeneration,NULL,0,&wireBytes));
@@ -2764,6 +2805,11 @@ int main(int argc,char **argv)
     wowTask=reply.u.CheckVDM.iTask;
     CHECK(OpenNtBaseServiceCreateReservation(launcher,GetCurrentProcessId(),launcherGeneration,
         wowTask,&wowReservation)==ERROR_SUCCESS);
+    swprintf_s(wowWindowName,80,L"Local\\ntvdm-wow-fixture-%lu",GetCurrentProcessId());
+    wowWindowReady=CreateEventW(NULL,TRUE,FALSE,wowWindowName);CHECK(wowWindowReady);
+    { char image[MAX_PATH];
+      CHECK(GetModuleFileNameA(NULL,image,sizeof(image)));
+      CHECK(sprintf_s(command,sizeof(command),"\"%s\" --wow-window-child %lu",image,GetCurrentProcessId())>0); }
     CHECK(CreateProcessA(NULL,command,NULL,NULL,FALSE,CREATE_SUSPENDED,NULL,NULL,&startup,&wowChild));
     CHECK(OpenNtBaseServicePrepareWorker(launcher,GetCurrentProcessId(),launcherGeneration,
         wowReservation,wowChild.hProcess)==ERROR_SUCCESS);
@@ -2780,6 +2826,10 @@ int main(int argc,char **argv)
         launcher,GetCurrentProcessId(),launcherGeneration,updateWire,updateWireBytes,
         updateAnswer,updateAnswerBytes,&updateAnswerBytes,&parentEvent,&parentReceipt)==ERROR_SUCCESS);
     CHECK(ResumeThread(wowChild.hThread)!=(DWORD)-1);
+    CHECK(WaitForSingleObject(wowWindowReady,5000)==WAIT_OBJECT_0);
+    CloseHandle(wowWindowReady);wowWindowReady=NULL;
+    swprintf_s(wowWindowName,80,L"ntvdm-wow-fixture-%lu",wowChild.dwProcessId);
+    wowExecWindow=FindWindowExW(HWND_MESSAGE,NULL,L"STATIC",wowWindowName);CHECK(wowExecWindow);
     CHECK(OpenNtBaseServiceConnect(service,wowChild.hProcess,&wowWorker,&wowGeneration)==ERROR_SUCCESS);
     CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
     CHECK(workerInfoCount==1 && workerInfo.kind==1 && workerInfo.stack_depth==1 &&
@@ -2828,9 +2878,14 @@ int main(int argc,char **argv)
     /* A registered WOW worker still cannot enroll another process's HWND. */
     CHECK(OpenNtBaseServiceRegisterWowExec(wowWorker,wowChild.dwProcessId,wowGeneration,
         (DWORD)(ULONG_PTR)GetDesktopWindow())==ERROR_ACCESS_DENIED);
+    /* XP first binds the shared WOW Console through its task-keyed PIF request. */
+    for(wowGetPhase=0;wowGetPhase<2;++wowGetPhase) {
     ZeroMemory(&get,sizeof(get));
     get.u.GetNextVDMCommand.StartupInfo=&getStartup;
-    get.u.GetNextVDMCommand.VDMState=ASKING_FOR_WOW_BINARY;
+    get.u.GetNextVDMCommand.VDMState=ASKING_FOR_WOW_BINARY | (wowGetPhase ? 0 : ASKING_FOR_PIF);
+    get.u.GetNextVDMCommand.iTask=wowGetPhase ? 0 : wowTask;
+    get.u.GetNextVDMCommand.Desktop=getDesktop;
+    get.u.GetNextVDMCommand.DesktopLen=sizeof(getDesktop);
     get.u.GetNextVDMCommand.CmdLine=getCmd;get.u.GetNextVDMCommand.CmdLen=sizeof(getCmd);
     get.u.GetNextVDMCommand.AppName=getApp;get.u.GetNextVDMCommand.AppLen=sizeof(getApp);
     get.u.GetNextVDMCommand.Env=getEnv;get.u.GetNextVDMCommand.EnvLen=sizeof(getEnv);
@@ -2842,7 +2897,16 @@ int main(int argc,char **argv)
     CHECK(OpenNtBaseServiceGet(wowWorker,wowChild.dwProcessId,wowGeneration,getWire,getWireBytes,
         &getAnswer,&wireBytes,&getWait,standard,&standardCount)==ERROR_SUCCESS);
     CHECK(getAnswer!=NULL && getWait==NULL && standardCount==0);
+    CHECK(OpenNtBaseApplyGetCommand(getAnswer,wireBytes,wowGeneration,10,&get));
+    CHECK(get.ReturnValue==STATUS_SUCCESS);
+    if(wowGetPhase) CHECK(
+        get.u.GetNextVDMCommand.CmdLen==sizeof(cmd) && !memcmp(getCmd,cmd,sizeof(cmd)) &&
+        get.u.GetNextVDMCommand.DesktopLen==strlen(wowDesktop)+1 && !strcmp(getDesktop,wowDesktop));
     OpenNtBaseServiceReleaseCommandReply(getAnswer);getAnswer=NULL;
+    }
+    CHECK(OpenNtBaseServiceRegisterWowExec(wowWorker,wowChild.dwProcessId,wowGeneration,
+        (DWORD)(ULONG_PTR)wowExecWindow)==ERROR_SUCCESS);
+
     {
         OPENNT_BASE_WORKER_INFO *tree=NULL;
         uint32_t count=0,index,wowRows=0,taskRows=0;
@@ -2933,18 +2997,24 @@ int main(int argc,char **argv)
             wowGeneration, second, 0x3346, &secondTicket) && secondTicket);
         CHECK(OpenNtBaseServiceExit(wowWorker, wowChild.dwProcessId, wowGeneration + 1,
             TRUE, second, &closeWait) == ERROR_ACCESS_DENIED && !closeWait);
-        CHECK(!OpenNtBaseServiceExit(wowWorker, wowChild.dwProcessId, wowGeneration,
-            TRUE, first, &closeWait) && !closeWait);
-        CHECK(OpenNtBaseServiceRetireWowTask(wowWorker, wowChild.dwProcessId,
-            wowGeneration, firstTicket) == ERROR_NOT_FOUND);
+        /* Labels alone are not original WOW tasks; XP rejects their ExitVDM. */
+        CHECK(OpenNtBaseServiceExit(wowWorker, wowChild.dwProcessId, wowGeneration,
+            TRUE, first, &closeWait) == ERROR_NOT_FOUND && !closeWait);
+        CHECK(!OpenNtBaseServiceRetireWowTask(wowWorker, wowChild.dwProcessId,
+            wowGeneration, firstTicket));
         CHECK(!OpenNtBaseServiceRetireWowTask(wowWorker, wowChild.dwProcessId,
             wowGeneration, secondTicket));
         CHECK(WaitForSingleObject(parentEvent, 0) == WAIT_TIMEOUT);
-        puts("PASS original ExitVDM retires matching pending WOW ticket only");
+        puts("PASS rejected ExitVDM preserves both observed WOW tickets and parent wait");
     }
     { BOOL closeWowWait=FALSE;
+      uint64_t originalTicket=0;
+      CHECK(!OpenNtBaseServiceBindWowTask(wowWorker,wowChild.dwProcessId,
+          wowGeneration,wowTask,0x3347,&originalTicket) && originalTicket);
       CHECK(OpenNtBaseServiceExit(wowWorker,wowChild.dwProcessId,wowGeneration,TRUE,wowTask,
-          &closeWowWait)==ERROR_SUCCESS && !closeWowWait); }
+          &closeWowWait)==ERROR_SUCCESS && !closeWowWait);
+      CHECK(OpenNtBaseServiceRetireWowTask(wowWorker,wowChild.dwProcessId,
+          wowGeneration,originalTicket)==ERROR_NOT_FOUND); }
     CHECK(OpenNtBaseServiceWowStartup(launcher,GetCurrentProcessId(),launcherGeneration,
         parentReceipt,&wowStartup,&wowStarted)==ERROR_SUCCESS && wowStarted);
     CHECK(WaitForSingleObject(wowStartup,0)==WAIT_OBJECT_0);

@@ -1,0 +1,448 @@
+{
+  "task": "M0 T485 S15 P23",
+  "runtime": "build/t485-s15/runtime24",
+  "build_exit": 0,
+  "inputs": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrdll.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntcsrdll.h",
+      "blob": "963582def0cc3c79fa49134af218fca5b4a09f5a",
+      "before_sha256": "430918d11ac891864f8e5cfdc491a21f32b130c77c1b9781ac7b992b6887ebba",
+      "xp_sha256": "430918d11ac891864f8e5cfdc491a21f32b130c77c1b9781ac7b992b6887ebba",
+      "equal": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntcsrmsg.h",
+      "blob": "9bd7d892d373020948a3f58c64004fc0ba8ace65",
+      "before_sha256": "0fd969e6e2b545e02e7255f97a8bbbfc8961020938298746d7af5723df980d43",
+      "xp_sha256": "0fd969e6e2b545e02e7255f97a8bbbfc8961020938298746d7af5723df980d43",
+      "equal": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntcsrsrv.h",
+      "blob": "4ea8fe3479c4e64a36434249a2bdd8a324f5411d",
+      "before_sha256": "9f22e4932d1b51c404c6bdaa6c4ca875ab8c19f1266c31c930985bdf75d1bbf2",
+      "xp_sha256": "79a3df4c4eefd50e68ee0230c7b730f902f63250b8b837f5e49f5ca3fda88580",
+      "equal": false
+    }
+  ],
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "25CEFFF1467893ECFBFF38511984DC0859EB5F60970F934865AC06B9C5934637",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "25CEFFF1467893ECFBFF38511984DC0859EB5F60970F934865AC06B9C5934637",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "6E242C83DA9E73C77C5D4E76FD11C8A074B419467A6427C37D211A3359819068",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "6E242C83DA9E73C77C5D4E76FD11C8A074B419467A6427C37D211A3359819068",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "846732AAC5079A5A60EBEA9325863058CABF28A1923B10731061BE7D4ED6ABC5",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "846732AAC5079A5A60EBEA9325863058CABF28A1923B10731061BE7D4ED6ABC5",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "1D3BE4228AB07610BA9BADE9D5479EF003D78A3742768E3707D334A2DB41C92B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "1D3BE4228AB07610BA9BADE9D5479EF003D78A3742768E3707D334A2DB41C92B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "FEB31F7B66C08605B25CA91047734FE042FEAFBE96201F4EF49B934D4A963656",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "FEB31F7B66C08605B25CA91047734FE042FEAFBE96201F4EF49B934D4A963656",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "D75269742F22CEFB44E799942335386706A857DB17B2C53F7C6867A6C8219A7B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "D75269742F22CEFB44E799942335386706A857DB17B2C53F7C6867A6C8219A7B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "6245C55D505225E3F18D5FA4B2A7C6990B31D120CA2197131A534D0FC1C381EE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "6245C55D505225E3F18D5FA4B2A7C6990B31D120CA2197131A534D0FC1C381EE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "DDAC817ADB09DCBE8A4CC38ED9BB095BAD4F8B5EB185D85869F0701CFD9540C2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "DDAC817ADB09DCBE8A4CC38ED9BB095BAD4F8B5EB185D85869F0701CFD9540C2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "98D85B35F7F9FE76397F42F7CA95E33760993997D5E5223E83EF5A264896DB07",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "98D85B35F7F9FE76397F42F7CA95E33760993997D5E5223E83EF5A264896DB07",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "0BE2020069C9B3F3AA1FBF558E316F2B80C7ECE9BF7586AB6DEA801BA5E44DE1",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "0BE2020069C9B3F3AA1FBF558E316F2B80C7ECE9BF7586AB6DEA801BA5E44DE1",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "B9B15D0340A9168EB1607DD51714A5DAD79BDE4DFAECB60767CC193DF05137B3",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "B9B15D0340A9168EB1607DD51714A5DAD79BDE4DFAECB60767CC193DF05137B3",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "31B77AE60DB6E524E4626975BA2F1F3AAAC98222F50C632BF13188766F9DF01D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "31B77AE60DB6E524E4626975BA2F1F3AAAC98222F50C632BF13188766F9DF01D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "62EDD6F6364E56E62D5806094F3AE9F5E1ED67D5E95C23F1E5E3CC0109F0B555",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "62EDD6F6364E56E62D5806094F3AE9F5E1ED67D5E95C23F1E5E3CC0109F0B555",
+      "pass": true
+    }
+  ],
+  "census": {
+    "before": {
+      "files": 1324,
+      "byte_identical": 774,
+      "nonerror_identical": 785,
+      "nonerror_different": 539,
+      "nonerror_points": 7742,
+      "nonerror_lines": 154167
+    },
+    "after": {
+      "files": 1324,
+      "byte_identical": 775,
+      "nonerror_identical": 786,
+      "nonerror_different": 538,
+      "nonerror_points": 7741,
+      "nonerror_lines": 153031
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 1,
+      "nonerror_identical": 1,
+      "nonerror_different": -1,
+      "nonerror_points": -1,
+      "nonerror_lines": -1136
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+        "before_points": 1,
+        "before_lines": 1136,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1252,
+      "OpenNT": 72
+    }
+  },
+  "logs": {
+    "capture32-final.log": "native capture bits=32 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "capture64-final.log": "native capture bits=64 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "layout32-final2.log": "PASS 32-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n",
+    "layout64-final2.log": "PASS 64-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n",
+    "service-fixtures-r8.log": "PASS service42 retained assertions; concurrency=4 elapsed-ms=6452\n",
+    "guest-netapi-results": {
+      "mode": "netapi",
+      "exit_code": 0,
+      "elapsed_ms": 13496
+    }
+  },
+  "service": {
+    "Concurrency": 4,
+    "ElapsedMs": 6452,
+    "ObserverHash": "AD6A887C6F14960E387D4664B9FA0A2FD8F6A1210032FF2FFF360FD7D10FD779",
+    "FixtureHash": "CD11A80125DA0F9F4256B22A34F3131C826F35D38865C84682032EC8D6547EC9",
+    "Cases": [
+      {
+        "Case": "frontend-chains",
+        "ElapsedMs": 823,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-instances",
+        "ElapsedMs": 832,
+        "Result": "PASS"
+      },
+      {
+        "Case": "parent-resume-origin",
+        "ElapsedMs": 827,
+        "Result": "PASS"
+      },
+      {
+        "Case": "io-authority",
+        "ElapsedMs": 832,
+        "Result": "PASS"
+      },
+      {
+        "Case": "route-cancellation",
+        "ElapsedMs": 461,
+        "Result": "PASS"
+      },
+      {
+        "Case": "prepared-native-root-loss",
+        "ElapsedMs": 512,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-stop",
+        "ElapsedMs": 546,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-reconnect",
+        "ElapsedMs": 563,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-delegated",
+        "ElapsedMs": 519,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait",
+        "ElapsedMs": 835,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-root-loss",
+        "ElapsedMs": 794,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-request-loss",
+        "ElapsedMs": 781,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-worker-loss",
+        "ElapsedMs": 583,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-rundown",
+        "ElapsedMs": 561,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-return",
+        "ElapsedMs": 575,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-after-return",
+        "ElapsedMs": 558,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-nested-return",
+        "ElapsedMs": 503,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-pending-command",
+        "ElapsedMs": 584,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-increment",
+        "ElapsedMs": 586,
+        "Result": "PASS"
+      },
+      {
+        "Case": "launcher-completed-rundown",
+        "ElapsedMs": 583,
+        "Result": "PASS"
+      },
+      {
+        "Case": "completed-worker-loss",
+        "ElapsedMs": 532,
+        "Result": "PASS"
+      },
+      {
+        "Case": "wow-start-late-query",
+        "ElapsedMs": 692,
+        "Result": "PASS"
+      },
+      {
+        "Case": "default",
+        "ElapsedMs": 705,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-authority",
+        "ElapsedMs": 711,
+        "Result": "PASS"
+      },
+      {
+        "Case": "shared-worker-residency",
+        "ElapsedMs": 703,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-command",
+        "ElapsedMs": 489,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-worker",
+        "ElapsedMs": 645,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-gui",
+        "ElapsedMs": 654,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close",
+        "ElapsedMs": 651,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-completion-barrier",
+        "ElapsedMs": 413,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-order",
+        "ElapsedMs": 461,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-root-loss",
+        "ElapsedMs": 472,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-prepare-pending",
+        "ElapsedMs": 478,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-worker-then-console",
+        "ElapsedMs": 431,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-console-then-worker",
+        "ElapsedMs": 455,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-late-worker-close",
+        "ElapsedMs": 495,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-exit-then-console",
+        "ElapsedMs": 489,
+        "Result": "PASS"
+      },
+      {
+        "Case": "console-then-worker-exit",
+        "ElapsedMs": 441,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-console-exit",
+        "ElapsedMs": 450,
+        "Result": "PASS"
+      },
+      {
+        "Case": "preparing-worker-exit",
+        "ElapsedMs": 479,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-terminate",
+        "ElapsedMs": 543,
+        "Result": "PASS"
+      },
+      {
+        "Case": "unfinished-worker-exit",
+        "ElapsedMs": 522,
+        "Result": "PASS"
+      }
+    ]
+  },
+  "initial_failures": {
+    "delivery-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-csr\\deliver.ps1:26\nLine |\n  26 |   if($LASTEXITCODE){throw 'layout64'}\n     |                     ~~~~~~~~~~~~~~~~\n     | layout64\n\n\n",
+    "delivery-final-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-csr\\deliver-final.ps1:30\nLine |\n  30 |   if($LASTEXITCODE){throw 'layout32'}\n     |                     ~~~~~~~~~~~~~~~~\n     | layout32\n\n\n",
+    "layout32-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-csr\\layout32.ps1:5\nLine |\n   5 |   if($LASTEXITCODE){throw 'layout32 build'}\n     |                     ~~~~~~~~~~~~~~~~~~~~~~\n     | layout32 build\n\n\n",
+    "retry-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-csr\\retry.ps1:7\nLine |\n   7 |   if($LASTEXITCODE){throw 'layout64'}\n     |                     ~~~~~~~~~~~~~~~~\n     | layout64\n\n\n",
+    "retry-final-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\test\\adapter-basesrv\\verify-service-fixtures.ps1:66\nLine |\n  66 |              throw \"Fixture assertion/actual exit failed: $($item.Case \u2026\n     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Fixture assertion/actual exit failed: frontend-unclaimed-stop\n\n\n",
+    "retry3-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-csr\\retry3.ps1:7\nLine |\n   7 |   if($LASTEXITCODE){throw 'layout64'}\n     |                     ~~~~~~~~~~~~~~~~\n     | layout64\n\n\n",
+    "service-retry-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\test\\adapter-basesrv\\verify-service-fixtures.ps1:66\nLine |\n  66 |              throw \"Fixture assertion/actual exit failed: $($item.Case \u2026\n     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Fixture assertion/actual exit failed: frontend-wait\n\n\n",
+    "service-retry3-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\test\\adapter-basesrv\\verify-service-fixtures.ps1:66\nLine |\n  66 |              throw \"Fixture assertion/actual exit failed: $($item.Case \u2026\n     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Fixture assertion/actual exit failed: frontend-wait\n\n\n",
+    "service-retry4-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\test\\adapter-basesrv\\verify-service-fixtures.ps1:66\nLine |\n  66 |              throw \"Fixture assertion/actual exit failed: $($item.Case \u2026\n     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Fixture assertion/actual exit failed: frontend-wait\n\n\n",
+    "service-retry5-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\test\\adapter-basesrv\\verify-service-fixtures.ps1:66\nLine |\n  66 |              throw \"Fixture assertion/actual exit failed: $($item.Case \u2026\n     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Fixture assertion/actual exit failed: frontend-wait\n\n\n",
+    "service-retry6-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\test\\adapter-basesrv\\verify-service-fixtures.ps1:66\nLine |\n  66 |              throw \"Fixture assertion/actual exit failed: $($item.Case \u2026\n     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Fixture assertion/actual exit failed: frontend-wait\n\n\n",
+    "service-retry7-error.txt": "Exception: O:\\repos.hobby\\ntvdm64\\test\\adapter-basesrv\\verify-service-fixtures.ps1:66\nLine |\n  66 |              throw \"Fixture assertion/actual exit failed: $($item.Case \u2026\n     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Fixture assertion/actual exit failed: frontend-wait\n\n\n"
+  },
+  "Full": "Not repeated: five audited files since P21, three changed mirror files"
+}

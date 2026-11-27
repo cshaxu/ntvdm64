@@ -208,7 +208,7 @@ BOOLEAN NTAPI CsrRevertToSelf(void)
 /* XP base/subsys/csr/server/apireqst.c:924, CsrValidateMessageBuffer.
  * Retain capture size/offset validation. Standalone's decoded, synchronous
  * server-local message is bound explicitly instead of forging its caller PID. */
-BOOLEAN CsrValidateMessageBuffer(const struct _CSR_API_MSG *message,
+BOOLEAN NTAPI CsrValidateMessageBuffer(const struct _CSR_API_MSG *message,
     const void *const *buffer, ULONG count, ULONG size)
 {
     OPENNT_BASE_MESSAGE_VIEW view={0};

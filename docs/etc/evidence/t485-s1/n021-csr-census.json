@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1324,
+    "byte_identical": 774,
+    "nonerror_identical": 785,
+    "nonerror_different": 539,
+    "nonerror_points": 7742,
+    "nonerror_lines": 154167
+  },
+  "after": {
+    "files": 1324,
+    "byte_identical": 775,
+    "nonerror_identical": 786,
+    "nonerror_different": 538,
+    "nonerror_points": 7741,
+    "nonerror_lines": 153031
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -1136
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "before_points": 1,
+      "before_lines": 1136,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1252,
+    "OpenNT": 72
+  }
+}

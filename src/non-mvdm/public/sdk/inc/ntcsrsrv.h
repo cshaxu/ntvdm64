@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0002    // Increment this if a change has global effects
 
-Copyright (c) 1990-1993  Microsoft Corporation
+Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Module Name:
 
@@ -22,6 +22,10 @@ Revision History:
 #ifndef _NTCSRSRVAPI_
 #define _NTCSRSRVAPI_
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 //
 // Define API decoration for direct importing system DLL references.
 //
@@ -33,6 +37,10 @@ Revision History:
 #endif
 
 #include "ntcsrmsg.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 //
 // NT Session structure allocated in the server context for each new NT
@@ -66,17 +74,7 @@ typedef struct _CSR_THREAD {
     HANDLE ThreadHandle;
     ULONG Flags;
     ULONG ReferenceCount;
-
-    //
-    // deadlock detection aids
-    //
-
-    NTSTATUS ShutDownStatus;
-    HANDLE ServerId;
-
     ULONG ImpersonateCount;
-
-    PVOID ServerDllPerThreadData[ 1 ];      // Variable length array
 } CSR_THREAD, *PCSR_THREAD;
 
 
@@ -149,7 +147,8 @@ typedef struct _CSR_PROCESS {
 typedef enum _CSR_REPLY_STATUS {
     CsrReplyImmediate,
     CsrReplyPending,
-    CsrClientDied
+    CsrClientDied,
+    CsrServerReplied
 } CSR_REPLY_STATUS, *PCSR_REPLY_STATUS;
 
 typedef
@@ -157,19 +156,6 @@ ULONG
 (*PCSR_API_ROUTINE)(
     IN OUT PCSR_API_MSG ReplyMsg,
     OUT PCSR_REPLY_STATUS ReplyStatus
-    );
-
-typedef
-ULONG
-(*PCSR_1P_API_ROUTINE)(
-    IN OUT PCSR_API_MSG ReplyMsg
-    );
-
-typedef
-ULONG
-(*PCSR_API_DISPATCH_ROUTINE)(
-    IN OUT PCSR_API_MSG ReplyMsg,
-    IN ULONG ApiIndex
     );
 
 #define CSR_SERVER_QUERYCLIENTTHREAD() \
@@ -200,29 +186,6 @@ NTSTATUS
 (*PCSR_SERVER_ADDPROCESS_ROUTINE)(
     IN PCSR_PROCESS ParentProcess,
     IN PCSR_PROCESS Process
-    );
-
-typedef
-NTSTATUS
-(*PCSR_SERVER_ADDTHREAD_ROUTINE)(
-    IN PCSR_THREAD t
-    );
-
-typedef
-NTSTATUS
-(*PCSR_SERVER_DELETETHREAD_ROUTINE)(
-    IN PCSR_THREAD t
-    );
-
-typedef
-NTSTATUS
-(*PCSR_SERVER_INITTHREAD_ROUTINE)();
-
-typedef
-VOID
-(*PCSR_SERVER_EXCEPTION_ROUTINE)(
-    IN PEXCEPTION_POINTERS ExceptionPointers,
-    IN BOOLEAN FirstPass
     );
 
 typedef
@@ -302,25 +265,16 @@ typedef struct _CSR_SERVER_DLL {
     ULONG ServerDllConnectInfoLength;
     ULONG ApiNumberBase;
     ULONG MaxApiNumber;
-    union {
-        PCSR_API_ROUTINE *ApiDispatchTable;
-        PCSR_1P_API_ROUTINE *QuickApiDispatchTable;
-    };
+    PCSR_API_ROUTINE *ApiDispatchTable;
     PBOOLEAN ApiServerValidTable;
     PSZ *ApiNameTable;
     ULONG PerProcessDataLength;
-    ULONG PerThreadDataLength;
     PCSR_SERVER_CONNECT_ROUTINE ConnectRoutine;
     PCSR_SERVER_DISCONNECT_ROUTINE DisconnectRoutine;
-    PCSR_SERVER_ADDTHREAD_ROUTINE AddThreadRoutine;
-    PCSR_SERVER_DELETETHREAD_ROUTINE DeleteThreadRoutine;
-    PCSR_SERVER_INITTHREAD_ROUTINE InitThreadRoutine;
-    PCSR_SERVER_EXCEPTION_ROUTINE ExceptionRoutine;
     PCSR_SERVER_HARDERROR_ROUTINE HardErrorRoutine;
     PVOID SharedStaticServerData;
     PCSR_SERVER_ADDPROCESS_ROUTINE AddProcessRoutine;
     PCSR_SERVER_SHUTDOWNPROCESS_ROUTINE ShutdownProcessRoutine;
-    PCSR_API_DISPATCH_ROUTINE ApiDispatchRoutine;
 } CSR_SERVER_DLL, *PCSR_SERVER_DLL;
 
 typedef
@@ -368,6 +322,14 @@ CsrDebugProcess(
     IN ULONG TargetProcessId,
     IN PCLIENT_ID DebugUserInterface,
     IN PCSR_ATTACH_COMPLETE_ROUTINE AttachCompleteRoutine
+    );
+
+NTCSRAPI
+NTSTATUS
+NTAPI
+CsrDebugProcessStop(
+    IN ULONG TargetProcessId,
+    IN PCLIENT_ID DebugUserInterface
     );
 
 NTCSRAPI
@@ -421,7 +383,8 @@ NTAPI
 CsrCreateThread(
     IN PCSR_PROCESS Process,
     IN HANDLE ThreadHandle,
-    IN PCLIENT_ID ClientId
+    IN PCLIENT_ID ClientId,
+    BOOLEAN ValidateCallingThread
     );
 
 NTCSRAPI
@@ -505,8 +468,9 @@ CsrNotifyWait(
 NTCSRAPI
 VOID
 NTAPI
-CsrDestroyWait(
-    IN PCSR_WAIT_BLOCK WaitBlock
+CsrMoveSatisfiedWait(
+    IN PLIST_ENTRY DstWaitQueue,
+    IN PLIST_ENTRY SrcWaitQueue
     );
 
 NTCSRAPI
@@ -515,6 +479,14 @@ NTAPI
 CsrAddStaticServerThread(
     IN HANDLE ThreadHandle,
     IN PCLIENT_ID ClientId,
+    IN ULONG Flags
+    );
+
+NTCSRAPI
+NTSTATUS
+NTAPI
+CsrExecServerThread(
+    IN PUSER_THREAD_START_ROUTINE StartAddress,
     IN ULONG Flags
     );
 
@@ -560,9 +532,31 @@ CsrUnhandledExceptionFilter(
     IN PEXCEPTION_POINTERS ExceptionInfo
     );
 
+NTCSRAPI
+BOOLEAN
+NTAPI
+CsrValidateMessageBuffer(
+    IN CONST CSR_API_MSG *m,
+    IN VOID CONST * CONST * Buffer,
+    IN ULONG Count,
+    IN ULONG Size
+    );
+
+NTCSRAPI
+BOOLEAN
+NTAPI
+CsrValidateMessageString(
+    IN CONST CSR_API_MSG *m,
+    IN CONST PCWSTR *Buffer
+    );
+
 typedef struct _CSR_FAST_ANSI_OEM_TABLES {
     char OemToAnsiTable[256];
     char AnsiToOemTable[256];
 } CSR_FAST_ANSI_OEM_TABLES, *PCSR_FAST_ANSI_OEM_TABLES;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _NTCSRSRVAPI_
