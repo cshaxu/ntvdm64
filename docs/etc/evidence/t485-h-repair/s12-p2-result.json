@@ -1,6 +1,8 @@
 {
   "task": "M0 T485 S12 P2",
-  "state": "final-verified-published-commit-pending",
+  "state": "delivered-pushed",
+  "commit": "c43ad57bb",
+  "documentation_governance": "PASS; initial native-path prose rejected, corrected to descriptive system32 location; exact observed path retained in control log",
   "package": "build/t485-s12/runtime2",
   "file": "src/mvdm-host/dos/command/cmdkeyb.c",
   "diff": {

@@ -6,11 +6,11 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed5/48files30/645points;restored-delivered7,restored-local1,
+Reviewed5/48files30/645points;restored-delivered8,restored-local0,
 residual-reviewed22,unreviewed615.
-Delivered/pushed4files28points in806a8c45c;workspace receipt follows.
+Delivered/pushed5files30points through c43ad57bb.
 Current byte-sensitive census is measured separately from frozen points.
-P1 delivered;P2 cached build,dual publication and targeted verification passed;commit pending.
+P1/P2 cached build,dual publication,targeted verification and commit/push complete.
 
 | Order | File | Frozen points | State |
 | ---: | --- | ---: | --- |
@@ -18,7 +18,7 @@ P1 delivered;P2 cached build,dual publication and targeted verification passed;c
 | 2 | src/mvdm-host/dos/command/cmdconf.c | 2 | P1 delivered806a8c45c |
 | 3 | src/mvdm-host/dos/command/cmdenv.c | 2 | P1 delivered806a8c45c |
 | 4 | src/mvdm-host/dos/command/cmdexec.c | 20 | P1 delivered806a8c45c |
-| 5 | src/mvdm-host/dos/command/cmdkeyb.c | 2 | P2 final verified/published; commit pending |
+| 5 | src/mvdm-host/dos/command/cmdkeyb.c | 2 | P2 delivered c43ad57bb |
 | 6 | src/mvdm-host/dos/command/cmdmisc.c | 8 | Pending |
 | 7 | src/mvdm-host/dos/dem/dem.c | 2 | Pending |
 | 8 | src/mvdm-host/dos/dem/dem.h | 1 | Pending |
@@ -202,4 +202,6 @@ Initial preprocessing output-directory typo corrected by relocating its owned
 output;no compilation/publication repeated. Guest binaries unchanged.
 No claim of interactive non-US keyboard layout installation. Full not due.
 Five files30points final verified;8restored22residual615unreviewed.
-P2 commit/push pending;next file6 cmdmisc.c. Current765/31754 (-38/-55).
+P2 delivered/pushed c43ad57bb;next file6 cmdmisc.c. Current765/31754 (-38/-55).
+
+P2 documentation governance and relative links PASS after correcting the native-path prose;exact control output retained in build evidence. No product test repeated.

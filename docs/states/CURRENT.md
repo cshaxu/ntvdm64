@@ -33,14 +33,14 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S12 Ordered Progress
 
 [S12 list](../etc/evidence/t485-h-repair/s12-progress.md):5/48files,
-30/645frozen points reviewed;7restored-delivered,1restored-local,22residual,
+30/645frozen points reviewed;8restored-delivered,0restored-local,22residual,
 615unreviewed. P1 delivered806a8c45c:4files28points,runtime1.
 P2 cmdkeyb.c2/6->1/5;actual default KDF native-directory counterexample,
 original calls restored with one existing package binding;final verification PASS.
 [P2 receipt](../etc/evidence/t485-h-repair/s12-p2-result.json):runtime2,26hashes,
-113line witnesses,keyboard reader/PIF PASS;commit/push pending.
+113line witnesses,keyboard reader/PIF PASS;P2 delivered/pushed c43ad57bb.
 S12 census803/31809->765/31754 (-38points/-55lines).
-Nextfile6 cmdmisc.c after P2 delivery. Migration39/159;N004 gated on S13.
+Nextfile6 cmdmisc.c. Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
 
