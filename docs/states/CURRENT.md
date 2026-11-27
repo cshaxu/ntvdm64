@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime49 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime50 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -185,6 +185,13 @@ CCPU window-borrow and SOL Options passed. N02215/39; S15 9/14, overall57/159.
 Census1329files,782exact,793nonerror same/536different,7785points/116983lines;
 delta0/0/0/0/-15points/-15lines.1281XP/48OpenNT. Two mirrors since P42
 Full24/24; next draw.c. No guest changes.
+
+[P45 N022 control drawing](../etc/evidence/t485-s1/n022-draw.md) delivers
+runtime50 with draw.c byte-identical to XP. Cached build, dual13-image26hash,
+controls40/40 (including actual PaintRect), CCPU window-borrow and SOL Options
+passed. N02216/39; S15 9/14, overall57/159. Census1329files,783exact,
+794nonerror same/535different,7783points/116981lines; delta0/+1/+1/-1/-2/-2.
+1282XP/47OpenNT. Three mirrors since P42 Full24/24; next drawtext.c.
 
 ## S14 Closure Record
 

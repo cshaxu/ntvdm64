@@ -9,12 +9,23 @@
  * and color-service doubles. Not a real HWND/guest lifetime acceptance. */
 HBRUSH WINAPI xxxGetControlBrush(PWND, HDC, UINT);
 static WND control, parent, owner;
+static WND desktop;
+static BOOL painting;
+static POINT paint_origin;
+BOOL WINAPI PaintRect(HWND, HWND, HDC, HBRUSH, LPRECT);
 static HWND expected;
 static unsigned failures, depth, calls, retains, leaves;
 static BOOL deny_enter, deny_validate, deny_retain, raise_color;
 static PWND rejected_state;
 #define TEST_EXCEPTION ((DWORD)0xe0424473)
 #define CHECK(c) do { if (!(c)) { ++failures; printf("FAIL %d\n", __LINE__); } } while (0)
+PWND WINAPI wow_window_client_validate_window(HWND window)
+{
+    if (window == control.head.h) return &control;
+    if (window == parent.head.h) return &parent;
+    if (window == desktop.head.h) return &desktop;
+    return NULL;
+}
 
 BOOL WINAPI wow_user_borrow_enter(wow_user_borrow_scope *scope)
 {
@@ -49,6 +60,12 @@ __declspec(noreturn) VOID WINAPI wow_user_native_call_failed(const char *stage, 
 }
 HBRUSH WINAPI wow_edit_NtUserGetControlColor(HWND receiver, HWND source, HDC dc, UINT message)
 {
+    if (painting) {
+        CHECK(source == control.head.h && message == WM_CTLCOLORLISTBOX);
+        CHECK(receiver == desktop.head.h || receiver == parent.head.h || receiver == control.head.h);
+        CHECK(GetBrushOrgEx(dc, &paint_origin));
+        return GetStockObject(BLACK_BRUSH);
+    }
     CHECK(depth == 1 && receiver == expected && source == control.head.h);
     CHECK(dc == (HDC)(ULONG_PTR)4 && message == WM_CTLCOLORLISTBOX);
     ++calls;
@@ -59,6 +76,42 @@ HBRUSH WINAPI wow_edit_NtUserGetControlColor(HWND receiver, HWND source, HDC dc,
 static HBRUSH invoke(void)
 {
     return GetControlBrush(control.head.h, (HDC)(ULONG_PTR)4, WM_CTLCOLORLISTBOX);
+}
+static void check_paint_rect(void)
+{
+    HDC dc = CreateCompatibleDC(NULL);
+    HBITMAP bitmap, previous;
+    RECT rect = {0, 0, 1, 1};
+    POINT restored;
+    CHECK(dc != NULL);
+    if (!dc) return;
+    bitmap = CreateBitmap(1, 1, 1, 32, NULL);
+    CHECK(bitmap != NULL);
+    if (!bitmap) { DeleteDC(dc); return; }
+    previous = (HBITMAP)SelectObject(dc, bitmap);
+    CHECK(previous != NULL);
+    CHECK(SetPixel(dc, 0, 0, RGB(255, 255, 255)) != CLR_INVALID);
+    painting = TRUE;
+    desktop.head.h = GetDesktopWindow();
+    SetRect(&desktop.rcClient, 100, 200, 500, 600);
+    SetRect(&control.rcClient, 20, 30, 40, 50);
+    SetRect(&parent.rcClient, 11, 13, 51, 53);
+    CHECK(SetBrushOrgEx(dc, 5, 7, NULL));
+    CHECK(PaintRect(NULL, control.head.h, dc, (HBRUSH)CTLCOLOR_LISTBOX, &rect));
+    CHECK(paint_origin.x == 0 && paint_origin.y == 0);
+    CHECK(GetPixel(dc, 0, 0) == RGB(0, 0, 0));
+    CHECK(GetBrushOrgEx(dc, &restored) && restored.x == 5 && restored.y == 7);
+    CHECK(PaintRect(parent.head.h, control.head.h, dc, (HBRUSH)CTLCOLOR_LISTBOX, &rect));
+    CHECK(paint_origin.x == -9 && paint_origin.y == -17);
+    CHECK(GetBrushOrgEx(dc, &restored) && restored.x == 5 && restored.y == 7);
+    CHECK(PaintRect(control.head.h, control.head.h, dc, (HBRUSH)CTLCOLOR_LISTBOX, &rect));
+    CHECK(paint_origin.x == 5 && paint_origin.y == 7);
+    CHECK(!PaintRect((HWND)99, control.head.h, dc, (HBRUSH)CTLCOLOR_LISTBOX, &rect));
+    CHECK(!PaintRect(parent.head.h, (HWND)99, dc, (HBRUSH)CTLCOLOR_LISTBOX, &rect));
+    painting = FALSE;
+    CHECK(SelectObject(dc, previous) == bitmap);
+    CHECK(DeleteObject(bitmap));
+    CHECK(DeleteDC(dc));
 }
 static void check_selection(DWORD style, PWND related_parent, PWND related_owner, HWND recipient)
 {
@@ -103,6 +156,7 @@ int __cdecl main(void)
     CHECK(caught && depth == 0 && calls == before + 1); raise_color = FALSE;
     check_selection(WS_CHILD, &parent, NULL, parent.head.h);
     CHECK(leaves == 11);
+    check_paint_rect();
     printf("control_brush_failures=%u calls=%u\n", failures, calls);
     return failures != 0;
 }

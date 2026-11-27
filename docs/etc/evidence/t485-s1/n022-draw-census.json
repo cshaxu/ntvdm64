@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 782,
+    "nonerror_identical": 793,
+    "nonerror_different": 536,
+    "nonerror_points": 7785,
+    "nonerror_lines": 116983
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 783,
+    "nonerror_identical": 794,
+    "nonerror_different": 535,
+    "nonerror_points": 7783,
+    "nonerror_lines": 116981
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -2,
+    "nonerror_lines": -2
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "before_points": 2,
+      "before_lines": 2,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1282,
+    "OpenNT": 47
+  }
+}

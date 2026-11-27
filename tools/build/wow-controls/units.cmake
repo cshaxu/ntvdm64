@@ -170,7 +170,7 @@ control_link(wow_dialog_getset_fixture.exe "" getset_fixture getset_reader getse
 add_custom_target(original-getset-boundary DEPENDS "${CMAKE_BINARY_DIR}/bin/wow_dialog_getset_fixture.exe")
 control_link(wow_edit_call_fixture.exe "" edit_fixture edit_adapter control_extent state_guards color_client)
 control_link(wow_edit_memory_callbacks_fixture.exe "" memory_fixture dialog_memory)
-control_link(wow_control_brush_fixture.exe "" brush_fixture brush_adapter brush_owner brush_client)
+control_link(wow_control_brush_fixture.exe "" brush_fixture brush_adapter brush_owner brush_client color_client original_draw)
 control_link(wow_default_window_binding_fixture.exe "" default_fixture default_adapter)
 control_link(wow_default_original_fixture.exe "ntdll.lib" default_original_fixture original_default default_view string_conversion string_services native_environment)
 add_custom_target(original-default-boundary DEPENDS "${CMAKE_BINARY_DIR}/bin/wow_default_original_fixture.exe")

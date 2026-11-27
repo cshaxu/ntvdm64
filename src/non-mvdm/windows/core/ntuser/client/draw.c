@@ -2,7 +2,7 @@
 /****************************** Module Header ******************************\
 * Module Name: draw.c
 *
-* Copyright (c) 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains the DrawFrameControl API
 *
@@ -10,10 +10,8 @@
 * 12-12-93  FritzS  Ported from Chicago
 \***************************************************************************/
 
-#line 13
 #include "precomp.h"
 #pragma hdrstop
-#line 15
 
 /***************************************************************************\
 * PaintRect
@@ -34,9 +32,12 @@ BOOL PaintRect(
     POINT ptOrg;
     PWND pwndBrush;
     PWND pwndPaint;
+    HWND    hwndDesktop;
 
-    if (hwndBrush == NULL)
-        hwndBrush = GetDesktopWindow();
+    hwndDesktop = GetDesktopWindow();
+    if (hwndBrush == NULL) {
+        hwndBrush = hwndDesktop;
+    }
 
     if (hwndBrush != hwndPaint) {
         pwndBrush = ValidateHwnd(hwndBrush);
@@ -52,8 +53,15 @@ BOOL PaintRect(
         }
 
 
-        SetBrushOrgEx(hdc, pwndBrush->rcClient.left - pwndPaint->rcClient.left,
-                pwndBrush->rcClient.top - pwndPaint->rcClient.top, &ptOrg);
+        if (hwndBrush != hwndDesktop) {
+            SetBrushOrgEx(
+                    hdc,
+                    pwndBrush->rcClient.left - pwndPaint->rcClient.left,
+                    pwndBrush->rcClient.top - pwndPaint->rcClient.top,
+                    &ptOrg);
+        } else {
+            SetBrushOrgEx(hdc, 0, 0, &ptOrg);
+        }
     }
 
     /*
@@ -64,7 +72,7 @@ BOOL PaintRect(
      */
     if (hbr < (HBRUSH)CTLCOLOR_MAX) {
         hbr = GetControlColor(hwndBrush, hwndPaint, hdc,
-                (UINT)hbr + WM_CTLCOLORMSGBOX);
+                HandleToUlong(hbr) + WM_CTLCOLORMSGBOX);
     }
 
     FillRect(hdc, lprc, hbr);
