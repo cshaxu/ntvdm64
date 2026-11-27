@@ -1,6 +1,8 @@
 {
   "task": "M0 T485 S12 P3",
-  "state": "final-verified-published-commit-pending",
+  "state": "delivered-pushed",
+  "commit": "d5e4a83f6",
+  "documentation_governance": "PASS",
   "package": "build/t485-s12/runtime4",
   "file": "src/mvdm-host/dos/command/cmdmisc.c",
   "sha256": "549cf67a32c2a460a5b54c0b481c785ad91eff7f563ecb3a537064567379d58a",

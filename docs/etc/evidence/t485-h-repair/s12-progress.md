@@ -6,9 +6,9 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed6/48files38/645points;restored-delivered8,restored-local1,
+Reviewed6/48files38/645points;restored-delivered9,restored-local0,
 residual-reviewed29,unreviewed607.
-Delivered/pushed5files30points through c43ad57bb.
+Delivered/pushed6files38points through d5e4a83f6.
 Current byte-sensitive census is measured separately from frozen points.
 P1/P2 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -19,7 +19,7 @@ P1/P2 cached build,dual publication,targeted verification and commit/push comple
 | 3 | src/mvdm-host/dos/command/cmdenv.c | 2 | P1 delivered806a8c45c |
 | 4 | src/mvdm-host/dos/command/cmdexec.c | 20 | P1 delivered806a8c45c |
 | 5 | src/mvdm-host/dos/command/cmdkeyb.c | 2 | P2 delivered c43ad57bb |
-| 6 | src/mvdm-host/dos/command/cmdmisc.c | 8 | P3 final verified/published; commit pending |
+| 6 | src/mvdm-host/dos/command/cmdmisc.c | 8 | P3 delivered d5e4a83f6 |
 | 7 | src/mvdm-host/dos/dem/dem.c | 2 | Pending |
 | 8 | src/mvdm-host/dos/dem/dem.h | 1 | Pending |
 | 9 | src/mvdm-host/dos/dem/demgset.c | 4 | Pending |
@@ -242,7 +242,7 @@ added cleanup statements are not original witnesses. Existing guest-location
 lifecycle/failure fixture,ten package-resource cases including WOW initial
 environment projection,and real private-desktop WINMINE visible window PASS.
 No original guest modification,rebuild or Full run. This is startup/window
-coverage,not new gameplay/normal-exit evidence. P3 commit/push pending.
+coverage,not new gameplay/normal-exit evidence. P3 delivered/pushed d5e4a83f6.
 
 Sixfiles38points final verified;9restored29residual607unreviewed.
 Nonerror750/31731,down53points78lines from S12 baseline.

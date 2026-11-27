@@ -33,13 +33,13 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 ## S12 Ordered Progress
 
 [S12 list](../etc/evidence/t485-h-repair/s12-progress.md):6/48files,
-38/645points reviewed;8restored-delivered,1restored-local,29residual,
-607unreviewed. P1/P2 delivered5files30points through c43ad57bb.
-P3 cmdmisc.c23/116->8/93 (-15/-23),whole-file source review complete;
+38/645points reviewed;9restored-delivered,0restored-local,29residual,
+607unreviewed. P1-P3 delivered6files38points through d5e4a83f6.
+P3 cmdmisc.c23/116->8/93 (-15/-23),whole-file review and delivery complete;
 [P3 receipt](../etc/evidence/t485-h-repair/s12-p3-result.json):runtime4 cached
-build,26publication hashes,151line witnesses and selected tests PASS;commit pending.
+build,26publication hashes,151line witnesses and selected tests PASS;delivered/pushed d5e4a83f6.
 S12 census803/31809->750/31731 (-53points/-78lines).
-Nextfile7 dem.c after P3 delivery. Migration39/159;N004 gated on S13.
+Nextfile7 dem.c. Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
 
