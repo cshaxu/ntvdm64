@@ -2993,3 +2993,10 @@ layout follows its XP owner rather than a copied declaration.
 wowgdip.h is byte-exact XP with unchanged service signatures and no local
 exclusion or line map. [Evidence](../../docs/etc/evidence/t485-s1/n020-wowgdi.md).
 N0206/7 delivered.
+
+### T485 S15 N020 WOW USER registration
+
+wowuserp.h uses the XP registration table with explicit retained original USER
+layout/cleanup ABI until the paired USER cohort migrates. Unused old slots are
+removed, not duplicated. [Evidence](../../docs/etc/evidence/t485-s1/n020-wowuser.md)
+records each residual and runtime19 Full checkpoint. N0207/7 delivered.

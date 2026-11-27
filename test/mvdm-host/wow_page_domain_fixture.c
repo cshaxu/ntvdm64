@@ -1849,7 +1849,7 @@ static void verify_original_modal_task(void)
     inputs.pfnLocalAlloc=W32LocalAlloc;inputs.pfnLocalReAlloc=W32LocalReAlloc;
     inputs.pfnLocalLock=W32LocalLock;inputs.pfnLocalUnlock=W32LocalUnlock;
     inputs.pfnLocalSize=W32LocalSize;inputs.pfnLocalFree=W32LocalFree;
-    inputs.pfnGetExpWinVer=W32GetExpWinVer;inputs.pfnInitDlgCb=NULL;
+    inputs.pfnGetExpWinVer=W32GetExpWinVer;
     inputs.pfn16GlobalAlloc=W32GlobalAlloc16;inputs.pfn16GlobalFree=W32GlobalFree16;
     inputs.pfnEmptyCB=W32EmptyClipboard;inputs.pfnWowEditNextWord=W32EditNextWord;
     inputs.pfnWowWndProcEx=destroy_in_callback;
@@ -2061,7 +2061,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
     callbacks.pfnLocalSize = W32LocalSize;
     callbacks.pfnLocalFree = W32LocalFree;
     callbacks.pfnGetExpWinVer = W32GetExpWinVer;
-    callbacks.pfnInitDlgCb = NULL;
+
     callbacks.pfn16GlobalAlloc = W32GlobalAlloc16;
     callbacks.pfn16GlobalFree = W32GlobalFree16;
     callbacks.pfnEmptyCB = W32EmptyClipboard;

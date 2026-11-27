@@ -1,0 +1,23 @@
+[
+  {
+    "id": "N020-WOWUSER-1",
+    "scope": "two legacy callback typedefs",
+    "evidence": "C clglobal.c:121/126 and globals.h:124/131 still compile legacy declarations; actual dialog dispatch uses pfnWOWTellWOWThehDlg",
+    "disposition": "Retain types for unmigrated original USER declarations; obsolete registration slots and B macros removed",
+    "revisit": "N022 USER client declarations"
+  },
+  {
+    "id": "N020-WOWUSER-2",
+    "scope": "PFNWOWCLEANUP four arguments",
+    "evidence": "wkman.c:2217 and wuser.c:2446/2469 call four arguments; module case passes NE selector list to registered_cleanup and original USER cleanup",
+    "disposition": "Preserve actual task/module cleanup until paired original USER cleanup migration; no discarded selectors or silent success",
+    "revisit": "N026 USER cleanup and paired WOW module unload calls"
+  },
+  {
+    "id": "N020-WOWUSER-3",
+    "scope": "old WW layout and marker/count constants",
+    "evidence": "user.h STATEOFFSET uses WND_CNT_WOWDWORDS; getset.c accesses adwWOW/dwStyle/dwExStyle/hInstance and verifies copied word extent; cleanup.c and usercli.h consume WNDPROC_WOW",
+    "disposition": "Preserve selected original USER object layout and synchronous access contract; do not copy another WW into compat",
+    "revisit": "N022-N026 original USER layout/callers together"
+  }
+]

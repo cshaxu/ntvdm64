@@ -1390,7 +1390,7 @@ void WINAPI wow_original_registration_exchange(struct tagAPFNWOWHANDLERSIN *inpu
     output->pfnServerLoadCreateMenu = wow_private_user_load_create_menu;
     output->pfnWOWCleanup = registered_cleanup;
     output->pfnWOWFindWindow = wow_native_FindWindowA;
-    output->pfnWOWGetIdFromDirectory = wow_private_user_get_id_from_directory;
+
     output->pfnWOWLoadBitmapA = wow_bitmap_load;
     output->pfnWowWaitForMsgAndEvent = registered_wait_for_message;
     output->pfnYieldTask = registered_yield_task;

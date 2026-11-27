@@ -1,0 +1,48 @@
+{
+  "before": {
+    "files": 1318,
+    "byte_identical": 767,
+    "nonerror_identical": 777,
+    "nonerror_different": 541,
+    "nonerror_points": 7727,
+    "nonerror_lines": 157354
+  },
+  "after": {
+    "files": 1318,
+    "byte_identical": 767,
+    "nonerror_identical": 777,
+    "nonerror_different": 541,
+    "nonerror_points": 7731,
+    "nonerror_lines": 156836
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 4,
+    "nonerror_lines": -518
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+      "before_points": 1,
+      "before_lines": 586,
+      "after_points": 5,
+      "after_lines": 68,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_points": 1,
+      "before_lines": 2702,
+      "after_points": 1,
+      "after_lines": 2702,
+      "baseline": "OpenNT unchanged"
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1241,
+    "OpenNT": 77
+  }
+}

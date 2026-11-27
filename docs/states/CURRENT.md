@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall55/159 directories, H001-H036 and N001-N019. S15 runtime18 is the current
+overall56/159 directories, H001-H036 and N001-N020. S15 runtime19 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,29 +32,19 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-7/14 directories delivered. P1 N013 and P2 N014 are complete; directory50
+8/14 directories delivered. P1 N013 and P2 N014 are complete; directory50
 Full24/24 passed. [P3 N015](../etc/evidence/t485-s1/n015.md) completed the five
 DDK declarations with cached build, runtime3 dual publication, lifecycle,
 guest NetAPI and all32 Video7 modes. See its receipt for the observer retry and historical census.
 
-[P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md) delivered:
-align/conroute/debugfmt/nettypes/ntddvdm migrated; B Console ABI matches XP.
-Cached full build, runtime4 dual13-image26hash publication, guest NetAPI and
-Full24/24 passed. Ten-file checkpoint resets to zero. N016 has5/21 delivered,
-16remaining; directory totals stay51/159 and S15 3/14. Next file packoff.h.
-Current census1319files,746exact,750nonerror same/569different,
-7737points/195577lines; P4delta0files,+4exact,+4same,-4different,-6points,
--574lines.1200XP/119OpenNT. Earlier P3 census remains historical.
+[P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md) delivered the
+five original declarations and paired Console ABI. Runtime4 dual publication,
+NetAPI and Full24/24 passed; its detailed record retains historical counters.
 
-[P5 N016 positions6-11](../etc/evidence/t485-s1/n016-packing-smb.md) delivered:
-packing/SMB/tstr migrated with21necessary #line differences; no function
-adaptation. Final cached build, runtime5 dual publication/hash check, RAP11/11,
-redirector lifecycle and guest NetAPI passed. Six files since P4 Full24/24.
-N016 now11/21 delivered,10remaining; overall51/159 and S15 3/14 remain.
-Next vdm.h/vdmapi.h/vdmtib.inc. Current census1319files,748exact,
-753nonerror same/566different,7752points/192119lines; P5delta0files,+2exact,
-+3same,-3different,+15points/-3458lines (restored original LF exposes#line).
-1206XP/113OpenNT; previous P4 census is historical.
+[P5 N016 positions6-11](../etc/evidence/t485-s1/n016-packing-smb.md) delivered
+packing/SMB/tstr with21necessary #line differences. Runtime5 cached build,
+dual publication, RAP11/11, lifecycle and NetAPI passed. Detailed census and
+LF block-count explanation remain in that receipt.
 
 [P6 N016 VDM](../etc/evidence/t485-s1/n016-vdm.md) delivered positions12-15:
 XP VDM pointer tables/ABI and relocated winbase template. Final cached build,
@@ -175,6 +165,14 @@ passed. N0206/7; next wowuserp.h. Overall55/159 and S15 7/14 unchanged.
 Census1318files,767exact,777nonerror same/541different,7727points/157354lines;
 delta0files,+1exact,+1same/-1different,-1point/-38lines.1240XP/78OpenNT.
 Eight files since P13 Full24/24; original guest unchanged.
+
+[P19 N020 WOW USER](../etc/evidence/t485-s1/n020-wowuser.md) delivered XP
+registration declarations; three evidenced legacy USER ABI groups remain.
+Cached build, runtime19 dual13-image26hash publication, registration/window
+lifecycle and Full24/24 passed. N0207/7 complete; overall56/159, S15 8/14.
+Ten-file checkpoint resets to zero. Next N021. Win95 exit1 boundary retained.
+Census1318files,767exact,777nonerror same/541different,7731points/156836lines;
+delta0files,0exact,0same,0different,+4points/-518lines.1241XP/77OpenNT.
 
 ## S14 Closure Record
 

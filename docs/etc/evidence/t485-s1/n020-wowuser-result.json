@@ -1,0 +1,238 @@
+{
+  "task": "M0 T485 S15 P19 N020 WOW USER",
+  "runtime": "build/t485-s15/runtime19",
+  "build_exit": 0,
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "E320E6DB52DC9BC50173332EBAD0783C887CE30373CF5643E04B2BC0FFB5E54D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "E320E6DB52DC9BC50173332EBAD0783C887CE30373CF5643E04B2BC0FFB5E54D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "379A83622958AB629E0A36D7BDCFD7F5B83D7A4DAC6ECBD34E2459CF08CB0E24",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "379A83622958AB629E0A36D7BDCFD7F5B83D7A4DAC6ECBD34E2459CF08CB0E24",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "91037337F2280F08CB83837A7EF5141F0533ADFB4AC4FC8D18A7338FF8CC3036",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "91037337F2280F08CB83837A7EF5141F0533ADFB4AC4FC8D18A7338FF8CC3036",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "CDF65893BF0351494DEFE47BF8E28A16499DB0B2332B55BB886658FB2460A660",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "CDF65893BF0351494DEFE47BF8E28A16499DB0B2332B55BB886658FB2460A660",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "99BDB994E99758278026C644E8E77DCEBFE6F2A8CF26D3D2C47DAA8C6B542E43",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "99BDB994E99758278026C644E8E77DCEBFE6F2A8CF26D3D2C47DAA8C6B542E43",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "E4F3597F693FB4D3C83520461D69C038E502B827A458183C9AC4A9FEA1F877F2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "E4F3597F693FB4D3C83520461D69C038E502B827A458183C9AC4A9FEA1F877F2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "BD106D55234C9660A2BA2170328BBA1CDBDD1EA3EF9BD05506F3EAF5A5F5F8CB",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "BD106D55234C9660A2BA2170328BBA1CDBDD1EA3EF9BD05506F3EAF5A5F5F8CB",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "915094857CA69BDDADDA4810579A4849922D9EDEBF3D2243DF0597AD3ECC5CF0",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "915094857CA69BDDADDA4810579A4849922D9EDEBF3D2243DF0597AD3ECC5CF0",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "13C59F0FA5A78D0F6FCFBAB37F61C953D1E984AA1C6112D83D61F72F43A8155E",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "13C59F0FA5A78D0F6FCFBAB37F61C953D1E984AA1C6112D83D61F72F43A8155E",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "C244AF4E1C4EA728DCDAA9777DAE658CD520F766940CE8F2AFEDF9B7D92702AE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "C244AF4E1C4EA728DCDAA9777DAE658CD520F766940CE8F2AFEDF9B7D92702AE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "CC9EDDF7A46B7433E6D322C83F325E118A27231E913FD8112AD0734BB08094A3",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "CC9EDDF7A46B7433E6D322C83F325E118A27231E913FD8112AD0734BB08094A3",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "B7E089E3AD9F5663F541ADA62EC782275BD989AE3593C9CBA9FEFBDD7E3F0058",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "B7E089E3AD9F5663F541ADA62EC782275BD989AE3593C9CBA9FEFBDD7E3F0058",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "B12F37B117BBF14524AB2DE8563F732398690F96B824249BEBAF9C610A1BA28F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "B12F37B117BBF14524AB2DE8563F732398690F96B824249BEBAF9C610A1BA28F",
+      "pass": true
+    }
+  ],
+  "Full": "24/24 PASS",
+  "census": {
+    "before": {
+      "files": 1318,
+      "byte_identical": 767,
+      "nonerror_identical": 777,
+      "nonerror_different": 541,
+      "nonerror_points": 7727,
+      "nonerror_lines": 157354
+    },
+    "after": {
+      "files": 1318,
+      "byte_identical": 767,
+      "nonerror_identical": 777,
+      "nonerror_different": 541,
+      "nonerror_points": 7731,
+      "nonerror_lines": 156836
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 4,
+      "nonerror_lines": -518
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "before_points": 1,
+        "before_lines": 586,
+        "after_points": 5,
+        "after_lines": 68,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "before_points": 1,
+        "before_lines": 2702,
+        "after_points": 1,
+        "after_lines": 2702,
+        "baseline": "OpenNT unchanged"
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1241,
+      "OpenNT": 77
+    }
+  },
+  "owned_runs": {
+    "build": 21584,
+    "publish": 25952,
+    "verification": 6708
+  },
+  "targeted": {
+    "init-notification": {
+      "passed": true,
+      "log_sha256": "a885b523ecd8b7ef4c5bdcfd77a60a15792fbf7c621fc8981dcfd40ce56066ac",
+      "markers": [
+        "WOW_INIT_NOTIFICATION errors=0 registration/retry/exhaustion/exception/retirement checked",
+        "WOW_FIXTURE_OK case=init-notification"
+      ]
+    },
+    "window-borrow": {
+      "passed": true,
+      "log_sha256": "a48c5b38a0accdd7d2fd462ada69cf1288a915adc9033a48cabb61286c6f9188",
+      "markers": [
+        "WOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0",
+        "WOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1",
+        "WOW_DESKTOP_QUERY_CCPU errors=0 single_root=1 class_name=1 retained=1 idempotent=1",
+        "WOW_MANAGED_SLOT_REUSE_CCPU errors=0 creation=1 null_class=1 retained=1 released=1",
+        "WOW_TERMINAL_PREPARE_CCPU errors=0 dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1",
+        "WOW_DIALOG_CACHE_CCPU errors=0 nested_destroy=1 released=1",
+        "WOW_NATIVE_CREATE_CCPU errors=0 forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1",
+        "WOW_UNOWNED_VIEW_CCPU errors=0 foreign_root=1 local_unowned=1 class_guard=1 native_untouched=1 released=1",
+        "WOW_CLASS_MEMBERSHIP_COPY_CCPU errors=0 phases=4 owned=2 nonowned=2 page_crossing=1 invalid_name=1",
+        "WOW_VIEW_PROMOTION_CCPU errors=0 same_backing=1 words=1 stale_rejected=1 ownership=1 released=1",
+        "WOW_NATIVE_CLASS_WND_OWNER_CCPU errors=0 same_class=1 same_generation=1 managed_retirement=1 modes=2",
+        "WOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=0 callback_double=1 rollback_retry=1 identity_retained=1",
+        "WOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=1 callback_double=1 rollback_retry=1 identity_retained=1",
+        "WOW_CLASS_RELEASE_CCPU errors=0 live_rejected=1 borrowed_safe=1 no_resurrection=1 reclaimed=1",
+        "WOW_CLASS_REFERENCE_SET_CCPU errors=0 classes=32 live=16 retired_borrowed=16 retained=1 reclaimed=1",
+        "WOW_VIEW_RETIREMENT_CCPU errors=0 nested_borrow=1 class_guard=1 consumed_once=1 released=1",
+        "WOW_DEAD_GRAPH_CCPU errors=0 atomic=1 live_guard=1 retained=1 released=1",
+        "WOW_GRAPH_DUPLICATE_SLOT_CCPU errors=0 no_publication=1 released=1",
+        "WOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 missing_desktop=1 unpublished=1 released=1",
+        "WOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1",
+        "WOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1 existing_state_validation=1",
+        "WOW_NATIVE_CLASS_CCPU errors=0 projected=9 owned_handle=1 native_pointers=0 released=1",
+        "WOW_CONTROL_NATIVE_RETURN_CCPU errors=0 paint=1 scroll=1 caret=1 lock=1",
+        "WOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1",
+        "WOW_RETURNED_WINDOWS_CCPU errors=0 parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1",
+        "WOW_MESSAGE_OPERANDS_CCPU errors=0 typed=1 numeric=1 menu=1 position=1 nested=1",
+        "WOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1",
+        "WOW_TERMINAL_RETRY_CCPU errors=0 property_removed=1 table_retained=1 native_gone=1 released=1",
+        "WOW_TERMINAL_MULTI_ERROR errors=0 low=1168 high=5023 later_reclaimed=1",
+        "WOW_WINDOW_BORROW_CCPU errors=0 normal=1 exception=1",
+        "WOW_FIXTURE_OK case=window-borrow"
+      ]
+    }
+  }
+}

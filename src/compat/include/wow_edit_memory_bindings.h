@@ -20,8 +20,6 @@
 #define pfnGetExpWinVer (wow_user_registered_callbacks()->pfnGetExpWinVer)
 /* OPENNT-HOST-081: use the already registered input table for original
  * creator/default-dialog callbacks, not a second registration owner. */
-#define pfnInitDlgCallback (wow_user_registered_callbacks()->pfnInitDlgCb)
-#define pfnWowSetFakeDialogClass (wow_user_registered_callbacks()->pfnWowSetFakeDialogClass)
 
 
 /* Original retail UserAssert does not evaluate its argument. */

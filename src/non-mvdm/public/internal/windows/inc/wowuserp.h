@@ -6,8 +6,10 @@
 * Created: 03-Mar-1993                                                     *
 * Author: John Colleran [johnc]                                            *
 *                                                                          *
-* Copyright (c) 1993 Microsoft Corporation                                 *
+* Copyright (c) Microsoft Corporation. All rights reserved.                *
 \**************************************************************************/
+
+#include "w32w64.h"
 
 #pragma pack(1)
 typedef struct _NE_MODULE_SEG {
@@ -28,7 +30,6 @@ typedef LPVOID  (WINAPI *PFNLLOCK)(HLOCAL hMem, HANDLE hInstance);
 typedef BOOL    (WINAPI *PFNLUNLOCK)(HLOCAL hMem, HANDLE hInstance);
 typedef UINT    (WINAPI *PFNLSIZE)(HLOCAL hMem, HANDLE hInstance);
 typedef HLOCAL  (WINAPI *PFNLFREE)(HLOCAL hMem, HANDLE hInstance);
-typedef DWORD   (WINAPI *PFNINITDLGCB)(HWND hwndDlg, LONG lParam);
 typedef WORD    (WINAPI *PFN16GALLOC)(UINT flags, DWORD cb);
 typedef VOID    (WINAPI *PFN16GFREE)(WORD h16Mem);
 typedef DWORD   (WINAPI *PFNGETMODFNAME)(HANDLE hModule, LPTSTR lpszPath, DWORD cchPath);
@@ -41,11 +42,19 @@ typedef BOOL    (WINAPI *PFNFREE)(HANDLE hResData, HANDLE hModule);
 typedef LPSTR   (WINAPI *PFNLOCK)(HANDLE hResData, HANDLE hModule);
 typedef BOOL    (WINAPI *PFNUNLOCK)(HANDLE hResData, HANDLE hModule);
 typedef DWORD   (WINAPI *PFNSIZEOF)(HANDLE hModule, HANDLE hResInfo);
-typedef DWORD   (WINAPI *PFNWOWWNDPROCEX)(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam, DWORD dw, PVOID adwWOW);
+typedef DWORD   (WINAPI *PFNWOWWNDPROCEX)(HWND hwnd, UINT uMsg, WPARAM uParam, LPARAM lParam, DWORD dw, PVOID adwWOW);
+typedef BOOL    (WINAPI *PFNWOWDLGPROCEX)(HWND hwnd, UINT uMsg, WPARAM uParam, LPARAM lParam, DWORD dw, PVOID adwWOW);
 typedef int     (WINAPI *PFNWOWEDITNEXTWORD)(LPSTR lpch, int ichCurrent, int cch, int code, DWORD dwProc16);
-typedef VOID    (WINAPI *PFNWOWSETFAKEDIALOGCLASS)(HWND hwnd);
 typedef VOID    (WINAPI *PFNWOWCBSTOREHANDLE)(WORD wFmt, WORD h16);
+typedef WORD    (FASTCALL *PFNGETPROCMODULE16)(DWORD vpfn);
+typedef VOID    (FASTCALL *PFNWOWMSGBOXINDIRECTCALLBACK)(DWORD vpfnCallback, LPHELPINFO lpHelpInfo);
+typedef int     (WINAPI *PFNWOWILSTRCMP)(LPCWSTR lpString1, LPCWSTR lpString2);
+typedef VOID    (FASTCALL *PFNWOWTELLWOWTHEHDLG)(HWND hDlg);
+typedef DWORD	(FASTCALL *PFNWOWTASK16SCHEDNOTIFY)(DWORD NotifyParm ,DWORD dwParam);
 
+typedef DWORD   (WINAPI *PFNINITDLGCB)(HWND hwndDlg, LONG lParam);
+typedef VOID    (WINAPI *PFNWOWSETFAKEDIALOGCLASS)(HWND hwnd);
+#line 55
 // Shared USER32 prototypes called by WOW32
 typedef HWND    (WINAPI *PFNCSCREATEWINDOWEX)(DWORD dwExStyle, LPCTSTR lpClassName,
         LPCTSTR lpWindowName, DWORD dwStyle, int X, int Y, int nWidth, int nHeight, HWND hWndParent, HMENU hMenu, HANDLE hInstance, LPVOID lpParam, DWORD Flags);
@@ -53,15 +62,14 @@ typedef VOID    (WINAPI *PFNDIRECTEDYIELD)(DWORD ThreadId);
 typedef VOID    (WINAPI *PFNFREEDDEDATA)(HANDLE hDDE, BOOL fIgnorefRelease, BOOL fFreeTruelyGlobalObjects);
 typedef LONG    (WINAPI *PFNGETCLASSWOWWORDS)(HINSTANCE hInstance, LPCTSTR pString);
 typedef BOOL    (WINAPI *PFNINITTASK)(UINT dwExpWinVer, DWORD dwAppCompatFlags,DWORD dwUserWOWCompatFlags, LPCSTR lpszModName, LPCSTR lpszBaseFileName, DWORD hTaskWow, DWORD dwHotkey, DWORD idTask, DWORD dwX, DWORD dwY, DWORD dwXSize, DWORD dwYSize);
-#define HTW_IS16BIT 0x80000000
 typedef ATOM    (WINAPI *PFNREGISTERCLASSWOWA)(PVOID lpWndClass, LPDWORD pdwWOWstuff);
 typedef BOOL    (WINAPI *PFNREGISTERUSERHUNGAPPHANDLERS)(PFNW32ET pfnW32EndTask, HANDLE hEventWowExec);
-typedef HWND    (WINAPI *PFNSERVERCREATEDIALOG)(HANDLE hmod, LPDLGTEMPLATE lpDlgTemplate, DWORD cb, HWND hwndOwner , DLGPROC pfnWndProc, LONG dwInitParam, UINT fFlags);
+typedef HWND    (WINAPI *PFNSERVERCREATEDIALOG)(HANDLE hmod, LPDLGTEMPLATE lpDlgTemplate, DWORD cb, HWND hwndOwner , DLGPROC pfnWndProc, LPARAM dwInitParam, UINT fFlags);
 typedef HCURSOR (WINAPI *PFNSERVERLOADCREATECURSORICON)(HANDLE hmod, LPTSTR lpModName, DWORD dwExpWinVer, LPCTSTR lpName, DWORD cb, PVOID pcur, LPTSTR lpType, BOOL fClient);
 typedef HMENU   (WINAPI *PFNSERVERLOADCREATEMENU)(HANDLE hMod, LPTSTR lpName, CONST LPMENUTEMPLATE pmt, DWORD cb, BOOL fCallClient);
 typedef BOOL    (WINAPI *PFNWOWCLEANUP)(HANDLE hInstance, DWORD hTaskWow, PNEMODULESEG SelList, DWORD nSel);
+typedef BOOL    (WINAPI *PFNWOWMODULEUNLOAD)(HANDLE hModule);
 typedef HWND    (WINAPI *PFNWOWFINDWINDOW)(LPCSTR lpClassName, LPCSTR lpWindowName);
-typedef int     (WINAPI *PFNWOWGETIDFROMDIRECTORY)(PBYTE presbits, UINT rt);
 typedef HBITMAP (WINAPI *PFNWOWLOADBITMAPA)(HINSTANCE hmod, LPCSTR lpName, LPBYTE pResData, DWORD cbResData);
 typedef BOOL    (WINAPI *PFNWOWWAITFORMSGANDEVENT)(HANDLE hevent);
 typedef BOOL    (WINAPI *PFNYIELDTASK)(VOID);
@@ -73,17 +81,11 @@ typedef VOID    (WINAPI *PFNFILLWINDOW)(HWND hwndParent, HWND hwnd, HDC hdc, HAN
 // other prototypes
 typedef BOOL    (WINAPI *PFNWOWGLOBALFREEHOOK)(HGLOBAL hMem);
 
+
 /*
  * MEASUREITEMSTRUCT itemWidth tag telling wow the itemData is a flat pointer
  */
 #define MIFLAG_FLAT      0x464C4154
-
-/*
- * CallWindowProc Bits
- */
-#define WNDPROC_WOW     0x80000000      // This bit for WOW Window Procs
-#define WNDPROC_MASK    0x7fffffff      // To mask off wow bit
-#define WNDPROC_HANDLE  0xFFFF          // HIWORD(x) == 0xFFFF for handle
 
 /*
  * WOWTask16SchedNotify NotifyParm values
@@ -97,6 +99,7 @@ typedef BOOL    (WINAPI *PFNWOWGLOBALFREEHOOK)(HGLOBAL hMem);
 #define WOWCLASS_RPL_MASK  0x00060000  // the LDT bits that store the 2 high bits
 #define WNDPROC_WOWPROC     0xC0000000  // These bits for WOW Window Procs
 #define WNDPROC_WOWMASK     0x3fffffff  // To mask off wow bits
+#define WNDPROC_HANDLE      0xFFFF      // HIWORD(x) == 0xFFFF for handle
 
 // USER needs a way to distinguish between a WOW and a Win32 window proc. We
 // used to achieve this by always setting the MSB of a 16:16 address as 1 (and
@@ -157,12 +160,6 @@ typedef BOOL    (WINAPI *PFNWOWGLOBALFREEHOOK)(HGLOBAL hMem);
  */
 #define CW_FLAGS_ANSI       0x00000001
 
-typedef BOOL    (WINAPI *PFNWOWDLGPROCEX)(HWND hwnd, UINT uMsg, WPARAM uParam, LPARAM lParam, DWORD dw, PVOID adwWOW);
-typedef WORD    (FASTCALL *PFNGETPROCMODULE16)(DWORD vpfn);
-typedef VOID    (FASTCALL *PFNWOWMSGBOXINDIRECTCALLBACK)(DWORD vpfnCallback, LPHELPINFO lpHelpInfo);
-typedef int     (WINAPI *PFNWOWILSTRCMP)(LPCWSTR lpString1, LPCWSTR lpString2);
-typedef VOID    (FASTCALL *PFNWOWTELLWOWTHEHDLG)(HWND hDlg);
-typedef DWORD	(FASTCALL *PFNWOWTASK16SCHEDNOTIFY)(DWORD NotifyParm ,DWORD dwParam);
 typedef struct tagAPFNWOWHANDLERSIN
 {
     // In'ees - passed from WOW32 to USER32 and called by USER32
@@ -173,7 +170,6 @@ typedef struct tagAPFNWOWHANDLERSIN
     PFNLSIZE                            pfnLocalSize;
     PFNLFREE                            pfnLocalFree;
     PFNGETEXPWINVER                     pfnGetExpWinVer;
-    PFNINITDLGCB                        pfnInitDlgCb;
     PFN16GALLOC                         pfn16GlobalAlloc;
     PFN16GFREE                          pfn16GlobalFree;
     PFNEMPTYCB                          pfnEmptyCB;
@@ -184,10 +180,9 @@ typedef struct tagAPFNWOWHANDLERSIN
     PFNUNLOCK                           pfnUnlockResource;
     PFNSIZEOF                           pfnSizeofResource;
     PFNWOWWNDPROCEX                     pfnWowWndProcEx;
-    PFNWOWEDITNEXTWORD                  pfnWowEditNextWord;
-    PFNWOWSETFAKEDIALOGCLASS            pfnWowSetFakeDialogClass;
-    PFNWOWCBSTOREHANDLE                 pfnWowCBStoreHandle;
     PFNWOWDLGPROCEX                     pfnWowDlgProcEx;
+    PFNWOWEDITNEXTWORD                  pfnWowEditNextWord;
+    PFNWOWCBSTOREHANDLE                 pfnWowCBStoreHandle;
     PFNGETPROCMODULE16                  pfnGetProcModule16;
     PFNWOWMSGBOXINDIRECTCALLBACK        pfnWowMsgBoxIndirectCallback;
     PFNWOWILSTRCMP                      pfnWowIlstrsmp;
@@ -211,8 +206,8 @@ typedef struct tagAPFNWOWHANDLERSOUT
     PFNSERVERLOADCREATECURSORICON       pfnServerLoadCreateCursorIcon;
     PFNSERVERLOADCREATEMENU             pfnServerLoadCreateMenu;
     PFNWOWCLEANUP                       pfnWOWCleanup;
+    PFNWOWMODULEUNLOAD                  pfnWOWModuleUnload;
     PFNWOWFINDWINDOW                    pfnWOWFindWindow;
-    PFNWOWGETIDFROMDIRECTORY            pfnWOWGetIdFromDirectory;
     PFNWOWLOADBITMAPA                   pfnWOWLoadBitmapA;
     PFNWOWWAITFORMSGANDEVENT            pfnWowWaitForMsgAndEvent;
     PFNYIELDTASK                        pfnYieldTask;
@@ -220,7 +215,7 @@ typedef struct tagAPFNWOWHANDLERSOUT
     PFNGETMENUINDEX                     pfnGetMenuIndex;
     PFNWOWGETDEFWINDOWPROCBITS          pfnWowGetDefWindowProcBits;
     PFNFILLWINDOW                       pfnFillWindow;
-    INT *aiWowClass;
+    INT *                               aiWowClass;
 } PFNWOWHANDLERSOUT, * APFNWOWHANDLERSOUT;
 
 
@@ -239,9 +234,9 @@ typedef struct tagAPFNWOWHANDLERSOUT
 // defined below.
 //
 
-#define WND_CNT_WOWDWORDS   0x3
+/* WOW class/handle type identifiers (see WARNING below)
+ */
 
-//
 #define FNID_START                  0x0000029A
 #define FNID_END                    0x000002B8
 
@@ -263,7 +258,14 @@ typedef struct tagAPFNWOWHANDLERSOUT
 #define WOWCLASS_MAX        14  // Always equal to the last value used.
 
 #define WOWCLASS_NOTHUNK    0xFF // not an actual class index
+//
+// WARNING! The above sequence and values must be maintained otherwise the
+// table in WMSG16.C for message thunking must be changed.  Same goes for
+// table in WALIAS.C.
+//
 
+
+//
 // When including this from USER, VPWNDPROC is undefined
 //
 #ifndef _WALIAS_
@@ -279,6 +281,10 @@ typedef struct tagWOWCLS {
 
 typedef WC UNALIGNED *PWC;
 
+#define WNDPROC_WOW     0x80000000      // This bit for WOW Window Procs
+#define WNDPROC_MASK    0x7fffffff      // To mask off wow bit
+#define WND_CNT_WOWDWORDS   0x3
+#line 281
 typedef struct _WW { /* ww */
     union {
         struct { /* WOW declaration */
@@ -300,6 +306,7 @@ typedef struct _WW { /* ww */
             DWORD     dwStyle;        // UserSrv calls this style.
             HANDLE    hInstance;      // UserSrv calls this hModule.
         };
+#line 294
 
         struct { /* USER declaration */
             /*
@@ -322,25 +329,35 @@ typedef struct _WW { /* ww */
 
         };
     };
+#line 299
 
 } WW, *PWW, **PPWW;
 
+// this is tied to WFISINITIALIZED in ntuser\inc\user.h
+#define WINDOW_IS_INITIALIZED   0x80000000
 
-DWORD UserRegisterWowHandlers(APFNWOWHANDLERSIN apfnWowIn, APFNWOWHANDLERSOUT apfnWowOut);
+ULONG_PTR UserRegisterWowHandlers(APFNWOWHANDLERSIN apfnWowIn, APFNWOWHANDLERSOUT apfnWowOut);
+
 VOID WINAPI RegisterWowBaseHandlers(PFNWOWGLOBALFREEHOOK pfn);
 
 BOOL
 InitTask(
     UINT dwExpWinVer,
-    LPCSTR lpszAppName,
+    DWORD dwAppCompatFlags,
+    DWORD dwAppCompatFlagsEx,
+    LPCSTR lpszModName,
+    LPCSTR lpszBaseFileName,
     DWORD hTaskWow,
     DWORD dwHotkey,
     DWORD idTask,
     DWORD dwX,
     DWORD dwY,
     DWORD dwXSize,
-    DWORD dwYSize,
-    WORD wShowWindow);
+    DWORD dwYSize);
+
+// Following bits occupy the hiword of hTaskWow which is actually only a WORD
+#define HTW_IS16BIT	0x80000000
+#define HTW_ISMEOW	0x40000000
 
 BOOL YieldTask(VOID);
 

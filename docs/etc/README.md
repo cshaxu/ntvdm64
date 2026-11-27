@@ -2162,3 +2162,5 @@ post-publication targeted checks.
 - [N020 GDI private declarations](evidence/t485-s1/n020-gdi.md).
 
 - [N020 WOW GDI declarations](evidence/t485-s1/n020-wowgdi.md).
+
+- [N020 WOW USER registration](evidence/t485-s1/n020-wowuser.md).

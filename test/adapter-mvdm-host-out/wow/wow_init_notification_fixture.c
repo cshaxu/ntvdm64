@@ -33,7 +33,7 @@ static const wow_standard_class_provider class_provider = {
 
 /* Actual registration and lifecycle code; only guest publication and the
  * broker RPC are seams. This fixture does not claim to execute guest code. */
-DWORD WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN, APFNWOWHANDLERSOUT);
+ULONG_PTR WINAPI UserRegisterWowHandlers(APFNWOWHANDLERSIN, APFNWOWHANDLERSOUT);
 /* No boot task runs in this fixture. Direct launcher requests do not inspect
  * this original startup identity, so do not link W32Thread as a substitute. */
 struct _TD *gptdShell;

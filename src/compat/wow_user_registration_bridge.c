@@ -108,7 +108,7 @@ BOOL WINAPI registered_init_task(UINT version, DWORD compat_flags, DWORD user_fl
     return result;
 }
 
-DWORD WINAPI UserRegisterWowHandlers(struct tagAPFNWOWHANDLERSIN *input,
+ULONG_PTR WINAPI UserRegisterWowHandlers(struct tagAPFNWOWHANDLERSIN *input,
     struct tagAPFNWOWHANDLERSOUT *output)
 {
     DWORD shared;
