@@ -2946,3 +2946,10 @@ All19 original N017 files reconciled; earlier paired userenvp.h unchanged.
 tstring.h is XP byte-exact, with original ANSI declarations and no new wrapper.
 [N018 evidence](../../docs/etc/evidence/t485-s1/n018.md). Prior Net directory
 arrivals retain their earlier migration owner and are not counted again.
+
+### T485 S15 N019 completion
+
+wowcmndg.h and wowshlp.h use their XP public/internal/base/inc paths and
+original bytes. Shell's prshtp.h remains at its existing path for wmdisp32.
+[N019 evidence](../../docs/etc/evidence/t485-s1/n019.md) records the actual
+three-argument callback consumer, host WORD-to-DWORD boundary and verification.

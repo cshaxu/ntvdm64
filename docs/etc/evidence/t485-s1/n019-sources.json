@@ -1,0 +1,16 @@
+[
+  {
+    "path": "src/non-mvdm/public/internal/base/inc/wowcmndg.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/base/inc/wowcmndg.h",
+    "xp_blob": "982270d58ef4da8ab7e62db9dd75c77d01437c28",
+    "sha256": "e51b3356ef48bbee96f0c0de4849a3ec24d5839f52b228c1d333f8704814f10a",
+    "byte_equal": true
+  },
+  {
+    "path": "src/non-mvdm/public/internal/base/inc/wowshlp.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/base/inc/wowshlp.h",
+    "xp_blob": "32e918b834f6b6fa7ee1e70301920f041c65de58",
+    "sha256": "301f09d44d550f9b36315e67915a8d465c16bd820a20c77539120f601467f633",
+    "byte_equal": true
+  }
+]

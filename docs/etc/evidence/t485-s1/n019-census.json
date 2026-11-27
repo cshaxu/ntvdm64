@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 761,
+    "nonerror_identical": 769,
+    "nonerror_different": 546,
+    "nonerror_points": 7747,
+    "nonerror_lines": 163505
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 762,
+    "nonerror_identical": 770,
+    "nonerror_different": 545,
+    "nonerror_points": 7746,
+    "nonerror_lines": 163445
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -60
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/wowshlp.h",
+      "before_points": 1,
+      "before_lines": 60,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1231,
+    "OpenNT": 84
+  }
+}

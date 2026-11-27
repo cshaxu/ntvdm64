@@ -5,13 +5,15 @@
 #include <stdio.h>
 #include <string.h>
 #define PROBE_CALLBACK_ABI WINAPI
-#ifdef TEST_THIRD_ARGUMENT
-typedef DWORD (PROBE_CALLBACK_ABI *shell_callback)(LPSTR,WORD,LPSTR);
+#ifdef TEST_ADAPTER
+#define CALLBACK_RESULT WORD
 #else
-typedef DWORD (PROBE_CALLBACK_ABI *shell_callback)(LPSTR,WORD);
+#define CALLBACK_RESULT DWORD
 #endif
+typedef CALLBACK_RESULT (PROBE_CALLBACK_ABI *shell_callback)(LPSTR,WORD,LPSTR);
 typedef HINSTANCE (WINAPI *wow_shell_execute_fn)(HWND,LPCSTR,LPCSTR,LPSTR,LPCSTR,INT,shell_callback);
 static DWORD owner_thread, calls, wrong_thread, callback_result;
+static char expected_directory[MAX_PATH];
 static DWORD exception_codes[16], exception_count;
 static LONG CALLBACK observe_first_chance(EXCEPTION_POINTERS *info)
 {
@@ -25,18 +27,20 @@ static LPCSTR nested_file;
 static LPSTR nested_parameters;
 static DWORD nested_calls;
 static DWORD exception_calls, caught_exceptions;
-static DWORD WINAPI throwing_callback(LPSTR command,WORD show)
+static WORD WINAPI throwing_callback(LPSTR command,WORD show,LPSTR directory)
 {
     (void)command;(void)show;
+    if(!directory || _stricmp(directory,expected_directory))++wrong_thread;
     ++exception_calls;
     if(GetCurrentThreadId()!=owner_thread || ShellProbeCurrentCallback()!=throwing_callback)
         ++wrong_thread;
     RaiseException(0xe4470003,0,0,NULL);
     return 0;
 }
-static DWORD WINAPI inner_callback(LPSTR command,WORD show)
+static WORD WINAPI inner_callback(LPSTR command,WORD show,LPSTR directory)
 {
     (void)command;(void)show;
+    if(!directory || _stricmp(directory,expected_directory))++wrong_thread;
     ++nested_calls;
     if(GetCurrentThreadId()!=owner_thread)++wrong_thread;
     return 2;
@@ -59,19 +63,14 @@ static LONG capture_exception(EXCEPTION_POINTERS *info)
     putchar('\n');
     return EXCEPTION_EXECUTE_HANDLER;
 }
-static DWORD PROBE_CALLBACK_ABI callback(LPSTR command,WORD show
-#ifdef TEST_THIRD_ARGUMENT
-    ,LPSTR third
-#endif
-    )
+static CALLBACK_RESULT PROBE_CALLBACK_ABI callback(LPSTR command,WORD show,LPSTR third)
 {
     ++calls;
     if(GetCurrentThreadId()!=owner_thread)++wrong_thread;
     printf("callback thread=%lu show=%u command=%s result=%lu\n",
         GetCurrentThreadId(),show,command?command:"<null>",callback_result);
-#ifdef TEST_THIRD_ARGUMENT
     printf("callback third=%s\n",third?third:"<null>");
-#endif
+    if(!third || _stricmp(third,expected_directory))++wrong_thread;
 #ifdef TEST_OUTER_BOUNDARY
     /* W32Dispatch catches outside WS32ShellExecute, not inside a resumed
      * outer Shell callback. Keep this distinct from the nested negative. */
@@ -80,19 +79,18 @@ static DWORD PROBE_CALLBACK_ABI callback(LPSTR command,WORD show
 #ifdef TEST_ADAPTER
     if(ShellProbeCurrentCallback()!=callback)++wrong_thread;
     if(callback_result==42 && (ULONG_PTR)wow_shell_execute(NULL,"open",nested_file,
-        nested_parameters,NULL,SW_HIDE,inner_callback)!=2)++wrong_thread;
+        nested_parameters,expected_directory,SW_HIDE,inner_callback)!=2)++wrong_thread;
     if(callback_result==43){
-        __try {
-            (void)wow_shell_execute(NULL,"open",nested_file,nested_parameters,NULL,
-                SW_HIDE,throwing_callback);
-            ++wrong_thread; /* The original callback exception must propagate. */
-        } __except(GetExceptionCode()==0xe4470003 ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH){
-            ++caught_exceptions;
-        }
+        /* Match W32Dispatch: unwind both Shell calls to the outer boundary.
+         * SHELL32 does not support resuming the outer call after an inner
+         * callback exception (the native-provider control fails likewise). */
+        (void)wow_shell_execute(NULL,"open",nested_file,nested_parameters,
+            expected_directory,SW_HIDE,throwing_callback);
+        ++wrong_thread;
     }
     if(ShellProbeCurrentCallback()!=callback)++wrong_thread;
 #endif
-    return callback_result;
+    return (CALLBACK_RESULT)callback_result;
 }
 int main(int argc,char **argv)
 {
@@ -114,6 +112,7 @@ int main(int argc,char **argv)
     execute=wow_shell_execute;nested_file=self;nested_parameters=parameters;
 #endif
     if(!execute){puts("provider export absent");return 5;}
+    if(!GetCurrentDirectoryA(sizeof(expected_directory),expected_directory))return 14;
     owner_thread=GetCurrentThreadId();
     if(!AddVectoredExceptionHandler(1,observe_first_chance))return 11;
     GetModuleFileNameA(module,library,sizeof(library));
@@ -130,16 +129,19 @@ int main(int argc,char **argv)
          * separate: 42 is only a sentinel, not an actual Win16 HINSTANCE. */
         calls=wrong_thread=0;callback_result=test?41+test:2;
         SetLastError(0x447);
-        __try { result=execute(NULL,"open",self,parameters,NULL,SW_HIDE,callback); }
+        __try { result=execute(NULL,"open",self,parameters,expected_directory,SW_HIDE,callback); }
         __except(capture_exception(GetExceptionInformation())) {
-#ifdef TEST_OUTER_BOUNDARY
+#if defined(TEST_OUTER_BOUNDARY) || defined(TEST_ADAPTER)
             if(test!=2 || GetExceptionCode()!=0xe4470003 || calls!=1 || wrong_thread)return 12;
 #ifdef TEST_ADAPTER
             if(ShellProbeCurrentCallback()!=NULL)return 13;
 #endif
+#ifdef TEST_ADAPTER
+            ++caught_exceptions;
+#endif
             puts("PASS outer API exception boundary and restored callback TLS");
             calls=wrong_thread=0;callback_result=2;
-            result=execute(NULL,"open",self,parameters,NULL,SW_HIDE,callback);
+            result=execute(NULL,"open",self,parameters,expected_directory,SW_HIDE,callback);
             puts("PASS provider invoked again after outer unwind");
 #else
             printf("FAIL provider exception calls=%lu foreign_thread=%lu\n",calls,wrong_thread);
@@ -164,7 +166,7 @@ int main(int argc,char **argv)
     if(exception_calls!=1 || caught_exceptions!=1)return 10;
     puts("PASS actual adapter exception propagation and inner/outer TLS restoration");
 #endif
-    puts("PASS actual adapter old two-argument callback and nested invocation");
+    puts("PASS actual adapter XP three-argument callback and directory and nested invocation");
 #endif
     puts("PASS modern WOWShellExecute synchronous callback and success/failure result");
     return 0;

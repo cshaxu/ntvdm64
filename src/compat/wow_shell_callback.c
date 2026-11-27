@@ -1,14 +1,12 @@
 #include <windows.h>
 #include <shellapi.h>
 
-/* Two-argument callback supplied by the caller for this synchronous ABI. */
-typedef DWORD (WINAPI *wow_shell_guest_callback)(LPSTR, WORD);
+/* XP wshell.c returns WORD and receives command, show and directory.
+ * SHELL32 expects a DWORD result. Widen it at this synchronous host boundary;
+ * preserve the original guest callback and its current-directory restoration.
+ * Scope is thread-local and supports nested Shell calls and exception unwind. */
+typedef WORD (WINAPI *wow_shell_guest_callback)(LPSTR, WORD, LPSTR);
 
-/* The selected NT4 wowshlp.h callback has two parameters. The modern x86
- * SHELL32 provider supplies three stdcall slots (command, show, directory).
- * Keep original wshell conversion/WinExec and its callback contract intact;
- * adapt only this private host boundary, not the guest or Shell resolver.
- * Scope is synchronous and thread-local, including nested shell calls. */
 typedef DWORD (WINAPI *modern_shell_callback)(LPSTR, WORD, LPSTR);
 typedef HINSTANCE (WINAPI *modern_shell_execute)(HWND, LPCSTR, LPCSTR,
     LPSTR, LPCSTR, INT, modern_shell_callback);
@@ -16,11 +14,7 @@ static __declspec(thread) wow_shell_guest_callback current_callback;
 
 static DWORD WINAPI invoke_original(LPSTR command, WORD show, LPSTR directory)
 {
-    /* Original shlexec.c passes only command/show; wshell.c itself owns
-     * UpdateDosCurrentDirectory. Do not introduce process-global cwd changes
-     * or replace its original WinExec path merely to consume a new ABI slot. */
-    (void)directory;
-    return current_callback(command, show);
+    return current_callback(command, show, directory);
 }
 
 HINSTANCE WINAPI wow_shell_execute(HWND window, LPCSTR operation, LPCSTR file,

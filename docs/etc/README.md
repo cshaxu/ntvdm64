@@ -2148,3 +2148,5 @@ post-publication targeted checks.
 - [T485 S15 N017 final six](evidence/t485-s1/n017-tail.md): original NetAPI/time declarations, zero nonerror diff and directory completion evidence.
 
 - [T485 S15 N018 string declarations](evidence/t485-s1/n018.md): complete XP original, actual consumers and delivery evidence.
+
+- [N019 Shell declarations and callback ABI](evidence/t485-s1/n019.md).

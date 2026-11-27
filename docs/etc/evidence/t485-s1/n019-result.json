@@ -1,0 +1,199 @@
+{
+  "task": "M0 T485 S15 P12 N019",
+  "runtime": "build/t485-s15/runtime12",
+  "build_exit": 0,
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "12036F4C5D28DAE9D142D3AA7008841682E03E9506CEF80BB29AA69F30A33D9C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "12036F4C5D28DAE9D142D3AA7008841682E03E9506CEF80BB29AA69F30A33D9C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "A3D290331B88BE4DED4F9A5861837A73B00DC048B4096662AAEA0907E857A6B7",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "A3D290331B88BE4DED4F9A5861837A73B00DC048B4096662AAEA0907E857A6B7",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "A7E86FD4AE179D1CD8DC82FCCC6329CFAD62297FD8B296EFFB19C93D96F8403B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "A7E86FD4AE179D1CD8DC82FCCC6329CFAD62297FD8B296EFFB19C93D96F8403B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "407ABC1DBEBFE6EACF734117E66C193A5AFDC74A939BB3D9BF849827D33628E2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "407ABC1DBEBFE6EACF734117E66C193A5AFDC74A939BB3D9BF849827D33628E2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "AEA20DBE96E96F5E1006F27ACB31320D10D2DD24824AD08B5BC2635B2BF20902",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "AEA20DBE96E96F5E1006F27ACB31320D10D2DD24824AD08B5BC2635B2BF20902",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "28628845D7A5C5FAEB6C6F5A72059133A4EE4A90C1312DBC697AE33C5CA03D5A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "28628845D7A5C5FAEB6C6F5A72059133A4EE4A90C1312DBC697AE33C5CA03D5A",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "8634B68ACEE8F795CE2A73B9210A71BBF1CEDC2ADFB01DA0A7CEE9C11973D2D1",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "8634B68ACEE8F795CE2A73B9210A71BBF1CEDC2ADFB01DA0A7CEE9C11973D2D1",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "165A552A70877FD9E5F959CACF3F21C4EE041494A8D8F95BECB74A7B33F11551",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "165A552A70877FD9E5F959CACF3F21C4EE041494A8D8F95BECB74A7B33F11551",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "4F9914DEFFC3D00B92BAF4AEA64332FB97A2673F4D1809F43CBC3824A4B3394A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "4F9914DEFFC3D00B92BAF4AEA64332FB97A2673F4D1809F43CBC3824A4B3394A",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "96D93D5436A211CE3129119D0DB3A360411D849CDABE60BA0CB949DD081A8410",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "96D93D5436A211CE3129119D0DB3A360411D849CDABE60BA0CB949DD081A8410",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "14EAB710293FFF309785BA499C1A2E825F7DA06422A57934062204065DBAB06F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "14EAB710293FFF309785BA499C1A2E825F7DA06422A57934062204065DBAB06F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "50FD459AD42C3B194B1DC5243D116D2F46F06610B013BA7EB5E3A1B6398DCC64",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "50FD459AD42C3B194B1DC5243D116D2F46F06610B013BA7EB5E3A1B6398DCC64",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "50BB5CF13917F789C867D2BE55056B413154916787D45876C893EB0E4CB625A6",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "50BB5CF13917F789C867D2BE55056B413154916787D45876C893EB0E4CB625A6",
+      "pass": true
+    }
+  ],
+  "shell_cases": {
+    "final-Adapter": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=12352\ncallback thread=12352 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter/native-fallback.txt\" result=2\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter\ncase=0 result=2 error=6 calls=1 foreign_thread=0\ncallback thread=12352 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter/native-fallback.txt\" result=42\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter\ncase=1 result=42 error=6 calls=1 foreign_thread=0\ncallback thread=12352 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter/native-fallback.txt\" result=43\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter\nexception=e4470003 module=C:\\WINDOWS\\System32\\KERNELBASE.dll rva=0016d674 access=0 address=00000000\nfirst-chance: 000006ba e4470003\nPASS outer API exception boundary and restored callback TLS\ncallback thread=12352 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter/native-fallback.txt\" result=2\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-Adapter\nPASS provider invoked again after outer unwind\ncase=2 result=2 error=6 calls=1 foreign_thread=0\nPASS actual adapter exception propagation and inner/outer TLS restoration\nPASS actual adapter XP three-argument callback and directory and nested invocation\nPASS modern WOWShellExecute synchronous callback and success/failure result\n",
+    "final-AdapterOuter": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=15924\ncallback thread=15924 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter/native-fallback.txt\" result=2\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter\ncase=0 result=2 error=6 calls=1 foreign_thread=0\ncallback thread=15924 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter/native-fallback.txt\" result=42\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter\ncase=1 result=42 error=6 calls=1 foreign_thread=0\ncallback thread=15924 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter/native-fallback.txt\" result=43\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter\nexception=e4470003 module=C:\\WINDOWS\\System32\\KERNELBASE.dll rva=0016d674 access=0 address=00000000\nfirst-chance: 000006ba e4470003\nPASS outer API exception boundary and restored callback TLS\ncallback thread=15924 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter/native-fallback.txt\" result=2\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\final-AdapterOuter\nPASS provider invoked again after outer unwind\ncase=2 result=2 error=6 calls=1 foreign_thread=0\nPASS actual adapter XP three-argument callback and directory and nested invocation\nPASS modern WOWShellExecute synchronous callback and success/failure result\n",
+    "shell-Native": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=16944\ncallback thread=16944 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-Native\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-Native/native-fallback.txt\" result=2\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-Native\ncase=0 result=2 error=6 calls=1 foreign_thread=0\ncallback thread=16944 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-Native\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-Native/native-fallback.txt\" result=42\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-Native\ncase=1 result=42 error=6 calls=1 foreign_thread=0\nPASS modern WOWShellExecute synchronous callback and success/failure result\n",
+    "shell-NativeOuter": "provider=C:\\WINDOWS\\System32\\shell32.dll caller_thread=7988\ncallback thread=7988 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter/native-fallback.txt\" result=2\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter\ncase=0 result=2 error=6 calls=1 foreign_thread=0\ncallback thread=7988 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter/native-fallback.txt\" result=42\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter\ncase=1 result=42 error=6 calls=1 foreign_thread=0\ncallback thread=7988 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter/native-fallback.txt\" result=43\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter\nexception=e4470003 module=C:\\WINDOWS\\System32\\KERNELBASE.dll rva=0016d674 access=0 address=00000000\nfirst-chance: 000006ba e4470003\nPASS outer API exception boundary and restored callback TLS\ncallback thread=7988 show=0 command=\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter\\probe.exe\" --child \"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter/native-fallback.txt\" result=2\ncallback third=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n019\\shell-NativeOuter\nPASS provider invoked again after outer unwind\ncase=2 result=2 error=6 calls=1 foreign_thread=0\nPASS modern WOWShellExecute synchronous callback and success/failure result\n"
+  },
+  "wow_window_evidence": "build/t485-s15/n019/wow/n019-wow-winmine-windows.txt",
+  "census": {
+    "before": {
+      "files": 1315,
+      "byte_identical": 761,
+      "nonerror_identical": 769,
+      "nonerror_different": 546,
+      "nonerror_points": 7747,
+      "nonerror_lines": 163505
+    },
+    "after": {
+      "files": 1315,
+      "byte_identical": 762,
+      "nonerror_identical": 770,
+      "nonerror_different": 545,
+      "nonerror_points": 7746,
+      "nonerror_lines": 163445
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 1,
+      "nonerror_identical": 1,
+      "nonerror_different": -1,
+      "nonerror_points": -1,
+      "nonerror_lines": -60
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/internal/base/inc/wowshlp.h",
+        "before_points": 1,
+        "before_lines": 60,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1231,
+      "OpenNT": 84
+    }
+  },
+  "initial_failures": [
+    "Removed Shell include directory still required by prshtp.h; restored before final build",
+    "Nested inner-catch/resume fails in native Windows.Storage too; test now unwinds both frames to actual outer W32Dispatch boundary"
+  ],
+  "Full": "Not repeated; nine inventory files reviewed since P9 Full24/24",
+  "owned_runs": {
+    "initial_build_pid": 1276,
+    "final_build_pid": 16316,
+    "initial_delivery_pid": 27528,
+    "final_delivery_pid": 18228,
+    "remaining_shell_pid": 23312,
+    "native_control_pid": 2288,
+    "final_tests_pid": 24532,
+    "governance_pid": 7380
+  }
+}
