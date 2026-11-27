@@ -2108,3 +2108,5 @@ post-publication targeted checks.
 [S13 S7 byte census](evidence/t485-h-repair/s13-s7-byte-census.json).
 
 [S13 P5 LF restoration](evidence/t485-h-repair/s13-p5-lf-restoration.json).
+
+[S13 P6 reconciliation](evidence/t485-h-repair/s13-p6-reconciliation.json).

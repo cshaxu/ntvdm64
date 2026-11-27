@@ -1,0 +1,3221 @@
+{
+  "source_unchanged_since": "502f48f7c",
+  "s7_files": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "sha256": "3ccb20e620217f2644995d7c5f8ba5f54af04fa9f90aa103d52cd6bbc4505793",
+      "metric": {
+        "points": 8,
+        "lines": 18,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.h",
+      "sha256": "3c320dacb49e93caf55401c4364e25904a32b8754f83a46ce75b772b5caf11b8",
+      "metric": {
+        "points": 8,
+        "lines": 15,
+        "excluded": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "sha256": "cad1bf7682a5eaa163a919dea2fbf4104b3e42de5172b45741099708fb98e8a5",
+      "metric": {
+        "points": 46,
+        "lines": 238,
+        "excluded": 8
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "sha256": "41c4d8a0d3c69ae241d1de678d06ade212b42b811ad20512984348405e104c13",
+      "metric": {
+        "points": 9,
+        "lines": 62,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "sha256": "abc98e342287cd5e1d87eb041d6b6ed7cd84726c47d94314539df720fd3cfade",
+      "metric": {
+        "points": 3,
+        "lines": 219,
+        "excluded": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "sha256": "2ffc7c1547b72899806a1741751fbfde431aae524464e847dc6c422944c886db",
+      "metric": {
+        "points": 22,
+        "lines": 63,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/stack.c",
+      "sha256": "6d170df338513e44269d503b9cdce7dd1ff071d9289c0c023454e81007357823",
+      "metric": {
+        "points": 5,
+        "lines": 20,
+        "excluded": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/inc/wowusr.h",
+      "sha256": "256343881dae7d6d5f1443b0cbb578a95aad2f20b57ee94d7d25932903e1019d",
+      "metric": {
+        "points": 82,
+        "lines": 82,
+        "excluded": 41
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "sha256": "be8de121f46dcf440256d56a32d29fa224d5babb6c009e93cc68bf038c9f4967",
+      "metric": {
+        "points": 142,
+        "lines": 193,
+        "excluded": 47
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "sha256": "df5263f015686e17d4ea3c552ef8875a0bdac3e93afb38df93dc5bce118d6230",
+      "metric": {
+        "points": 394,
+        "lines": 629,
+        "excluded": 83
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "sha256": "a87c9c8e6f6e419891ae7b4f10ff2e4a596222cab328a212339c5589af390f23",
+      "metric": {
+        "points": 583,
+        "lines": 642,
+        "excluded": 63
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "sha256": "7108a678210b1d35fc9a23c0cd1fb25404a3bfe03c208821520f2a15176a4ebc",
+      "metric": {
+        "points": 9,
+        "lines": 11,
+        "excluded": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "sha256": "0f8dc962f570cfb5ecd616f8680a8dffb93e505df3300ec0627b3fb517dbdd23",
+      "metric": {
+        "points": 13,
+        "lines": 19,
+        "excluded": 4
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "sha256": "6d1ae42c564af2fcf751c9a4af9e946f7de7f11ec7515b920052f16e4a9967be",
+      "metric": {
+        "points": 252,
+        "lines": 317,
+        "excluded": 60
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sb.c",
+      "sha256": "0d534bed6dcf94441d10f5913036e2ec76b756f11a74820bf97c3a9c7ee2878f",
+      "metric": {
+        "points": 0,
+        "lines": 0,
+        "excluded": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sbfm.c",
+      "sha256": "82b3e9f5ccdf04af275d7d6126e081603e6e624954b446f93ff24bafae1aa32e",
+      "metric": {
+        "points": 13,
+        "lines": 18,
+        "excluded": 4
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "sha256": "f77458df380bad08af6b3f46fe08f7be6c3b18e36e4131639e3697f007573a7b",
+      "metric": {
+        "points": 34,
+        "lines": 64,
+        "excluded": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "sha256": "2ef9acacb1cb77d942d0fb1935da21c638bfd7ac2a97b84d80e95b81da174bbd",
+      "metric": {
+        "points": 18,
+        "lines": 24,
+        "excluded": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "sha256": "6bf736ac69dd354e00a237b48dba8fb88017ae80497356c8f02353d42b56ee6e",
+      "metric": {
+        "points": 7,
+        "lines": 10,
+        "excluded": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "sha256": "2504060f5b97de7dd609ab61afcf344f36b7fa2eb6ed8e1cbe737ab2ac95728f",
+      "metric": {
+        "points": 93,
+        "lines": 182,
+        "excluded": 33
+      }
+    }
+  ],
+  "exclusion_pairs": {
+    "src/mvdm-host/dpmi32/dpmi32.c": [
+      {
+        "current_error": 105,
+        "original_start": 103,
+        "original_end": 103,
+        "kind": "conditional",
+        "anchor": 104
+      },
+      {
+        "current_error": 306,
+        "original_start": 305,
+        "original_end": 308,
+        "kind": "conditional",
+        "anchor": 305
+      }
+    ],
+    "src/mvdm-host/dpmi32/dpmi32.h": [],
+    "src/mvdm-host/dpmi32/dpmiint.c": [
+      {
+        "current_error": 156,
+        "original_start": 117,
+        "original_end": 133,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 495,
+        "original_start": 471,
+        "original_end": 471,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 593,
+        "original_start": 556,
+        "original_end": 562,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 719,
+        "original_start": 683,
+        "original_end": 708,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 739,
+        "original_start": 726,
+        "original_end": 726,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 806,
+        "original_start": 792,
+        "original_end": 813,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 820,
+        "original_start": 825,
+        "original_end": 825,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 966,
+        "original_start": 970,
+        "original_end": 976,
+        "kind": "conditional",
+        "anchor": null
+      }
+    ],
+    "src/mvdm-host/dpmi32/dpmiselr.c": [
+      {
+        "current_error": 232,
+        "original_start": 221,
+        "original_end": 221,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 239,
+        "original_start": 227,
+        "original_end": 229,
+        "kind": "conditional",
+        "anchor": null
+      }
+    ],
+    "src/mvdm-host/dpmi32/i386/dpmi386.c": [],
+    "src/mvdm-host/dpmi32/modesw.c": [
+      {
+        "current_error": 124,
+        "original_start": 110,
+        "original_end": 133,
+        "kind": "conditional",
+        "anchor": 110
+      },
+      {
+        "current_error": 169,
+        "original_start": 172,
+        "original_end": 195,
+        "kind": "conditional",
+        "anchor": 172
+      }
+    ],
+    "src/mvdm-host/dpmi32/stack.c": [],
+    "src/mvdm-host/inc/wowusr.h": [
+      {
+        "current_error": 633,
+        "original_start": 632,
+        "original_end": 634,
+        "kind": "conditional",
+        "anchor": 632
+      },
+      {
+        "current_error": 776,
+        "original_start": 775,
+        "original_end": 777,
+        "kind": "conditional",
+        "anchor": 775
+      },
+      {
+        "current_error": 830,
+        "original_start": 829,
+        "original_end": 831,
+        "kind": "conditional",
+        "anchor": 829
+      },
+      {
+        "current_error": 909,
+        "original_start": 908,
+        "original_end": 910,
+        "kind": "conditional",
+        "anchor": 908
+      },
+      {
+        "current_error": 915,
+        "original_start": 914,
+        "original_end": 916,
+        "kind": "conditional",
+        "anchor": 914
+      },
+      {
+        "current_error": 1028,
+        "original_start": 1027,
+        "original_end": 1029,
+        "kind": "conditional",
+        "anchor": 1027
+      },
+      {
+        "current_error": 1090,
+        "original_start": 1089,
+        "original_end": 1091,
+        "kind": "conditional",
+        "anchor": 1089
+      },
+      {
+        "current_error": 1200,
+        "original_start": 1199,
+        "original_end": 1201,
+        "kind": "conditional",
+        "anchor": 1199
+      },
+      {
+        "current_error": 1227,
+        "original_start": 1226,
+        "original_end": 1228,
+        "kind": "conditional",
+        "anchor": 1226
+      },
+      {
+        "current_error": 1250,
+        "original_start": 1249,
+        "original_end": 1251,
+        "kind": "conditional",
+        "anchor": 1249
+      },
+      {
+        "current_error": 1323,
+        "original_start": 1322,
+        "original_end": 1324,
+        "kind": "conditional",
+        "anchor": 1322
+      },
+      {
+        "current_error": 1344,
+        "original_start": 1343,
+        "original_end": 1345,
+        "kind": "conditional",
+        "anchor": 1343
+      },
+      {
+        "current_error": 1375,
+        "original_start": 1374,
+        "original_end": 1376,
+        "kind": "conditional",
+        "anchor": 1374
+      },
+      {
+        "current_error": 1386,
+        "original_start": 1385,
+        "original_end": 1387,
+        "kind": "conditional",
+        "anchor": 1385
+      },
+      {
+        "current_error": 1392,
+        "original_start": 1391,
+        "original_end": 1393,
+        "kind": "conditional",
+        "anchor": 1391
+      },
+      {
+        "current_error": 1447,
+        "original_start": 1446,
+        "original_end": 1448,
+        "kind": "conditional",
+        "anchor": 1446
+      },
+      {
+        "current_error": 1453,
+        "original_start": 1452,
+        "original_end": 1454,
+        "kind": "conditional",
+        "anchor": 1452
+      },
+      {
+        "current_error": 1484,
+        "original_start": 1483,
+        "original_end": 1485,
+        "kind": "conditional",
+        "anchor": 1483
+      },
+      {
+        "current_error": 1500,
+        "original_start": 1499,
+        "original_end": 1501,
+        "kind": "conditional",
+        "anchor": 1499
+      },
+      {
+        "current_error": 1506,
+        "original_start": 1505,
+        "original_end": 1507,
+        "kind": "conditional",
+        "anchor": 1505
+      },
+      {
+        "current_error": 1512,
+        "original_start": 1511,
+        "original_end": 1513,
+        "kind": "conditional",
+        "anchor": 1511
+      },
+      {
+        "current_error": 1545,
+        "original_start": 1544,
+        "original_end": 1546,
+        "kind": "conditional",
+        "anchor": 1544
+      },
+      {
+        "current_error": 1556,
+        "original_start": 1555,
+        "original_end": 1557,
+        "kind": "conditional",
+        "anchor": 1555
+      },
+      {
+        "current_error": 1568,
+        "original_start": 1567,
+        "original_end": 1569,
+        "kind": "conditional",
+        "anchor": 1567
+      },
+      {
+        "current_error": 1607,
+        "original_start": 1606,
+        "original_end": 1608,
+        "kind": "conditional",
+        "anchor": 1606
+      },
+      {
+        "current_error": 1658,
+        "original_start": 1657,
+        "original_end": 1659,
+        "kind": "conditional",
+        "anchor": 1657
+      },
+      {
+        "current_error": 1664,
+        "original_start": 1663,
+        "original_end": 1665,
+        "kind": "conditional",
+        "anchor": 1663
+      },
+      {
+        "current_error": 1738,
+        "original_start": 1737,
+        "original_end": 1739,
+        "kind": "conditional",
+        "anchor": 1737
+      },
+      {
+        "current_error": 1764,
+        "original_start": 1763,
+        "original_end": 1765,
+        "kind": "conditional",
+        "anchor": 1763
+      },
+      {
+        "current_error": 1770,
+        "original_start": 1769,
+        "original_end": 1771,
+        "kind": "conditional",
+        "anchor": 1769
+      },
+      {
+        "current_error": 1887,
+        "original_start": 1886,
+        "original_end": 1888,
+        "kind": "conditional",
+        "anchor": 1886
+      },
+      {
+        "current_error": 1906,
+        "original_start": 1905,
+        "original_end": 1907,
+        "kind": "conditional",
+        "anchor": 1905
+      },
+      {
+        "current_error": 1924,
+        "original_start": 1923,
+        "original_end": 1925,
+        "kind": "conditional",
+        "anchor": 1923
+      },
+      {
+        "current_error": 2024,
+        "original_start": 2023,
+        "original_end": 2025,
+        "kind": "conditional",
+        "anchor": 2023
+      },
+      {
+        "current_error": 2050,
+        "original_start": 2049,
+        "original_end": 2051,
+        "kind": "conditional",
+        "anchor": 2049
+      },
+      {
+        "current_error": 2239,
+        "original_start": 2238,
+        "original_end": 2240,
+        "kind": "conditional",
+        "anchor": 2238
+      },
+      {
+        "current_error": 2370,
+        "original_start": 2369,
+        "original_end": 2371,
+        "kind": "conditional",
+        "anchor": 2369
+      },
+      {
+        "current_error": 2395,
+        "original_start": 2394,
+        "original_end": 2396,
+        "kind": "conditional",
+        "anchor": 2394
+      },
+      {
+        "current_error": 2923,
+        "original_start": 2922,
+        "original_end": 2924,
+        "kind": "conditional",
+        "anchor": 2922
+      },
+      {
+        "current_error": 2941,
+        "original_start": 2940,
+        "original_end": 2942,
+        "kind": "conditional",
+        "anchor": 2940
+      },
+      {
+        "current_error": 2994,
+        "original_start": 2993,
+        "original_end": 2995,
+        "kind": "conditional",
+        "anchor": 2993
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/bios/reset.c": [
+      {
+        "current_error": 24,
+        "original_start": 22,
+        "original_end": 27,
+        "kind": "conditional",
+        "anchor": 22
+      },
+      {
+        "current_error": 78,
+        "original_start": 76,
+        "original_end": 76,
+        "kind": "conditional",
+        "anchor": 76
+      },
+      {
+        "current_error": 88,
+        "original_start": 83,
+        "original_end": 83,
+        "kind": "conditional",
+        "anchor": 83
+      },
+      {
+        "current_error": 95,
+        "original_start": 87,
+        "original_end": 87,
+        "kind": "conditional",
+        "anchor": 87
+      },
+      {
+        "current_error": 110,
+        "original_start": 99,
+        "original_end": 99,
+        "kind": "conditional",
+        "anchor": 99
+      },
+      {
+        "current_error": 119,
+        "original_start": 105,
+        "original_end": 105,
+        "kind": "conditional",
+        "anchor": 105
+      },
+      {
+        "current_error": 126,
+        "original_start": 109,
+        "original_end": 109,
+        "kind": "conditional",
+        "anchor": 109
+      },
+      {
+        "current_error": 133,
+        "original_start": 113,
+        "original_end": 114,
+        "kind": "conditional",
+        "anchor": 113
+      },
+      {
+        "current_error": 140,
+        "original_start": 118,
+        "original_end": 118,
+        "kind": "conditional",
+        "anchor": 118
+      },
+      {
+        "current_error": 178,
+        "original_start": 153,
+        "original_end": 167,
+        "kind": "conditional",
+        "anchor": 153
+      },
+      {
+        "current_error": 190,
+        "original_start": 176,
+        "original_end": 176,
+        "kind": "conditional",
+        "anchor": 176
+      },
+      {
+        "current_error": 205,
+        "original_start": 188,
+        "original_end": 325,
+        "kind": "conditional",
+        "anchor": 188
+      },
+      {
+        "current_error": 244,
+        "original_start": 361,
+        "original_end": 370,
+        "kind": "conditional",
+        "anchor": 361
+      },
+      {
+        "current_error": 342,
+        "original_start": 463,
+        "original_end": 480,
+        "kind": "conditional",
+        "anchor": 463
+      },
+      {
+        "current_error": 352,
+        "original_start": 486,
+        "original_end": 490,
+        "kind": "conditional",
+        "anchor": 486
+      },
+      {
+        "current_error": 368,
+        "original_start": 502,
+        "original_end": 502,
+        "kind": "conditional",
+        "anchor": 502
+      },
+      {
+        "current_error": 392,
+        "original_start": 519,
+        "original_end": 519,
+        "kind": "conditional",
+        "anchor": 519
+      },
+      {
+        "current_error": 424,
+        "original_start": 548,
+        "original_end": 668,
+        "kind": "conditional",
+        "anchor": 548
+      },
+      {
+        "current_error": 433,
+        "original_start": 674,
+        "original_end": 678,
+        "kind": "conditional",
+        "anchor": 674
+      },
+      {
+        "current_error": 574,
+        "original_start": 810,
+        "original_end": 810,
+        "kind": "conditional",
+        "anchor": 810
+      },
+      {
+        "current_error": 636,
+        "original_start": 867,
+        "original_end": 868,
+        "kind": "conditional",
+        "anchor": 867
+      },
+      {
+        "current_error": 659,
+        "original_start": 886,
+        "original_end": 927,
+        "kind": "conditional",
+        "anchor": 886
+      },
+      {
+        "current_error": 669,
+        "original_start": 934,
+        "original_end": 934,
+        "kind": "conditional",
+        "anchor": 934
+      },
+      {
+        "current_error": 680,
+        "original_start": 941,
+        "original_end": 941,
+        "kind": "conditional",
+        "anchor": 941
+      },
+      {
+        "current_error": 689,
+        "original_start": 946,
+        "original_end": 948,
+        "kind": "conditional",
+        "anchor": 946
+      },
+      {
+        "current_error": 714,
+        "original_start": 965,
+        "original_end": 972,
+        "kind": "conditional",
+        "anchor": 965
+      },
+      {
+        "current_error": 721,
+        "original_start": 976,
+        "original_end": 977,
+        "kind": "conditional",
+        "anchor": 976
+      },
+      {
+        "current_error": 739,
+        "original_start": 992,
+        "original_end": 992,
+        "kind": "conditional",
+        "anchor": 992
+      },
+      {
+        "current_error": 746,
+        "original_start": 996,
+        "original_end": 1009,
+        "kind": "conditional",
+        "anchor": 996
+      },
+      {
+        "current_error": 762,
+        "original_start": 1021,
+        "original_end": 1021,
+        "kind": "conditional",
+        "anchor": 1021
+      },
+      {
+        "current_error": 783,
+        "original_start": 1038,
+        "original_end": 1044,
+        "kind": "conditional",
+        "anchor": 1038
+      },
+      {
+        "current_error": 797,
+        "original_start": 1055,
+        "original_end": 1061,
+        "kind": "conditional",
+        "anchor": 1055
+      },
+      {
+        "current_error": 808,
+        "original_start": 1068,
+        "original_end": 1069,
+        "kind": "conditional",
+        "anchor": 1068
+      },
+      {
+        "current_error": 824,
+        "original_start": 1080,
+        "original_end": 1080,
+        "kind": "conditional",
+        "anchor": 1080
+      },
+      {
+        "current_error": 840,
+        "original_start": 1091,
+        "original_end": 1091,
+        "kind": "conditional",
+        "anchor": 1091
+      },
+      {
+        "current_error": 849,
+        "original_start": 1096,
+        "original_end": 1188,
+        "kind": "conditional",
+        "anchor": 1096
+      },
+      {
+        "current_error": 862,
+        "original_start": 1197,
+        "original_end": 1197,
+        "kind": "conditional",
+        "anchor": 1197
+      },
+      {
+        "current_error": 869,
+        "original_start": 1201,
+        "original_end": 1201,
+        "kind": "conditional",
+        "anchor": 1201
+      },
+      {
+        "current_error": 887,
+        "original_start": 1213,
+        "original_end": 1213,
+        "kind": "conditional",
+        "anchor": 1213
+      },
+      {
+        "current_error": 900,
+        "original_start": 1222,
+        "original_end": 1222,
+        "kind": "conditional",
+        "anchor": 1222
+      },
+      {
+        "current_error": 918,
+        "original_start": 1235,
+        "original_end": 1235,
+        "kind": "conditional",
+        "anchor": 1235
+      },
+      {
+        "current_error": 925,
+        "original_start": 1239,
+        "original_end": 1240,
+        "kind": "conditional",
+        "anchor": 1239
+      },
+      {
+        "current_error": 932,
+        "original_start": 1244,
+        "original_end": 1245,
+        "kind": "conditional",
+        "anchor": 1244
+      },
+      {
+        "current_error": 941,
+        "original_start": 1250,
+        "original_end": 1278,
+        "kind": "conditional",
+        "anchor": 1250
+      },
+      {
+        "current_error": 957,
+        "original_start": 1288,
+        "original_end": 1288,
+        "kind": "conditional",
+        "anchor": 1288
+      },
+      {
+        "current_error": 985,
+        "original_start": 1311,
+        "original_end": 1311,
+        "kind": "conditional",
+        "anchor": 1311
+      },
+      {
+        "current_error": 1014,
+        "original_start": 1337,
+        "original_end": 1759,
+        "kind": "conditional",
+        "anchor": 1337
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c": [
+      {
+        "current_error": 61,
+        "original_start": 60,
+        "original_end": 65,
+        "kind": "conditional",
+        "anchor": 60
+      },
+      {
+        "current_error": 115,
+        "original_start": 111,
+        "original_end": 162,
+        "kind": "conditional",
+        "anchor": 111
+      },
+      {
+        "current_error": 142,
+        "original_start": 185,
+        "original_end": 187,
+        "kind": "conditional",
+        "anchor": 185
+      },
+      {
+        "current_error": 160,
+        "original_start": 201,
+        "original_end": 204,
+        "kind": "conditional",
+        "anchor": 201
+      },
+      {
+        "current_error": 447,
+        "original_start": 484,
+        "original_end": 485,
+        "kind": "conditional",
+        "anchor": 484
+      },
+      {
+        "current_error": 931,
+        "original_start": 952,
+        "original_end": 955,
+        "kind": "conditional",
+        "anchor": 952
+      },
+      {
+        "current_error": 976,
+        "original_start": 995,
+        "original_end": 995,
+        "kind": "conditional",
+        "anchor": 995
+      },
+      {
+        "current_error": 984,
+        "original_start": 1001,
+        "original_end": 1063,
+        "kind": "conditional",
+        "anchor": 1001
+      },
+      {
+        "current_error": 1009,
+        "original_start": 1084,
+        "original_end": 1088,
+        "kind": "conditional",
+        "anchor": 1084
+      },
+      {
+        "current_error": 1037,
+        "original_start": 1112,
+        "original_end": 1116,
+        "kind": "conditional",
+        "anchor": 1112
+      },
+      {
+        "current_error": 1044,
+        "original_start": 1120,
+        "original_end": 1123,
+        "kind": "conditional",
+        "anchor": 1120
+      },
+      {
+        "current_error": 1085,
+        "original_start": 1157,
+        "original_end": 1157,
+        "kind": "conditional",
+        "anchor": 1157
+      },
+      {
+        "current_error": 1091,
+        "original_start": 1161,
+        "original_end": 1161,
+        "kind": "conditional",
+        "anchor": 1161
+      },
+      {
+        "current_error": 1305,
+        "original_start": 1357,
+        "original_end": 1396,
+        "kind": "conditional",
+        "anchor": 1357
+      },
+      {
+        "current_error": 1314,
+        "original_start": 1402,
+        "original_end": 1411,
+        "kind": "conditional",
+        "anchor": 1402
+      },
+      {
+        "current_error": 1461,
+        "original_start": 1554,
+        "original_end": 1607,
+        "kind": "conditional",
+        "anchor": 1554
+      },
+      {
+        "current_error": 1621,
+        "original_start": 1757,
+        "original_end": 1764,
+        "kind": "conditional",
+        "anchor": 1757
+      },
+      {
+        "current_error": 1634,
+        "original_start": 1774,
+        "original_end": 1774,
+        "kind": "conditional",
+        "anchor": 1774
+      },
+      {
+        "current_error": 1666,
+        "original_start": 1798,
+        "original_end": 1820,
+        "kind": "explicit"
+      },
+      {
+        "current_error": 1676,
+        "original_start": 1824,
+        "original_end": 1824,
+        "kind": "conditional",
+        "anchor": 1824
+      },
+      {
+        "current_error": 1687,
+        "original_start": 1833,
+        "original_end": 1836,
+        "kind": "conditional",
+        "anchor": 1833
+      },
+      {
+        "current_error": 1701,
+        "original_start": 1846,
+        "original_end": 1846,
+        "kind": "conditional",
+        "anchor": 1846
+      },
+      {
+        "current_error": 1717,
+        "original_start": 1858,
+        "original_end": 1858,
+        "kind": "conditional",
+        "anchor": 1858
+      },
+      {
+        "current_error": 1736,
+        "original_start": 1873,
+        "original_end": 1873,
+        "kind": "conditional",
+        "anchor": 1873
+      },
+      {
+        "current_error": 1746,
+        "original_start": 1881,
+        "original_end": 1881,
+        "kind": "conditional",
+        "anchor": 1881
+      },
+      {
+        "current_error": 1752,
+        "original_start": 1885,
+        "original_end": 1889,
+        "kind": "conditional",
+        "anchor": 1885
+      },
+      {
+        "current_error": 1793,
+        "original_start": 1927,
+        "original_end": 1936,
+        "kind": "conditional",
+        "anchor": 1927
+      },
+      {
+        "current_error": 1948,
+        "original_start": 2087,
+        "original_end": 2087,
+        "kind": "conditional",
+        "anchor": 2087
+      },
+      {
+        "current_error": 1958,
+        "original_start": 2094,
+        "original_end": 2094,
+        "kind": "conditional",
+        "anchor": 2094
+      },
+      {
+        "current_error": 2033,
+        "original_start": 2166,
+        "original_end": 2167,
+        "kind": "conditional",
+        "anchor": 2166
+      },
+      {
+        "current_error": 2123,
+        "original_start": 2250,
+        "original_end": 2250,
+        "kind": "conditional",
+        "anchor": 2250
+      },
+      {
+        "current_error": 2135,
+        "original_start": 2259,
+        "original_end": 2259,
+        "kind": "conditional",
+        "anchor": 2259
+      },
+      {
+        "current_error": 2157,
+        "original_start": 2275,
+        "original_end": 2275,
+        "kind": "conditional",
+        "anchor": 2275
+      },
+      {
+        "current_error": 2166,
+        "original_start": 2281,
+        "original_end": 2281,
+        "kind": "conditional",
+        "anchor": 2281
+      },
+      {
+        "current_error": 2172,
+        "original_start": 2285,
+        "original_end": 2286,
+        "kind": "conditional",
+        "anchor": 2285
+      },
+      {
+        "current_error": 2185,
+        "original_start": 2296,
+        "original_end": 2296,
+        "kind": "conditional",
+        "anchor": 2296
+      },
+      {
+        "current_error": 2191,
+        "original_start": 2300,
+        "original_end": 2300,
+        "kind": "conditional",
+        "anchor": 2300
+      },
+      {
+        "current_error": 2201,
+        "original_start": 2307,
+        "original_end": 2309,
+        "kind": "conditional",
+        "anchor": 2307
+      },
+      {
+        "current_error": 2314,
+        "original_start": 2419,
+        "original_end": 2420,
+        "kind": "conditional",
+        "anchor": 2419
+      },
+      {
+        "current_error": 2407,
+        "original_start": 2506,
+        "original_end": 2626,
+        "kind": "conditional",
+        "anchor": 2506
+      },
+      {
+        "current_error": 2442,
+        "original_start": 2658,
+        "original_end": 2677,
+        "kind": "conditional",
+        "anchor": 2658
+      },
+      {
+        "current_error": 2487,
+        "original_start": 2717,
+        "original_end": 2719,
+        "kind": "conditional",
+        "anchor": 2717
+      },
+      {
+        "current_error": 2528,
+        "original_start": 2739,
+        "original_end": 2739,
+        "kind": "conditional",
+        "anchor": 2739
+      },
+      {
+        "current_error": 2553,
+        "original_start": 2760,
+        "original_end": 2762,
+        "kind": "conditional",
+        "anchor": 2760
+      },
+      {
+        "current_error": 2673,
+        "original_start": 2877,
+        "original_end": 2877,
+        "kind": "conditional",
+        "anchor": 2877
+      },
+      {
+        "current_error": 2760,
+        "original_start": 2960,
+        "original_end": 2960,
+        "kind": "conditional",
+        "anchor": 2960
+      },
+      {
+        "current_error": 2833,
+        "original_start": 3030,
+        "original_end": 3032,
+        "kind": "conditional",
+        "anchor": 3030
+      },
+      {
+        "current_error": 2845,
+        "original_start": 3040,
+        "original_end": 3040,
+        "kind": "conditional",
+        "anchor": 3040
+      },
+      {
+        "current_error": 2875,
+        "original_start": 3067,
+        "original_end": 3069,
+        "kind": "conditional",
+        "anchor": 3067
+      },
+      {
+        "current_error": 2886,
+        "original_start": 3076,
+        "original_end": 3076,
+        "kind": "conditional",
+        "anchor": 3076
+      },
+      {
+        "current_error": 3202,
+        "original_start": 3381,
+        "original_end": 3381,
+        "kind": "conditional",
+        "anchor": 3381
+      },
+      {
+        "current_error": 3287,
+        "original_start": 3458,
+        "original_end": 3468,
+        "kind": "conditional",
+        "anchor": 3458
+      },
+      {
+        "current_error": 3537,
+        "original_start": 3713,
+        "original_end": 3722,
+        "kind": "conditional",
+        "anchor": 3713
+      },
+      {
+        "current_error": 3547,
+        "original_start": 3729,
+        "original_end": 3731,
+        "kind": "conditional",
+        "anchor": 3729
+      },
+      {
+        "current_error": 3594,
+        "original_start": 3774,
+        "original_end": 3777,
+        "kind": "conditional",
+        "anchor": 3774
+      },
+      {
+        "current_error": 3606,
+        "original_start": 3785,
+        "original_end": 3786,
+        "kind": "conditional",
+        "anchor": 3785
+      },
+      {
+        "current_error": 3636,
+        "original_start": 3811,
+        "original_end": 3811,
+        "kind": "conditional",
+        "anchor": 3811
+      },
+      {
+        "current_error": 3702,
+        "original_start": 3872,
+        "original_end": 3875,
+        "kind": "conditional",
+        "anchor": 3872
+      },
+      {
+        "current_error": 3713,
+        "original_start": 3883,
+        "original_end": 3883,
+        "kind": "conditional",
+        "anchor": 3883
+      },
+      {
+        "current_error": 3930,
+        "original_start": 4096,
+        "original_end": 4096,
+        "kind": "conditional",
+        "anchor": 4096
+      },
+      {
+        "current_error": 3969,
+        "original_start": 4131,
+        "original_end": 4132,
+        "kind": "conditional",
+        "anchor": 4131
+      },
+      {
+        "current_error": 3989,
+        "original_start": 4148,
+        "original_end": 4155,
+        "kind": "conditional",
+        "anchor": 4148
+      },
+      {
+        "current_error": 4014,
+        "original_start": 4176,
+        "original_end": 4179,
+        "kind": "conditional",
+        "anchor": 4176
+      },
+      {
+        "current_error": 4071,
+        "original_start": 4232,
+        "original_end": 4235,
+        "kind": "conditional",
+        "anchor": 4232
+      },
+      {
+        "current_error": 4092,
+        "original_start": 4253,
+        "original_end": 4265,
+        "kind": "conditional",
+        "anchor": 4253
+      },
+      {
+        "current_error": 4205,
+        "original_start": 4368,
+        "original_end": 4370,
+        "kind": "conditional",
+        "anchor": 4368
+      },
+      {
+        "current_error": 4307,
+        "original_start": 4466,
+        "original_end": 4468,
+        "kind": "conditional",
+        "anchor": 4466
+      },
+      {
+        "current_error": 5041,
+        "original_start": 5170,
+        "original_end": 5177,
+        "kind": "conditional",
+        "anchor": 5170
+      },
+      {
+        "current_error": 5150,
+        "original_start": 5278,
+        "original_end": 5307,
+        "kind": "conditional",
+        "anchor": 5278
+      },
+      {
+        "current_error": 5245,
+        "original_start": 5391,
+        "original_end": 5392,
+        "kind": "conditional",
+        "anchor": 5391
+      },
+      {
+        "current_error": 5283,
+        "original_start": 5425,
+        "original_end": 5425,
+        "kind": "conditional",
+        "anchor": 5425
+      },
+      {
+        "current_error": 5313,
+        "original_start": 5448,
+        "original_end": 5448,
+        "kind": "conditional",
+        "anchor": 5448
+      },
+      {
+        "current_error": 5322,
+        "original_start": 5454,
+        "original_end": 5456,
+        "kind": "conditional",
+        "anchor": 5454
+      },
+      {
+        "current_error": 5362,
+        "original_start": 5489,
+        "original_end": 5490,
+        "kind": "conditional",
+        "anchor": 5489
+      },
+      {
+        "current_error": 5396,
+        "original_start": 5542,
+        "original_end": 5542,
+        "kind": "conditional",
+        "anchor": 5542
+      },
+      {
+        "current_error": 5403,
+        "original_start": 5548,
+        "original_end": 5550,
+        "kind": "conditional",
+        "anchor": 5548
+      },
+      {
+        "current_error": 5615,
+        "original_start": 5738,
+        "original_end": 5741,
+        "kind": "conditional",
+        "anchor": 5738
+      },
+      {
+        "current_error": 5817,
+        "original_start": 5931,
+        "original_end": 5934,
+        "kind": "conditional",
+        "anchor": 5931
+      },
+      {
+        "current_error": 5907,
+        "original_start": 6015,
+        "original_end": 6018,
+        "kind": "conditional",
+        "anchor": 6015
+      },
+      {
+        "current_error": 5997,
+        "original_start": 6102,
+        "original_end": 6105,
+        "kind": "conditional",
+        "anchor": 6102
+      },
+      {
+        "current_error": 6194,
+        "original_start": 6295,
+        "original_end": 6445,
+        "kind": "conditional",
+        "anchor": 6295
+      },
+      {
+        "current_error": 6306,
+        "original_start": 6554,
+        "original_end": 6665,
+        "kind": "conditional",
+        "anchor": 6554
+      },
+      {
+        "current_error": 6418,
+        "original_start": 6763,
+        "original_end": 6763,
+        "kind": "conditional",
+        "anchor": 6763
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/video/video.c": [
+      {
+        "current_error": 53,
+        "original_start": 49,
+        "original_end": 54,
+        "kind": "conditional",
+        "anchor": 49
+      },
+      {
+        "current_error": 101,
+        "original_start": 92,
+        "original_end": 92,
+        "kind": "conditional",
+        "anchor": 92
+      },
+      {
+        "current_error": 118,
+        "original_start": 105,
+        "original_end": 105,
+        "kind": "conditional",
+        "anchor": 105
+      },
+      {
+        "current_error": 127,
+        "original_start": 111,
+        "original_end": 111,
+        "kind": "conditional",
+        "anchor": 111
+      },
+      {
+        "current_error": 166,
+        "original_start": 142,
+        "original_end": 142,
+        "kind": "conditional",
+        "anchor": 142
+      },
+      {
+        "current_error": 218,
+        "original_start": 186,
+        "original_end": 262,
+        "kind": "conditional",
+        "anchor": 186
+      },
+      {
+        "current_error": 231,
+        "original_start": 272,
+        "original_end": 274,
+        "kind": "conditional",
+        "anchor": 272
+      },
+      {
+        "current_error": 256,
+        "original_start": 296,
+        "original_end": 297,
+        "kind": "conditional",
+        "anchor": 296
+      },
+      {
+        "current_error": 277,
+        "original_start": 313,
+        "original_end": 313,
+        "kind": "conditional",
+        "anchor": 313
+      },
+      {
+        "current_error": 437,
+        "original_start": 463,
+        "original_end": 464,
+        "kind": "conditional",
+        "anchor": 463
+      },
+      {
+        "current_error": 499,
+        "original_start": 519,
+        "original_end": 519,
+        "kind": "conditional",
+        "anchor": 519
+      },
+      {
+        "current_error": 676,
+        "original_start": 676,
+        "original_end": 676,
+        "kind": "conditional",
+        "anchor": 676
+      },
+      {
+        "current_error": 688,
+        "original_start": 686,
+        "original_end": 686,
+        "kind": "conditional",
+        "anchor": 686
+      },
+      {
+        "current_error": 721,
+        "original_start": 717,
+        "original_end": 717,
+        "kind": "conditional",
+        "anchor": 717
+      },
+      {
+        "current_error": 748,
+        "original_start": 742,
+        "original_end": 744,
+        "kind": "conditional",
+        "anchor": 742
+      },
+      {
+        "current_error": 806,
+        "original_start": 796,
+        "original_end": 797,
+        "kind": "conditional",
+        "anchor": 796
+      },
+      {
+        "current_error": 984,
+        "original_start": 968,
+        "original_end": 968,
+        "kind": "conditional",
+        "anchor": 968
+      },
+      {
+        "current_error": 1212,
+        "original_start": 1172,
+        "original_end": 1173,
+        "kind": "conditional",
+        "anchor": 1172
+      },
+      {
+        "current_error": 1327,
+        "original_start": 1267,
+        "original_end": 1267,
+        "kind": "conditional",
+        "anchor": 1267
+      },
+      {
+        "current_error": 1405,
+        "original_start": 1327,
+        "original_end": 1327,
+        "kind": "conditional",
+        "anchor": 1327
+      },
+      {
+        "current_error": 1521,
+        "original_start": 1427,
+        "original_end": 1427,
+        "kind": "conditional",
+        "anchor": 1427
+      },
+      {
+        "current_error": 1532,
+        "original_start": 1435,
+        "original_end": 1435,
+        "kind": "conditional",
+        "anchor": 1435
+      },
+      {
+        "current_error": 1548,
+        "original_start": 1448,
+        "original_end": 1449,
+        "kind": "conditional",
+        "anchor": 1448
+      },
+      {
+        "current_error": 1608,
+        "original_start": 1503,
+        "original_end": 1503,
+        "kind": "conditional",
+        "anchor": 1503
+      },
+      {
+        "current_error": 1629,
+        "original_start": 1522,
+        "original_end": 1522,
+        "kind": "conditional",
+        "anchor": 1522
+      },
+      {
+        "current_error": 1644,
+        "original_start": 1534,
+        "original_end": 1534,
+        "kind": "conditional",
+        "anchor": 1534
+      },
+      {
+        "current_error": 1655,
+        "original_start": 1542,
+        "original_end": 1542,
+        "kind": "conditional",
+        "anchor": 1542
+      },
+      {
+        "current_error": 1676,
+        "original_start": 1560,
+        "original_end": 1560,
+        "kind": "conditional",
+        "anchor": 1560
+      },
+      {
+        "current_error": 1690,
+        "original_start": 1571,
+        "original_end": 1572,
+        "kind": "conditional",
+        "anchor": 1571
+      },
+      {
+        "current_error": 1836,
+        "original_start": 1696,
+        "original_end": 1697,
+        "kind": "conditional",
+        "anchor": 1696
+      },
+      {
+        "current_error": 1937,
+        "original_start": 1779,
+        "original_end": 1779,
+        "kind": "conditional",
+        "anchor": 1779
+      },
+      {
+        "current_error": 2013,
+        "original_start": 1837,
+        "original_end": 1837,
+        "kind": "conditional",
+        "anchor": 1837
+      },
+      {
+        "current_error": 2126,
+        "original_start": 1934,
+        "original_end": 1935,
+        "kind": "conditional",
+        "anchor": 1934
+      },
+      {
+        "current_error": 2144,
+        "original_start": 1949,
+        "original_end": 1950,
+        "kind": "conditional",
+        "anchor": 1949
+      },
+      {
+        "current_error": 2188,
+        "original_start": 1990,
+        "original_end": 1990,
+        "kind": "conditional",
+        "anchor": 1990
+      },
+      {
+        "current_error": 2207,
+        "original_start": 2007,
+        "original_end": 2007,
+        "kind": "conditional",
+        "anchor": 2007
+      },
+      {
+        "current_error": 2221,
+        "original_start": 2018,
+        "original_end": 2018,
+        "kind": "conditional",
+        "anchor": 2018
+      },
+      {
+        "current_error": 2232,
+        "original_start": 2026,
+        "original_end": 2026,
+        "kind": "conditional",
+        "anchor": 2026
+      },
+      {
+        "current_error": 2249,
+        "original_start": 2040,
+        "original_end": 2040,
+        "kind": "conditional",
+        "anchor": 2040
+      },
+      {
+        "current_error": 2263,
+        "original_start": 2051,
+        "original_end": 2052,
+        "kind": "conditional",
+        "anchor": 2051
+      },
+      {
+        "current_error": 2317,
+        "original_start": 2100,
+        "original_end": 2102,
+        "kind": "conditional",
+        "anchor": 2100
+      },
+      {
+        "current_error": 2386,
+        "original_start": 2162,
+        "original_end": 2162,
+        "kind": "conditional",
+        "anchor": 2162
+      },
+      {
+        "current_error": 2488,
+        "original_start": 2254,
+        "original_end": 2254,
+        "kind": "conditional",
+        "anchor": 2254
+      },
+      {
+        "current_error": 2495,
+        "original_start": 2259,
+        "original_end": 2259,
+        "kind": "conditional",
+        "anchor": 2259
+      },
+      {
+        "current_error": 2635,
+        "original_start": 2373,
+        "original_end": 2373,
+        "kind": "conditional",
+        "anchor": 2373
+      },
+      {
+        "current_error": 3003,
+        "original_start": 2703,
+        "original_end": 2710,
+        "kind": "conditional",
+        "anchor": 2703
+      },
+      {
+        "current_error": 3031,
+        "original_start": 2734,
+        "original_end": 2734,
+        "kind": "conditional",
+        "anchor": 2734
+      },
+      {
+        "current_error": 3075,
+        "original_start": 2771,
+        "original_end": 2781,
+        "kind": "conditional",
+        "anchor": 2771
+      },
+      {
+        "current_error": 3194,
+        "original_start": 2888,
+        "original_end": 2891,
+        "kind": "conditional",
+        "anchor": 2888
+      },
+      {
+        "current_error": 3241,
+        "original_start": 2930,
+        "original_end": 2930,
+        "kind": "conditional",
+        "anchor": 2930
+      },
+      {
+        "current_error": 3332,
+        "original_start": 3006,
+        "original_end": 3019,
+        "kind": "conditional",
+        "anchor": 3006
+      },
+      {
+        "current_error": 3362,
+        "original_start": 3045,
+        "original_end": 3048,
+        "kind": "conditional",
+        "anchor": 3045
+      },
+      {
+        "current_error": 3421,
+        "original_start": 3103,
+        "original_end": 3105,
+        "kind": "conditional",
+        "anchor": 3103
+      },
+      {
+        "current_error": 3469,
+        "original_start": 3140,
+        "original_end": 3142,
+        "kind": "conditional",
+        "anchor": 3140
+      },
+      {
+        "current_error": 3953,
+        "original_start": 3595,
+        "original_end": 3595,
+        "kind": "conditional",
+        "anchor": 3595
+      },
+      {
+        "current_error": 4079,
+        "original_start": 3717,
+        "original_end": 3741,
+        "kind": "conditional",
+        "anchor": 3717
+      },
+      {
+        "current_error": 4086,
+        "original_start": 3745,
+        "original_end": 3750,
+        "kind": "conditional",
+        "anchor": 3745
+      },
+      {
+        "current_error": 4102,
+        "original_start": 3759,
+        "original_end": 3759,
+        "kind": "conditional",
+        "anchor": 3759
+      },
+      {
+        "current_error": 4123,
+        "original_start": 3778,
+        "original_end": 3789,
+        "kind": "conditional",
+        "anchor": 3778
+      },
+      {
+        "current_error": 4161,
+        "original_start": 3822,
+        "original_end": 3937,
+        "kind": "conditional",
+        "anchor": 3822
+      },
+      {
+        "current_error": 4177,
+        "original_start": 3948,
+        "original_end": 3955,
+        "kind": "conditional",
+        "anchor": 3948
+      },
+      {
+        "current_error": 4192,
+        "original_start": 3967,
+        "original_end": 3967,
+        "kind": "conditional",
+        "anchor": 3967
+      },
+      {
+        "current_error": 5219,
+        "original_start": 4908,
+        "original_end": 5619,
+        "kind": "conditional",
+        "anchor": 4908
+      }
+    ],
+    "src/mvdm-host/softpc.new/host/inc/host_def.h": [
+      {
+        "current_error": 40,
+        "original_start": 40,
+        "original_end": 40,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 104,
+        "original_start": 102,
+        "original_end": 102,
+        "kind": "conditional",
+        "anchor": 102
+      },
+      {
+        "current_error": 115,
+        "original_start": 110,
+        "original_end": 110,
+        "kind": "conditional",
+        "anchor": 110
+      },
+      {
+        "current_error": 147,
+        "original_start": 140,
+        "original_end": 140,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 239,
+        "original_start": 232,
+        "original_end": 232,
+        "kind": "conditional",
+        "anchor": null
+      }
+    ],
+    "src/mvdm-host/softpc.new/host/src/copy_fnc.c": [
+      {
+        "current_error": 20,
+        "original_start": 19,
+        "original_end": 22,
+        "kind": "conditional",
+        "anchor": 19
+      },
+      {
+        "current_error": 62,
+        "original_start": 60,
+        "original_end": 78,
+        "kind": "conditional",
+        "anchor": 60
+      },
+      {
+        "current_error": 105,
+        "original_start": 116,
+        "original_end": 117,
+        "kind": "conditional",
+        "anchor": 116
+      },
+      {
+        "current_error": 173,
+        "original_start": 181,
+        "original_end": 184,
+        "kind": "conditional",
+        "anchor": 181
+      }
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_fulsc.c": [
+      {
+        "current_error": 30,
+        "original_start": 29,
+        "original_end": 32,
+        "kind": "conditional",
+        "anchor": 29
+      },
+      {
+        "current_error": 71,
+        "original_start": 70,
+        "original_end": 74,
+        "kind": "conditional",
+        "anchor": 70
+      },
+      {
+        "current_error": 91,
+        "original_start": 89,
+        "original_end": 91,
+        "kind": "conditional",
+        "anchor": 89
+      },
+      {
+        "current_error": 98,
+        "original_start": 95,
+        "original_end": 95,
+        "kind": "conditional",
+        "anchor": 95
+      },
+      {
+        "current_error": 128,
+        "original_start": 123,
+        "original_end": 123,
+        "kind": "conditional",
+        "anchor": 123
+      },
+      {
+        "current_error": 166,
+        "original_start": 157,
+        "original_end": 190,
+        "kind": "conditional",
+        "anchor": 157
+      },
+      {
+        "current_error": 182,
+        "original_start": 203,
+        "original_end": 203,
+        "kind": "conditional",
+        "anchor": 203
+      },
+      {
+        "current_error": 187,
+        "original_start": 206,
+        "original_end": 210,
+        "kind": "conditional",
+        "anchor": 206
+      },
+      {
+        "current_error": 215,
+        "original_start": 231,
+        "original_end": 232,
+        "kind": "conditional",
+        "anchor": 231
+      },
+      {
+        "current_error": 228,
+        "original_start": 242,
+        "original_end": 243,
+        "kind": "conditional",
+        "anchor": 242
+      },
+      {
+        "current_error": 234,
+        "original_start": 246,
+        "original_end": 252,
+        "kind": "conditional",
+        "anchor": 246
+      },
+      {
+        "current_error": 364,
+        "original_start": 371,
+        "original_end": 695,
+        "kind": "conditional",
+        "anchor": 371
+      },
+      {
+        "current_error": 401,
+        "original_start": 729,
+        "original_end": 737,
+        "kind": "conditional",
+        "anchor": 729
+      },
+      {
+        "current_error": 408,
+        "original_start": 741,
+        "original_end": 743,
+        "kind": "conditional",
+        "anchor": 741
+      },
+      {
+        "current_error": 516,
+        "original_start": 831,
+        "original_end": 831,
+        "kind": "conditional",
+        "anchor": 831
+      },
+      {
+        "current_error": 525,
+        "original_start": 837,
+        "original_end": 871,
+        "kind": "conditional",
+        "anchor": 837
+      },
+      {
+        "current_error": 560,
+        "original_start": 901,
+        "original_end": 901,
+        "kind": "conditional",
+        "anchor": 901
+      },
+      {
+        "current_error": 568,
+        "original_start": 907,
+        "original_end": 916,
+        "kind": "conditional",
+        "anchor": 907
+      },
+      {
+        "current_error": 586,
+        "original_start": 931,
+        "original_end": 934,
+        "kind": "conditional",
+        "anchor": 931
+      },
+      {
+        "current_error": 599,
+        "original_start": 944,
+        "original_end": 950,
+        "kind": "conditional",
+        "anchor": 944
+      },
+      {
+        "current_error": 611,
+        "original_start": 959,
+        "original_end": 1008,
+        "kind": "conditional",
+        "anchor": 959
+      },
+      {
+        "current_error": 633,
+        "original_start": 1027,
+        "original_end": 1034,
+        "kind": "conditional",
+        "anchor": 1027
+      },
+      {
+        "current_error": 661,
+        "original_start": 1059,
+        "original_end": 1085,
+        "kind": "conditional",
+        "anchor": 1059
+      },
+      {
+        "current_error": 687,
+        "original_start": 1108,
+        "original_end": 1174,
+        "kind": "conditional",
+        "anchor": 1108
+      },
+      {
+        "current_error": 716,
+        "original_start": 1196,
+        "original_end": 1199,
+        "kind": "conditional",
+        "anchor": 1196
+      },
+      {
+        "current_error": 722,
+        "original_start": 1202,
+        "original_end": 1203,
+        "kind": "conditional",
+        "anchor": 1202
+      },
+      {
+        "current_error": 731,
+        "original_start": 1209,
+        "original_end": 1211,
+        "kind": "conditional",
+        "anchor": 1209
+      },
+      {
+        "current_error": 766,
+        "original_start": 1237,
+        "original_end": 1257,
+        "kind": "conditional",
+        "anchor": 1237
+      },
+      {
+        "current_error": 775,
+        "original_start": 1262,
+        "original_end": 1313,
+        "kind": "conditional",
+        "anchor": 1262
+      },
+      {
+        "current_error": 793,
+        "original_start": 1327,
+        "original_end": 1734,
+        "kind": "conditional",
+        "anchor": 1327
+      },
+      {
+        "current_error": 818,
+        "original_start": 1752,
+        "original_end": 2110,
+        "kind": "conditional",
+        "anchor": 1752
+      },
+      {
+        "current_error": 835,
+        "original_start": 2123,
+        "original_end": 2174,
+        "kind": "explicit"
+      },
+      {
+        "current_error": 867,
+        "original_start": 2201,
+        "original_end": 2205,
+        "kind": "conditional",
+        "anchor": 2201
+      },
+      {
+        "current_error": 874,
+        "original_start": 2209,
+        "original_end": 2308,
+        "kind": "conditional",
+        "anchor": 2209
+      },
+      {
+        "current_error": 884,
+        "original_start": 2315,
+        "original_end": 2317,
+        "kind": "conditional",
+        "anchor": 2315
+      },
+      {
+        "current_error": 901,
+        "original_start": 2329,
+        "original_end": 2329,
+        "kind": "conditional",
+        "anchor": 2329
+      },
+      {
+        "current_error": 914,
+        "original_start": 2340,
+        "original_end": 2353,
+        "kind": "conditional",
+        "anchor": 2340
+      },
+      {
+        "current_error": 920,
+        "original_start": 2356,
+        "original_end": 2380,
+        "kind": "conditional",
+        "anchor": 2356
+      },
+      {
+        "current_error": 926,
+        "original_start": 2383,
+        "original_end": 2390,
+        "kind": "conditional",
+        "anchor": 2383
+      },
+      {
+        "current_error": 957,
+        "original_start": 2416,
+        "original_end": 2417,
+        "kind": "conditional",
+        "anchor": 2416
+      },
+      {
+        "current_error": 976,
+        "original_start": 2431,
+        "original_end": 2431,
+        "kind": "conditional",
+        "anchor": 2431
+      },
+      {
+        "current_error": 1037,
+        "original_start": 2477,
+        "original_end": 2477,
+        "kind": "conditional",
+        "anchor": 2477
+      },
+      {
+        "current_error": 1104,
+        "original_start": 2528,
+        "original_end": 2529,
+        "kind": "conditional",
+        "anchor": 2528
+      },
+      {
+        "current_error": 1133,
+        "original_start": 2548,
+        "original_end": 2554,
+        "kind": "conditional",
+        "anchor": 2548
+      },
+      {
+        "current_error": 1162,
+        "original_start": 2579,
+        "original_end": 2682,
+        "kind": "conditional",
+        "anchor": 2579
+      },
+      {
+        "current_error": 1250,
+        "original_start": 2764,
+        "original_end": 2767,
+        "kind": "conditional",
+        "anchor": 2764
+      },
+      {
+        "current_error": 1269,
+        "original_start": 2777,
+        "original_end": 2780,
+        "kind": "conditional",
+        "anchor": 2777
+      },
+      {
+        "current_error": 1393,
+        "original_start": 2896,
+        "original_end": 3010,
+        "kind": "conditional",
+        "anchor": 2896
+      },
+      {
+        "current_error": 1400,
+        "original_start": 3014,
+        "original_end": 3089,
+        "kind": "conditional",
+        "anchor": 3014
+      },
+      {
+        "current_error": 1425,
+        "original_start": 3111,
+        "original_end": 3112,
+        "kind": "conditional",
+        "anchor": 3111
+      },
+      {
+        "current_error": 1438,
+        "original_start": 3121,
+        "original_end": 3133,
+        "kind": "conditional",
+        "anchor": 3121
+      },
+      {
+        "current_error": 1516,
+        "original_start": 3203,
+        "original_end": 3204,
+        "kind": "conditional",
+        "anchor": 3203
+      },
+      {
+        "current_error": 1535,
+        "original_start": 3220,
+        "original_end": 3220,
+        "kind": "conditional",
+        "anchor": 3220
+      },
+      {
+        "current_error": 1544,
+        "original_start": 3226,
+        "original_end": 3227,
+        "kind": "conditional",
+        "anchor": 3226
+      },
+      {
+        "current_error": 1566,
+        "original_start": 3243,
+        "original_end": 3251,
+        "kind": "conditional",
+        "anchor": 3243
+      },
+      {
+        "current_error": 1593,
+        "original_start": 3273,
+        "original_end": 3273,
+        "kind": "conditional",
+        "anchor": 3273
+      },
+      {
+        "current_error": 1758,
+        "original_start": 3426,
+        "original_end": 3426,
+        "kind": "conditional",
+        "anchor": 3426
+      },
+      {
+        "current_error": 1765,
+        "original_start": 3431,
+        "original_end": 3804,
+        "kind": "conditional",
+        "anchor": 3431
+      },
+      {
+        "current_error": 1829,
+        "original_start": 3863,
+        "original_end": 3971,
+        "kind": "conditional",
+        "anchor": 3863
+      },
+      {
+        "current_error": 1836,
+        "original_start": 3975,
+        "original_end": 4707,
+        "kind": "conditional",
+        "anchor": 3975
+      }
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_sb.c": [],
+    "src/mvdm-host/softpc.new/host/src/nt_sbfm.c": [
+      {
+        "current_error": 69,
+        "original_start": 68,
+        "original_end": 100,
+        "kind": "conditional",
+        "anchor": 68
+      },
+      {
+        "current_error": 126,
+        "original_start": 154,
+        "original_end": 154,
+        "kind": "conditional",
+        "anchor": 154
+      },
+      {
+        "current_error": 140,
+        "original_start": 165,
+        "original_end": 165,
+        "kind": "conditional",
+        "anchor": 165
+      },
+      {
+        "current_error": 178,
+        "original_start": 200,
+        "original_end": 207,
+        "kind": "conditional",
+        "anchor": 200
+      }
+    ],
+    "src/mvdm-host/softpc.new/host/src/sim32.c": [
+      {
+        "current_error": 303,
+        "original_start": 275,
+        "original_end": 313,
+        "kind": "explicit"
+      },
+      {
+        "current_error": 364,
+        "original_start": 371,
+        "original_end": 372,
+        "kind": "conditional",
+        "anchor": 371
+      },
+      {
+        "current_error": 395,
+        "original_start": 400,
+        "original_end": 401,
+        "kind": "conditional",
+        "anchor": 400
+      },
+      {
+        "current_error": 469,
+        "original_start": 472,
+        "original_end": 570,
+        "kind": "conditional",
+        "anchor": 472
+      },
+      {
+        "current_error": 486,
+        "original_start": 584,
+        "original_end": 584,
+        "kind": "conditional",
+        "anchor": 584
+      }
+    ],
+    "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c": [
+      {
+        "current_error": 32,
+        "original_start": 28,
+        "original_end": 28,
+        "kind": "conditional",
+        "anchor": 28
+      },
+      {
+        "current_error": 125,
+        "original_start": 117,
+        "original_end": 117,
+        "kind": "conditional",
+        "anchor": 117
+      },
+      {
+        "current_error": 253,
+        "original_start": 243,
+        "original_end": 249,
+        "kind": "explicit"
+      },
+      {
+        "current_error": 336,
+        "original_start": 328,
+        "original_end": 332,
+        "kind": "conditional",
+        "anchor": 328
+      },
+      {
+        "current_error": 364,
+        "original_start": 357,
+        "original_end": 359,
+        "kind": "conditional",
+        "anchor": 357
+      }
+    ],
+    "src/mvdm-host/wow32/wkgthunk.c": [
+      {
+        "current_error": 230,
+        "original_start": 229,
+        "original_end": 235,
+        "kind": "conditional",
+        "anchor": 229
+      },
+      {
+        "current_error": 313,
+        "original_start": 316,
+        "original_end": 320,
+        "kind": "conditional",
+        "anchor": 316
+      },
+      {
+        "current_error": 411,
+        "original_start": 416,
+        "original_end": 455,
+        "kind": "conditional",
+        "anchor": 416
+      }
+    ],
+    "src/mvdm-host/wow32/wow32.c": [
+      {
+        "current_error": 64,
+        "original_start": 56,
+        "original_end": 59,
+        "kind": "conditional",
+        "anchor": 56
+      },
+      {
+        "current_error": 78,
+        "original_start": 70,
+        "original_end": 71,
+        "kind": "conditional",
+        "anchor": 70
+      },
+      {
+        "current_error": 87,
+        "original_start": 77,
+        "original_end": 78,
+        "kind": "conditional",
+        "anchor": 77
+      },
+      {
+        "current_error": 93,
+        "original_start": 82,
+        "original_end": 89,
+        "kind": "conditional",
+        "anchor": 82
+      },
+      {
+        "current_error": 99,
+        "original_start": 93,
+        "original_end": 93,
+        "kind": "conditional",
+        "anchor": null
+      },
+      {
+        "current_error": 198,
+        "original_start": 188,
+        "original_end": 204,
+        "kind": "conditional",
+        "anchor": 188
+      },
+      {
+        "current_error": 542,
+        "original_start": 545,
+        "original_end": 547,
+        "kind": "conditional",
+        "anchor": 545
+      },
+      {
+        "current_error": 767,
+        "original_start": 759,
+        "original_end": 818,
+        "kind": "conditional",
+        "anchor": 759
+      },
+      {
+        "current_error": 820,
+        "original_start": 867,
+        "original_end": 883,
+        "kind": "conditional",
+        "anchor": 867
+      },
+      {
+        "current_error": 864,
+        "original_start": 924,
+        "original_end": 926,
+        "kind": "conditional",
+        "anchor": 924
+      },
+      {
+        "current_error": 871,
+        "original_start": 930,
+        "original_end": 931,
+        "kind": "conditional",
+        "anchor": 930
+      },
+      {
+        "current_error": 893,
+        "original_start": 950,
+        "original_end": 966,
+        "kind": "conditional",
+        "anchor": 950
+      },
+      {
+        "current_error": 906,
+        "original_start": 975,
+        "original_end": 1059,
+        "kind": "conditional",
+        "anchor": 975
+      },
+      {
+        "current_error": 922,
+        "original_start": 1072,
+        "original_end": 1086,
+        "kind": "conditional",
+        "anchor": 1072
+      },
+      {
+        "current_error": 1007,
+        "original_start": 1166,
+        "original_end": 1166,
+        "kind": "conditional",
+        "anchor": 1166
+      },
+      {
+        "current_error": 1013,
+        "original_start": 1170,
+        "original_end": 1170,
+        "kind": "conditional",
+        "anchor": 1170
+      },
+      {
+        "current_error": 1057,
+        "original_start": 1210,
+        "original_end": 1210,
+        "kind": "conditional",
+        "anchor": 1210
+      },
+      {
+        "current_error": 1063,
+        "original_start": 1214,
+        "original_end": 1218,
+        "kind": "conditional",
+        "anchor": 1214
+      },
+      {
+        "current_error": 1082,
+        "original_start": 1235,
+        "original_end": 1235,
+        "kind": "conditional",
+        "anchor": 1235
+      },
+      {
+        "current_error": 1105,
+        "original_start": 1255,
+        "original_end": 1259,
+        "kind": "conditional",
+        "anchor": 1255
+      },
+      {
+        "current_error": 1119,
+        "original_start": 1270,
+        "original_end": 1281,
+        "kind": "conditional",
+        "anchor": 1270
+      },
+      {
+        "current_error": 1146,
+        "original_start": 1300,
+        "original_end": 1345,
+        "kind": "conditional",
+        "anchor": 1300
+      },
+      {
+        "current_error": 1519,
+        "original_start": 1714,
+        "original_end": 1835,
+        "kind": "conditional",
+        "anchor": 1714
+      },
+      {
+        "current_error": 1637,
+        "original_start": 1950,
+        "original_end": 1950,
+        "kind": "conditional",
+        "anchor": 1950
+      },
+      {
+        "current_error": 1660,
+        "original_start": 1971,
+        "original_end": 1971,
+        "kind": "conditional",
+        "anchor": 1971
+      },
+      {
+        "current_error": 1713,
+        "original_start": 2022,
+        "original_end": 2059,
+        "kind": "conditional",
+        "anchor": 2022
+      },
+      {
+        "current_error": 1729,
+        "original_start": 2071,
+        "original_end": 2071,
+        "kind": "conditional",
+        "anchor": 2071
+      },
+      {
+        "current_error": 1741,
+        "original_start": 2080,
+        "original_end": 2080,
+        "kind": "conditional",
+        "anchor": 2080
+      },
+      {
+        "current_error": 1767,
+        "original_start": 2102,
+        "original_end": 2102,
+        "kind": "conditional",
+        "anchor": 2102
+      },
+      {
+        "current_error": 1778,
+        "original_start": 2111,
+        "original_end": 2111,
+        "kind": "conditional",
+        "anchor": 2111
+      },
+      {
+        "current_error": 1789,
+        "original_start": 2119,
+        "original_end": 2461,
+        "kind": "conditional",
+        "anchor": 2119
+      },
+      {
+        "current_error": 2226,
+        "original_start": 2894,
+        "original_end": 2944,
+        "kind": "conditional",
+        "anchor": 2894
+      },
+      {
+        "current_error": 2270,
+        "original_start": 2951,
+        "original_end": 3198,
+        "kind": "conditional",
+        "anchor": 2951
+      }
+    ]
+  },
+  "same_as_original_review": 352,
+  "changed_pairs": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "current_error": 239,
+      "original_start": 227,
+      "original_end": 229,
+      "kind": "conditional",
+      "anchor": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_error": 1666,
+      "original_start": 1798,
+      "original_end": 1820,
+      "kind": "explicit"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_error": 2495,
+      "original_start": 2259,
+      "original_end": 2259,
+      "kind": "conditional",
+      "anchor": 2259
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_error": 2635,
+      "original_start": 2373,
+      "original_end": 2373,
+      "kind": "conditional",
+      "anchor": 2373
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_error": 3241,
+      "original_start": 2930,
+      "original_end": 2930,
+      "kind": "conditional",
+      "anchor": 2930
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "current_error": 40,
+      "original_start": 40,
+      "original_end": 40,
+      "kind": "conditional",
+      "anchor": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sbfm.c",
+      "current_error": 69,
+      "original_start": 68,
+      "original_end": 100,
+      "kind": "conditional",
+      "anchor": 68
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sbfm.c",
+      "current_error": 126,
+      "original_start": 154,
+      "original_end": 154,
+      "kind": "conditional",
+      "anchor": 154
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sbfm.c",
+      "current_error": 140,
+      "original_start": 165,
+      "original_end": 165,
+      "kind": "conditional",
+      "anchor": 165
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sbfm.c",
+      "current_error": 178,
+      "original_start": 200,
+      "original_end": 207,
+      "kind": "conditional",
+      "anchor": 200
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "current_error": 303,
+      "original_start": 275,
+      "original_end": 313,
+      "kind": "explicit"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "current_error": 364,
+      "original_start": 371,
+      "original_end": 372,
+      "kind": "conditional",
+      "anchor": 371
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "current_error": 395,
+      "original_start": 400,
+      "original_end": 401,
+      "kind": "conditional",
+      "anchor": 400
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_error": 253,
+      "original_start": 243,
+      "original_end": 249,
+      "kind": "explicit"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "current_error": 99,
+      "original_start": 93,
+      "original_end": 93,
+      "kind": "conditional",
+      "anchor": null
+    }
+  ],
+  "pair_review": "Existing exact ranges reused. New guard exclusions use source-reviewed bodies and adjacent #line anchors. nt_fulsc split uses original reviewed1752-2110 and2123-2174, preserving2111-2122. dpmi32 repeated _X86_ guard uses verified#line305 anchor instead of sequence-only match.",
+  "points": 1741,
+  "lines": 2826,
+  "open_source_issue": "dpmi32.c #line102 before original100 and#line106 before original105 cause drift; no anchor after shortened DpmiInitDosxRM causes later original229-303 drift. This is a real retained-source diagnostic mapping defect, not a product runtime failure. Source correction and compiler-line verification required before S13 closure.",
+  "publication": {
+    "published": [
+      {
+        "path": "assets\\release\\NTVDMD.DLL",
+        "expected": "53602e60b8994dc7b954826a95c71294fb10d13b31fc045f6167f433bedc9f04",
+        "actual": "53602e60b8994dc7b954826a95c71294fb10d13b31fc045f6167f433bedc9f04",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+        "expected": "53602e60b8994dc7b954826a95c71294fb10d13b31fc045f6167f433bedc9f04",
+        "actual": "53602e60b8994dc7b954826a95c71294fb10d13b31fc045f6167f433bedc9f04",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\VJOY.DLL",
+        "expected": "e8170b1153092dc413cca0ca2db7a5fac698006160ecd328d5475b61d64a8770",
+        "actual": "e8170b1153092dc413cca0ca2db7a5fac698006160ecd328d5475b61d64a8770",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+        "expected": "e8170b1153092dc413cca0ca2db7a5fac698006160ecd328d5475b61d64a8770",
+        "actual": "e8170b1153092dc413cca0ca2db7a5fac698006160ecd328d5475b61d64a8770",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "expected": "1fa97eec5bb9b7b3bbcc47ab4ba81bf6f262a225c72600a374647f50d3602171",
+        "actual": "1fa97eec5bb9b7b3bbcc47ab4ba81bf6f262a225c72600a374647f50d3602171",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+        "expected": "1fa97eec5bb9b7b3bbcc47ab4ba81bf6f262a225c72600a374647f50d3602171",
+        "actual": "1fa97eec5bb9b7b3bbcc47ab4ba81bf6f262a225c72600a374647f50d3602171",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "expected": "9481c4f0eb0a3a5ad6b281c74e22e991bd46a5f00349d75fc9d9bb863a7c092d",
+        "actual": "9481c4f0eb0a3a5ad6b281c74e22e991bd46a5f00349d75fc9d9bb863a7c092d",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+        "expected": "9481c4f0eb0a3a5ad6b281c74e22e991bd46a5f00349d75fc9d9bb863a7c092d",
+        "actual": "9481c4f0eb0a3a5ad6b281c74e22e991bd46a5f00349d75fc9d9bb863a7c092d",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "expected": "1a3fda75f9fd067516badb3b8b208e4ff9f2845ff5add39a9edd0a388df66064",
+        "actual": "1a3fda75f9fd067516badb3b8b208e4ff9f2845ff5add39a9edd0a388df66064",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+        "expected": "1a3fda75f9fd067516badb3b8b208e4ff9f2845ff5add39a9edd0a388df66064",
+        "actual": "1a3fda75f9fd067516badb3b8b208e4ff9f2845ff5add39a9edd0a388df66064",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "expected": "7a642776be7603692e84bc460107f7993c937495b99dafa348dfa6e9141e5812",
+        "actual": "7a642776be7603692e84bc460107f7993c937495b99dafa348dfa6e9141e5812",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+        "expected": "7a642776be7603692e84bc460107f7993c937495b99dafa348dfa6e9141e5812",
+        "actual": "7a642776be7603692e84bc460107f7993c937495b99dafa348dfa6e9141e5812",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "expected": "ebbb36a15bc7ba311bec60a550561cd6ca8044f5b83c73bd98656a345e29780d",
+        "actual": "ebbb36a15bc7ba311bec60a550561cd6ca8044f5b83c73bd98656a345e29780d",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+        "expected": "ebbb36a15bc7ba311bec60a550561cd6ca8044f5b83c73bd98656a345e29780d",
+        "actual": "ebbb36a15bc7ba311bec60a550561cd6ca8044f5b83c73bd98656a345e29780d",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "expected": "0bf7e3abb12c8176648f17f2c2913352d88c9e648b5cb92a07e3b79e364ee37d",
+        "actual": "0bf7e3abb12c8176648f17f2c2913352d88c9e648b5cb92a07e3b79e364ee37d",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+        "expected": "0bf7e3abb12c8176648f17f2c2913352d88c9e648b5cb92a07e3b79e364ee37d",
+        "actual": "0bf7e3abb12c8176648f17f2c2913352d88c9e648b5cb92a07e3b79e364ee37d",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "expected": "e631f6826ec8a5ecec391d07d71301955090100c6bdfb24838ffb76231db566c",
+        "actual": "e631f6826ec8a5ecec391d07d71301955090100c6bdfb24838ffb76231db566c",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+        "expected": "e631f6826ec8a5ecec391d07d71301955090100c6bdfb24838ffb76231db566c",
+        "actual": "e631f6826ec8a5ecec391d07d71301955090100c6bdfb24838ffb76231db566c",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "expected": "f04f8c16e34aaa26d79401d0d909d4acb08b88cf7a2f0cf683c95673021cd862",
+        "actual": "f04f8c16e34aaa26d79401d0d909d4acb08b88cf7a2f0cf683c95673021cd862",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+        "expected": "f04f8c16e34aaa26d79401d0d909d4acb08b88cf7a2f0cf683c95673021cd862",
+        "actual": "f04f8c16e34aaa26d79401d0d909d4acb08b88cf7a2f0cf683c95673021cd862",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "expected": "50f69ccb1cd6619021474fabf33132482643633a42b4d0e4e176e97b1c7f9b6a",
+        "actual": "50f69ccb1cd6619021474fabf33132482643633a42b4d0e4e176e97b1c7f9b6a",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+        "expected": "50f69ccb1cd6619021474fabf33132482643633a42b4d0e4e176e97b1c7f9b6a",
+        "actual": "50f69ccb1cd6619021474fabf33132482643633a42b4d0e4e176e97b1c7f9b6a",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "expected": "4d5b67c5cb5c91820002be0a498ef1582ef3d545e79a6836e0eaffe9305ac0cf",
+        "actual": "4d5b67c5cb5c91820002be0a498ef1582ef3d545e79a6836e0eaffe9305ac0cf",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+        "expected": "4d5b67c5cb5c91820002be0a498ef1582ef3d545e79a6836e0eaffe9305ac0cf",
+        "actual": "4d5b67c5cb5c91820002be0a498ef1582ef3d545e79a6836e0eaffe9305ac0cf",
+        "match": true
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "expected": "1f13f429aab628ee8debbacd78b2fb98669bbc0f0a38cddfe7f1042a50799d49",
+        "actual": "1f13f429aab628ee8debbacd78b2fb98669bbc0f0a38cddfe7f1042a50799d49",
+        "match": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+        "expected": "1f13f429aab628ee8debbacd78b2fb98669bbc0f0a38cddfe7f1042a50799d49",
+        "actual": "1f13f429aab628ee8debbacd78b2fb98669bbc0f0a38cddfe7f1042a50799d49",
+        "match": true
+      }
+    ],
+    "full": {
+      "Suite": "Full",
+      "ElapsedMs": 588930,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": true,
+      "PreparationMs": 19938,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1231,
+          "CleanupMs": 425,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-standard",
+          "ElapsedMs": 41199,
+          "CleanupMs": 355,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-enhanced",
+          "ElapsedMs": 72448,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "win95",
+          "ElapsedMs": 90740,
+          "CleanupMs": 326,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 15512,
+          "CleanupMs": 342,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 15304,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 16221,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 145,
+          "CleanupMs": 329,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 64863,
+          "CleanupMs": 369,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 42115,
+          "CleanupMs": 361,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 38591,
+          "CleanupMs": 330,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 13703,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 9442,
+          "CleanupMs": 372,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 1260,
+          "CleanupMs": 349,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12293,
+          "CleanupMs": 407,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 33091,
+          "CleanupMs": 355,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 40410,
+          "CleanupMs": 398,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3155,
+          "CleanupMs": 340,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7564,
+          "CleanupMs": 430,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10264,
+          "CleanupMs": 400,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3403,
+          "CleanupMs": 303,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7171,
+          "CleanupMs": 291,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20278,
+          "CleanupMs": 310,
+          "Passed": true
+        }
+      ]
+    },
+    "full_rerun": false,
+    "verification": "Read existing final gate receipt and hash actual dual-location files; not a new runtime run."
+  }
+}

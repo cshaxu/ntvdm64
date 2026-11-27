@@ -113,3 +113,24 @@ The computed S7 census becomes1740points/2838lines after these three changes;
 final exclusion-pair review and all-owner receipt reconciliation remain open.
 The original1039file/4550frozen-point population is unchanged. Full23/23 is
 retained for runtime14;this format-only update does not repeat Full.
+
+## P6 exclusion and package reconciliation
+
+[Reconciliation](s13-p6-reconciliation.json) preserves every current S7
+exclusion pair and the26actual published-file hashes. Both publication
+locations still match runtime14;the existing Full receipt has23passing gates.
+No runtime test was repeated. The known Win95 exit-one boundary is unchanged.
+
+The prior computed census over-excluded nt_fulsc.c original2111-2122 because
+its X86GFX guard was split around the retained getNtScreenState function.
+Use the already reviewed1752-2110 and2123-2174 ranges separately. Corrected
+S7 count:1741points/2826lines;this is a measurement correction,not a code
+reduction. Previous computed counts remain historical evidence.
+
+Source review also proves a remaining diagnostic-line defect in dpmi32.c:
+#line102 precedes original100,#line106 precedes original105,and the shortened
+DpmiInitDosxRM lacks an anchor before original229-303. The final source
+therefore does not yet satisfy the original logical-line contract. Correct
+these anchors and verify real compiler line output before S13 closure. This
+is not a new runtime failure or authority to rerun all previously passing Full
+gates. No source change is made in P6;the correction is the next concrete step.
