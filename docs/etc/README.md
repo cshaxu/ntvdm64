@@ -2195,4 +2195,5 @@ post-publication targeted checks.
 - [S15 P34 N022 message migration](evidence/t485-s1/n022-message.md).
 
 - [S15 P35 N022 resource migration](evidence/t485-s1/n022-resources.md).
-- [S15 P36 N022 combo migration in progress](evidence/t485-s1/n022-combo.md).
+- [S15 P36 N022 combo migration](evidence/t485-s1/n022-combo.md).
+- [S15 P37 N022 combo initialization](evidence/t485-s1/n022-comboini.md).

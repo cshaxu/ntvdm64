@@ -149,6 +149,8 @@ WORD DbcsCombine(HWND, WORD);
 #define CrackCombinedDbcsLB(c) ((BYTE)(c))
 #define CrackCombinedDbcsTB(c) ((c) >> 8)
 #define KPRECT_TO_PRECT(p) (p)
+/* Original w32inc/w32wow64.h non-WOW64 pointer conversion. */
+#define KPVOID_TO_PVOID(p) (p)
 #define KHANDLE_TO_HANDLE(h) ((HANDLE)(h))
 #ifndef CW_FLAGS_ANSI
 #define CW_FLAGS_ANSI 0x00000001

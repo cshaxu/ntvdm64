@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 781,
+    "nonerror_identical": 792,
+    "nonerror_different": 537,
+    "nonerror_points": 7853,
+    "nonerror_lines": 119031
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 781,
+    "nonerror_identical": 792,
+    "nonerror_different": 537,
+    "nonerror_points": 7853,
+    "nonerror_lines": 117785
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 0,
+    "nonerror_lines": -1246
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+      "before_points": 1,
+      "before_lines": 1275,
+      "after_points": 1,
+      "after_lines": 29,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1274,
+    "OpenNT": 55
+  }
+}

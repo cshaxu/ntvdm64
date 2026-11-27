@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime41 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime42 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -167,6 +167,15 @@ publication/test failures and repairs remain in the receipt. N0227/39;
 overall57/159; S15 9/14. Census1329files,781exact,792nonerror same/537different,
 7853points/119031lines; delta0files/0exact/0same/0different,+5points/-4515lines.
 1273XP/56OpenNT. Nine mirror files changed; Full checkpoint reset. Next comboini.c.
+
+[P37 N022 combo initialization](../etc/evidence/t485-s1/n022-comboini.md)
+delivered runtime42: exact XP641-line original plus existing29-line info provider.
+Cached build, dual13-image26hash, control39/39, window-borrow and SOL Options pass.
+N0228/39; overall57/159; S15 9/14. Census1329files,781exact,792nonerror same/
+537different,7853points/117785lines; delta0files/0exact/0same/0different/0points/
+-1246lines.1274XP/55OpenNT. One mirror since P36 Full. Sequence correction:
+P36 next-file pointer skipped combodir.c; restore that pending DIR entry next,
+before dlgbegin.c. It is not counted as migrated.
 
 ## S14 Closure Record
 

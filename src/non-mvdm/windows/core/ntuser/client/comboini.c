@@ -1,7 +1,7 @@
 /**************************** Module Header ********************************\
 * Module Name: comboini.c
 *
-* Copyright 1985-90, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * All the (one time) initialization/destruction code used for combo boxes
 *
@@ -28,7 +28,6 @@ void xxxCBSetDroppedSize(PCBOX pcbox, LPRECT lprc);
 * History:
 \***************************************************************************/
 
-#line 31
 LONG CBNcCreateHandler(
     PCBOX pcbox,
     PWND pwnd)
@@ -58,7 +57,6 @@ LONG CBNcCreateHandler(
 
     return (LONG)TRUE;
 }
-#line 61
 
 /***************************************************************************\
 * xxxCBCreateHandler
@@ -69,7 +67,6 @@ LONG CBNcCreateHandler(
 * History:
 \***************************************************************************/
 
-#line 70
 LRESULT xxxCBCreateHandler(
     PCBOX pcbox,
     PWND pwnd)
@@ -246,7 +243,6 @@ LRESULT xxxCBCreateHandler(
      */
     return (LRESULT)pwnd;
 }
-#line 240
 
 /***************************************************************************\
 * xxxCBCalcControlRects
@@ -254,7 +250,6 @@ LRESULT xxxCBCreateHandler(
 * History:
 \***************************************************************************/
 
-#line 253
 void xxxCBCalcControlRects(PCBOX pcbox, LPRECT lprcList)
 {
     HDC hdc;
@@ -387,7 +382,6 @@ void xxxCBCalcControlRects(PCBOX pcbox, LPRECT lprcList)
     lprcList->right         = max(pcbox->cxDrop, pcbox->cxCombo);
     lprcList->bottom        = pcbox->cyCombo + pcbox->cyDrop;
 }
-#line 367
 
 /***************************************************************************\
 * xxxCBNcDestroyHandler
@@ -409,29 +403,41 @@ void xxxCBNcDestroyHandler(
     if (pcbox != NULL) {
 
         /*
-         * Destroy the list box here so that it'll send WM_DELETEITEM messages
-         * before the combo box turns into a zombie.
-         */
-        if (pcbox->spwndList != NULL) {
-            NtUserDestroyWindow(HWq(pcbox->spwndList));
-            Unlock(&pcbox->spwndList);
+         * [msadek, 02/04/2001] fInDestroy is used to prevent oing through destruction code twice.
+         * This code happen when apps like Delphi 5 tries to destroy the combobox again during processing of 
+         * WM_PARENTNOTIFY in the NtUserDestroyWindow call (below). Thus, we end up freeing the same lookaside entry twice.
+         * Windows Bugs bug# 266084
+         */ 
+        if (!pcbox->fInDestroy) {    
+            pcbox->fInDestroy = TRUE;
+            /*
+             * Destroy the list box here so that it'll send WM_DELETEITEM messages
+             * before the combo box turns into a zombie.
+             */
+            if (pcbox->spwndList != NULL) {
+                NtUserDestroyWindow(HWq(pcbox->spwndList));
+                Unlock(&pcbox->spwndList);
+            }
+
+            pcbox->spwnd = NULL;
+            Unlock(&pcbox->spwndParent);
+
+            /*
+             * If there is no editcontrol, spwndEdit is the combobox window which
+             * isn't locked (that would have caused a 'catch-22').
+             */
+            if (pwnd != pcbox->spwndEdit) {
+                Unlock(&pcbox->spwndEdit);
+            }
+
+            /*
+             * Since a pointer and a handle to a fixed local object are the same.
+             */
+            FreeLookasideEntry(&ComboboxLookaside, KPVOID_TO_PVOID(pcbox));
         }
-
-        pcbox->spwnd = NULL;
-        Unlock(&pcbox->spwndParent);
-
-        /*
-         * If there is no editcontrol, spwndEdit is the combobox window which
-         * isn't locked (that would have caused a 'catch-22').
-         */
-        if (pwnd != pcbox->spwndEdit) {
-            Unlock(&pcbox->spwndEdit);
+        else {
+            RIPMSG1(RIP_WARNING, "Trying to destroy the same combobox %x twice. Ignoring", pcbox);
         }
-
-        /*
-         * Since a pointer and a handle to a fixed local object are the same.
-         */
-        FreeLookasideEntry(&ComboboxLookaside, pcbox);
     }
 
     /*
@@ -461,11 +467,11 @@ void xxxCBSetFontHandler(
 
     pcbox->hFont = hFont;
 
-    if (!pcbox->fNoEdit) {
-        SendMessageWorker(pcbox->spwndEdit, WM_SETFONT, (DWORD)hFont, FALSE, FALSE);
+    if (!pcbox->fNoEdit && pcbox->spwndEdit) {
+        SendMessageWorker(pcbox->spwndEdit, WM_SETFONT, (WPARAM)hFont, FALSE, FALSE);
     }
 
-    SendMessageWorker(pcbox->spwndList, WM_SETFONT, (DWORD)hFont, FALSE, FALSE);
+    SendMessageWorker(pcbox->spwndList, WM_SETFONT, (WPARAM)hFont, FALSE, FALSE);
 
     // Recalculate the layout of controls.  This will hide the listbox also.
     xxxCBPosition(pcbox);
@@ -519,7 +525,7 @@ LONG xxxCBSetEditItemHeight(
      * the height on a NCCREATE; same as not having
      * HW instead of HWq but we don't go to the kernel.
      */
-    if ((!pcbox->fNoEdit) && (pcbox->spwndEdit != NULL)) {
+    if (!pcbox->fNoEdit && pcbox->spwndEdit) {
         NtUserMoveWindow(HWq(pcbox->spwndEdit), pcbox->editrc.left, pcbox->editrc.top,
             pcbox->editrc.right-pcbox->editrc.left, dyEdit, TRUE);
     }
@@ -599,7 +605,7 @@ void xxxCBPosition(PCBOX pcbox)
     // Calculate placement of components--button, item, list
     xxxCBCalcControlRects(pcbox, &rcList);
 
-    if (!pcbox->fNoEdit) {
+    if (!pcbox->fNoEdit && pcbox->spwndEdit) {
         TL tlpwndEdit;
 
         ThreadLock(pcbox->spwndEdit, &tlpwndEdit);
