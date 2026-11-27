@@ -2114,3 +2114,7 @@ post-publication targeted checks.
 [S13 P7 line repair](evidence/t485-h-repair/s13-p7-line-repair.json).
 
 [S13 P8 line repair](evidence/t485-h-repair/s13-p8-line-repair.json).
+
+[S13 closure and final accounting](evidence/t485-h-repair/s13-closure.md),
+[machine receipt](evidence/t485-h-repair/s13-closure.json), and
+[1039-file census](evidence/t485-h-repair/s13-final-census.csv).

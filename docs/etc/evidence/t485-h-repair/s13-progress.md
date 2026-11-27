@@ -182,3 +182,10 @@ IDs,excluding the six already registered S13-L rows. Directive counts are not
 added to diff-block totals. The exact per-file inventory,hashes and pending-row
 count are in the receipt. All1039file hashes reconcile. S13 final cross-owner
 accounting and closure remain;no migration progress is claimed for repair.
+
+## P9 closure
+
+[Final reconciliation](s13-closure.md) resolves all1039files4550frozen points,
+registers qualified residuals and preserves runtime2 delivery/Full equivalence.
+Current byte census7322points12851lines;no new product edits or repeated Full.
+S13 closes with P9;S14 resumes N004-N012.

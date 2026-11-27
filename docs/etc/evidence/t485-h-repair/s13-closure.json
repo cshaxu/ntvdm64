@@ -1,0 +1,446 @@
+{
+  "task": "M0 T485 S13 P9",
+  "kind": "final reconciliation; no production change",
+  "source_head": "4a849ef9e904b875a179ca939cd1b695ae716b8c",
+  "frozen_project": "6e3e88b53bc57e7f047c9438cae741df5dd14694",
+  "xp_revision": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+  "files_verified": 1039,
+  "frozen_point_count": 4550,
+  "frozen_status": {
+    "restored": 1598,
+    "residual": 1215,
+    "superseded": 1737
+  },
+  "pending": {
+    "semantic_or_binding": 1327,
+    "diagnostic_line": 3729,
+    "total": 5056,
+    "meaning": "records, not raw current diff blocks; no blanket owner approval implied"
+  },
+  "summary": {
+    "S10": {
+      "files": 30,
+      "before_points": 201,
+      "before_lines": 102739,
+      "after_points": 1834,
+      "after_lines": 2939
+    },
+    "S11": {
+      "files": 48,
+      "before_points": 874,
+      "before_lines": 11865,
+      "after_points": 722,
+      "after_lines": 2384
+    },
+    "S12": {
+      "files": 48,
+      "before_points": 803,
+      "before_lines": 31802,
+      "after_points": 556,
+      "after_lines": 1390
+    },
+    "S6": {
+      "files": 1,
+      "before_points": 11,
+      "before_lines": 19,
+      "after_points": 11,
+      "after_lines": 11
+    },
+    "S7": {
+      "files": 20,
+      "before_points": 170,
+      "before_lines": 41330,
+      "after_points": 1741,
+      "after_lines": 2852
+    },
+    "S8": {
+      "files": 851,
+      "before_points": 3465,
+      "before_lines": 328879,
+      "after_points": 1818,
+      "after_lines": 1818
+    },
+    "S9": {
+      "files": 41,
+      "before_points": 674,
+      "before_lines": 32219,
+      "after_points": 640,
+      "after_lines": 1457
+    }
+  },
+  "total": {
+    "files": 1039,
+    "before_points": 6198,
+    "before_lines": 548853,
+    "after_points": 7322,
+    "after_lines": 12851
+  },
+  "measurement": "LF-delimited byte lines; preserve newline, EOF, #line and conditional guards. Exclude reviewed original bodies replaced by #error; never exclude unused intact source. Frozen identifiers are historical normalized metrics, not raw block counts.",
+  "corrections": [
+    "4508 is stale intermediate filtered metadata; reviewed-metrics.json and points.csv contain final4550.",
+    "Fresh per-file S12 sum is556/1390, not prior cumulative556/1394; no source change or new reduction credited.",
+    "Frozen byte baseline is one fixed commit, not the distinct per-S admission revisions."
+  ],
+  "delivery": {
+    "final_runtime": "build/t485-s13/runtime2",
+    "build_exit": 0,
+    "targeted_cpu_cases": 61,
+    "publication": [
+      {
+        "path": "assets\\release\\NTVDMD.DLL",
+        "sha256": "0d03bf15b993cbb7880be9ae172c52f470ebf3244f27843075f3049a29754dff",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+        "sha256": "0d03bf15b993cbb7880be9ae172c52f470ebf3244f27843075f3049a29754dff",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\VJOY.DLL",
+        "sha256": "06749bdec375657b25f419821d6fa7a83def09f0a02fbc2edc864fd8e66ac751",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+        "sha256": "06749bdec375657b25f419821d6fa7a83def09f0a02fbc2edc864fd8e66ac751",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "22e7d8e18916cdee2621eb3a5d601b8704d6ca4d8b012538345c7d028a187994",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+        "sha256": "22e7d8e18916cdee2621eb3a5d601b8704d6ca4d8b012538345c7d028a187994",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "3e475c3f9a4c298868788399b491760c7e3c3735472e5959e73490e72c33a6cd",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+        "sha256": "3e475c3f9a4c298868788399b491760c7e3c3735472e5959e73490e72c33a6cd",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "4212517b6394c398ce4b3a1d0a3dedab28b61b9a8253ba76252602c632310998",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+        "sha256": "4212517b6394c398ce4b3a1d0a3dedab28b61b9a8253ba76252602c632310998",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "e8ade2e1a693f5203ef502c585a1577cf58d42e27cc9c922486eae88299f1390",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+        "sha256": "e8ade2e1a693f5203ef502c585a1577cf58d42e27cc9c922486eae88299f1390",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "0812345bb43f59f7c6fd105a3bfe3234fb96a8564f5c8484024770c734e4313d",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+        "sha256": "0812345bb43f59f7c6fd105a3bfe3234fb96a8564f5c8484024770c734e4313d",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "8bc16fe9e0324eb6e65ecf6bccd64bedd3a6e1164cc30711a2bff5d1a95fa5fc",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+        "sha256": "8bc16fe9e0324eb6e65ecf6bccd64bedd3a6e1164cc30711a2bff5d1a95fa5fc",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "9af7a29e73f692f8ce693057ce5de413dbe94757c07b75c12ba254ca2803619a",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+        "sha256": "9af7a29e73f692f8ce693057ce5de413dbe94757c07b75c12ba254ca2803619a",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "d504c6e2eb1b546a21f0754b8afbd79106e7715a3edb72fffc49a64e035e7f7c",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+        "sha256": "d504c6e2eb1b546a21f0754b8afbd79106e7715a3edb72fffc49a64e035e7f7c",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "daae75854c43a6aec6a2e11cc1c17a0869b6114c9c25f0a8efdc4a8f082ef18f",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+        "sha256": "daae75854c43a6aec6a2e11cc1c17a0869b6114c9c25f0a8efdc4a8f082ef18f",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "003f8934a331b2d596836f5b67ec73b4458b35c0569551f89f9eed17cb6f7f32",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+        "sha256": "003f8934a331b2d596836f5b67ec73b4458b35c0569551f89f9eed17cb6f7f32",
+        "matches_manifest": true
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "bed783378c6b09d9e49f5c6b29c29748bc060bd28d7543d0b08389af5a62226a",
+        "matches_manifest": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+        "sha256": "bed783378c6b09d9e49f5c6b29c29748bc060bd28d7543d0b08389af5a62226a",
+        "matches_manifest": true
+      }
+    ],
+    "product_commit_pushed": "4a849ef9e",
+    "full": {
+      "Suite": "Full",
+      "ElapsedMs": 588930,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": true,
+      "PreparationMs": 19938,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1231,
+          "CleanupMs": 425,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-standard",
+          "ElapsedMs": 41199,
+          "CleanupMs": 355,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-enhanced",
+          "ElapsedMs": 72448,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "win95",
+          "ElapsedMs": 90740,
+          "CleanupMs": 326,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 15512,
+          "CleanupMs": 342,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 15304,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 16221,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 145,
+          "CleanupMs": 329,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 64863,
+          "CleanupMs": 369,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 42115,
+          "CleanupMs": 361,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 38591,
+          "CleanupMs": 330,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 13703,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 9442,
+          "CleanupMs": 372,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 1260,
+          "CleanupMs": 349,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12293,
+          "CleanupMs": 407,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 33091,
+          "CleanupMs": 355,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 40410,
+          "CleanupMs": 398,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3155,
+          "CleanupMs": 340,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7564,
+          "CleanupMs": 430,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10264,
+          "CleanupMs": 400,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3403,
+          "CleanupMs": 303,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7171,
+          "CleanupMs": 291,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20278,
+          "CleanupMs": 310,
+          "Passed": true
+        }
+      ]
+    },
+    "full_reuse": "S12 runtime14 Full23/23; P7 and P8 compare every image byte, allowing only package-ID resource and named PE timestamps. Targeted final-package CPU61 PASS. No new runtime2 Full execution claimed.",
+    "equivalence_receipts": [
+      "s13-p7-line-repair.json",
+      "s13-p8-line-repair.json"
+    ]
+  },
+  "guest_witnesses": {
+    "win31-standard": {
+      "matrix": {
+        "case": "std-dosonly0",
+        "dosonly": false,
+        "enhanced": false,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 21,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": true,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "exitAccepted": true,
+        "knownExitOne": false,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t485-s12\\p13\\final\\full\\win31-standard\\runtime\\std-dosonly0.observer.txt"
+      }
+    },
+    "win31-enhanced": {
+      "matrix": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 2085,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": true,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "exitAccepted": true,
+        "knownExitOne": false,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t485-s12\\p13\\final\\full\\win31-enhanced\\runtime\\386-dosonly0.observer.txt"
+      },
+      "roundtrip": "window-input=1 fullscreen-text=1 returned-window-input=1 second-fullscreen=1 same-window=1"
+    },
+    "win95": {
+      "matrix": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 6181,
+        "hwnd": 160,
+        "observedDosOnly": 0,
+        "normalExit": false,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "exitAccepted": true,
+        "knownExitOne": true,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t485-s12\\p13\\final\\full\\win95\\runtime\\386-dosonly0.observer.txt"
+      },
+      "roundtrip": "window-input=1 fullscreen-text=1 returned-window-input=1 second-fullscreen=1 same-window=1"
+    }
+  },
+  "limitations": [
+    "Win95 normal exit retains approved known-exit-one boundary; not repaired.",
+    "Necessary residuals remain pending owner review; reconciliation is not approval to erase them.",
+    "This closes repairs of migrated39/159 directories; N004-G097 and final capabilities remain."
+  ]
+}
