@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P9",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime10",
   "files": {
     "src/mvdm-host/oemuni/process.c": "660c4bf2de98746b27d0316d7df8360bc686710ac7696449c07f8ae3122044e0"
@@ -265,9 +265,11 @@
     ],
     "guest": "PASS runtime10 real DOS FCB,3unique names,EOF/missing FF,receipt37",
     "full": "Not repeated;last runtime8/file20 passed23/23;next due file30 or S closure",
-    "logs": "build\\t485-s12\\p9\\final"
+    "logs": "build\\t485-s12\\p9\\final",
+    "governance": "PASS after indexing new audit and correcting documentation-only encoding; runtime tests were not repeated"
   },
   "limitations": [
     "Existing broad OEM aggregate stale PIF-layout/DEM-constant fixtures remain assigned S13 reconciliation; this is four selected OEM targets, not an aggregate pass."
-  ]
+  ],
+  "product_commit": "c3dca3705"
 }

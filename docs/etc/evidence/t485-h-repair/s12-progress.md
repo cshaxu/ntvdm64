@@ -8,7 +8,7 @@ each file before delivery. Default original valid;retains need real evidence.
 
 Reviewed25/48files194/645points;restored-final-verified71,restored-local0,
 residual-final-verified123,unreviewed451.
-Delivered/pushed24files129points through e25380fe2.
+Delivered/pushed25files194points through c3dca3705.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -38,7 +38,7 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 22 | src/mvdm-host/inc/vrnetapi.h | 1 | P8 delivered e25380fe2 |
 | 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | P8 delivered e25380fe2 |
 | 24 | src/mvdm-host/oemuni/file.c | 19 | P8 delivered e25380fe2 |
-| 25 | src/mvdm-host/oemuni/process.c | 65 | P9 final verified; commit/push pending |
+| 25 | src/mvdm-host/oemuni/process.c | 65 | P9 delivered c3dca3705 |
 | 26 | src/mvdm-host/softpc.new/host/src/config.c | 38 | Pending |
 | 27 | src/mvdm-host/softpc.new/host/src/nt_bop.c | 16 | Pending |
 | 28 | src/mvdm-host/softpc.new/host/src/nt_com.c | 90 | Pending |
@@ -542,3 +542,7 @@ versus delivered686/27172. No Full rerun.
 verified;71restored,123residual,451unreviewed. Current715/25797; cumulative
 reduction88points/6012lines. Cached build,dual publication,four OEM fixtures
 and runtime10 DOS FCB pass. Commit/push pending; no Full rerun.
+
+P9 product c3dca3705 pushed;25files194points delivered. No local restoration
+pending. Documentation governance and links PASS after audit-index and UTF-8
+correction; runtime tests were not rerun. Next file26 in DIR order.

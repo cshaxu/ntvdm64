@@ -36,7 +36,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 194/645points final-verified;71restored,123residual,451unreviewed.
 [P9 receipt](../etc/evidence/t485-h-repair/s12-p9-result.json):cached build,
 dual26hash publication,60line witnesses,four OEM fixtures and runtime10 DOS
-FCB PASS. Commit/push pending;last delivered24files129points e25380fe2.
+FCB PASS. P9 c3dca3705 committed/pushed;25files194points delivered.
 S12census803/31809->715/25797 (-88points/-6012lines).
 Next file26;23files remain. Last Full:file20,runtime8,23/23;
 no Full rerun for this targeted P. Migration39/159;N004 gated on S13.
