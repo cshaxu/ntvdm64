@@ -129,7 +129,7 @@ typedef struct wow_task_order_thread {
     PVOID host_context;
     PUNICODE_STRING pstrAppName;
     struct wow_task_client_info *pClientInfo;
-    DWORD dwExpWinVer, dwCompatFlags;
+    DWORD dwExpWinVer, dwCompatFlags, dwCompatFlags2;
     /* Original USER membership precedes scheduler TDB insertion. */
     LIST_ENTRY PtiLink;
     struct wow_input_desktop *rpdesk;

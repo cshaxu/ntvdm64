@@ -80,7 +80,8 @@ BOOL WINAPI registered_init_task(UINT version, DWORD compat_flags, DWORD user_fl
     wow_user_registration_trace("InitTaskId", task_id);
     wow_user_registration_trace("InitTaskSharedId", shared_id);
     result = wow_user_ensure_registration_lifecycle() && wow_user_task_lifecycle_init(wow_user_registered_lifecycle(),
-        version, base_name ? base_name : module_name, task_id, hotkey, shared_id, x, y, width, height,
+        version, compat_flags, user_flags, base_name ? base_name : module_name,
+        task_id, hotkey, shared_id, x, y, width, height,
         SW_SHOW);
     init_error=GetLastError();
     if (result && !wow_user_task_lifecycle_publish_initial_view(wow_user_registered_lifecycle())) {

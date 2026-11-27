@@ -35,6 +35,8 @@ BOOL WINAPI wow_native_BringWindowToTop(HWND w);
 BOOL WINAPI wow_native_SetWindowPos(HWND w, HWND after, int x, int y, int cx, int cy, UINT flags);
 BOOL WINAPI wow_native_MoveWindow(HWND w, int x, int y, int cx, int cy, BOOL paint);
 BOOL WINAPI wow_native_ShowWindow(HWND w, int show);
+BOOL WINAPI wow_native_AnimateWindow(HWND, DWORD, DWORD);
+VOID WINAPI wow_native_NotifyWinEvent(DWORD, HWND, LONG, LONG);
 BOOL WINAPI wow_native_EnableWindow(HWND w, BOOL enable);
 HWND WINAPI wow_native_SetActiveWindow(HWND w);
 BOOL WINAPI wow_native_SetForegroundWindow(HWND);
@@ -152,6 +154,8 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define SetWindowPos wow_native_SetWindowPos
 #define MoveWindow wow_native_MoveWindow
 #define ShowWindow wow_native_ShowWindow
+#define AnimateWindow wow_native_AnimateWindow
+#define NotifyWinEvent wow_native_NotifyWinEvent
 #define EnableWindow wow_native_EnableWindow
 #define SetActiveWindow wow_native_SetActiveWindow
 #define SetFocus wow_native_SetFocus

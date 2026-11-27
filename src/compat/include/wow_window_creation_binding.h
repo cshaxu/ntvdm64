@@ -32,10 +32,10 @@ HWND WINAPI wow_user_create_dialog_window_ex(DWORD, struct _LARGE_STRING *,
     struct _LARGE_STRING *, DWORD, int, int, int, int, HWND, HMENU, HANDLE, LPVOID,
     DWORD, LPDWORD);
 /* Only original comboini.c's two internal _CreateWindowEx calls: atom class,
- * null title/WOW words, zero or ANSI creator flags, tool/client-edge styles.
+ * null title, zero or ANSI creator flags, tool/client-edge and RTL styles.
  * Original producer supplies all parameters; no child-ID/class inference. */
 HWND WINAPI wow_control_create_window_ex(DWORD, LPCTSTR, LPCTSTR, DWORD, int,
-    int, int, int, HWND, HMENU, HANDLE, LPVOID, DWORD, LPDWORD);
+    int, int, int, HWND, HMENU, HANDLE, LPVOID, DWORD);
 /* Per-window creation state, retained with WW rather than an explicit
  * CreateWindow call. Native internal creation has no such call scope.
  * The caller borrows the window/class through resource-loading reentry. */

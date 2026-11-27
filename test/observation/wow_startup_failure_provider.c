@@ -42,7 +42,8 @@ static PVOID WINAPI startup_allocate(SIZE_T bytes)
 #include "../../src/non-mvdm/windows/core/ntuser/kernel/queue.c"
 #undef xxxInitTask
 
-NTSTATUS WINAPI xxxInitTask(UINT version, PUNICODE_STRING name, DWORD task,
+NTSTATUS WINAPI xxxInitTask(UINT version, DWORD compat_flags, DWORD user_flags,
+    PUNICODE_STRING name, DWORD task,
     DWORD hotkey, DWORD id, DWORD x, DWORD y, DWORD width, DWORD height,
     WORD unused)
 {
@@ -56,7 +57,7 @@ NTSTATUS WINAPI xxxInitTask(UINT version, PUNICODE_STRING name, DWORD task,
         !memcmp(name->Buffer, selected, sizeof(selected) - sizeof(WCHAR)) ? 2 : 0;
     if (failing_allocation) startup_identity(task);
     __try {
-        result = diagnostic_original_InitTask(version, name, task, hotkey, id,
+        result = diagnostic_original_InitTask(version, compat_flags, user_flags, name, task, hotkey, id,
             x, y, width, height, unused);
     } __finally {
         failing_allocation = saved;

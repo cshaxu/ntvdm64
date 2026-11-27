@@ -328,6 +328,7 @@ CONST WORD gawListboxWndProc[] = {
     0
 };
 
+#line 382
 CONST WORD gawComboWndProc[] = {
     CBEC_KILLCOMBOFOCUS,
     WM_COMMAND,
@@ -403,6 +404,7 @@ CONST WORD gawComboWndProc[] = {
     CB_SHOWDROPDOWN,
     CB_SETLOCALE,
     CB_GETLOCALE,
+    CB_GETCOMBOBOXINFO,
     WM_MEASUREITEM,
     WM_DELETEITEM,
     WM_DRAWITEM,
@@ -410,8 +412,13 @@ CONST WORD gawComboWndProc[] = {
     WM_NCCREATE,
     WM_HELP,
     WM_MOUSEWHEEL,
+    WM_MOUSELEAVE,
+    WM_STYLECHANGED,
+    WM_STYLECHANGING,
+    WM_UPDATEUISTATE,
     0
 };
+#line 397
 
 CONST WORD gawEditWndProc[] = {
     EM_CANUNDO,

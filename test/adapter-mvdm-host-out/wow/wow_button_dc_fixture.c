@@ -12,6 +12,7 @@
 #undef InvalidateRect
 #undef DestroyWindow
 #undef SetWindowTextW
+#undef NotifyWinEvent
 
 HDC WINAPI xxxBNGetDC(PBUTN,HBRUSH *);
 VOID WINAPI BNReleaseDC(PBUTN,HDC);
@@ -118,6 +119,8 @@ static void setup(void)
 }
 LRESULT WINAPI wow_native_DefWindowProcW(HWND w,UINT m,WPARAM p,LPARAM l)
 {return DefWindowProcW(w,m,p,l);}
+VOID WINAPI wow_native_NotifyWinEvent(DWORD event,HWND w,LONG object,LONG child)
+{NotifyWinEvent(event,w,object,child);}
 HWND WINAPI wow_native_SetCapture(HWND w){return SetCapture(w);}
 HWND WINAPI wow_native_SetFocus(HWND w)
 {

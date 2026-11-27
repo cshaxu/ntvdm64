@@ -190,7 +190,7 @@ int __cdecl main(void)
     CHECK(wow_user_task_lifecycle_register(&lifecycle, end_task, event));
     duplicate = lifecycle.process.pwpi->pEventWowExec;
     CHECK(duplicate != event && GetHandleInformation(duplicate, &flags));
-    CHECK(wow_user_task_lifecycle_init(&lifecycle, 0x0400, "RETIRE.EXE",
+    CHECK(wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0, "RETIRE.EXE",
         0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
     CHECK(!wow_user_task_lifecycle_dispose(&lifecycle));
     CHECK(GetLastError() == ERROR_BUSY && lifecycle.threads != NULL);

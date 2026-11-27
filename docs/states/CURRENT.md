@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime38 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime41 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -135,32 +135,11 @@ P26 Full24/24. Next N022 USER client in DIR order; original guest unchanged.
 [P30 N022 button](../etc/evidence/t485-s1/n022-button.md) delivered runtime31;
 its receipt retains the paired ABI, tests, census and checkpoint counts.
 
-[P31 N022 bitmap](../etc/evidence/t485-s1/n022-dib.md) delivered runtime32:
-XP scaling exception handling and rounded palette conversion retained;
-only the existing host include differs (1point/2lines, -1290lines).
-Cached build, dual13-image26hash publication, native bitmap/registration
-checks and Full24/24 passed. N0222/39; overall57/159; S15 9/14.
-Census1325files,777exact,788nonerror same/537different,7798points/130239lines;
-delta0files/0exact/0same/0different/0points/-1290lines.1264XP/61OpenNT.
-Ten-file checkpoint resets to zero. Next clglobal.c, in DIR order.
-
-[P32 N022 globals](../etc/evidence/t485-s1/n022-globals.md) delivered runtime33:
-XP globals and message table/generator restored, four exact prerequisites;
-paired EDIT consumer uses XP metadata. Cached build, dual13-image26hash,
-registration, controls38/38 and actual SOL Options passed. Final shared-rule
-build matches all13 published image hashes. Test build failures and residual
-LPK provider frontier remain explicit in receipt. N0223/39; overall57/159; S15 9/14.
-Census1329files,781exact,792nonerror same/537different,7805points/127713lines;
-delta+4files/+4exact/+4same/0different,+7points/-2526lines.1269XP/60OpenNT.
-Eight changed mirror files since P31 Full24/24. Next clmenu.c. No guest change.
-
-[P33 N022 menu](../etc/evidence/t485-s1/n022-menu.md) delivered runtime35:
-XP menu parsing, RTL and validation retained; native menu ownership boundary
-leaves3points/49lines (-819lines). Cached build, dual13-image26hash, menu
-resource/validation/RTL and real SOL Options passed. N0224/39; overall57/159;
-S15 9/14. Census1329files,781exact,792nonerror same/537different,
-7807points/126894lines; delta0files/0exact/0same/0different,+2points/-819lines.
-1270XP/59OpenNT. Nine mirrors since P31 Full; next clmsg.c triggers Full.
+[P31 N022 bitmap](../etc/evidence/t485-s1/n022-dib.md),
+[P32 N022 globals](../etc/evidence/t485-s1/n022-globals.md) and
+[P33 N022 menu](../etc/evidence/t485-s1/n022-menu.md) delivered.
+Their receipts retain full package identities, tests, per-file/global census,
+failed attempts and source boundaries; P31 includes Full24/24.
 
 [P34 N022 messages](../etc/evidence/t485-s1/n022-message.md) delivered runtime37:
 XP default dispatch and paired tables/ABI, native IMM/UI/icon owner boundaries.
@@ -179,6 +158,15 @@ N0226/39; overall57/159; S15 9/14. Census1329files,781exact,
 792nonerror same/537different,7848points/123546lines; delta0files/0exact/
 0same/0different,+27points/-3355lines.1272XP/57OpenNT. Three changed mirror
 files since P34 Full checkpoint; next combo.c. No guest change.
+
+[P36 N022 combo](../etc/evidence/t485-s1/n022-combo.md) delivered runtime41:
+XP combo algorithm, paired DBCS/RTL/layout/task flags and original message
+array. Cached full build, dual13-image26hash publication, control39/39,
+task/native-window lifecycle, SOL Options and Full24/24 passed. Initial
+publication/test failures and repairs remain in the receipt. N0227/39;
+overall57/159; S15 9/14. Census1329files,781exact,792nonerror same/537different,
+7853points/119031lines; delta0files/0exact/0same/0different,+5points/-4515lines.
+1273XP/56OpenNT. Nine mirror files changed; Full checkpoint reset. Next comboini.c.
 
 ## S14 Closure Record
 

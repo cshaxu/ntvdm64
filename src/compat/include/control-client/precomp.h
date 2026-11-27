@@ -97,7 +97,7 @@ DWORD WINAPI xxxSetWindowData(PWND, int, DWORD, BOOL);
 #define ValidateHwnd wow_window_client_validate_window
 #define ValidateHwndNoRip wow_window_client_validate_window_no_rip
 #define RevalidateHwnd(hwnd) ValidateHwndNoRip(hwnd)
-#define ConnectIfNecessary() do { \
+#define ConnectIfNecessary(...) do { \
     if (!wow_edit_native_ensure_gui_thread()) return 0; \
 } while (0)
 
@@ -141,19 +141,38 @@ BOOL WINAPI PaintRect(HWND, HWND, HDC, HBRUSH, LPRECT);
 VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int);
 BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
 VOID WINAPI BltColor(HDC, HBRUSH, HDC, int, int, int, int, int, int, BOOL);
+/* XP finite control inputs. Original algorithms remain in the client sources. */
+#include "wow_char_conversion_abi.h"
+#define THREAD_CODEPAGE() OpenNtUserThreadCodePage()
+#define IS_DBCS_ENABLED() GetSystemMetrics(SM_DBCSENABLED)
+WORD DbcsCombine(HWND, WORD);
+#define CrackCombinedDbcsLB(c) ((BYTE)(c))
+#define CrackCombinedDbcsTB(c) ((c) >> 8)
+#define KPRECT_TO_PRECT(p) (p)
+#define KHANDLE_TO_HANDLE(h) ((HANDLE)(h))
+#ifndef CW_FLAGS_ANSI
+#define CW_FLAGS_ANSI 0x00000001
+#endif
+#ifndef PTR_TO_ID
+#define PTR_TO_ID(p) ((USHORT)(((ULONG_PTR)(p)) & MAXWORD))
+#endif
+#define NtUserGetComboBoxInfo wow_control_get_combo_info
+#define NtUserTrackMouseEvent TrackMouseEvent
+#define INDEX_COMBOBOX 0
+#define INDEX_COMBOBOX_BUTTON 2
+#define CMS_QANIMATION 165
+#define GACF2_ANIMATIONOFF 0x00000001
+#define PUSIF_COMBOBOXANIMATION 0x00000004
+#define PUSIF_UIEFFECTS 0x80000000
+#define TEST_EffectPUSIF(f) ((gpsi->PUSIFlags & ((f) | PUSIF_UIEFFECTS)) == ((f) | PUSIF_UIEFFECTS))
+typedef MONITORINFO *PMONITOR;
+#define _MonitorFromWindow(window, flags) wow_control_monitor(HWq(window), flags)
+DWORD GetAppCompatFlags2(WORD);
 /* Original userrtl.h declaration, with the unchanged rtl/winmgr.c owner. */
 BOOL NeedsWindowEdge(DWORD, DWORD, BOOL);
 /* Original ntuser/inc/user.h declaration; rtl/winmgr.c owns the body. */
 BOOL _FChildVisible(PWND pwnd);
 
-#ifdef WOW_ORIGINAL_BUTTON_CLIENT
-#include "wow_button_lifetime.h"
-/* Keep the Button atlas/lifetime separate from nested DrawState resources.
- * The helper implementation remains in its original mngrayc.c owner. */
-#undef oemInfo
-#define oemInfo (*wow_button_current_resources())
-#undef gpsi
-#define gpsi wow_button_current_context()
 /* XP private UI flags are owned by native USER, not our retained NT4 WND.
  * Query its existing state through the same synchronous callout boundary. */
 #define WEFPUIFOCUSHIDDEN 0x0B80
@@ -164,6 +183,14 @@ BOOL _FChildVisible(PWND pwnd);
         ((wow_native_DefWindowProcW(HWq(window), WM_QUERYUISTATE, 0, 0) & \
           ((flag) == WEFPUIFOCUSHIDDEN ? UISF_HIDEFOCUS : UISF_HIDEACCEL)) ? LOBYTE(flag) : 0) : \
         (*(((BYTE *)(window)) + STATEOFFSET + (int)HIBYTE(flag)) & LOBYTE(flag)))
+#ifdef WOW_ORIGINAL_BUTTON_CLIENT
+#include "wow_button_lifetime.h"
+/* Keep the Button atlas/lifetime separate from nested DrawState resources.
+ * The helper implementation remains in its original mngrayc.c owner. */
+#undef oemInfo
+#define oemInfo (*wow_button_current_resources())
+#undef gpsi
+#define gpsi wow_button_current_context()
 #define MIRRORED_HDC(dc) ((GetLayout(dc) & LAYOUT_RTL) != 0)
 #define PTR_TO_ID(p) ((USHORT)(((ULONG_PTR)(p)) & MAXWORD))
 #define BitBltSysBmp wow_button_BitBltSysBmp

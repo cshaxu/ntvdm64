@@ -1881,7 +1881,7 @@ static void verify_original_modal_task(void)
 #endif
     /* Launcher metadata is outside this native-only modal row. Enter the
      * actual registered owner's original InitTask without inventing a launch. */
-    BORROW_CHECK(wow_user_task_lifecycle_init(lifecycle,0x0400,"MODAL.EXE",
+    BORROW_CHECK(wow_user_task_lifecycle_init(lifecycle,0x0400, 0, 0,"MODAL.EXE",
         0x4323,0,0,0,0,200,100,SW_HIDE));
 #ifdef WOW_TERMINAL_SCHEDULE_FIXTURE
     verify_terminal_schedule(&binding);
@@ -2169,6 +2169,18 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
                             EqualRect(&info.rcButton,&state->pcbox->buttonrc) &&
                             info.hwndItem==state->pcbox->spwndEdit->head.h &&
                             info.hwndList==state->pcbox->spwndList->head.h);
+                        {
+                            COMBOBOXINFO via_message = { sizeof(via_message) };
+                            BORROW_CHECK(SendMessageA(combo, CB_GETCOMBOBOXINFO, 0,
+                                (LPARAM)&via_message));
+                            BORROW_CHECK(via_message.hwndCombo == combo &&
+                                via_message.hwndList == info.hwndList &&
+                                EqualRect(&via_message.rcItem, &info.rcItem));
+                        }
+                        SendMessageA(combo, CB_SHOWDROPDOWN, TRUE, 0);
+                        BORROW_CHECK(SendMessageA(combo, CB_GETDROPPEDSTATE, 0, 0));
+                        SendMessageA(combo, CB_SHOWDROPDOWN, FALSE, 0);
+                        BORROW_CHECK(!SendMessageA(combo, CB_GETDROPPEDSTATE, 0, 0));
                         unchanged=info;info.cbSize=0;
                         BORROW_CHECK(!wow_control_get_combo_info(combo,&info) &&
                             GetLastError()==ERROR_INVALID_PARAMETER && !info.cbSize);

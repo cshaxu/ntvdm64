@@ -6,7 +6,7 @@
  * queue/profile/presentation operations have no default implementations.
  * These callbacks must not invent task selection or compatibility policy. */
 typedef struct wow_task_client_info {
-    DWORD dwTIFlags, dwExpWinVer, dwCompatFlags;
+    DWORD dwTIFlags, dwExpWinVer, dwCompatFlags, dwCompatFlags2;
     /* Read-only projection for retained client consumers, refreshed from
      * the bound task on access. Not a native TEB CLIENTINFO layout. */
     DWORD CI_flags;
@@ -16,6 +16,11 @@ typedef struct wow_task_client_info {
     ULONG guest_callback[2];
 } wow_task_client_info;
 #define WOW_TASK_CI_16BIT 0x00000004u
+/* XP windows/published/winuser.w:407,435,440,450; original WOW mask. */
+#define GACF2_GIVEUPFOREGROUND 0x00000040
+#define GACF2_DDENOSYNC 0x00040000
+#define GACF2_FORCEFUSION 0x00800000
+#define COMPATFLAGS2_FORWOW (GACF2_DDENOSYNC | GACF2_GIVEUPFOREGROUND | GACF2_FORCEFUSION)
 typedef struct wow_task_init_ops {
     BOOL (WINAPI *journal_hooked)(wow_task_order_process *, BOOL playback);
     BOOL (WINAPI *reattach)(wow_task_order_process *, BOOL journal);
@@ -23,7 +28,7 @@ typedef struct wow_task_init_ops {
     UINT (WINAPI *profile)(wow_task_order_process *, UINT section,
         LPCWSTR key, LPCWSTR fallback, LPWSTR output, DWORD capacity);
 } wow_task_init_ops;
-NTSTATUS WINAPI xxxInitTask(UINT, PUNICODE_STRING, DWORD, DWORD, DWORD,
+NTSTATUS WINAPI xxxInitTask(UINT, DWORD, DWORD, PUNICODE_STRING, DWORD, DWORD, DWORD,
     DWORD, DWORD, DWORD, DWORD, WORD);
 void WINAPI SetAppCompatFlags(wow_task_order_thread *);
 void WINAPI _ShowStartGlass(DWORD);

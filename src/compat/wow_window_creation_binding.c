@@ -775,8 +775,7 @@ HWND WINAPI wow_user_create_window_ex(DWORD ex_style, LPCTSTR class_name,
 
 HWND WINAPI wow_control_create_window_ex(DWORD ex_style, LPCTSTR class_name,
     LPCTSTR title, DWORD style, int x, int y, int width, int height,
-    HWND parent, HMENU menu, HANDLE instance, LPVOID parameter, DWORD flags,
-    LPDWORD input_words)
+    HWND parent, HMENU menu, HANDLE instance, LPVOID parameter, DWORD flags)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     DWORD version;
@@ -784,9 +783,10 @@ HWND WINAPI wow_control_create_window_ex(DWORD ex_style, LPCTSTR class_name,
      * Its finite _CreateWindowEx shape needs no string conversion, WOW-word
      * capture, legacy-style rewrite or MDI preparation from ntstubs.c.
      * Reject new caller shapes, rather than silently skip those policies. */
-    if (!class_name || HIWORD((ULONG_PTR)class_name) || title || input_words ||
+    if (!class_name || HIWORD((ULONG_PTR)class_name) || title ||
             (flags & ~wow_window_access_current()->layout()->ansi_creation_flag) ||
-            (ex_style & ~(WS_EX_TOOLWINDOW | WS_EX_CLIENTEDGE))) {
+            (ex_style & ~(WS_EX_TOOLWINDOW | WS_EX_CLIENTEDGE | WS_EX_RIGHT |
+                WS_EX_RTLREADING | WS_EX_LEFTSCROLLBAR))) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return NULL;
     }

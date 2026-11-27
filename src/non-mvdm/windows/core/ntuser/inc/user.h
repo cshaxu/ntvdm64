@@ -1401,6 +1401,69 @@ typedef struct tagWND {          // wnd
                 //  the STATEOFFSET macro. Specifically, WW must be the
                 //  last "field" of WND.
 } WND;
+
+#line 2019
+typedef struct tagCBox {
+    PWND    spwnd;      /* Window for the combo box */
+    PWND    spwndParent;/* Parent of the combo box */
+    RECT    editrc;            /* Rectangle for the edit control/static text
+                                  area */
+    RECT    buttonrc;          /* Rectangle where the dropdown button is */
+
+    int     cxCombo;            // Width of sunken area
+    int     cyCombo;            // Height of sunken area
+    int     cxDrop;             // 0x24 Width of dropdown
+    int     cyDrop;             // Height of dropdown or shebang if simple
+
+    PWND    spwndEdit;  /* Edit control window handle */
+    PWND    spwndList;  /* List box control window handle */
+
+    UINT    CBoxStyle:2;         /* Combo box style */
+    UINT    fFocus:1;          /* Combo box has focus? */
+    UINT    fNoRedraw:1;       /* Stop drawing? */
+    UINT    fMouseDown:1;      /* Was the popdown button just clicked and
+                                   mouse still down? */
+    UINT    fButtonPressed:1; /* Is the dropdown button in an inverted state?
+                                */
+    UINT    fLBoxVisible:1;    /* Is list box visible? (dropped down?) */
+    UINT    OwnerDraw:2;       /* Owner draw combo box if nonzero. value
+                                * specifies either fixed or varheight
+                                */
+    UINT    fKeyboardSelInListBox:1; /* Is the user keyboarding through the
+                                      * listbox. So that we don't hide the
+                                      * listbox on selchanges caused by the
+                                      * user keyboard through it but we do
+                                      * hide it if the mouse causes the
+                                      * selchange.
+                                      */
+    UINT    fExtendedUI:1;     /* Are we doing TandyT's UI changes on this
+                                * combo box?
+                                */
+    UINT    fCase:2;
+
+    UINT    f3DCombo:1;         // 3D or flat border?
+    UINT    fNoEdit:1;         /* True if editing is not allowed in the edit
+                                * window.
+                                */
+#ifdef COLOR_HOTTRACKING
+#error
+#endif // COLOR_HOTTRACKING
+#line 2064
+    UINT    fRightAlign:1;     /* used primarily for MidEast right align */
+    UINT    fRtoLReading:1;    /* used only for MidEast, text rtol reading order */
+    UINT    fInDestroy:1;      /* Is combobox destruction started already? */
+    HANDLE  hFont;             /* Font for the combo box */
+    LONG    styleSave;         /* Temp to save the style bits when creating
+                                * window.  Needed because we strip off some
+                                * bits and pass them on to the listbox or
+                                * edit box.
+                                */
+} CBOX, * KPTR_MODIFIER PCBOX;
+
+typedef struct tagCOMBOWND {
+    WND wnd;
+    PCBOX pcbox;
+} COMBOWND, * KPTR_MODIFIER PCOMBOWND;
 #endif
 #if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
 #line 1438

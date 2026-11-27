@@ -3216,7 +3216,9 @@ VOID     ForceEmptyClipboard(PWINDOWSTATION);
 BOOL     xxxInitWinStaDevices(PWINDOWSTATION);
 VOID     DestroyGlobalAtomTable(PWINDOWSTATION pwinsta);
 
-NTSTATUS xxxInitTask(UINT dwExpWinVer, PUNICODE_STRING pstrAppName,
+NTSTATUS xxxInitTask(UINT dwExpWinVer, DWORD dwAppCompatFlags,
+                DWORD dwUserWOWCompatFlags, PUNICODE_STRING pstrAppName,
+#line 3190
                 DWORD hTaskWow, DWORD dwHotkey, DWORD idTask,
                 DWORD dwX, DWORD dwY, DWORD dwXSize, DWORD dwYSize,
                 WORD wShowWindow);

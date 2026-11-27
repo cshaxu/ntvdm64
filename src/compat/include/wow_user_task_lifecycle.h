@@ -48,7 +48,7 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *,
     wow_user_runtime *, const wow_user_task_lifecycle_callbacks *);
 BOOL WINAPI wow_user_task_lifecycle_register(wow_user_task_lifecycle *,
     wow_task_end_callback, HANDLE);
-BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *, UINT,
+BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *, UINT, DWORD, DWORD,
     LPCSTR, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, DWORD, WORD);
 /* Complete the copied USER view after original InitTask has created its
  * task carrier but before W32Thread can enter the 16-bit application.  This

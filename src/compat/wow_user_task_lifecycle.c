@@ -475,7 +475,8 @@ BOOL WINAPI wow_user_task_lifecycle_register(wow_user_task_lifecycle *owner,
 }
 
 BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
-    UINT version, LPCSTR app_name, DWORD task_id, DWORD hotkey, DWORD shared_id,
+    UINT version, DWORD compat_flags, DWORD user_flags, LPCSTR app_name,
+    DWORD task_id, DWORD hotkey, DWORD shared_id,
     DWORD x, DWORD y, DWORD width, DWORD height, WORD show)
 {
     wow_user_task_lifecycle_thread *task;
@@ -564,7 +565,7 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     if (!task->input_plan) goto done;
     RtlInitUnicodeString(&name, wide);
     __try {
-        status = task_provider->initialize(version, &name, task_id, hotkey, shared_id, x, y,
+        status = task_provider->initialize(version, compat_flags, user_flags, &name, task_id, hotkey, shared_id, x, y,
             width, height, show);
     } __finally {
         wow_input_group_release_plan(task->input_plan);
@@ -1303,6 +1304,27 @@ WOW_NATIVE_MAPPED_CALL(BOOL, MoveWindow,
     (native, x, y, cx, cy, paint), FALSE, FALSE, NULL)
 WOW_NATIVE_MAPPED_CALL(BOOL, ShowWindow, (HWND w, int show), (native, show),
     FALSE, FALSE, NULL)
+WOW_NATIVE_MAPPED_CALL(BOOL, AnimateWindow, (HWND w, DWORD time, DWORD flags),
+    (native, time, flags), FALSE, FALSE, NULL)
+
+VOID WINAPI wow_native_NotifyWinEvent(DWORD event, HWND window, LONG object, LONG child)
+{
+    wow_user_native_call call;
+    HWND native;
+    DWORD error = GetLastError();
+    if (!native_window_argument(window, TRUE, &native) ||
+            !wow_user_native_call_begin(&call, native))
+        wow_user_native_call_failed("notify-win-event-entry", GetLastError());
+    SetLastError(error);
+    __try { NotifyWinEvent(event, native, object, child); }
+    __finally {
+        error = GetLastError();
+        if (!wow_user_native_call_end(&call))
+            wow_user_native_call_failed("notify-win-event-return", GetLastError());
+        SetLastError(error);
+    }
+}
+
 WOW_NATIVE_MAPPED_CALL(BOOL, EnableWindow, (HWND w, BOOL enable),
     (native, enable), FALSE, FALSE, NULL)
 WOW_NATIVE_MAPPED_CALL(HWND, SetActiveWindow, (HWND w), (native), NULL, TRUE,

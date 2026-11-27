@@ -792,20 +792,22 @@ static void initialization(void)
         if(mode==5) {
             WCHAR *invalid=VirtualAlloc(NULL,4096,MEM_RESERVE|MEM_COMMIT,PAGE_NOACCESS);
             CHECK(invalid!=NULL);name.Buffer=invalid;
-            CHECK(xxxInitTask(version,&name,0x1234,7,0,position,20,position,40,0)==(NTSTATUS)0xc0000033);
+            CHECK(xxxInitTask(version,0x200u,0xffffffffu,&name,0x1234,7,0,position,20,position,40,0)==(NTSTATUS)0xc0000033);
             CHECK(thread.pstrAppName==NULL && thread.ptdb==NULL && shared.ppiStarting==NULL);
             CHECK(!test.attached && !test.cursor && !test.profile);
             CHECK(VirtualFree(invalid,0,MEM_RELEASE));name.Buffer=L"APP.EXE";
         }
-        CHECK(xxxInitTask(version,&name,0x1234,7,task_id,position,20,position,40,0)==0);
+        CHECK(xxxInitTask(version,0x200u,0xffffffffu,&name,0x1234,7,task_id,position,20,position,40,0)==0);
         CHECK(thread.pstrAppName && thread.pstrAppName->Length==name.Length);
         CHECK(!memcmp(thread.pstrAppName->Buffer,name.Buffer,name.Length));
         CHECK(thread.ptdb->hTaskWow==0x1234 && thread.ptdb->pwti==waiter);
         CHECK(!!(thread.TIF_flags&0x1000)==!!task_id);
         CHECK(thread.dwExpWinVer==version && client.dwExpWinVer==version);
-        CHECK(thread.dwCompatFlags==((mode==2 || mode>=6) ? 0u : 0x200u));
-        CHECK(client.dwCompatFlags==thread.dwCompatFlags && process.dwCompatFlags==thread.dwCompatFlags);
-        CHECK(test.profile==((mode==2 || mode==7) ? 0u : 1u) && test.cursor==2);
+        CHECK(thread.dwCompatFlags==0x200u);
+        CHECK(client.dwCompatFlags==thread.dwCompatFlags);
+        CHECK(thread.dwCompatFlags2==COMPATFLAGS2_FORWOW);
+        CHECK(client.dwCompatFlags2==thread.dwCompatFlags2);
+        CHECK(test.profile==0 && test.cursor==2);
         CHECK(test.attached==(test.journal ? 0u : 1u));
         CHECK(shared.ppiStarting==&process && process.dwHotkey==7);
         CHECK(!(process.usi.dwFlags&STARTF_USESHOWWINDOW));

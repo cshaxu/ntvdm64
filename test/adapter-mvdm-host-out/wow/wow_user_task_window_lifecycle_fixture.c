@@ -77,7 +77,7 @@ static DWORD WINAPI child_task(void *parameter)
     if (!session_thread_bind_owned(context->session,
             SESSION_THREAD_BINDING_ORIGINAL_WORKER) ||
             !wow_user_runtime_bind(&binding, context->runtime, NULL, NULL) ||
-            !wow_user_task_lifecycle_init(context->lifecycle, 0x0400,
+            !wow_user_task_lifecycle_init(context->lifecycle, 0x0400, 0, 0,
                 "CHILD.EXE", 0x4321, 0, 0, (DWORD)CW_USEDEFAULT,
                 (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
                 (DWORD)CW_USEDEFAULT, SW_SHOW)) goto done;
@@ -153,7 +153,7 @@ int __cdecl main(void)
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
     CHECK(wow_user_task_lifecycle_initialize(&lifecycle, &runtime, &callbacks));
     CHECK(wow_user_task_lifecycle_register(&lifecycle, end_task, wowexec));
-    CHECK(wow_user_task_lifecycle_init(&lifecycle, 0x0400, "WINDOW.EXE",
+    CHECK(wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0, "WINDOW.EXE",
         0x1234, 0, 0, (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW));
 

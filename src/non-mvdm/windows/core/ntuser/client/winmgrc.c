@@ -108,3 +108,17 @@ BOOL _AdjustWindowRectEx(
 
     return TRUE;
 }
+
+#line 580
+DWORD GetAppCompatFlags2(
+    WORD wVer)
+{
+    ConnectIfNecessary(0);
+    /*
+     * Newer apps should behave, so they get no hacks
+     */
+    if (wVer < GETAPPVER()) {
+        return 0;
+    }
+    return GetClientInfo()->dwCompatFlags2;
+}

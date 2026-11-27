@@ -23,6 +23,7 @@ BOOL WINAPI wow_edit_capture_context(wow_edit_context *context)
     HGDIOBJ previous;
     BOOL measured = FALSE;
     int planes, bits;
+    BOOL combo_animation, ui_effects;
     if (!context) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     /* Original clinit.c initializes rcScreen from a DISPLAY IC, not work
      * area or SM_CXSCREEN. Both combo placement and dialog clipping consume
@@ -48,6 +49,11 @@ BOOL WINAPI wow_edit_capture_context(wow_edit_context *context)
     /* Original NtUserGetCaretBlinkTime returns the same preference read by
      * the list's add-selection timer. Preserve the native value, including
      * INFINITE; do not invent a fixed blink interval or alter system policy. */
+    if (!SystemParametersInfoW(SPI_GETCOMBOBOXANIMATION, 0, &combo_animation, 0) ||
+            !SystemParametersInfoW(SPI_GETUIEFFECTS, 0, &ui_effects, 0)) return FALSE;
+    /* XP user.h PUSIF_COMBOBOXANIMATION / PUSIF_UIEFFECTS. */
+    value.PUSIFlags = (combo_animation ? 0x00000004u : 0) |
+        (ui_effects ? 0x80000000u : 0);
     value.dtCaretBlink = GetCaretBlinkTime();
     if (!value.dtCaretBlink) return FALSE;
     value.wMaxLeftOverlapChars = (int)wow_profile_int(5, L"LeftOverlapChars", 3);
@@ -69,6 +75,18 @@ BOOL WINAPI wow_edit_capture_context(wow_edit_context *context)
     *context = value;
     SetLastError(error);
     return TRUE;
+}
+
+MONITORINFO *WINAPI wow_control_monitor(HWND window, DWORD flags)
+{
+    DWORD error = GetLastError();
+    MONITORINFO value = { sizeof(value) };
+    HMONITOR monitor = MonitorFromWindow(window, flags);
+    if (!wow_edit_current || !monitor || !GetMonitorInfoW(monitor, &value))
+        wow_user_native_call_failed("control-monitor", GetLastError());
+    wow_edit_current->monitor = value;
+    SetLastError(error);
+    return &wow_edit_current->monitor;
 }
 
 /* ADAPTER-WOW-058: original EDIT/combo/list entries, with the original /Gz ABI.

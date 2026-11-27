@@ -1,0 +1,104 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 781,
+    "nonerror_identical": 792,
+    "nonerror_different": 537,
+    "nonerror_points": 7848,
+    "nonerror_lines": 123546
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 781,
+    "nonerror_identical": 792,
+    "nonerror_different": 537,
+    "nonerror_points": 7853,
+    "nonerror_lines": 119031
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 5,
+    "nonerror_lines": -4515
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "before_points": 1,
+      "before_lines": 4601,
+      "after_points": 6,
+      "after_lines": 6,
+      "exclusions": 6
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+      "before_points": 1,
+      "before_lines": 1251,
+      "after_points": 1,
+      "after_lines": 1275,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "before_points": 1,
+      "before_lines": 5819,
+      "after_points": 1,
+      "after_lines": 5834,
+      "exclusions": 10
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_points": 1,
+      "before_lines": 4693,
+      "after_points": 1,
+      "after_lines": 4638,
+      "exclusions": 17
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "before_points": 1,
+      "before_lines": 711,
+      "after_points": 1,
+      "after_lines": 725,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_points": 1,
+      "before_lines": 5161,
+      "after_points": 1,
+      "after_lines": 5223,
+      "exclusions": 25
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "before_points": 1,
+      "before_lines": 5200,
+      "after_points": 1,
+      "after_lines": 5211,
+      "exclusions": 24
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "before_points": 1,
+      "before_lines": 3010,
+      "after_points": 1,
+      "after_lines": 3017,
+      "exclusions": 15
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "before_points": 1,
+      "before_lines": 10214,
+      "after_points": 1,
+      "after_lines": 10216,
+      "exclusions": 40
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1273,
+    "OpenNT": 56
+  }
+}

@@ -186,6 +186,9 @@ SACF_GotFlags:
 
 NTSTATUS xxxInitTask(
     UINT dwExpWinVer,
+    DWORD dwAppCompatFlags,
+    DWORD dwUserWOWCompatFlags,
+#line 660
     PUNICODE_STRING pstrAppName,
     DWORD hTaskWow,
     DWORD dwHotkey,
@@ -335,6 +338,13 @@ NTSTATUS xxxInitTask(
      */
     ptdb->hTaskWow = hTaskWow;
 
+    pti->dwCompatFlags = dwAppCompatFlags;
+    pti->pClientInfo->dwCompatFlags = dwAppCompatFlags;
+    dwUserWOWCompatFlags &= COMPATFLAGS2_FORWOW;
+    pti->dwCompatFlags2 = dwUserWOWCompatFlags;
+    pti->pClientInfo->dwCompatFlags2 = dwUserWOWCompatFlags;
+
+#line 809
     /*
      * Setup the app start cursor for 5 second timeout.
      */
@@ -364,8 +374,9 @@ NTSTATUS xxxInitTask(
 
     InsertTask(ppi, ptdb);
 
-    SetAppCompatFlags(pti);
 
+
+#line 840
     /*
      * Force this new task to be the active task (WOW will ensure the
      * currently running task does a Yield which will put it into the

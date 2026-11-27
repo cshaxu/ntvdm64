@@ -28,10 +28,10 @@ void xxxCBSetDroppedSize(PCBOX pcbox, LPRECT lprc);
 * History:
 \***************************************************************************/
 
+#line 31
 LONG CBNcCreateHandler(
     PCBOX pcbox,
-    PWND pwnd,
-    LPCREATESTRUCT lpcreateStruct)
+    PWND pwnd)
 {
     /*
      * Save the style bits so that we have them when we create the client area
@@ -58,6 +58,7 @@ LONG CBNcCreateHandler(
 
     return (LONG)TRUE;
 }
+#line 61
 
 /***************************************************************************\
 * xxxCBCreateHandler
@@ -68,15 +69,16 @@ LONG CBNcCreateHandler(
 * History:
 \***************************************************************************/
 
-LONG xxxCBCreateHandler(
+#line 70
+LRESULT xxxCBCreateHandler(
     PCBOX pcbox,
-    PWND pwnd,
-    LPCREATESTRUCT lpcreateStruct)
+    PWND pwnd)
 {
     LONG lStyleT;
     RECT rcList;
     HWND hwndList;
     HWND hwndEdit;
+    DWORD lExStyle;
 
     CheckLock(pwnd);
 
@@ -100,6 +102,9 @@ LONG xxxCBCreateHandler(
         pcbox->CBoxStyle = SDROPDOWN;
     else
         pcbox->CBoxStyle = SSIMPLE;
+
+    pcbox->fRtoLReading = (TestWF(pwnd, WEFRTLREADING) != 0);
+    pcbox->fRightAlign  = (TestWF(pwnd, WEFRIGHT) != 0);
 
     if (TestWF(pwnd, CBFUPPERCASE))
         pcbox->fCase = UPPERCASE;
@@ -161,13 +166,14 @@ LONG xxxCBCreateHandler(
     if (pcbox->CBoxStyle & SDROPPABLE)
         lStyleT |= WS_BORDER;
 
-    hwndList = _CreateWindowEx(
+    lExStyle = pwnd->ExStyle & (WS_EX_RIGHT | WS_EX_RTLREADING | WS_EX_LEFTSCROLLBAR);
+    hwndList = _CreateWindowEx(lExStyle |
             ((pcbox->CBoxStyle & SDROPPABLE) ? WS_EX_TOOLWINDOW : WS_EX_CLIENTEDGE),
             MAKEINTRESOURCE(gpsi->atomSysClass[ICLS_COMBOLISTBOX]), NULL, lStyleT,
             rcList.left, rcList.top, rcList.right - rcList.left,
             rcList.bottom - rcList.top,
-            HW(pwnd), (HMENU)CBLISTBOXID, pcbox->spwnd->hModule, NULL,
-            0, NULL);
+            HW(pwnd), (HMENU)CBLISTBOXID, KHANDLE_TO_HANDLE(pcbox->spwnd->hModule), NULL,
+            0);
     Lock(&(pcbox->spwndList), ValidateHwnd(hwndList));
 
     if (!pcbox->spwndList) {
@@ -208,13 +214,16 @@ LONG xxxCBCreateHandler(
          * was ANSI or Unicode.
          */
         dwCsFlags = TestWF(pcbox->spwnd, WFANSICREATOR) ? CW_FLAGS_ANSI : 0L;
-        hwndEdit = _CreateWindowEx(0L,
+        if (lExStyle & WS_EX_RIGHT)
+            lStyleT |= ES_RIGHT;
+
+        hwndEdit = _CreateWindowEx(lExStyle,
             MAKEINTRESOURCE(gpsi->atomSysClass[ICLS_EDIT]), NULL, lStyleT,
             pcbox->editrc.left, pcbox->editrc.top,
             pcbox->editrc.right - pcbox->editrc.left, pcbox->editrc.bottom -
             pcbox->editrc.top, HW(pwnd), (HMENU)CBEDITID,
-            pcbox->spwnd->hModule, NULL,
-            dwCsFlags, NULL);
+            KHANDLE_TO_HANDLE(pcbox->spwnd->hModule), NULL,
+            dwCsFlags);
         Lock(&(pcbox->spwndEdit), ValidateHwnd(hwndEdit));
     }
     if (!pcbox->spwndEdit)
@@ -235,8 +244,9 @@ LONG xxxCBCreateHandler(
     /*
      * return anything as long as it's not -1L (-1L == error)
      */
-    return (LONG)pwnd;
+    return (LRESULT)pwnd;
 }
+#line 240
 
 /***************************************************************************\
 * xxxCBCalcControlRects
@@ -244,6 +254,7 @@ LONG xxxCBCreateHandler(
 * History:
 \***************************************************************************/
 
+#line 253
 void xxxCBCalcControlRects(PCBOX pcbox, LPRECT lprcList)
 {
     HDC hdc;
@@ -294,13 +305,13 @@ void xxxCBCalcControlRects(PCBOX pcbox, LPRECT lprcList)
              * a measure item message to the parent
              */
             mis.CtlType = ODT_COMBOBOX;
-            mis.CtlID = (UINT)pcbox->spwnd->spmenu;
+            mis.CtlID = PtrToUlong(pcbox->spwnd->spmenu);
             mis.itemID = (UINT)-1;
             mis.itemHeight = dyEdit;
             mis.itemData = 0;
 
             ThreadLock(pcbox->spwndParent, &tlpwndParent);
-            SendMessage(HW(pcbox->spwndParent), WM_MEASUREITEM, mis.CtlID, (long)&mis);
+            SendMessage(HW(pcbox->spwndParent), WM_MEASUREITEM, mis.CtlID, (LPARAM)&mis);
             ThreadUnlock(&tlpwndParent);
 
             dyEdit = mis.itemHeight;
@@ -337,33 +348,46 @@ void xxxCBCalcControlRects(PCBOX pcbox, LPRECT lprcList)
         // Determine button's rectangle.
         pcbox->buttonrc.top = SYSMET(CYEDGE);
         pcbox->buttonrc.bottom = pcbox->cyCombo - SYSMET(CYEDGE);
-        pcbox->buttonrc.right = pcbox->cxCombo - SYSMET(CXEDGE);
-        pcbox->buttonrc.left  = pcbox->buttonrc.right - SYSMET(CXVSCROLL);
+        if (pcbox->fRightAlign) {
+            pcbox->buttonrc.left  = SYSMET(CXFIXEDFRAME);
+            pcbox->buttonrc.right = pcbox->buttonrc.left + SYSMET(CXVSCROLL);
+        } else {
+            pcbox->buttonrc.right = pcbox->cxCombo - SYSMET(CXEDGE);
+            pcbox->buttonrc.left  = pcbox->buttonrc.right - SYSMET(CXVSCROLL);
+        }
 
         // Reduce the width of the edittext window to make room for the button.
         dxEdit = max(dxEdit - SYSMET(CXVSCROLL), 0);
+
     } else {
 
         /*
          * No button so make the rectangle 0 so that a point in rect will always
          * return false.
          */
-        SetRectEmpty(&pcbox->buttonrc);
+        SetRectEmpty(KPRECT_TO_PRECT(&pcbox->buttonrc));
     }
 
-    //
-    // So now, the edit rect is really the item area.
-    //
+    /*
+     * So now, the edit rect is really the item area.
+     */
     pcbox->editrc.left      = SYSMET(CXFIXEDFRAME);
     pcbox->editrc.right     = pcbox->editrc.left + dxEdit;
     pcbox->editrc.top       = SYSMET(CYFIXEDFRAME);
     pcbox->editrc.bottom    = pcbox->editrc.top + dyEdit;
+
+    // Is there a right-aligned button?
+    if ((pcbox->CBoxStyle & SDROPPABLE) && (pcbox->fRightAlign)) {
+        pcbox->editrc.right   = pcbox->cxCombo - SYSMET(CXEDGE);
+        pcbox->editrc.left    = pcbox->editrc.right - dxEdit;
+    }
 
     lprcList->left          = 0;
     lprcList->top           = pcbox->cyCombo;
     lprcList->right         = max(pcbox->cxDrop, pcbox->cxCombo);
     lprcList->bottom        = pcbox->cyCombo + pcbox->cyDrop;
 }
+#line 367
 
 /***************************************************************************\
 * xxxCBNcDestroyHandler

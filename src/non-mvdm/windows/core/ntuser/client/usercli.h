@@ -458,61 +458,7 @@ extern UINT gnCharset;
  */
 #define LBS_COMBOBOX    0x8000L
 
-typedef struct tagCBox {
-    struct tagWND *spwnd;      /* Window for the combo box */
-    struct tagWND *spwndParent;/* Parent of the combo box */
-    RECT    editrc;            /* Rectangle for the edit control/static text
-                                  area */
-    RECT    buttonrc;          /* Rectangle where the dropdown button is */
 
-    int     cxCombo;            // Width of sunken area
-    int     cyCombo;            // Height of sunken area
-    int     cxDrop;             // 0x24 Width of dropdown
-    int     cyDrop;             // Height of dropdown or shebang if simple
-
-    struct tagWND *spwndEdit;  /* Edit control window handle */
-    struct tagWND *spwndList;  /* List box control window handle */
-
-    UINT    CBoxStyle:2;         /* Combo box style */
-    UINT    fFocus:1;          /* Combo box has focus? */
-    UINT    fNoRedraw:1;       /* Stop drawing? */
-    UINT    fMouseDown:1;      /* Was the popdown button just clicked and
-                                   mouse still down? */
-    UINT    fButtonPressed:1; /* Is the dropdown button in an inverted state?
-                                */
-    UINT    fLBoxVisible:1;    /* Is list box visible? (dropped down?) */
-    UINT    OwnerDraw:2;       /* Owner draw combo box if nonzero. value
-                                * specifies either fixed or varheight
-                                */
-    UINT    fKeyboardSelInListBox:1; /* Is the user keyboarding through the
-                                      * listbox. So that we don't hide the
-                                      * listbox on selchanges caused by the
-                                      * user keyboard through it but we do
-                                      * hide it if the mouse causes the
-                                      * selchange.
-                                      */
-    UINT    fExtendedUI:1;     /* Are we doing TandyT's UI changes on this
-                                * combo box?
-                                */
-    UINT    fCase:2;
-
-    UINT    f3DCombo:1;         // 3D or flat border?
-    UINT    fNoEdit:1;         /* True if editing is not allowed in the edit
-                                * window.
-                                */
-    HANDLE  hFont;             /* Font for the combo box */
-    LONG    styleSave;         /* Temp to save the style bits when creating
-                                * window.  Needed because we strip off some
-                                * bits and pass them on to the listbox or
-                                * edit box.
-                                */
-} CBOX, *PCBOX;
-
-#line 499
-typedef struct tagCOMBOWND {
-    WND wnd;
-    PCBOX pcbox;
-} COMBOWND, *PCOMBOWND;
 
 #line 504
 /*
@@ -1670,8 +1616,7 @@ HWND _CreateWindowEx(
     HMENU hmenu,
     HANDLE hModule,
     LPVOID pParam,
-    DWORD dwFlags,
-    LPDWORD pWOW);
+    DWORD dwFlags);
 
 HKL _LoadKeyboardLayoutEx(
     HANDLE hFile,
@@ -2052,8 +1997,8 @@ void xxxCBPosition(PCBOX pcbox);
  */
 
 /* Initialization code */
-long  CBNcCreateHandler(PCBOX, PWND, LPCREATESTRUCT);
-long  xxxCBCreateHandler(PCBOX, PWND, LPCREATESTRUCT);
+LONG  CBNcCreateHandler(PCBOX, PWND);
+LRESULT xxxCBCreateHandler(PCBOX, PWND);
 void xxxCBCalcControlRects(PCBOX pcbox, LPRECT lprcList);
 
 /* Destruction code */

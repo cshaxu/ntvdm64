@@ -1,0 +1,761 @@
+{
+  "source_identities": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "baseline": "XP",
+      "xp_path": "Source/XPSP1/NT/windows/core/ntuser/client/combo.c",
+      "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+      "xp_blob": "f79ac6886fbdfe6b6022d1004565272f9b45bef6",
+      "sha256": "73b4708b3e41092fa83cc638d5c8115b1549dbb5fe023f89439707b8a8c8d787"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+      "baseline": "OpenNT",
+      "xp_path": "Source/XPSP1/NT/windows/core/ntuser/client/comboini.c",
+      "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+      "xp_blob": "fd0f1083974c4a740973985aa9265026e5fec7f2",
+      "sha256": "0e530c57d9ce3e4761b98319f2cc0ad7abd77e45c8af37f08cb42f9c602f1537"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "baseline": "OpenNT",
+      "xp_path": "Source/XPSP1/NT/windows/core/ntuser/client/editec.c",
+      "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+      "xp_blob": "315c6d8b28544566cca0dd7599b51ef1b1fa80db",
+      "sha256": "a443087793bb6cd9d1a15a2fb72ead82907bc52c81fe18958791af872adfacbb"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "baseline": "OpenNT",
+      "xp_path": "Source/XPSP1/NT/windows/core/ntuser/client/usercli.h",
+      "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+      "xp_blob": "07145f7769ad44c7c0df715c8009323e4bf9230c",
+      "sha256": "2107c118130de2723f44e0cb0bea1f4dbcd9271587cdcab47665ebe6a1d95ac3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "baseline": "OpenNT",
+      "xp_path": "Source/XPSP1/NT/windows/core/ntuser/client/winmgrc.c",
+      "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+      "xp_blob": "998e102edb1d8a72d7e8f0038e8e196f77e19e1a",
+      "sha256": "53cfd2da2dff31a2d7425784df1dbc4e45d414e19ce4ea6283a66d2ba38f5008"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "baseline": "OpenNT",
+      "xp_path": "Source/XPSP1/NT/windows/core/ntuser/inc/user.h",
+      "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+      "xp_blob": "842143d337dd84330b25abb2ecc71a73262fb0dc",
+      "sha256": "90bbec76488c5f4e213f6957f284b6f65cf26994d31f48f2f844cb5adaa054a9"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "baseline": "OpenNT",
+      "xp_path": "Source/XPSP1/NT/windows/core/ntuser/kernel/queue.c",
+      "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+      "xp_blob": "acb3619e95949290c2ad8b9174f86a6ed58aa3b1",
+      "sha256": "7f2e831005f780a4c2194085bb130e7238474736c147303ef0d5f54a38ed6b9c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "baseline": "OpenNT",
+      "xp_path": "Source/XPSP1/NT/windows/core/ntuser/kernel/userk.h",
+      "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+      "xp_blob": "7ee4335799af86fa2de42c04c883cf60abd48ffa",
+      "sha256": "2b041af4b59da8ed2f2cccb3b9dccb64af061283cd22e1f3e1b1f212530936d3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "baseline": "OpenNT",
+      "xp_path": "Source/XPSP1/NT/windows/core/ntuser/kernel/server.c",
+      "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+      "xp_blob": "508bcc9ca7b813e1a8235d98ecf5ae09ccf37eff",
+      "sha256": "26478bddb8d85464848d9e49ec47bcbc5351f2dd6575b0eaa0ad7854ec73444e"
+    }
+  ],
+  "task": "M0 T485 S15 P36",
+  "runtime": "build/t485-s15/runtime41",
+  "package_id": "663175D1-A214-4CAA-AEC7-10F4EFAFEADC",
+  "build_exit": 0,
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "23E4D7B1453BBC4E0E50A55577AA0EAED661FBE6D89FCA4B037CEBDA10D58950",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "23E4D7B1453BBC4E0E50A55577AA0EAED661FBE6D89FCA4B037CEBDA10D58950",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "2895E92892D10A4854331866919F81F8DF22D7E27B625AE814CDE1E0500452E3",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "2895E92892D10A4854331866919F81F8DF22D7E27B625AE814CDE1E0500452E3",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "48A5D3F7B373EE5414D30E32CF5471B316D322CCB917F8BB300791927770B7FC",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "48A5D3F7B373EE5414D30E32CF5471B316D322CCB917F8BB300791927770B7FC",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "FF131A18462EC380FAA2F402B4A9F1EF9778AA9EF1FF7B3ECECFD14860E0E172",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "FF131A18462EC380FAA2F402B4A9F1EF9778AA9EF1FF7B3ECECFD14860E0E172",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "7370B77FB3131B3D901FBF78D09497968B4ED55E33B02C14CE4CDB1408E0B4B7",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "7370B77FB3131B3D901FBF78D09497968B4ED55E33B02C14CE4CDB1408E0B4B7",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "F4BD2A5846E1D7766AFA7978D9747C6C7975799FD506FE049A45657C75EC026C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "F4BD2A5846E1D7766AFA7978D9747C6C7975799FD506FE049A45657C75EC026C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "F983B7D968A753DBB56154B6DECEF8F68C0F1479A98A2905EFB3975C115C6085",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "F983B7D968A753DBB56154B6DECEF8F68C0F1479A98A2905EFB3975C115C6085",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "CF69B8BEBCEB987940F205E37828AABA6A57E1247DE680C58FA994AE7C0A7DF9",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "CF69B8BEBCEB987940F205E37828AABA6A57E1247DE680C58FA994AE7C0A7DF9",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "B5C77E0802D25C64DD71CAFC6CCCCE6007C3875EA7F9D5291718AC16F9DA7479",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "B5C77E0802D25C64DD71CAFC6CCCCE6007C3875EA7F9D5291718AC16F9DA7479",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "86B7D6CF114F59CE79F1DAB4E219BAA8D8E300CDE68CCB40841829F247B4341E",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "86B7D6CF114F59CE79F1DAB4E219BAA8D8E300CDE68CCB40841829F247B4341E",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "4F7C44B74A0883C815AC5290696071C4683E80061DC26F1DF9175445AC8E32D5",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "4F7C44B74A0883C815AC5290696071C4683E80061DC26F1DF9175445AC8E32D5",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "7495A837726918A866EAC5398D2F330DB07C2AFD70461023DA243A265EAD8E6C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "7495A837726918A866EAC5398D2F330DB07C2AFD70461023DA243A265EAD8E6C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "8504B920CC650839B174ADE0255D2B70593D5D3BB4C3C5C9BDA1B84762150CE7",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "8504B920CC650839B174ADE0255D2B70593D5D3BB4C3C5C9BDA1B84762150CE7",
+      "pass": true
+    }
+  ],
+  "control": {
+    "exit": 0,
+    "cases": [
+      {
+        "name": "wow_dialog_getset_fixture",
+        "pid": 27840,
+        "exit": 0,
+        "started": "2026-11-27T20:49:11.6140086Z",
+        "sha256": "DDD48090E0529FF50AC5303998FC95FAAD03995A9BD1F9616455259BC90088A2"
+      },
+      {
+        "name": "wow_window_client_message_fixture",
+        "pid": 8272,
+        "exit": 0,
+        "started": "2026-11-27T20:49:12.0788974Z",
+        "sha256": "01CAB67B2576E6D551DBC53E3B552DE5D61F625E65E0E9E1FD13088B83D272BE"
+      },
+      {
+        "name": "wow_dialog_creator_lifetime_fixture",
+        "pid": 19668,
+        "exit": 0,
+        "started": "2026-11-27T20:49:12.2209068Z",
+        "sha256": "85C92B3D3040F3B383CA02025802B7C915166E1A62A7C5F771CA634E71863DB2"
+      },
+      {
+        "name": "wow_dialog_lifetime_fixture",
+        "pid": 19488,
+        "exit": 0,
+        "started": "2026-11-27T20:49:12.4308949Z",
+        "sha256": "6C6FD4508B93B8AE692EE87943A593E7A5821466B324E88CC58C571FA4977073"
+      },
+      {
+        "name": "wow_default_messages_fixture",
+        "pid": 21512,
+        "exit": 0,
+        "started": "2026-11-27T20:49:12.5785443Z",
+        "sha256": "26058EDCDAD21C79947FD495A6683D37E88BDD4EF64EBD78C15C13207974E4D8"
+      },
+      {
+        "name": "wow_default_state_fixture",
+        "pid": 28640,
+        "exit": 0,
+        "started": "2026-11-27T20:49:12.8670592Z",
+        "sha256": "7D666CE2EA7AAC80180C4C1C5ECDFE1EBCB3C6B6B82008AD6810A0D167EE6EDB"
+      },
+      {
+        "name": "wow_dialog_call_fixture",
+        "pid": 22492,
+        "exit": 0,
+        "started": "2026-11-27T20:49:13.1414341Z",
+        "sha256": "51D9B78E3CC19632B8C0028DF3C6F8EA75C6A5C57D0DCE03BDA59654730E096C"
+      },
+      {
+        "name": "wow_edit_call_fixture",
+        "pid": 7424,
+        "exit": 0,
+        "started": "2026-11-27T20:49:13.2580039Z",
+        "sha256": "87F6BFC209D97D5F5B8AC2AB77C72A8D55B76BAD6EFFF52351B9BC4E06EA2F99"
+      },
+      {
+        "name": "wow_edit_memory_callbacks_fixture",
+        "pid": 12704,
+        "exit": 0,
+        "started": "2026-11-27T20:49:13.3845369Z",
+        "sha256": "1222446E80A07B9BEE9741B7E34C33105CD8A7537BF40A8FA88E5A851992696F"
+      },
+      {
+        "name": "wow_control_brush_fixture",
+        "pid": 20588,
+        "exit": 0,
+        "started": "2026-11-27T20:49:13.5336482Z",
+        "sha256": "6C65D8496D270BBD2C27607E46DF16EC1DBCB8443A34504F493BE49EB86668E3"
+      },
+      {
+        "name": "wow_default_window_binding_fixture",
+        "pid": 7608,
+        "exit": 0,
+        "started": "2026-11-27T20:49:13.6680236Z",
+        "sha256": "55C5A1FE5660D33D66E9F89BAA6DD6F2C7FFF1826E4E36BE88D93F602CEDF245"
+      },
+      {
+        "name": "wow_dialog_context_fixture",
+        "pid": 6620,
+        "exit": 0,
+        "started": "2026-11-27T20:49:13.8362431Z",
+        "sha256": "1A6939C152967B92EE26AE11D190C2750323365AEEE20B3EE49739EDDB9FFDA6"
+      },
+      {
+        "name": "wow_dialog_creation_entry_fixture",
+        "pid": 20196,
+        "exit": 0,
+        "started": "2026-11-27T20:49:13.9948632Z",
+        "sha256": "3206AC86BCB2479FB16600A12BBF325BABCBBFBB056DB8C6148F69301F4E90E9"
+      },
+      {
+        "name": "wow_dialog_finalization_fixture",
+        "pid": 14372,
+        "exit": 0,
+        "started": "2026-11-27T20:49:14.1355644Z",
+        "sha256": "A4C9C5ED369FE2394605F057EC470B83DFF6EBBF52B000794C40AAB2FB9EB981"
+      },
+      {
+        "name": "wow_dialog_end_original_fixture",
+        "pid": 24232,
+        "exit": 0,
+        "started": "2026-11-27T20:49:14.2904064Z",
+        "sha256": "12C76F3E39C04711D5787BF0FC95F1C1219A3F070C7C03BA8C226F748FB9A415"
+      },
+      {
+        "name": "wow_dialog_keyboard_entry_fixture",
+        "pid": 2956,
+        "exit": 0,
+        "started": "2026-11-27T20:49:14.4844515Z",
+        "sha256": "FF78A5033DE237CE75CD1C66A8DD9EE259259B38F178A830859C1281B4CD7A45"
+      },
+      {
+        "name": "wow_dialog_mnemonic_lifetime_fixture",
+        "pid": 2912,
+        "exit": 0,
+        "started": "2026-11-27T20:49:14.6323021Z",
+        "sha256": "F86A0A3378DC1DC8B66C00444B76BA8854B77073A81FBBDEF7993419B51A35AE"
+      },
+      {
+        "name": "wow_dialog_keyboard_lifetime_fixture",
+        "pid": 21172,
+        "exit": 0,
+        "started": "2026-11-27T20:49:14.8316189Z",
+        "sha256": "D41802E5B1BBC4E226AA27818DE2BA6B7109C62914364A88A30E9FBC4D3890C4"
+      },
+      {
+        "name": "wow_control_string_fixture",
+        "pid": 27836,
+        "exit": 0,
+        "started": "2026-11-27T20:49:15.0305668Z",
+        "sha256": "092BE79194FF023AF10AB2C0405B54AD0F9DA2AEA1BAEE9C5B8221C94AAAA125"
+      },
+      {
+        "name": "wow_text_measure_failure_fixture",
+        "pid": 16912,
+        "exit": 0,
+        "started": "2026-11-27T20:49:15.2265265Z",
+        "sha256": "524E57F1409AEC2A5F7A61D156EF05B09324F67AD8C41617F40CB36F507FE71E"
+      },
+      {
+        "name": "wow_mnemonic_drawing_fixture",
+        "pid": 22540,
+        "exit": 0,
+        "started": "2026-11-27T20:49:15.3633922Z",
+        "sha256": "5D54594DEAB2920095979B79AA0F7D2D1FD156FF0B2D47F54178B19D5EE846C1"
+      },
+      {
+        "name": "wow_default_original_fixture",
+        "pid": 25984,
+        "exit": 0,
+        "started": "2026-11-27T20:49:15.5014393Z",
+        "sha256": "6A3CBD08142B238D1C3766878CE2AB53357B9CC78386252FBAD39B6174E36570"
+      },
+      {
+        "name": "wow_button_drawing_fixture",
+        "pid": 11684,
+        "exit": 0,
+        "started": "2026-11-27T20:49:15.6481073Z",
+        "sha256": "4A90A24FC85653F965EBFC6340220F04B8F6DB9491B76391AD4BF785BE72AEA3"
+      },
+      {
+        "name": "wow_button_resources_fixture",
+        "pid": 4316,
+        "exit": 0,
+        "started": "2026-11-27T20:49:15.7877834Z",
+        "sha256": "1F0604167918CEE60CD64D4560AAF24ADF5384A3CAA20A1E31E70E482C493F79"
+      },
+      {
+        "name": "wow_control_draw_state_fixture",
+        "pid": 15660,
+        "exit": 0,
+        "started": "2026-11-27T20:49:15.9918095Z",
+        "sha256": "2D52952ED12E6114F63D30AE3C72C2F2A37A61D1DBCAFAEDD44B0DEFB1FE5384"
+      },
+      {
+        "name": "wow_dialog_navigation_fixture",
+        "pid": 21196,
+        "exit": 0,
+        "started": "2026-11-27T20:49:16.1534849Z",
+        "sha256": "1B4A6CDF379B2B015ADD71B5B238E71A6CC985FD980FD291AF950601618E3211"
+      },
+      {
+        "name": "wow_edit_view_fixture",
+        "pid": 26060,
+        "exit": 0,
+        "started": "2026-11-27T20:49:16.2917031Z",
+        "sha256": "BE6327CEDA543F08EC66E76C95C0B9D1730AE8B5CF284E802BDF1D8A3481E59A"
+      },
+      {
+        "name": "wow_button_lifetime_fixture",
+        "pid": 16296,
+        "exit": 0,
+        "started": "2026-11-27T20:49:16.4374095Z",
+        "sha256": "7D6F4A23858D1F771A22D530CA85A6B061218EB8C44DA27F38CB160C4A186215"
+      },
+      {
+        "name": "wow_button_dc_fixture",
+        "pid": 22716,
+        "exit": 0,
+        "started": "2026-11-27T20:49:16.7293727Z",
+        "sha256": "40C1A1CD8184555748FE7DD7100A8097D86523A069A02C3D84B43EC8EAFC030E"
+      },
+      {
+        "name": "wow_dialog_native_owner_probe",
+        "pid": 10212,
+        "exit": 0,
+        "started": "2026-11-27T20:49:16.8797619Z",
+        "sha256": "00DDF00AB2F62374640BBC22D4F9C0CC13E95E70E189DCDE0E3F017A6701B9CC"
+      },
+      {
+        "name": "wow_control_fnid_fixture",
+        "pid": 6420,
+        "exit": 0,
+        "started": "2026-11-27T20:49:17.3017698Z",
+        "sha256": "9FB1EEDE5EB21ACEE927372B343A68EBFD3A542129BDAFC595C0832BAF9ADA2C"
+      },
+      {
+        "name": "wow_dialog_initialization_fixture",
+        "pid": 15704,
+        "exit": 0,
+        "started": "2026-11-27T20:49:17.8546105Z",
+        "sha256": "65D7047CC2B5ABBEA51D3AB84635A4D427EB2394D78DC6522278294ED09685D1"
+      },
+      {
+        "name": "wow_task_profile_fixture",
+        "pid": 21664,
+        "exit": 0,
+        "started": "2026-11-27T20:49:18.0238253Z",
+        "sha256": "0CA75AE5C6A272A31AFAE6B2F1DA16661A74B944694F0C55FFBFCC9568B382F6"
+      },
+      {
+        "name": "wow_task_profile_existing_fixture",
+        "pid": 27748,
+        "exit": 0,
+        "started": "2026-11-27T20:49:18.1433341Z",
+        "sha256": "F9C8FF6F7A1EF6B6896C1DAD5992553044D395DFC8D15E2747F0FEBDEDC8C516"
+      },
+      {
+        "name": "wow_edit_lookaside_fixture",
+        "pid": 26644,
+        "exit": 0,
+        "started": "2026-11-27T20:49:18.2784776Z",
+        "sha256": "2CF2A1F46404844A6F91C02A5A52B8388405A3F0C6D5578BBC3646E032939F9A"
+      },
+      {
+        "name": "wow_edit_conversion_fixture",
+        "pid": 6692,
+        "exit": 0,
+        "started": "2026-11-27T20:49:18.4077254Z",
+        "sha256": "9C424D6C17578C58BB8FA1D5A80BBBDBACBB8B885098BAB9DFB9573F2E2FF6AB"
+      },
+      {
+        "name": "wow_def_window_bits_fixture",
+        "pid": 22176,
+        "exit": 0,
+        "started": "2026-11-27T20:49:18.5488709Z",
+        "sha256": "3ADD72708B2342EC47EF4F293CE3196144F986D96C2C2AA0136CF099BB943AE0"
+      },
+      {
+        "name": "wow_original_dde_free_fixture",
+        "pid": 16372,
+        "exit": 0,
+        "started": "2026-11-27T20:49:18.8176596Z",
+        "sha256": "106279DEAF1B5C4D4EC661E6DA3DA64DD7ED17DDAB929E223A1F539EAD7C9705"
+      },
+      {
+        "name": "wow_user_capture_fixture",
+        "pid": 3744,
+        "exit": 0,
+        "started": "2026-11-27T20:49:18.9688603Z",
+        "sha256": "9113D28BA6B7F0C881296BA28DEA13ABBF1056E8545ED81AA9BA55607F8DC410"
+      }
+    ]
+  },
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 733181,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": true,
+    "PreparationMs": 27716,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1566,
+        "CleanupMs": 293,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-standard",
+        "ElapsedMs": 56557,
+        "CleanupMs": 302,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-enhanced",
+        "ElapsedMs": 96539,
+        "CleanupMs": 335,
+        "Passed": true
+      },
+      {
+        "Gate": "win95",
+        "ElapsedMs": 138588,
+        "CleanupMs": 343,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-sol-options",
+        "ElapsedMs": 25622,
+        "CleanupMs": 277,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 18558,
+        "CleanupMs": 332,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 18785,
+        "CleanupMs": 334,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 19480,
+        "CleanupMs": 320,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 219,
+        "CleanupMs": 336,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65789,
+        "CleanupMs": 316,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 43966,
+        "CleanupMs": 395,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 40005,
+        "CleanupMs": 383,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14946,
+        "CleanupMs": 356,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9863,
+        "CleanupMs": 344,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 2370,
+        "CleanupMs": 383,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12447,
+        "CleanupMs": 346,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 35621,
+        "CleanupMs": 351,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 40802,
+        "CleanupMs": 329,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4921,
+        "CleanupMs": 395,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8785,
+        "CleanupMs": 353,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10064,
+        "CleanupMs": 330,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3552,
+        "CleanupMs": 323,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7563,
+        "CleanupMs": 263,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20381,
+        "CleanupMs": 260,
+        "Passed": true
+      }
+    ]
+  },
+  "sol": "SOL options: game-thread=14196\nSOL options: command=1003\nSOL options: Game > Options visible; owner and OK/Cancel controls verified\nSOL options: dialog-visible-ms=750\nSOL options: dialog-close-recovery-ms=562\nSOL options: worker-cpu-open-ms=797 worker-cpu-close-ms=562\nSOL options: game-thread-cpu-open-ms=578 game-thread-cpu-close-ms=563\nPASS SOL Options command, modal dialog, close and parent recovery\n",
+  "source_review": "# S15 P36 N022 combo migration \u2014 in progress\n\nBase commit: 21fee549984a74ff0dae7c42aa80c671118e6de2.\nXP commit: a2f6d7c93aa4f11efc51147566d5961c59a8ef89.\ncombo.c XP blob: f79ac6886fbdfe6b6022d1004565272f9b45bef6.\nOpenNT blob: de000921ecc635a2e282a7d6472863ada31abd35.\n\n## Source and dependency disposition\n\nThe complete combo.c algorithm is XP original. Five COLOR_HOTTRACKING arms\nand one LATER arm preserve their original guards with #error bodies; each\n#line resumes after endif, including the selected false path. The old literal\n#if 0 declaration no longer exists in XP. No behavior is removed to ease build.\n\nCBOX/COMBOWND move from the old usercli.h location to XP's inc/user.h owner;\nthere is one structure definition. Original CBNcCreateHandler,\nxxxCBCreateHandler and xxxCBCalcControlRects supply the paired XP creation,\nANSI input and right-to-left placement behavior. The rest of comboini.c,\nuser.h and usercli.h remain OpenNT-baselined prerequisites, not completed\nwhole-file migrations. Original DbcsCombine is restored in editec.c, using\nthe already bound PeekMessageA and existing queue, with no new byte buffer.\nTHREAD_CODEPAGE reuses OpenNtUserThreadCodePage and native keyboard layout.\n\nXP CB_GETCOMBOBOXINFO calls the existing retained-state info provider. The\nno-edit case is not missing a child: original comboini sets spwndEdit to the\ncombo itself. Native GetComboBoxInfo must not inspect a different private\ncontrol implementation. Existing scoped native calls now also cover\nAnimateWindow and NotifyWinEvent. Monitor geometry and UI-effect preferences\nare inputs to the existing per-call context; no second lifecycle owner.\n\nSource review found registered_init_task accepted but discarded compat_flags\nand user_flags supplied by XP wkman.c. Both now flow through the existing\nlifecycle provider to queue.c's task/client state before task insertion.\nThe XP COMPATFLAGS2_FORWOW mask is preserved. It excludes ANIMATIONOFF;\nthis change does not invent that flag for WOW. Original GetAppCompatFlags2\nis restored in winmgrc.c. No native PEB/private CLIENTINFO reinterpretation.\n\nThe combo-only _CreateWindowEx boundary adopts XP's thirteen arguments and\nRTL styles. The generic fourteen-argument WOW creation boundary is unchanged.\nThe obsolete rejected-WOW-words combo test is removed because the parameter\nno longer exists; other failure and ownership assertions remain.\n\n## Verification status\n\nLocal byte comparison proves combo.c matches XP outside six excluded arms\nand their diagnostic mappings. The first cached full build passed. The first\npublication attempt stopped at an occupied NTVDMD.DLL; the verified O:/WINNT\ninstances were terminated under existing authority. Restaging the same output\nwas rejected because the staging tool requires a fresh root. Publication from\nthe already completed runtime39 then passed all26 destination hashes.\n\nThe control cohort failed to link its standalone button fixture: the newly\nbound NotifyWinEvent boundary lacked that fixture's native forwarding function.\nNo fixture executed in that attempt. The test forwarding function is now paired;\nproduction NotifyWinEvent also uses the existing native HWND conversion before\nthe scoped call, matching other mapped native calls. Neither correction changes\nmirror diff. A second cached build and fresh runtime40 publication are pending.\nFull has not run; its first coordinator correctly stopped at the failed cohort.\n\nExisting fixtures assert explicit compatibility flags and the original WOW mask,\nand exercise actual CB_GETCOMBOBOXINFO and dropdown show/hide messages. Their\nmodified versions still require passing results. P36 is not committed or pushed.\n\n## Provisional mixed-baseline census\n\nBefore: 1329 files; 781 byte-identical; 792 nonerror-identical / 537 different;\n7848 nonerror points / 123546 changed lines.\nLocal: 1329; 781; 792 / 537; 7853 points / 119031 lines.\nDelta: zero in all file counts; +5 points / -4515 lines.\ncombo.c alone: OpenNT 1/4601 -> XP 6/6, all six remaining lines are #line.\nEight paired files retain their registered OpenNT baseline. Local census\nrecords 1273 XP / 56 OpenNT; delivered census is unchanged until acceptance.\nPoint expansion comes from original LF restoration. Final source hashes and\npublished-package tests must replace these provisional figures at delivery.\n\n## Paired message-table correction\n\nThe first runtime40 native-creation test executed the new combo info message\nthrough the real window procedure and failed both return and output assertions.\nTask-order and task-lifecycle tests had passed. The existing server.c original\nmessage bitmap omitted CB_GETCOMBOBOXINFO, so FWINDOWMSG rejected it before\nXP ComboBoxWndProcWorker. The complete pinned XP gawComboWndProc array is now\nrestored in its original C owner, including mouse-leave, style and UI-state\nmessages. No filter bypass or alternate dispatch is added. The unchanged rest\nof server.c remains OpenNT-baselined. Its nonerror metric changes from1/3010\nto1/3017; the paired unit has original XP mapping and restores the following\nOpenNT diagnostic line. P36 now affects nine mirrored files.\n\nThe runtime41 cached build/publication and affected control/native-creation/\nwindow-borrow tests are pending. Previously passed task-order/task-lifecycle\nassertions do not use this message array and retain their evidence. Full has\nnot started; the failed prerequisites are not passes.",
+  "census": {
+    "before": {
+      "files": 1329,
+      "byte_identical": 781,
+      "nonerror_identical": 792,
+      "nonerror_different": 537,
+      "nonerror_points": 7848,
+      "nonerror_lines": 123546
+    },
+    "after": {
+      "files": 1329,
+      "byte_identical": 781,
+      "nonerror_identical": 792,
+      "nonerror_different": 537,
+      "nonerror_points": 7853,
+      "nonerror_lines": 119031
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 5,
+      "nonerror_lines": -4515
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+        "before_points": 1,
+        "before_lines": 4601,
+        "after_points": 6,
+        "after_lines": 6,
+        "exclusions": 6
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+        "before_points": 1,
+        "before_lines": 1251,
+        "after_points": 1,
+        "after_lines": 1275,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+        "before_points": 1,
+        "before_lines": 5819,
+        "after_points": 1,
+        "after_lines": 5834,
+        "exclusions": 10
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "before_points": 1,
+        "before_lines": 4693,
+        "after_points": 1,
+        "after_lines": 4638,
+        "exclusions": 17
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+        "before_points": 1,
+        "before_lines": 711,
+        "after_points": 1,
+        "after_lines": 725,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "before_points": 1,
+        "before_lines": 5161,
+        "after_points": 1,
+        "after_lines": 5223,
+        "exclusions": 25
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+        "before_points": 1,
+        "before_lines": 5200,
+        "after_points": 1,
+        "after_lines": 5211,
+        "exclusions": 24
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+        "before_points": 1,
+        "before_lines": 3010,
+        "after_points": 1,
+        "after_lines": 3017,
+        "exclusions": 15
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+        "before_points": 1,
+        "before_lines": 10214,
+        "after_points": 1,
+        "after_lines": 10216,
+        "exclusions": 40
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1273,
+      "OpenNT": 56
+    }
+  },
+  "retained_task_tests": [
+    "task-order",
+    "task-lifecycle"
+  ],
+  "retention_reason": "The final product correction only replaces the original combo message array. Task scheduling and compatibility-flag code/ABI are unchanged from the passing runs.",
+  "attempts": [
+    "Initial build passed; publication was blocked by verified O:/WINNT instances.",
+    "Restage to an existing directory was rejected; existing staged package was then published and verified.",
+    "Control fixture missing native event forwarder; paired, and production event boundary uses common HWND conversion.",
+    "Real combo info message rejected by old original message table; entire paired XP combo array restored.",
+    "Native creation fixture retained NT4 procedure tag; updated to existing XP tag; product unchanged."
+  ]
+}

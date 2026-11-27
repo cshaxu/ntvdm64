@@ -49,7 +49,7 @@ static void verify_gateway_failure_cleanup(void)
     target.procedure = (DWORD)wow_window_class_creation_proc;
     CHECK(!wow_window_words_attach_target(window, &words, NULL, &target));
     CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
-    target.procedure = 0x81234567;
+    target.procedure = (WOW_WINDOW_PROC_TAG | 0x01234567u);
     CHECK(!wow_window_words_attach_target(window, &words, NULL, &target));
     CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
     CHECK(wow_window_words_acquire(window) == NULL);
@@ -87,7 +87,7 @@ static HWND create(unsigned identity)
 {
     CREATESTRUCTA request = {0};
     WW words = {0};
-    wow_window_dispatch_target target = {0x81234567, callback, TRUE};
+    wow_window_dispatch_target target = {(WOW_WINDOW_PROC_TAG | 0x01234567u), callback, TRUE};
     words.adwWOW[0] = identity;
     request.hInstance = instance; request.lpszClass = name; request.lpszName = "";
     request.cx = request.cy = 32; request.style = WS_OVERLAPPEDWINDOW;
@@ -102,7 +102,7 @@ static DWORD WINAPI callback(HWND window, UINT message, UINT wp, LONG lp,
     DWORD *wc = wow_window_class_words_value(borrow);
     LONG result;
     ++callbacks;
-    CHECK(procedure == 0x81234567 && borrow);
+    CHECK(procedure == (WOW_WINDOW_PROC_TAG | 0x01234567u) && borrow);
     CHECK(wc && wc[0] == class_words[0] && wc[1] == class_words[1]);
     CHECK(words == wow_window_words_value(borrow));
     CHECK(wow_window_words_cleanup_value(borrow)->thread==wow_fixture_creation_owner(&context));
@@ -220,7 +220,7 @@ static void verify_mdi_creation(void)
     CREATESTRUCTA request = {0};
     CREATESTRUCTW wide;
     WW words = {0};
-    wow_window_dispatch_target target = {0x81234567, callback, TRUE};
+    wow_window_dispatch_target target = {(WOW_WINDOW_PROC_TAG | 0x01234567u), callback, TRUE};
     frame = CreateWindowExA(0, "STATIC", "", WS_OVERLAPPEDWINDOW,
         0, 0, 80, 80, NULL, NULL, GetModuleHandleA(NULL), NULL);
     CHECK(frame != NULL); if (!frame) return;
@@ -375,7 +375,7 @@ static void verify_control_creation_inputs(void)
         for (i = 0; i != 2; ++i) {
             HWND window = wow_control_create_window_ex(0, MAKEINTATOM(atom),
                 NULL, WS_OVERLAPPEDWINDOW, 0, 0, 32, 32, NULL, NULL,
-                instance, (LPVOID)0x12345678, i ? CW_FLAGS_ANSI : 0, NULL);
+                instance, (LPVOID)0x12345678, i ? CW_FLAGS_ANSI : 0);
             wow_window_words_binding *borrow;
             wow_window_creation_facts facts = {0};
             CHECK(window != NULL);
@@ -405,7 +405,7 @@ static void verify_control_creation_inputs(void)
             BOOL caught = FALSE;
             __try {
                 (void)wow_control_create_window_ex(0, MAKEINTATOM(atom), NULL,
-                    0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0, NULL);
+                    0, 0, 0, 0, 0, NULL, NULL, NULL, NULL, 0);
             } __except (GetExceptionCode() == 0xe0424473u ?
                     EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
                 caught = TRUE;
@@ -418,26 +418,20 @@ static void verify_control_creation_inputs(void)
         control_version_raise = FALSE;
         control_version_module = instance;
         CHECK(!wow_control_create_window_ex(WS_EX_MDICHILD, MAKEINTATOM(atom),
-            NULL, 0, 0, 0, 0, 0, NULL, NULL, instance, NULL, 0, NULL));
+            NULL, 0, 0, 0, 0, 0, NULL, NULL, instance, NULL, 0));
         CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
         CHECK(!wow_control_create_window_ex(0, MAKEINTATOM(atom), TEXT("title"),
-            0, 0, 0, 0, 0, NULL, NULL, instance, NULL, 0, NULL));
+            0, 0, 0, 0, 0, NULL, NULL, instance, NULL, 0));
         CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
         CHECK(!wow_control_create_window_ex(0, TEXT("S40_NATIVE_CREATE_BINDING"),
-            NULL, 0, 0, 0, 0, 0, NULL, NULL, instance, NULL, 0, NULL));
+            NULL, 0, 0, 0, 0, 0, NULL, NULL, instance, NULL, 0));
         CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
         CHECK(!wow_control_create_window_ex(0, MAKEINTATOM(atom), NULL,
-            0, 0, 0, 0, 0, NULL, NULL, instance, NULL, ~CW_FLAGS_ANSI, NULL));
+            0, 0, 0, 0, 0, NULL, NULL, instance, NULL, ~CW_FLAGS_ANSI));
         CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
-        {
-            DWORD words[3] = {0};
-            CHECK(!wow_control_create_window_ex(0, MAKEINTATOM(atom), NULL,
-                0, 0, 0, 0, 0, NULL, NULL, instance, NULL, 0, words));
-            CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
-        }
         client.get_version = NULL;
         CHECK(!wow_control_create_window_ex(0, MAKEINTATOM(atom), NULL,
-            0, 0, 0, 0, 0, NULL, NULL, instance, NULL, 0, NULL));
+            0, 0, 0, 0, 0, NULL, NULL, instance, NULL, 0));
         CHECK(GetLastError() == ERROR_INVALID_STATE);
         CHECK(control_version_calls == 3);
     } __finally {
@@ -772,7 +766,7 @@ int __cdecl main(void)
     wow_task_order_state task_state = {0};
     wow_task_order_entry task = {0};
     WNDCLASSEXA cls = {sizeof(cls)};
-    wow_window_dispatch_target target = {0x81234567, callback, TRUE};
+    wow_window_dispatch_target target = {(WOW_WINDOW_PROC_TAG | 0x01234567u), callback, TRUE};
     HHOOK terminal_observer = NULL;
     UNICODE_STRING captured_name;
     HWND window;

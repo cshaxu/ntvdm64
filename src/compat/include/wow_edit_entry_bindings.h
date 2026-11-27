@@ -29,6 +29,8 @@ typedef struct wow_edit_context {
     };
     struct tagOEMBITMAPINFO *oembmi; /* Borrowed immutable button metadata. */
     UINT dtLBSearch, dtScroll, dtCaretBlink, ucWheelScrollLines;
+    DWORD PUSIFlags;
+    MONITORINFO monitor; /* Borrowed only until the next monitor query in this call. */
     ATOM atomSysClass[20]; /* Snapshot of the existing process cleanup class table. */
     /* Dialog-only inputs; ordinary EDIT capture leaves these unused. */
     BOOL fSnapTo;
@@ -40,6 +42,7 @@ extern __declspec(thread) wow_edit_context *wow_edit_current;
  * Unlike per-call metric inputs, it must survive entry/context restoration. */
 extern int gcWheelDelta;
 BOOL WINAPI wow_edit_capture_context(wow_edit_context *);
+MONITORINFO *WINAPI wow_control_monitor(HWND, DWORD);
 #ifdef WOW_ORIGINAL_EDIT_CLIENT
 #define gpsi wow_edit_current
 #endif

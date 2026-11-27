@@ -2963,3 +2963,18 @@ BOOL WINAPI wow_original_finalize_control(HWND window)
     SetLastError(error);
     return TRUE;
 }
+
+#line 4137
+WORD DbcsCombine(HWND hwnd, WORD ch)
+{
+    MSG msg;
+    int i = 10; /* loop counter to avoid the infinite loop */
+
+    while (!PeekMessageA(&msg, hwnd, WM_CHAR, WM_CHAR, PM_REMOVE)) {
+        if (--i == 0)
+            return 0;
+        Sleep(1);
+    }
+
+    return (WORD)ch | ((WORD)(msg.wParam) << 8);
+}

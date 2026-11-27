@@ -1,7 +1,7 @@
 /**************************** Module Header ********************************\
 * Module Name: combo.c
 *
-* Copyright 1985-90, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * The WndProc for combo boxes and other often used combo routines
 *
@@ -15,6 +15,7 @@
 
 LOOKASIDE ComboboxLookaside;
 
+BOOL NtUserTrackMouseEvent(TRACKMOUSEEVENT *ptme);
 LONG xxxCBGetTextLengthHelper(PCBOX pcbox, BOOL fAnsi);
 LONG xxxCBGetTextHelper(PCBOX pcbox, int len, LPWSTR lpstr, BOOL fAnsi);
 
@@ -51,19 +52,136 @@ void xxxPressButton(PCBOX pcbox, BOOL fPress)
 
         pcbox->fButtonPressed = (fPress != 0);
         if (pcbox->f3DCombo)
-            NtUserInvalidateRect(hwnd, &pcbox->buttonrc, TRUE);
+            NtUserInvalidateRect(hwnd, KPRECT_TO_PRECT(&pcbox->buttonrc), TRUE);
         else
         {
             RECT    rc;
 
-            CopyRect(&rc, &pcbox->buttonrc);
+            CopyRect(&rc, KPRECT_TO_PRECT(&pcbox->buttonrc));
             InflateRect(&rc, 0, SYSMET(CYEDGE));
             NtUserInvalidateRect(hwnd, &rc, TRUE);
         }
         UpdateWindow(hwnd);
+
+        NotifyWinEvent(EVENT_OBJECT_STATECHANGE, hwnd, OBJID_CLIENT, INDEX_COMBOBOX_BUTTON);
     }
 }
 
+/***************************************************************************\
+* HotTrack
+*
+* If we're not already hot-tracking and the mouse is over the combobox,
+* turn on hot-tracking and invalidate the drop-down button.
+*
+\***************************************************************************/
+
+#ifdef COLOR_HOTTRACKING
+#error Unselected original combo configuration
+#endif // COLOR_HOTTRACKING
+#line 93
+
+/***************************************************************************\
+* xxxComboBoxDBCharHandler
+*
+* Double Byte character handler for ANSI ComboBox
+*
+* History:
+\***************************************************************************/
+
+LRESULT ComboBoxDBCharHandler(
+    PCBOX pcbox,
+    HWND hwnd,
+    UINT message,
+    WPARAM wParam,
+    LPARAM lParam)
+{
+    WORD w;
+    PWND pwndSend;
+
+    w = DbcsCombine(hwnd, (BYTE)wParam);
+    if (w == 0) {
+        return CB_ERR;  // Failed to assemble DBCS
+    }
+
+    UserAssert(pcbox->spwndList);
+    if (pcbox->fNoEdit) {
+        pwndSend = pcbox->spwndList;
+    } else if (pcbox->spwndEdit) {
+        RIPMSG1(RIP_WARNING, "ComboBoxWndProcWorker: WM_CHAR is posted to Combobox itself(%08x).",
+                hwnd);
+        pwndSend = pcbox->spwndEdit;
+    } else {
+        return CB_ERR;
+    }
+
+    RIPMSG1(RIP_VERBOSE, "ComboBoxWndProcWorker: sending WM_CHAR %04x", w);
+
+    if (!TestWF(pwndSend, WFANSIPROC)) {
+        //
+        // If receiver is not ANSI WndProc (may be subclassed?),
+        // send a UNICODE message.
+        //
+        WCHAR wChar;
+        LPWSTR lpwstr = &wChar;
+
+        if (MBToWCSEx(THREAD_CODEPAGE(), (LPCSTR)&w, 2, &lpwstr, 1, FALSE) == 0) {
+            RIPMSG1(RIP_WARNING, "ComboBoxWndProcWorker: cannot convert 0x%04x to UNICODE.", w);
+            return CB_ERR;
+        }
+        return SendMessageWorker(pwndSend, message, wChar, lParam, FALSE);
+    }
+
+    /*
+     * Post the Trailing byte to the target
+     * so that they can peek the second WM_CHAR
+     * message later.
+     * Note: it's safe since sender is A and receiver is A,
+     * translation layer does not perform any DBCS combining and cracking.
+     */
+    PostMessageA(HWq(pwndSend), message, CrackCombinedDbcsTB(w), lParam);
+    return SendMessageWorker(pwndSend, message, wParam, lParam, TRUE);
+}
+
+BOOL ComboBoxMsgOKInInit(UINT message, LRESULT* plRet)
+{
+    switch (message) {
+    default:
+        break;
+    case WM_SIZE:
+        *plRet = 0;
+        return FALSE;
+    case WM_STYLECHANGED:
+    case WM_GETTEXT:
+    case WM_GETTEXTLENGTH:
+    case WM_PRINT:
+    case WM_COMMAND:
+    case CBEC_KILLCOMBOFOCUS:
+    case WM_PRINTCLIENT:
+    case WM_SETFONT:
+    case WM_SYSKEYDOWN:
+    case WM_KEYDOWN:
+    case WM_CHAR:
+    case WM_LBUTTONDBLCLK:
+    case WM_LBUTTONDOWN:
+    case WM_MOUSEWHEEL:
+    case WM_CAPTURECHANGED:
+    case WM_LBUTTONUP:
+    case WM_MOUSEMOVE:
+    case WM_SETFOCUS:
+    case WM_KILLFOCUS:
+    case WM_SETREDRAW:
+    case WM_ENABLE:
+    case CB_SETDROPPEDWIDTH:
+    case CB_DIR:
+    case CB_ADDSTRING:
+        /*
+         * Cannot handle those messages yet. Bail out.
+         */
+        *plRet = CB_ERR;
+        return FALSE;
+    }
+    return TRUE;
+}
 
 /***************************************************************************\
 * xxxComboBoxCtlWndProc
@@ -73,7 +191,7 @@ void xxxPressButton(PCBOX pcbox, BOOL fPress)
 * History:
 \***************************************************************************/
 
-LONG APIENTRY ComboBoxWndProcWorker(
+LRESULT APIENTRY ComboBoxWndProcWorker(
     PWND pwnd,
     UINT message,
     WPARAM wParam,
@@ -87,7 +205,7 @@ LONG APIENTRY ComboBoxWndProcWorker(
     TL tlpwndList;
     PAINTSTRUCT ps;
     LPWSTR lpwsz = NULL;
-    LONG lReturn;
+    LRESULT lReturn;
     static BOOL fInit = TRUE;
     int  i;
 
@@ -98,10 +216,23 @@ LONG APIENTRY ComboBoxWndProcWorker(
 
     /*
      * Get the pcbox for the given window now since we will use it a lot in
-     * various handlers.  This is stored by CBNcCreateHandler() in
-     * ((PCOMBOWND)pwnd)->pcbox in response to WM_NCCREATE (see below).
+     * various handlers.  This is stored by NtUserSetWindowLongPtr() in the
+     * INITCONTROLLOOKASIDE macro above.
      */
     pcbox = ((PCOMBOWND)pwnd)->pcbox;
+
+    /*
+     * Protect the combobox during the initialization.
+     */
+    if (pcbox->spwndList == NULL) {
+        LRESULT lRet;
+
+        if (!ComboBoxMsgOKInInit(message, &lRet)) {
+            RIPMSG2(RIP_WARNING, "ComboBoxWndProcWorker: msg=%04x is sent to hwnd=%08x in the middle of initialization.",
+                    message, hwnd);
+            return lRet;
+        }
+    }
 
     /*
      * Dispatch the various messages we can receive
@@ -110,7 +241,7 @@ LONG APIENTRY ComboBoxWndProcWorker(
     case CBEC_KILLCOMBOFOCUS:
 
         /*
-         * Private message comming from editcontrol informing us that the combo
+         * Private message coming from editcontrol informing us that the combo
          * box is losing the focus to a window which isn't in this combo box.
          */
         xxxCBKillFocusHelper(pcbox);
@@ -122,7 +253,36 @@ LONG APIENTRY ComboBoxWndProcWorker(
          * So that we can handle notification messages from the listbox and
          * edit control.
          */
-        return xxxCBCommandHandler(pcbox, wParam, (HWND)lParam);
+        return xxxCBCommandHandler(pcbox, (DWORD)wParam, (HWND)lParam);
+
+    case WM_STYLECHANGED:
+        UserAssert(pcbox->spwndList != NULL);
+        {
+            LONG OldStyle;
+            LONG NewStyle = 0;
+
+            pcbox->fRtoLReading = (TestWF(pwnd, WEFRTLREADING) != 0);
+            pcbox->fRightAlign  = (TestWF(pwnd, WEFRIGHT) != 0);
+            if (pcbox->fRtoLReading)
+                NewStyle |= (WS_EX_RTLREADING | WS_EX_LEFTSCROLLBAR);
+            if (pcbox->fRightAlign)
+                NewStyle |= WS_EX_RIGHT;
+
+            ThreadLock(pcbox->spwndList, &tlpwndList);
+            OldStyle = GetWindowLong(HWq(pcbox->spwndList), GWL_EXSTYLE) & ~(WS_EX_RIGHT|WS_EX_RTLREADING|WS_EX_LEFTSCROLLBAR);
+            SetWindowLong(HWq(pcbox->spwndList), GWL_EXSTYLE, OldStyle|NewStyle);
+            ThreadUnlock(&tlpwndList);
+
+            if (!pcbox->fNoEdit && pcbox->spwndEdit) {
+                ThreadLock(pcbox->spwndEdit, &tlpwndEdit);
+                OldStyle = GetWindowLong(HWq(pcbox->spwndEdit), GWL_EXSTYLE) & ~(WS_EX_RIGHT|WS_EX_RTLREADING|WS_EX_LEFTSCROLLBAR);
+                SetWindowLong(HWq(pcbox->spwndEdit), GWL_EXSTYLE, OldStyle|NewStyle);
+                ThreadUnlock(&tlpwndEdit);
+            }
+            xxxCBPosition(pcbox);
+            NtUserInvalidateRect(hwnd, NULL, FALSE);
+        }
+        break;
 
     case WM_CTLCOLORMSGBOX:
     case WM_CTLCOLOREDIT:
@@ -138,7 +298,7 @@ LONG APIENTRY ComboBoxWndProcWorker(
         //
         if (TestWF(pwnd, WFWIN40COMPAT)) {
             TL tlpwndParent;
-            long ret;
+            LRESULT ret;
             PWND pwndParent;
 
             pwndParent = REBASEPWND(pwnd, spwndParent);
@@ -184,7 +344,7 @@ LONG APIENTRY ComboBoxWndProcWorker(
          * wParam - not used
          * lParam - Points to the CREATESTRUCT data structure for the window.
          */
-        return xxxCBCreateHandler(pcbox, pwnd, (LPCREATESTRUCT)lParam);
+        return xxxCBCreateHandler(pcbox, pwnd);
 
     case WM_ERASEBKGND:
 
@@ -194,7 +354,7 @@ LONG APIENTRY ComboBoxWndProcWorker(
         return 1L;
 
     case WM_GETFONT:
-        return (LONG)pcbox->hFont;
+        return (LRESULT)pcbox->hFont;
 
     case WM_PRINT:
         if (!DefWindowProcWorker(pwnd, message, wParam, lParam, fAnsi))
@@ -210,7 +370,7 @@ LONG APIENTRY ComboBoxWndProcWorker(
             SendMessageWorker(pcbox->spwndList, WM_PRINT, wParam, lParam, FALSE);
             RestoreDC((HDC) wParam, iDC);
         }
-        return(TRUE);
+        return TRUE;
 
     case WM_PRINTCLIENT:
         xxxCBPaint(pcbox, (HDC) wParam);
@@ -238,7 +398,7 @@ LONG APIENTRY ComboBoxWndProcWorker(
          * lParam - not used
          */
         {
-            LONG code = DLGC_WANTCHARS | DLGC_WANTARROWS;
+            LRESULT code = DLGC_WANTCHARS | DLGC_WANTARROWS;
 
             // If the listbox is dropped and the ENTER key is pressed,
             // we want this message so we can close up the listbox
@@ -249,8 +409,11 @@ LONG APIENTRY ComboBoxWndProcWorker(
             {
                 code |= DLGC_WANTMESSAGE;
             }
-            return((LRESULT)code);
+            return code;
         }
+        /*
+         * No fall through
+         */
 
     case WM_SETFONT:
         xxxCBSetFontHandler(pcbox, (HANDLE)wParam, LOWORD(lParam));
@@ -322,14 +485,24 @@ DropCombo:
         // FALL THROUGH
 
     case WM_CHAR:
-        if (pcbox->fNoEdit)
+        if (fAnsi && IS_DBCS_ENABLED() && IsDBCSLeadByteEx(THREAD_CODEPAGE(), (BYTE)wParam)) {
+            return ComboBoxDBCharHandler(pcbox, hwnd, message, wParam, lParam);
+        }
+
+        if (pcbox->fNoEdit) {
             goto CallListSendMessage;
+        }
         else
             goto CallEditSendMessage;
         break;
 
     case WM_LBUTTONDBLCLK:
     case WM_LBUTTONDOWN:
+
+#ifdef COLOR_HOTTRACKING
+#error Unselected original combo configuration
+#endif // COLOR_HOTTRACKING
+#line 516
 
         /*
          * Set the focus to the combo box if we get a mouse click on it.
@@ -354,7 +527,7 @@ DropCombo:
 
         POINTSTOPOINT(pt, lParam);
         if ((pcbox->CBoxStyle == SDROPDOWN &&
-                PtInRect(&pcbox->buttonrc, pt)) ||
+                PtInRect(KPRECT_TO_PRECT(&pcbox->buttonrc), pt)) ||
                 pcbox->CBoxStyle == SDROPDOWNLIST) {
 
             /*
@@ -380,6 +553,7 @@ DropCombo:
                 //
                 pcbox->fMouseDown = TRUE;
                 NtUserSetCapture(hwnd);
+                NotifyWinEvent(EVENT_OBJECT_STATECHANGE, hwnd, OBJID_CLIENT, INDEX_COMBOBOX_BUTTON);
             }
         }
         break;
@@ -401,7 +575,7 @@ DropCombo:
          * If we're in extended UI mode or the edit control isn't yet created,
          * bail.
          */
-        if (pcbox->fExtendedUI || !pcbox->spwndEdit)
+        if (pcbox->fExtendedUI || pcbox->spwndEdit == NULL)
             return TRUE;
 
         /*
@@ -463,7 +637,10 @@ DropCombo:
                 ThreadUnlock(&tlpwndList);
             }
         }
-
+#ifdef COLOR_HOTTRACKING
+#error Unselected original combo configuration
+#endif // COLOR_HOTTRACKING
+#line 658
         break;
 
     case WM_MOUSEMOVE:
@@ -472,12 +649,12 @@ DropCombo:
 
             // Note conversion of INT bit field to BOOL (1 or 0)
 
-            if (PtInRect(&pcbox->buttonrc, pt) != !!pcbox->fButtonPressed) {
+            if (PtInRect(KPRECT_TO_PRECT(&pcbox->buttonrc), pt) != !!pcbox->fButtonPressed) {
                 xxxPressButton(pcbox, (pcbox->fButtonPressed == 0));
             }
 
             _ClientToScreen(pwnd, &pt);
-            if (PtInRect(&pcbox->spwndList->rcClient, pt)) {
+            if (PtInRect(KPRECT_TO_PRECT(&pcbox->spwndList->rcClient), pt)) {
 
                 /*
                  * This handles dropdown comboboxes/listboxes so that clicking
@@ -514,6 +691,10 @@ DropCombo:
                 goto CallListSendMessage;
             }
         }
+#ifdef COLOR_HOTTRACKING
+#error Unselected original combo configuration
+#endif // COLOR_HOTTRACKING
+#line 711
         break;
 
     case WM_NCDESTROY:
@@ -528,8 +709,7 @@ DropCombo:
              * There is no editcontrol so set the focus to the combo box itself.
              */
             xxxCBGetFocusHelper(pcbox);
-        } else {
-
+        } else if (pcbox->spwndEdit) {
             /*
              * Set the focus to the edit control window if there is one
              */
@@ -554,7 +734,9 @@ DropCombo:
              */
             xxxCBKillFocusHelper(pcbox);
         }
-        if (pcbox->spwndList) {
+
+        UserAssert(pcbox->spwndList);
+        {
             PLBIV plb = ((PLBWND)pcbox->spwndList)->pLBIV;
 
             if ((plb != NULL) && (plb != (PLBIV)-1)) {
@@ -599,7 +781,7 @@ DropCombo:
          * disabled view or ungreyed for non-disabled view.
          */
         NtUserInvalidateRect(hwnd, NULL, FALSE);
-        if (pcbox->CBoxStyle & SEDITABLE) {
+        if ((pcbox->CBoxStyle & SEDITABLE) && pcbox->spwndEdit) {
 
             /*
              * Enable/disable the edit control window
@@ -612,6 +794,7 @@ DropCombo:
         /*
          * Enable/disable the listbox window
          */
+        UserAssert(pcbox->spwndList);
         ThreadLock(pcbox->spwndList, &tlpwndList);
         NtUserEnableWindow(HWq(pcbox->spwndList), (TestWF(pwnd, WFDISABLED) == 0));
         ThreadUnlock(&tlpwndList);
@@ -624,7 +807,8 @@ DropCombo:
          *          sizenormal etc.
          * lParam - new width in LOWORD, new height in HIGHUINT of client area
          */
-        if (!LOWORD(lParam) || !HIWORD(lParam) || !pcbox->spwndList) {
+        UserAssert(pcbox->spwndList);
+        if (LOWORD(lParam) == 0 || HIWORD(lParam) == 0) {
 
             /*
              * If being sized to a zero width or to a zero height or we aren't
@@ -681,7 +865,7 @@ DropCombo:
 
                 if (wParam != (UINT) pcbox->cxDrop)
                 {
-                    pcbox->cxDrop = wParam;
+                    pcbox->cxDrop = (int)wParam;
                     xxxCBPosition(pcbox);
                 }
             }
@@ -892,12 +1076,11 @@ DropCombo:
          * If we come here before WM_CREATE has been processed,
          * pcbox->spwndList will be NULL.
          */
-        if (pcbox->spwndList) {
-            ThreadLock(pcbox->spwndList, &tlpwndList);
-            SendMessageWorker(pcbox->spwndList, LB_RESETCONTENT, 0, 0, FALSE);
-            ThreadUnlock(&tlpwndList);
-            xxxCBInternalUpdateEditWindow(pcbox, NULL);
-        }
+        UserAssert(pcbox->spwndList);
+        ThreadLock(pcbox->spwndList, &tlpwndList);
+        SendMessageWorker(pcbox->spwndList, LB_RESETCONTENT, 0, 0, FALSE);
+        ThreadUnlock(&tlpwndList);
+        xxxCBInternalUpdateEditWindow(pcbox, NULL);
         break;
 
     case CB_GETHORIZONTALEXTENT:
@@ -934,15 +1117,13 @@ DropCombo:
          * wParam - index of starting point for search
          * lParam - points to prefix string
          */
-        if (pcbox->spwndList) {
-            ThreadLock(pcbox->spwndList, &tlpwndList);
-            lParam = SendMessageWorker(pcbox->spwndList, LB_SELECTSTRING,
-                    wParam, lParam, fAnsi);
-            ThreadUnlock(&tlpwndList);
-            xxxCBInternalUpdateEditWindow(pcbox, NULL);
-            return lParam;
-        }
-        return CB_ERR;
+        UserAssert(pcbox->spwndList);
+        ThreadLock(pcbox->spwndList, &tlpwndList);
+        lParam = SendMessageWorker(pcbox->spwndList, LB_SELECTSTRING,
+                wParam, lParam, fAnsi);
+        ThreadUnlock(&tlpwndList);
+        xxxCBInternalUpdateEditWindow(pcbox, NULL);
+        return lParam;
 
     case CB_SETCURSEL:
 
@@ -953,15 +1134,15 @@ DropCombo:
          * pcbox->spwndList will be NULL.
          */
 
-        if (pcbox->spwndList) {
-            ThreadLock(pcbox->spwndList, &tlpwndList);
-            lParam = SendMessageWorker(pcbox->spwndList, LB_SETCURSEL, wParam, lParam, FALSE);
-            if (lParam != -1) {
-                SendMessageWorker(pcbox->spwndList, LB_SETTOPINDEX, wParam, 0, FALSE);
-            }
-            ThreadUnlock(&tlpwndList);
-            xxxCBInternalUpdateEditWindow(pcbox, NULL);
+        UserAssert(pcbox->spwndList);
+
+        ThreadLock(pcbox->spwndList, &tlpwndList);
+        lParam = SendMessageWorker(pcbox->spwndList, LB_SETCURSEL, wParam, lParam, FALSE);
+        if (lParam != -1) {
+            SendMessageWorker(pcbox->spwndList, LB_SETTOPINDEX, wParam, 0, FALSE);
         }
+        ThreadUnlock(&tlpwndList);
+        xxxCBInternalUpdateEditWindow(pcbox, NULL);
         return lParam;
 
     case CB_GETITEMDATA:
@@ -1028,6 +1209,9 @@ DropCombo:
         goto CallListSendMessage;
         break;
 
+    case CB_GETCOMBOBOXINFO:
+        return NtUserGetComboBoxInfo(hwnd, (PCOMBOBOXINFO)lParam);
+
     case WM_MEASUREITEM:
     case WM_DELETEITEM:
     case WM_DRAWITEM:
@@ -1040,7 +1224,7 @@ DropCombo:
          * wParam - Contains a handle to the window being created
          * lParam - Points to the CREATESTRUCT data structure for the window.
          */
-        return CBNcCreateHandler(pcbox, pwnd, (LPCREATESTRUCT)lParam);
+        return CBNcCreateHandler(pcbox, pwnd);
 
     case WM_PARENTNOTIFY:
         if (LOWORD(wParam) == WM_DESTROY) {
@@ -1055,18 +1239,34 @@ DropCombo:
         }
         break;
 
+    case WM_UPDATEUISTATE:
+        /*
+         * Propagate the change to the list control, if any
+         */
+        UserAssert(pcbox->spwndList);
+        ThreadLock(pcbox->spwndList, &tlpwndList);
+        SendMessageWorker(pcbox->spwndList, WM_UPDATEUISTATE,
+                          wParam, lParam, fAnsi);
+        ThreadUnlock(&tlpwndList);
+        goto CallDWP;
+
     case WM_HELP:
         {
             LPHELPINFO lpHelpInfo;
 
-            /* Check if this message is form a child of this combo
+            /*
+             * Check if this message is from a child of this combo
              */
-            if ((lpHelpInfo = (LPHELPINFO)lParam) &&
-                (lpHelpInfo->iCtrlId == (SHORT)(LOWORD(pcbox->spwndEdit->spmenu)) ||
-                 lpHelpInfo->iCtrlId == (SHORT)(LOWORD(pcbox->spwndList->spmenu)) )) {
+            if ((lpHelpInfo = (LPHELPINFO)lParam) != NULL &&
+                ((pcbox->spwndEdit && lpHelpInfo->iCtrlId == (SHORT)(PTR_TO_ID(pcbox->spwndEdit->spmenu))) ||
+                 lpHelpInfo->iCtrlId == (SHORT)(PTR_TO_ID(pcbox->spwndList->spmenu)) )) {
 
-                // BUGBUG - What to do here?
-                lpHelpInfo->iCtrlId = (SHORT)(LOWORD(pwnd->spmenu));
+                /*
+                 * Make it look like the WM_HELP is coming form this combo.
+                 * Then DefWindowProcWorker will pass it up to our parent,
+                 * who can do whatever he wants with it.
+                 */
+                lpHelpInfo->iCtrlId = (SHORT)(PTR_TO_ID(pwnd->spmenu));
                 lpHelpInfo->hItemHandle = hwnd;
                 lpHelpInfo->dwContextId = GetContextHelpId(pwnd);
             }
@@ -1076,11 +1276,12 @@ DropCombo:
          */
 
     default:
-CallDWP:
+
         if (SYSMET(PENWINDOWS) &&
                 (message >= WM_PENWINFIRST && message <= WM_PENWINLAST))
             goto CallEditSendMessage;
 
+CallDWP:
         return DefWindowProcWorker(pwnd, message, wParam, lParam, fAnsi);
     }  /* switch (message) */
 
@@ -1090,10 +1291,7 @@ CallDWP:
  * The following forward messages off to the child controls.
  */
 CallEditSendMessage:
-    if (pcbox->fNoEdit) {
-        RIPERR0(ERROR_INVALID_COMBOBOX_MESSAGE, RIP_VERBOSE, "");
-        lReturn = CB_ERR;
-    } else if (pcbox->spwndEdit) {
+    if (!pcbox->fNoEdit && pcbox->spwndEdit) {
         /*
          * pcbox->spwndEdit will be NULL if we haven't done WM_CREATE yet!
          */
@@ -1101,29 +1299,31 @@ CallEditSendMessage:
         lReturn = SendMessageWorker(pcbox->spwndEdit, message,
                 wParam, lParam, fAnsi);
         ThreadUnlock(&tlpwndEdit);
-        return lReturn;
     }
+    else {
+        RIPERR0(ERROR_INVALID_COMBOBOX_MESSAGE, RIP_VERBOSE, "");
+        lReturn = CB_ERR;
+    }
+    return lReturn;
 
 CallListSendMessage:
     /*
      * pcbox->spwndList will be NULL if we haven't done WM_CREATE yet!
      */
-    if (pcbox->spwndList) {
-        ThreadLock(pcbox->spwndList, &tlpwndList);
-        lReturn = SendMessageWorker(pcbox->spwndList, message,
-                wParam, lParam, fAnsi);
-        ThreadUnlock(&tlpwndList);
-        return lReturn;
-    }
+    UserAssert(pcbox->spwndList);
+    ThreadLock(pcbox->spwndList, &tlpwndList);
+    lReturn = SendMessageWorker(pcbox->spwndList, message,
+            wParam, lParam, fAnsi);
+    ThreadUnlock(&tlpwndList);
+    return lReturn;
 
-    return  CB_ERR;
 }  /* ComboBoxWndProcWorker */
 
 
 /***************************************************************************\
 \***************************************************************************/
 
-LONG WINAPI ComboBoxWndProcA(
+LRESULT WINAPI ComboBoxWndProcA(
     HWND hwnd,
     UINT message,
     WPARAM wParam,
@@ -1147,7 +1347,7 @@ LONG WINAPI ComboBoxWndProcA(
     return ComboBoxWndProcWorker(pwnd, message, wParam, lParam, TRUE);
 }
 
-LONG WINAPI ComboBoxWndProcW(
+LRESULT WINAPI ComboBoxWndProcW(
     HWND hwnd,
     UINT message,
     WPARAM wParam,
@@ -1181,12 +1381,12 @@ LONG WINAPI ComboBoxWndProcW(
 * History:
 \***************************************************************************/
 
-long xxxCBMessageItemHandler(
+LRESULT xxxCBMessageItemHandler(
     PCBOX pcbox,
     UINT message,
     LPVOID lpfoo)  /* Actually can be any of the structs below */
 {
-    DWORD dw;
+    LRESULT lRet;
     TL tlpwndParent;
 
     CheckLock(pcbox->spwnd);
@@ -1196,7 +1396,7 @@ long xxxCBMessageItemHandler(
      * parameters to their combo box specific versions.
      */
     ((LPMEASUREITEMSTRUCT)lpfoo)->CtlType = ODT_COMBOBOX;
-    ((LPMEASUREITEMSTRUCT)lpfoo)->CtlID = (UINT)pcbox->spwnd->spmenu;
+    ((LPMEASUREITEMSTRUCT)lpfoo)->CtlID = PtrToUlong(pcbox->spwnd->spmenu);
     if (message == WM_DRAWITEM)
         ((LPDRAWITEMSTRUCT)lpfoo)->hwndItem = HWq(pcbox->spwnd);
     else if (message == WM_DELETEITEM)
@@ -1205,11 +1405,11 @@ long xxxCBMessageItemHandler(
         ((LPCOMPAREITEMSTRUCT)lpfoo)->hwndItem = HWq(pcbox->spwnd);
 
     ThreadLock(pcbox->spwndParent, &tlpwndParent);
-    dw = SendMessage(HW(pcbox->spwndParent), message,
-            (DWORD)pcbox->spwnd->spmenu, (LONG)lpfoo);
+    lRet = SendMessage(HW(pcbox->spwndParent), message,
+            (WPARAM)pcbox->spwnd->spmenu, (LPARAM)lpfoo);
     ThreadUnlock(&tlpwndParent);
 
-    return dw;
+    return lRet;
 }
 
 
@@ -1224,6 +1424,7 @@ void xxxCBPaint(
     HDC hdc)
 {
     RECT rc;
+    UINT msg;
     HBRUSH hbr;
 
     CheckLock(pcbox->spwnd);
@@ -1238,26 +1439,32 @@ void xxxCBPaint(
 
     if (pcbox->buttonrc.left != 0) {
     // Draw in the dropdown arrow button
-        DrawFrameControl(hdc, &pcbox->buttonrc, DFC_SCROLL,
+        DrawFrameControl(hdc, KPRECT_TO_PRECT(&pcbox->buttonrc), DFC_SCROLL,
             DFCS_SCROLLCOMBOBOX |
             (pcbox->fButtonPressed ? DFCS_PUSHED | DFCS_FLAT : 0) |
             (TestWF(pcbox->spwnd, WFDISABLED) ? DFCS_INACTIVE : 0));
-
-        rc.right = pcbox->buttonrc.left;
+#ifdef COLOR_HOTTRACKING
+#error Unselected original combo configuration
+#endif // COLOR_HOTTRACKING
+#line 1462
+        if (pcbox->fRightAlign )
+            rc.left = pcbox->buttonrc.right;
+        else
+            rc.right = pcbox->buttonrc.left;
     }
 
     // Erase the background behind the edit/static item.  Since a combo
     // is an edit field/list box hybrid, we use the same coloring
     // conventions.
-    hbr = (HBRUSH) WM_CTLCOLOREDIT;
+    msg = WM_CTLCOLOREDIT;
     if (TestWF(pcbox->spwnd, WFWIN40COMPAT)) {
         if (TestWF(pcbox->spwnd, WFDISABLED) ||
-            (!pcbox->fNoEdit && TestWF(pcbox->spwndEdit, EFREADONLY)))
-            hbr = (HBRUSH)WM_CTLCOLORSTATIC;
+            (!pcbox->fNoEdit && pcbox->spwndEdit && TestWF(pcbox->spwndEdit, EFREADONLY)))
+            msg = WM_CTLCOLORSTATIC;
     } else
-        hbr = (HBRUSH)WM_CTLCOLORLISTBOX;
+        msg = WM_CTLCOLORLISTBOX;
 
-    hbr = GetControlBrush(HWq(pcbox->spwnd), hdc, (int)hbr);
+    hbr = GetControlBrush(HWq(pcbox->spwnd), hdc, msg);
 
     if (pcbox->fNoEdit)
         xxxCBInternalUpdateEditWindow(pcbox, hdc);
@@ -1355,6 +1562,16 @@ long xxxCBCommandHandler(
 
             xxxCBNotifyParent(pcbox, CBN_SELCHANGE);
             xxxCBInternalUpdateEditWindow(pcbox, NULL);
+        
+            /*
+             * If this combobox doesn't have an edit control, it needs to send
+             * this notification itself when the user is cycling through the
+             * items with the keyboard.
+             * See bug #54766.
+             */
+            if (pcbox->fNoEdit) {
+                NotifyWinEvent(EVENT_OBJECT_VALUECHANGE, HWq(pcbox->spwnd), OBJID_CLIENT, INDEX_COMBOBOX);
+            }
             break;
         }
     }
@@ -1391,8 +1608,8 @@ void xxxCBNotifyParent(
      */
     ThreadLock(pwndParent, &tlpwndParent);
     SendMessageWorker(pwndParent, WM_COMMAND,
-            MAKELONG(pcbox->spwnd->spmenu, notificationCode),
-            (LONG)HWq(pcbox->spwnd), FALSE);
+            MAKELONG(PTR_TO_ID(pcbox->spwnd->spmenu), notificationCode),
+            (LPARAM)HWq(pcbox->spwnd), FALSE);
     ThreadUnlock(&tlpwndParent);
 }
 
@@ -1418,13 +1635,20 @@ void xxxCBCompleteEditWindow(
 
     CheckLock(pcbox->spwnd);
 
+    /*
+     * Firstly check the edit control.
+     */
+    if (pcbox->spwndEdit == NULL) {
+        return;
+    }
+
     ThreadLock(pcbox->spwndEdit, &tlpwndEdit);
     ThreadLock(pcbox->spwndList, &tlpwndList);
 
     /*
      * +1 for null terminator
      */
-    cchText = SendMessageWorker(pcbox->spwndEdit, WM_GETTEXTLENGTH, 0, 0, FALSE);
+    cchText = (int)SendMessageWorker(pcbox->spwndEdit, WM_GETTEXTLENGTH, 0, 0, FALSE);
 
     if (cchText) {
         cchText++;
@@ -1437,12 +1661,12 @@ void xxxCBCompleteEditWindow(
          * window revalidation fails.
          */
         try {
-            SendMessageWorker(pcbox->spwndEdit, WM_GETTEXT, cchText, (LONG)pText, FALSE);
-            itemNumber = SendMessageWorker(pcbox->spwndList,
-                    LB_FINDSTRINGEXACT, (DWORD)-1, (LONG)pText, FALSE);
+            SendMessageWorker(pcbox->spwndEdit, WM_GETTEXT, cchText, (LPARAM)pText, FALSE);
+            itemNumber = (int)SendMessageWorker(pcbox->spwndList,
+                    LB_FINDSTRINGEXACT, (WPARAM)-1, (LPARAM)pText, FALSE);
             if (itemNumber == -1)
-                itemNumber = SendMessageWorker(pcbox->spwndList,
-                        LB_FINDSTRING, (DWORD)-1, (LONG)pText, FALSE);
+                itemNumber = (int)SendMessageWorker(pcbox->spwndList,
+                        LB_FINDSTRING, (WPARAM)-1, (LPARAM)pText, FALSE);
         } finally {
             UserLocalFree((HANDLE)pText);
         }
@@ -1455,7 +1679,7 @@ void xxxCBCompleteEditWindow(
             goto Unlock;
         }
 
-        cchItemText = SendMessageWorker(pcbox->spwndList, LB_GETTEXTLEN,
+        cchItemText = (int)SendMessageWorker(pcbox->spwndList, LB_GETTEXTLEN,
                 itemNumber, 0, FALSE);
         if (cchItemText) {
             cchItemText++;
@@ -1469,14 +1693,14 @@ void xxxCBCompleteEditWindow(
              */
             try {
                 SendMessageWorker(pcbox->spwndList, LB_GETTEXT,
-                        itemNumber, (DWORD)pText, FALSE);
+                        itemNumber, (LPARAM)pText, FALSE);
                 SendMessageWorker(pcbox->spwndEdit, WM_SETTEXT,
-                        0, (DWORD)pText, FALSE);
+                        0, (LPARAM)pText, FALSE);
             } finally {
                 UserLocalFree((HANDLE)pText);
             }
 
-            SendMessageWorker(pcbox->spwndEdit, EM_SETSEL, 0, MAXLONG, FALSE);
+            SendMessageWorker(pcbox->spwndEdit, EM_SETSEL, 0, MAXLONG, !!TestWF(pcbox->spwnd, WFANSIPROC));
         }
     }
 
@@ -1503,12 +1727,6 @@ BOOL xxxCBHideListBoxWindow(
     HWND hwndList = HWq(pcbox->spwndList);
     TL tlpwndList;
 
-#line 1506
-#if 0
-#line 1507
-#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
-#endif
-#line 1509
 
     CheckLock(pcbox->spwnd);
 
@@ -1564,7 +1782,7 @@ BOOL xxxCBHideListBoxWindow(
         // to show focus/selection.
         //
         if (!(pcbox->CBoxStyle & SEDITABLE))
-            NtUserInvalidateRect(hwnd, &pcbox->editrc, TRUE);
+            NtUserInvalidateRect(hwnd, KPRECT_TO_PRECT(&pcbox->editrc), TRUE);
 
         NtUserSetWindowPos(hwnd, HWND_TOP, 0, 0,
                 pcbox->cxCombo, pcbox->cyCombo, swpFlags);
@@ -1603,15 +1821,17 @@ BOOL xxxCBHideListBoxWindow(
 void xxxCBShowListBoxWindow(
     PCBOX pcbox, BOOL fTrack)
 {
-    RECT editrc;
-    int     itemNumber;
-    int     iHeight;
-    int     yTop;
-    DWORD   dwMult;
-    int     cyItem;
-    HWND    hwnd = HWq(pcbox->spwnd);
-    HWND    hwndList = HWq(pcbox->spwndList);
-    TL tlpwndList;
+    RECT        editrc;
+    int         itemNumber;
+    int         iHeight;
+    int         yTop;
+    DWORD       dwMult;
+    int         cyItem;
+    HWND        hwnd = HWq(pcbox->spwnd);
+    HWND        hwndList = HWq(pcbox->spwndList);
+    BOOL        fAnimPos;
+    TL          tlpwndList;
+    PMONITOR    pMonitor;
 
     //
     // THIS FUNCTION IS ONLY CALLED FOR DROPPABLE LIST COMBOBOXES
@@ -1630,7 +1850,7 @@ void xxxCBShowListBoxWindow(
     /*
      * Invalidate the button rect so that the depressed arrow is drawn.
      */
-    NtUserInvalidateRect(hwnd, &pcbox->buttonrc, TRUE);
+    NtUserInvalidateRect(hwnd, KPRECT_TO_PRECT(&pcbox->buttonrc), TRUE);
 
     pcbox->fLBoxVisible = TRUE;
 
@@ -1650,7 +1870,7 @@ void xxxCBShowListBoxWindow(
         /*
          * Scroll the currently selected item to the top of the listbox.
          */
-        itemNumber = SendMessageWorker(pcbox->spwndList, LB_GETCURSEL,
+        itemNumber = (int)SendMessageWorker(pcbox->spwndList, LB_GETCURSEL,
                 0, 0, FALSE);
         if (itemNumber == -1) {
             itemNumber = 0;
@@ -1663,7 +1883,7 @@ void xxxCBShowListBoxWindow(
          * will be turned off when the listbox is visible.  Tandy wants this for
          * his typical reasons...
          */
-        NtUserInvalidateRect(hwnd, &pcbox->editrc, TRUE);
+        NtUserInvalidateRect(hwnd, KPRECT_TO_PRECT(&pcbox->editrc), TRUE);
     }
 
     //
@@ -1681,7 +1901,7 @@ void xxxCBShowListBoxWindow(
     editrc.bottom = pcbox->spwnd->rcWindow.top  + pcbox->cyCombo;
 
     // List area
-    cyItem = SendMessageWorker(pcbox->spwndList, LB_GETITEMHEIGHT, 0, 0, FALSE);
+    cyItem = (int)SendMessageWorker(pcbox->spwndList, LB_GETITEMHEIGHT, 0, 0, FALSE);
 
     if (cyItem == 0) {
         // Make sure that it's not 0
@@ -1696,7 +1916,7 @@ void xxxCBShowListBoxWindow(
     iHeight = max(pcbox->cyDrop, pcbox->spwndList->rcWindow.bottom -
                                  pcbox->spwndList->rcWindow.top);
 
-    if (dwMult = SendMessageWorker(pcbox->spwndList, LB_GETCOUNT, 0, 0, FALSE)) {
+    if (dwMult = (DWORD)SendMessageWorker(pcbox->spwndList, LB_GETCOUNT, 0, 0, FALSE)) {
         dwMult = (DWORD)(LOWORD(dwMult) * cyItem);
         dwMult += SYSMET(CYEDGE);
 
@@ -1715,14 +1935,19 @@ void xxxCBShowListBoxWindow(
     // and causing a repaint to help out Publisher 2.0's toolbar combos.
     // See comments for PressButton() above.
     //
-    if (editrc.bottom + iHeight <= rcScreen.bottom) {
+    pMonitor = _MonitorFromWindow(pcbox->spwnd, MONITOR_DEFAULTTOPRIMARY);
+    if (editrc.bottom + iHeight <= pMonitor->rcMonitor.bottom) {
         yTop = editrc.bottom;
         if (!pcbox->f3DCombo)
             yTop -= SYSMET(CYBORDER);
+
+        fAnimPos = TRUE;
     } else {
-        yTop = max(editrc.top - iHeight, 0);
+        yTop = max(editrc.top - iHeight, pMonitor->rcMonitor.top);
         if (!pcbox->f3DCombo)
             yTop += SYSMET(CYBORDER);
+
+        fAnimPos = FALSE;
     }
 
     if ( ! TestWF( pcbox->spwnd, WFWIN40COMPAT) )
@@ -1746,15 +1971,19 @@ void xxxCBShowListBoxWindow(
      * invalidate any of the SPB underneath the list window.
      */
     UpdateWindow(hwnd);
-    NtUserShowWindow(hwndList, SW_SHOWNA);
 
-#line 1748
+    if (!(TEST_EffectPUSIF(PUSIF_COMBOBOXANIMATION))
+        || (GetAppCompatFlags2(VER40) & GACF2_ANIMATIONOFF)) {
+        NtUserShowWindow(hwndList, SW_SHOWNA);
+    } else {
+        AnimateWindow(hwndList, CMS_QANIMATION, (fAnimPos ? AW_VER_POSITIVE :
+                AW_VER_NEGATIVE) | AW_SLIDE);
+    }
+
 #ifdef LATER
-#line 1749
-#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
-#line 1763
+#error Unselected original combo configuration
 #endif
-#line 1764
+#line 2011
 
     /*
      * Restart search buffer from first char
@@ -1794,6 +2023,7 @@ void xxxCBInternalUpdateEditWindow(
     LPWSTR pText = NULL;
     int sItem;
     HDC hdc;
+    UINT msg;
     HBRUSH hbrSave;
     HBRUSH hbrControl;
     HANDLE hOldFont;
@@ -1815,7 +2045,7 @@ void xxxCBInternalUpdateEditWindow(
     ThreadLock(pcbox->spwndList, &tlpwndList);
     ThreadLock(pcbox->spwndEdit, &tlpwndEdit);
 
-    sItem = SendMessageWorker(pcbox->spwndList, LB_GETCURSEL, 0, 0, FALSE);
+    sItem = (int)SendMessageWorker(pcbox->spwndList, LB_GETCURSEL, 0, 0, FALSE);
 
     /*
      * This 'try-finally' block ensures that the allocated 'pText' will
@@ -1823,25 +2053,26 @@ void xxxCBInternalUpdateEditWindow(
      */
     try {
         if (sItem != -1) {
-            cchText = SendMessageWorker(pcbox->spwndList, LB_GETTEXTLEN,
+            cchText = (int)SendMessageWorker(pcbox->spwndList, LB_GETTEXTLEN,
                     (DWORD)sItem, 0, FALSE);
             if ((pText = (LPWSTR)UserLocalAlloc(HEAP_ZERO_MEMORY, (cchText+1) * sizeof(WCHAR)))) {
-                SendMessageWorker(pcbox->spwndList, LB_GETTEXT,
-                        (DWORD)sItem, (long)pText, FALSE);
+                cchText = (int)SendMessageWorker(pcbox->spwndList, LB_GETTEXT,
+                        (DWORD)sItem, (LPARAM)pText, FALSE);
             }
         }
 
         if (!pcbox->fNoEdit) {
 
-            if (TestWF(pcbox->spwnd, CBFHASSTRINGS))
-                SetWindowText(HWq(pcbox->spwndEdit), pText ? pText : TEXT(""));
+            if (pcbox->spwndEdit) {
+                if (TestWF(pcbox->spwnd, CBFHASSTRINGS))
+                    SetWindowText(HWq(pcbox->spwndEdit), pText ? pText : TEXT(""));
 
-            if (pcbox->fFocus) {
-
-                /*
-                 * Only hilite the text if we have the focus.
-                 */
-                SendMessageWorker(pcbox->spwndEdit, EM_SETSEL, 0, MAXLONG, FALSE);
+                if (pcbox->fFocus) {
+                    /*
+                     * Only hilite the text if we have the focus.
+                     */
+                    SendMessageWorker(pcbox->spwndEdit, EM_SETSEL, 0, MAXLONG, !!TestWF(pcbox->spwnd, WFANSIPROC));
+                }
             }
         } else if (IsComboVisible(pcbox)) {
             if (hdcPaint) {
@@ -1853,16 +2084,16 @@ void xxxCBInternalUpdateEditWindow(
             SetBkMode(hdc, OPAQUE);
             if (TestWF(pcbox->spwnd, WFWIN40COMPAT)) {
                 if (TestWF(pcbox->spwnd, WFDISABLED))
-                    hbrControl = (HBRUSH)WM_CTLCOLORSTATIC;
+                    msg = WM_CTLCOLORSTATIC;
                 else
-                    hbrControl = (HBRUSH)WM_CTLCOLOREDIT;
+                    msg = WM_CTLCOLOREDIT;
             } else
-                hbrControl = (HBRUSH)WM_CTLCOLORLISTBOX;
+                msg = WM_CTLCOLORLISTBOX;
 
-            hbrControl = GetControlBrush(hwnd, hdc, (UINT) hbrControl);
+            hbrControl = GetControlBrush(hwnd, hdc, msg);
             hbrSave = SelectObject(hdc, hbrControl);
 
-            CopyInflateRect(&rc, &pcbox->editrc, SYSMET(CXBORDER), SYSMET(CYBORDER));
+            CopyInflateRect(&rc, KPRECT_TO_PRECT(&pcbox->editrc), SYSMET(CXBORDER), SYSMET(CYBORDER));
             PatBlt(hdc, rc.left, rc.top, rc.right - rc.left,
                 rc.bottom - rc.top, PATCOPY);
             InflateRect(&rc, -SYSMET(CXBORDER), -SYSMET(CYBORDER));
@@ -1896,14 +2127,17 @@ void xxxCBInternalUpdateEditWindow(
                  * Let the app draw the stuff in the static text box.
                  */
                 dis.CtlType = ODT_COMBOBOX;
-                dis.CtlID = (UINT)pcbox->spwnd->spmenu;
+                dis.CtlID = PtrToUlong(pcbox->spwnd->spmenu);
                 dis.itemID = sItem;
                 dis.itemAction = ODA_DRAWENTIRE;
                 dis.itemState = (UINT)
                     ((pcbox->fFocus && !pcbox->fLBoxVisible ? ODS_SELECTED : 0) |
                     (TestWF(pcbox->spwnd, WFDISABLED) ? ODS_DISABLED : 0) |
                     (pcbox->fFocus && !pcbox->fLBoxVisible ? ODS_FOCUS : 0) |
-                    (TestWF(pcbox->spwnd, WFWIN40COMPAT) ? ODS_COMBOBOXEDIT : 0));
+                    (TestWF(pcbox->spwnd, WFWIN40COMPAT) ? ODS_COMBOBOXEDIT : 0) |
+                    (TestWF(pcbox->spwnd, WEFPUIFOCUSHIDDEN) ? ODS_NOFOCUSRECT : 0) |
+                    (TestWF(pcbox->spwnd, WEFPUIACCELHIDDEN) ? ODS_NOACCEL : 0));
+
                 dis.hwndItem = hwnd;
                 dis.hDC = hdc;
                 CopyRect(&dis.rcItem, &rc);
@@ -1912,11 +2146,11 @@ void xxxCBInternalUpdateEditWindow(
                 // bounds.
                 IntersectClipRect(hdc, rc.left, rc.top, rc.right, rc.bottom);
 
-                dis.itemData = (DWORD)SendMessageWorker(pcbox->spwndList,
+                dis.itemData = (ULONG_PTR)SendMessageWorker(pcbox->spwndList,
                         LB_GETITEMDATA, (UINT)sItem, 0, FALSE);
 
                 SendMessage(HW(pcbox->spwndParent), WM_DRAWITEM, dis.CtlID,
-                        (LONG)(LPDRAWITEMSTRUCT)&dis);
+                        (LPARAM)&dis);
             } else {
 
                 /*
@@ -1924,11 +2158,30 @@ void xxxCBInternalUpdateEditWindow(
                  * nice hilite border around the text.
                  */
 
-                ExtTextOut(hdc, rc.left + SYSMET(CXBORDER), rc.top + SYSMET(CYBORDER),
-                        ETO_CLIPPED | ETO_OPAQUE, &rc, pText ? pText : TEXT(""),
-                        cchText, NULL);
+                int x ;
+                UINT align ;
+
+                if (pcbox->fRightAlign ) {
+                    align = TA_RIGHT;
+                    x = rc.right - SYSMET(CXBORDER);
+                } else {
+                    x = rc.left + SYSMET(CXBORDER);
+                    align = 0;
+                }
+
+                if (pcbox->fRtoLReading )
+                    align |= TA_RTLREADING;
+
+                if (align)
+                    SetTextAlign(hdc, GetTextAlign(hdc) | align);
+
+                // Draw the text, leaving a gap on the left & top for selection.
+                ExtTextOut(hdc, x, rc.top + SYSMET(CYBORDER), ETO_CLIPPED | ETO_OPAQUE,
+                       &rc, pText ? pText : TEXT(""), cchText, NULL);
                 if (pcbox->fFocus && !pcbox->fLBoxVisible) {
-                    DrawFocusRect(hdc, &rc);
+                    if (!TestWF(pcbox->spwnd, WEFPUIFOCUSHIDDEN)) {
+                        DrawFocusRect(hdc, &rc);
+                    }
                 }
             }
 
@@ -1999,6 +2252,10 @@ void xxxCBUpdateListBoxWindow(
     TL tlpwndEdit;
     TL tlpwndList;
 
+    if (pcbox->spwndEdit == NULL) {
+        return;
+    }
+
     CheckLock(pcbox->spwnd);
 
     ThreadLock(pcbox->spwndList, &tlpwndList);
@@ -2008,16 +2265,16 @@ void xxxCBUpdateListBoxWindow(
      * +1 for null terminator
      */
 
-    cchText = SendMessageWorker(pcbox->spwndEdit, WM_GETTEXTLENGTH, 0, 0, FALSE);
+    cchText = (int)SendMessageWorker(pcbox->spwndEdit, WM_GETTEXTLENGTH, 0, 0, FALSE);
 
     if (cchText) {
         cchText++;
         pText = (LPWSTR)UserLocalAlloc(HEAP_ZERO_MEMORY, cchText*sizeof(WCHAR));
         if (pText != NULL) {
             try {
-                SendMessageWorker(pcbox->spwndEdit, WM_GETTEXT, cchText, (LONG)pText, FALSE);
-                sItem = SendMessageWorker(pcbox->spwndList, LB_FINDSTRING,
-                        (DWORD)-1L, (LONG)pText, FALSE);
+                SendMessageWorker(pcbox->spwndEdit, WM_GETTEXT, cchText, (LPARAM)pText, FALSE);
+                sItem = (int)SendMessageWorker(pcbox->spwndList, LB_FINDSTRING,
+                        (WPARAM)-1L, (LPARAM)pText, FALSE);
             } finally {
                 UserLocalFree((HANDLE)pText);
             }
@@ -2108,8 +2365,9 @@ void xxxCBGetFocusHelper(
          * Invert the static text rectangle
          */
         xxxCBInvertStaticWindow(pcbox, TRUE, (HDC)NULL);
-    } else {
-        SendMessageWorker(pcbox->spwndEdit, EM_SETSEL, 0, MAXLONG, FALSE);
+    } else if (pcbox->spwndEdit) {
+        UserAssert(pcbox->spwnd);
+        SendMessageWorker(pcbox->spwndEdit, EM_SETSEL, 0, MAXLONG, !!TestWF(pcbox->spwnd, WFANSIPROC));
     }
 
     pcbox->fFocus = TRUE;
@@ -2168,8 +2426,8 @@ void xxxCBKillFocusHelper(
          * Invert the static text rectangle
          */
         xxxCBInvertStaticWindow(pcbox, FALSE, (HDC)NULL);
-    } else {
-        SendMessageWorker(pcbox->spwndEdit, EM_SETSEL, 0, 0, FALSE);
+    } else if (pcbox->spwndEdit) {
+        SendMessageWorker(pcbox->spwndEdit, EM_SETSEL, 0, 0, !!TestWF(pcbox->spwnd, WFANSIPROC));
     }
 
     pcbox->fFocus = FALSE;
@@ -2198,7 +2456,7 @@ LONG xxxCBGetTextLengthHelper(
     TL tlpwndList;
 
     ThreadLock(pcbox->spwndList, &tlpwndList);
-    item = SendMessageWorker(pcbox->spwndList, LB_GETCURSEL, 0, 0, fAnsi);
+    item = (int)SendMessageWorker(pcbox->spwndList, LB_GETCURSEL, 0, 0, fAnsi);
 
     if (item == LB_ERR) {
 
@@ -2207,7 +2465,7 @@ LONG xxxCBGetTextLengthHelper(
          */
         cchText = 0;
     } else {
-        cchText = SendMessageWorker(pcbox->spwndList, LB_GETTEXTLEN,
+        cchText = (int)SendMessageWorker(pcbox->spwndList, LB_GETTEXTLEN,
                 item, 0, fAnsi);
     }
 
@@ -2252,7 +2510,7 @@ LONG xxxCBGetTextHelper(
     }
 
     ThreadLock(pcbox->spwndList, &tlpwndList);
-    item = SendMessageWorker(pcbox->spwndList, LB_GETCURSEL, 0, 0, fAnsi);
+    item = (int)SendMessageWorker(pcbox->spwndList, LB_GETCURSEL, 0, 0, fAnsi);
 
     if (item == LB_ERR) {
 
@@ -2263,7 +2521,7 @@ LONG xxxCBGetTextHelper(
         return 0;
     }
 
-    cchText = SendMessageWorker(pcbox->spwndList, LB_GETTEXTLEN, item, 0, fAnsi);
+    cchText = (int)SendMessageWorker(pcbox->spwndList, LB_GETTEXTLEN, item, 0, fAnsi);
 
     cchText++;
     if ((cchText <= cchString) ||
@@ -2273,8 +2531,8 @@ LONG xxxCBGetTextHelper(
          * everything.  Or if old 3.0 app.  (Norton used to pass 2 & expect 3
          * chars including the \0 in 3.0; Bug #7018 win31: vatsanp)
          */
-        dw = SendMessageWorker(pcbox->spwndList, LB_GETTEXT, item,
-                (LONG)pString, fAnsi);
+        dw = (int)SendMessageWorker(pcbox->spwndList, LB_GETTEXT, item,
+                (LPARAM)pString, fAnsi);
         ThreadUnlock(&tlpwndList);
         return dw;
     }
@@ -2289,7 +2547,7 @@ LONG xxxCBGetTextHelper(
     }
 
     try {
-        SendMessageWorker(pcbox->spwndList, LB_GETTEXT, item, (LONG)pText, fAnsi);
+        SendMessageWorker(pcbox->spwndList, LB_GETTEXT, item, (LPARAM)pText, fAnsi);
         if (fAnsi) {
             RtlCopyMemory((PBYTE)pString, (PBYTE)pText, cchString);
             ((LPSTR)pString)[cchString - 1] = 0;
