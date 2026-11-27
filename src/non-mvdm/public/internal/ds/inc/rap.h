@@ -88,6 +88,12 @@ Revision History:
 
 //typedef CHAR DESC_CHAR;
 
+//
+// Net buffers contain 32-bit pointers.
+//
+
+#define NETPTR DWORD
+
 // DESCLEN(desc): return number of characters (not including null) in desc:
 #define DESCLEN(desc)                   strlen(desc)
 
@@ -108,9 +114,8 @@ Revision History:
 
 #else // DESC_CHAR_UNICODE is defined
 #error Unsupported excluded original configuration
-#line 140
 #endif // DESC_CHAR_UNICODE is defined
-#line 141
+#line 147
 
 //typedef DESC_CHAR * LPDESC;
 
@@ -213,6 +218,22 @@ RapConvertSingleEntry (
     IN OUT LPDWORD BytesRequired,
     IN RAP_TRANSMISSION_MODE TransmissionMode,
     IN RAP_CONVERSION_MODE ConversionMode
+    );
+
+NET_API_STATUS
+RapConvertSingleEntryEx (
+    IN LPBYTE InStructure,
+    IN LPDESC InStructureDesc,
+    IN BOOL MeaninglessInputPointers,
+    IN LPBYTE OutBufferStart OPTIONAL,
+    OUT LPBYTE OutStructure OPTIONAL,
+    IN LPDESC OutStructureDesc,
+    IN BOOL SetOffsets,
+    IN OUT LPBYTE *StringLocation OPTIONAL,
+    IN OUT LPDWORD BytesRequired,
+    IN RAP_TRANSMISSION_MODE TransmissionMode,
+    IN RAP_CONVERSION_MODE ConversionMode,
+    IN UINT_PTR Bias
     );
 
 //

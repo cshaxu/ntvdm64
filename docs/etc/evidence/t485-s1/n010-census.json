@@ -1,0 +1,48 @@
+{
+  "before": {
+    "files": 1319,
+    "byte_identical": 721,
+    "nonerror_identical": 723,
+    "nonerror_different": 596,
+    "nonerror_points": 7773,
+    "nonerror_lines": 222087
+  },
+  "after": {
+    "files": 1319,
+    "byte_identical": 729,
+    "nonerror_identical": 731,
+    "nonerror_different": 588,
+    "nonerror_points": 7765,
+    "nonerror_lines": 214351
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 8,
+    "nonerror_identical": 8,
+    "nonerror_different": -8,
+    "nonerror_points": -8,
+    "nonerror_lines": -7736
+  },
+  "baseline_counts_before": {
+    "XP": 1163,
+    "OpenNT": 154,
+    "OpenNT-4.5": 2
+  },
+  "baseline_counts_after": {
+    "XP": 1172,
+    "OpenNT": 145,
+    "OpenNT-4.5": 2
+  },
+  "baseline_changes": [
+    "src/non-mvdm/ds/netapi/rap/ascii.c",
+    "src/non-mvdm/ds/netapi/rap/auxdata.c",
+    "src/non-mvdm/ds/netapi/rap/convert.c",
+    "src/non-mvdm/ds/netapi/rap/examine.c",
+    "src/non-mvdm/ds/netapi/rap/parmnum.c",
+    "src/non-mvdm/ds/netapi/rap/pointer.c",
+    "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+    "src/non-mvdm/public/internal/ds/inc/rap.h",
+    "src/non-mvdm/public/internal/ds/inc/rapgtpt.h"
+  ],
+  "scope": "Tracked original files under mvdm-host/non-mvdm, including original build/resource files; excludes guest and project README records. Binary originals retained in file census; unchanged binary originals have zero textual differences."
+}

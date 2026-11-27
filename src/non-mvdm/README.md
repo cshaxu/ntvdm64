@@ -2847,3 +2847,11 @@ ntcsrdll.h is now byte-exact XP; current ntcsrmsg.h remains byte-exact.
 also supersede prior newline-only differences in N002/N003, with callconv.inc
 recorded as a separate association. Kernel pragma exclusions keep their
 original guards; active diagnostic line mapping is preserved.
+
+### T485 S14 N010 RAP
+
+Seven ds/netapi/rap sources are byte-exact XP SP1. Paired rap.h and rapgtpt.h
+lead N017 from XP public/internal/net/inc and ds/netapi/inc respectively,
+retaining current include locations until that directory migration. rapgtpt.h
+is byte-exact; rap.h preserves only the existing unsupported Unicode descriptor
+#error and active original line map. See [N010 evidence](../../docs/etc/evidence/t485-s1/n010.md).

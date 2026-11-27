@@ -57,7 +57,6 @@ Revision History:
 #include <rap.h>                // My prototype, LPDESC.
 #include <remtypes.h>           // REM_WORD, etc.
 
-
 VOID
 RapExamineDescriptor (
     IN LPDESC DescriptorString,
@@ -138,6 +137,8 @@ Return Value:
        worstAlignmentSoFar = value;        \
     }
 
+#define POINTER_SIZE (Native ? sizeof(PVOID) : sizeof(DWORD))
+
     //
     // Check for wierdness that could break null pointer handling.
     //
@@ -206,12 +207,11 @@ Return Value:
                 UPDATE_WORST_ALIGNMENT( ALIGN_LPBYTE );
                 lastPointerOffset = size;
 
-                size += sizeof(LPBYTE);
-
+                size += POINTER_SIZE;
 
             } else {
 
-                size += sizeof(LPBYTE);
+                size += POINTER_SIZE;
                 UPDATE_WORST_ALIGNMENT( ALIGN_BYTE );
 
             }
@@ -289,7 +289,7 @@ Return Value:
 
             size = RapPossiblyAlignCount(size, ALIGN_LPSTR, Native);
             lastPointerOffset = size;
-            size += sizeof(LPSTR);
+            size += POINTER_SIZE;
             UPDATE_WORST_ALIGNMENT( ALIGN_LPBYTE );
             (void) RapDescStringLength( s );
 
@@ -318,7 +318,7 @@ Return Value:
         case REM_NULL_PTR:              // null ptr
 
             size = RapPossiblyAlignCount(size, ALIGN_LPSTR, Native);
-            size += sizeof(LPSTR);
+            size += POINTER_SIZE;
             UPDATE_WORST_ALIGNMENT( ALIGN_LPBYTE );
 
             break;

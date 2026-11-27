@@ -100,4 +100,47 @@ Revision History:
         }                                                    \
     }
 
+//
+// DWORD_PTR
+// RapGetDword_Ptr(
+//     IN LPBYTE Ptr,  // Assumed aligned if Native is true.
+//     IN BOOL Native
+//     );
+//
+#ifdef _WIN64
+#define RapGetDword_Ptr(Ptr,Native)        \
+    ( (Native)                             \
+    ? ( * (PDWORD_PTR) (LPVOID) (Ptr) )   \
+    : (((DWORD_PTR) SmbGetUlong( (LPDWORD) (Ptr) )) \
+    | (((DWORD_PTR) SmbGetUlong( (LPDWORD) (Ptr) )) << 32) \
+       ) )
+#else
+#define RapGetDword_Ptr(Ptr,Native)        \
+    ( (Native)                             \
+    ? ( * (PDWORD_PTR) (LPVOID) (Ptr) )   \
+    : (((DWORD_PTR) SmbGetUlong( (LPDWORD) (Ptr) )) \
+       ) )
+#endif
+
+//
+// VOID
+// RapPutDword_Ptr(
+//     OUT LPBYTE Ptr,  // Assumed aligned if Native is true.
+//     IN DWORD_PTR Value,
+//     IN BOOL Native
+//     );
+//
+#ifdef _WIN64
+#define RapPutDword_Ptr(Ptr,Value,Native)                    \
+    {                                                        \
+        RapPutDword(Ptr, (DWORD)(DWORD_PTR) Value, Native);  \
+        RapPutDword( ((LPDWORD) Ptr + 1), (DWORD)((DWORD_PTR) Value >> 32), Native);  \
+    }
+#else
+#define RapPutDword_Ptr(Ptr,Value,Native)                    \
+    {                                                        \
+        RapPutDword(Ptr, (DWORD)(DWORD_PTR) Value, Native);  \
+    }
+#endif
+
 #endif // ndef _RAPGTPT_

@@ -30,6 +30,25 @@ passing evidence; a retry never erases a failed attempt or proves its root
 cause repaired. Documentation-only changes do not invalidate runtime evidence.
 Code changes require explicit affected-gate analysis under the existing
 verification rules, not an automatic reason to repeat unrelated passing gates.
+## Mirror-change commit census
+
+Owner update 2026-11-27: every commit that changes mirrored code reports the
+entire current non-guest mirror population, its pre-commit values, and the
+commit delta. Required fields: total files, byte-identical files, identical
+files after excluding supported #error branch bodies, differing files after
+that exclusion, and remaining diff points and changed lines. The two
+post-exclusion file counts must sum to the population. Keep line endings,
+EOF and #line differences in the byte-sensitive calculation.
+
+Use the pinned XP SP1 object for each migrated file and its registered pinned
+OpenNT object for each not-yet-migrated file. Record paired dependencies that
+lead their directory migration individually. Do not switch an entire directory
+because one prerequisite header has migrated. Identify original objects and
+current hashes per file; reuse old measurements only for identical file hash
+and identical baseline/exclusion evidence. Report baseline transitions and
+mirror additions/removals separately from edit-only changes. Never substitute
+batch-only or newline-normalized totals for this full-population report.
+
 ## Request Lifecycle
 
 1. Read the task reading set in [docs/README.md](../README.md) and re-read the

@@ -8,8 +8,8 @@ Module Name:
 
 Abstract:
 
-    This module contains RapConvertSingleEntry, a routine which is used by
-    XactSrv and RpcXlate.
+    This module contains RapConvertSingleEntry and RapConvertSingleEntryEx,
+    routines used by XactSrv and RpcXlate.
 
 Author:
 
@@ -131,9 +131,46 @@ Revision History:
 #include <prefix.h>     // PREFIX_ equates.
 #include <timelib.h>    // NetpGmtTimeToLocalTime(), etc.
 
+#define RAP_POINTER_SIZE( _isNative, _SetOffsets )  (_isNative ? sizeof(LPVOID) : sizeof(DWORD) )
+#define RAP_PUT_POINTER( _SetOffsets, Ptr, Value, Native ) if (Native) {RapPutDword_Ptr( Ptr, Value, Native ); } else { RapPutDword( Ptr, Value, Native );}
+
+PVOID
+RapGetPointer(
+    IN PVOID InStructure,
+    IN BOOL InNative,
+    IN UINT_PTR Bias
+    )
+{
+    UINT_PTR Value;
+
+    if ( InNative ) {
+        // remark: used to call RapGetDword but that truncated
+        // 64 bit pointers. See bug 104264 for more.
+        Value = * (UINT_PTR*) (InStructure);
+    }
+    else {
+        Value = SmbGetUlong( (LPDWORD) (InStructure) );
+    }
+
+#if defined(_WIN64)
+
+    //
+    // For 64-bit, RapSetPointer() stores only the buffer offset.  This,
+    // together with the original address of the buffer (Bias) yields the
+    // pointer value.
+    //
+
+    if( Value != 0 ) {
+        Value += Bias;
+    }
+
+#endif
+
+    return (PVOID)Value;
+}
 
 NET_API_STATUS
-RapConvertSingleEntry (
+RapConvertSingleEntryEx (
     IN LPBYTE InStructure,
     IN LPDESC InStructureDesc,
     IN BOOL MeaninglessInputPointers,
@@ -144,7 +181,8 @@ RapConvertSingleEntry (
     IN OUT LPBYTE *StringLocation OPTIONAL,
     IN OUT LPDWORD BytesRequired,
     IN RAP_TRANSMISSION_MODE TransmissionMode,
-    IN RAP_CONVERSION_MODE ConversionMode
+    IN RAP_CONVERSION_MODE ConversionMode,
+    IN UINT_PTR Bias
     )
 
 /*++
@@ -201,6 +239,9 @@ Arguments:
     Conversion Mode - Indicates whether this is a RAP-to-native, native-to-RAP,
         or native-to-native conversion.
 
+    Bias - Indicates the bias that must be applied to embedded pointers
+        before dereferencing them.
+
 Return Value:
 
     None.
@@ -218,7 +259,7 @@ Return Value:
     DESC_CHAR currentInStructureDesc;
 
     NetpAssert( sizeof(CHAR) == sizeof(BYTE) );
-
+    
     switch (ConversionMode) {
     case NativeToNative : inNative=TRUE ; outNative=TRUE ; break;
     case NativeToRap    : inNative=TRUE ; outNative=FALSE; break;
@@ -228,6 +269,16 @@ Return Value:
         NetpKdPrint(( PREFIX_NETRAP
                 "RapConvertSingleEntry: invalid conversion mode!\n"));
         NetpAssert(FALSE);
+        return ERROR_INVALID_PARAMETER;
+    }
+
+    //
+    // Make sure there's actually some data to convert
+    //
+
+    if ( *InStructureDesc != '\0' && InStructure == NULL )
+    {
+        return ERROR_INVALID_PARAMETER;
     }
 
     // Policy: native format implies TCHARs, RAP format imples default codepage.
@@ -334,8 +385,8 @@ Return Value:
                 outLength = RapDescArrayLength( OutStructureDesc );
 
                 //
-                // Assumption - the array sizes should match.
-                // BUGBUG: UNICODE conversion if one len is twice the other!
+                // Assumption - the array sizes should match.  If one length
+                // is twice the other, do the appropriate Ansi/Unicode conversion.
                 //
 
                 NetpAssert( inLength > 0 );
@@ -365,17 +416,9 @@ Return Value:
                 } else if (inLength == (DWORD) (2*outLength)) {
                     NetpAssert( sizeof(TCHAR) == (2*sizeof(CHAR)) );
                     if ( fixedWrite ) {
-#ifdef DBCS // RapConvertSingleEntry()
-#line 369
-#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
-#line 372
-#else
-#line 373
-                        NetpCopyWStrToStr(
+                        NetpCopyWStrToStrDBCS(
                                 (LPSTR) OutStructure,       // dest
                                 (LPWSTR) InStructure);      // src
-#endif // DBCS
-#line 377
                         OutStructure += outLength;
                     }
                     InStructure += inLength;
@@ -445,7 +488,7 @@ Return Value:
 
                     offset = (LPDWORD) OutStructure;
                     if ( fixedWrite ) {
-                        OutStructure += sizeof(LPBYTE);
+                        OutStructure += RAP_POINTER_SIZE( outNative, SetOffsets );
                     }
                     IF_DEBUG(CONVERT) {
                         NetpKdPrint(( PREFIX_NETRAP
@@ -454,8 +497,8 @@ Return Value:
                           (LPVOID) offset ));
                     }
 
-                    if ( (DWORD)*StringLocation <
-                             (DWORD)nextStructureLocation + outLength ) {
+                    if ( (ULONG_PTR)*StringLocation <
+                             (ULONG_PTR)nextStructureLocation + outLength ) {
 
                         //
                         // There isn't enough space to hold the data--it
@@ -465,7 +508,7 @@ Return Value:
                         //
 
                         if ( fixedWrite ) {
-                            RapPutDword( offset, (DWORD)NULL, outNative );
+                            RAP_PUT_POINTER( SetOffsets, offset, 0, outNative );
                         }
 
                         break;
@@ -504,11 +547,11 @@ Return Value:
                             IF_DEBUG(CONVERT) {
                                 NetpKdPrint(( PREFIX_NETRAP
                                         "RapConvertSingleEntry: B->b, "
-                                        "setting pointer " FORMAT_HEX_DWORD
-                                        "\n", (DWORD) (*StringLocation) ));
+                                        "setting pointer " FORMAT_POINTER
+                                        "\n", (DWORD_PTR) (*StringLocation) ));
                             }
-                            RapPutDword( offset,
-                                    (DWORD)( *StringLocation ),
+                            RapPutDword_Ptr( offset,
+                                    (DWORD_PTR)( *StringLocation ),
                                     outNative);
                         }
 
@@ -583,9 +626,9 @@ Return Value:
 
                     LPDWORD outData = RapPossiblyAlignPointer(
                             (LPDWORD)OutStructure, ALIGN_DWORD, outNative );
-                    DWORD data = (DWORD) * (LPDWORD)RapPossiblyAlignPointer(
+                    DWORD data = (DWORD) *(LPDWORD)RapPossiblyAlignPointer(
                             (LPDWORD)InStructure, ALIGN_DWORD, inNative );
-
+                                       
                     if ( data & 0x80 ) {
 
                         data |= 0xFFFFFF00;
@@ -645,20 +688,22 @@ Return Value:
                 //
 
                 InStructure += inLength;
-                if (inUNICODE) {
-#ifdef DBCS // RapConvertSingleEntry()
-#line 648
-#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
-#line 656
-#else
-#line 657
-                    stringSize = STRLEN( (LPTSTR) stringPtr );
-#endif // DBCS
-#line 659
-                } else {
-                    // BUGBUG: does this handle codepage right?
+                if (inUNICODE)
+                {
+                    if( outUNICODE )
+                    {
+                        stringSize = STRLEN( (LPTSTR) stringPtr );
+                    }
+                    else
+                    {
+                        stringSize = NetpUnicodeToDBCSLen( (LPTSTR)stringPtr ) + 1;
+                    }
+                }
+                else
+                {
                     stringSize = strlen( (LPSTR) stringPtr ) + 1;
                 }
+
                 if (outUNICODE) {
 
                     stringSize = STRING_SPACE_REQD( stringSize );
@@ -695,11 +740,11 @@ Return Value:
 
                     offset = (LPDWORD)OutStructure;
                     if ( fixedWrite ) {
-                        OutStructure += sizeof(LPSTR);
+                        OutStructure += RAP_POINTER_SIZE(outNative, SetOffsets);
                     }
 
-                    if ( (DWORD)*StringLocation <
-                             (DWORD)nextStructureLocation + stringSize ) {
+                    if ( (ULONG_PTR)*StringLocation <
+                             (ULONG_PTR)nextStructureLocation + stringSize ) {
 
                         //
                         // There isn't enough space to hold the string--it
@@ -709,7 +754,7 @@ Return Value:
                         //
 
                         if ( fixedWrite ) {
-                            RapPutDword( offset, (DWORD)NULL, outNative );
+                            RAP_PUT_POINTER( SetOffsets, offset, 0, outNative );
                         }
 
                         break;
@@ -733,7 +778,7 @@ Return Value:
                                 (DWORD)( *StringLocation - OutBufferStart),
                                 outNative );
                         } else {
-                            RapPutDword( offset, (DWORD)*StringLocation,
+                            RapPutDword_Ptr( offset, (DWORD_PTR)*StringLocation,
                                 outNative );
                         }
                     }
@@ -748,16 +793,8 @@ Return Value:
 
                     } else if ( inUNICODE ) {
 
-#ifdef DBCS // RapConvertSingleEntry()
-#line 753
-#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
-#line 755
-#else
-#line 756
-                        NetpCopyTStrToStr( (LPSTR)*StringLocation,
+                        NetpCopyWStrToStrDBCS( (LPSTR)*StringLocation,
                             (LPTSTR)stringPtr );
-#endif // DBCS
-#line 759
 
                     } else if ( outUNICODE ) {
 
@@ -798,7 +835,7 @@ Return Value:
             // really stored.
             //
 
-            bytePtr = (LPBYTE)RapGetDword( InStructure, inNative );
+            bytePtr = RapGetPointer( InStructure, inNative, Bias );
 
             if ( MeaninglessInputPointers && bytePtr != NULL ) {
                 bytePtr = variableInputData;
@@ -815,8 +852,8 @@ Return Value:
             // Update the InStructure pointer.
             //
 
-            InStructure += sizeof(LPBYTE);
-
+            InStructure += RAP_POINTER_SIZE( inNative, FALSE );
+                        
             switch ( *OutStructureDesc++ ) {
 
             case REM_BYTE: {
@@ -887,11 +924,12 @@ Return Value:
                 if ( bytePtr == NULL ) {
 
                     if ( fixedWrite ) {
-                        RapPutDword(
-                                (LPDWORD)OutStructure,
-                                (DWORD)NULL,
-                                outNative );
-                        OutStructure += sizeof(LPBYTE);
+                        RAP_PUT_POINTER(
+                                    SetOffsets,
+                                    (LPDWORD)OutStructure,
+                                    0,
+                                    outNative );
+                        OutStructure += RAP_POINTER_SIZE( outNative, SetOffsets );                       
                     }
 
                     break;
@@ -918,7 +956,7 @@ Return Value:
 
                     offset = (LPDWORD) OutStructure;
                     if ( fixedWrite ) {
-                        OutStructure += sizeof(LPBYTE);
+                        OutStructure += RAP_POINTER_SIZE( outNative, SetOffsets );
                     }
                     IF_DEBUG(CONVERT) {
                         NetpKdPrint(( PREFIX_NETRAP
@@ -927,8 +965,8 @@ Return Value:
                           (LPVOID) offset ));
                     }
 
-                    if ( (DWORD)*StringLocation <
-                             (DWORD)nextStructureLocation + outLength ) {
+                    if ( (ULONG_PTR)*StringLocation <
+                             (ULONG_PTR)nextStructureLocation + outLength ) {
 
                         //
                         // There isn't enough space to hold the data--it
@@ -938,7 +976,7 @@ Return Value:
                         //
 
                         if ( fixedWrite ) {
-                            RapPutDword( offset, (DWORD)NULL, outNative );
+                            RAP_PUT_POINTER( SetOffsets, offset, 0, outNative );
                         }
 
                         break;
@@ -977,11 +1015,11 @@ Return Value:
                             IF_DEBUG(CONVERT) {
                                 NetpKdPrint(( PREFIX_NETRAP
                                         "RapConvertSingleEntry: b->b, "
-                                        "setting pointer " FORMAT_HEX_DWORD
-                                        "\n", (DWORD) (*StringLocation) ));
+                                        "setting pointer " FORMAT_POINTER
+                                        "\n", (DWORD_PTR) (*StringLocation) ));
                             }
-                            RapPutDword( offset,
-                                    (DWORD)( *StringLocation ),
+                            RapPutDword_Ptr( offset,
+                                    (DWORD_PTR)( *StringLocation ),
                                     outNative);
                         }
 
@@ -1034,7 +1072,7 @@ Return Value:
             // of NULL is relevant.
             //
 
-            stringPtr = (LPVOID)RapGetDword( InStructure, inNative );
+            stringPtr = RapGetPointer( InStructure, inNative, Bias );
 
             if ( MeaninglessInputPointers && stringPtr != NULL ) {
                 stringPtr = variableInputData;
@@ -1048,11 +1086,11 @@ Return Value:
             }
 
             //
-            // Update the InStructure pointer.
+            // Update the InStructure pointer
+            //    Take into account the fact that on Win64, pointers are 8 bytes, but Non-Native ones are 4 bytes
             //
-
-            InStructure += sizeof(LPSTR);
-
+            InStructure += RAP_POINTER_SIZE( inNative, FALSE );
+                        
             //
             // Fill in the output based on the descriptor.
             //
@@ -1089,14 +1127,7 @@ Return Value:
                     if (inUNICODE) {
                         stringSize = STRSIZE( (LPTSTR)stringPtr );
                         if (!outUNICODE) {
-#ifdef DBCS // RapConvertSingleEntry()
-#line 1091
-#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
-#else
-#line 1093
-                            stringSize = stringSize / sizeof(WCHAR);
-#endif // DBCS
-#line 1095
+                            stringSize = NetpUnicodeToDBCSLen( (LPTSTR)stringPtr )+1;
                         }
                     } else {
                         stringSize = strlen( (LPSTR)stringPtr ) + 1;
@@ -1134,8 +1165,6 @@ Return Value:
                 // Copy either the entire string or the number of bytes
                 // that will fit, whichever is less.  Make sure that
                 // we leave at least one byte for a zero terminator.
-                //
-                // BUGBUG - This might need to be cleaned up.
                 //
 
                 if ( fixedWrite && stringPtr != NULL ) {
@@ -1178,16 +1207,8 @@ Return Value:
                             if ( Source == NULL ) {
                                 return NERR_NoRoom;
                             }
-#ifdef DBCS // RapConvertSingleEntry()
-#line 1177
-#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
-#line 1179
-#else
-#line 1180
-                            NetpCopyTStrToStr( Source,
+                            NetpCopyWStrToStrDBCS( Source,
                                 (LPTSTR)stringPtr );
-#endif // DBCS
-#line 1183
                             stringPtr = (LPBYTE)Source;
                         }
 
@@ -1258,11 +1279,12 @@ Return Value:
                 if ( stringPtr == NULL ) {
 
                     if ( fixedWrite ) {
-                        RapPutDword(
+                        RAP_PUT_POINTER(
+                                SetOffsets,
                                 (LPDWORD)OutStructure,
-                                (DWORD)NULL,
+                                0,
                                 outNative );
-                        OutStructure += sizeof(LPSTR);
+                        OutStructure += RAP_POINTER_SIZE( outNative, SetOffsets );
                     }
 
                     break;
@@ -1274,15 +1296,14 @@ Return Value:
                 //
 
                 if (inUNICODE) {
-#ifdef DBCS // RapConvertSingleEntry ()
-#line 1270
-#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
-#line 1278
-#else
-#line 1279
-                    stringLength = STRLEN( (LPTSTR)stringPtr ) + 1;
-#endif // DBCS
-#line 1281
+                    if( outUNICODE )
+                    {
+                        stringLength = STRLEN( (LPTSTR)stringPtr ) + 1;
+                    }
+                    else
+                    {
+                        stringLength = NetpUnicodeToDBCSLen( (LPTSTR)stringPtr ) + 1;
+                    }
                 } else {
                     stringLength = strlen( (LPSTR)stringPtr ) + 1;
                 }
@@ -1339,7 +1360,7 @@ Return Value:
                 if ( outputBufferSupplied ) {
                     offset = (LPDWORD) OutStructure;
                     if ( fixedWrite ) {
-                        OutStructure += sizeof(LPSTR);
+                        OutStructure += RAP_POINTER_SIZE( outNative, SetOffsets );
                     }
                     IF_DEBUG(CONVERT) {
                         NetpKdPrint(( PREFIX_NETRAP
@@ -1347,8 +1368,8 @@ Return Value:
                                 "offset after alignment is " FORMAT_LPVOID "\n",
                                 (LPVOID) offset ));
                     }
-                    if ( (DWORD)*StringLocation <
-                             (DWORD)nextStructureLocation + stringSize ) {
+                    if ( (ULONG_PTR)*StringLocation <
+                             (ULONG_PTR)nextStructureLocation + stringSize ) {
 
                         //
                         // There isn't enough space to hold the string--it
@@ -1358,7 +1379,7 @@ Return Value:
                         //
 
                         if ( fixedWrite ) {
-                            RapPutDword( offset, (DWORD)NULL, outNative );
+                            RAP_PUT_POINTER( SetOffsets, offset, 0, outNative );
                         }
 
                         break;
@@ -1397,17 +1418,16 @@ Return Value:
                             IF_DEBUG(CONVERT) {
                                 NetpKdPrint(( PREFIX_NETRAP
                                         "RapConvertSingleEntry: z->z, "
-                                        "setting pointer " FORMAT_HEX_DWORD
-                                        "\n", (DWORD) (*StringLocation) ));
+                                        "setting pointer " FORMAT_POINTER
+                                        "\n", (DWORD_PTR) (*StringLocation) ));
                             }
-                            RapPutDword( offset,
-                                    (DWORD)( *StringLocation ),
+                            RapPutDword_Ptr( offset,
+                                    (DWORD_PTR)( *StringLocation ),
                                     outNative);
                         }
 
                         //
                         // Copy over the string, truncating if necessary.
-                        // BUGBUG - Clean some of this up.
                         //
 
                         if ( inUNICODE && outUNICODE ) {
@@ -1419,12 +1439,6 @@ Return Value:
 
                         } else if ( inUNICODE ) {
 
-#ifdef DBCS // RapConvertSingleEntry ()
-#line 1418
-#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
-#line 1420
-#else
-#line 1421
                             LPTSTR Source;
 
                             Source = NetpMemoryAllocate(
@@ -1436,13 +1450,10 @@ Return Value:
                                 stringLength - 1 );
                             Source[stringLength - 1] = TCHAR_EOS;
 
-                            NetpCopyTStrToStr( (LPSTR)*StringLocation,
+                            NetpCopyWStrToStrDBCS( (LPSTR)*StringLocation,
                                 Source );
 
                             NetpMemoryFree( Source );
-
-#endif // DBCS
-#line 1438
 
 
                         } else if ( outUNICODE ) {
@@ -1491,12 +1502,6 @@ Return Value:
                 inLength = RapDescStringLength( InStructureDesc );
                 outLength = RapDescArrayLength( OutStructureDesc );
 
-                //
-                // BUGBUG: This wasn't here before.  It seems like it should
-                //     have been, but then again, no one complained.  So
-                //     maybe it shouldn't.
-                //
-
                 if ( fixedWrite ) {
                     OutStructure = RapPossiblyAlignPointer(
                                        OutStructure, ALIGN_LPSTR, outNative );
@@ -1542,11 +1547,12 @@ Return Value:
                 if ( stringPtr == NULL ) {
 
                     if ( fixedWrite ) {
-                        RapPutDword(
+                        RAP_PUT_POINTER(
+                                SetOffsets,
                                 (LPDWORD)OutStructure,
-                                (DWORD)NULL,
+                                0,
                                 outNative );
-                        OutStructure += sizeof(LPSTR);
+                        OutStructure += RAP_POINTER_SIZE( outNative, SetOffsets );
                     }
 
                     break;
@@ -1569,11 +1575,11 @@ Return Value:
                 if ( outputBufferSupplied ) {
                     offset = (LPDWORD)OutStructure;
                     if ( fixedWrite ) {
-                        OutStructure += sizeof( LPBYTE );
+                        OutStructure += RAP_POINTER_SIZE( outNative, SetOffsets );
                     }
 
-                    if ( (DWORD)*StringLocation <
-                             (DWORD)nextStructureLocation + outLength ) {
+                    if ( (ULONG_PTR)*StringLocation <
+                             (ULONG_PTR)nextStructureLocation + outLength ) {
 
                         //
                         // There isn't enough space to hold the array--it
@@ -1583,7 +1589,7 @@ Return Value:
                         //
 
                         if ( fixedWrite ) {
-                            RapPutDword( offset, (DWORD)NULL, outNative );
+                            RAP_PUT_POINTER( SetOffsets, offset, 0, outNative );
                         }
 
                         break;
@@ -1608,9 +1614,9 @@ Return Value:
                                     (DWORD)( *StringLocation - OutBufferStart ),
                                     outNative );
                         } else {
-                            RapPutDword(
+                            RapPutDword_Ptr(
                                     offset,
-                                    (DWORD)( *StringLocation ),
+                                    (DWORD_PTR)( *StringLocation ),
                                     outNative );
                         }
                     }
@@ -1768,14 +1774,15 @@ Return Value:
                         OutStructureDesc );  // updated by this call
 
                 if ( fixedWrite ) {
-                    RapPutDword(
+                    RAP_PUT_POINTER(
+                            SetOffsets,
                             (LPDWORD)OutStructure,
-                            (DWORD)NULL,
+                            0,
                             outNative );
-                    OutStructure += sizeof(LPSTR);
+                    OutStructure += RAP_POINTER_SIZE( outNative, SetOffsets );
                 }
 
-                InStructure += sizeof(LPSTR);
+                InStructure += RAP_POINTER_SIZE( inNative, FALSE );
                 break;
             }
 
@@ -2041,7 +2048,7 @@ Return Value:
             // really stored.
             //
 
-            bytePtr = (LPBYTE)RapGetDword( InStructure, inNative );
+            bytePtr = RapGetPointer( InStructure, inNative, Bias );
 
             if ( MeaninglessInputPointers && bytePtr != NULL ) {
                 bytePtr = variableInputData;
@@ -2073,8 +2080,7 @@ Return Value:
             //
             // Update the InStructure pointer.
             //
-
-            InStructure += sizeof(LPBYTE);
+            InStructure += RAP_POINTER_SIZE( inNative, FALSE );           
 
             switch ( *OutStructureDesc++ ) {
 
@@ -2104,11 +2110,12 @@ Return Value:
                 if ( bytePtr == NULL ) {
 
                     if ( fixedWrite ) {
-                        RapPutDword(
+                        RAP_PUT_POINTER(
+                                SetOffsets,
                                 (LPDWORD)OutStructure,
-                                (DWORD)NULL,
+                                0,
                                 outNative );
-                        OutStructure += sizeof(LPBYTE);
+                        OutStructure += RAP_POINTER_SIZE( outNative, SetOffsets );
                     }
 
                     break;
@@ -2144,8 +2151,8 @@ Return Value:
                           (LPVOID) offset ));
                     }
 
-                    if ( (DWORD)*StringLocation <
-                             (DWORD)nextStructureLocation + length ) {
+                    if ( (ULONG_PTR)*StringLocation <
+                             (ULONG_PTR)nextStructureLocation + length ) {
 
                         //
                         // There isn't enough space to hold the data--it
@@ -2155,7 +2162,7 @@ Return Value:
                         //
 
                         if ( fixedWrite ) {
-                            RapPutDword( offset, (DWORD)NULL, outNative );
+                            RAP_PUT_POINTER( SetOffsets, offset, 0, outNative );
                         }
 
                         break;
@@ -2194,11 +2201,11 @@ Return Value:
                             IF_DEBUG(CONVERT) {
                                 NetpKdPrint(( PREFIX_NETRAP
                                         "RapConvertSingleEntry: l->l, "
-                                        "setting pointer " FORMAT_HEX_DWORD
-                                        "\n", (DWORD) (*StringLocation) ));
+                                        "setting pointer " FORMAT_POINTER
+                                        "\n", (DWORD_PTR) (*StringLocation) ));
                             }
-                            RapPutDword( offset,
-                                    (DWORD)( *StringLocation ),
+                            RapPutDword_Ptr( offset,
+                                    (DWORD_PTR)( *StringLocation ),
                                     outNative);
                         }
 
@@ -2373,4 +2380,99 @@ Return Value:
 
     return NERR_Success;
 
-} // RapConvertSingleEntry
+} // RapConvertSingleEntryEx
+
+
+NET_API_STATUS
+RapConvertSingleEntry (
+    IN LPBYTE InStructure,
+    IN LPDESC InStructureDesc,
+    IN BOOL MeaninglessInputPointers,
+    IN LPBYTE OutBufferStart OPTIONAL,
+    OUT LPBYTE OutStructure OPTIONAL,
+    IN LPDESC OutStructureDesc,
+    IN BOOL SetOffsets,
+    IN OUT LPBYTE *StringLocation OPTIONAL,
+    IN OUT LPDWORD BytesRequired,
+    IN RAP_TRANSMISSION_MODE TransmissionMode,
+    IN RAP_CONVERSION_MODE ConversionMode
+    )
+
+/*++
+
+Routine Description:
+
+    This routine converts a single structure from one representation to
+    another.  The representations are described by the descriptor strings
+    (see the "OS/2 Lanman Remote Admin Protocol" spec).
+
+    If there isn't enough space in the buffer for the entire structure,
+    this routine simply updates the BytesRequired parameter.  Therefore,
+    callers have a convenient mechanism for determining the total buffer
+    size required to get all the information without special-casing for
+    buffer overflow.
+
+Arguments:
+
+    InStructure - a pointer to the input structure.
+
+    InStructureDesc - the descriptor string for the input string.
+
+    MeaninglessInputPointers - if TRUE, then all pointers in the input
+        structure are meaningless.  This routine should assume that
+        the first variable data immediately follows the input structure,
+        and the rest of the variable data follows in order.
+
+    OutBufferStart - the first byte in the output buffer.  For Enum APIs,
+        this is used to calculate offsets from the start of the buffer
+        for string pointers.  (This pointer may be null, to allow length
+        computations only.)
+
+    OutStructure - a pointer to where to put the actual output structure.
+        (This pointer may be null, to allow length computations only.)
+
+    OutStructureDesc - the descriptor string for the output structure.
+
+    SetOffsets - TRUE if pointer values in the output structure should
+        actually be set to the offset from the beginning of the structure.
+        FALSE if the actual addresses should be used.
+
+    StringLocation - the *last* location for variable-length data.  The
+        data will be placed before this location and the pointer will
+        be updated to reflect the data added.
+
+    BytesRequired - the total number of bytes that would be required to
+        store the complete output structure.  This allows the calling
+        routine to track the total required for all information without
+        worrying about buffer overflow.
+
+    Transmission Mode - Indicates whether this array is part of a response,
+        a request, or both.
+
+    Conversion Mode - Indicates whether this is a RAP-to-native, native-to-RAP,
+        or native-to-native conversion.
+
+Return Value:
+
+    None.
+
+--*/
+
+{
+    NET_API_STATUS netStatus;
+
+    netStatus = RapConvertSingleEntryEx (InStructure,
+                                         InStructureDesc,
+                                         MeaninglessInputPointers,
+                                         OutBufferStart,
+                                         OutStructure,
+                                         OutStructureDesc,
+                                         SetOffsets,
+                                         StringLocation,
+                                         BytesRequired,
+                                         TransmissionMode,
+                                         ConversionMode,
+                                         0 );
+
+    return netStatus;
+}

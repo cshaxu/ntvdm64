@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S14** (Ordinary Mode). Resume N004-N012 after
 [S13 closure](../etc/evidence/t485-h-repair/s13-closure.md).
-Migration verified for delivery45/159 directories: H001-H036 and N001-N009.
+Migration verified for delivery46/159 directories: H001-H036 and N001-N010.
 The owner approved continuous execution; the [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S15-S20 and all remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains S15-S20 and all remaining migration/capability obligations.
 
 ## S14 Progress
 
-6/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
+7/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
 and [receipt](../etc/evidence/t485-s1/n004-result.json): XP vdm.c plus required
 original vdm.h; paired WOW registration field leads N005. Cached full build,
 dual13-image26hash publication, targeted tests and consolidated Full23/23 pass.
@@ -70,7 +70,16 @@ dual13-image26hash publication, x86/x64 capture3475 checks each and Full24/24
 pass. Nonerror XP byte diff14points/16684lines -> 11points/257lines; CSR
 normalized9points/500lines -> 5points/240lines. Eight modified files are XP
 byte-exact. No original guest change. This is the new ten-file Full checkpoint.
-Delivery remains45/159, S14 remains6/9; next migration is N010.
+[P8 N010 RAP](../etc/evidence/t485-s1/n010.md) delivered7 XP-byte-exact
+sources plus2 paired declarations; runtime10 cached full build, dual13-image
+26hash publication,11 RAP assertions and real guest NetAPI pass. Full remains
+P7 runtime9;9 files since checkpoint. [Global mixed-baseline census](../etc/evidence/t485-s1/n010-census.json):
+1319 files; byte-exact729; nonerror same731/different588;7765points/214351lines.
+P8 delta: total0, exact+8, nonerror same+8/different-8,points-8,lines-7736.
+1172 files use XP,147 retain registered OpenNT-family originals. Next is N011;
+S14 delivery7/9 and overall46/159. The census includes original build/resources,
+excludes guest and project README records, and separates9 baseline transitions.
+
 
 
 ## S13 Closure Record

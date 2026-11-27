@@ -1,0 +1,419 @@
+{
+  "task": "M0 T485 S14 P8 N010",
+  "status": "verified for delivery",
+  "runtime": "build/t485-s14/runtime10",
+  "build_exit": 0,
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "D7F27B36D4C66099987336B1129A08E56A1414C88A7A9CDA9235163F7D01EBFE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "D7F27B36D4C66099987336B1129A08E56A1414C88A7A9CDA9235163F7D01EBFE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "AE1525C98AA2652694316676246D60007DBB09961BC0B67B2DDFCAEABD52A616",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "AE1525C98AA2652694316676246D60007DBB09961BC0B67B2DDFCAEABD52A616",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "1AED343D36125B9B37BCF31DDD1F38C174EB0072AFC8B585E6C0AD2F1C16C518",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "1AED343D36125B9B37BCF31DDD1F38C174EB0072AFC8B585E6C0AD2F1C16C518",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "8D43A20542D4E603039DBF569C0DC4073E3D9ABC66A33F01C060FB34DF7E2D73",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "8D43A20542D4E603039DBF569C0DC4073E3D9ABC66A33F01C060FB34DF7E2D73",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "555548E91A0E319DEA7C63B2E281A4F1E4065A0DB4450CFD8DE988275A3171D2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "555548E91A0E319DEA7C63B2E281A4F1E4065A0DB4450CFD8DE988275A3171D2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "384DE2E26D874A10D72FEDB6D06BA8D0AEE47C2BC1F325549415CEF87CD724C4",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "384DE2E26D874A10D72FEDB6D06BA8D0AEE47C2BC1F325549415CEF87CD724C4",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "DEDB609C91F128F750B1884D77B8D5A09F89F0B86C2535EDB21191845BF38D59",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "DEDB609C91F128F750B1884D77B8D5A09F89F0B86C2535EDB21191845BF38D59",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "C208F75F85623143AD7649BB40D8592F8BD07BD16108A656014C72FA7F1B77FD",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "C208F75F85623143AD7649BB40D8592F8BD07BD16108A656014C72FA7F1B77FD",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "E25FE2A850B96FE21029382C7CD99074D3F520757192199332371D91CF95EBD9",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "E25FE2A850B96FE21029382C7CD99074D3F520757192199332371D91CF95EBD9",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "9D463E2543191295B2912ABAE37C5A3BFCEA57934D349CC9170679C8F86DE02B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "9D463E2543191295B2912ABAE37C5A3BFCEA57934D349CC9170679C8F86DE02B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "128B4631FB158831BA5B3FD732F914DFD748B4B3D12498C8F32C6F38D96CD379",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "128B4631FB158831BA5B3FD732F914DFD748B4B3D12498C8F32C6F38D96CD379",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "D78896656C06FA444675951AB47CD78D725556EA72B062CE79327BF0E52174AA",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "D78896656C06FA444675951AB47CD78D725556EA72B062CE79327BF0E52174AA",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "06BD35512F8466B96E29EBB8820FAE736943CCF59ABC233649ECAC16A05E0F5C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "06BD35512F8466B96E29EBB8820FAE736943CCF59ABC233649ECAC16A05E0F5C",
+      "pass": true
+    }
+  ],
+  "rap_checks": 11,
+  "rap_failures": 0,
+  "guest_netapi": {
+    "mode": "netapi",
+    "exit_code": 0,
+    "elapsed_ms": 13418
+  },
+  "Full": "P7 runtime9 checkpoint retained; 9 files since checkpoint, targeted P cadence",
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/ascii.c",
+      "before_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/ascii.c",
+        "xp_blob": "df8e8f10e966ef3430c1628cff409d55e3d5baa5",
+        "baseline": "OpenNT",
+        "blob": "df8e8f10e966ef3430c1628cff409d55e3d5baa5"
+      },
+      "after_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/ascii.c",
+        "xp_blob": "df8e8f10e966ef3430c1628cff409d55e3d5baa5",
+        "baseline": "XP",
+        "blob": "df8e8f10e966ef3430c1628cff409d55e3d5baa5"
+      },
+      "before": {
+        "points": 1,
+        "lines": 188,
+        "excluded": 0,
+        "sha256": "1a5567fff519c4a161d27f02f9a86d1fedba60d0eb68d850f91e8a7c1bc33583",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      },
+      "after": {
+        "points": 0,
+        "lines": 0,
+        "sha256": "637c5acf3e90a5a42baee61f50f9e1c5fb342dff1e3fb785c06246810fb4119b",
+        "byte_equal": true,
+        "measurement": "byte-equal"
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/auxdata.c",
+      "before_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/auxdata.c",
+        "xp_blob": "0cde978d976f5359828cddb4a852fd95a16d75e4",
+        "baseline": "OpenNT",
+        "blob": "0cde978d976f5359828cddb4a852fd95a16d75e4"
+      },
+      "after_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/auxdata.c",
+        "xp_blob": "0cde978d976f5359828cddb4a852fd95a16d75e4",
+        "baseline": "XP",
+        "blob": "0cde978d976f5359828cddb4a852fd95a16d75e4"
+      },
+      "before": {
+        "points": 1,
+        "lines": 392,
+        "excluded": 0,
+        "sha256": "65ac082a9d1e00efea57cd6c93b8680662693389c22f0e75457f050413e60869",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      },
+      "after": {
+        "points": 0,
+        "lines": 0,
+        "sha256": "22cfc6d1104dc7300737b220ffdb3cd62d94b473b293f9fe1286a756dadbf25a",
+        "byte_equal": true,
+        "measurement": "byte-equal"
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "before_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/convert.c",
+        "xp_blob": "c6d7eed0e92d57d98d424edbb1624fa2b11a450c",
+        "baseline": "OpenNT",
+        "blob": "5120a4754cca2c81efa14c5712b4beceb93b9bb4"
+      },
+      "after_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/convert.c",
+        "xp_blob": "c6d7eed0e92d57d98d424edbb1624fa2b11a450c",
+        "baseline": "XP",
+        "blob": "c6d7eed0e92d57d98d424edbb1624fa2b11a450c"
+      },
+      "before": {
+        "points": 1,
+        "lines": 4711,
+        "excluded": 7,
+        "sha256": "73874720f6cb913f200d40b32f314ce099dbed7ff5857a9f17ecb7f57817b69c",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      },
+      "after": {
+        "points": 0,
+        "lines": 0,
+        "sha256": "814bac7a170291ed9a98084ec47eff29c97fe30227378e830fc3ed233595a790",
+        "byte_equal": true,
+        "measurement": "byte-equal"
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/examine.c",
+      "before_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/examine.c",
+        "xp_blob": "601f13758a5c966e856bc233771a72128d0f1565",
+        "baseline": "OpenNT",
+        "blob": "2554b3f916bc4ea383196327d29e1a8096e1e36a"
+      },
+      "after_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/examine.c",
+        "xp_blob": "601f13758a5c966e856bc233771a72128d0f1565",
+        "baseline": "XP",
+        "blob": "601f13758a5c966e856bc233771a72128d0f1565"
+      },
+      "before": {
+        "points": 1,
+        "lines": 812,
+        "excluded": 0,
+        "sha256": "88d15c5f6c7bb222f6bce5c6eefa9ddec7ab23e6da95af297c9806200e955d56",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      },
+      "after": {
+        "points": 0,
+        "lines": 0,
+        "sha256": "532c17d8c1ed871150b9e00dd596da56732e1a10d6b4c39f93d034117f7e8d07",
+        "byte_equal": true,
+        "measurement": "byte-equal"
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/parmnum.c",
+      "before_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/parmnum.c",
+        "xp_blob": "f641ddbd994bd3db2006aa7406bc445ea2aebb8c",
+        "baseline": "OpenNT",
+        "blob": "f641ddbd994bd3db2006aa7406bc445ea2aebb8c"
+      },
+      "after_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/parmnum.c",
+        "xp_blob": "f641ddbd994bd3db2006aa7406bc445ea2aebb8c",
+        "baseline": "XP",
+        "blob": "f641ddbd994bd3db2006aa7406bc445ea2aebb8c"
+      },
+      "before": {
+        "points": 1,
+        "lines": 364,
+        "excluded": 0,
+        "sha256": "a90b7473a7126de00406a26554ca6648bd1a4ea061fda21d70e2c8319cce2db7",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      },
+      "after": {
+        "points": 0,
+        "lines": 0,
+        "sha256": "459fb297d42338168e6d9c318e8514be97074890ec42384af125cacc42a61234",
+        "byte_equal": true,
+        "measurement": "byte-equal"
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/pointer.c",
+      "before_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/pointer.c",
+        "xp_blob": "cf4d2414ddcda6ee68c916f82f66ad3a3de587cc",
+        "baseline": "OpenNT",
+        "blob": "cf4d2414ddcda6ee68c916f82f66ad3a3de587cc"
+      },
+      "after_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/pointer.c",
+        "xp_blob": "cf4d2414ddcda6ee68c916f82f66ad3a3de587cc",
+        "baseline": "XP",
+        "blob": "cf4d2414ddcda6ee68c916f82f66ad3a3de587cc"
+      },
+      "before": {
+        "points": 1,
+        "lines": 182,
+        "excluded": 0,
+        "sha256": "f25a86eb907a969cd30f201fcd304ad28c92e84b6d66117e53ec5ae4d19f452d",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      },
+      "after": {
+        "points": 0,
+        "lines": 0,
+        "sha256": "35182db56f90692a940e74e01acd959ebde755967c01e2685bd8389eff6cbee8",
+        "byte_equal": true,
+        "measurement": "byte-equal"
+      }
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/strucsiz.c",
+      "before_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/strucsiz.c",
+        "xp_blob": "2f8d5ac7061abf95ea1a19c7ac6d2b99491bed7e",
+        "baseline": "OpenNT",
+        "blob": "2f8d5ac7061abf95ea1a19c7ac6d2b99491bed7e"
+      },
+      "after_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/rap/strucsiz.c",
+        "xp_blob": "2f8d5ac7061abf95ea1a19c7ac6d2b99491bed7e",
+        "baseline": "XP",
+        "blob": "2f8d5ac7061abf95ea1a19c7ac6d2b99491bed7e"
+      },
+      "before": {
+        "points": 1,
+        "lines": 188,
+        "excluded": 0,
+        "sha256": "b8a2677d4140e82eb197a1d16076603bf34ba661a7006fa8ac23fa1c0618e6e6",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      },
+      "after": {
+        "points": 0,
+        "lines": 0,
+        "sha256": "31c6dd72fdbf152c906115ac6ce91253f0a24d7b5d96d43a92fe058addd8c5dd",
+        "byte_equal": true,
+        "measurement": "byte-equal"
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "before_baseline": {
+        "xp_path": "Source/XPSP1/NT/public/internal/net/inc/rap.h",
+        "xp_blob": "95ca4f05be643f5301ac997a4bf3675e77d5557a",
+        "baseline": "OpenNT",
+        "blob": "5f6ab3b47eca8806cbc6ef7bc2934f47d9b4796c"
+      },
+      "after_baseline": {
+        "xp_path": "Source/XPSP1/NT/public/internal/net/inc/rap.h",
+        "xp_blob": "95ca4f05be643f5301ac997a4bf3675e77d5557a",
+        "baseline": "XP",
+        "blob": "95ca4f05be643f5301ac997a4bf3675e77d5557a"
+      },
+      "before": {
+        "points": 1,
+        "lines": 694,
+        "excluded": 1,
+        "sha256": "85ce6b7f702fdefa865ee66d736f1b6a2cdea1f86f21973e6a8f72206038f146",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      },
+      "after": {
+        "points": 1,
+        "lines": 1,
+        "excluded": 1,
+        "sha256": "eee2adfa9da5fab4090cc6037c24798e6d52232eeacaf26cf699579c6713a18f",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      }
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapgtpt.h",
+      "before_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/inc/rapgtpt.h",
+        "xp_blob": "4738616776dd870b745f2b4971bc814bc09e280e",
+        "baseline": "OpenNT",
+        "blob": "cf88dccfd64d2fc7e07b225f56f81295660802f3"
+      },
+      "after_baseline": {
+        "xp_path": "Source/XPSP1/NT/ds/netapi/inc/rapgtpt.h",
+        "xp_blob": "4738616776dd870b745f2b4971bc814bc09e280e",
+        "baseline": "XP",
+        "blob": "4738616776dd870b745f2b4971bc814bc09e280e"
+      },
+      "before": {
+        "points": 1,
+        "lines": 206,
+        "excluded": 0,
+        "sha256": "b77a81c76ebf5a82bddbc4812a94f9fc4281f4e01612380d843f16b47878b8e4",
+        "byte_equal": false,
+        "measurement": "current byte-sensitive exclusion projection"
+      },
+      "after": {
+        "points": 0,
+        "lines": 0,
+        "sha256": "229ab2614a48da0ea844b5caac869a19307bcc56e8e8374ee0052c6b8a9be114",
+        "byte_equal": true,
+        "measurement": "byte-equal"
+      }
+    }
+  ]
+}
