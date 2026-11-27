@@ -2781,3 +2781,10 @@ explicit. The N005 basemsg.h lead adds XP RegisterWowExec.ConsoleHandle.
 [Migration evidence](../../docs/etc/evidence/t485-s1/n004.md) and the
 [residual diff register](../../docs/etc/evidence/t485-s1/n004-diff.json) record
 original identities, remaining boundaries and final delivery status.
+
+## T485 S14 N005 XP Base declarations
+
+base/win32/inc uses complete pinned XP SP1 declarations; only the existing
+unsupported DBG branch remains error-excluded. Required public/sdk/inc/ntcsrmsg.h
+is adopted byte-exact as a dependency leading N021. The modern SDK public
+KSYSTEM_TIME ABI carrier stays in compat. [Evidence](../../docs/etc/evidence/t485-s1/n005.md).

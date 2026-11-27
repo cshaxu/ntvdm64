@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S14** (Ordinary Mode). Resume N004-N012 after
 [S13 closure](../etc/evidence/t485-h-repair/s13-closure.md).
-Migration delivered40/159 directories: H001-H036 and N001-N004.
+Migration delivered41/159 directories: H001-H036 and N001-N005.
 The owner approved continuous execution; the [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S15-S20 and all remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains S15-S20 and all remaining migration/capability obligations.
 
 ## S14 Progress
 
-1/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
+2/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
 and [receipt](../etc/evidence/t485-s1/n004-result.json): XP vdm.c plus required
 original vdm.h; paired WOW registration field leads N005. Cached full build,
 dual13-image26hash publication, targeted tests and consolidated Full23/23 pass.
@@ -42,7 +42,13 @@ Nine unaffected Full passes and three Console cases were retained; only failed
 and unexecuted cases continued. Runtime2 is the current published package.
 Nonerror vdm.c diff: OpenNT1point/6087lines -> XP16points/239lines; original LF
 restoration exposes residual points. Paired basemsg.h adds0points/2lines.
-S14 P1 is this N004 delivery. Next N005: Base declarations, in directory order.
+S14 P1 delivered N004. [N005 Base declarations](../etc/evidence/t485-s1/n005.md)
+([receipt](../etc/evidence/t485-s1/n005-result.json)) completes P2: cached full
+build, dual13-image26hash publication and affected BASE/RPC/COMMAND/WOW tests
+passed. Four mirror files reduce nonerror6points/983lines to0/0; ntcsrmsg.h
+leads N021 only as a dependency. Runtime3 is now published. N004 Full remains
+its checkpoint; no repeat Full is claimed. Four files since that checkpoint.
+Next N006: BaseSrv VDM, in directory order.
 ## S13 Closure Record
 
 [Closure](../etc/evidence/t485-h-repair/s13-closure.md) and

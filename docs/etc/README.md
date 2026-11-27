@@ -2119,3 +2119,4 @@ post-publication targeted checks.
 [S13 closure and final accounting](evidence/t485-h-repair/s13-closure.md),
 [machine receipt](evidence/t485-h-repair/s13-closure.json), and
 [1039-file census](evidence/t485-h-repair/s13-final-census.csv).
+- [N005 XP Base declarations](evidence/t485-s1/n005.md).

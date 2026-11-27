@@ -1,0 +1,84 @@
+[
+  {
+    "file": "src/non-mvdm/base/win32/inc/base.h",
+    "original_inventory_batch": "N005",
+    "before_vs_OpenNT": {
+      "points": 3,
+      "lines": 3,
+      "exclusions": [
+        {
+          "original": [
+            49,
+            49
+          ],
+          "current_error": 50,
+          "guard": "#if DBG"
+        }
+      ]
+    },
+    "after_vs_XP": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            52,
+            52
+          ],
+          "current_error": 52,
+          "guard": "#if DBG"
+        }
+      ]
+    },
+    "delta_points": -3,
+    "delta_lines": -3
+  },
+  {
+    "file": "src/non-mvdm/base/win32/inc/basemsg.h",
+    "original_inventory_batch": "N005",
+    "before_vs_OpenNT": {
+      "points": 1,
+      "lines": 580,
+      "exclusions": []
+    },
+    "after_vs_XP": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "delta_points": -1,
+    "delta_lines": -580
+  },
+  {
+    "file": "src/non-mvdm/base/win32/inc/basevdm.h",
+    "original_inventory_batch": "N005",
+    "before_vs_OpenNT": {
+      "points": 1,
+      "lines": 120,
+      "exclusions": []
+    },
+    "after_vs_XP": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "delta_points": -1,
+    "delta_lines": -120
+  },
+  {
+    "file": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+    "original_inventory_batch": "N021",
+    "before_vs_OpenNT": {
+      "points": 1,
+      "lines": 280,
+      "exclusions": []
+    },
+    "after_vs_XP": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "delta_points": -1,
+    "delta_lines": -280
+  }
+]

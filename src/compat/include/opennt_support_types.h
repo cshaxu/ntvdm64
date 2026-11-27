@@ -22,6 +22,13 @@
 #include <windows.h>
 #include <winternl.h>
 
+/* XP public/sdk/inc/ntkeapi.h:53-57; public shared-time ABI only. */
+typedef struct _KSYSTEM_TIME {
+    ULONG LowPart;
+    LONG High1Time;
+    LONG High2Time;
+} KSYSTEM_TIME, *PKSYSTEM_TIME;
+
 /* XP ntpsapi.h and ntexapi.h process drive-map query. */
 #define ProcessDeviceMap ((PROCESSINFOCLASS)23)
 #define DOSDEVICE_DRIVE_REMOVABLE 2
