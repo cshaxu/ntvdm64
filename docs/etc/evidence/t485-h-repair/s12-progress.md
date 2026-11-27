@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed35/48files523/645points;restored-final-verified358,restored-local0,
-residual-final-verified165,residual-local0,unreviewed122.
+Reviewed40/48files612/645points;restored-final-verified429,restored-local0,
+residual-final-verified183,residual-local0,unreviewed33.
 Delivered/pushed35files523points through e0b9f26d5.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
@@ -49,11 +49,11 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 33 | src/mvdm-host/softpc.new/host/src/nt_keycd.c | 7 | P11 delivered e0b9f26d5 |
 | 34 | src/mvdm-host/softpc.new/host/src/nt_mem.c | 8 | P11 delivered e0b9f26d5 |
 | 35 | src/mvdm-host/softpc.new/host/src/nt_msscs.c | 111 | P11 delivered e0b9f26d5 |
-| 36 | src/mvdm-host/softpc.new/host/src/nt_pif.c | 14 | Pending |
-| 37 | src/mvdm-host/softpc.new/host/src/nt_reset.c | 34 | Pending |
-| 38 | src/mvdm-host/softpc.new/host/src/nt_rez.c | 1 | Pending |
-| 39 | src/mvdm-host/softpc.new/host/src/nt_rflop.c | 25 | Pending |
-| 40 | src/mvdm-host/softpc.new/host/src/nt_sound.c | 15 | Pending |
+| 36 | src/mvdm-host/softpc.new/host/src/nt_pif.c | 14 | P12 final-verified; commit pending |
+| 37 | src/mvdm-host/softpc.new/host/src/nt_reset.c | 34 | P12 final-verified; commit pending |
+| 38 | src/mvdm-host/softpc.new/host/src/nt_rez.c | 1 | P12 final-verified; commit pending |
+| 39 | src/mvdm-host/softpc.new/host/src/nt_rflop.c | 25 | P12 final-verified; commit pending |
+| 40 | src/mvdm-host/softpc.new/host/src/nt_sound.c | 15 | P12 final-verified; commit pending |
 | 41 | src/mvdm-host/softpc.new/host/src/nt_thred.c | 1 | Pending |
 | 42 | src/mvdm-host/softpc.new/host/src/nt_unix.c | 1 | Pending |
 | 43 | src/mvdm-host/softpc.new/host/src/stubs.c | 4 | Pending |
@@ -708,3 +708,68 @@ P11 product e0b9f26d5 pushed;35/48files523/645points delivered.
 358restored165residual122unreviewed;zero local restoration awaiting delivery.
 Runtime12 targeted acceptance complete;no Full rerun,next checkpointfile40.
 Next36nt_pif.c;S12 remains active.
+
+## P12 file36 local audit
+
+nt_pif.c1/1082 ->8/33;9format restorations,5residual boundaries.
+R03880 actual include order selects C1 pif.h before MVDM pif.h;C1 lacks the
+PIFEXTHEADER family consumed here. Keep exact original header selection.
+R03881/R03883 preserve package system/default PIF path and capacity checks;
+R03882 converts original OEM result for actual ANSI callers;R03886 frees old
+owning config/autoexec fields before replacing them. No token changes.
+Four exclusions retained. Final product preprocessing/build/publication pending.
+Census691/9211,reduction112points22598lines;review36files537points,
+358restored verified+9local,165residual verified+5local,108unreviewed.
+Delivered35files523points unchanged. Next37nt_reset.c;format batch accumulates.
+
+## P12 files37-38 local audit
+
+nt_reset.c1/809 ->10/16;30format restored,4lifecycle points retained.
+Real termination callback closes before longjmp and bounded return closes again;
+keep active/consumed guard and B authorization before device cleanup.12exclusions
+unchanged. nt_rez.c1/388 ->1/4;one ROM provider point retained. Original rom.c
+requests ROMS_REZ_ID;B reads three fixed embedded RT_RCDATA identities with size
+checks. No external file fallback or callback.1exclusion unchanged.
+Both whole-file C token streams unchanged;final product preprocessing pending.
+Census700/8034,reduction103points23775lines. Reviewed38/48files572/645points;
+restored358verified+39local,residual165verified+10local,73unreviewed.
+Delivered35files523points unchanged. Next39nt_rflop.c;format batch accumulates.
+
+## P12 file39 local audit
+
+nt_rflop.c1/3594 ->35/37:22format points restored,3thread ABI points
+retained. Original void cdecl fdc_thread is called via B typed bridge and A
+WINAPI thunk; no original body/signature or lifecycle algorithm changed.
+34exclusions and C token stream unchanged. Logical line directives restored;
+final product preprocessing pending. Format recovery splits whole-file hunk.
+Census734/4477;reduction69points27332lines. Reviewed39/48files597/645points;
+restored358verified+61local,residual165verified+13local,48unreviewed.
+Delivered35files523points unchanged. Next40nt_sound.c,then required Full
+checkpoint for complete P12 batch. No build or test claimed for this file yet.
+
+## P12 file40 and checkpoint
+
+nt_sound.c1/917 ->6/16;10format points fully restored,5session-query
+points residual. Two formerly mixed points R03967/R03976 are fully restored
+brace/indentation changes. Current NtCurrentPeb returns finite B PEB without
+SessionId; retain public query, not a cast to private native layout. Query
+failure does not open session-zero device;LazyBeep uses existing public Beep.
+Three exclusions and C tokens unchanged. Final preprocessing pending.
+Five-file P12 batch5/6790 ->60/106 (+55blocks/-6684lines),format recovery
+splits whole-file hunks;no functional algorithm changes. Census739/3576,
+reduction64points28233lines. Reviewed40/48files612/645points;restored358
+verified+71local,residual165verified+18local,33unreviewed. Delivered35/523.
+All five files complete before required cached build,dual publish and Full.
+
+P12 cached build owner26444 PASS;selected-product preprocessing387unique
+original-line witnesses,zero mismatches. Governance25132 PASS. Publication19524
+PASS:runtime13,13host components copied to assets/release and O:/WINNT/SYSTEM32,
+26hashchecks PASS. Full owner9272 now running against this exact package;
+no runtime pass or delivery claimed yet. Receipt:s12-p12-result.json.
+
+P12 Full owner9272 finished PASS23/23 on runtime13,zero reruns. Win3.1 standard
+and enhanced,Win95 desktops;enhanced/Win95 strict same-Window Alt+Enter roundtrips;
+WOW,actual command return codes,GUI,RPC,lifecycle,nested handoff and real
+DOS4GW/NESticle menu/Escape gates PASS. Win95 knownExitOne boundary retained.
+All40files612points final-verified:429restored183residual33unreviewed.
+No local restorations await runtime verification. Commit/push pending.

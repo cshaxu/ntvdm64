@@ -32,7 +32,6 @@
 #include "insignia.h"
 #include "host_def.h"
 #include "compat/include/thread_start_compat.h"
-#line 34
 
 
 #line 36
@@ -48,7 +47,7 @@
 #include "dma.h"
 #include "config.h"
 #include "debug.h"
-#include "lock.h" 
+#include "lock.h"
 #include "timer.h"
 #include "floppy.h"
 #include "cmos.h"
@@ -64,7 +63,6 @@
 #ifdef min
 #undef min
 #endif
-#line 64
 #define min(a,b)	(a > b ? b : a)
 
 #define PC_MAX_DRIVE_TYPES              2
@@ -92,18 +90,15 @@
 #define MOTOR_ON			1
 
 #ifndef PROD
-#line 91
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 99
 
+#line 100
 #ifndef PROD
-#line 101
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 123
 #endif
-#line 124
 
+#line 125
 /********************************************************/
 
 /* TYPEDEFS */
@@ -135,10 +130,10 @@ typedef struct floppy_info
 	USHORT 		last_seek;
 	USHORT 		last_head_seek;
 /*
- * Change line state. 
- * This is a heuristic to try to fake up the correct change line behaviour 
- * without having a change line. The state of the change line is returned 
- * as CHANGED unless the diskette motor has been continuously ON since the 
+ * Change line state.
+ * This is a heuristic to try to fake up the correct change line behaviour
+ * without having a change line. The state of the change line is returned
+ * as CHANGED unless the diskette motor has been continuously ON since the
  * last reset.
  */
 	BOOLEAN		change_line_state;
@@ -178,7 +173,7 @@ BOOLEAN		auto_lock;
 /* routines used internally */
 
 /* routines called via vector table: all the prototypes are in gfi.h
-** so everybody matches. If you want to use this file to base a 
+** so everybody matches. If you want to use this file to base a
 ** host floppy module on, you know that all the functions that must
 ** be declared properly for gfi to work will be.
 **                                                    GM.
@@ -194,10 +189,8 @@ BOOL dismount_drive(FLP flp);
 
 
 #ifndef PROD
-#line 215
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 217
 
 void fdc_command_completed (BYTE drive, BYTE fdc_command);
 void fdc_thread (PFDC_PARMS fdc_parms);
@@ -229,17 +222,15 @@ int  DiskOpenRetry(CHAR);
 extern USHORT * pusCurrentPDB;
 
 #ifdef EJECT_FLOPPY
-#line 248
 #error Unsupported excluded original configuration
 #endif
-#line 250
 
 
 /********************************************************/
 
 /* STATIC GLOBALS */
 
- 
+
 FL floppy_data[MAX_FLOPPY];
 
  struct flop_struct floppy_tksc [6] =
@@ -276,12 +267,10 @@ ULONG	floppy_open_count = 0;
  * Debugging info only, for non-prod cases
  */
 #ifndef PROD
-#line 293
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 328
 #endif	/* PROD */
-#line 329
 
+#line 330
 char	dump_buf[256];
 
 
@@ -305,21 +294,21 @@ char	dump_buf[256];
 ** defined in this module.
 **     The floppy supported here is turned off by asking the empty floppy
 ** module to turn itself on in its place.
-** 
+**
 **     This makes a nice orthogonal interface which keeps everything save
 ** the three control functions	(private). The functions that are put
 ** in the table are defined only in gfi.h as typedefs so they are easy to
 ** get right.
-** 
-** 	This enabling/disabling via the gfi_function_table[] does not 
-** take place instead of any host ioctls/opens/closes etc that are needed 
+**
+** 	This enabling/disabling via the gfi_function_table[] does not
+** take place instead of any host ioctls/opens/closes etc that are needed
 ** to actually open or close the device, it forms the interface for SoftPC.
-** 
+**
 ** 	Really, this approach is a small tidy up of the way things are
 ** already done; existing host floppy code will require very small changes.
-** 
+**
 ** 	GM
-*/ 
+*/
 
 /********************************************************/
 
@@ -327,7 +316,7 @@ char	dump_buf[256];
 ** process can use it.
 */
 
-GLOBAL SHORT 
+GLOBAL SHORT
 host_gfi_rdiskette_active IFN3(UTINY, hostID, BOOL, active, CHAR *, err)
 {
 	UTINY drive 	= hostID - C_FLOPPY_A_DEVICE;
@@ -346,10 +335,8 @@ host_gfi_rdiskette_active IFN3(UTINY, hostID, BOOL, active, CHAR *, err)
 	else
 	{
 #ifdef  EJECT_FLOPPY
-#line 394
 #error Unsupported excluded original configuration
 #endif  /* EJECT_FLOPPY */
-#line 396
 		nt_gfi_rdiskette_term(flp);	/*  shutdown process */
 		gfi_empty_active(hostID,TRUE,err);  /* Tell gfi 'empty' is now active */
 		return(C_CONFIG_OP_OK);
@@ -367,13 +354,11 @@ host_gfi_rdiskette_active IFN3(UTINY, hostID, BOOL, active, CHAR *, err)
 **		GM.
 */
 
-GLOBAL SHORT 
+GLOBAL SHORT
 host_gfi_rdiskette_valid IFN3(UTINY,hostID,ConfigValues *,vals,CHAR *,err)
 {
 #ifndef NTVDM
-#line 417
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 447
 #endif
 #line 448
 	return(C_CONFIG_OP_OK);
@@ -381,13 +366,11 @@ host_gfi_rdiskette_valid IFN3(UTINY,hostID,ConfigValues *,vals,CHAR *,err)
 
 /********************************************************/
 
-GLOBAL VOID 
+GLOBAL VOID
 host_gfi_rdiskette_change IFN2(UTINY, hostID, BOOL, apply)
 {
 #ifndef NTVDM
-#line 457
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#line 463
 #endif
 #line 464
 }
@@ -395,13 +378,11 @@ host_gfi_rdiskette_change IFN2(UTINY, hostID, BOOL, apply)
 /********************************************************/
 
 #ifdef EJECT_FLOPPY
-#line 469
 #error Unsupported excluded original configuration
-#line 503
 #endif                          /* EJECT_FLOPPY */
-#line 504
 
 
+#line 506
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::: FLOPPY heart beat call ::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -412,7 +393,6 @@ GLOBAL void host_flpy_heart_beat(void)
     FLP   flp;
 
     if (pFDAccess && *pFDAccess) {
-#line 516
 	if (floppy_open_count) {
 	    for (drive = 0; drive < number_of_floppy; drive++) {
 		flp = & floppy_data[drive];
@@ -613,10 +593,8 @@ ULONG nt_floppy_read(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
     HANDLE  fd;
     LARGE_INTEGER large_integer;
 
-#line 716
     fd = get_drive_handle(drive, *pusCurrentPDB, FALSE);
 
-#line 718
     if (fd == INVALID_HANDLE_VALUE)
 	return 0;
     large_integer.LowPart = Offset;
@@ -630,10 +608,8 @@ ULONG nt_floppy_write(BYTE drive, ULONG Offset, ULONG Size, PBYTE Buffer)
     HANDLE  fd;
     LARGE_INTEGER large_integer;
     ULONG   size_returned;
-#line 731
 
     fd = get_drive_handle(drive, *pusCurrentPDB, TRUE);
-#line 733
     if (fd == INVALID_HANDLE_VALUE)
 	return 0;
 
@@ -650,15 +626,12 @@ BOOL nt_floppy_format(BYTE drive, WORD Cylinder, WORD Head, MEDIA_TYPE Media)
     ULONG   size_returned;
     HANDLE  fd;
     BOOL    result;
-#line 749
 
-#line 750
     result = FALSE;
     fmt.MediaType = Media;
     fmt.StartHeadNumber = fmt.EndHeadNumber = Head;
     fmt.StartCylinderNumber = fmt.EndCylinderNumber = Cylinder;
     fd = get_drive_handle(drive, *pusCurrentPDB,TRUE);
-#line 755
     if (fd == INVALID_HANDLE_VALUE)
 	return FALSE;
     result = DeviceIoControl(fd,
@@ -679,10 +652,8 @@ BOOL nt_floppy_verify(BYTE drive, DWORD Offset, DWORD Size)
 {
     HANDLE  fd;
     LARGE_INTEGER   large_integer;
-#line 775
 
     fd = get_drive_handle(drive, *pusCurrentPDB, FALSE);
-#line 777
     if (fd != INVALID_HANDLE_VALUE) {
 	large_integer.LowPart = Offset;
 	large_integer.HighPart = 0;
@@ -749,7 +720,6 @@ HANDLE get_drive_handle(UTINY drive, USHORT pdb, BOOL auto_lock)
 	    flp->owner_pdb = pdb;
 	    (*(pFDAccess))++;
 	    break;
-#line 843
 	}
 	if (auto_lock && GetLastError() == ERROR_SHARING_VIOLATION &&
 	    DiskOpenRetry((char)(drive + (UTINY)'A')) == RMB_RETRY)
@@ -791,18 +761,14 @@ BOOL nt_floppy_close(UTINY drive)
     flp = &floppy_data[drive];
 
 #ifndef PROD
-#line 884
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 887
 #endif
-#line 888
 
 #line 889
     if (flp->diskette_fd != INVALID_HANDLE_VALUE) {
 	CloseHandle(flp->diskette_fd);
 	flp->diskette_fd = INVALID_HANDLE_VALUE;
 	(*(pFDAccess))--;
-#line 893
 	flp->auto_locked = FALSE;
 	flp->owner_pdb = 0;
 	floppy_open_count--;
@@ -901,7 +867,6 @@ nt_rflop_command
 	BOOL	auto_lock;
 
 
-#line 991
 	note_trace1 (GFI_VERBOSE, "FDC: %s command",
 		cmd_name [get_type_cmd (command_block)]);
 
@@ -949,7 +914,6 @@ nt_rflop_command
 	    if (!nt_floppy_media_check(drive)) {
 		nt_floppy_close(drive);
 		get_drive_handle(drive, *pusCurrentPDB, auto_lock);
-#line 1038
 		if (!nt_floppy_media_check(drive)) {
 		    fdc_parms.auto_lock = auto_lock ? TRUE : FALSE;
 		    fdc_parms.command_block = command_block;
@@ -990,9 +954,7 @@ nt_rflop_command
 
 	case FDC_SPECIFY:
 #ifndef PROD
-#line 1078
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1083
 #endif
 #line 1084
 		break;
@@ -1001,9 +963,7 @@ nt_rflop_command
 	case FDC_SENSE_DRIVE_STATUS:
 
 #ifndef PROD
-#line 1090
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1092
 #endif
 #line 1093
 		D = get_c7_drive (command_block);
@@ -1021,9 +981,7 @@ nt_rflop_command
 	case FDC_RECALIBRATE:
 
 #ifndef PROD
-#line 1108
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1110
 #endif
 #line 1111
 		D = get_c5_drive (command_block);
@@ -1042,12 +1000,10 @@ nt_rflop_command
 		C = get_c8_new_cyl (command_block);
 
 #ifndef PROD
-#line 1127
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1133
 #endif
-#line 1134
 
+#line 1135
 		put_r3_ST0(result_block,0);
 		put_r1_ST0_head_address(result_block,1);
 		put_r1_ST0_seek_end(result_block,1);
@@ -1062,12 +1018,10 @@ nt_rflop_command
 	default:
 
 #ifndef     PROD
-#line 1149
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1152
 #endif
-#line 1153
 
+#line 1154
 		put_r0_ST0 (result_block, 0);
 		put_r1_ST0_int_code (result_block, 2);
 
@@ -1077,12 +1031,10 @@ nt_rflop_command
 
 
 #ifndef PROD
-#line 1163
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1170
 #endif /* !PROD */
-#line 1171
 
+#line 1172
 	host_release_timer ();
 
 	return SUCCESS;
@@ -1098,15 +1050,13 @@ nt_rflop_drive_on IFN1(UTINY, drive)
 
 	note_trace0 (GFI_VERBOSE, "FDC: Drive on command");
 #ifndef PROD
-#line 1187
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1193
 #endif
-#line 1194
 
+#line 1195
 	if (drive >= number_of_floppy)
 	{
-		note_trace1 (GFI_VERBOSE, 
+		note_trace1 (GFI_VERBOSE,
 			"FDC: Invalid drive %d accessed", drive);
 
 		return (FAILURE);
@@ -1126,12 +1076,10 @@ nt_rflop_drive_off IFN1(UTINY, drive)
 	FLP flp = &floppy_data[drive];
 	note_trace0 (GFI_VERBOSE, "FDC: Drive off command");
 #ifndef PROD
-#line 1217
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1223
 #endif
-#line 1224
 
+#line 1225
 	if (drive >= number_of_floppy)
 	{
 		note_trace1 (GFI_VERBOSE,
@@ -1144,7 +1092,7 @@ nt_rflop_drive_off IFN1(UTINY, drive)
 
 	/* I believe the line below makes booting off of low density
 	 * diskettes problematical, particularly after restarts.
-	 * Make your own mind up, the DEC code does it, the Sparc 
+	 * Make your own mind up, the DEC code does it, the Sparc
 	 * doesn't (as at 11/9/92)
 // we have no reason to do so in NT. As far as change line concerned,
 // the file system will tell us "media has been changed" when we ask
@@ -1170,17 +1118,14 @@ nt_rflop_rate IFN2(UTINY, drive, half_word, rate)
 // only one FDC(and mutiple drive).
 
 #if 0
-#line 1263
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 1300
 #ifndef PROD
-#line 1301
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1307
 #endif
-#line 1308
 
+#line 1309
     switch (rate) {
 	case DCR_RATE_1000:
 		new_density = DENSITY_EXTENDED;
@@ -1202,7 +1147,7 @@ nt_rflop_rate IFN2(UTINY, drive, half_word, rate)
     }
     return SUCCESS;
 }
- 
+
 
 /********************************************************/
 
@@ -1211,7 +1156,6 @@ SHORT
 nt_rflop_change IFN1(UTINY, drive)
 {
 	FLP flp = &floppy_data[drive];
-#line 1339
 	note_trace1 (GFI_VERBOSE, "FDC: change_line %c",
 		flp->change_line_state? 'T':'F');
 
@@ -1225,16 +1169,13 @@ nt_rflop_change IFN1(UTINY, drive)
 	    nt_floppy_close(drive);
 	}
 	get_drive_handle(drive, *pusCurrentPDB, FALSE);
-#line 1352
 	flp->change_line_state = !nt_floppy_media_check(drive);
 
 #ifndef PROD
-#line 1355
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1361
 #endif
-#line 1362
 
+#line 1363
 	return(flp->change_line_state);
 }
 
@@ -1285,12 +1226,10 @@ nt_rflop_reset IFN2(FDC_RESULT_BLOCK *, result_block, UTINY, drive)
 {
 	FLP flp = &floppy_data[drive];
 
-	note_trace0 (GFI_VERBOSE, "FDC: Reset command"); 
+	note_trace0 (GFI_VERBOSE, "FDC: Reset command");
 
 #ifndef  PROD
-#line 1416
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1421
 #endif
 #line 1422
 	/* clear change line */
@@ -1380,9 +1319,7 @@ FDC_RESULT_BLOCK * result_block
 		put_r1_ST1_no_address_mark (result_block,1);
 		put_r0_ST2 (result_block, 0);
 #ifndef PROD
-#line 1509
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1512
 #endif
 #line 1513
 		goto fdc_read_write_exit;
@@ -1390,7 +1327,7 @@ FDC_RESULT_BLOCK * result_block
 	}
 
 
-	/* 
+	/*
 	 * Do common setup processing, if read or write
 	 */
 	if (fdc_command == FDC_READ_DATA ||
@@ -1401,9 +1338,7 @@ FDC_RESULT_BLOCK * result_block
 	    dma_enquire (DMA_DISKETTE_CHANNEL, &dma_address, &dma_size);
 	    transfer_size = dma_size + 1;
 #ifndef PROD
-#line 1529
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1531
 #endif 	/* PROD */
 #line 1532
 	    /* check params passed are DOS compatible */
@@ -1416,9 +1351,7 @@ FDC_RESULT_BLOCK * result_block
 // "probing" the diskette. We just fail the call.
 //		host_direct_access_error((ULONG) NOSUPPORT_FLOPPY);
 #ifndef PROD
-#line 1542
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1551
 #endif /* !PROD */
 #line 1552
 		/* Sector not found or wrong size */
@@ -1436,24 +1369,20 @@ FDC_RESULT_BLOCK * result_block
 	    transfer_start = dos_offset (flp, C, H, S);
             transfer_count = (USHORT)(transfer_size / PC_BYTES_PER_SECTOR);
 #ifndef PROD
-#line 1567
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1574
 #endif
-#line 1575
 
+#line 1576
 	}
 
 	switch (fdc_command)
 	{
 	case FDC_READ_DATA:
 #ifndef PROD
-#line 1582
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1589
 #endif
-#line 1590
 
+#line 1591
 		if (!failed) {
 		    transferred_size = nt_floppy_read(drive,
 						      transfer_start,
@@ -1477,7 +1406,7 @@ FDC_RESULT_BLOCK * result_block
 			put_r0_ST1 (result_block, 0);
 			put_r1_ST1_no_data (result_block, 1);
 			put_r0_ST2 (result_block, 0);
-		} 
+		}
 		else {
 			put_r0_ST0 (result_block, 0x04);
 			put_r0_ST1 (result_block, 0);
@@ -1504,9 +1433,7 @@ FDC_RESULT_BLOCK * result_block
 
 	case FDC_WRITE_DATA:
 #ifndef PROD
-#line 1641
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1648
 #endif
 #line 1649
 		if (!failed) {
@@ -1540,7 +1467,7 @@ FDC_RESULT_BLOCK * result_block
 				put_r1_ST1_write_protected (result_block, 1);
 			else
 				put_r1_ST1_no_data (result_block, 1);
-		} 
+		}
 		else
 		{
 			put_r1_ST0_head_address (result_block, H);
@@ -1565,12 +1492,10 @@ FDC_RESULT_BLOCK * result_block
 
 	case FDC_READ_TRACK:
 #ifndef PROD
-#line 1705
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1710
 #endif
-#line 1711
 
+#line 1712
 		break;
 
 	case FDC_FORMAT_TRACK:
@@ -1585,9 +1510,7 @@ FDC_RESULT_BLOCK * result_block
 		H = get_c8_head(command_block);
 		flp = &floppy_data[D];
 #ifndef PROD
-#line 1726
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1733
 #endif
 #line 1734
 		if (!nt_floppy_format(D,
@@ -1650,9 +1573,7 @@ FDC_RESULT_BLOCK * result_block
 
 		put_r0_cyl(result_block, C);
 #ifndef PROD
-#line 1794
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1801
 #endif
 #line 1802
 	}
@@ -1776,9 +1697,7 @@ guess_media_density IFN1(UTINY, drive)
 	}
 
 #ifndef PROD
-#line 1923
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 1929
 #endif /* !PROD */
 #line 1930
 	return(flp->media_density);
@@ -1787,10 +1706,10 @@ guess_media_density IFN1(UTINY, drive)
 /********************************************************/
 
 /*
- * dos_offset() calculates the offset in bytes of the required sector 
+ * dos_offset() calculates the offset in bytes of the required sector
  * from the start of the nt virtual disk file for a given track
  * and sector.	This maps the floppy data onto the nt file in an
- * interleaved format with the data for each head adjacent for a 
+ * interleaved format with the data for each head adjacent for a
  * given cylinder.
  */
 
@@ -1820,7 +1739,7 @@ dos_compatible IFN5(FLP, flp, UTINY, cyl, UTINY, hd, UTINY, sec, UTINY, n)
 	BOOL ret;
 
 	ret = ((hd <= PC_HEADS_PER_DISKETTE)
-		&& (cyl < flp->trks_per_disk) 
+		&& (cyl < flp->trks_per_disk)
 		&& (sec <= flp->secs_per_trk)
 		&& (n == PC_N_VALUE));
 
@@ -1849,12 +1768,10 @@ set_floppy_parms IFN1(FLP, flp)
 
 
 #ifndef PROD
-#line 1998
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 2002
 #endif
-#line 2003
 
+#line 2004
 VOID update_chrn (
 FLP	flp,
 UTINY	mt,
@@ -1865,12 +1782,10 @@ UTINY	sector_count
     UTINY new_sector;
 
 #ifndef PROD
-#line 2014
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#line 2018
 #endif
-#line 2019
 
+#line 2020
     new_sector = flp->R + sector_count - 1;
     if (new_sector > eot && mt != 0) {
 	flp->H = 1;

@@ -49,12 +49,9 @@ AMENDMENTS      :
  * Allow a suitable default for the CMOS file name.
  */
 
-#line 52
 #ifndef CMOS_FILE_NAME
-#line 53
 #error Unsupported excluded original configuration
 #endif
-#line 55
 
 long host_read_resource(int type, char *name, byte *addr, int maxsize, int display_error)
 /* int type;                     Unused */
@@ -117,7 +114,6 @@ long size;              /* Quantity of data to write */
         char *hff_ret;
         extern char *host_find_file(char *name, char *path, int disp_err);
 
-#line 113
         type = 0; // To stop unreferenced formal parameter errors
 
         host_block_timer ();
@@ -145,11 +141,9 @@ long size;              /* Quantity of data to write */
                         host_error (EG_REZ_UPDATE,ERR_CONT,name);
 #endif
 
-#line 140
                         /* Continuing => try to create a new file */
                         file_fd = _open(name,O_RDWR|O_CREAT,S_IREAD|S_IWRITE);
 
-#line 143
                         if (file_fd != -1)
                         {
                                 _write (file_fd, addr, size);

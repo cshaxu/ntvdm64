@@ -50,11 +50,10 @@ unsigned short fSBCSMode = 0;
 #endif // JAPAN
 
 #if defined(NEC_98)         
-#line 53
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 57
 
+#line 58
 /*  GetPIFConfigFile
  *
  *  Copies PIF file specified name of config.sys\autoexec.bat
@@ -90,8 +89,8 @@ VOID GetPIFConfigFiles(BOOL bConfig, char *pchFileName)
       {
        dw = NtvdmGetSystemDirectoryA(pchFileName, MAX_PATH);
        if (!dw || dw >= MAX_PATH) return;
-#line 92
        if (*(pchFileName+dw-1) != achSlash[0])
+#line 93
            strcat(pchFileName, achSlash);
 #ifdef JAPAN
        strcat(pchFileName, bConfig ? (fSBCSMode ? achConfigUS : achConfigNT)
@@ -151,7 +150,6 @@ BOOL GetPIFData(PIF_DATA * pd, char *PifName)
     WORD      IdleSensitivity = (WORD)-1;
 
 #if defined(NEC_98)         
-#line 150
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 153
@@ -289,12 +287,12 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
              //
              if (IdleSensitivity > 100) {
                  if (ext386.PfFPriority < 100) {
-                 WNTPifFgPr = (UCHAR)ext386.PfFPriority;   // Foreground priority
-                 }
+                     WNTPifFgPr = (UCHAR)ext386.PfFPriority;   // Foreground priority
+                     }
                  if (ext386.PfBPriority < 50) {
-                 WNTPifBgPr = (UCHAR)ext386.PfBPriority;        // Background priority
-                 WNTPifBgPr <<= 1;                           // set def 50 to 100
-                 }
+                     WNTPifBgPr = (UCHAR)ext386.PfBPriority;        // Background priority
+                     WNTPifBgPr <<= 1;                           // set def 50 to 100
+                     }
 
                   pd->idledetect = (char)((ext386.PfW386Flags >> 12) & 1);
                   }
@@ -350,23 +348,23 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
 		    }
 		}
 
-	     }
+             }
 
-		//
+                  //
                   // Get Window 4.0 enhanced pif. Right now we only care about the
                   // idle sensitivity slider bar because its not beiong mapped into
                   // the 386 idle\polling stuff. For next release we need to integrate
                   // this section better.
-		//
+                  //
          else if (!strcmp(exthdr.extsig, WENHHDRSIG40)) {
              WENHPIF40 wenhpif40;
 
-		if(_llseek(filehandle, exthdr.extfileoffset, 0) == -1 ||
+             if(_llseek(filehandle, exthdr.extfileoffset, 0) == -1  ||
                 _lread(filehandle,(LPSTR)&wenhpif40,sizeof(wenhpif40)) == -1)
-		    {
-		    _lclose(filehandle);
-		    return FALSE;
-		    }
+                {
+                _lclose(filehandle);
+                return FALSE;
+                }
 
 
              //
@@ -388,9 +386,9 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
                  // Idle detection on or off.
                  if (IdleSensitivity > 0) {
                      pd->idledetect = 1;
-		    }
-		    }
-		    }
+                     }
+                 }
+             }
 
 
 #ifdef	JAPAN
@@ -406,7 +404,7 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
                 {
                 _lclose(filehandle);
                 return FALSE;
-	     }
+                }
 
 		fSBCSMode = extAX.fSBCSMode;
 #ifdef JAPAN_DBG
@@ -415,7 +413,6 @@ if (!strcmp(exthdr.extsig, STDHDRSIG))
 	     }
 #endif // JAPAN
 #if defined(NEC_98)         
-#line 421
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 439
@@ -523,10 +520,8 @@ void SetPifDefaults(PIF_DATA *pd)
      pd->StartDir = NULL;
      pd->SubSysId = SUBSYS_DEFAULT;
 #if defined(NEC_98)         
-#line 543
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 545
 }
 
 /*

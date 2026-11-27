@@ -10,7 +10,7 @@
  *
  * Title	: sg_sound.c
  *
- * Description	: This module provides functions to control sound.  The 
+ * Description	: This module provides functions to control sound.  The
  *		  functions are defined:
  *		
  *		  host_ring_bell(duration)
@@ -19,12 +19,11 @@
  *		  host_enable_timer2_sound()
  *		  host_disable_timer2_sound()
  *
- * Author	: 
+ * Author	:
  *
- * Notes	: 
+ * Notes	:
  */
 
-#line 27
 #include "xt.h"
 #include "config.h"
 #include "debug.h"
@@ -34,11 +33,10 @@
 #include "video.h"
 #include "debug.h"
 #if defined(NEC_98)
-#line 36
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 45
 
+#line 46
 void host_ica_lock(void);
 void host_ica_unlock(void);
 
@@ -53,7 +51,6 @@ ULONG FreqPpi   = 0;
 ULONG ET2TicCount=0;
 ULONG PpiCounting  = 0;
 #endif // !NEC_98
-#line 60
 
 HANDLE hBeepDevice = 0;
 ULONG BeepCloseCount = 0;
@@ -105,22 +102,23 @@ static BOOL InSessionZero(void)
     return ProcessIdToSessionId(GetCurrentProcessId(), &session) && session == 0;
 }
 
+#line 105
  /*  assumes caller holds ica lock */
 
 VOID InitSound( BOOL bInit)
 {
     if( InSessionZero() ) {
-    if (!bInit) {
-        host_ica_lock();
-        LazyBeep(0L, 0L);
-        if (hBeepDevice && hBeepDevice != INVALID_HANDLE_VALUE) {
-            CloseHandle(hBeepDevice);
-            hBeepDevice = 0;
+        if (!bInit) {
+            host_ica_lock();
+            LazyBeep(0L, 0L);
+            if (hBeepDevice && hBeepDevice != INVALID_HANDLE_VALUE) {
+                CloseHandle(hBeepDevice);
+                hBeepDevice = 0;
+                }
+            host_ica_unlock();
+            return;
             }
-        host_ica_unlock();
-        return;
-        }
-}
+    }
 }
 
 
@@ -158,14 +156,11 @@ HANDLE OpenBeepDevice(void)
                            );
 
     if (!NT_SUCCESS( Status )) {
-#line 158
 #ifndef PROD
-#line 159
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 161
         hBeep = INVALID_HANDLE_VALUE;
-    }
+        }
 
 
     return hBeep;
@@ -212,27 +207,27 @@ VOID LazyBeep(ULONG Freq, ULONG Duration)
       if (!InSessionZero()) {
           Beep( Freq, Duration );
       } else {
-      if (!hBeepDevice) {
-          hBeepDevice = OpenBeepDevice();
-          }
+          if (!hBeepDevice) {
+              hBeepDevice = OpenBeepDevice();
+              }
 
-      if (hBeepDevice == INVALID_HANDLE_VALUE) {
-          return;
-          }
+          if (hBeepDevice == INVALID_HANDLE_VALUE) {
+              return;
+              }
 
-      NtDeviceIoControlFile( hBeepDevice,
-                             NULL,
-                             NULL,
-                             NULL,
-                             &IoStatus,
-                             IOCTL_BEEP_SET,
-                             &bps,
-                             sizeof(bps),
-                             NULL,
-                             0
-                             );
+          NtDeviceIoControlFile( hBeepDevice,
+                                 NULL,
+                                 NULL,
+                                 NULL,
+                                 &IoStatus,
+                                 IOCTL_BEEP_SET,
+                                 &bps,
+                                 sizeof(bps),
+                                 NULL,
+                                 0
+                                 );
 
-      BeepCloseCount = 1000;
+          BeepCloseCount = 1000;
       }
       }
 
@@ -262,7 +257,6 @@ void PlaySound(BOOL bPulsedPpi)
       LazyBeep(0,0);
       }
 #endif // !NEC_98
-#line 259
 }
 
 
@@ -302,7 +296,6 @@ void host_timer2_waveform(int delay,
 
     PlaySound(FALSE);
 #endif // !NEC_98
-#line 298
 }
 
 
@@ -331,7 +324,6 @@ void HostPpiState(BYTE PortValue)
 
     host_ica_unlock();
 #endif // !NEC_98
-#line 326
 }
 
 
@@ -417,7 +409,6 @@ void PulsePpi(void)
     PpiCycles = 0;
 
 #endif // !NEC_98
-#line 411
 }
 
 
@@ -450,22 +441,20 @@ void PlayContinuousTone(void)
    PlaySound(FALSE);
 
    if (InSessionZero()) {
-   if (!BeepLastFreq && !BeepLastDuration &&
-       BeepCloseCount && !--BeepCloseCount)
-     {
-       if (hBeepDevice && hBeepDevice != INVALID_HANDLE_VALUE) {
-           CloseHandle(hBeepDevice);
-           hBeepDevice = 0;
+       if (!BeepLastFreq && !BeepLastDuration &&
+           BeepCloseCount && !--BeepCloseCount)
+         {
+           if (hBeepDevice && hBeepDevice != INVALID_HANDLE_VALUE) {
+               CloseHandle(hBeepDevice);
+               hBeepDevice = 0;
+               }
            }
-       }
    }
 
     host_ica_unlock();
 #endif // !NEC_98
-#line 455
 }
 
 #if defined(NEC_98)
-#line 458
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98

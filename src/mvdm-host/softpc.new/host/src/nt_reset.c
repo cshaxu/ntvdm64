@@ -1,14 +1,14 @@
-/*	
+/*
  * SoftPC Revision 3.0
  *
- * Title		: NT reset functions
+ * Title                : NT reset functions
  *
- * Description	: This function is called by the standard reset function to
+ * Description  : This function is called by the standard reset function to
  * set up any specific devices used by the Sun4 implementation.
  *
- * Author		: SoftPC team
+ * Author               : SoftPC team
  *
- * Notes		:
+ * Notes                :
  */
 #include <nt.h>
 #include <ntrtl.h>
@@ -20,10 +20,8 @@
 #include "host_def.h"
 
 #ifdef X86GFX
-#line 23
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 25
 
 #include <sys\types.h>
 #include "xt.h"
@@ -67,18 +65,15 @@ extern KEYBDFUNCS nt_keybd_funcs;
 extern HOSTMOUSEFUNCS the_mouse_funcs;
 
 #ifndef MONITOR
-#line 66
 extern WORD BWVKey;
 extern char achES[];
 #endif
 
 #ifndef NEC_98
 #ifdef MONITOR
-#line 72
 #error Excluded unsupported monitor IVT declarations
 #endif
 #endif // !NEC_98
-#line 75
 
 extern IU8 lcifo[];
 
@@ -95,14 +90,12 @@ GLOBAL UINT VdmExitCode = 0xFF;
 #ifndef NEC_98
 GLOBAL BOOL StreamIoSwitchOn = TRUE;
 #endif // !NEC_98
-#line 91
 #if defined(NEC_98)
-#line 92
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 static BOOL HostApplicationActive = FALSE;
-#line 98
 
+#line 99
 /*
  *
  * ============================================================================
@@ -111,41 +104,35 @@ static BOOL HostApplicationActive = FALSE;
  * =
  */
 
-#line 107
 void
 host_reset()
 {
 
 #ifdef X86GFX
-#line 112
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 114
 
 #ifndef NEC_98
     if (host_stream_io_enabled) {
-	sc.ScreenState = STREAM_IO;
-	ConsoleInitialised = TRUE;
+        sc.ScreenState = STREAM_IO;
+        ConsoleInitialised = TRUE;
     }
     else {
 #endif // !NEC_98
-#line 122
 
-	ConsoleInit();
-	MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
-	/*::::::::::::::::::::::::::::::::::::::::::::::::: Enable idle detect */
+        ConsoleInit();
+        MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
+        /*::::::::::::::::::::::::::::::::::::::::::::::::: Enable idle detect */
 #ifndef NEC_98
     }
 #endif // !NEC_98
-#line 129
 
 #ifdef MONITOR
-#line 131
 #error Excluded original conditional branch
 #endif  /* MONITOR */
-#line 143
 
 
+#line 145
     //
     // Let the heartbeat thread run and release the ica lock,
     // on x86 needed now, for fullscreen switch notification.
@@ -153,30 +140,24 @@ host_reset()
     ResumeThread(ThreadInfo.HeartBeat.Handle);
 
 #ifdef MONITOR
-#line 152
 #error Excluded unsupported monitor ICA initialization wait
 #endif
-#line 154
 
     host_ica_unlock();
 
-#ifdef	HUNTER
-#line 158
+#ifdef  HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
-#else	/* ! ( HUNTER ) */
-#line 160
-    if (sc.ScreenState == FULLSCREEN)	// initialised in ConsoleInit()
-	IDLE_ctl(FALSE);
+#else   /* ! ( HUNTER ) */
+    if (sc.ScreenState == FULLSCREEN)   // initialised in ConsoleInit()
+        IDLE_ctl(FALSE);
     else
-	IDLE_ctl(TRUE);		// can't idle detect fullscreen
+        IDLE_ctl(TRUE);         // can't idle detect fullscreen
 
-    host_idle_init();		// host sleep event creation
+    host_idle_init();           // host sleep event creation
 #endif  /* HUNTER */
-#line 167
 
 
 #if defined(NEC_98)
-#line 170
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 173
@@ -186,13 +167,13 @@ host_reset()
 /*
  * =========================================================================
  *
- * FUNCTION		: host_applInit
+ * FUNCTION             : host_applInit
  *
- * PURPOSE		: Sets up the keyboard, lpt and error panels.
+ * PURPOSE              : Sets up the keyboard, lpt and error panels.
  *
- * RETURNED STATUS	: None.
+ * RETURNED STATUS      : None.
  *
- * DESCRIPTION	: Called from main.c.  The keyboard and other GWI pointer
+ * DESCRIPTION  : Called from main.c.  The keyboard and other GWI pointer
  *                sets are initialised here. The command line arguments are
  *                parsed for those flags that need processing early (ie before
  *                config() is called).
@@ -203,7 +184,7 @@ host_reset()
 
 void  host_applInit(int argc,char *argv[])
 {
-    char	*psz;
+    char        *psz;
     int  temp_argc = argc;
     HostApplicationActive = TRUE;
 #line 198
@@ -226,8 +207,8 @@ void  host_applInit(int argc,char *argv[])
 // Check if the VDM Is for WOW
 // Check is for new console session
     while (--temp_argc > 0) {
-	psz = *++temp_argv;
-	if (*psz == '-' || *psz == '/') {
+        psz = *++temp_argv;
+        if (*psz == '-' || *psz == '/') {
             psz++;
 
             if (*psz == 'f') {
@@ -235,7 +216,6 @@ void  host_applInit(int argc,char *argv[])
                 continue;
             }
 #ifndef MONITOR
-#line 226
             //
             // Check for windowed graphics resize
             //
@@ -254,25 +234,24 @@ void  host_applInit(int argc,char *argv[])
 #endif
             if(tolower(*psz) == 'w') {
 
-                VDMForWOW = TRUE;
+               VDMForWOW = TRUE;
                ++psz;
                if (tolower(*psz) == 's') { // VadimB: New code
                   fSeparateWow = TRUE;
-	    }
+               }
                ++psz;
                if (tolower(*psz) == 'm') { // Jarbats: Is it MEOW
                   fMeowWOW = TRUE;
                }
             }
 #ifndef NEC_98
-	    else if (*psz == 'o'){
-		    StreamIoSwitchOn = FALSE;
-	    }
+           else if (*psz == 'o'){
+               StreamIoSwitchOn = FALSE;
+            }
 #endif // !NEC_98
-#line 259
             else if (*psz++ == 'i' && *psz) {
                SessionId = strtoul(psz, NULL, 16);
-	    }
+            }
 
         }
     }
@@ -293,7 +272,6 @@ void  host_applInit(int argc,char *argv[])
     }
 
 #if defined(NEC_98)
-#line 282
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 328
@@ -303,32 +281,27 @@ void  host_applInit(int argc,char *argv[])
 #ifndef NEC_98
        StreamIoSwitchOn = FALSE;
 #endif // !NEC_98
-#line 334
-            }
+    }
 #ifndef NEC_98
     else if (StreamIoSwitchOn)
-	    enable_stream_io();
+            enable_stream_io();
 #endif // !NEC_98
-#line 339
 
     /*
      * Get a handle to the main thread so it can be suspended during
      * hand-shaking.
      */
-#line 344
     DuplicateHandle(GetCurrentProcess(),
-		    GetCurrentThread(),
-		    GetCurrentProcess(),
-		    &MainThread,
-		    (DWORD) 0,
-		    FALSE,
-		    (DWORD) DUPLICATE_SAME_ACCESS);
+                    GetCurrentThread(),
+                    GetCurrentProcess(),
+                    &MainThread,
+                    (DWORD) 0,
+                    FALSE,
+                    (DWORD) DUPLICATE_SAME_ACCESS);
 
-#line 352
     InitializeIcaLock();
     host_ica_lock();
 
-#line 355
     init_host_uis();    /* console setup */
     nt_start_event_thread();      /* Start event processing thread */
 }
@@ -337,13 +310,13 @@ void  host_applInit(int argc,char *argv[])
 /*
  * =========================================================================
  *
- * FUNCTION		: host_applClose
+ * FUNCTION             : host_applClose
  *
- * PURPOSE		: The last chance to close down.
+ * PURPOSE              : The last chance to close down.
  *
- * RETURNED STATUS	: None.
+ * RETURNED STATUS      : None.
  *
- * DESCRIPTION	: Called from main.c.
+ * DESCRIPTION  : Called from main.c.
  *
  *
  * =======================================================================
@@ -364,13 +337,12 @@ host_applClose(void)
 
   GfxCloseDown();             // ensure video section destroyed
 #ifdef X86GFX
-#line 385
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
-#line 388
 
 
 
+#line 391
   host_lpt_close_all();       /* Close all open printer ports */
   host_com_close_all();       /* Close all open comms ports */
   MouseDetachMenuItem(TRUE);  /* Force the menu item away on quit */
@@ -397,15 +369,14 @@ void host_terminate(void)
 {
 
 #ifdef HUNTER
-#line 417
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 420
 
+#line 421
     if(VDMForWOW)
-	ExitVDM(VDMForWOW,(ULONG)-1);	  // Kill everything for WOW VDM
+        ExitVDM(VDMForWOW,(ULONG)-1);     // Kill everything for WOW VDM
     else
-	ExitVDM(FALSE,0);
+        ExitVDM(FALSE,0);
 
     ExitProcess(VdmExitCode);
 }
@@ -425,7 +396,6 @@ VOID TerminateVDM(void)
      *  NOTE: terminate will call host_applClose and host_terminate
      *        after doing base cleanup
      */
-#line 444
     terminate();
 }
 
@@ -433,9 +403,6 @@ VOID TerminateVDM(void)
 
 
 
-#line 451
 #ifdef NOTUSEDNOTUSED
-#line 452
 #error Unsupported excluded original configuration
 #endif
-#line 423

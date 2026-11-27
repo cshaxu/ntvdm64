@@ -1,0 +1,418 @@
+{
+  "task": "M0 T485 S12 P12",
+  "state": "final-verified-commit-pending",
+  "package": "build/t485-s12/runtime13",
+  "files": {
+    "src\\mvdm-host\\softpc.new\\host\\src\\nt_pif.c": "0081371482ca709b6c8a29eb2ab039a4803b5083fe6852df615538f491ad6d18",
+    "src\\mvdm-host\\softpc.new\\host\\src\\nt_reset.c": "783e726900ed2d0e95a93c779ee098026f373112fc2e07c3d7f20f9370dfcc99",
+    "src\\mvdm-host\\softpc.new\\host\\src\\nt_rez.c": "f8c0bb29502cee780b3e22973c8dc3ede2f4b879fa1db6755421414854f2d8c9",
+    "src\\mvdm-host\\softpc.new\\host\\src\\nt_rflop.c": "e6ea5792bd2e7ce4234336126a90e3cd661669cbe9ccf6025461204e100fd8b8",
+    "src\\mvdm-host\\softpc.new\\host\\src\\nt_sound.c": "ccac8344ad0d001542b0631bb9fc0bfad5b233b655859fbb5138f7531706df88"
+  },
+  "diff": {
+    "before": {
+      "points": 5,
+      "lines": 6790
+    },
+    "after": {
+      "points": 60,
+      "lines": 106
+    },
+    "s12_current": {
+      "points": 739,
+      "lines": 3576
+    },
+    "s12_reduction": {
+      "points": 64,
+      "lines": 28233
+    }
+  },
+  "line_witnesses": [
+    {
+      "file": "nt_pif.c",
+      "checked": 81,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "nt_reset.c",
+      "checked": 50,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "nt_rez.c",
+      "checked": 8,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "nt_rflop.c",
+      "checked": 184,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "nt_sound.c",
+      "checked": 64,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    }
+  ],
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "2C3E050B99CCD2B11B7F912B092FC350DAE17A038D713CA4FB90E49FB0A22B68",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "2C3E050B99CCD2B11B7F912B092FC350DAE17A038D713CA4FB90E49FB0A22B68",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "B43301D71A789447E5FF88518A94986CEDA8F1CF1F60222E938C58382F7463E3",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "B43301D71A789447E5FF88518A94986CEDA8F1CF1F60222E938C58382F7463E3",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "0E4759FC47F21EF284404ED50DFBA3642731AC74F67226D1C83D8B45EAEEBCB0",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "0E4759FC47F21EF284404ED50DFBA3642731AC74F67226D1C83D8B45EAEEBCB0",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "9A01EF98D64A8B9167171F9EB15D65DFC4D7C0C790B519B0FD8A3324C8F5889C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "9A01EF98D64A8B9167171F9EB15D65DFC4D7C0C790B519B0FD8A3324C8F5889C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "376E59913327B4733450DAC96C2C2F5B649E4224231175081D271C853A2CE8B2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "376E59913327B4733450DAC96C2C2F5B649E4224231175081D271C853A2CE8B2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "2A88D5E1D469A458ADEB088D43467F9ACF37AFFE120039CAA588B2EBFA296A01",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "2A88D5E1D469A458ADEB088D43467F9ACF37AFFE120039CAA588B2EBFA296A01",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "446EE20F841A7F9907DB4290D8FAF61EDBEC78F4126E903D7B98BC7D613DA496",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "446EE20F841A7F9907DB4290D8FAF61EDBEC78F4126E903D7B98BC7D613DA496",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "2270B24AFB1567D9C5581E884A7E3288D4394CF91A8EBE377C0BACEA36FABC4D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "2270B24AFB1567D9C5581E884A7E3288D4394CF91A8EBE377C0BACEA36FABC4D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "1F100435F1F5EDC30B1EB8F15CAE36207D1A8890A5C5AC0345997AF44F4AFCA2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "1F100435F1F5EDC30B1EB8F15CAE36207D1A8890A5C5AC0345997AF44F4AFCA2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "F9DEDF6AF8AE05A264FD7B9FF3CBDAFF5F2868A2E68BBCAA17865AE066FF65F6",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "F9DEDF6AF8AE05A264FD7B9FF3CBDAFF5F2868A2E68BBCAA17865AE066FF65F6",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "4682C6D5453B856A40FADD5282F43FF032FC434576362F72CC21E3D47016DC29",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "4682C6D5453B856A40FADD5282F43FF032FC434576362F72CC21E3D47016DC29",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "FC3CB0B45EED0850DC3413693A1DC8E2E1EC281E1AE2275DE97DC33A2AF6DD7C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "FC3CB0B45EED0850DC3413693A1DC8E2E1EC281E1AE2275DE97DC33A2AF6DD7C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "EAAE0838A4B9382FE2B3F33E36BC82ABAC2ACE364C8675328E7DC7B02260A477",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "EAAE0838A4B9382FE2B3F33E36BC82ABAC2ACE364C8675328E7DC7B02260A477",
+      "pass": true
+    }
+  ],
+  "build": "PASS",
+  "full": {
+    "state": "PASS",
+    "owner_pid": 9272,
+    "log": "build/t485-s12/p12/final/full.log",
+    "desktop_results": {
+      "win31-standard": {
+        "case": "std-dosonly0",
+        "dosonly": false,
+        "enhanced": false,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 21,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": true,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "exitAccepted": true,
+        "knownExitOne": false,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t485-s12\\p12\\final\\full\\win31-standard\\runtime\\std-dosonly0.observer.txt"
+      },
+      "win31-enhanced": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 2085,
+        "hwnd": 4456,
+        "observedDosOnly": 0,
+        "normalExit": true,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "exitAccepted": true,
+        "knownExitOne": false,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t485-s12\\p12\\final\\full\\win31-enhanced\\runtime\\386-dosonly0.observer.txt",
+        "strict_roundtrip": "window-input=1 fullscreen-text=1 returned-window-input=1 second-fullscreen=1 same-window=1"
+      },
+      "win95": {
+        "case": "386-dosonly0",
+        "dosonly": false,
+        "enhanced": true,
+        "probeStarted": true,
+        "progmanAndMode": true,
+        "flags": 6181,
+        "hwnd": 160,
+        "observedDosOnly": 0,
+        "normalExit": false,
+        "serviceLoss": false,
+        "workerClose": false,
+        "consoleClose": false,
+        "exitAccepted": true,
+        "knownExitOne": true,
+        "passed": true,
+        "error": null,
+        "observer": "O:\\repos.hobby\\ntvdm64\\build\\t485-s12\\p12\\final\\full\\win95\\runtime\\386-dosonly0.observer.txt",
+        "strict_roundtrip": "window-input=1 fullscreen-text=1 returned-window-input=1 second-fullscreen=1 same-window=1"
+      }
+    },
+    "timings": {
+      "Suite": "Full",
+      "ElapsedMs": 621880,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": true,
+      "PreparationMs": 20762,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1364,
+          "CleanupMs": 322,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-standard",
+          "ElapsedMs": 43469,
+          "CleanupMs": 339,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-enhanced",
+          "ElapsedMs": 73641,
+          "CleanupMs": 339,
+          "Passed": true
+        },
+        {
+          "Gate": "win95",
+          "ElapsedMs": 115241,
+          "CleanupMs": 327,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 17036,
+          "CleanupMs": 343,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 15813,
+          "CleanupMs": 353,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 16799,
+          "CleanupMs": 344,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 159,
+          "CleanupMs": 352,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 65305,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 42536,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 38955,
+          "CleanupMs": 347,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14397,
+          "CleanupMs": 396,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 9133,
+          "CleanupMs": 327,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 1173,
+          "CleanupMs": 405,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12234,
+          "CleanupMs": 340,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 33622,
+          "CleanupMs": 392,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 40574,
+          "CleanupMs": 362,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3146,
+          "CleanupMs": 342,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7568,
+          "CleanupMs": 347,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 9722,
+          "CleanupMs": 342,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3559,
+          "CleanupMs": 349,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7128,
+          "CleanupMs": 285,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20120,
+          "CleanupMs": 398,
+          "Passed": true
+        }
+      ]
+    },
+    "reruns": 0
+  },
+  "commit": null,
+  "push": false,
+  "reviewed": {
+    "files": 40,
+    "points": 612,
+    "restored_verified": 429,
+    "residual_verified": 183,
+    "unreviewed": 33
+  }
+}
