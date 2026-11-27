@@ -37,6 +37,7 @@
 #include <windowsx.h>
 /* OPENNT-HOST-110: original user.h prefix contract, no parser here. */
 #define CH_PREFIX TEXT('&')
+#define CH_ENGLISHPREFIX 0x1E /* XP user.h English mnemonic prefix. */
 #define MENUSYSMENU TEXT(' ') /* Original user.h system-menu mnemonic. */
 LONG GetPrefixCount(LPCWSTR lpstr, int cb, LPWSTR lpstrCopy, int cbCopy);
 #include "wow_task_init_bindings.h"
@@ -320,9 +321,6 @@ BOOL WINAPI wow_original_EndDialog(HWND, INT_PTR);
      ((msg) == WM_DEVICECHANGE && ((wParam) & 0x8000))) : 0)
 #define MSGFLAG_WOW_RESERVED 0x00010000
 #define WEFLAYOUTRTL 0x0A40
-/* The retained CLS identity is the registration's immutable native atom.
- * Its pre-XP field is atomClassName; no versioned-class namespace is exposed. */
-#define IS_BUTTON(pwnd) (gpsi->atomSysClass[ICLS_BUTTON] == (pwnd)->pcls->atomClassName)
 /* Define recovered bodies under private names, not SDK dllimport names. */
 #undef IsDialogMessageA
 #undef IsDialogMessageW
@@ -334,6 +332,9 @@ BOOL WINAPI wow_original_IsDialogMessageW(HWND, LPMSG);
 /* Retain the original navigation wrappers under private body symbols. No
  * external USER32 route is redirected by these source-definition aliases. */
 #ifdef WOW_ORIGINAL_DIALOG_MANAGER
+/* The retained CLS identity is the registration's immutable native atom.
+ * Its pre-XP field is atomClassName; no versioned-class namespace is exposed. */
+#define IS_BUTTON(pwnd) (gpsi->atomSysClass[ICLS_BUTTON] == (pwnd)->pcls->atomClassName)
 #undef GetNextDlgTabItem
 #undef GetNextDlgGroupItem
 #define GetNextDlgTabItem wow_original_GetNextDlgTabItem

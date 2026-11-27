@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime48 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime49 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -155,22 +155,10 @@ that Full checkpoint; its receipt retains all census and initial failures.
 Their receipts retain source identities, ordered-DIR correction, package/tests,
 complete census and checkpoint counts. No guest changes.
 
-[P39 N022 dialog creation](../etc/evidence/t485-s1/n022-dlgbegin-review.md)
-delivers runtime44: XP creation/font/monitor/UI algorithm and paired interfaces.
-Cached build, dual13-image26hash, control40/40, real CCPU window-borrow and SOL
-Options pass. Fixture-only link repairs and earlier build failures are retained.
-N02210/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
-536different,7869points/117412lines; delta0files/0exact/0same/0different/
-+17points/+58lines.1276XP/53OpenNT. Three changed mirrors; seven since P36
-Full24/24. No guest change.
-
-[P40 N022 dialog ending](../etc/evidence/t485-s1/n022-dlgend.md) delivers
-runtime45: XP INT_PTR EndDialog and paired declarations, retained retirement
-guard. Cached build, dual13-image26hash, control40/40, real CCPU window-borrow
-and SOL Options pass. N02211/39; overall57/159; S15 9/14.
-Census1329files,782exact,793nonerror same/536different,7866points/117406lines;
-delta0files/0exact/0same/0different/-3points/-6lines.1277XP/52OpenNT.
-One changed mirror; eight since P36 Full24/24. No guest change.
+[P39 dialog creation](../etc/evidence/t485-s1/n022-dlgbegin-review.md) and
+[P40 dialog ending](../etc/evidence/t485-s1/n022-dlgend.md) delivered runtime44/45.
+Their receipts preserve source identities, complete census, initial failures
+and final build/publication/control/lifecycle/SOL evidence. No guest changes.
 
 [P41 N022 dialog manager](../etc/evidence/t485-s1/n022-dlgmgr.md) delivered
 runtime46 and its recorded targeted gates; its receipt retains full census.
@@ -189,6 +177,14 @@ controls40/40, CCPU window-borrow and SOL Options passed. N02214/39;
 S15 9/14 and overall57/159. Census1329files,782exact,793nonerror same/
 536different,7800points/116998lines; delta0/0/0/0/+3points/-72lines.
 1280XP/49OpenNT. One mirror since P42 Full24/24; next dmmnem.c.
+
+[P44 N022 dialog mnemonics](../etc/evidence/t485-s1/n022-dmmnem.md)
+delivers runtime49: XP matching/loop algorithms, shared class identity and
+existing focus lifetime. Cached build, dual13-image26hash, controls40/40,
+CCPU window-borrow and SOL Options passed. N02215/39; S15 9/14, overall57/159.
+Census1329files,782exact,793nonerror same/536different,7785points/116983lines;
+delta0/0/0/0/-15points/-15lines.1281XP/48OpenNT. Two mirrors since P42
+Full24/24; next draw.c. No guest changes.
 
 ## S14 Closure Record
 

@@ -264,3 +264,4 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P41 N022 dialog manager](n022-dlgmgr.md).
 - [S15 P42 N022 dialog keyboard](n022-dlgmgr2.md).
 - [S15 P43 N022 dialog navigation](n022-dlgmgrc.md).
+- [S15 P44 N022 dialog mnemonics](n022-dmmnem.md).

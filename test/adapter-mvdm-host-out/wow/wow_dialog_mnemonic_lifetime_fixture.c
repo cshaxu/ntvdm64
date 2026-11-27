@@ -6,7 +6,10 @@
 
 /* Link the actual original dmmnem body and production BUTN scope. Only
  * native dispatch, graph traversal and final allocator are doubled. */
-static WND root, start, desktop, disabled[513];
+static WND root, start, desktop, disabled[1025];
+static CLS button_class;
+static wow_dialog_context context;
+__declspec(thread) wow_dialog_context *wow_dialog_current;
 static BOOL exhausted;
 static BUTNWND button;
 static BUTN data;
@@ -43,7 +46,7 @@ PWND _GetChildControl(PWND dialog, PWND child)
 PWND _GetNextDlgGroupItem(PWND dialog, PWND child, BOOL previous)
 {
     CHECK(dialog == &root && !previous);
-    if (exhausted) return child == &start ? &disabled[0] : &disabled[(child - disabled + 1) % 513];
+    if (exhausted) return child == &start ? &disabled[0] : &disabled[(child - disabled + 1) % ARRAYSIZE(disabled)];
     if (retired) return &start;
     return child == &button.wnd ? &start : &button.wnd;
 }
@@ -100,6 +103,9 @@ static void setup(UINT dialog_code)
 {
     ZeroMemory(&root, sizeof(root)); ZeroMemory(&start, sizeof(start));
     ZeroMemory(&button, sizeof(button)); ZeroMemory(&data, sizeof(data));
+    ZeroMemory(&context, sizeof(context)); wow_dialog_current = &context;
+    context.server.atomSysClass[ICLS_BUTTON] = 0xc001;
+    button_class.atomClassName = 0xc001; button.wnd.pcls = &button_class;
     root.head.h = (HWND)(ULONG_PTR)1; start.head.h = (HWND)(ULONG_PTR)2;
     desktop.head.h = (HWND)(ULONG_PTR)4; exhausted = FALSE;
     button.wnd.head.h = (HWND)(ULONG_PTR)3;
@@ -157,13 +163,13 @@ int __cdecl main(void)
     CHECK(xxxGotoNextMnem(&root, &start, L't') == &button.wnd && clicks == 1);
     setup(0); exhausted = TRUE;
     ZeroMemory(disabled, sizeof(disabled));
-    for (i = 0; i < 513; ++i) {
+    for (i = 0; i < ARRAYSIZE(disabled); ++i) {
         disabled[i].head.h = (HWND)(ULONG_PTR)(100 + i);
         disabled[i].spwndParent = &root;
         SetWF(&disabled[i], WFDISABLED);
     }
     CHECK(!xxxGotoNextMnem(&root, &start, L't'));
-    CHECK(texts == 512 && queries == 1024 && !focuses && !clicks);
+    CHECK(texts == 1024 && queries == 2048 && !focuses && !clicks);
     printf("original-mnemonic-lifetime failures=%u\n", failures);
     return failures ? 1 : 0;
 }

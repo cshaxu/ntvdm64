@@ -2203,3 +2203,4 @@ post-publication targeted checks.
 - [S15 P41 N022 dialog manager](evidence/t485-s1/n022-dlgmgr.md).
 - [S15 P42 N022 dialog keyboard](evidence/t485-s1/n022-dlgmgr2.md).
 - [S15 P43 N022 dialog navigation](evidence/t485-s1/n022-dlgmgrc.md).
+- [S15 P44 N022 dialog mnemonics](evidence/t485-s1/n022-dmmnem.md).

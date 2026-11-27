@@ -2,6 +2,8 @@
 *
 *  DMMNEM.C -
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 *      Mnemonic Character Processing Routines
 *
 * ??-???-???? mikeke    Ported from Win 3.0 sources
@@ -10,6 +12,13 @@
 
 #include "precomp.h"
 #pragma hdrstop
+
+/*
+ * There are several loops that we could get stuck in that we just forcibly
+ * break by a max iteration count. Ugly, but its legacy DialogManager
+ * issues.
+ */
+#define INFINITE_LOOP_CURE 1024
 
 /***************************************************************************\
 * FindMnemChar
@@ -29,46 +38,60 @@ int FindMnemChar(
     BOOL fPrefix)
 {
     WCHAR chc;
-    WCHAR chnext;
     WCHAR chFirst;
 
     while (*lpstr == TEXT(' '))
         lpstr++;
 
-    ch = (WCHAR)CharLowerW((LPWSTR)(DWORD)(UTCHAR)ch);
-    chFirst = (WCHAR)CharLowerW((LPWSTR)(DWORD)(UTCHAR)(*lpstr));
+    ch = (WCHAR)(ULONG_PTR)CharLowerW((LPWSTR)ULongToPtr( (DWORD)(UTCHAR)ch ));
+    chFirst = (WCHAR)(ULONG_PTR)CharLowerW((LPWSTR)ULongToPtr( (DWORD)(UTCHAR)(*lpstr) ));
 
     if (fPrefix) {
-        while (chc = *lpstr++) {
-            if (((WCHAR)CharLower((LPWSTR)(DWORD)(UTCHAR)chc) == CH_PREFIX)
-#line 44
-#ifdef KANJI
-#line 45
-#error DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register.
-#endif
-#line 47
-            ) {
-                chnext = (WCHAR)CharLowerW((LPWSTR)(DWORD)(UTCHAR)*lpstr);
+        WORD wvch, xvkey;
+        //
+        // get OEM-dependent virtual key code
+        //
+        if (IS_DBCS_ENABLED() && (wvch = VkKeyScanW(ch)) != -1)
+            wvch &= 0x00FF;
 
-                if (chnext == CH_PREFIX)
+        while (chc = *lpstr++) {
+            //
+            // This should think about KOREA & TAIWAN case. But probably OK.
+            //
+            if ((chc == CH_PREFIX) || (chc == CH_ENGLISHPREFIX && IS_DBCS_ENABLED())) {
+
+                WORD chnext = (WCHAR)(ULONG_PTR)CharLowerW((LPWSTR)ULongToPtr( (DWORD)(UTCHAR)*lpstr ));
+
+                if (chnext == CH_PREFIX) {
+                    //
+                    // Two CH_PREFIX in the resrc string results in one "&" in the text displayed
+                    //
                     lpstr++;
-                else if (chnext == ch)
-                    return 0x01;
-                else {
-#line 55
-#ifdef KANJI
-#line 56
-#error DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register.
-#line 63
-#else
-#line 64
-                    return 0x00;
-#endif
-#line 66
+                } else {
+                    if (chnext == ch) {
+                        return 0x01;
+                    }
+                    if (IS_DBCS_ENABLED()) {
+                        //
+                        // Compare should be done with virtual key in Kanji menu mode
+                        // in order to accept Digit shortcut key and save English
+                        // windows applications!
+                        //
+                        xvkey = VkKeyScanW(chnext);
+                        if (xvkey != 0xFFFF && ((xvkey & 0x00FF) == wvch)) {
+                            return 0x01;
+                        }
+                   }
+                   return 0x00;
                 }
             }
         }
     }
+#if 0   // the original US code on NT4
+#line 91
+#error Unsupported original disabled NT4 branch
+#endif // FE_SB
+#line 107
 
     if (fFirst && (ch == chFirst))
         return 0x80;
@@ -116,14 +139,15 @@ PWND xxxGNM_FindNextMnem(
         ThreadUnlock(&tlpwndStart);
 
         i++;
-        if (pwndT == NULL || pwndT == pwnd || i > 60) {
+        if (pwndT == NULL || pwndT == pwnd || i > INFINITE_LOOP_CURE) {
 
             /*
              * If we have returned to our starting window or if we have gone
-             * through 60 iterations, let's exit.  There are no local mnemonics
-             * that match.  We have to check for 60 iterations (or so) because
-             * we run into problems with WS_GROUP not being properly defined in
-             * rc files that we never reach this same starting window again....
+             * through INFINITE_LOOP_CURE iterations, let's exit.  There are
+             * no local mnemonics that match.  We have to check for 
+             * INFINITE_LOOP_CURE iterations (or so) because we run into
+             * problems with WS_GROUP not being properly defined in rc files
+             * that we never reach this same starting window again....
              */
             break;
         }
@@ -148,6 +172,7 @@ PWND xxxGNM_FindNextMnem(
     }
 
     pwnd = pwndStart = _GetChildControl(pwndDlg, pwnd);
+    i = 0;
 
     ThreadLock(pwnd, &tlpwnd);
     while (TRUE) {
@@ -156,11 +181,8 @@ PWND xxxGNM_FindNextMnem(
          * Start with next so we see multiples of same mnemonic.
          */
         pwnd = _NextControl(pwndDlg, pwnd, TRUE);
-
         ThreadUnlock(&tlpwnd);
         ThreadLock(pwnd, &tlpwnd);
-
-
 
         /*
          * Only check for matching mnemonic if control doesn't want characters
@@ -174,7 +196,8 @@ PWND xxxGNM_FindNextMnem(
                 break;
         }
 
-        if (pwnd == pwndStart) {
+        i++;
+        if (pwnd == pwndStart || i > INFINITE_LOOP_CURE) {
             pwnd = NULL;
             break;
         }
@@ -210,7 +233,7 @@ PWND xxxGotoNextMnem(
     /*
      * Loop for a long time but not long enough so we hang...
      */
-    while (count < 256 * 2) {
+    while (count < INFINITE_LOOP_CURE) {
 
         /*
          * If the dialog box doesn't has the mnemonic specified, return NULL.
@@ -229,7 +252,6 @@ PWND xxxGotoNextMnem(
         /*
          * If a non-disabled static item, then jump ahead to nearest tabstop.
          */
-#line 230
         if (code & DLGC_STATIC && !TestWF(pwnd, WFDISABLED)) {
             pwndT = _GetNextDlgTabItem(pwndDlg, pwnd, FALSE);
 
@@ -251,7 +273,6 @@ PWND xxxGotoNextMnem(
              * labeled with a static text item.
              */
             code = (UINT)SendMessage(hwnd, WM_GETDLGCODE, 0, 0L);
-#line 251
         }
 
         if (!TestWF(pwnd, WFDISABLED)) {
@@ -265,7 +286,6 @@ PWND xxxGotoNextMnem(
                  * No, simply give it the focus.
                  */
                 DlgSetFocus(hwnd);
-#line 264
             } else {
 
                 /*
@@ -281,16 +301,13 @@ PWND xxxGotoNextMnem(
                     /*
                      * Delay
                      */
-#line 279
 #ifdef LATER
-#line 280
-#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
-#line 284
+#line 317
+#error Unsupported original LATER branch
 #else
-#line 285
+#line 322
                     Sleep(1);
 #endif
-#line 287
 
                     /*
                      * Un-Flash it.
@@ -302,7 +319,7 @@ PWND xxxGotoNextMnem(
                      */
                     pwndT = REBASEPWND(pwnd, spwndParent);
                     SendMessage(HW(pwndT), WM_COMMAND,
-                            MAKELONG(pwnd->spmenu, BN_CLICKED), (LONG)hwnd);
+                            MAKELONG(PTR_TO_ID(pwnd->spmenu), BN_CLICKED), (LPARAM)hwnd);
                     ThreadUnlock(&tlpwnd);
                     return (PWND)1;
                 } else {
@@ -316,12 +333,12 @@ PWND xxxGotoNextMnem(
                     BOOL fIsNTButton;
                     PBUTN pbutn;
                     wow_button_scope buttonScope;
+#line 348
 
-#line 312
-                    fIsNTButton = (pwnd->fnid == FNID_BUTTON);
+                    fIsNTButton = IS_BUTTON(pwnd);
                     if (fIsNTButton) wow_button_scope_enter(&buttonScope, pwnd);
                     __try {
-#line 313
+#line 350
                     if (fIsNTButton) {
                       pbutn = ((PBUTNWND)pwnd)->pbutn;
                       BUTTONSTATE(pbutn) |= BST_DONTCLICK;
@@ -331,21 +348,17 @@ PWND xxxGotoNextMnem(
 
                     DlgSetFocus(hwnd);
                     } __finally {
-#line 322
-                    if (fIsNTButton) {
-                      BUTTONSTATE(pbutn) &= ~BST_DONTCLICK;
-                    }
-                        if (fIsNTButton) wow_button_scope_leave(&buttonScope);
-#line 324
+                        if (fIsNTButton) {
+                            BUTTONSTATE(pbutn) &= ~BST_DONTCLICK;
+                            wow_button_scope_leave(&buttonScope);
+                        }
                     }
                     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS)) {
                         ThreadUnlock(&tlpwnd);
                         return NULL;
-#line 324
+#line 361
                     }
-#line 325
 
-#line 326
                     /*
                      * Send click message if button has a UNIQUE mnemonic
                      */
@@ -357,7 +370,6 @@ PWND xxxGotoNextMnem(
 
             ThreadUnlock(&tlpwnd);
             return pwnd;
-#line 337
         } else {
 
             /*
@@ -378,5 +390,4 @@ PWND xxxGotoNextMnem(
 
     ThreadUnlock(&tlpwnd);
     return NULL;
-#line 356
 }
