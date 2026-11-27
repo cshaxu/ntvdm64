@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P6",
-  "state": "final-verified-published-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime7",
   "file": "src/mvdm-host/dos/dem/demsrch.c",
   "sha256": "78e76bc37d1cdc011a869389174fd75212b908c2c9800dac3b815b0a1b267285",
@@ -192,7 +192,8 @@
     },
     "fcb": "PASS three unique names,EOF,missing first,direct receipt37",
     "full": "Not due;last file10/runtime5 Full23/23;not repeated",
-    "logs": "build/t485-s12/p6/final"
+    "logs": "build/t485-s12/p6/final",
+    "governance": "PASS"
   },
   "attempts": [
     {
@@ -203,5 +204,6 @@
       "owner": 20784,
       "result": "Fixture passes FALSE for owned hard-disk test files. Only failed provider retried;unexecuted pressure and FCB gates run once. All PASS;production package unchanged."
     }
-  ]
+  ],
+  "commit": "ae9241746"
 }

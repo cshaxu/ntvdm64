@@ -8,7 +8,7 @@ each file before delivery. Default original valid;retains need real evidence.
 
 Reviewed13/48files66/645points;restored-delivered12,restored-local0,
 residual-reviewed54,unreviewed579.
-Delivered/pushed12files61points through 3b1d831b6.
+Delivered/pushed13files66points through ae9241746.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -26,7 +26,7 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 10 | src/mvdm-host/dos/dem/demhndl.c | 12 | P4 delivered d74c534ca |
 | 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | P5 delivered3b1d831b6 |
 | 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | P5 delivered3b1d831b6 |
-| 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | P6 verified; commit pending |
+| 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | P6 delivered ae9241746 |
 | 14 | src/mvdm-host/inc/dbgexp.h | 1 | Pending |
 | 15 | src/mvdm-host/inc/demexp.h | 3 | Pending |
 | 16 | src/mvdm-host/inc/doswow.h | 1 | Pending |
@@ -370,3 +370,6 @@ hard-disk files. Only that failed gate retried;provider115/115 PASS,then three
 previously unexecuted DOS pressure cases and actual FCB first/next/end/missing
 with receipt37 PASS. No production changes/rebuild/republish after this test-only
 fix. No Full rerun. Mirror43/80->16/39;all11exclusions retained. Commit/push pending.
+
+P6 committed/pushed ae9241746. Thirteenfiles66points delivered;12restored,
+54residual,579unreviewed. Census672/31619,reduction131/190. Next14dbgexp.h.

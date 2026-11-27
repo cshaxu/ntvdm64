@@ -34,12 +34,12 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 [S12 list](../etc/evidence/t485-h-repair/s12-progress.md):13/48files,
 66/645points source-reviewed;12restored-delivered,0restored-local,54residual,
-579unreviewed. Delivered12files61points through3b1d831b6.
+579unreviewed. Delivered13files66points through ae9241746.
 P6 demsrch.c43/80->16/39 (-27/-41);11exclusions and execution tokens unchanged.
 S12 census803/31809->672/31619 (-131points/-190lines).
 [P6 receipt](../etc/evidence/t485-h-repair/s12-p6-result.json):cached build,
 285line witnesses,dual runtime7 publication,provider115/115,three DOS pressure
-cases and FCB PASS. XP test-argument repair only;commit/push pending.
+cases and FCB PASS. XP test-argument repair only;committed/pushed ae9241746.
 Last Full checkpoint:file10,runtime5,23/23. No successful gate repeated.
 Nextfile14dbgexp.h;35files remain. Migration39/159;N004 gated on S13.
 
