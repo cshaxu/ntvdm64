@@ -2967,3 +2967,9 @@ The addon PIF reader/editor now uses original XP public/internal/shell/inc/pif.h
 its shlobj.h declaration dependency and seven existing excluded arms. The
 independent mvdm/inc/pif.h COMMAND provider is unchanged. [Evidence](../../docs/etc/evidence/t485-s1/n020-pif.md).
 N0202/7 delivered; five files remain.
+
+### T485 S15 N020 Console declarations
+
+winconp.h retains complete XP declarations and original packing, with only
+three pre-existing one-line excluded arms. No nonerror difference remains.
+[Evidence](../../docs/etc/evidence/t485-s1/n020-console.md). N0203/7 delivered.

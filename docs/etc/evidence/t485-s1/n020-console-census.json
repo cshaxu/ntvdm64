@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 763,
+    "nonerror_identical": 771,
+    "nonerror_different": 544,
+    "nonerror_points": 7735,
+    "nonerror_lines": 163271
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 763,
+    "nonerror_identical": 772,
+    "nonerror_different": 543,
+    "nonerror_points": 7728,
+    "nonerror_lines": 163264
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -7,
+    "nonerror_lines": -7
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "before_points": 7,
+      "before_lines": 7,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 3
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1234,
+    "OpenNT": 81
+  }
+}

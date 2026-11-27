@@ -2154,3 +2154,5 @@ post-publication targeted checks.
 - [N020 USER resource declaration checkpoint](evidence/t485-s1/n020-first.md).
 
 - [N020 PIF declaration migration](evidence/t485-s1/n020-pif.md).
+
+- [N020 Console private declarations](evidence/t485-s1/n020-console.md).
