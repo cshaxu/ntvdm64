@@ -24,6 +24,8 @@
 #include "section_image_information.h"
 /* Native SSPI status declaration, shared/sspi.h. */
 typedef LONG SECURITY_STATUS;
+/* XP pebteb.h frame identity; RTL declarations need only its pointer. */
+typedef struct _TEB_ACTIVE_FRAME *PTEB_ACTIVE_FRAME;
 
 /* XP ntdef.h:1019; native declaration prerequisite. */
 typedef enum _TIMER_TYPE {

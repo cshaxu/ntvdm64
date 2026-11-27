@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1325,
+    "byte_identical": 776,
+    "nonerror_identical": 787,
+    "nonerror_different": 538,
+    "nonerror_points": 7766,
+    "nonerror_lines": 138569
+  },
+  "after": {
+    "files": 1325,
+    "byte_identical": 776,
+    "nonerror_identical": 787,
+    "nonerror_different": 538,
+    "nonerror_points": 7773,
+    "nonerror_lines": 136488
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 7,
+    "nonerror_lines": -2081
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "before_points": 1,
+      "before_lines": 2180,
+      "after_points": 8,
+      "after_lines": 99,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1259,
+    "OpenNT": 66
+  }
+}

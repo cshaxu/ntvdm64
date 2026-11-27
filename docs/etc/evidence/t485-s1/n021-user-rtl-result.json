@@ -1,0 +1,579 @@
+{
+  "task": "M0 T485 S15 P28",
+  "runtime": "build/t485-s15/runtime29",
+  "build_exit": 0,
+  "original_inputs": {
+    "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+    "xp_blob": "978808f498bcfc4924079ec737192ef740c79a43",
+    "before_sha256": "b15718da6ac58a9f729bb4eb2bd6423e0c001c38f121fe03751594826eec0f3f",
+    "xp_sha256": "847d66fcf52415baa04bb84ff53981e8e9db8c4f4dc8258d6a24d25409417f62",
+    "before_lines": 1077,
+    "xp_lines": 3073,
+    "before_crlf": 1077,
+    "xp_crlf": 0
+  },
+  "frame_provenance": {
+    "path": "Source/XPSP1/NT/public/sdk/inc/pebteb.h",
+    "blob": "50249884d3e077d56090eebf90cdd2ad307f2e59",
+    "definition_lines": [
+      300,
+      304
+    ],
+    "adaptation": "opaque forward pointer only; no layout copied; actual consumers are RtlPushFrame/RtlPopFrame/RtlGetFrame declarations"
+  },
+  "source_hashes": {
+    "src/non-mvdm/public/sdk/inc/nturtl.h": "1c094e636f3b9a65165ef6b2b4ac5cee45fdd0b60d1351b2f264dd2d799a91fd",
+    "src/compat/include/opennt_support_types.h": "dc9e4ab632b26074332a338d3a15eef0e0945cfdbf5a879d8a4d3d638ffec77e"
+  },
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "406C98C77AD5B98434554C097549C4CA3AC93DE5E94096F9EEE51F82BBE690A3",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "406C98C77AD5B98434554C097549C4CA3AC93DE5E94096F9EEE51F82BBE690A3",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "DDEE24B4048D4A5DACFFB8A8CD7B3F217F17DF8292956DCE7DE6BC7B711EE932",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "DDEE24B4048D4A5DACFFB8A8CD7B3F217F17DF8292956DCE7DE6BC7B711EE932",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "8A820F5DB897D2BD221EBF76BDB421FD287A06767820421AAB5F967F76A1ECDE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "8A820F5DB897D2BD221EBF76BDB421FD287A06767820421AAB5F967F76A1ECDE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "2ECD01365282F6DE0AC79E1FBE422219FCFA85F1ED6066A6E533A073C7E970C5",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "2ECD01365282F6DE0AC79E1FBE422219FCFA85F1ED6066A6E533A073C7E970C5",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "90763C804C810A0BD7F1954B129322A0711A2EB1E45AAB356FF056631FE8BC6F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "90763C804C810A0BD7F1954B129322A0711A2EB1E45AAB356FF056631FE8BC6F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "189365654D66101441C9A2E729C032F21BCB29ED640D1C3907FE005B2E8599FA",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "189365654D66101441C9A2E729C032F21BCB29ED640D1C3907FE005B2E8599FA",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "90927B415AD513201289E77273FFBDFCCD43E4B657701E96C719E7E3567F1ABA",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "90927B415AD513201289E77273FFBDFCCD43E4B657701E96C719E7E3567F1ABA",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "DDA0F852E4342FAF96FC3483127E113DB26B1F410E30E4C9E15B06028D41531B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "DDA0F852E4342FAF96FC3483127E113DB26B1F410E30E4C9E15B06028D41531B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "B3C3140EC1D3F6E2B1487755AB513D0C01A073A1AB6F467A215D2EC8FEE7295C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "B3C3140EC1D3F6E2B1487755AB513D0C01A073A1AB6F467A215D2EC8FEE7295C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "210BCB685D9100B41B3C5E60D0C8A60FD508AA0646D1B673A12313E5DEB7C0D9",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "210BCB685D9100B41B3C5E60D0C8A60FD508AA0646D1B673A12313E5DEB7C0D9",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "BAE2A2FA9D97EB2877CB8E92FECEEA0E045CEE68DFA3B9B0A4370CEC98B5A06C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "BAE2A2FA9D97EB2877CB8E92FECEEA0E045CEE68DFA3B9B0A4370CEC98B5A06C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "2ED175FFDC1FA35D228F8153E681E756E695EA3F7B166A607756F6418915745C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "2ED175FFDC1FA35D228F8153E681E756E695EA3F7B166A607756F6418915745C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "928A31360CD5B2431CD354D2BFBE3CD2031D573149CFB1BED61E6B6F4AEBEFDD",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "928A31360CD5B2431CD354D2BFBE3CD2031D573149CFB1BED61E6B6F4AEBEFDD",
+      "pass": true
+    }
+  ],
+  "census": {
+    "before": {
+      "files": 1325,
+      "byte_identical": 776,
+      "nonerror_identical": 787,
+      "nonerror_different": 538,
+      "nonerror_points": 7766,
+      "nonerror_lines": 138569
+    },
+    "after": {
+      "files": 1325,
+      "byte_identical": 776,
+      "nonerror_identical": 787,
+      "nonerror_different": 538,
+      "nonerror_points": 7773,
+      "nonerror_lines": 136488
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 7,
+      "nonerror_lines": -2081
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+        "before_points": 1,
+        "before_lines": 2180,
+        "after_points": 8,
+        "after_lines": 99,
+        "exclusions": 0
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1259,
+      "OpenNT": 66
+    }
+  },
+  "logs": {
+    "capture32-final.log": "native capture bits=32 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "capture64-final.log": "native capture bits=64 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "layout32-final.log": "PASS 32-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n",
+    "layout64-final.log": "PASS 64-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n"
+  },
+  "service": {
+    "Concurrency": 4,
+    "ElapsedMs": 6437,
+    "ObserverHash": "00A37C673F82C3BC4B9DD3EE6EFE5DCA82A1FA143F3E745D9105EB2C2AD283D8",
+    "FixtureHash": "35D112960DCE268D48C424F0632E1566DF06DACB4C644A1D65B15182F7259D99",
+    "Cases": [
+      {
+        "Case": "frontend-chains",
+        "ElapsedMs": 878,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-instances",
+        "ElapsedMs": 885,
+        "Result": "PASS"
+      },
+      {
+        "Case": "parent-resume-origin",
+        "ElapsedMs": 905,
+        "Result": "PASS"
+      },
+      {
+        "Case": "io-authority",
+        "ElapsedMs": 898,
+        "Result": "PASS"
+      },
+      {
+        "Case": "route-cancellation",
+        "ElapsedMs": 464,
+        "Result": "PASS"
+      },
+      {
+        "Case": "prepared-native-root-loss",
+        "ElapsedMs": 484,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-stop",
+        "ElapsedMs": 558,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-reconnect",
+        "ElapsedMs": 565,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-delegated",
+        "ElapsedMs": 542,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait",
+        "ElapsedMs": 823,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-root-loss",
+        "ElapsedMs": 744,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-request-loss",
+        "ElapsedMs": 736,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-worker-loss",
+        "ElapsedMs": 569,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-rundown",
+        "ElapsedMs": 506,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-return",
+        "ElapsedMs": 574,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-after-return",
+        "ElapsedMs": 575,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-nested-return",
+        "ElapsedMs": 488,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-pending-command",
+        "ElapsedMs": 519,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-increment",
+        "ElapsedMs": 519,
+        "Result": "PASS"
+      },
+      {
+        "Case": "launcher-completed-rundown",
+        "ElapsedMs": 518,
+        "Result": "PASS"
+      },
+      {
+        "Case": "completed-worker-loss",
+        "ElapsedMs": 508,
+        "Result": "PASS"
+      },
+      {
+        "Case": "wow-start-late-query",
+        "ElapsedMs": 716,
+        "Result": "PASS"
+      },
+      {
+        "Case": "default",
+        "ElapsedMs": 712,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-authority",
+        "ElapsedMs": 715,
+        "Result": "PASS"
+      },
+      {
+        "Case": "shared-worker-residency",
+        "ElapsedMs": 638,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-command",
+        "ElapsedMs": 512,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-worker",
+        "ElapsedMs": 643,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-gui",
+        "ElapsedMs": 645,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close",
+        "ElapsedMs": 639,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-completion-barrier",
+        "ElapsedMs": 430,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-order",
+        "ElapsedMs": 509,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-root-loss",
+        "ElapsedMs": 508,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-prepare-pending",
+        "ElapsedMs": 507,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-worker-then-console",
+        "ElapsedMs": 434,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-console-then-worker",
+        "ElapsedMs": 482,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-late-worker-close",
+        "ElapsedMs": 546,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-exit-then-console",
+        "ElapsedMs": 550,
+        "Result": "PASS"
+      },
+      {
+        "Case": "console-then-worker-exit",
+        "ElapsedMs": 480,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-console-exit",
+        "ElapsedMs": 443,
+        "Result": "PASS"
+      },
+      {
+        "Case": "preparing-worker-exit",
+        "ElapsedMs": 472,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-terminate",
+        "ElapsedMs": 560,
+        "Result": "PASS"
+      },
+      {
+        "Case": "unfinished-worker-exit",
+        "ElapsedMs": 536,
+        "Result": "PASS"
+      }
+    ]
+  },
+  "guest": {
+    "mode": "netapi",
+    "exit_code": 0,
+    "elapsed_ms": 13450
+  },
+  "omissions": [
+    {
+      "name": "RTL_CRITICAL_SECTION_DEBUG",
+      "start": 59,
+      "end": 67,
+      "reason": "SDK C2011",
+      "evidence": [
+        "raw32.log",
+        "raw64.log"
+      ]
+    },
+    {
+      "name": "RTL_CRITICAL_SECTION",
+      "start": 72,
+      "end": 85,
+      "reason": "SDK C2011",
+      "evidence": [
+        "raw32.log",
+        "raw64.log"
+      ]
+    },
+    {
+      "name": "HEAP_INFORMATION_CLASS",
+      "start": 1113,
+      "end": 1117,
+      "reason": "SDK C2011",
+      "evidence": [
+        "raw32.log",
+        "raw64.log"
+      ]
+    },
+    {
+      "name": "ACTIVATION_CONTEXT_INFO_CLASS",
+      "start": 2471,
+      "end": 2483,
+      "reason": "SDK C2011",
+      "evidence": [
+        "raw32.log",
+        "raw64.log"
+      ]
+    },
+    {
+      "name": "ACTIVATION_CONTEXT_QUERY_INDEX",
+      "start": 2496,
+      "end": 2499,
+      "reason": "SDK C2011",
+      "evidence": [
+        "raw32.log",
+        "raw64.log"
+      ]
+    },
+    {
+      "name": "ASSEMBLY_FILE_DETAILED_INFORMATION",
+      "start": 2556,
+      "end": 2563,
+      "reason": "SDK C2011",
+      "evidence": [
+        "raw32.log",
+        "raw64.log"
+      ]
+    },
+    {
+      "name": "ACTIVATION_CONTEXT_ASSEMBLY_DETAILED_INFORMATION",
+      "start": 2575,
+      "end": 2598,
+      "reason": "SDK C2011",
+      "evidence": [
+        "raw32.log",
+        "raw64.log"
+      ]
+    },
+    {
+      "name": "ACTIVATION_CONTEXT_DETAILED_INFORMATION",
+      "start": 2602,
+      "end": 2615,
+      "reason": "SDK C2011",
+      "evidence": [
+        "raw32.log",
+        "raw64.log"
+      ]
+    }
+  ],
+  "line_audit": {
+    "mismatches": []
+  },
+  "normalized_census": {
+    "before": {
+      "points": 3,
+      "lines": 32
+    },
+    "after": {
+      "points": 8,
+      "lines": 99
+    }
+  },
+  "compile_proof": {
+    "raw32.log": {
+      "sha256": "98cb97a1187b96e3a98431f1b98b5f02d85b7943f8537c448e4b84c237a211b2",
+      "errors": [
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(59): error C2011: '_RTL_CRITICAL_SECTION_DEBUG': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(72): error C2011: '_RTL_CRITICAL_SECTION': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(1113): error C2011: '_HEAP_INFORMATION_CLASS': 'enum' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2471): error C2011: '_ACTIVATION_CONTEXT_INFO_CLASS': 'enum' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2496): error C2011: '_ACTIVATION_CONTEXT_QUERY_INDEX': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2556): error C2011: '_ASSEMBLY_FILE_DETAILED_INFORMATION': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2575): error C2011: '_ACTIVATION_CONTEXT_ASSEMBLY_DETAILED_INFORMATION': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2602): error C2011: '_ACTIVATION_CONTEXT_DETAILED_INFORMATION': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3032): error C2146: syntax error: missing ')' before identifier 'Frame'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3032): error C2061: syntax error: identifier 'Frame'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3032): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3033): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3039): error C2146: syntax error: missing ')' before identifier 'Frame'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3039): error C2061: syntax error: identifier 'Frame'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3039): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3040): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3044): error C2143: syntax error: missing '{' before '__stdcall'"
+      ]
+    },
+    "raw64.log": {
+      "sha256": "f859f2fde5c8eee655ecfb89c4916fd5534ab0e7b40077f4e6cfe447c185a810",
+      "errors": [
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(59): error C2011: '_RTL_CRITICAL_SECTION_DEBUG': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(72): error C2011: '_RTL_CRITICAL_SECTION': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(1113): error C2011: '_HEAP_INFORMATION_CLASS': 'enum' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2471): error C2011: '_ACTIVATION_CONTEXT_INFO_CLASS': 'enum' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2496): error C2011: '_ACTIVATION_CONTEXT_QUERY_INDEX': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2556): error C2011: '_ASSEMBLY_FILE_DETAILED_INFORMATION': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2575): error C2011: '_ACTIVATION_CONTEXT_ASSEMBLY_DETAILED_INFORMATION': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(2602): error C2011: '_ACTIVATION_CONTEXT_DETAILED_INFORMATION': 'struct' type redefinition",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3032): error C2146: syntax error: missing ')' before identifier 'Frame'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3032): error C2061: syntax error: identifier 'Frame'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3032): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3033): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3039): error C2146: syntax error: missing ')' before identifier 'Frame'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3039): error C2061: syntax error: identifier 'Frame'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3039): error C2059: syntax error: ';'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3040): error C2059: syntax error: ')'",
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\nturtl.h(3044): error C2143: syntax error: missing '{' before '__cdecl'"
+      ]
+    },
+    "final32.log": {
+      "sha256": "d65bf2d3796c7f7caa0f33402d84bd8119c8cc21f91eeaad1a34dbec85ec8a2a",
+      "errors": []
+    },
+    "final64.log": {
+      "sha256": "27ee74945886a93499f808ad5b3c65650c24af0fa534121a1562175db5b609ec",
+      "errors": []
+    }
+  },
+  "full": "Not due: P26 Full24/24, three completed files since checkpoint; targeted delivery passed."
+}

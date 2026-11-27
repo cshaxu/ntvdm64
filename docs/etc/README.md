@@ -2177,3 +2177,5 @@ post-publication targeted checks.
 - [N021 registry declarations](evidence/t485-s1/n021-registry.md).
 
 - [S15 P27 N021 RTL migration](evidence/t485-s1/n021-rtl.md).
+
+- [S15 P28 N021 user-mode RTL migration](evidence/t485-s1/n021-user-rtl.md).

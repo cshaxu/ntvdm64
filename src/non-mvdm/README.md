@@ -3036,3 +3036,8 @@ SDK memory-macro conflicts and x86 RtlFirstEntrySList calling convention are
 measured in [RTL evidence](../../docs/etc/evidence/t485-s1/n021-rtl.md).
 Existing rejected branches and original diagnostic lines remain; obsolete B
 RTL redeclarations are removed. No algorithm or original guest is changed.
+
+T485 S15 P28 restores pinned XP nturtl.h and original LF, preserving eight
+compiler-proven SDK type boundaries with original diagnostic lines. No RTL
+algorithm changes; B supplies only the opaque PTEB_ACTIVE_FRAME prerequisite.
+[User RTL evidence](../../docs/etc/evidence/t485-s1/n021-user-rtl.md).

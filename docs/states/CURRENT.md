@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall56/159 directories, H001-H036 and N001-N020. S15 runtime28 is the current
+overall56/159 directories, H001-H036 and N001-N020. S15 runtime29 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -151,15 +151,9 @@ N0218/17; next ntexapi.h. Overall56/159 and S15 8/14 unchanged.
 Five files audited since P21 Full24/24, three changed; no guest modification.
 
 
-[P24 N021 executive/LPC](../etc/evidence/t485-s1/n021-executive.md) delivered:
-XP declaration frameworks, original DEVL/C++ and paired NT includes restored.
-Necessary SDK/B duplicate boundaries retained; no algorithm or guest change.
-Cached build, runtime25 dual13-image26hash publication, both native capture/
-layout fixtures, service lifecycle and real guest NetAPI passed.
-Census1324files,775exact,786nonerror same/538different,7718points/152823lines;
-delta0files/0exact/0same/0different/-23points/-208lines.1254XP/70OpenNT.
-N02110/17; next ntpsapi.h. Overall56/159 and S15 8/14 unchanged. Eight audited
-files since P21 Full24/24, six changed distinct mirror files.
+[P24 N021 executive/LPC](../etc/evidence/t485-s1/n021-executive.md) delivered
+runtime25 and targeted capture/layout, service and guest NetAPI. Its receipt
+retains original DEVL/C++ recovery and census delta-23points/-208lines.
 
 [P25 N021 process/thread](../etc/evidence/t485-s1/n021-process.md) delivered
 runtime26, capture/layout, service42 and guest NetAPI. Its receipt retains
@@ -183,6 +177,15 @@ buffer header; SDK boundaries and original logical lines retained. Census
 delta+1file/+1exact/+1same/0different/+16points/-12245lines.1258XP/67OpenNT.
 N02113/17; next nturtl.h. Overall56/159 and S15 8/14 unchanged. Two mirror
 files completed since P26 Full24/24. Original guest unchanged.
+
+[P28 N021 user RTL](../etc/evidence/t485-s1/n021-user-rtl.md) delivered runtime29:
+XP declarations restored; eight proven SDK duplicate type omissions retained.
+Cached full build, dual13-image26hash, x86/x64 capture/layout, service42 and
+actual guest NetAPI passed. Census1325files,776exact,787nonerror same/538
+different,7773points/136488lines; delta0files/0exact/0same/0different,
++7points/-2081lines.1259XP/66OpenNT. N02114/17; next ptypes32.h.
+Overall56/159 and S15 8/14 unchanged. Three mirror files completed since
+P26 Full24/24. Original guest unchanged.
 
 ## S14 Closure Record
 
