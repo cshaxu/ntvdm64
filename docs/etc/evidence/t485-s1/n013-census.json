@@ -1,0 +1,65 @@
+{
+  "before": {
+    "files": 1319,
+    "byte_identical": 740,
+    "nonerror_identical": 742,
+    "nonerror_different": 577,
+    "nonerror_points": 7760,
+    "nonerror_lines": 197875
+  },
+  "after": {
+    "files": 1319,
+    "byte_identical": 740,
+    "nonerror_identical": 742,
+    "nonerror_different": 577,
+    "nonerror_points": 7761,
+    "nonerror_lines": 196407
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 1,
+    "nonerror_lines": -1468
+  },
+  "relocated_file": {
+    "path": "src/non-mvdm/public/internal/net/inc/dlcio.h",
+    "before_baseline": "OpenNT-4.5",
+    "before_original_blob": "79a709ca33bc6ecbf3b862b311b57032c3d86707",
+    "after_baseline": "XP",
+    "after_original_blob": "79a709ca33bc6ecbf3b862b311b57032c3d86707",
+    "before_sha256": "56c79410f528b52e1577725b413437a0ddfd50821aab4588e46bf72a941a3895",
+    "after_sha256": "db2387c109de7ccdd31b914a3fffdebc0746e7a51a6ea4ef1d387756d94e14f2",
+    "byte_equal_before": "False",
+    "byte_equal_after": "False",
+    "points_before": "1",
+    "points_after": "2",
+    "lines_before": "1470",
+    "lines_after": "2",
+    "measurement": "N013 XP relocation; two original exclusions with active line maps"
+  },
+  "exclusions": [
+    {
+      "original": [
+        471,
+        471
+      ],
+      "current_error": 471,
+      "guard": "#ifndef    MAX_PATH   // I don't want to include whole windows because of this"
+    },
+    {
+      "original": [
+        662,
+        733
+      ],
+      "current_error": 663,
+      "guard": "#ifdef INCLUDE_IO_BUFFER_SIZE_TABLE"
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1189,
+    "OpenNT-4.5": 1,
+    "OpenNT": 129
+  }
+}

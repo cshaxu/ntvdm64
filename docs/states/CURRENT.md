@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall48/159 directories, H001-H036 and N001-N012. Runtime12 is the current
+overall49/159 directories, H001-H036 and N001-N013. S15 runtime1 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,8 +32,14 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-0/14 directories delivered; next N013. Last Full checkpoint is S14 P10/runtime12.
-No S15 source mutation yet.
+1/14 directories delivered; next N014. Last Full checkpoint S14 P10/runtime12;
+one completed file since that checkpoint. [P1 N013](../etc/evidence/t485-s1/n013.md)
+relocates dlcio.h to XP net/inc, preserves declarations and two exclusions,
+removes old include search paths. Cached full build, runtime1 dual13-image26hash
+publication, lifecycle fixtures and real guest NetAPI passed. Current non-guest
+mirror census1319files:byte-exact740,nonerror same742/different577,
+7761points/196407lines. P1 delta0files/0exact/0same/0different,+1point/-1468lines;
+LF restoration reveals two original-line anchors.1189 XP,130 OpenNT-family files.
 
 ## S14 Closure Record
 

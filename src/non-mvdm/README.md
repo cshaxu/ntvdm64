@@ -2872,3 +2872,11 @@ Browser/NetServerEnumEx host boundary and original Unicode/release exclusions.
 Restore the already-admitted status.h include. [Per-file evidence and final
 package verification](../../docs/etc/evidence/t485-s1/n012.md) supersede older
 NT4 registrations for these files.
+
+### T485 S15 N013 DLC declarations
+
+The old private/inc/dlcio.h is now at XP public/internal/net/inc/dlcio.h.
+Its original object matches the registered OpenNT-4.5 input. Keep the two
+existing excluded profiles and two active line anchors; restore original LF.
+Five original redirector consumers use the new include path. [Current evidence](../../docs/etc/evidence/t485-s1/n013.md)
+supersedes old-path registration; no new kernel DLC capability is claimed.

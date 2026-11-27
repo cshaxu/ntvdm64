@@ -222,7 +222,7 @@ target_compile_definitions(redirector_async_contract_test_objects PRIVATE
 foreach(path IN ITEMS src/mvdm-host/inc src/mvdm-host/vdmredir src/mvdm-host/dos/command
     src/non-mvdm/ds/netapi/netlib src/mvdm-host/softpc.new/base/inc src/mvdm-host/softpc.new/host/inc
     src/compat/include src/non-mvdm/public/internal/base/inc src/non-mvdm/public/internal/ds/inc
-    src/non-mvdm/public/sdk/inc src/non-mvdm/public/ddk/inc src/non-mvdm/private/inc)
+    src/non-mvdm/public/sdk/inc src/non-mvdm/public/ddk/inc src/non-mvdm/public/internal/net/inc)
   target_include_directories(redirector_async_contract_test_objects PRIVATE "${NTVDM_REPO}/${path}")
 endforeach()
 add_custom_target(redirector-contract DEPENDS redirector_async_contract_test)
@@ -286,7 +286,7 @@ foreach(path IN ITEMS src/compat/include src/mvdm-host/inc src/mvdm-host/vdmredi
     src/non-mvdm/ds/netapi/netlib src/non-mvdm/public/internal/base/inc
     src/non-mvdm/public/internal/ds/inc src/non-mvdm/public/internal/net/inc
     src/non-mvdm/public/sdk/inc
-    src/non-mvdm/public/ddk/inc src/non-mvdm/private/inc)
+    src/non-mvdm/public/ddk/inc)
   target_include_directories(redirector_guest_copy_test_objects PRIVATE "${NTVDM_REPO}/${path}")
 endforeach()
 add_library(redirector_query_objects OBJECT

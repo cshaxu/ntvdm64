@@ -2130,3 +2130,4 @@ post-publication targeted checks.
 - [T485 S14 P7 bounded omission repair](evidence/t485-s1/p7-omissions.md).
 - [T485 S14 N012 XACTSRV migration](evidence/t485-s1/n012.md).
 - [T485 S14 closure and S15 admission](evidence/t485-s1/s14-closure.md).
+- [T485 S15 N013 DLC declaration relocation](evidence/t485-s1/n013.md).
