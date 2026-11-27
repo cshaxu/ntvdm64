@@ -58,8 +58,8 @@ SCODE GetPtr16Description(VPVOID vp,
     VDMLDT_ENTRY *vle;
 #if defined(_CHICAGO_)
 #error Excluded unselected original OLE profile
-#line 574
 #endif
+#line 575
     WORD wSel;
     WORD wOff;
     DWORD dwLength;
@@ -88,8 +88,8 @@ SCODE GetPtr16Description(VPVOID vp,
 
 #if defined(_CHICAGO_)
 #error Excluded unselected original OLE profile
-#line 607
 #else
+#line 608
     vle = (VDMLDT_ENTRY *)((BYTE *)(ExpLdt)+(wSel & SEL_INDEX));
 #endif
 
@@ -150,15 +150,15 @@ SCODE GetPtr16Description(VPVOID vp,
 
 #if defined(_CHICAGO_)
 #error Excluded unselected original OLE profile
-#line 667
 #endif
+#line 668
 
         thkAssert(vle->HighWord.Bits.Pres);
     }
 #ifdef _CHICAGO_
 #error Excluded unselected original OLE profile
-#line 679
 #endif
+#line 680
 
 
     dwLength = ((DWORD)vle->LimitLow |
@@ -196,7 +196,7 @@ SCODE GetPtr16Description(VPVOID vp,
 
         if (vle->HighWord.Bits.Granularity)
         {
-            // BUGBUG - Compiler - This should be +1, but
+            // Compiler - This should be +1, but
             // the compiler generates a warning about an overflow
             // in constant arithmetic
             pvpd->dwLengthLeft = 0xffffffff-wOff;
@@ -216,8 +216,8 @@ SCODE GetPtr16Description(VPVOID vp,
 
 #if DBG == 1
 #error Excluded unselected original OLE profile
-#line 753
 #endif
+#line 754
 
     return S_OK;
 }
@@ -313,7 +313,7 @@ Exit:
         }
     }
 }
-#line 2603
+#line 2605
 
 SCODE ConvertObjDesc1632(THUNKINFO *pti,
                          HMEM16 hg16,
@@ -330,6 +330,8 @@ SCODE ConvertObjDesc1632(THUNKINFO *pti,
     UINT cbOffset;
 
     sc = S_OK;
+
+	*phg32 = NULL;
 
     vp16 = WOWGlobalLock16(hg16);
     if ( vp16 == 0 )
@@ -421,8 +423,8 @@ SCODE ConvertObjDesc1632(THUNKINFO *pti,
 
 #if DBG == 1
 #error Excluded unselected original OLE profile
-#line 2730
 #endif
+#line 2735
 
     GlobalUnlock(hg32);
 
@@ -451,7 +453,7 @@ SCODE ConvertObjDesc1632(THUNKINFO *pti,
     GlobalFree(hg32);
     goto EH_Unlock;
 }
-#line 2777
+#line 2781
 
 SCODE ConvertObjDesc3216(THUNKINFO *pti,
                          HGLOBAL hg32,
@@ -556,8 +558,8 @@ SCODE ConvertObjDesc3216(THUNKINFO *pti,
 
 #if DBG == 1
 #error Excluded unselected original OLE profile
-#line 2901
 #endif
+#line 2906
 
     RELVDMPTR(vp16);
 
@@ -575,13 +577,13 @@ SCODE ConvertObjDesc3216(THUNKINFO *pti,
     goto EH_Unlock;
 }
 
-#line 4403
+#line 4412
 STDAPI_(HGLOBAL) ConvertObjDescriptor( HANDLE hMem, UINT flag )
 {
 
    /* DIVERGENCE(OPENNT-HOST-297): C constant expressions; values already
     * come from the selected WOW clipboard declarations. */
-#line 4408
+#line 4417
 
    THUNKINFO ti;
    HGLOBAL hMem32;

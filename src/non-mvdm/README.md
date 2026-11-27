@@ -2595,7 +2595,10 @@ Evidence: docs/etc/evidence/m0-t478-s4-remote-rap.md.
 OPENNT-HOST-297 (T478 S38 candidate): select only original thoputil.cxx
 GetPtr16Description, GetReadPtr16, GetStringPtr16, ConvertObjDesc1632,
 ConvertObjDesc3216 and ConvertObjDescriptor at their original com/ole32 path.
-Both pinned editions have identical selected bodies. The provider is compiled
+The historical OpenNT editions had identical selected bodies. T485 S14 N008
+updates this subset to pinned XP SP1, including ConvertObjDesc1632 output
+initialization; see docs/etc/evidence/t485-s1/n008.md for final provenance,
+nonerror diff and runtime7 targeted evidence. The provider is compiled
 as C; no C++ language/runtime, COM activation, OLE thunk manager or guest import.
 Original descriptors, conversion, failure/cleanup and DBCS scanning remain the
 owners. The NT selector view is the already selected ExpLdt; unavailable OLE16

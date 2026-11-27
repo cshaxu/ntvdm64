@@ -1,0 +1,138 @@
+{
+  "task": "M0 T485 S14 P5 N008",
+  "status": "verified for delivery",
+  "runtime": "build/t485-s14/runtime7",
+  "build_exit": 0,
+  "raw_build_marker": "%0%",
+  "publish_hashes": 26,
+  "targeted_result": "PASS actual product OLE forward/reverse payload conversion, invalid input/direction, guest input and output ownership",
+  "mirror": {
+    "before_vs_OpenNT": {
+      "points": 1,
+      "lines": 5096,
+      "exclusions": [
+        {
+          "original": [
+            573,
+            573
+          ],
+          "current_error": 60,
+          "guard": "#if defined(_CHICAGO_)"
+        },
+        {
+          "original": [
+            602,
+            606
+          ],
+          "current_error": 90,
+          "guard": "#if defined(_CHICAGO_)"
+        },
+        {
+          "original": [
+            665,
+            666
+          ],
+          "current_error": 152,
+          "guard": "#if defined(_CHICAGO_)"
+        },
+        {
+          "original": [
+            672,
+            678
+          ],
+          "current_error": 159,
+          "guard": "#ifdef _CHICAGO_"
+        },
+        {
+          "original": [
+            747,
+            752
+          ],
+          "current_error": 218,
+          "guard": "#if DBG == 1"
+        },
+        {
+          "original": [
+            2709,
+            2729
+          ],
+          "current_error": 423,
+          "guard": "#if DBG == 1"
+        },
+        {
+          "original": [
+            2880,
+            2900
+          ],
+          "current_error": 558,
+          "guard": "#if DBG == 1"
+        }
+      ]
+    },
+    "after_vs_XP": {
+      "points": 22,
+      "lines": 3936,
+      "exclusions": [
+        {
+          "original": [
+            573,
+            573
+          ],
+          "current_error": 60,
+          "guard": "#if defined(_CHICAGO_)"
+        },
+        {
+          "original": [
+            602,
+            606
+          ],
+          "current_error": 90,
+          "guard": "#if defined(_CHICAGO_)"
+        },
+        {
+          "original": [
+            665,
+            666
+          ],
+          "current_error": 152,
+          "guard": "#if defined(_CHICAGO_)"
+        },
+        {
+          "original": [
+            672,
+            678
+          ],
+          "current_error": 159,
+          "guard": "#ifdef _CHICAGO_"
+        },
+        {
+          "original": [
+            747,
+            752
+          ],
+          "current_error": 218,
+          "guard": "#if DBG == 1"
+        },
+        {
+          "original": [
+            2713,
+            2733
+          ],
+          "current_error": 425,
+          "guard": "#if DBG == 1"
+        },
+        {
+          "original": [
+            2884,
+            2904
+          ],
+          "current_error": 560,
+          "guard": "#if DBG == 1"
+        }
+      ]
+    },
+    "delta_points": 21,
+    "delta_lines": -1160
+  },
+  "sha256": "dd5fee43e727cbc0bd2cdac4691e11ea25b5ddd9408e59a5e6edb7ed37d03205"
+}
