@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall56/159 directories, H001-H036 and N001-N020. S15 runtime20 is the current
+overall56/159 directories, H001-H036 and N001-N020. S15 runtime21 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -51,15 +51,7 @@ ABI and relocated winbase template. Runtime6 cached build, dual publication,
 TIB/ABI, guest NetAPI and Full24/24 passed without retry. Per-file census and
 baseline transitions remain in its receipt.
 
-[P7 N016 tail](../etc/evidence/t485-s1/n016-tail.md) delivered: four obsolete
-files retired, two templates XP byte-exact relocated, five redundant winss
-includes removed. Cached build, runtime7 dual13-image26hash publication,
-BASE140assertions, original lifecycle, real RPC reply, COMMAND7cases and
-WOW WINMINE window passed. Seven audited mirror files since P6 Full24/24;
-no repeat Full. N016 is21/21 complete; overall52/159 and S15 4/14. Next N017.
-Current census1315files,750exact,755nonerror same/560different,
-7747points/176175lines; delta-4files,0exact,0same,-4different,-4points/-14397lines.
-1212XP/103OpenNT; retirement accounts for14396lines, caller reduction1line.
+P7 historical delivery remains indexed in this packet's evidence directory.
 
 [P8 N017 first-three](../etc/evidence/t485-s1/n017-first-three.md) delivered:
 apinums/apiparam use XP Net paths; crypt restores complete XP declarations.
@@ -177,6 +169,14 @@ and real guest NetAPI passed. N0213/17; next nt.h. Overall56/159, S15 8/14.
 Census1318files,768exact,779nonerror same/539different,7729points/154750lines;
 delta0files,+1exact,+2same/-2different,-2points/-2086lines.1243XP/75OpenNT.
 Three reviewed files since P19 Full24/24; no guest change.
+
+[P21 N021 NT entry](../etc/evidence/t485-s1/n021-nt.md) delivered:
+nt.h XP framework plus six exact prerequisite headers; SDK and local RTL
+boundaries retained. Cached build, runtime21 dual13-image26hash publication,
+Full24/24 passed. N0214/17; next nt_vdd.h. Ten-file checkpoint resets to zero.
+Overall56/159, S15 8/14. Census1324files,774exact,785nonerror same/539different,
+7741points/154642lines; delta+6files,+6exact,+6same,0different,+12points/-108lines.
+1250XP/74OpenNT. LPC and executive entry limitations recorded for paired migration.
 
 ## S14 Closure Record
 

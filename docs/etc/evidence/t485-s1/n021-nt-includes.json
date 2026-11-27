@@ -1,0 +1,269 @@
+[
+  {
+    "header": "ntdef.h",
+    "blob": "72df27639a888072d7bec818aafc3b942fefef4d",
+    "sdk_shared_tags": [
+      "_QUAD",
+      "_FLOAT128",
+      "_LARGE_INTEGER",
+      "_ULARGE_INTEGER",
+      "_LUID",
+      "_EVENT_TYPE",
+      "_TIMER_TYPE",
+      "_WAIT_TYPE",
+      "_STRING",
+      "_CSTRING",
+      "_UNICODE_STRING",
+      "_LIST_ENTRY",
+      "_SINGLE_LIST_ENTRY",
+      "_STRING32",
+      "_STRING64",
+      "_OBJECT_ATTRIBUTES64",
+      "_OBJECT_ATTRIBUTES32",
+      "_OBJECT_ATTRIBUTES"
+    ],
+    "includes": [
+      "<ctype.h>  // winnt ntndis",
+      "<basetsd.h>",
+      "<guiddef.h>"
+    ]
+  },
+  {
+    "header": "ntkeapi.h",
+    "blob": "cb5ab0a2b3aa251d5b52d8f4f4100e5b79e2f005",
+    "sdk_shared_tags": [],
+    "includes": []
+  },
+  {
+    "header": "nti386.h",
+    "blob": "5fd965f6433b5201bd5af47f5fb2d206a7b60baa",
+    "sdk_shared_tags": [
+      "_TEB",
+      "_EXCEPTION_REGISTRATION_RECORD",
+      "_FLOATING_SAVE_AREA",
+      "_CONTEXT",
+      "_LDT_ENTRY"
+    ],
+    "includes": [
+      "\"pshpack1.h\"",
+      "\"poppack.h\""
+    ]
+  },
+  {
+    "header": "ntamd64.h",
+    "blob": "8baefc682201eb891ab63c27ff104eee452bff89",
+    "sdk_shared_tags": [
+      "_KNONVOLATILE_CONTEXT_POINTERS",
+      "_UNWIND_HISTORY_TABLE_ENTRY",
+      "_UNWIND_HISTORY_TABLE",
+      "_DISPATCHER_CONTEXT",
+      "_EXCEPTION_RECORD",
+      "_EXCEPTION_POINTERS"
+    ],
+    "includes": []
+  },
+  {
+    "header": "ntia64.h",
+    "blob": "bcb0453bd39da7ebf1a486f9430b9952ead7a075",
+    "sdk_shared_tags": [
+      "_EXCEPTION_REGISTRATION_RECORD",
+      "_TEB",
+      "_CONTEXT",
+      "_KNONVOLATILE_CONTEXT_POINTERS",
+      "_UNWIND_HISTORY_TABLE_ENTRY",
+      "_UNWIND_HISTORY_TABLE",
+      "_DISPATCHER_CONTEXT",
+      "_EXCEPTION_POINTERS"
+    ],
+    "includes": [
+      "\"ia64inst.h\""
+    ]
+  },
+  {
+    "header": "ntseapi.h",
+    "blob": "bf99aad45e7d098783e91a60f63b5154a8ceb0f6",
+    "sdk_shared_tags": [
+      "_ACCESS_MASK",
+      "_GENERIC_MAPPING",
+      "_LUID_AND_ATTRIBUTES",
+      "_SID_IDENTIFIER_AUTHORITY",
+      "_SID",
+      "_SID_NAME_USE",
+      "_SID_AND_ATTRIBUTES",
+      "_ACL",
+      "_ACE_HEADER",
+      "_ACCESS_ALLOWED_ACE",
+      "_ACCESS_DENIED_ACE",
+      "_SYSTEM_AUDIT_ACE",
+      "_SYSTEM_ALARM_ACE",
+      "_ACCESS_ALLOWED_OBJECT_ACE",
+      "_ACCESS_DENIED_OBJECT_ACE",
+      "_SYSTEM_AUDIT_OBJECT_ACE",
+      "_SYSTEM_ALARM_OBJECT_ACE",
+      "_ACCESS_ALLOWED_CALLBACK_ACE"
+    ],
+    "includes": [
+      "<pshpack4.h>",
+      "<poppack.h>"
+    ]
+  },
+  {
+    "header": "ntobapi.h",
+    "blob": "56681253f340e7f42b2aff626187e30e24e92a41",
+    "sdk_shared_tags": [
+      "_OBJECT_INFORMATION_CLASS"
+    ],
+    "includes": []
+  },
+  {
+    "header": "ntimage.h",
+    "blob": "7b3f8a75d106efc3e97bc931031255836a63bc7b",
+    "sdk_shared_tags": [
+      "_IMAGE_DOS_HEADER",
+      "_IMAGE_OS2_HEADER",
+      "_IMAGE_VXD_HEADER",
+      "_IMAGE_FILE_HEADER",
+      "_IMAGE_DATA_DIRECTORY",
+      "_IMAGE_OPTIONAL_HEADER",
+      "_IMAGE_ROM_OPTIONAL_HEADER",
+      "_IMAGE_OPTIONAL_HEADER64",
+      "_IMAGE_NT_HEADERS64",
+      "_IMAGE_NT_HEADERS",
+      "_IMAGE_ROM_HEADERS",
+      "_IMAGE_SECTION_HEADER",
+      "_IMAGE_SYMBOL",
+      "_IMAGE_AUX_SYMBOL",
+      "_IMAGE_RELOCATION",
+      "_IMAGE_LINENUMBER",
+      "_IMAGE_BASE_RELOCATION",
+      "_IMAGE_ARCHIVE_MEMBER_HEADER"
+    ],
+    "includes": [
+      "\"pshpack4.h\"                   // 4 byte packing is the default",
+      "\"pshpack2.h\"                   // 16 bit headers are 2 byte packed",
+      "\"pshpack1.h\"",
+      "\"poppack.h\"                    // Back to 4 byte packing",
+      "\"pshpack2.h\"                       // Symbols, relocs, and linenumbers are 2 byte packed",
+      "<pshpack2.h>",
+      "<poppack.h>",
+      "\"poppack.h\"                        // Back to 4 byte packing",
+      "\"pshpack8.h\"                       // Use align 8 for the 64-bit IAT.",
+      "\"poppack.h\"                        // Back to 4 byte packing",
+      "\"poppack.h\"                // Back to the initial value"
+    ]
+  },
+  {
+    "header": "ntldr.h",
+    "blob": "bea2a608dc17fe9c19662a1b015e1ffc6ac6a84a",
+    "sdk_shared_tags": [
+      "_LDR_DATA_TABLE_ENTRY"
+    ],
+    "includes": []
+  },
+  {
+    "header": "ntxcapi.h",
+    "blob": "5b03300e41f1c5d2f48860f4b58c38497f0a2ab2",
+    "sdk_shared_tags": [
+      "_EXCEPTION_RECORD",
+      "_EXCEPTION_RECORD32",
+      "_EXCEPTION_RECORD64",
+      "_EXCEPTION_POINTERS"
+    ],
+    "includes": [
+      "\"pshpack4.h\"",
+      "\"poppack.h\""
+    ]
+  },
+  {
+    "header": "ntiolog.h",
+    "blob": "388251e0edf0d6db57af5b84bb4d030d36fc5cd5",
+    "sdk_shared_tags": [],
+    "includes": []
+  },
+  {
+    "header": "ntpoapi.h",
+    "blob": "afba276884c10eea18231240e06f6ca953a50b7a",
+    "sdk_shared_tags": [
+      "_SYSTEM_POWER_STATE",
+      "_DEVICE_POWER_STATE",
+      "_SYSTEM_POWER_POLICY",
+      "_PROCESSOR_POWER_POLICY_INFO",
+      "_PROCESSOR_POWER_POLICY",
+      "_ADMINISTRATOR_POWER_POLICY"
+    ],
+    "includes": []
+  },
+  {
+    "header": "ntmmapi.h",
+    "blob": "9b0c6f8a736a060c68a72ac52fdb9ebbf85d69c0",
+    "sdk_shared_tags": [
+      "_MEMORY_BASIC_INFORMATION",
+      "_MEMORY_BASIC_INFORMATION32",
+      "_MEMORY_BASIC_INFORMATION64"
+    ],
+    "includes": []
+  },
+  {
+    "header": "ntelfapi.h",
+    "blob": "92e4cc749f5720e86d4e216da03984a826b9cd13",
+    "sdk_shared_tags": [
+      "_EVENTLOGRECORD",
+      "_EVENTSFORLOGFILE",
+      "_PACKEDEVENTINFO"
+    ],
+    "includes": []
+  },
+  {
+    "header": "ntconfig.h",
+    "blob": "b33080d52ec2afa3fe81d50483ed936de3b0a87e",
+    "sdk_shared_tags": [
+      "_CM_SERVICE_NODE_TYPE",
+      "_CM_SERVICE_LOAD_TYPE",
+      "_CM_ERROR_CONTROL_TYPE"
+    ],
+    "includes": [
+      "\"pshpack4.h\"",
+      "\"poppack.h\"",
+      "\"pshpack1.h\"",
+      "\"poppack.h\""
+    ]
+  },
+  {
+    "header": "ntnls.h",
+    "blob": "fb54f8f004d6f9d195c5731d709e6354616e6018",
+    "sdk_shared_tags": [],
+    "includes": []
+  },
+  {
+    "header": "ntpnpapi.h",
+    "blob": "e2115eff2568375e926f9b25adb6008431404891",
+    "sdk_shared_tags": [],
+    "includes": [
+      "<cfg.h>"
+    ]
+  },
+  {
+    "header": "mce.h",
+    "blob": "d15a16ea5ce8781a9667d8421d4c174b34454d01",
+    "sdk_shared_tags": [],
+    "includes": []
+  },
+  {
+    "header": "nxamd64.h",
+    "blob": "68afd6b3b134181958459aafb982c36963b16278",
+    "sdk_shared_tags": [],
+    "includes": []
+  },
+  {
+    "header": "nxi386.h",
+    "blob": "f36409951622df3cc505b240f70fde48325ac39b",
+    "sdk_shared_tags": [],
+    "includes": []
+  },
+  {
+    "header": "nxia64.h",
+    "blob": "a83fde7f56cd9d55cfd0ae46d065bdc2395eaa6d",
+    "sdk_shared_tags": [],
+    "includes": []
+  }
+]

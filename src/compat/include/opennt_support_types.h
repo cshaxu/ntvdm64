@@ -49,6 +49,8 @@ typedef ULONG CLONG;
 /* Original ntddk.h:81,204,9260-9264. Types required by retained USER
  * declarations only; no kernel object or system-thread provider is imported. */
 typedef struct _OBJECT_TYPE *POBJECT_TYPE;
+/* XP ntconfig.h: opaque resource-list pointer used by ntpnpapi.h. */
+typedef struct _CM_RESOURCE_LIST *PCM_RESOURCE_LIST;
 typedef CCHAR KPROCESSOR_MODE;
 typedef struct _HARDERROR_MSG *PHARDERROR_MSG;
 

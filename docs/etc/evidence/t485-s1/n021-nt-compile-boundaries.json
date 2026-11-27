@@ -1,0 +1,27 @@
+[
+  {
+    "log": "build/t485-s15/n021-nt/initial-build.log",
+    "sha256": "8b86a88870df5a039fd0ead83fbcff54c7d91052c3c0519589508cf627f5e8ad",
+    "meaning": "Unconditional ntexapi reaches excluded x64 shared-data profile",
+    "errors": [
+      "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntexapi.h(1460): fatal error C1189: #error:  Excluded unsupported 64-bit NT executive shared data profile"
+    ]
+  },
+  {
+    "log": "build/t485-s15/n021-nt/pnp-build.log",
+    "sha256": "af9f0520dd6f171e20b0689cea42a78dae55201a8165cb04f9a44968d8cc1b68",
+    "meaning": "Original PnP requires opaque resource-list pointer",
+    "errors": [
+      "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntpnpapi.h(459): error C2061: syntax error: identifier 'PCM_RESOURCE_LIST'",
+      "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntpnpapi.h(465): error C2059: syntax error: '}'"
+    ]
+  },
+  {
+    "log": "build/t485-s15/n021-nt/lpc-build.log",
+    "sha256": "6013d4d9b556eb175a45c6b85a38c612bcb9bd5f81d6ecdce82d3e3456252342",
+    "meaning": "Unconditional ntlpcapi reaches excluded DEM C++ profile",
+    "errors": [
+      "O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\\ntlpcapi.h(338): fatal error C1189: #error:  Unsupported excluded original configuration"
+    ]
+  }
+]

@@ -1,0 +1,82 @@
+{
+  "before": {
+    "files": 1318,
+    "byte_identical": 768,
+    "nonerror_identical": 779,
+    "nonerror_different": 539,
+    "nonerror_points": 7729,
+    "nonerror_lines": 154750
+  },
+  "after": {
+    "files": 1324,
+    "byte_identical": 774,
+    "nonerror_identical": 785,
+    "nonerror_different": 539,
+    "nonerror_points": 7741,
+    "nonerror_lines": 154642
+  },
+  "delta": {
+    "files": 6,
+    "byte_identical": 6,
+    "nonerror_identical": 6,
+    "nonerror_different": 0,
+    "nonerror_points": 12,
+    "nonerror_lines": -108
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt.h",
+      "before_points": 1,
+      "before_lines": 149,
+      "after_points": 13,
+      "after_lines": 41,
+      "exclusions": 4
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntdef.h",
+      "before": "absent",
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntnls.h",
+      "before": "absent",
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntiolog.h",
+      "before": "absent",
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/mce.h",
+      "before": "absent",
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpnpapi.h",
+      "before": "absent",
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nxi386.h",
+      "before": "absent",
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1250,
+    "OpenNT": 74
+  }
+}

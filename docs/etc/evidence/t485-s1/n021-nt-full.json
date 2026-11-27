@@ -1,0 +1,153 @@
+{
+  "Suite": "Full",
+  "ElapsedMs": 643962,
+  "InputPolicy": "Observed",
+  "WindowOwnedConsole": true,
+  "PreparationMs": 26298,
+  "Gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1259,
+      "CleanupMs": 318,
+      "Passed": true
+    },
+    {
+      "Gate": "win31-standard",
+      "ElapsedMs": 44319,
+      "CleanupMs": 373,
+      "Passed": true
+    },
+    {
+      "Gate": "win31-enhanced",
+      "ElapsedMs": 75583,
+      "CleanupMs": 329,
+      "Passed": true
+    },
+    {
+      "Gate": "win95",
+      "ElapsedMs": 97825,
+      "CleanupMs": 373,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-sol-options",
+      "ElapsedMs": 23711,
+      "CleanupMs": 264,
+      "Passed": true
+    },
+    {
+      "Gate": "startup-presentation",
+      "ElapsedMs": 16867,
+      "CleanupMs": 301,
+      "Passed": true
+    },
+    {
+      "Gate": "console-font-restore",
+      "ElapsedMs": 16800,
+      "CleanupMs": 314,
+      "Passed": true
+    },
+    {
+      "Gate": "console-input-batch",
+      "ElapsedMs": 18191,
+      "CleanupMs": 320,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 166,
+      "CleanupMs": 357,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 65603,
+      "CleanupMs": 358,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 43219,
+      "CleanupMs": 357,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 38646,
+      "CleanupMs": 397,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 15601,
+      "CleanupMs": 339,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 9486,
+      "CleanupMs": 314,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 1318,
+      "CleanupMs": 407,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12309,
+      "CleanupMs": 350,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 34257,
+      "CleanupMs": 356,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 40555,
+      "CleanupMs": 345,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 3511,
+      "CleanupMs": 422,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7635,
+      "CleanupMs": 337,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 9971,
+      "CleanupMs": 328,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3651,
+      "CleanupMs": 345,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 8233,
+      "CleanupMs": 342,
+      "Passed": true
+    },
+    {
+      "Gate": "dos4gw-nesticle",
+      "ElapsedMs": 20349,
+      "CleanupMs": 255,
+      "Passed": true
+    }
+  ]
+}

@@ -3007,3 +3007,10 @@ callconv.inc remains XP-exact; devioctl.h is restored byte-exact and dlcapi.h
 has only its existing two original C++ excluded arms. All three have zero
 nonerror diff. [Evidence](../../docs/etc/evidence/t485-s1/n021-first.md).
 N0213/17 delivered.
+
+### T485 S15 N021 NT entry
+
+nt.h restores the XP entry framework and six byte-exact prerequisites.
+Host SDK and local RTL ABI bindings remain explicit; LPC/executive include
+limitations are evidenced for their paired N021 migration.
+[Evidence](../../docs/etc/evidence/t485-s1/n021-nt.md). N0214/17 delivered.
