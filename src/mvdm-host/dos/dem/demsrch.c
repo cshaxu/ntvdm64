@@ -22,7 +22,6 @@
 #include "compat/include/dem_restart_hint.h"
 #line 22
 
-#line 23
 extern BOOL IsFirstCall;
 
 
@@ -252,7 +251,6 @@ void demCharUpper(char *);
  *
  */
 
-#line 240
 VOID demFindFirst (VOID)
 {
     DWORD dwRet;
@@ -290,11 +288,8 @@ VOID demFindFirst (VOID)
     return;
 
 }
-#line 267
-#line 268
 
 
-#line 270
 DWORD demFileFindFirst (
     PVOID pvDTA,
     LPSTR lpFile,
@@ -309,11 +304,9 @@ DWORD demFileFindFirst (
 
 
 #if DBG
-#line 283
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 295
 #endif
-#line 296
+#line 314
 
     STOREDWORD(pDta->FFindId,0);
     STOREDWORD(pDta->pFFindEntry,0);
@@ -428,7 +421,6 @@ BOOL DemOemToUni(PUNICODE_STRING pUnicode, LPSTR lpstr)
  *      Client (CF) = 1
  *      Client (AX) = Error Code
  */
-#line 406
 VOID demFindNext (VOID)
 {
     DWORD dwRet;
@@ -449,11 +441,8 @@ VOID demFindNext (VOID)
     return;
 
 }
-#line 425
-#line 426
 
 
-#line 428
 DWORD demFileFindNext (
     PVOID pvDta)
 {
@@ -475,11 +464,9 @@ DWORD demFileFindNext (
         }
 
 #if DBG
-#line 448
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 452
 #endif
-#line 453
+#line 476
 
     SearchAttr = pFFindEntry->usSrchAttr;
 
@@ -550,11 +537,9 @@ VOID demFindFirstFCB (VOID)
     lpFile = (LPSTR) GetVDMAddr (getES(),getDI());
 
 #if DBG
-#line 521
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 525
 #endif
-#line 526
+#line 551
 
     pFCBSrchBuf = (PSRCHBUF) GetVDMAddr (getDS(),getSI());
     pDirEnt = &pFCBSrchBuf->DirEnt;
@@ -654,11 +639,9 @@ VOID demFindNextFCB (VOID)
         }
 
 #if DBG
-#line 622
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 626
 #endif
-#line 627
+#line 655
 
     SearchAttr = getAL() ? getDL() : 0;
 
@@ -1173,11 +1156,9 @@ FileFindOpen(
              }
 
 #if DBG
-#line 1120
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1129
 #endif
-#line 1130
+#line 1179
 
 
          //
@@ -1204,11 +1185,9 @@ FFOFinallyExit:;
     finally {
          if (!NT_SUCCESS(Status)) {
 #if DBG
-#line 1156
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1160
 #endif
-#line 1161
+#line 1210
 
              FileFindClose(pFFindEntry);
              RtlFreeUnicodeString(PathName);
@@ -1258,10 +1237,9 @@ FileFindClose(
     }
     /* DIVERGENCE(MVDM-HOST-DIV-362): retain only the first unconsumed
      * directory entry, not the discarded buffer or directory handle. */
-#line 1199
     if (pFFindEntry->FindBufferBase) {
         DemCaptureRestartHint(&pFFindEntry->RestartHint, pFFindEntry->FindBufferNext);
-#line 1200
+#line 1249
         RtlFreeHeap(RtlProcessHeap(), 0, pFFindEntry->FindBufferBase);
         --NumFindBuffer;
         }
@@ -1399,11 +1377,9 @@ FileFindReset(
                        pFFindEntry->FindBufferLength, &pFFindEntry->FindBufferNext);
                }
 #if DBG
-#line 1328
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1332
 #endif
-#line 1333
+#line 1382
                return Status;
                }
            }
@@ -1516,11 +1492,9 @@ FileFindLast(
 
        if (Status == STATUS_NO_MORE_FILES || Status == STATUS_NO_SUCH_FILE) {
 #if DBG
-#line 1444
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1448
 #endif
-#line 1449
+#line 1499
            return Status;
            }
 
@@ -1620,11 +1594,9 @@ FileFindNext(
 
            if (!NT_SUCCESS(Status)) {
 #if DBG
-#line 1548
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 1552
 #endif
-#line 1553
+#line 1603
                return Status;
                }
            }
@@ -2206,11 +2178,9 @@ VOID FillFCBSrchBuf(
     FILETIME    ftLocal;
 
 #if DBG
-#line 2067
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 2071
 #endif
-#line 2072
+#line 2189
 
     // Copy file name (Max Name = 8 and Max ext = 3)
     if ((pDot = strchr(pFFindDD->cFileName,'.')) == NULL) {
@@ -2324,11 +2294,9 @@ FillSrchDta(
     STOREWORD(pDta->usHighSize,(USHORT)(pFFindDD->dwFileSizeLow >> 16));
 
 #if DBG
-#line 2159
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 2163
 #endif
-#line 2164
+#line 2307
 
     strncpy(pDta->achFileName,pFFindDD->cFileName, 13);
 
@@ -2364,7 +2332,6 @@ DemHeartBeat(void)
    PPSP_FFINDLIST pPspFFindEntry;
    PFFINDLIST  pFFindEntry;
 
-#line 2199
    if (!NumFindBuffer ||
        NextFindFileTics.QuadPart > ++FindFileTics.QuadPart)
      {
@@ -2372,7 +2339,6 @@ DemHeartBeat(void)
        }
 
    pPspFFindEntry = GetPspFFindList(FETCHWORD(pusCurrentPDB[0]));
-#line 2206
    if (!pPspFFindEntry) {
        return;
        }
@@ -2504,17 +2470,11 @@ AddFFindEntry(
     ULONG          Len;
 
     pPspFFindEntry = GetPspFFindList(FETCHWORD(pusCurrentPDB[0]));
-#line 2337
 
-#line 2338
         //
-#line 2339
         // if a Psp entry doesn't exist
-#line 2340
         //    Allocate one, initialize it and insert it into the list
-#line 2341
         //
-#line 2342
     if (!pPspFFindEntry) {
         pPspFFindEntry = (PPSP_FFINDLIST) malloc(sizeof(PSP_FFINDLIST));
         if (!pPspFFindEntry)
@@ -2557,7 +2517,6 @@ AddFFindEntry(
  * Exit  -  None
  *
  */
-#line 2384
 VOID FreeFFindEntry(PFFINDLIST pFFindEntry)
 {
     RemoveEntryList(&pFFindEntry->FFindEntry);

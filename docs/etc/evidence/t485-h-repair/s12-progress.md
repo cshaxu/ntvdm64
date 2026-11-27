@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed12/48files61/645points;restored-delivered12,restored-local0,
-residual-reviewed49,unreviewed584.
+Reviewed13/48files66/645points;restored-delivered12,restored-local0,
+residual-reviewed54,unreviewed579.
 Delivered/pushed12files61points through 3b1d831b6.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
@@ -26,7 +26,7 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 10 | src/mvdm-host/dos/dem/demhndl.c | 12 | P4 delivered d74c534ca |
 | 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | P5 delivered3b1d831b6 |
 | 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | P5 delivered3b1d831b6 |
-| 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | Pending |
+| 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | P6 verified; commit pending |
 | 14 | src/mvdm-host/inc/dbgexp.h | 1 | Pending |
 | 15 | src/mvdm-host/inc/demexp.h | 3 | Pending |
 | 16 | src/mvdm-host/inc/doswow.h | 1 | Pending |
@@ -342,3 +342,31 @@ points restored;one ABI residual remains pending owner decision. Commit/push pen
 P5 product/receipt delivered in3b1d831b6 and pushed. Twelvefiles61points
 delivered;12restored49residual584unreviewed. Current699/31660,reduction104/149.
 Last Full remains file10/runtime5;next file13demsrch.c.
+
+## P6 file13 directory search
+
+R00102-R00106 retain bounded directory continuation:include,state,end-status
+repair,capture and deleted-anchor retry. XP still closes underlying enumeration
+at end while retaining buffered entries;reclamation discards them. Its original
+slow-reset loop still requires the saved anchor and explicitly notes deleted
+anchor failure. The existing indexed kernel route is unavailable under the
+admitted user-mode provider;do not invent a replacement or broader mutation
+promise. Existing T478 real provider and guest pressure evidence applies to
+these unchanged owner algorithms;new verification targets final runtime7.
+
+Restore redundant/stale line directives only:43/80->16/39,reduction27/41;
+11error exclusions and execution tokens unchanged. S12current672/31619,
+cumulative131points190lines. Reviewed13files66points:12restored54residual,
+579unreviewed. Delivered12files61points. Background18092 runs cached build,
+actual compiler line check,dual publication and existing provider/pressure/FCB
+tests. Next14dbgexp.h after delivery;Full not due at13files.
+
+### P6 final verification
+
+[Receipt](s12-p6-result.json):cached build,dual runtime7 publication26hashes,
+285original-line witnesses zero drift PASS. First provider compile failed because
+the NT4-era fixture omitted XP FillFCBSrchBuf IsOnCD;pass FALSE for actual owned
+hard-disk files. Only that failed gate retried;provider115/115 PASS,then three
+previously unexecuted DOS pressure cases and actual FCB first/next/end/missing
+with receipt37 PASS. No production changes/rebuild/republish after this test-only
+fix. No Full rerun. Mirror43/80->16/39;all11exclusions retained. Commit/push pending.

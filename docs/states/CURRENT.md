@@ -32,16 +32,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S12 Ordered Progress
 
-[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):12/48files,
-61/645points source-reviewed;12restored-delivered,0restored-local,49residual,
-584unreviewed. Delivered12files61points through 3b1d831b6.
-P5 LFN source/header4/8->1/2 (-3points/-6lines);source byte-exact XP,
-header retains only required NTAPI. S12 census803/31809->699/31660 (-104/-149).
-[P5 receipt](../etc/evidence/t485-h-repair/s12-p5-result.json):cached build,
-production object equivalence,dual runtime6 publication and targeted WOW PASS.
-Committed/pushed3b1d831b6.
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):13/48files,
+66/645points source-reviewed;12restored-delivered,0restored-local,54residual,
+579unreviewed. Delivered12files61points through3b1d831b6.
+P6 demsrch.c43/80->16/39 (-27/-41);11exclusions and execution tokens unchanged.
+S12 census803/31809->672/31619 (-131points/-190lines).
+[P6 receipt](../etc/evidence/t485-h-repair/s12-p6-result.json):cached build,
+285line witnesses,dual runtime7 publication,provider115/115,three DOS pressure
+cases and FCB PASS. XP test-argument repair only;commit/push pending.
 Last Full checkpoint:file10,runtime5,23/23. No successful gate repeated.
-Nextfile13demsrch.c;36files remain. Migration39/159;N004 gated on S13.
+Nextfile14dbgexp.h;35files remain. Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
 

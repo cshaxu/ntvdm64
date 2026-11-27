@@ -90,7 +90,7 @@ static void scenario(int mutation)
     check("first is owned 8.3 TST file", !strcmp(first.cFileName, "AAA.TST") ||
         !strcmp(first.cFileName, "BBB.TST") || !strcmp(first.cFileName, "CCC.TST"));
     memset(&fcb, 0, sizeof(fcb));
-    FillFCBSrchBuf(&first, &fcb);
+    FillFCBSrchBuf(&first, &fcb, FALSE);
     check("original FCB formatter", !memcmp(fcb.FileExt, "TST", 3) &&
         fcb.ulFileSize == 2);
     closed = entry.DirectoryHandle;

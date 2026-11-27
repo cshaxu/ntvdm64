@@ -1,0 +1,207 @@
+{
+  "task": "M0 T485 S12 P6",
+  "state": "final-verified-published-commit-pending",
+  "package": "build/t485-s12/runtime7",
+  "file": "src/mvdm-host/dos/dem/demsrch.c",
+  "sha256": "78e76bc37d1cdc011a869389174fd75212b908c2c9800dac3b815b0a1b267285",
+  "diff": {
+    "before": {
+      "points": 43,
+      "lines": 80
+    },
+    "after": {
+      "points": 16,
+      "lines": 39
+    },
+    "s12_current": {
+      "points": 672,
+      "lines": 31619
+    },
+    "s12_reduction": {
+      "points": 131,
+      "lines": 190
+    }
+  },
+  "review": {
+    "restored": [],
+    "residual": [
+      "HXP-R-00102",
+      "HXP-R-00103",
+      "HXP-R-00104",
+      "HXP-R-00105",
+      "HXP-R-00106"
+    ],
+    "exclusions": 11,
+    "execution_tokens_unchanged": true,
+    "conclusion": "XP retains original buffered-end/deleted-anchor failure. Existing bounded successor recovery retained without added guarantees. Only redundant/stale logical lines restored."
+  },
+  "verification": {
+    "build": "PASS cached full",
+    "publication": [
+      {
+        "path": "assets\\release\\NTVDMD.DLL",
+        "sha256": "66C89A7FE462E66AE80CB7BEF3AAE617D0D998F457A55EA821E105BF86AC243E",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+        "sha256": "66C89A7FE462E66AE80CB7BEF3AAE617D0D998F457A55EA821E105BF86AC243E",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VJOY.DLL",
+        "sha256": "F56AA88033F1EE470CE9AD1A281318656FD2C7067CC183CC4B17733C688B0CD7",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+        "sha256": "F56AA88033F1EE470CE9AD1A281318656FD2C7067CC183CC4B17733C688B0CD7",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "52B1EE0E0761098B221D8E26F45B3E651541B1A88A676F97C1A9F4F0E38568E8",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+        "sha256": "52B1EE0E0761098B221D8E26F45B3E651541B1A88A676F97C1A9F4F0E38568E8",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "CF83212E152F6F97D137ABF08A9F6739455AD2BF974FFF89B65DAE974F9EAA40",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+        "sha256": "CF83212E152F6F97D137ABF08A9F6739455AD2BF974FFF89B65DAE974F9EAA40",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "4C618EED104239351FFC8747E1F1590F935E014AB0A27B2C46D82FC2ACE27D8B",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+        "sha256": "4C618EED104239351FFC8747E1F1590F935E014AB0A27B2C46D82FC2ACE27D8B",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "1710358A9F2F2363151EA3E27FB10BB623E3AE8066110F8232C1ABE75E64019E",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+        "sha256": "1710358A9F2F2363151EA3E27FB10BB623E3AE8066110F8232C1ABE75E64019E",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "6CC97D5B673FD4144FA5AE1C96D9E818482E8DC47514E602E1A6A41320F9EF5D",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+        "sha256": "6CC97D5B673FD4144FA5AE1C96D9E818482E8DC47514E602E1A6A41320F9EF5D",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "20900580243EA12999069B0298E514C25E5165C1F40AB25CBB9CCD08B57B381C",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+        "sha256": "20900580243EA12999069B0298E514C25E5165C1F40AB25CBB9CCD08B57B381C",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "1594F495656F76464E8E57F953B44F1E311C1A932EFAF6935DB829A681250999",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+        "sha256": "1594F495656F76464E8E57F953B44F1E311C1A932EFAF6935DB829A681250999",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "663190986E5611DD1550CD75358F4ACB15522C0201727A6577A9B92656BA7233",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+        "sha256": "663190986E5611DD1550CD75358F4ACB15522C0201727A6577A9B92656BA7233",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "5B9298F1749F60116BAFDDA150C39807E624C0AE20101155AA634F0670D0595F",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+        "sha256": "5B9298F1749F60116BAFDDA150C39807E624C0AE20101155AA634F0670D0595F",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "C5868F3017E40616DB24E36AF26B0CED53C8D659D20AD56422D10DF410DADF40",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+        "sha256": "C5868F3017E40616DB24E36AF26B0CED53C8D659D20AD56422D10DF410DADF40",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "9CFF797255A99F9D58AA8600F7AD78333853A87BFC3114853F81579ECBA35E51",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+        "sha256": "9CFF797255A99F9D58AA8600F7AD78333853A87BFC3114853F81579ECBA35E51",
+        "pass": true
+      }
+    ],
+    "original_product_lines": [
+      {
+        "file": "demsrch.c",
+        "checked": 285,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      }
+    ],
+    "provider": {
+      "exit_code": 0,
+      "elapsed_ms": 234,
+      "original_sha256": "78E76BC37D1CDC011A869389174FD75212B908C2C9800DAC3B815B0A1B267285",
+      "executable_sha256": "8286A649EF93C90073271A71FE270BC783F0D2746ED2A0D2913B981405494049",
+      "scope": "Actual original DEM functions and real NT directory calls; provider fixture, not guest INT21 proof"
+    },
+    "provider_assertions": "115/115 PASS",
+    "pressure": {
+      "NoDelete": "PASS DOS directory continuation case=NoDelete",
+      "NoPressure": "PASS DOS directory continuation case=NoPressure",
+      "Deleted": "PASS DOS deleted-anchor continuation"
+    },
+    "fcb": "PASS three unique names,EOF,missing first,direct receipt37",
+    "full": "Not due;last file10/runtime5 Full23/23;not repeated",
+    "logs": "build/t485-s12/p6/final"
+  },
+  "attempts": [
+    {
+      "owner": 18092,
+      "result": "Product build/285line witnesses/dual publication PASS. Old directory fixture failed compile:XP FillFCBSrchBuf requires IsOnCD third parameter. No runtime gate executed."
+    },
+    {
+      "owner": 20784,
+      "result": "Fixture passes FALSE for owned hard-disk test files. Only failed provider retried;unexecuted pressure and FCB gates run once. All PASS;production package unchanged."
+    }
+  ]
+}
