@@ -2901,3 +2901,9 @@ align/debugfmt/nettypes declarations use XP public/sdk/inc; conroute uses
 public/internal/windows/inc. ntddvdm stays at its original Base path.
 [Delivery and ABI evidence](../../docs/etc/evidence/t485-s1/n016-first-five.md).
 N016's remaining16 original files are not yet migrated by this checkpoint.
+
+### T485 S15 N016 packing and SMB declarations
+
+packoff/packon/tstr use XP SDK paths. SMB declarations retain original
+profiles and XP pointer-width macros. [Evidence](../../docs/etc/evidence/t485-s1/n016-packing-smb.md).
+N016 positions6-11 are delivered; VDM and later fragments remain open.

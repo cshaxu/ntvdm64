@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall51/159 directories, H001-H036 and N001-N015. S15 runtime4 is the current
+overall51/159 directories, H001-H036 and N001-N015. S15 runtime5 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -51,6 +51,16 @@ Full24/24 passed. Ten-file checkpoint resets to zero. N016 has5/21 delivered,
 Current census1319files,746exact,750nonerror same/569different,
 7737points/195577lines; P4delta0files,+4exact,+4same,-4different,-6points,
 -574lines.1200XP/119OpenNT. Earlier P3 census remains historical.
+
+[P5 N016 positions6-11](../etc/evidence/t485-s1/n016-packing-smb.md) delivered:
+packing/SMB/tstr migrated with21necessary #line differences; no function
+adaptation. Final cached build, runtime5 dual publication/hash check, RAP11/11,
+redirector lifecycle and guest NetAPI passed. Six files since P4 Full24/24.
+N016 now11/21 delivered,10remaining; overall51/159 and S15 3/14 remain.
+Next vdm.h/vdmapi.h/vdmtib.inc. Current census1319files,748exact,
+753nonerror same/566different,7752points/192119lines; P5delta0files,+2exact,
++3same,-3different,+15points/-3458lines (restored original LF exposes#line).
+1206XP/113OpenNT; previous P4 census is historical.
 
 ## S14 Closure Record
 

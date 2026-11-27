@@ -1,0 +1,80 @@
+{
+  "before": {
+    "files": 1319,
+    "byte_identical": 746,
+    "nonerror_identical": 750,
+    "nonerror_different": 569,
+    "nonerror_points": 7737,
+    "nonerror_lines": 195577
+  },
+  "after": {
+    "files": 1319,
+    "byte_identical": 748,
+    "nonerror_identical": 753,
+    "nonerror_different": 566,
+    "nonerror_points": 7752,
+    "nonerror_lines": 192119
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 2,
+    "nonerror_identical": 3,
+    "nonerror_different": -3,
+    "nonerror_points": 15,
+    "nonerror_lines": -3458
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/packoff.h",
+      "before_points": 1,
+      "before_lines": 68,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/packon.h",
+      "before_points": 1,
+      "before_lines": 64,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "before_points": 1,
+      "before_lines": 1538,
+      "after_points": 17,
+      "after_lines": 17,
+      "exclusions": 40
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "before_points": 1,
+      "before_lines": 472,
+      "after_points": 1,
+      "after_lines": 1,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "before_points": 1,
+      "before_lines": 738,
+      "after_points": 3,
+      "after_lines": 3,
+      "exclusions": 4
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/tstr.h",
+      "before_points": 1,
+      "before_lines": 599,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 3
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1206,
+    "OpenNT": 113
+  }
+}

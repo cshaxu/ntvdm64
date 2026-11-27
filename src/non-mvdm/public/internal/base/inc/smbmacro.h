@@ -46,7 +46,7 @@ Revision History:
 //
 
 #define ALIGN_SMB_WSTR( Pointer ) \
-        (PVOID)( ((ULONG)Pointer + 1) & ~1 )
+        (PVOID)( ((ULONG_PTR)Pointer + 1) & ~1 )
 
 //
 // Macro to find the size of an SMB parameter block.  This macro takes
@@ -59,7 +59,7 @@ Revision History:
 //
 
 #define SIZEOF_SMB_PARAMS(type,byteCount)   \
-            (USHORT)( (CLONG)&((type *)0)->Buffer[0] + (byteCount) )
+            (USHORT)( (ULONG_PTR)&((type *)0)->Buffer[0] + (byteCount) )
 
 //
 // Macro to find the next location after an SMB parameter block.  This
@@ -87,12 +87,11 @@ Revision History:
 #ifndef NO_PACKING
 
 #define NEXT_LOCATION(base,type,byteCount)  \
-        (PVOID)( (ULONG)( (PUCHAR)( &((type *)(base))->Buffer[0] ) ) + \
+        (PVOID)( (ULONG_PTR)( (PUCHAR)( &((type *)(base))->Buffer[0] ) ) + \
         (byteCount) )
 
 #else
 #error Unsupported excluded original configuration
-#line 99
 #endif
 #line 100
 

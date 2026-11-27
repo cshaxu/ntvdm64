@@ -1,6 +1,6 @@
 /*++
 
-Copyright (c) 1989  Microsoft Corporation
+Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Module Name:
 
@@ -45,9 +45,7 @@ Revision History:
 #endif
 
 #if SMBDBG && SMBDBG1
-#line 48
 #error Unsupported SMB diagnostic or alignment profile
-#line 50
 #endif
 #line 51
 
@@ -74,11 +72,8 @@ Revision History:
 
 #ifndef SMB_USE_UNALIGNED
 #if SMB_NO_UNALIGNED
-#line 75
 #error Unsupported SMB diagnostic or alignment profile
-#line 76
 #else
-#line 77
 #define SMB_USE_UNALIGNED 1
 #endif
 #endif
@@ -94,11 +89,8 @@ Revision History:
 #if SMB_USE_UNALIGNED
 #define SMB_UNALIGNED UNALIGNED
 #else
-#line 92
 #error Unsupported SMB diagnostic or alignment profile
-#line 93
 #endif
-#line 94
 
 //
 // For ease of use, we define types for unaligned pointers to shorts
@@ -113,9 +105,7 @@ typedef unsigned long SMB_UNALIGNED *PSMB_ULONG;
 //
 
 #if SMBDBG1
-#line 108
 #error Unsupported SMB diagnostic or alignment profile
-#line 112
 #else
 #line 113
 
@@ -123,6 +113,7 @@ typedef unsigned long SMB_UNALIGNED *PSMB_ULONG;
 #define _ULONG( field ) ULONG field
 
 #endif
+#line 118
 
 //
 // Force misalignment of the following structures
@@ -148,6 +139,9 @@ typedef enum _SMB_DIALECT {
 
 
     SmbDialectCairo,                // Cairo
+#ifdef INCLUDE_SMB_IFMODIFIED
+    SmbDialectNtLanMan2,            // NT LAN Man for beyond Win2000
+#endif
     SmbDialectNtLanMan,             // NT LAN Man
     SmbDialectLanMan21,             // OS/2 Lanman 2.1
     SmbDialectDosLanMan21,          // DOS Lanman 2.1
@@ -164,7 +158,11 @@ typedef enum _SMB_DIALECT {
 
 #define FIRST_DIALECT SmbDialectCairo
 
+#ifdef INCLUDE_SMB_IFMODIFIED
+#define FIRST_DIALECT_EMULATED  SmbDialectNtLanMan2
+#else
 #define FIRST_DIALECT_EMULATED  SmbDialectNtLanMan
+#endif
 
 #define LAST_DIALECT SmbDialectIllegal
 #define IS_DOS_DIALECT(dialect)                                        \
@@ -173,8 +171,19 @@ typedef enum _SMB_DIALECT {
                  (dialect) > SmbDialectLanMan10 ) )
 #define IS_OS2_DIALECT(dialect) ( (BOOLEAN)!IS_DOS_DIALECT(dialect) )
 
+#ifdef INCLUDE_SMB_IFMODIFIED
+
+#define IS_NT_DIALECT(dialect)  ( (dialect) == SmbDialectNtLanMan ||   \
+                                  (dialect) == SmbDialectNtLanMan2 ||  \
+                                  (dialect) == SmbDialectCairo )
+#define IS_POSTNT5_DIALECT(dialect)  ( (dialect) == SmbDialectNtLanMan2 )
+
+#else
+
 #define IS_NT_DIALECT(dialect)  ( (dialect) == SmbDialectNtLanMan ||   \
                                   (dialect) == SmbDialectCairo )
+#endif
+
 
 #define DIALECT_HONORS_UID(dialect)     \
     ( (BOOLEAN)(dialect <= SmbDialectDosLanMan20 ) )
