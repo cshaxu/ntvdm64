@@ -1,0 +1,1118 @@
+[
+  {
+    "file": "src/mvdm-host/softpc.new/base/debug/markfrom",
+    "stem": "01-markfrom",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/softpc.new/base/debug/markfrom",
+    "xp_blob": "be7664ee1c25d75caa6790fefe2a313ddd6b5013",
+    "before_sha256": "d0734fc35cf6b2e8d8718217978651fdae23bf9e283f57874ffe864f8d998b83",
+    "xp_sha256": "df1a48f2d89b2483cdc613593cb791109784b3e87ef4c9261a263aa8c14667a1",
+    "byte_equal": false,
+    "newline_normalized_equal": true,
+    "after_sha256": "df1a48f2d89b2483cdc613593cb791109784b3e87ef4c9261a263aa8c14667a1",
+    "after_byte_equal": true,
+    "raw_before": {
+      "points": 1,
+      "lines": 72
+    },
+    "raw_after": {
+      "points": 0,
+      "lines": 0
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 72,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src/non-mvdm/base/ntdll/csrutil.c",
+    "stem": "02-csrutil.c",
+    "xp_path": "Source/XPSP1/NT/base/ntdll/csrutil.c",
+    "xp_blob": "67eb0460c076964707662b5483d2df4980747c1b",
+    "before_sha256": "3b2b90d7bd261c6905a047d2024f795c6bee451e634e3efd20043cc06bf73b52",
+    "xp_sha256": "358995e66dcc9dc0986fb729b982431a79c3a31815448e3533fb1b5202f32364",
+    "byte_equal": false,
+    "newline_normalized_equal": false,
+    "after_sha256": "500341ae7191e537587f47fc4936b03cd2c7893767174a39aadcdbc3d2deb56a",
+    "after_byte_equal": false,
+    "raw_before": {
+      "points": 1,
+      "lines": 1302
+    },
+    "raw_after": {
+      "points": 5,
+      "lines": 240
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 1302,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 5,
+      "lines": 240,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 9,
+      "lines": 500,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 5,
+      "lines": 240,
+      "exclusions": []
+    },
+    "line_directives": [
+      {
+        "physical_line": 30,
+        "directive": "#line 244"
+      },
+      {
+        "physical_line": 579,
+        "directive": "#line 790"
+      }
+    ],
+    "normalized_nonerror_without_line_before": {
+      "points": 8,
+      "lines": 494,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 5,
+      "lines": 238,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src/non-mvdm/public/sdk/inc/ntcsrdll.h",
+    "stem": "03-ntcsrdll.h",
+    "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntcsrdll.h",
+    "xp_blob": "963582def0cc3c79fa49134af218fca5b4a09f5a",
+    "before_sha256": "f866f01d29eeb068cf7773b35094284380556e36ce06b5f50cb65adba0180b9f",
+    "xp_sha256": "430918d11ac891864f8e5cfdc491a21f32b130c77c1b9781ac7b992b6887ebba",
+    "byte_equal": false,
+    "newline_normalized_equal": false,
+    "after_sha256": "430918d11ac891864f8e5cfdc491a21f32b130c77c1b9781ac7b992b6887ebba",
+    "after_byte_equal": true,
+    "raw_before": {
+      "points": 1,
+      "lines": 399
+    },
+    "raw_after": {
+      "points": 0,
+      "lines": 0
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 399,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 7,
+      "lines": 59,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 7,
+      "lines": 59,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src/non-mvdm/base/ntos/ex/probe.c",
+    "stem": "04-probe.c",
+    "xp_path": "Source/XPSP1/NT/base/ntos/ex/probe.c",
+    "xp_blob": "7e945f1167eb589f1d451d54b9a561877feceea9",
+    "before_sha256": "169c070d9e04e2153bd7c02ae852a90241a19c4f66ba3e2d4483a29d79299e6b",
+    "xp_sha256": "df1dbb11f3e282b8a96b64c1c50fdf945f7e53882da5fdb54bbf052cf8a7af40",
+    "byte_equal": false,
+    "newline_normalized_equal": false,
+    "after_sha256": "1105fc4a5baed4adb3d51a744b5ce53ee2cbc049d3e40672bbda94b7a9c1b41c",
+    "after_byte_equal": false,
+    "raw_before": {
+      "points": 1,
+      "lines": 396
+    },
+    "raw_after": {
+      "points": 3,
+      "lines": 8
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 393,
+      "exclusions": [
+        {
+          "original": [
+            31,
+            32
+          ],
+          "current_error": 33,
+          "guard": "#if defined(ALLOC_PRAGMA)"
+        }
+      ]
+    },
+    "nonerror_after": {
+      "points": 2,
+      "lines": 5,
+      "exclusions": [
+        {
+          "original": [
+            31,
+            32
+          ],
+          "current_error": 33,
+          "guard": "#if defined(ALLOC_PRAGMA)"
+        }
+      ]
+    },
+    "normalized_nonerror_before": {
+      "points": 2,
+      "lines": 5,
+      "exclusions": [
+        {
+          "original": [
+            31,
+            32
+          ],
+          "current_error": 33,
+          "guard": "#if defined(ALLOC_PRAGMA)"
+        }
+      ]
+    },
+    "normalized_nonerror_after": {
+      "points": 2,
+      "lines": 5,
+      "exclusions": [
+        {
+          "original": [
+            31,
+            32
+          ],
+          "current_error": 33,
+          "guard": "#if defined(ALLOC_PRAGMA)"
+        }
+      ]
+    },
+    "line_directives": [
+      {
+        "physical_line": 27,
+        "directive": "#line 26"
+      },
+      {
+        "physical_line": 35,
+        "directive": "#line 34"
+      }
+    ],
+    "normalized_nonerror_without_line_before": {
+      "points": 1,
+      "lines": 3,
+      "exclusions": [
+        {
+          "original": [
+            31,
+            32
+          ],
+          "current_error": 32,
+          "guard": "#if defined(ALLOC_PRAGMA)"
+        }
+      ]
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 1,
+      "lines": 3,
+      "exclusions": [
+        {
+          "original": [
+            31,
+            32
+          ],
+          "current_error": 32,
+          "guard": "#if defined(ALLOC_PRAGMA)"
+        }
+      ]
+    }
+  },
+  {
+    "file": "src/non-mvdm/base/ntos/rtl/environ.c",
+    "stem": "05-environ.c",
+    "xp_path": "Source/XPSP1/NT/base/ntos/rtl/environ.c",
+    "xp_blob": "6cc46a42f744612c5d12291fe15679ee305968e6",
+    "before_sha256": "b6906285fa43fefbd61d363297ccf8dc144d2c700dd41a1c3af5ab77c4ca0dd7",
+    "xp_sha256": "104f9d4d5811502faa102661d0f3093ce539f5b6bceac9117541f4d87b480d54",
+    "byte_equal": false,
+    "newline_normalized_equal": false,
+    "after_sha256": "ead01fedcf4869522d3e8337c9d410d762f14b132ac401546b1bff5bb3005be9",
+    "after_byte_equal": false,
+    "raw_before": {
+      "points": 1,
+      "lines": 1851
+    },
+    "raw_after": {
+      "points": 2,
+      "lines": 7
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 1845,
+      "exclusions": [
+        {
+          "original": [
+            28,
+            32
+          ],
+          "current_error": 28,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        }
+      ]
+    },
+    "nonerror_after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": [
+        {
+          "original": [
+            28,
+            32
+          ],
+          "current_error": 28,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        }
+      ]
+    },
+    "normalized_nonerror_before": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": [
+        {
+          "original": [
+            28,
+            32
+          ],
+          "current_error": 28,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        }
+      ]
+    },
+    "normalized_nonerror_after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": [
+        {
+          "original": [
+            28,
+            32
+          ],
+          "current_error": 28,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        }
+      ]
+    },
+    "line_directives": [
+      {
+        "physical_line": 30,
+        "directive": "#line 34"
+      }
+    ],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            28,
+            32
+          ],
+          "current_error": 28,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        }
+      ]
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            28,
+            32
+          ],
+          "current_error": 28,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        }
+      ]
+    }
+  },
+  {
+    "file": "src/non-mvdm/base/ntos/rtl/error.c",
+    "stem": "06-error.c",
+    "xp_path": "Source/XPSP1/NT/base/ntos/rtl/error.c",
+    "xp_blob": "98a70aff2086f98a81a40f6109e29f40a79fda20",
+    "before_sha256": "b5a1ec650bc6707ffbf7873ac6eab119eea916b90f4aed94f9eb9692345c3304",
+    "xp_sha256": "58aefe2c65745421d2e08bb09f90bf6757947c912f3a768ab75a35a1a026dc12",
+    "byte_equal": false,
+    "newline_normalized_equal": false,
+    "after_sha256": "8b6ecce1e6dea7917dd483ff6ca5561c75c5a6fa2582e0f4b5502ed0b20bb7bd",
+    "after_byte_equal": false,
+    "raw_before": {
+      "points": 1,
+      "lines": 498
+    },
+    "raw_after": {
+      "points": 2,
+      "lines": 8
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 489,
+      "exclusions": [
+        {
+          "original": [
+            27,
+            32
+          ],
+          "current_error": 27,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        },
+        {
+          "original": [
+            41,
+            41
+          ],
+          "current_error": 37,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "nonerror_after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": [
+        {
+          "original": [
+            27,
+            32
+          ],
+          "current_error": 27,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        },
+        {
+          "original": [
+            41,
+            41
+          ],
+          "current_error": 37,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "normalized_nonerror_before": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": [
+        {
+          "original": [
+            27,
+            32
+          ],
+          "current_error": 27,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        },
+        {
+          "original": [
+            41,
+            41
+          ],
+          "current_error": 37,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "normalized_nonerror_after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": [
+        {
+          "original": [
+            27,
+            32
+          ],
+          "current_error": 27,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        },
+        {
+          "original": [
+            41,
+            41
+          ],
+          "current_error": 37,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "line_directives": [
+      {
+        "physical_line": 29,
+        "directive": "#line 34"
+      }
+    ],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            27,
+            32
+          ],
+          "current_error": 27,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        },
+        {
+          "original": [
+            41,
+            41
+          ],
+          "current_error": 36,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            27,
+            32
+          ],
+          "current_error": 27,
+          "guard": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        },
+        {
+          "original": [
+            41,
+            41
+          ],
+          "current_error": 36,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "src/non-mvdm/base/ntos/rtl/generr.c",
+    "stem": "07-generr.c",
+    "xp_path": "Source/XPSP1/NT/base/ntos/rtl/generr.c",
+    "xp_blob": "f50890804c0ea66b3eb68f44dab4f7b9b9255275",
+    "before_sha256": "1b1a8555b2ff023f77363b72e2db24b96b00b7180f086e62841730dad49478bd",
+    "xp_sha256": "31744d4144077e5bcda0668757b495a5dea43818655b11adfa595b7701d11d4b",
+    "byte_equal": false,
+    "newline_normalized_equal": false,
+    "after_sha256": "9b1f61c652acd8c8cb3aed570b8ca9cc1dd4f3c787b7652d741d7bf048434110",
+    "after_byte_equal": false,
+    "raw_before": {
+      "points": 1,
+      "lines": 2815
+    },
+    "raw_after": {
+      "points": 1,
+      "lines": 9
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 2813,
+      "exclusions": [
+        {
+          "original": [
+            40,
+            40
+          ],
+          "current_error": 35,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "nonerror_after": {
+      "points": 1,
+      "lines": 9,
+      "exclusions": [
+        {
+          "original": [
+            40,
+            40
+          ],
+          "current_error": 35,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "normalized_nonerror_before": {
+      "points": 1,
+      "lines": 9,
+      "exclusions": [
+        {
+          "original": [
+            40,
+            40
+          ],
+          "current_error": 35,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "normalized_nonerror_after": {
+      "points": 1,
+      "lines": 9,
+      "exclusions": [
+        {
+          "original": [
+            40,
+            40
+          ],
+          "current_error": 35,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "line_directives": [
+      {
+        "physical_line": 24,
+        "directive": "#line 30"
+      }
+    ],
+    "normalized_nonerror_without_line_before": {
+      "points": 1,
+      "lines": 8,
+      "exclusions": [
+        {
+          "original": [
+            40,
+            40
+          ],
+          "current_error": 34,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 1,
+      "lines": 8,
+      "exclusions": [
+        {
+          "original": [
+            40,
+            40
+          ],
+          "current_error": 34,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "src/non-mvdm/base/ntos/rtl/i386/largeint.asm",
+    "stem": "08-largeint.asm",
+    "xp_path": "Source/XPSP1/NT/base/ntos/rtl/i386/largeint.asm",
+    "xp_blob": "5a5f057c4a63cc5a84381473c71c13f53d1d4aa8",
+    "before_sha256": "5e31a60cd517267d368a2879d8a5e316e020bac8a84ecb1f6d2866d080e7ce7a",
+    "xp_sha256": "11f53e6d4f6d23122674c1fcea3afeb3b718499f5c37d1280ed8932707156266",
+    "byte_equal": false,
+    "newline_normalized_equal": true,
+    "after_sha256": "11f53e6d4f6d23122674c1fcea3afeb3b718499f5c37d1280ed8932707156266",
+    "after_byte_equal": true,
+    "raw_before": {
+      "points": 1,
+      "lines": 1710
+    },
+    "raw_after": {
+      "points": 0,
+      "lines": 0
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 1710,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src/non-mvdm/base/ntos/rtl/i386/movemem.asm",
+    "stem": "09-movemem.asm",
+    "xp_path": "Source/XPSP1/NT/base/ntos/rtl/i386/movemem.asm",
+    "xp_blob": "801c6486eee1e250330720684088e9c0c75926e4",
+    "before_sha256": "308f5473899f9e6755cfed88f9aebc9a99dfef2f145c897169c98b32b47edbba",
+    "xp_sha256": "80d06ee44f3133082747379eb8a83e82e665018536e4823960598482c052563a",
+    "byte_equal": false,
+    "newline_normalized_equal": false,
+    "after_sha256": "2285b072e0e3e141c759e6a39b94a5edbb0a9bfd842052d4449f6e8eaa5faa94",
+    "after_byte_equal": false,
+    "raw_before": {
+      "points": 1,
+      "lines": 2655
+    },
+    "raw_after": {
+      "points": 1,
+      "lines": 1
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 2655,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": []
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src/non-mvdm/public/sdk/inc/ks386.inc",
+    "stem": "10-ks386.inc",
+    "xp_path": "Source/XPSP1/NT/public/sdk/inc/ks386.inc",
+    "xp_blob": "4937bc171a376b251cf8d6b771fb88333920766a",
+    "before_sha256": "9c58dd01062ef224026016bced24e617153fe031f627b3805c3e8c8812adb4e5",
+    "xp_sha256": "b315bce8a77bc10c3605fdb9ef8be35d748118193b9f9a34bdc50fe8b8059051",
+    "byte_equal": false,
+    "newline_normalized_equal": true,
+    "after_sha256": "b315bce8a77bc10c3605fdb9ef8be35d748118193b9f9a34bdc50fe8b8059051",
+    "after_byte_equal": true,
+    "raw_before": {
+      "points": 1,
+      "lines": 2438
+    },
+    "raw_after": {
+      "points": 0,
+      "lines": 0
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 2438,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src/non-mvdm/public/sdk/inc/ntrtlpath.h",
+    "stem": "11-ntrtlpath.h",
+    "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntrtlpath.h",
+    "xp_blob": "7ce21c1036f8af52fd5bed3d2fa86589e878fc45",
+    "before_sha256": "941b23ca31618f12670c7a7d932dc8a743161a97a32d674b1121bfafaa9dde78",
+    "xp_sha256": "355f69c9617cd41d479fae5b2512590758a797c0df92d41fe8ea4006dd2d0b2e",
+    "byte_equal": false,
+    "newline_normalized_equal": true,
+    "after_sha256": "355f69c9617cd41d479fae5b2512590758a797c0df92d41fe8ea4006dd2d0b2e",
+    "after_byte_equal": true,
+    "raw_before": {
+      "points": 1,
+      "lines": 662
+    },
+    "raw_after": {
+      "points": 0,
+      "lines": 0
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 662,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src/non-mvdm/public/internal/base/inc/status.h",
+    "stem": "12-status.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/base/inc/status.h",
+    "xp_blob": "cc297b5955252ad002a498e7138d7e7770c99348",
+    "before_sha256": "730c928405b92127ca2572327f6d86c0866c098b83bfd3285cf2a388f95c5240",
+    "xp_sha256": "af4af274f3b7d981bc21741ed8942ffcab6b28e3f65a2b686158cad3a4baf151",
+    "byte_equal": false,
+    "newline_normalized_equal": true,
+    "after_sha256": "af4af274f3b7d981bc21741ed8942ffcab6b28e3f65a2b686158cad3a4baf151",
+    "after_byte_equal": true,
+    "raw_before": {
+      "points": 1,
+      "lines": 438
+    },
+    "raw_after": {
+      "points": 0,
+      "lines": 0
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 438,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src/non-mvdm/sdktools/generr/generr.c",
+    "stem": "13-generr.c",
+    "xp_path": "Source/XPSP1/NT/sdktools/generr/generr.c",
+    "xp_blob": "0f86c45cfc351886e9008d75ca86f386c1353393",
+    "before_sha256": "4a2efbd820a07d753f48a6b223082bc0cae6e1e6929e4112c4e44d9f2fbe9313",
+    "xp_sha256": "b159f5b100c7fe1892c175ddd13d9386ff39d63073f0a0c04534bd8ce039eac6",
+    "byte_equal": false,
+    "newline_normalized_equal": true,
+    "after_sha256": "b159f5b100c7fe1892c175ddd13d9386ff39d63073f0a0c04534bd8ce039eac6",
+    "after_byte_equal": true,
+    "raw_before": {
+      "points": 1,
+      "lines": 864
+    },
+    "raw_after": {
+      "points": 0,
+      "lines": 0
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 862,
+      "exclusions": [
+        {
+          "original": [
+            34,
+            34
+          ],
+          "current_error": 34,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            34,
+            34
+          ],
+          "current_error": 34,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "normalized_nonerror_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            34,
+            34
+          ],
+          "current_error": 34,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "normalized_nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            34,
+            34
+          ],
+          "current_error": 34,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            34,
+            34
+          ],
+          "current_error": 34,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            34,
+            34
+          ],
+          "current_error": 34,
+          "guard": "#if ERROR_SUCCESS != 0 || NO_ERROR != 0"
+        }
+      ]
+    }
+  },
+  {
+    "file": "src/non-mvdm/public/sdk/inc/callconv.inc",
+    "stem": "14-callconv.inc",
+    "xp_path": "Source/XPSP1/NT/public/sdk/inc/callconv.inc",
+    "xp_blob": "86ca9c6292bb594597c4819f2f1ff7a3498af732",
+    "before_sha256": "044e0712a074c7fd61e1a4ca04fac1ff860f028d289c92e320b01cc9c7690bb5",
+    "xp_sha256": "dbe89c1091a5fac0f048efb3118caffb35775be7ec2e716597f54b71b9bab43f",
+    "byte_equal": false,
+    "newline_normalized_equal": true,
+    "after_sha256": "dbe89c1091a5fac0f048efb3118caffb35775be7ec2e716597f54b71b9bab43f",
+    "after_byte_equal": true,
+    "raw_before": {
+      "points": 1,
+      "lines": 606
+    },
+    "raw_after": {
+      "points": 0,
+      "lines": 0
+    },
+    "nonerror_before": {
+      "points": 1,
+      "lines": 606,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+    "stem": "15-ntcsrmsg.h",
+    "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntcsrmsg.h",
+    "xp_blob": "9bd7d892d373020948a3f58c64004fc0ba8ace65",
+    "before_sha256": "0fd969e6e2b545e02e7255f97a8bbbfc8961020938298746d7af5723df980d43",
+    "xp_sha256": "0fd969e6e2b545e02e7255f97a8bbbfc8961020938298746d7af5723df980d43",
+    "byte_equal": true,
+    "newline_normalized_equal": true,
+    "after_sha256": "0fd969e6e2b545e02e7255f97a8bbbfc8961020938298746d7af5723df980d43",
+    "after_byte_equal": true,
+    "raw_before": {
+      "points": 0,
+      "lines": 0
+    },
+    "raw_after": {
+      "points": 0,
+      "lines": 0
+    },
+    "nonerror_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "line_directives": [],
+    "normalized_nonerror_without_line_before": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "normalized_nonerror_without_line_after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  }
+]

@@ -35,6 +35,42 @@ int main(void)
         CHECK(capture->CountMessagePointers==count);
         CsrFreeCaptureBuffer(capture);
     }
+    {
+        WCHAR first[] = L"capture", second[] = L"two";
+        UNICODE_STRING a = {14, sizeof(first), first};
+        UNICODE_STRING b = {6, sizeof(second), second};
+        PUNICODE_STRING strings[] = {&a, NULL, &b};
+        PCSR_CAPTURE_HEADER capture = NULL;
+        CHECK(CsrCaptureMessageMultiUnicodeStringsInPlace(NULL, 0, NULL) == STATUS_INVALID_PARAMETER);
+        CHECK(CsrCaptureMessageMultiUnicodeStringsInPlace(&capture, 3, strings) == STATUS_SUCCESS);
+        CHECK(capture != NULL);
+        if (capture) {
+            CHECK(a.Buffer != first && b.Buffer != second);
+            CHECK(memcmp(a.Buffer, first, sizeof(first)) == 0);
+            CHECK(memcmp(b.Buffer, second, sizeof(second)) == 0);
+            CHECK(capture->CountMessagePointers == 2);
+            CHECK(((ULONG_PTR)a.Buffer % sizeof(void *)) == 0);
+            CHECK(((ULONG_PTR)b.Buffer % sizeof(void *)) == 0);
+            CsrFreeCaptureBuffer(capture);
+        }
+        CsrProbeForRead(first, sizeof(first), sizeof(WCHAR));
+        CsrProbeForWrite(first, sizeof(first), sizeof(WCHAR));
+        CHECK(memcmp(first, L"capture", sizeof(first)) == 0);
+        CsrProbeForRead(NULL, 0, 8);
+        CsrProbeForWrite(NULL, 0, 8);
+        __try {
+            CsrProbeForRead((PCHAR)first + 1, 1, 2);
+            CHECK(0);
+        } __except(GetExceptionCode() == STATUS_DATATYPE_MISALIGNMENT ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            CHECK(1);
+        }
+        __try {
+            CsrProbeForWrite((PCHAR)first + 1, 1, 2);
+            CHECK(0);
+        } __except(GetExceptionCode() == STATUS_DATATYPE_MISALIGNMENT ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            CHECK(1);
+        }
+    }
     CHECK(opennt_base_capture_heap_end() && CsrPortHeap==NULL);
     CHECK(opennt_base_capture_heap_end());
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && before==after);

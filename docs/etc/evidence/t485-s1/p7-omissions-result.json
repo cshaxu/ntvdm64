@@ -1,0 +1,156 @@
+{
+  "task": "M0 T485 S14 P7 bounded H/N001-N003 omissions",
+  "status": "verified for delivery",
+  "base_commit": "0262e23b1",
+  "runtime": "build/t485-s14/runtime9",
+  "build_exit": 0,
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "9B76DC443C2FA9B08D63CA8FF678AE51649C46C85B11FAFEB378A12A045DF8A9",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "9B76DC443C2FA9B08D63CA8FF678AE51649C46C85B11FAFEB378A12A045DF8A9",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "3790B9FEC55224320801566D5CA6795E5E4E8CCFF3479A053DB87DA35C54FC60",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "3790B9FEC55224320801566D5CA6795E5E4E8CCFF3479A053DB87DA35C54FC60",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "E85E3960691D28A0A4A083F3E07AABB91169F74418526F559F880261F913F9A8",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "E85E3960691D28A0A4A083F3E07AABB91169F74418526F559F880261F913F9A8",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "A33AE2B2AE704989CD61EB9D3E3BB911915A6D628A3F6B5AA13A827AC0738749",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "A33AE2B2AE704989CD61EB9D3E3BB911915A6D628A3F6B5AA13A827AC0738749",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "C1CF2815790FA1C85084F5B231A116DE6A5F0D922D96719AD584BD46B1087C28",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "C1CF2815790FA1C85084F5B231A116DE6A5F0D922D96719AD584BD46B1087C28",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "E38C7BD0304F9FEBC131BFC77962378783453BFA7B7BDC050261AF3949FC351F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "E38C7BD0304F9FEBC131BFC77962378783453BFA7B7BDC050261AF3949FC351F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "C6CBF91931D4967188DE5CB62D33ECA564EDD8A03FD8D5FDC561FB94169E09A2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "C6CBF91931D4967188DE5CB62D33ECA564EDD8A03FD8D5FDC561FB94169E09A2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "9190D25DCF3F0B89856EF1312C4360D96F5DD19B7323CF04E6EF7A07D32F003F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "9190D25DCF3F0B89856EF1312C4360D96F5DD19B7323CF04E6EF7A07D32F003F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "E2982F31F2FBA1BBF1A6B8C6FA10DD9007960605245444347F63919A514DDA42",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "E2982F31F2FBA1BBF1A6B8C6FA10DD9007960605245444347F63919A514DDA42",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "72D87EC3876E963455142F96D044842D467E61550A1786A378903067B0BB7F2C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "72D87EC3876E963455142F96D044842D467E61550A1786A378903067B0BB7F2C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "1E4E8B05A31E8B495A1576166B82C4CA76BCCA14786C566D2725DC8642D951F1",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "1E4E8B05A31E8B495A1576166B82C4CA76BCCA14786C566D2725DC8642D951F1",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "0FB541D8DE7391A46D61E2789F312B0747DDCBFE66FEF0720FC15C128BA83D0A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "0FB541D8DE7391A46D61E2789F312B0747DDCBFE66FEF0720FC15C128BA83D0A",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "12120680B7BA79DBA0207E902A2EBA0929707DB836846E9D2644E0D341746A99",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "12120680B7BA79DBA0207E902A2EBA0929707DB836846E9D2644E0D341746A99",
+      "pass": true
+    }
+  ],
+  "capture": {
+    "x86": "native capture bits=32 checks=3475 failures=0; original allocation/table/cleanup",
+    "x64": "native capture bits=64 checks=3475 failures=0; original allocation/table/cleanup"
+  },
+  "Full": "24/24 PASS, one run",
+  "mirror_files_changed": 14,
+  "protected_byte_exact": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+  "nonerror_before": {
+    "points": 14,
+    "lines": 16684
+  },
+  "nonerror_after": {
+    "points": 11,
+    "lines": 257
+  },
+  "unclosed_evidence": [],
+  "retained_boundary": "Win95 approved historical exit 1; no new source attribution claimed."
+}

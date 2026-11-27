@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0001    // Increment this if a change has global effects
 
-Copyright (c) 1990-1993  Microsoft Corporation
+Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Module Name:
 
@@ -22,19 +22,15 @@ Revision History:
 #ifndef _NTCSRDLLAPI_
 #define _NTCSRDLLAPI_
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 #include "ntcsrmsg.h"
 
-typedef
-ULONG
-(*PCSR_CALLBACK_ROUTINE)(
-    IN OUT PCSR_API_MSG ReplyMsg
-    );
-
-typedef struct _CSR_CALLBACK_INFO {
-    ULONG ApiNumberBase;
-    ULONG MaxApiNumber;
-    PCSR_CALLBACK_ROUTINE *CallbackDispatchTable;
-} CSR_CALLBACK_INFO, *PCSR_CALLBACK_INFO;
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 NTSYSAPI
 NTSTATUS
@@ -42,7 +38,6 @@ NTAPI
 CsrClientConnectToServer(
     IN PWSTR ObjectDirectory,
     IN ULONG ServertDllIndex,
-    IN PCSR_CALLBACK_INFO CallbackInformation OPTIONAL,
     IN PVOID ConnectionInformation,
     IN OUT PULONG ConnectionInformationLength OPTIONAL,
     OUT PBOOLEAN CalledFromServer OPTIONAL
@@ -83,15 +78,6 @@ CsrAllocateMessagePointer(
     );
 
 NTSYSAPI
-ULONG
-NTAPI
-CsrAllocateCapturePointer(
-    IN OUT PCSR_CAPTURE_HEADER CaptureBuffer,
-    IN ULONG Length,
-    OUT PVOID *Pointer
-    );
-
-NTSYSAPI
 VOID
 NTAPI
 CsrCaptureMessageBuffer(
@@ -110,6 +96,23 @@ CsrCaptureMessageString(
     IN ULONG Length,
     IN ULONG MaximumLength,
     OUT PSTRING CapturedString
+    );
+
+NTSYSAPI
+VOID
+NTAPI
+CsrCaptureMessageUnicodeStringInPlace(
+    IN OUT PCSR_CAPTURE_HEADER CaptureBuffer,
+    IN OUT PUNICODE_STRING     String
+    );
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+CsrCaptureMessageMultiUnicodeStringsInPlace(
+    IN OUT PCSR_CAPTURE_HEADER* InOutCaptureBuffer,
+    IN ULONG                    NumberOfStringsToCapture,
+    IN const PUNICODE_STRING*   StringsToCapture
     );
 
 NTSYSAPI
@@ -188,5 +191,17 @@ NTAPI
 CsrStopDumpProfile(
     VOID
     );
+
+NTSYSAPI
+HANDLE
+NTAPI
+CsrGetProcessId(
+    VOID
+    );
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _NTCSRDLLAPI_

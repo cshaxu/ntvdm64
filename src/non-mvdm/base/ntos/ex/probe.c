@@ -31,8 +31,8 @@ Revision History:
 
 #if defined(ALLOC_PRAGMA)
 #error DIVERGENCE OPENNT-HOST-144: kernel allocation pragma profile is not selected
-#line 33
 #endif
+#line 34
 
 
 VOID

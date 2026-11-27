@@ -63,7 +63,15 @@ checkpoint. Other paired directories remain open.
 byte-exact OpenNT/XP originals, with matching complete directory membership.
 No production or media change; nonerror0points/0lines. P4 documentation-only
 registration retains N006 runtime6 Full24/24 without rebuild/republication.
-The unchanged42-file audit uses that same checkpoint. [N008 OLE conversion](../etc/evidence/t485-s1/n008.md) completes P5 verification: XP output initialization and active-path line mapping, runtime7 cached full build and dual13-image26hash publication, real Win16 descriptor roundtrip/invalid-input/ownership pass. Nonerror OpenNT1point/5096lines -> XP22points/3936lines; LF restoration exposes residual points. One changed file since the checkpoint; no repeat Full. [N009 Netlib](../etc/evidence/t485-s1/n009.md) completes P6:10 existing sources plus required original midluser/RPC declarations; runtime8 cached full build, dual13-image26hash publication, targeted packstr and Full24/24 pass. Primary nonerror10points/7071lines -> 15points/19lines; paired header costs are separately recorded. This is the new Full checkpoint. Owner inserted a bounded H/N001-N003 omission repair before N010; admission follows P6 delivery.
+The unchanged42-file audit uses that same checkpoint. [N008 OLE conversion](../etc/evidence/t485-s1/n008.md) completes P5 verification: XP output initialization and active-path line mapping, runtime7 cached full build and dual13-image26hash publication, real Win16 descriptor roundtrip/invalid-input/ownership pass. Nonerror OpenNT1point/5096lines -> XP22points/3936lines; LF restoration exposes residual points. One changed file since the checkpoint; no repeat Full. [N009 Netlib](../etc/evidence/t485-s1/n009.md) completes P6:10 existing sources plus required original midluser/RPC declarations; runtime8 cached full build, dual13-image26hash publication, targeted packstr and Full24/24 pass. Primary nonerror10points/7071lines -> 15points/19lines; paired header costs are separately recorded. This is the new Full checkpoint. P6 committed/pushed0262e23b1. [P7 omission repair](../etc/evidence/t485-s1/p7-omissions.md) completes
+bounded H markfrom/N001-N003 follow-up:14 changed files, protected XP
+ntcsrmsg/BaseClient and retained S13 closure. Runtime9 cached full build,
+dual13-image26hash publication, x86/x64 capture3475 checks each and Full24/24
+pass. Nonerror XP byte diff14points/16684lines -> 11points/257lines; CSR
+normalized9points/500lines -> 5points/240lines. Eight modified files are XP
+byte-exact. No original guest change. This is the new ten-file Full checkpoint.
+Delivery remains45/159, S14 remains6/9; next migration is N010.
+
 
 ## S13 Closure Record
 

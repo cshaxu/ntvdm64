@@ -2830,3 +2830,20 @@ uses public LocalAlloc/Free/ReAlloc/Size; no outer RPC implementation is
 imported. Source algorithm, ABI, callers, three-way/mirror metrics and final
 verification state: docs/etc/evidence/t485-s1/n009.md. Historical OpenNT
 registration above remains provenance rather than the current source identity.
+
+### T485 S14 P7 CSR/RTL omission repair
+
+The current XP CSR capture owner supersedes the historical OPENNT-HOST-031
+three/six-function subset above. It retains the complete XP SP1 csrutil.c
+sequence from CsrAllocateCaptureBuffer through CsrProbeForRead (ten functions),
+including single/multiple Unicode capture and both probes. Only the private
+CSR LPC dispatcher and CSR-server PID query remain omitted; no artificial
+conditional exclusion hides those omissions. Existing process-local heap and
+native-pointer-width alignment remain. The write probe obtains its address
+ceiling through GetSystemInfo instead of private CSR initialization.
+ntcsrdll.h is now byte-exact XP; current ntcsrmsg.h remains byte-exact.
+
+[Per-file current differences, consumers and verification](../../docs/etc/evidence/t485-s1/p7-omissions.md)
+also supersede prior newline-only differences in N002/N003, with callconv.inc
+recorded as a separate association. Kernel pragma exclusions keep their
+original guards; active diagnostic line mapping is preserved.

@@ -26,8 +26,8 @@ Revision History:
 
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
 #error Unsupported excluded original configuration
-#line 33
 #endif
+#line 34
 
 BOOLEAN RtlpEnvironCacheValid;
 

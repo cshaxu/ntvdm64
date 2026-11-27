@@ -2125,3 +2125,4 @@ post-publication targeted checks.
 - [T485 S14 N007 system fonts](evidence/t485-s1/n007.md).
 - [T485 S14 N008 OLE conversion](evidence/t485-s1/n008.md).
 - [T485 S14 N009 Netlib migration](evidence/t485-s1/n009.md).
+- [T485 S14 P7 bounded omission repair](evidence/t485-s1/p7-omissions.md).
