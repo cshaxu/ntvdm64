@@ -3,6 +3,14 @@
 #define OPENNT_BASE_PROCESS_H
 #include <windows.h>
 struct _CSR_PROCESS;
+struct _CSR_THREAD;
+struct _CSR_API_MSG;
+typedef struct OPENNT_BASE_MESSAGE_VIEW {
+    const void *capture;
+    ULONG length,count;
+    const ULONG_PTR *offsets;
+    HANDLE caller;
+} OPENNT_BASE_MESSAGE_VIEW;
 /* Borrowed fields of the original record, only used under its registry lock. */
 typedef struct OPENNT_BASE_PROCESS_VIEW {
     LIST_ENTRY *link;
@@ -12,6 +20,9 @@ typedef struct OPENNT_BASE_PROCESS_VIEW {
 typedef struct OPENNT_BASE_PROCESS_PROVIDER {
     struct _CSR_PROCESS *(*record)(LIST_ENTRY *);
     void (*view)(struct _CSR_PROCESS *, OPENNT_BASE_PROCESS_VIEW *);
+    /* Borrow original request fields; authenticated process owner pins them. */
+    BOOL (*thread_view)(struct _CSR_THREAD *, HANDLE *, ULONG **);
+    void (*message_view)(const struct _CSR_API_MSG *, OPENNT_BASE_MESSAGE_VIEW *);
 } OPENNT_BASE_PROCESS_PROVIDER;
 typedef struct OPENNT_BASE_PROCESS_REGISTRY {
     const OPENNT_BASE_PROCESS_PROVIDER *Provider;

@@ -7,4 +7,7 @@ struct _CSR_THREAD;
 struct _CSR_THREAD *OpenNtBaseServerRequestThread(void);
 struct _CSR_THREAD *OpenNtBaseBindServerRequestThread(struct _CSR_THREAD *);
 
+/* Synchronous local dispatch, after bounded decoding; never a wire identity. */
+const void *OpenNtBaseServerRequestMessage(void);
+const void *OpenNtBaseBindServerRequestMessage(const void *);
 #endif

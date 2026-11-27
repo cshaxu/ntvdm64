@@ -213,6 +213,9 @@ try {
             }
         }
         if($desktopFailures.Count){throw ($desktopFailures -join [Environment]::NewLine)}
+        Invoke-Gate 'wow-sol-options' {
+            & "$repo/test/integration/verify-wow-sol-options.ps1" -PackageRoot $sourceRuntime -BuildRoot "$log/sol-options" -NoTrace
+        }
     }
     Invoke-Gate 'startup-presentation' {
         & "$repo/test/ntvdm-exe/softpc/verify-presentation-contracts.ps1" -Kind startup -OutputRoot "$log/startup-presentation" *> "$log/startup-presentation.txt"

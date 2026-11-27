@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S14** (Ordinary Mode). Resume N004-N012 after
 [S13 closure](../etc/evidence/t485-h-repair/s13-closure.md).
-Migration delivered41/159 directories: H001-H036 and N001-N005.
+Migration verified for delivery42/159 directories: H001-H036 and N001-N006.
 The owner approved continuous execution; the [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S15-S20 and all remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains S15-S20 and all remaining migration/capability obligations.
 
 ## S14 Progress
 
-2/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
+3/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
 and [receipt](../etc/evidence/t485-s1/n004-result.json): XP vdm.c plus required
 original vdm.h; paired WOW registration field leads N005. Cached full build,
 dual13-image26hash publication, targeted tests and consolidated Full23/23 pass.
@@ -46,9 +46,19 @@ S14 P1 delivered N004. [N005 Base declarations](../etc/evidence/t485-s1/n005.md)
 ([receipt](../etc/evidence/t485-s1/n005-result.json)) completes P2: cached full
 build, dual13-image26hash publication and affected BASE/RPC/COMMAND/WOW tests
 passed. Four mirror files reduce nonerror6points/983lines to0/0; ntcsrmsg.h
-leads N021 only as a dependency. Runtime3 is now published. N004 Full remains
+leads N021 only as a dependency. Runtime3 was N005's published package. N004 Full remains
 its checkpoint; no repeat Full is claimed. Four files since that checkpoint.
-Next N006: BaseSrv VDM, in directory order.
+[N006 BaseSrv VDM](../etc/evidence/t485-s1/n006.md) and
+[receipt](../etc/evidence/t485-s1/n006-result.json) complete P3 verification:
+XP desktop/logon shared-WOW records, real worker task/Console binding and
+original request validation. Runtime6 cached-build/dual13-image26hash pass;
+Full24/24 consolidates21 initial passes,2 bounded continuations and the new
+SOL Game > Options modal-dialog gate. Initial CAF find-KVM failure is retained;
+no full-suite rerun. Runtime6 differs from Full-tested runtime5 only in named
+package-ID/PE timestamp fields after format/#line cleanup. Primary mirrors
+OpenNT3points/6586lines -> XP17points/95lines; paired vdm.c drops4lines,
+5 original declaration headers are byte-exact. This is the new ten-file
+checkpoint. Next directory is N007; other paired directories remain open.
 ## S13 Closure Record
 
 [Closure](../etc/evidence/t485-h-repair/s13-closure.md) and

@@ -3,6 +3,7 @@
  * records. Full CSR root/reference/deletion machinery is not imported.
  * Authentication, task selection and worker role assignment are not here. */
 #include "compat/include/base_process.h"
+#include "compat/include/base_request.h"
 
 static __declspec(thread) OPENNT_BASE_PROCESS_REGISTRY *registry;
 
@@ -163,4 +164,70 @@ BOOL OpenNtBaseRetainRegisteredProcess(OPENNT_BASE_PROCESS_REGISTRY *state,
     OpenNtBaseBindProcessRegistry(previous);
     if (error) SetLastError(error);
     return error==0;
+}
+
+/* XP csr/server/process.c: CsrImpersonateClient / CsrRevertToSelf.
+ * Standalone requests authenticate a process, not an LPC client thread.
+ * Use its pinned process token; never accept a token/identity from the wire.
+ * Original CSR request ImpersonateCount remains the sole nesting owner. */
+BOOLEAN NTAPI CsrImpersonateClient(struct _CSR_THREAD *thread)
+{
+    struct _CSR_THREAD *caller=OpenNtBaseServerRequestThread();
+    HANDLE process,token;
+    ULONG *count,*unused;
+    BOOL ok;
+    DWORD error;
+    if(!thread)thread=caller;
+    if(!registry || !registry->Provider->thread_view || !caller || !thread ||
+       !registry->Provider->thread_view(caller,&process,&count) || !count || *count==MAXDWORD ||
+       !registry->Provider->thread_view(thread,&process,&unused) || !process) {
+        SetLastError(ERROR_INVALID_STATE);return FALSE;
+    }
+    if(!OpenProcessToken(process,TOKEN_QUERY|TOKEN_DUPLICATE,&token))return FALSE;
+    ok=ImpersonateLoggedOnUser(token);error=GetLastError();
+    CloseHandle(token);
+    if(ok)++*count;
+    else SetLastError(error);
+    return (BOOLEAN)ok;
+}
+
+BOOLEAN NTAPI CsrRevertToSelf(void)
+{
+    struct _CSR_THREAD *caller=OpenNtBaseServerRequestThread();
+    HANDLE process;
+    ULONG *count;
+    if(caller) {
+        if(!registry || !registry->Provider->thread_view ||
+           !registry->Provider->thread_view(caller,&process,&count) || !count || !*count)
+            return FALSE;
+        if(--*count)return TRUE;
+    }
+    return (BOOLEAN)RevertToSelf();
+}
+
+/* XP base/subsys/csr/server/apireqst.c:924, CsrValidateMessageBuffer.
+ * Retain capture size/offset validation. Standalone's decoded, synchronous
+ * server-local message is bound explicitly instead of forging its caller PID. */
+BOOLEAN CsrValidateMessageBuffer(const struct _CSR_API_MSG *message,
+    const void *const *buffer, ULONG count, ULONG size)
+{
+    OPENNT_BASE_MESSAGE_VIEW view={0};
+    ULONG_PTR length,end,offset;
+    ULONG i;
+    if(!message || !buffer || !size || count>MAXDWORD/size)return FALSE;
+    length=count*size;
+    if(!*buffer && !length)return TRUE;
+    if(!registry || !registry->Provider->message_view)return FALSE;
+    registry->Provider->message_view(message,&view);
+    if(view.capture) {
+        end=(ULONG_PTR)view.capture+view.length;
+        if(length<=end-(ULONG_PTR)*buffer) {
+            offset=(ULONG_PTR)buffer-(ULONG_PTR)message;
+            for(i=0;i<view.count;++i)
+                if(view.offsets[i]==offset)return TRUE;
+        }
+        return FALSE;
+    }
+    return view.caller==(HANDLE)(ULONG_PTR)GetCurrentProcessId() ||
+        message==OpenNtBaseServerRequestMessage();
 }

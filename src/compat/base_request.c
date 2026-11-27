@@ -17,3 +17,15 @@ struct _CSR_THREAD *OpenNtBaseBindServerRequestThread(struct _CSR_THREAD *thread
     requestThread = thread;
     return previous;
 }
+
+static __declspec(thread) const void *requestMessage;
+const void *OpenNtBaseServerRequestMessage(void)
+{
+    return requestMessage;
+}
+const void *OpenNtBaseBindServerRequestMessage(const void *message)
+{
+    const void *previous=requestMessage;
+    requestMessage=message;
+    return previous;
+}

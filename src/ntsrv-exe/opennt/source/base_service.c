@@ -6,7 +6,7 @@
 static void service_resources_release(OPENNT_BASE_RESOURCE_SCOPE *scope);
 static DWORD service_wait_resolve(OPENNT_BASE_CONNECTION *connection,DWORD generation,
     HANDLE receipt,DWORD role,HANDLE *event);
-static DWORD service_allocate_console(OPENNT_BASE_SERVICE *service,HANDLE *console);
+DWORD service_allocate_console(OPENNT_BASE_SERVICE *service,HANDLE *console);
 
 /* Called under the service lock before either original ExitVDM or process
  * rundown destroys records. Both paths must preserve the same parent result. */
@@ -168,6 +168,7 @@ DWORD OpenNtBaseServiceRegisterWowExec(OPENNT_BASE_CONNECTION *connection,
         return ERROR_ACCESS_DENIED;
     }
     message.u.RegisterWowExec.hwndWowExec=(HWND)(ULONG_PTR)window;
+    message.u.RegisterWowExec.ConsoleHandle=connection->console;
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
     previous_thread=OpenNtBaseBindServerRequestThread(&thread);
@@ -185,7 +186,7 @@ DWORD OpenNtBaseServiceRegisterWowExec(OPENNT_BASE_CONNECTION *connection,
  * reserved worker makes its original ASKING_FOR_PIF request.  This finite
  * local key is the transport replacement for that unavailable handle; it is
  * not a second record list or worker scheduler. */
-static DWORD service_allocate_console(OPENNT_BASE_SERVICE *service,HANDLE *console)
+DWORD service_allocate_console(OPENNT_BASE_SERVICE *service,HANDLE *console)
 {
     DWORD error=ERROR_SUCCESS;
     if (!service || !console) return ERROR_INVALID_PARAMETER;
@@ -227,8 +228,9 @@ DWORD OpenNtBaseServiceWowStarted(OPENNT_BASE_CONNECTION *connection,DWORD pid,
         }
         goto done;
     }
-    if(!WOWHead || WOWHead->SequenceNumber!=generation)goto done;
-    for (record=WOWHead->WOWRecord;record;record=record->WOWRecordNext)
+    PSHAREDWOWRECORD shared_wow=BaseSrvFindSharedWowBySequence(generation);
+    if(!shared_wow)goto done;
+    for (record=shared_wow->pWOWRecord;record;record=record->WOWRecordNext)
         if (record->iTask==task) break;
     if (!record || !record->fDispatched) { error=ERROR_INVALID_STATE; goto done; }
     /* Task IDs wrap. Match the original parent receipt too, never a stale
@@ -276,6 +278,36 @@ done:
     return error;
 }
 
+
+/* Original XP lookup owns desktop normalization and shared-WOW selection. */
+NTSTATUS BaseSrvFindSharedWow(PBASE_CHECKVDM_MSG,HANDLE,PUNICODE_STRING,PSHAREDWOWRECORD *);
+static BOOL service_wow_closing(OPENNT_BASE_CONNECTION *connection,PBASE_CHECKVDM_MSG request)
+{
+    CSR_THREAD thread={0};
+    PCSR_THREAD previous_thread;
+    OPENNT_BASE_PROCESS_REGISTRY *previous_registry;
+    PSHAREDWOWRECORD record=NULL;
+    UNICODE_STRING desktop={0};
+    LIST_ENTRY *entry;
+    BOOL closing=FALSE;
+    thread.Process=&connection->process;
+    thread.ClientId=connection->process.ClientId;
+    previous_thread=OpenNtBaseBindServerRequestThread(&thread);
+    previous_registry=OpenNtBaseBindProcessRegistry(&connection->service->registry);
+    RtlEnterCriticalSection(&BaseSrvWOWCriticalSection);
+    if(NT_SUCCESS(BaseSrvFindSharedWow(request,thread.ClientId.UniqueProcess,&desktop,&record)) && record)
+        for(entry=connection->service->worker_watches.Flink;
+            entry!=&connection->service->worker_watches;entry=entry->Flink) {
+            OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(entry,OPENNT_BASE_WORKER_WATCH,link);
+            if(watch->wow && watch->process.SequenceNumber==record->SequenceNumber) {
+                closing=watch->close_kind!=WORKER_CLOSE_NONE;break;
+            }
+        }
+    RtlLeaveCriticalSection(&BaseSrvWOWCriticalSection);
+    OpenNtBaseBindProcessRegistry(previous_registry);
+    OpenNtBaseBindServerRequestThread(previous_thread);
+    return closing;
+}
 
 DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD generation,
     void *input,uint32_t bytes,void *output,uint32_t capacity,uint32_t *required,
@@ -337,6 +369,10 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         separate_dos=TRUE;
     }
     EnterCriticalSection(&connection->service->lock);
+    if(message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16 &&
+       service_wow_closing(connection,&message.u.CheckVDM)) {
+        LeaveCriticalSection(&connection->service->lock);return ERROR_NOT_READY;
+    }
     /* CheckVDM publishes an original task record. A closing worker remains
      * in that original list until its actual cleanup, but must not accept a
      * new task during that interval. Read the service's single close owner;
@@ -346,11 +382,9 @@ DWORD OpenNtBaseServiceCheck(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD 
         for(entry=connection->service->worker_watches.Flink;
             entry!=&connection->service->worker_watches;entry=entry->Flink) {
             OPENNT_BASE_WORKER_WATCH *watch=CONTAINING_RECORD(entry,OPENNT_BASE_WORKER_WATCH,link);
-            BOOL selected=message.u.CheckVDM.BinaryType==BINARY_TYPE_WIN16 ?
-                (watch->wow && WOWHead && WOWHead->SequenceNumber==watch->process.SequenceNumber) :
-                (message.u.CheckVDM.BinaryType==BINARY_TYPE_DOS &&
+            BOOL selected=message.u.CheckVDM.BinaryType==BINARY_TYPE_DOS &&
                  selected_console && watch->kind==OPENNT_BASE_WORKER_DOS &&
-                 watch->console==selected_console);
+                 watch->console==selected_console;
             if(selected && watch->close_kind!=WORKER_CLOSE_NONE) {
                 LeaveCriticalSection(&connection->service->lock);
                 return ERROR_NOT_READY;
@@ -648,16 +682,10 @@ DWORD OpenNtBaseServiceGet(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD ge
     if (error) return error;
     requested_state=message.u.GetNextVDMCommand.VDMState;
     EnterCriticalSection(&connection->service->lock);
-    /* The original client sends -1 for the shared-WOW PIF/acquisition path;
-     * that selects BaseSrv's WOW record and deliberately has no DOS Console.
-     * Every other request retains the reservation's service-local Console
-     * identity, never a copied native handle. */
-    if (message.u.GetNextVDMCommand.VDMState & ASKING_FOR_WOW_BINARY)
-        message.u.GetNextVDMCommand.ConsoleHandle=OPENNT_BASE_CONSOLE_WOW;
-    else {
-        if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
-        message.u.GetNextVDMCommand.ConsoleHandle=connection->console;
-    }
+    /* XP selects WOW by VDMState, and associates its first PIF with this
+     * authenticated worker's service-owned Console identity. */
+    if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }
+    message.u.GetNextVDMCommand.ConsoleHandle=connection->console;
     service_resources_init(&resources,connection,BROKER_VDM_WORKER_WAIT,FALSE);
     thread.Process=&connection->process;
     thread.ClientId.UniqueProcess=connection->process.ClientId.UniqueProcess;
@@ -775,13 +803,13 @@ DWORD OpenNtBaseServiceExit(OPENNT_BASE_CONNECTION *connection,DWORD pid,DWORD g
     *close_worker_wait=FALSE;
     if (!connection || !OpenNtBaseServicePeer(connection,pid,generation))
         return ERROR_ACCESS_DENIED;
-    /* ExitVDM's branch is selected by the original ConsoleHandle sentinel.
+    /* XP ExitVDM selects the WOW branch by task ID.
      * Do not let a copied client bit switch an authenticated DOS connection
      * to WOW (or vice versa). */
     if (!!is_wow!=!!connection->wow) return ERROR_INVALID_PARAMETER;
     EnterCriticalSection(&connection->service->lock);
     if (is_wow) {
-        message.u.ExitVDM.ConsoleHandle=(HANDLE)-1;
+        message.u.ExitVDM.ConsoleHandle=connection->console;
         message.u.ExitVDM.iWowTask=wow_task;
     } else {
         if (!connection->console) { error=ERROR_INVALID_HANDLE; goto done; }

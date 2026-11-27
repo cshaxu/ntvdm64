@@ -10,6 +10,14 @@ OPENNT_BASE_SERVICE *OpenNtBaseServiceStart(void)
     OPENNT_BASE_SERVICE *service=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*service));
     FILETIME now;
     if (!service) return NULL;
+    /* XP's existing desktop resolver is a host DLL API, not a new policy. */
+    BaseSrvUserResolveDesktopForWow=(NTSTATUS (NTAPI *)(PUNICODE_STRING))
+        GetProcAddress(GetModuleHandleW(L"user32.dll"),"ResolveDesktopForWOW");
+    if(!BaseSrvUserResolveDesktopForWow) {
+        HeapFree(GetProcessHeap(),0,service);SetLastError(ERROR_PROC_NOT_FOUND);return NULL;
+    }
+    BaseSrvPostMessageA=PostMessageA;
+    BaseSrvGetWindowThreadProcessId=(BOOL (WINAPI *)(HWND,LPDWORD))GetWindowThreadProcessId;
     service->compare_handles=win32_handle_compare_provider();
     if(!service->compare_handles) {
         SetLastError(ERROR_CALL_NOT_IMPLEMENTED);HeapFree(GetProcessHeap(),0,service);return NULL;
@@ -153,8 +161,21 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
             connection->process.fVDM=!connection->native_worker;
             /* Before first PIF binding a new DOS ConsoleRecord is keyed by
              * DosSesId, not the reserved transport Console identity. */
-            if(!connection->native_worker)BaseSrvUpdateVDMSequenceNumber(shared_wow ? OPENNT_BASE_CONSOLE_WOW : task ? NULL : console,
-                connection->process.SequenceNumber,task);
+            if(!connection->native_worker) {
+                OPENNT_BASE_PROCESS_REGISTRY *previous;
+                NTSTATUS status;
+                if(shared_wow) {
+                    error=service_allocate_console(service,&console);
+                    if(error)goto ClaimComplete;
+                    connection->console=console;
+                }
+                previous=OpenNtBaseBindProcessRegistry(&service->registry);
+                status=BaseSrvUpdateVDMSequenceNumber(shared_wow ? BINARY_TYPE_WIN16 : BINARY_TYPE_DOS,
+                    shared_wow ? console : task ? NULL : console,task,
+                    connection->process.ClientId.UniqueProcess);
+                OpenNtBaseBindProcessRegistry(previous);
+                if(!NT_SUCCESS(status)) {error=RtlNtStatusToDosError(status);goto ClaimComplete;}
+            }
             watch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*watch));
             if (!watch || !reserved_worker) {
                 error=watch ? ERROR_INVALID_HANDLE : ERROR_NOT_ENOUGH_MEMORY;
@@ -249,6 +270,7 @@ DWORD OpenNtBaseServiceConnect(OPENNT_BASE_SERVICE *service,HANDLE process,
 }
             }
         }
+ClaimComplete:
         if (reserved_worker) CloseHandle(reserved_worker);
         if (!error) {
             service_prune_cancelled_frontends(service);

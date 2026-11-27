@@ -67,6 +67,10 @@ NTSTATUS OpenNtBaseDispatch(PCSR_API_MSG message, CSR_API_NUMBER number,
     }
     /* Never trust a caller identity carried in a decoded message. */
     message->h.ClientId = caller->ClientId;
-    message->ReturnValue = routine(message, &reply);
+    {
+        const void *previous=OpenNtBaseBindServerRequestMessage(message);
+        message->ReturnValue = routine(message, &reply);
+        OpenNtBaseBindServerRequestMessage(previous);
+    }
     return message->ReturnValue;
 }

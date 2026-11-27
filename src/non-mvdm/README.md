@@ -2788,3 +2788,28 @@ base/win32/inc uses complete pinned XP SP1 declarations; only the existing
 unsupported DBG branch remains error-excluded. Required public/sdk/inc/ntcsrmsg.h
 is adopted byte-exact as a dependency leading N021. The modern SDK public
 KSYSTEM_TIME ABI carrier stays in compat. [Evidence](../../docs/etc/evidence/t485-s1/n005.md).
+
+## T485 S14 N006 XP BaseSrv VDM
+
+base/win32/server/basesrv.h, srvvdm.c and srvvdm.h use the fixed XP SP1
+source identities recorded in [N006 evidence](../../docs/etc/evidence/t485-s1/n006.md).
+Shared WOW now uses the original desktop/logon records, Console/task lookup,
+registration and cleanup. Product readers use the existing authenticated
+sequence through a narrow mirror-owned record view. The existing standalone
+DOS completion latch and process/message layout provider remain explicit.
+The native ResolveDesktopForWOW provider requires NTAPI on the x86 callback.
+
+Required byte-exact XP declaration imports (original relative paths):
+
+| Path | XP Git blob |
+| --- | --- |
+| public/internal/base/inc/sxsapi.h | 44588b074658995f6f38bad8b7572222267f173a |
+| public/internal/base/inc/sxsapi_guids.h | 026b292fb7248ed05f36463ebdf4a403cafa1109 |
+| public/internal/base/inc/winnlsp.h | dc5fb7191dbddcad6bddb06bdd8ccc1eb79ee5be |
+| public/sdk/inc/sxstypes.h | 53bb74c2209aa8e0b51e26ed0ec382550dd24851 |
+| public/sdk/inc/sxs.h | 8e33642dcb6266824f3b2edf19be4d424bbeb97a |
+
+These retain original basesrv.h declarations; they do not introduce an SXS
+product or count their later directory batches as delivered. B validates
+capture views through the C-owned layout provider. F binds a server-local
+message only inside authenticated, size-checked synchronous dispatch.

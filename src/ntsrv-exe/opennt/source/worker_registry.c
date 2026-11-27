@@ -649,7 +649,7 @@ DWORD OpenNtBaseServiceStartVdmWorker(OPENNT_BASE_CONNECTION *connection,DWORD p
     if(!OpenNtBaseInitializeVdmConfig(&config,ansi,kernel))
         {error=ERROR_BAD_PATHNAME;goto done;}
     previous=OpenNtBaseBindVdmConfig(&config);
-    if(!BaseGetVdmConfigInfo(image,admission.binary==BINARY_TYPE_WIN16 ? 0 : connection->task,
+    if(!BaseGetVdmConfigInfo(image,connection->task,
         admission.binary,&command,&size))error=GetLastError();
     (void)OpenNtBaseBindVdmConfig(previous);
     if(error)goto done;

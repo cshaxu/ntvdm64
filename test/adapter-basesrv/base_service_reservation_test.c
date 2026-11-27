@@ -7,7 +7,6 @@ int fixture_frontend_instances(void);
 #include <stdlib.h>
 
 extern PCONSOLERECORD DOSHead;
-extern PWOWHEAD WOWHead;
 DWORD fixture_connection_control(BOOL,OPENNT_BASE_CONNECTION *,DWORD,DWORD,HANDLE *);
 
 /* Test-only entry to the actual private copied queue/take implementation.
@@ -1191,7 +1190,7 @@ int main(int argc,char **argv)
             reservation,child.hProcess));
         CHECK(!OpenNtBaseServiceConnect(service,child.hProcess,&worker,&workerGeneration));
         CHECK(OpenNtBaseServiceWorkerReservation(worker,&claimed,&task,&console));
-        CHECK(claimed==reservation && !task && console && !DOSHead && !WOWHead);
+        CHECK(claimed==reservation && !task && console && !DOSHead && !BaseSrvFindSharedWowBySequence(wowGeneration));
         CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
         CHECK(workerInfoCount==1 && workerInfo.kind==2 && workerInfo.sequence==workerGeneration &&
             workerInfo.process_id==child.dwProcessId && workerInfo.state);
@@ -1481,7 +1480,7 @@ int main(int argc,char **argv)
              * real worker-base client; this registry fixture only verifies
              * native admission and root binding. */
             CHECK(TerminateProcess(child.hProcess,ERROR_CANCELLED));
-            CHECK(!DOSHead && !WOWHead);
+            CHECK(!DOSHead && !BaseSrvFindSharedWowBySequence(wowGeneration));
         }
         CHECK(!OpenNtBaseServiceDisconnect(launcher));launcher=NULL;
         CHECK(WaitForSingleObject(child.hProcess,5000)==WAIT_OBJECT_0);
@@ -1490,7 +1489,7 @@ int main(int argc,char **argv)
         {DWORD deadline=GetTickCount()+5000;
             while(!OpenNtBaseServiceIsEmpty(service) && (LONG)(deadline-GetTickCount())>0)Sleep(10);}
         CHECK(!OpenNtBaseServiceSnapshot(service,&managementEpoch,&workerInfo,1,&workerInfoCount));
-        CHECK(!workerInfoCount && !DOSHead && !WOWHead && OpenNtBaseServiceIsEmpty(service));
+        CHECK(!workerInfoCount && !DOSHead && !BaseSrvFindSharedWowBySequence(wowGeneration) && OpenNtBaseServiceIsEmpty(service));
         {
             OPENNT_BASE_WORKER_INFO *tree=NULL;uint32_t count=0;uint64_t epoch=0;
             CHECK(!OpenNtBaseServiceSnapshotCopy(service,&epoch,&tree,&count) && !count && !tree);
@@ -2910,13 +2909,13 @@ int main(int argc,char **argv)
         /* Test-only identity fault: same task number, different original
          * parent receipt must not notify this launcher. No product mutation. */
         HANDLE original;
-        CHECK(WOWHead && WOWHead->WOWRecord && WOWHead->WOWRecord->iTask==wowTask);
-        original=WOWHead->WOWRecord->hWaitForParentServer;
-        WOWHead->WOWRecord->hWaitForParentServer=(HANDLE)(ULONG_PTR)(parentReceipt+2);
+        CHECK(BaseSrvFindSharedWowBySequence(wowGeneration) && BaseSrvFindSharedWowBySequence(wowGeneration)->pWOWRecord && BaseSrvFindSharedWowBySequence(wowGeneration)->pWOWRecord->iTask==wowTask);
+        original=BaseSrvFindSharedWowBySequence(wowGeneration)->pWOWRecord->hWaitForParentServer;
+        BaseSrvFindSharedWowBySequence(wowGeneration)->pWOWRecord->hWaitForParentServer=(HANDLE)(ULONG_PTR)(parentReceipt+2);
         CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
             wowTask)==ERROR_SUCCESS);
         CHECK(WaitForSingleObject(wowStartup,0)==WAIT_TIMEOUT);
-        WOWHead->WOWRecord->hWaitForParentServer=original;
+        BaseSrvFindSharedWowBySequence(wowGeneration)->pWOWRecord->hWaitForParentServer=original;
     }
     CHECK(OpenNtBaseServiceWowStarted(wowWorker,wowChild.dwProcessId,wowGeneration,
         wowTask)==ERROR_SUCCESS);
@@ -2958,7 +2957,7 @@ int main(int argc,char **argv)
         DWORD oldReceipt=parentReceipt;
         ULONG oldTask=wowTask;
         BOOL closeWowWait=FALSE;
-        /* Reuse the original WOWHead with another Check, not a second
+        /* Reuse the original BaseSrvFindSharedWowBySequence(wowGeneration) with another Check, not a second
          * worker or a fixture-authored task record. */
         CHECK(OpenNtBaseEncodeCheckCommand(&check,11,launcherGeneration,NULL,0,&wireBytes));
         free(wire);wire=malloc(wireBytes);
@@ -3018,7 +3017,7 @@ int main(int argc,char **argv)
     }
     {
         HANDLE shutdown=NULL;
-        PWOWHEAD original_head=WOWHead;
+        PSHAREDWOWRECORD original_head=BaseSrvFindSharedWowBySequence(wowGeneration);
         CHECK(original_head && original_head->SequenceNumber==wowGeneration);
         CHECK(!fixture_connection_control(FALSE,wowWorker,wowChild.dwProcessId,wowGeneration,&shutdown));
         CHECK(!OpenNtBaseServiceTerminateWorker(service,wowChild.dwProcessId));
@@ -3028,7 +3027,7 @@ int main(int argc,char **argv)
         CHECK(wire && OpenNtBaseEncodeCheckCommand(&check,13,launcherGeneration,wire,wireBytes,&wireBytes));
         CHECK(OpenNtBaseServiceCheck(launcher,GetCurrentProcessId(),launcherGeneration,
             wire,wireBytes,answer,answerBytes,&answerBytes,&parentEvent,&parentReceipt)==ERROR_NOT_READY);
-        CHECK(WOWHead==original_head && !WOWHead->WOWRecord);
+        CHECK(BaseSrvFindSharedWowBySequence(wowGeneration)==original_head && !BaseSrvFindSharedWowBySequence(wowGeneration)->pWOWRecord);
         CloseHandle(shutdown);
         puts("PASS closing original WOW head rejects new task without publishing a record");
     }

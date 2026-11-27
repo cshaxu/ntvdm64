@@ -163,11 +163,10 @@ static DWORD WINAPI remove_registered_peer(LPVOID context)
     SetEvent(test->finished);
     return test->removed?0:1;
 }
-extern HANDLE hwndWowExec;
-extern ULONG ulWowExecProcessSequenceNumber;
 extern NTSTATUS (*UserTestTokenForInteractive)(HANDLE, PLUID);
-extern PWOWHEAD WOWHead;
-extern LUID WowAuthId;
+extern NTSTATUS (NTAPI *BaseSrvUserResolveDesktopForWow)(PUNICODE_STRING);
+extern BOOL (WINAPI *BaseSrvPostMessageA)(HWND,UINT,WPARAM,LPARAM);
+extern BOOL (WINAPI *BaseSrvGetWindowThreadProcessId)(HWND,LPDWORD);
 BOOL BaseUpdateVDMEntry(ULONG, HANDLE *, ULONG, ULONG);
 BOOL BaseCheckForVDM(HANDLE, LPDWORD);
 BOOL BaseCheckVDM(ULONG, PCWCH, PCWCH, PCWCH, ANSI_STRING *, PBASE_API_MSG, PULONG, DWORD, LPSTARTUPINFOW);
@@ -287,6 +286,7 @@ NTSTATUS NTAPI NtvdmBaseClientCallServer(PCSR_API_MSG message, PCSR_CAPTURE_HEAD
     OPENNT_BASE_GET_COMMAND getCommand={0};
     unsigned char getRequest[112+16*BROKER_VDM_PAYLOAD_FIELDS];
     (void)capture;
+    message->CaptureBuffer=NULL; /* The decoder builds a server-local message. */
     if (!scalar_negatives()) return STATUS_INVALID_PARAMETER;
     if (number==CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepUpdateVDMEntry)) {
         unsigned char update[48];
@@ -416,7 +416,7 @@ static DWORD WINAPI enqueue_after_wait(LPVOID unused)
     message.u.CheckVDM.CmdLine = command;
     message.u.CheckVDM.CmdLen = sizeof(command);
     message.u.CheckVDM.StartupInfo = &startup;
-    enqueueStatus = BaseSrvCheckVDM((PCSR_API_MSG)&message,&reply);
+    enqueueStatus = OpenNtBaseDispatch((PCSR_API_MSG)&message,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM),sizeof(message.u.CheckVDM));
     queuedParent = message.u.CheckVDM.WaitObjectForParent;
     if (OpenNtBaseBindProcessRegistry(NULL)!=&processRegistry) return 7;
     if (OpenNtBaseServerRequestThread()!=&localThread ||
@@ -433,6 +433,41 @@ static int registry_setup(void)
     CHECK(OpenNtBaseBindProcessRegistry(&processRegistry)==NULL);
     CHECK(OpenNtBaseRegisterProcess(&processRegistry,&caller,GetCurrentProcess()));
     CHECK(caller.SequenceNumber==1);
+    {
+        BASE_API_MSG message={0},nested={0};
+        struct { CSR_CAPTURE_HEADER header; BYTE bytes[32]; } capture={0};
+        const void *previous;
+        message.h.ClientId.UniqueProcess=(HANDLE)(ULONG_PTR)(GetCurrentProcessId()+4);
+        message.u.CheckVDM.CmdLine=(PCHAR)capture.bytes;
+        CHECK(!CsrValidateMessageBuffer((PCSR_API_MSG)&message,
+            (const void *const *)&message.u.CheckVDM.CmdLine,1,1));
+        previous=OpenNtBaseBindServerRequestMessage(&message);
+        CHECK(previous==NULL);
+        CHECK(CsrValidateMessageBuffer((PCSR_API_MSG)&message,
+            (const void *const *)&message.u.CheckVDM.CmdLine,1,1));
+        CHECK(OpenNtBaseBindServerRequestMessage(&nested)==&message);
+        CHECK(!CsrValidateMessageBuffer((PCSR_API_MSG)&message,
+            (const void *const *)&message.u.CheckVDM.CmdLine,1,1));
+        CHECK(OpenNtBaseBindServerRequestMessage(&message)==&nested);
+        CHECK(OpenNtBaseBindServerRequestMessage(previous)==&message);
+        CHECK(OpenNtBaseServerRequestMessage()==NULL);
+        message.CaptureBuffer=&capture.header;
+        capture.header.Length=sizeof(capture);
+        capture.header.CountMessagePointers=1;
+        capture.header.MessagePointerOffsets[0]=FIELD_OFFSET(BASE_API_MSG,u.CheckVDM.CmdLine);
+        CHECK(CsrValidateMessageBuffer((PCSR_API_MSG)&message,
+            (const void *const *)&message.u.CheckVDM.CmdLine,32,1));
+        CHECK(!CsrValidateMessageBuffer((PCSR_API_MSG)&message,
+            (const void *const *)&message.u.CheckVDM.CmdLine,33,1));
+        CHECK(!CsrValidateMessageBuffer((PCSR_API_MSG)&message,
+            (const void *const *)&message.u.CheckVDM.CmdLine,MAXDWORD,4));
+        CHECK(!CsrValidateMessageBuffer((PCSR_API_MSG)&message,
+            (const void *const *)&message.u.CheckVDM.CmdLine,1,0));
+        message.u.CheckVDM.AppName=(PCHAR)capture.bytes;
+        CHECK(!CsrValidateMessageBuffer((PCSR_API_MSG)&message,
+            (const void *const *)&message.u.CheckVDM.AppName,1,1));
+        puts("PASS XP capture bounds, pointer registration, overflow and nested local-message scope");
+    }
     {
         HANDLE retained=NULL;
         CHECK(!OpenNtBaseRetainRegisteredProcess(&processRegistry,GetCurrentProcessId(),2,&retained));
@@ -682,11 +717,11 @@ int main(int argc, char **argv)
             kernelBase));
         CHECK(OpenNtBaseBindVdmConfig(&config)==NULL);
         {
-            CHAR small[2]={'x',0};
-            DWORD capacity=sizeof(small), size=0xfeed;
-            CHECK(!BaseGetVDMKeyword(CMDLINE,small,&capacity,DOSSIZE,&size));
-            CHECK(small[0]=='x' && capacity==sizeof(small) && size==0xfeed);
-            CHECK(!BaseGetVDMKeyword(CMDLINE,small,&capacity,WOWSIZE,&size));
+            CHAR short_buffer[2]={'x',0};
+            DWORD capacity=sizeof(short_buffer), size=0xfeed;
+            CHECK(!BaseGetVDMKeyword(CMDLINE,short_buffer,&capacity,DOSSIZE,&size));
+            CHECK(short_buffer[0]=='x' && capacity==sizeof(short_buffer) && size==0xfeed);
+            CHECK(!BaseGetVDMKeyword(CMDLINE,short_buffer,&capacity,WOWSIZE,&size));
         }
         CHECK(BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_DOS,&commandLine,&reserve));
         CHECK(!wcscmp(commandLine.Buffer,L"\"O:\\package with spaces\\ntvdm.exe\" -f"));
@@ -699,6 +734,10 @@ int main(int argc, char **argv)
         CHECK(BaseGetVdmConfigInfo(NULL,0,BINARY_TYPE_WIN16,&commandLine,&reserve));
         CHECK(wcsstr(commandLine.Buffer,L"\" -f -w -a ")!=NULL);
         CHECK(!wcscmp(wcsstr(commandLine.Buffer,L" -a ")+4,shortKernel));
+        CHECK(HeapFree(GetProcessHeap(),0,commandLine.Buffer));
+        CHECK(BaseGetVdmConfigInfo(NULL,0x12ab,BINARY_TYPE_WIN16,&commandLine,&reserve));
+        CHECK(wcsstr(commandLine.Buffer,L" -i12ab")!=NULL);
+        CHECK(wcsstr(commandLine.Buffer,L" -w")!=NULL);
         CHECK(HeapFree(GetProcessHeap(),0,commandLine.Buffer));
         CHECK(OpenNtBaseBindVdmConfig(NULL)==&config);
         puts("PASS: original DOS/WOW worker command construction, package path spaces, session ID and config rejection");
@@ -1070,7 +1109,7 @@ int main(int argc, char **argv)
     m.u.CheckVDM.CmdLine = command;
     m.u.CheckVDM.CmdLen = sizeof(command);
     m.u.CheckVDM.StartupInfo = &startup;
-    CHECK(BaseSrvCheckVDM((PCSR_API_MSG)&m,&reply) == 0);
+    CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepCheckVDM),sizeof(m.u.CheckVDM)) == 0);
     CHECK(m.u.CheckVDM.VDMState == VDM_NOT_PRESENT);
     CHECK(BaseSrvGetConsoleRecord((HANDLE)1,&record) == 0 && record != NULL);
     CHECK(record->DOSRecord->VDMState == VDM_TO_TAKE_A_COMMAND);
@@ -1080,16 +1119,16 @@ int main(int argc, char **argv)
     m.u.GetSetVDMCurDirs.ConsoleHandle = (HANDLE)1;
     m.u.GetSetVDMCurDirs.lpszzCurDirs = dirs;
     m.u.GetSetVDMCurDirs.cchCurDirs = sizeof(dirs);
-    CHECK(BaseSrvSetVDMCurDirs((PCSR_API_MSG)&m,&reply) == 0);
+    CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepSetVDMCurDirs),sizeof(m.u.GetSetVDMCurDirs)) == 0);
     m.u.GetSetVDMCurDirs.lpszzCurDirs = output;
     m.u.GetSetVDMCurDirs.cchCurDirs = 1;
-    status = BaseSrvGetVDMCurDirs((PCSR_API_MSG)&m,&reply);
+    status = OpenNtBaseDispatch((PCSR_API_MSG)&m,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMCurDirs),sizeof(m.u.GetSetVDMCurDirs));
     CHECK(status == (ULONG)STATUS_INVALID_PARAMETER);
     CHECK(m.u.GetSetVDMCurDirs.cchCurDirs == sizeof(dirs));
     CHECK(record->lpszzCurDirs != NULL);
-    CHECK(BaseSrvGetVDMCurDirs((PCSR_API_MSG)&m,&reply) == 0);
+    CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMCurDirs),sizeof(m.u.GetSetVDMCurDirs)) == 0);
     CHECK(!memcmp(output,dirs,sizeof(dirs)) && record->lpszzCurDirs == NULL);
-    CHECK(BaseSrvGetVDMCurDirs((PCSR_API_MSG)&m,&reply) == 0);
+    CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetVDMCurDirs),sizeof(m.u.GetSetVDMCurDirs)) == 0);
     CHECK(m.u.GetSetVDMCurDirs.cchCurDirs == 0);
     CHECK(SetVDMCurrentDirectories(sizeof(dirs),dirs) && captures == 0);
     CHECK(GetVDMCurrentDirectories(0,NULL) == sizeof(dirs) && captures == 0);
@@ -1106,13 +1145,10 @@ int main(int argc, char **argv)
     registrationWindow = CreateWindowExA(0,"STATIC","broker-registration-fixture",
         0,0,0,1,1,HWND_MESSAGE,NULL,GetModuleHandleW(NULL),NULL);
     CHECK(registrationWindow != NULL);
-    RegisterWowExec(registrationWindow);
-    CHECK(hwndWowExec == registrationWindow && ulWowExecProcessSequenceNumber == 1);
+    /* XP requires an admitted shared-WOW Console record before registration. */
+    CHECK(RegisterWowExec(registrationWindow) != STATUS_SUCCESS);
     CHECK(DestroyWindow(registrationWindow));
-    CHECK(RegisterWowExec(NULL) == STATUS_INVALID_HANDLE);
-    CHECK(hwndWowExec == registrationWindow);
-    /* No WOWHead was created by this registration-only fixture. */
-    hwndWowExec = NULL;
+    CHECK(RegisterWowExec(NULL) != STATUS_SUCCESS);
 
     ZeroMemory(&m,sizeof(m));
     m.u.UpdateVDMEntry.ConsoleHandle = (HANDLE)1;
@@ -1136,7 +1172,7 @@ int main(int argc, char **argv)
     m.u.GetNextVDMCommand.CmdLine = output;
     m.u.GetNextVDMCommand.CmdLen = 1;
     m.u.GetNextVDMCommand.StartupInfo = &startup;
-    CHECK(BaseSrvGetNextVDMCommand((PCSR_API_MSG)&m,&reply) == (ULONG)STATUS_INVALID_PARAMETER);
+    CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),sizeof(m.u.GetNextVDMCommand)) == (ULONG)STATUS_INVALID_PARAMETER);
     CHECK(m.u.GetNextVDMCommand.CmdLen == sizeof(command));
     CHECK(record->DOSRecord->VDMState == VDM_TO_TAKE_A_COMMAND);
     ZeroMemory(&clientInfo,sizeof(clientInfo));
@@ -1155,7 +1191,7 @@ int main(int argc, char **argv)
     ZeroMemory(&m,sizeof(m));
     m.u.GetNextVDMCommand.ConsoleHandle = (HANDLE)1;
     m.u.GetNextVDMCommand.ExitCode = 7;
-    CHECK(BaseSrvGetNextVDMCommand((PCSR_API_MSG)&m,&reply) == 0);
+    CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),sizeof(m.u.GetNextVDMCommand)) == 0);
     workerWait = m.u.GetNextVDMCommand.WaitObjectForVDM;
     CHECK(workerWait && WaitForSingleObject(workerWait,0) == WAIT_TIMEOUT);
     CHECK(WaitForSingleObject(parentWait,0) == WAIT_OBJECT_0);
@@ -1208,16 +1244,18 @@ int main(int argc, char **argv)
     CHECK(BaseSrvIsFirstVDM((PCSR_API_MSG)&m,&reply) == 0 && !m.u.IsFirstVDM.FirstVDM);
     ZeroMemory(&m,sizeof(m));
     m.u.GetNextVDMCommand.ConsoleHandle = (HANDLE)-1;
-    m.u.GetNextVDMCommand.CmdLen = 1;
-    m.u.GetNextVDMCommand.WaitObjectForVDM = (HANDLE)1;
-    CHECK(BaseSrvGetNextVDMCommand((PCSR_API_MSG)&m,&reply) == 0);
-    CHECK(!m.u.GetNextVDMCommand.WaitObjectForVDM && !m.u.GetNextVDMCommand.CmdLen);
+    m.u.GetNextVDMCommand.VDMState = ASKING_FOR_WOW_BINARY;
+    m.u.GetNextVDMCommand.CmdLine = output;
+    m.u.GetNextVDMCommand.CmdLen = sizeof(output);
+    m.u.GetNextVDMCommand.StartupInfo = &startup;
+    /* XP requires an admitted shared-WOW record; absent is not an empty queue. */
+    CHECK(OpenNtBaseDispatch((PCSR_API_MSG)&m,CSR_MAKE_API_NUMBER(BASESRV_SERVERDLL_INDEX,BasepGetNextVDMCommand),sizeof(m.u.GetNextVDMCommand)) == (ULONG)STATUS_NOT_FOUND);
     ZeroMemory(&clientInfo,sizeof(clientInfo));
     clientInfo.VDMState = ASKING_FOR_WOW_BINARY;
     clientInfo.CmdLine = output;
     clientInfo.CmdSize = sizeof(output);
-    CHECK(GetNextVDMCommand(&clientInfo));
-    CHECK(!clientInfo.CmdSize && captures == 0);
+    CHECK(!GetNextVDMCommand(&clientInfo));
+    CHECK(GetLastError()==ERROR_NOT_FOUND && captures==0);
     /* Original launcher construction -> actual original server deep copy. */
     {
         STARTUPINFOW launch={sizeof(launch)};
@@ -1277,6 +1315,8 @@ int main(int argc, char **argv)
         ULONG task=0;
         HANDLE undo;
         LUID invalidOutput={0x12345678,0x12345678};
+        PSHAREDWOWRECORD shared_wow;
+        launch.lpDesktop=L"WinSta0\\Default";
         CHECK(!OpenNtBaseInitializeInteractiveScope(NULL) && GetLastError()==ERROR_INVALID_PARAMETER);
         CHECK(!NT_SUCCESS(_UserTestTokenForInteractive(NULL,&invalidOutput)));
         CHECK(invalidOutput.LowPart==0x12345678 && invalidOutput.HighPart==0x12345678);
@@ -1285,26 +1325,45 @@ int main(int argc, char **argv)
         CHECK(OpenNtBaseBindInteractiveScope(&wrong)==NULL);
         CHECK(!NT_SUCCESS(NtUserTestForInteractiveUser(&wrong.AuthenticationId)));
         CHECK(OpenNtBaseBindInteractiveScope(NULL)==&wrong);
+        {
+            CSR_THREAD invalid={0};
+            HANDLE token=NULL;
+            CHECK(!CsrImpersonateClient(&invalid) && thread.ImpersonateCount==0);
+            CHECK(CsrImpersonateClient(NULL) && thread.ImpersonateCount==1);
+            CHECK(OpenThreadToken(GetCurrentThread(),TOKEN_QUERY,TRUE,&token));
+            CHECK(CloseHandle(token));
+            CHECK(CsrImpersonateClient(NULL) && thread.ImpersonateCount==2);
+            CHECK(CsrRevertToSelf() && thread.ImpersonateCount==1);
+            CHECK(CsrRevertToSelf() && thread.ImpersonateCount==0);
+            CHECK(!OpenThreadToken(GetCurrentThread(),TOKEN_QUERY,TRUE,&token) && GetLastError()==ERROR_NO_TOKEN);
+            CHECK(!CsrRevertToSelf() && thread.ImpersonateCount==0);
+        }
         UserTestTokenForInteractive=_UserTestTokenForInteractive;
+        BaseSrvUserResolveDesktopForWow=(NTSTATUS (NTAPI *)(PUNICODE_STRING))
+            GetProcAddress(GetModuleHandleW(L"user32.dll"),"ResolveDesktopForWOW");
+        CHECK(BaseSrvUserResolveDesktopForWow!=NULL);
+        BaseSrvPostMessageA=PostMessageA;
+        BaseSrvGetWindowThreadProcessId=(BOOL (WINAPI *)(HWND,LPDWORD))GetWindowThreadProcessId;
         ZeroMemory(&m,sizeof(m));
         CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,wowApp,L"WRITE.EXE",workingDirectory,&env,&m,&task,0,&launch));
-        CHECK(GetLastError()==ERROR_ACCESS_DENIED && WOWHead==NULL && captures==0);
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && BaseSrvFindSharedWowBySequence(0)==NULL && captures==0);
         wrong=scope; wrong.AuthenticationId.LowPart^=1;
         CHECK(OpenNtBaseBindInteractiveScope(&wrong)==NULL);
         ZeroMemory(&m,sizeof(m));
         CHECK(!BaseCheckVDM(BINARY_TYPE_WIN16,wowApp,L"WRITE.EXE",workingDirectory,&env,&m,&task,0,&launch));
-        CHECK(GetLastError()==ERROR_ACCESS_DENIED && WOWHead==NULL && captures==0);
+        CHECK(GetLastError()==ERROR_ACCESS_DENIED && BaseSrvFindSharedWowBySequence(0)==NULL && captures==0);
         CHECK(OpenNtBaseBindInteractiveScope(&scope)==&wrong);
         ZeroMemory(&m,sizeof(m));
         CHECK(BaseCheckVDM(BINARY_TYPE_WIN16,wowApp,L"WRITE.EXE",workingDirectory,&env,&m,&task,0,&launch));
-        CHECK(WOWHead!=NULL && task!=0 && m.u.CheckVDM.VDMState==VDM_NOT_PRESENT && captures==0);
-        CHECK(WOWHead->WOWRecord->iTask==task);
-        CHECK(WowAuthId.LowPart==scope.AuthenticationId.LowPart && WowAuthId.HighPart==scope.AuthenticationId.HighPart);
-        CHECK(!strcmp(WOWHead->WOWRecord->lpVDMInfo->AppName,wowAppA));
+        shared_wow=BaseSrvFindSharedWowBySequence(0);
+        CHECK(shared_wow!=NULL && task!=0 && m.u.CheckVDM.VDMState==VDM_NOT_PRESENT && captures==0);
+        CHECK(shared_wow->pWOWRecord->iTask==task);
+        CHECK(shared_wow->WowAuthId.LowPart==scope.AuthenticationId.LowPart && shared_wow->WowAuthId.HighPart==scope.AuthenticationId.HighPart);
+        CHECK(!strcmp(shared_wow->pWOWRecord->lpVDMInfo->AppName,wowAppA));
         undo=(HANDLE)task;
         CHECK(BaseUpdateVDMEntry(UPDATE_VDM_UNDO_CREATION,&undo,VDM_PARTIALLY_CREATED,BINARY_TYPE_WIN16));
-        CHECK(WOWHead==NULL && OpenNtBaseBindInteractiveScope(NULL)==&scope);
-        CHECK(WowAuthId.LowPart==0xffffffff && WowAuthId.HighPart==-1);
+        CHECK(BaseSrvFindSharedWowBySequence(0)==NULL && OpenNtBaseBindInteractiveScope(NULL)==&scope);
+        shared_wow=NULL; /* Original XP undo freed the record and its auth scope. */
         puts("PASS: original shared-WOW admission rejects absent/wrong scope, accepts matching logon and undoes launch");
     }
     {
@@ -1317,17 +1376,18 @@ int main(int argc, char **argv)
         CHECK(OpenNtBaseBindInteractiveScope(&scope)==NULL);
         for(i=0;i<2;++i) {
             CSR_PROCESS worker={0};
-            ULONG task=0, sequence=0x100+i;
+            ULONG task=0, sequence=caller.SequenceNumber;
             HANDLE console=i?(HANDLE)-1:(HANDLE)1;
             HANDLE wait=GetCurrentProcess();
             LPCWSTR app=i?wowApp:dosApp;
+            launch.lpDesktop=L"WinSta0\\Default";
             ZeroMemory(&m,sizeof(m));
             CHECK(BaseCheckVDM(types[i],app,app,workingDirectory,&env,&m,&task,0,&launch));
             CHECK(BaseUpdateVDMEntry(UPDATE_VDM_PROCESS_HANDLE,&wait,task,types[i]));
             CHECK(WaitForSingleObject(wait,0)==WAIT_TIMEOUT);
-            BaseSrvUpdateVDMSequenceNumber(console,sequence,task);
-            BaseSrvUpdateVDMSequenceNumber(console,sequence+10,task);
-            if(i) CHECK(WOWHead && WOWHead->SequenceNumber==sequence);
+            CHECK(NT_SUCCESS(BaseSrvUpdateVDMSequenceNumber(types[i],console,task,caller.ClientId.UniqueProcess)));
+            CHECK(NT_SUCCESS(BaseSrvUpdateVDMSequenceNumber(types[i],console,task,caller.ClientId.UniqueProcess)));
+            if(i) CHECK(BaseSrvFindSharedWowBySequence(sequence)!=NULL);
             else {
                 CHECK(BaseSrvGetConsoleRecord(console,&record)==0);
                 CHECK(record->SequenceNumber==sequence);
@@ -1335,13 +1395,10 @@ int main(int argc, char **argv)
             worker.fVDM=TRUE; worker.SequenceNumber=sequence+10;
             BaseSrvCleanupVDMResources(&worker);
             CHECK(WaitForSingleObject(wait,0)==WAIT_TIMEOUT);
-            worker.fVDM=FALSE; worker.SequenceNumber=sequence;
-            BaseSrvCleanupVDMResources(&worker);
-            CHECK(WaitForSingleObject(wait,0)==WAIT_TIMEOUT);
-            worker.fVDM=TRUE;
+            worker.fVDM=TRUE; worker.SequenceNumber=sequence;
             BaseSrvCleanupVDMResources(&worker);
             CHECK(WaitForSingleObject(wait,0)==WAIT_OBJECT_0);
-            if(i) CHECK(WOWHead==NULL && hwndWowExec==NULL && ulWowExecProcessSequenceNumber==0);
+            if(i) CHECK(BaseSrvFindSharedWowBySequence(sequence)==NULL);
             else CHECK(BaseSrvGetConsoleRecord(console,&record)==(ULONG)STATUS_INVALID_PARAMETER);
             BaseSrvCleanupVDMResources(&worker);
             CHECK(WaitForSingleObject(wait,0)==WAIT_OBJECT_0);

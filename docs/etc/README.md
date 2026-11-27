@@ -2120,3 +2120,4 @@ post-publication targeted checks.
 [machine receipt](evidence/t485-h-repair/s13-closure.json), and
 [1039-file census](evidence/t485-h-repair/s13-final-census.csv).
 - [N005 XP Base declarations](evidence/t485-s1/n005.md).
+- [N006 XP BaseSrv VDM migration](evidence/t485-s1/n006.md).

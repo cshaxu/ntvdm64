@@ -63,21 +63,22 @@ static void service_capture_wow_labels(OPENNT_BASE_WORKER_WATCH *watch)
 {
     LIST_ENTRY *link,*next;
     PWOWRECORD record;
-    if(!WOWHead || WOWHead->SequenceNumber!=watch->process.SequenceNumber) {
+    PSHAREDWOWRECORD shared_wow=BaseSrvFindSharedWowBySequence(watch->process.SequenceNumber);
+    if(!shared_wow) {
         service_clear_management_labels(watch);return;
     }
     for(link=watch->management_labels.Flink;link!=&watch->management_labels;link=next) {
         OPENNT_BASE_MANAGEMENT_LABEL *label=CONTAINING_RECORD(link,OPENNT_BASE_MANAGEMENT_LABEL,link);
         BOOL live=FALSE;
         next=link->Flink;
-        for(record=WOWHead->WOWRecord;record;record=record->WOWRecordNext)
+        for(record=shared_wow->pWOWRecord;record;record=record->WOWRecordNext)
             if(label->wow_record==record && service_same_management_wait(label->parent_wait,record->hWaitForParent))
                 {live=TRUE;break;}
         if(!live && !(label->wow_record==NULL && label->wow_task_bound)){
             RemoveEntryList(link);HeapFree(GetProcessHeap(),0,label);
         }
     }
-    for(record=WOWHead->WOWRecord;record;record=record->WOWRecordNext) {
+    for(record=shared_wow->pWOWRecord;record;record=record->WOWRecordNext) {
         OPENNT_BASE_MANAGEMENT_LABEL *label=service_wow_label(watch,record);
         if(!label) {
             if(watch->service->next_management_task==UINT64_MAX)continue;
@@ -318,8 +319,9 @@ static void service_copy_vdm_management_record(OPENNT_BASE_WORKER_WATCH *watch,
     if (watch->wow) {
         (void)RtlEnterCriticalSection(&BaseSrvWOWCriticalSection);
         service_capture_wow_labels(watch);
-        if (WOWHead && WOWHead->SequenceNumber==watch->process.SequenceNumber) {
-            for (wow=WOWHead->WOWRecord;wow;wow=wow->WOWRecordNext) {
+        PSHAREDWOWRECORD shared_wow=BaseSrvFindSharedWowBySequence(watch->process.SequenceNumber);
+        if (shared_wow) {
+            for (wow=shared_wow->pWOWRecord;wow;wow=wow->WOWRecordNext) {
                 ++item->stack_depth;
                 if (!selected_wow || (!selected_wow->fDispatched && wow->fDispatched))
                     selected_wow=wow;
@@ -476,9 +478,10 @@ static DWORD service_append_worker(OPENNT_BASE_WORKER_WATCH *watch,
     error=service_append_management(rows,count,capacity,&worker);
     if(error || !watch->wow)return error;
     (void)RtlEnterCriticalSection(&BaseSrvWOWCriticalSection);
-    if(WOWHead && WOWHead->SequenceNumber==worker.sequence) {
+    PSHAREDWOWRECORD shared_wow=BaseSrvFindSharedWowBySequence(worker.sequence);
+    if(shared_wow) {
         PWOWRECORD record;
-        for(record=WOWHead->WOWRecord;record;record=record->WOWRecordNext) {
+        for(record=shared_wow->pWOWRecord;record;record=record->WOWRecordNext) {
             OPENNT_BASE_MANAGEMENT_LABEL *label=service_wow_label(watch,record);
             OPENNT_BASE_WORKER_INFO task={0};
             /* Missing metadata cannot become a fabricated stable selector. */
@@ -805,8 +808,9 @@ DWORD OpenNtBaseServiceTaskTrace(OPENNT_BASE_SERVICE *service,
         PWOWRECORD record;
         (void)RtlEnterCriticalSection(&BaseSrvWOWCriticalSection);
         service_capture_wow_labels(watch);
-        if(WOWHead && WOWHead->SequenceNumber==key->generation)
-            for(record=WOWHead->WOWRecord;record;record=record->WOWRecordNext) {
+        PSHAREDWOWRECORD shared_wow=BaseSrvFindSharedWowBySequence(key->generation);
+        if(shared_wow)
+            for(record=shared_wow->pWOWRecord;record;record=record->WOWRecordNext) {
                 OPENNT_BASE_MANAGEMENT_LABEL *label=service_wow_label(watch,record);
                 if(!label){flags|=TASK_TRACE_TRUNCATED;continue;}
                 /* WOW tasks are peers, not a DOS-style parent stack. */

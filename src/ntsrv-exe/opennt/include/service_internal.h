@@ -31,7 +31,10 @@ extern OPENNT_USER_TEST_TOKEN_FOR_INTERACTIVE UserTestTokenForInteractive;
 /* srvvdm.c owns these source-shaped lists and their lock objects.  They are
  * intentionally not re-declared in a public product ABI: this binding only
  * reads them while constructing a bounded management projection. */
-extern PWOWHEAD WOWHead;
+extern NTSTATUS (NTAPI *BaseSrvUserResolveDesktopForWow)(PUNICODE_STRING);
+extern BOOL (WINAPI *BaseSrvPostMessageA)(HWND,UINT,WPARAM,LPARAM);
+extern BOOL (WINAPI *BaseSrvGetWindowThreadProcessId)(HWND,LPDWORD);
+DWORD service_allocate_console(OPENNT_BASE_SERVICE *,HANDLE *);
 extern PCONSOLERECORD DOSHead;
 extern RTL_CRITICAL_SECTION BaseSrvWOWCriticalSection;
 extern RTL_CRITICAL_SECTION BaseSrvDOSCriticalSection;

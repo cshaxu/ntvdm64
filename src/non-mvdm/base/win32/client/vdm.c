@@ -388,7 +388,7 @@ void BaseDecodeVdmRequest(void *message, ULONG number, ULONG length, ntvdm_base_
         r->wait = &m->u.GetNextVDMCommand.WaitObjectForVDM; break;
     case ntvdm_base_exit:
         r->notify_started = m->u.ExitVDM.ConsoleHandle == OPENNT_WOW_STARTUP_NOOP_CONSOLE;
-        r->wow = r->notify_started || m->u.ExitVDM.ConsoleHandle == (HANDLE)-1;
+        r->wow = r->notify_started || m->u.ExitVDM.iWowTask != 0;
         r->value = r->wow ? m->u.ExitVDM.iWowTask : 0;
         r->wait = &m->u.ExitVDM.WaitObjectForVDM; break;
     case ntvdm_base_code:
@@ -538,8 +538,7 @@ Return Value:
     // wow is differentiated by a parameter a->VDMState
     // a->VDMState & ASKING_FOR_WOW_BINARY indicates wow
 
-    a->ConsoleHandle = (VDMStateSave & ASKING_FOR_WOW_BINARY) ?
-        (HANDLE)-1 : NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+    a->ConsoleHandle = NtCurrentPeb()->ProcessParameters->ConsoleHandle;
 #line 453
 
     if (lpVDMInfo->VDMState & ASKING_FOR_PIF) {
@@ -882,8 +881,7 @@ Return Value:
     PBASE_EXIT_VDM_MSG c = &m.u.ExitVDM;
 
     c->ConsoleHandle = IsWowCaller == OPENNT_WOW_STARTUP_NOOP_EXIT ?
-        OPENNT_WOW_STARTUP_NOOP_CONSOLE : IsWowCaller ? (HANDLE)-1 :
-        NtCurrentPeb()->ProcessParameters->ConsoleHandle;
+        OPENNT_WOW_STARTUP_NOOP_CONSOLE : NtCurrentPeb()->ProcessParameters->ConsoleHandle;
 #line 794
 
     if (IsWowCaller) {

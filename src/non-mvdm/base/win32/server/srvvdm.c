@@ -21,34 +21,98 @@ Revision History:
     AndyH   23-May-1994
     Added Code to allow the Shared WOW to run if client is Interactive or SYSTEM
     impersonating Interactive.
+    VadimB  Sep-Dec 1996
+    Added code to allow for multiple default wows. Dispatching to an appropriate wow
+    is based upon the desktop name. It is still not possible to have multiple shared
+    wows on the same desktop (although technically trivial to implement) -- which would
+    be the level of OS/2 functionality
 
 --*/
 
 #include "basesrv.h"
 
-//
-// Initialize to an unused LUID value.
-// Nobody will ever be assigned this value, so it shouldn't
-// match any legitimately logged on user.
-//
 
-#line 35
-LUID WowAuthId={0xFFFFFFFF,-1};
+/*
+ * VadimB: Work to allow for multiple ntvdms
+ *    - Add linked list of hwndWowExec's
+ *    - The list should contain dwWowExecThreadId
+ *    - dwWowExecProcessId
+ *    - dwWowExecProcessSequenceNumber
+ *
+ * List is not completely dynamic - the first entry is static
+ * as the case with 1 shared vdm would be the most common one
+ *
+ */
 
-PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
+
+// record that reflects winstas with corresponding downlinks for desktops
+// there could be only one wowexec per desktop (the default one, I mean)
+// there could be many desktops per winsta as well as multiple winstas
+//
+// We have made a decision to simplify handling of wow vdms by introducing
+// a single-level list of wowexecs [as opposed to 2-level so searching for the particular
+// winsta would have been improved greatly]. The reason is purely practical: we do not
+// anticipate having a large number of desktops/winsta
 
 
 BOOL fIsFirstVDM = TRUE;
-PWOWHEAD WOWHead = NULL;            // Head of WOW Tasks list
+PFNNOTIFYPROCESSCREATE UserNotifyProcessCreate = NULL;
+#line 59
 PCONSOLERECORD DOSHead = NULL;      // Head Of DOS tasks with a valid Console
 PBATRECORD     BatRecordHead = NULL;
-ULONG WOWTaskIdNext = WOWMINID;
+
 RTL_CRITICAL_SECTION BaseSrvDOSCriticalSection;
 RTL_CRITICAL_SECTION BaseSrvWOWCriticalSection;
-HANDLE hwndWowExec = NULL;
-DWORD dwWowExecProcessId = 0;
-DWORD dwWowExecThreadId = 0;
-ULONG ulWowExecProcessSequenceNumber = 0;
+
+ULONG WOWTaskIdNext = WOWMINID; // This is global for all the wows in the system
+
+
+typedef struct tagSharedWOWHead {
+   PSHAREDWOWRECORD pSharedWowRecord; // points to the list of shared wows
+
+   // other wow-related information is stored here
+
+}  SHAREDWOWRECORDHEAD, *PSHAREDWOWRECORDHEAD;
+
+SHAREDWOWRECORDHEAD gWowHead;
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+//
+//  Synch macros and functions
+//
+//  DOSCriticalSection -- protects CONSOLERECORD list    (DOSHead)
+//  WOWCriticalSection -- protects SHAREDWOWRECORD list  (gpSharedWowRecordHead)
+//  each shared wow has it's very own critical section
+
+
+// function to access console queue for modification
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//
+// Macros
+//
+//
+
+
+// use these macros when manipulating shared wow items (adding, removing) or console
+// records (adding, removing)
+
+#define ENTER_WOW_CRITICAL() \
+RtlEnterCriticalSection(&BaseSrvWOWCriticalSection)
+
+
+#define LEAVE_WOW_CRITICAL() \
+RtlLeaveCriticalSection(&BaseSrvWOWCriticalSection)
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//
+// Dynamic linking to system and import api stuff
+//
+//
+
 
 typedef BOOL (WINAPI *POSTMESSAGEPROC)(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam);
 POSTMESSAGEPROC BaseSrvPostMessageA;
@@ -58,6 +122,512 @@ GETWINDOWTHREADPROCESSIDPROC BaseSrvGetWindowThreadProcessId;
 
 typedef NTSTATUS (*USERTESTTOKENFORINTERACTIVE)(HANDLE Token, PLUID pluidCaller);
 USERTESTTOKENFORINTERACTIVE UserTestTokenForInteractive = NULL;
+
+typedef NTSTATUS (NTAPI *USERRESOLVEDESKTOPFORWOW)(PUNICODE_STRING);
+USERRESOLVEDESKTOPFORWOW BaseSrvUserResolveDesktopForWow = NULL;
+
+
+typedef struct tagBaseSrvApiImportRecord {
+   PCHAR  pszProcedureName;
+   PVOID  *ppProcAddress;
+}  BASESRVAPIIMPORTRECORD, *PBASESRVAPIIMPORTRECORD;
+
+typedef struct tagBaseSrvModuleImportRecord {
+   PWCHAR pwszModuleName;
+   PBASESRVAPIIMPORTRECORD pApiImportRecord;
+   UINT nApiImportRecordCount;
+   HANDLE ModuleHandle;
+}  BASESRVMODULEIMPORTRECORD, *PBASESRVMODULEIMPORTRECORD;
+
+
+// prototypes
+
+NTSTATUS
+BaseSrvFindSharedWowRecordByDesktop(
+   PSHAREDWOWRECORDHEAD pSharedWowRecordHead,
+   PUNICODE_STRING      pDesktopName,
+   PSHAREDWOWRECORD*    ppSharedWowRecord
+   );
+
+
+VOID BaseSrvAddWOWRecord (
+    PSHAREDWOWRECORD pSharedWow,
+    PWOWRECORD pWOWRecord
+    );
+
+VOID BaseSrvRemoveWOWRecord (
+    PSHAREDWOWRECORD pSharedWow,
+    PWOWRECORD pWOWRecord
+    );
+
+VOID
+BaseSrvFreeSharedWowRecord(
+   PSHAREDWOWRECORD pSharedWowRecord
+   );
+
+ULONG
+BaseSrvGetWOWTaskId(
+   PSHAREDWOWRECORDHEAD pSharedWowHead // (->pSharedWowRecord)
+    );
+
+NTSTATUS
+BaseSrvRemoveWOWRecordByTaskId (
+    IN PSHAREDWOWRECORD pSharedWow,
+    IN ULONG iWowTask
+    );
+
+
+PWOWRECORD
+BaseSrvCheckAvailableWOWCommand(
+   PSHAREDWOWRECORD pSharedWow
+    );
+
+PWOWRECORD
+BaseSrvAllocateWOWRecord(
+   PSHAREDWOWRECORDHEAD pSharedWowRecordHead
+   );
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Api import definitions
+//
+//
+
+
+WCHAR wszUser32ModName[] = L"user32";
+WCHAR wszWinSrvModName[] = L"winsrv";
+
+BASESRVAPIIMPORTRECORD rgUser32ApiImport[] = {
+     { "PostMessageA",                  (PVOID*)&BaseSrvPostMessageA }
+   , { "GetWindowThreadProcessId",      (PVOID*)&BaseSrvGetWindowThreadProcessId }
+   , { "ResolveDesktopForWOW",          (PVOID*)&BaseSrvUserResolveDesktopForWow }
+};
+
+BASESRVAPIIMPORTRECORD rgWinsrvApiImport[] = {
+     { "_UserTestTokenForInteractive",  (PVOID*)&UserTestTokenForInteractive }
+};
+
+
+BASESRVMODULEIMPORTRECORD rgBaseSrvModuleImport[] = {
+   { wszUser32ModName, rgUser32ApiImport, sizeof(rgUser32ApiImport) / sizeof(rgUser32ApiImport[0]), NULL },
+   { wszWinSrvModName, rgWinsrvApiImport, sizeof(rgWinsrvApiImport) / sizeof(rgWinsrvApiImport[0]), NULL }
+};
+
+
+// import all the necessary apis at once
+// This procedure should execute just once and then the appropriate components just
+// hang around
+// call this with
+// Status = BaseSrvImportApis(rgBaseSrvModuleImport,
+//                            sizeof(rgBaseSrvModuleImport)/sizeof(rgBaseSrvModuleImport[0]))
+//
+
+NTSTATUS
+BaseSrvImportApis(
+   PBASESRVMODULEIMPORTRECORD pModuleImport,
+   UINT nModules
+   )
+{
+   NTSTATUS Status;
+   UINT uModule, uProcedure;
+   PBASESRVAPIIMPORTRECORD pApiImport;
+   STRING ProcedureName; // procedure name or module name
+   UNICODE_STRING ModuleName;
+   HANDLE ModuleHandle;
+
+
+   for (uModule = 0; uModule < nModules; ++uModule, ++pModuleImport) {
+
+      // see if we can load this particular dll
+      RtlInitUnicodeString(&ModuleName, pModuleImport->pwszModuleName);
+      Status = LdrLoadDll(NULL,
+                          NULL,
+                          &ModuleName,         // module name string
+                          &ModuleHandle);
+
+      if (!NT_SUCCESS(Status)) {
+
+         // we may have linked to a few dlls at this point - we have to unlink from all of those
+         // by unloading the dll which is really a useless exersise.
+         // so just abandon and return -- BUGBUG - cleanup later
+         KdPrint(("BaseSrvImportApis: Failed to load %ls\n",
+                  pModuleImport->pwszModuleName));
+         goto ErrorCleanup;
+      }
+
+      pModuleImport->ModuleHandle = ModuleHandle;
+
+      pApiImport = pModuleImport->pApiImportRecord;
+
+      for (uProcedure = 0, pApiImport = pModuleImport->pApiImportRecord;
+           uProcedure < pModuleImport->nApiImportRecordCount;
+           ++uProcedure, ++pApiImport) {
+
+         RtlInitString(&ProcedureName, pApiImport->pszProcedureName);
+         Status = LdrGetProcedureAddress(ModuleHandle,
+                                         &ProcedureName,      // procedure name string
+                                         0,
+                                         pApiImport->ppProcAddress);
+
+         if (!NT_SUCCESS(Status)) {
+            // we have failed to get this procedure - something is wrong
+            // perform a cleanup
+            KdPrint(("BaseSrvImportApis: Failed to link %s from %ls\n",
+                     pApiImport->pszProcedureName,
+                     pModuleImport->pwszModuleName));
+            goto ErrorCleanup;
+         }
+      }
+   }
+
+
+
+   return (STATUS_SUCCESS);
+
+ErrorCleanup:
+
+      // here we engage into a messy cleanup procedure by returning things back to the way
+      // they were before we have started
+
+   for (; uModule > 0; --uModule, --pModuleImport) {
+
+      // reset all the apis
+      for (uProcedure = 0, pApiImport = pModuleImport->pApiImportRecord;
+           uProcedure < pModuleImport->nApiImportRecordCount;
+           ++uProcedure, ++pApiImport) {
+
+         *pApiImport->ppProcAddress = NULL;
+
+      }
+
+      if (NULL != pModuleImport->ModuleHandle) {
+         LdrUnloadDll(pModuleImport->ModuleHandle);
+         pModuleImport->ModuleHandle = NULL;
+      }
+   }
+
+   return (Status);
+
+}
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Manipulating shared wows
+//
+//
+// assumes pDesktopName != NULL
+// without the explicit checking
+
+PSHAREDWOWRECORD BaseSrvAllocateSharedWowRecord (
+    PUNICODE_STRING pDesktopName
+    )
+{
+    PSHAREDWOWRECORD pSharedWow;
+    DWORD dwSharedWowRecordSize = sizeof(SHAREDWOWRECORD) +
+                                  pDesktopName->Length +
+                                  sizeof(WCHAR);
+
+    pSharedWow = RtlAllocateHeap(RtlProcessHeap (),
+                                 MAKE_TAG( VDM_TAG ),
+                                 dwSharedWowRecordSize);
+    if (NULL != pSharedWow) {
+       RtlZeroMemory ((PVOID)pSharedWow, dwSharedWowRecordSize);
+       // initialize desktop name
+       pSharedWow->WowExecDesktopName.MaximumLength = pDesktopName->Length + 1;
+       pSharedWow->WowExecDesktopName.Buffer = (PWCHAR)(pSharedWow + 1);
+       RtlCopyUnicodeString(&pSharedWow->WowExecDesktopName, pDesktopName);
+       pSharedWow->WowAuthId = RtlConvertLongToLuid(-1);
+    }
+
+    return pSharedWow;
+}
+
+// this function completely removes the given shared wow vdm
+// from our accounting
+//
+// removes the record from the list of shared wow records
+//
+// This function also frees the associated memory
+//
+//
+
+NTSTATUS
+BaseSrvDeleteSharedWowRecord (
+    PSHAREDWOWRECORDHEAD pSharedWowRecordHead,
+    PSHAREDWOWRECORD pSharedWowRecord
+    )
+{
+   PSHAREDWOWRECORD pSharedWowRecordPrev = NULL;
+   PSHAREDWOWRECORD pSharedWowRecordCur;
+
+   if (NULL == pSharedWowRecord) { // this is dumb
+      return STATUS_NOT_FOUND;
+   }
+
+   pSharedWowRecordCur = pSharedWowRecordHead->pSharedWowRecord;
+   while (NULL != pSharedWowRecordCur) {
+      if (pSharedWowRecordCur == pSharedWowRecord) {
+         break;
+      }
+
+      pSharedWowRecordPrev = pSharedWowRecordCur;
+      pSharedWowRecordCur = pSharedWowRecordCur->pNextSharedWow;
+   }
+
+   if (NULL == pSharedWowRecordCur) {
+      KdPrint(("BaseSrvDeleteSharedWowRecord: invalid pointer to Shared WOW\n"));
+      ASSERT(FALSE);
+      return STATUS_NOT_FOUND;
+   }
+
+
+   // unlink here
+   if (NULL == pSharedWowRecordPrev) {
+      pSharedWowRecordHead->pSharedWowRecord = pSharedWowRecord->pNextSharedWow;
+   }
+   else {
+      pSharedWowRecordPrev->pNextSharedWow = pSharedWowRecord->pNextSharedWow;
+   }
+
+   BaseSrvFreeSharedWowRecord(pSharedWowRecord);
+
+   return STATUS_SUCCESS;
+}
+
+// assumes no cs is held -- self-contained
+// assoc console record should have been removed by now
+// nukes all tasks associated with this particular shared wow
+
+VOID
+BaseSrvFreeSharedWowRecord(
+   PSHAREDWOWRECORD pSharedWowRecord)
+{
+   PWOWRECORD pWOWRecord,
+              pWOWRecordLast;
+
+   pWOWRecord = pSharedWowRecord->pWOWRecord;
+
+   while (NULL != pWOWRecord) {
+      pWOWRecordLast = pWOWRecord->WOWRecordNext;
+      if(pWOWRecord->hWaitForParent) {
+         NtSetEvent (pWOWRecord->hWaitForParent,NULL);
+         NtClose (pWOWRecord->hWaitForParent);
+         pWOWRecord->hWaitForParent = 0;
+      }
+      BaseSrvFreeWOWRecord(pWOWRecord);
+      pWOWRecord = pWOWRecordLast;
+   }
+
+   RtlFreeHeap(RtlProcessHeap (), 0, pSharedWowRecord);
+}
+
+
+// assumes: global wow crit sec is held
+
+NTSTATUS
+BaseSrvFindSharedWowRecordByDesktopAndProcessId(
+   PSHAREDWOWRECORDHEAD pSharedWowRecordHead,
+   PUNICODE_STRING      pDesktopName,
+   ULONG                dwWowProcessId,
+   PSHAREDWOWRECORD*    ppSharedWowRecord)
+{
+   PSHAREDWOWRECORD pSharedWowRecord = pSharedWowRecordHead->pSharedWowRecord;
+   LONG lCompare;
+
+   while (NULL != pSharedWowRecord) {
+      lCompare = RtlCompareUnicodeString(&pSharedWowRecord->WowExecDesktopName,
+                                         pDesktopName,
+                                         TRUE);
+      if (lCompare > 0) {
+         return(STATUS_NOT_FOUND); // not found -- sorry
+      }
+
+      if (0 == lCompare) {
+         if (pSharedWowRecord->dwWowExecProcessId == dwWowProcessId) {
+            break;
+         }
+      }
+
+      pSharedWowRecord = pSharedWowRecord->pNextSharedWow;
+   }
+
+   if (NULL != pSharedWowRecord) {
+      *ppSharedWowRecord = pSharedWowRecord;
+      return STATUS_SUCCESS;
+   }
+
+   return STATUS_NOT_FOUND; // bummer, this is not found
+}
+
+
+
+
+// assumes: global wow crit sec is held
+
+NTSTATUS
+BaseSrvFindSharedWowRecordByDesktop(
+   PSHAREDWOWRECORDHEAD pSharedWowRecordHead,
+   PUNICODE_STRING      pDesktopName,
+   PSHAREDWOWRECORD*    ppSharedWowRecord)
+{
+   PSHAREDWOWRECORD pSharedWowRecord = pSharedWowRecordHead->pSharedWowRecord;
+
+   while (NULL != pSharedWowRecord) {
+      if (0 == RtlCompareUnicodeString(&pSharedWowRecord->WowExecDesktopName,
+                                       pDesktopName,
+                                       TRUE)) {
+         break;
+      }
+      pSharedWowRecord = pSharedWowRecord->pNextSharedWow;
+   }
+
+   if (NULL != pSharedWowRecord) {
+      *ppSharedWowRecord = pSharedWowRecord;
+      return STATUS_SUCCESS;
+   }
+
+   return STATUS_NOT_FOUND; // bummer, this is not found
+}
+
+// Vadimb : modify this to handle sorted list properly
+// then find should be moded to work a little faster - BUGBUG
+// assumes: pSharedWowRecord->pNextSharedWow is inited to NULL
+
+VOID
+BaseSrvAddSharedWowRecord(
+   PSHAREDWOWRECORDHEAD pSharedWowRecordHead,
+   PSHAREDWOWRECORD pSharedWowRecord)
+{
+   PSHAREDWOWRECORD pSharedWowRecordCur = pSharedWowRecordHead->pSharedWowRecord;
+
+   if (NULL == pSharedWowRecordCur) {
+      pSharedWowRecordHead->pSharedWowRecord = pSharedWowRecord;
+   }
+   else {
+
+      PSHAREDWOWRECORD pSharedWowRecordPrev = NULL;
+      LONG lCompare;
+
+      while (NULL != pSharedWowRecordCur) {
+         lCompare = RtlCompareUnicodeString(&pSharedWowRecordCur->WowExecDesktopName,
+                                            &pSharedWowRecord->WowExecDesktopName,
+                                            TRUE);
+         if (lCompare > 0) {
+            break;
+         }
+
+         pSharedWowRecordPrev = pSharedWowRecordCur;
+         pSharedWowRecordCur = pSharedWowRecordCur->pNextSharedWow;
+      }
+
+      pSharedWowRecord->pNextSharedWow = pSharedWowRecordCur;
+
+      if (NULL == pSharedWowRecordPrev) { // goes to the head
+         pSharedWowRecordHead->pSharedWowRecord = pSharedWowRecord;
+      }
+      else {
+         pSharedWowRecordPrev->pNextSharedWow = pSharedWowRecord;
+      }
+   }
+}
+
+
+NTSTATUS
+BaseSrvFindSharedWowRecordByConsoleHandle(
+   PSHAREDWOWRECORDHEAD pSharedWowRecordHead,
+   HANDLE               hConsole,
+   PSHAREDWOWRECORD     *ppSharedWowRecord)
+{
+   PSHAREDWOWRECORD pSharedWow = pSharedWowRecordHead->pSharedWowRecord;
+
+   while (NULL != pSharedWow) {
+      // see if same hConsole
+      if (pSharedWow->hConsole == hConsole) {
+         *ppSharedWowRecord = pSharedWow;
+         return STATUS_SUCCESS;
+      }
+      pSharedWow = pSharedWow->pNextSharedWow;
+   }
+
+   return STATUS_NOT_FOUND;
+}
+
+NTSTATUS
+BaseSrvFindSharedWowRecordByTaskId(
+   PSHAREDWOWRECORDHEAD pSharedWowRecordHead,
+   ULONG                TaskId,             // task id
+   PSHAREDWOWRECORD     *ppSharedWowRecord,
+   PWOWRECORD           *ppWowRecord) // optional
+{
+   PSHAREDWOWRECORD pSharedWow = pSharedWowRecordHead->pSharedWowRecord;
+   PWOWRECORD       pWowRecord;
+
+   ASSERT(0 != TaskId); // this is a pre-condition
+
+   while (NULL != pSharedWow) {
+
+#if 0  // deal with wow session id -- not needed
+#error Excluded unsupported original configuration
+#endif
+#line 580
+
+      pWowRecord = pSharedWow->pWOWRecord;
+
+      while (NULL != pWowRecord) {
+
+         if (pWowRecord->iTask == TaskId) {
+
+            ASSERT(NULL != ppWowRecord);
+
+            // this is wow task
+            *ppSharedWowRecord = pSharedWow;
+            if (NULL != ppWowRecord) {
+               *ppWowRecord = pWowRecord;
+            }
+
+            return STATUS_SUCCESS;
+         }
+
+         pWowRecord = pWowRecord->WOWRecordNext;
+      }
+
+      pSharedWow = pSharedWow->pNextSharedWow;
+   }
+
+   return STATUS_NOT_FOUND;
+}
+
+
+NTSTATUS
+BaseSrvCheckAuthenticWow(
+   HANDLE hProcess,
+   PSHAREDWOWRECORD pSharedWow)
+{
+   NTSTATUS Status;
+   ULONG SequenceNumber;
+   PCSR_PROCESS pCsrProcess;
+
+   Status = CsrLockProcessByClientId(hProcess, &pCsrProcess);
+   if ( !NT_SUCCESS(Status) ) {
+       return Status;
+   }
+
+   SequenceNumber = pCsrProcess->SequenceNumber;
+   CsrUnlockProcess(pCsrProcess);
+
+   Status = STATUS_SUCCESS;
+   if (SequenceNumber != pSharedWow->SequenceNumber) {
+      Status = STATUS_INVALID_PARAMETER;
+   }
+
+   return Status;
+}
+
+
+////////////////////////////////////////////// End new code
 
 
 // internal prototypes
@@ -85,14 +655,15 @@ IsClientSystem(
 VOID
 BaseSrvVDMInit(VOID)
 {
-NTSTATUS Status;
+   NTSTATUS Status;
 
-    Status = RtlInitializeCriticalSection( &BaseSrvDOSCriticalSection );
-    ASSERT( NT_SUCCESS( Status ) );
-    Status = RtlInitializeCriticalSection( &BaseSrvWOWCriticalSection );
-    ASSERT( NT_SUCCESS( Status ) );
-    return;
+   Status = RtlInitializeCriticalSection( &BaseSrvDOSCriticalSection );
+   ASSERT( NT_SUCCESS( Status ) );
+   Status = RtlInitializeCriticalSection( &BaseSrvWOWCriticalSection );
+   ASSERT( NT_SUCCESS( Status ) );
+   return;
 }
+
 
 
 ULONG
@@ -104,11 +675,41 @@ BaseSrvCheckVDM(
     NTSTATUS Status;
     PBASE_CHECKVDM_MSG b = (PBASE_CHECKVDM_MSG)&m->u.ApiMessageData;
 
+    if (!CsrValidateMessageBuffer(m, &b->CmdLine, b->CmdLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->AppName, b->AppLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->Env, b->EnvLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->PifFile, b->PifLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->CurDirectory, b->CurDirectoryLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->Title, b->TitleLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->Reserved, b->ReservedLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->Desktop, b->DesktopLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+
+    if (!CsrValidateMessageBuffer(m, &b->StartupInfo, sizeof(STARTUPINFO), sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+
     if(b->BinaryType == BINARY_TYPE_WIN16) {
         Status = BaseSrvCheckWOW (b, m->h.ClientId.UniqueProcess);
-        }
-    else
-        Status = BaseSrvCheckDOS (b);
+    }
+    else {
+        Status = BaseSrvCheckDOS (b,  m->h.ClientId.UniqueProcess);
+    }
 
     return ((ULONG)Status);
 }
@@ -121,11 +722,21 @@ BaseSrvUpdateVDMEntry(
 {
     PBASE_UPDATE_VDM_ENTRY_MSG b = (PBASE_UPDATE_VDM_ENTRY_MSG)&m->u.ApiMessageData;
 
-    if(b->ConsoleHandle == (HANDLE)-1)
-        return (BaseSrvUpdateWOWEntry (b));
+    if (BINARY_TYPE_WIN16 == b->BinaryType)
+       return (BaseSrvUpdateWOWEntry (b));
     else
-        return (BaseSrvUpdateDOSEntry (b));
+       return (BaseSrvUpdateDOSEntry (b));
 }
+
+
+//
+// This call makes an explicit assumption that the very first time ntvdm is accessed --
+//
+//
+//
+//
+//
+
 
 ULONG
 BaseSrvGetNextVDMCommand(
@@ -133,331 +744,440 @@ BaseSrvGetNextVDMCommand(
     IN OUT PCSR_REPLY_STATUS ReplyStatus
     )
 {
-    NTSTATUS Status;
-    PBASE_GET_NEXT_VDM_COMMAND_MSG b = (PBASE_GET_NEXT_VDM_COMMAND_MSG)&m->u.ApiMessageData;
-    PDOSRECORD pDOSRecord,pDOSRecordTemp=NULL;
-    PWOWRECORD pWOWRecord;
-    PCONSOLERECORD pConsoleRecord;
-    PVDMINFO lpVDMInfo;
-    HANDLE Handle,TargetHandle;
-    LONG WaitState;
-    PBATRECORD pBatRecord;
+   NTSTATUS Status;
+   PBASE_GET_NEXT_VDM_COMMAND_MSG b = (PBASE_GET_NEXT_VDM_COMMAND_MSG)&m->u.ApiMessageData;
+   PDOSRECORD pDOSRecord,pDOSRecordTemp=NULL;
+   PWOWRECORD pWOWRecord;
+   PCONSOLERECORD pConsoleRecord;
+   PVDMINFO lpVDMInfo;
+   HANDLE Handle,TargetHandle;
+   LONG WaitState;
+   PBATRECORD pBatRecord;
+   PSHAREDWOWRECORD pSharedWow = NULL;
+   BOOL bWowApp = b->VDMState & ASKING_FOR_WOW_BINARY;
+   BOOL bSepWow = b->VDMState & ASKING_FOR_SEPWOW_BINARY;
+
+    if (!CsrValidateMessageBuffer(m, &b->CmdLine, b->CmdLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->AppName, b->AppLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->Env, b->EnvLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->PifFile, b->PifLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->CurDirectory, b->CurDirectoryLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->Title, b->TitleLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->Reserved, b->ReservedLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+    if (!CsrValidateMessageBuffer(m, &b->Desktop, b->DesktopLen, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+
+    if (!CsrValidateMessageBuffer(m, &b->StartupInfo, sizeof(STARTUPINFO), sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+
+   if (bWowApp) { // wow call please
+
+      BOOL bPif = b->VDMState & ASKING_FOR_PIF;
+
+      // find the shared wow record that we are calling
+      // to do that we look at iTask which (in case of shared wow
 
 
-    if(b->ConsoleHandle == (HANDLE)-1){
+      // this could have been the very first call that we've made in so far
+      // the iTask in this context procides us with
 
-        //
-        // WowExec is asking for a command.  We never block when
-        // asking for a WOW binary, since WOW no longer has a thread
-        // blocked in GetNextVDMCommand.  Instead, WowExec gets a
-        // message posted to it by BaseSrv when there are command(s)
-        // waiting for it, and it loops calling GetNextVDMCommand
-        // until it fails -- but it must not block.
-        //
+      // look for our beloved shared wow using the [supplied] task id
+      Status = ENTER_WOW_CRITICAL();
+      ASSERT(NT_SUCCESS(Status));
 
-        Status = RtlEnterCriticalSection( &BaseSrvWOWCriticalSection );
-        ASSERT( NT_SUCCESS( Status ) );
+      // grab crit section for read access
+      if (bPif && b->iTask) {
+         // this is probably the very first call -- update session handles first
+         Status = BaseSrvFindSharedWowRecordByTaskId(&gWowHead,
+                                                     b->iTask,
+                                                     &pSharedWow,
+                                                     &pWOWRecord);
+         if (!NT_SUCCESS(Status)) {
+            KdPrint(("BaseSrvGetNextVdmCommand: Failed to find shared wow record\n"));       
+            LEAVE_WOW_CRITICAL();
+            return Status;
+         }
 
-        b->WaitObjectForVDM = 0;
-
-        if ((pWOWRecord = BaseSrvCheckAvailableWOWCommand()) == NULL) {
-
-            //
-            // There's no command waiting for WOW, so just return.
-            // This is where we used to cause blocking.
-            //
-            b->TitleLen =
-            b->EnvLen =
-            b->DesktopLen =
-            b->ReservedLen =
-            b->CmdLen =
-            b->AppLen =
-            b->PifLen =
-            b->CurDirectoryLen = 0;
-
-            RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-            return ((ULONG)STATUS_SUCCESS);
-            }
-
-        lpVDMInfo = pWOWRecord->lpVDMInfo;
-
-        if (b->VDMState & ASKING_FOR_PIF) {
-            Status = BaseSrvFillPifInfo (lpVDMInfo,b);
-            RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-            return (Status);
-            }
-
-        }
-    else{
-
-        //
-        // DOS VDM or Separate WOW is asking for next command.
-        //
-
-        Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
-        ASSERT(NT_SUCCESS(Status));
-        if (b->VDMState & ASKING_FOR_PIF && b->iTask)
-            Status = GetConsoleRecordDosSesId(b->iTask,&pConsoleRecord);
-        else
-            Status = BaseSrvGetConsoleRecord(b->ConsoleHandle,&pConsoleRecord);
-        if (!NT_SUCCESS (Status)) {
-            RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-            return ((ULONG)STATUS_INVALID_PARAMETER);
-            }
-
-        pDOSRecord = pConsoleRecord->DOSRecord;
-
-        if (b->VDMState & ASKING_FOR_PIF) {
-            if (pDOSRecord) {
-                Status = BaseSrvFillPifInfo (pDOSRecord->lpVDMInfo,b);
-                if (b->iTask)  {
-                    if (!pConsoleRecord->hConsole)  {
-                        pConsoleRecord->hConsole = b->ConsoleHandle;
-                        pConsoleRecord->DosSesId = 0;
-                        }
-                    else {
-                        Status = STATUS_INVALID_PARAMETER;
-                        }
-                    }
-                }
-            else {
-                Status = STATUS_INVALID_PARAMETER;
-                }
-            RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-            return (Status);
-            }
-
-        if (!(b->VDMState & ASKING_FOR_SEPWOW_BINARY)) {
-            if (!(b->VDMState & (ASKING_FOR_FIRST_COMMAND |
-                                 ASKING_FOR_SECOND_TIME |
-                                 NO_PARENT_TO_WAKE))
-                || (b->VDMState & ASKING_FOR_SECOND_TIME && b->ExitCode != 0))
-               {
-
-                // Search first VDM_TO_TAKE_A_COMMAND or last VDM_BUSY record as
-                // per the case.
-                if (b->VDMState & ASKING_FOR_SECOND_TIME){
-                    while(pDOSRecord && pDOSRecord->VDMState != VDM_TO_TAKE_A_COMMAND)
-                        pDOSRecord = pDOSRecord->DOSRecordNext;
-                    }
-                else {
-                    while(pDOSRecord){
-                        if(pDOSRecord->VDMState == VDM_BUSY)
-                            pDOSRecordTemp = pDOSRecord;
-                        pDOSRecord = pDOSRecord->DOSRecordNext;
-                        }
-                    pDOSRecord = pDOSRecordTemp;
-                    }
+#if 0
+#error Excluded unsupported original configuration
+#endif
+#line 824
 
 
-                if (pDOSRecord == NULL) {
-                    RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-                    return STATUS_SUCCESS;
-                    }
+         pSharedWow->hConsole = b->ConsoleHandle;
 
-                pDOSRecord->ErrorCode = b->ExitCode;
-                pDOSRecord->VDMState = VDM_HAS_RETURNED_ERROR_CODE;
-                NtSetEvent (pDOSRecord->hWaitForParentDup,NULL);
-                NtClose (pDOSRecord->hWaitForParentDup);
-                pDOSRecord->hWaitForParentDup = 0;
-                pDOSRecord = pDOSRecord->DOSRecordNext;
-                }
-            }
+#if 0
+#error Excluded unsupported original configuration
+#endif
+#line 831
 
-        while (pDOSRecord && pDOSRecord->VDMState != VDM_TO_TAKE_A_COMMAND)
-            pDOSRecord = pDOSRecord->DOSRecordNext;
+      }
+      else { // this is not a pif -- find by a console handle then
 
-        if (pDOSRecord == NULL) {
+         Status = BaseSrvFindSharedWowRecordByConsoleHandle(&gWowHead,
+                                                            b->ConsoleHandle,
+                                                            &pSharedWow);
+      }
 
-            if ((b->VDMState & ASKING_FOR_SEPWOW_BINARY) ||
-                /* DIVERGENCE(OPENNT-HOST-064): retain early native completion across the command wait reset. */
-                (b->VDMState & RETURN_ON_NO_COMMAND &&
-                 (b->VDMState & ASKING_FOR_SECOND_TIME || pConsoleRecord->ReenterCompletionPending)))
-#line 273
-              {
-                pConsoleRecord->ReenterCompletionPending = FALSE;
-#line 274
-                b->WaitObjectForVDM = 0;
-                RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-                return ((ULONG)STATUS_NO_MEMORY);
-                }
+      // now if we have the share wow - party!
+      if (!NT_SUCCESS(Status)) {
+         KdPrint(("BaseSrvGetNextVDMCommand: Shared Wow has not been found. Console : 0x%x\n", b->ConsoleHandle));
+         LEAVE_WOW_CRITICAL();
+         return Status;
+      }
 
-            if(pConsoleRecord->hWaitForVDMDup == 0 ){
-                if(NT_SUCCESS(BaseSrvCreatePairWaitHandles (&Handle,
-                                                            &TargetHandle))){
-                    pConsoleRecord->hWaitForVDMDup = Handle;
-                    pConsoleRecord->hWaitForVDM = TargetHandle;
-                    }
-                else {
-                    b->WaitObjectForVDM = 0;
-                    RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-                    return ((ULONG)STATUS_NO_MEMORY);
-                    }
-                }
-            else {
-                NtResetEvent(pConsoleRecord->hWaitForVDMDup,&WaitState);
-                }
-            b->WaitObjectForVDM = pConsoleRecord->hWaitForVDM;
-            RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-            return STATUS_SUCCESS;
-            }
+      ASSERT(NULL != pSharedWow);
 
-        b->WaitObjectForVDM = 0;
-        lpVDMInfo = pDOSRecord->lpVDMInfo;
-        }
+      //
+      // WowExec is asking for a command.  We never block when
+      // asking for a WOW binary, since WOW no longer has a thread
+      // blocked in GetNextVDMCommand.  Instead, WowExec gets a
+      // message posted to it by BaseSrv when there are command(s)
+      // waiting for it, and it loops calling GetNextVDMCommand
+      // until it fails -- but it must not block.
+      //
 
-    //
-    // ASKING_FOR_ENVIRONMENT
-    // Return the information but DO NOT delete the lpVDMInfo
-    // associated with the DOS record
-    //
-    if (b->VDMState & ASKING_FOR_ENVIRONMENT) {
-        if (lpVDMInfo->EnviornmentSize <= b->EnvLen) {
-            RtlMoveMemory(b->Env,
-                          lpVDMInfo->Enviornment,
-                          lpVDMInfo->EnviornmentSize);
-            Status = STATUS_SUCCESS;
-            }
-        else {
-            Status = STATUS_INVALID_PARAMETER;
-            }
+      b->WaitObjectForVDM = 0;
 
-        b->EnvLen = lpVDMInfo->EnviornmentSize;
-
-        if(b->ConsoleHandle == (HANDLE)-1)
-            RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-        else
-            RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-        return Status;
-        }
+      // Vadimb: this call should uniquelly identify the caller as this is
+      // the task running on a particular winsta/desktop
+      // thus, as such it should be picked up from the appropriate queue
 
 
-    //
-    // check buffer sizes, CmdLine is mandatory!
-    //
+      if (NULL == (pWOWRecord = BaseSrvCheckAvailableWOWCommand(pSharedWow))) {
 
-    if (!b->CmdLine || lpVDMInfo->CmdSize > b->CmdLen ||
-        (b->AppName && lpVDMInfo->AppLen > b->AppLen) ||
-        (b->Env && lpVDMInfo->EnviornmentSize > b->EnvLen) ||
-        (b->PifFile && lpVDMInfo->PifLen > b->PifLen) ||
-        (b->CurDirectory && lpVDMInfo->CurDirectoryLen > b->CurDirectoryLen) ||
-        (b->Title && lpVDMInfo->TitleLen > b->TitleLen) ||
-        (b->Reserved && lpVDMInfo->ReservedLen > b->ReservedLen) ||
-        (b->Desktop && lpVDMInfo->DesktopLen > b->DesktopLen))
-       {
-        Status = STATUS_INVALID_PARAMETER;
-        }
-     else {
-        Status = STATUS_SUCCESS;
-        }
+         //
+         // There's no command waiting for WOW, so just return.
+         // This is where we used to cause blocking.
+         //
+         b->TitleLen =
+         b->EnvLen =
+         b->DesktopLen =
+         b->ReservedLen =
+         b->CmdLen =
+         b->AppLen =
+         b->PifLen =
+         b->CurDirectoryLen = 0;
 
-     b->CmdLen = lpVDMInfo->CmdSize;
-     b->AppLen = lpVDMInfo->AppLen;
-     b->PifLen = lpVDMInfo->PifLen;
-     b->EnvLen = lpVDMInfo->EnviornmentSize;
-     b->CurDirectoryLen = lpVDMInfo->CurDirectoryLen;
-     b->DesktopLen = lpVDMInfo->DesktopLen;
-     b->TitleLen = lpVDMInfo->TitleLen;
-     b->ReservedLen = lpVDMInfo->ReservedLen;
+         LEAVE_WOW_CRITICAL();
 
-     if (!NT_SUCCESS(Status)) {
-        if(b->ConsoleHandle == (HANDLE)-1)
-            RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-        else
-            RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+         return ((ULONG)STATUS_SUCCESS);
+      }
 
-        return (Status);
-        }
+      lpVDMInfo = pWOWRecord->lpVDMInfo;
+
+      if (bPif) { // this is initial call made by ntvdm
+
+         Status = BaseSrvFillPifInfo (lpVDMInfo,b);
+
+         LEAVE_WOW_CRITICAL();
+
+         return (Status);
+      }
+
+   }
+   else {
+      //
+      // DOS VDM or Separate WOW is asking for next command.
+      //
+
+      Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
+      ASSERT(NT_SUCCESS(Status));
+      if (b->VDMState & ASKING_FOR_PIF && b->iTask)
+          Status = GetConsoleRecordDosSesId(b->iTask,&pConsoleRecord);
+      else
+          Status = BaseSrvGetConsoleRecord(b->ConsoleHandle,&pConsoleRecord);
+      if (!NT_SUCCESS (Status)) {
+          RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+          return ((ULONG)STATUS_INVALID_PARAMETER);
+          }
+
+      pDOSRecord = pConsoleRecord->DOSRecord;
+
+      if (b->VDMState & ASKING_FOR_PIF) {
+          if (pDOSRecord) {
+              Status = BaseSrvFillPifInfo (pDOSRecord->lpVDMInfo,b);
+              if (b->iTask)  {
+                  if (!pConsoleRecord->hConsole)  {
+                      pConsoleRecord->hConsole = b->ConsoleHandle;
+                      pConsoleRecord->DosSesId = 0;
+                      }
+                  else {
+                      Status = STATUS_INVALID_PARAMETER;
+                      }
+                  }
+              }
+          else {
+              Status = STATUS_INVALID_PARAMETER;
+              }
+          RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+          return (Status);
+          }
+
+      if (!bSepWow) {
+          if (!(b->VDMState & (ASKING_FOR_FIRST_COMMAND |
+                               ASKING_FOR_SECOND_TIME |
+                               NO_PARENT_TO_WAKE))
+              || (b->VDMState & ASKING_FOR_SECOND_TIME && b->ExitCode != 0))
+             {
+
+              // Search first VDM_TO_TAKE_A_COMMAND or last VDM_BUSY record as
+              // per the case.
+              if (b->VDMState & ASKING_FOR_SECOND_TIME){
+                  while(pDOSRecord && pDOSRecord->VDMState != VDM_TO_TAKE_A_COMMAND)
+                      pDOSRecord = pDOSRecord->DOSRecordNext;
+                  }
+              else {
+                  while(pDOSRecord){
+                      if(pDOSRecord->VDMState == VDM_BUSY)
+                          pDOSRecordTemp = pDOSRecord;
+                      pDOSRecord = pDOSRecord->DOSRecordNext;
+                      }
+                  pDOSRecord = pDOSRecordTemp;
+                  }
 
 
-    if (lpVDMInfo->CmdLine && b->CmdLine)
-        RtlMoveMemory(b->CmdLine,
-                      lpVDMInfo->CmdLine,
-                      lpVDMInfo->CmdSize);
+              if (pDOSRecord == NULL) {
+                  RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+                  return STATUS_SUCCESS;
+                  }
 
-    if (lpVDMInfo->AppName && b->AppName)
-        RtlMoveMemory(b->AppName,
-                      lpVDMInfo->AppName,
-                      lpVDMInfo->AppLen);
+              pDOSRecord->ErrorCode = b->ExitCode;
+              pDOSRecord->VDMState = VDM_HAS_RETURNED_ERROR_CODE;
+              NtSetEvent (pDOSRecord->hWaitForParentDup,NULL);
+              NtClose (pDOSRecord->hWaitForParentDup);
+              pDOSRecord->hWaitForParentDup = 0;
+              pDOSRecord = pDOSRecord->DOSRecordNext;
+              }
+          }
 
-    if (lpVDMInfo->PifFile && b->PifFile)
-        RtlMoveMemory(b->PifFile,
-                      lpVDMInfo->PifFile,
-                      lpVDMInfo->PifLen);
+      while (pDOSRecord && pDOSRecord->VDMState != VDM_TO_TAKE_A_COMMAND)
+          pDOSRecord = pDOSRecord->DOSRecordNext;
 
-    if (lpVDMInfo->CurDirectory && b->CurDirectory)
-        RtlMoveMemory(b->CurDirectory,
-                      lpVDMInfo->CurDirectory,
-                      lpVDMInfo->CurDirectoryLen);
+      if (pDOSRecord == NULL) {
 
-    if (lpVDMInfo->Title && b->Title)
-        RtlMoveMemory(b->Title,
-                      lpVDMInfo->Title,
-                      lpVDMInfo->TitleLen);
+          if (bSepWow ||
+              (b->VDMState & RETURN_ON_NO_COMMAND &&
+               (b->VDMState & ASKING_FOR_SECOND_TIME || pConsoleRecord->ReenterCompletionPending)))
+#line 979
+            {
+              pConsoleRecord->ReenterCompletionPending = FALSE;
+#line 980
+              b->WaitObjectForVDM = 0;
+              RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+              return ((ULONG)STATUS_NO_MEMORY);
+              }
 
-    if (lpVDMInfo->Reserved && b->Reserved)
-        RtlMoveMemory(b->Reserved,
-                      lpVDMInfo->Reserved,
-                      lpVDMInfo->ReservedLen);
+          if(pConsoleRecord->hWaitForVDMDup == 0 ){
+              if(NT_SUCCESS(BaseSrvCreatePairWaitHandles (&Handle,
+                                                          &TargetHandle))){
+                  pConsoleRecord->hWaitForVDMDup = Handle;
+                  pConsoleRecord->hWaitForVDM = TargetHandle;
+                  }
+              else {
+                  b->WaitObjectForVDM = 0;
+                  RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+                  return ((ULONG)STATUS_NO_MEMORY);
+                  }
+              }
+          else {
+              NtResetEvent(pConsoleRecord->hWaitForVDMDup,&WaitState);
+              }
+          b->WaitObjectForVDM = pConsoleRecord->hWaitForVDM;
+          RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+          return STATUS_SUCCESS;
+          }
 
-    if (lpVDMInfo->Enviornment && b->Env)
-        RtlMoveMemory(b->Env,
-                      lpVDMInfo->Enviornment,
-                      lpVDMInfo->EnviornmentSize);
+      b->WaitObjectForVDM = 0;
+      lpVDMInfo = pDOSRecord->lpVDMInfo;
+
+   }
+
+   //
+   // ASKING_FOR_ENVIRONMENT
+   // Return the information but DO NOT delete the lpVDMInfo
+   // associated with the DOS record
+   // ONLY DOS APPS NEED THIS
+   //
+   if (b->VDMState & ASKING_FOR_ENVIRONMENT) {
+      if (lpVDMInfo->EnviornmentSize <= b->EnvLen) {
+         RtlMoveMemory(b->Env,
+                       lpVDMInfo->Enviornment,
+                       lpVDMInfo->EnviornmentSize);
+         Status = STATUS_SUCCESS;
+      }
+      else {
+         Status = STATUS_INVALID_PARAMETER;
+      }
+
+      b->EnvLen = lpVDMInfo->EnviornmentSize;
+
+      if (bWowApp) {
+         LEAVE_WOW_CRITICAL();
+      }
+      else {
+         RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+      }
+
+      return Status;
+   }
 
 
-    if (lpVDMInfo->VDMState & STARTUP_INFO_RETURNED)
-        RtlMoveMemory(b->StartupInfo,
-                      &lpVDMInfo->StartupInfo,
-                      sizeof (STARTUPINFOA));
+   //
+   // check buffer sizes, CmdLine is mandatory!
+   //
 
-    if (lpVDMInfo->Desktop && b->Desktop)
-        RtlMoveMemory(b->Desktop,
-                      lpVDMInfo->Desktop,
-                      lpVDMInfo->DesktopLen);
+   if (!b->CmdLine || lpVDMInfo->CmdSize > b->CmdLen ||
+       (b->AppName && lpVDMInfo->AppLen > b->AppLen) ||
+       (b->Env && lpVDMInfo->EnviornmentSize > b->EnvLen) ||
+       (b->PifFile && lpVDMInfo->PifLen > b->PifLen) ||
+       (b->CurDirectory && lpVDMInfo->CurDirectoryLen > b->CurDirectoryLen) ||
+       (b->Title && lpVDMInfo->TitleLen > b->TitleLen) ||
+       (b->Reserved && lpVDMInfo->ReservedLen > b->ReservedLen) ||
+       (b->Desktop && lpVDMInfo->DesktopLen > b->DesktopLen)) {
+
+      Status = STATUS_INVALID_PARAMETER;
+   }
+   else {
+      Status = STATUS_SUCCESS;
+   }
+
+   b->CmdLen = lpVDMInfo->CmdSize;
+   b->AppLen = lpVDMInfo->AppLen;
+   b->PifLen = lpVDMInfo->PifLen;
+   b->EnvLen = lpVDMInfo->EnviornmentSize;
+   b->CurDirectoryLen = lpVDMInfo->CurDirectoryLen;
+   b->DesktopLen = lpVDMInfo->DesktopLen;
+   b->TitleLen = lpVDMInfo->TitleLen;
+   b->ReservedLen = lpVDMInfo->ReservedLen;
+
+   if (!NT_SUCCESS(Status)) {
+      if (bWowApp) {
+         LEAVE_WOW_CRITICAL();
+      }
+      else {
+         RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+      }
+      return (Status);
+   }
 
 
-    if ((pBatRecord = BaseSrvGetBatRecord (b->ConsoleHandle)) != NULL)
-        b->fComingFromBat = TRUE;
-    else
-        b->fComingFromBat = FALSE;
+   if (lpVDMInfo->CmdLine && b->CmdLine)
+      RtlMoveMemory(b->CmdLine,
+                    lpVDMInfo->CmdLine,
+                    lpVDMInfo->CmdSize);
 
-    b->CurrentDrive = lpVDMInfo->CurDrive;
-    b->CodePage = lpVDMInfo->CodePage;
-    b->dwCreationFlags = lpVDMInfo->dwCreationFlags;
-    b->VDMState = lpVDMInfo->VDMState;
+   if (lpVDMInfo->AppName && b->AppName)
+      RtlMoveMemory(b->AppName,
+                    lpVDMInfo->AppName,
+                    lpVDMInfo->AppLen);
 
-    if (b->ConsoleHandle == (HANDLE)-1){
-        b->iTask = pWOWRecord->iTask;
-        pWOWRecord->fDispatched = TRUE;
-        }
-    else {
-        pDOSRecord->VDMState = VDM_BUSY;
-        }
+   if (lpVDMInfo->PifFile && b->PifFile)
+      RtlMoveMemory(b->PifFile,
+                     lpVDMInfo->PifFile,
+                     lpVDMInfo->PifLen);
 
-    b->StdIn  = lpVDMInfo->StdIn;
-    b->StdOut = lpVDMInfo->StdOut;
-    b->StdErr = lpVDMInfo->StdErr;
+   if (lpVDMInfo->CurDirectory && b->CurDirectory)
+      RtlMoveMemory(b->CurDirectory,
+                    lpVDMInfo->CurDirectory,
+                    lpVDMInfo->CurDirectoryLen);
 
-    if (b->VDMState & ASKING_FOR_SEPWOW_BINARY) {
-        BaseSrvFreeConsoleRecord(pConsoleRecord);
-        RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-        }
-    else {
-        BaseSrvFreeVDMInfo (lpVDMInfo);
+   if (lpVDMInfo->Title && b->Title)
+      RtlMoveMemory(b->Title,
+                    lpVDMInfo->Title,
+                    lpVDMInfo->TitleLen);
 
-        if(b->ConsoleHandle == (HANDLE)-1){
-           pWOWRecord->lpVDMInfo = NULL;
-           RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-           }
-        else {
-           pDOSRecord->lpVDMInfo = NULL;
-           RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-           }
-        }
+   if (lpVDMInfo->Reserved && b->Reserved)
+      RtlMoveMemory(b->Reserved,
+                    lpVDMInfo->Reserved,
+                    lpVDMInfo->ReservedLen);
 
-    return Status;
-}
+   if (lpVDMInfo->Enviornment && b->Env)
+      RtlMoveMemory(b->Env,
+                    lpVDMInfo->Enviornment,
+                    lpVDMInfo->EnviornmentSize);
+
+
+   if (lpVDMInfo->VDMState & STARTUP_INFO_RETURNED)
+      RtlMoveMemory(b->StartupInfo,
+                    &lpVDMInfo->StartupInfo,
+                    sizeof (STARTUPINFOA));
+
+   if (lpVDMInfo->Desktop && b->Desktop)
+      RtlMoveMemory(b->Desktop,
+                    lpVDMInfo->Desktop,
+                    lpVDMInfo->DesktopLen);
+
+
+   if ((pBatRecord = BaseSrvGetBatRecord (b->ConsoleHandle)) != NULL)
+      b->fComingFromBat = TRUE;
+   else
+      b->fComingFromBat = FALSE;
+
+   b->CurrentDrive = lpVDMInfo->CurDrive;
+   b->CodePage = lpVDMInfo->CodePage;
+   b->dwCreationFlags = lpVDMInfo->dwCreationFlags;
+   b->VDMState = lpVDMInfo->VDMState;
+
+   if (bWowApp) {
+      b->iTask = pWOWRecord->iTask;
+      pWOWRecord->fDispatched = TRUE;
+   }
+   else {
+      pDOSRecord->VDMState = VDM_BUSY;
+   }
+
+   b->StdIn  = lpVDMInfo->StdIn;
+   b->StdOut = lpVDMInfo->StdOut;
+   b->StdErr = lpVDMInfo->StdErr;
+
+   if (bSepWow) {
+      // this was a sep wow request -- we have done this only record that is to
+      // be dispatched to this particular wow -- now just remove every trace of
+      // this wow on the server side...
+
+      NtClose( pConsoleRecord->hVDM );
+      BaseSrvFreeConsoleRecord(pConsoleRecord); // unwire as well
+      RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+   }
+   else {
+      // this is shared wow or dos app -- free vdm info and release the
+      // appropriate sync object
+
+      BaseSrvFreeVDMInfo (lpVDMInfo);
+       // BUGBUG -- fixed
+
+      if (bWowApp) {
+         pWOWRecord->lpVDMInfo = NULL;
+         LEAVE_WOW_CRITICAL();
+      }
+      else {
+         pDOSRecord->lpVDMInfo = NULL;
+         RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+      }
+   }
+
+   return Status;
+}  // END of GetNextVdmCommand
+
+
+
 
 ULONG
 BaseSrvExitVDM(
@@ -465,12 +1185,17 @@ BaseSrvExitVDM(
     IN OUT PCSR_REPLY_STATUS ReplyStatus
     )
 {
-    PBASE_EXIT_VDM_MSG b = (PBASE_EXIT_VDM_MSG)&m->u.ApiMessageData;
+   PBASE_EXIT_VDM_MSG b = (PBASE_EXIT_VDM_MSG)&m->u.ApiMessageData;
+   NTSTATUS Status;
 
-    if(b->ConsoleHandle == (HANDLE)-1)
-        return BaseSrvExitWOWTask (b, m->h.ClientId.UniqueProcess);
-    else
-        return BaseSrvExitDOSTask (b);
+   if (b->iWowTask) {
+      Status = BaseSrvExitWOWTask(b, m->h.ClientId.UniqueProcess);
+   }
+   else {
+      Status = BaseSrvExitDOSTask(b);
+   }
+
+   return Status;
 }
 
 
@@ -488,6 +1213,14 @@ BaseSrvIsFirstVDM(
     return STATUS_SUCCESS;
 }
 
+
+//
+// This call should only be used for DOS apps and not for wow apps
+// hence we don't remove ConsoleHandle == -1 condition here as it is
+// only a validation check
+//
+//
+
 ULONG
 BaseSrvSetVDMCurDirs(
     IN OUT PCSR_API_MSG m,
@@ -501,6 +1234,11 @@ BaseSrvSetVDMCurDirs(
     if (b->ConsoleHandle == (HANDLE) -1) {
         return (ULONG) STATUS_INVALID_PARAMETER;
     }
+
+    if (!CsrValidateMessageBuffer(m, &b->lpszzCurDirs, b->cchCurDirs, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+
     Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
     ASSERT(NT_SUCCESS(Status));
     Status = BaseSrvGetConsoleRecord(b->ConsoleHandle,&pConsoleRecord);
@@ -537,8 +1275,8 @@ BaseSrvSetVDMCurDirs(
 
     RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
     return (ULONG) STATUS_INVALID_PARAMETER;
-
 }
+
 
 ULONG
 BaseSrvBatNotification(
@@ -571,6 +1309,10 @@ BaseSrvBatNotification(
     return ((ULONG)STATUS_SUCCESS);
 }
 
+
+
+
+
 ULONG
 BaseSrvRegisterWowExec(
     IN OUT PCSR_API_MSG m,
@@ -583,80 +1325,89 @@ BaseSrvRegisterWowExec(
     STRING ProcedureNameString;
     NTSTATUS Status;
     PCSR_PROCESS Process;
+    PSHAREDWOWRECORD pSharedWow;
 
-    Status = RtlEnterCriticalSection( &BaseSrvWOWCriticalSection );
+    Status = ENTER_WOW_CRITICAL();
     ASSERT( NT_SUCCESS( Status ) );
-
-    if (!b->hwndWowExec) {
-        if (!WOWHead || WOWHead->SequenceNumber != CSR_SERVER_QUERYCLIENTTHREAD()->Process->SequenceNumber) {
-            Status = STATUS_INVALID_HANDLE;
-        } else if (WOWHead->WOWRecord) {
-            Status = STATUS_MORE_PROCESSING_REQUIRED;
-        } else {
-            BaseSrvFreeWOWHead();
-        }
-        goto Cleanup;
-    }
 
     //
     // Do a run-time link to PostMessageA and GetWindowThreadProcessId
     // which we'll use to post messages to WowExec.
     //
 
-    if (!BaseSrvPostMessageA) {
-
-        RtlInitUnicodeString( &ModuleNameString_U, L"user32" );
-        Status = LdrLoadDll( UNICODE_NULL, NULL, &ModuleNameString_U, &ModuleHandle );
-        if ( !NT_SUCCESS(Status) ) {
-            goto Cleanup;
-        }
-
-        RtlInitString( &ProcedureNameString, "PostMessageA" );
-        Status = LdrGetProcedureAddress( ModuleHandle,
-                                         &ProcedureNameString,
-                                         (ULONG) NULL,
-                                         (PVOID *) &BaseSrvPostMessageA
-                                       );
-        if ( !NT_SUCCESS(Status) ) {
-            LdrUnloadDll( ModuleHandle );
-            goto Cleanup;
-        }
-
-        RtlInitString( &ProcedureNameString, "GetWindowThreadProcessId" );
-        Status = LdrGetProcedureAddress( ModuleHandle,
-                                         &ProcedureNameString,
-                                         (ULONG) NULL,
-                                         (PVOID *) &BaseSrvGetWindowThreadProcessId
-                                       );
-        if ( !NT_SUCCESS(Status) ) {
-            LdrUnloadDll( ModuleHandle );
-            goto Cleanup;
-        }
+    if (NULL == BaseSrvPostMessageA) {
+       // this is an impossible event as all the imports are inited at once
+       KdPrint(("BaseSrvRegisterWowExec: Api PostMessage is not available to BaseSrv\n"));
+       ASSERT(FALSE);
+       Status = STATUS_INVALID_PARAMETER;
+       goto Cleanup;
     }
 
-    hwndWowExec = b->hwndWowExec;
-    dwWowExecThreadId = BaseSrvGetWindowThreadProcessId( hwndWowExec,
-                                                         &dwWowExecProcessId
-                                                       );
+    Status = BaseSrvFindSharedWowRecordByConsoleHandle(&gWowHead,
+                                                       b->ConsoleHandle,
+                                                       &pSharedWow);
+    if (!NT_SUCCESS(Status)) {
+       KdPrint(("BaseSrvRegisterWowExec: Could not find record for wow console handle 0x%lx\n", b->ConsoleHandle));
+       goto Cleanup;
+    }
+
+    ASSERT(NULL != pSharedWow);
+
+    // see what the window handle is -- special "die wow, die" case
+    if (NULL == b->hwndWowExec) {
+       //
+       // Shared WOW is calling to de-register itself as part of shutdown.
+       // Protocol is we check for pending commands for this shared WOW,
+       // if there are any we fail this call, otherwise we set our
+       // hwndWowExec to NULL and succeed the call, ensuring no more
+       // commands will be added to this queue.
+       //
+       if (NULL != pSharedWow->pWOWRecord) {
+          Status = STATUS_MORE_PROCESSING_REQUIRED;
+       }
+       else { // no tasks for this wow
+              // it goes KABOOOOOOM!!!!!
+
+          Status = BaseSrvDeleteSharedWowRecord(&gWowHead, pSharedWow);
+       }
+
+       goto Cleanup;
+    }
+
+    // set the window handle
+    pSharedWow->hwndWowExec = b->hwndWowExec;
+
+    // rettrieve thread and process id of the calling process
+    pSharedWow->dwWowExecThreadId = BaseSrvGetWindowThreadProcessId(
+                                          pSharedWow->hwndWowExec,
+                                          &pSharedWow->dwWowExecProcessId);
     //
     // Process IDs recycle quickly also, so also save away the CSR_PROCESS
     // SequenceNumber, which recycles much more slowly.
     //
 
-    Status = CsrLockProcessByClientId((HANDLE)(ULONG_PTR)dwWowExecProcessId, &Process);
+    Status = CsrLockProcessByClientId((HANDLE)LongToPtr(pSharedWow->dwWowExecProcessId), &Process);
     if ( !NT_SUCCESS(Status) ) {
         KdPrint(("BaseSrvRegisterWowExec: CsrLockProcessByClientId(0x%x) fails, not registering WowExec.\n",
-                 dwWowExecProcessId));
-        hwndWowExec = NULL;
+                 pSharedWow->dwWowExecProcessId));
+        pSharedWow->hwndWowExec = NULL;
         goto Cleanup;
     }
 
-    ulWowExecProcessSequenceNumber = Process->SequenceNumber;
+
+    // this does not appear to be needed here ... in any event, process sequence number
+    // was delivered to us via BasepCreateProcess/UpdateSequence
+
+    // ulWowExecProcessSequenceNumber = Process->SequenceNumber;
+
+    ASSERT(Process->SequenceNumber == pSharedWow->SequenceNumber);
+
     CsrUnlockProcess(Process);
 
-Cleanup:
-    RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
 
+Cleanup:
+
+    LEAVE_WOW_CRITICAL();
     return (ULONG)Status;
 }
 
@@ -729,6 +1480,10 @@ BaseSrvGetVDMCurDirs(
     PBASE_GET_SET_VDM_CUR_DIRS_MSG b = (PBASE_GET_SET_VDM_CUR_DIRS_MSG)&m->u.ApiMessageData;
     PCONSOLERECORD pConsoleRecord;
 
+    if (!CsrValidateMessageBuffer(m, &b->lpszzCurDirs, b->cchCurDirs, sizeof(BYTE))) {
+        return STATUS_INVALID_PARAMETER;
+    }
+
     Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
     ASSERT(NT_SUCCESS(Status));
     Status = BaseSrvGetConsoleRecord(b->ConsoleHandle,&pConsoleRecord);
@@ -774,269 +1529,511 @@ BaseSrvGetVDMCurDirs(
 }
 
 
+#if 1
+NTSTATUS
+ParseReservedProcessId(
+   PCHAR  lpReserved,
+   PULONG lpdwProcessId)
+{
+   // parse the string looking for a process id
+   LPSTR lpProcessId;
+   NTSTATUS Status = STATUS_NOT_FOUND;
+   CHAR  szProcessId[] = "VDMProcessId";
+
+   if (NULL != lpReserved &&
+       NULL != (lpProcessId = strstr(lpReserved, szProcessId))) {
+      lpProcessId += strlen(szProcessId) + 1;
+      Status = RtlCharToInteger(lpProcessId, 0, lpdwProcessId);
+   }
+
+   return(Status);
+}
+
+#endif
+
+
+//
+// temporary static desktop name buffer
+// BUGBUG -- change when User gives me better return values
+//
+WCHAR wszDesktopName[MAX_PATH];
+
+//
+// This call produces a desktop name and optionally a shared wow running in the context
+// of this particular desktop.
+// extra bad: making conversion Uni->Ansi in client/vdm.c and ansi->Uni here
+//               this is BUGBUG -- look into it later
+//
+// this function returns success in all the cases (including when wow is not found)
+// and fails only if under-layers return failures
+
+NTSTATUS
+BaseSrvFindSharedWow(
+   IN PBASE_CHECKVDM_MSG b,
+   IN HANDLE UniqueProcessClientId,
+   IN OUT PUNICODE_STRING   pDesktopName,
+   IN OUT PSHAREDWOWRECORD* ppSharedWowRecord)
+
+{
+   ANSI_STRING DesktopNameAnsi;
+   BOOLEAN fRevertToSelf;
+   NTSTATUS Status;
+
+   // the first time out, we have not dyna-linked NtUserResolveDesktopForWow, so
+   // as an optimization, check to see if the list of shared wows is empty
+   // see if we need to dyna-link
+   if (NULL == BaseSrvUserResolveDesktopForWow) {
+      Status = BaseSrvImportApis(rgBaseSrvModuleImport,
+                                 sizeof(rgBaseSrvModuleImport)/sizeof(rgBaseSrvModuleImport[0]));
+      if (!NT_SUCCESS(Status)) {
+         KdPrint(("BaseSrvFindSharedWow: Failed to dyna-link apis\n"));
+         return Status;
+      }
+   }
+
+   if (b->DesktopLen == 0) {
+      return STATUS_INVALID_PARAMETER;
+   }
+
+   ASSERT(NULL != BaseSrvUserResolveDesktopForWow);
+
+   pDesktopName->Buffer = wszDesktopName;
+   pDesktopName->MaximumLength = sizeof(wszDesktopName);
+
+   DesktopNameAnsi.Buffer = b->Desktop;
+   DesktopNameAnsi.Length = (USHORT)(b->DesktopLen - 1);
+   DesktopNameAnsi.MaximumLength = (USHORT)(b->DesktopLen);
+
+   RtlAnsiStringToUnicodeString(pDesktopName, &DesktopNameAnsi, FALSE);
+
+   // now get the real desktop name there
+   // impersonate
+   fRevertToSelf = CsrImpersonateClient(NULL);
+   if (!fRevertToSelf) {
+       return STATUS_BAD_IMPERSONATION_LEVEL;
+   }
+
+   Status = BaseSrvUserResolveDesktopForWow(pDesktopName);
+
+   CsrRevertToSelf();
+
+   if (!NT_SUCCESS(Status)) {
+      // show that desktop is not valid name here by invalidating the pointer to buffer
+      pDesktopName->Buffer = NULL;
+      pDesktopName->MaximumLength = 0;
+      pDesktopName->Length = 0;
+      return Status;
+   }
+
+
+   // now parse for the ntvdm process id
+   {
+      DWORD dwWowProcessId;
+
+      Status = ParseReservedProcessId(b->Reserved, &dwWowProcessId);
+      if (NT_SUCCESS(Status)) {
+
+         // arg present and specified -- search by desktop + process id
+
+         if ((ULONG)-1 == dwWowProcessId) { // start new wow
+            *ppSharedWowRecord = NULL;
+            return(Status);
+         }
+
+         // now look for desktop + process id
+         Status = BaseSrvFindSharedWowRecordByDesktopAndProcessId(&gWowHead,
+                                                                  pDesktopName,
+                                                                  dwWowProcessId,
+                                                                  ppSharedWowRecord);
+         // if not found -- then we start using any shared wow
+         if (NT_SUCCESS(Status)) {
+            return(Status);
+         }
+
+         // else we fall back to using conventional method
+      }
+
+   }
+
+
+   // now look for this dektop in our task list
+   if (NULL != ppSharedWowRecord) {
+      Status = BaseSrvFindSharedWowRecordByDesktop(&gWowHead,
+                                                   pDesktopName,
+                                                   ppSharedWowRecord);
+      if (!NT_SUCCESS(Status)) {
+         *ppSharedWowRecord = NULL;
+      }
+
+   }
+
+   return STATUS_SUCCESS;
+}
+
+
+
 
 ULONG
-BaseSrvCheckWOW(
+BaseSrvCheckWOW( //////////////////////////////////// NEW IMP
     IN PBASE_CHECKVDM_MSG b,
     IN HANDLE UniqueProcessClientId
     )
 {
-    NTSTATUS Status;
-    HANDLE Handle,TargetHandle;
-    PWOWRECORD pWOWRecord;
-    INFORECORD InfoRecord;
-    USHORT Len;
-    LUID  ClientAuthId;
-    DWORD dwThreadId, dwProcessId;
-    ULONG ulProcessSequenceNumber;
-    PCSR_PROCESS Process;
-
-    Status = RtlEnterCriticalSection( &BaseSrvWOWCriticalSection );
-    ASSERT( NT_SUCCESS( Status ) );
-
-    if ( WOWHead ) {
-            switch (WOWHead->VDMState & VDM_READY) {
-
-            case VDM_READY:
+   NTSTATUS Status;
+   HANDLE Handle,TargetHandle;
+   PWOWRECORD pWOWRecord;
+   INFORECORD InfoRecord;
+   USHORT Len;
+   LUID  ClientAuthId;
+   DWORD dwThreadId, dwProcessId;
+   PCSR_PROCESS Process;
+   PSHAREDWOWRECORD pSharedWow = NULL;
+   PSHAREDWOWRECORD pSharedWowPrev;
+   UNICODE_STRING DesktopName;
+   PCSR_PROCESS ParentProcess;
 
 
-                //
-                // Check if caller can start Win16 app in the shared WOW:
-                //
-                // The AuthenticationId of the client must match both
-                // the shared wow and the currently logged on interactive
-                // user.
-                //
+   Status = ENTER_WOW_CRITICAL();
+   ASSERT( NT_SUCCESS( Status ) );
 
-               Status = OkToRunInSharedWOW( UniqueProcessClientId,
-                                            &ClientAuthId
-                                            );
+   // see if what we have in startup info matches any of the existing wow vdms
+   DesktopName.Buffer = NULL;
 
-               if (NT_SUCCESS(Status)) {
-                   if (!RtlEqualLuid(&ClientAuthId, &WowAuthId)) {
-                       Status = STATUS_ACCESS_DENIED;
-                       }
-                   }
-               if (!NT_SUCCESS(Status))  {
-                   RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-                   return ((ULONG)Status);
-                   }
+   Status = BaseSrvFindSharedWow(b,
+                                 UniqueProcessClientId,
+                                 &DesktopName,
+                                 &pSharedWow);
 
+   if (!NT_SUCCESS(Status)) {
+      ASSERT(FALSE);     // this is some sort of a system error
+      b->DesktopLen = 0; // indicate desktop access was denied/not existing
+      LEAVE_WOW_CRITICAL();
+      return Status;
+   }
 
-                // Allocate a record for this wow task
-                pWOWRecord = BaseSrvAllocateWOWRecord();
+   //
+   // here we could either have succeeded and have a shared wow or not -
+   // and hence have a desktop name in a global buffer pointed to by DesktopName.Buffer
+   //
 
-                if(pWOWRecord == NULL){
-                    Status = STATUS_NO_MEMORY;
-                    break;
-                    }
+   if (NULL != pSharedWow) {
 
-                InfoRecord.iTag = BINARY_TYPE_WIN16;
-                InfoRecord.pRecord.pWOWRecord = pWOWRecord;
+      switch(pSharedWow->VDMState & VDM_READY) {
 
-                if(BaseSrvCopyCommand (b,&InfoRecord) == FALSE){
-                    BaseSrvFreeWOWRecord(pWOWRecord);
-                    Status = STATUS_NO_MEMORY;
-                    break;
-                    }
+      case VDM_READY:
+         // meaning: vdm ready to take a command
+         // verify if the currently logged-on interactive user will be able to take out task
+         //
+         Status = OkToRunInSharedWOW( UniqueProcessClientId,
+                                      &ClientAuthId
+                                      );
 
-                Status = BaseSrvCreatePairWaitHandles (&Handle,&TargetHandle);
+         if (NT_SUCCESS(Status)) {
+             if (!RtlEqualLuid(&ClientAuthId, &pSharedWow->WowAuthId)) {
+                 Status = STATUS_ACCESS_DENIED;
+             }
+         }
 
-                if (!NT_SUCCESS(Status) ){
-                    BaseSrvFreeWOWRecord(pWOWRecord);
-                    break;
-                    }
-                else {
-                    pWOWRecord->hWaitForParent = Handle;
-                    pWOWRecord->hWaitForParentServer = TargetHandle;
-                    b->WaitObjectForParent = TargetHandle;
-                }
-
-                b->VDMState = VDM_PRESENT_AND_READY;
-                b->iTask = pWOWRecord->iTask;
-
-                BaseSrvAddWOWRecord (pWOWRecord);
-
-                if (UserNotifyProcessCreate != NULL) {
-                    (*UserNotifyProcessCreate)(pWOWRecord->iTask,
-                                (DWORD)(ULONG_PTR)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,
-                                (DWORD)(ULONG_PTR)TargetHandle, 0x04);
-                }
-
-                if (hwndWowExec) {
-
-                    //
-                    // Check to see if hwndWowExec still belongs to
-                    // the same thread/process ID before posting.
-                    //
-
-                    dwThreadId = BaseSrvGetWindowThreadProcessId(
-                                     hwndWowExec,
-                                     &dwProcessId
-                                     );
-
-                    if (dwThreadId) {
-                        Status = CsrLockProcessByClientId((HANDLE)(ULONG_PTR)dwProcessId, &Process);
-                    } else {
-                        Status = STATUS_UNSUCCESSFUL;
-                    }
-
-                    if ( NT_SUCCESS(Status) ) {
-                        ulProcessSequenceNumber = Process->SequenceNumber;
-                        CsrUnlockProcess(Process);
-                    } else {
-                        KdPrint(("BaseSrvCheckWOW: WowExec hwnd 0x%x not valid, shared WOW is gone.\n"));
-                        // Force the comparison below to fail.
-                        ulProcessSequenceNumber = ulWowExecProcessSequenceNumber + 1;
-                    }
-
-                    if (dwThreadId == dwWowExecThreadId &&
-                        dwProcessId == dwWowExecProcessId &&
-                        ulProcessSequenceNumber == ulWowExecProcessSequenceNumber) {
-
-                        BaseSrvPostMessageA((HWND)hwndWowExec,
-                                            WM_WOWEXECSTARTAPP,
-                                            0, 0);
-
-                    } else {
-
-                        //
-                        // Thread/process IDs don't match, so forget about this shared WOW.
-                        //
-
-                        if ( NT_SUCCESS(Status) ) {
-
-                            KdPrint(("BaseSrvCheckWOW: Thread/Process IDs don't match, shared WOW is gone.\n"
-                                     "Saved PID 0x%x TID 0x%x PSN 0x%x, hwndWowExec (0x%x) maps to \n"
-                                     "      PID 0x%x TID 0x%x PSN 0x%x.\n",
-                                     dwWowExecProcessId, dwWowExecThreadId, ulWowExecProcessSequenceNumber,
-                                     hwndWowExec,
-                                     dwProcessId, dwThreadId, ulProcessSequenceNumber));
-                        }
-
-                        //
-                        // BaseSrvFreeWOWHead will zero hwndWowExec as well.
-                        //
-
-                        BaseSrvFreeWOWHead();
-                    }
-
-                }
-
-                break;
-
-            default:
-                ASSERT(FALSE);
-            }
-        }
-
-
-    if (WOWHead == NULL) {
-
-        if (b->CmdLen > MAXIMUM_VDM_COMMAND_LENGTH) {
-            RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-            return ((ULONG)STATUS_INVALID_PARAMETER);
-            }
-
-        //
-        // Only the currently logged on interactive user can start the
-        // shared wow. Verify if the caller is such, and if it is
-        // store the Authentication Id of the client which identifies who
-        // is allowed to run wow apps in the default ntvdm-wow process.
-        //
-
-        //
-        // if needed, do a run-time link to UserTestTokenForInteractive,
-        // which is used to verify the client luid.
-        //
-        if (!UserTestTokenForInteractive) {
-            PVOID ModuleHandle;
-            UNICODE_STRING ModuleName;
-            ANSI_STRING ProcName;
-
-            RtlInitUnicodeString( &ModuleName, L"winsrv");
-            Status = LdrLoadDll(UNICODE_NULL,
-                                NULL,
-                                &ModuleName,
-                                &ModuleHandle
-                                );
-
-            if (!NT_SUCCESS(Status)) {
-                RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-                return (ULONG)Status;
-                }
-
-            RtlInitString( &ProcName, "_UserTestTokenForInteractive");
-            Status = LdrGetProcedureAddress(
-                                ModuleHandle,
-                                &ProcName,
-                                0,
-                                (PVOID *)&UserTestTokenForInteractive
-                                );
-
-            if (!NT_SUCCESS(Status)) {
-                LdrUnloadDll(ModuleHandle);
-                RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-                return (ULONG)Status;
-                }
-            }
-
-
-        //
-        // If the caller isn't the currently logged on interactive user,
-        // OkToRunInSharedWOW will fail with access denied.
-        //
-
-        Status = OkToRunInSharedWOW(
-                      UniqueProcessClientId,
-                      &ClientAuthId
-                      );
-
-        if (!NT_SUCCESS(Status)) {
-            RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
+         if (!NT_SUCCESS(Status))  {
+            LEAVE_WOW_CRITICAL();
             return ((ULONG)Status);
+         }
+
+         // now we have verified that user 1) has access to this desktop
+         //                                2) is a currently logged-on interactive user
+
+
+         // Allocate a record for this wow task
+         if (NULL == (pWOWRecord = BaseSrvAllocateWOWRecord(&gWowHead))) {
+            Status = STATUS_NO_MEMORY;
+            break; // failed with mem alloc  -- still holding task critical
+         }
+
+         // copy the command parameters
+
+         InfoRecord.iTag = BINARY_TYPE_WIN16;
+         InfoRecord.pRecord.pWOWRecord = pWOWRecord;
+
+         if (BaseSrvCopyCommand (b,&InfoRecord) == FALSE){
+            BaseSrvFreeWOWRecord(pWOWRecord);
+            Status = STATUS_NO_MEMORY;
+            break;  // holding task critical
+         }
+
+         // create pseudo handles
+
+         Status = BaseSrvCreatePairWaitHandles (&Handle,&TargetHandle);
+
+         if (!NT_SUCCESS(Status) ){
+            BaseSrvFreeWOWRecord(pWOWRecord);
+            break;
+         }
+         else {
+            pWOWRecord->hWaitForParent = Handle;
+            pWOWRecord->hWaitForParentServer = TargetHandle;
+            b->WaitObjectForParent = TargetHandle; // give the handle back to the client
+         }
+
+         // set the state and task id, task id is allocated in BaseSrvAllocateWowRecord
+
+         b->VDMState = VDM_PRESENT_AND_READY;
+         b->iTask = pWOWRecord->iTask;
+
+         // add wow record to this shared wow list
+
+         BaseSrvAddWOWRecord (pSharedWow, pWOWRecord);
+
+         // let User know we have been started
+
+         if (NULL != UserNotifyProcessCreate) {
+            (*UserNotifyProcessCreate)(pWOWRecord->iTask,
+                                       (DWORD)((ULONG_PTR)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread),
+                                       (DWORD)((ULONG_PTR)TargetHandle),
+                                       0x04);
+         }
+
+         // see if the wowexec window exists and is valid
+
+         if (NULL != pSharedWow->hwndWowExec) {
+
+            //
+            // Check to see if hwndWowExec still belongs to
+            // the same thread/process ID before posting.
+            //
+
+            // BUGBUG -- debug code here -- not really needed
+
+            dwThreadId = BaseSrvGetWindowThreadProcessId(pSharedWow->hwndWowExec,
+                                                         &dwProcessId);
+
+            if (dwThreadId) {
+               Status = BaseSrvCheckAuthenticWow((HANDLE)LongToPtr(dwProcessId), pSharedWow);
+            }
+            else {
+               Status = STATUS_UNSUCCESSFUL;
+               KdPrint(("BaseSrvCheckWOW: Not authentic wow by process seq number\n"));
+               //
+               // Spurious assert was here. The wow process has died while the message was incoming. 
+               //  The code below will cleanup appropriately
+               //
             }
 
-        //
-        // Store the Autherntication Id since this now is the currently
-        // logged on interactive user.
-        //
+            if (dwThreadId  == pSharedWow->dwWowExecThreadId &&
+                dwProcessId == pSharedWow->dwWowExecProcessId &&
+                NT_SUCCESS(Status)) {
 
-        WowAuthId = ClientAuthId;
+                HANDLE ThreadId;
+
+                /*
+                 * Set the csr thread's desktop temporarily to the client
+                 * it is servicing
+                 */
 
 
+                BaseSrvPostMessageA((HWND)pSharedWow->hwndWowExec,
+                                    WM_WOWEXECSTARTAPP,
+                                    0,
+                                    0);
 
-        WOWHead = BaseSrvAllocateWOWHead();
 
-        if (WOWHead == NULL) {
-            Status = STATUS_NO_MEMORY ;
             }
-        else {
-            if((WOWHead->WOWRecord = BaseSrvAllocateWOWRecord()) == NULL) {
-                BaseSrvFreeWOWHead();
-                RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-                return ((ULONG) STATUS_NO_MEMORY );
-                }
+            else {
+
+               //
+               // Thread/process IDs don't match, so forget about this shared WOW.
+               //
+
+               if ( NT_SUCCESS(Status) ) {
+
+                      KdPrint(("BaseSrvCheckWOW: Thread/Process IDs don't match, shared WOW is gone.\n"
+                               "Saved PID 0x%x TID 0x%x hwndWowExec (0x%x) maps to \n"
+                               "      PID 0x%x TID 0x%x\n",
+                               pSharedWow->dwWowExecProcessId,
+                               pSharedWow->dwWowExecThreadId,
+                               pSharedWow->hwndWowExec,
+                               dwProcessId,
+                               dwThreadId));
+               }
+
+               // okay, panic! our internal list is in fact corrupted - remove the offending
+               // entry
 
 
-            InfoRecord.iTag = BINARY_TYPE_WIN16;
-            InfoRecord.pRecord.pWOWRecord = WOWHead->WOWRecord;
-            if(!BaseSrvCopyCommand (b, &InfoRecord)){
-                BaseSrvFreeWOWHead();
-                RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-                return ((ULONG) STATUS_NO_MEMORY);
-                }
+               // to do this we must have access -- relinquish control
+               // and then re-aquire it
 
-            WOWHead->VDMState = VDM_READY;
-            b->VDMState = VDM_NOT_PRESENT;
-            b->iTask = WOWHead->WOWRecord->iTask;
-            Status = STATUS_SUCCESS;
+               BaseSrvDeleteSharedWowRecord(&gWowHead, pSharedWow);
+
+                  // reset these values so that new shared wow is created
+               pSharedWow = NULL;
+
             }
-        }
 
-    RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
+         }
+         else {
+            // our shared wow doesn't have a window yet.
+            // 
 
-    return ((ULONG)Status);
+            BaseSrvDeleteSharedWowRecord(&gWowHead, pSharedWow);
+
+            pSharedWow = NULL;
+         }
+
+         break; // case VDM_READY
+
+
+       default:
+          KdPrint(("BaseSrvCheckWOW: bad vdm state: 0x%lx\n", pSharedWow->VDMState));
+          ASSERT(FALSE);  // how did I get into this mess ?
+          break;
+       }  // end switch
+    }
+
+
+    // if we are here then either :
+    //   -- the first take on a shared wow failed
+    //   -- the app was successfully handed off to wowexec for execution
+    // if pSharedWow is NULL, then we have to start shared wow in this environment
+    // as it was either not present or nuked due to seq number/id conflics
+    //
+
+    if (NULL == pSharedWow) {
+
+       //
+       // this check verifies command line for not being too long
+       //
+       if (b->CmdLen > MAXIMUM_VDM_COMMAND_LENGTH) {
+          LEAVE_WOW_CRITICAL();
+          return ((ULONG)STATUS_INVALID_PARAMETER);
+       }
+
+       //
+       // Only the currently logged on interactive user can start the
+       // shared wow. Verify if the caller is such, and if it is
+       // store the Authentication Id of the client which identifies who
+       // is allowed to run wow apps in the default ntvdm-wow process.
+       //
+
+       //
+       // if needed, do a run-time link to UserTestTokenForInteractive,
+       // which is used to verify the client luid.
+       //
+
+       // this dynalink is performed automatically using our all-out api
+       // see above for dynalink source
+
+       ASSERT (NULL != UserTestTokenForInteractive);
+
+
+       ASSERT (NULL != DesktopName.Buffer); // yes, it should be valid
+
+       //
+       // see if we had desktop there. if not (the first time around!) - get it now
+       // by calling FindSharedWow (which retrieves desktop as well)
+       //
+
+       //
+       // If the caller isn't the currently logged on interactive user,
+       // OkToRunInSharedWOW will fail with access denied.
+
+       Status = OkToRunInSharedWOW(UniqueProcessClientId,
+                                   &ClientAuthId);
+
+       if (!NT_SUCCESS(Status)) {
+          LEAVE_WOW_CRITICAL();
+          return ((ULONG)Status);
+       }
+
+       //
+       // Store the Autherntication Id since this now is the currently
+       // logged on interactive user.
+       //
+
+       // produce a viable shared wow record
+       // this process consists of 2 parts : producing a wow record and producing a
+       // console record. the reason for this is to be able to identify this record
+       // when the wow process had been created and is calling to update a record with it's
+       // own handle (this is twise confusing, but just bear with me for a while).
+       //
+       // just as a dos program, we might need a temporary session id or a console id for the
+       // creating process.
+
+
+       pSharedWow = BaseSrvAllocateSharedWowRecord(&DesktopName);
+       if (NULL == pSharedWow) {
+          Status = STATUS_NO_MEMORY;
+       }
+       
+       // 
+       // Store parent process sequence number until ntvdm
+       // comes and gives its sequence number
+       //
+
+       Status = CsrLockProcessByClientId(UniqueProcessClientId,
+                                  &ParentProcess);
+       if (NT_SUCCESS(Status)) {                 
+          pSharedWow->ParentSequenceNumber = ParentProcess->SequenceNumber;
+          CsrUnlockProcess(ParentProcess);
+       }
+
+
+
+       if (NT_SUCCESS(Status)) {
+          pSharedWow->pWOWRecord = BaseSrvAllocateWOWRecord(&gWowHead); // this is a new shared wow
+          if (NULL == pSharedWow->pWOWRecord) {
+             Status = STATUS_NO_MEMORY;
+          }
+       }
+
+
+       if (NT_SUCCESS(Status)) {
+          // here we have [successfully] allocated shared struct and a console record
+          // and a wow record for the task
+
+          // copy the command parameters
+
+          InfoRecord.iTag = BINARY_TYPE_WIN16;
+          InfoRecord.pRecord.pWOWRecord = pSharedWow->pWOWRecord;
+
+          if(!BaseSrvCopyCommand (b, &InfoRecord)) {
+             Status = STATUS_NO_MEMORY;
+          }
+       }
+
+       if (NT_SUCCESS(Status)) {
+
+#if 0
+#error Excluded unsupported original configuration
+#endif
+#line 2006
+          // store the retrieved auth id
+          pSharedWow->WowAuthId = ClientAuthId;
+
+          // link shared wow to the console...
+          // set wow state to be ready
+          pSharedWow->VDMState = VDM_READY;
+
+          b->VDMState = VDM_NOT_PRESENT;
+          b->iTask = pSharedWow->pWOWRecord->iTask;
+
+          // now add this shared wow in --
+          BaseSrvAddSharedWowRecord(&gWowHead, pSharedWow);
+
+       }
+       else {
+
+          // this has not succeeded. cleanup
+          if (NULL != pSharedWow) {
+             BaseSrvFreeSharedWowRecord(pSharedWow);
+          }
+       }
+
+   }
+
+
+   LEAVE_WOW_CRITICAL();
+   return (ULONG)Status;
+
 }
 
 NTSTATUS
@@ -1062,7 +2059,7 @@ OkToRunInSharedWOW(
     HANDLE   ImpersonationToken;
     PCSR_PROCESS    Process;
     PCSR_THREAD     t;
-
+    BOOL fRevertToSelf;
 
     Status = CsrLockProcessByClientId(UniqueProcessClientId,&Process);
     if (!NT_SUCCESS(Status))
@@ -1094,33 +2091,41 @@ OkToRunInSharedWOW(
         if (IsClientSystem(Token)) {
 
             //  get impersonation token
-            t = CSR_SERVER_QUERYCLIENTTHREAD();
-            Status = NtOpenThreadToken(t->ThreadHandle,
-                            TOKEN_QUERY,
-                            TRUE,
-                            &ImpersonationToken);
-            if (NT_SUCCESS(Status)) {
-                Status = (*UserTestTokenForInteractive)(ImpersonationToken,
-                                                        pAuthenticationId
-                                                        );
-                NtClose(ImpersonationToken);
-                }
-            else {
-                Status = STATUS_ACCESS_DENIED;
+
+            fRevertToSelf = CsrImpersonateClient(NULL);
+            if (!fRevertToSelf) {
+                Status = STATUS_BAD_IMPERSONATION_LEVEL;
+            } else {
+                t = CSR_SERVER_QUERYCLIENTTHREAD();
+
+
+                Status = NtOpenThreadToken(t->ThreadHandle,
+                                           TOKEN_QUERY,
+                                           TRUE,
+                                           &ImpersonationToken);
+
+                CsrRevertToSelf();
+
+                if (NT_SUCCESS(Status)) {
+                    Status = (*UserTestTokenForInteractive)(ImpersonationToken,
+                                                            pAuthenticationId);
+                    NtClose(ImpersonationToken);
+                } else {
+                    Status = STATUS_ACCESS_DENIED;
                 }
             }
         }
+    }
 
     NtClose(Token);
     CsrUnlockProcess(Process);
     return(Status);
 }
 
-
-
 ULONG
 BaseSrvCheckDOS(
-    IN PBASE_CHECKVDM_MSG b
+    IN PBASE_CHECKVDM_MSG b,
+    IN HANDLE UniqueProcessClientId
     )
 {
     NTSTATUS Status;
@@ -1128,6 +2133,7 @@ BaseSrvCheckDOS(
     HANDLE Handle,TargetHandle;
     PDOSRECORD pDOSRecord;
     INFORECORD InfoRecord;
+    PCSR_PROCESS ParentProcess;
 
     Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
     ASSERT( NT_SUCCESS( Status ) );
@@ -1247,6 +2253,17 @@ BaseSrvCheckDOS(
                 return (ULONG)STATUS_NO_MEMORY;
                 }
 
+            Status = CsrLockProcessByClientId(UniqueProcessClientId,
+                               &ParentProcess);
+
+            if (!NT_SUCCESS(Status)) {                
+               BaseSrvFreeConsoleRecord(pConsoleRecord);
+               RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+               return Status;               
+            }
+
+            pConsoleRecord->ParentSequenceNumber = ParentProcess->SequenceNumber;
+            CsrUnlockProcess(ParentProcess);
 
             InfoRecord.iTag = b->BinaryType;
             InfoRecord.pRecord.pDOSRecord = pConsoleRecord->DOSRecord;
@@ -1283,33 +2300,6 @@ BaseSrvCheckDOS(
 }
 
 
-/* DIVERGENCE(OPENNT-HOST-031): query the original command-wait event. */
-BOOL
-BaseSrvDOSWorkerWaitPending(
-    IN HANDLE ConsoleHandle,
-    OUT PBOOL ConsoleRecordExists
-    )
-{
-    NTSTATUS Status;
-    PCONSOLERECORD pConsoleRecord;
-    EVENT_BASIC_INFORMATION EventInformation;
-    BOOL Pending = FALSE;
-
-    Status = RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
-    ASSERT(NT_SUCCESS(Status));
-    Status = BaseSrvGetConsoleRecord(ConsoleHandle,&pConsoleRecord);
-    *ConsoleRecordExists = NT_SUCCESS(Status);
-    if (*ConsoleRecordExists && pConsoleRecord->hWaitForVDMDup) {
-        Status = NtQueryEvent(pConsoleRecord->hWaitForVDMDup, EventBasicInformation,
-                              &EventInformation, sizeof(EventInformation), NULL);
-        Pending = NT_SUCCESS(Status) && !EventInformation.EventState;
-    }
-    RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
-    return Pending;
-}
-
-
-#line 1269
 BOOL
 BaseSrvCopyCommand(
     PBASE_CHECKVDM_MSG b,
@@ -1370,31 +2360,8 @@ BaseSrvCopyCommand(
         (b->ReservedLen && VDMInfo->Reserved == NULL )||
         (b->TitleLen && VDMInfo->Title == NULL)) {
 
-        RtlFreeHeap ( RtlProcessHeap (), 0, VDMInfo);
+        BaseSrvFreeVDMInfo(VDMInfo);
 
-        if (VDMInfo->CmdLine != NULL)
-            RtlFreeHeap ( RtlProcessHeap (), 0, VDMInfo->CmdLine);
-
-        if (VDMInfo->AppName != NULL)
-            RtlFreeHeap ( RtlProcessHeap (), 0, VDMInfo->AppName);
-
-        if (VDMInfo->PifFile != NULL)
-            RtlFreeHeap ( RtlProcessHeap (), 0, VDMInfo->PifFile);
-
-        if (VDMInfo->Enviornment != NULL)
-            RtlFreeHeap ( RtlProcessHeap (), 0, VDMInfo->Enviornment);
-
-        if (VDMInfo->CurDirectory != NULL)
-            RtlFreeHeap ( RtlProcessHeap (), 0, VDMInfo->CurDirectory);
-
-        if (VDMInfo->Desktop  != NULL)
-            RtlFreeHeap ( RtlProcessHeap (), 0, VDMInfo->Desktop);
-
-        if (VDMInfo->Title  != NULL)
-            RtlFreeHeap ( RtlProcessHeap (), 0, VDMInfo->Title);
-
-        if (VDMInfo->Reserved  != NULL)
-            RtlFreeHeap ( RtlProcessHeap (), 0, VDMInfo->Reserved);
         return FALSE;
     }
 
@@ -1471,7 +2438,16 @@ BaseSrvCopyCommand(
     VDMInfo->CurDrive = b->CurDrive;
     VDMInfo->CodePage = b->CodePage;
 
-    pInfoRecord->pRecord.pWOWRecord->lpVDMInfo = VDMInfo;
+    // ATTENTION THIS CODE ASSUMES THAT WOWRECORD AND DOSRECORD HAVE THE SAME LAYOUT
+    // THIS IS BAD BAD BAD  -- fix later BUGBUG
+    //
+
+    if (pInfoRecord->iTag == BINARY_TYPE_WIN16) {
+       pInfoRecord->pRecord.pWOWRecord->lpVDMInfo = VDMInfo;
+    }
+    else {
+       pInfoRecord->pRecord.pDOSRecord->lpVDMInfo = VDMInfo;
+    }
 
     VDMInfo->StdIn = VDMInfo->StdOut = VDMInfo->StdErr = 0;
     if(pInfoRecord->iTag == BINARY_TYPE_DOS) {
@@ -1491,18 +2467,27 @@ BaseSrvCopyCommand(
 }
 
 ULONG
-BaseSrvUpdateWOWEntry(
+BaseSrvUpdateWOWEntry(          // BUGBUG -- fixme
     PBASE_UPDATE_VDM_ENTRY_MSG b
     )
 {
     NTSTATUS Status;
+    PSHAREDWOWRECORD pSharedWow;
     PWOWRECORD pWOWRecord;
     HANDLE Handle,TargetHandle;
 
-    Status = RtlEnterCriticalSection( &BaseSrvWOWCriticalSection );
+    Status = ENTER_WOW_CRITICAL();
     ASSERT( NT_SUCCESS( Status ) );
 
-    Status = BaseSrvGetWOWRecord(b->iTask,&pWOWRecord);
+    // this is fun -- we get the the record using the task id
+    // reason: the call is made from the context of a creator process
+    // hence console handle means nothing
+
+    Status = BaseSrvFindSharedWowRecordByTaskId(&gWowHead,
+                                                b->iTask,
+                                                &pSharedWow,
+                                                &pWOWRecord);
+    // this returns us the shared wow record and wow record
 
     if ( NT_SUCCESS(Status) ) {
 
@@ -1517,16 +2502,18 @@ BaseSrvUpdateWOWEntry(
                         b->VDMCreationState & VDM_FULLY_CREATED){
                     NtClose(pWOWRecord->hWaitForParent);
                     pWOWRecord->hWaitForParent = 0;
-                    }
+                }
 
                 if( b->VDMCreationState & VDM_PARTIALLY_CREATED ||
                         b->VDMCreationState & VDM_FULLY_CREATED){
 
-                    BaseSrvRemoveWOWRecord (pWOWRecord);
+                    BaseSrvRemoveWOWRecord (pSharedWow, pWOWRecord);
                     BaseSrvFreeWOWRecord (pWOWRecord);
-                    if (WOWHead->WOWRecord == NULL)
-                        BaseSrvFreeWOWHead();
+
+                    if (NULL == pSharedWow->pWOWRecord) {
+                       Status = BaseSrvDeleteSharedWowRecord(&gWowHead, pSharedWow);
                     }
+                }
                 break;
 
             default:
@@ -1534,37 +2521,41 @@ BaseSrvUpdateWOWEntry(
             }
         }
 
-    RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
 
     if (!NT_SUCCESS(Status) )
-        return Status;
+        goto UpdateWowEntryExit;
 
     switch ( b->EntryIndex ){
         case UPDATE_VDM_PROCESS_HANDLE:
             Status = BaseSrvCreatePairWaitHandles (&Handle,&TargetHandle);
 
-            if (!NT_SUCCESS(Status) ){
-                return Status;
-                }
-            else {
+            if (NT_SUCCESS(Status) ){                
                 pWOWRecord->hWaitForParent = Handle;
                 pWOWRecord->hWaitForParentServer = TargetHandle;
                 b->WaitObjectForParent = TargetHandle;
                 if (UserNotifyProcessCreate != NULL) {
                     (*UserNotifyProcessCreate)(pWOWRecord->iTask,
-                                (DWORD)(ULONG_PTR)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread,
-                                (DWORD)(ULONG_PTR)TargetHandle, 0x04);
+                                (DWORD)((ULONG_PTR)CSR_SERVER_QUERYCLIENTTHREAD()->ClientId.UniqueThread),
+                                (DWORD)((ULONG_PTR)TargetHandle),
+                                 0x04);
+                    }                
                 }
-                return STATUS_SUCCESS;
-                }
+            break;
 
         case UPDATE_VDM_UNDO_CREATION:
         case UPDATE_VDM_HOOKED_CTRLC:
-            return STATUS_SUCCESS;
+            break;
 
         default:
             ASSERT(FALSE);
+            break;
+
         }
+
+
+UpdateWowEntryExit:
+    LEAVE_WOW_CRITICAL();
+    return Status;
 }
 
 ULONG
@@ -1600,7 +2591,7 @@ BaseSrvUpdateDOSEntry(
                             b->VDMProcessHandle,
                             NtCurrentProcess(),
                             &pConsoleRecord->hVDM,
-                            (ACCESS_MASK)NULL,
+                            0,
                             FALSE,
                             DUPLICATE_SAME_ACCESS
                             );
@@ -1634,217 +2625,228 @@ BaseSrvUpdateDOSEntry(
                 ASSERT(FALSE);
             }
         }
-
-    RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+    
 
     if (!NT_SUCCESS(Status) )
-        return Status;
+        goto UpdateDosEntryExit;
 
     switch ( b->EntryIndex ){
         case UPDATE_VDM_PROCESS_HANDLE:
-
-	    // williamh, Oct 24, 1996.
-	    // if the ntvdm is runnig on a new console, do NOT subsititue
-	    // the given process handle with event. The caller(CreateProcess)
-	    // will get the real process handle and so does the application
-	    // who calls CreateProcess. When it is time for the application
-	    // to call GetExitCodeProcess, the client side will return the
-	    // right thing(on the server side, we have nothing because
-	    // console and dos record are gone).
-	    //
-	    if (!pConsoleRecord->DosSesId && b->BinaryType == BINARY_TYPE_DOS) {
+            // williamh, Oct 24, 1996.
+            // if the ntvdm is runnig on a new console, do NOT subsititue
+            // the given process handle with event. The caller(CreateProcess)
+            // will get the real process handle and so does the application
+            // who calls CreateProcess. When it is time for the application
+            // to call GetExitCodeProcess, the client side will return the
+            // right thing(on the server side, we have nothing because
+            // console and dos record are gone).
+            //
+            // VadimB: this code fixes the problem with GetExitCodeProcess
+            //         in a way that is not too consistent. We should review
+            //         TerminateProcess code along with the code that deletes
+            //         pseudo-handles for processes (in this file) to account for
+            //         outstanding handle references. For now this code also
+            //         makes terminateprocess work on the handle we return
+            //
+            if ((!pConsoleRecord->DosSesId && b->BinaryType == BINARY_TYPE_DOS)) {
                 Status = BaseSrvCreatePairWaitHandles (&Handle,&TargetHandle);
 
-                if (!NT_SUCCESS(Status) ){
-                    return Status;
-                    }
-                else {
-                    if (!NT_SUCCESS ( Status = BaseSrvDupStandardHandles (
+                if (NT_SUCCESS(Status) ){
+                    if (NT_SUCCESS ( Status = BaseSrvDupStandardHandles (
                                                     pConsoleRecord->hVDM,
                                                     pDOSRecord))){
-                        BaseSrvClosePairWaitHandles (pDOSRecord);
-                        return Status;
+                        pDOSRecord->hWaitForParent = TargetHandle;    
+                        pDOSRecord->hWaitForParentDup = Handle;       
+                        b->WaitObjectForParent = TargetHandle;        
                         }
-
-                    pDOSRecord->hWaitForParent = TargetHandle;
-                    pDOSRecord->hWaitForParentDup = Handle;
-                    b->WaitObjectForParent = TargetHandle;
+                    else{                    
+                        BaseSrvClosePairWaitHandles (pDOSRecord);                        
+                        }
                     }
                 }
-             else {
+            else {
                 pDOSRecord->hWaitForParent = NULL;
                 pDOSRecord->hWaitForParentDup = NULL;
                 b->WaitObjectForParent = NULL;
                 }
 
-             return STATUS_SUCCESS;
+            break;
 
         case UPDATE_VDM_UNDO_CREATION:
         case UPDATE_VDM_HOOKED_CTRLC:
-            return STATUS_SUCCESS;
+            break;
 
         default:
             ASSERT(FALSE);
+            break;
         }
+
+UpdateDosEntryExit:
+    RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+    return Status;
 }
 
 
 PWOWRECORD
 BaseSrvCheckAvailableWOWCommand(
+   PSHAREDWOWRECORD pSharedWow
     )
 {
 
-PWOWRECORD pWOWRecord;
+   PWOWRECORD pWOWRecord;
 
-    if(WOWHead == NULL)
-        return NULL;
+   if (NULL == pSharedWow)
+      return NULL;
 
-    pWOWRecord = WOWHead->WOWRecord;
+   pWOWRecord = pSharedWow->pWOWRecord;
 
-    while(pWOWRecord){
-        if(pWOWRecord->fDispatched == FALSE)
-            break;
-        else
-            pWOWRecord = pWOWRecord->WOWRecordNext;
-        }
-    return pWOWRecord;
+   while(NULL != pWOWRecord) {
+      if (pWOWRecord->fDispatched == FALSE) {
+         break;
+      }
+      pWOWRecord = pWOWRecord->WOWRecordNext;
+
+   }
+   return pWOWRecord;
 }
 
-ULONG
+// this function exits given wow task running in a given shared wow
+//
+
+NTSTATUS
 BaseSrvExitWOWTask(
     PBASE_EXIT_VDM_MSG b,
-    HANDLE ProcessId
+    HANDLE hProcess
     )
 {
-    NTSTATUS Status;
-    PCSR_PROCESS Process;
-    ULONG ThisSequenceNumber;
+   NTSTATUS Status;
+   PSHAREDWOWRECORD pSharedWow;
 
-    Status = CsrLockProcessByClientId(ProcessId, &Process);
-    if ( !NT_SUCCESS(Status) )
-        return Status;
-    ThisSequenceNumber = Process->SequenceNumber;
-    CsrUnlockProcess(Process);
+   // now we might get burned here -- although unlikely
 
-    Status = RtlEnterCriticalSection( &BaseSrvWOWCriticalSection );
-    ASSERT( NT_SUCCESS( Status ) );
+   // find shared wow first
 
-    if (WOWHead && WOWHead->SequenceNumber == ThisSequenceNumber) {
-        BaseSrvRemoveWOWRecordByITask(b->iWowTask);
-        }
+   Status = ENTER_WOW_CRITICAL();
+   ASSERT(NT_SUCCESS(Status));
 
-    RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
+   Status = BaseSrvFindSharedWowRecordByConsoleHandle(&gWowHead,
+                                                      b->ConsoleHandle,
+                                                      &pSharedWow);
 
-    return Status;
+   if (NT_SUCCESS(Status)) {
+
+         // bugbug == should be in debug impl only
+      Status = BaseSrvCheckAuthenticWow(hProcess, pSharedWow);
+      ASSERT(NT_SUCCESS(Status));
+
+      if (-1 == b->iWowTask) { // the entire vdm goes
+
+         // remove from the chain first
+         Status = BaseSrvDeleteSharedWowRecord(&gWowHead,
+                                            pSharedWow);
+      }
+      else {
+         Status = BaseSrvRemoveWOWRecordByTaskId(pSharedWow,
+                                                 b->iWowTask);
+
+      }
+   }
+
+   LEAVE_WOW_CRITICAL();
+   return Status;
 }
 
-ULONG
+
+NTSTATUS
 BaseSrvExitDOSTask(
     PBASE_EXIT_VDM_MSG b
     )
 {
-    NTSTATUS Status;
-    PDOSRECORD pDOSRecord;
-    PCONSOLERECORD pConsoleRecord = NULL;
+   NTSTATUS Status;
+   PDOSRECORD pDOSRecord;
+   PCONSOLERECORD pConsoleRecord = NULL;
 
-    Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
-    ASSERT( NT_SUCCESS( Status ) );
+   Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
+   ASSERT( NT_SUCCESS( Status ) );
 
-    Status = BaseSrvGetConsoleRecord(b->ConsoleHandle,&pConsoleRecord);
+   Status = BaseSrvGetConsoleRecord(b->ConsoleHandle,&pConsoleRecord);
 
-    if (!NT_SUCCESS (Status)) {
-        RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-        return ((ULONG)STATUS_INVALID_PARAMETER);
-        }
+   if (!NT_SUCCESS (Status)) {
+       RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+       return ((ULONG)STATUS_INVALID_PARAMETER);
+       }
 
-    if (pConsoleRecord->hWaitForVDMDup){
-        NtClose(pConsoleRecord->hWaitForVDMDup);
-        pConsoleRecord->hWaitForVDMDup =0;
-        b->WaitObjectForVDM = pConsoleRecord->hWaitForVDM;
-    }
+   if (pConsoleRecord->hWaitForVDMDup){
+       NtClose(pConsoleRecord->hWaitForVDMDup);
+       pConsoleRecord->hWaitForVDMDup =0;
+       b->WaitObjectForVDM = pConsoleRecord->hWaitForVDM;
+   }
 
-    pDOSRecord = pConsoleRecord->DOSRecord;
-    while (pDOSRecord) {
-        if (pDOSRecord->hWaitForParentDup) {
-            NtSetEvent (pDOSRecord->hWaitForParentDup,NULL);
-            NtClose (pDOSRecord->hWaitForParentDup);
-            pDOSRecord->hWaitForParentDup = 0;
-        }
-        pDOSRecord = pDOSRecord->DOSRecordNext;
-    }
-    NtClose(pConsoleRecord->hVDM);
+   pDOSRecord = pConsoleRecord->DOSRecord;
+   while (pDOSRecord) {
+       if (pDOSRecord->hWaitForParentDup) {
+           NtSetEvent (pDOSRecord->hWaitForParentDup,NULL);
+           NtClose (pDOSRecord->hWaitForParentDup);
+           pDOSRecord->hWaitForParentDup = 0;
+       }
+       pDOSRecord = pDOSRecord->DOSRecordNext;
+   }
+   NtClose(pConsoleRecord->hVDM);
 
-    BaseSrvFreeConsoleRecord (pConsoleRecord);
+   BaseSrvFreeConsoleRecord (pConsoleRecord);
 
-    RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+   RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
 
-    return Status;
+   return Status;
 }
 
-VOID
-BaseSrvRemoveWOWRecordByITask(
+// assumes: shared wow cs is being held
+//          iWowTask is valid
+
+NTSTATUS
+BaseSrvRemoveWOWRecordByTaskId (
+    IN PSHAREDWOWRECORD pSharedWow,
     IN ULONG iWowTask
     )
 {
-    PWOWRECORD pWOWRecordLast = NULL, pWOWRecord;
+   PWOWRECORD pWOWRecordLast = NULL, pWOWRecord;
 
-    if (WOWHead == NULL)
-        return;
+   if (pSharedWow == NULL) {
+      return STATUS_INVALID_PARAMETER;
+   }
 
-    pWOWRecord = WOWHead->WOWRecord;
+   pWOWRecord = pSharedWow->pWOWRecord;
 
-    if(iWowTask != (ULONG)-1) {
-        // Find the right WOW record and free it.
-        while(pWOWRecord){
-            if(pWOWRecord->iTask == iWowTask){
-                if(pWOWRecordLast == NULL)
-                    WOWHead->WOWRecord = pWOWRecord->WOWRecordNext;
-                else
-                    pWOWRecordLast->WOWRecordNext = pWOWRecord->WOWRecordNext;
-                NtSetEvent (pWOWRecord->hWaitForParent,NULL);
-                NtClose (pWOWRecord->hWaitForParent);
-                pWOWRecord->hWaitForParent = 0;
-                BaseSrvFreeWOWRecord(pWOWRecord);
-                return;
-                }
-            pWOWRecordLast = pWOWRecord;
-            pWOWRecord = pWOWRecord->WOWRecordNext;
-            }
+      // Find the right WOW record and free it.
+   while (NULL != pWOWRecord) {
 
-        }
-    else{
-        BaseSrvFreeWOWHead();
-        }
+      if (pWOWRecord->iTask == iWowTask) {
 
-    return;
+         if (NULL == pWOWRecordLast) {
+            pSharedWow->pWOWRecord = pWOWRecord->WOWRecordNext;
+         }
+         else {
+            pWOWRecordLast->WOWRecordNext = pWOWRecord->WOWRecordNext;
+         }
+
+         NtSetEvent (pWOWRecord->hWaitForParent,NULL);
+         NtClose (pWOWRecord->hWaitForParent);
+         pWOWRecord->hWaitForParent = 0;
+         BaseSrvFreeWOWRecord(pWOWRecord);
+
+         return STATUS_SUCCESS;
+      }
+
+      pWOWRecordLast = pWOWRecord;
+      pWOWRecord = pWOWRecord->WOWRecordNext;
+   }
+
+   return STATUS_NOT_FOUND;
 }
 
 
 ULONG
-BaseSrvGetWOWRecord(
-    ULONG iTask,
-    OUT PWOWRECORD *pRecord
-    )
-{
-    PWOWRECORD pWOWRecord;
-
-    if(WOWHead == NULL)
-        return ((ULONG)STATUS_INVALID_PARAMETER);
-    pWOWRecord = WOWHead->WOWRecord;
-    while (pWOWRecord){
-        if (pWOWRecord->iTask == iTask){
-            *pRecord = pWOWRecord;
-            return STATUS_SUCCESS;
-            }
-        else
-            pWOWRecord = pWOWRecord->WOWRecordNext;
-    }
-    return ((ULONG)STATUS_INVALID_PARAMETER);
-}
-
-
-ULONG
-BaseSrvGetVDMExitCode(
+BaseSrvGetVDMExitCode( ///////// BUGBUG -- fixme
     IN OUT PCSR_API_MSG m,
     IN OUT PCSR_REPLY_STATUS ReplyStatus
     )
@@ -1854,18 +2856,19 @@ BaseSrvGetVDMExitCode(
     PDOSRECORD pDOSRecord;
     PBASE_GET_VDM_EXIT_CODE_MSG b = (PBASE_GET_VDM_EXIT_CODE_MSG)&m->u.ApiMessageData;
 
-
-    if(b->ConsoleHandle == (HANDLE)-1){
+    if (b->ConsoleHandle == (HANDLE)-1){
         b->ExitCode =    0;
         }
     else{
+
+
         Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
         ASSERT( NT_SUCCESS( Status ) );
         Status = BaseSrvGetConsoleRecord (b->ConsoleHandle,&pConsoleRecord);
         if (!NT_SUCCESS(Status)){
             b->ExitCode =   0;
             RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-	    return STATUS_SUCCESS;
+            return STATUS_SUCCESS;
             }
 
         pDOSRecord = pConsoleRecord->DOSRecord;
@@ -1873,7 +2876,7 @@ BaseSrvGetVDMExitCode(
             // sudeepb 05-Oct-1992
             // fix for the change markl has made for tagging VDM handles
 
-            if (pDOSRecord->hWaitForParent == (HANDLE)((ULONG_PTR)b->hParent & ~(ULONG_PTR)0x1)) {
+            if (pDOSRecord->hWaitForParent == (HANDLE)((ULONG_PTR)b->hParent & ~0x1)) {
                 if (pDOSRecord->VDMState == VDM_HAS_RETURNED_ERROR_CODE){
                     b->ExitCode = pDOSRecord->ErrorCode;
                     if (pDOSRecord == pConsoleRecord->DOSRecord &&
@@ -1916,7 +2919,7 @@ ULONG BaseSrvDupStandardHandles(
 {
     NTSTATUS Status;
     HANDLE pSrcProc;
-    HANDLE StdOutTemp;
+    HANDLE StdOutTemp = NULL;
     PCSR_THREAD t;
     PVDMINFO pVDMInfo = pDOSRecord->lpVDMInfo;
 
@@ -1929,7 +2932,7 @@ ULONG BaseSrvDupStandardHandles(
                             pVDMInfo->StdIn,
                             pVDMProc,
                             &pVDMInfo->StdIn,
-                            (ACCESS_MASK)NULL,
+                            0,
                             OBJ_INHERIT,
                             DUPLICATE_SAME_ACCESS
                          );
@@ -1944,7 +2947,7 @@ ULONG BaseSrvDupStandardHandles(
                             pVDMInfo->StdOut,
                             pVDMProc,
                             &pVDMInfo->StdOut,
-                            (ACCESS_MASK)NULL,
+                            0,
                             OBJ_INHERIT,
                             DUPLICATE_SAME_ACCESS
                          );
@@ -1959,7 +2962,7 @@ ULONG BaseSrvDupStandardHandles(
                             pVDMInfo->StdErr,
                             pVDMProc,
                             &pVDMInfo->StdErr,
-                            (ACCESS_MASK)NULL,
+                            0,
                             OBJ_INHERIT,
                             DUPLICATE_SAME_ACCESS
                          );
@@ -2067,54 +3070,10 @@ GetConsoleRecordDosSesId (
 
 
 
-PWOWHEAD BaseSrvAllocateWOWHead (
-    VOID
-    )
-{
-    PWOWHEAD pWOWHead;
-
-    if((pWOWHead = RtlAllocateHeap ( RtlProcessHeap (), MAKE_TAG( VDM_TAG ),
-                                     sizeof (WOWHEAD))) == NULL)
-        return NULL;
-
-    RtlFillMemory ((PVOID)pWOWHead,sizeof(WOWHEAD),'\0');
-
-    return pWOWHead;
-}
-
-VOID BaseSrvFreeWOWHead (
-    VOID
-    )
-{
-    PWOWRECORD pWOWRecord, pWOWRecordLast;
-
-    if (WOWHead == NULL)
-        return;
-
-    //
-    // Free all wow records and wake their parents
-    //
-
-    pWOWRecord = WOWHead->WOWRecord;
-    while(pWOWRecord){
-        pWOWRecordLast = pWOWRecord->WOWRecordNext;
-        NtSetEvent (pWOWRecord->hWaitForParent,NULL);
-        NtClose (pWOWRecord->hWaitForParent);
-        pWOWRecord->hWaitForParent = 0;
-        BaseSrvFreeWOWRecord(pWOWRecord);
-        pWOWRecord = pWOWRecordLast;
-        }
-    RtlFreeHeap(RtlProcessHeap (), 0, WOWHead);
-    WOWHead = NULL;
-
-    WowAuthId = RtlConvertLongToLuid(-1);
-    hwndWowExec = 0;
-}
-
 PWOWRECORD
 BaseSrvAllocateWOWRecord(
-    VOID
-    )
+   PSHAREDWOWRECORDHEAD pSharedWowRecordHead
+   )
 {
     register PWOWRECORD WOWRecord;
 
@@ -2123,15 +3082,14 @@ BaseSrvAllocateWOWRecord(
     if (WOWRecord == NULL)
         return NULL;
 
-    RtlFillMemory ((PVOID)WOWRecord,sizeof(WOWRECORD),'\0');
+    RtlZeroMemory ((PVOID)WOWRecord,sizeof(WOWRECORD));
 
     // if too many tasks, error out.
-    if ((WOWRecord->iTask = BaseSrvGetWOWTaskId()) == WOWMAXID) {
+    if ((WOWRecord->iTask = BaseSrvGetWOWTaskId(pSharedWowRecordHead)) == WOWMAXID) {
         RtlFreeHeap(RtlProcessHeap(), 0, WOWRecord);
         return NULL;
-        }
-    else
-        return WOWRecord;
+        }    
+    return WOWRecord;
 }
 
 VOID BaseSrvFreeWOWRecord (
@@ -2140,28 +3098,28 @@ VOID BaseSrvFreeWOWRecord (
 {
     if (pWOWRecord == NULL)
         return;
-
+    
     BaseSrvFreeVDMInfo (pWOWRecord->lpVDMInfo);
 
     RtlFreeHeap(RtlProcessHeap (), 0, pWOWRecord);
 }
 
 VOID BaseSrvAddWOWRecord (
+    PSHAREDWOWRECORD pSharedWow,
     PWOWRECORD pWOWRecord
     )
 {
     PWOWRECORD WOWRecordCurrent,WOWRecordLast;
 
     // First WOW app runs first, so add the new ones at the end
-
-    if(WOWHead->WOWRecord == NULL){
-        WOWHead->WOWRecord = pWOWRecord;
-        return;
+    if (NULL == pSharedWow->pWOWRecord) {
+       pSharedWow->pWOWRecord = pWOWRecord;
+       return;
     }
 
-    WOWRecordCurrent = WOWHead->WOWRecord;
+    WOWRecordCurrent = pSharedWow->pWOWRecord;
 
-    while (WOWRecordCurrent){
+    while (NULL != WOWRecordCurrent){
         WOWRecordLast = WOWRecordCurrent;
         WOWRecordCurrent = WOWRecordCurrent->WOWRecordNext;
     }
@@ -2172,23 +3130,26 @@ VOID BaseSrvAddWOWRecord (
 }
 
 VOID BaseSrvRemoveWOWRecord (
+    PSHAREDWOWRECORD pSharedWow,
     PWOWRECORD pWOWRecord
     )
 {
     PWOWRECORD WOWRecordCurrent,WOWRecordLast = NULL;
 
-    if(WOWHead == NULL)
-        return;
+    if (NULL == pSharedWow) {
+       return;
+    }
 
-    if(WOWHead->WOWRecord == NULL)
-        return;
+    if (NULL == pSharedWow->pWOWRecord) {
+       return;
+    }
 
-    if(WOWHead->WOWRecord == pWOWRecord){
-        WOWHead->WOWRecord = pWOWRecord->WOWRecordNext;
-        return;
-        }
+    if (pSharedWow->pWOWRecord == pWOWRecord) {
+       pSharedWow->pWOWRecord = pWOWRecord->WOWRecordNext;
+       return;
+    }
 
-    WOWRecordLast = WOWHead->WOWRecord;
+    WOWRecordLast = pSharedWow->pWOWRecord;
     WOWRecordCurrent = WOWRecordLast->WOWRecordNext;
 
     while (WOWRecordCurrent && WOWRecordCurrent != pWOWRecord){
@@ -2208,25 +3169,18 @@ PCONSOLERECORD BaseSrvAllocateConsoleRecord (
 {
     PCONSOLERECORD pConsoleRecord;
 
-    if((pConsoleRecord = RtlAllocateHeap ( RtlProcessHeap (), MAKE_TAG( VDM_TAG ),
-                                             sizeof (CONSOLERECORD))) == NULL)
-        return NULL;
+    if (NULL == (pConsoleRecord = RtlAllocateHeap (RtlProcessHeap (),
+                                                  MAKE_TAG(VDM_TAG),
+                                                  sizeof (CONSOLERECORD)))) {
+       return NULL;
+    }
 
-    pConsoleRecord->hConsole = 0;
-    pConsoleRecord->hVDM = 0;
-    pConsoleRecord->SequenceNumber = 0;
-    pConsoleRecord->DosSesId = 0;
-    pConsoleRecord->DOSRecord = 0;
-    pConsoleRecord->hWaitForVDM = 0;
-    pConsoleRecord->hWaitForVDMDup = 0;
-    pConsoleRecord->nReEntrancy = 0;
-    pConsoleRecord->ReenterCompletionPending = FALSE; // DIVERGENCE(OPENNT-HOST-064): record-local notification lifetime.
-#line 2179
-    pConsoleRecord->Next = NULL;
-    pConsoleRecord->cchCurDirs = 0;
-    pConsoleRecord->lpszzCurDirs = NULL;
+
+    RtlZeroMemory(pConsoleRecord, sizeof(CONSOLERECORD));
+
     return pConsoleRecord;
 }
+
 
 VOID BaseSrvFreeConsoleRecord (
     PCONSOLERECORD pConsoleRecord
@@ -2247,7 +3201,6 @@ VOID BaseSrvFreeConsoleRecord (
     BaseSrvRemoveConsoleRecord (pConsoleRecord);
 
     RtlFreeHeap (RtlProcessHeap (), 0, pConsoleRecord );
-
 }
 
 VOID BaseSrvRemoveConsoleRecord (
@@ -2291,15 +3244,14 @@ BaseSrvAllocateDOSRecord(
     if (DOSRecord == NULL)
         return NULL;
 
-    RtlFillMemory ((PVOID)DOSRecord,sizeof(DOSRECORD),'\0');
-
+    RtlZeroMemory ((PVOID)DOSRecord,sizeof(DOSRECORD));    
     return DOSRecord;
 }
 
 VOID BaseSrvFreeDOSRecord (
     PDOSRECORD pDOSRecord
     )
-{
+{    
     BaseSrvFreeVDMInfo (pDOSRecord->lpVDMInfo);
     RtlFreeHeap(RtlProcessHeap (), 0, pDOSRecord);
     return;
@@ -2375,6 +3327,14 @@ BaseSrvFreeVDMInfo(
     if (lpVDMInfo->CmdLine)
         RtlFreeHeap(RtlProcessHeap (), 0,lpVDMInfo->CmdLine);
 
+    if (lpVDMInfo->AppName) {
+       RtlFreeHeap(RtlProcessHeap (), 0, lpVDMInfo->AppName);
+    }
+
+    if (lpVDMInfo->PifFile) {
+       RtlFreeHeap(RtlProcessHeap (), 0, lpVDMInfo->PifFile);
+    }
+
     if(lpVDMInfo->Enviornment)
         RtlFreeHeap(RtlProcessHeap (), 0,lpVDMInfo->Enviornment);
 
@@ -2421,7 +3381,7 @@ HANDLE *ClientHandle;
                             *ServerHandle,
                             t->Process->ProcessHandle,
                             ClientHandle,
-                            (ACCESS_MASK)NULL,
+                            0,
                             FALSE,
                             DUPLICATE_SAME_ACCESS
                          );
@@ -2436,13 +3396,23 @@ HANDLE *ClientHandle;
 }
 
 
+// generate global task id
+//
+// The handling of a task id should be redone wrt the user notification
+// private apis
+// note that wow task id is never 0 or (ULONG)-1
+//
+
+
 
 ULONG
 BaseSrvGetWOWTaskId(
-    VOID
+   PSHAREDWOWRECORDHEAD pSharedWowHead // (->pSharedWowRecord)
     )
 {
     PWOWRECORD pWOWRecord;
+    PSHAREDWOWRECORD pSharedWow = pSharedWowHead->pSharedWowRecord;
+
     static BOOL fWrapped = FALSE;
 
     if (WOWTaskIdNext == WOWMAXID) {
@@ -2450,32 +3420,43 @@ BaseSrvGetWOWTaskId(
         WOWTaskIdNext = WOWMINID;
     }
 
-    if (fWrapped && WOWHead != NULL) {
-        pWOWRecord = WOWHead->WOWRecord;
-        while (pWOWRecord) {
-            if (pWOWRecord->iTask == WOWTaskIdNext) {
-                WOWTaskIdNext++;
-                if (WOWTaskIdNext == WOWMAXID) {
-                    WOWTaskIdNext = WOWMINID;
+    if (fWrapped && NULL != pSharedWow) {
+       while (NULL != pSharedWow) {
+
+#if 0
+#error Excluded unsupported original configuration
+#endif
+#line 3433
+
+          // examine all the records for this wow
+
+          pWOWRecord = pSharedWow->pWOWRecord;
+          while (NULL != pWOWRecord) {
+
+             if (pWOWRecord->iTask == WOWTaskIdNext) {
+                if (WOWMAXID == ++WOWTaskIdNext) {
+                   WOWTaskIdNext = WOWMINID;
                 }
-                pWOWRecord = WOWHead->WOWRecord;
-            } else {
-                pWOWRecord = pWOWRecord->WOWRecordNext;
-            }
-        }
+
+                break; // we are breaking out => (pWOWRecord != NULL)
+             }
+
+             pWOWRecord = pWOWRecord->WOWRecordNext;
+          }
+
+
+          if (NULL == pWOWRecord) { // id is ok for this wow -- check the next wow
+             pSharedWow = pSharedWow->pNextSharedWow;
+          }
+          else {
+             pSharedWow = pSharedWowHead->pSharedWowRecord;
+          }
+       }
     }
 
     return WOWTaskIdNext++;
 }
 
-
-#line 2426
-#ifdef NOT_NEEDED
-#line 2427
-#error DIVERGENCE OPENNT-HOST-131: NOT_NEEDED branch is not selected; see mirror register.
-#line 2452
-#endif
-#line 2453
 
 VOID
 BaseSrvAddConsoleRecord(
@@ -2500,7 +3481,7 @@ VOID BaseSrvCloseStandardHandles (HANDLE hVDM, PDOSRECORD pDOSRecord)
                            pVDMInfo->StdIn,
                            NULL,
                            NULL,
-                           (ACCESS_MASK)NULL,
+                           0,
                            0,
                            DUPLICATE_CLOSE_SOURCE);
 
@@ -2509,7 +3490,7 @@ VOID BaseSrvCloseStandardHandles (HANDLE hVDM, PDOSRECORD pDOSRecord)
                            pVDMInfo->StdOut,
                            NULL,
                            NULL,
-                           (ACCESS_MASK)NULL,
+                           0,
                            0,
                            DUPLICATE_CLOSE_SOURCE);
 
@@ -2518,7 +3499,7 @@ VOID BaseSrvCloseStandardHandles (HANDLE hVDM, PDOSRECORD pDOSRecord)
                            pVDMInfo->StdErr,
                            NULL,
                            NULL,
-                           (ACCESS_MASK)NULL,
+                           0,
                            0,
                            DUPLICATE_CLOSE_SOURCE);
 
@@ -2542,7 +3523,7 @@ VOID BaseSrvClosePairWaitHandles (PDOSRECORD pDOSRecord)
                            pDOSRecord->hWaitForParent,
                            NULL,
                            NULL,
-                           (ACCESS_MASK)NULL,
+                           0,
                            0,
                            DUPLICATE_CLOSE_SOURCE);
 
@@ -2550,6 +3531,7 @@ VOID BaseSrvClosePairWaitHandles (PDOSRECORD pDOSRecord)
     pDOSRecord->hWaitForParent = 0;
     return;
 }
+
 
 ULONG
 BaseSrvSetReenterCount (
@@ -2574,8 +3556,8 @@ BaseSrvSetReenterCount (
         pConsoleRecord->nReEntrancy++;
     else {
         pConsoleRecord->nReEntrancy--;
-        pConsoleRecord->ReenterCompletionPending = TRUE; // DIVERGENCE(OPENNT-HOST-064): the next eligible Get consumes this notification.
-#line 2551
+        pConsoleRecord->ReenterCompletionPending = TRUE;
+#line 3562
         if(pConsoleRecord->hWaitForVDMDup)
            NtSetEvent (pConsoleRecord->hWaitForVDMDup,NULL);
         }
@@ -2584,11 +3566,11 @@ BaseSrvSetReenterCount (
     return TRUE;
 }
 
-
 /*
  *  Spawn of ntvdm failed before CreateProcessW finished.
  *  delete the console record.
  */
+
 
 VOID
 BaseSrvVDMTerminated (
@@ -2614,63 +3596,118 @@ BaseSrvVDMTerminated (
 
 }
 
-
-VOID
+NTSTATUS
 BaseSrvUpdateVDMSequenceNumber (
-    IN HANDLE hVDM,
-    IN ULONG  VDMSequenceNumber,
-    IN ULONG  DosSesId
+    IN ULONG  VdmBinaryType,    // binary type
+    IN HANDLE hVDM,             // console handle
+    IN ULONG  DosSesId,         // session id
+    IN HANDLE UniqueProcessClientID // client id
     )
 
 {
     NTSTATUS Status;
-    PCONSOLERECORD pConsoleRecord;
+    PCSR_PROCESS ProcessVDM;
 
-    if (hVDM == (HANDLE) -1) {
-        if (WOWHead == NULL || WOWHead->SequenceNumber != 0) {
+    // so how do we know what to update ?
+    // this condition is always true: (hvdm ^ DosSesId)
+    // hence since shared wow
+
+    // sequence numbers are important -- hence we need to acquire
+    // a wow critical section -- does not hurt -- this op performed once
+    // during the new wow creation
+
+    if (IS_SHARED_WOW_BINARY(VdmBinaryType)) {
+
+       PSHAREDWOWRECORD pSharedWowRecord;
+
+       Status = ENTER_WOW_CRITICAL();
+       ASSERT(NT_SUCCESS(Status));
+
+       // this looks like a shared wow binary -- hence locate the
+       // appropriate vdm either by hvdm or by dos session id
+       if (!hVDM) { // search by console handle
+          Status = BaseSrvFindSharedWowRecordByConsoleHandle(&gWowHead,
+                                                             hVDM,
+                                                             &pSharedWowRecord);
+       }
+       else { // search by the task id
+          Status = BaseSrvFindSharedWowRecordByTaskId(&gWowHead,
+                                                      DosSesId,
+                                                      &pSharedWowRecord,
+                                                      NULL);
+       }
+
+       if (NT_SUCCESS(Status) && 0 == pSharedWowRecord->SequenceNumber) {
+
+          // now obtain a sequence number please
+          Status = CsrLockProcessByClientId(UniqueProcessClientID,
+                                            &ProcessVDM);
+          if (NT_SUCCESS(Status)) {
+              ProcessVDM->fVDM = TRUE;
+              pSharedWowRecord->SequenceNumber = ProcessVDM->SequenceNumber;
+              pSharedWowRecord->ParentSequenceNumber = 0; 
+              CsrUnlockProcess(ProcessVDM);                    
+          } else {
+              // The spawned ntvdm.exe went away, give up.
+              BaseSrvDeleteSharedWowRecord(&gWowHead,pSharedWowRecord);
+          }
+
+       }
+       else {
 #if DEVL
-#line 2604
-#error Unsupported excluded original configuration
-#line 2605
+#error Excluded unsupported original configuration
 #endif
-#line 2606
-            return;
-        }
-        WOWHead->SequenceNumber = VDMSequenceNumber;
-        return;
+#line 3661
+       }
+
+       LEAVE_WOW_CRITICAL();
     }
-    else {
-        Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
-        ASSERT( NT_SUCCESS( Status ) );
+    else {   // not shared wow binary
+       PCONSOLERECORD pConsoleRecord;
 
-        if (!hVDM)  // no-console-handle case
-           Status = GetConsoleRecordDosSesId(DosSesId,&pConsoleRecord);
-        else
-           Status = BaseSrvGetConsoleRecord(hVDM,&pConsoleRecord);
+       Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
+       ASSERT( NT_SUCCESS( Status ) );
 
-        if (!NT_SUCCESS (Status) || pConsoleRecord->SequenceNumber != 0) {
+       if (!hVDM)  // no-console-handle case
+          Status = GetConsoleRecordDosSesId(DosSesId,&pConsoleRecord);
+       else
+          Status = BaseSrvGetConsoleRecord(hVDM,&pConsoleRecord);
+
+       if (NT_SUCCESS (Status) && 0 == pConsoleRecord->SequenceNumber) {
+          Status = CsrLockProcessByClientId(UniqueProcessClientID,
+                                         &ProcessVDM);
+          if (NT_SUCCESS(Status)) {
+             ProcessVDM->fVDM = TRUE;
+             pConsoleRecord->SequenceNumber = ProcessVDM->SequenceNumber;
+             pConsoleRecord->ParentSequenceNumber = 0;
+             CsrUnlockProcess(ProcessVDM);
+          }
+          // The spawned ntvdm.exe went away, give up.
+          // The caller BasepCreateProcess will clean up dos records, so we don't need to here.
+          // else  
+          //     BaseSrvExitVdmWorker(pConsoleRecord);
+
+       }
+       else {
 #if DEVL
-#line 2622
-#error Unsupported excluded original configuration
-#line 2623
+#error Excluded unsupported original configuration
 #endif
-#line 2624
-            RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-            return;
-        }
+#line 3695
+       }
 
-        pConsoleRecord->SequenceNumber = VDMSequenceNumber;
-        RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-    }
-    return;
+       RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
+   }
+   return Status;
 }
 
+
 VOID
-BaseSrvCleanupVDMResources (
+BaseSrvCleanupVDMResources (   //////// BUGBUGBUGBUG
     IN PCSR_PROCESS Process
     )
 {
     PCONSOLERECORD pConsoleHead;
+    PSHAREDWOWRECORD pSharedWowRecord;
     NTSTATUS Status;
     PBATRECORD pBatRecord;
 
@@ -2685,25 +3722,38 @@ BaseSrvCleanupVDMResources (
         if (pBatRecord)
             BaseSrvFreeAndRemoveBatRecord(pBatRecord);
         RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
-        return;
     }
+    
+    // search all the shared wow's
 
-    // Test WOW Head first
-    Status = RtlEnterCriticalSection( &BaseSrvWOWCriticalSection );
-    ASSERT( NT_SUCCESS( Status ) );
-    if (WOWHead) {
-        if (WOWHead->SequenceNumber == Process->SequenceNumber){
-            BaseSrvRemoveWOWRecordByITask((ULONG)-1);
-            hwndWowExec = NULL;
-            dwWowExecThreadId = dwWowExecProcessId = 0;
-            ulWowExecProcessSequenceNumber = 0;
-            RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
-            return;
+    Status = ENTER_WOW_CRITICAL();
+    ASSERT(NT_SUCCESS(Status));
+    
+    pSharedWowRecord = gWowHead.pSharedWowRecord;
+
+    while (pSharedWowRecord) {
+        if (pSharedWowRecord->SequenceNumber == Process->SequenceNumber) {
+           BaseSrvDeleteSharedWowRecord(&gWowHead, pSharedWowRecord);
+           break;
         }
+        else
+           pSharedWowRecord = pSharedWowRecord->pNextSharedWow;
     }
-    RtlLeaveCriticalSection( &BaseSrvWOWCriticalSection );
+    
+    pSharedWowRecord = gWowHead.pSharedWowRecord;
 
-    // Test all DOS Heads
+    while (pSharedWowRecord) {
+        if (pSharedWowRecord->ParentSequenceNumber == Process->SequenceNumber) {
+           BaseSrvDeleteSharedWowRecord(&gWowHead, pSharedWowRecord);
+           break;
+        }
+        else
+           pSharedWowRecord = pSharedWowRecord->pNextSharedWow;
+    }
+
+    LEAVE_WOW_CRITICAL();
+
+    // search all the dos's and separate wow's
 
     Status = RtlEnterCriticalSection( &BaseSrvDOSCriticalSection );
     ASSERT(NT_SUCCESS(Status));
@@ -2711,13 +3761,24 @@ BaseSrvCleanupVDMResources (
     pConsoleHead = DOSHead;
 
     while (pConsoleHead) {
-        if (pConsoleHead->SequenceNumber == Process->SequenceNumber){
+        if (pConsoleHead->SequenceNumber == Process->SequenceNumber){                
             BaseSrvExitVDMWorker (pConsoleHead);
             break;
         }
         else
             pConsoleHead = pConsoleHead->Next;
     }
+
+    pConsoleHead = DOSHead;
+
+    while (pConsoleHead) {
+        if (pConsoleHead->ParentSequenceNumber == Process->SequenceNumber){                    
+            BaseSrvExitVDMWorker (pConsoleHead);
+            break;
+        }
+        else
+            pConsoleHead = pConsoleHead->Next;
+    }    
 
     RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
     return;
@@ -2745,8 +3806,8 @@ BaseSrvExitVDMWorker (
             pDOSRecord->hWaitForParentDup = 0;
         }
         pDOSRecord = pDOSRecord->DOSRecordNext;
-    }
-    NtClose(pConsoleRecord->hVDM);
+    }    
+    NtClose(pConsoleRecord->hVDM);   
     BaseSrvFreeConsoleRecord (pConsoleRecord);
     return;
 }
@@ -2953,6 +4014,31 @@ IsClientSystem(
     return (fSystem);
 }
 
+/* DIVERGENCE(OPENNT-HOST-031): query the original command-wait event. */
+BOOL
+BaseSrvDOSWorkerWaitPending(
+    IN HANDLE ConsoleHandle,
+    OUT PBOOL ConsoleRecordExists
+    )
+{
+    NTSTATUS Status;
+    PCONSOLERECORD pConsoleRecord;
+    EVENT_BASIC_INFORMATION EventInformation;
+    BOOL Pending = FALSE;
+
+    Status = RtlEnterCriticalSection(&BaseSrvDOSCriticalSection);
+    ASSERT(NT_SUCCESS(Status));
+    Status = BaseSrvGetConsoleRecord(ConsoleHandle,&pConsoleRecord);
+    *ConsoleRecordExists = NT_SUCCESS(Status);
+    if (*ConsoleRecordExists && pConsoleRecord->hWaitForVDMDup) {
+        Status = NtQueryEvent(pConsoleRecord->hWaitForVDMDup, EventBasicInformation,
+                              &EventInformation, sizeof(EventInformation), NULL);
+        Pending = NT_SUCCESS(Status) && !EventInformation.EventState;
+    }
+    RtlLeaveCriticalSection(&BaseSrvDOSCriticalSection);
+    return Pending;
+}
+
 /* DIVERGENCE(NON-MVDM-DIV-PROCESS-VIEW): original record layout provider. */
 #include "compat/include/base_process.h"
 static PCSR_PROCESS BaseProcessRecord(LIST_ENTRY *entry)
@@ -2966,4 +4052,32 @@ static void BaseProcessView(PCSR_PROCESS process, OPENNT_BASE_PROCESS_VIEW *view
     view->handle=&process->ProcessHandle;
     view->sequence=&process->SequenceNumber;
 }
-const OPENNT_BASE_PROCESS_PROVIDER BaseProcessProvider = {BaseProcessRecord, BaseProcessView};
+static BOOL BaseThreadView(PCSR_THREAD thread, HANDLE *process, ULONG **count)
+{
+    if(!thread || !thread->Process)return FALSE;
+    *process=thread->Process->ProcessHandle;
+    *count=&thread->ImpersonateCount;
+    return TRUE;
+}
+static void BaseMessageView(const CSR_API_MSG *message, OPENNT_BASE_MESSAGE_VIEW *view)
+{
+    view->caller=message->h.ClientId.UniqueProcess;
+    view->capture=message->CaptureBuffer;
+    if(message->CaptureBuffer) {
+        view->length=message->CaptureBuffer->Length;
+        view->count=message->CaptureBuffer->CountMessagePointers;
+        view->offsets=message->CaptureBuffer->MessagePointerOffsets;
+    }
+}
+const OPENNT_BASE_PROCESS_PROVIDER BaseProcessProvider = {
+    BaseProcessRecord, BaseProcessView, BaseThreadView, BaseMessageView
+};
+
+/* Caller holds BaseSrvWOWCriticalSection; XP records remain the lifetime owner. */
+PSHAREDWOWRECORD BaseSrvFindSharedWowBySequence(ULONG sequence)
+{
+    PSHAREDWOWRECORD record;
+    for (record=gWowHead.pSharedWowRecord;record;record=record->pNextSharedWow)
+        if (record->SequenceNumber==sequence) return record;
+    return NULL;
+}

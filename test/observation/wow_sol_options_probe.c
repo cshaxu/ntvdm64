@@ -216,7 +216,13 @@ static UINT options_command(HWND window)
     int outer;
     if (!top) return 0;
     for (outer = 0; outer < GetMenuItemCount(top); ++outer) {
+        WCHAR caption[128] = L"", plain[128] = L"";
+        unsigned source, target = 0;
         HMENU popup = GetSubMenu(top, (int)outer);
+        GetMenuStringW(top, outer, caption, ARRAYSIZE(caption), MF_BYPOSITION);
+        for (source = 0; caption[source] && target + 1 < ARRAYSIZE(plain); ++source)
+            if (caption[source] != L'&') plain[target++] = caption[source];
+        if (_wcsicmp(plain, L"Game")) continue;
         int item;
         if (!popup) continue;
         for (item = 0; item < GetMenuItemCount(popup); ++item) {
@@ -397,6 +403,13 @@ static int probe_active_sol(DWORD pid, HDESK desktop)
         report_stalled_worker(owner_pid);
         return 8;
     }
+    if (GetWindow(option_dialog, GW_OWNER) != game_window ||
+        !GetDlgItem(option_dialog, IDOK) || !GetDlgItem(option_dialog, IDCANCEL) ||
+        IsWindowEnabled(game_window)) {
+        printf("SOL options: incorrect owner, settings buttons or modal state\n");
+        return 8;
+    }
+    printf("SOL options: Game > Options visible; owner and OK/Cancel controls verified\n");
     shown = GetTickCount64();
     if (clock_sampling) printf("SOL profile: shown=%llu\n", (unsigned long long)shown);
     cpu_shown_ok = worker_cpu_time(process, &cpu_shown);
