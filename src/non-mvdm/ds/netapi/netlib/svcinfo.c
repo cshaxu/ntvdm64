@@ -88,7 +88,7 @@ NetpServiceStructureInfo (
 {
     LPDESC LocalDataDesc16, LocalDataDesc32, LocalDataDescSmb;
 
-    DBG_UNREFERENCED_PARAMETER(ParmNum);// BUGBUG use this eventually.
+    DBG_UNREFERENCED_PARAMETER(ParmNum);
 
     //
     // Decide what to do based on the info level.

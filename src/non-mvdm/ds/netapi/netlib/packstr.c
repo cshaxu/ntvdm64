@@ -46,7 +46,7 @@ Revision History:
 #include <windef.h>     // IN, OUT, etc.
 #include <lmcons.h>     // Needed by <netlib.h>.
 #include <lmerr.h>      // NERR_*
-#line 50
+#include <rpcutil.h>    // MIDL_user_allocate & MIDL_user_free
 
 // These may be included in any order:
 
@@ -373,8 +373,7 @@ Return Value:
                (Alignment == 4) || (Alignment == 8));
 
     NewEndOfVariableData = (LPBYTE)
-        ( ((DWORD)(*EndOfVariableData - ByteCount)) &
-        (0xFFFFFFFF - (Alignment - 1)));
+        (((DWORD_PTR)(*EndOfVariableData - ByteCount)) & ~((LONG)Alignment - 1));
 
     //
     // If the data doesn't fit into the buffer, error out
@@ -406,4 +405,342 @@ Return Value:
 } // NetpCopyDataToBuffer
 
 
-#line 670
+NET_API_STATUS
+NetpAllocateEnumBuffer(
+    IN OUT PBUFFER_DESCRIPTOR BufferDescriptor,
+    IN BOOL IsGet,
+    IN DWORD PrefMaxSize,
+    IN DWORD NeededSize,
+    IN VOID (*RelocationRoutine)( IN DWORD RelocationParameter,
+                                  IN OUT PBUFFER_DESCRIPTOR BufferDescriptor,
+                                  IN PTRDIFF_T Offset ),
+    IN DWORD RelocationParameter
+    )
+
+/*++
+
+Routine Description:
+
+    Ensures a buffer is allocated which contains the needed size.
+
+Arguments:
+
+    BufferDescriptor - Points to a structure which describes the allocated
+        buffer.  On the first call, pass in BufferDescriptor->Buffer set
+        to NULL.  On subsequent calls (in the 'enum' case), pass in the
+        structure just as it was passed back on a previous call.
+
+        The caller must deallocate the BufferDescriptor->Buffer using
+        MIDL_user_free if it is non-null.
+
+    IsGet - TRUE iff this is a 'get' rather than an 'enum' operation.
+
+    PrefMaxSize - Callers prefered maximum size
+
+    NeededSize - the number of bytes which must be available in the allocated
+        buffer.
+
+    RelocationRoutine - Supplies a pointer to a routine that will be called
+        when the buffer needs to be relocated.  The routine is called with
+        both the fixed portion and the strings already copied.  Merely,
+        the pointers to the strings need to be adjusted.
+
+        The 'Offset' parameter to the relocation routine merely needs to
+        be added to the each pointer within the allocated buffer which points
+        to a place within the allocated buffer.  It is a byte-offset.  This
+        design depends on a 'flat' address space where the addresses of two
+        unrelated pointers can simply be subtracted.
+
+    RelocationParameter - Supplies a parameter which will (in turn) be passed
+        to the relocation routine.
+
+Return Value:
+
+    Error code for the operation.
+
+    If this is an Enum call, the status can be ERROR_MORE_DATA implying that
+    the Buffer has grown to PrefMaxSize and that this much data should
+    be returned to the caller.
+
+--*/
+
+{
+    return NetpAllocateEnumBufferEx(
+                            BufferDescriptor,
+                            IsGet,
+                            PrefMaxSize,
+                            NeededSize,
+                            RelocationRoutine,
+                            RelocationParameter,
+                            NETP_ENUM_GUESS );
+}
+
+
+NET_API_STATUS
+NetpAllocateEnumBufferEx(
+    IN OUT PBUFFER_DESCRIPTOR BufferDescriptor,
+    IN BOOL IsGet,
+    IN DWORD PrefMaxSize,
+    IN DWORD NeededSize,
+    IN VOID (*RelocationRoutine)( IN DWORD RelocationParameter,
+                                  IN OUT PBUFFER_DESCRIPTOR BufferDescriptor,
+                                  IN PTRDIFF_T Offset ),
+    IN DWORD RelocationParameter,
+    IN DWORD IncrementalSize
+    )
+
+/*++
+
+Routine Description:
+
+    Ensures a buffer is allocated which contains the needed size.
+
+Arguments:
+
+    BufferDescriptor - Points to a structure which describes the allocated
+        buffer.  On the first call, pass in BufferDescriptor->Buffer set
+        to NULL.  On subsequent calls (in the 'enum' case), pass in the
+        structure just as it was passed back on a previous call.
+
+        The caller must deallocate the BufferDescriptor->Buffer using
+        MIDL_user_free if it is non-null.
+
+    IsGet - TRUE iff this is a 'get' rather than an 'enum' operation.
+
+    PrefMaxSize - Callers prefered maximum size
+
+    NeededSize - the number of bytes which must be available in the allocated
+        buffer.
+
+    RelocationRoutine - Supplies a pointer to a routine that will be called
+        when the buffer needs to be relocated.  The routine is called with
+        both the fixed portion and the strings already copied.  Merely,
+        the pointers to the strings need to be adjusted.
+
+        The 'Offset' parameter to the relocation routine merely needs to
+        be added to the each pointer within the allocated buffer which points
+        to a place within the allocated buffer.  It is a byte-offset.  This
+        design depends on a 'flat' address space where the addresses of two
+        unrelated pointers can simply be subtracted.
+
+    RelocationParameter - Supplies a parameter which will (in turn) be passed
+        to the relocation routine.
+
+    IncrementalSize - Mimimum number of bytes to extend the buffer by when it
+        needs extending.
+
+Return Value:
+
+    Error code for the operation.
+
+    If this is an Enum call, the status can be ERROR_MORE_DATA implying that
+    the Buffer has grown to PrefMaxSize and that this much data should
+    be returned to the caller.
+
+--*/
+
+{
+        NET_API_STATUS NetStatus;
+    PBUFFER_DESCRIPTOR Desc = BufferDescriptor;
+
+    IF_DEBUG(PACKSTR) {
+        NetpKdPrint((
+            "NetpAllocateEnumBuffer: Isget: " FORMAT_DWORD " PrefMaxSize: "
+            FORMAT_HEX_DWORD " NeededSize: " FORMAT_HEX_DWORD "\n",
+            IsGet, PrefMaxSize, NeededSize ));
+
+        NetpKdPrint((
+            "+BufferDescriptor: Buffer: " FORMAT_HEX_DWORD " AllocSize: "
+            FORMAT_HEX_DWORD " AllocIncr: " FORMAT_HEX_DWORD "\n",
+            Desc->Buffer, Desc->AllocSize, Desc->AllocIncrement ));
+        NetpKdPrint(( "                  variable: " FORMAT_HEX_DWORD " Fixed:"
+            FORMAT_HEX_DWORD "\n",
+            Desc->EndOfVariableData, Desc->FixedDataEnd ));
+    }
+
+    //
+    // If this is not a resume, initialize a buffer descriptor.
+    //
+
+    if ( Desc->Buffer == NULL ) {
+
+        //
+        // Allocate the return buffer.
+        //
+        // If this is a Getinfo call, allocate the buffer the correct size.
+        //
+        // If the is an Enum call, this is an initial allocation which
+        // might be reallocated later if this size isn't big enough.
+        // The initial allocation is the user's prefered maximum
+        // length unless that length is deemed to be very large.
+        // In that case we allocate a good sized buffer and will
+        // reallocate later as needed.
+        //
+
+        if ( IsGet ) {
+
+            Desc->AllocSize = NeededSize;
+
+        } else {
+
+            if ( PrefMaxSize < NeededSize ) {
+                NetStatus = NERR_BufTooSmall;
+                goto Cleanup;
+            }
+
+            Desc->AllocSize = min(PrefMaxSize, IncrementalSize);
+            Desc->AllocSize = max(NeededSize, Desc->AllocSize );
+
+        }
+
+        // Some callers pack data on that top end of this buffer so
+        // ensure the buffer size allows for proper alignment.
+        Desc->AllocSize = ROUND_UP_COUNT( Desc->AllocSize, ALIGN_WORST );
+
+        Desc->AllocIncrement = Desc->AllocSize;
+        IF_DEBUG(PACKSTR) {
+            NetpKdPrint((" Allocated size : " FORMAT_HEX_DWORD "\n",
+                Desc->AllocSize ));
+        }
+
+        Desc->Buffer = MIDL_user_allocate(Desc->AllocSize);
+
+        if (Desc->Buffer == NULL) {
+            NetStatus = ERROR_NOT_ENOUGH_MEMORY;
+            goto Cleanup;
+        }
+
+        IF_DEBUG(PACKSTR) {
+            NetpKdPrint((" Allocated: " FORMAT_HEX_DWORD "\n", Desc->Buffer ));
+        }
+
+        Desc->FixedDataEnd = Desc->Buffer;
+        Desc->EndOfVariableData = Desc->Buffer + Desc->AllocSize;
+
+    //
+    // If this is a resume, get the buffer descriptor that the caller passed in.
+    //
+
+    } else {
+
+        //
+        // If the entry doesn't fit, reallocate a larger return buffer
+        //
+
+        if ((DWORD)(Desc->EndOfVariableData - Desc->FixedDataEnd) < NeededSize){
+
+            BUFFER_DESCRIPTOR OldDesc;
+            DWORD FixedSize;        // Total size of the fixed data
+            DWORD StringSize;       // Total size of the string data
+
+            //
+            // If the buffer is as big as is allowed,
+            //      we're all done for now.
+            //
+
+            if ( Desc->AllocSize >= PrefMaxSize ) {
+                NetStatus = ERROR_MORE_DATA;
+                goto Cleanup;
+            }
+
+
+            //
+            // Allocate a larger return buffer.
+            //
+
+            OldDesc = *Desc;
+
+            Desc->AllocSize += max( NeededSize, Desc->AllocIncrement );
+            Desc->AllocSize = min( Desc->AllocSize, PrefMaxSize );
+            Desc->AllocSize = ROUND_UP_COUNT( Desc->AllocSize, ALIGN_WORST );
+            IF_DEBUG(PACKSTR) {
+                NetpKdPrint(("Re-Allocated size : " FORMAT_HEX_DWORD "\n",
+                    Desc->AllocSize ));
+            }
+            Desc->Buffer = MIDL_user_allocate( Desc->AllocSize );
+
+            if ( Desc->Buffer == NULL ) {
+                MIDL_user_free( OldDesc.Buffer );
+                NetStatus = ERROR_NOT_ENOUGH_MEMORY;
+                goto Cleanup;
+            }
+            IF_DEBUG(PACKSTR) {
+                NetpKdPrint(("ReAllocated: " FORMAT_HEX_DWORD "\n",
+                             Desc->Buffer ));
+            }
+
+            //
+            // Copy the fixed length portion of the data to the new buffer
+            //
+
+            FixedSize = (DWORD)(OldDesc.FixedDataEnd - OldDesc.Buffer);
+
+            RtlCopyMemory( Desc->Buffer,
+                            OldDesc.Buffer,
+                            FixedSize );
+
+            Desc->FixedDataEnd = Desc->Buffer + FixedSize ;
+
+            //
+            // Copy the string portion of the data to the new buffer
+            //
+
+            StringSize = OldDesc.AllocSize -
+                                (DWORD)(OldDesc.EndOfVariableData - OldDesc.Buffer);
+
+            Desc->EndOfVariableData = Desc->Buffer + Desc->AllocSize - StringSize;
+
+            RtlCopyMemory( Desc->EndOfVariableData, OldDesc.EndOfVariableData, StringSize );
+
+            //
+            // Callback to allow the pointers into the string data to be
+            // relocated.
+            //
+            // The callback routine merely needs to add the value I pass it
+            // to all of the pointers from the fixed area to the string area.
+            //
+
+            (*RelocationRoutine)(
+                    RelocationParameter,
+                    Desc,
+                    (Desc->EndOfVariableData - OldDesc.EndOfVariableData) );
+
+            //
+            // Free the old buffer.
+            //
+
+            MIDL_user_free( OldDesc.Buffer );
+        }
+    }
+
+    NetStatus = NERR_Success;
+
+    //
+    // Clean up
+    //
+
+Cleanup:
+    //
+    //
+    //
+
+    if ( NetStatus != NERR_Success && NetStatus != ERROR_MORE_DATA &&
+        Desc->Buffer != NULL ) {
+
+        MIDL_user_free (Desc->Buffer );
+        Desc->Buffer = NULL;
+    }
+
+    IF_DEBUG(PACKSTR) {
+        NetpKdPrint((
+            "BufferDescriptor: Buffer: " FORMAT_HEX_DWORD " AllocSize: "
+            FORMAT_HEX_DWORD " AllocIncr: " FORMAT_HEX_DWORD "\n",
+            Desc->Buffer, Desc->AllocSize, Desc->AllocIncrement ));
+        NetpKdPrint(( "                  variable: " FORMAT_HEX_DWORD " Fixed:"
+            FORMAT_HEX_DWORD "\n",
+            Desc->EndOfVariableData, Desc->FixedDataEnd ));
+    }
+
+    return NetStatus;
+
+} // NetpAllocateEnumBuffer

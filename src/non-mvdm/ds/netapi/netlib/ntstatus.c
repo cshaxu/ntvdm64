@@ -52,6 +52,9 @@ Revision History:
 #include <ntstatus.h>           // STATUS_ equates.
 #include <ntrtl.h>
 
+#ifdef WIN32_CHICAGO
+#include "ntcalls.h"
+#endif // WIN32_CHICAGO
 
 NET_API_STATUS
 NetpNtStatusToApiStatus (
@@ -78,7 +81,11 @@ Return Value:
     NET_API_STATUS error;
 
     IF_DEBUG(NTSTATUS) {
+#ifndef WIN32_CHICAGO
         NetpKdPrint(( "   NT status is " FORMAT_NTSTATUS "\n", NtStatus ));
+#else  // WIN32_CHICAGO
+        NlPrint(( NL_MISC, "   NT status is " FORMAT_NTSTATUS "\n", NtStatus ));
+#endif // WIN32_CHICAGO
     }
 
     //
@@ -183,22 +190,22 @@ Return Value:
             // Use the system routine to do the mapping to ERROR_ codes.
             //
 
+#ifndef WIN32_CHICAGO
+
             error = RtlNtStatusToDosError( NtStatus );
 
             if ( error != (NET_API_STATUS)NtStatus ) {
                 return error;
             }
 
+#endif  // WIN32_CHICAGO
+
             //
             // Could not map the NT status to anything appropriate.
-            // BUGBUG: Write this to the eventlog file
             //
-#line 196
 #if DBG
-#line 197
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif
-#line 199
             return NERR_InternalError;
     }
 
@@ -255,6 +262,7 @@ struct {
     { ERROR_NETNAME_DELETED, STATUS_NETWORK_NAME_DELETED},
     { ERROR_NETWORK_ACCESS_DENIED, STATUS_NETWORK_ACCESS_DENIED},
     { ERROR_NETWORK_BUSY, STATUS_NETWORK_BUSY},
+    { ERROR_NETWORK_UNREACHABLE, STATUS_NETWORK_UNREACHABLE},
     { ERROR_NET_WRITE_FAULT, STATUS_NET_WRITE_FAULT},
     { ERROR_NOACCESS, STATUS_ACCESS_VIOLATION},
     { ERROR_NOT_DOS_DISK, STATUS_DISK_CORRUPT_ERROR},

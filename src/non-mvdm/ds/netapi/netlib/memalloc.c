@@ -246,9 +246,9 @@ Return Value:
                 LMEM_MOVEABLE);                 // OK if new block is in new location
 
         if (hNewMem == NULL) {
-            // BUGBUG: call GetLastError, could be out of memory or error.
             return (NULL);
         }
+
         NewAddress = (LPVOID) hNewMem;
 
 #elif !defined(CDEBUG)  // not WIN32 or CDEBUG, must be NT

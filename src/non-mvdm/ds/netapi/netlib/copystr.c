@@ -60,49 +60,11 @@ Revision History:
 #include <align.h>      // ROUND_UP_POINTER(), ALIGN_WCHAR.
 #include <lmapibuf.h>   // NetApiBufferFree().
 #include <netdebug.h>   // NetpAssert(), etc.
-#include <netlibnt.h>   // NetpCopyStringToTStr() prototype.
 #include <ntrtl.h>      // RtlUnicodeStringToOemString(), etc.
 #include <string.h>     // strlen().
 #include <tstring.h>    // Most of my prototypes.
 #include <stdlib.h>      // wcslen(), wcsncpy().
 #include <winerror.h>   // NO_ERROR, ERROR_NOT_ENOUGH_MEMORY.
-
-
-VOID
-NetpCopyStringToTStr(
-    OUT LPTSTR Dest,
-    IN PSTRING Src
-    )
-{
-    NET_API_STATUS ApiStatus;
-    DWORD CharCount;
-
-    NetpAssert( Dest != NULL );
-    NetpAssert( Src != NULL );
-
-    //
-    // Compute space required.
-    //
-    NetpAssert( ( Src->Length % sizeof(TCHAR) ) == 0 );
-    CharCount = Src->Length / sizeof(TCHAR);
-    NetpAssert( CharCount > 0 );
-
-    //
-    // Copy (and convert if applicable)...
-    //
-    ApiStatus = NetpNCopyStrToTStr(
-            Dest,                       // dest
-            Src->Buffer,                // src (not null terminated)
-            CharCount);                 // number of input chars
-
-    NetpAssert( ApiStatus == NO_ERROR );  // BUGBUG: out of memory?
-
-    //
-    // Null terminate our destination.
-    //
-    Dest[CharCount] = TCHAR_EOS;
-
-} // NetpCopyStringToTStr
 
 
 VOID
@@ -141,16 +103,18 @@ Return Value:
     NetpAssert( ((LPVOID)Dest) != ((LPVOID)Src) );
     NetpAssert( ROUND_UP_POINTER( Src, ALIGN_WCHAR ) == Src );
 
-    // BUGBUG: Do we need this?
     *Dest = '\0';
-
-    // BUGBUG: Do we really need to call NetpInitOemString?
 
     NetpInitOemString(
         & DestAnsi,             // output: struct
         Dest);                  // input: null terminated
 
+    //
     // Tell RTL routines there's enough memory out there.
+    // Note that using a max length in characters is by
+    // design as this is what this routine's callers
+    // expect (the max length should normally be in bytes).
+    //
     DestAnsi.MaximumLength = (USHORT) (wcslen(Src)+1);
 
     RtlInitUnicodeString(
@@ -205,14 +169,12 @@ Return Value:
     NetpAssert( ((LPVOID)Dest) != ((LPVOID)Src) );
     NetpAssert( ROUND_UP_POINTER( Dest, ALIGN_WCHAR ) == Dest );
 
-    // BUGBUG: Do we need this?
     *Dest = L'\0';
 
     NetpInitOemString(
         & SrcAnsi,              // output: struct
         Src);                   // input: null terminated
 
-    // BUGBUG: Do we really need to call RtlInitUnicodeString?
     RtlInitUnicodeString(
         & DestUnicode,          // output: struct
         Dest);                  // input: null terminated
@@ -350,57 +312,6 @@ Return Value:
 
 } // NetpCopyWStrToStr
 
-VOID
-NetpCopyWStrToStrDBCSN(
-    OUT LPSTR  Dest,
-    IN  LPWSTR Src,
-    IN  DWORD  MaxBytesInString
-    )
-
-/*++
-
-Routine Description:
-
-    NetpCopyWStrToStr copies characters from a source string
-    to a destination, converting as it copies them.
-
-Arguments:
-
-    Dest - is an LPSTR indicating where the converted characters are to go.
-        This string will be in the default codepage for the LAN.
-
-    Src - is in LPWSTR indicating the source string.
-
-    MaxBytesInString - indicates the maximum number of bytes to copy
-
-Return Value:
-
-    None.
-
---*/
-
-{
-    NTSTATUS NtStatus;
-    LONG Index;
-
-    NetpAssert( Dest != NULL );
-    NetpAssert( Src != NULL );
-    NetpAssert( ((LPVOID)Dest) != ((LPVOID)Src) );
-    NetpAssert( ROUND_UP_POINTER( Src, ALIGN_WCHAR ) == Src );
-
-    NtStatus = RtlUnicodeToOemN(
-        Dest,                             // Destination string
-        MaxBytesInString-1,               // Destination string length
-        &Index,                           // Last char in translated string
-        Src,                              // Source string
-        wcslen(Src)*sizeof(WCHAR)         // Length of source string
-    );
-
-    Dest[Index] = '\0';
-
-    NetpAssert( NT_SUCCESS(NtStatus) );
-
-} // NetpCopyWStrToStr
 
 ULONG
 NetpUnicodeToDBCSLen(

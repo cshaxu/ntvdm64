@@ -1,0 +1,61 @@
+{
+  "task": "M0 T485 S14 P6 N009",
+  "status": "verified for delivery",
+  "runtime": "build/t485-s14/runtime8",
+  "build_exit": 0,
+  "published_hashes": 26,
+  "targeted": "PASS original packstr",
+  "Full": "24/24 PASS",
+  "files": [
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\allocstr.c",
+      "xp_blob": "5ec1b29a397782d52a7b34754a59d73bd08a2003",
+      "sha256": "11d85eee506dd9a82667bc3a2caf677ce3d54aa7debaa9b69b4daa2bfa7684c5"
+    },
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\copystr.c",
+      "xp_blob": "98110fa236ab22c77633e6517fe6beb7282964e7",
+      "sha256": "fe654406b1a0babee2ac96091d4c564fa5cdd605457a531d1c8bd03653593132"
+    },
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\initoem.c",
+      "xp_blob": "e65a0ec8aff26c1dc1fa4841f39ede678912117c",
+      "sha256": "b158a597512ce6210d7ba4df6e321625323db4bf35bac4f5fba37981e34bd102"
+    },
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\memalloc.c",
+      "xp_blob": "bbcc7aa896278aa000c78c3718f8c0793c2ab0ed",
+      "sha256": "95fc0653b6eee31375f51acb7f9f3ff7d4da770d00d6d9b24ff93a8db8276778"
+    },
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\ntstatus.c",
+      "xp_blob": "2d01daa1422d33592bafb7f67d3bc9c7f3edaf65",
+      "sha256": "73cbb55e5a125ec1ef726fa704269508b47898e028e9d3dce4089bbd8aff090b"
+    },
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\packstr.c",
+      "xp_blob": "3fdfac4daaa10e7f4638ede403c58f226abc9875",
+      "sha256": "714b9a6fbd56bb6492ce0b1baf170de14cf6586ef9ca845cfac7285b13962d5d"
+    },
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\svcinfo.c",
+      "xp_blob": "f1151d2e4a3024b6c84f0d3e037cebeb326ce881",
+      "sha256": "a442514c2ffce9d2f6c46ea8af6817a376a703434d209d01778b364cdda70014"
+    },
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\time.c",
+      "xp_blob": "5277d9c9a6c1d5e2e72c7345b88ce61f23079133",
+      "sha256": "9df6c7c7d832e0b589e05aca97b33f49aed36af6691286c4332b0dc00361581c"
+    },
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\timezone.c",
+      "xp_blob": "332bda43cc7f172098bd915224a712c0126a54ea",
+      "sha256": "7ae51fdb00dcfbbfa8334bd2a7830cde309e6d5c6259451c1eb3e303bde249e2"
+    },
+    {
+      "file": "src\\non-mvdm\\ds\\netapi\\netlib\\xlatesvc.c",
+      "xp_blob": "9bb18250189c549ad583bb89024c62a1cad2dc6c",
+      "sha256": "ffea5c6a324ce7c067a94b653e409468c1cd89d6f352a3fd28be1c68cf9e701e"
+    }
+  ]
+}

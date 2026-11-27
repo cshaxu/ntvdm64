@@ -1,0 +1,130 @@
+[
+  {
+    "file": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+    "reference": "OpenNT; later header batch remains open",
+    "before": {
+      "points": 1,
+      "lines": 1098,
+      "exclusions": [
+        {
+          "original": [
+            113,
+            115
+          ],
+          "current_error": 113,
+          "guard": "#ifdef CDEBUG                   // Debug in ANSI C environment?"
+        },
+        {
+          "original": [
+            120,
+            120
+          ],
+          "current_error": 120,
+          "guard": "#ifdef __cplusplus"
+        },
+        {
+          "original": [
+            203,
+            212
+          ],
+          "current_error": 203,
+          "guard": "#ifdef CDEBUG"
+        },
+        {
+          "original": [
+            394,
+            394
+          ],
+          "current_error": 387,
+          "guard": "#if defined(lint) || defined(_lint)"
+        },
+        {
+          "original": [
+            560,
+            560
+          ],
+          "current_error": 553,
+          "guard": "#ifdef __cplusplus"
+        }
+      ]
+    },
+    "after": {
+      "points": 5,
+      "lines": 18,
+      "exclusions": [
+        {
+          "original": [
+            113,
+            115
+          ],
+          "current_error": 113,
+          "guard": "#ifdef CDEBUG                   // Debug in ANSI C environment?"
+        },
+        {
+          "original": [
+            120,
+            120
+          ],
+          "current_error": 120,
+          "guard": "#ifdef __cplusplus"
+        },
+        {
+          "original": [
+            203,
+            212
+          ],
+          "current_error": 203,
+          "guard": "#ifdef CDEBUG"
+        },
+        {
+          "original": [
+            394,
+            394
+          ],
+          "current_error": 401,
+          "guard": "#if defined(lint) || defined(_lint)"
+        },
+        {
+          "original": [
+            560,
+            560
+          ],
+          "current_error": 567,
+          "guard": "#ifdef __cplusplus"
+        }
+      ]
+    }
+  },
+  {
+    "file": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+    "reference": "OpenNT; later header batch remains open",
+    "before": {
+      "points": 1,
+      "lines": 262,
+      "exclusions": [
+        {
+          "original": [
+            46,
+            46
+          ],
+          "current_error": 47,
+          "guard": "#ifdef NT_INCLUDED"
+        }
+      ]
+    },
+    "after": {
+      "points": 1,
+      "lines": 262,
+      "exclusions": [
+        {
+          "original": [
+            46,
+            46
+          ],
+          "current_error": 47,
+          "guard": "#ifdef NT_INCLUDED"
+        }
+      ]
+    }
+  }
+]

@@ -64,54 +64,6 @@ Revision History:
 
 
 LPSTR
-NetpAllocStrFromStr (
-    IN LPSTR Src
-    )
-
-/*++
-
-Routine Description:
-
-    Allocates a copy of a code-page string.
-
-Arguments:
-
-    Src - Specifies the zero terminated string to convert.
-
-
-Return Value:
-
-    NULL - There was some error in the conversion.
-
-    Otherwise, it returns a pointer to the zero terminated ASCII string in
-    an allocated buffer.  The buffer must be freed using NetApiBufferFree.
-
---*/
-
-{
-    LPSTR Dest;
-    NET_API_STATUS ApiStatus;
-
-    NetpAssert( Src != NULL );
-    NetpAssert( *Src != '\0' );
-
-    ApiStatus = NetApiBufferAllocate(
-            (DWORD) strlen(Src) + 1,
-            (LPVOID *) & Dest);
-    if (ApiStatus != NO_ERROR) {
-        NetpAssert( ApiStatus == ERROR_NOT_ENOUGH_MEMORY );
-        return (NULL);
-    }
-    NetpAssert( Dest != NULL );
-    NetpAssert( Dest != Src );
-
-    (void) strcpy( Dest, Src );
-    return (Dest);
-
-} // NetpAllocStrFromStr
-
-
-LPSTR
 NetpAllocStrFromWStr (
     IN LPWSTR Unicode
     )
@@ -120,7 +72,7 @@ NetpAllocStrFromWStr (
 
 Routine Description:
 
-    Convert an UNICODE (zero terminated) string to the corresponding ASCII
+    Convert an UNICODE (zero terminated) string to the corresponding OEM
     string.
 
 Arguments:
@@ -132,113 +84,58 @@ Return Value:
 
     NULL - There was some error in the conversion.
 
-    Otherwise, it returns a pointer to the zero terminated ASCII string in
+    Otherwise, it returns a pointer to the zero terminated OEM string in
     an allocated buffer.  The buffer must be freed using NetApiBufferFree.
 
 --*/
 
 {
-    OEM_STRING AnsiString;
+    OEM_STRING OemString;
     NET_API_STATUS ApiStatus;
     UNICODE_STRING UnicodeString;
 
     RtlInitUnicodeString( &UnicodeString, Unicode );
 
-    AnsiString.MaximumLength =
+    OemString.MaximumLength =
         (USHORT) RtlUnicodeStringToOemSize( &UnicodeString );
 
     ApiStatus = NetApiBufferAllocate(
-            AnsiString.MaximumLength,
-            (LPVOID *) (LPVOID) & AnsiString.Buffer );
+            OemString.MaximumLength,
+            (LPVOID *) (LPVOID) & OemString.Buffer );
     if (ApiStatus != NO_ERROR) {
         NetpAssert( ApiStatus == ERROR_NOT_ENOUGH_MEMORY );
         return (NULL);
     }
 
-    NetpAssert( AnsiString.Buffer != NULL );
+    NetpAssert( OemString.Buffer != NULL );
 
-    if(!NT_SUCCESS( RtlUnicodeStringToOemString( &AnsiString,
+    if(!NT_SUCCESS( RtlUnicodeStringToOemString( &OemString,
                                                   &UnicodeString,
                                                   FALSE))){
-        (void) NetApiBufferFree( AnsiString.Buffer );
+        (void) NetApiBufferFree( OemString.Buffer );
         return NULL;
     }
 
-    return AnsiString.Buffer;
+    return OemString.Buffer;
 
 } // NetpAllocStrFromWStr
 
 
-NET_API_STATUS
-NetpAllocTStrFromString(
-    IN PSTRING lpstringSrc,
-    IN LPTSTR * BufPtr          // Must be freed with NetApiBufferFree().
-    )
-
-{
-    NET_API_STATUS ApiStatus;
-    DWORD CharCount;
-    LPTSTR lptstrDest;
-
-    NetpAssert( lpstringSrc != NULL );
-    NetpAssert( BufPtr != NULL );
-
-    //
-    // assume error until proven otherwise.
-    //
-
-    *BufPtr = NULL;
-
-    //
-    // Compute space required.
-    //
-    CharCount = lpstringSrc->Length;
-    NetpAssert( CharCount > 0 );
-
-    //
-    // Allocate space for the copy.
-    //
-
-    ApiStatus = NetapipBufferAllocate (
-            (CharCount + 1) * sizeof(TCHAR),
-            (LPVOID *) &lptstrDest);
-    if (ApiStatus != NO_ERROR) {
-        return (ApiStatus);
-    }
-    NetpAssert( lptstrDest != NULL );
-
-    //
-    // Copy (and convert if applicable)...
-    //
-    NetpNCopyStrToTStr(
-            lptstrDest,                 // dest
-            lpstringSrc->Buffer,        // src
-            CharCount);                 // number of input chars
-
-    lptstrDest[CharCount] = TCHAR_EOS;
-
-    *BufPtr = lptstrDest;
-
-    return NO_ERROR;
-
-} // NetpAllocTStrFromString
-
-
 LPWSTR
 NetpAllocWStrFromStr(
-    IN LPSTR Ansi
+    IN LPSTR Oem
     )
 
 /*++
 
 Routine Description:
 
-    Convert an ASCII (zero terminated) string to the corresponding UNICODE
+    Convert an Oem (zero terminated) string to the corresponding UNICODE
     string.
 
 Arguments:
 
-    Ansi - Specifies the ASCII zero terminated string to convert.
+    Oem - Specifies the Oem zero terminated string to convert.
 
 
 Return Value:
@@ -251,14 +148,14 @@ Return Value:
 --*/
 
 {
-    OEM_STRING AnsiString;
+    OEM_STRING OemString;
     NET_API_STATUS ApiStatus;
     UNICODE_STRING UnicodeString;
 
-    RtlInitString( &AnsiString, Ansi );
+    RtlInitString( &OemString, Oem );
 
     UnicodeString.MaximumLength =
-        (USHORT) RtlOemStringToUnicodeSize( &AnsiString );
+        (USHORT) RtlOemStringToUnicodeSize( &OemString );
 
     ApiStatus = NetApiBufferAllocate(
             UnicodeString.MaximumLength,
@@ -269,7 +166,7 @@ Return Value:
     NetpAssert(UnicodeString.Buffer != NULL);
 
     if(!NT_SUCCESS( RtlOemStringToUnicodeString( &UnicodeString,
-                                                  &AnsiString,
+                                                  &OemString,
                                                   FALSE))){
         (void) NetApiBufferFree( UnicodeString.Buffer );
         return NULL;
@@ -318,3 +215,116 @@ Return Value:
     RtlCopyMemory(ptr, Unicode, size);
     return ptr;
 } // NetpAllocWStrFromWStr
+
+
+LPWSTR
+NetpAllocWStrFromAStr(
+    IN LPCSTR Ansi
+    )
+
+/*++
+
+Routine Description:
+
+    Convert an Oem (zero terminated) string to the corresponding UNICODE
+    string.
+
+Arguments:
+
+    Oem - Specifies the Oem zero terminated string to convert.
+
+
+Return Value:
+
+    NULL - There was some error in the conversion.
+
+    Otherwise, it returns a pointer to the zero terminated UNICODE string in
+    an allocated buffer.  The buffer must be freed using NetApiBufferFree.
+
+--*/
+
+{
+    ANSI_STRING AnsiString;
+    NET_API_STATUS ApiStatus;
+    UNICODE_STRING UnicodeString;
+
+    RtlInitString( &AnsiString, Ansi );
+
+    UnicodeString.MaximumLength =
+        (USHORT) RtlAnsiStringToUnicodeSize( &AnsiString );
+
+    ApiStatus = NetApiBufferAllocate(
+            UnicodeString.MaximumLength,
+            (LPVOID *) & UnicodeString.Buffer );
+    if (ApiStatus != NO_ERROR) {
+        return (NULL);
+    }
+    NetpAssert(UnicodeString.Buffer != NULL);
+
+    if(!NT_SUCCESS( RtlAnsiStringToUnicodeString( &UnicodeString,
+                                                  &AnsiString,
+                                                  FALSE))){
+        (void) NetApiBufferFree( UnicodeString.Buffer );
+        return NULL;
+    }
+
+    return UnicodeString.Buffer;
+
+} // NetpAllocWStrFromAStr
+
+LPSTR
+NetpAllocAStrFromWStr (
+    IN LPCWSTR Unicode
+    )
+
+/*++
+
+Routine Description:
+
+    Convert an UNICODE (zero terminated) string to the corresponding ANSI
+    string.
+
+Arguments:
+
+    Unicode - Specifies the UNICODE zero terminated string to convert.
+
+
+Return Value:
+
+    NULL - There was some error in the conversion.
+
+    Otherwise, it returns a pointer to the zero terminated ANSI string in
+    an allocated buffer.  The buffer must be freed using NetApiBufferFree.
+
+--*/
+
+{
+    ANSI_STRING AnsiString;
+    NET_API_STATUS ApiStatus;
+    UNICODE_STRING UnicodeString;
+
+    RtlInitUnicodeString( &UnicodeString, Unicode );
+
+    AnsiString.MaximumLength =
+        (USHORT) RtlUnicodeStringToAnsiSize( &UnicodeString );
+
+    ApiStatus = NetApiBufferAllocate(
+            AnsiString.MaximumLength,
+            (LPVOID *) (LPVOID) & AnsiString.Buffer );
+    if (ApiStatus != NO_ERROR) {
+        NetpAssert( ApiStatus == ERROR_NOT_ENOUGH_MEMORY );
+        return (NULL);
+    }
+
+    NetpAssert( AnsiString.Buffer != NULL );
+
+    if(!NT_SUCCESS( RtlUnicodeStringToAnsiString( &AnsiString,
+                                                  &UnicodeString,
+                                                  FALSE))){
+        (void) NetApiBufferFree( AnsiString.Buffer );
+        return NULL;
+    }
+
+    return AnsiString.Buffer;
+
+} // NetpAllocStrFromWStr

@@ -35,7 +35,7 @@ add_custom_target(softpc-contracts DEPENDS ${softpc_contracts})
 # Link the actual product-selected packstr object, not a copied algorithm.
 worker_unit("obj/tests/netlib-packstr.obj" "${NTVDM_REPO}/test/opennt-host/netlib/packstr.c" "/nologo /MT /TC /c")
 worker_link("netlib-packstr.exe" "/nologo /out:$out" "kernel32.lib"
-  INPUTS "obj/tests/netlib-packstr.obj" "obj/opennt-netlib/packstr.obj")
+  INPUTS "obj/tests/netlib-packstr.obj" "obj/opennt-netlib/packstr.obj" "obj/opennt-netlib/midluser.obj")
 worker_group(netlib-packstr "netlib-packstr.exe")
 
 # Preserve both rejected kernel-i386 boundaries and their original diagnostics.

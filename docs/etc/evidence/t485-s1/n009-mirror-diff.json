@@ -1,0 +1,264 @@
+[
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\allocstr.c",
+    "before": {
+      "points": 1,
+      "lines": 640,
+      "exclusions": []
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\copystr.c",
+    "before": {
+      "points": 1,
+      "lines": 834,
+      "exclusions": []
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\initoem.c",
+    "before": {
+      "points": 1,
+      "lines": 104,
+      "exclusions": []
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\memalloc.c",
+    "before": {
+      "points": 1,
+      "lines": 519,
+      "exclusions": [
+        {
+          "original": [
+            3,
+            3
+          ],
+          "current_error": 4,
+          "guard": "#ifndef WIN32"
+        },
+        {
+          "original": [
+            72,
+            72
+          ],
+          "current_error": 76,
+          "guard": "#ifdef CDEBUG"
+        },
+        {
+          "original": [
+            118,
+            125
+          ],
+          "current_error": 124,
+          "guard": "#else // ndef WIN32"
+        },
+        {
+          "original": [
+            168,
+            177
+          ],
+          "current_error": 170,
+          "guard": "#else // ndef WIN32"
+        },
+        {
+          "original": [
+            239,
+            239
+          ],
+          "current_error": 235,
+          "guard": "#ifdef notdef // LocalHandle returns 0 for LMEM_FIXED block"
+        },
+        {
+          "original": [
+            257,
+            281
+          ],
+          "current_error": 256,
+          "guard": "#elif !defined(CDEBUG)  // not WIN32 or CDEBUG, must be NT"
+        },
+        {
+          "original": [
+            283,
+            286
+          ],
+          "current_error": 260,
+          "guard": "#else // must be CDEBUG"
+        }
+      ]
+    },
+    "after": {
+      "points": 15,
+      "lines": 19,
+      "exclusions": [
+        {
+          "original": [
+            3,
+            3
+          ],
+          "current_error": 4,
+          "guard": "#ifndef WIN32"
+        },
+        {
+          "original": [
+            72,
+            72
+          ],
+          "current_error": 76,
+          "guard": "#ifdef CDEBUG"
+        },
+        {
+          "original": [
+            118,
+            125
+          ],
+          "current_error": 124,
+          "guard": "#else // ndef WIN32"
+        },
+        {
+          "original": [
+            168,
+            177
+          ],
+          "current_error": 170,
+          "guard": "#else // ndef WIN32"
+        },
+        {
+          "original": [
+            239,
+            239
+          ],
+          "current_error": 235,
+          "guard": "#ifdef notdef // LocalHandle returns 0 for LMEM_FIXED block"
+        },
+        {
+          "original": [
+            257,
+            281
+          ],
+          "current_error": 256,
+          "guard": "#elif !defined(CDEBUG)  // not WIN32 or CDEBUG, must be NT"
+        },
+        {
+          "original": [
+            283,
+            286
+          ],
+          "current_error": 260,
+          "guard": "#else // must be CDEBUG"
+        }
+      ]
+    }
+  },
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\ntstatus.c",
+    "before": {
+      "points": 1,
+      "lines": 739,
+      "exclusions": [
+        {
+          "original": [
+            197,
+            197
+          ],
+          "current_error": 199,
+          "guard": "#if DBG"
+        }
+      ]
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": [
+        {
+          "original": [
+            207,
+            207
+          ],
+          "current_error": 207,
+          "guard": "#if DBG"
+        }
+      ]
+    }
+  },
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\packstr.c",
+    "before": {
+      "points": 1,
+      "lines": 1077,
+      "exclusions": []
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\svcinfo.c",
+    "before": {
+      "points": 1,
+      "lines": 354,
+      "exclusions": []
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\time.c",
+    "before": {
+      "points": 1,
+      "lines": 1924,
+      "exclusions": []
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\timezone.c",
+    "before": {
+      "points": 1,
+      "lines": 166,
+      "exclusions": []
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  },
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\xlatesvc.c",
+    "before": {
+      "points": 1,
+      "lines": 714,
+      "exclusions": []
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    }
+  }
+]

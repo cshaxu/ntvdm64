@@ -1,0 +1,18 @@
+[
+  {
+    "file": "src\\non-mvdm\\ds\\netapi\\netlib\\midluser.c",
+    "xp_blob": "1572edd3601e118226951ce7282bbecf407d66c5",
+    "sha256": "6e1d2bb8435b2e5f7eaf8befe0787047164aba6fa2cfe2d7fc914eda773b4d9c",
+    "mirror_points": 0,
+    "mirror_lines": 0,
+    "reason": "required provider/declaration for restored complete packstr"
+  },
+  {
+    "file": "src\\non-mvdm\\public\\internal\\net\\inc\\rpcutil.h",
+    "xp_blob": "0f896fdff10b3111ac0ea1af0d76895fc4d57bb7",
+    "sha256": "1498fc5e8728e08acb893242378ad7e1593b7226cddca113ed794bfcdbcd5706",
+    "mirror_points": 0,
+    "mirror_lines": 0,
+    "reason": "required provider/declaration for restored complete packstr"
+  }
+]

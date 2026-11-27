@@ -296,6 +296,20 @@ NetpAllocateEnumBuffer(
     IN DWORD RelocationParameter
     );
 
+NET_API_STATUS
+NetpAllocateEnumBufferEx(
+    IN OUT PBUFFER_DESCRIPTOR BufferDescriptor,
+    IN BOOL IsGet,
+    IN DWORD PrefMaxSize,
+    IN DWORD NeededSize,
+    IN VOID (*RelocationRoutine)( IN DWORD RelocationParameter,
+                                  IN OUT PBUFFER_DESCRIPTOR BufferDescriptor,
+                                  IN PTRDIFF_T Offset ),
+    IN DWORD RelocationParameter,
+    IN DWORD IncrementalSize
+    );
+
+#line 306
 // VOID
 // NetpBuildASCIIZ(
 //     OUT LPSTR Dest,          // Destination (will be null terminated).

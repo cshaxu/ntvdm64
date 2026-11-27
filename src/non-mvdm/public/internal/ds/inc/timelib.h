@@ -58,7 +58,7 @@ Revision History:
 
 int    net_ctime(ULONG *, CHAR *, int, int);
 int    net_gmtime(time_t * timp, struct tm *tb);
-time_t time_now(VOID);
+DWORD  time_now(VOID);
 
 
 VOID

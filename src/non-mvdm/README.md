@@ -2816,3 +2816,17 @@ These retain original basesrv.h declarations; they do not introduce an SXS
 product or count their later directory batches as delivered. B validates
 capture views through the C-owned layout provider. F binds a server-local
 message only inside authenticated, size-checked synchronous dispatch.
+
+## T485 S14 N009 XP Netlib migration
+
+The ten existing ds/netapi/netlib files now use pinned XP SP1 originals,
+retaining the existing memalloc/ntstatus excluded profiles. XP time_now's
+DWORD declaration is synchronized in the current timelib.h; the required
+NetpAllocateEnumBufferEx prototype is added to the existing netlib.h owner.
+The full original packstr.c is restored, including its enumeration functions.
+Its original rpcutil.h declarations and same-directory midluser.c provider
+are imported byte-for-byte as required dependencies. The original provider
+uses public LocalAlloc/Free/ReAlloc/Size; no outer RPC implementation is
+imported. Source algorithm, ABI, callers, three-way/mirror metrics and final
+verification state: docs/etc/evidence/t485-s1/n009.md. Historical OpenNT
+registration above remains provenance rather than the current source identity.

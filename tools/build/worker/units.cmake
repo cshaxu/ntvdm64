@@ -144,6 +144,7 @@ worker_unit("obj/opennt-netlib/timezone.obj" "${NTVDM_REPO}/src/non-mvdm/ds/neta
 worker_unit("obj/opennt-netlib/xlatesvc.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/netlib/xlatesvc.c" "${profile_30}")
 worker_unit("obj/opennt-netlib/svcinfo.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/netlib/svcinfo.c" "${profile_30}")
 worker_unit("obj/opennt-netlib/packstr.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/netlib/packstr.c" "${profile_30}")
+worker_unit("obj/opennt-netlib/midluser.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/netlib/midluser.c" "${profile_30}")
 worker_unit("obj/opennt-xactsrv/apiwksta.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/xactsrv/apiwksta.c" "${profile_32}")
 worker_unit("obj/opennt-xactsrv/apiuse.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/xactsrv/apiuse.c" "${profile_32}")
 worker_unit("obj/opennt-xactsrv/apimsg.obj" "${NTVDM_REPO}/src/non-mvdm/ds/netapi/xactsrv/apimsg.c" "${profile_32}")
@@ -767,7 +768,7 @@ worker_archive("softpc-fixture-bindings.lib"
 worker_archive("vdmredir-dll-bindings.lib"
   "${vdmredir_dll_objects}" "obj/compat/mvdm_redirector_guest_copy.obj" "obj/compat/remote_browser.obj" "obj/compat/remote_rap.obj")
 worker_archive("original-opennt-netlib.lib"
-  "obj/opennt-netlib/ntstatus.obj" "obj/opennt-netlib/copystr.obj" "obj/opennt-netlib/allocstr.obj" "obj/opennt-netlib/initoem.obj" "obj/opennt-netlib/memalloc.obj" "obj/opennt-netlib/time.obj" "obj/opennt-netlib/timezone.obj" "obj/opennt-netlib/xlatesvc.obj" "obj/opennt-netlib/svcinfo.obj" "obj/opennt-netlib/packstr.obj")
+  "obj/opennt-netlib/ntstatus.obj" "obj/opennt-netlib/copystr.obj" "obj/opennt-netlib/allocstr.obj" "obj/opennt-netlib/initoem.obj" "obj/opennt-netlib/memalloc.obj" "obj/opennt-netlib/time.obj" "obj/opennt-netlib/timezone.obj" "obj/opennt-netlib/xlatesvc.obj" "obj/opennt-netlib/svcinfo.obj" "obj/opennt-netlib/packstr.obj" "obj/opennt-netlib/midluser.obj")
 worker_archive("original-opennt-xactsrv.lib"
   "obj/opennt-xactsrv/apiwksta.obj" "obj/opennt-xactsrv/apiuse.obj" "obj/opennt-xactsrv/apimsg.obj" "obj/opennt-xactsrv/apisvc.obj" "obj/opennt-xactsrv/apisrv.obj" "obj/opennt-xactsrv/xssubs.obj" "obj/opennt-xactsrv/strucsiz.obj" "obj/opennt-xactsrv/examine.obj" "obj/opennt-xactsrv/ascii.obj" "obj/opennt-xactsrv/pointer.obj" "obj/opennt-xactsrv/convert.obj" "obj/opennt-xactsrv/xsunicod.obj" "obj/opennt-xactsrv/auxdata.obj" "obj/opennt-xactsrv/parmnum.obj")
 worker_archive("original-opennt-base-vdm.lib"
