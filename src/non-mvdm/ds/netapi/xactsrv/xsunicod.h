@@ -63,9 +63,7 @@ XsCopyBufToTBuf(
     );
 
 #else
-#line 66
-#error ANSI xactsrv conversion profile is not supported
-#line 83
+#error Unsupported excluded original configuration
 #endif // def UNICODE
 #line 84
 

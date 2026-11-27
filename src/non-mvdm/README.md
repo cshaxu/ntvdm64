@@ -2863,3 +2863,12 @@ and exact bytes. The old ds/netapi/rpcxlate/apiworke.h and its build include
 search entries are removed. vrremote retains its original include and API
 constants. [Current relocation evidence](../../docs/etc/evidence/t485-s1/n011.md)
 supersedes the historical old-path registration above.
+
+### T485 S14 N012 XACTSRV
+
+The selected XACTSRV handlers/converters now use XP SP1. Retire xsdata.h;
+use original xsdebug.h instead of local debug macros. Retain the actual
+Browser/NetServerEnumEx host boundary and original Unicode/release exclusions.
+Restore the already-admitted status.h include. [Per-file evidence and final
+package verification](../../docs/etc/evidence/t485-s1/n012.md) supersede older
+NT4 registrations for these files.

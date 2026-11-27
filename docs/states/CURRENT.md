@@ -2,37 +2,42 @@
 
 ## Current Work
 
-**Active: M0 T485 S14** (Ordinary Mode). Resume N004-N012 after
-[S13 closure](../etc/evidence/t485-h-repair/s13-closure.md).
-Migration verified for delivery47/159 directories: H001-H036 and N001-N011.
-The owner approved continuous execution; the [working plan](../etc/operations/m0-t485-h-repair-plan.md)
-retains S15-S20 and all remaining migration/capability obligations.
+**Active: M0 T485 S15** (Ordinary Mode), N013-N026.
+[S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
+overall48/159 directories, H001-H036 and N001-N012. Runtime12 is the current
+published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
+retains all S16-S20 and remaining migration/capability obligations.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T485 S14, Ordinary Mode. |
+| Identifier Mode | M0 T485 S15, Ordinary Mode. |
 | Candidate Proposal | [XP baseline migration](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md). |
-| Admission And Approval | Owner continuous-execution approval; S6-S13 repair restart gate reconciled in the S13 closure. P8 product4a849ef9e is pushed; P9 records closure and this admission. |
-| Objective | Migrate existing N004-N012 owners to pinned XP SP1, preserving current supported CCPU and product boundaries, with complete three-way dispositions and delivery. |
-| Reference Baseline | Current product4a849ef9e/runtime2; XP commit a2f6d7c93aa4f11efc51147566d5961c59a8ef89, Source/XPSP1/NT; per-file OpenNT and project identities in the S1 inventory. |
-| Files And ABI Surface | N004 BaseClient VDM; N005 Base declarations; N006 BaseSrv VDM; N007 existing font media; N008 OLE thunk; N009 Netlib; N010 RAP; N011 RPC translation declarations; N012 XACTSRV. 83 existing files; only indispensable paired dependencies may lead their later batch. |
+| Admission And Approval | Owner continuous-execution approval; S14 P10 closes N004-N012 with runtime12 Full24/24 and admits this next directory cohort. |
+| Objective | Migrate existing N013-N026 owners to pinned XP SP1, preserving the selected product ABI, original algorithms and minimal evidenced host adaptations. |
+| Reference Baseline | S14 P10/runtime12; fixed XP commit a2f6d7c93aa4f11efc51147566d5961c59a8ef89; per-file registered OpenNT originals for not-yet-migrated files. |
+| Files And ABI Surface | N013 private headers; N014 Windows private headers; N015 DDK; N016 Base declarations; N017 DS declarations; N018 Net; N019 Shell; N020 Windows declarations; N021 SDK; N022-N026 USER client/inc/kernel/rtl/server. 137 original files across14 directories. Already migrated paired headers retain their individual XP baseline. |
 | Applicable Rules | [Execution](../rules/EXECUTION.md), [architecture](../rules/ARCHITECTURE.md), [coding](../rules/CODING.md), [documents](../rules/DOCUMENT.md), [source policy](../etc/operations/policy/source-policy.md). |
-| Verification | Each changed batch: cached full build, dual publication/hash verification, affected targeted tests, commit, push. N004 reaches40/159 and requires Full. Every S closure/every10 audited files also follows Full cadence. Retain unchanged passing Full gates; retry only failures and run unexecuted gates once. |
+| Verification | Each P: cached full build, dual publication/hash verification, affected targeted tests, commit, push. Every10 completed files and S closure require final-package Full. Retry only failed/unexecuted gates for unchanged inputs. |
 | Expected Markers | Pinned originals, three-way diff, retired/relocated obsolete paths, current ABI callers/providers, nonerror byte diff before/after, coherent final package, genuine guest/host acceptance and clean pushed tree. |
 | Asset Needs | Existing fixed XP SP1 source and selected English Professional SP3 media; immutable guest binaries. |
 | Constraints | Preserve original compile selections, #error/#line and architecture boundaries. No original guest changes/rebuilds, Computer Use, unrelated changes or unapproved large mirror increases. |
 | Non-goals | No wholesale Kernel32/CSR import; no independent XP-only components or unrelated capability rewrite. |
 | Reporting Requirements | Brief each batch before editing; affected files and behavior, original-relative nonerror diff points/lines versus prior OpenNT baseline, migration totals and delivery status. |
 | Stop Conditions | Unsupported required ABI, unapproved material boundary or mirror growth, missing original input, unexplained regression; resolve within authority or seek bounded decision. |
-| Exit Criteria | N004-N012 delivered in order, all83 existing files reconciled, paired dependencies recorded once, mandatory final-package Full evidence, commit/push and clean workspace. |
-| Original Owner Request | Complete current repairs then N004-G097 migration to XP SP1 with minimal mirror diff and proper component layers; do not over-verify unchanged code. |
+| Exit Criteria | All N013-N026 inventory files reconciled in order with necessary dependencies, fixed original identities and minimal residual evidence; final dual-published package Full, clean committed and pushed tree. |
+| Original Owner Request | Continue existing-component XP baseline migration through G097; preserve architecture and immutable original guest, minimize original-relative mirror diff without excessive repeated validation. |
 | Similar-Issue Sweep | XP-absent obsolete files, retained unused original code, changed compile guards, pointer/handle ABI, lost environment/exit ownership, guest package mismatch, false test pass/skip. |
 
-## S14 Progress
+## S15 Progress
 
-8/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
+0/14 directories delivered; next N013. Last Full checkpoint is S14 P10/runtime12.
+No S15 source mutation yet.
+
+## S14 Closure Record
+
+9/9 directories verified for delivery in S14. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
 and [receipt](../etc/evidence/t485-s1/n004-result.json): XP vdm.c plus required
 original vdm.h; paired WOW registration field leads N005. Cached full build,
 dual13-image26hash publication, targeted tests and consolidated Full23/23 pass.
@@ -80,13 +85,23 @@ P8 delta: total0, exact+8, nonerror same+8/different-8,points-8,lines-7736.
 public/internal/net/inc path byte-exact and removes old include search paths.
 Runtime11 cached full build, dual13-image26hash publication, real guest NetAPI
 and Full24/24 pass. This is the ten-file checkpoint after N010's nine files.
-Current global census1319files:byte-exact730,nonerror same732/different587,
+P9 global census1319files:byte-exact730,nonerror same732/different587,
 7764points/214251lines. P9 delta:total0,exact+1,same+1,different-1,
 points-1,lines-100;1 relocation and OpenNT->XP baseline switch.
 1173 files use XP,146 retain OpenNT-family originals. S14 delivery8/9,
 overall47/159; next N012 XACTSRV, then mandatory S14 closure Full.
 
 
+
+
+[P10 N012](../etc/evidence/t485-s1/n012.md) delivers XP XACTSRV handlers and
+conversion helpers; obsolete xsdata removed, original xsdebug replaces local
+macros. Runtime12 cached full build, dual13-image26hash publication, RAP11/11,
+enum42/42, real guest NetAPI and Full24/24 passed. Existing Win95 exit1 boundary
+retained. Current global census1319files:byte-exact740,nonerror same742/different577,
+7760points/197875lines; P10 delta0files,+10exact,+10same,-10different,-4points,
+-16376lines.1188 XP and131 OpenNT-family originals. All N004-N012 are verified
+for delivery:9/9 S14,48/159 total. [S14 closure audit](../etc/evidence/t485-s1/s14-closure.md) passed; S15 admitted.
 
 
 ## S13 Closure Record

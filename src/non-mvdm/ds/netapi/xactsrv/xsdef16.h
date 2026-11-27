@@ -35,43 +35,46 @@ Revision History:
 
 #include <packon.h>
 
+// Pointers are actually Dword offsets (64-bit compat)
+#define LPSTR_16_REMOTE DWORD
+
 typedef struct _ACCESS_16_INFO_1 {
-    LPSTR acc1_resource_name;
+    LPSTR_16_REMOTE acc1_resource_name;
     WORD acc1_attr;
     WORD acc1_count;
 } ACCESS_16_INFO_1, *PACCESS_16_INFO_1;
 
 typedef struct _PRQINFO_16 {
-    LPSTR pszName;
+    LPSTR_16_REMOTE pszName;
     WORD uPriority;
     WORD uStartTime;
     WORD uUntilTime;
     WORD pad1;
-    LPSTR pszSepFile;
-    LPSTR pszPrProc;
-    LPSTR pszParms;
-    LPSTR pszComment;
+    LPSTR_16_REMOTE pszSepFile;
+    LPSTR_16_REMOTE pszPrProc;
+    LPSTR_16_REMOTE pszParms;
+    LPSTR_16_REMOTE pszComment;
     WORD fsStatus;
     WORD cJobs;
-    LPSTR pszPrinters;
-    LPSTR pszDriverName;
+    LPSTR_16_REMOTE pszPrinters;
+    LPSTR_16_REMOTE pszDriverName;
     PBYTE pDriverData;
 } PRQINFO3_16, *PPRQINFO3_16;
 
 typedef struct _PRJINFO_16 {
     WORD uJobId;
     WORD uPriority;
-    LPSTR pszUserName;
+    LPSTR_16_REMOTE pszUserName;
     WORD uPosition;
     WORD fsStatus;
     DWORD ulSubmitted;
     DWORD ulSize;
-    LPSTR pszComment;
-    LPSTR pszDocument;
+    LPSTR_16_REMOTE pszComment;
+    LPSTR_16_REMOTE pszDocument;
 } PRJINFO2_16, *PPRJINFO2_16;
 
 typedef struct _PRINTQ_16_INFO_5 {
-    LPSTR pszName;
+    LPSTR_16_REMOTE pszName;
 } PRQ_16_INFO_5, *PPRQ_16_INFO_5;
 
 typedef struct _SERVER_16_INFO_2 {
@@ -79,13 +82,13 @@ typedef struct _SERVER_16_INFO_2 {
     BYTE sv2_version_major;
     BYTE sv2_version_minor;
     DWORD sv2_type;
-    LPSTR sv2_comment;
+    LPSTR_16_REMOTE sv2_comment;
     DWORD sv2_ulist_mtime;
     DWORD sv2_glist_mtime;
     DWORD sv2_alist_mtime;
     WORD sv2_users;
     WORD sv2_disc;
-    LPSTR sv2_alerts;
+    LPSTR_16_REMOTE sv2_alerts;
     WORD sv2_security;
     WORD sv2_auditing;
     WORD sv2_numadmin;
@@ -95,7 +98,7 @@ typedef struct _SERVER_16_INFO_2 {
     WORD sv2_anndelta;
     BYTE sv2_guestacct[LM20_UNLEN + 1];
     BYTE sv2_pad1;
-    LPSTR sv2_userpath;
+    LPSTR_16_REMOTE sv2_userpath;
     WORD sv2_chdevs;
     WORD sv2_chdevq;
     WORD sv2_chdevjobs;
@@ -118,7 +121,7 @@ typedef struct _SERVER_16_INFO_2 {
     WORD sv2_diskalert;
     WORD sv2_netioalert;
     WORD sv2_maxauditsz;
-    LPSTR sv2_srvheuristics;
+    LPSTR_16_REMOTE sv2_srvheuristics;
 } SERVER_16_INFO_2, *PSERVER_16_INFO_2;
 
 typedef struct _SERVER_16_INFO_3 {
@@ -126,13 +129,13 @@ typedef struct _SERVER_16_INFO_3 {
     BYTE sv3_version_major;
     BYTE sv3_version_minor;
     DWORD sv3_type;
-    LPSTR sv3_comment;
+    LPSTR_16_REMOTE sv3_comment;
     DWORD sv3_ulist_mtime;
     DWORD sv3_glist_mtime;
     DWORD sv3_alist_mtime;
     WORD sv3_users;
     WORD sv3_disc;
-    LPSTR sv3_alerts;
+    LPSTR_16_REMOTE sv3_alerts;
     WORD sv3_security;
     WORD sv3_auditing;
     WORD sv3_numadmin;
@@ -142,7 +145,7 @@ typedef struct _SERVER_16_INFO_3 {
     WORD sv3_anndelta;
     BYTE sv3_guestacct[LM20_UNLEN + 1];
     BYTE sv3_pad1;
-    LPSTR sv3_userpath;
+    LPSTR_16_REMOTE sv3_userpath;
     WORD sv3_chdevs;
     WORD sv3_chdevq;
     WORD sv3_chdevjobs;
@@ -165,10 +168,10 @@ typedef struct _SERVER_16_INFO_3 {
     WORD sv3_diskalert;
     WORD sv3_netioalert;
     WORD sv3_maxauditsz;
-    LPSTR sv3_srvheuristics;
+    LPSTR_16_REMOTE sv3_srvheuristics;
     DWORD sv3_auditedevents;
     WORD sv3_autoprofile;
-    LPSTR sv3_autopath;
+    LPSTR_16_REMOTE sv3_autopath;
 } SERVER_16_INFO_3, *PSERVER_16_INFO_3;
 
 #define DEF16_sv_ulist_mtime 0
@@ -204,8 +207,8 @@ typedef struct _SERVER_16_INFO_3 {
 #define DEF16_sv_autopath TEXT("")
 
 typedef struct _SESSION_16_INFO_1 {
-    LPSTR sesi1_cname;
-    LPSTR sesi1_username;
+    LPSTR_16_REMOTE sesi1_cname;
+    LPSTR_16_REMOTE sesi1_username;
     WORD sesi1_num_conns;
     WORD sesi1_num_opens;
     WORD sesi1_num_users;
@@ -215,20 +218,20 @@ typedef struct _SESSION_16_INFO_1 {
 } SESSION_16_INFO_1, *PSESSION_16_INFO_1;
 
 typedef struct _SESSION_16_INFO_2 {
-    LPSTR sesi2_cname;
-    LPSTR sesi2_username;
+    LPSTR_16_REMOTE sesi2_cname;
+    LPSTR_16_REMOTE sesi2_username;
     WORD sesi2_num_conns;
     WORD sesi2_num_opens;
     WORD sesi2_num_users;
     DWORD sesi2_time;
     DWORD sesi2_idle_time;
     DWORD sesi2_user_flags;
-    LPSTR sesi2_cltype_name;
+    LPSTR_16_REMOTE sesi2_cltype_name;
 } SESSION_16_INFO_2, *PSESSION_16_INFO_2;
 
 typedef struct _SESSION_16_INFO_10 {
-    LPSTR sesi10_cname;
-    LPSTR sesi10_username;
+    LPSTR_16_REMOTE sesi10_cname;
+    LPSTR_16_REMOTE sesi10_username;
     DWORD sesi10_time;
     DWORD sesi10_idle_time;
 } SESSION_16_INFO_10, *PSESSION_16_INFO_10;
@@ -239,7 +242,7 @@ typedef struct _SESSION_16_INFO_10 {
 typedef struct _USE_16_INFO_0 {
     BYTE ui0_local[LM20_DEVLEN + 1];
     BYTE ui0_pad1;
-    LPSTR ui0_remote;
+    LPSTR_16_REMOTE ui0_remote;
 } USE_16_INFO_0, *PUSE_16_INFO_0;
 
 typedef struct _USER_16_INFO_1 {
@@ -248,10 +251,10 @@ typedef struct _USER_16_INFO_1 {
     BYTE usri1_password[ENCRYPTED_PWLEN];
     DWORD usri1_password_age;
     WORD usri1_priv;
-    LPSTR usri1_home_dir;
-    LPSTR usri1_comment;
+    LPSTR_16_REMOTE usri1_home_dir;
+    LPSTR_16_REMOTE usri1_comment;
     WORD usri1_flags;
-    LPSTR usri1_script_path;
+    LPSTR_16_REMOTE usri1_script_path;
 } USER_16_INFO_1, *PUSER_16_INFO_1;
 
 typedef struct _USER_16_LOGOFF_INFO_1 {
@@ -275,19 +278,19 @@ typedef struct _USER_16_LOGON_INFO_1 {
     DWORD usrlog1_password_age;
     DWORD usrlog1_pw_can_change;
     DWORD usrlog1_pw_must_change;
-    LPSTR usrlog1_computer;
-    LPSTR usrlog1_domain;
-    LPSTR usrlog1_script_path;
+    LPSTR_16_REMOTE usrlog1_computer;
+    LPSTR_16_REMOTE usrlog1_domain;
+    LPSTR_16_REMOTE usrlog1_script_path;
     DWORD usrlog1_reserved1;
 } USER_16_LOGON_INFO_1, *PUSER_16_LOGON_INFO_1;
 
 typedef struct _WKSTA_16_INFO_0 {
     WORD  wki0_reserved_1;
     DWORD wki0_reserved_2;
-    LPSTR wki0_root;
-    LPSTR wki0_computername;
-    LPSTR wki0_username;
-    LPSTR wki0_langroup;
+    LPSTR_16_REMOTE wki0_root;
+    LPSTR_16_REMOTE wki0_computername;
+    LPSTR_16_REMOTE wki0_username;
+    LPSTR_16_REMOTE wki0_langroup;
     BYTE  wki0_ver_major;
     BYTE  wki0_ver_minor;
     DWORD wki0_reserved_3;
@@ -312,18 +315,18 @@ typedef struct _WKSTA_16_INFO_0 {
     WORD  wki0_printbuftime;
     WORD  wki0_numcharbuf;
     WORD  wki0_sizcharbuf;
-    LPSTR wki0_logon_server;
-    LPSTR wki0_wrkheuristics;
+    LPSTR_16_REMOTE wki0_logon_server;
+    LPSTR_16_REMOTE wki0_wrkheuristics;
     WORD  wki0_mailslots;
 } WKSTA_16_INFO_0, *PWKSTA_16_INFO_0, *LPWKSTA_16_INFO_0;
 
 typedef struct _WKSTA_16_INFO_1 {
     WORD  wki1_reserved_1;
     DWORD wki1_reserved_2;
-    LPSTR wki1_root;
-    LPSTR wki1_computername;
-    LPSTR wki1_username;
-    LPSTR wki1_langroup;
+    LPSTR_16_REMOTE wki1_root;
+    LPSTR_16_REMOTE wki1_computername;
+    LPSTR_16_REMOTE wki1_username;
+    LPSTR_16_REMOTE wki1_langroup;
     BYTE  wki1_ver_major;
     BYTE  wki1_ver_minor;
     DWORD wki1_reserved_3;
@@ -348,22 +351,22 @@ typedef struct _WKSTA_16_INFO_1 {
     WORD  wki1_printbuftime;
     WORD  wki1_numcharbuf;
     WORD  wki1_sizcharbuf;
-    LPSTR wki1_logon_server;
-    LPSTR wki1_wrkheuristics;
+    LPSTR_16_REMOTE wki1_logon_server;
+    LPSTR_16_REMOTE wki1_wrkheuristics;
     WORD  wki1_mailslots;
-    LPSTR wki1_logon_domain;
-    LPSTR wki1_oth_domains;
+    LPSTR_16_REMOTE wki1_logon_domain;
+    LPSTR_16_REMOTE wki1_oth_domains;
     WORD  wki1_numdgrambuf;
 } WKSTA_16_INFO_1, *PWKSTA_16_INFO_1, *LPWKSTA_16_INFO_1;
 
 typedef struct _WKSTA_16_INFO_10 {
-    LPSTR wki10_computername;
-    LPSTR wki10_username;
-    LPSTR wki10_langroup;
+    LPSTR_16_REMOTE wki10_computername;
+    LPSTR_16_REMOTE wki10_username;
+    LPSTR_16_REMOTE wki10_langroup;
     BYTE  wki10_ver_major;
     BYTE  wki10_ver_minor;
-    LPSTR wki10_logon_domain;
-    LPSTR wki10_oth_domains;
+    LPSTR_16_REMOTE wki10_logon_domain;
+    LPSTR_16_REMOTE wki10_oth_domains;
 } WKSTA_16_INFO_10, *PWKSTA_16_INFO_10, *LPWKSTA_16_INFO_10;
 
 typedef struct _WKSTA_16_USER_LOGON_REQUEST_1 {

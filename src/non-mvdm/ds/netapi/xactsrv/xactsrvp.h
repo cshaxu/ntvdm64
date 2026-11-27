@@ -59,11 +59,13 @@ Revision History:
 #include <smbtypes.h>
 #include <smbmacro.h>
 #include <smbgtpt.h>
+#line 65
 
+#include <status.h>
 #line 68
 #include <lm.h>         // LM20_SERVICE_ equates, etc.
+#line 70
 
-#line 71
 #include <winsvc.h>     // SERVICE_ equates, etc.
 
 #include <apiparam.h>
@@ -77,11 +79,10 @@ Revision History:
 // Xactsrv's own include files
 //
 
-#line 85
+#include <XsDebug.h>
 #include <XsTypes.h>
 #line 87
 #include <XsConst.h>              // XactSrv.h must precede XsConst.h
-#include <XsData.h>               // XsTypes.h must precede XsData.h
 #include <XsUnicod.h>
 #include <XsProcs.h>              // XsTypes.h must precede XsProcs.h.
 #include <XsProcsP.h>             // XsTypes.h, XsConst.h and XsUnicod.h
@@ -95,13 +96,4 @@ Revision History:
 
 #include <WkstaDef.h>
 
-#ifndef STATIC
-#define STATIC static
-#endif
-#ifndef IF_DEBUG
-#define IF_DEBUG(_x) if (0)
-#endif
-
-#line 102
 #endif // ndef _XACTSRVP_
-

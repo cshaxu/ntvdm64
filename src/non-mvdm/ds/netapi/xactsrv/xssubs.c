@@ -18,13 +18,19 @@ Revision History:
 
     05-Oct-1992 JohnRo
         RAID 3556: DosPrintQGetInfo(from downlevel) level 3, rc=124.  (4&5 too.)
-	(Fixed XsFillAuxEnumBuffer.)
+    (Fixed XsFillAuxEnumBuffer.)
 
 --*/
 
 #include "XactSrvP.h"
 #include <WinBase.h>          // GetCurrentProcessId prototype
 #include <align.h>
+
+VOID
+SmbCapturePtr(
+    LPBYTE  PointerDestination,
+    LPBYTE  PointerSource
+    );
 
 
 DWORD
@@ -75,9 +81,9 @@ Return Value:
     //
 
     //
-    // BUGBUG: Should handle errors from RapConvertSingleEntry.
-    //         But the way this is used, existing code probably
-    //         won't break if we just ignore them.
+    // Should handle errors from RapConvertSingleEntry.
+    // But the way this is used, existing code probably
+    // won't break if we just ignore them.
     //
 
     status = RapConvertSingleEntry(
@@ -169,10 +175,17 @@ Return Value:
 
     //
     // Allocate space to hold the output parameters.
+    // In addition when the request fails the current APIs set the buflen field
+    // In order to account for this additional buffer space is allocated. Since
+    // this field is not located at the same offset we need to compute the
+    // additional space reqd. to be the maximum of all the offsets. Currently
+    // the 16 byte offset seems to suffice. When modifying apiparam.h ensure
+    // that this is the case.
     //
 
     outParams = NetpMemoryAllocate( sizeof(XS_PARAMETER_HEADER)
-                                        + outParamsLength );
+                                        + outParamsLength +
+                                        sizeof(DWORD) * 4);
 
     if ( outParams == NULL ) {
         IF_DEBUG(ERRORS) {
@@ -215,9 +228,12 @@ Return Value:
             //     counts.
             //
 
-            NetpAssert( !isdigit( *descriptor ));
+            if( isdigit( *descriptor ) ) {
+                NetpMemoryFree( outParams );
+                return NULL;
+            }
 
-            SmbPutUlong( (LPDWORD)outParamsPtr, (DWORD)inParams );
+            SmbCapturePtr( outParamsPtr, inParams );
 
             //
             // Update pointers -- move inParams past end of string.
@@ -235,7 +251,7 @@ Return Value:
             // The parameter is a pointer to a byte or array of bytes.
             //
 
-            SmbPutUlong( (LPDWORD)outParamsPtr, (DWORD)inParams );
+            SmbCapturePtr( outParamsPtr, inParams );
 
             inParams += sizeof(BYTE) * RapDescArrayLength( descriptor );
             outParamsPtr += sizeof(LPBYTE);
@@ -250,7 +266,10 @@ Return Value:
             // !!! This assumes that an array of words will never be passed
             //     as a parameter.
 
-            NetpAssert( !isdigit( *descriptor ));
+            if( isdigit( *descriptor ) ) {
+                NetpMemoryFree( outParams );
+                return NULL;
+            }
 
             //
             // Copy over the double word and update pointers.
@@ -302,7 +321,7 @@ Return Value:
             // pointers.
             //
 
-            SmbPutUlong( (LPDWORD)outParamsPtr, (DWORD)NULL );
+            SmbCapturePtr( outParamsPtr, NULL );
             outParamsPtr += sizeof(LPSTR);
 
             break;
@@ -317,7 +336,7 @@ Return Value:
 
             //
             // If the indicated buffer length is greater than the max
-            // data count on the transaction, somebody screwed up. Set
+            // data count on the transaction, somebody messed up. Set
             // the length to MaxDataCount.
             //
 
@@ -357,9 +376,9 @@ Return Value:
             // section of the transaction.
             //
 
-            SmbPutUlong(
-                (LPDWORD)outParamsPtr,
-                (DWORD)Transaction->OutData
+            SmbCapturePtr(
+                outParamsPtr,
+                Transaction->OutData
                 );
 
             outParamsPtr += sizeof(LPBYTE);
@@ -401,7 +420,7 @@ Return Value:
             // of the transaction.
             //
 
-            SmbPutUlong( (LPDWORD)outParamsPtr, (DWORD)Transaction->InData );
+            SmbCapturePtr( outParamsPtr, Transaction->InData );
 
             outParamsPtr += sizeof(LPBYTE);
 
@@ -416,7 +435,10 @@ Return Value:
             // !!! This assumes that an array of words will never be passed
             //     as a parameter.
 
-            NetpAssert( !isdigit( *descriptor ));
+            if( isdigit( *descriptor ) ) {
+                NetpMemoryFree( outParams );
+                return NULL;
+            }
 
             //
             // Copy over the word and update pointers.
@@ -654,7 +676,7 @@ Return Value:
     LPDESC subDesc2 = NULL;
     DWORD bufferSize;
     LPBYTE stringLocation;
-    DWORD bytesRequired;
+    DWORD bytesRequired = 0;
     LPDESC OutDescCopy = OutStructureDesc;
     NET_API_STATUS status = NERR_Success;
 
@@ -1159,7 +1181,7 @@ Return Value:
 
         for ( currentAux = 0; currentAux < inputAuxCount; currentAux++ ) {
 
-            remainingSize = outputStringLocation - currentOutEntryPtr;
+            remainingSize = (DWORD)(outputStringLocation - currentOutEntryPtr);
             auxBytesRequired = 0;
 
             status = RapConvertSingleEntry(
@@ -1533,9 +1555,9 @@ Return Value:
     // the data copy.
     //
 
-    if ( beginningOfVariableData == (DWORD)NULL ||
-         (DWORD)Buffer + beginningOfVariableData -
-             (DWORD)endOfFixedStructures <= MAXIMUM_ALLOWABLE_DATA_GAP ) {
+    if ( beginningOfVariableData == (DWORD)0 ||
+         (DWORD_PTR)Buffer + beginningOfVariableData -
+             (DWORD_PTR)endOfFixedStructures <= MAXIMUM_ALLOWABLE_DATA_GAP ) {
 
         return 0;
     }
@@ -1554,8 +1576,8 @@ Return Value:
     // Return the distance we moved the variable data.
     //
 
-    return (WORD)( (DWORD)Buffer + beginningOfVariableData -
-                         (DWORD)endOfFixedStructures );
+    return (WORD)( (DWORD_PTR)Buffer + beginningOfVariableData -
+                         (DWORD_PTR)endOfFixedStructures );
 
 } // XsPackReturnData
 
@@ -1681,6 +1703,7 @@ Return Value:
     LPBYTE outParams = Transaction->OutParameters;
     LPDESC descriptorString;
     LPDESC descriptor;
+    LPBYTE outParamsMax = outParams + Transaction->MaxParameterCount;
 
     //
     // The first two bytes of the parameter section are the API number,
@@ -1694,9 +1717,11 @@ Return Value:
     // header.
     //
 
+    if( outParams + sizeof(WORD) > outParamsMax ) goto insuff_buffer;
     SmbPutUshort( (LPWORD)outParams, Header->Status );
     outParams += sizeof(WORD);
 
+    if( outParams + sizeof(WORD) > outParamsMax ) goto insuff_buffer;
     SmbPutUshort( (LPWORD)outParams, Header->Converter );
     outParams += sizeof(WORD);
 
@@ -1778,6 +1803,8 @@ Return Value:
             // This is an output parameter, so copy over the word.
             //
 
+            if( outParams + sizeof(WORD) > outParamsMax ) goto insuff_buffer;
+
             SmbPutUshort(
                 (LPWORD)outParams,
                 SmbGetUshort( (LPWORD)inParams )
@@ -1794,6 +1821,8 @@ Return Value:
             // Count of receive dword pointer (h).
             // This is an output parameter, so copy over the word.
             //
+
+            if( outParams + sizeof(DWORD) > outParamsMax ) goto insuff_buffer;
 
             SmbPutUlong(
                 (LPDWORD)outParams,
@@ -1840,6 +1869,8 @@ Return Value:
 
             arraySize = sizeof(BYTE) * RapDescArrayLength( descriptor );
 
+            if( outParams + arraySize > outParamsMax ) goto insuff_buffer;
+
             RtlCopyMemory( outParams, inParams, arraySize );
 
             outParams += arraySize;
@@ -1880,7 +1911,7 @@ Return Value:
     //
 
     Transaction->ParameterCount =
-        (DWORD)(outParams - (DWORD)(Transaction->OutParameters) );
+        (DWORD)((DWORD_PTR)outParams - (DWORD_PTR)(Transaction->OutParameters) );
 
     //
     // Free the parameter buffer allocated by XsCaptureParameters.
@@ -1888,6 +1919,10 @@ Return Value:
 
     NetpMemoryFree( Header );
 
+    return;
+
+insuff_buffer:
+    Header->Status = NERR_BufTooSmall;
     return;
 
 } // XsSetParameters
@@ -1976,4 +2011,34 @@ cleanup:
 
     return status;
 }
+
+VOID
+SmbCapturePtr(
+    LPBYTE  PointerDestination,
+    LPBYTE  PointerValue
+    )
+
+/*++
+
+Routine Description:
+
+    This routine captures a pointer from the supplied buffer and places it
+    into the destination buffer.
+
+Arguments:
+
+    PointerDestination - A pointer to the pointer value destination.
+
+    PointerSource - A pointer to the pointer value source.
+
+Return Value:
+
+    None.
+
+--*/
+
+{
+    XsSmbPutPointer( PointerDestination, PointerValue );
+}
+
 

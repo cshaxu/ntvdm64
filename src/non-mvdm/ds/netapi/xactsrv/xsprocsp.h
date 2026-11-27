@@ -23,24 +23,14 @@ Revision History:
 #define _XSPROCSP_
 
 //
-// Main control routines.
+// This header file is full of expressions that are always false. These
+// expressions manifest themselves in macros that take unsigned values
+// and make tests, for example, of greater than or equal to zero.
+//
+// Turn off these warnings until the authors fix this code.
 //
 
-NTSTATUS
-XsInitialize (
-    VOID
-    );
-
-VOID
-XsControlHandler (
-    IN DWORD opCode
-    );
-
-VOID
-XsProcessApisWrapper (
-    DWORD ThreadNum
-    );
-
+#pragma warning(disable:4296)
 
 //
 // Helper subroutines.
@@ -62,7 +52,7 @@ XsProcessApisWrapper (
 #define XsAddVarString( StringLocation, String, Pointer, OffsetBegin ) \
     NetpCopyWStrToStrDBCS((StringLocation), (String));                 \
     SmbPutUlong((LPDWORD)(Pointer),                                    \
-        ((LPBYTE)(StringLocation)-(LPBYTE)(OffsetBegin)));             \
+        (ULONG)((LPBYTE)(StringLocation)-(LPBYTE)(OffsetBegin)));      \
     StringLocation += (strlen((LPSTR)StringLocation) + 1)
 
 //
@@ -133,23 +123,11 @@ XsBytesForConvertedStructure (
     IN BOOL MeaninglessInputPointers
     );
 
-LPVOID
-XsCaptureParameters (
-    IN LPTRANSACTION Transaction,
-    OUT LPDESC *AuxDescriptor
-    );
-
 BOOL
 XsCheckBufferSize (
     IN WORD BufferLength,
     IN LPDESC Descriptor,
     IN BOOL NativeFormat
-    );
-
-BOOL
-XsCheckSmbDescriptor(
-    IN LPDESC SmbDescriptor,
-    IN LPDESC ActualDescriptor
     );
 
 //
@@ -161,6 +139,7 @@ XsCheckSmbDescriptor(
 //
 // Check if parameter is out of range.
 //
+
 
 #define XsDwordParamOutOfRange( Field, Min, Max )   \
     (((DWORD)SmbGetUlong( &( Field )) < ( Min )) || \
@@ -293,13 +272,6 @@ XsSetDataCount(
     IN WORD ReturnStatus
     );
 
-VOID
-XsSetParameters(
-    IN LPTRANSACTION Transaction,
-    IN LPXS_PARAMETER_HEADER Header,
-    IN LPVOID Parameters
-    );
-
 //
 // XsWordParamOutOfRange(
 //     IN WORD Field,
@@ -308,6 +280,9 @@ XsSetParameters(
 //     )
 //
 // Check if parameter is out of range.
+//
+// N.B. If Min is zero, then the first part of the following expression is
+//      always FALSE.
 //
 
 #define XsWordParamOutOfRange( Field, Min, Max )            \
@@ -331,8 +306,9 @@ XsNetUnsupportedApi (
 //  RAP server info array
 //
 
+typedef
 USHORT
-XsConvertServerEnumBuffer(
+(XS_CONVERT_SERVER_ENUM_BUFFER_FUNCTION)(
     IN LPVOID ServerEnumBuffer,
     IN DWORD EntriesRead,
     IN OUT PDWORD TotalEntries,
@@ -342,5 +318,76 @@ XsConvertServerEnumBuffer(
     OUT PDWORD EntriesFilled,
     OUT PUSHORT Converter
     );
+
+extern XS_CONVERT_SERVER_ENUM_BUFFER_FUNCTION XsConvertServerEnumBuffer;
+
+
+//++
+//
+// ULONG
+// XsSmbGetPointer (
+//     IN PSMB_ULONG SrcAddress
+//     )
+//
+// Routine Description:
+//
+//     This macro retrieves a ULONG value from the possibly misaligned
+//     source address, avoiding alignment faults.
+//     This also takes into account the fact that pointers are 8-bytes on 64-bit.
+//
+// Arguments:
+//
+//     SrcAddress - where to retrieve ULONG value from
+//
+// Return Value:
+//
+//     ULONG - the value retrieved.  The target must be aligned.
+//
+//--
+#if defined (_WIN64)
+#define XsSmbGetPointer(SrcAddress) ((LPBYTE)(  ((__int64)SmbGetUlong((LPVOID)SrcAddress)) + (((__int64)SmbGetUlong( ( ((LPBYTE)SrcAddress) + 4 ) ) ) << 32) ))
+#else
+#define XsSmbGetPointer SmbGetUlong
+#endif
+
+
+//++
+//
+// VOID
+// XsSmbPutPointer (
+//     OUT PSMB_ULONG DestAddress,
+//     IN LPVOID Value
+//     )
+//
+// Routine Description:
+//
+//     This macro stores a POINTER value at the possibly misaligned
+//     destination address, avoiding alignment faults.
+//     This also takes into account the fact that 64-bit pointers are 8-bytes
+//
+// Arguments:
+//
+//     DestAddress - where to store ULONG value
+//
+//     Value - ULONG to store.  Value must be a constant or an aligned
+//         field.
+//
+// Return Value:
+//
+//     None.
+//
+//--
+#if defined (_WIN64)
+#define XsSmbPutPointer(DestAddress64,Value)                 \
+              {                                              \
+                    LPDWORD Source = (LPDWORD)(&Value);      \
+                    LPDWORD Dest = (LPDWORD)DestAddress64;   \
+                    SmbPutUlong( Dest, SmbGetUlong(Source) );             \
+                    SmbPutUlong( Dest+1, SmbGetUlong(Source+1) );         \
+              }
+
+#else
+#define XsSmbPutPointer(DEST,VAL) SmbPutUlong(DEST, (ULONG)VAL)
+#endif
 
 #endif // ndef _XSPROCSP_

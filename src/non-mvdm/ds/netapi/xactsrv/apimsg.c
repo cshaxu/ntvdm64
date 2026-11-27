@@ -72,61 +72,64 @@ Return Value:
                       SmbGetUlong( &parameters->Recipient )));
     }
 
-    //
-    // Translate parameters, check for errors.
-    //
+    try {
+        //
+        // Translate parameters, check for errors.
+        //
 
-    XsConvertTextParameter(
-        nativeRecipient,
-        (LPSTR)SmbGetUlong( &parameters->Recipient )
-        );
+        XsConvertTextParameter(
+            nativeRecipient,
+            (LPSTR)XsSmbGetPointer( &parameters->Recipient )
+            );
 
-    //
-    // NetMessageBufferSend has an ASCII data buffer. Convert this to
-    // Unicode if necessary. BUGBUG - Make sure BufLen is semantically correct.
-    //
+        //
+        // NetMessageBufferSend has an ASCII data buffer. Convert this to
+        // Unicode if necessary. 
+        //
 
 #ifdef UNICODE
 
-    nativeBufLen = SmbGetUshort( &parameters->BufLen ) * sizeof(WCHAR);
+        nativeBufLen = SmbGetUshort( &parameters->BufLen ) * sizeof(WCHAR);
 
-    if (( nativeBuffer = NetpMemoryAllocate( nativeBufLen )) == NULL ) {
+        if (( nativeBuffer = NetpMemoryAllocate( nativeBufLen )) == NULL ) {
 
-        status = NERR_NoRoom;
-        goto cleanup;
+            status = NERR_NoRoom;
+            goto cleanup;
 
-    } else {
+        } else {
 
-        XsCopyBufToTBuf(
-            (LPBYTE)nativeBuffer,
-            (LPBYTE)SmbGetUlong( &parameters->Buffer ),
-            (DWORD)SmbGetUshort( &parameters->BufLen )
-            );
+            XsCopyBufToTBuf(
+                (LPBYTE)nativeBuffer,
+                (LPBYTE)XsSmbGetPointer( &parameters->Buffer ),
+                (DWORD)SmbGetUshort( &parameters->BufLen )
+                );
 
-    }
-#else
-#line 108
-#error Unsupported excluded original configuration
-#line 112
-#endif // def UNICODE
-#line 113
-
-    status = NetMessageBufferSend(
-                 NULL,
-                 nativeRecipient,
-                 NULL,
-                 nativeBuffer,
-                 nativeBufLen
-                 );
-
-    if ( !XsApiSuccess( status )) {
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "XsNetMessageBufferSend: NetMessageBufferSend "
-                          "failed: %X\n", status ));
         }
-    }
+#else
+#error Unsupported excluded original configuration
+#endif // def UNICODE
+#line 115
+
+        status = NetMessageBufferSend(
+                     NULL,
+                     nativeRecipient,
+                     NULL,
+                     nativeBuffer,
+                     nativeBufLen
+                     );
+
+        if ( !XsApiSuccess( status )) {
+            IF_DEBUG(ERRORS) {
+                NetpKdPrint(( "XsNetMessageBufferSend: NetMessageBufferSend "
+                              "failed: %X\n", status ));
+            }
+        }
 
 cleanup:
+    ;
+    } except( EXCEPTION_EXECUTE_HANDLER ) {
+        status = (WORD)RtlNtStatusToDosError( GetExceptionCode() );
+    }
 
     NetpMemoryFree( nativeRecipient );
 
@@ -182,36 +185,41 @@ Return Value:
                       SmbGetUlong( &parameters->MessageName )));
     }
 
-    //
-    // Translate parameters, check for errors.
-    //
+    try {
+        //
+        // Translate parameters, check for errors.
+        //
 
-    XsConvertTextParameter(
-        nativeMessageName,
-        (LPSTR)SmbGetUlong( &parameters->MessageName )
-        );
+        XsConvertTextParameter(
+            nativeMessageName,
+            (LPSTR)XsSmbGetPointer( &parameters->MessageName )
+            );
 
-    //
-    // NetMessageNameAdd has one useful parameter, MessageName, a string.
-    // The other parameter, FwdAction, is ignored in NT, because forwarding
-    // messages is not supported.
-    //
-    // Make the local call.
-    //
+        //
+        // NetMessageNameAdd has one useful parameter, MessageName, a string.
+        // The other parameter, FwdAction, is ignored in NT, because forwarding
+        // messages is not supported.
+        //
+        // Make the local call.
+        //
 
-    status = NetMessageNameAdd(
-                 NULL,
-                 nativeMessageName
-                 );
+        status = NetMessageNameAdd(
+                     NULL,
+                     nativeMessageName
+                     );
 
-    if ( !XsApiSuccess( status )) {
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "XsNetMessageNameAdd: NetMessageNameAdd "
-                          "failed: %X\n", status ));
+        if ( !XsApiSuccess( status )) {
+            IF_DEBUG(ERRORS) {
+                NetpKdPrint(( "XsNetMessageNameAdd: NetMessageNameAdd "
+                              "failed: %X\n", status ));
+            }
         }
-    }
 
 cleanup:
+    ;
+    } except( EXCEPTION_EXECUTE_HANDLER ) {
+        status = (WORD)RtlNtStatusToDosError( GetExceptionCode() );
+    }
 
     NetpMemoryFree( nativeMessageName );
 
@@ -263,36 +271,41 @@ Return Value:
                       SmbGetUlong( &parameters->MessageName )));
     }
 
-    //
-    // Translate parameters, check for errors.
-    //
+    try {
+        //
+        // Translate parameters, check for errors.
+        //
 
-    XsConvertTextParameter(
-        nativeMessageName,
-        (LPSTR)SmbGetUlong( &parameters->MessageName )
-        );
+        XsConvertTextParameter(
+            nativeMessageName,
+            (LPSTR)XsSmbGetPointer( &parameters->MessageName )
+            );
 
-    //
-    // NetMessageNameDel has only one useful parameter, MessageName, which is
-    // a string. The other parameter, FwdAction, is ignored, because NT does
-    // not support message forwarding.
-    //
-    // Make the local call.
-    //
+        //
+        // NetMessageNameDel has only one useful parameter, MessageName, which is
+        // a string. The other parameter, FwdAction, is ignored, because NT does
+        // not support message forwarding.
+        //
+        // Make the local call.
+        //
 
-    status = NetMessageNameDel(
-                 NULL,
-                 nativeMessageName
-                 );
+        status = NetMessageNameDel(
+                     NULL,
+                     nativeMessageName
+                     );
 
-    if ( !XsApiSuccess( status )) {
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "XsNetMessageNameDel: NetMessageNameDel failed: "
-                          "%X\n", status ));
+        if ( !XsApiSuccess( status )) {
+            IF_DEBUG(ERRORS) {
+                NetpKdPrint(( "XsNetMessageNameDel: NetMessageNameDel failed: "
+                              "%X\n", status ));
+            }
         }
-    }
 
 cleanup:
+    ;
+    } except( EXCEPTION_EXECUTE_HANDLER ) {
+        status = (WORD)RtlNtStatusToDosError( GetExceptionCode() );
+    }
 
     NetpMemoryFree( nativeMessageName );
 
@@ -337,7 +350,7 @@ Return Value:
     DWORD entriesRead;
     DWORD totalEntries;
 
-    DWORD entriesFilled;                    // Conversion variables
+    DWORD entriesFilled = 0;                // Conversion variables
     DWORD bytesRequired = 0;
     LPDESC nativeStructureDesc;
 
@@ -350,110 +363,115 @@ Return Value:
                       SmbGetUshort( &parameters->BufLen )));
     }
 
-    //
-    // Check for errors.
-    //
+    try {
+        //
+        // Check for errors.
+        //
 
-    if ( XsWordParamOutOfRange( parameters->Level, 0, 1 )) {
+        if ( XsWordParamOutOfRange( parameters->Level, 0, 1 )) {
 
-        Header->Status = ERROR_INVALID_LEVEL;
-        goto cleanup;
-    }
-
-    //
-    // Get the actual information from the local 32-bit call.
-    //
-
-    status = NetMessageNameEnum(
-                 NULL,
-                 (DWORD)SmbGetUshort( &parameters->Level ),
-                 (LPBYTE *)&outBuffer,
-                 XsNativeBufferSize( SmbGetUshort( &parameters->BufLen )),
-                 &entriesRead,
-                 &totalEntries,
-                 NULL
-                 );
-
-    if ( !XsApiSuccess( status )) {
-        IF_DEBUG(API_ERRORS) {
-            NetpKdPrint(( "XsNetMessageNameEnum: NetMessageNameEnum failed:"
-                          " %X\n", status ));
+            Header->Status = ERROR_INVALID_LEVEL;
+            goto cleanup;
         }
-        Header->Status = (WORD)status;
-        goto cleanup;
-    }
 
-    IF_DEBUG(MESSAGE) {
-        NetpKdPrint(( "XsNetMessageNameEnum: received %ld entries at %lx\n",
-                      entriesRead, outBuffer ));
-    }
+        //
+        // Get the actual information from the local 32-bit call.
+        //
 
-    //
-    // Use the requested level to determine the format of the
-    // data structure.
-    //
+        status = NetMessageNameEnum(
+                     NULL,
+                     (DWORD)SmbGetUshort( &parameters->Level ),
+                     (LPBYTE *)&outBuffer,
+                     XsNativeBufferSize( SmbGetUshort( &parameters->BufLen )),
+                     &entriesRead,
+                     &totalEntries,
+                     NULL
+                     );
 
-    switch ( SmbGetUshort( &parameters->Level ) ) {
+        if ( !XsApiSuccess( status )) {
+            IF_DEBUG(API_ERRORS) {
+                NetpKdPrint(( "XsNetMessageNameEnum: NetMessageNameEnum failed:"
+                              " %X\n", status ));
+            }
+            Header->Status = (WORD)status;
+            goto cleanup;
+        }
 
-    case 0:
+        IF_DEBUG(MESSAGE) {
+            NetpKdPrint(( "XsNetMessageNameEnum: received %ld entries at %lx\n",
+                          entriesRead, outBuffer ));
+        }
 
-        nativeStructureDesc = Desc32_msg_info_0;
-        StructureDesc = Desc16_msg_info_0;
-        break;
+        //
+        // Use the requested level to determine the format of the
+        // data structure.
+        //
 
-    case 1:
+        switch ( SmbGetUshort( &parameters->Level ) ) {
 
-        nativeStructureDesc = Desc32_msg_info_1;
-        StructureDesc = Desc16_msg_info_1;
-        break;
-    }
+        case 0:
 
-    //
-    // Do the actual conversion from the 32-bit structures to 16-bit
-    // structures.
-    //
+            nativeStructureDesc = Desc32_msg_info_0;
+            StructureDesc = Desc16_msg_info_0;
+            break;
 
-    XsFillEnumBuffer(
-        outBuffer,
-        entriesRead,
-        nativeStructureDesc,
-        (LPVOID)SmbGetUlong( &parameters->Buffer ),
-        (LPVOID)SmbGetUlong( &parameters->Buffer ),
-        SmbGetUshort( &parameters->BufLen ),
-        StructureDesc,
-        NULL,  // verify function
-        &bytesRequired,
-        &entriesFilled,
-        NULL
-        );
+        case 1:
 
-    IF_DEBUG(MESSAGE) {
-        NetpKdPrint(( "32-bit data at %lx, 16-bit data at %lx, %ld BR,"
-                      " Entries %ld of %ld\n",
-                      outBuffer, SmbGetUlong( &parameters->Buffer ),
-                      bytesRequired, entriesFilled, totalEntries ));
-    }
+            nativeStructureDesc = Desc32_msg_info_1;
+            StructureDesc = Desc16_msg_info_1;
+            break;
+        }
 
-    //
-    // If all the entries could not be filled, return ERROR_MORE_DATA,
-    // and return the buffer as is. MSG_INFO_x structures have no
-    // data to pack.
-    //
+        //
+        // Do the actual conversion from the 32-bit structures to 16-bit
+        // structures.
+        //
 
-    if ( entriesFilled < totalEntries ) {
+        XsFillEnumBuffer(
+            outBuffer,
+            entriesRead,
+            nativeStructureDesc,
+            (LPVOID)XsSmbGetPointer( &parameters->Buffer ),
+            (LPVOID)XsSmbGetPointer( &parameters->Buffer ),
+            SmbGetUshort( &parameters->BufLen ),
+            StructureDesc,
+            NULL,  // verify function
+            &bytesRequired,
+            &entriesFilled,
+            NULL
+            );
 
-        Header->Status = ERROR_MORE_DATA;
+        IF_DEBUG(MESSAGE) {
+            NetpKdPrint(( "32-bit data at %lx, 16-bit data at %lx, %ld BR,"
+                          " Entries %ld of %ld\n",
+                          outBuffer, SmbGetUlong( &parameters->Buffer ),
+                          bytesRequired, entriesFilled, totalEntries ));
+        }
 
-    }
+        //
+        // If all the entries could not be filled, return ERROR_MORE_DATA,
+        // and return the buffer as is. MSG_INFO_x structures have no
+        // data to pack.
+        //
 
-    //
-    // Set up the response parameters.
-    //
+        if ( entriesFilled < totalEntries ) {
 
-    SmbPutUshort( &parameters->EntriesRead, (WORD)entriesFilled );
-    SmbPutUshort( &parameters->TotalAvail, (WORD)totalEntries );
+            Header->Status = ERROR_MORE_DATA;
+
+        }
+
+        //
+        // Set up the response parameters.
+        //
+
+        SmbPutUshort( &parameters->EntriesRead, (WORD)entriesFilled );
+        SmbPutUshort( &parameters->TotalAvail, (WORD)totalEntries );
 
 cleanup:
+    ;
+    } except( EXCEPTION_EXECUTE_HANDLER ) {
+        Header->Status = (WORD)RtlNtStatusToDosError( GetExceptionCode() );
+    }
 
     NetApiBufferFree( outBuffer );
 
@@ -515,128 +533,133 @@ Return Value:
                       Header, parameters, SmbGetUshort( &parameters->Level ) ));
     }
 
-    //
-    // Translate parameters, check for errors.
-    //
+    try {
+        //
+        // Translate parameters, check for errors.
+        //
 
-    if ( XsWordParamOutOfRange( parameters->Level, 0, 1 )) {
+        if ( XsWordParamOutOfRange( parameters->Level, 0, 1 )) {
 
-        Header->Status = ERROR_INVALID_LEVEL;
-        goto cleanup;
-    }
-
-    XsConvertTextParameter(
-        nativeMessageName,
-        (LPSTR)SmbGetUlong( &parameters->MessageName )
-        );
-
-    //
-    // Do the actual local call.
-    //
-
-    status = NetMessageNameGetInfo(
-                 NULL,
-                 nativeMessageName,
-                 (DWORD)SmbGetUshort( &parameters->Level ),
-                 (LPBYTE *)&outBuffer
-                 );
-
-    if ( !XsApiSuccess( status )) {
-        IF_DEBUG(API_ERRORS) {
-            NetpKdPrint(( "XsNetMessageNameGetInfo: "
-                          "NetMessageNameGetInfo failed: %X\n", status ));
+            Header->Status = ERROR_INVALID_LEVEL;
+            goto cleanup;
         }
-        Header->Status = (WORD)status;
-        goto cleanup;
 
-    }
+        XsConvertTextParameter(
+            nativeMessageName,
+            (LPSTR)XsSmbGetPointer( &parameters->MessageName )
+            );
 
-    //
-    // Use the requested level to determine the format of the
-    // data structure.
-    //
+        //
+        // Do the actual local call.
+        //
 
-    switch ( SmbGetUshort( &parameters->Level ) ) {
+        status = NetMessageNameGetInfo(
+                     NULL,
+                     nativeMessageName,
+                     (DWORD)SmbGetUshort( &parameters->Level ),
+                     (LPBYTE *)&outBuffer
+                     );
 
-    case 0:
+        if ( !XsApiSuccess( status )) {
+            IF_DEBUG(API_ERRORS) {
+                NetpKdPrint(( "XsNetMessageNameGetInfo: "
+                              "NetMessageNameGetInfo failed: %X\n", status ));
+            }
+            Header->Status = (WORD)status;
+            goto cleanup;
 
-        nativeStructureDesc = Desc32_msg_info_0;
-        StructureDesc = Desc16_msg_info_0;
-        break;
+        }
 
-    case 1:
+        //
+        // Use the requested level to determine the format of the
+        // data structure.
+        //
 
-        nativeStructureDesc = Desc32_msg_info_1;
-        StructureDesc = Desc16_msg_info_1;
-        break;
-    }
+        switch ( SmbGetUshort( &parameters->Level ) ) {
 
-    //
-    // Convert the structure returned by the 32-bit call to a 16-bit
-    // structure. The last possible location for variable data is
-    // calculated from buffer location and length.
-    //
+        case 0:
 
-    stringLocation = (LPBYTE)( SmbGetUlong( &parameters->Buffer )
-                                  + SmbGetUshort( &parameters->BufLen ) );
+            nativeStructureDesc = Desc32_msg_info_0;
+            StructureDesc = Desc16_msg_info_0;
+            break;
 
-    status = RapConvertSingleEntry(
-                 outBuffer,
-                 nativeStructureDesc,
-                 FALSE,
-                 (LPBYTE)SmbGetUlong( &parameters->Buffer ),
-                 (LPBYTE)SmbGetUlong( &parameters->Buffer ),
+        case 1:
+
+            nativeStructureDesc = Desc32_msg_info_1;
+            StructureDesc = Desc16_msg_info_1;
+            break;
+        }
+
+        //
+        // Convert the structure returned by the 32-bit call to a 16-bit
+        // structure. The last possible location for variable data is
+        // calculated from buffer location and length.
+        //
+
+        stringLocation = (LPBYTE)( XsSmbGetPointer( &parameters->Buffer )
+                                      + SmbGetUshort( &parameters->BufLen ) );
+
+        status = RapConvertSingleEntry(
+                     outBuffer,
+                     nativeStructureDesc,
+                     FALSE,
+                     (LPBYTE)XsSmbGetPointer( &parameters->Buffer ),
+                     (LPBYTE)XsSmbGetPointer( &parameters->Buffer ),
+                     StructureDesc,
+                     TRUE,
+                     &stringLocation,
+                     &bytesRequired,
+                     Response,
+                     NativeToRap
+                     );
+
+
+        if ( status != NERR_Success ) {
+            IF_DEBUG(ERRORS) {
+                NetpKdPrint(( "NetMessageNameGetInfo: "
+                              "RapConvertSingleEntry failed: %X\n", status ));
+            }
+
+            Header->Status = NERR_InternalError;
+            goto cleanup;
+        }
+
+        IF_DEBUG(MESSAGE) {
+            NetpKdPrint(( "32-bit data at %lx, 16-bit data at %lx, %ld BR\n",
+                          outBuffer, SmbGetUlong( &parameters->Buffer ),
+                          bytesRequired ));
+        }
+
+        //
+        // Determine return code based on the size of the buffer. msg_info_x
+        // structures have no data to pack.
+        //
+
+        if ( !XsCheckBufferSize(
+                 SmbGetUshort( &parameters->BufLen ),
                  StructureDesc,
-                 TRUE,
-                 &stringLocation,
-                 &bytesRequired,
-                 Response,
-                 NativeToRap
-                 );
+                 FALSE  // not in native format
+                 )) {
 
+            IF_DEBUG(ERRORS) {
+                NetpKdPrint(( "XsNetMessageNameGetInfo: Buffer too small.\n" ));
+            }
+            Header->Status = NERR_BufTooSmall;
 
-    if ( status != NERR_Success ) {
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "NetMessageNameGetInfo: "
-                          "RapConvertSingleEntry failed: %X\n", status ));
         }
 
-        Header->Status = NERR_InternalError;
-        goto cleanup;
-    }
 
-    IF_DEBUG(MESSAGE) {
-        NetpKdPrint(( "32-bit data at %lx, 16-bit data at %lx, %ld BR\n",
-                      outBuffer, SmbGetUlong( &parameters->Buffer ),
-                      bytesRequired ));
-    }
+        //
+        // Set up the response parameters.
+        //
 
-    //
-    // Determine return code based on the size of the buffer. msg_info_x
-    // structures have no data to pack.
-    //
-
-    if ( !XsCheckBufferSize(
-             SmbGetUshort( &parameters->BufLen ),
-             StructureDesc,
-             FALSE  // not in native format
-             )) {
-
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "XsNetMessageNameGetInfo: Buffer too small.\n" ));
-        }
-        Header->Status = NERR_BufTooSmall;
-
-    }
-
-
-    //
-    // Set up the response parameters.
-    //
-
-    SmbPutUshort( &parameters->TotalAvail, (WORD)bytesRequired );
+        SmbPutUshort( &parameters->TotalAvail, (WORD)bytesRequired );
 
 cleanup:
+    ;
+    } except( EXCEPTION_EXECUTE_HANDLER ) {
+        Header->Status = (WORD)RtlNtStatusToDosError( GetExceptionCode() );
+    }
 
     NetApiBufferFree( outBuffer );
     NetpMemoryFree( nativeMessageName );
@@ -656,4 +679,3 @@ cleanup:
     return STATUS_SUCCESS;
 
 } // XsNetMessageNameGetInfo
-

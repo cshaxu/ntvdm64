@@ -76,85 +76,95 @@ Return Value:
 
     API_HANDLER_PARAMETERS_REFERENCE;       // Avoid warnings
 
-    //
-    // Check for errors.
-    //
+    try {
+        //
+        // Check for errors.
+        //
 
-    if ( SmbGetUshort( &parameters->Level ) != 0 ) {
+        if ( SmbGetUshort( &parameters->Level ) != 0 ) {
 
-        Header->Status = ERROR_INVALID_LEVEL;
-        goto cleanup;
+            Header->Status = ERROR_INVALID_LEVEL;
+            goto cleanup;
 
-    }
+        }
 
-    //
-    // Make the local call.
-    //
+        //
+        // Make the local call.
+        //
 
-    bufferLength = (DWORD)SmbGetUshort( &parameters->BufLen );
+        bufferLength = (DWORD)SmbGetUshort( &parameters->BufLen );
 
-    status = NetServerDiskEnum(
-                 NULL,
-                 (DWORD)SmbGetUshort( &parameters->Level ),
-                 (LPBYTE *)&outBuffer,
-                 XsNativeBufferSize( bufferLength ),
-                 &entriesRead,
-                 &totalEntries,
-                 NULL
-                 );
+        status = NetServerDiskEnum(
+                     NULL,
+                     (DWORD)SmbGetUshort( &parameters->Level ),
+                     (LPBYTE *)&outBuffer,
+                     XsNativeBufferSize( bufferLength ),
+                     &entriesRead,
+                     &totalEntries,
+                     NULL
+                     );
 
-    if ( !XsApiSuccess( status )) {
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "XsNetServer: NetServerDiskEnum failed: "
-                          "%X\n", status ));
+        if ( !XsApiSuccess( status )) {
+            IF_DEBUG(ERRORS) {
+                NetpKdPrint(( "XsNetServer: NetServerDiskEnum failed: "
+                              "%X\n", status ));
+            }
+
+            Header->Status = (WORD)status;
+            goto cleanup;
+        }
+
+        //
+        // Calculate how many entries will fit in 16-bit buffer;
+        //
+
+        if ( bufferLength > 0 ) {
+            DWORD elementSize;
+
+            elementSize = RapStructureSize( StructureDesc, Response, FALSE );
+
+            if (elementSize != 0) {
+                entriesFilled = ( bufferLength - 1 ) / elementSize;
+            }
+        }
+
+        if ( entriesFilled < entriesRead ) {
+
+            status = ERROR_MORE_DATA;
+        } else {
+
+            entriesFilled = entriesRead;
+            status = NERR_Success;
+        }
+
+        //
+        // Copy native buffer to 16-bit buffer, converting Unicode to Ansi
+        // if necessary.
+        //
+
+        if ( bufferLength > 0 ) {
+
+            DWORD i;
+            LPTSTR entryIn = (LPTSTR)outBuffer;
+            LPSTR entryOut = (LPSTR)XsSmbGetPointer( &parameters->Buffer );
+
+            for ( i = 0; i < entriesFilled; i++ ) {
+
+                NetpCopyWStrToStrDBCS( entryOut, entryIn );
+                entryOut += ( strlen( entryOut ) + 1 );
+                entryIn += ( STRLEN( entryIn ) + 1 );
+
+            }
+            strcpy( entryOut, "" );
         }
 
         Header->Status = (WORD)status;
-        goto cleanup;
-    }
-
-    //
-    // Calculate how many entries will fit in 16-bit buffer;
-    //
-
-    if ( bufferLength > 0 ) {
-        entriesFilled = ( bufferLength - 1 ) /
-                          RapStructureSize( StructureDesc, Response, FALSE );
-    }
-
-    if ( entriesFilled < entriesRead ) {
-
-        status = ERROR_MORE_DATA;
-    } else {
-
-        entriesFilled = entriesRead;
-        status = NERR_Success;
-    }
-
-    //
-    // Copy native buffer to 16-bit buffer, converting Unicode to Ansi
-    // if necessary.
-    //
-
-    if ( bufferLength > 0 ) {
-
-        DWORD i;
-        LPTSTR entryIn = (LPTSTR)outBuffer;
-        LPSTR entryOut = (LPSTR)SmbGetUlong( &parameters->Buffer );
-
-        for ( i = 0; i < entriesFilled; i++ ) {
-
-            NetpCopyWStrToStrDBCS( entryOut, entryIn );
-            entryOut += ( strlen( entryOut ) + 1 );
-            entryIn += ( STRLEN( entryIn ) + 1 );
-
-        }
-        strcpy( entryOut, "" );
-    }
-
-    Header->Status = (WORD)status;
 
 cleanup:
+    ;
+    } except( EXCEPTION_EXECUTE_HANDLER ) {
+        Header->Status = (WORD)RtlNtStatusToDosError( GetExceptionCode() );
+    }
 
     //
     // Put return data into fields.
@@ -203,7 +213,7 @@ Return Value:
     LPTSTR clientTransportName = NULL;
     LPTSTR clientName = NULL;
 
-    DWORD entriesFilled;                    // Conversion variables
+    DWORD entriesFilled = 0;                    // Conversion variables
 
     API_HANDLER_PARAMETERS_REFERENCE;       // Avoid warnings
 
@@ -214,107 +224,112 @@ Return Value:
                       SmbGetUshort( &parameters->BufLen )));
     }
 
-    //
-    // Translate parameters, check for errors.
-    //
+    try {
+        //
+        // Translate parameters, check for errors.
+        //
 
-    if ( XsWordParamOutOfRange( parameters->Level, 0, 1 )) {
+        if ( XsWordParamOutOfRange( parameters->Level, 0, 1 )) {
 
-        Header->Status = ERROR_INVALID_LEVEL;
-        goto cleanup;
-    }
-
-    XsConvertTextParameter(
-        nativeDomain,
-        (LPSTR)SmbGetUlong( &parameters->Domain )
-        );
-
-    clientTransportName = Header->ClientTransportName;
-
-    clientName = Header->ClientMachineName;
-
-    //
-    // Get the actual server information from the local 32-bit call. The
-    // native level is 100 or 101.
-    //
-
-    if (clientTransportName == NULL) {
-        status = NetServerEnum(
-                        NULL,
-                        100 + (DWORD)SmbGetUshort( &parameters->Level ),
-                        (LPBYTE *)&outBuffer,
-                        XsNativeBufferSize( SmbGetUshort( &parameters->BufLen )),
-                        &entriesRead,
-                        &totalEntries,
-                        SmbGetUlong( &parameters->ServerType ),
-                        nativeDomain,
-                        NULL
-                        );
-
-        if ( !XsApiSuccess( status ) ) {
-            IF_DEBUG(API_ERRORS) {
-                NetpKdPrint(( "XsNetServerEnum2: NetServerEnum failed: %X\n",
-                              status ));
-            }
-            Header->Status = (WORD)status;
+            Header->Status = ERROR_INVALID_LEVEL;
             goto cleanup;
         }
 
-        Header->Status = XsConvertServerEnumBuffer(
-                              outBuffer,
-                              entriesRead,
-                              &totalEntries,
-                              SmbGetUshort( &parameters->Level ),
-                              (LPVOID)SmbGetUlong( &parameters->Buffer ),
-                              SmbGetUshort( &parameters->BufLen ),
-                              &entriesFilled,
-                              &Header->Converter);
+        XsConvertTextParameter(
+            nativeDomain,
+            (LPSTR)XsSmbGetPointer( &parameters->Domain )
+            );
 
-    } else {
+        clientTransportName = Header->ClientTransportName;
 
-        Header->Status = I_BrowserServerEnumForXactsrv(
-                 clientTransportName,
-                 clientName,
+        clientName = Header->ClientMachineName;
 
-                 100 + SmbGetUshort( &parameters->Level ),
-                 SmbGetUshort( &parameters->Level ),
+        //
+        // Get the actual server information from the local 32-bit call. The
+        // native level is 100 or 101.
+        //
 
-                 (PVOID)SmbGetUlong( &parameters->Buffer ),
-                 SmbGetUshort( &parameters->BufLen ),
-                 XsNativeBufferSize( SmbGetUshort( &parameters->BufLen ) ),
+        if (clientTransportName == NULL) {
+            status = NetServerEnum(
+                            NULL,
+                            100 + (DWORD)SmbGetUshort( &parameters->Level ),
+                            (LPBYTE *)&outBuffer,
+                            XsNativeBufferSize( SmbGetUshort( &parameters->BufLen )),
+                            &entriesRead,
+                            &totalEntries,
+                            SmbGetUlong( &parameters->ServerType ),
+                            nativeDomain,
+                            NULL
+                            );
 
-                 &entriesFilled,
-                 &totalEntries,
-
-                 SmbGetUlong( &parameters->ServerType ),
-                 nativeDomain,
-                 NULL,
-
-                 &Header->Converter
-
-                 );
-
-
-        if (!XsApiSuccess( Header->Status )) {
-            IF_DEBUG(API_ERRORS) {
-                NetpKdPrint(( "XsNetServerEnum2: I_BrowserServerEnum failed: %d\n", Header->Status));
+            if ( !XsApiSuccess( status ) ) {
+                IF_DEBUG(API_ERRORS) {
+                    NetpKdPrint(( "XsNetServerEnum2: NetServerEnum failed: %X\n",
+                                  status ));
+                }
+                Header->Status = (WORD)status;
+                goto cleanup;
             }
-            goto cleanup;
+
+            Header->Status = XsConvertServerEnumBuffer(
+                                  outBuffer,
+                                  entriesRead,
+                                  &totalEntries,
+                                  SmbGetUshort( &parameters->Level ),
+                                  (LPVOID)XsSmbGetPointer( &parameters->Buffer ),
+                                  SmbGetUshort( &parameters->BufLen ),
+                                  &entriesFilled,
+                                  &Header->Converter);
+
+        } else {
+
+            Header->Status = I_BrowserServerEnumForXactsrv(
+                     clientTransportName,
+                     clientName,
+
+                     100 + SmbGetUshort( &parameters->Level ),
+                     SmbGetUshort( &parameters->Level ),
+
+                     (PVOID)XsSmbGetPointer( &parameters->Buffer ),
+                     SmbGetUshort( &parameters->BufLen ),
+                     XsNativeBufferSize( SmbGetUshort( &parameters->BufLen ) ),
+
+                     &entriesFilled,
+                     &totalEntries,
+
+                     SmbGetUlong( &parameters->ServerType ),
+                     nativeDomain,
+                     NULL,
+
+                     &Header->Converter
+
+                     );
+
+
+            if (!XsApiSuccess( Header->Status )) {
+                IF_DEBUG(API_ERRORS) {
+                    NetpKdPrint(( "XsNetServerEnum2: I_BrowserServerEnum failed: %d\n", Header->Status));
+                }
+                goto cleanup;
+            }
         }
-    }
 
-    if ( entriesFilled == 0 ) {
-        SmbPutUshort( &parameters->BufLen, 0 );
-    }
+        if ( entriesFilled == 0 ) {
+            SmbPutUshort( &parameters->BufLen, 0 );
+        }
 
-    //
-    // Set up the response parameters.
-    //
+        //
+        // Set up the response parameters.
+        //
 
-    SmbPutUshort( &parameters->EntriesRead, (WORD)entriesFilled );
-    SmbPutUshort( &parameters->TotalAvail, (WORD)totalEntries );
+        SmbPutUshort( &parameters->EntriesRead, (WORD)entriesFilled );
+        SmbPutUshort( &parameters->TotalAvail, (WORD)totalEntries );
 
 cleanup:
+    ;
+    } except( EXCEPTION_EXECUTE_HANDLER ) {
+        Header->Status = (WORD)RtlNtStatusToDosError( GetExceptionCode() );
+    }
 
     if ( outBuffer != NULL ) {
         NetApiBufferFree( outBuffer );
@@ -339,7 +354,7 @@ cleanup:
 
 } // XsNetServerEnum2
 
-#line 522
+#line 542
 USHORT
 XsConvertServerEnumBuffer(
     IN LPVOID ServerEnumBuffer,
@@ -443,11 +458,9 @@ Return Value:
     if ( invalidEntries > 0) {
         (*TotalEntries) -= invalidEntries;
 #if DBG
-#line 625
 #error Unsupported excluded original configuration
-#line 630
 #endif
-#line 631
+#line 655
     }
 
     //
@@ -472,7 +485,6 @@ Return Value:
 
     return status;
 }   //  XsConvertServerEnumBuffer
-
 
 
 
@@ -527,115 +539,93 @@ Return Value:
                       Header, parameters, SmbGetUshort( &parameters->Level ) ));
     }
 
-    //
-    // Check for errors.
-    //
+    try {
+        //
+        // Check for errors.
+        //
 
-    if ( XsWordParamOutOfRange( parameters->Level, 0, 3 ) ) {
+        if ( XsWordParamOutOfRange( parameters->Level, 0, 3 ) ) {
 
-        Header->Status = ERROR_INVALID_LEVEL;
-        goto cleanup;
-    }
-
-    //
-    // Use the 16-bit level number to determine the NT level number and the
-    // native descriptor string.
-    //
-
-    switch ( SmbGetUshort( &parameters->Level ) ) {
-
-    case 0:
-
-        nativeStructureDesc = Desc32_server_info_0;
-        StructureDesc = Desc16_server_info_0;
-        localLevel = 100;
-        break;
-
-    case 1:
-
-        nativeStructureDesc = Desc32_server_info_1;
-        StructureDesc = Desc16_server_info_1;
-        localLevel = 101;
-        break;
-
-    case 2:
-
-        nativeStructureDesc = Desc32_server_info_2;
-        StructureDesc = Desc16_server_info_2;
-        localLevel = 102;
-        break;
-
-    case 3:
-
-        nativeStructureDesc = Desc32_server_info_3;
-        StructureDesc = Desc16_server_info_3;
-        localLevel = 102;
-        break;
-
-    }
-
-    //
-    // If the buffer is not big enough, we have to continue doing the
-    // Rap Conversion so that we can return the right buffer size to
-    // the caller.
-    //
-
-    sizeOfFixedStructure = RapStructureSize( StructureDesc,
-                                              Response,
-                                              FALSE );
-
-    if ( SmbGetUshort( &parameters->BufLen ) < sizeOfFixedStructure ) {
-
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "XsNetServerGetInfo: Buffer too small.\n" ));
+            Header->Status = ERROR_INVALID_LEVEL;
+            goto cleanup;
         }
 
-        bufferTooSmall = TRUE;
-    }
+        //
+        // Use the 16-bit level number to determine the NT level number and the
+        // native descriptor string.
+        //
 
-    serverNameBuf[0] = serverNameBuf[1] = '\\';
-    memcpy( &serverNameBuf[2], Header->ServerName, NETBIOS_NAME_LEN );
-    for( p = &serverNameBuf[ NETBIOS_NAME_LEN + 1 ]; p > serverNameBuf && *p == ' '; p-- )
-        ;
-    *(p+1) = '\0';
+        switch ( SmbGetUshort( &parameters->Level ) ) {
 
-    ServerName = XsDupStrToWStr( serverNameBuf );
+        case 0:
 
-    if( ServerName == NULL ) {
-        Header->Status = NERR_NoRoom;
-        goto cleanup;
-    }
+            nativeStructureDesc = Desc32_server_info_0;
+            StructureDesc = Desc16_server_info_0;
+            localLevel = 100;
+            break;
 
-    //
-    // Do the actual local call.
-    //
-    status = NetServerGetInfo(
-                 ServerName,
-                 localLevel,
-                 (LPBYTE *)&nativeStruct
-                 );
+        case 1:
 
-    if ( !XsApiSuccess( status )) {
-        IF_DEBUG(API_ERRORS) {
-            NetpKdPrint(( "XsNetServerGetInfo: NetServerGetInfo failed: "
-                          "%X\n", status ));
+            nativeStructureDesc = Desc32_server_info_1;
+            StructureDesc = Desc16_server_info_1;
+            localLevel = 101;
+            break;
+
+        case 2:
+
+            nativeStructureDesc = Desc32_server_info_2;
+            StructureDesc = Desc16_server_info_2;
+            localLevel = 102;
+            break;
+
+        case 3:
+
+            nativeStructureDesc = Desc32_server_info_3;
+            StructureDesc = Desc16_server_info_3;
+            localLevel = 102;
+            break;
+
         }
-        Header->Status = (WORD)status;
-        goto cleanup;
 
-    }
+        //
+        // If the buffer is not big enough, we have to continue doing the
+        // Rap Conversion so that we can return the right buffer size to
+        // the caller.
+        //
 
-    //
-    // For levels 2 and 3 (native level 102), additional data is
-    // required from native level 502. Do this call.
-    //
+        sizeOfFixedStructure = RapStructureSize( StructureDesc,
+                                                  Response,
+                                                  FALSE );
 
-    if ( localLevel == 102 ) {
+        if ( SmbGetUshort( &parameters->BufLen ) < sizeOfFixedStructure ) {
 
+            IF_DEBUG(ERRORS) {
+                NetpKdPrint(( "XsNetServerGetInfo: Buffer too small.\n" ));
+            }
+
+            bufferTooSmall = TRUE;
+        }
+
+        serverNameBuf[0] = serverNameBuf[1] = '\\';
+        memcpy( &serverNameBuf[2], Header->ServerName, NETBIOS_NAME_LEN );
+        for( p = &serverNameBuf[ NETBIOS_NAME_LEN + 1 ]; p > serverNameBuf && *p == ' '; p-- )
+            ;
+        *(p+1) = '\0';
+
+        ServerName = XsDupStrToWStr( serverNameBuf );
+
+        if( ServerName == NULL ) {
+            Header->Status = NERR_NoRoom;
+            goto cleanup;
+        }
+
+        //
+        // Do the actual local call.
+        //
         status = NetServerGetInfo(
                      ServerName,
-                     502,
-                     (LPBYTE *)&secondaryNativeStruct
+                     localLevel,
+                     (LPBYTE *)&nativeStruct
                      );
 
         if ( !XsApiSuccess( status )) {
@@ -647,229 +637,256 @@ Return Value:
             goto cleanup;
 
         }
-    }
 
-    //
-    // Convert the structure returned by the 32-bit call to a 16-bit
-    // structure. For levels 0 and 1, there is no additional work
-    // involved after this step, so ConvertSingleEntry can store the
-    // variable data in the structure. This is indicated by passing
-    // the end of the entire buffer in stringLocation. For levels 2 and 3,
-    // the manual filling scheme requires that variable data not be entered
-    // at this stage, so stringLocation is set to the end of the fixed
-    // structure.
-    //
+        //
+        // For levels 2 and 3 (native level 102), additional data is
+        // required from native level 502. Do this call.
+        //
 
-    stringLocation = (LPBYTE)SmbGetUlong( &parameters->Buffer );
+        if ( localLevel == 102 ) {
 
-    if ( !bufferTooSmall ) {
-        stringLocation += ( localLevel == 102 ) ?
-                                    sizeOfFixedStructure:
-                                    SmbGetUshort( &parameters->BufLen );
-    }
+            status = NetServerGetInfo(
+                         ServerName,
+                         502,
+                         (LPBYTE *)&secondaryNativeStruct
+                         );
 
-    status = RapConvertSingleEntry(
-                 (LPBYTE)nativeStruct,
-                 nativeStructureDesc,
-                 FALSE,
-                 (LPBYTE)SmbGetUlong( &parameters->Buffer ),
-                 (LPBYTE)SmbGetUlong( &parameters->Buffer ),
-                 StructureDesc,
-                 TRUE,
-                 &stringLocation,
-                 &bytesRequired,
-                 Response,
-                 NativeToRap
-                 );
+            if ( !XsApiSuccess( status )) {
+                IF_DEBUG(API_ERRORS) {
+                    NetpKdPrint(( "XsNetServerGetInfo: NetServerGetInfo failed: "
+                                  "%X\n", status ));
+                }
+                Header->Status = (WORD)status;
+                goto cleanup;
 
-    if ( status != NERR_Success ) {
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "XsNetServerGetInfo: RapConvertSingleEntry failed: "
-                          "%X\n", status ));
+            }
         }
 
-        Header->Status = NERR_InternalError;
-        goto cleanup;
-    }
-
-    //
-    // For levels 2 and 3, the number of bytes required is, in fact, more than
-    // that returned by ConvertSingleEntry. We also need space for the
-    // string defaults.
-    //
-
-    if ( localLevel == 102 ) {
-
         //
-        // The number we get from rap includes some string lengths.
-        // We only need the fixed length since we are manually adding
-        // those ourselves.
+        // Convert the structure returned by the 32-bit call to a 16-bit
+        // structure. For levels 0 and 1, there is no additional work
+        // involved after this step, so ConvertSingleEntry can store the
+        // variable data in the structure. This is indicated by passing
+        // the end of the entire buffer in stringLocation. For levels 2 and 3,
+        // the manual filling scheme requires that variable data not be entered
+        // at this stage, so stringLocation is set to the end of the fixed
+        // structure.
         //
 
-        bytesRequired = sizeOfFixedStructure;
-    }
+        stringLocation = (LPBYTE)XsSmbGetPointer( &parameters->Buffer );
 
-    switch ( SmbGetUshort( &parameters->Level ) ) {
-
-    case 3:
-
-        bytesRequired += NetpUnicodeToDBCSLen( DEF16_sv_autopath ) + 1;
-
-    case 2:
-
-        bytesRequired += ( NetpUnicodeToDBCSLen( DEF16_sv_alerts )
-                               + NetpUnicodeToDBCSLen( DEF16_sv_srvheuristics )
-                               + NetpUnicodeToDBCSLen( nativeStruct->sv102_comment )
-                               + NetpUnicodeToDBCSLen( nativeStruct->sv102_userpath )
-                               + 4 );
-    }
-
-    //
-    // We don't have room even for the fixed data, abort.
-    //
-
-    if ( bufferTooSmall ) {
-
-        Header->Status = NERR_BufTooSmall;
-        goto cleanup;
-    }
-
-    //
-    // For levels 2 and 3, fill in the default values in the fixed structure
-    // manually.
-    //
-
-    returnStruct = (PSERVER_16_INFO_3)SmbGetUlong( &parameters->Buffer );
-
-    switch ( SmbGetUshort( &parameters->Level ) ) {
-
-    case 3:
-
-        SmbPutUlong( &returnStruct->sv3_auditedevents, DEF16_sv_auditedevents );
-        SmbPutUshort( &returnStruct->sv3_autoprofile, DEF16_sv_autoprofile );
-
-    case 2:
-
-        SmbPutUlong( &returnStruct->sv3_ulist_mtime, DEF16_sv_ulist_mtime );
-        SmbPutUlong( &returnStruct->sv3_alist_mtime, DEF16_sv_alist_mtime );
-        SmbPutUlong( &returnStruct->sv3_glist_mtime, DEF16_sv_glist_mtime );
-        SmbPutUshort( &returnStruct->sv3_security, DEF16_sv_security );
-        SmbPutUshort( &returnStruct->sv3_auditing, DEF16_sv_auditing );
-        SmbPutUshort( &returnStruct->sv3_numadmin, (USHORT)DEF16_sv_numadmin );
-        SmbPutUshort( &returnStruct->sv3_lanmask, DEF16_sv_lanmask );
-        NetpCopyTStrToStr( returnStruct->sv3_guestacct, DEF16_sv_guestacct );
-        SmbPutUshort( &returnStruct->sv3_chdevs, DEF16_sv_chdevs );
-        SmbPutUshort( &returnStruct->sv3_chdevq, DEF16_sv_chdevq );
-        SmbPutUshort( &returnStruct->sv3_chdevjobs, DEF16_sv_chdevjobs );
-        SmbPutUshort( &returnStruct->sv3_connections, DEF16_sv_connections );
-        SmbPutUshort( &returnStruct->sv3_shares, DEF16_sv_shares );
-        SmbPutUshort( &returnStruct->sv3_openfiles, DEF16_sv_openfiles );
-        SmbPutUshort( &returnStruct->sv3_sessopens,
-            (WORD)secondaryNativeStruct->sv502_sessopens );
-        SmbPutUshort( &returnStruct->sv3_sessvcs,
-            (WORD)secondaryNativeStruct->sv502_sessvcs );
-        SmbPutUshort( &returnStruct->sv3_sessreqs, DEF16_sv_sessreqs );
-        SmbPutUshort( &returnStruct->sv3_opensearch,
-            (WORD)secondaryNativeStruct->sv502_opensearch );
-        SmbPutUshort( &returnStruct->sv3_activelocks, DEF16_sv_activelocks );
-        SmbPutUshort( &returnStruct->sv3_numreqbuf, DEF16_sv_numreqbuf );
-        SmbPutUshort( &returnStruct->sv3_sizreqbuf,
-            (WORD)secondaryNativeStruct->sv502_sizreqbuf );
-        SmbPutUshort( &returnStruct->sv3_numbigbuf, DEF16_sv_numbigbuf );
-        SmbPutUshort( &returnStruct->sv3_numfiletasks, DEF16_sv_numfiletasks );
-        SmbPutUshort( &returnStruct->sv3_alertsched, DEF16_sv_alertsched );
-        SmbPutUshort( &returnStruct->sv3_erroralert, DEF16_sv_erroralert );
-        SmbPutUshort( &returnStruct->sv3_logonalert, DEF16_sv_logonalert );
-        SmbPutUshort( &returnStruct->sv3_accessalert, DEF16_sv_accessalert );
-        SmbPutUshort( &returnStruct->sv3_diskalert, DEF16_sv_diskalert );
-        SmbPutUshort( &returnStruct->sv3_netioalert, DEF16_sv_netioalert );
-        SmbPutUshort( &returnStruct->sv3_maxauditsz, DEF16_sv_maxauditsz );
-    }
-
-    //
-    // Now check if there is room for the variable data. If there isn't,
-    // set return status and quit. This is done here to prevent code
-    // below from overwriting the buffer.
-    //
-
-    if ( bytesRequired > (DWORD)SmbGetUshort( &parameters-> BufLen )) {
-
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "NetServerGetInfo: More data available.\n" ));
+        if ( !bufferTooSmall ) {
+            stringLocation += ( localLevel == 102 ) ?
+                                        sizeOfFixedStructure:
+                                        SmbGetUshort( &parameters->BufLen );
         }
-        Header->Status = ERROR_MORE_DATA;
-        goto cleanup;
-    }
 
-    //
-    // For levels 2 and 3, fill in the variable data manually. The variable
-    // data is filled in immediately following the fixed structures. For
-    // other levels, pack the response data as normal.
+        status = RapConvertSingleEntry(
+                     (LPBYTE)nativeStruct,
+                     nativeStructureDesc,
+                     FALSE,
+                     (LPBYTE)XsSmbGetPointer( &parameters->Buffer ),
+                     (LPBYTE)XsSmbGetPointer( &parameters->Buffer ),
+                     StructureDesc,
+                     TRUE,
+                     &stringLocation,
+                     &bytesRequired,
+                     Response,
+                     NativeToRap
+                     );
 
-    stringLocation = (LPBYTE)( SmbGetUlong( &parameters->Buffer )
-                         + sizeOfFixedStructure );
+        if ( status != NERR_Success ) {
+            IF_DEBUG(ERRORS) {
+                NetpKdPrint(( "XsNetServerGetInfo: RapConvertSingleEntry failed: "
+                              "%X\n", status ));
+            }
 
-    switch ( SmbGetUshort( &parameters->Level )) {
-
-    case 3:
-
-        XsAddVarString(
-            stringLocation,
-            DEF16_sv_autopath,
-            &returnStruct->sv3_autopath,
-            returnStruct
-            );
-
-    case 2:
-
-        XsAddVarString(
-            stringLocation,
-            DEF16_sv_srvheuristics,
-            &returnStruct->sv3_srvheuristics,
-            returnStruct
-            );
-
-        XsAddVarString(
-            stringLocation,
-            nativeStruct->sv102_userpath,
-            &returnStruct->sv3_userpath,
-            returnStruct
-            );
-
-        XsAddVarString(
-            stringLocation,
-            DEF16_sv_alerts,
-            &returnStruct->sv3_alerts,
-            returnStruct
-            );
-
-        XsAddVarString(
-            stringLocation,
-            nativeStruct->sv102_comment,
-            &returnStruct->sv3_comment,
-            returnStruct
-            );
-
-        break;
-
-    default:
+            Header->Status = NERR_InternalError;
+            goto cleanup;
+        }
 
         //
-        // Pack the response data.
+        // For levels 2 and 3, the number of bytes required is, in fact, more than
+        // that returned by ConvertSingleEntry. We also need space for the
+        // string defaults.
         //
 
-        Header->Converter = XsPackReturnData(
-                                (LPVOID)SmbGetUlong( &parameters->Buffer ),
-                                SmbGetUshort( &parameters->BufLen ),
-                                StructureDesc,
-                                1
-                                );
+        if ( localLevel == 102 ) {
 
-        break;
+            //
+            // The number we get from rap includes some string lengths.
+            // We only need the fixed length since we are manually adding
+            // those ourselves.
+            //
 
-    }
+            bytesRequired = sizeOfFixedStructure;
+        }
+
+        switch ( SmbGetUshort( &parameters->Level ) ) {
+
+        case 3:
+
+            bytesRequired += NetpUnicodeToDBCSLen( DEF16_sv_autopath ) + 1;
+
+        case 2:
+
+            bytesRequired += ( NetpUnicodeToDBCSLen( DEF16_sv_alerts )
+                                   + NetpUnicodeToDBCSLen( DEF16_sv_srvheuristics )
+                                   + NetpUnicodeToDBCSLen( nativeStruct->sv102_comment )
+                                   + NetpUnicodeToDBCSLen( nativeStruct->sv102_userpath )
+                                   + 4 );
+        }
+
+        //
+        // We don't have room even for the fixed data, abort.
+        //
+
+        if ( bufferTooSmall ) {
+
+            Header->Status = NERR_BufTooSmall;
+            goto cleanup;
+        }
+
+        //
+        // For levels 2 and 3, fill in the default values in the fixed structure
+        // manually.
+        //
+
+        returnStruct = (PSERVER_16_INFO_3)XsSmbGetPointer( &parameters->Buffer );
+
+        switch ( SmbGetUshort( &parameters->Level ) ) {
+
+        case 3:
+
+            SmbPutUlong( &returnStruct->sv3_auditedevents, DEF16_sv_auditedevents );
+            SmbPutUshort( &returnStruct->sv3_autoprofile, DEF16_sv_autoprofile );
+
+        case 2:
+
+            SmbPutUlong( &returnStruct->sv3_ulist_mtime, DEF16_sv_ulist_mtime );
+            SmbPutUlong( &returnStruct->sv3_alist_mtime, DEF16_sv_alist_mtime );
+            SmbPutUlong( &returnStruct->sv3_glist_mtime, DEF16_sv_glist_mtime );
+            SmbPutUshort( &returnStruct->sv3_security, DEF16_sv_security );
+            SmbPutUshort( &returnStruct->sv3_auditing, DEF16_sv_auditing );
+            SmbPutUshort( &returnStruct->sv3_numadmin, (USHORT)DEF16_sv_numadmin );
+            SmbPutUshort( &returnStruct->sv3_lanmask, DEF16_sv_lanmask );
+            NetpCopyTStrToStr( returnStruct->sv3_guestacct, DEF16_sv_guestacct );
+            SmbPutUshort( &returnStruct->sv3_chdevs, DEF16_sv_chdevs );
+            SmbPutUshort( &returnStruct->sv3_chdevq, DEF16_sv_chdevq );
+            SmbPutUshort( &returnStruct->sv3_chdevjobs, DEF16_sv_chdevjobs );
+            SmbPutUshort( &returnStruct->sv3_connections, DEF16_sv_connections );
+            SmbPutUshort( &returnStruct->sv3_shares, DEF16_sv_shares );
+            SmbPutUshort( &returnStruct->sv3_openfiles, DEF16_sv_openfiles );
+            SmbPutUshort( &returnStruct->sv3_sessopens,
+                (WORD)secondaryNativeStruct->sv502_sessopens );
+            SmbPutUshort( &returnStruct->sv3_sessvcs,
+                (WORD)secondaryNativeStruct->sv502_sessvcs );
+            SmbPutUshort( &returnStruct->sv3_sessreqs, DEF16_sv_sessreqs );
+            SmbPutUshort( &returnStruct->sv3_opensearch,
+                (WORD)secondaryNativeStruct->sv502_opensearch );
+            SmbPutUshort( &returnStruct->sv3_activelocks, DEF16_sv_activelocks );
+            SmbPutUshort( &returnStruct->sv3_numreqbuf, DEF16_sv_numreqbuf );
+            SmbPutUshort( &returnStruct->sv3_sizreqbuf,
+                (WORD)secondaryNativeStruct->sv502_sizreqbuf );
+            SmbPutUshort( &returnStruct->sv3_numbigbuf, DEF16_sv_numbigbuf );
+            SmbPutUshort( &returnStruct->sv3_numfiletasks, DEF16_sv_numfiletasks );
+            SmbPutUshort( &returnStruct->sv3_alertsched, DEF16_sv_alertsched );
+            SmbPutUshort( &returnStruct->sv3_erroralert, DEF16_sv_erroralert );
+            SmbPutUshort( &returnStruct->sv3_logonalert, DEF16_sv_logonalert );
+            SmbPutUshort( &returnStruct->sv3_accessalert, DEF16_sv_accessalert );
+            SmbPutUshort( &returnStruct->sv3_diskalert, DEF16_sv_diskalert );
+            SmbPutUshort( &returnStruct->sv3_netioalert, DEF16_sv_netioalert );
+            SmbPutUshort( &returnStruct->sv3_maxauditsz, DEF16_sv_maxauditsz );
+        }
+
+        //
+        // Now check if there is room for the variable data. If there isn't,
+        // set return status and quit. This is done here to prevent code
+        // below from overwriting the buffer.
+        //
+
+        if ( bytesRequired > (DWORD)SmbGetUshort( &parameters-> BufLen )) {
+
+            IF_DEBUG(ERRORS) {
+                NetpKdPrint(( "NetServerGetInfo: More data available.\n" ));
+            }
+            Header->Status = ERROR_MORE_DATA;
+            goto cleanup;
+        }
+
+        //
+        // For levels 2 and 3, fill in the variable data manually. The variable
+        // data is filled in immediately following the fixed structures. For
+        // other levels, pack the response data as normal.
+
+        stringLocation = (LPBYTE)( XsSmbGetPointer( &parameters->Buffer )
+                             + sizeOfFixedStructure );
+
+        switch ( SmbGetUshort( &parameters->Level )) {
+
+        case 3:
+
+            XsAddVarString(
+                stringLocation,
+                DEF16_sv_autopath,
+                &returnStruct->sv3_autopath,
+                returnStruct
+                );
+
+        case 2:
+
+            XsAddVarString(
+                stringLocation,
+                DEF16_sv_srvheuristics,
+                &returnStruct->sv3_srvheuristics,
+                returnStruct
+                );
+
+            XsAddVarString(
+                stringLocation,
+                nativeStruct->sv102_userpath,
+                &returnStruct->sv3_userpath,
+                returnStruct
+                );
+
+            XsAddVarString(
+                stringLocation,
+                DEF16_sv_alerts,
+                &returnStruct->sv3_alerts,
+                returnStruct
+                );
+
+            XsAddVarString(
+                stringLocation,
+                nativeStruct->sv102_comment,
+                &returnStruct->sv3_comment,
+                returnStruct
+                );
+
+            break;
+
+        default:
+
+            //
+            // Pack the response data.
+            //
+
+            Header->Converter = XsPackReturnData(
+                                    (LPVOID)XsSmbGetPointer( &parameters->Buffer ),
+                                    SmbGetUshort( &parameters->BufLen ),
+                                    StructureDesc,
+                                    1
+                                    );
+
+            break;
+
+        }
 
 cleanup:
+    ;
+    } except( EXCEPTION_EXECUTE_HANDLER ) {
+        Header->Status = (WORD)RtlNtStatusToDosError( GetExceptionCode() );
+    }
 
     if( ServerName != NULL ) {
         NetpMemoryFree( ServerName );
@@ -940,261 +957,266 @@ Return Value:
 
     API_HANDLER_PARAMETERS_REFERENCE;       // Avoid warnings
 
-    //
-    // Check for errors.
-    //
-
-    if ( XsWordParamOutOfRange( parameters->Level, 1, 3 )) {
-
-        Header->Status = ERROR_INVALID_LEVEL;
-        goto cleanup;
-    }
-
-    //
-    // Processing of this API depends on the value of the ParmNum
-    // parameter.
-    //
-
-    switch ( SmbGetUshort( &parameters->ParmNum )) {
-
-    case PARMNUM_ALL:
-
+    try {
         //
-        // PARMNUM_ALL.
-        //
-        // The structure descriptor given is OK; determine native descriptor
-        // (and expected minimum buffer length) from level. The buffer then
-        // needs to be converted into a native 32-bit buffer.
+        // Check for errors.
         //
 
-        switch( SmbGetUshort( &parameters->Level )) {
+        if ( XsWordParamOutOfRange( parameters->Level, 1, 3 )) {
 
-        case 1:
-
-            StructureDesc = Desc16_server_info_1;
-            nativeStructureDesc = Desc32_server_info_1;
-            break;
-
-        case 2:
-
-            StructureDesc = Desc16_server_info_2;
-            nativeStructureDesc = Desc32_server_info_2;
-            break;
-
-        case 3:
-
-            StructureDesc = Desc16_server_info_3;
-            nativeStructureDesc = Desc32_server_info_3;
-            break;
-
-        }
-
-        if ( !XsCheckBufferSize(
-                  SmbGetUshort( &parameters->BufLen ),
-                  StructureDesc,
-                  FALSE // native format
-                  )) {
-
-            Header->Status = NERR_BufTooSmall;
+            Header->Status = ERROR_INVALID_LEVEL;
             goto cleanup;
         }
 
         //
-        // Find out how big a 32-bit data buffer we need.
+        // Processing of this API depends on the value of the ParmNum
+        // parameter.
         //
 
-        bufferSize = XsBytesForConvertedStructure(
-                         (LPBYTE)SmbGetUlong( &parameters->Buffer ),
+        switch ( SmbGetUshort( &parameters->ParmNum )) {
+
+        case PARMNUM_ALL:
+
+            //
+            // PARMNUM_ALL.
+            //
+            // The structure descriptor given is OK; determine native descriptor
+            // (and expected minimum buffer length) from level. The buffer then
+            // needs to be converted into a native 32-bit buffer.
+            //
+
+            switch( SmbGetUshort( &parameters->Level )) {
+
+            case 1:
+
+                StructureDesc = Desc16_server_info_1;
+                nativeStructureDesc = Desc32_server_info_1;
+                break;
+
+            case 2:
+
+                StructureDesc = Desc16_server_info_2;
+                nativeStructureDesc = Desc32_server_info_2;
+                break;
+
+            case 3:
+
+                StructureDesc = Desc16_server_info_3;
+                nativeStructureDesc = Desc32_server_info_3;
+                break;
+
+            }
+
+            if ( !XsCheckBufferSize(
+                      SmbGetUshort( &parameters->BufLen ),
+                      StructureDesc,
+                      FALSE // native format
+                      )) {
+
+                Header->Status = NERR_BufTooSmall;
+                goto cleanup;
+            }
+
+            //
+            // Find out how big a 32-bit data buffer we need.
+            //
+
+            bufferSize = XsBytesForConvertedStructure(
+                             (LPBYTE)XsSmbGetPointer( &parameters->Buffer ),
+                             StructureDesc,
+                             nativeStructureDesc,
+                             RapToNative,
+                             TRUE
+                             );
+
+            //
+            // Allocate enough memory to hold the converted native buffer.
+            //
+
+            buffer = NetpMemoryAllocate( bufferSize );
+
+            if ( buffer == NULL ) {
+                IF_DEBUG(ERRORS) {
+                    NetpKdPrint(( "XsNetServerSetInfo: failed to create buffer" ));
+                }
+                Header->Status = NERR_NoRoom;
+                goto cleanup;
+
+            }
+
+            IF_DEBUG(SERVER) {
+                NetpKdPrint(( "XsNetServerSetInfo: buffer of %ld bytes at %lx\n",
+                              bufferSize, buffer ));
+            }
+
+            //
+            // Convert 16-bit data into 32-bit data and store it in the native
+            // buffer.
+            //
+
+            stringLocation = (LPBYTE)buffer + bufferSize;
+            bytesRequired = 0;
+
+            status = RapConvertSingleEntry(
+                         (LPBYTE)XsSmbGetPointer( &parameters->Buffer ),
                          StructureDesc,
+                         TRUE,
+                         buffer,
+                         buffer,
                          nativeStructureDesc,
-                         RapToNative,
-                         TRUE
+                         FALSE,
+                         &stringLocation,
+                         &bytesRequired,
+                         Response,
+                         RapToNative
                          );
 
-        //
-        // Allocate enough memory to hold the converted native buffer.
-        //
+            if ( status != NERR_Success ) {
+                IF_DEBUG(ERRORS) {
+                    NetpKdPrint(( "XsNetServerSetInfo: RapConvertSingleEntry "
+                                  "failed: %X\n", status ));
+                }
 
-        buffer = NetpMemoryAllocate( bufferSize );
-
-        if ( buffer == NULL ) {
-            IF_DEBUG(ERRORS) {
-                NetpKdPrint(( "XsNetServerSetInfo: failed to create buffer" ));
+                Header->Status = NERR_InternalError;
+                goto cleanup;
             }
-            Header->Status = NERR_NoRoom;
+
+            break;
+
+        case SV_COMMENT_PARMNUM:
+
+            //
+            // SV_COMMENT_PARMNUM.
+            //
+            // The structure descriptor given is meaningless. The data is actually
+            // a null terminated string, and can be passed to the native routine
+            // immediately. Being a string, it must be at least one character long.
+            //
+
+            if ( !XsCheckBufferSize(
+                      SmbGetUshort( &parameters->BufLen ),
+                      "B",
+                      FALSE  // not in native format
+                      )) {
+
+                Header->Status= NERR_BufTooSmall;
+                goto cleanup;
+            }
+
+            XsConvertUnicodeTextParameter(
+                                    comment,
+                                    (LPSTR)XsSmbGetPointer( &parameters->Buffer )
+                                    );
+
+            if ( comment == NULL ) {
+                IF_DEBUG(ERRORS) {
+                    NetpKdPrint(( "XsNetServerSetInfo: failed to create buffer" ));
+                }
+                Header->Status = NERR_NoRoom;
+                goto cleanup;
+            }
+
+            buffer = &comment;
+
+            break;
+
+        case SV_ALERTS_PARMNUM:
+        case SV_ALERTSCHED_PARMNUM:
+        case SV_ERRORALERT_PARMNUM:
+        case SV_LOGONALERT_PARMNUM:
+
             goto cleanup;
 
-        }
+        case SV_ACCESSALERT_PARMNUM:
+        case SV_DISKALERT_PARMNUM:
+        case SV_NETIOALERT_PARMNUM:
+        case SV_MAXAUDITSZ_PARMNUM:
 
-        IF_DEBUG(SERVER) {
-            NetpKdPrint(( "XsNetServerSetInfo: buffer of %ld bytes at %lx\n",
-                          bufferSize, buffer ));
+            //
+            // SV_ALERTS_PARMNUM, SV_ALERTSCHED_PARMNUM, SV_ERRORALERT_PARMNUM,
+            // SV_LOGONALERT_PARMNUM, SV_ACCESSALERT_PARMNUM, SV_DISKALERT_PARMNUM,
+            // SV_NETIOALERT_PARMNUM, or SV_MAXAUDITSZ_PARMNUM.
+            //
+            // These parameters are not supported in NT, so just return an OK.
+            //
+
+            goto cleanup;
+
+        case SV_DISC_PARMNUM:
+        case SV_HIDDEN_PARMNUM:
+        case SV_ANNOUNCE_PARMNUM:
+        case SV_ANNDELTA_PARMNUM:
+
+            //
+            // SV_DISC_PARMNUM, SV_HIDDEN_PARMNUM, SV_ANNOUNCE_PARMNUM, or
+            // SV_ANNDELTA_PARMNUM.
+            //
+            // The structure descriptor given is meaningless; the data is a word
+            // to be converted into a 32-bit DWORD. The length of data must be 2.
+            //
+
+            if ( !XsCheckBufferSize(
+                      SmbGetUshort( &parameters->BufLen ),
+                      "W",
+                      FALSE   // not in native format
+                      )) {
+
+                Header->Status= NERR_BufTooSmall;
+                goto cleanup;
+            }
+
+            data = (DWORD)SmbGetUshort(
+                                  (LPWORD)XsSmbGetPointer( &parameters->Buffer )
+                                  );
+            buffer = &data;
+
+            break;
+
+        default:
+
+            Header->Status = ERROR_INVALID_PARAMETER;
+            goto cleanup;
         }
 
         //
-        // Convert 16-bit data into 32-bit data and store it in the native
-        // buffer.
+        // Do the actual local call.
         //
 
-        stringLocation = (LPBYTE)buffer + bufferSize;
-        bytesRequired = 0;
+        level = SmbGetUshort( &parameters->ParmNum );
+        if ( level != 0 ) {
+            level = level + PARMNUM_BASE_INFOLEVEL;
+        } else {
+            level = 100 + SmbGetUshort( &parameters->Level );
+            if ( level == 103 ) {
+                level = 102;
+            }
+        }
 
-        status = RapConvertSingleEntry(
-                     (LPBYTE)SmbGetUlong( &parameters->Buffer ),
-                     StructureDesc,
-                     TRUE,
+        status = NetServerSetInfo(
+                     NULL,
+                     level,
                      buffer,
-                     buffer,
-                     nativeStructureDesc,
-                     FALSE,
-                     &stringLocation,
-                     &bytesRequired,
-                     Response,
-                     RapToNative
+                     NULL
                      );
 
-        if ( status != NERR_Success ) {
+        if ( !XsApiSuccess( status )) {
             IF_DEBUG(ERRORS) {
-                NetpKdPrint(( "XsNetServerSetInfo: RapConvertSingleEntry "
-                              "failed: %X\n", status ));
+                NetpKdPrint(( "XsNetServerSetInfo: NetServerSetInfo failed: %X\n",
+                              status ));
             }
-
-            Header->Status = NERR_InternalError;
+            Header->Status = (WORD)status;
             goto cleanup;
         }
 
-        break;
-
-    case SV_COMMENT_PARMNUM:
-
         //
-        // SV_COMMENT_PARMNUM.
+        // No return information for this API.
         //
-        // The structure descriptor given is meaningless. The data is actually
-        // a null terminated string, and can be passed to the native routine
-        // immediately. Being a string, it must be at least one character long.
-        //
-
-        if ( !XsCheckBufferSize(
-                  SmbGetUshort( &parameters->BufLen ),
-                  "B",
-                  FALSE  // not in native format
-                  )) {
-
-            Header->Status= NERR_BufTooSmall;
-            goto cleanup;
-        }
-
-        XsConvertUnicodeTextParameter(
-                                comment,
-                                (LPSTR)SmbGetUlong( &parameters->Buffer )
-                                );
-
-        if ( comment == NULL ) {
-            IF_DEBUG(ERRORS) {
-                NetpKdPrint(( "XsNetServerSetInfo: failed to create buffer" ));
-            }
-            Header->Status = NERR_NoRoom;
-            goto cleanup;
-        }
-
-        buffer = &comment;
-
-        break;
-
-    case SV_ALERTS_PARMNUM:
-    case SV_ALERTSCHED_PARMNUM:
-    case SV_ERRORALERT_PARMNUM:
-    case SV_LOGONALERT_PARMNUM:
-
-        goto cleanup;
-
-    case SV_ACCESSALERT_PARMNUM:
-    case SV_DISKALERT_PARMNUM:
-    case SV_NETIOALERT_PARMNUM:
-    case SV_MAXAUDITSZ_PARMNUM:
-
-        //
-        // SV_ALERTS_PARMNUM, SV_ALERTSCHED_PARMNUM, SV_ERRORALERT_PARMNUM,
-        // SV_LOGONALERT_PARMNUM, SV_ACCESSALERT_PARMNUM, SV_DISKALERT_PARMNUM,
-        // SV_NETIOALERT_PARMNUM, or SV_MAXAUDITSZ_PARMNUM.
-        //
-        // These parameters are not supported in NT, so just return an OK.
-        //
-
-        goto cleanup;
-
-    case SV_DISC_PARMNUM:
-    case SV_HIDDEN_PARMNUM:
-    case SV_ANNOUNCE_PARMNUM:
-    case SV_ANNDELTA_PARMNUM:
-
-        //
-        // SV_DISC_PARMNUM, SV_HIDDEN_PARMNUM, SV_ANNOUNCE_PARMNUM, or
-        // SV_ANNDELTA_PARMNUM.
-        //
-        // The structure descriptor given is meaningless; the data is a word
-        // to be converted into a 32-bit DWORD. The length of data must be 2.
-        //
-
-        if ( !XsCheckBufferSize(
-                  SmbGetUshort( &parameters->BufLen ),
-                  "W",
-                  FALSE   // not in native format
-                  )) {
-
-            Header->Status= NERR_BufTooSmall;
-            goto cleanup;
-        }
-
-        data = (DWORD)SmbGetUshort(
-                              (LPWORD)SmbGetUlong( &parameters->Buffer )
-                              );
-        buffer = &data;
-
-        break;
-
-    default:
-
-        Header->Status = ERROR_INVALID_PARAMETER;
-        goto cleanup;
-    }
-
-    //
-    // Do the actual local call.
-    //
-
-    level = SmbGetUshort( &parameters->ParmNum );
-    if ( level != 0 ) {
-        level = level + PARMNUM_BASE_INFOLEVEL;
-    } else {
-        level = 100 + SmbGetUshort( &parameters->Level );
-        if ( level == 103 ) {
-            level = 102;
-        }
-    }
-
-    status = NetServerSetInfo(
-                 NULL,
-                 level,
-                 buffer,
-                 NULL
-                 );
-
-    if ( !XsApiSuccess( status )) {
-        IF_DEBUG(ERRORS) {
-            NetpKdPrint(( "XsNetServerSetInfo: NetServerSetInfo failed: %X\n",
-                          status ));
-        }
-        Header->Status = (WORD)status;
-        goto cleanup;
-    }
-
-    //
-    // No return information for this API.
-    //
 
 cleanup:
+    ;
+    } except( EXCEPTION_EXECUTE_HANDLER ) {
+        Header->Status = (WORD)RtlNtStatusToDosError( GetExceptionCode() );
+    }
 
     //
     // If there is a native 32-bit buffer, free it.

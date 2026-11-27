@@ -12,6 +12,7 @@ NET_API_STATUS WINAPI fixture_server_enum(LPCWSTR server,DWORD level,LPBYTE *out
     ++calls;if(server || resume || (level!=100 && level!=101))++failures;
     *out=level==100?(LPBYTE)&info0:(LPBYTE)&info1;
     *read=mode==4?0:1;*total=mode==3?3:*read;
+    if(mode==5)RaiseException(EXCEPTION_ACCESS_VIOLATION,0,0,NULL);
     return mode==1?ERROR_ACCESS_DENIED:mode==3?ERROR_MORE_DATA:0;
 }
 NET_API_STATUS WINAPI fixture_net_free(LPVOID p)
@@ -34,13 +35,14 @@ static void run(unsigned m,WORD level,WORD capacity,BOOL private_transport)
     NTSTATUS status=XsNetServerEnum2(&h,&p,NULL,NULL);
     check(status==0,"original handler NTSTATUS completion");
     /* Failed replies have no data; the original handler leaves Converter unused. */
-    if(m==1 || level>1 || private_transport)check(h.Converter==0xbeef,"early-failure unused converter preserved");
+    if(m==1 || m==5 || level>1 || private_transport)check(h.Converter==0xbeef,"early-failure unused converter preserved");
     check(buffer[0]==0xa5 && buffer[capacity+1]==0xa5,"output capacity canaries");
     if(private_transport)check(h.Status==ERROR_CALL_NOT_IMPLEMENTED && !calls && !frees && !p.BufLen,"private browser remains unavailable");
     else if(level>1)check(h.Status==ERROR_INVALID_LEVEL && !calls && !frees && !p.BufLen,"invalid level skips provider");
     else {
         check(calls==1 && frees==1,"public provider and exactly-once buffer retirement");
         if(m==1)check(h.Status==ERROR_ACCESS_DENIED && !p.BufLen && buffer[1]==0xa5,"native error with allocated buffer cleaned");
+        else if(m==5)check(h.Status==ERROR_NOACCESS && !p.BufLen && buffer[1]==0xa5,"XP exception converted and allocated buffer cleaned");
         else if(capacity==1)check(h.Status==ERROR_MORE_DATA && !p.EntriesRead,"short buffer returns zero entries");
         else if(m==4)check(!h.Status && !p.EntriesRead && !p.TotalAvail && !p.BufLen,"empty enumeration");
         else {
@@ -54,7 +56,7 @@ int main(void)
 {
     run(0,0,1024,FALSE);run(0,1,1024,FALSE);run(1,0,1024,FALSE);
     run(0,2,1024,FALSE);run(0,0,1,FALSE);run(3,0,1024,FALSE);
-    run(4,0,1024,FALSE);run(0,0,1024,TRUE);
+    run(5,0,1024,FALSE);run(4,0,1024,FALSE);run(0,0,1024,TRUE);
     printf("SERVER_ENUM checks=%u failures=%u\n",checks,failures);
     return failures?1:0;
 }

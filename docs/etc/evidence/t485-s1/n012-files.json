@@ -1,0 +1,277 @@
+[
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+    "before": {
+      "points": 1,
+      "lines": 1313
+    },
+    "after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": [
+        {
+          "original": [
+            109,
+            112
+          ],
+          "current_error": 109,
+          "guard": "#else"
+        }
+      ]
+    },
+    "byte_equal": false,
+    "sha256": "e8abb70ccfba196ec6989a7774895e0a7d27e350b7aa3fb7384200990c0d21a4",
+    "xp_blob": "612dc05fd0fc00df2157095b10b3629ebaba690a"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apisrv.c",
+    "before": {
+      "points": 1,
+      "lines": 2600
+    },
+    "after": {
+      "points": 3,
+      "lines": 189,
+      "exclusions": [
+        {
+          "original": [
+            645,
+            649
+          ],
+          "current_error": 461,
+          "guard": "#if DBG"
+        }
+      ]
+    },
+    "byte_equal": false,
+    "sha256": "8b7bc5b9d16ecdbf83b0487391988e395353fa654bc1fc334b0568eaa9b978ed",
+    "xp_blob": "1f4f7c6b7bd3c41bc189ca417b255a6a61e7e69e"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+    "before": {
+      "points": 1,
+      "lines": 2042
+    },
+    "after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": [
+        {
+          "original": [
+            892,
+            892
+          ],
+          "current_error": 892,
+          "guard": "#else"
+        }
+      ]
+    },
+    "byte_equal": false,
+    "sha256": "3bc1aaed88b275290513db5137f96c944ffa08503340cd311091a784083a3923",
+    "xp_blob": "f2c8d1e6e3556727547314c005fb8df48a64e701"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
+    "before": {
+      "points": 1,
+      "lines": 1478
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "sha256": "20a08931f23cdcd5bfd2c024b0b0a15656487c2ed6197cb7a39a43369930bb46",
+    "xp_blob": "eb594ae58b20e15fe1d6c64f36d10d3f89ee99c6"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/apiwksta.c",
+    "before": {
+      "points": 1,
+      "lines": 2034
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "sha256": "1bb55b4d1eefdd7d8ce53114f03d6c472901a66a9a08970a6ca46f3b388289e5",
+    "xp_blob": "9930b77a5caf1dbdb7ea929bb1565adcc94e6fd1"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/wkstadef.h",
+    "before": {
+      "points": 1,
+      "lines": 98
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "sha256": "04eb54dd5d23b96880d5e5f3e5bc5898a76e60bf041a3f6c7e33148e2f1029c1",
+    "xp_blob": "f75ed94b56aa648c7fa5ad2e6eb50c312919413b"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xactsrvp.h",
+    "before": {
+      "points": 1,
+      "lines": 206
+    },
+    "after": {
+      "points": 5,
+      "lines": 10,
+      "exclusions": [
+        {
+          "original": [
+            32,
+            34
+          ],
+          "current_error": 32,
+          "guard": "#if DBG"
+        }
+      ]
+    },
+    "byte_equal": false,
+    "sha256": "a9b65419ce1aef68b0c2f6870053a5b506b9a91f7606a71f4cadc19205a55aa2",
+    "xp_blob": "4f72501ce766e75c0181c7598923700099a2594e"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsconst.h",
+    "before": {
+      "points": 1,
+      "lines": 160
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "sha256": "b98c5562ededc08481b1501862841cfd88fb5b20a03dbb73f56d57eefd8cb643",
+    "xp_blob": "f1832fbe445e89954a63fcb1fce00af389fa0b69"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsdata.h",
+    "before": {
+      "points": 1,
+      "lines": 154
+    },
+    "after": null,
+    "status": "XP removed; no production consumers"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsdef16.h",
+    "before": {
+      "points": 1,
+      "lines": 818
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "sha256": "fd086b2485101c04626219f950afd37b008abf612723bba6b8254c1eb302b6ca",
+    "xp_blob": "c4d399df4b10cef189e91081f71a8714e0c182c0"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsparm16.h",
+    "before": {
+      "points": 1,
+      "lines": 258
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "sha256": "540b16227373fd6771a0bdab32f91527d681f338e808d61df95aeaabb83b4817",
+    "xp_blob": "45e3e0d2760d25d16d3d7da3284464ff8bd33896"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsprocsp.h",
+    "before": {
+      "points": 1,
+      "lines": 692
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "sha256": "28b2395f9dfdfb9876a154bb7df14a233348e679e60c7ec37befa4a453ba8f92",
+    "xp_blob": "7bd97adf22d789f41ec4a18da8b846e17d77f75f"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xssubs.c",
+    "before": {
+      "points": 1,
+      "lines": 3958
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "sha256": "10462916f2525371efbf2a4807a28bd4555625734f9692bb0e6ce6dc5bcf1fa8",
+    "xp_blob": "8646c22c4ce8d1a1b438be87f5b57450caf74bf8"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+    "before": {
+      "points": 1,
+      "lines": 536
+    },
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "sha256": "b060b00f2559331a1cc735d7a13e3b83543352705da9225e062efcc6657c67d0",
+    "xp_blob": "0e8ac0400b49559d224ea034816daf41932b8306"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+    "before": {
+      "points": 1,
+      "lines": 231
+    },
+    "after": {
+      "points": 1,
+      "lines": 1,
+      "exclusions": [
+        {
+          "original": [
+            66,
+            82
+          ],
+          "current_error": 66,
+          "guard": "#else"
+        }
+      ]
+    },
+    "byte_equal": false,
+    "sha256": "6153effe116ea4aaaa014ed85536d0dcd2b94593c6084c52b99f2f58dc10881c",
+    "xp_blob": "52783be695633d65c705a493b05fb5b046afaa1f"
+  },
+  {
+    "path": "src/non-mvdm/ds/netapi/xactsrv/xsdebug.h",
+    "before": null,
+    "after": {
+      "points": 0,
+      "lines": 0,
+      "exclusions": []
+    },
+    "byte_equal": true,
+    "status": "original prerequisite replaces handwritten macros"
+  }
+]

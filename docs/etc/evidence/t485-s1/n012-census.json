@@ -1,0 +1,38 @@
+{
+  "before": {
+    "files": 1319,
+    "byte_identical": 730,
+    "nonerror_identical": 732,
+    "nonerror_different": 587,
+    "nonerror_points": 7764,
+    "nonerror_lines": 214251
+  },
+  "after": {
+    "files": 1319,
+    "byte_identical": 740,
+    "nonerror_identical": 742,
+    "nonerror_different": 577,
+    "nonerror_points": 7760,
+    "nonerror_lines": 197875
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 10,
+    "nonerror_identical": 10,
+    "nonerror_different": -10,
+    "nonerror_points": -4,
+    "nonerror_lines": -16376
+  },
+  "baseline_counts": {
+    "XP": 1188,
+    "OpenNT-4.5": 2,
+    "OpenNT": 129
+  },
+  "removed": [
+    "src/non-mvdm/ds/netapi/xactsrv/xsdata.h"
+  ],
+  "added": [
+    "src/non-mvdm/ds/netapi/xactsrv/xsdebug.h"
+  ],
+  "status": "verified for delivery"
+}

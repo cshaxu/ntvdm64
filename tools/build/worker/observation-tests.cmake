@@ -162,7 +162,7 @@ worker_link("server-enum-test.exe" "/nologo /OPT:REF /out:$out /map:$out.map"
   INPUTS "obj/tests/server-enum/enum-test.obj" "obj/tests/server-enum/apisrv-test.obj"
     "obj/compat/remote_rap.obj" "obj/compat/remote_browser.obj"
     "original-opennt-xactsrv.lib" "original-opennt-netlib.lib"
-    "original-opennt-rtl-x86.lib" "lib-crt-compat.lib")
+    "original-opennt-rtl-x86.lib" "common-opennt-compat.lib" "lib-crt-compat.lib")
 worker_unit("obj/tests/server-enum/remote-provider-test.obj"
   "${NTVDM_REPO}/test/integration/redirector_remote_unavailable_test.c"
   "/nologo /MT /O2 /Gy /I\"${NTVDM_REPO}/src\"")
