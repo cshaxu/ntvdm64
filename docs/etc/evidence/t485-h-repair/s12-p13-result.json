@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P13",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime14",
   "files": {
     "src/mvdm-host/softpc.new/host/src/nt_thred.c": "69861883c599b24a380c342f3c42ae540885b4ad8f94761c730115be47c258cd",
@@ -515,5 +515,6 @@
     "restored_verified": 432,
     "residual_verified": 213,
     "unreviewed": 0
-  }
+  },
+  "commit": "1930f0852"
 }

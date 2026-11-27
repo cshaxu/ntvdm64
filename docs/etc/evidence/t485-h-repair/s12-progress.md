@@ -8,7 +8,7 @@ each file before delivery. Default original valid;retains need real evidence.
 
 Reviewed48/48files645/645points;restored-final-verified432,restored-local0,
 residual-final-verified213,residual-local0,unreviewed0.
-Delivered/pushed40files612points through 88cde1caf.
+Delivered/pushed48files645points through 1930f0852.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -54,14 +54,14 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 38 | src/mvdm-host/softpc.new/host/src/nt_rez.c | 1 | P12 delivered 88cde1caf |
 | 39 | src/mvdm-host/softpc.new/host/src/nt_rflop.c | 25 | P12 delivered 88cde1caf |
 | 40 | src/mvdm-host/softpc.new/host/src/nt_sound.c | 15 | P12 delivered 88cde1caf |
-| 41 | src/mvdm-host/softpc.new/host/src/nt_thred.c | 1 | P13 final-verified; commit pending |
-| 42 | src/mvdm-host/softpc.new/host/src/nt_unix.c | 1 | P13 final-verified; commit pending |
-| 43 | src/mvdm-host/softpc.new/host/src/stubs.c | 4 | P13 final-verified; commit pending |
+| 41 | src/mvdm-host/softpc.new/host/src/nt_thred.c | 1 | P13 delivered1930f0852 |
+| 42 | src/mvdm-host/softpc.new/host/src/nt_unix.c | 1 | P13 delivered1930f0852 |
+| 43 | src/mvdm-host/softpc.new/host/src/stubs.c | 4 | P13 delivered1930f0852 |
 | 44 | src/mvdm-host/vdd/mscdex/vdd/vcdex.c | 1 | P13 audited; no change |
-| 45 | src/mvdm-host/vdmredir/vrica.h | 1 | P13 final-verified; commit pending |
-| 46 | src/mvdm-host/vdmredir/vrnetapi.c | 14 | P13 final-verified; commit pending |
-| 47 | src/mvdm-host/vdmredir/vrnmpipe.c | 9 | P13 final-verified; commit pending |
-| 48 | src/mvdm-host/vdmredir/vrremote.c | 2 | P13 final-verified; commit pending |
+| 45 | src/mvdm-host/vdmredir/vrica.h | 1 | P13 delivered1930f0852 |
+| 46 | src/mvdm-host/vdmredir/vrnetapi.c | 14 | P13 delivered1930f0852 |
+| 47 | src/mvdm-host/vdmredir/vrnmpipe.c | 9 | P13 delivered1930f0852 |
+| 48 | src/mvdm-host/vdmredir/vrremote.c | 2 | P13 delivered1930f0852 |
 
 ## Verification and boundaries
 
@@ -876,3 +876,16 @@ complete. Batch372/2474 ->189/292,reduction183points2182lines.
 All48files645points verified:432restored213necessary residual0unreviewed.
 S12 census803/31809 ->556/1394,reduction247points30415lines.
 Commit/push remains the last delivery step;S13 admission follows closure.
+
+## S12 closure
+
+1930f0852 delivered and pushed to origin/main. All48files645points have final
+code,hash,evidence and delivery dispositions:432fully restored,213qualified
+residuals,zero unreviewed or local unverified. Runtime14 cached full build,
+dual13-image publication,26hash checks,targeted tests and Full23/23 PASS.
+979original line witnesses match. No original guest modification/rebuild.
+Nonerror byte-sensitive census803/31809 ->556/1394,reduction247/30415.
+The initial targeted ABI-link failure was repaired using the existing product
+bridge;no Full retries. Win95 known exit1 and remote-name capacity boundaries
+remain explicit. S12 is closed. S13 reconciles all preceding repair evidence
+and final code before N004;no unchanged-code Full rerun is authorized.

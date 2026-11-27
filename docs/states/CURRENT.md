@@ -2,43 +2,43 @@
 
 ## Current Work
 
-**Active: M0 T485 S12** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. The S2 receipt identifies its twelve host images. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). S3 delivered H009–H022, bringing the total to 22/159. S4 delivered H023 host headers and H024 link resources, bringing the total to 24/159. H025 host sources brings the total to 25/159. H026 delivered the worker image and exports, bringing the total to 26/159. H027 delivered the suballocator baseline, bringing the total to 27/159. H028 delivered the XP VCDEX provider, bringing the total to 28/159. H029 restored the sample1 directory selector (29/159). H030 delivered sample2 and the 30/159 Full checkpoint. H031 delivered the XP VDMDBG reference (31/159). H032 delivered the redirector and matching SP3 guest (32/159). H033 delivered the XP WOW32 package and paired guest dependencies (33/159). See the [H033 receipt](../etc/evidence/t485-s1/h033.md). H034 delivered XMS and the startup repair checkpoint (34/159); Full passed all 23 gates on runtime58. See the [H034 receipt](../etc/evidence/t485-s1/h034.md). H035–H036 retired duplicate selectors; S4 closed at 36/159. See the [S4 closure](../etc/evidence/t485-s1/s4-closure.md). N001 delivered the XP capture ABI and utilities (37/159); see the [N001 receipt](../etc/evidence/t485-s1/n001.md). N002 delivered the XP ProbeForRead baseline (38/159); see the [N002 receipt](../etc/evidence/t485-s1/n002.md), including the reproduced baseline WRITE test limitation. N003 delivered the XP RTL environment, error tables and full x86 primitives (39/159); see the [N003 receipt](../etc/evidence/t485-s1/n003.md). S5 P4 repairs DPMI dispatch ownership and CAF Window continuity, adds strict enhanced Win3.1/Win95 Alt+Enter round trips, and passes Full 23/23; N004 follows S6-S13 repair, not P4 alone. See the [H032 receipt](../etc/evidence/t485-s1/h032.md). See the [H031 receipt](../etc/evidence/t485-s1/h031.md). See the [H030 receipt](../etc/evidence/t485-s1/h030.md). See the [H029 receipt](../etc/evidence/t485-s1/h029.md). See the [H028 receipt](../etc/evidence/t485-s1/h028.md). See the [H027 receipt](../etc/evidence/t485-s1/h027.md). See the [H026 receipt](../etc/evidence/t485-s1/h026.md). See the [H025 receipt](../etc/evidence/t485-s1/h025.md). See the [H023–H024 receipt](../etc/evidence/t485-s1/h023-h024.md). See the [S3 closure and H022 release receipt](../etc/evidence/t485-s1/h022.md).
+**Active: M0 T485 S13** (Ordinary Mode). S2 delivered H001–H008 in commit 574d526e0. The S2 receipt identifies its twelve host images. The guest and host inputs are listed in the [S2 package receipt](../etc/evidence/t485-s1/h001-h008-package22.csv). S3 delivered H009–H022, bringing the total to 22/159. S4 delivered H023 host headers and H024 link resources, bringing the total to 24/159. H025 host sources brings the total to 25/159. H026 delivered the worker image and exports, bringing the total to 26/159. H027 delivered the suballocator baseline, bringing the total to 27/159. H028 delivered the XP VCDEX provider, bringing the total to 28/159. H029 restored the sample1 directory selector (29/159). H030 delivered sample2 and the 30/159 Full checkpoint. H031 delivered the XP VDMDBG reference (31/159). H032 delivered the redirector and matching SP3 guest (32/159). H033 delivered the XP WOW32 package and paired guest dependencies (33/159). See the [H033 receipt](../etc/evidence/t485-s1/h033.md). H034 delivered XMS and the startup repair checkpoint (34/159); Full passed all 23 gates on runtime58. See the [H034 receipt](../etc/evidence/t485-s1/h034.md). H035–H036 retired duplicate selectors; S4 closed at 36/159. See the [S4 closure](../etc/evidence/t485-s1/s4-closure.md). N001 delivered the XP capture ABI and utilities (37/159); see the [N001 receipt](../etc/evidence/t485-s1/n001.md). N002 delivered the XP ProbeForRead baseline (38/159); see the [N002 receipt](../etc/evidence/t485-s1/n002.md), including the reproduced baseline WRITE test limitation. N003 delivered the XP RTL environment, error tables and full x86 primitives (39/159); see the [N003 receipt](../etc/evidence/t485-s1/n003.md). S5 P4 repairs DPMI dispatch ownership and CAF Window continuity, adds strict enhanced Win3.1/Win95 Alt+Enter round trips, and passes Full 23/23; N004 follows S6-S13 repair, not P4 alone. See the [H032 receipt](../etc/evidence/t485-s1/h032.md). See the [H031 receipt](../etc/evidence/t485-s1/h031.md). See the [H030 receipt](../etc/evidence/t485-s1/h030.md). See the [H029 receipt](../etc/evidence/t485-s1/h029.md). See the [H028 receipt](../etc/evidence/t485-s1/h028.md). See the [H027 receipt](../etc/evidence/t485-s1/h027.md). See the [H026 receipt](../etc/evidence/t485-s1/h026.md). See the [H025 receipt](../etc/evidence/t485-s1/h025.md). See the [H023–H024 receipt](../etc/evidence/t485-s1/h023-h024.md). See the [S3 closure and H022 release receipt](../etc/evidence/t485-s1/h022.md).
 
 ## Owner-admitted repair insertion
 
-On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operations/m0-t485-h-repair-plan.md) before N004. S5 has completed N001-N003 and P4 delivery. S6-S11 are delivered; S12 is now active in S6-S13, then S14 resumes N004-N012; later migration packets become S15-S20. The [persistent audit handoff](../etc/evidence/t485-h-repair/README.md) assigns every file and point. Audit classification is not repair acceptance. N004 is gated on S13 closure; migration progress remains 39/159.
+On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operations/m0-t485-h-repair-plan.md) before N004. S5 has completed N001-N003 and P4 delivery. S6-S12 are delivered; S13 reconciliation is now active, then S14 resumes N004-N012; later migration packets become S15-S20. The [persistent audit handoff](../etc/evidence/t485-h-repair/README.md) assigns every file and point. Audit classification is not repair acceptance. N004 is gated on S13 closure; migration progress remains 39/159.
 
 ## Active Packet
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T485 S12, Ordinary Mode |
+| Identifier Mode | M0 T485 S13, Ordinary Mode |
 | Candidate Proposal | [XP migration](../proposals/proposal-windows-xp-ntvdm-baseline-upgrade-001.md) and [H repair plan](../etc/operations/m0-t485-h-repair-plan.md) |
-| Admission And Approval | Owner authorized continuous S6-S13 repairs. S11 P19 c205781fe is delivered and pushed; [S11 closure](../etc/evidence/t485-h-repair/s11-progress.md#s11-closure) records runtime26 Full23/23. |
-| Objective | Review and simplify48assigned COMMAND/DEM/OEM,redirector/VDD,host configuration,packaging and lifecycle files in canonical relative-path DIR order. |
-| Reference Baseline | S11 runtime26 / c205781fe;fixed XP objects,files.csv and645frozen S12 points. |
-| Verification | Whole-file original/exclusion/line audit;real provider/caller and failure semantics,OEM/DBCS capacity,launch capture,cancellation/cleanup and package isolation. Cached full build,dual publication,targeted tests,commit/push per substantive batch;Full every10files and S closure. Unchanged Full code retries failures only. |
-| Constraints | Original-first, preserve error exclusions and original logical lines; no original guest modification/rebuild, Computer Use, hardware fullscreen or kernel monitor. Preserve layer ownership and unrelated work. |
-| Non-goals | No N004 before S13, no speculative rewriting or second state machine. Full is mandatory for this S closure. |
-| Files And ABI Surface | Forty-eight S12 rows in files.csv;645points in points.csv. Whole-file review includes coupled providers;no native boot-file writes. |
-| Applicable Rules | Execution, architecture, coding, source and document authorities linked by docs/README.md. |
-| Expected Markers | Every file has exact before/after metrics, source evidence, restored or justified residual points, updated hashes and final-package delivery. |
-| Asset Needs | Existing pinned XP originals and immutable guest fixtures. |
-| Reporting Requirements | File entry/exit; non-error points/lines and cumulative totals; reviewed, restored, residual, verified and delivered counts separately. |
-| Stop Conditions | Material unapproved scope or mirror increase outside owner allowance; unexplained ABI/semantic change. |
-| Exit Criteria | All48files645points reviewed;restorations and justified residuals synchronized,final-package Full and five-step delivery complete before S13 reconciliation. |
-| Original Owner Request | Complete S6-S13 repairs before N004-G097, preserve correct original code and minimize both mirror difference metrics without excessive verification. |
-| Similar-Issue Sweep | Unused declaration deletion,cpu_createthread ABI,registry error suppression,OEM/DBCS bounds,path/optional-provider fallback and cancellation lifetime. |
+| Admission And Approval | Owner authorized continuous S6-S13 repairs. [S12 closure](../etc/evidence/t485-h-repair/s12-progress.md#s12-closure),1930f0852 pushed,finishes the preceding packet. |
+| Objective | Reconcile all assigned files and frozen points against final code and delivery evidence;resolve omissions and false closure before resuming N004. |
+| Reference Baseline | S12 runtime14 /1930f0852;fixed XP source objects,1039file identities and4550frozen points in the repair handoff. |
+| Verification | Check final source/hash,exclusion/line ownership,residual necessity and minimality,ledger coverage,publication and committed receipts. Reuse runtime14 Full23/23 only for identical inputs;retry failed gates only. Changed inputs require affected-gate analysis. Closure retains build/publication/test/commit/push evidence. |
+| Constraints | Preserve original-first and layer rules,#error/#line,unrelated work;no original guest modification/rebuild or Computer Use. |
+| Non-goals | No new migration before reconciliation;no speculative rewrite or blanket repeated Full. |
+| Files And ABI Surface | Complete S6-S12 files.csv,points.csv,pending-decisions.csv and final source/receipt set;no new ABI intended. |
+| Applicable Rules | Execution,architecture,coding,source and document authorities linked by docs/README.md. |
+| Expected Markers | Every row reconciled;unverified/unfinished entries resolved honestly;current diff totals,package hashes,required guest witnesses and pushed commits recorded. |
+| Asset Needs | Existing pinned XP originals,immutable guest fixtures and delivered runtime14. |
+| Reporting Requirements | Reconciliation counts by owner and disposition;missing/stale evidence separately from source defects;both nonerror diff metrics and delivery status. |
+| Stop Conditions | Material unapproved scope or mirror increase;unexplained ABI/semantic change;do not relabel missing evidence as pass. |
+| Exit Criteria | No unreviewed or unfinished repair;retained differences qualified,final-package required gates proved,documentation and delivery complete;then admit S14 N004-N012. |
+| Original Owner Request | Complete S6-S13 repairs and minimization before N004-G097,without excessive verification. |
+| Similar-Issue Sweep | Stale hashes/statuses,partial restoration counted as complete,missing residual registration,unsupported exclusion mapping and mismatched runtime receipts. |
 
-## S12 Ordered Progress
+## S12 Closure Record
 
 [S12 list](../etc/evidence/t485-h-repair/s12-progress.md):48/48files,
 645/645points final-verified;432restored,213residual,0unreviewed.
 [P13 receipt](../etc/evidence/t485-h-repair/s12-p13-result.json):runtime14 cached
 build,dual26hash publication,979line witnesses,targeted tests and Full23/23
-PASS,zero reruns. Commit/push pending;P12 remains latest pushed delivery.
+PASS,zero reruns. P13 1930f0852 delivered and pushed.
 Census803/31809->556/1394 (-247points/-30415lines).
-Win95 known exit1 boundary retained. S12 closure awaits push;S13 follows.
+Win95 known exit1 boundary retained. S12 closed;S13 reconciliation active.
 Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
