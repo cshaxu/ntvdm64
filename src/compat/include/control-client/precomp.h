@@ -314,6 +314,15 @@ LONG WINAPI wow_original_DefDlgProcW(HWND, UINT, WPARAM, LPARAM);
 BOOL WINAPI wow_original_EndDialog(HWND, INT_PTR);
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
+/* XP message policy uses the original table supplied by clmsg.c. */
+#define TESTSYNCONLYMESSAGE(msg, wParam) (((msg) < WM_USER) ? \
+    (MessageTable[msg].bSyncOnlyMessage || \
+     ((msg) == WM_DEVICECHANGE && ((wParam) & 0x8000))) : 0)
+#define MSGFLAG_WOW_RESERVED 0x00010000
+#define WEFLAYOUTRTL 0x0A40
+/* The retained CLS identity is the registration's immutable native atom.
+ * Its pre-XP field is atomClassName; no versioned-class namespace is exposed. */
+#define IS_BUTTON(pwnd) (gpsi->atomSysClass[ICLS_BUTTON] == (pwnd)->pcls->atomClassName)
 /* Define recovered bodies under private names, not SDK dllimport names. */
 #undef IsDialogMessageA
 #undef IsDialogMessageW

@@ -21,7 +21,12 @@ static DLG dialog_data;
 static WND source;
 static BUTNWND target;
 static BUTN button;
+static CLS button_class;
+static wow_dialog_context dialog_context;
+static wow_task_client_info client_info;
+const wow_task_client_info *WINAPI wow_edit_client_info(void) { return &client_info; }
 static unsigned failures, focused, clicked, styles;
+static UINT ui_state, ui_changes;
 static UINT target_code;
 enum fault_point { NONE, SOURCE_QUERY, TARGET_QUERY, FOCUS, DEFAULT_ID, CHECK_STATE, STYLE, SELECTION };
 static enum fault_point fault;
@@ -30,6 +35,15 @@ static BOOL raise_filter, handle_filter;
 #define FILTER_FAULT ((DWORD)0xe0447121)
 __declspec(thread) wow_edit_context *wow_edit_current;
 #define CHECK(x) do { if (!(x)) { ++failures; printf("FAIL line=%d fault=%u root=%u\n", __LINE__, fault, kill_dialog); } } while (0)
+DWORD GetAppCompatFlags2(WORD version)
+{ CHECK(version == VER40); return client_info.dwCompatFlags2; }
+LRESULT WINAPI wow_native_DefWindowProcW(HWND w, UINT m, WPARAM wp, LPARAM lp)
+{ CHECK(w == source.head.h && m == WM_QUERYUISTATE && !wp && !lp); return ui_state; }
+LONG WINAPI wow_window_client_send_message(PWND w, UINT m, WPARAM wp, LPARAM lp, BOOL ansi)
+{
+    CHECK(w == &dialog && m == WM_CHANGEUISTATE && LOWORD(wp) == UIS_CLEAR && !lp && !ansi);
+    ui_state &= ~HIWORD(wp); ++ui_changes; return 0;
+}
 static BOOL dead(PWND w) { return TestWF(w, WFDESTROYED) || (w->fnid & FNID_STATUS_BITS); }
 /* These focus cases have no application dialog procedure/result. Native
  * storage is tested separately; unexpected dispatch is a failure here. */
@@ -144,6 +158,12 @@ static void setup(UINT code)
     if (!native_target) ExitProcess(2);
     ZeroMemory(&dialog_storage, sizeof(dialog_storage)); ZeroMemory(&source, sizeof(source));
     ZeroMemory(&dialog_data, sizeof(dialog_data));
+    ZeroMemory(&dialog_context, sizeof(dialog_context));
+    ZeroMemory(&client_info, sizeof(client_info));
+    ui_state = ui_changes = 0;
+    wow_dialog_current = &dialog_context;
+    dialog_context.server.atomSysClass[ICLS_BUTTON] = 0xc001;
+    button_class.atomClassName = 0xc001;
     dialog_storage.pdlg = &dialog_data;
     dialog.fnid = FNID_DIALOG;
     dialog.cbwndExtra = DLGWINDOWEXTRA;
@@ -151,6 +171,7 @@ static void setup(UINT code)
     ZeroMemory(&target, sizeof(target)); ZeroMemory(&button, sizeof(button));
     dialog.head.h = (HWND)(ULONG_PTR)1; source.head.h = (HWND)(ULONG_PTR)2;
     target.wnd.head.h = native_target; target.wnd.fnid = FNID_BUTTON;
+    target.wnd.pcls = &button_class;
     target.pbutn = &button; button.spwnd = &target.wnd;
     target.wnd.spmenu = (PMENU)(ULONG_PTR)IDOK;
     dialog.spwndChild = &target.wnd;
@@ -216,6 +237,28 @@ int __cdecl main(void)
     setup(0); handle_filter = TRUE; ansi.wParam = 0x4241;
     CHECK(wow_original_IsDialogMessageA(dialog.head.h, &ansi));
     CHECK(ansi.wParam == 0x4241);
+    /* XP rejects synchronous pointer messages for native callers, while WOW
+     * marks them before the existing filter. Exercise the original table. */
+    setup(0); handle_filter = TRUE;
+    ansi.hwnd = source.head.h; ansi.message = WM_SETTEXT; ansi.wParam = 0;
+    SetLastError(0);
+    CHECK(!wow_original_IsDialogMessageW(dialog.head.h, &ansi));
+    CHECK(GetLastError() == ERROR_MESSAGE_SYNC_ONLY && ansi.message == WM_SETTEXT);
+    client_info.dwTIFlags = TIF_16BIT;
+    CHECK(wow_original_IsDialogMessageW(dialog.head.h, &ansi));
+    CHECK(ansi.message == (WM_SETTEXT | 0x00010000));
+    client_info.dwTIFlags = 0;
+    ansi.message = WM_DEVICECHANGE; ansi.wParam = 0x8000;
+    CHECK(!wow_original_IsDialogMessageW(dialog.head.h, &ansi));
+    CHECK(GetLastError() == ERROR_MESSAGE_SYNC_ONLY);
+    ansi.wParam = 0;
+    CHECK(wow_original_IsDialogMessageW(dialog.head.h, &ansi));
+    CHECK(ansi.message == WM_DEVICECHANGE);
+    setup(0);
+    dialog_context.server.PUSIFlags = PUSIF_UIEFFECTS;
+    ui_state = UISF_HIDEFOCUS;
+    CHECK(key(WM_KEYDOWN, VK_TAB));
+    CHECK(ui_changes == 1 && ui_state == 0);
     /* Actual default-dialog callers must stop too: the helper returning
      * safely does not keep its caller's PDLG alive. These are explicit
      * terminal-state doubles, not evidence of real HWND reuse. */

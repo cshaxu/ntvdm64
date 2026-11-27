@@ -2,13 +2,14 @@
 *
 *  DLGMGR2.C
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 *      Dialog Management Routines
 *
 * ??-???-???? mikeke    Ported from Win 3.0 sources
 * 12-Feb-1991 mikeke    Added Revalidation code
 \***************************************************************************/
 
-#line 11
 #include "precomp.h"
 #pragma hdrstop
 
@@ -20,15 +21,20 @@
 * do not know who has the default button.
 *
 * History:
+*
+* Bug 19449 - joejo
+*
+*   Stop infinite loop when pwnd != pwndStart but pwnd == pwnd after calling
+*   _NextControl!
 \***************************************************************************/
 
-#line 24
 void xxxRemoveDefaultButton(
     PWND pwndRoot,
     PWND pwndStart)
 {
     UINT code;
     PWND pwnd;
+    PWND pwndDup;
     TL tlpwnd;
 
     CheckLock(pwndRoot);
@@ -44,6 +50,8 @@ void xxxRemoveDefaultButton(
 
     pwnd = pwndStart;
     do {
+        pwndDup = pwnd;
+        
         ThreadLock(pwnd, &tlpwnd);
 
         code = (UINT)SendMessage(HWq(pwnd), WM_GETDLGCODE, 0, 0L);
@@ -56,7 +64,14 @@ void xxxRemoveDefaultButton(
 
         ThreadUnlock(&tlpwnd);
 
-    } while (pwnd && (pwnd != pwndStart));
+    } while (pwnd && (pwnd != pwndStart) && (pwnd != pwndDup));
+    
+#if DBG
+#line 70
+#error Unsupported original DBG branch
+#endif
+#line 74
+    
 }
 
 
@@ -101,7 +116,7 @@ void xxxCheckDefPushButton(
         if (TestWF(pwndNewFocus, WEFCONTROLPARENT))
             return;
 
-        codeNewFocus = SendMessage(hwndNewFocus, WM_GETDLGCODE, 0, 0L);
+        codeNewFocus = (UINT)SendMessage(hwndNewFocus, WM_GETDLGCODE, 0, 0L);
     }
 
     if (SAMEWOWHANDLE(hwndOldFocus, hwndNewFocus)) {
@@ -124,11 +139,11 @@ void xxxCheckDefPushButton(
         {
            if (TestWF(pwndDlg, WFWIN40COMPAT) && hwndOldFocus)
            {
-               lT = SendMessage(HWq(pwndDlg), DM_GETDEFID, 0, 0L);
+               lT = (LONG)SendMessage(HWq(pwndDlg), DM_GETDEFID, 0, 0L);
                id = (HIWORD(lT) == DC_HASDEFID ? LOWORD(lT) : IDOK);
                lT = MAKELONG(id, 0);
 
-               if (lT != (LONG)(DWORD)pwndNewFocus->spmenu)
+               if (lT != PtrToLong(pwndNewFocus->spmenu))
                {
                    if (pwndOldFocus = _FindDlgItem(pwndDlg, lT))
                    {
@@ -174,7 +189,7 @@ SetNewDefault:
         /*
          * Get the original default button handle
          */
-        lT = SendMessage(HWq(pwndDlg), DM_GETDEFID, 0, 0L);
+        lT = (LONG)SendMessage(HWq(pwndDlg), DM_GETDEFID, 0, 0L);
         id = (HIWORD(lT) == DC_HASDEFID ? LOWORD(lT) : IDOK);
         pwndT = _FindDlgItem(pwndDlg, id);
 
@@ -206,15 +221,14 @@ SetNewDefault:
 }
 
 
-#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
-#line 207
 /***************************************************************************\
 * IsDialogMessage (API)
 *
 * History:
 \***************************************************************************/
 
-#line 213
+
+FUNCLOG2(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, IsDialogMessageA, HWND, hwndDlg, LPMSG, lpmsg)
 BOOL IsDialogMessageA(
     HWND hwndDlg,
     LPMSG lpmsg)
@@ -223,53 +237,39 @@ BOOL IsDialogMessageA(
     BOOL bRet;
 
     switch (lpmsg->message) {
-#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
-#line 221
 #ifdef FE_SB // IsDialogMessageA()
-#line 222
-#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
-#line 231
+#line 241
+#error Unsupported original FE_SB branch
 #else
-#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
-#line 232
-#line 222
+#line 294
     case WM_CHAR:
     case EM_SETPASSWORDCHAR:
-#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
-#line 234
 #endif // FE_SB
-#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
-#line 235
     case WM_CHARTOITEM:
     case WM_DEADCHAR:
     case WM_SYSCHAR:
     case WM_SYSDEADCHAR:
     case WM_MENUCHAR:
-#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
-#line 240
 #ifdef FE_IME // IsDialogMessageA()
-#line 241
-#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
-#line 243
+#line 303
+#error Unsupported original FE_IME branch
 #endif // FE_IME
-#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
-#line 243
+#line 306
 
-#line 245
-        RtlMBMessageWParamCharToWCS(lpmsg->message, (PDWORD)&lpmsg->wParam);
+        RtlMBMessageWParamCharToWCS(lpmsg->message, &lpmsg->wParam);
     }
 
-#line 248
     bRet = IsDialogMessageW(hwndDlg, lpmsg);
 
     /*
      * Restore the original ANSI char.
      */
     lpmsg->wParam = wParamSaved;
-#line 254
     return bRet;
 }
 
+
+FUNCLOG2(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, IsDialogMessageW, HWND, hwndDlg, LPMSG, lpMsg)
 BOOL IsDialogMessageW(
     HWND hwndDlg,
     LPMSG lpMsg)
@@ -287,6 +287,9 @@ BOOL IsDialogMessageW(
     TL tlpwndDlg;
     BOOL fLockDlg = FALSE;
     TL tlpwnd2;
+    WORD langID;
+
+    langID = PRIMARYLANGID(LANGIDFROMLCID(GetUserDefaultLCID()));
 
     if ((pwndDlg = ValidateHwndNoRip(hwndDlg)) == NULL) {
         return FALSE;
@@ -294,34 +297,48 @@ BOOL IsDialogMessageW(
 
     CheckLock(pwndDlg);
 
-#endif /* WOW_ORIGINAL_DIALOG_KEYBOARD */
-#line 281
-#ifdef LATER // JerrySh - we shouldn't need this on the client-side
-#line 282
-#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
-#line 308
-#endif
-#ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
-#line 309
+    /*
+     * If this is a synchronous-only message (takes a pointer in wParam or
+     * lParam), then don't allow this message to go through since those
+     * parameters have not been thunked, and are pointing into outer-space
+     * (which would case exceptions to occur).
+     *
+     * (This api is only called in the context of a message loop, and you
+     * don't get synchronous-only messages in a message loop).
+     */
+    if (TESTSYNCONLYMESSAGE(lpMsg->message, lpMsg->wParam)) {
+        /*
+         * Fail if 32 bit app is calling.
+         */
+        if (!(GetClientInfo()->dwTIFlags & TIF_16BIT)) {
+            RIPERR0(ERROR_MESSAGE_SYNC_ONLY, RIP_WARNING, "IsDialogMessage: must be sync only");
+            return FALSE;
+        }
+
+        /*
+         * For wow apps, allow it to go through (for compatibility). Change
+         * the message id so our code doesn't understand the message - wow
+         * will get the message and strip out this bit before dispatching
+         * the message to the application.
+         */
+        lpMsg->message |= MSGFLAG_WOW_RESERVED;
+    }
 
     if (CallMsgFilter(lpMsg, MSGF_DIALOGBOX))
         return TRUE;
 
-#line 313
     if (lpMsg->hwnd == NULL) {
         return FALSE;
     }
 
     pwnd = ValidateHwnd(lpMsg->hwnd);
-#line 318
     //
     // THIS IS FOR MFC.
     //
     // This solves many problems with apps that use MFC but want to take
     // advantage of DS_CONTROL.  MFC blindly passes in child dialogs sometimes
-    // to IsDialogMessage, which can screw up tabbing etc.
+    // to IsDialogMessage, which can mess up tabbing etc.
     //
-#line 325
     if (TestWF(pwndDlg, WEFCONTROLPARENT) && TestWF(pwndDlg, WFCHILD)) {
         pwndDlg = GetParentDialog(pwndDlg);
         ThreadLock(pwndDlg, &tlpwndDlg);
@@ -404,13 +421,12 @@ BOOL IsDialogMessageW(
         }
 
         code = (UINT)SendMessage(lpMsg->hwnd, WM_GETDLGCODE, lpMsg->wParam,
-                (DWORD)lpMsg);
+                (LPARAM)lpMsg);
 
         /*
          * If the control wants to process the message, then don't check for
          * possible mnemonic key.
          */
-#line 413
         if ((lpMsg->message == WM_CHAR) && (code & (DLGC_WANTCHARS | DLGC_WANTMESSAGE)))
             break;
 
@@ -480,10 +496,21 @@ CallDefWindowProcAndReturnTrue:
             ThreadUnlock(&tlpwndDlg);
         return TRUE;
 
+    case WM_SYSKEYDOWN:
+        /*
+         * If Alt is down, deal with keyboard cues
+         */
+        if ((HIWORD(lpMsg->lParam) & SYS_ALTERNATE) && TEST_KbdCuesPUSIF) {
+            if (TestWF(pwnd, WEFPUIFOCUSHIDDEN) || (TestWF(pwnd, WEFPUIACCELHIDDEN))) {
+                    SendMessageWorker(pwndDlg, WM_CHANGEUISTATE,
+                                      MAKEWPARAM(UIS_CLEAR, UISF_HIDEACCEL | UISF_HIDEFOCUS), 0, FALSE);
+                }
+        }
+        break;
+
     case WM_KEYDOWN:
         code = (UINT)SendMessage(lpMsg->hwnd, WM_GETDLGCODE, lpMsg->wParam,
-                (DWORD)lpMsg);
-#line 485
+                (LPARAM)lpMsg);
         if (code & (DLGC_WANTALLKEYS | DLGC_WANTMESSAGE))
             break;
 
@@ -493,32 +520,60 @@ CallDefWindowProcAndReturnTrue:
                 break;
             pwnd2 = _GetNextDlgTabItem(pwndDlg, pwnd,
                     (GetKeyState(VK_SHIFT) & 0x8000));
+
+            if (TEST_KbdCuesPUSIF) {
+                if (TestWF(pwnd, WEFPUIFOCUSHIDDEN)) {
+                    SendMessageWorker(pwndDlg, WM_CHANGEUISTATE,
+                                          MAKEWPARAM(UIS_CLEAR, UISF_HIDEFOCUS), 0, FALSE);
+                }
+            }
+
             if (pwnd2 != NULL) {
                 hwnd2 = HWq(pwnd2);
                 ThreadLockAlways(pwnd2, &tlpwnd2);
                 DlgSetFocus(hwnd2);
-#line 498
                 xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
-#line 499
                 ThreadUnlock(&tlpwnd2);
             }
-
             ThreadUnlock(&tlpwnd);
             if (fLockDlg)
                 ThreadUnlock(&tlpwndDlg);
             return TRUE;
 
+        /*
+         * For Arabic and Hebrew locales the arrow keys are reversed. Also reverse them if
+         * the dialog is RTL mirrored.
+         */
         case VK_LEFT:
+            if ((((langID == LANG_ARABIC) || (langID == LANG_HEBREW)) && TestWF(pwndDlg,WEFRTLREADING))
+                    ^ (!!TestWF(pwndDlg, WEFLAYOUTRTL))) {
+
+                goto DoKeyStuff;
+            }
         case VK_UP:
             fBack = TRUE;
+            goto DoKeyStuff;
 
         /*
          *** FALL THRU **
          */
         case VK_RIGHT:
+            if ((((langID == LANG_ARABIC) || (langID == LANG_HEBREW)) && TestWF(pwndDlg,WEFRTLREADING)) 
+                     ^ (!!TestWF(pwndDlg, WEFLAYOUTRTL))) {
+
+                fBack = TRUE;
+            }
         case VK_DOWN:
+DoKeyStuff:
             if (code & DLGC_WANTARROWS)
                 break;
+
+            if (TEST_KbdCuesPUSIF) {
+                if (TestWF(pwnd, WEFPUIFOCUSHIDDEN)) {
+                        SendMessageWorker(pwndDlg, WM_CHANGEUISTATE,
+                                          MAKEWPARAM(UIS_CLEAR, UISF_HIDEFOCUS), 0, FALSE);
+                    }
+            }
 
             pwnd2 = _GetNextDlgGroupItem(pwndDlg, pwnd, fBack);
             if (pwnd2 == NULL) {
@@ -527,48 +582,42 @@ CallDefWindowProcAndReturnTrue:
                     ThreadUnlock(&tlpwndDlg);
                 return TRUE;
             }
-
             hwnd2 = HWq(pwnd2);
             ThreadLockAlways(pwnd2, &tlpwnd2);
 
             code = (UINT)SendMessage(hwnd2, WM_GETDLGCODE, lpMsg->wParam,
-                    (DWORD)lpMsg);
-
+                    (LPARAM)lpMsg);
             if (pwnd2->fnid & FNID_STATUS_BITS) {
                 ThreadUnlock(&tlpwnd2);
                 goto ReturnProcessed;
             }
+#line 638
 
-#line 533
             /*
              * We are just moving the focus rect around! So, do not send
              * BN_CLICK messages, when WM_SETFOCUSing.  Fix for Bug
              * #4358.
              */
-#line 538
             if (code & (DLGC_UNDEFPUSHBUTTON | DLGC_DEFPUSHBUTTON)) {
                 PBUTN pbutn;
-                BOOL fIsNTButton = (GETFNID(pwnd2) == FNID_BUTTON);
+                BOOL fIsNTButton = IS_BUTTON(pwnd2);
                 wow_button_scope buttonScope;
                 if (fIsNTButton) wow_button_scope_enter(&buttonScope, pwnd2);
                 __try {
-#line 541
+#line 647
                 if (fIsNTButton) {
                     pbutn = ((PBUTNWND)pwnd2)->pbutn;
                     BUTTONSTATE(pbutn) |= BST_DONTCLICK;
                 }
                 DlgSetFocus(hwnd2);
                 } __finally {
-#line 546
-                if (fIsNTButton) {
-                    BUTTONSTATE(pbutn) &= ~BST_DONTCLICK;
+                    if (fIsNTButton) {
+                        BUTTONSTATE(pbutn) &= ~BST_DONTCLICK;
+                        wow_button_scope_leave(&buttonScope);
+                    }
+#line 654
                 }
-                    if (fIsNTButton) wow_button_scope_leave(&buttonScope);
-#line 548
-                }
-#line 549
                 xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
-#line 550
             } else if (code & DLGC_RADIOBUTTON) {
                 DlgSetFocus(hwnd2);
                 xxxCheckDefPushButton(pwndDlg, lpMsg->hwnd, hwnd2);
@@ -634,11 +683,11 @@ HaveWindow:
                 NtUserMessageBeep(0);
             } else {
                 SendMessage(hwndDlg, WM_COMMAND,
-                        MAKELONG(iOK, BN_CLICKED), (LONG)HW(pwnd2));
+                        MAKELONG(iOK, BN_CLICKED), (LPARAM)HW(pwnd2));
             }
 
 ReturnProcessed:
-#line 618
+#line 724
             ThreadUnlock(&tlpwnd);
             if (fLockDlg)
                 ThreadUnlock(&tlpwndDlg);
@@ -656,9 +705,7 @@ ReturnProcessed:
 
     return TRUE;
 }
-#endif
 
-#line 636
 /***************************************************************************\
 *
 * FindDlgItem32()
@@ -668,7 +715,6 @@ ReturnProcessed:
 *
 \***************************************************************************/
 
-#line 645
 PWND _FindDlgItem(PWND pwndParent, DWORD id)
 {
     PWND    pwndChild;
@@ -689,7 +735,7 @@ PWND _FindDlgItem(PWND pwndParent, DWORD id)
 
     do
     {
-        if ((DWORD)pwndChild->spmenu == id)
+        if (PtrToUlong(pwndChild->spmenu) == id)
             return(pwndChild);
 
         pwndChild = _NextControl(pwndParent, pwndChild, CWP_SKIPINVISIBLE);

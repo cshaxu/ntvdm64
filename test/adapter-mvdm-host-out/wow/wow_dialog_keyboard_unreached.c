@@ -18,7 +18,6 @@ __declspec(thread) wow_dialog_context *wow_dialog_current;
 NTSTATUS WINAPI InitLookaside(PLOOKASIDE p, DWORD s, DWORD n) { REJECT(); }
 PVOID WINAPI AllocLookasideEntry(PLOOKASIDE p) { REJECT(); }
 BOOL WINAPI wow_edit_FillWindow(HWND p, HWND w, HDC d, HBRUSH b) { REJECT(); }
-const wow_task_client_info *WINAPI wow_edit_client_info(void) { REJECT(); }
 DWORD WINAPI wow_edit_control_extent(WORD f) { REJECT(); }
 LONG WINAPI wow_window_client_set_window_long(HWND w, int i, LONG v, BOOL a) { REJECT(); }
 const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void) { REJECT(); }

@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime46 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime47 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -148,7 +148,7 @@ per-file/global census and original baseline transitions.
 
 [P36 N022 combo](../etc/evidence/t485-s1/n022-combo.md) delivered runtime41,
 cached build, dual publication, controls/lifecycle/SOL and Full24/24. This is
-the latest Full checkpoint; its receipt retains all census and initial failures.
+that Full checkpoint; its receipt retains all census and initial failures.
 
 [P37 combo initialization](../etc/evidence/t485-s1/n022-comboini.md) and
 [P38 combo directory](../etc/evidence/t485-s1/n022-combodir.md) are delivered.
@@ -172,14 +172,17 @@ Census1329files,782exact,793nonerror same/536different,7866points/117406lines;
 delta0files/0exact/0same/0different/-3points/-6lines.1277XP/52OpenNT.
 One changed mirror; eight since P36 Full24/24. No guest change.
 
-[P41 N022 dialog manager](../etc/evidence/t485-s1/n022-dlgmgr.md) delivers
-runtime46: whole XP algorithms, restored helpers and original focus validation;
-test-only source guards removed. Cached build, dual13-image26hash, control40/40,
-real CCPU window-borrow and SOL Options pass; fixture build retries retained.
-N02212/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
-536different,7822points/117106lines; delta0files/0exact/0same/0different/
--44points/-300lines.1278XP/51OpenNT. Nine mirrors since P36 Full24/24.
-Next dlgmgr2.c; its completion reaches the ten-file Full checkpoint.
+[P41 N022 dialog manager](../etc/evidence/t485-s1/n022-dlgmgr.md) delivered
+runtime46 and its recorded targeted gates; its receipt retains full census.
+
+[P42 N022 dialog keyboard](../etc/evidence/t485-s1/n022-dlgmgr2.md) delivers
+runtime47: complete XP keyboard navigation and existing callback lifetimes.
+Cached build, dual13-image26hash, controls40/40, real CCPU window-borrow,
+SOL Options and Full24/24 passed. Initial fixture link failure retained.
+N02213/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
+536different,7797points/117070lines; delta0files/0exact/0same/0different/
+-25points/-36lines.1279XP/50OpenNT. P42 is the new ten-file Full checkpoint.
+Next dlgmgrc.c; no new mirror file completed since this Full.
 
 ## S14 Closure Record
 

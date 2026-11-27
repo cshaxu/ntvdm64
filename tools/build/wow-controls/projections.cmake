@@ -36,6 +36,13 @@ control_slice(provider "${button}" "/* Image-attach composition only:" "#line 15
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/button-resource-provider.c"
   CONTENT "#include \"${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_button_resource_provider.h\"\n#line ${provider_line} \"${button}\"\n${provider}" @ONLY)
 set(dialog "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/dlgmgr.c")
+set(keyboard "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c")
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/keyboard-message-table.c"
+  CONTENT "#include \"control-client/default-precomp.h\"\n#define PROTOS_ONLY\n#include \"${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/inc/messages.h\"\n" @ONLY)
+control_slice(keyboard_helpers "${keyboard}" "void xxxRemoveDefaultButton(" "FUNCLOG2(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, IsDialogMessageA" FALSE)
+control_slice(keyboard_lookup "${keyboard}" "PWND _FindDlgItem(" "" FALSE)
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/dialog-keyboard-helpers.c"
+  CONTENT "#include \"control-client/precomp.h\"\n#line ${keyboard_helpers_line} \"${keyboard}\"\n${keyboard_helpers}\n#line ${keyboard_lookup_line} \"${keyboard}\"\n${keyboard_lookup}" @ONLY)
 set(layout_marker "/* Original-layout operations; caller retains its task and window borrow. */")
 control_slice(layout "${dialog}" "${layout_marker}" "" TRUE)
 string(REGEX MATCHALL "BOOL WINAPI wow_original_dialog_" operations "${layout}")

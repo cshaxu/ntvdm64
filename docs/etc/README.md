@@ -2201,3 +2201,4 @@ post-publication targeted checks.
 - [S15 P39 N022 dialog creation delivery](evidence/t485-s1/n022-dlgbegin-review.md).
 - [S15 P40 N022 dialog ending](evidence/t485-s1/n022-dlgend.md).
 - [S15 P41 N022 dialog manager](evidence/t485-s1/n022-dlgmgr.md).
+- [S15 P42 N022 dialog keyboard](evidence/t485-s1/n022-dlgmgr2.md).
