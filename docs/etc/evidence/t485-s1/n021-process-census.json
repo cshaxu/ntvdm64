@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1324,
+    "byte_identical": 775,
+    "nonerror_identical": 786,
+    "nonerror_different": 538,
+    "nonerror_points": 7718,
+    "nonerror_lines": 152823
+  },
+  "after": {
+    "files": 1324,
+    "byte_identical": 775,
+    "nonerror_identical": 786,
+    "nonerror_different": 538,
+    "nonerror_points": 7749,
+    "nonerror_lines": 150811
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 31,
+    "nonerror_lines": -2012
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "before_points": 1,
+      "before_lines": 2292,
+      "after_points": 32,
+      "after_lines": 280,
+      "exclusions": 2
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1255,
+    "OpenNT": 69
+  }
+}

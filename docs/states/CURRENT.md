@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall56/159 directories, H001-H036 and N001-N020. S15 runtime25 is the current
+overall56/159 directories, H001-H036 and N001-N020. S15 runtime26 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -62,16 +62,8 @@ P7 historical delivery remains indexed in this packet's evidence directory.
 [P11 N018](../etc/evidence/t485-s1/n018.md) delivered; detailed census and
 verification remain in its receipt.
 
-[P12 N019](../etc/evidence/t485-s1/n019.md) delivered: wowshlp.h moved to its
-XP Base path byte-exact; wowcmndg.h remains exact. Fixed the existing host
-Shell binding's two-argument call to match the XP three-argument WORD callback.
-Cached full build, runtime12 dual13-image26hash publication, four Shell cases
-and real WINMINE window passed. Initial include-path failure and native-provider
-inner-exception limitation retained in evidence. Nine inventory files reviewed
-since P9 Full24/24; no repeat Full. Overall55/159, S15 7/14. Next N020.
-Current census1315files,762exact,770nonerror same/545different,
-7746points/163445lines; delta0files,+1exact,+1same,-1different,-1point/-60lines.
-1231XP/84OpenNT. No #error/#line change or original guest modification.
+[P12 N019](../etc/evidence/t485-s1/n019.md) delivered; detailed package,
+Shell verification and census remain in its receipt.
 
 [P13 N020 first-file](../etc/evidence/t485-s1/n020-first.md) delivered:
 newres.h byte-exact XP at windows/core/w32inc; clres.c include follows with
@@ -180,6 +172,16 @@ Census1324files,775exact,786nonerror same/538different,7718points/152823lines;
 delta0files/0exact/0same/0different/-23points/-208lines.1254XP/70OpenNT.
 N02110/17; next ntpsapi.h. Overall56/159 and S15 8/14 unchanged. Eight audited
 files since P21 Full24/24, six changed distinct mirror files.
+
+[P25 N021 process/thread](../etc/evidence/t485-s1/n021-process.md) delivered:
+XP declarations and LF restored; compiler-proven SDK omissions and original
+host PEB binding retained. Cached build, runtime26 dual13-image26hash,
+native capture/layout, service42 and actual guest COMMAND/NetAPI passed.
+Census1324files,775exact,786nonerror same/538different,7749points/150811lines;
+delta0files/0exact/0same/0different/+31points/-2012lines.1255XP/69OpenNT.
+LF recovery exposes separate actual adaptations. N02111/17; next ntregapi.h.
+Overall56/159 and S15 8/14 unchanged. Nine audited files since P21 Full24/24,
+seven changed distinct mirror files; next completed file requires Full.
 
 ## S14 Closure Record
 

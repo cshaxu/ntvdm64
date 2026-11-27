@@ -1,0 +1,626 @@
+{
+  "task": "M0 T485 S15 P25",
+  "runtime": "build/t485-s15/runtime26",
+  "build_exit": 0,
+  "inputs": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntpsapi.h",
+      "blob": "3bf8c5fb976bba9e331743966b9d75c68cafad3e",
+      "sha256": "f5bd64dd7899b6bea121101c0d61e0fe6ca9ab537485d03b5ad51a1adf124089",
+      "xp_sha256": "b83f51e106b1633f15240117377e432e0ffea1e076e4833e170f55c351f4eba4",
+      "selected_original_line_mismatches": [],
+      "raw_points": 34,
+      "raw_lines": 296
+    }
+  ],
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "D06D430ECC761E4FBD8D1C81167CDFFF1291C402B1EA9C4CFDE35A8B6E29F30F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "D06D430ECC761E4FBD8D1C81167CDFFF1291C402B1EA9C4CFDE35A8B6E29F30F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "EAD0FF135DD8DEBC624DEEF8AF8990809B85CF7B279FFC6786C0DDD12C062108",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "EAD0FF135DD8DEBC624DEEF8AF8990809B85CF7B279FFC6786C0DDD12C062108",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "A0034FB8E46EB9C01D7AD90CCCC0EA8875FEF138A943AAD750266EE42A4A0EB7",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "A0034FB8E46EB9C01D7AD90CCCC0EA8875FEF138A943AAD750266EE42A4A0EB7",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "71AB09CCC3161B36C824332E616431EB61AA4E41D797586B5AFAF6C098CE7CD0",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "71AB09CCC3161B36C824332E616431EB61AA4E41D797586B5AFAF6C098CE7CD0",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "DC68EC0ACF169286CD726BDAF3E2CFF21BE39BD50AC7EFEB95BBD11FDD5A3152",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "DC68EC0ACF169286CD726BDAF3E2CFF21BE39BD50AC7EFEB95BBD11FDD5A3152",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "0505B9D6C21FCC5C088AD94960EE1AA13412CD95826C4A986CB5DFD5E1F03271",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "0505B9D6C21FCC5C088AD94960EE1AA13412CD95826C4A986CB5DFD5E1F03271",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "354A468C319FA016ADE72635BD357F5DE019986289B7E56DC8DD955E6408DF63",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "354A468C319FA016ADE72635BD357F5DE019986289B7E56DC8DD955E6408DF63",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "E2C345E950D8325F7070BF25575D10392C398CABF51189438CC6EB55E3053CBE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "E2C345E950D8325F7070BF25575D10392C398CABF51189438CC6EB55E3053CBE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "88EA6543B834528076C5D90D63CC3F59C863A061F77D85261A29CBCEB31781D4",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "88EA6543B834528076C5D90D63CC3F59C863A061F77D85261A29CBCEB31781D4",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "51E99045182C398BB7684732A6F7342D8EB7DCD852B6D92EF00872FDF7142A2A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "51E99045182C398BB7684732A6F7342D8EB7DCD852B6D92EF00872FDF7142A2A",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "DDF7FAC730220172A9B619EEA33574FBD4952004E841C24EF5DDC09F147CE8A8",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "DDF7FAC730220172A9B619EEA33574FBD4952004E841C24EF5DDC09F147CE8A8",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "322AD55924E79C71633EEA604E90C06423F9F9D0CEBADE264BB8E789C30FECDF",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "322AD55924E79C71633EEA604E90C06423F9F9D0CEBADE264BB8E789C30FECDF",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "587707B452514E05892C4BA81047A9A3E1935228AACB31E176C51BCCA4FC07D7",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "587707B452514E05892C4BA81047A9A3E1935228AACB31E176C51BCCA4FC07D7",
+      "pass": true
+    }
+  ],
+  "census": {
+    "before": {
+      "files": 1324,
+      "byte_identical": 775,
+      "nonerror_identical": 786,
+      "nonerror_different": 538,
+      "nonerror_points": 7718,
+      "nonerror_lines": 152823
+    },
+    "after": {
+      "files": 1324,
+      "byte_identical": 775,
+      "nonerror_identical": 786,
+      "nonerror_different": 538,
+      "nonerror_points": 7749,
+      "nonerror_lines": 150811
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 31,
+      "nonerror_lines": -2012
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+        "before_points": 1,
+        "before_lines": 2292,
+        "after_points": 32,
+        "after_lines": 280,
+        "exclusions": 2
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1255,
+      "OpenNT": 69
+    }
+  },
+  "newline_explanation": {
+    "before_opennt_normalized": [
+      49,
+      358,
+      5
+    ],
+    "after_xp_normalized": [
+      32,
+      280,
+      2
+    ]
+  },
+  "logs": {
+    "capture32-final.log": "native capture bits=32 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "capture64-final.log": "native capture bits=64 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "layout32-final.log": "PASS 32-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n",
+    "layout64-final.log": "PASS 64-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n"
+  },
+  "service": {
+    "Concurrency": 4,
+    "ElapsedMs": 6014,
+    "ObserverHash": "AD6A887C6F14960E387D4664B9FA0A2FD8F6A1210032FF2FFF360FD7D10FD779",
+    "FixtureHash": "6BAC106050FD08C76912040C925C5D39B3C9F41FDC0091E18FDEB0484273CDFF",
+    "Cases": [
+      {
+        "Case": "frontend-chains",
+        "ElapsedMs": 872,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-instances",
+        "ElapsedMs": 882,
+        "Result": "PASS"
+      },
+      {
+        "Case": "parent-resume-origin",
+        "ElapsedMs": 883,
+        "Result": "PASS"
+      },
+      {
+        "Case": "io-authority",
+        "ElapsedMs": 872,
+        "Result": "PASS"
+      },
+      {
+        "Case": "route-cancellation",
+        "ElapsedMs": 439,
+        "Result": "PASS"
+      },
+      {
+        "Case": "prepared-native-root-loss",
+        "ElapsedMs": 452,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-stop",
+        "ElapsedMs": 539,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-reconnect",
+        "ElapsedMs": 544,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-delegated",
+        "ElapsedMs": 506,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait",
+        "ElapsedMs": 790,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-root-loss",
+        "ElapsedMs": 707,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-request-loss",
+        "ElapsedMs": 705,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-worker-loss",
+        "ElapsedMs": 558,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-rundown",
+        "ElapsedMs": 493,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-return",
+        "ElapsedMs": 515,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-after-return",
+        "ElapsedMs": 518,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-nested-return",
+        "ElapsedMs": 485,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-pending-command",
+        "ElapsedMs": 488,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-increment",
+        "ElapsedMs": 509,
+        "Result": "PASS"
+      },
+      {
+        "Case": "launcher-completed-rundown",
+        "ElapsedMs": 504,
+        "Result": "PASS"
+      },
+      {
+        "Case": "completed-worker-loss",
+        "ElapsedMs": 496,
+        "Result": "PASS"
+      },
+      {
+        "Case": "wow-start-late-query",
+        "ElapsedMs": 659,
+        "Result": "PASS"
+      },
+      {
+        "Case": "default",
+        "ElapsedMs": 658,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-authority",
+        "ElapsedMs": 661,
+        "Result": "PASS"
+      },
+      {
+        "Case": "shared-worker-residency",
+        "ElapsedMs": 524,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-command",
+        "ElapsedMs": 446,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-worker",
+        "ElapsedMs": 586,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-gui",
+        "ElapsedMs": 585,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close",
+        "ElapsedMs": 584,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-completion-barrier",
+        "ElapsedMs": 421,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-order",
+        "ElapsedMs": 455,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-root-loss",
+        "ElapsedMs": 462,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-prepare-pending",
+        "ElapsedMs": 483,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-worker-then-console",
+        "ElapsedMs": 414,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-console-then-worker",
+        "ElapsedMs": 436,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-late-worker-close",
+        "ElapsedMs": 491,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-exit-then-console",
+        "ElapsedMs": 472,
+        "Result": "PASS"
+      },
+      {
+        "Case": "console-then-worker-exit",
+        "ElapsedMs": 390,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-console-exit",
+        "ElapsedMs": 405,
+        "Result": "PASS"
+      },
+      {
+        "Case": "preparing-worker-exit",
+        "ElapsedMs": 420,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-terminate",
+        "ElapsedMs": 487,
+        "Result": "PASS"
+      },
+      {
+        "Case": "unfinished-worker-exit",
+        "ElapsedMs": 474,
+        "Result": "PASS"
+      }
+    ]
+  },
+  "guest": {
+    "mode": "netapi",
+    "exit_code": 0,
+    "elapsed_ms": 13439
+  },
+  "omissions": [
+    {
+      "name": "_JOBOBJECTINFOCLASS",
+      "start": 1298,
+      "end": 1310,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_JOBSET_INFORMATION",
+      "start": 1213,
+      "end": 1215,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_BASIC_AND_IO_ACCOUNTING_INFORMATION",
+      "start": 1208,
+      "end": 1211,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_ASSOCIATE_COMPLETION_PORT",
+      "start": 1203,
+      "end": 1206,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_END_OF_JOB_TIME_INFORMATION",
+      "start": 1199,
+      "end": 1201,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_SECURITY_LIMIT_INFORMATION",
+      "start": 1191,
+      "end": 1197,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_BASIC_UI_RESTRICTIONS",
+      "start": 1187,
+      "end": 1189,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_BASIC_PROCESS_ID_LIST",
+      "start": 1181,
+      "end": 1185,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_EXTENDED_LIMIT_INFORMATION",
+      "start": 1172,
+      "end": 1179,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_BASIC_LIMIT_INFORMATION",
+      "start": 1160,
+      "end": 1170,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOBOBJECT_BASIC_ACCOUNTING_INFORMATION",
+      "start": 1149,
+      "end": 1158,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "NtSetInformationThread",
+      "start": 1013,
+      "end": 1021,
+      "reason": "compiler C2375 SDK linkage"
+    },
+    {
+      "name": "NtQueryInformationThread",
+      "start": 1001,
+      "end": 1010,
+      "reason": "compiler C2375 SDK linkage"
+    },
+    {
+      "name": "NtQueryInformationProcess",
+      "start": 887,
+      "end": 896,
+      "reason": "compiler C2375 SDK linkage"
+    },
+    {
+      "name": "_IO_COUNTERS",
+      "start": 646,
+      "end": 653,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_QUOTA_LIMITS",
+      "start": 628,
+      "end": 635,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_PROCESS_BASIC_INFORMATION",
+      "start": 543,
+      "end": 550,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_THREADINFOCLASS",
+      "start": 476,
+      "end": 497,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_PROCESSINFOCLASS",
+      "start": 435,
+      "end": 470,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_EXCEPTION_REGISTRATION_RECORD",
+      "start": 332,
+      "end": 335,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "pebteb.h",
+      "start": 307,
+      "end": 307,
+      "reason": "compiler C2011 SDK PEB/TEB duplicates; host state remains independently owned"
+    },
+    {
+      "name": "_NT_TIB64",
+      "start": 257,
+      "end": 268,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_NT_TIB32",
+      "start": 244,
+      "end": 255,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_NT_TIB",
+      "start": 227,
+      "end": 238,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_CLIENT_ID",
+      "start": 174,
+      "end": 177,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_PEB_LDR_DATA",
+      "start": 126,
+      "end": 134,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "_JOB_SET_ARRAY",
+      "start": 111,
+      "end": 115,
+      "reason": "compiler C2011 SDK duplicate"
+    },
+    {
+      "name": "NtCurrentPeb user macro",
+      "start": 882,
+      "end": 882,
+      "reason": "Real BaseClient vdm.c compile C2039; native host PEB carrier refreshes current directory and standard streams through public APIs. Raw XP TEB access is not that contract."
+    },
+    {
+      "name": "NtCurrentPeb kernel macro",
+      "start": 878,
+      "end": 878,
+      "reason": "Actual RTL environ.c build selects NTOS_KERNEL_RUNTIME; C4013/C2223 PsGetCurrentProcess is unavailable in the native user-mode host. Both selections use the existing B carrier."
+    },
+    {
+      "name": "PPS_POST_PROCESS_INIT_ROUTINE",
+      "start": 198,
+      "end": 202,
+      "reason": "Actual x86 build C2373: SDK winternl.h calling convention differs; retain native SDK provider."
+    }
+  ],
+  "exclusions": [
+    {
+      "condition": "((b'#ifndef _NTPSAPI_', 0, 0), (b'#ifdef  _IA64_', 0, 0))",
+      "original_start": 801,
+      "original_end": 804
+    },
+    {
+      "condition": "((b'#ifndef _NTPSAPI_', 0, 0), (b'#if DBG', 0, 0))",
+      "original_start": 375,
+      "original_end": 388
+    }
+  ],
+  "initial_failures": "probe/probe2: SDK duplicate declarations, pebteb PEB/TEB duplicates and query linkage; peb-probe: BaseClient TEB field; build: RTL selected kernel PEB macro. Corrected final code rebuilt.",
+  "Full": "Not repeated: ninth audited file since P21, seven changed distinct mirror files"
+}

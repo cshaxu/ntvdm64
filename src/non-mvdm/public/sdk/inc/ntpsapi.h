@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0007    // Increment this if a change has global effects
 
-Copyright (c) 1989-1993  Microsoft Corporation
+Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Module Name:
 
@@ -22,6 +22,14 @@ Revision History:
 #ifndef _NTPSAPI_
 #define _NTPSAPI_
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 //
 // Process Specific Access Rights
 //
@@ -32,20 +40,32 @@ Revision History:
 #define PROCESS_VM_OPERATION      (0x0008)  // winnt
 #define PROCESS_VM_READ           (0x0010)  // winnt
 #define PROCESS_VM_WRITE          (0x0020)  // winnt
-// begin_ntddk
+// begin_ntddk begin_wdm begin_ntifs
 #define PROCESS_DUP_HANDLE        (0x0040)  // winnt
-// end_ntddk
+// end_ntddk end_wdm end_ntifs
 #define PROCESS_CREATE_PROCESS    (0x0080)  // winnt
 #define PROCESS_SET_QUOTA         (0x0100)  // winnt
 #define PROCESS_SET_INFORMATION   (0x0200)  // winnt
 #define PROCESS_QUERY_INFORMATION (0x0400)  // winnt
 #define PROCESS_SET_PORT          (0x0800)
-// begin_winnt begin_ntddk
+#define PROCESS_SUSPEND_RESUME    (0x0800)  // winnt
+
+// begin_winnt begin_ntddk begin_wdm begin_ntifs
 #define PROCESS_ALL_ACCESS        (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
                                    0xFFF)
+// begin_nthal
 
+#if defined(_WIN64)
+
+#define MAXIMUM_PROCESSORS 64
+
+#else
 
 #define MAXIMUM_PROCESSORS 32
+
+#endif
+
+// end_nthal
 
 // end_winnt
 
@@ -54,25 +74,25 @@ Revision History:
 //
 
 #define THREAD_TERMINATE               (0x0001)  // winnt
-// end_ntddk
+// end_ntddk end_wdm end_ntifs
 #define THREAD_SUSPEND_RESUME          (0x0002)  // winnt
 #define THREAD_ALERT                   (0x0004)
 #define THREAD_GET_CONTEXT             (0x0008)  // winnt
 #define THREAD_SET_CONTEXT             (0x0010)  // winnt
-// begin_ntddk
+// begin_ntddk begin_wdm begin_ntifs
 #define THREAD_SET_INFORMATION         (0x0020)  // winnt
-// end_ntddk
+// end_ntddk end_wdm end_ntifs
 #define THREAD_QUERY_INFORMATION       (0x0040)  // winnt
 // begin_winnt
 #define THREAD_SET_THREAD_TOKEN        (0x0080)
 #define THREAD_IMPERSONATE             (0x0100)
 #define THREAD_DIRECT_IMPERSONATION    (0x0200)
-// begin_ntddk
+// begin_ntddk begin_wdm begin_ntifs
 
 #define THREAD_ALL_ACCESS         (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
                                    0x3FF)
 
-// end_ntddk
+// end_ntddk end_wdm end_ntifs
 // end_winnt
 
 //
@@ -85,17 +105,25 @@ Revision History:
 #define JOB_OBJECT_QUERY                    (0x0004)
 #define JOB_OBJECT_TERMINATE                (0x0008)
 #define JOB_OBJECT_SET_SECURITY_ATTRIBUTES  (0x0010)
-#define JOB_OBJECT_ALL_ACCESS               (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
-                                             0x1F )
+#define JOB_OBJECT_ALL_ACCESS       (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
+                                        0x1F )
+
+#line 116
 
 // end_winnt
 
 //
 // Process Environment Block
 //
+#ifdef _MAC
+#pragma warning( disable : 4121)
+#endif
 
-#line 105
+#line 135
 
+#ifdef _MAC
+#pragma warning( default : 4121 )
+#endif
 //
 // Handle tag bits for Peb Stdio File Handles
 //
@@ -105,7 +133,18 @@ Revision History:
 #define PEB_STDIO_HANDLE_PM         2
 #define PEB_STDIO_HANDLE_RESERVED   3
 
-#define GDI_HANDLE_BUFFER_SIZE      34
+#define GDI_HANDLE_BUFFER_SIZE32  34
+#define GDI_HANDLE_BUFFER_SIZE64  60
+
+#if !defined(_IA64_) && !defined(_AMD64_)
+#define GDI_HANDLE_BUFFER_SIZE      GDI_HANDLE_BUFFER_SIZE32
+#else
+#define GDI_HANDLE_BUFFER_SIZE      GDI_HANDLE_BUFFER_SIZE64
+#endif
+
+typedef ULONG GDI_HANDLE_BUFFER32[GDI_HANDLE_BUFFER_SIZE32];
+typedef ULONG GDI_HANDLE_BUFFER64[GDI_HANDLE_BUFFER_SIZE64];
+typedef ULONG GDI_HANDLE_BUFFER  [GDI_HANDLE_BUFFER_SIZE  ];
 
 #define FOREGROUND_BASE_PRIORITY  9
 #define NORMAL_BASE_PRIORITY      8
@@ -115,96 +154,35 @@ typedef struct _PEB_FREE_BLOCK {
     ULONG Size;
 } PEB_FREE_BLOCK, *PPEB_FREE_BLOCK;
 
-// begin_ntddk begin_nthal
+// begin_ntddk begin_wdm begin_nthal begin_ntifs
 //
 // ClientId
 //
 
-#line 134
+#line 178
 typedef CLIENT_ID *PCLIENT_ID;
 
-// end_ntddk end_nthal
+// end_ntddk end_wdm end_nthal end_ntifs
 
-#ifndef CLIENT_ID64_DEFINED
+#if !defined(CLIENT_ID64_DEFINED)
 
 typedef struct _CLIENT_ID64 {
     ULONGLONG  UniqueProcess;
     ULONGLONG  UniqueThread;
 } CLIENT_ID64;
- 
+
 typedef CLIENT_ID64 *PCLIENT_ID64;
- 
+
 #define CLIENT_ID64_DEFINED
- 
+
 #endif
 
 #define TLS_MINIMUM_AVAILABLE 64    // winnt
 #define TLS_EXPANSION_SLOTS   1024
 
-#line 154
-typedef
-VOID
-(NTAPI *PPS_POST_PROCESS_INIT_ROUTINE) (
-    VOID
-    );
-#line 159
-
-#line 166
-
-#line 188
-
-    //
-    // Useful information for LdrpInitialize
-#line 193
-
-    //
-    // Passed up from MmCreatePeb from Session Manager registry key
-    //
-
 #line 203
 
-    //
-    // Where heap manager keeps track of all heaps created for a process
-    // Fields initialized by MmCreatePeb.  ProcessHeaps is initialized
-    // to point to the first free byte after the PEB and MaximumNumberOfHeaps
-    // is computed from the page size used to hold the PEB, less the fixed
-    // size of this data structure.
-    //
-
-#line 215
-
-    //
-    //
-#line 222
-
-    //
-    // Following fields filled in by MmCreatePeb from system values and/or
-    // image header.
-    //
-
-#line 239
-
-#line 242
-
-    //
-    // Id of the Hydra session in which this process is running
-    //
-#line 247
-
-    //
-    // Filled in by LdrQueryImageFileExecutionOptions
-    //
-#line 252
-
-    //
-    // Used by GetVersionExW as the szCSDVersion string
-    // 
-#line 257
-
-
-#line 260
-
-// begin_nthal begin_ntddk
+// begin_nthal begin_ntddk begin_ntifs
 //
 // Thread Environment Block (and portable part of Thread Information Block)
 //
@@ -216,18 +194,28 @@ VOID
 //      It appears as the first part of the TEB for all threads which have
 //      a user mode component.
 //
+// end_nthal end_ntddk end_ntifs
 //      This structure MUST MATCH OS/2 V2.0!
 //
 //      There is another, non-portable part of the TIB which is used
 //      for by subsystems, i.e. Os2Tib for OS/2 threads.  SubSystemTib
 //      points there.
+// begin_nthal begin_ntddk begin_ntifs
 //
 
 // begin_winnt
 
-#line 294
+#line 239
 typedef NT_TIB *PNT_TIB;
-// end_nthal end_ntddk end_winnt
+
+//
+// 32 and 64 bit specific version for wow64 and the debugger
+//
+#line 256
+
+#line 269
+
+// end_nthal end_ntddk end_ntifs end_winnt
 
 //
 // Gdi command batching
@@ -236,10 +224,11 @@ typedef NT_TIB *PNT_TIB;
 #define GDI_BATCH_BUFFER_SIZE 310
 
 typedef struct _GDI_TEB_BATCH {
-    ULONG Offset;
-    ULONG HDC;
-    ULONG Buffer[GDI_BATCH_BUFFER_SIZE];
+    ULONG    Offset;
+    ULONG_PTR HDC;
+    ULONG    Buffer[GDI_BATCH_BUFFER_SIZE];
 } GDI_TEB_BATCH,*PGDI_TEB_BATCH;
+
 
 //
 // Wx86 thread state information
@@ -261,76 +250,68 @@ typedef struct _Wx86ThreadState {
 
 #define WIN32_CLIENT_INFO_SPIN_COUNT 1
 
-#line 386
-#ifdef  _IA64_
-#error Unsupported excluded original configuration
-#line 389
-#endif
-#line 394
-typedef TEB *PTEB;
+typedef PVOID* PPVOID;
 
-#if !defined(_X86_)
-#define Wx86CurrentTib()  (  \
-     NtCurrentTeb()->Vdm &&  \
-     ((PWX86TIB)NtCurrentTeb()->Vdm)->Size == sizeof(WX86TIB) \
-     ? (PWX86TIB)NtCurrentTeb()->Vdm : NULL                   \
-     )
+#line 308
 
+// begin_winnt
+
+#if !defined(_X86_) && !defined(_IA64_) && !defined(_AMD64_)
 #define WX86
+#endif
 
+// end_winnt
+
+
+#if defined(WX86)
+#define Wx86CurrentTib() ((PWX86TIB)NtCurrentTeb()->Vdm)
+#else
+#define Wx86CurrentTib() (NULL)
+#endif
+
+#if !defined(_X86_) && !defined(_IA64_)
 //
 // Exception Registration structure
 //
-// X86 Call frame record definition, normally defined in ntx86.h
+// X86 Call frame record definition, normally defined in nti386.h
 // which is not included on risc.
 //
 
-#line 416
+#line 336
 
 typedef EXCEPTION_REGISTRATION_RECORD *PEXCEPTION_REGISTRATION_RECORD;
-
-#line 419
-#else
-#line 420
-#define Wx86CurrentTib() (NULL)
 #endif
-#line 422
 
 typedef struct _Wx86TIB {
     ULONG Size;
     ULONG InitialPc;
-    PVOID StackBase;
-    PVOID StackLimit;
-    PVOID DeallocationStack;
-    ULONG   LogFlags;
-    PULONG  CallBx86Eip;
-    ULONG   InitialSp;
-    BOOLEAN UseKnownWx86Dll;
-    BOOLEAN EmulateInitialPc;
+    VOID * POINTER_32 StackBase;
+    VOID * POINTER_32 StackLimit;
+    VOID * POINTER_32 DeallocationStack;
+    ULONG LogFlags;
+    ULONG InitialSp;
+    UCHAR SimulationCount;
     BOOLEAN InCpuSimulation;
-    UCHAR   SimulationCount;
-    BOOLEAN OleStubInvoked;
+    BOOLEAN EmulateInitialPc;
     BOOLEAN Initialized;
-    PEXCEPTION_REGISTRATION_RECORD ExceptionList;
-    PVOID   CpuContext;
-    PCONTEXT InitialExceptionContext;
+    EXCEPTION_REGISTRATION_RECORD * POINTER_32 ExceptionList;
+    VOID * POINTER_32 CpuContext;
+    CONTEXT * POINTER_32 InitialExceptionContext;
+    VOID * POINTER_32 pCallersRIID;
+    VOID * POINTER_32 pCallersUnknown;
+    ULONG Flags;
+    VOID * POINTER_32 SelfRegDllName;
+    VOID * POINTER_32 SelfRegDllHandle;
 } WX86TIB, *PWX86TIB;
 
+#define EXCEPTION_CHAIN_END ((struct _EXCEPTION_REGISTRATION_RECORD * POINTER_32)-1)
 
 
-
-
-
-
-
-
-#define EXCEPTION_CHAIN_END ((struct _EXCEPTION_REGISTRATION_RECORD *)-1)
 
 //
 // The version number of OS2
 //
 
-// BUGBUG shielint The version number is temporay.
 
 #define MAJOR_VERSION 30  // Cruiser uses 20 (not 20H)
 #define MINOR_VERSION 00
@@ -338,17 +319,22 @@ typedef struct _Wx86TIB {
 
 #if DBG
 #error Unsupported excluded original configuration
-#line 476
 #endif // DBG
-#line 477
+#line 389
 
 typedef struct _INITIAL_TEB {
     struct {
         PVOID OldStackBase;
         PVOID OldStackLimit;
+#if defined(_IA64_)
+        PVOID OldBStoreLimit;
+#endif // defined(_IA64_)
     } OldInitialTeb;
     PVOID StackBase;
     PVOID StackLimit;
+#if defined(_IA64_)
+    PVOID BStoreLimit;
+#endif // defined(_IA64_)
     PVOID StackAllocationBase;
 } INITIAL_TEB, *PINITIAL_TEB;
 
@@ -369,21 +355,26 @@ typedef struct _PROCESS_FOREGROUND_BACKGROUND {
     BOOLEAN Foreground;
 } PROCESS_FOREGROUND_BACKGROUND, *PPROCESS_FOREGROUND_BACKGROUND;
 
-// begin_ntddk
+
+//
+// Define process debug flags
+//
+#define PROCESS_DEBUG_INHERIT 0x00000001
+
+
+// begin_ntddk begin_ntifs
 //
 // Process Information Classes
 //
 
-#line 551
-// end_ntddk
+#line 471
 
 //
 // Thread Information Classes
 //
-// begin_ntddk
 
-#line 582
-// end_ntddk
+#line 498
+// end_ntddk end_ntifs
 
 #define PROCESS_PRIORITY_SEPARATION_MASK    0x00000003
 #define PROCESS_PRIORITY_SEPARATION_MAX     0x00000002
@@ -396,6 +387,7 @@ typedef struct _PROCESS_FOREGROUND_BACKGROUND {
 #define PROCESS_QUANTUM_LONG_VALUE          0x00000010
 #define PROCESS_QUANTUM_SHORT_VALUE         0x00000020
 
+
 #define PROCESS_HARDERROR_ALIGNMENT_BIT 0x0004  // from winbase.h, but not tagged
 
 //
@@ -404,11 +396,11 @@ typedef struct _PROCESS_FOREGROUND_BACKGROUND {
 // begin_winnt
 #define THREAD_BASE_PRIORITY_LOWRT  15  // value that gets a thread to LowRealtime-1
 #define THREAD_BASE_PRIORITY_MAX    2   // maximum thread base priority boost
-#define THREAD_BASE_PRIORITY_MIN    -2  // minimum thread base priority boost
-#define THREAD_BASE_PRIORITY_IDLE   -15 // value that gets a thread to idle
+#define THREAD_BASE_PRIORITY_MIN    (-2)  // minimum thread base priority boost
+#define THREAD_BASE_PRIORITY_IDLE   (-15) // value that gets a thread to idle
 // end_winnt
 
-// begin_ntddk
+// begin_ntddk begin_ntifs
 //
 // Process Information Structures
 //
@@ -427,8 +419,9 @@ typedef struct _PROCESS_WS_WATCH_INFORMATION {
 //  NtQueryInformationProcess using ProcessBasicInfo
 //
 
-#line 634
+#line 551
 typedef PROCESS_BASIC_INFORMATION *PPROCESS_BASIC_INFORMATION;
+
 
 //
 // Process Device Map information
@@ -448,6 +441,24 @@ typedef struct _PROCESS_DEVICEMAP_INFORMATION {
     };
 } PROCESS_DEVICEMAP_INFORMATION, *PPROCESS_DEVICEMAP_INFORMATION;
 
+typedef struct _PROCESS_DEVICEMAP_INFORMATION_EX {
+    union {
+        struct {
+            HANDLE DirectoryHandle;
+        } Set;
+        struct {
+            ULONG DriveMap;
+            UCHAR DriveType[ 32 ];
+        } Query;
+    };
+    ULONG Flags;    // specifies that the query type
+} PROCESS_DEVICEMAP_INFORMATION_EX, *PPROCESS_DEVICEMAP_INFORMATION_EX;
+
+//
+// PROCESS_DEVICEMAP_INFORMATION_EX flags
+//
+#define PROCESS_LUID_DOSDEVICES_ONLY 0x00000001
+
 //
 // Multi-User Session specific Process Information
 //  NtQueryInformationProcess using ProcessSessionInformation
@@ -456,6 +467,26 @@ typedef struct _PROCESS_DEVICEMAP_INFORMATION {
 typedef struct _PROCESS_SESSION_INFORMATION {
     ULONG SessionId;
 } PROCESS_SESSION_INFORMATION, *PPROCESS_SESSION_INFORMATION;
+
+
+typedef struct _PROCESS_HANDLE_TRACING_ENABLE {
+    ULONG Flags;
+} PROCESS_HANDLE_TRACING_ENABLE, *PPROCESS_HANDLE_TRACING_ENABLE;
+
+#define PROCESS_HANDLE_TRACING_MAX_STACKS 16
+
+typedef struct _PROCESS_HANDLE_TRACING_ENTRY {
+    HANDLE Handle;
+    CLIENT_ID ClientId;
+    ULONG Type;
+    PVOID Stacks[PROCESS_HANDLE_TRACING_MAX_STACKS];
+} PROCESS_HANDLE_TRACING_ENTRY, *PPROCESS_HANDLE_TRACING_ENTRY;
+
+typedef struct _PROCESS_HANDLE_TRACING_QUERY {
+    HANDLE Handle;
+    ULONG  TotalTraces;
+    PROCESS_HANDLE_TRACING_ENTRY HandleTrace[1];
+} PROCESS_HANDLE_TRACING_QUERY, *PPROCESS_HANDLE_TRACING_QUERY;
 
 //
 // Process Quotas
@@ -466,7 +497,7 @@ typedef struct _PROCESS_SESSION_INFORMATION {
 
 // begin_winnt
 
-#line 680
+#line 636
 typedef QUOTA_LIMITS *PQUOTA_LIMITS;
 
 // end_winnt
@@ -476,8 +507,11 @@ typedef QUOTA_LIMITS *PQUOTA_LIMITS;
 //  NtQueryInformationProcess using ProcessIoCounters
 //
 
-#line 697
+// begin_winnt
+#line 654
 typedef IO_COUNTERS *PIO_COUNTERS;
+
+// end_winnt
 
 //
 // Process Virtual Memory Counters
@@ -498,6 +532,22 @@ typedef struct _VM_COUNTERS {
     SIZE_T PeakPagefileUsage;
 } VM_COUNTERS;
 typedef VM_COUNTERS *PVM_COUNTERS;
+
+typedef struct _VM_COUNTERS_EX {
+    SIZE_T PeakVirtualSize;
+    SIZE_T VirtualSize;
+    ULONG PageFaultCount;
+    SIZE_T PeakWorkingSetSize;
+    SIZE_T WorkingSetSize;
+    SIZE_T QuotaPeakPagedPoolUsage;
+    SIZE_T QuotaPagedPoolUsage;
+    SIZE_T QuotaPeakNonPagedPoolUsage;
+    SIZE_T QuotaNonPagedPoolUsage;
+    SIZE_T PagefileUsage;
+    SIZE_T PeakPagefileUsage;
+    SIZE_T PrivateUsage;
+} VM_COUNTERS_EX;
+typedef VM_COUNTERS_EX *PVM_COUNTERS_EX;
 
 //
 // Process Pooled Quota Usage and Limits
@@ -558,7 +608,8 @@ typedef struct _KERNEL_USER_TIMES {
     LARGE_INTEGER UserTime;
 } KERNEL_USER_TIMES;
 typedef KERNEL_USER_TIMES *PKERNEL_USER_TIMES;
-// end_ntddk
+// end_ntddk end_ntifs
+
 
 //
 // Thread Information Structures
@@ -579,8 +630,8 @@ typedef struct _THREAD_BASIC_INFORMATION {
 } THREAD_BASIC_INFORMATION;
 typedef THREAD_BASIC_INFORMATION *PTHREAD_BASIC_INFORMATION;
 
-#ifdef _IA64_
-#error Unsupported excluded original configuration
+#if defined(_AMD64_) || defined(_IA64_)
+#include <pshpck16.h>
 #endif
 
 typedef struct _FIBER {
@@ -602,29 +653,26 @@ typedef struct _FIBER {
     PVOID DeallocationStack;
 
     CONTEXT FiberContext;
-    
+
     PWX86TIB Wx86Tib;
-    
+
 #ifdef  _IA64_
 #error Unsupported excluded original configuration
-#line 828
 #endif
-#line 829
+#line 805
 
 } FIBER, *PFIBER;
 
-#ifdef  _IA64_
-#error Unsupported excluded original configuration
-#line 835
+#if defined(_AMD64_) || defined(_IA64_)
+#include <poppack.h>
 #endif
-#line 836
 
 //
 //
 // Process Object APIs
 //
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtCreateProcess(
@@ -638,8 +686,29 @@ NtCreateProcess(
     IN HANDLE ExceptionPort OPTIONAL
     );
 
-// begin_ntddk
-NTSYSAPI
+#define PROCESS_CREATE_FLAGS_BREAKAWAY               0x00000001
+#define PROCESS_CREATE_FLAGS_NO_DEBUG_INHERIT        0x00000002
+#define PROCESS_CREATE_FLAGS_INHERIT_HANDLES         0x00000004
+#define PROCESS_CREATE_FLAGS_OVERRIDE_ADDRESS_SPACE  0x00000008
+#define PROCESS_CREATE_FLAGS_LEGAL_MASK              0x0000000f
+
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtCreateProcessEx(
+    OUT PHANDLE ProcessHandle,
+    IN ACCESS_MASK DesiredAccess,
+    IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL,
+    IN HANDLE ParentProcess,
+    IN ULONG Flags,
+    IN HANDLE SectionHandle OPTIONAL,
+    IN HANDLE DebugPort OPTIONAL,
+    IN HANDLE ExceptionPort OPTIONAL,
+    IN ULONG JobMemberLevel
+    );
+
+// begin_ntddk begin_ntifs
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtOpenProcess (
@@ -648,10 +717,10 @@ NtOpenProcess (
     IN POBJECT_ATTRIBUTES ObjectAttributes,
     IN PCLIENT_ID ClientId OPTIONAL
     );
-// end_ntddk
+// end_ntddk end_ntifs
 
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtTerminateProcess(
@@ -660,28 +729,30 @@ NtTerminateProcess(
     );
 
 
-// begin_ntddk
-#define NtCurrentProcess() ( (HANDLE) -1 )
+#define NtCurrentProcess() ( (HANDLE)(LONG_PTR) -1 )  // ntddk wdm ntifs
 
-// end_ntddk
+#if defined(RTL_USE_KERNEL_PEB_RTN) || defined(NTOS_KERNEL_RUNTIME)
 
-#line 884
+#line 879
 
-// begin_ntddk
-#line 887
+#else
+
+#line 883
+
+#endif
+
+// begin_ntddk begin_ntifs
+#line 897
+// end_ntddk end_ntifs
+
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
-NtQueryInformationProcess(
-    IN HANDLE ProcessHandle,
-    IN PROCESSINFOCLASS ProcessInformationClass,
-    OUT PVOID ProcessInformation,
-    IN ULONG ProcessInformationLength,
-    OUT PULONG ReturnLength OPTIONAL
+NtQueryPortInformationProcess(
+    VOID
     );
-#line 896
-// end_ntddk
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtSetInformationProcess(
@@ -695,7 +766,7 @@ NtSetInformationProcess(
 // Thread Object APIs
 //
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtCreateThread(
@@ -709,7 +780,7 @@ NtCreateThread(
     IN BOOLEAN CreateSuspended
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtOpenThread (
@@ -719,7 +790,7 @@ NtOpenThread (
     IN PCLIENT_ID ClientId OPTIONAL
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtTerminateThread(
@@ -727,12 +798,9 @@ NtTerminateThread(
     IN NTSTATUS ExitStatus
     );
 
-// begin_ntddk
-#define NtCurrentThread() ( (HANDLE) -2 )
+#define NtCurrentThread() ( (HANDLE)(LONG_PTR) -2 )   // ntddk wdm ntifs
 
-// end_ntddk
-
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtSuspendThread(
@@ -740,7 +808,7 @@ NtSuspendThread(
     OUT PULONG PreviousSuspendCount OPTIONAL
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtResumeThread(
@@ -748,7 +816,22 @@ NtResumeThread(
     OUT PULONG PreviousSuspendCount OPTIONAL
     );
 
-NTSYSAPI
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtSuspendProcess (
+    IN HANDLE ProcessHandle
+    );
+
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtResumeProcess (
+    IN HANDLE ProcessHandle
+    );
+
+
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtGetContextThread(
@@ -756,7 +839,7 @@ NtGetContextThread(
     IN OUT PCONTEXT ThreadContext
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtSetContextThread(
@@ -764,39 +847,20 @@ NtSetContextThread(
     IN PCONTEXT ThreadContext
     );
 
-#line 982
-NTSTATUS
-NTAPI
-NtQueryInformationThread(
-    IN HANDLE ThreadHandle,
-    IN THREADINFOCLASS ThreadInformationClass,
-    OUT PVOID ThreadInformation,
-    IN ULONG ThreadInformationLength,
-    OUT PULONG ReturnLength OPTIONAL
-    );
-#line 991
+#line 1011
 
-// begin_ntsrv
-#line 994
-NTSTATUS
-NTAPI
-NtSetInformationThread(
-    IN HANDLE ThreadHandle,
-    IN THREADINFOCLASS ThreadInformationClass,
-    IN PVOID ThreadInformation,
-    IN ULONG ThreadInformationLength
-    );
-#line 1002
-// end_ntsrv
+// begin_ntifs
+#line 1022
+// end_ntifs
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtAlertThread(
     IN HANDLE ThreadHandle
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtAlertResumeThread(
@@ -804,7 +868,7 @@ NtAlertResumeThread(
     OUT PULONG PreviousSuspendCount OPTIONAL
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtImpersonateThread(
@@ -813,21 +877,21 @@ NtImpersonateThread(
     IN PSECURITY_QUALITY_OF_SERVICE SecurityQos
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtTestAlert(
     VOID
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtRegisterThreadTerminatePort(
     IN HANDLE PortHandle
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtSetLdtEntries(
@@ -847,7 +911,7 @@ VOID
     IN PVOID ApcArgument3
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtQueueApcThread(
@@ -862,16 +926,16 @@ NtQueueApcThread(
 // Job Object APIs
 //
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
-NtCreateJobObject(
+NtCreateJobObject (
     OUT PHANDLE JobHandle,
     IN ACCESS_MASK DesiredAccess,
     IN POBJECT_ATTRIBUTES ObjectAttributes OPTIONAL
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtOpenJobObject(
@@ -880,7 +944,7 @@ NtOpenJobObject(
     IN POBJECT_ATTRIBUTES ObjectAttributes
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtAssignProcessToJobObject(
@@ -888,7 +952,7 @@ NtAssignProcessToJobObject(
     IN HANDLE ProcessHandle
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtTerminateJobObject(
@@ -896,23 +960,43 @@ NtTerminateJobObject(
     IN NTSTATUS ExitStatus
     );
 
-#line 1121
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtIsProcessInJob (
+    IN HANDLE ProcessHandle,
+    IN HANDLE JobHandle
+    );
 
-#line 1133
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtCreateJobSet (
+    IN ULONG NumJob,
+    IN PJOB_SET_ARRAY UserJobSet,
+    IN ULONG Flags);
 
-#line 1142
+// begin_winnt
 
-#line 1148
+#line 1159
 
-#line 1152
+#line 1171
 
-#line 1160
+#line 1180
 
-#line 1164
+#line 1186
 
-#line 1169
+#line 1190
 
-#line 1174
+#line 1198
+
+#line 1202
+
+#line 1207
+
+#line 1212
+
+#line 1216
 
 #define JOB_OBJECT_TERMINATE_AT_END_OF_JOB  0
 #define JOB_OBJECT_POST_AT_END_OF_JOB       1
@@ -932,6 +1016,7 @@ NtTerminateJobObject(
 #define JOB_OBJECT_MSG_ABNORMAL_EXIT_PROCESS    8
 #define JOB_OBJECT_MSG_PROCESS_MEMORY_LIMIT     9
 #define JOB_OBJECT_MSG_JOB_MEMORY_LIMIT         10
+
 
 //
 // Basic Limits
@@ -994,30 +1079,34 @@ NtTerminateJobObject(
 
 #define JOB_OBJECT_SECURITY_VALID_FLAGS         0x0000000f
 
-#line 1268
+#line 1311
 //
 // end_winnt
 //
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
 NtQueryInformationJobObject(
-    IN HANDLE JobHandle OPTIONAL,
+    IN HANDLE JobHandle,
     IN JOBOBJECTINFOCLASS JobObjectInformationClass,
     OUT PVOID JobObjectInformation,
     IN ULONG JobObjectInformationLength,
     OUT PULONG ReturnLength OPTIONAL
     );
 
-NTSYSAPI
+NTSYSCALLAPI
 NTSTATUS
 NTAPI
-NtSetInformationJobObject (
+NtSetInformationJobObject(
     IN HANDLE JobHandle,
     IN JOBOBJECTINFOCLASS JobObjectInformationClass,
     IN PVOID JobObjectInformation,
     IN ULONG JobObjectInformationLength
     );
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _NTPSAPI_
