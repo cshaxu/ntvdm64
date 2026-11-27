@@ -8,7 +8,6 @@
 
 #include "cmd.h"
 
-#line 11
 #include <cmdsvc.h>
 #include <demexp.h>
 #include <softpc.h>
@@ -17,16 +16,16 @@
 #include <memory.h>
 #include "oemuni.h"
 #include "nt_pif.h"
-#include "nt_uis.h"	  // For resource id
+#include "nt_uis.h"       // For resource id
 #include "compat/include/guest_location.h"
 #include "compat/include/guest_environment.h"
+#line 20
 
 #if defined(NEC_98)
 extern UINT saveCP;
 extern UINT saveOutputCP;
 #endif // NEC_98
 
-#line 22
 VOID GetWowKernelCmdLine(VOID);
 extern ULONG fSeparateWow;
 #if defined(KOREA)
@@ -35,7 +34,6 @@ extern ULONG fSeparateWow;
 BOOL bIgnoreExtraKbdDisable = FALSE;
 #endif
 
-#line 25
 VOID cmdGetNextCmd (VOID)
 {
 LPSTR   lpszCmd;
@@ -281,7 +279,6 @@ char    CmdLine[MAX_PATH];
     // tell DOS that this is a dos executable and no further checking is
     // necessary
     *pIsDosBinary = 1;
-#line 238
 
 
     // Check for PIF files. If a pif file is being executed extract the
@@ -435,7 +432,6 @@ char    CmdLine[MAX_PATH];
 
     // Tell DOS that it has to invalidate the CDSs
     *pSCS_ToSync = (CHAR)0xff;
-#line 362
     setCF(0);
 
 #if defined(NEC_98)
@@ -446,7 +442,6 @@ char    CmdLine[MAX_PATH];
 
 
 
-#line 369
 VOID GetWowKernelCmdLine(VOID)
 {
 CMDINFO UNALIGNED *pCMDInfo;
@@ -492,7 +487,6 @@ LPSTR    pszCmdLine;
     if (!cmdCreateVDMEnvironment(&cmdVDMEnvBlk) ||
         !mvdm_softpc_project_wow_initial_environment(
             &cmdVDMEnvBlk.lpszzEnv, &cmdVDMEnvBlk.cchEnv)) {
-#line 411
         RcErrorDialogBox(EG_ENVIRONMENT_ERR, NULL, NULL);
         TerminateVDM();
     }
@@ -522,7 +516,6 @@ LPSTR    pszCmdLine;
         return;
     }
 
-#line 419
     pch = (PVOID)GetVDMAddr(FETCHWORD(pCMDInfo->EnvSeg),0);
     RtlMoveMemory(pch,
                   cmdVDMEnvBlk.lpszzEnv,
@@ -535,6 +528,7 @@ LPSTR    pszCmdLine;
     FreeEnvironmentStrings(pEnvStrings);
 
     //
+#line 467
     // Get the command line parameter, which consists of a fully
     // qualified short path file name: "-a %SystemRoot%\system32\krnl386.exe".
     //
@@ -562,7 +556,6 @@ LPSTR    pszCmdLine;
             }
 
         // mov to beg of WowKernelPathName
-#line 458
         pszCmdLine = strstr(pszCmdLine, " -a ");
         pszCmdLine += 4;
         while (*pszCmdLine && *pszCmdLine == ' ') {
@@ -611,13 +604,11 @@ LPSTR    pszCmdLine;
 
 
     *pIsDosBinary = 1;
-#line 506
     IsRepeatCall = FALSE;
     IsFirstCall = FALSE;
 
     // Tell DOS that it has to invalidate the CDSs
     *pSCS_ToSync = (CHAR)0xff;
-#line 511
     setCF(0);
 
     return;
@@ -639,9 +630,9 @@ LPSTR    pszCmdLine;
 
 VOID cmdGetCurrentDir (VOID)
 {
-CHAR  CurDir[MAXIMUM_VDM_CURRENT_DIR + 3];
+CHAR  lpszCurDir[MAXIMUM_VDM_CURRENT_DIR + 3];
 mvdm_guest_location CurDirLocation;
-#line 533
+#line 569
 UCHAR chDrive;
 CHAR  EnvVar[] = "=?:";
 CHAR  RootName[] = "?:\\";
@@ -653,7 +644,7 @@ UINT  DriveType;
      * no guest pointer is materialized before the known bounded result exists. */
     mvdm_guest_location_set_real_mode(&CurDirLocation, (USHORT)getDS(),
         (USHORT)getSI());
-#line 541
+#line 577
     chDrive = getAL();
     EnvVar[1] = chDrive + 'A';
     RootName[0] = chDrive + 'A';
@@ -672,18 +663,18 @@ UINT  DriveType;
         return;
     }
 
-    if((EnvVarLen = GetEnvironmentVariableOem (EnvVar,CurDir,
+    if((EnvVarLen = GetEnvironmentVariableOem (EnvVar,lpszCurDir,
                                             MAXIMUM_VDM_CURRENT_DIR+3)) == 0){
 
-	// if its not in env then and drive exist then we have'nt
-	// yet touched it.
+        // if its not in env then and drive exist then we have'nt
+        // yet touched it.
         if (!mvdm_guest_location_copy_to_guest(&CurDirLocation,
             (PBYTE)RootName, sizeof(RootName))) {
             setCF(1);
             setAX(0);
             return;
         }
-#line 565
+#line 601
         SetEnvironmentVariableOem (EnvVar,RootName);
         setCF(0);
         return;
@@ -694,14 +685,13 @@ UINT  DriveType;
     }
     else {
         if (!mvdm_guest_location_copy_to_guest(&CurDirLocation,
-            (PBYTE)CurDir, EnvVarLen + 1)) {
+            (PBYTE)lpszCurDir, EnvVarLen + 1)) {
             setCF(1);
             setAX(0);
             return;
         }
-#line 574
+#line 610
         setCF(0);
-#line 575
     }
     return;
 }
@@ -721,7 +711,6 @@ UINT  DriveType;
 VOID cmdSetInfo (VOID)
 {
 
-#line 594
     pSCSInfo = (PSCSINFO) GetVDMAddr (getDS(),getDX());
 
     pSCS_ToSync  =  (PCHAR) &pSCSInfo->SCS_ToSync;
@@ -729,7 +718,6 @@ VOID cmdSetInfo (VOID)
     pIsDosBinary = (BYTE *) GetVDMAddr(getDS(), getBX());
 
     pFDAccess = (WORD *) GetVDMAddr(getDS(), getCX());
-#line 601
     return;
 }
 
@@ -785,13 +773,10 @@ LPSTR   lpszCS;
 
 VOID cmdSaveWorld (VOID)
 {
-#line 656
 #ifdef CHECK_IT_LATER
-#line 657
 #error DIVERGENCE MVDM-HOST-DIV-529: CHECK_IT_LATER platform branch is not selected; see mirror register.
-#line 713
 #endif
-#line 714
+#line 750
     return;
 }
 

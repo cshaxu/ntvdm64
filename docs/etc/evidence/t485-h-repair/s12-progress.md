@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed5/48files30/645points;restored-delivered8,restored-local0,
-residual-reviewed22,unreviewed615.
+Reviewed6/48files38/645points;restored-delivered8,restored-local1,
+residual-reviewed29,unreviewed607.
 Delivered/pushed5files30points through c43ad57bb.
 Current byte-sensitive census is measured separately from frozen points.
 P1/P2 cached build,dual publication,targeted verification and commit/push complete.
@@ -19,7 +19,7 @@ P1/P2 cached build,dual publication,targeted verification and commit/push comple
 | 3 | src/mvdm-host/dos/command/cmdenv.c | 2 | P1 delivered806a8c45c |
 | 4 | src/mvdm-host/dos/command/cmdexec.c | 20 | P1 delivered806a8c45c |
 | 5 | src/mvdm-host/dos/command/cmdkeyb.c | 2 | P2 delivered c43ad57bb |
-| 6 | src/mvdm-host/dos/command/cmdmisc.c | 8 | Pending |
+| 6 | src/mvdm-host/dos/command/cmdmisc.c | 8 | P3 final verified/published; commit pending |
 | 7 | src/mvdm-host/dos/dem/dem.c | 2 | Pending |
 | 8 | src/mvdm-host/dos/dem/dem.h | 1 | Pending |
 | 9 | src/mvdm-host/dos/dem/demgset.c | 4 | Pending |
@@ -205,3 +205,44 @@ Five files30points final verified;8restored22residual615unreviewed.
 P2 delivered/pushed c43ad57bb;next file6 cmdmisc.c. Current765/31754 (-38/-55).
 
 P2 documentation governance and relative links PASS after correcting the native-path prose;exact control output retained in build evidence. No product test repeated.
+
+## P3 file6 cmdmisc.c
+
+Whole-file review23points116lines ->8points93lines (-15/-23),one existing
+CHECK_IT_LATER error exclusion retained. Original variable spelling and
+spacing restored;stale NT4 logical lines replaced by XP anchors. Executable
+tokens are identical after the local CurDir-to-lpszCurDir rename. No added
+function,algorithm,shim or guest change. R00071 fully restored;seven residuals
+have explicit provider/ABI/runtime evidence in both registers.
+
+The261-byte advertised current-directory buffer requires the existing261-byte
+local storage,not original68. Guest current-directory direct pointer has no
+whole-range mapping contract;retain bounded staging/SAS copy. WOW initial
+SYSTEMROOT projection remains guest-only and its actual1185/1184 overwrite
+requires the existing capacity return;XP guest handles CF/AX retry unchanged.
+
+Source-reviewed6/48files38/645points,9restored(8delivered1local),29residual,
+607unreviewed. Current750/31731 from803/31809;reduction53points78lines.
+Fivefiles30points delivered;P3 cached build,dual publication,product line
+verification and existing guest-location/package/WOW targeted tests follow.
+
+P3 initial product preprocessor check rejected a line anchor inside the
+unselected CHECK_IT_LATER branch. Move it after endif (line750);same8/93
+metric. Three added environment cleanup statements match older original text
+but are not original-position witnesses. The checker records those separately.
+First runtime3 build/publication succeeded;runtime tests had not started.
+Rebuild/publication of corrected source targets immutable runtime4;no successful
+runtime gate is repeated. Initial failure retained under p3/final/attempt1.
+
+### P3 final verification
+
+[Receipt](s12-p3-result.json):runtime4 cached build and dual26hash publication
+PASS. Product preprocessing151original statement witnesses,zero drift;three
+added cleanup statements are not original witnesses. Existing guest-location
+lifecycle/failure fixture,ten package-resource cases including WOW initial
+environment projection,and real private-desktop WINMINE visible window PASS.
+No original guest modification,rebuild or Full run. This is startup/window
+coverage,not new gameplay/normal-exit evidence. P3 commit/push pending.
+
+Sixfiles38points final verified;9restored29residual607unreviewed.
+Nonerror750/31731,down53points78lines from S12 baseline.

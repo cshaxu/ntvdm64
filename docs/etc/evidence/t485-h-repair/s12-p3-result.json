@@ -1,0 +1,301 @@
+{
+  "task": "M0 T485 S12 P3",
+  "state": "final-verified-published-commit-pending",
+  "package": "build/t485-s12/runtime4",
+  "file": "src/mvdm-host/dos/command/cmdmisc.c",
+  "sha256": "549cf67a32c2a460a5b54c0b481c785ad91eff7f563ecb3a537064567379d58a",
+  "diff": {
+    "before": {
+      "points": 23,
+      "lines": 116
+    },
+    "after": {
+      "points": 8,
+      "lines": 93
+    },
+    "s12_current": {
+      "points": 750,
+      "lines": 31731
+    },
+    "s12_reduction": {
+      "points": 53,
+      "lines": 78
+    }
+  },
+  "review": {
+    "restored": [
+      "HXP-R-00071"
+    ],
+    "residual": [
+      "HXP-R-00066",
+      "HXP-R-00067",
+      "HXP-R-00068",
+      "HXP-R-00069",
+      "HXP-R-00070",
+      "HXP-R-00072",
+      "HXP-R-00073"
+    ],
+    "exclusions": 1,
+    "changes": "Original local identifier,spacing and XP logical lines;executable tokens identical after local rename. No new behavior,provider,shim or guest change."
+  },
+  "verification": {
+    "build": "PASS cached full",
+    "publication": [
+      {
+        "path": "assets\\release\\NTVDMD.DLL",
+        "sha256": "3F5B496780D9BDB91DAF130937F7A25B2EB1A85C323BBDE902596BED29CBE0A2",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+        "sha256": "3F5B496780D9BDB91DAF130937F7A25B2EB1A85C323BBDE902596BED29CBE0A2",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VJOY.DLL",
+        "sha256": "286DF093E3ED14E77FBED541E06970F51BB917A507EB6650F50F16E1AF9ECC6F",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+        "sha256": "286DF093E3ED14E77FBED541E06970F51BB917A507EB6650F50F16E1AF9ECC6F",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "073FE6557D1807568A1DB675C71214701D0FFD115CF9CF7B8D049D3FE930A240",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+        "sha256": "073FE6557D1807568A1DB675C71214701D0FFD115CF9CF7B8D049D3FE930A240",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "401EC443179F80D7F61E67C0D817054AD82F56CDCBA31E8D47A7DB885E3A1C90",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+        "sha256": "401EC443179F80D7F61E67C0D817054AD82F56CDCBA31E8D47A7DB885E3A1C90",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "A4279FE9087757A2E746549AE387A9F970C65E7B131EA8ABF79C6E963FE2B731",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+        "sha256": "A4279FE9087757A2E746549AE387A9F970C65E7B131EA8ABF79C6E963FE2B731",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "2DA8AE7C8D126CECF4895D4F8EC165D40C2E4382787E63341EAEF7EFA6644105",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+        "sha256": "2DA8AE7C8D126CECF4895D4F8EC165D40C2E4382787E63341EAEF7EFA6644105",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "227DFDD0391640D36A15EE804A9AC764822EFB995879DDB389D4D7BB762AF544",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+        "sha256": "227DFDD0391640D36A15EE804A9AC764822EFB995879DDB389D4D7BB762AF544",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "00C906AAB195A90F17496E11611336A5A31839A0CDECCC4C36C83351E94AC3F5",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+        "sha256": "00C906AAB195A90F17496E11611336A5A31839A0CDECCC4C36C83351E94AC3F5",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "F26846407623A0865997091386011CCDBB2E2C0AAF4C2EB91312B3DDC9C1BE96",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+        "sha256": "F26846407623A0865997091386011CCDBB2E2C0AAF4C2EB91312B3DDC9C1BE96",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "1E1FB029D1E4F58E718DD7E1569F0D0070084038087EEB85BDAA27409883445F",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+        "sha256": "1E1FB029D1E4F58E718DD7E1569F0D0070084038087EEB85BDAA27409883445F",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "ACDC7C7BEC1A44E06EC317332146007109785432DF7B5C6F83CDB33B0C5EAD6A",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+        "sha256": "ACDC7C7BEC1A44E06EC317332146007109785432DF7B5C6F83CDB33B0C5EAD6A",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "66D93ED3CE2E7371A3EBB2DA473BA06E3F6082B58EEB40FF910ED3FBC9D41ACC",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+        "sha256": "66D93ED3CE2E7371A3EBB2DA473BA06E3F6082B58EEB40FF910ED3FBC9D41ACC",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "7CE2E03082503D8EED8AEEC654BA51F20FD45124C62284F0D3CF991DB39C88F0",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+        "sha256": "7CE2E03082503D8EED8AEEC654BA51F20FD45124C62284F0D3CF991DB39C88F0",
+        "pass": true
+      }
+    ],
+    "original_product_lines": [
+      {
+        "file": "cmdmisc.c",
+        "checked": 151,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": [
+          [
+            411,
+            498,
+            "        free(cmdVDMEnvBlk.lpszzEnv);"
+          ],
+          [
+            422,
+            500,
+            "        cmdVDMEnvBlk.cchEnv = 0;"
+          ],
+          [
+            411,
+            522,
+            "    free(cmdVDMEnvBlk.lpszzEnv);"
+          ]
+        ]
+      }
+    ],
+    "guest_location": "PASS existing acquire/copy/release/failure/ownership fixture",
+    "package_resources": {
+      "exit": 0,
+      "cases": [
+        {
+          "architecture": "x86",
+          "name": "package-layout-fixture",
+          "exit": 0,
+          "sha256": "FE083C6C0600D668EC9693DE686DD048C08C4441465F5D0CFD921AD1B5C221EC",
+          "output": ""
+        },
+        {
+          "architecture": "x86",
+          "name": "softpc-firmware-resource-fixture",
+          "exit": 0,
+          "sha256": "F0193C87010739D06733CB54E72F04DC53B1E59C867CE02AB6AA2E071546AC87",
+          "output": ""
+        },
+        {
+          "architecture": "x86",
+          "name": "softpc-wow-boot-environment-fixture",
+          "exit": 0,
+          "sha256": "D683A5FDF52285EB722DC02643A0B7785A5EF74313713557B1EC43FCFA3B35C6",
+          "output": "WOW-BOOT-ENVIRONMENT-PASS"
+        },
+        {
+          "architecture": "x86",
+          "name": "softpc-media-resource-fixture",
+          "exit": 0,
+          "sha256": "353FF481E89DDB0439F9A2DE1474DF6225C1175FABF75E157043698F44CAB687",
+          "output": "PASS media roots and SYSTEM.INI shadow reuse, refusal and cleanup"
+        },
+        {
+          "architecture": "x86",
+          "name": "flat-media-rejection",
+          "exit": 0
+        },
+        {
+          "architecture": "x64",
+          "name": "package-layout-fixture",
+          "exit": 0,
+          "sha256": "7EE50D2D945FBB607B6A37B081C9036EB2AED556736ACD007A0FE88B790DB12B",
+          "output": ""
+        },
+        {
+          "architecture": "x64",
+          "name": "softpc-firmware-resource-fixture",
+          "exit": 0,
+          "sha256": "72897AED7EEF4210E766673ACC5F555E41364C4244956C7015E3005C10B25CB2",
+          "output": ""
+        },
+        {
+          "architecture": "x64",
+          "name": "softpc-wow-boot-environment-fixture",
+          "exit": 0,
+          "sha256": "43507277AC4AF79A5E608D057C872B7F3DA3E4F5B79EC823691D3CC796A0D32B",
+          "output": "WOW-BOOT-ENVIRONMENT-PASS"
+        },
+        {
+          "architecture": "x64",
+          "name": "softpc-media-resource-fixture",
+          "exit": 0,
+          "sha256": "9FF2DFFD92C03615F226EA947F29200FA2C057F7F76C0E619061DF21C595CBE2",
+          "output": "PASS media roots and SYSTEM.INI shadow reuse, refusal and cleanup"
+        },
+        {
+          "architecture": "x64",
+          "name": "flat-media-rejection",
+          "exit": 0
+        }
+      ],
+      "inputs": [
+        {
+          "path": "system32/NTIO.SYS",
+          "sha256": "560532C538BBCEF4DDA5FFF0F9146E906F7ADC3AF5765D342A6DF080EDB58F02"
+        },
+        {
+          "path": "system.ini",
+          "sha256": "F20A94235712C26B0499D61E7CC080B612BBFE230DE0C65A6832494FDBB1ACAA"
+        }
+      ]
+    },
+    "wow": "PASS exact visible WINMINE application window on final package private desktop;not gameplay or normal exit acceptance",
+    "logs": "build\\t485-s12\\p3\\final",
+    "full": "Not due at6files;not run"
+  },
+  "attempts": [
+    {
+      "build_pid": 6900,
+      "test_pid": 16312,
+      "result": "runtime3 compiled/published;preprocessor caught #line inside false CHECK_IT_LATER branch;runtime tests not started"
+    },
+    {
+      "build_pid": 12320,
+      "test_pid": 9716,
+      "result": "line anchor moved after endif;runtime4 rebuilt/published;151original statements align;three inserted cleanup statements recorded separately;location/package cases PASS;direct deep-path WOW run exited0x42B before worker;successful gates retained"
+    },
+    {
+      "test_pid": 28544,
+      "result": "Only failed WOW gate retried with existing New-PhysicalRuntimeStage success path;exact visible WINMINE window PASS"
+    }
+  ]
+}

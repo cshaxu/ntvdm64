@@ -2083,3 +2083,5 @@ post-publication targeted checks.
 [S12 P1 delivery receipt](evidence/t485-h-repair/s12-p1-result.json).
 
 [S12 P2 keyboard package receipt](evidence/t485-h-repair/s12-p2-result.json).
+
+[S12 P3 COMMAND miscellaneous receipt](evidence/t485-h-repair/s12-p3-result.json).
