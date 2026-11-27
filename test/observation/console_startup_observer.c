@@ -580,7 +580,7 @@ static void capture_timeout_guest(FILE *report,HANDLE process,DWORD pid,
     CloseHandle(output);
 }
 static void report_children(FILE *report, DWORD parent, BOOL contexts,const char *guest_prefix,
-    unsigned depth)
+    unsigned depth,const FILETIME *parent_created)
 {
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     PROCESSENTRY32 entry;
@@ -590,14 +590,23 @@ static void report_children(FILE *report, DWORD parent, BOOL contexts,const char
     }
     entry.dwSize = sizeof(entry);
     if (Process32First(snapshot, &entry)) do {
-        if (entry.th32ParentProcessID == parent) {
+        if (entry.th32ParentProcessID == parent && entry.th32ProcessID != GetCurrentProcessId()) {
             HANDLE process = OpenProcess(SYNCHRONIZE | PROCESS_QUERY_LIMITED_INFORMATION |
                                          (contexts ? PROCESS_QUERY_INFORMATION | PROCESS_VM_READ : 0),
                                          FALSE, entry.th32ProcessID);
             DWORD code = 0, length = MAX_PATH;
+            FILETIME created, exited, kernel, user;
             char path[MAX_PATH] = "unavailable";
             DWORD wait = process ? WaitForSingleObject(process, 0) : WAIT_FAILED;
             BOOL have_code = process && GetExitCodeProcess(process, &code);
+            /* Toolhelp retains numeric parent IDs after their owners exit.
+             * A reused parent PID must not turn an older, unrelated process
+             * (or this observer) into a diagnostic descendant. */
+            if (!process || !GetProcessTimes(process,&created,&exited,&kernel,&user) ||
+                CompareFileTime(&created,parent_created)<0) {
+                if(process)CloseHandle(process);
+                continue;
+            }
             if (process) QueryFullProcessImageNameA(process, 0, path, &length);
             fprintf(report, "%s pid=%lu name=%s wait=%lu exit-known=%u exit=%08lx path=%s\n",
                     depth ? "descendant-child" : "direct-child",entry.th32ProcessID, entry.szExeFile, wait,
@@ -626,19 +635,25 @@ static void report_children(FILE *report, DWORD parent, BOOL contexts,const char
                 }
                 if(symbols)SymCleanup(process);
             }
-            if (process) CloseHandle(process);
             /* Timeout-only diagnostics: broker-created workers are no longer
              * direct launcher children. Capture their stacks too, without
              * deriving any product task/ownership/termination policy. */
             if(contexts && wait==WAIT_TIMEOUT && depth<8)
-                report_children(report,entry.th32ProcessID,TRUE,guest_prefix,depth+1);
+                report_children(report,entry.th32ProcessID,TRUE,guest_prefix,depth+1,&created);
+            CloseHandle(process);
         }
     } while (Process32Next(snapshot, &entry));
     CloseHandle(snapshot);
 }
 static void report_direct_children(FILE *report,DWORD parent,BOOL contexts,const char *guest_prefix)
 {
-    report_children(report,parent,contexts,guest_prefix,0);
+    HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,parent);
+    FILETIME created,exited,kernel,user;
+    if(process && GetProcessTimes(process,&created,&exited,&kernel,&user))
+        report_children(report,parent,contexts,guest_prefix,0,&created);
+    else
+        fprintf(report,"parent-identity-unavailable=%lu\n",GetLastError());
+    if(process)CloseHandle(process);
 }
 
 /* The product's original illegal-opcode path formats a bounded `CS:... OP:`

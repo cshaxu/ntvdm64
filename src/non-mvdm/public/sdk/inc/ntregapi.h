@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0009    // Increment this if a change has global effects
 
-Copyright (c) 1991-1999  Microsoft Corporation
+Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Module Name:
 
@@ -27,8 +27,12 @@ Revision History:
 #endif
 
 #ifdef __cplusplus
-#error Excluded unsupported C++ NT registry declaration context
+extern "C" {
 #endif
+
+//
+// begin_winnt
+//
 
 // begin_ntddk begin_wdm begin_nthal
 //
@@ -41,6 +45,9 @@ Revision History:
 #define KEY_ENUMERATE_SUB_KEYS  (0x0008)
 #define KEY_NOTIFY              (0x0010)
 #define KEY_CREATE_LINK         (0x0020)
+#define KEY_WOW64_32KEY         (0x0200)
+#define KEY_WOW64_64KEY         (0x0100)
+#define KEY_WOW64_RES           (0x0300)
 
 #define KEY_READ                ((STANDARD_RIGHTS_READ       |\
                                   KEY_QUERY_VALUE            |\
@@ -107,6 +114,13 @@ Revision History:
 #define REG_OPENED_EXISTING_KEY     (0x00000002L)   // Existing Key opened
 
 //
+// hive format to be used by Reg(Nt)SaveKeyEx
+//
+#define REG_STANDARD_FORMAT     1
+#define REG_LATEST_FORMAT       2
+#define REG_NO_COMPRESSION      4
+
+//
 // Key restore flags
 //
 
@@ -131,6 +145,10 @@ Revision History:
                  REG_NOTIFY_CHANGE_LAST_SET      |\
                  REG_NOTIFY_CHANGE_SECURITY)
 
+//
+// end_winnt
+//
+
 // Boot condition flags (for NtInitializeRegistry)
 
 #define REG_INIT_BOOT_SM         (0x0000)    // Init called from SM after Autocheck, etc.
@@ -147,6 +165,13 @@ Revision History:
 #define REG_INIT_BOOT_ACCEPTED_MAX    REG_INIT_BOOT_ACCEPTED_BASE + 999
 
 #define REG_INIT_MAX_VALID_CONDITION  REG_INIT_BOOT_ACCEPTED_MAX
+
+//
+// registry limits for value name and key name
+//
+#define REG_MAX_KEY_VALUE_NAME_LENGTH   32767       // 32k - sanity limit for value name
+#define REG_MAX_KEY_NAME_LENGTH         512         // allow for 256 unicode, as promise
+
 
 // begin_ntddk begin_wdm begin_nthal
 //
@@ -190,6 +215,22 @@ typedef struct _KEY_NAME_INFORMATION {
     WCHAR   Name[1];            // Variable length string
 } KEY_NAME_INFORMATION, *PKEY_NAME_INFORMATION;
 
+typedef struct _KEY_CACHED_INFORMATION {
+    LARGE_INTEGER LastWriteTime;
+    ULONG   TitleIndex;
+    ULONG   SubKeys;
+    ULONG   MaxNameLen;
+    ULONG   Values;
+    ULONG   MaxValueNameLen;
+    ULONG   MaxValueDataLen;
+    ULONG   NameLength;
+    WCHAR   Name[1];            // Variable length string
+} KEY_CACHED_INFORMATION, *PKEY_CACHED_INFORMATION;
+
+typedef struct _KEY_FLAGS_INFORMATION {
+    ULONG   UserFlags;
+} KEY_FLAGS_INFORMATION, *PKEY_FLAGS_INFORMATION;
+
 // begin_wdm
 typedef enum _KEY_INFORMATION_CLASS {
     KeyBasicInformation,
@@ -197,7 +238,9 @@ typedef enum _KEY_INFORMATION_CLASS {
     KeyFullInformation
 // end_wdm
     ,
-    KeyNameInformation
+    KeyNameInformation,
+    KeyCachedInformation,
+    KeyFlagsInformation
 // begin_wdm
 } KEY_INFORMATION_CLASS;
 
@@ -205,7 +248,11 @@ typedef struct _KEY_WRITE_TIME_INFORMATION {
     LARGE_INTEGER LastWriteTime;
 } KEY_WRITE_TIME_INFORMATION, *PKEY_WRITE_TIME_INFORMATION;
 
-#line 211
+typedef struct _KEY_USER_FLAGS_INFORMATION {
+    ULONG   UserFlags;
+} KEY_USER_FLAGS_INFORMATION, *PKEY_USER_FLAGS_INFORMATION;
+
+#line 259
 
 //
 // Value entry query structures
@@ -241,7 +288,7 @@ typedef struct _KEY_VALUE_PARTIAL_INFORMATION_ALIGN64 {
     UCHAR   Data[1];            // Variable size
 } KEY_VALUE_PARTIAL_INFORMATION_ALIGN64, *PKEY_VALUE_PARTIAL_INFORMATION_ALIGN64;
 
-#line 252
+#line 300
 
 typedef enum _KEY_VALUE_INFORMATION_CLASS {
     KeyValueBasicInformation,
@@ -359,7 +406,7 @@ NtNotifyChangeKey(
     IN BOOLEAN Asynchronous
     );
 
-#line 370
+#line 418
 NTSTATUS
 NTAPI
 NtNotifyChangeMultipleKeys(
@@ -426,12 +473,12 @@ NtQueryValueKey(
     OUT PULONG ResultLength
     );
 
-#line 437
+#line 485
 NTSTATUS
 NTAPI
 NtQueryMultipleValueKey(
     IN HANDLE KeyHandle,
-    IN PKEY_VALUE_ENTRY ValueEntries,
+    IN OUT PKEY_VALUE_ENTRY ValueEntries,
     IN ULONG EntryCount,
     OUT PVOID ValueBuffer,
     IN OUT PULONG BufferLength,
@@ -446,6 +493,29 @@ NtReplaceKey(
     IN HANDLE             TargetHandle,
     IN POBJECT_ATTRIBUTES OldFile
     );
+
+#line 506
+NTSTATUS
+NTAPI
+NtRenameKey(
+    IN HANDLE           KeyHandle,
+    IN PUNICODE_STRING  NewName
+    );
+
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtCompactKeys(
+    IN ULONG Count,
+    IN HANDLE KeyArray[]
+            );
+
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtCompressKey(
+    IN HANDLE Key
+            );
 
 NTSYSCALLAPI
 NTSTATUS
@@ -462,6 +532,15 @@ NTAPI
 NtSaveKey(
     IN HANDLE KeyHandle,
     IN HANDLE FileHandle
+    );
+
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtSaveKeyEx(
+    IN HANDLE KeyHandle,
+    IN HANDLE FileHandle,
+    IN ULONG  Format
     );
 
 NTSYSCALLAPI
@@ -492,7 +571,15 @@ NtUnloadKey(
     IN POBJECT_ATTRIBUTES TargetKey
     );
 
-#line 503
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtUnloadKeyEx(
+    IN POBJECT_ATTRIBUTES TargetKey,
+    IN HANDLE Event OPTIONAL
+    );
+
+#line 591
 NTSTATUS
 NTAPI
 NtSetInformationKey(
@@ -510,8 +597,23 @@ NtQueryOpenSubKeys(
     OUT PULONG  HandleCount
     );
 
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtLockRegistryKey(
+    IN HANDLE           KeyHandle
+    );
+
+NTSYSCALLAPI
+NTSTATUS
+NTAPI
+NtLockProductActivationKeys(
+    ULONG   *pPrivateVer,
+    ULONG   *pIsSafeMode
+    );
+
 #ifdef __cplusplus
-#error Excluded unsupported C++ NT registry declaration context
+}
 #endif
 
 #endif // _NTREGAPI_

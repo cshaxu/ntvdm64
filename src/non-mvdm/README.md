@@ -3024,3 +3024,8 @@ real cache functions. Paired DPMI keeps its VM-aware mode override.
 S15 P23: N021 CSR server declarations now match XP SP1 byte-for-byte;
 client/message headers remain exact. B validation provider uses original NTAPI.
 Runtime24 dual-published and CSR layout/capture/service/guest tests passed.
+
+S15 P26: ntregapi.h restores XP registry declarations and C++ wrappers.
+Both actual native compile contexts require two SDK type omissions and four
+import-attribute omissions; original function signatures remain intact.
+[Evidence](../../docs/etc/evidence/t485-s1/n021-registry.md).

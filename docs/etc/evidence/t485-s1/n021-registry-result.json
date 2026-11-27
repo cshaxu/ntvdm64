@@ -1,0 +1,900 @@
+{
+  "task": "M0 T485 S15 P26",
+  "runtime": "build/t485-s15/runtime27",
+  "build_exit": 0,
+  "inputs": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/ntregapi.h",
+      "blob": "77f3cae0ad7cc82aaa4dc65e5f3ed11d11602a6d",
+      "sha256": "64066ac8c83eab0783f3362c29e4a53a7739ad7ee6a98b761ea1c3ea29969458",
+      "xp_sha256": "7aca3320936a243faa08507a3a7ee29e30bc379f6e1817655020faf001de3f12",
+      "raw_points": 6,
+      "raw_lines": 20,
+      "selected_original_line_mismatches": []
+    }
+  ],
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "25212BBC010B6B9E8A5023935C88F8A0DE6F734D21755FFC5DA110D8A9A008A8",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "25212BBC010B6B9E8A5023935C88F8A0DE6F734D21755FFC5DA110D8A9A008A8",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "842E5DEC131D485999F71DEF5B7A9F83BF7F0CEA7EABC13F07DE1A1E719060E4",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "842E5DEC131D485999F71DEF5B7A9F83BF7F0CEA7EABC13F07DE1A1E719060E4",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "E6AB76229ABDF7D7668FE8D93E9FCB3056EB72FAE6FA7B8511D6E49EC074D07E",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "E6AB76229ABDF7D7668FE8D93E9FCB3056EB72FAE6FA7B8511D6E49EC074D07E",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "F6DF366647D9346962091DF3ED7D7B6BD094E7657119876B4AE9EECA0137F436",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "F6DF366647D9346962091DF3ED7D7B6BD094E7657119876B4AE9EECA0137F436",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "7F571636A5D93FFF97D37A261C06F5B93A0325EC7C793D0312E133FC359027E7",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "7F571636A5D93FFF97D37A261C06F5B93A0325EC7C793D0312E133FC359027E7",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "805E69026F1EAB7BDEA66FB204EBE8E9034520D57927B092A817EF7244B528EF",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "805E69026F1EAB7BDEA66FB204EBE8E9034520D57927B092A817EF7244B528EF",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "E4EE1E9B7E97AFC6862D13F1AB6B3B97031250F97A611EC0903E8BA2688ADAB9",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "E4EE1E9B7E97AFC6862D13F1AB6B3B97031250F97A611EC0903E8BA2688ADAB9",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "8B81F785F2389177F9D3594449AE6F68EEE79AFAC12F8DDB3F05FA7BB9072F57",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "8B81F785F2389177F9D3594449AE6F68EEE79AFAC12F8DDB3F05FA7BB9072F57",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "FD2AD1C2821AC4A2C128935EFC0A8F5923A19F1BA3919E074F2C900CFB442FBA",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "FD2AD1C2821AC4A2C128935EFC0A8F5923A19F1BA3919E074F2C900CFB442FBA",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "F4BB6AE45D671A3B6F4C0C436D5E33A4F6EE20FDDE8385F818B9AA5F999AAD47",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "F4BB6AE45D671A3B6F4C0C436D5E33A4F6EE20FDDE8385F818B9AA5F999AAD47",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "D238CA2F6587BBC80AC2099E17C32BD013BE9B3A26F5DAED3F473464B48881E2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "D238CA2F6587BBC80AC2099E17C32BD013BE9B3A26F5DAED3F473464B48881E2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "A72B825BE1F20F819AD19CDDDEF6149A0318C206327847E1288AFA4388902E05",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "A72B825BE1F20F819AD19CDDDEF6149A0318C206327847E1288AFA4388902E05",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "32979F4FCBA3398395093C81E5C0367A6897F9BD7C966E36EB0681E06ACFCB05",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "32979F4FCBA3398395093C81E5C0367A6897F9BD7C966E36EB0681E06ACFCB05",
+      "pass": true
+    }
+  ],
+  "census": {
+    "before": {
+      "files": 1324,
+      "byte_identical": 775,
+      "nonerror_identical": 786,
+      "nonerror_different": 538,
+      "nonerror_points": 7749,
+      "nonerror_lines": 150811
+    },
+    "after": {
+      "files": 1324,
+      "byte_identical": 775,
+      "nonerror_identical": 786,
+      "nonerror_different": 538,
+      "nonerror_points": 7750,
+      "nonerror_lines": 150814
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 1,
+      "nonerror_lines": 3
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+        "before_points": 5,
+        "before_lines": 17,
+        "after_points": 6,
+        "after_lines": 20,
+        "exclusions": 0
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1256,
+      "OpenNT": 68
+    }
+  },
+  "logs": {
+    "capture32-final.log": "native capture bits=32 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "capture64-final.log": "native capture bits=64 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "layout32-final.log": "PASS 32-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n",
+    "layout64-final.log": "PASS 64-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n"
+  },
+  "service": {
+    "Concurrency": 4,
+    "ElapsedMs": 6257,
+    "ObserverHash": "AD6A887C6F14960E387D4664B9FA0A2FD8F6A1210032FF2FFF360FD7D10FD779",
+    "FixtureHash": "C572DE7DC57D8FCC012C7FCA65F63801DCCEA871CED2C38B04B43E4712B77BB4",
+    "Cases": [
+      {
+        "Case": "frontend-chains",
+        "ElapsedMs": 848,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-instances",
+        "ElapsedMs": 860,
+        "Result": "PASS"
+      },
+      {
+        "Case": "parent-resume-origin",
+        "ElapsedMs": 863,
+        "Result": "PASS"
+      },
+      {
+        "Case": "io-authority",
+        "ElapsedMs": 861,
+        "Result": "PASS"
+      },
+      {
+        "Case": "route-cancellation",
+        "ElapsedMs": 424,
+        "Result": "PASS"
+      },
+      {
+        "Case": "prepared-native-root-loss",
+        "ElapsedMs": 478,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-stop",
+        "ElapsedMs": 515,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-reconnect",
+        "ElapsedMs": 510,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-delegated",
+        "ElapsedMs": 516,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait",
+        "ElapsedMs": 813,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-root-loss",
+        "ElapsedMs": 777,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-request-loss",
+        "ElapsedMs": 766,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-worker-loss",
+        "ElapsedMs": 577,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-rundown",
+        "ElapsedMs": 540,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-return",
+        "ElapsedMs": 550,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-after-return",
+        "ElapsedMs": 557,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-nested-return",
+        "ElapsedMs": 504,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-pending-command",
+        "ElapsedMs": 504,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-increment",
+        "ElapsedMs": 584,
+        "Result": "PASS"
+      },
+      {
+        "Case": "launcher-completed-rundown",
+        "ElapsedMs": 595,
+        "Result": "PASS"
+      },
+      {
+        "Case": "completed-worker-loss",
+        "ElapsedMs": 535,
+        "Result": "PASS"
+      },
+      {
+        "Case": "wow-start-late-query",
+        "ElapsedMs": 638,
+        "Result": "PASS"
+      },
+      {
+        "Case": "default",
+        "ElapsedMs": 693,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-authority",
+        "ElapsedMs": 682,
+        "Result": "PASS"
+      },
+      {
+        "Case": "shared-worker-residency",
+        "ElapsedMs": 645,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-command",
+        "ElapsedMs": 457,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-worker",
+        "ElapsedMs": 631,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-gui",
+        "ElapsedMs": 632,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close",
+        "ElapsedMs": 629,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-completion-barrier",
+        "ElapsedMs": 423,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-order",
+        "ElapsedMs": 450,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-root-loss",
+        "ElapsedMs": 454,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-prepare-pending",
+        "ElapsedMs": 459,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-worker-then-console",
+        "ElapsedMs": 439,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-console-then-worker",
+        "ElapsedMs": 442,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-late-worker-close",
+        "ElapsedMs": 498,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-exit-then-console",
+        "ElapsedMs": 498,
+        "Result": "PASS"
+      },
+      {
+        "Case": "console-then-worker-exit",
+        "ElapsedMs": 484,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-console-exit",
+        "ElapsedMs": 430,
+        "Result": "PASS"
+      },
+      {
+        "Case": "preparing-worker-exit",
+        "ElapsedMs": 448,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-terminate",
+        "ElapsedMs": 528,
+        "Result": "PASS"
+      },
+      {
+        "Case": "unfinished-worker-exit",
+        "ElapsedMs": 503,
+        "Result": "PASS"
+      }
+    ]
+  },
+  "guest": {
+    "mode": "netapi",
+    "exit_code": 0,
+    "elapsed_ms": 13418
+  },
+  "Full": {
+    "Suite": "Full",
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1486,
+        "CleanupMs": 352,
+        "Passed": true,
+        "run": "full"
+      },
+      {
+        "Gate": "win31-standard",
+        "ElapsedMs": 50287,
+        "CleanupMs": 331,
+        "Passed": true,
+        "run": "full"
+      },
+      {
+        "Gate": "win31-enhanced",
+        "ElapsedMs": 81857,
+        "CleanupMs": 314,
+        "Passed": true,
+        "run": "full"
+      },
+      {
+        "Gate": "win95",
+        "ElapsedMs": 126548,
+        "CleanupMs": 318,
+        "Passed": true,
+        "run": "full"
+      },
+      {
+        "Gate": "wow-sol-options",
+        "ElapsedMs": 24472,
+        "CleanupMs": 327,
+        "Passed": true,
+        "run": "full"
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 16897,
+        "CleanupMs": 328,
+        "Passed": true,
+        "run": "full"
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 17413,
+        "CleanupMs": 332,
+        "Passed": true,
+        "run": "full"
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 17960,
+        "CleanupMs": 324,
+        "Passed": true,
+        "run": "full"
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 197,
+        "CleanupMs": 317,
+        "Passed": true,
+        "run": "full"
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 64828,
+        "CleanupMs": 358,
+        "Passed": true,
+        "run": "observer-final"
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 39186,
+        "CleanupMs": 326,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 35877,
+        "CleanupMs": 323,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14541,
+        "CleanupMs": 348,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9647,
+        "CleanupMs": 330,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 1317,
+        "CleanupMs": 366,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12012,
+        "CleanupMs": 367,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 34713,
+        "CleanupMs": 317,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 39999,
+        "CleanupMs": 344,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3807,
+        "CleanupMs": 325,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7612,
+        "CleanupMs": 338,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9559,
+        "CleanupMs": 340,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3422,
+        "CleanupMs": 273,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6716,
+        "CleanupMs": 290,
+        "Passed": true,
+        "run": "full-retry"
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20716,
+        "CleanupMs": 311,
+        "Passed": true,
+        "run": "full-retry"
+      }
+    ],
+    "Attempts": {
+      "full": {
+        "Suite": "Full",
+        "ElapsedMs": 434290,
+        "InputPolicy": "Observed",
+        "WindowOwnedConsole": true,
+        "PreparationMs": 25512,
+        "Gates": [
+          {
+            "Gate": "guest-media",
+            "ElapsedMs": 1486,
+            "CleanupMs": 352,
+            "Passed": true
+          },
+          {
+            "Gate": "win31-standard",
+            "ElapsedMs": 50287,
+            "CleanupMs": 331,
+            "Passed": true
+          },
+          {
+            "Gate": "win31-enhanced",
+            "ElapsedMs": 81857,
+            "CleanupMs": 314,
+            "Passed": true
+          },
+          {
+            "Gate": "win95",
+            "ElapsedMs": 126548,
+            "CleanupMs": 318,
+            "Passed": true
+          },
+          {
+            "Gate": "wow-sol-options",
+            "ElapsedMs": 24472,
+            "CleanupMs": 327,
+            "Passed": true
+          },
+          {
+            "Gate": "startup-presentation",
+            "ElapsedMs": 16897,
+            "CleanupMs": 328,
+            "Passed": true
+          },
+          {
+            "Gate": "console-font-restore",
+            "ElapsedMs": 17413,
+            "CleanupMs": 332,
+            "Passed": true
+          },
+          {
+            "Gate": "console-input-batch",
+            "ElapsedMs": 17960,
+            "CleanupMs": 324,
+            "Passed": true
+          },
+          {
+            "Gate": "ntvdm-export-ordinals",
+            "ElapsedMs": 197,
+            "CleanupMs": 317,
+            "Passed": true
+          },
+          {
+            "Gate": "wow-frontiers",
+            "ElapsedMs": 68010,
+            "CleanupMs": 330,
+            "Passed": false
+          }
+        ]
+      },
+      "full-retry": {
+        "Suite": "Full",
+        "ElapsedMs": 332910,
+        "InputPolicy": "Observed",
+        "WindowOwnedConsole": true,
+        "PreparationMs": 23695,
+        "Gates": [
+          {
+            "Gate": "wow-frontiers",
+            "ElapsedMs": 64720,
+            "CleanupMs": 364,
+            "Passed": true
+          },
+          {
+            "Gate": "Console-17",
+            "ElapsedMs": 39186,
+            "CleanupMs": 326,
+            "Passed": true
+          },
+          {
+            "Gate": "Window-17",
+            "ElapsedMs": 35877,
+            "CleanupMs": 323,
+            "Passed": true
+          },
+          {
+            "Gate": "rpc",
+            "ElapsedMs": 14541,
+            "CleanupMs": 348,
+            "Passed": true
+          },
+          {
+            "Gate": "native-gui",
+            "ElapsedMs": 9647,
+            "CleanupMs": 330,
+            "Passed": true
+          },
+          {
+            "Gate": "version-negatives",
+            "ElapsedMs": 1317,
+            "CleanupMs": 366,
+            "Passed": true
+          },
+          {
+            "Gate": "strict-dir",
+            "ElapsedMs": 12012,
+            "CleanupMs": 367,
+            "Passed": true
+          },
+          {
+            "Gate": "modern-edit-return",
+            "ElapsedMs": 34713,
+            "CleanupMs": 317,
+            "Passed": true
+          },
+          {
+            "Gate": "cooked-return",
+            "ElapsedMs": 39999,
+            "CleanupMs": 344,
+            "Passed": true
+          },
+          {
+            "Gate": "rapid-relaunch",
+            "ElapsedMs": 3807,
+            "CleanupMs": 325,
+            "Passed": true
+          },
+          {
+            "Gate": "interactive-relaunch",
+            "ElapsedMs": 7612,
+            "CleanupMs": 338,
+            "Passed": true
+          },
+          {
+            "Gate": "session-isolation",
+            "ElapsedMs": 9559,
+            "CleanupMs": 340,
+            "Passed": true
+          },
+          {
+            "Gate": "retirement-wiring",
+            "ElapsedMs": 3422,
+            "CleanupMs": 273,
+            "Passed": true
+          },
+          {
+            "Gate": "nested-window-handoff",
+            "ElapsedMs": 6716,
+            "CleanupMs": 290,
+            "Passed": true
+          },
+          {
+            "Gate": "dos4gw-nesticle",
+            "ElapsedMs": 20716,
+            "CleanupMs": 311,
+            "Passed": true
+          }
+        ]
+      },
+      "observer-final": {
+        "Suite": "Full",
+        "ElapsedMs": 89556,
+        "InputPolicy": "Observed",
+        "WindowOwnedConsole": true,
+        "PreparationMs": 23991,
+        "Gates": [
+          {
+            "Gate": "wow-frontiers",
+            "ElapsedMs": 64828,
+            "CleanupMs": 358,
+            "Passed": true
+          }
+        ]
+      }
+    },
+    "ProductManifest": [
+      {
+        "Name": "run16.exe",
+        "Sha256": "F6DF366647D9346962091DF3ED7D7B6BD094E7657119876B4AE9EECA0137F436",
+        "Machine": 34404
+      },
+      {
+        "Name": "ntsrv.exe",
+        "Sha256": "7F571636A5D93FFF97D37A261C06F5B93A0325EC7C793D0312E133FC359027E7",
+        "Machine": 34404
+      },
+      {
+        "Name": "ntcon.exe",
+        "Sha256": "805E69026F1EAB7BDEA66FB204EBE8E9034520D57927B092A817EF7244B528EF",
+        "Machine": 34404
+      },
+      {
+        "Name": "ntvdm.exe",
+        "Sha256": "E4EE1E9B7E97AFC6862D13F1AB6B3B97031250F97A611EC0903E8BA2688ADAB9",
+        "Machine": 332
+      },
+      {
+        "Name": "ntvwm.exe",
+        "Sha256": "8B81F785F2389177F9D3594449AE6F68EEE79AFAC12F8DDB3F05FA7BB9072F57",
+        "Machine": 34404
+      },
+      {
+        "Name": "ntmon.exe",
+        "Sha256": "FD2AD1C2821AC4A2C128935EFC0A8F5923A19F1BA3919E074F2C900CFB442FBA",
+        "Machine": 34404
+      },
+      {
+        "Name": "WOW32.DLL",
+        "Sha256": "F4BB6AE45D671A3B6F4C0C436D5E33A4F6EE20FDDE8385F818B9AA5F999AAD47",
+        "Machine": 332
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "Sha256": "D238CA2F6587BBC80AC2099E17C32BD013BE9B3A26F5DAED3F473464B48881E2",
+        "Machine": 332
+      },
+      {
+        "Name": "nthook32.dll",
+        "Sha256": "A72B825BE1F20F819AD19CDDDEF6149A0318C206327847E1288AFA4388902E05",
+        "Machine": 332
+      },
+      {
+        "Name": "nthook64.dll",
+        "Sha256": "32979F4FCBA3398395093C81E5C0367A6897F9BD7C966E36EB0681E06ACFCB05",
+        "Machine": 34404
+      },
+      {
+        "Name": "VCDEX.DLL",
+        "Sha256": "E6AB76229ABDF7D7668FE8D93E9FCB3056EB72FAE6FA7B8511D6E49EC074D07E",
+        "Machine": 332
+      },
+      {
+        "Name": "NTVDMD.DLL",
+        "Sha256": "25212BBC010B6B9E8A5023935C88F8A0DE6F734D21755FFC5DA110D8A9A008A8",
+        "Machine": 332
+      },
+      {
+        "Name": "VJOY.DLL",
+        "Sha256": "842E5DEC131D485999F71DEF5B7A9F83BF7F0CEA7EABC13F07DE1A1E719060E4",
+        "Machine": 332
+      }
+    ],
+    "ObserverCorrection": {
+      "before_observer_sha256": "AD6A887C6F14960E387D4664B9FA0A2FD8F6A1210032FF2FFF360FD7D10FD779",
+      "trace": [
+        "phase=before-launcher-termination",
+        "launcher=14364",
+        "windows-desktop=NTVDMConsoleTest-19616",
+        "window pid=28200 visible=1 class=Solitaire title=Solitaire",
+        "direct-child pid=9308 name=pwsh.exe wait=258 exit-known=1 exit=00000103 path=C:\\Program Files\\WindowsApps\\OpenAI.CodexPrimaryRuntime.v26-1123-915-0_26.1123.915.0_x64__3k8sg7r9htsxt\\dependencies\\native\\powershell\\pwsh.exe",
+        "descendant-child pid=24224 name=conhost.exe wait=258 exit-known=1 exit=00000103 path=C:\\Windows\\System32\\conhost.exe",
+        "descendant-child pid=19616 name=console-startup-observer.exe wait=258 exit-known=1 exit=00000103 path=O:\\repos.hobby\\ntvdm64\\build\\.ninja\\fixtures-x64\\console-startup-observer.exe",
+        "descendant-child pid=21636 name=cons"
+      ],
+      "fix": "Pin process identities, reject older child creation time, exclude self; no product change",
+      "after_observer_sha256": "00a37c673f82c3bc4b9dd3ee6efe5dca82a1fa143f3e745d9105eb2c2ad283d8",
+      "after_source_sha256": "0f4a843fac374fc66903a0dd4fc35885a8c2164814cadaa4b7f3b0702c210618"
+    },
+    "RetryPolicy": "Nine prior passes retained; failed and unexecuted gates completed, then corrected diagnostic observer reverified on wow-frontiers. No product code change."
+  },
+  "omissions": [
+    {
+      "name": "NtSetInformationKey",
+      "start": 590,
+      "end": 590,
+      "reason": "x86/x64 C2375 SDK non-imported declaration; preserve full original prototype"
+    },
+    {
+      "name": "NtRenameKey",
+      "start": 505,
+      "end": 505,
+      "reason": "x86/x64 C2375 SDK non-imported declaration; preserve full original prototype"
+    },
+    {
+      "name": "NtQueryMultipleValueKey",
+      "start": 484,
+      "end": 484,
+      "reason": "x86/x64 C2375 SDK non-imported declaration; preserve full original prototype"
+    },
+    {
+      "name": "NtNotifyChangeMultipleKeys",
+      "start": 417,
+      "end": 417,
+      "reason": "x86/x64 C2375 SDK non-imported declaration; preserve full original prototype"
+    },
+    {
+      "name": "_KEY_VALUE_ENTRY",
+      "start": 294,
+      "end": 299,
+      "reason": "x86/x64 C2011 SDK duplicate"
+    },
+    {
+      "name": "_KEY_SET_INFORMATION_CLASS",
+      "start": 255,
+      "end": 258,
+      "reason": "x86/x64 C2011 SDK duplicate"
+    }
+  ],
+  "exclusions": [],
+  "initial_failures": "Both raw XP compile probes fail on two SDK type and four import-attribute conflicts; final signatures preserved, then both probes pass."
+}

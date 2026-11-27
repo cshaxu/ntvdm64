@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1324,
+    "byte_identical": 775,
+    "nonerror_identical": 786,
+    "nonerror_different": 538,
+    "nonerror_points": 7749,
+    "nonerror_lines": 150811
+  },
+  "after": {
+    "files": 1324,
+    "byte_identical": 775,
+    "nonerror_identical": 786,
+    "nonerror_different": 538,
+    "nonerror_points": 7750,
+    "nonerror_lines": 150814
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 1,
+    "nonerror_lines": 3
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "before_points": 5,
+      "before_lines": 17,
+      "after_points": 6,
+      "after_lines": 20,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1256,
+    "OpenNT": 68
+  }
+}
