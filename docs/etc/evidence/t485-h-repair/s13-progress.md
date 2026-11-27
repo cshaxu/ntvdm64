@@ -35,3 +35,16 @@ rows are now1327,including112replacement/new IDs outside frozen inventory.
 All953 S10-S12 residual IDs now have pending records;no product change and
 no new owner approval inferred. The source and runtime delivery stays valid;
 the previous complete-registration claim is corrected by this reconciliation.
+
+## S8 final-file mapping
+
+[Final mapping](s13-s8-final-map.json) reconciles all851files/900frozen points.
+606files are byte-exact XP;245files retain only1818#line points/1818lines
+after admitted exclusion projection. No remaining code,format or EOF changes.
+All current hashes match the final S8 census.898old classifications are now
+explicitly superseded by this file-level accounting;the two earlier proven
+whole restorations remain separate. Do not call all900points byte-restored.
+Each of1818current diagnostic points has its physical line,original logical
+line and S8-L identifier in pending decisions;no production code is changed.
+The pending population is now3145including these diagnostic records.
+S7 replacement-ID correspondence and final receipt coverage remain open.

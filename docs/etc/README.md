@@ -2100,3 +2100,5 @@ post-publication targeted checks.
 
 [S13 final repair reconciliation](evidence/t485-h-repair/s13-progress.md) and
 [point synchronization evidence](evidence/t485-h-repair/s13-ledger-sync.json).
+
+[S13 S8 final residual mapping](evidence/t485-h-repair/s13-s8-final-map.json).

@@ -36,7 +36,9 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 4550frozen point IDs checked for coverage.656legacy main-table dispositions
 synchronized from explicit delivered evidence:394restored262residual.
 S10-S12:953residual IDs covered after appending11omitted P13 pending rows.
-Whole-file replacement-ID mapping and final receipt reconciliation remain.
+S8:851files/900frozen points reconcile;606byte-exact,245line-only files,
+1818diagnostic residual points registered separately. S7 mapping and final
+receipt reconciliation remain.
 No product changes;runtime14 Full23/23 is retained,not rerun. No S13 closure.
 
 ## S12 Closure Record
