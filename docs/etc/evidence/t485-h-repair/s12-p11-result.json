@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P11",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime12",
   "files": {
     "src/mvdm-host/softpc.new/host/src/nt_eoi.c": "9897bad2ba8313203a02869cae5b723a56a523f5e4914f26eadb5c18e119181b",
@@ -208,5 +208,7 @@
     "build wrapper stderr failure;CMD retry PASS",
     "publication module failure;resume staged manifest PASS",
     "external-memory test-only initializer fix;retry PASS"
-  ]
+  ],
+  "product_commit": "e0b9f26d5",
+  "push": "origin/main confirmed"
 }

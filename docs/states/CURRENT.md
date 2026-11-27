@@ -37,7 +37,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 [P11 receipt](../etc/evidence/t485-h-repair/s12-p11-result.json):runtime12 cached
 build,dual26hash publication,514line witnesses and targeted gates PASS.
 Test-only CPU initialization repaired;failed external-memory gate retry PASS.
-Commit/push pending;last delivered30files369points38b11ba6c.
+Producte0b9f26d5 pushed;35files523points delivered,no local restoration pending.
 Census803/31809->684/10260 (-119points/-21549lines).
 Next36nt_pif.c;13files remain. Last Full:file30,runtime11;not rerun.
 Migration39/159;N004 gated on S13.

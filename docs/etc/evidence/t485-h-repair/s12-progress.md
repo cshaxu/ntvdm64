@@ -8,7 +8,7 @@ each file before delivery. Default original valid;retains need real evidence.
 
 Reviewed35/48files523/645points;restored-final-verified358,restored-local0,
 residual-final-verified165,residual-local0,unreviewed122.
-Delivered/pushed30files369points through 38b11ba6c.
+Delivered/pushed35files523points through e0b9f26d5.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -44,11 +44,11 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 28 | src/mvdm-host/softpc.new/host/src/nt_com.c | 90 | P10 delivered 38b11ba6c |
 | 29 | src/mvdm-host/softpc.new/host/src/nt_cpu.c | 2 | P10 delivered 38b11ba6c |
 | 30 | src/mvdm-host/softpc.new/host/src/nt_emm.c | 29 | P10 delivered 38b11ba6c |
-| 31 | src/mvdm-host/softpc.new/host/src/nt_eoi.c | 2 | P11 whole-file local audit |
-| 32 | src/mvdm-host/softpc.new/host/src/nt_error.c | 26 | P11 whole-file local audit |
-| 33 | src/mvdm-host/softpc.new/host/src/nt_keycd.c | 7 | P11 whole-file local audit |
-| 34 | src/mvdm-host/softpc.new/host/src/nt_mem.c | 8 | P11 whole-file local audit |
-| 35 | src/mvdm-host/softpc.new/host/src/nt_msscs.c | 111 | P11 whole-file local audit; build running |
+| 31 | src/mvdm-host/softpc.new/host/src/nt_eoi.c | 2 | P11 delivered e0b9f26d5 |
+| 32 | src/mvdm-host/softpc.new/host/src/nt_error.c | 26 | P11 delivered e0b9f26d5 |
+| 33 | src/mvdm-host/softpc.new/host/src/nt_keycd.c | 7 | P11 delivered e0b9f26d5 |
+| 34 | src/mvdm-host/softpc.new/host/src/nt_mem.c | 8 | P11 delivered e0b9f26d5 |
+| 35 | src/mvdm-host/softpc.new/host/src/nt_msscs.c | 111 | P11 delivered e0b9f26d5 |
 | 36 | src/mvdm-host/softpc.new/host/src/nt_pif.c | 14 | Pending |
 | 37 | src/mvdm-host/softpc.new/host/src/nt_reset.c | 34 | Pending |
 | 38 | src/mvdm-host/softpc.new/host/src/nt_rez.c | 1 | Pending |
@@ -703,3 +703,8 @@ P11 final runtime12 cached build,dual26hash publication,514line witnesses,VDD11c
 physical mapping,external memory retry,hard-error six groups and real guest FCB PASS.
 Receipt:s12-p11-result.json. All35files523points final-verified;358restored165residual,
 122unreviewed. Commit/push pending. Full not rerun;next file36nt_pif.c.
+
+P11 product e0b9f26d5 pushed;35/48files523/645points delivered.
+358restored165residual122unreviewed;zero local restoration awaiting delivery.
+Runtime12 targeted acceptance complete;no Full rerun,next checkpointfile40.
+Next36nt_pif.c;S12 remains active.
