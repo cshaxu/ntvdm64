@@ -1,0 +1,519 @@
+{
+  "task": "M0 T485 S12 P13",
+  "state": "final-verified-commit-pending",
+  "package": "build/t485-s12/runtime14",
+  "files": {
+    "src/mvdm-host/softpc.new/host/src/nt_thred.c": "69861883c599b24a380c342f3c42ae540885b4ad8f94761c730115be47c258cd",
+    "src/mvdm-host/softpc.new/host/src/nt_unix.c": "38ecb10cfd1e8fe45564c27091800eca86f8f3dbf0e2fddab37c302778bb163b",
+    "src/mvdm-host/softpc.new/host/src/stubs.c": "7cce7df7923f45335c5922297017b05a2e78c98dc5f7eb63efcbf269b0549e83",
+    "src/mvdm-host/vdd/mscdex/vdd/vcdex.c": "4517c915b541d28b2f380f074cd9bfb9181a3556ae5284120df0fa57ce4d57bc",
+    "src/mvdm-host/vdmredir/vrica.h": "60bd0afff609a12a71b7b3d185f308bc13df4496fc436f183957285112461369",
+    "src/mvdm-host/vdmredir/vrnetapi.c": "dd4191c16b45cc06d780f71fc2b7618cb2e89facbb40aaad5500a7a61070c94f",
+    "src/mvdm-host/vdmredir/vrnmpipe.c": "a602afae0667c94ef261a011c648fdf582a4e5ccd6fcea699415d9aba324e44d",
+    "src/mvdm-host/vdmredir/vrremote.c": "139847dd6c0b5905d487ea7941aca87d0de248a25d98d42a3af0ff3bcadb9b1f"
+  },
+  "diff": {
+    "files": {
+      "src/mvdm-host/softpc.new/host/src/nt_thred.c": {
+        "before": {
+          "points": 1,
+          "lines": 342,
+          "excluded": 2
+        },
+        "after": {
+          "points": 1,
+          "lines": 3,
+          "excluded": 2
+        },
+        "c_tokens_unchanged": true,
+        "exclusions_unchanged": true,
+        "status": "final product build/preprocess/publication/targeted and Full verified"
+      },
+      "src/mvdm-host/softpc.new/host/src/nt_unix.c": {
+        "before": {
+          "points": 1,
+          "lines": 868,
+          "excluded": 2
+        },
+        "after": {
+          "points": 3,
+          "lines": 4,
+          "excluded": 2
+        },
+        "c_tokens_unchanged": true,
+        "exclusions_unchanged": true,
+        "status": "final product build/preprocess/publication/targeted and Full verified"
+      },
+      "src/mvdm-host/softpc.new/host/src/stubs.c": {
+        "before": {
+          "points": 1,
+          "lines": 730,
+          "excluded": 8
+        },
+        "after": {
+          "points": 9,
+          "lines": 10,
+          "excluded": 8
+        },
+        "body_tokens_unchanged_after_three_redundant_includes_removed": true,
+        "exclusions_unchanged": true,
+        "status": "final product build/preprocess/publication/targeted and Full verified"
+      },
+      "src/mvdm-host/vdd/mscdex/vdd/vcdex.c": {
+        "before": {
+          "points": 1,
+          "lines": 2,
+          "excluded": 0
+        },
+        "after": {
+          "points": 1,
+          "lines": 2,
+          "excluded": 0
+        },
+        "change": "no source change; required WINAPI DLL initialization boundary",
+        "status": "final product build/preprocess/publication/targeted and Full verified"
+      },
+      "src/mvdm-host/vdmredir/vrica.h": {
+        "before": {
+          "points": 1,
+          "lines": 3,
+          "excluded": 0
+        },
+        "after": {
+          "points": 1,
+          "lines": 2,
+          "excluded": 0
+        },
+        "change": "restore original EOF Ctrl-Z only; keep actual stdcall void export declaration",
+        "status": "final product build/preprocess/publication/targeted and Full verified"
+      },
+      "src/mvdm-host/vdmredir/vrnetapi.c": {
+        "before": {
+          "points": 163,
+          "lines": 274,
+          "excluded": 74
+        },
+        "after": {
+          "points": 78,
+          "lines": 125,
+          "excluded": 74
+        },
+        "c_tokens_unchanged": true,
+        "exclusions_unchanged": true,
+        "status": "final product build/preprocess/publication/targeted and Full verified"
+      },
+      "src/mvdm-host/vdmredir/vrnmpipe.c": {
+        "before": {
+          "points": 183,
+          "lines": 222,
+          "excluded": 80
+        },
+        "after": {
+          "points": 90,
+          "lines": 128,
+          "excluded": 80
+        },
+        "c_tokens_unchanged": true,
+        "exclusions_unchanged": true,
+        "status": "final product build/preprocess/publication/targeted and Full verified"
+      },
+      "src/mvdm-host/vdmredir/vrremote.c": {
+        "before": {
+          "points": 21,
+          "lines": 33,
+          "excluded": 8
+        },
+        "after": {
+          "points": 6,
+          "lines": 18,
+          "excluded": 8
+        },
+        "c_tokens_unchanged": true,
+        "exclusions_unchanged": true,
+        "status": "final product build/preprocess/publication/targeted and Full verified"
+      }
+    },
+    "s12_current": {
+      "points": 556,
+      "lines": 1394
+    },
+    "s12_reduction": {
+      "points": 247,
+      "lines": 30415
+    },
+    "batch": {
+      "before": {
+        "points": 372,
+        "lines": 2474
+      },
+      "after": {
+        "points": 189,
+        "lines": 292
+      },
+      "reduction": {
+        "points": 183,
+        "lines": 2182
+      }
+    }
+  },
+  "line_witnesses": [
+    {
+      "file": "nt_thred.c",
+      "checked": 29,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "nt_unix.c",
+      "checked": 59,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "stubs.c",
+      "checked": 53,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "vcdex.c",
+      "checked": 211,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "vrnetapi.c",
+      "checked": 288,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    },
+    {
+      "file": "vrnmpipe.c",
+      "checked": 181,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": [
+        [
+          1606,
+          1517,
+          "        CloseHandle(hEvent);"
+        ]
+      ]
+    },
+    {
+      "file": "vrremote.c",
+      "checked": 158,
+      "mismatches": [],
+      "added_error_statements_not_original_witnesses": []
+    }
+  ],
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "53602E60B8994DC7B954826A95C71294FB10D13B31FC045F6167F433BEDC9F04",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "53602E60B8994DC7B954826A95C71294FB10D13B31FC045F6167F433BEDC9F04",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "E8170B1153092DC413CCA0CA2DB7A5FAC698006160ECD328D5475B61D64A8770",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "E8170B1153092DC413CCA0CA2DB7A5FAC698006160ECD328D5475B61D64A8770",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "1FA97EEC5BB9B7B3BBCC47AB4BA81BF6F262A225C72600A374647F50D3602171",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "1FA97EEC5BB9B7B3BBCC47AB4BA81BF6F262A225C72600A374647F50D3602171",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "9481C4F0EB0A3A5AD6B281C74E22E991BD46A5F00349D75FC9D9BB863A7C092D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "9481C4F0EB0A3A5AD6B281C74E22E991BD46A5F00349D75FC9D9BB863A7C092D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "1A3FDA75F9FD067516BADB3B8B208E4FF9F2845FF5ADD39A9EDD0A388DF66064",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "1A3FDA75F9FD067516BADB3B8B208E4FF9F2845FF5ADD39A9EDD0A388DF66064",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "7A642776BE7603692E84BC460107F7993C937495B99DAFA348DFA6E9141E5812",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "7A642776BE7603692E84BC460107F7993C937495B99DAFA348DFA6E9141E5812",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "EBBB36A15BC7BA311BEC60A550561CD6CA8044F5B83C73BD98656A345E29780D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "EBBB36A15BC7BA311BEC60A550561CD6CA8044F5B83C73BD98656A345E29780D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "0BF7E3ABB12C8176648F17F2C2913352D88C9E648B5CB92A07E3B79E364EE37D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "0BF7E3ABB12C8176648F17F2C2913352D88C9E648B5CB92A07E3B79E364EE37D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "E631F6826EC8A5ECEC391D07D71301955090100C6BDFB24838FFB76231DB566C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "E631F6826EC8A5ECEC391D07D71301955090100C6BDFB24838FFB76231DB566C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "F04F8C16E34AAA26D79401D0D909D4ACB08B88CF7A2F0CF683C95673021CD862",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "F04F8C16E34AAA26D79401D0D909D4ACB08B88CF7A2F0CF683C95673021CD862",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "50F69CCB1CD6619021474FABF33132482643633A42B4D0E4E176E97B1C7F9B6A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "50F69CCB1CD6619021474FABF33132482643633A42B4D0E4E176E97B1C7F9B6A",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "4D5B67C5CB5C91820002BE0A498EF1582EF3D545E79A6836E0EAFFE9305AC0CF",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "4D5B67C5CB5C91820002BE0A498EF1582EF3D545E79A6836E0EAFFE9305AC0CF",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "1F13F429AAB628EE8DEBBACD78B2FB98669BBC0F0A38CDDFE7F1042A50799D49",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "1F13F429AAB628EE8DEBBACD78B2FB98669BBC0F0A38CDDFE7F1042A50799D49",
+      "pass": true
+    }
+  ],
+  "targeted": {
+    "state": "PASS",
+    "netapi_assertions": 24,
+    "oem_assertions": 14,
+    "remote_name_cases": 4,
+    "async_assertions": 27,
+    "thread": "THREAD_PRE_CCPU original_exit_body=1 unbind_before_cpu=1 once=1; THREAD_MODULE actual_redirector_entry=1 shared_binding=1 same_owner=1",
+    "initial_failure": "Fixture omitted existing production stdcall register bridges; added existing register_exports.obj and exact setAX/setES aliases. Product source unchanged by test repair.",
+    "evidence": "build/t485-s12/p13/final",
+    "owners": [
+      21028,
+      236
+    ]
+  },
+  "full": {
+    "state": "PASS",
+    "owner": 21668,
+    "evidence": "build/t485-s12/p13/final/full",
+    "reruns": 0,
+    "timings": {
+      "Suite": "Full",
+      "ElapsedMs": 588930,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": true,
+      "PreparationMs": 19938,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1231,
+          "CleanupMs": 425,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-standard",
+          "ElapsedMs": 41199,
+          "CleanupMs": 355,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-enhanced",
+          "ElapsedMs": 72448,
+          "CleanupMs": 422,
+          "Passed": true
+        },
+        {
+          "Gate": "win95",
+          "ElapsedMs": 90740,
+          "CleanupMs": 326,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 15512,
+          "CleanupMs": 342,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 15304,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 16221,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 145,
+          "CleanupMs": 329,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 64863,
+          "CleanupMs": 369,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 42115,
+          "CleanupMs": 361,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 38591,
+          "CleanupMs": 330,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 13703,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 9442,
+          "CleanupMs": 372,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 1260,
+          "CleanupMs": 349,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12293,
+          "CleanupMs": 407,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 33091,
+          "CleanupMs": 355,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 40410,
+          "CleanupMs": 398,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3155,
+          "CleanupMs": 340,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7564,
+          "CleanupMs": 430,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10264,
+          "CleanupMs": 400,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3403,
+          "CleanupMs": 303,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7171,
+          "CleanupMs": 291,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 20278,
+          "CleanupMs": 310,
+          "Passed": true
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Remote-name over-capacity rejection remains explicit, not fixed.",
+    "Win95 known exit-code-one boundary retained; normal resource cleanup and restart evidence do not claim its root cause fixed."
+  ],
+  "reviewed": {
+    "files": 48,
+    "points": 645,
+    "restored_verified": 432,
+    "residual_verified": 213,
+    "unreviewed": 0
+  }
+}

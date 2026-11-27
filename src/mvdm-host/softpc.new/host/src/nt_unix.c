@@ -317,8 +317,8 @@ memset(addr, val, size);
 #ifdef NO_LONGER_USED
 #error Unsupported excluded original configuration
 #endif
-#line 343
 
+#line 344
 /*
  * Host-specific equivalent of the Unix function time().
  */

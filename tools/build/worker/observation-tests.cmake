@@ -59,9 +59,10 @@ worker_unit("obj/tests/redirector/vrnmpipe.obj"
   "${profile_10} /Gy /DMVDM_REDIRECTOR_WORKER_EXPORTS")
 worker_archive("original-redir-observation.lib" ${redir_objects})
 worker_link("redirector-netapi-provider-test.exe"
-  "/nologo /OPT:REF /force:multiple /alternatename:_call_ica_hw_interrupt@12=_mvdm_public_ica_interrupt@12 /out:$out /map:$out.map"
+  "/nologo /OPT:REF /force:multiple /alternatename:_call_ica_hw_interrupt@12=_mvdm_public_ica_interrupt@12 /alternatename:_setAX@4=_ntvdm_debug_setAX@4 /alternatename:_setES@4=_ntvdm_debug_setES@4 /out:$out /map:$out.map"
   "${redirector_system}" INPUTS ${redirector_fixture}
   "obj/tests/redirector/providers.obj" "obj/tests/redirector/async.obj"
+  "obj/mvdm-debugger/register_exports.obj"
   "obj/tests/redirector/vrnetapi.obj" "obj/tests/redirector/vrnmpipe.obj"
   "original-redir-observation.lib" ${host_fixture}
   "original-opennt-netlib.lib" "original-opennt-xactsrv.lib")

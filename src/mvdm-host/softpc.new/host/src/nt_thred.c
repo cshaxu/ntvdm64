@@ -29,7 +29,6 @@ Revision History:
 #include "nt_timer.h"
 #include "monregs.h"
 
-#line 32
 typedef struct _ThreadStartUpParameters {
         LPTHREAD_START_ROUTINE lpStartAddress;
         LPVOID                 lpParameter;
@@ -104,10 +103,8 @@ Return Value:
 #endif
 /****************************** STF ********************************/
 #ifdef MONITOR
-#line 106
 #error Excluded original conditional branch
 #endif
-#line 108
         if (!(dwCreationFlags & CREATE_SUSPENDED))
             ResumeThread(Thread);
 
@@ -169,9 +166,7 @@ Return Value:
 #endif
 /****************************** STF ********************************/
 #ifdef MONITOR
-#line 166
 #error Excluded original conditional branch
 #endif
-#line 168
     ExitThread(dwExitCode);
 }

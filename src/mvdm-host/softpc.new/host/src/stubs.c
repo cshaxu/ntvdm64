@@ -1,10 +1,8 @@
 #undef ANSI     // until file tidied or better still, lost
 
-#include <nt.h>
-#include <ntrtl.h>
-#include <nturtl.h>
 #include <windows.h>
 #include <vdm.h>
+#line 4
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
@@ -18,18 +16,16 @@
 #include "chkmallc.h"
 
 #ifdef X86GFX
-#line 17
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 20
 
+#line 21
 #ifdef MONITOR
-#line 22
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 39
 
 
+#line 41
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: log1p */
 
 #ifndef MONITOR
@@ -45,15 +41,14 @@ double x;
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::: SAS wrapping stubs */
 
 #ifdef MONITOR
-#line 56
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#endif	//MONITOR
-#line 249
+#endif  //MONITOR
 
 
 
 
 
+#line 254
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ASSERT CODE */
 
 
@@ -140,11 +135,10 @@ decode_files_init()
 }
 
 #ifdef ALPHA
-#line 340
 #error Unsupported excluded original configuration
 #endif
-#line 352
 
+#line 353
 #ifdef CPU_40_STYLE
 
 GLOBAL BOOL sas_manage_xms IFN3(VOID *,start_addr, ULONG, cb, INT, a_or_f)
@@ -167,13 +161,12 @@ GLOBAL void host_sigio_event IPT0()
 
 #ifndef GENERIC_NPX
 #ifndef CPU_40_STYLE
-#line 375
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
-#line 396
 #endif /* GENERIC_NPX */
 #endif
 
+#line 399
 int     rate_min;
 int     rate_max;
 int     compiling;
@@ -234,13 +227,11 @@ getsdosunit()
         return(1);
 }
 
-#line 459
 #ifdef NOT_IN_USE
-#line 460
 #error Unsupported excluded original configuration
 #endif
-#line 471
 
+#line 472
 int host_timer_2_frig_factor = 20;
 
 host_check_read_only_drive()
@@ -311,18 +302,14 @@ getIntelRegistersPointer()
     return(0);
 }
 
-#line 542
 #if  0
-#line 543
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 556
 
 #line 557
 int FlatAddress[1];
 int Ldt[1];
 int VdmTib;
-#line 560
 int VdmTibStruct;
 
 void DispatchInterrupts()
@@ -330,12 +317,11 @@ void DispatchInterrupts()
 }
 
 #else //MONITOR
-#line 567
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif  //MONITOR
-#line 580
 
 
+#line 582
 #ifndef MONITOR
 
 //
@@ -380,6 +366,6 @@ Return Value:
 ULONG CurrentMonitorTeb;
 #endif
 
-void host_note_queue_added() 
+void host_note_queue_added()
 {
 }

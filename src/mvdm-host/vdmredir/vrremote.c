@@ -352,7 +352,6 @@ Return Value:
     // Clear the internal error flag
     //
 
-#line 355
     remapi_err_flag = 0;
 
     //
@@ -503,10 +502,8 @@ Return Value:
             rcv_data_length = (DWORD)SmbGetUshort((LPWORD)parm_ptr);
             rcv_dl_flag = TRUE;
 #ifdef VR_DIAGNOSE
-#line 505
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
-#line 507
             break;
 
         case REM_RCV_BUF_PTR:
@@ -516,7 +513,6 @@ Return Value:
             rcv_data_ptr = LPBYTE_FROM_POINTER(parm_ptr);
             rcv_dp_flag = TRUE;
 #ifdef VR_DIAGNOSE
-#line 516
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
 #line 519
@@ -692,10 +688,8 @@ Return Value:
 #line 679
             serverName = computerName;
 #ifdef VR_DIAGNOSE
-#line 681
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
-#line 683
         }
     }
 
@@ -710,24 +704,20 @@ Return Value:
     ntstatus = RtlAnsiStringToUnicodeString(&uString, &aString, (BOOLEAN)TRUE);
     if (!NT_SUCCESS(ntstatus)) {
 
-#line 697
 #if DBG
-#line 698
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 702
 
+#line 703
         return ERROR_NOT_ENOUGH_MEMORY;
     }
     uncName = uString.Buffer;
 
-#line 707
 #if DBG
-#line 708
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 712
 
+#line 713
     status = RxpTransactSmb((LPTSTR)uncName,
 
                             //
@@ -749,7 +739,6 @@ Return Value:
 
     if (status) {
 #ifdef VR_DIAGNOSE
-#line 734
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
 #line 737
@@ -1114,10 +1103,8 @@ Return Value:
     default:
         remapi_err_flag = NERR_InternalError;
 #ifdef VR_DIAGNOSE
-#line 1098
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
-#line 1100
         ASSERT(FALSE);
         return 0;
     }
@@ -1427,10 +1414,8 @@ Return Value:
                     if (ptr == NULL) {
                         if ((*l_dsc == REM_ASCIZ) && OkToModifyDescriptor) {
 #ifdef VR_DIAGNOSE
-#line 1409
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
-#line 1411
                             *l_dsc = REM_NULL_PTR;
                         }
                         struct_ptr += sizeof(LPBYTE);

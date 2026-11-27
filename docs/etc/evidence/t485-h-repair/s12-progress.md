@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed40/48files612/645points;restored-final-verified429,restored-local0,
-residual-final-verified183,residual-local0,unreviewed33.
+Reviewed48/48files645/645points;restored-final-verified432,restored-local0,
+residual-final-verified213,residual-local0,unreviewed0.
 Delivered/pushed40files612points through 88cde1caf.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
@@ -54,14 +54,14 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 38 | src/mvdm-host/softpc.new/host/src/nt_rez.c | 1 | P12 delivered 88cde1caf |
 | 39 | src/mvdm-host/softpc.new/host/src/nt_rflop.c | 25 | P12 delivered 88cde1caf |
 | 40 | src/mvdm-host/softpc.new/host/src/nt_sound.c | 15 | P12 delivered 88cde1caf |
-| 41 | src/mvdm-host/softpc.new/host/src/nt_thred.c | 1 | Pending |
-| 42 | src/mvdm-host/softpc.new/host/src/nt_unix.c | 1 | Pending |
-| 43 | src/mvdm-host/softpc.new/host/src/stubs.c | 4 | Pending |
-| 44 | src/mvdm-host/vdd/mscdex/vdd/vcdex.c | 1 | Pending |
-| 45 | src/mvdm-host/vdmredir/vrica.h | 1 | Pending |
-| 46 | src/mvdm-host/vdmredir/vrnetapi.c | 14 | Pending |
-| 47 | src/mvdm-host/vdmredir/vrnmpipe.c | 9 | Pending |
-| 48 | src/mvdm-host/vdmredir/vrremote.c | 2 | Pending |
+| 41 | src/mvdm-host/softpc.new/host/src/nt_thred.c | 1 | P13 final-verified; commit pending |
+| 42 | src/mvdm-host/softpc.new/host/src/nt_unix.c | 1 | P13 final-verified; commit pending |
+| 43 | src/mvdm-host/softpc.new/host/src/stubs.c | 4 | P13 final-verified; commit pending |
+| 44 | src/mvdm-host/vdd/mscdex/vdd/vcdex.c | 1 | P13 audited; no change |
+| 45 | src/mvdm-host/vdmredir/vrica.h | 1 | P13 final-verified; commit pending |
+| 46 | src/mvdm-host/vdmredir/vrnetapi.c | 14 | P13 final-verified; commit pending |
+| 47 | src/mvdm-host/vdmredir/vrnmpipe.c | 9 | P13 final-verified; commit pending |
+| 48 | src/mvdm-host/vdmredir/vrremote.c | 2 | P13 final-verified; commit pending |
 
 ## Verification and boundaries
 
@@ -777,3 +777,102 @@ No local restorations await runtime verification. Commit/push pending.
 P12 product88cde1caf pushed.40/48files612/645points delivered;429restored,
 183residual,33unreviewed. Census739/3576;next41nt_thred.c.
 Runtime13 Full23/23 checkpoint complete;no unchanged-code Full rerun.
+
+## P13 file41 local audit
+
+nt_thred.c1/342 ->1/3;one frozen lifecycle point remains residual,not
+counted as whole-point restoration. Original ccpu386exitthread frees thread
+simulate stack; B teardown executes before it. Keep explicit void cdecl
+provider declaration and preparation call. Existing thread-start fixture
+asserts cleanup-before-CPU order;not claimed rerun for P13 yet. Both error
+exclusions and C tokens unchanged. Final product preprocessing pending.
+Census739/3237;reduction64points28572lines. Reviewed41/48files613/645points;
+429restored verified,183residual verified+1local,32unreviewed. Delivered40/612.
+Next42nt_unix.c;pure formatting accumulates,do not rebuild this partial batch.
+
+## P13 files42-43 local audit
+
+nt_unix.c1/868 ->3/4;original _sys_errlist extern restoration fails C2090
+with actual product flags because UCRT macro expands it to a function-return
+array declaration. Keep one omitted declaration,original consumers unchanged.
+Two exclusions unchanged. Census741/2373,review42files614points,31unreviewed.
+stubs.c1/730 ->9/10;restore three redundant NT includes and two format points.
+Keep vdm.h:original cpu_createthread needs PVDM_TIB. All-four-header removal
+fails C2146/C2081;vdm-only compile passes. No shim/algorithm change. Eight
+exclusions retained. Four points:3restored1residual;final product verification
+pending. Census749/1653,reduction54points30156lines. Review43files618points;
+429restored verified+3local,183residual verified+3local,27unreviewed.
+Delivered40/612unchanged. Next44vcdex.c;declaration/format batch accumulates.
+
+## P13 files44-45 local audit
+
+vcdex.c1/2 unchanged:profile18 cdecl default,actual link entryVDDInitialize@12
+requires explicit WINAPI. vrica.h1/3 ->1/2 restores original EOF Ctrl-Z.
+Actual imported symbol selects mvdm_public_ica_interrupt stdcall bridge,not
+underlying cdecl ica_hw_interrupt. Keep void/stdcall declaration. Both residual
+points retained;no whole-point restoration credited for partial EOF cleanup.
+Census749/1652,reduction54points30157lines. Reviewed45files620points;
+429restored verified+3local,183residual verified+5local,25unreviewed.
+Delivered40/612unchanged;next46vrnetapi.c. Final batch verification pending.
+
+## P13 file46 local audit
+
+vrnetapi.c163/274 ->78/125:remove85blocks149lines of redundant logical-line
+scaffolding/format.14frozen semantic points remain,with per-point owner/boundary
+evidence,not a blanket generic-hardening rationale. Preserve sequential guest
+far-target reads,empty initialization,DBCS byte-length commits,copy error status,
+and original NetAPI free-once order. Existing provider tests cover actual mirror
+bodies,aliasing,invalid mapping,OEM capacity and BX0 semantics;final batch rerun
+pending. C tokens and74exclusions unchanged. Census664/1503,reduction139/30306.
+Reviewed46files634points;429restored verified+3local,183residual verified+19local,
+11unreviewed. Delivered40/612unchanged;next47vrnmpipe.c.
+
+## P13 file47 local audit
+
+vrnmpipe.c183/222 ->90/128:remove93blocks94lines of redundant line/format
+scaffolding;C tokens and80exclusions unchanged. Nine semantic points retain
+per-point evidence:overlapped read error,owned request staging,completion
+publication and three release sites. Provider rejects stale owner/epoch and
+commits payload before error/count;failed publication cannot notify ANR success.
+Original cross-thread queue remains,no new state machine. Existing publication
+fixture covers failure order,thread binding and epoch;P13 rerun still pending.
+Census571/1409,reduction232points30400lines. Reviewed47/48files643/645points;
+429restored verified+3local,183residual verified+28local,2unreviewed.
+Delivered40/612unchanged;next48vrremote.c.
+
+## P13 file48 local audit
+
+vrremote.c21/33 ->6/18;15blocks15lines reduced with identical C tokens and
+8exclusions. Keep UTF16-to-ACP conversion and allocation failure cleanup;
+original cast truncates multi-character names. Actual VrRemoteApi fixture
+checks two name conversions,capacity rejection and NetAPI failure;it is not
+remote-server acceptance. Long-name rejection remains an explicit boundary.
+All48files645points reviewed:429restored verified+3local,183residual verified
++30local,zero unreviewed. Census556/1394,reduction247/30415. Delivered40/612.
+P13 final cached build,publication,targeted tests and closure Full pending.
+
+## P13 final package verification in progress
+
+[P13 package receipt](s12-p13-result.json) records the final package identity.
+
+Cached full build27440 PASS;runtime14 dual13-image publication27628 PASS.
+979 original product-preprocessing line witnesses match;one added cleanup
+statement is recorded separately,not an original-line witness.48file latest
+hashes reconcile. Initial targeted link failed because the fixture omitted
+the production stdcall register export bridge;observation-tests.cmake now
+links that existing object and matches the two exported symbols. No product
+algorithm changed. Retry236 passes NetAPI24,OEM14,remote-name4,async27 and
+thread lifecycle/module cleanup assertions. Initial failure retained under
+build/t485-s12/p13/final/focused-build-initial-failure.log.
+Full owner21668 is running against the published runtime14;not yet passed.
+No Full rerun is authorized without changed inputs;retry failed gates only.
+Commit,push and S12 closure remain pending final results.
+
+## S12 final verification
+
+P13 runtime14 Full23/23 PASS,zero reruns. Cached full build,dual26hash
+publication,979 original line witnesses,targeted tests and final-package Full
+complete. Batch372/2474 ->189/292,reduction183points2182lines.
+All48files645points verified:432restored213necessary residual0unreviewed.
+S12 census803/31809 ->556/1394,reduction247points30415lines.
+Commit/push remains the last delivery step;S13 admission follows closure.
