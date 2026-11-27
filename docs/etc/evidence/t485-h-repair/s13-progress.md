@@ -48,3 +48,21 @@ Each of1818current diagnostic points has its physical line,original logical
 line and S8-L identifier in pending decisions;no production code is changed.
 The pending population is now3145including these diagnostic records.
 S7 replacement-ID correspondence and final receipt coverage remain open.
+
+## S7 delivered whole-file mapping
+
+[Seven-file map](s13-s7-final-map.json) covers839remaining historical IDs,
+with110already registered semantic residual IDs and398normalized lines.
+All seven final sources match the delivered review hashes;their last source
+commits are ancestors of current main. Frozen points are marked superseded,
+not falsely credited as restored. Existing pending records remain intact.
+
+The S7 measurement helper omitted#line and normalized CRLF. Consequently
+those110/398numbers are not complete byte-sensitive mirror metrics. The first
+current census pass resolves10of20files;10need their existing explicit
+exclusion correspondence because selector expressions differ from upstream.
+Do not treat generic matcher assertions as product failures or count excluded
+bodies as active differences. Complete this census before S13 closure.
+All4550frozen IDs now have either explicit final dispositions or linked
+whole-file replacement accounting;final metric and receipt reconciliation
+remain open. No source/package changes and no Full rerun.
