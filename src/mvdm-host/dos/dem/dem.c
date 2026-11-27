@@ -7,8 +7,8 @@
 #include "io.h"
 #include "dem.h"
 #include "compat/include/system_root.h"
+#line 9
 
-#line 10
 /* DemInit - DEM Initialiazation routine. (This name may change when DEM is
  *           converted to DLL).
  *
@@ -20,7 +20,6 @@
  *      None
  */
 
-#line 21
 PSZ pszDefaultDOSDirectory;
 
 extern VOID     TerminateVDM(VOID);
@@ -29,12 +28,10 @@ extern VOID     dempInitLFNSupport(VOID);
 
 CHAR demDebugBuffer [256];
 
-#line 27
 #if DBG
-#line 28
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 30
+#line 32
 
 BOOL DemInit (int argc, char *argv[])
 {
@@ -48,7 +45,6 @@ BOOL DemInit (int argc, char *argv[])
     SetErrorMode (SEM_FAILCRITICALERRORS | SEM_NOOPENFILEERRORBOX);
 
     pszDefaultDOSDirectory =  (PCHAR) malloc(MAX_PATH+14);
-#line 43
     if (!pszDefaultDOSDirectory ||
         !(dw = NtvdmGetSystemDirectoryA(pszDefaultDOSDirectory, MAX_PATH)) ||
         dw >= MAX_PATH )
@@ -74,13 +70,10 @@ BOOL DemInit (int argc, char *argv[])
     }
 
 
-#line 66
 #if DBG
-#line 67
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 73
 #endif
-#line 74
+#line 78
 
     return TRUE;
 }

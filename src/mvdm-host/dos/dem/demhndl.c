@@ -21,6 +21,8 @@
 #include <vrnmpipe.h>
 #include <exterr.h>
 #include <mvdm.h>
+#include "compat/include/guest_location.h"
+#line 24
 
 BOOL (*VrInitialized)(VOID);  // POINTER TO FUNCTION
 extern BOOL IsVdmRedirLoaded(VOID);
@@ -44,7 +46,6 @@ extern BOOL IsVdmRedirLoaded(VOID);
  *
  */
 
-#line 45
 VOID demClose (VOID)
 {
 HANDLE  hFile;
@@ -53,7 +54,6 @@ USHORT  usDX,usCX;
 
     hFile = GETHANDLE (getAX(),getBP());
 
-#line 53
     if (hFile == 0) {
     setCF (0);
     return;
@@ -126,8 +126,8 @@ UCHAR   locus, action, class;
 LONG    lLoc;
 mvdm_guest_location bufferLocation;
 mvdm_guest_location_lease bufferLease;
+#line 125
 
-#line 124
     hFile = GETHANDLE (getAX(),getBP());
     usDS = getDS();
     usDX = getDX();
@@ -139,7 +139,7 @@ mvdm_guest_location_lease bufferLease;
         goto readFailureExit;
     }
     lpBuf = (LPVOID)bufferLease.bytes;
-#line 128
+#line 130
 
     //
     // if this handle is a named pipe then use VrReadNamedPipe since we have
@@ -147,7 +147,6 @@ mvdm_guest_location_lease bufferLease;
     // even though we're still doing synchronous read
     //
 
-#line 135
     if (IsVdmRedirLoaded()) {
         if (VrIsNamedPipeHandle(hFile)) {
 
@@ -184,12 +183,10 @@ mvdm_guest_location_lease bufferLease;
 
                 goto readFailureExit;
             }
-#line 171
             pExtendedError->ExtendedErrorLocus = locus;
             STOREWORD(pExtendedError->ExtendedError, (WORD)dwReadError);
             pExtendedError->ExtendedErrorAction = action;
             pExtendedError->ExtendedErrorClass = class;
-#line 175
             if (ok) {
                 goto readSuccessExit;
             } else {
@@ -205,7 +202,6 @@ mvdm_guest_location_lease bufferLease;
 
     if (!getZF()) {
         ULONG   Zero = 0;
-#line 190
         lLoc  = (LONG)((((int)getBX()) << 16) + (int)getSI());
         if ((SetFilePointer (hFile,
                             lLoc,
@@ -225,7 +221,7 @@ mvdm_guest_location_lease bufferLease;
 
 readFailureExit:
         (void)mvdm_guest_location_release(&bufferLease, FALSE);
-#line 212
+#line 214
 
         if (GetLastError() == ERROR_BROKEN_PIPE)  {
              setAX(0);
@@ -241,7 +237,6 @@ readSuccessExit:
         SetLastError(ERROR_INVALID_ADDRESS);
         goto readFailureExit;
     }
-#line 227
     setCF(0);
     setAX((USHORT)dwBytesRead);
     return;
@@ -278,8 +273,8 @@ LONG    lLoc;
 DWORD	dwErrCode;
 mvdm_guest_location bufferLocation;
 mvdm_guest_location_lease bufferLease;
+#line 263
 
-#line 262
     hFile = GETHANDLE (getAX(),getBP());
     /* DIVERGENCE(MVDM-HOST-DIV-231): copy across noncontiguous guest pages. */
     mvdm_guest_location_set_real_mode(&bufferLocation, getDS(), getDX());
@@ -289,7 +284,7 @@ mvdm_guest_location_lease bufferLease;
         goto writeFailureExit;
     }
     lpBuf = (LPVOID)bufferLease.bytes;
-#line 264
+#line 266
 
 
     //
@@ -298,7 +293,6 @@ mvdm_guest_location_lease bufferLease;
     // even though we're still doing synchronous write
     //
 
-#line 272
     if (IsVdmRedirLoaded()) {
         if (VrIsNamedPipeHandle(hFile)) {
             if (VrWriteNamedPipe(hFile, lpBuf, (DWORD)getCX(), &dwBytesWritten)) {
@@ -317,7 +311,6 @@ mvdm_guest_location_lease bufferLease;
 
     if (!getZF()) {
         ULONG   Zero = 0;
-#line 290
         lLoc  = (LONG)((((int)getBX()) << 16) + (int)getSI());
         if ((SetFilePointer (hFile,
                             lLoc,
@@ -325,7 +318,7 @@ mvdm_guest_location_lease bufferLease;
                             FILE_BEGIN) == -1L) &&
             (GetLastError() != NO_ERROR)) {
             goto writeFailureExit;
-#line 298
+#line 300
         }
 
     }
@@ -334,10 +327,8 @@ mvdm_guest_location_lease bufferLease;
     if (getCX() == 0){
         if (SetEndOfFile(hFile) == FALSE){
             goto writeFailureExit;
-#line 307
         }
         (void)mvdm_guest_location_release(&bufferLease, FALSE);
-#line 308
         setCF (0);
         return;
     }
@@ -353,24 +344,24 @@ mvdm_guest_location_lease bufferLease;
         if(dwErrCode == ERROR_DISK_FULL) {
 
 	    (void)mvdm_guest_location_release(&bufferLease, FALSE);
-#line 322
-	    setCF(0);
-	    setAX(0);
-	    return;
-	}
+#line 324
+            setCF(0);
+            setAX(0);
+            return;
+        }
 
         SetLastError(dwErrCode);
 
 writeFailureExit:
     (void)mvdm_guest_location_release(&bufferLease, FALSE);
-#line 330
-	demClientError(hFile, (CHAR)-1);
-	return ;
+#line 332
+        demClientError(hFile, (CHAR)-1);
+        return ;
     }
 
 writeSuccessExit:
     (void)mvdm_guest_location_release(&bufferLease, FALSE);
-#line 335
+#line 337
     setCF(0);
     setAX((USHORT)dwBytesWritten);
     return;
@@ -405,12 +396,10 @@ HANDLE  hFile;
 LONG    lLoc;
 DWORD   dwLoc;
 
-#line 369
 #if (FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)
-#line 370
-#error "Win32 values not DOS compatible"
+    #error "Win32 values not DOS compatible"
 #endif
-#line 374
+#line 376
     hFile =  GETHANDLE (getAX(),getBP());
     lLoc  = (LONG)((((int)getCX()) << 16) + (int)getDX());
 
@@ -577,12 +566,10 @@ VOID demCommit(VOID)
 
     hFile = GETHANDLE(getAX(),getBP());
     bRet = FlushFileBuffers(hFile);
-#line 528
 #if DBG
-#line 529
 #error Excluded unsupported DBG profile
 #endif
-#line 548
+#line 562
 
     setCF(0);
 

@@ -32,14 +32,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S12 Ordered Progress
 
-[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):6/48files,
-38/645points reviewed;9restored-delivered,0restored-local,29residual,
-607unreviewed. P1-P3 delivered6files38points through d5e4a83f6.
-P3 cmdmisc.c23/116->8/93 (-15/-23),whole-file review and delivery complete;
-[P3 receipt](../etc/evidence/t485-h-repair/s12-p3-result.json):runtime4 cached
-build,26publication hashes,151line witnesses and selected tests PASS;delivered/pushed d5e4a83f6.
-S12 census803/31809->750/31731 (-53points/-78lines).
-Nextfile7 dem.c. Migration39/159;N004 gated on S13.
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):10/48files,
+57/645points source-reviewed;9restored-delivered,0restored-local,48residual,
+588unreviewed. Delivered6files38points through d5e4a83f6.
+P4 four whole DEM files complete:77/168->29/103 (-48points/-65lines).
+S12 census803/31809->702/31666 (-101points/-143lines).
+Ten-file checkpoint:cached build,246line witnesses and dual runtime5
+publication26hashes and Full23/23 PASS;[P4 receipt](../etc/evidence/t485-h-repair/s12-p4-result.json). Commit/push pending.
+No successful gate repeated. Nextfile11 demlfn.c after checkpoint delivery.
+Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
 

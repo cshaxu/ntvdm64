@@ -56,3 +56,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S12 P2 keyboard package receipt](s12-p2-result.json).
 
 [S12 P3 COMMAND miscellaneous receipt](s12-p3-result.json).
+
+[S12 P4 DEM Full checkpoint receipt](s12-p4-result.json).

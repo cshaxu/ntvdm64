@@ -1,0 +1,435 @@
+{
+  "task": "M0 T485 S12 P4",
+  "state": "final-verified-published-commit-pending",
+  "package": "build/t485-s12/runtime5",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "sha256": "4e62b60b60b52546d90825c54a6d85d92f059a50058d40da0d5b742abe203b30",
+      "before": {
+        "points": 11,
+        "lines": 13
+      },
+      "after": {
+        "points": 4,
+        "lines": 6
+      }
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "sha256": "860423f992e8caa0c65e5c94373b410389b439764e3dc78ef8e99921590da8eb",
+      "before": {
+        "points": 28,
+        "lines": 33
+      },
+      "after": {
+        "points": 6,
+        "lines": 6
+      }
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demgset.c",
+      "sha256": "be7e785c049fb84271e1a29a07c30683fe98a2391258b1bedc5b38f469cb47af",
+      "before": {
+        "points": 10,
+        "lines": 37
+      },
+      "after": {
+        "points": 4,
+        "lines": 31
+      }
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "sha256": "a7bf5d082ea886d6f6cd6247311d3e2c98bffb74bd170d2b9495de2a5ecd8a8d",
+      "before": {
+        "points": 28,
+        "lines": 85
+      },
+      "after": {
+        "points": 15,
+        "lines": 60
+      }
+    }
+  ],
+  "diff": {
+    "before": {
+      "points": 77,
+      "lines": 168
+    },
+    "after": {
+      "points": 29,
+      "lines": 103
+    },
+    "s12_current": {
+      "points": 702,
+      "lines": 31666
+    },
+    "s12_reduction": {
+      "points": 101,
+      "lines": 143
+    }
+  },
+  "review": {
+    "restored": [],
+    "residual": [
+      "HXP-R-00076",
+      "HXP-R-00077",
+      "HXP-R-00078",
+      "HXP-R-00082",
+      "HXP-R-00083",
+      "HXP-R-00084",
+      "HXP-R-00085",
+      "HXP-R-00086",
+      "HXP-R-00087",
+      "HXP-R-00088",
+      "HXP-R-00089",
+      "HXP-R-00090",
+      "HXP-R-00091",
+      "HXP-R-00092",
+      "HXP-R-00093",
+      "HXP-R-00094",
+      "HXP-R-00095",
+      "HXP-R-00096",
+      "HXP-R-00097"
+    ],
+    "note": "R00078 necessary include relocated to its sole DEM consumer;not fully restored. Original spacing and XP logical lines restored;existing guest memory and package providers retained. No executable behavior rewrite or original guest changes."
+  },
+  "verification": {
+    "build": "PASS cached full",
+    "publication": [
+      {
+        "path": "assets\\release\\NTVDMD.DLL",
+        "sha256": "971F0EE75B51A1B21D6A44D7033C39B7987674ABFFCBED0E2960E3E875DBA48A",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+        "sha256": "971F0EE75B51A1B21D6A44D7033C39B7987674ABFFCBED0E2960E3E875DBA48A",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VJOY.DLL",
+        "sha256": "F95371D9D1E032CE0DDE20DF4E2ADD8A3E879295342040E2A8A8399EEAE1C130",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+        "sha256": "F95371D9D1E032CE0DDE20DF4E2ADD8A3E879295342040E2A8A8399EEAE1C130",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "73ACEF55B3DEEECAF04AE72F728EB512F2B576731C8FE420BBCC0BD1C2EC61CD",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+        "sha256": "73ACEF55B3DEEECAF04AE72F728EB512F2B576731C8FE420BBCC0BD1C2EC61CD",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "0549FD19EADC73B27C91D7CEC428FB5A107A3F28DE83CBB03C1321BFCEABA504",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+        "sha256": "0549FD19EADC73B27C91D7CEC428FB5A107A3F28DE83CBB03C1321BFCEABA504",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "793EAB680ADA7FF9C963A7EBD42D418701E85063179EE93559398BD3ABB6AACF",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+        "sha256": "793EAB680ADA7FF9C963A7EBD42D418701E85063179EE93559398BD3ABB6AACF",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "9583E4A4F4DC6E1E18BB4E53A67EA103DC8E9489B1F3468F063C0F1D8AA15F1C",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+        "sha256": "9583E4A4F4DC6E1E18BB4E53A67EA103DC8E9489B1F3468F063C0F1D8AA15F1C",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "DBD753CC2678F78CD442E79B9738DD870D2BDCCEC3F96A9A2811EDB3C5C27861",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+        "sha256": "DBD753CC2678F78CD442E79B9738DD870D2BDCCEC3F96A9A2811EDB3C5C27861",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "9BC5F9B72CD4E26F6C273F511A90AEBC2582A86377649A8C19DA49307365B0D6",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+        "sha256": "9BC5F9B72CD4E26F6C273F511A90AEBC2582A86377649A8C19DA49307365B0D6",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "1F2945738C117A73C6AFF534612474648FED13B88106A236666D38EAACE373DF",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+        "sha256": "1F2945738C117A73C6AFF534612474648FED13B88106A236666D38EAACE373DF",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "11B20FECC80EFB92CE22B79940EDC89A8CDE7093E036D515FBE981BF1F2AF01A",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+        "sha256": "11B20FECC80EFB92CE22B79940EDC89A8CDE7093E036D515FBE981BF1F2AF01A",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "52ECC47A1892F7C2A685F88BA8A40338B0C84D39901B1E9D991A31EB8EA22EC6",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+        "sha256": "52ECC47A1892F7C2A685F88BA8A40338B0C84D39901B1E9D991A31EB8EA22EC6",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "6BE6D60072E2ECCAE64F5B8E28F3CC71D0E526025F1D016F9FD802BEC2E4026F",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+        "sha256": "6BE6D60072E2ECCAE64F5B8E28F3CC71D0E526025F1D016F9FD802BEC2E4026F",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "10C95E637F609126C1BEB2763546DDFC1BE0709E3480334E4E869C78A7CC7426",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+        "sha256": "10C95E637F609126C1BEB2763546DDFC1BE0709E3480334E4E869C78A7CC7426",
+        "pass": true
+      }
+    ],
+    "original_product_lines": [
+      {
+        "file": "dem.c",
+        "checked": 9,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      },
+      {
+        "file": "dem.h",
+        "checked": 30,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      },
+      {
+        "file": "demgset.c",
+        "checked": 162,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      },
+      {
+        "file": "demhndl.c",
+        "checked": 45,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": [
+          [
+            279,
+            270,
+            "        goto writeFailureExit;"
+          ],
+          [
+            279,
+            298,
+            "            goto writeFailureExit;"
+          ],
+          [
+            279,
+            307,
+            "            goto writeFailureExit;"
+          ]
+        ]
+      }
+    ],
+    "full": {
+      "Suite": "Full",
+      "ElapsedMs": 594675,
+      "InputPolicy": "Observed",
+      "WindowOwnedConsole": true,
+      "PreparationMs": 20121,
+      "Gates": [
+        {
+          "Gate": "guest-media",
+          "ElapsedMs": 1262,
+          "CleanupMs": 454,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-standard",
+          "ElapsedMs": 40464,
+          "CleanupMs": 370,
+          "Passed": true
+        },
+        {
+          "Gate": "win31-enhanced",
+          "ElapsedMs": 68996,
+          "CleanupMs": 383,
+          "Passed": true
+        },
+        {
+          "Gate": "win95",
+          "ElapsedMs": 92409,
+          "CleanupMs": 459,
+          "Passed": true
+        },
+        {
+          "Gate": "startup-presentation",
+          "ElapsedMs": 20694,
+          "CleanupMs": 325,
+          "Passed": true
+        },
+        {
+          "Gate": "console-font-restore",
+          "ElapsedMs": 15994,
+          "CleanupMs": 363,
+          "Passed": true
+        },
+        {
+          "Gate": "console-input-batch",
+          "ElapsedMs": 15927,
+          "CleanupMs": 351,
+          "Passed": true
+        },
+        {
+          "Gate": "ntvdm-export-ordinals",
+          "ElapsedMs": 217,
+          "CleanupMs": 321,
+          "Passed": true
+        },
+        {
+          "Gate": "wow-frontiers",
+          "ElapsedMs": 65276,
+          "CleanupMs": 309,
+          "Passed": true
+        },
+        {
+          "Gate": "Console-17",
+          "ElapsedMs": 42984,
+          "CleanupMs": 394,
+          "Passed": true
+        },
+        {
+          "Gate": "Window-17",
+          "ElapsedMs": 38597,
+          "CleanupMs": 314,
+          "Passed": true
+        },
+        {
+          "Gate": "rpc",
+          "ElapsedMs": 14336,
+          "CleanupMs": 381,
+          "Passed": true
+        },
+        {
+          "Gate": "native-gui",
+          "ElapsedMs": 9182,
+          "CleanupMs": 358,
+          "Passed": true
+        },
+        {
+          "Gate": "version-negatives",
+          "ElapsedMs": 1127,
+          "CleanupMs": 397,
+          "Passed": true
+        },
+        {
+          "Gate": "strict-dir",
+          "ElapsedMs": 12286,
+          "CleanupMs": 353,
+          "Passed": true
+        },
+        {
+          "Gate": "modern-edit-return",
+          "ElapsedMs": 33803,
+          "CleanupMs": 320,
+          "Passed": true
+        },
+        {
+          "Gate": "cooked-return",
+          "ElapsedMs": 40563,
+          "CleanupMs": 318,
+          "Passed": true
+        },
+        {
+          "Gate": "rapid-relaunch",
+          "ElapsedMs": 3252,
+          "CleanupMs": 346,
+          "Passed": true
+        },
+        {
+          "Gate": "interactive-relaunch",
+          "ElapsedMs": 7626,
+          "CleanupMs": 347,
+          "Passed": true
+        },
+        {
+          "Gate": "session-isolation",
+          "ElapsedMs": 10284,
+          "CleanupMs": 338,
+          "Passed": true
+        },
+        {
+          "Gate": "retirement-wiring",
+          "ElapsedMs": 3366,
+          "CleanupMs": 356,
+          "Passed": true
+        },
+        {
+          "Gate": "nested-window-handoff",
+          "ElapsedMs": 7281,
+          "CleanupMs": 299,
+          "Passed": true
+        },
+        {
+          "Gate": "dos4gw-nesticle",
+          "ElapsedMs": 19982,
+          "CleanupMs": 341,
+          "Passed": true
+        }
+      ]
+    },
+    "governance": "PASS updated receipt and relative links",
+    "win95_boundary": "approved knownExitOne;not normal return zero",
+    "logs": "build/t485-s12/p4/final"
+  },
+  "attempts": [
+    {
+      "owner": 20704,
+      "result": "Cached build PASS;line checker rejected three added cleanup gotos falsely as unique original-line witnesses. No runtime gate started."
+    },
+    {
+      "owner": 5304,
+      "result": "Checker classification corrected without source modification;246 original witnesses zero drift. Dual publication and first Full23/23 PASS. No runtime retry or full rerun."
+    }
+  ]
+}

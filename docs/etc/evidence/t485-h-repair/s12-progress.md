@@ -6,11 +6,11 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed6/48files38/645points;restored-delivered9,restored-local0,
-residual-reviewed29,unreviewed607.
+Reviewed10/48files57/645points;restored-delivered9,restored-local0,
+residual-reviewed48,unreviewed588.
 Delivered/pushed6files38points through d5e4a83f6.
 Current byte-sensitive census is measured separately from frozen points.
-P1/P2 cached build,dual publication,targeted verification and commit/push complete.
+P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
 | Order | File | Frozen points | State |
 | ---: | --- | ---: | --- |
@@ -20,10 +20,10 @@ P1/P2 cached build,dual publication,targeted verification and commit/push comple
 | 4 | src/mvdm-host/dos/command/cmdexec.c | 20 | P1 delivered806a8c45c |
 | 5 | src/mvdm-host/dos/command/cmdkeyb.c | 2 | P2 delivered c43ad57bb |
 | 6 | src/mvdm-host/dos/command/cmdmisc.c | 8 | P3 delivered d5e4a83f6 |
-| 7 | src/mvdm-host/dos/dem/dem.c | 2 | Pending |
-| 8 | src/mvdm-host/dos/dem/dem.h | 1 | Pending |
-| 9 | src/mvdm-host/dos/dem/demgset.c | 4 | Pending |
-| 10 | src/mvdm-host/dos/dem/demhndl.c | 12 | Pending |
+| 7 | src/mvdm-host/dos/dem/dem.c | 2 | P4 final verified; commit pending |
+| 8 | src/mvdm-host/dos/dem/dem.h | 1 | P4 final verified; commit pending |
+| 9 | src/mvdm-host/dos/dem/demgset.c | 4 | P4 final verified; commit pending |
+| 10 | src/mvdm-host/dos/dem/demhndl.c | 12 | P4 final verified; commit pending |
 | 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | Pending |
 | 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | Pending |
 | 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | Pending |
@@ -246,3 +246,59 @@ coverage,not new gameplay/normal-exit evidence. P3 delivered/pushed d5e4a83f6.
 
 Sixfiles38points final verified;9restored29residual607unreviewed.
 Nonerror750/31731,down53points78lines from S12 baseline.
+
+## P4 files7-9 source review, file10 pending
+
+- dem.c11/13->4/6 (-7/-7);two DBG exclusions retained;package NTDOS path
+  provider required by original demmisc loader. Only line directives changed.
+- dem.h28/33->6/6 (-22/-27);nine exclusions retained. guest_location is unused
+  by this header and moves to sole DEM consumer demhndl.c (+1/+2). R00078
+  remains a relocated dependency,not counted as a complete restoration.
+- demgset.c10/37->4/31 (-6/-6);zero exclusions. Keep BootDir overlay,DOSWOWDATA
+  lifecycle/CDS owner projection and proven FileSystemType padding correction.
+  Register failure can leave prior state;explicit clear is not redundant.
+
+Combined with demhndl include move,batch reduction34points38lines.
+S12 current716/31693 from803/31809,cumulative reduction87points116lines.
+Reviewed9files45points;9restored36residual600unreviewed. Delivered remains
+6files38points. No build triggered for the completed format/reference edits;
+demhndl.c whole-file12point audit is next,then the required10-file Full checkpoint.
+All latest hashes and both registers synchronized;P4 is not delivered.
+
+## P4 file10 and ten-file checkpoint
+
+demhndl.c28/85->15/60 including moved include (-13/-25). Two excluded
+branches retained;original spacing and correct XP lines restored,execution
+tokens unchanged except required include relocation. Existing original
+extended-error record writes retained. Twelve reviewed residuals have explicit
+first-byte alias,checked-page-copy and every-exit lifecycle justification.
+Do not claim new runtime failure equivalence from source inspection alone.
+
+Four-file batch77/168->29/103 (-48points/-65lines). S12 current702/31666,
+baseline803/31809,reduction101points143lines. Tenfiles57points reviewed,
+9restored48residual588unreviewed;delivered still6files38points.
+Owned background20704 runs cached full build,actual compiler line check,
+dual runtime5 publication and Full via the existing successful runner.
+No file remains partially audited before this batch build. Final acceptance
+and commit/push remain pending. Reuse successful Full gates on unchanged code.
+
+P4 cached full build PASS. Initial line checker classified three added cleanup
+gotos as the sole original literal;source locations and preprocessor output
+confirm they are added statements,not original witnesses. Checker corrected,
+246original statements PASS with zero drift. No rebuild or preprocessing rerun.
+Continuation owner5304 published runtime5 to both locations (26hash checks),
+then started the first Full for this final package. It remains running;no
+Full success,commit or delivery completion is claimed. Logs:p4/final/full.log.
+
+### P4 final verification
+
+[Receipt](s12-p4-result.json):runtime5 cached full build,dual26hash publication,
+246original-line witnesses and first Full23/23 PASS. Includes three desktops,
+enhanced Win3.1/Win95 same-window fullscreen roundtrips,WOW windows,command and
+lifecycle gates,and real NESticle menu pixels/Escape response. Win95 retains
+approved knownExitOne boundary. No source changes or whole-suite retries after
+Full;no original guest change. Initial line-checker false positives remain in
+the attempt record. Documentation and relative-link gates passed before receipt.
+Four files77/168->29/103;S12 current702/31666,reduction101points143lines.
+Tenfiles57points final verified;9restored48residual588unreviewed. Commit/push
+pending;S12 remains active and next file is demlfn.c.

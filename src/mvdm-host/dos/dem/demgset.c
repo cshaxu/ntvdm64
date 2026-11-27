@@ -43,7 +43,6 @@ BYTE demGetDpbI(BYTE Drive, DPB UNALIGNED *pDpb);
 UCHAR PhysicalDriveTypes[26]={0};
 
 extern PDOSSF pSFTHead;
-#line 42
 
 USHORT  nDrives = 0;
 CHAR    IsAPresent = TRUE;
@@ -559,21 +558,17 @@ SYSTEMTIME TimeDate;
 VOID demSetDTALocation (VOID)
 {
     PDOSWOWDATA pDosWowData;
-#line 562
 
-#line 563
     pulDTALocation = (PULONG)  GetVDMAddr(getDS(),getAX());
     pusCurrentPDB  = (PUSHORT) GetVDMAddr(getDS(),getDX());
-#line 565
     pExtendedError = (PDEMEXTERR) GetVDMAddr(getDS(),getCX());
-#line 566
 
     pDosWowData = (PDOSWOWDATA) GetVDMAddr(getDS(),getSI());
     pSFTHead    = (PDOSSF) GetVDMAddr(getDS(),(WORD)pDosWowData->lpSftAddr);
     /* DIVERGENCE MVDM-HOST-DIV-892: retain DOSWOWDATA for session directory queries. */
     mvdm_command_guest_state_clear_doswow();
     (void)mvdm_command_guest_state_register_doswow(getDS(), getSI());
-#line 569
+#line 564
     return;
 }
 
@@ -664,7 +659,6 @@ DWORD   adwVolumeSerial[2],i;
         }
 
     strncpy(pVolInfo->FileSystemType,achFileSystemType,FILESYS_NAME_SIZE);
-#line 659
     for(i=0;i<FILESYS_NAME_SIZE;i++) {
         if (pVolInfo->FileSystemType[i] == '\0')
             pVolInfo->FileSystemType[i] = '\x020'; /* DIVERGENCE(MVDM-HOST-DIV-279) */

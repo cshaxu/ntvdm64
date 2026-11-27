@@ -21,21 +21,16 @@
 */
 
 #ifdef DOS
-#line 24
 #error Unsupported excluded original DEM host configuration
 #endif
-#line 26
 
 #ifdef OS2_16
-#line 28
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register.
 #endif
 #line 31
 
 #ifdef OS2_32
-#line 33
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
-#line 35
 #endif
 #line 36
 
@@ -47,9 +42,7 @@
 #include <process.h>
 
 #ifdef WIN_16
-#line 45
 #error Unsupported excluded original DEM host configuration
-#line 47
 #endif
 #line 48
 
@@ -62,38 +55,29 @@
 #include <nturtl.h>
 #include <ntdddisk.h>
 #else
-#line 58
 #error Unsupported excluded original DEM host configuration
 #endif
-#line 60
 
 #ifdef FLAT_32
 #ifndef i386
 #define ALIGN_32
 #else
-#line 65
 #error Unsupported excluded original DEM host configuration
 #endif
-#line 67
 #endif
-#line 68
 
 #ifdef WIN
 #define _WINDOWS
 #include <windows.h>
 #endif
-#line 73
 
 #ifdef SIGNALS
-#line 75
 #error Unsupported excluded original DEM host configuration
 #endif
 #line 78
 
 #ifdef OS2_32
-#line 80
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
-#line 82
 #endif
 #line 83
 #define SIGHIT(flChk)   ((iSigCheck++ & 0x7FF)?(flSignals & (flChk)):(kbhit(),(flSignals & (flChk))))
@@ -130,17 +114,12 @@ typedef struct _DISKINFO {
 
 #include "dosdef.h"
 #include "dossvc.h"
-#include "compat/include/guest_location.h"
-#line 117
 
 
 
-#line 120
 /** DEM Externs **/
 
-#line 122
 extern ULONG  UNALIGNED *pulDTALocation;
-#line 123
 extern BOOL   VDMForWOW;
 extern PVHE   pHardErrPacket;
 extern ULONG  CurrentISVC;
@@ -149,16 +128,13 @@ extern PFNSVC apfnSVC[];
 extern PSZ    pszDefaultDOSDirectory;
 extern USHORT nDrives;
 extern PUSHORT pusCurrentPDB;
-#line 131
 extern PDEMEXTERR pExtendedError;
 
 
-#line 134
 #include "demexp.h"
 #if DEVL
 extern CHAR demDebugBuffer [];
 #endif
-#line 138
 
 
 
@@ -268,16 +244,13 @@ VOID ConvNwPathToDosPath   (CHAR *,CHAR *);
 /** Debug Function Prototypes */
 
 #if DBG
-#line 241
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#line 244
 #else
-#line 245
+#line 251
 
 #define demPrintMsg(x)
 
 #endif
-#line 249
 
 /* Label functions and constants */
 USHORT demDeleteLabel(BYTE Drive);
