@@ -1,7 +1,7 @@
 /**************************** Module Header ********************************\
 * Module Name: combodir.c
 *
-* Copyright 1985-90, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * Directory Combo Box Routines
 *
@@ -35,6 +35,7 @@ int xxxCBDir(
     TL tlpwnd;
 
     CheckLock(pcbox->spwnd);
+    UserAssert(pcbox->spwndList);
 
     plb = ((PLBWND)pcbox->spwndList)->pLBIV;
 
@@ -56,7 +57,7 @@ int xxxCBDir(
 }
 
 /***************************************************************************\
-* xxxDlgDirSelectComboBoxEx
+* DlgDirSelectComboBoxEx
 *
 * Retrieves the current selection from the listbox of a combobox.
 * It assumes that the combo box was filled by xxxDlgDirListComboBox()
@@ -66,6 +67,8 @@ int xxxCBDir(
 * 12-05-90 IanJa    converted to internal version
 \***************************************************************************/
 
+
+FUNCLOG4(LOG_GENERAL, int, DUMMYCALLINGTYPE, DlgDirSelectComboBoxExA, HWND, hwndDlg, LPSTR, pszOut, int, cchOut, int, idComboBox)
 int DlgDirSelectComboBoxExA(
     HWND hwndDlg,
     LPSTR pszOut,
@@ -89,15 +92,14 @@ int DlgDirSelectComboBoxExA(
     return fRet;
 }
 
+
+FUNCLOG4(LOG_GENERAL, int, DUMMYCALLINGTYPE, DlgDirSelectComboBoxExW, HWND, hwndDlg, LPWSTR, pwszOut, int, cchOut, int, idComboBox)
 int DlgDirSelectComboBoxExW(
     HWND hwndDlg,
     LPWSTR pwszOut,
     int cchOut,
     int idComboBox)
 {
-    BOOL fRet;
-    TL tlpwndComboBox;
-    TL tlpwndList;
     PWND pwndDlg;
     PWND pwndComboBox;
     PCBOX pcbox;
@@ -118,13 +120,7 @@ int DlgDirSelectComboBoxExW(
         return 0;
     }
 
-    ThreadLockAlways(pwndComboBox, &tlpwndComboBox);
-    ThreadLock(pcbox->spwndList, &tlpwndList);
-    fRet = xxxDlgDirSelectHelper(pwndComboBox, pwszOut, cchOut, pcbox->spwndList);
-    ThreadUnlock(&tlpwndList);
-    ThreadUnlock(&tlpwndComboBox);
-
-    return fRet;
+    return DlgDirSelectHelper(pwszOut, cchOut, HWq(pcbox->spwndList));
 }
 
 
@@ -135,6 +131,8 @@ int DlgDirSelectComboBoxExW(
 * 12-05-90 IanJa    converted to internal version
 \***************************************************************************/
 
+
+FUNCLOG5(LOG_GENERAL, int, DUMMYCALLINGTYPE, DlgDirListComboBoxA, HWND, hwndDlg, LPSTR, lpszPathSpecClient, int, idComboBox, int, idStaticPath, UINT, attrib)
 int DlgDirListComboBoxA(
     HWND hwndDlg,
     LPSTR lpszPathSpecClient,
@@ -177,6 +175,8 @@ int DlgDirListComboBoxA(
     return fRet;
 }
 
+
+FUNCLOG5(LOG_GENERAL, int, DUMMYCALLINGTYPE, DlgDirListComboBoxW, HWND, hwndDlg, LPWSTR, lpszPathSpecClient, int, idComboBox, int, idStaticPath, UINT, attrib)
 int DlgDirListComboBoxW(
     HWND hwndDlg,
     LPWSTR lpszPathSpecClient,

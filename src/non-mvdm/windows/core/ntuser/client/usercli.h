@@ -2132,8 +2132,8 @@ VOID  xxxResetWorld(PLBIV, INT, INT, BOOL);
 
 VOID  xxxTrackMouse(PLBIV, UINT, POINT);
 BOOL  xxxDlgDirListHelper(PWND, LPWSTR, LPBYTE, int, int, UINT, BOOL);
-BOOL  xxxDlgDirSelectHelper(PWND pwndDlg, LPWSTR pFileName, int cbFileName,
-        PWND pwndListBox);
+BOOL  DlgDirSelectHelper(LPWSTR pFileName, int cbFileName,
+        HWND hwndListBox);
 BOOL xxxLBResetContent(PLBIV plb);
 VOID xxxLBSetRedraw(PLBIV plb, BOOL fRedraw);
 int xxxSetLBScrollParms(PLBIV plb, int nCtl);

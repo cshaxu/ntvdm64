@@ -206,6 +206,8 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
  * formatting operands; RIPERR still sets the caller's Win32 error. */
 #ifndef RIPMSG0
 #define FUNCLOG6(...)
+#define FUNCLOG4(...)
+#define FUNCLOG5(...)
 #define RIPMSG0(level, text) ((void)0)
 #endif
 #ifndef RIPMSG1

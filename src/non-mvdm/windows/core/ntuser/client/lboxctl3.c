@@ -679,11 +679,11 @@ BOOL DlgDirListW(
 * History:
 \***************************************************************************/
 
-BOOL xxxDlgDirSelectHelper(
-    PWND pwndDlg,
+#line 686
+BOOL DlgDirSelectHelper(
     LPWSTR lpszPathSpec,
     int chCount,
-    PWND pwndListBox)
+    HWND hwndListBox)
 {
     INT   cch;
     LPWSTR lpchFile;
@@ -694,23 +694,20 @@ BOOL xxxDlgDirSelectHelper(
     int cchT;
     LARGE_UNICODE_STRING str;
 
-    CheckLock(pwndDlg);
-    CheckLock(pwndListBox);
-
     /*
-     * Callers such as xxxDlgDirSelectEx do not validate the existance
-     * of pwndListBox
+     * Callers such as DlgDirSelectEx do not validate the existance
+     * of hwndListBox
      */
-    if (pwndListBox == NULL) {
+    if (hwndListBox == NULL) {
         RIPERR0(ERROR_CONTROL_ID_NOT_FOUND, RIP_VERBOSE, "");
         return 0;
     }
 
-    sItem = (INT)SendMessage(HWq(pwndListBox), LB_GETCURSEL, 0, 0L);
+    sItem = (INT)SendMessage(hwndListBox, LB_GETCURSEL, 0, 0L);
     if (sItem < 0)
         return FALSE;
 
-    cchT = SendMessage(HWq(pwndListBox), LB_GETTEXT, sItem, (DWORD)rgch);
+    cchT = (INT)SendMessage(hwndListBox, LB_GETTEXT, sItem, (LPARAM)rgch);
     UserAssert(cchT < (sizeof(rgch)/sizeof(rgch[0])));
 
     lpchFile = rgch;
@@ -777,6 +774,7 @@ Exit:
     TextCopy(&str, lpszPathSpec, (UINT)chCount);
     return fDir;
 }
+#line 779
 
 
 /***************************************************************************\
@@ -808,35 +806,16 @@ BOOL DlgDirSelectExA(
     return fRet;
 }
 
+#line 815
 BOOL DlgDirSelectExW(
     HWND hwndDlg,
     LPWSTR lpszPathSpec,
     int chCount,
     int idListBox)
 {
-    PWND pwndDlg;
-    PWND pwndDI;
-    TL tlpwndDlg;
-    TL tlpwndDI;
-    BOOL fRet;
-
-    pwndDlg = ValidateHwnd(hwndDlg);
-
-    if (pwndDlg == NULL)
-        return FALSE;
-
-    ThreadLock(pwndDlg, &tlpwndDlg);
-
-    pwndDI = _GetDlgItem(pwndDlg, idListBox);
-    ThreadLock(pwndDI, &tlpwndDI);
-
-    fRet = xxxDlgDirSelectHelper(pwndDlg, lpszPathSpec, chCount, pwndDI);
-
-    ThreadUnlock(&tlpwndDI);
-    ThreadUnlock(&tlpwndDlg);
-
-    return (fRet);
+    return DlgDirSelectHelper(lpszPathSpec, chCount, GetDlgItem(hwndDlg, idListBox));
 }
+#line 839
 
 
 /***************************************************************************\

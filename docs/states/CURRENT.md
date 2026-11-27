@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime42 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime43 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -176,6 +176,14 @@ N0228/39; overall57/159; S15 9/14. Census1329files,781exact,792nonerror same/
 -1246lines.1274XP/55OpenNT. One mirror since P36 Full. Sequence correction:
 P36 next-file pointer skipped combodir.c; restore that pending DIR entry next,
 before dlgbegin.c. It is not counted as migrated.
+
+[P38 N022 combo directory](../etc/evidence/t485-s1/n022-combodir.md) delivered
+runtime43: exact205-line XP source, one paired HWND selection helper and caller.
+Cached build, dual13-image26hash, control39/39, real combo file/directory selection
+and SOL Options pass. N0229/39; overall57/159; S15 9/14. Census1329files,782exact,
+793nonerror same/536different,7852points/117354lines; delta0files/+1exact/+1same/
+-1different/-1point/-431lines.1275XP/54OpenNT. Four changed mirrors since P36 Full.
+The missed DIR entry is now delivered; next dlgbegin.c.
 
 ## S14 Closure Record
 

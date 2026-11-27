@@ -2145,6 +2145,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
             combo_request.hInstance = request.hInstance;
             combo_request.style = WS_CHILD | CBS_DROPDOWN;
             combo_request.hwndParent = window;
+            combo_request.hMenu = (HMENU)0x701;
             combo_request.cx = 100; combo_request.cy = 90;
             combo = wow_window_create_boundA(&thread, combo_class.atom,
                 &combo_request, &words, NULL);
@@ -2181,6 +2182,23 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
                         BORROW_CHECK(SendMessageA(combo, CB_GETDROPPEDSTATE, 0, 0));
                         SendMessageA(combo, CB_SHOWDROPDOWN, FALSE, 0);
                         BORROW_CHECK(!SendMessageA(combo, CB_GETDROPPEDSTATE, 0, 0));
+                        {
+                            char selected[32] = {0};
+                            BORROW_CHECK(SendMessageA(combo, CB_ADDSTRING, 0,
+                                (LPARAM)"alpha") >= 0);
+                            SendMessageA(combo, CB_SETCURSEL, 0, 0);
+                            BORROW_CHECK(!wow_user_dlg_dir_select_comboA(window,
+                                selected, sizeof(selected), 0x701) &&
+                                !strcmp(selected, "alpha."));
+                            SendMessageA(combo, CB_RESETCONTENT, 0, 0);
+                            BORROW_CHECK(SendMessageA(combo, CB_ADDSTRING, 0,
+                                (LPARAM)"[folder]") >= 0);
+                            SendMessageA(combo, CB_SETCURSEL, 0, 0);
+                            BORROW_CHECK(wow_user_dlg_dir_select_comboA(window,
+                                selected, sizeof(selected), 0x701) &&
+                                !strcmp(selected, "folder\\"));
+                            SendMessageA(combo, CB_RESETCONTENT, 0, 0);
+                        }
                         unchanged=info;info.cbSize=0;
                         BORROW_CHECK(!wow_control_get_combo_info(combo,&info) &&
                             GetLastError()==ERROR_INVALID_PARAMETER && !info.cbSize);
