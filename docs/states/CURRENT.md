@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall56/159 directories, H001-H036 and N001-N020. S15 runtime21 is the current
+overall56/159 directories, H001-H036 and N001-N020. S15 runtime22 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -53,24 +53,9 @@ baseline transitions remain in its receipt.
 
 P7 historical delivery remains indexed in this packet's evidence directory.
 
-[P8 N017 first-three](../etc/evidence/t485-s1/n017-first-three.md) delivered:
-apinums/apiparam use XP Net paths; crypt restores complete XP declarations.
-All three byte-exact. Cached build, runtime8 dual13-image26hash publication,
-RAP11/11, guest NetAPI and Full24/24 passed without retry. Ten-file checkpoint
-resets to zero. N017 now3/19 delivered,16remaining; overall52/159 and S15 4/14.
-Next debuglib.h. Current census1315files,753exact,758nonerror same/557different,
-7744points/172161lines; delta0files,+3exact,+3same,-3different,-3points/-4014lines.
-1215XP/100OpenNT.
+[P8 N017 first-three](../etc/evidence/t485-s1/n017-first-three.md) delivered.
 
-[P9 N017 middle-ten](../etc/evidence/t485-s1/n017-middle.md) delivered DIR
-positions4-13 and original private include paths. Original exclusion conditions
-retained; remaining nonerror differences are#line only. Cached build,
-runtime9 dual13-image26hash publication, RAP11/11, NetAPI and Full24/24 passed.
-Ten-file checkpoint resets to zero. N017 now13/19 delivered,6remaining;
-next rxp.h. Overall52/159 and S15 4/14 remain. Current census1315files,
-756exact,762nonerror same/553different,7754points/167883lines;
-delta0files,+3exact,+4same,-4different,+10points/-4278lines (LF/#line cleanup).
-1223XP/92OpenNT.
+[P9 N017 middle-ten](../etc/evidence/t485-s1/n017-middle.md) delivered; Full24/24 passed.
 
 [P10 N017 final-six](../etc/evidence/t485-s1/n017-tail.md) delivered: all six
 original XP paths/declarations restored, four byte-exact and two only#error.
@@ -177,6 +162,15 @@ Full24/24 passed. N0214/17; next nt_vdd.h. Ten-file checkpoint resets to zero.
 Overall56/159, S15 8/14. Census1324files,774exact,785nonerror same/539different,
 7741points/154642lines; delta+6files,+6exact,+6same,0different,+12points/-108lines.
 1250XP/74OpenNT. LPC and executive entry limitations recorded for paired migration.
+
+[P22 N021 VDD](../etc/evidence/t485-s1/n021-vdd.md) delivered XP declarations:
+nt_vdd.h2points/4lines; paired DPMI macro override adds1line. Cached build,
+runtime22 dual13-image26hash publication, BIOS123, VDD/IOS contracts and real
+VDD/MEM exports/lifecycle passed. Two missing fixture boundaries corrected;
+initial failures retained. N0215/17; next ntcsrdll.h. Overall56/159, S15 8/14.
+Census1324files,774exact,785nonerror same/539different,7742points/154167lines;
+delta0files,0exact,0same,0different,+1point/-475lines.1251XP/73OpenNT.
+Two changed mirror files since P21 Full24/24; no guest change.
 
 ## S14 Closure Record
 

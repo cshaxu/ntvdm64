@@ -1,0 +1,48 @@
+{
+  "before": {
+    "files": 1324,
+    "byte_identical": 774,
+    "nonerror_identical": 785,
+    "nonerror_different": 539,
+    "nonerror_points": 7741,
+    "nonerror_lines": 154642
+  },
+  "after": {
+    "files": 1324,
+    "byte_identical": 774,
+    "nonerror_identical": 785,
+    "nonerror_different": 539,
+    "nonerror_points": 7742,
+    "nonerror_lines": 154167
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 1,
+    "nonerror_lines": -475
+  },
+  "files": [
+    {
+      "path": "src/mvdm-host/dpmi32/precomp.h",
+      "before_points": 1,
+      "before_lines": 10,
+      "after_points": 1,
+      "after_lines": 11,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
+      "before_points": 1,
+      "before_lines": 480,
+      "after_points": 2,
+      "after_lines": 4,
+      "exclusions": 1
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1251,
+    "OpenNT": 73
+  }
+}

@@ -26,6 +26,7 @@ Abstract:
 #include <nt_vdd.h>
 
 #ifdef CCPU
+#undef getMODE
 #define getMODE() (((getMSW() & MSW_PE) && !(getEFLAGS() & EFLAGS_VM_MASK)) ? VDM_PM : VDM_V86)
 #ifndef DECLARE_LocalVdmContext
 #define DECLARE_LocalVdmContext

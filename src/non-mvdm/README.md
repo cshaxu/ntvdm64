@@ -3014,3 +3014,9 @@ nt.h restores the XP entry framework and six byte-exact prerequisites.
 Host SDK and local RTL ABI bindings remain explicit; LPC/executive include
 limitations are evidenced for their paired N021 migration.
 [Evidence](../../docs/etc/evidence/t485-s1/n021-nt.md). N0214/17 delivered.
+
+### T485 S15 N021 VDD declarations
+
+nt_vdd.h restores XP order/linkage and preserves the stdcall map ABI and CCPU
+real cache functions. Paired DPMI keeps its VM-aware mode override.
+[Evidence](../../docs/etc/evidence/t485-s1/n021-vdd.md). N0215/17 delivered.

@@ -6,6 +6,7 @@
 #include <string.h>
 #include <insignia.h>
 #include <host_def.h>
+#include <error.h>
 #include <xt.h>
 #include <ios.h>
 #include <dma.h>
@@ -33,6 +34,12 @@ void host_ica_unlock(void){CHECK(lock_depth==1);--lock_depth;LeaveCriticalSectio
 DMA_ADAPT *dmaGetAdaptor(void){++dma_access;return &dma_owned.state;}
 int dma_request(half_word port,char *buffer,word length)
 {(void)port;(void)buffer;(void)length;fputs("UNEXPECTED real DMA transfer\n",stderr);exit(90);}
+void RcErrorDialogBox(UINT id, CHAR *first, CHAR *second)
+{
+    (void)first; (void)second;
+    fprintf(stderr, "UNEXPECTED VDD error dialog id=%u\n", id);
+    exit(91);
+}
 static VOID read_byte(WORD port,BYTE *value){(void)port;++callbacks;++read_calls;*value=0x56;}
 static VOID write_byte(WORD port,BYTE value){(void)port;(void)value;++callbacks;++write_calls;}
 static void bop_callback(void){++callbacks;++bop_calls;}

@@ -1,4 +1,4 @@
-/* Actual ios.obj routing under a controlled CPU-virtualisation boundary.
+/* Actual ios.obj routing under controlled CPU and VDD-lookup boundaries.
  * No hardware, guest, port instruction or device emulator is substituted. */
 #include <stdio.h>
 #include <string.h>
@@ -29,6 +29,12 @@ static IU32 virtual_value;
 #define P ((io_addr)0x240)
 #define CHECK(x) do { ++checks; if (!(x)) { ++failures; fprintf(stderr,"FAIL %d: %s\n",__LINE__,#x); } } while (0)
 
+/* No dynamically registered VDD in this routing-only fixture. */
+BOOL HostUndefinedIo(WORD port)
+{
+    (void)port;
+    return FALSE;
+}
 IBOOL c_IOVirtualised(io_addr port, IU32 *value, LIN_ADDR offset, IU8 width)
 {
     (void)offset;

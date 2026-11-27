@@ -1,0 +1,412 @@
+{
+  "task": "M0 T485 S15 P22 N021 VDD",
+  "runtime": "build/t485-s15/runtime22",
+  "build_exit": 0,
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "6C0DCB637105D3EECF82D83634277DE9608DF45A7ED0CAEEB7ABF882921B542A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "6C0DCB637105D3EECF82D83634277DE9608DF45A7ED0CAEEB7ABF882921B542A",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "6A41A44A7FE993E31ADBF80366AB8ED7F39703C543F08EE23AE64B54F5F2BF26",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "6A41A44A7FE993E31ADBF80366AB8ED7F39703C543F08EE23AE64B54F5F2BF26",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "EAF0568AC97FED6272497A7BAC356859F3171C33AA1EC915470ABDBB7A6250BA",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "EAF0568AC97FED6272497A7BAC356859F3171C33AA1EC915470ABDBB7A6250BA",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "073815D1CB09E001C4F486EB9341523367208D1D491E87547361AD12AED2480E",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "073815D1CB09E001C4F486EB9341523367208D1D491E87547361AD12AED2480E",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "23BDBF48722E2B971A992CF506DFD21D95BD37B20A00B862897BCB3FE94C973B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "23BDBF48722E2B971A992CF506DFD21D95BD37B20A00B862897BCB3FE94C973B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "61F5BC7CABABC7846F8B18CF8E55687D38E7831880B28602AD6F5A755F8A0CFB",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "61F5BC7CABABC7846F8B18CF8E55687D38E7831880B28602AD6F5A755F8A0CFB",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "FE1E8CD0E0847F4CB31955C874A6DFE02CF7172E2F35FA6FA2381218AEB96D5D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "FE1E8CD0E0847F4CB31955C874A6DFE02CF7172E2F35FA6FA2381218AEB96D5D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "9B4C711654B872B72058B9304F0B6C8BCEA13B58B42ED3B7A230A0BE1113A929",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "9B4C711654B872B72058B9304F0B6C8BCEA13B58B42ED3B7A230A0BE1113A929",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "5C8B6813BD65968B897D53A1B4040805C88B3583FB1AE1C22578D962F39C6620",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "5C8B6813BD65968B897D53A1B4040805C88B3583FB1AE1C22578D962F39C6620",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "E89AC4A4827F15972AAF3B6E506F1E075FF5AADA9F9549C73911F4A9CEEF97CC",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "E89AC4A4827F15972AAF3B6E506F1E075FF5AADA9F9549C73911F4A9CEEF97CC",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "3DE5DC6E0222635279AAF791B95DD11C5F3F2CDE8D42DEE07BC66604C453E4B1",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "3DE5DC6E0222635279AAF791B95DD11C5F3F2CDE8D42DEE07BC66604C453E4B1",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "D484DF707CB39F1FC0D92C54B3A346543AF6E077922A6E84C8C668BEBBB90829",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "D484DF707CB39F1FC0D92C54B3A346543AF6E077922A6E84C8C668BEBBB90829",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "8ADB4AC8B9D9DAA0B521E0C1EEA010218057C144F39ACB6A64D62C482CD8C85A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "8ADB4AC8B9D9DAA0B521E0C1EEA010218057C144F39ACB6A64D62C482CD8C85A",
+      "pass": true
+    }
+  ],
+  "census": {
+    "before": {
+      "files": 1324,
+      "byte_identical": 774,
+      "nonerror_identical": 785,
+      "nonerror_different": 539,
+      "nonerror_points": 7741,
+      "nonerror_lines": 154642
+    },
+    "after": {
+      "files": 1324,
+      "byte_identical": 774,
+      "nonerror_identical": 785,
+      "nonerror_different": 539,
+      "nonerror_points": 7742,
+      "nonerror_lines": 154167
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 1,
+      "nonerror_lines": -475
+    },
+    "files": [
+      {
+        "path": "src/mvdm-host/dpmi32/precomp.h",
+        "before_points": 1,
+        "before_lines": 10,
+        "after_points": 1,
+        "after_lines": 11,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
+        "before_points": 1,
+        "before_lines": 480,
+        "after_points": 2,
+        "after_lines": 4,
+        "exclusions": 1
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1251,
+      "OpenNT": 73
+    }
+  },
+  "bios": "CCPU_BIOS_ACCESS cases=123 failures=0",
+  "vdd": {
+    "started": "2026-11-27T14:57:34.5293408Z",
+    "owner_pid": 25428,
+    "result": "pass",
+    "contract": "vdd",
+    "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+    "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-vdd\\vdd-contract-r3",
+    "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-vdd\\vdd-contract-r3\\vdd-object-contract.exe",
+    "inputs": [
+      {
+        "sha256": "20C46AED5C54B4590C878DA29A0618A26C1F3798FED108E86390BF33367E1D4A",
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-softpc-object-contract.ps1"
+      },
+      {
+        "sha256": "CE25F8E8E51F4A259C5383012FD6351C81D6B71E9FFA69EE56C436D821F31C8C",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd"
+      },
+      {
+        "sha256": "CD3CAE198D25C30EE0991CAAB86817F43779A56078393DF37915258710B473E4",
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\vdd_object_contract_fixture.c"
+      },
+      {
+        "sha256": "50C80A3C4DAE8160764B178DE84F35B19CBAEF339F600BEDFBECBB971E958E81",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\src\\nt_vdd.c"
+      },
+      {
+        "sha256": "168D4A92D0DFC1AF4301D5F8AC5C19F3BCF95B9047CE56C57F94D27244D0F3A9",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_vdd.obj"
+      },
+      {
+        "sha256": "B26AA0E2062BA28A72ABCB940574A482050534F31D62C2C84BC75A5B0E18E5A0",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja"
+      },
+      {
+        "sha256": "A2A88B277659A7AFFF373B1FC3232F675A2247C5AF3E2B4AFE0C7841C8664171",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\insignia.h"
+      },
+      {
+        "sha256": "7108A678210B1D35FC9A23C0CD1FB25404A3BFE03C208821520F2A15176A4EBC",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      },
+      {
+        "sha256": "C3AABE93271B3CC9846EBA60D4ADA3E366EFC8759AFA8D147E3A212F93FA4669",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\nt_vddp.h"
+      },
+      {
+        "sha256": "4D575E388B723D5578314B6E2B747DA63273CDD7310532C16881551AD757D8CA",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\ios.h"
+      },
+      {
+        "sha256": "FCDC50C7985C7B740BF46D0620E255254EB9B9B16ACED9A51B3F7A886D8D7316",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\dma.h"
+      },
+      {
+        "sha256": "6D0AB4C8F546C7351ED74ED50F454E0B06059616C8CD6E47AF373191FE7D642A",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\nt_vdd.h"
+      },
+      {
+        "sha256": "ADE1F71078DD51A1978B6D19E48E1A56B6AD49170F318C3C6723018CE45C79D0",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\ios.obj"
+      },
+      {
+        "sha256": "F405C3CB114025620A2413C19AB7507DFB45BDF496849A07A830C146DD254800",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\in.obj"
+      },
+      {
+        "sha256": "F50CE4775FDC74D6225AA341BB261371EB4B1B54EBCC276C5D8C36F4A154315B",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\out.obj"
+      },
+      {
+        "sha256": "50A43C13CF2DB352CA82E97FAA50575F0761BA3FF594BAA88C841BEDB98398EA",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\support\\ios.c"
+      },
+      {
+        "sha256": "5D21592FCA88D20B764AE8A5377E1102D9E50DD19E01A543241B47A107218239",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\in.c"
+      },
+      {
+        "sha256": "89999515F4F834EEF0683D3218D5CC3BE2ACBAE2897360D2984510D79BBAA74E",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\out.c"
+      }
+    ],
+    "runs": [
+      {
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+        "exit": 0,
+        "pid": 28020,
+        "kind": "native-build"
+      },
+      {
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-vdd-negative\"",
+        "exit": 2,
+        "pid": 25760,
+        "kind": "negative-abi-compile"
+      },
+      {
+        "exit": 0,
+        "pid": 15676,
+        "diagnostic_budget_ms": 30000,
+        "kind": "fixture"
+      }
+    ],
+    "checks": 303,
+    "callbacks": 82,
+    "fixture_sha256": "C56277D478DD5B1F4635B5CB14494E5FFB3B3DF408306499FB704B2473878D6D",
+    "finished": "2026-11-27T14:58:07.4801404Z"
+  },
+  "ios": {
+    "started": "2026-11-27T14:58:07.5358612Z",
+    "owner_pid": 25428,
+    "result": "pass",
+    "contract": "ios",
+    "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+    "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-vdd\\ios-contract",
+    "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-vdd\\ios-contract\\ios-object-contract.exe",
+    "inputs": [
+      {
+        "sha256": "20C46AED5C54B4590C878DA29A0618A26C1F3798FED108E86390BF33367E1D4A",
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-softpc-object-contract.ps1"
+      },
+      {
+        "sha256": "CE25F8E8E51F4A259C5383012FD6351C81D6B71E9FFA69EE56C436D821F31C8C",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd"
+      },
+      {
+        "sha256": "4146E3FAAF9C95E601399EEE8F0586F23A212F984700967C2EC4A71625C5C26A",
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\ios_object_contract_fixture.c"
+      },
+      {
+        "sha256": "50A43C13CF2DB352CA82E97FAA50575F0761BA3FF594BAA88C841BEDB98398EA",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\support\\ios.c"
+      },
+      {
+        "sha256": "ADE1F71078DD51A1978B6D19E48E1A56B6AD49170F318C3C6723018CE45C79D0",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\ios.obj"
+      },
+      {
+        "sha256": "B26AA0E2062BA28A72ABCB940574A482050534F31D62C2C84BC75A5B0E18E5A0",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja"
+      },
+      {
+        "sha256": "A2A88B277659A7AFFF373B1FC3232F675A2247C5AF3E2B4AFE0C7841C8664171",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\insignia.h"
+      },
+      {
+        "sha256": "4FDF692424E2E41B764B518072DB069488EC9AF9E54CD5D4CA808CB246871076",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\base_def.h"
+      },
+      {
+        "sha256": "4D575E388B723D5578314B6E2B747DA63273CDD7310532C16881551AD757D8CA",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\ios.h"
+      },
+      {
+        "sha256": "9711806E704626E254583685A3436C4E89AAE2251463EC7F6807B7CF44F71BD0",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\in.h"
+      },
+      {
+        "sha256": "CF2836E5F63A2FB7320D56787ACB85D11FCF4577BD3E67C693244759C790B859",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\out.h"
+      },
+      {
+        "sha256": "F405C3CB114025620A2413C19AB7507DFB45BDF496849A07A830C146DD254800",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\in.obj"
+      },
+      {
+        "sha256": "F50CE4775FDC74D6225AA341BB261371EB4B1B54EBCC276C5D8C36F4A154315B",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\out.obj"
+      },
+      {
+        "sha256": "5D21592FCA88D20B764AE8A5377E1102D9E50DD19E01A543241B47A107218239",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\in.c"
+      },
+      {
+        "sha256": "89999515F4F834EEF0683D3218D5CC3BE2ACBAE2897360D2984510D79BBAA74E",
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\out.c"
+      }
+    ],
+    "runs": [
+      {
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+        "exit": 0,
+        "pid": 24772,
+        "kind": "native-build"
+      },
+      {
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-ios-negative\"",
+        "exit": 2,
+        "pid": 13888,
+        "kind": "negative-abi-compile"
+      },
+      {
+        "exit": 0,
+        "pid": 8248,
+        "diagnostic_budget_ms": 30000,
+        "kind": "fixture"
+      }
+    ],
+    "checks": 70,
+    "callbacks": 78,
+    "fixture_sha256": "12DC38EA0AD571078C74F547EB58DABED2D21BA5EB6A41DF2D05522ABD9202B8",
+    "finished": "2026-11-27T14:58:40.7102792Z"
+  },
+  "live": "PASS live NTVDM VDD export witness and MEM completion",
+  "trace": "PASS worker loaded NTVDMD.DLL\nEVENT received break and matching SAS base\nEVENT received break and matching SAS base\nPASS XP debug event writeback\nPASS XP debugger register round trip\nPASS NTVDM export name/ordinal query/allocate/reallocate/free\nPASS failed reallocation preserves allocation and free space\nPASS export query at matching task termination\n",
+  "initial_fixture_failures": [
+    {
+      "directory": "vdd-contract",
+      "error": "Native fixture build failed",
+      "sha256": "eca724052561932dded1ad62a80ebd34dd06217b482394ba329dc893af5b5a7b",
+      "diagnostics": [
+        "nt_vdd.obj : error LNK2019: unresolved external symbol _RcErrorDialogBox referenced in function _HostUndefinedIo",
+        "vdd-object-contract.exe : fatal error LNK1120: 1 unresolved externals"
+      ]
+    },
+    {
+      "directory": "vdd-contract-r2",
+      "error": "Native fixture build failed",
+      "sha256": "c7f6f952a9c940663562b56b49c5ecc0ff881b9b660bb0a81cd7d6ee7c2e9424",
+      "diagnostics": [
+        "ios.obj : error LNK2019: unresolved external symbol _HostUndefinedIo referenced in function _io_empty_inb",
+        "ios-object-contract.exe : fatal error LNK1120: 1 unresolved externals"
+      ]
+    }
+  ],
+  "initial_live_runner_error": "Wrong terminal-observer CLI returned64 before guest; rerun existing successful console-startup-observer path only",
+  "Full": "Not repeated; two changed mirror files since P21 Full24/24"
+}
