@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 763,
+    "nonerror_identical": 772,
+    "nonerror_different": 543,
+    "nonerror_points": 7728,
+    "nonerror_lines": 163264
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 763,
+    "nonerror_identical": 772,
+    "nonerror_different": 543,
+    "nonerror_points": 7729,
+    "nonerror_lines": 158246
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 1,
+    "nonerror_lines": -5018
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/oak/inc/winddi.h",
+      "before_points": 1,
+      "before_lines": 5020,
+      "after_points": 2,
+      "after_lines": 2,
+      "exclusions": 1
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1235,
+    "OpenNT": 80
+  }
+}

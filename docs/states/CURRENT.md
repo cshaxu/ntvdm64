@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall55/159 directories, H001-H036 and N001-N019. S15 runtime15 is the current
+overall55/159 directories, H001-H036 and N001-N019. S15 runtime16 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -154,6 +154,16 @@ N0203/7 done, four remain; overall55/159 and S15 7/14. Next winddi.h.
 Current census1315files,763exact,772nonerror same/543different,
 7728points/163264lines; delta0files,0exact,+1same,-1different,-7points/-7lines.
 1234XP/81OpenNT. Two files since P13 Full24/24; original guest unchanged.
+
+[P16 N020 DDI](../etc/evidence/t485-s1/n020-ddi.md) delivered complete XP OAK
+winddi.h, existing FLOATOBJ exclusion and two #line anchors. Cached build,
+runtime16 dual13-image26hash publication, output/font contracts, real Win16
+GDI marker and WINMINE/WRITE windows passed. N0204/7 done, three remain;
+overall55/159 and S15 7/14 unchanged. Next wingdip.h.
+Current census1315files,763exact,772nonerror same/543different,
+7729points/158246lines; delta0files,0exact,0same,0different,+1point/-5018lines.
+1235XP/80OpenNT. LF restoration exposes two #line blocks rather than one
+whole-file difference. Three files since P13 Full24/24; guest unchanged.
 
 ## S14 Closure Record
 

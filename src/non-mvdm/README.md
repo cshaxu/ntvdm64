@@ -2973,3 +2973,10 @@ N0202/7 delivered; five files remain.
 winconp.h retains complete XP declarations and original packing, with only
 three pre-existing one-line excluded arms. No nonerror difference remains.
 [Evidence](../../docs/etc/evidence/t485-s1/n020-console.md). N0203/7 delivered.
+
+### T485 S15 N020 GDI driver declarations
+
+winddi.h follows its original XP public/oak/inc path with complete declarations,
+one existing FLOATOBJ exclusion and two original-line anchors. WOW's actual
+fax object selects this header; compat font bindings keep the host SDK.
+[Evidence](../../docs/etc/evidence/t485-s1/n020-ddi.md). N0204/7 delivered.
