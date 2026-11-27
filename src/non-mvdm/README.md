@@ -2880,3 +2880,10 @@ Its original object matches the registered OpenNT-4.5 input. Keep the two
 existing excluded profiles and two active line anchors; restore original LF.
 Five original redirector consumers use the new include path. [Current evidence](../../docs/etc/evidence/t485-s1/n013.md)
 supersedes old-path registration; no new kernel DLC capability is claimed.
+
+### T485 S15 N014 PMVDM declarations
+
+The old private/windows/inc/pmvdm.h is now byte-exact XP at
+public/internal/base/inc/pmvdm.h. Original config.c retains its include and
+property bits. Remove obsolete worker/WOW include paths. [Current evidence](../../docs/etc/evidence/t485-s1/n014.md)
+supersedes the old OpenNT-4.5 path registration.

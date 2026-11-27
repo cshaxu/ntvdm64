@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall49/159 directories, H001-H036 and N001-N013. S15 runtime1 is the current
+overall50/159 directories, H001-H036 and N001-N014. S15 runtime2 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,14 +32,16 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-1/14 directories delivered; next N014. Last Full checkpoint S14 P10/runtime12;
-one completed file since that checkpoint. [P1 N013](../etc/evidence/t485-s1/n013.md)
-relocates dlcio.h to XP net/inc, preserves declarations and two exclusions,
-removes old include search paths. Cached full build, runtime1 dual13-image26hash
-publication, lifecycle fixtures and real guest NetAPI passed. Current non-guest
-mirror census1319files:byte-exact740,nonerror same742/different577,
-7761points/196407lines. P1 delta0files/0exact/0same/0different,+1point/-1468lines;
-LF restoration reveals two original-line anchors.1189 XP,130 OpenNT-family files.
+2/14 directories delivered; next N015. [P1 N013](../etc/evidence/t485-s1/n013.md)
+relocated DLC declarations to XP net/inc, retaining two original exclusions
+and verified lifecycle/guest behavior. [P2 N014](../etc/evidence/t485-s1/n014.md)
+relocates PMVDM declarations to XP base/inc byte-exact; no API/constant change.
+Cached full build, runtime2 dual13-image26hash publication, real guest NetAPI
+and Full24/24 passed. This is the50-directory checkpoint; zero audited files
+since this Full. Existing Win95 exit1 boundary retained.
+Current non-guest census1319files:byte-exact741,nonerror same743/different576,
+7760points/196327lines. P2 delta0files,+1exact,+1same,-1different,-1point,-80lines.
+1190 files use XP,129 retain registered OpenNT originals; no OpenNT-4.5 remains.
 
 ## S14 Closure Record
 

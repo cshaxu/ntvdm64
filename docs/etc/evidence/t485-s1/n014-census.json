@@ -1,0 +1,47 @@
+{
+  "before": {
+    "files": 1319,
+    "byte_identical": 740,
+    "nonerror_identical": 742,
+    "nonerror_different": 577,
+    "nonerror_points": 7761,
+    "nonerror_lines": 196407
+  },
+  "after": {
+    "files": 1319,
+    "byte_identical": 741,
+    "nonerror_identical": 743,
+    "nonerror_different": 576,
+    "nonerror_points": 7760,
+    "nonerror_lines": 196327
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -80
+  },
+  "relocated_file": {
+    "path": "src/non-mvdm/public/internal/base/inc/pmvdm.h",
+    "before_baseline": "OpenNT-4.5",
+    "before_original_blob": "e722016cb299ed40cf0356ec6bd4e95effb177ea",
+    "after_baseline": "XP",
+    "after_original_blob": "bf482ce52f77b17b7add78c4db68286b1240a79b",
+    "before_sha256": "d9bc8a4e975f9d2bc1aef89d8e8854f2dc8ad8fac53b49d6f4998bccafd4afc8",
+    "after_sha256": "6116e216def2a5692c54fff133a5aae727acfc4bca22fbbb235ff6e7c4350e89",
+    "byte_equal_before": "False",
+    "byte_equal_after": "True",
+    "points_before": "1",
+    "points_after": "0",
+    "lines_before": "80",
+    "lines_after": "0",
+    "measurement": "N014 XP byte-exact relocation"
+  },
+  "exclusions": [],
+  "baseline_counts": {
+    "XP": 1190,
+    "OpenNT": 129
+  }
+}
