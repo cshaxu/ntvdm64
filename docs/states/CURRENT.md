@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime32 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime33 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -168,6 +168,16 @@ checks and Full24/24 passed. N0222/39; overall57/159; S15 9/14.
 Census1325files,777exact,788nonerror same/537different,7798points/130239lines;
 delta0files/0exact/0same/0different/0points/-1290lines.1264XP/61OpenNT.
 Ten-file checkpoint resets to zero. Next clglobal.c, in DIR order.
+
+[P32 N022 globals](../etc/evidence/t485-s1/n022-globals.md) delivered runtime33:
+XP globals and message table/generator restored, four exact prerequisites;
+paired EDIT consumer uses XP metadata. Cached build, dual13-image26hash,
+registration, controls38/38 and actual SOL Options passed. Final shared-rule
+build matches all13 published image hashes. Test build failures and residual
+LPK provider frontier remain explicit in receipt. N0223/39; overall57/159; S15 9/14.
+Census1329files,781exact,792nonerror same/537different,7805points/127713lines;
+delta+4files/+4exact/+4same/0different,+7points/-2526lines.1269XP/60OpenNT.
+Eight changed mirror files since P31 Full24/24. Next clmenu.c. No guest change.
 
 ## S14 Closure Record
 

@@ -3051,3 +3051,8 @@ records all17 pinned directory identities, final delivery and residuals.
 T485 S15 P31 restores XP cldib.c byte-for-byte except its existing public
 bitmap host include. The retail FALSE exception filter is bound in B; all
 scaling algorithms remain original. [Bitmap evidence](../../docs/etc/evidence/t485-s1/n022-dib.md).
+
+T485 S15 P32 restores XP clglobal.c and original message metadata with the
+original listmung generator. Shared CMD/CMake generation serves production
+and control fixtures. [Globals evidence](../../docs/etc/evidence/t485-s1/n022-globals.md)
+records original identities, paired OpenNT consumers and residual boundaries.

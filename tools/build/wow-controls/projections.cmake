@@ -28,8 +28,8 @@ function(control_slice out source start end reverse_end)
 endfunction()
 set(button "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/btnctl.c")
 control_slice(globals "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clglobal.c"
-  "/****************************** Module Header" "#include \"wow_registration_provider.h\"" FALSE)
-file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/control-globals.c" CONTENT "${globals}" @ONLY)
+  "CRITICAL_SECTION gcsLookaside;" "#ifdef _JANUS_" FALSE)
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/control-globals.c" CONTENT "#include <windows.h>\n#line ${globals_line} \"${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clglobal.c\"\n${globals}" @ONLY)
 control_slice(provider "${button}" "/* Image-attach composition only:" "#line 15" FALSE)
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/button-resource-provider.c"
   CONTENT "#include \"${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_button_resource_provider.h\"\n#line ${provider_line} \"${button}\"\n${provider}" @ONLY)

@@ -2262,7 +2262,7 @@ LONG EditWndProcWorker(
      */
     if (ped->fAnsi == fAnsi ||
             (message >= WM_USER) ||
-            !gabThunkMessage[message]) {
+            !MessageTable[message].bThunkMessage) {
         return EditWndProc(pwnd, message, wParam, lParam);
     }
 

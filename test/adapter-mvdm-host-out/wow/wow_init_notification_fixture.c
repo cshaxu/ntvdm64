@@ -106,6 +106,12 @@ int __cdecl main(void)
     void *committed;
     unsigned i;
     BOOL caught = FALSE;
+    CHECK(MessageTable[WM_SETTEXT].bThunkMessage && MessageTable[WM_SETTEXT].bSyncOnlyMessage);
+    CHECK(MessageTable[WM_GETTEXT].bThunkMessage && !MessageTable[WM_PAINT].bThunkMessage);
+    CHECK(MessageTable[WM_COPYDATA].bSyncOnlyMessage && !MessageTable[WM_COPYDATA].bThunkMessage);
+    CHECK(MessageTable[LB_DIR].bThunkMessage && !MessageTable[LB_DIR].bSyncOnlyMessage);
+    CHECK(MessageTable[CB_DIR].bThunkMessage && !MessageTable[CB_DIR].bSyncOnlyMessage);
+    CHECK(MessageTable[WM_DDE_INITIATE].bThunkMessage);
     check_callback_abi();
     CHECK(wow_window_access_bind(&wow_fixture_window_access_provider));
     CHECK(wow_task_lifecycle_bind(&wow_fixture_task_lifecycle_provider));

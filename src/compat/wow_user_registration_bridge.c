@@ -31,14 +31,10 @@ BOOL WINAPI wow_registration_bind(const wow_registration_provider *value)
     return TRUE;
 }
 
-/* ADAPTER-WOW-056: UserRegisterWowHandlers is one original all-or-nothing
- * ABI transaction.  Modern USER32 exposes its historical name but rejects
- * registration, so the provider owns this narrow transport seam.  All 21
- * WOW-to-USER callbacks are retained verbatim for original owners introduced
- * by later packets.  Every 20 USER-to-WOW output slots is non-null: a slot
- * with a selected source-backed carrier is wired immediately; an otherwise
- * unimplemented slot fails explicitly and is labelled below.  No placeholder
- * reports successful work or invents USER policy. */
+/* ADAPTER-WOW-056: one copied XP input table supplies registered callbacks.
+ * The selected USER16 view retains the documented four-argument cleanup ABI;
+ * its separate XP module-unload output is unused and remains zero. Native
+ * USER32 cannot register this worker-local guest view. */
 /* The registration seam is normally silent.  An opt-in host-only witness is
  * retained because the immutable USER16 workload has no textual way to show
  * whether it reached the all-or-nothing registration call. */

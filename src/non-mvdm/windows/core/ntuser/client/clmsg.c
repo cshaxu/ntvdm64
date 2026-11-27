@@ -21,6 +21,9 @@
 #define MSGFN(func) fn ## func
 #define FNSCSENDMESSAGE CFNSCSENDMESSAGE
 
+#define PROTOS_ONLY
+#include "messages.h"
+#undef PROTOS_ONLY
 #line 23
 #ifdef DEBUG
 #line 24

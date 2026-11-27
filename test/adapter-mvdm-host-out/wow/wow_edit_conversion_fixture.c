@@ -3,8 +3,10 @@
 #include "wow_edit_entry_bindings.h"
 #include <stdio.h>
 
-extern CONST BOOLEAN gabThunkMessage[WM_USER];
-C_ASSERT(sizeof(gabThunkMessage) / sizeof(gabThunkMessage[0]) == WM_USER);
+#define PROTOS_ONLY
+#include "messages.h"
+#undef PROTOS_ONLY
+C_ASSERT(sizeof(MessageTable) / sizeof(MessageTable[0]) == WM_USER);
 
 /* Supplemental transport contract only. Link the real conversion binding
  * with these boundary doubles. This does not prove native CPD translation,
@@ -60,12 +62,12 @@ int main(void)
     CHECK(wow_edit_conversion_bind(&provider));
     /* Link the production original table, never a fixture classification.
      * EditWndProcWorker's existing >=WM_USER guard owns the upper bound. */
-    CHECK(gabThunkMessage[WM_CREATE] && gabThunkMessage[WM_SETTEXT] &&
-        gabThunkMessage[WM_GETTEXT] && gabThunkMessage[WM_GETTEXTLENGTH]);
-    CHECK(gabThunkMessage[WM_CHAR] && gabThunkMessage[EM_REPLACESEL] &&
-        gabThunkMessage[EM_GETLINE]);
-    CHECK(!gabThunkMessage[WM_PAINT] && !gabThunkMessage[WM_DESTROY] &&
-        !gabThunkMessage[EM_SETSEL] && !gabThunkMessage[WM_USER - 1]);
+    CHECK(MessageTable[WM_CREATE].bThunkMessage && MessageTable[WM_SETTEXT].bThunkMessage &&
+        MessageTable[WM_GETTEXT].bThunkMessage && MessageTable[WM_GETTEXTLENGTH].bThunkMessage);
+    CHECK(MessageTable[WM_CHAR].bThunkMessage && MessageTable[EM_REPLACESEL].bThunkMessage &&
+        MessageTable[EM_GETLINE].bThunkMessage);
+    CHECK(!MessageTable[WM_PAINT].bThunkMessage && !MessageTable[WM_DESTROY].bThunkMessage &&
+        !MessageTable[EM_SETSEL].bThunkMessage && !MessageTable[WM_USER - 1].bThunkMessage);
     for (direction = 0; direction != 2; ++direction) {
         BOOL ansi = direction == 0;
         DWORD original = (DWORD)(ULONG_PTR)(ansi ? EditWndProcW : EditWndProcA);

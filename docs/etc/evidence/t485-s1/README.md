@@ -248,3 +248,5 @@ Owner selected Professional. Use mswinnt51_en_winxpsp3provol_en_windows_xp_profe
 The [Professional binary ledger](sp3-professional-media.csv) records an independent lookup and expansion of the 67 current archive members. All 61 direct matches have identical expanded SHA-256 to the earlier Home observations; 12 match current package bytes. The six unresolved names also gave zero exact basename matches in all 28 outer CAB member lists on the Professional disc. The expanded Professional NTVDM.EXE, WOW32.DLL, VDMREDIR.DLL and NTVDMD.DLL each report 5.1.2600.5512 and have the respective hashes recorded above. The 38-entry H001 import comparison therefore applies byte-for-byte to the selected Professional debugger DLL and reference worker. Use the Professional disc for subsequent batches.
 
 - [S15 P31 N022 bitmap scaling](n022-dib.md).
+
+- [S15 P32 N022 globals and message metadata](n022-globals.md).

@@ -1,0 +1,100 @@
+{
+  "before": {
+    "files": 1325,
+    "byte_identical": 777,
+    "nonerror_identical": 788,
+    "nonerror_different": 537,
+    "nonerror_points": 7798,
+    "nonerror_lines": 130239
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 781,
+    "nonerror_identical": 792,
+    "nonerror_different": 537,
+    "nonerror_points": 7805,
+    "nonerror_lines": 127713
+  },
+  "delta": {
+    "files": 4,
+    "byte_identical": 4,
+    "nonerror_identical": 4,
+    "nonerror_different": 0,
+    "nonerror_points": 7,
+    "nonerror_lines": -2526
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_points": 1,
+      "before_lines": 2702,
+      "after_points": 8,
+      "after_lines": 161,
+      "exclusions": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "before_points": 1,
+      "before_lines": 2030,
+      "after_points": 1,
+      "after_lines": 2033,
+      "exclusions": 16
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "before_points": 1,
+      "before_lines": 5819,
+      "after_points": 1,
+      "after_lines": 5819,
+      "exclusions": 10
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_points": 1,
+      "before_lines": 5149,
+      "after_points": 1,
+      "after_lines": 5161,
+      "exclusions": 24
+    },
+    {
+      "path": "src/non-mvdm/sdktools/listmung/listmung.c",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0,
+      "addition": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/messages.h",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0,
+      "addition": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/msgdef.lst",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0,
+      "addition": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/msgdef.tpl",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0,
+      "addition": true
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1269,
+    "OpenNT": 60
+  }
+}

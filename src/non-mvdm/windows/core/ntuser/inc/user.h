@@ -2426,17 +2426,19 @@ typedef struct tagBUTNWND {
  * SysErrorBox is a 3.1 API that has no 32-bit equivalent.  It's
  * implemented for WOW in harderr.c.
  */
-#define MAX_SEB_STYLES  9  /* number of SEB_* values */
-
-#define  SEB_OK         1  /* Button with "OK".     */
-#define  SEB_CANCEL     2  /* Button with "Cancel"  */
-#define  SEB_YES        3  /* Button with "&Yes"     */
-#define  SEB_NO         4  /* Button with "&No"      */
-#define  SEB_RETRY      5  /* Button with "&Retry"   */
-#define  SEB_ABORT      6  /* Button with "&Abort"   */
-#define  SEB_IGNORE     7  /* Button with "&Ignore"  */
-#define  SEB_CLOSE      8  /* Button with "&Close"   */
-#define  SEB_HELP       9  /* Button with "&Help"    */
+#line 3450
+#define  SEB_OK         0  /* Button with "OK".     */
+#define  SEB_CANCEL     1  /* Button with "Cancel"  */
+#define  SEB_ABORT      2  /* Button with "&Abort"   */
+#define  SEB_RETRY      3  /* Button with "&Retry"   */
+#define  SEB_IGNORE     4  /* Button with "&Ignore"  */
+#define  SEB_YES        5  /* Button with "&Yes"     */
+#define  SEB_NO         6  /* Button with "&No"      */
+#define  SEB_CLOSE      7  /* Button with "&Close"   */
+#define  SEB_HELP       8  /* Button with "&Help"    */
+#define  SEB_TRYAGAIN   9  /* Button with "&Try Again"  */
+#define  SEB_CONTINUE   10 /* Button with "&Continue"   */
+#line 2449
 
 #define  SEB_DEFBUTTON  0x8000  /* Mask to make this button default */
 
@@ -2646,6 +2648,16 @@ PCURSOR ClassSetSmallIcon(
 
 void KernelBP(void);
 
+#line 3913
+typedef struct tagMSG_TABLE_ENTRY {
+    BYTE iFunction:6;
+    BYTE bThunkMessage:1;
+    BYTE bSyncOnlyMessage:1;
+} MSG_TABLE_ENTRY;
+
+extern CONST MSG_TABLE_ENTRY MessageTable[];
+
+#line 2640
 #endif
 #define OPENNT_USER_OBJECT_TYPES_SUBSET_H
 #if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
