@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: dlgmgrc.c
 *
-* Copyright (c) 1985-92, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains client side dialog functionality
 *
@@ -151,9 +151,11 @@ PWND  _GetChildControl(PWND pwndRoot, PWND pwndChild) {
 PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 {
     PWND pwndParent;
-#ifdef DEBUG
-#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#if DBG
+#line 155
+#error Unsupported original DBG branch
 #endif
+#line 157
 
     // If there is a sibbling, go for it
     if (pwndStart->spwndNext != NULL) {
@@ -172,17 +174,20 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
     // Otherwise walk up the parent chain looking for the first window with
     // a WS_EX_CONTROLPARENT parent.
 
-#ifdef DEBUG
-#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
+#if DBG
+#line 176
+#error Unsupported original DBG branch
 #else
+#line 178
     return
 #endif
         _GetChildControl(pwndRoot, pwndParent);
 
-#ifdef DEBUG
-#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
-#line 191
+#if DBG
+#line 183
+#error Unsupported original DBG branch
 #endif
+#line 192
 }
 /***************************************************************************\
 *
@@ -205,7 +210,13 @@ PWND _NextControl(
 {
     BOOL fSkip, fAncestor;
     PWND pwndLast, pwndSibblingLoop;
-
+    /* Bug 272874 - joejo
+     *
+     * Stop infinite loop by only looping a finite number of times and
+     * then bailing.
+     */
+    int nLoopCount = 0;
+    
     UserAssert (pwndRoot != NULL);
 
     if (pwndStart == NULL) {
@@ -233,6 +244,7 @@ PWND _NextControl(
     // try its spwndNext; otherwise, walk down its child chain.
     pwndSibblingLoop = pwndStart;
     do {
+        
         //If not WS_EX_CONTROLPARENT parent, done.
         if (!TestWF(pwndStart, WEFCONTROLPARENT)) {
             return pwndStart;
@@ -284,13 +296,56 @@ TryNextOne:
             fAncestor = TRUE;
         }
 
-    } while (TRUE);
+    /* Bug 272874 - joejo
+     *
+     * Stop infinite loop by only looping a finite number of times and
+     * then bailing.
+     */
+    } while (nLoopCount++ < 256 * 4);
 
     // It couldn't find one...
     return pwndRoot;
 }
 
-#line 336
+/***************************************************************************\
+* GetNextDlgTabItem
+*
+* History:
+* 19-Feb-1991 JimA      Added access check
+\***************************************************************************/
+
+
+FUNCLOG3(LOG_GENERAL, HWND, WINAPI, GetNextDlgTabItem, HWND, hwndDlg, HWND, hwnd, BOOL, fPrev)
+HWND WINAPI GetNextDlgTabItem(
+    HWND hwndDlg,
+    HWND hwnd,
+    BOOL fPrev)
+{
+
+    PWND pwnd;
+    PWND pwndDlg;
+    PWND pwndNext;
+
+    pwndDlg = ValidateHwnd(hwndDlg);
+
+    if (pwndDlg == NULL)
+        return NULL;
+
+    if (hwnd != (HWND)0) {
+        pwnd = ValidateHwnd(hwnd);
+
+        if (pwnd == NULL)
+            return NULL;
+
+    } else {
+        pwnd = (PWND)NULL;
+    }
+
+    pwndNext = _GetNextDlgTabItem(pwndDlg, pwnd, fPrev);
+
+    return (HW(pwndNext));
+}
+
 PWND _GetNextDlgTabItem(
     PWND pwndDlg,
     PWND pwnd,
@@ -344,7 +399,46 @@ AllOver:
     return pwnd;
 }
 
-#line 427
+/***************************************************************************\
+*
+*  _GetNextDlgGroupItem()
+*
+\***************************************************************************/
+
+
+FUNCLOG3(LOG_GENERAL, HWND, DUMMYCALLINGTYPE, GetNextDlgGroupItem, HWND, hwndDlg, HWND, hwndCtl, BOOL, bPrevious)
+HWND GetNextDlgGroupItem(
+    HWND hwndDlg,
+    HWND hwndCtl,
+    BOOL bPrevious)
+{
+    PWND pwndDlg;
+    PWND pwndCtl;
+    PWND pwndNext;
+
+    pwndDlg = ValidateHwnd(hwndDlg);
+
+    if (pwndDlg == NULL)
+        return 0;
+
+
+    if (hwndCtl != (HWND)0) {
+        pwndCtl = ValidateHwnd(hwndCtl);
+
+        if (pwndCtl == NULL)
+            return 0;
+    } else {
+        pwndCtl = (PWND)NULL;
+    }
+
+    if (pwndCtl == pwndDlg)
+        pwndCtl = pwndDlg;
+
+    pwndNext = _GetNextDlgGroupItem(pwndDlg, pwndCtl, bPrevious);
+
+    return (HW(pwndNext));
+}
+
 PWND _GetNextDlgGroupItem(
     PWND pwndDlg,
     PWND pwnd,

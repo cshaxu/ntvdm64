@@ -6,6 +6,8 @@
 #include "wow_edit_entry_bindings.h"
 PWND _GetNextDlgTabItem(PWND, PWND, BOOL);
 PWND _GetNextDlgGroupItem(PWND, PWND, BOOL);
+HWND WINAPI wow_original_GetNextDlgTabItem(HWND, HWND, BOOL);
+HWND WINAPI wow_original_GetNextDlgGroupItem(HWND, HWND, BOOL);
 PWND _GetDlgItem(PWND, int);
 PWND _FindDlgItem(PWND, DWORD);
 VOID xxxCheckDefPushButton(PWND, HWND, HWND);
@@ -88,6 +90,12 @@ static void verify_dialog_controls(void)
     CHECK(_GetDlgItem(&root, 3) == NULL);
     CHECK(_FindDlgItem(&root, 3) == NULL); /* Pre-4.0 direct-child contract. */
     SetWF(&root, WFWIN40COMPAT);
+    CHECK(wow_original_GetNextDlgTabItem(root.head.h, first.head.h, FALSE) == nested.head.h);
+    CHECK(wow_original_GetNextDlgTabItem(root.head.h, NULL, FALSE) == first.head.h);
+    CHECK(wow_original_GetNextDlgTabItem((HWND)99, first.head.h, FALSE) == NULL);
+    CHECK(wow_original_GetNextDlgTabItem(root.head.h, (HWND)99, FALSE) == NULL);
+    CHECK(wow_original_GetNextDlgGroupItem((HWND)99, first.head.h, FALSE) == NULL);
+    CHECK(wow_original_GetNextDlgGroupItem(root.head.h, (HWND)99, FALSE) == NULL);
     CHECK(_FindDlgItem(&root, 3) == &nested);
     CHECK(_FindDlgItem(&root, 999) == NULL);
     /* Production withdrawal keeps pinned WND storage and desktop parent,

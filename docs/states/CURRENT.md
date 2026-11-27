@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime47 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime48 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -182,7 +182,13 @@ SOL Options and Full24/24 passed. Initial fixture link failure retained.
 N02213/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
 536different,7797points/117070lines; delta0files/0exact/0same/0different/
 -25points/-36lines.1279XP/50OpenNT. P42 is the new ten-file Full checkpoint.
-Next dlgmgrc.c; no new mirror file completed since this Full.
+[P43 N022 dialog navigation](../etc/evidence/t485-s1/n022-dlgmgrc.md)
+delivers runtime48: restored XP wrappers and original bounded traversal;
+only six #line differences remain. Cached build, dual13-image26hash,
+controls40/40, CCPU window-borrow and SOL Options passed. N02214/39;
+S15 9/14 and overall57/159. Census1329files,782exact,793nonerror same/
+536different,7800points/116998lines; delta0/0/0/0/+3points/-72lines.
+1280XP/49OpenNT. One mirror since P42 Full24/24; next dmmnem.c.
 
 ## S14 Closure Record
 

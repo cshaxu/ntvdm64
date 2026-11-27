@@ -331,6 +331,16 @@ BOOL WINAPI wow_original_EndDialog(HWND, INT_PTR);
 BOOL WINAPI wow_original_IsDialogMessageA(HWND, LPMSG);
 BOOL WINAPI wow_original_IsDialogMessageW(HWND, LPMSG);
 #endif
+/* Retain the original navigation wrappers under private body symbols. No
+ * external USER32 route is redirected by these source-definition aliases. */
+#ifdef WOW_ORIGINAL_DIALOG_MANAGER
+#undef GetNextDlgTabItem
+#undef GetNextDlgGroupItem
+#define GetNextDlgTabItem wow_original_GetNextDlgTabItem
+#define GetNextDlgGroupItem wow_original_GetNextDlgGroupItem
+HWND WINAPI wow_original_GetNextDlgTabItem(HWND, HWND, BOOL);
+HWND WINAPI wow_original_GetNextDlgGroupItem(HWND, HWND, BOOL);
+#endif
 BOOL RtlMBMessageWParamCharToWCS(DWORD, PDWORD);
 PWND GetParentDialog(PWND);
 PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
