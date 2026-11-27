@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed13/48files66/645points;restored-delivered12,restored-local0,
-residual-reviewed54,unreviewed579.
+Reviewed20/48files107/645points;restored-final-verified18,restored-local0,
+residual-final-verified89,unreviewed538.
 Delivered/pushed13files66points through ae9241746.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
@@ -27,13 +27,13 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | P5 delivered3b1d831b6 |
 | 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | P5 delivered3b1d831b6 |
 | 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | P6 delivered ae9241746 |
-| 14 | src/mvdm-host/inc/dbgexp.h | 1 | Pending |
-| 15 | src/mvdm-host/inc/demexp.h | 3 | Pending |
-| 16 | src/mvdm-host/inc/doswow.h | 1 | Pending |
-| 17 | src/mvdm-host/inc/memapi.h | 5 | Pending |
-| 18 | src/mvdm-host/inc/mvdm.h | 2 | Pending |
-| 19 | src/mvdm-host/inc/softpc.h | 28 | Pending |
-| 20 | src/mvdm-host/inc/suballoc.h | 1 | Pending |
+| 14 | src/mvdm-host/inc/dbgexp.h | 1 | P7 final verified; commit/push pending |
+| 15 | src/mvdm-host/inc/demexp.h | 3 | P7 final verified; commit/push pending |
+| 16 | src/mvdm-host/inc/doswow.h | 1 | P7 final verified; commit/push pending |
+| 17 | src/mvdm-host/inc/memapi.h | 5 | P7 final verified; commit/push pending |
+| 18 | src/mvdm-host/inc/mvdm.h | 2 | P7 final verified; commit/push pending |
+| 19 | src/mvdm-host/inc/softpc.h | 28 | P7 final verified; commit/push pending |
+| 20 | src/mvdm-host/inc/suballoc.h | 1 | P7 final verified; commit/push pending |
 | 21 | src/mvdm-host/inc/vdmredir.h | 1 | Pending |
 | 22 | src/mvdm-host/inc/vrnetapi.h | 1 | Pending |
 | 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | Pending |
@@ -373,3 +373,91 @@ fix. No Full rerun. Mirror43/80->16/39;all11exclusions retained. Commit/push pen
 
 P6 committed/pushed ae9241746. Thirteenfiles66points delivered;12restored,
 54residual,579unreviewed. Census672/31619,reduction131/190. Next14dbgexp.h.
+
+## P7 files14-16 shared ABI headers
+
+dbgexp.h1/6 unchanged:three DBGNotify declarations are required cdecl between
+WOW /Gz callers and worker dbg.obj providers. Actual current product link maps
+confirm these symbols;not merely an adaptation citing itself.
+demexp.h1/108->3/13:restore XP LF from CRCRLF,keep two NTIO constants and five
+cdecl declarations,add#line1 after prefix. Constant need is demLoadDos
+unconditional sizeof expression;nt_msscs references are FE_SB-guarded and do
+not prove a non-FE requirement. Three necessary residuals remain. Formatting
+splits one whole-file block into three real blocks;owner permanently approved
+this class. No execution/preprocessing tokens changed apart from line mapping.
+doswow.h1/6 unchanged:three typed callbacks flow from wdos.c via wkman LFNInit
+to original DEM cdecl call pointers. Correct prior generic provider-direction
+wording;explicit typedef convention matches actual cdecl provider symbols.
+All three files have zero error exclusions;unmodified headers retain XP lines.
+
+Threefiles5frozen points reviewed,all residual. S12reviewed16/48files71/645points,
+12restored59residual574unreviewed. Delivered13files66points;current674/31524,
+cumulative129points285lines reduction. Only demexp formatting changed;accumulate
+into next complete-file batch per owner rule,no build or runtime gate rerun.
+Next17memapi.h. No new guest/provider/algorithm/ABI choice.
+
+## P7 files17-18 memory/shared declarations
+
+memapi.h5/10 unchanged. R00228-R00232 correspond to five actual cdecl WOW
+imports from worker nt_mem.obj/dpmiselr.obj. WOW /Gz defaults conflict without
+explicit declarations;keep minimal existing ABI declarations,not wrappers.
+mvdm.h10/18->1/1:restore original DOS EOF marker and newline tail (R00233-234),
+original macro line endings,and remove redundant stale line directives. Two
+error exclusions retained;one required post-exclusion#line remains. No
+execution token changes;actual compilation of restored EOF awaits whole batch.
+
+Reviewed18files78points:12restored-delivered2restored-local64residual567unreviewed.
+Current665/31507,cumulative138points302lines reduction. Delivered13files66points;
+P7 pending only format/EOF edits in demexp.h and mvdm.h. No runtime tests or
+build repeated. Next19softpc.h,then20suballoc.h triggers ten-file Full checkpoint
+once both whole-file reviews complete.
+
+
+## P7 files19-20 and actual ABI correction
+
+softpc.h:1/1632 ->26/122 (zero exclusions). Restore XP LF, original SB
+prototype location, redundant declarations and harmless spacing. Four frozen
+points R00235/236/243/255 restored. Twenty-four residual points retain explicit
+cross-image ABI declarations and opaque PVDM_TIB; original two-argument
+cpu_createthread is already restored by S7. No new wrappers or algorithms.
+
+Counter-review: the first cached full build disproved the initial claim that
+the i386 setter branch was unused. src/ntvdmd-dll/target.cmake selects /Di386;
+its 12 setter imports require the existing WINAPI exports supplied by
+src/ntvdm-exe/debugger/register_exports.c. Reinstated those qualifiers before
+retry. Initial build.log preserves LNK2019/LNK2001; none of these eleven frozen
+points is counted restored. Runtime verification has not yet passed.
+
+suballoc.h:1/226 ->2/4;one historical i386 error exclusion retained. Keep
+_M_IX86 selecting original Intel4096 commit geometry, backed by nt_mem.c
+4096-page ownership and suballoc commit/decommit callback sizes. Restore LF
+and redundant line directives; do not claim a reproduced 65536 failure.
+
+Whole P7 batch20/2006 ->39/162 (+19points,-1844lines), including approved
+format restoration splitting whole-file blocks. S12 current691/29775,
+reduction112points/2034lines from803/31809. Reviewed20/48files107/645points:
+12restored-delivered,6restored-local,89residual,538unreviewed. Delivered remains
+13files66points. First owner4340 failed link; retry28264 owns cached build and
+line checks. Publication and file20 Full checkpoint still pending. Next file21
+vdmredir.h only after this checkpoint delivery.
+
+
+P7 build retry passed; NTVDMD map confirms all restored stdcall imports. First
+line-check attempt selected dem.c, which does not include mvdm.h/softpc.h;
+zero witnesses correctly failed the audit. Reused actual NTVDMD preprocessing
+instead, without product changes/rebuild. Final witnesses:demexp4,mvdm4,
+softpc28,suballoc15,zero drift. Continuation26488 owns first Full on runtime8.
+Dual assets/release and O:/WINNT/SYSTEM32 publication verified26/26hashes.
+Initial link failure and audit-helper failure remain recorded,not erased.
+
+
+### P7 final verification
+
+[Receipt](s12-p7-result.json): cached full build, dual26-hash publication and
+first runtime8 Full23/23 PASS. All three Windows desktop gates, enhanced
+same-Window Alt+Enter round trips, WOW and DOS4GW/NESticle gates passed.
+Win95 retains approved exit-one boundary. Actual line witnesses51,zero drift.
+No Full retries/reruns. Six restored points and35residual points in this batch;
+total20files107points final-verified,18restored89residual538unreviewed.
+Mirror batch20/2006->39/162;S12total691/29775,reduction112/2034.
+Commit/push pending. Next21vdmredir.h;28files remain;S12 remains active.

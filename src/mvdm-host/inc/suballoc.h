@@ -30,13 +30,11 @@ Revision History:
 //   to make defining data structures easier
 //
 #ifdef i386
-#line 33
 #error Excluded unsupported historical i386 profile
 #elif defined(_M_IX86)
 #line 33
 #define COMMIT_GRANULARITY 4096
 #else
-#line 35
 #define COMMIT_GRANULARITY 65536
 #endif
 #line 37

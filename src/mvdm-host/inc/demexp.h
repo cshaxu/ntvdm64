@@ -1,5 +1,6 @@
 #define NTIO_411 "\\ntio411.sys"        // LANG_JAPANESE
 #define NTIO_409 "\\ntio.sys"           //
+#line 1
 /*++ BUILD Version: 0001
  *
  *  MVDM v1.0

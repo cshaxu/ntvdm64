@@ -19,9 +19,7 @@
 
 /* Common types, not defined in NT/WIN32
  */
-#line 22
 #ifdef H2INC
-#line 23
 #error DIVERGENCE MVDM-HOST-DIV-536: H2INC branch is not selected; see mirror register.
 #endif
 #line 36
@@ -57,12 +55,9 @@ typedef DWORD UNALIGNED *PDWORD16;
 #define HIW(l)		WORDOF(l,1)
 #define INTOF(i,n)	(((PINT)&(i))[n])
 #define UINTOF(i,n)	(((PUINT)&(i))[n])
-#line 68
 #ifndef MAKEWORD
-#line 69
 #error Excluded unsupported missing MAKEWORD SDK profile
 #endif
-#line 71
 #define MAKEDWORD(l0,h0,l1,h1)	((DWORD)MAKEWORD(l0,h0)|((DWORD)MAKEWORD(l1,h1)<<16))
 #define GETBYTE(p)	*((PBYTE)p)++
 #ifdef	i386
@@ -71,13 +66,11 @@ typedef DWORD UNALIGNED *PDWORD16;
 #define STOREWORD(d,s)	(WORD)d=(WORD)s
 #define STOREDWORD(d,s) (DWORD)d=(DWORD)s
 #else
-#line 79
 #define FETCHWORD(s)  (*(UNALIGNED WORD *)&(s))
 #define FETCHDWORD(s) (*(UNALIGNED DWORD *)&(s))
 #define STOREWORD(d,s)  *(UNALIGNED WORD *)&(d)=(WORD)s
 #define STOREDWORD(d,s) *(UNALIGNED DWORD *)&(d)=(DWORD)s
 #endif
-#line 84
 #define FETCHSHORT(s)	((SHORT)(FETCHWORD(s)))
 #define FETCHLONG(s)	((LONG)(FETCHDWORD(s)))
 #define STORESHORT(d,s) STOREWORD(d,s)
@@ -85,4 +78,4 @@ typedef DWORD UNALIGNED *PDWORD16;
 
 #define NUMEL(a)	((sizeof a)/(sizeof a[0]))
 #define OFFSETOF(t,f)	((INT)&(((t *)0)->f))
-
+

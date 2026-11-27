@@ -27,21 +27,15 @@ Revision History:
 /********** COMMON STUFF FOR MIPS AND V86 *************/
 
 /* XLATOFF */
-#line 30
 #ifdef i386
-#line 31
 #include "v86def.h"
-PX86CONTEXT getIntelRegistersPointer(VOID);
 #endif
-#line 33
 
 #include <vdm.h>
 
+extern VOID SbReinitialize(PCHAR, DWORD);
 
 /* XLATON */
-extern VOID SbReinitialize(PCHAR, DWORD);
-extern BOOL SbInitialize(VOID);
-extern VOID SbTerminate(VOID);
 extern VOID nt_block_event_thread(ULONG);
 extern VOID nt_resume_event_thread(VOID);
 /* notification of PDB(Process Data Block, A.K.A PSP) termination */
@@ -208,7 +202,6 @@ __cdecl host_simulate(
     );
 
 HANDLE
-#line 195
 host_CreateThread(
     LPSECURITY_ATTRIBUTES lpThreadAttributes,
     DWORD dwStackSize,
@@ -221,12 +214,12 @@ host_CreateThread(
 typedef struct _Vdm_Tib *PVDM_TIB;
 VOID
 __cdecl cpu_createthread(
+#line 216
     HANDLE   hThread,
     PVDM_TIB VdmTib
     );
 
 VOID
-#line 210
 host_ExitThread(
     DWORD dwExitCode
     );
@@ -242,9 +235,8 @@ void *ch_malloc(unsigned int NumBytes);
 UCHAR *__cdecl Sim32pGetVDMPointer(ULONG addr, UCHAR pm);
 #define Sim32GetVDMPointer(Addr,Size,Mode) Sim32pGetVDMPointer(Addr,Mode)
 
-#line 225
 #ifdef i386
-#line 226
+
 /********** FOR V86 BUILD *************/
 
 BOOL
@@ -690,13 +682,12 @@ char *nt_gets(char *buffer);
 #define GetVDMAddr(usSeg,usOff)  (((ULONG)usSeg << 4) + usOff)
 
 PX86CONTEXT getIntelRegistersPointer(VOID);
+
 #else
-#line 527
 
 /*********************** FOR MIPS BUILD ***************************/
 
 
-#line 531
 #define GetVDMAddr(usSeg,usOff) Sim32pGetVDMPointer((ULONG)(((ULONG)usSeg << 16) | usOff),FALSE)
 
 #define RMSEGOFFTOLIN(seg, off) (PVOID)(((ULONG)(seg) << 4) + (ULONG)(off))
@@ -747,6 +738,7 @@ extern VOID __cdecl setBP(USHORT val);
 extern VOID __cdecl setSI(USHORT val);
 extern VOID __cdecl setDI(USHORT val);
 extern VOID __cdecl setIP(USHORT val);
+#line 736
 
 extern ULONG getEAX(VOID);
 extern ULONG getECX(VOID);

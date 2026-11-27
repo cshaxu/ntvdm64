@@ -32,16 +32,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S12 Ordered Progress
 
-[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):13/48files,
-66/645points source-reviewed;12restored-delivered,0restored-local,54residual,
-579unreviewed. Delivered13files66points through ae9241746.
-P6 demsrch.c43/80->16/39 (-27/-41);11exclusions and execution tokens unchanged.
-S12 census803/31809->672/31619 (-131points/-190lines).
-[P6 receipt](../etc/evidence/t485-h-repair/s12-p6-result.json):cached build,
-285line witnesses,dual runtime7 publication,provider115/115,three DOS pressure
-cases and FCB PASS. XP test-argument repair only;committed/pushed ae9241746.
-Last Full checkpoint:file10,runtime5,23/23. No successful gate repeated.
-Nextfile14dbgexp.h;35files remain. Migration39/159;N004 gated on S13.
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):20/48files,
+107/645points final-verified;18restored,89residual,538unreviewed.
+[P7 receipt](../etc/evidence/t485-h-repair/s12-p7-result.json):cached full build,
+dual publication26/26hashes,51original-line witnesses and runtime8 Full23/23 PASS.
+Initial NTVDMD ABI restoration attempt failed and was corrected before final
+publication. Commit/push pending;last delivered13files66points ae9241746.
+S12 census803/31809->691/29775 (-112points/-2034lines).
+Next21vdmredir.h;28files remain. Last Full:file20,runtime8,23/23.
+Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
 

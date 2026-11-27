@@ -62,3 +62,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S12 P5 LFN original restoration receipt](s12-p5-result.json).
 
 [S12 P6 directory search receipt](s12-p6-result.json).
+
+[S12 P7 shared-header Full checkpoint receipt](s12-p7-result.json).
