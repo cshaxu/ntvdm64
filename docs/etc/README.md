@@ -2160,3 +2160,5 @@ post-publication targeted checks.
 - [N020 XP OAK GDI driver declarations](evidence/t485-s1/n020-ddi.md).
 
 - [N020 GDI private declarations](evidence/t485-s1/n020-gdi.md).
+
+- [N020 WOW GDI declarations](evidence/t485-s1/n020-wowgdi.md).

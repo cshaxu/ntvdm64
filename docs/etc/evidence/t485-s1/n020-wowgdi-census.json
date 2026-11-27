@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1318,
+    "byte_identical": 766,
+    "nonerror_identical": 776,
+    "nonerror_different": 542,
+    "nonerror_points": 7728,
+    "nonerror_lines": 157392
+  },
+  "after": {
+    "files": 1318,
+    "byte_identical": 767,
+    "nonerror_identical": 777,
+    "nonerror_different": 541,
+    "nonerror_points": 7727,
+    "nonerror_lines": 157354
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -38
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowgdip.h",
+      "before_points": 1,
+      "before_lines": 38,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1240,
+    "OpenNT": 78
+  }
+}

@@ -6,7 +6,7 @@
 * Created: 30-Jan-1993 13:14:57                                            *
 * Author: Charles Whitmer [chuckwh]                                        *
 *                                                                          *
-* Copyright (c) 1993 Microsoft Corporation                                 *
+* Copyright (c) Microsoft Corporation. All rights reserved.                *
 \**************************************************************************/
 
 extern BOOL GdiCleanCacheDC(HDC hdcLocal);

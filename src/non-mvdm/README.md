@@ -2987,3 +2987,9 @@ wingdip.h keeps complete XP declarations and two original C++ exclusions.
 Required w32gdip.h/w32w64a.h/w32w64.h are XP byte-exact; the original PolyPatBlt
 layout follows its XP owner rather than a copied declaration.
 [Evidence](../../docs/etc/evidence/t485-s1/n020-gdi.md). N0205/7 delivered.
+
+### T485 S15 N020 WOW GDI declarations
+
+wowgdip.h is byte-exact XP with unchanged service signatures and no local
+exclusion or line map. [Evidence](../../docs/etc/evidence/t485-s1/n020-wowgdi.md).
+N0206/7 delivered.

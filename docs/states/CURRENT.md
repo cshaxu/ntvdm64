@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall55/159 directories, H001-H036 and N001-N019. S15 runtime17 is the current
+overall55/159 directories, H001-H036 and N001-N019. S15 runtime18 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,16 +32,10 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-7/14 directories delivered; next N020. P1 N013 relocated DLC declarations;
-P2 N014 relocated PMVDM and passed Full24/24 at directory50.
-[P3 N015](../etc/evidence/t485-s1/n015.md) migrated five DDK declarations,
-including DLC's XP SDK path. Cached full build, runtime3 dual13-image26hash
-publication, two lifecycle fixtures, real guest NetAPI and all32 Video7 modes
-passed. Initial wrong-observer invocation and successful bounded retry are
-recorded. Five files since the last Full; existing Win95 exit1 boundary retained.
-Current census1319files:742byte-exact,746nonerror same/573different,
-7743points/196151lines. P3 delta0files,+1exact,+3same,-3different,-17points,
--176lines.1195XP/124OpenNT; per-file baselines remain individually registered.
+7/14 directories delivered. P1 N013 and P2 N014 are complete; directory50
+Full24/24 passed. [P3 N015](../etc/evidence/t485-s1/n015.md) completed the five
+DDK declarations with cached build, runtime3 dual publication, lifecycle,
+guest NetAPI and all32 Video7 modes. See its receipt for the observer retry and historical census.
 
 [P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md) delivered:
 align/conroute/debugfmt/nettypes/ntddvdm migrated; B Console ABI matches XP.
@@ -69,7 +63,7 @@ Full24/24 passed without retry. Ten-file checkpoint resets to zero.
 N016 now15/21 delivered,6remaining; overall51/159 and S15 3/14 remain.
 Next winbase.x. Current census1319files,750exact,755nonerror same/564different,
 7751points/190572lines; P6delta0files,+2exact,+2same,-2different,
--1point/-1547lines;1210XP/109OpenNT. P5 census remains historical.
+-1point/-1547lines;1210XP/109OpenNT.
 
 [P7 N016 tail](../etc/evidence/t485-s1/n016-tail.md) delivered: four obsolete
 files retired, two templates XP byte-exact relocated, five redundant winss
@@ -88,7 +82,7 @@ RAP11/11, guest NetAPI and Full24/24 passed without retry. Ten-file checkpoint
 resets to zero. N017 now3/19 delivered,16remaining; overall52/159 and S15 4/14.
 Next debuglib.h. Current census1315files,753exact,758nonerror same/557different,
 7744points/172161lines; delta0files,+3exact,+3same,-3different,-3points/-4014lines.
-1215XP/100OpenNT. P7 census remains historical.
+1215XP/100OpenNT.
 
 [P9 N017 middle-ten](../etc/evidence/t485-s1/n017-middle.md) delivered DIR
 positions4-13 and original private include paths. Original exclusion conditions
@@ -98,7 +92,7 @@ Ten-file checkpoint resets to zero. N017 now13/19 delivered,6remaining;
 next rxp.h. Overall52/159 and S15 4/14 remain. Current census1315files,
 756exact,762nonerror same/553different,7754points/167883lines;
 delta0files,+3exact,+4same,-4different,+10points/-4278lines (LF/#line cleanup).
-1223XP/92OpenNT. P8 census remains historical.
+1223XP/92OpenNT.
 
 [P10 N017 final-six](../etc/evidence/t485-s1/n017-tail.md) delivered: all six
 original XP paths/declarations restored, four byte-exact and two only#error.
@@ -173,6 +167,14 @@ Overall55/159, S15 7/14 unchanged. Census1318files,766exact,
 776nonerror same/542different,7728points/157392lines;
 delta+3files,+3exact,+4same/-1different,-1point/-854lines.1239XP/79OpenNT.
 Seven mirror files since P13 Full24/24 including three required dependencies.
+
+[P18 N020 WOW GDI](../etc/evidence/t485-s1/n020-wowgdi.md) delivered complete
+XP bytes with unchanged declarations. Cached build, runtime18 dual13-image
+26hash publication, output/font contracts, real Win16 GDI and WOW windows
+passed. N0206/7; next wowuserp.h. Overall55/159 and S15 7/14 unchanged.
+Census1318files,767exact,777nonerror same/541different,7727points/157354lines;
+delta0files,+1exact,+1same/-1different,-1point/-38lines.1240XP/78OpenNT.
+Eight files since P13 Full24/24; original guest unchanged.
 
 ## S14 Closure Record
 
