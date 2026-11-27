@@ -1,7 +1,7 @@
 #ifndef WOW_EDIT_DRAWING_FIXTURE_PRECOMP_H
 #define WOW_EDIT_DRAWING_FIXTURE_PRECOMP_H
 #include <windows.h>
-#include "non-mvdm/public/internal/windows/inc/wingdip.h"
+#include "non-mvdm/windows/core/w32inc/w32gdip.h"
 /* Original winuserp.h color range, not a modern extended palette. */
 #define COLOR_MAX (COLOR_INFOBK + 1)
 #include "non-mvdm/windows/core/ntuser/inc/user.h"

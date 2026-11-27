@@ -1,5 +1,5 @@
 #include "wow_button_resource_provider.h"
-#include "non-mvdm/public/internal/windows/inc/wingdip.h"
+#include "non-mvdm/windows/core/w32inc/w32gdip.h"
 #include "wow_control_draw_state.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_edit_native_bindings.h"

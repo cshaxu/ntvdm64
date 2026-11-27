@@ -63,6 +63,13 @@ wow_button_resources *WINAPI wow_button_current_resources(void)
     return &frame->resources;
 }
 
+wow_edit_context *WINAPI wow_button_current_context(void)
+{
+    wow_button_resources *resources = wow_button_current_resources();
+    wow_edit_current->oembmi = resources->bm;
+    return wow_edit_current;
+}
+
 BOOL WINAPI wow_button_atlas_blit(HDC dc, int x, int y, int width, int height,
     int source_x, int source_y, DWORD operation)
 {

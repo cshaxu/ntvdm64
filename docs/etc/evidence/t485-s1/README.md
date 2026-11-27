@@ -1,5 +1,7 @@
 # T485 S1 existing-component migration ledger
 
+[S15 P30 N022 button](n022-button.md); [P29 status snapshot](s15-p29-status.md).
+
 [S5 P4 DPMI ownership and fullscreen verification](s5-p4-dpmi-ownership.md).
 
 **Current T485 decision.** The owner approved direct use of XP source for the migration, including normal project delivery to the existing origin. Earlier S1 notes on missing distribution evidence describe the status at inventory time. They do not block any T485 source batch. The package and guest identity requirements remain in effect.

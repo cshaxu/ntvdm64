@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime30 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime31 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -71,41 +71,9 @@ runtime13 Full24/24 and census remain in its receipt.
 [P14 N020 PIF](../etc/evidence/t485-s1/n020-pif.md) delivered; package,
 PIF tests and census remain in its receipt.
 
-[P15 N020 Console](../etc/evidence/t485-s1/n020-console.md) delivered complete
-XP winconp.h declarations. Three existing one-line #error substitutions preserve
-physical original lines; no nonerror diff. Cached build, runtime15 dual13-image
-26hash publication, font/input-batch and seven actual COMMAND cases passed.
-N0203/7 done, four remain; overall55/159 and S15 7/14. Next winddi.h.
-Current census1315files,763exact,772nonerror same/543different,
-7728points/163264lines; delta0files,0exact,+1same,-1different,-7points/-7lines.
-1234XP/81OpenNT. Two files since P13 Full24/24; original guest unchanged.
-
-[P16 N020 DDI](../etc/evidence/t485-s1/n020-ddi.md) delivered complete XP OAK
-winddi.h, existing FLOATOBJ exclusion and two #line anchors. Cached build,
-runtime16 dual13-image26hash publication, output/font contracts, real Win16
-GDI marker and WINMINE/WRITE windows passed. N0204/7 done, three remain;
-overall55/159 and S15 7/14 unchanged. Next wingdip.h.
-Current census1315files,763exact,772nonerror same/543different,
-7729points/158246lines; delta0files,0exact,0same,0different,+1point/-5018lines.
-1235XP/80OpenNT. LF restoration exposes two #line blocks rather than one
-whole-file difference. Three files since P13 Full24/24; guest unchanged.
-
-[P17 N020 GDI](../etc/evidence/t485-s1/n020-gdi.md) delivered wingdip.h with
-zero nonerror diff and three required XP byte-exact PolyPatBlt headers.
-Cached build, runtime17 dual13-image26hash publication, output/font contracts,
-real Win16 GDI and WINMINE/WRITE windows passed. N0205/7; next wowgdip.h.
-Overall55/159, S15 7/14 unchanged. Census1318files,766exact,
-776nonerror same/542different,7728points/157392lines;
-delta+3files,+3exact,+4same/-1different,-1point/-854lines.1239XP/79OpenNT.
-Seven mirror files since P13 Full24/24 including three required dependencies.
-
-[P18 N020 WOW GDI](../etc/evidence/t485-s1/n020-wowgdi.md) delivered complete
-XP bytes with unchanged declarations. Cached build, runtime18 dual13-image
-26hash publication, output/font contracts, real Win16 GDI and WOW windows
-passed. N0206/7; next wowuserp.h. Overall55/159 and S15 7/14 unchanged.
-Census1318files,767exact,777nonerror same/541different,7727points/157354lines;
-delta0files,+1exact,+1same/-1different,-1point/-38lines.1240XP/78OpenNT.
-Eight files since P13 Full24/24; original guest unchanged.
+P15-P18 N020 deliveries are retained in the
+[S15 P29 status snapshot](../etc/evidence/t485-s1/s15-p29-status.md)
+and their linked per-P receipts.
 
 [P19 N020 WOW USER](../etc/evidence/t485-s1/n020-wowuser.md) delivered XP
 registration declarations; three evidenced legacy USER ABI groups remain.
@@ -182,6 +150,15 @@ Census1325files,777exact,788nonerror same/537different,7784points/135222lines;
 delta0files/+1exact/+1same/-1different/+11points/-1266lines.1262XP/63OpenNT.
 N02117/17 complete; overall57/159, S15 9/14. Six mirror files completed since
 P26 Full24/24. Next N022 USER client in DIR order; original guest unchanged.
+
+[P30 N022 button](../etc/evidence/t485-s1/n022-button.md) delivers XP button,
+paired layout/message prerequisites and native UI-state binding. Cached full
+build, runtime31 dual13-image26hash, controls38/38 and real SOL Options pass.
+Census1325files,777exact,788nonerror same/537different,7798points/131529lines;
+delta0files/0exact/0same/0different,+14points/-3693lines.1263XP/62OpenNT.
+N0221/39 complete; overall57/159, S15 9/14. Nine mirror files since P26 Full24/24;
+next cldib.c triggers Full. Paired user.h/server.c remain OpenNT until migrated.
+Original guest unchanged.
 
 ## S14 Closure Record
 

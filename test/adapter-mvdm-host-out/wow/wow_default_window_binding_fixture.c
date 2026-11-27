@@ -57,6 +57,15 @@ BOOL WINAPI wow_window_words_creation_facts(wow_window_words_binding *binding,
 LONG WINAPI wow_default_CsSendMessage(HWND window, UINT message, WPARAM wp,
     LPARAM lp, DWORD extra, DWORD function, BOOL ansi)
 {
+    if (message == WM_UPDATEUISTATE || message == WM_CHANGEUISTATE ||
+            message == WM_QUERYUISTATE) {
+        CHECK(window == state.head.h && wp == 73 && lp == 91 && extra == 0 &&
+            function == FNID_DEFWINDOWPROC && ansi == 1);
+        CHECK(GetLastError() == 456);
+        ++native_calls;
+        if (native_raises) RaiseException(0xe0447004, 0, 0, NULL);
+        return 124;
+    }
     CHECK(window == state.head.h && message == WM_CTLCOLORSTATIC && wp == 73);
     CHECK(lp == (LPARAM)replacement.head.h && extra == 0 &&
         function == FNID_DEFWINDOWPROC && ansi == 1);
@@ -224,6 +233,29 @@ int main(void)
         caught = TRUE;
     }
     CHECK(caught && native_calls == 2 && !wow_default_current);
+    /* XP controls must use the one native UI-state owner. No name lock,
+     * original default callback or surviving snapshot on return/exception. */
+    {
+        const UINT ui_messages[] = {WM_UPDATEUISTATE, WM_CHANGEUISTATE, WM_QUERYUISTATE};
+        int before = calls, native_before = native_calls;
+        native_raises = FALSE;
+        for (i = 0; i < ARRAYSIZE(ui_messages); ++i) {
+            SetLastError(456);
+            CHECK(wow_default_window_proc(&state, ui_messages[i], 73, 91, 1) == 124);
+            CHECK(calls == before && !locked && !wow_default_current);
+        }
+        CHECK(native_calls == native_before + 3);
+        native_raises = TRUE;
+        caught = FALSE;
+        __try {
+            SetLastError(456);
+            (void)wow_default_window_proc(&state, WM_UPDATEUISTATE, 73, 91, 1);
+        } __except (GetExceptionCode() == 0xe0447004 ?
+            EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+            caught = TRUE;
+        }
+        CHECK(caught && calls == before && !locked && !wow_default_current);
+    }
     printf("default_window_binding_failures=%d\n", failures);
     return failures != 0;
 }

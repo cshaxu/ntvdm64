@@ -1795,6 +1795,9 @@ typedef struct tagCURSORFIND {
 #define BFNOTIFY                0x0D40
 #define BFFLAT                  0x0D80
 
+#define ISBSTEXTOROD(pwnd) (!TestWF(pwnd, BFBITMAP) && !TestWF(pwnd, BFICON))
+#line 1825
+
 // Combos
 #define CBFSIMPLE               0x0C01
 #define CBFDROPDOWN             0x0C02
@@ -2402,6 +2405,8 @@ typedef struct tagBUTN {
     UINT buttonState;   // Leave this a word for compatibility with SetWindowWord( 0L )
     HANDLE hFont;
     HANDLE hImage;
+    UINT fPaintKbdCuesOnly : 1;
+#line 2401
 } BUTN, *PBUTN;
 
 typedef struct tagBUTNWND {

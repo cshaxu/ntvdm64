@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T485 S15 P30 XP button delivery](evidence/t485-s1/n022-button.md) records the original migration, paired ABI and final-package controls/SOL evidence.
+
+[T485 S15 P29 status snapshot](evidence/t485-s1/s15-p29-status.md) preserves the detailed status before current-packet compaction.
+
 [T485 H-series repair plan](operations/m0-t485-h-repair-plan.md) inserts ROI-ordered S6-S13 before N004; the [audit handoff](evidence/t485-h-repair/README.md) preserves every file/point assignment and experimental limits.
 
 [T485 S1 migration batches](evidence/t485-s1/README.md) indexes the three existing mirror components and their pinned file-level XP path matches.

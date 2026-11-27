@@ -138,19 +138,19 @@ static VOID WINAPI free_dialog_ds(WORD memory)
     CHECK(memory == 0x4321);
     SetLastError(44732);
 }
-static DWORD WINAPI initialize_dialog(HWND window, LONG parameter)
+/* wow_shared_user_abi.h selects WINAPI for the CCPU callback table. */
+static VOID WINAPI initialize_dialog(HWND window)
 {
     ++dialog_calls;
-    CHECK(window == (HWND)(ULONG_PTR)0x1234 && parameter == -12345);
+    CHECK(window == (HWND)(ULONG_PTR)0x1234);
     SetLastError(44733);
-    return reject ? 0 : 0x87654321;
 }
 static void exercise_original_dialog_callbacks(void)
 {
     HANDLE memory;
     callbacks.pfn16GlobalAlloc = allocate_dialog_ds;
     callbacks.pfn16GlobalFree = free_dialog_ds;
-    callbacks.pfnInitDlgCb = initialize_dialog;
+    callbacks.pfnWOWTellWOWThehDlg = initialize_dialog;
     reject = FALSE;
     memory = GetEditDS();
     CHECK((ULONG_PTR)memory == 0x4321 && GetLastError() == 44731);
@@ -159,11 +159,11 @@ static void exercise_original_dialog_callbacks(void)
     /* Original ReleaseEditDS passes LOWORD, not a native HGLOBAL/pointer. */
     ReleaseEditDS((HANDLE)(ULONG_PTR)0x98764321);
     CHECK(GetLastError() == 44732);
-    CHECK(WOWDlgInit((HWND)(ULONG_PTR)0x1234, -12345) == 0x87654321);
+    CHECK(WOWDlgInit((HWND)(ULONG_PTR)0x1234, -12345) == (DWORD)-12345);
     CHECK(GetLastError() == 44733);
     reject = TRUE;
     CHECK(GetEditDS() == NULL && GetLastError() == 44731);
-    CHECK(WOWDlgInit((HWND)(ULONG_PTR)0x1234, -12345) == 0);
+    CHECK(WOWDlgInit((HWND)(ULONG_PTR)0x1234, -12345) == (DWORD)-12345);
     CHECK(GetLastError() == 44733 && dialog_calls == 6);
 }
 int __cdecl main(void)

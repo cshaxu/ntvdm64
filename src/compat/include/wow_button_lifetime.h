@@ -22,6 +22,8 @@ VOID WINAPI wow_button_scope_leave(wow_button_scope *);
 LRESULT WINAPI wow_button_invoke(HWND, UINT, WPARAM, LPARAM, WNDPROC);
 VOID WINAPI wow_button_free_state(PLOOKASIDE, PVOID);
 wow_button_resources *WINAPI wow_button_current_resources(void);
+struct wow_edit_context;
+struct wow_edit_context *WINAPI wow_button_current_context(void);
 BOOL WINAPI wow_button_atlas_blit(HDC, int, int, int, int, int, int, DWORD);
 BOOL WINAPI wow_button_BitBltSysBmp(HDC, int, int, UINT);
 #endif

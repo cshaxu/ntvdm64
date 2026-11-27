@@ -1,0 +1,56 @@
+{
+  "before": {
+    "files": 1325,
+    "byte_identical": 777,
+    "nonerror_identical": 788,
+    "nonerror_different": 537,
+    "nonerror_points": 7784,
+    "nonerror_lines": 135222
+  },
+  "after": {
+    "files": 1325,
+    "byte_identical": 777,
+    "nonerror_identical": 788,
+    "nonerror_different": 537,
+    "nonerror_points": 7798,
+    "nonerror_lines": 131529
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 14,
+    "nonerror_lines": -3693
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "before_points": 1,
+      "before_lines": 3774,
+      "after_points": 15,
+      "after_lines": 73,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_points": 1,
+      "before_lines": 5144,
+      "after_points": 1,
+      "after_lines": 5149,
+      "exclusions": 24
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "before_points": 1,
+      "before_lines": 2964,
+      "after_points": 1,
+      "after_lines": 2967,
+      "exclusions": 14
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1263,
+    "OpenNT": 62
+  }
+}

@@ -23,7 +23,11 @@ typedef struct wow_edit_context {
     int cxSysFontChar, cySysFontChar;
     TEXTMETRICW tmSysFont;
     RECT screen_rect; /* Original clinit DISPLAY desktop-resolution input. */
-    struct { UINT BitCount; } screen; /* Original drawing display-depth input. */
+    union {
+        UINT BitCount; /* XP SERVERINFO spelling, same captured display depth. */
+        struct { UINT BitCount; } screen;
+    };
+    struct tagOEMBITMAPINFO *oembmi; /* Borrowed immutable button metadata. */
     UINT dtLBSearch, dtScroll, dtCaretBlink, ucWheelScrollLines;
     ATOM atomSysClass[20]; /* Snapshot of the existing process cleanup class table. */
     /* Dialog-only inputs; ordinary EDIT capture leaves these unused. */

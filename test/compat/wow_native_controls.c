@@ -1,5 +1,5 @@
 #include "compat/include/wow_native_controls.h"
-#include "non-mvdm/public/internal/windows/inc/wingdip.h"
+#include "non-mvdm/windows/core/w32inc/w32gdip.h"
 #include <stdio.h>
 
 static unsigned failures;

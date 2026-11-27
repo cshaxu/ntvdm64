@@ -116,6 +116,8 @@ static void setup(void)
     control.wnd.rcClient.right=control.wnd.rcClient.bottom=16;
     control.pbutn=&data; data.spwnd=&control.wnd;
 }
+LRESULT WINAPI wow_native_DefWindowProcW(HWND w,UINT m,WPARAM p,LPARAM l)
+{return DefWindowProcW(w,m,p,l);}
 HWND WINAPI wow_native_SetCapture(HWND w){return SetCapture(w);}
 HWND WINAPI wow_native_SetFocus(HWND w)
 {
@@ -134,7 +136,8 @@ LONG WINAPI wow_window_client_send_message(PWND w,UINT m,WPARAM p,LPARAM l,BOOL 
 BOOL WINAPI _GetClientRect(PWND w,LPRECT r)
 {*r=w->rcClient;OffsetRect(r,-r->left,-r->top);return TRUE;}
 LONG WINAPI wow_default_window_proc(PWND w,UINT m,WPARAM p,LPARAM l,DWORD a)
-{(void)a;return (LONG)DefWindowProcW(w->head.h,m,p,l);}
+{(void)a;if(mode==11 && m==WM_UPDATEUISTATE)retire();
+ return (LONG)DefWindowProcW(w->head.h,m,p,l);}
 static void run(int selected)
 {
     DWORD exception=0;
@@ -207,6 +210,24 @@ int __cdecl main(void)
     other=CreateWindowW(cls.lpszClassName,L"",WS_CHILD,0,0,16,16,parent,NULL,cls.hInstance,NULL);
     CHECK(other); parent_view.head.h=parent; parent_view.style=WS_POPUP;
     for(i=1;i<=10;++i)run(i);
+    /* Native UI-state is authoritative; retained WND private bits cannot
+     * substitute for it. Exercise both transitions and the XP flag binding. */
+    fired=logical_frees=0;
+    setup();
+    DefWindowProcW(expected,WM_UPDATEUISTATE,
+        MAKEWPARAM(UIS_SET,UISF_HIDEFOCUS|UISF_HIDEACCEL),0);
+    CHECK(TestWF(&control.wnd,WEFPUIFOCUSHIDDEN));
+    CHECK(TestWF(&control.wnd,WEFPUIACCELHIDDEN));
+    DefWindowProcW(expected,WM_UPDATEUISTATE,
+        MAKEWPARAM(UIS_CLEAR,UISF_HIDEFOCUS|UISF_HIDEACCEL),0);
+    CHECK(!TestWF(&control.wnd,WEFPUIFOCUSHIDDEN));
+    CHECK(!TestWF(&control.wnd,WEFPUIACCELHIDDEN));
+    mode=11;fired=0;exception=0;
+    __try { ButtonWndProcWorker(&control.wnd,WM_UPDATEUISTATE,0,0,FALSE); }
+    __except(EXCEPTION_EXECUTE_HANDLER){exception=GetExceptionCode();}
+    CHECK(fired==1 && !exception && !data.spwnd && !data.fPaintKbdCuesOnly);
+    printf("ui_state_cleanup_exception=%08lx\n",exception);
+    mode=0;ReleaseCapture();
     expected=NULL; CHECK(DestroyWindow(parent));
     CHECK(UnregisterClassW(cls.lpszClassName,cls.hInstance));
     printf("button_dc_failures=%u colors=%u cleanup=%u acquired=%u released=%u\n",failures,colors,logical_frees,acquired,released);

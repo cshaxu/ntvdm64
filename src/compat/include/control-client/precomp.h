@@ -152,6 +152,20 @@ BOOL _FChildVisible(PWND pwnd);
  * The helper implementation remains in its original mngrayc.c owner. */
 #undef oemInfo
 #define oemInfo (*wow_button_current_resources())
+#undef gpsi
+#define gpsi wow_button_current_context()
+/* XP private UI flags are owned by native USER, not our retained NT4 WND.
+ * Query its existing state through the same synchronous callout boundary. */
+#define WEFPUIFOCUSHIDDEN 0x0B80
+#define WEFPUIACCELHIDDEN 0x0B40
+#undef TestWF
+#define TestWF(window, flag) \
+    ((flag) == WEFPUIFOCUSHIDDEN || (flag) == WEFPUIACCELHIDDEN ? \
+        ((wow_native_DefWindowProcW(HWq(window), WM_QUERYUISTATE, 0, 0) & \
+          ((flag) == WEFPUIFOCUSHIDDEN ? UISF_HIDEFOCUS : UISF_HIDEACCEL)) ? LOBYTE(flag) : 0) : \
+        (*(((BYTE *)(window)) + STATEOFFSET + (int)HIBYTE(flag)) & LOBYTE(flag)))
+#define MIRRORED_HDC(dc) ((GetLayout(dc) & LAYOUT_RTL) != 0)
+#define PTR_TO_ID(p) ((USHORT)(((ULONG_PTR)(p)) & MAXWORD))
 #define BitBltSysBmp wow_button_BitBltSysBmp
 #define NtUserBitBltSysBmp wow_button_atlas_blit
 #define NtUserGetIconSize wow_control_icon_size

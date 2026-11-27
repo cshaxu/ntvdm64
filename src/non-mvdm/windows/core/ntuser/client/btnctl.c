@@ -1,7 +1,7 @@
 /**************************** Module Header ********************************\
 * Module Name: btnctl.c
 *
-* Copyright 1985-90, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * Radio Button and Check Box Handling Routines
 *
@@ -93,6 +93,7 @@ static CONST BYTE rgbType[IMAGE_BMMAX] = {
 
 typedef struct tagBTNDATA {
     LPWSTR  lpsz;       // Text string
+    PBUTN   pbutn;      // Button data
     WORD    wFlags;     // Alignment flags
 } BTNDATA, FAR * LPBTNDATA;
 
@@ -176,7 +177,7 @@ UINT IsPushButton(
 *
 \***************************************************************************/
 
-UINT GetAlignment(
+WORD GetAlignment(
     PWND pwnd)
 {
     BYTE bHorz;
@@ -286,11 +287,8 @@ HBRUSH xxxBNInitDC(
             pwnd->rcClient.bottom - pwnd->rcClient.top);
     }
 
-#ifdef LATER
-#error
-#line 248
-#endif
-#line 249
+    if (TestWF(pwnd,WEFRTLREADING))
+        SetTextAlign(hdc, TA_RTLREADING | GetTextAlign(hdc));
 
     return(hbr);
 }
@@ -308,7 +306,7 @@ HDC xxxBNGetDC(
     HDC hdc;
     PWND pwnd = pbutn->spwnd;
     if (!pwnd) return NULL;
-#line 265
+#line 264
 
     CheckLock(pwnd);
 
@@ -318,7 +316,7 @@ HDC xxxBNGetDC(
         hdc = NtUserGetDC(HWq(pwnd));
         hbr = xxxBNInitDC(pbutn, hdc);
         if (!pbutn->spwnd) { ReleaseDC(HWq(pwnd), hdc); return NULL; }
-#line 273
+#line 272
 
         if (lphbr!=NULL)
             *lphbr = hbr;
@@ -341,17 +339,15 @@ void BNReleaseDC(
 {
     PWND pwnd = pbutn->spwnd;
 
-#ifdef LATER
-#error
-#line 298
-#endif
-#line 299
+    if (pwnd && TestWF(pwnd,WEFRTLREADING))
+        SetTextAlign(hdc, GetTextAlign(hdc) & ~TA_RTLREADING);
 
     if (pbutn->hFont) {
         SelectObject(hdc, ghFontSys);
     }
 
     ReleaseDC(HW(pwnd), hdc);
+#line 302
 }
 
 /***************************************************************************\
@@ -361,21 +357,33 @@ void BNReleaseDC(
 \***************************************************************************/
 
 void xxxBNOwnerDraw(
-    PWND pwnd,
+    PBUTN pbutn,
     HDC hdc,
-    UINT itemAction,
-    UINT itemState)
+    UINT itemAction)
 {
     DRAWITEMSTRUCT drawItemStruct;
     TL tlpwndParent;
+    PWND pwnd = pbutn->spwnd;
+    UINT itemState = 0;
 
-    CheckLock(pwnd);
+    if (TestWF(pwnd, WEFPUIFOCUSHIDDEN)) {
+        itemState |= ODS_NOFOCUSRECT;
+    }
+    if (TestWF(pwnd, WEFPUIACCELHIDDEN)) {
+        itemState |= ODS_NOACCEL;
+    }
+    if (BUTTONSTATE(pbutn) & BST_FOCUS) {
+        itemState |= ODS_FOCUS;
+    }
+    if (BUTTONSTATE(pbutn) & BST_PUSHED) {
+        itemState |= ODS_SELECTED;
+    }
 
     if (TestWF(pwnd, WFDISABLED))
         itemState |= ODS_DISABLED;
 
     drawItemStruct.CtlType = ODT_BUTTON;
-    drawItemStruct.CtlID = (UINT)pwnd->spmenu;
+    drawItemStruct.CtlID = PtrToUlong(pwnd->spmenu);
     drawItemStruct.itemAction = itemAction;
     drawItemStruct.itemState = itemState;
     drawItemStruct.hwndItem = HWq(pwnd);
@@ -388,10 +396,9 @@ void xxxBNOwnerDraw(
      * IanJa:  in this case pMenu is being used as the control ID
      */
     ThreadLock(REBASEPWND(pwnd, spwndParent), &tlpwndParent);
-    SendMessage(HW(REBASEPWND(pwnd, spwndParent)), WM_DRAWITEM, (DWORD)pwnd->spmenu,
-            (LONG)&drawItemStruct);
+    SendMessage(HW(REBASEPWND(pwnd, spwndParent)), WM_DRAWITEM, (WPARAM)pwnd->spmenu,
+            (LPARAM)&drawItemStruct);
     ThreadUnlock(&tlpwndParent);
-
 }
 
 /***************************************************************************\
@@ -429,8 +436,8 @@ void BNCalcRect(
     case CBR_CHECKBOX:
         switch (align & LOBYTE(BFVERTMASK))
         {
-            case LOBYTE(BFVCENTER):
-                lprc->top = (lprc->top + lprc->bottom - oemInfo.bm[OBI_CHECK].cy) / 2;
+        case LOBYTE(BFVCENTER):
+                lprc->top = (lprc->top + lprc->bottom - gpsi->oembmi[OBI_CHECK].cy) / 2;
                 break;
 
             case LOBYTE(BFTOP):
@@ -442,8 +449,8 @@ void BNCalcRect(
                 extent.cx = dy;
 
                 // Get centered amount
-                dy = (dy - oemInfo.bm[OBI_CHECK].cy) / 2;
 
+                dy = (dy - gpsi->oembmi[OBI_CHECK].cy) / 2;
                 if ((align & LOBYTE(BFVERTMASK)) == LOBYTE(BFTOP))
                     lprc->top += dy;
                 else
@@ -452,15 +459,15 @@ void BNCalcRect(
         }
 
         if (TestWF(pwnd, BFRIGHTBUTTON))
-            lprc->left = lprc->right - oemInfo.bm[OBI_CHECK].cx;
+            lprc->left = lprc->right - gpsi->oembmi[OBI_CHECK].cx;
         else
-            lprc->right = lprc->left + oemInfo.bm[OBI_CHECK].cx;
+            lprc->right = lprc->left + gpsi->oembmi[OBI_CHECK].cx;
 
         break;
 
     case CBR_CHECKTEXT:
         if (TestWF(pwnd, BFRIGHTBUTTON)) {
-            lprc->right -= oemInfo.bm[OBI_CHECK].cx;
+            lprc->right -= gpsi->oembmi[OBI_CHECK].cx;
 
             // More spacing for 4.0 dudes
             if (TestWF(pwnd, WFWIN40COMPAT)) {
@@ -468,7 +475,7 @@ void BNCalcRect(
                 lprc->right -= extent.cx  / 2;
             }
         } else {
-            lprc->left += oemInfo.bm[OBI_CHECK].cx;
+            lprc->left += gpsi->oembmi[OBI_CHECK].cx;
 
             // More spacing for 4.0 dudes
             if (TestWF(pwnd, WFWIN40COMPAT)) {
@@ -540,8 +547,8 @@ void BNMultiExtent(
     PINT pcy)
 {
     RECT rcT;
-    UINT dtFlags = DT_CALCRECT | DT_WORDBREAK | DT_EDITCONTROL;
 
+    UINT dtFlags = DT_CALCRECT | DT_WORDBREAK | DT_EDITCONTROL;
     CopyRect(&rcT, lprcMax);
 
     // Note that since we're just calculating the maximum dimensions,
@@ -551,11 +558,17 @@ void BNMultiExtent(
 
     InflateRect(&rcT, -SYSMET(CXEDGE), -SYSMET(CYBORDER));
 
-    if ((wFlags & LOWORD(BS_HORZMASK)) == LOWORD(BS_CENTER))
+    if ((wFlags & LOBYTE(BFHORZMASK)) == LOBYTE(BFCENTER))
         dtFlags |= DT_CENTER;
 
-    if ((wFlags & LOWORD(BS_VERTMASK)) == LOWORD(BS_VCENTER))
+    if ((wFlags & LOBYTE(BFHORZMASK)) == LOBYTE(BFRIGHT))
+        dtFlags |= DT_RIGHT;
+
+    if ((wFlags & LOBYTE(BFVERTMASK)) == LOBYTE(BFVCENTER))
         dtFlags |= DT_VCENTER;
+
+    if ((wFlags & LOBYTE(BFVERTMASK)) == LOBYTE(BFBOTTOM))
+        dtFlags |= DT_BOTTOM;
 
     DrawTextExW(hdc, lpsz, cch, &rcT, dtFlags, NULL);
 
@@ -573,16 +586,29 @@ void BNMultiExtent(
 *
 \***************************************************************************/
 
-BOOL BNMultiDraw(
+BOOL CALLBACK BNMultiDraw(
     HDC hdc,
-    LPBTNDATA lpbd,
-    int cch,
+    LPARAM lData,
+    WPARAM wData,
     int cx,
     int cy)
 {
+    LPBTNDATA lpbd = (LPBTNDATA)lData;
+    int cch = (int)wData;
     RECT rcT;
     UINT dtFlags = DT_WORDBREAK | DT_EDITCONTROL;
+    PBUTN pbutn = lpbd->pbutn;
 
+    if (TestWF(pbutn->spwnd, WEFPUIACCELHIDDEN)) {
+        dtFlags |= DT_HIDEPREFIX;
+    } else if (pbutn->fPaintKbdCuesOnly){
+        dtFlags |= DT_PREFIXONLY;
+    }
+
+    if (TestWF(pbutn->spwnd, WEFRIGHT)) {
+        dtFlags |= DT_RIGHT;
+    }
+    
     rcT.left    = 0;
     rcT.top     = 0;
     rcT.right   = cx;
@@ -590,24 +616,24 @@ BOOL BNMultiDraw(
 
     // Horizontal alignment
     UserAssert(DT_LEFT == 0);
-    switch (lpbd->wFlags & LOWORD(BS_HORZMASK)) {
-        case LOWORD(BS_CENTER):
+    switch (lpbd->wFlags & LOBYTE(BFHORZMASK)) {
+        case LOBYTE(BFCENTER):
             dtFlags |= DT_CENTER;
             break;
 
-        case LOWORD(BS_RIGHT):
+        case LOBYTE(BFRIGHT):
             dtFlags |= DT_RIGHT;
             break;
     }
 
     // Vertical alignment
     UserAssert(DT_TOP == 0);
-    switch (lpbd->wFlags & LOWORD(BS_VERTMASK)) {
-        case LOWORD(BS_VCENTER):
+    switch (lpbd->wFlags & LOBYTE(BFVERTMASK)) {
+        case LOBYTE(BFVCENTER):
             dtFlags |= DT_VCENTER;
             break;
 
-        case LOWORD(BS_BOTTOM):
+        case LOBYTE(BFBOTTOM):
             dtFlags |= DT_BOTTOM;
             break;
     }
@@ -631,7 +657,7 @@ BOOL xxxBNSetCapture(
     BUTTONSTATE(pbutn) |= codeMouse;
 
     if (!pwnd) return FALSE;
-#line 583
+#line 610
     CheckLock(pwnd);
 
     if (!(BUTTONSTATE(pbutn) & BST_CAPTURED)) {
@@ -666,7 +692,7 @@ void xxxButtonNotifyParent(
     TL tlpwndParent;
     PWND pwndParent;            // Parent if it exists
     if (pwnd->fnid & FNID_STATUS_BITS) return;
-#line 616
+#line 643
 
     CheckLock(pwnd);
 
@@ -680,7 +706,7 @@ void xxxButtonNotifyParent(
      */
     ThreadLock(pwndParent, &tlpwndParent);
     SendMessage(HW(pwndParent), WM_COMMAND,
-            MAKELONG(pwnd->spmenu, code), (LONG)HWq(pwnd));
+            MAKELONG(PTR_TO_ID(pwnd->spmenu), code), (LPARAM)HWq(pwnd));
     ThreadUnlock(&tlpwndParent);
 }
 
@@ -701,13 +727,13 @@ void xxxBNReleaseCapture(
     PWND pwnd = pbutn->spwnd;
 
     if (!pwnd) return;
-#line 649
+#line 676
     CheckLock(pwnd);
 
     if (BUTTONSTATE(pbutn) & BST_PUSHED) {
         SendMessageWorker(pwnd, BM_SETSTATE, FALSE, 0, FALSE);
         if (!pbutn->spwnd) return;
-#line 653
+#line 680
         if (fCheck) {
             switch (TestWF(pwnd, BFTYPEMASK)) {
             case BS_AUTOCHECKBOX:
@@ -719,7 +745,7 @@ void xxxBNReleaseCapture(
                 }
                 SendMessageWorker(pwnd, BM_SETCHECK, check, 0, FALSE);
                 if (!pbutn->spwnd) return;
-#line 663
+#line 690
                 break;
 
             case BS_AUTORADIOBUTTON:
@@ -732,7 +758,7 @@ void xxxBNReleaseCapture(
                         SendMessage(HW(pwndT), BM_SETCHECK, (pwnd == pwndT), 0L);
                     }
                     if (!pbutn->spwnd) { ThreadUnlock(&tlpwndT); return; }
-#line 674
+#line 701
                     pwndT = _GetNextDlgGroupItem(REBASEPWND(pwndT, spwndParent),
                             pwndT, FALSE);
                     ThreadUnlock(&tlpwndT);
@@ -786,7 +812,7 @@ void xxxBNDrawText(
     UINT    pbfPush;
     PWND    pwnd = pbutn->spwnd;
     if (!pwnd) return;
-#line 726
+#line 753
 
     bStyle = TestWF(pwnd, BFTYPEMASK);
 
@@ -801,9 +827,9 @@ void xxxBNDrawText(
         IntersectClipRect(hdc, rc.left, rc.top, rc.right, rc.bottom);
 
         //
-        // This is because we were too stupid to have WM_CTLCOLOR,
-        // CTLCOLOR_BTN actually set up the damned button colors.  For
-        // old apps, CTLCOLOR_BTN needs to work like CTLCOLOR_STATIC.
+        // This is because we don't have WM_CTLCOLOR / CTLCOLOR_BTN
+        // actually set up the button colors.  For old apps, CTLCOLOR_BTN
+        // needs to work like CTLCOLOR_STATIC.
         //
         SetBkColor(hdc, SYSRGB(3DFACE));
         SetTextColor(hdc, SYSRGB(BTNTEXT));
@@ -821,6 +847,7 @@ void xxxBNDrawText(
 
     // Alignment
     bdt.wFlags = GetAlignment(pwnd);
+    bdt.pbutn = pbutn;
 
     // Bail if we have nothing to draw
     if (TestWF(pwnd, BFBITMAP)) {
@@ -857,6 +884,7 @@ UseImageForName:
         cch    = pwnd->strName.Length / sizeof(WCHAR);
 
         if (TestWF(pwnd, BFMULTILINE)) {
+
             bdt.lpsz = lpName;
 
             BNMultiExtent(bdt.wFlags, hdc, &rc, lpName, cch, &cx, &cy);
@@ -870,8 +898,18 @@ UseImageForName:
             PSMGetTextExtent(hdc, lpName, cch, &size);
             cx = size.cx;
             cy = size.cy;
+            /*
+             * If the control doesn't need underlines, set DST_HIDEPREFIX and
+             * also do not show the focus indicator
+             */
             dsFlags = DST_PREFIXTEXT;
+            if (TestWF(pwnd, WEFPUIACCELHIDDEN)) {
+                dsFlags |= DSS_HIDEPREFIX;
+            } else if (pbutn->fPaintKbdCuesOnly) {
+                dsFlags |= DSS_PREFIXONLY;
+            }
         }
+
 
         //
         // Add on a pixel or two of vertical space to make centering
@@ -972,7 +1010,7 @@ UseImageForName:
         // Use brush and colors currently selected into hdc when we grabbed
         // color
         //
-        DrawState(hdc, hbr, (DRAWSTATEPROC)BNMultiDraw, (LPARAM)lpName,
+        DrawState(hdc, hbr, BNMultiDraw, (LPARAM)lpName,
             (WPARAM)cch, x, y, cx, cy,
             dsFlags);
     }
@@ -988,33 +1026,36 @@ DrawFocus:
             // WM_SETFOCUS or WM_KILL FOCUS message.  So, we can check the
             // new state of the focus by looking at the BUTTONSTATE bits
             // which are set before this procedure is called.
-            xxxBNOwnerDraw(pwnd, hdc, ODA_FOCUS,
-                    (BUTTONSTATE(pbutn) & BST_FOCUS ? ODS_FOCUS : 0) |
-                    (BUTTONSTATE(pbutn) & BST_PUSHED ? ODS_SELECTED : 0));
+            xxxBNOwnerDraw(pbutn, hdc, ODA_FOCUS);
         } else {
-            // Let focus rect always hug edge of push buttons.  We already
-            // have the client area setup for push buttons, so we don't have
-            // to do anything.
-            if (!pbfPush) {
-                RECT rcClient;
+            // Don't draw the focus if underlines are not turned on
+            if (!TestWF(pwnd, WEFPUIFOCUSHIDDEN)) {
 
-                _GetClientRect(pwnd, &rcClient);
-                if (bStyle == LOBYTE(BS_USERBUTTON))
-                    CopyRect(&rc, &rcClient);
-                else {
-                    // Try to leave a border all around text.  That causes
-                    // focus to hug text.
-                    rc.top = max(rcClient.top, y-SYSMET(CYBORDER));
-                    rc.bottom = min(rcClient.bottom, rc.top + SYSMET(CYEDGE) + cy);
+                // Let focus rect always hug edge of push buttons.  We already
+                // have the client area setup for push buttons, so we don't have
+                // to do anything.
+                if (!pbfPush) {
 
-                    rc.left = max(rcClient.left, x-SYSMET(CXBORDER));
-                    rc.right = min(rcClient.right, rc.left + SYSMET(CXEDGE) + cx);
-                }
-            } else
-                InflateRect(&rc, -SYSMET(CXBORDER), -SYSMET(CYBORDER));
+                    RECT rcClient;
 
-            // Are back & fore colors set properly?
-            DrawFocusRect(hdc, &rc);
+                    _GetClientRect(pwnd, &rcClient);
+                    if (bStyle == LOBYTE(BS_USERBUTTON))
+                        CopyRect(&rc, &rcClient);
+                    else {
+                        // Try to leave a border all around text.  That causes
+                        // focus to hug text.
+                        rc.top = max(rcClient.top, y-SYSMET(CYBORDER));
+                        rc.bottom = min(rcClient.bottom, rc.top + SYSMET(CYEDGE) + cy);
+
+                        rc.left = max(rcClient.left, x-SYSMET(CXBORDER));
+                        rc.right = min(rcClient.right, rc.left + SYSMET(CXEDGE) + cx);
+                    }
+                } else
+                    InflateRect(&rc, -SYSMET(CXBORDER), -SYSMET(CYBORDER));
+
+                // Are back & fore colors set properly?
+                DrawFocusRect(hdc, &rc);
+            }
         }
     }
 }
@@ -1072,18 +1113,19 @@ void xxxButtonDrawCheck(
             break;
     }
 
-    rc.right = rc.left + oemInfo.bm[bm].cx;
-    rc.bottom = rc.top + oemInfo.bm[bm].cy;
+    rc.right = rc.left + gpsi->oembmi[bm].cx;
+    rc.bottom = rc.top + gpsi->oembmi[bm].cy;
 
     ThreadLockAlways(pwnd->spwndParent, &tlpwnd);
     pwndParent = REBASEPWND(pwnd, spwndParent);
     PaintRect(HW(pwndParent), HWq(pwnd), hdc, hbr, &rc);
     ThreadUnlock(&tlpwnd);
 
-    if (TestWF(pwnd, BFFLAT) && (oemInfo.BitCount != 1)) {
+    if (TestWF(pwnd, BFFLAT) && gpsi->BitCount != 1) {
         flags |= DFCS_MONO | DFCS_FLAT;
         DrawFrameControl(hdc, &rc, DFC_BUTTON, flags);
     } else {
+
         switch (flags & (DFCS_CHECKED | DFCS_PUSHED | DFCS_INACTIVE))
         {
         case 0:
@@ -1113,18 +1155,27 @@ void xxxButtonDrawCheck(
             // the exterior keeps the same color as the window's background
             DWORD clrTextSave = SetTextColor(hdc, 0x00000000L);
             DWORD clrBkSave   = SetBkColor(hdc, 0x00FFFFFFL);
-            POEMBITMAPINFO pOem = oemInfo.bm + OBI_RADIOMASK;
+            POEMBITMAPINFO pOem = gpsi->oembmi + OBI_RADIOMASK;
 
             NtUserBitBltSysBmp(hdc, rc.left, rc.top, pOem->cx, pOem->cy,
                     pOem->x, pOem->y, SRCAND);
-            pOem = oemInfo.bm + bm;
+
+            pOem = gpsi->oembmi + bm;
             NtUserBitBltSysBmp(hdc, rc.left, rc.top, pOem->cx, pOem->cy,
                     pOem->x, pOem->y, SRCINVERT);
 
             SetTextColor(hdc, clrTextSave);
             SetBkColor(hdc, clrBkSave);
         } else {
-            BitBltSysBmp(hdc, rc.left, rc.top, bm);
+            POEMBITMAPINFO pOem = gpsi->oembmi + bm;
+            DWORD dwROP = 0;
+
+            // We do not want to mirror the check box.
+            if (MIRRORED_HDC(hdc)) {
+                dwROP = NOMIRRORBITMAP;
+            }
+            NtUserBitBltSysBmp(hdc, rc.left, rc.top, pOem->cx, pOem->cy,
+                    pOem->x, pOem->y, SRCCOPY | dwROP);
         }
     }
 }
@@ -1189,29 +1240,31 @@ void xxxDrawButton(
     UINT state = 0;
     PWND pwnd = pbutn->spwnd;
 
-    if (BUTTONSTATE(pbutn) & BST_CHECKMASK)
-        state = DFCS_CHECKED;
-
     if (BUTTONSTATE(pbutn) & BST_PUSHED)
         state |= DFCS_PUSHED;
 
-    if (TestWF(pwnd, WFWIN40COMPAT))
-        flags = BF_SOFT;
+    if (!pbutn->fPaintKbdCuesOnly) {
+        if (BUTTONSTATE(pbutn) & BST_CHECKMASK)
+            state |= DFCS_CHECKED;
 
-    if (TestWF(pwnd, BFFLAT))
-        flags |= BF_FLAT | BF_MONO;
+        if (TestWF(pwnd, WFWIN40COMPAT))
+            flags = BF_SOFT;
 
-    _GetClientRect(pwnd, &rc);
+        if (TestWF(pwnd, BFFLAT))
+            flags |= BF_FLAT | BF_MONO;
 
-    if (pbfPush & PBF_DEFAULT) {
-        DrawFrame(hdc, &rc, 1, DF_WINDOWFRAME);
-        InflateRect(&rc, -SYSMET(CXBORDER), -SYSMET(CYBORDER));
+        _GetClientRect(pwnd, &rc);
 
-        if (state & DFCS_PUSHED)
-            flags |= BF_FLAT;
+        if (pbfPush & PBF_DEFAULT) {
+            DrawFrame(hdc, &rc, 1, DF_WINDOWFRAME);
+            InflateRect(&rc, -SYSMET(CXBORDER), -SYSMET(CYBORDER));
+
+            if (state & DFCS_PUSHED)
+                flags |= BF_FLAT;
+        }
+
+        DrawPushButton(hdc, &rc, state, flags);
     }
-
-    DrawPushButton(hdc, &rc, state, flags);
 
     xxxBNDrawText(pbutn, hdc, DBT_TEXT | (BUTTONSTATE(pbutn) &
            BST_FOCUS ? DBT_FOCUS : 0), (state & DFCS_PUSHED));
@@ -1242,10 +1295,10 @@ void xxxBNPaint(
     hbr = xxxBNInitDC(pbutn, hdc);
 
     if (!pbutn->spwnd) return;
-#line 1180
+#line 1234
     bsWnd = TestWF(pwnd, BFTYPEMASK);
     pbfPush = IsPushButton(pwnd);
-    if (!pbfPush) {
+    if (!pbfPush && !pbutn->fPaintKbdCuesOnly) {
         _GetClientRect(pwnd, &rc);
 
         if ((bsWnd != LOBYTE(BS_OWNERDRAW)) &&
@@ -1269,7 +1322,9 @@ void xxxBNPaint(
         if (!pbfPush) {
             xxxBNDrawText(pbutn, hdc,
                 DBT_TEXT | (BUTTONSTATE(pbutn) & BST_FOCUS ? DBT_FOCUS : 0), FALSE);
-            xxxButtonDrawCheck(pbutn, hdc, hbr);
+            if (!pbutn->fPaintKbdCuesOnly) {
+                xxxButtonDrawCheck(pbutn, hdc, hbr);
+            }
             break;
         }
         /*
@@ -1303,21 +1358,21 @@ void xxxBNPaint(
         break;
 
     case BS_OWNERDRAW:
-        xxxBNOwnerDraw(pwnd, hdc, ODA_DRAWENTIRE,
-                ((BUTTONSTATE(pbutn) & BST_FOCUS) ? ODS_FOCUS : 0) |
-                ((BUTTONSTATE(pbutn) & BST_PUSHED) ? ODS_SELECTED : 0));
+        xxxBNOwnerDraw(pbutn, hdc, ODA_DRAWENTIRE);
         break;
 
     case BS_GROUPBOX:
-        BNCalcRect(pwnd, hdc, &rc, CBR_GROUPFRAME, 0);
-        DrawEdge(hdc, &rc, EDGE_ETCHED, BF_RECT |
-            (TestWF(pwnd, BFFLAT) ? BF_FLAT | BF_MONO : 0));
+        if (!pbutn->fPaintKbdCuesOnly) {
+            BNCalcRect(pwnd, hdc, &rc, CBR_GROUPFRAME, 0);
+            DrawEdge(hdc, &rc, EDGE_ETCHED, BF_RECT |
+                (TestWF(pwnd, BFFLAT) ? BF_FLAT | BF_MONO : 0));
 
-        BNCalcRect(pwnd, hdc, &rc, CBR_GROUPTEXT, 0);
-        ThreadLock(pwnd->spwndParent, &tlpwndParent);
-        pwndParent = REBASEPWND(pwnd, spwndParent);
-        PaintRect(HW(pwndParent), HWq(pwnd), hdc, hbr, &rc);
-        ThreadUnlock(&tlpwndParent);
+            BNCalcRect(pwnd, hdc, &rc, CBR_GROUPTEXT, 0);
+            ThreadLock(pwnd->spwndParent, &tlpwndParent);
+            pwndParent = REBASEPWND(pwnd, spwndParent);
+            PaintRect(HW(pwndParent), HWq(pwnd), hdc, hbr, &rc);
+            ThreadUnlock(&tlpwndParent);
+        }
 
         /*
          * FillRect(hdc, &rc, hbrBtn);
@@ -1336,8 +1391,18 @@ void xxxBNPaint(
         SelectObject(hdc, ghFontSys);
     }
 }
-
-
+/***************************************************************************\
+* RepaintButton
+*
+\***************************************************************************/
+void RepaintButton (PBUTN pbutn)
+{
+    HDC hdc = xxxBNGetDC(pbutn, NULL);
+    if (hdc != NULL) {
+        xxxBNPaint(pbutn, hdc);
+        BNReleaseDC(pbutn, hdc);
+    }
+}
 /***************************************************************************\
 * ButtonWndProc
 *
@@ -1346,7 +1411,7 @@ void xxxBNPaint(
 * History:
 \***************************************************************************/
 
-LONG APIENTRY ButtonWndProcWorker(
+LRESULT APIENTRY ButtonWndProcWorker(
     PWND pwnd,
     UINT message,
     WPARAM wParam,
@@ -1698,15 +1763,16 @@ SetCheck:
                     /*
                      * Only notify for drawing if state has changed..
                      */
-                    xxxBNOwnerDraw(pwnd, hdc, ODA_SELECT,
-                        (BUTTONSTATE(pbutn)&BST_FOCUS ? ODS_FOCUS : 0) |
-                            (wParam ? ODS_SELECTED : 0));
+                    xxxBNOwnerDraw(pbutn, hdc, ODA_SELECT);
                 }
             } else {
                 xxxButtonDrawNewState(pbutn, hdc, hbr, wOldState);
             }
 
             BNReleaseDC(pbutn, hdc);
+        }
+        if (wOldState != (BOOL)(BUTTONSTATE(pbutn) & BST_PUSHED)) {
+            NotifyWinEvent(EVENT_OBJECT_STATECHANGE, hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
         }
         break;
 
@@ -1754,17 +1820,20 @@ CheckIt:
                     }
                     BNReleaseDC(pbutn, hdc);
                 }
+
+                NotifyWinEvent(EVENT_OBJECT_STATECHANGE, hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
             }
             break;
         }
         break;
 
     case BM_SETSTYLE:
-        NtUserAlterWindowStyle(hwnd, BS_TYPEMASK, wParam);
+        NtUserAlterWindowStyle(hwnd, BS_TYPEMASK, (DWORD)wParam);
 
         if (lParam) {
             NtUserInvalidateRect(hwnd, NULL, TRUE);
         }
+        NotifyWinEvent(EVENT_OBJECT_STATECHANGE, hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
         break;
 
     case WM_SETTEXT:
@@ -1790,8 +1859,10 @@ CheckIt:
         }
 
         if (!pbutn->spwnd) break;
-#line 1726
+#line 1796
         lResult = _DefSetText(hwnd, (LPWSTR)lParam, (BOOL)fAnsi);
+
+        NotifyWinEvent(EVENT_OBJECT_NAMECHANGE, hwnd, OBJID_WINDOW, INDEXID_CONTAINER);
         goto DoEnable;
 
         /*
@@ -1800,11 +1871,7 @@ CheckIt:
     case WM_ENABLE:
         lResult = 0L;
 DoEnable:
-        if (IsVisible(pwnd)) {
-            hdc = NtUserGetDC(hwnd);
-            xxxBNPaint(pbutn, hdc);
-            BNReleaseDC(pbutn, hdc);
-        }
+        RepaintButton(pbutn);
         return lResult;
 
     case WM_SETFONT:
@@ -1816,7 +1883,7 @@ DoEnable:
         break;
 
     case WM_GETFONT:
-        return (LONG)pbutn->hFont;
+        return (LRESULT)pbutn->hFont;
 
     case BM_GETIMAGE:
     case BM_SETIMAGE:
@@ -1831,7 +1898,7 @@ DoEnable:
                     NtUserInvalidateRect(hwnd, NULL, TRUE);
                 }
             }
-            return (LONG)hOld;
+            return (LRESULT)hOld;
         }
         break;
 
@@ -1850,27 +1917,60 @@ DoEnable:
         // Stripping these bits cause a GP Fault in OBEX.
         // For win3.1 guys, I use the old code to strip the style bits.
         //
-        if(TestWF(pwnd, WFWIN31COMPAT))
-          {
+        if (TestWF(pwnd, WFWIN31COMPAT)) {
             if(((!TestWF(pwnd, WFWIN40COMPAT)) &&
                 (((LOBYTE(pwnd->style)) & (LOBYTE(~BS_LEFTTEXT))) == LOBYTE(BS_USERBUTTON))) ||
                (TestWF(pwnd, WFWIN40COMPAT) &&
                (bsWnd == LOBYTE(BS_USERBUTTON))))
-              {
+            {
                 // BS_USERBUTTON is no longer allowed for 3.1 and beyond.
                 // Just turn to normal push button.
                 NtUserAlterWindowStyle(hwnd, BS_TYPEMASK, 0);
                 RIPMSG0(RIP_WARNING, "BS_USERBUTTON no longer supported");
-              }
-          }
+            }
+        }
         if (TestWF(pwnd,WEFRIGHT)) {
             NtUserAlterWindowStyle(hwnd, BS_RIGHT | BS_RIGHTBUTTON, BS_RIGHT | BS_RIGHTBUTTON);
         }
-        // FALL THRU
+        goto CallDWP;
+
+    case WM_INPUTLANGCHANGEREQUEST:
+
+        //
+        // #115190
+        // If the window is one of controls on top of dialogbox,
+        // let the parent dialog handle it.
+        //
+        if (TestwndChild(pwnd) && pwnd->spwndParent) {
+            PWND pwndParent = REBASEPWND(pwnd, spwndParent);
+            if (pwndParent) {
+                PCLS pclsParent = REBASEALWAYS(pwndParent, pcls);
+
+                UserAssert(pclsParent != NULL);
+                if (pclsParent->atomClassName == gpsi->atomSysClass[ICLS_DIALOG]) {
+                    RIPMSG0(RIP_VERBOSE, "Button: WM_INPUTLANGCHANGEREQUEST is sent to parent.\n");
+                    return SendMessageWorker(pwndParent, message, wParam, lParam, FALSE);
+                }
+            }
+        }
+        goto CallDWP;
+
+    case WM_UPDATEUISTATE:
+        {
+            DefWindowProcWorker(pwnd, message, wParam, lParam, fAnsi);
+            if (!pbutn->spwnd) break;
+#line 1894
+            if (ISBSTEXTOROD(pwnd)) {
+                pbutn->fPaintKbdCuesOnly = TRUE;
+                RepaintButton(pbutn);
+                pbutn->fPaintKbdCuesOnly = FALSE;
+            }
+        }
+        break;
 
     default:
 CallDWP:
-        return (LONG)DefWindowProcWorker(pwnd, message, wParam, lParam, fAnsi);
+        return DefWindowProcWorker(pwnd, message, wParam, lParam, fAnsi);
     }
 
     return 0L;
@@ -1879,7 +1979,7 @@ CallDWP:
 /***************************************************************************\
 \***************************************************************************/
 
-LONG WINAPI ButtonWndProcA(
+LRESULT WINAPI ButtonWndProcA(
     HWND hwnd,
     UINT message,
     WPARAM wParam,
@@ -1901,7 +2001,7 @@ LONG WINAPI ButtonWndProcA(
     return ButtonWndProcWorker(pwnd, message, wParam, lParam, TRUE);
 }
 
-LONG WINAPI ButtonWndProcW(
+LRESULT WINAPI ButtonWndProcW(
     HWND hwnd,
     UINT message,
     WPARAM wParam,

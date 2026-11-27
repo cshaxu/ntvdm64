@@ -65,6 +65,12 @@ static LONG invoke_default(wow_window_words_binding *binding, struct tagWND * st
     struct tagWND * locked;
     LONG result = 0;
     DWORD error = GetLastError();
+    /* Native USER owns UI-state propagation and input-modality policy.
+     * Do not maintain a second copy in the retained original WND view. */
+    if (message == WM_UPDATEUISTATE || message == WM_CHANGEUISTATE ||
+            message == WM_QUERYUISTATE)
+        return wow_default_CsSendMessage(wow_window_access_current()->window_handle(state),
+            message, wp, lp, 0, wow_window_access_current()->default_function, ansi);
     if (message != WM_GETTEXT && message != WM_GETTEXTLENGTH)
         return default_provider(state, message, wp, lp, ansi);
     /* The original caller's ThreadLock equivalent already retains this
