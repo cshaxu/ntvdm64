@@ -1,0 +1,31 @@
+{
+  "before": {
+    "files": 1324,
+    "byte_identical": 775,
+    "nonerror_identical": 786,
+    "nonerror_different": 538,
+    "nonerror_points": 7750,
+    "nonerror_lines": 150814
+  },
+  "after": {
+    "files": 1325,
+    "byte_identical": 776,
+    "nonerror_identical": 787,
+    "nonerror_different": 538,
+    "nonerror_points": 7766,
+    "nonerror_lines": 138569
+  },
+  "delta": {
+    "files": 1,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": 0,
+    "nonerror_points": 16,
+    "nonerror_lines": -12245
+  },
+  "baseline_counts": {
+    "XP": 1258,
+    "OpenNT": 67
+  },
+  "status": "final build, dual publication and targeted verification passed"
+}

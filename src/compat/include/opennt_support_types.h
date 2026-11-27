@@ -21,6 +21,9 @@
 #endif
 #include <windows.h>
 #include <winternl.h>
+#include "section_image_information.h"
+/* Native SSPI status declaration, shared/sspi.h. */
+typedef LONG SECURITY_STATUS;
 
 /* XP ntdef.h:1019; native declaration prerequisite. */
 typedef enum _TIMER_TYPE {

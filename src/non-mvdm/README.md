@@ -3029,3 +3029,10 @@ S15 P26: ntregapi.h restores XP registry declarations and C++ wrappers.
 Both actual native compile contexts require two SDK type omissions and four
 import-attribute omissions; original function signatures remain intact.
 [Evidence](../../docs/etc/evidence/t485-s1/n021-registry.md).
+
+T485 S15 P27 restores the complete pinned XP ntrtl.h declaration framework
+and original ntrtlstringandbuffer.h prerequisite. SDK duplicate units, four
+SDK memory-macro conflicts and x86 RtlFirstEntrySList calling convention are
+measured in [RTL evidence](../../docs/etc/evidence/t485-s1/n021-rtl.md).
+Existing rejected branches and original diagnostic lines remain; obsolete B
+RTL redeclarations are removed. No algorithm or original guest is changed.

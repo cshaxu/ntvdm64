@@ -24,20 +24,7 @@
 #endif
 #include "compat/include/base_classifier_path.h"
 #define RtlDosPathNameToNtPathName_U OpenNtBaseDosPathNameToNtPathName_U
-typedef struct _SECTION_IMAGE_INFORMATION {
-    PVOID TransferAddress;
-    ULONG ZeroBits;
-    SIZE_T MaximumStackSize, CommittedStackSize;
-    ULONG SubSystemType;
-    union {
-        struct { USHORT SubSystemMinorVersion, SubSystemMajorVersion; };
-        ULONG SubSystemVersion;
-    };
-    ULONG GpValue;
-    USHORT ImageCharacteristics, DllCharacteristics, Machine;
-    BOOLEAN ImageContainsCode, Spare1;
-    ULONG LoaderFlags, Reserved[2];
-} SECTION_IMAGE_INFORMATION;
+#include "section_image_information.h"
 #define SectionImageInformation 1
 NTSTATUS NTAPI NtCreateSection(PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, PLARGE_INTEGER, ULONG, ULONG, HANDLE);
 NTSTATUS NTAPI NtQuerySection(HANDLE, ULONG, PVOID, ULONG, PULONG);
