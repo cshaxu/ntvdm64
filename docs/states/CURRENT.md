@@ -37,7 +37,7 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 [P7 receipt](../etc/evidence/t485-h-repair/s12-p7-result.json):cached full build,
 dual publication26/26hashes,51original-line witnesses and runtime8 Full23/23 PASS.
 Initial NTVDMD ABI restoration attempt failed and was corrected before final
-publication. Commit/push pending;last delivered13files66points ae9241746.
+publication. P7 committed/pushed c1b02e99f;20files107points delivered.
 S12 census803/31809->691/29775 (-112points/-2034lines).
 Next21vdmredir.h;28files remain. Last Full:file20,runtime8,23/23.
 Migration39/159;N004 gated on S13.

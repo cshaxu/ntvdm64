@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P7",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime8",
   "files": {
     "dbgexp.h": "dc3d1a67832acdcb17672e1534023a43ac93b86cdbfca4bf0b10222f64aff9a2",
@@ -389,7 +389,8 @@
       ]
     },
     "win95_boundary": "approved knownExitOne; not return zero",
-    "logs": "build\\t485-s12\\p7\\final"
+    "logs": "build\\t485-s12\\p7\\final",
+    "governance": "PASS final documentation governance and relative links"
   },
   "attempts": [
     {
@@ -404,5 +405,6 @@
       "owner": 26488,
       "result": "Actual NTVDMD preprocessing supplies missing witnesses. No further product rebuild; dual publication and first Full23/23 PASS."
     }
-  ]
+  ],
+  "commit": "c1b02e99f"
 }

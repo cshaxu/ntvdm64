@@ -8,7 +8,7 @@ each file before delivery. Default original valid;retains need real evidence.
 
 Reviewed20/48files107/645points;restored-final-verified18,restored-local0,
 residual-final-verified89,unreviewed538.
-Delivered/pushed13files66points through ae9241746.
+Delivered/pushed20files107points through c1b02e99f.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -27,13 +27,13 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | P5 delivered3b1d831b6 |
 | 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | P5 delivered3b1d831b6 |
 | 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | P6 delivered ae9241746 |
-| 14 | src/mvdm-host/inc/dbgexp.h | 1 | P7 final verified; commit/push pending |
-| 15 | src/mvdm-host/inc/demexp.h | 3 | P7 final verified; commit/push pending |
-| 16 | src/mvdm-host/inc/doswow.h | 1 | P7 final verified; commit/push pending |
-| 17 | src/mvdm-host/inc/memapi.h | 5 | P7 final verified; commit/push pending |
-| 18 | src/mvdm-host/inc/mvdm.h | 2 | P7 final verified; commit/push pending |
-| 19 | src/mvdm-host/inc/softpc.h | 28 | P7 final verified; commit/push pending |
-| 20 | src/mvdm-host/inc/suballoc.h | 1 | P7 final verified; commit/push pending |
+| 14 | src/mvdm-host/inc/dbgexp.h | 1 | P7 delivered c1b02e99f |
+| 15 | src/mvdm-host/inc/demexp.h | 3 | P7 delivered c1b02e99f |
+| 16 | src/mvdm-host/inc/doswow.h | 1 | P7 delivered c1b02e99f |
+| 17 | src/mvdm-host/inc/memapi.h | 5 | P7 delivered c1b02e99f |
+| 18 | src/mvdm-host/inc/mvdm.h | 2 | P7 delivered c1b02e99f |
+| 19 | src/mvdm-host/inc/softpc.h | 28 | P7 delivered c1b02e99f |
+| 20 | src/mvdm-host/inc/suballoc.h | 1 | P7 delivered c1b02e99f |
 | 21 | src/mvdm-host/inc/vdmredir.h | 1 | Pending |
 | 22 | src/mvdm-host/inc/vrnetapi.h | 1 | Pending |
 | 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | Pending |
@@ -461,3 +461,6 @@ No Full retries/reruns. Six restored points and35residual points in this batch;
 total20files107points final-verified,18restored89residual538unreviewed.
 Mirror batch20/2006->39/162;S12total691/29775,reduction112/2034.
 Commit/push pending. Next21vdmredir.h;28files remain;S12 remains active.
+
+P7 product committed/pushed c1b02e99f. Twentyfiles107points delivered;
+18restored89residual538unreviewed. Work proceeds to file21vdmredir.h.
