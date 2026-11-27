@@ -17,7 +17,7 @@ HMENU WINAPI wow_user_load_menu_indirect(const MENUTEMPLATEW *);
 /* The retained parser's allocation, insertion and failure destruction must
  * use the same task-associated native boundary as the WOW menu thunks. */
 #include "wow_menu_native_bindings.h"
-/* Exact private declarations from OpenNT public/internal/windows/inc/winuserp.h
+/* Exact private declarations from XP SP1 public/internal/windows/inc/winuserp.h
  * and ntuser/client/usercli.h. Native menu objects remain USER32-owned. */
 #define MF_CHANGE_VALID (MF_INSERT | MF_CHANGE | MF_APPEND | MF_DELETE | \
     MF_REMOVE | MF_BYCOMMAND | MF_BYPOSITION | MF_SEPARATOR | MF_ENABLED | \
@@ -25,11 +25,11 @@ HMENU WINAPI wow_user_load_menu_indirect(const MENUTEMPLATEW *);
     MF_STRING | MF_BITMAP | MF_OWNERDRAW | MF_POPUP | MF_MENUBARBREAK | \
     MF_MENUBREAK | MF_UNHILITE | MF_HILITE | MF_SYSMENU)
 #define MF_VALID (MF_CHANGE_VALID | MF_HELP | MF_MOUSESELECT)
-#define MFT_MASK 0x00034B64L
+#define MFT_MASK 0x00036B64L
 #define MFS_MASK 0x0000108BL
 #define MFR_POPUP 0x01
 #define MFR_END 0x80
-#define MFT_OLDAPI_MASK 0x00004B64L
+#define MFT_OLDAPI_MASK 0x00006B64L
 #define MFS_OLDAPI_MASK 0x0000008BL
 typedef struct {
     DWORD dwHelpID;
@@ -46,8 +46,30 @@ typedef struct {
 #define NtUserDestroyMenu DestroyMenu
 #define NtUserSetMenuContextHelpId SetMenuContextHelpId
 /* Original callers always insert by position; no private MENU is emulated. */
-#define NtUserThunkedMenuItemInfo(menu, item, position, insert, info, str, ansi) \
+#define NtUserThunkedMenuItemInfo(menu, item, position, insert, info, str) \
     InsertMenuItemW(menu, item, position, info)
+/* XP clmenu validation declarations; menu/GDI handles stay native. */
+#define FUNCLOG2(a, b, c, d, e, f, g, h)
+#define VALIDATIONFNNAME(name)
+#define VALIDATIONFAIL(value) goto InvalidParameter;
+#define VALIDATIONERROR(result) InvalidParameter: SetLastError(ERROR_INVALID_PARAMETER); return result;
+#define UserAssert(condition) ((void)0)
+#define SIZEOFMENUITEMINFO95 FIELD_OFFSET(MENUITEMINFO, hbmpItem)
+#define MIIM_MASK 0x000001FF
+#define MNS_VALID 0xFC000000
+#define MIM_MASK 0x8000001F
+#define MFT_NONSTRING 0x00000904L
+#ifndef MAXUSHORT
+#define MAXUSHORT 0xffff
+#endif
+#define MENUAPI_GET 1
+#define HBMMENU_MAX ((HBITMAP)12)
+#define IS_PTR(p) ((((ULONG_PTR)(p)) & ~MAXUSHORT) != 0)
+#define VALIDATEHMENU IsMenu
+#define GdiValidateHandle(handle) (GetObjectType(handle) != 0)
+#define ThunkedMenuItemInfo(menu, item, position, insert, info, ansi) \
+    InsertMenuItemW(menu, item, position, info)
+#define NtUserSetMenuFlagRtoL wow_menu_native_SetMenuFlagRtoL
 #define RIPERR1(error, level, format, value) SetLastError(error)
 #define RIPMSG0(level, message) ((void)0)
 #endif

@@ -2,7 +2,7 @@
 *
 * Module Name: clmenu.c
 *
-* Copyright (c) 1985-92, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * Menu Loading Routines
 *
@@ -34,7 +34,7 @@ LPBYTE MenuLoadWinTemplates(
 {
     HMENU hMenu;
     UINT menuFlags = 0;
-    long menuId = 0;
+    ULONG_PTR menuId = 0;
     LPWSTR lpmenuText;
     MENUITEMINFO    mii;
     UNICODE_STRING str;
@@ -68,10 +68,14 @@ LPBYTE MenuLoadWinTemplates(
              * Some Win3.1 and Win95 16 bit apps (chessmaster, mavis typing) know that
              * dwItemData for MFT_OWNERDRAW items is a pointer to a string in the resource data.
              * So WOW has given us the proper pointer from the 16 bit resource.
+             *
+             * Sundown Note:
+             * __unaligned unsigned long value pointed by lpMenuTemplate is zero-extended to
+             * update lpmenuText. WOW restrictions.
              */
             if ((menuFlags & MFT_OWNERDRAW)
                     && (GetClientInfo()->dwTIFlags & TIF_16BIT)) {
-                lpmenuText = (LPWSTR)(*(DWORD UNALIGNED *)lpMenuTemplate);
+                lpmenuText = (LPWSTR)ULongToPtr( (*(DWORD UNALIGNED *)lpMenuTemplate) );
                 /*
                  * We'll skip one WCHAR later; so skip only the difference now.
                  */
@@ -97,14 +101,11 @@ LPBYTE MenuLoadWinTemplates(
 
         RtlZeroMemory(&mii, sizeof(mii));
         mii.cbSize = sizeof(MENUITEMINFO);
-#ifdef MEMPHIS_MENUS
-#error
-#line 102
-#else
-#line 103
-        mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;
-#endif // MEMPHIS_MENUS
-#line 105
+        mii.fMask = MIIM_ID | MIIM_STATE | MIIM_FTYPE;
+        if (lpmenuText) {
+            mii.fMask |= MIIM_STRING;
+        }
+
         if (menuFlags & MF_POPUP) {
             mii.fMask |= MIIM_SUBMENU;
             lpMenuTemplate = MenuLoadWinTemplates(lpMenuTemplate,
@@ -136,19 +137,15 @@ LPBYTE MenuLoadWinTemplates(
         if (menuFlags & MFT_OWNERDRAW)
         {
             mii.fMask |= MIIM_DATA;
-            mii.dwItemData = (DWORD) lpmenuText;
+            mii.dwItemData = (ULONG_PTR) lpmenuText;
             lpmenuText = 0;
         }
         mii.dwTypeData = (LPWSTR) lpmenuText;
         mii.cch = (UINT)-1;
-        mii.wID = menuId;
-#ifdef MEMPHIS_MENUS
-#error
-#line 144
-#endif // MEMPHIS_MENUS
-#line 145
+        mii.wID = (UINT)menuId;
+
         if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,
-                    &mii, lpmenuText ? &str : NULL, FALSE)) {
+                    &mii, lpmenuText ? &str : NULL)) {
             if (menuFlags & MF_POPUP)
                 NtUserDestroyMenu(mii.hSubMenu);
             goto memoryerror;
@@ -181,7 +178,8 @@ memoryerror:
 PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
     PMENUITEMTEMPLATE2 lpMenuTemplate,
     HMENU *phMenu,
-    WORD wResInfo)
+    WORD wResInfo,
+    UINT mftRtl)
 {
     HMENU hMenu;
     HMENU hSubMenu;
@@ -210,16 +208,9 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
 
         RtlZeroMemory(&mii, sizeof(mii));
         mii.cbSize = sizeof(MENUITEMINFO);
-#ifdef MEMPHIS_MENUS
-#error
-#line 210
-#else
-#line 211
-        mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;
-#endif // MEMPHIS_MENUS
-#line 213
+        mii.fMask = MIIM_ID | MIIM_STATE | MIIM_FTYPE ;
 
-        mii.fType = lpMenuTemplate->fType;
+        mii.fType = lpMenuTemplate->fType | mftRtl;
         if (mii.fType & ~MFT_MASK) {
             RIPERR1(ERROR_INVALID_DATA, RIP_WARNING, "Menu Type flags %lX are invalid", mii.fType);
             goto memoryerror;
@@ -240,15 +231,12 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
         if (dwHelpID) {
             NtUserSetMenuContextHelpId(hMenu,dwHelpID);
         }
-#ifdef MEMPHIS_MENUS
-#error
-#line 241
-#else
-#line 242
-        lpmenuText = lpMenuTemplate->mtString[0] ?
-                lpMenuTemplate->mtString : NULL;
-#endif // MEMPHIS_MENUS
-#line 245
+        if (lpMenuTemplate->mtString[0]) {
+            lpmenuText = lpMenuTemplate->mtString;
+            mii.fMask |= MIIM_STRING;
+        } else {
+            lpmenuText = NULL;
+        }
         RtlInitUnicodeString(&str, lpmenuText);
 
         mii.dwTypeData = (LPWSTR) lpmenuText;
@@ -264,14 +252,24 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
         if (mii.fType & MFT_OWNERDRAW)
         {
             mii.fMask |= MIIM_DATA;
-            mii.dwItemData = (DWORD) mii.dwTypeData;
+            mii.dwItemData = (ULONG_PTR) mii.dwTypeData;
             mii.dwTypeData = 0;
+        }
+
+        /*
+         * If MFT_RIGHTORDER is specified then all subsequent
+         * menus are right-to-left as well.
+         */
+        if (mii.fType & MFT_RIGHTORDER)
+        {
+            mftRtl = MFT_RIGHTORDER;
+            NtUserSetMenuFlagRtoL(hMenu);
         }
 
         if (wResInfo & MFR_POPUP) {
             mii.fMask |= MIIM_SUBMENU;
             lpMenuTemplate = MenuLoadChicagoTemplates(lpMenuTemplate,
-                    &hSubMenu, MFR_POPUP);
+                    &hSubMenu, MFR_POPUP, mftRtl);
             if (lpMenuTemplate == NULL)
                 goto memoryerror;
             mii.hSubMenu = hSubMenu;
@@ -287,13 +285,8 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
 
         mii.cch = (UINT)-1;
         mii.wID = menuId;
-#ifdef MEMPHIS_MENUS
-#error
-#line 285
-#endif // MEMPHIS_MENUS
-#line 286
         if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,
-                    &mii, &str, FALSE)) {
+                    &mii, &str)) {
             if (wResInfo & MFR_POPUP)
                 NtUserDestroyMenu(mii.hSubMenu);
             goto memoryerror;
@@ -345,11 +338,11 @@ HMENU CreateMenuFromResource(
     lpMenuTemplate += menuTemplateHeaderSize;
     switch (menuTemplateVersion) {
     case 0:
-        MenuLoadWinTemplates(lpMenuTemplate, (HMENU *)&hMenu);
+        MenuLoadWinTemplates(lpMenuTemplate, &hMenu);
         break;
 
     case 1:
-        MenuLoadChicagoTemplates((PMENUITEMTEMPLATE2)lpMenuTemplate, (HMENU *)&hMenu, 0);
+        MenuLoadChicagoTemplates((PMENUITEMTEMPLATE2)lpMenuTemplate, &hMenu, 0, 0);
         break;
     }
     return hMenu;
@@ -364,8 +357,8 @@ HMENU CreateMenuFromResource(
 * 10-Mar-1996 ChrisWil  Created.
 \***************************************************************************/
 
-#line 364
 
+#line 367
 /***************************************************************************\
 * LoadMenu (API)
 *
@@ -411,6 +404,8 @@ HMENU CommonLoadMenu(
     return (hMenu);
 }
 
+
+FUNCLOG2(LOG_GENERAL, HMENU, WINAPI, LoadMenuA, HINSTANCE, hmod, LPCSTR, lpName)
 HMENU WINAPI LoadMenuA(
     HINSTANCE hmod,
     LPCSTR lpName)
@@ -423,6 +418,8 @@ HMENU WINAPI LoadMenuA(
         return NULL;
 }
 
+
+FUNCLOG2(LOG_GENERAL, HMENU, WINAPI, LoadMenuW, HINSTANCE, hmod, LPCWSTR, lpName)
 HMENU WINAPI LoadMenuW(
     HINSTANCE hmod,
     LPCWSTR lpName)
@@ -434,15 +431,223 @@ HMENU WINAPI LoadMenuW(
     else
         return NULL;
 }
+/***************************************************************************\
+* InternalInsertMenuItem
+*
+* History:
+*  09/20/96 GerardoB - Created
+\***************************************************************************/
+BOOL InternalInsertMenuItem (HMENU hMenu, UINT uID, BOOL fByPosition, LPCMENUITEMINFO lpmii)
+{
+ return ThunkedMenuItemInfo(hMenu, uID, fByPosition, TRUE, (LPMENUITEMINFOW)lpmii, FALSE);
+}
 
-#ifdef MEMPHIS_MENUS
-#error
-#line 674
-#endif // MEMPHIS_MENUS
-#line 675
+/***************************************************************************\
+* ValidateMENUITEMINFO() -
+*   it converts and validates a MENUITEMINFO95 or a new-MENUITEMINFO-with-old-flags
+*     to a new MENUITEMINFO -- this way all internal code can assume one look for the
+*   structure
+*
+* History:
+*  12-08-95 Ported from Nashville - jjk
+*  07-19-96 GerardoB - Fixed up for 5.0
+\***************************************************************************/
+BOOL ValidateMENUITEMINFO(LPMENUITEMINFO lpmiiIn, LPMENUITEMINFO lpmii, DWORD dwAPICode)
+{
 
-#ifdef MEMPHIS_MENU_WATERMARKS
-#error
-#line 754
-#endif // MEMPHIS_MENU_WATERMARKS
-#line 755
+    VALIDATIONFNNAME(ValidateMENUITEMINFO)
+    BOOL fOldApp;
+
+    if (lpmiiIn == NULL) {
+        VALIDATIONFAIL(lpmiiIn);
+    }
+
+    /*
+     * In order to map the old flags to the new ones, we might have to modify
+     *  the lpmiiIn structure. So we make a copy to avoid breaking anyone.
+     */
+    fOldApp = (lpmiiIn->cbSize == SIZEOFMENUITEMINFO95);
+    UserAssert(SIZEOFMENUITEMINFO95 < sizeof(MENUITEMINFO));
+    RtlCopyMemory(lpmii, lpmiiIn, SIZEOFMENUITEMINFO95);
+    if (fOldApp) {
+        lpmii->cbSize = sizeof(MENUITEMINFO);
+        lpmii->hbmpItem = NULL;
+    } else if (lpmiiIn->cbSize == sizeof(MENUITEMINFO)) {
+        lpmii->hbmpItem = lpmiiIn->hbmpItem;
+    } else {
+        VALIDATIONFAIL(lpmiiIn->cbSize);
+    }
+
+
+    if (lpmii->fMask & ~MIIM_MASK) {
+        VALIDATIONFAIL(lpmii->fMask);
+    } else if ((lpmii->fMask & MIIM_TYPE)
+            && (lpmii->fMask & (MIIM_FTYPE | MIIM_STRING | MIIM_BITMAP))) {
+        /*
+         * Don't let them mix new and old flags
+         */
+        VALIDATIONFAIL(lpmii->fMask);
+    }
+
+    /*
+     * No more validation needed for Get calls
+     */
+    if (dwAPICode == MENUAPI_GET) {
+        /*
+         * Map MIIM_TYPE for old apps doing a Get.
+         * Keep the MIIM_TYPE flag so we'll know this guy passed the old flags.
+         * GetMenuItemInfo uses lpmii->hbmpItem to determine if a bitmap
+         *  was returned. So we NULL it out here. The caller is using the
+         *  old flags so he shouldn't care about it.
+         */
+        if (lpmii->fMask & MIIM_TYPE) {
+            lpmii->fMask |= MIIM_FTYPE | MIIM_BITMAP | MIIM_STRING;
+            lpmii->hbmpItem = NULL;
+        }
+        return TRUE;
+    }
+
+    /*
+     * Map MIIM_TYPE to MIIM_FTYPE
+     */
+    if (lpmii->fMask & MIIM_TYPE) {
+        lpmii->fMask |= MIIM_FTYPE;
+    }
+
+    if (lpmii->fMask & MIIM_FTYPE) {
+        if (lpmii->fType & ~MFT_MASK) {
+            VALIDATIONFAIL(lpmii->fType);
+        }
+        /*
+         * If using MIIM_TYPE, Map MFT_BITMAP to MIIM_BITMAP
+         *  and MFT_NONSTRING to MIIM_STRING.
+         * Old applications couldn't use string and bitmap simultaneously
+         *  so setting one implies clearing the other.
+         */
+        if (lpmii->fMask & MIIM_TYPE) {
+            if (lpmii->fType & MFT_BITMAP) {
+                /*
+                 * Don't display a warning. A lot of shell menus hit this
+                 * if (!fOldApp) {
+                 *     VALIDATIONOBSOLETE(MFT_BITMAP, MIIM_BITMAP);
+                 *  }
+                 */
+                lpmii->fMask |= MIIM_BITMAP | MIIM_STRING;
+                lpmii->hbmpItem = (HBITMAP)lpmii->dwTypeData;
+                lpmii->dwTypeData = 0;
+            } else if (!(lpmii->fType & MFT_NONSTRING)) {
+                /*
+                 * Don't display a warning. A lot of shell menus hit this
+                 * if (!fOldApp) {
+                 *     VALIDATIONOBSOLETE(MFT_STRING, MIIM_STRING);
+                 *  }
+                 */
+                lpmii->fMask |= MIIM_BITMAP | MIIM_STRING;
+                lpmii->hbmpItem = NULL;
+            }
+        } else if (lpmii->fType & MFT_BITMAP) {
+            /*
+             * Don't let them mix new and old flags
+             */
+            VALIDATIONFAIL(lpmii->fType);
+        }
+    }
+
+    if ((lpmii->fMask & MIIM_STATE) && (lpmii->fState & ~MFS_MASK)){
+        VALIDATIONFAIL(lpmii->fState);
+    }
+
+    if (lpmii->fMask & MIIM_CHECKMARKS) {
+        if ((lpmii->hbmpChecked != NULL) && !GdiValidateHandle((HBITMAP)lpmii->hbmpChecked)) {
+            VALIDATIONFAIL(lpmii->hbmpChecked);
+        }
+        if ((lpmii->hbmpUnchecked != NULL) && !GdiValidateHandle((HBITMAP)lpmii->hbmpUnchecked)) {
+            VALIDATIONFAIL(lpmii->hbmpUnchecked);
+        }
+    }
+
+    if (lpmii->fMask & MIIM_SUBMENU) {
+        if ((lpmii->hSubMenu != NULL) && !VALIDATEHMENU(lpmii->hSubMenu)) {
+            VALIDATIONFAIL(lpmii->hSubMenu);
+        }
+    }
+
+    /*
+     * Warning: NULL lpmii->hbmpItem accepted as valid (or the explorer breaks)
+     */
+    if (lpmii->fMask & MIIM_BITMAP) {
+        if ((lpmii->hbmpItem != HBMMENU_CALLBACK)
+                && (lpmii->hbmpItem >= HBMMENU_MAX)
+                && !GdiValidateHandle(lpmii->hbmpItem)) {
+
+            /*
+             * Compatibility hack
+             */
+            if (((HBITMAP)LOWORD(HandleToUlong(lpmii->hbmpItem)) >= HBMMENU_MAX) || !IS_PTR(lpmii->hbmpItem)) {
+                VALIDATIONFAIL(lpmii->hbmpItem);
+            }
+        }
+    }
+
+    /*
+     * Warning: No dwTypeData / cch validation
+     */
+
+    return TRUE;
+
+    VALIDATIONERROR(FALSE);
+}
+
+/***************************************************************************\
+* ValidateMENUINFO() -
+*
+* History:
+*  07-22-96 GerardoB - Added header and Fixed up for 5.0
+\***************************************************************************/
+
+BOOL ValidateMENUINFO(LPCMENUINFO lpmi, DWORD dwAPICode)
+{
+    VALIDATIONFNNAME(ValidateMENUINFO)
+
+    if (lpmi == NULL) {
+        VALIDATIONFAIL(lpmi);
+    }
+
+    if (lpmi->cbSize != sizeof(MENUINFO)) {
+        VALIDATIONFAIL(lpmi->cbSize);
+    }
+
+    if (lpmi->fMask & ~MIM_MASK) {
+        VALIDATIONFAIL(lpmi->fMask);
+    }
+
+    /*
+     * No more validation needed for Get calls
+     */
+    if (dwAPICode == MENUAPI_GET){
+        return TRUE;
+    }
+
+    if ((lpmi->fMask & MIM_STYLE) && (lpmi->dwStyle & ~MNS_VALID)) {
+        VALIDATIONFAIL(lpmi->dwStyle);
+    }
+
+    if (lpmi->fMask & MIM_BACKGROUND) {
+        if ((lpmi->hbrBack != NULL)
+                && !GdiValidateHandle((HBRUSH)lpmi->hbrBack)) {
+
+            VALIDATIONFAIL(lpmi->hbrBack);
+        }
+    }
+
+    return TRUE;
+
+    VALIDATIONERROR(FALSE);
+}
+/***************************************************************************\
+* GetMenuInfo
+*
+* History:
+*  07-22-96 GerardoB - Added header and Fixed up for 5.0
+\***************************************************************************/
+

@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime33 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime35 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -83,13 +83,8 @@ Ten-file checkpoint resets to zero. Next N021. Win95 exit1 boundary retained.
 Census1318files,767exact,777nonerror same/541different,7731points/156836lines;
 delta0files,0exact,0same,0different,+4points/-518lines.1241XP/77OpenNT.
 
-[P20 N021 first-three](../etc/evidence/t485-s1/n021-first.md) delivered:
-callconv remains XP-exact; devioctl/dlcapi restore XP with zero nonerror diff.
-Cached build, runtime20 dual13-image26hash publication, RAP11/11, lifecycle
-and real guest NetAPI passed. N0213/17; next nt.h. Overall56/159, S15 8/14.
-Census1318files,768exact,779nonerror same/539different,7729points/154750lines;
-delta0files,+1exact,+2same/-2different,-2points/-2086lines.1243XP/75OpenNT.
-Three reviewed files since P19 Full24/24; no guest change.
+[P20 N021 first-three](../etc/evidence/t485-s1/n021-first.md) delivered runtime20;
+its receipt retains targeted verification, original identities and census.
 
 [P21 N021 NT entry](../etc/evidence/t485-s1/n021-nt.md) delivered:
 nt.h XP framework plus six exact prerequisite headers; SDK and local RTL
@@ -178,6 +173,14 @@ LPK provider frontier remain explicit in receipt. N0223/39; overall57/159; S15 9
 Census1329files,781exact,792nonerror same/537different,7805points/127713lines;
 delta+4files/+4exact/+4same/0different,+7points/-2526lines.1269XP/60OpenNT.
 Eight changed mirror files since P31 Full24/24. Next clmenu.c. No guest change.
+
+[P33 N022 menu](../etc/evidence/t485-s1/n022-menu.md) delivered runtime35:
+XP menu parsing, RTL and validation retained; native menu ownership boundary
+leaves3points/49lines (-819lines). Cached build, dual13-image26hash, menu
+resource/validation/RTL and real SOL Options passed. N0224/39; overall57/159;
+S15 9/14. Census1329files,781exact,792nonerror same/537different,
+7807points/126894lines; delta0files/0exact/0same/0different,+2points/-819lines.
+1270XP/59OpenNT. Nine mirrors since P31 Full; next clmsg.c triggers Full.
 
 ## S14 Closure Record
 

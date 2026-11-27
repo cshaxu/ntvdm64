@@ -6,6 +6,18 @@
 #include "wow_user_task_lifecycle.h"
 #include "compat/include/wow_page_domain.h"
 
+/* Original XP NtUserSetMenuFlagRtoL has the same one-HMENU native ABI.
+ * The native menu owner sets MFRTL; no private MENU layout is re-created. */
+BOOL WINAPI wow_menu_native_SetMenuFlagRtoL(HMENU menu)
+{
+    typedef BOOL (WINAPI *set_rtl_fn)(HMENU);
+    HMODULE module = GetModuleHandleW(L"win32u.dll");
+    set_rtl_fn set_rtl = module ? (set_rtl_fn)GetProcAddress(module,
+        "NtUserSetMenuFlagRtoL") : NULL;
+    if (!set_rtl) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED); return FALSE; }
+    return set_rtl(menu);
+}
+
 static wow_user_runtime_thread *menu_context(void)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();

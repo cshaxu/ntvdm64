@@ -211,9 +211,13 @@ if(EXISTS "${lifecycle_worker}/lifecycle-inputs.txt")
   file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/original-menu-convert.inc"
     CONTENT "#include \"menu-macros.inc\"\n#include \"menu-converter.inc\"\n" @ONLY)
   ntvdm_function_body(menu_cover "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clres.c" WOWFindResourceExWCover)
-  ntvdm_source_projection("original-menu-resource-inputs.inc"
-    "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clmenu.c"
-    "HMENU CommonLoadMenu(" "" "${menu_cover}\n" FALSE)
+  set(menu_inputs "${menu_cover}\n")
+  foreach(name IN ITEMS CommonLoadMenu LoadMenuA LoadMenuW)
+    ntvdm_function_body(menu_body "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clmenu.c" ${name})
+    string(APPEND menu_inputs "${menu_body}\n")
+  endforeach()
+  file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/original-menu-resource-inputs.inc"
+    CONTENT "${menu_inputs}" @ONLY)
   foreach(kind IN ITEMS resource thunk)
     string(TOUPPER "${kind}" upper)
     set(definition WOW_${upper}_BOUND_FIXTURE)
@@ -386,13 +390,15 @@ if(EXISTS "${lifecycle_worker}/lifecycle-inputs.txt")
     "$<TARGET_OBJECTS:lifecycle_imports>" "$<TARGET_OBJECTS:lifecycle_seams>" "$<TARGET_OBJECTS:lifecycle_register_exports>"
     "$<TARGET_OBJECTS:obj_wow32-system-import-abi-aliases_obj>"
     "$<TARGET_OBJECTS:obj_wow32-parent-import-abi-aliases_obj>")
+  set(lifecycle_link_inputs ${lifecycle_direct} "$<TARGET_FILE:${provider}>" ${worker_inputs}
+    "${CMAKE_BINARY_DIR}/legacy-wow-user32.lib" "${CMAKE_BINARY_DIR}/legacy-wow-kernel32.lib"
+    "${CMAKE_BINARY_DIR}/legacy-wow-ntdll.lib" "${CMAKE_BINARY_DIR}/legacy-wow-apphelp.lib" "${CMAKE_BINARY_DIR}/legacy-wow-comdlg32.lib"
+    userenv.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib shell32.lib
+    advapi32.lib ntdll.lib oldnames.lib libcmt.lib libvcruntime.lib libucrt.lib)
+  file(GENERATE OUTPUT "${output}.rsp" CONTENT "\"$<JOIN:${lifecycle_link_inputs},\"\n\">\"\n")
   add_custom_command(OUTPUT "${output}"
-    COMMAND "${CMAKE_LINKER}" /nologo /NODEFAULTLIB:ntvdm.lib "/alternatename:_setAX@4=_ntvdm_debug_setAX@4" "/alternatename:_setES@4=_ntvdm_debug_setES@4" "/out:${output}" "/map:${output}.map"
-      ${lifecycle_direct} "$<TARGET_FILE:${provider}>" ${worker_inputs}
-      "${CMAKE_BINARY_DIR}/legacy-wow-user32.lib" "${CMAKE_BINARY_DIR}/legacy-wow-kernel32.lib"
-      "${CMAKE_BINARY_DIR}/legacy-wow-ntdll.lib" "${CMAKE_BINARY_DIR}/legacy-wow-apphelp.lib" "${CMAKE_BINARY_DIR}/legacy-wow-comdlg32.lib" userenv.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib
-      user32.lib gdi32.lib shell32.lib advapi32.lib ntdll.lib oldnames.lib libcmt.lib libvcruntime.lib libucrt.lib
-    DEPENDS ${provider} ${fixture} ${parent} lifecycle_imports lifecycle_seams wow-imports
+    COMMAND "${CMAKE_LINKER}" /nologo /NODEFAULTLIB:ntvdm.lib "/alternatename:_setAX@4=_ntvdm_debug_setAX@4" "/alternatename:_setES@4=_ntvdm_debug_setES@4" "/out:${output}" "/map:${output}.map" "@${output}.rsp"
+    DEPENDS "${output}.rsp" ${provider} ${fixture} ${parent} lifecycle_imports lifecycle_seams wow-imports
       ${lifecycle_direct} "$<TARGET_FILE:${provider}>" ${worker_inputs}
     COMMAND_EXPAND_LISTS VERBATIM)
   add_custom_target(wow-lifecycle-${kind} DEPENDS "${output}")

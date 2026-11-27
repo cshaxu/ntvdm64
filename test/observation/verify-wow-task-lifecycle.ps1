@@ -325,7 +325,7 @@ if ($Case -eq 'class-query' -and
     throw 'Class projection did not commit the completed original registration or roll back failure'
 }
 if ($Case -eq 'menu-resource' -and
-    (!($fixtureOutput -match '^WOW_ORIGINAL_MENU_RESOURCE errors=0 resource_cases=16 parser_cases=7 invalid_repeats=64$') -or
+    (!($fixtureOutput -match '^WOW_ORIGINAL_MENU_RESOURCE errors=0 resource_cases=16 parser_cases=8 invalid_repeats=64$') -or
      !($fixtureOutput -match '^WOW_OWNER_DRAW_RESOURCE errors=0$') -or
      !($fixtureOutput -match '^WOW_ORIGINAL_MENU_THUNKS errors=0 cases=6 allocations=0$') -or
      !($fixtureOutput -match '^WOW_NATIVE_MENU_ENTRY_CCPU result=1$'))) {

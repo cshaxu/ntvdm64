@@ -250,3 +250,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P31 N022 bitmap scaling](n022-dib.md).
 
 - [S15 P32 N022 globals and message metadata](n022-globals.md).
+
+- [S15 P33 N022 menu migration](n022-menu.md).

@@ -121,6 +121,16 @@ static void parser_cases(void)
         CHECK(GetMenuItemID(menu, 0) == 51);
         CHECK(DestroyMenu(menu));
     }
+    extended[2] = MFT_RIGHTORDER;
+    menu = CreateMenuFromResource((LPBYTE)extended);
+    CHECK(menu != NULL);
+    if (menu) {
+        item.cbSize = sizeof(item); item.fMask = MIIM_FTYPE;
+        CHECK(GetMenuItemInfoW(menu, 0, TRUE, &item));
+        CHECK((item.fType & MFT_RIGHTORDER) != 0);
+        CHECK(wow_menu_native_SetMenuFlagRtoL(menu));
+        CHECK(DestroyMenu(menu));
+    }
     thread->pClientInfo->dwTIFlags = client_flags;
     CHECK(CreateMenuFromResource((LPBYTE)version) == NULL);
     for (repeat = 0; repeat != 64; ++repeat) {
@@ -197,11 +207,43 @@ int __cdecl main(int argc, char **argv)
         }
     }
     parser_cases();
-    fprintf(stderr, "WOW_ORIGINAL_MENU_RESOURCE errors=%u resource_cases=16 parser_cases=7 invalid_repeats=64\n", errors);
+    fprintf(stderr, "WOW_ORIGINAL_MENU_RESOURCE errors=%u resource_cases=16 parser_cases=8 invalid_repeats=64\n", errors);
     return errors != 0;
 }
 #ifdef WOW_RESOURCE_BOUND_FIXTURE
 #undef main
+BOOL WINAPI ValidateMENUITEMINFO(LPMENUITEMINFOW, LPMENUITEMINFOW, DWORD);
+BOOL WINAPI ValidateMENUINFO(LPCMENUINFO, DWORD);
+static void xp_menu_validation_cases(void)
+{
+    MENUITEMINFOW input = {0}, output = {0};
+    MENUINFO menu = {0};
+    input.cbSize = sizeof(input);
+    input.fMask = MIIM_TYPE;
+    input.fType = MFT_STRING;
+    input.dwTypeData = L"XP";
+    CHECK(ValidateMENUITEMINFO(&input, &output, 0));
+    CHECK((output.fMask & (MIIM_FTYPE | MIIM_STRING | MIIM_BITMAP)) ==
+        (MIIM_FTYPE | MIIM_STRING | MIIM_BITMAP));
+    CHECK(input.fMask == MIIM_TYPE);
+    input.cbSize = FIELD_OFFSET(MENUITEMINFOW, hbmpItem);
+    CHECK(ValidateMENUITEMINFO(&input, &output, 1));
+    CHECK(output.cbSize == sizeof(output) && output.hbmpItem == NULL);
+    input.cbSize = sizeof(input);
+    input.fMask = MIIM_TYPE | MIIM_STRING;
+    SetLastError(0);
+    CHECK(!ValidateMENUITEMINFO(&input, &output, 0));
+    CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
+    input.fMask = MIIM_STATE; input.fState = 0x80000000;
+    CHECK(!ValidateMENUITEMINFO(&input, &output, 0));
+    menu.cbSize = sizeof(menu); menu.fMask = MIM_STYLE;
+    menu.dwStyle = MNS_CHECKORBMP;
+    CHECK(ValidateMENUINFO(&menu, 0));
+    menu.dwStyle = 1;
+    CHECK(!ValidateMENUINFO(&menu, 0));
+    CHECK(ValidateMENUINFO(&menu, 1));
+    CHECK(!ValidateMENUINFO(NULL, 0));
+}
 int __cdecl wow_original_menu_resource_fixture(void)
 {
     char *ordinary[] = {"resource-menu", NULL};
@@ -217,6 +259,7 @@ int __cdecl wow_original_menu_resource_fixture(void)
     errors = step = fail_at = 0;
     owner_probe = string_name = FALSE;
     callbacks_active = TRUE;
+    xp_menu_validation_cases();
     __try {
         result = wow_original_menu_resource_main(1, ordinary);
         step = fail_at = 0;

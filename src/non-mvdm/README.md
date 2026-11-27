@@ -3056,3 +3056,6 @@ T485 S15 P32 restores XP clglobal.c and original message metadata with the
 original listmung generator. Shared CMD/CMake generation serves production
 and control fixtures. [Globals evidence](../../docs/etc/evidence/t485-s1/n022-globals.md)
 records original identities, paired OpenNT consumers and residual boundaries.
+
+T485 S15 P33 restores XP clmenu.c parsing and validation; native USER32 owns
+menu objects. [Menu evidence](../../docs/etc/evidence/t485-s1/n022-menu.md).

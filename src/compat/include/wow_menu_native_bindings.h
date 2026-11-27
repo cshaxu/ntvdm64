@@ -2,6 +2,7 @@
 #define WOW_MENU_NATIVE_BINDINGS_H
 #include <windows.h>
 
+BOOL WINAPI wow_menu_native_SetMenuFlagRtoL(HMENU);
 HMENU WINAPI wow_menu_native_CreateMenu(void);
 HMENU WINAPI wow_menu_native_CreatePopupMenu(void);
 HMENU WINAPI wow_menu_native_GetMenu(HWND);
