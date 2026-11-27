@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0002    // Increment this if a change has global effects
 
-Copyright (c) 1990-1999  Microsoft Corporation
+Copyright (c) Microsoft Corporation. All rights reserved.
 
 Module Name:
 
@@ -35,24 +35,26 @@ Revision History:
 //
 #ifndef FAR
 #error Unsupported excluded original configuration
-#line 42
 #endif
 #line 43
 
 // begin_wioctlguids
-DEFINE_GUID(GUID_CLASS_COMPORT,          0x86e0d1e0L, 0x8089, 0x11d0, 0x9c, 0xe4, 0x08, 0x00, 0x3e, 0x30, 0x1f, 0x73);
-DEFINE_GUID(GUID_SERENUM_BUS_ENUMERATOR, 0x4D36E978L, 0xE325, 0x11CE, 0xBF, 0xC1, 0x08, 0x00, 0x2B, 0xE1, 0x03, 0x18);
+DEFINE_GUID(GUID_DEVINTERFACE_COMPORT,                0x86e0d1e0L, 0x8089, 0x11d0, 0x9c, 0xe4, 0x08, 0x00, 0x3e, 0x30, 0x1f, 0x73);
+DEFINE_GUID(GUID_DEVINTERFACE_SERENUM_BUS_ENUMERATOR, 0x4D36E978L, 0xE325, 0x11CE, 0xBF, 0xC1, 0x08, 0x00, 0x2B, 0xE1, 0x03, 0x18);
 // end_wioctlguids
+
+// begin_wioctlobsoleteguids
+#define GUID_CLASS_COMPORT          GUID_DEVINTERFACE_COMPORT
+#define GUID_SERENUM_BUS_ENUMERATOR GUID_DEVINTERFACE_SERENUM_BUS_ENUMERATOR
+// end_wioctlobsoleteguids
 #endif // DEFINE_GUID
 
 #ifndef _NTDDSER_
 #define _NTDDSER_
 
 #ifdef __cplusplus
-#line 54
 #error Unsupported excluded original configuration
 #endif
-#line 56
 
 //
 // NtDeviceIoControlFile IoControlCode values for this device.
@@ -683,11 +685,8 @@ typedef struct _SERENUM_PORT_PARAMETERS
 } SERENUM_PORT_PARAMETERS, *PSERENUM_PORT_PARAMETERS;
 
 #ifdef __cplusplus
-#line 686
 #error Unsupported excluded original configuration
 #endif
-#line 688
 
 #endif  // _NTDDSER_
-
 

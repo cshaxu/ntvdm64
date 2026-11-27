@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0001    // Increment this if a change has global effects
 
-Copyright (c) 1990-1999  Microsoft Corporation
+Copyright (c) Microsoft Corporation. All rights reserved.
 
 Module Name:
 
@@ -48,9 +48,23 @@ Revision History:
 // Display output interfaces
 //
 
-// DEFINE_GUID(GUID_DISPLAY_OUTPUT_INTERFACE_STANDARD, 0x96304D9F, 0x54b5, 0x11d1, 0x8b, 0x0f, 0x00, 0xa0, 0xc9, 0x06, 0x8f, 0xf3);
+// DEFINE_GUID(GUID_DISPLAY_OUTPUT_INTERFACE_STANDARD,  0x96304D9F, 0x54b5, 0x11d1, 0x8b, 0x0f, 0x00, 0xa0, 0xc9, 0x06, 0x8f, 0xf3);
 
-
+//
+// Display adapter device interface
+// 5b45201d-f2f2-4f3b-85bb-30ff1f953599
+//
+
+DEFINE_GUID(GUID_DEVINTERFACE_DISPLAY_ADAPTER, 0x5b45201d, 0xf2f2, 0x4f3b, 0x85, 0xbb, 0x30, 0xff, 0x1f, 0x95, 0x35, 0x99);
+
+//
+// Obsolete device interface class GUID names.
+// (use of above GUID_DEVINTERFACE_* names is recommended).
+//
+
+#define GUID_DISPLAY_ADAPTER_INTERFACE  GUID_DEVINTERFACE_DISPLAY_ADAPTER
+
+
 //
 // The first set of IOCTLs are handle by the port driver and never seen
 // by the miniport.
@@ -86,7 +100,12 @@ Revision History:
 #define IOCTL_VIDEO_IS_VGA_DEVICE \
     CTL_CODE(FILE_DEVICE_VIDEO, 0x09, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
-
+#define IOCTL_VIDEO_USE_DEVICE_IN_SESSION \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x0a, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+#define IOCTL_VIDEO_PREPARE_FOR_EARECOVERY \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x0b, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
 //
 // All these IOCTL's must be both handled by the port and miniport since
 // they require processing by both parties.
@@ -189,6 +208,21 @@ Revision History:
 
 #define IOCTL_VIDEO_SET_CHILD_STATE_CONFIGURATION \
     CTL_CODE(FILE_DEVICE_VIDEO, 0x122, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+#define IOCTL_VIDEO_SWITCH_DUALVIEW \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x123, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+#define IOCTL_VIDEO_SET_BANK_POSITION \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x124, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+#define IOCTL_VIDEO_QUERY_SUPPORTED_BRIGHTNESS \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x125, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+#define IOCTL_VIDEO_QUERY_DISPLAY_BRIGHTNESS \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x126, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
+#define IOCTL_VIDEO_SET_DISPLAY_BRIGHTNESS \
+    CTL_CODE(FILE_DEVICE_VIDEO, 0x127, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
 //
 // All these IOCTL's are handled by the Far East Full Screen Video driver
@@ -355,7 +389,7 @@ typedef struct _VIDEO_REGISTER_VDM {
 //
 
 typedef struct tagVIDEO_MONITOR_DEVICE {
-    ULONG   active;     // The monitor is ON/OFF
+    ULONG   flag;       // The monitor is ON/OFF
     HANDLE  pdo;        // Monitor device handle
     ULONG   HwID;
 } VIDEO_MONITOR_DEVICE, *PVIDEO_MONITOR_DEVICE;
@@ -372,7 +406,8 @@ typedef enum _VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE {
     VideoDisplaySwitchCallout,
     VideoEnumChildPdoNotifyCallout,
     VideoFindAdapterCallout,
-    VideoWakeupCallout
+    VideoWakeupCallout,
+    VideoChangeDisplaySettingsCallout
 } VIDEO_WIN32K_CALLBACKS_PARAMS_TYPE;
 
 
@@ -396,9 +431,41 @@ typedef struct _VIDEO_WIN32K_CALLBACKS {
     PVIDEO_WIN32K_CALLOUT Callout;
     ULONG                 bACPI;
     HANDLE                pPhysDeviceObject;
+    ULONG                 DualviewFlags;
 } VIDEO_WIN32K_CALLBACKS, *PVIDEO_WIN32K_CALLBACKS;
 
-
+
+//
+// IOCTL_VIDEO_USE_DEVICE_IN_SESSION
+//
+// Parameters to request new enabled/disabled state for a device
+//
+
+typedef struct _VIDEO_DEVICE_SESSION_STATUS {
+    ULONG   bEnable;	// Is device being enabled or disabled
+    ULONG   bSuccess;   // Was request validated
+} VIDEO_DEVICE_SESSION_STATUS, *PVIDEO_DEVICE_SESSION_STATUS;
+
+
+//
+// defines for Dualview Flags
+//
+
+#define VIDEO_DUALVIEW_REMOVABLE           0x00000001
+#define VIDEO_DUALVIEW_PRIMARY             0x80000000
+#define VIDEO_DUALVIEW_SECONDARY           0x40000000
+
+
+//
+// defines for child state flag
+//
+
+#define VIDEO_CHILD_ACTIVE                 0x00000001
+#define VIDEO_CHILD_DETACHED               0x00000002
+#define VIDEO_CHILD_NOPRUNE_FREQ           0x80000000
+#define VIDEO_CHILD_NOPRUNE_RESOLUTION     0x40000000
+
+
 //
 // Second set of structures
 //
@@ -449,6 +516,9 @@ typedef struct _VIDEO_HARDWARE_STATE_HEADER {
     ULONG DIBYResolution;
     ULONG DIBXlatOffset;
     ULONG DIBXlatLength;
+    ULONG VesaInfoOffset;
+    PVOID FrameBufferData;
+
 } VIDEO_HARDWARE_STATE_HEADER, *PVIDEO_HARDWARE_STATE_HEADER;
 
 //
@@ -458,7 +528,6 @@ typedef struct _VIDEO_HARDWARE_STATE_HEADER {
 #define VIDEO_STATE_NON_STANDARD_VGA       0x00000001
 #define VIDEO_STATE_UNEMULATED_VGA_STATE   0x00000002
 #define VIDEO_STATE_PACKED_CHAIN4_MODE     0x00000004
-
 
 typedef struct _VIDEO_HARDWARE_STATE {
     PVIDEO_HARDWARE_STATE_HEADER StateHeader;
@@ -704,6 +773,10 @@ typedef struct _VIDEO_MODE_INFORMATION {
                                             //     buffer are not handled properly.
                                             // 0 = 64 bit memory writes to frame
                                             //     buffer are handled properly.
+#define VIDEO_MODE_BANKED           0x0080  // 0 = undefined
+                                            // 1 = this is a banked mode
+#define VIDEO_MODE_LINEAR           0x0100  // 0 = undefined
+                                            // 1 = this is a linear mode
 
 //
 //Length - Length of the structure in bytes. Also used to do verisioning.
@@ -1507,6 +1580,38 @@ typedef struct _VIDEO_LUT_RGB256WORDS {
 //     format.
 //
 
+//
+// BANK_POSITION
+//
+
+typedef struct _BANK_POSITION
+{
+    ULONG ReadBankPosition;
+    ULONG WriteBankPosition;
+} BANK_POSITION, *PBANK_POSITION;
+
+//
+// IOCTL_VIDEO_QUERY_SUPPORTED_BRIGHTNESS - Queries via _BCL the available backlight
+//                                          levels.
+// IOCTL_VIDEO_QUERY_DISPLAY_BRIGHTNESS   - Queries the current AC/DC backlight levels
+//                                          and indicates the current power state per
+//                                          ucDisplayPolicy.
+// IOCTL_VIDEO_SET_DISPLAY_BRIGHTNESS     - Sets via _BCM the AC/DC brightness of the
+//                                          backlight for the power states indicated
+//                                          in ucDisplayPolicy.
+//
+
+typedef struct _DISPLAY_BRIGHTNESS {
+    UCHAR ucDisplayPolicy;
+    UCHAR ucACBrightness;
+    UCHAR ucDCBrightness;
+} DISPLAY_BRIGHTNESS, *PDISPLAY_BRIGHTNESS;
+
+#define DISPLAYPOLICY_AC                0x00000001
+#define DISPLAYPOLICY_DC                0x00000002
+#define DISPLAYPOLICY_BOTH              (DISPLAYPOLICY_AC | DISPLAYPOLICY_DC)
+
+
 
 //+----------------------------------------------------------------------------
 //
@@ -1517,9 +1622,8 @@ typedef struct _VIDEO_LUT_RGB256WORDS {
 
 #ifndef _WINCON_
 #error Unsupported excluded original configuration
-#line 1580
 #endif // _WINCON_
-#line 1581
+#line 1686
 
 
 typedef struct _FSCNTL_SCREEN_INFO {
@@ -1625,4 +1729,3 @@ typedef struct _FSVIDEO_CURSOR_POSITION {
 #endif
 
 #endif  // _NTDDVDEO_
-

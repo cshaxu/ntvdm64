@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0001    // Increment this if a change has global effects
 
-Copyright (c) 1990-1999  Microsoft Corporation
+Copyright (c) Microsoft Corporation. All rights reserved.
 
 Module Name:
 
@@ -27,10 +27,8 @@ Revision History:
 #endif
 
 #ifdef __cplusplus
-#line 30
 #error Unsupported excluded original configuration
 #endif
-#line 32
 
 //
 // Device Name - this string is the name of the device.  It is the name
@@ -65,16 +63,21 @@ Revision History:
 #define IOCTL_KEYBOARD_SET_IME_STATUS        CTL_CODE(FILE_DEVICE_KEYBOARD, 0x0401, METHOD_BUFFERED, FILE_ANY_ACCESS)
 
 //
-// Declair the GUID that represents the device interface for mice.
+// Declare the GUID that represents the device interface for keyboards.
 //
 #ifndef FAR
-#line 69
 #error Unsupported excluded original configuration
 #endif
-#line 71
 
-DEFINE_GUID( GUID_CLASS_KEYBOARD, 0x884b96c3, 0x56ef, 0x11d1, \
+DEFINE_GUID( GUID_DEVINTERFACE_KEYBOARD, 0x884b96c3, 0x56ef, 0x11d1, \
              0xbc, 0x8c, 0x00, 0xa0, 0xc9, 0x14, 0x05, 0xdd);
+
+//
+// Obsolete device interface class GUID name.
+// (use of above GUID_DEVINTERFACE_* name is recommended).
+//
+
+#define GUID_CLASS_KEYBOARD  GUID_DEVINTERFACE_KEYBOARD
 
 
 //
@@ -128,7 +131,9 @@ typedef struct _KEYBOARD_INPUT_DATA {
 #define KEY_E0    2
 #define KEY_E1    4
 #define KEY_TERMSRV_SET_LED 8
+#define KEY_TERMSRV_SHADOW  0x10
 #define KEY_TERMSRV_VKPACKET 0x20
+
 
 //
 // NtDeviceIoControlFile Input/Output Buffer record structures for
@@ -296,6 +301,7 @@ typedef struct _KEYBOARD_INDICATOR_TRANSLATION {
 //
 
 #define KEYBOARD_LED_INJECTED     0x8000 //Used by Terminal Server
+#define KEYBOARD_SHADOW           0x4000 //Used by Terminal Server
 //#if defined(FE_SB) || defined(WINDOWS_FE) || defined(DBCS)
 #define KEYBOARD_KANA_LOCK_ON     8 // Japanese keyboard
 //#endif // defined(FE_SB) || defined(WINDOWS_FE) || defined(DBCS)
@@ -353,10 +359,7 @@ typedef struct _KEYBOARD_IME_STATUS {
 } KEYBOARD_IME_STATUS, *PKEYBOARD_IME_STATUS;
 
 #ifdef __cplusplus
-#line 352
 #error Unsupported excluded original configuration
 #endif
-#line 354
 
 #endif // _NTDDKBD_
-

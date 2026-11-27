@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0001    // Increment this if a change has global effects
 
-Copyright (c) 1990-1999  Microsoft Corporation
+Copyright (c) Microsoft Corporation. All rights reserved.
 
 Module Name:
 
@@ -27,10 +27,8 @@ Revision History:
 #endif
 
 #ifdef __cplusplus
-#line 30
 #error Unsupported excluded original configuration
 #endif
-#line 32
 
 //
 // Device Name - this string is the name of the device.  It is the name
@@ -66,10 +64,7 @@ typedef struct _BEEP_SET_PARAMETERS {
 #define BEEP_FREQUENCY_MAXIMUM 0x7FFF
 
 #ifdef __cplusplus
-#line 67
 #error Unsupported excluded original configuration
 #endif
-#line 69
 
 #endif // _NTDDBEEP_
-

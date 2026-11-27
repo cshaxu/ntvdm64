@@ -2887,3 +2887,10 @@ The old private/windows/inc/pmvdm.h is now byte-exact XP at
 public/internal/base/inc/pmvdm.h. Original config.c retains its include and
 property bits. Remove obsolete worker/WOW include paths. [Current evidence](../../docs/etc/evidence/t485-s1/n014.md)
 supersedes the old OpenNT-4.5 path registration.
+
+### T485 S15 N015 DDK declarations
+
+Five headers use pinned XP SP1. ntdddlc.h moves to public/sdk/inc;
+the other four remain public/ddk/inc. Original guards and existing excluded
+profiles remain; only serial/video need active diagnostic line resets.
+[Migration and delivery evidence](../../docs/etc/evidence/t485-s1/n015.md).
