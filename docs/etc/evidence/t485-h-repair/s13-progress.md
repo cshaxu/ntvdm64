@@ -134,3 +134,27 @@ therefore does not yet satisfy the original logical-line contract. Correct
 these anchors and verify real compiler line output before S13 closure. This
 is not a new runtime failure or authority to rerun all previously passing Full
 gates. No source change is made in P6;the correction is the next concrete step.
+
+## P7 diagnostic-line repair delivered
+
+[Receipt](s13-p7-line-repair.json):dpmi32.c removes the misplaced pre-dispatch
+anchor,corrects the excluded DBG and return anchors,and restores original225
+after the shortened initializer. Nonerror8points/18lines ->7points/18lines.
+Only#line directives changed. Real product preprocessing matches80original
+statements with zero line mismatches;preprocessed code ignoring line metadata
+is byte-identical. The six remaining diagnostic anchors have S13-L0001-L0006
+pending records,separate from frozen point IDs and semantic residual counts.
+
+Cached full build PID1128 passed;runtime1 is dual-published with26matching
+hashes;61CCPU/DPMI cases pass. All13images differ from runtime14 only by the
+coherent16-byte package-ID resource;NTVDM also changes COFF/debug timestamps.
+Every other binary byte is identical. Preserve prior Full23/23 through this
+explicit input-equivalence analysis;no new Full execution is claimed.
+
+S7 current census is1740points/2826lines. P5+P7 actual source changes reduce
+4350diff lines and expose54additional blocks;the separate P6 projection
+correction is not source reduction. Static unique-statement review finds
+remaining line candidates only in dpmi32.h,dpmiint.c and modesw.c. Confirm
+these with product preprocessing and repair their complete files next. Other
+17files have no such static mismatch;this is not complete branch coverage.
+S13 remains open;N004 stays gated.

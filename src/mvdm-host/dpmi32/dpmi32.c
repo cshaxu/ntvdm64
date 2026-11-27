@@ -97,14 +97,13 @@ Return Value:
 
     DBGTRACE(VDMTR_TYPE_DPMI | DPMI_DISPATCH_ENTRY, NestLevel++, Index);
 
-#line 102
     if (Index >= MAX_DPMI_BOP_FUNC) {
         //BUGBUG IMHO, we should fatal exit here
 #if DBG
-#line 104
+#line 103
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 106
+#line 105
         return;
     }
 
@@ -221,6 +220,7 @@ Return Value:
     DpmiCpu40BindDescriptorTables();
 
     DpmiGetFastBopEntry();
+#line 225
 
 }
 

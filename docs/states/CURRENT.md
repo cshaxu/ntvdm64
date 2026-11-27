@@ -39,11 +39,12 @@ S10-S12:953residual IDs covered after appending11omitted P13 pending rows.
 S8:851files/900frozen points reconcile;606byte-exact,245line-only files,
 1818diagnostic residual points registered separately. S7 maps839old IDs to
 110registered semantic residuals across7files. Its historical metrics omit
-#line;the20file byte census is1741points/2826lines after correcting the split
-nt_fulsc exclusion. Three LF restorations removed4350diff lines. R00144 is
-corrected. Both publication locations match26/26hashes. Remaining concrete
-defect:dpmi32.c diagnostic-line drift requires anchor correction and compiler
-verification before final accounting/closure.
+#line;the20file byte census is1740points/2826lines. LF restoration removed4350
+diff lines;dpmi32.c line repair removes1point,80compiler witnesses pass.
+S13 runtime1 cached-build/dual26hash/61CPU cases pass;all binary bytes match
+runtime14 except package IDs and PE timestamps. Six diagnostic anchors are
+registered. Remaining line candidates:dpmi32.h,dpmiint.c,modesw.c;confirm
+and repair before final accounting/closure.
 No behavioral changes;runtime14 Full23/23 is retained,not rerun. No S13 closure.
 
 ## S12 Closure Record

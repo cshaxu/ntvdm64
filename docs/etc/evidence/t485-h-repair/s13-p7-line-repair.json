@@ -1,0 +1,1605 @@
+{
+  "task": "M0 T485 S13 P7",
+  "package": "build/t485-s13/runtime1",
+  "source": "src/mvdm-host/dpmi32/dpmi32.c",
+  "change": {
+    "before_sha256": "3ccb20e620217f2644995d7c5f8ba5f54af04fa9f90aa103d52cd6bbc4505793",
+    "after_sha256": "95227568e50c2cb7b6759b0eb37a40fef18a4e156f9f5b4ba2009a31416b4b43",
+    "before": {
+      "points": 8,
+      "lines": 18,
+      "excluded": 2
+    },
+    "after": {
+      "points": 7,
+      "lines": 18,
+      "excluded": 2
+    },
+    "only_line_directives_changed": true
+  },
+  "compiler": {
+    "preprocessed_body_identical": true,
+    "matched_original_statements": 80,
+    "mismatches": []
+  },
+  "cached_build": {
+    "owner_pid": 1128,
+    "exit": 0,
+    "log": "build\\t485-s13\\p7\\build.log"
+  },
+  "publication": [
+    {
+      "name": "NTVDMD.DLL",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\NTVDMD.DLL",
+          "sha256": "f4878925084121b5fb750d961e3bebb8dbc88dd68b02e1a3d69da933233b0e4c",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+          "sha256": "f4878925084121b5fb750d961e3bebb8dbc88dd68b02e1a3d69da933233b0e4c",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "VJOY.DLL",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\VJOY.DLL",
+          "sha256": "b04af65102271d4d9e9c9eee1395f4f6948c7458958f509e0e3f8944c68e98c1",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+          "sha256": "b04af65102271d4d9e9c9eee1395f4f6948c7458958f509e0e3f8944c68e98c1",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "VCDEX.DLL",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\VCDEX.DLL",
+          "sha256": "4e70a2d4ec3b1d269639cd4c898e50b2947b861bae373b9939cbd95ac4cd378f",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+          "sha256": "4e70a2d4ec3b1d269639cd4c898e50b2947b861bae373b9939cbd95ac4cd378f",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "run16.exe",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\run16.exe",
+          "sha256": "06e4006dfc02f268b756482e76ee1ddf5693764f8072ac52169fa7255c21dad2",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+          "sha256": "06e4006dfc02f268b756482e76ee1ddf5693764f8072ac52169fa7255c21dad2",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "ntsrv.exe",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\ntsrv.exe",
+          "sha256": "dbdaf7ba84496a8f7844ed72a1081e8c989cec4be1b3b52e518a441ca9919a61",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+          "sha256": "dbdaf7ba84496a8f7844ed72a1081e8c989cec4be1b3b52e518a441ca9919a61",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "ntcon.exe",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\ntcon.exe",
+          "sha256": "90fd19d8fa93f1e20a926121ce9e5da6e46658b44617ea31874e8f0f27de6a94",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+          "sha256": "90fd19d8fa93f1e20a926121ce9e5da6e46658b44617ea31874e8f0f27de6a94",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "ntvdm.exe",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\ntvdm.exe",
+          "sha256": "3b98337df60dae60c74d27ba991257af34260557a90fa8b8837f4a371289ad32",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+          "sha256": "3b98337df60dae60c74d27ba991257af34260557a90fa8b8837f4a371289ad32",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "ntvwm.exe",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\ntvwm.exe",
+          "sha256": "bcc1408e41907a9f7d499ef0e8442fdcc98af12f36c86f0eb6313787f87ff494",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+          "sha256": "bcc1408e41907a9f7d499ef0e8442fdcc98af12f36c86f0eb6313787f87ff494",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "ntmon.exe",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\ntmon.exe",
+          "sha256": "6acd2113bd57c54996e43ce3b1918c3dadb8fcf00bffed666f49ba169fbcf039",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+          "sha256": "6acd2113bd57c54996e43ce3b1918c3dadb8fcf00bffed666f49ba169fbcf039",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "WOW32.DLL",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\WOW32.DLL",
+          "sha256": "12832513fadd8b7a69b2ded606bea83b03002620ecb5602a184af98b29175152",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+          "sha256": "12832513fadd8b7a69b2ded606bea83b03002620ecb5602a184af98b29175152",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\VDMREDIR.DLL",
+          "sha256": "2e813d89d0f639ae6b7b10e63f5128a43d29bd3c778c0fb418a6b51567977d7c",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+          "sha256": "2e813d89d0f639ae6b7b10e63f5128a43d29bd3c778c0fb418a6b51567977d7c",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "nthook32.dll",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\nthook32.dll",
+          "sha256": "25d9677f5ff090600d9b8672f6db1e749f1654b5ec03f29b8aeecdfc97b241fb",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+          "sha256": "25d9677f5ff090600d9b8672f6db1e749f1654b5ec03f29b8aeecdfc97b241fb",
+          "matches_manifest": true
+        }
+      ]
+    },
+    {
+      "name": "nthook64.dll",
+      "unchanged_from_runtime14": false,
+      "published": [
+        {
+          "path": "assets\\release\\nthook64.dll",
+          "sha256": "b0639bacd2cf7918105ee780c42b443c2d22c30f2a58817be99667ebac9bdfff",
+          "matches_manifest": true
+        },
+        {
+          "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+          "sha256": "b0639bacd2cf7918105ee780c42b443c2d22c30f2a58817be99667ebac9bdfff",
+          "matches_manifest": true
+        }
+      ]
+    }
+  ],
+  "package_comparison": [
+    {
+      "name": "NTVDMD.DLL",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          264,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          12692,
+          4,
+          "export timestamp"
+        ],
+        [
+          12116,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          14532,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "VJOY.DLL",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          232,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          2660,
+          4,
+          "export timestamp"
+        ],
+        [
+          2632,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          4292,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "VCDEX.DLL",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          240,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          6532,
+          4,
+          "export timestamp"
+        ],
+        [
+          6484,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          8388,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "run16.exe",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          264,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          214692,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          374396,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          256,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          301076,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          474748,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "ntcon.exe",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          252164,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          420988,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "same_size": true,
+      "changed_bytes": 20,
+      "allowed_named_fields": [
+        [
+          280,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          1920612,
+          4,
+          "export timestamp"
+        ],
+        [
+          1783644,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          1983368,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          248,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          227812,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          390268,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "ntmon.exe",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          256,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          148212,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          166524,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          312,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          662580,
+          4,
+          "export timestamp"
+        ],
+        [
+          651268,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          708228,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          288,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          259396,
+          4,
+          "export timestamp"
+        ],
+        [
+          125268,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          266948,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "nthook32.dll",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          269460,
+          4,
+          "export timestamp"
+        ],
+        [
+          134772,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          276092,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    },
+    {
+      "name": "nthook64.dll",
+      "same_size": true,
+      "changed_bytes": 16,
+      "allowed_named_fields": [
+        [
+          272,
+          4,
+          "COFF timestamp"
+        ],
+        [
+          309812,
+          4,
+          "export timestamp"
+        ],
+        [
+          168916,
+          4,
+          "debug-directory timestamp"
+        ],
+        [
+          324732,
+          16,
+          "NTVDM_PACKAGE_ID resource"
+        ]
+      ],
+      "unexpected_changes": [],
+      "executable_and_other_bytes_identical": true
+    }
+  ],
+  "targeted": {
+    "cases": 61,
+    "result": "PASS",
+    "log": "build\\t485-s13\\p7\\unit.log"
+  },
+  "full": "No rerun. Reuse runtime14 Full23/23 under proved identical executable/data/resource bytes except coherent package GUID and named PE timestamps. This receipt does not claim a fresh Full run of runtime1.",
+  "pending_diagnostic_records": 6,
+  "next_source_review": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.h",
+      "good": 58,
+      "potential_mismatches": [
+        {
+          "physical": 200,
+          "logical": 200,
+          "original": 199,
+          "text": "WORD    LimitLow;"
+        },
+        {
+          "physical": 201,
+          "logical": 201,
+          "original": 200,
+          "text": "WORD    BaseLow;"
+        },
+        {
+          "physical": 204,
+          "logical": 204,
+          "original": 203,
+          "text": "BYTE    BaseMid;"
+        },
+        {
+          "physical": 207,
+          "logical": 207,
+          "original": 206,
+          "text": "BYTE    BaseHi;"
+        },
+        {
+          "physical": 210,
+          "logical": 210,
+          "original": 209,
+          "text": "DWORD   BaseMid : 8;"
+        },
+        {
+          "physical": 211,
+          "logical": 211,
+          "original": 210,
+          "text": "DWORD   Type : 5;"
+        },
+        {
+          "physical": 212,
+          "logical": 212,
+          "original": 211,
+          "text": "DWORD   Dpl : 2;"
+        },
+        {
+          "physical": 213,
+          "logical": 213,
+          "original": 212,
+          "text": "DWORD   Pres : 1;"
+        },
+        {
+          "physical": 214,
+          "logical": 214,
+          "original": 213,
+          "text": "DWORD   LimitHi : 4;"
+        },
+        {
+          "physical": 215,
+          "logical": 215,
+          "original": 214,
+          "text": "DWORD   Sys : 1;"
+        },
+        {
+          "physical": 216,
+          "logical": 216,
+          "original": 215,
+          "text": "DWORD   Reserved_0 : 1;"
+        },
+        {
+          "physical": 217,
+          "logical": 217,
+          "original": 216,
+          "text": "DWORD   Default_Big : 1;"
+        },
+        {
+          "physical": 218,
+          "logical": 218,
+          "original": 217,
+          "text": "DWORD   Granularity : 1;"
+        },
+        {
+          "physical": 219,
+          "logical": 219,
+          "original": 218,
+          "text": "DWORD   BaseHi : 8;"
+        },
+        {
+          "physical": 222,
+          "logical": 222,
+          "original": 221,
+          "text": "} LDT_ENTRY, *PLDT_ENTRY;"
+        },
+        {
+          "physical": 230,
+          "logical": 230,
+          "original": 228,
+          "text": "extern VOID force_yoda(VOID);"
+        },
+        {
+          "physical": 231,
+          "logical": 231,
+          "original": 229,
+          "text": "extern VOID DisableEmulatorIretHooks(VOID);"
+        },
+        {
+          "physical": 232,
+          "logical": 232,
+          "original": 230,
+          "text": "extern VOID EnableEmulatorIretHooks(VOID);"
+        },
+        {
+          "physical": 237,
+          "logical": 237,
+          "original": 235,
+          "text": "WORD    OffsetLow;"
+        },
+        {
+          "physical": 238,
+          "logical": 238,
+          "original": 236,
+          "text": "WORD    Selector;"
+        },
+        {
+          "physical": 239,
+          "logical": 239,
+          "original": 237,
+          "text": "BYTE    Reserved;"
+        },
+        {
+          "physical": 245,
+          "logical": 245,
+          "original": 243,
+          "text": "BYTE   Type : 5;"
+        },
+        {
+          "physical": 246,
+          "logical": 246,
+          "original": 244,
+          "text": "BYTE   Dpl : 2;"
+        },
+        {
+          "physical": 247,
+          "logical": 247,
+          "original": 245,
+          "text": "BYTE   Pres : 1;"
+        },
+        {
+          "physical": 250,
+          "logical": 250,
+          "original": 248,
+          "text": "WORD    OffsetHi;"
+        },
+        {
+          "physical": 251,
+          "logical": 251,
+          "original": 249,
+          "text": "} IDT_ENTRY, *PIDT_ENTRY;"
+        },
+        {
+          "physical": 288,
+          "logical": 288,
+          "original": 286,
+          "text": "if (!Ldt[i].HighWord.Bits.Granularity) {                        \\"
+        },
+        {
+          "physical": 402,
+          "logical": 402,
+          "original": 400,
+          "text": "typedef ULONG (*GETREGISTERFUNCTION)(VOID);"
+        },
+        {
+          "physical": 403,
+          "logical": 403,
+          "original": 401,
+          "text": "typedef VOID (*SETREGISTERFUNCTION)(ULONG);"
+        },
+        {
+          "physical": 453,
+          "logical": 453,
+          "original": 451,
+          "text": "ULONG Eflags;"
+        },
+        {
+          "physical": 460,
+          "logical": 460,
+          "original": 458,
+          "text": "} CLIENT_REGS, *PCLIENT_REGS;"
+        },
+        {
+          "physical": 476,
+          "logical": 476,
+          "original": 474,
+          "text": "UCHAR Misc[28];"
+        },
+        {
+          "physical": 477,
+          "logical": 477,
+          "original": 475,
+          "text": "} VSAVEDSTATE, PVSAVEDSTATE;"
+        },
+        {
+          "physical": 492,
+          "logical": 492,
+          "original": 490,
+          "text": "USHORT SelCount;"
+        },
+        {
+          "physical": 493,
+          "logical": 493,
+          "original": 491,
+          "text": "ULONG LdtBase;"
+        },
+        {
+          "physical": 494,
+          "logical": 494,
+          "original": 492,
+          "text": "ULONG FlatBase;"
+        },
+        {
+          "physical": 495,
+          "logical": 495,
+          "original": 493,
+          "text": "struct _DESC_MAPPING* pNext;"
+        },
+        {
+          "physical": 496,
+          "logical": 496,
+          "original": 494,
+          "text": "} DESC_MAPPING, *PDESC_MAPPING;"
+        },
+        {
+          "physical": 504,
+          "logical": 504,
+          "original": 502,
+          "text": "extern ULONG LastLockedPMStackSS;"
+        },
+        {
+          "physical": 505,
+          "logical": 505,
+          "original": 503,
+          "text": "extern ULONG LastLockedPMStackESP;"
+        },
+        {
+          "physical": 507,
+          "logical": 507,
+          "original": 505,
+          "text": "extern PUCHAR SmallXlatBuffer;"
+        },
+        {
+          "physical": 508,
+          "logical": 508,
+          "original": 506,
+          "text": "extern PUCHAR LargeXlatBuffer;"
+        },
+        {
+          "physical": 509,
+          "logical": 509,
+          "original": 507,
+          "text": "extern BOOL SmallBufferInUse;"
+        },
+        {
+          "physical": 510,
+          "logical": 510,
+          "original": 508,
+          "text": "extern USHORT LargeBufferInUseCount;"
+        },
+        {
+          "physical": 511,
+          "logical": 511,
+          "original": 509,
+          "text": "extern USHORT DosxStackSegment;"
+        },
+        {
+          "physical": 512,
+          "logical": 512,
+          "original": 510,
+          "text": "extern USHORT DosxRmCodeSegment;"
+        },
+        {
+          "physical": 513,
+          "logical": 513,
+          "original": 511,
+          "text": "extern USHORT DosxRmCodeSelector;"
+        },
+        {
+          "physical": 514,
+          "logical": 514,
+          "original": 512,
+          "text": "extern PWORD16 DosxStackFramePointer;"
+        },
+        {
+          "physical": 515,
+          "logical": 515,
+          "original": 513,
+          "text": "extern USHORT DosxStackFrameSize;"
+        },
+        {
+          "physical": 516,
+          "logical": 516,
+          "original": 514,
+          "text": "extern USHORT CurrentAppFlags;"
+        },
+        {
+          "physical": 517,
+          "logical": 517,
+          "original": 515,
+          "text": "extern ULONG RmBopFe;"
+        },
+        {
+          "physical": 518,
+          "logical": 518,
+          "original": 516,
+          "text": "extern ULONG PmBopFe;"
+        },
+        {
+          "physical": 519,
+          "logical": 519,
+          "original": 517,
+          "text": "extern USHORT RMCallBackBopSeg;"
+        },
+        {
+          "physical": 520,
+          "logical": 520,
+          "original": 518,
+          "text": "extern USHORT RMCallBackBopOffset;"
+        },
+        {
+          "physical": 521,
+          "logical": 521,
+          "original": 519,
+          "text": "extern USHORT PMReflectorSeg;"
+        },
+        {
+          "physical": 522,
+          "logical": 522,
+          "original": 520,
+          "text": "extern PUCHAR DosxDtaBuffer;"
+        },
+        {
+          "physical": 523,
+          "logical": 523,
+          "original": 521,
+          "text": "extern ULONG IntelBase;"
+        },
+        {
+          "physical": 524,
+          "logical": 524,
+          "original": 522,
+          "text": "extern PLDT_ENTRY Ldt;"
+        },
+        {
+          "physical": 525,
+          "logical": 525,
+          "original": 523,
+          "text": "extern USHORT LdtSel;"
+        },
+        {
+          "physical": 526,
+          "logical": 526,
+          "original": 524,
+          "text": "extern USHORT LdtMaxSel;"
+        },
+        {
+          "physical": 527,
+          "logical": 527,
+          "original": 525,
+          "text": "extern USHORT LdtUserSel;"
+        },
+        {
+          "physical": 528,
+          "logical": 528,
+          "original": 526,
+          "text": "extern PIDT_ENTRY Idt;"
+        },
+        {
+          "physical": 529,
+          "logical": 529,
+          "original": 527,
+          "text": "extern USHORT WOWAllocSeg;"
+        },
+        {
+          "physical": 530,
+          "logical": 530,
+          "original": 528,
+          "text": "extern USHORT WOWAllocFunc;"
+        },
+        {
+          "physical": 531,
+          "logical": 531,
+          "original": 529,
+          "text": "extern USHORT WOWFreeSeg;"
+        },
+        {
+          "physical": 532,
+          "logical": 532,
+          "original": 530,
+          "text": "extern USHORT WOWFreeFunc;"
+        },
+        {
+          "physical": 540,
+          "logical": 540,
+          "original": 538,
+          "text": "extern PUCHAR CurrentDta;"
+        },
+        {
+          "physical": 541,
+          "logical": 541,
+          "original": 539,
+          "text": "extern PUCHAR CurrentPmDtaAddress;"
+        },
+        {
+          "physical": 542,
+          "logical": 542,
+          "original": 540,
+          "text": "extern PUCHAR CurrentDosDta;"
+        },
+        {
+          "physical": 543,
+          "logical": 543,
+          "original": 541,
+          "text": "extern USHORT CurrentDtaSelector;"
+        },
+        {
+          "physical": 544,
+          "logical": 544,
+          "original": 542,
+          "text": "extern USHORT CurrentDtaOffset;"
+        },
+        {
+          "physical": 547,
+          "logical": 547,
+          "original": 545,
+          "text": "extern ULONG SelectorLimit[LDT_SIZE];"
+        },
+        {
+          "physical": 554,
+          "logical": 554,
+          "original": 552,
+          "text": "extern GETREGISTERFUNCTION GetCXRegister;"
+        },
+        {
+          "physical": 555,
+          "logical": 555,
+          "original": 553,
+          "text": "extern GETREGISTERFUNCTION GetDXRegister;"
+        },
+        {
+          "physical": 556,
+          "logical": 556,
+          "original": 554,
+          "text": "extern GETREGISTERFUNCTION GetDIRegister;"
+        },
+        {
+          "physical": 557,
+          "logical": 557,
+          "original": 555,
+          "text": "extern GETREGISTERFUNCTION GetSIRegister;"
+        },
+        {
+          "physical": 558,
+          "logical": 558,
+          "original": 556,
+          "text": "extern GETREGISTERFUNCTION GetBXRegister;"
+        },
+        {
+          "physical": 559,
+          "logical": 559,
+          "original": 557,
+          "text": "extern GETREGISTERFUNCTION GetAXRegister;"
+        },
+        {
+          "physical": 560,
+          "logical": 560,
+          "original": 558,
+          "text": "extern GETREGISTERFUNCTION GetSPRegister;"
+        },
+        {
+          "physical": 562,
+          "logical": 562,
+          "original": 560,
+          "text": "extern SETREGISTERFUNCTION SetCXRegister;"
+        },
+        {
+          "physical": 563,
+          "logical": 563,
+          "original": 561,
+          "text": "extern SETREGISTERFUNCTION SetDXRegister;"
+        },
+        {
+          "physical": 564,
+          "logical": 564,
+          "original": 562,
+          "text": "extern SETREGISTERFUNCTION SetDIRegister;"
+        },
+        {
+          "physical": 565,
+          "logical": 565,
+          "original": 563,
+          "text": "extern SETREGISTERFUNCTION SetSIRegister;"
+        },
+        {
+          "physical": 566,
+          "logical": 566,
+          "original": 564,
+          "text": "extern SETREGISTERFUNCTION SetBXRegister;"
+        },
+        {
+          "physical": 567,
+          "logical": 567,
+          "original": 565,
+          "text": "extern SETREGISTERFUNCTION SetAXRegister;"
+        },
+        {
+          "physical": 568,
+          "logical": 568,
+          "original": 566,
+          "text": "extern SETREGISTERFUNCTION SetSPRegister;"
+        },
+        {
+          "physical": 571,
+          "logical": 571,
+          "original": 569,
+          "text": "extern USHORT CurrentPSPSelector;"
+        },
+        {
+          "physical": 572,
+          "logical": 572,
+          "original": 570,
+          "text": "extern ULONG FlatAddress[LDT_SIZE];"
+        },
+        {
+          "physical": 574,
+          "logical": 574,
+          "original": 572,
+          "text": "extern ULONG DosxIret;"
+        },
+        {
+          "physical": 575,
+          "logical": 575,
+          "original": 573,
+          "text": "extern ULONG DosxIretd;"
+        },
+        {
+          "physical": 577,
+          "logical": 577,
+          "original": 575,
+          "text": "extern ULONG DosxRmSaveRestoreState;"
+        },
+        {
+          "physical": 578,
+          "logical": 578,
+          "original": 576,
+          "text": "extern ULONG DosxPmSaveRestoreState;"
+        },
+        {
+          "physical": 579,
+          "logical": 579,
+          "original": 577,
+          "text": "extern ULONG DosxRmRawModeSwitch;"
+        },
+        {
+          "physical": 580,
+          "logical": 580,
+          "original": 578,
+          "text": "extern ULONG DosxPmRawModeSwitch;"
+        },
+        {
+          "physical": 582,
+          "logical": 582,
+          "original": 580,
+          "text": "extern ULONG DosxVcdPmSvcCall;"
+        },
+        {
+          "physical": 583,
+          "logical": 583,
+          "original": 581,
+          "text": "extern ULONG DosxMsDosApi;"
+        },
+        {
+          "physical": 584,
+          "logical": 584,
+          "original": 582,
+          "text": "extern ULONG DosxXmsControl;"
+        },
+        {
+          "physical": 585,
+          "logical": 585,
+          "original": 583,
+          "text": "extern ULONG DosxHungAppExit;"
+        },
+        {
+          "physical": 599,
+          "logical": 599,
+          "original": 597,
+          "text": "VOID DpmiInitDosxRM(VOID);"
+        },
+        {
+          "physical": 600,
+          "logical": 600,
+          "original": 598,
+          "text": "VOID DpmiInitDosx(VOID);"
+        },
+        {
+          "physical": 601,
+          "logical": 601,
+          "original": 599,
+          "text": "VOID DpmiInitLDT(VOID);"
+        },
+        {
+          "physical": 602,
+          "logical": 602,
+          "original": 600,
+          "text": "VOID DpmiGetFastBopEntry(VOID);"
+        },
+        {
+          "physical": 603,
+          "logical": 603,
+          "original": 601,
+          "text": "VOID DpmiInitIDT(VOID);"
+        },
+        {
+          "physical": 604,
+          "logical": 604,
+          "original": 602,
+          "text": "VOID DpmiInitExceptionHandlers(VOID);"
+        },
+        {
+          "physical": 605,
+          "logical": 605,
+          "original": 603,
+          "text": "VOID DpmiInitPmStackInfo(VOID);"
+        },
+        {
+          "physical": 606,
+          "logical": 606,
+          "original": 604,
+          "text": "VOID DpmiInitApp(VOID);"
+        },
+        {
+          "physical": 607,
+          "logical": 607,
+          "original": 605,
+          "text": "VOID DpmiTerminateApp(VOID);"
+        },
+        {
+          "physical": 608,
+          "logical": 608,
+          "original": 606,
+          "text": "VOID DpmiDpmiInUse(VOID);"
+        },
+        {
+          "physical": 609,
+          "logical": 609,
+          "original": 607,
+          "text": "VOID DpmiDpmiNoLongerInUse(VOID);"
+        },
+        {
+          "physical": 611,
+          "logical": 611,
+          "original": 609,
+          "text": "VOID switch_to_protected_mode(VOID);"
+        },
+        {
+          "physical": 612,
+          "logical": 612,
+          "original": 610,
+          "text": "VOID switch_to_real_mode(VOID);"
+        },
+        {
+          "physical": 613,
+          "logical": 613,
+          "original": 611,
+          "text": "VOID DpmiSetAltRegs(VOID);"
+        },
+        {
+          "physical": 615,
+          "logical": 615,
+          "original": 613,
+          "text": "VOID DpmiVcdPmSvcCall32(VOID);"
+        },
+        {
+          "physical": 616,
+          "logical": 616,
+          "original": 614,
+          "text": "VOID DpmiFreeAppXmem(VOID);"
+        },
+        {
+          "physical": 617,
+          "logical": 617,
+          "original": 615,
+          "text": "VOID DpmiFreeAllXmem(VOID);"
+        },
+        {
+          "physical": 619,
+          "logical": 619,
+          "original": 617,
+          "text": "VOID DpmiIntHandlerIret16(VOID);"
+        },
+        {
+          "physical": 620,
+          "logical": 620,
+          "original": 618,
+          "text": "VOID DpmiIntHandlerIret32(VOID);"
+        },
+        {
+          "physical": 621,
+          "logical": 621,
+          "original": 619,
+          "text": "VOID DpmiFaultHandlerIret16(VOID);"
+        },
+        {
+          "physical": 622,
+          "logical": 622,
+          "original": 620,
+          "text": "VOID DpmiFaultHandlerIret32(VOID);"
+        },
+        {
+          "physical": 623,
+          "logical": 623,
+          "original": 621,
+          "text": "VOID DpmiUnhandledExceptionHandler(VOID);"
+        },
+        {
+          "physical": 625,
+          "logical": 625,
+          "original": 623,
+          "text": "VOID DpmiRMCallBackCall(VOID);"
+        },
+        {
+          "physical": 626,
+          "logical": 626,
+          "original": 624,
+          "text": "VOID DpmiReflectIntrToPM(VOID);"
+        },
+        {
+          "physical": 627,
+          "logical": 627,
+          "original": 625,
+          "text": "VOID DpmiReflectIntrToV86(VOID);"
+        },
+        {
+          "physical": 629,
+          "logical": 629,
+          "original": 627,
+          "text": "VOID DpmiSetDescriptorEntry(VOID);"
+        },
+        {
+          "physical": 630,
+          "logical": 630,
+          "original": 628,
+          "text": "VOID DpmiAllocateSelectors(VOID);"
+        },
+        {
+          "physical": 631,
+          "logical": 631,
+          "original": 629,
+          "text": "VOID DpmiFreeSelector(VOID);"
+        },
+        {
+          "physical": 632,
+          "logical": 632,
+          "original": 630,
+          "text": "VOID DpmiResetLDTUserBase(VOID);"
+        },
+        {
+          "physical": 634,
+          "logical": 634,
+          "original": 632,
+          "text": "VOID DpmiXlatInt21Call(VOID);"
+        },
+        {
+          "physical": 635,
+          "logical": 635,
+          "original": 633,
+          "text": "VOID DpmiInt31Entry(VOID);"
+        },
+        {
+          "physical": 636,
+          "logical": 636,
+          "original": 634,
+          "text": "VOID DpmiInt31Call(VOID);"
+        },
+        {
+          "physical": 638,
+          "logical": 638,
+          "original": 636,
+          "text": "VOID DpmiHungAppIretAndExit(VOID);"
+        },
+        {
+          "physical": 674,
+          "logical": 674,
+          "original": 669,
+          "text": "} IRET_BEHAVIOR;"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "good": 90,
+      "potential_mismatches": [
+        {
+          "physical": 105,
+          "logical": 105,
+          "original": 67,
+          "text": "if (IntNumber >= 256) {"
+        },
+        {
+          "physical": 109,
+          "logical": 109,
+          "original": 71,
+          "text": "if ((IntNumber >= 8 && IntNumber <= 0xf) ||"
+        },
+        {
+          "physical": 114,
+          "logical": 114,
+          "original": 76,
+          "text": "Flags |= VDM_INT_INT_GATE;"
+        },
+        {
+          "physical": 119,
+          "logical": 119,
+          "original": 81,
+          "text": "Flags |= VDM_INT_TRAP_GATE;"
+        },
+        {
+          "physical": 122,
+          "logical": 122,
+          "original": 84,
+          "text": "if (Sel != PMReflectorSeg) {"
+        },
+        {
+          "physical": 130,
+          "logical": 130,
+          "original": 92,
+          "text": "if ((IntNumber == 0x1b) ||      //^Break?"
+        },
+        {
+          "physical": 139,
+          "logical": 139,
+          "original": 101,
+          "text": "Flags |= VDM_INT_HOOKED;"
+        },
+        {
+          "physical": 142,
+          "logical": 142,
+          "original": 104,
+          "text": "if ( (IntNumber == 0x1c) || (IntNumber == 8) ) {"
+        },
+        {
+          "physical": 148,
+          "logical": 148,
+          "original": 110,
+          "text": "Handlers[IntNumber].Flags = Flags;"
+        },
+        {
+          "physical": 152,
+          "logical": 152,
+          "original": 114,
+          "text": "DBGTRACE((USHORT)(VDMTR_TYPE_DPMI_SI | IntNumber), Sel, Offset);"
+        },
+        {
+          "physical": 538,
+          "logical": 513,
+          "original": 502,
+          "text": "DBGTRACE(VDMTR_TYPE_DPMI | DPMI_SW_INT, (USHORT)IntNumber, 0);"
+        },
+        {
+          "physical": 543,
+          "logical": 518,
+          "original": 507,
+          "text": "if ((IntNumber == 3) &&"
+        },
+        {
+          "physical": 562,
+          "logical": 537,
+          "original": 524,
+          "text": "SaveEFLAGS &= ~EFLAGS_NT_MASK;"
+        },
+        {
+          "physical": 643,
+          "logical": 611,
+          "original": 609,
+          "text": "SaveEFLAGS &= ~0x4000;"
+        },
+        {
+          "physical": 901,
+          "logical": 905,
+          "original": 904,
+          "text": "SaveSS = getSS();"
+        },
+        {
+          "physical": 902,
+          "logical": 906,
+          "original": 905,
+          "text": "SaveESP = getESP();"
+        },
+        {
+          "physical": 904,
+          "logical": 908,
+          "original": 907,
+          "text": "SaveEIP = getEIP();"
+        },
+        {
+          "physical": 905,
+          "logical": 909,
+          "original": 908,
+          "text": "SaveCS  = getCS();"
+        },
+        {
+          "physical": 923,
+          "logical": 927,
+          "original": 932,
+          "text": "setESP(getESP()-0x20);"
+        },
+        {
+          "physical": 929,
+          "logical": 933,
+          "original": 938,
+          "text": "if (!BuildStackFrame(8, &VdmStackPointer, &NewSP)) {"
+        },
+        {
+          "physical": 958,
+          "logical": 962,
+          "original": 963,
+          "text": "setEIP(LOWORD(Handlers[IntNumber].Eip));"
+        },
+        {
+          "physical": 1211,
+          "logical": 1220,
+          "original": 1189,
+          "text": "PUCHAR pCode;"
+        },
+        {
+          "physical": 1216,
+          "logical": 1225,
+          "original": 1192,
+          "text": "BOOL bReturn = FALSE;"
+        },
+        {
+          "physical": 1288,
+          "logical": 1297,
+          "original": 1225,
+          "text": "if ((SegCS == DosxRmCodeSelector) &&"
+        },
+        {
+          "physical": 1297,
+          "logical": 1306,
+          "original": 1235,
+          "text": "DBGTRACE(VDMTR_TYPE_DPMI | DPMI_OP_EMULATION, Opcode, (ULONG) bReturn);"
+        },
+        {
+          "physical": 1304,
+          "logical": 1313,
+          "original": 1236,
+          "text": "return bReturn;"
+        },
+        {
+          "physical": 1351,
+          "logical": 1360,
+          "original": 1283,
+          "text": "Value = getCR0();"
+        },
+        {
+          "physical": 1354,
+          "logical": 1363,
+          "original": 1286,
+          "text": "SetRegisterByIndex[*pCode & MI_RMMASK](Value);"
+        },
+        {
+          "physical": 1372,
+          "logical": 1381,
+          "original": 1304,
+          "text": "setCR0(GetRegisterByIndex[*pCode & MI_RMMASK]());"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "good": 158,
+      "potential_mismatches": [
+        {
+          "physical": 107,
+          "logical": 102,
+          "original": 101,
+          "text": "setMSW(getMSW() & ~MSW_PE);"
+        },
+        {
+          "physical": 157,
+          "logical": 164,
+          "original": 163,
+          "text": "setMSW(getMSW() | MSW_PE);"
+        },
+        {
+          "physical": 351,
+          "logical": 360,
+          "original": 357,
+          "text": "setESP(LastLockedPMStackESP);"
+        }
+      ]
+    }
+  ]
+}
