@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed25/48files194/645points;restored-final-verified71,restored-local0,
-residual-final-verified123,unreviewed451.
+Reviewed30/48files369/645points;restored-final-verified220,restored-local0,
+residual-final-verified149,residual-local0,unreviewed276.
 Delivered/pushed25files194points through c3dca3705.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
@@ -39,11 +39,11 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | P8 delivered e25380fe2 |
 | 24 | src/mvdm-host/oemuni/file.c | 19 | P8 delivered e25380fe2 |
 | 25 | src/mvdm-host/oemuni/process.c | 65 | P9 delivered c3dca3705 |
-| 26 | src/mvdm-host/softpc.new/host/src/config.c | 38 | Pending |
-| 27 | src/mvdm-host/softpc.new/host/src/nt_bop.c | 16 | Pending |
-| 28 | src/mvdm-host/softpc.new/host/src/nt_com.c | 90 | Pending |
-| 29 | src/mvdm-host/softpc.new/host/src/nt_cpu.c | 2 | Pending |
-| 30 | src/mvdm-host/softpc.new/host/src/nt_emm.c | 29 | Pending |
+| 26 | src/mvdm-host/softpc.new/host/src/config.c | 38 | P10 final verified; commit/push pending |
+| 27 | src/mvdm-host/softpc.new/host/src/nt_bop.c | 16 | P10 final verified; commit/push pending |
+| 28 | src/mvdm-host/softpc.new/host/src/nt_com.c | 90 | P10 final verified; commit/push pending |
+| 29 | src/mvdm-host/softpc.new/host/src/nt_cpu.c | 2 | P10 final verified; commit/push pending |
+| 30 | src/mvdm-host/softpc.new/host/src/nt_emm.c | 29 | P10 final verified; commit/push pending |
 | 31 | src/mvdm-host/softpc.new/host/src/nt_eoi.c | 2 | Pending |
 | 32 | src/mvdm-host/softpc.new/host/src/nt_error.c | 26 | Pending |
 | 33 | src/mvdm-host/softpc.new/host/src/nt_keycd.c | 7 | Pending |
@@ -546,3 +546,68 @@ and runtime10 DOS FCB pass. Commit/push pending; no Full rerun.
 P9 product c3dca3705 pushed;25files194points delivered. No local restoration
 pending. Documentation governance and links PASS after audit-index and UTF-8
 correction; runtime tests were not rerun. Next file26 in DIR order.
+
+## P10 local file26 config.c
+
+38points reviewed:37format restorations,1package-registry binding residual.
+Nonerror1/1983 ->19/20;23exclusions unchanged, C tokens identical. Final
+preprocessing/build/publication not yet run: pure format can accumulate.
+Audited26/48files232/645points;delivered25/48files194/645points. Restored
+delivered71,local37;residual verified123,local1;unreviewed413. Local census
+733/23834;reduction70points7975lines. Delivered census715/25797 unchanged.
+Next27nt_bop.c;whole-file processing before next build.
+
+## P10 local file27 nt_bop.c
+
+16points reviewed:1format restoration,15evidence-backed residuals.
+Nonerror1/1795 ->21/44;32exclusions and C tokens unchanged. Retained ABI
+contracts match WOW /Gz and FARPROC exports; V86 mode requires !VM for PM
+selector interpretation. SAS read owns user-page permissions and guest fault
+service, unlike a raw VdmMapFlat dereference. B page-domain and synchronous
+COMMAND ingress providers are named in points.csv; loader failures use
+FreeLibrary, not CloseHandle. No new product logic or copied algorithm.
+
+Audited27/48files248/645points;delivered25files194points. Restored71delivered
+and38local;residual123verified and16local;397unreviewed. Local census
+753/22083,reduction50points/9726lines. Whole-file final preprocessing and
+delivery pending; pure format batch continues to file28nt_com.c.
+
+## P10 five-file checkpoint ready for final verification
+
+Files26-30 complete:config.c38points,nt_bop.c16,nt_com.c90,nt_cpu.c2,
+nt_emm.c29.149restored,26residual;all175points have conclusions in points.csv
+and pending decisions synchronized. Nonerror batch118/6282 ->74/153,
+reduction44points/6129lines. Final per-file metrics:config19/20,bop22/44,
+com7/8,cpu9/11,emm17/70. A format-helper correction preserved original
+blank lines instead of swallowing them before #line;these final metrics
+supersede local intermediate counts above. C tokens/exclusion counts unchanged.
+
+Local census671/19668,reduction132points/12141lines from S12 start.
+Audited30files369points;delivered25files194points. Restored71delivered plus
+149local;residual123verified plus26local;276unreviewed. Build owner25776
+runs cached full and actual per-TU preprocessing. Dual publication then Full
+required at this file30checkpoint;not yet delivered. No S closure claimed.
+
+### P10 verification running
+
+Cached build25776 PASS;503original logical-line witnesses PASS. First line
+check falsely counted two nt_bop.c form-feeds as newlines;initial evidence
+retained under build/t485-s12/p10/final/initial-*. Only the checker changed;
+no source rebuild. Runtime11 staged and dual-published; Full owner17924
+running after line check retry. No Full restart or repeated passing gates.
+Delivery remains25files194points until Full/commit/push complete.
+
+P10 Full follow-up: owner17924 remains live. Win31 standard/enhanced desktop
+subtests output PASS with normal exit; Win95 desktop outputs PASS under the
+previously approved exit-code boundary (normal-exit=False),not a claim of
+newly repaired normal exit. Governance11308 and relative links PASS. Full
+remaining gates and final timings receipt are pending;no repeat run started.
+
+## P10 final verification
+
+[Receipt](s12-p10-result.json):cached full build,503original line witnesses,
+dual26hash publication and runtime11 Full23/23 PASS. No Full rerun. Initial
+checker form-feed error retained;checker-only fix,no product rebuild. All
+30files369points final-verified:220restored149residual276unreviewed.
+Current671/19668,reduction132points12141lines. Commit/push pending;
+last delivered25files194points c3dca3705. Next31nt_eoi.c.

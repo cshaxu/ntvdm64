@@ -32,14 +32,14 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S12 Ordered Progress
 
-[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):25/48files,
-194/645points final-verified;71restored,123residual,451unreviewed.
-[P9 receipt](../etc/evidence/t485-h-repair/s12-p9-result.json):cached build,
-dual26hash publication,60line witnesses,four OEM fixtures and runtime10 DOS
-FCB PASS. P9 c3dca3705 committed/pushed;25files194points delivered.
-S12census803/31809->715/25797 (-88points/-6012lines).
-Next file26;23files remain. Last Full:file20,runtime8,23/23;
-no Full rerun for this targeted P. Migration39/159;N004 gated on S13.
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):30/48files,
+369/645points final-verified;220restored,149residual,276unreviewed.
+[P10 receipt](../etc/evidence/t485-h-repair/s12-p10-result.json):cached build,
+dual26hash publication,503line witnesses and runtime11 Full23/23 PASS.
+Commit/push pending;last delivered25files194points c3dca3705.
+S12census803/31809->671/19668 (-132points/-12141lines).
+Next31nt_eoi.c;18files remain. Last Full:file30,runtime11,23/23;
+no Full rerun. Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
 

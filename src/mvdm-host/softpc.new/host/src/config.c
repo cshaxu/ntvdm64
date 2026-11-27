@@ -57,11 +57,10 @@
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif  //HUNTER
+#line 60
 #if defined(NEC_98)
-#line 61
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 63
 
 #ifdef ARCX86
 #include "rom.h"
@@ -76,22 +75,22 @@ IMPORT ULONG xmsMemorySize;
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 118
 
 
+#line 120
 PIF_DATA pfdata; /* data structure for holding all the relavent information
                     from the PIF file interrogated */
 /* must be unsigned because they can be over 32768 */
-USHORT PIFExtendMemSize = 0;	 /* save value of extend mem from PIF file */
-USHORT PIFEMSMemSize = 0;	 /* save value of LIM mem from PIF file */
+USHORT PIFExtendMemSize = 0;     /* save value of extend mem from PIF file */
+USHORT PIFEMSMemSize = 0;        /* save value of LIM mem from PIF file */
 ULONG emsMemorySize;
 
 #ifdef LIM
 LIM_CONFIG_DATA     lim_config_data = {FALSE, 0, 0, 640 * 1024 / 16, FALSE};
 #endif
 
-APPKEY Shortkey;	/* PIF Shortcut key settings */
-BYTE ReserveKey;	/* PIF Reserved key setting */
+APPKEY Shortkey;        /* PIF Shortcut key settings */
+BYTE ReserveKey;        /* PIF Reserved key setting */
 int  nShortKeys;
 /*
  * ===========================================================================
@@ -100,17 +99,16 @@ int  nShortKeys;
  */
 GLOBAL SHORT Npx_enabled = TRUE;        //For Jazz CPU support
 GLOBAL BOOL IdleDisabledFromPIF = FALSE;//Flag showing idledetection wishes
-GLOBAL UTINY number_of_floppy = 0;	// number of floppy drives
+GLOBAL UTINY number_of_floppy = 0;      // number of floppy drives
 #ifdef ARCX86
 GLOBAL BOOL UseEmulationROM = FALSE;   // For ARCx86 system
 #endif /* ARCX86 */
 
 #if defined(NEC_98)
-#line 147
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 154
 
+#line 155
 /*================================================================
 Local defines
 ================================================================*/
@@ -121,18 +119,18 @@ Local defines
 #define EMBITSET        0x4
 
 #define ONEMEG  0x100000L
-#define ONEKB	0x400L
+#define ONEKB   0x400L
 
 #define RESERVED_LENGTH  129
 #define PMVDM_NTVDM_NAME    "ntvdm."
-#define PMVDM_NTVDM_NAME_LENGTH 6	/* doesn't include NULL */
+#define PMVDM_NTVDM_NAME_LENGTH 6       /* doesn't include NULL */
 
 #define XMS_DEFAULT_MEMORY_SIZE 15*1024
 #define EMS_DEFAULT_MEMORY_SIZE 4*1024
 #define DPMI_DEFAULT_MEMORY_SIZE_FOR_DOS 8*1024
 #define DPMI_DEFAULT_MEMORY_SIZE_FOR_WOW 16*1024
 /* maximum ems memory size */
-#define EMS_MAX_MEMORY_SIZE	32 * 1024   /* from EMM 4.0 specification */
+#define EMS_MAX_MEMORY_SIZE     32 * 1024   /* from EMM 4.0 specification */
 
 int read_profile_int(int index);
 ULONG GetVDMSize(BOOL);
@@ -161,8 +159,8 @@ VOID process_pif_exe (char *PifName)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 206
 
+#line 207
     GetPIFData(&pfdata, PifName);
 
     // get app specific LIM memory size
@@ -188,29 +186,29 @@ VOID process_pif_exe (char *PifName)
 
     if (DosSessionId || (pfdata.AppHasPIFFile && pfdata.SubSysId == SUBSYS_DOS))
     {
-	ReserveKey = pfdata.reskey;
-	if (!pfdata.IgnoreShortKeyInPIF) {
-	    Shortkey.Modifier = pfdata.ShortMod;
-	    Shortkey.ScanCode = pfdata.ShortScan;
-	    nShortKeys = (Shortkey.Modifier || Shortkey.ScanCode) ? 1 : 0;
-	}
-	if (ReserveKey || nShortKeys)
-	    SetConsoleKeyShortcuts(TRUE,
-				   ReserveKey,
+        ReserveKey = pfdata.reskey;
+        if (!pfdata.IgnoreShortKeyInPIF) {
+            Shortkey.Modifier = pfdata.ShortMod;
+            Shortkey.ScanCode = pfdata.ShortScan;
+            nShortKeys = (Shortkey.Modifier || Shortkey.ScanCode) ? 1 : 0;
+        }
+        if (ReserveKey || nShortKeys)
+            SetConsoleKeyShortcuts(TRUE,
+                                   ReserveKey,
                                    &Shortkey,
-				   nShortKeys
-				  );
+                                   nShortKeys
+                                  );
     }
 
     if (pfdata.idledetect == 1)
-	IdleDisabledFromPIF = FALSE;
+        IdleDisabledFromPIF = FALSE;
     else
-	IdleDisabledFromPIF = TRUE;
+        IdleDisabledFromPIF = TRUE;
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif  /* X86GFX */
-#line 293
 
+#line 294
 }
 
 /* Turn off the PIF reserved & shortcut keys - on block and quit */
@@ -231,21 +229,20 @@ void EnablePIFKeySetup(void)
 {
     /* only doing this if the app has a new console.*/
     if (ReserveKey || nShortKeys)
-	SetConsoleKeyShortcuts(TRUE,
-			       ReserveKey,
+        SetConsoleKeyShortcuts(TRUE,
+                               ReserveKey,
                                &Shortkey,
-			       nShortKeys
-			       );
+                               nShortKeys
+                               );
 
 }
 
 
 #if defined(NEC_98)
-#line 324
 #error Unsupported NEC PC-98 configuration
 #endif //NEC_98
-#line 458
 
+#line 459
 GLOBAL VOID config( VOID )
 {
     VDMINFO GetPIF;
@@ -263,11 +260,10 @@ GLOBAL VOID config( VOID )
     ULONG dpmiMemorySize, vdmMemorySize;
 
 #if defined(NEC_98)
-#line 476
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 530
 
+#line 531
 #ifdef ARCX86
     {
         HKEY    hSystemKey;
@@ -299,8 +295,8 @@ GLOBAL VOID config( VOID )
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 571
 
+#line 572
          /*
           *  Set the window title to a unique string, to get
           *  the Consoles Window Handle, we will retrieve
@@ -330,8 +326,8 @@ GLOBAL VOID config( VOID )
          */
         GetPIF.PifFile = PifName;
         GetPIF.PifLen = MAX_PATH;
-	GetPIF.EnviornmentSize = 0;
-	GetPIF.Enviornment = NULL;
+        GetPIF.EnviornmentSize = 0;
+        GetPIF.Enviornment = NULL;
 
         if (fSeparateWow) {
             GetPIF.VDMState = ASKING_FOR_PIF | ASKING_FOR_SEPWOW_BINARY;
@@ -348,10 +344,10 @@ GLOBAL VOID config( VOID )
         GetPIF.AppName = NULL;
         GetPIF.AppLen = 0;
         GetPIF.iTask      = VDMForWOW && !fSeparateWow ? WowSessionId : DosSessionId;
-	GetPIF.Desktop	  = NULL;
+        GetPIF.Desktop    = NULL;
         GetPIF.DesktopLen = 0;
         GetPIF.ReservedLen = (VDMForWOW) ? 0 : RESERVED_LENGTH;
-	GetPIF.Reserved = (VDMForWOW) ? NULL : Reserved;
+        GetPIF.Reserved = (VDMForWOW) ? NULL : Reserved;
         GetPIF.CurDirectoryLen = MAX_PATH + 1;
         GetPIF.CurDirectory = CurDir;
 
@@ -369,39 +365,39 @@ GLOBAL VOID config( VOID )
         pfdata.IgnoreWIN31JExtention = (DosSessionId) ? 0 : 1;
 #endif // JAPAN
 
-	PifName[0] = '\0';
-	pfdata.IgnoreTitleInPIF = 0;
-	pfdata.IgnoreStartDirInPIF = 0;
-	pfdata.IgnoreShortKeyInPIF = 0;
-	if (GetNextVDMCommand(&GetPIF)) {
-	    /* parsing the reserve field to decide if
-	       we should take StartDir, Title and hotkey from
-	       pif file. See windows\inc\pmvdm.h for the detail
-	    */
+        PifName[0] = '\0';
+        pfdata.IgnoreTitleInPIF = 0;
+        pfdata.IgnoreStartDirInPIF = 0;
+        pfdata.IgnoreShortKeyInPIF = 0;
+        if (GetNextVDMCommand(&GetPIF)) {
+            /* parsing the reserve field to decide if
+               we should take StartDir, Title and hotkey from
+               pif file. See windows\inc\pmvdm.h for the detail
+            */
 
-	    Reserved[GetPIF.ReservedLen] = '\0';
-	    if (!VDMForWOW && GetPIF.ReservedLen &&
-		(pch = strstr(Reserved, PMVDM_NTVDM_NAME)) != NULL)
-	    {
-		pch += PMVDM_NTVDM_NAME_LENGTH;
-		pch1 = pch;
-		dw = 0;
-		while(*pch >= '0' && *pch <= '9')
-		    pch++;
-		if (pch1 != pch) {
-		    ch = *pch;
-		    *pch = '\0';
-		    dw = (DWORD) strtol(pch1, (char **)NULL, 10);
-		    *pch = ch;
-		    if (dw &  PROPERTY_HAS_CURDIR)
-			pfdata.IgnoreStartDirInPIF = 1;
-		    if (dw & PROPERTY_HAS_HOTKEY)
-			pfdata.IgnoreShortKeyInPIF = 1;
-		    if (dw & PROPERTY_HAS_TITLE)
-			pfdata.IgnoreTitleInPIF = 1;
-		}
-	    }
-	    if (GetPIF.CurDirectoryLen) {
+            Reserved[GetPIF.ReservedLen] = '\0';
+            if (!VDMForWOW && GetPIF.ReservedLen &&
+                (pch = strstr(Reserved, PMVDM_NTVDM_NAME)) != NULL)
+            {
+                pch += PMVDM_NTVDM_NAME_LENGTH;
+                pch1 = pch;
+                dw = 0;
+                while(*pch >= '0' && *pch <= '9')
+                    pch++;
+                if (pch1 != pch) {
+                    ch = *pch;
+                    *pch = '\0';
+                    dw = (DWORD) strtol(pch1, (char **)NULL, 10);
+                    *pch = ch;
+                    if (dw &  PROPERTY_HAS_CURDIR)
+                        pfdata.IgnoreStartDirInPIF = 1;
+                    if (dw & PROPERTY_HAS_HOTKEY)
+                        pfdata.IgnoreShortKeyInPIF = 1;
+                    if (dw & PROPERTY_HAS_TITLE)
+                        pfdata.IgnoreTitleInPIF = 1;
+                }
+            }
+            if (GetPIF.CurDirectoryLen) {
                 achRoot[1] = CurDir[0];
 
                 /* these needs to be ANSI calls not OEM as server passes
@@ -410,11 +406,11 @@ GLOBAL VOID config( VOID )
                 SetEnvironmentVariable(achRoot, CurDir);
                 SetCurrentDirectory(CurDir);
 
-	    }
+            }
         }
 
 
-	pfdata.IgnoreCmdLineInPIF = 0;
+        pfdata.IgnoreCmdLineInPIF = 0;
         pfdata.IgnoreConfigAutoexec = 0;
         pfdata.AppHasPIFFile = PifName[0] ? 1 : 0;
 
@@ -457,18 +453,18 @@ GLOBAL VOID config( VOID )
 #endif // JAPAN
             DosSessionId = 0;            // Wow has hidden console !
             pfdata.IgnoreCmdLineInPIF =
-	    pfdata.IgnoreTitleInPIF =
-	    pfdata.IgnoreStartDirInPIF = 1;
-	    pfdata.IgnoreShortKeyInPIF = 1;
+            pfdata.IgnoreTitleInPIF =
+            pfdata.IgnoreStartDirInPIF = 1;
+            pfdata.IgnoreShortKeyInPIF = 1;
         }
 
         process_pif_exe(PifName);
 
 #if defined(NEC_98)
-#line 736
 #error Unsupported NEC PC-98 configuration
 #endif
 
+#line 755
         sas_term ();
 
         //
@@ -485,27 +481,27 @@ GLOBAL VOID config( VOID )
             //
             emsMemorySize = 0;
             xmsMemorySize = XMS_DEFAULT_MEMORY_SIZE;
-	    dpmiMemorySize = DPMI_DEFAULT_MEMORY_SIZE_FOR_WOW;
+            dpmiMemorySize = DPMI_DEFAULT_MEMORY_SIZE_FOR_WOW;
         } else {
 
-	    emsMemorySize = PIFEMSMemSize == (USHORT)(-1)
+            emsMemorySize = PIFEMSMemSize == (USHORT)(-1)
                             ? EMS_DEFAULT_MEMORY_SIZE
                             : PIFEMSMemSize;
 
-	    /* maximum size is 63MB */
-	    xmsMemorySize = PIFExtendMemSize == (USHORT)(-1)
+            /* maximum size is 63MB */
+            xmsMemorySize = PIFExtendMemSize == (USHORT)(-1)
                             ? XMS_DEFAULT_MEMORY_SIZE
                             : PIFExtendMemSize;
 
-	    /* put a upper limit on ems memory size based on EMM 4.0 spec */
-	    if (emsMemorySize > EMS_MAX_MEMORY_SIZE)
-		emsMemorySize = EMS_MAX_MEMORY_SIZE;
+            /* put a upper limit on ems memory size based on EMM 4.0 spec */
+            if (emsMemorySize > EMS_MAX_MEMORY_SIZE)
+                emsMemorySize = EMS_MAX_MEMORY_SIZE;
 
             // Force at least 1 megabyte xms to keep himem and dosx working.
             if (xmsMemorySize < 1024) {
                 xmsMemorySize = 1024;
-	    }
-	    dpmiMemorySize = DPMI_DEFAULT_MEMORY_SIZE_FOR_DOS;
+            }
+            dpmiMemorySize = DPMI_DEFAULT_MEMORY_SIZE_FOR_DOS;
         }
 
 #ifdef LIM
@@ -527,26 +523,26 @@ GLOBAL VOID config( VOID )
 #error Unsupported i386 kernel VDM memory-size profile
 #else
 #line 813
-	 vdmMemorySize = GetVDMSize(VDMForWOW);
+         vdmMemorySize = GetVDMSize(VDMForWOW);
 
-	 // Extend the vdm size if the user asks for it through a .PIF.
-	 // Also make sure we have at least appropriate size of dpmi
-	 // memory.
-	 //
-	 if ((xmsMemorySize + emsMemorySize +  1024 + dpmiMemorySize) >
-	      vdmMemorySize)
-	 {
-	    vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +
-			    dpmiMemorySize;
-	 }
+         // Extend the vdm size if the user asks for it through a .PIF.
+         // Also make sure we have at least appropriate size of dpmi
+         // memory.
+         //
+         if ((xmsMemorySize + emsMemorySize +  1024 + dpmiMemorySize) >
+              vdmMemorySize)
+         {
+            vdmMemorySize = xmsMemorySize + emsMemorySize + 1024 +
+                            dpmiMemorySize;
+         }
 #endif
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 833
 
-	sas_init(vdmMemorySize*ONEKB);
+#line 834
+        sas_init(vdmMemorySize*ONEKB);
 
 
 #ifdef CPU_40_STYLE
@@ -562,8 +558,8 @@ GLOBAL VOID config( VOID )
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 899
 
+#line 900
            //  Now see if we can get the console window handle
         if (!VDMForWOW)  {
             i = 6;
@@ -587,20 +583,19 @@ GLOBAL VOID config( VOID )
 
 
 // Create UMB list (both MIPS and x86) -- williamh
-	InitUMBList();
+        InitUMBList();
 //
         host_runtime_init();            /* initialise the runtime system */
 
 
         /* Do not attempt to initialise printer system here */
 // activate(open) floppy drives if there are any
-	number_of_floppy = 0;
-	for (i = 0, hostID = C_FLOPPY_A_DEVICE; i < MAX_FLOPPY; i++, hostID++)
-	    if ((gfi_floppy_active(hostID, 1, NULL)) == C_CONFIG_OP_OK)
-		number_of_floppy++;
+        number_of_floppy = 0;
+        for (i = 0, hostID = C_FLOPPY_A_DEVICE; i < MAX_FLOPPY; i++, hostID++)
+            if ((gfi_floppy_active(hostID, 1, NULL)) == C_CONFIG_OP_OK)
+                number_of_floppy++;
 
 #if defined(NEC_98)
-#line 936
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
 #line 948
@@ -652,12 +647,12 @@ config_inquire(UTINY hostID, ConfigValues *values)
                         return ((VOID *) values->index);
 
                 case C_EXTENDED_MEM_SIZE:
-			values->index = (SHORT)(xmsMemorySize/1024);
+                        values->index = (SHORT)(xmsMemorySize/1024);
                         return ((VOID *)values->index);
 
                 case C_LIM_SIZE:
-			values->index = (SHORT)(emsMemorySize/1024);
-			return ((VOID *)values->index);
+                        values->index = (SHORT)(emsMemorySize/1024);
+                        return ((VOID *)values->index);
 
                 case C_MEM_LIMIT:
                         values->index = 640;
@@ -699,7 +694,7 @@ config_inquire(UTINY hostID, ConfigValues *values)
 /* Auto flush closes the port after 'n' seconds of inactivaty */
 
                 case C_AUTOFLUSH:
-			values->index = TRUE;
+                        values->index = TRUE;
                         return ((VOID *)values->index);
 
                 case C_AUTOFLUSH_DELAY:
@@ -713,22 +708,22 @@ config_inquire(UTINY hostID, ConfigValues *values)
                         strcpy (values->string, "\\");
                         return ((VOID *) values->string);
 
-		case C_VDMLPT1_NAME:
-			strcpy(values->string, "\\\\.\\$VDMLPT1");
-			return ((VOID *)values->string);
-		case C_VDMLPT2_NAME:
-			strcpy(values->string, "\\\\.\\$VDMLPT2");
-			return ((VOID *)values->string);
-		case C_VDMLPT3_NAME:
-			strcpy(values->string, "\\\\.\\$VDMLPT3");
-			return ((VOID *)values->string);
+                case C_VDMLPT1_NAME:
+                        strcpy(values->string, "\\\\.\\$VDMLPT1");
+                        return ((VOID *)values->string);
+                case C_VDMLPT2_NAME:
+                        strcpy(values->string, "\\\\.\\$VDMLPT2");
+                        return ((VOID *)values->string);
+                case C_VDMLPT3_NAME:
+                        strcpy(values->string, "\\\\.\\$VDMLPT3");
+                        return ((VOID *)values->string);
 
 
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 1099
 
+#line 1100
                 default:        /* ie everything else */
                         /* fail */
                         break;
@@ -854,8 +849,8 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 1325
 
+#line 1326
 /*
  * ===========================================================================
  * LOCAL FUNCTIONS
@@ -865,8 +860,8 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
-#line 1457
 
+#line 1458
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::: Read auto close time ::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -894,11 +889,11 @@ int read_profile_int(int index)
     /* LPT autoclose default moved from win.ini to registry */
 
     if (RegOpenKeyEx ( HKEY_LOCAL_MACHINE,
-		       "SYSTEM\\CurrentControlSet\\Control\\WOW",
-		       0,
-		       KEY_QUERY_VALUE,
+                       "SYSTEM\\CurrentControlSet\\Control\\WOW",
+                       0,
+                       KEY_QUERY_VALUE,
                        &LPTKey
-		     ) != 0)
+                     ) != 0)
     {
         return(ProfileStrings[PROFILE_LPT].def);
     }
@@ -907,10 +902,10 @@ int read_profile_int(int index)
 
     if (RegQueryValueEx (LPTKey,
                          KeywordName,
-			 NULL,
-			 NULL,
-			 (LPBYTE)&CmdLine,
-			 &CmdLineSize) != 0)
+                         NULL,
+                         NULL,
+                         (LPBYTE)&CmdLine,
+                         &CmdLineSize) != 0)
     {
         RegCloseKey (LPTKey);
         return(ProfileStrings[PROFILE_LPT].def);
@@ -939,8 +934,8 @@ boolean get_lim_configuration_data(PLIM_CONFIG_DATA buffer)
 #ifdef MONITOR
 #error Excluded original conditional branch
 #endif
-#line 1548
 
+#line 1549
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::: Get VDM Memory Size :::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -1021,8 +1016,6 @@ GetDefaultVDMSize ( BOOL fwow )
 }
 
 #if defined(NEC_98)
-#line 1629
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 1715
 

@@ -61,6 +61,7 @@ The Following Routines are defined:
 #include "compat/include/guest_memory_access.h"
 
 
+#line 62
 /*	Global Variables		*/
 
 /*	Forward Declarations		*/
@@ -69,7 +70,6 @@ The Following Routines are defined:
 
 /*	Local Variables			*/
 
-#line 70
 UTINY	*EM_pagemap_address = 0; /* address of start of pagemap	*/
 sys_addr    EM_base_address;	/* EM base intel address */
 host_addr   EM_host_base_address = 0;	/* EM base host address */
@@ -81,7 +81,7 @@ LOCAL	LONG	EM_size = 0;
 unsigned short EM_starting_page_no;
 
 /*
-Support for backwards LIM to speed up backwards M ports 
+Support for backwards LIM to speed up backwards M ports
 
 Defines are:
 	EM_host_address(offset), returns host address of offset bytes
@@ -102,7 +102,6 @@ Defines are:
 #define unix_memmove(dst,src,len) memmove((dst),(src),(len))
 
 #ifdef	BACK_M
-#line 102
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 #line 114
@@ -118,12 +117,10 @@ Defines are:
 	MoveMemory(to, from, length)
 #define	EM_pointer(ptr, length) (ptr)
 #endif
-#line 126
 
 #define EM_PAGE_ADDRESS(page_no)    (EM_base_address + page_no * EMM_PAGE_SIZE)
 static int em_loads(sys_addr from, unsigned char *to, int length)
 {
-#line 134
     if (!mvdm_softpc_physical_mapping_span_is_aliased(from, length)) {
         EM_loads(from, to, length);
         return SUCCESS;
@@ -134,7 +131,6 @@ static int em_loads(sys_addr from, unsigned char *to, int length)
 
 static int em_stores(sys_addr to, unsigned char *from, int length)
 {
-#line 148
     if (!mvdm_softpc_physical_mapping_span_is_aliased(to, length)) {
         EM_stores(to, from, length);
         return SUCCESS;
@@ -146,7 +142,6 @@ static int em_stores(sys_addr to, unsigned char *from, int length)
 
 static int em_moves(sys_addr from, sys_addr to, int length)
 {
-#line 163
     if (!mvdm_softpc_physical_mapping_span_is_aliased(from, length) &&
         !mvdm_softpc_physical_mapping_span_is_aliased(to, length)) {
         EM_moves(from, to, length);
@@ -158,12 +153,13 @@ static int em_moves(sys_addr from, sys_addr to, int length)
 }
 
 
+#line 130
 /*
 ===========================================================================
 
 FUNCTION	: host_initialise_EM
 
-PURPOSE		: allocates the area of memory that is used for 
+PURPOSE		: allocates the area of memory that is used for
 		expanded memory and sets up an area of memory to be used
 		for the logical pagemap allocation table.
 
@@ -176,7 +172,6 @@ DESCRIPTION	:
 
 =========================================================================
 */
-#line 148
 int host_initialise_EM(short size)
 
 /*   IN   short	size		 size of area required in megabytes	*/
@@ -190,17 +185,14 @@ int host_initialise_EM(short size)
 	status = VdmAllocateVirtualMemory(&EM_base_address, size * 0x100000, FALSE);
 	if (!NT_SUCCESS(status)) {
 #ifdef EMM_DEBUG
-#line 161
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 #line 164
 	    return FAILURE;
 	}
 #ifdef EMM_DEBUG
-#line 167
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
-#line 169
 
 	/* pagemap requires 1 bit per 16K page - i.e. 8 bytes per meg	*/
 
@@ -228,7 +220,7 @@ int host_initialise_EM(short size)
 
 FUNCTION	: host_deinitialise_EM
 
-PURPOSE		: frees the area of memory that was used for 
+PURPOSE		: frees the area of memory that was used for
 		expanded memory and memory  used
 		for the logical pagemap allocation table.
 
@@ -264,7 +256,7 @@ int host_deinitialise_EM()
 
 FUNCTION	: host_allocate_storage
 
-PURPOSE		: allocates an area of memory of requested size, to be 
+PURPOSE		: allocates an area of memory of requested size, to be
 		used as a general data storage area. The area is
 		to zeros.
 
@@ -275,7 +267,7 @@ RETURNED STATUS	: storage_ID - (in this case a pointer)
 DESCRIPTION	: calloc is similar to malloc but returns memory
 		initialised to zeros.
 		The storage ID returned is a value used to later reference
-		the storage area allocated. The macro USEBLOCK in 
+		the storage area allocated. The macro USEBLOCK in
 		"host_emm.h" is used by the manager routines to convert
 		this ID into a char pointer
 
@@ -295,7 +287,7 @@ long host_allocate_storage(int no_bytes)
 
 FUNCTION	: host_free_storage
 
-PURPOSE		: frees the area of memory that was used for 
+PURPOSE		: frees the area of memory that was used for
 		data storage
 
 
@@ -341,7 +333,7 @@ DESCRIPTION	: In this implementation storage_ID is simply a pointer
 */
 long host_reallocate_storage(long storage_ID, int size, int new_size)
 
-/*   IN 
+/*   IN
 long	storage_ID	ptr to area of memory	
 int	size		original size - not used in this version
 	new_size	new size required
@@ -363,7 +355,7 @@ PURPOSE		: produces mapping from an Expanded Memory page to a
 RETURNED STATUS	: SUCCESS - mapping completed succesfully
 		  FAILURE - error ocurred in mapping
 
-DESCRIPTION	: Mapping achieved by simply copying data from the 
+DESCRIPTION	: Mapping achieved by simply copying data from the
 		expanded memory to Intel memory
 
 =========================================================================
@@ -373,7 +365,7 @@ extern NTSTATUS VdmMapDosMemory(ULONG, ULONG, ULONG);
 
 int host_map_page(short EM_page_no, unsigned short segment)
 
-/*   IN 
+/*   IN
 short		EM_page_no;	 Expanded Memory page to be mapped in
 unsigned short	segment;	 segment in physical address space to
 				 map into
@@ -394,7 +386,6 @@ unsigned short	segment;	 segment in physical address space to
 				 EMM_PAGE_SIZE / INTEL_PAGE_SIZE
 				 );
 #ifdef EMM_DEBUG
-#line 362
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 #line 365
@@ -428,7 +419,7 @@ extern NTSTATUS VdmUnmapDosMemory(ULONG, ULONG);
 
 int host_unmap_page(unsigned short segment, short EM_page_no)
 
-/*   IN  
+/*   IN
 unsigned short	segment 	segment in physical address space to
 				unmap 			
 short		EM_page_no 	Expanded Memory page currently
@@ -444,7 +435,6 @@ short		EM_page_no 	Expanded Memory page currently
 			 EM_starting_page_no;
 
 #ifdef EMM_DEBUG
-#line 411
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 #line 414
@@ -469,7 +459,7 @@ FUNCTION	: host_alloc_page
 PURPOSE		: searches the pagemap looking for a free page, allocates
 		that page and returns the EM page no.
 
-RETURNED STATUS	: 
+RETURNED STATUS	:
 		  SUCCESS - Always see note below
 
 DESCRIPTION	: Steps through the Expanded memory Pagemap looking for
@@ -538,7 +528,7 @@ FUNCTION	: host_free_page
 PURPOSE		: marks the page indicated as being free for further
 		allocation
 
-RETURNED STATUS	: 
+RETURNED STATUS	:
 		SUCCESS - Always - see note below	
 
 DESCRIPTION	: clears the relevent bit in the pagemap.
@@ -601,12 +591,12 @@ FUNCTION	: host_copy routines
 PURPOSE		: copies between conventional and expanded memory
 
 
-RETURNED STATUS	: 
+RETURNED STATUS	:
 		SUCCESS - Always - see note below	
 
 DESCRIPTION	:
 		 The middle layer calling routine always checks for a
-		return of SUCCESS as other implementations may 
+		return of SUCCESS as other implementations may
 		return FAILURE.
 =========================================================================
 */
@@ -614,7 +604,7 @@ int host_copy_con_to_con(int length, unsigned short src_seg,
 			unsigned short src_off, unsigned short dst_seg,
 			unsigned short dst_off)
 
-/*   IN  
+/*   IN
 int		length 		number of bytes to copy	
 
 unsigned short	src_seg 	source segment address	
@@ -639,7 +629,7 @@ int host_copy_con_to_EM(int length, unsigned short src_seg,
 			unsigned short src_off, unsigned short dst_page,
 			unsigned short dst_off)
 
-/*   IN 
+/*   IN
 int		length 		number of bytes to copy	
 
 unsigned short	src_seg 	source segment address	
@@ -665,7 +655,7 @@ int host_copy_EM_to_con(int length, unsigned short src_page,
 			unsigned short src_off, unsigned short dst_seg,
 			unsigned short dst_off)
 
-/*   IN 
+/*   IN
 int		length 		number of bytes to copy	
 
 unsigned short	src_page 	source page number		
@@ -691,7 +681,7 @@ int host_copy_EM_to_EM(int length, unsigned short src_page,
 			unsigned short src_off, unsigned short dst_page,
 			unsigned short dst_off)
 
-/*   IN  
+/*   IN
 int		length 		number of bytes to copy	
 
 unsigned short	src_page 	source page number		
@@ -722,7 +712,7 @@ FUNCTION	: host_exchange routines
 PURPOSE		: exchanges data between conventional and expanded memory
 
 
-RETURNED STATUS	: 
+RETURNED STATUS	:
 		SUCCESS - Everything ok
 		FAILURE - Memory allocation failure
 
@@ -734,7 +724,7 @@ int host_exchg_con_to_con(int length, unsigned short src_seg,
 			unsigned short src_off, unsigned short dst_seg,
 			unsigned short dst_off)
 
-/*   IN 
+/*   IN
 int		length		number of bytes to copy	
 
 unsigned short	src_seg		 source segment address	
@@ -771,7 +761,7 @@ int host_exchg_con_to_EM(int length, unsigned short src_seg,
 			unsigned short src_off, unsigned short dst_page,
 			unsigned short dst_off)
 
-/*   IN 
+/*   IN
 int		length 		number of bytes to copy	
 
 unsigned short	src_seg 	source segment address	
@@ -808,7 +798,7 @@ int host_exchg_EM_to_EM(int length, unsigned short src_page,
 			unsigned short src_off, unsigned short dst_page,
 			unsigned short dst_off)
 
-/*   IN  
+/*   IN
 int		length		number of bytes to copy	
 
 unsigned short	src_page 	source page number		

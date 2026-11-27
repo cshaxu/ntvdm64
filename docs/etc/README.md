@@ -2093,3 +2093,7 @@ post-publication targeted checks.
 [S12 P6 directory search receipt](evidence/t485-h-repair/s12-p6-result.json).
 
 [S12 P9 OEM process audit](evidence/t485-h-repair/s12-p9-audit.md) and [delivery receipt](evidence/t485-h-repair/s12-p9-result.json).
+
+[S12 P10 five-file source audit](evidence/t485-h-repair/s12-p10-audit.md).
+
+[S12 P10 Full checkpoint receipt](evidence/t485-h-repair/s12-p10-result.json).

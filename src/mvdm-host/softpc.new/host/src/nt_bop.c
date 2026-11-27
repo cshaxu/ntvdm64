@@ -71,7 +71,7 @@ DATA OBJECTS      : None
 #include "config.h"
 #include "cntlbop.h"
 #include "compat/include/mvdm_softpc_wow_page_domain.h"
-#line 74
+#line 73
 #include "host_bop.h"
 #include "demexp.h"
 #include "xmsexp.h"
@@ -126,10 +126,8 @@ VOID call_ica_hw_interrupt(int, half_word, int);
 VOID ica_enable_iret_hook(int, int, int);
 VOID ica_iret_hook_called(int);
 #if defined(NEC_98)
-#line 129
 #error Unsupported NEC PC-98 configuration
 #endif // NEC_98
-#line 131
 
 /*
 [7.1 INTERMODULE DATA DEFINITIONS]              */
@@ -186,7 +184,7 @@ void MS_bop_1(void) {
         TerminateVDM();
         return;
     }
-#line 183
+#line 181
     if (!WowModeInitialized) {
     hWOWDll = SafeLoadLibrary("WOW32");
     if (hWOWDll == NULL)
@@ -279,8 +277,8 @@ void MS_bop_1(void) {
     (*WOWDispatchEntry)();
 #else
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
-#endif	/* CPU_40_STYLE */
-#line 295
+#endif  /* CPU_40_STYLE */
+#line 293
 }
 
 
@@ -324,11 +322,11 @@ void MS_bop_4(void)
     IMPORT BOOL CmdDispatch(ULONG);
     extern int mvdm_vm_command_enter(IU32 service);
 
-#line 335
     sas_load( ((ULONG)getCS()<<4) + getIP(), &Command);
+#line 336
     setIP((USHORT)(getIP() + 1));
     if (mvdm_vm_command_enter(Command)) return;
-#line 339
+#line 337
     CmdDispatch((ULONG) Command);
 }
 
@@ -366,7 +364,7 @@ ULONG DefaultVrInitialized() {
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
-#line 390
+#line 388
 MYFARPROC VrDispatch;
 MYFARPROC VrInitialized = DefaultVrInitialized;
 MYFARPROC VrReadNamedPipe;
@@ -464,7 +462,7 @@ returnError:
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 488
+#line 486
     }
 
     //
@@ -564,7 +562,7 @@ closeAndReturnError:
 
     if (hVdmRedir != NULL) FreeLibrary(hVdmRedir);
     hVdmRedir = NULL;
-#line 586
+#line 584
     return FALSE;
 }
 
@@ -645,7 +643,7 @@ void MS_bop_A(void)
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 667
+#line 665
 }
 
 
@@ -680,7 +678,7 @@ void MS_bop_D(void)
 #ifdef MONITOR
 #error Excluded unsupported monitor IRET BOP
 #else
-#line 717
+#line 715
     illegal_bop();
 #endif
 
@@ -714,11 +712,10 @@ void MS_bop_F(void)
     extern void kb_setup_vectors(void);
 
 #if defined(NEC_98)
-#line 750
 #error Unsupported NEC PC-98 configuration
 #else  // !NEC_98
-#line 754
 
+#line 753
     kb_setup_vectors();
 
     //
@@ -749,11 +746,10 @@ void MS_bop_F(void)
 #ifdef MONITOR
 #error Excluded original conditional branch
 #endif
-#line 793
 
 #endif // !NEC_98
-#line 795
 
+#line 794
     /*
      * Now that spckbd is loaded, and the ivt rom vectors are hooked
      * we can allow hw interrupts.
@@ -939,4 +935,3 @@ void ISV_DispatchCall (void)
 #ifdef i386
 #error DIVERGENCE MVDM-HOST-DIV-601: unsupported hardware-host FPU save path
 #endif  //i386
-#line 1008
