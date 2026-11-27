@@ -2104,3 +2104,5 @@ post-publication targeted checks.
 [S13 S8 final residual mapping](evidence/t485-h-repair/s13-s8-final-map.json).
 
 [S13 S7 final residual mapping](evidence/t485-h-repair/s13-s7-final-map.json).
+
+[S13 S7 byte census](evidence/t485-h-repair/s13-s7-byte-census.json).

@@ -66,3 +66,28 @@ bodies as active differences. Complete this census before S13 closure.
 All4550frozen IDs now have either explicit final dispositions or linked
 whole-file replacement accounting;final metric and receipt reconciliation
 remain open. No source/package changes and no Full rerun.
+
+## S7 byte census follow-up
+
+[Byte census](s13-s7-byte-census.json) now computes all20files,1685points/
+7188lines including CRLF,EOF and#line. This is the computed census pending
+final exclusion-pair review,not a new closure claim. Condition canonicalization
+is used only to align guards;the compared source bytes remain unchanged.
+Four source-reviewed explicit ranges cover translated-cache flush,monitor TEB
+initialization,VESA monitor switching and the moved X86GFX wrapper. Added
+condition frames remain counted. LF alone separates compiler physical lines.
+
+Three delivered files still use CRLF against LF originals. Pure LF candidates:
+
+| File | Current points/lines | LF candidate points/lines |
+| --- | --- | --- |
+| dpmiint.c | 1/2600 | 46/238 |
+| dpmiselr.c | 1/1862 | 9/62 |
+| i386/dpmi386.c | 1/407 | 3/219 |
+
+These candidates reduce4350diff lines,while exposing55previously joined
+blocks. They have not yet been applied;the standing format-restoration
+approval covers this kind of point increase. Whole-file residual necessity,
+exclusion mapping and source-hash ledger updates remain before final accounting.
+No product source or package changed;runtime14 Full23/23 remains valid and
+was not rerun. This batch corrects measurement evidence only.

@@ -1,0 +1,235 @@
+{
+  "status": "computed-pending-final-mapping-review",
+  "baseline_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+  "source_unchanged": true,
+  "files": 20,
+  "points": 1685,
+  "lines": 7188,
+  "counting": "LF-delimited byte-sensitive SequenceMatcher, autojunk false; preserve CRLF, EOF, #line and added condition frameworks; omit admitted #error bodies only",
+  "pairing_aliases": [
+    "defined(_X86_) && !defined(CCPU) -> original _X86_",
+    "MONITOR && !CPU_40_STYLE -> original MONITOR",
+    "!i386 && !WOW_X86_GENERIC_CALL -> original !i386",
+    "remove !MVDM_STANDALONE_SAS_VIDEO for guard pairing only"
+  ],
+  "explicit_original_ranges": {
+    "mouse_io.c": [
+      1798,
+      1820
+    ],
+    "sim32.c": [
+      275,
+      313
+    ],
+    "ntvdm.c": [
+      243,
+      249
+    ],
+    "nt_fulsc.c": [
+      2123,
+      2174
+    ]
+  },
+  "limitations": [
+    "Automatic condition alignment is not a proof of exclusion ownership; final pair review remains required.",
+    "Historical normalized semantic counts must not be added to byte-sensitive counts.",
+    "LF candidates are computed only; production remains unchanged."
+  ],
+  "rows": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "sha256": "3ccb20e620217f2644995d7c5f8ba5f54af04fa9f90aa103d52cd6bbc4505793",
+      "metric": {
+        "points": 8,
+        "lines": 18,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.h",
+      "sha256": "3c320dacb49e93caf55401c4364e25904a32b8754f83a46ce75b772b5caf11b8",
+      "metric": {
+        "points": 8,
+        "lines": 15,
+        "excluded": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "sha256": "11c607ba854ff7f7be7a6d64af660c0aa1949b843d07976df30287c6770ae666",
+      "metric": {
+        "points": 1,
+        "lines": 2600,
+        "excluded": 8
+      },
+      "lf_only_candidate": {
+        "points": 46,
+        "lines": 238,
+        "excluded": 8
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "sha256": "bcc60faa937d726158b811aaa4ae4ad7539fc2adea93909b526b325ed650ef65",
+      "metric": {
+        "points": 1,
+        "lines": 1862,
+        "excluded": 2
+      },
+      "lf_only_candidate": {
+        "points": 9,
+        "lines": 62,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "sha256": "438d11bab802d783aa549e98aa47c859d80db6564122e73c332a4b91666ac365",
+      "metric": {
+        "points": 1,
+        "lines": 407,
+        "excluded": 0
+      },
+      "lf_only_candidate": {
+        "points": 3,
+        "lines": 219,
+        "excluded": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "sha256": "2ffc7c1547b72899806a1741751fbfde431aae524464e847dc6c422944c886db",
+      "metric": {
+        "points": 22,
+        "lines": 63,
+        "excluded": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/stack.c",
+      "sha256": "6d170df338513e44269d503b9cdce7dd1ff071d9289c0c023454e81007357823",
+      "metric": {
+        "points": 5,
+        "lines": 20,
+        "excluded": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/inc/wowusr.h",
+      "sha256": "256343881dae7d6d5f1443b0cbb578a95aad2f20b57ee94d7d25932903e1019d",
+      "metric": {
+        "points": 82,
+        "lines": 82,
+        "excluded": 41
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "sha256": "be8de121f46dcf440256d56a32d29fa224d5babb6c009e93cc68bf038c9f4967",
+      "metric": {
+        "points": 142,
+        "lines": 193,
+        "excluded": 47
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "sha256": "df5263f015686e17d4ea3c552ef8875a0bdac3e93afb38df93dc5bce118d6230",
+      "metric": {
+        "points": 394,
+        "lines": 629,
+        "excluded": 83
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "sha256": "a87c9c8e6f6e419891ae7b4f10ff2e4a596222cab328a212339c5589af390f23",
+      "metric": {
+        "points": 583,
+        "lines": 642,
+        "excluded": 63
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "sha256": "7108a678210b1d35fc9a23c0cd1fb25404a3bfe03c208821520f2a15176a4ebc",
+      "metric": {
+        "points": 9,
+        "lines": 11,
+        "excluded": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "sha256": "0f8dc962f570cfb5ecd616f8680a8dffb93e505df3300ec0627b3fb517dbdd23",
+      "metric": {
+        "points": 13,
+        "lines": 19,
+        "excluded": 4
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "sha256": "6d1ae42c564af2fcf751c9a4af9e946f7de7f11ec7515b920052f16e4a9967be",
+      "metric": {
+        "points": 251,
+        "lines": 329,
+        "excluded": 60
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sb.c",
+      "sha256": "0d534bed6dcf94441d10f5913036e2ec76b756f11a74820bf97c3a9c7ee2878f",
+      "metric": {
+        "points": 0,
+        "lines": 0,
+        "excluded": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sbfm.c",
+      "sha256": "82b3e9f5ccdf04af275d7d6126e081603e6e624954b446f93ff24bafae1aa32e",
+      "metric": {
+        "points": 13,
+        "lines": 18,
+        "excluded": 4
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "sha256": "f77458df380bad08af6b3f46fe08f7be6c3b18e36e4131639e3697f007573a7b",
+      "metric": {
+        "points": 34,
+        "lines": 64,
+        "excluded": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "sha256": "2ef9acacb1cb77d942d0fb1935da21c638bfd7ac2a97b84d80e95b81da174bbd",
+      "metric": {
+        "points": 18,
+        "lines": 24,
+        "excluded": 5
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "sha256": "6bf736ac69dd354e00a237b48dba8fb88017ae80497356c8f02353d42b56ee6e",
+      "metric": {
+        "points": 7,
+        "lines": 10,
+        "excluded": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "sha256": "2504060f5b97de7dd609ab61afcf344f36b7fa2eb6ed8e1cbe737ab2ac95728f",
+      "metric": {
+        "points": 93,
+        "lines": 182,
+        "excluded": 33
+      }
+    }
+  ]
+}
