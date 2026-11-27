@@ -25,5 +25,14 @@ BOOL WINAPI mnemonic_underline(HDC, int, int, UINT, CONST RECT *, LPCWSTR, UINT,
 #define UserGetTextColor mnemonic_foreground
 #undef UserExtTextOutW
 #define UserExtTextOutW mnemonic_underline
-VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int);
+VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int, DWORD);
+/* Instrument native leaves used by the actual XP client PSM body. */
+#define UserLocalAlloc(flags, bytes) mnemonic_allocate(bytes)
+#define UserLocalFree(ptr) mnemonic_free(ptr)
+#define TextOutW mnemonic_text
+#define GetTextMetricsW mnemonic_metrics
+#define GetTextExtentPointW mnemonic_extent
+#define SetBkColor mnemonic_background
+#define GetTextColor mnemonic_foreground
+#define ExtTextOutW mnemonic_underline
 #endif

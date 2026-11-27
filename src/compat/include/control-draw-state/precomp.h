@@ -35,5 +35,5 @@
 BOOL WINAPI BitBltSysBmp(HDC, int, int, UINT);
 VOID WINAPI BltColor(HDC, HBRUSH, HDC, int, int, int, int, int, int, BOOL);
 BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
-VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int);
+VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int, DWORD);
 #endif

@@ -33,7 +33,7 @@ BOOL WINAPI IsSysFontAndDefaultMode(HDC);
 #define UserGetTextColor GetTextColor
 #define UserExtTextOutW ExtTextOutW
 #define UserSetBkColor SetBkColor
-VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int);
+VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int, DWORD);
 /* OPENNT-HOST-111: original arithmetic; native resources/scoped input only. */
 #define oemInfo (wow_edit_current->screen)
 #define SYSRGB(index) GetSysColor(COLOR_##index)
@@ -47,4 +47,47 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 #define UserGetWindowExtEx GetWindowExtEx
 #define ghbrWhite ((HBRUSH)GetStockObject(WHITE_BRUSH))
 #define ghbrBlack ((HBRUSH)GetStockObject(BLACK_BRUSH))
+/* XP client/usercli.h and rtl/userrtl.h text-provider ABI. */
+#include "wow_multibyte.h"
+#include "wow_control_resource_abi.h"
+#include "wow_task_init_bindings.h"
+#include "wow_edit_call_bindings.h"
+#include "wow_user_globals_binding.h"
+#define PCLIENTINFO const wow_task_client_info *
+#define GetClientInfo() wow_edit_client_info()
+#define TIF_16BIT WOW_TASK_TIF_16BIT
+#define IS_DBCS_ENABLED() GetSystemMetrics(SM_DBCSENABLED)
+#define CH_ENGLISHPREFIX 0x1E
+#define CH_KANJIPREFIX 0x1F
+#define USER_AWCONV_COUNTSTRINGSZ (-2)
+/* XP user.h:646, usercli.h:1140 and rtl/userrtl.h:69. */
+#define DBCS_CHARSIZE (2)
+#define GETAPPVER() GetClientInfo()->dwExpWinVer
+#define USERGETCODEPAGE(hdc) GdiGetCodePage(hdc)
+#define UserLpkDrawTextEx fpLpkDrawTextEx
+#define UserLocalAlloc(flags, bytes) LocalAlloc((flags), (bytes))
+#define UserLocalReAlloc(ptr, bytes, flags) LocalReAlloc((HLOCAL)(ptr), (bytes), (flags))
+#define UserLocalFree(ptr) LocalFree((HLOCAL)(ptr))
+#define UserGetLayout GetLayout
+#define UserGetTextCharsetInfo GetTextCharsetInfo
+#define UserSetTextAlign SetTextAlign
+#define UserGetTextAlign GetTextAlign
+#define UserCreateRectRgn CreateRectRgn
+#define UserDeleteObject DeleteObject
+#define UserGetClipRgn GetClipRgn
+#define UserIntersectClipRect IntersectClipRect
+#define UserExtSelectClipRgn ExtSelectClipRgn
+#define UserAssert(condition) ((void)0)
+#define RIPERR1(error, level, text, arg) SetLastError(error)
+#define FUNCLOG5(...)
+#define FUNCLOG6(...)
+#define FUNCLOGVOID6(...)
+/* Source-local original wrappers coexist with native USER import consumers. */
+#define DrawTextA wow_original_DrawTextA
+#define TabbedTextOutA wow_original_TabbedTextOutA
+#define GetTabbedTextExtentA wow_original_GetTabbedTextExtentA
+#define DrawTextExW wow_original_DrawTextExW
+int WINAPI wow_original_DrawTextExW(HDC, LPWSTR, int, LPRECT, UINT, LPDRAWTEXTPARAMS);
+#define GdiGetCodePage wow_edit_native_GdiGetCodePage
+#define GdiValidateHandle wow_edit_native_GdiValidateHandle
 #endif

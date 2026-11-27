@@ -266,3 +266,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P43 N022 dialog navigation](n022-dlgmgrc.md).
 - [S15 P44 N022 dialog mnemonics](n022-dmmnem.md).
 - [S15 P45 N022 control drawing](n022-draw.md).
+
+- [S15 P46 XP text drawing](n022-drawtext.md).

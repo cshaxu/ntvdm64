@@ -2205,3 +2205,5 @@ post-publication targeted checks.
 - [S15 P43 N022 dialog navigation](evidence/t485-s1/n022-dlgmgrc.md).
 - [S15 P44 N022 dialog mnemonics](evidence/t485-s1/n022-dmmnem.md).
 - [S15 P45 N022 control drawing](evidence/t485-s1/n022-draw.md).
+
+- [S15 P46 XP text drawing](evidence/t485-s1/n022-drawtext.md).

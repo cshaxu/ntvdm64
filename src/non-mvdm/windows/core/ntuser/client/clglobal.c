@@ -107,6 +107,9 @@ HBRUSH ghbrWindowText;
 int    gcxGray;
 int    gcyGray;
 
+FPLPKTABBEDTEXTOUT fpLpkTabbedTextOut = UserLpkTabbedTextOut;
+FPLPKPSMTEXTOUT fpLpkPSMTextOut       = UserLpkPSMTextOut;
+FPLPKDRAWTEXTEX fpLpkDrawTextEx       = (FPLPKDRAWTEXTEX)NULL;
 #line 112
 
 /*

@@ -42,6 +42,27 @@ static void descriptor_contract(void)
     }
     CHECK(wow_native_text_bind(wow_original_text_capture));
 }
+int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
+static void counted_conversion_contract(void)
+{
+    WCHAR buffer[8];
+    LPWSTR out = buffer;
+    int count;
+    buffer[3] = L'!';
+    count = MBToWCSEx(CP_ACP, "abc", -2, &out, 8, FALSE);
+    CHECK(count == 3 && !wmemcmp(buffer, L"abc", 3) && buffer[3] == L'!');
+    count = MBToWCSEx(CP_ACP, "abc", -1, &out, 8, FALSE);
+    CHECK(count == 4 && buffer[3] == 0);
+    buffer[0] = L'!';
+    CHECK(MBToWCSEx(CP_ACP, "", -2, &out, 8, FALSE) == 0);
+    CHECK(buffer[0] == L'!');
+    CHECK(MBToWCSEx(CP_ACP, "abc", -3, &out, 8, FALSE) == 0);
+    CHECK(buffer[0] == L'!');
+    out = NULL;
+    CHECK(MBToWCSEx(CP_ACP, "abc", -2, &out, -1, TRUE) == 3);
+    CHECK(out && !wmemcmp(out, L"abc", 3));
+    if (out) CHECK(LocalFree(out) == NULL);
+}
 static void message_character_contract(void)
 {
     static const UINT messages[] = { WM_CHAR, WM_CHARTOITEM,
@@ -177,6 +198,7 @@ int main(void)
     CHECK(!ansi.Buffer && !ansi.Length && !ansi.MaximumLength && ansi.bAnsi);
     password_transform_boundary();
     descriptor_contract();
+    counted_conversion_contract();
     message_character_contract();
     mnemonic_prefix_contract();
     mnemonic_extent_contract();

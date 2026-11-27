@@ -67,3 +67,22 @@ file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/dialog-lookup-original.c"
   CONTENT "#include \"control-client/precomp.h\"\n${lookup}" @ONLY)
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/dialog-finalization-layout.c"
   CONTENT "#include \"wow_user_client_view_layout.h\"\n#define WOW_ORIGINAL_DIALOG_LAYOUT\n#include \"compat/include/opennt_user_multipass.h\"\n#undef WOW_ORIGINAL_DIALOG_LAYOUT\n${pointer}${setter}${layout}" @ONLY)
+
+# XP moved PSMTextOut and its default implementation to the client owner.
+control_slice(text_lpk_defaults "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clglobal.c"
+  "FPLPKTABBEDTEXTOUT fpLpkTabbedTextOut" "#line 112" FALSE)
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/text-lpk-defaults.c"
+  CONTENT "#include \"control-drawing/precomp.h\"\n#line ${text_lpk_defaults_line} \"${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clglobal.c\"\n${text_lpk_defaults}" @ONLY)
+control_slice(mnemonic_client "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/drawtext.c"
+  "void PSMTextOut(" "" FALSE)
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/mnemonic-client.c"
+  CONTENT "#include \"${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/mnemonic-drawing/precomp.h\"\n#line ${mnemonic_client_line} \"${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/drawtext.c\"\n${mnemonic_client}" @ONLY)
+
+control_slice(prefix_body "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/drawtext.c"
+  "LONG GetPrefixCount(" "\n/***************************************************************************" FALSE)
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/text-prefix.c"
+  CONTENT "#include \"control-drawing/precomp.h\"\n#line ${prefix_body_line} \"${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/drawtext.c\"\n${prefix_body}" @ONLY)
+control_slice(mnemonic_default "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clglobal.c"
+  "FPLPKPSMTEXTOUT fpLpkPSMTextOut" "FPLPKDRAWTEXTEX" FALSE)
+file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/mnemonic-default.c"
+  CONTENT "#include \"control-drawing/precomp.h\"\n#line ${mnemonic_default_line} \"${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clglobal.c\"\n${mnemonic_default}" @ONLY)

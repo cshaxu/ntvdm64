@@ -13,6 +13,10 @@ USHORT WINAPI OpenNtUserThreadCodePage(VOID);
 PVOID WINAPI OpenNtUserRtlAllocMem(SIZE_T bytes);
 VOID WINAPI OpenNtUserRtlFreeMem(PVOID value);
 
+// XP user.h counted conversion constants; shared by conversion consumers.
+#define USER_AWCONV_COUNTSTRING (-1)
+#define USER_AWCONV_COUNTSTRINGSZ (-2)
+
 #define UserRtlAllocMem OpenNtUserRtlAllocMem
 #define UserRtlFreeMem OpenNtUserRtlFreeMem
 

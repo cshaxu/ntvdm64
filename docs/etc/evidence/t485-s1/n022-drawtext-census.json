@@ -1,0 +1,88 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 783,
+    "nonerror_identical": 794,
+    "nonerror_different": 535,
+    "nonerror_points": 7783,
+    "nonerror_lines": 116981
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 784,
+    "nonerror_identical": 795,
+    "nonerror_different": 534,
+    "nonerror_points": 7795,
+    "nonerror_lines": 114547
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": 12,
+    "nonerror_lines": -2434
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_points": 8,
+      "before_lines": 161,
+      "after_points": 8,
+      "after_lines": 158,
+      "exclusions": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "before_points": 4,
+      "before_lines": 140,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "before_points": 1,
+      "before_lines": 7039,
+      "after_points": 1,
+      "after_lines": 7039,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "before_points": 1,
+      "before_lines": 1175,
+      "after_points": 1,
+      "after_lines": 1185,
+      "exclusions": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_points": 1,
+      "before_lines": 5223,
+      "after_points": 1,
+      "after_lines": 5267,
+      "exclusions": 25
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "before_points": 1,
+      "before_lines": 1014,
+      "after_points": 1,
+      "after_lines": 1036,
+      "exclusions": 15
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "before_points": 1,
+      "before_lines": 2387,
+      "after_points": 17,
+      "after_lines": 20,
+      "exclusions": 17
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1284,
+    "OpenNT": 45
+  }
+}

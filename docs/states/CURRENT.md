@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime50 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime54 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -170,21 +170,10 @@ SOL Options and Full24/24 passed. Initial fixture link failure retained.
 N02213/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
 536different,7797points/117070lines; delta0files/0exact/0same/0different/
 -25points/-36lines.1279XP/50OpenNT. P42 is the new ten-file Full checkpoint.
-[P43 N022 dialog navigation](../etc/evidence/t485-s1/n022-dlgmgrc.md)
-delivers runtime48: restored XP wrappers and original bounded traversal;
-only six #line differences remain. Cached build, dual13-image26hash,
-controls40/40, CCPU window-borrow and SOL Options passed. N02214/39;
-S15 9/14 and overall57/159. Census1329files,782exact,793nonerror same/
-536different,7800points/116998lines; delta0/0/0/0/+3points/-72lines.
-1280XP/49OpenNT. One mirror since P42 Full24/24; next dmmnem.c.
-
-[P44 N022 dialog mnemonics](../etc/evidence/t485-s1/n022-dmmnem.md)
-delivers runtime49: XP matching/loop algorithms, shared class identity and
-existing focus lifetime. Cached build, dual13-image26hash, controls40/40,
-CCPU window-borrow and SOL Options passed. N02215/39; S15 9/14, overall57/159.
-Census1329files,782exact,793nonerror same/536different,7785points/116983lines;
-delta0/0/0/0/-15points/-15lines.1281XP/48OpenNT. Two mirrors since P42
-Full24/24; next draw.c. No guest changes.
+[P43 dialog navigation](../etc/evidence/t485-s1/n022-dlgmgrc.md) and
+[P44 mnemonics](../etc/evidence/t485-s1/n022-dmmnem.md) delivered runtime48/49,
+with cached build, dual publication and targeted gates; their linked receipts
+retain full source, census and runtime evidence.
 
 [P45 N022 control drawing](../etc/evidence/t485-s1/n022-draw.md) delivers
 runtime50 with draw.c byte-identical to XP. Cached build, dual13-image26hash,
@@ -192,6 +181,14 @@ controls40/40 (including actual PaintRect), CCPU window-borrow and SOL Options
 passed. N02216/39; S15 9/14, overall57/159. Census1329files,783exact,
 794nonerror same/535different,7783points/116981lines; delta0/+1/+1/-1/-2/-2.
 1282XP/47OpenNT. Three mirrors since P42 Full24/24; next drawtext.c.
+
+[P46 XP text drawing](../etc/evidence/t485-s1/n022-drawtext.md) delivers
+runtime54: complete client/paired RTL text algorithms, existing native GDI
+providers and captured system-font charset. Cached build, dual13-image26hash,
+controls40/40, CCPU window-borrow and SOL Options passed. N02217/39 plus paired
+N025 RTL; S15 9/14, overall57/159. Census1329/784/795/534/7795/114547;
+delta0/+1/+1/-1/+12/-2434.1284XP/45OpenNT. Five mirrors since P42 Full24/24;
+next edecrare.c. No guest changes or S/T closure.
 
 ## S14 Closure Record
 

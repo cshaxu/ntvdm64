@@ -8,6 +8,25 @@
 /* Original drawing body with real GDI; explicit context and PolyPatBlt leaf.
  * No claim of native control entry or real guest acceptance. */
 __declspec(thread) wow_edit_context *wow_edit_current;
+/* Explicit fixture task input; the product obtains this from its bound task. */
+#include "wow_task_init_bindings.h"
+const wow_task_client_info *WINAPI wow_edit_client_info(void)
+{
+    static const wow_task_client_info info = { WOW_TASK_TIF_16BIT, 0x030a, 0, 0 };
+    return &info;
+}
+DWORD WINAPI wow_edit_native_GdiGetCodePage(HDC dc)
+{
+    typedef DWORD (WINAPI *provider)(HDC);
+    provider call = (provider)GetProcAddress(GetModuleHandleW(L"gdi32.dll"), "GdiGetCodePage");
+    return call ? call(dc) : 0;
+}
+BOOL WINAPI wow_edit_native_GdiValidateHandle(HANDLE object)
+{
+    typedef BOOL (WINAPI *provider)(HANDLE);
+    provider call = (provider)GetProcAddress(GetModuleHandleW(L"gdi32.dll"), "GdiValidateHandle");
+    return call ? call(object) : FALSE;
+}
 static unsigned failures, unions;
 static BOOL nested, raise_callback, select_borrowed;
 static HBITMAP borrowed;
@@ -43,6 +62,7 @@ int WINAPI wow_edit_native_GdiGetCharDimensions(HDC dc, TEXTMETRICW *metrics, LP
     CHECK(function != NULL);
     return function ? function(dc, metrics, height) : 0;
 }
+DWORD WINAPI wow_original_GetTabbedTextExtentA(HDC, LPCSTR, int, int, const INT *);
 static void check_tab_text(HDC dc, wow_edit_context *context)
 {
     typedef DWORD (WINAPI *extent_proc)(HDC, LPCWSTR, int, int, const INT *);
@@ -55,12 +75,16 @@ static void check_tab_text(HDC dc, wow_edit_context *context)
     DWORD extent;
     CHECK(native_extent && native_draw);
     if (!native_extent || !native_draw) return;
-    context->cxSysFontChar = wow_edit_native_GdiGetCharDimensions(dc, NULL, &height);
+    context->cxSysFontChar = wow_edit_native_GdiGetCharDimensions(dc, &context->tmSysFont, &height);
     context->cySysFontChar = height;
     extent = native_extent(dc, text, 3, 2, tabs);
     CHECK(original_tab_extent(dc, text, 3, 2, tabs) == extent);
     CHECK((DWORD)original_tab_out(dc, 0, 0, text, 3, 2, tabs, 0) == extent);
-    CHECK(original_tab_extent(dc, text, 0, 0, NULL) == 0);
+    /* XP accepts an empty run and preserves its measured line height. */
+    CHECK(original_tab_extent(dc, text, 0, 0, NULL) == MAKELONG(0, height));
+    CHECK(original_tab_extent(dc, text, -1, 2, tabs) == extent);
+    CHECK(wow_original_GetTabbedTextExtentA(dc, "a\tb", -1, 2, tabs) == extent);
+    CHECK(wow_original_GetTabbedTextExtentA(dc, "a\tb", 3, 2, tabs) == extent);
     CHECK(original_draw_text(dc, text, -2, &local, DT_CALCRECT) == 0);
     CHECK(original_draw_text(dc, text, 3, &local, DT_CALCRECT | DT_EXPANDTABS) ==
           native_draw(dc, text, 3, &system, DT_CALCRECT | DT_EXPANDTABS));

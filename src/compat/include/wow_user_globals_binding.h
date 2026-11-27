@@ -34,4 +34,8 @@ typedef BOOL (CALLBACK* INITUSERAPIHOOK)(DWORD dwCmd, void* pvParam);
 BOOL APIENTRY _FreeResource(HANDLE hResData, HINSTANCE hModule);
 LPSTR APIENTRY _LockResource(HANDLE hResData, HINSTANCE hModule);
 BOOL APIENTRY _UnlockResource(HANDLE hResData, HINSTANCE hModule);
+/* XP usercli.h:985-990, original LPK default providers. */
+LONG WINAPI UserLpkTabbedTextOut(HDC, int, int, LPCWSTR, int, int,
+    CONST INT *, int, BOOL, int, int, int);
+VOID WINAPI UserLpkPSMTextOut(HDC, int, int, LPWSTR, int, DWORD);
 #endif

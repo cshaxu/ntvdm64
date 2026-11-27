@@ -2681,8 +2681,52 @@ BOOL DrawFrame(HDC hdc, LPRECT prect, int clFrame, int cmd);
 void DrawPushButton(HDC hdc, LPRECT lprc, UINT state, UINT flags);
 void ClientFrame(HDC hDC, CONST RECT *pRect, HBRUSH hBrush, DWORD patOp);
 
+#line 3539
+#define DT_CHARSETDRAW  1
+#define DT_GETNEXTWORD  2
+
+typedef void (FAR *LPFNTEXTDRAW)(HDC, int, int, LPWSTR, int, DWORD);
+
+typedef  struct   {
+    RECT     rcFormat;          // Format rectangle.
+    int      cxTabLength;       // Tab length in pixels.
+    int      iXSign;
+    int      iYSign;
+    int      cyLineHeight;      // Height of a line based on DT_EXTERNALLEADING
+    int      cxMaxWidth;        // Width of the format rectangle.
+    int      cxMaxExtent;       // Width of the longest line drawn.
+    int      cxRightMargin;     // Right margin in pixels (with proper sign)
+    LPFNTEXTDRAW  lpfnTextDraw; // pointer to PSTextOut or PSMTextOut based
+                                // on DT_NOPREFIX flag.
+    int      cxOverhang;        // Character overhang.
+    BOOL     bCharsetDll;       // redirect to intl DLL, not textout
+    int      iCharset;          // ANSI charset value
+} DRAWTEXTDATA, *LPDRAWTEXTDATA;
+
+typedef LONG (*FPLPKTABBEDTEXTOUT)
+               (HDC, int, int, LPCWSTR, int, int, CONST INT *, int, BOOL, int, int, int);
+
+typedef void (*FPLPKPSMTEXTOUT)
+               (HDC, int, int, LPWSTR, int, DWORD);
+
+typedef int  (*FPLPKDRAWTEXTEX)
+               (HDC, int, int, LPCWSTR, int, BOOL, UINT, LPDRAWTEXTDATA, UINT, int);
+
+extern FPLPKTABBEDTEXTOUT fpLpkTabbedTextOut;
+extern FPLPKPSMTEXTOUT    fpLpkPSMTextOut;
+extern FPLPKDRAWTEXTEX    fpLpkDrawTextEx;
+
+
+// The number of characters in the ellipsis string (string defined in rtl\drawtext.c).
+#define CCHELLIPSIS  3
+
+int DrawTextExWorker(HDC hdc, LPWSTR lpchText, int cchText, LPRECT lprc,
+                     UINT dwDTformat, LPDRAWTEXTPARAMS lpDTparams, int iCharset);
+
+
+#line 2616
 void PSMTextOut( HDC hdc, int xLeft, int yTop,
-    LPWSTR lpsz, int cch);
+    LPWSTR lpsz, int cch, DWORD dwFlags);
 
 HBITMAP OwnerLoadBitmap(
     HANDLE hInstLoad,

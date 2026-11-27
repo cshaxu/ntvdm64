@@ -139,7 +139,7 @@ BOOL APIENTRY DrawFrame(HDC, PRECT, int, int);
 BOOL APIENTRY CopyInflateRect(LPRECT, CONST RECT *, int, int);
 /* OPENNT-HOST-114/115 retain the original brush and mnemonic algorithms. */
 BOOL WINAPI PaintRect(HWND, HWND, HDC, HBRUSH, LPRECT);
-VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int);
+VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int, DWORD);
 BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
 VOID WINAPI BltColor(HDC, HBRUSH, HDC, int, int, int, int, int, int, BOOL);
 /* XP finite control inputs. Original algorithms remain in the client sources. */

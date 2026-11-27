@@ -220,11 +220,33 @@ int MBToWCSEx(
      * illegal value so we return FALSE.  Otherwise, nAnsiChar is
      * set and requires no adjustment.
      */
-    if (nAnsiChar == -1) {
-        nAnsiChar = strlen(pAnsiString) + 1;   // don't forget the NUL
-    } else if (nAnsiChar < -1) {
-        return 0;     // illegal value
+    if (nAnsiChar < 0) {
+
+        /*
+         *  Bug 268035 - joejo
+         *  Need to fail if the count is a negative number less than -2!
+         */
+        if (nAnsiChar < USER_AWCONV_COUNTSTRINGSZ) {
+            return 0;
+        }
+
+#if (USER_AWCONV_COUNTSTRING != -1 || USER_AWCONV_COUNTSTRINGSZ != -2)
+#error USER_AWCONV_COUNTSTRING or USER_AWCONV_COUNTSTRINGSZ has unexpected value.
+#endif
+        /* HACK HACK HACK
+         * If nAnsiChar is -1 (USER_AWCONV_COUNTSTRING), nAnsiChar length will be strlen() + 1,
+         * to allocate the memory including trailing \0: this is compatible to the original code.
+         * If nAnsiCahr is -2 (USER_AWCONV_COUNTSTRINGSZ), memory for trailing \0 will not be needed,
+         * so memory allocation is optimized and the return value would be same as strlen().
+         */
+        nAnsiChar = strlen(pAnsiString) + 2 + nAnsiChar;   // don't forget the NUL if nAnsiChar == -1
+
+        if (nAnsiChar == 0) {
+            return 0;
+        }
     }
+
+#line 216
 
     /*
      * Adjust the cchUnicodeString value.  If cchUnicodeString == -1 then we

@@ -89,6 +89,8 @@ BOOL ClientDrawState(
     HDC     hdcT;
     HBITMAP hbmpT;
     BOOL    fResult;
+    DWORD   dwPSMFlags;
+#line 90
     POINT   ptOrg;
 
     UserAssert(ghdcGray != NULL);
@@ -369,7 +371,15 @@ BOOL ClientDrawState(
             break;
 
         case DST_PREFIXTEXT:
-            PSMTextOut(hdcT, 0, 0, (LPWSTR)lData, (int)wData);
+            if (uFlags & DSS_HIDEPREFIX) {
+                dwPSMFlags = DT_HIDEPREFIX;
+            } else if (uFlags & DSS_PREFIXONLY) {
+                dwPSMFlags = DT_PREFIXONLY;
+            } else {
+                dwPSMFlags = 0;
+            }
+#line 368
+            PSMTextOut(hdcT, 0, 0, (LPWSTR)lData, (int)wData, dwPSMFlags);
             break;
 
         case DST_TEXT:

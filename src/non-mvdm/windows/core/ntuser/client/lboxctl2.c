@@ -291,7 +291,7 @@ BOOL CALLBACK LBPrintCallback(HDC hdc, LPWSTR lpstr, PLBIV plb, int cx, int cy)
         TabTextOut(hdc, xStart, 0, lpstr, cLen,
             (plb->iTabPixelPositions ? plb->iTabPixelPositions[0] : 0),
             (plb->iTabPixelPositions ? (LPINT)&plb->iTabPixelPositions[1] : NULL),
-            0, TRUE);
+            0, TRUE, GetTextCharset(plb->hdc));
     } else {
         rc.left     = 0;
         rc.top      = 0;
