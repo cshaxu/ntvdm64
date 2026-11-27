@@ -9,6 +9,7 @@
  * The staged build selects these leaves; complete original creation/storage/
  * dispatch/retirement and grouped acceptance are still required for delivery. */
 typedef int (WINAPI *char_dimensions_fn)(HDC, TEXTMETRICW *, LPINT);
+typedef int (WINAPI *text_face_alias_fn)(HDC, int, LPWSTR);
 typedef BOOL (WINAPI *char_width_fn)(HDC, struct _CHWIDTHINFO *);
 typedef BOOL (WINAPI *poly_pat_blt_fn)(HDC, DWORD, struct _POLYPATBLT *, DWORD, DWORD);
 /* Current x86 NtUserSetSystemTimer has THREE arguments, unlike NT4's four.
@@ -24,6 +25,7 @@ typedef BOOL (WINAPI *def_set_text_fn)(HWND, const wow_native_text_descriptor *)
 
 typedef struct edit_native_exports {
     char_dimensions_fn char_dimensions;
+    text_face_alias_fn text_face_alias;
     char_width_fn char_width;
     poly_pat_blt_fn poly_pat_blt;
     system_timer_fn system_timer;
@@ -57,6 +59,8 @@ static BOOL CALLBACK resolve_exports(PINIT_ONCE once, PVOID parameter,
     }
     candidate.char_dimensions = (char_dimensions_fn)GetProcAddress(gdi,
         "GdiGetCharDimensions");
+    candidate.text_face_alias = (text_face_alias_fn)GetProcAddress(gdi,
+        "GetTextFaceAliasW");
     candidate.char_width = (char_width_fn)GetProcAddress(gdi,
         "GetCharWidthInfo");
     candidate.poly_pat_blt = (poly_pat_blt_fn)GetProcAddress(gdi, "PolyPatBlt");
@@ -74,7 +78,7 @@ static BOOL CALLBACK resolve_exports(PINIT_ONCE once, PVOID parameter,
     candidate.fill_window = (fill_window_fn)GetProcAddress(user, "NtUserFillWindow");
     candidate.control_color = (control_color_fn)GetProcAddress(user, "NtUserGetControlColor");
     candidate.def_set_text = (def_set_text_fn)GetProcAddress(user, "NtUserDefSetText");
-    if (!candidate.char_dimensions || !candidate.char_width ||
+    if (!candidate.char_dimensions || !candidate.text_face_alias || !candidate.char_width ||
             !candidate.poly_pat_blt || !candidate.system_timer ||
             !candidate.kill_system_timer || !candidate.get_cpd ||
             !candidate.set_window_state || !candidate.clear_window_state ||
@@ -109,6 +113,12 @@ int WINAPI wow_edit_native_GdiGetCharDimensions(HDC dc, TEXTMETRICW *metrics,
 {
     if (!wow_edit_native_ready()) return 0;
     return exports.char_dimensions(dc, metrics, height);
+}
+
+int WINAPI wow_edit_native_GetTextFaceAliasW(HDC dc, int count, LPWSTR face)
+{
+    if (!wow_edit_native_ready()) return 0;
+    return exports.text_face_alias(dc, count, face);
 }
 
 BOOL WINAPI wow_edit_native_GetCharWidthInfo(HDC dc, struct _CHWIDTHINFO * widths)

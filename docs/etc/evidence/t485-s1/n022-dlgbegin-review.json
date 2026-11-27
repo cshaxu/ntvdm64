@@ -1,0 +1,115 @@
+{
+  "status": "final package verified; commit/push pending",
+  "head": "e9914b422d3b7c51a6951ce914fbdbc5a9dd51b7",
+  "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+  "objects": [
+    {
+      "path": "Source/XPSP1/NT/windows/core/ntuser/client/dlgbegin.c",
+      "blob": "d30c3f8be4bbffbd3f8d3e34a57f4476dbac3cac",
+      "sha256": "5d022a98decae44b40e4c80feba6957dec214b2e34facc1153dc0d93f635137a"
+    },
+    {
+      "path": "Source/XPSP1/NT/windows/core/ntuser/client/dlgmgr.c",
+      "blob": "9dde726a0a75d848e89389629aaf760a7b472b89",
+      "sha256": "486fca0bb809d9822c8f2f488bfe8f172ede0cc8b22513a3b63e3925cb6e0c29"
+    },
+    {
+      "path": "Source/XPSP1/NT/windows/core/ntuser/client/client.c",
+      "blob": "0a965dba8e47e9ba7ec9d42a8d1d50c74988423f",
+      "sha256": "a2ed4b5538360827051bacdbda87d74eb39e0a6da94905c1c5e668e6ec54c89a"
+    },
+    {
+      "path": "Source/XPSP1/NT/windows/core/ntuser/client/usercli.h",
+      "blob": "07145f7769ad44c7c0df715c8009323e4bf9230c",
+      "sha256": "7e2fb6b77487511fe7e961cec52861456f051e034e4c6b5e36e1c77e9cd2f7d2"
+    }
+  ],
+  "before": {
+    "baseline": "OpenNT",
+    "points": 13,
+    "lines": 46
+  },
+  "candidate": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+    "sha256": "fbe9a13c1eafaaf396dc59fe5ef5fc4f0c17eaee7c956bfefb3e7c4067d2c69c",
+    "points": 16,
+    "lines": 52,
+    "excluded_branches": 3,
+    "compiled": true,
+    "published": true
+  },
+  "production_modified": true,
+  "initial_review": {
+    "status": "whole-file source review; prerequisite implementation pending",
+    "candidate": {
+      "path": "build/t485-s15/n022-dlgbegin/dlgbegin.c.candidate",
+      "sha256": "1183b323020f753b34cfbf4ba39b0b44a67463434b1b47f425c05fe2d9fae0aa",
+      "points": 19,
+      "lines": 63,
+      "excluded_branches": 3,
+      "compiled": false,
+      "published": false
+    },
+    "production_modified": false
+  },
+  "census": {
+    "before": {
+      "files": 1329,
+      "byte_identical": 782,
+      "nonerror_identical": 793,
+      "nonerror_different": 536,
+      "nonerror_points": 7852,
+      "nonerror_lines": 117354
+    },
+    "after": {
+      "files": 1329,
+      "byte_identical": 782,
+      "nonerror_identical": 793,
+      "nonerror_different": 536,
+      "nonerror_points": 7869,
+      "nonerror_lines": 117412
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 17,
+      "nonerror_lines": 58
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+        "before_points": 13,
+        "before_lines": 46,
+        "after_points": 16,
+        "after_lines": 52,
+        "exclusions": 3
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "before_points": 40,
+        "before_lines": 428,
+        "after_points": 54,
+        "after_lines": 480,
+        "exclusions": 1
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "before_points": 1,
+        "before_lines": 4638,
+        "after_points": 1,
+        "after_lines": 4638,
+        "exclusions": 17
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1276,
+      "OpenNT": 53
+    }
+  },
+  "line_mapping": {
+    "checked_original_lines": 1194,
+    "mismatches": []
+  }
+}

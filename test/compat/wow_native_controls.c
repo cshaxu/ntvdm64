@@ -29,6 +29,9 @@ int main(void)
         CHECK(width > 0 && height == metrics.tmHeight);
         CHECK(wow_edit_native_GdiGetCharDimensions(dc, NULL, &height) == width);
         CHECK(wow_edit_native_GetCharWidthInfo(dc, &widths));
+        ZeroMemory(result, sizeof(result));
+        CHECK(wow_edit_native_GetTextFaceAliasW(dc, ARRAYSIZE(result), result) > 0);
+        CHECK(result[0] != L'\0');
         rectangle.cx = rectangle.cy = 8;
         rectangle.BrClr.hbr = GetStockObject(WHITE_BRUSH);
         CHECK(wow_edit_native_PolyPatBlt(dc, PATCOPY, &rectangle, 1, PPB_BRUSH));

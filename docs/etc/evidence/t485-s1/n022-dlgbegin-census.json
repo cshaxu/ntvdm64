@@ -1,0 +1,56 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 782,
+    "nonerror_identical": 793,
+    "nonerror_different": 536,
+    "nonerror_points": 7852,
+    "nonerror_lines": 117354
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 782,
+    "nonerror_identical": 793,
+    "nonerror_different": 536,
+    "nonerror_points": 7869,
+    "nonerror_lines": 117412
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 17,
+    "nonerror_lines": 58
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "before_points": 13,
+      "before_lines": 46,
+      "after_points": 16,
+      "after_lines": 52,
+      "exclusions": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "before_points": 40,
+      "before_lines": 428,
+      "after_points": 54,
+      "after_lines": 480,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_points": 1,
+      "before_lines": 4638,
+      "after_points": 1,
+      "after_lines": 4638,
+      "exclusions": 17
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1276,
+    "OpenNT": 53
+  }
+}

@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime43 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime44 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -141,23 +141,10 @@ its receipt retains the paired ABI, tests, census and checkpoint counts.
 Their receipts retain full package identities, tests, per-file/global census,
 failed attempts and source boundaries; P31 includes Full24/24.
 
-[P34 N022 messages](../etc/evidence/t485-s1/n022-message.md) delivered runtime37:
-XP default dispatch and paired tables/ABI, native IMM/UI/icon owner boundaries.
-Cached build, dual13-image26hash, controls39/39 including one corrected test
-retry passed; Full24/24 runtime36 retained after timestamp-only proof. N0225/39; overall57/159; S15 9/14.
-Census1329files,781exact,792nonerror same/537different,
-7821points/126901lines; delta0files/0exact/0same/0different,
-+14points/+7lines.1271XP/58OpenNT. Ten-file checkpoint resets.
-
-[P35 N022 resources](../etc/evidence/t485-s1/n022-resources.md) delivered runtime38:
-XP bitmap/color/icon algorithms and dialog sizing, paired six-argument modal
-ABI, existing native USER resource/DC boundaries. Cached build, dual13-image
-26hash publication, bitmap normal/failure/color/icon, original modal lifecycle
-and actual SOL Options passed. Initial build/test failures retained in receipt.
-N0226/39; overall57/159; S15 9/14. Census1329files,781exact,
-792nonerror same/537different,7848points/123546lines; delta0files/0exact/
-0same/0different,+27points/-3355lines.1272XP/57OpenNT. Three changed mirror
-files since P34 Full checkpoint; next combo.c. No guest change.
+[P34 N022 messages](../etc/evidence/t485-s1/n022-message.md) and
+[P35 N022 resources](../etc/evidence/t485-s1/n022-resources.md) are delivered.
+Their receipts retain original ABI, package identities, tests, initial failures,
+per-file/global census and original baseline transitions.
 
 [P36 N022 combo](../etc/evidence/t485-s1/n022-combo.md) delivered runtime41:
 XP combo algorithm, paired DBCS/RTL/layout/task flags and original message
@@ -183,7 +170,16 @@ Cached build, dual13-image26hash, control39/39, real combo file/directory select
 and SOL Options pass. N0229/39; overall57/159; S15 9/14. Census1329files,782exact,
 793nonerror same/536different,7852points/117354lines; delta0files/+1exact/+1same/
 -1different/-1point/-431lines.1275XP/54OpenNT. Four changed mirrors since P36 Full.
-The missed DIR entry is now delivered; next dlgbegin.c.
+The missed DIR entry is delivered.
+
+[P39 N022 dialog creation](../etc/evidence/t485-s1/n022-dlgbegin-review.md)
+delivers runtime44: XP creation/font/monitor/UI algorithm and paired interfaces.
+Cached build, dual13-image26hash, control40/40, real CCPU window-borrow and SOL
+Options pass. Fixture-only link repairs and earlier build failures are retained.
+N02210/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
+536different,7869points/117412lines; delta0files/0exact/0same/0different/
++17points/+58lines.1276XP/53OpenNT. Three changed mirrors; seven since P36
+Full24/24. Next dlgend.c. No guest change.
 
 ## S14 Closure Record
 

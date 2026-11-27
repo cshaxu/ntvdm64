@@ -18,6 +18,7 @@
 #define pfnWowEditNextWord (wow_user_registered_callbacks()->pfnWowEditNextWord)
 #define pfnWowEmptyClipBoard (wow_user_registered_callbacks()->pfnEmptyCB)
 #define pfnGetExpWinVer (wow_user_registered_callbacks()->pfnGetExpWinVer)
+#define pfnWOWTellWOWThehDlg (wow_user_registered_callbacks()->pfnWOWTellWOWThehDlg)
 /* OPENNT-HOST-081: use the already registered input table for original
  * creator/default-dialog callbacks, not a second registration owner. */
 
@@ -29,5 +30,5 @@
 
 HANDLE WINAPI GetEditDS(void);
 VOID WINAPI ReleaseEditDS(HANDLE);
-DWORD WINAPI WOWDlgInit(HWND, LONG);
+VOID WINAPI TellWOWThehDlg(HWND);
 #endif

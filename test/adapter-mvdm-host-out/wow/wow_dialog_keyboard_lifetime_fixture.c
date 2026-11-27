@@ -65,6 +65,11 @@ PWND WINAPI wow_window_client_validate_hwnd(HWND w)
 { return wow_window_client_validate_window(w); }
 __declspec(noreturn) VOID WINAPI wow_user_native_call_failed(const char *where, DWORD error)
 { printf("fatal %s %lu\n", where, error); ExitProcess(99); }
+/* Keyboard cases must not enter the unrelated reposition/monitor branch. */
+MONITORINFO *WINAPI wow_dialog_monitor(HMONITOR monitor)
+{ (void)monitor; CHECK(FALSE); return NULL; }
+MONITORINFO *WINAPI wow_dialog_primary_monitor(void)
+{ CHECK(FALSE); return NULL; }
 void WINAPI FreeLookasideEntry(PLOOKASIDE pool, PVOID value)
 { (void)pool; (void)value; CHECK(FALSE); }
 BOOL _IsChild(PWND parent, PWND child)

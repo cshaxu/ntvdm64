@@ -524,7 +524,9 @@ DoCleanup:
                 if(!TestWF(pwnd, WEFCONTROLPARENT))
                     goto CallDWP;
                 CopyRect(&rc, &pwnd->rcWindow);
-                RepositionRect(&rc, pwnd->style, pwnd->ExStyle);
+                RepositionRect(_MonitorFromRect(&rc, MONITOR_DEFAULTTOPRIMARY),
+                    &rc, pwnd->style, pwnd->ExStyle);
+#line 706
                 NtUserSetWindowPos(hwnd, HWND_TOP, rc.left, rc.top,
                              rc.right-rc.left, rc.bottom-rc.top,
                              SWP_NOZORDER | SWP_NOSIZE | SWP_NOACTIVATE);
@@ -1121,45 +1123,57 @@ INT_PTR InternalDialogBox(
 **  desktop area after they've resized.
 **
 \***************************************************************************/
-void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle)
+#line 1369
+void
+RepositionRect(
+        PMONITOR    pMonitor,
+        LPRECT      lprc,
+        DWORD       dwStyle,
+        DWORD       dwExStyle)
 {
-    LPRECT lprcClip;
-    int y;
+    LPRECT      lprcClip;
+    int         y;
 
     UserAssert(lprc);
+    UserAssert(pMonitor);
 
-    if (dwStyle & WS_CHILD)
-    {
+    if (dwStyle & WS_CHILD) {
         if (dwExStyle & WS_EX_CONTROLPARENT)
             return;
 
-        //
-        // Old style 3.1 child dialogs--do this nonsense anyway.  Keeps
-        // FedEx happy.
-        //
-        goto UseScreenRect;
+        /*
+         * Old style 3.1 child dialogs--do this nonsense anyway.  Keeps
+         * FedEx happy.
+         */
+        pMonitor = GetPrimaryMonitor();
+        lprcClip = KPRECT_TO_PRECT(&pMonitor->rcMonitor);
+    } else if (dwExStyle & WS_EX_TOOLWINDOW) {
+        lprcClip = KPRECT_TO_PRECT(&pMonitor->rcMonitor);
+    } else {
+        lprcClip = KPRECT_TO_PRECT(&pMonitor->rcWork);
     }
-
-    if (dwExStyle & WS_EX_TOOLWINDOW)
-UseScreenRect:
-        lprcClip = &rcScreen;
-    else
-        lprcClip = &(gpsi->rcWork);
 
     UserAssert(lprc);
 
     y = lprcClip->bottom - (SYSMET(CYEDGE) * 2 + SYSMET(CYKANJIWINDOW));
 
-    if (lprc->bottom > y)
+    if (lprc->bottom > y) {
         OffsetRect(lprc, 0, y - lprc->bottom);
-    if (lprc->top < lprcClip->top)
-        OffsetRect(lprc, 0, lprcClip->top - lprc->top);
+    }
 
-    if (lprc->right > lprcClip->right)
+    if (lprc->top < lprcClip->top) {
+        OffsetRect(lprc, 0, lprcClip->top - lprc->top);
+    }
+
+    if (lprc->right > lprcClip->right) {
         OffsetRect(lprc, lprcClip->right - lprc->right, 0);
-    if (lprc->left < lprcClip->left)
+    }
+
+    if (lprc->left < lprcClip->left) {
         OffsetRect(lprc, lprcClip->left - lprc->left, 0);
+    }
 }
+#line 1332
 
 /***************************************************************************\
 * MapDialogRect
@@ -1192,27 +1206,23 @@ BOOL MapDialogRect(
     return TRUE;
 }
 
-/* Original client/client.c: WOWDlgInit, GetEditDS and ReleaseEditDS;
- * revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
- * Existing registered callbacks retain allocation and initialization ownership. */
+/* XP SP1 client/client.c registered dialog notification; original callback owner. */
+#line 2880
 /***************************************************************************\
-* WOWDlgInit
+* TellWOWThehDlg
 *
-* This is a callback to WOW used at the begining of dialog creation to allow
-* it to associate the lParam of the WM_INITDIALOG messasge with the window
-* prior to actually recieving the message.
+* This is a callback to WOW used to inform WOW of the hDlg of a newly
+* created dialog window.
 *
-* 06-19-92 sanfords Created
+* 08-31-97 cmjones  Created
 \***************************************************************************/
-DWORD WOWDlgInit(
-HWND hwndDlg,
-LONG lParam)
+VOID TellWOWThehDlg(
+HWND hDlg)
 {
-    wow_user_registered_callbacks()->pfnWOWTellWOWThehDlg(hwndDlg);
-    return lParam;
+    UserAssert(pfnWOWTellWOWThehDlg != NULL);
+
+    (*pfnWOWTellWOWThehDlg)(hDlg);
 }
-
-
 
 /***************************************************************************\
 * GetEditDS

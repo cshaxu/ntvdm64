@@ -42,7 +42,7 @@ string(STRIP "${layout}" stripped)
 if(NOT count EQUAL 2 OR NOT stripped MATCHES "}$")
   message(FATAL_ERROR "Dialog layout projection changed")
 endif()
-control_slice(memory "${dialog}" "/* Original client/client.c: WOWDlgInit, GetEditDS and ReleaseEditDS;"
+control_slice(memory "${dialog}" "/* XP SP1 client/client.c registered dialog notification; original callback owner. */"
   "/* Copyright (c) 1985-95, Microsoft Corporation." FALSE)
 control_slice(pointer "${dialog}" "VOID SetDialogPointer(" "/* Copyright (c) 1985-92" FALSE)
 control_slice(lookup "${dialog}" "PWND _GetDlgItem(" "BOOL WINAPI wow_original_dialog_set_pointer(" FALSE)

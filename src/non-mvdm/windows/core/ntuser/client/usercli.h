@@ -2179,7 +2179,7 @@ UINT LBCalcAllocNeeded(PLBIV, INT);
 #line 2150
 HWND   InternalCreateDialog(HANDLE hmod,
         LPDLGTEMPLATE lpDlgTemplate, DWORD cb,
-        HWND hwndOwner , DLGPROC pfnWndProc, LONG dwInitParam,
+        HWND hwndOwner , DLGPROC pfnWndProc, LPARAM dwInitParam,
         UINT fFlags);
 #line 2154
 INT_PTR InternalDialogBox(HANDLE hmod,
@@ -2200,7 +2200,7 @@ VOID xxxCheckDefPushButton(PWND pwndDlg, HWND hwndOldFocus, HWND hwndNewFocus);
 PWND xxxGotoNextMnem(PWND pwndDlg, PWND pwndStart, WCHAR ch);
 #line 2166
 VOID DlgSetFocus(HWND hwnd);
-void RepositionRect(LPRECT lprc, DWORD dwStyle, DWORD dwExStyle);
+void RepositionRect(PMONITOR pMonitor, LPRECT lprc, DWORD dwStyle, DWORD dwExStyle);
 BOOL ValidateDialogPwnd(PWND pwnd);
 #line 2169
 BOOL _GetClientRect(PWND pwnd, LPRECT prc);
@@ -2228,7 +2228,7 @@ extern CHAR achSlashStar[];
 extern WCHAR szOneChar[];
 extern WCHAR szSLASHSTARDOTSTAR[];
 #line 2170
-DWORD  WOWDlgInit(HWND hwndDlg, LONG lParam);
+VOID TellWOWThehDlg(HWND hwndDlg);
 HANDLE GetEditDS(VOID);
 VOID   ReleaseEditDS(HANDLE h);
 

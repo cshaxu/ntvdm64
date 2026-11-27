@@ -18,6 +18,8 @@ const wow_control_entry_provider *WINAPI wow_control_original_provider(void);
 
 /* ADAPTER-WOW-058: finite EDIT and recovered list/combo system inputs.
  * An invocation owns this snapshot; it is not modern USER's SERVERINFO. */
+#pragma push_macro("ptCursor")
+#undef ptCursor
 typedef struct wow_edit_context {
     int wMaxLeftOverlapChars, wMaxRightOverlapChars;
     int cxSysFontChar, cySysFontChar;
@@ -34,9 +36,13 @@ typedef struct wow_edit_context {
     ATOM atomSysClass[20]; /* Snapshot of the existing process cleanup class table. */
     /* Dialog-only inputs; ordinary EDIT capture leaves these unused. */
     BOOL fSnapTo;
+    BOOL bKeyboardPref;
+    int dmLogPixels;
+    POINT ptCursor;
     HFONT hMsgFont;
     RECT rcWork;
 } wow_edit_context;
+#pragma pop_macro("ptCursor")
 extern __declspec(thread) wow_edit_context *wow_edit_current;
 /* Original clglobal.c owns this process-wide partial-wheel accumulator.
  * Unlike per-call metric inputs, it must survive entry/context restoration. */

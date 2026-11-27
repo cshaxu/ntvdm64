@@ -158,6 +158,13 @@ WORD DbcsCombine(HWND, WORD);
 #ifndef PTR_TO_ID
 #define PTR_TO_ID(p) ((USHORT)(((ULONG_PTR)(p)) & MAXWORD))
 #endif
+#ifndef IS_PTR
+/* XP ntuser/inc/user.h:467. */
+#ifndef MAXUSHORT
+#define MAXUSHORT MAXWORD
+#endif
+#define IS_PTR(p) ((((ULONG_PTR)(p)) & ~MAXUSHORT) != 0)
+#endif
 #define NtUserGetComboBoxInfo wow_control_get_combo_info
 #define NtUserTrackMouseEvent TrackMouseEvent
 #define INDEX_COMBOBOX 0
@@ -167,7 +174,6 @@ WORD DbcsCombine(HWND, WORD);
 #define PUSIF_COMBOBOXANIMATION 0x00000004
 #define PUSIF_UIEFFECTS 0x80000000
 #define TEST_EffectPUSIF(f) ((gpsi->PUSIFlags & ((f) | PUSIF_UIEFFECTS)) == ((f) | PUSIF_UIEFFECTS))
-typedef MONITORINFO *PMONITOR;
 #define _MonitorFromWindow(window, flags) wow_control_monitor(HWq(window), flags)
 DWORD GetAppCompatFlags2(WORD);
 /* Original userrtl.h declaration, with the unchanged rtl/winmgr.c owner. */
@@ -204,6 +210,9 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 
 /* Original winerrp.h retail semantics: diagnostics do not evaluate their
  * formatting operands; RIPERR still sets the caller's Win32 error. */
+#ifndef TAGMSG0
+#define TAGMSG0(...) ((void)0)
+#endif
 #ifndef RIPMSG0
 #define FUNCLOG6(...)
 #define FUNCLOG4(...)
@@ -296,16 +305,44 @@ PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
 /* Original 14-argument creator must enter the enrolled creation adapter,
  * never resolve directly to the modern 17-argument native service. */
 #define NtUserCreateWindowEx wow_user_create_dialog_window_ex
+/* XP's versioned client creator has no WOW-word argument. Both original
+ * call shapes enter the same enrollment/creation owner. */
+#define VerNtUserCreateWindowEx(...) wow_user_create_dialog_window_ex(__VA_ARGS__, NULL)
+#define CW_FLAGS_VERSIONCLASS 0x40000000
+#ifndef CW2_USEDEFAULT
+#define CW2_USEDEFAULT 0x8000
+#endif
+#define KHFONT_TO_HFONT(h) ((HFONT)(h))
+#define RealAdjustWindowRectEx _AdjustWindowRectEx
+#define MIRRORED_HWND(hwnd) ((GetWindowLongW(hwnd, GWL_EXSTYLE) & WS_EX_LAYOUTRTL) != 0)
+#define NtUserGetForegroundWindow GetForegroundWindow
+#undef _MonitorFromWindow
+#define _MonitorFromWindow(window, flags) wow_dialog_monitor(MonitorFromWindow(HWq(window), flags))
+#define _MonitorFromPoint(point, flags) wow_dialog_monitor(MonitorFromPoint(point, flags))
+#define _MonitorFromRect(rect, flags) wow_dialog_monitor(MonitorFromRect(rect, flags))
+#define GetPrimaryMonitor wow_dialog_primary_monitor
+#undef ptCursor
+/* XP user.h keyboard-cue policy, supplied by the dialog's native snapshot. */
+#define PUSIF_KEYBOARDCUES 0x00000020
+#define GACF2_KCOFF 0x00000002
+#define TEST_KbdCuesPUSIF (!gpsi->bKeyboardPref && \
+    !(gpsi->PUSIFlags & PUSIF_KEYBOARDCUES) && \
+    (gpsi->PUSIFlags & PUSIF_UIEFFECTS) && \
+    !(GetAppCompatFlags2(VER40) & GACF2_KCOFF))
+/* Original wingdip.h exports, not a substitute font lookup algorithm. */
+#define GetTextFaceAliasW wow_edit_native_GetTextFaceAliasW
+#ifndef IS_ANY_DBCS_CHARSET
+#define IS_ANY_DBCS_CHARSET(c) ((c) == SHIFTJIS_CHARSET || (c) == HANGEUL_CHARSET || \
+    (c) == GB2312_CHARSET || (c) == CHINESEBIG5_CHARSET)
+#endif
 /* Symbolic operation selection: never pass old NT4 enum values to USER. */
 #define UserThreadStateIsForeground wow_dialog_current_foreground
 #define WindowIsForegroundThread wow_dialog_window_foreground
-#define ptCursor wow_dialog_cursor_position()
 #define NtUserGetThreadState(operation) operation()
 #define NtUserQueryWindow(window, operation) operation(window)
 #undef gpsi
 #undef oemInfo
 #define gpsi (&wow_dialog_current->server)
-#define oemInfo (wow_dialog_current->screen)
 #endif
 #include "wow_control_state_provider.h"
 #define SetWindowState wow_control_set_window_state

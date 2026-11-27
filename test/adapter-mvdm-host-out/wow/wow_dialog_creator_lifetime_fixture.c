@@ -22,7 +22,7 @@ static unsigned failures, creates, allocations, releases, queries, updates, show
 static HFONT transferred_font;
 static BOOL child_only, fail_child, fail_promotion, fail_slot;
 enum edge { NONE, ROOT_FONT, ALLOCATE, CREATE_CHILD, CHILD_FONT, CHILD_CODE,
-    INITIALIZE, FOCUS_CHILD, DEFAULT_BUTTON, FOREGROUND, SHOW, UPDATE };
+    INITIALIZE, FOCUS_CHILD, DEFAULT_BUTTON, UISTATE, FOREGROUND, SHOW, UPDATE };
 static enum edge fault;
 static DWORD version;
 #define CHECK(x) do { if (!(x)) { ++failures; printf("FAIL line=%d edge=%u child=%u\n", __LINE__, fault, child_only); } } while (0)
@@ -53,18 +53,37 @@ const wow_task_client_info *WINAPI wow_edit_client_info(void) { return &client; 
 BOOL WINAPI wow_edit_native_ensure_gui_thread(void) { return TRUE; }
 int WINAPI wow_edit_native_GdiGetCharDimensions(HDC dc, TEXTMETRICW *tm, LPINT height)
 { (void)dc; (void)tm; *height = 16; return 8; }
+int WINAPI wow_edit_native_GetTextFaceAliasW(HDC dc, int count, LPWSTR face)
+{
+    typedef int (WINAPI *alias_fn)(HDC, int, LPWSTR);
+    alias_fn alias = (alias_fn)GetProcAddress(GetModuleHandleW(L"gdi32.dll"), "GetTextFaceAliasW");
+    CHECK(alias != NULL);
+    return alias ? alias(dc, count, face) : 0;
+}
 PWND WINAPI wow_window_client_validate_window(HWND w)
 { return !IsWindow(w) ? NULL : w == native_root ? &root.wnd : w == native_child ? &child : NULL; }
 PWND WINAPI wow_window_client_validate_window_no_rip(HWND w)
 { return wow_window_client_validate_window(w); }
 BOOL ValidateDialogPwnd(PWND w)
 { CHECK(w == &root.wnd && !dead(w)); if (fail_promotion) return FALSE; root.pdlg = &data; SetWF(w, WFDIALOGWINDOW); return TRUE; }
-DWORD WINAPI WOWDlgInit(HWND w, LONG value) { CHECK(w == native_root && !dead(&root.wnd)); return value; }
+VOID WINAPI TellWOWThehDlg(HWND w) { CHECK(w == native_root && !dead(&root.wnd)); }
 HANDLE WINAPI GetEditDS(void) { ++allocations; retire(ALLOCATE); return (HANDLE)0x1234; }
 VOID WINAPI ReleaseEditDS(HANDLE segment) { CHECK(segment == (HANDLE)0x1234); ++releases; }
 BOOL _AdjustWindowRectEx(LPRECT r, LONG style, BOOL menu, DWORD ex)
 { (void)r; (void)style; CHECK(!menu); (void)ex; return TRUE; }
-void RepositionRect(LPRECT r, DWORD style, DWORD ex) { (void)r; (void)style; (void)ex; }
+void RepositionRect(PMONITOR monitor, LPRECT r, DWORD style, DWORD ex)
+{ CHECK(monitor != NULL); (void)r; (void)style; (void)ex; }
+static MONITORINFO monitor_info = {sizeof(MONITORINFO), {0,0,1024,768}, {0,0,1024,768}, MONITORINFOF_PRIMARY};
+MONITORINFO *WINAPI wow_dialog_monitor(HMONITOR monitor)
+{ return monitor ? &monitor_info : NULL; }
+MONITORINFO *WINAPI wow_dialog_primary_monitor(void) { return &monitor_info; }
+HWND WINAPI wow_native_GetForegroundWindow(void) { return NULL; }
+/* This fixture has no foreground owner; these accesses must remain unused. */
+POPENNT_SUPPORT_TEB NTAPI opennt_support_current_teb(VOID)
+{ CHECK(FALSE); return NULL; }
+DWORD WINAPI wow_native_GetWindowThreadProcessId(HWND window, LPDWORD process)
+{ (void)window; (void)process; CHECK(FALSE); return 0; }
+DWORD GetAppCompatFlags2(WORD version) { (void)version; return 0; }
 PWND _GetNextDlgTabItem(PWND w, PWND previous, BOOL back)
 { CHECK(w == &root.wnd && !dead(w)); (void)previous; (void)back; return dead(&child) ? NULL : &child; }
 void DlgSetFocus(HWND w) { CHECK(w == native_child && !dead(&root.wnd) && !dead(&child)); retire(FOCUS_CHILD); }
@@ -74,6 +93,7 @@ LONG WINAPI wow_window_client_send_message(PWND w, UINT msg, WPARAM wp, LPARAM l
 {
     CHECK(w == &root.wnd && !dead(w) && root.pdlg); (void)wp; (void)lp; (void)ansi;
     if (msg == WM_SETFONT) retire(ROOT_FONT);
+    else if (msg == WM_CHANGEUISTATE) retire(UISTATE);
     else { CHECK(msg == WM_INITDIALOG); retire(INITIALIZE); }
     return TRUE;
 }
@@ -126,6 +146,8 @@ static void setup(enum edge at, BOOL child_fault, DWORD app_version)
     root.wnd.head.h = native_root; root.wnd.fnid = FNID_DIALOG; root.wnd.cbwndExtra = DLGWINDOWEXTRA;
     child.head.h = native_child; child.spwndParent = &root.wnd;
     fault = at; child_only = child_fault; fail_child = FALSE; version = app_version;
+    context.server.bKeyboardPref = at != UISTATE;
+    context.server.PUSIFlags = PUSIF_UIEFFECTS;
     client.dwExpWinVer = version; transferred_font = NULL;
     creates = allocations = releases = queries = updates = shows = destroys = 0;
 }
@@ -159,7 +181,9 @@ int __cdecl main(void)
     HWND result;
     handlers.pfnGetExpWinVer = expected_version;
     context.server.cxSysFontChar = 8; context.server.cySysFontChar = 16;
-    context.server.atomSysClass[ICLS_EDIT] = 0x81; context.screen.cyPixelsPerInch = 96;
+    context.server.atomSysClass[ICLS_EDIT] = 0x81;
+    context.server.dmLogPixels = 96;
+    context.server.bKeyboardPref = TRUE;
     context.server.rcWork.right = 1024; context.server.rcWork.bottom = 768;
     wow_dialog_current = &context;
     setup(NONE, FALSE, 0x30a); fail_promotion = TRUE;

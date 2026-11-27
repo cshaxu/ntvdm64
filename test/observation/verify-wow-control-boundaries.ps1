@@ -79,7 +79,7 @@ try {
                 'wow_control_string_fixture','wow_text_measure_failure_fixture','wow_mnemonic_drawing_fixture',
                 'wow_default_original_fixture','wow_button_drawing_fixture','wow_button_resources_fixture','wow_control_draw_state_fixture',
                 'wow_dialog_navigation_fixture','wow_edit_view_fixture','wow_button_lifetime_fixture','wow_button_dc_fixture')
-        $cases += 'wow_dialog_native_owner_probe', 'wow_control_fnid_fixture'
+        $cases += 'wow_dialog_native_owner_probe', 'wow_control_fnid_fixture', 'wow_native_controls_fixture'
         $cases += 'wow_dialog_initialization_fixture', 'wow_task_profile_fixture', 'wow_task_profile_existing_fixture'
         $cases += 'wow_edit_lookaside_fixture', 'wow_edit_conversion_fixture'
         $cases += 'wow_def_window_bits_fixture', 'wow_original_dde_free_fixture', 'wow_user_capture_fixture'

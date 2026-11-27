@@ -70,6 +70,7 @@ static void exercise_original_macros(void)
 #undef pfnWowEditNextWord
 #undef pfn16GlobalAlloc
 #undef pfn16GlobalFree
+#undef pfnWOWTellWOWThehDlg
 static PFNWOWHANDLERSIN callbacks;
 static unsigned dialog_calls;
 const struct tagAPFNWOWHANDLERSIN *WINAPI wow_user_registered_callbacks(void)
@@ -159,11 +160,11 @@ static void exercise_original_dialog_callbacks(void)
     /* Original ReleaseEditDS passes LOWORD, not a native HGLOBAL/pointer. */
     ReleaseEditDS((HANDLE)(ULONG_PTR)0x98764321);
     CHECK(GetLastError() == 44732);
-    CHECK(WOWDlgInit((HWND)(ULONG_PTR)0x1234, -12345) == (DWORD)-12345);
+    TellWOWThehDlg((HWND)(ULONG_PTR)0x1234);
     CHECK(GetLastError() == 44733);
     reject = TRUE;
     CHECK(GetEditDS() == NULL && GetLastError() == 44731);
-    CHECK(WOWDlgInit((HWND)(ULONG_PTR)0x1234, -12345) == (DWORD)-12345);
+    TellWOWThehDlg((HWND)(ULONG_PTR)0x1234);
     CHECK(GetLastError() == 44733 && dialog_calls == 6);
 }
 int __cdecl main(void)

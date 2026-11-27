@@ -12,6 +12,8 @@ static wow_task_order_thread thread;
 static BOOL reject_metrics;
 static BOOL reject_geometry;
 static int failures;
+__declspec(noreturn) void WINAPI wow_user_native_call_failed(const char *site, DWORD error)
+{ printf("unexpected failure %s %lu\n", site, error); ExitProcess(99); }
 #define CHECK(c) do { if (!(c)) { ++failures; printf("FAIL line=%d\n", __LINE__); } } while (0)
 wow_user_runtime_thread *WINAPI wow_user_runtime_current(void) { return &current; }
 BOOL WINAPI wow_default_capture_context(wow_default_context *context, UINT message)
@@ -39,6 +41,10 @@ int __cdecl main(void)
     RECT work;
     BOOL snap;
     HFONT retained;
+    POINT origin = {0};
+    HMONITOR monitor;
+    MONITORINFO *view, *nested_view, expected = {sizeof(expected)};
+    wow_dialog_context nested;
     memset(&context, 0x5a, sizeof(context));
     before = context;
     CHECK(!wow_dialog_capture_context(&context, TRUE));
@@ -65,7 +71,27 @@ int __cdecl main(void)
     CHECK(context.server.cxSysFontChar == 8 && context.server.cySysFontChar == 16);
     CHECK(context.server.screen_rect.right == 1234 &&
         context.server.screen_rect.bottom == 987);
-    CHECK(context.screen.cyPixelsPerInch > 0 && context.server.hMsgFont);
+    CHECK(context.server.dmLogPixels > 0 && context.server.hMsgFont);
+    CHECK(SystemParametersInfoW(SPI_GETKEYBOARDPREF, 0, &snap, 0));
+    CHECK(context.server.bKeyboardPref == snap);
+    CHECK(SystemParametersInfoW(SPI_GETKEYBOARDCUES, 0, &snap, 0));
+    CHECK(!!(context.server.PUSIFlags & 0x20) == !!snap);
+    monitor = MonitorFromPoint(origin, MONITOR_DEFAULTTOPRIMARY);
+    CHECK(monitor && GetMonitorInfoW(monitor, &expected));
+    wow_dialog_current = &context;
+    SetLastError(44765);
+    view = wow_dialog_monitor(monitor);
+    CHECK(view && !memcmp(view, &expected, sizeof(expected)) && GetLastError() == 44765);
+    CHECK(wow_dialog_monitor(monitor) == view && wow_dialog_primary_monitor() == view);
+    CHECK(!wow_dialog_monitor(NULL));
+    CHECK(wow_dialog_capture_context(&nested, FALSE));
+    wow_dialog_current = &nested;
+    nested_view = wow_dialog_monitor(monitor);
+    CHECK(nested_view != view && !memcmp(nested_view, view, sizeof(*view)));
+    wow_dialog_release_context(&nested);
+    CHECK(!nested.monitors);
+    wow_dialog_current = &context;
+    CHECK(wow_dialog_monitor(monitor) == view);
     CHECK(SystemParametersInfoW(SPI_GETWORKAREA, 0, &work, 0));
     CHECK(EqualRect(&work, &context.server.rcWork));
     CHECK(SystemParametersInfoW(SPI_GETSNAPTODEFBUTTON, 0, &snap, 0));
@@ -78,6 +104,8 @@ int __cdecl main(void)
     retained = context.server.hMsgFont;
     SetLastError(44764);
     wow_dialog_release_context(&context);
+    CHECK(!context.monitors);
+    wow_dialog_current = NULL;
     CHECK(!context.server.hMsgFont && GetLastError() == 44764);
     CHECK(!GetObjectW(retained, sizeof(font), &font));
     wow_dialog_release_context(&context);

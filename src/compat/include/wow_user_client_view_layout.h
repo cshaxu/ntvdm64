@@ -13,6 +13,9 @@ typedef struct tagTHREADINFO *PWOW_CLIENT_THREADINFO;
 typedef struct tagCLS *PCLS;
 typedef struct tagSBINFO *PSBINFO;
 typedef struct tagWND *PWND;
+/* Selected client monitor inputs use public native snapshots, not USER's
+ * private monitor object layout. */
+typedef MONITORINFO *PMONITOR;
 typedef LONG (APIENTRY *WNDPROC_PWND)(PWND, UINT, DWORD, LONG);
 
 #pragma warning(push)
