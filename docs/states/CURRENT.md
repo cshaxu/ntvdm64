@@ -30,6 +30,15 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 | Original Owner Request | Complete S6-S13 repairs and minimization before N004-G097,without excessive verification. |
 | Similar-Issue Sweep | Stale hashes/statuses,partial restoration counted as complete,missing residual registration,unsupported exclusion mapping and mismatched runtime receipts. |
 
+## S13 Reconciliation Progress
+
+[Progress](../etc/evidence/t485-h-repair/s13-progress.md):1039file hashes match;
+4550frozen point IDs checked for coverage.656legacy main-table dispositions
+synchronized from explicit delivered evidence:394restored262residual.
+S10-S12:953residual IDs covered after appending11omitted P13 pending rows.
+Whole-file replacement-ID mapping and final receipt reconciliation remain.
+No product changes;runtime14 Full23/23 is retained,not rerun. No S13 closure.
+
 ## S12 Closure Record
 
 [S12 list](../etc/evidence/t485-h-repair/s12-progress.md):48/48files,

@@ -2097,3 +2097,6 @@ post-publication targeted checks.
 [S12 P10 five-file source audit](evidence/t485-h-repair/s12-p10-audit.md).
 
 [S12 P10 Full checkpoint receipt](evidence/t485-h-repair/s12-p10-result.json).
+
+[S13 final repair reconciliation](evidence/t485-h-repair/s13-progress.md) and
+[point synchronization evidence](evidence/t485-h-repair/s13-ledger-sync.json).
