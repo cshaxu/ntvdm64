@@ -35,8 +35,8 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 [S12 list](../etc/evidence/t485-h-repair/s12-progress.md):40/48files,
 612/645points final-verified;429restored,183residual,33unreviewed.
 [P12 receipt](../etc/evidence/t485-h-repair/s12-p12-result.json):runtime13 cached
-build,dual26hash publication,387line witnesses and Full23/23 PASS;commit/push
-pending. P11e0b9f26d5 remains latest pushed delivery (35files523points).
+build,dual26hash publication,387line witnesses and Full23/23 PASS.
+P12 88cde1caf pushed:40files612points delivered.
 Census803/31809->739/3576 (-64points/-28233lines).
 File40 Full checkpoint passed,zero reruns;Win95 known exit1 boundary retained.
 Next41nt_thred.c;8files remain. Migration39/159;N004 gated on S13.

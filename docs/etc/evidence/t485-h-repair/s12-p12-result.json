@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P12",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime13",
   "files": {
     "src\\mvdm-host\\softpc.new\\host\\src\\nt_pif.c": "0081371482ca709b6c8a29eb2ab039a4803b5083fe6852df615538f491ad6d18",
@@ -406,8 +406,8 @@
     },
     "reruns": 0
   },
-  "commit": null,
-  "push": false,
+  "commit": "88cde1caf",
+  "push": true,
   "reviewed": {
     "files": 40,
     "points": 612,

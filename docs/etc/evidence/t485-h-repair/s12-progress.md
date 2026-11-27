@@ -8,7 +8,7 @@ each file before delivery. Default original valid;retains need real evidence.
 
 Reviewed40/48files612/645points;restored-final-verified429,restored-local0,
 residual-final-verified183,residual-local0,unreviewed33.
-Delivered/pushed35files523points through e0b9f26d5.
+Delivered/pushed40files612points through 88cde1caf.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -49,11 +49,11 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 33 | src/mvdm-host/softpc.new/host/src/nt_keycd.c | 7 | P11 delivered e0b9f26d5 |
 | 34 | src/mvdm-host/softpc.new/host/src/nt_mem.c | 8 | P11 delivered e0b9f26d5 |
 | 35 | src/mvdm-host/softpc.new/host/src/nt_msscs.c | 111 | P11 delivered e0b9f26d5 |
-| 36 | src/mvdm-host/softpc.new/host/src/nt_pif.c | 14 | P12 final-verified; commit pending |
-| 37 | src/mvdm-host/softpc.new/host/src/nt_reset.c | 34 | P12 final-verified; commit pending |
-| 38 | src/mvdm-host/softpc.new/host/src/nt_rez.c | 1 | P12 final-verified; commit pending |
-| 39 | src/mvdm-host/softpc.new/host/src/nt_rflop.c | 25 | P12 final-verified; commit pending |
-| 40 | src/mvdm-host/softpc.new/host/src/nt_sound.c | 15 | P12 final-verified; commit pending |
+| 36 | src/mvdm-host/softpc.new/host/src/nt_pif.c | 14 | P12 delivered 88cde1caf |
+| 37 | src/mvdm-host/softpc.new/host/src/nt_reset.c | 34 | P12 delivered 88cde1caf |
+| 38 | src/mvdm-host/softpc.new/host/src/nt_rez.c | 1 | P12 delivered 88cde1caf |
+| 39 | src/mvdm-host/softpc.new/host/src/nt_rflop.c | 25 | P12 delivered 88cde1caf |
+| 40 | src/mvdm-host/softpc.new/host/src/nt_sound.c | 15 | P12 delivered 88cde1caf |
 | 41 | src/mvdm-host/softpc.new/host/src/nt_thred.c | 1 | Pending |
 | 42 | src/mvdm-host/softpc.new/host/src/nt_unix.c | 1 | Pending |
 | 43 | src/mvdm-host/softpc.new/host/src/stubs.c | 4 | Pending |
@@ -773,3 +773,7 @@ WOW,actual command return codes,GUI,RPC,lifecycle,nested handoff and real
 DOS4GW/NESticle menu/Escape gates PASS. Win95 knownExitOne boundary retained.
 All40files612points final-verified:429restored183residual33unreviewed.
 No local restorations await runtime verification. Commit/push pending.
+
+P12 product88cde1caf pushed.40/48files612/645points delivered;429restored,
+183residual,33unreviewed. Census739/3576;next41nt_thred.c.
+Runtime13 Full23/23 checkpoint complete;no unchanged-code Full rerun.
