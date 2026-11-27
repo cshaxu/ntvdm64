@@ -213,6 +213,9 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 #ifndef TAGMSG0
 #define TAGMSG0(...) ((void)0)
 #endif
+#ifndef FUNCLOG2
+#define FUNCLOG2(...)
+#endif
 #ifndef RIPMSG0
 #define FUNCLOG6(...)
 #define FUNCLOG4(...)
@@ -286,7 +289,7 @@ LONG WINAPI wow_original_DefDlgProcW(HWND, UINT, WPARAM, LPARAM);
  * from other units must still enter wow_user_end_dialog's ownership scope. */
 #undef EndDialog
 #define EndDialog wow_original_EndDialog
-BOOL WINAPI wow_original_EndDialog(HWND, int);
+BOOL WINAPI wow_original_EndDialog(HWND, INT_PTR);
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_KEYBOARD
 /* Define recovered bodies under private names, not SDK dllimport names. */

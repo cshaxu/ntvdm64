@@ -132,7 +132,7 @@ BOOL WINAPI wow_window_client_prepare_graph(HWND window)
     if (fail_graph) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
     return TRUE;
 }
-BOOL WINAPI fixture_wow_original_EndDialog(HWND window, int result)
+BOOL WINAPI fixture_wow_original_EndDialog(HWND window, INT_PTR result)
 {
     CHECK(window == WINDOW && tasks && borrows && references);
     ++end_calls; end_result = result;

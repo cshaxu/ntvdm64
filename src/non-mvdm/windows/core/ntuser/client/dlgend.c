@@ -2,6 +2,8 @@
 *
 *  DLGEND.C -
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 *      Dialog Destruction Routines
 *
 * ??-???-???? mikeke    Ported from Win 3.0 sources
@@ -19,21 +21,21 @@
 * 11-Dec-1990 mikeke  ported from win30
 \***************************************************************************/
 
+
+FUNCLOG2(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, EndDialog, HWND, hwnd, INT_PTR, result)
 BOOL EndDialog(
     HWND hwnd,
-    int result)
+    INT_PTR result)
 {
     PWND pwnd;
     PWND pwndOwner;
     HWND hwndOwner;
     BOOL fWasActive = FALSE;
-#line 30
 #ifdef SYSMODALWINDOWS
-#line 31
+#line 35
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
-#line 32
 #endif
-#line 33
+#line 37
 
     if ((pwnd = ValidateHwnd(hwnd)) == NULL) {
         return (0L);
@@ -75,7 +77,7 @@ BOOL EndDialog(
      */
     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
         return FALSE;
-#line 72
+#line 76
     PDLG(pwnd)->fEnd = TRUE;
     PDLG(pwnd)->result = result;
 
@@ -99,13 +101,11 @@ BOOL EndDialog(
                        SWP_HIDEWINDOW | SWP_NOACTIVATE | SWP_NOMOVE |
                        SWP_NOSIZE | SWP_NOZORDER);
 
-#line 95
 #ifdef SYSMODALWINDOWS
-#line 96
+#line 100
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
-#line 115
 #endif
-#line 116
+#line 120
 
     /*
      * Don't do any activation unless we were previously active.
@@ -133,13 +133,11 @@ BOOL EndDialog(
         }
     }
 
-#line 143
 #ifdef SYSMODALWINDOWS
-#line 144
+#line 148
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
-#line 161
 #endif
-#line 162
+#line 166
 
     /*
      * Make sure the dialog loop will wake and destroy the window.

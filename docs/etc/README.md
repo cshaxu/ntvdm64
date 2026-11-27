@@ -2199,3 +2199,4 @@ post-publication targeted checks.
 - [S15 P37 N022 combo initialization](evidence/t485-s1/n022-comboini.md).
 - [S15 P38 N022 combo directory](evidence/t485-s1/n022-combodir.md).
 - [S15 P39 N022 dialog creation delivery](evidence/t485-s1/n022-dlgbegin-review.md).
+- [S15 P40 N022 dialog ending](evidence/t485-s1/n022-dlgend.md).

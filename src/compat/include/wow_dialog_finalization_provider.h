@@ -5,7 +5,7 @@ struct tagWND;
 struct _DLG;
 typedef struct wow_dialog_finalization_provider {
     LONG (WINAPI *worker)(struct tagWND *, UINT, WPARAM, LPARAM, DWORD);
-    BOOL (WINAPI *end)(HWND, int);
+    BOOL (WINAPI *end)(HWND, INT_PTR);
     BOOL (WINAPI *map)(HWND, LPRECT);
     int (WINAPI *list)(HWND, LPSTR, int, int, UINT);
     int (WINAPI *combo_list)(HWND, LPSTR, int, int, UINT);

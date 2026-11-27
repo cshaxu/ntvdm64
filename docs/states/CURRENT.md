@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime44 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime45 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -146,14 +146,9 @@ failed attempts and source boundaries; P31 includes Full24/24.
 Their receipts retain original ABI, package identities, tests, initial failures,
 per-file/global census and original baseline transitions.
 
-[P36 N022 combo](../etc/evidence/t485-s1/n022-combo.md) delivered runtime41:
-XP combo algorithm, paired DBCS/RTL/layout/task flags and original message
-array. Cached full build, dual13-image26hash publication, control39/39,
-task/native-window lifecycle, SOL Options and Full24/24 passed. Initial
-publication/test failures and repairs remain in the receipt. N0227/39;
-overall57/159; S15 9/14. Census1329files,781exact,792nonerror same/537different,
-7853points/119031lines; delta0files/0exact/0same/0different,+5points/-4515lines.
-1273XP/56OpenNT. Nine mirror files changed; Full checkpoint reset. Next comboini.c.
+[P36 N022 combo](../etc/evidence/t485-s1/n022-combo.md) delivered runtime41,
+cached build, dual publication, controls/lifecycle/SOL and Full24/24. This is
+the latest Full checkpoint; its receipt retains all census and initial failures.
 
 [P37 N022 combo initialization](../etc/evidence/t485-s1/n022-comboini.md)
 delivered runtime42: exact XP641-line original plus existing29-line info provider.
@@ -179,7 +174,15 @@ Options pass. Fixture-only link repairs and earlier build failures are retained.
 N02210/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
 536different,7869points/117412lines; delta0files/0exact/0same/0different/
 +17points/+58lines.1276XP/53OpenNT. Three changed mirrors; seven since P36
-Full24/24. Next dlgend.c. No guest change.
+Full24/24. No guest change.
+
+[P40 N022 dialog ending](../etc/evidence/t485-s1/n022-dlgend.md) delivers
+runtime45: XP INT_PTR EndDialog and paired declarations, retained retirement
+guard. Cached build, dual13-image26hash, control40/40, real CCPU window-borrow
+and SOL Options pass. N02211/39; overall57/159; S15 9/14.
+Census1329files,782exact,793nonerror same/536different,7866points/117406lines;
+delta0files/0exact/0same/0different/-3points/-6lines.1277XP/52OpenNT.
+One changed mirror; eight since P36 Full24/24. Next dlgmgr.c. No guest change.
 
 ## S14 Closure Record
 

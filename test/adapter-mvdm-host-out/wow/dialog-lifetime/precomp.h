@@ -38,6 +38,7 @@ C_ASSERT(sizeof(DLG) == 40);
 #define CheckLock(window) ((void)0)
 #define UserAssert(condition) fixture_check((condition), __LINE__)
 #define RIPMSG0(level, text) ((void)0)
+#define FUNCLOG2(...)
 #define SCDLG_CLIENT 1
 #define SCDLG_ANSI 2
 #define SCDLG_16BIT 8
@@ -110,6 +111,6 @@ ULONG_PTR NtUserCallNoParam(int);
 HWND InternalCreateDialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND, DLGPROC, LONG, UINT);
 INT_PTR InternalDialogBox(HANDLE, LPDLGTEMPLATE, HWND, DLGPROC, LPARAM, UINT);
 int PASCAL DialogBox2(HWND, HWND, BOOL, BOOL);
-BOOL EndDialog(HWND, int);
+BOOL EndDialog(HWND, INT_PTR);
 VOID SetDialogPointer(PWND, LONG);
 #endif

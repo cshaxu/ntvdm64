@@ -133,7 +133,7 @@ static LRESULT dialog_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
         }
         if (operation == dialog_end) {
             SetLastError(error);
-            result = wow_dialog_finalization_current()->end(window, (int)wp);
+            result = wow_dialog_finalization_current()->end(window, (INT_PTR)wp);
             __leave;
         }
         if (!finalize) {
