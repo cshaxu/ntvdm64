@@ -285,7 +285,7 @@ foreach(path IN ITEMS src/compat/include src/mvdm-host/inc src/mvdm-host/vdmredi
     src/mvdm-host/dos/command src/mvdm-host/softpc.new/base/inc src/mvdm-host/softpc.new/host/inc
     src/non-mvdm/ds/netapi/netlib src/non-mvdm/public/internal/base/inc
     src/non-mvdm/public/internal/ds/inc src/non-mvdm/public/internal/net/inc
-    src/non-mvdm/ds/netapi/rpcxlate src/non-mvdm/public/sdk/inc
+    src/non-mvdm/public/sdk/inc
     src/non-mvdm/public/ddk/inc src/non-mvdm/private/inc)
   target_include_directories(redirector_guest_copy_test_objects PRIVATE "${NTVDM_REPO}/${path}")
 endforeach()

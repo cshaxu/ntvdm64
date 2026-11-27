@@ -2855,3 +2855,11 @@ lead N017 from XP public/internal/net/inc and ds/netapi/inc respectively,
 retaining current include locations until that directory migration. rapgtpt.h
 is byte-exact; rap.h preserves only the existing unsupported Unicode descriptor
 #error and active original line map. See [N010 evidence](../../docs/etc/evidence/t485-s1/n010.md).
+
+### T485 S14 N011 RPC translation declarations
+
+The selected apiworke.h now uses XP's public/internal/net/inc/apiworke.h path
+and exact bytes. The old ds/netapi/rpcxlate/apiworke.h and its build include
+search entries are removed. vrremote retains its original include and API
+constants. [Current relocation evidence](../../docs/etc/evidence/t485-s1/n011.md)
+supersedes the historical old-path registration above.

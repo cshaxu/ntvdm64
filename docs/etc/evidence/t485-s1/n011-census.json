@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1319,
+    "byte_identical": 729,
+    "nonerror_identical": 731,
+    "nonerror_different": 588,
+    "nonerror_points": 7765,
+    "nonerror_lines": 214351
+  },
+  "after": {
+    "files": 1319,
+    "byte_identical": 730,
+    "nonerror_identical": 732,
+    "nonerror_different": 587,
+    "nonerror_points": 7764,
+    "nonerror_lines": 214251
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -100
+  },
+  "relocation": {
+    "old_path": "src/non-mvdm/ds/netapi/rpcxlate/apiworke.h",
+    "new_path": "src/non-mvdm/public/internal/net/inc/apiworke.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/net/inc/apiworke.h",
+    "xp_blob": "f5c85d24d3ee2a40783ab0f08c23cb095950d5c8",
+    "before_sha256": "805d632a97f750e4b15544d67fc0cc2e36070cbcbb44dd4600a031a528f85c75",
+    "after_sha256": "d00f1ef07909f75400e09fe52dad8ea6667c6d4f17b91d4c08a7e324532c5174"
+  },
+  "baseline_counts": {
+    "XP": 1173,
+    "OpenNT": 144,
+    "OpenNT-4.5": 2
+  },
+  "measurement": "Reuse only exact prior hashes and original IDs; measure relocated header byte-exact XP; old path removed, new path added, net file count zero."
+}

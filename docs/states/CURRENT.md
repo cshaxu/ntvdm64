@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S14** (Ordinary Mode). Resume N004-N012 after
 [S13 closure](../etc/evidence/t485-h-repair/s13-closure.md).
-Migration verified for delivery46/159 directories: H001-H036 and N001-N010.
+Migration verified for delivery47/159 directories: H001-H036 and N001-N011.
 The owner approved continuous execution; the [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S15-S20 and all remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains S15-S20 and all remaining migration/capability obligations.
 
 ## S14 Progress
 
-7/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
+8/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
 and [receipt](../etc/evidence/t485-s1/n004-result.json): XP vdm.c plus required
 original vdm.h; paired WOW registration field leads N005. Cached full build,
 dual13-image26hash publication, targeted tests and consolidated Full23/23 pass.
@@ -76,9 +76,16 @@ sources plus2 paired declarations; runtime10 cached full build, dual13-image
 P7 runtime9;9 files since checkpoint. [Global mixed-baseline census](../etc/evidence/t485-s1/n010-census.json):
 1319 files; byte-exact729; nonerror same731/different588;7765points/214351lines.
 P8 delta: total0, exact+8, nonerror same+8/different-8,points-8,lines-7736.
-1172 files use XP,147 retain registered OpenNT-family originals. Next is N011;
-S14 delivery7/9 and overall46/159. The census includes original build/resources,
-excludes guest and project README records, and separates9 baseline transitions.
+[P9 N011](../etc/evidence/t485-s1/n011.md) relocates apiworke.h to XP's
+public/internal/net/inc path byte-exact and removes old include search paths.
+Runtime11 cached full build, dual13-image26hash publication, real guest NetAPI
+and Full24/24 pass. This is the ten-file checkpoint after N010's nine files.
+Current global census1319files:byte-exact730,nonerror same732/different587,
+7764points/214251lines. P9 delta:total0,exact+1,same+1,different-1,
+points-1,lines-100;1 relocation and OpenNT->XP baseline switch.
+1173 files use XP,146 retain OpenNT-family originals. S14 delivery8/9,
+overall47/159; next N012 XACTSRV, then mandatory S14 closure Full.
+
 
 
 
