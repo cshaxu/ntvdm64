@@ -1,0 +1,755 @@
+{
+  "task": "M0 T485 S15 P29",
+  "runtime": "build/t485-s15/runtime30",
+  "build_exit": 0,
+  "original_inputs": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/ptypes32.h",
+      "xp_blob": "04d14e3057f0207ef1088c924d4fe4b9c1dd9a19",
+      "before_sha256": "fbc65366df6b091aadbdc0ce12eb842bbd48691ccb1b9ce34c6d503226a7139b",
+      "after_sha256": "34d53183853c001e82a510a679ad2aa17fddb47e1c0f572bae579c4ea7e11a3b",
+      "normalized_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/vddsvc.h",
+      "xp_blob": "20ca93a34504dda189533846770592f583e626d2",
+      "before_sha256": "9a55104c41eb6dba07966803610ec3bb880a185162ffa749b583e4be4ee4db91",
+      "xp_sha256": "d0fd6a9ce2742551abcb5d6a82c56b5a5a285db0d16291f231ae8a1bc5d8a8f4"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "xp_path": "Source/XPSP1/NT/public/sdk/inc/vdmdbg.h",
+      "xp_blob": "b8f578bb97e9caa4dbe11b91cdd0ae3f32ff0690",
+      "before_sha256": "14b363ea6cbe8917e6d672231e1b208ab589768b9903e1cd11448be75bcd8e41",
+      "xp_sha256": "6a64b6ae1592d22301c97ecc40b76c851db4053b0442fe169252e3e19fbdb303"
+    }
+  ],
+  "source_hashes": {
+    "src/non-mvdm/public/sdk/inc/ptypes32.h": "34d53183853c001e82a510a679ad2aa17fddb47e1c0f572bae579c4ea7e11a3b",
+    "src/non-mvdm/public/sdk/inc/vddsvc.h": "5caab37c35a6c075dac2524383a5450cdb797ef45b955dacd4a961f05e9b241d",
+    "src/non-mvdm/public/sdk/inc/vdmdbg.h": "ab2d9808b783fc8dcf6f5ac45817ac5b8787ae40648a0ba63784f399c244cde9"
+  },
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "595A21E2A2B4FC8EF2E0A8F3244B2BE34A751945618965BBDABE4A979943344F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "595A21E2A2B4FC8EF2E0A8F3244B2BE34A751945618965BBDABE4A979943344F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "B694E179342986A9605C069F6E890A0E52B8F25DCBF5EA64B4F17D84BAA789ED",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "B694E179342986A9605C069F6E890A0E52B8F25DCBF5EA64B4F17D84BAA789ED",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "044F635C4396945A85CA288AB69B9BB815A87E07A8C8229AE0437509212E8F92",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "044F635C4396945A85CA288AB69B9BB815A87E07A8C8229AE0437509212E8F92",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "BBC370725744733C6077386234491E4DD1E55B24E6FA5306A9992056EBC73314",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "BBC370725744733C6077386234491E4DD1E55B24E6FA5306A9992056EBC73314",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "857AD0B4399EF95D8C27B5DEFBE25B3D54DA14D8FD88D2C6BDA25B6B8A7E3191",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "857AD0B4399EF95D8C27B5DEFBE25B3D54DA14D8FD88D2C6BDA25B6B8A7E3191",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "6433425065CC86E877973EACFDC6A87C8BC47F6C9FF6B2EE3BB2CE7D223F3562",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "6433425065CC86E877973EACFDC6A87C8BC47F6C9FF6B2EE3BB2CE7D223F3562",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "8AFB6F42A18B9FCBE78E78F3A491B305DAAB5163073264824737B3EB9778EE0D",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "8AFB6F42A18B9FCBE78E78F3A491B305DAAB5163073264824737B3EB9778EE0D",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "399EFF997AC4D136A3C9EFB4B01DE600FD76A6B0EB9FFD20BEB0CF8C3E31C0ED",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "399EFF997AC4D136A3C9EFB4B01DE600FD76A6B0EB9FFD20BEB0CF8C3E31C0ED",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "98DE1409AE2E3C28CE82BA0320C8A0297B44D20730B4A2F942835BC2F9F62F62",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "98DE1409AE2E3C28CE82BA0320C8A0297B44D20730B4A2F942835BC2F9F62F62",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "6B3773EA3DC12D7EA3539B45C4B89D3AA0ABDCA124E6B31B5C0A56ABFB353258",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "6B3773EA3DC12D7EA3539B45C4B89D3AA0ABDCA124E6B31B5C0A56ABFB353258",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "59C70073B7110A494B9FCA0934C336ACEF94E838DCBFDFF19F9DB2B9FE6183EB",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "59C70073B7110A494B9FCA0934C336ACEF94E838DCBFDFF19F9DB2B9FE6183EB",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "F131FBEF5FBB879D391CB224713B22E1992B2558DA1EF0F2AD031BC76DC4C1A2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "F131FBEF5FBB879D391CB224713B22E1992B2558DA1EF0F2AD031BC76DC4C1A2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "5ECF5DDBC517AF210695F5ABD676BF631762626C7ACE694E5FEBB1BDF7A654BD",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "5ECF5DDBC517AF210695F5ABD676BF631762626C7ACE694E5FEBB1BDF7A654BD",
+      "pass": true
+    }
+  ],
+  "census": {
+    "before": {
+      "files": 1325,
+      "byte_identical": 776,
+      "nonerror_identical": 787,
+      "nonerror_different": 538,
+      "nonerror_points": 7773,
+      "nonerror_lines": 136488
+    },
+    "after": {
+      "files": 1325,
+      "byte_identical": 777,
+      "nonerror_identical": 788,
+      "nonerror_different": 537,
+      "nonerror_points": 7784,
+      "nonerror_lines": 135222
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 1,
+      "nonerror_identical": 1,
+      "nonerror_different": -1,
+      "nonerror_points": 11,
+      "nonerror_lines": -1266
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+        "before_points": 1,
+        "before_lines": 124,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+        "before_points": 1,
+        "before_lines": 367,
+        "after_points": 13,
+        "after_lines": 25,
+        "exclusions": 3
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+        "before_points": 1,
+        "before_lines": 801,
+        "after_points": 1,
+        "after_lines": 1,
+        "exclusions": 1
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1262,
+      "OpenNT": 63
+    }
+  },
+  "logs": {
+    "capture32-final.log": "native capture bits=32 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "capture64-final.log": "native capture bits=64 checks=3475 failures=0; original allocation/table/cleanup\n",
+    "layout32-final.log": "PASS 32-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n",
+    "layout64-final.log": "PASS 64-bit native CSR layouts; fixed wire=36/16/32; high numeric PID/TID/receipt and parent tag identities\n"
+  },
+  "service": {
+    "Concurrency": 4,
+    "ElapsedMs": 6368,
+    "ObserverHash": "00A37C673F82C3BC4B9DD3EE6EFE5DCA82A1FA143F3E745D9105EB2C2AD283D8",
+    "FixtureHash": "35D112960DCE268D48C424F0632E1566DF06DACB4C644A1D65B15182F7259D99",
+    "Cases": [
+      {
+        "Case": "frontend-chains",
+        "ElapsedMs": 797,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-instances",
+        "ElapsedMs": 802,
+        "Result": "PASS"
+      },
+      {
+        "Case": "parent-resume-origin",
+        "ElapsedMs": 799,
+        "Result": "PASS"
+      },
+      {
+        "Case": "io-authority",
+        "ElapsedMs": 799,
+        "Result": "PASS"
+      },
+      {
+        "Case": "route-cancellation",
+        "ElapsedMs": 458,
+        "Result": "PASS"
+      },
+      {
+        "Case": "prepared-native-root-loss",
+        "ElapsedMs": 478,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-stop",
+        "ElapsedMs": 576,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-unclaimed-reconnect",
+        "ElapsedMs": 577,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-delegated",
+        "ElapsedMs": 541,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait",
+        "ElapsedMs": 804,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-root-loss",
+        "ElapsedMs": 722,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-request-loss",
+        "ElapsedMs": 718,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-wait-worker-loss",
+        "ElapsedMs": 577,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-rundown",
+        "ElapsedMs": 492,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-return",
+        "ElapsedMs": 529,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-after-return",
+        "ElapsedMs": 532,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-nested-return",
+        "ElapsedMs": 474,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-pending-command",
+        "ElapsedMs": 546,
+        "Result": "PASS"
+      },
+      {
+        "Case": "reenter-before-increment",
+        "ElapsedMs": 538,
+        "Result": "PASS"
+      },
+      {
+        "Case": "launcher-completed-rundown",
+        "ElapsedMs": 545,
+        "Result": "PASS"
+      },
+      {
+        "Case": "completed-worker-loss",
+        "ElapsedMs": 522,
+        "Result": "PASS"
+      },
+      {
+        "Case": "wow-start-late-query",
+        "ElapsedMs": 716,
+        "Result": "PASS"
+      },
+      {
+        "Case": "default",
+        "ElapsedMs": 690,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-authority",
+        "ElapsedMs": 658,
+        "Result": "PASS"
+      },
+      {
+        "Case": "shared-worker-residency",
+        "ElapsedMs": 562,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-command",
+        "ElapsedMs": 487,
+        "Result": "PASS"
+      },
+      {
+        "Case": "native-worker",
+        "ElapsedMs": 672,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-gui",
+        "ElapsedMs": 677,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close",
+        "ElapsedMs": 705,
+        "Result": "PASS"
+      },
+      {
+        "Case": "frontend-completion-barrier",
+        "ElapsedMs": 419,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-order",
+        "ElapsedMs": 509,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-close-root-loss",
+        "ElapsedMs": 509,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-frontend-prepare-pending",
+        "ElapsedMs": 485,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-worker-then-console",
+        "ElapsedMs": 439,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-console-then-worker",
+        "ElapsedMs": 464,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-late-worker-close",
+        "ElapsedMs": 548,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-exit-then-console",
+        "ElapsedMs": 595,
+        "Result": "PASS"
+      },
+      {
+        "Case": "console-then-worker-exit",
+        "ElapsedMs": 529,
+        "Result": "PASS"
+      },
+      {
+        "Case": "worker-console-exit",
+        "ElapsedMs": 422,
+        "Result": "PASS"
+      },
+      {
+        "Case": "preparing-worker-exit",
+        "ElapsedMs": 500,
+        "Result": "PASS"
+      },
+      {
+        "Case": "management-terminate",
+        "ElapsedMs": 563,
+        "Result": "PASS"
+      },
+      {
+        "Case": "unfinished-worker-exit",
+        "ElapsedMs": 538,
+        "Result": "PASS"
+      }
+    ]
+  },
+  "guest": {
+    "mode": "netapi",
+    "exit_code": 0,
+    "elapsed_ms": 13443
+  },
+  "vdd_contract": {
+    "started": "2026-11-27T17:18:15.7346195Z",
+    "owner_pid": 27412,
+    "result": "pass",
+    "contract": "vdd",
+    "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+    "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-final\\vdd-contract",
+    "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n021-final\\vdd-contract\\vdd-object-contract.exe",
+    "inputs": [
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\observation\\verify-softpc-object-contract.ps1",
+        "sha256": "20C46AED5C54B4590C878DA29A0618A26C1F3798FED108E86390BF33367E1D4A"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd",
+        "sha256": "CE25F8E8E51F4A259C5383012FD6351C81D6B71E9FFA69EE56C436D821F31C8C"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\test\\mvdm-host\\vdd_object_contract_fixture.c",
+        "sha256": "CD3CAE198D25C30EE0991CAAB86817F43779A56078393DF37915258710B473E4"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\src\\nt_vdd.c",
+        "sha256": "50C80A3C4DAE8160764B178DE84F35B19CBAEF339F600BEDFBECBB971E958E81"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_vdd.obj",
+        "sha256": "64A4998749693513A3EEB97EB18877D6DEA1C09E3539B759468946EBA4CB51A6"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+        "sha256": "B26AA0E2062BA28A72ABCB940574A482050534F31D62C2C84BC75A5B0E18E5A0"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\insignia.h",
+        "sha256": "A2A88B277659A7AFFF373B1FC3232F675A2247C5AF3E2B4AFE0C7841C8664171"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+        "sha256": "7108A678210B1D35FC9A23C0CD1FB25404A3BFE03C208821520F2A15176A4EBC"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\nt_vddp.h",
+        "sha256": "C3AABE93271B3CC9846EBA60D4ADA3E366EFC8759AFA8D147E3A212F93FA4669"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\ios.h",
+        "sha256": "4D575E388B723D5578314B6E2B747DA63273CDD7310532C16881551AD757D8CA"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\dma.h",
+        "sha256": "FCDC50C7985C7B740BF46D0620E255254EB9B9B16ACED9A51B3F7A886D8D7316"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\non-mvdm\\public\\sdk\\inc\\nt_vdd.h",
+        "sha256": "6D0AB4C8F546C7351ED74ED50F454E0B06059616C8CD6E47AF373191FE7D642A"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\ios.obj",
+        "sha256": "0EBD32CB7C2B63990EC38A7F146D0A7E005620CE7D7A37E81DB6FEA9F84C5E4D"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\in.obj",
+        "sha256": "EEA860AA01FB1D305EDB60427A99796433BC58FF8602B0CAA624A5C4F3A0B9A3"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\out.obj",
+        "sha256": "5879259120D572D52963ACC0205B79810517410EBB62AA494831FA8C76D8F52B"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\support\\ios.c",
+        "sha256": "50A43C13CF2DB352CA82E97FAA50575F0761BA3FF594BAA88C841BEDB98398EA"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\in.c",
+        "sha256": "5D21592FCA88D20B764AE8A5377E1102D9E50DD19E01A543241B47A107218239"
+      },
+      {
+        "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\ccpu386\\out.c",
+        "sha256": "89999515F4F834EEF0683D3218D5CC3BE2ACBAE2897360D2984510D79BBAA74E"
+      }
+    ],
+    "runs": [
+      {
+        "pid": 3800,
+        "kind": "native-build",
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\tools\\build-fixtures.cmd\" x86 softpc-contracts\"",
+        "exit": 0
+      },
+      {
+        "pid": 6148,
+        "kind": "negative-abi-compile",
+        "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd\" softpc-vdd-negative\"",
+        "exit": 2
+      },
+      {
+        "pid": 6532,
+        "exit": 0,
+        "kind": "fixture",
+        "diagnostic_budget_ms": 30000
+      }
+    ],
+    "checks": 303,
+    "callbacks": 82,
+    "fixture_sha256": "297106EFEBF488326C14156711BB5E47F88241E194E732D44D9604845AC5EF22",
+    "finished": "2026-11-27T17:18:49.7928931Z"
+  },
+  "live_vdd_result": "PASS live NTVDM VDD export witness and MEM completion\n",
+  "live_vdd_trace": "PASS worker loaded NTVDMD.DLL\nEVENT received break and matching SAS base\nEVENT received break and matching SAS base\nPASS XP debug event writeback\nPASS XP debugger register round trip\nPASS NTVDM export name/ordinal query/allocate/reallocate/free\nPASS failed reallocation preserves allocation and free space\nPASS export query at matching task termination\n",
+  "directory_audit": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/callconv.inc",
+      "xp_blob": "86ca9c6292bb594597c4819f2f1ff7a3498af732",
+      "sha256": "dbe89c1091a5fac0f048efb3118caffb35775be7ec2e716597f54b71b9bab43f",
+      "points": 0,
+      "lines": 0,
+      "byte_equal": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/devioctl.h",
+      "xp_blob": "d357c7c2389af1086ee890c100e14597721b3820",
+      "sha256": "2d43923c3fb84d7a188420aa88da5d8b48a0fd6e8b94d6551ca693b0cd6f3d85",
+      "points": 0,
+      "lines": 0,
+      "byte_equal": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "xp_blob": "923a1401a3a8b8df86153636d3ffbd6d2d478ec9",
+      "sha256": "845f7cf7275a1369f140cd753b12839c5fa5e641ec795a3ded0718201007c120",
+      "points": 0,
+      "lines": 0,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt.h",
+      "xp_blob": "44268dc13f0d6a201611989fd0d662a685e8314c",
+      "sha256": "5012e22d0de17cb2a32613b6685272544e3a8cedd71cd16df1abc70fdc1accf7",
+      "points": 14,
+      "lines": 40,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
+      "xp_blob": "00821b561abf0edfba44701440eef70848ed8a89",
+      "sha256": "6d0ab4c8f546c7351ed74ed50f454e0b06059616c8cd6e47af373191fe7d642a",
+      "points": 2,
+      "lines": 4,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrdll.h",
+      "xp_blob": "963582def0cc3c79fa49134af218fca5b4a09f5a",
+      "sha256": "430918d11ac891864f8e5cfdc491a21f32b130c77c1b9781ac7b992b6887ebba",
+      "points": 0,
+      "lines": 0,
+      "byte_equal": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "xp_blob": "9bd7d892d373020948a3f58c64004fc0ba8ace65",
+      "sha256": "0fd969e6e2b545e02e7255f97a8bbbfc8961020938298746d7af5723df980d43",
+      "points": 0,
+      "lines": 0,
+      "byte_equal": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "xp_blob": "4ea8fe3479c4e64a36434249a2bdd8a324f5411d",
+      "sha256": "79a3df4c4eefd50e68ee0230c7b730f902f63250b8b837f5e49f5ca3fda88580",
+      "points": 0,
+      "lines": 0,
+      "byte_equal": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "xp_blob": "b9bfabc459a343f84701fc619118f2e0a7940f95",
+      "sha256": "6c1274def9212cf1db13f0a62c316e008c69b09711c18e05fe04f61a42de0db6",
+      "points": 20,
+      "lines": 302,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "xp_blob": "e635d79201f00fe706d78f232d15180a94791f3b",
+      "sha256": "cd6684fb8f227da233934d38c70178d1ff026a6607163fdadd3133de2b75750c",
+      "points": 3,
+      "lines": 3,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "xp_blob": "3bf8c5fb976bba9e331743966b9d75c68cafad3e",
+      "sha256": "f5bd64dd7899b6bea121101c0d61e0fe6ca9ab537485d03b5ad51a1adf124089",
+      "points": 32,
+      "lines": 280,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "xp_blob": "77f3cae0ad7cc82aaa4dc65e5f3ed11d11602a6d",
+      "sha256": "64066ac8c83eab0783f3362c29e4a53a7739ad7ee6a98b761ea1c3ea29969458",
+      "points": 6,
+      "lines": 20,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "xp_blob": "81d18c586d38412ec8351fdecd31cfe2170e2703",
+      "sha256": "a62b91e9c93285e66c60a859506974e7a7025703ff2393bc37c4dd493b7c0dce",
+      "points": 17,
+      "lines": 155,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "xp_blob": "978808f498bcfc4924079ec737192ef740c79a43",
+      "sha256": "1c094e636f3b9a65165ef6b2b4ac5cee45fdd0b60d1351b2f264dd2d799a91fd",
+      "points": 8,
+      "lines": 99,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+      "xp_blob": "04d14e3057f0207ef1088c924d4fe4b9c1dd9a19",
+      "sha256": "34d53183853c001e82a510a679ad2aa17fddb47e1c0f572bae579c4ea7e11a3b",
+      "points": 0,
+      "lines": 0,
+      "byte_equal": true
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+      "xp_blob": "20ca93a34504dda189533846770592f583e626d2",
+      "sha256": "5caab37c35a6c075dac2524383a5450cdb797ef45b955dacd4a961f05e9b241d",
+      "points": 13,
+      "lines": 25,
+      "byte_equal": false
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "xp_blob": "b8f578bb97e9caa4dbe11b91cdd0ae3f32ff0690",
+      "sha256": "ab2d9808b783fc8dcf6f5ac45817ac5b8787ae40648a0ba63784f399c244cde9",
+      "points": 1,
+      "lines": 1,
+      "byte_equal": false
+    }
+  ],
+  "adaptations": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+      "exclusions": [
+        {
+          "start": 58,
+          "end": 138
+        },
+        {
+          "start": 172,
+          "end": 187
+        },
+        {
+          "start": 280,
+          "end": 349
+        }
+      ],
+      "stdcall_setters": [
+        "setEAX",
+        "setAX",
+        "setEBX",
+        "setECX",
+        "setEDX",
+        "setESP",
+        "setEBP",
+        "setESI",
+        "setEDI",
+        "setEIP",
+        "setES"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "exclusions": [
+        {
+          "start": 96,
+          "end": 229
+        }
+      ],
+      "stdcall_setters": []
+    }
+  ],
+  "line_audit": [
+    {
+      "path": "ptypes32.h",
+      "mismatches": []
+    },
+    {
+      "path": "vddsvc.h",
+      "mismatches": []
+    },
+    {
+      "path": "vdmdbg.h",
+      "mismatches": []
+    }
+  ],
+  "full": "Not due: six completed files since P26 Full24/24; current directory57; targeted final-package delivery passed."
+}

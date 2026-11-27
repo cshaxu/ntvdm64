@@ -1,6 +1,6 @@
 /*++
 
-Copyright (c) 1992 Microsoft Corporation
+Copyright (c) 1992-1999 Microsoft Corporation
 
 Module Name:
 
@@ -20,6 +20,10 @@ Abstract:
  * If we have not included the file yet, include it and set a signal
  * to tell anybody the fact.
 **/
+
+#if _MSC_VER > 1000
+#pragma once
+#endif
 
 #ifndef _NT_VDD
 #include "nt_vdd.h"
@@ -51,9 +55,10 @@ Abstract:
 /** Register manipulation services **/
 
 #ifndef i386
-#error
-#line 135
+#error Unsupported excluded original configuration
+#line 139
 #endif
+#line 140
 
 
 /** Real function prototype declarations **/
@@ -86,9 +91,10 @@ MGetVdmPointer(
 );
 
 #else
-#error
-#line 184
+#error Unsupported excluded original configuration
+#line 188
 #endif
+#line 189
 
 
 /** Register manipulation functions **/
@@ -180,9 +186,10 @@ VOID    setMSW(USHORT);
 
 
 #else
-#error
-#line 346
+#error Unsupported excluded original configuration
+#line 350
 #endif
+#line 351
 
 
 /* end of VDDSVC.H */

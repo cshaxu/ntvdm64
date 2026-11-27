@@ -1,8 +1,13 @@
 /*****************************************************************************\
+* Copyright (C) Microsoft Corporation, 1990-1999
 * PTYPES32.H - PORTABILITY MAPPING HEADER FILE
 *
 * This file provides types for 16/32 bit portable code.
 \*****************************************************************************/
+
+#if _MSC_VER > 1000
+#pragma once
+#endif
 
 #include <setjmp.h>
 
@@ -59,4 +64,3 @@ typedef    MCATCHBUF    *LPMCATCHBUF   ;
 #define TF_FORCEDRIVE       (BYTE)0x80
 #define DLLMEM_MOVEABLE     0
 #define DLLMEM_ZEROINIT     GMEM_ZEROINIT
-

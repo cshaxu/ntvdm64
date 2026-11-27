@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall56/159 directories, H001-H036 and N001-N020. S15 runtime29 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime30 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-8/14 directories delivered. P1 N013 and P2 N014 are complete; directory50
+9/14 directories delivered. P1 N013 and P2 N014 are complete; directory50
 Full24/24 passed. [P3 N015](../etc/evidence/t485-s1/n015.md) completed the five
 DDK declarations with cached build, runtime3 dual publication, lifecycle,
 guest NetAPI and all32 Video7 modes. See its receipt for the observer retry and historical census.
@@ -140,16 +140,9 @@ Census1324files,774exact,785nonerror same/539different,7742points/154167lines;
 delta0files,0exact,0same,0different,+1point/-475lines.1251XP/73OpenNT.
 Two changed mirror files since P21 Full24/24; no guest change.
 
-[P23 N021 CSR](../etc/evidence/t485-s1/n021-csr.md) delivered: client/message
-headers verified XP exact; server header restored XP exact. B validation
-provider signature now matches XP NTAPI. Corrected NT4-era fixture sizes.
-Cached build, runtime24 dual13-image26hash publication, capture3475 each on
-x86/x64, both layout fixtures, service lifecycle and guest NetAPI passed.
-Global1324files,775exact,786nonerror same/538different,7741points/153031lines;
-delta+1exact,+1same,-1different,-1point/-1136lines.1252XP/72OpenNT.
-N0218/17; next ntexapi.h. Overall56/159 and S15 8/14 unchanged.
-Five files audited since P21 Full24/24, three changed; no guest modification.
-
+[P23 N021 CSR](../etc/evidence/t485-s1/n021-csr.md) delivered runtime24,
+original XP CSR headers and targeted capture/layout, service and guest NetAPI.
+The receipt retains original ABI restoration and all historical census values.
 
 [P24 N021 executive/LPC](../etc/evidence/t485-s1/n021-executive.md) delivered
 runtime25 and targeted capture/layout, service and guest NetAPI. Its receipt
@@ -159,15 +152,9 @@ retains original DEVL/C++ recovery and census delta-23points/-208lines.
 runtime26, capture/layout, service42 and guest NetAPI. Its receipt retains
 all ABI evidence and census delta+31points/-2012lines; N02111/17 then.
 
-[P26 N021 registry](../etc/evidence/t485-s1/n021-registry.md) delivered:
-XP declarations and C++ restored; two SDK type/four import-attribute omissions
-retain original signatures. Cached build, runtime27 dual13-image26hash,
-native capture/layout, service42, guest NetAPI and Full24/24 passed.
-Census1324files,775exact,786nonerror same/538different,7750points/150814lines;
-delta0files/0exact/0same/0different/+1point/+3lines.1256XP/68OpenNT.
-N02112/17; next ntrtl.h. Overall56/159 and S15 8/14 unchanged.
-Ten-file Full checkpoint complete; count resets to zero. Guest unchanged;
-Win95 known exit-one boundary remains explicitly retained.
+[P26 N021 registry](../etc/evidence/t485-s1/n021-registry.md) delivered
+runtime27 with consolidated Full24/24. Its receipt preserves the observer
+correction, all attempts and census. This is the latest Full checkpoint.
 
 [P27 N021 RTL](../etc/evidence/t485-s1/n021-rtl.md) delivered runtime28:
 full cached build, dual13-image26hash, x86/x64 capture/layout, service42 and
@@ -186,6 +173,15 @@ different,7773points/136488lines; delta0files/0exact/0same/0different,
 +7points/-2081lines.1259XP/66OpenNT. N02114/17; next ptypes32.h.
 Overall56/159 and S15 8/14 unchanged. Three mirror files completed since
 P26 Full24/24. Original guest unchanged.
+
+[P29 N021 final SDK](../etc/evidence/t485-s1/n021-final.md) delivered runtime30:
+ptypes32 exact XP; VDD stdcall boundaries/exclusions retained; debugger
+original declarations restored. Cached build, dual13-image26hash, capture/
+layout, service42, guest NetAPI, VDD contract and live debug/export pass.
+Census1325files,777exact,788nonerror same/537different,7784points/135222lines;
+delta0files/+1exact/+1same/-1different/+11points/-1266lines.1262XP/63OpenNT.
+N02117/17 complete; overall57/159, S15 9/14. Six mirror files completed since
+P26 Full24/24. Next N022 USER client in DIR order; original guest unchanged.
 
 ## S14 Closure Record
 

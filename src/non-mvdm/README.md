@@ -3041,3 +3041,9 @@ T485 S15 P28 restores pinned XP nturtl.h and original LF, preserving eight
 compiler-proven SDK type boundaries with original diagnostic lines. No RTL
 algorithm changes; B supplies only the opaque PTEB_ACTIVE_FRAME prerequisite.
 [User RTL evidence](../../docs/etc/evidence/t485-s1/n021-user-rtl.md).
+
+T485 S15 P29 completes N021 with byte-exact XP ptypes32.h, restored original
+vdmdbg.h declarations and vddsvc.h public contracts. Eleven setter WINAPI
+bindings match actual published stdcall exports; original rejected branches
+and diagnostic lines remain. [Final SDK evidence](../../docs/etc/evidence/t485-s1/n021-final.md)
+records all17 pinned directory identities, final delivery and residuals.

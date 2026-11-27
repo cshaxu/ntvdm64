@@ -2179,3 +2179,5 @@ post-publication targeted checks.
 - [S15 P27 N021 RTL migration](evidence/t485-s1/n021-rtl.md).
 
 - [S15 P28 N021 user-mode RTL migration](evidence/t485-s1/n021-user-rtl.md).
+
+- [S15 P29 N021 final SDK declarations](evidence/t485-s1/n021-final.md).

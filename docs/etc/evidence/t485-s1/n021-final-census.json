@@ -1,0 +1,56 @@
+{
+  "before": {
+    "files": 1325,
+    "byte_identical": 776,
+    "nonerror_identical": 787,
+    "nonerror_different": 538,
+    "nonerror_points": 7773,
+    "nonerror_lines": 136488
+  },
+  "after": {
+    "files": 1325,
+    "byte_identical": 777,
+    "nonerror_identical": 788,
+    "nonerror_different": 537,
+    "nonerror_points": 7784,
+    "nonerror_lines": 135222
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": 11,
+    "nonerror_lines": -1266
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+      "before_points": 1,
+      "before_lines": 124,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+      "before_points": 1,
+      "before_lines": 367,
+      "after_points": 13,
+      "after_lines": 25,
+      "exclusions": 3
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "before_points": 1,
+      "before_lines": 801,
+      "after_points": 1,
+      "after_lines": 1,
+      "exclusions": 1
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1262,
+    "OpenNT": 63
+  }
+}
