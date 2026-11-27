@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P8",
-  "state": "final-verified-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime9",
   "files": {
     "src/mvdm-host/inc/vdmredir.h": "162dbb02ebb6ce2446be0e35a648f94195e854015ae25b4535cff06f30d1d68d",
@@ -245,7 +245,9 @@
     "async": "PASS existing production staging fixture; see async.log",
     "guest": "PASS actual final-package DOS FCB test; see fcb.log",
     "full": "Not repeated; last Full runtime8/file20 passed23/23; current P uses targeted scope",
-    "logs": "build\\t485-s12\\p8\\final"
+    "logs": "build\\t485-s12\\p8\\final",
+    "excluded_profile": "PASS actual compiler /DFE_SB rejected at restored #error",
+    "governance": "PASS documentation and relative links"
   },
   "attempts": [
     {
@@ -264,5 +266,6 @@
       "owner": 10968,
       "result": "Only selected family/failure/dbcs targets and outstanding async/guest gates run;no product rebuild or republication"
     }
-  ]
+  ],
+  "commit": "e25380fe2"
 }

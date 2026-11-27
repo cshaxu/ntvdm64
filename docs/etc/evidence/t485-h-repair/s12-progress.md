@@ -8,7 +8,7 @@ each file before delivery. Default original valid;retains need real evidence.
 
 Reviewed24/48files129/645points;restored-final-verified26,restored-local0,
 residual-final-verified103,unreviewed516.
-Delivered/pushed20files107points through c1b02e99f.
+Delivered/pushed24files129points through e25380fe2.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -34,10 +34,10 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 18 | src/mvdm-host/inc/mvdm.h | 2 | P7 delivered c1b02e99f |
 | 19 | src/mvdm-host/inc/softpc.h | 28 | P7 delivered c1b02e99f |
 | 20 | src/mvdm-host/inc/suballoc.h | 1 | P7 delivered c1b02e99f |
-| 21 | src/mvdm-host/inc/vdmredir.h | 1 | P8 final verified; commit/push pending |
-| 22 | src/mvdm-host/inc/vrnetapi.h | 1 | P8 final verified; commit/push pending |
-| 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | P8 final verified; commit/push pending |
-| 24 | src/mvdm-host/oemuni/file.c | 19 | P8 final verified; commit/push pending |
+| 21 | src/mvdm-host/inc/vdmredir.h | 1 | P8 delivered e25380fe2 |
+| 22 | src/mvdm-host/inc/vrnetapi.h | 1 | P8 delivered e25380fe2 |
+| 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | P8 delivered e25380fe2 |
+| 24 | src/mvdm-host/oemuni/file.c | 19 | P8 delivered e25380fe2 |
 | 25 | src/mvdm-host/oemuni/process.c | 65 | Pending |
 | 26 | src/mvdm-host/softpc.new/host/src/config.c | 38 | Pending |
 | 27 | src/mvdm-host/softpc.new/host/src/nt_bop.c | 16 | Pending |
@@ -518,3 +518,7 @@ statement falsely matched a later original statement in audit helper;corrected
 classification without product rebuild. Initial failed audit retained.
 All24files129points final-verified,26restored103residual516unreviewed.
 Mirror total686/27172,reduction117/4637. Commit/push pending;next25process.c.
+
+P8 product committed/pushed e25380fe2. Actual compiler FE_SB negative profile
+rejected at restored#error as required. Delivered24files129points;26restored,
+103residual,516unreviewed. Next25process.c includes stale PIF fixture follow-up.
