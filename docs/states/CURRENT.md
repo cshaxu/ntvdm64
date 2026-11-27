@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S14** (Ordinary Mode). Resume N004-N012 after
 [S13 closure](../etc/evidence/t485-h-repair/s13-closure.md).
-Migration verified for delivery42/159 directories: H001-H036 and N001-N006.
+Migration verified for delivery43/159 directories: H001-H036 and N001-N007.
 The owner approved continuous execution; the [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S15-S20 and all remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains S15-S20 and all remaining migration/capability obligations.
 
 ## S14 Progress
 
-3/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
+4/9 directories verified for delivery in this S. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
 and [receipt](../etc/evidence/t485-s1/n004-result.json): XP vdm.c plus required
 original vdm.h; paired WOW registration field leads N005. Cached full build,
 dual13-image26hash publication, targeted tests and consolidated Full23/23 pass.
@@ -58,7 +58,12 @@ no full-suite rerun. Runtime6 differs from Full-tested runtime5 only in named
 package-ID/PE timestamp fields after format/#line cleanup. Primary mirrors
 OpenNT3points/6586lines -> XP17points/95lines; paired vdm.c drops4lines,
 5 original declaration headers are byte-exact. This is the new ten-file
-checkpoint. Next directory is N007; other paired directories remain open.
+checkpoint. Other paired directories remain open.
+[N007 system fonts](../etc/evidence/t485-s1/n007.md):42/42 actual files are
+byte-exact OpenNT/XP originals, with matching complete directory membership.
+No production or media change; nonerror0points/0lines. P4 documentation-only
+registration retains N006 runtime6 Full24/24 without rebuild/republication.
+The unchanged42-file audit uses that same checkpoint. Next is N008.
 ## S13 Closure Record
 
 [Closure](../etc/evidence/t485-h-repair/s13-closure.md) and

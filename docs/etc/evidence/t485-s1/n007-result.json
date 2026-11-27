@@ -1,0 +1,390 @@
+{
+  "batch": "N007",
+  "task": "M0 T485 S14 P4",
+  "files": [
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/app852.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/app852.fon",
+      "blob": "e0afcbebe1ca2d413a1d5fcaf4643e650e54957f",
+      "bytes": 16435,
+      "sha256": "ca3b89619d7c41798834f2e3da09138f1c57a391d5f963fcbef85665595358a6",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/app857.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/app857.fon",
+      "blob": "2f67bfcf4bdafaa787ae1fdbe09be79944befc33",
+      "bytes": 16587,
+      "sha256": "3b5bc4dde6a0b48f55252b94750b74c7621f4a0d8f7aff52bb49521078ce7959",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/app866.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/app866.fon",
+      "blob": "26803bc31a9a36bc1c0c850bff0ee8bbfd3d045c",
+      "bytes": 16663,
+      "sha256": "a782587b6adf4d698511eca99e115af79064b44429272c1c60e4ca70ef18d274",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga40737.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga40737.fon",
+      "blob": "32735e076c708115eb43beed92dc68e15e0eced9",
+      "bytes": 3641,
+      "sha256": "c90ba5043990a30933ad7a0db2794cda3870b85b09378ae4e778579cd0ad594a",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga40852.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga40852.fon",
+      "blob": "ed4b0874ad9bbd3a42f0958bbb2dafb8ffc4bdd0",
+      "bytes": 3349,
+      "sha256": "d0aa5a7d2a9c6bef4d2f11d7e715df3b4fbc4e93caa141a0c1ec5ee4d92b26d6",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga40857.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga40857.fon",
+      "blob": "0f4f8a7965e3081a76d823c720a51bd484e1d7b8",
+      "bytes": 3335,
+      "sha256": "71f1c8d03809a74eee037b5a8c4598148469a4c72e8a5d3722e3515ef50a72a0",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga40866.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga40866.fon",
+      "blob": "d9fd3655572999e9d183b4c3a61b6bc0f1edd20c",
+      "bytes": 3726,
+      "sha256": "8a16153551932c535c6934cb3a675f2db6691348cc3e7fffdf5f4c3075e9552e",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga40869.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga40869.fon",
+      "blob": "9d718de4ca8698c42218107f545efe1eaead9264",
+      "bytes": 3689,
+      "sha256": "e591d52af2b5d6fde8dfd7bba0ce17d88fad8b074c9adeddd6745a1dedca8779",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga80737.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga80737.fon",
+      "blob": "4e414e259703d3850b70d2fe510613466dd21c59",
+      "bytes": 3075,
+      "sha256": "a4fdc16ee91e64484a26a3401772c3311c506b55c8b49a2cddf77393b679d6b5",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga80852.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga80852.fon",
+      "blob": "c5796b8334d63301640f81175cdfdc3614b91a11",
+      "bytes": 3113,
+      "sha256": "0a4603adf2f1963d6b8dcfb87693a9dabfd73ee399c71b3ee088500baa68363a",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga80857.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga80857.fon",
+      "blob": "e4d75eb20ce95e34725c73a9e780f4e617d77462",
+      "bytes": 2745,
+      "sha256": "66bb0ea0706867d0b6d88676c9b286211b7b13c955b4c38fe6c53d41680722b5",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga80866.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga80866.fon",
+      "blob": "8158cb17c1311c08bb08abd4a8fd96ad4ea998f5",
+      "bytes": 3097,
+      "sha256": "62bf8f0faf2eb756308ff5bfd35d386b36c57c04972fc4fa4f028091e15f2e5c",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/cga80869.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/cga80869.fon",
+      "blob": "95ed5f66d31ecb7f8c7f2ae8a158766e0d14b17f",
+      "bytes": 3111,
+      "sha256": "a1f1c479b7476bf5de8a0625503a4ed9bd93b6de594b9bbd91dc6f167cd61410",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/dos737.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/dos737.fon",
+      "blob": "6e40266801a0ecd1d8e152b2eac292cb9baa2291",
+      "bytes": 15892,
+      "sha256": "db45dee073fd4e9ea808b23066923ee7234f201213fc8b971e548acc4eb3ab28",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/dos869.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/dos869.fon",
+      "blob": "a69d9903c61df0086f0aaba8e3c4e994ea1f4480",
+      "bytes": 16369,
+      "sha256": "7a02637c46fdbcd37ae45ffac1bb4e64e211ea7d35d706f764ca90f363554548",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega40737.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega40737.fon",
+      "blob": "a6fc7bae8dfc30751b2cce0228199e8d0fe41e34",
+      "bytes": 3943,
+      "sha256": "2193751df9e228eefe7b45e203940384e06d1b2f46fa50bf3922f9ec99dc8e4c",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega40852.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega40852.fon",
+      "blob": "de391d435146f39daba85efc780b4a7df8647d37",
+      "bytes": 4013,
+      "sha256": "224ed3deb909fddcc8f62730734989f3c957dd116d9ef8fcbb1e1454fa7e2aed",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega40857.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega40857.fon",
+      "blob": "e5ec7ddaecdb8ba43013de054beb7d32d9f3d7ec",
+      "bytes": 3693,
+      "sha256": "0a17519ac31c85d6a30764d84a6987d08e670bc64774a55cd70c21670a0c6020",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega40866.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega40866.fon",
+      "blob": "a22997e6dc83b2ac9593eb13aef6d00dffbae719",
+      "bytes": 4091,
+      "sha256": "4c19e883916a50dd9b8b88cb16695e4a0c0e8b5b59e83e561c03f0bf747e4e63",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega40869.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega40869.fon",
+      "blob": "a6fc7bae8dfc30751b2cce0228199e8d0fe41e34",
+      "bytes": 3943,
+      "sha256": "2193751df9e228eefe7b45e203940384e06d1b2f46fa50bf3922f9ec99dc8e4c",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega80737.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega80737.fon",
+      "blob": "0257662f47b34b2f39764beb8f50f41eaa3b533d",
+      "bytes": 3320,
+      "sha256": "577c24b715c88a32240e0af91ad32755f589e9f274f7736aac6056cb11f495e1",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega80852.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega80852.fon",
+      "blob": "79bc77a9de85f937e7065e07ac65ea19bdeaa254",
+      "bytes": 3234,
+      "sha256": "4cfdd7f22001f4cace10776ac2110d800e31c5a2c23737d78b46b9cfe1d86fad",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega80857.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega80857.fon",
+      "blob": "5e0a198af6762995b53d338a347b63b5d30a4429",
+      "bytes": 2914,
+      "sha256": "49e22e1c3bc9edf2026afbea5ee7b8a2cb4baf1d5b2424d2ff92c8d26fadf26e",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega80866.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega80866.fon",
+      "blob": "fdaf7ce9bf9876aa64885173eb42365d5a881380",
+      "bytes": 3262,
+      "sha256": "f0cafc12600590e3ae2b92dd4ab3286ad8bab6d8c6f254c3d8b11ec6367c86b9",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/ega80869.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/ega80869.fon",
+      "blob": "806250c9bf9151f4ebedcc45fb6b862351f206f7",
+      "bytes": 3355,
+      "sha256": "ef744037ab220fdc2b11a9f65a985cc9d6131e0a0f28ff346a7f0eda7a0bcb0a",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/sserifee.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/sserifee.fon",
+      "blob": "7ce248a804d8a0fb317defe7b9757e40763196a3",
+      "bytes": 22096,
+      "sha256": "061b1ea239e3e29408a7d3bc8d6b0275b501cb8432755c8523f9647ddd4237ee",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/sserifeg.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/sserifeg.fon",
+      "blob": "89fb58e544889cd85ed4d3931f10ba94c25e323e",
+      "bytes": 22080,
+      "sha256": "a26dc4fc50c9b2bed73a07ed98e4ddcd26fe90395fff5baa733d4103968dd5d9",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/sserifer.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/sserifer.fon",
+      "blob": "7c6402668c6aca031d6b2dd57e862e638bf985e8",
+      "bytes": 23420,
+      "sha256": "183c9c62353f3af6f2d40ec8ebcb8e4ed159cf2a31bc1cfb084b8f013db16f5f",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/sserifet.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/sserifet.fon",
+      "blob": "c6e29a28670f67d67ca1dfce583e34df838d2f39",
+      "bytes": 21406,
+      "sha256": "e5a7dd835a05a5296947f0e0d36d0401b632a40238b18ac3794b3b8f488beecb",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vga737.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vga737.fon",
+      "blob": "1b38135523ab3622a9a7285eb6ffa7d69b508d50",
+      "bytes": 3170,
+      "sha256": "e36fcd5763aff69021177a3fad66ba7b79ee889e888967bdc2fa7b6845ec4b3b",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vga852.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vga852.fon",
+      "blob": "48827fe4c1ec4bb9ab1ceca4c8f192ea765a7e56",
+      "bytes": 3317,
+      "sha256": "c0a2e36b551c8c342c22406f4e4edda5b3bda9cab17b35ca40a73df078037ecd",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vga857.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vga857.fon",
+      "blob": "534ef7a4443183045b4f54e5d3010ea3c0c53f21",
+      "bytes": 2912,
+      "sha256": "71f1c3ee2dfd72c8a0d5dc11f1b7f15eeaf5a4d7f9df1156a155b1680d47e3e9",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vga866.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vga866.fon",
+      "blob": "ab3ae3c6836d5c6e4cb8ff44e5d630f14f7628fc",
+      "bytes": 3310,
+      "sha256": "41addc4a9d416a59e9f4090edd7bd595604d77fba27867384590d35a7bbe4cef",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vga869.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vga869.fon",
+      "blob": "dd74bedfab09dec0120a3965f6cf7b7374a0d374",
+      "bytes": 3210,
+      "sha256": "e2651fe72a321367aef3dce9bb27d44c92b05ac2f0b79ed647dd2235b76f581b",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vgafixe.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vgafixe.fon",
+      "blob": "67877e5404df9efe009bfdc55cd6f5d7f285c957",
+      "bytes": 2885,
+      "sha256": "55e50f6fad7d800f6018adc95f440d469864382934594bb757a1e8aa3cb0e257",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vgafixg.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vgafixg.fon",
+      "blob": "215d62aeca7e3679e49aef6146f26124c7bba2c1",
+      "bytes": 2465,
+      "sha256": "b1546c96b9a710dce5c5258522ba82178d8875f17c8046d741b3c42f36ca5ff6",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vgafixr.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vgafixr.fon",
+      "blob": "dcaae0674389012bd115a44b3b605f17ed3a3f87",
+      "bytes": 3010,
+      "sha256": "ee7a4cb553689445b9f5210fdd40c5638694a1100d0898fcfa6359c155f34f43",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vgafixt.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vgafixt.fon",
+      "blob": "54632fd990809578395fc6379c26621ac15ab8dc",
+      "bytes": 2457,
+      "sha256": "1ef1dd3c452a06002da0d8a26f2851e1930cc917184455dfe302f2de6da08199",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vgasyse.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vgasyse.fon",
+      "blob": "120abbb4fa84598692334f0ae3ac264dfec2872f",
+      "bytes": 3152,
+      "sha256": "1e132806cd260349dc68d6f21e140f8a78c53caedc9c97ea8cc2f193e9364b52",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vgasysg.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vgasysg.fon",
+      "blob": "9a124b8a240cf197e8e5db775450957d33e0eba5",
+      "bytes": 2796,
+      "sha256": "2dd9377ea834bf604ce0b6128a7e841e042c3adc35729e625eca7d11b53837e6",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vgasysr.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vgasysr.fon",
+      "blob": "66fa02ce78aa09d6cf8526040f04732da6b5d653",
+      "bytes": 3335,
+      "sha256": "49b4a2be63c8c397e8ff7b1c85342adff4a3297ea4bfe42d6415e6849c5ba0b7",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    },
+    {
+      "file": "src/non-mvdm/base/win32/winnls/fontsup/system/vgasyst.fon",
+      "xp_path": "Source/XPSP1/NT/base/win32/winnls/fontsup/system/vgasyst.fon",
+      "blob": "09e5491e655771d1526f770b813a5f769041a0bb",
+      "bytes": 2755,
+      "sha256": "ef6d568597e943d24d91dddebaf3024712b4420a54deb4863d2788b91aba2ebc",
+      "three_way": "all-identical",
+      "action": "retain byte-exact XP original"
+    }
+  ],
+  "total_files": 42,
+  "xp_only_paths": [],
+  "nonerror_diff_points": 0,
+  "nonerror_diff_lines": 0,
+  "production_changes": false,
+  "verification": "N006 runtime6 Full24/24 retained; identical code/media/package, docs-only migration registration"
+}
