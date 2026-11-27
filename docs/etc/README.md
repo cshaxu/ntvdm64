@@ -2091,3 +2091,5 @@ post-publication targeted checks.
 [S12 P5 LFN original restoration receipt](evidence/t485-h-repair/s12-p5-result.json).
 
 [S12 P6 directory search receipt](evidence/t485-h-repair/s12-p6-result.json).
+
+[S12 P9 OEM process audit](evidence/t485-h-repair/s12-p9-audit.md) and [delivery receipt](evidence/t485-h-repair/s12-p9-result.json).

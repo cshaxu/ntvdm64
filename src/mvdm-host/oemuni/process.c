@@ -137,7 +137,7 @@ Routine Description:
     PUNICODE_STRING Unicode;
     UNICODE_STRING xlpExtension;
     PWSTR xlpBuffer;
-    DWORD UnicodeCapacity, ReturnValue = 0;
+    DWORD UnicodeCapacity, ReturnValue=0;
     OEM_STRING OemString;
     UNICODE_STRING UnicodeString;
     NTSTATUS Status;
@@ -146,10 +146,9 @@ Routine Description:
 
     if ( ARGUMENT_PRESENT(lpFilePart) ) {
         FilePartPtr = &FilePart;
-        }
-    else {
+    } else {
         FilePartPtr = NULL;
-        }
+    }
 
     Unicode = &NtCurrentTeb()->StaticUnicodeString;
     InitOemString(&OemString,lpFileName);
@@ -158,12 +157,11 @@ Routine Description:
     if ( !NT_SUCCESS(Status) ) {
         if ( Status == STATUS_BUFFER_OVERFLOW ) {
             SetLastError(ERROR_FILENAME_EXCED_RANGE);
-            }
-        else {
+        } else {
             BaseSetLastNTError(Status);
-            }
-        return 0;
         }
+        return 0;
+    }
 
     if ( ARGUMENT_PRESENT(lpExtension) ) {
         InitOemString(&OemString,lpExtension);
@@ -171,11 +169,10 @@ Routine Description:
         if ( !NT_SUCCESS(Status) ) {
             BaseSetLastNTError(Status);
             return 0;
-            }
         }
-    else {
+    } else {
         xlpExtension.Buffer = NULL;
-        }
+    }
 
     if ( ARGUMENT_PRESENT(lpPath) ) {
         InitOemString(&OemString,lpPath);
@@ -183,74 +180,87 @@ Routine Description:
         if ( !NT_SUCCESS(Status) ) {
             if ( ARGUMENT_PRESENT(lpExtension) ) {
                 RtlFreeUnicodeString(&xlpExtension);
-                }
+            }
             BaseSetLastNTError(Status);
             return 0;
-            }
         }
-    else {
+    } else {
         xlpPath.Buffer = NULL;
-        }
+    }
 
     UnicodeCapacity = SearchPathW(xlpPath.Buffer,Unicode->Buffer,xlpExtension.Buffer,0,NULL,NULL);
     if ( !UnicodeCapacity ) goto bail0;
     if ( UnicodeCapacity > 32767 ) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); goto bail0; }
     xlpBuffer = RtlAllocateHeap(RtlProcessHeap(), 0,UnicodeCapacity*sizeof(WCHAR));
+#line 192
     if ( !xlpBuffer ) {
         BaseSetLastNTError(STATUS_NO_MEMORY);
         goto bail0;
-        }
+    }
     ReturnValue = SearchPathW(
-                    xlpPath.Buffer,
-                    Unicode->Buffer,
-                    xlpExtension.Buffer,
-                    UnicodeCapacity,
-                    xlpBuffer,
-                    FilePartPtr
-                    );
-    if (ReturnValue && ReturnValue < UnicodeCapacity ) {
-        RtlInitUnicodeString(&UnicodeString,xlpBuffer);
-        ReturnValue = RtlUnicodeStringToOemSize(&UnicodeString);
-        if ( ReturnValue > nBufferLength ) {
-            RtlFreeHeap(RtlProcessHeap(), 0,xlpBuffer);
-            goto bail0;
+                             xlpPath.Buffer,
+                             Unicode->Buffer,
+                             xlpExtension.Buffer,
+                             UnicodeCapacity,
+                             xlpBuffer,
+                             FilePartPtr
+                             );
+
+#ifdef FE_SB
+#error DIVERGENCE: FE_SB OEM profile is not selected by the product.
+#endif
+
+        if (ReturnValue && ReturnValue < UnicodeCapacity ) {
+#line 212
+#ifndef FE_SB
+            RtlInitUnicodeString(&UnicodeString,xlpBuffer);
+#endif
+            ReturnValue = RtlUnicodeStringToOemSize(&UnicodeString);
+            if (ReturnValue > nBufferLength) {
+                RtlFreeHeap(RtlProcessHeap(), 0,xlpBuffer);
+                goto bail0;
             }
-        OemString.MaximumLength = (USHORT)min(nBufferLength,65535);
-        OemString.Buffer = lpBuffer;
-        Status = RtlUnicodeStringToOemString(&OemString,&UnicodeString,FALSE);
-        if ( !NT_SUCCESS(Status) ) {
-            BaseSetLastNTError(Status);
-            ReturnValue = 0;
-            }
-        else {
-            ReturnValue = OemString.Length;
-            if ( ARGUMENT_PRESENT(lpFilePart) ) {
-                if ( FilePart == NULL ) {
-                    *lpFilePart = NULL;
-                    }
-                else {
-                    UnicodeString.Length = (USHORT)((FilePart - xlpBuffer)*sizeof(WCHAR));
-                    *lpFilePart = lpBuffer + RtlUnicodeStringToOemSize(&UnicodeString)-1;
+            OemString.MaximumLength = (USHORT)min(nBufferLength,65535);
+#line 216
+            OemString.Buffer = lpBuffer;
+            Status = RtlUnicodeStringToOemString(&OemString,&UnicodeString,FALSE);
+            if ( !NT_SUCCESS(Status) ) {
+                BaseSetLastNTError(Status);
+                ReturnValue = 0;
+            } else {
+                ReturnValue = OemString.Length;
+#line 222
+                if ( ARGUMENT_PRESENT(lpFilePart) ) {
+                    if ( FilePart == NULL ) {
+                        *lpFilePart = NULL;
+                    } else {
+                        UnicodeString.Length = (USHORT)((FilePart - xlpBuffer)*sizeof(WCHAR));
+                        *lpFilePart = (LPSTR)(RtlUnicodeStringToOemSize(&UnicodeString)-1);
+#line 227
+                        *lpFilePart = *lpFilePart + (DWORD)lpBuffer;
                     }
                 }
             }
         }
-
-    else if ( ReturnValue ) {
-        BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
-        ReturnValue = 0;
+#ifdef FE_SB
+#error DIVERGENCE: FE_SB OEM profile is not selected by the product.
+#endif
+        else if (ReturnValue) {
+            BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
+            ReturnValue = 0;
         }
+
+#line 236
     RtlFreeHeap(RtlProcessHeap(), 0,xlpBuffer);
-bail0:
+    bail0:
     if ( ARGUMENT_PRESENT(lpExtension) ) {
         RtlFreeUnicodeString(&xlpExtension);
-        }
+    }
 
     if ( ARGUMENT_PRESENT(lpPath) ) {
         RtlFreeUnicodeString(&xlpPath);
-        }
+    }
     return ReturnValue;
-#line 246
 }
 
 
@@ -382,10 +392,7 @@ Routine Description:
 #if 0  // unused
 #error DIVERGENCE MVDM-HOST-DIV-496: excluded legacy process wrapper.
 #endif
-#line 561
-
-
-
+#line 564
 DWORD
 WINAPI
 GetEnvironmentVariableOem(
@@ -416,18 +423,17 @@ GetEnvironmentVariableOem(
         if ( !NT_SUCCESS(Status) ) {
             if ( Status == STATUS_BUFFER_OVERFLOW ) {
                 SetLastError(ERROR_FILENAME_EXCED_RANGE);
-                }
-            else {
+            } else {
                 BaseSetLastNTError(Status);
-                }
-            return 0;
             }
+            return 0;
+        }
 
         Status = RtlUnicodeStringToAnsiString( &Name, &Unicode, TRUE );
         if (!NT_SUCCESS( Status )) {
             BaseSetLastNTError( Status );
             goto try_exit;
-            }
+        }
 
         ReturnValue = GetEnvironmentVariableA(Name.Buffer, NULL, 0);
         if (ReturnValue == 0)
@@ -438,15 +444,18 @@ GetEnvironmentVariableOem(
             goto try_exit;
             }
         Buffer.MaximumLength = (USHORT)ReturnValue;
+#line 607
         Buffer.Buffer = (PCHAR)
-            RtlAllocateHeap( RtlProcessHeap(), 0, Buffer.MaximumLength );
+                        RtlAllocateHeap( RtlProcessHeap(), 0, Buffer.MaximumLength );
         if (Buffer.Buffer == NULL) {
             BaseSetLastNTError( STATUS_NO_MEMORY );
             ReturnValue = 0;
+#line 611
             goto try_exit;
-            }
+        }
 
         SetLastError(ERROR_SUCCESS);
+#line 614
         ReturnValue = GetEnvironmentVariableA( Name.Buffer,
                                                Buffer.Buffer,
                                                Buffer.MaximumLength
@@ -456,6 +465,7 @@ GetEnvironmentVariableOem(
             else ReturnValue = 1;
             goto try_exit;
             }
+#line 618
         if (ReturnValue != 0) {
             if ( ReturnValue < Buffer.MaximumLength ) {
                 Buffer.Length = (USHORT)ReturnValue;
@@ -467,17 +477,17 @@ GetEnvironmentVariableOem(
                     ReturnValue = 0;
                     goto try_exit;
                     }
-
                 OemString.Buffer        = lpBuffer;
                 OemString.MaximumLength = (USHORT)(nSize > 65535 ? 65535 : nSize);
                 ReturnValue = RtlUnicodeStringToOemSize(&Unicode);
                 if (ReturnValue > nSize)
                     goto try_exit;
+#line 631
                 Status = RtlUnicodeStringToOemString( &OemString, &Unicode, FALSE );
                 if (!NT_SUCCESS( Status )) {
                     BaseSetLastNTError( Status );
                     ReturnValue = 0;
-                    }
+                }
                 else {
                     ReturnValue = OemString.Length;
                     }
@@ -486,25 +496,24 @@ GetEnvironmentVariableOem(
                 BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
                 ReturnValue = 0;
                 }
-            }
-try_exit:;
+#line 637
         }
-    finally {
+        try_exit:;
+    } finally {
         if (Unicode.Buffer != NULL) {
             RtlFreeUnicodeString( &Unicode );
-            }
+        }
 
         if (Name.Buffer != NULL) {
             RtlFreeAnsiString( &Name );
-            }
+        }
 
         if (Buffer.Buffer != NULL) {
             RtlFreeHeap( RtlProcessHeap(), 0, Buffer.Buffer );
-            }
         }
+    }
 
-    return( ReturnValue );
-#line 654
+    return ( ReturnValue );
 }
 
 
@@ -617,9 +626,9 @@ ExpandEnvironmentStringsOem(
     ANSI_STRING Name, Value;
     DWORD ReturnValue;
 
-    if (!ARGUMENT_PRESENT(lpSrc)){
-	SetLastError(ERROR_INVALID_PARAMETER);
-	return 0;
+    if (!ARGUMENT_PRESENT(lpSrc)) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return 0;
     }
 
     Unicode.Buffer = NULL;
@@ -627,71 +636,70 @@ ExpandEnvironmentStringsOem(
     Value.Buffer = NULL;
     ReturnValue = 0;
     try {
-	InitOemString(&OemString, lpSrc);
+        InitOemString(&OemString, lpSrc);
         Status = RtlOemStringToUnicodeString(&Unicode, &OemString, TRUE);
         if ( !NT_SUCCESS(Status) ) {
             if ( Status == STATUS_BUFFER_OVERFLOW ) {
                 SetLastError(ERROR_FILENAME_EXCED_RANGE);
-		}
-            else {
+            } else {
                 BaseSetLastNTError(Status);
-                }
-            return 0;
             }
+            return 0;
+        }
 
         Status = RtlUnicodeStringToAnsiString( &Name, &Unicode, TRUE );
         if (!NT_SUCCESS( Status )) {
             BaseSetLastNTError( Status );
             goto try_exit;
-            }
+        }
         RtlFreeUnicodeString( &Unicode );
         Unicode.Buffer = NULL;
 
-	ReturnValue = ExpandEnvironmentStrings( Name.Buffer,
-						lpDst,
-						cchDst
-					      );
-	if (ReturnValue != 0 && ReturnValue <= cchDst) {
-	    ReturnValue = 0;
-	    RtlInitString(&Value, lpDst);
-	    Status = RtlAnsiStringToUnicodeString(&Unicode, &Value, TRUE);
-            Value.Buffer = NULL;
+        ReturnValue = ExpandEnvironmentStrings( Name.Buffer,
+                                                lpDst,
+                                                cchDst
+                                              );
+        if (ReturnValue != 0 && ReturnValue <= cchDst) {
+            ReturnValue = 0;
+#line 800
+            RtlInitString(&Value, lpDst);
+            Status = RtlAnsiStringToUnicodeString(&Unicode, &Value, TRUE);
+    Value.Buffer = NULL;
+#line 802
             if ( !NT_SUCCESS(Status) ) {
                 if ( Status == STATUS_BUFFER_OVERFLOW ) {
                     SetLastError(ERROR_FILENAME_EXCED_RANGE);
-                    }
-                else {
+                } else {
                     BaseSetLastNTError(Status);
-                    }
-		goto try_exit;
                 }
-	    Status = RtlUnicodeStringToOemString( &Value, &Unicode, TRUE );
+                goto try_exit;
+            }
+            Status = RtlUnicodeStringToOemString( &Value, &Unicode, TRUE );
             if (!NT_SUCCESS( Status )) {
                 BaseSetLastNTError( Status );
                 goto try_exit;
-                }
+            }
             ReturnValue = Value.Length + 1;
             if (ReturnValue <= cchDst)
                 RtlMoveMemory(lpDst, Value.Buffer, ReturnValue);
             }
-try_exit:;
-        }
-    finally {
+#line 817
+        try_exit:;
+    } finally {
         if (Unicode.Buffer != NULL) {
             RtlFreeUnicodeString( &Unicode );
-            }
+        }
 
         if (Name.Buffer != NULL) {
             RtlFreeAnsiString( &Name );
-            }
+        }
 
         if (Value.Buffer != NULL) {
             RtlFreeAnsiString( &Value );
-            }
         }
+    }
 
-    return( ReturnValue );
-#line 833
+    return ( ReturnValue );
 }
 
 
@@ -710,67 +718,72 @@ GetShortPathNameOem(
 
 {
 
-	UNICODE_STRING	UString = { 0 }, UStringRet;
-    OEM_STRING	   OemString;
-    NTSTATUS	    Status;
-	LPWSTR	    lpDstW = NULL;
-	DWORD	    ReturnValue = 0;
+    UNICODE_STRING  UString = {0}, UStringRet;
+    OEM_STRING     OemString;
+    NTSTATUS        Status;
+    LPWSTR      lpDstW = NULL;
+    DWORD       ReturnValue = 0;
     DWORD UnicodeCapacity;
     if (lpSrc == NULL) {
-	SetLastError(ERROR_INVALID_PARAMETER);
-	return 0;
-	}
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return 0;
+    }
     try {
-	InitOemString(&OemString, lpSrc);
-	Status = RtlOemStringToUnicodeString(&UString,
-					     &OemString,
-					     TRUE
-					     );
-	if (!NT_SUCCESS(Status)){
-	    BaseSetLastNTError(Status);
-	    leave;
-	    }
-	UnicodeCapacity = GetShortPathNameW(UString.Buffer,NULL,0);
-    if (!UnicodeCapacity) leave;
-    if (UnicodeCapacity > 32767) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); leave; }
-	    lpDstW = RtlAllocateHeap(RtlProcessHeap(), 0,
-					UnicodeCapacity * sizeof(WCHAR)
-					);
-	    if (lpDstW == NULL) {
-		SetLastError(ERROR_NOT_ENOUGH_MEMORY);
-		leave;
-		}
-	ReturnValue = GetShortPathNameW(UString.Buffer,
-					lpDstW,
-					UnicodeCapacity
-					);
-	if (ReturnValue != 0 && ReturnValue < UnicodeCapacity) {
-        RtlInitUnicodeString(&UStringRet,lpDstW);
-        ReturnValue = RtlUnicodeStringToOemSize(&UStringRet);
-	    if (ARGUMENT_PRESENT(lpDst) && ReturnValue <= cchDst) {
-		OemString.Buffer = lpDst;
-		OemString.MaximumLength = (USHORT)min(cchDst,65535);
-		Status = RtlUnicodeStringToOemString(&OemString,
-						     &UStringRet,
-						     FALSE
-						     );
-		if (!NT_SUCCESS(Status)) {
-		    BaseSetLastNTError(Status);
-		    ReturnValue = 0;
-		    leave;
-		    }
-        ReturnValue = OemString.Length;
-		}
-	    }
-    else if (ReturnValue) {
-        BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
-        ReturnValue = 0;
+        InitOemString(&OemString, lpSrc);
+        Status = RtlOemStringToUnicodeString(&UString,
+                                             &OemString,
+                                             TRUE
+                                            );
+        if (!NT_SUCCESS(Status)) {
+            BaseSetLastNTError(Status);
+            leave;
         }
-	}
-    finally {
-	    RtlFreeUnicodeString(&UString);
-	    if (lpDstW) RtlFreeHeap(RtlProcessHeap(), 0, lpDstW);
+        UnicodeCapacity = GetShortPathNameW(UString.Buffer,NULL,0);
+        if (!UnicodeCapacity) leave;
+        if (UnicodeCapacity > 32767) { BaseSetLastNTError(STATUS_BUFFER_OVERFLOW); leave; }
+#line 872
+            lpDstW = RtlAllocateHeap(RtlProcessHeap(), 0,
+                                     UnicodeCapacity * sizeof(WCHAR)
+                                    );
+            if (lpDstW == NULL) {
+                SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+                leave;
+            }
+#line 883
+        ReturnValue = GetShortPathNameW(UString.Buffer,
+                                        lpDstW,
+                                        UnicodeCapacity
+                                       );
+        if (ReturnValue != 0 && ReturnValue < UnicodeCapacity) {
+            RtlInitUnicodeString(&UStringRet,lpDstW);
+            ReturnValue = RtlUnicodeStringToOemSize(&UStringRet);
+            if (ARGUMENT_PRESENT(lpDst) && ReturnValue <= cchDst) {
+#line 889
+                OemString.Buffer = lpDst;
+                OemString.MaximumLength = (USHORT)min(cchDst,65535);
+#line 893
+                Status = RtlUnicodeStringToOemString(&OemString,
+                                                     &UStringRet,
+                                                     FALSE
+                                                    );
+                if (!NT_SUCCESS(Status)) {
+                    BaseSetLastNTError(Status);
+                    ReturnValue = 0;
+                    leave;
+                }
+                ReturnValue = OemString.Length;
+#line 902
+            }
+        }
+        else if (ReturnValue) {
+            BaseSetLastNTError(STATUS_BUFFER_OVERFLOW);
+            ReturnValue = 0;
+#line 903
+        }
+    } finally {
+        RtlFreeUnicodeString(&UString);
+        if (lpDstW)
+            RtlFreeHeap(RtlProcessHeap(), 0, lpDstW);
     }
     return ReturnValue;
-#line 910
 }

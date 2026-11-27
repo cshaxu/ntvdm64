@@ -66,3 +66,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S12 P7 shared-header Full checkpoint receipt](s12-p7-result.json).
 
 [S12 P8 redirector and OEM receipt](s12-p8-result.json).
+
+[S12 P9 OEM process audit](s12-p9-audit.md) and [delivery receipt](s12-p9-result.json).

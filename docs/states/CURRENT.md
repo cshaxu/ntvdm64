@@ -32,13 +32,13 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S12 Ordered Progress
 
-[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):24/48files,
-129/645points final-verified;26restored,103residual,516unreviewed.
-[P8 receipt](../etc/evidence/t485-h-repair/s12-p8-result.json):cached build,
-dual26hash publication,223line witnesses,OEM/async fixtures and real DOS FCB
-PASS. P8 committed/pushed e25380fe2;24files129points delivered.
-S12census803/31809->686/27172 (-117points/-4637lines).
-Next25oemuni/process.c;24files remain. Last Full:file20,runtime8,23/23;
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):25/48files,
+194/645points final-verified;71restored,123residual,451unreviewed.
+[P9 receipt](../etc/evidence/t485-h-repair/s12-p9-result.json):cached build,
+dual26hash publication,60line witnesses,four OEM fixtures and runtime10 DOS
+FCB PASS. Commit/push pending;last delivered24files129points e25380fe2.
+S12census803/31809->715/25797 (-88points/-6012lines).
+Next file26;23files remain. Last Full:file20,runtime8,23/23;
 no Full rerun for this targeted P. Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record

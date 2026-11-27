@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed24/48files129/645points;restored-final-verified26,restored-local0,
-residual-final-verified103,unreviewed516.
+Reviewed25/48files194/645points;restored-final-verified71,restored-local0,
+residual-final-verified123,unreviewed451.
 Delivered/pushed24files129points through e25380fe2.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
@@ -38,7 +38,7 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 22 | src/mvdm-host/inc/vrnetapi.h | 1 | P8 delivered e25380fe2 |
 | 23 | src/mvdm-host/inc/vrnmpipe.h | 1 | P8 delivered e25380fe2 |
 | 24 | src/mvdm-host/oemuni/file.c | 19 | P8 delivered e25380fe2 |
-| 25 | src/mvdm-host/oemuni/process.c | 65 | Pending |
+| 25 | src/mvdm-host/oemuni/process.c | 65 | P9 final verified; commit/push pending |
 | 26 | src/mvdm-host/softpc.new/host/src/config.c | 38 | Pending |
 | 27 | src/mvdm-host/softpc.new/host/src/nt_bop.c | 16 | Pending |
 | 28 | src/mvdm-host/softpc.new/host/src/nt_com.c | 90 | Pending |
@@ -522,3 +522,23 @@ Mirror total686/27172,reduction117/4637. Commit/push pending;next25process.c.
 P8 product committed/pushed e25380fe2. Actual compiler FE_SB negative profile
 rejected at restored#error as required. Delivered24files129points;26restored,
 103residual,516unreviewed. Next25process.c includes stale PIF fixture follow-up.
+
+## P9 in progress: file25 oemuni/process.c
+
+Original-format restoration only: nonerror1/1500 ->28/142; token sequence
+and the one excluded branch unchanged. The block increase reveals dispersed
+adaptations previously hidden by whole-file CRCRLF differences; owner has
+approved this class of restoration. Source is local and not yet built,
+published, tested or delivered. No frozen point is closed by this interim
+record. Whole-file SearchPath framework and OEM failure semantics review
+continues before the batch build. Evidence: build/t485-s12/p9/format-result.json
+and process.c.before/process.c.xp. Delivered totals remain24/48files,
+129/645points;26restored,103residual,516unreviewed. Local census713/25814,
+versus delivered686/27172. No Full rerun.
+
+## P9 final verification
+
+[Audit](s12-p9-audit.md),[receipt](s12-p9-result.json):25/48files194/645points
+verified;71restored,123residual,451unreviewed. Current715/25797; cumulative
+reduction88points/6012lines. Cached build,dual publication,four OEM fixtures
+and runtime10 DOS FCB pass. Commit/push pending; no Full rerun.
