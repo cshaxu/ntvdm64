@@ -24,12 +24,12 @@ DWORD dialog_fixture_version(HINSTANCE module)
     return version;
 }
 
-int InternalDialogBox(HANDLE module, LPDLGTEMPLATE resource, DWORD count,
-    HWND owner, DLGPROC procedure, LONG parameter, UINT flags)
+INT_PTR InternalDialogBox(HANDLE module, LPDLGTEMPLATE resource,
+    HWND owner, DLGPROC procedure, LPARAM parameter, UINT flags)
 {
     CHECK(module == MODULE && (BYTE *)resource == bytes && procedure == NULL);
     ++manager_calls;
-    manager_bytes = count;
+    manager_bytes = GetSizeDialogTemplate(module, resource);
     manager_flags = flags;
     manager_owner = owner;
     manager_parameter = parameter;
@@ -96,7 +96,7 @@ int main(void)
     CHECK(version_calls == calls); /* Extended validation does not query version. */
     extended();
     ((LPDLGTEMPLATE2)bytes)->wDlgVer = 2;
-    CHECK(GetSizeDialogTemplate(MODULE, (LPCDLGTEMPLATE)bytes) == 0);
+    CHECK(GetSizeDialogTemplate(MODULE, (LPCDLGTEMPLATE)bytes) == 32);
     printf("dialog_template_failures=%u\n", failures);
     return failures != 0;
 }

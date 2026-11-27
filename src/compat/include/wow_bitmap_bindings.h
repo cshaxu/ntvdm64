@@ -9,8 +9,7 @@ typedef BITMAPINFOHEADER UNALIGNED *UPBITMAPINFOHEADER;
 typedef BITMAPCOREHEADER UNALIGNED *UPBITMAPCOREHEADER;
 typedef struct wow_bitmap_context {
     HDC dc;
-    struct { BYTE Planes, BitsPixel, BitCount; } screen;
-    struct { BOOL fPaletteDisplay; } server;
+    struct { BYTE Planes, BitsPixel, BitCount; BOOL fPaletteDisplay; } server;
     struct wow_bitmap_context *previous;
 } wow_bitmap_context;
 extern __declspec(thread) wow_bitmap_context *wow_bitmap_current;
@@ -22,8 +21,14 @@ void WINAPI wow_bitmap_bindings_shutdown(void);
 
 #define gcsHdc wow_bitmap_lock
 #define ghdcBits2 (wow_bitmap_current->dc)
-#define oemInfo (wow_bitmap_current->screen)
 #define gpsi (&wow_bitmap_current->server)
+#define TEST_PUSIF(flag) (wow_bitmap_current->server.fPaletteDisplay)
+#define PUSIF_PALETTEDISPLAY 1
+/* Original retail resource trace macros have no side effects. */
+#define TAGMSG0(...) ((void)0)
+#define TAGMSG1(...) ((void)0)
+#define TAGMSG2(...) ((void)0)
+#define TAGMSG4(...) ((void)0)
 #define GETINITDC() GetDC(NULL)
 #define RELEASEINITDC(hdc) ReleaseDC(NULL, hdc)
 #define RtlEnterCriticalSection EnterCriticalSection

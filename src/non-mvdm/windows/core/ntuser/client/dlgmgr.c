@@ -1003,16 +1003,16 @@ ShowIt:
 
 extern HCURSOR hCurCursor;
 
-int InternalDialogBox(
+INT_PTR InternalDialogBox(
     HANDLE hModule,
     LPDLGTEMPLATE lpdt,
-    DWORD cb,
+#line 1181
     HWND hwndOwner,
     DLGPROC pfnDialog,
-    LONG lParam,
+    LPARAM lParam,
     UINT fSCDLGFlags)
 {
-    int i;
+    INT_PTR i;
     BOOL fDisabled = FALSE;
     HWND hwnd;
     PWND pwndOwner;

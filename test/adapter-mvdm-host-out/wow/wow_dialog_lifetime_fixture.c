@@ -169,7 +169,7 @@ HWND InternalCreateDialog(HANDLE module, LPDLGTEMPLATE resource, DWORD bytes,
     return DIALOG_WINDOW;
 }
 static int modal(HWND window)
-{ return InternalDialogBox(NULL, NULL, 0, window, NULL, 17, SCDLG_ANSI); }
+{ return InternalDialogBox(NULL, NULL, window, NULL, 17, SCDLG_ANSI); }
 static void verify_dialog_pointer(void)
 {
     DIALOG retained = {0};

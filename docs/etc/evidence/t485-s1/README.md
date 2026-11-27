@@ -254,3 +254,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P33 N022 menu migration](n022-menu.md).
 
 - [S15 P34 N022 message migration](n022-message.md).
+
+- [S15 P35 N022 resource migration](n022-resources.md).

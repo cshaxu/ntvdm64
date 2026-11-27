@@ -1,0 +1,381 @@
+{
+  "task": "M0 T485 S15 P35",
+  "runtime": "build/t485-s15/runtime38",
+  "build_exit": 0,
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "3FEFA0CC5337BF7B69501E186310DEFFEB6FD6A0CD3B9FF2D8A7705D5CFB8ECB",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "3FEFA0CC5337BF7B69501E186310DEFFEB6FD6A0CD3B9FF2D8A7705D5CFB8ECB",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "7C9DC80267C0B1B98D3E556470E08751E99B1FEA968005DE45EE73209B0D63A1",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "7C9DC80267C0B1B98D3E556470E08751E99B1FEA968005DE45EE73209B0D63A1",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "371DBD67F9DC4440394F07E75647FD949720DAA670894B85A2A826E71E38F73A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "371DBD67F9DC4440394F07E75647FD949720DAA670894B85A2A826E71E38F73A",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "665043ECA987B2ACB984D6B6C304EBAEE4A745BD79BF3AEFF41AEF6F6F07399C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "665043ECA987B2ACB984D6B6C304EBAEE4A745BD79BF3AEFF41AEF6F6F07399C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "D25930D9772264B23ED43C8530DCF885B010A60A69BED1071B6C1C348F736553",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "D25930D9772264B23ED43C8530DCF885B010A60A69BED1071B6C1C348F736553",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "E3A4DF520AC502BAF1D23BCBC8D57709E2357CA9BD1C3B264D2F114CB60D14FE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "E3A4DF520AC502BAF1D23BCBC8D57709E2357CA9BD1C3B264D2F114CB60D14FE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "885E9E119A36ED0765FCA4039DB3F200EAA33E7B3EA8A8C3F7CD62ECF58B369A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "885E9E119A36ED0765FCA4039DB3F200EAA33E7B3EA8A8C3F7CD62ECF58B369A",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "A6879F33252978CB1889A5F958ED19453573E1549AA983315F609D7BF182DA7B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "A6879F33252978CB1889A5F958ED19453573E1549AA983315F609D7BF182DA7B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "F5101FF3DDB955F0A6DB185E035B887035CB261115ABD0E45435AFD89655F6D4",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "F5101FF3DDB955F0A6DB185E035B887035CB261115ABD0E45435AFD89655F6D4",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "8EE07015164DB49683415BB4FEC06CC4CC77F1C89E95D73F13591A1FAEEF6BB1",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "8EE07015164DB49683415BB4FEC06CC4CC77F1C89E95D73F13591A1FAEEF6BB1",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "AADD62CD74655771D602B4D48C121AB75D96414B9342FCA0970C1E92486389FE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "AADD62CD74655771D602B4D48C121AB75D96414B9342FCA0970C1E92486389FE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "B20AA8A8474FA1C2F9B3DF2A928366FD9956C99FCC1915FDB19C63C33C4DBD69",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "B20AA8A8474FA1C2F9B3DF2A928366FD9956C99FCC1915FDB19C63C33C4DBD69",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "D1AB088D3C103FAA62E2D20A3D190933B3C497FB72B4772AD0B81A12F3834577",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "D1AB088D3C103FAA62E2D20A3D190933B3C497FB72B4772AD0B81A12F3834577",
+      "pass": true
+    }
+  ],
+  "bitmap": "XP_DIB_SCALING_OK rounding=43 invalid-pixels=false last-error=preserved\nXP_RESOURCE_COLOR_ICON_OK rgb32=0 bitfields=3 mono=2 icon=20 invalid-bitmap=null\nWOW_BITMAP_BINDING_OK nested=30 parallel=4x50 named=2 missing=2 gdi-before=0 gdi-after=0\n",
+  "bitmap_failure": "WOW_BITMAP_BINDING_FAILURE_OK locks=2 screen=10/10\n",
+  "modal_exit": 0,
+  "modal_artifact": "\"Algorithm\",\"Hash\",\"Path\"\n\"SHA256\",\"8962E77A0A9546A198C46016ED5D3BFBECB0152EF67836468353691649D82A1D\",\"O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n022-resources\\modal\\fixture.exe\"\n",
+  "sol_options": "SOL options: game-thread=23380\nSOL options: command=1003\nSOL options: Game > Options visible; owner and OK/Cancel controls verified\nSOL options: dialog-visible-ms=719\nSOL options: dialog-close-recovery-ms=390\nSOL options: worker-cpu-open-ms=688 worker-cpu-close-ms=359\nSOL options: game-thread-cpu-open-ms=484 game-thread-cpu-close-ms=360\nPASS SOL Options command, modal dialog, close and parent recovery\n",
+  "census": {
+    "before": {
+      "files": 1329,
+      "byte_identical": 781,
+      "nonerror_identical": 792,
+      "nonerror_different": 537,
+      "nonerror_points": 7821,
+      "nonerror_lines": 126901
+    },
+    "after": {
+      "files": 1329,
+      "byte_identical": 781,
+      "nonerror_identical": 792,
+      "nonerror_different": 537,
+      "nonerror_points": 7848,
+      "nonerror_lines": 123546
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 27,
+      "nonerror_lines": -3355
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+        "before_points": 1,
+        "before_lines": 6424,
+        "after_points": 25,
+        "after_lines": 3061,
+        "exclusions": 4
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+        "before_points": 37,
+        "before_lines": 420,
+        "after_points": 40,
+        "after_lines": 428,
+        "exclusions": 1
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "before_points": 1,
+        "before_lines": 4693,
+        "after_points": 1,
+        "after_lines": 4693,
+        "exclusions": 17
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1272,
+      "OpenNT": 57
+    }
+  },
+  "review": "# S15 P35 N022 resources review\n\nBase commit:98a23f1c6. Fixed XP clres blob8085809158b0e31f60058823bb36bc71f524c85c;\nOpenNT blobe6fd8db7f4ef05d5377143874bcb5a2a4ebd69ef. No guest or winnt.zip change.\n\n## Whole-file disposition\n\nRetain the original types/constants and29 complete resource/template function\nunits in original order, including GetResourceBpp required by XP image scoring.\nRetain original four disabled/DBG arms as#error with original guards and#line.\nKeep the existing dialog/bitmap translation-unit split; adjacent selections\nare merged rather than adding a conditional around each function.\n\nNative USER resource frontiers remain explicit whole-function omissions:\n- SplFindResource/SplFreeResource and LoadBmp/LoadDIB/LoadIcoCur participate in\n  original shared USER resource/module ownership. The original globals and\n  resource-call table are not the native USER cache. Supplied bitmap bytes\n  enter WOWLoadBitmapA; native named bitmaps use existing LoadBitmapW binding.\n- Accelerator load/cache/public entrypoints use private ACCELCACHE validation\n  and native accelerator ownership. Actual WOW waccel.c::CreateAccel32 calls\n  native CreateAcceleratorTable; it already owns guest/native aliases.\n- Public string wrappers use native resource lookup; actual walias.c/wkman.c/\n  wow32.c call native LoadString. Do not replace the host resource module owner.\n- Public dialog A/W/modeless wrappers are supplied by existing scoped creation\n  entrypoints. Retained GetSizeDialogTemplate and modal body still execute.\n  Preserve native public symbols rather than defining competing USER exports.\n- Cursor/icon construction, shared cache, public load/copy/info, and server\n  create wrappers require private CURSOR data and NtUser cursor allocation.\n  Actual compat/wow_private_user_compat.c uses CreateIconFromResourceEx and\n  LoadImageW; WOW win95.c calls native CopyImage. Original private USER cache\n  and kernel object layouts are outside the admitted finite client boundary.\n\nThese are ownership boundaries, not permission to delete merely-unused\noriginal code. All selected algorithms remain XP source; none is reimplemented\nin B. Original constants and types remain even when not presently expanded.\n\n## Necessary adaptations and paired dependency\n\nHeader binding and diagnostic lines are host composition. GETINITDC and\nRELEASEINITDC use existing paired GetDC/ReleaseDC: XP system-startup branch\nrequires gfSystemInitialized, which this host never transitions; native USER\nhas already initialized. First build failed on that unbound variable and\nNtUserGetDC; no invented initialization flag or private-API replacement added.\n\nCopyDibHdr retains the existing OLDICON pointer-order repair: capture old\nabBitmap before replacing upbih with the stack Fake header. The original\nmacro otherwise dereferences the replacement header as OLDICON. Existing\nfixture records cover this input; XP does not fix that ordering.\n\nXP InternalDialogBox drops cb; source audit proves the old provider reads it\nzero times. Restore six-argument signature, INT_PTR result and LPARAM together\nwith usercli and scoped declarations/fixture calls. No compatibility thunk.\nWhole dlgmgr/usercli files remain OpenNT-baselined until their DIR turn.\n\nBitmap display data moves within the same call-owned context from screen to\nXP server shape. The existing lock/DC lifetime remains unchanged. TAGMSG retail\nmacros are no-ops; TEST_PUSIF reads the existing palette capability value.\n\n## Verification state\n\nFirst cached build failed on original USER startup macros. Second cached\nfull build passed. Runtime38 dual publication passed26 image hash checks.\nFirst bitmap test build failed because its isolated compile context omitted\nresource-cover lookup and text-conversion bindings. A /Gy experiment did not\nresolve it and was withdrawn. The small native fixture header now binds the\ncover to actual FindResourceExA and existing WCSToMBEx, with no fake success.\nThis does not claim guest-resource-cover coverage; real SOL uses the actual\nproduction registration. Final bitmap normal/failure suites, actual modal lifecycle, and runtime38 SOL\nOptions passed. Added negative DIB test first used NULL and correctly hit the\noriginal precondition assertion; corrected to a nonzero invalid bitmap handle\nto exercise GetObject failure. Production was unchanged during test retries.\nNo Full repetition is required this P.\n\nCurrent nonerror census:1329files,781exact,792same/537different,\n7848points/123546lines; delta+27points/-3355lines.\nclres OpenNT1/6424 -> XP25/3061; dlgmgr OpenNT37/420 ->40/428;\nusercli remains1/4693. Baselines1272XP/57OpenNT. Original LF restoration\nunmerges old whole-file byte differences; no source-line totals substituted.\n\nFinal publication matches all26 hashes; current WOW32 build input matches\nmanifest InputSha256 after fixture builds. Supplemental legacy standalone\ntemplate/header fixtures were updated for source coherence but were not run;\nno passing result is claimed for those standalone files.\n",
+  "retained_units": [
+    {
+      "name": "WowGetModuleFileName",
+      "xp_start": 118,
+      "xp_end": 147,
+      "context": "dialog"
+    },
+    {
+      "name": "WowGetModuleHandle",
+      "xp_start": 147,
+      "xp_end": 192,
+      "context": "dialog"
+    },
+    {
+      "name": "SkipIDorString",
+      "xp_start": 597,
+      "xp_end": 613,
+      "context": "dialog"
+    },
+    {
+      "name": "GetSizeDialogTemplate",
+      "xp_start": 615,
+      "xp_end": 732,
+      "context": "dialog"
+    },
+    {
+      "name": "DialogBoxIndirectParamAorW",
+      "xp_start": 775,
+      "xp_end": 805,
+      "context": "dialog"
+    },
+    {
+      "name": "_FreeResource",
+      "xp_start": 1543,
+      "xp_end": 1561,
+      "context": "bitmap"
+    },
+    {
+      "name": "_LockResource",
+      "xp_start": 1561,
+      "xp_end": 1570,
+      "context": "bitmap"
+    },
+    {
+      "name": "_UnlockResource",
+      "xp_start": 1570,
+      "xp_end": 1580,
+      "context": "bitmap"
+    },
+    {
+      "name": "Convert1BppToMonoBitmap",
+      "xp_start": 1728,
+      "xp_end": 1783,
+      "context": "bitmap"
+    },
+    {
+      "name": "CreateScreenBitmap",
+      "xp_start": 1785,
+      "xp_end": 1947,
+      "context": "bitmap"
+    },
+    {
+      "name": "BitmapFromDIB",
+      "xp_start": 3019,
+      "xp_end": 3235,
+      "context": "bitmap"
+    },
+    {
+      "name": "HowManyColors",
+      "xp_start": 3237,
+      "xp_end": 3307,
+      "context": "bitmap"
+    },
+    {
+      "name": "ChangeDibColors",
+      "xp_start": 3309,
+      "xp_end": 3428,
+      "context": "bitmap"
+    },
+    {
+      "name": "TrulyMonochrome",
+      "xp_start": 3607,
+      "xp_end": 3647,
+      "context": "bitmap"
+    },
+    {
+      "name": "CopyDibHdr",
+      "xp_start": 3649,
+      "xp_end": 3799,
+      "context": "bitmap"
+    },
+    {
+      "name": "ConvertDIBBitmap",
+      "xp_start": 3801,
+      "xp_end": 3966,
+      "context": "bitmap"
+    },
+    {
+      "name": "MyAbs",
+      "xp_start": 3968,
+      "xp_end": 3990,
+      "context": "bitmap"
+    },
+    {
+      "name": "Magnitude",
+      "xp_start": 3992,
+      "xp_end": 4014,
+      "context": "bitmap"
+    },
+    {
+      "name": "GetResourceBpp",
+      "xp_start": 4016,
+      "xp_end": 4060,
+      "context": "bitmap"
+    },
+    {
+      "name": "MatchImage",
+      "xp_start": 4062,
+      "xp_end": 4177,
+      "context": "bitmap"
+    },
+    {
+      "name": "GetBestImage",
+      "xp_start": 4179,
+      "xp_end": 4302,
+      "context": "bitmap"
+    },
+    {
+      "name": "GetIcoCurWidth",
+      "xp_start": 4304,
+      "xp_end": 4325,
+      "context": "bitmap"
+    },
+    {
+      "name": "GetIcoCurHeight",
+      "xp_start": 4327,
+      "xp_end": 4347,
+      "context": "bitmap"
+    },
+    {
+      "name": "GetIcoCurBpp",
+      "xp_start": 4349,
+      "xp_end": 4385,
+      "context": "bitmap"
+    },
+    {
+      "name": "WOWFindResourceExWCover",
+      "xp_start": 4387,
+      "xp_end": 4418,
+      "context": "bitmap"
+    },
+    {
+      "name": "WOWLoadBitmapA",
+      "xp_start": 4420,
+      "xp_end": 4460,
+      "context": "bitmap"
+    },
+    {
+      "name": "DIBFromBitmap",
+      "xp_start": 4532,
+      "xp_end": 4634,
+      "context": "bitmap"
+    },
+    {
+      "name": "CopyBmp",
+      "xp_start": 4636,
+      "xp_end": 4686,
+      "context": "bitmap"
+    },
+    {
+      "name": "RtlGetIdFromDirectory",
+      "xp_start": 5021,
+      "xp_end": 5075,
+      "context": "bitmap"
+    }
+  ],
+  "attempts": [
+    "Initial build: unbound USER system-startup DC macros; restored existing native DC boundary.",
+    "Bitmap attempts1/2: missing native resource-cover bindings; /Gy experiment ineffective and withdrawn.",
+    "Bitmap attempt3: test NULL violated original non-null precondition; corrected to invalid nonzero handle.",
+    "Bitmap attempt4, modal, SOL passed."
+  ]
+}

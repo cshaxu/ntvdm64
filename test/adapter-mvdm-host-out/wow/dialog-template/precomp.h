@@ -39,10 +39,11 @@ C_ASSERT(sizeof(DLGITEMTEMPLATE2) == 24);
 #define SCDLG_CLIENT 0x0001
 #define SCDLG_ANSI 0x0002
 #define SCDLG_16BIT 0x0008
+#define FUNCLOG6(...)
 #define RIPMSG0(level, text) ((void)0)
 DWORD dialog_fixture_version(HINSTANCE);
 #define GETEXPWINVER(module) dialog_fixture_version(module)
-int InternalDialogBox(HANDLE, LPDLGTEMPLATE, DWORD, HWND, DLGPROC, LONG, UINT);
+INT_PTR InternalDialogBox(HANDLE, LPDLGTEMPLATE, HWND, DLGPROC, LPARAM, UINT);
 DWORD GetSizeDialogTemplate(HINSTANCE, LPCDLGTEMPLATE);
 int WINAPI DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW, HWND,
     DLGPROC, LPARAM, UINT);

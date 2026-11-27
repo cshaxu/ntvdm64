@@ -23,12 +23,18 @@ static void *fixture_alloc(UINT flags, SIZE_T size)
 }
 #define UserLocalAlloc fixture_alloc
 #define RIPMSG0(level, message) ((void)0)
+#define RIPMSG1(...) ((void)0)
+#define TAGMSG0(...) ((void)0)
+#define TAGMSG1(...) ((void)0)
+#define TAGMSG2(...) ((void)0)
+#define TAGMSG4(...) ((void)0)
+#define TEST_PUSIF(flag) (server_info.fPaletteDisplay)
+#define PUSIF_PALETTEDISPLAY 1
 static void release_header(void *p);
 #define UserLocalFree release_header
 static CRITICAL_SECTION gcsHdc;
 static HDC ghdcBits2;
-static struct { BYTE Planes, BitsPixel, BitCount; } oemInfo;
-static struct { BOOL fPaletteDisplay; } server_info, *gpsi = &server_info;
+static struct { BYTE Planes, BitsPixel, BitCount; BOOL fPaletteDisplay; } server_info, *gpsi = &server_info;
 static BOOL fail_screen_dc;
 #define GETINITDC() (fail_screen_dc ? NULL : GetDC(NULL))
 #define RELEASEINITDC(hdc) ReleaseDC(NULL, hdc)
@@ -143,9 +149,9 @@ int __cdecl main(void)
         InitializeCriticalSection(&gcsHdc);
         screen = GetDC(NULL);
         CHECK(screen != NULL);
-        oemInfo.Planes = (BYTE)GetDeviceCaps(screen, PLANES);
-        oemInfo.BitsPixel = (BYTE)GetDeviceCaps(screen, BITSPIXEL);
-        oemInfo.BitCount = oemInfo.Planes * oemInfo.BitsPixel;
+        server_info.Planes = (BYTE)GetDeviceCaps(screen, PLANES);
+        server_info.BitsPixel = (BYTE)GetDeviceCaps(screen, BITSPIXEL);
+        server_info.BitCount = server_info.Planes * server_info.BitsPixel;
         ghdcBits2 = CreateCompatibleDC(screen);
         read_dc = CreateCompatibleDC(screen);
         ReleaseDC(NULL, screen);

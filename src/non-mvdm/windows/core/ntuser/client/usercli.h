@@ -2237,9 +2237,9 @@ HWND   InternalCreateDialog(HANDLE hmod,
         HWND hwndOwner , DLGPROC pfnWndProc, LONG dwInitParam,
         UINT fFlags);
 #line 2154
-int    InternalDialogBox(HANDLE hmod,
-        LPDLGTEMPLATE lpDlgTemplate, DWORD cb,
-        HWND hwndOwner , DLGPROC pfnWndProc, LONG dwInitParam,
+INT_PTR InternalDialogBox(HANDLE hmod,
+        LPDLGTEMPLATE lpDlgTemplate,
+        HWND hwndOwner , DLGPROC pfnWndProc, LPARAM dwInitParam,
         UINT fFlags);
 #line 2158
 PWND _FindDlgItem(PWND pwndParent, DWORD id);

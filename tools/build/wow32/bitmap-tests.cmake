@@ -2,7 +2,7 @@
 get_target_property(bitmap_flags obj_compat_wow_bitmap_bindings_obj COMPILE_FLAGS)
 get_target_property(resource_flags obj_opennt-user_clres_obj COMPILE_FLAGS)
 wow_unit(bitmap_resource_owner "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clres.c"
-  "${resource_flags} /DWOW_BITMAP_FIXTURE_BINDINGS /FI \"${NTVDM_REPO}/src/compat/include/wow_bitmap_bindings.h\"")
+  "${resource_flags} /DWOW_BITMAP_FIXTURE_BINDINGS /FI \"${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/bitmap-native-fixture.h\"")
 set_property(TARGET bitmap_resource_owner PROPERTY EXCLUDE_FROM_ALL TRUE)
 add_library(bitmap_resource OBJECT EXCLUDE_FROM_ALL
   "${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_bitmap_binding_fixture.rc")

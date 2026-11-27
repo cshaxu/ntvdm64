@@ -108,7 +108,7 @@ ULONG_PTR NtUserQueryWindow(HWND, int);
 ULONG_PTR NtUserGetThreadState(int);
 ULONG_PTR NtUserCallNoParam(int);
 HWND InternalCreateDialog(HANDLE, LPDLGTEMPLATE, DWORD, HWND, DLGPROC, LONG, UINT);
-int InternalDialogBox(HANDLE, LPDLGTEMPLATE, DWORD, HWND, DLGPROC, LONG, UINT);
+INT_PTR InternalDialogBox(HANDLE, LPDLGTEMPLATE, HWND, DLGPROC, LPARAM, UINT);
 int PASCAL DialogBox2(HWND, HWND, BOOL, BOOL);
 BOOL EndDialog(HWND, int);
 VOID SetDialogPointer(PWND, LONG);

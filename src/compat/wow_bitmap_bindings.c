@@ -35,9 +35,9 @@ BOOL WINAPI wow_bitmap_bindings_enter(wow_bitmap_context *context)
     EnterCriticalSection(&wow_bitmap_lock);
     screen = GetDC(NULL);
     if (!screen) { LeaveCriticalSection(&wow_bitmap_lock); return FALSE; }
-    context->screen.Planes = (BYTE)GetDeviceCaps(screen, PLANES);
-    context->screen.BitsPixel = (BYTE)GetDeviceCaps(screen, BITSPIXEL);
-    context->screen.BitCount = context->screen.Planes * context->screen.BitsPixel;
+    context->server.Planes = (BYTE)GetDeviceCaps(screen, PLANES);
+    context->server.BitsPixel = (BYTE)GetDeviceCaps(screen, BITSPIXEL);
+    context->server.BitCount = context->server.Planes * context->server.BitsPixel;
     context->server.fPaletteDisplay = (GetDeviceCaps(screen, RASTERCAPS) & RC_PALETTE) != 0;
     context->dc = CreateCompatibleDC(screen);
     ReleaseDC(NULL, screen);

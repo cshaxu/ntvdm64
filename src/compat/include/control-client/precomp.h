@@ -176,6 +176,7 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 /* Original winerrp.h retail semantics: diagnostics do not evaluate their
  * formatting operands; RIPERR still sets the caller's Win32 error. */
 #ifndef RIPMSG0
+#define FUNCLOG6(...)
 #define RIPMSG0(level, text) ((void)0)
 #endif
 #ifndef RIPMSG1
@@ -228,7 +229,7 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 #define DialogBoxIndirectParamAorW wow_original_DialogBoxIndirectParamAorW
 int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE, LPCDLGTEMPLATEW,
     HWND, DLGPROC, LPARAM, UINT);
-int WINAPI InternalDialogBox(HANDLE, LPDLGTEMPLATE, DWORD, HWND, DLGPROC, LONG, UINT);
+INT_PTR WINAPI InternalDialogBox(HANDLE, LPDLGTEMPLATE, HWND, DLGPROC, LPARAM, UINT);
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_DEFAULT
 /* Keep original public-shaped bodies distinct from both SDK imports and

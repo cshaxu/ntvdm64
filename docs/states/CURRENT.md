@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime37 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime38 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -119,23 +119,9 @@ all ABI evidence and census delta+31points/-2012lines; N02111/17 then.
 runtime27 with consolidated Full24/24. Its receipt preserves the observer
 correction, all attempts and census. This is the latest Full checkpoint.
 
-[P27 N021 RTL](../etc/evidence/t485-s1/n021-rtl.md) delivered runtime28:
-full cached build, dual13-image26hash, x86/x64 capture/layout, service42 and
-actual guest NetAPI passed. XP RTL restored with byte-exact paired string/
-buffer header; SDK boundaries and original logical lines retained. Census
-1325files,776exact,787nonerror same/538different,7766points/138569lines;
-delta+1file/+1exact/+1same/0different/+16points/-12245lines.1258XP/67OpenNT.
-N02113/17; next nturtl.h. Overall56/159 and S15 8/14 unchanged. Two mirror
-files completed since P26 Full24/24. Original guest unchanged.
-
-[P28 N021 user RTL](../etc/evidence/t485-s1/n021-user-rtl.md) delivered runtime29:
-XP declarations restored; eight proven SDK duplicate type omissions retained.
-Cached full build, dual13-image26hash, x86/x64 capture/layout, service42 and
-actual guest NetAPI passed. Census1325files,776exact,787nonerror same/538
-different,7773points/136488lines; delta0files/0exact/0same/0different,
-+7points/-2081lines.1259XP/66OpenNT. N02114/17; next ptypes32.h.
-Overall56/159 and S15 8/14 unchanged. Three mirror files completed since
-P26 Full24/24. Original guest unchanged.
+[P27 N021 RTL](../etc/evidence/t485-s1/n021-rtl.md) and
+[P28 N021 user RTL](../etc/evidence/t485-s1/n021-user-rtl.md) delivered;
+their receipts retain package, verification, original identities and census.
 
 [P29 N021 final SDK](../etc/evidence/t485-s1/n021-final.md) delivered runtime30:
 ptypes32 exact XP; VDD stdcall boundaries/exclusions retained; debugger
@@ -183,6 +169,16 @@ retry passed; Full24/24 runtime36 retained after timestamp-only proof. N0225/39;
 Census1329files,781exact,792nonerror same/537different,
 7821points/126901lines; delta0files/0exact/0same/0different,
 +14points/+7lines.1271XP/58OpenNT. Ten-file checkpoint resets.
+
+[P35 N022 resources](../etc/evidence/t485-s1/n022-resources.md) delivered runtime38:
+XP bitmap/color/icon algorithms and dialog sizing, paired six-argument modal
+ABI, existing native USER resource/DC boundaries. Cached build, dual13-image
+26hash publication, bitmap normal/failure/color/icon, original modal lifecycle
+and actual SOL Options passed. Initial build/test failures retained in receipt.
+N0226/39; overall57/159; S15 9/14. Census1329files,781exact,
+792nonerror same/537different,7848points/123546lines; delta0files/0exact/
+0same/0different,+27points/-3355lines.1272XP/57OpenNT. Three changed mirror
+files since P34 Full checkpoint; next combo.c. No guest change.
 
 ## S14 Closure Record
 

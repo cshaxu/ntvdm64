@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: clres.c
 *
-* Copyright (c) 1985-1996, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * Resource Loading/Creation Routines
 *
@@ -22,7 +22,9 @@
 #define WCSToMB(text, count, output, capacity, allocate) \
     WCSToMBEx(0, text, count, output, capacity, allocate)
 #endif
+#endif
 
+#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
 #line 16
 /*
  * Constants.
@@ -30,16 +32,17 @@
 #define BPP01_MAXCOLORS     2
 #define BPP04_MAXCOLORS    16
 #define BPP08_MAXCOLORS   256
+#define ICON_DEFAULTDEPTH   8
+#define ICON_MAXWIDTH     256
+#define ICON_MAXHEIGHT    256
 
 #define RESCLR_BLACK      0x00000000
 #define RESCLR_WHITE      0x00FFFFFF
 
-#line 26
 typedef struct {
     ACCEL accel;
     WORD  padding;
 } RESOURCE_ACCEL, *PRESOURCE_ACCEL;
-#line 30
 
 /*
  * Bitmap resource IDs
@@ -61,7 +64,10 @@ typedef struct _OLDCURSOR {
 } OLDCURSOR, *POLDCURSOR;
 typedef OLDCURSOR UNALIGNED *UPOLDCURSOR;
 
-#line 60
+/*
+ * Local Macros.
+ */
+#line 63
 #define ISRIFFFORMAT(p) \
     (((UNALIGNED RTAG *)(p))->ckID == FOURCC_RIFF)
 
@@ -82,7 +88,9 @@ HBITMAP CopyBmp(HBITMAP hbmpOrg, int cxNew, int cyNew, UINT LR_flags);
 #endif
 
 #if defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
-#line 117
+#line 118
+
+
 /***********************************************************************\
 * WowGetModuleFileName
 *
@@ -145,8 +153,8 @@ HMODULE WowGetModuleHandle(
             if (digit > 9)
                 digit += (DWORD)(TEXT('0') - TEXT('a') + 10);
 
-            (DWORD)hMod <<= 4;
-            (DWORD)hMod += digit;
+            (ULONG_PTR)hMod <<= 4;
+            (ULONG_PTR)hMod += digit;
         }
 
     } else {
@@ -156,8 +164,7 @@ HMODULE WowGetModuleHandle(
 
     return hMod;
 }
-
-#line 411
+#line 597
 /***************************************************************************\
 * SkipIDorString
 *
@@ -176,7 +183,6 @@ PBYTE SkipIDorString(
     return pb;
 }
 
-#line 429
 /***************************************************************************\
 * GetSizeDialogTemplate
 *
@@ -196,12 +202,6 @@ DWORD GetSizeDialogTemplate(
     LPDLGTEMPLATE2 pdt2;
 
     if (HIWORD(pdt->style) == 0xFFFF) {
-
-        /*
-         * Chicago style - version better be 1!
-         */
-        if (LOWORD(pdt->style) != 1)
-            return 0;
 
         pdt2 = (LPDLGTEMPLATE2)pdt;
         fChicago = TRUE;
@@ -254,10 +254,10 @@ DWORD GetSizeDialogTemplate(
      * Skip font type, size and name, adjust to next dword boundary.
      */
     if ((fChicago ? pdt2->style : pdt->style) & DS_SETFONT) {
-        pb = (LPBYTE)((DWORD)pb + (fChicago ? sizeof(DWORD) + sizeof(WORD): sizeof(WORD)));
+        pb += fChicago ? sizeof(DWORD) + sizeof(WORD): sizeof(WORD);
         pb = SkipIDorString(pb);
     }
-    pb = (LPBYTE)(((DWORD)pb + 3) & ~3);
+    pb = (LPBYTE)(((ULONG_PTR)pb + 3) & ~3);
 
     /*
      * Loop through dialog items now...
@@ -293,17 +293,20 @@ DWORD GetSizeDialogTemplate(
         /*
          * Point at the next dialog item. (DWORD aligned)
          */
-        pb = (LPBYTE)(((DWORD)pb + 3) & ~3);
+        pb = (LPBYTE)(((ULONG_PTR)pb + 3) & ~3);
     }
 
     /*
      * Return template size.
      */
-    return (pb - (LPBYTE)pdt);
+    return (DWORD)(pb - (LPBYTE)pdt);
 }
+#line 775
 
-#line 593
-int WINAPI DialogBoxIndirectParamAorW(
+
+
+FUNCLOG6(LOG_GENERAL, INT_PTR, WINAPI, DialogBoxIndirectParamAorW, HINSTANCE, hmod, LPCDLGTEMPLATEW, lpDlgTemplate, HWND, hwndOwner, DLGPROC, lpDialogFunc, LPARAM, dwInitParam, UINT, fAnsiFlags)
+INT_PTR WINAPI DialogBoxIndirectParamAorW(
     HINSTANCE       hmod,
     LPCDLGTEMPLATEW lpDlgTemplate,
     HWND            hwndOwner,
@@ -312,7 +315,6 @@ int WINAPI DialogBoxIndirectParamAorW(
     UINT            fAnsiFlags)
 {
     DWORD cb;
-    int   iRetCode;
 
     /*
      * The server routine destroys the menu if it fails.
@@ -324,28 +326,17 @@ int WINAPI DialogBoxIndirectParamAorW(
         return -1;
     }
 
-    iRetCode = InternalDialogBox(hmod,
-                                 (LPDLGTEMPLATE)lpDlgTemplate,
-                                 cb,
-                                 hwndOwner,
-                                 lpDialogFunc,
-                                 dwInitParam,
-                                 SCDLG_CLIENT | (fAnsiFlags & (SCDLG_ANSI | SCDLG_16BIT)));
-
-    return iRetCode;
+    return InternalDialogBox(hmod,
+                            (LPDLGTEMPLATE)lpDlgTemplate,
+                            hwndOwner,
+                            lpDialogFunc,
+                            dwInitParam,
+                            SCDLG_CLIENT | (fAnsiFlags & (SCDLG_ANSI | SCDLG_16BIT)));
 }
-
-#endif
-
-#line 881
-#ifdef DEBUG
-#line 882
-#error Unsupported DEBUG original branch
-#line 896
 #endif
 
 #if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
-#line 1317
+#line 1543
 /***************************************************************************\
 * _FreeResource   (API)
 * _LockResource   (API)
@@ -384,15 +375,7 @@ BOOL WINAPI _UnlockResource(
 
     return TRUE;
 }
-
-#line 1480
-#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
-#line 1481
-#error Excluded original disabled cursor branch
-#line 1483
-#endif
-
-#line 1499
+#line 1728
 /***************************************************************************\
 * Convert1BppToMonoBitmap
 *
@@ -450,7 +433,6 @@ HBITMAP Convert1BppToMonoBitmap(
     return hbmMono;
 }
 
-#line 1556
 /***************************************************************************\
 * CreateScreenBitmap
 *
@@ -533,8 +515,8 @@ HBITMAP CreateScreenBitmap(
     if (hdcScreen = GETINITDC()) {
 
         /*
-         * This appears to mess up color to mono conversion by loosing all
-         * the data and forceing all non-forground colors to black.
+         * This appears to mess up color to mono conversion by losing all
+         * the data and forcing all non-forground colors to black.
          * (try copyimage with IDC_WARNING_DEFAULT)
          * This is what win95 does but their system works.  The scary thing
          * (according to marke) is that win95 may have changed GDI to make
@@ -560,29 +542,27 @@ HBITMAP CreateScreenBitmap(
 
         } else {
 
-            if (((planes == 0) || (planes == oemInfo.Planes)) &&
-                ((bpp == 0) || (bpp == oemInfo.BitsPixel))) {
+            if (((planes == 0) || (planes == gpsi->Planes)) &&
+                ((bpp == 0) || (bpp == gpsi->BitsPixel))) {
 
                 hbm = CreateCompatibleBitmap(hdcScreen, cx, cy);
 
             } else {
 
-                dib4Vga.bi.biBitCount = planes * bpp ? planes * bpp : oemInfo.BitCount;
+                dib4Vga.bi.biBitCount = planes * bpp ? planes * bpp : gpsi->BitCount;
 
 #if 0 // We use to do the dib-section create, but this breaks icons
-#line 1675
-#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
-#line 1691
+#error Unsupported original resource branch
+#line 1920
 #else
-
-                dib1Vga.bi.biWidth  = cx;
-                dib1Vga.bi.biHeight = cy;
+                dib4Vga.bi.biWidth  = cx;
+                dib4Vga.bi.biHeight = cy;
 
                 hbm = CreateDIBitmap(hdcScreen,
-                                     (LPBITMAPINFOHEADER)&dib1Vga,
+                                     (LPBITMAPINFOHEADER)&dib4Vga,
                                      CBM_CREATEDIB,
                                      NULL,
-                                     (LPBITMAPINFO)&dib1Vga,
+                                     (LPBITMAPINFO)&dib4Vga,
                                      DIB_RGB_COLORS);
 #endif
             }
@@ -602,34 +582,7 @@ HBITMAP CreateScreenBitmap(
 
     return hbm;
 }
-
-#endif
-
-#line 2298
-#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
-#line 2299
-#error Excluded original disabled image branch
-#line 2301
-#endif
-
-#line 2624
-#if 0
-#line 2625
-#error Excluded original disabled icon-loading branch
-#else
-#line 2627
-#line 2628
-#endif
-
-#line 2640
-#ifdef LATER // SanfordS
-#line 2641
-#error Excluded unsupported original LATER branch
-#line 2667
-#endif
-
-#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
-#line 2783
+#line 3019
 /***************************************************************************\
 * BitmapFromDIB
 *
@@ -674,7 +627,7 @@ HBITMAP BitmapFromDIB(
         int   cxTemp;
         int   cyTemp;
         BOOL  fOldFormat;
-        DWORD dwDummy;
+        LPVOID dwDummy;
         DWORD dwTemp;
 
 #define lpbch ((LPBITMAPCOREHEADER)lpbi)
@@ -686,8 +639,8 @@ HBITMAP BitmapFromDIB(
             cxTemp = lpbch->bcWidth;
             cyTemp = lpbch->bcHeight;
 
-            lpbch->bcWidth  = cxNew;
-            lpbch->bcHeight = cyNew;
+            lpbch->bcWidth  = (WORD)cxNew;
+            lpbch->bcHeight = (WORD)cyNew;
 
         } else {
 
@@ -713,14 +666,14 @@ HBITMAP BitmapFromDIB(
             hbmpNew = CreateDIBSection(ghdcBits2,
                                        lpbi,
                                        DIB_RGB_COLORS,
-                                       (LPVOID*)&dwDummy,
+                                       &dwDummy,
                                        0,
                                        0);
         }
 
         if (fOldFormat) {
-            lpbch->bcWidth  = cxTemp;
-            lpbch->bcHeight = cyTemp;
+            lpbch->bcWidth  = (WORD)cxTemp;
+            lpbch->bcHeight = (WORD)cyTemp;
         } else {
             lpbi->bmiHeader.biWidth       = cxTemp;
             lpbi->bmiHeader.biHeight      = cyTemp;
@@ -745,6 +698,7 @@ HBITMAP BitmapFromDIB(
         DWORD   rgbBk;
         DWORD   rgbText;
         HBITMAP hbmpT;
+        BOOL    fFail;
 
         /*
          * We need to select in appropriate bitmap immediately!  That way,
@@ -769,7 +723,10 @@ HBITMAP BitmapFromDIB(
          * Realize the palette.
          */
         if (hpal) {
-            UserAssert(gpsi->fPaletteDisplay);
+#if DBG
+#error Unsupported original resource branch
+#line 3161
+#endif // DBG
 
             hpal = SelectPalette(ghdcBits2, hpal, FALSE);
             RealizePalette(ghdcBits2);
@@ -777,7 +734,7 @@ HBITMAP BitmapFromDIB(
 
         if (fStretch) {
 
-            SmartStretchDIBits(ghdcBits2,
+            fFail = SmartStretchDIBits(ghdcBits2,
                                0,
                                0,
                                cxNew,
@@ -789,16 +746,16 @@ HBITMAP BitmapFromDIB(
                                lpBits,
                                lpbi,
                                DIB_RGB_COLORS,
-                               SRCCOPY);
+                               SRCCOPY) <= 0;
         } else {
 
-            SetDIBits(ghdcBits2,
+            fFail = SetDIBits(ghdcBits2,
                       hbmpNew,
                       0,
                       cyNew,
                       lpBits,
                       lpbi,
-                      DIB_RGB_COLORS);
+                      DIB_RGB_COLORS) <= 0;
         }
 
         /*
@@ -818,6 +775,19 @@ HBITMAP BitmapFromDIB(
             SetStretchBltMode(ghdcBits2, nStretchMode);
 
         SelectBitmap(ghdcBits2, hbmpT);
+
+        /*
+         * If the SetDIBits() of StretchDIBits() failed, it is probably because
+         * GDI or the driver did not like the DIB format.  This may happen if
+         * the file is truncated and we are using a memory mapped file to read
+         * the DIB in.  In this case, an exception gets thrown in GDI, that it
+         * traps and will return failure from the GDI call.
+         */
+
+        if (fFail) {
+            DeleteObject(hbmpNew);
+            hbmpNew = NULL;
+        }
     }
 
     /*
@@ -832,11 +802,10 @@ HBITMAP BitmapFromDIB(
     return hbmpNew;
 }
 
-#line 2985
 /***************************************************************************\
 * HowManyColors
 *
-*
+* Aug-01-2000 DwayneN - Fixed high color support
 \***************************************************************************/
 
 DWORD HowManyColors(
@@ -856,19 +825,55 @@ DWORD HowManyColors(
         if (ppColorTable != NULL) {
             *ppColorTable = (LPBYTE)(upbih + 1);
         }
-        if (upbih->biClrUsed)
+
+        if (upbih->biClrUsed) {
+            /*
+             * If the bitmap header explicitly provides the number of colors
+             * in the color table, use it.
+             */
             return (DWORD)upbih->biClrUsed;
-        else if (upbih->biBitCount <= 8)
+        } else if (upbih->biBitCount <= 8) {
+            /*
+             * If the bitmap header describes a pallete-bassed bitmap
+             * (8bpp or less) then the color table must be big enough
+             * to hold all palette indecies.
+             */
             return (1 << upbih->biBitCount);
-        else if ((upbih->biBitCount == 16) || (upbih->biBitCount == 32))
-            return 3;
+        } else {
+            /*
+             * Finally, if the bitmap header describes a highcolor+ bitmap
+             * (anything over 8bpp, but typically 16bpp, 24bpp, or 32bpp)
+             * there isn't a need for a color table.  However, 16bpp and
+             * 32bpp bitmaps are special cases since it is not obvious how
+             * they should be split into triplets (Red, Green, and Blue).  For
+             * instance, 16bpp bitmaps can have 6 red bits, 5 green bits, and
+             * 5 blue bits.  Or some other combination.  To specify this, the
+             * 16bpp and 32bpp bitmaps provide BI_BITFIELDS in the 
+             * biCompression field.  This indicates that the color table will
+             * have 3 DWORDS that describe the masks for the red, green, and
+             * blue components of entry in the bitmap.  If this isn't 
+             * specified, then GDI assumes "555" for 16bpp and "XBGR" for
+             * 32bpp.  24bpp bitmaps are always "XBGR" and consume a 32-bit
+             * entry in the form of an RGBQUAD.
+             */
+            if (upbih->biCompression == BI_BITFIELDS) {
+                if ((upbih->biBitCount != 16) && (upbih->biBitCount != 32)) {
+                    RIPMSG1(RIP_WARNING, "HowManyColors: biCompression==BI_BITFIELDS on a %dbpp bitmap!", upbih->biBitCount);
+                }
+
+                return 3;
+            }
+        }
     }
+
+    /*
+     * Evidently, there is no color table.
+     */
     return 0;
 
 #undef upbch
 }
 
-#line 3020
 /***************************************************************************\
 * ChangeDibColors
 *
@@ -890,25 +895,42 @@ VOID ChangeDibColors(
     cColors = HowManyColors(lpbih, FALSE, &(LPBYTE)lpColorTable);
 
     /*
-     * No color table!  Do nothing.
+     * NT Bug 366661: Don't check the color count here b/c we will do different
+     * things depending on what type of change we are performing.  For example,
+     * when loading hi-color/true-color icons, we always need to do the
+     * monochrome conversion in order to properly get an icon-mask.
      */
-    if (cColors == 0) {
-        RIPMSG0(RIP_WARNING, "ChangeDibColors: DIB doesn't have a color table");
-        return;
-    }
 
     /*
      * LR_MONOCHROME is the only option that handles PM dibs.
      */
     if (LR_flags & LR_MONOCHROME) {
-
+        /*
+         * LR_MONOCHROME is the only option that handles PM dibs.
+         *
+         * DO THIS NO MATTER WHETHER WE HAVE A COLOR TABLE!  We need
+         * to do this for mono conversion and for > 8 BPP
+         * icons/cursors.  In CopyDibHdr, we already made a copy of
+         * the header big enough to hold 2 colors even on high-color+
+         * bpp images.
+         */
         lpbih->biBitCount = lpbih->biPlanes = 1;
+        lpbih->biCompression = 0;
         lpColorTable[0] = RESCLR_BLACK;
         lpColorTable[1] = RESCLR_WHITE;
-
     } else if (LR_flags & LR_LOADTRANSPARENT) {
 
-        LPBYTE pb = (LPBYTE)(lpColorTable + cColors);
+        LPBYTE pb;
+
+        /*
+         * No color table!  Do nothing.
+         */
+        if (cColors == 0) {
+            RIPMSG0(RIP_WARNING, "ChangeDibColors: DIB doesn't have a color table");
+            return;
+        }
+
+        pb = (LPBYTE)(lpColorTable + cColors);
 
         /*
          * Change the first pixel's color table entry to RGB_WINDOW
@@ -972,8 +994,7 @@ ChangeColor:
         }
     }
 }
-
-#line 3291
+#line 3607
 /***************************************************************************\
 * TrulyMonochrome
 *
@@ -1016,7 +1037,6 @@ BOOL TrulyMonochrome(
     return FALSE;
 }
 
-#line 3333
 /***************************************************************************\
 * CopyDibHdr
 *
@@ -1046,8 +1066,8 @@ LPBITMAPINFOHEADER CopyDibHdr(
 {
 
 #define upbch ((UPBITMAPCOREHEADER)upbih)
-
     DWORD              cColors;
+    DWORD              cMinColors;
     DWORD              i;
     LPBITMAPINFOHEADER lpbihNew;
     DWORD              cbAlloc;
@@ -1080,11 +1100,9 @@ LPBITMAPINFOHEADER CopyDibHdr(
         Fake.bih.biXPelsPerMeter =
         Fake.bih.biYPelsPerMeter =
         Fake.bih.biClrImportant  = 0;
-        Fake.bih.biClrUsed       = cColors =
-                                   HowManyColors(upbih, TRUE, &lpColorTable);
-        Fake.bih.biSizeImage     =
-                BitmapWidth(Fake.bih.biWidth, Fake.bih.biBitCount) *
-                            Fake.bih.biHeight;
+        Fake.bih.biClrUsed       = cColors = HowManyColors(upbih, TRUE, &lpColorTable);
+        Fake.bih.biSizeImage     = BitmapWidth(Fake.bih.biWidth, Fake.bih.biBitCount) * Fake.bih.biHeight;
+
         /*
          * Copy and convert tripplet color table to rgbQuad color table.
          */
@@ -1120,15 +1138,14 @@ LPBITMAPINFOHEADER CopyDibHdr(
             Fake.bih.biYPelsPerMeter =
             Fake.bih.biClrImportant  = 0;
             Fake.bih.biClrUsed       = cColors = BPP01_MAXCOLORS;
-            Fake.bih.biSizeImage     =
-                    BitmapWidth(upOldIcoCur->cx, 1) * upOldIcoCur->cy;
+            Fake.bih.biSizeImage     = BitmapWidth(upOldIcoCur->cx, 1) * upOldIcoCur->cy;
             Fake.rgb[0]              = RESCLR_BLACK;
             Fake.rgb[1]              = RESCLR_WHITE;
-#line 3441
+#line 3754
             *lplpBits                = upOldIcoCur->abBitmap;
-#line 3440
+#line 3753
             upbih                    = (LPBITMAPINFOHEADER)&Fake;
-#line 3442
+#line 3755
             Fake.rgb[2]              = *((LPDWORD)*lplpBits);  // For LR_LOADTRANSPARENT
 
         } else {
@@ -1145,10 +1162,29 @@ LPBITMAPINFOHEADER CopyDibHdr(
     *lpfMono = (cColors == BPP01_MAXCOLORS) &&
             TrulyMonochrome((LPBYTE)upbih + sizeof(BITMAPINFOHEADER), FALSE);
 
-    cbAlloc = sizeof(BITMAPINFOHEADER) + (cColors * sizeof(RGBQUAD)) + 4;
+    /*
+     * Note: We have to allocate at least 2 color entries so that we have
+     * room in the color table to define black and white for monochrome
+     * conversions.  See ChangeDibColors() and ConvertDIBIcon().
+     */
+    cMinColors = cColors >= 2 ? cColors : 2;
 
-    if (lpbihNew = UserLocalAlloc(0, cbAlloc))
+    /*
+     * LR_LOADTRANSPARENT needs to examine the first pixel to determine the
+     * transparent color.  This routine splits the bitmap header away
+     * from the actual bitmap bits.  However, the routines that process the
+     * LR_LOADTRANSPARENT style expect the first pixel to immediately follow
+     * the bitmap header.  Above we copied the first pixel of the bitmap
+     * bits right after the color table.  Now we just need to make room for
+     * it in our buffer.
+     */
+    cMinColors++;
+
+    cbAlloc = sizeof(BITMAPINFOHEADER) + (cMinColors * sizeof(RGBQUAD));
+
+    if (lpbihNew = UserLocalAlloc(0, cbAlloc)) {
         RtlCopyMemory(lpbihNew, upbih, cbAlloc);
+    }
 
     return lpbihNew;
 
@@ -1156,7 +1192,6 @@ LPBITMAPINFOHEADER CopyDibHdr(
 
 }
 
-#line 3469
 /***************************************************************************\
 * ConvertDIBBitmap
 *
@@ -1196,15 +1231,17 @@ HBITMAP ConvertDIBBitmap(
      * which was allocated, so it must be freed later.
      * The also converts the header to BITMAPINFOHEADER format.
      */
-    if ((lpbihNew = CopyDibHdr(upbih, &lpBits, &fMono)) == NULL)
+    if ((lpbihNew = CopyDibHdr(upbih, &lpBits, &fMono)) == NULL) {
         return NULL;
+    }
 
     /*
      * When loading a DIB file, we may need to use a different
      * bits pointer.  See RtlRes.c/RtlLoadObjectFromDIBFile.
      */
-    if (lplpBits && *lplpBits)
+    if (lplpBits && *lplpBits) {
         lpBits = *lplpBits;
+    }
 
     fMonoGiven = fMono;
 
@@ -1213,9 +1250,15 @@ HBITMAP ConvertDIBBitmap(
         if (LR_flags & (LR_LOADTRANSPARENT | LR_LOADMAP3DCOLORS))
             ChangeDibColors(lpbihNew, LR_flags & ~LR_MONOCHROME);
 
-        bPlanesDesired = oemInfo.Planes;
-        bppDesired     = oemInfo.BitsPixel;
-        fMono          = LR_flags & LR_MONOCHROME;
+        if (LR_flags & LR_CREATEREALDIB) {
+            bPlanesDesired = (BYTE) lpbihNew->biPlanes;
+            bppDesired = (BYTE) lpbihNew->biBitCount;
+        } else {
+            bPlanesDesired = gpsi->Planes;
+            bppDesired = gpsi->BitsPixel;
+        }
+
+        fMono = LR_flags & LR_MONOCHROME;
     }
 
     if (fMono) {
@@ -1232,6 +1275,23 @@ HBITMAP ConvertDIBBitmap(
          * pass back the translated/copied header
          */
         *lplpbih = lpbihNew;
+
+        /*
+         * When loading icon/cursors on a system with multiple monitors
+         * with different color depths, always convert to VGA color.
+         *
+         * dwaynen - 1/12/2001
+         * Note: This used to also check the SM_SAMEDISPLAYFORMAT metric.  If
+         * the display formats (on a multi-mon system) were different, it
+         * would force the bpp to 4,  We have removed this code because we
+         * suspect that it isn't really needed.
+         * Refer to bug 258022.
+         *
+        if (!fMono && !SYSMET(SAMEDISPLAYFORMAT)) {
+            bPlanesDesired = 1;
+            bppDesired = 4;
+        }
+        */
 
         /*
          * Return a ponter to the bits following this set of bits
@@ -1299,27 +1359,26 @@ HBITMAP ConvertDIBBitmap(
     return hBmpRet;
 }
 
-#line 3611
 /***************************************************************************\
 * MyAbs
 *
 * Calcules my weighted absolute value of the difference between 2 nums.
-* This of course normalizes values to >= zero.  But it also doubles them
-* if valueHave < valueWant.  This is because you get worse results trying
-* to extrapolate from less info up then interpolating from more info down.
-* I paid $150 to take the SAT.  I'm damned well going to get my vocab's
-* money worth.
+* This of course normalizes values to >= zero.  But it can also "punish" the
+* returned value by a factor of two if valueHave < valueWant.  This is
+* because you get worse results trying to extrapolate from less info up then
+* interpolating from more info down.
 *
 \***************************************************************************/
 
 UINT MyAbs(
     int valueHave,
-    int valueWant)
+    int valueWant,
+    BOOL fPunish)
 {
     int diff = (valueHave - valueWant);
 
     if (diff < 0)
-        diff = 2 * (-diff);
+        diff = (fPunish ? -2 : -1) * diff;
 
     return (UINT)diff;
 }
@@ -1348,7 +1407,52 @@ UINT Magnitude(
         return 8;
 }
 
-#line 3659
+/***************************************************************************\
+* GetResourceBpp
+*
+* Extract the bpp for a icon/cursor resource.  Handle low and high-color
+* formats.
+*
+\***************************************************************************/
+UINT GetResourceBpp(LPRESDIR lprd, BOOL fIcon)
+{
+    UINT bpp = 0;
+
+    if (fIcon) {
+        if (lprd->Icon.ColorCount != 0) {
+            bpp = Magnitude(lprd->Icon.ColorCount);
+            TAGMSG2(DBGTAG_Icon, "GetResourceBpp: icon color count = %d, bpp = %d", lprd->Icon.ColorCount, bpp);
+        } else {
+            bpp = lprd->BitCount;
+            TAGMSG1(DBGTAG_Icon, "GetResourceBpp: icon bpp = %d", bpp);
+        }
+    } else {
+        /*
+         * NTRAID#NTBUG9-360375-2001/04/05-dwaynen  
+         * This seems really suspicious to me.
+         * Forcing bppNew to 1.
+         *    Cursors provide a hotspot where an icon provides bit-depth
+         *    information.  So we just set the bppNew to 1, since we don't
+         *    have any better ideas.  We just hope that there is only
+         *    one cursor candidate, otherwise our scoring logic is broken.
+         *    Also this is broken when we try to load a cursor resource
+         *    as an icon.  We won't match color depth properly!
+         */
+        bpp = 1;
+        TAGMSG1(DBGTAG_Icon, "GetResourceBpp: cursor bpp = %d", bpp);
+    }
+
+    /*
+     * Nothing has 0 bpp.
+     */
+    if(bpp == 0) {
+    	bpp = ICON_DEFAULTDEPTH;
+        TAGMSG1(DBGTAG_Icon, "GetResourceBpp: icon color depth unknown!  Assuming %d!", bpp);
+    }
+
+    return bpp;
+}
+
 /***************************************************************************\
 * MatchImage
 *
@@ -1361,35 +1465,42 @@ UINT Magnitude(
 * formula has the following properties:
 *     (1) Differences in width/height count much more than differences in
 *         color format.
-*     (2) Fewer colors give a smaller difference than more
-*     (3) Bigger images are better than smaller, since shrinking produces
-*             better results than stretching.
+*     (2) Bigger images are better than smaller, since shrinking produces
+*         better results than stretching.
+*     (3) Color matching is done by the difference in bit depth.  No
+*         preference is given to having a candidate equally different
+*         above and below the target.
 *
 * The formula is the sum of the following terms:
-*     Log2(colors wanted) - Log2(colors really), times -2 if the image
-*         has more colors than we'd like.  This is because we will lose
-*         information when converting to fewer colors, like 16 color to
-*         monochrome.
-*     Log2(width really) - Log2(width wanted), times -2 if the image is
+*     abs(bppCandidate - bppTarget)
+*     abs(cxCandidate - cxTarget), times 2 if the image is
 *         narrower than what we'd like.  This is because we will get a
 *         better result when consolidating more information into a smaller
 *         space, than when extrapolating from less information to more.
-*     Log2(height really) - Log2(height wanted), times -2 if the image is
+*     abs(cxCandidate - cxTarget), times 2 if the image is
 *         shorter than what we'd like.  This is for the same reason as
 *         the width.
 *
-* Let's step through an example.  Suppose we want a 16 color, 32x32 image,
-* and are choosing from the following list:
-*     16 color, 64x64 image
-*     16 color, 16x16 image
-*      8 color, 32x32 image
-*      2 color, 32x32 image
+* Let's step through an example.  Suppose we want a 4bpp (16 color),
+* 32x32 image.  We would choose the various candidates in the following order:
+* 
+* Candidate     Score   Formula
 *
-* We'd prefer the images in the following order:
-*      8 color, 32x32         : Match value is 0 + 0 + 1     == 1
-*     16 color, 64x64         : Match value is 1 + 1 + 0     == 2
-*      2 color, 32x32         : Match value is 0 + 0 + 3     == 3
-*     16 color, 16x16         : Match value is 2*1 + 2*1 + 0 == 4
+* 32x32x4bpp  = 0       abs(32-32)*1 + abs(32-32)*1 + 2*abs(4-4)*1
+* 32x32x2bpp  = 4
+* 32x32x8bpp  = 8
+* 32x32x16bpp = 24
+* 48x48x4bpp  = 32
+* 48x48x2bpp  = 36
+* 48x48x8bpp  = 40
+* 32x32x32bpp = 56
+* 48x48x16bpp = 56      abs(48-32)*1 + abs(48-32)*1 + 2*abs(16-4)*1
+* 16x16x4bpp  = 64
+* 16x16x2bpp  = 68      abs(16-32)*2 + abs(16-32)*2 + 2*abs(2-4)*1
+* 16x16x8bpp  = 72
+* 48x48x32bpp = 88      abs(48-32)*1 + abs(48-32)*1 + 2*abs(32-4)*1
+* 16x16x16bpp = 88
+* 16x16x32bpp = 104
 *
 \***************************************************************************/
 
@@ -1397,75 +1508,83 @@ UINT MatchImage(
     LPRESDIR lprd,
     LPINT    lpcxWant,
     LPINT    lpcyWant,
-    UINT     uColorsWant,
+    UINT     bppWant,
     BOOL     fIcon)
 {
-    UINT uColorsNew;
+    UINT bppNew;
     int  cxNew;
     int  cyNew;
+    UINT score;
 
     cxNew = lprd->Icon.Width;
     cyNew = lprd->Icon.Height;
+	bppNew = GetResourceBpp(lprd, fIcon);
 
-    if (fIcon) {
-        uColorsNew = lprd->Icon.ColorCount;
-    } else {
+    if (!fIcon) {
+        /*
+         * NTRAID#NTBUG9-360375-2001/04/05-dwaynen  
+         *
+         * This seems really suspicious to me.
+         * Cutting the height in half.
+         *    This is because cursors store a 2X height for legacy reasons.
+         *    Unfortunately, this code path can also be used to load an
+         *    icon resource AS a cursor.  Maybe we should only do this for
+         *    cursor resources.  But how to tell?
+         */
         cyNew >>= 1;
-        uColorsNew = BPP01_MAXCOLORS;
     }
 
     /*
      * 0 really means maximum size (256) or colors (256).
      */
-    if (!cxNew)
-        cxNew = BPP08_MAXCOLORS;
+    if (!cxNew) {
+        cxNew = ICON_MAXWIDTH;
+        TAGMSG1(DBGTAG_Icon, "MatchImage: icon width unknown!  Assuming %d!", cxNew);
+    }
 
-    if (!*lpcxWant)
+    if (!*lpcxWant) {
         *lpcxWant = cxNew;
+    }
 
-    if (!cyNew)
-        cyNew = BPP08_MAXCOLORS;
+    if (!cyNew) {
+        cyNew = ICON_MAXHEIGHT;
+        TAGMSG1(DBGTAG_Icon, "MatchImage: icon height unknown!  Assuming %d!", cyNew);
+    }
 
-    if (!*lpcyWant)
+    if (!*lpcyWant) {
         *lpcyWant = cyNew;
+    }
 
-    if (!uColorsNew)
-        uColorsNew = BPP08_MAXCOLORS;
-
-    /*
+	/*
      * Here are the rules for our "match" formula:
      *      (1) A close size match is much preferable to a color match
-     *      (2) Fewer colors are better than more
-     *      (3) Bigger icons are better than smaller
-     *
-     * The color count, width, and height are powers of 2.  So we use Magnitude()
-     * which calculates the order of magnitude in base 2.
+     *      (2) Bigger icons are better than smaller
+     *      (3) The smaller the difference in bit depths the better
      */
-#if 0 //CHRISWIL: Not in Win95
-#line 3752
-#error Excluded original disabled image-matching branch
-#line 3757
-#else
-#line 3758
+    score = 2*MyAbs(bppNew, bppWant, FALSE) +
+            MyAbs(cxNew, *lpcxWant, TRUE) +
+            MyAbs(cyNew, *lpcyWant, TRUE);
 
-    return( 2*MyAbs(Magnitude(uColorsWant), Magnitude(uColorsNew)) +
-              MyAbs(cxNew, *lpcxWant) +
-              MyAbs(cyNew, *lpcyWant));
-#endif
+    TAGMSG4(DBGTAG_Icon, "MatchImage: Candidate Summary: cx=%d, cy=%d, bpp=%d, score=%d", cxNew, cyNew, bppNew, score);
+
+    return score;
 }
 
 /***************************************************************************\
 * GetBestImage
 *
 * Among the different forms of images, choose the one that best matches the
-* color format & dimensions of the request.  We try to match the size, then
-* the color info.  So we find the item that
+* color format & dimensions of the request.
 *
-* (1) Has closest dimensions (smaller or bigger equally good) to minimize
-*     the width, height difference
-* (2) Has best colors.  We favor less over more colors.
+* Here are the rules for our "match" formula:
+*      (1) A close size match is much preferable to a color match
+*      (2) Bigger icons are better than smaller
+*      (3) Closer bit depths are better
 *
-* If we find an identical match, we return immediately.
+* Here are some additional rules:
+*      (4) A tie is broken by choosing the one with the largest bpp.
+*      (5) A further tie is broken by choosing the first in the resource.
+*      (6) If we find an identical match, we return immediately.
 *
 \***************************************************************************/
 
@@ -1474,30 +1593,60 @@ UINT GetBestImage(
     UINT     uCount,
     int      cxDesired,
     int      cyDesired,
-    UINT     bpp,
+    UINT     bppDesired,
     BOOL     fIcon)
 {
-    UINT uIndex;
-    UINT uT;
-    UINT uIndexBest = 0;
-    UINT uBest = (UINT)-1;
+    UINT i;
+    UINT iBest = 0;
+    UINT score;
+    UINT scoreBest = (UINT)-1;
+    UINT bppBest;
+    UINT bppCandidate;
 
+    TAGMSG0(DBGTAG_Icon, "GetBestImage: Icon dir has %d candidates.");
+    TAGMSG4(DBGTAG_Icon, "GetBestImage: Looking for cx=%d, cy=%d, bpp=%d, fIcon=%s", cxDesired, cyDesired, bppDesired, fIcon ? "TRUE" : "FALSE");
 
     /*
+     * If the bpp was not specified, grab the primary monitor's color depth.
+     */
+    if (bppDesired == 0) {
+        bppDesired = (UINT)gpsi->BitCount;
+        TAGMSG1(DBGTAG_Icon, "GetBestImage: Using screen bpp=%d", bppDesired);
+    }
+
+    /*
+     * 10/18/2000 - dwaynen
+     *
+     * We no longer do the following, because we now pass along the
+     * actuall bpp, instead of a color count.  The old code (commented out
+     * below) used to crop the supported bpp to 8, and to convert the bpp
+     * into an actual color count.  We used to pass the color count because
+     * the resource format (see ICONDIR) stores the color count in a byte,
+     * and we would simply compare the desired colors against the available
+     * colors.  If an icon had 256 colors, it actually just stored a 0 in
+     * the ICONDIR::ColorCount field.  The problem is obvious, what about
+     * icons/cursors with more than 256 colors?
+     *
+     * Fortunately, the resource format also stores the bits-per-pixel (bpp).
+     * So, we now pass along the desired bpp, instead of the desired color
+     * count, to do our matching against.  
+     *
+     * Old code and comments below:
+     * --------
+     *
      * Get desired number of colors in # value, not bits value.  Note that
      * we do NOT allow you to have  16- or 32- or 24- bit color icons.
      *
      * the icon resources can be 16, 24, 32 bpp, but the restable only has
      * a color count, so a HiColor icon would have a max value in the
      * restable.  we treat a 0 in the color count as "max colors"
-     */
-    if (bpp == 0)
-        bpp = (UINT)oemInfo.BitCount;
-
+     *
+     
     if (bpp > 8)
         bpp = 8;
 
     bpp = 1 << bpp;
+    */
 
     /*
      * Loop through resource entries, saving the "closest" item so far.  Most
@@ -1506,34 +1655,46 @@ UINT GetBestImage(
      * size to what we want preferring bigger over smaller, then an image
      * with the right color format
      */
-    for (uIndex = 0; uIndex < uCount; uIndex++, lprd++) {
+    for (i = 0; i < uCount; i++, lprd++) {
+        TAGMSG1(DBGTAG_Icon, "GetBestImage: Checking candidate %d...", i);
+        bppCandidate = GetResourceBpp(lprd, fIcon);
 
         /*
          * Get "matching" value.  How close are we to what we want?
          */
-        uT = MatchImage(lprd, &cxDesired, &cyDesired, bpp, fIcon);
+        score = MatchImage(lprd, &cxDesired, &cyDesired, bppDesired, fIcon);
 
-        if (!uT) {
+        TAGMSG0(DBGTAG_Icon, "---------------------------------------------");
 
+        if (score == 0) {
             /*
              * We've found an exact match!
              */
-            return uIndex;
-
-        } else if (uT < uBest) {
-
+            TAGMSG1(DBGTAG_Icon, "GetBestImage: Found exact match: candidate=%d", i);
+            iBest = i;
+            break;
+        } else if (score < scoreBest) {
             /*
              * We've found a better match than the current alternative.
              */
-            uBest = uT;
-            uIndexBest = uIndex;
+            scoreBest = score;
+            iBest = i;
+            bppBest = bppCandidate;
+        } else if (score == scoreBest) {
+            /*
+             * Tie breaker: choose the higher color depth.  If that fails, choose first one.
+             */
+            if (bppBest < bppCandidate) {
+                iBest = i;
+                bppBest = bppCandidate;
+            }
         }
     }
 
-    return uIndexBest;
+    TAGMSG2(DBGTAG_Icon, "GetBestImage: Using best match: candidate=%d, score=%d", iBest, scoreBest);
+    return iBest;
 }
 
-#line 3844
 /***************************************************************************\
 * GetIcoCurWidth
 *
@@ -1579,7 +1740,6 @@ _inline DWORD GetIcoCurHeight(
     }
 }
 
-#line 3889
 /***************************************************************************\
 * GetIcoCurBpp
 *
@@ -1592,23 +1752,31 @@ _inline DWORD GetIcoCurBpp(
 {
     if (lrFlags & LR_MONOCHROME) {
 
-#ifdef DEBUG
-#line 3902
-#error Unsupported DEBUG original branch
-#line 3905
+#if DBG
+#error Unsupported original resource branch
+#line 4365
 #endif
         return 1;
 
-    } else if (gpsi->fPaletteDisplay || (lrFlags & LR_VGACOLOR)) {
+    } else if (TEST_PUSIF(PUSIF_PALETTEDISPLAY) || (lrFlags & LR_VGACOLOR)) {
+        /*
+         * dwaynen - 1/12/2001
+         * Note: This used to also check the SM_SAMEDISPLAYFORMAT metric.  If
+         * the display formats (on a multi-mon system) were different, it
+         * would also return 4,  We have removed this code because we suspect
+         * that it isn't really needed.
+         * Refer to bug 258022.
+         *
+         * || !SYSMET(SAMEDISPLAYFORMAT)
+         *
+         */
+
         return 4;
     } else {
         return 0;
     }
 }
-#endif
 
-#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE) && !defined(WOW_BITMAP_FIXTURE_BINDINGS)
-#line 3915
 /***************************************************************************\
 * WOWFindResourceExWCover
 *
@@ -1642,10 +1810,6 @@ HANDLE WOWFindResourceExWCover(
     return hRes;
 }
 
-#endif
-
-#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
-#line 3948
 /***************************************************************************\
 * WOWLoadBitmapA
 *
@@ -1660,6 +1824,8 @@ HBITMAP WOWLoadBitmapA(
 {
     LPWSTR  lpUniName;
     HBITMAP hRet;
+
+    UNREFERENCED_PARAMETER(cbResData);
 
     if (pResData == NULL) {
 
@@ -1685,8 +1851,9 @@ HBITMAP WOWLoadBitmapA(
 
     return hRet;
 }
+#line 4532
 
-#line 4053
+
 /***********************************************************************\
 * DIBFromBitmap()
 *
@@ -1714,7 +1881,9 @@ PVOID DIBFromBitmap(
     UserAssert(hbmp);
     UserAssert(hdc);
 
-    GetObject(hbmp, sizeof(BITMAP), &bmp);
+    if (GetObject(hbmp, sizeof(BITMAP), &bmp) == 0)
+        return NULL;
+
     cBits = ((WORD)bmp.bmPlanes * (WORD)bmp.bmBitsPixel);
 
 TrySmallerDIB:
@@ -1809,20 +1978,12 @@ HBITMAP CopyBmp(
 
     if (pdib = DIBFromBitmap(hbmpOrg, ghdcBits2)) {
 
-        if (LR_flags & LR_COPYRETURNORG) {
+#if 0  // Win-9x comments this code out
+#error Unsupported original resource branch
+#line 4673
+#endif
 
-            DWORD bpp = GetIcoCurBpp(LR_flags);
-
-            if ((cxNew == 0 || cxNew == pdib->biWidth)  &&
-                (cyNew == 0 || cyNew == pdib->biHeight) &&
-                (bpp == 0 || bpp == pdib->biBitCount)) {
-
-                hbmNew = hbmpOrg;
-            }
-        }
-
-        if (hbmNew == NULL)
-            hbmNew = ConvertDIBBitmap(pdib, cxNew, cyNew, LR_flags, NULL, NULL);
+        hbmNew = ConvertDIBBitmap(pdib, cxNew, cyNew, LR_flags, NULL, NULL);
 
         UserLocalFree(pdib);
     }
@@ -1834,17 +1995,7 @@ HBITMAP CopyBmp(
 
     return hbmNew;
 }
-#endif
-
-#line 4516
-#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
-#line 4517
-#error Excluded original disabled image-copy branch
-#line 4519
-#endif
-
-#if !defined(WOW_ORIGINAL_DIALOG_TEMPLATE)
-#line 4538
+#line 5021
 /***************************************************************************\
 * RtlGetIdFromDirectory
 *
@@ -1881,12 +2032,6 @@ int RtlGetIdFromDirectory(
     cxDesired = GetIcoCurWidth(cxDesired, fIcon, LR_flags, 0);
     cyDesired = GetIcoCurHeight(cyDesired, fIcon, LR_flags, 0);
 
-#if 0 //CHRISWIL : oemInfo.fColorCursors doesn't exist on NT.
-#line 4575
-#error Excluded original disabled directory branch
-#line 4577
-#endif
-
     bpp = GetIcoCurBpp(LR_flags);
 
     /*
@@ -1906,5 +2051,4 @@ int RtlGetIdFromDirectory(
 
     return ((LPRESDIR)(lprsd + iImage))->idIcon;
 }
-
 #endif
