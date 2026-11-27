@@ -58,3 +58,5 @@ The audit observed concurrent dpmiint.c ownership/flag changes and reviewed that
 [S12 P3 COMMAND miscellaneous receipt](s12-p3-result.json).
 
 [S12 P4 DEM Full checkpoint receipt](s12-p4-result.json).
+
+[S12 P5 LFN original restoration receipt](s12-p5-result.json).

@@ -2087,3 +2087,5 @@ post-publication targeted checks.
 [S12 P3 COMMAND miscellaneous receipt](evidence/t485-h-repair/s12-p3-result.json).
 
 [S12 P4 DEM Full checkpoint receipt](evidence/t485-h-repair/s12-p4-result.json).
+
+[S12 P5 LFN original restoration receipt](evidence/t485-h-repair/s12-p5-result.json).

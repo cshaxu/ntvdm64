@@ -6,8 +6,8 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed10/48files57/645points;restored-delivered9,restored-local0,
-residual-reviewed48,unreviewed588.
+Reviewed12/48files61/645points;restored-delivered9,restored-local3,
+residual-reviewed49,unreviewed584.
 Delivered/pushed10files57points through d74c534ca.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
@@ -24,8 +24,8 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 8 | src/mvdm-host/dos/dem/dem.h | 1 | P4 delivered d74c534ca |
 | 9 | src/mvdm-host/dos/dem/demgset.c | 4 | P4 delivered d74c534ca |
 | 10 | src/mvdm-host/dos/dem/demhndl.c | 12 | P4 delivered d74c534ca |
-| 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | Pending |
-| 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | Pending |
+| 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | P5 restored/verified; commit pending |
+| 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | P5 reduced/verified; commit pending |
 | 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | Pending |
 | 14 | src/mvdm-host/inc/dbgexp.h | 1 | Pending |
 | 15 | src/mvdm-host/inc/demexp.h | 3 | Pending |
@@ -310,3 +310,31 @@ are now delivered;9restored48residual588unreviewed. Last Full checkpoint is
 file10,runtime5,23/23 PASS. Remaining38files;next11demlfn.c. Census remains
 702points31666lines,down101points143lines. Only receipt state changes after
 Full;no repeated build,publication or runtime verification is required.
+
+## P5 LFN ABI whole-file restoration
+
+File11 demlfn.c2/4->0/0:restore XP pointer casts at both ANSI/OEM bindings.
+R00098/R00099 are restored locally;the historical failure belongs to the
+calling convention in the typedef,not the presence of these casts.
+File12 demlfn.h2/4->1/2:restore original PVOID argument (R00101);retain
+NTAPI (R00100). Native x86 pointer argument layout is unchanged. This is the
+admitted MSVC x86 ABI,not a claim of portability across arbitrary C ABIs.
+Both files have zero error exclusions;line counts and logical lines remain XP.
+Production object code/relocations are compared before/after the final build;
+final published package runs existing private-desktop WOW startup coverage.
+
+Batch4/8->1/2,reduction3points6lines. S12current699/31660,cumulative104/149.
+Reviewed12files61points:9restored-delivered3restored-local49residual584unreviewed.
+Delivered still10files57points. Owner21176 runs cached full build,dual runtime6
+publication and targeted verification. Full just passed at file10/runtime5;
+not repeated. No guest changes or new provider/shim. Next13demsrch.c after
+P5 delivery. P5 commit/push remain pending.
+
+### P5 final verification
+
+[Receipt](s12-p5-result.json):cached full build,dual runtime6 publication26hashes,
+83production code sections20743bytes plus relocations identical,and actual
+private-desktop WINMINE window PASS. Source file is byte-exact XP;header only
+NTAPI remains. Both retain original lines and have no error exclusions.
+No Full repeat,new test framework,wrapper or guest modifications. Three frozen
+points restored;one ABI residual remains pending owner decision. Commit/push pending.

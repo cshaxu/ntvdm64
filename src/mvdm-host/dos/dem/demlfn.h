@@ -172,7 +172,7 @@ typedef NTSTATUS (*PFNUNICODESTRINGTODESTSTRING)(
 
 typedef NTSTATUS (NTAPI *PFNSRCSTRINGTOUNICODESTRING)(
    PUNICODE_STRING pUnicodeString,  // counted unicode string -- returned
-   PCANSI_STRING pSrcString,                // oem or ansi string to convert
+   PVOID pSrcString,                // oem or ansi string to convert
    BOOLEAN fAllocateDestination);   // allocate destination dynamically ?
 
 

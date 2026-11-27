@@ -215,11 +215,11 @@ demSetLFNApiTranslation(BOOL fIsAnsi)
 {
    if (fIsAnsi) {
       pfnUnicodeStringToDestString = (PFNUNICODESTRINGTODESTSTRING) DemUnicodeStringToAnsiString;
-      pfnSrcStringToUnicodeString  = DemAnsiStringToUnicodeString;
+      pfnSrcStringToUnicodeString  = (PFNSRCSTRINGTOUNICODESTRING)  DemAnsiStringToUnicodeString;
    }
    else {
       pfnUnicodeStringToDestString = (PFNUNICODESTRINGTODESTSTRING) DemUnicodeStringToOemString;
-      pfnSrcStringToUnicodeString  = DemOemStringToUnicodeString;
+      pfnSrcStringToUnicodeString  = (PFNSRCSTRINGTOUNICODESTRING)  DemOemStringToUnicodeString;
    }
 }
 

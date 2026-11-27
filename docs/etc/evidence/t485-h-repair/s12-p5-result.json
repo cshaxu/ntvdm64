@@ -1,0 +1,698 @@
+{
+  "task": "M0 T485 S12 P5",
+  "state": "final-verified-published-commit-pending",
+  "package": "build/t485-s12/runtime6",
+  "files": [
+    {
+      "path": "src/mvdm-host/dos/dem/demlfn.c",
+      "sha256": "afb0a9b4fadadcebceab92d485e81cf55dbd65daa4256c4cdabdac00afb660e2",
+      "before": {
+        "points": 2,
+        "lines": 4
+      },
+      "after": {
+        "points": 0,
+        "lines": 0
+      }
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demlfn.h",
+      "sha256": "c76518c83f6d0b9d97d4c6e4808c08cdfd1a0e1660b185576bb6d302abdf78ee",
+      "before": {
+        "points": 2,
+        "lines": 4
+      },
+      "after": {
+        "points": 1,
+        "lines": 2
+      }
+    }
+  ],
+  "restored": [
+    "HXP-R-00098",
+    "HXP-R-00099",
+    "HXP-R-00101"
+  ],
+  "residual": [
+    "HXP-R-00100"
+  ],
+  "diff": {
+    "reduction": {
+      "points": 3,
+      "lines": 6
+    },
+    "s12_current": {
+      "points": 699,
+      "lines": 31660
+    },
+    "s12_reduction": {
+      "points": 104,
+      "lines": 149
+    }
+  },
+  "verification": {
+    "build": "PASS cached full",
+    "publication": [
+      {
+        "path": "assets\\release\\NTVDMD.DLL",
+        "sha256": "ED3993631D28FEB7CBCD8390B3A6B9699C9F48B12CD299C4710DDE34389BB24C",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+        "sha256": "ED3993631D28FEB7CBCD8390B3A6B9699C9F48B12CD299C4710DDE34389BB24C",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VJOY.DLL",
+        "sha256": "CC6DD3A64CD16021CAE276E88DB1FFB929AC058DD87FF52982CAD089FAD318E1",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+        "sha256": "CC6DD3A64CD16021CAE276E88DB1FFB929AC058DD87FF52982CAD089FAD318E1",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "0936DB88A14417FAE8401A43E20FAAC086D6F78CCDD4E8DD9A386AB457499CAD",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+        "sha256": "0936DB88A14417FAE8401A43E20FAAC086D6F78CCDD4E8DD9A386AB457499CAD",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "783B960350794EEFA474F8DF3496545C2E162F4C7C732A8202D2BDC936536FE7",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+        "sha256": "783B960350794EEFA474F8DF3496545C2E162F4C7C732A8202D2BDC936536FE7",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "D40DB0F605B169C96A345408AA19C4B5212D0BF9D0BD64EFB87F6E3530CDFE27",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+        "sha256": "D40DB0F605B169C96A345408AA19C4B5212D0BF9D0BD64EFB87F6E3530CDFE27",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "C3DAFE39A648FB0D846CADD18FCAAAAE120867A599001245E81B64D1F80C80D4",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+        "sha256": "C3DAFE39A648FB0D846CADD18FCAAAAE120867A599001245E81B64D1F80C80D4",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "58911BEBEB054E1FF55D83106CE0B8F5126235CE30EC8ED8A921AADC227DD88D",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+        "sha256": "58911BEBEB054E1FF55D83106CE0B8F5126235CE30EC8ED8A921AADC227DD88D",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "176E3EFF9EF7D81ED44A29FDEC0485C0D7A5516ABD20BA10880E7A550E12D635",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+        "sha256": "176E3EFF9EF7D81ED44A29FDEC0485C0D7A5516ABD20BA10880E7A550E12D635",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "2AB89EBA4659202B2F1F6C0F855F17A65F76AE41835DA8583B28D479E927B350",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+        "sha256": "2AB89EBA4659202B2F1F6C0F855F17A65F76AE41835DA8583B28D479E927B350",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "6D54A598E4853BFFD634D0789667597951B90B63FBC85957CE0E8CFB1C0791B6",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+        "sha256": "6D54A598E4853BFFD634D0789667597951B90B63FBC85957CE0E8CFB1C0791B6",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "F13F219FCBCA04254655C7F299611385A08D839FBDEFF079796B4B8F359DC0DA",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+        "sha256": "F13F219FCBCA04254655C7F299611385A08D839FBDEFF079796B4B8F359DC0DA",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "4E6F6C95D375AEED8B47ABA27B9B23BDB6271EE04C3E6552805786F0E3EF4D80",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+        "sha256": "4E6F6C95D375AEED8B47ABA27B9B23BDB6271EE04C3E6552805786F0E3EF4D80",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "6ABEAF661199139E9C861DCE49A9E42CCCCBB18ED9249A04A336A7B7EA87BED0",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+        "sha256": "6ABEAF661199139E9C861DCE49A9E42CCCCBB18ED9249A04A336A7B7EA87BED0",
+        "pass": true
+      }
+    ],
+    "code_equivalence": {
+      "pass": true,
+      "executable_sections": 83,
+      "bytes": 20743,
+      "sections": [
+        [
+          ".text$mn",
+          18,
+          "b7881aadaea6eed1cf1d30b4779d0d8f76141591acf0c1ea848226060e4cdbe5",
+          "b47528dc8af46a7c9734c05b6e9f551e0cb356fb90ce1d3605c8eac57df81333"
+        ],
+        [
+          ".text$mn",
+          122,
+          "57d416f81606cd86da9ffefc1c2160b00f2e71330974643e4a4d9d8724670ae8",
+          "cb450978a78b2386a1da7864c9345481318df8b243dc55798d84efa44ead1235"
+        ],
+        [
+          ".text$mn",
+          3,
+          "4bc724f3b1d0caf4fe369c18cba3102e6c4ea057f63fe1587e3973134a7f755e",
+          "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        ],
+        [
+          ".text$mn",
+          524,
+          "8458b038f9ca8745f93982b39351e2f12f307465d675e6a79c98fe848b5742e6",
+          "60def862207aeb5afc34c0877af090bcba348a5155e0c3963480b98ccb289828"
+        ],
+        [
+          ".text$mn",
+          55,
+          "aeefa6e100e3e274c703a4d46c69e0e7ffd5920b11bd8e9b83503e0ec75a78b0",
+          "42ffcc4b32dea33c90821f73d38f622b7c9cf2ad3dad2085aa722aa0adfe827a"
+        ],
+        [
+          ".text$mn",
+          428,
+          "2cf2feb3d66ed8747f2001a318191289849fd498e8b311a18e1f877c304e42c9",
+          "c7cc68586affc9cb15258b1aed47a7c972cb75049ac65e832a93c6c5e3303ec9"
+        ],
+        [
+          ".text$mn",
+          153,
+          "d72402c286d7780bc2e91602920fe8e16311eb39f28286de3c7b275b4d359659",
+          "ab97c2b301cb9e08354ce719ea8f0505b8251f253ad212e15bcfd60c9ebad22d"
+        ],
+        [
+          ".text$mn",
+          56,
+          "9a14837b645f1faffc8be74aff820035256d44177a328f768ac6bd2f76c3ae1f",
+          "c8fe82266931e288652c2e68ff1fa96bc030720867449761a362dc4402c647d1"
+        ],
+        [
+          ".text$mn",
+          712,
+          "9790476eed771b428cef394c2640f3c2610c9181bdba0e53c7b57ac38ac67704",
+          "48a24a6d12ecdbd263f9f9f7193e9b4b319d6f13f0af0cb5e5ba86770db23e1b"
+        ],
+        [
+          ".text$mn",
+          116,
+          "bdc488b02556f797d62a4e175b067caee83133fc0476699f68cfa7384ff7bb3b",
+          "14b8f079c252f001ecb20cb946c2d844dc7f6cc0d6fe8c56c6a925b9f40dcd99"
+        ],
+        [
+          ".text$mn",
+          586,
+          "aa3288682146dee0799412954ddcd99e2395c612a51c97a7189eea90c32e9085",
+          "527a1b94992902b10aa4558093b81bf42720ce6f5eed77137e298d984ca9109e"
+        ],
+        [
+          ".text$mn",
+          199,
+          "0f3cf4c0828c1896deac078809eedac917bf004f9bc47d56ca58417d1a842662",
+          "af0762d323d5d810cb89fc86ad641f3d159489f781ed9b6fcb9435ca404ddb31"
+        ],
+        [
+          ".text$mn",
+          3177,
+          "a636798276ad21879cd5eb52b75e2c3a1fbcc45a51b25d6968688edb726e9a57",
+          "62c5003e3543ccbc29425e1c45b244e19cec8d222d77d7756a0aed17ff6bd7cd"
+        ],
+        [
+          ".text$mn",
+          42,
+          "2e2e70b1028b6a29eefa8e98ce8a38be340506f694daedefbd58a952c23822b1",
+          "3279b1d58854bb31a949b13edf7a1b28be3f3933c403af16b9c7074a05538050"
+        ],
+        [
+          ".text$mn",
+          522,
+          "819ecff79b54390e05a0d4af95041c45ce1312bc91541e3c1ec0012b794de2e9",
+          "3ed391300690cfeb16d4c22d578b893ad2cff18067ee95e11d814d7e8529edeb"
+        ],
+        [
+          ".text$mn",
+          102,
+          "bc15d663d62089b1233622403d32c0647b98a32afe1cce3db5590b693376f497",
+          "3e446b3a5ad318674e9bd7ae31c1473fc623cda326f1119f596bd713c3cef9a0"
+        ],
+        [
+          ".text$mn",
+          394,
+          "e75cb5e3decba9230c5bc05b83feeba5ab69efb13df742556600873eec96a181",
+          "f0ffc65540c94a3b631e3f54a78061a8facd1c5f09a463a7be3d2cc8cee3d2ba"
+        ],
+        [
+          ".text$mn",
+          288,
+          "821d642edaac3a31c72504efd1fc60e48a528788798d35972589b20c851a6bca",
+          "a73864ae7410c9429d1ab727d7fa62ac4491ae1dbe8a7dd642b793e44b1c0c68"
+        ],
+        [
+          ".text$mn",
+          476,
+          "e5a64000a59b1ccfc99caf7c94531ef94e32bf7ab5d0108f0563b6753215aab4",
+          "91784d640593c1a1351f2abb59ff2eca8d3d8773d0285e59536a6bf0790c21bb"
+        ],
+        [
+          ".text$mn",
+          124,
+          "834fb8152dbfe6b20a409a7fcf7291ceac7ac960ba4f2a045ccbe9e07e5cb443",
+          "fe8b1c0cba07236318728723af58b96031c2078f6b9677517513ef340077e4c6"
+        ],
+        [
+          ".text$mn",
+          58,
+          "d14c635b10b590fb0056d88d2ef3b00efe8515f6383437b294d66fef5ac843f8",
+          "436c51ed92b749862c095565e56a3a646e9e5be506b0766bd23e97bee18ad3ee"
+        ],
+        [
+          ".text$mn",
+          442,
+          "2c2b1900ae1cb6f8f5502cb76494f474bf6a5bffabdc33a7978e3376c8e64b0d",
+          "402411da345c1a4f99f243969798386ed7eb23aae4230a4e913951f51d4cbe2b"
+        ],
+        [
+          ".text$mn",
+          984,
+          "bd9f93ae2d23be05b6b1f0705a242efbcadda02140dfaa99a9b3e7ff6d85ad3f",
+          "fd0074dec891415aa1b42b28cc2256f6556b83ae8fbde861555e197b3b29f24a"
+        ],
+        [
+          ".text$mn",
+          85,
+          "fac70cf51369e39261dd8045d769eb9748c969ba0621288a0539f42cc00db0e0",
+          "6765931cb57a3a1682b21b90cecedf4c61fa26fe56d6f337b3ba78d6fc5b685b"
+        ],
+        [
+          ".text$mn",
+          237,
+          "97c197a223dda1c4df0815f48b664f7213953fa4edd9d22524c99da7d0cf1b01",
+          "2fa6e9594c7662c91f40636ac3c3c8e063adae94454d0248372f70fc77937dda"
+        ],
+        [
+          ".text$mn",
+          744,
+          "3413d60f8f572a2e586fc270d0f4c18db289c68241fd3ac4e1c12c28583e8aaf",
+          "1defe3ce21e4a9d3c3b5b97d395217194f8531e440fa2e4cbe112d2a2cb3f739"
+        ],
+        [
+          ".text$mn",
+          489,
+          "e7deba4e301b351016cccc172efa007c2b39d745c49f40c032bbf871b49c3a59",
+          "4389babefd5991e2a0a262a488f6005ff91b627174ad0daa2ece6c165d98e59e"
+        ],
+        [
+          ".text$mn",
+          58,
+          "77c5227ff36e00aeea854f89099823ac05ce912ebc7aae6a9c8c304c21f1c206",
+          "0eaf9099bd4651ae3810bdb9bf9a2f9f86794216c710ccaad04724bf64db364b"
+        ],
+        [
+          ".text$mn",
+          114,
+          "abc64048f55c9b2ab04a091b21cda987589174ecb656e8ef3e923d2cfcafad96",
+          "d097fd882a97f5121e63c115f9957a2c39740d5e4f10124141822af7565aac12"
+        ],
+        [
+          ".text$mn",
+          476,
+          "a8b1909c78259bf4510a2ca13c96fd23fa86f5f38e6021413e2b4aa92fefae21",
+          "b15af0c48a2a9dd3b4c6c5252b87e6c632314e317bbec08a5054d4e11c7fff7f"
+        ],
+        [
+          ".text$mn",
+          300,
+          "07e8da5142b4873df2a955a0da4548cef49864b9896a14a318deef0da004e9a8",
+          "9a260fe06d2bc0cd285b1fe08429b9bc0b4f173698cb7abc64a53e0dd46f8e05"
+        ],
+        [
+          ".text$mn",
+          43,
+          "03c1b938c689dcc9031b1f89b47ba990e6fb9b5722a8695231d3845bca48f73d",
+          "ed5d54b58023cc66b8fb4fd6ad1df57fefb5c3d4a8a107bc44fa295a6dfaba28"
+        ],
+        [
+          ".text$mn",
+          74,
+          "71f5603a3b742fccd85f7fa405e4b7ccae1a8c8a007f42b39091a95f6294cfe5",
+          "43212589dc24bdc15665742dabcca296102aea347086362079026d838fd6fc04"
+        ],
+        [
+          ".text$mn",
+          84,
+          "e7aa437c00585e2e085b219f2dc255e0d99837cb51e4b160b3c7c372faa32f5a",
+          "f1be7971452747b60a1804f1cb564a3c71b4a1f7466eb82962a489b14ef75559"
+        ],
+        [
+          ".text$mn",
+          112,
+          "03c128e34a5865354856d1e27c1368c9f720aa6b161b679e23ccad3ed315045b",
+          "344b9b8e15d46eebe0be1b2c0d280d60d1cd74390a171a5168d2ff5938b25fc9"
+        ],
+        [
+          ".text$mn",
+          67,
+          "f7cf0272b97378c4afba3138768884126a53e4088f1a8d3bb7204b548ea8cade",
+          "8b35dbc0c9ee4eef2399b560b495f504cacd060ef6b79ce514bbd40188417e40"
+        ],
+        [
+          ".text$mn",
+          289,
+          "2dd3270dfe4dc237dc5a5662f8a37bc64e3cccf2fcad02d5aa3b08c8acf3449b",
+          "3ada68a3a8482cc4ea54f9359db955ef0a420523253087db1a78b833eb11ce3b"
+        ],
+        [
+          ".text$mn",
+          202,
+          "92193769201e6b63931ea9f09847fca2546b13f8d6fce909f83f5434d4b70ef0",
+          "c6aea1116663de2a191a34060f7325c1d54952a82a121b74a1b8e5c0a1643005"
+        ],
+        [
+          ".text$mn",
+          381,
+          "154a8a771326a1a3b05ebbb7c3a445bd4dfc5bcfe85f2f419a5f73a8e7047301",
+          "83aa3bc829363fa1029c6fc709ffea212e9abace317b1ed5b4a391c8c6c284b3"
+        ],
+        [
+          ".text$mn",
+          122,
+          "3bd1ced8d690bd38ebc99cba94f78a4894b07dfdd8c32258a6251abc3dfe878b",
+          "0ea3fd8a34d05bd920d783e3c7270ce543dd1517c9988a4d16c5a9f1fdf0924e"
+        ],
+        [
+          ".text$mn",
+          309,
+          "6be6f7440db7957d0b9eac43f45152beab0e80f36b028d7a6e6477c250c1f394",
+          "c26067c635194bfa7f94154781a046b1237d1e43a158dcbfc9306c07d3b8da4a"
+        ],
+        [
+          ".text$mn",
+          58,
+          "60dfc1933a76584b1a913666f2f78842cb5b036726e713c22ec2709c0ed62cf1",
+          "0e8abdeccac4a619ad434da1da01aebb3fe3fc8a800fd3be1a13c046ad909fef"
+        ],
+        [
+          ".text$mn",
+          132,
+          "a707f0b992784ebffb0a77fe3254f2c7d4c71e22ad87f665d18f2c07f0d7111c",
+          "cfc813be8c9c149393957ff9ad8070ffc5150c07fcb9cb3c17de8a6d308fa4bb"
+        ],
+        [
+          ".text$mn",
+          44,
+          "8fa030b7831a5d1cbf817c02fa232d6cf1a702493f95b13fbeafc18b2ac73c62",
+          "d97f5177058cfdd39171915f3dd6da0902765b3c2c7504662c64af11169ad05f"
+        ],
+        [
+          ".text$mn",
+          182,
+          "9e88cd14ac6cf0f10eb6cccd4d700a05dc7fa26ee60f15974449304b999eff4e",
+          "0792a1dddf518fa4679754e971d9795f2eb377d07a30223388a1dcd0f8dc7ccb"
+        ],
+        [
+          ".text$mn",
+          143,
+          "b5e195dacb3c90f0157e1b264dcf4f39d63c7f6a0c854a0fd25b3bee6bcc2370",
+          "52e24e1b0caa944b971405effee4a60960686d1b11448ec43ff6a99d833e648d"
+        ],
+        [
+          ".text$mn",
+          976,
+          "eb20c7536d3b465c2d1b5e4ce0a8ed818a6b2a74908760ca8fb2ca73fe30509c",
+          "0ca026da95f285979a33c24d1ffd9965a106e426c34861f1a6f6f8d68240df24"
+        ],
+        [
+          ".text$mn",
+          88,
+          "8639e509c67251a888f71ac9f49d1d8a9a4e16f4b61aac5ff03e0525084faa33",
+          "fa087b994d38b7df719137b960016a575a6b749718b834f9cb39b98064820b59"
+        ],
+        [
+          ".text$mn",
+          167,
+          "56a1748aa50bc50cc556457b1aa5f00aba59a3b55249932f474b53f5c83c368d",
+          "0ef2d1087a35974d5974511421a5090909ec79bf2aa1af83deb37fc179fa5d4c"
+        ],
+        [
+          ".text$mn",
+          373,
+          "77a52de5a322d9ccba8e54db673819403a54c2b7bdfc267e3a1cc3c73c9eb2a2",
+          "c18868618e3d7cc52080a39ce204b13366b82999fbf2333cc198384cafb0a2d5"
+        ],
+        [
+          ".text$mn",
+          230,
+          "a9b50fb284a318dc4988c9c2725dd3569c3ace8940fe1f058043df23c38ed606",
+          "ee5c435e60bf8e30f2cfec1fd744a1773e284904e93cec5699e6f2c38d48c9a0"
+        ],
+        [
+          ".text$mn",
+          46,
+          "e908f333d0b798f50b57ca7cc59fe9fd121dabc046ae8e14f625bbd614889c45",
+          "4d7bb23caa6d6139159d155584aece2de0d42f5cefb238b82abf8273f6f20d7a"
+        ],
+        [
+          ".text$mn",
+          116,
+          "bdc488b02556f797d62a4e175b067caee83133fc0476699f68cfa7384ff7bb3b",
+          "14b8f079c252f001ecb20cb946c2d844dc7f6cc0d6fe8c56c6a925b9f40dcd99"
+        ],
+        [
+          ".text$mn",
+          167,
+          "c4c39f7b710a2ec78c37771a52b4a4b2a1c7f912d5148f845ef2f312684e9c4a",
+          "050a66c61fc541cb84d6375bfd9d72f69e9695550b4ef58e361e6b0f9601897b"
+        ],
+        [
+          ".text$mn",
+          332,
+          "6442b89b895fbf0be4486576b7660fde6c72233bf6393403c37f60ca0cff9f84",
+          "d04caf46e35669dfc9f005b19c412e7fe7f184856ffcc779412437e7efa49177"
+        ],
+        [
+          ".text$mn",
+          217,
+          "6c21e6c6aac72cd7d0cb32d0bb719cd5608bc86790b46ef99ce72e1c48b77a03",
+          "4070e214eaaf4c1b189a4bae316566d7bf694186f0f485a6e330148607e3de01"
+        ],
+        [
+          ".text$mn",
+          168,
+          "7a1d575e8692d351948156f0245ea1655a955eb4832e93a92e8d1ec69d37f902",
+          "1eedb63a044fe878cff5340ddf5ea5838d712827285f31eb88ad3b39f4ca8313"
+        ],
+        [
+          ".text$mn",
+          81,
+          "f5b05c1121ec0bfe9b6b4bd8d347a5db67a2a93e4fa749fbd6a3fd1cd0ce94f7",
+          "69ce6961d615461e4d6f5e031be5674de5ea99eb5cd373e657250865bae7ebc0"
+        ],
+        [
+          ".text$mn",
+          179,
+          "154849ee5965e7dcde1f4ea1ac9551aff1dacfd1fc5257c5717c72e2c87ab10a",
+          "dde6417f3f40ea46a1673f3424a9fe9389a803cd23ceea8e9fbf2317d94fa072"
+        ],
+        [
+          ".text$mn",
+          448,
+          "966fea9aef6d4063d421df311f7aa4af1056f2396a05305ef7fac404db656322",
+          "981095901f8c9a33b922d749bdf12e2b950245b6a3e7ac5f4814ac4e63cda74a"
+        ],
+        [
+          ".text$mn",
+          62,
+          "b2e6b485f8c7f6c24ab0ea4a8e89ce75ea9f2c490edd330016f2b1774871df57",
+          "8b35dbc0c9ee4eef2399b560b495f504cacd060ef6b79ce514bbd40188417e40"
+        ],
+        [
+          ".text$mn",
+          43,
+          "c9f9bc81610f060aba052916b3d706c5476a6a95873a94b0adff4c4d26087efa",
+          "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        ],
+        [
+          ".text$mn",
+          73,
+          "2b48ea7da754c2de81a57f7e22a03c322cd8143996a98ac73d69d34f61ec486d",
+          "4667d852b5ee1416fcd5e27d73f36e0803fe65ccfcc67e8d0943349c57db9ce1"
+        ],
+        [
+          ".text$mn",
+          10,
+          "67b44b1bae6c6afda582011af35a49f4b1c9f93d6d152d1e4daa662390772e77",
+          "fc67de21da5f8ff44e769c8cc65f6799fa8d11ad6b8a9d2075b1c4e5b357525f"
+        ],
+        [
+          ".text$mn",
+          125,
+          "e068e345e1ab2a3808fbf3a78f6d3d65866ffb428cd217f7d94609349d7c3d94",
+          "07e20d1c1ef600a162f16038417dc052254cdac62a4b714087b009de4fbb3258"
+        ],
+        [
+          ".text$mn",
+          376,
+          "c6890c405a55a9d84b0678baccf7598ee892ea3503fc5cb7d824d42460bfbb95",
+          "bf02b38e16a89e0291d2570c127976784efdea560c3135c16bd41cf8bbe057e4"
+        ],
+        [
+          ".text$mn",
+          341,
+          "e1927af9da3e93dc5843df16e3e48deb9dbd2a7907f837b1179ccc84320a7cd8",
+          "c9809deb6d8432e2f0ae64192a670bae128b53e943414d31b4b21ed828feb502"
+        ],
+        [
+          ".text$mn",
+          250,
+          "0ac6d54a730f9e0a38992f639d4470981a5d7c3e57ab392ca83792b50c573f37",
+          "762db88087b2024eff5c394dcc20bff18374a5c4e3d37a18eb425c03189ffa12"
+        ],
+        [
+          ".text$mn",
+          93,
+          "a02f3e22fb69ed868c438b9e50268e14583da8d9bdd2f9e1eb18c7992eaced80",
+          "d0d467953ea3a2e43f7bf945f857ce2c94460fd241d06039a32c2d4482a88dbd"
+        ],
+        [
+          ".text$mn",
+          12,
+          "07c3cbb765bcbe55ad6a894f464242fcbd3541bae0d93ef1cdf6c83f5fa921a7",
+          "a2d3aabdd4cdd5de8ad99daf5afd15eb05b9cba067ef5435cd0fc2b6304b4358"
+        ],
+        [
+          ".text$mn",
+          114,
+          "aa58ce0b8e574d02526354c32388eb93c87c92c83f3a567df9474f69e74cab3c",
+          "8fd08a696e3f9a53fd7d16335526882e8429b258c643fa525fa046b48cceb4c4"
+        ],
+        [
+          ".text$mn",
+          131,
+          "5684cd1ed199bbdcdbb09428e81bcc2a3cd44d0474b1a09ccb7b8034a0d88dc0",
+          "cf38c13e6640c7919bcfc4fffd1b7ea4016e3cd1bf5d84c90b6903a848d16fe8"
+        ],
+        [
+          ".text$mn",
+          124,
+          "d7ce709ca43ce7386ba73bda0a46532612dd4f6ebf403b793433ca288ff1aa74",
+          "617f363de2971ad344514756b6741124fa8b5dfe2312ee2b4c73d25f186fe7c3"
+        ],
+        [
+          ".text$mn",
+          124,
+          "a540b6c2d9e2a6ea5a609a709d1c2d0fb0086a23adcc7652408ff3272b037828",
+          "bac1fe3b7b842d4ad19a04f0f156318307073112732f8c0a61cc69e4b2575a13"
+        ],
+        [
+          ".text$mn",
+          117,
+          "7cb0342e1c62af8cf6003607f53ec2d7f1e18d19822dfb6a4bc6f06083bd7834",
+          "72f11ad2150b5aac17c76cf49a1c3c5866639bd0ebb5645b46234f38b7c2d74e"
+        ],
+        [
+          ".text$mn",
+          35,
+          "48e321dc32cc04d63c7f9fd15d6286acc0d7cd431ba21e8fc0c09f1ee12fe537",
+          "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        ],
+        [
+          ".text$mn",
+          150,
+          "3a83f676e607096c4e06d51fd6225c61c608ce05a77ac444f77df765f7a93a6e",
+          "b978ffce506e5d92f81e617ba0f08a150e23dbebdce6b70f975c837c04823566"
+        ],
+        [
+          ".text$mn",
+          214,
+          "909c9f13aa2aa74362abb2223593d2b2d5dae88d747336e42ab8f2a045bb042a",
+          "0a16befaf65fa8fc6106b521215b4993a43a61c6a4667db5d34505f1ad3720b3"
+        ],
+        [
+          ".text$mn",
+          64,
+          "28177f94a5ca00d57380118c2f992119557cc70baa882b34503f5b52292a6975",
+          "51dfd31444622f3e218a2d4a5b48786b67fb0dd96a65df6c02a21c8fce4aab48"
+        ],
+        [
+          ".text$mn",
+          160,
+          "459d5c75b48533e3d24967fec28f22af55ef4808a97c18c8896a08d9e02d37a9",
+          "0e01b425724b0ff79f3ec3bdf0481089f6febf5b5aa717e02230c23846f55dc6"
+        ],
+        [
+          ".text$mn",
+          119,
+          "c38fb6c641694fa9341580b5e3d6701a4ccfa8fe2178b6d75e3aa74d70f50a38",
+          "67aaf967cc0d26fb6525407ad24ff68a2dbd0e37d358f1a5c376b90784691fea"
+        ],
+        [
+          ".text$mn",
+          59,
+          "7de53ba3f2264f5169e17e3b3a942ff4d81942a898c69f099a49fed08606776f",
+          "bac199c0070a890609beb833cf96358348f1197fd3deb25fd74fcf814291edcd"
+        ],
+        [
+          ".text$mn",
+          33,
+          "ba6cb7fa456893d82eb0e413e02d3db30b0290ae58193345541dcd1b199dfb69",
+          "c462ba9a923cf8f1a0f245319c24db0bd5938f90eb17b81caf5b51f25f205c94"
+        ]
+      ]
+    },
+    "lines": "Source byte-exact XP;header only one same-line NTAPI insertion;zero exclusions and no line drift",
+    "wow": "PASS exact visible WINMINE application window and live worker in private desktop on final package;not gameplay or normal-exit acceptance",
+    "full": "Not repeated;last checkpoint file10 runtime5 Full23/23",
+    "logs": "build/t485-s12/p5/final"
+  },
+  "quality_review": "Keep historical proven NTAPI stack cleanup correction;restore original pointer casts and PVOID ABI under admitted MSVC x86. Production code and relocations identical across83sections20743bytes. No new provider,state,guest edits or tests."
+}

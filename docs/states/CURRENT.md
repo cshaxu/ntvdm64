@@ -32,16 +32,16 @@ On 2026-11-26 the owner inserted the [H-series repair sequence](../etc/operation
 
 ## S12 Ordered Progress
 
-[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):10/48files,
-57/645points source-reviewed;9restored-delivered,0restored-local,48residual,
-588unreviewed. Delivered10files57points through d74c534ca.
-P4 four whole DEM files complete:77/168->29/103 (-48points/-65lines).
-S12 census803/31809->702/31666 (-101points/-143lines).
-Ten-file checkpoint:cached build,246line witnesses and dual runtime5
-publication26hashes and Full23/23 PASS;[P4 receipt](../etc/evidence/t485-h-repair/s12-p4-result.json). Committed/pushed d74c534ca.
+[S12 list](../etc/evidence/t485-h-repair/s12-progress.md):12/48files,
+61/645points source-reviewed;9restored-delivered,3restored-local,49residual,
+584unreviewed. Delivered10files57points through d74c534ca.
+P5 LFN source/header4/8->1/2 (-3points/-6lines);source byte-exact XP,
+header retains only required NTAPI. S12 census803/31809->699/31660 (-104/-149).
+[P5 receipt](../etc/evidence/t485-h-repair/s12-p5-result.json):cached build,
+production object equivalence,dual runtime6 publication and targeted WOW PASS.
+Commit/push pending.
 Last Full checkpoint:file10,runtime5,23/23. No successful gate repeated.
-Nextfile11 demlfn.c;38files remain.
-Migration39/159;N004 gated on S13.
+Nextfile13demsrch.c;36files remain. Migration39/159;N004 gated on S13.
 
 ## S11 Closure Record
 
