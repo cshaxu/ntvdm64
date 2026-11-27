@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall55/159 directories, H001-H036 and N001-N019. S15 runtime12 is the current
+overall55/159 directories, H001-H036 and N001-N019. S15 runtime13 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -127,6 +127,15 @@ since P9 Full24/24; no repeat Full. Overall55/159, S15 7/14. Next N020.
 Current census1315files,762exact,770nonerror same/545different,
 7746points/163445lines; delta0files,+1exact,+1same,-1different,-1point/-60lines.
 1231XP/84OpenNT. No #error/#line change or original guest modification.
+
+[P13 N020 first-file](../etc/evidence/t485-s1/n020-first.md) delivered:
+newres.h byte-exact XP at windows/core/w32inc; clres.c include follows with
+unchanged OpenNT baseline/diff. Cached build, runtime13 dual13-image26hash
+publication and Full24/24 passed. Ten-file checkpoint resets to zero.
+N0201/7 delivered, six remain; overall55/159 and S15 7/14. Next pif.h.
+Current census1315files,763exact,771nonerror same/544different,
+7745points/163285lines; delta0files,+1exact,+1same,-1different,-1point/-160lines.
+1232XP/83OpenNT. No #error/#line change. Win95 exit1 boundary remains.
 
 ## S14 Closure Record
 

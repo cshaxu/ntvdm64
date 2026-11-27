@@ -15,7 +15,7 @@
 #include "precomp.h"
 #pragma hdrstop
 #else
-#include "non-mvdm/public/internal/windows/inc/newres.h"
+#include "non-mvdm/windows/core/w32inc/newres.h"
 #ifndef WOW_BITMAP_FIXTURE_BINDINGS
 #include "wow_bitmap_bindings.h"
 #include "wow_menu_resource_bindings.h"

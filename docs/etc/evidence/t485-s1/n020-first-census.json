@@ -1,0 +1,48 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 762,
+    "nonerror_identical": 770,
+    "nonerror_different": 545,
+    "nonerror_points": 7746,
+    "nonerror_lines": 163445
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 763,
+    "nonerror_identical": 771,
+    "nonerror_different": 544,
+    "nonerror_points": 7745,
+    "nonerror_lines": 163285
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -160
+  },
+  "files": [
+    {
+      "before_path": "src/non-mvdm/public/internal/windows/inc/newres.h",
+      "path": "src/non-mvdm/windows/core/w32inc/newres.h",
+      "before_points": 1,
+      "before_lines": 160,
+      "after_points": 0,
+      "after_lines": 0,
+      "original_blob": "492f641b5fa984a47dac5c2c1f198e61e07361bf",
+      "baseline": "XP"
+    },
+    {
+      "before_path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "before_points": 1,
+      "before_lines": 6424,
+      "after_points": 1,
+      "after_lines": 6424,
+      "original_blob": "e6fd8db7f4ef05d5377143874bcb5a2a4ebd69ef",
+      "baseline": "OpenNT"
+    }
+  ]
+}

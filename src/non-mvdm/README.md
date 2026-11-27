@@ -2953,3 +2953,10 @@ wowcmndg.h and wowshlp.h use their XP public/internal/base/inc paths and
 original bytes. Shell's prshtp.h remains at its existing path for wmdisp32.
 [N019 evidence](../../docs/etc/evidence/t485-s1/n019.md) records the actual
 three-argument callback consumer, host WORD-to-DWORD boundary and verification.
+
+### T485 S15 N020 USER resource checkpoint
+
+newres.h is byte-exact XP at windows/core/w32inc; the USER clres.c resource
+consumer names that owner. Its own OpenNT baseline stays until N022 migration.
+[Evidence](../../docs/etc/evidence/t485-s1/n020-first.md) records the unchanged
+structure/packing contracts and final-package Full checkpoint. N0201/7 done.

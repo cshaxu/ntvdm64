@@ -2150,3 +2150,5 @@ post-publication targeted checks.
 - [T485 S15 N018 string declarations](evidence/t485-s1/n018.md): complete XP original, actual consumers and delivery evidence.
 
 - [N019 Shell declarations and callback ABI](evidence/t485-s1/n019.md).
+
+- [N020 USER resource declaration checkpoint](evidence/t485-s1/n020-first.md).
