@@ -1,6 +1,6 @@
 /*++
 
-Copyright (c) 1991-1996  Microsoft Corporation
+Copyright (c) 1991-1999 Microsoft Corporation
 
 Module Name:
 
@@ -17,11 +17,13 @@ Revision History:
 #ifndef _DLCAPI_
 #define _DLCAPI_
 
+#if _MSC_VER > 1000
+#pragma once
+#endif
+
 #ifdef __cplusplus
-#line 21
 #error Unsupported excluded original configuration
 #endif
-#line 23
 
 //
 // DLC Command Codes
@@ -903,10 +905,22 @@ AcsLan(
     OUT PLLC_CCB* ppBadCcb
     );
 
+LLC_STATUS
+APIENTRY
+GetAdapterNameFromNumber(
+    IN UINT AdapterNumber,
+    OUT LPTSTR pNdisName
+    );
+
+LLC_STATUS
+APIENTRY
+GetAdapterNumberFromName(
+    IN LPTSTR pNdisName,
+    OUT UINT *AdapterNumber
+    );
+
 #ifdef __cplusplus
-#line 905
 #error Unsupported excluded original configuration
 #endif
-#line 907
 
 #endif // _DLCAPI_

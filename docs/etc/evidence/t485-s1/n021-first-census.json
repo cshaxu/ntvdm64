@@ -1,0 +1,56 @@
+{
+  "before": {
+    "files": 1318,
+    "byte_identical": 767,
+    "nonerror_identical": 777,
+    "nonerror_different": 541,
+    "nonerror_points": 7731,
+    "nonerror_lines": 156836
+  },
+  "after": {
+    "files": 1318,
+    "byte_identical": 768,
+    "nonerror_identical": 779,
+    "nonerror_different": 539,
+    "nonerror_points": 7729,
+    "nonerror_lines": 154750
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 2,
+    "nonerror_different": -2,
+    "nonerror_points": -2,
+    "nonerror_lines": -2086
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/callconv.inc",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/devioctl.h",
+      "before_points": 1,
+      "before_lines": 270,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "before_points": 1,
+      "before_lines": 1816,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 2
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1243,
+    "OpenNT": 75
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "task": "M0 T485 S15 P20 N021 first three",
+  "runtime": "build/t485-s15/runtime20",
+  "build_exit": 0,
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "84F411C31D40B41F741C5B4D3F504A37BEE5AF8D530D6021B4A3A186702CD2F1",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "84F411C31D40B41F741C5B4D3F504A37BEE5AF8D530D6021B4A3A186702CD2F1",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "F3895A373CBCBC24B77D85A62106EAF4F16064FC316A7B60E2E181775C39DA00",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "F3895A373CBCBC24B77D85A62106EAF4F16064FC316A7B60E2E181775C39DA00",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "E885D62143A1CEFEC1074CDF19EB28051A29E5D96A7A0EFADCAC29AD2173B221",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "E885D62143A1CEFEC1074CDF19EB28051A29E5D96A7A0EFADCAC29AD2173B221",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "187F71E450E168B7B175D592C7DDA635B938D2188B197F0BA7424A72048F9B7A",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "187F71E450E168B7B175D592C7DDA635B938D2188B197F0BA7424A72048F9B7A",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "F7D17B56089A0DE4EB0694D66E66B07527DF75D3B95DC7C7E99D17CFC555870B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "F7D17B56089A0DE4EB0694D66E66B07527DF75D3B95DC7C7E99D17CFC555870B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "95B891192C2F16D98D0D3D6D9697486929EC7DF1E14EEC4BE965E8DA12D962BA",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "95B891192C2F16D98D0D3D6D9697486929EC7DF1E14EEC4BE965E8DA12D962BA",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "F01164552A6F627C31329496244384E95E3F2B252514608CF22D8029F2E7C047",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "F01164552A6F627C31329496244384E95E3F2B252514608CF22D8029F2E7C047",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "5C8E33A6DC37C467CD47C81C79E70A55BD0B8E5A46276BEC3E46872B0E6ADCA8",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "5C8E33A6DC37C467CD47C81C79E70A55BD0B8E5A46276BEC3E46872B0E6ADCA8",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "0B2E0A7836B06B8BA365C6A90D7D2500C2F5BB0D3DC1123F9F379E48EFA24977",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "0B2E0A7836B06B8BA365C6A90D7D2500C2F5BB0D3DC1123F9F379E48EFA24977",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "792390292C63B987ABC9DF2EB52EBC04FCBC350E0AC2EC2D02B5283DBBC2AC9F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "792390292C63B987ABC9DF2EB52EBC04FCBC350E0AC2EC2D02B5283DBBC2AC9F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "06BA5E323B96415F99CE8BD76710D117B4A57EC26D8ACF859574D399BD0CC2AA",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "06BA5E323B96415F99CE8BD76710D117B4A57EC26D8ACF859574D399BD0CC2AA",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "4EBE42A76353B3F69FCDADE6C4C8FBF95619CAA836E08487976412DDA52ED84F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "4EBE42A76353B3F69FCDADE6C4C8FBF95619CAA836E08487976412DDA52ED84F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "CBB46DFA924A372965F8170E3F92A0FF9341890B3A4B438BCFBF68AB37326CC2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "CBB46DFA924A372965F8170E3F92A0FF9341890B3A4B438BCFBF68AB37326CC2",
+      "pass": true
+    }
+  ],
+  "rap": "RAP product objects: 11 checks, 0 failures",
+  "lifecycle": "Both existing redirector fixtures exit0",
+  "netapi": {
+    "mode": "netapi",
+    "exit_code": 0,
+    "elapsed_ms": 13417
+  },
+  "census": {
+    "before": {
+      "files": 1318,
+      "byte_identical": 767,
+      "nonerror_identical": 777,
+      "nonerror_different": 541,
+      "nonerror_points": 7731,
+      "nonerror_lines": 156836
+    },
+    "after": {
+      "files": 1318,
+      "byte_identical": 768,
+      "nonerror_identical": 779,
+      "nonerror_different": 539,
+      "nonerror_points": 7729,
+      "nonerror_lines": 154750
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 1,
+      "nonerror_identical": 2,
+      "nonerror_different": -2,
+      "nonerror_points": -2,
+      "nonerror_lines": -2086
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/sdk/inc/callconv.inc",
+        "before_points": 0,
+        "before_lines": 0,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/devioctl.h",
+        "before_points": 1,
+        "before_lines": 270,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+        "before_points": 1,
+        "before_lines": 1816,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 2
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1243,
+      "OpenNT": 75
+    }
+  },
+  "Full": "Not repeated; three reviewed files since P19 Full24/24"
+}

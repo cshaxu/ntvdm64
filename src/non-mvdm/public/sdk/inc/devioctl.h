@@ -1,6 +1,6 @@
 /*++ BUILD Version: 0004    // Increment this if a change has global effects
 
-Copyright (c) 1992-1993  Microsoft Corporation
+Copyright (c) 1992-1999  Microsoft Corporation
 
 Module Name:
 
@@ -25,7 +25,7 @@ Revision History:
 #ifndef _DEVIOCTL_
 #define _DEVIOCTL_
 
-// begin_ntddk begin_nthal begin_ntifs
+// begin_ntddk begin_wdm begin_nthal begin_ntifs
 //
 // Define the various device type values.  Note that values used by Microsoft
 // Corporation are in the range 0-32767, and 32768-65535 are reserved for use
@@ -91,8 +91,7 @@ Revision History:
 #define FILE_DEVICE_SERENUM             0x00000037
 #define FILE_DEVICE_TERMSRV             0x00000038
 #define FILE_DEVICE_KSEC                0x00000039
-#define FILE_DEVICE_FIPS                0x0000003a
-#define FILE_DEVICE_INFINIBAND          0x0000003b
+#define FILE_DEVICE_FIPS		0x0000003A
 
 //
 // Macro definition for defining IOCTL and FSCTL function control codes.  Note
@@ -103,6 +102,11 @@ Revision History:
 #define CTL_CODE( DeviceType, Function, Method, Access ) (                 \
     ((DeviceType) << 16) | ((Access) << 14) | ((Function) << 2) | (Method) \
 )
+
+//
+// Macro to extract device type out of the device io control code
+//
+#define DEVICE_TYPE_FROM_CTL_CODE(ctrlCode)     (((ULONG)(ctrlCode & 0xffff0000)) >> 16)
 
 //
 // Define the method codes for how buffers are passed for I/O and FS controls
@@ -121,14 +125,19 @@ Revision History:
 // ntioapi.h as FILE_READ_DATA and FILE_WRITE_DATA. The values for these
 // constants *MUST* always be in sync.
 //
+//
+// FILE_SPECIAL_ACCESS is checked by the NT I/O system the same as FILE_ANY_ACCESS.
+// The file systems, however, may add additional access checks for I/O and FS controls
+// that use this value.
+//
 
 
-#define FILE_ANY_ACCESS           0
-#define FILE_SPECIAL_ACCESS       (FILE_ANY_ACCESS)
+#define FILE_ANY_ACCESS                 0
+#define FILE_SPECIAL_ACCESS    (FILE_ANY_ACCESS)
 #define FILE_READ_ACCESS          ( 0x0001 )    // file & pipe
 #define FILE_WRITE_ACCESS         ( 0x0002 )    // file & pipe
 
-// end_ntddk end_nthal end_ntifs
+// end_ntddk end_wdm end_nthal end_ntifs
 
 #endif // _DEVIOCTL_
 

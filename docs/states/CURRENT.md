@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall56/159 directories, H001-H036 and N001-N020. S15 runtime19 is the current
+overall56/159 directories, H001-H036 and N001-N020. S15 runtime20 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -46,14 +46,10 @@ packing/SMB/tstr with21necessary #line differences. Runtime5 cached build,
 dual publication, RAP11/11, lifecycle and NetAPI passed. Detailed census and
 LF block-count explanation remain in that receipt.
 
-[P6 N016 VDM](../etc/evidence/t485-s1/n016-vdm.md) delivered positions12-15:
-XP VDM pointer tables/ABI and relocated winbase template. Final cached build,
-runtime6 dual13-image26hash publication, TIB/ABI and guest NetAPI passed;
-Full24/24 passed without retry. Ten-file checkpoint resets to zero.
-N016 now15/21 delivered,6remaining; overall51/159 and S15 3/14 remain.
-Next winbase.x. Current census1319files,750exact,755nonerror same/564different,
-7751points/190572lines; P6delta0files,+2exact,+2same,-2different,
--1point/-1547lines;1210XP/109OpenNT.
+[P6 N016 VDM](../etc/evidence/t485-s1/n016-vdm.md) delivered XP VDM pointer
+ABI and relocated winbase template. Runtime6 cached build, dual publication,
+TIB/ABI, guest NetAPI and Full24/24 passed without retry. Per-file census and
+baseline transitions remain in its receipt.
 
 [P7 N016 tail](../etc/evidence/t485-s1/n016-tail.md) delivered: four obsolete
 files retired, two templates XP byte-exact relocated, five redundant winss
@@ -173,6 +169,14 @@ lifecycle and Full24/24 passed. N0207/7 complete; overall56/159, S15 8/14.
 Ten-file checkpoint resets to zero. Next N021. Win95 exit1 boundary retained.
 Census1318files,767exact,777nonerror same/541different,7731points/156836lines;
 delta0files,0exact,0same,0different,+4points/-518lines.1241XP/77OpenNT.
+
+[P20 N021 first-three](../etc/evidence/t485-s1/n021-first.md) delivered:
+callconv remains XP-exact; devioctl/dlcapi restore XP with zero nonerror diff.
+Cached build, runtime20 dual13-image26hash publication, RAP11/11, lifecycle
+and real guest NetAPI passed. N0213/17; next nt.h. Overall56/159, S15 8/14.
+Census1318files,768exact,779nonerror same/539different,7729points/154750lines;
+delta0files,+1exact,+2same/-2different,-2points/-2086lines.1243XP/75OpenNT.
+Three reviewed files since P19 Full24/24; no guest change.
 
 ## S14 Closure Record
 

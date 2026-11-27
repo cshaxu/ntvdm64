@@ -3000,3 +3000,10 @@ wowuserp.h uses the XP registration table with explicit retained original USER
 layout/cleanup ABI until the paired USER cohort migrates. Unused old slots are
 removed, not duplicated. [Evidence](../../docs/etc/evidence/t485-s1/n020-wowuser.md)
 records each residual and runtime19 Full checkpoint. N0207/7 delivered.
+
+### T485 S15 N021 SDK first three
+
+callconv.inc remains XP-exact; devioctl.h is restored byte-exact and dlcapi.h
+has only its existing two original C++ excluded arms. All three have zero
+nonerror diff. [Evidence](../../docs/etc/evidence/t485-s1/n021-first.md).
+N0213/17 delivered.
