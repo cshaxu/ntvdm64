@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 BOOL bPifFastPaste;
 static CHAR layout_name[KL_NAMELENGTH];
@@ -14,10 +15,13 @@ static CHAR guest_bytes[512];
 static BOOL layout_unavailable;
 static unsigned console_initializations;
 static unsigned environment_queries;
+static BOOL package_directory;
+unsigned int __cdecl keyboard_fixture_system_directory(char *,unsigned int);
+BOOL LocateKDF(CHAR *,WORD,WORD,LPSTR,DWORD *);
 
-/* This original-reader fixture does not test package-directory composition.
- * Keep its historical native directory/code-page inputs; neither boundary
- * may be reached after the layout query reports unavailable. */
+/* The initial layout cases keep historical native directory inputs.
+ * The default KDF case selects the real package-directory implementation.
+ * Neither input may be queried when the layout is unavailable. */
 UINT WINAPI MvdmGetConsoleCP(VOID)
 {
     ++environment_queries;
@@ -26,8 +30,14 @@ UINT WINAPI MvdmGetConsoleCP(VOID)
 unsigned int __cdecl NtvdmGetSystemDirectoryA(char *path,unsigned int capacity)
 {
     ++environment_queries;
-    return GetSystemDirectoryA(path,capacity);
+    return package_directory ? keyboard_fixture_system_directory(path,capacity) :
+        GetSystemDirectoryA(path,capacity);
 }
+
+/* Any original allocation-failure exit is a fixture failure, not success. */
+int RcMessageBox(USHORT id, CHAR *a, CHAR *b, ULONG flags)
+{ (void)id;(void)a;(void)b;(void)flags;abort(); }
+VOID TerminateVDM(VOID) { abort(); }
 
 VOID cmdGetKbdLayout(VOID);
 BOOL ntvdm_shadow_registry_initialize(VOID);
@@ -98,6 +108,37 @@ static int run_case(LPCSTR module, LPCSTR name, LPCSTR file_text, USHORT expecte
     return 0;
 }
 
+static int default_kdf_case(void)
+{
+    CHAR ini[MAX_PATH],expected[MAX_PATH+40],actual[MAX_PATH+40],native[MAX_PATH],*slash;
+    DWORD size;
+    BOOL found;
+    int result=1;
+    if (!GetModuleFileNameA(NULL,ini,sizeof(ini)) || !(slash=strrchr(ini,'\\'))) return 1;
+    lstrcpyA(slash+1,"NTVDM.REG");
+    if (!write_file(ini,"Windows Registry Editor Version 5.00\r\n\r\n"
+            "[HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\WOW]\r\n")) return 1;
+    if (!ntvdm_shadow_registry_initialize()) { DeleteFileA(ini);return 1; }
+    package_directory=TRUE;
+    if (!keyboard_fixture_system_directory(expected,MAX_PATH) ||
+            !GetSystemDirectoryA(native,sizeof(native)) || !_stricmp(expected,native)) goto done;
+    lstrcatA(expected,"\\KEYBOARD.SYS");
+    size=sizeof(actual);
+    actual[0]=0;found=LocateKDF("US",0,437,actual,&size);
+    printf("KDF_DEFAULT found=%u actual=%s expected=%s\n",found,actual,expected);
+    if (!found || strcmp(actual,expected) ||
+            size!=strlen(expected)) goto done;
+    actual[0]='X';size=1;SetLastError(ERROR_SUCCESS);
+    if (LocateKDF("US",0,437,actual,&size) || GetLastError()!=ERROR_INSUFFICIENT_BUFFER ||
+            size!=strlen(expected) || actual[0]!='X') goto done;
+    puts("S45_CMDKEYB_DEFAULT_KDF_PACKAGE_AND_CAPACITY_OK");
+    result=0;
+done:
+    package_directory=FALSE;
+    ntvdm_shadow_registry_shutdown();DeleteFileA(ini);
+    return result;
+}
+
 int main(VOID)
 {
     static const CHAR configured[]=
@@ -128,5 +169,6 @@ int main(VOID)
     if (run_case("CONFIGURED","00000409",configured,0)) return 1;
     if (run_case("MALFORMED","00000409",malformed,0)) return 2;
     if (run_case("ABSENT","0000F00D",absent,0)) return 3;
+    if (default_kdf_case()) return 6;
     return 0;
 }

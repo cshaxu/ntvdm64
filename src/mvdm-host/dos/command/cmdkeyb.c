@@ -19,7 +19,9 @@
 #include <winnls.h>
 #include "compat/include/wow_registry.h"
 #include "compat/include/system_root.h"
-#line 17
+#undef GetSystemDirectory
+#define GetSystemDirectory NtvdmGetSystemDirectoryA
+#line 20
 
 CHAR szPrev[5] = "US";
 INT  iPrevCP = 437;
@@ -206,8 +208,7 @@ VOID cmdGetKbdLayout( VOID )
 //
 // kb16.com should be found in GetSystemDirectory()\system32 subdirectory.
 //
-    iSaveSize = iSize = NtvdmGetSystemDirectoryA(szDir, MAX_PATH);
-#line 166
+    iSaveSize = iSize = GetSystemDirectory(szDir, MAX_PATH);
 
     // can't get the system directory!
     if (!iSize || iSize > MAX_PATH)

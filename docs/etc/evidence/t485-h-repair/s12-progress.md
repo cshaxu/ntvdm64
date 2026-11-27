@@ -6,10 +6,11 @@ published runtime26,Full23/23. Scope48files645frozen points,not fresh XP
 migration. Review in relative-path DIR order and original point order;complete
 each file before delivery. Default original valid;retains need real evidence.
 
-Reviewed4/48files28/645points;restored-delivered7,residual-reviewed21,unreviewed617.
+Reviewed5/48files30/645points;restored-delivered7,restored-local1,
+residual-reviewed22,unreviewed615.
 Delivered/pushed4files28points in806a8c45c;workspace receipt follows.
 Current byte-sensitive census is measured separately from frozen points.
-Local code changes exist;no S12 build,test,publication or delivery claimed.
+P1 delivered;P2 cached build,dual publication and targeted verification passed;commit pending.
 
 | Order | File | Frozen points | State |
 | ---: | --- | ---: | --- |
@@ -17,7 +18,7 @@ Local code changes exist;no S12 build,test,publication or delivery claimed.
 | 2 | src/mvdm-host/dos/command/cmdconf.c | 2 | P1 delivered806a8c45c |
 | 3 | src/mvdm-host/dos/command/cmdenv.c | 2 | P1 delivered806a8c45c |
 | 4 | src/mvdm-host/dos/command/cmdexec.c | 20 | P1 delivered806a8c45c |
-| 5 | src/mvdm-host/dos/command/cmdkeyb.c | 2 | Pending |
+| 5 | src/mvdm-host/dos/command/cmdkeyb.c | 2 | P2 final verified/published; commit pending |
 | 6 | src/mvdm-host/dos/command/cmdmisc.c | 8 | Pending |
 | 7 | src/mvdm-host/dos/dem/dem.c | 2 | Pending |
 | 8 | src/mvdm-host/dos/dem/dem.h | 1 | Pending |
@@ -167,3 +168,38 @@ Next file5 cmdkeyb.c after P1 commit/push. No migration batch count increment.
 P1 delivered and pushed806a8c45c. Governance/relative links PASS.
 Current4/48files28/645points delivered;7restored21residual617unreviewed.
 No local source restorations awaiting verification. Nextfile5 cmdkeyb.c.
+
+## P2 file5 cmdkeyb.c
+
+Entry2points6lines;two frozen points. Real linked original-reader control
+returned native Windows system32 KEYBOARD.SYS instead of its package
+system32 path:exit6 after four prior cases PASS. First control build exposed
+missing fixture RcMessageBox/TerminateVDM failure exits;they now abort the test,
+never suppress product failures. The controlled directory comparison then failed
+exactly as expected. No host keyboard/Registry or guest binary modified.
+
+Restore both original directory-call spellings and bind once in this TU to
+the existing package-directory provider. Keep the package Registry projection.
+Final1point5lines (-1/-1);body identical to fixed XP except the five-line
+integration preamble. XP logical line20 replaces stale17;stale166 disappears.
+No alternative KDF algorithm,second directory fallback or new runtime owner.
+Extend existing reader fixture with real package-directory resolution and
+insufficient-buffer length/no-write assertions;existing integration runner
+requires its new marker. Full cached build/publication process236 active.
+
+Reviewed5/48files30/645points:8restored(7delivered1local),22residual,
+615unreviewed. Delivered4files28points. Current765/31754;baseline803/31809,
+cumulative reduction38points55lines. P2 not yet verified or delivered.
+
+### P2 final verification
+
+[Receipt](s12-p2-result.json):runtime2 cached full build and26dual-location
+host hashes PASS. Actual original-reader counterexample exit6 now passes with
+matching package KDF path;small-buffer size/no-write assertions PASS. Existing
+four reader branches PASS;real keyboard PIF MEM output and exit0 PASS.
+Product preprocessing113unique original statements,zero XP line drift.
+Initial preprocessing output-directory typo corrected by relocating its owned
+output;no compilation/publication repeated. Guest binaries unchanged.
+No claim of interactive non-US keyboard layout installation. Full not due.
+Five files30points final verified;8restored22residual615unreviewed.
+P2 commit/push pending;next file6 cmdmisc.c. Current765/31754 (-38/-55).

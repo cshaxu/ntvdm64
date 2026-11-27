@@ -55,6 +55,9 @@ try {
     $env:NTVDM_SHADOW_REGISTRY_TRACE="$build/reader.trace"
     & $reader *> "$build/reader.txt"
     if($LASTEXITCODE){throw 'Original keyboard reader fixture failed'}
+    if ((Get-Content "$build/reader.txt" -Raw) -notmatch "S45_CMDKEYB_DEFAULT_KDF_PACKAGE_AND_CAPACITY_OK") {
+        throw "Default KDF package/capacity assertions did not complete"
+    }
     $readerText=Get-Content "$build/reader.trace" -Raw
     foreach($marker in 'QUERY_OK','QUERY_MALFORMED','QUERY_ABSENT'){
         if($readerText -notmatch $marker){throw "Missing reader result: $marker"}

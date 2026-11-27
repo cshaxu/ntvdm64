@@ -2081,3 +2081,5 @@ post-publication targeted checks.
 - [S12 ordered host-boundary repair progress](evidence/t485-h-repair/s12-progress.md).
 
 [S12 P1 delivery receipt](evidence/t485-h-repair/s12-p1-result.json).
+
+[S12 P2 keyboard package receipt](evidence/t485-h-repair/s12-p2-result.json).

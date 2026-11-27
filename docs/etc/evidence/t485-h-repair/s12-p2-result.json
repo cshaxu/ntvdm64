@@ -1,0 +1,181 @@
+{
+  "task": "M0 T485 S12 P2",
+  "state": "final-verified-published-commit-pending",
+  "package": "build/t485-s12/runtime2",
+  "file": "src/mvdm-host/dos/command/cmdkeyb.c",
+  "diff": {
+    "before": {
+      "points": 2,
+      "lines": 6
+    },
+    "after": {
+      "points": 1,
+      "lines": 5
+    },
+    "s12_current": {
+      "points": 765,
+      "lines": 31754
+    },
+    "s12_reduction": {
+      "points": 38,
+      "lines": 55
+    }
+  },
+  "finding": "Default LocateKDF used native system directory while KB16 used package directory. Bind both original calls once to existing package provider;no original function body changes.",
+  "control": {
+    "exit": 6,
+    "result": "four legacy cases pass;default KDF actual C:/WINDOWS/system32/KEYBOARD.SYS differs from build-owned package",
+    "evidence": "build/t485-s12/p2/control.log",
+    "first_attempt": "fixture link failed on missing RcMessageBox/TerminateVDM exits;explicit abort-only fixture exits added;no production failure suppressed"
+  },
+  "verification": {
+    "cached_full_build": "PASS",
+    "publication": [
+      {
+        "path": "assets\\release\\NTVDMD.DLL",
+        "sha256": "A51C0F59C7C718C81FD092F13D2218C53B217364293F8ED8DFA63AD0CB6794B1",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+        "sha256": "A51C0F59C7C718C81FD092F13D2218C53B217364293F8ED8DFA63AD0CB6794B1",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VJOY.DLL",
+        "sha256": "8A48DDA00BA1BB2BBEEAB2C68DED1C1E0B4C2516854363D380958EED5B50E99F",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+        "sha256": "8A48DDA00BA1BB2BBEEAB2C68DED1C1E0B4C2516854363D380958EED5B50E99F",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VCDEX.DLL",
+        "sha256": "7C598D485475490AA8DC6186F059AC5ABDD0B45C987C68A50284A81FBCD9192A",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+        "sha256": "7C598D485475490AA8DC6186F059AC5ABDD0B45C987C68A50284A81FBCD9192A",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\run16.exe",
+        "sha256": "22818D3B34329E49E4452F8435FD5715F4E9F47ACF5A5CE1AD74B0B31A0AEEE2",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+        "sha256": "22818D3B34329E49E4452F8435FD5715F4E9F47ACF5A5CE1AD74B0B31A0AEEE2",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntsrv.exe",
+        "sha256": "EFD4E6E68DBD7F769D409F0187D56A693EAADD7B37B736972B25F1B4218AFBA1",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+        "sha256": "EFD4E6E68DBD7F769D409F0187D56A693EAADD7B37B736972B25F1B4218AFBA1",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntcon.exe",
+        "sha256": "CD8B4842891E36E722FE4A9A0B2570918655D9B12EF9176DBA5C90D1BB28622F",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+        "sha256": "CD8B4842891E36E722FE4A9A0B2570918655D9B12EF9176DBA5C90D1BB28622F",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvdm.exe",
+        "sha256": "07D21CEB4D463721389B13D854658B20767098990CD02CB09C1B5D78BE8D94C0",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+        "sha256": "07D21CEB4D463721389B13D854658B20767098990CD02CB09C1B5D78BE8D94C0",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntvwm.exe",
+        "sha256": "9B55C36D7E2DE7D61B6336B71393032BC8062DEEADF0B78E5BFB97ED7BF5E87B",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+        "sha256": "9B55C36D7E2DE7D61B6336B71393032BC8062DEEADF0B78E5BFB97ED7BF5E87B",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\ntmon.exe",
+        "sha256": "F9839ECC8A21A34E1D4B7353ECD5A9350C542C111DD9BE6D72C05F4F6155382E",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+        "sha256": "F9839ECC8A21A34E1D4B7353ECD5A9350C542C111DD9BE6D72C05F4F6155382E",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "B3D7C9520393E64F789668A6599A92B16F014219D4F781703C15BDEC710AC3C1",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+        "sha256": "B3D7C9520393E64F789668A6599A92B16F014219D4F781703C15BDEC710AC3C1",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\VDMREDIR.DLL",
+        "sha256": "9FA12624A661A02E6A9756A487F7B9CCC4D3CB2F65BEEFC0D2F790C52907F02F",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+        "sha256": "9FA12624A661A02E6A9756A487F7B9CCC4D3CB2F65BEEFC0D2F790C52907F02F",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook32.dll",
+        "sha256": "1A9F879F642926117E07E068CA4AAE80D72D3514EB7DED87E123239EFACDD73E",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+        "sha256": "1A9F879F642926117E07E068CA4AAE80D72D3514EB7DED87E123239EFACDD73E",
+        "pass": true
+      },
+      {
+        "path": "assets\\release\\nthook64.dll",
+        "sha256": "D98B630699E9E397B633AF18D95C97876C1F8B0B6083E049760BC54605B5B298",
+        "pass": true
+      },
+      {
+        "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+        "sha256": "D98B630699E9E397B633AF18D95C97876C1F8B0B6083E049760BC54605B5B298",
+        "pass": true
+      }
+    ],
+    "original_product_lines": [
+      {
+        "file": "cmdkeyb.c",
+        "checked": 113,
+        "mismatches": [],
+        "added_error_statements_not_original_witnesses": []
+      }
+    ],
+    "keyboard_reader": "PASS unavailable/configured/malformed/absent/default-package/small-buffer",
+    "guest_PIF": "PASS MEM output and exit0",
+    "logs": "build\\t485-s12\\p2\\final\\keyboard",
+    "retry": "preprocessing succeeded but diagnostic output directory reference was wrong;relocated owned output;only line-read failure and unexecuted integration continued;no build/publication repeated",
+    "full": "not due at5files;not repeated"
+  },
+  "guest_binaries": "unchanged",
+  "coverage_limit": "Real guest PIF startup and deterministic linked original-reader coverage;not a claim of interactive non-US layout installation."
+}
