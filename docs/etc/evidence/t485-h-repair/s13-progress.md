@@ -91,3 +91,25 @@ approval covers this kind of point increase. Whole-file residual necessity,
 exclusion mapping and source-hash ledger updates remain before final accounting.
 No product source or package changed;runtime14 Full23/23 remains valid and
 was not rerun. This batch corrects measurement evidence only.
+
+## P5 LF restoration and residual correction
+
+[Restoration proof](s13-p5-lf-restoration.json) applies all three LF candidates:
+3points/4869lines ->58points/519lines,delta+55points/-4350lines. The increase
+only exposes existing separated differences;no new code was added. Every
+non-line-ending byte,physical line count,#error and#line is unchanged.
+Main file hashes now identify the LF files. Prior source hashes in historical
+receipts remain intact. Runtime14 remains the published package;no build,
+publication or runtime test is claimed for this format-only update.
+
+R00144 had stale whitespace-only necessity text,although S7 P1 explicitly
+retained the final DOSX-ownership boundary at this location. Main and pending
+records now identify the actual single early-return check in DpmiFaultHandler,
+its shared predicate and guest-ownership evidence. It stays pending;no whole
+point restoration is claimed. This resolves the contradictory explanation,
+not a newly discovered runtime defect. Pending row count is unchanged.
+
+The computed S7 census becomes1740points/2838lines after these three changes;
+final exclusion-pair review and all-owner receipt reconciliation remain open.
+The original1039file/4550frozen-point population is unchanged. Full23/23 is
+retained for runtime14;this format-only update does not repeat Full.

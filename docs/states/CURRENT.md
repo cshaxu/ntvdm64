@@ -39,10 +39,11 @@ S10-S12:953residual IDs covered after appending11omitted P13 pending rows.
 S8:851files/900frozen points reconcile;606byte-exact,245line-only files,
 1818diagnostic residual points registered separately. S7 maps839old IDs to
 110registered semantic residuals across7files. Its historical metrics omit
-#line;the new20file byte census computes1685points/7188lines,pending final
-exclusion-pair review. Three CRLF files have LF candidates reducing4350lines;
-not yet applied. Final accounting and receipt reconciliation remain.
-No product changes;runtime14 Full23/23 is retained,not rerun. No S13 closure.
+#line;the20file byte census now computes1740points/2838lines,pending final
+exclusion-pair review. Three LF restorations removed4350diff lines;only line
+endings changed. R00144 necessity is corrected in both registers. Final
+accounting and receipt reconciliation remain.
+No behavioral changes;runtime14 Full23/23 is retained,not rerun. No S13 closure.
 
 ## S12 Closure Record
 
