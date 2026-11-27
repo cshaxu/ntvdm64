@@ -1,0 +1,41 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 760,
+    "nonerror_identical": 768,
+    "nonerror_different": 547,
+    "nonerror_points": 7748,
+    "nonerror_lines": 164027
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 761,
+    "nonerror_identical": 769,
+    "nonerror_different": 546,
+    "nonerror_points": 7747,
+    "nonerror_lines": 163505
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -522
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "before_points": 1,
+      "before_lines": 522,
+      "after_points": 0,
+      "after_lines": 0,
+      "xp_path": "Source/XPSP1/NT/public/internal/net/inc/tstring.h",
+      "xp_blob": "76771d9a036fa85c458389da63cec09020d21d66"
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1230,
+    "OpenNT": 85
+  }
+}

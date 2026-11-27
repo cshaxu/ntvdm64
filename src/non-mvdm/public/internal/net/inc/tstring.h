@@ -1,6 +1,6 @@
 /*++
 
-Copyright (c) 1991-1993  Microsoft Corporation
+Copyright (c) Microsoft Corporation. All rights reserved.
 
 Module Name:
 
@@ -132,37 +132,19 @@ NetpCopyWStrToStrDBCSN(
 ULONG
 NetpUnicodeToDBCSLen(
     IN  LPWSTR Src
-);
+    );
+
+
 #ifdef UNICODE
 
 #define NetpCopyStrToTStr(Dest,Src)  NetpCopyStrToWStr((Dest),(Src))
 #define NetpCopyTStrToStr(Dest,Src)  NetpCopyWStrToStr((LPSTR)(Dest),(LPWSTR)(Src))
 #define NetpCopyTStrToWStr(Dest,Src) (void) wcscpy((Dest),(Src))
-#define NetpCopyWStrToTStr(Dest,Src) (void) wcscpy((Dest),(Src))
 
-#define NetpNCopyStrToTStr(Dest,Src,Len)  NetpNCopyStrToWStr((Dest),(Src),(Len))
-#define NetpNCopyTStrToStr(Dest,Src,Len)  NetpNCopyWStrToStr((Dest),(Src),(Len))
 #define NetpNCopyTStrToWStr(Dest,Src,Len) \
                         (wcsncpy((Dest),(Src),(Len)), NO_ERROR)
-#define NetpNCopyWStrToTStr(Dest,Src,Len) \
-                        (wcsncpy((Dest),(Src),(Len)), NO_ERROR)
 
-#else // not UNICODE
-
-// BUGBUG: Does strcpy() handle code pages OK?
-#define NetpCopyStrToTStr(Dest,Src)  (void) strcpy((Dest),(Src))
-#define NetpCopyTStrToStr(Dest,Src)  (void) strcpy((Dest),(Src))
-#define NetpCopyTStrToWStr(Dest,Src) NetpCopyStrToWStr((Dest),(Src))
-#define NetpCopyWStrToTStr(Dest,Src) NetpCopyWStrToStr((Dest),(Src))
-
-#define NetpNCopyStrToTStr(Dest,Src,Len) \
-                        (strncpy((Dest),(Src),(Len)), NO_ERROR)
-#define NetpNCopyTStrToStr(Dest,Src,Len) \
-                        (strncpy((Dest),(Src),(Len)), NO_ERROR)
-#define NetpNCopyTStrToWStr(Dest,Src,Len) NetpNCopyStrToWStr((Dest),(Src),(Len))
-#define NetpNCopyWStrToTStr(Dest,Src,Len) NetpNCopyWStrToStr((Dest),(Src),(Len))
-
-#endif // not UNICODE
+#endif // UNICODE
 
 
 //
@@ -190,50 +172,6 @@ NetpAllocWStrFromWStr (
     IN LPWSTR Src
     );
 
-#ifdef UNICODE
-
-#define NetpAllocStrFromTStr(Src)       NetpAllocStrFromWStr(Src)
-#define NetpAllocTStrFromStr(Src)       NetpAllocWStrFromStr(Src)
-#define NetpAllocTStrFromTStr(Src)      NetpAllocWStrFromWStr(Src)
-#define NetpAllocTStrFromWStr(Src)      NetpAllocWStrFromWStr(Src)
-#define NetpAllocWStrFromTStr(Src)      NetpAllocWStrFromWStr(Src)
-
-#else // ndef UNICODE
-
-#define NetpAllocStrFromTStr(Src)       NetpAllocStrFromStr(Src)
-#define NetpAllocTStrFromStr(Src)       NetpAllocStrFromStr(Src)
-#define NetpAllocTStrFromTStr(Src)      NetpAllocStrFromStr(Src)
-#define NetpAllocTStrFromWStr(Src)      NetpAllocStrFromWStr(Src)
-#define NetpAllocWStrFromTStr(Src)      NetpAllocWStrFromStr(Src)
-
-#endif // ndef UNICODE
-
-
-VOID
-NetpCopyStrToUnalignedWStr(
-    OUT LPBYTE Dest,
-    IN LPSTR Src
-    );
-
-VOID
-NetpCopyWStrToUnalignedWStr(
-    OUT LPBYTE Dest,
-    IN LPWSTR Src
-    );
-
-#ifdef UNICODE
-
-#define NetpCopyTStrToUnalignedWStr(Dest,Src) \
-        NetpCopyWStrToUnalignedWStr(Dest,Src)
-
-#else // ndef UNICODE
-
-#define NetpCopyTStrToUnalignedWStr(Dest,Src) \
-        NetpCopyStrToUnalignedWStr(Dest,Src)
-
-#endif // ndef UNICODE
-
-
 //
 // As of 03-Aug-1992, people are still arguing over whether there should
 // be an RtlInitOemString.  So I'm inventing NetpInitOemString in the
@@ -251,11 +189,19 @@ NetpInitOemString(
 #endif // _NTDEF_
 
 
-VOID
-NetpSubsetStr(
-    IN OUT LPSTR StringToSubset, // OEM chars, conv to subset in place.
-    IN     DWORD MaxStringSize   // size in bytes (incl null char)
+//
+//
+// ANSI versions of the API.
+//
+
+LPWSTR
+NetpAllocWStrFromAStr (
+    IN LPCSTR Src
     );
 
+LPSTR
+NetpAllocAStrFromWStr (
+    IN LPCWSTR Src
+    );
 
 #endif  // _TSTRING_H_INCLUDED
