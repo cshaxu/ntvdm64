@@ -2133,3 +2133,4 @@ post-publication targeted checks.
 - [T485 S15 N013 DLC declaration relocation](evidence/t485-s1/n013.md).
 - [T485 S15 N014 PMVDM declaration relocation](evidence/t485-s1/n014.md).
 - [T485 S15 N015 DDK declaration migration](evidence/t485-s1/n015.md).
+- [T485 S15 N016 first-five checkpoint](evidence/t485-s1/n016-first-five.md).

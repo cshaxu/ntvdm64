@@ -1,5 +1,5 @@
 # Explicit source and link composition; no reference graph is consumed.
-set(native_flags "${family_flags} /I \"${NTVDM_REPO}/src/lib-nxvm\" /I \"${NTVDM_REPO}/src\" /I \"${NTVDM_REPO}/src/compat/include\" /I \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/base/inc\" /I obj/basesrv")
+set(native_flags "${family_flags} /I \"${NTVDM_REPO}/src/lib-nxvm\" /I \"${NTVDM_REPO}/src\" /I \"${NTVDM_REPO}/src/compat/include\" /I \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/base/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/windows/inc\" /I obj/basesrv")
 family_unit("obj/run16/entry.obj" "${NTVDM_REPO}/src/run16-exe/main.c" "${native_flags} /we4013 /I \"${NTVDM_REPO}/src/non-mvdm/base/win32/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/base/win32/server\" /O2" "obj/basesrv/service.h")
 family_unit("obj/common/application_search.obj" "${NTVDM_REPO}/src/common/application_search.c" "${native_flags} /we4013 /O2" "obj/basesrv/service.h")
 family_unit("obj/run16/image_classification.obj" "${NTVDM_REPO}/src/run16-exe/image_classification.c" "${native_flags} /we4013 /I \"${NTVDM_REPO}/src/non-mvdm/base/win32/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/base/win32/server\" /O2" "obj/basesrv/service.h")

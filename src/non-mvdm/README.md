@@ -2894,3 +2894,10 @@ Five headers use pinned XP SP1. ntdddlc.h moves to public/sdk/inc;
 the other four remain public/ddk/inc. Original guards and existing excluded
 profiles remain; only serial/video need active diagnostic line resets.
 [Migration and delivery evidence](../../docs/etc/evidence/t485-s1/n015.md).
+
+### T485 S15 N016 first-five checkpoint
+
+align/debugfmt/nettypes declarations use XP public/sdk/inc; conroute uses
+public/internal/windows/inc. ntddvdm stays at its original Base path.
+[Delivery and ABI evidence](../../docs/etc/evidence/t485-s1/n016-first-five.md).
+N016's remaining16 original files are not yet migrated by this checkpoint.

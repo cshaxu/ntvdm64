@@ -1,0 +1,227 @@
+{
+  "task": "M0 T485 S15 P4 N016 first five",
+  "runtime": "build/t485-s15/runtime4",
+  "build_exit": 0,
+  "published_hashes": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "AFA168FFF46E1091F1429D2A01325C530ADEF24221E9EB4535CBDD2A0549D42F",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "AFA168FFF46E1091F1429D2A01325C530ADEF24221E9EB4535CBDD2A0549D42F",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "22E0D1A2A36F0712FD36A5BE7C5DE2EA96224833993576796E5CD01AFCE6B7DD",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "22E0D1A2A36F0712FD36A5BE7C5DE2EA96224833993576796E5CD01AFCE6B7DD",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "4EB03C7BEFEFE0C44C2EC88E758CE94FBB4BF3D6FB195D84BE3E7D5C7D6D900B",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "4EB03C7BEFEFE0C44C2EC88E758CE94FBB4BF3D6FB195D84BE3E7D5C7D6D900B",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "EE142C0C6BE036B729AECDBE03D5069A651F8DB6EF49FB8C4415DBDB5C7B3F82",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "EE142C0C6BE036B729AECDBE03D5069A651F8DB6EF49FB8C4415DBDB5C7B3F82",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "64FA45A7BBA9C43FB27AD638D849E54E013BEB9A70D0679D3D1F50740AAFC79C",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "64FA45A7BBA9C43FB27AD638D849E54E013BEB9A70D0679D3D1F50740AAFC79C",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "AD5466BAE71BBDEB70C375906284AD11729D16880CFEAD43D34FAE1D89D745CD",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "AD5466BAE71BBDEB70C375906284AD11729D16880CFEAD43D34FAE1D89D745CD",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "9FD5D4BF9114F82CAF18EAEA17427EFF538B44F777B2E3D8895B750C0A30EE67",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "9FD5D4BF9114F82CAF18EAEA17427EFF538B44F777B2E3D8895B750C0A30EE67",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "879E87C559DE8BEB37FE286442749C33726EA4EA7D6B859FA3E2A46645C63F54",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "879E87C559DE8BEB37FE286442749C33726EA4EA7D6B859FA3E2A46645C63F54",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "30F5B3BDB36C580DCC5A787BC70235E317C511029D643A1F4AE7089884DBD735",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "30F5B3BDB36C580DCC5A787BC70235E317C511029D643A1F4AE7089884DBD735",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "ED23724CE6A0A26BEE395B3160F2E7F07FF7B06821BE83B34EBBFCB1263089E7",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "ED23724CE6A0A26BEE395B3160F2E7F07FF7B06821BE83B34EBBFCB1263089E7",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "15473554E787252D25D397D311B57874D5099817CECCD97F9EE39A8A57DBA514",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "15473554E787252D25D397D311B57874D5099817CECCD97F9EE39A8A57DBA514",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "744850DD5B4B0BC9B5F1BA780074126F33C3A640247FC5D7F637B994F79C64ED",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "744850DD5B4B0BC9B5F1BA780074126F33C3A640247FC5D7F637B994F79C64ED",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "A85023A3141375354BDC9771E5C028B3432EC3CF0D2963EC6FDC3D26944C6640",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "A85023A3141375354BDC9771E5C028B3432EC3CF0D2963EC6FDC3D26944C6640",
+      "pass": true
+    }
+  ],
+  "guest_netapi": {
+    "mode": "netapi",
+    "exit_code": 0,
+    "elapsed_ms": 13411
+  },
+  "Full": "24/24 PASS",
+  "census": {
+    "before": {
+      "files": 1319,
+      "byte_identical": 742,
+      "nonerror_identical": 746,
+      "nonerror_different": 573,
+      "nonerror_points": 7743,
+      "nonerror_lines": 196151
+    },
+    "after": {
+      "files": 1319,
+      "byte_identical": 746,
+      "nonerror_identical": 750,
+      "nonerror_different": 569,
+      "nonerror_points": 7737,
+      "nonerror_lines": 195577
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 4,
+      "nonerror_identical": 4,
+      "nonerror_different": -4,
+      "nonerror_points": -6,
+      "nonerror_lines": -574
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/sdk/inc/align.h",
+        "before_points": 3,
+        "before_lines": 5,
+        "after_points": 1,
+        "after_lines": 1,
+        "exclusions": 1
+      },
+      {
+        "path": "src/non-mvdm/public/internal/windows/inc/conroute.h",
+        "before_points": 1,
+        "before_lines": 168,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/debugfmt.h",
+        "before_points": 1,
+        "before_lines": 152,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/public/sdk/inc/nettypes.h",
+        "before_points": 1,
+        "before_lines": 162,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/public/internal/base/inc/ntddvdm.h",
+        "before_points": 1,
+        "before_lines": 88,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1200,
+      "OpenNT": 119
+    }
+  },
+  "excluded_arm_proof": {
+    "points": 1,
+    "lines": 1,
+    "excluded_arms": [
+      {
+        "original_start": 118,
+        "original_end": 122,
+        "current_start": 118,
+        "current_end": 120
+      }
+    ]
+  }
+}

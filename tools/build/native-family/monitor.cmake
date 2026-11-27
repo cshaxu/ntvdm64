@@ -1,5 +1,5 @@
 # Explicit source and link composition; no reference graph is consumed.
-set(native_flags "${family_flags} /I \"${NTVDM_REPO}/src/lib-nxvm\" /I \"${NTVDM_REPO}/src\" /I \"${NTVDM_REPO}/src/compat/include\" /I \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/base/inc\" /I obj/basesrv")
+set(native_flags "${family_flags} /I \"${NTVDM_REPO}/src/lib-nxvm\" /I \"${NTVDM_REPO}/src\" /I \"${NTVDM_REPO}/src/compat/include\" /I \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/base/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/windows/inc\" /I obj/basesrv")
 family_unit("obj/monitor/main.obj" "${NTVDM_REPO}/src/ntmon-exe/main.c" "${native_flags} /we4013 /O2" "obj/basesrv/service.h")
 family_unit("obj/monitor/trace_view.obj" "${NTVDM_REPO}/src/ntmon-exe/trace_view.c" "${native_flags} /we4013 /O2" "obj/basesrv/service.h")
 family_unit("obj/monitor/stub.obj" "obj/basesrv/service_c.c" "${native_flags} /we4013 /O2" "obj/basesrv/service.h")

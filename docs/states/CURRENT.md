@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall51/159 directories, H001-H036 and N001-N015. S15 runtime3 is the current
+overall51/159 directories, H001-H036 and N001-N015. S15 runtime4 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -42,6 +42,15 @@ recorded. Five files since the last Full; existing Win95 exit1 boundary retained
 Current census1319files:742byte-exact,746nonerror same/573different,
 7743points/196151lines. P3 delta0files,+1exact,+3same,-3different,-17points,
 -176lines.1195XP/124OpenNT; per-file baselines remain individually registered.
+
+[P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md) delivered:
+align/conroute/debugfmt/nettypes/ntddvdm migrated; B Console ABI matches XP.
+Cached full build, runtime4 dual13-image26hash publication, guest NetAPI and
+Full24/24 passed. Ten-file checkpoint resets to zero. N016 has5/21 delivered,
+16remaining; directory totals stay51/159 and S15 3/14. Next file packoff.h.
+Current census1319files,746exact,750nonerror same/569different,
+7737points/195577lines; P4delta0files,+4exact,+4same,-4different,-6points,
+-574lines.1200XP/119OpenNT. Earlier P3 census remains historical.
 
 ## S14 Closure Record
 

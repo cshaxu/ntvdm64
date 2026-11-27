@@ -7,7 +7,7 @@
 /* 0 unrelated, 1 input, 2 output; local identities, never UI resources. */
 DWORD ntvdm_console_handle_kind(HANDLE);
 
-HANDLE GetConsoleInputWaitHandle(VOID);
+HANDLE WINAPI GetConsoleInputWaitHandle(VOID);
 UINT WINAPI MvdmGetConsoleCP(void);
 BOOL WINAPI GetConsoleKeyboardLayoutNameA(LPSTR name);
 DWORD WINAPI MvdmGetConsoleTitleA(LPSTR title, DWORD capacity);

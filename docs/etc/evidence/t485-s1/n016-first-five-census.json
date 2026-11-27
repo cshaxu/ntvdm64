@@ -1,0 +1,72 @@
+{
+  "before": {
+    "files": 1319,
+    "byte_identical": 742,
+    "nonerror_identical": 746,
+    "nonerror_different": 573,
+    "nonerror_points": 7743,
+    "nonerror_lines": 196151
+  },
+  "after": {
+    "files": 1319,
+    "byte_identical": 746,
+    "nonerror_identical": 750,
+    "nonerror_different": 569,
+    "nonerror_points": 7737,
+    "nonerror_lines": 195577
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 4,
+    "nonerror_identical": 4,
+    "nonerror_different": -4,
+    "nonerror_points": -6,
+    "nonerror_lines": -574
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/sdk/inc/align.h",
+      "before_points": 3,
+      "before_lines": 5,
+      "after_points": 1,
+      "after_lines": 1,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/conroute.h",
+      "before_points": 1,
+      "before_lines": 168,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/debugfmt.h",
+      "before_points": 1,
+      "before_lines": 152,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nettypes.h",
+      "before_points": 1,
+      "before_lines": 162,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/ntddvdm.h",
+      "before_points": 1,
+      "before_lines": 88,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1200,
+    "OpenNT": 119
+  }
+}

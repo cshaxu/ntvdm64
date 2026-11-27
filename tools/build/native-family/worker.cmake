@@ -1,5 +1,5 @@
 # Explicit source and link composition; no reference graph is consumed.
-set(native_flags "${family_flags} /I \"${NTVDM_REPO}/src/lib-nxvm\" /I \"${NTVDM_REPO}/src\" /I \"${NTVDM_REPO}/src/compat/include\" /I \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/base/inc\" /I obj/basesrv")
+set(native_flags "${family_flags} /I \"${NTVDM_REPO}/src/lib-nxvm\" /I \"${NTVDM_REPO}/src\" /I \"${NTVDM_REPO}/src/compat/include\" /I \"${NTVDM_REPO}/src/non-mvdm/public/sdk/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/base/inc\" /I \"${NTVDM_REPO}/src/non-mvdm/public/internal/windows/inc\" /I obj/basesrv")
 family_unit("obj/worker-base/connection.obj" "${NTVDM_REPO}/src/worker-base/connection.c" "${native_flags} /we4013 /O2" "obj/basesrv/service.h")
 family_unit("obj/worker-base/shutdown_close.obj" "${NTVDM_REPO}/src/worker-base/shutdown_close.c" "${native_flags} /we4013 /O2" "obj/basesrv/service.h")
 family_unit("obj/worker-base/publication.obj" "${NTVDM_REPO}/src/compat/publication.c" "${family_flags} /I \"${NTVDM_REPO}/src\" /we4013 /O2")

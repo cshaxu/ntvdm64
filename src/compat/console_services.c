@@ -15,7 +15,7 @@ static compat_console_endpoint *current_endpoint(void)
     return context ? context->console_endpoint : NULL;
 }
 
-HANDLE GetConsoleInputWaitHandle(VOID)
+HANDLE WINAPI GetConsoleInputWaitHandle(VOID)
 {
     compat_host_context *context = compat_host_context_current();
 
