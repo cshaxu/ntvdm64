@@ -18,7 +18,11 @@ Author:
 
 Revision History:
 
+    Scott Field (SField)    09-October-2000
+        Add RNG and Memory encryption interfaces
+
 --*/
+
 
 #ifndef _NTCRYPT_
 #define _NTCRYPT_
@@ -32,6 +36,9 @@ Revision History:
 #include <rpc.h>
 #endif // MIDL_PASS
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /////////////////////////////////////////////////////////////////////////
 //                                                                     //
@@ -241,13 +248,14 @@ typedef NT_SESSION_KEY *            PNT_SESSION_KEY;
 // is different for each user on the system. This allows it to be used
 // for secure user communication with a server.
 //
+// begin_ntsubauth
 #define USER_SESSION_KEY_LENGTH     (CYPHER_BLOCK_LENGTH * 2)
 
 typedef struct _USER_SESSION_KEY {
     CYPHER_BLOCK data[2];
 }                                   USER_SESSION_KEY;
 typedef USER_SESSION_KEY          * PUSER_SESSION_KEY;
-
+// end_ntsubauth
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -294,6 +302,12 @@ typedef USER_SESSION_KEY          * PUSER_SESSION_KEY;
 #define RtlEqualNtOwfPassword           SystemFunction031
 #define RtlEncryptData2                 SystemFunction032
 #define RtlDecryptData2                 SystemFunction033
+#define RtlGetUserSessionKeyClientBinding SystemFunction034
+#define RtlCheckSignatureInFile         SystemFunction035
+
+#define RtlGenRandom                    SystemFunction036
+#define RtlEncryptMemory                SystemFunction040
+#define RtlDecryptMemory                SystemFunction041
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -582,6 +596,53 @@ RtlDecryptNtOwfPwdWithIndex(
     OUT PNT_OWF_PASSWORD NtOwfPassword
     );
 
+ULONG
+RtlCheckSignatureInFile(
+    IN PWSTR File
+    );
+
+BOOLEAN
+RtlGenRandom(
+    OUT PVOID RandomBuffer,
+    IN  ULONG RandomBufferLength
+    );
+
+
+//
+// The buffer passed into RtlEncryptMemory and RtlDecryptMemory
+// must be a multiple of this length.
+//
+
+#define RTL_ENCRYPT_MEMORY_SIZE             8
+
+//
+// Allow Encrypt/Decrypt across process boundaries.
+// eg: encrypted buffer passed across LPC to another process which calls RtlDecryptMemory.
+//
+
+#define RTL_ENCRYPT_OPTION_CROSS_PROCESS    0x01
+
+//
+// Allow Encrypt/Decrypt across callers with same LogonId.
+// eg: encrypted buffer passed across LPC to another process which calls RtlDecryptMemory whilst impersonating.
+//
+
+#define RTL_ENCRYPT_OPTION_SAME_LOGON       0x02
+
+NTSTATUS
+RtlEncryptMemory(
+    IN OUT  PVOID Memory,
+    IN      ULONG MemoryLength,
+    IN      ULONG OptionFlags
+    );
+
+NTSTATUS
+RtlDecryptMemory(
+    IN OUT  PVOID Memory,
+    IN      ULONG MemoryLength,
+    IN      ULONG OptionFlags
+    );
+
 
 //
 // Get the user session key for an RPC connection
@@ -590,7 +651,14 @@ RtlDecryptNtOwfPwdWithIndex(
 #ifndef MIDL_PASS    // Don't confuse MIDL
 NTSTATUS
 RtlGetUserSessionKeyClient(
-    IN PVOID RpcContextHandle OPTIONAL,
+    IN PVOID RpcContextHandle,
+    OUT PUSER_SESSION_KEY UserSessionKey
+    );
+
+NTSTATUS
+RtlGetUserSessionKeyClientBinding(
+    IN PVOID RpcBindingHandle,
+    OUT HANDLE *RedirHandle,
     OUT PUSER_SESSION_KEY UserSessionKey
     );
 
@@ -600,6 +668,10 @@ RtlGetUserSessionKeyServer(
     OUT PUSER_SESSION_KEY UserSessionKey
     );
 #endif // MIDL_PASS
+
+#ifdef __cplusplus
+}   // extern "C"
+#endif
 
 #endif // _NTCRYPT_
 

@@ -2920,3 +2920,10 @@ The remaining published templates use their XP paths; obsolete OpenNT x-files
 and winss.h are retired. Callers use the existing XP ntcsrmsg declarations.
 [N016 final six and delivery](../../docs/etc/evidence/t485-s1/n016-tail.md).
 All21 original N016 inventory files are reconciled; no unrelated XP files imported.
+
+### T485 S15 N017 first-three checkpoint
+
+apinums/apiparam use XP public/internal/net/inc; crypt retains its DS path.
+All three are byte-exact XP originals, including unused declarations.
+[Evidence](../../docs/etc/evidence/t485-s1/n017-first-three.md).
+N017 has3/19 inventory files delivered; later declarations remain open.

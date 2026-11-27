@@ -1,0 +1,62 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 750,
+    "nonerror_identical": 755,
+    "nonerror_different": 560,
+    "nonerror_points": 7747,
+    "nonerror_lines": 176175
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 753,
+    "nonerror_identical": 758,
+    "nonerror_different": 557,
+    "nonerror_points": 7744,
+    "nonerror_lines": 172161
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 3,
+    "nonerror_identical": 3,
+    "nonerror_different": -3,
+    "nonerror_points": -3,
+    "nonerror_lines": -4014
+  },
+  "files": [
+    {
+      "old_path": "src/non-mvdm/public/internal/ds/inc/apinums.h",
+      "path": "src/non-mvdm/public/internal/net/inc/apinums.h",
+      "before_points": 1,
+      "before_lines": 444,
+      "after_points": 0,
+      "after_lines": 0,
+      "xp_path": "Source/XPSP1/NT/public/internal/net/inc/apinums.h",
+      "xp_blob": "bcafa1d2b3c1265157ae02c92e64f26e70351048"
+    },
+    {
+      "old_path": "src/non-mvdm/public/internal/ds/inc/apiparam.h",
+      "path": "src/non-mvdm/public/internal/net/inc/apiparam.h",
+      "before_points": 1,
+      "before_lines": 2360,
+      "after_points": 0,
+      "after_lines": 0,
+      "xp_path": "Source/XPSP1/NT/public/internal/net/inc/apiparam.h",
+      "xp_blob": "66c4dd874f030c13dee851e2d9f03efaefbc21a5"
+    },
+    {
+      "old_path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "before_points": 1,
+      "before_lines": 1210,
+      "after_points": 0,
+      "after_lines": 0,
+      "xp_path": "Source/XPSP1/NT/public/internal/ds/inc/crypt.h",
+      "xp_blob": "16562216a4bd3ae42a5c256824e716e85774e6da"
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1215,
+    "OpenNT": 100
+  }
+}

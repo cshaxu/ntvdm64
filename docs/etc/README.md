@@ -2139,3 +2139,5 @@ post-publication targeted checks.
 - [T485 S15 N016 VDM declarations and template](evidence/t485-s1/n016-vdm.md): XP layout, original-relative census and final-package delivery evidence.
 
 - [T485 S15 N016 final fragments](evidence/t485-s1/n016-tail.md): obsolete-file retirement, XP published paths and BASE caller evidence.
+
+- [T485 S15 N017 first three](evidence/t485-s1/n017-first-three.md): XP Net/DS declaration originals, consumers and checkpoint evidence.

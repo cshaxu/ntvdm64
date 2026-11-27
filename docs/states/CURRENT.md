@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall52/159 directories, H001-H036 and N001-N016. S15 runtime7 is the current
+overall52/159 directories, H001-H036 and N001-N016. S15 runtime8 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -80,6 +80,15 @@ no repeat Full. N016 is21/21 complete; overall52/159 and S15 4/14. Next N017.
 Current census1315files,750exact,755nonerror same/560different,
 7747points/176175lines; delta-4files,0exact,0same,-4different,-4points/-14397lines.
 1212XP/103OpenNT; retirement accounts for14396lines, caller reduction1line.
+
+[P8 N017 first-three](../etc/evidence/t485-s1/n017-first-three.md) delivered:
+apinums/apiparam use XP Net paths; crypt restores complete XP declarations.
+All three byte-exact. Cached build, runtime8 dual13-image26hash publication,
+RAP11/11, guest NetAPI and Full24/24 passed without retry. Ten-file checkpoint
+resets to zero. N017 now3/19 delivered,16remaining; overall52/159 and S15 4/14.
+Next debuglib.h. Current census1315files,753exact,758nonerror same/557different,
+7744points/172161lines; delta0files,+3exact,+3same,-3different,-3points/-4014lines.
+1215XP/100OpenNT. P7 census remains historical.
 
 ## S14 Closure Record
 
