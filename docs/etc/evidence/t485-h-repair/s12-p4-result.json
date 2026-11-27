@@ -1,6 +1,6 @@
 {
   "task": "M0 T485 S12 P4",
-  "state": "final-verified-published-commit-pending",
+  "state": "delivered-pushed",
   "package": "build/t485-s12/runtime5",
   "files": [
     {
@@ -431,5 +431,6 @@
       "owner": 5304,
       "result": "Checker classification corrected without source modification;246 original witnesses zero drift. Dual publication and first Full23/23 PASS. No runtime retry or full rerun."
     }
-  ]
+  ],
+  "commit": "d74c534ca"
 }

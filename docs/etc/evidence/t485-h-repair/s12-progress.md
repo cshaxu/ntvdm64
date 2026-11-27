@@ -8,7 +8,7 @@ each file before delivery. Default original valid;retains need real evidence.
 
 Reviewed10/48files57/645points;restored-delivered9,restored-local0,
 residual-reviewed48,unreviewed588.
-Delivered/pushed6files38points through d5e4a83f6.
+Delivered/pushed10files57points through d74c534ca.
 Current byte-sensitive census is measured separately from frozen points.
 P1-P3 cached build,dual publication,targeted verification and commit/push complete.
 
@@ -20,10 +20,10 @@ P1-P3 cached build,dual publication,targeted verification and commit/push comple
 | 4 | src/mvdm-host/dos/command/cmdexec.c | 20 | P1 delivered806a8c45c |
 | 5 | src/mvdm-host/dos/command/cmdkeyb.c | 2 | P2 delivered c43ad57bb |
 | 6 | src/mvdm-host/dos/command/cmdmisc.c | 8 | P3 delivered d5e4a83f6 |
-| 7 | src/mvdm-host/dos/dem/dem.c | 2 | P4 final verified; commit pending |
-| 8 | src/mvdm-host/dos/dem/dem.h | 1 | P4 final verified; commit pending |
-| 9 | src/mvdm-host/dos/dem/demgset.c | 4 | P4 final verified; commit pending |
-| 10 | src/mvdm-host/dos/dem/demhndl.c | 12 | P4 final verified; commit pending |
+| 7 | src/mvdm-host/dos/dem/dem.c | 2 | P4 delivered d74c534ca |
+| 8 | src/mvdm-host/dos/dem/dem.h | 1 | P4 delivered d74c534ca |
+| 9 | src/mvdm-host/dos/dem/demgset.c | 4 | P4 delivered d74c534ca |
+| 10 | src/mvdm-host/dos/dem/demhndl.c | 12 | P4 delivered d74c534ca |
 | 11 | src/mvdm-host/dos/dem/demlfn.c | 2 | Pending |
 | 12 | src/mvdm-host/dos/dem/demlfn.h | 2 | Pending |
 | 13 | src/mvdm-host/dos/dem/demsrch.c | 5 | Pending |
@@ -302,3 +302,11 @@ the attempt record. Documentation and relative-link gates passed before receipt.
 Four files77/168->29/103;S12 current702/31666,reduction101points143lines.
 Tenfiles57points final verified;9restored48residual588unreviewed. Commit/push
 pending;S12 remains active and next file is demlfn.c.
+
+### P4 delivery receipt
+
+Product and Full checkpoint committed/pushed d74c534ca. Tenfiles57points
+are now delivered;9restored48residual588unreviewed. Last Full checkpoint is
+file10,runtime5,23/23 PASS. Remaining38files;next11demlfn.c. Census remains
+702points31666lines,down101points143lines. Only receipt state changes after
+Full;no repeated build,publication or runtime verification is required.
