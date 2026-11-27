@@ -1,0 +1,57 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 763,
+    "nonerror_identical": 772,
+    "nonerror_different": 543,
+    "nonerror_points": 7729,
+    "nonerror_lines": 158246
+  },
+  "after": {
+    "files": 1318,
+    "byte_identical": 766,
+    "nonerror_identical": 776,
+    "nonerror_different": 542,
+    "nonerror_points": 7728,
+    "nonerror_lines": 157392
+  },
+  "delta": {
+    "files": 3,
+    "byte_identical": 3,
+    "nonerror_identical": 4,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -854
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "before_points": 1,
+      "before_lines": 854,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 2
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1239,
+    "OpenNT": 79
+  },
+  "added_dependencies": [
+    {
+      "path": "src/non-mvdm/windows/core/w32inc/w32gdip.h",
+      "xp_path": "Source/XPSP1/NT/windows/core/w32inc/w32gdip.h",
+      "blob": "201ed0a06dfbd8a8b7540ded0f0fc402d29c84c3"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/w32inc/w32w64a.h",
+      "xp_path": "Source/XPSP1/NT/windows/core/w32inc/w32w64a.h",
+      "blob": "d69705143936b7d2f1b412f91fff960d8af0ab70"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/w32w64.h",
+      "xp_path": "Source/XPSP1/NT/public/internal/windows/inc/w32w64.h",
+      "blob": "8809419a40306d3183bf5559596f85cd4b4ecd8b"
+    }
+  ]
+}

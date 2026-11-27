@@ -2980,3 +2980,10 @@ winddi.h follows its original XP public/oak/inc path with complete declarations,
 one existing FLOATOBJ exclusion and two original-line anchors. WOW's actual
 fax object selects this header; compat font bindings keep the host SDK.
 [Evidence](../../docs/etc/evidence/t485-s1/n020-ddi.md). N0204/7 delivered.
+
+### T485 S15 N020 private GDI declarations
+
+wingdip.h keeps complete XP declarations and two original C++ exclusions.
+Required w32gdip.h/w32w64a.h/w32w64.h are XP byte-exact; the original PolyPatBlt
+layout follows its XP owner rather than a copied declaration.
+[Evidence](../../docs/etc/evidence/t485-s1/n020-gdi.md). N0205/7 delivered.

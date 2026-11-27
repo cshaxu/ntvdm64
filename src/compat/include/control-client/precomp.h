@@ -64,6 +64,7 @@ BOOL WINAPI _DefSetText(HWND, LPCWSTR, BOOL);
 #undef DrawState
 #define DrawState wow_control_draw_state
 #include "wow_edit_native_bindings.h"
+#include "non-mvdm/windows/core/w32inc/w32gdip.h"
 #ifdef WOW_ORIGINAL_CLIENT_CPD
 /* OPENNT-HOST-120: outgoing native token allocation only. The original
  * client retains its HW conversion; never reinterpret a native CPD. */
