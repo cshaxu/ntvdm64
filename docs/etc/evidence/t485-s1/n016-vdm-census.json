@@ -1,0 +1,64 @@
+{
+  "before": {
+    "files": 1319,
+    "byte_identical": 748,
+    "nonerror_identical": 753,
+    "nonerror_different": 566,
+    "nonerror_points": 7752,
+    "nonerror_lines": 192119
+  },
+  "after": {
+    "files": 1319,
+    "byte_identical": 750,
+    "nonerror_identical": 755,
+    "nonerror_different": 564,
+    "nonerror_points": 7751,
+    "nonerror_lines": 190572
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 2,
+    "nonerror_identical": 2,
+    "nonerror_different": -2,
+    "nonerror_points": -1,
+    "nonerror_lines": -1547
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "before_points": 1,
+      "before_lines": 967,
+      "after_points": 5,
+      "after_lines": 8,
+      "exclusions": 2
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "before_points": 1,
+      "before_lines": 282,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdmtib.inc",
+      "before_points": 4,
+      "before_lines": 306,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/base/published/winbase.w",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1210,
+    "OpenNT": 109
+  }
+}

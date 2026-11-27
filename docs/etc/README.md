@@ -2135,3 +2135,5 @@ post-publication targeted checks.
 - [T485 S15 N015 DDK declaration migration](evidence/t485-s1/n015.md).
 - [T485 S15 N016 first-five checkpoint](evidence/t485-s1/n016-first-five.md).
 - [T485 S15 N016 packing and SMB declarations](evidence/t485-s1/n016-packing-smb.md).
+
+- [T485 S15 N016 VDM declarations and template](evidence/t485-s1/n016-vdm.md): XP layout, original-relative census and final-package delivery evidence.

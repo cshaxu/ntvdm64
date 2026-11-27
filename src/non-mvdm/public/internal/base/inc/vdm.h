@@ -1,6 +1,6 @@
 /*++
 
-Copyright (c) 1991  Microsoft Corporation
+Copyright (c) Microsoft Corporation.  All rights reserved.
 
 Module Name:
 
@@ -37,12 +37,12 @@ typedef enum _VdmServiceClass {
     VdmSetLdtEntries,
     VdmSetProcessLdtInfo,
     VdmAdlibEmulation,
-    VdmPMCliControl,
-    VdmQueryVdmProcess
+    VdmPMCliControl
 } VDMSERVICECLASS, *PVDMSERVICECLASS;
 
 
 #if defined (_NTDEF_)
+
 
 NTSTATUS
 NtVdmControl(
@@ -95,7 +95,6 @@ typedef struct _VdmVirtualIca{
 #define VDM_PM_IRETBOPOFF  0x6
 #define VDM_PM_IRETBOPSIZE 8
 #else
-#line 98
 #define VDM_PM_IRETBOPSEG  0xd3
 #define VDM_PM_IRETBOPOFF  0x0
 #define VDM_PM_IRETBOPSIZE 4
@@ -108,21 +107,12 @@ typedef struct _VdmVirtualIca{
 // VDM state which was earlier in vdmtib->flags has been moved to
 // dos arena at following fixed address.
 #ifdef _VDMNTOS_
-#line 110
 #error Unsupported excluded original configuration
-#line 114
 #else  // _VDMNTOS_
 #line 115
 
 /* XLATON */
-#if defined(_PC98_)
-#line 118
-#error DIVERGENCE OPENNT-HOST-136: _PC98_ branch is not selected; see mirror register.
-#line 119
-#else  // !_PC98_
-#line 120
 #define  FIXED_NTVDMSTATE_SEGMENT   0x70
-#endif // _PC98_
 
 #define  FIXED_NTVDMSTATE_OFFSET    0x14
 #define  FIXED_NTVDMSTATE_LINEAR    ((FIXED_NTVDMSTATE_SEGMENT << 4) + FIXED_NTVDMSTATE_OFFSET)
@@ -130,6 +120,7 @@ typedef struct _VdmVirtualIca{
 /* XLATOFF */
 
 #endif // _VDMNTOS_
+#line 125
 
 #if defined (_X86_)
   // defined on x86 only since on mips we must reference thru sas
@@ -171,13 +162,11 @@ typedef struct _VdmVirtualIca{
 /* XLATOFF */
 
 #if DBG
-#line 170
-#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
-#line 171
+#error Unsupported excluded original configuration
 #else
-#line 172
 #define INITIAL_VDM_TIB_FLAGS (VDM_USE_DBG_VDMEVENT | VDM_BREAK_DEBUGGER)
 #endif
+
 
 //
 // bits defined in Eflags
@@ -194,7 +183,6 @@ typedef struct _VdmVirtualIca{
 // If the size of the structure is changed, ke\i386\instemul.asm must
 // be modified too.  If not, it will fail to build
 //
-
 #pragma pack(1)
 typedef struct _Vdm_InterruptHandler {
     USHORT  CsSelector;
@@ -212,15 +200,6 @@ typedef struct _Vdm_FaultHandler {
 } VDM_FAULTHANDLER, *PVDM_FAULTHANDLER;
 
 #pragma pack(1)
-/* XLATON */
-// ==== CHANGED TO _VdmDpmiInfo
-#if 0
-#line 211
-#error DIVERGENCE OPENNT-HOST-129: original literal #if 0 excludes this legacy branch; see mirror register.
-#line 223
-#endif
-#line 224
-
 typedef struct _VdmDpmiInfo {        /* VDMTIB */
     USHORT LockCount;
     USHORT Flags;
@@ -234,8 +213,17 @@ typedef struct _VdmDpmiInfo {        /* VDMTIB */
     ULONG  DosxFaultIretD;
     ULONG  DosxRmReflector;
 } VDM_DPMIINFO, *PVDM_DPMIINFO;
-/* XLATOFF */
 #pragma pack()
+
+//
+// Interrupt handler flags
+//
+
+#define VDM_INT_INT_GATE        0x00000001
+#define VDM_INT_TRAP_GATE       0x00000000
+#define VDM_INT_32              0x00000002
+#define VDM_INT_16              0x00000000
+#define VDM_INT_HOOKED          0x00000004
 
 #pragma pack(1)
 //
@@ -293,6 +281,7 @@ typedef struct _VdmTraceInfo {
 #define VDMTR_KERNEL_OP_PM  1
 #define VDMTR_KERNEL_OP_V86 2
 #define VDMTR_KERNEL_HW_INT 3
+
 
 #if defined(_X86_)
 
@@ -373,24 +362,7 @@ typedef struct _VDM_INITIALIZE_DATA {
         PVDMICAUSERDATA IcaUserData;
 }VDM_INITIALIZE_DATA, *PVDM_INITIALIZE_DATA;
 
-#line 324
 #if defined (_NTDEF_)
-NTSTATUS
-NtVdmControl(
-    IN VDMSERVICECLASS Service,
-    IN OUT PVOID ServiceData
-    );
-
-//
-// Interrupt handler flags
-//
-
-#define VDM_INT_INT_GATE        0x00000001
-#define VDM_INT_TRAP_GATE       0x00000000
-#define VDM_INT_32              0x00000002
-#define VDM_INT_16              0x00000000
-#define VDM_INT_HOOKED          0x00000004
-
 typedef enum _VdmEventClass {
     VdmIO,
     VdmStringIO,
@@ -404,14 +376,14 @@ typedef enum _VdmEventClass {
 
 // VdmPrinterInfo
 
-#define VDM_NUMBER_OF_LPT		3
+#define VDM_NUMBER_OF_LPT       3
 
-#define PRT_MODE_NO_SIMULATION		1
-#define PRT_MODE_SIMULATE_STATUS_PORT	2
-#define PRT_MODE_DIRECT_IO		3
-#define PRT_MODE_VDD_CONNECTED		4
+#define PRT_MODE_NO_SIMULATION  1
+#define PRT_MODE_SIMULATE_STATUS_PORT   2
+#define PRT_MODE_DIRECT_IO      3
+#define PRT_MODE_VDD_CONNECTED  4
 
-#define PRT_DATA_BUFFER_SIZE	16
+#define PRT_DATA_BUFFER_SIZE    16
 
 typedef struct _Vdm_Printer_Info {
     PUCHAR prt_State;
@@ -457,15 +429,6 @@ typedef ULONG VDMINTACKINFO;
 #define VDMINTACK_SLAVE      0x00010000
 #define VDMINTACK_AEOI       0x00020000
 
-// Family table definition for Dynamic Patch Module support
-typedef struct _tagFAMILY_TABLE {
-    int      numHookedAPIs;           // number of hooked API's in this family
-    PVOID    hModShimEng;             // hMod of shim engine
-    PVOID    hMod;                    // hMod of associated loaded dll.
-    PVOID   *DpmMisc;                 // ptr to DPM Module specific data
-    PVOID   *pDpmShmTbls;             // array of ptrs to API family shim tables
-    PVOID   *pfn;                     // array of ptrs to hook functions
-} FAMILY_TABLE, *PFAMILY_TABLE;
 
 typedef struct _VdmEventInfo {
     ULONG Size;
@@ -482,6 +445,7 @@ typedef struct _VdmEventInfo {
 } VDMEVENTINFO, *PVDMEVENTINFO;
 
 
+// Sudeepb 12-Mar-1993
 // Scratch areas are used from VDMTib to get user space while
 // in kernel. This allows us to make Nt APIs (faster) from kernel
 // rather than Zw apis (slower). These are currently being used
@@ -489,24 +453,20 @@ typedef struct _VdmEventInfo {
 
 typedef struct _Vdm_Tib {
     ULONG Size;
-    VDM_INTERRUPTHANDLER VdmInterruptHandlers[256];
-    VDM_FAULTHANDLER VdmFaultHandlers[32];
+    PVDM_INTERRUPTHANDLER VdmInterruptTable;
+    PVDM_FAULTHANDLER VdmFaultTable;
     CONTEXT MonitorContext;
     CONTEXT VdmContext;
     VDMEVENTINFO EventInfo;
     VDM_PRINTER_INFO PrinterInfo;
     ULONG TempArea1[2];                 // Scratch area
-    ULONG TempArea2[2];                 // Scratch area
+    ULONG TempArea2[2];                 // Scratch aArea
     VDM_DPMIINFO DpmiInfo;
     VDM_TRACEINFO TraceInfo;
     ULONG IntelMSW;
     LONG NumTasks;
-    PFAMILY_TABLE *pDpmFamTbls;  // array of ptrs to API family tables
     BOOLEAN ContinueExecution;
 } VDM_TIB, *PVDM_TIB;
-
-#define EFLAGS_TF_MASK  0x00000100
-#define EFLAGS_NT_MASK  0x00004000
 
 //
 // Feature flags returned by NtVdmControl(VdmFeatures...)

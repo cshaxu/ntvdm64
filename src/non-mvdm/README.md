@@ -2907,3 +2907,9 @@ N016's remaining16 original files are not yet migrated by this checkpoint.
 packoff/packon/tstr use XP SDK paths. SMB declarations retain original
 profiles and XP pointer-width macros. [Evidence](../../docs/etc/evidence/t485-s1/n016-packing-smb.md).
 N016 positions6-11 are delivered; VDM and later fragments remain open.
+
+### T485 S15 N016 VDM declarations
+
+VDM C/assembly declarations use XP pointer-table layout. The original winbase
+published template moves to base/published. [ABI and delivery evidence](../../docs/etc/evidence/t485-s1/n016-vdm.md).
+N016 positions12-15 are delivered; six later files remain.

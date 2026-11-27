@@ -99,7 +99,8 @@ int wmain(int argc, wchar_t **argv)
         require(definitions == 1, "Expected one VdmTib definition");
         for (const auto &s : symbols)
             if (s.section == section && s.offset > start && s.offset < end) end = s.offset;
-        require(end > start && end - start > 0xfc0, "Full VDM_TIB must include printer fields");
+        // XP x86 TIB uses two table pointers; vdm_control_test checks its full layout.
+        require(end > start && end - start >= 0x674, "Full XP VDM_TIB storage is required");
         const uint64_t storage = end - start;
         const std::regex row(R"(^\s+[0-9a-fA-F]+:[0-9a-fA-F]+\s+(\S+)\s+([0-9a-fA-F]{8})\s)");
         std::istringstream lines(map);
