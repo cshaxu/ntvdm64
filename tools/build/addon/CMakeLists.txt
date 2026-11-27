@@ -40,7 +40,7 @@ foreach(id IN ITEMS grp hash ini lnk patch31 patch95 path31 path95 pif szdd)
   if(id STREQUAL "pif")
     target_compile_definitions(${id}_object PRIVATE WINNT)
     target_include_directories(${id}_object PRIVATE
-      "${NTVDM_REPO}/src/non-mvdm/public/internal/windows/inc")
+      "${NTVDM_REPO}/src/non-mvdm/public/internal/shell/inc")
   endif()
   set(libraries)
   if(id MATCHES "^(hash|patch31|patch95)$")

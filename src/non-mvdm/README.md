@@ -2960,3 +2960,10 @@ newres.h is byte-exact XP at windows/core/w32inc; the USER clres.c resource
 consumer names that owner. Its own OpenNT baseline stays until N022 migration.
 [Evidence](../../docs/etc/evidence/t485-s1/n020-first.md) records the unchanged
 structure/packing contracts and final-package Full checkpoint. N0201/7 done.
+
+### T485 S15 N020 PIF declaration migration
+
+The addon PIF reader/editor now uses original XP public/internal/shell/inc/pif.h,
+its shlobj.h declaration dependency and seven existing excluded arms. The
+independent mvdm/inc/pif.h COMMAND provider is unchanged. [Evidence](../../docs/etc/evidence/t485-s1/n020-pif.md).
+N0202/7 delivered; five files remain.

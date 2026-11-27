@@ -2152,3 +2152,5 @@ post-publication targeted checks.
 - [N019 Shell declarations and callback ABI](evidence/t485-s1/n019.md).
 
 - [N020 USER resource declaration checkpoint](evidence/t485-s1/n020-first.md).
+
+- [N020 PIF declaration migration](evidence/t485-s1/n020-pif.md).

@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 763,
+    "nonerror_identical": 771,
+    "nonerror_different": 544,
+    "nonerror_points": 7745,
+    "nonerror_lines": 163285
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 763,
+    "nonerror_identical": 771,
+    "nonerror_different": 544,
+    "nonerror_points": 7735,
+    "nonerror_lines": 163271
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": -10,
+    "nonerror_lines": -14
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/pif.h",
+      "before_points": 15,
+      "before_lines": 19,
+      "after_points": 5,
+      "after_lines": 5,
+      "exclusions": 7
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1233,
+    "OpenNT": 82
+  }
+}

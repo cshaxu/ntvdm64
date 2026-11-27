@@ -1,6 +1,6 @@
 /*
  *  Microsoft  Confidential
- *  Copyright (C) Microsoft Corporation 1991-1995
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  All Rights Reserved.
  *
  *
@@ -12,67 +12,53 @@
 #ifndef _INC_PIF
 #define _INC_PIF
 
+#include <shlobj.h>
+
 /* XLATOFF */
 #ifndef RC_INVOKED
 #pragma pack(1)         /* Assume byte packing throughout */
 #endif  /* RC_INVOKED */
 /* XLATON */
 
-#define PIFNAMESIZE     30
-#define PIFSTARTLOCSIZE 63
-#define PIFDEFPATHSIZE  64
-#define PIFPARAMSSIZE   64
-#define PIFSHPROGSIZE   64
-#define PIFSHDATASIZE   64
-#define PIFDEFFILESIZE  80
-#define PIFMAXFILEPATH  260
+// for DOJ compliance, size defines moved to shlobj.w
 
 #ifndef LF_FACESIZE
-#line 31
 #error Unsupported excluded original configuration
 #endif
-#line 33
 
 #define LARGEST_GROUP   sizeof(PROPPRG)
 
-#define OPENPROPS_NONE          0x0000
-#define OPENPROPS_RAWIO         0x0001
-#define OPENPROPS_INFONLY       0x0002
-#define OPENPROPS_FORCEREALMODE 0x0004
-#define OPENPROPS_INHIBITPIF    0x8000
+// for DOJ compliance, some property flags moved to shlobj.h
+#define OPENPROPS_RAWIO         0x0001		//;Internal
+#define OPENPROPS_INFONLY       0x0002		//;Internal
+#define OPENPROPS_FORCEREALMODE 0x0004		//;Internal
 
-#define GETPROPS_NONE           0x0000
-#define GETPROPS_RAWIO          0x0001
-#define GETPROPS_EXTENDED       0x0004          // ;Internal
-#define GETPROPS_OEM            0x0008
+#define GETPROPS_RAWIO          0x0001		//;Internal
+#define GETPROPS_EXTENDED       0x0004          //;Internal
+#define GETPROPS_OEM            0x0008		//;Internal
 
-#define SETPROPS_NONE           0x0000
-#define SETPROPS_RAWIO          0x0001
-#define SETPROPS_CACHE          0x0002
-#define SETPROPS_EXTENDED       0x0004          // ;Internal
-#define SETPROPS_OEM            0x0008
+#define FLUSHPROPS_NONE         0x0000		//;Internal
+#define FLUSHPROPS_DISCARD      0x0001		//;Internal
 
-#define FLUSHPROPS_NONE         0x0000
-#define FLUSHPROPS_DISCARD      0x0001
+#define CREATEPROPS_NONE        0x0000		//;Internal
 
-#define CLOSEPROPS_NONE         0x0000
-#define CLOSEPROPS_DISCARD      0x0001
+#define SETPROPS_RAWIO          0x0001		//;Internal
+#define SETPROPS_CACHE          0x0002		//;Internal
+#define SETPROPS_EXTENDED       0x0004          //;Internal
+#define SETPROPS_OEM            0x0008		//;Internal
 
-#define CREATEPROPS_NONE        0x0000
-
-#define DELETEPROPS_NONE        0x0000
-#define DELETEPROPS_DISCARD     0x0001
+#define DELETEPROPS_NONE        0x0000		
+#define DELETEPROPS_DISCARD     0x0001		
 #define DELETEPROPS_ABORT       0x0002
 
 #define LOADPROPLIB_DEFER       0x0001
 
 
+
 /* XLATOFF */
 #ifndef FAR
-#line 70
 #error Unsupported excluded original configuration
 #endif
-#line 72
 /* XLATON */
 
 //#ifdef  RECT
@@ -148,24 +134,8 @@ typedef PIFRECT FAR *LPPIFRECT;
 #define ICONFILE_DEFAULT        TEXT("PIFMGR.DLL")
 #define ICONINDEX_DEFAULT       0
 
-typedef struct PROPPRG {                    /* prg */
-    WORD    flPrg;                          // see PRG_ flags
-    WORD    flPrgInit;                      // see PRGINIT_ flags
-    CHAR    achTitle[PIFNAMESIZE];          // name[30]
-    CHAR    achCmdLine[PIFSTARTLOCSIZE+PIFPARAMSSIZE+1];// startfile[63] + params[64]
-    CHAR    achWorkDir[PIFDEFPATHSIZE];     // defpath[64]
-    WORD    wHotKey;                        // PfHotKeyScan thru PfHotKeyVal
-    CHAR    achIconFile[PIFDEFFILESIZE];    // name of file containing icon
-    WORD    wIconIndex;                     // index of icon within file
-    DWORD   dwEnhModeFlags;                 // reserved enh-mode flags
-    DWORD   dwRealModeFlags;                // real-mode flags (see RMOPT_*)
-    CHAR    achOtherFile[PIFDEFFILESIZE];   // name of "other" file in directory
-    CHAR    achPIFFile[PIFMAXFILEPATH];     // name of PIF file
-} PROPPRG;
-typedef UNALIGNED PROPPRG *PPROPPRG;
-typedef UNALIGNED PROPPRG FAR *LPPROPPRG;
-typedef const UNALIGNED PROPPRG FAR *LPCPROPPRG;
 
+// for DOJ compliance, PROPPRG moved to shlobj.w
 
 
 #define GROUP_TSK               2           // tasking group
@@ -466,20 +436,16 @@ typedef UNALIGNED PROPNT31 FAR *LPPROPNT31;
 #endif
 
 #ifdef UNICODE
-#line 465
 #error Unsupported excluded original configuration
-#line 519
 #else
+#line 494
 
-#line 521
 #ifndef WINNT
-#line 522
 #error Unsupported non-WINNT PIF profile
 #endif
-#line 524
 
 #endif // UNICODE
-#line 526
+#line 500
 
 #define GROUP_ICON              (MAX_VALID_GROUP+1)
 #define GROUP_MAX               0x0FF
@@ -785,11 +751,9 @@ typedef UNALIGNED WNTPIF31 FAR *LPWNTPIF31;                                 /* ;
 #endif
                                                                             /* ;Internal */
 #ifdef UNICODE
-#line 831
 #error Unsupported excluded original configuration
-#line 837
 #endif
-#line 838
+#line 812
                                                                             /* ;Internal */
 //                                                                          /* ;Internal */
 // Whenever a previously reserved field or bit becomes used, increment      /* ;Internal */
@@ -853,11 +817,9 @@ typedef struct PIFDATA {                    /* pd */  //Examples            /* ;
 
 
 #ifdef UNICODE
-#line 901
 #error Unsupported excluded original configuration
-#line 909
 #endif
-#line 910
+#line 884
                                                                             /* ;Internal */
 } PIFDATA;                                  // 0x221 if Windows 3.x PIF     /* ;Internal */
 typedef UNALIGNED PIFDATA *PPIFDATA;                                        /* ;Internal */
@@ -916,30 +878,28 @@ typedef UINT PIFWIZERR;
 
 /* XLATOFF */
 
-#if !defined(NTVDM) && defined(WINAPI)
-PIFWIZERR WINAPI AppWizard(HWND hwnd, int hProps, UINT action);
+#ifdef WINAPI
+PIFWIZERR WINAPI AppWizard(HWND hwnd, HANDLE hProps, UINT action);
 
 int  WINAPI OpenProperties(LPCTSTR lpszApp, LPCTSTR lpszPIF, UINT hInf, UINT flOpt);
-int  WINAPI GetProperties(int hProps, LPCSTR lpszGroup, LPVOID lpProps, int cbProps, UINT flOpt);
-int  WINAPI SetProperties(int hProps, LPCSTR lpszGroup, const VOID FAR *lpProps, int cbProps, UINT flOpt);
-int  WINAPI EditProperties(int hProps, LPCTSTR lpszTitle, UINT uStartPage, HWND hwnd, UINT uMsgPost);
-int  WINAPI FlushProperties(int hProps, UINT flOpt);
-int  WINAPI EnumProperties(int hProps);
-long WINAPI AssociateProperties(int hProps, int iAssociate, long lData);
-int  WINAPI CloseProperties(int hProps, UINT flOpt);
-int  WINAPI CreateStartupProperties(int hProps, UINT flOpt);
-int  WINAPI DeleteStartupProperties(int hProps, UINT flOpt);
+int  WINAPI GetProperties(HANDLE hProps, LPCSTR lpszGroup, LPVOID lpProps, int cbProps, UINT flOpt);
+int  WINAPI SetProperties(HANDLE hProps, LPCSTR lpszGroup, const VOID FAR *lpProps, int cbProps, UINT flOpt);
+int  WINAPI EditProperties(HANDLE hProps, LPCTSTR lpszTitle, UINT uStartPage, HWND hwnd, UINT uMsgPost);
+int  WINAPI FlushProperties(HANDLE hProps, UINT flOpt);
+HANDLE  WINAPI EnumProperties(HANDLE hProps);
+LONG_PTR WINAPI AssociateProperties(HANDLE hProps, int iAssociate, LONG_PTR lData);
+int  WINAPI CloseProperties(HANDLE hProps, UINT flOpt);
+int  WINAPI CreateStartupProperties(HANDLE hProps, UINT flOpt);
+int  WINAPI DeleteStartupProperties(HANDLE hProps, UINT flOpt);
 BOOL WINAPI PifPropGetPages(LPVOID lpv, LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM lParam);
 
 
 #ifdef  PIF_PROPERTY_SHEETS
-#line 985
 #error DIVERGENCE OPENNT-HOST-133: PIF_PROPERTY_SHEETS branch is not selected; see mirror register.
-#line 993
 #endif  /* PIF_PROPERTY_SHEETS */
-#line 994
+#line 968
 
-#endif	/* !NTVDM && WINAPI */
+#endif  /* WINAPI */
 
 #ifndef RC_INVOKED
 #pragma pack()          /* Revert to default packing */
