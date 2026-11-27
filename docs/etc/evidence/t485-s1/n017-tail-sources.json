@@ -1,0 +1,48 @@
+[
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/rxp.h",
+    "path": "src/non-mvdm/public/internal/net/inc/rxp.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/net/inc/rxp.h",
+    "exclusions": []
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/rxuser.h",
+    "path": "src/non-mvdm/public/internal/net/inc/rxuser.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/net/inc/rxuser.h",
+    "exclusions": []
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/strucinf.h",
+    "path": "src/non-mvdm/ds/netapi/inc/strucinf.h",
+    "xp_path": "Source/XPSP1/NT/ds/netapi/inc/strucinf.h",
+    "exclusions": []
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+    "path": "src/non-mvdm/ds/netapi/inc/timelib.h",
+    "xp_path": "Source/XPSP1/NT/ds/netapi/inc/timelib.h",
+    "exclusions": [
+      {
+        "original_start": 45,
+        "original_end": 47
+      }
+    ]
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/xsprocs.h",
+    "path": "src/non-mvdm/public/internal/net/inc/xsprocs.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/net/inc/xsprocs.h",
+    "exclusions": []
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+    "path": "src/non-mvdm/public/internal/net/inc/xstypes.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/net/inc/xstypes.h",
+    "exclusions": [
+      {
+        "original_start": 47,
+        "original_end": 49
+      }
+    ]
+  }
+]

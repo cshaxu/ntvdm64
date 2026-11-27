@@ -1,0 +1,80 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 756,
+    "nonerror_identical": 762,
+    "nonerror_different": 553,
+    "nonerror_points": 7754,
+    "nonerror_lines": 167883
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 760,
+    "nonerror_identical": 768,
+    "nonerror_different": 547,
+    "nonerror_points": 7748,
+    "nonerror_lines": 164027
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 4,
+    "nonerror_identical": 6,
+    "nonerror_different": -6,
+    "nonerror_points": -6,
+    "nonerror_lines": -3856
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/rxp.h",
+      "before_points": 1,
+      "before_lines": 804,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/rxuser.h",
+      "before_points": 1,
+      "before_lines": 230,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/inc/strucinf.h",
+      "before_points": 1,
+      "before_lines": 406,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/inc/timelib.h",
+      "before_points": 1,
+      "before_lines": 262,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/xsprocs.h",
+      "before_points": 1,
+      "before_lines": 1810,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/xstypes.h",
+      "before_points": 1,
+      "before_lines": 344,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 1
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1229,
+    "OpenNT": 86
+  }
+}

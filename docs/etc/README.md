@@ -2144,3 +2144,5 @@ post-publication targeted checks.
 
 - [T485 S15 N017 middle ten](evidence/t485-s1/n017-middle.md): NetAPI original headers, excluded arms and original directory binding.
 - [Archived S14 status detail](evidence/t485-s1/s14-status-history.md): closed P chronology moved out of CURRENT without losing evidence.
+
+- [T485 S15 N017 final six](evidence/t485-s1/n017-tail.md): original NetAPI/time declarations, zero nonerror diff and directory completion evidence.

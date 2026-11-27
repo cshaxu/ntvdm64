@@ -2934,3 +2934,9 @@ NetAPI private/public declarations use XP owners under ds/inc, ds/netapi/inc
 and public/internal/net/inc. Existing excluded arms remain original; only
 #line differences survive. [Evidence](../../docs/etc/evidence/t485-s1/n017-middle.md).
 N017 has13/19 files delivered; rxp through xstypes remain.
+
+### T485 S15 N017 completion
+
+Final Rx/XACTSRV interfaces use XP Net paths; structure/time declarations use
+XP ds/netapi/inc. All six have zero nonerror difference. [Evidence](../../docs/etc/evidence/t485-s1/n017-tail.md).
+All19 original N017 files reconciled; earlier paired userenvp.h unchanged.

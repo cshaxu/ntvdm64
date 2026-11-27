@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall52/159 directories, H001-H036 and N001-N016. S15 runtime9 is the current
+overall53/159 directories, H001-H036 and N001-N017. S15 runtime10 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-4/14 directories delivered; next N017. P1 N013 relocated DLC declarations;
+5/14 directories delivered; next N018. P1 N013 relocated DLC declarations;
 P2 N014 relocated PMVDM and passed Full24/24 at directory50.
 [P3 N015](../etc/evidence/t485-s1/n015.md) migrated five DDK declarations,
 including DLC's XP SDK path. Cached full build, runtime3 dual13-image26hash
@@ -99,6 +99,15 @@ next rxp.h. Overall52/159 and S15 4/14 remain. Current census1315files,
 756exact,762nonerror same/553different,7754points/167883lines;
 delta0files,+3exact,+4same,-4different,+10points/-4278lines (LF/#line cleanup).
 1223XP/92OpenNT. P8 census remains historical.
+
+[P10 N017 final-six](../etc/evidence/t485-s1/n017-tail.md) delivered: all six
+original XP paths/declarations restored, four byte-exact and two only#error.
+Cached build, runtime10 dual13-image26hash publication, RAP11/11, lifecycle
+and real guest NetAPI passed. Six files since P9 Full24/24; no repeat Full.
+N017 is19/19 complete; overall53/159 and S15 5/14. Next N018.
+Current census1315files,760exact,768nonerror same/547different,
+7748points/164027lines; delta0files,+4exact,+6same,-6different,-6points/-3856lines.
+1229XP/86OpenNT. P9 census remains historical.
 
 ## S14 Closure Record
 
