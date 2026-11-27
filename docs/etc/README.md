@@ -2141,3 +2141,6 @@ post-publication targeted checks.
 - [T485 S15 N016 final fragments](evidence/t485-s1/n016-tail.md): obsolete-file retirement, XP published paths and BASE caller evidence.
 
 - [T485 S15 N017 first three](evidence/t485-s1/n017-first-three.md): XP Net/DS declaration originals, consumers and checkpoint evidence.
+
+- [T485 S15 N017 middle ten](evidence/t485-s1/n017-middle.md): NetAPI original headers, excluded arms and original directory binding.
+- [Archived S14 status detail](evidence/t485-s1/s14-status-history.md): closed P chronology moved out of CURRENT without losing evidence.

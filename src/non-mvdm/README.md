@@ -2927,3 +2927,10 @@ apinums/apiparam use XP public/internal/net/inc; crypt retains its DS path.
 All three are byte-exact XP originals, including unused declarations.
 [Evidence](../../docs/etc/evidence/t485-s1/n017-first-three.md).
 N017 has3/19 inventory files delivered; later declarations remain open.
+
+### T485 S15 N017 middle-ten checkpoint
+
+NetAPI private/public declarations use XP owners under ds/inc, ds/netapi/inc
+and public/internal/net/inc. Existing excluded arms remain original; only
+#line differences survive. [Evidence](../../docs/etc/evidence/t485-s1/n017-middle.md).
+N017 has13/19 files delivered; rxp through xstypes remain.

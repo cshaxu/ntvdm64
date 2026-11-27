@@ -1,0 +1,112 @@
+{
+  "before": {
+    "files": 1315,
+    "byte_identical": 753,
+    "nonerror_identical": 758,
+    "nonerror_different": 557,
+    "nonerror_points": 7744,
+    "nonerror_lines": 172161
+  },
+  "after": {
+    "files": 1315,
+    "byte_identical": 756,
+    "nonerror_identical": 762,
+    "nonerror_different": 553,
+    "nonerror_points": 7754,
+    "nonerror_lines": 167883
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 3,
+    "nonerror_identical": 4,
+    "nonerror_different": -4,
+    "nonerror_points": 10,
+    "nonerror_lines": -4278
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/ds/netapi/inc/debuglib.h",
+      "before_points": 1,
+      "before_lines": 310,
+      "after_points": 2,
+      "after_lines": 2,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "before_points": 1,
+      "before_lines": 652,
+      "after_points": 16,
+      "after_lines": 16,
+      "exclusions": 13
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "before_points": 5,
+      "before_lines": 18,
+      "after_points": 3,
+      "after_lines": 3,
+      "exclusions": 5
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "before_points": 1,
+      "before_lines": 232,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 2
+    },
+    {
+      "path": "src/non-mvdm/ds/inc/prefix.h",
+      "before_points": 1,
+      "before_lines": 126,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/rap.h",
+      "before_points": 1,
+      "before_lines": 1,
+      "after_points": 1,
+      "after_lines": 1,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/inc/rapdebug.h",
+      "before_points": 1,
+      "before_lines": 124,
+      "after_points": 1,
+      "after_lines": 1,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/inc/rapgtpt.h",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/remdef.h",
+      "before_points": 1,
+      "before_lines": 2486,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/remtypes.h",
+      "before_points": 1,
+      "before_lines": 352,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1223,
+    "OpenNT": 92
+  }
+}

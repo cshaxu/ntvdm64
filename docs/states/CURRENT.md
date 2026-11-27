@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall52/159 directories, H001-H036 and N001-N016. S15 runtime8 is the current
+overall52/159 directories, H001-H036 and N001-N016. S15 runtime9 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -90,74 +90,22 @@ Next debuglib.h. Current census1315files,753exact,758nonerror same/557different,
 7744points/172161lines; delta0files,+3exact,+3same,-3different,-3points/-4014lines.
 1215XP/100OpenNT. P7 census remains historical.
 
+[P9 N017 middle-ten](../etc/evidence/t485-s1/n017-middle.md) delivered DIR
+positions4-13 and original private include paths. Original exclusion conditions
+retained; remaining nonerror differences are#line only. Cached build,
+runtime9 dual13-image26hash publication, RAP11/11, NetAPI and Full24/24 passed.
+Ten-file checkpoint resets to zero. N017 now13/19 delivered,6remaining;
+next rxp.h. Overall52/159 and S15 4/14 remain. Current census1315files,
+756exact,762nonerror same/553different,7754points/167883lines;
+delta0files,+3exact,+4same,-4different,+10points/-4278lines (LF/#line cleanup).
+1223XP/92OpenNT. P8 census remains historical.
+
 ## S14 Closure Record
 
-9/9 directories verified for delivery in S14. [N004 BaseClient](../etc/evidence/t485-s1/n004.md)
-and [receipt](../etc/evidence/t485-s1/n004-result.json): XP vdm.c plus required
-original vdm.h; paired WOW registration field leads N005. Cached full build,
-dual13-image26hash publication, targeted tests and consolidated Full23/23 pass.
-First Full exposed Run16's rejection of XP's PE64 classification; one native
-acceptance condition now admits both32/64 through the existing launch path.
-Nine unaffected Full passes and three Console cases were retained; only failed
-and unexecuted cases continued. Runtime2 is the current published package.
-Nonerror vdm.c diff: OpenNT1point/6087lines -> XP16points/239lines; original LF
-restoration exposes residual points. Paired basemsg.h adds0points/2lines.
-S14 P1 delivered N004. [N005 Base declarations](../etc/evidence/t485-s1/n005.md)
-([receipt](../etc/evidence/t485-s1/n005-result.json)) completes P2: cached full
-build, dual13-image26hash publication and affected BASE/RPC/COMMAND/WOW tests
-passed. Four mirror files reduce nonerror6points/983lines to0/0; ntcsrmsg.h
-leads N021 only as a dependency. Runtime3 was N005's published package. N004 Full remains
-its checkpoint; no repeat Full is claimed. Four files since that checkpoint.
-[N006 BaseSrv VDM](../etc/evidence/t485-s1/n006.md) and
-[receipt](../etc/evidence/t485-s1/n006-result.json) complete P3 verification:
-XP desktop/logon shared-WOW records, real worker task/Console binding and
-original request validation. Runtime6 cached-build/dual13-image26hash pass;
-Full24/24 consolidates21 initial passes,2 bounded continuations and the new
-SOL Game > Options modal-dialog gate. Initial CAF find-KVM failure is retained;
-no full-suite rerun. Runtime6 differs from Full-tested runtime5 only in named
-package-ID/PE timestamp fields after format/#line cleanup. Primary mirrors
-OpenNT3points/6586lines -> XP17points/95lines; paired vdm.c drops4lines,
-5 original declaration headers are byte-exact. This is the new ten-file
-checkpoint. Other paired directories remain open.
-[N007 system fonts](../etc/evidence/t485-s1/n007.md):42/42 actual files are
-byte-exact OpenNT/XP originals, with matching complete directory membership.
-No production or media change; nonerror0points/0lines. P4 documentation-only
-registration retains N006 runtime6 Full24/24 without rebuild/republication.
-The unchanged42-file audit uses that same checkpoint. [N008 OLE conversion](../etc/evidence/t485-s1/n008.md) completes P5 verification: XP output initialization and active-path line mapping, runtime7 cached full build and dual13-image26hash publication, real Win16 descriptor roundtrip/invalid-input/ownership pass. Nonerror OpenNT1point/5096lines -> XP22points/3936lines; LF restoration exposes residual points. One changed file since the checkpoint; no repeat Full. [N009 Netlib](../etc/evidence/t485-s1/n009.md) completes P6:10 existing sources plus required original midluser/RPC declarations; runtime8 cached full build, dual13-image26hash publication, targeted packstr and Full24/24 pass. Primary nonerror10points/7071lines -> 15points/19lines; paired header costs are separately recorded. This is the new Full checkpoint. P6 committed/pushed0262e23b1. [P7 omission repair](../etc/evidence/t485-s1/p7-omissions.md) completes
-bounded H markfrom/N001-N003 follow-up:14 changed files, protected XP
-ntcsrmsg/BaseClient and retained S13 closure. Runtime9 cached full build,
-dual13-image26hash publication, x86/x64 capture3475 checks each and Full24/24
-pass. Nonerror XP byte diff14points/16684lines -> 11points/257lines; CSR
-normalized9points/500lines -> 5points/240lines. Eight modified files are XP
-byte-exact. No original guest change. This is the new ten-file Full checkpoint.
-[P8 N010 RAP](../etc/evidence/t485-s1/n010.md) delivered7 XP-byte-exact
-sources plus2 paired declarations; runtime10 cached full build, dual13-image
-26hash publication,11 RAP assertions and real guest NetAPI pass. Full remains
-P7 runtime9;9 files since checkpoint. [Global mixed-baseline census](../etc/evidence/t485-s1/n010-census.json):
-1319 files; byte-exact729; nonerror same731/different588;7765points/214351lines.
-P8 delta: total0, exact+8, nonerror same+8/different-8,points-8,lines-7736.
-[P9 N011](../etc/evidence/t485-s1/n011.md) relocates apiworke.h to XP's
-public/internal/net/inc path byte-exact and removes old include search paths.
-Runtime11 cached full build, dual13-image26hash publication, real guest NetAPI
-and Full24/24 pass. This is the ten-file checkpoint after N010's nine files.
-P9 global census1319files:byte-exact730,nonerror same732/different587,
-7764points/214251lines. P9 delta:total0,exact+1,same+1,different-1,
-points-1,lines-100;1 relocation and OpenNT->XP baseline switch.
-1173 files use XP,146 retain OpenNT-family originals. S14 delivery8/9,
-overall47/159; next N012 XACTSRV, then mandatory S14 closure Full.
-
-
-
-
-[P10 N012](../etc/evidence/t485-s1/n012.md) delivers XP XACTSRV handlers and
-conversion helpers; obsolete xsdata removed, original xsdebug replaces local
-macros. Runtime12 cached full build, dual13-image26hash publication, RAP11/11,
-enum42/42, real guest NetAPI and Full24/24 passed. Existing Win95 exit1 boundary
-retained. Current global census1319files:byte-exact740,nonerror same742/different577,
-7760points/197875lines; P10 delta0files,+10exact,+10same,-10different,-4points,
--16376lines.1188 XP and131 OpenNT-family originals. All N004-N012 are verified
-for delivery:9/9 S14,48/159 total. [S14 closure audit](../etc/evidence/t485-s1/s14-closure.md) passed; S15 admitted.
-
+S14 completed N004-N012; final runtime12 Full24/24 and clean delivery admitted
+S15. [Closure](../etc/evidence/t485-s1/s14-closure.md) and
+[archived detailed status](../etc/evidence/t485-s1/s14-status-history.md)
+retain all per-P results, counterexamples and approved boundaries.
 
 ## S13 Closure Record
 

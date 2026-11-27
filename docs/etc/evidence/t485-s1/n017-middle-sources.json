@@ -1,0 +1,160 @@
+[
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+    "path": "src/non-mvdm/ds/netapi/inc/debuglib.h",
+    "xp_path": "Source/XPSP1/NT/ds/netapi/inc/debuglib.h",
+    "exclusions": [
+      {
+        "original_start": 141,
+        "original_end": 147
+      }
+    ]
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+    "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/ds/inc/netdebug.h",
+    "exclusions": [
+      {
+        "original_start": 116,
+        "original_end": 120
+      },
+      {
+        "original_start": 122,
+        "original_end": 128
+      },
+      {
+        "original_start": 139,
+        "original_end": 141
+      },
+      {
+        "original_start": 157,
+        "original_end": 159
+      },
+      {
+        "original_start": 172,
+        "original_end": 191
+      },
+      {
+        "original_start": 193,
+        "original_end": 198
+      },
+      {
+        "original_start": 218,
+        "original_end": 226
+      },
+      {
+        "original_start": 228,
+        "original_end": 233
+      },
+      {
+        "original_start": 243,
+        "original_end": 285
+      },
+      {
+        "original_start": 306,
+        "original_end": 322
+      },
+      {
+        "original_start": 324,
+        "original_end": 331
+      },
+      {
+        "original_start": 345,
+        "original_end": 353
+      },
+      {
+        "original_start": 376,
+        "original_end": 378
+      }
+    ]
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+    "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/ds/inc/netlib.h",
+    "exclusions": [
+      {
+        "original_start": 106,
+        "original_end": 110
+      },
+      {
+        "original_start": 113,
+        "original_end": 115
+      },
+      {
+        "original_start": 173,
+        "original_end": 184
+      },
+      {
+        "original_start": 346,
+        "original_end": 348
+      },
+      {
+        "original_start": 551,
+        "original_end": 553
+      }
+    ]
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+    "path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/ds/inc/netlibnt.h",
+    "exclusions": [
+      {
+        "original_start": 56,
+        "original_end": 58
+      },
+      {
+        "original_start": 84,
+        "original_end": 86
+      }
+    ]
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/prefix.h",
+    "path": "src/non-mvdm/ds/inc/prefix.h",
+    "xp_path": "Source/XPSP1/NT/ds/inc/prefix.h",
+    "exclusions": []
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+    "path": "src/non-mvdm/public/internal/net/inc/rap.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/net/inc/rap.h",
+    "exclusions": [
+      {
+        "original_start": 115,
+        "original_end": 146
+      }
+    ]
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+    "path": "src/non-mvdm/ds/netapi/inc/rapdebug.h",
+    "xp_path": "Source/XPSP1/NT/ds/netapi/inc/rapdebug.h",
+    "exclusions": [
+      {
+        "original_start": 52,
+        "original_end": 60
+      }
+    ]
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/rapgtpt.h",
+    "path": "src/non-mvdm/ds/netapi/inc/rapgtpt.h",
+    "xp_path": "Source/XPSP1/NT/ds/netapi/inc/rapgtpt.h",
+    "exclusions": []
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/remdef.h",
+    "path": "src/non-mvdm/public/internal/net/inc/remdef.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/net/inc/remdef.h",
+    "exclusions": []
+  },
+  {
+    "old_path": "src/non-mvdm/public/internal/ds/inc/remtypes.h",
+    "path": "src/non-mvdm/public/internal/net/inc/remtypes.h",
+    "xp_path": "Source/XPSP1/NT/public/internal/net/inc/remtypes.h",
+    "exclusions": []
+  }
+]

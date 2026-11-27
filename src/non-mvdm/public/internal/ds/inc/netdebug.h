@@ -111,35 +111,31 @@ Revision History:
 
 // These may be included in any order:
 #include <debugfmt.h>           // Most FORMAT_ equates.
+#include <stdarg.h>
 
 #if DBG
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
-#line 119
 #else // not DBG
-#line 120
+#line 121
 
 #ifdef CDEBUG
-#line 122
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
-#line 127
 #else // ndef CDEBUG
-#line 128
+#line 129
 
 // Nondebug version.
 
 #endif // ndef CDEBUG
 
 #endif // not DBG
+#line 135
 
 
 #if !DBG || defined(lint) || defined(_lint)
 #define DBGSTATIC static        // hidden function
 #else
-#line 139
 #error Network debug visibility profile is not supported
-#line 140
 #endif
-#line 141
 
 
 //
@@ -156,11 +152,8 @@ typedef LPSTR LPDEBUG_STRING;
 #define FORMAT_LPDEBUG_STRING   "%s"
 
 #ifdef __cplusplus
-#line 157
 #error Unsupported excluded original configuration
-#line 158
 #endif
-#line 159
 
 
 // NetpAssert: continue if Predicate is true; otherwise print debug message
@@ -174,18 +167,14 @@ typedef LPSTR LPDEBUG_STRING;
 //
 
 #if DBG
-#line 172
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
-#line 190
 #else // not DBG
-#line 191
+#line 192
 
 #ifdef CDEBUG
-#line 193
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
-#line 197
 #else // ndef CDEBUG
-#line 198
+#line 199
 
 // Nondebug version.
 #define NetpAssert(Predicate)   /* no output; ignore arguments */
@@ -193,6 +182,7 @@ typedef LPSTR LPDEBUG_STRING;
 #endif // ndef CDEBUG
 
 #endif // not DBG
+#line 206
 
 
 // NetpBreakPoint: if this is a debug version of some sort, cause a breakpoint
@@ -206,18 +196,14 @@ typedef LPSTR LPDEBUG_STRING;
 //
 
 #if DBG
-#line 218
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
-#line 225
 #else // not DBG
-#line 226
+#line 227
 
 #ifdef CDEBUG
-#line 228
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
-#line 232
 #else // ndef CDEBUG
-#line 233
+#line 234
 
 // Nondebug version.
 #define NetpBreakPoint()          /* no effect. */
@@ -225,65 +211,24 @@ typedef LPSTR LPDEBUG_STRING;
 #endif // ndef CDEBUG
 
 #endif // not DBG
+#line 241
 
 
 #if DBG
-#line 243
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
-#line 537
 #else // not DBG
-#line 538
+#line 286
 
-#define NetpDbgDisplayBool(Tag,Value)         /* nothing */
-#define NetpDbgDisplayConnection(Level,Info)  /* nothing */
-#define NetpDbgDisplayConnectionArray(Level,Info,EntryCount)  /* nothing */
 #define NetpDbgDisplayDword(Tag,Value)        /* nothing */
 #define NetpDbgDisplayDwordHex(Tag,Value)     /* nothing */
-#define NetpDbgDisplayFile(Level,Info)        /* nothing */
-#define NetpDbgDisplayFileArray(Level,Array,EntryCount)       /* nothing */
-#define NetpDbgDisplayFileId(Id)              /* nothing */
-#define NetpDbgDisplayFileTime(Time)          /* nothing */
-#define NetpDbgDisplayFilePermissions(Perm)   /* nothing */
-#define NetpDbgDisplayLanManVersion(Major,Minor)  /* nothing */
-#define NetpDbgDisplayLargeIntegerTime(Time)  /* nothing */
 #define NetpDbgDisplayLong(Tag,Value)         /* nothing */
-#define NetpDbgDisplayPlatformId(Value)       /* nothing */
-#define NetpDbgDisplayPrintDest(Level,Info,Unicode)                  /* empty */
-#define NetpDbgDisplayPrintDestArray(Level,Array,EntryCount,Unicode) /* empty */
-#define NetpDbgDisplayPrintJob(Level,Info,Unicode)                   /* empty */
-#define NetpDbgDisplayPrintJobArray(Level,Array,EntryCount,Unicode)  /* empty */
-#define NetpDbgDisplayPrintQ(Level,Info,Unicode)                     /* empty */
-#define NetpDbgDisplayPrintQArray(Level,Array,EntryCount,Unicode)    /* empty */
-#define NetpDbgDisplayServerInfo(Level,Info)  /* nothing */
-#define NetpDbgDisplayRepl(Level,Info)        /* nothing */
-#define NetpDbgDisplayReplExportDir(Level,Info)  /* nothing */
-#define NetpDbgDisplayReplExportDirArray(Level,Array,EntryCount) /* nothing */
-#define NetpDbgDisplayReplImportDir(Level,Info)  /* nothing */
-#define NetpDbgDisplayReplImportDirArray(Level,Array,EntryCount) /* nothing */
-#define NetpDbgDisplayReplList(Tag,Value)     /* nothing */
-#define NetpDbgDisplayReplState(State)                               /* empty */
-#define NetpDbgDisplayService(Level,Info)     /* nothing */
-#define NetpDbgDisplayServiceArray(Level,Array,EntryCount)    /* nothing */
-#define NetpDbgDisplayServiceCode(Code)       /* nothing */
-#define NetpDbgDisplayServicePid(Pid)         /* nothing */
-#define NetpDbgDisplayServiceStatus(Status)   /* nothing */
-#define NetpDbgDisplaySession(Level,Info)     /* nothing */
-#define NetpDbgDisplaySessionArray(Level,Array,EntryCount)    /* nothing */
-#define NetpDbgDisplayStr(Tag,Value)                                 /* empty */
 #define NetpDbgDisplayString(Tag,Value)       /* nothing */
 #define NetpDbgDisplayTimestamp(Tag,Time)     /* nothing */
 #define NetpDbgDisplayTag(Tag)                /* nothing */
 #define NetpDbgDisplayTod(Tag,Tod)            /* nothing */
-#define NetpDbgDisplayTStr(Tag,Value)         /* nothing */
-#define NetpDbgDisplayUseInfo(Level,Buffer)   /* nothing */
-#define NetpDbgDisplayWord(Tag,Value)         /* nothing */
-#define NetpDbgDisplayWordHex(Tag,Value)      /* nothing */
-#define NetpDbgDisplayWksta(Level,Info)       /* nothing */
-#define NetpDbgDisplayWkstaUser(Level,Info)   /* nothing */
-#define NetpDbgDisplayWkstaUserArray(Level,Array,EntryCount)  /* nothing */
-#define NetpDbgDisplayWStr(Tag,Value)         /* nothing */
 
 #endif // not DBG
+#line 296
 
 //
 //  NetpKdPrint() & NetpDbgPrint() are net equivalents of
@@ -295,18 +240,14 @@ typedef LPSTR LPDEBUG_STRING;
 //
 
 #if DBG
-#line 600
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
-#line 615
 #else // not DBG
-#line 616
+#line 323
 
 #ifdef CDEBUG
-#line 618
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
-#line 625
 #else // ndef CDEBUG
-#line 626
+#line 332
 
 //  Nondebug version.  Note that NetpKdPrint() eliminates all its
 //  arguments.
@@ -315,21 +256,21 @@ typedef LPSTR LPDEBUG_STRING;
 
 #endif // ndef CDEBUG
 #endif // not DBG
+#line 340
 
 
 // NetpDbgHexDump: do a hex dump of some number of bytes to the debug
 // terminal or whatever.  This is a no-op in a nondebug build.
 
 #if DBG || defined(CDEBUG)
-#line 640
 #error Network debug hexdump profile is not supported
-#line 647
 #else
-#line 648
+#line 354
 
 #define NetpDbgHexDump(StartAddr,Length)     // no output; ignore arguments
 
 #endif
+#line 358
 
 //
 // Define a number of bytes to dump for partial dumps.  Each line dumps
@@ -349,10 +290,62 @@ typedef LPSTR LPDEBUG_STRING;
     /*lint -restore */
 
 #ifdef __cplusplus
-#line 671
 #error Unsupported excluded original configuration
-#line 672
 #endif
-#line 673
+
+//
+// Generic log managment funtions.  Present in debug and free builds.
+// All logs are relative to %WINDIR%\\debug\\.  DebugLog will automatically
+// have a .LOG appended
+//
+
+VOID
+NetpInitializeLogFile(
+    VOID
+    );
+
+VOID
+NetpShutdownLogFile(
+    VOID
+    );
+
+HANDLE
+NetpOpenDebugFile(
+    IN LPWSTR DebugLog,
+    IN BOOLEAN ReopenFlag
+    );
+
+VOID
+NetpCloseDebugFile(
+    IN HANDLE LogHandle
+    );
+
+VOID
+NetpLogPrintRoutine(
+    IN HANDLE LogHandle,
+    IN LPSTR Format,
+    ...
+    );
+
+VOID
+NetpLogPrintRoutineVEx(
+    IN HANDLE LogHandle,
+    IN PDWORD OpenLogThreadId OPTIONAL,
+    IN LPSTR Format,
+    IN va_list arglist
+    );
+
+VOID
+NetpLogPrintRoutineV(
+    IN HANDLE LogHandle,
+    IN LPSTR Format,
+    IN va_list arglist
+    );
+
+VOID
+NetpResetLog(
+    IN HANDLE LogHandle
+    );
+
 
 #endif // ndef _NETDEBUG_

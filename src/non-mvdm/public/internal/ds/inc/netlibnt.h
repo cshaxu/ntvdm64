@@ -54,38 +54,8 @@ Revision History:
 #define _NETLIBNT_
 
 #ifdef __cplusplus
-#line 57
 #error Unsupported excluded original configuration
 #endif
-#line 59
-
-NET_API_STATUS
-NetpAllocTStrFromString(
-    IN PSTRING lpstringSrc,
-    OUT LPTSTR * BufPtr         // Must be freed with NetApiBufferFree().
-    );
-
-VOID
-NetpCopyStringToTStr(
-    OUT LPTSTR Dest,
-    IN PSTRING Src
-    );
-
-NET_API_STATUS
-NetpGetProductType(
-    IN LPTSTR UncServerName OPTIONAL,
-    OUT PNT_PRODUCT_TYPE ProductType
-    );
-
-// BOOL
-// NetpIsProductTypeValid(
-//     IN DWORD ProductType
-//     );
-//
-#define NetpIsProductTypeValid( prod ) \
-    (  ( (prod) == NtProductWinNt ) \
-    || ( (prod) == NtProductLanManNt ) \
-    || ( (prod) == NtProductServer ))
 
 NET_API_STATUS
 NetpNtStatusToApiStatus(
@@ -112,9 +82,7 @@ NetpRdrFsControlTree(
     );
 
 #ifdef __cplusplus
-#line 113
 #error Unsupported excluded original configuration
 #endif
-#line 115
 
 #endif // ndef _NETLIBNT_

@@ -94,12 +94,6 @@ Revision History:
 #ifndef _NETLIB_
 #define _NETLIB_
 
-// These must be included first:
-// (none, because of MIDL conflicts.)
-
-// #include <windows.h>            // IN, LPBYTE, LPVOID, NULL, etc.
-// #include <lmcons.h>             // NET_API_STATUS, etc.
-
 // These may be included in any order:
 
 #include <string.h>             // memcpy().
@@ -111,20 +105,13 @@ Revision History:
 
 #ifdef CDEBUG                   // Debug in ANSI C environment?
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
-#line 116
 #endif // ndef CDEBUG
-#line 117
+#line 111
 
 
 #ifdef __cplusplus
 #error Unsupported excluded original configuration
 #endif
-
-// Arbitrary.  PortUAS has at least 16 args in one message.
-// This allows arg numbers 1-19 to be used.
-// (This is used by NetpFindNumberedFormatInWStr() and its caller(s).
-#define MAX_NETLIB_MESSAGE_ARG  19
-
 
 //
 // IN_RANGE(): Make sure SomeValue is between SomeMin and SomeMax.
@@ -171,23 +158,6 @@ NetpAdjustPreferedMaximum (
     OUT LPDWORD EntriesToAllocate OPTIONAL
     );
 
-DWORD
-NetpAtoX(
-    IN LPCWSTR String
-    );
-
-// VOID
-// NetpChangeNullCharToNullPtr(
-//     IN OUT LPTSTR p
-//     );
-//
-#define NetpChangeNullCharToNullPtr(p) \
-    { \
-        if ( ((p) != NULL) && (*(p) == '\0') ) { \
-            (p) = NULL; \
-        } \
-    }
-
 // Portable memory move/copy routine:  This is intended to have exactly
 // the semantics of ANSI C's memcpy() routine, except that the byte count
 // is 32 bits long.
@@ -201,20 +171,20 @@ NetpAtoX(
 
 #ifdef CDEBUG
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
-#line 213
 #else // ndef CDEBUG
-#line 214
+#line 185
 
 #define NetpMoveMemory(Dest,Src,Size)                                   \
                 (void) memcpy( (Dest), (Src), (size_t) (Size) )
 
 #endif // ndef CDEBUG
+#line 190
 
 DWORD
 NetpPackString(
-    IN OUT LPTSTR * string,     // pointer by reference: string to be copied.
+    IN OUT LPWSTR * string,     // pointer by reference: string to be copied.
     IN LPBYTE dataend,          // pointer to end of fixed size data.
-    IN OUT LPTSTR * laststring  // pointer by reference: top of string data.
+    IN OUT LPWSTR * laststring  // pointer by reference: top of string data.
     );
 
 //
@@ -226,11 +196,11 @@ NetpPackString(
 
 BOOL
 NetpCopyStringToBuffer (
-    IN LPTSTR String OPTIONAL,
+    IN LPWSTR String OPTIONAL,
     IN DWORD CharacterCount,
     IN LPBYTE FixedDataEnd,
-    IN OUT LPTSTR *EndOfVariableData,
-    OUT LPTSTR *VariableDataPointer
+    IN OUT LPWSTR *EndOfVariableData,
+    OUT LPWSTR *VariableDataPointer
     );
 
 //
@@ -257,7 +227,7 @@ NetpCopyDataToBuffer (
 // add a dependency on <stddef.h> here.
 //
 
-typedef DWORD PTRDIFF_T;
+typedef DWORD_PTR PTRDIFF_T;
 
 
 //
@@ -309,41 +279,9 @@ NetpAllocateEnumBufferEx(
     IN DWORD IncrementalSize
     );
 
-#line 306
-// VOID
-// NetpBuildASCIIZ(
-//     OUT LPSTR Dest,          // Destination (will be null terminated).
-//     IN LPBYTE Src,           // Source (not null terminated).
-//     IN DWORD Count           // Byte count (not including null char).
-//     );
-
-#define NetpBuildASCIIZ(dest,src,count)                                 \
-                {                                                       \
-                    NetpMoveMemory( (dest), (src), (count) );           \
-                    *( ((LPBYTE)(dest)) + (count) ) = '\0';             \
-                }
-
-// Convert C runtime errno value to windows/lanman API status value.
-NET_API_STATUS
-NetpErrNoToApiStatus(
-    IN int Err
-    );
-
-LPCWSTR
-NetpFindNumberedFormatInWStr(
-    IN LPCWSTR Format,
-    IN DWORD   ArgNumber        // Arg number (1=first).
-    );
-
-BOOL
-NetpIsRemoteServiceStarted(
-    IN LPTSTR UncServerName OPTIONAL,
-    IN LPTSTR ServiceName
-    );
-
 BOOL
 NetpIsServiceStarted(
-    IN LPTSTR ServiceName
+    IN LPWSTR ServiceName
     );
 
 //
@@ -410,23 +348,50 @@ NetpMemoryReallocate(
 
 NET_API_STATUS
 NetpGetComputerName (
-    IN  LPTSTR   *ComputerNamePtr);
+    IN  LPWSTR   *ComputerNamePtr);
 
-// Note: calls to NetpGetDomainId should eventually be replaced by calls
-// to NetpGetLocalDomainId.  --JR
 NET_API_STATUS
-NetpGetDomainId (
-    OUT PSID *RetDomainId     // alloc and set ptr (free with LocalFree)
+NetpGetComputerNameEx (
+    IN  LPWSTR   *ComputerNamePtr,
+    IN  BOOL PhysicalNetbiosName
     );
 
 NET_API_STATUS
 NetpGetDomainName (
-    OUT LPTSTR *DomainNamePtr  // alloc and set ptr (free with NetApiBufferFree)
+    OUT LPWSTR *DomainNamePtr  // alloc and set ptr (free with NetApiBufferFree)
     );
 
 NET_API_STATUS
 NetpGetDomainNameEx (
-    OUT LPTSTR *DomainNamePtr, // alloc and set ptr (free with NetApiBufferFree)
+    OUT LPWSTR *DomainNamePtr, // alloc and set ptr (free with NetApiBufferFree)
+    OUT PBOOLEAN IsWorkgroupName
+    );
+
+NET_API_STATUS
+NetpGetDomainNameExEx (
+    OUT LPWSTR *DomainNamePtr,
+    OUT LPWSTR *DnsDomainNamePtr OPTIONAL,
+    OUT PBOOLEAN IsWorkgroupName
+    );
+
+#ifndef GUID_DEFINED
+#define GUID_DEFINED
+typedef struct  _GUID
+    {
+    DWORD Data1;
+    WORD Data2;
+    WORD Data3;
+    BYTE Data4[ 8 ];
+    } GUID;
+
+#endif // !GUID_DEFINED
+
+NET_API_STATUS
+NetpGetDomainNameExExEx (
+    OUT LPTSTR *DomainNamePtr,
+    OUT LPTSTR *DnsDomainNamePtr OPTIONAL,
+    OUT LPTSTR *DnsForestNamePtr OPTIONAL,
+    OUT GUID **DomainGuidPtr OPTIONAL,
     OUT PBOOLEAN IsWorkgroupName
     );
 
@@ -443,16 +408,6 @@ NetpGetLocalDomainId (
     );
 
 //
-// Get SID for this thread.  (Caller must impersonate if they want client's
-// SID.)
-//
-NET_API_STATUS
-NetpGetUserSid(
-    OUT PSID *UserSid           // alloc and set ptr (free with LocalFree).
-    );
-
-
-//
 // NetService API helpers
 //
 
@@ -463,34 +418,6 @@ NetpGetUserSid(
 //
 #define NetpIsServiceLevelValid( Level ) \
      ( ((Level)==0) || ((Level)==1) || ((Level)==2) )
-
-BOOL
-NetpIsServiceNameValid(
-     IN LPTSTR ServiceName,
-     IN BOOL UseDownlevelRules
-     );
-
-NET_API_STATUS
-NetpShiftArrayLeft(
-    IN LPVOID ArrayBase,
-    IN DWORD  DestIndex,
-    IN DWORD  SrcIndex,
-    IN DWORD  TotalEntries,
-    IN DWORD  EntrySize
-    );
-
-// VOID
-// NetpSkipWDigits(
-//     IN OUT LPWSTR strPtr
-//     );
-//
-// Note that strPtr WILL be evaluated multiple times and will be updated.
-#define NetpSkipWDigits( strPtr ) \
-    { \
-        while (iswdigit( (*strPtr) ) ) { \
-            ++strPtr;    /* Point to next wide char. */ \
-        } \
-    }
 
 NET_API_STATUS
 NetpTranslateNamesInServiceArray(
@@ -503,9 +430,9 @@ NetpTranslateNamesInServiceArray(
 
 NET_API_STATUS
 NetpTranslateServiceName(
-    IN LPTSTR GivenServiceName,
+    IN LPWSTR GivenServiceName,
     IN BOOL PreferNewStyle,
-    OUT LPTSTR * TranslatedName
+    OUT LPWSTR * TranslatedName
     );
 
 //
@@ -520,26 +447,9 @@ DosGetMessage(
     OUT LPBYTE Buffer,
     IN WORD BufferLength,
     IN WORD MessageId,
-    IN LPTSTR FileName,
+    IN LPWSTR FileName,
     OUT PWORD pMessageLength
     );
-
-WORD
-DosInsMessage(
-    IN LPSTR * InsertionStrings,
-    IN WORD NumberofStrings,
-    IN OUT LPSTR InputMessage,
-    IN WORD InputMessageLength,
-    OUT LPBYTE Buffer,
-    IN WORD BufferLength,
-    OUT PWORD pMessageLength
-    );
-WORD
-DosPutMessage(
-    unsigned int hf,
-    WORD us,
-    PCHAR pch);
-
 
 DWORD
 NetpGetPrivilege(
@@ -561,6 +471,73 @@ NetpWriteEventlog(
     LPWSTR *Strings,
     DWORD DataLength,
     LPVOID Data
+    );
+
+DWORD
+NetpRaiseAlert(
+    IN LPWSTR ServiceName,
+    IN DWORD alert_no,
+    IN LPWSTR *string_array
+    );
+
+//
+// Special flags to NetpEventlogWrite
+//
+
+#define NETP_LAST_MESSAGE_IS_NTSTATUS  0x80000000
+#define NETP_LAST_MESSAGE_IS_NETSTATUS 0x40000000
+#define NETP_ALLOW_DUPLICATE_EVENTS    0x20000000
+#define NETP_RAISE_ALERT_TOO           0x10000000
+#define NETP_STRING_COUNT_MASK         0x000FFFFF
+
+HANDLE
+NetpEventlogOpen (
+    IN LPWSTR Source,
+    IN ULONG DuplicateEventlogTimeout
+    );
+
+DWORD
+NetpEventlogWrite (
+    IN HANDLE NetpEventHandle,
+    IN DWORD EventId,
+    IN DWORD EventType,
+    IN LPBYTE RawDataBuffer OPTIONAL,
+    IN DWORD RawDataSize,
+    IN LPWSTR *StringArray,
+    IN DWORD StringCount
+    );
+
+//
+// extended version with re-arranged parameters + category, to be more
+// compatible with ReportEvent().
+//
+
+DWORD
+NetpEventlogWriteEx (
+    IN HANDLE NetpEventHandle,
+    IN DWORD EventType,
+    IN DWORD EventCategory,
+    IN DWORD EventId,
+    IN DWORD StringCount,
+    IN DWORD RawDataSize,
+    IN LPWSTR *StringArray,
+    IN LPVOID RawDataBuffer OPTIONAL
+    );
+
+VOID
+NetpEventlogClearList (
+    IN HANDLE NetpEventHandle
+    );
+
+VOID
+NetpEventlogSetTimeout (
+    IN HANDLE NetpEventHandle,
+    IN ULONG DuplicateEventlogTimeout
+    );
+
+VOID
+NetpEventlogClose (
+    IN HANDLE NetpEventHandle
     );
 
 #ifdef __cplusplus
