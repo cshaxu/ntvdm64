@@ -196,6 +196,7 @@ extern ULONG DosxRMReflector;
 //
 
 #ifndef _X86_
+#line 198
 typedef struct _LDT_ENTRY {
     WORD    LimitLow;
     WORD    BaseLow;
@@ -221,6 +222,7 @@ typedef struct _LDT_ENTRY {
     } HighWord;
 } LDT_ENTRY, *PLDT_ENTRY;
 #endif
+#line 222
 
 
 //
@@ -661,6 +663,7 @@ BuildStackFrame(
 BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame,
     PUCHAR *pVdmStackPointer, ULONG *pNewSP);
 
+#line 659
 VOID
 EmulateV86Int(
     UCHAR InterruptNumber

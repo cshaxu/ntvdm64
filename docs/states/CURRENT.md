@@ -39,12 +39,13 @@ S10-S12:953residual IDs covered after appending11omitted P13 pending rows.
 S8:851files/900frozen points reconcile;606byte-exact,245line-only files,
 1818diagnostic residual points registered separately. S7 maps839old IDs to
 110registered semantic residuals across7files. Its historical metrics omit
-#line;the20file byte census is1740points/2826lines. LF restoration removed4350
-diff lines;dpmi32.c line repair removes1point,80compiler witnesses pass.
-S13 runtime1 cached-build/dual26hash/61CPU cases pass;all binary bytes match
-runtime14 except package IDs and PE timestamps. Six diagnostic anchors are
-registered. Remaining line candidates:dpmi32.h,dpmiint.c,modesw.c;confirm
-and repair before final accounting/closure.
+#line;current S7 byte census is1741points/2852lines. S6 adds11diagnostic
+points/11lines,not semantic defects. Three LF restorations removed4350lines;
+P7/P8 repaired four files'line anchors. S7 static review has zero unmatched
+unique-statement lines;P8 product preprocessing has703matched records.
+Runtime2 cached build,dual26hash publication and61CPU cases pass;images differ
+from runtime1 only by package identity/PE timestamps. Missing S6/S7 diagnostic
+records are registered;final cross-owner accounting/closure remains.
 No behavioral changes;runtime14 Full23/23 is retained,not rerun. No S13 closure.
 
 ## S12 Closure Record

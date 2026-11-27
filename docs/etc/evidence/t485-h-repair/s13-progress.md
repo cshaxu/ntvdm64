@@ -158,3 +158,27 @@ remaining line candidates only in dpmi32.h,dpmiint.c and modesw.c. Confirm
 these with product preprocessing and repair their complete files next. Other
 17files have no such static mismatch;this is not complete branch coverage.
 S13 remains open;N004 stays gated.
+
+## P8 remaining S7 line repair and diagnostic register
+
+[Receipt](s13-p8-line-repair.json) completes dpmi32.h,dpmiint.c and modesw.c
+line anchors:76points/316lines ->77points/342lines (+1point/+26lines).
+Only#line changes;this fits the owner's standing1point/below100line approval.
+Two actual compiler contexts match703original-statement records with zero
+unexplained mismatches. The new prefix decoder switch is explicitly not an
+original-statement witness. Initial strict output comparison found blank-line
+differences;nonempty preprocessed code lines and literals remain identical.
+S7's20file static review now has zero unique-statement line mismatches.
+
+Cached full build passed;runtime2 dual publication matches26hashes;61CCPU
+cases pass. Images differ from runtime1 only by package GUID and PE timestamps;
+all other bytes are identical. Full23/23 is retained with that explicit
+identity analysis,not re-executed or claimed as a fresh runtime2 Full.
+
+S7 current nonerror byte census:1741points/2852lines. S6 current census is
+11points/11lines,all diagnostic anchors;its historical0/0was semantic only.
+Register the previously omitted S6/S7 diagnostic anchors separately from frozen
+IDs,excluding the six already registered S13-L rows. Directive counts are not
+added to diff-block totals. The exact per-file inventory,hashes and pending-row
+count are in the receipt. All1039file hashes reconcile. S13 final cross-owner
+accounting and closure remain;no migration progress is claimed for repair.

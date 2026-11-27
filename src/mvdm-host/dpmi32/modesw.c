@@ -104,6 +104,7 @@ Return Value:
     DECLARE_LocalVdmContext;
 
     mvdm_softpc_wow_page_domain_leave_protected();
+#line 101
     setMSW(getMSW() & ~MSW_PE);
 
 #line 103
@@ -154,6 +155,7 @@ Return Value:
     DECLARE_LocalVdmContext;
 
     setEFLAGS((getEFLAGS() & ~(EFLAGS_RF_MASK | EFLAGS_NT_MASK)));
+#line 163
     setMSW(getMSW() | MSW_PE);
 
 #line 165
@@ -345,9 +347,12 @@ Return Value:
     Data = (PWORD16) VdmMapFlat(DosxRmCodeSegment, 4, VDM_V86);
     *(Data) = 0xb7;
 
+#line 360
     SetPMExec();
     setCS(DosxRmCodeSelector);
+#line 358
     setSS(LastLockedPMStackSS);
+#line 357
     setESP(LastLockedPMStackESP);
     (void)mvdm_softpc_wow_page_domain_reenter_protected();
 #line 361

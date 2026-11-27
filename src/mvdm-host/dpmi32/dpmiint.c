@@ -77,6 +77,7 @@ static void monitor_printer_close(WORD adapter)
 const mvdm_monitor_provider mvdm_original_monitor_provider = {
     &VdmTib, monitor_printer_view, monitor_printer_close
 };
+#line 42
 
 BOOL
 SetProtectedModeInterrupt(
@@ -508,6 +509,7 @@ DpmiOwnsContext(VOID)
         Cpu40LdtShadowAddress && c_getLDT_BASE() == Cpu40LdtShadowAddress;
 }
 
+#line 475
 BOOL
 DpmiSwIntHandler(
     ULONG IntNumber
@@ -556,10 +558,12 @@ Return Value:
 
         if (!DpmiOwnsContext()) return FALSE;
 
+#line 521
         // Protect mode
         SaveEFLAGS = getEFLAGS();
         //BUGBUG turn off task bits
         SaveEFLAGS &= ~EFLAGS_NT_MASK;
+#line 526
 
         if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) {
             return FALSE;
@@ -573,11 +577,13 @@ Return Value:
         /* A rejected frame does not commit the monitor's flag updates. */
         setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
         if (WideFrame) {
+#line 536
 
             *(PDWORD16)(VdmStackPointer-4) =  SaveEFLAGS;
             *(PDWORD16)(VdmStackPointer-8) =  getCS();
             *(PDWORD16)(VdmStackPointer-12) = getEIP();
             setEIP(Handlers[IntNumber].Eip);
+#line 543
         } else {
 
             *(PWORD16)(VdmStackPointer-2) = (WORD) SaveEFLAGS;
@@ -638,9 +644,11 @@ Return Value:
 
         if (!DpmiOwnsContext()) return FALSE;
 
+#line 607
         SaveEFLAGS = getEFLAGS();
         //BUGBUG turn off task bits
         SaveEFLAGS &= ~0x4000;
+#line 611
 
         BeginUseLockedPMStack();
 
@@ -650,6 +658,7 @@ Return Value:
         }
 
         setEFLAGS(SaveEFLAGS & ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK));
+#line 618
 
         if (Frame32) {
             *(PDWORD16)(VdmStackPointer-4) = SaveEFLAGS;
@@ -897,6 +906,7 @@ Return Value:
         return TRUE;
     }
     if (!DpmiOwnsContext()) return FALSE;
+#line 903
 
     SaveSS = getSS();
     SaveESP = getESP();
@@ -906,6 +916,7 @@ Return Value:
     if ((IntNumber == 13 || IntNumber == 6) && DpmiEmulateInstruction()) return TRUE;
 
     if (!SEGMENT_IS_PRESENT(Handlers[IntNumber].CsSelector)) { 
+#line 918
         return FALSE;
     }
 
@@ -935,6 +946,7 @@ Return Value:
     }
 
     setEFLAGS(SaveEFLAGS & ~(EFLAGS_IF_MASK | EFLAGS_TF_MASK));
+#line 943
 
     if (Frame32) {
         *(PDWORD16)(VdmStackPointer-4) = SaveSS;
@@ -1183,6 +1195,7 @@ DpmiNextCodeByte(ULONG Offset, PULONG Length, PUCHAR Value)
     return TRUE;
 }
 #endif
+#line 1164
 BOOL
 DpmiEmulateInstruction(
     VOID
@@ -1213,6 +1226,7 @@ Return Value:
     ULONG SegCS = getCS(), Length = 0;
     BOOL Big = (c_getCS_AR() & 0x4000) != 0, Operand32 = Big;
     ULONG Offset = Big ? getEIP() : getIP();
+#line 1192
     BOOL bReturn = FALSE;
 
     /* Validate instruction prefixes and operands before dispatching side effects. */
@@ -1227,6 +1241,7 @@ Return Value:
         }
         break;
     }
+#line 1204
     switch (Opcode) {
         case 0xfa:
         case 0xfb:
@@ -1282,6 +1297,7 @@ Return Value:
             //
             if (!DpmiNextCodeByte(Offset, &Length, &Operands[0]))
                 break;
+#line 1222
             //
             // Look for code in dxutil.asm EnterProtectedMode
             //
@@ -1289,6 +1305,7 @@ Return Value:
                 ((Operands[0] == 0xe0) ||          // mov fs, ax
                  (Operands[0] == 0xe8))            // mov gs, ax
                     ) {
+#line 1230
                 bReturn = TRUE;
             }
             break;
@@ -1301,6 +1318,7 @@ Return Value:
         if (Opcode != 0xfb)
             ccpu386CompleteInstruction();
     }
+#line 1236
     return bReturn;
 }
 
