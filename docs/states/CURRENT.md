@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall59/159 directories, H001-H036 and N001-N023. S15 runtime96 is the current
+overall59/159 directories, H001-H036 and N001-N023. S15 runtime97 is the current
 published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
@@ -182,23 +182,11 @@ its receipt retains all tests and census.
 [P77 XP window data](../etc/evidence/t485-s1/n024-getset.md) delivered runtime93;
 its receipt retains complete tests, failures, corrections and census.
 
-[P78 XP profile](../etc/evidence/t485-s1/n024-profile.md) verified runtime94:
-original five-function/query ABI and tables; native read-only boundary retained.
-Cached build, dual26hash, controls40/40, task-order, init-notification and real
-Win16 controls pass. Policy-only negative outputs/handle lifetime verified.
-Census1332/792/803/529/7990/62434; delta0/0/0/0/
-+10/-551;1318XP/14OpenNT. LF recovery unfolds old whole-file diff.
-N0245/9; S15 11/14; overall59/159. Three files since P75 Full24/24.
-Next queue.c; no S/T closure.
+[P78 XP profile](../etc/evidence/t485-s1/n024-profile.md) delivered runtime94;
+its receipt retains complete tests, corrections and census.
 
-[P79 XP task initialization](../etc/evidence/t485-s1/n024-queue.md) verified runtime95:
-paired module/base names, Win16 handle flags, XP profile identifiers and rollback.
-Cached build, dual26hash, controls40/40, task-order, init-notification,
-task-lifecycle, init-rollback and real Win16 controls pass.
-Census1332/792/803/529/8012/63536; delta0/0/0/0/
-+22/+1102;1319XP/13OpenNT. Source-baseline growth is explicit.
-N0246/9; S15 11/14; overall59/159. Four files since P75 Full24/24.
-Next server.c; no S/T closure.
+[P79 XP task initialization](../etc/evidence/t485-s1/n024-queue.md) delivered
+runtime95; its receipt retains all tests, corrections and census.
 
 [P80 XP message tables](../etc/evidence/t485-s1/n024-server.md) verified runtime96:
 original tables/initializer restored, shared-heap zeroing contract paired;
@@ -208,6 +196,14 @@ Census1332/792/803/529/8028/63075; delta0/0/0/0/
 +16/-461;1320XP/12OpenNT. LF recovery unfolds old byte span.
 N0247/9; S15 11/14; overall59/159. Five files since P75 Full24/24.
 Next taskman.c; no S/T closure.
+
+[P81 XP task scheduler](../etc/evidence/t485-s1/n024-taskman.md) verified runtime97.
+XP destruction/notification/wait restored; unused task-lock excluded by XP.
+Cached build, dual26hash, controls40/40, task-order, init-notification,
+task-lifecycle, init-rollback and real Win16 controls pass.
+Census1332/792/803/529/8044/61645; delta0/0/0/0/
++16/-1430;1321XP/11OpenNT. N0248/9;
+S15 11/14; overall59/159; six since P75 Full24/24. Next userk.h.
 
 ## S14 Closure Record
 

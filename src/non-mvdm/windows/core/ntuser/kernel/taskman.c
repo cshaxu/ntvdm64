@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: taskman.c
 *
-* Copyright (c) 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains the core functions of the input sub-system
 *
@@ -15,24 +15,33 @@
 #define WOW_ORIGINAL_TASK_ORDER
 #include "wow_task_order_bindings.h"
 #include "userk.h"
+#define BEGINATOMICCHECK()
+#define TIF_MEOW 0x00800000u
+#define TDBF_SETUP 1
+#define DTM_SETUPAPPRAN (WM_USER + 90)
+/* XP ntcb.h receive-side contract, using the existing C client callback. */
+DWORD xxxClientWOWTask16SchedNotify(DWORD notify, DWORD parameter)
+{
+    return pfnWowTask16SchedNotify ? pfnWowTask16SchedNotify(notify, parameter) : 1;
+}
 #line 16
 #pragma hdrstop
 
 
-/*
- * WakeWowTask
- *
- * if needed the wowtask is woken by setting its event
- * It is assumed that if any wow task is currently scheduled
- * that it is a waste of time to wake the specified wow task
- * since rescheduling will occur when the currently scheduled
- * wow task enters xxxSleepTask
- *
- */
+/***************************************************************************\
+* WakeWowTask
+*
+* If needed the wowtask is woken by setting its event. It is assumed that if
+* any wow task is currently scheduled that it is a waste of time to wake the
+* specified wow task since rescheduling will occur when the currently
+* scheduled wow task enters xxxSleepTask.
+*
+* History:
+* ????
+\***************************************************************************/
 VOID
 WakeWowTask(
-   PTHREADINFO pti
-   )
+   PTHREADINFO pti)
 {
    PWOWPROCESSINFO pwpi;
 
@@ -41,8 +50,6 @@ WakeWowTask(
        KeSetEvent(pti->pEventQueueServer, EVENT_INCREMENT, FALSE);
        }
 }
-
-
 
 
 /***************************************************************************\
@@ -59,8 +66,7 @@ WakeWowTask(
 * History:
 * 19-Nov-1993 mikeke    Created
 \***************************************************************************/
-
-void InsertTask(
+VOID InsertTask(
     PPROCESSINFO ppi,
     PTDB ptdbNew)
 {
@@ -128,8 +134,7 @@ void InsertTask(
 * History:
 * 02-27-91 MikeHar      Created.
 \***************************************************************************/
-
-void DestroyTask(
+VOID DestroyTask(
     PPROCESSINFO ppi,
     PTHREADINFO ptiToRemove)
 {
@@ -138,15 +143,32 @@ void DestroyTask(
     PTDB* pptdb;
     PWOWPROCESSINFO pwpi = ppi->pwpi;
 
+    // try to catch #150446
+    CheckCritIn();
+    BEGINATOMICCHECK();
+
     UserAssert(pwpi != NULL);
 
     if (ptdbToRemove != NULL) {
 
+        if (ptdbToRemove->TDB_Flags & TDBF_SETUP) {
+              /*
+               * This means that the WoW app was a setup app (checked in SetAppCompatFlags).
+               * If so, the shell needs to be notified so it can clean up potential problems
+               * caused by bad calls to DDE, etc.   FritzS
+               */
+            HWND shell = GetShellWindow();
+            if (shell) {
+                PostMessageW(shell, DTM_SETUPAPPRAN, 0, 0);
+#line 151
+            }
+        }
         /*
          * Remove the WOW per thread info
          */
         if (ptdbToRemove->pwti) {
             PWOWTHREADINFO *ppwti = &(ppi->shared->pwtiFirst);
+#line 158
             while (*ppwti != ptdbToRemove->pwti && (*ppwti)->pwtiNext != NULL) {
                 ppwti = &((*ppwti)->pwtiNext);
             }
@@ -158,6 +180,7 @@ void DestroyTask(
         }
 
         (ppi->shared)->nEvents -= ptdbToRemove->nEvents;
+#line 169
 
         /*
          * remove it from any lists
@@ -169,13 +192,16 @@ void DestroyTask(
              */
             if (ptdb == ptdbToRemove) {
                 *pptdb = ptdb->ptdbNext;
+                UserFreePool(ptdbToRemove);
+                UserAssert(ptiToRemove->ptdb == ptdbToRemove);
+                ptiToRemove->ptdb = NULL;
                 break;
             }
             pptdb = &(ptdb->ptdbNext);
         }
-
-        UserFreePool(ptdbToRemove);
+        UserAssert(ptdb == ptdbToRemove);  // #150446 check that we actually found it
     }
+    ENDATOMICCHECK(); // #150446
 
     /*
      * If the task being destroyed is the active task, make nobody active.
@@ -219,7 +245,6 @@ void DestroyTask(
 
 
 
-#line 219
 /***************************************************************************\
 * xxxSleepTask
 *
@@ -239,7 +264,7 @@ BOOL xxxSleepTask(
     BOOL   fInputIdle,
     HANDLE hEvent,
     PTHREADINFO currentThread)
-#line 237
+#line 251
 {
     PTDB ptdb;
     PTHREADINFO     pti;
@@ -260,9 +285,9 @@ BOOL xxxSleepTask(
     CheckCritIn();
 
     pti  = currentThread;
+#line 271
     ppi  = pti->ppi;
     pwpi = ppi->pwpi;
-
 
     /*
      *  If this task has received a message from outside of the current
@@ -314,6 +339,7 @@ BOOL xxxSleepTask(
         if (pti->pcti->fsChangeBits & pti->pcti->fsWakeMask) {
             pti->ptdb->nEvents++;
             (ppi->shared)->nEvents++;
+#line 324
         }
     }
 
@@ -333,8 +359,8 @@ rescan:
             if (pwpi->nRecvLock >= pwpi->nSendLock) {
                 for (ptdb = pwpi->ptdbHead; ptdb; ptdb = ptdb->ptdbNext) {
                     if (ptdb->nEvents > 0 &&
-                            wow_task_execution_ready(ptdb->pti) && /* DIVERGENCE(OPENNT-HOST-123): native-stack readiness. */
-#line 330
+                            wow_task_execution_ready(ptdb->pti) &&
+#line 343
                             !(hEvent == HEVENT_REMOVEME && ptdb->pti == pti)) {
                         pwpi->ptiScheduled = ptdb->pti;
                         break;
@@ -411,10 +437,10 @@ rescan:
             } else if ((pti->TIF_flags & TIF_SHAREDWOW) && !bWaitedAtLeastOnce) {
                 if (pwpi->hEventWowExecClient == hEvent) {
                     /*
-                     * We have to call WakeInputIdle only if this will
+                     * We have to call zzzWakeInputIdle only if this will
                      * awake WowExec's thread and not other thread. Bug 44060.
                      */
-                    WakeInputIdle(pti);
+                    zzzWakeInputIdle(pti); // need to DeferWinEventNotify() ?? IANJA ??
                 }
             }
 
@@ -436,8 +462,7 @@ rescan:
         }
 
         if (pti->apEvent == NULL) {
-            pti->apEvent = ExAllocatePoolWithTag(NonPagedPool,
-                    POLL_EVENT_CNT * sizeof(PKEVENT), TAG_THREADINFO);
+            pti->apEvent = UserAllocPoolNonPaged(POLL_EVENT_CNT * sizeof(PKEVENT), TAG_EVENT);
             if (pti->apEvent == NULL)
                 return FALSE;
         }
@@ -457,9 +482,11 @@ rescan:
             nHandles = 1;
         }
 
-        CheckForClientDeath();
-        LeaveCrit();
+	if (pti->TIF_flags & TIF_MEOW) {
+	    xxxClientWOWTask16SchedNotify(WOWSCHNOTIFY_WAIT, 0);
+	}
 
+        LeaveCrit();
         Status = KeWaitForMultipleObjects(nHandles,
                                           &pti->apEvent[IEV_TASK],
                                           WaitAny,
@@ -469,9 +496,12 @@ rescan:
                                           NULL,
                                           NULL);
 
-        CheckForClientDeath();
-
         EnterCrit();
+
+        if (pti->TIF_flags & TIF_MEOW) {
+	    xxxClientWOWTask16SchedNotify(WOWSCHNOTIFY_RUN, 0);
+	}
+
 
         bWaitedAtLeastOnce = TRUE;
 
@@ -483,6 +513,9 @@ rescan:
             /*
              * An alert was received.  This should only occur when the
              * thread has been terminated.
+             * ClientDeliverUserApc() delivers User-mode APCs by calling back
+             * to the client and immediately returning without doing anything:
+             * KeUserModeCallback will automatically deliver any pending APCs.
              */
             UserAssert(PsIsThreadTerminating(PsGetCurrentThread()));
             ClientDeliverUserApc();
@@ -499,6 +532,7 @@ rescan:
     pti->ptdb->nEvents--;
     (ppi->shared)->nEvents--;
     UserAssert((ppi->shared)->nEvents >= 0);
+#line 514
 
     InsertTask(ppi, pti->ptdb);
 
@@ -553,6 +587,7 @@ BOOL xxxUserYield(
        if (pti->ptdb->nEvents == 0) {
             pti->ptdb->nEvents++;
             (ppi->shared)->nEvents++;
+#line 568
         }
         InsertTask(ppi, pti->ptdb);
 
@@ -561,6 +596,7 @@ BOOL xxxUserYield(
          * in need of running.
          */
         xxxSleepTask(TRUE, NULL, pti);
+#line 576
 
         /*
          * Deal with any that arrived since we weren't executing.
@@ -579,13 +615,11 @@ BOOL xxxUserYield(
 * History:
 * 25-Jun-1992 mikeke    Created.
 \***************************************************************************/
-
 VOID DirectedScheduleTask(
      PTHREADINFO ptiOld,
      PTHREADINFO ptiNew,
      BOOL bSendMsg,
-     PSMS psms
-     )
+     PSMS psms)
 {
     PWOWPROCESSINFO pwpiOld;
     PWOWPROCESSINFO pwpiNew;
@@ -606,6 +640,7 @@ VOID DirectedScheduleTask(
         if (pwpiOld->ptiScheduled == ptiOld) {
             ptiOld->ptdb->nEvents++;
             (ptiOld->ppi->shared)->nEvents++;
+#line 619
             InsertTask(ptiOld->ppi, ptiOld->ptdb);
             }
 
@@ -637,6 +672,7 @@ VOID DirectedScheduleTask(
 
         ptiNew->ptdb->nEvents++;
         (ptiOld->ppi->shared)->nEvents++;
+#line 650
         bRaisePriority = bSendMsg || psms == ptiNew->psmsSent;
 
         if (bRaisePriority) {
@@ -676,8 +712,7 @@ VOID DirectedScheduleTask(
 * History:
 * 09-17-92 JimA         Created.
 \***************************************************************************/
-
-void xxxDirectedYield(
+VOID xxxDirectedYield(
     DWORD dwThreadId)
 {
     PTHREADINFO ptiOld;
@@ -697,6 +732,7 @@ void xxxDirectedYield(
      */
     ptiOld->ptdb->nEvents++;
     (ptiOld->ppi->shared)->nEvents++;
+#line 709
     InsertTask(ptiOld->ppi, ptiOld->ptdb);
 
     /*
@@ -711,6 +747,7 @@ void xxxDirectedYield(
         if (ptiNew->TIF_flags & TIF_16BIT) {
             ptiNew->ptdb->nEvents++;
             (ptiOld->ppi->shared)->nEvents++;
+#line 723
             ptiNew->ptdb->nPriority--;
             InsertTask(ptiNew->ppi, ptiNew->ptdb);
             ptiNew->ptdb->nPriority++;
@@ -718,6 +755,7 @@ void xxxDirectedYield(
     }
 
     xxxSleepTask(TRUE, NULL, ptiOld);
+#line 730
 }
 
 
@@ -733,20 +771,7 @@ void xxxDirectedYield(
 * History:
 * 13-Apr-1992 jonpa      Created.
 \***************************************************************************/
-DWORD CurrentTaskLock(
-    DWORD hlck)
-{
-    PWOWPROCESSINFO pwpi = PpiCurrent()->pwpi;
-
-    if (!pwpi)
-        return 0;
-
-    if (hlck == 0) {
-        pwpi->nTaskLock++;
-        return ~(DWORD)pwpi->ptiScheduled->ptdb;
-    } else if ((~hlck) == (DWORD)pwpi->ptiScheduled->ptdb) {
-        pwpi->nTaskLock--;
-    }
-
-    return 0;
-}
+#if 0 /* WOW is not using this but they might some day */
+#error
+#line 763
+#endif

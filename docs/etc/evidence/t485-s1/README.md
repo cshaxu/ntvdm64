@@ -335,3 +335,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 
 - [N024 XP queue call-chain audit](n024-queue.md).
 - [N024 XP message-table migration](n024-server.md).
+
+- [N024 XP task scheduler migration](n024-taskman.md).

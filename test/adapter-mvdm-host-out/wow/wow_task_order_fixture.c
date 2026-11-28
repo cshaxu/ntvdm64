@@ -63,7 +63,6 @@ static void transitions(void)
     wow_task_order_thread tb={&pb,&b,WOW_TASK_TIF_16BIT,NULL,NULL};
     wow_task_order_thread native={&pn,NULL,0,NULL,NULL};
     wow_task_order_message message={0};
-    DWORD cookie;
     a.pti=&ta;b.pti=&tb;
     ta.pEventQueueServer=CreateEventW(NULL,FALSE,FALSE,NULL);
     tb.pEventQueueServer=CreateEventW(NULL,FALSE,FALSE,NULL);
@@ -90,14 +89,6 @@ static void transitions(void)
     CHECK(sb.nRecvLock==0 && message.flags==0 && shared.nEvents==6);
     sa.ptiScheduled=&ta;
     CHECK(wow_user_runtime_bind(&binding,&runtime,&ta,NULL));
-    cookie=CurrentTaskLock(0);
-    CHECK(cookie==~(DWORD)&a && sa.nTaskLock==1);
-    CHECK(CurrentTaskLock(0)==cookie && sa.nTaskLock==2);
-    CHECK(CurrentTaskLock(cookie^1)==0 && sa.nTaskLock==2);
-    CHECK(CurrentTaskLock(cookie)==0 && sa.nTaskLock==1);
-    CHECK(CurrentTaskLock(cookie)==0 && sa.nTaskLock==0);
-    CHECK(wow_user_runtime_set_context(&binding,&native,NULL));
-    CHECK(CurrentTaskLock(0)==0);
     CHECK(wow_user_runtime_unbind(&binding));
     CHECK(CloseHandle(ta.pEventQueueServer));CHECK(CloseHandle(tb.pEventQueueServer));
 }
@@ -196,6 +187,7 @@ static void destruction(void)
             HeapFree(GetProcessHeap(),0,owned);shared.pwtiFirst=NULL;
         }
         DestroyTask(&process,&victim);
+        CHECK(victim.ptdb == NULL);
         CHECK(state.ptdbHead==(mode==3 ? NULL : &successor));
         CHECK(shared.nEvents==(mode==3 ? 0 : successor.nEvents));
         if(mode!=4) {
@@ -218,7 +210,7 @@ typedef struct wait_test {
     CRITICAL_SECTION lock;
     HANDLE begin;
     HANDLE interrupt;
-    unsigned released,acquired,checked,received;
+    unsigned released,acquired,received;
     DWORD target_id;
     wow_task_order_thread *target;
     unsigned lookups;
@@ -235,10 +227,6 @@ static void WINAPI acquire_lock(wow_task_order_thread *t)
 {
     wait_test *v=t->host_context;
     EnterCriticalSection(&v->lock);++v->acquired;
-}
-static void WINAPI check_death(wow_task_order_thread *t)
-{
-    wait_test *v=t->host_context;++v->checked;
 }
 static void WINAPI unexpected(wow_task_order_thread *t) { (void)t;CHECK(FALSE); }
 static BOOL WINAPI no_hook(wow_task_order_thread *t)
@@ -280,7 +268,7 @@ static void WINAPI client_context(wow_task_order_thread *previous,
     if(previous) CHECK(previous->ppi->pwpi->CSOwningThread==previous);
     if(previous && next) CHECK(previous->ppi==next->ppi);
 }
-static const wow_task_host_ops test_ops={release_lock,acquire_lock,check_death,unexpected,
+static const wow_task_host_ops test_ops={release_lock,acquire_lock,unexpected,
     no_hook,observe_idle,unexpected,receive,wait_events,find_thread,client_context};
 
 /* Real original selection with explicit readiness input. These stack-owned
@@ -402,7 +390,7 @@ static void sleeping(void)
     EnterCriticalSection(&test.lock);
     CHECK(!xxxSleepTask(TRUE,NULL,&thread));
     CHECK(task.nEvents==0 && shared.nEvents==0 && state.CSLockCount==0 && state.CSOwningThread==&thread);
-    CHECK(test.released==1 && test.acquired==1 && test.checked==2);
+    CHECK(test.released==1 && test.acquired==1);
     CHECK(xxxUserYield(&thread));
     CHECK(test.received==2 && test.released==2 && test.acquired==2);
     CHECK(task.nEvents==0 && shared.nEvents==0);
@@ -412,7 +400,7 @@ static void sleeping(void)
     CHECK(queue.fsWakeMask==0x20ff);
     CHECK(state.CSOwningThread==&thread && state.CSLockCount==0);
     CHECK(task.nEvents==0 && shared.nEvents==0 && !(process.W32PF_Flags&0x10000));
-    CHECK(test.released==3 && test.acquired==3 && test.checked==6);
+    CHECK(test.released==3 && test.acquired==3);
     CHECK(WaitForSingleObject(helper,3000)==WAIT_OBJECT_0);
     CHECK(GetExitCodeThread(helper,&code) && code==0);
     CHECK(!xxxSleepTask(FALSE,(HANDLE)-1,&thread));
@@ -873,6 +861,6 @@ int __cdecl main(void)
     registration();
     initialization();
     reserved_parameters();
-    printf("WOW_ORIGINAL_TASK_ORDER errors=%u sequences=5 send_reply=4 same_worker_nested=4 native_send=3 native_same_thread=1 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8\n",errors);
+    printf("WOW_ORIGINAL_TASK_ORDER errors=%u sequences=5 send_reply=4 same_worker_nested=4 native_send=3 native_same_thread=1 destruction=7 waits=4 directed=6 registration=6 init=8\n",errors);
     return errors!=0;
 }

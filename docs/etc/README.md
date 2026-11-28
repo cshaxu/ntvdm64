@@ -2274,3 +2274,5 @@ post-publication targeted checks.
 
 - [N024 XP queue call-chain audit](evidence/t485-s1/n024-queue.md).
 - [N024 XP message-table migration](evidence/t485-s1/n024-server.md).
+
+- [N024 XP task scheduler migration](evidence/t485-s1/n024-taskman.md).

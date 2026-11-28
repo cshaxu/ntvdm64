@@ -92,7 +92,6 @@ typedef struct wow_task_order_queue {
 typedef struct wow_task_host_ops {
     void (WINAPI *release_lock)(struct wow_task_order_thread *);
     void (WINAPI *acquire_lock)(struct wow_task_order_thread *);
-    void (WINAPI *check_death)(struct wow_task_order_thread *);
     void (WINAPI *deliver_apc)(struct wow_task_order_thread *);
     BOOL (WINAPI *idle_hooked)(struct wow_task_order_thread *);
     void (WINAPI *idle_hook)(struct wow_task_order_thread *);
@@ -153,7 +152,6 @@ void WINAPI InsertTask(wow_task_order_process *, wow_task_order_entry *);
 void WINAPI WakeWowTask(wow_task_order_thread *);
 void WINAPI DirectedScheduleTask(wow_task_order_thread *, wow_task_order_thread *,
     BOOL, wow_task_order_message *);
-DWORD WINAPI CurrentTaskLock(DWORD);
 /* DestroyTask consumes heap-owned task/waiter records and their independently
  * retained idle-event handle. Thread and process records survive the call. */
 void WINAPI DestroyTask(wow_task_order_process *, wow_task_order_thread *);
@@ -208,16 +206,15 @@ typedef wow_task_order_waiter *PWOWTHREADINFO;
 #define QS_ALLINPUT (QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE)
 #define STATUS_WAIT_1 ((NTSTATUS)1)
 #define KeClearEvent(event) ResetEvent(event)
-#define ExAllocatePoolWithTag(pool, bytes, tag) HeapAlloc(GetProcessHeap(),0,bytes)
+#define UserAllocPoolNonPaged(bytes, tag) HeapAlloc(GetProcessHeap(),0,bytes)
 #define KeWaitForMultipleObjects(count, events, kind, reason, mode, alert, timeout, blocks) \
     pti->host->wait(pti,(count),(events),(alert))
 #define LeaveCrit() pti->host->release_lock(pti)
 #define EnterCrit() pti->host->acquire_lock(pti)
-#define CheckForClientDeath() pti->host->check_death(pti)
 #define ClientDeliverUserApc() pti->host->deliver_apc(pti)
 #define IsHooked(thread, hook) ((thread)->host->idle_hooked(thread))
 #define xxxCallHook(code, wp, lp, hook) pti->host->idle_hook(pti)
-#define WakeInputIdle(thread) (thread)->host->wake_input_idle(thread)
+#define zzzWakeInputIdle(thread) (thread)->host->wake_input_idle(thread)
 #define xxxReceiveMessages(thread) (thread)->host->receive(thread)
 #define RIPMSG2(level, text, first, second) ((void)0)
 #define RIPMSG0(level, text) ((void)0)

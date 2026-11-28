@@ -1,0 +1,44 @@
+{
+  "status": "verified-runtime97",
+  "before": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 8028,
+    "nonerror_lines": 63075
+  },
+  "after": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 8044,
+    "nonerror_lines": 61645
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 16,
+    "nonerror_lines": -1430
+  },
+  "files": [
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\taskman.c",
+      "before_points": 1,
+      "before_lines": 1496,
+      "after_points": 17,
+      "after_lines": 66,
+      "baseline": "XP",
+      "blob": "45a98a808bbbd24bb14810bb9a023fc7caedadc2",
+      "normalized": {
+        "points": 17,
+        "lines": 66,
+        "excluded": 1
+      },
+      "sha256": "71ea82523118a0641862e7d38a6ca130fba95a413e18a8a74a95a5db31ccf8c5"
+    }
+  ]
+}

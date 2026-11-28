@@ -173,12 +173,6 @@ static void WINAPI acquire_lock(wow_task_order_thread *thread)
         lifecycle_failure("acquire-lock", ERROR_INVALID_STATE);
 }
 
-static void WINAPI check_death(wow_task_order_thread *thread)
-{
-    if (!thread || !wow_user_worker_active())
-        lifecycle_failure("check-death", ERROR_PROCESS_ABORTED);
-}
-
 static void WINAPI deliver_apc(wow_task_order_thread *thread)
 {
     (void)thread;
@@ -238,6 +232,8 @@ static NTSTATUS WINAPI wait_for_task_or_message(wow_task_order_thread *thread,
 
     if (!task || !events || count == 0 || !binding ||
             binding->runtime != task->owner->runtime) return (NTSTATUS)0xC0000001;
+    if (!wow_user_worker_active())
+        lifecycle_failure("wait-worker", ERROR_PROCESS_ABORTED);
     /* The original caller released its USER domain immediately before this
      * wait.  MsgWait is the finite public substitute for the unavailable
      * kernel queue wake. Actual native sent callbacks must be admitted before
@@ -331,7 +327,7 @@ static void WINAPI client_context(wow_task_order_thread *previous,
 }
 
 static const wow_task_host_ops host_ops = {
-    release_lock, acquire_lock, check_death, deliver_apc, idle_hooked,
+    release_lock, acquire_lock, deliver_apc, idle_hooked,
     idle_hook, wake_input_idle, receive, wait_for_task_or_message, find_thread,
     client_context
 };
