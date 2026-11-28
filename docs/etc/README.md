@@ -2289,3 +2289,7 @@ post-publication targeted checks.
 [G002 DOS APPEND migration](evidence/t485-s1/g002.md).
 
 [G003 BACKUP original paths](evidence/t485-s1/g003.md).
+
+[G004 COMMAND source and archive test inputs](evidence/t485-s1/g004.md).
+
+[G004 delivery receipt](evidence/t485-s1/g004-result.json).

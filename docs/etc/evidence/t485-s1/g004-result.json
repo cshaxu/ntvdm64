@@ -1,0 +1,224 @@
+{
+  "batch": "G004",
+  "packet": "T485 S16 P4",
+  "archive_sha256": "b36cb0499847ae9c0a3cbf3ad3effd5f7afea675188efc279b95dd0792d06b4c",
+  "census": {
+    "before": {
+      "files": 1340,
+      "byte_identical": 801,
+      "nonerror_identical": 812,
+      "nonerror_different": 528,
+      "nonerror_points": 8191,
+      "nonerror_lines": 45674
+    },
+    "delta": {
+      "files": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 0,
+      "nonerror_lines": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0
+    },
+    "after": {
+      "files": 1340,
+      "byte_identical": 801,
+      "nonerror_identical": 812,
+      "nonerror_different": 528,
+      "nonerror_points": 8191,
+      "nonerror_lines": 45674
+    }
+  },
+  "build_exit": 0,
+  "runtime": "build/t485-s16/runtime4",
+  "full": "Not rerun: guest-source-only changes; owner requires affected targeted checks",
+  "source_receipt": "g004-sources.json",
+  "targeted": "PASS archive classifier and lifecycle; normal-logon archive COMMAND /c ver exit0",
+  "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+  "publication": [
+    {
+      "sha256": "A5CE5EC460DD3E46282A4254D7BF65F67E729B163A595F9E2FF9A347DBDDCC52",
+      "path": "assets\\release\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "A5CE5EC460DD3E46282A4254D7BF65F67E729B163A595F9E2FF9A347DBDDCC52",
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "AB0BEAD39F5035EE2E0B9ED4BBD2BF2D3830F8AEED3B8BC8DBF1CD99C3F82584",
+      "path": "assets\\release\\VJOY.DLL"
+    },
+    {
+      "sha256": "AB0BEAD39F5035EE2E0B9ED4BBD2BF2D3830F8AEED3B8BC8DBF1CD99C3F82584",
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL"
+    },
+    {
+      "sha256": "13614E6BDBC28EDC62AB14F02992DCC4C5E196466AE343FC42583C691E600192",
+      "path": "assets\\release\\VCDEX.DLL"
+    },
+    {
+      "sha256": "13614E6BDBC28EDC62AB14F02992DCC4C5E196466AE343FC42583C691E600192",
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL"
+    },
+    {
+      "sha256": "52FA9440294BDCABC20345F44CF0D5CED4E085A1D961F91D46DD7AEE04ABE157",
+      "path": "assets\\release\\run16.exe"
+    },
+    {
+      "sha256": "52FA9440294BDCABC20345F44CF0D5CED4E085A1D961F91D46DD7AEE04ABE157",
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe"
+    },
+    {
+      "sha256": "44167D79B2A8B3DA8AAF5181D7FDE932D76AE7DBFB2ACBD9BEDB8E86925780B8",
+      "path": "assets\\release\\ntsrv.exe"
+    },
+    {
+      "sha256": "44167D79B2A8B3DA8AAF5181D7FDE932D76AE7DBFB2ACBD9BEDB8E86925780B8",
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe"
+    },
+    {
+      "sha256": "B2C166E6CB6ED9B1DDFE90C3AFD4D9A1DAC5B4806B65364735728BBEF47202B0",
+      "path": "assets\\release\\ntcon.exe"
+    },
+    {
+      "sha256": "B2C166E6CB6ED9B1DDFE90C3AFD4D9A1DAC5B4806B65364735728BBEF47202B0",
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe"
+    },
+    {
+      "sha256": "B930967183A59864D8DEA4B1222F3C63E0267EE18C3BC39B5DB27A2AA02C9F98",
+      "path": "assets\\release\\ntvdm.exe"
+    },
+    {
+      "sha256": "B930967183A59864D8DEA4B1222F3C63E0267EE18C3BC39B5DB27A2AA02C9F98",
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe"
+    },
+    {
+      "sha256": "2F4CE7C5B8AD175A324272498FDD4EE1CD8164CDB7C514D7C7F75C4360D55D6E",
+      "path": "assets\\release\\ntvwm.exe"
+    },
+    {
+      "sha256": "2F4CE7C5B8AD175A324272498FDD4EE1CD8164CDB7C514D7C7F75C4360D55D6E",
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe"
+    },
+    {
+      "sha256": "4A90F29E93D98D4FB2DC861537FA8742DE65C8B879D10A2C0AF2942B45EC2259",
+      "path": "assets\\release\\ntmon.exe"
+    },
+    {
+      "sha256": "4A90F29E93D98D4FB2DC861537FA8742DE65C8B879D10A2C0AF2942B45EC2259",
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe"
+    },
+    {
+      "sha256": "68EA9C5747436D598BB7A2A6E6FF0207F55B6EBFA92006F3AE43122B47CC3EDB",
+      "path": "assets\\release\\WOW32.DLL"
+    },
+    {
+      "sha256": "68EA9C5747436D598BB7A2A6E6FF0207F55B6EBFA92006F3AE43122B47CC3EDB",
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL"
+    },
+    {
+      "sha256": "765DEAF0F8134BE51A79067DD82ADA162597E70DF3317D29F12F4D1AA2F3D474",
+      "path": "assets\\release\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "765DEAF0F8134BE51A79067DD82ADA162597E70DF3317D29F12F4D1AA2F3D474",
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "C3C233A098BF643471AB2784803B9EC3205F1507ABE420DEDFEB999948EFF0F2",
+      "path": "assets\\release\\nthook32.dll"
+    },
+    {
+      "sha256": "C3C233A098BF643471AB2784803B9EC3205F1507ABE420DEDFEB999948EFF0F2",
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll"
+    },
+    {
+      "sha256": "7283DB0D6A1DC68F44825D2EB9B4F3FAD32244E92D46629959DFE3D7A17D012C",
+      "path": "assets\\release\\nthook64.dll"
+    },
+    {
+      "sha256": "7283DB0D6A1DC68F44825D2EB9B4F3FAD32244E92D46629959DFE3D7A17D012C",
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll"
+    }
+  ],
+  "command_media": {
+    "source": "assets/winnt.zip:WINNT/SYSTEM32/COMMAND.COM",
+    "target": "COMMAND.COM",
+    "path": "O:\\tmp\\nC1C\\system32\\COMMAND.COM",
+    "sha256": "908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43"
+  },
+  "command_result": {
+    "result": "exited",
+    "exit": 0,
+    "console": "# buffer=120,9001 viewport=0,0,119,29\n[1] MS-DOS Version 5.00.500\n",
+    "environment": "existing CreateEnvironmentBlock inherit=false helper; private desktop",
+    "earlier_attempts": "Inherited agent environment produced illegal-instruction dialog and timeout twice; changing slash spelling did not fix it. No product/guest changes between trials. Arbitrary inherited-environment support is not proved."
+  },
+  "classifier": {
+    "fixture": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-classifier-test.exe",
+    "sha256": "96931A96FC695869476E853ABA7728328519FAC7D301018625B5D403465F77C8",
+    "pid": 15192,
+    "exit": 0,
+    "media": [
+      {
+        "source": "assets/winnt.zip:WINNT/SYSTEM32/MEM.EXE",
+        "target": "MEM.EXE",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s16\\g004\\classifier\\media\\MEM.EXE",
+        "sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB"
+      },
+      {
+        "source": "assets/winnt.zip:WINNT/SYSTEM32/COMMAND.COM",
+        "target": "COMMAND.COM",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s16\\g004\\classifier\\media\\COMMAND.COM",
+        "sha256": "908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43"
+      },
+      {
+        "source": "assets/winnt.zip:WINNT/EDIT.COM",
+        "target": "EDIT.COM",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s16\\g004\\classifier\\media\\EDIT.COM",
+        "sha256": "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46"
+      },
+      {
+        "source": "assets/winnt.zip:WINNT/WRITE.EXE",
+        "target": "WRITE.EXE",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s16\\g004\\classifier\\media\\WRITE.EXE",
+        "sha256": "EB44B5D5F5A405B6A8CD018B9F790BCA2E7E895DAD4F7E1F5462EC14CCDAA87A"
+      }
+    ]
+  },
+  "lifecycle": {
+    "pid": 24636,
+    "media": [
+      {
+        "source": "assets/winnt.zip:WINNT/SYSTEM32/MEM.EXE",
+        "target": "MEM.EXE",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s16\\g004\\lifecycle\\MEM.EXE",
+        "sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB"
+      },
+      {
+        "source": "assets/winnt.zip:WINNT/WRITE.EXE",
+        "target": "system32/WRITE.EXE",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s16\\g004\\lifecycle\\system32\\WRITE.EXE",
+        "sha256": "EB44B5D5F5A405B6A8CD018B9F790BCA2E7E895DAD4F7E1F5462EC14CCDAA87A"
+      },
+      {
+        "source": "assets/winnt.zip:WINNT/SYSTEM32/KRNL386.EXE",
+        "target": "system32/KRNL386.exe",
+        "path": "O:\\repos.hobby\\ntvdm64\\build\\t485-s16\\g004\\lifecycle\\system32\\KRNL386.exe",
+        "sha256": "ED5F8AFA0F1DBAC7AF8FBB4EA95F622BB0E85C95FA81D6533145E692D9C4AA38"
+      }
+    ],
+    "fixture": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-server-lifecycle-test.exe",
+    "sha256": "4B4AE055DB5E7DC4A8664CC2AC53917A5944703F6E95B06F6A8E36EBFBF6D0FF",
+    "exit": 0
+  },
+  "guest_retained": 48,
+  "guest_retired": 46,
+  "guest_retained_before_vs_opennt": [
+    3,
+    6548
+  ],
+  "guest_retained_after_vs_xp": [
+    0,
+    0
+  ]
+}

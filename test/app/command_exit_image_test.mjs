@@ -9,11 +9,11 @@ assert(imagePath && originalPath, 'usage: node command_exit_image_test.mjs COMMA
 const image = fs.readFileSync(imagePath);
 const original = fs.readFileSync(originalPath);
 const mirror = fs.readFileSync('src/mvdm-guest/dos/v86/cmd/command/tcode.asm');
-assert(original.equals(mirror), 'selected tcode.asm must remain byte-exact OpenNT');
+assert(original.equals(mirror), 'selected tcode.asm must remain byte-exact XP');
 for (const name of ['command1.asm', 'command2.asm']) {
   assert(fs.readFileSync(path.join(path.dirname(originalPath), name)).equals(
     fs.readFileSync(`src/mvdm-guest/dos/v86/cmd/command/${name}`)),
-  `${name} must remain byte-exact OpenNT`);
+  `${name} must remain byte-exact XP`);
 }
 assert.equal(crypto.createHash('sha256').update(image).digest('hex'),
   '908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43');

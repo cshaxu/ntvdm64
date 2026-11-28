@@ -349,3 +349,7 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 [G002 DOS APPEND migration](g002.md).
 
 [G003 BACKUP original paths](g003.md).
+
+[G004 COMMAND source and archive test inputs](g004.md).
+
+[G004 delivery receipt](g004-result.json).

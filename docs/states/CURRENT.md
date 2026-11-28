@@ -5,8 +5,8 @@
 **Active: M0 T485 S16** (Ordinary Mode), G001-G033.
 [S15 closure](../etc/evidence/t485-s1/s15-closure.md): N013-N026 delivered;
 S15 delivered62/159 directories, H001-H036 and N001-N026. S16 P1/G001 brings
-the total to63/159; P2/G002 brings it to64/159; P3/G003 brings it to65/159.
-S16 runtime3 is published with actual XP BACKUP targeted verification;
+the total to63/159; P2/G002 to64/159; P3/G003 to65/159; P4/G004 to66/159.
+S16 runtime4 is published with archive-derived COMMAND targeted verification;
 runtime2 retains the latest Full24/24 checkpoint.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S17-S20 and all remaining migration/capability obligations.
@@ -35,7 +35,7 @@ retains S17-S20 and all remaining migration/capability obligations.
 
 ## S16 Progress
 
-3/33 directories complete through P3. [G001](../etc/evidence/t485-s1/g001.md):
+4/33 directories complete through P4. [G001](../etc/evidence/t485-s1/g001.md):
 18 exact XP files and1 retired makefile. Four existing archive members advance
 to identical XP SP1/SP3 originals, without adding archive members. Cached
 build, dual publication (26 host and8 guest hashes), WINHELP document/topic
@@ -48,13 +48,14 @@ cleanup dependency. No guest binary is rebuilt and no runtime payload changes.
 The complete16-entry cohort passed cached build, dual26 publication hashes,
 raw-original identity checks and final-package Full24/24 on runtime2.
 [P2 receipt](../etc/evidence/t485-s1/g002-result.json) records final identities.
-Next is G003, whose two old BACKUP paths have XP language/build counterparts.
-G003 source migration and cached build completed. Owner correction requires
-the XP BACKUP binary in winnt.zip and runtime, not just in the source mirror.
-The archive/manifest now include SYSTEM32/BACKUP.EXE; archive-derived runtime
-publication,65 media identities,actual BACKUP help and normal exit0 passed.
-[P3 receipt](../etc/evidence/t485-s1/g003-result.json) records archive and runtime evidence.
-Next is G004;2 entries completed since the P2 Full checkpoint.
+G003 delivered the XP BACKUP original in the archive and runtime;65 media
+identities, actual help and exit0 passed. [P3](../etc/evidence/t485-s1/g003-result.json).
+G004 delivered48 raw XP files/relocations and46 retired old paths; archive
+COMMAND remains the approved XP original. Cached build,dual26hash, archive
+classifier/lifecycle and COMMAND VER exit0 passed. The latter uses the existing
+normal-logon environment helper; inherited agent environment failed with an
+illegal instruction and is not claimed supported. No product workaround.
+[P4 receipt](../etc/evidence/t485-s1/g004-result.json). Next is G005.
 For guest-source-only batches the affected targeted check is original identity,
 paths and consumers; replacing runtime guest binaries adds their direct runtime
 tests. Tests must consume the XP originals from winnt.zip; old runtime or
