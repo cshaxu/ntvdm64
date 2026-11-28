@@ -47,7 +47,9 @@ typedef struct _PAGED_LOOKASIDE_LIST *PPAGED_LOOKASIDE_LIST;
 #define gpwtiFirst (ppi->shared->pwtiFirst)
 #define gppiStarting (ppi->shared->ppiStarting)
 #define gfAllowForegroundActivate (ppi->shared->allowForegroundActivate)
-#define ExAllocatePoolWithQuota(pool, bytes) HeapAlloc(GetProcessHeap(),0,bytes)
+/* XP usergdi.h moved the quota pool entry out of userk.h. Keep the
+ * existing non-raising, process-heap binding for task initialization. */
+#define UserAllocPoolWithQuota(bytes, tag) HeapAlloc(GetProcessHeap(),0,bytes)
 #define W32PF_APPSTARTING 0x00000040
 #define W32PF_HAVECOMPATFLAGS 0x00000080
 #define W32PF_ALLOWFOREGROUNDACTIVATE 0x00000100

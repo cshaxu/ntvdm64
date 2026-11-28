@@ -36,8 +36,8 @@ static PVOID WINAPI startup_allocate(SIZE_T bytes)
     return HeapAlloc(GetProcessHeap(), 0, bytes);
 }
 
-#undef ExAllocatePoolWithQuota
-#define ExAllocatePoolWithQuota(pool, bytes) startup_allocate(bytes)
+#undef UserAllocPoolWithQuota
+#define UserAllocPoolWithQuota(bytes, tag) startup_allocate(bytes)
 #define zzzInitTask diagnostic_original_InitTask
 #include "../../src/non-mvdm/windows/core/ntuser/kernel/queue.c"
 #undef zzzInitTask

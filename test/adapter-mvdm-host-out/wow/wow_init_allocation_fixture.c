@@ -36,8 +36,8 @@ BOOL WINAPI wow_init_fixture_free(HANDLE heap, DWORD flags, PVOID memory)
     return result;
 }
 
-#undef ExAllocatePoolWithQuota
-#define ExAllocatePoolWithQuota(pool, bytes) allocate_original(bytes)
+#undef UserAllocPoolWithQuota
+#define UserAllocPoolWithQuota(bytes, tag) allocate_original(bytes)
 #undef ExFreePool
 #define ExFreePool(pointer) wow_init_fixture_free(GetProcessHeap(), 0, pointer)
 #include "../../../src/non-mvdm/windows/core/ntuser/kernel/queue.c"

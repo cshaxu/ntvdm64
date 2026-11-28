@@ -15,10 +15,7 @@
 #define WOW_ORIGINAL_TASK_ORDER
 #include "wow_task_order_bindings.h"
 #include "userk.h"
-#define BEGINATOMICCHECK()
-#define TIF_MEOW 0x00800000u
 #define TDBF_SETUP 1
-#define DTM_SETUPAPPRAN (WM_USER + 90)
 /* XP ntcb.h receive-side contract, using the existing C client callback. */
 DWORD xxxClientWOWTask16SchedNotify(DWORD notify, DWORD parameter)
 {

@@ -156,6 +156,114 @@ typedef struct tagQ *PQ;
 
 /* Original w32p.h:47-55, pointer-only thread declaration. */
 typedef struct _W32THREAD *PW32THREAD;
+/* XP windows/core/w32inc/w32p.h:72-83. Retained kernel declaration,
+ * not client/usercli.h's dummy TL and not an instantiated kernel lock. */
+typedef struct _TL {
+    struct _TL    *next;
+    PVOID          pobj;
+    PFREE_FUNCTION pfnFree;
+#if DBG
+    ULONG          uTLCount;
+    PW32THREAD     pW32Thread;
+    PVOID          pfnCaller;
+    struct _TL    *ptl;
+#endif
+} TL, * KPTR_MODIFIER PTL;
+/* XP public/ddk/inc/ntddk.h:13627. */
+#define EVENT_INCREMENT 1
+
+/* XP ntosdef.h MODE is local to this USER view: SoftPC VGA has its own MODE. */
+typedef enum _MODE {
+    KernelMode,
+    UserMode,
+    MaximumMode
+} MODE;
+
+/* XP retained USER declarations: original tags, pointer-only kernel owners.
+ * usergdi.h:555, immstruc.h:99, gre.h:646 and ntosp.h object callouts. */
+typedef struct tagWin32PoolHead *PWin32PoolHead;
+typedef struct tagIMEINFOEX *PIMEINFOEX;
+typedef struct _MDEV *PMDEV;
+typedef struct _EJOB *PEJOB;
+typedef struct _PAGED_LOOKASIDE_LIST *PPAGED_LOOKASIDE_LIST;
+typedef struct _WIN32_JOBCALLOUT_PARAMETERS *PKWIN32_JOBCALLOUT_PARAMETERS;
+typedef struct _WIN32_CLOSEMETHOD_PARAMETERS *PKWIN32_CLOSEMETHOD_PARAMETERS;
+typedef struct _WIN32_DELETEMETHOD_PARAMETERS *PKWIN32_DELETEMETHOD_PARAMETERS;
+typedef struct _WIN32_PARSEMETHOD_PARAMETERS *PKWIN32_PARSEMETHOD_PARAMETERS;
+typedef struct _WIN32_OKAYTOCLOSEMETHOD_PARAMETERS *PKWIN32_OKAYTOCLOSEMETHOD_PARAMETERS;
+typedef struct _WIN32_OPENMETHOD_PARAMETERS *PKWIN32_OPENMETHOD_PARAMETERS;
+/* XP wmidata.h:3746-3758; complete by-value device identifier. */
+typedef struct _KEYBOARD_ID_EX {
+    ULONG Type;
+    ULONG Subtype;
+} KEYBOARD_ID_EX, *PKEYBOARD_ID_EX;
+/* XP windows/core/w32inc/winuserk.h:91-94. */
+typedef struct _CONSOLE_CARET_INFO {
+    HWND hwnd;
+    RECT rc;
+} CONSOLE_CARET_INFO, *PCONSOLE_CARET_INFO;
+/* XP windows/core/w32inc/winuserk.h:138, pointer-only desktop restoration. */
+typedef struct tagDESKRESTOREDATA *PDESKRESTOREDATA;
+/* XP windows/published/winuser.w:5978,6078,8091. */
+#define HBMMENU_MBARLAST ((HBITMAP) 7)
+#define TPM_FIRSTANIBITPOS 10
+#define MFS_CACHEDBMP 0x20000000L
+/* Original XP immstruc.h and published imm.w/winuser.w declarations. */
+typedef enum _AIC_STATUS {
+    AIC_SUCCESS,
+    AIC_FOCUSCONTEXTCHANGED,
+    AIC_ERROR,
+} AIC_STATUS;
+typedef enum _UPDATEINPUTCONTEXTCLASS {
+    UpdateClientInputContext,
+    UpdateInUseImeWindow,
+} UPDATEINPUTCONTEXTCLASS;
+typedef enum _IMEINFOEXCLASS {
+    ImeInfoExKeyboardLayout,
+#if defined(CUAS_ENABLE)
+    ImeInfoExKeyboardLayoutWithCUAS,
+#endif
+    ImeInfoExImeWindow,
+    ImeInfoExImeFileName,
+} IMEINFOEXCLASS;
+typedef struct _tagIMEHOTKEYOBJ *PIMEHOTKEYOBJ;
+typedef struct tagSOFTKBDDATA *PSOFTKBDDATA;
+typedef struct tagWSINFO WSINFO;
+#define SPI_STARTBOOLRANGE                  0x1000
+#define SPI_MAXBOOLRANGE                    0x1040
+#define SPI_BOOLRANGECOUNT ((SPI_MAXBOOLRANGE - SPI_STARTBOOLRANGE) / 2)
+#define SPI_BOOLMASKDWORDSIZE (((SPI_BOOLRANGECOUNT - 1) / 32) + 1)
+#define SPI_STARTDWORDRANGE                 0x2000
+#define SPI_MAXDWORDRANGE                   0x2014
+#define SPI_DWORDRANGECOUNT ((SPI_MAXDWORDRANGE - SPI_STARTDWORDRANGE) / 2)
+#define GACF2_GIVEUPFOREGROUND    0x00000040  // In W2k, we have changed foreground semantics to stop
+#define DCX_INVALID 0x00000800L
+#define DCX_REDIRECTED 0x00004000L
+/* XP winuserk.h:177-179 and winuser.w:10537-10542. */
+typedef enum _USERPROCESSINFOCLASS {
+    UserProcessFlags
+} USERPROCESSINFOCLASS;
+typedef struct tagPOWERSTATEPARAMS {
+    POWER_ACTION        SystemAction;
+    SYSTEM_POWER_STATE  MinSystemState;
+    ULONG               Flags;
+    BOOL                FullScreenMode;
+} POWERSTATEPARAMS, *PPOWERSTATEPARAMS;
+/* XP w32err.h retail diagnostic contract. */
+/* Original w32err.h retail diagnostics, when not supplied by the caller. */
+#ifndef UserAssert
+#define UserAssert(exp)
+#endif
+#ifndef RIPMSG0
+#define RIPMSG0(flags, szFmt)
+#endif
+#ifndef TAGMSG0
+#define TAGMSG0(flags, szFmt)
+#endif
+#ifndef TAGMSG1
+#define TAGMSG1(flags, szFmt, p1)
+#endif
+
 /* Original NT4 hook range WH_MIN=-1,WH_MAX=12;not modern SDK hook count. */
 #define CWINHOOKS 14
 
@@ -164,6 +272,7 @@ typedef struct _W32THREAD *PW32THREAD;
 typedef struct _W32PROCESS *PW32PROCESS;
 /* Original userk.h:2374 pointer-only process scheduler dependency. */
 typedef struct tagWOWPROCESSINFO *PWOWPROCESSINFO;
+typedef struct tagWOWTHREADINFO *PWOWTHREADINFO;
 #endif
 
 #endif /* selected USER kernel declarations */

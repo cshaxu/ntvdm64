@@ -26,6 +26,10 @@
 typedef LONG SECURITY_STATUS;
 /* XP pebteb.h frame identity; RTL declarations need only its pointer. */
 typedef struct _TEB_ACTIVE_FRAME *PTEB_ACTIVE_FRAME;
+/* XP ntddk.h FAST_MUTEX tag: pointer-only prerequisite of WIN32HEAP. */
+typedef struct _FAST_MUTEX FAST_MUTEX, *PFAST_MUTEX;
+/* XP base/ntos/inc/ex.h:885-889; declaration only, no allocator. */
+typedef VOID (*PFREE_FUNCTION)(PVOID Buffer);
 
 /* XP ntdef.h:1019; native declaration prerequisite. */
 typedef enum _TIMER_TYPE {
@@ -135,6 +139,9 @@ typedef struct _OBJECT_TYPE *POBJECT_TYPE;
 /* XP ntconfig.h: opaque resource-list pointer used by ntpnpapi.h. */
 typedef struct _CM_RESOURCE_LIST *PCM_RESOURCE_LIST;
 typedef CCHAR KPROCESSOR_MODE;
+/* XP base/ntos/inc/ntosdef.h:105-109 and ke.h:320. */
+
+typedef struct _KWAIT_BLOCK *PKWAIT_BLOCK;
 typedef struct _HARDERROR_MSG *PHARDERROR_MSG;
 
 /* Original ke.h:318-326 selected x86/x64 declaration and w32p.h:47-54.

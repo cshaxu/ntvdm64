@@ -4,8 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall59/159 directories, H001-H036 and N001-N023. S15 runtime97 is the current
-published and verified package.
+overall60/159 directories, H001-H036 and N001-N024. S15 runtime98 is the current published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -33,7 +32,7 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-11/14 directories delivered. P1 N013 and P2 N014 completed; directory50
+12/14 directories delivered. P1 N013 and P2 N014 completed; directory50
 Full24/24 passed. [P3 N015](../etc/evidence/t485-s1/n015.md),
 [P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md),
 [P5 packing/SMB](../etc/evidence/t485-s1/n016-packing-smb.md) and
@@ -188,22 +187,18 @@ its receipt retains complete tests, corrections and census.
 [P79 XP task initialization](../etc/evidence/t485-s1/n024-queue.md) delivered
 runtime95; its receipt retains all tests, corrections and census.
 
-[P80 XP message tables](../etc/evidence/t485-s1/n024-server.md) verified runtime96:
-original tables/initializer restored, shared-heap zeroing contract paired;
-13allocation failures and retry covered. Cached build, dual26hash,
-controls40/40 and genuine Win16 controls pass.
-Census1332/792/803/529/8028/63075; delta0/0/0/0/
-+16/-461;1320XP/12OpenNT. LF recovery unfolds old byte span.
-N0247/9; S15 11/14; overall59/159. Five files since P75 Full24/24.
-Next taskman.c; no S/T closure.
+[P80 XP message tables](../etc/evidence/t485-s1/n024-server.md) delivered runtime96;
+its receipt retains all tests, corrections and census.
 
-[P81 XP task scheduler](../etc/evidence/t485-s1/n024-taskman.md) verified runtime97.
-XP destruction/notification/wait restored; unused task-lock excluded by XP.
-Cached build, dual26hash, controls40/40, task-order, init-notification,
-task-lifecycle, init-rollback and real Win16 controls pass.
-Census1332/792/803/529/8044/61645; delta0/0/0/0/
-+16/-1430;1321XP/11OpenNT. N0248/9;
-S15 11/14; overall59/159; six since P75 Full24/24. Next userk.h.
+[P81 XP task scheduler](../etc/evidence/t485-s1/n024-taskman.md) delivered
+runtime97; its receipt retains all tests, original source identities and census.
+
+[P82 XP kernel declarations](../etc/evidence/t485-s1/n024-userk.md) verified
+runtime98: cached full build, dual26hash, controls40/40, lifecycle/rollback,
+real Win16 controls and Full24/24 pass. Preserve initial failed attempts.
+Census1338/798/809/529/8148/51728; delta+6/+6/+6/0/+104/-9917;1328XP/10OpenNT.
+N0249/9, S15 12/14, overall60/159; Full counter reset. Next N025.
+P82 delivery records are complete; next N025. No S/T closure.
 
 ## S14 Closure Record
 

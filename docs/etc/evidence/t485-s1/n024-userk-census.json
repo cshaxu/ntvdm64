@@ -1,0 +1,107 @@
+{
+  "status": "verified-runtime98",
+  "before": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 8044,
+    "nonerror_lines": 61645
+  },
+  "after": {
+    "files": 1338,
+    "byte_identical": 798,
+    "nonerror_identical": 809,
+    "nonerror_different": 529,
+    "nonerror_points": 8148,
+    "nonerror_lines": 51728
+  },
+  "delta": {
+    "files": 6,
+    "byte_identical": 6,
+    "nonerror_identical": 6,
+    "nonerror_different": 0,
+    "nonerror_points": 104,
+    "nonerror_lines": -9917
+  },
+  "files": [
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\taskman.c",
+      "before_points": 17,
+      "before_lines": 66,
+      "after_points": 17,
+      "after_lines": 63,
+      "baseline": "XP",
+      "blob": "45a98a808bbbd24bb14810bb9a023fc7caedadc2",
+      "normalized": {
+        "points": 17,
+        "lines": 63,
+        "excluded": 1
+      },
+      "sha256": "581b65a8474ff2ce197c1b19d226e0e4f29574562b9345444893befd9fa9cc8c"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\userk.h",
+      "before_points": 1,
+      "before_lines": 10213,
+      "after_points": 105,
+      "after_lines": 299,
+      "baseline": "XP",
+      "blob": "7ee4335799af86fa2de42c04c883cf60abd48ffa",
+      "normalized": {
+        "points": 105,
+        "lines": 299,
+        "excluded": 92
+      },
+      "sha256": "4d35ca808709a4c748eb85e4fd8bb7bf29afcf64e0e6334e0e91b17ea7a9e285"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/csrmsg.h",
+      "kind": "original-prerequisite-addition",
+      "after_points": 0,
+      "after_lines": 0,
+      "blob": "48499e1b7a7f4c0e30e3ddf3f20f9a9cac3f2f56",
+      "sha256": "fa0a423d9e27e686bc24c29f0e0ff700a3801c3345c05e31debd70960a65976b"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/w32inc/heap.h",
+      "kind": "original-prerequisite-addition",
+      "after_points": 0,
+      "after_lines": 0,
+      "blob": "5af43731288a1a1fb5608017e7e7eb0d37d1414a",
+      "sha256": "d5a248c0d6f7488fb2df3a2edd900a9074399c37d228375f40039b022822f270"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ptag.lst",
+      "kind": "original-prerequisite-addition",
+      "after_points": 0,
+      "after_lines": 0,
+      "blob": "21e07947410dd97cd8007037233c143ef032e602",
+      "sha256": "0c0d1451f91c536cbb3c04faa9f64e3ed94e149d3a98241bcc419b43f8de504a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ptag.tpl",
+      "kind": "original-prerequisite-addition",
+      "after_points": 0,
+      "after_lines": 0,
+      "blob": "e55b83fb8c5d234e1989d94d5eac46bfb4a93877",
+      "sha256": "d70b6ce4a3f697e21382b07c40761dec05a230b8acf1fef5adec95a16bba2da9"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ptag.bat",
+      "kind": "original-prerequisite-addition",
+      "after_points": 0,
+      "after_lines": 0,
+      "blob": "ff0f79098a6bd393ded69d817414a14ae966cd81",
+      "sha256": "4c517b31b6eb24cf51380f28f22df1b7e553c876af87b0f5c88374d361d91e66"
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddmou.h",
+      "kind": "original-prerequisite-addition",
+      "after_points": 0,
+      "after_lines": 0,
+      "blob": "fbb3ab615fd292662c25a36bd0853dfbd812da57",
+      "sha256": "10ef23d006ef1083c268d44131e92e28cd7df507e148ebbc96d4b153fe89ef1a"
+    }
+  ]
+}

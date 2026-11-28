@@ -1,9 +1,7 @@
-/*++ BUILD Version: 0015    // Increment this if a change has global effects
-
 /****************************** Module Header ******************************\
 * Module Name: userk.h
 *
-* Copyright (c) 1985-1996, Microsoft Corporation
+* Copyright (c) 1985 - 2001, Microsoft Corporation
 *
 * Typedefs, defines, and prototypes that are used exclusively by the User
 * kernel-mode code.
@@ -16,47 +14,68 @@
 #ifndef _USERK_
 #define _USERK_
 
-#line 19
-#define OEMRESOURCE 1
-#line 20
-
-
 #ifndef _WINBASE_
-#error
-#line 58
-#endif _WINBASE_
+#include <wbasek.h>
+#endif // _WINBASE_
 
+#include <csrmsg.h>
+#include <heap.h>
 
-#if DBG
-#error
-#endif
+/*
+ * BltColor() flags.
+ */
+#define BC_INVERT             0x00000001
+#define BC_NOMIRROR           0x00000002
 
-#ifdef RIP_COMPONENT
-#error
-#endif
-#line 68
-#define RIP_COMPONENT RIP_USERKRNL
+#define MIRRORED_HDC(hdc)     (GreGetLayout(hdc) & LAYOUT_RTL)
+
+#define OEMRESOURCE 1
+
+#define CCACHEDCAPTIONS 5
+
+#define RIT_PROCESSINPUT  0x01
+#define RIT_STOPINPUT     0x02
+
+#define GETMOUSETRAILS()        (IsRemoteConnection() ? 0 : gMouseTrails)
+#define MOUSE_TRAILS_FREQ       50
 
 #include <winnls.h>
 #include <wincon.h>
 
 #include <winuser.h>
-#line 74
 #include <winuserp.h>
-#line 76
+#include <ntddkbd.h>
+#include <ntddmou.h>
+#line 48
+#include "ntddvdeo.h"
+
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+#line 55
 
 #include <user.h>
-#line 78
 
-// define TRACESYSPEEK if you want to trace idSysPeek movements
-//#define TRACESYSPEEK
-#ifdef TRACESYSPEEK
-#error
-#line 84
-#else
+PTHREADINFO _ptiCrit(VOID);
+PTHREADINFO _ptiCritShared(VOID);
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 65
+    #define PtiCurrent()  (gptiCurrent)
+    #define PtiCurrentShared() ((PTHREADINFO)(W32GetCurrentThread()))
+#endif // DBG
+
+extern HANDLE CsrApiPort;
+
+#if DEBUGTAGS
+#error Original configuration is not selected.
+#else // DEBUGTAGS
+#line 75
     #define CheckPtiSysPeek(where, pq, newIdSysPeek)
     #define CheckSysLock(where, pq, pti)
-#endif // TRACESYSPEEK
+#endif // DEBUGTAGS
 
 /*
  * ShutdownProcessRoutine return values
@@ -69,82 +88,151 @@
  * Macros to get address of current thread and process information.
  */
 
-#line 100
 #define PpiCurrent() \
     ((PPROCESSINFO)(W32GetCurrentProcess()))
-#line 102
 
-#define PtiFromThread(Thread)  ((PTHREADINFO)((Thread)->Tcb.Win32Thread))
+#define PtiFromThread(Thread) ((PTHREADINFO)(PsGetThreadWin32Thread(Thread)))
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+    #define GetNestedCallsCounter()
+#endif // DBG
 
 #define PpiFromProcess(Process)                                           \
-        ((PPROCESSINFO)((PW32PROCESS)(Process)->Win32Process))
+        ((PPROCESSINFO)(PsGetProcessWin32Process(Process)))
 
-#line 108
-#define GetCurrentProcessId() \
-        (PsGetCurrentThread()->Cid.UniqueProcess)
-#line 110
+#define GetCurrentProcessId() PsGetCurrentProcessId()
 
-PTHREADINFO _ptiCrit(VOID);
-PTHREADINFO _ptiCritShared(VOID);
-#line 113
-#ifdef DEBUG
-#error
-#line 116
-#else
-#line 117
-#define PtiCurrent()  (gptiCurrent)
-#line 118
-#define PtiCurrentShared() ((PTHREADINFO)(W32GetCurrentThread()))
-#endif
+#define ISCSRSS() (PsGetCurrentProcess() == gpepCSRSS)
 
-#line 121
-#define GetClientInfo() ((PTHREADINFO)(W32GetCurrentThread()))->pClientInfo;
-#line 124
+BOOL CSTPush(UINT uThreadID, PVOID pParam, HANDLE UniqueProcessId, BOOL bRemoteThreadStack);
 
-#define LockProcessByClientId   PsLookupProcessByProcessId
-#define LockThreadByClientId    PsLookupThreadByThreadId
-#define UnlockProcess           ObDereferenceObject
-#define UnlockThread            ObDereferenceObject
+void CSTCleanupStack(BOOL bRemoteThreadStack);
+
+__inline BOOL InitCreateSystemThreadsMsg(PUSER_API_MSG pMsg, UINT ThreadID, PVOID pVoid, HANDLE UniqueProcessId, BOOL bRemoteThread)
+{
+    UserAssert(CsrApiPort != NULL);
+    if (!CSTPush(ThreadID, pVoid, UniqueProcessId, bRemoteThread)) {
+        return FALSE;
+    }
+    pMsg->h.u1.s1.DataLength  = (USHORT) (sizeof(USER_API_MSG) - sizeof( PORT_MESSAGE ));
+    pMsg->h.u1.s1.TotalLength = (USHORT) (sizeof(USER_API_MSG));
+    pMsg->h.u2.ZeroInit = 0;
+    pMsg->CaptureBuffer = NULL;
+    pMsg->ApiNumber = CSR_MAKE_API_NUMBER( USERSRV_SERVERDLL_INDEX, UserpCreateSystemThreads);
+    pMsg->u.CreateSystemThreads.bRemoteThread = bRemoteThread;
+    return TRUE;
+}
 
 NTSTATUS OpenEffectiveToken(
     PHANDLE phToken);
 
-#line 133
 NTSTATUS GetProcessLuid(
     PETHREAD Thread OPTIONAL,
     PLUID LuidProcess);
+
+BOOLEAN IsRestricted(
+    PETHREAD Thread);
 
 NTSTATUS CreateSystemThread(
     PKSTART_ROUTINE lpThreadAddress,
     PVOID pvContext,
     PHANDLE phThread);
-#line 141
 
 NTSTATUS InitSystemThread(
     PUNICODE_STRING pstrThreadName);
 
-#line 145
+#define INITCLIENTINFO(pti)                                     \
+{                                                               \
+    pti->pClientInfo->dwExpWinVer = pti->dwExpWinVer;           \
+    pti->pClientInfo->dwTIFlags   = pti->TIF_flags;             \
+                                                                \
+    if (pti->spklActive) {                                      \
+        pti->pClientInfo->CodePage = pti->spklActive->CodePage; \
+        pti->pClientInfo->hKL = pti->spklActive->hkl;           \
+    } else {                                                    \
+        pti->pClientInfo->CodePage = CP_ACP;                    \
+        pti->pClientInfo->hKL = 0;                              \
+    }                                                           \
+                                                                \
+}
+
 PKEVENT CreateKernelEvent(
     IN EVENT_TYPE Type,
     IN BOOLEAN State);
-#line 148
 
 NTSTATUS ProtectHandle(
-    IN HANDLE Handle,
-    IN BOOLEAN Protect);
+    IN HANDLE       Handle,
+    IN POBJECT_TYPE pObjectType,
+    IN BOOLEAN      Protect);
+
+__inline VOID FreeKernelEvent(PVOID* pp)
+{
+    UserFreePool(*pp);
+    *pp = NULL;
+}
+
+
+extern BOOL  gfSwitchInProgress;
+extern PKEVENT gpevtVideoportCallout;
+
+__inline VOID SetConsoleSwitchInProgress(BOOL fSwitchInProgress)
+{
+    gfSwitchInProgress = fSwitchInProgress;
+    if (fSwitchInProgress) {
+        KeResetEvent(gpevtVideoportCallout);
+    } else {
+        KeSetEvent(gpevtVideoportCallout, EVENT_INCREMENT, FALSE);
+    }
+}
 
 /*
  * Object types exported from the kernel.
  */
-#line 156
 extern POBJECT_TYPE *ExWindowStationObjectType;
 extern POBJECT_TYPE *ExDesktopObjectType;
-extern POBJECT_TYPE ExEventObjectType;
-#line 159
+extern POBJECT_TYPE *ExEventObjectType;
+extern POBJECT_TYPE *IoDriverObjectType;
+
+#ifndef DWORD_ALIGN
+#define DWORD_ALIGN(x) ((x+3)&~3)
+#endif // !DWORD_ALIGN
 
 /*
  * Private probing macros
  */
+
+#if defined(_X86_)
+#define DATAALIGN sizeof(BYTE)
+#define CHARALIGN sizeof(BYTE)
+#else
+#define DATAALIGN sizeof(DWORD)
+#define CHARALIGN sizeof(WCHAR)
+#endif
+
+#define ProbeForReadBuffer(Address, Count, Alignment) {                     \
+    if ((ULONG)(Count) > (ULONG)(MAXULONG / sizeof(*(Address)))) {          \
+        ExRaiseAccessViolation();                                           \
+    }                                                                       \
+    ProbeForRead(Address, (ULONG)(Count) * sizeof(*(Address)), Alignment);  \
+}
+
+#define ProbeForWriteBuffer(Address, Count, Alignment) {                    \
+    if ((ULONG)(Count) > (ULONG)(MAXULONG / sizeof(*(Address)))) {          \
+        ExRaiseAccessViolation();                                           \
+    }                                                                       \
+    ProbeForWrite(Address, (ULONG)(Count) * sizeof(*(Address)), Alignment); \
+}
+
+#define ProbeAndReadSize(Address)                         \
+    (((Address) >= (SIZE * const)MM_USER_PROBE_ADDRESS) ? \
+        (*(volatile SIZE * const)MM_USER_PROBE_ADDRESS) : (*(volatile SIZE *)(Address)))
+
+
+#define ProbeAndReadBlendfunction(Address)                         \
+    (((Address) >= (BLENDFUNCTION * const)MM_USER_PROBE_ADDRESS) ? \
+        (*(volatile BLENDFUNCTION * const)MM_USER_PROBE_ADDRESS) : (*(volatile BLENDFUNCTION *)(Address)))
 
 //++
 //
@@ -235,10 +323,20 @@ extern POBJECT_TYPE ExEventObjectType;
 #define ProbeAndReadMenuItem(Address)                             \
     (((Address) >= (MENUITEMINFO * const)MM_USER_PROBE_ADDRESS) ? \
         (*(volatile MENUITEMINFO * const)MM_USER_PROBE_ADDRESS) : (*(volatile MENUITEMINFO *)(Address)))
-#ifdef MEMPHIS_MENU_WATERMARKS
-#error
-#line 266
-#endif // MEMPHIS_MENU_WATERMARKS
+
+//++
+//
+// BOOLEAN
+// ProbeAndReadMenuInfo(
+//     IN PMENUINFO Address
+//     )
+//
+//--
+
+#define ProbeAndReadMenuInfo(Address)                             \
+    (((Address) >= (MENUINFO * const)MM_USER_PROBE_ADDRESS) ? \
+        (*(volatile MENUINFO * const)MM_USER_PROBE_ADDRESS) : (*(volatile MENUINFO *)(Address)))
+
 //++
 //
 // BOOLEAN
@@ -411,15 +509,46 @@ extern POBJECT_TYPE ExEventObjectType;
 //++
 //
 // BOOLEAN
+// ProbeAndReadKbdHook(
+//     IN PKBDHOOKSTRUCT Address
+//     )
+//
+//--
+
+#define ProbeAndReadKbdHook(Address)                               \
+    (((Address) >= (KBDLLHOOKSTRUCT * const)MM_USER_PROBE_ADDRESS) ? \
+        (*(volatile KBDLLHOOKSTRUCT * const)MM_USER_PROBE_ADDRESS) : (*(volatile KBDLLHOOKSTRUCT *)(Address)))
+//++
+//
+// BOOLEAN
+// ProbeAndReadMsllHook(
+//     IN PMSLLHOOKSTRUCT Address
+//     )
+//
+//--
+
+#define ProbeAndReadMsllHook(Address)                               \
+    (((Address) >= (MSLLHOOKSTRUCT * const)MM_USER_PROBE_ADDRESS) ? \
+        (*(volatile MSLLHOOKSTRUCT * const)MM_USER_PROBE_ADDRESS) : (*(volatile MSLLHOOKSTRUCT *)(Address)))
+
+//++
+//
+// BOOLEAN
 // ProbeAndReadMouseHook(
-//     IN PMOUSEHOOKSTRUCT Address
+//     IN PMOUSEHOOKSTRUCTEX Address
 //     )
 //
 //--
 
 #define ProbeAndReadMouseHook(Address)                               \
-    (((Address) >= (MOUSEHOOKSTRUCT * const)MM_USER_PROBE_ADDRESS) ? \
-        (*(volatile MOUSEHOOKSTRUCT * const)MM_USER_PROBE_ADDRESS) : (*(volatile MOUSEHOOKSTRUCT *)(Address)))
+    (((Address) >= (MOUSEHOOKSTRUCTEX * const)MM_USER_PROBE_ADDRESS) ? \
+        (*(volatile MOUSEHOOKSTRUCTEX * const)MM_USER_PROBE_ADDRESS) : (*(volatile MOUSEHOOKSTRUCTEX *)(Address)))
+
+
+#ifdef REDIRECTION
+#error Original configuration is not selected.
+#endif // REDIRECTION
+#line 563
 
 //++
 //
@@ -485,6 +614,139 @@ extern POBJECT_TYPE ExEventObjectType;
 #define ProbeAndReadSetClipBData(Address) \
     (((Address) >= (SETCLIPBDATA * const)MM_USER_PROBE_ADDRESS) ? \
         (*(volatile SETCLIPBDATA * const)MM_USER_PROBE_ADDRESS) : (*(volatile SETCLIPBDATA *)(Address)))
+
+//++
+//
+// BOOLEAN
+// ProbeAndReadBroadcastSystemMsgParams(
+//     IN LPBROADCASTSYSTEMMSGPARAMS Address
+//     )
+//
+//--
+
+#define ProbeAndReadBroadcastSystemMsgParams(Address) \
+    (((Address) >= (BROADCASTSYSTEMMSGPARAMS * const)MM_USER_PROBE_ADDRESS) ? \
+        (*(volatile BROADCASTSYSTEMMSGPARAMS * const)MM_USER_PROBE_ADDRESS) : (*(volatile BROADCASTSYSTEMMSGPARAMS *)(Address)))
+
+//++
+//
+// BOOLEAN
+// ProbeAndReadCursorData(
+//     IN PCURSORDATA Address
+//     )
+//
+//--
+
+#define ProbeAndReadCursorData(Address) \
+    (((Address) >= (CURSORDATA * const)MM_USER_PROBE_ADDRESS) ? \
+        (*(volatile CURSORDATA * const)MM_USER_PROBE_ADDRESS) : (*(volatile CURSORDATA *)(Address)))
+
+//++
+//
+// BOOLEAN
+// ProbeForReadUnicodeStringBuffer(
+//     IN UNICODE_STRING String
+//     )
+//
+//--
+
+#if defined(_X86_)
+#define ProbeForReadUnicodeStringBuffer(String)                                                          \
+    if (((ULONG_PTR)((String).Buffer) & (sizeof(BYTE) - 1)) != 0) {                                   \
+        ExRaiseDatatypeMisalignment();                                                            \
+    } else if ((((ULONG_PTR)((String).Buffer) + ((String).Length) + sizeof(UNICODE_NULL)) < (ULONG_PTR)((String).Buffer)) ||     \
+               (((ULONG_PTR)((String).Buffer) + ((String).Length) + sizeof(UNICODE_NULL)) > (ULONG_PTR)MM_USER_PROBE_ADDRESS)) { \
+        ExRaiseAccessViolation();                                                                 \
+    } else if (((String).Length) > ((String).MaximumLength)) {                                    \
+        ExRaiseAccessViolation();                                                                 \
+    }
+#else
+#define ProbeForReadUnicodeStringBuffer(String)                                                          \
+    if (((ULONG_PTR)((String).Buffer) & (sizeof(WCHAR) - 1)) != 0) {                                  \
+        ExRaiseDatatypeMisalignment();                                                            \
+    } else if ((((ULONG_PTR)((String).Buffer) + ((String).Length) + sizeof(UNICODE_NULL)) < (ULONG_PTR)((String).Buffer)) ||     \
+               (((ULONG_PTR)((String).Buffer) + ((String).Length) + sizeof(UNICODE_NULL)) > (ULONG_PTR)MM_USER_PROBE_ADDRESS)) { \
+        ExRaiseAccessViolation();                                                                 \
+    } else if (((String).Length) > ((String).MaximumLength)) {                                    \
+        ExRaiseAccessViolation();                                                                 \
+    }
+#endif
+
+#if defined(_X86_)
+#define ProbeForReadUnicodeStringFullBuffer(String)                                                          \
+    if (((ULONG_PTR)((String).Buffer) & (sizeof(BYTE) - 1)) != 0) {                                   \
+        ExRaiseDatatypeMisalignment();                                                            \
+    } else if ((((ULONG_PTR)((String).Buffer) + ((String).MaximumLength)) < (ULONG_PTR)((String).Buffer)) ||     \
+               (((ULONG_PTR)((String).Buffer) + ((String).MaximumLength)) > (ULONG_PTR)MM_USER_PROBE_ADDRESS)) { \
+        ExRaiseAccessViolation();                                                                 \
+    } else if (((String).Length) > ((String).MaximumLength)) {                                    \
+        ExRaiseAccessViolation();                                                                 \
+    }
+#else
+#define ProbeForReadUnicodeStringFullBuffer(String)                                                          \
+    if (((ULONG_PTR)((String).Buffer) & (sizeof(WCHAR) - 1)) != 0) {                                  \
+        ExRaiseDatatypeMisalignment();                                                            \
+    } else if ((((ULONG_PTR)((String).Buffer) + ((String).MaximumLength)) < (ULONG_PTR)((String).Buffer)) ||     \
+               (((ULONG_PTR)((String).Buffer) + ((String).MaximumLength)) > (ULONG_PTR)MM_USER_PROBE_ADDRESS)) { \
+        ExRaiseAccessViolation();                                                                 \
+    } else if (((String).Length) > ((String).MaximumLength)) {                                    \
+        ExRaiseAccessViolation();                                                                 \
+    }
+#endif
+
+//++
+//
+// BOOLEAN
+// ProbeForReadUnicodeStringBufferOrId(
+//     IN UNICODE_STRING String
+//     )
+//
+//--
+
+#define ProbeForReadUnicodeStringBufferOrId(String) \
+    if (IS_PTR((String).Buffer)) {           \
+        ProbeForReadUnicodeStringBuffer(String);    \
+    }
+
+    //++
+    //
+    // BOOLEAN
+    // ProbeAndReadCandidateForm(
+    //     IN PCANDIDATEFORM Address
+    //     )
+    //
+    //--
+
+    #define ProbeAndReadCandidateForm(Address) \
+        (((Address) >= (CANDIDATEFORM * const)MM_USER_PROBE_ADDRESS) ? \
+            (*(volatile CANDIDATEFORM * const)MM_USER_PROBE_ADDRESS) : (*(volatile CANDIDATEFORM *)(Address)))
+
+    //++
+    //
+    // BOOLEAN
+    // ProbeAndReadCompositionForm(
+    //     IN PCANDIDATEFORM Address
+    //     )
+    //
+    //--
+
+    #define ProbeAndReadCompositionForm(Address) \
+        (((Address) >= (COMPOSITIONFORM * const)MM_USER_PROBE_ADDRESS) ? \
+            (*(volatile COMPOSITIONFORM * const)MM_USER_PROBE_ADDRESS) : (*(volatile COMPOSITIONFORM *)(Address)))
+
+    //++
+    //
+    // BOOLEAN
+    // ProbeAndReadLogFontW(
+    //     IN PLOGFONTA Address
+    //     )
+    //
+    //--
+
+    #define ProbeAndReadLogFontW(Address) \
+        (((Address) >= (LOGFONTW * const)MM_USER_PROBE_ADDRESS) ? \
+            (*(volatile LOGFONTW * const)MM_USER_PROBE_ADDRESS) : (*(volatile LOGFONTW *)(Address)))
+
 
 //++
 //
@@ -692,6 +954,23 @@ extern POBJECT_TYPE ExEventObjectType;
 
 //++
 //
+// VOUD
+// ProbeForWriteBroadcastSystemMsgParams(
+//     IN LPBROADCASTSYSTEMMSGPARAMS Address
+//     )
+//
+//--
+
+#define ProbeForWriteBroadcastSystemMsgParams(Address) {                                                \
+    if ((Address) >= (BROADCASTSYSTEMMSGPARAMS * const)MM_USER_PROBE_ADDRESS) {                         \
+        *(volatile ULONG * const)MM_USER_PROBE_ADDRESS = 0;                                             \
+    }                                                                                                   \
+                                                                                                        \
+    *(volatile BROADCASTSYSTEMMSGPARAMS *)(Address) = *(volatile BROADCASTSYSTEMMSGPARAMS *)(Address);  \
+}
+
+//++
+//
 // VOID
 // ProbeForWriteMDINextMenu(
 //     IN PMDINEXTMENU Address
@@ -758,55 +1037,177 @@ extern POBJECT_TYPE ExEventObjectType;
     *(volatile WINDOWPOS *)(Address) = *(volatile WINDOWPOS *)(Address);\
 }
 
+#define ProbeForWriteComboBoxInfo(Address) {                                        \
+    if ((Address) >= (COMBOBOXINFO * const)MM_USER_PROBE_ADDRESS) {                 \
+        *(volatile ULONG * const)MM_USER_PROBE_ADDRESS = 0;                         \
+    }                                                                               \
+                                                                                    \
+    *(volatile COMBOBOXINFO *)(Address) = *(volatile COMBOBOXINFO *)(Address);      \
+}
+
+#define ProbeForWriteScrollBarInfo(Address) {                                       \
+    if ((Address) >= (SCROLLBARINFO * const)MM_USER_PROBE_ADDRESS) {                \
+        *(volatile ULONG * const)MM_USER_PROBE_ADDRESS = 0;                         \
+    }                                                                               \
+                                                                                    \
+    *(volatile SCROLLBARINFO *)(Address) = *(volatile SCROLLBARINFO *)(Address);    \
+}
+
+
+    //++
+    //
+    // VOID
+    // ProbeForWriteCandidateForm(
+    //     IN PCANDIDATEFORM Address
+    //     )
+    //
+    //--
+
+    #define ProbeForWriteCandidateForm(Address) {                                     \
+        if ((Address) >= (CANDIDATEFORM * const)MM_USER_PROBE_ADDRESS) {              \
+            *(volatile ULONG * const)MM_USER_PROBE_ADDRESS = 0;                       \
+        }                                                                             \
+                                                                                      \
+        *(volatile CANDIDATEFORM *)(Address) = *(volatile CANDIDATEFORM *)(Address);  \
+    }
+
+    //++
+    //
+    // VOID
+    // ProbeForWriteCompositionForm(
+    //     IN PCOMPOSITIONFORM Address
+    //     )
+    //
+    //--
+
+    #define ProbeForWriteCompositionForm(Address) {                                     \
+        if ((Address) >= (COMPOSITIONFORM * const)MM_USER_PROBE_ADDRESS) {              \
+            *(volatile ULONG * const)MM_USER_PROBE_ADDRESS = 0;                         \
+        }                                                                               \
+                                                                                        \
+        *(volatile COMPOSITIONFORM *)(Address) = *(volatile COMPOSITIONFORM *)(Address);\
+    }
+
+    //++
+    //
+    // VOID
+    // ProbeForWriteLogFontW(
+    //     IN PLOGFONTW Address
+    //     )
+    //
+    //--
+
+    #define ProbeForWriteLogFontW(Address) {                                   \
+        if ((Address) >= (LOGFONTW * const)MM_USER_PROBE_ADDRESS) {            \
+            *(volatile ULONG * const)MM_USER_PROBE_ADDRESS = 0;                \
+        }                                                                      \
+                                                                               \
+        *(volatile LOGFONTW *)(Address) = *(volatile LOGFONTW *)(Address);     \
+    }
+
+//++
+//
+// VOID
+// ProbeForWriteReconvertString(IN PRECONVERTSTRING Address)
+//
+//--
+
+#define ProbeForWriteReconvertString(Address) { \
+    if ((Address) >= (RECONVERTSTRING* const)MM_USER_PROBE_ADDRESS) {           \
+        *(volatile ULONG* const)MM_USER_PROBE_ADDRESS = 0;                      \
+    }                                                                           \
+                                                                                \
+    *(volatile RECONVERTSTRING*)(Address) = *(volatile RECONVERTSTRING*)(Address); \
+    *((volatile BYTE*)(Address) + (Address)->dwSize) = *((volatile BYTE*)(Address) + (Address)->dwSize); \
+}
+
+#define ProbeForReadReconvertString(pReconv) \
+    ProbeForRead((pReconv), (pReconv)->dwSize, 1)
+
+
+//++
+//
+// VOID
+// ProbeForWriteImeCharPosition(IN LPPrivateIMECHARPOSITION Address)
+//
+//--
+
+#define ProbeForWriteImeCharPosition(Address) { \
+    if ((Address) >= (PrivateIMECHARPOSITION* const)MM_USER_PROBE_ADDRESS) {    \
+        *(volatile ULONG* const)MM_USER_PROBE_ADDRESS = 0;                      \
+    }                                                                           \
+                                                                                \
+    *(volatile PrivateIMECHARPOSITION*)(Address) = *(volatile PrivateIMECHARPOSITION*)(Address); \
+}
+
+
+
+//++
+//
+// VOID
+// ProbeAndReadMenuGetObjectInfo(
+//     IN PMENUGETOBJECTINFO Address
+//     )
+//
+//--
+
+#define ProbeAndReadMenuGetObjectInfo(Address) \
+    (((Address) >= (MENUGETOBJECTINFO * const)MM_USER_PROBE_ADDRESS) ? \
+        (*(volatile MENUGETOBJECTINFO * const)MM_USER_PROBE_ADDRESS) : (*(volatile MENUGETOBJECTINFO *)(Address)))
+
 
 /*
  * This macro makes sure an object is thread locked. DEBUG only.
  */
-#ifdef DEBUG
-#error
-#else
-#line 793
-#define CheckLock(p)
-#line 794
-#endif
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+    #define CheckLock(p)
+#endif // DBG
 
 /*
  * Debug macros
  */
 #if DBG
-#error
-#line 842
-#else
+#error Original configuration is not selected.
+#else // DBG
+#line 1211
 
-#line 844
-#define TRACE_INIT(str) {}
-#line 845
-#define TRACE_SWITCH(str) {}
-#line 846
-#define TRACE(s)
-#line 847
-#define TRACEVOID(s)
-#define TRACETHUNK(t)
-#define TRACECALLBACK(t)
-#define TRACECALLBACKMSG(t)
+    #define TRACE_INIT(str) {}
+    #define TRACE_SWITCH(str) {}
+    #define TRACE(s)
+    #define TRACEVOID(s)
+    #define TRACETHUNK(t)
+    #define TRACECALLBACK(t)
+    #define TRACECALLBACKMSG(t)
 
+#endif // DBG
+
+/*
+ * Statistics for performance counter
+ */
+
+typedef struct tagPERFINFO {
+    LONG               lCount;
+    LONG               lMaxCount;
+    LONG               lTotalCount;
+    SIZE_T             lSize;
+} PERFHANDLEINFO, *PPERFHANDLEINFO;
+
+typedef struct _HANDLEPAGE {
+    ULONG_PTR iheLimit;    /* first handle index past the end of the page */
+    ULONG_PTR iheFreeEven; /* first even free handle in the page -- window objects */
+    ULONG_PTR iheFreeOdd;  /* first even odd handle in the page */
+} HANDLEPAGE, *PHANDLEPAGE;
+
+
+#if DBG
+#error Original configuration is not selected.
 #endif
+#line 1244
 
-/*
- * Object definition control flags
- */
-#define OCF_THREADOWNED      0x0001
-#define OCF_PROCESSOWNED     0x0002
-#define OCF_MARKTHREAD       0x0004
-#define OCF_USEQUOTA         0x0008
-
-/*
- * From HANDTABL.C
- */
 BOOL     HMInitHandleTable(PVOID pBase);
-#line 866
 PVOID    HMAllocObject(PTHREADINFO pti, PDESKTOP pdesk, BYTE btype, DWORD size);
-#line 867
 BOOL     HMFreeObject(PVOID pobj);
 BOOL     HMMarkObjectDestroy(PVOID pobj);
 BOOL     HMDestroyObject(PVOID pobj);
@@ -814,202 +1215,354 @@ PVOID FASTCALL HMAssignmentLock(PVOID *ppobj, PVOID pobj);
 PVOID FASTCALL HMAssignmentUnlock(PVOID *ppobj);
 NTSTATUS HMGetStats(HANDLE hProcess, int iPidType, PVOID pResults, UINT cjResultSize);
 HANDLE   KernelPtoH(PVOID pObj);
-#line 874
 void     HMDestroyUnlockedObject(PHE phe);
+
+void     HMCleanupGrantedHandle(HANDLE h);
 
 /*
  * Validation, handle mapping, etc.
  */
-#line 879
-#define RevalidateHwnd(hwnd)       HMValidateHandleNoRip(hwnd, TYPE_WINDOW)
-#line 880
+#define RevalidateHwnd(hwnd)   HMValidateHandleNoSecure(hwnd, TYPE_WINDOW)
+#define RevalidateCatHwnd(hwnd)   HMValidateCatHandleNoSecure(hwnd, TYPE_WINDOW)
+
 #define HtoPq(h)    ((PVOID)HMObjectFromHandle(h))
+#define HtoPqCat(h)    ((PVOID)HMCatObjectFromHandle(h))
 #define HtoP(h)     ((PVOID)HMObjectFromHandle(h))
+#define HtoPCat(h)     ((PVOID)HMCatObjectFromHandle(h))
 #define PW(hwnd)    ((PWND)HtoP(hwnd))
-#line 883
-#define TID(pti)    ((DWORD)((pti) == NULL ? NULL : (pti)->Thread->Cid.UniqueThread))
-#line 884
-#define TIDq(pti)   ((DWORD)((pti)->Thread->Cid.UniqueThread))
+#define PWCat(hwnd)    ((PWND)HtoPCat(hwnd))
+#define TID(pti)    HandleToUlong((pti) == NULL ? NULL : (PsGetThreadId((pti)->pEThread)))
+#define TIDq(pti)   HandleToUlong(PsGetThreadId((pti)->pEThread))
 
 /*
  * Assignment lock macro -> used for locking objects embedded in structures
  * and globals. Threadlocks used for locking objects across callbacks.
  */
-#line 890
 #define Lock(ppobj, pobj) HMAssignmentLock((PVOID *)ppobj, (PVOID)pobj)
 #define Unlock(ppobj)     HMAssignmentUnlock((PVOID *)ppobj)
-#line 892
-
-#ifdef DEBUG
-#error
-#else
-#line 896
-#define ThreadLock(_pobj_, _ptl_)          \
-{                                          \
-                                           \
-    PTHREADINFO _pti_;                     \
-                                           \
-    _pti_ = PtiCurrent();                  \
-    (_ptl_)->next = _pti_->ptl;            \
-    _pti_->ptl = (_ptl_);                  \
-    (_ptl_)->pobj = (_pobj_);              \
-    if ((_pobj_) != NULL) {                \
-        HMLockObject((_pobj_));            \
-    }                                      \
-}
-#line 909
-#endif
-
-#ifdef DEBUG
-#error
-#line 917
-#else
-#line 918
-#define ThreadLockAlways(_pobj_, _ptl_)    \
-{                                          \
-                                           \
-    PTHREADINFO _pti_;                     \
-                                           \
-    _pti_ = PtiCurrent();                  \
-    (_ptl_)->next = _pti_->ptl;            \
-    _pti_->ptl = (_ptl_);                  \
-    (_ptl_)->pobj = (_pobj_);              \
-    HMLockObject((_pobj_));                \
-}
-#line 929
-#endif
-
-#ifdef DEBUG
-#error
-#line 938
-#else
-#line 939
-#define ThreadLockAlwaysWithPti(_pti_, _pobj_, _ptl_)  \
-{                                          \
-    (_ptl_)->next = _pti_->ptl;            \
-    _pti_->ptl = (_ptl_);                  \
-    (_ptl_)->pobj = (_pobj_);              \
-    HMLockObject((_pobj_));                \
-}
-#line 946
-#endif
-
-#ifdef DEBUG
-#error
-#line 954
-#else
-#line 955
-#define ThreadLockWithPti(_pti_, _pobj_, _ptl_)  \
-{                                          \
-    (_ptl_)->next = _pti_->ptl;            \
-    _pti_->ptl = (_ptl_);                  \
-    (_ptl_)->pobj = (_pobj_);              \
-    if ((_pobj_) != NULL) {                \
-        HMLockObject((_pobj_));            \
-    }                                      \
-}
-#line 964
-#endif
-
-#ifdef DEBUG
-#error
-#line 969
-#else
-#line 970
-#define ThreadUnlock(ptl) ThreadUnlock1()
-#line 971
-PVOID ThreadUnlock1(VOID);
-#endif
 
 PVOID HMUnlockObjectInternal(PVOID pobj);
+
 #define HMUnlockObject(pobj) \
     ( (--((PHEAD)pobj)->cLockObj == 0) ? HMUnlockObjectInternal(pobj) : pobj )
 
-#line 978
 VOID HMChangeOwnerThread(PVOID pobj, PTHREADINFO pti);
-#line 979
-#ifdef DEBUG
-#error
-#line 982
+VOID HMChangeOwnerPheProcess(PHE phe, PTHREADINFO pti);
+#define HMChangeOwnerProcess(pobj, pti) HMChangeOwnerPheProcess(HMPheFromObject(pobj), pti)
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 1293
+    #define HMLockObject(p)     (((PHEAD)p)->cLockObj++)
+#endif // DBG
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+    #define ThreadLock(_pobj_, _ptl_)          \
+    {                                          \
+        PTHREADINFO _pti_;                     \
+        PVOID __pobj_ = (_pobj_);              \
+                                               \
+        _pti_ = PtiCurrent();                  \
+        (_ptl_)->next = _pti_->ptl;            \
+        _pti_->ptl = (_ptl_);                  \
+        (_ptl_)->pobj = __pobj_;              \
+        if (__pobj_ != NULL) {                \
+            HMLockObject(__pobj_);            \
+        }                                      \
+    }
+#endif // DBG
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 1322
+    #define ThreadLockAlways(_pobj_, _ptl_)    \
+    {                                          \
+        PTHREADINFO _pti_;                     \
+        PVOID __pobj_ = (_pobj_);              \
+                                               \
+        _pti_ = PtiCurrent();                  \
+        (_ptl_)->next = _pti_->ptl;            \
+        _pti_->ptl = (_ptl_);                  \
+        (_ptl_)->pobj = __pobj_;              \
+        HMLockObject(__pobj_);                \
+    }
+#endif // DBG
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 1341
+    #define ThreadLockNever(_ptl_)             \
+    {                                          \
+        PTHREADINFO _pti_;                     \
+                                               \
+        _pti_ = PtiCurrent();                  \
+        (_ptl_)->next = _pti_->ptl;            \
+        _pti_->ptl = (_ptl_);                  \
+        (_ptl_)->pobj = NULL;                  \
+    }
+#endif // DBG
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 1361
+    #define ThreadLockAlwaysWithPti(_pti_, _pobj_, _ptl_)  \
+    {                                          \
+        PVOID __pobj_ = (_pobj_);              \
+        (_ptl_)->next = _pti_->ptl;            \
+        _pti_->ptl = (_ptl_);                  \
+        (_ptl_)->pobj = __pobj_;              \
+        HMLockObject(__pobj_);                \
+    }
+#endif // DBG
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 1378
+    #define ThreadLockNeverWithPti(_pti_, _ptl_)    \
+    {                                               \
+        (_ptl_)->next = _pti_->ptl;                 \
+        _pti_->ptl = (_ptl_);                       \
+        (_ptl_)->pobj = NULL;                       \
+    }
+#endif // DBG
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 1394
+    #define ThreadLockWithPti(_pti_, _pobj_, _ptl_) \
+    {                                               \
+        PVOID __pobj_ = (_pobj_);              \
+        (_ptl_)->next = _pti_->ptl;                 \
+        _pti_->ptl = (_ptl_);                       \
+        (_ptl_)->pobj = __pobj_;                   \
+        if (__pobj_ != NULL) {                     \
+            HMLockObject(__pobj_);                 \
+        }                                           \
+    }
+#endif // DBG
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+    __inline PVOID ThreadLockExchange(PVOID pobj, PTL ptl)
+    {
+        PVOID   pobjOld;
+
+        pobjOld = ptl->pobj;
+        ptl->pobj = pobj;
+        if (pobj) {
+            HMLockObject(pobj);
+        }
+
+        if (pobjOld) {
+            pobjOld = HMUnlockObject((PHEAD)pobjOld);
+        }
+
+        return pobjOld;
+    }
+#endif // DBG
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 1435
+    __inline PVOID ThreadLockExchangeAlways(PVOID pobj, PTL ptl)
+    {
+        PVOID   pobjOld;
+
+        pobjOld = ptl->pobj;
+        ptl->pobj = pobj;
+        HMLockObject(pobj);
+        if (pobjOld) {
+            pobjOld = HMUnlockObject((PHEAD)pobjOld);
+        }
+
+        return pobjOld;
+    }
+#endif // DBG
+
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 1454
+    PVOID ThreadUnlock1(VOID);
+    #define ThreadUnlock(ptl) ThreadUnlock1()
+#endif // DBG
+
+/*
+ * Define this only if you want to track down lock/unlock mismatches
+ * for desktop objects.
+ */
+#if DBG
+#error Original configuration is not selected.
+#endif // DBG
+
+#ifdef LOGDESKTOPLOCKS
+#error Original configuration is not selected.
 #else
-#define HMLockObject(p)     (((PHEAD)p)->cLockObj++)
-#endif
+#line 1632
+    #define LogDesktop(pdesk, tag, bLock, extra)
+#endif // LOGDESKTOPLOCKS
 
 /*
  * Routines for referencing and assigning kernel objects.
  */
-VOID LockObjectAssignment(PVOID *, PVOID);
-VOID UnlockObjectAssignment(PVOID *);
-#line 991
-VOID ThreadLockObject(PTHREADINFO, PVOID, PTL);
-VOID ThreadUnlockObject(PTHREADINFO);
-#line 993
+#ifdef LOGDESKTOPLOCKS
+#error Original configuration is not selected.
+#else
+#line 1642
+    VOID LockObjectAssignment(PVOID*, PVOID);
+    VOID UnlockObjectAssignment(PVOID*);
+#endif
 
-#define LockWinSta(ppwinsta, pwinsta) \
-{                                                                                           \
-    if (pwinsta != NULL)                                                                    \
-    {                                                                                       \
-        UserAssert(OBJECT_TO_OBJECT_HEADER(pwinsta)->Type == *ExWindowStationObjectType);   \
-    }                                                                                       \
-    LockObjectAssignment(ppwinsta, pwinsta);                                                \
+VOID UserDereferenceObject(PVOID pobj);
+
+#define ThreadLockObject(pobj, ptl)                                                 \
+{                                                                                   \
+    UserAssert(!(PpiCurrent()->W32PF_Flags & W32PF_TERMINATED));                    \
+    UserAssert(pobj == NULL || OBJECT_TO_OBJECT_HEADER(pobj)->PointerCount != 0);   \
+    PushW32ThreadLock(pobj, ptl, UserDereferenceObject);                            \
+    if (pobj != NULL) {                                                             \
+        ObReferenceObject(pobj);                                                    \
+    }                                                                               \
 }
 
-#define LockDesktop(ppdesk, pdesk) \
-{                                                                                           \
-    if (pdesk != NULL)                                                                      \
-    {                                                                                       \
-        UserAssert(OBJECT_TO_OBJECT_HEADER(pdesk)->Type == *ExDesktopObjectType);           \
-    }                                                                                       \
-    LockObjectAssignment(ppdesk, pdesk);                                                    \
+#define ThreadLockExchangeObject(pobj, ptl)                                         \
+{                                                                                   \
+    UserAssert(!(PpiCurrent()->W32PF_Flags & W32PF_TERMINATED));                    \
+    UserAssert(pobj == NULL || OBJECT_TO_OBJECT_HEADER(pobj)->PointerCount != 0);   \
+    if (pobj != NULL) {                                                             \
+        ObReferenceObject(pobj);                                                    \
+    }                                                                               \
+    ExchangeW32ThreadLock(pobj, ptl);                                               \
 }
 
-#define UnlockWinSta(ppwinsta) \
-        UnlockObjectAssignment(ppwinsta)
-#define UnlockDesktop(ppdesk) \
-        UnlockObjectAssignment(ppdesk)
+#define ThreadUnlockObject(ptl)                                                     \
+{                                                                                   \
+    PopAndFreeW32ThreadLock(ptl);                                                   \
+}                                                                                   \
+
+#ifdef LOGDESKTOPLOCKS
+#error Original configuration is not selected.
+#else
+#line 1720
+
+    #define UnlockWinSta(ppwinsta) \
+            UnlockObjectAssignment(ppwinsta)
+
+    #define LockWinSta(ppwinsta, pwinsta) \
+    {                                                                                           \
+        if (pwinsta != NULL)                                                                    \
+        {                                                                                       \
+            UserAssert(OBJECT_TO_OBJECT_HEADER(pwinsta)->Type == *ExWindowStationObjectType);   \
+        }                                                                                       \
+        LockObjectAssignment(ppwinsta, pwinsta);                                                \
+    }
+
+    #define LockDesktop(ppdesk, pdesk, tag, extra) \
+    {                                                                                           \
+        if (pdesk != NULL)                                                                      \
+        {                                                                                       \
+            UserAssert(OBJECT_TO_OBJECT_HEADER(pdesk)->Type == *ExDesktopObjectType);           \
+        }                                                                                       \
+        LockObjectAssignment(ppdesk, pdesk);                                                    \
+    }
+
+    #define UnlockDesktop(ppdesk, tag, extra) \
+            UnlockObjectAssignment(ppdesk)
+
+    #define ThreadLockDesktop(pti, pdesk, ptl, tag) \
+    {                                                                                           \
+        UserAssert(pdesk == NULL || OBJECT_TO_OBJECT_HEADER(pdesk)->Type == *ExDesktopObjectType);\
+        ThreadLockObject(pdesk, ptl);                                                           \
+    }
+
+    #define ThreadLockExchangeDesktop(pti, pdesk, ptl, tag) \
+    {                                                                                           \
+        UserAssert(pdesk == NULL || OBJECT_TO_OBJECT_HEADER(pdesk)->Type == *ExDesktopObjectType);\
+        ThreadLockExchangeObject(pdesk, ptl);                                                   \
+    }
+
+    #define ThreadUnlockDesktop(pti, ptl, tag) ThreadUnlockObject(ptl)
+
+#endif // LOGDESKTOPLOCKS
 
 #define ThreadLockWinSta(pti, pwinsta, ptl) \
 {                                                                                           \
     UserAssert(pwinsta == NULL || OBJECT_TO_OBJECT_HEADER(pwinsta)->Type == *ExWindowStationObjectType);\
-    ThreadLockObject(pti, pwinsta, ptl);                                                    \
+    ThreadLockObject(pwinsta, ptl);                                                         \
 }
 
-#define ThreadLockDesktop(pti, pdesk, ptl) \
+#define ThreadLockExchangeWinSta(pti, pwinsta, ptl) \
 {                                                                                           \
-    UserAssert(pdesk == NULL || OBJECT_TO_OBJECT_HEADER(pdesk)->Type == *ExDesktopObjectType);\
-    ThreadLockObject(pti, pdesk, ptl);                                                      \
+    UserAssert(pwinsta == NULL || OBJECT_TO_OBJECT_HEADER(pwinsta)->Type == *ExWindowStationObjectType);\
+    ThreadLockExchangeObject(pwinsta, ptl);                                                 \
 }
 
+#define _ThreadLockPti(pti, pobj, ptl) LockW32Thread((PW32THREAD)pobj, ptl)
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 1785
 #define ThreadLockPti(pti, pobj, ptl) \
-{                                                                                           \
-    ThreadLockObject(pti, pobj ? pobj->Thread : NULL, ptl);                                                      \
+{ \
+    _ThreadLockPti(pti, pobj, ptl); \
 }
+#endif
 
-#define ThreadUnlockWinSta(pti, ptl) ThreadUnlockObject(pti)
-#define ThreadUnlockDesktop(pti, ptl) ThreadUnlockObject(pti)
-#define ThreadUnlockPti(pti, ptl) ThreadUnlockObject(pti)
+#define ThreadLockExchangePti(pobj, ptl) LockExchangeW32Thread((PW32THREAD)pobj, ptl)
+
+#define ThreadUnlockWinSta(pti, ptl) ThreadUnlockObject(ptl)
+#define ThreadUnlockPti(pti, ptl) UnlockW32Thread(ptl)
 
 /*
  * Macros for locking pool allocations
  */
 #define ThreadLockPool(_pti_, _ppool_, _ptl_)  \
-{                                          \
-    (_ptl_)->next = _pti_->ptlPool;        \
-    _pti_->ptlPool = (_ptl_);              \
-    (_ptl_)->pobj = (_ppool_);             \
-}
+        PushW32ThreadLock(_ppool_, _ptl_, UserFreePool)
 
-#ifdef DEBUG
-#error
-#line 1055
-#else
+#define ThreadUnlockPool(_pti_, _ptl_)  \
+        PopW32ThreadLock(_ptl_)
+
 #define ThreadUnlockAndFreePool(_pti_, _ptl_)  \
-{                                           \
-    UserFreePool(_pti_->ptlPool->pobj);     \
-    _pti_->ptlPool = _pti_->ptlPool->next;  \
-}
-#endif
+        PopAndFreeAlwaysW32ThreadLock(_ptl_)
 
+#define ThreadLockPoolCleanup(_pti_, _ppool_, _ptl_, _pfn_)  \
+        PushW32ThreadLock(_ppool_, _ptl_, _pfn_)
+
+#define ThreadUnlockPoolCleanup(_pti_, _ptl_)  \
+        PopW32ThreadLock(_ptl_)
+
+#define ThreadUnlockAndCleanupPool(_pti_, _ptl_)  \
+        PopAndFreeAlwaysW32ThreadLock(_ptl_)
+
+#define ThreadLockDesktopHandle(_pti, _ptl_, _hdesk_)   \
+        PushW32ThreadLock(_hdesk_, _ptl_, CloseProtectedHandle)
+
+#define ThreadUnlockDesktopHandle(_ptl_)   \
+        PopAndFreeAlwaysW32ThreadLock(_ptl_)
+
+void CleanupDecSFWLockCount(PVOID pIgnore);
+#define ThreadLockSFWLockCount(_ptl_) \
+        { \
+            IncSFWLockCount(); \
+            /* Pass a fake pObj or the cleanup function won't be called */ \
+            PushW32ThreadLock(&guSFWLockCount, _ptl_, CleanupDecSFWLockCount); \
+        }
+
+#define ThreadUnlockSFWLockCount(_ptl_) \
+    { \
+        DecSFWLockCount(); \
+        PopW32ThreadLock(_ptl_); \
+    }
 
 /*
  * special handle that signifies we have a rle bitmap for the wallpaper
@@ -1023,199 +1576,423 @@ typedef struct tagWPINFO {
     PBYTE pbmfh;
 } WPINFO;
 
-VOID
-KeBoostCurrentThread(
-    VOID
-    );
+/*
+ * Defines used by GetMouseMovePointsEx API
+ */
+
+#define MAX_MOUSEPOINTS 64
+
+#define PREVPOINT(i)    \
+    ((i == 0) ? (MAX_MOUSEPOINTS - 1) : ((i - 1) % MAX_MOUSEPOINTS))
+
+#define NEXTPOINT(i)    \
+    ((i + 1) % MAX_MOUSEPOINTS)
+
+#define NEXTPOINTCOUNT(c)           \
+    {                               \
+        if (c < MAX_MOUSEPOINTS)    \
+            c++;                    \
+    }
+
+#define SAVEPOINT(xc, yc, _resX, _resY, t, e)                            \
+{                                                                        \
+    /*                                                                   \
+     * (xc, yc) is the point and (resX, resY) is the resolution          \
+     */                                                                  \
+    gaptMouse[gptInd].x           = MAKELONG(LOWORD(xc), LOWORD(_resX)); \
+    gaptMouse[gptInd].y           = MAKELONG(LOWORD(yc), LOWORD(_resY)); \
+    gaptMouse[gptInd].time        = t;                                   \
+    gaptMouse[gptInd].dwExtraInfo = e;                                   \
+                                                                         \
+    gptInd = NEXTPOINT(gptInd);                                          \
+}
+
+
+/*
+ * Structure used for getting the stack traces for user critical section
+ */
+
+#define MAX_STACK_CALLS 8
+
+typedef struct tagCRITSTACK {
+struct tagCRITSTACK* pNext;
+    PETHREAD         thread;
+    int              nFrames;
+    PVOID            trace[MAX_STACK_CALLS];
+} CRITSTACK, *PCRITSTACK;
+
 
 /*
  * Macros for User Server and Raw Input Thread critical sections.
  */
-#ifdef DEBUG
-#error
-#line 1095
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 1930
+    #define CheckCritIn()
+    #define CheckDeviceInfoListCritIn()
+    #define CheckCritInShared()
+    #define CheckCritOut()
+    #define CheckDeviceInfoListCritOut()
+    #define BEGINATOMICCHECK()
+    #define BEGINATOMICDEVICEINFOLISTCHECK()
+    #define BeginAtomicCheck()
+    #define BeginAtomicDeviceInfoListCheck()
+    #define ENDATOMICCHECK()
+    #define ENDATOMICDEVICEINFOLISTCHECK()
+    #define EndAtomicCheck()
+    #define EndAtomicDeviceInfoListCheck()
+    #define EXITATOMICCHECK()
+    #define ISATOMICCHECK()
+    #define ISATOMICDEVICEINFOLISTCHECK()
+#endif // DBG
+
+
+#define DIAGNOSE_IO 1
+#ifdef DIAGNOSE_IO
+ULONG MonotonicTick();
+#define LOGTIME(gt) gt = MonotonicTick();
 #else
-#define CheckCritIn()
-#define CheckCritInShared()
-#define CheckCritOut()
-#define BEGINGATOMICCHECK()
-#define ENDATOMICCHECK()
+#define LOGTIME(gt)
 #endif
 
-#define EnterMouseCrit()                                        \
-    KeEnterCriticalRegion(); {                                    \
-    KeBoostCurrentThread(); \
-    ExAcquireResourceExclusiveLite(gpresMouseEventQueue, TRUE); }
+/*
+ * #defines used for mouse/keyboard read buffer
+ */
+#define MAXIMUM_ITEMS_READ      10
+#define NELEM_BUTTONQUEUE       16
 
-#define LeaveMouseCrit() {                                        \
-    ExReleaseResource(gpresMouseEventQueue);                     \
-    KeLeaveCriticalRegion(); }
+/*
+ * Number of times to retry reading a device after a read attempt fails
+ */
+#define MAXIMUM_READ_RETRIES 5
+
+typedef struct tagGENERIC_DEVICE_INFO {
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+    struct tagDEVICEINFO *pNext;
+    BYTE                 type;
+    BYTE                 bFlags;
+    USHORT               usActions;
+    BYTE                 nRetryRead;
+    UNICODE_STRING       ustrName;
+    HANDLE               handle;
+    PVOID                NotificationEntry;
+    PKEVENT              pkeHidChangeCompleted; // wake RequestDeviceChange()
+    IO_STATUS_BLOCK      iosb;
+    NTSTATUS             ReadStatus;
+
+#ifdef DIAGNOSE_IO
+    HANDLE               OpenerProcess;
+    NTSTATUS             OpenStatus;
+    NTSTATUS             AttrStatus;
+    ULONG                timeStartRead;     // tick before ZwReadFile
+    ULONG                timeEndRead;       // tick after ZwReadFile
+    int                  nReadsOutstanding; // ZwReadFile ++, consume data --
+#endif
+} GENERIC_DEVICE_INFO, *PGENERIC_DEVICE_INFO;
+
+// valuse for GENERIC_DEVICE_INFO.type
+#define DEVICE_TYPE_MOUSE    0
+#define DEVICE_TYPE_KEYBOARD 1
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#else
+#line 2001
+#define DEVICE_TYPE_MAX      1
+#endif
+
+// values for GENERIC_DEVICE_INFO.usActions and SignalDeviceChange()
+#define GDIAF_ARRIVED         (USHORT)0x0001 // open & start reading
+#define GDIAF_QUERYREMOVE     (USHORT)0x0002 // close the device
+#define GDIAF_REMOVECANCELLED (USHORT)0x0004 // reopen the device
+#define GDIAF_DEPARTED        (USHORT)0x0008 // close and free the device
+#define GDIAF_IME_STATUS      (USHORT)0x0010 // ???
+#define GDIAF_REFRESH_MOUSE   (USHORT)0x0020 // ???
+#define GDIAF_FREEME          (USHORT)0x0080 // Request to Free the DeviceInfo
+#define GDIAF_PNPWAITING      (USHORT)0x0100 // a PnP thread is waiting
+#define GDIAF_RETRYREAD       (USHORT)0x0200 // Retry the read
+#define GDIAF_RECONNECT       (USHORT)0x0400 // The session reconnected
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+#line 2019
+
+// values for GENERIC_DEVICE_INFO.bFlags;
+#define GDIF_NOTPNP         0x01 // Not a PnP device (eg: PS/2)
+#define GDIF_READING        0x02 // Read may be pending (don't free DeviceInfo).
+#if DIAGNOSE_IO
+#define GDIF_READERMUSTFREE 0x04 // "Free Device" while read pending
+#define GDIF_PNPMUSTFREE    0x08 // "Free Device" while PnP notification pending
+#endif
+#define GDIF_DBGREAD        0x10 // Verbose dbg output about this device
+
+typedef struct tagMOUSE_DEVICE_INFO {    // DEVICE_TYPE_MOUSE
+    MOUSE_ATTRIBUTES     Attr;
+    MOUSE_INPUT_DATA     Data[MAXIMUM_ITEMS_READ];
+} MOUSE_DEVICE_INFO, *PMOUSE_DEVICE_INFO;
+
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+#line 2038
+
+
+typedef struct tagKEYBOARD_DEVICE_INFO { // DEVICE_TYPE_KEYBOARD
+    KEYBOARD_ATTRIBUTES  Attr;
+    KEYBOARD_ID_EX IdEx;
+    KEYBOARD_INPUT_DATA  Data[MAXIMUM_ITEMS_READ];
+} KEYBOARD_DEVICE_INFO, *PKEYBOARD_DEVICE_INFO;
+
+#define GET_KEYBOARD_DEVINFO_ID(pDeviceInfo)        ((pDeviceInfo)->keyboard.IdEx)
+#define GET_KEYBOARD_DEVINFO_TYPE(pDeviceInfo)      ((pDeviceInfo)->keyboard.IdEx.Type)
+#define GET_KEYBOARD_DEVINFO_SUBTYPE(pDeviceInfo)   ((pDeviceInfo)->keyboard.IdEx.Subtype)
+
+
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif  // GENERIC_INPUT
+#line 2233
+
+typedef struct tagDEVICEINFO {
+    GENERIC_DEVICE_INFO;
+    union {
+        MOUSE_DEVICE_INFO    mouse;
+        KEYBOARD_DEVICE_INFO keyboard;
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+    };
+} DEVICEINFO, *PDEVICEINFO;
+
+typedef struct tagDEVICE_TEMPLATE {
+    SIZE_T cbDeviceInfo;        // bytes to allocate for DEVICEINFO
+    const GUID *pClassGUID;     // GUID of the class
+    UINT   uiRegistrySection;   // Parameters for class (HKLM\SYSTEM\CurrentControlSet\Services\*\Parameters)
+    LPWSTR pwszClassName;       // Class name (eg: L"mouclass")
+    LPWSTR pwszDefDevName;      // Default Device Name
+    LPWSTR pwszLegacyDevName;   // Legacy Device Name (eg: "PointerClassLegacy0")
+    ULONG  IOCTL_Attr;          // IOCTL_*_QUERY_ATTRIBUTES
+    UINT   offAttr;             // offset of *_ATTRIBUTES struct within DEVICEINFO
+    ULONG  cbAttr;              // sizeof *_ATTRIBUTES struct
+    UINT   offData;             // offset of *_INPUT_DATA buffer within DEVICEINFO
+    ULONG  cbData;              // sizeof *_INPUT_DATA buffer
+    VOID   (*DeviceRead)(PDEVICEINFO); // routine to read the device
+    PKEVENT pkeHidChange;       // event to signal changes to this sort of device
+
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+} DEVICE_TEMPLATE, *PDEVICE_TEMPLATE;
+
+
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+
+extern DEVICE_TEMPLATE aDeviceTemplate[]; // in pnp.c
+
+typedef struct tagMOUSEEVENT {
+    USHORT  ButtonFlags;
+    USHORT  ButtonData;
+    ULONG_PTR ExtraInfo;
+    POINT   ptPointer;
+    LONG    time;
+    BOOL    bInjected;
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+#line 2287
+} MOUSEEVENT, *PMOUSEEVENT;
+
+
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif  // GENERIC_INPUT
+#line 2429
+
+
+VOID ProcessKeyboardInput(PDEVICEINFO pDeviceInfo);
+VOID ProcessMouseInput(PDEVICEINFO pDeviceInfo);
+VOID RequestDeviceChange(
+    PDEVICEINFO pDeviceInfo,
+    USHORT usAction,
+    BOOL fInDeviceInfoListCrit);
+
+VOID RetryReadInput();
+
+VOID NTAPI InputApc(
+    IN PVOID ApcContext,
+    IN PIO_STATUS_BLOCK IoStatusBlock,
+    IN ULONG Reserved);
+
+ULONG GetDeviceChangeInfo(VOID);
+VOID InitializeMediaChange(HANDLE);
+VOID CleanupMediaChange(VOID);
+
+/*
+ * Hard error information
+ */
+typedef struct tagHARDERRORHANDLER {
+    PTHREADINFO pti;
+    PQ pqAttach;
+} HARDERRORHANDLER, *PHARDERRORHANDLER;
+
+/*
+ * Terminal Structure.
+ *
+ *   This structure is only viewable from the kernel.
+ */
+
+#define TEST_GTERMF(f)               TEST_FLAG(gdwGTERMFlags, f)
+#define TEST_BOOL_GTERMF(f)          TEST_BOOL_FLAG(gdwGTERMFlags, f)
+#define SET_GTERMF(f)                SET_FLAG(gdwGTERMFlags, f)
+#define CLEAR_GTERMF(f)              CLEAR_FLAG(gdwGTERMFlags, f)
+#define SET_OR_CLEAR_GTERMF(f, fSet) SET_OR_CLEAR_FLAG(gdwGTERMFlags, f, fSet)
+#define TOGGLE_GTERMF(f)             TOGGLE_FLAG(gdwGTERMFlags, f)
+
+#define GTERMF_MOUSE        0x00000001
+
+
+#define TERMF_INITIALIZED       0x00000001
+#define TERMF_NOIO              0x00000002
+#define TERMF_STOPINPUT         0x00000004
+#define TERMF_DTINITSUCCESS     0x00000008
+#define TERMF_DTINITFAILED      0x00000010
+#define TERMF_DTDESTROYED       0x00000020
+
+typedef struct tagTERMINAL {
+
+    DWORD               dwTERMF_Flags;      // terminal flags
+
+    /*
+     * System Information
+     */
+    PWND                spwndDesktopOwner;  // mother desktop
+
+
+    PTHREADINFO         ptiDesktop;
+#ifdef BUG365290
+#error Original configuration is not selected.
+#endif //BUG365290
+    PQ                  pqDesktop;
+
+    PKEVENT             pEventTermInit;
+    PKEVENT             pEventDestroyDesktop;   // Used for destroying desktops
+
+    PDESKTOP            rpdeskDestroy;          // Desktop destroy list.
+
+    PKEVENT             pEventInputReady;   // input ready event. This is created in
+                                            // CreateTerminal. RIT and the desktop thread
+                                            // will wait for it. It will be set when the
+                                            // first desktop in that terminal will be created.
+    PKEVENT             pEventDTExit;
+
+} TERMINAL, *PTERMINAL;
 
 /*
  * Pool allocation tags and macros
  */
-#define TAG_NONE                ('onsU')    // Usno
 
-#define TAG_ACCEL               ('casU')    // Usac
-#define TAG_ATTACHINFO          ('iasU')    // Usai
-#define TAG_ALTTAB              ('lasU')    // Usal
-#define TAG_CALLBACK            ('ccsU')    // Uscc
-#define TAG_CHECKPT             ('pcsU')    // Uscp
-#define TAG_CLASS               ('lcsU')    // Uscl
-#define TAG_CLIPBOARD           ('bcsU')    // Uscb
-#define TAG_SCANCODEMAP         ('mcsU')    // Uscm
-#define TAG_CLIPBOARDPALETTE    ('pcsU')    // Uscp
-#define TAG_CURSOR              ('ucsU')    // Uscu
-#define TAG_DCE                 ('cdsU')    // Usdc
-#define TAG_DDE                 ('ddsU')    // Usdd
-#define TAG_DDE1                ('1dsU')    // Usd1
-#define TAG_DDE2                ('2dsU')    // Usd2
-#define TAG_DDE3                ('3dsU')    // Usd3
-#define TAG_DDE4                ('4dsU')    // Usd4
-#define TAG_DDE5                ('5dsU')    // Usd5
-#define TAG_DDE6                ('6dsU')    // Usd6
-#define TAG_DDE7                ('7dsU')    // Usd7
-#define TAG_DDE8                ('8dsU')    // Usd8
-#define TAG_DDE9                ('9dsU')    // Usd9
-#define TAG_DDEa                ('adsU')    // Usda
-#define TAG_DDEb                ('bdsU')    // Usdb
-#define TAG_DDEc                ('cdsU')    // Usdc
-#define TAG_DDEd                ('ddsU')    // Usdd
-#define TAG_DEVMODE             ('mdsU')    // Usdm
-#define TAG_DRAGDROP            ('sdsU')    // Usds
-#define TAG_FULLSCREEN          ('csfU')    // Usfs
-#define TAG_HOTKEY              ('khsU')    // Ushk
-#define TAG_HUNGLIST            ('lhsU')    // Ushl
-#define TAG_KBDLAYOUT           ('bksU')    // Uskb  KL structs
-#define TAG_KBDFILE             ('fksU')    // Uskf  KBDFILE struct
-#define TAG_KBDTRANS            ('rksU')    // Uskr  Buffer for ToUnicodeEx
-#define TAG_KBDSTATE            ('sksU')    // Usks  Keyboard state info
-#define TAG_KBDTABLE            ('tksU')    // Uskt  Keyboard layout tables
-#define TAG_LOOKASIDE           ('alsU')    // Usla
-#define TAG_LOCKRECORD          ('rlsU')    // Uslr
-#define TAG_MENUSTATE           ('tmsU')    // Usmt
-#define TAG_MOVESIZE            ('smsU')    // Usms
-#define TAG_PROCESSINFO         ('ipsU')    // Uspi
-#define TAG_POPUPMENU           ('mpsU')    // Uspm
-#line 1158
-#define TAG_PROFILE             ('rpsU')    // Uspr
-#line 1159
-#define TAG_Q                   (' qsU')    // Usq
-#define TAG_QMSG                ('mqsU')    // Usqm
-#define TAG_RTL                 ('trsU')    // Usrt
-#define TAG_SPB                 ('bssU')    // Ussb
-#define TAG_SECURITY            ('essU')    // Usse     Security objects
-#define TAG_SHELL               ('hssU')    // Ussh
-#define TAG_SMS                 ('mssU')    // Ussm
-#define TAG_SCROLLTRACK         ('tssU')    // Usst
-#define TAG_SWP                 ('wssU')    // Ussw
-#define TAG_SYSTEM              ('yssU')    // Ussy
-#line 1169
-#define TAG_TEXT                ('xtsU')    // Ustx
-#line 1170
-#define TAG_TEXT2               ('2tsU')    // Ust2
-#line 1171
-#define TAG_THREADINFO          ('itsU')    // Usti
-#line 1172
-#define TAG_TIMER               ('mtsU')    // Ustm
-#define TAG_VISRGN              ('ivsU')    // Usvi
-#define TAG_WINDOW              ('dwsU')    // Uswd
-#define TAG_WINDOWLIST          ('lwsU')    // Uswl
-#line 1176
-#define TAG_WOW                 ('owsU')    // Uswo
-#line 1177
-#define TAG_IMEHOTKEY           ('hisU')    // Usih
+/*
+ * Define tags. To add tags, add them to ntuser\kernel\ptag.lst
+ */
+#define DEFINE_POOLTAG(value, index) value
 
-// Don't add your new tag here, but in order of 4 char tag...
+#define DECLARE_POOLTAG(name, value, index)
 
+#include "ptag.h"
 
-#line 1182
-typedef struct _HEAP_ENTRY {
+NTSTATUS UserCommitDesktopMemory(
+    PVOID  pBase,
+    PVOID *ppCommit,
+    PSIZE_T pCommitSize);
 
-    ULONG Size;
+NTSTATUS UserCommitSharedMemory(
+    PVOID  pBase,
+    PVOID *ppCommit,
+    PSIZE_T pCommitSize);
 
-    /*
-     * This field contains the number of unused bytes at the end of this
-     * block that were not actually allocated.  Used to compute exact
-     * size requested prior to rounding requested size to allocation
-     * granularity.  Also used for tail checking purposes.
-     */
+PWIN32HEAP UserCreateHeap(
+    HANDLE                   hSection,
+    ULONG                    ulViewOffset,
+    PVOID                    pvBaseAddress,
+    DWORD                    dwSize,
+    PRTL_HEAP_COMMIT_ROUTINE pfnCommit);
 
-    ULONG UnusedBytes;
+#define IsValidTag(p, tag)      TRUE
 
-} HEAP_ENTRY, *PHEAP_ENTRY;
+#define RECORD_STACK_TRACE_SIZE 6
 
-typedef struct _HEAP_FREE_ENTRY *PHEAP_FREE_ENTRY;
-typedef struct _HEAP_FREE_ENTRY {
+/*
+ * Pool allocation flags
+ */
 
-    ULONG Size;
+#define POOL_HEAVY_ALLOCS       0x00000001  // use HeavyAllocPool
+#define POOL_CAPTURE_STACK      0x00000002  // stack traces are captured
+#define POOL_FAIL_ALLOCS        0x00000004  // fail pool allocations
+#define POOL_FAIL_BY_INDEX      0x00000008  // fail allocations by index
+#define POOL_TAIL_CHECK         0x00000010  // append tail string
+#define POOL_KEEP_FREE_RECORD   0x00000020  // keep a list with last x frees
+#define POOL_KEEP_FAIL_RECORD   0x00000040  // keep a list with last x failed allocations
+#define POOL_BREAK_FOR_LEAKS    0x00000080  // break on pool leaks (remote sessions)
 
-    PHEAP_FREE_ENTRY FreeNext;
+typedef struct tagWin32AllocStats {
+    SIZE_T dwMaxMem;             // max pool memory allocated
+    SIZE_T dwCrtMem;             // current pool memory used
+    DWORD  dwMaxAlloc;           // max number of pool allocations made
+    DWORD  dwCrtAlloc;           // current pool allocations
 
-} HEAP_FREE_ENTRY;
+    PWin32PoolHead pHead;        // pointer to the link list with the allocations
 
-typedef struct _HEAP_BASE *PHEAP_BASE;
-typedef struct _HEAP_BASE {
-    PHEAP_BASE Self;
-    PHEAP_FREE_ENTRY FreeList;
-    DWORD HeapSize;
-    DWORD AllocationCount;
-} HEAP_BASE;
-#line 1213
+} Win32AllocStats, *PWin32AllocStats;
 
-PVOID UserCreateHeap(
-    HANDLE hSection,
-    PVOID pvBaseAddress,
-    DWORD dwSize);
+typedef struct tagPOOLRECORD {
+    PVOID   ExtraData;           // the tag
+    SIZE_T  size;
+    PVOID   trace[RECORD_STACK_TRACE_SIZE];
+} POOLRECORD, *PPOOLRECORD;
 
-#ifdef POOL_TAGGING
-#error
-#line 1245
+#ifdef POOL_INSTR_API
+#error Original configuration is not selected.
+#endif // POOL_INSTR_API
+#line 2583
+
+#ifdef POOL_INSTR
+#error Original configuration is not selected.
 #else
+#line 2590
+    #define CleanupPoolAllocations()
+    #define InitPoolLimitations()   STATUS_SUCCESS
+    #define CleanUpPoolLimitations()
 
-PVOID _UserReAllocPool(
-    PVOID pSrc,
-    ULONG uBytesSrc,
-    ULONG uBytes);
+#endif // POOL_INSTR
 
-PVOID _UserReAllocPoolWithQuota(
-    PVOID pSrc,
-    ULONG uBytesSrc,
-    ULONG uBytes);
-
-#define UserAllocPool(uBytes, iTag) \
-    ExAllocatePool(PagedPool, (uBytes))
-
-#line 1260
-#define UserAllocPoolWithQuota(uBytes, iTag) \
-    ExAllocatePoolWithQuota(PagedPool | POOL_QUOTA_FAIL_INSTEAD_OF_RAISE, (uBytes))
-#line 1262
-
-#define UserReAllocPool(p, uBytesSrc, uBytes, iTag) \
-    _UserReAllocPool((p), (uBytesSrc), (uBytes))
-
-#define UserReAllocPoolWithQuota(p, uBytesSrc, uBytes, iTag) \
-    _UserReAllocPoolWithQuota((p), (uBytesSrc), (uBytes))
-
-#endif  // POOL_TAGGING
-
-#ifdef DEBUG
-#error
-#line 1278
+#ifndef TRACE_MAP_VIEWS
+    #define InitSectionTrace()      STATUS_SUCCESS
+    #define CleanUpSections()
 #else
-#line 1279
-#define UserFreePool(p) ExFreePool(p);
-#line 1280
-#endif // DEBUG
+    NTSTATUS InitSectionTrace(VOID);
+    void CleanUpSections(void);
+#endif // TRACE_MAP_VIEWS
 
+extern PWIN32HEAP gpvSharedAlloc;
 
-#define DesktopAlloc(hheap, cb) RtlAllocateHeap((hheap), 0, (cb))
-#define DesktopFree(hheap, pv) (RtlFreeHeap(hheap, 0, (LPSTR)(pv)) ? (HLOCAL)NULL : (pv))
+__inline PVOID
+SharedAlloc(ULONG cb)
+{
+    return Win32HeapAlloc(gpvSharedAlloc, cb, 0, 0);
+}
 
-#line 1286
-PVOID SharedAlloc(UINT cb);
-#line 1287
-NTSTATUS CommitReadOnlyMemory(HANDLE hSection, ULONG cbCommit, DWORD dwCommitOffset);
+__inline BOOL
+SharedFree(PVOID pv)
+{
+    return Win32HeapFree(gpvSharedAlloc, pv);
+}
+
+NTSTATUS CommitReadOnlyMemory(HANDLE hSection, PSIZE_T pulCommit,
+                              DWORD dwCommitOffset, int* pdCommit);
 
 /*
  * Height and Width of the desktop pattern bitmap.
@@ -1228,73 +2005,65 @@ NTSTATUS CommitReadOnlyMemory(HANDLE hSection, ULONG cbCommit, DWORD dwCommitOff
 #define CheckHwnd(x)        TRUE
 #define CheckHwndNull(x)    TRUE
 
-#line 1300
 /***************************************************************************\
 * Typedefs and Macros
 *
 * Here are defined all types and macros that are shared across the User's
-* server-side code modules.  Types and macros that are unique to a single
+* server-side code modules. Types and macros that are unique to a single
 * module should be defined at the head of that module, not in this file.
 *
 \***************************************************************************/
-#line 1308
 
-
-#line 1310
-#define SWP_ASYNCWINDOWPOS  0x4000
-#line 1311
-
-
-
-// !!! LATER remove data from a header file.  Linker probably creates a
-// !!! LATER seperate version for each time these are used.
-#define CHECKPOINT_PROP_NAME    TEXT("SysCP")
-#define DDETRACK_PROP_NAME      TEXT("SysDT")
-#define QOS_PROP_NAME           TEXT("SysQOS")
-#define DDEIMP_PROP_NAME        TEXT("SysDDEI")
-#define szCONTEXTHELPIDPROP     TEXT("SysCH")
-#define ICONSM_PROP_NAME        TEXT("SysICS")
-#define ICON_PROP_NAME          TEXT("SysIC")
 
 // Window Proc Window Validation macro
 
-#line 1326
-#define VALIDATECLASSANDSIZE(pwnd, inFNID)        \
-    switch ((pwnd)->fnid) {                                                           \
-    DWORD cb;                                                                         \
-    case 0:                                                                           \
-                                                                                      \
-        if ((cb = pwnd->cbwndExtra + sizeof(WND)) < (DWORD)(CBFNID(inFNID))) {        \
-            RIPMSG3(RIP_ERROR,                                                        \
-                   "(%lX %lX) needs at least (%ld) window words for this proc",       \
-                    pwnd, cb - sizeof(WND),                                           \
-                    (DWORD)(CBFNID(inFNID)) - sizeof(WND));                           \
-            return 0;                                                                 \
-        }                                                                             \
-                                                                                      \
-        /*                                                                            \
-         * Remember what window class this window belongs to.  Can't use              \
-         * the real class because any app can call CallWindowProc()                   \
-         * directly no matter what the class is!                                      \
-         */                                                                           \
-        (pwnd)->fnid = (WORD)(inFNID);                                                \
-                                                                                      \
-        /* FALL THROUGH! */                                                           \
-    case inFNID:      /* put out side of switch for speed??? */                       \
-        break;                                                                        \
-                                                                                      \
-    case (inFNID | FNID_CLEANEDUP_BIT):                                               \
-    case (inFNID | FNID_DELETED_BIT):                                                 \
-    case (inFNID | FNID_STATUS_BITS):                                                 \
-        return 0;                                                                     \
-                                                                                      \
-    default:                                                                          \
-        RIPMSG3(RIP_WARNING, "Window (%lX) not of correct class; fnid = %lX not %lX", \
-                (pwnd), (DWORD)((pwnd)->fnid), (DWORD)(inFNID));                      \
-        return 0;                                                                     \
-        break;                                                                        \
+#define VALIDATECLASSANDSIZE(pwnd, message, wParam, lParam, inFNID, initmessage)          \
+    if ((pwnd)->fnid != (inFNID)) {                                                       \
+        switch ((pwnd)->fnid) {                                                           \
+        DWORD cb;                                                                         \
+        case 0:                                                                           \
+                                                                                          \
+            if ((cb = pwnd->cbwndExtra + sizeof(WND)) < (DWORD)(CBFNID(inFNID))) {        \
+                RIPMSG3(RIP_WARNING,                                                      \
+                       "(%#p %lX) needs at least (%ld) window words for this proc",       \
+                        pwnd, cb - sizeof(WND),                                           \
+                        (DWORD)(CBFNID(inFNID)) - sizeof(WND));                           \
+                return 0;                                                                 \
+            }                                                                             \
+            /*                                                                            \
+             * If this is not the initialization message, we cannot set the fnid;         \
+             *  otherwise, we'll probably fault working on this pwnd's private            \
+             *  uninitialized data                                                        \
+             */                                                                           \
+            if ((message) != (initmessage)) {                                             \
+                if (((message) != WM_NCCREATE) && ((message) != WM_NCCALCSIZE)  && ((message) != WM_GETMINMAXINFO)) {         \
+                    RIPMSG3(RIP_WARNING,                                                  \
+                        "Default processing message %#lx for pwnd %#p. fnid %#lx not set",\
+                        (message), (pwnd), (DWORD)(inFNID));                              \
+                }                                                                         \
+                return xxxDefWindowProc((pwnd), (message), (wParam), (lParam));           \
+            }                                                                             \
+                                                                                          \
+            /*                                                                            \
+             * Remember what window class this window belongs to. Can't use              \
+             * the real class because any app can call CallWindowProc()                   \
+             * directly no matter what the class is!                                      \
+             */                                                                           \
+            (pwnd)->fnid = (WORD)(inFNID);                                                \
+            break;                                                                        \
+                                                                                          \
+        default:                                                                          \
+            RIPMSG3(RIP_WARNING, "Window (%#p) not of correct class; fnid = %lX not %lX", \
+                    (pwnd), (DWORD)((pwnd)->fnid), (DWORD)(inFNID));                      \
+                                                                                          \
+            /* Fall through */                                                            \
+                                                                                          \
+        case (inFNID | FNID_CLEANEDUP_BIT):                                               \
+        case (inFNID | FNID_DELETED_BIT):                                                 \
+        case (inFNID | FNID_STATUS_BITS):                                                 \
+            return 0;                                                                     \
+        }                                                                                 \
     }
-#line 1361
 
 /*
  * Handy Region helper macros
@@ -1310,14 +2079,15 @@ NTSTATUS CommitReadOnlyMemory(HANDLE hSection, ULONG cbCommit, DWORD dwCommitOff
 #define XorRgn(hrgnResult, hrgnA, hrgnB) \
             GreCombineRgn(hrgnResult, hrgnA, hrgnB, RGN_XOR)
 
+void DeleteMaybeSpecialRgn(HRGN hrgn);
 
-#line 1377
-BOOL InvalidateDCCache(PWND pwndInvalid, DWORD flags);
-#line 1378
+BOOL zzzInvalidateDCCache(PWND pwndInvalid, DWORD flags);
 
 #define IDC_DEFAULT         0x0001
 #define IDC_CHILDRENONLY    0x0002
 #define IDC_CLIENTONLY      0x0004
+#define IDC_MOVEBLT         0x0008
+#define IDC_NOMOUSE         0x0010
 
 /*
  * RestoreSpb return Flags
@@ -1343,12 +2113,9 @@ BOOL InvalidateDCCache(PWND pwndInvalid, DWORD flags);
 #define ScSendMessageSMS(pwnd, msg, wParam, lParam, xParam, xpfn, dwSCMSFlags, psms) \
         (((msg) & ~MSGFLAG_MASK) >= WM_USER) ? \
         SfnDWORD(pwnd, msg, wParam, lParam, xParam, xpfn, dwSCMSFlags, psms) : \
-        gapfnScSendMessage[msg & 0xffff](pwnd, msg, wParam, lParam, xParam, xpfn, dwSCMSFlags, psms)
+        gapfnScSendMessage[MessageTable[msg & 0xffff].iFunction](pwnd, msg, wParam, lParam, xParam, xpfn, dwSCMSFlags, psms)
 #define ScSendMessage(pwnd, msg, wParam, lParam, xParam, xpfn, dwSCMSFlags) \
         ScSendMessageSMS(pwnd, msg, wParam, lParam, xParam, xpfn, dwSCMSFlags, NULL)
-
-#define SETSYNCONLYMESSAGE(msg) (abfSyncOnlyMessage[(msg) / 8] |= (1 << ((msg) & 7)))
-#define TESTSYNCONLYMESSAGE(msg, wParam) (((msg) < WM_USER) ? ((abfSyncOnlyMessage[(msg) / 8] & (1 << ((msg) & 7))) || (((msg) == WM_DEVICECHANGE) && ((wParam) & 0x8000))) : 0)
 
 /*
  * Server-side routines for loading cursors/icons/strings/menus from server.
@@ -1380,12 +2147,11 @@ HANDLE xxxClientCopyImage(
     IN int             cyDesired,
     IN UINT            LR_flags);
 
-#line 1444
 PMENU xxxClientLoadMenu(
     HANDLE hmod,
     PUNICODE_STRING pstrName);
-#line 1447
-int xxxClientAddFontResourceW(PUNICODE_STRING, DWORD);
+
+int xxxClientAddFontResourceW(PUNICODE_STRING, DWORD, DESIGNVECTOR*);
 
 VOID ClientFontSweep(VOID);
 VOID ClientLoadLocalT1Fonts();
@@ -1394,12 +2160,16 @@ VOID ClientLoadRemoteT1Fonts();
 /*
  * Server-side routine for thread initialization.
  */
-#line 1456
-NTSTATUS InitializeClientPfnArrays(PPFNCLIENT ppfnClientA, PPFNCLIENT ppfnClientW,
+NTSTATUS InitializeClientPfnArrays(
+    CONST PFNCLIENT *ppfnClientA,
+    CONST PFNCLIENT *ppfnClientW,
+    CONST PFNCLIENTWORKER *ppfnClientWorker,
     HANDLE hModUser);
-#line 1458
 
-VOID _SetDebugErrorLevel(DWORD);
+//VOID _SetDebugErrorLevel(DWORD);
+VOID _SetRipFlags(DWORD, DWORD);
+VOID _SetDbgTag(int, DWORD);
+
 
 /*
  * xxxActivateWindow() commands
@@ -1414,7 +2184,6 @@ VOID _SetDebugErrorLevel(DWORD);
 /*
  * Structure for WM_ACTIVATEAPP EnumWindows() callback.
  */
-#line 1474
 typedef struct tagAAS {
     PTHREADINFO ptiNotify;
     DWORD tidActDeact;
@@ -1426,24 +2195,22 @@ typedef struct tagAAS {
  * Declaration for EnumWindows() callback function.
  */
 BOOL xxxActivateApp(PWND pwnd, AAS *paas);
-#line 1485
 
 #define GETDESKINFO(pti)  ((pti)->pDeskInfo)
-#define GETDISPINFO(pti)  ((pti)->rpdesk->pDispInfo)
 
 #define SET_TIME_LAST_READ(pti)     ((pti)->pcti->timeLastRead = NtGetTickCount())
 #define GET_TIME_LAST_READ(pti)     ((pti)->pcti->timeLastRead)
 
 
 /*
- * Desktop-Wallpaper file-flags
+ * General purpose helper macros
  */
-#define SETWALLPAPER_DEFAULT    ((LPWSTR)-1)
-#define SETWALLPAPER_METRICS    ((LPWSTR)-2)
-
-#line 1499
 #define abs(A)      (((A) < 0)? -(A) : (A))
-#line 1500
+
+#define N_ELEM(a)     (sizeof(a)/sizeof(a[0]))
+#define LAST_ELEM(a)  ( (a) [ N_ELEM(a) - 1 ] )
+#define PLAST_ELEM(a) (&LAST_ELEM(a))
+
 
 /*
  * General purpose access check macro
@@ -1452,70 +2219,54 @@ BOOL xxxActivateApp(PWND pwnd, AAS *paas);
         if (!CheckGrantedAccess((amGranted), (amRequested))) return r
 
 /*
- * These flags are used in the internal version of xxxFindWindow
- */
-#define FW_BOTH 0
-#define FW_16BIT 1
-#define FW_32BIT 2
-
-#define GETPPI(p)           ((p)->head.ppi)
-#define GETPWNDPPI(p)       ((p)->head.pti->ppi)
-
-/*
  * Lock record structure for tracking locks (debug only)
  */
+
+#define LOCKRECORD_STACK    8
+#define LOCKRECORD_MARKDESTROY  IntToPtr( 0xFFFFFFFF )
+
 typedef struct _LOCKRECORD {
-    struct _LOCKRECORD *plrNext;
+    PLR    plrNext;
     DWORD  cLockObj;
-    PVOID  pfn;
     PVOID  ppobj;
-} LOCKRECORD, *PLR;
+    PVOID  trace[LOCKRECORD_STACK];
+} LOCKRECORD;
 
 /*
- * The following is a "thread lock structure". This structure lives on
- * the stack and is linked into a LIFO list that is rooted in the thread
- * information structure.
- */
-#line 1532
-typedef struct _TL {
-    struct _TL *next;
-    PVOID pobj;
-#line 1535
-#ifdef DEBUG
-#error
-#line 1538
-#endif
-#line 1539
-} TL, *PTL;
-#line 1540
-
-/*
- * We limit recursion until if we have only this much stack left.
+ * We limit recursion until we have only this much stack left.
  * We have to leave room for kernel interupts
  */
 #define KERNEL_STACK_MINIMUM_RESERVE  (4*1024)
 
 /*
+ * And this much of Back storing in IA64
+ */
+#if defined(_IA64_)
+#define KERNEL_BSTORE_MINIMUM_RESERVE (4*1024)
+#define GET_CURRENT_BSTORE() ((ULONG_PTR)PsGetCurrentThreadStackBase() + KERNEL_LARGE_BSTORE_SIZE - __getReg(CV_IA64_RsBSP))
+#endif // _IA64_
+
+#if DBG
+#error Original configuration is not selected.
+#endif // DBG
+#line 2892
+
+/*
  * The following is a LOCK structure. This structure is recorded for
  * each threadlock so unlocks can occur at cleanup time.
  */
-#line 1551
 typedef struct _LOCK {
     PTHREADINFO pti;
     PVOID pobj;
-    struct _TL *ptl;
-#line 1555
-#ifdef DEBUG
-#error
-#line 1559
-#endif
-#line 1560
+    PTL ptl;
+#if DBG
+#error Original configuration is not selected.
+#endif // DBG
+#line 2906
 } LOCK, *PLOCK;
-#line 1561
 
 #define NEEDSSYNCPAINT(pwnd) TestWF(pwnd, WFSENDERASEBKGND | WFSENDNCPAINT)
 
-#line 1564
 typedef struct tagCVR       // cvr
 {
     WINDOWPOS   pos;        // MUST be first field of CVR!
@@ -1530,8 +2281,8 @@ typedef struct tagCVR       // cvr
     HRGN        hrgnVisOld; // Previous visrgn
     PTHREADINFO pti;        // The thread this SWP should be processed on
     HRGN        hrgnClip;   // Window clipping region
+    HRGN        hrgnInterMonitor;  // multimon support
 } CVR, *PCVR;
-#line 1579
 
 /*
  * CalcValidRects() "Region Empty" flag values
@@ -1545,14 +2296,19 @@ typedef struct tagCVR       // cvr
 #define RE_VALIDSUM     0x0020
 #define RE_INVALIDSUM   0x0040
 
-#line 1592
 typedef struct tagSMWP {    // smwp
     HEAD           head;
+    UINT           bShellNotify:1; // The acvr list contains shell notify flags
+    UINT           bHandle:1;   // This is an HM object allocation -- See -BeginDeferWindowPos
+    /*
+     * All fields AFTER ccvr are preserved when reusing the global SMWP structure.
+     */
     int            ccvr;        // Number of CVRs in the SWMP
     int            ccvrAlloc;   // Number of actual CVRs allocated in the SMWP
     PCVR           acvr;        // Pointer to array of CVR structures
 } SMWP, *PSMWP;
-#line 1598
+
+void DestroySMWP(PSMWP psmwp);
 
 /*
  * Clipboard data object definition
@@ -1560,9 +2316,8 @@ typedef struct tagSMWP {    // smwp
 typedef struct tagCLIPDATA {
     HEAD    head;
     DWORD   cbData;
-    PVOID   vData[1];
+    BYTE    abData[0];
 } CLIPDATA, *PCLIPDATA;
-#line 1607
 
 /*
  * Private User Startupinfo
@@ -1578,21 +2333,37 @@ typedef struct tagUSERSTARTUPINFO {
     WORD    cbReserved2;
 } USERSTARTUPINFO, *PUSERSTARTUPINFO;
 
-#ifdef FE_IME
-#error
-#line 1633
+/*
+ * TLBLOCK structure for multiple threads locking.
+ */
+#define THREADS_PER_TLBLOCK 16
+
+typedef struct tagTLBLOCK {
+    struct      tagTLBLOCK *ptlBlockPrev;
+    struct {
+        PTHREADINFO pti;
+        TL          tlpti;
+        DWORD       dwFlags;
+#if DBG
+#error Original configuration is not selected.
 #endif
+    } list[THREADS_PER_TLBLOCK];
+} TLBLOCK, *PTLBLOCK;
 
 /*
  * Keyboard File object
  */
-#line 1638
 typedef struct tagKBDFILE {
     HEAD               head;
     struct tagKBDFILE *pkfNext;   // next keyboard file
-    WCHAR              awchKF[9]; // Name of Layout eg: L"00000409"
     HANDLE             hBase;     // base address of data
     PKBDTABLES         pKbdTbl;   // pointer to kbd layout data.
+    ULONG              Size;      // Size of pKbdTbl
+    PKBDNLSTABLES      pKbdNlsTbl; // pointer to kbd nls layout data.
+    WCHAR              awchDllName[32];
+#ifdef LATER
+    LANGID             langId;    // Default language ID of this layout
+#endif
 } KBDFILE, *PKBDFILE;
 
 /*
@@ -1602,19 +2373,21 @@ typedef struct tagKL {   /* kl */
     HEAD          head;
     struct tagKL *pklNext;     // next in layout cycle
     struct tagKL *pklPrev;     // prev in layout cycle
-    DWORD         dwFlags;     // KL_* flags
+    DWORD         dwKL_Flags;  // KL_* flags
     HKL           hkl;         // (Layout ID | Base Language ID)
     KBDFILE      *spkf;        // Keyboard Layout File
-    DWORD         bCharsets;   // Windows Codepage bit (Win95 compat) eg: FS_LATIN1
+    KBDFILE      *spkfPrimary; // Primary keyboard layout file
+    DWORD         dwFontSigs;  // mask of FS_xxx bits - fonts that layout is good for
     UINT          iBaseCharset;// Charset value (Win95 compat) eg: ANSI_CHARSET
     WORD          CodePage;    // Windows Codepage of kbd layout, eg: 1252, 1250
-#line 1659
-#ifdef FE_IME
-#error
-#endif
-#line 1662
+    WCHAR         wchDiacritic;// Dead key saved here until next keystroke
+    PIMEINFOEX    piiex;       // Extended information for IME based layout
+    UINT          uNumTbl;     // number of tables in pKbdTbl
+    PKBDFILE     *pspkfExtra;  // extra layout file in this
+    DWORD         dwLastKbdType;
+    DWORD         dwLastKbdSubType;
+    DWORD         dwKLID;      // base keyboard layout ID
 } KL, *PKL;
-#line 1663
 
 /*
  * Flag values for KL dwFlags
@@ -1623,12 +2396,7 @@ typedef struct tagKL {   /* kl */
 #define KL_RESET    0x40000000
 
 
-#line 1671
-PKL HKLtoPKL(HKL hkl);
-#line 1672
-
-#define LANGCHANGE_FORWARD         0x0002    // From Win95
-#define LANGCHANGE_BACKWARD        0x0004    // From Win95
+PKL HKLtoPKL(PTHREADINFO pti, HKL hkl);
 
 typedef struct tagKBDLANGTOGGLE
 {
@@ -1642,158 +2410,293 @@ typedef struct tagKBDLANGTOGGLE
  * iBitPosition (refer to the LangToggle array defined
  * in globals.c).
  */
-#define KLT_LEFTSHIFT     3
-#define KLT_RIGHTSHIFT    5
-#define KLT_BOTHSHIFTS    7
 
+/*
+ * This bit is used for both control and alt keys
+ */
+#define KLT_ALT              1
+
+/*
+ * This bit is used for the left shift key
+ */
+#define KLT_LEFTSHIFT        2
+
+/*
+ * This combination denotes ctrl/alt and the left shift key
+ */
+#define KLT_ALTLEFTSHIFT     3
+
+/*
+ * This bit is used for the right shift key
+ */
+#define KLT_RIGHTSHIFT       4
+
+/*
+ * This combination denotes ctrl/alt and the right shift key
+ */
+#define KLT_ALTRIGHTSHIFT    5
+
+/*
+ * This combination denotes ctrl/alt and both the shift keys
+ */
+#define KLT_ALTBOTHSHIFTS    7
+
+/*
+ * This value is used to mark invalid toggle key sequence
+ */
+#define KLT_NONE             8
+
+
+/*
+ * Key Event (KE) structure
+ * Stores a Virtual Key event
+ */
+typedef struct tagKE {
+    union {
+        BYTE bScanCode;    // Virtual Scan Code (Set 1)
+        WCHAR wchInjected; // Unicode char from SendInput()
+    };
+    USHORT usFlaggedVk;    // Vk | Flags
+    DWORD  dwTime;         // time in milliseconds
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+#line 3105
+} KE, *PKE;
+
+/*
+ * Misc. keyboard stuff moved from oak/inc/kbd.h
+ */
+typedef BOOL (* KEPROC)(PKE pKe);
+typedef BOOL (* NLSKEPROC)(PKE pKe, ULONG_PTR dwExtraInfo, ULONG dwParam);
+typedef BOOL (* NLSVKFPROC)(PVK_F pVkToF, PKE pKe, ULONG_PTR dwExtraInfo);
+
+/*
+ * OEM-specific special processing (keystroke simulators and filters)
+ */
+extern KEPROC aKEProcOEM[];
+
+
+/*
+ * Key message lParam bits
+ */
+#define EXTENDED_BIT   0x01000000
+#define DONTCARE_BIT   0x02000000
+#define FAKE_KEYSTROKE 0x02000000
+#define ALTNUMPAD_BIT  0x04000000 // copied from windows\inc\wincon.w
+
+/*
+ * For handy diacritics
+ */
+#define IDS_FROM_SCANCODE(prefix, base) \
+        (0xc000 + ((0x ## prefix) >= 0xE0 ? 0x100 : 0) + (0x ## base))
+
+//
+// NLS Keyboard functions
+//
+VOID NlsKbdInitializePerSystem(VOID);
+VOID NlsKbdSendIMENotification(DWORD dwImeOpen, DWORD dwImeConversion);
+
+/*
+ * Desktop flags
+ */
 #define DF_DYING            0x80000000
 #define DF_DESKWNDDESTROYED 0x40000000
 #define DF_DESTROYED        0x20000000
+#define DF_HOTTRACKING      0x10000000
+#define DF_TOOLTIPSHOWING   0x08000000
+#define DF_TOOLTIPACTIVE    0x04000000
+#define DF_TOOLTIP          (DF_TOOLTIPACTIVE | DF_TOOLTIPSHOWING)
+#define DF_TRACKMOUSELEAVE  0x02000000
+#define DF_TRACKMOUSEHOVER  0x01000000
+#define DF_TRACKMOUSEEVENT  (DF_TRACKMOUSELEAVE | DF_TRACKMOUSEHOVER)
+#define DF_MOUSEMOVETRK     (DF_HOTTRACKING | DF_TOOLTIPACTIVE | DF_TRACKMOUSELEAVE | DF_TRACKMOUSEHOVER)
+#define DF_MENUINUSE        0x00800000
+#define DF_NEWDISPLAYSETTINGS 0x00400000
+#define DF_DESKCREATED      0x00200000
+#define DF_REDIRECTED       0x00100000
+#ifdef BUG365290
+#error Original configuration is not selected.
+#endif //BUG365290
+#line 3166
+
+
+#define CAPTIONTOOLTIPLEN   100
+
+/*
+ * Used to identify desktops uniquely for GDI
+ */
+
+#define GW_DESKTOP_ID 1
+
+// #define DESKTOP_ALLOC_TRACE
+#define DESKTOP_ALLOC_TRACE_SIZE    6
+
+#if DBG
+#error Original configuration is not selected.
+#endif // DBG
+#line 3196
+
+#define DTAG_CLASS              0x0001
+#define DTAG_DESKTOPINFO        0x0002
+#define DTAG_CLIENTTHREADINFO   0x0003
+#define DTAG_TEXT               0x0004
+#define DTAG_HANDTABL           0x0005
+#define DTAG_SBINFO             0x0006
+#define DTAG_MENUITEM           0x0007
+#define DTAG_MENUTEXT           0x0008
+#define DTAG_IMETEXT            0x0009
+#define DTAG_PROPLIST           0x000A
 
 /*
  * Desktop Structure.
  *
- *   This structure is only viewable from the kernel.  If any desktop
+ *   This structure is only viewable from the kernel. If any desktop
  *   information is needed in the client, then they should reference off
  *   the pDeskInfo field (i.e. pti->pDeskInfo).
  */
-#line 1703
 typedef struct tagDESKTOP {
 
-    PDEVMODE                pDesktopDevmode;   // current mode for this desktop
+    DWORD                   dwSessionId;       // Terminal Server SessionId. This has to be first field in the structure
     PDESKTOPINFO            pDeskInfo;         // Desktop information
     PDISPLAYINFO            pDispInfo;         //
 
-    struct tagDESKTOP       *rpdeskNext;       // Next desktop in list
-    struct tagWINDOWSTATION *rpwinstaParent;   // Windowstation owner
+    PDESKTOP                 rpdeskNext;       // Next desktop in list
+    PWINDOWSTATION           rpwinstaParent;   // Windowstation owner
 
     DWORD                   dwDTFlags;         // Desktop flags
+    ULONG                   dwDesktopId;       // Needed by GDI to tag display devices
 
-    struct tagWND           *spwndMenu;        //
-    struct tagMENU          *spmenuSys;        //
-    struct tagMENU          *spmenuDialogSys;  //
-    struct tagWND           *spwndForeground;  //
-    struct tagWND           *spwndTray;        //
+    PWND                     spwndMenu;        //
+    PMENU                    spmenuSys;        //
+    PMENU                    spmenuDialogSys;  //
+    PMENU                    spmenuHScroll;
+    PMENU                    spmenuVScroll;
+    PWND                     spwndForeground;  //
+    PWND                     spwndTray;
+    PWND                     spwndMessage;
+    PWND                     spwndTooltip;
 
-    int                     cFullScreen;       //
-    BOOL                    fMenuInUse;        //
-    BOOL                    bForceModeReset;   // For dynamic mode switching
     HANDLE                  hsectionDesktop;   //
-    PVOID                   hheapDesktop;      //
+    PWIN32HEAP              pheapDesktop;      //
     DWORD                   dwConsoleThreadId; //
+    DWORD                   dwConsoleIMEThreadId;
+    CONSOLE_CARET_INFO      cciConsole;
     LIST_ENTRY              PtiList;           //
+
+    PWND                    spwndTrack;        // xxxTrackMouseMove data
+    int                     htEx;
+    RECT                    rcMouseHover;
+    DWORD                   dwMouseHoverTime;
+
+
+#ifdef LOGDESKTOPLOCKS
+#error Original configuration is not selected.
+#endif // LOGDESKTOPLOCKS
+#line 3256
+
 } DESKTOP;
 
-#line 1729
 typedef struct tagDESKWND {
     WND   wnd;
     DWORD idProcess;
     DWORD idThread;
 } DESKWND, *PDESKWND;
-#line 1734
+
+PVOID DesktopAlloc(PDESKTOP pdesk, UINT uSize,DWORD tag);
+
+#define DesktopAllocAlways(pdesk, uSize, tag)   \
+            Win32HeapAlloc(pdesk->pheapDesktop, uSize, tag, 0)
+
+#define DesktopFree(pdesk, p)   Win32HeapFree(pdesk->pheapDesktop, p)
 
 /*
  * Windowstation structure
  */
-#define WSF_SWITCHLOCK          0x01
-#define WSF_OPENLOCK            0x02
-#define WSF_NOIO                0x04
-#define WSF_SHUTDOWN            0x08
-#define WSF_DYING               0x10
+#define WSF_SWITCHLOCK          0x0001
+#define WSF_OPENLOCK            0x0002
+#define WSF_NOIO                0x0004
+#define WSF_SHUTDOWN            0x0008
+#define WSF_DYING               0x0010
+#define WSF_REALSHUTDOWN        0x0020
 
-#line 1744
 typedef struct tagWINDOWSTATION {
-    struct tagWINDOWSTATION *rpwinstaNext;
-    struct tagDESKTOP *rpdeskList;
-    struct tagDESKTOP *rpdeskLogon;
-    struct tagDESKTOP *rpdeskDestroy;
-    PKEVENT           pEventDestroyDesktop;
-
     /*
-     * Pointer to the currently active desktop for the window station.
+     * Terminal Server SessionId. This has to be first field in the structure.
      */
-    struct tagDESKTOP    *rpdeskCurrent;
-    struct tagWND        *spwndDesktopOwner;
-    struct tagWND        *spwndLogonNotify;
-    struct tagTHREADINFO *ptiDesktop;
-    DWORD                dwFlags;
+    DWORD                dwSessionId;
+    PWINDOWSTATION       rpwinstaNext;
+    PDESKTOP             rpdeskList;
+
+    PTERMINAL            pTerm;
+
+    DWORD                dwWSF_Flags;
     struct tagKL         *spklList;
-    LPWSTR               pwchDiacritic;
-    WCHAR                awchDiacritic[5];
-    PKEVENT              pEventInputReady;
 
     /*
      * Clipboard variables
      */
     PTHREADINFO          ptiClipLock;
+    PTHREADINFO          ptiDrawingClipboard;
     PWND                 spwndClipOpen;
     PWND                 spwndClipViewer;
     PWND                 spwndClipOwner;
     struct tagCLIP       *pClipBase;
     int                  cNumClipFormats;
     UINT                 iClipSerialNumber;
+    UINT                 iClipSequenceNumber;
     UINT                 fClipboardChanged : 1;
-    UINT                 fDrawingClipboard : 1;
+    UINT                 fInDelayedRendering : 1;
 
     /*
      * Global Atom table
      */
     PVOID                pGlobalAtomTable;
 
-    PKEVENT              pEventSwitchNotify;
     LUID                 luidEndSession;
     LUID                 luidUser;
     PSID                 psidUser;
     PQ                   pqDesktop;
-    HANDLE               hEventSwitchNotify;
-} WINDOWSTATION, *PWINDOWSTATION;
 
-typedef struct tagDESKTOPTHREADINIT {
-    PWINDOWSTATION pwinsta;
-    PKEVENT        pEvent;
-} DESKTOPTHREADINIT, *PDESKTOPTHREADINIT;
+    /*
+     * Pointer to the currently active desktop for the window station.
+     */
+#if DBG
+#error Original configuration is not selected.
+#endif // DBG
 
-#line 1795
+} WINDOWSTATION;
+
 typedef struct tagCAPTIONCACHE {
     PCURSOR         spcursor;
     POEMBITMAPINFO  pOem;
-#line 1798
-#ifdef DEBUG
-#error
-#endif
-#line 1801
-}   CAPTIONCACHE;
-#line 1802
-
-#line 1834
-
-#define PICON PCURSOR
+#if DBG
+#error Original configuration is not selected.
+#endif // DBG
+} CAPTIONCACHE;
 
 /*
  * Configurable icon and cursor stuff
  */
-#line 1840
-typedef struct tagSYSCFGICO
-{
-    WORD    Id;     // configurable id (OIC_ or OCR_ value)
-    WORD    StrId;  // String ID for registry key name
-    PCURSOR spcur;  // perminant cursor/icon pointer
-} SYSCFGICO;
-#line 1846
-#define SYSICO(name) (rgsysico[OIC_##name##_DEFAULT - OIC_FIRST_DEFAULT].spcur)
-#define SYSCUR(name) (rgsyscur[OCR_##name##_DEFAULT - OCR_FIRST_DEFAULT].spcur)
+    typedef struct tagSYSCFGICO
+    {
+        WORD    Id;     // configurable id (OIC_ or OCR_ value)
+        WORD    StrId;  // String ID for registry key name
+        PCURSOR spcur;  // perminant cursor/icon pointer
+    } SYSCFGICO;
+
+    #define SYSICO(name) (gasysico[OIC_##name##_DEFAULT - OIC_FIRST_DEFAULT].spcur)
+    #define SYSCUR(name) (gasyscur[OCR_##name##_DEFAULT - OCR_FIRST_DEFAULT].spcur)
 
 
 /*
  * Accelerator Table structure
  */
-#line 1853
 typedef struct tagACCELTABLE {
     PROCOBJHEAD head;
     UINT        cAccel;
     ACCEL       accel[1];
 } ACCELTABLE, *LPACCELTABLE;
-#line 1858
 
 /*
  * Besides the desktop window used by the current thread, we also
@@ -1801,7 +2704,8 @@ typedef struct tagACCELTABLE {
  * window.
  */
 #define PWNDDESKTOP(p)      ((p)->head.rpdesk->pDeskInfo->spwnd)
-#define INPUTPWNDDESKTOP()  (grpdeskRitInput->pDeskInfo->spwnd)
+#define PWNDMESSAGE(p)      ((p)->head.rpdesk->spwndMessage)
+#define PWNDTOOLTIP(p)      ((p)->head.rpdesk->spwndTooltip)
 
 /*
  * During window destruction, even a locked window can have a
@@ -1811,12 +2715,9 @@ typedef struct tagACCELTABLE {
 
 #define ISAMENU(pwwnd)       \
         (GETFNID(pwnd) == FNID_MENU)
-#ifdef MEMPHIS_MENUS
-#error
-#line 1878
-#endif // MEMPHIS_MENUS
+
+
 /* NEW MENU STUFF */
-#line 1880
 typedef struct tagPOPUPMENU
 {
 
@@ -1831,21 +2732,20 @@ typedef struct tagPOPUPMENU
   DWORD  fIsSysMenu:1;    /* The system menu is here. */
   DWORD  fIsTrackPopup:1;    /* Is TrackPopup popup menu */
   DWORD  fDroppedLeft:1;
-  DWORD  fHierarchyDropped:1;
-  DWORD  fHierarchyVisible:1;
+  DWORD  fHierarchyDropped:1;/* If true, a submenu has been dropped off this popup */
   DWORD  fRightButton:1;     /* Allow right button in menu */
-  DWORD  fToggle:1;          /* For toggling when clicking on hierarchical item */
+  DWORD  fToggle:1;          /* If TRUE, button up cancels the popup */
   DWORD  fSynchronous:1;     /* For synchronous return value of cmd chosen */
   DWORD  fFirstClick:1;      /* Keep track if this was the first click on the
-                              * top level menu bar item.  If the user down/up
+                              * top level menu bar item. If the user down/up
                               * clicks on a top level menu bar item twice, we
                               * want to cancel menu mode.
                               */
   DWORD  fDropNextPopup:1;   /* Should we drop hierarchy of next menu item w/ popup? */
   DWORD  fNoNotify:1;        /* Don't send WM_ msgs to owner, except WM_COMMAND  */
-  DWORD  fAboutToHide:1;     //  -
-  DWORD  fShowTimer:1;       //  -
-  DWORD  fHideTimer:1;       //  -
+  DWORD  fAboutToHide:1;     // Same purpose as fHideTimer?
+  DWORD  fShowTimer:1;       // TRUE if the IDSYS_MNSHOW timer is set
+  DWORD  fHideTimer:1;       // TRUE if the IDSYS_MNHIDE timer is set
 
   DWORD  fDestroyed:1;       /* Set when the owner menu window has been destroyed
                               *  so the popup can be freed once it's no longer needed
@@ -1868,67 +2768,62 @@ typedef struct tagPOPUPMENU
   DWORD  fFreed:1;           /* Popup has been freed. Used for debug only */
 
   DWORD  fInCancel:1;        /* Popup has been passed to xxxMNCancel */
-  DWORD  fInClose:1;         /* Popup has been passed to xxxMNCloseHierarchy */
-  DWORD  dwUnused:10;        /* Reduce size when adding new flags.
-                              * Defined flags + dwUnused size = 32
-                              */
 
-  struct tagWND *spwndNotify;
+  DWORD  fTrackMouseEvent:1; /* TrackMouseEvent has been called */
+  DWORD  fSendUninit:1;      /* Send WM_UNINITMENUPOPUP */
+  DWORD  fRtoL:1;            /* For going backwards with the keys */
+  DWORD  fDesktopMenu:1;     /* Set if this popup belons to the pdesk->spwndMenu window */
+  DWORD  iDropDir:5;         /* Animation direction */
+
+
+  PWND           spwndNotify;
                         /* Window who gets the notification messages. If this
                          * is a window with a menu bar, then this is the same
                          * as hwndPopupMenu.
                          */
-  struct tagWND *spwndPopupMenu;
+  PWND           spwndPopupMenu;
                         /* The window associated with this ppopupMenu struct.
                          * If this is a top level menubar, then hwndPopupMenu
                          * is the window the menu bar. ie. it isn't really a
                          * popup menu window.
                          */
-  struct tagWND *spwndNextPopup;
+  PWND           spwndNextPopup;
                         /* The next popup in the hierarchy. Null if the last
                          * in chain
                          */
-  struct tagWND *spwndPrevPopup;
+  PWND           spwndPrevPopup;
                         /* The previous popup in the hierarchy. NULL if at top
                          */
-  struct tagMENU *spmenu;/* The PMENU displayed in this window
+  PMENU          spmenu;/* The PMENU displayed in this window
                          */
-  struct tagMENU *spmenuAlternate;
+  PMENU          spmenuAlternate;
                         /* Alternate PMENU. If the system menu is displayed,
                          * and a menubar menu exists, this will contain the
                          * menubar menu. If menubar menu is displayed, this
                          * will contain the system menu. Use only on top level
                          * ppopupMenu structs so that we can handle windows
-                         * with both a system menu and a menu bar menu.  Only
+                         * with both a system menu and a menu bar menu. Only
                          * used in the root ppopupMenuStruct.
                          */
-  struct tagWND *spwndActivePopup;
 
-  struct tagPOPUPMENU *ppopupmenuRoot;
+  PWND           spwndActivePopup; /* This is the popup the mouse/"keyboard focus" is on */
 
-  struct tagPOPUPMENU *ppmDelayedFree; /* List of hierarchical popups marked
+  PPOPUPMENU     ppopupmenuRoot;
+
+  PPOPUPMENU     ppmDelayedFree;       /* List of hierarchical popups marked
                                         *  as fDelayedFree.
                                         */
 
   UINT   posSelectedItem;  /* Position of the selected item in this menu
                             */
   UINT   posDropped;
-#line 1976
 
-#ifdef MEMPHIS_MENU_ANIMATION
-#error
-#endif // MEMPHIS_MENU_ANIMATION
-
-#line 1981
 } POPUPMENU;
-typedef POPUPMENU *PPOPUPMENU;
 
-#line 1984
 typedef struct tagMENUWND {
     WND wnd;
     PPOPUPMENU ppopupmenu;
 } MENUWND, *PMENUWND;
-#line 1988
 
 /*
  * CheckPoint structure
@@ -1937,40 +2832,24 @@ typedef struct tagCHECKPOINT {
     RECT rcNormal;
     POINT ptMin;
     POINT ptMax;
-    int fDragged:1;
-    int fWasMaximizedBeforeMinimized:1;
-    int fWasMinimizedBeforeMaximized:1;
-    int fMinInitialized:1;
-    int fMaxInitialized:1;
+    DWORD fDragged:1;
+    DWORD fWasMaximizedBeforeMinimized:1;
+    DWORD fWasMinimizedBeforeMaximized:1;
+    DWORD fMinInitialized:1;
+    DWORD fMaxInitialized:1;
 } CHECKPOINT, *PCHECKPOINT;
 
-
-#line 2004
-#define dpHorzRes           HORZRES
-#define dpVertRes           VERTRES
-#line 2006
-
-/*
- * If the handle for CF_TEXT/CF_OEMTEXT is a dummy handle then this implies
- * that data is available in the other format (as CF_OEMTEXT/CF_TEXT)
- */
-#define DUMMY_TEXT_HANDLE       0xFFFF
-#define DATA_NOT_BANKED         0xFFFF
-
-#line 2014
 typedef struct tagCLIP {
     UINT    fmt;
     HANDLE  hData;
     BOOL    fGlobalHandle;
 } CLIP, *PCLIP;
-#line 2031
 
 /*
-#line 2021
  * DDEML instance structure
  */
 typedef struct tagSVR_INSTANCE_INFO {
-    HEAD head;
+    THROBJHEAD head;
     struct tagSVR_INSTANCE_INFO *next;
     struct tagSVR_INSTANCE_INFO *nextInThisThread;
     DWORD afCmd;
@@ -1978,12 +2857,13 @@ typedef struct tagSVR_INSTANCE_INFO {
     PVOID pcii;
 } SVR_INSTANCE_INFO, *PSVR_INSTANCE_INFO;
 
-/*
-#line 2033
- * For pMenu's
- */
-#define MFISPOPUP     0x01
-#define MFMULTIROW    0x04
+typedef struct tagPUBOBJ {
+    struct tagPUBOBJ *next;
+    HANDLE hObj;
+    int count;
+    W32PID pid;
+} PUBOBJ, *PPUBOBJ;
+
 /*
  * Defines for Menu focus
  */
@@ -1992,19 +2872,17 @@ typedef struct tagSVR_INSTANCE_INFO {
 #define KEYBDHOLD   1
 
 /*
- * Structure definition for messages as they exist on a Q.  Same as MSG
+ * Structure definition for messages as they exist on a Q. Same as MSG
  * structure except for the link-pointer and flags at the end.
  */
-#line 2048
 typedef struct tagQMSG {
-    struct tagQMSG  *pqmsgNext;
-    struct tagQMSG  *pqmsgPrev;
+    PQMSG           pqmsgNext;
+    PQMSG           pqmsgPrev;
     MSG             msg;
-    LONG            ExtraInfo;
+    LONG_PTR        ExtraInfo;
     DWORD           dwQEvent;
     PTHREADINFO     pti;
-} QMSG, *PQMSG;
-#line 2056
+} QMSG;
 
 /*
  * dwQEvent values for QMSG structure.
@@ -2020,6 +2898,19 @@ typedef struct tagQMSG {
 #define QEVENT_CANCELMENU           0x0009  // Chicago
 #define QEVENT_DESTROYWINDOW        0x000A
 #define QEVENT_ASYNCSENDMSG         0x000B
+#define QEVENT_HUNGTHREAD           0x000C
+#define QEVENT_CANCELMOUSEMOVETRK   0x000D
+#define QEVENT_NOTIFYWINEVENT       0x000E
+#define QEVENT_RITACCESSIBILITY     0x000F
+#define QEVENT_RITSOUND             0x0010
+#define QEVENT_APPCOMMAND           0x0011
+
+#define RITSOUND_UPSIREN            0x0000
+#define RITSOUND_DOWNSIREN          0x0001
+#define RITSOUND_LOWBEEP            0x0002
+#define RITSOUND_HIGHBEEP           0x0003
+#define RITSOUND_KEYCLICK           0x0004
+#define RITSOUND_DOBEEP             0x0005
 
 /*
  * xxxProcessEventMessage flags
@@ -2027,11 +2918,8 @@ typedef struct tagQMSG {
 #define PEM_ACTIVATE_RESTORE        0x0001
 #define PEM_ACTIVATE_NOZORDER       0x0002
 
-#define QMF_MAXEVENT                0x000F
-
-#line 2080
 typedef struct _MOVESIZEDATA {
-    struct tagWND  *spwnd;
+    PWND            spwnd;
     RECT            rcDrag;
     RECT            rcDragCursor;
     RECT            rcParent;
@@ -2053,7 +2941,6 @@ typedef struct _MOVESIZEDATA {
     UINT            fDragFullWindows  : 1;
     UINT            fOffScreen        : 1;
 } MOVESIZEDATA, *PMOVESIZEDATA;
-#line 2103
 
 /*
  * DrawDragRect styles.
@@ -2064,13 +2951,13 @@ typedef struct _MOVESIZEDATA {
 
 
 /*
- * Pseudo Event stuff.  (fManualReset := TRUE, fInitState := FALSE)
+ * Pseudo Event stuff. (fManualReset := TRUE, fInitState := FALSE)
  */
 
 DWORD WaitOnPseudoEvent(HANDLE *phE, DWORD dwMilliseconds);
 
-#define PSEUDO_EVENT_ON     ((HANDLE)0xFFFFFFFF)
-#define PSEUDO_EVENT_OFF    ((HANDLE)0x00000000)
+#define PSEUDO_EVENT_ON     ((HANDLE)IntToPtr( 0xFFFFFFFF ))
+#define PSEUDO_EVENT_OFF    ((HANDLE)IntToPtr( 0x00000000 ))
 #define INIT_PSEUDO_EVENT(ph) *ph = PSEUDO_EVENT_OFF;
 
 #define SET_PSEUDO_EVENT(phE)                                   \
@@ -2098,22 +2985,24 @@ DWORD WaitOnPseudoEvent(HANDLE *phE, DWORD dwMilliseconds);
         *(phE) = PSEUDO_EVENT_OFF;                              \
     }
 
-#line 2147
 typedef struct tagMLIST {
-    PQMSG pqmsgRead;
-    PQMSG pqmsgWriteLast;
-    DWORD cMsgs;
+    PQMSG pqmsgRead;        // next message to be read. This is a FIFO queue
+    PQMSG pqmsgWriteLast;   // last message  added to the queue. Used mainly for coalescing
+    DWORD cMsgs;            // Count of messages. Used for optimizations and to enforce a max.
 } MLIST, *PMLIST;
 
 /*
  * Message Queue structure.
+ *
+ * Note, if you need to add a WORD sized value,
+ * do so after xbtnDblClk.
  */
 typedef struct tagQ {
     MLIST       mlInput;            // raw mouse and key message list.
 
     PTHREADINFO ptiSysLock;         // Thread currently allowed to process input
-    DWORD       idSysLock;          // Last message removed
-    DWORD       idSysPeek;          // Last message peeked
+    ULONG_PTR    idSysLock;          // Last message removed or to be removed before unlocking
+    ULONG_PTR    idSysPeek;          // Last message peeked
 
     PTHREADINFO ptiMouse;           // Last thread to get mouse msg.
     PTHREADINFO ptiKeyboard;
@@ -2123,39 +3012,32 @@ typedef struct tagQ {
     PWND        spwndActive;
     PWND        spwndActivePrev;
 
-    UINT        codeCapture;
-    UINT        msgDblClk;
-    DWORD       timeDblClk;
-    HWND        hwndDblClk;
-    RECT        rcDblClk;
+    UINT        codeCapture;        // type of captue. See *_CAP* defines in this file
+    UINT        msgDblClk;          // last mouse down message removed
+    WORD        xbtnDblClk;         // last xbutton down
+    DWORD       timeDblClk;         // max time for next button down to be taken as double click
+    HWND        hwndDblClk;         // window that got last button down
+    POINT       ptDblClk;           // last button down position. See SYSMET(C?DOUBLECLK)
 
     BYTE        afKeyRecentDown[CBKEYSTATERECENTDOWN];
     BYTE        afKeyState[CBKEYSTATE];
 
-    PWND        spwndAltTab;
-
     CARET       caret;
 
     PCURSOR     spcurCurrent;
-    int         iCursorLevel;
+    int         iCursorLevel;       // show/hide count. < 0 if the cursor is not visible
 
     DWORD       QF_flags;            // QF_ flags go here
 
     USHORT      cThreads;            // Count of threads using this queue
     USHORT      cLockCount;          // Count of threads that don't want this queue freed
 
-    UINT        msgJournal;
-    HCURSOR     hcurCurrent;
-    LONG        ExtraInfo;
-
-    PWND        spwndLastMouseMessage;
-    RECT        rcMouseHover;
-    DWORD       dwMouseHoverTime;
+    UINT        msgJournal;         // See SetJournalTimer. Journal message to be delivered when timer goes off
+    LONG_PTR    ExtraInfo;          // Extra info for last qmsg read. See GetMessageExtraInfo
 } Q;
-#line 2200
 
 /*
- * Used for AttachThreadInput()
+ * Used for zzzAttachThreadInput()
  */
 typedef struct tagATTACHINFO {
     struct tagATTACHINFO *paiNext;
@@ -2172,7 +3054,35 @@ typedef struct tagATTACHINFO {
 #define IEV_WOWEXEC 4
 
 
-#line 2239
+
+#line 3723
+
+/*
+ * Task Data Block structure.
+ */
+
+#line 3736
+
+#define TDBF_SETUP 1
+
+
+/*
+ * Hack message for shell to tell them a setup app is exiting.
+ * This message is defined in \nt\private\shell\inc, but I really
+ * don't want to introduce that dependency in the build. DavidDS
+ * has put a check in that file to make sure that the value does not
+ * change and refers to this usage. FritzS
+ */
+#define DTM_SETUPAPPRAN (WM_USER+90)
+
+/*
+ * Menu animation GDI objects.
+ */
+typedef struct tagMENUANIDC
+{
+    HDC     hdcAni;         // Scratch dc for animation
+} MENUANIDC;
+
 /*
  * Menu Control Structure
  */
@@ -2183,49 +3093,129 @@ typedef struct tagMENUSTATE {
     DWORD   fInsideMenuLoop : 1;
     DWORD   fButtonDown:1;
     DWORD   fInEndMenu:1;
+    DWORD   fUnderline:1;               /* Shorcut key underlines are shown */
+    DWORD   fButtonAlwaysDown:1;        /* The mouse has always been down since the menu started */
+    DWORD   fDragging:1;                /* Dragging (in DoDragDrop) or about to */
+    DWORD   fModelessMenu:1;            /* No modal loop */
+    DWORD   fInCallHandleMenuMessages:1;/* processing a msg from CallHandleMM */
+    DWORD   fDragAndDrop:1;             /* This menu can do drag and drop */
+    DWORD   fAutoDismiss:1;             /* This menu goes away on its own if mouse is off for certain time */
+    DWORD   fAboutToAutoDismiss:1;      /* Autodismiss will take place when timer goes off */
+    DWORD   fIgnoreButtonUp:1;          /* Eat next button up, i.e, cancel dragging */
+    DWORD   fMouseOffMenu:1;            /* Mouse is off the menu - modeless menus only */
+    DWORD   fInDoDragDrop:1;            /* in a WM_MENUDODRAGDROP callback */
+    DWORD   fActiveNoForeground:1;      /* A menu window is active but we're not in the foreground */
+    DWORD   fNotifyByPos:1;             /* Use WM_MENUCOMMAND */
+    DWORD   fSetCapture:1;              /* True if the menu mode set capture */
+    DWORD   iAniDropDir:5;              /* direction of animation */
+
     POINT   ptMouseLast;
     int     mnFocus;
     int     cmdLast;
-    struct tagTHREADINFO *ptiMenuStateOwner;
+    PTHREADINFO ptiMenuStateOwner;
+
+    DWORD   dwLockCount;
+
+    struct tagMENUSTATE *pmnsPrev;      /* Previous menustate for nested/context menus */
+
+    POINT   ptButtonDown;               /* Mouse down position (begin drag position) */
+    ULONG_PTR uButtonDownHitArea;        /* Return from xxxMNFindWindowFromPoint on button down */
+    UINT    uButtonDownIndex;           /* Index of the item being dragged */
+
+    int     vkButtonDown;               /* Mouse button being dragged */
+
+    ULONG_PTR uDraggingHitArea;          /* Last hit area while InDoDragDrop */
+    UINT    uDraggingIndex;             /* Last index  */
+    UINT    uDraggingFlags;             /* Gap flags */
+
+    HDC     hdcWndAni;      // window DC while animating
+    DWORD   dwAniStartTime; // starting time of animation
+    int     ixAni;          // current x-step in animation
+    int     iyAni;          // current y-step in animation
+    int     cxAni;          // total x in animation
+    int     cyAni;          // total y in animation
+    HBITMAP hbmAni;         // Scratch bmp for animation.
+
+    /*
+     * Important: The following structure must be the last
+     *  thing in tagMENUSTATE. MNAllocMenuState doesn't NULL out
+     *  this structure
+     */
+    MENUANIDC;
+
 } MENUSTATE, *PMENUSTATE;
 
+typedef struct tagLASTINPUT {  /* linp */
+    DWORD timeLastInputMessage;
+    DWORD dwFlags;
+    PTHREADINFO ptiLastWoken;  /* Last thread woken by key or click  */
+                               /* It can be NULL                     */
+    POINT ptLastClick;         /* point of the last mouse click      */
+} LASTINPUT, PLASTINPUT;
 
-#line 2256
+#define LINP_KEYBOARD       0x00000001
+#define LINP_SCREENSAVER    0x00000002
+#define LINP_LOWPOWER       0x00000004
+#define LINP_POWEROFF       0x00000008
+#define LINP_JOURNALLING    0x00000010
+#define LINP_INPUTSOURCES   (LINP_KEYBOARD | LINP_JOURNALLING)
+#define LINP_POWERTIMEOUTS  (LINP_LOWPOWER | LINP_POWEROFF)
+#define LINP_INPUTTIMEOUTS  (LINP_SCREENSAVER | LINP_LOWPOWER | LINP_POWEROFF)
+
+/*
+ * Menu data to be passed to xxxRealDrawMenuItem from xxxDrawState
+ */
+typedef struct {
+    PMENU pMenu;
+    PITEM pItem;
+} GRAYMENU;
+typedef GRAYMENU *PGRAYMENU;
+
+
+#define IS_THREAD_RESTRICTED(pti, r)                            \
+    ((pti->TIF_flags & TIF_RESTRICTED) ?                        \
+        (pti->ppi->pW32Job->restrictions & (r)) :               \
+        FALSE)
+
+#define IS_CURRENT_THREAD_RESTRICTED(r)                         \
+    ((PtiCurrent()->TIF_flags & TIF_RESTRICTED) ?               \
+        (PtiCurrent()->ppi->pW32Job->restrictions & (r)) :      \
+        FALSE)
+
+/*
+ * These types are needed before they are fully defined.
+ */
+
+
 /*
  * Make sure this structure matches up with W32THREAD, since they're
  * really the same thing.
  */
+
+/*
+ * NOTE -- this structure has been sorted (roughly) in order of use
+ * of the fields. The x86 code set allows cheaper access to fields
+ * that are in the first 0x80 bytes of a structure. Please attempt
+ * to ensure that frequently-used fields are below this boundary.
+ *          FritzS
+ */
+
 typedef struct tagTHREADINFO {
     W32THREAD;
 
 //***************************************** begin: USER specific fields
 
-    LIST_ENTRY      PtiLink;            // Link to other threads on desktop
     PTL             ptl;                // Listhead for thread lock list
-    PTL             ptlOb;              // Listhead for kernel object thread lock list
-    PTL             ptlPool;            // Listhead for temp pool usage
-    int             cEnterCount;
 
-    struct tagPROCESSINFO *ppi;         // process info struct for this thread
+    PPROCESSINFO    ppi;                // process info struct for this thread
 
-    struct tagQ    *pq;                 // keyboard and mouse input queue
+    PQ              pq;                 // keyboard and mouse input queue
 
     PKL             spklActive;         // active keyboard layout for this thread
-    MLIST           mlPost;             // posted message list.
-    USHORT          fsChangeBitsRemoved;// Bits removed during PeekMessage
-    USHORT          cDeskClient;        // Ref count for CSRSS desktop
 
     PCLIENTTHREADINFO pcti;             // Info that must be visible from client
-    CLIENTTHREADINFO  cti;              // Use this when no desktop is available
-
-    HANDLE          hEventQueueClient;
-    PKEVENT         pEventQueueServer;
-
-    PKEVENT        *apEvent;            // Wait array for xxxPollAndWaitForSingleObject
 
     PDESKTOP        rpdesk;
-    HDESK           hdesk;              // Desktop handle
-    ACCESS_MASK     amdesk;             // Granted desktop access
     PDESKTOPINFO    pDeskInfo;          // Desktop info visible to client
     PCLIENTINFO     pClientInfo;        // Client info stored in TEB
 
@@ -2233,17 +3223,16 @@ typedef struct tagTHREADINFO {
 
     PUNICODE_STRING pstrAppName;        // Application module name.
 
-    struct tagSMS  *psmsSent;           // Most recent SMS this thread has sent
-    struct tagSMS  *psmsCurrent;        // Received SMS this thread is currently processing
-    struct tagSMS  *psmsReceiveList;    // SMSs to be processed
+    PSMS            psmsSent;           // Most recent SMS this thread has sent
+    PSMS            psmsCurrent;        // Received SMS this thread is currently processing
+    PSMS            psmsReceiveList;    // SMSs to be processed
 
-    LONG            timeLast;           // Time, position, and ID of last message
-    POINT           ptLast;
-    DWORD           idLast;
+    LONG            timeLast;           // Time and ID of last message
+    ULONG_PTR       idLast;
 
-    int             cQuit;
     int             exitCode;
 
+    HDESK           hdesk;              // Desktop handle
     int             cPaintsReady;
     UINT            cTimersReady;
 
@@ -2252,44 +3241,61 @@ typedef struct tagTHREADINFO {
     union {
         PTDB            ptdb;           // Win16Task Schedule data for WOW thread
         PWINDOWSTATION  pwinsta;        // Window station for SYSTEM thread
-        PDESKTOP        pdeskClient;    // Desktop for CSRSS thread
     };
 
     PSVR_INSTANCE_INFO psiiList;        // thread DDEML instance list
     DWORD           dwExpWinVer;
     DWORD           dwCompatFlags;      // The Win 3.1 Compat flags
+    DWORD           dwCompatFlags2;     // new DWORD to extend compat flags for NT5+ features
 
-    UINT            cWindows;           // Number of windows owned by this thread
-    UINT            cVisWindows;        // Number of visible windows on this thread
+    PQ              pqAttach;           // calculation variabled used in
+                                        // zzzAttachThreadInput()
 
-    struct tagQ    *pqAttach;           // calculation variabled used in
-                                        // AttachThreadInput()
-
-    int             iCursorLevel;       // keep track of each thread's level
-    DWORD           fsReserveKeys;      // Keys that must be sent to the active
-                                        // active console window.
-    struct tagTHREADINFO *ptiSibling;   // pointer to sibling thread info
+    PTHREADINFO     ptiSibling;         // pointer to sibling thread info
 
     PMOVESIZEDATA   pmsd;
 
     DWORD           fsHooks;                // WHF_ Flags for which hooks are installed
-    PHOOK           asphkStart[CWINHOOKS];  // Hooks registered for this thread
     PHOOK           sphkCurrent;            // Hook this thread is currently processing
 
     PSBTRACK        pSBTrack;
 
-#ifdef FE_IME
-#error
-#line 2347
+    HANDLE          hEventQueueClient;
+    PKEVENT         pEventQueueServer;
+    LIST_ENTRY      PtiLink;            // Link to other threads on desktop
+    int             iCursorLevel;       // keep track of each thread's level
+    POINT           ptLast;             // Position of last message
+
+    PWND            spwndDefaultIme;    // Default IME Window for this thread
+    PIMC            spDefaultImc;       // Default input context for this thread
+    HKL             hklPrev;            // Previous active keyboard layout
+    int             cEnterCount;
+    MLIST           mlPost;             // posted message list.
+    USHORT          fsChangeBitsRemoved;// Bits removed during PeekMessage
+    WCHAR           wchInjected;        // character from last VK_PACKET
+    DWORD           fsReserveKeys;      // Keys that must be sent to the active
+                                        // active console window.
+    PKEVENT        *apEvent;            // Wait array for xxxPollAndWaitForSingleObject
+    ACCESS_MASK     amdesk;             // Granted desktop access
+    UINT            cWindows;           // Number of windows owned by this thread
+    UINT            cVisWindows;        // Number of visible windows on this thread
+
+    PHOOK           aphkStart[CWINHOOKS];   // Hooks registered for this thread
+    CLIENTTHREADINFO  cti;              // Use this when no desktop is available
+
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
 #endif
-#line 2348
+#if DBG
+#error Original configuration is not selected.
+#endif
 } THREADINFO;
 
 #define PWNDTOPSBTRACK(pwnd) (((GETPTI(pwnd)->pSBTrack)))
 
 /*
  * The number of library module handles we can store in the dependency
- * tables.  If this exceeds 32, the load mask implementation must be
+ * tables. If this exceeds 32, the load mask implementation must be
  * changed.
  */
 #define CLIBS           32
@@ -2297,52 +3303,139 @@ typedef struct tagTHREADINFO {
 /*
  * Process Info structure.
  */
-#line 2376
+
+#line 3990
+
 typedef struct tagDESKTOPVIEW {
     struct tagDESKTOPVIEW *pdvNext;
     PDESKTOP              pdesk;
-    ULONG                 ulClientDelta;
+    ULONG_PTR              ulClientDelta;
 } DESKTOPVIEW, *PDESKTOPVIEW;
 
-#line 2382
+
+/*
+ * number of DWORDs in ppi->pgh
+ */
+#define GH_SIZE  8
+
+/*
+ * The delta allocation for ppiTable array in W32JOB structure.
+ */
+#define JP_DELTA  4
+
+/*
+ * W32JOB structure
+ */
+typedef struct tagW32JOB {
+    struct tagW32JOB*  pNext;           // next W32JOB structure
+    PEJOB              Job;             // pointer to the EJOB structure
+    PVOID              pAtomTable;      // the atom table for the job object
+    DWORD              restrictions;    // UI restrictions
+    UINT               uProcessCount;   // number of processes in ppiTable
+    UINT               uMaxProcesses;   // how much room is in ppiTable
+    PPROCESSINFO*      ppiTable;        // the array of processes contained in the job
+    UINT               ughCrt;          // crt number of handles in pgh
+    UINT               ughMax;          // number of handles pgh can store
+    PULONG_PTR         pgh;             // the granted handles table
+} W32JOB, *PW32JOB;
+
+#ifdef REDIRECTION
+#error Original configuration is not selected.
+#endif // REDIRECTION
+#line 4028
+
 /*
  * Make sure this structure matches up with W32PROCESS, since they're
  * really the same thing.
  */
+
+/*
+ * NOTE -- this structure has been sorted (roughly) in order of use
+ * of the fields. The x86 code set allows cheaper access to fields
+ * that are in the first 0x80 bytes of a structure. Please attempt
+ * to ensure that frequently-used fields are below this boundary.
+ */
+
 typedef struct tagPROCESSINFO {
     W32PROCESS;
 //***************************************** begin: USER specific fields
-    PPROCESSINFO    ppiNext;                    // next ppi structure in start list
+    PTHREADINFO     ptiList;                    // threads in this process
     PTHREADINFO     ptiMainThread;              // pti of "main thread"
-    int             cThreads;                   // count of threads using this process info
     PDESKTOP        rpdeskStartup;              // initial desktop
-    HDESK           hdeskStartup;               // initial desktop handle
     PCLS            pclsPrivateList;            // this processes' private classes
     PCLS            pclsPublicList;             // this processes' public classes
+    PWOWPROCESSINFO pwpi;                       // Wow PerProcess Info
+
+    PPROCESSINFO    ppiNext;                    // next ppi structure in start list
+    PPROCESSINFO    ppiNextRunning;
+    int             cThreads;                   // count of threads using this process info
+    HDESK           hdeskStartup;               // initial desktop handle
     UINT            cSysExpunge;                // sys expunge counter
     DWORD           dwhmodLibLoadedMask;        // bits describing loaded hook dlls
     HANDLE          ahmodLibLoaded[CLIBS];      // process unique hmod array for hook dlls
     struct          tagWINDOWSTATION *rpwinsta; // process windowstation
     HWINSTA         hwinsta;                    // windowstation handle
     ACCESS_MASK     amwinsta;                   // windowstation accesses
-    USERSTARTUPINFO usi;                        // process startup info
-    DWORD           dwCompatFlags;              // per-process GetAppCompat() flags
+
     DWORD           dwHotkey;                   // hot key from progman
-    PWOWPROCESSINFO pwpi;                       // Wow PerProcess Info
-    PTHREADINFO     ptiList;                    // threads in this process
-    PCURSOR         pcurList;                   // cursor list
-    LUID            luidSession;                // logon session id
+    HMONITOR        hMonitor;                   // monitor handle from CreateProcess
     PDESKTOPVIEW    pdvList;                    // list of desktop views
     UINT            iClipSerialNumber;          // clipboard serial number
-    RTL_BITMAP      bmDesktopHookFlags;         // hookable desktops
+    RTL_BITMAP      bmHandleFlags;              // per handle flags
     PCURSOR         pCursorCache;               // process cursor/icon cache
+    PVOID           pClientBase;                // LEAVE THIS FOR HYDRA; offset to the shared section
+    DWORD           dwLpkEntryPoints;           // user mode language pack installed
+
+    PW32JOB         pW32Job;                    // pointer to the W32JOB structure
+
+    DWORD           dwImeCompatFlags;           // per-process Ime Compatibility flags
+    LUID            luidSession;                // logon session id
+    USERSTARTUPINFO usi;                        // process startup info
+
+#ifdef VALIDATEHANDLEQUOTA
+    LONG lHandles;
+#endif
+
+    DWORD           dwLayout;                   // the default Window orientation for this process
+
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+
+#ifdef REDIRECTION
+#error Original configuration is not selected.
+#endif // REDIRECTION
+    DWORD           fDisableWindowsGhosting : 1;
 } PROCESSINFO;
-#line 2414
+
+/*
+ * Bit definitions for dwLpkEntryPoints in the processinfo structure.
+ * These are passed from the client side when an lpk is registered.
+ * The kernel determines when to perform callbacks based on which
+ * entry points an lpk supports.
+ */
+#define LPK_TABBEDTEXTOUT 0x01
+#define LPK_PSMTEXTOUT    0x02
+#define LPK_DRAWTEXTEX    0x04
+#define LPK_EDITCONTROL   0x08
+#define LPK_INSTALLED     0x0f
+
+#define CALL_LPK(ptiCurrent)  ((PpiCurrent()->dwLpkEntryPoints & LPK_INSTALLED) && \
+                               !((ptiCurrent)->TIF_flags & TIF_INCLEANUP))
+
+/*
+ * This is used to send cool switch windows information
+ * to the lpk
+ */
+typedef struct _LPKDRAWSWITCHWND {
+    RECT rcRect;
+    LARGE_UNICODE_STRING strName;
+} LPKDRAWSWITCHWND;
 
 /*
  * DC cache entry structure (DCE)
  *
- *   This structure identifies an entry in the DCE cache.  It is
+ *   This structure identifies an entry in the DCE cache. It is
  *   usually initialized at GetDCEx() and cleanded during RelaseCacheDC
  *   calls.
  *
@@ -2352,7 +3445,7 @@ typedef struct tagPROCESSINFO {
  *   pdceNext       - Pointer to the next DCE entry.
  *
  *
- *   hdc            - GDI DC handle for the dce entry.  This will have
+ *   hdc            - GDI DC handle for the dce entry. This will have
  *                    the necessary clipping regions selected into it.
  *
  *   pwndOrg        - Identifies the window in the GetDCEx() call which owns
@@ -2364,15 +3457,15 @@ typedef struct tagPROCESSINFO {
  *   hrgnClip       - This region is set if the caller to GetDCEx() passes a
  *                    clipping region in which to intersect with the visrgn.
  *                    This is used when we need to recalc the visrgn for the
- *                    DCE entry.  This will be freed at ReleaseCacheDC()
+ *                    DCE entry. This will be freed at ReleaseCacheDC()
  *                    time if the flag doesn't have DCX_NODELETERGN set.
  *
- *   hrgnClipPublic - This is a copy of the (hrgnClip) passed in above.  We
+ *   hrgnClipPublic - This is a copy of the (hrgnClip) passed in above. We
  *                    make a copy and set it as PUBLIC ownership so that
  *                    we can use it in computations during the UserSetDCVisRgn
- *                    call.  This is necessary for Full-Hung-Draw where we
+ *                    call. This is necessary for Full-Hung-Draw where we
  *                    are drawing from a different process then the one
- *                    who created the (hrgnClip).  This is always deleted
+ *                    who created the (hrgnClip). This is always deleted
  *                    in the ReleaseCacheDC() call.
  *
  *   hrgnSavedVis   - This is a copy of the saved visrgn for the DCE entry.
@@ -2383,19 +3476,18 @@ typedef struct tagPROCESSINFO {
  *
  */
 typedef struct tagDCE {
-    struct tagDCE        *pdceNext;
+    PDCE                 pdceNext;
     HDC                  hdc;
-    struct tagWND        *pwndOrg;
-    struct tagWND        *pwndClip;
+    PWND                 pwndOrg;
+    PWND                 pwndClip;
     HRGN                 hrgnClip;
     HRGN                 hrgnClipPublic;
     HRGN                 hrgnSavedVis;
-    DWORD                flags;
-    struct tagTHREADINFO *ptiOwner;
-} DCE, *PDCE;
-#line 2469
+    DWORD                DCX_flags;
+    PTHREADINFO          ptiOwner;
+    PMONITOR             pMonitor;
+} DCE;
 
-#define DCE_SIZE_DCLIMIT        256    // Maximum count of dces.
 #define DCE_SIZE_CACHEINIT        5    // Initial number of DCEs in the cache.
 #define DCE_SIZE_CACHETHRESHOLD  32    // Number of dce's as a threshold.
 
@@ -2407,20 +3499,15 @@ typedef struct tagDCE {
  * CalcVisRgn DC type bits
  */
 #define DCUNUSED        0x00        /* Unused cache entry */
-#line 2482
 #define DCC             0x01        /* Client area */
-#line 2483
 #define DCW             0x02        /* Window area */
 #define DCSAVEDVISRGN   0x04
 #define DCCLIPRGN       0x08
 #define DCNOCHILDCLIP   0x10        /* Nochildern clip */
 #define DCSAVEVIS       0x20        /* Save visrgn before calculating */
-#line 2488
 #define DCCACHE         0x40
-#line 2500
 
 /*
-#line 2491
  * Window List Structure
  */
 typedef struct tagBWL {
@@ -2432,7 +3519,6 @@ typedef struct tagBWL {
 } BWL, *PBWL;
 
 /*
-#line 2502
  * Numbers of HWND slots to to start with and to increase by.
  */
 #define BWL_CHWNDINIT      32     /* initial # slots pre-allocated */
@@ -2442,42 +3528,21 @@ typedef struct tagBWL {
 #define BWL_ENUMLIST        2
 #define BWL_ENUMOWNERLIST   4
 
-/*
- * Hard error information
- */
-#line 2514
-typedef struct tagHARDERRORHANDLER {
-    PTHREADINFO pti;
-    PQ pqAttach;
-} HARDERRORHANDLER, *PHARDERRORHANDLER;
-#line 2518
-
-/*
- * Structures needed for hung app redraw.
- */
-#define CHRLINCR 10
-
-#line 2524
-typedef struct _HUNGREDRAWLIST {
-    int cEntries;
-    int iFirstFree;
-    PWND apwndRedraw[1];
-} HUNGREDRAWLIST, *PHUNGREDRAWLIST;
+#define BWL_ENUMIMELAST     0x08
+#define BWL_REMOVEIMECHILD  0x10
 
 /*
  * Saved Popup Bits structure
  */
-#line 2533
 typedef struct tagSPB {
     struct tagSPB *pspbNext;
-    struct tagWND *spwnd;
+    PWND          spwnd;
     HBITMAP       hbm;
     RECT          rc;
     HRGN          hrgn;
     DWORD         flags;
-    ULONG         ulSaveId;
-} SPB, *PSPB;
-#line 2542
+    ULONG_PTR     ulSaveId;
+} SPB;
 
 #define SPB_SAVESCREENBITS  0x0001  // GreSaveScreenBits() was called
 #define SPB_LOCKUPDATE      0x0002  // LockWindowUpdate() SPB
@@ -2488,7 +3553,7 @@ typedef struct tagSPB {
 /*
  * Macro to check if the journal playback hook is installed.
  */
-#line 2554
+#line 4240
 
 #define TESTHMODLOADED(pti, x)       ((pti)->ppi->dwhmodLibLoadedMask & (1 << (x)))
 #define SETHMODLOADED(pti, x, hmod)  ((pti)->ppi->ahmodLibLoaded[x] = hmod, \
@@ -2496,92 +3561,74 @@ typedef struct tagSPB {
 #define CLEARHMODLOADED(pti, x)      ((pti)->ppi->ahmodLibLoaded[x] = NULL, \
                                       (pti)->ppi->dwhmodLibLoadedMask &= ~(1 << (x)))
 #define PFNHOOK(phk) (phk->ihmod == -1 ? (PROC)phk->offPfn : \
-        (PROC)(((DWORD)(PtiCurrent()->ppi->ahmodLibLoaded[phk->ihmod])) + \
-        ((DWORD)(phk->offPfn))))
+        (PROC)(((ULONG_PTR)(PtiCurrent()->ppi->ahmodLibLoaded[phk->ihmod])) + \
+        ((ULONG_PTR)(phk->offPfn))))
 
 /*
  * Extended structures for message thunking.
  */
-#line 2567
 typedef struct _CREATESTRUCTEX {
     CREATESTRUCT cs;
     LARGE_STRING strName;
     LARGE_STRING strClass;
 } CREATESTRUCTEX, *PCREATESTRUCTEX;
-#line 2572
 
 typedef struct _MDICREATESTRUCTEX {
     MDICREATESTRUCT mdics;
-    UNICODE_STRING strTitle;
-    UNICODE_STRING strClass;
+    LARGE_STRING strTitle;
+    LARGE_STRING strClass;
 } MDICREATESTRUCTEX, *PMDICREATESTRUCTEX;
 
 typedef struct _CWPSTRUCTEX {
     struct tagCWPSTRUCT;
-    struct tagSMS   *psmsSender;
+    PSMS            psmsSender;
 } CWPSTRUCTEX, *PCWPSTRUCTEX;
 
 typedef struct _CWPRETSTRUCTEX {
     LRESULT         lResult;
     struct tagCWPSTRUCT;
-    struct tagSMS   *psmsSender;
+    PSMS            psmsSender;
 } CWPRETSTRUCTEX, *PCWPRETSTRUCTEX;
-#line 2589
 
 /*
  * SendMessage structure and defines.
  */
 typedef struct tagSMS {   /* sms */
-    struct tagSMS   *psmsNext;          // link in global psmsList
+    PSMS            psmsNext;          // link in global psmsList
 #if DBG
-#error
-#line 2598
-#endif
-#line 2599
-    struct tagSMS   *psmsReceiveNext;   // link in queue's ReceiveList
+#error Original configuration is not selected.
+#endif // DBG
+#line 4285
+    PSMS            psmsReceiveNext;   // link in queue's ReceiveList
     DWORD           tSent;              // time message was sent
     PTHREADINFO     ptiSender;          // sending thread
     PTHREADINFO     ptiReceiver;        // receiving thread
 
     SENDASYNCPROC   lpResultCallBack;   // function to receive the SendMessageCallback return value
-    DWORD           dwData;             // value to be passed back to the lpResultCallBack function
+    ULONG_PTR        dwData;             // value to be passed back to the lpResultCallBack function
     PTHREADINFO     ptiCallBackSender;  // sending thread
 
-    LONG            lRet;               // message return value
+    LRESULT         lRet;               // message return value
     UINT            flags;              // SMF_ flags
-    DWORD           wParam;             // message fields...
-    DWORD           lParam;
+    WPARAM          wParam;             // message fields...
+    LPARAM          lParam;
     UINT            message;
-    struct tagWND   *spwnd;
+    PWND            spwnd;
     PVOID           pvCapture;          // captured argument data
 } SMS;
 
 #define SMF_REPLY                   0x0001      // message has been replied to
 #define SMF_RECEIVERDIED            0x0002      // receiver has died
-#line 2619
 #define SMF_SENDERDIED              0x0004      // sender has died
-#line 2620
 #define SMF_RECEIVERFREE            0x0008      // receiver should free sms when done
 #define SMF_RECEIVEDMESSAGE         0x0010      // sms has been received
-#line 2622
 #define SMF_CB_REQUEST              0x0100      // SendMessageCallback requested
-#line 2623
 #define SMF_CB_REPLY                0x0200      // SendMessageCallback reply
-#line 2624
 #define SMF_CB_CLIENT               0x0400      // Client process request
-#line 2625
 #define SMF_CB_SERVER               0x0800      // Server process request
 #define SMF_WOWRECEIVE              0x1000      // wow sched has incr recv count
 #define SMF_WOWSEND                 0x2000      // wow sched has incr send count
 #define SMF_RECEIVERBUSY            0x4000      // reciver is processing this msg
-
-#define MSGFLAG_MASK                0xFFFE0000
-#define MSGFLAG_WOW_RESERVED        0x00010000      // Used by WOW
-#define MSGFLAG_DDE_MID_THUNK       0x80000000      // DDE tracking thunk
-#define MSGFLAG_DDE_SPECIAL_SEND    0x40000000      // WOW bad DDE app hack
-#line 2634
-#define MSGFLAG_SPECIAL_THUNK       0x10000000      // server->client thunk needs special handling
-#line 2635
 
 /*
  * InterSendMsgEx parameter used for SendMessageCallback and TimeOut
@@ -2590,12 +3637,12 @@ typedef struct tagINTERSENDMSGEX {   /* ism */
     UINT   fuCall;                      // callback or timeout call
 
     SENDASYNCPROC lpResultCallBack;     // function to receive the send message value
-    DWORD dwData;                       // Value to be passed back to the SendResult call back function
-    LONG lRet;                          // return value from the send message
+    ULONG_PTR dwData;                    // Value to be passed back to the SendResult call back function
+    LRESULT lRet;                       // return value from the send message
 
     UINT fuSend;                        // how to send the message, SMTO_BLOCK, SMTO_ABORTIFHUNG
     UINT uTimeout;                      // time-out duration
-    LPDWORD lpdwResult;                 // the return value for a syncornis call
+    PULONG_PTR lpdwResult;               // the return value for a syncornis call
 } INTRSENDMSGEX, *PINTRSENDMSGEX;
 
 #define ISM_CALLBACK        0x0001      // callback function request
@@ -2603,14 +3650,13 @@ typedef struct tagINTERSENDMSGEX {   /* ism */
 #define ISM_REQUEST         0x0010      // callback function request message
 #define ISM_REPLY           0x0020      // callback function reply message
 #define ISM_CB_CLIENT       0x0100      // client process callback function
-#line 2656
 
 /*
  * Event structure to handle broadcasts of notification messages.
  */
 typedef struct tagASYNCSENDMSG {
-    DWORD   wParam;
-    DWORD   lParam;
+    WPARAM  wParam;
+    LPARAM  lParam;
     UINT    message;
     HWND    hwnd;
 } ASYNCSENDMSG, *PASYNCSENDMSG;
@@ -2618,14 +3664,17 @@ typedef struct tagASYNCSENDMSG {
 /*
  * HkCallHook() structure
  */
-#line 2672
+
+#line 4352
+
+#define IsGlobalHooked(pti, fsHook) \
+    ((fsHook & pti->pDeskInfo->fsHooks) != 0)
 
 typedef struct tagHOOKMSGSTRUCT { /* hch */
     PHOOK   phk;
     int     nCode;
-    DWORD   lParam;
+    LPARAM  lParam;
 } HOOKMSGSTRUCT, *PHOOKMSGSTRUCT;
-#line 2678
 
 /*
  * BroadcastMessage() commands.
@@ -2640,42 +3689,49 @@ typedef struct tagHOOKMSGSTRUCT { /* hch */
 /*
  * xxxBroadcastMessage parameter used for SendMessageCallback and TimeOut
  */
-#line 2692
 typedef union tagBROADCASTMSG {   /* bcm */
      struct {                               // for callback broadcast
          SENDASYNCPROC lpResultCallBack;    // function to receive the send message value
-         DWORD dwData;                      // Value to be passed back to the SendResult call back function
+         ULONG_PTR dwData;                   // Value to be passed back to the SendResult call back function
          BOOL bClientRequest;               // if a cliet or server callback request
      } cb;
      struct {                               // for timeout broadcast
          UINT fuFlags;                      // timeout type flags
          UINT uTimeout;                     // timeout length
-         LPDWORD lpdwResult;                // where to put the return value
+         PULONG_PTR lpdwResult;              // where to put the return value
      } to;
 } BROADCASTMSG, *PBROADCASTMSG;
-#line 2716
 
-#line 2705
 /*
  * Internal hotkey structures and defines.
  */
 typedef struct tagHOTKEY {
     PTHREADINFO pti;
-    struct tagWND *spwnd;
-    UINT    fsModifiers;
+    PWND    spwnd;
+    WORD    fsModifiers; // MOD_SHIFT, MOD_ALT, MOD_CONTROL, MOD_WIN
+    WORD    wFlags;      // MOD_SAS
     UINT    vk;
     int     id;
     struct tagHOTKEY *phkNext;
 } HOTKEY, *PHOTKEY;
 
-#line 2717
 #define PWND_INPUTOWNER (PWND)1    // Means send WM_HOTKEY to input owner.
 #define PWND_FOCUS      (PWND)NULL // Means send WM_HOTKEY to queue's pwndFocus.
-#define PWND_ERROR      (PWND)0x10  // Means HWND validation returned an error
 #define PWND_TOP        (PWND)0
 #define PWND_BOTTOM     (PWND)1
 #define PWND_GROUPTOTOP ((PWND)-1)
 #define PWND_TOPMOST    ((PWND)-1)
+#define PWND_NOTOPMOST  ((PWND)-2)
+#define PWND_BROADCAST  ((PWND)-1)
+
+#define IDHOT_DEBUG         (-5)
+#define IDHOT_DEBUGSERVER   (-6)
+#define IDHOT_WINDOWS       (-7)
+
+/*
+ * xPos, yPos for WM_CONTEXTMENU from keyboard
+ */
+#define KEYBOARD_MENU   ((LPARAM)-1)    // Keyboard generated menu
 
 /*
  * Capture codes
@@ -2691,13 +3747,14 @@ typedef struct tagHOTKEY {
 #define CH_HELPPREFIX   0x08
 
 #ifdef KANJI
-#error
-#line 2742
-#endif
+    #define CH_KANJI1       0x1D
+    #define CH_KANJI2       0x1E
+    #define CH_KANJI3       0x1F
+#endif // KANJI
 
 #define xxxRedrawScreen() \
         xxxInternalInvalidate(PtiCurrent()->rpdesk->pDeskInfo->spwnd, \
-        MAXREGION, RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN)
+        HRGN_FULL, RDW_INVALIDATE | RDW_ERASE | RDW_FRAME | RDW_ALLCHILDREN)
 
 /*
  * Preallocated buffer for use during SetWindowPos to prevent memory
@@ -2708,13 +3765,11 @@ typedef struct tagHOTKEY {
 /*
  * DrawIconCallBack data, global only for state data in tmswitch.c
  */
-#line 2757
 typedef struct tagDRAWICONCB {   /* dicb */
     PWND   pwndTop;                     // Window being drawn
     UINT   cx;                          // x offset for icon
     UINT   cy;                          // y offset for icon
 } DRAWICONCB, *PDRAWICONCB;
-#line 2762
 
 /*
  * The following defines the components of nKeyboardSpeed
@@ -2730,64 +3785,153 @@ typedef struct tagDRAWICONCB {   /* dicb */
 #define PROP_DDETRACK       MAKEINTATOM(atomDDETrack)
 #define PROP_QOS            MAKEINTATOM(atomQOS)
 #define PROP_DDEIMP         MAKEINTATOM(atomDDEImp)
-
-/*
- * Order of points for MINMAXINFO
- */
-#define MMI_MINSIZE                 0   /* Minimized width, height */
-#define MMI_MAXSIZE                 1   /* Maximized width, height */
-#define MMI_MAXPOS                  2   /* Maximized top left corner */
-#define MMI_MINTRACK                3   /* Minimum size for normal window */
-#define MMI_MAXTRACK                4   /* Maximum size for normal window */
+#define PROP_WNDOBJ         MAKEINTATOM(atomWndObj)
+#define PROP_IMELEVEL       MAKEINTATOM(atomImeLevel)
+#define PROP_LAYER          MAKEINTATOM(atomLayer)
 
 #define WinFlags    ((WORD)(&__WinFlags))
 
 /*
  * ntinput.c
  */
-VOID InternalKeyEvent(
-   BYTE bVk,
-   BYTE bScan,
-   DWORD dwFlags,
-   DWORD dwExtraInfo);
+BOOL xxxInternalKeyEventDirect(
+    BYTE  bVk,
+    WORD  wScan,
+    DWORD dwFlags,
+    DWORD dwTime,
+    ULONG_PTR dwExtraInfo);
 
-#line 2798
-VOID ProcessKeyEvent(
-   PKE pke,
-   ULONG ExtraInformation,
-   BOOL fInCriticalSection);
-#line 2802
+UINT xxxSendInput(
+    UINT    nInputs,
+    LPINPUT pInputs);
 
-VOID ButtonEvent(
-   DWORD ButtonNumber,
-   POINT ptPointer,
-   BOOL fBreak,
-   ULONG ExtraInfo);
+BOOL _BlockInput(
+    BOOL    fBlockIt);
 
-VOID MoveEvent(
-    LONG dx,
-    LONG dy,
-    BOOL fAbsolute);
+int _GetMouseMovePointsEx(
+    CONST MOUSEMOVEPOINT* ppt,
+    MOUSEMOVEPOINT*       pptBuf,
+    UINT                  nPoints,
+    DWORD                 resolution);
 
-VOID _MouseEvent(
-   DWORD dwFlags,
-   DWORD dx,
-   DWORD dy,
-   DWORD cButtons,
-   DWORD dwExtraInfo);
 
-VOID MouseApcProcedure(VOID);
+VOID xxxProcessKeyEvent(
+   PKE       pke,
+   ULONG_PTR ExtraInformation,
+   BOOL      bInjected);
+
+VOID xxxButtonEvent(
+    DWORD ButtonNumber,
+    POINT ptPointer,
+    BOOL  fBreak,
+    DWORD time,
+    ULONG_PTR ExtraInfo,
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+#line 4516
+    BOOL  bInjected,
+    BOOL  fDblClk);
+
+VOID xxxMoveEvent(
+    LONG         dx,
+    LONG         dy,
+    DWORD        dwFlags,
+    ULONG_PTR    dwExtraInfo,
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+#line 4528
+    DWORD        time,
+    BOOL         bInjected
+    );
+
+typedef struct _RIT_INIT {
+    PTERMINAL pTerm;
+    PKEVENT   pRitReadyEvent;
+} RIT_INIT, *PRIT_INIT;
+
+PDEVICEINFO StartDeviceRead(PDEVICEINFO pDeviceInfo);
+
+NTSTATUS DeviceNotify(
+    IN PPLUGPLAY_NOTIFY_HDR pNotification,
+    IN PDEVICEINFO pDeviceInfo);
+
+#define MOUSE_SENSITIVITY_MIN     1
+#define MOUSE_SENSITIVITY_DEFAULT 10
+#define MOUSE_SENSITIVITY_MAX     20
+LONG CalculateMouseSensitivity(LONG lSens);
+
+PDEVICEINFO FreeDeviceInfo(PDEVICEINFO pMouseInfo);
+
+
+#line 4559
+
+#line 4567
+
+#line 4576
+
+#line 4584
+
 
 VOID QueueMouseEvent(
-   USHORT   ButtonFlags,
-   USHORT   ButtonData,
-   ULONG    ExtraInfo,
-   POINT    ptMouse,
-   BOOL     bWakeRIT);
+    USHORT       ButtonFlags,
+    USHORT       ButtonData,
+    ULONG_PTR    ExtraInfo,
+    POINT        ptMouse,
+    LONG         time,
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+#line 4596
+    BOOL         bInjected,
+    BOOL         bWakeRIT
+    );
 
-#line 2830
+typedef struct {
+    DWORD dwVersion;
+    DWORD dwFlags;
+    DWORD dwMapCount;
+    DWORD dwMap[0];
+} SCANCODEMAP, *PSCANCODEMAP;
+
+
+#ifndef SCANCODE_NUMPAD_PLUS
+#define SCANCODE_NUMPAD_PLUS    (0x4e)
+#endif
+#ifndef SCANCODE_NUMPAD_DOT
+#define SCANCODE_NUMPAD_DOT     (0x53)
+#endif
+
+/*
+ * Flag (LowLevel and HighLevel) for
+ * hex Alt+Numpad mode.
+ * If you need to add a new flag for gfInNumpadHexInput,
+ * note the variable is BYTE.
+ */
+#define NUMPAD_HEXMODE_LL       (1)
+#define NUMPAD_HEXMODE_HL       (2)
+
+#define MODIFIER_FOR_ALT_NUMPAD(wModBit) \
+    (((wModBits) == KBDALT) || ((wModBits) == (KBDALT | KBDSHIFT)) || \
+     ((wModBits) == (KBDKANA | KBDALT)) || ((wModBits) == (KBDKANA | KBDALT | KBDSHIFT)))
+
+
+BOOL UnqueueMouseEvent(PMOUSEEVENT pme);
+
+BYTE    VKFromVSC(PKE pke, BYTE bPrefix, LPBYTE afKeyState);
+BOOL    KEOEMProcs(PKE pke);
+BOOL    xxxKELocaleProcs(PKE pke);
+BOOL    xxxKENLSProcs(PKE pke, ULONG_PTR dwExtraInformation);
+
+VOID    xxxKeyEvent(USHORT usVk, WORD wScanCode, DWORD time, ULONG_PTR ExtraInfo,
+#ifdef GENERIC_INPUT
+#error Original configuration is not selected.
+#endif
+#line 4641
+                    BOOL bInjected);
+
 typedef BITMAPINFOHEADER *PBMPHEADER, *LPBMPHEADER;
-#line 2831
 
 /*
  * Defines for WinOldAppHackoMatic flags which win386 oldapp can send to us.
@@ -2796,19 +3940,17 @@ typedef BITMAPINFOHEADER *PBMPHEADER, *LPBMPHEADER;
 #define WOAHACK_CHECKALTKEYSTATE 1
 #define WOAHACK_IGNOREALTKEYDOWN 2
 
-#line 2839
 void xxxSimpleDoSyncPaint(PWND pwnd);
 VOID xxxDoSyncPaint(PWND pwnd, DWORD flags);
 void xxxInternalDoSyncPaint(PWND pwnd, DWORD flags);
-#line 2842
 
 /*
  * NOTE: the first 4 values must be as defined for backward compatibility
- * reasons.  They are sent as parameters to the WM_SYNCPAINT message.
+ * reasons. They are sent as parameters to the WM_SYNCPAINT message.
  * They used to be hard-coded constants.
  *
  * Only ENUMCLIPPEDCHILDREN, ALLCHILDREN, and NOCHECKPARENTS are passed on
- * during recursion.  The other bits reflect the current window only.
+ * during recursion. The other bits reflect the current window only.
  */
 #define DSP_ERASE               0x0001  // Send WM_ERASEBKGND
 #define DSP_FRAME               0x0002  // Send WM_NCPAINT
@@ -2817,32 +3959,35 @@ void xxxInternalDoSyncPaint(PWND pwnd, DWORD flags);
 #define DSP_NOCHECKPARENTS      0x0010  // Don't check parents for update region
 #define DSP_ALLCHILDREN         0x0020  // Enumerate all children.
 
-#line 2858
-BOOL xxx_DrawAnimatedRects(
+BOOL xxxDrawAnimatedRects(
     PWND pwndClip,
     int idAnimation,
     LPRECT lprcStart,
     LPRECT lprcEnd);
 
 typedef struct tagTIMER {           // tmr
+    HEAD            head;
     struct tagTIMER *ptmrNext;
+    struct tagTIMER *ptmrPrev;
     PTHREADINFO     pti;
     struct tagWND * spwnd;
-    UINT            nID;
-    INT             cmsCountdown;
-    INT             cmsRate;
+    UINT_PTR        nID;
+    DWORD           cmsCountdown;
+    DWORD           cmsRate;
     UINT            flags;
-    WNDPROC_PWND    pfn;
+    TIMERPROC_PWND  pfn;
     PTHREADINFO     ptiOptCreator;     // used for journal playback
                                        // will be NULL if timer was created by non-GUI thread
 } TIMER, *PTIMER;
 
-UINT InternalSetTimer(PWND pwnd, UINT nIDEvent, UINT dwElapse,
-        WNDPROC_PWND pTimerFunc, UINT flags);
-#line 2879
+UINT_PTR InternalSetTimer(PWND pwnd, UINT_PTR nIDEvent, UINT dwElapse,
+        TIMERPROC_PWND pTimerFunc, UINT flags);
+
+VOID FreeTimer(PTIMER ptmr);
+BOOL ValidateTimerCallback(PTHREADINFO, PWND, WPARAM, LPARAM);
 
 /*
- * Call FindTimer() with fKill == TRUE and TMRF_RIT.  This will basically
+ * Call FindTimer() with fKill == TRUE and TMRF_RIT. This will basically
  * delete the timer.
  */
 #define KILLRITTIMER(pwnd, nID) FindTimer(pwnd, nID, TMRF_RIT, TRUE)
@@ -2850,38 +3995,29 @@ UINT InternalSetTimer(PWND pwnd, UINT nIDEvent, UINT dwElapse,
 /*
  * Raster Ops
  */
-#define DPO           0x00FA0089  /* destination, pattern, or */
+#define PATOR 0x00FA0089L  /* destination, pattern, or */
 
 /*
  * Message thunks.
  */
-#line 2894
-typedef LONG (APIENTRY *SFNSCSENDMESSAGE)(PWND, UINT, DWORD, LONG,
-        DWORD, PROC, DWORD, PSMS);
-#line 2896
+typedef LRESULT (APIENTRY *SFNSCSENDMESSAGE)(PWND, UINT, WPARAM, LPARAM,
+        ULONG_PTR, PROC, DWORD, PSMS);
 
 #define SMESSAGEPROTO(func) \
-     LONG CALLBACK Sfn ## func(                                 \
-        PWND pwnd, UINT msg, DWORD wParam, LONG lParam,         \
-        DWORD xParam, PROC xpfnWndProc, DWORD dwSCMSFlags, PSMS psms)
+     LRESULT CALLBACK Sfn ## func(                              \
+        PWND pwnd, UINT msg, WPARAM wParam, LPARAM lParam,      \
+        ULONG_PTR xParam, PROC xpfnWndProc, DWORD dwSCMSFlags, PSMS psms)
 
-#line 2902
 SMESSAGEPROTO(SENTDDEMSG);
 SMESSAGEPROTO(DDEINIT);
 SMESSAGEPROTO(DWORD);
-SMESSAGEPROTO(PAINT);
+SMESSAGEPROTO(NCDESTROY);
 SMESSAGEPROTO(INWPARAMCHAR);
-#line 2907
-#ifdef FE_SB // SfnINWPARAMDBCSCHAR()
-#error
-#endif // FE_SB
-#line 2910
+SMESSAGEPROTO(INWPARAMDBCSCHAR);
+
 SMESSAGEPROTO(GETTEXTLENGTHS);
-#line 2911
-#ifdef FE_SB // SfnGETDBCSTEXTLENGTHS
-#error
-#endif // FE_SB
-#line 2914
+
+SMESSAGEPROTO(GETDBCSTEXTLENGTHS);
 SMESSAGEPROTO(INLPCREATESTRUCT);
 SMESSAGEPROTO(INLPDROPSTRUCT);
 SMESSAGEPROTO(INOUTLPPOINT5);
@@ -2910,11 +4046,6 @@ SMESSAGEPROTO(OUTLBOXSTRING);
 SMESSAGEPROTO(INCBOXSTRING);
 SMESSAGEPROTO(OUTCBOXSTRING);
 SMESSAGEPROTO(INCNTOUTSTRINGNULL);
-SMESSAGEPROTO(WMCTLCOLOR);
-SMESSAGEPROTO(HFONTDWORDDWORD);
-SMESSAGEPROTO(HFONTDWORD);
-SMESSAGEPROTO(HRGNDWORD);
-SMESSAGEPROTO(HDCDWORD);
 SMESSAGEPROTO(INOUTDRAG);
 SMESSAGEPROTO(FULLSCREEN);
 SMESSAGEPROTO(INPAINTCLIPBRD);
@@ -2931,13 +4062,20 @@ SMESSAGEPROTO(INOUTSTYLECHANGE);
 SMESSAGEPROTO(IMAGEIN);
 SMESSAGEPROTO(IMAGEOUT);
 SMESSAGEPROTO(INDEVICECHANGE);
-
+SMESSAGEPROTO(INOUTMENUGETOBJECT);
+SMESSAGEPROTO(POWERBROADCAST);
+SMESSAGEPROTO(LOGONNOTIFY);
+SMESSAGEPROTO(IMECONTROL);
+SMESSAGEPROTO(IMEREQUEST);
+SMESSAGEPROTO(INLPKDRAWSWITCHWND);
+SMESSAGEPROTO(OUTLPCOMBOBOXINFO);
+SMESSAGEPROTO(OUTLPSCROLLBARINFO);
 
 /***************************************************************************\
 * Function Prototypes
 *
 * NOTE: Only prototypes for GLOBAL (across module) functions should be put
-* here.  Prototypes for functions that are global to a single module should
+* here. Prototypes for functions that are global to a single module should
 * be put at the head of that module.
 *
 * LATER: There's still lots of bogus trash in here to be cleaned out.
@@ -2959,9 +4097,7 @@ void xxxSendHelpMessage(
     int    iType,
     int    iCtrlId,
     HANDLE hItemHandle,
-    DWORD  dwContextId,
-    MSGBOXCALLBACK lpfnCallback);
-#line 2993
+    DWORD  dwContextId);
 
 HPALETTE _SelectPalette(
     HDC hdc,
@@ -2971,15 +4107,12 @@ HPALETTE _SelectPalette(
 int xxxRealizePalette(
     HDC hdc);
 
-#line 3002
 VOID xxxFlushPalette(
     PWND pwnd);
 
-PCURSOR _GetCursorInfo(
-    PCURSOR pcur,
-    int iFrame,
-    PJIF pjifRate,
-    LPINT pccur);
+VOID xxxBroadcastPaletteChanged(
+    PWND pwnd,
+    BOOL fForceDesktop);
 
 PCURSOR SearchIconCache(
     PCURSOR         pCursorCache,
@@ -2988,18 +4121,15 @@ PCURSOR SearchIconCache(
     PCURSOR         pCursorSrc,
     PCURSORFIND     pcfSearch);
 
-BOOL _SetSystemCursor(
+VOID ZombieCursor(PCURSOR pcur);
+
+BOOL IsSmallerThanScreen(PWND pwnd);
+
+BOOL zzzSetSystemCursor(
     PCURSOR pcur,
     DWORD   id);
-#line 3021
 
-#ifdef LATER
-#error
-#line 3026
-#endif
-
-#line 3028
-BOOL SetSystemImage(
+BOOL zzzSetSystemImage(
     PCURSOR pcur,
     PCURSOR pcurOld);
 
@@ -3014,9 +4144,6 @@ BOOL _InternalGetIconInfo(
 VOID LinkCursor(
     PCURSOR pcur);
 
-VOID UnlinkCursor(
-    PCURSOR pcur);
-
 BOOL _SetCursorIconData(
     PCURSOR         pcur,
     PUNICODE_STRING pstrModName,
@@ -3024,17 +4151,13 @@ BOOL _SetCursorIconData(
     PCURSORDATA     pData,
     DWORD           cbData);
 
-PCURSOR _GetCursorInfo(
+PCURSOR _GetCursorFrameInfo(
     PCURSOR pcur,
     int     iFrame,
     PJIF    pjifRate,
     LPINT   pccur);
 
-PCURSOR FindSystemCursorIcon(
-    DWORD rt,
-    DWORD id);
-
-BOOL _SetSystemCursor(
+BOOL zzzSetSystemCursor(
     PCURSOR pcur,
     DWORD id);
 
@@ -3044,31 +4167,16 @@ PCURSOR _FindExistingCursorIcon(
     PCURSOR         pcurSrc,
     PCURSORFIND     pcfSearch);
 
-BOOL _SetCursorIconData(
-    PCURSOR         pcur,
-    PUNICODE_STRING pstrModName,
-    PUNICODE_STRING pstrResName,
-    PCURSORDATA     pData,
-    DWORD           cbData);
-#line 3079
-
 HCURSOR _CreateEmptyCursorObject(
     BOOL fPublic);
 
-#line 3083
-PTIMER FindTimer(PWND pwnd, UINT nID, UINT flags, BOOL fKill);
-#line 3084
 BOOL _GetUserObjectInformation(HANDLE h,
     int nIndex, PVOID pvInfo, DWORD nLength, LPDWORD lpnLengthNeeded);
 BOOL _SetUserObjectInformation(HANDLE h,
     int nIndex, PVOID pvInfo, DWORD nLength);
-#line 3088
-int _InternalGetWindowText(PWND pwnd, LPWSTR psz, int cchMax);
-#line 3089
-DWORD xxxWaitForInputIdle(DWORD idProcess, DWORD dwMilliseconds,
+DWORD xxxWaitForInputIdle(ULONG_PTR idProcess, DWORD dwMilliseconds,
         BOOL fSharedWow);
-VOID StartScreenSaver(VOID);
-#line 3092
+VOID StartScreenSaver(BOOL bOnlyIfSecure);
 UINT InternalMapVirtualKeyEx(UINT wCode, UINT wType, PKBDTABLES pKbdTbl);
 SHORT InternalVkKeyScanEx(WCHAR cChar, PKBDTABLES pKbdTbl);
 
@@ -3083,155 +4191,183 @@ BOOL _DdeSetQualityOfService(PWND pwndClient,
         PSECURITY_QUALITY_OF_SERVICE pqosOld);
 BOOL _DdeGetQualityOfService(PWND pwndClient,
         PWND pwndServer, PSECURITY_QUALITY_OF_SERVICE pqos);
-#line 3106
 
 BOOL QueryTrackMouseEvent(LPTRACKMOUSEEVENT lpTME);
-#line 3108
 void CancelMouseHover(PQ pq);
 void ResetMouseTracking(PQ pq, PWND pwnd);
+
+void _SetIMEShowStatus(BOOL fShow);
+BOOL _GetIMEShowStatus(VOID);
 
 /*
  * Prototypes for internal version of APIs.
  */
 PWND _FindWindowEx(PWND pwndParent, PWND pwndChild,
-                              LPWSTR pszClass, LPWSTR pszName, DWORD dwType);
-#line 3116
-
-/*
- * Prototypes for functions used to aid debugging.
- */
-HANDLE DebugAlloc(DWORD dwFlags, DWORD dwBytes, DWORD idOwner);
-HANDLE DebugAlloc2(DWORD dwFlags, DWORD dwBytes, DWORD idOwner, DWORD idCreator);
-HANDLE DebugReAlloc(HANDLE hMem, DWORD dwBytes, DWORD dwFlags);
-HANDLE DebugFree(HANDLE hMem);
-DWORD  DebugSize(HANDLE hMem);
+                              LPCWSTR pszClass, LPCWSTR pszName, DWORD dwType);
+UINT APIENTRY GreSetTextAlign(HDC, UINT);
+UINT APIENTRY GreGetTextAlign(HDC);
 
 /*
  * Prototypes for validation, RIP, error handling, etc functions.
  */
-#line 3129
-PWND FASTCALL  ValidateHwnd(HWND hwnd);
-#line 3130
-VOID    SetError(DWORD idErr);
-#line 3131
-NTSTATUS ValidateHwinsta(HWINSTA hwinsta, ACCESS_MASK amDesired,
-        PWINDOWSTATION *ppwinsta);
-NTSTATUS ValidateHdesk(HDESK hdesk, ACCESS_MASK amDesired, PDESKTOP *ppdesk);
-PMENU   ValidateHmenu(HMENU hmenu);
-#line 3135
-HRGN    UserValidateCopyRgn(HRGN);
+PWND FASTCALL   ValidateHwnd(HWND hwnd);
+
+NTSTATUS ValidateHwinsta(HWINSTA, KPROCESSOR_MODE, ACCESS_MASK, PWINDOWSTATION*);
+NTSTATUS ValidateHdesk(HDESK, KPROCESSOR_MODE, ACCESS_MASK, PDESKTOP*);
+
+PMENU           ValidateHmenu(HMENU hmenu);
+PMONITOR        ValidateHmonitor(HMONITOR hmonitor);
+HRGN            UserValidateCopyRgn(HRGN);
+
+BOOL    ValidateHandleSecure(HANDLE h);
+
+NTSTATUS UserJobCallout(PKWIN32_JOBCALLOUT_PARAMETERS Parm);
+
+BOOL RemoveProcessFromJob(PPROCESSINFO ppi);
+
 
 BOOL    xxxActivateDebugger(UINT fsModifiers);
 
 void ClientDied(void);
 
-BOOL    _QuerySendMessage(PMSG pmsg);
-#line 3142
 VOID    SendMsgCleanup(PTHREADINFO ptiCurrent);
 VOID    ReceiverDied(PSMS psms, PSMS *ppsmsUnlink);
-LONG    xxxInterSendMsgEx(PWND, UINT, DWORD, DWORD, PTHREADINFO, PTHREADINFO, PINTRSENDMSGEX );
+LRESULT xxxInterSendMsgEx(PWND, UINT, WPARAM, LPARAM, PTHREADINFO, PTHREADINFO, PINTRSENDMSGEX );
 VOID    ClearSendMessages(PWND pwnd);
-#line 3147
+
 BOOL    ReferenceClass(PCLS pcls, PWND pwnd);
 VOID    DereferenceClass(PWND pwnd);
-#line 3149
-DWORD   MapClientToServerPfn(DWORD dw);
+ULONG_PTR MapClientToServerPfn(ULONG_PTR dw);
 
-
-#line 3152
-int     _GetClassName(PWND pwnd, LPWSTR lpch, int cchMax);
 
 VOID xxxReceiveMessage(PTHREADINFO);
-#line 3157
+
+#line 4955
 
 PBWL     BuildHwndList(PWND pwnd, UINT flags, PTHREADINFO ptiOwner);
 VOID     FreeHwndList(PBWL pbwl);
-#line 3160
+
 #define  MINMAX_KEEPHIDDEN 0x1
 #define  MINMAX_ANIMATE    0x10000
-#line 3162
-PWND     xxxMinMaximize(PWND pwnd, UINT cmd, DWORD dwFlags);
-VOID     xxxInitSendValidateMinMaxInfo(PWND pwnd);
-#line 3164
-VOID     InitKeyboard(VOID);
-#line 3165
-VOID     xxxInitKeyboardLayout(PWINDOWSTATION pwinsta, UINT Flags);
-VOID     DestroyKL(PKL pkl);
-#line 3167
-VOID     SetKeyboardRate(UINT nKeySpeed);
-#line 3168
-VOID     SetMinMaxInfo(VOID);
-#line 3169
-BOOL     xxxSetDeskPattern(LPWSTR lpPat, BOOL fCreation);
-VOID     RecolorDeskPattern(VOID);
-BOOL     xxxSetDeskWallpaper(LPWSTR lpszFile);
-HPALETTE CreateDIBPalette(LPBITMAPINFOHEADER pbmih, UINT colors);
-HBITMAP  ReadBitmapFile(HANDLE hFile, UINT style, HBITMAP *lphBitmap,
-         HPALETTE *lphPalette);
-#line 3175
-BOOL     CalcVisRgn(HRGN* hrgn, PWND pwndOrg, PWND pwndClip, DWORD flags);
-VOID     InitInput(PWINDOWSTATION);
-#line 3177
-VOID     InitSit(VOID);
-BOOL     HardErrorControl(DWORD, HDESK);
-#line 3179
-NTSTATUS xxxCreateThreadInfo(PW32THREAD);
-PQ       ValidateQ(PQ pq);
-BOOL     DestroyProcessInfo(PW32PROCESS);
-VOID     DesktopThread(PDESKTOPTHREADINIT pdti);
-BOOL     SetDesktopHookFlag(PPROCESSINFO, HANDLE, BOOL);
-BOOL     CheckDesktopHookFlag(PPROCESSINFO, HANDLE);
-VOID     ForceEmptyClipboard(PWINDOWSTATION);
-BOOL     xxxInitWinStaDevices(PWINDOWSTATION);
-VOID     DestroyGlobalAtomTable(PWINDOWSTATION pwinsta);
 
-NTSTATUS zzzInitTask(UINT dwExpWinVer, DWORD dwAppCompatFlags,
-                DWORD dwUserWOWCompatFlags, PUNICODE_STRING pstrModName,
-                PUNICODE_STRING pstrBaseFileName, DWORD hTaskWow, DWORD dwHotkey,
-                DWORD idTask, DWORD dwX, DWORD dwY, DWORD dwXSize, DWORD dwYSize);
-#line 3193
+PWND     xxxMinMaximize(PWND pwnd, UINT cmd, DWORD dwFlags);
+void     xxxMinimizeHungWindow(PWND pwnd);
+VOID     xxxInitSendValidateMinMaxInfo(PWND pwnd, LPMINMAXINFO lpmmi);
+HRGN     CreateEmptyRgn(void);
+HRGN     CreateEmptyRgnPublic(void);
+HRGN     SetOrCreateRectRgnIndirectPublic(HRGN * phrgn, LPCRECT lprc);
+BOOL     SetEmptyRgn(HRGN hrgn);
+BOOL     SetRectRgnIndirect(HRGN hrgn, LPCRECT lprc);
+void     RegisterCDROMNotify(void);
+NTSTATUS xxxRegisterForDeviceClassNotifications();
+VOID     xxxUnregisterDeviceClassNotifications();
+BOOL     xxxInitInput(PTERMINAL);
+VOID     InitMice();
+void     UpdateMouseInfo(void);
+BOOL     OpenMouse(PDEVICEINFO pMouseInfo);
+void     ProcessDeviceChanges(DWORD DeviceType);
+PDEVICEINFO CreateDeviceInfo(DWORD DeviceType, PUNICODE_STRING SymbolicLinkName, BYTE bFlags);
+void     InitKeyboard(void);
+void     InitKeyboardState(void);
+UINT     xxxHardErrorControl(DWORD, HANDLE, PDESKRESTOREDATA);
+
+
+
+#define UPDATE_KBD_TYPEMATIC 1
+#define UPDATE_KBD_LEDS      2
+
+VOID     SetKeyboardRate(UINT nKeySpeed);
+VOID     RecolorDeskPattern();
+BOOL     xxxInitWindowStation(PWINDOWSTATION);
+VOID     zzzInternalSetCursorPos(int x, int y);
+VOID     UpdateKeyLights(BOOL bInjected);
+VOID     SetDebugHotKeys();
+VOID     BoundCursor(LPPOINT lppt);
+
+void     DestroyKF(PKBDFILE pkf);
+VOID     DestroyKL(PKL pkl);
+VOID     CleanupKeyboardLayouts();
+
+BOOL     xxxSetDeskPattern(PUNICODE_STRING pProfileUserName,LPWSTR lpPat, BOOL fCreation);
+BOOL     xxxSetDeskWallpaper(PUNICODE_STRING pProfileUserName,LPWSTR lpszFile);
+HPALETTE CreateDIBPalette(LPBITMAPINFOHEADER pbmih, UINT colors);
+BOOL     CalcVisRgn(HRGN* hrgn, PWND pwndOrg, PWND pwndClip, DWORD flags);
+
+NTSTATUS xxxCreateThreadInfo(PETHREAD, BOOL);
+
+BOOL     DestroyProcessInfo(PW32PROCESS);
+
+#if DBG
+#error Original configuration is not selected.
+#endif // DBG
+
+
+VOID    RawInputThread(PVOID pVoid);
+HANDLE  GetRemoteProcessId(void);
+void    HandleSystemThreadCreationFailure(BOOL bRemoteThread);
+void    xxxCreateSystemThreads(BOOL bRemoteThread);
+
+VOID     xxxDesktopThread(PTERMINAL pTerm);
+VOID     ForceEmptyClipboard(PWINDOWSTATION);
+
+NTSTATUS zzzInitTask(UINT dwExpWinVer, DWORD dwAppCompatFlags, DWORD dwUserWOWCompatFlags,
+                PUNICODE_STRING pstrModName, PUNICODE_STRING pstrBaseFileName,
+                DWORD hTaskWow, DWORD dwHotkey, DWORD idTask,
+                DWORD dwX, DWORD dwY, DWORD dwXSize, DWORD dwYSize);
 VOID    DestroyTask(PPROCESSINFO ppi, PTHREADINFO ptiToRemove);
-void    PostInputMessage(PQ pq, PWND pwnd, UINT message, DWORD wParam,
-                LONG lParam, DWORD dwExtraInfo);
-VOID    PostSetForeground(PTHREADINFO pti, PQMSG pqmsg, DWORD wParam);
-BOOL    PostHotkeyMessage(PQ pq, PWND pwnd, DWORD wParam, LONG lParam);
+BOOL    PostInputMessage(PQ pq, PWND pwnd, UINT message, WPARAM wParam,
+                LPARAM lParam, DWORD time, ULONG_PTR dwExtraInfo);
 PWND    PwndForegroundCapture(VOID);
 BOOL    xxxSleepThread(UINT fsWakeMask, DWORD Timeout, BOOL fForegroundIdle);
-VOID    WakeThread(PTHREADINFO pti);
 VOID    SetWakeBit(PTHREADINFO pti, UINT wWakeBit);
 VOID    WakeSomeone(PQ pq, UINT message, PQMSG pqmsg);
 VOID    ClearWakeBit(PTHREADINFO pti, UINT wWakeBit, BOOL fSysCheck);
-BOOL    InitProcessInfo(PW32PROCESS);
+NTSTATUS xxxInitProcessInfo(PW32PROCESS);
 
-#line 3211
+#line 5037
+BOOL    zzzAttachThreadInput(PTHREADINFO ptiAttach, PTHREADINFO ptiAttachTo, BOOL fAttach);
+#line 5039
+PQ      AllocQueue(PTHREADINFO, PQ);
+VOID    FreeQueue(PQ pq);
+
+
+VOID    FreeCachedQueues(VOID);
+VOID    CleanupGDI(VOID);
+VOID    CleanupResources(VOID);
+
+VOID    zzzDestroyQueue(PQ pq, PTHREADINFO pti);
 PQMSG   AllocQEntry(PMLIST pml);
-void    DelQEntry(PMLIST pml, PQMSG pqmsg);
-void    AttachToQueue(PTHREADINFO pti, PQ pqAttach, PQ pqJournal,
+__inline VOID FreeQEntry(PQMSG pqmsg)
+{
+    extern PPAGED_LOOKASIDE_LIST QEntryLookaside;
+    ExFreeToPagedLookasideList(QEntryLookaside, pqmsg);
+}
+
+VOID    DelQEntry(PMLIST pml, PQMSG pqmsg);
+VOID    zzzAttachToQueue(PTHREADINFO pti, PQ pqAttach, PQ pqJournal,
         BOOL fJoiningForeground);
-BOOL    WriteMessage(PTHREADINFO pti, PWND pwnd, UINT message, DWORD wParam,
-                LONG lParam, DWORD flags, DWORD dwExtraInfo);
-VOID    xxxProcessEventMessage(PTHREADINFO pti, PQMSG pqmsg);
+VOID    xxxProcessEventMessage(PTHREADINFO ptiCurrent, PQMSG pqmsg);
 VOID    xxxProcessSetWindowPosEvent(PSMWP psmwpT);
 VOID    xxxProcessAsyncSendMessage(PASYNCSENDMSG pmsg);
-VOID    BoostQ(PTHREADINFO pti, DWORD dwBoostType);
-PQMSG   FindMessage(UINT message, PQMSG pqmsgRead, PQMSG pqmsgWrite);
-PQMSG   xxxGetNextMessage(PTHREADINFO pti, PQ pq, PQMSG *ppqmsgRead,
-                PQMSG *ppqmsgWrite, PQMSG pqmsgPrev, PQMSG pqmsg, int nQueue);
-PQMSG   GetPrevMessage(UINT message, PQMSG pqmsgRead, PQMSG pqmsgWrite);
-BOOL    xxxRemoveMessage(PQ pq, PQMSG *ppqmsgRead, PQMSG *ppqmsgWrite,
-                PQMSG *ppqmsgLast, PQMSG pqmsg, PQMSG pqmsgPrev, int nQueue);
-BOOL    PostEventMessage(PTHREADINFO pti, PQ pq, DWORD dwQEvent, PWND pwnd, UINT message, DWORD wParam, LONG lParam);
+BOOL    PostEventMessage(PTHREADINFO pti, PQ pq, DWORD dwQEvent, PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-BOOL    DoPaint(PWND pwndFilter, LPMSG lpMsg);
-BOOL    DoTimer(PWND pwndFilter, UINT wMsgFilterMin, UINT wMsgFilterMax);
-VOID    InvalidateDC(PWND pwnd, LPRECT lprcInvalidOld);
+BOOL    xxxDoPaint(PWND pwndFilter, LPMSG lpMsg);
+BOOL    DoTimer(PWND pwndFilter);
 BOOL    CheckPwndFilter(PWND pwnd, PWND pwndFilter);
-HWND    xxxWindowHitTest(PWND pwnd,  POINT pt, int *pipos, BOOL fIgnoreDisabled);
-HWND    xxxWindowHitTest2(PWND pwnd, POINT pt, int *pipos, BOOL fIgnoreDisabled);
+
+#define WHT_IGNOREDISABLED      0x00000001
+
+#ifdef REDIRECTION
+#error Original configuration is not selected.
+#endif // REDIRECTION
+#line 5078
+
+BOOL    xxxGetCursorPos(LPPOINT lpPt);
+HWND    xxxWindowHitTest(PWND pwnd,  POINT pt, int *pipos, DWORD dwHitTestFlags);
+HWND    xxxWindowHitTest2(PWND pwnd, POINT pt, int *pipos, DWORD dwHitTestFlags);
+
 PWND    SpeedHitTest(PWND pwndParent, POINT pt);
-VOID    xxxActivate(PWND pwndActivate, PQ pqLoseForeground);
 VOID    xxxDeactivate(PTHREADINFO pti, DWORD tidSetForeground);
-#line 3238
 
 #define SFW_STARTUP             0x0001
 #define SFW_SWITCH              0x0002
@@ -3239,150 +4375,134 @@ VOID    xxxDeactivate(PTHREADINFO pti, DWORD tidSetForeground);
 #define SFW_SETFOCUS            0x0008
 #define SFW_ACTIVATERESTORE     0x0010
 
-#line 3245
 BOOL    xxxSetForegroundWindow2(PWND pwnd, PTHREADINFO ptiCurrent, DWORD fFlags);
 VOID    SetForegroundThread(PTHREADINFO pti);
 VOID    xxxSendFocusMessages(PTHREADINFO pti, PWND pwndReceive);
-#line 3248
 
 #define ATW_MOUSE               0x0001
 #define ATW_SETFOCUS            0x0002
 #define ATW_ASYNC               0x0004
 #define ATW_NOZORDER            0x0008
 
-#line 3254
-VOID    InternalSetCursorPos(int x, int y, PDESKTOP pdesk);
 BOOL    FBadWindow(PWND pwnd);
 BOOL    xxxActivateThisWindow(PWND pwnd, DWORD tidLoseForeground, DWORD fFlags);
 BOOL    xxxActivateWindow(PWND pwnd, UINT cmd);
-#line 3258
 
 #define NTW_PREVIOUS         1
 #define NTW_IGNORETOOLWINDOW 2
-#line 3261
 PWND    NextTopWindow(PTHREADINFO pti, PWND pwnd, PWND pwndSkip, DWORD flags);
 
-int     xxxMouseActivate(PTHREADINFO pti, PWND pwnd, UINT message, LPPOINT lppt, int ht);
+int     xxxMouseActivate(PTHREADINFO pti, PWND pwnd, UINT message, WPARAM wParam, LPPOINT lppt, int ht);
 int     UT_GetParentDCClipBox(PWND pwnd, HDC hdc, LPRECT lprc);
 VOID    UpdateAsyncKeyState(PQ pq, UINT wVK, BOOL fBreak);
 void    PostUpdateKeyStateEvent(PQ pq);
+void    ProcessUpdateKeyStateEvent(PQ pq, CONST PBYTE pbKeyState, CONST PBYTE pbRecentDown);
 
 BOOL    InternalSetProp(PWND pwnd, LPWSTR pszKey, HANDLE hData, DWORD dwFlags);
 HANDLE  InternalRemoveProp(PWND pwnd, LPWSTR pszKey, BOOL fInternal);
 VOID    DeleteProperties(PWND pwnd);
-CHECKPOINT *CkptRestore(PWND pwnd, RECT rcWindow);
-UINT _SetTimer(PWND pwnd, UINT nIDEvent, UINT dwElapse, WNDPROC_PWND pTimerFunc);
-BOOL    KillTimer2(PWND pwnd, UINT nIDEvent, BOOL fSystemTimer);
+CHECKPOINT *CkptRestore(PWND pwnd, LPCRECT lprcWindow);
+UINT_PTR _SetTimer(PWND pwnd, UINT_PTR nIDEvent, UINT dwElapse, TIMERPROC_PWND pTimerFunc);
+BOOL    KillTimer2(PWND pwnd, UINT_PTR nIDEvent, BOOL fSystemTimer);
 VOID    DestroyThreadsTimers(PTHREADINFO pti);
 VOID    DecTimerCount(PTHREADINFO pti);
-#line 3276
-VOID    InternalShowCaret();
-VOID    InternalHideCaret();
-VOID    InternalDestroyCaret();
-BOOL    IsSystemFont(HDC hdc);
-#line 3280
-VOID    InitClassOffsets(VOID);
-#line 3282
-VOID    EnterCritNoPti(VOID);
-#line 3283
+VOID    zzzInternalShowCaret();
+VOID    zzzInternalHideCaret();
+VOID    zzzInternalDestroyCaret();
+VOID    ChangeAcquireResourceType(VOID);
+
 VOID    EnterSharedCrit(VOID);
-#line 3285
+
 VOID    _AssertCritIn(VOID);
+VOID    _AssertDeviceInfoListCritIn(VOID);
 VOID    _AssertCritInShared(VOID);
 VOID    _AssertCritOut(VOID);
-void    BeginAtomicCheck();
-void    EndAtomicCheck();
+VOID    _AssertDeviceInfoListCritOut(VOID);
 NTSTATUS _KeUserModeCallback (IN ULONG ApiNumber, IN PVOID InputBuffer,
     IN ULONG InputLength, OUT PVOID *OutputBuffer, OUT PULONG OutputLength);
-VOID    UpdateKeyLights(VOID);
+
+#define UnlockProcess           ObDereferenceObject
+#define UnlockThread            ObDereferenceObject
+
+extern ULONG gSessionId;
+
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 5150
+    #define ValidateProcessSessionId(pEProcess)
+    #define ValidateThreadSessionId(pEThread)
+#endif
+
+
+__inline NTSTATUS LockProcessByClientId(
+    HANDLE dwProcessId,
+    PEPROCESS* ppEProcess)
+{
+    NTSTATUS Status;
+
+    CheckCritOut();
+
+    Status = PsLookupProcessByProcessId(dwProcessId, ppEProcess);
+
+    if (NT_SUCCESS(Status) && (PsGetProcessSessionId(*ppEProcess) != gSessionId)) {
+        UnlockProcess(*ppEProcess);
+        return STATUS_UNSUCCESSFUL;
+    }
+
+    return Status;
+}
+
+__inline NTSTATUS LockThreadByClientId(
+    HANDLE dwThreadId,
+    PETHREAD* ppEThread)
+{
+    NTSTATUS Status;
+
+    Status = PsLookupThreadByThreadId(dwThreadId, ppEThread);
+
+    if (NT_SUCCESS(Status) && (PsGetThreadSessionId(*ppEThread) != gSessionId)) {
+        UnlockThread(*ppEThread);
+        return STATUS_UNSUCCESSFUL;
+    }
+
+    return Status;
+}
+
+BOOL    IsSAS(BYTE vk, UINT* pfsModifiers);
 BOOL    xxxDoHotKeyStuff(UINT vk, BOOL fBreak, DWORD fsReserveKeys);
-#line 3294
 PHOTKEY IsHotKey(UINT fsModifiers, UINT vk);
-#line 3295
-VOID    InitSystemHotKeys(VOID);
-VOID    BoundCursor(VOID);
-HANDLE  FakeGetStockObject(DWORD id);
-HBRUSH  FakeCreateSolidBrush(DWORD rgb);
-HANDLE  FakeSelectObject(HDC hdc, HANDLE handle);
-int     FakeCombineRgn(HRGN hrgnTrg, HRGN hrgnSrc1, HRGN hrgnSrc2, int cmd);
+void    ClearCachedHotkeyModifiers(void);
+
+/*
+ * Server.c
+ */
+BOOL InitCreateUserCrit(VOID);
+PMDEV InitVideo(
+    BOOL bReenumerationNeeded);
 
 /*
  * DRVSUP.C
-
  */
-NTSTATUS InitLoadDriver(VOID);
+BOOL InitUserScreen();
 
-//
-// ProbeAndCapture prototype
-//
+VOID InitLoadResources();
 
-BOOL
-ProbeAndCaptureDeviceName(
-    PUNICODE_STRING Destination,
-    PUNICODE_STRING Source
-    );
-
-NTSTATUS
-ProbeAndCaptureDevmode(
-    PUNICODE_STRING pstrDeviceName,
-    PDEVMODEW *DestinationDevmode,
-    PDEVMODEW SourceDevmode,
-    BOOL bKernelMode
-    );
-
-#line 3326
-HDEV
-UserCreateHDEV(
-    PUNICODE_STRING         pstrDevice,
-    LPDEVMODEW              lpdevmodeInformation,
-    PPHYSICAL_DEV_INFO     *physdevinfo,
-    PDEVICE_LOCK           *pDevLock
-    );
-
-VOID
-UserDestroyHDEV(
-    HDEV hdev
-    );
+typedef struct tagDISPLAYRESOURCE {
+    WORD cyThunb;
+    WORD cxThumb;
+    WORD xCompressIcon;
+    WORD yCompressIcon;
+    WORD xCompressCursor;
+    WORD yCompressCursor;
+    WORD yKanji;
+    WORD cxBorder;
+    WORD cyBorder;
+} DISPLAYRESOURCE, *PDISPLAYRESOURCE;
 
 
-PPHYSICAL_DEV_INFO
-UserGetDeviceFromName(PUNICODE_STRING pstrDeviceName,
-                      ULONG bShareState);
 
-#line 3344
-typedef enum _DISP_DRIVER_PARAM_TYPE {
-    DispDriverParamDefault,
-    DispDriverParamUser,
-    DispDriverParamDefaultDevmode,
-    DispDriverParamMerged
-} DISP_DRIVER_PARAM_TYPE;
-
-NTSTATUS
-UserSetDisplayDriverParameters(
-    PUNICODE_STRING deviceName,
-    DISP_DRIVER_PARAM_TYPE ParamType,
-    PDEVMODEW pdevmode,
-    PRECT deviceRect);
-#line 3357
-
-VOID UserFreeDevice(PPHYSICAL_DEV_INFO physInfo);
-VOID UserResetDisplayDevice(HDEV hdev);
-
-VOID
-UserSaveCurrentMode(
-    PDESKTOP           pDesktop,
-    PPHYSICAL_DEV_INFO physinfo,
-    LPDEVMODEW         lpdevmodeInformation
-    );
-#line 3367
-
-/*
- * ENUMWIN.C
- */
-BOOL xxxEnumWindows(WNDENUMPROC lpfn, DWORD lParam);
-#line 3372
-BOOL xxxEnumChildWindows(PWND pwnd, WNDENUMPROC lpfn, DWORD lParam);
-#line 3373
+VOID xxxUserResetDisplayDevice(VOID);
 
 /*
  * Object management and security
@@ -3393,11 +4513,11 @@ BOOL xxxEnumChildWindows(PWND pwnd, WNDENUMPROC lpfn, DWORD lParam);
     &(OBJECT_HEADER_TO_NAME_INFO(OBJECT_TO_OBJECT_HEADER(pobj))->Name) : NULL)
 
 PSECURITY_DESCRIPTOR CreateSecurityDescriptor(PACCESS_ALLOWED_ACE paceList,
-        DWORD cAce, DWORD cbAce, BOOLEAN fDaclDefaulted);
+        DWORD cbAce, BOOLEAN fDaclDefaulted);
 PACCESS_ALLOWED_ACE AllocAce(PACCESS_ALLOWED_ACE pace, BYTE bType,
         BYTE bFlags, ACCESS_MASK am, PSID psid, LPDWORD lpdwLength);
 BOOL CheckGrantedAccess(ACCESS_MASK, ACCESS_MASK);
-BOOL AccessCheckObject(PVOID, ACCESS_MASK);
+BOOL AccessCheckObject(PVOID, ACCESS_MASK, KPROCESSOR_MODE, CONST GENERIC_MAPPING *);
 BOOL InitSecurity(VOID);
 BOOL IsPrivileged(PPRIVILEGE_SET ppSet);
 BOOL CheckWinstaWriteAttributesAccess(void);
@@ -3406,57 +4526,56 @@ NTSTATUS xxxUserDuplicateObject(HANDLE SourceProcessHandle, HANDLE SourceHandle,
         HANDLE TargetProcessHandle, PHANDLE TargetHandle, ACCESS_MASK DesiredAccess,
         ULONG HandleAttributes, ULONG Options);
 HWINSTA xxxConnectService(PUNICODE_STRING, HDESK *);
+NTSTATUS TestForInteractiveUser(PLUID pluidCaller);
 NTSTATUS _UserTestForWinStaAccess( PUNICODE_STRING pstrWinSta, BOOL fInherit);
 HDESK xxxResolveDesktop(HANDLE hProcess, PUNICODE_STRING pstrDesktop,
     HWINSTA *phwinsta, BOOL fInherit, BOOL* pbShutDown);
+
+/* NEW CODE */
+NTSTATUS xxxResolveDesktopForWOW (
+    IN OUT PUNICODE_STRING pstrDesktop);
+
+WORD xxxClientWOWGetProcModule(WNDPROC_PWND pfn);
+DWORD xxxClientWOWTask16SchedNotify(DWORD NotifyParm,DWORD dwParam);
+
 PVOID _MapDesktopObject(HANDLE h);
-#line 3400
 PDESKTOPVIEW GetDesktopView(PPROCESSINFO ppi, PDESKTOP pdesk);
-#line 3401
 VOID TerminateConsole(PDESKTOP);
+
 
 /*
  * Object manager callouts for windowstations
  */
-VOID DestroyWindowStation(
-    IN PEPROCESS Process OPTIONAL,
-    IN PVOID Object,
-    IN ACCESS_MASK GrantedAccess,
-    IN ULONG ProcessHandleCount,
-    IN ULONG SystemHandleCount);
-VOID FreeWindowStation(
-    IN PWINDOWSTATION WindowStation);
+NTSTATUS DestroyWindowStation(
+     PKWIN32_CLOSEMETHOD_PARAMETERS pCloseParams );
+
+NTSTATUS FreeWindowStation(
+     PKWIN32_DELETEMETHOD_PARAMETERS pDeleteParams );
+
 NTSTATUS ParseWindowStation(
-    IN PVOID ParseObject,
-    IN PVOID ObjectType,
-    IN OUT PACCESS_STATE AccessState,
-    IN KPROCESSOR_MODE AccessMode,
-    IN ULONG Attributes,
-    IN OUT PUNICODE_STRING CompleteName,
-    IN OUT PUNICODE_STRING RemainingName,
-    IN OUT PVOID Context OPTIONAL,
-    IN PSECURITY_QUALITY_OF_SERVICE SecurityQos OPTIONAL,
-    OUT PVOID *Object);
+     PKWIN32_PARSEMETHOD_PARAMETERS pParseParams );
+
+NTSTATUS OkayToCloseWindowStation(
+     PKWIN32_OKAYTOCLOSEMETHOD_PARAMETERS pOkCloseParams);
+
+NTSTATUS WindowStationOpenProcedure(
+     PKWIN32_OPENMETHOD_PARAMETERS pOpenParams);
 
 /*
  * Object manager callouts for desktops
  */
-VOID MapDesktop(
-    IN OB_OPEN_REASON OpenReason,
-    IN PEPROCESS Process OPTIONAL,
-    IN PVOID Object,
-    IN ACCESS_MASK GrantedAccess,
-    IN ULONG HandleCount);
-VOID UnmapDesktop(
-    IN PEPROCESS Process OPTIONAL,
-    IN PVOID Object,
-    IN ACCESS_MASK GrantedAccess,
-    IN ULONG ProcessHandleCount,
-    IN ULONG SystemHandleCount);
-#line 3441
-VOID FreeDesktop(
-    IN PVOID Desktop);
-#line 3443
+NTSTATUS DesktopOpenProcedure(
+    PKWIN32_OPENMETHOD_PARAMETERS pOpenParams);
+
+NTSTATUS MapDesktop(
+     PKWIN32_OPENMETHOD_PARAMETERS pOpenParams );
+
+NTSTATUS UnmapDesktop(
+     PKWIN32_CLOSEMETHOD_PARAMETERS pCloseParams );
+
+NTSTATUS FreeDesktop(
+    PKWIN32_DELETEMETHOD_PARAMETERS pDeleteParams );
+
 NTSTATUS ParseDesktop(
     IN PVOID ParseObject,
     IN PVOID ObjectType,
@@ -3468,7 +4587,9 @@ NTSTATUS ParseDesktop(
     IN OUT PVOID Context OPTIONAL,
     IN PSECURITY_QUALITY_OF_SERVICE SecurityQos OPTIONAL,
     OUT PVOID *Object);
-#line 3454
+
+NTSTATUS OkayToCloseDesktop(
+    PKWIN32_OKAYTOCLOSEMETHOD_PARAMETERS pOkCloseParams);
 
 /*
  * Routines pilfered from kernel32
@@ -3480,46 +4601,43 @@ ATOM UserAddAtom(LPCWSTR lpAtom, BOOL bPin);
 ATOM UserFindAtom(LPCWSTR lpAtom);
 ATOM UserDeleteAtom(ATOM atom);
 UINT UserGetAtomName(ATOM atom, LPWSTR lpch, int cchMax);
-int UserMulDiv(int nNumber, int nNumerator, int nDenominator);
-
-#line 3467
-#undef AddAtomW
-#define AddAtomW(a) UserAddAtom((a), FALSE)
-#undef FindAtomW
-#define FindAtomW UserFindAtom
-#undef DeleteAtom
-#define DeleteAtom UserDeleteAtom
-#undef GetAtomNameW
-#define GetAtomNameW UserGetAtomName
 
 #define FindClassAtom(lpszClassName) \
-    ((HIWORD(lpszClassName) != 0) ? FindAtomW(lpszClassName) : LOWORD(lpszClassName))
-#line 3478
+    (IS_PTR(lpszClassName) ? UserFindAtom(lpszClassName) : PTR_TO_ID(lpszClassName))
 
 /*
  * Keyboard Layouts
  */
-HKL  xxxLoadKeyboardLayoutEx(PWINDOWSTATION, HANDLE, HKL, UINT, LPCWSTR, UINT, UINT);
-HKL  xxxActivateKeyboardLayout(PWINDOWSTATION pwinsta, HKL hkl, UINT Flags);
-HKL  xxxInternalActivateKeyboardLayout(PKL, UINT);
+void SetGlobalKeyboardTableInfo(PKL pklNew);
+VOID ChangeForegroundKeyboardTable(PKL pklOld, PKL pklNew);
+HKL  xxxLoadKeyboardLayoutEx(PWINDOWSTATION, HANDLE, HKL, UINT,
+                             PKBDTABLE_MULTI_INTERNAL,
+                             LPCWSTR, UINT, UINT);
+HKL  xxxActivateKeyboardLayout(PWINDOWSTATION pwinsta, HKL hkl, UINT Flags, PWND pwnd);
+HKL  xxxInternalActivateKeyboardLayout(PKL pkl, UINT Flags, PWND pwnd);
+BOOL GetKbdLangSwitch(PUNICODE_STRING pProfileUserName);
+
 BOOL xxxUnloadKeyboardLayout(PWINDOWSTATION, HKL);
 VOID RemoveKeyboardLayoutFile(PKBDFILE pkf);
-#line 3487
 HKL  _GetKeyboardLayout(DWORD idThread);
-#line 3488
 UINT _GetKeyboardLayoutList(PWINDOWSTATION pwinsta, UINT nItems, HKL *lpBuff);
-#line 3489
-BOOL _GetKeyboardLayoutName(PUNICODE_STRING);
-#line 3490
-VOID xxxFreeKeyboardLayouts(PWINDOWSTATION);
-#line 3491
-BOOL GetKbdLangSwitch(VOID);
+VOID xxxFreeKeyboardLayouts(PWINDOWSTATION, BOOL bUnlock);
 
-#line 3493
 DWORD xxxDragObject(PWND pwndParent, PWND xhwndFrom, UINT wFmt,
-        DWORD dwData, PCURSOR xpcur);
+        ULONG_PTR dwData, PCURSOR xpcur);
 BOOL xxxDragDetect(PWND pwnd, POINT pt);
 BOOL xxxIsDragging(PWND pwnd, POINT ptScreen, UINT uMsg);
+
+HKL GetActiveHKL();
+
+#define DMI_INVERT         0x00000001
+#define DMI_GRAYED         0x00000002
+
+VOID xxxDrawMenuItem(HDC hdc, PMENU pMenu, PITEM pItem, DWORD dwFlags);
+BOOL xxxRealDrawMenuItem(HDC hdc, PGRAYMENU lpGray, int cx, int cy);
+VOID xxxDrawMenuBarUnderlines(PWND pwnd, BOOL fShow);
+UINT MNItemHitTest(PMENU pMenu, PWND pwnd, POINT pt);
+
 
 /*
  * Menu macros
@@ -3532,100 +4650,210 @@ __inline BOOL ExitMenuLoop (PMENUSTATE pMenuState, PPOPUPMENU ppopupmenu)
 {
     return  (!pMenuState->fInsideMenuLoop || ppopupmenu->fDestroyed);
 }
-#line 3509
-__inline PMENUSTATE GetpMenuState (PWND pwnd)
+#line 5386
+__inline PITEM MNGetToppItem(PMENU pMenu)
 {
-    return (GETPTI(pwnd)->pMenuState);
+    return pMenu->rgItems + pMenu->iTop;
 }
-__inline PPOPUPMENU GetpGlobalPopupMenu (PWND pwnd)
+__inline BOOL MNIsItemSelected(PPOPUPMENU ppopupmenu)
 {
-    return (GetpMenuState(pwnd) ? GetpMenuState(pwnd)->pGlobalPopupMenu : NULL);
+    return ((int)ppopupmenu->posSelectedItem >= 0);
 }
-#line 3525
-__inline BOOL IsSomeOneInMenuMode (void)
+__inline PITEM MNGetSelectedpitem(PPOPUPMENU ppopupmenu)
 {
-    extern UINT  guMenuStateCount;
-    return (guMenuStateCount != 0);
+    return ppopupmenu->spmenu->rgItems + ppopupmenu->posSelectedItem;
 }
+__inline BOOL MNIsScrollArrowSelected(PPOPUPMENU ppopupmenu)
+{
+    return ((ppopupmenu->posSelectedItem == MFMWFP_UPARROW)
+            || (ppopupmenu->posSelectedItem == MFMWFP_DOWNARROW));
+#line 5409
+}
+__inline BOOL IsRecursedMenuState(PMENUSTATE pMenuState, PPOPUPMENU ppopupmenu)
+{
+    return (pMenuState->pGlobalPopupMenu != ppopupmenu->ppopupmenuRoot);
+}
+
+__inline BOOL IsMDIItem (PITEM pitem)
+{
+   return (TestMFS(pitem, MFS_CACHEDBMP)
+      && (pitem->hbmp != NULL)
+      && (pitem->hbmp <= HBMMENU_MBARLAST));
+}
+
+/*
+ * This definition for CM_MODE_TRANSITION must match the one in ntcon\inc\server.h
+ */
+
+#define CM_MODE_TRANSITION       (WM_USER+6)
+
+#define MNXBORDER (SYSMET(CXBORDER) + SYSMET(CXEDGE))
+#define MNYBORDER (SYSMET(CYBORDER) + SYSMET(CYEDGE))
+#define MNXSPACE  (SYSMET(CXEDGE))
+#define MNLEFTMARGIN (SYSMET(CXEDGE))
+
+/*
+ * xxxMNUpdateShownMenu flags
+ */
+#define MNUS_DEFAULT      0x00000001
+#define MNUS_DELETE       0x00000002
+#define MNUS_DRAWFRAME    0x00000004
+
+/* This tells xxxMNItemSize that the bitamp size is not avilable */
+#define MNIS_MEASUREBMP -1
+
+
+/*
+ * MN_SIZEWINDOW wParam flag. xxxMNUpdateShownMenu sends this
+ *  message, so keep MNSW_ and MNUS_ in sync.
+ */
+#define MNSW_RETURNSIZE  0
+#define MNSW_SIZE        MNUS_DEFAULT
+#define MNSW_DRAWFRAME   MNUS_DRAWFRAME
+
+/*
+ * Animation flags (pMenuState->iAniDropDir)
+ */
+#define PAS_RIGHT       (TPM_HORPOSANIMATION >> TPM_FIRSTANIBITPOS)
+#define PAS_LEFT        (TPM_HORNEGANIMATION >> TPM_FIRSTANIBITPOS)
+#define PAS_DOWN        (TPM_VERPOSANIMATION >> TPM_FIRSTANIBITPOS)
+#define PAS_UP          (TPM_VERNEGANIMATION >> TPM_FIRSTANIBITPOS)
+#define PAS_OUT         0x10
+#define PAS_HORZ        (PAS_LEFT | PAS_RIGHT)
+#define PAS_VERT        (PAS_UP | PAS_DOWN)
+
+#if (PAS_HORZ + PAS_VERT >= PAS_OUT)
+#error PAS_ & TPM_*ANIMATION conflict.
+#endif
+
+#define CXMENU3DEDGE 1
+#define CYMENU3DEDGE 1
+
+/*
+ * Scrollbar initialization types
+ */
+#define SCROLL_NORMAL   0
+#define SCROLL_DIRECT   1
+#define SCROLL_MENU     2
 
 /*
  * movesize.c
  */
-#line 3534
 void xxxDrawDragRect(PMOVESIZEDATA pmsd, LPRECT lprc, UINT flags);
-#line 3546
+void GetMonitorMaxArea(PWND pwnd, PMONITOR pMonitor, LPRECT * pprc);
 
-#line 3536
 /*
  * focusact.c
  */
+VOID SetForegroundPriorityProcess(PPROCESSINFO ppi, PTHREADINFO pti, BOOL fSetForegound);
 VOID SetForegroundPriority(PTHREADINFO pti, BOOL fSetForeground);
+void xxxUpdateTray(PWND pwnd);
+
+
+//
+// mnchange.c
+//
+void xxxMNUpdateShownMenu(PPOPUPMENU ppopup, PITEM pItem, UINT uFlags);
 
 //
 // mnkey.c
 //
-UINT MNFindChar(PMENU pMenu, UINT ch, INT idxC, INT *lpr);
+UINT xxxMNFindChar(PMENU pMenu, UINT ch, INT idxC, INT *lpr);
 UINT MNFindItemInColumn(PMENU pMenu, UINT idxB, int dir, BOOL fRoot);
 
-#line 3547
-#ifdef MEMPHIS_MENU_ANIMATION
-#error
-#line 3553
-#endif // MEMPHIS_MENU_ANIMATION
+//
+// mndraw.c
+//
+void MNAnimate(PMENUSTATE pMenuState, BOOL fIterate);
+void MNDrawFullNC(PWND pwnd, HDC hdcIn, PPOPUPMENU ppopup);
+void MNDrawArrow(HDC hdcIn, PPOPUPMENU ppopup, UINT uArrow);
+void MNEraseBackground (HDC hdc, PMENU pmenu, int x, int y, int cx, int cy);
+void MNDrawEdge(PMENU pmenu, HDC hdc, RECT * prcDraw, UINT nFlags);
 
 
 //
 // mnstate.c
 //
-#line 3559
-PMENUSTATE MNAllocMenuState(PTHREADINFO ptiCurrent, PTHREADINFO ptiNotify, PPOPUPMENU ppopupmenuRoot);
-#line 3560
-void MNEndMenuState(BOOL fFreePopup);
-#line 3561
-void MNEndMenuStateNotify (PMENUSTATE pMenuState);
+PMENUSTATE xxxMNAllocMenuState(PTHREADINFO ptiCurrent, PTHREADINFO ptiNotify, PPOPUPMENU ppopupmenuRoot);
+void xxxMNEndMenuState(BOOL fFreePopup);
+BOOL MNEndMenuStateNotify (PMENUSTATE pMenuState);
 void MNFlushDestroyedPopups (PPOPUPMENU ppopupmenu, BOOL fUnlock);
-PMENUSTATE xxxMNStartMenuState(PWND pwnd);
-#line 3564
+BOOL MNSetupAnimationDC (PMENUSTATE pMenuState);
+BOOL MNCreateAnimationBitmap(PMENUSTATE pMenuState, UINT cx, UINT cy);
+void MNDestroyAnimationBitmap(PMENUSTATE pMenuState);
+PMENUSTATE xxxMNStartMenuState(PWND pwnd, DWORD cmd, LPARAM lParam);
+__inline VOID LockMenuState(
+    PMENUSTATE pMenuState)
+{
+    (pMenuState->dwLockCount)++;
+}
+BOOL xxxUnlockMenuState (PMENUSTATE pMenuState);
 
 //
 // menu.c
 //
-#ifdef DEBUG
-#error
-#else
-#define Validateppopupmenu(ppopupmenu)
-#endif
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+    #define Validateppopupmenu(ppopupmenu)
+#endif // DBG
 
-#line 3574
-LONG xxxMenuWindowProc(PWND, UINT, DWORD, LONG);
-VOID xxxMNButtonUp(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState, UINT posItemHit, LONG lParam);
+#if DBG
+#error Original configuration is not selected.
+#else // DBG
+#line 5543
+    #define MNGetpItemIndex _MNGetpItemIndex
+#endif // DBG
+
+__inline UINT _MNGetpItemIndex(
+    PMENU pmenu,
+    PITEM pitem)
+{
+    return (UINT)(((ULONG_PTR)pitem - (ULONG_PTR)pmenu->rgItems) / sizeof(ITEM));
+}
+
+VOID xxxMNDismiss(PMENUSTATE pMenuState);
+PITEM MNGetpItem(PPOPUPMENU ppopup, UINT uIndex);
+VOID xxxMNSetCapture(PPOPUPMENU ppopup);
+VOID xxxMNReleaseCapture(VOID);
+VOID MNCheckButtonDownState(PMENUSTATE pMenuState);
+PWND GetMenuStateWindow(PMENUSTATE pMenuState);
+PVOID LockPopupMenu(PPOPUPMENU ppopup, PMENU * pspmenu, PMENU pmenu);
+PVOID UnlockPopupMenu(PPOPUPMENU ppopup, PMENU * pspmenu);
+PVOID LockWndMenu(PWND pwnd, PMENU * pspmenu, PMENU pmenu);
+PVOID UnlockWndMenu(PWND pwnd, PMENU * pspmenu);
+UINT MNSetTimerToCloseHierarchy(PPOPUPMENU ppopup);
+BOOL xxxMNSetTop(PPOPUPMENU ppopup, int iNewTop);
+LRESULT xxxMenuWindowProc(PWND, UINT, WPARAM, LPARAM);
+VOID xxxMNButtonUp(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState, UINT posItemHit, LPARAM lParam);
 VOID xxxMNButtonDown(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState, UINT posItemHit, BOOL fClick);
 PITEM xxxMNSelectItem(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState, UINT itemPos);
 BOOL xxxMNSwitchToAlternateMenu(PPOPUPMENU ppopupMenu);
-VOID xxxMNCancel(PPOPUPMENU ppopupMenu, UINT cmd, BOOL fSend, LONG lParam);
+VOID xxxMNCancel(PMENUSTATE pMenuState, UINT uMsg, UINT cmd, LPARAM lParam);
 VOID xxxMNKeyDown(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState, UINT key);
-BOOL xxxMNDoubleClick(PPOPUPMENU ppopup, int idxItem);
+BOOL xxxMNDoubleClick(PMENUSTATE pMenuState, PPOPUPMENU ppopup, int idxItem);
 VOID xxxMNCloseHierarchy(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState);
 PWND xxxMNOpenHierarchy(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState);
-LONG xxxMNFindWindowFromPoint(PPOPUPMENU ppopupMenu, PUINT pIndex, POINTS screenPt);
+VOID LockMFMWFPWindow (PULONG_PTR puHitArea, ULONG_PTR uNewHitArea);
+VOID UnlockMFMWFPWindow (PULONG_PTR puHitArea);
+BOOL IsMFMWFPWindow (ULONG_PTR uHitArea);
+LONG_PTR xxxMNFindWindowFromPoint(PPOPUPMENU ppopupMenu, PUINT pIndex, POINTS screenPt);
 VOID xxxMNMouseMove(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState, POINTS screenPt);
 int xxxMNCompute(PMENU pMenu, PWND pwndNotify, DWORD yMenuTop,
         DWORD xMenuLeft,DWORD cxMax, LPDWORD lpdwHeight);
 VOID xxxMNRecomputeBarIfNeeded(PWND pwndNotify, PMENU pMenu);
-VOID xxxMenuDraw( HDC hdc, PMENU pMenu);
+VOID xxxMenuDraw(HDC hdc, PMENU pMenu);
 UINT  MNFindNextValidItem(PMENU pMenu, int i, int dir, UINT flags);
-BOOL xxxPositionPopupMenu(PWND pwndOwner, PMENU pPMenu, int xLeft, int yTop,
-    PWND pwndParent, PMENU pMenuParent);
-VOID xxxDestroySomePopupMenus(PWND pwndDestroy, PMENUSTATE pMenuState);
-VOID xxxDestroyPopupMenuChain(PWND pwndMenuPopup);
-VOID   xxxPopupMenuWndDestroyHandler(PWND pwnd);
 VOID MNFreeItem(PMENU pMenu, PITEM pItem, BOOL fFreeItemPopup);
-BOOL   xxxMNStartState(PPOPUPMENU ppopupMenu, int mn);
-VOID xxxNextItem(HWND hwndOwner, PMENUSTATE pMenuState, PMENU pSMenu, int idx,
-    BOOL fViaKeyboardSelection);
+BOOL   xxxMNStartMenu(PPOPUPMENU ppopupMenu, int mn);
 VOID MNPositionSysMenu(PWND pwnd, PMENU pSysMenu);
-PITEM xxxMNInvertItem(PWND pwnd, PMENU pMenu,int itemNumber,PWND pwndNotify, BOOL fOn);
-VOID   xxxSendMenuSelect(PWND pwnd, PMENU pMenu, int idx);
+
+PITEM xxxMNInvertItem(PPOPUPMENU ppopupmenu, PMENU pMenu,int itemNumber,PWND pwndNotify, BOOL fOn);
+
+VOID   xxxSendMenuSelect(PWND pwndNotify, PWND pwndMenu, PMENU pMenu, int idx);
+#define SMS_NOMENU      (PMENU)(-1)
+
+
 BOOL   xxxSetSystemMenu(PWND pwnd, PMENU pMenu);
 BOOL   xxxSetDialogSystemMenu(PWND pwnd);
 
@@ -3636,57 +4864,82 @@ VOID MNFreePopup(PPOPUPMENU ppopupmenu);
 /*
  * Menu entry points used by the rest of USER
  */
-VOID xxxMenuSDraw(PWND, HDC, DWORD, DWORD);
 VOID xxxMNKeyFilter(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState, UINT ch);
 int  xxxMenuBarCompute(PMENU pMenu, PWND pwndNotify, DWORD yMenuTop,
         DWORD xMenuLeft, int cxMax);
-PWND xxxGetMenuWnd(PWND pwnd);
 VOID xxxEndMenu(PMENUSTATE pMenuState);
-int  xxxMNLoop(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState, LONG lParam, BOOL fDblClk);
-VOID SetSysMenu(PWND pwnd);
-PMENU GetSysMenuHandle(PWND pwnd);
-PMENU GetSysMenu(PWND pwnd, BOOL fSubMenu);
-BOOL _MNCanClose(PWND pwnd);
+BOOL xxxCallHandleMenuMessages(PMENUSTATE pMenuState, PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam);
+BOOL xxxHandleMenuMessages(LPMSG lpmsg, PMENUSTATE pMenuState, PPOPUPMENU ppopupmenu);
+void xxxEndMenuLoop (PMENUSTATE pMenuState, PPOPUPMENU ppopupmenu);
+int  xxxMNLoop(PPOPUPMENU ppopupMenu, PMENUSTATE pMenuState, LPARAM lParam, BOOL fDblClk);
+VOID xxxSetSysMenu(PWND pwnd);
+PMENU xxxGetSysMenuHandle(PWND pwnd);
+PMENU xxxGetSysMenu(PWND pwnd, BOOL fSubMenu);
+PMENU MakeMenuRtoL(PMENU pMenu, BOOL bRtoL);
+HDC CreateCompatiblePublicDC(HDC hdc, HBITMAP *pbmDCGray);
+void xxxPSMTextOut(HDC hdc, int xLeft, int yTop, LPWSTR lpsz, int cch, DWORD dwFlags);
+BOOL xxxPSMGetTextExtent(HDC hdc, LPWSTR lpstr, int cch, PSIZE psize);
+
+/*
+ * LPK callbacks
+ */
+void xxxClientPSMTextOut(HDC hdc, int xLeft, int yTop, PUNICODE_STRING lpsz, int cch, DWORD dwFlags);
+int  xxxClientLpkDrawTextEx(HDC hdc, int xLeft, int yTop, LPCWSTR lpsz, int nCount,
+        BOOL fDraw, UINT wFormat, LPDRAWTEXTDATA lpDrawInfo, UINT bAction, int iCharSet);
+BOOL xxxClientExtTextOutW(HDC hdc, int x, int y, int flOpts, RECT *prcl,
+        LPCWSTR pwsz, UINT cwc, INT *pdx);
+BOOL xxxClientGetTextExtentPointW(HDC hdc, LPCWSTR lpstr, int cch, PSIZE psize);
+
+/*
+ * Menu Drag and Drop
+ */
+NTSTATUS xxxClientRegisterDragDrop (HWND hwnd);
+NTSTATUS xxxClientRevokeDragDrop (HWND hwnd);
+NTSTATUS xxxClientLoadOLE(VOID);
+void xxxMNSetGapState (ULONG_PTR uHitArea, UINT uIndex, UINT uFlags, BOOL fSet);
+BOOL xxxMNDragOver(POINT * ppt, PMNDRAGOVERINFO pmndoi);
+BOOL xxxMNDragLeave(VOID);
+void xxxMNUpdateDraggingInfo (PMENUSTATE pMenuState, ULONG_PTR uHitArea, UINT uIndex);
 
 /*
  * Scroll bar entry points
  */
-VOID xxxSBTrackInit(PWND pwnd, LONG lParam, int curArea);
+VOID xxxSBTrackInit(PWND pwnd, LPARAM lParam, int curArea, UINT uType);
+VOID SBCtlSetup(PSBWND psbwnd);
+void CalcSBStuff(PWND pwnd, PSBCALC pSBCalc, BOOL fVert);
+void CalcSBStuff2(PSBCALC  pSBCalc, LPRECT lprc, CONST PSBDATA pw, BOOL fVert);
 BOOL xxxEnableScrollBar(PWND pwnd, UINT wSBflags, UINT wArrows);
 void DrawSize(PWND pwnd, HDC hdc, int cxFrame, int cyFrame);
 int xxxScrollWindowEx(PWND pwnd, int dx, int dy, LPRECT prcScroll,
-     LPRECT prcClip, HRGN hrgnUpdate, LPRECT prcUpdate, DWORD flags);
+        LPRECT prcClip, HRGN hrgnUpdate, LPRECT prcUpdate, DWORD flags);
+void xxxDoScrollMenu(PWND pwndNotify, PWND pwndSB, BOOL fVert, LPARAM lParam);
 
 /*
  * ICONS.C
  */
-BOOL xxxInternalEnumWindow(PWND pwndNext, WNDENUMPROC_PWND lpfn, LONG lParam, UINT fEnumChildren);
-VOID ISV_InitMinMaxInfo(PWND pwnd);
-VOID ISV_ValidateMinMaxInfo(PWND pwnd);
+BOOL xxxInternalEnumWindow(PWND pwndNext, WNDENUMPROC_PWND lpfn, LPARAM lParam, UINT fEnumChildren);
+VOID ISV_InitMinMaxInfo(PWND pwnd, PPOINT aptMinMaxWnd);
+VOID ISV_ValidateMinMaxInfo(PWND pwnd, PPOINT aptMinMaxWnd);
 /*
  * GETSET.C
  */
 WORD  _SetWindowWord(PWND pwnd, int index, WORD value);
 DWORD xxxSetWindowLong(PWND pwnd, int index, DWORD value, BOOL bAnsi);
-DWORD xxxSetWindowData(PWND pwnd, int index, DWORD dwData, BOOL bAnsi);
+ULONG_PTR xxxSetWindowData(PWND pwnd, int index, ULONG_PTR dwData, BOOL bAnsi);
 LONG  xxxSetWindowStyle(PWND pwnd, int gwl, DWORD styleNew);
-#line 3647
+BOOL FCallerOk(PWND pwnd);
 
 int IntersectVisRect(HDC, int, int, int, int);  // Imported from GDI
-#line 3649
 PCURSOR xxxGetWindowSmIcon(PWND pwnd, BOOL fDontSendMsg);
 VOID xxxDrawCaptionBar(PWND pwnd, HDC hdc, UINT fFlags);
 VOID xxxDrawScrollBar(PWND pwnd, HDC hdc, BOOL fVert);
-DWORD GetAppCompatFlags(PTHREADINFO pti);
-VOID xxxTrackBox(PWND, UINT, DWORD, LONG, PSBCALC);
-VOID xxxTrackThumb(PWND, UINT, DWORD, LONG, PSBCALC);
+VOID xxxTrackBox(PWND, UINT, WPARAM, LPARAM, PSBCALC);
+VOID xxxTrackThumb(PWND, UINT, WPARAM, LPARAM, PSBCALC);
 VOID xxxEndScroll(PWND pwnd, BOOL fCancel);
-VOID xxxDrawWindowFrame(PWND pwnd, HDC hdc,
-        BOOL fHungRedraw, BOOL fActive);
-BOOL InternalPaintDesktop(PDESKWND pdeskwnd, HDC hdc, BOOL fPaint);
-VOID xxxSysCommand(PWND pwnd, DWORD cmd, LONG lParam);
-VOID xxxHandleNCMouseGuys(PWND pwnd, UINT message, int htArea, LONG lParam);
-VOID InternalEndPaint(PWND pwnd, LPPAINTSTRUCT lps, BOOL flag);
+VOID xxxDrawWindowFrame(PWND pwnd, HDC hdc, UINT wFlags);
+BOOL xxxInternalPaintDesktop(PWND pwnd, HDC hdc, BOOL fPaint);
+VOID xxxSysCommand(PWND pwnd, DWORD cmd, LPARAM lParam);
+VOID xxxHandleNCMouseGuys(PWND pwnd, UINT message, int htArea, LPARAM lParam);
 void xxxCreateClassSmIcon(PCLS pcls);
 HICON xxxCreateWindowSmIcon(PWND pwnd, HICON hIconBig, BOOL fCopyFromRes);
 BOOL DestroyWindowSmIcon(PWND pwnd);
@@ -3694,128 +4947,56 @@ BOOL DestroyClassSmIcon(PCLS pcls);
 UINT DWP_GetHotKey(PWND);
 UINT DWP_SetHotKey(PWND, DWORD);
 PWND HotKeyToWindow(DWORD);
-#line 3669
+
+VOID xxxDWP_DoNCActivate(PWND pwnd, DWORD dwFlags, HRGN hrgnClip);
+#define NCA_ACTIVE          0x00000001
+#define NCA_FORCEFRAMEOFF   0x00000002
+
 VOID xxxDWP_ProcessVirtKey(UINT key);
-#line 3670
-BOOL xxxDWP_EraseBkgnd(PWND pwnd, UINT msg, HDC hdc, BOOL fHungRedraw);
-VOID SetTiledRect(PWND pwnd, LPRECT lprc);
-VOID CheckByteAlign(PWND pwnd, LPRECT lprc, BOOL fInSize);
-BOOL CW_AttachDC(PWND pwnd);
-VOID LinkWindow(PWND pwnd, PWND pwndInsert, PWND *ppwndFirst);
-VOID UnlinkWindow(PWND pwndUnlink, PWND *ppwndFirst);
+BOOL xxxDWP_EraseBkgnd(PWND pwnd, UINT msg, HDC hdc);
+VOID SetTiledRect(PWND pwnd, LPRECT lprc, PMONITOR pMonitor);
+VOID LinkWindow(PWND pwnd, PWND pwndInsert, PWND pwndParent);
+VOID UnlinkWindow(PWND pwndUnlink, PWND pwndParent);
 VOID xxxDW_DestroyOwnedWindows(PWND pwndParent);
 VOID xxxDW_SendDestroyMessages(PWND pwnd);
 VOID xxxFreeWindow(PWND pwnd, PTL ptlpwndFree);
 VOID xxxFW_DestroyAllChildren(PWND pwnd);
-#line 3680
-VOID ToggleCursor(VOID);
-#line 3681
-PDCE CD_DCSearch(PWND pwnd, BYTE type);
-PDCE UT_GetPreviousDCE(PDCE pdceSearch);
+
 PHOTKEY FindHotKey(PTHREADINFO pti, PWND pwnd, int id, UINT fsModifiers, UINT vk,
         BOOL fUnregister, PBOOL pfKeysExist);
-PMENU _LoadCreateMenu(HANDLE, LPWSTR, LPMENUTEMPLATE, BOOL);
-NTSTATUS _BuildPropList(PWND pwnd, PROPSET aPropSet[],
-        UINT cPropMax, PUINT pcPropReturned);
-NTSTATUS _BuildNameList(PWINDOWSTATION pwinsta,
-        PNAMELIST pNameList, UINT cbNameList, PUINT pcbNeeded);
-VOID xxxUT_FrameChildList(PWND pwnd, PWND pwndSkip, HRGN hrgn, BOOL fSWP);
+
+NTSTATUS _BuildNameList(
+        PWINDOWSTATION pwinsta,
+        PNAMELIST pNameList,
+        UINT cbNameList,
+        PUINT pcbNeeded);
+
+VOID xxxHelpLoop(PWND pwnd);
+
+NTSTATUS _BuildPropList(PWND pwnd, PROPSET aPropSet[], UINT cPropMax, PUINT pcPropReturned);
 BOOL xxxSendEraseBkgnd(PWND pwnd, HDC hdcBeginPaint, HRGN hrgnUpdate);
 LONG xxxSetScrollBar(PWND pwnd, int code, LPSCROLLINFO lpsi, BOOL fRedraw);
-PWND GetInsertAfter(PWND pwndTop, PWND pwndAfter);
-VOID xxxCompUpdateRect(PWND pwnd, LPRECT lprc, BOOL fErase, DWORD fl);
-VOID CompUpdateRgn(PWND pwnd, HRGN hrgn, BOOL fErase, DWORD fl);
-VOID xxxScreenUpdateRect(PWND pwnd, LPRECT lprc, PWND pwndSkip, BOOL fErase, UINT cmd);
-VOID xxxEraseAndFrameChildren(PWND pwnd, PWND pwndSkip, BOOL fSWP, BOOL fDeleteUpdate);
 VOID IncPaintCount(PWND pwnd);
 VOID DecPaintCount(PWND pwnd);
-HRGN EFC_CopyUpdateRgn(PWND pwnd, PUINT lpflags, BOOL fSWP);
-VOID xxxUW_ValidateParent(PWND pwnd);
-BOOL RV_ExcludeWindowList(PWND pwndClip, RECT *prc, HRGN hrgn, PWND pwndStart,
-        PWND pwndStop);
 PPROP CreateProp(PWND pwnd);
-VOID xxxHelpLoop(PWND pwnd);
 
 /*
  * METRICS.C
  */
 VOID xxxRecreateSmallIcons(PWND pwnd);
-#line 3711
-
-#ifndef MSDWP
-
-//VOID  LFillStruct();
-
-/* Suppport routines for seperate segment stuff. */
-#line 3717
-unsigned int umin(UINT, UINT);
-unsigned int umax(UINT, UINT);
-#line 3719
-HDC    GetClientDc();
-
-#line 3721
-BOOL   ActivateWindow(PWND, UINT);
-
-BOOL  CheckHwndFilter(PWND, PWND);
 
 VOID   TransferWakeBit(PTHREADINFO pti, UINT message);
-#line 3726
-VOID   InitSysQueue(void);
-VOID   DeleteQueue(void);
-VOID   SuspendTask(void);
-VOID   ReleaseTask(void);
-
 BOOL   SysHasKanji(VOID);
+LONG   xxxBroadcastMessage(PWND, UINT, WPARAM, LPARAM, UINT, PBROADCASTMSG );
 
-VOID   SetDivZero(VOID);
+VOID   zzzSetFMouseMoved();
 
-#line 3735
-LONG   xxxBroadcastMessage(PWND, UINT, DWORD, LONG, UINT, PBROADCASTMSG );
-#line 3736
+VOID   TimersProc(VOID);
 
-int    StripPrefix(LPWSTR, LPWSTR);
-
-VOID   OEMSetCursor(LPWSTR);
-VOID   SetFMouseMoved(VOID);
-#line 3741
 VOID   PostMove(PQ pq);
-BOOL   AttachDC(PWND);
-#line 3743
-BOOL   LastApplication(VOID);
-VOID   FlushSentMessages(VOID);
-#line 3745
-VOID   CheckCursor(PWND);
 VOID   DestroyWindowsTimers(PWND pwnd);
-#line 3747
 
-int    EnableKeyboard(FARPROC, LPWSTR);
-int    InquireKeyboard(LPWSTR);
-VOID   DisableKeyboard(VOID);
-int    EnableMouse(FARPROC);
-int    InquireMouse(LPWSTR);
-VOID   DisableMouse(VOID);
-int    InquireCursor(LPWSTR);
-VOID   StartTimers(VOID);
-VOID   EnableSystemTimers(VOID);
-VOID   DisableSystemTimers(VOID);
-DWORD  CreateSystemTimer(DWORD, FARPROC);
-VOID   DestroySystemTimer(int);
-
-#ifdef DISABLE
-#error
-#line 3764
-#endif
-
-VOID DestroyAllWindows(VOID);
-
-#line 3768
-VOID ScreenToWindow(PWND, LPPOINT);
-
-BOOL LockWindowVerChk(PWND);
-#line 3771
-VOID LockPaints(BOOL);
-
-#endif  /* MSDWP */
+UINT_PTR StartTimers(VOID);
 
 /*==========================================================================*/
 /*                                                                          */
@@ -3823,175 +5004,216 @@ VOID LockPaints(BOOL);
 /*                                                                          */
 /*==========================================================================*/
 
-#ifndef MSDWP
+LRESULT xxxTooltipWndProc(PWND, UINT, WPARAM, LPARAM);
+LRESULT xxxSwitchWndProc(PWND, UINT, WPARAM, LPARAM);
+LRESULT xxxDesktopWndProc(PWND, UINT, WPARAM, LPARAM);
 
-#line 3783
-LONG xxxSwitchWndProc(PWND, UINT, DWORD, LONG);
-LONG xxxDesktopWndProc(PWND, UINT, DWORD, LONG);
-LONG xxxSitWndProc(PWND, UINT, DWORD, LONG);
-LONG xxxSBWndProc(PSBWND, UINT, DWORD, LONG);
+LRESULT xxxSBWndProc(PSBWND, UINT, WPARAM, LPARAM);
 
-VOID   DrawSB2(PWND, HDC, BOOL, UINT);
 VOID   DrawThumb2(PWND, PSBCALC, HDC, HBRUSH, BOOL, UINT);
 UINT   GetWndSBDisableFlags(PWND, BOOL);
-#line 3791
 
+HANDLE _ConvertMemHandle(LPBYTE lpData, UINT cbData);
 
+VOID zzzRegisterSystemThread (DWORD flags, DWORD reserved);
 
-#ifdef LATER    // Hopefully we won't need these
-#error
-#line 3802
-#endif
+VOID zzzUpdateCursorImage();
+#line 5760
+BOOL FinalUserInit();
+BOOL LW_RegisterWindows(BOOL fSystem);
 
-#define _RegisterWindowMessage(a)  (UINT)AddAtomW(a)
+BOOL xxxSystemParametersInfo(UINT wFlag, DWORD wParam, LPVOID lParam, UINT flags);
 
-HANDLE _ConvertMemHandle(LPBYTE lpData, int cbData);
-
-VOID _RegisterSystemThread (DWORD flags, DWORD reserved);
-
-#line 3810
-VOID FrameMenuItem(HDC hDC, LPRECT lpRect, PMENU pMenu, PITEM pItem, PWND pwnd);
-#line 3811
-VOID UpdateCursorImage(VOID);
-#line 3813
-VOID FreeCopyHandle(CLIP *pClip);
-#line 3814
-VOID DestroyClipBoardData(VOID);
-BOOL SendClipboardMessage(int message);
-#line 3816
-BOOL CheckClipboardAccess(PWINDOWSTATION *ppwinsta);
+PWINDOWSTATION CheckClipboardAccess(void);
 PCLIP FindClipFormat(PWINDOWSTATION pwinsta, UINT format);
-BOOL IsDummyTextHandle(PCLIP pClip);
 BOOL InternalSetClipboardData(PWINDOWSTATION pwinsta, UINT format,
         HANDLE hData, BOOL fGlobalHandle, BOOL fIncSerialNumber);
-#line 3821
-VOID DisownClipboard(VOID);
+VOID DisownClipboard(PWND pwndClipOwner);
 
-HCURSOR CISetCurs(HCURSOR hNewCursor, HCURSOR hDefCursor);
-#line 3824
-LONG CaretBlinkProc(PWND pwnd, UINT message, DWORD id, LONG lParam);
-PDCE CalcDCE(PWND pwnd, BYTE type, BOOL fGetDC);
-HDC  GetFrameDC(PWND pwnd, BYTE type, HRGN hrgnClip, DWORD *lpState);
+VOID CaretBlinkProc(PWND pwnd, UINT message, UINT_PTR id, LPARAM lParam);
 VOID xxxRedrawFrame(PWND pwnd);
 VOID xxxRedrawFrameAndHook(PWND pwnd);
-#line 3829
-VOID BltColor(HDC, HBRUSH, HDC, int, int, int, int, int, int, BOOL);
-#line 3830
-VOID EnableInput(VOID);
-VOID DisableInput(VOID);
-VOID CopyKeyState(VOID);
-VOID EnableOEMLayer(VOID);
-VOID DisableOEMLayer(VOID);
-VOID ColorInit(VOID);
-VOID xxxFinalUserInit(VOID);
-#line 3837
-VOID SetRedraw(PWND pwnd, BOOL fRedraw);
-VOID StoreMessage(LPMSG pmsg, PWND pwnd, UINT message, DWORD wParam,
-        LONG lParam, DWORD time);
-VOID StoreQMessage(PQMSG pqmsg, PWND pwnd, UINT message, DWORD wParam,
-        LONG lParam, DWORD flags, DWORD dwExtraInfo);
-VOID ChangeToCurrentTask(PWND pwnd1, PWND pwnd2);
-VOID xxxSendMoveMessage(PWND pwnd, BOOL fList);
-VOID xxxSendSizeMessage(PWND pwnd, UINT cmdSize);
-#line 3845
+VOID BltColor(HDC, HBRUSH, HDC, int, int, int, int, int, int, UINT);
+VOID StoreMessage(LPMSG pmsg, PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, DWORD time);
+VOID StoreQMessage(PQMSG pqmsg, PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, DWORD time, DWORD dwQEvent, ULONG_PTR dwExtraInfo);
 
-VOID DisableVKD(BOOL fDisable);
-#line 3847
+#ifdef REDIRECTION
+#error Original configuration is not selected.
+#else
+#line 5795
+__inline VOID StoreQMessagePti(
+    PQMSG pqmsg,
+    PTHREADINFO pti)
+{
+    pqmsg->pti = pti;
+}
+#endif // REDIRECTION
+
+VOID xxxSendSizeMessage(PWND pwnd, UINT cmdSize);
+
 VOID xxxCheckFocus(PWND pwnd);
 VOID OffsetChildren(PWND pwnd, int dx, int dy, LPRECT prcHitTest);
-VOID InternalGetClientRect(PWND pwnd, LPRECT lprc);
 
-VOID CancelMode(PWND pwnd);
-VOID xxxDisplayIconicWindow(PWND pwnd, BOOL fActivate, BOOL fShow);
-BOOL SendZoom(PWND pwnd, LONG lParam);
-#line 3854
-VOID xxxRepaintScreen(VOID);
-HANDLE BcastCopyString(LONG lParam);
-#line 3856
-BOOL SignalProc(HANDLE hTask, UINT message, DWORD wParam, LONG lParam);
-
-#line 3858
 VOID xxxMoveSize(PWND pwnd, UINT cmdMove, DWORD wptStart);
-BYTE SetClrWindowFlag(PWND pwnd, UINT style, BYTE cmd);
-BOOL LockScreen(PWND pwndDesktop, BOOL fLock, LPRECT lprcDirty);
-VOID xxxShowOwnedWindows(PWND pwndOwner, UINT cmdShow);
+VOID xxxShowOwnedWindows(PWND pwndOwner, UINT cmdShow, HRGN hrgnHung);
 VOID xxxAdjustSize(PWND pwnd, LPINT lpcx, LPINT lpcy);
 
 VOID xxxNextWindow(PQ pq, DWORD wParam);
-#line 3865
 VOID xxxOldNextWindow(UINT flags);
-#line 3866
-VOID xxxCancelCoolSwitch(PQ pq);
-#line 3867
+VOID xxxCancelCoolSwitch(void);
 
-VOID PurgeClass(HANDLE hModule);
-#line 3869
-VOID DestroyTaskWindows(HQ hq);
-#line 3870
 VOID xxxCancelTracking(VOID);
-#line 3871
 VOID xxxCancelTrackingForThread(PTHREADINFO ptiCancel);
-VOID xxxButtonDrawText(HDC hdc, PWND pwnd, BOOL dbt, BOOL fDepress);
 VOID xxxCapture(PTHREADINFO pti, PWND pwnd, UINT code);
-#line 3874
-int  SystoChar(UINT message, DWORD lParam);
+UINT SystoChar(UINT message, LPARAM lParam);
 
-HANDLE SrvLoadLibrary(LPWSTR pszLibName);
-BOOL   SrvFreeLibrary(LPWSTR pszLibName);
-
-#line 3879
-PHOOK PhkFirst(PTHREADINFO pti, int nFilterType);
+PHOOK PhkFirstValid(PTHREADINFO pti, int nFilterType);
+PHOOK PhkFirstGlobalValid(PTHREADINFO pti, int nFilterType);
 VOID  FreeHook(PHOOK phk);
-#line 3882
-int   xxxCallHook2(PHOOK, int, DWORD, DWORD, LPBOOL);
-#line 3883
-BOOL  xxxCallMouseHook(UINT message, PMOUSEHOOKSTRUCT pmhs, BOOL fRemove);
-#line 3884
+
+LRESULT xxxCallHook2(PHOOK, int, WPARAM, LPARAM, LPBOOL);
+BOOL  xxxCallMouseHook(UINT message, PMOUSEHOOKSTRUCTEX pmhs, BOOL fRemove);
 VOID  xxxCallJournalRecordHook(PQMSG pqmsg);
 DWORD xxxCallJournalPlaybackHook(PQMSG pqmsg);
-#line 3886
 VOID  SetJournalTimer(DWORD dt, UINT msgJournal);
 VOID  FreeThreadsWindowHooks(VOID);
 
-
-VOID NewDrawDragRect(LPRECT lprc);   /* WinMgr2.c */
-VOID   LW_ReloadLangDriver(LPWSTR);
-BOOL LW_DesktopIconInit(LPLOGFONT);
-#line 3893
-VOID LW_RegisterWindows(BOOL fSystem);
-
-#line 3895
-int  SysErrorBox(LPWSTR lpszText, LPWSTR lpszCaption, unsigned int btn1, unsigned int btn2, unsigned int btn3);
-#line 3896
 BOOL xxxSnapWindow(PWND pwnd);
-#line 3897
 
-#endif  /*  MSDWP  */
-
-#line 3900
 BOOL    DefSetText(PWND pwnd, PLARGE_STRING pstrText);
 PWND    DSW_GetTopLevelCreatorWindow(PWND pwnd);
 VOID    xxxCalcClientRect(PWND pwnd, LPRECT lprc, BOOL fHungRedraw);
 VOID    xxxUpdateClientRect(PWND pwnd);
-#line 3904
-VOID    ReleaseFrameDC(DWORD *lpDceState);
 
-LPWSTR  DesktopTextAlloc(PVOID hheapDesktop, LPCWSTR lpszSrc);
 BOOL   AllocateUnicodeString(PUNICODE_STRING pstrDst, PUNICODE_STRING pstrSrc);
 
-HANDLE CreateDesktopHeap(PVOID *ppvHeapBase, ULONG ulHeapSize);
+HANDLE CreateDesktopHeap(PWIN32HEAP* ppheapRet, ULONG ulHeapSize);
 
-#line 3911
-CHECKPOINT *GetCheckpoint(PWND pwnd);
-UINT _GetInternalWindowPos(PWND pwnd, LPRECT lprcWin, LPPOINT lpptMin);
 BOOL xxxSetInternalWindowPos(PWND pwnd, UINT cmdShow, LPRECT lprcWin,
             LPPOINT lpptMin);
-#line 3915
 VOID xxxMetricsRecalc(UINT wFlags, int dx, int dy, int dyCaption, int dyMenu);
-BOOL xxxSystemParametersInfo(UINT wFlag, DWORD wParam, LPVOID lParam, UINT flags);
-BOOL xxxUpdatePerUserSystemParameters(BOOL bUserLoggedOn);
 
-void MenuRecalc(void);
+VOID xxxBroadcastDisplaySettingsChange(PDESKTOP, BOOL);
+
+
+/*
+ * This is for SPI_GET/SETUSERPREFERENCE.
+ * Currently it's for DWORD values only. A type field will be added so all new
+ * settings will be mostly handled through common SystemParametersInfo code.
+ */
+typedef struct tagPROFILEVALUEINFO {
+    DWORD       dwValue;
+    UINT        uSection;
+    LPCWSTR     pwszKeyName;
+} PROFILEVALUEINFO, *PPROFILEVALUEINFO;
+
+/*
+ *  SystemParametersInfo UserPreferences manipulation macros.
+ *  SPI_ values in the BOOL or DWORD ranges (see winuser.w) are stored in
+ *   gpdwCPUserPreferencesMask (BOOL) and gpviCPUserPreferences (DOWRD) (see kernel\globals.c).
+ *  The following macros use the actual SPI_ value to determine the
+ *   location of a given bit (BOOL mask) or DWORD in those  globals.
+ *
+ *  Macros to access DWORDs stored in gpviCPUserPreferences.
+ *
+ */
+#define UPIsDWORDRange(uSetting)    \
+            ((uSetting) >= SPI_STARTDWORDRANGE && (uSetting) < SPI_MAXDWORDRANGE)
+
+/*
+ * The first entry in gpviCPUserPreferences is reserved for the bitmask, so add 1.
+ * Each setting has SPI_GET and SPI_SET, so divide by 2 to get the index
+ */
+#define UPDWORDIndex(uSetting)    \
+            (1 + (((uSetting) - SPI_STARTDWORDRANGE) / 2))
+
+/*
+ * Macros to access BOOLs stored in gpdwCPUserPreferencesMask.
+ */
+#define UPIsBOOLRange(uSetting) \
+    ((uSetting) >= SPI_STARTBOOLRANGE && (uSetting) < SPI_MAXBOOLRANGE)
+
+/*
+ * Each setting has SPI_GET and SPI_SET, so divide by 2 to get the index
+ */
+#define UPBOOLIndex(uSetting) \
+    (((uSetting) - SPI_STARTBOOLRANGE) / 2)
+
+/*
+ * Returns a pointer to the DWORD that contains the bit corresponding to uSetting
+ */
+#define UPBOOLPointer(pdw, uSetting)    \
+    (pdw + (UPBOOLIndex(uSetting) / 32))
+
+/*
+ * Returns the DWORD mask needed to test/set/clear the bit corresponding to uSetting
+ */
+#define UPBOOLMask(uSetting)    \
+    (1 << (UPBOOLIndex(uSetting) - ((UPBOOLIndex(uSetting) / 32) * 32)))
+
+#define TestUPBOOL(pdw, uSetting)   \
+    (*UPBOOLPointer(pdw, uSetting) & UPBOOLMask(uSetting))
+
+#define SetUPBOOL(pdw, uSetting)    \
+    (*UPBOOLPointer(pdw, uSetting) |= UPBOOLMask(uSetting))
+
+#define ClearUPBOOL(pdw, uSetting)                              \
+{                                                               \
+    UserAssert(UPIsBOOLRange(uSetting));                        \
+    *UPBOOLPointer(pdw, uSetting) &= ~UPBOOLMask(uSetting);     \
+}
+
+/*
+ * Use these macros ONLY if UPIsBOOLRange(SPI_GET ## uSetting) is TRUE
+ */
+#define TestUP(uSetting)    TestUPBOOL(gpdwCPUserPreferencesMask, SPI_GET ## uSetting)
+#define SetUP(uSetting)     SetUPBOOL(gpdwCPUserPreferencesMask, SPI_GET ## uSetting)
+#define ClearUP(uSetting)   ClearUPBOOL(gpdwCPUserPreferencesMask, SPI_GET ## uSetting)
+
+#define IndexUP(uSetting) \
+    (1 << (((uSetting) - SPI_STARTBOOLRANGE) / 2))
+
+/*
+ * Some settings (ie, UI Effects) are disabled when TestUP(UISETTINGS) is FALSE.
+ */
+#define TestEffectUP(uSetting)                                          \
+    ((*gpdwCPUserPreferencesMask &                                      \
+     (IndexUP(SPI_GET ## uSetting) | IndexUP(SPI_GETUIEFFECTS))) ==     \
+     (IndexUP(SPI_GET ## uSetting) | IndexUP(SPI_GETUIEFFECTS)))
+
+/*
+ * Some UI effects have an "inverted" disabled value (ie, disabled is TRUE).
+ */
+#define TestEffectInvertUP(uSetting) (TestUP(uSetting) || !TestUP(UIEFFECTS))
+
+/*
+ * Some of these BOOL values are needed in the client side. This macro
+ * propagates them to gpsi->PUSIFlags. Note that the SI_ value must match the
+ * UPBOOLMask value for this to work fine.
+ */
+#define PropagetUPBOOLTogpsi(uSetting) \
+    UserAssert((DWORD)(PUSIF_ ## uSetting) == (DWORD)UPBOOLMask(SPI_GET ## uSetting)); \
+    COPY_FLAG(gpsi->PUSIFlags, TestUP(## uSetting), PUSIF_ ## uSetting)
+
+
+
+/*
+ * Test if a TS session is connected remotly or locally through the console
+ * terminal.
+ */
+#define IsRemoteConnection() (gProtocolType != PROTOCOL_CONSOLE)
+#define IsMultimon()  ((gpDispInfo != NULL)  && (gpDispInfo->cMonitors > 1))
+#define GETCONSOLEHDEV() (gfRemotingConsole?gConsoleShadowhDev:gpDispInfo->hDev)
+
+#ifdef IMM_PER_LOGON
+BOOL UpdatePerUserImmEnabling(VOID);
+#endif
+BOOL xxxUpdatePerUserSystemParameters(DWORD dwFlags);
+VOID SaveVolatileUserSettings(VOID);
+
+VOID MenuRecalc(VOID);
 
 #define UNDERLINE_RECALC    0x7FFFFFFF      // MAXINT; tells us to recalc underline position
 
@@ -3999,52 +5221,18 @@ void MenuRecalc(void);
 /*
  * Library management routines.
  */
-VOID SetAllWakeBits(UINT wWakeBit);
-#line 3928
 int GetHmodTableIndex(PUNICODE_STRING pstrName);
-#line 3929
 VOID AddHmodDependency(int iatom);
 VOID RemoveHmodDependency(int iatom);
-HANDLE xxxLoadHmodIndex(int iatom, BOOL bWx86KnownDll);
-#line 3932
+HANDLE xxxLoadHmodIndex(int iatom);
 VOID xxxDoSysExpunge(PTHREADINFO pti);
-#line 3933
 
-
-#ifndef   MSDWP
-
-/*
- * Imported from GDI.
- */
-//LATER these prototypes should be in some GDI header file
-// Why do we need this when we have wingdi.h?
-int     ExcludeVisRect(HDC, int, int, int, int);
-LONG    SetDCOrg(HDC, int, int);
-BOOL    IsDCDirty(HDC, LPRECT);
-BOOL    SetDCStatus(HDC, BOOL, LPRECT);
-HANDLE  GDIInit2(HANDLE, HANDLE);
-HBITMAP CreateUserBitmap(int, int, int, int, LONG);
-
-#line 3949
-#define UnrealizeObject(hbr)    /* NOP for NT */
-#line 3950
-
-VOID    Death(HDC);
-VOID    Resurrection(HDC, LONG, LONG, LONG);
-VOID    DeleteAboveLineFonts(VOID);
-BOOL    GDIInitApp(VOID);
-HBITMAP CreateUserDiscardableBitmap(HDC, int, int);
-VOID    FinalGDIInit(HBRUSH);
-BOOL    IsValidMetaFile(HANDLE);
 
 VOID DestroyThreadsObjects(VOID);
-#line 3960
 VOID MarkThreadsObjects(PTHREADINFO pti);
 
 VOID FreeMessageList(PMLIST pml);
-#line 3963
 VOID DestroyThreadsHotKeys(VOID);
-#line 3964
 VOID DestroyWindowsHotKeys(PWND pwnd);
 
 VOID DestroyClass(PPCLS ppcls);
@@ -4058,10 +5246,9 @@ VOID DestroyProcessesClasses(PPROCESSINFO);
  */
 
 VOID InsertTask(PPROCESSINFO ppi, PTDB ptdbNew);
-//VOID DeleteTask(PTDB ptdbDelete);
-#line 3979
-#define HEVENT_REMOVEME ((HANDLE)0xFFFFFFFF)
-#line 3980
+
+BOOL xxxSleepTask(BOOL fInputIdle, HANDLE, PTHREADINFO);
+
 BOOL xxxUserYield(PTHREADINFO pti);
 VOID xxxDirectedYield(DWORD dwThreadId);
 VOID DirectedScheduleTask(PTHREADINFO ptiOld, PTHREADINFO ptiNew, BOOL bSendMsg, PSMS psms);
@@ -4071,31 +5258,25 @@ VOID WakeWowTask(PTHREADINFO Pti);
  *  WowScheduler assertion for multiple wow tasks running simultaneously
  */
 
-#line 3984
 #ifndef WOW_USER_OBJECT_FLAGS_ONLY
-#line 3989
+#line 6010
 _inline
-#line 3990
 VOID
 EnterWowCritSect(
     PTHREADINFO pti,
     PWOWPROCESSINFO pwpi
-    )
+)
 {
    if (!++pwpi->CSLockCount) {
        if (pti->host) pti->host->client_context(pwpi->CSOwningThread, pti);
-#line 3997
+#line 6018
        pwpi->CSOwningThread = pti;
-       return;
-       }
-
-   RIPMSG2(RIP_ERROR,
-         "MultipleWowTasks running simultaneously %x %x\n",
-         pwpi->CSOwningThread,
-         pwpi->CSLockCount
-         );
-
-   return;
+   } else {
+       RIPMSG2(RIP_ERROR,
+              "MultipleWowTasks running simultaneously %x %x\n",
+              pwpi->CSOwningThread,
+              pwpi->CSLockCount);
+   }
 }
 
 _inline
@@ -4103,25 +5284,23 @@ VOID
 ExitWowCritSect(
     PTHREADINFO pti,
     PWOWPROCESSINFO pwpi
-    )
+)
 {
    if (pti == pwpi->CSOwningThread) {
        if (pti->host) pti->host->client_context(pti, NULL);
-#line 4018
+#line 6035
        pwpi->CSOwningThread = NULL;
        pwpi->CSLockCount--;
-       }
-
-   return;
+   }
 }
 
 
-////////////////////////////////////////////////////////////////////////////
 #endif
-#line 4027
+#line 6041
+////////////////////////////////////////////////////////////////////////////
 //
 // These are internal USER functions called from inside and outside the
-// critical section (from server & client side).  They are a private 'API'.
+// critical section (from server & client side). They are a private 'API'.
 //
 // The prototypes appear in pairs:
 //    as called from outside the critsect (from client-side)
@@ -4135,12 +5314,11 @@ ExitWowCritSect(
 //
 ////////////////////////////////////////////////////////////////////////////
 
-#line 4043
 BOOL  xxxFillWindow(PWND pwndBrush, PWND pwndPaint, HDC hdc, HBRUSH hbr);
 HBRUSH xxxGetControlBrush(PWND pwnd, HDC hdc, UINT msg);
 HBRUSH xxxGetControlColor(PWND pwndParent, PWND pwndCtl, HDC hdc, UINT message);
 PSBINFO  _InitPwSB(PWND);
-BOOL  _KillSystemTimer(PWND pwnd, UINT nIDEvent);
+BOOL  _KillSystemTimer(PWND pwnd, UINT_PTR nIDEvent);
 BOOL  xxxPaintRect(PWND, PWND, HDC, HBRUSH, LPRECT);
 
 ////////////////////////////////////////////////////////////////////////////
@@ -4153,118 +5331,131 @@ BOOL  xxxPaintRect(PWND, PWND, HDC, HBRUSH, LPRECT);
 /*
  * From CLASS.C
  */
-PCLS InternalRegisterClassEx(LPWNDCLASSEX lpwndcls, WORD fnid, DWORD flags);
+
+typedef struct tagWNDCLASSVEREX {
+    WNDCLASSEXW;
+    LPCWSTR     lpszClassNameVer;
+} WNDCLASSVEREX, *LPWNDCLASSVEREX;
+
+
+PCLS InternalRegisterClassEx(
+        LPWNDCLASSVEREX lpwndcls,
+        WORD fnid,
+        DWORD flags
+        );
+
+PCURSOR GetClassIcoCur(PWND pwnd, int index);
 PCURSOR xxxSetClassIcon(PWND pwnd, PCLS pcls, PCURSOR pCursor, int gcw);
-#line 4062
+ULONG_PTR xxxSetClassData(PWND pwnd, int index, ULONG_PTR dwData, BOOL bAnsi);
+ULONG_PTR SetClassCursor(PWND pwnd, PCLS pcls, DWORD index, ULONG_PTR dwData);
 
 /*
  * CREATEW.C
- * LATER IanJa: LPSTR -> LPCREATESTRUCT pCreateParams
  */
 
-#define xxxCreateWindowEx(dwExStyle, pstrClass, pstrName, style, x, y,\
-          cx, cy, pwndParent, pmenu, hModule, pCreateParams, dwExpWinVerAndFlags)\
-        xxxCreateWindowExWOW(dwExStyle, pstrClass, pstrName, style, x, y,\
-          cx, cy, pwndParent, pmenu, hModule, pCreateParams, dwExpWinVerAndFlags, NULL)
+#define xxxNVCreateWindowEx(dwStyle, pstrClass, pstrName, style,        \
+        x, y, cx, cy, pwndParent, pmenu, hModule, pCreateParams,        \
+        dwExpWinVerAndFlags)                                            \
+        xxxCreateWindowEx(dwStyle, pstrClass, pstrClass, pstrName,      \
+        style, x, y, cx, cy, pwndParent, pmenu, hModule, pCreateParams, \
+        dwExpWinVerAndFlags, NULL)
 
-#line 4073
-PWND xxxCreateWindowExWOW(DWORD dwStyle, PLARGE_STRING pstrClass,
+PWND xxxCreateWindowEx(DWORD dwStyle, PLARGE_STRING pstrNVClass, PLARGE_STRING pstrClass,
         PLARGE_STRING pstrName, DWORD style, int x, int y, int cx,
         int cy, PWND pwndParent, PMENU pmenu, HANDLE hModule,
-        LPVOID pCreateParams, DWORD dwExpWinVerAndFlags, LPDWORD lpWOW);
+        LPVOID pCreateParams, DWORD dwExpWinVerAndFlags, PACTIVATION_CONTEXT pActCtx);
 BOOL xxxDestroyWindow(PWND pwnd);
 
 /*
  * SENDMSG.C
  */
-LONG xxxSendMessageFF(PWND pwnd, UINT message, DWORD wParam, LONG lParam, DWORD xParam);
-LONG xxxSendMessageBSM(PWND pwnd, UINT message, DWORD wParam, LONG lParam, DWORD xParam);
-LONG xxxSendMessageEx(PWND pwnd, UINT message, DWORD wParam, LONG lParam, DWORD xParam);
-LONG xxxSendMessage(PWND pwnd, UINT message, DWORD wParam, LONG lParam);
-LONG xxxSendMessageTimeout(PWND pwnd, UINT message, DWORD wParam, LONG lParam,
-        UINT fuFlags, UINT uTimeout, LPLONG lpdwResult);
-BOOL xxxSendNotifyMessage(PWND pwnd, UINT message, DWORD wParam, LONG lParam);
-void QueueNotifyMessage(PWND pwnd, UINT message, DWORD wParam, LONG lParam);
-BOOL xxxSendMessageCallback(PWND pwnd, UINT message, DWORD wParam, LONG lParam,
-        SENDASYNCPROC lpResultCallBack, DWORD dwData, BOOL bClientReqest );
-BOOL _ReplyMessage(LONG lRet);
+LRESULT xxxSendMessageFF(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam, ULONG_PTR xParam);
+LONG xxxSendMessageBSM(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam,
+        LPBROADCASTSYSTEMMSGPARAMS pbsmParams);
+LRESULT xxxSendMessageEx(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam, ULONG_PTR xParam);
+LRESULT xxxSendMessage(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT xxxSendMessageTimeout(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam,
+        UINT fuFlags, UINT uTimeout, PLONG_PTR lpdwResult);
+BOOL xxxSendNotifyMessage(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam);
+void QueueNotifyMessage(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam);
+BOOL xxxSendMessageCallback(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam,
+        SENDASYNCPROC lpResultCallBack, ULONG_PTR dwData, BOOL bClientReqest );
+BOOL _ReplyMessage(LRESULT lRet);
 
 /*
  * MN*.C
  */
-#line 4097
 int xxxTranslateAccelerator(PWND pwnd, LPACCELTABLE pat, LPMSG lpMsg);
-#line 4098
 BOOL  xxxSetMenu(PWND pwnd, PMENU pmenu, BOOL fRedraw);
 VOID  ChangeMenuOwner(PMENU pMenu, PPROCESSINFO ppi);
-#line 4100
 int   xxxMenuBarDraw(PWND pwnd, HDC hdc, int cxFrame, int cyFrame);
 BOOL  xxxDrawMenuBar(PWND pwnd);
-#line 4102
-int MNByteAlignItem(int x);
 
-#ifdef MEMPHIS_MENUS
-#error
-#line 4112
-#else
-#line 4113
-BOOL _SetMenuItemInfo(PMENU pMenu, UINT nPos, BOOL fByPosition,
+UINT xxxPaintMenuBar(PWND pwnd, HDC hdc, int iLeftOffset, int iRightOffset, int iTopOffset, DWORD dwFlags);
+UINT xxxCalcMenuBar(PWND pwnd, int iLeftOffset, int iRightOffset, int iTopOffset, LPCRECT prcWnd);
+
+BOOL xxxSetMenuItemInfo(PMENU pMenu, UINT nPos, BOOL fByPosition,
     LPMENUITEMINFOW lpmii, PUNICODE_STRING pstrItem);
 BOOL _SetMenuContextHelpId(PMENU pMenu, DWORD dwContextHelpId);
-BOOL _InsertMenuItem(PMENU pMenu, UINT wIndex, BOOL fByPosition,
+BOOL _SetMenuFlagRtoL(PMENU pMenu);
+BOOL xxxInsertMenuItem(PMENU pMenu, UINT wIndex, BOOL fByPosition,
         LPMENUITEMINFOW lpmii, PUNICODE_STRING pstrItem);
-BOOL  _RemoveMenu(PMENU pMenu, UINT nPos, UINT dwFlags);
-BOOL  _DeleteMenu(PMENU pMenu, UINT nPos, UINT dwFlags);
-#line 4120
-#endif // MEMPHIS_MENUS
-#ifdef MEMPHIS_MENU_WATERMARKS
-#error
-#endif //MEMPHIS_MENU_WATERMARKS
-#line 4124
+BOOL  xxxRemoveMenu(PMENU pMenu, UINT nPos, UINT dwFlags);
+BOOL  xxxDeleteMenu(PMENU pMenu, UINT nPos, UINT dwFlags);
+BOOL  xxxSetMenuInfo(PMENU pMenu, LPCMENUINFO lpmi);
 BOOL  xxxTrackPopupMenuEx(PMENU pmenu, UINT dwFlags, int x, int y,
-        PWND pwnd, LPTPMPARAMS pparams);
-BOOL _CheckMenuRadioItem(PMENU pMenu, UINT wIDFirst, UINT wIDLast,
-        UINT wIDCheck, UINT flags);
+        PWND pwnd, CONST TPMPARAMS *pparams);
+LONG FindBestPos(int x, int y, int cx, int cy, LPRECT prcExclude,
+                UINT wFlags, PPOPUPMENU ppopupmenu, PMONITOR pMonitor);
 BOOL _SetMenuDefaultItem(PMENU pMenu, UINT wId, BOOL fByPosition);
 int xxxMenuItemFromPoint(PWND pwnd, PMENU pMenu, POINT ptScreen);
 BOOL xxxGetMenuItemRect(PWND pwnd, PMENU pMenu, UINT uIndex, LPRECT lprcScreen);
+PPOPUPMENU MNGetPopupFromMenu(PMENU pMenu, PMENUSTATE *ppMenuState);
+PVOID LockDesktopMenu(PMENU * ppmenu, PMENU pmenu);
+PVOID UnlockDesktopMenu(PMENU * ppmenu);
+#ifdef LAME_BUTTON
+#error Original configuration is not selected.
+#else
+PMENU xxxLoadSysDesktopMenu (PMENU * ppmenu, UINT uMenuId);
+#endif // LAME_BUTTON
+__inline PVOID UnlockDesktopSysMenu(
+    PMENU * ppmenu)
+{
+    ClearMF(*ppmenu, MFSYSMENU);
+    return UnlockDesktopMenu(ppmenu);
+}
 
 /*
  * SHOWWIN.C
  */
 BOOL xxxShowWindow(PWND pwnd, DWORD cmdShowAnimate);
-BOOL _ShowWindowAsync(PWND pwnd, int cmdShow);
+BOOL _ShowWindowAsync(PWND pwnd, int cmdShow, UINT uWPFlags);
 BOOL xxxShowOwnedPopups(PWND pwndOwner, BOOL fShow);
-BOOL xxxOpenIcon(PWND pwnd);
-BOOL xxxCloseWindow(PWND pwnd);
-#line 4140
 
 #define RDW_HASWINDOWRGN        0x8000
-#line 4142
-BOOL SelectWindowRgn(PWND pwnd, HRGN hrgn);
 BOOL xxxSetWindowRgn(PWND pwnd, HRGN hrgn, BOOL fRedraw);
-#line 4144
-
-
-/*
- * ENUMWIN.C
- */
-BOOL _EnumWindows(FARPROC lpfn, DWORD lParam);
-#line 4150
-BOOL _EnumChildWindows(PWND pwnd, FARPROC lpfn, DWORD lParam);
 
 /*
  * SWP.C
  */
+void SelectWindowRgn(PWND pwnd, HRGN hrgnClip);
 PWND GetTopMostInsertAfter (PWND pwnd);
-#line 4156
+
 #define GETTOPMOSTINSERTAFTER(pwnd) \
     (gHardErrorHandler.pti == NULL ? NULL : GetTopMostInsertAfter(pwnd))
 
-#line 4159
+__inline BOOL FSwpTopmost(
+   PWND pwnd)
+{
+    return (!!TestWF(pwnd, WEFTOPMOST) ^ !!TestWF(pwnd, WFTOGGLETOPMOST));
+}
+
+
 PWND CalcForegroundInsertAfter(PWND pwnd);
 BOOL xxxSetWindowPos(PWND pwnd, PWND pwndInsertAfter, int x, int y,
         int cx, int cy, UINT flags);
+PSMWP InternalBeginDeferWindowPos(int cwndGuess);
+BOOL AllocateCvr (PSMWP psmwp, int cwndHint);
 PSMWP _BeginDeferWindowPos(int cwndGuess);
 PSMWP _DeferWindowPos(PSMWP psmwp, PWND pwnd, PWND pwndInsertAfter,
         int x, int y, int cx, int cy, UINT rgf);
@@ -4274,97 +5465,144 @@ PWND GetLastTopMostWindow(VOID);
 VOID xxxHandleWindowPosChanged(PWND pwnd, PWINDOWPOS ppos);
 VOID IncVisWindows(PWND pwnd);
 VOID DecVisWindows(PWND pwnd);
+BOOL FVisCountable(PWND pwnd);
 VOID SetVisible(PWND pwnd, UINT flags);
 VOID ClrFTrueVis(PWND pwnd);
 
 VOID SetWindowState(PWND pwnd, DWORD flags);
 VOID ClearWindowState(PWND pwnd, DWORD flags);
 
+BOOL xxxUpdateWindows(PWND pwnd, HRGN hrgn);
+
 VOID SetMinimize(PWND pwnd, UINT uFlags);
-#line 4178
 #define SMIN_CLEAR            0
 #define SMIN_SET              1
+
+PWND NextOwnedWindow(PWND pwnd, PWND pwndOwner, PWND pwndParent);
 
 /*
  * DWP.C
  */
-#line 4184
-LONG xxxDefWindowProc(PWND, UINT, DWORD, LONG);
+LRESULT xxxDefWindowProc(PWND, UINT, WPARAM, LPARAM);
+LRESULT xxxRealDefWindowProc(PWND, UINT, WPARAM, LPARAM);
 PWND DWP_GetEnabledPopup(PWND pwndStart);
-#line 4186
 
 
 /*
  * INPUT.C
  */
+#ifdef MESSAGE_PUMP_HOOK
+#error Original configuration is not selected.
+#else
+#line 6246
+
 BOOL xxxWaitMessage(VOID);
+
+#endif
+
+VOID DBGValidateQueueStates(PDESKTOP pdesk);
 VOID IdleTimerProc(VOID);
-#line 4194
+
 VOID SleepInputIdle(PTHREADINFO pti);
 BOOL xxxInternalGetMessage(LPMSG lpmsg, HWND hwnd, UINT wMsgFilterMin,
         UINT wMsgFilterMax, UINT wRemoveMsg, BOOL fGetMessage);
-#line 4197
+
+#ifdef MESSAGE_PUMP_HOOK
+#error Original configuration is not selected.
+#endif
+#line 6262
+
 #define xxxPeekMessage(lpmsg, hwnd, wMsgMin, wMsgMax, wRemoveMsg) \
     xxxInternalGetMessage(lpmsg, hwnd, wMsgMin, wMsgMax, wRemoveMsg, FALSE)
 #define xxxGetMessage(lpmsg, hwnd, wMsgMin, wMsgMax) \
     xxxInternalGetMessage(lpmsg, hwnd, wMsgMin, wMsgMax, PM_REMOVE, TRUE)
 DWORD _GetMessagePos(VOID);
-LONG xxxDispatchMessage(LPMSG lpmsg);
-#line 4203
-BOOL _PostMessage(PWND pwnd, UINT message, DWORD wParam, LONG lParam);
-#line 4204
+LRESULT xxxDispatchMessage(LPMSG lpmsg);
+UINT GetMouseKeyFlags(PQ pq);
+BOOL _PostMessage(PWND pwnd, UINT message, WPARAM wParam, LPARAM lParam);
+BOOL IPostQuitMessage(PTHREADINFO pti, int nExitCode);
 BOOL _PostQuitMessage(int nExitCode);
-#line 4205
-BOOL _PostThreadMessage(PTHREADINFO pti, UINT message, DWORD wParam, LONG lParam);
-BOOL xxxPostCloseMessage(PWND pwnd);
-#line 4207
-BOOL _TranslateMessage(LPMSG pmsg, UINT flags);
+BOOL _PostThreadMessage(PTHREADINFO pti, UINT message, WPARAM wParam, LPARAM lParam);
+BOOL xxxTranslateMessage(LPMSG pmsg, UINT flags);
 BOOL _GetInputState(VOID);
 DWORD _GetQueueStatus(UINT);
-BOOL xxxInitWindows(VOID);
-#line 4211
-typedef VOID (CALLBACK* MSGWAITCALLBACK)(VOID);
-DWORD xxxMsgWaitForMultipleObjects(DWORD nCount, PVOID *apObjects,
-        BOOL fWaitAll, DWORD dwMilliseconds, DWORD dwWakeMask,
-        MSGWAITCALLBACK pfnNonMsg);
+typedef VOID (CALLBACK* MSGWAITCALLBACK)(DWORD DeviceType);
+DWORD xxxMsgWaitForMultipleObjects(DWORD nCount, PVOID *apObjects, MSGWAITCALLBACK pfnNonMsg, PKWAIT_BLOCK WaitBlockArray);
 
 BOOL FHungApp(PTHREADINFO pti, DWORD dwTimeFromLastRead);
-VOID RedrawHungWindow(PWND pwnd, HRGN hrgnFullDrag);
-VOID RedrawHungWindowFrame(PWND pwnd, BOOL fActive);
+VOID xxxRedrawHungWindow(PWND pwnd, HRGN hrgnFullDrag);
+VOID xxxRedrawHungWindowFrame(PWND pwnd, BOOL fActive);
+VOID zzzActiveCursorTracking (PWND pwnd);
+PWND GetActiveTrackPwnd(PWND pwnd, Q **ppq);
 int xxxActiveWindowTracking(PWND pwnd, UINT uMsg, int iHitTest);
+VOID xxxHungAppDemon(PWND pwnd, UINT message, UINT_PTR nID, LPARAM lParam);
 
+/*
+ * shadow.c
+ */
+BOOL WindowHasShadow(PWND pwnd);
+BOOL xxxAddShadow(PWND pwnd);
+VOID xxxRemoveShadow(PWND pwnd);
+VOID CleanupShadow(PWND pwndShadow);
+VOID MoveShadow(PWND pwnd);
+VOID UpdateShadowShape(PWND pwnd);
+VOID xxxUpdateShadowZorder(PWND pwnd);
+BOOL FAnyShadows(VOID);
+
+/*
+ * QUEUE.C
+ */
+
+#line 6309
+
+__inline DWORD GetAppCompatFlags2ForPti(
+    PTHREADINFO pti,
+    WORD wVer)
+{
+    if (wVer < pti->dwExpWinVer) {
+        return 0;
+    }
+
+    return pti->dwCompatFlags2;
+}
+
+VOID ClearWakeMask(VOID);
+VOID _AllowForegroundActivation(VOID);
+
+ULONG GetTaskName(PTHREADINFO pti, PWSTR Buffer, ULONG BufferLength);
+PQMSG FindQMsg(PTHREADINFO pti, PMLIST pml, PWND pwndFilter, UINT msgMin, UINT msgMax, BOOL bProcessAck);
+VOID zzzShowStartGlass(DWORD dwTimeout);
+DWORD _GetChangeBits(VOID);
+NTSTATUS xxxSetCsrssThreadDesktop(PDESKTOP pdesk, PDESKRESTOREDATA pdrdRestore);
+NTSTATUS xxxRestoreCsrssThreadDesktop(PDESKRESTOREDATA pdrdRestore);
+
+PQ GetJournallingQueue(PTHREADINFO pti);
+VOID ClearAppStarting (PPROCESSINFO ppi);
+BOOL _GetProcessDefaultLayout(DWORD *pdwDefaultLayout);
+BOOL _SetProcessDefaultLayout(DWORD dwDefaultLayout);
+
+
+#ifdef HUNGAPP_GHOSTING
+#error Original configuration is not selected.
+#endif // HUNGAPP_GHOSTING
+#line 6375
 
 /*
  * TMSWITCH.C
  */
 VOID xxxSwitchToThisWindow(PWND pwnd, BOOL fAltTab);
-#line 4226
-
-/*
- * TOASCII.C
- */
-int _ToAscii(UINT wVirtKey, UINT wScanCode, LPBYTE lpKeyState, LPVOID lpChar,
-      UINT wFlags);
-int InternalToAscii(UINT wVirtKey, UINT wScanCode, LPBYTE pfvk, LPVOID lpChar,
-      UINT wFlags);
 
 /*
  * TOUNICOD.C
  */
-#line 4238
-int _ToUnicodeEx(UINT wVirtKey, UINT wScanCode, LPBYTE lpKeyState,
+int xxxToUnicodeEx(UINT wVirtKey, UINT wScanCode, CONST BYTE *lpKeyState,
       LPWSTR pwszBuff, int cchBuff, UINT wFlags, HKL hkl);
-#line 4240
-int InternalToUnicodeEx(UINT wVirtKey, UINT wScanCode, LPBYTE pfvk, LPVOID pChar,
-      INT cChar, UINT wFlags, PBOOL pbBreak, HKL hkl);
-
-#define InternalToUnicode(wVirtKey, wScanCode, pfvk, pChar, cChar, wFlags, pbBreak) \
-            InternalToUnicodeEx(wVirtKey, wScanCode, pfvk, pChar, cChar, wFlags, pbBreak, NULL)
+int xxxInternalToUnicode(UINT wVirtKey, UINT wScanCode, CONST IN PBYTE pfvk,
+      OUT PWCHAR awchChars, INT cChar, UINT uiTMFlags, OUT PDWORD pdwFlags, HKL hkl);
 
 /*
  * HOTKEYS.C
  */
-#line 4249
 BOOL _RegisterHotKey(PWND pwnd, int id, UINT fsModifiers, UINT vk);
 BOOL _UnregisterHotKey(PWND pwnd, int id);
 
@@ -4372,9 +5610,18 @@ BOOL _UnregisterHotKey(PWND pwnd, int id);
  * FOCUSACT.C
  */
 PWND xxxSetFocus(PWND pwnd);
-BOOL xxxSetForegroundWindow(PWND pwnd);
+#ifdef FG_HOOKLOCK
+#error Original configuration is not selected.
+#else
+#define FG_HOOKLOCK_PARAM(x)
+#endif
+BOOL CanForceForeground(PPROCESSINFO ppi FG_HOOKLOCK_PARAM(PTHREADINFO pti));
+BOOL xxxStubSetForegroundWindow(PWND pwnd);
+BOOL xxxSetForegroundWindow(PWND pwnd, BOOL fFlash);
 PWND xxxSetActiveWindow(PWND pwnd);
 PWND _GetActiveWindow(VOID);
+BOOL xxxAllowSetForegroundWindow(DWORD dwProcessId);
+BOOL _LockSetForegroundWindow(UINT uLockCode);
 
 /*
  * UPDATE.C
@@ -4399,12 +5646,31 @@ VOID xxxInternalInvalidate(PWND pwnd, HRGN hrgnUpdate, DWORD flags);
 BOOL xxxEnableWindow(PWND pwnd, BOOL fEnable);
 int xxxGetWindowText(PWND pwnd, LPWSTR psz, int cchMax);
 PWND xxxSetParent(PWND pwnd, PWND pwndNewParent);
-#line 4283
-BOOL _IsWindow(HWND hwnd);
-#line 4284
-BOOL xxxFlashWindow(PWND pwnd, BOOL fFlash);
+BOOL xxxFlashWindow(PWND pwnd, DWORD dwFlags, DWORD dwTimeout);
+extern ATOM gaFlashWState;
+__inline DWORD GetFlashWindowState(
+    PWND pwnd)
+{
+    return HandleToUlong(_GetProp(pwnd, MAKEINTATOM(gaFlashWState), PROPF_INTERNAL));
+}
+
+__inline VOID SetFlashWindowState(
+    PWND pwnd,
+    DWORD dwState)
+{
+    InternalSetProp(pwnd, MAKEINTATOM(gaFlashWState),
+                    (HANDLE)ULongToPtr(dwState), PROPF_INTERNAL | PROPF_NOPOOL);
+}
+__inline VOID RemoveFlashWindowState(
+    PWND pwnd)
+{
+    InternalRemoveProp(pwnd, MAKEINTATOM(gaFlashWState), PROPF_INTERNAL);
+}
 BOOL _GetWindowPlacement(PWND pwnd, PWINDOWPLACEMENT pwp);
 BOOL xxxSetWindowPlacement(PWND pwnd, PWINDOWPLACEMENT pwp);
+BOOL ValidateParentDepth(PWND pwnd, PWND pwndParent);
+BOOL ValidateOwnerDepth(PWND pwnd, PWND pwndOwner);
+VOID WPUpdateCheckPointSettings (PWND pwnd, UINT uWPFlags);
 
 /*
  * DC.C
@@ -4412,55 +5678,63 @@ BOOL xxxSetWindowPlacement(PWND pwnd, PWINDOWPLACEMENT pwp);
 HDC  _GetDC(PWND pwnd);
 HDC  _GetDCEx(PWND pwnd, HRGN hrgnClip, DWORD flags);
 HDC  _GetWindowDC(PWND pwnd);
-#line 4294
 BOOL _ReleaseDC(HDC hdc);
 UINT ReleaseCacheDC(HDC hdc, BOOL fEndPaint);
-#line 4296
-HDC  CreateCacheDC(PWND, DWORD);
-void DeleteHrgnClip(PDCE pdce);
-BOOL SetDCVisRgn(PDCE);
+HDC  CreateCacheDC(PWND, DWORD, PMONITOR);
+BOOL DestroyCacheDC(PDCE *, HDC);
+VOID InvalidateDce(PDCE pdce);
+VOID DeleteHrgnClip(PDCE pdce);
 PWND WindowFromCacheDC(HDC hdc);
 PWND FastWindowFromDC(HDC hdc);
-BOOL DestroyCacheDC(PDCE *, HDC);
-#line 4302
 VOID DelayedDestroyCacheDC(VOID);
+PDCE LookupDC(HDC hdc);
+HDC GetMonitorDC(PDCE pdceOrig, PMONITOR pMonitor);
+BOOL GetDCOrgOnScreen(HDC hdc, LPPOINT ppt);
+__inline VOID MarkDCEInvalid(
+    PDCE pdce)
+{
+    /*
+     * Clear all bits, but these.
+     */
+    pdce->DCX_flags &= (DCX_CACHE | DCX_REDIRECTED);
+
+    /*
+     * Mark this cache entry as invalid
+     */
+    pdce->DCX_flags |= DCX_INVALID;
+}
+
+BOOL MirrorRegion(PWND pwnd, HRGN hrgn, BOOL bUseClient);
 
 /*
  * PAINT.C
  */
-#line 4307
 HDC  xxxBeginPaint(PWND pwnd, PAINTSTRUCT *lpps);
-HDC  xxxInternalBeginPaint(PWND pwnd, PAINTSTRUCT *lpps, BOOL fWindowDC);
-BOOL _EndPaint(PWND pwnd, PAINTSTRUCT *lpps);
-#line 4310
-
-/*
- * SECURITY.C
- */
-BOOL _SetObjectSecurity(HANDLE, PSECURITY_INFORMATION, PSECURITY_DESCRIPTOR);
-BOOL _GetObjectSecurity(HANDLE, PSECURITY_INFORMATION, PSECURITY_DESCRIPTOR,
-        DWORD, LPDWORD);
+BOOL xxxEndPaint(PWND pwnd, PAINTSTRUCT *lpps);
 
 /*
  * CAPTURE.C
  */
-#line 4321
 PWND xxxSetCapture(PWND pwnd);
-#line 4322
 BOOL xxxReleaseCapture(VOID);
 
 /*
  * KEYBOARD.C
  */
 SHORT _GetAsyncKeyState(int vk);
-BOOL _SetKeyboardState(BYTE *pKeyboard);
+BOOL _SetKeyboardState(CONST BYTE *pKeyboard);
 int _GetKeyboardType(int nTypeFlag);
-VOID RegisterPerUserKeyboardIndicators(VOID);
-VOID UpdatePerUserKeyboardIndicators(VOID);
+VOID RegisterPerUserKeyboardIndicators(PUNICODE_STRING pProfileUserName);
+VOID UpdatePerUserKeyboardIndicators(PUNICODE_STRING pProfileUserName);
+VOID UpdatePerUserKeyboardMappings(PUNICODE_STRING pProfileUserName);
 
-/*
- * LOADBITS.C
- */
+#define TestRawKeyDown(vk)     TestKeyDownBit(gafRawKeyState, vk)
+#define SetRawKeyDown(vk)      SetKeyDownBit(gafRawKeyState, vk)
+#define ClearRawKeyDown(vk)    ClearKeyDownBit(gafRawKeyState, vk)
+#define TestRawKeyToggle(vk)   TestKeyToggleBit(gafRawKeyState, vk)
+#define SetRawKeyToggle(vk)    SetKeyToggleBit(gafRawKeyState, vk)
+#define ClearRawKeyToggle(vk)  ClearKeyToggleBit(gafRawKeyState, vk)
+#define ToggleRawKeyToggle(vk) ToggleKeyToggleBit(gafRawKeyState, vk)
 
 /*
  * XLATE.C
@@ -4470,83 +5744,83 @@ int  _GetKeyNameText(LONG lParam, LPWSTR lpString, int nSize);
 /*
  * TIMERS.C
  */
-#line 4345
-BOOL _KillTimer(PWND pwnd, UINT nIDEvent);
-PTIMER FindTimer(PWND pwnd, UINT nID, UINT flags, BOOL fKill);
-#line 4347
+BOOL _KillTimer(PWND pwnd, UINT_PTR nIDEvent);
+PTIMER FindTimer(PWND pwnd, UINT_PTR nID, UINT flags, BOOL fKill);
+VOID xxxSystemTimerProc(PWND pwnd, UINT msg, UINT_PTR id, LPARAM lParam);
+
 
 /*
  * CARET.C
  */
-BOOL _DestroyCaret(VOID);
-#line 4352
-BOOL _CreateCaret(PWND, HBITMAP, int, int);
-BOOL _ShowCaret(PWND);
-BOOL _HideCaret(PWND);
-#line 4355
+BOOL zzzDestroyCaret(VOID);
+BOOL xxxCreateCaret(PWND, HBITMAP, int, int);
+BOOL zzzShowCaret(PWND);
+BOOL zzzHideCaret(PWND);
 BOOL _SetCaretBlinkTime(UINT);
-BOOL _GetCaretPos(LPPOINT);
-BOOL _SetCaretPos(int, int);
+BOOL zzzSetCaretPos(int, int);
 
 /*
  * MSGBEEP.C
  */
-BOOL xxxOldMessageBeep(UINT wType);
+BOOL xxxOldMessageBeep(VOID);
 BOOL xxxMessageBeep(UINT wType);
-VOID xxxPlayEventSound(LPWSTR lpszwSound);
+VOID PlayEventSound(UINT idSound);
 
 /*
  * WINWHERE.C
  */
-#line 4369
 PWND _ChildWindowFromPointEx(PWND pwndParent, POINT pt, UINT i);
 PWND xxxWindowFromPoint(POINT pt);
-PWND FAR SizeBoxHwnd(PWND pwnd);
+PWND SizeBoxHwnd(PWND pwnd);
 
 /*
  * GETSET.C
  */
 WORD  _SetWindowWord(PWND pwnd, int index, WORD value);
 DWORD xxxSetWindowLong(PWND pwnd, int index, DWORD value, BOOL bAnsi);
+#ifdef _WIN64
+#error Original configuration is not selected.
+#else
+#define xxxSetWindowLongPtr xxxSetWindowLong
+#endif
+#define __GetWindowLong(pwnd, index) ((LONG)(*(DWORD UNALIGNED *)((BYTE *)((pwnd) + 1) + (index))))
+#define __GetWindowLongPtr(pwnd, index) ((LONG_PTR)(*(ULONG_PTR UNALIGNED *)((BYTE *)((pwnd) + 1) + (index))))
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 6580
+#define _GetWindowLong __GetWindowLong
+#define _GetWindowLongPtr __GetWindowLongPtr
+#endif
 
 /*
  * CLIPBRD.C
  */
 BOOL xxxOpenClipboard(PWND pwnd, LPBOOL lpfEmptyClient);
 BOOL xxxCloseClipboard(PWINDOWSTATION pwinsta);
-#line 4384
 UINT _EnumClipboardFormats(UINT fmt);
-#line 4385
 BOOL xxxEmptyClipboard(PWINDOWSTATION pwinsta);
 HANDLE xxxGetClipboardData(PWINDOWSTATION pwinsta, UINT fmt, PGETCLIPBDATA gcd);
-#line 4387
-UINT _RegisterClipboardFormat(LPWSTR lpszFormat);
 BOOL _IsClipboardFormatAvailable(UINT fmt);
-int _GetClipboardFormatName(UINT fmt, LPWSTR lpchBuffer, int cchMax);
 int _GetPriorityClipboardFormat(UINT *lpPriorityList, int cfmts);
-#line 4391
 PWND xxxSetClipboardViewer(PWND pwndClipViewerNew);
 BOOL xxxChangeClipboardChain(PWND pwndRemove, PWND pwndNewNext);
 
 /*
  * miscutil.c
  */
-VOID SetDialogPointer(PWND pwnd, LONG lPtr);
-#line 4398
+VOID SetDialogPointer(PWND pwnd, LONG_PTR lPtr);
 VOID ZapActiveAndFocus(VOID);
-#line 4399
 BOOL xxxSetShellWindow(PWND pwnd, PWND pwndBkGnd);
 BOOL _SetProgmanWindow(PWND pwnd);
 BOOL _SetTaskmanWindow(PWND pwnd);
 
-void xxxSetTrayWindow(PDESKTOP pdesk, PWND pwnd);
-BOOL xxxAddFullScreen(PWND pwnd);
-BOOL xxxRemoveFullScreen(PWND pwnd);
-BOOL xxxCheckFullScreen(PWND pwnd, LPRECT lprc);
+#define STW_SAME    ((PWND) 1)
+VOID xxxSetTrayWindow(PDESKTOP pdesk, PWND pwnd, PMONITOR pMonitor);
+BOOL xxxAddFullScreen(PWND pwnd, PMONITOR pMonitor);
+BOOL xxxRemoveFullScreen(PWND pwnd, PMONITOR pMonitor);
+BOOL xxxCheckFullScreen(PWND pwnd, PSIZERECT psrc);
 BOOL IsTrayWindow(PWND);
-
-void CheckFullScreen(PWND pwnd, LPRECT lprcDimensions);
-#line 4410
 
 #define FDoTray()   (SYSMET(ARRANGE) & ARW_HIDE)
 #define FCallHookTray() (IsHooked(PtiCurrent(), WHF_SHELL))
@@ -4566,7 +5840,6 @@ void CheckFullScreen(PWND pwnd, LPRECT lprcDimensions);
 #define FHas31TrayStyles(pwnd)    (TestWF(pwnd, WFFULLSCREEN) || \
                                   (TestWF(pwnd, WFSYSMENU | WFMINBOX) && \
                                   (TestWF(pwnd, WFCAPTION) || TestWF(pwnd, WFMINIMIZED))))
-#line 4429
 BOOL IsVSlick(PWND pwnd);
 BOOL Is31TrayWindow(PWND pwnd);
 
@@ -4574,114 +5847,97 @@ BOOL Is31TrayWindow(PWND pwnd);
  * fullscr.c
  */
 
-void xxxMakeWindowForegroundWithState(PWND, BYTE);
-#line 4437
+#if DBG
+#error Original configuration is not selected.
+#endif
+#line 6652
+
+BOOL xxxMakeWindowForegroundWithState(PWND, BYTE);
 void FullScreenCleanup();
-#line 4438
-LONG UserChangeDisplaySettings(PUNICODE_STRING pstrDeviceName, LPDEVMODEW pDevMode,
-    PWND pwnd, PDESKTOP pdesk, DWORD dwFlags, PVOID lParam, BOOL bKernelMode);
+LONG xxxUserChangeDisplaySettings(PUNICODE_STRING pstrDeviceName, LPDEVMODEW pDevMode,
+    HWND hwnd, PDESKTOP pdesk, DWORD dwFlags, PVOID lParam, MODE PreviousMode);
+BOOL xxxbFullscreenSwitch(BOOL bFullscreenSwitch, HWND hwnd);
 
 
 /*
  * SBAPI.C
  */
 BOOL xxxShowScrollBar(PWND, UINT, BOOL);
-#line 4446
-#define xxxSetScrollInfo(a,b,c,d) xxxSetScrollBar((a),(b),(c),(d))
 
 /*
  * mngray.c
  */
-#line 4451
-BOOL _DrawState(HDC hdcDraw, HBRUSH hbrFore, DRAWSTATEPROC   qfnCallBack,
-        LPARAM lData, WPARAM wData, int x,int y, int cx, int cy, UINT uFlags);
-#line 4453
+BOOL xxxDrawState(HDC hdcDraw, HBRUSH hbrFore,
+        LPARAM lData, int x, int y, int cx, int cy, UINT uFlags);
 
 /*
  * SCROLLW.C
  */
-BOOL _ScrollDC(HDC, int, int, LPRECT, LPRECT, HRGN, LPRECT);
+BOOL _ScrollDC(HDC hdc, int dx, int dy, LPRECT prcSrc, LPRECT prcClip,
+               HRGN hrgnUpdate, LPRECT prcUpdate);
 
 /*
  * SPB.C
  */
-#line 4462
 VOID SpbCheckRect(PWND pwnd, LPRECT lprc, DWORD flags);
-#line 4463
 VOID SpbCheck(VOID);
-#line 4464
 PSPB FindSpb(PWND pwnd);
 VOID FreeSpb(PSPB pspb);
-VOID FreeAllSpbs(PWND pwnd);
+VOID FreeAllSpbs(VOID);
 VOID CreateSpb(PWND pwnd, UINT flags, HDC hdcScreen);
 UINT RestoreSpb(PWND pwnd, HRGN hrgnUncovered, HDC *phdcScreen);
 VOID SpbCheckPwnd(PWND pwnd);
 VOID SpbCheckDce(PDCE pdce);
-BOOL xxxLockWindowUpdate2(PWND pwndLock, BOOL fThreadOverride);
+BOOL LockWindowUpdate2(PWND pwndLock, BOOL fThreadOverride);
 
 /*
  * DRAWFRM.C
  */
-BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i);
-#line 4477
+BOOL BitBltSysBmp(HDC hdc, int x, int y, UINT i);
 
 /*
  * SYSMET.c
  */
-DWORD APIENTRY _GetSysColor(int icolor);
-BOOL APIENTRY xxxSetSysColors(int count, LPINT pIndex, LPDWORD pClrVal, UINT uOptions);
-int APIENTRY _GetSystemMetrics(int index);
-#line 4484
-VOID SetSysColor(int icol, DWORD rgb, UINT uOptions);
+BOOL APIENTRY xxxSetSysColors(PUNICODE_STRING pProfileUserName,int count, PUINT pIndex, LPDWORD pClrVal, UINT uOptions);
+VOID SetSysColor(UINT icol, DWORD rgb, UINT uOptions);
 
-#line 4486
 /*
  * ICONS.C
  */
 UINT xxxArrangeIconicWindows(PWND pwnd);
 BOOL  _SetSystemMenu(PWND pwnd, PMENU pMenu);
-#line 4491
-
-/*
- * Server call-backs.
- */
-int _HkCallHook(PROC pfn, int nCode, DWORD wParam, DWORD lParam);
 
 /*
  * RMCREATE.C
  */
-#line 4500
 PICON _CreateIconIndirect(PICONINFO piconinfo);
 PCURSOR _CreateCursor(HANDLE hModule, int iXhotspot, int iYhotspot,
         int iWidth, int iHeight, LPBYTE lpANDplane, LPBYTE lpXORplane);
 PICON _CreateIcon(HANDLE hModule, int iWidth, int iHeight,
         BYTE bPlanes, BYTE bBitsPixel, LPBYTE lpANDplane, LPBYTE lpXORplane);
-BOOL _DestroyCursor(PCURSOR, DWORD);
-#line 4506
-HANDLE _CreateAcceleratorTable(LPACCEL, int);
-#line 4507
-int _CopyAcceleratorTable(LPACCELTABLE pat, LPACCEL paccel, int length);
-#line 4508
+VOID DestroyUnlockedCursor(VOID *pv);
+BOOL _DestroyCursor(PCURSOR pcur, DWORD cmdDestroy);
+HANDLE _CreateAcceleratorTable(LPACCEL ccxpaccel, int cbAccel);
 
 /*
  * CURSOR.C
  */
-BOOL    _GetCursorPos(LPPOINT);
-#line 4513
-PCURSOR _SetCursor(PCURSOR pcur);
-PCURSOR LockQCursor(PQ pq, PCURSOR pcur);
-#line 4515
-BOOL    _SetCursorPos(int x, int y);
-#line 4516
-int     _ShowCursor(BOOL fShow);
-#line 4517
-BOOL    _ClipCursor(LPCRECT prcClip);
-#line 4518
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 6727
+    #define LockQCursor(pq, pcur)   Lock(&pq->spcurCurrent, pcur)
+#endif // DBG
+
+PCURSOR zzzSetCursor(PCURSOR pcur);
+BOOL    zzzSetCursorPos(int x, int y);
+int     zzzShowCursor(BOOL fShow);
+BOOL    zzzClipCursor(LPCRECT prcClip);
 PCURSOR _GetCursor(VOID);
-#line 4519
-BOOL    _GetClipCursor(LPRECT prcClip);
-#line 4520
 BOOL    _SetCursorContents(PCURSOR pcur, PCURSOR pcurNew);
+VOID    SetPointer(BOOL fSet);
+VOID    zzzHideCursorNoCapture(VOID);
+#define GETPCI(pcur) ((PCURSINFO)&(pcur->CI_FIRST))
 
 /*
  * WMICON.C
@@ -4689,180 +5945,180 @@ BOOL    _SetCursorContents(PCURSOR pcur, PCURSOR pcurNew);
 BOOL _DrawIconEx(HDC hdc, int x, int y, PCURSOR pcur, int cx, int cy,
         UINT istepIfAniCur, HBRUSH hbrush, UINT diFlags) ;
 BOOL BltIcon(HDC hdc, int x, int y, int cx, int cy,
-        HDC hdcSrc, PCURSOR pcursor, BOOL fMask, LONG rop);
-
+        HDC hdcSrc, PCURSOR pcursor, UINT diFlag, LONG rop);
 
 /*
  * DESKTOP.C
  */
-HDESK xxxCreateDesktop(POBJECT_ATTRIBUTES, KPROCESSOR_MODE,
-        PUNICODE_STRING, LPDEVMODEW, DWORD, DWORD);
-#line 4536
-HDESK xxxOpenDesktop(POBJECT_ATTRIBUTES, DWORD, DWORD, BOOL*);
-#line 4537
-BOOL OpenDesktopCompletion(PDESKTOP pdesk, HDESK hdesk, DWORD dwFlags, BOOL*);
-BOOL xxxSwitchDesktop(PWINDOWSTATION, PDESKTOP, BOOL);
-VOID SetDesktop(PTHREADINFO pti, PDESKTOP pdesk, HDESK hdesk);
-#line 4540
+
+HDESK xxxCreateDesktop(
+        POBJECT_ATTRIBUTES,
+        KPROCESSOR_MODE,
+        PUNICODE_STRING,
+        LPDEVMODEW,
+        DWORD,
+        DWORD);
+
+#define CST_MAX_THREADS       30
+
+/*
+ * Flags for xxxSwitchDesktop().
+ */
+#define SDF_CREATENEW  0x01 /* New desktop, don't send enable/disable */
+#define SDF_SLOVERRIDE 0x02 /* Don't respect WSF_SWITCHLOCK on pwinsta */
+
+HDESK _OpenDesktop(POBJECT_ATTRIBUTES ccxObja, KPROCESSOR_MODE AccessMode, DWORD dwFlags, DWORD dwDesiredAccess, BOOL *pbShutDown);
+BOOL OpenDesktopCompletion(PDESKTOP pdesk, HDESK hdesk, DWORD dwFlags, BOOL *pbShutDown);
+BOOL xxxSwitchDesktop(PWINDOWSTATION pwinsta, PDESKTOP pdesk, DWORD dwFlags);
+VOID zzzSetDesktop(PTHREADINFO pti, PDESKTOP pdesk, HDESK hdesk);
 HDESK xxxGetInputDesktop(VOID);
-#line 4541
-BOOL _SetThreadDesktop(HDESK, PDESKTOP);
-#line 4542
-HDESK xxxGetThreadDesktop(DWORD, HDESK);
-BOOL xxxCloseDesktop(HDESK);
-BOOL xxxEnumDesktops(FARPROC, LONG, BOOL);
-BOOL xxxEnumDisplayDevices(FARPROC, LONG, BOOL);
-#line 4546
+BOOL xxxSetThreadDesktop(HDESK hdesk, PDESKTOP pdesk);
+HDESK xxxGetThreadDesktop(DWORD dwThread, HDESK hdeskConsole, KPROCESSOR_MODE AccessMode);
+BOOL xxxCloseDesktop(HDESK hdesk, KPROCESSOR_MODE AccessMode);
 DWORD _SetDesktopConsoleThread(PDESKTOP pdesk, DWORD dwThreadId);
+VOID xxxRealizeDesktop(PWND pwnd);
 
 /*
  * WINSTA.C
  */
+NTSTATUS CreateGlobalAtomTable(PVOID* ppAtomTable);
 HWINSTA xxxCreateWindowStation(POBJECT_ATTRIBUTES ObjA,
-        KPROCESSOR_MODE, DWORD amRequest);
-#line 4553
-HWINSTA _OpenWindowStation(POBJECT_ATTRIBUTES, DWORD);
-BOOL xxxSetProcessWindowStation(HWINSTA);
-#line 4555
-PWINDOWSTATION _GetProcessWindowStation(HWINSTA *);
+    KPROCESSOR_MODE OwnershipMode,
+    DWORD amRequest,
+    HANDLE hKbdLayoutFile,
+    DWORD offTable,
+    PKBDTABLE_MULTI_INTERNAL pKbdTableMulti,
+    PCWSTR pwszKLID,
+    UINT uKbdInputLocale);
+HWINSTA _OpenWindowStation(POBJECT_ATTRIBUTES pObjA, DWORD dwDesiredAccess, KPROCESSOR_MODE AccessMode);
+BOOL _CloseWindowStation(HWINSTA hwinsta);
+NTSTATUS xxxSetProcessWindowStation(HWINSTA hwinsta, KPROCESSOR_MODE AccessMode);
+
+PWINDOWSTATION _GetProcessWindowStation(HWINSTA *phwinsta);
+BOOL _LockWorkStation(VOID);
+
 NTSTATUS ReferenceWindowStation(PETHREAD Thread, HWINSTA hwinsta,
         ACCESS_MASK amDesiredAccess, PWINDOWSTATION *ppwinsta, BOOL fUseDesktop);
-#line 4558
 
 /*
  * HOOKS.C
  */
-PROC _SetWindowsHookAW(int nFilterType, PROC pfnFilterProc, BOOL bAnsi);
-#line 4563
-BOOL _UnhookWindowsHookEx(PHOOK phk);
-#line 4564
-BOOL _UnhookWindowsHook(int nFilterType, PROC pfnFilterProc);
-DWORD xxxCallNextHookEx(int nCode, DWORD wParam, DWORD lParam);
+PROC zzzSetWindowsHookAW(int nFilterType, PROC pfnFilterProc, DWORD dwFlags);
+BOOL zzzUnhookWindowsHookEx(PHOOK phk);
+BOOL zzzUnhookWindowsHook(int nFilterType, PROC pfnFilterProc);
+LRESULT xxxCallNextHookEx(int nCode, WPARAM wParam, LPARAM lParam);
 BOOL _CallMsgFilter(LPMSG lpMsg, int nCode);
-BOOL _IsHooked(int nFilterType);
-void CancelJournalling(void);
+VOID zzzCancelJournalling(VOID);
+#if DBG
+#error Original configuration is not selected.
+#else
+#define DbgValidateHooks(phk, iType)
+#endif
+BOOL _RegisterUserApiHook(PUNICODE_STRING pstrLib, ULONG_PTR offPfnInitDefWindowProc);
+BOOL _UnregisterUserApiHook(VOID);
+BOOL xxxLoadUserApiHook(VOID);
+
+
+extern int gihmodUserApiHook;
+
+__inline BOOL IsInsideUserApiHook(
+    VOID)
+{
+    return gihmodUserApiHook >= 0;
+}
+
+#ifdef MESSAGE_PUMP_HOOK
+#error Original configuration is not selected.
+#endif // MESSAGE_PUMP_HOOK
+#line 6843
+
 
 /*
  * SRVHOOK.C
  */
-#line 4573
-DWORD fnHkINLPCWPEXSTRUCT(PWND pwnd, UINT message, DWORD wParam,
-        DWORD lParam, DWORD xParam);
-DWORD fnHkINLPCWPRETEXSTRUCT(PWND pwnd, UINT message, DWORD wParam,
-        DWORD lParam, DWORD xParam);
-
-/*
- * QUEUE.C
- */
-
-PQMSG FindQMsg(PTHREADINFO, PMLIST, PWND, UINT, UINT);
-__inline DWORD GetAppCompatFlags2ForPti(
-    PTHREADINFO pti,
-    WORD wVer)
-{
-    if (wVer < pti->dwExpWinVer) {
-        return 0;
-    }
-
-    return pti->dwCompatFlags2;
-}
-
-#define REMOVE_FROM_LIST(type, pstart, pitem, next) \
-    {                                                           \
-        type** pp;                                              \
-                                                                \
-        for (pp = &pstart; *pp != NULL; pp = &(*pp)->next) {    \
-            if (*pp == pitem) {                                 \
-                *pp = pitem->next;                              \
-                break;                                          \
-            }                                                   \
-        }                                                       \
-    }                                                           \
-
-
-#line 4583
-VOID zzzShowStartGlass(DWORD dwTimeout);
-#line 4584
-DWORD _GetChangeBits(VOID);
+LRESULT fnHkINLPCWPEXSTRUCT(PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, ULONG_PTR xParam);
+LRESULT fnHkINLPCWPRETEXSTRUCT(PWND pwnd, UINT message, WPARAM wParam,
+        LPARAM lParam, ULONG_PTR xParam);
 
 /*
  * EXITWIN.C
  */
-BOOL xxxKillApp(HWND hwnd);
-BOOL xxxEndTask(HWND hwnd, BOOL fShutDown, BOOL fForce);
-#line 4591
-void xxxClientShutdown(PWND pwnd, DWORD wParam, DWORD lParam);
-#line 4592
-LONG EndTaskDlgProc(HWND hwndDlg, UINT wMsg, UINT wParam, LONG lParam);
-#line 4593
-DWORD xxxEndTaskMsgBox( INT iRCID, PWND pwnd, INT nbSize, PVOID pvTrigger, DWORD dwFlags);
-#line 4594
-int  xxxDoEndTaskDialog(TCHAR* pszTitle, HANDLE h, UINT type, int cSeconds);
-#line 4596
-BOOL _MarkProcess(UINT uFlag);
+LONG xxxClientShutdown(PWND pwnd, WPARAM wParam);
+
 
 /*
  * INIT.C
  */
-VOID LW_LoadSomeStrings(VOID);
-VOID LW_LoadProfileInitData(VOID);
-VOID xxxLW_DCInit(VOID);
-VOID LW_LoadDllList(VOID);
-#line 4605
-VOID LW_BrushInit(VOID);
-#line 4606
+BOOL CreateTerminalInput(PTERMINAL pTerm);
+
+VOID LW_LoadProfileInitData(PUNICODE_STRING pProfileUserName);
+VOID xxxODI_ColorInit(PUNICODE_STRING pProfileUserName);
+HRGN InitCreateRgn(VOID);
+VOID xxxUpdateSystemCursorsFromRegistry(PUNICODE_STRING pProfileUserName);
+VOID xxxUpdateSystemIconsFromRegistry(PUNICODE_STRING pProfileUserName);
+VOID RegisterLPK(DWORD dwLpkEntryPoints);
+HBITMAP CreateCaptionStrip(VOID);
+
+BOOL LW_BrushInit(VOID);
 VOID xxxLW_LoadFonts(BOOL bRemote);
 
-void _LoadCursorsAndIcons(void);
-void IncrMBox(void);
-void DecrMBox(void);
-#line 4611
-int  xxxAddFontResourceW(LPWSTR lpFile, FLONG flags);
-#line 4612
-VOID UpdateSystemCursorsFromRegistry(void);
-VOID UpdateSystemIconsFromRegistry(void);
+VOID _LoadCursorsAndIcons(VOID);
 
-BOOL IsSyncOnlyMessage(UINT message, WPARAM wParam);
+VOID UnloadCursorsAndIcons(VOID);
 
-HBITMAP CreateCaptionStrip(VOID);
+VOID IncrMBox(VOID);
+VOID DecrMBox(VOID);
+VOID InitAnsiOem(PCHAR pOemToAnsi, PCHAR pAnsiToOem);
+int  xxxAddFontResourceW(LPWSTR lpFile, FLONG flags, DESIGNVECTOR *pdv);
+VOID EnforceColorDependentSettings(VOID);
+
+
 /*
  * ACCESS.C
  */
-VOID UpdatePerUserAccessPackSettings(VOID);
+VOID xxxUpdatePerUserAccessPackSettings(PUNICODE_STRING pProfileUserName);
 
 /*
  * inctlpan.c
  */
-#line 4626
-HFONT FAR PASCAL CreateFontFromWinIni(LPLOGFONT lplf, UINT idFont);
-#line 4627
-
-VOID SetMinMetrics(LPMINIMIZEDMETRICS lpmin);
-VOID SetWindowNCMetrics(LPNONCLIENTMETRICS lpnc, BOOL fSizeChange, int clNewBorder);
 VOID GetWindowNCMetrics(LPNONCLIENTMETRICS lpnc);
-VOID SetIconMetrics(LPICONMETRICS lpicon);
-VOID SetNCFonts(LPNONCLIENTMETRICS lpnc);
+
+HFONT CreateFontFromWinIni(PUNICODE_STRING pProfileUserName,LPLOGFONT lplf, UINT idFont);
+VOID SetMinMetrics(PUNICODE_STRING pProfileUserName,LPMINIMIZEDMETRICS lpmin);
+BOOL xxxSetWindowNCMetrics(PUNICODE_STRING pProfileUserName,LPNONCLIENTMETRICS lpnc, BOOL fSizeChange, int clNewBorder);
+BOOL SetIconMetrics(PUNICODE_STRING pProfileUserName,LPICONMETRICS lpicon);
+BOOL xxxSetNCFonts(PUNICODE_STRING pProfileUserName, LPNONCLIENTMETRICS lpnc);
+BOOL CreateBitmapStrip(VOID);
+BOOL UpdateWinIniInt(PUNICODE_STRING pProfileUserName, UINT idSection, UINT wKeyNameId, int value);
 
 /*
  * rare.c
  */
-#line 4637
-void FAR SetDesktopMetrics(void);
+VOID SetDesktopMetrics(VOID);
+VOID SetMsgBox(PWND pwnd);
 
-#line 4639
 BOOL _RegisterShellHookWindow(PWND pwnd);
-void _DeregisterShellHookWindow(PWND pwnd);
+BOOL _DeregisterShellHookWindow(PWND pwnd);
 BOOL xxxSendMinRectMessages(PWND pwnd, RECT *lpRect);
-#line 4642
-void PostShellHookMessages(UINT message, HWND hwnd);
-#line 4643
+void PostShellHookMessages(UINT message, LPARAM lParam);
 VOID _ResetDblClk(VOID);
-#line 4644
-VOID SimulateShiftF10(VOID);
+VOID xxxSimulateShiftF10(VOID);
+BOOL VWPLAdd(PVWPL *ppvwpl, PWND pwnd, DWORD dwThreshold);
+BOOL VWPLRemove(PVWPL *ppvwpl, PWND pwnd);
+PWND VWPLNext(PVWPL pvwpl, PWND pwndPrev, DWORD *pnPrev);
 
 /*
  * DDETRACK STUFF
  */
+
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 6932
+#define ValidatePublicObjectList()
+#define TraceDdeMsg(m, h1, h2, c)
+#endif // DBG
 
 typedef struct tagFREELIST {
     struct tagFREELIST *next;
@@ -4870,7 +6126,6 @@ typedef struct tagFREELIST {
     DWORD flags;                        // XS_ flags describing data
 } FREELIST, *PFREELIST;
 
-#line 4656
 typedef struct tagDDEIMP {
     SECURITY_QUALITY_OF_SERVICE qos;
     SECURITY_CLIENT_CONTEXT ClientContext;
@@ -4882,8 +6137,8 @@ typedef struct tagDDECONV {
     THROBJHEAD          head;           // HM header
     struct tagDDECONV   *snext;
     struct tagDDECONV   *spartnerConv;  // siamese twin
-    struct tagWND       *spwnd;         // associated pwnd
-    struct tagWND       *spwndPartner;  // associated partner pwnd
+    PWND                spwnd;          // associated pwnd
+    PWND                spwndPartner;   // associated partner pwnd
     struct tagXSTATE    *spxsOut;       // transaction info queue - out point
     struct tagXSTATE    *spxsIn;        // transaction info queue - in point
     struct tagFREELIST  *pfl;           // free list
@@ -4891,7 +6146,7 @@ typedef struct tagDDECONV {
     struct tagDDEIMP    *pddei;         // impersonation information
 } DDECONV, *PDDECONV;
 
-typedef DWORD (FNDDERESPONSE)(PDWORD pmsg, LPLONG plParam, PDDECONV pDdeConv);
+typedef DWORD (FNDDERESPONSE)(PDWORD pmsg, LPARAM *plParam, PDDECONV pDdeConv);
 typedef FNDDERESPONSE *PFNDDERESPONSE;
 
 typedef struct tagXSTATE {
@@ -4903,7 +6158,6 @@ typedef struct tagXSTATE {
     PINTDDEINFO         pIntDdeInfo;    // DDE data being transfered
     DWORD               flags;          // XS_ flags describing transaction/data
 } XSTATE, *PXSTATE;
-#line 4688
 
 // values for flags field
 
@@ -4912,134 +6166,156 @@ typedef struct tagXSTATE {
 #define CXF_PARTNER_WINDOW_DIED     0x0004
 #define CXF_INTRA_PROCESS           0x8000
 
-#line 4696
-BOOL xxxDDETrackSendHook(PWND pwndTo, DWORD message, WPARAM wParam, LONG lParam);
-DWORD xxxDDETrackPostHook(PUINT pmessage, PWND pwndTo, WPARAM wParam, LPLONG plParam, BOOL fSent);
-#line 4698
-VOID   FreeDdeXact(PXSTATE pxs);
-#line 4699
+BOOL xxxDDETrackSendHook(PWND pwndTo, DWORD message, WPARAM wParam, LPARAM lParam);
+DWORD xxxDDETrackPostHook(PUINT pmessage, PWND pwndTo, WPARAM wParam, LPARAM *plParam, BOOL fSent);
+VOID FreeDdeXact(PXSTATE pxs);
 
 VOID xxxDDETrackGetMessageHook(PMSG pmsg);
-#line 4701
 VOID xxxDDETrackWindowDying(PWND pwnd, PDDECONV pDdeConv);
 VOID FreeDdeConv(PDDECONV pDdeConv);
-#line 4703
 BOOL _ImpersonateDdeClientWindow(PWND pwndClient, PWND pwndServer);
-#line 4704
 
-HDC _GetScreenDC(VOID);
-HBITMAP _ConvertBitmap(HBITMAP hBitmap);
 
-VOID DesktopRecalc(LPRECT, LPRECT, BOOL);
+typedef struct tagMONITORPOS
+{
+    RECT     rcMonitor;     /* where the monitor rect was */
+    RECT     rcWork;        /* where the work rect was */
+    PMONITOR pMonitor;      /* what new monitor gets its windows */
+} MONITORPOS, *PMONITORPOS;
 
-BOOL _SetDoubleClickTime(UINT);
-BOOL APIENTRY _SwapMouseButton(BOOL fSwapButtons);
+typedef struct tagMONITORRECTS
+{
+    int             cMonitor;   /* number of monitors */
+    MONITORPOS      amp[1];     /* the monitor positions */
+} MONITORRECTS, *PMONITORRECTS;
+
+
+// stuctures for windows resize/ reposition on reconnect.
+// when disconnecting from local console, these structures allow
+// to memorize the monitors layout and windows size and positions
+// on the monitors. When reconnecting back to local console, the snapshot
+// is used to restore windows positions for windows that still exist.
+
+
+typedef struct tagWPSNAPSHOT
+{
+    RECT     rcWindow;                 /* Windows rect */
+    HWND     hwnd;                     /* hwnd */
+} WPSNAPSHOT, *PWPSNAPSHOT;
+
+typedef struct tagWMSNAPSHOT
+{
+    PMONITORRECTS   pmr;        /* Monitors and their dimensions and positions */
+    PWPSNAPSHOT     pwps;       /* Windows and their dimensions and positions */
+    int cWindows;               /* number of windows in pwps */
+} WMSNAPSHOT, *PWMSNAPSHOT;
+
+NTSTATUS RestoreMonitorsAndWindowsRects(VOID);
+NTSTATUS SnapShotMonitorsAndWindowsRects(VOID);
+VOID  CleanupMonitorsAndWindowsSnapShot(VOID);
+PWPSNAPSHOT SnapshotWindowRects(int *pnWindows);
+
+PMONITORRECTS SnapshotMonitorRects(VOID);
+VOID xxxDesktopRecalc(PMONITORRECTS pmrOld);
+VOID UpdateMonitorRectsSnapShot(PMONITORRECTS pmr);
+BOOL IsValidMonitor(PMONITOR pMonitor);
+
+BOOL _SetDoubleClickTime(UINT dtTime);
+BOOL _SwapMouseButton(BOOL fSwapButtons);
 VOID xxxDestroyThreadInfo(VOID);
-#line 4713
-VOID DeleteThreadInfo (PTHREADINFO pti);
-
-DWORD _GetWindowContextHelpId(PWND pWnd);
-BOOL _SetWindowContextHelpId(PWND pWnd, DWORD dwContextId);
 
 BOOL _GetWindowPlacement(PWND pwnd, PWINDOWPLACEMENT pwp);
 
-PMENU _GetSystemMenu(PWND pWnd, BOOL bRevert);
+PMENU xxxGetSystemMenu(PWND pWnd, BOOL bRevert);
 PMENU _CreateMenu(VOID);
 PMENU _CreatePopupMenu(VOID);
 BOOL  _DestroyMenu(PMENU pMenu);
 DWORD _CheckMenuItem(PMENU pMenu, UINT wIDCheckItem, UINT wCheck);
-DWORD _EnableMenuItem(PMENU pMenu, UINT wIDEnableItem, UINT wEnable);
-WINUSERAPI UINT  _GetMenuItemID(PMENU pMenu, int nPos);
-WINUSERAPI UINT  _GetMenuItemCount(PMENU pMenu);
-
-PMENU _GetMenu(PWND pWnd);
-BOOL _SetMenuContextHelpId(PMENU pMenu, DWORD dwContextHelpId);
+DWORD xxxEnableMenuItem(PMENU pMenu, UINT wIDEnableItem, UINT wEnable);
 
 PWND _GetNextQueueWindow(PWND pwnd, BOOL fDir, BOOL fAltEsc);
 
-UINT   _SetSystemTimer(PWND pwnd, UINT nIDEvent, DWORD dwElapse,
-        WNDPROC_PWND pTimerFunc);
-#line 4736
+UINT_PTR _SetSystemTimer(PWND pwnd, UINT_PTR nIDEvent, DWORD dwElapse,
+        TIMERPROC_PWND pTimerFunc);
 BOOL   _SetClipboardData(UINT fmt, HANDLE hData, BOOL fGlobalHandle, BOOL fIncSerialNumber);
-#line 4737
-BOOL   _SetProp(PWND pwnd, LPWSTR pszKey, HANDLE hData);
-HANDLE _RemoveProp(PWND pwnd, LPWSTR pszKey);
 WORD   _SetClassWord(PWND pwnd, int index, WORD value);
 DWORD  xxxSetClassLong(PWND pwnd, int index, DWORD value, BOOL bAnsi);
-ATOM   _RegisterClassEx(LPWNDCLASSEX pwc, PROC lpfnWorker, PCLSMENUNAME pcmn,
+#ifdef _WIN64
+#error Original configuration is not selected.
+#else
+#define xxxSetClassLongPtr  xxxSetClassLong
+#endif
+ATOM   xxxRegisterClassEx(LPWNDCLASSVEREX pwc, PCLSMENUNAME pcmn,
         WORD fnid, DWORD dwFlags, LPDWORD pdwWOW);
 BOOL  xxxHiliteMenuItem(PWND pwnd, PMENU pmenu, UINT cmd, UINT flags);
-PMENU  _CreatePopupMenu();
-#line 4745
 HANDLE _CreateAcceleratorTable(LPACCEL paccel, int cbAccel);
-#line 4746
 HANDLE xxxGetInputEvent(DWORD dwWakeMask);
-#line 4747
-BOOL   _UnregisterClass(LPWSTR lpszClassName, HANDLE hModule, PCLSMENUNAME pcmn);
-ATOM   _GetClassInfoEx(HANDLE hModule, LPWSTR lpszClassName, LPWNDCLASSEX pwc, LPWSTR *ppszMenuName, BOOL bAnsi);
+BOOL   _UnregisterClass(LPCWSTR lpszClassName, HANDLE hModule, PCLSMENUNAME pcmn);
+ATOM   _GetClassInfoEx(HANDLE hModule, LPCWSTR lpszClassName, LPWNDCLASSEX pwc, LPWSTR *ppszMenuName, BOOL bAnsi);
 PWND   _WindowFromDC(HDC hdc);
-PCLS   _GetWOWClass(HANDLE hModule, LPWSTR lpszClassName);
-int    xxxHkCallHook(PHOOK phk, int nCode, DWORD wParam, DWORD lParam);
-PHOOK  _SetWindowsHookEx(HANDLE hmod, PUNICODE_STRING pstrLib,
-        PTHREADINFO ptiThread, int nFilterType, PROC pfnFilterProc, BOOL bAnsi);
-#line 4754
+PCLS   _GetWOWClass(HANDLE hModule, LPCWSTR lpszClassName);
+LRESULT xxxHkCallHook(PHOOK phk, int nCode, WPARAM wParam, LPARAM lParam);
+PHOOK  zzzSetWindowsHookEx(HANDLE hmod, PUNICODE_STRING pstrLib,
+        PTHREADINFO ptiThread, int nFilterType, PROC pfnFilterProc, DWORD dwFlags);
+DWORD  GetDebugHookLParamSize(WPARAM wParam, PDEBUGHOOKINFO pdebughookstruct);
 BOOL   _RegisterLogonProcess(DWORD dwProcessId, BOOL fSecure);
-#line 4755
 UINT   _LockWindowStation(PWINDOWSTATION pwinsta);
 BOOL   _UnlockWindowStation(PWINDOWSTATION pwinsta);
-UINT   _SetWindowStationUser(PWINDOWSTATION pwinsta, PLUID pluidUser,
+BOOL   _SetWindowStationUser(PWINDOWSTATION pwinsta, PLUID pluidUser,
         PSID psidUser, DWORD cbsidUser);
 BOOL   _SetDesktopBitmap(PDESKTOP pdesk, HBITMAP hbitmap, DWORD dwStyle);
-BOOL   _SetLogonNotifyWindow(PWINDOWSTATION pwinsta, PWND pwnd);
+
+BOOL   _SetLogonNotifyWindow(PWND pwnd);
+
+
 BOOL   _RegisterTasklist(PWND pwndTasklist);
-#line 4762
-LONG   _SetMessageExtraInfo(LONG);
-#line 4763
-WINUSERAPI DWORD  _GetWindowThreadProcessId(PWND pwnd, LPDWORD lpdwProcessId);
+LONG_PTR _SetMessageExtraInfo(LONG_PTR);
 VOID   xxxRemoveEvents(PQ pq, int nQueue, DWORD flags);
 
-#line 4768
-HANDLE OpenCacheKeyEx(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, ACCESS_MASK amRequest, PDWORD pdwPolicyFlags);
+#line 7089
 
-#line 4770
+/*
+ * ntcb.h funtions.
+ */
 DWORD ClientGetListboxString(PWND hwnd, UINT msg,
-        DWORD wParam, PVOID lParam,
-        DWORD xParam, PROC xpfn, DWORD dwSCMSFlags, BOOL bNotString, PSMS psms);
-#line 4773
-HANDLE ClientLoadLibrary(PUNICODE_STRING pstrLib, BOOL bWx86KnownDll);
+        WPARAM wParam, PVOID lParam,
+        ULONG_PTR xParam, PROC xpfn, DWORD dwSCMSFlags, BOOL bNotString, PSMS psms);
+HANDLE ClientLoadLibrary(PUNICODE_STRING pstrLib, ULONG_PTR offPfnInitDefWindowProc);
 BOOL ClientFreeLibrary(HANDLE hmod);
+
+#ifdef MESSAGE_PUMP_HOOK
+#error Original configuration is not selected.
+#endif
+#line 7103
+
 BOOL xxxClientGetCharsetInfo(LCID lcid, PCHARSETINFO pcs);
-#line 4776
 BOOL ClientExitProcess(PFNW32ET pfn, DWORD dwExitCode);
-#line 4777
 BOOL ClientGrayString(GRAYSTRINGPROC pfnOutProc, HDC hdc,
         DWORD lpData, int nCount);
 BOOL CopyFromClient(LPBYTE lpByte, LPBYTE lpByteClient, DWORD cch,
         BOOL fString, BOOL fAnsi);
 BOOL CopyToClient(LPBYTE lpByte, LPBYTE lpByteClient,
         DWORD cchMax, BOOL fAnsi);
-BOOL ClientSendHelp(HELPINFO    *pHelpInfo,DWORD xpfnProc);
 VOID ClientNoMemoryPopup(VOID);
-NTSTATUS ClientThreadSetup(VOID);
-#line 4787
-NTSTATUS ClientOpenKey(PHANDLE, ACCESS_MASK, PUNICODE_STRING);
-#ifdef FE_IME
-#error
-#line 4792
-#endif
+NTSTATUS xxxClientThreadSetup(VOID);
 
-#line 4794
+
+
+BOOL ClientImmLoadLayout(HKL, PIMEINFOEX);
+DWORD ClientImmProcessKey(HWND, HKL, UINT, LPARAM, DWORD);
+
+NTSTATUS xxxUserModeCallback (ULONG uApi, PVOID pIn, ULONG cbIn, PVOID pOut, ULONG cbOut);
+int xxxClientLoadStringW(UINT StrID, LPWSTR szText, int cch);
+
 PCURSOR ClassSetSmallIcon(
     PCLS pcls,
     PCURSOR pcursor,
     BOOL fServerCreated);
-#line 4798
 
 BOOL _GetTextMetricsW(
     HDC hdc,
     LPTEXTMETRICW ptm);
 
-#line 4803
 int xxxDrawMenuBarTemp(
     PWND pwnd,
     HDC hdc,
@@ -5059,131 +6335,518 @@ BOOL xxxDrawCaptionTemp(
 WORD xxxTrackCaptionButton(
     PWND pwnd,
     UINT hit);
-#line 4822
 
-HRGN SaveClipRgn(
-    HDC hdc);
+VOID GiveForegroundActivateRight(HANDLE hPid);
+BOOL HasForegroundActivateRight(HANDLE hPid);
+BOOL FRemoveForegroundActivate(PTHREADINFO pti);
+VOID RestoreForegroundActivate(VOID);
+VOID CancelForegroundActivate(VOID);
 
-void RestoreClipRgn(
-    HDC hdc,
-    HRGN hrgnRestore);
+#define ACTIVATE_ARRAY_SIZE 5
+extern HANDLE ghCanActivateForegroundPIDs[ACTIVATE_ARRAY_SIZE];
 
-void RestoreForegroundActivate();
-void CancelForegroundActivate();
+__inline VOID GiveForegroundActivateRight(
+    HANDLE hPid)
+{
+    static int index = 0;
+
+    TAGMSG1(DBGTAG_FOREGROUND, "Giving 0x%x foreground activate right", hPid);
+    ghCanActivateForegroundPIDs[index++] = hPid;
+    if (index == ACTIVATE_ARRAY_SIZE) {
+        index = 0;
+    }
+}
+
+__inline BOOL HasForegroundActivateRight(
+    HANDLE hPid)
+{
+    int i = 0;
+
+    for(; i < ACTIVATE_ARRAY_SIZE; ++i) {
+            if (ghCanActivateForegroundPIDs[i] == hPid) {
+                TAGMSG1(DBGTAG_FOREGROUND, "HasForegroundActivateRight: Found 0x%x", hPid);
+                return TRUE;
+            }
+     }
+
+     TAGMSG1(DBGTAG_FOREGROUND, "HasForegroundActivateRight: Did NOT find 0x%x", hPid);
+     return FALSE;
+}
 
 
 #define WHERE_NOONE_CAN_SEE_ME ((int) -32000)
-#line 4835
 BOOL MinToTray(PWND pwnd);
 
 void xxxUpdateThreadsWindows(
     PTHREADINFO pti,
     PWND pwnd,
     HRGN hrgnFullDrag);
-#line 4841
 
-BOOL ClientDeleteObject(
-    HANDLE hobj,
-    UINT   utype);
-
-#line 4846
-NTSTATUS QueryInformationThread(
+NTSTATUS xxxQueryInformationThread(
     IN HANDLE hThread,
     IN USERTHREADINFOCLASS ThreadInfoClass,
     OUT PVOID ThreadInformation,
     IN ULONG ThreadInformationLength,
     OUT PULONG ReturnLength OPTIONAL);
 
-NTSTATUS SetInformationThread(
+NTSTATUS xxxSetInformationThread(
     IN HANDLE hThread,
     IN USERTHREADINFOCLASS ThreadInfoClass,
     IN PVOID ThreadInformation,
     IN ULONG ThreadInformationLength);
 
-NTSTATUS ConsoleControl(
+NTSTATUS GetProcessDefaultWindowOrientation(
+    IN HANDLE hProcess,
+    OUT DWORD *pdwDefaultOrientation);
+
+NTSTATUS SetProcessDefaultWindowOrientation(
+    IN HANDLE hProcess,
+    IN DWORD dwDefaultOrientation);
+
+NTSTATUS SetInformationProcess(
+    IN HANDLE hProcess,
+    IN USERPROCESSINFOCLASS ProcessInfoClass,
+    IN PVOID ProcessInformation,
+    IN ULONG ProcessInformationLength);
+
+
+NTSTATUS xxxConsoleControl(
     IN CONSOLECONTROL ConsoleControl,
     IN PVOID ConsoleInformation,
     IN ULONG ConsoleInformationLength);
-#line 4863
 
-#endif /*  MSDWP  */
 
-#line 4866
 /***************************************************************************\
 * String Table Defines
 *
-* NTUSERK.MC has a nice big table of strings that are meant to be
-* localized.  Before use, the strings are pulled from the resource table
+* KERNEL\STRID.MC has a nice big table of strings that are meant to be
+* localized. Before use, the strings are pulled from the resource table
 * with LoadString, passing it one of the following string ids.
 *
 * NOTE: Only strings that need to be localized should be added to the
-*       string table.  Class name strings, etc are NOT localized.
+*       string table. Class name strings, etc are NOT localized.
 *
 * LATER: All string table entries should be reexamined to be sure they
 *        conform to the note above.
 *
 \***************************************************************************/
-#line 4880
 
-#line 4881
 #define OCR_APPSTARTING         32650
-#line 4882
 
 /*
- * This is for SPI_GET/SETUSERPREFERENCE.
- * Currently it's for DWORD values only. A type field will be added
- *  so all new settings will be mostly handled through common SystemParametersInfo
- *  code.
+ * Win Event Hook struct
  */
-typedef struct tagPROFILEVALUEINFO {
-    DWORD       dwValue;
-    UINT        uSection;
-    LPCWSTR     pwszKeyName;
-} PROFILEVALUEINFO, *PPROFILEVALUEINFO;
+typedef struct tagEVENTHOOK {
+    THROBJHEAD          head;                //
+    struct tagEVENTHOOK *pehNext;            // Next event hook
+    UINT                eventMin;            // Min event (>=) to hook
+    UINT                eventMax;            // Max event (<=) to hook
+    UINT                fDestroyed:1;        // If orphaned while in use
+// IanJa - we don't need this bit
+//  UINT                f32Bit:1;            // If 32-bit client
+    UINT                fIgnoreOwnThread:1;  // Ignore events for installer thread
+    UINT                fIgnoreOwnProcess:1; // Ignore events for installer process
+    UINT                fSync:1;             // Sync event (inject DLL into each process)
+    HANDLE              hEventProcess;       // Process being hooked
+    DWORD               idEventThread;       // Thread being hooked
+// (IanJa - have head.pti: don't need ppiInstaller, can use GETPTI(peh)->ppi)
+//  DWORD               idInstallerProcess;  // ID of process that installed hook
+    ULONG_PTR            offPfn;             // offset event proc
+    int                 ihmod;               // index of module containing event proc
+    LPWSTR              pwszModulePath;      // Path of module library for global sync.
+} EVENTHOOK, *PEVENTHOOK;
 
+typedef struct tagNOTIFY {
+    struct tagNOTIFY *pNotifyNext;         // Next notification
+    PEVENTHOOK        spEventHook;         // Event this refers to
+    DWORD             event;               // Event
+    HWND              hwnd;                // hwnd to ask about it
+    LONG              idObject;            // object ID
+    LONG              idChild;             // child id
+    DWORD             idSenderThread;      // Thread generating event
+    DWORD             dwEventTime;         // Event time
+    DWORD             dwWEFlags;           // WEF_DEFERNOTIFY etc.
+    PTHREADINFO       ptiReceiver;         // Thread receiving event
+} NOTIFY, *PNOTIFY;
+
+VOID xxxWindowEvent(DWORD event, PWND pwnd, LONG idObject, LONG idChild, DWORD dwFlags);
+#define WEF_USEPWNDTHREAD 0x0001
+#define WEF_DEFERNOTIFY   0x0002
+#define WEF_ASYNC         0x0004
+#define WEF_POSTED        0x0008
+
+#define DeferWinEventNotify()      CheckCritIn();          \
+                                   gdwDeferWinEvent++
+#define IsWinEventNotifyDeferred() (gdwDeferWinEvent > 0)
+#define IsWinEventNotifyDeferredOK() (!IsWinEventNotifyDeferred() || ISATOMICCHECK())
+#define zzzEndDeferWinEventNotify()                        \
+        UserAssert(IsWinEventNotifyDeferred());            \
+        CheckCritIn();                                     \
+        if (--gdwDeferWinEvent == 0) {                     \
+            if (gpPendingNotifies != NULL) { \
+                xxxFlushDeferredWindowEvents();            \
+            }                                              \
+        }
+
+/*
+ * Only use this one for bookkeeping gdwDeferWinEvent,
+ * which may be required without leaving the critical section.
+ */
+#define EndDeferWinEventNotifyWithoutProcessing()          \
+        UserAssert(IsWinEventNotifyDeferred());            \
+        CheckCritIn();                                     \
+        --gdwDeferWinEvent
+
+#define zzzWindowEvent(event, pwnd, idObject, idChild, dwFlags) \
+        xxxWindowEvent(event, pwnd, idObject, idChild,          \
+            IsWinEventNotifyDeferred() ? (dwFlags) | WEF_DEFERNOTIFY : (dwFlags))
+
+VOID xxxFlushDeferredWindowEvents();
+
+BOOL xxxClientCallWinEventProc(WINEVENTPROC pfn, PEVENTHOOK pEventHook, PNOTIFY pNotify);
+void DestroyEventHook(PEVENTHOOK);
+VOID FreeThreadsWinEvents(PTHREADINFO pti);
+
+BOOL       _UnhookWinEvent(PEVENTHOOK peh);
+VOID       DestroyNotify(PNOTIFY pNotify);
+PEVENTHOOK xxxProcessNotifyWinEvent(PNOTIFY pNotify);
+PEVENTHOOK _SetWinEventHook(DWORD eventMin, DWORD eventMax,
+        HMODULE hmodWinEventProc, PUNICODE_STRING pstrLib,
+        WINEVENTPROC pfnWinEventProc, HANDLE hEventProcess,
+        DWORD idEventThread, DWORD dwFlags);
+BOOL _GetGUIThreadInfo(PTHREADINFO pti, PGUITHREADINFO pgui);
+BOOL xxxGetTitleBarInfo(PWND pwnd, PTITLEBARINFO ptbi);
+BOOL xxxGetComboBoxInfo(PWND pwnd, PCOMBOBOXINFO ptbi);
+DWORD xxxGetListBoxInfo(PWND pwnd);
+BOOL xxxGetScrollBarInfo(PWND pwnd, LONG idObject, PSCROLLBARINFO ptbi);
+PWND _GetAncestor(PWND pwnd, UINT gaFlags);
+PWND _RealChildWindowFromPoint(PWND pwndParent, POINT pt);
+BOOL _GetAltTabInfo(int iItem, PALTTABINFO pati,
+        LPWSTR lpszItemText, UINT cchItemText, BOOL bAnsi);
+BOOL xxxGetMenuBarInfo(PWND pwnd, long idObject, long idItem, PMENUBARINFO pmbi);
+
+typedef HWND *PHWND;
+
+typedef struct tagSwitchWndInfo {
+
+    PBWL    pbwl;               // Pointer to the window list built.
+    PHWND   phwndLast;          // Pointer to the last window in the list.
+    PHWND   phwndCurrent;       // pointer to the current window.
+
+    INT     iTotalTasks;        // Total number of tasks.
+    INT     iTasksShown;        // Total tasks shown.
+    BOOL    fScroll;            // Is there a need to scroll?
+
+    INT     iFirstTaskIndex;    // Index to the first task shown.
+
+    INT     iNoOfColumns;       // Max Number of tasks per row.
+    INT     iNoOfRows;          // Max Number of rows of icons in the switch window.
+    INT     iIconsInLastRow;    // Icons in last row.
+    INT     iCurCol;            // Current column where hilite lies.
+    INT     iCurRow;            // Current row where hilite lies.
+    INT     cxSwitch;           // Switch Window dimensions.
+    INT     cySwitch;
+    POINT   ptFirstRowStart;    // Top left corner of the first Icon Slot.
+    RECT    rcTaskName;         // Rect where Task name is displayed.
+    BOOL    fJournaling;        // Determins how we check the keyboard state
+} SWITCHWNDINFO, *PSWINFO;
+
+typedef struct tagSWITCHWND {
+    WND;
+    PSWINFO pswi;
+} SWITCHWND, *PSWITCHWND;
+
+typedef struct tagHOTKEYSTRUCT {
+    PWND  spwnd;
+    DWORD key;
+} HOTKEYSTRUCT, *PHOTKEYSTRUCT;
+
+#define LANGTOGGLEKEYS_SIZE 3
+
+/*
+ * ACCF_ and PUDF_ flags share the same field. ACCF fields
+ * are so named because they may later move to a differnt
+ * struct.
+ */
+#define ACCF_DEFAULTFILTERKEYSON        0x00000001
+#define ACCF_DEFAULTSTICKYKEYSON        0x00000002
+#define ACCF_DEFAULTMOUSEKEYSON         0x00000004
+#define ACCF_DEFAULTTOGGLEKEYSON        0x00000008
+#define ACCF_DEFAULTTIMEOUTON           0x00000010
+#define ACCF_DEFAULTKEYBOARDPREF        0x00000020
+#define ACCF_DEFAULTSCREENREADER        0x00000040
+#define ACCF_DEFAULTHIGHCONTRASTON      0x00000080
+#define ACCF_ACCESSENABLED              0x00000100
+#define ACCF_IGNOREBREAKCODE            0x00000400
+#define ACCF_FKMAKECODEPROCESSED        0x00000800
+#define ACCF_MKVIRTUALMOUSE             0x00001000
+#define ACCF_MKREPEATVK                 0x00002000
+#define ACCF_FIRSTTICK                  0x00004000
+#define ACCF_SHOWSOUNDSON               0x00008000
+
+/*
+ * NOTE: PUDF_ANIMATE must have the same value as MINMAX_ANIMATE.
+ */
+#define PUDF_ANIMATE                    0x00010000
+
+#define ACCF_KEYBOARDPREF               0x00020000
+#define ACCF_SCREENREADER               0x00040000
+#define PUDF_BEEP                       0x00080000  /* Warning beeps allowed?                   */
+#define PUDF_DRAGFULLWINDOWS            0x00100000  /* Drag xor rect or full windows            */
+#define PUDF_ICONTITLEWRAP              0x00200000  /* Wrap icon titles or just use single line */
+#define PUDF_FONTSARELOADED             0x00400000
+#define PUDF_POPUPINUSE                 0x00800000
+#define PUDF_EXTENDEDSOUNDS             0x01000000
+#define PUDF_MENUSTATEINUSE             0x02000000
+#define PUDF_VDMBOUNDSACTIVE            0x04000000
+#define PUDF_ALLOWFOREGROUNDACTIVATE    0x08000000
+#define PUDF_DRAGGINGFULLWINDOW         0x10000000
+#define PUDF_LOCKFULLSCREEN             0x20000000
+#define PUDF_GSMWPINUSE                 0x40000000
+
+#define TEST_ACCF(f)               TEST_FLAG(gdwPUDFlags, f)
+#define TEST_BOOL_ACCF(f)          TEST_BOOL_FLAG(gdwPUDFlags, f)
+#define SET_ACCF(f)                SET_FLAG(gdwPUDFlags, f)
+#define CLEAR_ACCF(f)              CLEAR_FLAG(gdwPUDFlags, f)
+#define SET_OR_CLEAR_ACCF(f, fSet) SET_OR_CLEAR_FLAG(gdwPUDFlags, f, fSet)
+#define TOGGLE_ACCF(f)             TOGGLE_FLAG(gdwPUDFlags, f)
+
+#define TEST_PUDF(f)               TEST_FLAG(gdwPUDFlags, f)
+#define TEST_BOOL_PUDF(f)          TEST_BOOL_FLAG(gdwPUDFlags, f)
+#line 7430
+#define CLEAR_PUDF(f)              CLEAR_FLAG(gdwPUDFlags, f)
+#define SET_OR_CLEAR_PUDF(f, fSet) SET_OR_CLEAR_FLAG(gdwPUDFlags, f, fSet)
+#define TOGGLE_PUDF(f)             TOGGLE_FLAG(gdwPUDFlags, f)
+
+/*
+ * Power state stuff
+ */
+
+typedef struct tagPOWERSTATE {
+    volatile ULONG           fInProgress:1;
+    volatile ULONG           fCritical:1;
+    volatile ULONG           fOverrideApps:1;
+    volatile ULONG           fQueryAllowed:1;
+    volatile ULONG           fUIAllowed:1;
+    PKEVENT                  pEvent;
+    BROADCASTSYSTEMMSGPARAMS bsmParams;
+    POWERSTATEPARAMS         psParams;
+    ULONG PowerStateTask;
+} POWERSTATE, *PPOWERSTATE;
+
+typedef struct _POWER_INIT {
+    PVIDEO_WIN32K_CALLBACKS_PARAMS Params;
+    PKEVENT   pPowerReadyEvent;
+} POWER_INIT, *PPOWER_INIT;
+
+#define POWERON_PHASE  -1
+#define LOWPOWER_PHASE  1
+#define POWEROFF_PHASE  2
+
+NTSTATUS InitializePowerRequestList(HANDLE hPowerRequestEvent);
+VOID     CleanupPowerRequestList(VOID);
+VOID     DeletePowerRequestList(VOID);
+VOID     xxxUserPowerCalloutWorker(VOID);
+VOID     VideoPortCalloutThread(PPOWER_INIT pInitData);
+
+/*
+ * Fade-in / fade-out globals.
+ */
+
+typedef struct tagFADE {
+    HANDLE hsprite;
+    HDC hdc;
+    HBITMAP hbm;
+    POINT ptDst;
+    SIZE size;
+    DWORD dwTime;
+    DWORD dwStart;
+    DWORD dwFlags;
+#ifdef MOUSE_IP
+#error Original configuration is not selected.
+#endif
+} FADE, *PFADE;
 
 /*
  * Globals are included last because they may require some of the types
  * being defined above.
  */
-#line 4904
+extern PTHREADINFO     gptiForeground;
+extern FADE gfade;
+extern LASTINPUT glinp;
+extern PPROCESSINFO gppiLockSFW;
+extern UINT guSFWLockCount;
+extern UINT gdtDblClk;
+extern DWORD gpdwCPUserPreferencesMask [SPI_BOOLMASKDWORDSIZE];
+extern PROFILEVALUEINFO gpviCPUserPreferences [1 + SPI_DWORDRANGECOUNT];
+extern PDISPLAYINFO        gpDispInfo;
+extern BOOL                gbMDEVDisabled;
+extern PERESOURCE  gpresDeviceInfoList;
+extern PERESOURCE  gpresMouseEventQueue;
+extern DWORD               gdwUpdateKeyboard;
+extern PFAST_MUTEX gpHandleFlagsMutex;
+
+#line 7489
+/*
+ * If you make a change that requires including strid.h when building
+ *  ntuser\rtl, then you need to change the sources/makefil* files so this
+ *  file will be built in ntuser\inc; make sure that the output of
+ *  mc.exe still goes to the kernel directory; this is because there are
+ *  other places (like ntuser\server) where we use the same file name.
+ */
+#ifndef _USERRTL_
+#include "strid.h"
+#endif
+
+#line 7501
+
+#define TestALPHA(uSetting) (!gbDisableAlpha && TestEffectUP(uSetting))
+
+/*
+ * tooltips/tracking prototypes from tooltips.c
+ */
+
+typedef struct tagTOOLTIP {
+    DWORD dwFlags;
+    UINT uTID;
+    DWORD dwAnimStart;
+    int iyAnim;
+    LPWSTR pstr;
+} TOOLTIP;
+
+typedef struct tagTOOLTIPWND {
+    WND;
+
+    DWORD dwShowDelay;
+    DWORD dwHideDelay;
+    HDC hdcMem;
+    HBITMAP hbmMem;
+
+    TOOLTIP;  // this field must be last!
+} TOOLTIPWND, *PTOOLTIPWND;
+
+#define HTEXSCROLLFIRST     60
+#define HTSCROLLUP          60
+#define HTSCROLLDOWN        61
+#define HTSCROLLUPPAGE      62
+#define HTSCROLLDOWNPAGE    63
+#define HTSCROLLTHUMB       64
+#define HTEXSCROLLLAST      64
+#define HTEXMENUFIRST       65
+#define HTMDISYSMENU        65
+#define HTMDIMAXBUTTON      66
+#define HTMDIMINBUTTON      67
+#define HTMDICLOSE          68
+#define HTMENUITEM          69
+#define HTEXMENULAST        69
+
+int FindNCHitEx(PWND pwnd, int ht, POINT pt);
+void xxxTrackMouseMove(PWND pwnd, int htEx, UINT message);
+BOOL xxxHotTrack(PWND pwnd, int htEx, BOOL fDraw);
+void xxxResetTooltip(PTOOLTIPWND pttwnd);
+void xxxCancelMouseMoveTracking (DWORD dwDTFlags, PWND pwndTrack, int htEx, DWORD dwDTCancel);
+
+#line 7555
+
+#line 7564
 
 /*
  * String range IDs.
  *
- * These are defined here to avoid duplicate entries in ntuserk.mc
+ * These are defined here to avoid duplicate entries in strid.mc
  */
 #define STR_COLORSTART                   STR_SCROLLBAR
-#define STR_COLOREND                     STR_INFOBK
-#define STR_SNDEVTMSGBEEPFIRST           STR_SNDEVTSYSTEMDEFAULT
-#define STR_SNDEVTMSGBEEPLAST            STR_SNDEVTSYSTEMASTERISK
-#define STR_CURSOR_START                 STR_CURSOR_ARROW
-#define STR_CURSOR_END                   STR_CURSOR_NWPEN
-#define STR_ICON_START                   STR_ICON_SAMPLE
-#define STR_ICON_END                     STR_ICON_WINLOGO
-#define STR_SNDEVTMSGBEEPFIRST           STR_SNDEVTSYSTEMDEFAULT
-#define STR_SNDEVTMSGBEEPLAST            STR_SNDEVTSYSTEMASTERISK
+#define STR_COLOREND                     STR_MENUBAR
 
-#line 4921
+/*
+ * Sprite and Fade related functions and defines.
+ */
+#define FADE_SHOW           0x00000001
+#define FADE_COMPLETED      0x00000002
+#define FADE_SHOWN          0x00000004
+#define FADE_WINDOW         0x00000008
+#define FADE_MENU           0x00000010
+#define FADE_TOOLTIP        0x00000020
+#ifdef MOUSE_IP
+#error Original configuration is not selected.
+#endif
+#line 7586
+
+HDC CreateFade(PWND pwnd, RECT *prc, DWORD dwTime, DWORD dwFlags);
+VOID StartFade(void);
+VOID StopFade(void);
+VOID ShowFade(void);
+VOID AnimateFade(void);
+__inline DWORD TestFadeFlags(
+    DWORD dwFlags)
+{
+    return (gfade.dwFlags & dwFlags);
+}
+
+#ifdef MOUSE_IP
+#error Original configuration is not selected.
+#endif
+#line 7607
+
+HANDLE xxxSetLayeredWindow(PWND pwnd, BOOL fRepaintBehind);
+VOID UnsetLayeredWindow(PWND pwnd);
+void TrackLayeredZorder(PWND pwnd);
+VOID UpdateRedirectedDC(PDCE pdce);
+BOOL _UpdateLayeredWindow(PWND pwnd, HDC hdcDst, POINT *pptDst, SIZE *psize, HDC hdcSrc,
+        POINT *pptSrc, COLORREF crKey, BLENDFUNCTION *pblend, DWORD dwFlags);
+BOOL _GetLayeredWindowAttributes(PWND hwnd, COLORREF *pcrKey, BYTE *pbAlpha, DWORD *pdwFlags);
+BOOL _SetLayeredWindowAttributes(PWND pwnd, COLORREF crKey, BYTE bAlpha, DWORD dwFlags);
+BOOL RecreateRedirectionBitmap(PWND pwnd);
+VOID ResetRedirectedWindows(VOID);
+
+PWND GetStyleWindow(PWND pwnd, DWORD dwStyle);
+PWND GetLastChild(PWND pwnd);
+
+BOOL SetRedirectedWindow(PWND pwnd, UINT uFlags);
+VOID UnsetRedirectedWindow(PWND pwnd, UINT uFlags);
+
+VOID xxxCompositedPaint(PWND pwnd);
+
+#define REDIRECT_LAYER                     0x0001
+#define REDIRECT_COMPOSITED                0x0002
+#define REDIRECT_EXTREDIRECTED             0x0004
+#define REDIRECT_PRINT                     0x0008
+
+typedef struct tagREDIRECT {
+    HBITMAP hbm;
+    RECT rcUpdate;
+    UINT uFlags;
+    HRGN hrgnComp;
+
+#if DBG
+#error Original configuration is not selected.
+#endif // DBG
+
+} REDIRECT, *PREDIRECT;
+
+HBITMAP GetRedirectionBitmap(PWND pwnd);
+BOOL SetRedirectionBitmap(PWND pwnd, HBITMAP hbm);
+UINT GetRedirectionFlags(PWND pwnd);
+BOOL xxxPrintWindow(PWND pwnd, HDC hdcBlt, UINT nFlags);
+void xxxTurnOffCompositing(PWND pwndStart, BOOL fChild);
+
+
+#ifdef REDIRECTION
+#error Original configuration is not selected.
+#endif // REDIRECTION
+#line 7655
+
 void InternalInvalidate3(
     PWND pwnd,
     HRGN hrgn,
     DWORD flags);
-#line 4925
 
-int GetSetProfileStructFromResID(
-    UINT idSection,
-    UINT id,
-    LPVOID pv,
-    UINT cbv,
-    BOOL fSet);
+BOOL UserSetFont(PUNICODE_STRING pProfileUserName,
+    LPLOGFONTW   lplf,
+    UINT         idFont,
+    HFONT*       phfont
+    );
 
-void UserSetFont(
-    LPLOGFONTW lplf,
-    UINT idFont,
-    HFONT *phfont);
-
-#line 4938
 HICON DWP_GetIcon(
     PWND pwnd,
     UINT uType);
@@ -5194,10 +6857,6 @@ BOOL xxxRedrawTitle(
 DWORD GetContextHelpId(
     PWND pwnd);
 
-BOOL BltIcon(
-    HDC hdc, int x, int y, int cx, int cy,
-    HDC hdcSrc, PCURSOR pcursor, BOOL fMask, LONG rop);
-#line 4951
 
 HANDLE xxxClientCopyImage(
     HANDLE hImage,
@@ -5206,7 +6865,11 @@ HANDLE xxxClientCopyImage(
     int cyNew,
     UINT flags);
 
-#line 4964
+VOID _WOWCleanup(
+    HANDLE hInstance,
+    DWORD hTaskWow);
+
+VOID _WOWModuleUnload(HANDLE hModule);
 
 /*
  * FastProfile APIs
@@ -5218,18 +6881,23 @@ typedef struct tagPROFINTINFO {
     PUINT puResult;
 } PROFINTINFO, *PPROFINTINFO;
 
+typedef struct {
+    UINT idSection;
+    UINT id;
+    UINT idRes;
+    UINT def;
+} SPINFO, *PSPINFO;
 
-#line 4976
-extern PROFILEVALUEINFO gpviCPUserPreferences [SPI_UP_COUNT];
-#define SPI_UP(uSetting) ((gpviCPUserPreferences + SPI_UP_ ## uSetting)->dwValue)
 
+#define INITIAL_USER_HANDLE_QUOTA  10000
+#define MINIMUM_USER_HANDLE_QUOTA    200
 
-int GetIntFromProfileID(int KeyID, int def);
-UINT UT_GetProfileStringW(LPCWSTR lpAppName, LPCWSTR lpKeyName, LPCWSTR lpDefault,
-    LPWSTR lpReturnedString, DWORD nSize);
-UINT UT_GetProfileIntW(LPCWSTR lpAppName, LPCWSTR lpKeyName, DWORD nDefault);
-BOOL GetProfileIntsW(PPROFINTINFO ppii);
+#define INITIAL_POSTMESSAGE_LIMIT   10000
+#define MINIMUM_POSTMESSAGE_LIMIT    4000
 
+/*
+ * See aFastRegMap[] in ntuser\kernel\profile.c
+ */
 #define PMAP_COLORS             0
 #define PMAP_CURSORS            1
 #define PMAP_WINDOWSM           2
@@ -5307,61 +6975,758 @@ DWORD   FastGetProfileValue(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSe
 BOOL    FastGetProfileIntsW(PUNICODE_STRING pProfileUserName OPTIONAL, PPROFINTINFO ppii, DWORD dwPolicyOnly);
 BOOL    FastUpdateWinIni(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, UINT wKeyNameId, LPWSTR lpszValue);
 
-#line 5058
 VOID RecreateSmallIcons(PWND pwnd);
-#line 5059
-
 
 /*
- *  # of pels added to border width.  When a user requests a border width of 1
- *  that user actualy gets a border width of BORDER_EXTRA + 1if the window
- *  has a sizing border.
+ * # of pels added to border width. When a user requests a border width of 1
+ * that user actualy gets a border width of BORDER_EXTRA + 1 if the window
+ * has a sizing border.
  */
-
 #define BORDER_EXTRA    3
 
 /*
  * tmswitch.c stuff
  */
 
-#line 5073
-typedef HWND *PHWND;
+__inline int GetCaptionHeight(
+    PWND pwnd)
+{
+    if (!TestWF(pwnd, WFCPRESENT)) {
+        return 0;
+    } else {
+        return TestWF(pwnd, WEFTOOLWINDOW) ?
+                   SYSMET(CYSMCAPTION) : SYSMET(CYCAPTION);
+    }
+}
 
-typedef struct tagSwitchWndInfo {
+__inline VOID InitTooltipDelay(
+    PTOOLTIPWND pttwnd)
+{
+    if (pttwnd != NULL) {
+        pttwnd->dwShowDelay = gdtDblClk * 3;
+        pttwnd->dwHideDelay = gdtDblClk * 8;
+    }
+}
 
-    PBWL    pbwl;               // Pointer to the window list built.
-    PHWND   phwndLast;          // Pointer to the last window in the list.
-    PHWND   phwndCurrent;       // pointer to the current window.
-
-    INT     iTotalTasks;        // Total number of tasks.
-    INT     iTasksShown;        // Total tasks shown.
-    BOOL    fScroll;            // Is there a need to scroll?
-
-    INT     iFirstTaskIndex;    // Index to the first task shown.
-
-    INT     iNoOfColumns;       // Max Number of tasks per row.
-    INT     iNoOfRows;          // Max Number of rows of icons in the switch window.
-    INT     iIconsInLastRow;    // Icons in last row.
-    INT     iCurCol;            // Current column where hilite lies.
-    INT     iCurRow;            // Current row where hilite lies.
-    INT     cxSwitch;           // Switch Window dimensions.
-    INT     cySwitch;
-    POINT   ptFirstRowStart;    // Top left corner of the first Icon Slot.
-    RECT    rcTaskName;         // Rect where Task name is displayed.
-    BOOL    fJournaling;        // Determins how we check the keyboard state
-} SWITCHWNDINFO, *PSWINFO;
-
-#line 5099
-typedef struct tagSWITCHWND {
-    WND;
-    PSWINFO pswi;
-} SWITCHWND, *PSWITCHWND;
-#line 5103
+__inline PPROFILEVALUEINFO UPDWORDPointer(
+    UINT uSetting)
+{
+    UserAssert(UPIsDWORDRange(uSetting));
+    return gpviCPUserPreferences + UPDWORDIndex(uSetting);
+}
 
 
-#ifdef FE_IME
-#error
-#line 5215
-#endif  // FE_IME
+/*
+ * ComputeTickDelta
+ *
+ * ComputeTickDelta computes a time delta between two times. The
+ * delta is defined as a 31-bit, signed value. It is best to think of time as
+ * a clock that wraps around. The delta is the minimum distance on this circle
+ * between two different places on the circle. If the delta goes
+ * counter-clockwise, it is looking at a time in the PAST and is POSITIVE. If
+ * the delta goes clockwise, it is looking at a time in the FUTURE and is
+ * negative.
+ *
+ * It is IMPORTANT to realize that the (dwCurTime >= dwLastTime) comparison does
+ * not determine the delta's sign, but only determines the operation to compute
+ * the delta without an overflow occuring.
+ */
+__inline
+int ComputeTickDelta(
+        IN DWORD dwCurTick,
+        IN DWORD dwLastTick)
+{
+    return (int) dwCurTick - dwLastTick;
+}
+
+
+__inline
+DWORD ComputePastTickDelta(
+        IN DWORD dwCurTick,
+        IN DWORD dwLastTick)
+{
+    /*
+     * This handles a wrap-around.
+     */
+    return dwCurTick - dwLastTick;
+}
+
+__inline BOOL IsTimeFromLastInput(
+    DWORD dwTimeout)
+{
+    return ((NtGetTickCount() - glinp.timeLastInputMessage) > dwTimeout);
+}
+
+__inline BOOL IsTimeFromLastRITEvent(
+    DWORD dwTimeout)
+{
+    return ((NtGetTickCount() - gpsi->dwLastRITEventTickCount) > dwTimeout);
+}
+
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 7897
+#define DBGIncModalMenuCount()
+#define DBGDecModalMenuCount()
+#endif
+
+__inline BOOL IsForegroundLocked(
+    VOID)
+{
+    return (guSFWLockCount != 0 || gppiLockSFW != NULL);
+}
+
+
+/* Bug 247768 - joejo
+ * Add compatibility hack for foreground activation problems.
+ *
+ */
+__inline
+BOOL GiveUpForeground(
+    VOID)
+{
+    if (gptiForeground == NULL) {
+        return FALSE;
+    }
+
+    if (GetAppCompatFlags2ForPti(gptiForeground, VER40) & GACF2_GIVEUPFOREGROUND){
+        TAGMSG0(DBGTAG_FOREGROUND, "GiveUpForeground Hack Succeeded!");
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+__inline VOID IncSFWLockCount(
+    VOID)
+{
+    guSFWLockCount++;
+}
+
+__inline VOID DecSFWLockCount(
+    VOID)
+{
+    UserAssert(guSFWLockCount != 0);
+    guSFWLockCount--;
+}
+
+__inline DWORD UPDWORDValue(
+    UINT uSetting)
+{
+    return UPDWORDPointer(uSetting)->dwValue;
+}
+/*
+ * Use this macro ONLY if UPIsDWORDRange(SPI_GET ## uSetting) is TRUE.
+ */
+#define UP(uSetting) UPDWORDValue(SPI_GET ## uSetting)
+
+/*
+ * NTIMM.C
+ */
+
+#define IMESHOWSTATUS_NOTINITIALIZED    ((BOOL)0xffff)
+
+PIMC CreateInputContext(
+    IN ULONG_PTR dwClientImcData);
+
+BOOL DestroyInputContext(
+    IN PIMC pImc);
+
+VOID FreeInputContext(
+    IN PIMC pImc);
+
+HIMC AssociateInputContext(
+    IN PWND pWnd,
+    IN PIMC pImc);
+
+AIC_STATUS AssociateInputContextEx(
+    IN PWND  pWnd,
+    IN PIMC  pImc,
+    IN DWORD dwFlag);
+
+BOOL UpdateInputContext(
+    IN PIMC pImc,
+    IN UPDATEINPUTCONTEXTCLASS UpdateType,
+    IN ULONG_PTR UpdateValue);
+
+VOID xxxFocusSetInputContext(
+    IN PWND pwnd,
+    IN BOOL fActivate,
+    IN BOOL fQueueMsg);
+
+UINT BuildHimcList(
+    PTHREADINFO pti,
+    UINT cHimcMax,
+    HIMC *phimcFirst);
+
+PWND xxxCreateDefaultImeWindow(
+    IN PWND pwnd,
+    IN ATOM atomT,
+    IN HANDLE hInst);
+
+BOOL xxxImmActivateThreadsLayout(
+    PTHREADINFO pti,
+    PTLBLOCK    ptlBlockPrev,
+    PKL         pkl);
+
+VOID xxxImmActivateAndUnloadThreadsLayout(
+    IN PTHREADINFO *ptiList,
+    IN UINT         nEntries,
+    IN PTLBLOCK     ptlBlockPrev,
+    PKL             pklCurrent,
+    DWORD           dwHklReplace);
+
+VOID xxxImmActivateLayout(
+    IN PTHREADINFO pti,
+    IN PKL pkl);
+
+VOID xxxImmUnloadThreadsLayout(
+    IN PTHREADINFO *ptiList,
+    IN UINT         nEntry,
+    IN PTLBLOCK     ptlBlockPrev,
+    IN DWORD        dwFlag);
+
+VOID xxxImmUnloadLayout(
+    IN PTHREADINFO pti,
+    IN DWORD       dwFlag);
+
+PIMEINFOEX xxxImmLoadLayout(
+    IN HKL hKL);
+
+VOID xxxImmActivateLayout(
+    IN PTHREADINFO pti,
+    IN PKL pkl);
+
+BOOL GetImeInfoEx(
+    IN PWINDOWSTATION pwinsta,
+    IN PIMEINFOEX piiex,
+    IN IMEINFOEXCLASS SearchType);
+
+BOOL SetImeInfoEx(
+    IN PWINDOWSTATION pwinsta,
+    IN PIMEINFOEX piiex);
+
+DWORD xxxImmProcessKey(
+    IN PQ   pq,
+    IN PWND pwnd,
+    IN UINT message,
+    IN WPARAM wParam,
+    IN LPARAM lParam);
+
+BOOL GetImeHotKey(
+    DWORD dwHotKeyID,
+    PUINT puModifiers,
+    PUINT puVKey,
+    HKL   *phKL );
+
+BOOL  SetImeHotKey(
+    DWORD  dwHotKeyID,
+    UINT   uModifiers,
+    UINT   uVKey,
+    HKL    hKL,
+    DWORD  dwAction );
+
+PIMEHOTKEYOBJ CheckImeHotKey(
+    PQ   pq,
+    UINT uVKey,
+    LPARAM lParam);
+
+BOOL ImeCanDestroyDefIME(
+    IN PWND pwndDefaultIme,
+    IN PWND pwndDestroy);
+
+BOOL IsChildSameThread(
+    IN PWND pwndParent,
+    IN PWND pwndChild);
+
+BOOL ImeCanDestroyDefIMEforChild(
+    IN PWND pwndDefaultIme,
+    IN PWND pwndDestroy);
+
+VOID ImeCheckTopmost(
+    IN PWND pwnd);
+
+VOID ImeSetFutureOwner(
+    IN PWND pwndDefaultIme,
+    IN PWND pwndOrgOwner);
+
+VOID ImeSetTopmostChild(
+    IN PWND pwndRoot,
+    IN BOOL fFlag);
+
+VOID ImeSetTopmost(
+    IN PWND pwndRoot,
+    IN BOOL fFlag,
+    IN PWND pwndInsertBefore);
+
+PSOFTKBDDATA ProbeAndCaptureSoftKbdData(
+    PSOFTKBDDATA Source);
+
+VOID xxxNotifyIMEStatus(
+    IN PWND pwnd,
+    IN DWORD dwOpen,
+    IN DWORD dwConversion );
+
+BOOL xxxSetIMEShowStatus(
+    IN BOOL fShow);
+
+VOID xxxBroadcastImeShowStatusChange(
+    IN PWND pwndDefIme,
+    IN BOOL fShow);
+
+VOID xxxCheckImeShowStatusInThread(
+    IN PWND pwndDefIme);
+
+
+#define IsWndImeRelated(pwnd)   \
+    (pwnd->pcls->atomClassName == gpsi->atomSysClass[ICLS_IME] || \
+     TestCF(pwnd, CFIME))
+
+/*
+ * Critical section routines for processing mouse input
+ */
+__inline VOID EnterMouseCrit(
+    VOID)
+{
+
+    KeEnterCriticalRegion();
+    ExAcquireResourceExclusiveLite(gpresMouseEventQueue, TRUE);
+}
+
+__inline VOID LeaveMouseCrit(
+    VOID)
+{
+
+    ExReleaseResourceLite(gpresMouseEventQueue);
+    KeLeaveCriticalRegion();
+}
+
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 8138
+/*
+ * Critical section routines for accessing the Device List (gpDeviceInfoList)
+ */
+__inline VOID EnterDeviceInfoListCrit(
+    VOID)
+{
+    KeEnterCriticalRegion();
+    ExAcquireResourceExclusiveLite(gpresDeviceInfoList, TRUE);
+}
+__inline VOID LeaveDeviceInfoListCrit(
+    VOID)
+{
+    ExReleaseResourceLite(gpresDeviceInfoList);
+    KeLeaveCriticalRegion();
+}
+#endif // DBG
+
+#define BEGIN_REENTER_DEVICEINFOLISTCRIT()                              \
+{                                                                       \
+    BOOL fAlreadyHadDeviceInfoCrit;                                     \
+                                                                        \
+    /*                                                                  \
+     * If we're not in the user crit then acquire it.                   \
+     */                                                                 \
+    fAlreadyHadDeviceInfoCrit = ExIsResourceAcquiredExclusiveLite(gpresDeviceInfoList); \
+    if (fAlreadyHadDeviceInfoCrit == FALSE) {                           \
+        EnterDeviceInfoListCrit();                                      \
+    }
+
+#define END_REENTER_DEVICEINFOLISTCRIT()                                \
+    if (fAlreadyHadDeviceInfoCrit == FALSE) {                           \
+       LeaveDeviceInfoListCrit();                                       \
+    }                                                                   \
+}
+
+
+/*
+ * Request RIT to update the keyboard h/w settings
+ */
+__inline VOID RequestKeyboardRateUpdate(
+    VOID)
+{
+    gdwUpdateKeyboard |= UPDATE_KBD_TYPEMATIC;
+}
+
+
+
+/*
+ * Keep some capture state visible from user-mode for performance.
+ */
+#line 8196
+
+#line 8213
+
+/*
+ * Some routines for manipulating desktop and windowstation handles.
+ */
+#define HF_DESKTOPHOOK  0       // offset to desktop hook flag
+#define HF_PROTECTED    1       // offset to protected flag
+#define HF_LIMIT        2       // number of flags per handle
+
+BOOL SetHandleFlag(HANDLE hObject, DWORD dwFlag, BOOL fSet);
+BOOL CheckHandleFlag(PEPROCESS Process, DWORD dwSessionId, HANDLE hObject, DWORD dwFlag);
+VOID SetHandleInUse(HANDLE hObject);
+BOOL CheckHandleInUse(HANDLE hObject);
+
+__inline NTSTATUS CloseProtectedHandle(
+    HANDLE handle)
+{
+    if (handle != NULL) {
+        SetHandleFlag(handle, HF_PROTECTED, FALSE);
+        return ZwClose(handle);
+    }
+
+    return STATUS_SUCCESS;
+}
+
+__inline VOID EnterHandleFlagsCrit(
+    VOID)
+{
+    KeEnterCriticalRegion();
+    ExAcquireFastMutexUnsafe(gpHandleFlagsMutex);
+}
+
+__inline VOID LeaveHandleFlagsCrit(
+    VOID)
+{
+    ExReleaseFastMutexUnsafe(gpHandleFlagsMutex);
+    KeLeaveCriticalRegion();
+}
+
+// multimon apis
+
+BOOL    xxxEnumDisplayMonitors(
+                HDC             hdc,
+                LPRECT          lprcClip,
+                MONITORENUMPROC lpfnEnum,
+                LPARAM          dwData,
+                BOOL            fInternal);
+
+BOOL    xxxClientMonitorEnumProc(
+                HMONITOR        hMonitor,
+                HDC             hdcMonitor,
+                LPRECT          lprc,
+                LPARAM          dwData,
+                MONITORENUMPROC xpfnProc);
+
+VOID    ClipPointToDesktop(LPPOINT lppt);
+VOID    DestroyMonitor(PMONITOR pMonitor);
+BOOL    GetHDevName(HMONITOR hMon, PWCHAR pName);
+ULONG   HdevFromMonitor(PMONITOR pMonitor);
+
+/*
+ * Rebasing functions for shared memory.
+ */
+#define REBASESHAREDPTR(p)       (p)
+#define REBASESHAREDPTRALWAYS(p) (p)
+
+#define PDEV_ENABLED() \
+    InterlockedExchange((LPLONG)&gbMDEVDisabled, FALSE);
+
+#define PDEV_DISABLED() \
+    InterlockedExchange((LPLONG)&gbMDEVDisabled, TRUE);
+
+__inline BOOL SafeEnableMDEV()
+{
+    if(gbMDEVDisabled) {
+        if (DrvEnableMDEV(gpDispInfo->pmdev, TRUE)) {
+            PDEV_ENABLED();
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        RIPMSG0(RIP_WARNING, "Trying to enable an enabled MDEV");
+        return TRUE;
+    }
+}
+
+__inline BOOL SafeDisableMDEV()
+{
+    if(!gbMDEVDisabled) {
+        if (DrvDisableMDEV(gpDispInfo->pmdev, TRUE)) {
+            PDEV_DISABLED();
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    } else {
+        RIPMSG0(RIP_WARNING, "Trying to disable a disabled MDEV");
+        return TRUE;
+    }
+}
+
+/*
+ * Multimonitor macros used in RTL. There are similar definitions
+ * in client\usercli.h
+ */
+__inline PDISPLAYINFO
+GetDispInfo(
+    VOID)
+{
+    return gpDispInfo;
+}
+
+__inline PMONITOR
+GetPrimaryMonitor(
+    VOID)
+{
+    return REBASESHAREDPTRALWAYS(GetDispInfo()->pMonitorPrimary);
+}
+
+VOID _QueryUserHandles(
+        IN  LPDWORD     lpIn,
+        IN  DWORD       dwInLength,
+        OUT DWORD       pdwResult[][TYPE_CTYPES]);
+
+
+
+#define REMOVE_FROM_LIST(type, pstart, pitem, next) \
+    {                                                           \
+        type** pp;                                              \
+                                                                \
+        for (pp = &pstart; *pp != NULL; pp = &(*pp)->next) {    \
+            if (*pp == pitem) {                                 \
+                *pp = pitem->next;                              \
+                break;                                          \
+            }                                                   \
+        }                                                       \
+    }                                                           \
+
+
+#define HH_DRIVERENTRY              0x00000001
+#define HH_USERINITIALIZE           0x00000002
+#define HH_INITVIDEO                0x00000004
+#define HH_REMOTECONNECT            0x00000008
+#define HH_REMOTEDISCONNECT         0x00000010
+#define HH_REMOTERECONNECT          0x00000020
+#define HH_REMOTELOGOFF             0x00000040
+#define HH_DRIVERUNLOAD             0x00000080
+#define HH_GRECLEANUP               0x00000100
+#define HH_USERKCLEANUP             0x00000200
+#define HH_INITIATEWIN32KCLEANUP    0x00000400
+#define HH_ALLDTGONE                0x00000800
+#define HH_RITGONE                  0x00001000
+#define HH_RITCREATED               0x00002000
+#define HH_LOADCURSORS              0x00004000
+#define HH_KBDLYOUTGLOBALCLEANUP    0x00008000
+#define HH_KBDLYOUTFREEWINSTA       0x00010000
+#define HH_CLEANUPRESOURCES         0x00020000
+#define HH_DISCONNECTDESKTOP        0x00040000
+#define HH_DTQUITPOSTED             0x00080000
+#define HH_DTQUITRECEIVED           0x00100000
+#define HH_DTWAITONHANDLES          0x00400000
+
+#define HYDRA_HINT(ev)  (gdwHydraHint |= ev)
+
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 8386
+    #define DbgTrackAddDesktop(pdesk)
+    #define DbgTrackRemoveDesktop(pdesk)
+    #define DbgDumpTrackedDesktops(b)
+#endif
+
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 8398
+    #define TRACE_HYDAPI(m)
+#endif
+
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 8408
+    #define TRACE_DESKTOP(m)
+#endif
+
+NTSTATUS
+RemoteConnect(
+    IN PDOCONNECTDATA pDoConnectData,
+    IN ULONG DisplayDriverNameLength,
+    IN PWCHAR DisplayDriverName);
+
+NTSTATUS
+xxxRemoteDisconnect(
+    VOID);
+
+NTSTATUS
+xxxRemoteConsoleShadowStop(
+    VOID);
+
+
+NTSTATUS
+xxxRemoteReconnect(
+    IN PDORECONNECTDATA pDoReconnectData);
+
+
+NTSTATUS
+xxxRemoteNotify(
+    IN PDONOTIFYDATA pDoNotifyData);
+
+NTSTATUS
+RemoteLogoff(
+    VOID);
+
+BOOL
+PrepareForLogoff(
+    UINT uFlags);
+
+NTSTATUS
+xxxRemoteStopScreenUpdates(
+    BOOL fDisableGraphics);
+
+VOID xxxPushKeyEvent(
+    BYTE  bVk,
+    BYTE  bScan,
+    DWORD dwFlags,
+    DWORD dwExtraInfo);
+
+NTSTATUS
+RemoteThinwireStats(
+    OUT PVOID Stats);
+
+NTSTATUS
+RemoteNtSecurity(
+    VOID);
+
+NTSTATUS
+xxxRemoteShadowSetup(
+    VOID);
+
+NTSTATUS
+RemoteShadowStart(
+    IN PVOID pThinwireData,
+    ULONG ThinwireDataLength);
+
+NTSTATUS
+xxxRemoteShadowStop(
+    VOID);
+
+NTSTATUS
+RemoteShadowCleanup(
+    IN PVOID pThinwireData,
+    ULONG ThinwireDataLength);
+
+NTSTATUS
+xxxRemotePassthruEnable(
+    VOID);
+
+NTSTATUS
+RemotePassthruDisable(
+    VOID);
+
+NTSTATUS
+CtxDisplayIOCtl(
+    ULONG  DisplayIOCtlFlags,
+    PUCHAR pDisplayIOCtlData,
+    ULONG  cbDisplayIOCtlData);
+
+DWORD
+RemoteConnectState(
+    VOID);
+
+BOOL
+_GetWinStationInfo(
+    WSINFO* pWsInfo);
+
+// from fullscr.c
+
+NTSTATUS
+RemoteRedrawRectangle(
+    WORD Left,
+    WORD Top,
+    WORD Right,
+    WORD Bottom);
+
+NTSTATUS
+RemoteRedrawScreen(
+    VOID);
+
+NTSTATUS
+RemoteDisableScreen(
+    VOID);
+
+// from fekbd.c
+VOID
+NlsKbdSendIMEProc(
+    DWORD dwImeOpen,
+    DWORD dwImeConversion);
+
+
+/*
+ * Additional menu functions (dependant on previous inline functions)
+ */
+__inline BOOL MNIsFlatMenu(
+    VOID)
+{
+    return TestEffectUP(FLATMENU);
+}
+
+VOID SetMouseTrails(UINT n);
+VOID HideMouseTrails(PWND pwnd, UINT message, UINT_PTR nID, LPARAM lParam);
+
+
+#if DBG
+#error Original configuration is not selected.
+#else
+#line 8546
+#define CheckPublicDC(lpszStr, hdc)
+#endif
+#define szMESSAGE   L"Message"
+
+#ifdef LAME_BUTTON
+#error Original configuration is not selected.
+#endif // LAME_BUTTON
+#line 8576
+
+#ifdef TRACK_PNP_NOTIFICATION
+#error Original configuration is not selected.
+#endif // TRACK_PNP_NOTIFICATION
+#line 8614
+
+#ifdef SUBPIXEL_MOUSE
+#error Original configuration is not selected.
+#endif // SUBPIXEL_MOUSE
+#line 8629
+
+#ifdef AUTORUN_CURSOR
+#error Original configuration is not selected.
+#endif // AUTORUN_CURSOR
+#line 8640
+
+/*
+ * These must go after globals.h is #include'd, as they're inline functions and
+ * they use gptiCurrent (indirectly, by way of ThreadLock()).
+ */
+#line 8653
+
+#line 8662
+
+__inline VOID ThreadUnlockMenuNoModify (
+    PTL ptl)
+{
+    UserAssert(TestMF((PMENU)ptl->pobj, MFREADONLY));
+    ClearMF((PMENU)ptl->pobj, MFREADONLY);
+    ThreadUnlock(ptl);
+}
+
+__inline int
+SetBestStretchMode(
+    HDC hdc,
+    UINT bpp,
+    BOOL fHT)
+{
+    return GreSetStretchBltMode(
+                   hdc,
+                   ((fHT) ?
+                       HALFTONE : ((bpp == 1) ? BLACKONWHITE : COLORONCOLOR)));
+}
 
 #endif  // !_USERK_
