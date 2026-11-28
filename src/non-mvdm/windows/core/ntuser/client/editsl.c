@@ -1,15 +1,118 @@
 /****************************************************************************\
 * editsl.c - Edit controls rewrite. Version II of edit controls.
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 * Single Line Support Routines
 *
 * Created: 24-Jul-88 davidds
+*
+* Language pack notes:
+*   With the language pack loaded all positional processing is based on
+*   ped->xOffset rather than ped->ichScreenStart. The non-lpk optimisation of
+*   maintaining ped->ichScreenStart doesn't work because of the
+*   glyph reordering features of complex scripts.
+*
 \****************************************************************************/
 
 #include "precomp.h"
 #pragma hdrstop
 
 #define SYS_ALTERNATE 0x2000
+
+typedef BOOL (*FnGetTextExtentPoint)(HDC, PVOID, int, LPSIZE);
+
+/***************************************************************************\
+* SLCalcStringWidth
+*
+\***************************************************************************/
+
+int SLCalcStringWidth(PED ped, HDC hdc, ICH ich, ICH cch)
+{
+    if (cch == 0)
+        return 0;
+
+    if (ped->charPasswordChar) {
+        return cch * ped->cPasswordCharWidth;
+    } else {
+        SIZE size;
+
+        if (ped->fNonPropFont && !ped->fDBCS) {
+            size.cx = cch * ped->aveCharWidth;
+        } else {
+            PSTR pText = ECLock(ped);
+            if (ped->fAnsi) {
+                GetTextExtentPointA(hdc, (LPSTR)(pText + ich), cch, &size);
+            } else {
+                GetTextExtentPointW(hdc, (LPWSTR)pText + ich, cch, &size);
+            }
+            ECUnlock(ped);
+        }
+        return size.cx - ped->charOverhang;
+    }
+}
+
+/***************************************************************************\
+* SLCalcXOffsetLeft
+*
+* Calculates the starting offset for left-aligned strings.
+*
+\***************************************************************************/
+
+int SLCalcXOffsetLeft(PED ped, HDC hdc, ICH ich)
+{
+    int cch = (int)(ich - ped->ichScreenStart);
+
+    if (cch <= 0)
+        return 0;
+
+    return SLCalcStringWidth(ped, hdc, ped->ichScreenStart, cch);
+}
+
+/***************************************************************************\
+* SLCalcXOffsetSpecial
+*
+* Calculates the horizontal offset (indent) required for right or center
+* justified lines.
+*
+\***************************************************************************/
+
+int SLCalcXOffsetSpecial(PED ped, HDC hdc, ICH ich)
+{
+    PSTR pText;
+    ICH cch, ichStart = ped->ichScreenStart;
+    int cx;
+
+    /*
+     * Calc the number of characters from start to right end.
+     */
+    pText = ECLock(ped);
+    cch = ECCchInWidth(ped, hdc, (LPSTR)(pText + ichStart * ped->cbChar),
+            ped->cch - ichStart, ped->rcFmt.right - ped->rcFmt.left, TRUE);
+    ECUnlock(ped);
+
+    /*
+     * Once the last character of the string has been scrolled out of
+     * the view, use normal offset calculation.
+     */
+    if (ped->ichScreenStart + cch < ped->cch)
+        return SLCalcXOffsetLeft(ped, hdc, ich);
+
+    cx = ped->rcFmt.right - ped->rcFmt.left - SLCalcStringWidth(ped,
+            hdc, ichStart, cch);
+
+    if (ped->format == ES_CENTER) {
+         cx = max(0, cx / 2);
+    } else if (ped->format == ES_RIGHT) {
+        /*
+         * Subtract 1 so that the 1 pixel wide cursor will be in the visible
+         * region on the very right side of the screen, mle does this.
+         */
+        cx = max(0, cx - 1);
+    }
+
+    return cx + SLCalcStringWidth(ped, hdc, ichStart, ich - ichStart);
+}
 
 /***************************************************************************\
 * SLSetCaretPosition AorW
@@ -44,10 +147,22 @@ void SLSetCaretPosition(
      * Don't let caret go out of bounds of edit control if there is too much
      * text.
      */
-    xPosition = min(xPosition, ped->rcFmt.right -
+    if (ped->pLpkEditCallout) {
+        xPosition += ped->iCaretOffset;
+        xPosition = max(xPosition , 0);
+        xPosition = min(xPosition, ped->rcFmt.right - 1 -
             ((ped->cxSysCharWidth > ped->aveCharWidth) ? 1 : 2));
+    } else {
+        xPosition = min(xPosition, ped->rcFmt.right -
+            ((ped->cxSysCharWidth > ped->aveCharWidth) ? 1 : 2));
+    }
 
     NtUserSetCaretPos(xPosition, ped->rcFmt.top);
+
+    // FE_IME SLSetCaretPosition - ECImmSetCompostionWindow( CFS_POINT )
+    if (fpImmIsIME(THREAD_HKL())) {
+        ECImmSetCompositionWindow(ped, xPosition, ped->rcFmt.top);
+    }
 }
 
 /***************************************************************************\
@@ -74,6 +189,16 @@ int SLIchToLeftXPos(
     SIZE size;
     int  cchDiff;
 
+    if (ped->pLpkEditCallout) {
+
+       pText = ECLock(ped);
+       textExtent = ped->pLpkEditCallout->EditIchToXY(ped, hdc, pText, ped->cch, ich);
+       ECUnlock(ped);
+
+       return textExtent;
+
+    }
+
     /*
      * Check if we are adding lots and lots of chars. A paste for example could
      * cause this and GetTextExtents could overflow on this.
@@ -84,15 +209,13 @@ int SLIchToLeftXPos(
     else if (cchDiff < -1000)
         return (-30000);
 
-#line 87
-#ifdef SUPPORT_LPK
-#line 88
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 90
-#endif
-#line 91
+    if (ped->format != ES_LEFT)
+        return (ped->rcFmt.left + SLCalcXOffsetSpecial(ped, hdc, ich));
 
-    if (ped->fNonPropFont)
+    /*
+     * Caret position /w DBCS text, we can not optimize...
+     */
+    if (ped->fNonPropFont && !ped->fDBCS)
         return (ped->rcFmt.left + cchDiff*ped->aveCharWidth);
 
     /*
@@ -197,7 +320,7 @@ void SLSetSelection(
 *  SLGetClipRect()
 *
 \***************************************************************************/
-void   SLGetClipRect(
+void SLGetClipRect(
     PED     ped,
     HDC     hdc,
     ICH     ichStart,
@@ -207,13 +330,11 @@ void   SLGetClipRect(
     int    iStCount;
     PSTR   pText;
 
-#line 207
-#ifdef SUPPORT_LPK
-#line 208
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 213
-#endif
-#line 214
+    if (ped->pLpkEditCallout) {
+        RIPMSG0(RIP_WARNING, "SLGetClipRect - Error - Invalid call with language pack loaded");
+        RtlZeroMemory(lpClipRect, sizeof(RECT));
+        return;
+    }
 
     CopyRect(lpClipRect, &ped->rcFmt);
 
@@ -221,24 +342,17 @@ void   SLGetClipRect(
 
     // Calculates the starting pos for this piece of text
     if ((iStCount = (int)(ichStart - ped->ichScreenStart)) > 0) {
-        if (ped->charPasswordChar)
-            lpClipRect->left += ped->cPasswordCharWidth * iStCount;
-        else {
-            SIZE size ;
-
-            if ( ped->fAnsi )
-                     GetTextExtentPointA(hdc, pText + ped->ichScreenStart,
-                    iStCount, &size);
-            else
-                GetTextExtentPointW(hdc, ((LPWSTR)pText) + ped->ichScreenStart,
-                    iStCount, &size);
-
-            lpClipRect->left += size.cx - ped->charOverhang;
+        if (ped->format == ES_LEFT) {
+            lpClipRect->left += SLCalcXOffsetLeft(ped, hdc, ichStart);
         }
     } else {
             // Reset the values to visible portions
             iCount -= (ped->ichScreenStart - ichStart);
             ichStart = ped->ichScreenStart;
+    }
+
+    if (ped->format != ES_LEFT) {
+        lpClipRect->left += SLCalcXOffsetSpecial(ped, hdc, ichStart);
     }
 
     if (iCount < 0) {
@@ -296,6 +410,21 @@ void SLChangeSelection(
     ichNewMinSel = min(ichNewMinSel, ped->cch);
     ichNewMaxSel = min(ichNewMaxSel, ped->cch);
 
+    //
+    // To avoid position to half of DBCS, check and ajust position if necessary
+    //
+    // We check ped->fDBCS and ped->fAnsi though ECAdjustIch checks these bits.
+    // We're worrying about the overhead of EcLock and EcUnlock.
+    //
+    if (ped->fDBCS && ped->fAnsi) {
+        PSTR pText;
+
+        pText = ECLock(ped);
+        ichNewMinSel = ECAdjustIch( ped, pText, ichNewMinSel );
+        ichNewMaxSel = ECAdjustIch( ped, pText, ichNewMaxSel );
+        ECUnlock(ped);
+    }
+
     /*
      * Preserve the Old selection
      */
@@ -321,26 +450,38 @@ void SLChangeSelection(
         if (ped->fFocus)
             NtUserHideCaret(ped->hwnd);
 
-        Blk[0].StPos = ichOldMinSel;
-        Blk[0].EndPos = ichOldMaxSel;
-        Blk[1].StPos = ped->ichMinSel;
-        Blk[1].EndPos = ped->ichMaxSel;
+        if (ped->pLpkEditCallout) {
+            /*
+             * The language pack handles display while complex script support present
+             */
+            PSTR pText;
 
-        if (ECCalcChangeSelection(ped, ichOldMinSel, ichOldMaxSel,
-            (LPBLOCK)&Blk[0], (LPBLOCK)&Blk[1])) {
+            ECGetBrush(ped, hdc);   // Give user a chance to manipulate the DC
+            pText = ECLock(ped);
+            ped->pLpkEditCallout->EditDrawText(ped, hdc, pText, ped->cch, ped->ichMinSel, ped->ichMaxSel, ped->rcFmt.top);
+            ECUnlock(ped);
+        } else {
+            Blk[0].StPos = ichOldMinSel;
+            Blk[0].EndPos = ichOldMaxSel;
+            Blk[1].StPos = ped->ichMinSel;
+            Blk[1].EndPos = ped->ichMaxSel;
 
-            //
-            // Paint the rectangles where selection has changed.
-            // Paint both Blk[0] and Blk[1], if they exist.
-            //
-            for (i = 0; i < 2; i++) {
-                if (Blk[i].StPos != 0xFFFFFFFF) {
-                           SLGetClipRect(ped, hdc, Blk[i].StPos,
-                                                   Blk[i].EndPos - Blk[i].StPos, (LPRECT)&rc);
-                           SLDrawLine(ped, hdc, rc.left, rc.right, Blk[i].StPos,
-                                                Blk[i].EndPos - Blk[i].StPos,
-                                      ((Blk[i].StPos >= ped->ichMinSel) &&
-                                   (Blk[i].StPos < ped->ichMaxSel)));
+            if (ECCalcChangeSelection(ped, ichOldMinSel, ichOldMaxSel,
+                (LPBLOCK)&Blk[0], (LPBLOCK)&Blk[1])) {
+
+                //
+                // Paint the rectangles where selection has changed.
+                // Paint both Blk[0] and Blk[1], if they exist.
+                //
+                for (i = 0; i < 2; i++) {
+                    if (Blk[i].StPos != 0xFFFFFFFF) {
+                               SLGetClipRect(ped, hdc, Blk[i].StPos,
+                                                       Blk[i].EndPos - Blk[i].StPos, (LPRECT)&rc);
+                               SLDrawLine(ped, hdc, rc.left, rc.right, Blk[i].StPos,
+                                                    Blk[i].EndPos - Blk[i].StPos,
+                                          ((Blk[i].StPos >= ped->ichMinSel) &&
+                                       (Blk[i].StPos < ped->ichMaxSel)));
+                    }
                 }
             }
         }
@@ -382,26 +523,67 @@ void SLDrawLine(
     ICH     ichNewStart;
     HBRUSH  hbrBack;
 
+    if (ped->pLpkEditCallout) {
+        RIPMSG0(RIP_WARNING, "SLDrawLine - Error - Invalid call with language pack loaded");
+        return;
+    }
+
     //
     // Anything to draw?
     //
     if (xClipStPos >= xClipEndPos || !_IsWindowVisible(ped->pwnd) )
         return;
 
-#line 388
-#ifdef SUPPORT_LPK
-#line 389
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 394
-#endif
-#line 395
+    if (ped->fAnsi && ped->fDBCS) {
+        PSTR pT,pTOrg;
+        int iTCount;
 
-    // Reset ichStart to take care of the negative C widths
-    ichNewStart = max((int)(ichStart - ped->wMaxNegCcharPos), 0);
+        pText = ECLock(ped);
+        ichNewStart = 0;
+        if (ichStart > 0) {
+            pT = pText + ichStart;
+            ichNewStart = ichStart;
 
-    // Reset ichCount to take care of the negative C and A widths
-    iCount = (int)(min(ichStart+iCount+ped->wMaxNegAcharPos, ped->cch)
-                - ichNewStart);
+            while (ichNewStart &&
+                  (ichStart - ichNewStart < ped->wMaxNegCcharPos)) {
+                pT = ECAnsiPrev(ped, pText, pT);
+                ichNewStart = (ICH)(pT - pText);
+                if (!ichNewStart)
+                    break;
+            }
+
+            // B#16152 - win95.
+            // In case of T2, SLE always set an additional margin
+            // to erase a character (iCount == 0 case), using aveCharWidth.
+            // It erases unexpected an extra char if we don't use ichNewStart
+            // and it happens when wMaxNegCcharPos == 0.
+            //
+            if (ped->wMaxNegCcharPos == 0 && iCount == 0) {
+                pT = ECAnsiPrev(ped, pText, pT);
+                ichNewStart = (ICH)(pT - pText);
+            }
+        }
+
+        iTCount = 0;
+        if (ichStart + iCount < ped->cch) {
+            pTOrg = pT = pText + ichStart + iCount;
+            while ((iTCount < (int)ped->wMaxNegAcharPos) &&
+                   (ichStart + iCount + iTCount < ped->cch)) {
+                pT = ECAnsiNext(ped, pT);
+                iTCount = (int)(pT - pTOrg);
+            }
+        }
+
+        ECUnlock(ped);
+        iCount = (int)(min(ichStart+iCount+iTCount, ped->cch) - ichNewStart);
+    } else {
+        // Reset ichStart to take care of the negative C widths
+        ichNewStart = max((int)(ichStart - ped->wMaxNegCcharPos), 0);
+
+        // Reset ichCount to take care of the negative C and A widths
+        iCount = (int)(min(ichStart+iCount+ped->wMaxNegAcharPos, ped->cch)
+                    - ichNewStart);
+    }
     ichStart = ichNewStart;
 
     //
@@ -435,21 +617,12 @@ void SLDrawLine(
     //
     // Calculate the starting pos for this piece of text
     //
-    if (iStCount = (int)(ichStart - ped->ichScreenStart)) {
-        if (ped->charPasswordChar)
-            rc.left += ped->cPasswordCharWidth * iStCount;
-        else {
-            SIZE size;
-
-            if ( ped->fAnsi )
-                GetTextExtentPointA(hdc, pText + ped->ichScreenStart,
-                                    iStCount, &size);
-            else
-                GetTextExtentPointW(hdc, ((LPWSTR)pText) + ped->ichScreenStart,
-                                    iStCount, &size);
-
-            rc.left += size.cx - ped->charOverhang;
+    if (ped->format == ES_LEFT) {
+        if (iStCount = (int)(ichStart - ped->ichScreenStart)) {
+            rc.left += SLCalcXOffsetLeft(ped, hdc, ichStart);
         }
+    } else {
+        rc.left += SLCalcXOffsetSpecial(ped, hdc, ichStart);
     }
 
     //
@@ -581,16 +754,39 @@ void SLDrawText(
     if (!_IsWindowVisible(ped->pwnd))
         return;
 
-#line 581
-#ifdef SUPPORT_LPK
-#line 582
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 587
-#endif
-#line 588
+    if (ped->pLpkEditCallout) {
+        // The language pack handles display while complex script support present
+        ECGetBrush(ped, hdc);   // Give user a chance to manipulate the DC
+        pText = ECLock(ped);
+        ped->pLpkEditCallout->EditDrawText(ped, hdc, pText, ped->cch, ped->ichMinSel, ped->ichMaxSel, ped->rcFmt.top);
+        ECUnlock(ped);
+        SLSetCaretPosition(ped, hdc);
+        return;
+    }
 
-    if (ichStart < ped->ichScreenStart )
+    /*
+     * When drawing the entire visible content of special-aligned sle
+     * erase the view.
+     */
+    if (ped->format != ES_LEFT && ichStart == 0)
+        FillRect(hdc, &ped->rcFmt, ECGetBrush(ped, hdc));
+
+    pText = ECLock(ped);
+
+    if (ichStart < ped->ichScreenStart) {
+#if DBG
+#error DIVERGENCE: unselected retail EDIT profile.
+#endif
+#line 781
         ichStart = ped->ichScreenStart;
+    }
+    else if (ped->fDBCS && ped->fAnsi) {
+        /*
+         * If ichStart stays on trailing byte of DBCS, we have to
+         * adjust it.
+         */
+        ichStart = ECAdjustIch(ped, pText, ichStart);
+    }
 
     CopyRect((LPRECT)&rc, (LPRECT)&ped->rcFmt);
 
@@ -598,8 +794,6 @@ void SLDrawText(
      * Find out how many characters will fit on the screen so that we don't do
      * any needless drawing.
      */
-    pText = ECLock(ped);
-
     cchToDraw = ECCchInWidth(ped, hdc,
             (LPSTR)(pText + ped->ichScreenStart * ped->cbChar),
             ped->cch - ped->ichScreenStart, rc.right - rc.left, TRUE);
@@ -612,22 +806,12 @@ void SLDrawText(
      */
     fNoSelection = ((ped->ichMinSel == ped->ichMaxSel) || (!ped->fFocus && !ped->fNoHideSel));
 
-    if (iStCount = (int)(ichStart - ped->ichScreenStart)) {
-        if (ped->charPasswordChar)
-            rc.left += ped->cPasswordCharWidth * iStCount;
-        else {
-            if ( ped->fAnsi )
-                GetTextExtentPointA(hdc, pText + ped->ichScreenStart,
-                                    iStCount, &size);
-            else
-                GetTextExtentPointW(hdc, ((LPWSTR)pText) + ped->ichScreenStart,
-                                    iStCount, &size);
-
-            /*
-             * For Non TrueType fonts, ped->wMaxNegA is equal to ped->charOverhang
-             */
-            rc.left += size.cx - ped->wMaxNegA;
+    if (ped->format == ES_LEFT) {
+        if (iStCount = (int)(ichStart - ped->ichScreenStart)) {
+            rc.left += SLCalcXOffsetLeft(ped, hdc, ichStart);
         }
+    } else {
+        rc.left += SLCalcXOffsetSpecial(ped, hdc, ichStart);
     }
 
     //
@@ -729,8 +913,10 @@ void SLDrawText(
 
     // Check if anything to be erased on the right hand side
     if (fDrawEndOfLineStrip &&
-            (rc.left < (rc.right = (ped->rcFmt.right+ped->wRightMargin))))
-        SLDrawLine(ped, hdc, rc.left, rc.right, ichStart, 0, FALSE);
+            (rc.left < (rc.right = (ped->rcFmt.right+ped->wRightMargin)))) {
+        SLDrawLine(ped, hdc, rc.left, rc.right, ichStart, 0, 
+            (ichEnd < ped->ichMaxSel) ? TRUE : FALSE);
+    }
 
     SLSetCaretPosition(ped, hdc);
 }
@@ -753,67 +939,99 @@ BOOL SLScrollText(
     ICH scrollAmount;
     ICH newScreenStartX = ped->ichScreenStart;
     ICH cch;
+    BOOLEAN fAdjustNext = FALSE;
 
     if (!ped->fAutoHScroll)
         return (FALSE);
 
-#line 757
-#ifdef SUPPORT_LPK
-#line 758
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 761
-#endif
-#line 762
+    if (ped->pLpkEditCallout) {
+        BOOL fChanged;
+
+        // With complex script glyph reordering, use lpk to do horz scroll
+        pTextScreenStart = ECLock(ped);
+        fChanged = ped->pLpkEditCallout->EditHScroll(ped, hdc, pTextScreenStart);
+        ECUnlock(ped);
+
+        if (fChanged) {
+            SLDrawText(ped, hdc, 0);
+        }
+
+        return fChanged;
+    }
+
+    /*
+     * Calculate the new starting screen position
+     */
+    if (ped->ichCaret <= ped->ichScreenStart) {
+
         /*
-         * Calculate the new starting screen position
+         * Caret is to the left of the starting text on the screen we must
+         * scroll the text backwards to bring it into view. Watch out when
+         * subtracting unsigned numbers when we have the possibility of going
+         * negative.
          */
-        if (ped->ichCaret <= ped->ichScreenStart) {
+        pTextScreenStart = ECLock(ped);
+
+        scrollAmount = ECCchInWidth(ped, hdc, (LPSTR)pTextScreenStart,
+                ped->ichCaret, (ped->rcFmt.right - ped->rcFmt.left) / 4, FALSE);
+
+        newScreenStartX = ped->ichCaret - scrollAmount;
+        ECUnlock(ped);
+    } else if (ped->ichCaret != ped->ichScreenStart) {
+        pTextScreenStart = ECLock(ped);
+        pTextScreenStart += ped->ichScreenStart * ped->cbChar;
+
+        cch = ECCchInWidth(ped, hdc, (LPSTR)pTextScreenStart,
+                ped->ichCaret - ped->ichScreenStart,
+                ped->rcFmt.right - ped->rcFmt.left, FALSE);
+
+        if (cch < ped->ichCaret - ped->ichScreenStart) {
+            fAdjustNext = TRUE;
 
             /*
-             * Caret is to the left of the starting text on the screen we must
-             * scroll the text backwards to bring it into view. Watch out when
-             * subtracting unsigned numbers when we have the possibility of going
-             * negative.
+             * Scroll Forward 1/4 -- if that leaves some empty space
+             * at the end, scroll back enough to fill the space
              */
-            pTextScreenStart = ECLock(ped);
-
-            scrollAmount = ECCchInWidth(ped, hdc, (LPSTR)pTextScreenStart,
-                    ped->ichCaret, (ped->rcFmt.right - ped->rcFmt.left) / 4, FALSE);
-
-            newScreenStartX = ped->ichCaret - scrollAmount;
-            ECUnlock(ped);
-        } else if (ped->ichCaret != ped->ichScreenStart) {
-            pTextScreenStart = ECLock(ped);
-            pTextScreenStart += ped->ichScreenStart * ped->cbChar;
+            newScreenStartX = ped->ichCaret - (3 * cch / 4);
 
             cch = ECCchInWidth(ped, hdc, (LPSTR)pTextScreenStart,
-                    ped->ichCaret - ped->ichScreenStart,
+                    ped->cch - ped->ichScreenStart,
                     ped->rcFmt.right - ped->rcFmt.left, FALSE);
 
-            if (cch < ped->ichCaret - ped->ichScreenStart) {
+            if (newScreenStartX > (ped->cch - cch))
+                newScreenStartX = ped->cch - cch;
+        } else if (ped->format != ES_LEFT) {
 
-                /*
-                 * Scroll Forward 1/4 -- if that leaves some empty space
-                 * at the end, scroll back enough to fill the space
-                 */
-                newScreenStartX = ped->ichCaret - (3 * cch / 4);
+            cch = ECCchInWidth(ped, hdc, (LPSTR)pTextScreenStart,
+                    ped->cch - ped->ichScreenStart,
+                    ped->rcFmt.right - ped->rcFmt.left, FALSE);
 
-                cch = ECCchInWidth(ped, hdc, (LPSTR)pTextScreenStart,
-                        ped->cch - ped->ichScreenStart,
-                        ped->rcFmt.right - ped->rcFmt.left, FALSE);
+           /*
+            * Scroll the text hidden behind the left border back
+            * into view.
+            */
+           if (ped->ichScreenStart == ped->cch - cch) {
 
-                if (newScreenStartX > (ped->cch - cch))
-                    newScreenStartX = ped->cch - cch;
-            }
+               pTextScreenStart -= ped->ichScreenStart * ped->cbChar;
+               cch = ECCchInWidth(ped, hdc, (LPSTR)pTextScreenStart,
+                       ped->cch, ped->rcFmt.right - ped->rcFmt.left, FALSE);
 
-            ECUnlock(ped);
+               newScreenStartX = ped->cch - cch;
+           }
         }
-#line 806
-#ifdef SUPPORT_LPK
-#line 807
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#endif
-#line 809
+
+        ECUnlock(ped);
+    }
+
+    //
+    // Adjust newScreenStartX
+    //
+    if (ped->fAnsi && ped->fDBCS) {
+        newScreenStartX = (fAdjustNext ? ECAdjustIchNext : ECAdjustIch)(ped,
+                                                                        ECLock(ped),
+                                                                        newScreenStartX);
+        ECUnlock(ped);
+    }
 
     if (ped->ichScreenStart != newScreenStartX) {
         // Check if we have to wipe out the left margin
@@ -943,18 +1161,23 @@ ICH PASCAL NEAR SLPasteText(
 {
     HANDLE hData;
     LPSTR lpchClip;
-    ICH cchAdded;
+    ICH cchAdded = 0;
     ICH clipLength;
 
     if (!OpenClipboard(ped->hwnd))
-        return (0);
+        goto PasteExitNoCloseClip;
 
-    if (!(hData = GetClipboardData(ped->fAnsi ? CF_TEXT : CF_UNICODETEXT))) {
-        CloseClipboard();
-        return (0);
+    if (!(hData = GetClipboardData(ped->fAnsi ? CF_TEXT : CF_UNICODETEXT)) ||
+            (GlobalFlags(hData) == GMEM_INVALID_HANDLE)) {
+        RIPMSG1(RIP_WARNING, "SLPasteText(): couldn't get a valid handle(%x)", hData);
+        goto PasteExit;
     }
 
     USERGLOBALLOCK(hData, lpchClip);
+    if (lpchClip == NULL) {
+        RIPMSG1(RIP_WARNING, "SLPasteText(): USERGLOBALLOCK(%x) failed.", hData);
+        goto PasteExit;
+    }
 
     if (ped->fAnsi) {
         LPSTR lpchClip2 = lpchClip;
@@ -985,8 +1208,11 @@ ICH PASCAL NEAR SLPasteText(
     cchAdded = SLInsertText(ped, lpchClip, cchAdded);
 
     USERGLOBALUNLOCK(hData);
-    CloseClipboard();
 
+PasteExit:
+    NtUserCloseClipboard();
+
+PasteExitNoCloseClip:
     return (cchAdded);
 }
 
@@ -1063,6 +1289,8 @@ void SLReplaceSel(
     }
 
     ECNotifyParent(ped, EN_CHANGE);
+
+    NotifyWinEvent(EVENT_OBJECT_VALUECHANGE, ped->hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
 }
 
 /***************************************************************************\
@@ -1081,6 +1309,8 @@ void SLChar(
     WCHAR keyPress;
     BOOL updateText = FALSE;
     HWND hwndSave = ped->hwnd;
+    int InsertTextLen = 1;
+    int DBCSkey;
 
     if (ped->fAnsi)
         keyPress = LOBYTE(keyValue);
@@ -1095,6 +1325,10 @@ void SLChar(
          * ctrl-C in order to copy to the clipboard.
          */
         return ;
+    }
+
+    if (IS_IME_ENABLED()) {
+        ECInOutReconversionMode(ped, FALSE);
     }
 
     switch (keyPress) {
@@ -1141,7 +1375,10 @@ DeleteSelection:
              * There was no selection to delete so we just delete character
                left if available
              */
-            ped->ichMinSel--;
+            //
+            // Calling PrevIch rather than just doing a decrement for VK_BACK
+            //
+            ped->ichMinSel = ECPrevIch( ped, NULL, ped->ichMinSel);
             ECDeleteText(ped);
             updateText = TRUE;
         }
@@ -1175,15 +1412,34 @@ DeleteSelection:
         return;
 
     default:
-        if (keyPress >= TEXT(' ')) {
-            if (SLInsertText(ped, (LPSTR)&keyPress, 1))
-                updateText = TRUE;
-            else
+        if (keyPress >= 0x1E) {  // 1E,1F are unicode block and segment separators
+            /*
+             * Hide the cursor if typing, if the mouse is captured, do not mess with this
+             * as it is going to desapear forever (no WM_SETCURSOR is sent to restore it
+             * at the first mouse-move)
+             * MCostea #166951
+             */
+            NtUserCallNoParam(SFI_ZZZHIDECURSORNOCAPTURE);
 
-                /*
-                 * Beep. Since we couldn't add the text
-                 */
-                NtUserMessageBeep(0);
+            if (IS_DBCS_ENABLED() && ped->fAnsi && (ECIsDBCSLeadByte(ped,(BYTE)keyPress))) {
+                if ((DBCSkey = DbcsCombine(ped->hwnd, keyPress)) != 0 &&
+                     SLInsertText(ped,(LPSTR)&DBCSkey, 2) == 2) {
+                    InsertTextLen = 2;
+                    updateText = TRUE;
+                } else {
+                    NtUserMessageBeep(0);
+                }
+            } else {  // Here the original code begins
+                InsertTextLen = 1;
+                if (SLInsertText(ped, (LPSTR)&keyPress, 1))
+                    updateText = TRUE;
+                else
+
+                    /*
+                     * Beep. Since we couldn't add the text
+                     */
+                    NtUserMessageBeep(0);
+            } // Here the original code ends
         } else {
 
             /*
@@ -1205,11 +1461,54 @@ IllegalChar:
          */
         ECNotifyParent(ped, EN_UPDATE);
         hdc = ECGetEditDC(ped, FALSE);
-        if (!SLScrollText(ped, hdc))
-            SLDrawText(ped, hdc, max(0, (int)(ped->ichCaret - 1 - ped->wMaxNegCcharPos)));
+        if (!SLScrollText(ped, hdc)) {
+            if (ped->format == ES_LEFT) {
+            //
+            // Call SLDrawText with correct ichStart
+            //
+                SLDrawText(ped, hdc, max(0, (int)(ped->ichCaret - InsertTextLen - ped->wMaxNegCcharPos)));
+            } else {
+                /*
+                 * We can't just draw from ichStart because string may have
+                 * shifted because of alignment.
+                 */
+                SLDrawText(ped, hdc, 0);
+            }
+        }
         ECReleaseEditDC(ped, hdc, FALSE);
         ECNotifyParent(ped, EN_CHANGE);
+
+        NotifyWinEvent(EVENT_OBJECT_VALUECHANGE, ped->hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
     }
+}
+
+/***************************************************************************\
+* SLMoveSelectionRestricted AorW
+*
+* Moves the selection like MLMoveSelection, but also obeys limitations
+* imposed by some languages such as Thai, where the cursor cannot stop
+* between a character and it's attached vowel or tone marks.
+*
+* Only called if the language pack is loaded.
+*
+\***************************************************************************/
+
+ICH SLMoveSelectionRestricted(
+    PED  ped,
+    ICH  ich,
+    BOOL fLeft)
+{
+    PSTR pText;
+    HDC  hdc;
+    ICH  ichResult;
+
+    pText = ECLock(ped);
+    hdc = ECGetEditDC(ped, TRUE);
+    ichResult = ped->pLpkEditCallout->EditMoveSelection(ped, hdc, pText, ich, fLeft);
+    ECReleaseEditDC(ped, hdc, TRUE);
+    ECUnlock(ped);
+
+    return ichResult;
 }
 
 /***************************************************************************\
@@ -1281,8 +1580,8 @@ void SLKeyDown(
             /*
              * Handle Combobox support
              */
-            fIsExtendedUI = SendMessage(ped->hwndParent, CB_GETEXTENDEDUI, 0, 0);
-            fIsListVisible = SendMessage(ped->hwndParent, CB_GETDROPPEDSTATE, 0, 0);
+            fIsExtendedUI = (BOOL)SendMessage(ped->hwndParent, CB_GETEXTENDEDUI, 0, 0);
+            fIsListVisible = (BOOL)SendMessage(ped->hwndParent, CB_GETDROPPEDSTATE, 0, 0);
 
             if (!fIsListVisible && fIsExtendedUI) {
 
@@ -1320,7 +1619,10 @@ DropExtendedUIListBox:
                 ECWord(ped, ped->ichCaret, TRUE, &ped->ichCaret, NULL);
             } else {
                 // Move caret char left
-                ped->ichCaret--;
+                if (ped->pLpkEditCallout) {
+                    ped->ichCaret = SLMoveSelectionRestricted(ped, ped->ichCaret, TRUE);
+                } else
+                ped->ichCaret = ECPrevIch(ped,NULL,ped->ichCaret);
             }
 
             //
@@ -1364,8 +1666,8 @@ DropExtendedUIListBox:
             /*
              * Handle Combobox support
              */
-            fIsExtendedUI = SendMessage(ped->hwndParent, CB_GETEXTENDEDUI, 0, 0);
-            fIsListVisible = SendMessage(ped->hwndParent, CB_GETDROPPEDSTATE, 0, 0);
+            fIsExtendedUI = (BOOL)SendMessage(ped->hwndParent, CB_GETEXTENDEDUI, 0, 0);
+            fIsListVisible = (BOOL)SendMessage(ped->hwndParent, CB_GETDROPPEDSTATE, 0, 0);
 
             if (!fIsListVisible && fIsExtendedUI) {
 
@@ -1393,7 +1695,10 @@ DropExtendedUIListBox:
                 ECWord(ped, ped->ichCaret, FALSE, NULL, &ped->ichCaret);
             } else {
                 // Move caret char right
-                ped->ichCaret++;
+                if (ped->pLpkEditCallout) {
+                    ped->ichCaret = SLMoveSelectionRestricted(ped, ped->ichCaret, FALSE);
+                } else
+                ped->ichCaret = ECNextIch(ped,NULL,ped->ichCaret);
             }
 
             //
@@ -1494,8 +1799,13 @@ DropExtendedUIListBox:
                 /*
                  * Move cursor forwards and simulate a backspace.
                  */
-                ped->ichCaret++;
-                ped->ichMaxSel = ped->ichMinSel = ped->ichCaret;
+                if (ped->pLpkEditCallout) {
+                    ped->ichMinSel = ped->ichCaret;
+                    ped->ichMaxSel = ped->ichCaret = SLMoveSelectionRestricted(ped, ped->ichCaret, FALSE);
+                } else {
+                    ped->ichCaret = ECNextIch(ped,NULL,ped->ichCaret);
+                    ped->ichMaxSel = ped->ichMinSel = ped->ichCaret;
+                }
                 SLChar(ped, (UINT)VK_BACK);
             }
             if (ped->ichMinSel != ped->ichMaxSel)
@@ -1548,12 +1858,21 @@ DropExtendedUIListBox:
             /*
              * Copy current selection to clipboard
              */
-            SendMessage(ped->hwnd, WM_COPY, (UINT)NULL, (LONG)NULL);
+            SendMessage(ped->hwnd, WM_COPY, 0, 0);
             break;
 
         case SHFTDOWN:
             SendMessage(ped->hwnd, WM_PASTE, 0, 0L);
             break;
+        }
+        break;
+
+    // VK_HANJA support
+    case VK_HANJA:
+        if ( HanjaKeyHandler( ped ) ) {
+            changeSelection = TRUE;
+            newMinSel = ped->ichCaret;
+            newMaxSel = ped->ichCaret + (ped->fAnsi ? 2 : 1);
         }
         break;
 
@@ -1577,8 +1896,6 @@ SendKeyToListBox:
         }
     }
 
-
-
     if (changeSelection || updateText) {
         hdc = ECGetEditDC(ped, FALSE);
 
@@ -1594,8 +1911,10 @@ SendKeyToListBox:
             SLDrawText(ped, hdc, 0);
 
         ECReleaseEditDC(ped, hdc, FALSE);
-        if (updateText)
+        if (updateText) {
             ECNotifyParent(ped, EN_CHANGE);
+            NotifyWinEvent(EVENT_OBJECT_VALUECHANGE, ped->hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
+        }
     }
 }
 
@@ -1614,18 +1933,19 @@ ICH SLMouseToIch(
 {
     PSTR pText;
     int width = mousePt->x;
+    int lastHighWidth, lastLowWidth;
     SIZE size;
     ICH cch;
     ICH cchLo, cchHi;
     LPSTR lpText;
+    FnGetTextExtentPoint pGetTextExtentPoint;
 
-#line 1614
-#ifdef SUPPORT_LPK
-#line 1615
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 1617
-#endif
-#line 1618
+    if (ped->pLpkEditCallout) {
+        pText = ECLock(ped);
+        cch = ped->pLpkEditCallout->EditMouseToIch(ped, hdc, pText, ped->cch, width);
+        ECUnlock(ped);
+        return cch;
+    }
 
     if (width <= ped->rcFmt.left) {
 
@@ -1633,10 +1953,14 @@ ICH SLMouseToIch(
          * Return either the first non visible character or return 0 if at
          * beginning of text
          */
-        if (ped->ichScreenStart)
-            return (ped->ichScreenStart - 1);
-        else
-            return (0);
+        if (ped->ichScreenStart) {
+            cch = ECAdjustIch(ped, ECLock(ped), ped->ichScreenStart - 1);
+            ECUnlock(ped);
+            return cch;
+        }
+        else {
+            return 0;
+        }
     }
 
     if (width > ped->rcFmt.right) {
@@ -1649,11 +1973,36 @@ ICH SLMouseToIch(
                 (LPSTR)(pText + ped->ichScreenStart * ped->cbChar),
                 ped->cch - ped->ichScreenStart, ped->rcFmt.right -
                 ped->rcFmt.left, TRUE) + ped->ichScreenStart;
-        ECUnlock(ped);
-        if (cch >= ped->cch)
-            return (ped->cch);
-        else
-            return (cch + 1);
+
+        //
+        // This is marked as JAPAN in Win31J. But it should be a DBCS
+        // issue. LiZ -- 5/5/93
+        // We must check DBCS Lead byte. Because ECAdjustIch() pick up Prev Char.
+        //  1993.3.9 by yutakas
+        //
+        if (ped->fAnsi && ped->fDBCS) {
+            if (cch >= ped->cch) {
+                cch = ped->cch;
+            } else {
+                if (ECIsDBCSLeadByte(ped,*(pText+cch))) {
+                    cch += 2;
+                } else {
+                    cch ++;
+                }
+            }
+            ECUnlock(ped);
+            return cch;
+        } else {
+            ECUnlock(ped);
+            if (cch >= ped->cch)
+                return (ped->cch);
+            else
+                return (cch + 1);
+        }
+    }
+
+    if (ped->format != ES_LEFT) {
+        width -= SLCalcXOffsetSpecial(ped, hdc, ped->ichScreenStart);
     }
 
     /*
@@ -1669,32 +2018,72 @@ ICH SLMouseToIch(
     pText = ECLock(ped);
     lpText = pText + ped->ichScreenStart * ped->cbChar;
 
+    pGetTextExtentPoint = ped->fAnsi ? (FnGetTextExtentPoint)GetTextExtentPointA
+                                     : (FnGetTextExtentPoint)GetTextExtentPointW;
+    width -= ped->rcFmt.left;
+
+    /*
+     * If the user clicked past the end of the text, return the last character
+     */
+    cchHi = ped->cch - ped->ichScreenStart;
+    pGetTextExtentPoint(hdc, lpText, cchHi, &size);
+    if (size.cx <= width) {
+        cch = cchHi;
+        goto edAdjust;
+    }
     /*
      * Initialize Binary Search Bounds
      */
     cchLo = 0;
-    cchHi = ped->cch + 1 - ped->ichScreenStart;
+    cchHi ++;
+    lastLowWidth = 0;
+    lastHighWidth = size.cx;
 
     /*
      * Binary search for closest char
      */
     while (cchLo < cchHi - 1) {
-        cch = max((cchHi - cchLo) / 2, 1) + cchLo;
 
-        if (ped->fAnsi)
-            GetTextExtentPointA(hdc, lpText, cch, &size);
-        else
-            GetTextExtentPointW(hdc, (LPWSTR)lpText, cch, &size);
-        size.cx -= (ped->aveCharWidth / 2);
+        cch = (cchHi + cchLo) / 2;
+        pGetTextExtentPoint(hdc, lpText, cch, &size);
 
-        if (size.cx <= (width - ped->rcFmt.left))
+        if (size.cx <= width) {
             cchLo = cch;
-        else
+            lastLowWidth = size.cx;
+        } else {
             cchHi = cch;
+            lastHighWidth = size.cx;
+        }
     }
 
+    /*
+     * When the while ends, you can't know the exact position.
+     * Try to see if the mouse pointer was on the farest half
+     * of the char we got and if so, adjust cch.
+     */
+    if (cchLo == cch) {
+        /*
+         * Need to compare with lastHighWidth
+         */
+        if ((lastHighWidth - width) < (width - size.cx)) {
+            cch++;
+        }
+    } else {
+        /*
+         * Need to compare with lastLowWidth
+         */
+        if ((width - lastLowWidth) < (size.cx - width)) {
+            cch--;
+        }
+    }
+
+edAdjust:
+    //
+    // Avoid to point the intermediate of double byte character
+    //
+    cch = ECAdjustIch( ped, pText, cch + ped->ichScreenStart );
     ECUnlock(ped);
-    return cchLo + ped->ichScreenStart;
+    return ( cch );
 }
 
 /***************************************************************************\
@@ -1718,6 +2107,7 @@ void SLMouseMotion(
     ICH     newMinSel;
     HDC     hdc;
     ICH     mouseIch;
+    LPSTR   pText;
 
     changeSelection = FALSE;
 
@@ -1729,9 +2119,23 @@ void SLMouseMotion(
 
     switch (message) {
         case WM_LBUTTONDBLCLK:
-        // if shift key is down, extend selection to word we double clicked on
-        // else clear current selection and select word.
-        ECWord(ped, mouseIch, (mouseIch) ? TRUE : FALSE, &selectionl, &selectionh);
+
+            // if shift key is down, extend selection to word we double clicked on
+            // else clear current selection and select word.
+
+            // in DBCS, we have different word breaking. LiZ -- 5/5/93
+            // In Hangeul Environment we use word selection feature because Hangeul
+            // use SPACE as word break
+            if (ped->fAnsi && ped->fDBCS) {
+                pText = ECLock(ped) + mouseIch;
+                ECWord(ped, mouseIch,
+                       (ECIsDBCSLeadByte(ped,*pText) && mouseIch < ped->cch) ? FALSE : TRUE,
+                       &selectionl, &selectionh);
+                ECUnlock(ped);
+            } else {
+                ECWord(ped, mouseIch, (mouseIch) ? TRUE : FALSE, &selectionl, &selectionh);
+            }
+
             if (!(virtKeyDown & MK_SHIFT)) {
                 // If shift key isn't down, move caret to mouse point and clear
                 // old selection
@@ -1937,7 +2341,6 @@ void SLSetFocus(
     PED ped)
 {
     HDC hdc;
-    BOOL bDoCaret;
 
     if (!ped->fFocus) {
 
@@ -1948,17 +2351,6 @@ void SLSetFocus(
          */
         hdc = ECGetEditDC(ped, TRUE);
 
-#line 1940
-#ifdef SUPPORT_LPK
-#line 1941
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 1944
-#endif
-#line 1945
-        {
-            bDoCaret = TRUE;
-        }
-
         /*
          * Show the current selection if necessary.
          */
@@ -1966,11 +2358,13 @@ void SLSetFocus(
             SLDrawText(ped, hdc, 0);
 
         /*
-         * Create the caret. Add in the +1 because we have an extra pixel for
-         * highlighting around the text. If the font is at least as wide as the
-         * system font, use a wide caret else use a 1 pixel wide caret.
+         * Create the caret
          */
-        if (bDoCaret) {
+        if (ped->pLpkEditCallout) {
+            ped->pLpkEditCallout->EditCreateCaret (ped, hdc, ECGetCaretWidth(),
+                                                   ped->lineHeight, 0);
+        }
+        else {
             NtUserCreateCaret(ped->hwnd, (HBITMAP)NULL,
                     ECGetCaretWidth(),
                     ped->lineHeight );
@@ -1978,6 +2372,7 @@ void SLSetFocus(
         SLSetCaretPosition(ped, hdc);
         ECReleaseEditDC(ped, hdc, TRUE);
         NtUserShowCaret(ped->hwnd);
+
     }
 
     /*
@@ -1999,28 +2394,14 @@ void SLKillFocus(
     PED ped,
     HWND newFocusHwnd)
 {
-    BOOL bKillCaret;
-
     if (ped->fFocus) {
 
         /*
          * Destroy the caret (Win31/Chicago hides it first)
          */
-#line 1996
-#ifdef SUPPORT_LPK
-#line 1997
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2000
-#endif
-#line 2001
-              bKillCaret = TRUE;
-
-        if (bKillCaret) {
-           NtUserDestroyCaret();
-        }
+        NtUserDestroyCaret();
 
         ped->fFocus = FALSE; /* Clear focus */
-
         /*
          * Do this only if we still have the focus. But we always notify the
          * parent that we lost the focus whether or not we originally had the
@@ -2033,10 +2414,9 @@ void SLKillFocus(
         if (!ped->fNoHideSel && (ped->ichMinSel != ped->ichMaxSel)) {
             NtUserInvalidateRect(ped->hwnd, NULL, FALSE);
 #if 0
-#line 2021
-#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
+#error DIVERGENCE: unselected retail EDIT profile.
 #endif
-#line 2023
+#line 2419
         }
     }
 
@@ -2107,10 +2487,11 @@ void   SLPaste(PED ped)
 
     ECReleaseEditDC(ped,hdc,FALSE);
 
-    //
-    // Tell parent our text contents changed.
-    //
+    /*
+     * Tell parent our text contents changed.
+     */
     ECNotifyParent(ped, EN_CHANGE);
+    NotifyWinEvent(EVENT_OBJECT_VALUECHANGE, ped->hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
 }
 
 
@@ -2134,12 +2515,12 @@ void   SLPaste(PED ped)
 * History:
 \***************************************************************************/
 
-LONG SLEditWndProc(
+LRESULT SLEditWndProc(
     HWND hwnd,
     PED ped,
     UINT message,
-    DWORD wParam,
-    LONG lParam)
+    WPARAM wParam,
+    LPARAM lParam)
 {
     HDC         hdc;
     PAINTSTRUCT ps;
@@ -2149,6 +2530,39 @@ LONG SLEditWndProc(
      * Dispatch the various messages we can receive
      */
     switch (message) {
+
+    case WM_INPUTLANGCHANGE:
+        if (ped && ped->fFocus && ped->pLpkEditCallout) {
+            NtUserHideCaret(hwnd);
+            hdc = ECGetEditDC(ped, TRUE);
+            NtUserDestroyCaret();
+            ped->pLpkEditCallout->EditCreateCaret (ped, hdc, ECGetCaretWidth(), ped->lineHeight, (UINT)lParam);
+            SLSetCaretPosition(ped, hdc);
+            ECReleaseEditDC(ped, hdc, TRUE);
+            NtUserShowCaret(hwnd);
+        }
+        goto PassToDefaultWindowProc;
+
+    case WM_STYLECHANGED:
+        if (ped && ped->pLpkEditCallout) {
+            switch (wParam) {
+
+                case GWL_STYLE:
+                    ECUpdateFormat(ped,
+                        ((LPSTYLESTRUCT)lParam)->styleNew,
+                        GetWindowLong(ped->hwnd, GWL_EXSTYLE));
+                    return 1L;
+
+                case GWL_EXSTYLE:
+                    ECUpdateFormat(ped,
+                        GetWindowLong(ped->hwnd, GWL_STYLE),
+                        ((LPSTYLESTRUCT)lParam)->styleNew);
+                    return 1L;
+            }
+        }
+
+        goto PassToDefaultWindowProc;
+
     case WM_CHAR:
 
         /*
@@ -2156,7 +2570,7 @@ LONG SLEditWndProc(
            lParam - modifiers, repeat count etc (not used)
          */
         if (!ped->fEatNextChar)
-            SLChar(ped, wParam);
+            SLChar(ped, (UINT)wParam);
         else
             ped->fEatNextChar = FALSE;
         break;
@@ -2204,28 +2618,13 @@ LONG SLEditWndProc(
 
         break;
 
-#line 2190
-#ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
-#line 2191
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2210
-#endif
-#line 2211
-
     case WM_KEYDOWN:
 
         /*
          * wParam - virt keycode of the given key
          * lParam - modifiers such as repeat count etc. (not used)
          */
-#line 2218
-#ifdef SUPPORT_LPK
-#line 2219
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2225
-#endif
-#line 2226
-        SLKeyDown(ped, wParam, 0);
+        SLKeyDown(ped, (UINT)wParam, 0);
         break;
 
     case WM_KILLFOCUS:
@@ -2234,6 +2633,7 @@ LONG SLEditWndProc(
          * wParam - handle of the window that receives the input focus
            lParam - not used
          */
+
         SLKillFocus(ped, (HWND)wParam);
         break;
 
@@ -2255,8 +2655,7 @@ LONG SLEditWndProc(
          * wParam - contains a value that indicates which virtual keys are down
          * lParam - contains x and y coords of the mouse cursor
          */
-        pt.x = (short)LOWORD(lParam);
-        pt.y = (short)HIWORD(lParam);
+        POINTSTOPOINT(pt, lParam);
         SLMouseMotion(ped, message, (UINT)wParam, &pt);
         break;
 
@@ -2267,7 +2666,7 @@ LONG SLEditWndProc(
            lParam - points to a CREATESTRUCT that contains copies of parameters
                     passed to the CreateWindow function.
          */
-        return (SLCreate(hwnd, ped, (LPCREATESTRUCT)lParam));
+        return (SLCreate(ped, (LPCREATESTRUCT)lParam));
         break;
 
     case WM_PRINTCLIENT:
@@ -2287,16 +2686,16 @@ LONG SLEditWndProc(
         else {
             // this hide/show caret is outside Begin/EndPaint to handle the
             // case when the caret is half in/half out of the update region
-            NtUserHideCaret(ped->hwnd);
-            hdc = NtUserBeginPaint(ped->hwnd, &ps);
+            NtUserHideCaret(hwnd);
+            hdc = NtUserBeginPaint(hwnd, &ps);
         }
 
         if (_IsWindowVisible(ped->pwnd))
             SLPaint(ped, hdc);
 
         if (!wParam) {
-            NtUserEndPaint(ped->hwnd, &ps);
-            NtUserShowCaret(ped->hwnd);
+            NtUserEndPaint(hwnd, &ps);
+            NtUserShowCaret(hwnd);
         }
         break;
 
@@ -2387,14 +2786,7 @@ foo:
             break;
         }
         else
-#line 2388
-#ifdef SUPPORT_LPK
-#line 2389
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2394
-#endif
-#line 2395
-        goto PassToDefaultWindowProc;
+            goto PassToDefaultWindowProc;
         break;
 
     case EM_GETLINE:
@@ -2419,7 +2811,7 @@ foo:
          * wParam -- start pos
          * lParam -- end pos
          */
-        SLSetSelection(ped, wParam, lParam);
+        SLSetSelection(ped, (ICH)wParam, (ICH)lParam);
         break;
 
     case EM_REPLACESEL:
@@ -2466,10 +2858,9 @@ foo:
             hdc = ECGetEditDC(ped, TRUE);
 
             if (message == EM_POSFROMCHAR)
-                xyPos = MAKELONG(SLIchToLeftXPos(ped, hdc, wParam), 0);
+                xyPos = MAKELONG(SLIchToLeftXPos(ped, hdc, (ICH)wParam), 0);
             else {
-                pt.x = (short)LOWORD(lParam);
-                pt.y = (short)HIWORD(lParam);
+                POINTSTOPOINT(pt, lParam);
                 xyPos = SLMouseToIch(ped, hdc, &pt);
             }
 
@@ -2484,11 +2875,9 @@ foo:
         break;
 
 #if 0
-#line 2485
-#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
-#line 2508
+#error DIVERGENCE: unselected retail EDIT profile.
 #endif
-#line 2509
+#line 2901
 
     default:
 PassToDefaultWindowProc:

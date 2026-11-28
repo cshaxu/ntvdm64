@@ -23,7 +23,7 @@
 \***************************************************************************/
 
 LONG SLCreate(
-    HWND hwnd,
+
     PED ped,
     LPCREATESTRUCT lpCreateStruct) //!!! CREATESTRUCT AorW and in other routines
 {

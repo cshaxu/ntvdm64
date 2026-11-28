@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime58 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime59 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -154,12 +154,9 @@ N02213/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
 with cached build, dual publication and targeted gates; their linked receipts
 retain full source, census and runtime evidence.
 
-[P45 N022 control drawing](../etc/evidence/t485-s1/n022-draw.md) delivers
-runtime50 with draw.c byte-identical to XP. Cached build, dual13-image26hash,
-controls40/40 (including actual PaintRect), CCPU window-borrow and SOL Options
-passed. N02216/39; S15 9/14, overall57/159. Census1329files,783exact,
-794nonerror same/535different,7783points/116981lines; delta0/+1/+1/-1/-2/-2.
-1282XP/47OpenNT. Three mirrors since P42 Full24/24; next drawtext.c.
+[P45 N022 control drawing](../etc/evidence/t485-s1/n022-draw.md) delivered
+runtime50 with draw.c byte-identical to XP. Its receipt retains full census,
+source identity, dual publication and targeted runtime verification.
 
 [P46 XP text drawing](../etc/evidence/t485-s1/n022-drawtext.md) delivers
 runtime54: complete client/paired RTL text algorithms, existing native GDI
@@ -190,6 +187,13 @@ paired creation ABI. Cached build, dual13-image26hash, controls40/40, CCPU
 window-borrow and SOL Options pass. N02220/39; overall57/159, S15 9/14.
 Census1329/784/795/534/7829/99839; delta0/0/0/0/+5/-7546.1287XP/42OpenNT.
 Eight mirrors since P42 Full24/24; next editsl.c. No guest change or S/T closure.
+
+[P50 single-line EDIT](../etc/evidence/t485-s1/n022-editsl.md) delivers runtime59:
+full XP algorithms and paired creation/message ABI. Cached build, dual13-image
+26hash, controls40/40, CCPU window-borrow and SOL Options pass. N02221/39;
+overall57/159, S15 9/14. Census1329/784/795/534/7831/94922;
+delta0/0/0/0/+2/-4917.1288XP/41OpenNT. Nine mirrors since P42 Full24/24.
+No guest change or S/T closure.
 
 ## S14 Closure Record
 
