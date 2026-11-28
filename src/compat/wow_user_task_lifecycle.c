@@ -11,6 +11,7 @@
 #include "wow_dialog_state_bindings.h"
 #include "wow_user_object_bindings.h"
 #include "wow_native_gui_thread.h"
+#include "wow_native_controls.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_menu_native_bindings.h"
 #include "wow_task_profile_bindings.h"
@@ -1294,6 +1295,12 @@ type WINAPI wow_native_##name params \
  * conversion projection before modern USER sees it.  Do not apply this to
  * message entrypoints: those carry pseudo/external HWND contracts and their
  * original FULLHWND32 conversions already occur at message construction. */
+/* Reuse the same HWND conversion, native reentry and finally restoration.
+ * Token-pasted public wrapper name remains wow_native_EnterReaderModeHelper. */
+#define EnterReaderModeHelper wow_edit_native_EnterReaderModeHelper
+WOW_NATIVE_MAPPED_CALL(BOOL, EnterReaderModeHelper, (HWND w), (native), FALSE,
+    FALSE, NULL)
+#undef EnterReaderModeHelper
 WOW_NATIVE_MAPPED_CALL(BOOL, BringWindowToTop, (HWND w), (native), FALSE,
     FALSE, NULL)
 WOW_NATIVE_MAPPED_CALL(BOOL, FlashWindow, (HWND w, BOOL invert),

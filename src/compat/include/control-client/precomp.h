@@ -227,6 +227,8 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 #ifndef FUNCLOG3
 #define FUNCLOG3(...)
 #endif
+/* XP w32err.h:899, retail without PRERELEASE/USER_INSTRUMENTATION. */
+#define FRE_RIPMSG0(flags, text)
 #ifndef RIPMSG0
 #define FUNCLOG6(...)
 #define FUNCLOG4(...)

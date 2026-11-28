@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime57 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime58 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -78,14 +78,9 @@ Overall56/159, S15 8/14. Census1324files,774exact,785nonerror same/539different,
 7741points/154642lines; delta+6files,+6exact,+6same,0different,+12points/-108lines.
 1250XP/74OpenNT. LPC and executive entry limitations recorded for paired migration.
 
-[P22 N021 VDD](../etc/evidence/t485-s1/n021-vdd.md) delivered XP declarations:
-nt_vdd.h2points/4lines; paired DPMI macro override adds1line. Cached build,
-runtime22 dual13-image26hash publication, BIOS123, VDD/IOS contracts and real
-VDD/MEM exports/lifecycle passed. Two missing fixture boundaries corrected;
-initial failures retained. N0215/17; next ntcsrdll.h. Overall56/159, S15 8/14.
-Census1324files,774exact,785nonerror same/539different,7742points/154167lines;
-delta0files,0exact,0same,0different,+1point/-475lines.1251XP/73OpenNT.
-Two changed mirror files since P21 Full24/24; no guest change.
+[P22 N021 VDD](../etc/evidence/t485-s1/n021-vdd.md) delivered runtime22;
+its receipt retains original ABI, compile exclusions, targeted runtime evidence
+and census. No guest change.
 
 [P23 N021 CSR](../etc/evidence/t485-s1/n021-csr.md) delivered runtime24,
 original XP CSR headers and targeted capture/layout, service and guest NetAPI.
@@ -188,6 +183,13 @@ Cached full build, dual13-image26hash, controls40/40, CCPU window-borrow and
 SOL Options pass. N02219/39; S15 9/14, overall57/159. Census1329/784/795/534/
 7824/107385; delta0/0/0/0/+20/-5784.1286XP/43OpenNT. Seven mirrors since P42
 Full24/24; next editml.c. Initial failures remain in receipt. No guest change.
+
+[P49 multiline EDIT](../etc/evidence/t485-s1/n022-editml.md) delivers runtime58:
+complete XP multi-line algorithms, existing native cursor/reader providers and
+paired creation ABI. Cached build, dual13-image26hash, controls40/40, CCPU
+window-borrow and SOL Options pass. N02220/39; overall57/159, S15 9/14.
+Census1329/784/795/534/7829/99839; delta0/0/0/0/+5/-7546.1287XP/42OpenNT.
+Eight mirrors since P42 Full24/24; next editsl.c. No guest change or S/T closure.
 
 ## S14 Closure Record
 

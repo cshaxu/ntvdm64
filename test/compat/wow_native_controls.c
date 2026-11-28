@@ -48,6 +48,17 @@ int main(void)
         0, 0, 8, 8, NULL, NULL, GetModuleHandleW(NULL), NULL);
     CHECK(window != NULL);
     if (window) {
+        HWND previous_capture = GetCapture();
+        HCURSOR previous_cursor = GetCursor();
+        HCURSOR arrow = LoadCursorW(NULL, IDC_ARROW);
+        SetCapture(window);
+        SetCursor(arrow);
+        CHECK(GetCapture() == window && GetCursor() == arrow);
+        wow_edit_native_HideCursorNoCapture();
+        CHECK(GetCapture() == window && GetCursor() == arrow);
+        SetCursor(previous_cursor);
+        if (previous_capture) SetCapture(previous_capture);
+        else ReleaseCapture();
         CHECK(wow_native_set_window_text(window, &text));
         CHECK(GetWindowTextW(window, result, 32) == 15 && !lstrcmpW(result, title));
         CHECK(wow_native_set_window_text(window, NULL));

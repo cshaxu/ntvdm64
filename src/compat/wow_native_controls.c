@@ -26,7 +26,12 @@ typedef BOOL (WINAPI *fill_window_fn)(HWND, HWND, HDC, HBRUSH);
 typedef HBRUSH (WINAPI *control_color_fn)(HWND, HWND, HDC, UINT);
 typedef BOOL (WINAPI *def_set_text_fn)(HWND, const wow_native_text_descriptor *);
 
+typedef VOID (WINAPI *hide_cursor_fn)(void);
+typedef BOOL (WINAPI *reader_mode_fn)(HWND);
+
 typedef struct edit_native_exports {
+    hide_cursor_fn hide_cursor;
+    reader_mode_fn reader_mode;
     char_dimensions_fn char_dimensions;
     code_page_fn code_page;
     font_assoc_fn font_assoc;
@@ -56,13 +61,16 @@ static BOOL CALLBACK resolve_exports(PINIT_ONCE once, PVOID parameter,
     edit_native_exports candidate = {0};
     HMODULE gdi = GetModuleHandleW(L"gdi32.dll");
     HMODULE user = GetModuleHandleW(L"win32u.dll");
+    HMODULE client = GetModuleHandleW(L"user32.dll");
     (void)once; (void)parameter; (void)context;
     /* WOW32 imports GDI/USER. Borrow their loaded system dependencies;
      * never search CWD/PATH or load an alternate DLL on export failure. */
-    if (!gdi || !user) {
+    if (!gdi || !user || !client) {
         SetLastError(ERROR_MOD_NOT_FOUND);
         return FALSE;
     }
+    candidate.reader_mode = (reader_mode_fn)GetProcAddress(client, "EnterReaderModeHelper");
+    candidate.hide_cursor = (hide_cursor_fn)GetProcAddress(user, "NtUserHideCursorNoCapture");
     candidate.char_dimensions = (char_dimensions_fn)GetProcAddress(gdi,
         "GdiGetCharDimensions");
     candidate.font_assoc = (font_assoc_fn)GetProcAddress(gdi, "QueryFontAssocStatus");
@@ -87,7 +95,7 @@ static BOOL CALLBACK resolve_exports(PINIT_ONCE once, PVOID parameter,
     candidate.fill_window = (fill_window_fn)GetProcAddress(user, "NtUserFillWindow");
     candidate.control_color = (control_color_fn)GetProcAddress(user, "NtUserGetControlColor");
     candidate.def_set_text = (def_set_text_fn)GetProcAddress(user, "NtUserDefSetText");
-    if (!candidate.font_assoc || !candidate.code_page || !candidate.validate_gdi || !candidate.char_dimensions || !candidate.text_face_alias || !candidate.char_width ||
+    if (!candidate.reader_mode || !candidate.hide_cursor || !candidate.font_assoc || !candidate.code_page || !candidate.validate_gdi || !candidate.char_dimensions || !candidate.text_face_alias || !candidate.char_width ||
             !candidate.poly_pat_blt || !candidate.system_timer ||
             !candidate.kill_system_timer || !candidate.get_cpd ||
             !candidate.set_window_state || !candidate.clear_window_state ||
@@ -229,4 +237,16 @@ UINT WINAPI wow_edit_native_QueryFontAssocStatus(void)
 {
     if (!wow_edit_native_ready()) return 0;
     return exports.font_assoc();
+}
+
+VOID WINAPI wow_edit_native_HideCursorNoCapture(void)
+{
+    if (!wow_edit_native_ready()) return;
+    exports.hide_cursor();
+}
+
+BOOL WINAPI wow_edit_native_EnterReaderModeHelper(HWND window)
+{
+    if (!wow_edit_native_ready()) return FALSE;
+    return exports.reader_mode(window);
 }

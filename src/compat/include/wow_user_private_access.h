@@ -32,6 +32,7 @@ BOOL WINAPI wow_user_peek_messageW(LPMSG, HWND, UINT, UINT, UINT);
 BOOL WINAPI wow_user_wait_message(void);
 LRESULT WINAPI wow_native_CallNextHookEx(HHOOK, int, WPARAM, LPARAM);
 BOOL WINAPI wow_native_BringWindowToTop(HWND w);
+BOOL WINAPI wow_native_EnterReaderModeHelper(HWND);
 BOOL WINAPI wow_native_SetWindowPos(HWND w, HWND after, int x, int y, int cx, int cy, UINT flags);
 BOOL WINAPI wow_native_MoveWindow(HWND w, int x, int y, int cx, int cy, BOOL paint);
 BOOL WINAPI wow_native_ShowWindow(HWND w, int show);

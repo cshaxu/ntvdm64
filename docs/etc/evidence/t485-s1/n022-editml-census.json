@@ -1,0 +1,56 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 784,
+    "nonerror_identical": 795,
+    "nonerror_different": 534,
+    "nonerror_points": 7824,
+    "nonerror_lines": 107385
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 784,
+    "nonerror_identical": 795,
+    "nonerror_different": 534,
+    "nonerror_points": 7829,
+    "nonerror_lines": 99839
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 5,
+    "nonerror_lines": -7546
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "before_points": 1,
+      "before_lines": 7554,
+      "after_points": 6,
+      "after_lines": 6,
+      "exclusions": 6
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "before_points": 1,
+      "before_lines": 233,
+      "after_points": 1,
+      "after_lines": 233,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_points": 1,
+      "before_lines": 4706,
+      "after_points": 1,
+      "after_lines": 4708,
+      "exclusions": 17
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1287,
+    "OpenNT": 42
+  }
+}

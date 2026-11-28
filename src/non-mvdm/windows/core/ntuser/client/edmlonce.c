@@ -19,7 +19,7 @@
 \***************************************************************************/
 
 LONG MLCreate(
-    HWND hwnd,
+
     PED ped,
     LPCREATESTRUCT lpCreateStruct)
 {

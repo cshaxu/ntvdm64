@@ -114,6 +114,8 @@ C_ASSERT(SHOW_OPENWINDOW == SW_SHOWNORMAL);
 #define SFI_ZAPACTIVEANDFOCUS wow_dialog_zap_active_and_focus
 #define SFI_SETDIALOGPOINTER wow_dialog_set_pointer_word
 #define SFI__RESETDBLCLK wow_list_reset_double_click
+#define EnterReaderModeHelper wow_native_EnterReaderModeHelper
+#define SFI_ZZZHIDECURSORNOCAPTURE wow_edit_native_HideCursorNoCapture
 #define NtUserCallNoParam(service) service()
 #define NtUserReleaseDC ReleaseDC
 #define NtUserSetCursor wow_native_SetCursor

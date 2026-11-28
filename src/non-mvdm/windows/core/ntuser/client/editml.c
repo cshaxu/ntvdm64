@@ -1,6 +1,8 @@
 /***************************************************************************\
 * editml.c - Edit controls rewrite. Version II of edit controls.
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 * Multi-Line Support Routines
 *
 * Created: 24-Jul-88 davidds
@@ -15,9 +17,25 @@
 #define LINEBUMP 32
 
 /*
+ * Code to catch bug #202678, please remove it get resolved.
+ */
+#define CHECK_LINE_NUMBER(iLine, ped)                                                       \
+    if (((int)iLine < 0) || ((ICH)iLine >= ped->cLines)) {                                       \
+        FRE_RIPMSG0(RIP_ERROR, "Line # is < 0 or >= ped->cLines, Please check this out!");  \
+    }
+
+/*
  * Used for ML scroll updates
  */
 #define ML_REFRESH  0xffffffff
+
+__inline void MLSanityCheck(PED ped)
+{
+    UNREFERENCED_PARAMETER(ped);    // For free build
+
+    UserAssert(ped->cch >= ped->chLines[ped->cLines - 1]);
+}
+
 
 /***************************************************************************\
 *
@@ -29,13 +47,6 @@
 \***************************************************************************/
 UINT MLGetLineWidth(HDC hdc, LPSTR lpstr, int nCnt, PED ped)
 {
-#line 32
-#ifdef SUPPORT_LPK
-#line 33
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 37
-#endif
-#line 38
     return(ECTabTheTextOut(hdc, 0, 0, 0, 0, lpstr, nCnt, 0, ped, 0, ECT_CALC, NULL));
 }
 
@@ -75,6 +86,8 @@ void   MLSize(PED ped, BOOL fRedraw)
 * and right justified lines.
 *
 * History:
+*
+* Not used if language pack loaded.
 \***************************************************************************/
 
 int MLCalcXOffset(
@@ -111,7 +124,8 @@ int MLCalcXOffset(
      */
     lineWidth = max(0, (int)(ped->rcFmt.right-ped->rcFmt.left-lineWidth));
 
-    if (ped->format == ES_CENTER) return (lineWidth / 2);
+    if (ped->format == ES_CENTER)
+        return (lineWidth / 2);
 
     if (ped->format == ES_RIGHT) {
 
@@ -119,8 +133,10 @@ int MLCalcXOffset(
          * Subtract 1 so that the 1 pixel wide cursor will be in the visible
          * region on the very right side of the screen.
          */
-        return (max(0, (int)(lineWidth-1)));
+        return max(0, (int)(lineWidth-1));
     }
+
+    return 0;
 }
 
 /***************************************************************************\
@@ -144,7 +160,7 @@ ICH MLMoveSelection(
         /*
          * Move left
          */
-        ich--;
+        ich = ECPrevIch( ped, NULL, ich );
         if (ich) {
             if (ped->fAnsi) {
                 LPSTR pText;
@@ -183,7 +199,10 @@ ICH MLMoveSelection(
             }
         }
     } else if (!fLeft && ich < ped->cch) {
-        ich++;
+        /*
+         * Move right.
+         */
+        ich = ECNextIch( ped, NULL, ich );
         if (ich < ped->cch) {
             if (ped->fAnsi) {
                 LPSTR pText;
@@ -226,6 +245,46 @@ ICH MLMoveSelection(
         }
     }
     return (ich);
+}
+
+/***************************************************************************\
+* MLMoveSelectionRestricted AorW
+*
+* Moves the selection like MLMoveSelection, but also obeys limitations
+* imposed by some languages such as Thai, where the cursor cannot stop
+* between a character and it's attached vowel or tone marks.
+*
+* Only called if the language pack is loaded.
+*
+\***************************************************************************/
+
+/***************************************************************************\
+* MLMoveSelectionRestricted AorW
+*
+* Moves the selection like MLMoveSelection, but also obeys limitations
+* imposed by some languages such as Thai, where the cursor cannot stop
+* between a character and it's attached vowel or tone marks.
+*
+* Only called if the language pack is loaded.
+*
+\***************************************************************************/
+
+ICH MLMoveSelectionRestricted(
+    PED  ped,
+    ICH  ich,
+    BOOL fLeft)
+{
+    PSTR pText;
+    HDC  hdc;
+    ICH  ichResult;
+
+    pText = ECLock(ped);
+    hdc = ECGetEditDC(ped, TRUE);
+    ichResult = ped->pLpkEditCallout->EditMoveSelection(ped, hdc, pText, ich, fLeft);
+    ECReleaseEditDC(ped, hdc, TRUE);
+    ECUnlock(ped);
+
+    return ichResult;
 }
 
 
@@ -297,7 +356,18 @@ void MLSetCaretPosition(
         }
     }
 
-    NtUserSetCaretPos(x, y);
+    if (ped->pLpkEditCallout) {
+        NtUserSetCaretPos(x + ped->iCaretOffset, y);
+    } else {
+        NtUserSetCaretPos(x, y);
+    }
+
+    // FE_IME : MLSetCaretPosition -- ImmSetCompositionWindow(CFS_RECT)
+    if (fpImmIsIME(THREAD_HKL())) {
+        if (x != -20000 && y != -20000) {
+            ECImmSetCompositionWindow(ped, x, y);
+        }
+    }
 }
 
 /***************************************************************************\
@@ -315,6 +385,8 @@ ICH MLLine(
 {
     ICH result;
 
+    UserAssert(lineNumber < ped->cLines);
+
     if (lineNumber >= ped->cLines)
         return (0);
 
@@ -326,6 +398,7 @@ ICH MLLine(
         return (ped->cch - ped->chLines[ped->cLines - 1]);
     } else {
         result = ped->chLines[lineNumber + 1] - ped->chLines[lineNumber];
+        RIPMSG1(RIP_VERBOSE, "MLLine result=%d\n", result);
 
         /*
          * Now check for CRLF or CRCRLF at end of line
@@ -397,9 +470,83 @@ int MLIchToLine(
         }
     }
 
+    CHECK_LINE_NUMBER(iLo, ped);
+
     return iLo;
 }
 
+/***************************************************************************\
+* MLIchToYPos
+*
+* Given an ich, return its y coordinate with respect to the top line
+* displayed in the window. If prevLine is TRUE and if the ich is at the
+* beginning of the line, return the y coordinate of the
+* previous line (if it is not a CRLF).
+*
+* Added for the LPK (3Dec96) - with an LPK installed, calculating X position is
+* a far more processor intensive job. Where only the Y position is required
+* this routine should be called instead of MLIchToXYPos.
+*
+* Called only when LPK installed.
+*
+\***************************************************************************/
+
+
+/***************************************************************************\
+* MLIchToYPos
+*
+* Given an ich, return its y coordinate with respect to the top line
+* displayed in the window. If prevLine is TRUE and if the ich is at the
+* beginning of the line, return the y coordinate of the
+* previous line (if it is not a CRLF).
+*
+* Added for the LPK (3Dec96) - with an LPK installed, calculating X position is
+* a far more processor intensive job. Where only the Y position is required
+* this routine should be called instead of MLIchToXYPos.
+*
+* Called only when LPK installed.
+*
+\***************************************************************************/
+
+
+INT MLIchToYPos(
+    PED  ped,
+    ICH  ich,
+    BOOL prevLine)
+{
+    int  iline;
+    int  yPosition;
+    PSTR pText;
+
+    /*
+     * Determine what line the character is on
+     */
+    iline = MLIchToLine(ped, ich);
+
+    /*
+     * Calc. the yPosition now. Note that this may change by the height of one
+     * char if the prevLine flag is set and the ICH is at the beginning of a
+     * line.
+     */
+    yPosition = (iline - ped->ichScreenStart) * ped->lineHeight + ped->rcFmt.top;
+
+    pText = ECLock(ped);
+    if (prevLine && iline && (ich == ped->chLines[iline]) &&
+            (!AWCOMPARECHAR(ped, pText + (ich - 2) * ped->cbChar, 0x0D) ||
+             !AWCOMPARECHAR(ped, pText + (ich - 1) * ped->cbChar, 0x0A))) {
+
+        /*
+         * First char in the line. We want Y position of the previous
+         * line if we aren't at the 0th line.
+         */
+        iline--;
+
+        yPosition = yPosition - ped->lineHeight;
+    }
+    ECUnlock(ped);
+
+    return yPosition;
+}
 
 /***************************************************************************\
 * MLIchToXYPos
@@ -509,19 +656,20 @@ void MLIchToXYPos(
         if (pText < pLineStart)
             pText = pLineStart;
 
-        cch = (pText - pLineStart)/ped->cbChar;
+        cch = (ICH)(pText - pLineStart)/ped->cbChar;
     }
 
     /*
      * Find out how many pixels we indent the line for funny formats
      */
-#line 517
-#ifdef SUPPORT_LPK
-#line 518
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 522
-#endif
-#line 523
+    if (ped->pLpkEditCallout) {
+        /*
+         * Must find position at start of character offset cch from start of line.
+         * This depends on the layout and the reading order
+         */
+        xPosition = ped->pLpkEditCallout->EditIchToXY(
+                          ped, hdc, pLineStart, MLLine(ped, iline), cch);
+    } else {
         if (ped->format != ES_LEFT) {
             xOffset = MLCalcXOffset(ped, hdc, iline);
         } else {
@@ -530,12 +678,7 @@ void MLIchToXYPos(
 
         xPosition = ped->rcFmt.left + xOffset +
                 MLGetLineWidth(hdc, pLineStart, cch, ped);
-#line 531
-#ifdef SUPPORT_LPK
-#line 532
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#endif
-#line 534
+    }
 
     ECUnlock(ped);
     ppt->x = xPosition;
@@ -567,19 +710,12 @@ ICH MLMouseToIch(
     ICH cch;
     ICH cLineLength;
     ICH cLineLengthNew;
-    ICH cLineLengthHigh = 0;
-    ICH cLineLengthLow = 0;
+    ICH cLineLengthHigh;
+    ICH cLineLengthLow;
+    ICH cLineLengthTemp;
     int textWidth;
-    int iOldTextWidth;
     int iCurWidth;
-
-#line 571
-#ifdef SUPPORT_LPK
-#line 572
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 575
-#endif
-#line 576
+    int lastHighWidth, lastLowWidth;
 
     /*
      * First determine which line the mouse is pointing to.
@@ -613,97 +749,168 @@ ICH MLMouseToIch(
      */
     pLineStart = ECLock(ped) + ped->chLines[line] * ped->cbChar;
     cLineLength = MLLine(ped, line); /* Length is sans CRLF or CRCRLF */
+    RIPMSG3(RIP_VERBOSE, "MLLine(ped=%x, line=%d) returned %d\n", ped, line, cLineLength);
+    UserAssert((int)cLineLength >= 0);
 
     /*
-     * xOffset will be a negative value for center and right justified lines.
-     * ie. We will just displace the lines left by the amount of indent for
-     * right and center justification. Note that ped->xOffset will be 0 for
-     * these lines since we don't support horizontal scrolling with them.
+     * If the language pack is loaded, visual and logical character order
+     * may differ.
      */
-    if (ped->format != ES_LEFT) {
-        xOffset = MLCalcXOffset(ped, hdc, line);
+    if (ped->pLpkEditCallout) {
+        /*
+         * Use the language pack to find the character nearest the cursor.
+         */
+        cch = ped->chLines[line] + ped->pLpkEditCallout->EditMouseToIch
+            (ped, hdc, pLineStart, cLineLength, width);
     } else {
         /*
-         * So that we handle a horizontally scrolled window for left justified
-         * text.
+         * xOffset will be a negative value for center and right justified lines.
+         * ie. We will just displace the lines left by the amount of indent for
+         * right and center justification. Note that ped->xOffset will be 0 for
+         * these lines since we don't support horizontal scrolling with them.
          */
-        xOffset = 0;
-    }
-
-    width = width - xOffset;
-
-    /*
-     * The code below is tricky... I depend on the fact that ped->xOffset is 0
-     * for right and center justified lines
-     */
-
-    /*
-     * Now find out how many chars fit in the given width
-     */
-    if (width >= ped->rcFmt.right) {
-
-        /*
-         * Return 1+last char in line or one plus the last char visible
-         */
-        cch = ECCchInWidth(ped, hdc, pLineStart, cLineLength,
-                ped->rcFmt.right - ped->rcFmt.left + ped->xOffset, TRUE);
-        cch = ped->chLines[line] + min(cch + 1, cLineLength);
-    } else if (width <= ped->rcFmt.left + ped->aveCharWidth / 2) {
-
-        /*
-         * Return first char in line or one minus first char visible. Note that
-         * ped->xOffset is 0 for right and centered text so we will just return
-         * the first char in the string for them. (Allow a avecharwidth/2
-         * positioning border so that the user can be a little off...
-         */
-        cch = ECCchInWidth(ped, hdc, pLineStart, cLineLength,
-                ped->xOffset, TRUE);
-        if (cch)
-            cch--;
-
-        cch += ped->chLines[line];
-    } else {
-
-        /*
-         * Now the mouse is somewhere on the visible portion of the text
-         * remember cch contains the length the line.
-         */
-        iCurWidth = width + ped->xOffset;
-
-        cLineLengthHigh = cLineLength + 1;
-        while (cLineLengthLow < cLineLengthHigh - 1) {
-            cLineLengthNew = max((cLineLengthHigh - cLineLengthLow) / 2, 1) + cLineLengthLow;
-
+        if (ped->format != ES_LEFT) {
+            xOffset = MLCalcXOffset(ped, hdc, line);
+        } else {
             /*
-             * Add in a avecharwidth/2 so that if user is half way on the next
-             * char, it is still considered the previous char. For that feel.
+             * So that we handle a horizontally scrolled window for left justified
+             * text.
              */
-            textWidth = ped->rcFmt.left + ped->aveCharWidth/2 +
-                MLGetLineWidth(hdc, pLineStart, cLineLengthNew, ped);
-            if (textWidth > iCurWidth)
-                cLineLengthHigh = cLineLengthNew;
-            else
-                cLineLengthLow = cLineLengthNew;
-
-            /*
-             * Preserve the old Width
-             */
-            iOldTextWidth = textWidth;
+            xOffset = 0;
         }
 
+        width = width - xOffset;
+
         /*
-         * Find out which side of the character the mouse click occurred
+         * The code below is tricky... I depend on the fact that ped->xOffset is 0
+         * for right and center justified lines
          */
-        if ((iOldTextWidth - iCurWidth) < (iCurWidth - textWidth))
-            cLineLengthNew++;
 
-        cLineLength = min(cLineLengthNew, cLineLength);
+        /*
+         * Now find out how many chars fit in the given width
+         */
+        if (width >= ped->rcFmt.right) {
 
-        cch = ped->chLines[line] + cLineLength;
+            /*
+             * Return 1+last char in line or one plus the last char visible
+             */
+            cch = ECCchInWidth(ped, hdc, pLineStart, cLineLength,
+                    ped->rcFmt.right - ped->rcFmt.left + ped->xOffset, TRUE);
+            //
+            // Consider DBCS in case of width >= ped->rcFmt.right
+            //
+            // Since ECCchInWidth and MLLineLength takes care of DBCS, we only need to
+            // worry about if the last character is a double byte character or not.
+            //
+            // cch = ped->chLines[line] + min( ECNextIch(ped, pLineStart, cch), cLineLength);
+            //
+            // we need to adjust the position. LiZ -- 5/5/93
+            if (ped->fAnsi && ped->fDBCS) {
+                ICH cch2 = min(cch+1,cLineLength);
+                if (ECAdjustIch(ped, pLineStart, cch2) != cch2) {
+                    /* Displayed character on the right edge is DBCS */
+                    cch = min(cch+2,cLineLength);
+                } else {
+                    cch = cch2;
+                }
+                cch += ped->chLines[line];
+            } else {
+                cch = ped->chLines[line] + min(cch + 1, cLineLength);
+            }
+        } else if (width <= ped->rcFmt.left + ped->aveCharWidth / 2) {
+
+            /*
+             * Return first char in line or one minus first char visible. Note that
+             * ped->xOffset is 0 for right and centered text so we will just return
+             * the first char in the string for them. (Allow a avecharwidth/2
+             * positioning border so that the user can be a little off...
+             */
+            cch = ECCchInWidth(ped, hdc, pLineStart, cLineLength,
+                    ped->xOffset, TRUE);
+            if (cch)
+                cch--;
+
+            cch = ECAdjustIch( ped, pLineStart, cch );
+            cch += ped->chLines[line];
+        } else {
+
+            if (cLineLength == 0) {
+                cch = ped->chLines[line];
+                goto edUnlock;
+            }
+
+            iCurWidth = width + ped->xOffset - ped->rcFmt.left;
+            /*
+             * If the user clicked past the end of the text, return the last character
+             */
+            lastHighWidth = MLGetLineWidth(hdc, pLineStart, cLineLength, ped);
+            if (lastHighWidth <= iCurWidth) {
+                cLineLengthNew = cLineLength;
+                goto edAdjust;
+            }
+            /*
+             * Now the mouse is somewhere on the visible portion of the text
+             * remember cch contains the length of the line.
+             */
+            cLineLengthLow = 0;
+            cLineLengthHigh = cLineLength + 1;
+            lastLowWidth = 0;
+
+            while (cLineLengthLow < cLineLengthHigh - 1) {
+
+                cLineLengthNew = (cLineLengthHigh + cLineLengthLow) / 2;
+
+                if (ped->fAnsi && ped->fDBCS) {
+                    /*
+                     * MLGetLineWidth returns meaningless value for truncated DBCS.
+                     */
+                    cLineLengthTemp = ECAdjustIch(ped, pLineStart, cLineLengthNew);
+                    textWidth = MLGetLineWidth(hdc, pLineStart, cLineLengthTemp, ped);
+
+                } else {
+                    textWidth = MLGetLineWidth(hdc, pLineStart, cLineLengthNew, ped);
+                }
+
+                if (textWidth > iCurWidth) {
+                    cLineLengthHigh = cLineLengthNew;
+                    lastHighWidth = textWidth;
+                } else {
+                    cLineLengthLow = cLineLengthNew;
+                    lastLowWidth = textWidth;
+                }
+            }
+
+            /*
+             * When the while ends, you can't know the exact desired position.
+             * Try to see if the mouse pointer was on the farest half
+             * of the char we got and if so, adjust cch.
+             */
+            if (cLineLengthLow == cLineLengthNew) {
+                /*
+                 * Need to compare with lastHighWidth
+                 */
+                if ((lastHighWidth - iCurWidth) < (iCurWidth - textWidth)) {
+                    cLineLengthNew++;
+                }
+            } else {
+                /*
+                 * Need to compare with lastLowHigh
+                 */
+                if ((iCurWidth - lastLowWidth) < (textWidth - iCurWidth)) {
+                    cLineLengthNew--;
+                }
+            }
+edAdjust:
+            cLineLength = ECAdjustIch( ped, pLineStart, cLineLengthNew );
+
+            cch = ped->chLines[line] + cLineLength;
+        }
     }
+edUnlock:
     ECUnlock(ped);
 
     if (pline) {
+        CHECK_LINE_NUMBER(line, ped);
         *pline = line;
     }
     return cch;
@@ -857,6 +1064,7 @@ ICH MLInsertText(
     POINT xyPosFinal;
     HWND hwndSave = ped->hwnd;
     UNDO undo;
+    ICH validCchTemp;
 
     xyPosInitial.x=0;
     xyPosInitial.y=0;
@@ -918,13 +1126,22 @@ ICH MLInsertText(
     ECSaveUndo(Pundo(ped), (PUNDO)&undo, !ped->fAutoVScroll);
 
     hdc = ECGetEditDC(ped, FALSE);
+    /*
+     * We only need the y position. Since with an LPK loaded
+     * calculating the x position is an intensive job, just
+     * call MLIchToYPos.
+     */
     if (ped->cch)
-        MLIchToXYPos(ped, hdc, ped->cch - 1, FALSE, &xyPosInitial);
+        if (ped->pLpkEditCallout)
+            xyPosInitial.y = MLIchToYPos(ped, ped->cch-1, FALSE);
+        else
+            MLIchToXYPos(ped, hdc, ped->cch - 1, FALSE, &xyPosInitial);
 
     /*
      * Insert the text
      */
-    if (!ECInsertText(ped, lpText, &validCch)) {
+    validCchTemp = validCch;    // may not be needed, but just for precautions..
+    if (!ECInsertText(ped, lpText, &validCchTemp)) {
 
         // Restore previous undo buffer if it was cleared
         if (!ped->fAutoVScroll)
@@ -935,18 +1152,53 @@ ICH MLInsertText(
         return (0);
     }
 
+#if DBG
+#error DIVERGENCE: unselected retail EDIT profile.
+#endif
+#line 1166
+
     /*
      * Note that ped->ichCaret is updated by ECInsertText
      */
     MLBuildchLines(ped, (ICH)oldCaretLine, (int)validCch, fCRLF?(BOOL)FALSE:fUserTyping, &ll, &hl);
 
-    if (ped->cch) MLIchToXYPos(ped, hdc, ped->cch - 1, FALSE,&xyPosFinal);
+    if (ped->cch)
+       /*
+        * We only need the y position. Since with an LPK loaded
+        * calculating the x position is an intensive job, just
+        * call MLIchToYPos.
+        */
+       if (ped->pLpkEditCallout)
+           xyPosFinal.y = MLIchToYPos(ped, ped->cch-1, FALSE);
+       else
+           MLIchToXYPos(ped, hdc, ped->cch - 1, FALSE,&xyPosFinal);
 
     if (xyPosFinal.y < xyPosInitial.y && ((ICH)ped->ichScreenStart) + ped->ichLinesOnScreen >= ped->cLines - 1) {
         RECT rc;
 
         CopyRect((LPRECT)&rc, (LPRECT)&ped->rcFmt);
         rc.top = xyPosFinal.y + ped->lineHeight;
+        if (ped->pLpkEditCallout) {
+            int xFarOffset = ped->xOffset + ped->rcFmt.right - ped->rcFmt.left;
+            // Include left or right margins in display unless clipped
+            // by horizontal scrolling.
+            if (ped->wLeftMargin) {
+                if (!(   ped->format == ES_LEFT     // Only ES_LEFT (Nearside alignment) can get clipped
+                      && (   (!ped->fRtoLReading && ped->xOffset > 0)  // LTR and first char not fully in view
+                          || ( ped->fRtoLReading && xFarOffset < ped->maxPixelWidth)))) { //RTL and last char not fully in view
+                    rc.left  -= ped->wLeftMargin;
+                }
+            }
+
+            // Process right margin
+            if (ped->wRightMargin) {
+                if (!(   ped->format == ES_LEFT     // Only ES_LEFT (Nearside alignment) can get clipped
+                      && (   ( ped->fRtoLReading && ped->xOffset > 0)  // RTL and first char not fully in view
+                          || (!ped->fRtoLReading && xFarOffset < ped->maxPixelWidth)))) { // LTR and last char not fully in view
+                    rc.right += ped->wRightMargin;
+                }
+            }
+        }
         NtUserInvalidateRect(ped->hwnd, (LPRECT)&rc, TRUE);
     }
 
@@ -971,8 +1223,23 @@ ICH MLInsertText(
         }
     }
 
-    if (fUserTyping && ped->fWrap)
-        oldCaret = min((ICH)ll, oldCaret);
+    if (fUserTyping && ped->fWrap) {
+        //
+        // To avoid oldCaret points intermediate of DBCS character,
+        // adjust oldCaret position if necessary.
+        //
+        // !!!CR If MLBuildchLines() returns reasonable value ( and I think
+        //       it does), we don't probably need this. Check this out later.
+        //
+        if (ped->fDBCS && ped->fAnsi) {
+            oldCaret = ECAdjustIch(ped,
+                                   ECLock(ped),
+                                   min((ICH)LOWORD(ll),oldCaret));
+            /* ECUnlock(ped); */
+        } else { // same as original code
+            oldCaret = min((ICH)LOWORD(ll), oldCaret);
+        }
+    }
 
     // Update ped->iCaretLine properly.
     MLUpdateiCaretLine(ped);
@@ -1021,6 +1288,10 @@ ICH MLInsertText(
 
     if (validCch < cchInsert)
         ECNotifyParent(ped, EN_MAXTEXT);
+
+    if (validCch) {
+        NotifyWinEvent(EVENT_OBJECT_VALUECHANGE, ped->hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
+    }
 
     /*
      * Make sure the window still exists.
@@ -1110,6 +1381,7 @@ ICH MLDeleteText(
     RECT rc;
     BOOL fFastDelete = FALSE;
     LONG hl;
+    INT  cchcount = 0;
 
     /*
      * Get what line the min selection is on so that we can start rebuilding the
@@ -1117,11 +1389,23 @@ ICH MLDeleteText(
      */
     minSelLine = MLIchToLine(ped, minSel);
     maxSelLine = MLIchToLine(ped, maxSel);
-    if (((maxSel - minSel) == 1) && (minSelLine == maxSelLine) && (ped->chLines[minSelLine] != minSel)) {
-        if (!ped->fAutoVScroll)
-            fFastDelete = FALSE;
-        else
-            fFastDelete = TRUE;
+    //
+    // Calculate fFastDelete and cchcount
+    //
+    if (ped->fAnsi && ped->fDBCS) {
+        if ((ped->fAutoVScroll) &&
+            (minSelLine == maxSelLine) &&
+            (ped->chLines[minSelLine] != minSel)  &&
+            (ECNextIch(ped,NULL,minSel) == maxSel)) {
+
+                fFastDelete = TRUE;
+                cchcount = ((maxSel - minSel) == 1) ? 0 : -1;
+        }
+    } else if (((maxSel - minSel) == 1) && (minSelLine == maxSelLine) && (ped->chLines[minSelLine] != minSel)) {
+            if (!ped->fAutoVScroll)
+                fFastDelete = FALSE;
+            else
+                fFastDelete = TRUE;
     }
     if (!(cchDelete = ECDeleteText(ped)))
         return (0);
@@ -1131,7 +1415,10 @@ ICH MLDeleteText(
      * point.
      */
     if (fFastDelete) {
-        MLShiftchLines(ped, minSelLine + 1, -2);
+        //
+        // cchcount is (-1) if it's a double byte character
+        //
+        MLShiftchLines(ped, minSelLine + 1, -2 + cchcount);
         MLBuildchLines(ped, minSelLine, 1, TRUE, NULL, &hl);
     } else {
         MLBuildchLines(ped, max(minSelLine-1,0), -(int)cchDelete, FALSE, NULL, NULL);
@@ -1163,8 +1450,15 @@ ICH MLDeleteText(
 
             /*
              * Clear from end of text to end of window.
+             *
+             * We only need the y position. Since with an LPK loaded
+             * calculating the x position is an intensive job, just
+             * call MLIchToYPos.
              */
-            MLIchToXYPos(ped, hdc, ped->cch, FALSE, &xyPos);
+            if (ped->pLpkEditCallout)
+                xyPos.y = MLIchToYPos(ped, ped->cch, FALSE);
+            else
+                MLIchToXYPos(ped, hdc, ped->cch, FALSE, &xyPos);
             rc.top = xyPos.y + ped->lineHeight;
         }
 
@@ -1177,7 +1471,11 @@ ICH MLDeleteText(
     ped->fDirty = TRUE;
 
     ECNotifyParent(ped, EN_CHANGE);
-    return (cchDelete);
+
+    if (cchDelete)
+        NotifyWinEvent(EVENT_OBJECT_VALUECHANGE, ped->hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
+
+    return cchDelete;
 }
 
 /***************************************************************************\
@@ -1374,18 +1672,32 @@ void MLBuildchLines(
              * If we are not word wrapping, line breaks are signified by CRLF.
              */
 
-            /*
-             * We will limit lines to MAXLINELENGTH characters maximum
-             */
-            ichLineEnd = ichLineStart + min(ichCRLF - ichLineStart, MAXLINELENGTH);
+            //
+            // If we cut off the line at MAXLINELENGTH, we should
+            // adjust ichLineEnd.
+            //
+            if ((ichCRLF - ichLineStart) <= MAXLINELENGTH) {
+                ichLineEnd = ichCRLF;
+            } else {
+                ichLineEnd = ichLineStart + MAXLINELENGTH;
+                if (ped->fAnsi && ped->fDBCS) {
+                    ichLineEnd = ECAdjustIch( ped, (PSTR)ptext, ichLineEnd);
+                }
+            }
 
             /*
              * We will keep track of what the longest line is for the horizontal
              * scroll bar thumb positioning.
              */
-            LineWidth = MLGetLineWidth(hdc, ptext + ichLineStart * ped->cbChar,
-                                        ichLineEnd - ichLineStart,
-                                        ped);
+            if (ped->pLpkEditCallout) {
+                LineWidth = ped->pLpkEditCallout->EditGetLineWidth(
+                    ped, hdc, ptext + ichLineStart*ped->cbChar,
+                    ichLineEnd - ichLineStart);
+            } else {
+                LineWidth = MLGetLineWidth(hdc, ptext + ichLineStart * ped->cbChar,
+                                            ichLineEnd - ichLineStart,
+                                            ped);
+            }
             ped->maxPixelWidth = max(ped->maxPixelWidth,(int)LineWidth);
 
         } else {
@@ -1396,17 +1708,16 @@ void MLBuildchLines(
              */
             if(ped->rcFmt.right > ped->rcFmt.left) {
 
-#line 1392
-#ifdef SUPPORT_LPK
-#line 1393
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 1400
-#endif
-#line 1401
-                {
-                    /*
-                     * Find the end of the line based solely on text extents
-                     */
+                /*
+                 * Find the end of the line based solely on text extents
+                 */
+                if (ped->pLpkEditCallout) {
+                    ichLineEnd = ichLineStart +
+                        ped->pLpkEditCallout->EditCchInWidth(
+                            ped, hdc, ptext + ped->cbChar*ichLineStart,
+                            ichCRLF - ichLineStart,
+                            ped->rcFmt.right - ped->rcFmt.left);
+                } else {
                     if (ped->fAnsi) {
                         ichLineEnd = ichLineStart +
                                  ECCchInWidth(ped, hdc,
@@ -1432,7 +1743,10 @@ void MLBuildchLines(
                 /*
                  * Maintain a minimum of one char per line
                  */
-                ichLineEnd++;
+                //
+                // Since it might be a double byte char, so calling ECNextIch.
+                //
+                ichLineEnd = ECNextIch(ped, NULL, ichLineEnd);
             }
 
             /*
@@ -1451,12 +1765,28 @@ void MLBuildchLines(
                             ichLineEnd, ped->cch, WB_ISDELIMITER) ||
                             CALLWORDBREAKPROC(*ped->lpfnNextWord, ptext, ichLineEnd - 1,
                             ped->cch, WB_ISDELIMITER));
+                //
+                // This change was done for FOUR reasons:
+                //
+                // 1. If we are on a delimiter, no need to look word left to break at.
+                // 2. If we are on a double byte character, we can break at current char.
+                // 3. If the previous char is a delimter, we can break at current char.
+                // 4. If the previous char is a double byte character, we can break at current char.
+                //
                 } else if (ped->fAnsi) {
-                     fOnDelimiter = (ISDELIMETERA(*(ptext + ichLineEnd)) ||
-                            ISDELIMETERA(*(ptext + ichLineEnd - 1)));
-                } else {
-                     fOnDelimiter = (ISDELIMETERW(*((LPWSTR)ptext + ichLineEnd)) ||
-                            ISDELIMETERW(*((LPWSTR)ptext + ichLineEnd - 1)));
+                    fOnDelimiter = (ISDELIMETERA(*(ptext + ichLineEnd)) ||
+                                    ECIsDBCSLeadByte(ped, *(ptext + ichLineEnd)));
+                    if (!fOnDelimiter) {
+                        PSTR pPrev = ECAnsiPrev(ped,ptext,ptext+ichLineEnd);
+
+                        fOnDelimiter = ISDELIMETERA(*pPrev) ||
+                                       ECIsDBCSLeadByte(ped,*pPrev);
+                    }
+                } else { // Unicode
+                    fOnDelimiter = (ISDELIMETERW(*((LPWSTR)ptext + ichLineEnd))     ||
+                                    UserIsFullWidth(CP_ACP,*((LPWSTR)ptext + ichLineEnd))      ||
+                                    ISDELIMETERW(*((LPWSTR)ptext + ichLineEnd - 1)) ||
+                                    UserIsFullWidth(CP_ACP,*((LPWSTR)ptext + ichLineEnd - 1)));
                 }
                 if (!fOnDelimiter ||
                     (ped->fAnsi && *(ptext + ichLineEnd) == 0x0D) ||
@@ -1466,7 +1796,9 @@ void MLBuildchLines(
                         cch = CALLWORDBREAKPROC(*ped->lpfnNextWord, (LPSTR)ptext, ichLineEnd,
                                 ped->cch, WB_LEFT);
                     } else {
+                        ped->fCalcLines = TRUE;
                         ECWord(ped, ichLineEnd, TRUE, &cch, NULL);
+                        ped->fCalcLines = FALSE;
                     }
                     if (cch > ichLineStart) {
                         ichLineEnd = cch;
@@ -1484,17 +1816,17 @@ void MLBuildchLines(
             }
         }
 #if 0
-#line 1482
-#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
-#line 1488
+#error DIVERGENCE: unselected retail EDIT profile.
 #endif
-#line 1489
-        while (AWCOMPARECHAR(ped,ptext + ichLineEnd * ped->cbChar, ' ') ||
+#line 1833
+        if (AWCOMPARECHAR(ped,ptext + ichLineEnd * ped->cbChar, ' ') ||
                 AWCOMPARECHAR(ped,ptext + ichLineEnd * ped->cbChar, VK_TAB)) {
             /*
              * Swallow the space at the end of a line.
              */
-            ichLineEnd++;
+            if (ichLineEnd < ped->cch) {
+                ichLineEnd++;
+            }
         }
 
         /*
@@ -1504,23 +1836,27 @@ void MLBuildchLines(
         ichLineEndBeforeCRLF = ichLineEnd;
 
         if (ped->fAnsi) {
-            if (*(ptext + ichLineEnd) == 0x0D)
-                ichLineEnd += 2;
+            if (ichLineEnd < ped->cch && *(ptext + ichLineEnd) == 0x0D)
+                ichLineEnd += (ichLineEnd + 1 == ped->cch) ? 1 : 2;
 
             /*
              * Skip over CRCRLF
              */
-            if (*(ptext + ichLineEnd) == 0x0A)
+            if (ichLineEnd < ped->cch && *(ptext + ichLineEnd) == 0x0A)
                 ichLineEnd++;
+            UserAssert(ichLineEnd <= ped->cch);
         } else {
-            if (*(((LPWSTR)ptext) + ichLineEnd) == 0x0D)
-                ichLineEnd += 2;
+            if (ichLineEnd < ped->cch && *(((LPWSTR)ptext) + ichLineEnd) == 0x0D)
+                ichLineEnd += (ichLineEnd + 1 == ped->cch) ? 1 : 2;
 
             /*
              * Skip over CRCRLF
              */
-            if (*(((LPWSTR)ptext) + ichLineEnd) == 0x0A)
+            if (ichLineEnd < ped->cch && *(((LPWSTR)ptext) + ichLineEnd) == 0x0A) {
                 ichLineEnd++;
+                RIPMSG0(RIP_VERBOSE, "Skip over CRCRLF\n");
+            }
+            UserAssert(ichLineEnd <= ped->cch);
         }
 
         /*
@@ -1571,6 +1907,7 @@ void MLBuildchLines(
 
 
     if (iLine != ped->cLines) {
+        RIPMSG1(RIP_VERBOSE, "chLines[%d] is being cleared.\n", iLine);
         ped->cLines = iLine;
         ped->chLines[ped->cLines] = 0;
     }
@@ -1597,6 +1934,7 @@ void MLBuildchLines(
         maxCchBreak = max(maxCchBreak, ichLineEnd);
         ECUnlock(ped);
         MLInsertchLine(ped, iLine, ped->cch, FALSE);
+        MLSanityCheck(ped);
     } else
 UnlockAndEndUp:
         ECUnlock(ped);
@@ -1611,6 +1949,8 @@ EndUp:
 UpdateScroll:
     MLScroll(ped, FALSE, ML_REFRESH, 0, TRUE);
     MLScroll(ped, TRUE,  ML_REFRESH, 0, TRUE);
+
+    MLSanityCheck(ped);
 
     return;
 }
@@ -1746,10 +2086,9 @@ void MLKeyDown(
              * Fix for Bug #4123 -- 02/07/91 -- SANKAR --
              */
 #if 0
-#line 1746
-#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
+#error DIVERGENCE: unselected retail EDIT profile.
 #endif
-#line 1748
+#line 2102
 
                 /*
                  * User hit ESC...Send a close message (which in turn sends a
@@ -1784,11 +2123,11 @@ void MLKeyDown(
                 defaultDlgId = (int)(DWORD)LOWORD(SendMessage(ped->hwndParent,
                         DM_GETDEFID, 0, 0L));
                 if (defaultDlgId) {
-                    defaultDlgId = (int)GetDlgItem(ped->hwndParent, defaultDlgId);
-                    if (defaultDlgId) {
-                        SendMessage(ped->hwndParent, WM_NEXTDLGCTL, defaultDlgId, 1L);
+                    HWND hwnd = GetDlgItem(ped->hwndParent, defaultDlgId);
+                    if (hwnd) {
+                        SendMessage(ped->hwndParent, WM_NEXTDLGCTL, (WPARAM)hwnd, 1L);
                         if (!ped->fFocus)
-                            PostMessage((HWND)defaultDlgId, WM_KEYDOWN, VK_RETURN, 0L);
+                            PostMessage(hwnd, WM_KEYDOWN, VK_RETURN, 0L);
                     }
                 }
             }
@@ -1822,8 +2161,12 @@ void MLKeyDown(
                 // Move caret word left
                 ECWord(ped, ped->ichCaret, TRUE, &ped->ichCaret, NULL);
             } else {
-                // Move caret char left
-                ped->ichCaret = MLMoveSelection(ped, ped->ichCaret, TRUE);
+                if (ped->pLpkEditCallout) {
+                    ped->ichCaret = MLMoveSelectionRestricted(ped, ped->ichCaret, TRUE);
+                } else {
+                    // Move caret char left
+                    ped->ichCaret = MLMoveSelection(ped, ped->ichCaret, TRUE);
+                }
             }
 
             // Get new selection
@@ -1870,7 +2213,11 @@ void MLKeyDown(
                 ECWord(ped, ped->ichCaret, FALSE, NULL, &ped->ichCaret);
             } else {
                 // Move caret char right
-                ped->ichCaret = MLMoveSelection(ped, ped->ichCaret, FALSE);
+                if (ped->pLpkEditCallout) {
+                    ped->ichCaret = MLMoveSelectionRestricted(ped, ped->ichCaret, FALSE);
+                } else {
+                    ped->ichCaret = MLMoveSelection(ped, ped->ichCaret, FALSE);
+                }
             }
 
             //
@@ -2000,6 +2347,15 @@ void MLKeyDown(
         changeSelection = TRUE;
         break;
 
+    // FE_IME // EC_INSERT_COMPOSITION_CHAR : MLKeyDown() : VK_HANJA support
+    case VK_HANJA:
+        if ( HanjaKeyHandler( ped ) ) {
+            changeSelection = TRUE;
+            newMinSel = ped->ichCaret;
+            newMaxSel = ped->ichCaret + (ped->fAnsi ? 2 : 1);
+        }
+        break;
+
     case VK_PRIOR:
     case VK_NEXT:
         if (!(scState & CTRLDOWN)) {
@@ -2027,7 +2383,7 @@ void MLKeyDown(
             if (virtKeyCode == VK_PRIOR)
                 iScrollAmt *= -1; /* For previous page */
 
-            SendMessage(ped->hwnd, WM_HSCROLL, EM_LINESCROLL, iScrollAmt);
+            SendMessage(ped->hwnd, WM_HSCROLL, MAKELONG(EM_LINESCROLL, iScrollAmt), 0);
             break;
         }
         break;
@@ -2048,8 +2404,13 @@ void MLKeyDown(
                 /*
                  * Move cursor forwards and send a backspace message...
                  */
-                ped->ichCaret = MLMoveSelection(ped, ped->ichCaret, FALSE);
-                ped->ichMaxSel = ped->ichMinSel = ped->ichCaret;
+                if (ped->pLpkEditCallout) {
+                    ped->ichMinSel = ped->ichCaret;
+                    ped->ichMaxSel = MLMoveSelectionRestricted(ped, ped->ichCaret, FALSE);
+                } else {
+                    ped->ichCaret = MLMoveSelection(ped, ped->ichCaret, FALSE);
+                    ped->ichMaxSel = ped->ichMinSel = ped->ichCaret;
+                }
 
                 goto DeleteAnotherChar;
             }
@@ -2084,7 +2445,7 @@ void MLKeyDown(
         if (!(scState & SHFTDOWN) && (ped->ichMinSel != ped->ichMaxSel)) {
 
 DeleteAnotherChar:
-            if (GetAppVer(NULL) >= VER40) {
+            if (GETAPPVER() >= VER40) {
                 MLChar(ped, VK_BACK, 0);
             } else {
                 SendMessageWorker(ped->pwnd, WM_CHAR, VK_BACK, 0, ped->fAnsi);
@@ -2144,6 +2505,7 @@ DeleteAnotherChar:
                     ped->iCaretLine--;
                 }
             }
+            CHECK_LINE_NUMBER(ped->iCaretLine, ped);
             ECUnlock(ped);
         }
 
@@ -2195,6 +2557,8 @@ void MLChar(
          */
         return ;
     }
+
+    ECInOutReconversionMode(ped, FALSE);
 
     {
         int scState;
@@ -2315,10 +2679,26 @@ SendEditingMessage:
             else
                 keyValue = 0x000A000D;
 
-        if (keyPress >= TEXT(' ') || keyPress == VK_RETURN || keyPress == VK_TAB) {
-            if (ped->fAnsi)
+        if (   keyPress >= TEXT(' ')
+            || keyPress == VK_RETURN
+            || keyPress == VK_TAB
+            || keyPress == 0x1E     // RS - Unicode block separator
+            || keyPress == 0x1F     // US - Unicode segment separator
+            ) {
+
+            NtUserCallNoParam(SFI_ZZZHIDECURSORNOCAPTURE);
+            if (ped->fAnsi) {
+                //
+                // check if it's a leading byte of double byte character
+                //
+                if (ECIsDBCSLeadByte(ped,(BYTE)keyPress)) {
+                    int DBCSkey;
+
+                    if ((DBCSkey = DbcsCombine(ped->hwnd, keyPress)) != 0)
+                        keyValue = DBCSkey;
+                }
                 MLInsertText(ped, (LPSTR)&keyValue, HIBYTE(keyValue) ? 2 : 1, TRUE);
-            else
+            } else
                 MLInsertText(ped, (LPSTR)&keyValue, HIWORD(keyValue) ? 2 : 1, TRUE);
         } else {
 IllegalChar:
@@ -2347,20 +2727,19 @@ ICH PASCAL NEAR MLPasteText(
     ICH cchAdded = 0;
     HCURSOR hCursorOld;
 
-#line 2345
 #ifdef UNDO_CLEANUP           // #ifdef Added in Chicago  - johnl
-#line 2346
-#error DIVERGENCE OPENNT-HOST-133: UNDO_CLEANUP branch is not selected; see mirror register.
-#line 2355
+#error DIVERGENCE: unselected retail EDIT profile.
 #endif
-#line 2356
+#line 2751
 
     hCursorOld = NtUserSetCursor(LoadCursor(NULL, IDC_WAIT));
 
     if (!OpenClipboard(ped->hwnd))
         goto PasteExitNoCloseClip;
 
-    if (!(hData = GetClipboardData(ped->fAnsi ? CF_TEXT : CF_UNICODETEXT))) {
+    if (!(hData = GetClipboardData(ped->fAnsi ? CF_TEXT : CF_UNICODETEXT)) ||
+            (GlobalFlags(hData) == GMEM_INVALID_HANDLE)) {
+        RIPMSG1(RIP_WARNING, "MLPasteText(): couldn't get a valid handle(%x)", hData);
         goto PasteExit;
     }
 
@@ -2370,6 +2749,10 @@ ICH PASCAL NEAR MLPasteText(
     MLDeleteText(ped);
 
     USERGLOBALLOCK(hData, lpchClip);
+    if (lpchClip == NULL) {
+        RIPMSG1(RIP_WARNING, "MLPasteText: USERGLOBALLOCK(%x) failed.", hData);
+        goto PasteExit;
+    }
 
     /*
      * Get the length of the addition.
@@ -2387,11 +2770,10 @@ ICH PASCAL NEAR MLPasteText(
     USERGLOBALUNLOCK(hData);
 
 PasteExit:
-    CloseClipboard();
+    NtUserCloseClipboard();
 
 PasteExitNoCloseClip:
-    if (hCursorOld)
-        NtUserSetCursor(hCursorOld);
+    NtUserSetCursor(hCursorOld);
 
     return (cchAdded);
 }
@@ -2434,8 +2816,18 @@ void MLMouseMotion(
          * if shift key is down, extend selection to word we double clicked on
          * else clear current selection and select word.
          */
-        ECWord(ped, mouseCch, !(mouseCch == ped->chLines[mouseLine]), &ll, &lh);
-
+        // LiZ -- 5/5/93
+        if (ped->fAnsi && ped->fDBCS) {
+            LPSTR pText = ECLock(ped);
+            ECWord(ped,ped->ichCaret,
+                   ECIsDBCSLeadByte(ped, *(pText+(ped->ichCaret)))
+                        ? FALSE :
+                          (ped->ichCaret == ped->chLines[ped->iCaretLine]
+                              ? FALSE : TRUE), &ll, &lh);
+            ECUnlock(ped);
+        } else {
+            ECWord(ped, mouseCch, !(mouseCch == ped->chLines[mouseLine]), &ll, &lh);
+        }
         if (!(virtKeyDown & MK_SHIFT)) {
             // If shift key isn't down, move caret to mouse point and clear
             // old selection
@@ -2499,7 +2891,6 @@ void MLMouseMotion(
         break;
 
     case WM_LBUTTONDOWN:
-
         ll = lh = mouseCch;
 
         if (!(virtKeyDown & MK_SHIFT)) {
@@ -2582,13 +2973,22 @@ LONG MLScroll(
     int         oldPos;
     BOOL        fUp = FALSE;
     UINT        wFlag;
+    DWORD       dwTime = 0;
 
     if (fRedraw && (cmd != ML_REFRESH)) {
         UpdateWindow(ped->hwnd);
     }
 
-
-    oldPos = (int) (fVertical ? ped->ichScreenStart : ped->xOffset);
+    if (ped->pLpkEditCallout && ped->fRtoLReading && !fVertical
+        && ped->maxPixelWidth > ped->rcFmt.right - ped->rcFmt.left) {
+        /*
+         * Horizontal scoll of a right oriented window with a scrollbar.
+         * Map the logical xOffset to visual coordinates.
+         */
+        oldPos = ped->maxPixelWidth
+                 - ((int)ped->xOffset + ped->rcFmt.right - ped->rcFmt.left);
+    } else
+        oldPos = (int) (fVertical ? ped->ichScreenStart : ped->xOffset);
 
     fIncludeLeftMargin = (ped->xOffset == 0);
 
@@ -2623,9 +3023,21 @@ LONG MLScroll(
             }
             break;
 
+        case SB_TOP:      // == SB_LEFT
+            newPos = 0;
+            break;
+
+        case SB_BOTTOM:   // == SB_RIGHT
+            if (fVertical)
+                newPos = ped->cLines;
+            else
+                newPos = ped->maxPixelWidth;
+            break;
+
         case SB_PAGEUP:   // == SB_PAGELEFT
             fUp = TRUE;
         case SB_PAGEDOWN: // == SB_PAGERIGHT
+
             if (fVertical)
                 iAmt = ped->ichLinesOnScreen - 1;
             else
@@ -2641,6 +3053,9 @@ LONG MLScroll(
         case SB_LINEUP:   // == SB_LINELEFT
             fUp = TRUE;
         case SB_LINEDOWN: // == SB_LINERIGHT
+
+            dwTime = iAmt;
+
             iAmt = 1;
 
             if (fUp)
@@ -2684,7 +3099,7 @@ AddDelta:
         si.fMask = SIF_ALL | SIF_DISABLENOSCROLL;
         si.nMin  = 0;
         si.nPos = newPos;
-        newPos = NtUserSetScrollInfo(ped->hwnd, fVertical ? SB_VERT : SB_HORZ,
+        newPos = SetScrollInfo(ped->hwnd, fVertical ? SB_VERT : SB_HORZ,
                                      &si, fRedraw);
     } else {
         // BOGUS -- this is duped code from ScrollBar code
@@ -2704,6 +3119,19 @@ AddDelta:
 
     if (!oldPos)
         return(0L);
+
+    if (ped->pLpkEditCallout && ped->fRtoLReading && !fVertical
+        && ped->maxPixelWidth > ped->rcFmt.right - ped->rcFmt.left) {
+        // Map visual oldPos and newPos back to logical coordinates
+        newPos = ped->maxPixelWidth
+                 - (newPos + ped->rcFmt.right - ped->rcFmt.left);
+        oldPos = -oldPos;
+        if (newPos<0) {
+            // Compensate for scroll bar returning pos > max-page
+            oldPos += newPos;
+            newPos=0;
+        }
+    }
 
     if (fVertical) {
         ped->ichScreenStart = newPos;
@@ -2749,25 +3177,64 @@ AddDelta:
         ECSetEditClip(ped, hdc, fIncludeLeftMargin);
         if (ped->hFont)
             SelectObject(hdc, ped->hFont);
+        ECGetBrush(ped, hdc);
 
-#line 2752
-#ifdef SUPPORT_LPK
-#line 2753
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2762
-#endif
-#line 2763
-            fUp = TRUE;
+        if (ped->pLpkEditCallout && !fVertical) {
+            // Horizontal scroll with complex script support
+            int xFarOffset = ped->xOffset + ped->rcFmt.right - ped->rcFmt.left;
 
-        if (fUp)
-        {
-            NtUserScrollDC(hdc, dx, dy, &rc, &rc, NULL, &rcUpdate);
+            rc = ped->rcFmt;
+            if (dwTime != 0)
+                ScrollWindowEx(ped->hwnd, ped->fRtoLReading ? -dx : dx, dy, NULL, NULL, NULL,
+                        &rcUpdate, MAKELONG(SW_SMOOTHSCROLL | SW_SCROLLCHILDREN, dwTime));
+            else
+                NtUserScrollDC(hdc, ped->fRtoLReading ? -dx : dx, dy,
+                               &rc, &rc, NULL, &rcUpdate);
+
+            // Handle margins: Blank if clipped by horizontal scrolling,
+            // display otherwise.
+            if (ped->wLeftMargin) {
+                rc.left  = ped->rcFmt.left - ped->wLeftMargin;
+                rc.right = ped->rcFmt.left;
+                if (   (ped->format != ES_LEFT)   // Always display margin for centred or far-aligned text
+                    ||  // Display LTR left margin if first character fully visible
+                        (!ped->fRtoLReading && ped->xOffset == 0)
+                    ||  // Display RTL left margin if last character fully visible
+                        (ped->fRtoLReading && xFarOffset >= ped->maxPixelWidth)) {
+                    UnionRect(&rcUpdate, &rcUpdate, &rc);
+                } else {
+                    ExtTextOutW(hdc, rc.left, rc.top,
+                        ETO_CLIPPED | ETO_OPAQUE | ETO_GLYPH_INDEX,
+                        &rc, L"", 0, 0L);
+                }
+            }
+            if (ped->wRightMargin) {
+                rc.left  = ped->rcFmt.right;
+                rc.right = ped->rcFmt.right + ped->wRightMargin;
+                if (   (ped->format != ES_LEFT)   // Always display margin for centred or far-aligned text
+                    ||  // Display RTL right margin if first character fully visible
+                        (ped->fRtoLReading && ped->xOffset == 0)
+                    ||  // Display LTR right margin if last character fully visible
+                        (!ped->fRtoLReading && xFarOffset >= ped->maxPixelWidth)) {
+                    UnionRect(&rcUpdate, &rcUpdate, &rc);
+                } else {
+                    ExtTextOutW(hdc, rc.left, rc.top,
+                        ETO_CLIPPED | ETO_OPAQUE | ETO_GLYPH_INDEX,
+                        &rc, L"", 0, 0L);
+                }
+            }
+        } else {
+            if (dwTime != 0)
+                ScrollWindowEx(ped->hwnd, dx, dy, NULL, NULL, NULL,
+                        &rcUpdate, MAKELONG(SW_SMOOTHSCROLL | SW_SCROLLCHILDREN, dwTime));
+            else
+                NtUserScrollDC(hdc, dx, dy, &rc, &rc, NULL, &rcUpdate);
 
             // If we need to wipe out the left margin area
             if (ped->wLeftMargin && !fVertical) {
                 // Calculate the rectangle to be wiped out
                 rc.right = rc.left;
-                rc.left = max(0, ped->rcFmt.left - ped->wLeftMargin);
+                rc.left = max(0, (INT)(ped->rcFmt.left - ped->wLeftMargin));
                 if (rc.left < rc.right) {
                     if (fIncludeLeftMargin && (ped->xOffset != 0)) {
 
@@ -2805,8 +3272,6 @@ void MLSetFocus(
     HDC hdc;
 
     if (!ped->fFocus) {
-        BOOL bDoCaret;
-
         ped->fFocus = 1; /* Set focus */
 
         hdc = ECGetEditDC(ped, TRUE);
@@ -2817,17 +3282,12 @@ void MLSetFocus(
          * hidden edit control window. If we don't create the caret etc, it will
          * never end up showing properly.
          */
-#line 2823
-#ifdef SUPPORT_LPK
-#line 2824
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2827
-#endif
-#line 2828
-            bDoCaret = TRUE;
-
-        if (bDoCaret)
+        if (ped->pLpkEditCallout) {
+            ped->pLpkEditCallout->EditCreateCaret (ped, hdc, ECGetCaretWidth(), ped->lineHeight, 0);
+        }
+        else {
             NtUserCreateCaret(ped->hwnd, (HBITMAP)NULL, ECGetCaretWidth(), ped->lineHeight);
+        }
         NtUserShowCaret(ped->hwnd);
         MLSetCaretPosition(ped, hdc);
 
@@ -2840,12 +3300,12 @@ void MLSetFocus(
             MLDrawText(ped, hdc, ped->ichMinSel, ped->ichMaxSel, TRUE);
 
         ECReleaseEditDC(ped, hdc, TRUE);
+
     }
 #if 0
-#line 2846
-#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
+#error DIVERGENCE: unselected retail EDIT profile.
 #endif
-#line 2848
+#line 3325
 
     /*
      * Notify parent we have the focus
@@ -2873,7 +3333,6 @@ void MLKillFocus(
     gcWheelDelta = 0;
 
     if (ped->fFocus) {
-        BOOL bKillCaret;
         ped->fFocus = 0; /* Clear focus */
 
         /*
@@ -2895,18 +3354,7 @@ void MLKillFocus(
         /*
          * Destroy the caret
          */
-#line 2897
-#ifdef SUPPORT_LPK
-#line 2898
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2901
-#endif
-#line 2902
-            bKillCaret = TRUE;
-
-        if(bKillCaret) {
-            NtUserDestroyCaret();
-        }
+        NtUserDestroyCaret();
     }
 
     /*
@@ -3002,12 +3450,12 @@ BOOL MLEnsureCaretVisible(
 * History:
 \***************************************************************************/
 
-LONG MLEditWndProc(
+LRESULT MLEditWndProc(
     HWND hwnd,
     PED ped,
     UINT message,
-    DWORD wParam,
-    LONG lParam)
+    WPARAM wParam,
+    LPARAM lParam)
 {
     HDC         hdc;
     PAINTSTRUCT ps;
@@ -3016,13 +3464,47 @@ LONG MLEditWndProc(
     DWORD       windowstyle;
 
     switch (message) {
+
+    case WM_INPUTLANGCHANGE:
+        if (ped && ped->fFocus && ped->pLpkEditCallout) {
+            NtUserHideCaret(hwnd);
+            hdc = ECGetEditDC(ped, TRUE);
+            NtUserDestroyCaret();
+            ped->pLpkEditCallout->EditCreateCaret (ped, hdc, ECGetCaretWidth(), ped->lineHeight, (UINT)lParam);
+            MLSetCaretPosition(ped, hdc);
+            ECReleaseEditDC(ped, hdc, TRUE);
+            NtUserShowCaret(hwnd);
+        }
+        goto PassToDefaultWindowProc;
+
+
+    case WM_STYLECHANGED:
+        if (ped && ped->pLpkEditCallout) {
+            switch (wParam) {
+
+                case GWL_STYLE:
+                    ECUpdateFormat(ped,
+                        ((LPSTYLESTRUCT)lParam)->styleNew,
+                        GetWindowLong(ped->hwnd, GWL_EXSTYLE));
+                    return 1L;
+
+                case GWL_EXSTYLE:
+                    ECUpdateFormat(ped,
+                        GetWindowLong(ped->hwnd, GWL_STYLE),
+                        ((LPSTYLESTRUCT)lParam)->styleNew);
+                    return 1L;
+            }
+        }
+
+        goto PassToDefaultWindowProc;
+
     case WM_CHAR:
 
         /*
          * wParam - the value of the key
          * lParam - modifiers, repeat count etc (not used)
          */
-        MLChar(ped, wParam, 0);
+        MLChar(ped, (UINT)wParam, 0);
         break;
 
     case WM_ERASEBKGND:  {
@@ -3117,27 +3599,12 @@ LONG MLEditWndProc(
 
         break;
 
-#line 3117
-#ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
-#line 3118
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 3139
-#endif
-#line 3140
-
     case WM_KEYDOWN:
 
         /*
          * wParam - virt keycode of the given key
          * lParam - modifiers such as repeat count etc. (not used)
          */
-#line 3147
-#ifdef SUPPORT_LPK
-#line 3148
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 3154
-#endif
-#line 3155
         MLKeyDown(ped, (UINT)wParam, 0);
         break;
 
@@ -3147,13 +3614,6 @@ LONG MLEditWndProc(
          * wParam - handle of the window that receives the input focus
          * lParam - not used
          */
-#line 3164
-#ifdef SUPPORT_LPK
-#line 3165
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 3171
-#endif
-#line 3172
         MLKillFocus(ped);
         break;
 
@@ -3187,6 +3647,10 @@ LONG MLEditWndProc(
             MLMouseMotion(ped, WM_MOUSEMOVE, ped->prevKeys, &ped->ptPrevMouse);
         break;
 
+    case WM_MBUTTONDOWN:
+        EnterReaderModeHelper(ped->hwnd);
+        break;
+
     case WM_MOUSEMOVE:
         UserAssert(ped->fMouseDown);
 
@@ -3200,8 +3664,7 @@ LONG MLEditWndProc(
          * wParam - contains a value that indicates which virtual keys are down
            lParam - contains x and y coords of the mouse cursor
          */
-        pt.x = (short)LOWORD(lParam);
-        pt.y = (short)HIWORD(lParam);
+        POINTSTOPOINT(pt, lParam);
         MLMouseMotion(ped, message, (UINT)wParam, &pt);
         break;
 
@@ -3212,7 +3675,7 @@ LONG MLEditWndProc(
          * lParam - points to a CREATESTRUCT that contains copies of parameters
          * passed to the CreateWindow function.
          */
-        return (MLCreate(hwnd, ped, (LPCREATESTRUCT)lParam));
+        return (MLCreate(ped, (LPCREATESTRUCT)lParam));
 
     case WM_PRINTCLIENT:
         MLPaint(ped, (HDC) wParam, NULL);
@@ -3305,7 +3768,7 @@ LONG MLEditWndProc(
         else
             *((LPWSTR)ECLock(ped) + ped->cch) = 0;
         ECUnlock(ped);
-        return ((LONG)ped->hText);
+        return ((LRESULT)ped->hText);
 
     case EM_GETLINE:
 
@@ -3314,7 +3777,7 @@ LONG MLEditWndProc(
          * lParam - buffer to copy text to. First WORD is max # of bytes to
          * copy
          */
-        return MLGetLine(ped, wParam, (ICH)*(WORD UNALIGNED *)lParam, (LPSTR)lParam);
+        return MLGetLine(ped, (ICH)wParam, (ICH)*(WORD UNALIGNED *)lParam, (LPSTR)lParam);
 
     case EM_LINEFROMCHAR:
 
@@ -3323,7 +3786,7 @@ LONG MLEditWndProc(
          * of the edit control. These are 0 based.
          * lParam - not used
          */
-        return (LONG)MLIchToLine(ped, wParam);
+        return (LRESULT)MLIchToLine(ped, (ICH)wParam);
 
     case EM_LINEINDEX:
 
@@ -3334,7 +3797,14 @@ LONG MLEditWndProc(
          * This function return s the number of character positions that occur
          * preceeding the first char in a given line.
          */
-        return (LONG)MLLineIndex(ped, wParam);
+        {
+            ICH ichResult = MLLineIndex(ped, (ICH)wParam);
+            if (ichResult == (ICH)-1) {
+                return -1;
+            }
+            return (LRESULT)ichResult;
+        }
+        break;
 
     case EM_LINELENGTH:
 
@@ -3345,7 +3815,7 @@ LONG MLEditWndProc(
            length of any selected text.
            lParam - not used
          */
-        return (LONG)MLLineLength(ped, wParam);
+        return (LRESULT)MLLineLength(ped, (ICH)wParam);
 
     case EM_LINESCROLL:
 
@@ -3353,8 +3823,8 @@ LONG MLEditWndProc(
          * wParam - not used
            lParam - Contains the number of lines and char positions to scroll
          */
-        MLScroll(ped, TRUE,  EM_LINESCROLL, lParam, TRUE);
-        MLScroll(ped, FALSE, EM_LINESCROLL, wParam, TRUE);
+        MLScroll(ped, TRUE,  EM_LINESCROLL, (INT)lParam, TRUE);
+        MLScroll(ped, FALSE, EM_LINESCROLL, (INT)wParam, TRUE);
         break;
 
     case EM_REPLACESEL:
@@ -3399,7 +3869,7 @@ LONG MLEditWndProc(
          * The message EM_SCROLLCARET forces the caret to be scrolled
          * into view.
          */
-        MLSetSelection(ped, TRUE, wParam, lParam);
+        MLSetSelection(ped, TRUE, (ICH)wParam, (ICH)lParam);
         break;
 
     case EM_SCROLLCARET:
@@ -3460,11 +3930,10 @@ LONG MLEditWndProc(
             hdc = ECGetEditDC(ped, TRUE);
 
             if (message == EM_POSFROMCHAR) {
-                MLIchToXYPos(ped, hdc, wParam, FALSE, &pt);
+                MLIchToXYPos(ped, hdc, (ICH)wParam, FALSE, &pt);
                 xyPos = MAKELONG(pt.x, pt.y);
             } else {
-                pt.x = (short)LOWORD(lParam);
-                pt.y = (short)HIWORD(lParam);
+                POINTSTOPOINT(pt, lParam);
                 xyPos = MLMouseToIch(ped, hdc, &pt, &line);
                 xyPos = MAKELONG(xyPos, line);
             }
@@ -3486,6 +3955,11 @@ LONG MLEditWndProc(
         }
       break;
 
+#if LATER
+#error DIVERGENCE: unselected retail EDIT profile.
+#endif
+#line 3979
+
     default:
 PassToDefaultWindowProc:
         return DefWindowProcWorker(ped->pwnd, message, wParam, lParam, ped->fAnsi);
@@ -3506,6 +3980,12 @@ PassToDefaultWindowProc:
 *  attributes. It calls ECTabTheTextOut() to draw each strip.
 *  This takes care of the Negative A anc C widths of the current font, if
 *  it has any, on either side of each strip of text.
+*
+*  NOTE: If the language pack is loaded the text is not divided into strips,
+*  nor is selection highlighting performed here. Whole lines are passed
+*  to the language pack to display with tab expansion and selection
+*  highlighting. (Since the language pack supports scripts with complex
+*  character re-ordering rules, only it can do this).
 *
 * History:
 \***************************************************************************/
@@ -3564,6 +4044,9 @@ void MLDrawText(
     wCurLine = MLIchToLine(ped, ichStart);    // Starting line.
     wEndLine = MLIchToLine(ped, ichEnd);           // Ending line.
 
+    UserAssert(ped->chLines[wCurLine] <= ped->cch + 1);
+    UserAssert(ped->chLines[wEndLine] <= ped->cch + 1);
+
     if (fSelChange && (GetBkMode(hdc) != OPAQUE))
     {
         /*
@@ -3573,22 +4056,18 @@ void MLDrawText(
         RECT rcStrip;
         CopyRect(&rcStrip, &ped->rcFmt);
         rcStrip.left -= ped->wLeftMargin;
+        if (ped->pLpkEditCallout) {
+            rcStrip.right += ped->wRightMargin;
+        }
         rcStrip.top += (wCurLine - ped->ichScreenStart) * ped->lineHeight;
         rcStrip.bottom = rcStrip.top + ((wEndLine - wCurLine) + 1) * ped->lineHeight;
         NtUserInvalidateRect(ped->hwnd, &rcStrip, TRUE);
         return;
     }
 
-#line 3597
-#ifdef SUPPORT_LPK
-#line 3598
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 3605
-#endif
-#line 3606
-
     // If it is either centered or right-justified, then draw the whole lines.
-    if (ped->format != ES_LEFT) {
+    // Also draw whole lines if the language pack is handling line layout.
+    if ((ped->format != ES_LEFT) || (ped->pLpkEditCallout)) {
         ichStart = ped->chLines[wCurLine];
         ichEnd = ped->chLines[wEndLine] + MLLine(ped, wEndLine);
     }
@@ -3597,7 +4076,26 @@ void MLDrawText(
 
     NtUserHideCaret(ped->hwnd);
 
+    //
+    // If ichStart stays on Second byte of DBCS, we have to
+    // adjust it. LiZ -- 5/5/93
+    //
+    if (ped->fAnsi && ped->fDBCS) {
+        ichStart = ECAdjustIch( ped, pText, ichStart );
+    }
+    UserAssert(ichStart <= ped->cch);
+    UserAssert(ichEnd <= ped->cch);
+
     while (ichStart <= ichEnd) {
+        // Pass whole lines to the language pack to display with selection
+        // marking and tab expansion.
+        if (ped->pLpkEditCallout) {
+            ped->pLpkEditCallout->EditDrawText(
+                ped, hdc, pText + ped->cbChar*ichStart,
+                MLLine(ped, wCurLine),
+                (INT)ped->ichMinSel - (INT)ichStart, (INT)ped->ichMaxSel - (INT)ichStart,
+                MLIchToYPos(ped, ichStart, FALSE));
+        } else {
         // xStPos:      The starting Position where the string must be drawn.
         // xClipStPos:  The starting position for the clipping rect for the block.
         // xClipEndPos: The ending position for the clipping rect for the block.
@@ -3621,6 +4119,12 @@ void MLDrawText(
 
             // If ichStart needs to be changed, then change xStPos also accordingly.
             if (ichNewStart != ichStart) {
+                if (ped->fAnsi && ped->fDBCS) {
+                    //
+                    // Adjust DBCS alignment...
+                    //
+                    ichNewStart = ECAdjustIchNext( ped, pText, ichNewStart );
+                }
                 MLIchToXYPos(ped, hdc, ichStart = ichNewStart, FALSE, &pt);
                 xStPos = pt.x;
             }
@@ -3785,7 +4289,16 @@ void MLDrawText(
                 // just drawn.
                 //
                 iLastDrawnLength = CurStripLength +ExtraLengthForNegA - NegCInfo.nCount;
-                ichStart += iLastDrawnLength;
+                //
+                // Adjust DBCS alignment...
+                //
+                if (ped->fAnsi && ped->fDBCS) {
+                    ichNewStart = ECAdjustIch(ped,pText,ichStart+iLastDrawnLength);
+                    iLastDrawnLength = ichNewStart - ichStart;
+                    ichStart = ichNewStart;
+                } else {
+                    ichStart += iLastDrawnLength;
+                }
                 LengthToDraw -= iLastDrawnLength;
                 iRemainingLengthInLine -= iLastDrawnLength;
 
@@ -3806,6 +4319,7 @@ void MLDrawText(
             }
         }
         while(fDrawOnSameLine);   // do while loop ends here.
+        }
 
         // Let us move on to the next line of this block to be drawn.
         wCurLine++;
