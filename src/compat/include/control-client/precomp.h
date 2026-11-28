@@ -366,7 +366,7 @@ BOOL WINAPI wow_original_IsDialogMessageW(HWND, LPMSG);
 HWND WINAPI wow_original_GetNextDlgTabItem(HWND, HWND, BOOL);
 HWND WINAPI wow_original_GetNextDlgGroupItem(HWND, HWND, BOOL);
 #endif
-BOOL RtlMBMessageWParamCharToWCS(DWORD, PDWORD);
+BOOL RtlMBMessageWParamCharToWCS(DWORD, WPARAM *);
 PWND GetParentDialog(PWND);
 PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
 #undef CallMsgFilter

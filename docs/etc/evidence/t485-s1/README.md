@@ -339,3 +339,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [N024 XP task scheduler migration](n024-taskman.md).
 
 - [N024 XP kernel declaration migration](n024-userk.md).
+
+[N025 USER RTL migration](n025.md): ordered input inventory and active first-file audit.

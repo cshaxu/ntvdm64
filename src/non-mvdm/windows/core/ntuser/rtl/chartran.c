@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: chartran.c
 *
-* Copyright (c) 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains the routines for translating ACP characters
 * to Unicode and translating Unicode characters to ACP characters.
@@ -30,15 +30,18 @@ void WINAPI wow_original_text_capture(wow_native_text_descriptor *target,
 }
 #line 16
 extern __declspec(dllimport) USHORT NlsAnsiCodePage;
-#line 17
+
+#ifndef THREAD_CODEPAGE
 #ifdef _USERK_
-#line 18
-#error DIVERGENCE OPENNT-HOST-145: kernel USER profile is not selected
+#error Excluded unsupported original kernel USER, IME or debug branch
 #else
-#line 20
-#define THREAD_CODEPAGE() OpenNtUserThreadCodePage()
-#endif // _USERK_
 #line 22
+#define THREAD_CODEPAGE() (GetClientInfo()->CodePage)
+#endif // _USERK_
+#endif
+#line 25
+
+
 #define IS_ACP(cp) (((cp) == NlsAnsiCodePage) || ((cp) == CP_ACP))
 
 /***************************************************************************\
@@ -66,7 +69,6 @@ extern __declspec(dllimport) USHORT NlsAnsiCodePage;
 *  1993-01-07 IanJa      fix memory leak on error case.
 \***************************************************************************/
 
-#line 49
 int
 WCSToMBEx(
     WORD wCodePage,
@@ -77,14 +79,12 @@ WCSToMBEx(
     BOOL bAllocateMem)
 {
     ULONG nCharsInAnsiString;
-#line 59
 #ifdef _USERK_
-#line 60
-#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
+#error Excluded unsupported original kernel USER, IME or debug branch
 #endif // _USERK_
-#line 62
+#line 67
 
-    if (nAnsiChar == 0 || cchUnicodeString == 0) {
+    if (nAnsiChar == 0 || cchUnicodeString == 0 || pUnicodeString == NULL) {
         return 0;      // nothing to translate or nowhere to put it
     }
 
@@ -111,7 +111,7 @@ WCSToMBEx(
         if (bAllocateMem == FALSE) {
             return 0;  // no destination
         }
-        nAnsiChar = cchUnicodeString * sizeof(USHORT);
+        nAnsiChar = cchUnicodeString * DBCS_CHARSIZE;
     } else if (nAnsiChar < -1) {
         return 0;     // illegal value
     }
@@ -167,13 +167,10 @@ WCSToMBEx(
 
     } else {
 
-#line 146
 #ifdef _USERK_
-#line 147
-#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
-#line 165
+#error Excluded unsupported original kernel USER, IME or debug branch
 #else
-#line 166
+#line 167
         /*
          * Call NLS API (Kernel32) to convert string to Unicode. (User mode)
          */
@@ -185,7 +182,6 @@ WCSToMBEx(
                                  nAnsiChar,
                                  NULL, NULL);
 #endif // _USERK_
-#line 177
 
         if (nCharsInAnsiString == 0) {
             if (bAllocateMem) {
@@ -209,7 +205,7 @@ int MBToWCSEx(
 {
     ULONG nBytesInUnicodeString;
 
-    if (nAnsiChar == 0 || cchUnicodeString == 0) {
+    if (nAnsiChar == 0 || cchUnicodeString == 0 || pAnsiString == NULL) {
         return 0;      // nothing to translate or nowhere to put it
     }
 
@@ -220,6 +216,11 @@ int MBToWCSEx(
      * illegal value so we return FALSE.  Otherwise, nAnsiChar is
      * set and requires no adjustment.
      */
+
+#ifdef _USERK_
+#error Excluded unsupported original kernel USER, IME or debug branch
+#endif
+#line 216
     if (nAnsiChar < 0) {
 
         /*
@@ -245,8 +246,6 @@ int MBToWCSEx(
             return 0;
         }
     }
-
-#line 216
 
     /*
      * Adjust the cchUnicodeString value.  If cchUnicodeString == -1 then we
@@ -301,13 +300,10 @@ int MBToWCSEx(
          */
         ULONG nCharsInUnicodeString;
 
-#line 270
 #ifdef _USERK_
-#line 271
-#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
-#line 290
+#error Excluded unsupported original kernel USER, IME or debug branch
 #else
-#line 291
+#line 329
         /*
          * Call NLS API (Kernel32) to convert string to Unicode. (User mode)
          */
@@ -318,7 +314,6 @@ int MBToWCSEx(
                                     (LPWSTR)*ppUnicodeString,
                                     (int)cchUnicodeString);
 #endif // _USERK_
-#line 301
 
         if (nCharsInUnicodeString == 0) {
             if (bAllocateMem) {
@@ -332,7 +327,6 @@ int MBToWCSEx(
 }
 
 
-#line 314
 /**************************************************************************\
 * RtlWCSMessageWParmCharToMB
 *
@@ -342,15 +336,33 @@ int MBToWCSEx(
 * 11-Feb-1992  JohnC    Created
 \**************************************************************************/
 
-BOOL RtlWCSMessageWParamCharToMB(DWORD msg, PDWORD pWParam)
+BOOL RtlWCSMessageWParamCharToMB(DWORD msg, WPARAM *pWParam)
 {
     DWORD dwAnsi;
-#ifdef FE_SB
-#error
-#line 328
-#endif
     NTSTATUS Status;
-    WORD CodePage = THREAD_CODEPAGE();
+    WORD CodePage;
+    int nbWch;
+
+#ifdef FE_SB // RtlWCSMessageWParamCharToMB()
+    //
+    // Format of *pWParam here...
+    //
+    // LOWORD(*pWParam) = Unicode CodePoint...
+    // HIWORD(*pWParam) = Has some information for DBCS messaging
+    //                    (ex. WPARAM_IR_DBCSCHAR)
+    //
+    // Then we need to convert ONLY loword of wParam to Unicode...
+    //
+#endif // FE_SB
+#ifndef FE_SB
+    // NtBug #3135 (Closed 02/04/93)
+    // Publisher Posts WM_CHAR messages with wParam > 0xFF (not a valid ANSI char)!
+    //
+    // It does this to disable TranslateAccelerator for that char.
+    // MSPub's winproc must get the non-ANSI 'character' value, so PostMessage must
+    // translate *two* characters of wParam for character messages, and PeekMessage
+    // must translate *two* Unicode chars of wParam for ANSI app.
+#endif
 
     /*
      * Only these messages have CHARs: others are passed through
@@ -358,9 +370,9 @@ BOOL RtlWCSMessageWParamCharToMB(DWORD msg, PDWORD pWParam)
 
     switch(msg) {
 #ifdef FE_IME // RtlWCSMessageWParamCharToMB()
-#error
-#line 340
+#error Excluded unsupported original kernel USER, IME or debug branch
 #endif // FE_IME
+#line 398
     case WM_CHAR:
     case WM_CHARTOITEM:
     case EM_SETPASSWORDCHAR:
@@ -369,18 +381,17 @@ BOOL RtlWCSMessageWParamCharToMB(DWORD msg, PDWORD pWParam)
     case WM_SYSDEADCHAR:
     case WM_MENUCHAR:
 
+        CodePage = THREAD_CODEPAGE();
         dwAnsi = 0;
 
-#ifdef FE_SB // RtlWCSMessageWParamCharToMB()
-#error
-#line 362
-#else
-#define NWCH 2
-#endif // FE_SB
+        nbWch = IS_DBCS_ENABLED() ? 1 * sizeof(WCHAR) : 2 * sizeof(WCHAR);
 
         if (IS_ACP(CodePage)) {
+            // HACK HACK HACK HACK (for NtBug #3135)
+            // to allow applications that store data in high word of wParam
+            // Jan/06/96 hiroyama
             Status = RtlUnicodeToMultiByteN((LPSTR)&dwAnsi, sizeof(dwAnsi),
-                    NULL, (LPWSTR)pWParam, NWCH * sizeof(WCHAR));
+                    NULL, (LPWSTR)pWParam, nbWch);
             if (!NT_SUCCESS(Status)) {
                 // LATER IanJa: returning FALSE makes GetMessage fail, which
                 // terminates the app.  We should use some default 'bad character'
@@ -390,12 +401,13 @@ BOOL RtlWCSMessageWParamCharToMB(DWORD msg, PDWORD pWParam)
             }
         } else {
             int cwch;
+            // assuming little endian
 #ifdef _USERK_
-#error
-#line 382
+#error Excluded unsupported original kernel USER, IME or debug branch
 #else
+#line 432
             cwch = WideCharToMultiByte(CodePage, 0,
-                    (LPCWSTR)pWParam, NWCH,
+                    (LPCWSTR)pWParam, nbWch / sizeof(WCHAR),
                     (LPSTR)&dwAnsi, sizeof(dwAnsi), NULL, NULL);
 #endif // _USERK_
             // KdPrint(("0x%04x -> 0x%02x (%d)\n", *pWParam, dwAnsi, CodePage));
@@ -404,17 +416,36 @@ BOOL RtlWCSMessageWParamCharToMB(DWORD msg, PDWORD pWParam)
                 return TRUE;
             }
         }
-#ifdef FE_SB // RtlWCSMessageWParamCharToMB()
-#error
-#line 416
-#else
-        // LATER!!!; in product 2 handle DBCS correctly.
-#ifdef DEBUG
-#error
-#line 422
+        if (IS_DBCS_ENABLED()) {
+            WORD wAnsi = LOWORD(dwAnsi);
+            //
+            // From:
+            //   HIBYTE(wAnsi)            = Dbcs TrailingByte.
+            //   LOBYTE(wAnsi)            = Dbcs LeadingByte or Sbcs character.
+            //
+            // To:
+            //   HIWORD(*pWParam)         = Original Data (information for DBCS messgaing).
+            //   HIBYTE(LOWORD(*pWParam)) = Dbcs LeadingByte Byte.
+            //   LOBYTE(LOWORD(*pWParam)) = Dbcs TrailingByte or Sbcs character.
+            //
+            if (IS_DBCS_MESSAGE(wAnsi)) {
+                //
+                // It's a DBCS character.
+                //
+                *pWParam = MAKEWPARAM(MAKEWORD(HIBYTE(wAnsi),LOBYTE(wAnsi)),HIWORD(*pWParam));
+            } else {
+                //
+                // It's a SBCS character.
+                //
+                *pWParam = MAKEWPARAM(MAKEWORD(LOBYTE(wAnsi),0),0);
+            }
+        } else {
+#if DBG
+#error Excluded unsupported original kernel USER, IME or debug branch
 #endif
-        *pWParam = dwAnsi;
-#endif // FE_SB
+#line 471
+            *pWParam = dwAnsi;
+        }
         break;
     }
 
@@ -432,18 +463,14 @@ BOOL RtlWCSMessageWParamCharToMB(DWORD msg, PDWORD pWParam)
 * 13-Jan-1993  IanJa    Translate 2 characters (Publisher posts these!)
 \**************************************************************************/
 
-#line 442
-BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
+BOOL RtlMBMessageWParamCharToWCS(DWORD msg, WPARAM *pWParam)
 {
     DWORD dwUni;
     NTSTATUS Status;
-#line 446
-#ifdef FE_SB // RtlMBMessageWParamCharToWCS()
-#line 447
-#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
-#line 449
-#endif // FE_SB
-#line 450
+    // FE_SB    (RtlMBMessageWParamCharToWCS)
+    BOOL  bWmCrIrDbcsChar = FALSE;
+    WORD  wAnsi = LOWORD(*pWParam);
+    // end FE_SB    (RtlMBMessageWParamCharToWCS)
     WORD CodePage = THREAD_CODEPAGE();
 
     /*
@@ -451,16 +478,29 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
      */
 
     switch(msg) {
-#line 457
-#ifdef FE_SB // RtlMBMessageWParamCharToWCS()
-#line 458
-#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
-#line 496
-#else
-#line 497
+    // FE_SB    (RtlMBMessageWParamCharToWCS)
     case WM_CHAR:
-#endif // FE_SB
-#line 499
+        //
+        // WM_CHAR's wParam format for WM_IME_REPORT:IR_DBCSCHAR
+        //
+        if (IS_DBCS_ENABLED() && (*pWParam & WMCR_IR_DBCSCHAR)) {
+            //
+            // Mark this message is sent as IR_DBCSCHAR format.
+            //
+            bWmCrIrDbcsChar = TRUE;
+        }
+
+        //
+        // Fall through....
+        //
+#ifdef FE_IME
+#error Excluded unsupported original kernel USER, IME or debug branch
+#endif
+#line 544
+        //
+        // Fall through...
+        //
+        // end FE_SB    (RtlMBMessageWParamCharToWCS)
     case WM_CHARTOITEM:
     case EM_SETPASSWORDCHAR:
     case WM_DEADCHAR:
@@ -477,39 +517,32 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
                 return FALSE;
         } else {
             int cwch;
-#line 515
 #ifdef _USERK_
-#line 516
-#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
-#line 519
+#error Excluded unsupported original kernel USER, IME or debug branch
 #else
-#line 520
+#line 569
             cwch = MultiByteToWideChar(CodePage, 0,
                     (LPSTR)pWParam, 2,
                     (LPWSTR)&dwUni, sizeof(dwUni) / sizeof(WCHAR));
 #endif // _USERK_
-#line 524
             // KdPrint(("0x%02x -> 0x%04x (%d)\n", *pWParam, dwUni, CodePage));
             if (cwch == 0) {
                 return FALSE;
             }
         }
 
-#line 530
-#ifdef FE_SB // RtlMBMessageWParamCharToWCS
-#line 531
-#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
-#line 536
-#else
-#line 537
-#ifdef DEBUG
-#line 538
-#error Excluded unsupported original DEBUG branch
-#line 541
+        // FE_SB    (RtlMBMessageWParamCharToWCS)
+        //
+        // if this character is sent for WM_IME_REPORT:IR_DBCSCHAR, we mark it.
+        //
+        if (bWmCrIrDbcsChar)
+            dwUni |= WMCR_IR_DBCSCHAR;
+        // else FE_SB (RtlMBMessageWParamCharToWCS)
+#if DBG
+#error Excluded unsupported original kernel USER, IME or debug branch
 #endif
-#line 542
-#endif // FE_SB
-#line 543
+#line 591
+        // end FE_SB
         *pWParam = dwUni;
         break;
     }
@@ -526,7 +559,6 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 * 03-22-95 JimA         Created.
 \**************************************************************************/
 
-#line 559
 VOID RtlInitLargeAnsiString(
     PLARGE_ANSI_STRING plstr,
     LPCSTR psz,
@@ -555,7 +587,6 @@ VOID RtlInitLargeAnsiString(
 * 03-22-95 JimA         Created.
 \**************************************************************************/
 
-#line 587
 VOID RtlInitLargeUnicodeString(
     PLARGE_UNICODE_STRING plstr,
     LPCWSTR psz,

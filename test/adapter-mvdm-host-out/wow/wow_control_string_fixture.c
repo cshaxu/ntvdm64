@@ -12,8 +12,8 @@ UINT TextCopy(PLARGE_UNICODE_STRING, LPWSTR, UINT);
 DWORD wcsncpycch(LPWSTR, LPCWSTR, DWORD);
 LONG GetPrefixCount(LPCWSTR, int, LPWSTR, int);
 BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
-BOOL RtlMBMessageWParamCharToWCS(DWORD, PDWORD);
-BOOL RtlWCSMessageWParamCharToMB(DWORD, PDWORD);
+BOOL RtlMBMessageWParamCharToWCS(DWORD, WPARAM *);
+BOOL RtlWCSMessageWParamCharToMB(DWORD, WPARAM *);
 USHORT WINAPI OpenNtUserThreadCodePage(VOID);
 #include "compat/include/wow_native_text_descriptor.h"
 void WINAPI wow_original_text_capture(wow_native_text_descriptor *, const LARGE_STRING *);
@@ -68,7 +68,7 @@ static void message_character_contract(void)
     static const UINT messages[] = { WM_CHAR, WM_CHARTOITEM,
         EM_SETPASSWORDCHAR, WM_DEADCHAR, WM_SYSCHAR, WM_SYSDEADCHAR, WM_MENUCHAR };
     unsigned i;
-    DWORD value;
+    WPARAM value;
     SetLastError(0x447119);
     (void)OpenNtUserThreadCodePage();
     CHECK(GetLastError() == 0x447119);

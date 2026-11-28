@@ -2278,3 +2278,5 @@ post-publication targeted checks.
 - [N024 XP task scheduler migration](evidence/t485-s1/n024-taskman.md).
 
 - [N024 XP kernel declaration migration](evidence/t485-s1/n024-userk.md).
+
+[N025 USER RTL migration](evidence/t485-s1/n025.md): ordered migration and P83 delivery evidence.

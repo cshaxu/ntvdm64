@@ -17,6 +17,12 @@ VOID WINAPI OpenNtUserRtlFreeMem(PVOID value);
 #define USER_AWCONV_COUNTSTRING (-1)
 #define USER_AWCONV_COUNTSTRINGSZ (-2)
 
+// XP allows the standalone thread-code-page provider before its fallback.
+#define THREAD_CODEPAGE() OpenNtUserThreadCodePage()
+/* Native USER owns the same system-wide DBCS capability as other control bindings. */
+#undef IS_DBCS_ENABLED
+#define IS_DBCS_ENABLED() GetSystemMetrics(SM_DBCSENABLED)
+
 #define UserRtlAllocMem OpenNtUserRtlAllocMem
 #define UserRtlFreeMem OpenNtUserRtlFreeMem
 
