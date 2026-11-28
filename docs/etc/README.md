@@ -2267,3 +2267,5 @@ post-publication targeted checks.
 - [N024 cleanup producer and lifecycle review](evidence/t485-s1/n024-cleanup-review.md).
 
 - [N024 XP hung-handler registration](evidence/t485-s1/n024-exitwin.md).
+
+- [N024 XP window-data migration](evidence/t485-s1/n024-getset.md).

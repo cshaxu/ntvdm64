@@ -7,6 +7,7 @@
 #undef WOW_ORIGINAL_DIALOG_LAYOUT
 #include "wow_edit_state_bindings.h"
 #define WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
+#define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #define WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY
 #include "non-mvdm/windows/core/ntuser/client/usercli.h"
 #define WOW_ORIGINAL_CLIENT_HANDLES
@@ -14,6 +15,7 @@
 #undef WOW_ORIGINAL_CLIENT_HANDLES
 #undef WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY
 #undef WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
+#undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #include "non-mvdm/windows/core/ntuser/inc/ntsend.h"
 
 /* Actual original layouts; only unavailable transports are test doubles.

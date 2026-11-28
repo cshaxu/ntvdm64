@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: getset.c
 *
-* Copyright (c) 1985-1995, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains window manager information routines
 *
@@ -11,22 +11,11 @@
 * 08-Feb-1991 IanJa     Unicode/ANSI aware and neutral
 \***************************************************************************/
 
-#line 14
 #include "precomp.h"
 #pragma hdrstop
 
-HWND WINAPI wow_original_window_handle(PWND window)
-{
-    return window->head.h;
-}
+#line 248
 
-VOID WINAPI wow_original_change_compat_state(PWND window, BOOL set)
-{
-    if (set) SetWF(window, WFWIN40COMPAT);
-    else ClrWF(window, WFWIN40COMPAT);
-}
-
-#line 245
 /***************************************************************************\
 * xxxSetWindowLong (API)
 *
@@ -38,26 +27,23 @@ VOID WINAPI wow_original_change_compat_state(PWND window, BOOL set)
 * 26-Nov-1990 DarrinM   Wrote.
 \***************************************************************************/
 
-#line 256
-DWORD xxxSetWindowLong(
+ULONG_PTR xxxSetWindowLongPtr(
     PWND  pwnd,
     int   index,
-    DWORD dwData,
+    ULONG_PTR dwData,
     BOOL  bAnsi)
 {
-    DWORD dwOld;
+    ULONG_PTR dwOld;
     DWORD dwCPDType = 0;
 
     /*
      * Hide the window proc from other processes
      */
-#line 268
-#ifdef DEBUG
-#line 269
+#if DBG
 #error
-#line 272
+#line 276
 #endif
-#line 273
+#line 277
 
     /*
      * CheckLock(pwnd);  The only case that leaves the critical section is
@@ -78,20 +64,20 @@ DWORD xxxSetWindowLong(
     if (GETFNID(pwnd) != 0) {
         if (TestWF(pwnd, WFDIALOGWINDOW)) {
             switch (index) {
-            case DWL_MSGRESULT:
+            case DWLP_MSGRESULT:
 #ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
                  return wow_dialog_host_set(HW(pwnd), index, dwData, bAnsi);
 #else
-#line 294
-                 dwOld = (DWORD)((PDIALOG)(pwnd))->resultWP;
-                 ((PDIALOG)(pwnd))->resultWP = (long)dwData;
+#line 298
+                 dwOld = (ULONG_PTR)((PDIALOG)(pwnd))->resultWP;
+                 ((PDIALOG)(pwnd))->resultWP = (LONG_PTR)dwData;
                  return dwOld;
 #endif
+#line 301
 
-#line 298
-            case DWL_USER:
-                 dwOld = (DWORD)((PDIALOG)(pwnd))->unused;
-                 ((PDIALOG)(pwnd))->unused = (long)dwData;
+            case DWLP_USER:
+                 dwOld = (ULONG_PTR)((PDIALOG)(pwnd))->unused;
+                 ((PDIALOG)(pwnd))->unused = (LONG_PTR)dwData;
                  return dwOld;
 
             default:
@@ -111,19 +97,18 @@ DWORD xxxSetWindowLong(
                 case FNID_LISTBOX:
                 case FNID_STATIC:
                 case FNID_EDIT:
-#line 320
 #ifdef FE_IME
-#line 321
 #error
+#line 326
 #endif
-#line 323
+#line 327
                     /*
                      * Allow the 0 index for controls to be set if it's
                      * still NULL or the window is being destroyed. This
                      * is where controls store their private data.
                      */
                     if (index == 0) {
-                        dwOld = *((LPDWORD)(pwnd + 1));
+                        dwOld = *((PULONG_PTR)(pwnd + 1));
                         if (dwOld == 0 || TestWF(pwnd, WFDESTROYED))
                             goto SetData;
                     }
@@ -138,11 +123,13 @@ DWORD xxxSetWindowLong(
                      * the window is being destroyed. This is where we
                      * store our private data.
                      */
+#ifndef _WIN64
                     if (index == 0) {
                         goto SetData;
                     }
-                    if (index == 4) {
-                        dwOld = *((LPDWORD)(pwnd + 1));
+#endif
+                    if (index == GWLP_MDIDATA) {
+                        dwOld = *((PULONG_PTR)(pwnd + 1));
                         if (dwOld == 0 || TestWF(pwnd, WFDESTROYED))
                             goto SetData;
                     }
@@ -151,7 +138,7 @@ DWORD xxxSetWindowLong(
 
                 RIPERR3(ERROR_INVALID_INDEX,
                         RIP_WARNING,
-                        "SetWindowLong: Trying to set private server data pwnd=(%lX) index=(%ld) FNID=(%lX)",
+                        "SetWindowLongPtr: Trying to set private server data pwnd=(%#p) index=(%ld) FNID=(%lX)",
                         pwnd, index, (DWORD)pwnd->fnid);
                 return 0;
             }
@@ -161,14 +148,17 @@ DWORD xxxSetWindowLong(
     if (index < 0) {
         return xxxSetWindowData(pwnd, index, dwData, bAnsi);
     } else {
-        if (index + (int)sizeof(DWORD) > pwnd->cbwndExtra) {
-            RIPERR0(ERROR_INVALID_INDEX, RIP_VERBOSE, "");
+        if ((UINT)index + sizeof(ULONG_PTR) > (UINT)pwnd->cbwndExtra) {
+            RIPERR3(ERROR_INVALID_INDEX,
+                    RIP_WARNING,
+                    "SetWindowLongPtr: Index %d too big for cbWndExtra %d on pwnd %#p",
+                    index, pwnd->cbwndExtra, pwnd);
             return 0;
         } else {
-            DWORD UNALIGNED *pudw;
+            ULONG_PTR UNALIGNED *pudw;
 
 SetData:
-            pudw = (DWORD UNALIGNED *)((BYTE *)(pwnd + 1) + index);
+            pudw = (ULONG_PTR UNALIGNED *)((BYTE *)(pwnd + 1) + index);
             dwOld = *pudw;
             *pudw = dwData;
             return dwOld;
@@ -176,36 +166,97 @@ SetData:
     }
 }
 
-
-#line 749
-#ifdef DEBUG
-#line 750
+#line 391
+#ifdef _WIN64
 #error
+#line 503
 #endif
-#line 752
+#line 504
 
-#line 759
-#ifdef DEBUG
-#line 760
+#line 851
+
+/***************************************************************************\
+* FindPCPD
+*
+* Searches the list of CallProcData's associated with window to see if
+* one already exists representing this transition.  CPD can be re-used
+* and aren't deleted until a window or thread dies
+*
+*
+* 04-Feb-1993 JohnC     Created.
+\***************************************************************************/
+
+PCALLPROCDATA FindPCPD(
+    PCALLPROCDATA pCPD,
+    ULONG_PTR      dwClientPrevious,
+    WORD          wCPDType)
+{
+    while (pCPD) {
+        if ((pCPD->pfnClientPrevious == dwClientPrevious) &&
+                (pCPD->wType == wCPDType))
+            return pCPD;
+        pCPD = pCPD->spcpdNext;
+    }
+
+    return NULL;
+}
+
+#line 895
+#if DBG
 #error
-#line 769
+#line 897
 #endif
-#line 770
+#line 898
 
-#line 776
-#ifdef DEBUG
-#line 777
+#line 905
+#if DBG
 #error
+#line 915
 #endif
-#line 779
+#line 916
 
-#line 781
-#ifdef DEBUG
-#line 782
+#line 922
+#if DBG
 #error
-#line 793
-#endif // DEBUG
-#line 794
+#line 924
+#endif
+#line 925
+
+#line 927
+#if DBG
+#error
+#line 939
+#endif // DBG
+#line 940
+
+#line 1011
+
+ULONG DBGGetWindowLong(PWND pwnd, int index)
+{
+    UserAssert(index >= 0);
+    UserAssert((UINT)index + sizeof(DWORD) <= (UINT)pwnd->cbwndExtra);
+    return __GetWindowLong(pwnd, index);
+}
+
+#line 1018
+
+ULONG_PTR DBGGetWindowLongPtr(PWND pwnd, int index)
+{
+    UserAssert(index >= 0);
+    UserAssert((UINT)index + sizeof(ULONG_PTR) <= (UINT)pwnd->cbwndExtra);
+    return __GetWindowLongPtr(pwnd, index);
+}
+
+HWND WINAPI wow_original_window_handle(PWND window)
+{
+    return window->head.h;
+}
+
+VOID WINAPI wow_original_change_compat_state(PWND window, BOOL set)
+{
+    if (set) SetWF(window, WFWIN40COMPAT);
+    else ClrWF(window, WFWIN40COMPAT);
+}
 
 #include "compat/include/wow_page_domain.h"
 VOID WINAPI wow_original_restore_window_words(struct _WW *words,

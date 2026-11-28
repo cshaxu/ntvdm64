@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall59/159 directories, H001-H036 and N001-N023. S15 runtime92 is the current
+overall59/159 directories, H001-H036 and N001-N023. S15 runtime93 is the current
 published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
@@ -192,6 +192,16 @@ Census1332/792/803/529/7961/63292; delta0/0/0/0/
 +4/-100;1316XP/16OpenNT. Original LF recovery exposes bounded spans.
 N0243/9; S15 11/14; overall59/159. One file since P75 Full24/24.
 Next getset.c; no S/T closure.
+
+[P77 XP window data](../etc/evidence/t485-s1/n024-getset.md) verified runtime93:
+original pointer-width setter and three original helpers, unchanged x86 ABI and
+native dialog owner. Cached build, dual26hash, controls40/40, native creation,
+process retirement and genuine Win16 controls pass. Two test-build prerequisite
+failures repaired without changing assertions; retries retained in receipt.
+Census1332/792/803/529/7980/62985; delta0/0/0/0/
++19/-307;1317XP/15OpenNT. LF recovery unfolds whole-file span.
+N0244/9; S15 11/14; overall59/159. Two files since P75 Full24/24.
+Next profile.c; no S/T closure.
 
 ## S14 Closure Record
 

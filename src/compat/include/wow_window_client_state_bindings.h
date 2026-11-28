@@ -3,6 +3,14 @@
 #include <windows.h>
 struct tagWND;
 
+/* XP kernel/userk.h GETSET.C: fixed x86 entry alias and original private
+ * extra-byte readers, shared by the product and original-body fixtures. */
+#ifndef _WIN64
+#define xxxSetWindowLongPtr xxxSetWindowLong
+#endif
+#define __GetWindowLong(pwnd, index) ((LONG)(*(DWORD UNALIGNED *)((BYTE *)((pwnd) + 1) + (index))))
+#define __GetWindowLongPtr(pwnd, index) ((LONG_PTR)(*(ULONG_PTR UNALIGNED *)((BYTE *)((pwnd) + 1) + (index))))
+
 /* ADAPTER-WOW-063. Caller owns the existing task/borrow scope. State belongs
  * to its enrolled HWND binding, not another registry or the guest projection.
  * Creation consumes captured provenance; validation never invents it. */

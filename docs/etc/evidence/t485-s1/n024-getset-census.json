@@ -1,0 +1,44 @@
+{
+  "status": "verified-runtime93",
+  "before": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7961,
+    "nonerror_lines": 63292
+  },
+  "after": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7980,
+    "nonerror_lines": 62985
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 19,
+    "nonerror_lines": -307
+  },
+  "files": [
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\getset.c",
+      "before_points": 1,
+      "before_lines": 1234,
+      "after_points": 20,
+      "after_lines": 927,
+      "baseline": "XP",
+      "blob": "7f721d604212d819d13255fc59bd402ed98370e6",
+      "normalized": {
+        "points": 20,
+        "lines": 927,
+        "excluded": 7
+      },
+      "sha256": "9e5df066a7e072c7d21877f4b6e208babd97ed1e77df195b578bf3d1f4055f65"
+    }
+  ]
+}

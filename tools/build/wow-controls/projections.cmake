@@ -88,6 +88,6 @@ file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/mnemonic-default.c"
   CONTENT "#include \"control-drawing/precomp.h\"\n#line ${mnemonic_default_line} \"${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clglobal.c\"\n${mnemonic_default}" @ONLY)
 
 set(class_binding "${NTVDM_REPO}/src/compat/wow_standard_class_bindings.c")
-control_slice(class_atoms "${class_binding}" "static const struct { BYTE cleanup, client; } class_indices[]" "static BOOL process_control(" FALSE)
+control_slice(class_atoms "${class_binding}" "BOOL WINAPI wow_standard_classes_copy_client_atoms(" "static BOOL process_control(" FALSE)
 file(CONFIGURE OUTPUT "${CMAKE_BINARY_DIR}/class-atoms.c"
   CONTENT "#include <windows.h>\n#include \"wow_standard_class_bindings.h\"\n#line ${class_atoms_line} \"${class_binding}\"\n${class_atoms}" @ONLY)
