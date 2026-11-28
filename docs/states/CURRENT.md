@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime69 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime70 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -96,7 +96,7 @@ all ABI evidence and census delta+31points/-2012lines; N02111/17 then.
 
 [P26 N021 registry](../etc/evidence/t485-s1/n021-registry.md) delivered
 runtime27 with consolidated Full24/24. Its receipt preserves the observer
-correction, all attempts and census. This is the latest Full checkpoint.
+correction, all attempts and census. Historical Full evidence remains in that receipt.
 
 [P27 N021 RTL](../etc/evidence/t485-s1/n021-rtl.md) and
 [P28 N021 user RTL](../etc/evidence/t485-s1/n021-user-rtl.md) delivered;
@@ -179,7 +179,7 @@ mirror census. No guest change or S/T closure.
 [P51 multiline creation](../etc/evidence/t485-s1/n022-edmlonce.md) delivered
 runtime60 with exact XP source and Full24/24. Its receipt retains provider
 binding, initial failure, final package/tests and complete mirror census.
-P51 is the current ten-file Full checkpoint.
+P51 is the previous ten-file Full checkpoint.
 
 [P52](../etc/evidence/t485-s1/n022-edmlrare.md),
 [P53](../etc/evidence/t485-s1/n022-edslrare.md),
@@ -197,12 +197,14 @@ delivered runtime66; its receipt retains all tests, baseline and census.
 runtime67; its receipt retains the approved RIT boundary, ABI, all tests and census.
 [P59 multi-column ListBox](../etc/evidence/t485-s1/n022-lboxmult.md) delivered
 runtime68; its receipt retains byte identity, real multi-column scrolling and census.
-[P60 ListBox auxiliary operations](../etc/evidence/t485-s1/n022-lboxrare.md) delivers
-runtime69: byte-identical XP body. Cached build, dual13-image26hash, controls40/40,
-CCPU borrow, SOL Options and real Win16 tab-stop reset and scrolling pass.
-N02231/39; S15 9/14, overall57/159. Census1329/787/798/531/8067/70627;
-delta0/+1/+1/-1/-5/-40;1298XP/31OpenNT. Nine mirrors since P51 Full24/24.
-No original guest change or S/T closure. Next lboxctl3.c: correct prior next-file omission, then lboxvar.c.
+[P60 ListBox auxiliary operations](../etc/evidence/t485-s1/n022-lboxrare.md)
+delivered runtime69; its receipt retains source identity, tests and census.
+[P61 directory ListBox](../etc/evidence/t485-s1/n022-lboxctl3.md) delivers
+runtime70: XP algorithms, four original unselected branches and shared SEH
+filter. Cached build, dual13-image26hash, targeted and Full24/24 pass.
+N02232/39; S15 9/14, overall57/159. Census1329/787/798/531/8072/68258;
+delta0/0/0/0/+5/-2369;1299XP/30OpenNT. P61 is the current ten-file Full checkpoint.
+No original guest change or S/T closure. Directory omission corrected; next lboxvar.c.
 
 ## S14 Closure Record
 

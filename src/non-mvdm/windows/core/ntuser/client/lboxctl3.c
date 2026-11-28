@@ -2,6 +2,8 @@
 *
 *  LBOXCTL3.C -
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 *      Directory List Box Routines
 *
 * ??-???-???? ianja    Ported from Win 3.0 sources
@@ -19,7 +21,6 @@
 #define TABCHAR        TEXT('\t')
 
 #define MAXDIGITSINSIZE 9
-extern WCHAR szAttr[];  /* Defined in InitlStr.c */
 
 void LB_CreateLBLine(LPWIN32_FIND_DATA, LPWSTR);
 
@@ -139,7 +140,7 @@ LPWSTR ChopText(
             while (*lpch && (*lpch++ != L'\\')) {
                 ;
             }
-            cchT = cchPath - (lpch - lpchPath);
+            cchT = cchPath - (int)(lpch - lpchPath);
             GetTextExtentPoint(hdc, lpch, cchT, &size);
             if (*lpch == 0 || size.cx <= cxField) {
 
@@ -500,10 +501,9 @@ BOOL xxxDlgDirListHelper(
                  * Post lpszPathSpecClient, the client side pointer.
                  */
 #ifdef WASWIN31
-#line 503
-#error DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register.
+#error DIVERGENCE: original WASWIN31/non-Unicode branch is not selected.
 #else
-#line 507
+#line 508
                 /*
                  * On NT, keep DDL_POSTMSGS in wParam because we need to know
                  * in the wndproc whether the pointer is clientside or server
@@ -511,9 +511,9 @@ BOOL xxxDlgDirListHelper(
                  */
                 PostMessage(hwndLB, wDirMsg,
                         attrib & ~(DDL_DIRECTORY | DDL_DRIVES),
-                        (LONG)lpszPathSpecClient);
+                        (LPARAM)lpszPathSpecClient);
 #endif
-#line 516
+#line 517
 
             } else {
 
@@ -523,14 +523,13 @@ BOOL xxxDlgDirListHelper(
                  */
                 SendMessage(hwndLB, wDirMsg,
                         attrib & ~(DDL_DIRECTORY | DDL_DRIVES),
-                        (LONG)lpszPathSpec);
+                        (LPARAM)lpszPathSpec);
             }
 
 #ifdef WASWIN31
-#line 529
-#error DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register.
+#error DIVERGENCE: original WASWIN31/non-Unicode branch is not selected.
 #else
-#line 534
+#line 535
             //
             // B#1433
             // The old code stripped out read-only, hidden, system, and archive
@@ -551,7 +550,7 @@ BOOL xxxDlgDirListHelper(
             }
 //            attrib &= (DDL_DIRECTORY | DDL_DRIVES | DDL_POSTMSGS);
 #endif
-#line 554
+#line 555
         }
 
         //
@@ -571,9 +570,9 @@ BOOL xxxDlgDirListHelper(
                  * Post lpszPathSpecClient, the client side pointer (see text
                  * above).
                  */
-                PostMessage(hwndLB, wDirMsg, attrib, (LONG)lpszPathSpecClient);
+                PostMessage(hwndLB, wDirMsg, attrib, (LPARAM)lpszPathSpecClient);
             } else {
-                SendMessage(hwndLB, wDirMsg, attrib, (LONG)lpszPathSpec);
+                SendMessage(hwndLB, wDirMsg, attrib, (LPARAM)lpszPathSpec);
             }
         }
 
@@ -597,6 +596,8 @@ BOOL xxxDlgDirListHelper(
 * History:
 \***************************************************************************/
 
+
+FUNCLOG5(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, DlgDirListA, HWND, hwndDlg, LPSTR, lpszPathSpecClient, int, idListBox, int, idStaticPath, UINT, attrib)
 BOOL DlgDirListA(
     HWND hwndDlg,
     LPSTR lpszPathSpecClient,
@@ -642,6 +643,8 @@ BOOL DlgDirListA(
     return fRet;
 }
 
+
+FUNCLOG5(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, DlgDirListW, HWND, hwndDlg, LPWSTR, lpszPathSpecClient, int, idListBox, int, idStaticPath, UINT, attrib)
 BOOL DlgDirListW(
     HWND hwndDlg,
     LPWSTR lpszPathSpecClient,
@@ -674,12 +677,11 @@ BOOL DlgDirListW(
 
 
 /***************************************************************************\
-* xxxDlgDirSelectHelper
+* DlgDirSelectHelper
 *
 * History:
 \***************************************************************************/
 
-#line 686
 BOOL DlgDirSelectHelper(
     LPWSTR lpszPathSpec,
     int chCount,
@@ -774,15 +776,16 @@ Exit:
     TextCopy(&str, lpszPathSpec, (UINT)chCount);
     return fDir;
 }
-#line 779
 
 
 /***************************************************************************\
-* xxxDlgDirSelectEx
+* DlgDirSelectEx
 *
 * History:
 \***************************************************************************/
 
+
+FUNCLOG4(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, DlgDirSelectExA, HWND, hwndDlg, LPSTR, lpszPathSpec, int, chCount, int, idListBox)
 BOOL DlgDirSelectExA(
     HWND hwndDlg,
     LPSTR lpszPathSpec,
@@ -797,7 +800,7 @@ BOOL DlgDirSelectExA(
         return FALSE;
     }
 
-    fRet = DlgDirSelectExW(hwndDlg, lpwsz, chCount, idListBox);
+    fRet = DlgDirSelectHelper(lpwsz, chCount, GetDlgItem(hwndDlg, idListBox));
 
     WCSToMB(lpwsz, -1, &lpszPathSpec, chCount, FALSE);
 
@@ -806,7 +809,8 @@ BOOL DlgDirSelectExA(
     return fRet;
 }
 
-#line 815
+
+FUNCLOG4(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, DlgDirSelectExW, HWND, hwndDlg, LPWSTR, lpszPathSpec, int, chCount, int, idListBox)
 BOOL DlgDirSelectExW(
     HWND hwndDlg,
     LPWSTR lpszPathSpec,
@@ -815,7 +819,6 @@ BOOL DlgDirSelectExW(
 {
     return DlgDirSelectHelper(lpszPathSpec, chCount, GetDlgItem(hwndDlg, idListBox));
 }
-#line 839
 
 
 /***************************************************************************\
@@ -867,17 +870,16 @@ INT xxxLbDir(
     try {
         wcscpy(Buffer2, lhszFileSpec);
         lhszFileSpec = Buffer2;
-    } except (EXCEPTION_EXECUTE_HANDLER) {
+    } except (W32ExceptionHandler(FALSE, RIP_WARNING)) {
         return -1;
     }
 
     result = -1;
 
 #ifndef UNICODE
-#line 897
-#error Unsupported excluded original configuration
+#error DIVERGENCE: original WASWIN31/non-Unicode branch is not selected.
 #endif
-#line 899
+#line 883
 
     if (fWasVisible = IsLBoxVisible(plb)) {
         SendMessage(HWq(plb->spwnd), WM_SETREDRAW, FALSE, 0);
@@ -894,7 +896,7 @@ INT xxxLbDir(
     if (attrib != (DDL_EXCLUSIVE | DDL_DRIVES | DDL_NOFILES)) {
         hFind = FindFirstFile(lhszFileSpec, &ffd);
 
-        if (hFind != (HANDLE)-1) {
+        if (hFind != INVALID_HANDLE_VALUE) {
 
             /*
              * If this is not an exclusive search, include normal files.
@@ -1051,7 +1053,7 @@ INT xxxLbInsertFile(
     CheckLock(plb->spwnd);
 
     hFind = FindFirstFile(lpFile, &ffd);
-    if (hFind != (HANDLE)-1) {
+    if (hFind != INVALID_HANDLE_VALUE) {
         FindClose(hFind);
         LB_CreateLBLine(&ffd, chBuffer);
         result = xxxLBInsertItem(plb, chBuffer, 0, MSGFLAG_SPECIAL_THUNK | LBI_ADD);
@@ -1112,6 +1114,12 @@ void LB_CreateLBLine(
                  */
                 wcscpy(lpch, pffd->cAlternateFileName);
         }
+        /*
+         * Make filename lower-case for 16-bit apps.  Some Corel apps
+         * require this.
+         */
+        CharLower(lpch);
+
     }
     else
        wcscpy(lpch, pffd->cFileName);
@@ -1124,63 +1132,9 @@ void LB_CreateLBLine(
     *lpch = TEXT('\0');
 
 #ifndef UNICODE
-#line 1145
-#error Unsupported excluded original configuration
+#error DIVERGENCE: original WASWIN31/non-Unicode branch is not selected.
 #endif
-#line 1147
-
-/*
- * This call is not in Win95.  FritzS
- */
-
-//        CharLower(lpBuffer);
+#line 1137
 
     *lpch = TEXT('\0');  /* Null terminate */
-}
-
-
-/***************************************************************************\
-* LB_CreateStr
-*
-* This picks up the values in wValArray, converts them in into a string
-* separated by the 'bSeparator; sCount is the number of items in wValArray[];
-*
-* History:
-\***************************************************************************/
-
-INT   LB_CreateStr(
-    LPWORD wValArray,
-    WCHAR bSeparator,
-    INT sCount,
-    LPWSTR lpOutStr)
-{
-    INT s;
-    WCHAR TempStr[20];
-    LPWSTR lpInStr;
-    LPWSTR lpStr;
-    UINT wTempVal;
-
-    lpInStr = lpOutStr;
-    lpStr = TempStr;
-    for (s = 0; s < sCount; s++) {
-
-        /*
-         * This assumes that the values are of two digits only
-         */
-        *lpStr++ = (WCHAR)((wTempVal = *(wValArray + s)) / 10 + TEXT('0'));
-        *lpStr++ = (WCHAR)((wTempVal % 10) + TEXT('0'));
-        if (s < (sCount - 1))
-            *lpStr++ = bSeparator;
-    }
-    *lpStr = TEXT('\0');
-
-    lpStr = TempStr;
-    if (*lpStr == TEXT('0')) {
-        *lpInStr++ = TEXT(' ');
-        *lpInStr++ = TEXT(' ');  /* Suppress leading zero by two blanks */
-        lpStr++;
-    }
-    wcscpy(lpInStr, lpStr);
-
-    return wcslen(lpOutStr);
 }

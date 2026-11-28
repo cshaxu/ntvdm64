@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 787,
+    "nonerror_identical": 798,
+    "nonerror_different": 531,
+    "nonerror_points": 8067,
+    "nonerror_lines": 70627
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 787,
+    "nonerror_identical": 798,
+    "nonerror_different": 531,
+    "nonerror_points": 8072,
+    "nonerror_lines": 68258
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 5,
+    "nonerror_lines": -2369
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "before_points": 1,
+      "before_lines": 2375,
+      "after_points": 6,
+      "after_lines": 6,
+      "exclusions": 4
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1299,
+    "OpenNT": 30
+  }
+}

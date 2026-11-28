@@ -26,6 +26,7 @@
 #include <windows.h>
 #include <imm.h>
 #include <winternl.h>
+#include "wow_user_exception_filter.h"
 #pragma warning(push)
 #define WOW_ORIGINAL_BUTTON_RESOURCES
 #include "compat/include/opennt_user_multipass.h"
