@@ -159,7 +159,8 @@ static const wow_control_state_providers control_state_provider = { SetWindowSta
 BOOL WINAPI wow_edit_set_window_fnid(HWND, WORD);
 #include "compat/include/wow_control_extent_bindings.h"
 #include "compat/include/wow_control_draw_state.h"
-BOOL WINAPI ClientDrawState(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);
+#pragma comment(linker, "/alternatename:_wow_original_DrawStateW@40=_DrawStateW@40")
+BOOL WINAPI wow_original_DrawStateW(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);
 int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)
 {
     int result;
@@ -175,7 +176,7 @@ int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)
     if (reason == 1 && !wow_control_state_bind(&control_state_provider)) return 0;
     if (reason == 1 && !wow_control_fnid_bind(wow_edit_set_window_fnid)) return 0;
     if (reason == 1 && !wow_control_extent_bind(wow_control_registered_extent)) return 0;
-    if (reason == 1 && !wow_control_draw_bind(ClientDrawState)) return 0;
+    if (reason == 1 && !wow_control_draw_bind(wow_original_DrawStateW)) return 0;
     if (reason == 1 && !wow_control_brush_bind(xxxGetControlBrush)) return 0;
     if (reason == 1 && !wow_common_dialog_bind(&dialog_callbacks)) return 0;
     if (reason == 1 && !wow_hook_bind(&hook_callbacks)) return 0;

@@ -215,11 +215,11 @@ BOOL WINAPI wow_edit_set_window_fnid(HWND, WORD);
 void WINAPI fixture_SetWindowState(struct tagWND *, UINT);
 void WINAPI fixture_ClearWindowState(struct tagWND *, UINT);
 HBRUSH WINAPI fixture_GetControlBrush(struct tagWND *, HDC, UINT);
-BOOL WINAPI fixture_ClientDrawState(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);
+BOOL WINAPI fixture_DrawStateW(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);
 #pragma comment(linker, "/alternatename:_fixture_SetWindowState@8=_SetWindowState@8")
 #pragma comment(linker, "/alternatename:_fixture_ClearWindowState@8=_ClearWindowState@8")
 #pragma comment(linker, "/alternatename:_fixture_GetControlBrush@12=_xxxGetControlBrush@12")
-#pragma comment(linker, "/alternatename:_fixture_ClientDrawState@40=_ClientDrawState@40")
+#pragma comment(linker, "/alternatename:_fixture_DrawStateW@40=_DrawStateW@40")
 void WINAPI wow_original_change_compat_state(struct tagWND *, BOOL);
 static const wow_control_state_providers fixture_control_state_provider = {
     fixture_SetWindowState, fixture_ClearWindowState, WFWIN40COMPAT,
@@ -6472,7 +6472,7 @@ int main(int argc, char **argv)
             !wow_control_fnid_bind(wow_edit_set_window_fnid) ||
             !wow_control_extent_bind(wow_control_registered_extent) ||
             !wow_control_brush_bind(fixture_GetControlBrush) ||
-            !wow_control_draw_bind(fixture_ClientDrawState)) return 13;
+            !wow_control_draw_bind(fixture_DrawStateW)) return 13;
     if (!wow_profile_bind(wow_original_task_profile, FastGetProfileIntW) ||
             !wow_class_client_bind(&wow_fixture_class_client_provider) ||
             !wow_button_resources_bind(wow_original_button_resources()) ||

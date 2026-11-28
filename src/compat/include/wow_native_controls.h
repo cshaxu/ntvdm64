@@ -25,6 +25,7 @@ C_ASSERT(offsetof(wow_native_text_descriptor, buffer_upper) == 12);
  * replacement editor. Callers retain the existing task/native-call scopes.
  * No HWND, text pointer, timer or CallProc identity is retained here. */
 BOOL WINAPI wow_edit_native_ready(void);
+DWORD WINAPI wow_edit_native_SetLayoutWidth(HDC, LONG, DWORD);
 VOID WINAPI wow_edit_native_HideCursorNoCapture(void);
 BOOL WINAPI wow_edit_native_EnterReaderModeHelper(HWND);
 UINT WINAPI wow_edit_native_QueryFontAssocStatus(void);

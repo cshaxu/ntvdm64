@@ -2239,3 +2239,5 @@ post-publication targeted checks.
 - [S15 P61 directory ListBox and Full checkpoint](evidence/t485-s1/n022-lboxctl3.md).
 
 - [S15 P62 variable-height ListBox](evidence/t485-s1/n022-lboxvar.md).
+
+- [S15 P63 state drawing migration](evidence/t485-s1/n022-mngrayc.md).

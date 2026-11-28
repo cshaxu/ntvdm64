@@ -3,7 +3,7 @@
 #include <windows.h>
 #include "wow_button_resources.h"
 
-/* OPENNT-HOST-116: resources only. The original ClientDrawState owns effects. */
+/* OPENNT-HOST-116: resources only. The original DrawStateW owns effects. */
 typedef struct wow_control_draw_context {
     HDC gray_dc, bits_dc;
     HGDIOBJ original_gray_bitmap;
@@ -12,6 +12,10 @@ typedef struct wow_control_draw_context {
     CRITICAL_SECTION lock;
     BOOL lock_ready;
     wow_button_resources atlas;
+    /* Borrowed XP inputs for this invocation. */
+    struct tagOEMBITMAPINFO *oembmi;
+    UINT BitCount;
+    HBRUSH hbrGray;
 } wow_control_draw_context;
 extern __declspec(thread) wow_control_draw_context *wow_control_draw_current;
 typedef BOOL (WINAPI *wow_control_draw_provider)(HDC, HBRUSH, DRAWSTATEPROC,

@@ -27,8 +27,14 @@ BOOL WINAPI wow_edit_native_GdiValidateHandle(HANDLE object)
     provider call = (provider)GetProcAddress(GetModuleHandleW(L"gdi32.dll"), "GdiValidateHandle");
     return call ? call(object) : FALSE;
 }
+DWORD WINAPI wow_edit_native_SetLayoutWidth(HDC dc, LONG width, DWORD layout)
+{
+    typedef DWORD (WINAPI *layout_fn)(HDC, LONG, DWORD);
+    layout_fn call = (layout_fn)GetProcAddress(GetModuleHandleW(L"gdi32.dll"), "SetLayoutWidth");
+    return call ? call(dc, width, layout) : GDI_ERROR;
+}
 static unsigned failures, unions;
-static BOOL nested, raise_callback, select_borrowed;
+static BOOL nested, raise_callback, select_borrowed, check_origin;
 static HBITMAP borrowed;
 #define DRAW_EXCEPTION 0xe0477116u
 #define CHECK(x) do { if (!(x)) { ++failures; printf("FAIL line=%d\n", __LINE__); } } while (0)
@@ -95,10 +101,14 @@ static BOOL CALLBACK paint(HDC dc, LPARAM data, WPARAM parameter, int width, int
     wow_control_draw_context *outer = wow_control_draw_current;
     (void)parameter;
     CHECK(outer != NULL);
+    if (check_origin) {
+        POINT origin;
+        CHECK(GetViewportOrgEx(dc, &origin) && origin.x == 14 && origin.y == 16);
+    }
     if (data) CHECK(outer != (wow_control_draw_context *)data);
     if (nested) {
         nested = FALSE;
-        CHECK(wow_control_draw_state(dc, NULL, paint, (LPARAM)outer, 0, 0, 0, 2, 2, DST_COMPLEX));
+        CHECK(!wow_control_draw_state(dc, NULL, paint, (LPARAM)outer, 0, 0, 0, 2, 2, DST_COMPLEX));
         CHECK(wow_control_draw_current == outer);
         CHECK(original_draw_state_w(dc, NULL, NULL, (LPARAM)L"x", 1, 0, 0, 7, 3, DST_TEXT));
         CHECK(original_draw_state_a(dc, NULL, NULL, (LPARAM)"x", 1, 0, 0, 7, 3, DST_TEXT));
@@ -106,7 +116,7 @@ static BOOL CALLBACK paint(HDC dc, LPARAM data, WPARAM parameter, int width, int
     if (select_borrowed) CHECK(SelectObject(dc, borrowed) != NULL);
     if (raise_callback) RaiseException(DRAW_EXCEPTION, 0, 0, NULL);
     CHECK(PatBlt(dc, 0, 0, width, height, BLACKNESS));
-    return FALSE; /* Original non-MONO branch returns TRUE despite callback FALSE. */
+    return FALSE; /* XP preserves the callback result in both drawing paths. */
 }
 static void check_icon_size(void)
 {
@@ -125,7 +135,8 @@ static void check_icon_size(void)
     DestroyIcon(icon);
 }
 
-BOOL WINAPI ClientDrawState(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);
+#pragma comment(linker, "/alternatename:_wow_original_DrawStateW@40=_DrawStateW@40")
+BOOL WINAPI wow_original_DrawStateW(HDC, HBRUSH, DRAWSTATEPROC, LPARAM, WPARAM, int, int, int, int, UINT);
 int __cdecl main(void)
 {
     if (!wow_button_resources_bind(wow_original_button_resources())) return 3;
@@ -138,7 +149,7 @@ int __cdecl main(void)
     unsigned i;
     BOOL caught;
     BITMAP info;
-    CHECK(wow_control_draw_bind(ClientDrawState));
+    CHECK(wow_control_draw_bind(wow_original_DrawStateW));
     CHECK(screen && dc && bitmap && previous && previous != HGDI_ERROR);
     ReleaseDC(NULL, screen);
     context.screen.BitCount = 32;
@@ -147,13 +158,15 @@ int __cdecl main(void)
     borrowed = CreateBitmap(40, 40, 1, 1, NULL);
     CHECK(borrowed != NULL);
     CHECK(SetViewportOrgEx(dc, 3, 4, NULL));
-    CHECK(wow_control_draw_state(dc, NULL, paint, 0, 0, 11, 12, 7, 3, DST_COMPLEX));
+    check_origin = TRUE;
+    CHECK(!wow_control_draw_state(dc, NULL, paint, 0, 0, 11, 12, 7, 3, DST_COMPLEX));
+    check_origin = FALSE;
     CHECK(GetViewportOrgEx(dc, &viewport) && viewport.x == 3 && viewport.y == 4);
     CHECK(!wow_control_draw_current);
     nested = TRUE;
-    CHECK(wow_control_draw_state(dc, NULL, paint, 0, 0, 1, 2, 7, 3, DST_COMPLEX));
+    CHECK(!wow_control_draw_state(dc, NULL, paint, 0, 0, 1, 2, 7, 3, DST_COMPLEX));
     CHECK(!nested && !wow_control_draw_current);
-    /* Original MONO path preserves the callback's FALSE result. */
+    /* XP MONO path preserves the callback's FALSE result. */
     CHECK(!wow_control_draw_state(dc, NULL, paint, 0, 0, 1, 2, 7, 3, DST_COMPLEX | DSS_UNION));
     CHECK(unions == 1);
     for (i = 0; i < 2; ++i) {

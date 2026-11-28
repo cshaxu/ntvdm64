@@ -44,6 +44,9 @@ static BOOL create_context(wow_control_draw_context *context)
     if (!wow_edit_drawing_ready() || !wow_button_resources_initialize(&context->atlas))
         return FALSE;
     context->atlas.BitCount = wow_edit_current->screen.BitCount;
+    context->oembmi = context->atlas.bm;
+    context->BitCount = context->atlas.BitCount;
+    context->hbrGray = wow_edit_gray_brush;
     if (!InitializeCriticalSectionEx(&context->lock, 0, 0)) return FALSE;
     context->lock_ready = TRUE;
     context->gray_dc = CreateCompatibleDC(NULL);
@@ -112,7 +115,7 @@ HGDIOBJ WINAPI wow_control_draw_select(HDC dc, HGDIOBJ object)
 {
     HGDIOBJ previous = SelectObject(dc, object);
     DWORD error = GetLastError();
-    /* Only original ClientDrawState's scratch growth uses this binding.
+    /* Only original DrawStateW's scratch growth uses this binding.
      * Arbitrary callback selections do not transfer object ownership. */
     if (previous && previous != HGDI_ERROR && wow_control_draw_current &&
             dc == wow_control_draw_current->gray_dc && GetObjectType(object) == OBJ_BITMAP)

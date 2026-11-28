@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 788,
+    "nonerror_identical": 799,
+    "nonerror_different": 530,
+    "nonerror_points": 8071,
+    "nonerror_lines": 67792
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 788,
+    "nonerror_identical": 799,
+    "nonerror_different": 530,
+    "nonerror_points": 8079,
+    "nonerror_lines": 66627
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 8,
+    "nonerror_lines": -1165
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "before_points": 1,
+      "before_lines": 1185,
+      "after_points": 9,
+      "after_lines": 20,
+      "exclusions": 2
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1301,
+    "OpenNT": 28
+  }
+}

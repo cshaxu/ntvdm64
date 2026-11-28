@@ -8,6 +8,7 @@
  *
  * The staged build selects these leaves; complete original creation/storage/
  * dispatch/retirement and grouped acceptance are still required for delivery. */
+typedef DWORD (WINAPI *layout_width_fn)(HDC, LONG, DWORD);
 typedef UINT (WINAPI *font_assoc_fn)(void);
 typedef DWORD (WINAPI *code_page_fn)(HDC);
 typedef BOOL (WINAPI *validate_gdi_fn)(HANDLE);
@@ -39,6 +40,7 @@ typedef struct edit_native_exports {
     text_face_alias_fn text_face_alias;
     char_width_fn char_width;
     poly_pat_blt_fn poly_pat_blt;
+    layout_width_fn layout_width;
     system_timer_fn system_timer;
     kill_system_timer_fn kill_system_timer;
     get_cpd_fn get_cpd;
@@ -80,6 +82,7 @@ static BOOL CALLBACK resolve_exports(PINIT_ONCE once, PVOID parameter,
         "GetTextFaceAliasW");
     candidate.char_width = (char_width_fn)GetProcAddress(gdi,
         "GetCharWidthInfo");
+    candidate.layout_width = (layout_width_fn)GetProcAddress(gdi, "SetLayoutWidth");
     candidate.poly_pat_blt = (poly_pat_blt_fn)GetProcAddress(gdi, "PolyPatBlt");
     candidate.system_timer = (system_timer_fn)GetProcAddress(user,
         "NtUserSetSystemTimer");
@@ -96,7 +99,7 @@ static BOOL CALLBACK resolve_exports(PINIT_ONCE once, PVOID parameter,
     candidate.control_color = (control_color_fn)GetProcAddress(user, "NtUserGetControlColor");
     candidate.def_set_text = (def_set_text_fn)GetProcAddress(user, "NtUserDefSetText");
     if (!candidate.reader_mode || !candidate.hide_cursor || !candidate.font_assoc || !candidate.code_page || !candidate.validate_gdi || !candidate.char_dimensions || !candidate.text_face_alias || !candidate.char_width ||
-            !candidate.poly_pat_blt || !candidate.system_timer ||
+            !candidate.layout_width || !candidate.poly_pat_blt || !candidate.system_timer ||
             !candidate.kill_system_timer || !candidate.get_cpd ||
             !candidate.set_window_state || !candidate.clear_window_state ||
             !candidate.alter_window_style ||
@@ -107,6 +110,12 @@ static BOOL CALLBACK resolve_exports(PINIT_ONCE once, PVOID parameter,
     }
     exports = candidate;
     return TRUE;
+}
+
+DWORD WINAPI wow_edit_native_SetLayoutWidth(HDC dc, LONG width, DWORD layout)
+{
+    if (!wow_edit_native_ready()) return GDI_ERROR;
+    return exports.layout_width(dc, width, layout);
 }
 
 BOOL WINAPI wow_native_set_window_text(HWND window,

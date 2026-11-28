@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: mngray.c
 *
-* Copyright (c) 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains the DrawState API
 *
@@ -16,9 +16,10 @@
 #define SRCSTENCIL          0x00B8074AL
 #define SRCINVSTENCIL       0x00E20746L
 
-void BltColor(HDC hdc, HBRUSH hbr, HDC hdcSrce,int xO, int yO,
-       int cx, int cy, int xO1, int yO1, BOOL fInvert);
+#define BC_INVERT             0x00000001
 
+void BltColor(HDC hdc, HBRUSH hbr, HDC hdcSrce,int xO, int yO,
+       int cx, int cy, int xO1, int yO1, UINT uBltFlags);
 /***************************************************************************\
 *
 *  BitBltSysBmp()
@@ -27,13 +28,12 @@ void BltColor(HDC hdc, HBRUSH hbr, HDC hdcSrce,int xO, int yO,
 \***************************************************************************/
 BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)
 {
-    POEMBITMAPINFO pOem = oemInfo.bm + i;
+    POEMBITMAPINFO pOem = gpsi->oembmi + i;
+
     return(NtUserBitBltSysBmp(hdc, x, y, pOem->cx, pOem->cy, pOem->x, pOem->y, SRCCOPY));
 }
 
 
-#ifdef WOW_ORIGINAL_STATE_DRAWING
-#line 35
 /***************************************************************************\
 *
 *  DrawState()
@@ -72,7 +72,11 @@ BOOL FAR BitBltSysBmp(HDC hdc, int x, int y, UINT i)
 *
 *
 \***************************************************************************/
-BOOL ClientDrawState(
+
+#ifdef WOW_ORIGINAL_STATE_DRAWING
+#line 76
+FUNCLOG10(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, DrawStateW, HDC, hdcDraw, HBRUSH, hbrFore, DRAWSTATEPROC, qfnCallBack, LPARAM, lData, WPARAM, wData, int, x, int, y, int, cx, int, cy, UINT, uFlags)
+BOOL DrawStateW(
     HDC             hdcDraw,
     HBRUSH          hbrFore,
     DRAWSTATEPROC   qfnCallBack,
@@ -88,16 +92,18 @@ BOOL ClientDrawState(
     HFONT   hFontSave = NULL;
     HDC     hdcT;
     HBITMAP hbmpT;
-    BOOL    fResult;
+    BOOL    fResult = FALSE;
     DWORD   dwPSMFlags;
-#line 90
     POINT   ptOrg;
+    int     oldAlign;
+    DWORD   dwLayout = GDI_ERROR;
 
-    UserAssert(ghdcGray != NULL);
+    if (ghdcGray == NULL)
+        return FALSE;
 
     RtlEnterCriticalSection(&gcsHdc);
     __try {
-#line 95
+#line 103
 
     /*
      * These require monochrome conversion
@@ -105,7 +111,7 @@ BOOL ClientDrawState(
      * Enforce monochrome: embossed doesn't look great with 2 color displays
      */
     if ((uFlags & DSS_DISABLED) &&
-        (oemInfo.BitCount == 1 || SYSMET(SLOWMACHINE))) {
+        (gpsi->BitCount == 1 || SYSMET(SLOWMACHINE))) {
 
         uFlags &= ~DSS_DISABLED;
         uFlags |= DSS_UNION;
@@ -125,15 +131,17 @@ BOOL ClientDrawState(
              * LOWORD(lData) is OBI_ value.
              */
             if (LOWORD(lData) >= (WORD)OBI_COUNT) {
-                fResult = FALSE;
                 goto CDS_Leave;
             }
 
-            if (!cx)
-                cx = oemInfo.bm[LOWORD(lData)].cx;
+            if (!cx) {
+                cx = gpsi->oembmi[LOWORD(lData)].cx;
+            }
 
-            if (!cy)
-                cy = oemInfo.bm[LOWORD(lData)].cy;
+            if (!cy) {
+                cy = gpsi->oembmi[LOWORD(lData)].cy;
+            }
+
             break;
 
         case DST_BITMAP:
@@ -142,7 +150,6 @@ BOOL ClientDrawState(
              * LOWORD(lData) is hbmp.
              */
             if (GetObjectType((HGDIOBJ)lData) != OBJ_BITMAP) {
-                fResult = FALSE;
                 goto CDS_Leave;
             }
 
@@ -199,13 +206,14 @@ BOOL ClientDrawState(
                 /*
                  * Make sure we use right dc w/ right font.
                  */
-                GetTextExtentPointW(hdcDraw, (LPWSTR)lData, wData, &size);
+                GetTextExtentPointW(hdcDraw, (LPWSTR)lData, (INT)wData, &size);
 
                 if (!cx)
                     cx = size.cx;
 
                 if (!cy)
                     cy = size.cy;
+
             }
 
             /*
@@ -213,17 +221,15 @@ BOOL ClientDrawState(
              * we're supporting GrayString().
              */
 #if 0 // This will get turned on if/when we change GrayString to tie
-#error Unsupported excluded original configuration
-#line 217
+#error DIVERGENCE: original disabled GrayString branch.
 #endif
-#line 218
+#line 228
             break;
 
         case DST_PREFIXTEXT:
 
             if (lData == 0) {
                 RIPMSG0(RIP_ERROR, "DrawState: NULL DST_PREFIXTEXT string");
-                fResult = FALSE;
                 goto CDS_Leave;
             }
 
@@ -234,7 +240,7 @@ BOOL ClientDrawState(
 
                 SIZE size;
 
-                PSMGetTextExtent(hdcDraw, (LPWSTR)lData, wData, &size);
+                PSMGetTextExtent(hdcDraw, (LPWSTR)lData, (int)wData, &size);
 
                 if (!cx)
                     cx = size.cx;
@@ -251,15 +257,13 @@ BOOL ClientDrawState(
 
         case DST_COMPLEX:
 #if 0
-#error Unsupported excluded original configuration
-#line 257
+#error DIVERGENCE: original disabled GrayString branch.
 #endif
-#line 258
+#line 266
             break;
 
         default:
             RIPMSG0(RIP_ERROR, "DrawState: invalid DST_ type");
-            fResult = FALSE;
             goto CDS_Leave;
     }
 
@@ -280,6 +284,17 @@ BOOL ClientDrawState(
     if (uFlags & DSS_MONO) {
 
         hdcT = ghdcGray;
+        /*
+         * First turn off mirroring on hdcGray if any.
+         */
+        SetLayoutWidth(hdcT, -1, 0);
+        /*
+         * Set the ghdcGray layout to be equal to the screen hdcDraw layout.
+         */
+        dwLayout = GetLayout(hdcDraw);
+        if (dwLayout != GDI_ERROR) {
+            SetLayoutWidth(hdcT, cx, dwLayout);
+        }
 
         /*
          * Is our scratch bitmap big enough?  We need potentially
@@ -294,10 +309,9 @@ BOOL ClientDrawState(
                 hbmGray = SelectObject(ghdcGray, hbmpT);
                 if (!hbmGray || hbmGray == HGDI_ERROR) {
                     DeleteObject(hbmpT);
-                    fResult = FALSE;
                     goto CDS_Leave;
                 }
-#line 295
+#line 313
                 DeleteObject(hbmGray);
 
                 gcxGray = max(gcxGray, cx + 1);
@@ -311,6 +325,10 @@ BOOL ClientDrawState(
 
         PatBlt(ghdcGray, 0, 0, gcxGray, gcyGray, WHITENESS);
         SetTextCharacterExtra(ghdcGray, GetTextCharacterExtra(hdcDraw));
+
+        oldAlign = GetTextAlign(hdcT);
+        SetTextAlign(hdcT, (oldAlign & ~(TA_RTLREADING |TA_CENTER |TA_RIGHT))
+                     | (GetTextAlign(hdcDraw) & (TA_RTLREADING |TA_CENTER |TA_RIGHT)));
 
         /*
          * Setup font
@@ -331,7 +349,8 @@ BOOL ClientDrawState(
         /*
          * Adjust viewport
          */
-        SetViewportOrgEx(hdcT, x, y, &ptOrg);
+        GetViewportOrgEx(hdcT, &ptOrg);
+        SetViewportOrgEx(hdcT, ptOrg.x + x, ptOrg.y + y, NULL);
     }
 
     /*
@@ -378,7 +397,6 @@ BOOL ClientDrawState(
             } else {
                 dwPSMFlags = 0;
             }
-#line 368
             PSMTextOut(hdcT, 0, 0, (LPWSTR)lData, (int)wData, dwPSMFlags);
             break;
 
@@ -411,14 +429,12 @@ BOOL ClientDrawState(
          */
         if (hFontSave)
             SelectObject(hdcT, hFontSave);
-
+        SetTextAlign(hdcT, oldAlign);
     } else {
         /*
          * Reset DC.
          */
         SetViewportOrgEx(hdcT, ptOrg.x, ptOrg.y, NULL);
-
-        fResult = TRUE;
         goto CDS_Leave;
     }
 
@@ -435,7 +451,7 @@ BOOL ClientDrawState(
         PolyData.y         = 0;
         PolyData.cx        = cx;
         PolyData.cy        = cy;
-        PolyData.BrClr.hbr = ghbrGray;
+        PolyData.BrClr.hbr = gpsi->hbrGray;
 
         PolyPatBlt(ghdcGray, PATOR, &PolyData, 1, PPB_BRUSH);
     }
@@ -461,7 +477,7 @@ BOOL ClientDrawState(
                  cy,
                  0,
                  0,
-                 TRUE);
+                 BC_INVERT);
 
         BltColor(hdcDraw,
                  SYSHBR(3DSHADOW),
@@ -472,7 +488,7 @@ BOOL ClientDrawState(
                  cy,
                  0,
                  0,
-                 TRUE);
+                 BC_INVERT);
 
     } else if (uFlags & DSS_DEFAULT) {
 
@@ -485,7 +501,7 @@ BOOL ClientDrawState(
                  cy,
                  0,
                  0,
-                 TRUE);
+                 BC_INVERT);
 
         goto DrawNormal;
 
@@ -493,62 +509,60 @@ BOOL ClientDrawState(
 
 DrawNormal:
 
-        BltColor(hdcDraw, hbrFore, ghdcGray, x, y, cx, cy, 0, 0, TRUE);
+        BltColor(hdcDraw, hbrFore, ghdcGray, x, y, cx, cy, 0, 0, BC_INVERT);
     }
 
 CDS_Leave:
-    ;
-    } __finally {
-#line 486
 
+    if (uFlags & DSS_MONO) {
+        /*
+         * Set the ghdcGray layout to 0, it is a public DC.
+         */
+        if (dwLayout != GDI_ERROR) {
+            SetLayoutWidth(hdcT, -1, 0);
+        }
+    }
+    } __finally {
+#line 523
     RtlLeaveCriticalSection(&gcsHdc);
     }
-#line 488
+#line 524
 
     return fResult;
 }
 
-BOOL DrawStateW(HDC hDC, HBRUSH hBrush, DRAWSTATEPROC func,
-    LPARAM lParam, WPARAM wParam, int x, int y, int cx, int cy, UINT wFlags) {
 
-// No thunk until we set up the server-side for handling client or server-side
-//  callbacks.  We can then decide whether to make a common client/server drawing
-//  routine.
-
-    return ClientDrawState(hDC, hBrush, func,
-             lParam, wParam, x, y, cx, cy, wFlags);
-}
-
+FUNCLOG10(LOG_GENERAL, BOOL, DUMMYCALLINGTYPE, DrawStateA, HDC, hDC, HBRUSH, hBrush, DRAWSTATEPROC, func, LPARAM, lParam, WPARAM, wParam, int, x, int, y, int, cx, int, cy, UINT, wFlags)
 BOOL DrawStateA(HDC hDC, HBRUSH hBrush, DRAWSTATEPROC func,
-    LPARAM lParam, WPARAM wParam, int x, int y, int cx, int cy, UINT wFlags) {
+    LPARAM lParam, WPARAM wParam, int x, int y, int cx, int cy, UINT wFlags)
+{
 
     LPARAM lpwstr = lParam;
     BOOL bRet;
-
-// No thunk until we set up the server-side for handling client or server-side
-//  callbacks.  We can then decide whether to make a common client/server drawing
-//  routine.
+    BOOL bFree;
 
     if (((wFlags & DST_TYPEMASK) == DST_TEXT) ||
         ((wFlags & DST_TYPEMASK) == DST_PREFIXTEXT)) {
 
-        if (!MBToWCS((LPSTR)lParam, wParam ? wParam : -1, &(LPWSTR)lpwstr, -1, TRUE))
+        bFree = TRUE;
+
+        if ((wParam = MBToWCS((LPSTR)lParam, wParam ? (int)wParam : USER_AWCONV_COUNTSTRINGSZ, &(LPWSTR)lpwstr, -1, TRUE)) == 0)
             return FALSE;
+    } else {
+        bFree = FALSE;
     }
 
-    bRet = ClientDrawState(hDC, hBrush, func,
-             lpwstr, wParam, x, y, cx, cy, wFlags);
+    bRet = DrawStateW(hDC, hBrush, func, lpwstr, wParam, x, y, cx, cy, wFlags);
 
-    if (((wFlags & DST_TYPEMASK) == DST_TEXT) ||
-        ((wFlags & DST_TYPEMASK) == DST_PREFIXTEXT)) {
+    if (bFree) {
         UserLocalFree((HANDLE)lpwstr);
     }
     return bRet;
 }
+
 #endif
 #ifndef WOW_ORIGINAL_BUTTON_BLIT_ONLY
-#line 529
-
+#line 557
 /***************************************************************************\
 * BltColor
 *
@@ -565,12 +579,13 @@ void BltColor(
     int cy,
     int xO1,
     int yO1,
-    BOOL fInvert)
+    UINT uBltFlags
+)
 {
     HBRUSH hbrSave;
     HBRUSH hbrNew = NULL;
-    DWORD textColorSave;
-    DWORD bkColorSave;
+    DWORD  textColorSave;
+    DWORD  bkColorSave;
 
     if (hbr == (HBRUSH)NULL) {
         LOGBRUSH lb;
@@ -593,7 +608,7 @@ void BltColor(
     hbrSave = SelectObject(hdc, hbr);
 
     BitBlt(hdc, xO, yO, cx, cy, hdcSrce,
-        xO1, yO1, (fInvert ? 0xB8074AL : 0xE20746L));
+        xO1, yO1, ((uBltFlags & BC_INVERT) ? 0xB8074AL : 0xE20746L));
         //xO1, yO1, (fInvert ? 0xB80000 : 0xE20000));
 
     SelectObject(hdc, hbrSave);
@@ -608,4 +623,5 @@ void BltColor(
         DeleteObject(hbrNew);
     }
 }
+
 #endif

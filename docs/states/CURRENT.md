@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime71 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime72 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -142,13 +142,8 @@ and final build/publication/control/lifecycle/SOL evidence. No guest changes.
 [P41 N022 dialog manager](../etc/evidence/t485-s1/n022-dlgmgr.md) delivered
 runtime46 and its recorded targeted gates; its receipt retains full census.
 
-[P42 N022 dialog keyboard](../etc/evidence/t485-s1/n022-dlgmgr2.md) delivers
-runtime47: complete XP keyboard navigation and existing callback lifetimes.
-Cached build, dual13-image26hash, controls40/40, real CCPU window-borrow,
-SOL Options and Full24/24 passed. Initial fixture link failure retained.
-N02213/39; overall57/159; S15 9/14. Census1329files,782exact,793nonerror same/
-536different,7797points/117070lines; delta0files/0exact/0same/0different/
--25points/-36lines.1279XP/50OpenNT. P42 is the new ten-file Full checkpoint.
+[P42 dialog keyboard](../etc/evidence/t485-s1/n022-dlgmgr2.md) delivered
+runtime47 and Full24/24; its receipt preserves ABI, all attempts and census.
 [P43 dialog navigation](../etc/evidence/t485-s1/n022-dlgmgrc.md) and
 [P44 mnemonics](../etc/evidence/t485-s1/n022-dmmnem.md) delivered runtime48/49,
 with cached build, dual publication and targeted gates; their linked receipts
@@ -202,12 +197,14 @@ delivered runtime69; its receipt retains source identity, tests and census.
 [P61 directory ListBox](../etc/evidence/t485-s1/n022-lboxctl3.md) delivered
 runtime70 and Full24/24, the current ten-file checkpoint. Its receipt retains
 original exclusions, directory-order correction, census and final tests.
-[P62 variable-height ListBox](../etc/evidence/t485-s1/n022-lboxvar.md) delivers
-runtime71: byte-identical XP; no algorithm or ABI change. Cached full build,
-dual13-image26hash publication and all targeted gates pass. N02233/39;
-S15 9/14, overall57/159. Census1329/788/799/530/8071/67792;
-delta0/+1/+1/-1/-1/-466;1300XP/29OpenNT. One file since P61 Full24/24.
-No original guest change or S/T closure. Next mngrayc.c.
+[P62 variable-height ListBox](../etc/evidence/t485-s1/n022-lboxvar.md) delivered
+runtime71; original bytes and targeted verification retained in its receipt.
+[P63 state drawing](../etc/evidence/t485-s1/n022-mngrayc.md) delivers runtime72:
+XP layout/viewport/text/count/result semantics and existing scoped resources.
+Cached full build, dual13-image26hash publication and targeted gates pass.
+N02234/39; S15 9/14, overall57/159. Census1329/788/799/530/8079/66627;
+delta0/0/0/0/+8/-1165;1301XP/28OpenNT. Two files since P61 Full24/24.
+No original guest change or S/T closure. Next client ntstubs.c.
 
 ## S14 Closure Record
 
