@@ -302,3 +302,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P62 variable-height ListBox](n022-lboxvar.md).
 
 - [S15 P63 state drawing migration](n022-mngrayc.md).
+
+- [S15 P64 client ntstubs review](n022-ntstubs-review.md).

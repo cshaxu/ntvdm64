@@ -138,6 +138,9 @@ int __cdecl main(void)
     before = calls;
     CHECK(!GetControlBrush(control.head.h, NULL, WM_CTLCOLORLISTBOX));
     CHECK(calls == before && depth == 0);
+    CHECK(!GetControlBrush(control.head.h, (HDC)(ULONG_PTR)4, WM_CTLCOLORMSGBOX - 1));
+    CHECK(!GetControlBrush(control.head.h, (HDC)(ULONG_PTR)4, WM_CTLCOLORSTATIC + 1));
+    CHECK(calls == before && depth == 0);
     deny_enter = TRUE; CHECK(!invoke() && GetLastError() == 701); deny_enter = FALSE;
     deny_validate = TRUE; CHECK(!invoke() && GetLastError() == 702); deny_validate = FALSE;
     CHECK(calls == before && depth == 0);
@@ -155,7 +158,8 @@ int __cdecl main(void)
     __except(GetExceptionCode() == TEST_EXCEPTION ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught = TRUE; }
     CHECK(caught && depth == 0 && calls == before + 1); raise_color = FALSE;
     check_selection(WS_CHILD, &parent, NULL, parent.head.h);
-    CHECK(leaves == 11);
+    /* NULL DC and both invalid message calls also leave the service scope. */
+    CHECK(leaves == 14);
     check_paint_rect();
     printf("control_brush_failures=%u calls=%u\n", failures, calls);
     return failures != 0;

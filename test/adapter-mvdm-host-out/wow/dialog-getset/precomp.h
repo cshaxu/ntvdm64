@@ -28,6 +28,10 @@ PCALLPROCDATA fixture_validate_cpd(HANDLE, BYTE);
 void fixture_check(BOOL, int);
 #define ValidateHwnd wow_window_client_validate_hwnd
 #define NtUserSetWindowLong wow_window_client_set_window_long
+#define NtUserSetWindowLongPtr NtUserSetWindowLong
+#define _SetWindowLongPtr _SetWindowLong
+/* XP w32wow64.h non-BUILD_WOW6432 identity conversion. */
+#define KERNEL_ULONG_PTR_TO_ULONG_PTR(value) (value)
 #define FCallerOk fixture_caller_ok
 #define HMValidateHandleNoRip fixture_validate_cpd
 #define UserAssert(c) fixture_check((c), __LINE__)

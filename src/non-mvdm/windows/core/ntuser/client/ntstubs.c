@@ -1,7 +1,7 @@
 /**************************************************************************\
 * Module Name: ntstubs.c
 *
-* Copyright (c) Microsoft Corp. 1990 All Rights Reserved
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * client side API stubs
 *
@@ -12,30 +12,39 @@
 #if defined(WOW_ORIGINAL_CONTROL_TEXT) || defined(WOW_ORIGINAL_DIALOG_GETSET)
 #line 12
 #include "precomp.h"
-#elif defined(WOW_ORIGINAL_CONTROL_COLOR) || defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
-#include "wow_edit_call_bindings.h"
 #else
 #define WOW_ORIGINAL_CLASS_QUERY
 #include "nt.h"
 #include "wow_edit_lookaside_bindings.h"
 #include "wow_class_query_bindings.h"
+#include "wow_control_resource_abi.h"
 #endif
 #line 13
 #pragma hdrstop
 
 #define CLIENTSIDE 1
 
+#include <dbt.h>
+
 #include "ntsend.h"
+#include "cfgmgr32.h"
+#line 22
+
+extern BOOL GetRemoteKeyboardLayout(PWCHAR);
+#line 48
+#ifdef IMM_PER_LOGON
+#error DIVERGENCE: original configuration not selected.
+#line 66
+#endif
 
 #line 77
-#ifdef FE_IME
-#line 78
-#error
+#ifdef IMM_PER_LOGON
+#error DIVERGENCE: original configuration not selected.
 #line 83
 #endif
 
 #ifdef WOW_ORIGINAL_CLASS_QUERY
-#line 138
+#line 140
 LONG GetClassWOWWords(
     HINSTANCE hInstance,
     LPCTSTR pString)
@@ -58,147 +67,30 @@ LONG GetClassWOWWords(
             MSGERRORCODE(ERROR_CLASS_DOES_NOT_EXIST);
         }
 
-        pcls = (PCLS)((PBYTE)pcls - GetClientInfo()->ulClientDelta);
-        retval = _GetClassData(pcls, NULL, GCL_WOWWORDS, TRUE);
+        pcls = (PCLS)((KPBYTE)pcls - GetClientInfo()->ulClientDelta);
+        retval = _GetClassData(pcls, NULL, GCLP_WOWWORDS, TRUE);
 
     ERRORTRAP(0);
     CLEANUPLPSTRW(strClassName);
     ENDCALL(LONG);
 }
 #endif
-
-#line 358
-#ifdef LATER
-#line 359
-#error
-#line 368
-#endif
-
-#line 380
-#ifdef MEMPHIS_MENUS
-#line 381
-#error
-#line 439
-#else // MEMPHIS_MENUS
-#line 498
-#endif // MEMPHIS_MENUS
-
-#line 500
-#ifdef MEMPHIS_MENU_WATERMARKS
-#line 501
-#error
-#line 522
-#endif // MEMPHIS_MENU_WATERMARKS
-
-#ifdef WOW_ORIGINAL_CONTROL_BRUSH_CLIENT
-#line 623
-HBRUSH GetControlBrush(
-    HWND hwnd,
-    HDC hdc,
-    UINT msg)
-{
-
-    BEGINCALL()
-        FIXUP_HANDLE(hdc);
-
-        if (hdc == (HDC)0)
-            MSGERROR();
-
-        retval = (DWORD)NtUserGetControlBrush(hwnd, hdc, msg);
-
-    ERRORTRAP(0);
-    ENDCALL(HBRUSH);
-}
-#endif
-
-#ifdef WOW_ORIGINAL_CONTROL_COLOR
-#line 641
-HBRUSH GetControlColor(
-    HWND hwndParent,
-    HWND hwndCtl,
-    HDC hdc,
-    UINT msg)
-{
-    BEGINCALL()
-
-        FIXUP_HANDLE(hdc);
-
-        retval = (DWORD)NtUserGetControlColor(
-                hwndParent,
-                hwndCtl,
-                hdc,
-                msg);
-
-    ERRORTRAP(0);
-    ENDCALL(HBRUSH);
-}
-#endif
-
-#line 693
-#ifdef FE_SB // _PeekMessage()
-#line 694
-#error
-#line 701
-#endif // FE_SB
-
-#line 717
-#ifdef FE_IME // _PeekMessage()
-#line 718
-#error
-#line 720
-#else
-#line 722
-#endif // FE_IME
-
-#line 753
-#ifdef FE_SB // _PeekMessage()
-#line 754
-#error
-#line 758
-#else
-#line 760
-#ifdef DEBUG
-#line 761
-#error
-#line 764
-#endif
-#line 766
-#endif // FE_SB
-
-#line 769
-#ifdef FE_SB // _PeekMessage()
-#line 770
-#error
-#line 779
-#else
-#line 782
-#endif // FE_SB
-
-#line 784
-#ifdef FE_SB // _PeekMessage()
-#line 785
-#error
-#line 792
-#else
-#line 794
-#endif // FE_SB
-
-#line 797
-#ifdef FE_SB // _PeekMessage()
-#line 798
-#error
-#endif // FE_SB
+#line 467
+#ifdef MESSAGE_PUMP_HOOK
+#error DIVERGENCE: original configuration not selected.
+#line 622
+#endif // MESSAGE_PUMP_HOOK
 
 #ifdef WOW_ORIGINAL_DIALOG_GETSET
-#line 827
-LONG _SetWindowLong(
+#line 908
+LONG_PTR _SetWindowLongPtr(
     HWND hwnd,
     int nIndex,
-    LONG dwNewLong,
+    LONG_PTR dwNewLong,
     BOOL bAnsi)
 {
     PWND pwnd;
-    LONG dwOldLong;
+    LONG_PTR dwOldLong;
     DWORD dwCPDType = 0;
 
     pwnd = ValidateHwnd(hwnd);
@@ -208,7 +100,7 @@ LONG _SetWindowLong(
 
     if (TestWF(pwnd, WFDIALOGWINDOW)) {
         switch (nIndex) {
-        case DWL_DLGPROC:     // See similar case GWL_WNDGPROC
+        case DWLP_DLGPROC:    // See similar case GWL_WNDPROC
 
             /*
              * Hide the window proc from other processes
@@ -225,11 +117,11 @@ LONG _SetWindowLong(
 #ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
             return wow_dialog_host_set(hwnd, nIndex, dwNewLong, bAnsi);
 #else
-#line 858
+#line 939
             /*
              * Get the old window proc address
              */
-            dwOldLong = (LONG)PDLG(pwnd)->lpfnDlg;
+            dwOldLong = (LONG_PTR)PDLG(pwnd)->lpfnDlg;
 
             /*
              * We always store the actual address in the wndproc; We only
@@ -251,7 +143,7 @@ LONG _SetWindowLong(
              * this type of transition and this wndproc (dwOldLong)
              */
             if (dwCPDType) {
-                DWORD cpd;
+                ULONG_PTR cpd;
 
                 cpd = GetCPD(pwnd, dwCPDType | CPD_DIALOG, dwOldLong);
 
@@ -273,7 +165,7 @@ LONG _SetWindowLong(
             if (ISCPDTAG(dwNewLong)) {
                 PCALLPROCDATA pCPD;
                 if (pCPD = HMValidateHandleNoRip((HANDLE)dwNewLong, TYPE_CALLPROC)) {
-                    dwNewLong = pCPD->pfnClientPrevious;
+                    dwNewLong = KERNEL_ULONG_PTR_TO_ULONG_PTR(pCPD->pfnClientPrevious);
                     bAnsi = pCPD->wType & CPD_UNICODE_TO_ANSI;
                 }
             }
@@ -284,7 +176,7 @@ LONG _SetWindowLong(
              * a server-side proc again.  Need to check against client side
              * stub addresses.
              */
-            PDLG(pwnd)->lpfnDlg = (WNDPROC)dwNewLong;
+            PDLG(pwnd)->lpfnDlg = (DLGPROC)dwNewLong;
             if (bAnsi) {
                 PDLG(pwnd)->flags |= DLGF_ANSI;
             } else {
@@ -292,10 +184,16 @@ LONG _SetWindowLong(
             }
 
             return dwOldLong;
+
 #endif
-#line 925
-        case DWL_MSGRESULT:
-        case DWL_USER:
+#line 1006
+        case DWLP_USER:
+#ifdef BUILD_WOW6432
+#error DIVERGENCE: original configuration not selected.
+#line 1010
+#endif
+#line 1011
+        case DWLP_MSGRESULT:
             break;
 
         default:
@@ -322,12 +220,11 @@ LONG _SetWindowLong(
         ((PLBWND)pwnd)->pLBIV != NULL &&
         (!TestWindowProcess(pwnd) || ((PLBWND)pwnd)->pLBIV->fInitialized)) {
 
-#line 953
-#ifdef DEBUG
-#line 954
-#error
+#if DBG
+#error DIVERGENCE: original configuration not selected.
+#line 1040
 #endif
-#line 956
+#line 1041
 
         dwNewLong &= ~(LBS_OWNERDRAWFIXED |
                        LBS_OWNERDRAWVARIABLE |
@@ -337,36 +234,38 @@ LONG _SetWindowLong(
                                     LBS_OWNERDRAWVARIABLE |
                                     LBS_HASSTRINGS);
 
-#line 965
-#ifdef DEBUG
-#line 966
-#error
-#line 969
+#if DBG
+#error DIVERGENCE: original configuration not selected.
+#line 1054
 #endif
-#line 970
+#line 1055
     }
 
 
-        retval = (DWORD)NtUserSetWindowLong(
+        retval = (ULONG_PTR)NtUserSetWindowLongPtr(
                 hwnd,
                 nIndex,
                 dwNewLong,
                 bAnsi);
 
     ERRORTRAP(0);
-    ENDCALL(LONG);
+    ENDCALL(LONG_PTR);
 }
 #endif
-
-#line 1020
-#ifdef FE_IME //@TK
-#line 1021
-#error
-#line 1033
+#line 1068
+#ifdef _WIN64
+#error DIVERGENCE: original configuration not selected.
+#line 1145
 #endif
 
+#line 1316
+#if DBG
+#error DIVERGENCE: original configuration not selected.
+#line 1356
+#endif // DBG
+
 #ifdef WOW_ORIGINAL_CONTROL_TEXT
-#line 1291
+#line 1494
 BOOL _DefSetText(
     HWND hwnd,
     LPCWSTR lpszText,
@@ -393,17 +292,73 @@ BOOL _DefSetText(
     ENDCALL(BOOL);
 }
 #endif
+#ifdef WOW_ORIGINAL_CLASS_QUERY
+#line 2107
+DWORD CalcCharacterPositionAtoW(
+    DWORD dwCharPosA,
+    LPSTR lpszCharStr,
+    DWORD dwCodePage)
+{
+    DWORD dwCharPosW = 0;
 
-#line 1611
-#ifdef FE_SB // fnINWPARAMDBCSCHAR()
-#line 1612
-#error
-#line 1645
-#endif // FE_SB
+    while (dwCharPosA != 0) {
+        if (IsDBCSLeadByteEx(dwCodePage, *lpszCharStr)) {
+            if (dwCharPosA >= 2) {
+                dwCharPosA -= 2;
+            }
+            else {
+                dwCharPosA--;
+            }
+            lpszCharStr += 2;
+        }
+        else {
+            dwCharPosA--;
+            lpszCharStr++;
+        }
+        dwCharPosW++;
+    }
 
-#line 2204
-#ifdef DEBUG
-#line 2205
-#error
-#line 2209
+    return dwCharPosW;
+}
+
+int UnicodeToMultiByteSize(DWORD dwCodePage, LPCWSTR pwstr)
+{
+    char dummy[2], *lpszDummy = dummy;
+    return WCSToMBEx((WORD)dwCodePage, pwstr, 1, &lpszDummy, sizeof(WCHAR), FALSE);
+}
+
+DWORD CalcCharacterPositionWtoA(
+    DWORD dwCharPosW,
+    LPWSTR lpwszCharStr,
+    DWORD  dwCodePage)
+{
+    DWORD dwCharPosA = 0;
+    ULONG MultiByteSize;
+
+    while (dwCharPosW != 0) {
+        MultiByteSize = UnicodeToMultiByteSize(dwCodePage, lpwszCharStr);
+        if (MultiByteSize == 2) {
+            dwCharPosA += 2;
+        }
+        else {
+            dwCharPosA++;
+        }
+        dwCharPosW--;
+        lpwszCharStr++;
+    }
+
+    return dwCharPosA;
+}
 #endif
+#line 2163
+#ifdef LATER
+#error DIVERGENCE: original configuration not selected.
+#line 2421
+#endif
+
+#line 2827
+#if DBG
+#error DIVERGENCE: original configuration not selected.
+#line 2832
+#endif
+

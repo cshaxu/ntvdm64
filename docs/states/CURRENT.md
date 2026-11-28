@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime72 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime73 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -199,12 +199,14 @@ runtime70 and Full24/24, the current ten-file checkpoint. Its receipt retains
 original exclusions, directory-order correction, census and final tests.
 [P62 variable-height ListBox](../etc/evidence/t485-s1/n022-lboxvar.md) delivered
 runtime71; original bytes and targeted verification retained in its receipt.
-[P63 state drawing](../etc/evidence/t485-s1/n022-mngrayc.md) delivers runtime72:
-XP layout/viewport/text/count/result semantics and existing scoped resources.
+[P63 state drawing](../etc/evidence/t485-s1/n022-mngrayc.md) delivered runtime72;
+its receipt retains original semantics, provider bindings and verification.
+[P64 client stubs](../etc/evidence/t485-s1/n022-ntstubs-review.md) delivered runtime73:
+XP query/setter/text/helper bodies and direct color/brush service bindings.
 Cached full build, dual13-image26hash publication and targeted gates pass.
-N02234/39; S15 9/14, overall57/159. Census1329/788/799/530/8079/66627;
-delta0/0/0/0/+8/-1165;1301XP/28OpenNT. Two files since P61 Full24/24.
-No original guest change or S/T closure. Next client ntstubs.c.
+N02235/39; S15 9/14, overall57/159. Census1329/788/799/530/8108/66388;
+delta0/0/0/0/+29/-239;1302XP/27OpenNT. Three files since P61 Full24/24.
+No original guest change or S/T closure. Next res.rc.
 
 ## S14 Closure Record
 

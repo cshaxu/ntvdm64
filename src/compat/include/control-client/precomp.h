@@ -95,6 +95,12 @@ DWORD WINAPI xxxSetWindowData(PWND, int, DWORD, BOOL);
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #undef WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
 
+/* XP usercli.h: shared x86 pointer-sized setter aliases. */
+#ifndef _WIN64
+#define NtUserSetWindowLongPtr NtUserSetWindowLong
+#define _SetWindowLongPtr _SetWindowLong
+#endif
+
 /* General resource identity is distinct from the private-state validator.
  * Original usercli.h makes RevalidateHwnd exactly the NoRip operation. */
 #define ValidateHwnd wow_window_client_validate_window
@@ -370,7 +376,6 @@ PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
 #define RealAdjustWindowRectEx _AdjustWindowRectEx
 #define MIRRORED_HWND(hwnd) ((GetWindowLongW(hwnd, GWL_EXSTYLE) & WS_EX_LAYOUTRTL) != 0)
 #define NtUserGetForegroundWindow GetForegroundWindow
-#define NtUserSetWindowLongPtr NtUserSetWindowLong
 #define IS_IME_ENABLED() GetSystemMetrics(SM_IMMENABLED)
 #ifndef WFMSGBOX
 #define WFMSGBOX 0x0020

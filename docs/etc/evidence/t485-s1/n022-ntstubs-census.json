@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 788,
+    "nonerror_identical": 799,
+    "nonerror_different": 530,
+    "nonerror_points": 8079,
+    "nonerror_lines": 66627
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 788,
+    "nonerror_identical": 799,
+    "nonerror_different": 530,
+    "nonerror_points": 8108,
+    "nonerror_lines": 66388
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 29,
+    "nonerror_lines": -239
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "before_points": 1,
+      "before_lines": 2475,
+      "after_points": 30,
+      "after_lines": 2236,
+      "exclusions": 10
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1302,
+    "OpenNT": 27
+  }
+}

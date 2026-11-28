@@ -8,18 +8,10 @@ BOOL WINAPI wow_edit_NtUserDefSetText(HWND, const struct _LARGE_STRING *);
 /* ADAPTER-WOW-061: original EDIT caller shape; existing native boundary
  * handles CTLCOLOR reentry. HWND/HDC/HBRUSH are already native identities. */
 BOOL WINAPI wow_edit_FillWindow(HWND, HWND, HDC, HBRUSH);
-/* Native GetControlColor service edge; original client policy precedes it. */
-HBRUSH WINAPI GetControlColor(HWND, HWND, HDC, UINT);
-HBRUSH WINAPI GetControlBrush(HWND, HDC, UINT);
-#if defined(WOW_ORIGINAL_CONTROL_COLOR) || defined(WOW_ORIGINAL_CONTROL_BRUSH_CLIENT)
-#include "wow_control_brush_bindings.h"
-/* Original retail usercli.h, HANDLE_FIXUP=0 and DBG=0: no truncated-handle
- * repair or diagnostics. Recovered callers already carry native GDI handles. */
-#define CHECK_HANDLE_WARNING(h, bZ)
-#define FIXUP_HANDLE(h) { CHECK_HANDLE_WARNING(h,FALSE); }
-#define NtUserGetControlColor wow_edit_NtUserGetControlColor
-#define NtUserGetControlBrush wow_control_brush
-#endif
+/* XP usercli.h uses direct service aliases. Existing providers retain the
+ * native-call and window-borrow boundaries; no obsolete client wrappers. */
+#define GetControlColor wow_edit_NtUserGetControlColor
+#define GetControlBrush wow_control_brush
 struct wow_task_client_info;
 /* Borrowed from the currently bound WOW task, valid within its EDIT scope. */
 const struct wow_task_client_info *WINAPI wow_edit_client_info(void);

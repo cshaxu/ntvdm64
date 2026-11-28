@@ -39,8 +39,6 @@ set(wow_extra_order
   obj_wow32-dll_wow_client_dispatch_obj
   obj_opennt-user_dialog-template_obj
   obj_opennt-user_control-text_obj
-  obj_opennt-user_control-color_obj
-  obj_opennt-user_control-brush-client_obj
   obj_wow32-dll_wow_control_brush_obj
   obj_wow32-dll_wow_control_state_obj
   obj_wow32-dll_wow_control_fnid_obj

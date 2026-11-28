@@ -40,7 +40,9 @@ HBRUSH WINAPI wow_control_brush(HWND window, HDC dc, UINT message)
     if (!wow_user_borrow_enter(&scope)) return NULL;
     __try {
         state = wow_window_client_validate_hwnd(window);
-        if (state) {
+        /* XP NtUserGetControlBrush validates these before its retained body. */
+        if (state && dc && message >= WM_CTLCOLORMSGBOX &&
+                message <= WM_CTLCOLORSTATIC) {
             wow_control_brush_retain(window, state);
             SetLastError(error);
             if (!brush_provider) RaiseFailFastException(NULL, NULL, 0);
