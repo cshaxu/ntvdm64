@@ -1,0 +1,362 @@
+[
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/EXE2BIN.CL1",
+    "before_sha256": "011b1f1b2be4f8b182f773c71556ed6417e1db9cf904d118a2e43f06b8c4cd74",
+    "old_tree": "opennt-src-2",
+    "old_blob": "e168a2bc210480b56eaeeaf2afc98edd72e8d702",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/01-EXE2BIN.CL1",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/EXE2BIN.CL2",
+    "before_sha256": "4d7debffaff48325ed12f0657e2bc1201e9a110bc0d51d7a50275c8eb2c148c7",
+    "old_tree": "opennt-src-2",
+    "old_blob": "2e200d27a04f1191f56752162496a93fdacce076",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/02-EXE2BIN.CL2",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/EXE2BIN.CLA",
+    "before_sha256": "2c716be1254939969bfe7c5ec5a1335cba661dbe10077c374a6b8ad15d296c56",
+    "old_tree": "opennt-src-2",
+    "old_blob": "a375d31c657500b97e2017efdfc5e39f691b7838",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/03-EXE2BIN.CLA",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/EXE2BIN.CLB",
+    "before_sha256": "908e74a72c621fa0971e090ee43ca6ba13fb34fe2ca7fe935c2cb9fea8f209d8",
+    "old_tree": "opennt-src-2",
+    "old_blob": "4b3a155a4d4c8df8c8d14296cc9f54bfa36ac831",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/04-EXE2BIN.CLB",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/EXE2BIN.CTL",
+    "before_sha256": "c8135c859384a180aa9e1d97a713e07661db1675529794f649115a3f6e9f7c66",
+    "old_tree": "opennt-src-2",
+    "old_blob": "16bd81bdba4bc4491eb09173de0741dac073f96b",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/05-EXE2BIN.CTL",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/EXE2BIN.EXE",
+    "before_sha256": "edf4009a2ab45a30ae3291b0f8c9585de9a15b6a1262288ae6694d4693cb737e",
+    "old_tree": "OpenNT",
+    "old_blob": "440d48cf82adc6e89490527ca44c026e557d61db",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/06-EXE2BIN.EXE",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/EXE2BIN.MAP",
+    "before_sha256": "34bc2f3515b219b19824e7fca2e1adc6d29525b0a5ede8b644072ba73414999b",
+    "old_tree": "OpenNT",
+    "old_blob": "fc806d447701cb09c5618ec9a3ed6e7633d85aad",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/07-EXE2BIN.MAP",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/display.OBJ",
+    "before_sha256": "8de9ae4b2384b562d2e0d8bb36c83b5062ba27d00055eae11d2aeece463aefec",
+    "old_tree": "opennt-src-2",
+    "old_blob": "6dcd60202d95275fd927021e35a8af7836be8467",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/08-display.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/display.asm",
+    "before_sha256": "c7878560ea9c9d02b9558de882790e9892fcb59c76eac1db93a431ecfd879956",
+    "old_tree": "OpenNT",
+    "old_blob": "ded97e3a01d00d4f8e2d5430eb6236da7b299815",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/09-display.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/display.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/display.asm",
+    "xp_blob": "ac5ee75ad722b73b913deef403a4b35e1cdce8ee",
+    "xp_sha256": "109901bc9bf1743a491e4fb49b4227b14140ec45a73188b66d129445b6bdeeae",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      228
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2bchng.inc",
+    "before_sha256": "9d81fcd587713e51c12da2659f1b3269794115fa3f866e985e2d39a2cf050c13",
+    "old_tree": "OpenNT",
+    "old_blob": "c90b151e7b8a4d4558f1e1acb716142f8f5d3049",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/10-e2bchng.inc",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2bchng.inc",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/e2bchng.inc",
+    "xp_blob": "45a3ca0ee9a95a5851f0784310f9c3fd0ea0a7e4",
+    "xp_sha256": "90e42726f403abfebffe67ceec678fe7f6fb0461205c7eeffcbbba414def7d9a",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      52
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2bequ.inc",
+    "before_sha256": "40241e85352082915026125e5b77d4b1aa7cc90ddb06988b822d62e8c55824ae",
+    "old_tree": "OpenNT",
+    "old_blob": "5a454badbe273113d13beecec22f51d4cc81e540",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/11-e2bequ.inc",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2bequ.inc",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/e2bequ.inc",
+    "xp_blob": "1edda849e920ca8157c88c7ba8ee3dc748064d9c",
+    "xp_sha256": "24d1c3eaa0f956f3ebddfd7e5f0aaef49b8bee6c4533ff016fb44fc41bc43ad5",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      108
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2binit.OBJ",
+    "before_sha256": "485333ec8fa09c80ced44341bb286d9c917bcd78d2c24a4aa64aee0a6639fbbf",
+    "old_tree": "opennt-src-2",
+    "old_blob": "aa06227fd4e7f3c0c6c590d6cbc41bd7a8626a9c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/12-e2binit.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2binit.asm",
+    "before_sha256": "cece5b8e813d2207dfbc43b5f07516af563c868f24e3ba2761c0ee02901107dc",
+    "old_tree": "OpenNT",
+    "old_blob": "b4f001b9c0fcb02c2e932baddaaab00635698582",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/13-e2binit.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2binit.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/e2binit.asm",
+    "xp_blob": "7cbac91b3dfc942d9127e8d757184d9a9367744d",
+    "xp_sha256": "04e903182281183e0f5a6f46b2391924c1f431bef8e37aaebcf48fcc3d2c9a24",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2358
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2bmacro.inc",
+    "before_sha256": "eb67cdb7b1a8ff3f3c73a2d0a067b79130fb2cb41ff743c63e87f6a6c6a8db36",
+    "old_tree": "OpenNT",
+    "old_blob": "1fde1c7699ad16f5b6cf6fc2e31a192fe6ce733f",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/14-e2bmacro.inc",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2bmacro.inc",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/e2bmacro.inc",
+    "xp_blob": "c08358d3a180acd0560f95a8a9b83fcdd1625f39",
+    "xp_sha256": "05af8437876fc2fb9d95b2a3270db07c791632edca3d919d64888423a8585ad2",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      224
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2bparse.inc",
+    "before_sha256": "c979ac9158974a30ea9fcd8196f6ebda499e5af31f16d58c17baa36eda213931",
+    "old_tree": "OpenNT",
+    "old_blob": "109bbcb24a8dabd37e61c64914e822722f14e0c2",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/15-e2bparse.inc",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2bparse.inc",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/e2bparse.inc",
+    "xp_blob": "088d744ead8405d4b46951578908a334788aa369",
+    "xp_sha256": "9d24f12a0ea1cb3bf52a2b22e3573dce6bb5f463146c6f10f963dc0bc3d3786b",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      396
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2btable.inc",
+    "before_sha256": "5f849d6f84b72d44d5fc2998d78d5c4e90c7e88ecf910467afd7517f297352c3",
+    "old_tree": "OpenNT",
+    "old_blob": "847508312c5b85c534fa0af7d100a0dee9bfc375",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/16-e2btable.inc",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/e2btable.inc",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/e2btable.inc",
+    "xp_blob": "e7965b41e109ca47006bbefef9640c058b725fa0",
+    "xp_sha256": "17ce4b9abec44abb412e51d6550894f6e8ad8a923fb686740671555eb0e98d3b",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      414
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/exe2bin.lnk",
+    "before_sha256": "5670665dc0767e7b18a834bac1f7c9aa97f777f5463b4c98d67ef4c2a727380e",
+    "old_tree": "OpenNT",
+    "old_blob": "a038f9bb0aba58aaf4974291bdf0bb14545db414",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/17-exe2bin.lnk",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; runtime replaced by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/exe2bin.skl",
+    "before_sha256": "e9475efabec5bcf730a276ac910dbc33dc4a2a18337abaf7fcb283a43bf7f173",
+    "old_tree": "OpenNT",
+    "old_blob": "876403f5afb3cd3fc267bd6ded07ced876a87459",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/18-exe2bin.skl",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/usa/exe2bin.skl",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/usa/exe2bin.skl",
+    "xp_blob": "d90575cf502ed5413119a288f401ed604fa82ef8",
+    "xp_sha256": "f55bbaa524fbb6ab3c58b6e8bdd077f7390d172b2684e00708ff5829590b36e3",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      140
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/exe2bin.tag",
+    "before_sha256": "d47d911cfa306aab0ca87c1d537669839b2fbe8a55e3b73add166bba74582b0f",
+    "old_tree": "OpenNT",
+    "old_blob": "476e9b084a58d2911bbcb3e56fc7d3ccae2ced2a",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g007/19-exe2bin.tag",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/exe2bin.tag",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/exe2bin.tag",
+    "xp_blob": "0366c4aad6ccd361a83d703059c0ac5c293a0559",
+    "xp_sha256": "5441d6250600bd9a88876ad5f16193dca6d3cfd3efedfe5ed892c73813457ddd",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      14
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/exe2bin/makefile",
+    "before_sha256": "70c345a1f7e3f763d5524f95dc35bc13a26d8a06a820df48910f49274174fbb5",
+    "old_tree": "OpenNT",
+    "old_blob": "41e64ad570237497aa1b55964eb94d5e19bf2e7b",
+    "before_equals_old": false,
+    "evidence_dir": "build/t485-s16/g007/20-makefile",
+    "target": "src/mvdm-guest/dos/v86/cmd/exe2bin/makefile.sub",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/exe2bin/makefile.sub",
+    "xp_blob": "730905911c31a62c8b9d854540838866b50798e0",
+    "xp_sha256": "7cc7c8250cf887ff9d58440f451f211536cb5f615a6ef6c9590e7c3d823dcfb2",
+    "before_vs_old": [
+      1,
+      130
+    ],
+    "before_vs_xp": [
+      1,
+      126
+    ],
+    "normalized_diff": [
+      9,
+      44
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  }
+]

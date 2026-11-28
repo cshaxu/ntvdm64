@@ -2301,3 +2301,7 @@ post-publication targeted checks.
 [G006 EDLIN migration](evidence/t485-s1/g006.md).
 
 [G006 delivery receipt](evidence/t485-s1/g006-result.json).
+
+[G007 EXE2BIN migration](evidence/t485-s1/g007.md).
+
+[G007 delivery receipt](evidence/t485-s1/g007-result.json).
