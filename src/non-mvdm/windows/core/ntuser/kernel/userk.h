@@ -3185,12 +3185,11 @@ VOID     ForceEmptyClipboard(PWINDOWSTATION);
 BOOL     xxxInitWinStaDevices(PWINDOWSTATION);
 VOID     DestroyGlobalAtomTable(PWINDOWSTATION pwinsta);
 
-NTSTATUS xxxInitTask(UINT dwExpWinVer, DWORD dwAppCompatFlags,
-                DWORD dwUserWOWCompatFlags, PUNICODE_STRING pstrAppName,
-#line 3190
-                DWORD hTaskWow, DWORD dwHotkey, DWORD idTask,
-                DWORD dwX, DWORD dwY, DWORD dwXSize, DWORD dwYSize,
-                WORD wShowWindow);
+NTSTATUS zzzInitTask(UINT dwExpWinVer, DWORD dwAppCompatFlags,
+                DWORD dwUserWOWCompatFlags, PUNICODE_STRING pstrModName,
+                PUNICODE_STRING pstrBaseFileName, DWORD hTaskWow, DWORD dwHotkey,
+                DWORD idTask, DWORD dwX, DWORD dwY, DWORD dwXSize, DWORD dwYSize);
+#line 3193
 VOID    DestroyTask(PPROCESSINFO ppi, PTHREADINFO ptiToRemove);
 void    PostInputMessage(PQ pq, PWND pwnd, UINT message, DWORD wParam,
                 LONG lParam, DWORD dwExtraInfo);
@@ -4757,8 +4756,32 @@ DWORD fnHkINLPCWPRETEXSTRUCT(PWND pwnd, UINT message, DWORD wParam,
  */
 
 PQMSG FindQMsg(PTHREADINFO, PMLIST, PWND, UINT, UINT);
+__inline DWORD GetAppCompatFlags2ForPti(
+    PTHREADINFO pti,
+    WORD wVer)
+{
+    if (wVer < pti->dwExpWinVer) {
+        return 0;
+    }
+
+    return pti->dwCompatFlags2;
+}
+
+#define REMOVE_FROM_LIST(type, pstart, pitem, next) \
+    {                                                           \
+        type** pp;                                              \
+                                                                \
+        for (pp = &pstart; *pp != NULL; pp = &(*pp)->next) {    \
+            if (*pp == pitem) {                                 \
+                *pp = pitem->next;                              \
+                break;                                          \
+            }                                                   \
+        }                                                       \
+    }                                                           \
+
+
 #line 4583
-void _ShowStartGlass(DWORD dwTimeout);
+VOID zzzShowStartGlass(DWORD dwTimeout);
 #line 4584
 DWORD _GetChangeBits(VOID);
 
@@ -4976,7 +4999,7 @@ WINUSERAPI DWORD  _GetWindowThreadProcessId(PWND pwnd, LPDWORD lpdwProcessId);
 VOID   xxxRemoveEvents(PQ pq, int nQueue, DWORD flags);
 
 #line 4768
-HANDLE OpenCacheKeyEx(UINT idSection, ACCESS_MASK amRequest);
+HANDLE OpenCacheKeyEx(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, ACCESS_MASK amRequest, PDWORD pdwPolicyFlags);
 
 #line 4770
 DWORD ClientGetListboxString(PWND hwnd, UINT msg,
@@ -5207,80 +5230,82 @@ UINT UT_GetProfileStringW(LPCWSTR lpAppName, LPCWSTR lpKeyName, LPCWSTR lpDefaul
 UINT UT_GetProfileIntW(LPCWSTR lpAppName, LPCWSTR lpKeyName, DWORD nDefault);
 BOOL GetProfileIntsW(PPROFINTINFO ppii);
 
-#define PMAP_ROOT               0
-#define PMAP_COLORS             1
-#define PMAP_CURSORS            2
-#define PMAP_WINDOWSM           3
-#define PMAP_WINDOWSU           4
-#define PMAP_DESKTOP            5
-#define PMAP_ICONS              6
-#define PMAP_FONTS              7
-#define PMAP_BOOT               8
-#define PMAP_TRUETYPE           9
-#define PMAP_KBDLAYOUTACTIVE   10
-#define PMAP_KBDLAYOUT         11
-#define PMAP_SOUNDS            12
-#define PMAP_INPUT             13
-#define PMAP_COMPAT            14
-#define PMAP_SUBSYSTEMS        15
-#define PMAP_FONTSUBS          16
-#define PMAP_GREINIT           17
-#define PMAP_BEEP              18
-#define PMAP_MOUSE             19
-#define PMAP_KEYBOARD          20
-// #define UNUSED                 21
-#define PMAP_HARDERRORCONTROL  22
-#define PMAP_STICKYKEYS        23
-#define PMAP_KEYBOARDRESPONSE  24
-#define PMAP_MOUSEKEYS         25
-#define PMAP_TOGGLEKEYS        26
-#define PMAP_TIMEOUT           27
-#define PMAP_SOUNDSENTRY       28
-#define PMAP_SHOWSOUNDS        29
-#define PMAP_KBDLAYOUTSUBST    30
-#define PMAP_AEDEBUG           31
-#define PMAP_NETWORK           32
-#define PMAP_LSA               33
-#define PMAP_CONTROL           34
-#define PMAP_METRICS           35
-#define PMAP_KBDLAYOUTTOGGLE   36
-#ifdef FE_SB // PMAP_WINLOGON
-#error
-#line 5026
-#else
-#line 5027
-#define PMAP_LAST              36
-#line 5028
-#endif // FE_SB
+#define PMAP_COLORS             0
+#define PMAP_CURSORS            1
+#define PMAP_WINDOWSM           2
+#define PMAP_WINDOWSU           3
+#define PMAP_DESKTOP            4
+#define PMAP_ICONS              5
+#define PMAP_FONTS              6
+#define PMAP_TRUETYPE           7
+#define PMAP_KBDLAYOUT          8
+#define PMAP_INPUT              9
+#define PMAP_COMPAT            10
+#define PMAP_SUBSYSTEMS        11
+#define PMAP_BEEP              12
+#define PMAP_MOUSE             13
+#define PMAP_KEYBOARD          14
+#define PMAP_STICKYKEYS        15
+#define PMAP_KEYBOARDRESPONSE  16
+#define PMAP_MOUSEKEYS         17
+#define PMAP_TOGGLEKEYS        18
+#define PMAP_TIMEOUT           19
+#define PMAP_SOUNDSENTRY       20
+#define PMAP_SHOWSOUNDS        21
+#define PMAP_AEDEBUG           22
+#define PMAP_NETWORK           23
+#define PMAP_METRICS           24
+#define PMAP_UKBDLAYOUT        25
+#define PMAP_UKBDLAYOUTTOGGLE  26
+#define PMAP_WINLOGON          27
+#define PMAP_KEYBOARDPREF      28
+#define PMAP_SCREENREADER      29
+#define PMAP_HIGHCONTRAST      30
+#define PMAP_IMECOMPAT         31
+#define PMAP_IMM               32
+#define PMAP_POOLLIMITS        33
+#define PMAP_COMPAT32          34
+#define PMAP_SETUPPROGRAMNAMES 35
+#define PMAP_INPUTMETHOD       36
+#define PMAP_COMPAT2           37
+#define PMAP_MOUCLASS_PARAMS   38
+#define PMAP_KBDCLASS_PARAMS   39
+#define PMAP_COMPUTERNAME      40
+#define PMAP_TS                41
+#define PMAP_TABLETPC          42
+#define PMAP_MEDIACENTER       43
+#define PMAP_LAST              43
 
-typedef struct tagFASTREGMAP {
-    HANDLE hKeyCache;
-    LPWSTR szSection;
-} FASTREGMAP, *PFASTREGMAP;
+#define MAXPROFILEBUF 256
 
-BOOL    FastOpenProfileUserMapping(void);
-BOOL    FastCloseProfileUserMapping(void);
-DWORD   FastGetProfileKeysW(UINT idSection, LPCWSTR pszDefault, LPWSTR *ppszKeys);
-DWORD   FastGetProfileDwordW(UINT idSection, LPCWSTR lpKeyName, DWORD dwDefault);
-DWORD   FastGetProfileStringW(UINT idSection, LPCWSTR lpKeyName, LPCWSTR lpDefault,
-            LPWSTR lpReturnedString, DWORD nSize);
-UINT    FastGetProfileIntW(UINT idSection, LPCWSTR lpKeyName, UINT nDefault);
-BOOL    FastWriteProfileStringW(UINT idSection, LPCWSTR lpKeyName, LPCWSTR lpString);
-int     FastGetProfileIntFromID(UINT idSection, UINT idKey, int def);
-DWORD   FastGetProfileStringFromIDW(UINT idSection, UINT idKey, LPCWSTR lpDefault,
-            LPWSTR lpReturnedString, DWORD cch);
-BOOL    FastWriteProfileValue(UINT idSection, LPCWSTR lpKeyName, UINT uType, LPBYTE lpStruct, UINT cbSizeStruct) ;
-DWORD   FastGetProfileValue(UINT idSection, LPCWSTR lpKeyName, LPBYTE lpDefault, LPBYTE lpReturn, UINT cbSizeReturn) ;
+#define POLICY_NONE     0x0001
+#define POLICY_USER     0x0002
+#define POLICY_MACHINE  0x0004
+#define POLICY_REMOTE   0x0008
+#define POLICY_ONLY     0x0010
+/*
+ * POLICY_REMOTE is not included in POLICY_REMOTE intentionally.
+ * Else, we will try to read the remote policy always.
+ */
+#define POLICY_ALL      (POLICY_NONE | POLICY_USER | POLICY_MACHINE)
+#define POLICY_VALID    (POLICY_ALL | POLICY_ONLY | POLICY_REMOTE)
 
-#line 5051
-UINT    UT_FastWriteProfileStringW(UINT idSection, LPCWSTR pwszKey, LPCWSTR pwszString);
-UINT    UT_FastGetProfileIntW(UINT idSection, LPCWSTR lpKeyName, DWORD nDefault);
-#line 5053
-BOOL    UT_FastGetProfileIntsW(PPROFINTINFO ppii);
-#line 5054
-BOOL    UT_FastUpdateWinIni(UINT idSection, UINT wKeyNameId, LPWSTR lpszValue);
-BOOL    UT_FastWriteProfileValue(UINT idSection, LPCWSTR pwszKey, UINT uType, LPBYTE lpStruct, UINT cbSizeStruct) ;
-DWORD   UT_FastGetProfileValue(UINT idSection, LPCWSTR pwszKey, LPBYTE lpDefault, LPBYTE lpReturn, UINT cbSizeReturn) ;
+PUNICODE_STRING CreateProfileUserName(TL *ptl);
+void FreeProfileUserName(PUNICODE_STRING pProfileUserName,TL *ptl);
+HANDLE  OpenCacheKeyEx(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, ACCESS_MASK amRequest, PDWORD pdwPolicyFlags);
+BOOL    CheckDesktopPolicy(PUNICODE_STRING pProfileUserName OPTIONAL, PCWSTR lpKeyName);
+BOOL    CheckDesktopPolicyChange(PUNICODE_STRING pProfileUserName OPTIONAL);
+DWORD   FastGetProfileKeysW(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, LPCWSTR pszDefault, LPWSTR *ppszKeys);
+BOOL    FastGetProfileDwordW(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, LPCWSTR lpKeyName, DWORD dwDefault, PDWORD pdwReturn, DWORD dwPolicyOnly);
+DWORD   FastGetProfileStringW(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, LPCWSTR lpKeyName, LPCWSTR lpDefault, LPWSTR lpReturnedString, DWORD nSize, DWORD dwPolicyOnly);
+BOOL    FastGetProfileIntW(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, LPCWSTR lpKeyName, UINT nDefault, PUINT puiReturn, DWORD dwPolicyOnly);
+BOOL    FastWriteProfileStringW(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, LPCWSTR lpKeyName, LPCWSTR lpString);
+BOOL    FastGetProfileIntFromID(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, UINT idKey, int def, PINT pResult, DWORD dwPolicyOnly);
+DWORD   FastGetProfileStringFromIDW(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, UINT idKey, LPCWSTR lpDefault, LPWSTR lpReturnedString, DWORD cch, DWORD dwPolicyOnly);
+BOOL    FastWriteProfileValue(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, LPCWSTR lpKeyName, UINT uType, LPBYTE lpStruct, UINT cbSizeStruct);
+DWORD   FastGetProfileValue(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, LPCWSTR lpKeyName,LPBYTE lpDefault, LPBYTE lpReturn, UINT cbSizeReturn, DWORD dwPolicyOnly);
+BOOL    FastGetProfileIntsW(PUNICODE_STRING pProfileUserName OPTIONAL, PPROFINTINFO ppii, DWORD dwPolicyOnly);
+BOOL    FastUpdateWinIni(PUNICODE_STRING pProfileUserName OPTIONAL, UINT idSection, UINT wKeyNameId, LPWSTR lpszValue);
 
 #line 5058
 VOID RecreateSmallIcons(PWND pwnd);

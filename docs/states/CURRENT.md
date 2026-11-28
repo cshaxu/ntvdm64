@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall59/159 directories, H001-H036 and N001-N023. S15 runtime94 is the current
+overall59/159 directories, H001-H036 and N001-N023. S15 runtime95 is the current
 published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
@@ -173,16 +173,8 @@ Census1332/792/803/529/7948/64273; delta0/0/0/0/+12/-438;
 N024 first file delivered; S15 11/14, overall59/159. Eight completed files
 since P69 Full24/24. Next cleanup.c; no S/T closure.
 
-[P75 XP module/task cleanup](../etc/evidence/t485-s1/n024-cleanup-review.md)
-verified runtime91: original module identity callback, separate XP module/task
-cleanup and paired caller ABI; selector probing removed. Cached full build,
-dual26hash, seven owner cases, real Win16 controls and Full24/24 pass.
-Receipt preserves intermediate implementation/fixture failures and corrections.
-Census1332/792/803/529/7957/63392; delta0/0/0/0/+9/-881;
-1315XP/17OpenNT. LF recovery exposes real bounded adaptations. This Full covers
-five changed mirrors plus eight files since P69; new checkpoint count0.
-N0242/9; S15 remains11/14 and overall59/159 directories. Next exitwin.c.
-No S/T closure. Win95 retains its approved exit-one boundary.
+[P75 XP module/task cleanup](../etc/evidence/t485-s1/n024-cleanup-review.md) delivered
+runtime91 Full24/24; its receipt retains all tests, corrections and census.
 
 [P76 XP WOW registration](../etc/evidence/t485-s1/n024-exitwin.md) delivered runtime92;
 its receipt retains all tests and census.
@@ -205,6 +197,15 @@ Census1332/792/803/529/7990/62434; delta0/0/0/0/
 +10/-551;1318XP/14OpenNT. LF recovery unfolds old whole-file diff.
 N0245/9; S15 11/14; overall59/159. Three files since P75 Full24/24.
 Next queue.c; no S/T closure.
+
+[P79 XP task initialization](../etc/evidence/t485-s1/n024-queue.md) verified runtime95:
+paired module/base names, Win16 handle flags, XP profile identifiers and rollback.
+Cached build, dual26hash, controls40/40, task-order, init-notification,
+task-lifecycle, init-rollback and real Win16 controls pass.
+Census1332/792/803/529/8012/63536; delta0/0/0/0/
++22/+1102;1319XP/13OpenNT. Source-baseline growth is explicit.
+N0246/9; S15 11/14; overall59/159. Four files since P75 Full24/24.
+Next server.c; no S/T closure.
 
 ## S14 Closure Record
 

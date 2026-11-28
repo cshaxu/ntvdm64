@@ -6,7 +6,7 @@
 #include "wow_standard_class_provider.h"
 #include "wow_task_lifecycle_provider.h"
 static const wow_task_lifecycle_provider task_lifecycle_provider = {
-    xxxSleepTask, xxxDirectedYield, xxxInitTask, xxxRegisterUserHungAppHandlers,
+    xxxSleepTask, xxxDirectedYield, zzzInitTask, xxxRegisterUserHungAppHandlers,
     xxxUserYield, DestroyTask };
 #include "wow_window_access_provider.h"
 HWND WINAPI wow_original_window_handle(struct tagWND *);

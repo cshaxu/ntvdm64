@@ -586,7 +586,7 @@ BOOL FastWriteProfileStringW(PUNICODE_STRING pProfileUserName OPTIONAL,
 UINT WINAPI wow_original_task_profile(UINT section, LPCWSTR key, LPCWSTR fallback,
     LPWSTR output, DWORD capacity)
 {
-    if (section != 14 || !key || !output || !capacity ||
+    if (section != 10 || !key || !output || !capacity ||
         capacity > (MAXDWORD - sizeof(KEY_VALUE_PARTIAL_INFORMATION)) / sizeof(WCHAR) ||
         (fallback && wcslen(fallback) >= capacity)) {
         SetLastError(ERROR_INVALID_PARAMETER);

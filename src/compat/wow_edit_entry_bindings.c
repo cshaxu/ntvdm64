@@ -59,8 +59,8 @@ BOOL WINAPI wow_edit_capture_context(wow_edit_context *context)
     if (!SystemParametersInfoW(SPI_GETCARETWIDTH, 0, &value.uCaretWidth, 0)) return FALSE;
     value.dtCaretBlink = GetCaretBlinkTime();
     if (!value.dtCaretBlink) return FALSE;
-    value.wMaxLeftOverlapChars = (int)wow_profile_int(5, L"LeftOverlapChars", 3);
-    value.wMaxRightOverlapChars = (int)wow_profile_int(5, L"RightOverlapChars", 3);
+    value.wMaxLeftOverlapChars = (int)wow_profile_int(4, L"LeftOverlapChars", 3);
+    value.wMaxRightOverlapChars = (int)wow_profile_int(4, L"RightOverlapChars", 3);
     /* Original init.c measures SYSTEM_FONT on its bits DC through
      * GetCharDimensions. Reuse the audited GDI implementation, including
      * its average-width rounding, not tmAveCharWidth or dialog base units. */

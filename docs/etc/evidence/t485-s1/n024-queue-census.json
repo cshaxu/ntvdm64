@@ -1,0 +1,74 @@
+{
+  "status": "verified-runtime95",
+  "before": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7990,
+    "nonerror_lines": 62434
+  },
+  "after": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 8012,
+    "nonerror_lines": 63536
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 22,
+    "nonerror_lines": 1102
+  },
+  "files": [
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\profile.c",
+      "before_points": 11,
+      "before_lines": 781,
+      "after_points": 11,
+      "after_lines": 781,
+      "baseline": "XP",
+      "blob": "b9f10cb901fd5eed0ecb35cffd46c439c86df844",
+      "normalized": {
+        "points": 11,
+        "lines": 781,
+        "excluded": 2
+      },
+      "sha256": "735790e6d677c6c3b3f473fda0f0f228507791bf6f0ca63b13569cb54fc3a2e4"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\queue.c",
+      "before_points": 1,
+      "before_lines": 5211,
+      "after_points": 23,
+      "after_lines": 6285,
+      "baseline": "XP",
+      "blob": "acb3619e95949290c2ad8b9174f86a6ed58aa3b1",
+      "normalized": {
+        "points": 23,
+        "lines": 6285,
+        "excluded": 1
+      },
+      "sha256": "8a904e9525ec055fe031a74bec94001014420014b9f84272c326f318ba2190c4"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\userk.h",
+      "before_points": 1,
+      "before_lines": 10185,
+      "after_points": 1,
+      "after_lines": 10213,
+      "baseline": "OpenNT",
+      "blob": "0bf5dbcf391f5332cc9ba756fd2f309542129149",
+      "normalized": {
+        "points": 520,
+        "lines": 807,
+        "excluded": 39
+      },
+      "sha256": "c408e71b4d9f0b508ba7bed61d531a5395e614a85d1e3698637d957e8eab249d"
+    }
+  ]
+}

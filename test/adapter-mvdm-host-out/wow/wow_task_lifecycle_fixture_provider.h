@@ -5,7 +5,7 @@
 
 /* The same original functions bound by the product DLL entry. */
 static const wow_task_lifecycle_provider wow_fixture_task_lifecycle_provider = {
-    xxxSleepTask, xxxDirectedYield, xxxInitTask, xxxRegisterUserHungAppHandlers,
+    xxxSleepTask, xxxDirectedYield, zzzInitTask, xxxRegisterUserHungAppHandlers,
     xxxUserYield, DestroyTask
 };
 #endif

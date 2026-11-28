@@ -859,8 +859,7 @@ static DWORD WINAPI cross_receiver(void *parameter)
     MSG message;
     CHECK(session_thread_bind(test->session_owner));
     CHECK(wow_user_runtime_bind(&binding, test->runtime, NULL, NULL));
-    CHECK(wow_user_task_lifecycle_init(test->lifecycle, 0x0400, 0, 0, "RECEIVER.EXE",
-        0x1235, 0, 0, 0, 0, 1, 1, SW_HIDE));
+    CHECK(wow_user_task_lifecycle_init(test->lifecycle, 0x0400, 0, 0, "RECEIVER.EXE", NULL, 0x80000000u | (0x1235), 0, 0, 0, 0, 1, 1));
     test->window = CreateWindowExW(0, L"WOW_NATIVE_CROSS", L"", 0, 0, 0, 1, 1,
         HWND_MESSAGE, NULL, GetModuleHandleW(NULL), test);
     CHECK(test->window != NULL);
@@ -1336,8 +1335,7 @@ int __cdecl main(int argc,char **argv)
          * projection leaf configured to fail on its third member, it must
          * leave precisely the first two standard classes published. */
         wow_task_class_fail_at = 3;
-        CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0, "APP.EXE",
-            0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
+        CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0, "APP.EXE", NULL, 0x80000000u | (0x1234), 0, 0, 0, 0, 1, 1));
         CHECK(!binding.thread && !binding.exclusive_held && !lifecycle.threads);
         CHECK(wow_user_idle_hook_for_current() == NULL);
         for (entry = lifecycle.classes.pclsPublicList; entry; entry = entry->next)
@@ -1352,7 +1350,7 @@ int __cdecl main(int argc,char **argv)
         for (failure = 0; failure < ARRAYSIZE(hook_ids); ++failure) {
             wow_init_hook_fail = hook_ids[failure];
             CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0,
-                "APP.EXE", 0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
+                "APP.EXE", NULL, 0x80000000u | (0x1234), 0, 0, 0, 0, 1, 1));
             CHECK(GetLastError() == ERROR_ACCESS_DENIED);
             CHECK(!wow_init_hooks_live && !binding.thread &&
                 !binding.exclusive_held && !lifecycle.threads);
@@ -1363,7 +1361,7 @@ int __cdecl main(int argc,char **argv)
             wow_init_alloc_calls = 0;
             wow_init_fail_at = failure;
             CHECK(!wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0,
-                "APP.EXE", 0x1234, 0, 0, 0, 0, 1, 1, SW_HIDE));
+                "APP.EXE", NULL, 0x80000000u | (0x1234), 0, 0, 0, 0, 1, 1));
             CHECK(GetLastError() == (failure == 1 ?
                 ERROR_INVALID_NAME : ERROR_NOT_ENOUGH_MEMORY));
             CHECK(wow_init_alloc_calls == failure && !wow_init_name_live);
@@ -1375,10 +1373,9 @@ int __cdecl main(int argc,char **argv)
         wow_init_alloc_calls = wow_init_fail_at = 0;
     }
 #endif
-    CHECK(wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0, "APP.EXE",
-        0x1234, 0, FIXTURE_LAUNCH_REQUEST,
+    CHECK(wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0, "APP.EXE", NULL, 0x80000000u | (0x1234), 0, FIXTURE_LAUNCH_REQUEST,
         (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
-        (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW));
+        (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT));
     /* The registration bridge performs this once before W32Thread can enter
      * guest code.  Exercise the same no-guest-execution transaction here;
      * inactive page domains remain a valid native-only fixture boundary. */

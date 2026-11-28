@@ -62,12 +62,13 @@ BOOL WINAPI registered_init_task(UINT version, DWORD compat_flags, DWORD user_fl
 {
     BOOL result;
     DWORD init_error;
+    DWORD initialization_handle = task_id;
     task_id = LOWORD(task_id); /* USER lifecycle stores the Win16 handle. */
     if (!wow_user_ensure_registration_lifecycle()) return FALSE;
     if (wow_user_runtime_current()->thread) {
         /* wkman.c retries pfnInitTask after every failed post-InitTask
          * handoff.  Resume the one incomplete copied-view transaction before
-         * its original launch notification retry; do not run xxxInitTask or
+         * its original launch notification retry; do not run zzzInitTask or
          * create another task carrier. */
         if (!wow_user_task_lifecycle_publish_initial_view(wow_user_registered_lifecycle())) {
             DWORD error = GetLastError();
@@ -80,9 +81,8 @@ BOOL WINAPI registered_init_task(UINT version, DWORD compat_flags, DWORD user_fl
     wow_user_registration_trace("InitTaskId", task_id);
     wow_user_registration_trace("InitTaskSharedId", shared_id);
     result = wow_user_ensure_registration_lifecycle() && wow_user_task_lifecycle_init(wow_user_registered_lifecycle(),
-        version, compat_flags, user_flags, base_name ? base_name : module_name,
-        task_id, hotkey, shared_id, x, y, width, height,
-        SW_SHOW);
+        version, compat_flags, user_flags, module_name, base_name,
+        initialization_handle, hotkey, shared_id, x, y, width, height);
     init_error=GetLastError();
     if (result && !wow_user_task_lifecycle_publish_initial_view(wow_user_registered_lifecycle())) {
         result = FALSE;

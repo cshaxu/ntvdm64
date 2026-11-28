@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: queue.c
 *
-* Copyright (c) 1985-95, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains the low-level code for working with the Q structure.
 *
@@ -11,223 +11,276 @@
 \***************************************************************************/
 
 #define WOW_ORIGINAL_TASK_ORDER
-#line 13
 #include "wow_task_init_bindings.h"
-#line 13
+#include "wow_user_exception_filter.h"
+#define GetAppCompatFlags wow_kernel_GetAppCompatFlags
+#define GetAppCompatFlags2 wow_kernel_GetAppCompatFlags2
+#define GetAppImeCompatFlags wow_kernel_GetAppImeCompatFlags
+#undef InitiateShutdown
 #include "userk.h"
+#line 14
 #pragma hdrstop
-
-#line 17
+#line 16
 VOID DestroyProcessesObjects(PPROCESSINFO ppi);
-#line 19
-void CheckProcessForeground(PTHREADINFO pti);
-void ScreenSaverCheck(PTHREADINFO pti);
+VOID DestroyThreadsMessages(PQ pq, PTHREADINFO pti);
+VOID CheckProcessForeground(PTHREADINFO pti);
 DWORD xxxPollAndWaitForSingleObject(PKEVENT pEvent, PVOID pExecObject,
-        DWORD dwMilliseconds);
+                                    DWORD dwMilliseconds);
 
-#line 26
-void SetVDMCursorBounds(LPRECT lprc);
+NTSTATUS InitiateShutdown(PETHREAD Thread, PULONG lpdwFlags);
+NTSTATUS EndShutdown(PETHREAD Thread, NTSTATUS StatusShutdown);
+VOID SetVDMCursorBounds(LPRECT lprc);
+NTSTATUS InitQEntryLookaside(VOID);
+VOID SetAppStarting(PPROCESSINFO ppi);
 
-PW32PROCESS gpwpCalcFirst = NULL;
-
-#ifdef DEBUG
-#error
-#line 36
-#else
-#line 37
-#define TraceDdeMsg(m, h1, h2, c)
-#endif // DEBUG
-#line 39
-
-PVOID QEntryLookasideBase;
-PVOID QEntryLookasideBounds;
-#line 43
-#if DBG
-#error
-#line 49
-#endif // DBG
-#line 50
-
-#define QUEUE_ENTRIES 16
-#line 54
-#ifdef DEBUG
-#error
-#line 114
-#else
-#line 115
-#define DebugValidateMLIST(pml)
-#define DebugValidateMLISTandQMSG(pml, pqmsg)
+#line 28
+#if defined(_WIN64) 
+/* 
+ * For Win64 ask winlogon to play sounds for accessibility events
+ * (IA64 machines do not have internal speakers so we have to go
+ * thru the sound card).  Post a message to winlogon with an lParam
+ * whose high word is ACCESS_SOUND_RANGE and low word is the index 
+ * of the sound to make.  If a new RITSOUND_xx macro is added then
+ * winlogon has to be updated too.
+ */
+#define ACCESS_SOUND_RANGE 1
 #endif
-#line 118
-#line 516
+#line 42
+PW32PROCESS gpwpCalcFirst;
+
+PPAGED_LOOKASIDE_LIST QLookaside;
+PPAGED_LOOKASIDE_LIST QEntryLookaside;
+
+#line 685
 #define QUERY_VALUE_BUFFER 80
+#line 695
+PUNICODE_STRING gpastrSetupExe;    // These are initialized in the routine
+int giSetupExe;                    // CreateSetupNameArray in setup.c
 
-/***************************************************************************\
-* SetAppCompatFlags
-*
-*
-* History:
-* 03-23-92 JimA     Created.
-\***************************************************************************/
 
-void SetAppCompatFlags(
+#line 709
+BOOL SetAppImeCompatFlags(
+    PTHREADINFO pti,
+    PUNICODE_STRING pstrModName,
+    PUNICODE_STRING pstrBaseFileName)
+{
+    DWORD dwImeFlags = 0;
+    WCHAR szHex[QUERY_VALUE_BUFFER];
+    WORD wPrimaryLangID;
+    LCID lcid;
+    int iSetup;
+    BOOL fSetup = FALSE;
+    int iAppName;
+    int cAppNames;
+    PUNICODE_STRING rgpstrAppNames[2];
+    UNICODE_STRING strHex;
+
+    /*
+     * Because can't access pClientInfo of another process
+     */
+    UserAssert(pti->ppi == PpiCurrent());
+
+    /*
+     * Because it is used as a zero-terminated profile key name.
+     */
+    UserAssert(pstrModName->Buffer[pstrModName->Length / sizeof(WCHAR)] == 0);
+
+    if (FastGetProfileStringW(
+                NULL,
+                PMAP_IMECOMPAT,
+                pstrModName->Buffer,
+                NULL,
+                szHex,
+                ARRAY_SIZE(szHex),
+                0)) {
+
+        /*
+         * Found some flags. Attempt to convert the hex string
+         * into numeric value. Specify base 0, so
+         * RtlUnicodeStringToInteger will handle the 0x format.
+         */
+        RtlInitUnicodeString(&strHex, szHex);
+        RtlUnicodeStringToInteger(&strHex, 0, (PULONG)&dwImeFlags);
+    }
+
+    /*
+     * If current layout is not IME layout, we don't need to get
+     * compatible flags for IME. But now, we don't have any scheme
+     * to get this flags when the keyboard layout is switched. Then
+     * we get it here, even this flags are not nessesary for non-IME
+     * keyboard layouts.
+     */
+    ZwQueryDefaultLocale(FALSE, &lcid);
+    wPrimaryLangID = PRIMARYLANGID(lcid);
+
+    if ((wPrimaryLangID == LANG_KOREAN || wPrimaryLangID == LANG_JAPANESE) &&
+            (LOWORD(pti->dwExpWinVer) <= VER31)) {
+        /*
+         * IME compatibility flags are needed even if it's a 32 bit app.
+         */
+        pti->ppi->dwImeCompatFlags = dwImeFlags;
+    } else {
+        pti->ppi->dwImeCompatFlags = dwImeFlags & (IMECOMPAT_NOFINALIZECOMPSTR | IMECOMPAT_HYDRACLIENT);
+        if (dwImeFlags & IMECOMPAT_NOFINALIZECOMPSTR) {
+            RIPMSG1(RIP_WARNING, "IMECOMPAT_NOFINALIZECOMPSTR is set to ppi=%#p", pti->ppi);
+        }
+        if (dwImeFlags & IMECOMPAT_HYDRACLIENT) {
+            RIPMSG1(RIP_WARNING, "IMECOMPAT_HYDRACLIENT is set to ppi=%#p", pti->ppi);
+        }
+    }
+
+
+    if (gpastrSetupExe == NULL) {
+        return fSetup;
+    }
+
+    rgpstrAppNames[0] = pstrModName;
+    cAppNames = 1;
+    if (pstrBaseFileName) {
+        rgpstrAppNames[1] = pstrBaseFileName;
+        cAppNames = 2;
+    }
+
+    for (iAppName = 0;
+         iAppName < cAppNames && !fSetup;
+         iAppName++) {
+
+        iSetup = 0;
+        while (iSetup < giSetupExe) {
+            if (RtlCompareUnicodeString(rgpstrAppNames[iAppName], &(gpastrSetupExe[iSetup]), TRUE) == 0) {
+                fSetup = TRUE;
+                break;
+            }
+            iSetup++;
+        }
+    }
+
+    return fSetup;
+}
+
+#line 974
+DWORD GetAppCompatFlags(
     PTHREADINFO pti)
 {
-    DWORD dwFlags = 0;
-    WCHAR szHex[QUERY_VALUE_BUFFER];
-    WCHAR szKey[80];
-    WCHAR *pchStart, *pchEnd;
-    DWORD cb;
-    PUNICODE_STRING pstrAppName;
+    // From GRE with pti = NULL
+    // We got to use PtiCurrentShared()
+    if (pti == NULL)
+        pti = PtiCurrentShared();
 
-    /*
-     * If this process is WOW, every app (and every thread) has its own
-     * compat flags. If not WOW, then we only need to do this lookup
-     * once per process.
-     */
-    if (!(pti->TIF_flags & TIF_16BIT)) {
-        if (LOWORD(pti->dwExpWinVer) <= VER31) {
-            if (pti->ppi->W32PF_Flags & W32PF_HAVECOMPATFLAGS) {
-                pti->dwCompatFlags = pti->ppi->dwCompatFlags;
-                pti->pClientInfo->dwCompatFlags = pti->dwCompatFlags;
-                return;
-            }
-        }
-        goto SACF_GotFlags;     // They're zero; we're a 3.1 (32 bit) app
+    return pti->dwCompatFlags;
+}
+/***************************************************************************\
+* GetAppCompatFlags2
+*
+* Compatibility flags for < wVer apps
+*
+* History:
+* 07-01-98 MCostea      Created.
+\***************************************************************************/
+DWORD GetAppCompatFlags2(
+    WORD wVer)
+{
+    return GetAppCompatFlags2ForPti(PtiCurrentShared(), wVer);
+}
+
+DWORD GetAppImeCompatFlags(
+    PTHREADINFO pti)
+{
+    if (pti == NULL) {
+        pti = PtiCurrentShared();
     }
 
+    return pti->ppi->dwImeCompatFlags;
+}
+
+
+#line 1057
+VOID SetAppStarting(
+    PPROCESSINFO ppi)
+{
+    static UINT_PTR guAppStartingId = 0;
 
     /*
-     * Find end of app name
+     * This ppi had better not be in the list already, or we will be creating
+     * a loop (as seen in stress).
      */
-    if (pti->pstrAppName != NULL)
-        pstrAppName = pti->pstrAppName;
-    else
-        pstrAppName = &pti->ppi->imagePathName;
-    pchStart = pchEnd = pstrAppName->Buffer +
-            (pstrAppName->Length / sizeof(WCHAR));
+    UserAssert((ppi->W32PF_Flags & W32PF_APPSTARTING) == 0);
 
     /*
-     * Locate start of extension
+     * If we add this to the gppiStartingList without this bit set, we will
+     * skip removing it from the list in DestroyProcessInfo(), but continue
+     * to free it in FreeW32Process called by W32pProcessCallout.
      */
-    while (TRUE) {
-        if (pchEnd == pstrAppName->Buffer) {
-            pchEnd = pchStart;
-            break;
-        }
+    UserAssert((ppi->W32PF_Flags & W32PF_PROCESSCONNECTED));
 
-        if (*pchEnd == TEXT('.'))
-            break;
-
-        pchEnd--;
-    }
-
+    ppi->W32PF_Flags |= W32PF_APPSTARTING;
+    ppi->ppiNext = gppiStarting;
+    gppiStarting = ppi;
     /*
-     * Locate start of filename
+     * Some system processes are initialized before the RIT has setup the master
+     * timer, so check for it.
      */
-    pchStart = pchEnd;
-
-    while (pchStart != pstrAppName->Buffer) {
-        if (*pchStart == TEXT('\\') || *pchStart == TEXT(':')) {
-            pchStart++;
-            break;
-        }
-
-        pchStart--;
-    }
-
-    /*
-     * Get a copy of the filename - make sure it fits and is zero
-     * terminated.
-     */
-    cb = (pchEnd - pchStart) * sizeof(WCHAR);
-    if (cb >= sizeof(szKey))
-        cb = sizeof(szKey) - sizeof(WCHAR);
-    RtlCopyMemory(szKey, pchStart, cb);
-    szKey[(cb / sizeof(WCHAR))] = 0;
-
-    /*
-     * Find compatiblility flags (if not a 4.0 app)
-     */
-    if (LOWORD(pti->dwExpWinVer) <= VER31)
-        if (UT_FastGetProfileStringW(PMAP_COMPAT, szKey, TEXT(""),
-                szHex, sizeof(szHex) / sizeof(szHex[0]))) {
-            UNICODE_STRING strHex;
-
-            /*
-             * Found some flags.  Attempt to convert the hex string
-             * into numeric value. Specify base 0, so
-             * RtlUnicodeStringToInteger will handle the 0x format
-             */
-            RtlInitUnicodeString(&strHex, szHex);
-            RtlUnicodeStringToInteger(&strHex, 0, (PULONG)&dwFlags);
-        }
-
-SACF_GotFlags:
-
-    pti->dwCompatFlags = dwFlags;
-    pti->pClientInfo->dwCompatFlags = dwFlags;
-
-    pti->ppi->dwCompatFlags = dwFlags;
-    pti->ppi->W32PF_Flags |= W32PF_HAVECOMPATFLAGS;
+#line 1086
 
 }
 
-#line 648
-/***************************************************************************\
-* xxxInitTask -- called by WOW startup for each app
-*
-*
-*
-* History:
-* 02-21-91 MikeHar  Created.
-* 02-23-92 MattFe   Altered for WOW
-\***************************************************************************/
+#define PROCESSINFO wow_task_order_process
+#line 1098
+VOID ClearAppStarting(
+    PPROCESSINFO ppi)
+{
+    REMOVE_FROM_LIST(PROCESSINFO, gppiStarting, ppi, ppiNext);
+    ppi->W32PF_Flags &= ~W32PF_APPSTARTING;
+}
 
-NTSTATUS xxxInitTask(
+#undef PROCESSINFO
+
+#line 1114
+NTSTATUS zzzInitTask(
     UINT dwExpWinVer,
     DWORD dwAppCompatFlags,
     DWORD dwUserWOWCompatFlags,
-#line 660
-    PUNICODE_STRING pstrAppName,
+    PUNICODE_STRING pstrModName,
+    PUNICODE_STRING pstrBaseFileName,
     DWORD hTaskWow,
     DWORD dwHotkey,
     DWORD idTask,
     DWORD dwX,
     DWORD dwY,
     DWORD dwXSize,
-    DWORD dwYSize,
-    WORD  wUnusedAndAvailable)
+    DWORD dwYSize)
 {
-    PTHREADINFO pti;
+    PTHREADINFO ptiCurrent;
     PTDB ptdb;
     PPROCESSINFO ppi;
     PWOWTHREADINFO pwti;
 
-    UNREFERENCED_PARAMETER(wUnusedAndAvailable);
-
-    pti = PtiCurrent();
-    ppi = pti->ppi;
+    ptiCurrent = PtiCurrent();
+    ppi = ptiCurrent->ppi;
 
     /*
-     * Set the real name of the module.  (Instead of 'NTVDM')
+     * Set the real name of the module. (Instead of 'NTVDM')
+     * We've already probed pstrModName->Buffer for Length+sizeof(WCHAR) so
+     * we can copy the UNICODE_NULL terminator as well.
      */
-    if (pti->pstrAppName != NULL)
-        UserFreePool(pti->pstrAppName);
-    pti->pstrAppName = UserAllocPoolWithQuota(sizeof(UNICODE_STRING) +
-            pstrAppName->MaximumLength, TAG_TEXT);
-    if (pti->pstrAppName != NULL) {
-        pti->pstrAppName->Buffer = (PWCHAR)(pti->pstrAppName + 1);
+    if (ptiCurrent->pstrAppName != NULL) {
+        UserFreePool(ptiCurrent->pstrAppName);
+    }
+    ptiCurrent->pstrAppName = UserAllocPoolWithQuota(sizeof(UNICODE_STRING) +
+            pstrModName->Length + sizeof(WCHAR), TAG_TEXT);
+    if (ptiCurrent->pstrAppName != NULL) {
+        ptiCurrent->pstrAppName->Buffer = (PWCHAR)(ptiCurrent->pstrAppName + 1);
         try {
-            RtlCopyMemory(pti->pstrAppName->Buffer, pstrAppName->Buffer,
-                    pstrAppName->Length);
-        } except (EXCEPTION_EXECUTE_HANDLER) {
-            UserFreePool(pti->pstrAppName);
-            pti->pstrAppName = NULL;
+            RtlCopyMemory(ptiCurrent->pstrAppName->Buffer, pstrModName->Buffer,
+                    pstrModName->Length);
+            ptiCurrent->pstrAppName->Buffer[pstrModName->Length / sizeof(WCHAR)] = 0;
+        } except (W32ExceptionHandler(FALSE, RIP_WARNING)) {
+            UserFreePool(ptiCurrent->pstrAppName);
+            ptiCurrent->pstrAppName = NULL;
             return STATUS_OBJECT_NAME_INVALID;
         }
-        pti->pstrAppName->MaximumLength = pstrAppName->MaximumLength;
-        pti->pstrAppName->Length = pstrAppName->Length;
+        ptiCurrent->pstrAppName->MaximumLength = pstrModName->Length + sizeof(WCHAR);
+        ptiCurrent->pstrAppName->Length = pstrModName->Length;
     } else
         return STATUS_OBJECT_NAME_INVALID;
 
@@ -235,14 +288,12 @@ NTSTATUS xxxInitTask(
      * An app is starting!
      */
     if (!(ppi->W32PF_Flags & W32PF_APPSTARTING)) {
-        ppi->W32PF_Flags |= W32PF_APPSTARTING;
-        ppi->ppiNext = gppiStarting;
-        gppiStarting = ppi;
+        SetAppStarting(ppi);
     }
 
     /*
      * We never want to use the ShowWindow defaulting mechanism for WOW
-     * apps.  If STARTF_USESHOWWINDOW was set in the client-side
+     * apps. If STARTF_USESHOWWINDOW was set in the client-side
      * STARTUPINFO structure, WOW has already picked it up and used
      * it for the first (command-line) app.
      */
@@ -282,312 +333,234 @@ NTSTATUS xxxInitTask(
     /*
      * Alloc and Link in new task into the task list
      */
-    if ((ptdb = (PTDB)UserAllocPoolWithQuota(sizeof(TDB), TAG_WOW)) == NULL)
+
+    if ((ptdb = (PTDB)UserAllocPoolWithQuota(sizeof(TDB), TAG_WOWTDB)) == NULL)
         return STATUS_NO_MEMORY;
-    pti->ptdb = ptdb;
 
-    /*
-     * Set the flags to say this is a 16-bit thread - before attaching
-     * queues!
-     */
-    pti->TIF_flags |= TIF_16BIT | TIF_FIRSTIDLE;
-
-    /*
-     * If this task is running in the shared WOW VDM, we handle
-     * WaitForInputIdle a little differently than separate WOW
-     * VDMs.  This is because CreateProcess returns a real process
-     * handle when you start a separate WOW VDM, so the "normal"
-     * WaitForInputIdle works.  For the shared WOW VDM, CreateProcess
-     * returns an event handle.
-     */
-    ptdb->pwti = NULL;
-    if (idTask) {
-        pti->TIF_flags |= TIF_SHAREDWOW;
-
-        /*
-         * Look for a matching thread in the WOW thread info list.
-         */
-        if (idTask != (DWORD)-1) {
-            for (pwti = gpwtiFirst; pwti != NULL; pwti = pwti->pwtiNext) {
-                if (pwti->idTask == idTask) {
-                    ptdb->pwti = pwti;
-                    break;
-                }
-            }
-#ifdef DEBUG
-#error
-#line 789
-#endif
-#line 790
-        }
-    }
-    pti->pClientInfo->dwTIFlags |= pti->TIF_flags;
-
-    /*
-     * We need this thread to share the queue of other win16 apps.
-     * If we're journalling, all apps are sharing a queue, so we wouldn't
-     * want to interrupt that - so only cause queue recalculation
-     * if we aren't journalling.
-     */
-    if (!FJOURNALRECORD() && !FJOURNALPLAYBACK())
-        ReattachThreads(FALSE);
+    ptiCurrent->ptdb = ptdb;
 
     /*
      * Save away the 16 bit task handle: we use this later when calling
      * wow back to close a WOW task.
      */
-    ptdb->hTaskWow = hTaskWow;
+    ptdb->hTaskWow = LOWORD(hTaskWow);
 
-    pti->dwCompatFlags = dwAppCompatFlags;
-    pti->pClientInfo->dwCompatFlags = dwAppCompatFlags;
+    ptiCurrent->dwCompatFlags = dwAppCompatFlags;
+    ptiCurrent->pClientInfo->dwCompatFlags = dwAppCompatFlags;
+
+    UserAssert(ptiCurrent->ppi->ptiList);
+
     dwUserWOWCompatFlags &= COMPATFLAGS2_FORWOW;
-    pti->dwCompatFlags2 = dwUserWOWCompatFlags;
-    pti->pClientInfo->dwCompatFlags2 = dwUserWOWCompatFlags;
-
-#line 809
-    /*
-     * Setup the app start cursor for 5 second timeout.
-     */
-    CalcStartCursorHide((PW32PROCESS)ppi, 5000);
+    ptiCurrent->dwCompatFlags2 = dwUserWOWCompatFlags;
+    ptiCurrent->pClientInfo->dwCompatFlags2 = dwUserWOWCompatFlags;
 
     /*
      * HIWORD: != 0 if wants proportional font
      * LOWORD: Expected windows version (3.00 [300], 3.10 [30A], etc)
      */
-    pti->dwExpWinVer = dwExpWinVer;
-    pti->pClientInfo->dwExpWinVer = dwExpWinVer;
+    ptiCurrent->dwExpWinVer = dwExpWinVer;
+    ptiCurrent->pClientInfo->dwExpWinVer = dwExpWinVer;
 
     /*
-     * Mark this guy and add him to the global task list so he can run.
+     * We haven't captured pstrBaseFileName's buffer, we
+     * may fault touching it in SetAppImeCompatFlags. If
+     * so the IME flags have been set already and we
+     * can safely assume it's not a setup app.
      */
-#define NORMAL_PRIORITY_TASK 10
+
+    try {
+        if (SetAppImeCompatFlags(ptiCurrent, ptiCurrent->pstrAppName,
+                             pstrBaseFileName)) {
+            /*
+             * Flag task as a setup app.
+             */
+            ptdb->TDB_Flags = TDBF_SETUP;
+            ppi->W32PF_Flags |= W32PF_SETUPAPP;
+        }
+    } except (W32ExceptionHandler(FALSE, RIP_WARNING)) {
+    }
+
 
     /*
-     * To be Compatible it super important that the new task run immediately
-     * Set its priority accordingly.  No other task should ever be set to
-     * CREATION priority
+     * Set the flags to say this is a TIF_MEOW
+     * queues!
      */
-    ptdb->nPriority = NORMAL_PRIORITY_TASK;
-    ptdb->nEvents = 0;
-    ptdb->pti = pti;
-    ptdb->ptdbNext = NULL;
 
-    InsertTask(ppi, ptdb);
+    if(hTaskWow & HTW_ISMEOW) {
+       ptiCurrent->TIF_flags |= TIF_MEOW;
+    }
+
+    if(hTaskWow & HTW_IS16BIT) {
+       ptiCurrent->TIF_flags |= TIF_16BIT | TIF_FIRSTIDLE;
+    }
+    else {
+       ptiCurrent->pClientInfo->dwTIFlags |= ptiCurrent->TIF_flags;
+    }
+
+    if(hTaskWow & HTW_IS16BIT) {
+
+       /* jarbats
+        * Set the flags to say this is a 16-bit thread - before attaching
+        * queues!
+        */
+
+       /*
+        * If this task is running in the shared WOW VDM, we handle
+        * WaitForInputIdle a little differently than separate WOW
+        * VDMs. This is because CreateProcess returns a real process
+        * handle when you start a separate WOW VDM, so the "normal"
+        * WaitForInputIdle works. For the shared WOW VDM, CreateProcess
+        * returns an event handle.
+        */
+        ptdb->pwti = NULL;
+        if (idTask) {
+            ptiCurrent->TIF_flags |= TIF_SHAREDWOW;
+
+            /*
+             * Look for a matching thread in the WOW thread info list.
+             */
+            if (idTask != (DWORD)-1) {
+                for (pwti = gpwtiFirst; pwti != NULL; pwti = pwti->pwtiNext) {
+                     if (pwti->idTask == idTask) {
+                         ptdb->pwti = pwti;
+                         break;
+                     }
+                }
+#if DBG
+#error
+#line 1308
+#endif
+#line 1309
+            }
+        }
+        ptiCurrent->pClientInfo->dwTIFlags |= ptiCurrent->TIF_flags;
+
+        /*
+         * We need this thread to share the queue of other win16 apps.
+         * If we're journalling, all apps are sharing a queue, so we wouldn't
+         * want to interrupt that - so only cause queue recalculation
+         * if we aren't journalling.
+         * ptdb may be freed by DestroyTask during a callback, so defer WinEvent
+         * notifications until we don't need ptdb any more.
+         */
+
+        if (!FJOURNALRECORD() && !FJOURNALPLAYBACK())
+            zzzReattachThreads(FALSE);
+
+        /*
+         * Setup the app start cursor for 5 second timeout.
+         */
+        zzzCalcStartCursorHide((PW32PROCESS)ppi, 5000);
+
+        /*
+         * Mark this guy and add him to the global task list so he can run.
+         */
+        #define NORMAL_PRIORITY_TASK 10
+
+        /*
+         * To be Compatible it super important that the new task run immediately
+         * Set its priority accordingly. No other task should ever be set to
+         * CREATION priority
+         */
+        ptdb->nPriority = NORMAL_PRIORITY_TASK;
+        ptdb->nEvents = 0;
+        ptdb->pti = ptiCurrent;
+        ptdb->ptdbNext = NULL;
+        ptdb->TDB_Flags = 0;
+
+        InsertTask(ppi, ptdb);
 
 
 
-#line 840
-    /*
-     * Force this new task to be the active task (WOW will ensure the
-     * currently running task does a Yield which will put it into the
-     * non preemptive scheduler.
-     */
-    ppi->pwpi->ptiScheduled = pti;
-    ppi->pwpi->CSLockCount = -1;
+        /*
+         * Force this new task to be the active task (WOW will ensure the
+         * currently running task does a Yield which will put it into the
+         * non preemptive scheduler.
+         */
+        ppi->pwpi->ptiScheduled = ptiCurrent;
+        ppi->pwpi->CSLockCount = -1;
 
-    EnterWowCritSect(pti, ppi->pwpi);
+        EnterWowCritSect(ptiCurrent, ppi->pwpi);
 
-    /*
-     * ensure app gets focus
-     */
-    _ShowStartGlass(10000);
+        /*
+         * ensure app gets focus
+         */
+        zzzShowStartGlass(10000);
+    }
 
     return STATUS_SUCCESS;
 }
 
-/***************************************************************************\
-* _ShowStartGlass
-*
-* This routine is called by WOW when first starting or when starting an
-* additional WOW app.
-*
-* 12-07-92 ScottLu      Created.
-\***************************************************************************/
-
-void _ShowStartGlass(
+#line 1377
+VOID zzzShowStartGlass(
     DWORD dwTimeout)
 {
     PPROCESSINFO ppi;
 
     /*
-     * If this is the first call to ShowStartGlass(), then the
+     * If this is the first call to zzzShowStartGlass(), then the
      * W32PF_ALLOWFOREGROUNDACTIVATE bit has already been set in the process
      * info - we don't want to set it again because it may have been
      * purposefully cleared when the user hit a key or mouse clicked.
      */
-    ppi = PtiCurrent()->ppi;
+    ppi = PpiCurrent();
     if (ppi->W32PF_Flags & W32PF_SHOWSTARTGLASSCALLED) {
         /*
          * Allow this wow app to come to the foreground. This'll be cancelled
          * if the user mouse clicks or hits any keys.
          */
-        gfAllowForegroundActivate = TRUE;
+        SET_PUDF(PUDF_ALLOWFOREGROUNDACTIVATE);
+        TAGMSG0(DBGTAG_FOREGROUND, "zzzShowStartGlass set PUDF");
         ppi->W32PF_Flags |= W32PF_ALLOWFOREGROUNDACTIVATE;
-    }
+        TAGMSG1(DBGTAG_FOREGROUND, "zzzShowStartGlass set W32PF %#p", ppi);
+}
     ppi->W32PF_Flags |= W32PF_SHOWSTARTGLASSCALLED;
 
     /*
      * Show the start glass cursor for this much longer.
      */
-    CalcStartCursorHide((PW32PROCESS)ppi, dwTimeout);
+    zzzCalcStartCursorHide((PW32PROCESS)ppi, dwTimeout);
 }
 
-#line 895
-/***************************************************************************\
-* xxxCreateThreadInfo
-*
-* Allocate the main thread information structure
-*
-* History:
-* 03-18-95 JimA         Created.
-\***************************************************************************/
+#line 1453
+VOID ClearQueueServerEvent(
+    WORD wWakeMask)
+{
+    PTHREADINFO ptiCurrent = PtiCurrent();
+    UserAssert(wWakeMask != 0);
+    ptiCurrent->pcti->fsWakeMask = wWakeMask;
+    KeClearEvent(ptiCurrent->pEventQueueServer);
+}
 
-#define STARTF_SCREENSAVER 0x80000000
-
+#line 1462
 ULONG ParseReserved(
-    WCHAR *pchReserved,
+    WCHAR *cczpReserved,
     WCHAR *pchFind)
 {
     ULONG dw;
-    WCHAR *pch, *pchT, ch;
-    UNICODE_STRING uString;
+    WCHAR *cczpch, *cczpchT, ch;
+    UNICODE_STRING cczuString;
 
     dw = 0;
-    if (pchReserved != NULL && (pch = wcsstr(pchReserved, pchFind)) != NULL) {
-        pch += wcslen(pchFind);
+    try {
+        if (cczpReserved != NULL && (cczpch = wcsstr(cczpReserved, pchFind)) != NULL) {
+            cczpch += wcslen(pchFind);
 
-        pchT = pch;
-        while (*pchT >= '0' && *pchT <= '9')
-            pchT++;
+            cczpchT = cczpch;
+            while (*cczpchT >= '0' && *cczpchT <= '9')
+                cczpchT++;
 
-        ch = *pchT;
-        *pchT = 0;
-        RtlInitUnicodeString(&uString, pch);
-        *pchT = ch;
+            ch = *cczpchT;
+            *cczpchT = 0;
+            RtlInitUnicodeString(&cczuString, cczpch);
+            *cczpchT = ch;
 
-        RtlUnicodeStringToInteger(&uString, 0, &dw);
+            RtlUnicodeStringToInteger(&cczuString, 0, &dw);
+        }
+    } except (W32ExceptionHandler(FALSE, RIP_WARNING)) {
+        return 0;
     }
 
     return dw;
 }
 
-#line 957
-#ifdef FE_IME
-#error
-#else
-#line 960
-#line 961
-#endif
-#line 962
-#line 963
-#ifdef FE_IME
-#error
-#else
-#line 966
-#line 967
-#endif
-#line 968
-#line 992
-#ifdef FE_IME
-#error
-#line 996
-#endif
-#line 997
-#line 1203
-#ifdef FE_IME
-#error
-#line 1208
-#else
-#line 1209
-#line 1210
-#endif
-#line 1211
-#line 1480
-#ifdef DEBUG
-#error
-#line 1489
-#endif
-#line 1490
-#line 1518
-#if DBG
-#error
-#endif
-#line 1521
-#line 1555
-#if DBG
-#error
-#line 1558
-#endif
-#line 1559
-#line 1598
-#if DBG
-#error
-#line 1608
-#endif
-#line 1609
-#line 1626
-#ifdef DEBUG
-#error
-#line 1635
-#endif
-#line 1636
-#line 1784
-#if DBG
-#error
-#line 1787
-#endif
-#line 1788
-#line 1915
-#ifdef FE_IME
-#error
-#line 1920
-#endif
-#line 1921
-#line 2275
-#if DBG
-#error
-#endif // DBG
-#line 2278
-#line 2282
-#if DBG
-#error
-#line 2288
-#endif // DBG
-#line 2289
-#line 2322
-#if DBG
-#error
-#endif // DBG
-#line 2325
-#line 2355
-#if DBG
-#error
-#endif // DBG
-#line 2358
-#line 2375
-#if DBG
-#error
-#endif // DBG
-#line 2378
-#line 2385
-#if DBG
-#error
-#endif // DBG
-#line 2388
-#line 2649
-#ifdef DEBUG
-#error
-#line 2657
-#endif
-#line 2658
-#line 2962
-#ifdef LOCK_MOUSE_CODE
-#error
-#endif
-#line 2965
-#line 3705
-#if DBG
-#error
-#line 3727
-#endif
-#line 3728

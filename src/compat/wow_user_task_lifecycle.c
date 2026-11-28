@@ -81,7 +81,7 @@ typedef struct wow_user_task_lifecycle_thread {
     DWORD launch_request;
     BOOL start_pending;
     BOOL debug_registered;
-    /* xxxInitTask has committed this carrier, but its one initial copied
+    /* zzzInitTask has committed this carrier, but its one initial copied
      * USER view has not yet reached the W32Thread return boundary. */
     BOOL initial_publication_pending;
     BOOL wait_publication_pending; /* Native wait omitted a guest publication. */
@@ -469,15 +469,17 @@ BOOL WINAPI wow_user_task_lifecycle_register(wow_user_task_lifecycle *owner,
 }
 
 BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
-    UINT version, DWORD compat_flags, DWORD user_flags, LPCSTR app_name,
+    UINT version, DWORD compat_flags, DWORD user_flags, LPCSTR app_name, LPCSTR base_name,
     DWORD task_id, DWORD hotkey, DWORD shared_id,
-    DWORD x, DWORD y, DWORD width, DWORD height, WORD show)
+    DWORD x, DWORD y, DWORD width, DWORD height)
 {
     wow_user_task_lifecycle_thread *task;
     wow_user_runtime_thread *binding;
-    WCHAR *wide = NULL;
-    UNICODE_STRING name;
+    WCHAR *wide[2] = {NULL, NULL};
+    LPCSTR names[2] = {app_name, base_name};
+    UNICODE_STRING name[2];
     int length;
+    unsigned i;
     NTSTATUS status;
     DWORD failure_error;
     BOOL result = FALSE;
@@ -494,10 +496,22 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
         SetLastError(ERROR_NOT_ENOUGH_MEMORY);
         return FALSE;
     }
-    length = MultiByteToWideChar(CP_ACP, 0, app_name, -1, NULL, 0);
-    if (length <= 1 || !(wide = HeapAlloc(GetProcessHeap(), 0,
-            (SIZE_T)length * sizeof(WCHAR))) || !MultiByteToWideChar(CP_ACP, 0,
-            app_name, -1, wide, length)) goto done;
+    for (i = 0; i < 2; ++i) {
+        if (!names[i]) continue;
+        length = MultiByteToWideChar(CP_ACP, 0, names[i], -1, NULL, 0);
+        if (!length) goto done;
+        if (length <= 1 || length > MAXWORD / sizeof(WCHAR)) {
+            SetLastError(ERROR_INVALID_NAME);
+            goto done;
+        }
+        wide[i] = HeapAlloc(GetProcessHeap(), 0, (SIZE_T)length * sizeof(WCHAR));
+        if (!wide[i]) {
+            SetLastError(ERROR_NOT_ENOUGH_MEMORY);
+            goto done;
+        }
+        if (!MultiByteToWideChar(CP_ACP, 0, names[i], -1, wide[i], length)) goto done;
+        RtlInitUnicodeString(&name[i], wide[i]);
+    }
     task->owner = owner;
     /* Creates the current USER queue without pumping input or creating a
      * hidden window. A task owns its native thread capability until all of
@@ -557,10 +571,10 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     if (!wow_standard_classes_publish(&owner->classes)) goto done;
     task->input_plan = wow_input_group_prepare(&owner->input);
     if (!task->input_plan) goto done;
-    RtlInitUnicodeString(&name, wide);
     __try {
-        status = task_provider->initialize(version, compat_flags, user_flags, &name, task_id, hotkey, shared_id, x, y,
-            width, height, show);
+        status = task_provider->initialize(version, compat_flags, user_flags, &name[0],
+            base_name ? &name[1] : NULL, task_id, hotkey, shared_id, x, y,
+            width, height);
     } __finally {
         wow_input_group_release_plan(task->input_plan);
         task->input_plan = NULL;
@@ -577,7 +591,8 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     } else SetLastError(RtlNtStatusToDosError(status));
 done:
     failure_error = GetLastError();
-    if (wide) HeapFree(GetProcessHeap(), 0, wide);
+    for (i = 0; i < 2; ++i)
+        if (wide[i]) HeapFree(GetProcessHeap(), 0, wide[i]);
     if (task) {
         wow_user_task_lifecycle_thread **link = &owner->threads;
         if (task->idle_observer) UnhookWindowsHookEx(task->idle_observer);
@@ -593,7 +608,7 @@ done:
         if (task->thread.native_thread) CloseHandle(task->thread.native_thread);
         if (task->debug_registered) mvdm_debug_task_retire(task->thread.native_thread_id, TRUE);
         /* queue.c DeleteThreadInfo owns this final release in original USER.
-         * xxxInitTask may allocate the name and then reject TDB allocation;
+         * zzzInitTask may allocate the name and then reject TDB allocation;
          * this project carrier must release it on rollback as well. */
         cleanup_release(task->thread.pstrAppName);
         HeapFree(GetProcessHeap(), 0, task);
@@ -1085,7 +1100,7 @@ BOOL WINAPI wow_user_task_lifecycle_publish_initial_view(
     BOOL result;
     DWORD error, saved = GetLastError();
     /* W32Thread invokes pfnInitTask immediately before it transfers control
-     * to the guest app.  xxxInitTask has now established the original task
+     * to the guest app.  zzzInitTask has now established the original task
      * carrier, but no native call has necessarily returned to trigger the
      * ordinary publication point.  Acquire the existing runtime owner and
      * use that exact publisher; this is not an independent startup view. */
@@ -1100,7 +1115,7 @@ BOOL WINAPI wow_user_task_lifecycle_publish_initial_view(
         error = ERROR_INVALID_STATE;
     } else if (!task->initial_publication_pending) {
         /* W32Thread retries pfnInitTask after a launch notification failure.
-         * Original xxxInitTask already committed, so retain its one copied
+         * Original zzzInitTask already committed, so retain its one copied
          * initial-view transaction rather than publishing it again. */
         result = TRUE;
         error = saved;

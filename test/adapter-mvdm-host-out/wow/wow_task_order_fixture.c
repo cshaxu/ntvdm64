@@ -792,13 +792,16 @@ static void initialization(void)
         if(mode==5) {
             WCHAR *invalid=VirtualAlloc(NULL,4096,MEM_RESERVE|MEM_COMMIT,PAGE_NOACCESS);
             CHECK(invalid!=NULL);name.Buffer=invalid;
-            CHECK(xxxInitTask(version,0x200u,0xffffffffu,&name,0x1234,7,0,position,20,position,40,0)==(NTSTATUS)0xc0000033);
+            CHECK(zzzInitTask(version,0x200u,0xffffffffu,&name,NULL,0x80001234,7,0,position,20,position,40)==(NTSTATUS)0xc0000033);
             CHECK(thread.pstrAppName==NULL && thread.ptdb==NULL && shared.ppiStarting==NULL);
             CHECK(!test.attached && !test.cursor && !test.profile);
             CHECK(VirtualFree(invalid,0,MEM_RELEASE));name.Buffer=L"APP.EXE";
         }
-        CHECK(xxxInitTask(version,0x200u,0xffffffffu,&name,0x1234,7,task_id,position,20,position,40,0)==0);
+        CHECK(zzzInitTask(version,0x200u,0xffffffffu,&name,NULL,0x80001234,7,task_id,position,20,position,40)==0);
         CHECK(thread.pstrAppName && thread.pstrAppName->Length==name.Length);
+        CHECK(thread.pstrAppName->MaximumLength==name.Length+sizeof(WCHAR));
+        CHECK(thread.pstrAppName->Buffer[name.Length/sizeof(WCHAR)]==0);
+        CHECK(thread.TIF_flags & WOW_TASK_TIF_16BIT);
         CHECK(!memcmp(thread.pstrAppName->Buffer,name.Buffer,name.Length));
         CHECK(thread.ptdb->hTaskWow==0x1234 && thread.ptdb->pwti==waiter);
         CHECK(!!(thread.TIF_flags&0x1000)==!!task_id);

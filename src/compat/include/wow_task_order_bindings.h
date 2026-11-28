@@ -26,6 +26,7 @@ typedef struct wow_task_order_entry {
     struct wow_task_order_thread *pti;
     struct wow_task_order_waiter *pwti;
     DWORD hTaskWow;
+    WORD TDB_Flags;
 } wow_task_order_entry;
 typedef struct wow_task_order_state {
     wow_task_order_entry *ptdbHead;
@@ -64,7 +65,7 @@ typedef struct wow_task_order_process {
     DWORD W32PF_Flags;
     struct wow_task_order_process *ppiNext;
     wow_task_startup usi;
-    DWORD dwHotkey, dwCompatFlags;
+    DWORD dwHotkey, dwCompatFlags, dwImeCompatFlags;
     UNICODE_STRING imagePathName;
     const struct wow_task_init_ops *init;
     PVOID init_context;

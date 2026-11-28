@@ -28,13 +28,21 @@ typedef struct wow_task_init_ops {
     UINT (WINAPI *profile)(wow_task_order_process *, UINT section,
         LPCWSTR key, LPCWSTR fallback, LPWSTR output, DWORD capacity);
 } wow_task_init_ops;
-NTSTATUS WINAPI xxxInitTask(UINT, DWORD, DWORD, PUNICODE_STRING, DWORD, DWORD, DWORD,
-    DWORD, DWORD, DWORD, DWORD, WORD);
-void WINAPI SetAppCompatFlags(wow_task_order_thread *);
-void WINAPI _ShowStartGlass(DWORD);
+NTSTATUS WINAPI zzzInitTask(UINT, DWORD, DWORD, PUNICODE_STRING, PUNICODE_STRING, DWORD, DWORD, DWORD,
+    DWORD, DWORD, DWORD, DWORD);
+void WINAPI SetAppStarting(wow_task_order_process *);
+void WINAPI zzzShowStartGlass(DWORD);
 
 #ifdef WOW_ORIGINAL_TASK_ORDER
 typedef wow_task_order_entry TDB;
+/* Uninstantiated XP kernel lookaside declarations; no allocator is imported. */
+typedef struct _PAGED_LOOKASIDE_LIST *PPAGED_LOOKASIDE_LIST;
+#define W32GetCurrentThread() (wow_user_runtime_current()->thread)
+#define TIF_MEOW 0x00800000u
+#ifndef ARRAY_SIZE
+#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
+#endif
+#define RIPMSG1(level, text, arg) ((void)0)
 #undef gpsi
 #define gpwtiFirst (ppi->shared->pwtiFirst)
 #define gppiStarting (ppi->shared->ppiStarting)
@@ -47,7 +55,16 @@ typedef wow_task_order_entry TDB;
 #define TIF_FIRSTIDLE WOW_TASK_TIF_FIRSTIDLE
 #define CW2_USEDEFAULT 0x8000
 #define VER31 0x030a
-#define PMAP_COMPAT 14
+#define HTW_IS16BIT 0x80000000u
+#define HTW_ISMEOW 0x40000000u
+#define TDBF_SETUP 1
+#define W32PF_SETUPAPP 0x01000000u
+#define IMECOMPAT_NOFINALIZECOMPSTR 0x00400000u
+#define IMECOMPAT_HYDRACLIENT 0x00800000u
+#define ZwQueryDefaultLocale NtQueryDefaultLocale
+#define TAGMSG0(tag,text) ((void)0)
+#define TAGMSG1(tag,text,arg) ((void)0)
+#define SET_PUDF(flag) (ppi->shared->allowForegroundActivate = TRUE)
 /* This original USER kernel slice is Unicode even in the ANSI WOW client
  * build. Retain its TEXT literals without changing the original bodies. */
 #undef TEXT
@@ -57,8 +74,8 @@ typedef wow_task_order_entry TDB;
 #endif
 #define FJOURNALRECORD() ppi->init->journal_hooked(ppi,FALSE)
 #define FJOURNALPLAYBACK() ppi->init->journal_hooked(ppi,TRUE)
-#define ReattachThreads(journal) ppi->init->reattach(ppi,journal)
-#define CalcStartCursorHide(process, timeout) (process)->init->start_cursor(process,timeout)
+#define zzzReattachThreads(journal) ppi->init->reattach(ppi,journal)
+#define zzzCalcStartCursorHide(process, timeout) (process)->init->start_cursor(process,timeout)
 #define UT_FastGetProfileStringW(section,key,fallback,out,capacity) \
     pti->ppi->init->profile(pti->ppi,section,key,fallback,out,capacity)
 #ifndef try

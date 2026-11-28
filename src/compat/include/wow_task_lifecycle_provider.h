@@ -7,8 +7,8 @@
 typedef struct wow_task_lifecycle_provider {
     BOOL (WINAPI *sleep)(BOOL, HANDLE, wow_task_order_thread *);
     VOID (WINAPI *directed_yield)(DWORD);
-    NTSTATUS (WINAPI *initialize)(UINT, DWORD, DWORD, PUNICODE_STRING, DWORD, DWORD, DWORD,
-        DWORD, DWORD, DWORD, DWORD, WORD);
+    NTSTATUS (WINAPI *initialize)(UINT, DWORD, DWORD, PUNICODE_STRING, PUNICODE_STRING, DWORD, DWORD, DWORD,
+        DWORD, DWORD, DWORD, DWORD);
     BOOL (WINAPI *register_hung_handlers)(wow_task_end_callback, HANDLE,
         wow_task_order_process *);
     BOOL (WINAPI *yield)(wow_task_order_thread *);

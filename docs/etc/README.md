@@ -2271,3 +2271,5 @@ post-publication targeted checks.
 - [N024 XP window-data migration](evidence/t485-s1/n024-getset.md).
 
 - [N024 XP profile migration](evidence/t485-s1/n024-profile.md).
+
+- [N024 XP queue call-chain audit](evidence/t485-s1/n024-queue.md).

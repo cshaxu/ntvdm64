@@ -78,9 +78,9 @@ static DWORD WINAPI child_task(void *parameter)
             SESSION_THREAD_BINDING_ORIGINAL_WORKER) ||
             !wow_user_runtime_bind(&binding, context->runtime, NULL, NULL) ||
             !wow_user_task_lifecycle_init(context->lifecycle, 0x0400, 0, 0,
-                "CHILD.EXE", 0x4321, 0, 0, (DWORD)CW_USEDEFAULT,
+                "CHILD.EXE", NULL, 0x80000000u | (0x4321), 0, 0, (DWORD)CW_USEDEFAULT,
                 (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
-                (DWORD)CW_USEDEFAULT, SW_SHOW)) goto done;
+                (DWORD)CW_USEDEFAULT)) goto done;
     thread = wow_user_runtime_current()->thread;
     window_class.lpfnWndProc = wow_window_class_creation_proc;
     window_class.hInstance = GetModuleHandleA(NULL);
@@ -152,9 +152,8 @@ int __cdecl main(void)
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
     CHECK(wow_user_task_lifecycle_initialize(&lifecycle, &runtime, &callbacks));
     CHECK(wow_user_task_lifecycle_register(&lifecycle, end_task, wowexec));
-    CHECK(wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0, "WINDOW.EXE",
-        0x1234, 0, 0, (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
-        (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT, SW_SHOW));
+    CHECK(wow_user_task_lifecycle_init(&lifecycle, 0x0400, 0, 0, "WINDOW.EXE", NULL, 0x80000000u | (0x1234), 0, 0, (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT,
+        (DWORD)CW_USEDEFAULT, (DWORD)CW_USEDEFAULT));
 
     thread = wow_user_runtime_current()->thread;
     window_class.lpfnWndProc = wow_window_class_creation_proc;

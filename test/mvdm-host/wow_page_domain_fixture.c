@@ -1903,8 +1903,7 @@ static void verify_original_modal_task(void)
 #endif
     /* Launcher metadata is outside this native-only modal row. Enter the
      * actual registered owner's original InitTask without inventing a launch. */
-    BORROW_CHECK(wow_user_task_lifecycle_init(lifecycle,0x0400, 0, 0,"MODAL.EXE",
-        0x4323,0,0,0,0,200,100,SW_HIDE));
+    BORROW_CHECK(wow_user_task_lifecycle_init(lifecycle,0x0400, 0, 0,"MODAL.EXE", NULL, 0x80000000u | (0x4323),0,0,0,0,200,100));
 #ifdef WOW_TERMINAL_SCHEDULE_FIXTURE
     verify_terminal_schedule(&binding);
 #endif
