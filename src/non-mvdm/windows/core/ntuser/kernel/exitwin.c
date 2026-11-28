@@ -1,10 +1,7 @@
 /**************************** Module Header ********************************\
 * Module Name: exitwin.c
 *
-* Copyright 1985-92, Microsoft Corporation
-*
-* NT: Logoff user
-* DOS: Exit windows
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * History:
 * 07-23-92 ScottLu      Created.
@@ -12,16 +9,39 @@
 
 #define WOW_ORIGINAL_TASK_ORDER
 #include "wow_task_order_bindings.h"
-#line 14
+#line 11
 #pragma hdrstop
 
 #define OPTIONMASK (EWX_SHUTDOWN | EWX_REBOOT | EWX_FORCE)
+
+/*
+ * Globals local to this file only
+ */
+PWINDOWSTATION  gpwinstaLogoff;
+DWORD           gdwLocks;
+DWORD           gdwShutdownFlags;
+HANDLE          gpidEndSession;
+
+#ifdef PRERELEASE
+DWORD gdwllParamCopy, gdwStatusCopy, gdwFlagsCopy;
+BOOL  gfNotifiedCopy;
+#endif // PRERELEASE
+
 #define gpwpiFirstWow (currentProcess->shared->pwpiFirstWow)
-#define UserAllocPoolWithQuota(bytes, tag) HeapAlloc(GetProcessHeap(), 0, bytes)
+#define PpiCurrent() (currentProcess)
+#define UserAllocPoolWithQuotaZInit(bytes, tag) HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, bytes)
 #define ObReferenceObjectByHandle(handle, access, type, mode, out, info) \
     (wow_task_reference_event(handle, out) ? (NTSTATUS)0 : (NTSTATUS)0xC0000001)
 
-#line 497
+#line 189
+#ifndef LATER
+#line 191
+#else
+#error
+#line 197
+#endif
+
+#line 563
 /***************************************************************************\
 * xxxRegisterUserHungAppHandlers
 *
@@ -45,10 +65,11 @@ BOOL xxxRegisterUserHungAppHandlers(
     //  Allocate the per wow process info stuff
     //  ensuring the memory is Zero init.
     //
-    pwpi = (PWOWPROCESSINFO) UserAllocPoolWithQuota(sizeof(WOWPROCESSINFO), TAG_WOW);
+    pwpi = (PWOWPROCESSINFO) UserAllocPoolWithQuotaZInit(
+            sizeof(WOWPROCESSINFO), TAG_WOWPROCESSINFO);
+
     if (!pwpi)
         return FALSE;
-    RtlZeroMemory(pwpi, sizeof(*pwpi));
 
     //
     // Reference the WowExec event for kernel access
@@ -56,7 +77,7 @@ BOOL xxxRegisterUserHungAppHandlers(
     bRetVal = NT_SUCCESS(ObReferenceObjectByHandle(
                  hEventWowExec,
                  EVENT_ALL_ACCESS,
-                 NULL,
+                 *ExEventObjectType,
                  UserMode,
                  &pwpi->pEventWowExec,
                  NULL
@@ -68,8 +89,8 @@ BOOL xxxRegisterUserHungAppHandlers(
     //
     if (bRetVal) {
         pwpi->hEventWowExecClient = hEventWowExec;
-        pwpi->lpfnWowExitTask = (DWORD)pfnW32EndTask;
-        ppi = currentProcess;
+        pwpi->lpfnWowExitTask = pfnW32EndTask;
+        ppi = PpiCurrent();
         ppi->pwpi = pwpi;
 
         // add to the list, order doesn't matter
@@ -83,13 +104,3 @@ BOOL xxxRegisterUserHungAppHandlers(
 
    return bRetVal;
 }
-
-
-#line 134
-#ifndef LATER
-#line 136
-#else
-#error
-#line 142
-#endif
-#line 143

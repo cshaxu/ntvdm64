@@ -1,0 +1,405 @@
+{
+  "task": "M0 T485 S15 P76",
+  "start_head": "cae0623c6b1042343eca9322b7ed3472710cc8e5",
+  "runtime": "build\\t485-s15\\runtime92",
+  "publication": [
+    {
+      "pass": true,
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "593A2C989178DC2B741EA986413516A7727BB19D9F44C2C034CA8AEA1EB58628"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "593A2C989178DC2B741EA986413516A7727BB19D9F44C2C034CA8AEA1EB58628"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "E637A734516510FBE76C74F6AB938C67E841FA8E854D4914661D0F375725D755"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "E637A734516510FBE76C74F6AB938C67E841FA8E854D4914661D0F375725D755"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "5C11A366C1A5360A79BFD9C2FCB564E4E007E2648F0B0A9241CE47B52AEF4D81"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "5C11A366C1A5360A79BFD9C2FCB564E4E007E2648F0B0A9241CE47B52AEF4D81"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\run16.exe",
+      "sha256": "56BE1052C5D6F9883CDA1574A7189FC6F34C7617AC83167500B8A2A9303EFEB6"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "56BE1052C5D6F9883CDA1574A7189FC6F34C7617AC83167500B8A2A9303EFEB6"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "A83C0379C4F74797272AE6516DE4806E63CC5497F4FDEC8FBB0AAB5DA9C10D8E"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "A83C0379C4F74797272AE6516DE4806E63CC5497F4FDEC8FBB0AAB5DA9C10D8E"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "0D1B7F5C5974D50ED6E212CE36D0ED30C660C905DE27FF8CBB594C2D83B23CC3"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "0D1B7F5C5974D50ED6E212CE36D0ED30C660C905DE27FF8CBB594C2D83B23CC3"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "3A7E499AE2A64F247277F5A74C59E6532EEB53C956B66A89419DE248DED0909C"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "3A7E499AE2A64F247277F5A74C59E6532EEB53C956B66A89419DE248DED0909C"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "B23C344DCC9A70DD411E4CCF2D9E1C4B82A8883339F8B97F2ACB5C087DB40D60"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "B23C344DCC9A70DD411E4CCF2D9E1C4B82A8883339F8B97F2ACB5C087DB40D60"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "264222524DA92CC6A5C0E2F769EDB504426DB2B190A104AF38C49C0A6D2D7241"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "264222524DA92CC6A5C0E2F769EDB504426DB2B190A104AF38C49C0A6D2D7241"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FBFBFEA20D9B78952F7C3B04C79C153696289252168A7A3CFDDEE6AA9A162687"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "FBFBFEA20D9B78952F7C3B04C79C153696289252168A7A3CFDDEE6AA9A162687"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "4B74E6001BDF11F50267BC725FB5E56B6357BE75059C78C9F25E5050BFD27C08"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "4B74E6001BDF11F50267BC725FB5E56B6357BE75059C78C9F25E5050BFD27C08"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "702CD4023AF82D3EAFBEE2F0E348DB3B0642E9C183F1B2D9CF52D3D3826FA152"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "702CD4023AF82D3EAFBEE2F0E348DB3B0642E9C183F1B2D9CF52D3D3826FA152"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "18DEED8A2E196C395C54376362F76D4365AAE62D985E66703112CB310A87803C"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "18DEED8A2E196C395C54376362F76D4365AAE62D985E66703112CB310A87803C"
+    }
+  ],
+  "census": {
+    "status": "verified-runtime92",
+    "before": {
+      "files": 1332,
+      "byte_identical": 792,
+      "nonerror_identical": 803,
+      "nonerror_different": 529,
+      "nonerror_points": 7957,
+      "nonerror_lines": 63392
+    },
+    "after": {
+      "files": 1332,
+      "byte_identical": 792,
+      "nonerror_identical": 803,
+      "nonerror_different": 529,
+      "nonerror_points": 7961,
+      "nonerror_lines": 63292
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 4,
+      "nonerror_lines": -100
+    },
+    "files": [
+      {
+        "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\exitwin.c",
+        "before_points": 1,
+        "before_lines": 646,
+        "after_points": 5,
+        "after_lines": 546,
+        "baseline": "XP",
+        "blob": "675433e732790375b7d6c9bb01a55bebf86ca84f",
+        "normalized": {
+          "points": 5,
+          "lines": 546,
+          "excluded": 1
+        },
+        "sha256": "a9b9dc1d5ccf711d90a39d21f4c8161377a7324866142a56e5edaf7f247d633a"
+      }
+    ]
+  },
+  "tests": {
+    "task-order": {
+      "path": "build\\t485-s15\\n024-exitwin\\task-order.log",
+      "sha256": "485fb515bdd60255e3b54db8ee5138866ad8acf994e4e0d05aed2e74fc518d1e",
+      "result": "WOW_ORIGINAL_TASK_ELIGIBILITY errors=0 persistent=1 events_preserved=1 lock=1 idle=1 hardware=1\nWOW_ORIGINAL_TASK_ORDER errors=0 sequences=5 send_reply=4 same_worker_nested=4 native_send=3 native_same_thread=1 locks=6 destruction=7 waits=4 directed=6 registration=6 init=8\nWOW_FIXTURE_OK case=task-order\n"
+    },
+    "task-lifecycle": {
+      "path": "build\\t485-s15\\n024-exitwin\\task-lifecycle.log",
+      "sha256": "3b10b057176d2e42598f979ca5cf64eddf10c187ab1039eb723324c561655a3f",
+      "result": "WOW_STANDARD_CLASS_ADMISSION projected=9 calls=10 retry=1 errors=0\nWOW_CONTROL_CALLOUT paints=2 texts=3 errors=0\nWOW_NATIVE_EXECUTION_SCOPES errors=0 inline=1 nested=1 wait=1 unbind_rejected=1\nWOW_NATIVE_QUEUE_PRECONDITION errors=0 drained=0 own_preserved=1\nWOW_NATIVE_QUIT_ORDER errors=0 wide=0 sentinel=1 exit=41 bound=64\nWOW_NATIVE_QUIT_ORDER errors=0 wide=1 sentinel=1 exit=42 bound=64\nWOW_USER_TASK_LIFECYCLE errors=0 native_direct=5\nWOW_FIXTURE_OK case=task-lifecycle\n"
+    },
+    "process-retirement": {
+      "path": "build\\t485-s15\\n024-exitwin\\process-retirement.log",
+      "sha256": "7796d0c4b97e12d1cf718b779154755495ad758b2af612975fcf5f3443d58174",
+      "result": "WOW_PROCESS_RETIREMENT errors=0 startup-rollback/cleanup-atomic/task/object/class/refusal/retry/event/native checked\nWOW_FIXTURE_OK case=process-retirement\n"
+    }
+  },
+  "guest_controls": {
+    "records": [
+      {
+        "phase": 0,
+        "errors": 0,
+        "created": 0,
+        "button": 0,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 1,
+        "errors": 0,
+        "created": 2,
+        "button": 1,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 2,
+        "errors": 0,
+        "created": 3,
+        "button": 1,
+        "single": 1,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 3,
+        "errors": 0,
+        "created": 4,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 4,
+        "errors": 0,
+        "created": 8,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 0
+      },
+      {
+        "phase": 5,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 6,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 7,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 8,
+        "errors": 0,
+        "created": 13,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 2,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      }
+    ],
+    "pass": true,
+    "worker": "63CB7491466D22AA22E72241736B47FA5D29DCC7FDED30D08CE7CA79DE02BD8C",
+    "package": "09B41A5B21C58AB0BB9BEF02A884B4A1186B1BB8D2036EEE0EEF82449E96966B",
+    "wow": "036DE9CA9B051B59A93B1B5F3924461C153082F5D0068C21E7E079C9C92335DE"
+  },
+  "line_audit": {
+    "file": "exitwin.c",
+    "unchanged_nonblank_checked": 77,
+    "mismatches": []
+  },
+  "source": {
+    "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\exitwin.c",
+    "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+    "xp_blob": "675433e732790375b7d6c9bb01a55bebf86ca84f",
+    "old_blob": "b475f44d3102bd70dfde46ff8ed40182a36404c0",
+    "before_sha256": "1a4a6b65882593cf8ec079e650366013a3b87ff4968d64f3b8e000624fa89197",
+    "after_sha256": "a9b9dc1d5ccf711d90a39d21f4c8161377a7324866142a56e5edaf7f247d633a",
+    "function_line": 574,
+    "omitted_functions": {
+      "BOOL PrepareForLogoff": 33,
+      "BOOL NotifyLogon": 73,
+      "NTSTATUS InitiateShutdown": 126,
+      "NTSTATUS EndShutdown": 332,
+      "LONG xxxClientShutdown2": 437,
+      "LONG xxxClientShutdown": 530
+    }
+  },
+  "original_guest_unchanged": true,
+  "full_checkpoint": "P75 runtime91 Full24/24; one completed file since",
+  "baseline_counts": {
+    "XP": 1316,
+    "OpenNT": 16
+  }
+}

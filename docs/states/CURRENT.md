@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall59/159 directories, H001-H036 and N001-N023. S15 runtime91 is the current
+overall59/159 directories, H001-H036 and N001-N023. S15 runtime92 is the current
 published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
@@ -183,6 +183,15 @@ Census1332/792/803/529/7957/63392; delta0/0/0/0/+9/-881;
 five changed mirrors plus eight files since P69; new checkpoint count0.
 N0242/9; S15 remains11/14 and overall59/159 directories. Next exitwin.c.
 No S/T closure. Win95 retains its approved exit-one boundary.
+
+[P76 XP WOW registration](../etc/evidence/t485-s1/n024-exitwin.md) verified
+runtime92: original zero-init/event/callback registration, retained harmless
+declarations, unchanged event reference ownership. Cached build, dual26hash,
+task-order, task/process lifecycle and genuine Win16 controls pass.
+Census1332/792/803/529/7961/63292; delta0/0/0/0/
++4/-100;1316XP/16OpenNT. Original LF recovery exposes bounded spans.
+N0243/9; S15 11/14; overall59/159. One file since P75 Full24/24.
+Next getset.c; no S/T closure.
 
 ## S14 Closure Record
 

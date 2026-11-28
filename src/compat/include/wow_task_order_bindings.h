@@ -18,6 +18,7 @@
  * A future complete scheduler owner must serialize every list mutation and
  * retain every task until unlinked. Registration allocates a process view,
  * not a native process, task or thread. */
+typedef VOID (WINAPI *wow_task_end_callback)(VOID);
 typedef struct wow_task_order_entry {
     struct wow_task_order_entry *ptdbNext;
     int nPriority;
@@ -36,7 +37,7 @@ typedef struct wow_task_order_state {
     LONG CSLockCount;
     HANDLE pEventWowExec;
     HANDLE hEventWowExecClient;
-    DWORD lpfnWowExitTask;
+    wow_task_end_callback lpfnWowExitTask;
     struct wow_task_order_state *pwpiNext;
 } wow_task_order_state;
 typedef struct wow_task_order_waiter {
@@ -174,7 +175,6 @@ BOOL WINAPI wow_task_resource_cleanup_enter(wow_task_callback_scope *);
  * it must not convert failed restoration into a guest callback result. Both
  * successful operations preserve the caller's last-error value. */
 BOOL WINAPI wow_task_callback_leave(wow_task_callback_scope *);
-typedef VOID (WINAPI *wow_task_end_callback)(VOID);
 BOOL WINAPI xxxRegisterUserHungAppHandlers(wow_task_end_callback, HANDLE, wow_task_order_process *);
 #define WOW_TASK_TIF_INCLEANUP 0x00000001u
 #define WOW_TASK_TIF_16BIT 0x00000002u

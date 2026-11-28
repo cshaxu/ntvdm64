@@ -683,7 +683,7 @@ static void registration(void)
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
     CHECK(xxxRegisterUserHungAppHandlers(end_task,event,&first));
     CHECK(first.pwpi && shared.pwpiFirstWow==first.pwpi);
-    CHECK(first.pwpi->lpfnWowExitTask==(DWORD)end_task && first.pwpi->hEventWowExecClient==event);
+    CHECK(first.pwpi->lpfnWowExitTask==end_task && first.pwpi->hEventWowExecClient==event);
     CHECK(first.pwpi->ptdbHead==NULL && first.pwpi->nTaskLock==0 && first.pwpi->CSLockCount==0);
     /* Original registration records, but does not validate/call, callback. */
     CHECK(xxxRegisterUserHungAppHandlers(NULL,event,&second));

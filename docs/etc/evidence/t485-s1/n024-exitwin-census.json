@@ -1,0 +1,44 @@
+{
+  "status": "verified-runtime92",
+  "before": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7957,
+    "nonerror_lines": 63392
+  },
+  "after": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7961,
+    "nonerror_lines": 63292
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 4,
+    "nonerror_lines": -100
+  },
+  "files": [
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\exitwin.c",
+      "before_points": 1,
+      "before_lines": 646,
+      "after_points": 5,
+      "after_lines": 546,
+      "baseline": "XP",
+      "blob": "675433e732790375b7d6c9bb01a55bebf86ca84f",
+      "normalized": {
+        "points": 5,
+        "lines": 546,
+        "excluded": 1
+      },
+      "sha256": "a9b9dc1d5ccf711d90a39d21f4c8161377a7324866142a56e5edaf7f247d633a"
+    }
+  ]
+}

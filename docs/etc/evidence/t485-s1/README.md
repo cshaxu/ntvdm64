@@ -326,3 +326,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P74 class registration migration](n024-class.md).
 
 - [N024 cleanup producer and lifecycle review](n024-cleanup-review.md).
+
+- [N024 XP hung-handler registration](n024-exitwin.md).

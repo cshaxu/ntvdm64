@@ -2265,3 +2265,5 @@ post-publication targeted checks.
 - [S15 P74 class registration migration](evidence/t485-s1/n024-class.md).
 
 - [N024 cleanup producer and lifecycle review](evidence/t485-s1/n024-cleanup-review.md).
+
+- [N024 XP hung-handler registration](evidence/t485-s1/n024-exitwin.md).
