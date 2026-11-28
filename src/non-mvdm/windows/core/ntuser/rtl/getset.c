@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: getset.c
 *
-* Copyright (c) 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains window manager information routines
 *
@@ -11,175 +11,76 @@
 * 08-Feb-1991 IanJa     Unicode/ANSI aware and neutral
 \***************************************************************************/
 
-#include "precomp.h"
-#line 14
-DWORD MapServerToClientPfn(DWORD dw, BOOL bAnsi);
-DWORD GetWindowData(PWND pwnd, int index, BOOL bAnsi);
-
 /***************************************************************************\
-* _GetWindowLong (supports GetWindowLongA/W API)
+* MapServerToClientPfn
 *
-* Return a window long.  Positive index values return application window longs
-* while negative index values return system window longs.  The negative
-* indices are published in WINDOWS.H.
+* Returns the client wndproc representing the server wndproc passed in
 *
-* History:
-* 11-26-90 darrinm      Wrote.
+* 01-13-92 ScottLu      Created.
 \***************************************************************************/
 
-#line 28
-DWORD _GetWindowLong(
-    PWND pwnd,
-    int index,
+ULONG_PTR MapServerToClientPfn(
+    KERNEL_ULONG_PTR dw,
     BOOL bAnsi)
 {
-    DWORD           dwProc;
-    DWORD           dwCPDType = 0;
-    DWORD UNALIGNED *pudw;
+    int i;
+
+    for (i = FNID_WNDPROCSTART; i <= FNID_WNDPROCEND; i++) {
+        if ((WNDPROC_PWND)dw == STOCID(i)) {
+            if (bAnsi) {
+                return FNID_TO_CLIENT_PFNA_CLIENT(i);
+            } else {
+                return FNID_TO_CLIENT_PFNW_CLIENT(i);
+            }
+        }
+    }
+    return 0;
+}
+
+/***************************************************************************\
+* MapClientNeuterToClientPfn
+*
+* Maps client Neuter routines like editwndproc to Ansi or Unicode versions
+* and back again.
+*
+* 01-13-92 ScottLu      Created.
+\***************************************************************************/
+
+ULONG_PTR MapClientNeuterToClientPfn(
+    PCLS pcls,
+    KERNEL_ULONG_PTR dw,
+    BOOL bAnsi)
+{
+    /*
+     * Default to the class window proc.
+     */
+    if (dw == 0) {
+        dw = (KERNEL_ULONG_PTR)pcls->lpfnWndProc;
+    }
 
     /*
-     * If it's a dialog window, only a few indices are permitted.
+     * If this is one of our controls and it hasn't been subclassed, try
+     * to return the correct ANSI/Unicode function.
      */
-    if (GETFNID(pwnd) != 0) {
-        if (TestWF(pwnd, WFDIALOGWINDOW)) {
-            switch (index) {
-            case DWL_DLGPROC:     // See similar case GWL_WNDGPROC
-
-                /*
-                 * Hide the window proc from other processes
-                 */
-                if (!TestWindowProcess(pwnd)) {
-                    RIPERR1(ERROR_ACCESS_DENIED,
-                            RIP_WARNING,
-                            "Access denied to \"pwnd\" (%#lx) in _GetWindowLong",
-                            pwnd);
-
-                    return 0;
-                }
-
-#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-                return wow_dialog_host_get(HW(pwnd), index, bAnsi);
-#else
-#line 57
-                dwProc = (DWORD)PDLG(pwnd)->lpfnDlg;
-
-                /*
-                 * If a proc exists check it to see if we need a translation
-                 */
-                if (dwProc) {
-
-                    /*
-                     * May need to return a CallProc handle if there is an
-                     * Ansi/Unicode transition
-                     */
-                    if (bAnsi != ((PDLG(pwnd)->flags & DLGF_ANSI) ? TRUE : FALSE)) {
-                        dwCPDType |= bAnsi ? CPD_ANSI_TO_UNICODE : CPD_UNICODE_TO_ANSI;
-                    }
-
-                    if (dwCPDType) {
-                        DWORD cpd;
-
-                        cpd = (DWORD)GetCPD(pwnd, dwCPDType | CPD_DIALOG, dwProc);
-
-                        if (cpd) {
-                            dwProc = cpd;
-                        } else {
-                            RIPMSG0(RIP_WARNING, "GetWindowLong unable to alloc CPD returning handle\n");
-                        }
-                    }
-                }
-
-                /*
-                 * return proc (or CPD handle)
-                 */
-                return dwProc;
-#endif
-
-#line 90
-            case DWL_MSGRESULT:
-#ifdef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-                 return wow_dialog_host_get(HW(pwnd), index, bAnsi);
-#else
-#line 91
-                 return (DWORD)((PDIALOG)pwnd)->resultWP;
-#endif
-
-#line 93
-            case DWL_USER:
-                 return (DWORD)((PDIALOG)pwnd)->unused;
-
-            default:
-                if (index >= 0 && index < DLGWINDOWEXTRA) {
-                    RIPERR0(ERROR_PRIVATE_DIALOG_INDEX, RIP_VERBOSE, "");
-                    return 0;
-                }
-            }
+    if (pcls->fnid >= FNID_CONTROLSTART && pcls->fnid <= FNID_CONTROLEND) {
+        if (!bAnsi) {
+            if (FNID_TO_CLIENT_PFNA_KERNEL(pcls->fnid) == dw)
+                return FNID_TO_CLIENT_PFNW_CLIENT(pcls->fnid);
         } else {
-            if (index >= 0 &&
-                    (index < (int)(CBFNID(pwnd->fnid)-sizeof(WND)))) {
-                switch (GETFNID(pwnd)) {
-                case FNID_MDICLIENT:
-                    /*
-                     * Allow the 0 index (which is reserved) to be set/get.
-                     * Quattro Pro 1.0 uses this index!
-                     */
-                    if (index != 0)
-                        break;
-
-                    goto GetData;
-                    break;
-
-                case FNID_EDIT:
-
-                    if (index != 0)
-                        break;
-
-                    /*
-                     * If we get to this point we need to return the first
-                     * entry in the lookaside.  This will provide backward
-                     * compatibilty for 3.51 that allowed edit-controls to
-                     * do this.  PeachTree is one app which required this.
-                     */
-                    pudw = (DWORD UNALIGNED *)((BYTE *)(pwnd + 1));
-
-                    /*
-                     * Do not dereference the pointer if we are not in
-                     *  the proper address space. Apps like Spyxx like to
-                     *  do this on other process' windows
-                     */
-                    return (TestWindowProcess(pwnd) ? *(DWORD UNALIGNED *)*pudw : (DWORD)pudw);
-
-                }
-
-#ifndef _USERK_
-                RIPERR3(ERROR_INVALID_INDEX,
-                        RIP_WARNING,
-                        "GetWindowLong: Trying to read private server data pwnd=(%lX) index=(%ld) fnid (%lX)",
-                        pwnd, index, (DWORD)pwnd->fnid);
-                return 0;
-#endif
-            }
+            if (FNID_TO_CLIENT_PFNW_KERNEL(pcls->fnid) == dw)
+                return FNID_TO_CLIENT_PFNA_CLIENT(pcls->fnid);
         }
+#ifdef BUILD_WOW6432
+        if (!bAnsi) {
+            if (FNID_TO_CLIENT_PFNW_KERNEL(pcls->fnid) == dw)
+                return FNID_TO_CLIENT_PFNW_CLIENT(pcls->fnid);
+        } else {
+            if (FNID_TO_CLIENT_PFNA_KERNEL(pcls->fnid) == dw)
+                return FNID_TO_CLIENT_PFNA_CLIENT(pcls->fnid);
+        }
+        dw = (KERNEL_ULONG_PTR)MapKernelClientFnToClientFn((WNDPROC_PWND)dw);
+#endif
     }
 
-    if (index < 0) {
-#ifdef WOW_ORIGINAL_PRIVATE_WORD_GETTER
-        RIPERR0(ERROR_INVALID_INDEX, RIP_VERBOSE, "");
-        return 0;
-#else
-#line 151
-        return GetWindowData(pwnd, index, bAnsi);
-#endif
-#line 152
-    } else {
-        if (index + (int)sizeof(DWORD) > pwnd->cbwndExtra) {
-            RIPERR0(ERROR_INVALID_INDEX, RIP_VERBOSE, "");
-            return 0;
-        } else {
-
-GetData:
-            pudw = (DWORD UNALIGNED *)((BYTE *)(pwnd + 1) + index);
-            return *pudw;
-        }
-    }
+    return (ULONG_PTR)dw;
 }
