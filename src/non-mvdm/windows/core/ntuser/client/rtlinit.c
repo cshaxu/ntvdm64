@@ -321,16 +321,16 @@ PVOID AllocLookasideEntry(
          */
 #if DBG
 #error DIVERGENCE: original configuration not selected.
-#line 321
 #endif // DBG
+#line 322
         if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)
             return NULL;
         }
     RtlZeroMemory(pEntry, pla->EntrySize);
 #if DBG
 #error DIVERGENCE: original configuration not selected.
-#line 332
 #endif // DBG
+#line 333
 
     return pEntry;
 }
@@ -349,8 +349,8 @@ void FreeLookasideEntry(
 {
 #if DBG
 #error DIVERGENCE: original configuration not selected.
-#line 351
 #endif // DBG
+#line 352
 
     //
     // If the pEntry was from zone, then free to zone
@@ -362,8 +362,8 @@ void FreeLookasideEntry(
     } else {
 #if DBG
 #error DIVERGENCE: original configuration not selected.
-#line 363
 #endif // DBG
+#line 364
         UserLocalFree(pEntry);
     }
 }

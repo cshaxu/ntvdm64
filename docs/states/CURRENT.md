@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall58/159 directories, H001-H036 and N001-N022. S15 runtime79 is the current
+overall58/159 directories, H001-H036 and N001-N022. S15 runtime80 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -106,70 +106,10 @@ delta0files/+1exact/+1same/-1different/+11points/-1266lines.1262XP/63OpenNT.
 N02117/17 complete; overall57/159, S15 9/14. Six mirror files completed since
 P26 Full24/24. Next N022 USER client in DIR order; original guest unchanged.
 
-[P30 N022 button](../etc/evidence/t485-s1/n022-button.md) delivered runtime31;
-its receipt retains the paired ABI, tests, census and checkpoint counts.
-
-[P31 N022 bitmap](../etc/evidence/t485-s1/n022-dib.md),
-[P32 N022 globals](../etc/evidence/t485-s1/n022-globals.md) and
-[P33 N022 menu](../etc/evidence/t485-s1/n022-menu.md) delivered.
-Their receipts retain full package identities, tests, per-file/global census,
-failed attempts and source boundaries; P31 includes Full24/24.
-
-[P34 N022 messages](../etc/evidence/t485-s1/n022-message.md) and
-[P35 N022 resources](../etc/evidence/t485-s1/n022-resources.md) are delivered.
-Their receipts retain original ABI, package identities, tests, initial failures,
-per-file/global census and original baseline transitions.
-
-[P36 N022 combo](../etc/evidence/t485-s1/n022-combo.md) delivered runtime41,
-cached build, dual publication, controls/lifecycle/SOL and Full24/24. This is
-that Full checkpoint; its receipt retains all census and initial failures.
-
-[P37 combo initialization](../etc/evidence/t485-s1/n022-comboini.md) and
-[P38 combo directory](../etc/evidence/t485-s1/n022-combodir.md) are delivered.
-Their receipts retain source identities, ordered-DIR correction, package/tests,
-complete census and checkpoint counts. No guest changes.
-
-[P39 dialog creation](../etc/evidence/t485-s1/n022-dlgbegin-review.md) and
-[P40 dialog ending](../etc/evidence/t485-s1/n022-dlgend.md) delivered runtime44/45.
-Their receipts preserve source identities, complete census, initial failures
-and final build/publication/control/lifecycle/SOL evidence. No guest changes.
-
-[P41 N022 dialog manager](../etc/evidence/t485-s1/n022-dlgmgr.md) delivered
-runtime46 and its recorded targeted gates; its receipt retains full census.
-
-[P42 dialog keyboard](../etc/evidence/t485-s1/n022-dlgmgr2.md) delivered
-runtime47 and Full24/24; its receipt preserves ABI, all attempts and census.
-[P43 dialog navigation](../etc/evidence/t485-s1/n022-dlgmgrc.md) and
-[P44 mnemonics](../etc/evidence/t485-s1/n022-dmmnem.md) delivered runtime48/49,
-with cached build, dual publication and targeted gates; their linked receipts
-retain full source, census and runtime evidence.
-
-[P45 N022 control drawing](../etc/evidence/t485-s1/n022-draw.md) delivered
-runtime50 with draw.c byte-identical to XP. Its receipt retains full census,
-source identity, dual publication and targeted runtime verification.
-
-[P46 XP text drawing](../etc/evidence/t485-s1/n022-drawtext.md) delivered
-runtime54; its receipt retains client/RTL source identities, native GDI
-bindings, package/tests, full census and initial failure history.
-
-[P47 EDIT rare operations](../etc/evidence/t485-s1/n022-edecrare.md) delivered
-runtime55; its receipt retains original identities, paired ABI, initial fixture
-failure, final publication/targeted verification and full mirror census.
-
-[P48 EDIT core](../etc/evidence/t485-s1/n022-editec.md) delivered runtime57;
-its receipt retains XP algorithms, IME boundary, package/tests and census.
-
-[P49 multiline EDIT](../etc/evidence/t485-s1/n022-editml.md) delivered runtime58;
-its receipt retains original algorithms, native providers, package and tests.
-
-[P50 single-line EDIT](../etc/evidence/t485-s1/n022-editsl.md) delivered runtime59;
-its receipt retains original algorithms, paired ABI, package/tests and full
-mirror census. No guest change or S/T closure.
-
-[P51 multiline creation](../etc/evidence/t485-s1/n022-edmlonce.md) delivered
-runtime60 with exact XP source and Full24/24. Its receipt retains provider
-binding, initial failure, final package/tests and complete mirror census.
-P51 is the previous ten-file Full checkpoint.
+P30-P51 N022 deliveries remain in the indexed
+[S15 evidence directory](../etc/evidence/t485-s1/README.md), with their individual
+source identities, ABI decisions, publication hashes, tests and full census.
+Full checkpoints in this range are P31, P36, P42 and P51; P61 superseded them.
 
 [P52](../etc/evidence/t485-s1/n022-edmlrare.md),
 [P53](../etc/evidence/t485-s1/n022-edslrare.md),
@@ -190,7 +130,7 @@ runtime68; its receipt retains byte identity, real multi-column scrolling and ce
 [P60 ListBox auxiliary operations](../etc/evidence/t485-s1/n022-lboxrare.md)
 delivered runtime69; its receipt retains source identity, tests and census.
 [P61 directory ListBox](../etc/evidence/t485-s1/n022-lboxctl3.md) delivered
-runtime70 and Full24/24, the current ten-file checkpoint. Its receipt retains
+runtime70 and Full24/24, the previous ten-file checkpoint. Its receipt retains
 original exclusions, directory-order correction, census and final tests.
 [P62 variable-height ListBox](../etc/evidence/t485-s1/n022-lboxvar.md) delivered
 runtime71; original bytes and targeted verification retained in its receipt.
@@ -204,13 +144,15 @@ its receipt retains source/dependency identities, resource and runtime verificat
 receipt retains verification.
 [P67 USER client declarations](../etc/evidence/t485-s1/n022-usercli.md) delivered
 runtime78; see receipt.
-[P68 client window helpers](../etc/evidence/t485-s1/n022-winmgrc.md) delivered runtime79.
-Build, dual26hash, controls40/40, standard-class, SOL Options and
-real Win16 controls pass. N02239/39; S15 10/14, overall58/159.
-Census1330/789/800/530/7971/66379; delta0/0/0/0/+6/+1169;1307XP/23OpenNT.
-Nine files since P61 Full24/24. Next N023 plus recorded P66 #line correction;
-next changed mirror triggers Full. Baseline/format delta explained in receipt.
-No S/T closure.
+[P68 client window helpers](../etc/evidence/t485-s1/n022-winmgrc.md) delivered
+runtime79 and completed N02239/39. Its receipt retains all tests and census.
+[P69 diagnostic mapping and N023 audit](../etc/evidence/t485-s1/n023-ntcftxt-review.md)
+delivered runtime80: cached build, dual26hash, selected compiler-line verification
+and Full24/24 pass. This resolves P66's #line placement error and is the current
+ten-file Full checkpoint. N023 first-file ABI review is recorded, not migrated; capture and
+class-publication ABI dependencies must migrate together.
+S15 10/14; overall58/159. Census1330/789/800/530/7971/66379;
+all six deltas0;1307XP/23OpenNT. No S/T closure. Next N023 in DIR order.
 
 ## S14 Closure Record
 

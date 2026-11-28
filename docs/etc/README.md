@@ -2251,3 +2251,5 @@ post-publication targeted checks.
 - [S15 P67 USER client declarations](evidence/t485-s1/n022-usercli.md).
 
 - [S15 P68 client window helpers](evidence/t485-s1/n022-winmgrc.md).
+
+- [S15 P69 diagnostic mapping and N023 dependency audit](evidence/t485-s1/n023-ntcftxt-review.md).

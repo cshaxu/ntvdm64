@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1330,
+    "byte_identical": 789,
+    "nonerror_identical": 800,
+    "nonerror_different": 530,
+    "nonerror_points": 7971,
+    "nonerror_lines": 66379
+  },
+  "after": {
+    "files": 1330,
+    "byte_identical": 789,
+    "nonerror_identical": 800,
+    "nonerror_different": 530,
+    "nonerror_points": 7971,
+    "nonerror_lines": 66379
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 0,
+    "nonerror_lines": 0
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "before_points": 6,
+      "before_lines": 11,
+      "after_points": 6,
+      "after_lines": 11,
+      "exclusions": 4
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1307,
+    "OpenNT": 23
+  }
+}

@@ -1,0 +1,353 @@
+{
+  "task": "M0 T485 S15 P69",
+  "runtime": "build\\t485-s15\\runtime80",
+  "package_id": "FBD05A01-6A3C-4F5F-A8B1-561893E78745",
+  "build_exit": 0,
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "ECA2CC5A68C328A98F6DBFED61C1223EF5DEF75930101B45C9561E0D065A58F2",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "ECA2CC5A68C328A98F6DBFED61C1223EF5DEF75930101B45C9561E0D065A58F2",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "780508CDC0B9F7075ED7807B41DC522E5F2D1ACC749145DA5E71452B51E588F9",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "780508CDC0B9F7075ED7807B41DC522E5F2D1ACC749145DA5E71452B51E588F9",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "2652BEF11230DF400BFE7E8251DD0416F8BEE6CED58ED935CDB2C56EEF7894AF",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "2652BEF11230DF400BFE7E8251DD0416F8BEE6CED58ED935CDB2C56EEF7894AF",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "2C1A11A028D19BF54F7FCB98687BE857AD77CDAD32A311EF978D037DF1D54951",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "2C1A11A028D19BF54F7FCB98687BE857AD77CDAD32A311EF978D037DF1D54951",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "03D8117DB232F0B643A1F23DF1FE1BE6449613891C2784D9DE7B4A50F5F7FC90",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "03D8117DB232F0B643A1F23DF1FE1BE6449613891C2784D9DE7B4A50F5F7FC90",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "70412BF804E1DA3C60E6C913453066E040FF0C4A64DB3256110D01DD82F64231",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "70412BF804E1DA3C60E6C913453066E040FF0C4A64DB3256110D01DD82F64231",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "97529541890A2C03AAB73714D84D3A0858EA55A8889928400F35363A5659DF01",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "97529541890A2C03AAB73714D84D3A0858EA55A8889928400F35363A5659DF01",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "F6829A2251C9F983DD4AE0DD00747FFECA1835BC044C78047FC00498FA7C0FB8",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "F6829A2251C9F983DD4AE0DD00747FFECA1835BC044C78047FC00498FA7C0FB8",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "1EC0C3796F63A859C1EA764C0B0877165598332A4CC9079BC744CB3EA83CF986",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "1EC0C3796F63A859C1EA764C0B0877165598332A4CC9079BC744CB3EA83CF986",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "8C87ECF0A9A606B25C4EB41AD5A4969BC22B07175C373D2F139355AF5585B5B3",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "8C87ECF0A9A606B25C4EB41AD5A4969BC22B07175C373D2F139355AF5585B5B3",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "DE280916C1A957CFE9358E2C8E6AF2A5E7E53D406390676D7FD2E5E27413F31E",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "DE280916C1A957CFE9358E2C8E6AF2A5E7E53D406390676D7FD2E5E27413F31E",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "B188B71721D43BDCA285A1EAD2886B7A47D9B7B2C269D40E9754FA03C5A6B9AE",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "B188B71721D43BDCA285A1EAD2886B7A47D9B7B2C269D40E9754FA03C5A6B9AE",
+      "pass": true
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "38B91A6D6BECFE158D10F1B9A8AB83E83F9EFB1C31CAED49A793F8E6F6128E71",
+      "pass": true
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "38B91A6D6BECFE158D10F1B9A8AB83E83F9EFB1C31CAED49A793F8E6F6128E71",
+      "pass": true
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 740921,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": true,
+    "PreparationMs": 25371,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1490,
+        "CleanupMs": 373,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-standard",
+        "ElapsedMs": 59300,
+        "CleanupMs": 284,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-enhanced",
+        "ElapsedMs": 92515,
+        "CleanupMs": 329,
+        "Passed": true
+      },
+      {
+        "Gate": "win95",
+        "ElapsedMs": 136599,
+        "CleanupMs": 318,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-sol-options",
+        "ElapsedMs": 24868,
+        "CleanupMs": 294,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 26961,
+        "CleanupMs": 286,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 20735,
+        "CleanupMs": 362,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 20601,
+        "CleanupMs": 299,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 190,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65721,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 45514,
+        "CleanupMs": 333,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 40944,
+        "CleanupMs": 292,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15130,
+        "CleanupMs": 331,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9141,
+        "CleanupMs": 319,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 2696,
+        "CleanupMs": 326,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12502,
+        "CleanupMs": 336,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 35555,
+        "CleanupMs": 329,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 40789,
+        "CleanupMs": 362,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4755,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 8724,
+        "CleanupMs": 350,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10733,
+        "CleanupMs": 293,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3715,
+        "CleanupMs": 326,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7712,
+        "CleanupMs": 299,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20284,
+        "CleanupMs": 297,
+        "Passed": true
+      }
+    ]
+  },
+  "census": {
+    "before": {
+      "files": 1330,
+      "byte_identical": 789,
+      "nonerror_identical": 800,
+      "nonerror_different": 530,
+      "nonerror_points": 7971,
+      "nonerror_lines": 66379
+    },
+    "after": {
+      "files": 1330,
+      "byte_identical": 789,
+      "nonerror_identical": 800,
+      "nonerror_different": 530,
+      "nonerror_points": 7971,
+      "nonerror_lines": 66379
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+        "before_points": 6,
+        "before_lines": 11,
+        "after_points": 6,
+        "after_lines": 11,
+        "exclusions": 4
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1307,
+      "OpenNT": 23
+    }
+  },
+  "selected_line_mapping": [
+    {
+      "line": 322,
+      "text": "if ((pEntry = HeapAlloc(GetProcessHeap(), 0, (pla->EntrySize))) == ((void *)0))"
+    },
+    {
+      "line": 334,
+      "text": "return pEntry;"
+    },
+    {
+      "line": 356,
+      "text": "if ( (PVOID)pEntry >= pla->LookasideBase && (PVOID)pEntry < pla->LookasideBounds ) {"
+    },
+    {
+      "line": 364,
+      "text": "HeapFree(GetProcessHeap(), 0, (LPSTR)(pEntry));"
+    }
+  ],
+  "full_checkpoint": "P69 runtime80 Full24/24; ten-file checkpoint delivered",
+  "original_blob": "6ebeb702a753755f12092737569b02ec29f5c908",
+  "original_guest_unchanged": true,
+  "n023_migrated": false
+}
