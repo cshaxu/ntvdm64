@@ -4,8 +4,9 @@
 
 **Active: M0 T485 S16** (Ordinary Mode), G001-G033.
 [S15 closure](../etc/evidence/t485-s1/s15-closure.md): N013-N026 delivered;
-overall62/159 directories, H001-H036 and N001-N026. runtime108 is the current
-published and verified package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
+S15 delivered62/159 directories, H001-H036 and N001-N026. S16 P1/G001 brings
+the total to63/159. S16 runtime1 is now published and Full24/24 verified.
+The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S17-S20 and all remaining migration/capability obligations.
 
 ## Active Packet
@@ -32,10 +33,17 @@ retains S17-S20 and all remaining migration/capability obligations.
 
 ## S16 Progress
 
-0/33 directories delivered. Next G001 bin86, in fixed inventory order.
+1/33 directories complete in P1. [G001](../etc/evidence/t485-s1/g001.md):
+18 exact XP files and1 retired makefile. Four existing archive members advance
+to identical XP SP1/SP3 originals, without adding archive members. Cached
+build, dual publication (26 host and8 guest hashes), WINHELP document/topic
+observation and final-package Full24/24 passed. The initial WINHELP assertion
+used the wrong class; evidence retains that correction and exit limitations.
+[P1 receipt](../etc/evidence/t485-s1/g001-result.json) records final identities.
+Next is G002 in the frozen directory order; S16 and the complete T remain active.
 S15 final census1340files/801byte-identical/812nonerror-identical/528different/
 8191points/45674lines;1340XP/0OpenNT in the non-guest population only.
-Full counter reset at S15 P92/runtime108. No guest-directory completion
+Full counter reset at S16 P1/runtime1 after19 entries. No guest-directory completion
 credit is inferred from paired host dependencies or existing package tests.
 
 ## S15 Closure Record

@@ -1,0 +1,137 @@
+{
+  "replaced": [
+    {
+      "member": "WINNT/SYSTEM/OLECLI.DLL",
+      "before": {
+        "path": "WINNT/SYSTEM/OLECLI.DLL",
+        "bytes": 83456,
+        "sha256": "f3a76752b6a257056ec43cd6d43da5a65244fc5c41f89e2162ef27634ece54b4",
+        "source": "preserved-approved-baseline-zip",
+        "format": "NE",
+        "module": "OLECLI",
+        "imports": [
+          "KERNEL",
+          "GDI",
+          "USER",
+          "SHELL"
+        ]
+      },
+      "after": {
+        "path": "WINNT/SYSTEM/OLECLI.DLL",
+        "bytes": 82944,
+        "sha256": "c4d49a1e05cf3e79a2937393aad24c4f50cd5473590542fe4bb9c6d82c913061",
+        "source": "src/mvdm-guest/bin86/olecli.dll",
+        "format": "NE",
+        "module": "OLECLI",
+        "imports": [
+          "KERNEL",
+          "GDI",
+          "USER",
+          "SHELL"
+        ]
+      },
+      "xp_blob": "524e5fe723a59e1a183545159575c820acbbe544",
+      "sp3_member": "I386/OLECLI.DL_",
+      "xp_equals_sp3": true
+    },
+    {
+      "member": "WINNT/SYSTEM32/PMSPL.DLL",
+      "before": {
+        "path": "WINNT/SYSTEM32/PMSPL.DLL",
+        "bytes": 27248,
+        "sha256": "432bb90629ceb7714c13f54147caa11ce77d7bdd3a168bba86195565b5fee456",
+        "source": "src\\mvdm\\bin86\\pmspl.dll",
+        "format": "NE",
+        "module": "PMSPL",
+        "imports": [
+          "NETAPI",
+          "KERNEL"
+        ]
+      },
+      "after": {
+        "path": "WINNT/SYSTEM32/PMSPL.DLL",
+        "bytes": 46592,
+        "sha256": "6ccfe02dc29219851b11e64be907b8394f9cd0d5c26f319cb1cfb1f42601bf2c",
+        "source": "src/mvdm-guest/bin86/pmspl.dll",
+        "format": "NE",
+        "module": "PMSPL",
+        "imports": [
+          "KERNEL"
+        ]
+      },
+      "xp_blob": "31dfd5a2a27b90409fe28954fb00687c32ca4e14",
+      "sp3_member": "I386/PMSPL.DL_",
+      "xp_equals_sp3": true
+    },
+    {
+      "member": "WINNT/SYSTEM32/WINHELP.EXE",
+      "before": {
+        "path": "WINNT/SYSTEM32/WINHELP.EXE",
+        "bytes": 256192,
+        "sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170",
+        "source": "src\\mvdm\\bin86\\winhelp.exe",
+        "format": "NE",
+        "module": "WINHELP",
+        "imports": [
+          "KERNEL",
+          "GDI",
+          "USER",
+          "KEYBOARD"
+        ]
+      },
+      "after": {
+        "path": "WINNT/SYSTEM32/WINHELP.EXE",
+        "bytes": 256192,
+        "sha256": "7ad523a8f7183ddd809f6f3251e0e2e6adfc969fab5484ed13c497d92c7abbc6",
+        "source": "src/mvdm-guest/bin86/winhelp.exe",
+        "format": "NE",
+        "module": "WINHELP",
+        "imports": [
+          "KERNEL",
+          "GDI",
+          "USER",
+          "KEYBOARD"
+        ]
+      },
+      "xp_blob": "e4f3647f8397e732ac1b58930ca2d16f70ba1ef2",
+      "sp3_member": "I386/WINHELP.EX_",
+      "xp_equals_sp3": true
+    },
+    {
+      "member": "WINNT/SYSTEM32/WIN87EM.DLL",
+      "before": {
+        "path": "WINNT/SYSTEM32/WIN87EM.DLL",
+        "bytes": 12800,
+        "sha256": "30d6b965d45eddf306268c9526b01494df4841b8b530bab2654c379e1cf49db2",
+        "source": "src\\mvdm\\bin86\\i386\\win87em.dll",
+        "format": "NE",
+        "module": "WIN87EM",
+        "imports": [
+          "KERNEL"
+        ]
+      },
+      "after": {
+        "path": "WINNT/SYSTEM32/WIN87EM.DLL",
+        "bytes": 13312,
+        "sha256": "d3a72576176ca90c8a45512ec68f2a19a715ff0b935886531a3954f90a85c43d",
+        "source": "src/mvdm-guest/bin86/i386/win87em.dll",
+        "format": "NE",
+        "module": "WIN87EM",
+        "imports": [
+          "KERNEL"
+        ]
+      },
+      "xp_blob": "68cd81d5420424c14b8b92f0bc67742a0e6edf8d",
+      "sp3_member": "I386/WIN87EM.DL_",
+      "xp_equals_sp3": true
+    }
+  ],
+  "unchanged_membership": true,
+  "changed_members": [
+    "WINNT/SYSTEM32/PMSPL.DLL",
+    "WINNT/SYSTEM32/WIN87EM.DLL",
+    "WINNT/SYSTEM32/WINHELP.EXE",
+    "WINNT/SYSTEM/OLECLI.DLL"
+  ],
+  "new_archive_sha256": "cc039a325ca8ebd0be3a1219e598b21d8e706661442651b52be812eca6f10b1f"
+}

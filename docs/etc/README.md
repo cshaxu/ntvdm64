@@ -2283,3 +2283,5 @@ post-publication targeted checks.
 
 [N026 USER server exports](evidence/t485-s1/n026.md);
 [S15 closure](evidence/t485-s1/s15-closure.md).
+
+[G001 XP bin86 originals and package integration](evidence/t485-s1/g001.md).

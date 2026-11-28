@@ -1,0 +1,440 @@
+[
+  {
+    "path": "src/mvdm-guest/bin86/autoexec.nt",
+    "xp_blob": "683da895d75628756f3f838d2676b357d0852449",
+    "old_blob": "ad82e008d2128cc16269a49344928e48727b0010",
+    "before_sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b",
+    "xp_sha256": "6d9699f9082a747c02e51b00591fd604d1dfbc3f0115a45b3c6389a524c9a3da",
+    "before_size": 438,
+    "xp_size": 1648,
+    "before_format": "text",
+    "xp_format": "text",
+    "before_equals_xp": false,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      54
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "6d9699f9082a747c02e51b00591fd604d1dfbc3f0115a45b3c6389a524c9a3da",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/config.nt",
+    "xp_blob": "3725212e9561d3bce08f990b403cd70aa3f7440e",
+    "old_blob": "73273b65371c002b4271ab6fb32eb50c2798c19e",
+    "before_sha256": "6ae1e74e78de00c0fa03124e6f947d977c71f253855ad2af979554074aea189a",
+    "xp_sha256": "309050a33933a4b7eda249e52c5a3544f4b9fa6535b54537c5272e27b5c8b0bf",
+    "before_size": 2510,
+    "xp_size": 2521,
+    "before_format": "text",
+    "xp_format": "text",
+    "before_equals_xp": false,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      112
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "309050a33933a4b7eda249e52c5a3544f4b9fa6535b54537c5272e27b5c8b0bf",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/country.sys",
+    "xp_blob": "6e3165e6af3ae6a20673d424becc07bf3c94c83f",
+    "old_blob": "6e3165e6af3ae6a20673d424becc07bf3c94c83f",
+    "before_sha256": "ba263d4276024a904ece68fe193f8ca6da928dc9b35f8948f69d458dbb6ac3d0",
+    "xp_sha256": "ba263d4276024a904ece68fe193f8ca6da928dc9b35f8948f69d458dbb6ac3d0",
+    "before_size": 17069,
+    "xp_size": 17069,
+    "before_format": "binary",
+    "xp_format": "binary",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "ba263d4276024a904ece68fe193f8ca6da928dc9b35f8948f69d458dbb6ac3d0",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/ctl3dv2.dll",
+    "xp_blob": "81af05a6f9d8b234c2a44333dae6c50aef42fea1",
+    "old_blob": "81af05a6f9d8b234c2a44333dae6c50aef42fea1",
+    "before_sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db",
+    "xp_sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db",
+    "before_size": 27200,
+    "xp_size": 27200,
+    "before_format": "MZ/NE",
+    "xp_format": "MZ/NE",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/ctl3dv2.map",
+    "xp_blob": "f463bb206954e12a2ee81f3ed74ee3cfa69825c7",
+    "old_blob": "53d3c8bee06b8c2bf6ef6ee35152bd125b502a0a",
+    "before_sha256": "862d762ce3ce3619ed3321d9eec69b8d5a1fbca42b52a9d914128a1e11d485c1",
+    "xp_sha256": "44d1b3662ca6c7174d6f92fa948a1f4141eed6bde0cda7edf48888f8e39d89b8",
+    "before_size": 20463,
+    "xp_size": 19944,
+    "before_format": "text",
+    "xp_format": "text",
+    "before_equals_xp": false,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1038
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "44d1b3662ca6c7174d6f92fa948a1f4141eed6bde0cda7edf48888f8e39d89b8",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/ctl3dv2.sym",
+    "xp_blob": "068f31837a788555b56a2b4345bd899d71870b23",
+    "old_blob": "068f31837a788555b56a2b4345bd899d71870b23",
+    "before_sha256": "7b0a89b4f21c4cecd344c38f25de8951fe1e4e57b26d067f090754430dd0b6d9",
+    "xp_sha256": "7b0a89b4f21c4cecd344c38f25de8951fe1e4e57b26d067f090754430dd0b6d9",
+    "before_size": 2068,
+    "xp_size": 2068,
+    "before_format": "binary",
+    "xp_format": "binary",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "7b0a89b4f21c4cecd344c38f25de8951fe1e4e57b26d067f090754430dd0b6d9",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/lanman.drv",
+    "xp_blob": "0896be7c61181ce5b85dc09cea2cc94a6fc78a57",
+    "old_blob": "0896be7c61181ce5b85dc09cea2cc94a6fc78a57",
+    "before_sha256": "60204f58744d38e9201ba958d45c483ce7989b216b98a67ce5aa355af37dec02",
+    "xp_sha256": "60204f58744d38e9201ba958d45c483ce7989b216b98a67ce5aa355af37dec02",
+    "before_size": 221600,
+    "xp_size": 221600,
+    "before_format": "MZ/NE",
+    "xp_format": "MZ/NE",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "60204f58744d38e9201ba958d45c483ce7989b216b98a67ce5aa355af37dec02",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/lzexpand.dll",
+    "xp_blob": "283315a62fcad298cae91741edaf4b8546507706",
+    "old_blob": "283315a62fcad298cae91741edaf4b8546507706",
+    "before_sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd",
+    "xp_sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd",
+    "before_size": 9936,
+    "xp_size": 9936,
+    "before_format": "MZ/NE",
+    "xp_format": "MZ/NE",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/makefile",
+    "xp_blob": "",
+    "old_blob": "0e77034491b0fffde406881e49816495305188d6",
+    "before_sha256": "2a5aacafe216a9bd3b46fa0929c522ead66e7ba7e81e24258bd53f59b89fda6b",
+    "xp_sha256": null,
+    "before_size": 579,
+    "xp_size": null,
+    "before_format": "text",
+    "xp_format": null,
+    "before_equals_xp": false,
+    "before_vs_old": [
+      1,
+      56
+    ],
+    "before_vs_xp": null,
+    "disposition": "retired obsolete unconsumed OpenNT root makefile"
+  },
+  {
+    "path": "src/mvdm-guest/bin86/netapi.dll",
+    "xp_blob": "1699851218ae28f61cb2d4d3dd0865f35e4cfb19",
+    "old_blob": "1699851218ae28f61cb2d4d3dd0865f35e4cfb19",
+    "before_sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a",
+    "xp_sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a",
+    "before_size": 108464,
+    "xp_size": 108464,
+    "before_format": "MZ/NE",
+    "xp_format": "MZ/NE",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/olecli.dll",
+    "xp_blob": "524e5fe723a59e1a183545159575c820acbbe544",
+    "old_blob": "db5d6efe13b49dc07281f32e07214448f19d6dab",
+    "before_sha256": "f3a76752b6a257056ec43cd6d43da5a65244fc5c41f89e2162ef27634ece54b4",
+    "xp_sha256": "c4d49a1e05cf3e79a2937393aad24c4f50cd5473590542fe4bb9c6d82c913061",
+    "before_size": 83456,
+    "xp_size": 82944,
+    "before_format": "MZ/NE",
+    "xp_format": "MZ/NE",
+    "before_equals_xp": false,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": "binary-byte-difference",
+    "disposition": "XP original bytes",
+    "after_sha256": "c4d49a1e05cf3e79a2937393aad24c4f50cd5473590542fe4bb9c6d82c913061",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/pifedit.hlp",
+    "xp_blob": "c95444c17a6e7274c23049d335e71a5d44f44c44",
+    "old_blob": "c95444c17a6e7274c23049d335e71a5d44f44c44",
+    "before_sha256": "20bb0049acbeda2a403dd07204ec82102671fc97359691b0ed0009b33c3e788c",
+    "xp_sha256": "20bb0049acbeda2a403dd07204ec82102671fc97359691b0ed0009b33c3e788c",
+    "before_size": 33508,
+    "xp_size": 33508,
+    "before_format": "binary",
+    "xp_format": "binary",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "20bb0049acbeda2a403dd07204ec82102671fc97359691b0ed0009b33c3e788c",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/pmspl.dll",
+    "xp_blob": "31dfd5a2a27b90409fe28954fb00687c32ca4e14",
+    "old_blob": "33068507dc292a6c35284f9cac97cee071006046",
+    "before_sha256": "432bb90629ceb7714c13f54147caa11ce77d7bdd3a168bba86195565b5fee456",
+    "xp_sha256": "6ccfe02dc29219851b11e64be907b8394f9cd0d5c26f319cb1cfb1f42601bf2c",
+    "before_size": 27248,
+    "xp_size": 46592,
+    "before_format": "MZ/NE",
+    "xp_format": "MZ/NE",
+    "before_equals_xp": false,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": "binary-byte-difference",
+    "disposition": "XP original bytes",
+    "after_sha256": "6ccfe02dc29219851b11e64be907b8394f9cd0d5c26f319cb1cfb1f42601bf2c",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/regedit.hlp",
+    "xp_blob": "64a110197204f898bfeb8c786163fe4bd209a149",
+    "old_blob": "64a110197204f898bfeb8c786163fe4bd209a149",
+    "before_sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6",
+    "xp_sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6",
+    "before_size": 22681,
+    "xp_size": 22681,
+    "before_format": "binary",
+    "xp_format": "binary",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/system.ini",
+    "xp_blob": "4489348f25103bb7c5a7d851c4441b6bb9c27843",
+    "old_blob": "ddeaf8532524f39c83b0aaf083105d4898b988ec",
+    "before_sha256": "6f533ccc79227e38f18bfc63bfc961ef4d3ee0e2bf33dd097ccf3548a12b743b",
+    "xp_sha256": "1d9a44084d4e22c8940ea2e79461b868fdd3c0f01f17aef490c148b73327d5bf",
+    "before_size": 219,
+    "xp_size": 206,
+    "before_format": "text",
+    "xp_format": "text",
+    "before_equals_xp": false,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      26
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "1d9a44084d4e22c8940ea2e79461b868fdd3c0f01f17aef490c148b73327d5bf",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/ver.dll",
+    "xp_blob": "0856ab683ba453160abda824459976eefd4b550c",
+    "old_blob": "0856ab683ba453160abda824459976eefd4b550c",
+    "before_sha256": "6d03cf1e31748149b6d34725e293c5ee4f3bd7ddebe526285fe7ba41a1d1f5b4",
+    "xp_sha256": "6d03cf1e31748149b6d34725e293c5ee4f3bd7ddebe526285fe7ba41a1d1f5b4",
+    "before_size": 9008,
+    "xp_size": 9008,
+    "before_format": "MZ/NE",
+    "xp_format": "MZ/NE",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "6d03cf1e31748149b6d34725e293c5ee4f3bd7ddebe526285fe7ba41a1d1f5b4",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/winhelp.exe",
+    "xp_blob": "e4f3647f8397e732ac1b58930ca2d16f70ba1ef2",
+    "old_blob": "d89bdee7e7b89b538d4d429a0c382b282887d03d",
+    "before_sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170",
+    "xp_sha256": "7ad523a8f7183ddd809f6f3251e0e2e6adfc969fab5484ed13c497d92c7abbc6",
+    "before_size": 256192,
+    "xp_size": 256192,
+    "before_format": "MZ/NE",
+    "xp_format": "MZ/NE",
+    "before_equals_xp": false,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": "binary-byte-difference",
+    "disposition": "XP original bytes",
+    "after_sha256": "7ad523a8f7183ddd809f6f3251e0e2e6adfc969fab5484ed13c497d92c7abbc6",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/write.hlp",
+    "xp_blob": "324c081b5ebc843e3dbbcf405ecda83ecafaf9f7",
+    "old_blob": "324c081b5ebc843e3dbbcf405ecda83ecafaf9f7",
+    "before_sha256": "b6b131a2fc1fcb7ad69ea7404fa35b46cf21549913293f3d412708fa8c138f67",
+    "xp_sha256": "b6b131a2fc1fcb7ad69ea7404fa35b46cf21549913293f3d412708fa8c138f67",
+    "before_size": 36929,
+    "xp_size": 36929,
+    "before_format": "binary",
+    "xp_format": "binary",
+    "before_equals_xp": true,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      0,
+      0
+    ],
+    "disposition": "XP original bytes",
+    "after_sha256": "b6b131a2fc1fcb7ad69ea7404fa35b46cf21549913293f3d412708fa8c138f67",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/bin86/i386/win87em.dll",
+    "xp_blob": "68cd81d5420424c14b8b92f0bc67742a0e6edf8d",
+    "old_blob": "02df0c8d20fbe0e621c008335b69c27258092deb",
+    "before_sha256": "30d6b965d45eddf306268c9526b01494df4841b8b530bab2654c379e1cf49db2",
+    "xp_sha256": "d3a72576176ca90c8a45512ec68f2a19a715ff0b935886531a3954f90a85c43d",
+    "before_size": 12800,
+    "xp_size": 13312,
+    "before_format": "MZ/NE",
+    "xp_format": "MZ/NE",
+    "before_equals_xp": false,
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": "binary-byte-difference",
+    "disposition": "XP original bytes",
+    "after_sha256": "d3a72576176ca90c8a45512ec68f2a19a715ff0b935886531a3954f90a85c43d",
+    "after_nonerror_points": 0,
+    "after_nonerror_lines": 0
+  }
+]

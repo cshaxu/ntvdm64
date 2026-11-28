@@ -1,0 +1,348 @@
+{
+  "limitations": [
+    "WinHelp visible document/topic observation does not prove normal exit",
+    "Win95 startup gate retains approved normal-exit boundary",
+    "No exhaustive OLE/printer/floating-point API acceptance claimed"
+  ],
+  "host_publication": [
+    {
+      "sha256": "D8553AD8A336DFC1FC512CA327B0CBBCAC41B61598C77A3168008891CFF2BB16",
+      "path": "assets\\release\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "D8553AD8A336DFC1FC512CA327B0CBBCAC41B61598C77A3168008891CFF2BB16",
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "449B8EF66586212DDE7680FA965D63B05959C0300ADDDD03EB78078F83299933",
+      "path": "assets\\release\\VJOY.DLL"
+    },
+    {
+      "sha256": "449B8EF66586212DDE7680FA965D63B05959C0300ADDDD03EB78078F83299933",
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL"
+    },
+    {
+      "sha256": "5BA312DD66260DC8B8C4BBD269A375ECFEAEA30C301B3FD76C55FA8F4FD477FF",
+      "path": "assets\\release\\VCDEX.DLL"
+    },
+    {
+      "sha256": "5BA312DD66260DC8B8C4BBD269A375ECFEAEA30C301B3FD76C55FA8F4FD477FF",
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL"
+    },
+    {
+      "sha256": "FFF3535F57BE308CC84829579B79D4C23A63476E8E210169FC102737594705C2",
+      "path": "assets\\release\\run16.exe"
+    },
+    {
+      "sha256": "FFF3535F57BE308CC84829579B79D4C23A63476E8E210169FC102737594705C2",
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe"
+    },
+    {
+      "sha256": "6031D809637189A4B1814A4996612D8E48EFA9116F8EBB936D1AB73E0B646274",
+      "path": "assets\\release\\ntsrv.exe"
+    },
+    {
+      "sha256": "6031D809637189A4B1814A4996612D8E48EFA9116F8EBB936D1AB73E0B646274",
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe"
+    },
+    {
+      "sha256": "BDCFB664EB81E9990B633846AADCE58A8E46984992411B3989CB610EB333AFA4",
+      "path": "assets\\release\\ntcon.exe"
+    },
+    {
+      "sha256": "BDCFB664EB81E9990B633846AADCE58A8E46984992411B3989CB610EB333AFA4",
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe"
+    },
+    {
+      "sha256": "0B2D99319E26D827B8BF0CE94E2462B2C3C89ADEEFA7DCDA94D8445FEAC62DCF",
+      "path": "assets\\release\\ntvdm.exe"
+    },
+    {
+      "sha256": "0B2D99319E26D827B8BF0CE94E2462B2C3C89ADEEFA7DCDA94D8445FEAC62DCF",
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe"
+    },
+    {
+      "sha256": "213127450A7E33FA29462D25CFA8C7D93BC3701DFE6F7B6E88C3EFCCC504BB94",
+      "path": "assets\\release\\ntvwm.exe"
+    },
+    {
+      "sha256": "213127450A7E33FA29462D25CFA8C7D93BC3701DFE6F7B6E88C3EFCCC504BB94",
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe"
+    },
+    {
+      "sha256": "6D9ED92E756B54767CFE3D19AF7DD12F189B59D02F0337789347A455BAD6C29C",
+      "path": "assets\\release\\ntmon.exe"
+    },
+    {
+      "sha256": "6D9ED92E756B54767CFE3D19AF7DD12F189B59D02F0337789347A455BAD6C29C",
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe"
+    },
+    {
+      "sha256": "2BBD60FF62130A41A16E79B1CCF6489D79FE16CD1AF7494709E24FE43C7A2830",
+      "path": "assets\\release\\WOW32.DLL"
+    },
+    {
+      "sha256": "2BBD60FF62130A41A16E79B1CCF6489D79FE16CD1AF7494709E24FE43C7A2830",
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL"
+    },
+    {
+      "sha256": "8022BB379FF52FD8116FA0F9A819E204FE48B7AA784EE674C20167E3E05F2229",
+      "path": "assets\\release\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "8022BB379FF52FD8116FA0F9A819E204FE48B7AA784EE674C20167E3E05F2229",
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "E39E6E9D967F60980361489C66CAE938F5AA341ADAFD18EB4B3D567F7DD4B7D5",
+      "path": "assets\\release\\nthook32.dll"
+    },
+    {
+      "sha256": "E39E6E9D967F60980361489C66CAE938F5AA341ADAFD18EB4B3D567F7DD4B7D5",
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll"
+    },
+    {
+      "sha256": "C4F4E8D85F9CF41663A0BA09E6E6ABA6E28ACD3693F1A601FA78753D45E317F0",
+      "path": "assets\\release\\nthook64.dll"
+    },
+    {
+      "sha256": "C4F4E8D85F9CF41663A0BA09E6E6ABA6E28ACD3693F1A601FA78753D45E317F0",
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll"
+    }
+  ],
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 698198,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": true,
+    "PreparationMs": 26075,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 946,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-standard",
+        "ElapsedMs": 49858,
+        "CleanupMs": 293,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-enhanced",
+        "ElapsedMs": 88916,
+        "CleanupMs": 357,
+        "Passed": true
+      },
+      {
+        "Gate": "win95",
+        "ElapsedMs": 117629,
+        "CleanupMs": 332,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-sol-options",
+        "ElapsedMs": 25401,
+        "CleanupMs": 291,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 19174,
+        "CleanupMs": 343,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 20175,
+        "CleanupMs": 275,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 20060,
+        "CleanupMs": 317,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 603,
+        "CleanupMs": 424,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65640,
+        "CleanupMs": 287,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 43886,
+        "CleanupMs": 275,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 39239,
+        "CleanupMs": 375,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15055,
+        "CleanupMs": 299,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10396,
+        "CleanupMs": 332,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 2414,
+        "CleanupMs": 302,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12526,
+        "CleanupMs": 330,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 35514,
+        "CleanupMs": 367,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 40728,
+        "CleanupMs": 385,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4772,
+        "CleanupMs": 323,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7775,
+        "CleanupMs": 364,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10111,
+        "CleanupMs": 293,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3999,
+        "CleanupMs": 287,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 8334,
+        "CleanupMs": 283,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20633,
+        "CleanupMs": 309,
+        "Passed": true
+      }
+    ]
+  },
+  "census": {
+    "before": {
+      "files": 1340,
+      "byte_identical": 801,
+      "nonerror_identical": 812,
+      "nonerror_different": 528,
+      "nonerror_points": 8191,
+      "nonerror_lines": 45674
+    },
+    "delta": {
+      "byte_identical": 0,
+      "nonerror_different": 0,
+      "files": 0,
+      "nonerror_identical": 0,
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    "after": {
+      "files": 1340,
+      "byte_identical": 801,
+      "nonerror_identical": 812,
+      "nonerror_different": 528,
+      "nonerror_points": 8191,
+      "nonerror_lines": 45674
+    },
+    "basis": "No change to non-guest mirror paths since S15 P92"
+  },
+  "guest_files": {
+    "retained_xp_exact": 18,
+    "local_adaptation_lines": 0,
+    "local_adaptation_points": 0,
+    "retired": 1
+  },
+  "batch": "G001",
+  "guest_publication": [
+    {
+      "sha256": "C4D49A1E05CF3E79A2937393AAD24C4F50CD5473590542FE4BB9C6D82C913061",
+      "path": "build\\t485-s16\\runtime1\\SYSTEM\\OLECLI.DLL"
+    },
+    {
+      "sha256": "C4D49A1E05CF3E79A2937393AAD24C4F50CD5473590542FE4BB9C6D82C913061",
+      "path": "O:\\WINNT\\SYSTEM\\OLECLI.DLL"
+    },
+    {
+      "sha256": "6CCFE02DC29219851B11E64BE907B8394F9CD0D5C26F319CB1CFB1F42601BF2C",
+      "path": "build\\t485-s16\\runtime1\\SYSTEM32\\PMSPL.DLL"
+    },
+    {
+      "sha256": "6CCFE02DC29219851B11E64BE907B8394F9CD0D5C26F319CB1CFB1F42601BF2C",
+      "path": "O:\\WINNT\\SYSTEM32\\PMSPL.DLL"
+    },
+    {
+      "sha256": "7AD523A8F7183DDD809F6F3251E0E2E6ADFC969FAB5484ED13C497D92C7ABBC6",
+      "path": "build\\t485-s16\\runtime1\\SYSTEM32\\WINHELP.EXE"
+    },
+    {
+      "sha256": "7AD523A8F7183DDD809F6F3251E0E2E6ADFC969FAB5484ED13C497D92C7ABBC6",
+      "path": "O:\\WINNT\\SYSTEM32\\WINHELP.EXE"
+    },
+    {
+      "sha256": "D3A72576176CA90C8A45512EC68F2A19A715FF0B935886531A3954F90A85C43D",
+      "path": "build\\t485-s16\\runtime1\\SYSTEM32\\WIN87EM.DLL"
+    },
+    {
+      "sha256": "D3A72576176CA90C8A45512EC68F2A19A715FF0B935886531A3954F90A85C43D",
+      "path": "O:\\WINNT\\SYSTEM32\\WIN87EM.DLL"
+    }
+  ],
+  "targeted": {
+    "correction": "Initial MS_WINHELP assertion selected communication identity rather than visible MS_WINDOC document",
+    "topicSamples": 4,
+    "result": "PASS",
+    "documentSamples": 4,
+    "evidence": "winhelp/xp-help-winhelp-windows.txt",
+    "scope": "Visible original XP Help document and topic only; timeout cleanup is not normal-exit proof"
+  },
+  "source_receipt": "g001-sources.json",
+  "runtime": "build/t485-s16/runtime1",
+  "archive_receipt": "g001-archive.json",
+  "packet": "T485 S16 P1",
+  "archive_sha256": "cc039a325ca8ebd0be3a1219e598b21d8e706661442651b52be812eca6f10b1f",
+  "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89"
+}

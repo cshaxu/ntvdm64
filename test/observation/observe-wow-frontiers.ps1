@@ -9,7 +9,7 @@ param(
     [ValidateRange(0,5000)][int]$PostExitObservationMs=0,
     [switch]$VisibleDesktop,
     [switch]$WaitTarget,
-    [ValidateSet('WINMINE.EXE','SOL.EXE','WRITE.EXE')]
+    [ValidateSet('WINMINE.EXE','SOL.EXE','WRITE.EXE','WINHELP.EXE')]
     [string[]]$Guests=@('WINMINE.EXE','SOL.EXE','WRITE.EXE')
 )
 # Read-only GUI observations on an unswitched desktop. This does not assert
