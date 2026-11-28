@@ -24,7 +24,7 @@ LONG WINAPI fixture_ButtonWndProcA(HWND, UINT, WPARAM, LPARAM);
 #pragma comment(linker, "/alternatename:_fixture_ButtonWndProcA@16=_ButtonWndProcA@16")
 LONG WINAPI fixture_ButtonWndProcW(HWND, UINT, WPARAM, LPARAM);
 #pragma comment(linker, "/alternatename:_fixture_ButtonWndProcW@16=_ButtonWndProcW@16")
-LONG WINAPI fixture_xxxLBoxCaretBlinker(HWND, UINT, UINT, LONG);
+VOID WINAPI fixture_xxxLBoxCaretBlinker(HWND, UINT, UINT_PTR, DWORD);
 #pragma comment(linker, "/alternatename:_fixture_xxxLBoxCaretBlinker@16=_xxxLBoxCaretBlinker@16")
 BOOL WINAPI wow_original_list_caret_ready(struct tagWND *);
 BOOL WINAPI wow_original_combo_info(HWND, struct tagWND *, PCOMBOBOXINFO, BOOL *);

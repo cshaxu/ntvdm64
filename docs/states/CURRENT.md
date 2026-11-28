@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime66 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime67 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -197,21 +197,18 @@ in its receipt. No original guest change.
 its receipt retains the original subset, ABI, package/tests and mirror census.
 Four completed mirrors since P51 Full24/24. No guest change or S/T closure.
 
-[P56 ListBox dispatch](../etc/evidence/t485-s1/n022-lb1.md) delivers runtime65:
-XP whole lb1.c with original layout/allocation/event dependencies. Cached
-build, dual13-image26hash, controls40/40, CCPU window-borrow, SOL Options and
-real Win16 controls pass. N02227/39; S15 9/14, overall57/159. Census1329/785/
-796/533/8076/77980; delta0/0/0/0/+239/-14389.1294XP/35OpenNT.
-Five mirrors since P51 Full24/24. No guest change or S/T closure.
-Next lboxctl1.c whole-file migration; paired code retains OpenNT baseline.
+[P56 ListBox dispatch](../etc/evidence/t485-s1/n022-lb1.md) delivered runtime65;
+its receipt retains original layout/allocation/event dependencies, all targeted
+results, paired-header baselines and complete mirror census.
 
 [P57 ListBox data operations](../etc/evidence/t485-s1/n022-lboxctl1.md)
-delivers runtime66: XP whole file, original registered Win16 comparison and
-paired pointer-width declarations. Cached build, dual13-image26hash,
-controls40/40, CCPU window-borrow, SOL Options and sorted Win16 controls pass.
-N02228/39; S15 9/14, overall57/159. Census1329/785/796/533/8071/77907;
-delta0/0/0/0/-5/-73.1295XP/34OpenNT. Six mirrors since P51 Full24/24.
-No guest change or S/T closure. Next lboxctl2.c.
+delivered runtime66; its receipt retains all tests, baseline and census.
+[P58 ListBox interaction](../etc/evidence/t485-s1/n022-lboxctl2.md)
+delivers runtime67: XP body, approved RIT omission, native caret ABI and scroll
+preference. Cached build, dual13-image26hash, controls40/40, CCPU borrow,
+SOL Options and genuine Win16 controls pass. N02229/39; S15 9/14, overall57/159.
+Census1329/785/796/533/8073/70889;delta0/0/0/0/+2/-7018;1296XP/33OpenNT.
+Seven mirrors since P51 Full24/24. No guest change or S/T closure. Next lboxmult.c.
 
 ## S14 Closure Record
 

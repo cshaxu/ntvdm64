@@ -178,6 +178,10 @@ WORD DbcsCombine(HWND, WORD);
 #define CMS_QANIMATION 165
 #define GACF2_ANIMATIONOFF 0x00000001
 #define PUSIF_COMBOBOXANIMATION 0x00000004
+#define PUSIF_LISTBOXSMOOTHSCROLLING 0x00000008
+#define GACF_NOSMOOTHSCROLLING 0x40000000
+/* XP remote-session preference, queried from the native USER owner. */
+#define ISREMOTESESSION() GetSystemMetrics(SM_REMOTESESSION)
 #define PUSIF_UIEFFECTS 0x80000000
 #define TEST_EffectPUSIF(f) ((gpsi->PUSIFlags & ((f) | PUSIF_UIEFFECTS)) == ((f) | PUSIF_UIEFFECTS))
 #define _MonitorFromWindow(window, flags) wow_control_monitor(HWq(window), flags)
@@ -189,6 +193,7 @@ BOOL _FChildVisible(PWND pwnd);
 
 /* XP private UI flags are owned by native USER, not our retained NT4 WND.
  * Query its existing state through the same synchronous callout boundary. */
+#define WEFLAYOUTRTL 0x0A40 /* Original XP WS_EX_LAYOUTRTL state bit. */
 #define WEFPUIFOCUSHIDDEN 0x0B80
 #define WEFPUIACCELHIDDEN 0x0B40
 #undef TestWF
@@ -324,7 +329,6 @@ BOOL WINAPI wow_original_EndDialog(HWND, INT_PTR);
     (MessageTable[msg].bSyncOnlyMessage || \
      ((msg) == WM_DEVICECHANGE && ((wParam) & 0x8000))) : 0)
 #define MSGFLAG_WOW_RESERVED 0x00010000
-#define WEFLAYOUTRTL 0x0A40
 /* Define recovered bodies under private names, not SDK dllimport names. */
 #undef IsDialogMessageA
 #undef IsDialogMessageW

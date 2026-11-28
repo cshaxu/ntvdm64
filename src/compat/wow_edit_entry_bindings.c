@@ -23,7 +23,7 @@ BOOL WINAPI wow_edit_capture_context(wow_edit_context *context)
     HGDIOBJ previous;
     BOOL measured = FALSE;
     int planes, bits;
-    BOOL combo_animation, ui_effects;
+    BOOL combo_animation, list_smooth_scroll, ui_effects;
     if (!context) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     /* Original clinit.c initializes rcScreen from a DISPLAY IC, not work
      * area or SM_CXSCREEN. Both combo placement and dialog clipping consume
@@ -50,10 +50,11 @@ BOOL WINAPI wow_edit_capture_context(wow_edit_context *context)
      * the list's add-selection timer. Preserve the native value, including
      * INFINITE; do not invent a fixed blink interval or alter system policy. */
     if (!SystemParametersInfoW(SPI_GETCOMBOBOXANIMATION, 0, &combo_animation, 0) ||
+            !SystemParametersInfoW(SPI_GETLISTBOXSMOOTHSCROLLING, 0, &list_smooth_scroll, 0) ||
             !SystemParametersInfoW(SPI_GETUIEFFECTS, 0, &ui_effects, 0)) return FALSE;
-    /* XP user.h PUSIF_COMBOBOXANIMATION / PUSIF_UIEFFECTS. */
+    /* XP user.h PUSIF_COMBOBOXANIMATION / LISTBOXSMOOTHSCROLLING / UIEFFECTS. */
     value.PUSIFlags = (combo_animation ? 0x00000004u : 0) |
-        (ui_effects ? 0x80000000u : 0);
+        (list_smooth_scroll ? 0x00000008u : 0) | (ui_effects ? 0x80000000u : 0);
     if (!SystemParametersInfoW(SPI_GETCARETWIDTH, 0, &value.uCaretWidth, 0)) return FALSE;
     value.dtCaretBlink = GetCaretBlinkTime();
     if (!value.dtCaretBlink) return FALSE;
@@ -303,7 +304,8 @@ static LRESULT CALLBACK list_caret_entry(HWND window, UINT message,
     /* A queued callback must not dereference a freed original LBIV after
      * normal/final cleanup. Do not instantiate control state for a timer. */
     if (!state || !wow_control_original_provider()->caret_ready(state)) return 0;
-    return wow_control_original_provider()->caret(window, message, (UINT)id, (LONG)time);
+    wow_control_original_provider()->caret(window, message, id, (DWORD)time);
+    return 0;
 }
 
 static VOID CALLBACK list_caret_timer(HWND window, UINT message,
@@ -312,15 +314,15 @@ static VOID CALLBACK list_caret_timer(HWND window, UINT message,
     (void)edit_entry(window, message, id, (LPARAM)time, list_caret_entry, FALSE);
 }
 
-UINT WINAPI wow_control_set_timer(HWND window, UINT id, DWORD milliseconds,
-    WNDPROC callback)
+UINT_PTR WINAPI wow_control_set_timer(HWND window, UINT_PTR id, DWORD milliseconds,
+    TIMERPROC callback)
 {
     /* ADAPTER-WOW-070: original ListBox timing and timer IDs are untouched.
      * Its sole non-NULL callback enters the same scoped owner as its WNDPROC;
      * no timer registry, guest timer or replacement blinking algorithm. */
-    if (!window || (callback && callback != (WNDPROC)wow_control_original_provider()->caret)) {
+    if (!window || (callback && callback != wow_control_original_provider()->caret)) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return 0;
     }
-    return (UINT)SetTimer(window, id, milliseconds, callback ? list_caret_timer : NULL);
+    return SetTimer(window, id, milliseconds, callback ? list_caret_timer : NULL);
 }

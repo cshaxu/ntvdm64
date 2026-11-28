@@ -1,0 +1,48 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 8071,
+    "nonerror_lines": 77907
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 8073,
+    "nonerror_lines": 70889
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 2,
+    "nonerror_lines": -7018
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "before_points": 1,
+      "before_lines": 7039,
+      "after_points": 1,
+      "after_lines": 18,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_points": 168,
+      "before_lines": 589,
+      "after_points": 170,
+      "after_lines": 592,
+      "exclusions": 17
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1296,
+    "OpenNT": 33
+  }
+}

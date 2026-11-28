@@ -2066,7 +2066,7 @@ LONG_PTR LBGetItemData(PLBIV, INT);
 INT LBGetText(PLBIV, BOOL, BOOL, INT, LPWSTR);
 
 VOID  xxxLBSetFont(PLBIV, HANDLE, BOOL);
-int LBSetItemData(PLBIV, INT, LONG);
+int LBSetItemData(PLBIV, INT, LONG_PTR);
 
 BOOL  LBSetTabStops(PLBIV, INT, LPINT);
 
@@ -2078,6 +2078,7 @@ INT xxxLbDir(PLBIV, UINT, LPWSTR);
 INT xxxLbInsertFile(PLBIV, LPWSTR);
 
 VOID  xxxNewITop(PLBIV, INT);
+VOID  xxxNewITopEx(PLBIV, INT, DWORD);
 
 VOID  xxxNotifyOwner(PLBIV, INT);
 

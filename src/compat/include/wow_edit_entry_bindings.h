@@ -6,7 +6,7 @@
 typedef struct wow_control_entry_provider {
     WNDPROC edit_a, edit_w, combo_a, combo_w, list_a, list_w;
     WNDPROC combo_list_a, combo_list_w, button_a, button_w;
-    LONG (WINAPI *caret)(HWND, UINT, UINT, LONG);
+    TIMERPROC caret;
     WORD button_fnid, edit_fnid, combo_fnid, list_fnid, combo_list_fnid;
     UINT edit_class_index, combo_list_class_index;
     BOOL (WINAPI *caret_ready)(struct tagWND *);
@@ -64,7 +64,7 @@ LRESULT CALLBACK wow_edit_window_procW(HWND, UINT, WPARAM, LPARAM);
 WNDPROC WINAPI wow_control_client_procedure(WORD fnid, BOOL unicode);
 /* Ordinary control timers; only the original list caret callback is admitted.
  * NULL callbacks remain ordinary WM_TIMER delivery, not system timers. */
-UINT WINAPI wow_control_set_timer(HWND, UINT, DWORD, WNDPROC);
+UINT_PTR WINAPI wow_control_set_timer(HWND, UINT_PTR, DWORD, TIMERPROC);
 /* Terminal owner calls while HWND identity is still enrolled. Establishes
  * the same task/borrow permission as normal EDIT entry, then invokes the
  * canonical EDIT/ComboBox/ListBox finalizer selected by initialized FNID. */

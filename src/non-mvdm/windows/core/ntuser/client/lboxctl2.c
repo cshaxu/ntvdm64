@@ -2,6 +2,8 @@
 *
 *  LBOXCTL2.C -
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 *      List box handling routines
 *
 * 18-Dec-1990 ianja    Ported from Win 3.0 sources
@@ -205,17 +207,25 @@ BOOL LBGetItemRect(
         /*
          * itemHeight * sItem mod number ItemsPerColumn (itemsPerColumn)
          */
-        lprc->top = plb->cyChar * mod(sItem, plb->itemsPerColumn);
+        lprc->top = plb->cyChar * (sItem % plb->itemsPerColumn);
         lprc->bottom = lprc->top + plb->cyChar  /*+(plb->OwnerDraw ? 0 : 1)*/;
 
         UserAssert(plb->itemsPerColumn);
-        /*
-         * Remember, this is integer division here...
-         */
-        lprc->left += plb->cxColumn *
-                  ((sItem / plb->itemsPerColumn) - (plb->iTop / plb->itemsPerColumn));
 
-        lprc->right = lprc->left + plb->cxColumn;
+        if (plb->fRightAlign) {
+            lprc->right = lprc->right - plb->cxColumn *
+                 ((sItem / plb->itemsPerColumn) - (plb->iTop / plb->itemsPerColumn));
+
+            lprc->left = lprc->right - plb->cxColumn;
+        } else {
+            /*
+             * Remember, this is integer division here...
+             */
+            lprc->left += plb->cxColumn *
+                      ((sItem / plb->itemsPerColumn) - (plb->iTop / plb->itemsPerColumn));
+
+            lprc->right = lprc->left + plb->cxColumn;
+        }
     } else if (plb->OwnerDraw == OWNERDRAWVAR) {
 
         /*
@@ -253,7 +263,10 @@ BOOL LBGetItemRect(
         /*
          * For fixed height listboxes
          */
-        lprc->right += plb->xOrigin;
+        if (plb->fRightAlign && !(plb->fMultiColumn || plb->OwnerDraw) && plb->fHorzBar)
+            lprc->right += plb->xOrigin + (plb->xRightOrigin - plb->xOrigin);
+        else
+            lprc->right += plb->xOrigin;
         lprc->top = (sItem - plb->iTop) * plb->cyChar;
         lprc->bottom = lprc->top + plb->cyChar;
     }
@@ -270,11 +283,19 @@ BOOL LBGetItemRect(
 *  Called back from DrawState()
 *
 \***************************************************************************/
-BOOL CALLBACK LBPrintCallback(HDC hdc, LPWSTR lpstr, PLBIV plb, int cx, int cy)
+BOOL CALLBACK LBPrintCallback(
+    HDC hdc,
+    LPARAM lData,
+    WPARAM wData,
+    int cx,
+    int cy)
 {
+    LPWSTR  lpstr = (LPWSTR)lData;
+    PLBIV   plb = (PLBIV)wData;
     int     xStart;
     UINT    cLen;
     RECT    rc;
+    UINT    oldAlign;
 
     if (!lpstr) {
         return FALSE;
@@ -285,13 +306,18 @@ BOOL CALLBACK LBPrintCallback(HDC hdc, LPWSTR lpstr, PLBIV plb, int cx, int cy)
     else
         xStart = 2;
 
+    if (plb->fRightAlign) {
+        oldAlign = SetTextAlign(hdc, TA_RIGHT | GetTextAlign(hdc));
+        xStart = cx - xStart;
+    }
+
     cLen = wcslen(lpstr);
 
     if (plb->fUseTabStops) {
         TabTextOut(hdc, xStart, 0, lpstr, cLen,
             (plb->iTabPixelPositions ? plb->iTabPixelPositions[0] : 0),
             (plb->iTabPixelPositions ? (LPINT)&plb->iTabPixelPositions[1] : NULL),
-            0, TRUE, GetTextCharset(plb->hdc));
+            plb->fRightAlign ? cx : 0, TRUE, GetTextCharset(plb->hdc));
     } else {
         rc.left     = 0;
         rc.top      = 0;
@@ -302,9 +328,25 @@ BOOL CALLBACK LBPrintCallback(HDC hdc, LPWSTR lpstr, PLBIV plb, int cx, int cy)
             ExtTextOut(hdc, xStart, 0, ETO_OPAQUE, &rc, lpstr, cLen, NULL);
         else if (plb->fMultiColumn)
             ExtTextOut(hdc, xStart, 0, ETO_CLIPPED, &rc, lpstr, cLen, NULL);
-        else
+        else {
             ExtTextOut(hdc, xStart, 0, 0, NULL, lpstr, cLen, NULL);
+
+            /*
+             * When the listbox is in the incremental search mode and the item
+             * is highlighted (so we only draw in the current item), draw the
+             * caret for search indication.
+             */
+            if ((plb->iTypeSearch != 0) && (plb->OwnerDraw == 0) &&
+                    (GetBkColor(hdc) == SYSRGB(HIGHLIGHT))) {
+                SIZE size;
+                GetTextExtentPointW(hdc, lpstr, plb->iTypeSearch, &size);
+                PatBlt(hdc, xStart + size.cx - 1, 1, 1, cy - 2, DSTINVERT);
+            }
+        }
     }
+
+    if (plb->fRightAlign)
+        SetTextAlign(hdc, oldAlign);
 
     return(TRUE);
 }
@@ -328,6 +370,7 @@ void xxxLBDrawLBItem(
     DWORD rgbBkSave;
     UINT    uFlags;
     HDC     hdc = plb->hdc;
+    UINT  oldAlign;
 
     CheckLock(plb->spwnd);
 
@@ -360,8 +403,14 @@ void xxxLBDrawLBItem(
             uFlags |= DSS_UNION;
     }
 
+    if (plb->fRightAlign)
+        uFlags |= DSS_RIGHT;
+
+    if (plb->fRtoLReading)
+        oldAlign = SetTextAlign(hdc, TA_RTLREADING | GetTextAlign(hdc));
+
     DrawState(hdc, SYSHBR(WINDOWTEXT),
-        (DRAWSTATEPROC)LBPrintCallback,
+        LBPrintCallback,
         (LPARAM)lpstr,
         (WPARAM)plb,
         lprect->left,
@@ -369,6 +418,9 @@ void xxxLBDrawLBItem(
         lprect->right-lprect->left,
         lprect->bottom-lprect->top,
         uFlags);
+
+    if (plb->fRtoLReading)
+        SetTextAlign(hdc, oldAlign);
 
     if (fHilite) {
         SetTextColor(hdc, rgbSave);
@@ -407,8 +459,15 @@ void xxxLBSetCaret(PLBIV plb, BOOL fSetCaret)
                     itemState |= ODS_SELECTED;
 
                 xxxLBoxDrawItem(plb, plb->iSelBase, ODA_FOCUS, itemState, &rc);
-            } else
+            } else if (!TestWF(plb->spwnd, WEFPUIFOCUSHIDDEN)) {
+                COLORREF crBk = SetBkColor(plb->hdc, SYSRGB(WINDOW));
+                COLORREF crText = SetTextColor(plb->hdc, SYSRGB(WINDOWTEXT));
+
                 DrawFocusRect(plb->hdc, &rc);
+
+                SetBkColor(plb->hdc, crBk);
+                SetTextColor(plb->hdc, crText);
+            }
 
             if (fNewDC)
                 LBReleaseDC(plb);
@@ -513,6 +572,7 @@ void xxxLBoxCtlScroll(
 {
     INT iTopNew;
     INT cItemPageScroll;
+    DWORD dwTime = 0;
 
     CheckLock(plb->spwnd);
 
@@ -534,10 +594,12 @@ void xxxLBoxCtlScroll(
         iTopNew = plb->iTop;
         switch (cmd) {
         case SB_LINEUP:
+            dwTime = yAmt;
             iTopNew--;
             break;
 
         case SB_LINEDOWN:
+            dwTime = yAmt;
             iTopNew++;
             break;
 
@@ -589,16 +651,41 @@ void xxxLBoxCtlScroll(
             break;
 
         case SB_ENDSCROLL:
+            plb->fSmoothScroll = TRUE;
             xxxLBSetCaret(plb, FALSE);
             xxxLBShowHideScrollBars(plb);
             xxxLBSetCaret(plb, TRUE);
             return;
         }
 
-        xxxNewITop(plb, iTopNew);
+        xxxNewITopEx(plb, iTopNew, dwTime);
     }
 }
 
+/***************************************************************************\
+* LBGetScrollFlags
+*
+\***************************************************************************/
+
+DWORD LBGetScrollFlags(PLBIV plb, DWORD dwTime)
+{
+    DWORD dwFlags;
+
+    if (GetAppCompatFlags(NULL) & GACF_NOSMOOTHSCROLLING)
+        goto NoSmoothScrolling;
+
+    if (dwTime != 0) {
+        dwFlags = MAKELONG(SW_SCROLLWINDOW | SW_SMOOTHSCROLL | SW_SCROLLCHILDREN, dwTime);
+    } else if (TEST_EffectPUSIF(PUSIF_LISTBOXSMOOTHSCROLLING) && plb->fSmoothScroll) {
+        dwFlags = SW_SCROLLWINDOW | SW_SMOOTHSCROLL | SW_SCROLLCHILDREN;
+        plb->fSmoothScroll = FALSE;
+    } else {
+NoSmoothScrolling:
+        dwFlags = SW_SCROLLWINDOW | SW_INVALIDATE | SW_ERASE | SW_SCROLLCHILDREN;
+    }
+
+    return dwFlags;
+}
 
 /***************************************************************************\
 * xxxLBoxCtlHScroll
@@ -617,6 +704,7 @@ void xxxLBoxCtlHScroll(
     int oldOrigin = plb->xOrigin;
     int windowWidth;
     RECT rc;
+    DWORD dwTime = 0;
 
     CheckLock(plb->spwnd);
 
@@ -640,10 +728,12 @@ void xxxLBoxCtlHScroll(
 
         switch (cmd) {
         case SB_LINEUP:
+            dwTime = xAmt;
             newOrigin -= plb->cxChar;
             break;
 
         case SB_LINEDOWN:
+            dwTime = xAmt;
             newOrigin += plb->cxChar;
             break;
 
@@ -669,6 +759,7 @@ void xxxLBoxCtlHScroll(
             break;
 
         case SB_ENDSCROLL:
+            plb->fSmoothScroll = TRUE;
             xxxLBSetCaret(plb, FALSE);
             xxxLBShowHideScrollBars(plb);
             xxxLBSetCaret(plb, TRUE);
@@ -679,22 +770,29 @@ void xxxLBoxCtlHScroll(
         plb->xOrigin = newOrigin;
         plb->xOrigin = xxxSetLBScrollParms(plb, SB_HORZ);
 
+        if ((cmd == SB_BOTTOM) && plb->fRightAlign) {
+            /*
+             * so we know where to draw from.
+             */
+            plb->xRightOrigin = plb->xOrigin;
+        }
+
         if(oldOrigin != plb->xOrigin)  {
             HWND hwnd = HWq(plb->spwnd);
-            NtUserScrollWindowEx(hwnd, oldOrigin-plb->xOrigin,
-                0, NULL, &rc, NULL, NULL, SW_SCROLLWINDOW |
-                SW_INVALIDATE | SW_ERASE | SW_SCROLLCHILDREN);
+            DWORD dwFlags;
+
+            dwFlags = LBGetScrollFlags(plb, dwTime);
+            ScrollWindowEx(hwnd, oldOrigin-plb->xOrigin,
+                0, NULL, &rc, NULL, NULL, dwFlags);
             UpdateWindow(hwnd);
         }
 
         xxxLBSetCaret(plb, TRUE);
-    }
-
-    else
+    } else {
         // this is a less-than-ideal fix for ImageMind ScreenSaver (Win95
         // B#8252) but it works and it doesn't hurt anybody -- JEFFBOG 10/28/94
         xxxSetLBScrollParms(plb, SB_HORZ);
-
+    }
 }
 
 
@@ -745,7 +843,10 @@ void xxxLBPaint(
 
     // Adjust width of client rect for scrolled amount
     // fix for #140, t-arthb
-    rect.right += plb->xOrigin;
+    if (plb->fRightAlign && !(plb->fMultiColumn || plb->OwnerDraw) && plb->fHorzBar)
+        rect.right += plb->xOrigin + (plb->xRightOrigin - plb->xOrigin);
+    else
+        rect.right += plb->xOrigin;
 
     // Get the index of the last item visible on the screen. This is also
     // valid for var height ownerdraw.
@@ -756,6 +857,11 @@ void xxxLBPaint(
     // or if we're doing a control print
     if (iLastItem == -1)
         FillRect(plb->hdc, &rect, hbrControl);
+
+
+    // Allow AnimateWindow() catch the apps that do not use our DC when
+    // drawing the list box
+    SetBoundsRect(plb->hdc, NULL, DCB_RESET | DCB_ENABLE);
 
     for (i = plb->iTop; i <= iLastItem; i++) {
 
@@ -852,8 +958,13 @@ BOOL ISelFromPt(
     if (plb->OwnerDraw != OWNERDRAWVAR) {
         if (plb->fMultiColumn) {
             if (y < plb->itemsPerColumn * plb->cyChar) {
-                sItem = plb->iTop + (INT)((y / plb->cyChar) +
-                        (pt.x / plb->cxColumn) * plb->itemsPerColumn);
+                if (plb->fRightAlign)
+                    sItem = plb->iTop + (INT)((y / plb->cyChar) +
+                            ((rect.right - pt.x) / plb->cxColumn) * plb->itemsPerColumn);
+                else
+                    sItem = plb->iTop + (INT)((y / plb->cyChar) +
+                            (pt.x / plb->cxColumn) * plb->itemsPerColumn);
+
             } else {
 
                 /*
@@ -1145,16 +1256,9 @@ void xxxNotifyOwner(
 
     CheckLock(plb->spwnd);
 
-#line 1148
-#ifdef NEVER
-#line 1149
-#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
-#endif
-#line 1160
-
     ThreadLock(plb->spwndParent, &tlpwndParent);
     SendMessage(HW(plb->spwndParent), WM_COMMAND,
-            MAKELONG((UINT)plb->spwnd->spmenu, sEvt), (LONG)HWq(plb->spwnd));
+            MAKELONG(PTR_TO_ID(plb->spwnd->spmenu), sEvt), (LPARAM)HWq(plb->spwnd));
     ThreadUnlock(&tlpwndParent);
 }
 
@@ -1174,6 +1278,16 @@ void xxxSetISelBase(
     xxxLBSetCaret(plb, FALSE);
     plb->iSelBase = sItem;
     xxxLBSetCaret(plb, TRUE);
+
+    xxxInsureVisible(plb, plb->iSelBase, FALSE);
+    
+    /*
+     * We need to send this event even if the listbox isn't visible. See
+     * bug #88548. Also see 355612.
+     */
+    if (_IsWindowVisible(plb->spwnd) || (GetFocus() == HWq(plb->spwnd))) {
+        LBEvent(plb, EVENT_OBJECT_FOCUS, sItem);
+    }
 }
 
 
@@ -1195,6 +1309,7 @@ void xxxTrackMouse(
     RECT rcClient;
     UINT wModifiers = 0;
     BOOL fSelected;
+    UINT uEvent = 0;
     INT trackPtRetn;
     HWND hwnd = HWq(plb->spwnd);
     TL tlpwndEdit;
@@ -1206,8 +1321,13 @@ void xxxTrackMouse(
      * Optimization:  do nothing if mouse not captured
      */
     if ((wMsg != WM_LBUTTONDOWN) && (wMsg != WM_LBUTTONDBLCLK)) {
-        if (!plb->fCaptured)
+        if (!plb->fCaptured) {
             return;
+        }
+        /* Host boundary: native USER owns the session RIT input-source state.
+         * Do not guess it from this dispatched message; keep normal tracking. */
+#line 1340
+
     }
 
     mousetemp = ISelFromPt(plb, pt, &iSelFromPt);
@@ -1242,13 +1362,13 @@ void xxxTrackMouse(
             if (plb->pcbox && mousetemp) {
                 _ClientToScreen(plb->spwnd, &pt);
 
-                if (!PtInRect(&plb->spwnd->rcWindow, pt)) {
+                if (!PtInRect(KPRECT_TO_PRECT(&plb->spwnd->rcWindow), pt)) {
                     /*
                      * Cancel selection if clicked outside of combo;
                      * Accept if clicked on combo button or item.
                      */
                     xxxCBHideListBoxWindow(plb->pcbox, TRUE, FALSE);
-                } else if (!PtInRect(&plb->spwnd->rcClient, pt)) {
+                } else if (!PtInRect(KPRECT_TO_PRECT(&plb->spwnd->rcClient), pt)) {
                     /*
                      * Let it pass through.  Save, restore capture in
                      * case user is clicking on scrollbar.
@@ -1439,6 +1559,13 @@ MouseMoveHandler:
              */
             if (plb->wMultiple != MULTIPLESEL) {
                 xxxResetWorld(plb, iSelTemp, iSelTemp, FALSE);
+                /*
+                 * This will be TRUE if iSelTemp isn't -1 (like below)
+                 * and also if it is but there is a current selection.
+                 */
+                if ((iSelTemp == -1) && (plb->iSel != -1)) {
+                    uEvent = EVENT_OBJECT_SELECTIONREMOVE;
+                }
             }
 
             fSelected = IsSelected(plb, iSelTemp, HILITEONLY);
@@ -1456,6 +1583,12 @@ MouseMoveHandler:
                      */
                     xxxInvertLBItem(plb, iSelTemp, !fSelected);
                     fSelected = !fSelected;  /* Set the new state */
+                    if (plb->wMultiple == MULTIPLESEL) {
+                        uEvent = (fSelected ? EVENT_OBJECT_SELECTIONADD :
+                                EVENT_OBJECT_SELECTIONREMOVE);
+                    } else {
+                        uEvent = EVENT_OBJECT_SELECTION;
+                    }
                 }
             }
 
@@ -1498,6 +1631,10 @@ MouseMoveHandler:
                  */
                 SetSelected(plb, plb->iMouseDown, TRUE, HILITEANDSEL);
                 xxxInvertLBItem(plb, plb->iMouseDown, TRUE);
+                /*
+                 * We are changing the selction to this item only
+                 */
+                uEvent = EVENT_OBJECT_SELECTION;
             } else {
 
                 /*
@@ -1509,6 +1646,7 @@ MouseMoveHandler:
                  * Select all items from anchor point upto current click pt
                  */
                 xxxAlterHilite(plb, plb->iMouseDown, iSelFromPt, HILITE, HILITEONLY, FALSE);
+                uEvent = EVENT_OBJECT_SELECTIONWITHIN;
             }
             plb->fNewItemState = (UINT)TRUE;
             break;
@@ -1535,6 +1673,8 @@ MouseMoveHandler:
              */
             SetSelected(plb, iSelFromPt, plb->fNewItemState, HILITEANDSEL);
             xxxInvertLBItem(plb, iSelFromPt, plb->fNewItemState);
+            uEvent = (plb->fNewItemState ? EVENT_OBJECT_SELECTIONADD :
+                    EVENT_OBJECT_SELECTIONREMOVE);
             break;
 
         case SHCTLDOWN:
@@ -1582,6 +1722,7 @@ MouseMoveHandler:
              * Select all items from anchor point upto current click pt
              */
             xxxAlterHilite(plb, plb->iMouseDown, iSelFromPt, plb->fNewItemState, HILITEONLY, FALSE);
+            uEvent = EVENT_OBJECT_SELECTIONWITHIN;
             break;
         }
 
@@ -1598,6 +1739,13 @@ MouseMoveHandler:
             xxxSetISelBase(plb, iSelFromPt);
         }
 
+        /*
+         * SetISelBase will change the focus and send a focus event.
+         * Then we send the selection event.
+         */
+        if (uEvent) {
+            LBEvent(plb, uEvent, iSelFromPt);
+        }
         if (wMsg == WM_LBUTTONDOWN && TestWF(plb->spwnd, WEFDRAGOBJECT)) {
             if (NtUserDragDetect(hwnd, pt)) {
 
@@ -1617,7 +1765,7 @@ MouseMoveHandler:
                  */
                 ThreadLock(plb->spwndParent, &tlpwndParent);
                 SendMessage(HW(plb->spwndParent), WM_BEGINDRAG, plb->iSelBase,
-                        (LONG)hwnd);
+                        (LPARAM)hwnd);
                 ThreadUnlock(&tlpwndParent);
             } else {
                 xxxTrackMouse(plb, WM_LBUTTONUP, pt);
@@ -1649,7 +1797,10 @@ MouseMoveHandler:
                     dist = pt.x < 0 ? -pt.x : (pt.x - rcClient.right + 1);
                     iTimer = ((gpsi->dtScroll * 3) / 2) - ((WORD) dist << 4);
 
-                    xxxLBoxCtlHScrollMultiColumn(plb, (pt.x < 0 ? SB_LINEUP : SB_LINEDOWN), 0);
+                    if (plb->fRightAlign)
+                        xxxLBoxCtlHScrollMultiColumn(plb, (pt.x < 0 ? SB_LINEDOWN : SB_LINEUP), 0);
+                    else
+                        xxxLBoxCtlHScrollMultiColumn(plb, (pt.x < 0 ? SB_LINEUP : SB_LINEDOWN), 0);
 
                     goto SetTimerAndSel;
                 }
@@ -1697,6 +1848,7 @@ SetTimerAndSel:
                  */
                 if (plb->wMultiple == EXTENDEDSEL) {
                     xxxLBBlockHilite(plb, iSelFromPt, FALSE);
+                    LBEvent(plb, EVENT_OBJECT_SELECTIONWITHIN, iSelFromPt);
                 }
                 plb->iLastMouseMove = iSelFromPt;
             }
@@ -1748,7 +1900,19 @@ void xxxLBButtonUp(PLBIV plb, UINT uFlags)
         plb->iSel = plb->iLastSelection;
         xxxInvertLBItem(plb, plb->iSel, TRUE);
 
-        if (!(uFlags & LBUP_NOTIFY) && plb->fNotify && (iSelOld != plb->iSel))
+        /*
+         * Note that we always send selection events before we tell the
+         * app.  This is on purpose--the app may turn around and select
+         * something else when notified.  In which case our event would
+         * be out of order.
+         */
+        LBEvent(plb, EVENT_OBJECT_SELECTION, plb->iSel);
+
+        /*
+         * On win-95 and NT4 the check used to be !(uFlags & LBUP_NOTIFY) which
+         * is a bug because we would notify even when the lb is not LBUP_NOTIFY
+         */
+        if ((uFlags & LBUP_NOTIFY) && plb->fNotify && (iSelOld != plb->iSel))
             xxxNotifyOwner(plb, LBN_SELCHANGE);
     }
 
@@ -1827,14 +1991,26 @@ INT IncrementISel(
 
 
 /***************************************************************************\
-* xxxNewITop
+* NewITop
+*
+\***************************************************************************/
+
+void xxxNewITop(PLBIV plb, INT iTopNew)
+{
+    xxxNewITopEx(plb, iTopNew, 0);
+}
+
+
+/***************************************************************************\
+* xxxNewITopEx
 *
 * History:
 \***************************************************************************/
 
-void xxxNewITop(
+void xxxNewITopEx(
     PLBIV plb,
-    INT iTopNew)
+    INT iTopNew,
+    DWORD dwTime)
 {
     int     iTopOld;
     BOOL fCaretOn;
@@ -1858,6 +2034,7 @@ void xxxNewITop(
     if (iTopNew != iTopOld) {
         int     xAmt, yAmt;
         RECT    rc;
+        DWORD   dwFlags;
 
         _GetClientRect(plb->spwnd, &rc);
 
@@ -1867,8 +2044,11 @@ void xxxNewITop(
                 // Handle scrolling a large number of columns properly so that
                 // we don't overflow the size of a rect.
                 xAmt = 32000;
-            else
+            else {
                 xAmt = (iTopOld - iTopNew) * plb->cxColumn;
+                if (plb->fRightAlign)
+                    xAmt = -xAmt;
+            }
         } else {
             xAmt = 0;
             if (plb->OwnerDraw == OWNERDRAWVAR) {
@@ -1885,9 +2065,9 @@ void xxxNewITop(
                 yAmt = (iTopOld - iTopNew) * plb->cyChar;
         }
 
-        NtUserScrollWindowEx(HWq(plb->spwnd), xAmt, yAmt, NULL, &rc, NULL, NULL,
-            SW_SCROLLWINDOW | SW_INVALIDATE | SW_ERASE | SW_SCROLLCHILDREN);
-
+        dwFlags = LBGetScrollFlags(plb, dwTime);
+        ScrollWindowEx(HWq(plb->spwnd), xAmt, yAmt, NULL, &rc, NULL,
+                NULL, dwFlags);
         UpdateWindow(HWq(plb->spwnd));
     }
 
@@ -1954,11 +2134,11 @@ void xxxInsureVisible(
 * History:
 \***************************************************************************/
 
-LONG xxxLBoxCaretBlinker(
+VOID xxxLBoxCaretBlinker(
     HWND hwnd,
     UINT wMsg,
-    UINT nIDEvent,
-    LONG dwTime)
+    UINT_PTR nIDEvent,
+    DWORD dwTime)
 {
     PWND pwnd;
     PLBIV plb;
@@ -1975,10 +2155,17 @@ LONG xxxLBoxCaretBlinker(
     plb = ((PLBWND)pwnd)->pLBIV;
 
     /*
+     * leave caret on, don't blink it off (prevents rapid blinks?)
+     */
+    if (ISREMOTESESSION() && plb->fCaretOn) {
+        return;
+    }
+
+    /*
      * Check if the Caret is ON, if so, switch it OFF
      */
     xxxLBSetCaret(plb, !plb->fCaretOn);
-    return TRUE;
+    return;
 }
 
 
@@ -2005,6 +2192,7 @@ void xxxLBoxCtlKeyInput(
     BOOL hScrollBar = TestWF(plb->spwnd, WFHSCROLL);
     UINT wModifiers = 0;
     BOOL fSelectKey = FALSE;  /* assume it is a navigation key */
+    UINT uEvent = 0;
     HWND hwnd = HWq(plb->spwnd);
     TL tlpwndParent;
     TL tlpwnd;
@@ -2077,7 +2265,7 @@ void xxxLBoxCtlKeyInput(
          */
         ThreadLock(plb->spwndParent, &tlpwndParent);
         iNewISel = (INT)SendMessage(HW(plb->spwndParent), WM_VKEYTOITEM,
-                MAKELONG(vKey, plb->iSelBase), (LONG)hwnd);
+                MAKELONG(vKey, plb->iSelBase), (LPARAM)hwnd);
         ThreadUnlock(&tlpwndParent);
 
         if (iNewISel == -2) {
@@ -2122,8 +2310,8 @@ void xxxLBoxCtlKeyInput(
              */
             SetSelected(plb, plb->iSelBase, TRUE, HILITEANDSEL);
             xxxInvertLBItem(plb, plb->iSelBase, TRUE);
-            xxxLBSetCaret(plb, TRUE);
-            xxxNotifyOwner(plb, LBN_SELCHANGE);
+            uEvent = EVENT_OBJECT_SELECTION;
+            goto CaretOnAndNotify;
         }
         return;
         break;
@@ -2141,7 +2329,12 @@ void xxxLBoxCtlKeyInput(
         if ((wModifiers & CTLDOWN) && (plb->wMultiple != SINGLESEL)) {
             xxxLBSetCaret(plb, FALSE);
             xxxResetWorld(plb, -1, -1, TRUE);
+
+            uEvent = EVENT_OBJECT_SELECTIONWITHIN;
+
+CaretOnAndNotify:
             xxxLBSetCaret(plb, TRUE);
+            LBEvent(plb, uEvent, plb->iSelBase);
             xxxNotifyOwner(plb, LBN_SELCHANGE);
         }
         return;
@@ -2248,6 +2441,10 @@ void xxxLBoxCtlKeyInput(
 
     case VK_LEFT:
         if (plb->fMultiColumn) {
+            if (plb->fRightAlign ^ (!!TestWF(plb->spwnd, WEFLAYOUTRTL))) {
+                goto ReallyRight;
+            }
+ReallyLeft:
             if (plb->iSelBase / plb->itemsPerColumn == 0) {
                 i = 0;
             } else {
@@ -2281,6 +2478,10 @@ void xxxLBoxCtlKeyInput(
 
     case VK_RIGHT:
         if (plb->fMultiColumn) {
+            if (plb->fRightAlign ^ (!!TestWF(plb->spwnd, WEFLAYOUTRTL))) {
+                goto ReallyLeft;
+            }
+ReallyRight:
             if (plb->iSelBase / plb->itemsPerColumn == plb->cMac / plb->itemsPerColumn) {
                 i = 0;
             } else {
@@ -2384,6 +2585,9 @@ HandleHScrolling:
             return;
         }
 
+        uEvent = EVENT_OBJECT_SELECTION;
+
+        plb->iTypeSearch = 0;
         if ((vKey == VK_UP || vKey == VK_DOWN) &&
                 !IsSelected(plb, plb->iSelBase, HILITEONLY)) {
 
@@ -2444,6 +2648,8 @@ TrackKeyDown:
             xxxResetWorld(plb, plb->iMouseDown, plb->iLastMouseMove, FALSE);
         }
 
+        uEvent = EVENT_OBJECT_SELECTIONWITHIN;
+
         /* LBBlockHilite takes care to deselect the block between
          * the anchor point and iLastMouseMove and select the block
          * between the anchor point and the current cursor location
@@ -2470,6 +2676,8 @@ TrackKeyDown:
 
                 /* Set the anchor point at the current location */
                 plb->iLastMouseMove = plb->iMouseDown = iNewISel;
+                uEvent = (plb->fNewItemState ? EVENT_OBJECT_SELECTIONADD :
+                        EVENT_OBJECT_SELECTIONREMOVE);
             }
         } else {
             /* We are NOT in ADD mode */
@@ -2484,6 +2692,7 @@ TrackKeyDown:
 
             /* Set the anchor point at the current location */
             plb->iLastMouseMove = plb->iMouseDown = iNewISel;
+            uEvent = EVENT_OBJECT_SELECTION;
         }
     }
 
@@ -2494,6 +2703,10 @@ TrackKeyDown:
     xxxLBShowHideScrollBars(plb);
 
     xxxLBSetCaret(plb, TRUE);
+
+    if (uEvent) {
+        LBEvent(plb, uEvent, iNewISel);
+    }
 
     /*
      * Should we notify our parent?
@@ -2547,9 +2760,9 @@ INT Compare(
     result = CompareStringW((LCID)dwLocaleId, NORM_IGNORECASE,
             pwsz1, min(len1,len2), pwsz2, min(len1, len2));
 
-    if (result == 1) {
+    if (result == CSTR_LESS_THAN) {
        return LT;
-    } else if (result == 2) {
+    } else if (result == CSTR_EQUAL) {
         if (len1 == len2) {
             return EQ;
         } else if (len1 < len2) {
@@ -2665,17 +2878,17 @@ INT xxxFindString(
                  * Send compare item messages to the parent for sorting
                  */
                 cis.CtlType = ODT_LISTBOX;
-                cis.CtlID = (UINT)plb->spwnd->spmenu;
+                cis.CtlID = PtrToUlong(plb->spwnd->spmenu);
                 cis.hwndItem = HWq(plb->spwnd);
                 cis.itemID1 = (UINT)-1;
-                cis.itemData1 = (DWORD)lpstr;
+                cis.itemData1 = (ULONG_PTR)lpstr;
                 cis.itemID2 = (UINT)sInd;
                 cis.itemData2 = pODRg[sInd].itemData;
                 cis.dwLocaleId = plb->dwLocaleId;
 
                 ThreadLock(plb->spwndParent, &tlpwndParent);
-                sortResult = SendMessage(HW(plb->spwndParent), WM_COMPAREITEM,
-                        cis.CtlID, (LONG)&cis);
+                sortResult = (INT)SendMessage(HW(plb->spwndParent), WM_COMPAREITEM,
+                        cis.CtlID, (LPARAM)&cis);
                 ThreadUnlock(&tlpwndParent);
 
 
@@ -2695,7 +2908,7 @@ INT xxxFindString(
                 /*
                  * Searching for app supplied long data matches.
                  */
-                if ((DWORD)lpstr == pODRg[sInd].itemData)
+                if ((ULONG_PTR)lpstr == pODRg[sInd].itemData)
                     goto FoundIt;
             }
         }
@@ -2773,6 +2986,34 @@ void xxxLBoxCtlCharInput(
          * Move selection to first item beginning with the character the
          * user typed.  We don't want do this if we are using owner draw.
          */
+
+        if (fAnsi && IS_DBCS_ENABLED() && IsDBCSLeadByteEx(THREAD_CODEPAGE(), (BYTE)inputChar)) {
+            WCHAR wch;
+            LPWSTR lpwstr = &wch;
+
+            inputChar = DbcsCombine(HWq(plb->spwnd), (BYTE)inputChar);
+            RIPMSG1(RIP_VERBOSE, "xxxLBoxCtlCharInput: combined DBCS. 0x%04x", inputChar);
+
+            if (inputChar == 0) {
+                RIPMSG1(RIP_WARNING, "xxxLBoxCtlCharInput: cannot combine two DBCS. LB=0x%02x",
+                        inputChar);
+                break;
+            }
+            // If it is DBCS, let's ignore the ctrl status.
+            fControl = FALSE;
+
+            // Convert DBCS to UNICODE.
+            // Note: Leading byte is in the low byte, trailing byte is in high byte.
+            // Let's assume Little Endian CPUs only, so inputChar can directly be
+            // input for MBSToWCSEx as an ANSI string.
+            if (MBToWCSEx(THREAD_CODEPAGE(), (LPCSTR)&inputChar, 2, &lpwstr, 1, FALSE) == 0) {
+                RIPMSG1(RIP_WARNING, "xxxLBoxCtlCharInput: cannot convert 0x%04x to UNICODE.",
+                        inputChar);
+                break;
+            }
+            inputChar = wch;
+        }
+
         if (plb->fHasStrings) {
             // Incremental Type Search processing
             //
@@ -2851,7 +3092,7 @@ CtlKeyInput:
             if (plb->spwndParent != NULL) {
                 ThreadLock(plb->spwndParent, &tlpwndParent);
                 iSel = (INT)SendMessageWorker(plb->spwndParent, WM_CHARTOITEM,
-                        MAKELONG(inputChar, plb->iSelBase), (LONG)HWq(plb->spwnd), fAnsi);
+                        MAKELONG(inputChar, plb->iSelBase), (LPARAM)HWq(plb->spwnd), fAnsi);
                 ThreadUnlock(&tlpwndParent);
             } else
                 iSel = -1;
@@ -2989,8 +3230,9 @@ void xxxLBSelRange(
             xxxLBInvalidateRect(plb, (LPRECT)&rc, FALSE);
         }
 
-
     }
+    UserAssert(plb->wMultiple);
+    LBEvent(plb, EVENT_OBJECT_SELECTIONWITHIN, iStart);
 }
 
 
@@ -3038,6 +3280,17 @@ int xxxLBSetCurSel(
                 plb->iSelBase = 0;
         }
 
+        /*
+         * Send both focus and selection events
+         *
+         * We need to send this event even if the listbox isn't visible. See
+         * bug #88548. Also see 355612.
+         */
+        if (_IsWindowVisible(plb->spwnd) || (GetFocus() == HWq(plb->spwnd))) {
+            LBEvent(plb, EVENT_OBJECT_FOCUS, plb->iSelBase);
+            LBEvent(plb, EVENT_OBJECT_SELECTION, plb->iSel);
+        }
+
         xxxLBSetCaret(plb, TRUE);
         return plb->iSel;
     }
@@ -3058,7 +3311,7 @@ int xxxLBSetCurSel(
 int LBSetItemData(
     PLBIV plb,
     int index,
-    LONG data)
+    LONG_PTR data)
 {
     LPSTR lpItemText;
 
@@ -3066,7 +3319,7 @@ int LBSetItemData(
      * v-ronaar: fix bug #25865, don't allow negative indices!
      */
     if ((index != -1) && ((UINT) index >= (UINT) plb->cMac)) {
-        RIPERR0(ERROR_INVALID_INDEX, RIP_WARNING, "LBSetItemData with invalid index");
+        RIPERR1(ERROR_INVALID_INDEX, RIP_WARNING, "LBSetItemData with invalid index %x", index);
         return LB_ERR;
     }
 
@@ -3193,6 +3446,7 @@ LONG xxxLBSetSel(
 {
     INT sItem;
     RECT rc;
+    UINT uEvent = 0;
 
     CheckLock(plb->spwnd);
 
@@ -3230,6 +3484,7 @@ LONG xxxLBSetSel(
             }
         }
         xxxLBSetCaret(plb, TRUE);
+        uEvent = EVENT_OBJECT_SELECTIONWITHIN;
     } else {
         if (fSelect) {
 
@@ -3242,6 +3497,9 @@ LONG xxxLBSetSel(
             plb->iSelBase = plb->iSel = iSel;
 
             plb->iMouseDown = plb->iLastMouseMove = iSel;
+            uEvent = EVENT_OBJECT_FOCUS;
+        } else {
+            uEvent = EVENT_OBJECT_SELECTIONREMOVE;
         }
         SetSelected(plb, iSel, fSelect, HILITEANDSEL);
 
@@ -3259,6 +3517,18 @@ LONG xxxLBSetSel(
         if (LBGetItemRect(plb, iSel, &rc)) {
             xxxLBInvalidateRect(plb, &rc, FALSE);
         }
+    }
+
+    /*
+     * We need to send this event even if the listbox isn't visible. See
+     * bug #88548. Also see 355612.
+     */
+    if (_IsWindowVisible(plb->spwnd) || (GetFocus() == HWq(plb->spwnd))) {
+        if (uEvent == EVENT_OBJECT_FOCUS) {
+            LBEvent(plb, uEvent, plb->iSelBase);
+            uEvent = EVENT_OBJECT_SELECTION;
+        }
+        LBEvent(plb, uEvent, iSel);
     }
 
     return 0;
@@ -3293,7 +3563,7 @@ void xxxLBoxDrawItem(
      */
 
     dis.CtlType = ODT_LISTBOX;
-    dis.CtlID = (UINT)plb->spwnd->spmenu;
+    dis.CtlID = PtrToUlong(plb->spwnd->spmenu);
 
     /*
      * Use -1 if an invalid item number is being used.  This is so that the app
@@ -3306,6 +3576,13 @@ void xxxLBoxDrawItem(
     dis.hDC = plb->hdc;
     dis.itemState = itemState |
             (UINT)(TestWF(plb->spwnd, WFDISABLED) ? ODS_DISABLED : 0);
+
+    if (TestWF(plb->spwnd, WEFPUIFOCUSHIDDEN)) {
+        dis.itemState |= ODS_NOFOCUSRECT;
+    }
+    if (TestWF(plb->spwnd, WEFPUIACCELHIDDEN)) {
+        dis.itemState |= ODS_NOACCEL;
+    }
 
     /*
      * Set the app supplied data
@@ -3338,8 +3615,7 @@ void xxxLBoxDrawItem(
     ThreadLock(plb->spwndParent, &tlpwndParent);
     SendMessage(HW(plb->spwndParent), WM_DRAWITEM,
             TestWF(plb->spwndParent, WFWIN31COMPAT) ? dis.CtlID : 0,
-            (LONG)&dis);
-
+            (LPARAM)&dis);
     ThreadUnlock(&tlpwndParent);
 }
 
@@ -3450,12 +3726,12 @@ void xxxLBBlockHilite(
 * xxxAlterHilite
 *
 * Changes the hilite state of (i..j] (ie. excludes i, includes j in case
-* you've forgotten this silly notation) to fHilite. It inverts this changes
+* you've forgotten this notation) to fHilite. It inverts this changes
 * the hilite state.
 *
-*  OpFlags:  HILIEONLY    Only change the display state of the items
-*             SELONLY     Only Chage the selection state of the items
-*             HILITEANDSELECT  Do both.
+*  OpFlags:  HILITEONLY      Only change the display state of the items
+*            SELONLY         Only Change the selection state of the items
+*            HILITEANDSELECT Do both.
 *  fHilite:
 *            HILITE/TRUE
 *            DEHILITE/FALSE
