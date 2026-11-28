@@ -2,6 +2,8 @@
 #define WOW_CONTROL_MESSAGE_ABI_H
 
 /* XP WOW message dispatch slots shared with the recovered USER controls. */
+/* XP user.h:2517; moved from usercli.h upstream. */
+#define MSGFLAG_SPECIAL_THUNK 0x10000000
 #define CBEC_SETCOMBOFOCUS 0x0166
 #define CBEC_KILLCOMBOFOCUS 0x0167
 #ifndef LBCB_CARETON

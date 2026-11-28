@@ -25,13 +25,7 @@ typedef union tagALWAYSZERO
 } ALWAYSZERO;
 
 /* XP windows/core/ntuser/client/usercli.h:2209-2215. */
-typedef struct tagACCELCACHE
-{
-    struct tagACCELCACHE *pacNext;
-    UINT dwLockCount;
-    HACCEL hAccel;
-    PVOID pRes;
-} ACCELCACHE, *PACCELCACHE;
+typedef struct tagACCELCACHE ACCELCACHE, *PACCELCACHE;
 
 /* XP public/internal/windows/inc/winuserp.h:2625. */
 typedef BOOL (CALLBACK* INITUSERAPIHOOK)(DWORD dwCmd, void* pvParam);

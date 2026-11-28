@@ -2607,6 +2607,23 @@ typedef struct tagBUTNWND {
     WND wnd;
     PBUTN pbutn;
 } BUTNWND, *PBUTNWND;
+
+typedef struct tagMDI {
+    UINT    cKids;
+    HWND    hwndMaxedChild;
+    HWND    hwndActiveChild;
+    HMENU   hmenuWindow;
+    UINT    idFirstChild;
+    UINT    wScroll;
+    LPWSTR  pTitle;
+    UINT    iChildTileLevel;
+} MDI, * PMDI;
+
+typedef struct tagMDIWND {
+    WND             wnd;
+    KERNEL_UINT_PTR dwReserved; // quattro pro 1.0 stores stuff here!!
+    PMDI            pmdi;
+} MDIWND, * KPTR_MODIFIER PMDIWND;
 #endif
 #if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
 #line 2407

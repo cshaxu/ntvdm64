@@ -2,6 +2,15 @@
 #define WOW_USER_CLIENT_VIEW_LAYOUT_H
 
 #include <windows.h>
+/* Public COM and private USER have unrelated CLIPDATA names. Keep both
+ * original layouts, separating only the public declaration namespace. */
+#pragma push_macro("tagCLIPDATA")
+#pragma push_macro("CLIPDATA")
+#define tagCLIPDATA tagWOW_PUBLIC_CLIPDATA
+#define CLIPDATA WOW_PUBLIC_CLIPDATA
+#include <ole2.h>
+#pragma pop_macro("CLIPDATA")
+#pragma pop_macro("tagCLIPDATA")
 #include <stddef.h>
 #include "non-mvdm/public/internal/windows/inc/w32w64.h"
 
@@ -11,7 +20,14 @@
 /* XP shared-pointer spellings in this fixed x86 client view. */
 typedef BYTE *KPBYTE;
 typedef INT *KPINT;
+typedef ULONG_PTR *KPULONG_PTR;
+/* Existing WOW help payload is declared by wow32_provider_private.h. */
+typedef struct _WOW32_HLP *LPHLP;
 typedef WCHAR *KLPWSTR;
+/* XP user.h:702 opaque keyboard-table declaration; no table storage. */
+typedef struct tagKBDTABLE_MULT_INTERNAL *PKBDTABLE_MULTI_INTERNAL;
+/* XP windows/published/winuser.w:12626-12629. */
+typedef struct tagMSGMASK { BYTE *rgb; DWORD cb; } MSGMASK, *PMSGMASK;
 typedef struct tagDESKTOP *PDESKTOP;
 typedef struct tagTHREADINFO *PWOW_CLIENT_THREADINFO;
 typedef struct tagCLS *PCLS;
@@ -38,6 +54,9 @@ typedef LONG (APIENTRY *WNDPROC_PWND)(PWND, UINT, DWORD, LONG);
 #undef WOW_ORIGINAL_CLIENT_VIEW_LAYOUT
 #undef CWINHOOKS
 #pragma warning(pop)
+
+/* Original declarations precede the registered-callback expression macros. */
+#include "non-mvdm/windows/core/ntuser/client/globals.h"
 
 #define WOW_VIEW_ASSERT(name, condition) typedef char name[(condition) ? 1 : -1]
 WOW_VIEW_ASSERT(wow_view_x86, sizeof(void *) == 4);

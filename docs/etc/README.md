@@ -2247,3 +2247,5 @@ post-publication targeted checks.
 - [S15 P65 USER resources](evidence/t485-s1/n022-res.md).
 
 - [S15 P66 capture and lookaside](evidence/t485-s1/n022-rtlinit.md).
+
+- [S15 P67 USER client declarations](evidence/t485-s1/n022-usercli.md).

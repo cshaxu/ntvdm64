@@ -308,3 +308,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P65 USER resources](n022-res.md).
 
 - [S15 P66 capture and lookaside](n022-rtlinit.md).
+
+- [S15 P67 USER client declarations](n022-usercli.md).

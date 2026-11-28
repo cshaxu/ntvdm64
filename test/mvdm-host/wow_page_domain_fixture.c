@@ -233,7 +233,14 @@ static const wow_control_state_providers fixture_control_state_provider = {
 #define DispatchClientMessage WINAPI DispatchClientMessage
 #define CreateMenuFromResource WINAPI CreateMenuFromResource
 #define TabTextOut WINAPI TabTextOut
+/* The original USER declarations inherit /Gz in production. */
+#define UserLpkTabbedTextOut WINAPI UserLpkTabbedTextOut
+#define UserLpkPSMTextOut WINAPI UserLpkPSMTextOut
 #include "non-mvdm/windows/core/ntuser/client/usercli.h"
+#undef UserLpkPSMTextOut
+#undef UserLpkTabbedTextOut
+/* Native HWND observations below use the public host API. */
+#undef GetWindowPlacement
 #undef FreeLookasideEntry
 #undef TabTextOut
 #undef CreateMenuFromResource

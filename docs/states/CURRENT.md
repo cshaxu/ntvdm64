@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime77 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime78 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -200,13 +200,14 @@ its receipt retains original semantics, provider bindings and verification.
 runtime73; receipt preserves restored bodies, service bindings and targeted tests.
 [P65 USER resources](../etc/evidence/t485-s1/n022-res.md) delivered runtime75;
 its receipt retains source/dependency identities, resource and runtime verification.
-[P66 capture/lookaside](../etc/evidence/t485-s1/n022-rtlinit.md) delivered runtime77:
-XP bodies restored, autonomous class capture moved to existing F owner.
-Cached full build, dual13-image26hash, controls40/40, real standard-class
-lifecycle and genuine Win16 controls pass. N02237/39; S15 9/14, overall57/159.
-Census1330/789/800/530/8107/65540; delta0/0/0/0/+5/-733;1305XP/25OpenNT.
-Six files since P61 runtime70 Full24/24, including one exact direct dependency.
-No original guest change or S/T closure. Next usercli.h.
+[P66 capture/lookaside](../etc/evidence/t485-s1/n022-rtlinit.md) delivered runtime77;
+its receipt retains XP bodies, coupled capture ABI correction and all verification.
+[P67 USER client declarations](../etc/evidence/t485-s1/n022-usercli.md) delivered
+runtime78. Cached full build, dual13-image26hash, controls40/40, real standard-class
+lifecycle, SOL Options and genuine Win16 controls pass. N02238/39; S15 9/14,
+overall57/159. Census1330/789/800/530/7965/65210;
+delta0/0/0/0/-142/-330;1306XP/24OpenNT. Eight files since P61 Full24/24.
+No original guest change or S/T closure. Next winmgrc.c.
 
 ## S14 Closure Record
 

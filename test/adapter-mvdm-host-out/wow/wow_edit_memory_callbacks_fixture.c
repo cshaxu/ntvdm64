@@ -9,8 +9,6 @@ static BYTE text[8];
 static BOOL reject;
 static HANDLE seen_module;
 static unsigned native_word_calls, wow_word_calls;
-static struct { DWORD dwExpWinVer; } test_client_info;
-#define GetClientInfo() (&test_client_info)
 #define INSTANCE ((HANDLE)(ULONG_PTR)0x45671234)
 #define MEMORY ((HLOCAL)(ULONG_PTR)0x56782345)
 #define RESIZED ((HLOCAL)(ULONG_PTR)0x56783456)
@@ -27,7 +25,7 @@ static void exercise_original_macros(void)
 {
     PVOID pointer = NULL;
     EDITWORDBREAKPROCA native_proc = native_word_break;
-    EDITWORDBREAKPROCA wow_proc = (EDITWORDBREAKPROCA)(ULONG_PTR)0x81234567;
+    EDITWORDBREAKPROCA wow_proc = (EDITWORDBREAKPROCA)(ULONG_PTR)0xC1234567;
     CHECK(LOCALALLOC(LHND, 123, INSTANCE) == MEMORY);
     CHECK(LOCALREALLOC(MEMORY, 456, LMEM_MOVEABLE, INSTANCE, &pointer) == RESIZED);
     CHECK(pointer == text);
@@ -46,11 +44,8 @@ static void exercise_original_macros(void)
     CHECK(seen_module == INSTANCE);
     CHECK(GETEXPWINVER(NULL) == 0x1234030a);
     CHECK(seen_module == GetModuleHandle(NULL));
-    test_client_info.dwExpWinVer = 0x56780400;
-    CHECK(GetAppVer(NULL) == 0x56780400);
-    CHECK(seen_module == GetModuleHandle(NULL)); /* No module callback. */
-    CHECK(((DWORD)(ULONG_PTR)native_proc & WNDPROC_WOW) == 0);
-    if (!((DWORD)(ULONG_PTR)native_proc & WNDPROC_WOW)) {
+    CHECK(!IsWOWProc(native_proc));
+    if (!IsWOWProc(native_proc)) {
         CHECK(CALLWORDBREAKPROC(native_proc, (LPSTR)text, 2, 7, WB_LEFT) == -27);
         CHECK(native_word_calls == 1 && wow_word_calls == 0);
     }
@@ -123,7 +118,7 @@ static int WINAPI wow_word_break(LPSTR buffer, int start, int count, int action,
 {
     ++calls; ++wow_word_calls;
     CHECK(buffer == (LPSTR)text && start == 3 && count == 6 && action == WB_RIGHT);
-    CHECK(procedure == 0x81234567);
+    CHECK(procedure == 0xC1234567);
     return 31;
 }
 static WORD WINAPI allocate_dialog_ds(UINT flags, DWORD bytes)

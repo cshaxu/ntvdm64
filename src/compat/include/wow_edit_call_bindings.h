@@ -10,8 +10,10 @@ BOOL WINAPI wow_edit_NtUserDefSetText(HWND, const struct _LARGE_STRING *);
 BOOL WINAPI wow_edit_FillWindow(HWND, HWND, HDC, HBRUSH);
 /* XP usercli.h uses direct service aliases. Existing providers retain the
  * native-call and window-borrow boundaries; no obsolete client wrappers. */
-#define GetControlColor wow_edit_NtUserGetControlColor
-#define GetControlBrush wow_control_brush
+#define NtUserGetControlColor wow_edit_NtUserGetControlColor
+#define NtUserGetControlBrush wow_control_brush
+#define GetControlColor NtUserGetControlColor
+#define GetControlBrush NtUserGetControlBrush
 struct wow_task_client_info;
 /* Borrowed from the currently bound WOW task, valid within its EDIT scope. */
 const struct wow_task_client_info *WINAPI wow_edit_client_info(void);

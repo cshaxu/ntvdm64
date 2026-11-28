@@ -1,0 +1,48 @@
+{
+  "before": {
+    "files": 1330,
+    "byte_identical": 789,
+    "nonerror_identical": 800,
+    "nonerror_different": 530,
+    "nonerror_points": 8107,
+    "nonerror_lines": 65540
+  },
+  "after": {
+    "files": 1330,
+    "byte_identical": 789,
+    "nonerror_identical": 800,
+    "nonerror_different": 530,
+    "nonerror_points": 7965,
+    "nonerror_lines": 65210
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": -142,
+    "nonerror_lines": -330
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_points": 170,
+      "before_lines": 592,
+      "after_points": 28,
+      "after_lines": 245,
+      "exclusions": 12
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_points": 63,
+      "before_lines": 491,
+      "after_points": 63,
+      "after_lines": 508,
+      "exclusions": 25
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1306,
+    "OpenNT": 24
+  }
+}

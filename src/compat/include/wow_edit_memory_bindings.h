@@ -26,6 +26,7 @@
 /* Original retail UserAssert does not evaluate its argument. */
 #ifndef UserAssert
 #define UserAssert(condition) ((void)0)
+#define UserAssertMsg0(condition, message) ((void)0)
 #endif
 
 HANDLE WINAPI GetEditDS(void);

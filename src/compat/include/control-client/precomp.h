@@ -106,6 +106,8 @@ DWORD WINAPI xxxSetWindowData(PWND, int, DWORD, BOOL);
 #define ValidateHwnd wow_window_client_validate_window
 #define ValidateHwndNoRip wow_window_client_validate_window_no_rip
 #define RevalidateHwnd(hwnd) ValidateHwndNoRip(hwnd)
+/* Remaining OpenNT winmgrc.c caller; same existing task-version input. */
+#define GetAppVer(pti) GetClientInfo()->dwExpWinVer
 #define ConnectIfNecessary(...) do { \
     if (!wow_edit_native_ensure_gui_thread()) return 0; \
 } while (0)
