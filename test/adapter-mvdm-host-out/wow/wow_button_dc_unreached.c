@@ -35,7 +35,7 @@ BOOL WINAPI wow_control_draw_state(HDC d, HBRUSH b, DRAWSTATEPROC p,
     LPARAM l, WPARAM w, int x, int y, int cx, int cy, UINT f) { REJECT(); }
 BOOL WINAPI wow_control_icon_size(HICON i, UINT f, int *x, int *y) { REJECT(); }
 BOOL WINAPI PaintRect(HWND p, HWND w, HDC d, HBRUSH b, LPRECT r) { REJECT(); }
-BOOL WINAPI PSMGetTextExtent(HDC d, LPWSTR t, int c, PSIZE s) { REJECT(); }
+BOOL WINAPI PSMGetTextExtent(HDC d, LPCWSTR t, int c, PSIZE s) { REJECT(); }
 wow_button_resources *WINAPI wow_button_current_resources(void) { REJECT(); }
 wow_edit_context *WINAPI wow_button_current_context(void) { REJECT(); }
 BOOL WINAPI wow_button_atlas_blit(HDC d, int x, int y, int cx, int cy,

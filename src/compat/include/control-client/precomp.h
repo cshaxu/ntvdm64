@@ -158,7 +158,7 @@ BOOL APIENTRY CopyInflateRect(LPRECT, CONST RECT *, int, int);
 /* OPENNT-HOST-114/115 retain the original brush and mnemonic algorithms. */
 BOOL WINAPI PaintRect(HWND, HWND, HDC, HBRUSH, LPRECT);
 VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int, DWORD);
-BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
+BOOL WINAPI PSMGetTextExtent(HDC, LPCWSTR, int, PSIZE);
 VOID WINAPI BltColor(HDC, HBRUSH, HDC, int, int, int, int, int, int, UINT);
 /* XP finite control inputs. Original algorithms remain in the client sources. */
 #include "wow_char_conversion_abi.h"

@@ -37,6 +37,6 @@
 #define UserLocalFree(p) LocalFree((HLOCAL)(p))
 BOOL WINAPI BitBltSysBmp(HDC, int, int, UINT);
 VOID WINAPI BltColor(HDC, HBRUSH, HDC, int, int, int, int, int, int, UINT);
-BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
+BOOL WINAPI PSMGetTextExtent(HDC, LPCWSTR, int, PSIZE);
 VOID WINAPI PSMTextOut(HDC, int, int, LPWSTR, int, DWORD);
 #endif

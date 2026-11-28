@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: text.c
 *
-* Copyright (c) 1985-95, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains the MessageBox API and related functions.
 *
@@ -10,6 +10,7 @@
 * 11-20-90 DarrinM      Merged in User text APIs.
 * 02-07-91 DarrinM      Removed TextOut, ExtTextOut, and GetTextExtentPoint stubs.
 \***************************************************************************/
+
 
 #include "precomp.h"
 #line 15
@@ -26,35 +27,46 @@
 * 11-13-90  JimA        Ported.
 \***************************************************************************/
 
+#ifdef _USERK_
+#error Excluded unsupported original kernel USER text measurement
+#else
+#line 73
+
 BOOL PSMGetTextExtent(
     HDC hdc,
-    LPWSTR lpstr,
+    LPCWSTR lpstr,
     int cch,
     PSIZE psize)
 {
     int result;
-    WCHAR szTemp[255]; /* Strings w/prefix chars must be under 256 chars long.*/
-    WCHAR *pchOut = szTemp;
+    WCHAR szTemp[255], *pchOut;
 
-    if (cch >= (int)(sizeof(szTemp)/sizeof(WCHAR))) {
-        pchOut = (WCHAR *)UserRtlAllocMem(((SIZE_T)cch + 1) * sizeof(WCHAR));
-        if (!pchOut) return FALSE;
+    if (cch > sizeof(szTemp)/sizeof(WCHAR)) {
+        pchOut = (WCHAR*)UserLocalAlloc(0, (cch+1) * sizeof(WCHAR));
+        if (pchOut == NULL) {
+            psize->cx = psize->cy = 0;
+            return FALSE;
+        }
+    } else {
+        pchOut = szTemp;
     }
-#line 36
 
     result = HIWORD(GetPrefixCount(lpstr, cch, pchOut, cch));
 
-    if (!result)
-        UserGetTextExtentPointW(hdc, lpstr, cch, psize);
-    else
-        UserGetTextExtentPointW(hdc, pchOut, cch - result, psize);
+    if (result) {
+        lpstr = pchOut;
+        cch -= result;
+    }
 
-    if (pchOut != szTemp) UserRtlFreeMem(pchOut);
-#line 43
+    UserGetTextExtentPointW(hdc, lpstr, cch, psize);
 
+    if (pchOut != szTemp)
+        UserLocalFree(pchOut);
 
     /*
      * IanJa everyone seems to ignore the ret val
      */
     return TRUE;
 }
+
+#endif // _USERK_

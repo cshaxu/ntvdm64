@@ -2,11 +2,11 @@
 #define WOW_TEXT_MEASURE_FIXTURE_PRECOMP_H
 #include <windows.h>
 LONG WINAPI GetPrefixCount(LPCWSTR, int, LPWSTR, int);
-PVOID WINAPI measure_allocate(SIZE_T);
+PVOID WINAPI measure_allocate(UINT, SIZE_T);
 VOID WINAPI measure_free(PVOID);
 BOOL WINAPI measure_extent(HDC, LPCWSTR, int, PSIZE);
-#define UserRtlAllocMem measure_allocate
-#define UserRtlFreeMem measure_free
+#define UserLocalAlloc measure_allocate
+#define UserLocalFree measure_free
 #define UserGetTextExtentPointW measure_extent
-BOOL WINAPI PSMGetTextExtent(HDC, LPWSTR, int, PSIZE);
+BOOL WINAPI PSMGetTextExtent(HDC, LPCWSTR, int, PSIZE);
 #endif

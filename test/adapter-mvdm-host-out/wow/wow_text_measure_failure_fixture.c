@@ -11,9 +11,9 @@ static SIZE_T owned_size;
 #define CHECK(x) do { if (!(x)) { ++failures; printf("FAIL line=%d\n", __LINE__); } } while (0)
 #define LEAF_ERROR 0x47112u
 
-PVOID WINAPI measure_allocate(SIZE_T bytes)
+PVOID WINAPI measure_allocate(UINT flags, SIZE_T bytes)
 {
-    CHECK(!owned);
+    CHECK(!owned && flags == 0);
     ++allocations;
     if (fail_allocate) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return NULL; }
     owned = HeapAlloc(GetProcessHeap(), 0, bytes + 4);
@@ -54,12 +54,14 @@ int __cdecl main(void)
     CHECK(PSMGetTextExtent(NULL, text, 254, &size));
     CHECK(!allocations && !frees && measurements == 1 && size.cx == 254);
     CHECK(PSMGetTextExtent(NULL, text, 255, &size));
-    CHECK(allocations == 1 && frees == 1 && !owned && size.cx == 255);
+    CHECK(!allocations && !frees && measurements == 2 && size.cx == 255);
+    CHECK(PSMGetTextExtent(NULL, text, 256, &size));
+    CHECK(allocations == 1 && frees == 1 && !owned && size.cx == 256);
     fail_allocate = TRUE;
     size.cx = size.cy = 99;
     CHECK(!PSMGetTextExtent(NULL, text, 300, &size));
-    CHECK(GetLastError() == ERROR_NOT_ENOUGH_MEMORY && size.cx == 99 && size.cy == 99);
-    CHECK(allocations == 2 && frees == 1 && measurements == 2 && !owned);
+    CHECK(GetLastError() == ERROR_NOT_ENOUGH_MEMORY && size.cx == 0 && size.cy == 0);
+    CHECK(allocations == 2 && frees == 1 && measurements == 3 && !owned);
     fail_allocate = FALSE;
     text[0] = L'&';
     CHECK(PSMGetTextExtent(NULL, text, 300, &size));
