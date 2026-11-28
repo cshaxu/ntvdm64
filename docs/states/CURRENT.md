@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall60/159 directories, H001-H036 and N001-N024. S15 runtime104 is the current published and verified package.
+overall60/159 directories, H001-H036 and N001-N024. S15 runtime105 is the current published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -200,12 +200,12 @@ Census1338/798/809/529/8148/51728; delta+6/+6/+6/0/+104/-9917;1328XP/10OpenNT.
 N0249/9, S15 12/14, overall60/159; Full counter reset. Next N025.
 P82 delivery records are complete; next N025. No S/T closure.
 
-[P88 N025](../etc/evidence/t485-s1/n025.md): runtime104 cached full build,
-dual26hash, native controls40/40 and genuine Win16 controls pass. text.c uses
-XP client allocation/measurement; original kernel branch remains excluded.
-Census1339/800/811/528/8175/48088; delta0/0/0/0/+1/-106;1335XP/4OpenNT.
-N0257/10, overall60/159, S15 12/14. Seven files since P82 Full including the
-paired client owner. Next userrtl.h in DIR order. No S/T closure.
+[P89 N025](../etc/evidence/t485-s1/n025.md): runtime105 cached full build,
+dual26hash, native controls40/40 and genuine Win16 controls pass. userrtl.h
+restores XP client declarations and retains the four local-view REBASE macros.
+Census1339/800/811/528/8180/47758; delta0/0/0/0/+5/-330;1336XP/3OpenNT.
+N0258/10, overall60/159, S15 12/14. Eight files since P82 Full including the
+paired client owner. Next winmgr.c in DIR order. No S/T closure.
 ## S14 Closure Record
 
 S14 completed N004-N012; final runtime12 Full24/24 and clean delivery admitted
