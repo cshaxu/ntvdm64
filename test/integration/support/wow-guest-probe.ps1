@@ -3,7 +3,7 @@
 . "$PSScriptRoot/../../observation/isolated_package_cleanup.ps1"
 function Invoke-WowGuestProbe {
  param([string]$PackageRoot,[string]$OutputRoot,[string]$Observer,
-       [ValidateSet('EMBTEST','KERNTEST','PALTEST')][string]$Name,[switch]$RequireNoRegistry)
+       [ValidateSet('EMBTEST','KERNTEST','PALTEST','CTLPROBE')][string]$Name,[switch]$RequireNoRegistry)
  $ErrorActionPreference='Stop'
  $repo=(Resolve-Path "$PSScriptRoot/../../..").Path
  Set-Location $repo

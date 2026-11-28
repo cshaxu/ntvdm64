@@ -258,15 +258,19 @@ INT LBGetText(
 }
 
 
+#line 277
 /***************************************************************************\
 * GrowMem
 *
 * History:
 * 16-Apr-1992 beng      NODATA listboxes
+* 23-Jul-1996 jparsons  Added numItems parameter for LB_INITSTORAGE support
 \***************************************************************************/
 
 BOOL GrowMem(
-    PLBIV plb)
+    PLBIV plb,
+    INT   numItems)
+
 {
     LONG cb;
     HANDLE hMem;
@@ -274,7 +278,7 @@ BOOL GrowMem(
     /*
      * Allocate memory for pointers to the strings.
      */
-    cb = (plb->cMax + CITEMSALLOC) *
+    cb = (plb->cMax + numItems) *
             (plb->fHasStrings ? sizeof(LBItem)
                               : (plb->fHasData ? sizeof(LBODItem)
                                               : 0));
@@ -284,20 +288,21 @@ BOOL GrowMem(
      * allocate an extra byte per item to keep track of it's selection state.
      */
     if (plb->wMultiple != SINGLESEL) {
-        cb += (plb->cMax + CITEMSALLOC);
+        cb += (plb->cMax + numItems);
     }
 
     /*
      * Extra bytes for each item so that we can store its height.
      */
     if (plb->OwnerDraw == OWNERDRAWVAR) {
-        cb += (plb->cMax + CITEMSALLOC);
+        cb += (plb->cMax + numItems);
     }
 
     /*
      * Don't allocate more than 2G of memory
      */
-    if (cb > MAXLONG) return FALSE;
+    if (cb > MAXLONG)
+        return FALSE;
 
     if (plb->rgpch == NULL) {
         if ((plb->rgpch = UserLocalAlloc(HEAP_ZERO_MEMORY, (LONG)cb)) == NULL)
@@ -308,11 +313,74 @@ BOOL GrowMem(
         plb->rgpch = hMem;
     }
 
-    plb->cMax += CITEMSALLOC;
+    plb->cMax += numItems;
 
     return TRUE;
 }
 
+/***************************************************************************\
+* xxxLBInitStorage
+*
+* History:
+* 23-Jul-1996 jparsons  Added support for pre-allocation
+\***************************************************************************/
+LONG xxxLBInitStorage(PLBIV plb, BOOL fAnsi, INT cItems, INT cb)
+{
+    HANDLE hMem;
+    INT    cbChunk;
+
+    /*
+     * if the app is talking ANSI, then adjust for the worst case in unicode
+     * where each single ansi byte translates to one 16 bit unicode value
+     */
+    if (fAnsi) {
+        cb *= sizeof(WCHAR) ;
+    } /* if */
+
+    /*
+     * Fail if either of the parameters look bad.
+     */
+    if ((cItems < 0) || (cb < 0)) {
+        xxxNotifyOwner(plb, LBN_ERRSPACE);
+        return LB_ERRSPACE;
+    } /* if */
+
+    /*
+     * try to grow the pointer array (if necessary) accounting for the free space
+     * already available.
+     */
+    cItems -= plb->cMax - plb->cMac ;
+    if ((cItems > 0) && !GrowMem(plb, cItems)) {
+        xxxNotifyOwner(plb, LBN_ERRSPACE);
+        return LB_ERRSPACE;
+    } /* if */
+
+    /*
+     * now grow the string space if necessary
+     */
+    if (plb->fHasStrings) {
+        if ((cbChunk = (plb->ichAlloc + cb)) > plb->cchStrings) {
+
+            /*
+             * Round up to the nearest 256 byte chunk.
+             */
+            cbChunk = (cbChunk & ~0xff) + 0x100;
+            if (!(hMem = UserLocalReAlloc(plb->hStrings, (LONG)cbChunk, 0))) {
+                xxxNotifyOwner(plb, LBN_ERRSPACE);
+                return LB_ERRSPACE;
+            }
+            plb->hStrings = hMem;
+            plb->cchStrings = cbChunk;
+        } /* if */
+    } /* if */
+
+    /*
+     * return the number of items that can be stored
+     */
+    return plb->cMax ;
+}
+
+#line 316
 /***************************************************************************\
 * xxxInsertString
 *
@@ -412,7 +480,7 @@ INT xxxLBInsertItem(
      * Now expand the pointer array.
      */
     if (plb->cMac >= plb->cMax) {
-        if (!GrowMem(plb)) {
+        if (!GrowMem(plb, CITEMSALLOC)) {
             xxxNotifyOwner(plb, LBN_ERRSPACE);
             return LB_ERRSPACE;
         }

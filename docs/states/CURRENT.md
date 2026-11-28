@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime64 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime65 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -166,13 +166,11 @@ bindings, package/tests, full census and initial failure history.
 runtime55; its receipt retains original identities, paired ABI, initial fixture
 failure, final publication/targeted verification and full mirror census.
 
-[P48 EDIT common operations](../etc/evidence/t485-s1/n022-editec.md) delivered
-runtime57; its receipt retains complete XP algorithms, original boundaries,
-paired ABI/resources, package/tests and full mirror census.
+[P48 EDIT core](../etc/evidence/t485-s1/n022-editec.md) delivered runtime57;
+its receipt retains XP algorithms, IME boundary, package/tests and census.
 
 [P49 multiline EDIT](../etc/evidence/t485-s1/n022-editml.md) delivered runtime58;
-its receipt retains complete algorithms, native providers, paired ABI, package/
-targeted tests, source identities and full mirror census.
+its receipt retains original algorithms, native providers, package and tests.
 
 [P50 single-line EDIT](../etc/evidence/t485-s1/n022-editsl.md) delivered runtime59;
 its receipt retains original algorithms, paired ABI, package/tests and full
@@ -195,12 +193,17 @@ verification and complete mirror census.
 delivered runtime63; original ABI, package, targeted results and census remain
 in its receipt. No original guest change.
 
-[P55 DDE data handles](../etc/evidence/t485-s1/n022-hdata.md) delivers runtime64:
-XP raw-data release/copy, existing private DDEML-manager omission evidenced.
-Cached build, dual13-image26hash, controls40/40, CCPU window-borrow and SOL
-Options pass. N02226/39; S15 9/14, overall57/159. Census1329/785/796/533/
-7837/92369; delta0/0/0/0/+1/-520.1293XP/36OpenNT. Four mirrors since P51
-Full24/24. No guest change or S/T closure. Next lb1.c.
+[P55 DDE data handles](../etc/evidence/t485-s1/n022-hdata.md) delivered runtime64;
+its receipt retains the original subset, ABI, package/tests and mirror census.
+Four completed mirrors since P51 Full24/24. No guest change or S/T closure.
+
+[P56 ListBox dispatch](../etc/evidence/t485-s1/n022-lb1.md) delivers runtime65:
+XP whole lb1.c with original layout/allocation/event dependencies. Cached
+build, dual13-image26hash, controls40/40, CCPU window-borrow, SOL Options and
+real Win16 controls pass. N02227/39; S15 9/14, overall57/159. Census1329/785/
+796/533/8076/77980; delta0/0/0/0/+239/-14389.1294XP/35OpenNT.
+Five mirrors since P51 Full24/24. No guest change or S/T closure.
+Next lboxctl1.c whole-file migration; paired code retains OpenNT baseline.
 
 ## S14 Closure Record
 
@@ -212,20 +215,9 @@ retain all per-P results, counterexamples and approved boundaries.
 ## S13 Closure Record
 
 [Closure](../etc/evidence/t485-h-repair/s13-closure.md) and
-[receipt](../etc/evidence/t485-h-repair/s13-closure.json):1039file hashes verified,
-4550frozen IDs reconciled;1598restored,1215residual,1737superseded by explicit
-final-file maps. Pending5056records comprise1327semantic/binding and3729line
-records; none is a claim of blanket owner approval. Current byte-sensitive
-nonerror census7322points/12851lines versus fixed snapshot6198/548853.
-CRLF restoration exposes separated blocks; this is not a block-count reduction.
-S12 old cumulative1394lines corrects to1390 by per-file recount, no source edit.
-
-S13 P8 cached full build, dual13-image26hash publication and61CPU cases pass.
-Runtime2 differs from Full-tested S12 runtime14 only by package identity and
-named PE timestamps through the P7/P8 byte comparisons. Retain Full23/23;
-no new runtime2 Full execution is claimed. Actual Win3.1 standard/enhanced and
-Win95 desktops pass; both enhanced Alt+Enter roundtrips preserve one KVM window.
-Win95 known exit-one boundary remains explicit. Product4a849ef9e is pushed.
+[receipt](../etc/evidence/t485-h-repair/s13-closure.json) retain the1039-file
+hash audit, frozen diff dispositions, corrected historical totals, published
+package equivalence and Full evidence. Win95 exit-one remains a boundary.
 
 ## S1 Closure Record
 

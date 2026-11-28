@@ -8,6 +8,10 @@
 /* Fixed x86 NT4 USER client ABI, not the current host USER internals. Keep
  * the original structure bodies in their original mirror owner. This header
  * supplies only their compile boundary; it owns no objects or handles. */
+/* XP shared-pointer spellings in this fixed x86 client view. */
+typedef BYTE *KPBYTE;
+typedef INT *KPINT;
+typedef WCHAR *KLPWSTR;
 typedef struct tagDESKTOP *PDESKTOP;
 typedef struct tagTHREADINFO *PWOW_CLIENT_THREADINFO;
 typedef struct tagCLS *PCLS;

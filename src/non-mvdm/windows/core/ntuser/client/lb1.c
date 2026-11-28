@@ -1,7 +1,7 @@
 /****************************** Module Header ********************************\
 * Module Name: lb1.c
 *
-* Copyright 1985-90, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * ListBox routines
 *
@@ -16,6 +16,15 @@
 BOOL WINAPI wow_original_list_caret_ready(PWND window)
 {
     return window->fnid == FNID_LISTBOX;
+}
+
+/* XP kernel/winable2.c xxxGetListBoxInfo: read the current borrowed client
+ * LBIV, not the native USER control's private object or a recursive message. */
+DWORD WINAPI NtUserGetListBoxInfo(HWND hwnd)
+{
+    PWND pwnd = ValidateHwnd(hwnd);
+    PLBIV plb = pwnd ? ((PLBWND)pwnd)->pLBIV : NULL;
+    return plb ? (DWORD)(plb->fMultiColumn ? plb->itemsPerColumn : plb->cMac) : 0;
 }
 
 #line 16
@@ -35,7 +44,7 @@ LOOKASIDE ListboxLookaside;
 * 16-Apr-1992 beng      Added LB_SETCOUNT
 \***************************************************************************/
 
-LONG APIENTRY ListBoxWndProcWorker(
+LRESULT APIENTRY ListBoxWndProcWorker(
     PWND pwnd,
     UINT message,
     WPARAM wParam,
@@ -52,7 +61,7 @@ LONG APIENTRY ListBoxWndProcWorker(
     TL tlpwndParent;
     UINT wFlags;
     LPWSTR lpwsz = NULL;
-    LONG lReturn = 0;
+    LRESULT lReturn = 0;
     static BOOL fInit = TRUE;
 
     CheckLock(pwnd);
@@ -62,8 +71,8 @@ LONG APIENTRY ListBoxWndProcWorker(
 
     /*
      * Get the plb for the given window now since we will use it a lot in
-     * various handlers. This was stored using SetWindowLong(hwnd,0,plb) when
-     * we initially created the listbox control.
+     * various handlers. This was stored using SetWindowLong(hwnd,0,plb)
+     * when the listbox was first created (by INITCONTROLLOOKASIDE above)
      */
     plb = ((PLBWND)pwnd)->pLBIV;
 
@@ -96,7 +105,7 @@ LONG APIENTRY ListBoxWndProcWorker(
             break;
         }
         if (lpwsz) {
-            lParam = (LONG)lpwsz;
+            lParam = (LPARAM)lpwsz;
         }
     }
 
@@ -113,6 +122,12 @@ LONG APIENTRY ListBoxWndProcWorker(
         if (plb->cMac) {
             xxxNewITop(plb, (INT)wParam);
         }
+        break;
+
+    case WM_STYLECHANGED:
+        plb->fRtoLReading = (TestWF(pwnd, WEFRTLREADING) != 0);
+        plb->fRightAlign  = (TestWF(pwnd, WEFRIGHT) != 0);
+        xxxCheckRedraw(plb, FALSE, 0);
         break;
 
     case WM_WINDOWPOSCHANGED:
@@ -133,7 +148,7 @@ LONG APIENTRY ListBoxWndProcWorker(
          * messages.  See xxxLBCreate().
          */
         if (!plb->fIgnoreSizeMsg)
-            xxxLBSize(plb, XCOORD(lParam), YCOORD(lParam));
+            xxxLBSize(plb, GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
         break;
 
     case WM_ERASEBKGND:
@@ -151,6 +166,7 @@ LONG APIENTRY ListBoxWndProcWorker(
         if (wParam == IDSYS_LBSEARCH) {
             plb->iTypeSearch = 0;
             NtUserKillTimer(hwnd, IDSYS_LBSEARCH);
+            xxxInvertLBItem(plb, plb->iSel, TRUE);
             break;
         }
 
@@ -171,6 +187,10 @@ LONG APIENTRY ListBoxWndProcWorker(
             POINTSTOPOINT(pt, lParam);
             xxxTrackMouse(plb, message, pt);
         }
+        break;
+
+    case WM_MBUTTONDOWN:
+        EnterReaderModeHelper(hwnd);
         break;
 
     case WM_CAPTURECHANGED:
@@ -242,6 +262,12 @@ LONG APIENTRY ListBoxWndProcWorker(
         CaretCreate(plb);
         xxxLBSetCaret(plb, TRUE);
         xxxNotifyOwner(plb, LBN_SETFOCUS);
+
+        /*
+         * We need to send this event even if the listbox isn't visible. See
+         * bug #88548.
+         */
+         LBEvent(plb, EVENT_OBJECT_FOCUS, plb->iSelBase);
         break;
 
     case WM_KILLFOCUS:
@@ -365,16 +391,16 @@ LONG APIENTRY ListBoxWndProcWorker(
         break;
 
     case WM_GETFONT:
-        return (LONG)plb->hFont;
+        return (LRESULT)plb->hFont;
 
     case WM_DRAGSELECT:
     case WM_DRAGLOOP:
     case WM_DRAGMOVE:
     case WM_DROPFILES:
         ThreadLock(plb->spwndParent, &tlpwndParent);
-        dw = SendMessage(HW(plb->spwndParent), message, wParam, lParam);
+        lReturn = SendMessage(HW(plb->spwndParent), message, wParam, lParam);
         ThreadUnlock(&tlpwndParent);
-        return dw;
+        return lReturn;
 
 
     case WM_QUERYDROPOBJECT:
@@ -385,9 +411,9 @@ LONG APIENTRY ListBoxWndProcWorker(
          */
         LBDropObjectHandler(plb, (PDROPSTRUCT)lParam);
         ThreadLock(plb->spwndParent, &tlpwndParent);
-        dw = SendMessage(HW(plb->spwndParent), message, wParam, lParam);
+        lReturn = SendMessage(HW(plb->spwndParent), message, wParam, lParam);
         ThreadUnlock(&tlpwndParent);
-        return dw;
+        return lReturn;
 
     case LB_GETITEMRECT:
         return LBGetItemRect(plb, (INT)wParam, (LPRECT)lParam);
@@ -429,9 +455,7 @@ CallInsertItem:
         break;
 
     case LB_INITSTORAGE:
-// LATER -- figure out how to port this -- FritzS
-//        return((LRESULT) LBInitStorage(plb, (int) wParamLo, lParam));
-        return wParam;
+        return xxxLBInitStorage(plb, fAnsi, (INT)wParam, (INT)lParam);
 
     case LB_DELETESTRING:
         return xxxLBoxCtlDelete(plb, (INT)wParam);
@@ -449,7 +473,7 @@ CallInsertItem:
         break;
 
     case LB_SETSEL:
-        return xxxLBSetSel(plb, (wParam != 0), lParam);
+        return xxxLBSetSel(plb, (wParam != 0), (INT)lParam);
 
     case LB_SETCURSEL:
         /*
@@ -479,7 +503,7 @@ CallInsertItem:
             return LB_ERR;
         }
 
-        xxxLBSelRange(plb, LOWORD(lParam), HIWORD(lParam), wParam);
+        xxxLBSelRange(plb, LOWORD(lParam), HIWORD(lParam), (wParam != 0));
         break;
 
     case LB_SELITEMRANGEEX:
@@ -490,17 +514,20 @@ CallInsertItem:
             RIPERR0(ERROR_INVALID_LB_MESSAGE, RIP_VERBOSE,"LB_SELITEMRANGEEX:Can't select a range if only single selections are enabled");
             return LB_ERR;
         } else {
-            BOOL fHighlight = ((DWORD)lParam > wParam);
+            BOOL fHighlight = ((DWORD)lParam > (DWORD)wParam);
             if (fHighlight == FALSE) {
-                UINT temp = lParam;
+                ULONG_PTR temp = lParam;
                 lParam = wParam;
                 wParam = temp;
             }
-            xxxLBSelRange(plb, wParam, lParam, fHighlight);
+            xxxLBSelRange(plb, (INT)wParam, (INT)lParam, fHighlight);
         }
         break;
 
     case LB_GETTEXTLEN:
+        if (lParam != 0) {
+            RIPMSG1(RIP_WARNING, "LB_GETTEXTLEN with lParam = %lx\n", lParam);
+        }
         lReturn = LBGetText(plb, TRUE, fAnsi, (INT)wParam, NULL);
         break;
 
@@ -538,12 +565,12 @@ CallInsertItem:
         /*
          * Validate locale
          */
-        wParam = ConvertDefaultLocale(wParam);
-        if (!IsValidLocale(wParam, LCID_INSTALLED))
+        wParam = ConvertDefaultLocale((LCID)wParam);
+        if (!IsValidLocale((LCID)wParam, LCID_INSTALLED))
             return LB_ERR;
 
         dw = plb->dwLocaleId;
-        plb->dwLocaleId = wParam;
+        plb->dwLocaleId = (DWORD)wParam;
         return dw;
 
     case WM_KEYDOWN:
@@ -596,6 +623,12 @@ CallInsertItem:
              * Fix for Bug #2477 -- 01/14/91 -- SANKAR --
              */
             xxxLBShowHideScrollBars(plb); //Try to show or hide scroll bars
+            if (plb->fHorzBar && plb->fRightAlign && !(plb->fMultiColumn || plb->OwnerDraw)) {
+                /*
+                 * origin to right
+                 */
+                xxxLBoxCtlHScroll(plb, SB_BOTTOM, 0);
+            }
         }
         break;    /* originally returned register ax (message) ! */
 
@@ -649,7 +682,7 @@ CallInsertItem:
 
     case LB_SETITEMHEIGHT:
     case LB_GETITEMHEIGHT:
-        return LBGetSetItemHeightHandler(plb, message, wParam, LOWORD(lParam));
+        return LBGetSetItemHeightHandler(plb, message, (INT)wParam, LOWORD(lParam));
         break;
 
     case LB_FINDSTRINGEXACT:
@@ -658,11 +691,13 @@ CallInsertItem:
 
     case LB_ITEMFROMPOINT: {
         POINT pt;
+        BOOL bOutside;
         DWORD dwItem;
 
         POINTSTOPOINT(pt, lParam);
-        ISelFromPt(plb, pt, &dwItem);
-        return (LRESULT)dwItem;
+        bOutside = ISelFromPt(plb, pt, &dwItem);
+        UserAssert(bOutside == 1 || bOutside == 0);
+        return (LRESULT)MAKELONG(dwItem, bOutside);
     }
 
     case LBCB_CARETON:
@@ -674,6 +709,15 @@ CallInsertItem:
         // Set up the caret in the proper location for drop downs.
         plb->iSelBase = plb->iSel;
         xxxLBSetCaret(plb, TRUE);
+            
+        /*
+         * We need to send this event even if the listbox isn't visible. See
+         * bug #88548.  Also see 355612.
+         */
+        if (_IsWindowVisible(pwnd) || (GetFocus() == hwnd)) {
+            LBEvent(plb, EVENT_OBJECT_FOCUS, plb->iSelBase);
+        }
+
         return(plb->iSel);
 
     case LBCB_CARETOFF:
@@ -684,6 +728,9 @@ CallInsertItem:
         xxxLBSetCaret(plb, FALSE);
         xxxCaretDestroy(plb);
         break;
+
+    case LB_GETLISTBOXINFO:
+       return NtUserGetListBoxInfo(hwnd);
 
     case WM_NCCREATE:
         if ((pwnd->style & LBS_MULTICOLUMN) && (pwnd->style & WS_VSCROLL))
@@ -717,7 +764,7 @@ CallDWP:
 /***************************************************************************\
 \***************************************************************************/
 
-LONG WINAPI ListBoxWndProcA(
+LRESULT WINAPI ListBoxWndProcA(
     HWND hwnd,
     UINT message,
     WPARAM wParam,
@@ -739,7 +786,7 @@ LONG WINAPI ListBoxWndProcA(
     return ListBoxWndProcWorker(pwnd, message, wParam, lParam, TRUE);
 }
 
-LONG WINAPI ListBoxWndProcW(
+LRESULT WINAPI ListBoxWndProcW(
     HWND hwnd,
     UINT message,
     WPARAM wParam,
@@ -761,7 +808,7 @@ LONG WINAPI ListBoxWndProcW(
     return ListBoxWndProcWorker(pwnd, message, wParam, lParam, FALSE);
 }
 
-LONG WINAPI ComboListBoxWndProcA(
+LRESULT WINAPI ComboListBoxWndProcA(
     HWND hwnd,
     UINT message,
     WPARAM wParam,
@@ -783,7 +830,7 @@ LONG WINAPI ComboListBoxWndProcA(
     return ListBoxWndProcWorker(pwnd, message, wParam, lParam, TRUE);
 }
 
-LONG WINAPI ComboListBoxWndProcW(
+LRESULT WINAPI ComboListBoxWndProcW(
     HWND hwnd,
     UINT message,
     WPARAM wParam,
@@ -837,5 +884,5 @@ LPWSTR GetLpszItem(
      */
     plbi = (lpLBItem)(pLBIV->rgpch);
     offsz = plbi[sItem].offsz;
-    return (LPWSTR)((LONG)(pLBIV->hStrings) + offsz);
+    return (LPWSTR)((PBYTE)(pLBIV->hStrings) + offsz);
 }

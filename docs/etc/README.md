@@ -2225,3 +2225,5 @@ post-publication targeted checks.
 - [S15 P54 USER global declarations](evidence/t485-s1/n022-globals-h.md).
 
 - [S15 P55 DDE data handles](evidence/t485-s1/n022-hdata.md).
+
+- [S15 P56 ListBox dispatch](evidence/t485-s1/n022-lb1.md).

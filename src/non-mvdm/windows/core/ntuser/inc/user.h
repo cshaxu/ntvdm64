@@ -1464,6 +1464,137 @@ typedef struct tagCOMBOWND {
     WND wnd;
     PCBOX pcbox;
 } COMBOWND, * KPTR_MODIFIER PCOMBOWND;
+
+#line 2080
+/*
+ * List Box
+ */
+typedef struct _SCROLLPOS {
+    INT cItems;
+    UINT iPage;
+    INT iPos;
+    UINT fMask;
+    INT iReturn;
+} SCROLLPOS, *PSCROLLPOS;
+
+typedef struct tagLBIV {
+    PWND    spwndParent;    /* parent window */
+    PWND    spwnd;          /* lbox ctl window */
+    INT     iTop;           /* index of top item displayed          */
+    INT     iSel;           /* index of current item selected       */
+    INT     iSelBase;       /* base sel for multiple selections     */
+    INT     cItemFullMax;   /* cnt of Fully Visible items. Always contains
+                               result of CItemInWindow(plb, FALSE) for fixed
+                               height listboxes. Contains 1 for var height
+                               listboxes. */
+    INT     cMac;           /* cnt of items in listbox              */
+    INT     cMax;           /* cnt of total # items allocated for rgpch.
+                               Not all are necessarly in use    */
+    KPBYTE  rgpch;          /* pointer to array of string offsets    */
+    KLPWSTR hStrings;       /* string storage handle                */
+    INT     cchStrings;     /* Size in bytes of hStrings            */
+    INT     ichAlloc;       /* Pointer to end of hStrings (end of last valid
+                               string) */
+    INT     cxChar;         /* Width of a character                 */
+    INT     cyChar;         /* height of line                       */
+    INT     cxColumn;       /* width of a column in multicolumn listboxes */
+    INT     itemsPerColumn; /* for multicolumn listboxes */
+    INT     numberOfColumns; /* for multicolumn listboxes */
+    POINT   ptPrev;         /* coord of last tracked mouse pt. used for auto
+                               scrolling the listbox during timer's */
+
+    UINT    OwnerDraw:2;    /* Owner draw styles. Non-zero if ownerdraw. */
+    UINT    fRedraw:1;      /* if TRUE then do repaints             */
+    UINT    fDeferUpdate:1; /* */
+    UINT    wMultiple:2;    /* SINGLESEL allows a single item to be selected.
+                             * MULTIPLESEL allows simple toggle multi-selection
+                             * EXTENDEDSEL allows extended multi selection;
+                             */
+
+    UINT     fSort:1;        /* if TRUE the sort list                */
+    UINT     fNotify:1;      /* if TRUE then Notify parent           */
+    UINT     fMouseDown:1;   /* if TRUE then process mouse moves/mouseup */
+    UINT     fCaptured:1;    /* if TRUE then process mouse messages  */
+    UINT     fCaret:1;       /* flashing caret allowed               */
+    UINT     fDoubleClick:1; /* mouse down in double click           */
+    UINT     fCaretOn:1;     /* if TRUE then caret is on             */
+    UINT     fAddSelMode:1;  /* if TRUE, then it is in ADD selection mode */
+    UINT     fHasStrings:1;  /* True if the listbox has a string associated
+                              * with each item else it has an app suppled LONG
+                              * value and is ownerdraw
+                              */
+    UINT     fHasData:1;    /* if FALSE, then lb doesn't keep any line data
+                             * beyond selection state, but instead calls back
+                             * to the client for each line's definition.
+                             * Forces OwnerDraw==OWNERDRAWFIXED, !fSort,
+                             * and !fHasStrings.
+                             */
+    UINT     fNewItemState:1; /* select/deselect mode? for multiselection lb
+                              */
+    UINT     fUseTabStops:1; /* True if the non-ownerdraw listbox should handle
+                             * tabstops
+                             */
+    UINT     fMultiColumn:1; /* True if this is a multicolumn listbox */
+    UINT     fNoIntegralHeight:1; /* True if we don't want to size the listbox
+                                  * an integral lineheight
+                                  */
+    UINT     fWantKeyboardInput:1; /* True if we should pass on WM_KEY & CHAR
+                                   * so that the app can go to special items
+                                   * with them.
+                                   */
+    UINT     fDisableNoScroll:1;   /* True if the listbox should
+                                    * automatically Enable/disable
+                                    * it's scroll bars. If false, the scroll
+                                    * bars will be hidden/Shown automatically
+                                    * if they are present.
+                                    */
+    UINT    fHorzBar:1; // TRUE if WS_HSCROLL specified at create time
+
+    UINT    fVertBar:1; // TRUE if WS_VSCROLL specified at create time
+    UINT    fFromInsert:1;  // TRUE if client drawing should be deferred during delete/insert ops
+    UINT    fNoSel:1;
+
+    UINT    fHorzInitialized : 1;   // Horz scroll cache initialized
+    UINT    fVertInitialized : 1;   // Vert scroll cache initialized
+
+    UINT    fSized : 1;             // Listbox was resized.
+    UINT    fIgnoreSizeMsg : 1;     // If TRUE, ignore WM_SIZE message
+
+    UINT    fInitialized : 1;
+
+    UINT    fRightAlign:1;     // used primarily for MidEast right align
+    UINT    fRtoLReading:1;    // used only for MidEast, text rtol reading order
+    UINT    fSmoothScroll:1;   // allow just one smooth-scroll per scroll cycle
+
+    int     xRightOrigin;      // For horizontal scrolling. The current x origin
+
+    INT     iLastSelection; /* Used for cancelable selection. Last selection
+                             * in listbox for combo box support
+                             */
+    INT     iMouseDown;     /* For multiselection mouse click & drag extended
+                             * selection. It is the ANCHOR point for range
+                             * selections
+                             */
+    INT     iLastMouseMove; /* selection of listbox items */
+    KPINT   iTabPixelPositions; /* List of positions for tabs */
+    KHANDLE hFont;          /* User settable font for listboxes */
+    int     xOrigin;        /* For horizontal scrolling. The current x origin */
+    int     maxWidth;       /* Maximum width of listbox in pixels for
+                               horizontal scrolling purposes */
+    PCBOX   pcbox;          /* Combo box pointer */
+    HDC     hdc;            /* hdc currently in use */
+    DWORD   dwLocaleId;     /* Locale used for sorting strings in list box */
+    int     iTypeSearch;
+    KLPWSTR pszTypeSearch;
+    SCROLLPOS HPos;
+    SCROLLPOS VPos;
+} LBIV, *PLBIV;
+
+typedef struct tagLBWND {
+    WND wnd;
+    PLBIV pLBIV;
+} LBWND, * KPTR_MODIFIER PLBWND;
+
 #endif
 #if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
 #line 1438

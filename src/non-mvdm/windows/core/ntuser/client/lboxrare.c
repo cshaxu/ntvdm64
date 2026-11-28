@@ -812,3 +812,37 @@ int LBGetSetItemHeightHandler(
 
     return(0);
 }
+
+#line 813
+/*****************************************************************************\
+*
+* LBEvent()
+*
+* This is for item focus & selection events in listboxes.
+*
+\*****************************************************************************/
+void LBEvent(PLBIV plb, UINT uEvent, int iItem)
+{
+    switch (uEvent) {
+        case EVENT_OBJECT_SELECTIONREMOVE:
+            if (plb->wMultiple != SINGLESEL) {
+                break;
+            }
+            iItem = -1;
+            //
+            // FALL THRU
+            //
+
+        case EVENT_OBJECT_SELECTIONADD:
+            if (plb->wMultiple == MULTIPLESEL) {
+                uEvent = EVENT_OBJECT_SELECTION;
+            }
+            break;
+
+        case EVENT_OBJECT_SELECTIONWITHIN:
+            iItem = -1;
+            break;
+    }
+
+    NotifyWinEvent(uEvent, HW(plb->spwnd), OBJID_CLIENT, iItem+1);
+}

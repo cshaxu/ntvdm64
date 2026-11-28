@@ -1,0 +1,72 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 7837,
+    "nonerror_lines": 92369
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 8076,
+    "nonerror_lines": 77980
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 239,
+    "nonerror_lines": -14389
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lb1.c",
+      "before_points": 1,
+      "before_lines": 1676,
+      "after_points": 1,
+      "after_lines": 15,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl1.c",
+      "before_points": 1,
+      "before_lines": 2276,
+      "after_points": 10,
+      "after_lines": 82,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "before_points": 1,
+      "before_lines": 1622,
+      "after_points": 5,
+      "after_lines": 40,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_points": 1,
+      "before_lines": 4708,
+      "after_points": 165,
+      "after_lines": 583,
+      "exclusions": 17
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_points": 1,
+      "before_lines": 5318,
+      "after_points": 63,
+      "after_lines": 491,
+      "exclusions": 25
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1294,
+    "OpenNT": 35
+  }
+}
