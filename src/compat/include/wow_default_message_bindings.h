@@ -95,8 +95,12 @@ BOOL WINAPI wow_default_messages_ready(void);
 #define MN_BUTTONUP                     (MN_FIRST + 15)
 #define MN_SETTIMERTOOPENHIERARCHY      (MN_FIRST + 16)
 #define MN_DBLCLK                       (MN_FIRST + 17)
+/* XP windows/published/winuser.w:2135-2137. */
+#define MN_ACTIVATEPOPUP                (MN_FIRST + 18)
+#define MN_ENDMENU                      (MN_FIRST + 19)
+#define MN_DODRAGDROP                   (MN_FIRST + 20)
 #define gSharedInfo wow_default_message_state
-#define SharedAlloc(bytes) HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, (bytes))
+#define SharedAlloc(bytes) HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS | HEAP_ZERO_MEMORY, (bytes))
 #define TRACE_INIT(args) ((void)0)
 #endif
 #endif

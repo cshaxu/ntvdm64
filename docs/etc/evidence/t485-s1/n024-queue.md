@@ -38,9 +38,10 @@ bytes are saved in build/t485-s15/n024-queue. No original guest changes.
 4. XP SetAppImeCompatFlags:709 reads PMAP_IMECOMPAT, native locale and the
    optional setup-name array; it is called before scheduler enrollment. This
    must be evaluated as a concrete original dependency, not replaced by an
-   unconditional success/no-op. Setup-name population is from setup.c, outside
-   the current admitted directory, and must not be claimed implemented merely
-   because the null-array path works.
+   unconditional success/no-op. P80 corrected the original setup.c comment:
+   XP defines CreateSetupNameArray in kernel/server.c:1673. P79 did not import
+   or call that population function; the null-array path does not prove setup
+   classification is implemented.
 5. XP SetAppStarting:1057 adds an RIT master-timer arm to the same original
    linked-list insertion; CheckAppStarting uses kernel process creation times.
    Current native carrier owns only the list and flags, not the RIT timer.

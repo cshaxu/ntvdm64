@@ -1,16 +1,17 @@
 /**************************************************************************\
 * Module Name: server.c
 *
-* Server support routines for the CSR stuff.  This basically performs the
-* startup/initialization for USER.
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
-* Copyright (c) Microsoft Corp.  1990-1996 All Rights Reserved
+* Server support routines for the CSR stuff. This basically performs the
+* startup/initialization for USER.
 *
 \**************************************************************************/
 
 #define WOW_ORIGINAL_MESSAGE_TABLES
-#line 11
 #include "wow_default_message_bindings.h"
+#define szUSER32 wow_kernel_szUSER32
+#line 12
 #pragma hdrstop
 /* Original-layout owner: B supplies once-publication and calls this reset
  * only before publication, after an initialization failure. */
@@ -27,48 +28,76 @@ VOID WINAPI wow_default_message_reset(VOID)
             HeapFree(GetProcessHeap(), 0, wow_default_message_state.awmControl[index].abMsgs);
     ZeroMemory(&wow_default_message_state, sizeof(wow_default_message_state));
 }
-#line 13
+#line 16
+extern WORD gDispatchTableValues;
+
+BOOL gbUserInitialized;
 
 /*
  * Initialization Routines (external).
  */
 NTSTATUS     InitQEntryLookaside(VOID);
-NTSTATUS     InitKeyStateLookaside(VOID);
 NTSTATUS     InitSMSLookaside(VOID);
-#line 22
-FARPROC gpfnDebugAttachRoutine;
-#line 26
+
+NTSTATUS    InitCreateSharedSection(VOID);
+NTSTATUS    InitCreateObjectDirectory(VOID);
+BOOL        InitCreateUserSubsystem(VOID);
+VOID        InitFunctionTables(VOID);
+VOID        InitMessageTables(VOID);
+VOID        InitWindowMsgTable(PBYTE*, PUINT, CONST WORD*);
+
+VOID        VerifySyncOnlyMessages(VOID);
+BOOL        InitOLEFormats(VOID);
+NTSTATUS    Win32UserInitialize(VOID);
+#line 49
+
 /*
  * Constants pertaining to the user-initialization.
  */
-
 #define USRINIT_SHAREDSECT_SIZE   32
 #define USRINIT_ATOMBUCKET_SIZE   37
+
 #define USRINIT_WINDOWSECT_SIZE  512
 #define USRINIT_NOIOSECT_SIZE    128
 
 #define USRINIT_SHAREDSECT_BUFF_SIZE     640
 #define USRINIT_SHAREDSECT_READ_SIZE     (USRINIT_SHAREDSECT_BUFF_SIZE-33)
-#line 39
-LPCWSTR  szBUTTONCLASS         = TEXT("Button");
-LPCWSTR  szSTATICCLASS         = TEXT("Static");
-LPCWSTR  szLISTBOXCLASS        = TEXT("ListBox");
-LPCWSTR  szSCROLLBARCLASS      = TEXT("ScrollBar");
-LPCWSTR  szCOMBOLISTBOXCLASS   = TEXT("ComboLBox");
-LPCWSTR  szCOMBOBOXCLASS       = TEXT("ComboBox");
-LPCWSTR  szMDICLIENTCLASS      = TEXT("MDIClient");
-LPCWSTR  szDDEMLEVENTCLASS     = TEXT("DDEMLEvent");
-LPCWSTR  szDDEMLMOTHERCLASS    = TEXT("DDEMLMom");
-LPCWSTR  szDDEML16BITCLASS     = TEXT("DMGClass");
-LPCWSTR  szDDEMLCLIENTCLASSW   = L"DDEMLUnicodeClient";
-LPCWSTR  szDDEMLSERVERCLASSW   = L"DDEMLUnicodeServer";
-LPCWSTR  szDDEMLCLIENTCLASSA   = L"DDEMLAnsiClient";
-LPCWSTR  szDDEMLSERVERCLASSA   = L"DDEMLAnsiServer";
-#ifdef FE_IME
-#error
-#endif
 
-#line 57
+
+/***************************************************************************\
+* Globals stored in the INIT section. These should only be accessed at
+* load time!
+\***************************************************************************/
+#ifdef ALLOC_DATA_PRAGMA
+#error Unsupported original build branch
+#line 69
+#endif
+#line 70
+
+CONST WCHAR szCHECKPOINT_PROP_NAME[]  = L"SysCP";
+CONST WCHAR szDDETRACK_PROP_NAME[]    = L"SysDT";
+CONST WCHAR szQOS_PROP_NAME[]         = L"SysQOS";
+CONST WCHAR szDDEIMP_PROP_NAME[]      = L"SysDDEI";
+CONST WCHAR szWNDOBJ_PROP_NAME[]      = L"SysWNDO";
+CONST WCHAR szIMELEVEL_PROP_NAME[]    = L"SysIMEL";
+CONST WCHAR szLAYER_PROP_NAME[]       = L"SysLayer";
+CONST WCHAR szUSER32[]                = L"USER32";
+CONST WCHAR szCONTEXTHELPIDPROP[]     = L"SysCH";
+CONST WCHAR szICONSM_PROP_NAME[]      = L"SysICS";
+CONST WCHAR szICON_PROP_NAME[]        = ICON_PROP_NAME;
+CONST WCHAR szSHELLHOOK[]             = L"SHELLHOOK";
+CONST WCHAR szACTIVATESHELLWINDOW[]   = L"ACTIVATESHELLWINDOW";
+CONST WCHAR szOTHERWINDOWCREATED[]    = L"OTHERWINDOWCREATED";
+CONST WCHAR szOTHERWINDOWDESTROYED[]  = L"OTHERWINDOWDESTROYED";
+CONST WCHAR szOLEMAINTHREADWNDCLASS[] = L"OleMainThreadWndClass";
+CONST WCHAR szFLASHWSTATE[]           = L"FlashWState";
+
+#ifdef HUNGAPP_GHOSTING
+CONST WCHAR szGHOST[]                 = L"Ghost";
+#endif // HUNGAPP_GHOSTING
+
+CONST WCHAR szSHADOW[]                = L"SysShadow";
+
 /***************************************************************************\
 * Message Tables
 *
@@ -83,6 +112,8 @@ LPCWSTR  szDDEMLSERVERCLASSA   = L"DDEMLAnsiServer";
 *   DefWindowMsgs
 *   DefWindowSpecMsgs
 *
+* These are used in InitMessageTables() to initialize gSharedInfo.awmControl[]
+* using the INITMSGTABLE() macro.
 *
 * 25-Aug-1995 ChrisWil  Created comment block.
 \***************************************************************************/
@@ -104,6 +135,7 @@ CONST WORD gawDefDlgProc[] = {
     WM_ERASEBKGND,
     WM_SHOWWINDOW,
     WM_SYSCOMMAND,
+    WM_SYSKEYDOWN,
     WM_ACTIVATE,
     WM_SETFOCUS,
     WM_CLOSE,
@@ -118,13 +150,15 @@ CONST WORD gawDefDlgProc[] = {
     WM_NCLBUTTONDOWN,
     WM_GETFONT,
     WM_NOTIFYFORMAT,
+    WM_INPUTLANGCHANGEREQUEST,
     0
 };
 
 CONST WORD gawMenuWndProc[] = {
-    WM_CREATE,
+    WM_NCCREATE,
     WM_FINALDESTROY,
     WM_PAINT,
+    WM_NCCALCSIZE,
     WM_CHAR,
     WM_SYSCHAR,
     WM_KEYDOWN,
@@ -146,6 +180,20 @@ CONST WORD gawMenuWndProc[] = {
     WM_ACTIVATE,
     MN_GETHMENU,
     MN_DBLCLK,
+    MN_ACTIVATEPOPUP,
+    MN_ENDMENU,
+    MN_DODRAGDROP,
+    WM_ACTIVATEAPP,
+    WM_MOUSELEAVE,
+    WM_SIZE,
+    WM_MOVE,
+    WM_NCHITTEST,
+    WM_NCPAINT,
+    WM_PRINT,
+    WM_PRINTCLIENT,
+    WM_ERASEBKGND,
+    WM_WINDOWPOSCHANGING,
+    WM_WINDOWPOSCHANGED,
     0
 };
 
@@ -172,7 +220,10 @@ CONST WORD gawScrollBarWndProc[] = {
     SBM_SETRANGE,
     SBM_SETSCROLLINFO,
     SBM_GETSCROLLINFO,
+    SBM_GETSCROLLBARINFO,
     WM_PRINTCLIENT,
+    WM_MOUSEMOVE,
+    WM_MOUSELEAVE,
     0
 };
 
@@ -183,6 +234,7 @@ CONST WORD gawStaticWndProc[] = {
     STM_SETIMAGE,
     WM_ERASEBKGND,
     WM_PAINT,
+    WM_PRINTCLIENT,
     WM_CREATE,
     WM_DESTROY,
     WM_NCCREATE,
@@ -200,6 +252,8 @@ CONST WORD gawStaticWndProc[] = {
     WM_GETFONT,
     WM_GETTEXT,
     WM_TIMER,
+    WM_INPUTLANGCHANGEREQUEST,
+    WM_UPDATEUISTATE,
     0
 };
 
@@ -237,7 +291,6 @@ CONST WORD gawButtonWndProc[] = {
     WM_NCCREATE,
     WM_INPUTLANGCHANGEREQUEST,
     WM_UPDATEUISTATE,
-#line 223
     0
 };
 
@@ -249,6 +302,7 @@ CONST WORD gawListboxWndProc[] = {
     LB_RESETCONTENT,
     WM_TIMER,
     WM_MOUSEMOVE,
+    WM_MBUTTONDOWN,
     WM_LBUTTONDOWN,
     WM_LBUTTONUP,
     WM_LBUTTONDBLCLK,
@@ -322,13 +376,15 @@ CONST WORD gawListboxWndProc[] = {
     LB_GETLOCALE,
     LBCB_CARETON,
     LBCB_CARETOFF,
+    LB_GETLISTBOXINFO,
     WM_NCCREATE,
     WM_WINDOWPOSCHANGED,
     WM_MOUSEWHEEL,
+    WM_STYLECHANGED,
+    WM_STYLECHANGING,
     0
 };
 
-#line 382
 CONST WORD gawComboWndProc[] = {
     CBEC_KILLCOMBOFOCUS,
     WM_COMMAND,
@@ -418,7 +474,6 @@ CONST WORD gawComboWndProc[] = {
     WM_UPDATEUISTATE,
     0
 };
-#line 397
 
 CONST WORD gawEditWndProc[] = {
     EM_CANUNDO,
@@ -437,6 +492,8 @@ CONST WORD gawEditWndProc[] = {
     EM_GETRECT,
     EM_GETSEL,
     EM_GETWORDBREAKPROC,
+    EM_SETIMESTATUS,
+    EM_GETIMESTATUS,
     EM_LINEFROMCHAR,
     EM_LINEINDEX,
     EM_LINELENGTH,
@@ -471,9 +528,20 @@ CONST WORD gawEditWndProc[] = {
     WM_GETTEXT,
     WM_GETTEXTLENGTH,
     WM_HSCROLL,
+    WM_IME_STARTCOMPOSITION,
+    WM_IME_ENDCOMPOSITION,
+    WM_IME_COMPOSITION,
+    WM_IME_SETCONTEXT,
+    WM_IME_NOTIFY,
+    WM_IME_COMPOSITIONFULL,
+    WM_IME_SELECT,
+    WM_IME_CHAR,
+    WM_IME_REQUEST,
     WM_INPUTLANGCHANGE,
+    WM_KEYUP,
     WM_KEYDOWN,
     WM_KILLFOCUS,
+    WM_MBUTTONDOWN,
     WM_LBUTTONDBLCLK,
     WM_LBUTTONDOWN,
     WM_LBUTTONUP,
@@ -484,9 +552,10 @@ CONST WORD gawEditWndProc[] = {
     WM_RBUTTONUP,
     WM_FINALDESTROY,
 #if 0
-#error
+#error Unsupported original build branch
+#line 550
 #endif
-#line 464
+#line 551
     WM_PAINT,
     WM_PASTE,
     WM_PRINTCLIENT,
@@ -495,6 +564,8 @@ CONST WORD gawEditWndProc[] = {
     WM_SETREDRAW,
     WM_SETTEXT,
     WM_SIZE,
+    WM_STYLECHANGED,
+    WM_STYLECHANGING,
     WM_SYSCHAR,
     WM_SYSKEYDOWN,
     WM_SYSTIMER,
@@ -504,17 +575,30 @@ CONST WORD gawEditWndProc[] = {
     0
 };
 
-#ifdef FE_IME
-#error
-#line 498
-#endif
-#line 499
+CONST WORD gawImeWndProc[] = {
+    WM_ERASEBKGND,
+    WM_PAINT,
+    WM_DESTROY,
+    WM_NCDESTROY,
+    WM_FINALDESTROY,
+    WM_CREATE,
+    WM_IME_SYSTEM,
+    WM_IME_SELECT,
+    WM_IME_CONTROL,
+    WM_IME_SETCONTEXT,
+    WM_IME_NOTIFY,
+    WM_IME_COMPOSITION,
+    WM_IME_STARTCOMPOSITION,
+    WM_IME_ENDCOMPOSITION,
+    WM_IME_REQUEST,
+    WM_COPYDATA,
+    0
+};
 
 /*
  * This array is for all the messages that need to be passed straight
  * across to the server for handling.
  */
-#line 594
 CONST WORD gawDefWindowMsgs[] = {
     WM_GETHOTKEY,
     WM_SETHOTKEY,
@@ -567,10 +651,9 @@ CONST WORD gawDefWindowMsgs[] = {
 
 /*
  * This array is for all messages that can be handled with some special
- * code by the client.  DefWindowProcWorker returns 0 for all messages
+ * code by the client. DefWindowProcWorker returns 0 for all messages
  * that aren't in this array or the one above.
  */
-#line 649
 CONST WORD gawDefWindowSpecMsgs[] = {
     WM_ACTIVATE,
     WM_GETTEXT,
@@ -585,7 +668,8 @@ CONST WORD gawDefWindowSpecMsgs[] = {
     WM_CHARTOITEM,
     WM_KEYDOWN,
 #ifdef LAME_BUTTON
-#error Unsupported original LAME_BUTTON branch
+#error Unsupported original build branch
+#line 665
 #endif // LAME_BUTTON
 #line 666
     WM_SYSKEYDOWN,
@@ -603,7 +687,8 @@ CONST WORD gawDefWindowSpecMsgs[] = {
     WM_CTLCOLORSCROLLBAR,
     WM_NCHITTEST,
 #ifdef LAME_BUTTON
-#error Unsupported original LAME_BUTTON branch
+#error Unsupported original build branch
+#line 682
 #endif // LAME_BUTTON
 #line 683
     WM_NCXBUTTONUP,
@@ -633,6 +718,56 @@ CONST WORD gawDefWindowSpecMsgs[] = {
     0
 };
 
+static CONST LPCWSTR lpszOLEFormats[] = {
+    L"ObjectLink",
+    L"OwnerLink",
+    L"Native",
+    L"Binary",
+    L"FileName",
+    L"FileNameW",
+    L"NetworkName",
+    L"DataObject",
+    L"Embedded Object",
+    L"Embed Source",
+    L"Custom Link Source",
+    L"Link Source",
+    L"Object Descriptor",
+    L"Link Source Descriptor",
+    L"OleDraw",
+    L"PBrush",
+    L"MSDraw",
+    L"Ole Private Data",
+    L"Screen Picture",
+    L"OleClipboardPersistOnFlush",
+    L"MoreOlePrivateData"
+};
+
+static CONST LPCWSTR lpszControls[] = {
+    L"Button",
+    L"Edit",
+    L"Static",
+    L"ListBox",
+    L"ScrollBar",
+    L"ComboBox",
+    L"MDIClient",
+    L"ComboLBox",
+    L"DDEMLEvent",
+    L"DDEMLMom",
+    L"DMGClass",
+    L"DDEMLAnsiClient",
+    L"DDEMLUnicodeClient",
+    L"DDEMLAnsiServer",
+    L"DDEMLUnicodeServer",
+    L"IME",
+};
+
+
+#ifdef ALLOC_DATA_PRAGMA
+#error Unsupported original build branch
+#line 756
+#endif
+#line 757
+
 /***************************************************************************\
 * DispatchServerMessage
 *
@@ -640,46 +775,21 @@ CONST WORD gawDefWindowSpecMsgs[] = {
 * 19-Aug-1992 MikeKe    Created
 \***************************************************************************/
 
-#line 607
 #define WRAPPFN(pfn, type)                                   \
-LONG xxxWrap ## pfn(                                         \
+LRESULT xxxWrap ## pfn(                                      \
     PWND  pwnd,                                              \
     UINT  message,                                           \
-    DWORD wParam,                                            \
-    LONG  lParam,                                            \
-    DWORD xParam)                                            \
+    WPARAM wParam,                                           \
+    LPARAM lParam,                                           \
+    ULONG_PTR xParam)                                         \
 {                                                            \
+    DBG_UNREFERENCED_PARAMETER(xParam);                      \
+                                                             \
     return xxx ## pfn((type)pwnd, message, wParam, lParam);  \
 }
 
-#line 833
-#ifdef FE_IME // amsgsSyncOnly[]
-#error
-#line 839
-#endif
-#line 850
-#ifdef DEBUG
-#error
-#line 877
-#endif // DEBUG
-#line 879
 
-/***************************************************************************\
-* InitWindowMsgTables
-*
-* This function generates a bit-array lookup table from a list of messages.
-* The lookup table is used to determine whether the message needs to be
-* passed over to the server for handling or whether it can be handled
-* directly on the client.
-*
-* LATER: Some memory (a couple hundred bytes per process) could be saved
-*        by putting this in the shared read-only heap.
-*
-*
-* 27-Mar-1992 DarrinM   Created.
-* 06-Dec-1993 MikeKe    Added support for all of our window procs.
-\***************************************************************************/
-
+#line 1060
 VOID InitWindowMsgTable(
     PBYTE      *ppbyte,
     PUINT      pmax,
@@ -697,39 +807,15 @@ VOID InitWindowMsgTable(
 
     cbTable = *pmax / 8 + 1;
     *ppbyte = SharedAlloc(cbTable);
-    RtlZeroMemory(*ppbyte, cbTable);
+    if (*ppbyte == NULL) {
+        return;
+    }
 
     for (i = 0; (msg = pw[i]) != 0; i++)
         (*ppbyte)[msg / 8] |= (BYTE)(1 << (msg & 7));
 }
 
-#line 934
-#ifdef DEBUG
-#error
-#line 939
-#endif
-#line 990
-#ifdef FE_IME
-#error
-#else
-#line 994
-#endif
-#line 1002
-#ifdef DEBUG
-#error
-#line 1019
-#endif
-#line 1022
-
-/***************************************************************************\
-* InitMessageTables
-*
-* Initialize the message tables.
-*
-*
-* 25-Aug-1995 ChrisWil      Created.
-\***************************************************************************/
-
+#line 1175
 VOID InitMessageTables(VOID)
 {
     TRACE_INIT(("UserInit: Initialize Message Tables\n"));
@@ -752,49 +838,5 @@ VOID InitMessageTables(VOID)
     INITMSGTABLE(awmControl[FNID_COMBOBOX     - FNID_START], ComboWndProc);
     INITMSGTABLE(awmControl[FNID_COMBOLISTBOX - FNID_START], ListboxWndProc);
     INITMSGTABLE(awmControl[FNID_EDIT         - FNID_START], EditWndProc);
-#ifdef FE_IME
-#error
-#endif
-#line 1057
+    INITMSGTABLE(awmControl[FNID_IME          - FNID_START], ImeWndProc);
 }
-#line 1150
-
-/***************************************************************************\
-* InitGlobalRIPFlags (debug only)
-*
-* This initializes the global RIP flags from the registry.
-*
-*
-* 25-Aug-1995 ChrisWil      Created.
-\***************************************************************************/
-
-VOID InitGlobalRIPFlags(VOID)
-{
-
-#ifdef DEBUG
-#error
-#line 1209
-#endif
-
-}
-
-#line 1257
-#ifndef PAGE_SIZE
-#define PAGE_SIZE 0x1000
-#endif
-#line 1260
-
-#define ROUND_UP_TO_PAGES(SIZE) \
-        (((ULONG)(SIZE) + PAGE_SIZE - 1) & ~(PAGE_SIZE - 1))
-#line 1703
-#ifdef ANDREVA_DBG
-#error
-#endif
-#line 1822
-#ifdef DEBUG
-#error
-#endif
-#line 1861
-#ifdef FE_IME
-#error
-#endif

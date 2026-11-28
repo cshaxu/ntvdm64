@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall59/159 directories, H001-H036 and N001-N023. S15 runtime95 is the current
+overall59/159 directories, H001-H036 and N001-N023. S15 runtime96 is the current
 published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
@@ -179,15 +179,8 @@ runtime91 Full24/24; its receipt retains all tests, corrections and census.
 [P76 XP WOW registration](../etc/evidence/t485-s1/n024-exitwin.md) delivered runtime92;
 its receipt retains all tests and census.
 
-[P77 XP window data](../etc/evidence/t485-s1/n024-getset.md) verified runtime93:
-original pointer-width setter and three original helpers, unchanged x86 ABI and
-native dialog owner. Cached build, dual26hash, controls40/40, native creation,
-process retirement and genuine Win16 controls pass. Two test-build prerequisite
-failures repaired without changing assertions; retries retained in receipt.
-Census1332/792/803/529/7980/62985; delta0/0/0/0/
-+19/-307;1317XP/15OpenNT. LF recovery unfolds whole-file span.
-N0244/9; S15 11/14; overall59/159. Two files since P75 Full24/24.
-Next profile.c; no S/T closure.
+[P77 XP window data](../etc/evidence/t485-s1/n024-getset.md) delivered runtime93;
+its receipt retains complete tests, failures, corrections and census.
 
 [P78 XP profile](../etc/evidence/t485-s1/n024-profile.md) verified runtime94:
 original five-function/query ABI and tables; native read-only boundary retained.
@@ -206,6 +199,15 @@ Census1332/792/803/529/8012/63536; delta0/0/0/0/
 +22/+1102;1319XP/13OpenNT. Source-baseline growth is explicit.
 N0246/9; S15 11/14; overall59/159. Four files since P75 Full24/24.
 Next server.c; no S/T closure.
+
+[P80 XP message tables](../etc/evidence/t485-s1/n024-server.md) verified runtime96:
+original tables/initializer restored, shared-heap zeroing contract paired;
+13allocation failures and retry covered. Cached build, dual26hash,
+controls40/40 and genuine Win16 controls pass.
+Census1332/792/803/529/8028/63075; delta0/0/0/0/
++16/-461;1320XP/12OpenNT. LF recovery unfolds old byte span.
+N0247/9; S15 11/14; overall59/159. Five files since P75 Full24/24.
+Next taskman.c; no S/T closure.
 
 ## S14 Closure Record
 

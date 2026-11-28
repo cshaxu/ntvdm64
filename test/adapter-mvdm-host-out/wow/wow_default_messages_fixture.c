@@ -13,6 +13,7 @@ static BOOL fail_registration;
 LPVOID WINAPI fixture_message_alloc(HANDLE heap, DWORD flags, SIZE_T bytes)
 {
     LPVOID memory;
+    if (!(flags & HEAP_ZERO_MEMORY)) RaiseException(STATUS_INVALID_PARAMETER, 0, 0, NULL);
     if (++allocation_count == fail_allocation)
         RaiseException(STATUS_NO_MEMORY, 0, 0, NULL);
     memory = HeapAlloc(heap, flags, bytes);
@@ -58,7 +59,7 @@ int main(void)
     unsigned failure;
     static const wow_default_message_provider provider = { InitMessageTables, unused_merge, wow_default_message_reset };
     CHECK(wow_default_messages_bind(&provider));
-    for (failure = 1; failure <= 12; ++failure) {
+    for (failure = 1; failure <= 13; ++failure) {
         allocation_count = 0;
         fail_allocation = failure;
         CHECK(!wow_default_messages_ready());
@@ -71,14 +72,14 @@ int main(void)
     fail_registration = TRUE;
     CHECK(!wow_default_messages_ready());
     CHECK(GetLastError() == ERROR_ACCESS_DENIED);
-    CHECK(allocation_count == 12 && live_allocations == 0);
+    CHECK(allocation_count == 13 && live_allocations == 0);
     CHECK(memcmp(&empty, &wow_default_message_state, sizeof(empty)) == 0);
     fail_registration = FALSE;
     allocation_count = 0;
     SetLastError(456);
     CHECK(wow_default_messages_ready());
     CHECK(GetLastError() == 456);
-    CHECK(allocation_count == 12 && live_allocations == 12);
+    CHECK(allocation_count == 13 && live_allocations == 13);
     CHECK(wow_default_shell_message >= 0xc000 &&
         wow_default_shell_message <= 0xffff);
     CHECK(wow_default_shell_message == RegisterWindowMessageW(L"SHELLHOOK"));
@@ -128,6 +129,12 @@ int main(void)
     CHECK(member(&edit, WM_NCDESTROY));
     CHECK(member(&edit, WM_FINALDESTROY));
     CHECK(member(&edit, WM_SYSTIMER));
+    CHECK(member(&edit, WM_IME_COMPOSITION) && member(&edit, EM_GETIMESTATUS));
+    CHECK(member(&edit, WM_STYLECHANGED));
+    CHECK(member(&list, LB_GETLISTBOXINFO) && member(&list, WM_MBUTTONDOWN));
+    CHECK(member(&wow_default_message_state.awmControl[FNID_IME - FNID_START], WM_IME_REQUEST));
+    CHECK(!member(&wow_default_message_state.awmControl[FNID_IME - FNID_START], WM_USER));
+    CHECK(member(&wow_default_message_state.awmControl[FNID_DIALOG - FNID_START], WM_SYSKEYDOWN));
     CHECK(member(&edit, WM_MOUSEWHEEL));
     CHECK(!member(&edit, WM_NCPAINT)); /* Original #if 0 exclusion. */
     CHECK(!member(&edit, WM_USER));
@@ -148,7 +155,7 @@ int main(void)
     SetLastError(789);
     CHECK(wow_default_messages_ready());
     CHECK(GetLastError() == 789);
-    CHECK(allocation_count == 12 && live_allocations == 12);
+    CHECK(allocation_count == 13 && live_allocations == 13);
     CHECK(server.abMsgs == wow_default_message_state.DefWindowMsgs.abMsgs);
     CHECK(client.abMsgs == wow_default_message_state.DefWindowSpecMsgs.abMsgs);
     CHECK(server.maxMsgs == wow_default_message_state.DefWindowMsgs.maxMsgs);
