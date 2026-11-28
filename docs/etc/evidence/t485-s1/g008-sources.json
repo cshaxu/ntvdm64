@@ -1,0 +1,110 @@
+[
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/fastopen/FASTOPEN.EXE",
+    "before_sha256": "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc",
+    "old_tree": "OpenNT",
+    "old_blob": "7fe6bf023a3e1fe69f229a54be94b5f289fd3c4d",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g008/01-FASTOPEN.EXE",
+    "target": null,
+    "disposition": "XP-absent historical generated binary/object/map; archive retains verified SP3 runtime original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/fastopen/FASTOPEN.map",
+    "before_sha256": "15838202ea1189a03ca94796d1a7d2e413108ec58a615dc9e021a7547920eb47",
+    "old_tree": "OpenNT",
+    "old_blob": "199c281218808fbc604da9514d2a8e7ff052489f",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g008/02-FASTOPEN.map",
+    "target": null,
+    "disposition": "XP-absent historical generated binary/object/map; archive retains verified SP3 runtime original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/fastopen/fastopen.OBJ",
+    "before_sha256": "ca631ae84d621e2e59a6c2df9c746f24fd8dedfac53250f56c5b55ba857795d2",
+    "old_tree": "opennt-src-2",
+    "old_blob": "d9e00a9f109545f8c43d6408ed0afc38a98e7830",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g008/03-fastopen.OBJ",
+    "target": null,
+    "disposition": "XP-absent historical generated binary/object/map; archive retains verified SP3 runtime original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/fastopen/fastopen.asm",
+    "before_sha256": "9b51e57daedb53940f355405cfc51deb5a24ce0830d99c747bd44194fe6594b0",
+    "old_tree": "OpenNT",
+    "old_blob": "ffd93cf655cb95f65a73a003f8eb7769d1a69c80",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g008/04-fastopen.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/fastopen/fastopen.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/fastopen/fastopen.asm",
+    "xp_blob": "5eff529c50c70389b4a685a972be299dc38e865d",
+    "xp_sha256": "4c23d4f6a1c6abbb89704249f058db510e37827197b7a900fc9d825232c6026e",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      48
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/fastopen/fastopen.lnk",
+    "before_sha256": "b58065a4841ef621f918cedfb0ba96f5df94dc79fd41bc1be62270fa8619a110",
+    "old_tree": "OpenNT",
+    "old_blob": "11f6d05817872ef60207da9654ca6c8331f09364",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g008/05-fastopen.lnk",
+    "target": "src/mvdm-guest/dos/v86/cmd/fastopen/fastopen.lnk",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/fastopen/fastopen.lnk",
+    "xp_blob": "542121a100c37603d9234460422dfdc6b58e3657",
+    "xp_sha256": "c157a2bfbdab3ee72304547728da3138e50c4611daa25555c62957c459753ae0",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      4
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/fastopen/makefile",
+    "before_sha256": "83797fae562c4609d627dc1d334d4ed35d73dfb9240e4b9464fa05c50a3a3b89",
+    "old_tree": "OpenNT",
+    "old_blob": "fff987b80d4759a44c53eef34da27c91d903ec6b",
+    "before_equals_old": false,
+    "evidence_dir": "build/t485-s16/g008/06-makefile",
+    "target": "src/mvdm-guest/dos/v86/cmd/fastopen/makefile.sub",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/fastopen/makefile.sub",
+    "xp_blob": "613eb2d9daa1ec71d0a7a100674a731e1f57d8da",
+    "xp_sha256": "6b79da8b21423bbd0bd3d31a95f9ce889dda43848130d6ec7f90b60662a777dd",
+    "before_vs_old": [
+      1,
+      66
+    ],
+    "before_vs_xp": [
+      1,
+      68
+    ],
+    "normalized_diff": [
+      6,
+      16
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  }
+]

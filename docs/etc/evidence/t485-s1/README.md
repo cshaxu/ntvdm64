@@ -365,3 +365,7 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 [G007 EXE2BIN migration](g007.md).
 
 [G007 delivery receipt](g007-result.json).
+
+[G008 FASTOPEN migration](g008.md).
+
+[G008 delivery receipt](g008-result.json).

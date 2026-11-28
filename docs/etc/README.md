@@ -2305,3 +2305,7 @@ post-publication targeted checks.
 [G007 EXE2BIN migration](evidence/t485-s1/g007.md).
 
 [G007 delivery receipt](evidence/t485-s1/g007-result.json).
+
+[G008 FASTOPEN migration](evidence/t485-s1/g008.md).
+
+[G008 delivery receipt](evidence/t485-s1/g008-result.json).
