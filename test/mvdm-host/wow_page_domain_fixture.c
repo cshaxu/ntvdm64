@@ -1501,11 +1501,12 @@ static int verify_class_registration(ULONG teb)
             ULONG client = entry->guest_server - c_sas_dw_at(teb + 0x60u);
             /* Real CCPU reads of XP's trailing WC and CLS.hTaskWow. No mocked
              * parent export: this case links the selected worker page owner. */
-            BORROW_CHECK(c_sas_dw_at(client + 92u) == words[0]);
-            BORROW_CHECK(c_sas_dw_at(client + 96u) == words[1]);
+            BORROW_CHECK(c_sas_dw_at(client + 92u) == (mode ? 0u : words[0]));
+            BORROW_CHECK(c_sas_dw_at(client + 96u) == (mode ? 0u : words[1]));
             BORROW_CHECK(LOWORD(c_sas_dw_at(client + 20u)) == (mode ? 0u : task.hTaskWow));
             BORROW_CHECK(c_sas_dw_at(client + 52u) == (ULONG)wc.lpfnWndProc);
-            BORROW_CHECK(entry->adwWOW[0] == words[0] && entry->adwWOW[1] == words[1]);
+            BORROW_CHECK(entry->adwWOW[0] == (mode ? 0u : words[0]) &&
+                entry->adwWOW[1] == (mode ? 0u : words[1]));
         }
         wow_class_words_release(binding);
         BORROW_CHECK(wow_class_client_unregister(&context, wc.lpszClassName, wc.hInstance));

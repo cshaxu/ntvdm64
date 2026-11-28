@@ -115,11 +115,12 @@ int __cdecl main(void)
     CHECK(!GetClassInfoA(module, original.lpszClassName, &output));
     CHECK(wow_class_fixture_publications == 2);
     wow_class_fixture_publication_fail = FALSE;
-    /* Original _RegisterClassEx, not mere existence of ptdb, decides whether
+    /* Original xxxRegisterClassEx, not mere existence of ptdb, decides whether
      * the class belongs to a WOW task. Do not retain the old duplicate rule. */
     thread.TIF_flags = 0;
     CHECK(wow_class_client_register_guest(&context, &original, words));
     CHECK(wow_class_fixture_task == 0 && wow_class_fixture_publications == 3);
+    CHECK(wow_class_fixture_words[0] == 0 && wow_class_fixture_words[1] == 0);
     CHECK(wow_class_client_unregister(&context, original.lpszClassName, module));
     CHECK(classes.pclsPrivateList == NULL);
     external.hInstance = GetModuleHandleA(NULL);

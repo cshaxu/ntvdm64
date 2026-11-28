@@ -20,17 +20,17 @@ typedef struct wow_class_client_context {
  * borrow lifetime. No private CLS layout or menu descriptor enters B. */
 VOID WINAPI wow_original_class_initialize_identity(struct tagCLS *, ATOM);
 VOID WINAPI wow_original_class_capture_menu(const struct tagCLSMENUNAME *, wow_class_lookup_entry *);
-BOOL WINAPI wow_original_class_unregister_committed(LPWSTR, HANDLE,
+BOOL WINAPI wow_original_class_unregister_committed(LPCWSTR, HANDLE,
     PCLSMENUNAME, wow_class_remove_context *);
 typedef struct wow_class_client_provider {
     ATOM (WINAPI *register_class)(WNDCLASSA *, DWORD *);
     BOOL (WINAPI *unregister_class)(LPCSTR, HINSTANCE);
     BOOL (WINAPI *get_class_info)(HINSTANCE, LPCSTR, WNDCLASSA *);
-    ATOM (WINAPI *register_class_ex)(WNDCLASSEXA *, PROC, PCLSMENUNAME, WORD, DWORD,
+    ATOM (WINAPI *register_class_ex)(WNDCLASSEXA *, PCLSMENUNAME, WORD, DWORD,
         DWORD *, wow_class_register_context *);
     wow_class_lookup_entry **(WINAPI *get_class_ptr)(ATOM, wow_class_lookup_context *, HANDLE);
     wow_class_lookup_entry **(WINAPI *inner_get_class_ptr)(ATOM, wow_class_lookup_entry **, HANDLE);
-    BOOL (WINAPI *unregister_class_internal)(LPWSTR, HANDLE, PCLSMENUNAME, wow_class_remove_context *);
+    BOOL (WINAPI *unregister_class_internal)(LPCWSTR, HANDLE, PCLSMENUNAME, wow_class_remove_context *);
     SIZE_T identity_bytes;
     WORD dialog_fnid;
     VOID (WINAPI *initialize_identity)(struct tagCLS *, ATOM);

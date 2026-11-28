@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall59/159 directories, H001-H036 and N001-N023. S15 runtime87 is the current
+overall59/159 directories, H001-H036 and N001-N023. S15 runtime88 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -186,6 +186,15 @@ behavior changed. Cached full build, dual26hash and real Win16 controls pass.
 Census1332/792/803/529/7936/64711; delta-1/0/0/-1/-1/-284;
 1313XP/19OpenNT. N0234/4; S15 11/14; overall59/159. Seven completed files
 since P69 Full24/24. Next N024 kernel in DIR order; no S/T closure.
+
+[P74 class registration](../etc/evidence/t485-s1/n024-class.md) delivered
+runtime88: XP registration/lookup/removal, original class tables and paired
+providers; cached build, dual26hash, four class/CCPU owner cases and real Win16
+controls pass. Receipt retains the corrected non-Win16 test expectation.
+Census1332/792/803/529/7948/64273; delta0/0/0/0/+12/-438;
+1314XP/18OpenNT. Original LF recovery expands the former whole-file diff.
+N024 first file delivered; S15 11/14, overall59/159. Eight completed files
+since P69 Full24/24. Next cleanup.c; no S/T closure.
 
 ## S14 Closure Record
 

@@ -8,13 +8,13 @@
  * The caller owns synchronization and lifetime of every entry and list link. */
 typedef struct wow_class_lookup_entry {
     struct wow_class_lookup_entry *next; /* Original ppcls = (PPCLS)*ppcls. */
-    ATOM atomClassName;
+    /* Both names denote the native public atom, not a kernel version atom. */
+    union { ATOM atomClassName; ATOM atomNVClassName; };
     WORD fnid;
     HANDLE hModule;
     DWORD flags;
     LONG cWndReferenceCount; /* Enrolled WND associations, not alias borrows. */
     DWORD hTaskWow;
-    PROC lpfnWorker;
     WNDPROC lpfnWndProc; /* Enrolled logical target; native gateway stays native. */
     LPSTR lpszClientAnsiMenuName;
     LPWSTR lpszClientUnicodeMenuName;
@@ -43,6 +43,7 @@ wow_class_lookup_entry **WINAPI GetClassPtr(ATOM,
     wow_class_lookup_context *, HANDLE);
 
 #ifdef WOW_ORIGINAL_CLASS_LOOKUP
+#define CSF_flags flags
 typedef wow_class_lookup_entry **PPCLS;
 typedef wow_class_lookup_context *PPROCESSINFO;
 /* Bind original per-process/system roots to this worker's supplied context;

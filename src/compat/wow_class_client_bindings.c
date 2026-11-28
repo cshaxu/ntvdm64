@@ -271,8 +271,8 @@ static BOOL publish_completed_class(class_publication *publication,
 {
     wow_class_lookup_entry *entry = publication->entry;
     wow_class_lookup_context *classes = publication->client->classes;
-    /* InternalRegisterClassEx returns before the original _RegisterClassEx
-     * copies adwWOW and chooses hTaskWow. Project only the completed original
+    /* InternalRegisterClassEx returns before the original xxxRegisterClassEx
+     * copies WC and chooses hTaskWow. Project only the completed original
      * result, not the zero-initialized allocation returned by publish_native. */
     if (!wow_class_words_publish_guest(entry, native_class)) {
         wow_class_lookup_entry **link = (native_class->style & CS_GLOBALCLASS) ?
@@ -325,7 +325,7 @@ ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *wc, PUNICODE_STRING name,
     publication.client=current; publication.name=version_name; publication.menu=menu;
     context.thread=current->thread; context.register_class=publish_native;
     context.resolve_callproc=resolve_callproc; context.binding=&publication;
-    atom = wow_class_client_provider_current()->register_class_ex(wc,NULL,menu,fnid,flags,words,&context);
+    atom = wow_class_client_provider_current()->register_class_ex(wc,menu,fnid,flags,words,&context);
     if (atom && !publish_completed_class(&publication, wc)) return 0;
     return atom;
 }

@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: class.c
 *
-* Copyright (c) 1985-96, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains RegisterClass and the related window class management
 * functions.
@@ -16,13 +16,93 @@
 #pragma hdrstop
 #ifdef WOW_ORIGINAL_CLASS_REGISTRATION
 #include <winternl.h>
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #include "wow_user_client_view_layout.h"
-#include "wow_class_client_bindings.h"
+#line 18
+/*
+ * These arrays are used by Get/SetClassWord/Long.
+ *
+ * INDEX_OFFSET must refer to the first entry of afClassDWord[]
+ */
+#define INDEX_OFFSET GCLP_HICONSM
+CONST BYTE afClassDWord[-INDEX_OFFSET] = {
+    FIELD_SIZE(CLS, spicnSm),          // GCL_HICONSM       (-34)
+    0,
+    FIELD_SIZE(CLS, atomNVClassName),  // GCW_ATOM          (-32)
+    0,
+    0,
+    0,
+    0,
+    0,
+    FIELD_SIZE(CLS, style),            // GCL_STYLE         (-26)
+    0,
+    FIELD_SIZE(CLS, lpfnWndProc),      // GCL_WNDPROC       (-24)
+    0,
+    0,
+    0,
+    FIELD_SIZE(CLS, cbclsExtra),       // GCL_CBCLSEXTRA    (-20)
+    0,
+    FIELD_SIZE(CLS, cbwndExtra),       // GCL_CBWNDEXTRA    (-18)
+    0,
+    FIELD_SIZE(CLS, hModule),          // GCL_HMODULE       (-16)
+    0,
+    FIELD_SIZE(CLS, spicn),            // GCL_HICON         (-14)
+    0,
+    FIELD_SIZE(CLS, spcur),            // GCL_HCURSOR       (-12)
+    0,
+    FIELD_SIZE(CLS, hbrBackground),    // GCL_HBRBACKGROUND (-10)
+    0,
+    FIELD_SIZE(CLS, lpszMenuName),     // GCL_HMENUNAME      (-8)
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+};
 
+CONST BYTE aiClassOffset[-INDEX_OFFSET] = {
+    FIELD_OFFSET(CLS, spicnSm),         // GCL_HICONSM
+    0,
+    FIELD_OFFSET(CLS, atomNVClassName),   // GCW_ATOM
+    0,
+    0,
+    0,
+    0,
+    0,
+    FIELD_OFFSET(CLS, style),           // GCL_STYLE
+    0,
+    FIELD_OFFSET(CLS, lpfnWndProc),     // GCL_WNDPROC
+    0,
+    0,
+    0,
+    FIELD_OFFSET(CLS, cbclsExtra),      // GCL_CBCLSEXTRA
+    0,
+    FIELD_OFFSET(CLS, cbwndExtra),      // GCL_CBWNDEXTRA
+    0,
+    FIELD_OFFSET(CLS, hModule),         // GCL_HMODULE
+    0,
+    FIELD_OFFSET(CLS, spicn),           // GCL_HICON
+    0,
+    FIELD_OFFSET(CLS, spcur),           // GCL_HCURSOR
+    0,
+    FIELD_OFFSET(CLS, hbrBackground),   // GCL_HBRBACKGROUND
+    0,
+    FIELD_OFFSET(CLS, lpszMenuName),    // GCL_MENUNAME
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+};
+
+#include "wow_class_client_bindings.h"
 VOID WINAPI wow_original_class_initialize_identity(struct tagCLS *identity, ATOM atom)
 {
     identity->atomClassName = atom;
+    identity->atomNVClassName = atom;
 }
 VOID WINAPI wow_original_class_capture_menu(const CLSMENUNAME *menu,
     wow_class_lookup_entry *entry)
@@ -30,7 +110,7 @@ VOID WINAPI wow_original_class_capture_menu(const CLSMENUNAME *menu,
     entry->lpszClientAnsiMenuName = menu->pszClientAnsiMenuName;
     entry->lpszClientUnicodeMenuName = menu->pwszClientUnicodeMenuName;
 }
-BOOL WINAPI wow_original_class_unregister_committed(LPWSTR name, HANDLE module,
+BOOL WINAPI wow_original_class_unregister_committed(LPCWSTR name, HANDLE module,
     PCLSMENUNAME menu, wow_class_remove_context *context)
 {
     CLSMENUNAME result;
@@ -39,7 +119,7 @@ BOOL WINAPI wow_original_class_unregister_committed(LPWSTR name, HANDLE module,
     return TRUE;
 }
 
-#line 68
+#line 98
 /***************************************************************************\
 * _RegisterClass (API)
 *
@@ -52,36 +132,36 @@ BOOL WINAPI wow_original_class_unregister_committed(LPWSTR name, HANDLE module,
 * 04-26-91 DarrinM      Created.
 \***************************************************************************/
 
-ATOM _RegisterClassEx(
-    LPWNDCLASSEX pwc,
-    PROC lpfnWorker,
+ATOM xxxRegisterClassEx(
+    WNDCLASSEXA *cczpwc,
     PCLSMENUNAME pcmn,
     WORD fnid,
     DWORD dwFlags,
-    LPDWORD pdwWOW, wow_class_register_context *context )
-#line 87
+    LPDWORD pdwWOW, wow_class_register_context *context)
+#line 116
 {
     PCLS pcls;
+    PTHREADINFO  ptiCurrent = PtiCurrent();
 
     /*
-     * Convert a possible CallProc Handle into a real address.  They may
+     * NOTE -- lpszClassName and lpszMenuName in the wndclass may be client-side
+     *         pointers. Use of those fields must be protected in try blocks.
+     */
+
+    /*
+     * Convert a possible CallProc Handle into a real address. They may
      * have kept the CallProc Handle from some previous mixed GetClassinfo
      * or SetWindowLong.
      */
-    if (ISCPDTAG(pwc->lpfnWndProc)) {
+    if (ISCPDTAG(cczpwc->lpfnWndProc)) {
         PCALLPROCDATA pCPD;
-        if  (pCPD = HMValidateHandleNoRip((HANDLE)pwc->lpfnWndProc, TYPE_CALLPROC)) {
-            pwc->lpfnWndProc = (WNDPROC)pCPD->pfnClientPrevious;
+        if (pCPD = HMValidateHandleNoRip((HANDLE)cczpwc->lpfnWndProc, TYPE_CALLPROC)) {
+            cczpwc->lpfnWndProc = (WNDPROC)pCPD->pfnClientPrevious;
         }
     }
 
-    pcls = InternalRegisterClassEx(pwc, fnid, dwFlags |
-        ((PtiCurrent()->TIF_flags & TIF_16BIT) ? CSF_WOWCLASS : 0));
-
+    pcls = InternalRegisterClassEx(cczpwc, fnid, dwFlags | ((ptiCurrent->TIF_flags & TIF_16BIT)? CSF_WOWCLASS : 0));
     if (pcls != NULL) {
-        PTHREADINFO ptiCurrent = PtiCurrent();
-
-        pcls->lpfnWorker = lpfnWorker;
 
         pcls->lpszClientUnicodeMenuName = pcmn->pwszClientUnicodeMenuName;
         pcls->lpszClientAnsiMenuName = pcmn->pszClientAnsiMenuName;
@@ -89,8 +169,10 @@ ATOM _RegisterClassEx(
         /*
          * copy 5 WOW dwords.
          */
-        if (pdwWOW)
-            RtlCopyMemory (pcls->adwWOW, pdwWOW, sizeof(pcls->adwWOW));
+        if (pdwWOW && (ptiCurrent->TIF_flags & TIF_16BIT)) {
+            RtlCopyMemory (PWCFromPCLS(pcls), pdwWOW, sizeof(WC));
+        }
+
         if ((ptiCurrent->TIF_flags & TIF_16BIT) && ptiCurrent->ptdb) {
             pcls->hTaskWow = ptiCurrent->ptdb->hTaskWow;
         } else {
@@ -101,17 +183,18 @@ ATOM _RegisterClassEx(
          * For some (presumably good) reason Win 3.1 changed RegisterClass
          * to return the classes classname atom.
          */
-        return pcls->atomClassName;
+        return pcls->atomNVClassName;
     } else {
         return 0;
     }
 }
+
+
 #elif defined(WOW_ORIGINAL_CLASS_REMOVAL)
 #include <winternl.h>
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "wow_user_client_view_layout.h"
 #include "wow_class_remove_bindings.h"
-
-#line 478
+#line 550
 /***************************************************************************\
 * _UnregisterClass (API)
 *
@@ -135,10 +218,10 @@ ATOM _RegisterClassEx(
 \***************************************************************************/
 
 BOOL _UnregisterClass(
-    LPWSTR lpszClassName,
+    LPCWSTR ccxlpszClassName,
     HANDLE hModule,
     PCLSMENUNAME pcmn, wow_class_remove_context *context)
-#line 504
+#line 576
 {
     ATOM atomT;
     PPCLS ppcls;
@@ -158,8 +241,7 @@ BOOL _UnregisterClass(
     /*
      * bradg (3/9/95) - Must first check to see if an ATOM has been passed
      */
-    atomT = FindClassAtom(lpszClassName);
-
+    atomT = FindClassAtom(ccxlpszClassName);
     ppcls = _InnerGetClassPtr(atomT, &ptiCurrent->ppi->pclsPrivateList, hModule);
     if (ppcls == NULL) {
         /*
@@ -167,7 +249,7 @@ BOOL _UnregisterClass(
          */
         ppcls = _InnerGetClassPtr(atomT, &ptiCurrent->ppi->pclsPublicList, NULL);
         if (ppcls == NULL) {
-            RIPERR0(ERROR_CLASS_DOES_NOT_EXIST, RIP_VERBOSE, "");
+            RIPERR1(ERROR_CLASS_DOES_NOT_EXIST, RIP_WARNING, "UnregisterClass: Class does not exist; atom=%lX", (DWORD)atomT);
             return FALSE;
         }
     }
@@ -190,17 +272,16 @@ BOOL _UnregisterClass(
     /*
      * Release the Window class and related information.
      */
-        if (!DestroyClass(ppcls))
-        return FALSE;
+    if (!DestroyClass(ppcls)) return FALSE;
 
-#line 557
     return TRUE;
 }
+
+
 #else
 #define WOW_ORIGINAL_CLASS_LOOKUP
 #include "wow_class_lookup_bindings.h"
-
-#line 891
+#line 1016
 PPCLS _InnerGetClassPtr(
     ATOM atom,
     PPCLS ppcls,
@@ -211,8 +292,8 @@ PPCLS _InnerGetClassPtr(
 
     while (*ppcls != NULL) {
         if ((*ppcls)->atomClassName == atom &&
-                (hModule == NULL || HIWORD((*ppcls)->hModule) == HIWORD(hModule)) &&
-                !((*ppcls)->flags & CSF_WOWDEFERDESTROY)) {
+                (hModule == NULL || HIWORD((ULONG_PTR)(*ppcls)->hModule) == HIWORD((ULONG_PTR)hModule)) &&
+                !((*ppcls)->CSF_flags & CSF_WOWDEFERDESTROY)) {
             return ppcls;
         }
 
@@ -228,7 +309,7 @@ PPCLS _InnerGetClassPtr(
 *
 * Note: This returns a "pointer-to-PCLS" and not "PCLS".
 *
-* Scan the passed-in class list for the specified class.  Return NULL if
+* Scan the passed-in class list for the specified class. Return NULL if
 * the class isn't in the list.
 *
 * History:
@@ -240,7 +321,6 @@ PPCLS _InnerGetClassPtr(
                        and LoWord is 16-bit hInstance
 \***************************************************************************/
 
-#line 930
 PPCLS GetClassPtr(
     ATOM atom,
     PPROCESSINFO ppi,
@@ -269,7 +349,7 @@ PPCLS GetClassPtr(
 
     /*
      * Later -- since we are no longer returning hModuleWin to any app,
-     * we may only need to check for hModClient.  Check this out.
+     * we may only need to check for hModClient. Check this out.
      *      FritzS
      */
 
@@ -287,19 +367,23 @@ PPCLS GetClassPtr(
     ppcls = _InnerGetClassPtr(atom, &gpclsList, NULL);
     return ppcls;
 }
+
 #endif
 
-
-#line 1070
-#ifdef DBG
-#line 1071
-#error
-#endif
-
-#line 375
+#line 436
 #ifdef FE_SB // InternalRegisterClassEx()
-#line 376
-#error
+#line 437
+#error Excluded unsupported kernel DBCS menu allocation
 #else
-#line 378
+#line 439
 #endif // FE_SB
+#line 965
+#ifdef _WIN64
+#line 966
+#error Excluded unsupported native x64 USER class owner
+#endif
+#line 1207
+#if DBG
+#line 1208
+#error Excluded unsupported kernel USER debug diagnostics
+#endif

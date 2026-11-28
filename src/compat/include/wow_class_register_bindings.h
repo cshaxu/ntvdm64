@@ -5,7 +5,7 @@
 
 /* ADAPTER-WOW-044: original registration state, not a second class registry.
  * Both callbacks are required; a CPD is validated by its actual owner.
- * Unrecognized values retain original _RegisterClassEx's unchanged-input rule.
+ * Unrecognized values retain original xxxRegisterClassEx's unchanged-input rule.
  * Native registration supplies an existing owned entry in the class lists. */
 typedef struct wow_class_callproc { ULONG_PTR pfnClientPrevious; } wow_class_callproc;
 typedef struct wow_class_register_context {
@@ -14,10 +14,14 @@ typedef struct wow_class_register_context {
     wow_class_callproc *(WINAPI *resolve_callproc)(struct wow_class_register_context *, HANDLE);
     PVOID binding;
 } wow_class_register_context;
-ATOM WINAPI _RegisterClassEx(WNDCLASSEXA *, PROC, PCLSMENUNAME, WORD, DWORD,
+ATOM WINAPI xxxRegisterClassEx(WNDCLASSEXA *, PCLSMENUNAME, WORD, DWORD,
     DWORD *, wow_class_register_context *);
 #ifdef WOW_ORIGINAL_CLASS_REGISTRATION
 #define PCLS wow_class_lookup_entry *
+/* Native USER returns the public, non-versioned class atom. Existing lookup
+ * maps the resolved version name to that same native registration. */
+#undef PWCFromPCLS
+#define PWCFromPCLS(pcls) ((PWC)(pcls)->adwWOW)
 typedef WNDCLASSEXA *LPWNDCLASSEX;
 typedef wow_task_order_thread *PTHREADINFO;
 #define PCALLPROCDATA wow_class_callproc *

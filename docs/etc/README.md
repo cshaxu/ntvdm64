@@ -2261,3 +2261,5 @@ post-publication targeted checks.
 - [S15 N023 USER core declaration audit](evidence/t485-s1/n023-user.md).
 
 - [S15 P73 obsolete diagnostic header](evidence/t485-s1/n023-winerrp.md).
+
+- [S15 P74 class registration migration](evidence/t485-s1/n024-class.md).

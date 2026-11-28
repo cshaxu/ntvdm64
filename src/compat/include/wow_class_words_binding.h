@@ -6,7 +6,7 @@
 
 typedef struct wow_class_words_binding wow_class_words_binding;
 /* Public native class owner resolves recognized CPDs and preserves unknown
- * values, matching original _RegisterClassEx. No HWND or token cache.
+ * values, matching original xxxRegisterClassEx. No HWND or token cache.
  * FALSE is a resource/query/cleanup failure; output is then unchanged. */
 BOOL WINAPI wow_native_class_resolve_procedure(DWORD, DWORD *);
 /* Same borrowed lifetime as class words; no new lookup or copied entry. */

@@ -66,7 +66,7 @@ ATOM WINAPI wow_original_register_class(WNDCLASSA *, DWORD *);
 BOOL WINAPI wow_original_unregister_class(LPCSTR, HINSTANCE);
 BOOL WINAPI wow_original_get_class_info(HINSTANCE, LPCSTR, WNDCLASSA *);
 static const wow_class_client_provider class_client_provider = {
-    wow_original_register_class, wow_original_unregister_class, wow_original_get_class_info, _RegisterClassEx, GetClassPtr, _InnerGetClassPtr, wow_original_class_unregister_committed, sizeof(CLS), FNID_DIALOG, wow_original_class_initialize_identity, wow_original_class_capture_menu };
+    wow_original_register_class, wow_original_unregister_class, wow_original_get_class_info, xxxRegisterClassEx, GetClassPtr, _InnerGetClassPtr, wow_original_class_unregister_committed, sizeof(CLS), FNID_DIALOG, wow_original_class_initialize_identity, wow_original_class_capture_menu };
 #include "compat/include/wow_button_lifetime.h"
 PVOID WINAPI wow_original_button_data(struct tagWND *);
 const wow_button_resource_provider *WINAPI wow_original_button_resources(void);

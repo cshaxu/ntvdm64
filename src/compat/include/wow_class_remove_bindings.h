@@ -11,7 +11,7 @@ typedef struct wow_class_remove_context {
     BOOL menu_output_available;
     BOOL (WINAPI *destroy)(struct wow_class_remove_context *, wow_class_lookup_entry **);
 } wow_class_remove_context;
-BOOL WINAPI _UnregisterClass(LPWSTR,HANDLE,PCLSMENUNAME,wow_class_remove_context *);
+BOOL WINAPI _UnregisterClass(LPCWSTR,HANDLE,PCLSMENUNAME,wow_class_remove_context *);
 #ifdef WOW_ORIGINAL_CLASS_REMOVAL
 typedef wow_class_lookup_entry **wow_class_remove_link;
 #define PPCLS wow_class_remove_link
@@ -21,5 +21,6 @@ typedef wow_class_remove_context *PTHREADINFO;
 #define FindClassAtom(rawName) ((void)(rawName), wow_class_words_find_atom(context->ppi,&context->name))
 #define DestroyClass(link) context->destroy(context,link)
 #define RIPERR0(error, level, message) SetLastError(error)
+#define RIPERR1(error, level, message, value) SetLastError(error)
 #endif
 #endif

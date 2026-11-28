@@ -42,12 +42,11 @@ int __cdecl main(void)
         thread.TIF_flags=(i==1 || i==2 || i==4) ? WOW_TASK_TIF_16BIT : 0;
         thread.ptdb=(i==1 || i==3 || i==4) ? &task : NULL;
         valid_cpd=TRUE;
-        atom=_RegisterClassEx(&wc,(PROC)DefWindowProcA,&menu,0,2,i==2 ? NULL : words,&context);
+        atom=xxxRegisterClassEx(&wc,&menu,0,2,i==2 ? NULL : words,&context);
         CHECK(atom!=0);if(!atom)return 2;
         CHECK(classes.pclsPrivateList->hTaskWow==((i==1 || i==4) ? 0x4321u : 0u));
-        CHECK(classes.pclsPrivateList->lpfnWorker==(PROC)DefWindowProcA);
-        CHECK(classes.pclsPrivateList->adwWOW[0]==(i==2 ? 0u : words[0]));
-        CHECK(classes.pclsPrivateList->adwWOW[1]==(i==2 ? 0u : words[1]));
+        CHECK(classes.pclsPrivateList->adwWOW[0]==((i==1 || i==4) ? words[0] : 0u));
+        CHECK(classes.pclsPrivateList->adwWOW[1]==((i==1 || i==4) ? words[1] : 0u));
         CHECK(classes.pclsPrivateList->cWndReferenceCount==0);
         CHECK(wc.lpfnWndProc==DefWindowProcA);
         CHECK(wow_class_words_unregister(&classes,atom,wc.hInstance,&returned));
@@ -56,7 +55,7 @@ int __cdecl main(void)
         CHECK(classes.pclsPrivateList==NULL);
     }
     fail_registration=TRUE;valid_cpd=FALSE;wc.lpfnWndProc=(WNDPROC)0xffff1234;
-    CHECK(!_RegisterClassEx(&wc,NULL,&menu,0,2,words,&context));
+    CHECK(!xxxRegisterClassEx(&wc,&menu,0,2,words,&context));
     CHECK(wc.lpfnWndProc==(WNDPROC)0xffff1234 && classes.pclsPrivateList==NULL);
     CHECK(registrations==6 && resolutions==2);
     /* Original private lookup compares the high word of packed modules;
@@ -68,7 +67,7 @@ int __cdecl main(void)
         BOOL removed;
         HINSTANCE requested=i ? (HINSTANCE)0x45671234 : (HINSTANCE)0x23455678;
         wc.style=i ? CS_GLOBALCLASS : 0;
-        atom=_RegisterClassEx(&wc,NULL,&menu,0,2,words,&context);
+        atom=xxxRegisterClassEx(&wc,&menu,0,2,words,&context);
         CHECK(atom!=0);if(!atom)return 2;
         if(!i) {
             returned.pszClientAnsiMenuName=(LPSTR)1;

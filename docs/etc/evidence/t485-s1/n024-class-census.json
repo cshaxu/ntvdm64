@@ -1,0 +1,88 @@
+{
+  "before": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7936,
+    "nonerror_lines": 64711
+  },
+  "after": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7948,
+    "nonerror_lines": 64273
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 12,
+    "nonerror_lines": -438
+  },
+  "file": {
+    "before": {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "before_baseline": "OpenNT",
+      "before_original_blob": "51c95e1f710e8c091e0e361f4d8275d340c40a46",
+      "after_baseline": "OpenNT",
+      "after_original_blob": "51c95e1f710e8c091e0e361f4d8275d340c40a46",
+      "before_sha256": "eaa1d0e04237e895658383f3d542c08adcd05534bde238ba726efee8ff6da18a",
+      "after_sha256": "eaa1d0e04237e895658383f3d542c08adcd05534bde238ba726efee8ff6da18a",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "1",
+      "points_after": "1",
+      "lines_before": "1926",
+      "lines_after": "1926",
+      "measurement": "current byte-sensitive exclusion projection"
+    },
+    "after": {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "before_baseline": "OpenNT",
+      "before_original_blob": "51c95e1f710e8c091e0e361f4d8275d340c40a46",
+      "after_baseline": "XP",
+      "after_original_blob": "1eee60a947dfce9c76531988782d5cdd0dbc4082",
+      "before_sha256": "eaa1d0e04237e895658383f3d542c08adcd05534bde238ba726efee8ff6da18a",
+      "after_sha256": "5b7c897720f12065e3fcba83f0fea0508e062dd8490b5d4f89d0d7a1a2988f93",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "1",
+      "points_after": "13",
+      "lines_before": "1926",
+      "lines_after": "1488",
+      "measurement": "S15 P74 XP class registration/lookup/removal"
+    },
+    "exclusions": [
+      {
+        "current_error": 376,
+        "original_start": 437,
+        "original_end": 437,
+        "kind": "conditional",
+        "anchor": 437
+      },
+      {
+        "current_error": 383,
+        "original_start": 966,
+        "original_end": 1012,
+        "kind": "conditional",
+        "anchor": 966
+      },
+      {
+        "current_error": 388,
+        "original_start": 1208,
+        "original_end": 1210,
+        "kind": "conditional",
+        "anchor": 1208
+      }
+    ],
+    "raw_points": 13
+  },
+  "baseline_counts": {
+    "XP": 1314,
+    "OpenNT": 18
+  }
+}
