@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime63 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime64 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -184,19 +184,23 @@ binding, initial failure, final package/tests and complete mirror census.
 P51 is the current ten-file Full checkpoint.
 
 [P52 multiline auxiliary operations](../etc/evidence/t485-s1/n022-edmlrare.md)
-delivered runtime61; its receipt preserves original selection, source identities,
-package/tests and complete mirror census.
+delivered runtime61; original algorithms, paired ABI, package/tests and
+complete census are retained in its receipt.
 
 [P53 single-line auxiliary operations](../etc/evidence/t485-s1/n022-edslrare.md)
-delivered runtime62; its receipt retains original algorithms, source identity,
-package/tests and complete mirror census.
+delivered runtime62; its receipt retains original identity, ABI, targeted
+verification and complete mirror census.
 
 [P54 USER global declarations](../etc/evidence/t485-s1/n022-globals-h.md)
-delivers runtime63: full XP globals and paired message-dispatch ABI.
+delivered runtime63; original ABI, package, targeted results and census remain
+in its receipt. No original guest change.
+
+[P55 DDE data handles](../etc/evidence/t485-s1/n022-hdata.md) delivers runtime64:
+XP raw-data release/copy, existing private DDEML-manager omission evidenced.
 Cached build, dual13-image26hash, controls40/40, CCPU window-borrow and SOL
-Options pass. N02225/39; S15 9/14, overall57/159. Census1329/785/796/533/
-7836/92889; delta0/0/0/0/+1/-275.1292XP/37OpenNT. Three mirrors since P51
-Full24/24. No guest change or S/T closure. Next hdata.c.
+Options pass. N02226/39; S15 9/14, overall57/159. Census1329/785/796/533/
+7837/92369; delta0/0/0/0/+1/-520.1293XP/36OpenNT. Four mirrors since P51
+Full24/24. No guest change or S/T closure. Next lb1.c.
 
 ## S14 Closure Record
 

@@ -9,7 +9,7 @@ static HGLOBAL data(WORD format, WORD status, HANDLE nested)
     if (!h) return NULL;
     p = GlobalLock(h);
     if (!p) { GlobalFree(h); return NULL; }
-    p->wStatus = status; p->wFmt = format; p->Data = (DWORD)nested;
+    p->wStatus = status; p->wFmt = format; p->Data = nested;
     GlobalUnlock(h);
     return h;
 }
@@ -20,6 +20,8 @@ int __cdecl main(void)
     HBITMAP bitmap;
     BITMAP bitmap_info;
     unsigned mode;
+    CHECK(sizeof(DDE_DATA) == 8 && FIELD_OFFSET(DDE_DATA, Data) == 4);
+    CHECK(CopyBitmap(NULL) == NULL && CopyPalette(NULL) == NULL);
     outer = data(CF_TEXT, 0, NULL);
     CHECK(outer);
     FreeDDEData(outer, FALSE, TRUE);
@@ -124,7 +126,7 @@ int __cdecl main(void)
     CHECK(copy);
     {
         PDDE_DATA target = GlobalLock(copy);
-        CHECK(target && target->Data != (DWORD)bitmap);
+        CHECK(target && target->Data != (PVOID)bitmap);
         CHECK(GetObject((HBITMAP)target->Data, sizeof(bitmap_info), &bitmap_info));
         CHECK(bitmap_info.bmWidth == 2 && bitmap_info.bmHeight == 2);
         GlobalUnlock(copy);

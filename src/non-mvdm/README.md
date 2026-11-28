@@ -1740,6 +1740,11 @@ not a guest change or evidence that current Win16 workloads use old formats.
 
 ### S40 finite USER DDE data owner
 
+T485 S15 P55 migrates this subset to XP SP1; the [current receipt](../../docs/etc/evidence/t485-s1/n022-hdata.md)
+records all four retained data functions, exact original identity, private
+DDEML-manager omission and pointer-shaped x86 ABI. The S40 account below is
+historical admission evidence.
+
 OPENNT-HOST-032 admits the original `windows/core/ntuser/client/hdata.c`
 `FreeDDEData` body as a true subset. Direct callers are original
 `mvdm/wow32/wumsg.c` through `pfnOut.pfnFreeDDEData`. Source SHA-256:

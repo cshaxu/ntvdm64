@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 7836,
+    "nonerror_lines": 92889
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 7837,
+    "nonerror_lines": 92369
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 1,
+    "nonerror_lines": -520
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+      "before_points": 1,
+      "before_lines": 985,
+      "after_points": 2,
+      "after_lines": 465,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1293,
+    "OpenNT": 36
+  }
+}

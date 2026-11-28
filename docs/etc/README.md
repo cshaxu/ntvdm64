@@ -2223,3 +2223,5 @@ post-publication targeted checks.
 - [S15 P53 single-line EDIT auxiliary operations](evidence/t485-s1/n022-edslrare.md).
 
 - [S15 P54 USER global declarations](evidence/t485-s1/n022-globals-h.md).
+
+- [S15 P55 DDE data handles](evidence/t485-s1/n022-hdata.md).

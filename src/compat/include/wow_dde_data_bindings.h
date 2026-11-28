@@ -5,13 +5,16 @@
 #include <dde.h>
 #include <ddeml.h>
 
-/* Original ntuser/inc/ddetrack.h data layout and client/usercli.h retail
+/* XP windows/published/ddetrack.w data layout and client/usercli.h retail
  * macros. No DDE ownership policy is implemented by this binding. */
 typedef struct tagDDE_DATA {
     WORD wStatus;
     WORD wFmt;
-    DWORD Data;
+    PVOID Data;
 } DDE_DATA, *PDDE_DATA;
+
+/* Retail assertion has no evaluation or runtime state. */
+#define UserAssert(condition) ((void)0)
 
 #define USERGLOBALLOCK(h, p) p = GlobalLock((HANDLE)(h))
 #define USERGLOBALUNLOCK(h) GlobalUnlock((HANDLE)(h))

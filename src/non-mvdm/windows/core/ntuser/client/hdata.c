@@ -1,6 +1,8 @@
 /****************************** Module Header ******************************\
 * Module Name: hdata.c
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 * DDE Manager data handle functions
 *
 * Created: 11/12/91 Sanford Staab
@@ -9,9 +11,9 @@
 
 #define DDEMLDB
 #include "wow_dde_data_bindings.h"
+#include "w32w64.h"
 #pragma hdrstop
-#line 453
-
+#line 476
 /***************************************************************************\
 * FreeDDEData
 *
@@ -54,7 +56,7 @@ BOOL fFreeTruelyGlobalObjects)
     }
 
     if ((pdde->wStatus & DDE_FRELEASE) || fIgnorefRelease) {
-        cb = GlobalSize(hDDE);
+        cb = (DWORD)GlobalSize(hDDE);
         /*
          * Because there is the possibility that the data never got
          * initialized we need to do this in a try-except so we
@@ -131,7 +133,7 @@ HBITMAP CopyBitmap(
 HBITMAP hbm)
 {
     BITMAP bm;
-    HBITMAP hbm2, hbmOld1, hbmOld2;
+    HBITMAP hbm2 = NULL, hbmOld1, hbmOld2;
     HDC hdc, hdcMem1, hdcMem2;
 
     if (!GetObject(hbm, sizeof(BITMAP), &bm)) {
@@ -189,9 +191,11 @@ HPALETTE hpal)
     plp->palVersion = 0x300;
     plp->palNumEntries = (WORD)cPalEntries;
     hpal = CreatePalette(plp);
-    if (hpal  &&
-            !SetPaletteEntries(hpal, 0, cPalEntries, plp->palPalEntry)) {
-        hpal = 0;
+    if (hpal != NULL) {
+        if (!SetPaletteEntries(hpal, 0, cPalEntries, plp->palPalEntry)) {
+            DeleteObject(hpal);
+            hpal = NULL;
+        }
     }
     DDEMLFree(plp);
     return(hpal);
@@ -228,21 +232,22 @@ BOOL fIsExecute)
         return (0);
     }
     USERGLOBALLOCK(hDDENew, pddeNew);
+    UserAssert(pddeNew);
     RtlCopyMemory(pddeNew, pdde, UserGlobalSize(hDDE));
 
     if (!fIsExecute) {
         switch (pdde->wFmt) {
         case CF_BITMAP:
         case CF_DSPBITMAP:
-            pddeNew->Data = (DWORD)CopyBitmap((HBITMAP)pdde->Data);
+            pddeNew->Data = (KERNEL_PVOID)CopyBitmap((HBITMAP)pdde->Data);
             break;
 
         case CF_PALETTE:
-            pddeNew->Data = (DWORD)CopyPalette((HPALETTE)pdde->Data);
+            pddeNew->Data = (KERNEL_PVOID)CopyPalette((HPALETTE)pdde->Data);
             break;
 
         case CF_DIB:
-            pddeNew->Data = (DWORD)CopyDDEData((HANDLE)pdde->Data, TRUE);
+            pddeNew->Data = (KERNEL_PVOID)CopyDDEData((HANDLE)pdde->Data, TRUE);
             break;
 
         case CF_METAFILEPICT:
@@ -258,12 +263,12 @@ BOOL fIsExecute)
             }
             pmfPict->hMF = CopyMetaFile(pmfPict->hMF, NULL);
             USERGLOBALUNLOCK(hmfPict);
-            pddeNew->Data = (DWORD)hmfPict;
+            pddeNew->Data = (KERNEL_PVOID)hmfPict;
             break;
 
         case CF_ENHMETAFILE:
         case CF_DSPENHMETAFILE:
-            pddeNew->Data = (DWORD)CopyEnhMetaFile((HANDLE)pdde->Data, NULL);
+            pddeNew->Data = (KERNEL_PVOID)CopyEnhMetaFile((HANDLE)pdde->Data, NULL);
             break;
         }
     }
