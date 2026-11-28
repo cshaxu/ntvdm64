@@ -2309,3 +2309,7 @@ post-publication targeted checks.
 [G008 FASTOPEN migration](evidence/t485-s1/g008.md).
 
 [G008 delivery receipt](evidence/t485-s1/g008-result.json).
+
+[G009 GRAPHICS migration](evidence/t485-s1/g009.md).
+
+[G009 delivery receipt](evidence/t485-s1/g009-result.json).

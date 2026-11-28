@@ -1,0 +1,1158 @@
+[
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.CL1",
+    "before_sha256": "17284f8980cac891554180fbedf53e295686fd268aff103eba3c2d967b0ff065",
+    "old_tree": "opennt-src-2",
+    "old_blob": "54aa27129405ec9e5f3b1a2f91e2ea1bcf3fc29c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/01-GRAPHICS.CL1",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.CL2",
+    "before_sha256": "4d7debffaff48325ed12f0657e2bc1201e9a110bc0d51d7a50275c8eb2c148c7",
+    "old_tree": "opennt-src-2",
+    "old_blob": "2e200d27a04f1191f56752162496a93fdacce076",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/02-GRAPHICS.CL2",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.CLA",
+    "before_sha256": "32ade7d98d87db21f28b5e933bd747a590cd7b6734feb796fd84fa1716987d7e",
+    "old_tree": "opennt-src-2",
+    "old_blob": "1d8c6d9b4db55945b10f08826ea1958c815fd954",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/03-GRAPHICS.CLA",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.CLB",
+    "before_sha256": "ba2a2500959b7d9e35f23640434a3b7dd6dc1422b96f8dda78a101042925bdd0",
+    "old_tree": "opennt-src-2",
+    "old_blob": "250738abb67291931cd83c1e9f9656e2e6be07d2",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/04-GRAPHICS.CLB",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.CLC",
+    "before_sha256": "e94ad43ea4ec9a42cec22badd3fff3427d0c5e42b71da631d3ab220ef69672cd",
+    "old_tree": "opennt-src-2",
+    "old_blob": "c01f265a1ecb314896229fcb40b2538790df9544",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/05-GRAPHICS.CLC",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.COM",
+    "before_sha256": "989b38806ec1e1bdd30da3dc6b41cc85bdc81dda74f870fcc7df399876eb2756",
+    "old_tree": "OpenNT",
+    "old_blob": "8259f1ad4040ebad47191b4a8008dfd8c5f0f25f",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/06-GRAPHICS.COM",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.CTL",
+    "before_sha256": "4d383bb90e7a065ea209e15e1d08e0fee41138659102436f333a5540ddd919ab",
+    "old_tree": "opennt-src-2",
+    "old_blob": "5b0019df6f7507f651ca52a083a823b68ac1c451",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/07-GRAPHICS.CTL",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/GRAPHICS.EXC",
+    "before_sha256": "40b380874875ac10e16bedb04c5c05e7894a3f27a6ee1cb892948810bbc4d7b4",
+    "old_tree": "OpenNT",
+    "old_blob": "970add4e3341dadf7be2d4d8963db5463c692856",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/08-GRAPHICS.EXC",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/graphics.OBJ",
+    "before_sha256": "65ef69b7949117e440a1101c48ce718acb1f548783bf2b5404906b9aab2f84c4",
+    "old_tree": "opennt-src-2",
+    "old_blob": "c674098c31d31a9d8ab6c0914bd197a998df0c91",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/09-graphics.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/graphics.asm",
+    "before_sha256": "84f518e73a132486ee52c482266eb8e748373caff14298aa1a0eba468c4409fe",
+    "old_tree": "OpenNT",
+    "old_blob": "99afe17f3d5706c11da52bf350a3e51c4edaecad",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/10-graphics.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/graphics.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/graphics.asm",
+    "xp_blob": "4d79a6f1faca1e42a11d065b408eca3310ec3894",
+    "xp_sha256": "236c27e70a555d29ea911edf557f966c3eb0c30a76666de5a6740dffe2f3b716",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      162
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/graphics.lnk",
+    "before_sha256": "1560ab572a2806cb73ac856d65ab898e7e0125ac7f7ba91c77c6826589fb5e50",
+    "old_tree": "OpenNT",
+    "old_blob": "b266f198707b6ad408e9035841f9f6614b855b88",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/11-graphics.lnk",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/graphics.pro",
+    "before_sha256": "b734f750a473f83d33aa773fe3d6c7bcdd209d97339f37b03b8c5f3f8eed890b",
+    "old_tree": "OpenNT",
+    "old_blob": "3cc9fad608c06060efff5f60ce598fd96e5091d3",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/12-graphics.pro",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/graphics.pro",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/graphics.pro",
+    "xp_blob": "77d74e2b8a5ef9506fd2d9ef0504eb691d397358",
+    "xp_sha256": "fb9581cc29a41d939401340bda69d91c7ddd11b1c5ab06e061166f6dd909ce7f",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1142
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/graphics.skl",
+    "before_sha256": "901e9b765e731c9a86df18712b07a0e20b9d725382ac9f933ac2eeac054e8713",
+    "old_tree": "OpenNT",
+    "old_blob": "eb430439641df632cd16e2d2676746b0d11ee8ce",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/13-graphics.skl",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/usa/graphics.skl",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/usa/graphics.skl",
+    "xp_blob": "8ecb6800013070dacbdb52ff9962a983271bcca5",
+    "xp_sha256": "99c1b2cf8804d2f409acc92b6bda41eff4c64efa55af23888fc0fa4b2f09d367",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      160
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/graphics.tag",
+    "before_sha256": "1aa392f9d234e56075aac7d4d51b9ea8b73c69605d4ea3265857d972c8335b88",
+    "old_tree": "OpenNT",
+    "old_blob": "45c69ae6fccf05be1df27d3938c71a9c9030c608",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/14-graphics.tag",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/graphics.tag",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/graphics.tag",
+    "xp_blob": "71448bf783680b0b675aaee5a2d368a08ce06a91",
+    "xp_sha256": "85977cfbb723f6ecdcef204a3ecafc896f90f039fcdb5255b30bd4c78e3745cb",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      38
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grbwprt.OBJ",
+    "before_sha256": "e0c02e31e64f4c219e9e2004f8a6faec5b50e4035d48093887651319858a9fe2",
+    "old_tree": "opennt-src-2",
+    "old_blob": "1af165572fb98846287d41bb33170dd00380d7af",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/15-grbwprt.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grbwprt.asm",
+    "before_sha256": "ea30dce059897094984428f87b6f6385bb12f93344e8053d734587fd8a228d18",
+    "old_tree": "OpenNT",
+    "old_blob": "df13dfc473215090e12e51150f989a60f06dbffc",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/16-grbwprt.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grbwprt.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grbwprt.asm",
+    "xp_blob": "f0b6e60d0f491343bb6ed598a4e2d3336b407215",
+    "xp_sha256": "de78c2a33d98a1810fbb1738f9be3bff5f1faf4c8f5cadaaad9454e4512abb1d",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1694
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grbwprt.ext",
+    "before_sha256": "88be142df1b3318c39c8c2228423d9c88a8cc8c0ad0163651b7b12f0bec187b6",
+    "old_tree": "OpenNT",
+    "old_blob": "09f265ddf600dfc276279721f75ba2a33d2361f7",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/17-grbwprt.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grbwprt.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grbwprt.ext",
+    "xp_blob": "2acbed9525480a256ec9c82d7cd90834ffa95b02",
+    "xp_sha256": "ed8fb49da2c21368dc17945dce75e61fbe148a321808bdc455b820fca562e762",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      58
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grcolprt.OBJ",
+    "before_sha256": "2a477c80d5c942310083ecbf9f94e7670f6e9b38b780da74a2fa491e9eff34be",
+    "old_tree": "opennt-src-2",
+    "old_blob": "5f1c0149bd2fc30050b8014100e86911b7a6d7a5",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/18-grcolprt.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grcolprt.asm",
+    "before_sha256": "a600caeda341f3cb5a86eeaa040191c46037e088a0c68f2e1cf4cda8c980a8c7",
+    "old_tree": "OpenNT",
+    "old_blob": "68d4826e82505cba5c00ddfa6c613d47aa3dccc5",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/19-grcolprt.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grcolprt.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grcolprt.asm",
+    "xp_blob": "ab05b815a5de6a8031f0cb634a87fdb0fe3135de",
+    "xp_sha256": "ea6bed1c33075604d030ddc0ed42d9455b06a2914a3b710645c0c999ce6736a9",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2254
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grcolprt.ext",
+    "before_sha256": "9d88587fa2ce60a0df9ddd7a19df08eae9e00db8ee451f6ce9767c19ff184cbb",
+    "old_tree": "OpenNT",
+    "old_blob": "a13c05d508d3185d1586c81ad464361577b47d36",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/20-grcolprt.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grcolprt.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grcolprt.ext",
+    "xp_blob": "d5357856c71f2b74dffb1c3bce1bada09673c5bc",
+    "xp_sha256": "53b9aad7dfb572d5cab05c0ab13f1d34789ea90f9c4ed4bb0f12417940db2a0e",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      60
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grcommon.asm",
+    "before_sha256": "9677c16253aec2949aebfb7b5d4055598cc918379c3f38cdd06cd530df8f9a63",
+    "old_tree": "OpenNT",
+    "old_blob": "fb6982b48cbcae81621c1ca695066d7feef5291b",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/21-grcommon.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grcommon.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grcommon.asm",
+    "xp_blob": "bbe2aeebdd8dd91def1bfb672c07a48d134b3169",
+    "xp_sha256": "5464be2ba4094dcf4ddd6bd3dc0e5997e3e3fddc775ca838fa133e6fe8ccc2bd",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2722
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grcommon.ext",
+    "before_sha256": "71f7f5ea82b47e5f8e16f99223f642745fa1ec8ce33234311965cc0569cf54bb",
+    "old_tree": "OpenNT",
+    "old_blob": "c2706f8182ee5c06071282a381343f8e27c96e0f",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/22-grcommon.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grcommon.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grcommon.ext",
+    "xp_blob": "034e98acc22eed8e47babbc8f38a5dabae188477",
+    "xp_sha256": "52603a0e977d44e620eb4eb5f2fdcbae8cbb3a779f7e5dcf0f49d90138766f5c",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      74
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grcpsd.OBJ",
+    "before_sha256": "439ac64caabf2e48f2434a6ae53bee44a216a7286dc27e3bdb27261ef2f5acd7",
+    "old_tree": "opennt-src-2",
+    "old_blob": "eefe160ca57e072576d875df0e76d9dfd79b2e79",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/23-grcpsd.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grcpsd.asm",
+    "before_sha256": "ab08a60f5d1a49b5d0afd3b98577f0cf6a49ae384f9d63b3901d877a7980359e",
+    "old_tree": "OpenNT",
+    "old_blob": "c0c93e232af63ddfeba851ac489b34591a79f2ed",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/24-grcpsd.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grcpsd.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grcpsd.asm",
+    "xp_blob": "fdf1a6ddfbb34a9c87b3dda49d46ff74ceb9a195",
+    "xp_sha256": "11c413288e5c3757d48b377a3c4ee3bea854e04a19a668c34623fdb23d496af9",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      228
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grcpsd.ext",
+    "before_sha256": "98c0ae3d54f86d47efb92c915b9010d784a6a208a7aa308e83413a2191f2df94",
+    "old_tree": "OpenNT",
+    "old_blob": "487d91fe515d33d482d3bebc9fb47eece029dfaf",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/25-grcpsd.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grcpsd.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grcpsd.ext",
+    "xp_blob": "54cba041fa75f0f361ab5156e7e87c962f2694ca",
+    "xp_sha256": "8033e906029751afb8a9c1fac72be0b78235373379616098f935db5301cdb269",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      58
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grctrl.OBJ",
+    "before_sha256": "d31c0dc920e2b08fe0b3aa426d4f6d621785de9249b493eb4fb26a022c88ef65",
+    "old_tree": "opennt-src-2",
+    "old_blob": "b32caa509833974fb5c85a499788cad4723d4177",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/26-grctrl.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grctrl.asm",
+    "before_sha256": "ac4d86c7f97f14fc5cea6d5313fa488d82726eda2e2010cbb6d338013e33a5bc",
+    "old_tree": "OpenNT",
+    "old_blob": "0bded2fbeb6f4854852d428c3498ffed99383035",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/27-grctrl.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grctrl.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grctrl.asm",
+    "xp_blob": "e171a2ac799f11f4b8341b871bf47aa6b367af8c",
+    "xp_sha256": "f032565040d18eba19262c9ba67aec4f18462675141dda84adb5063625ee8ffe",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      4458
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grctrl.ext",
+    "before_sha256": "a2f8885757efdb5b7e44e00d4b803c805589f8841e00a384df597942f59ee9b9",
+    "old_tree": "OpenNT",
+    "old_blob": "6f28e8cd4a457e75181568d3937f03550da442f9",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/28-grctrl.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grctrl.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grctrl.ext",
+    "xp_blob": "aaa0108b7c90ae79f7ca72c68006fee7c3ed0e7e",
+    "xp_sha256": "f9e83a9e080ecaf8126909fdefd2d675c83e4e3ecda74c292f5b159e269af7b3",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      120
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grctrl.str",
+    "before_sha256": "d68a3ffd01e9283f1cdf4e1364663f3804e4377da1220060982bae2d19b5f50c",
+    "old_tree": "OpenNT",
+    "old_blob": "3b850b0542332ff34a99aebad03b52a48a059fdb",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/29-grctrl.str",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grctrl.str",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grctrl.str",
+    "xp_blob": "7b659399e9e8ce119097911b07c18a6b9d387ec3",
+    "xp_sha256": "305d6b4d1a4d4e72336a91423b8ffc7b04dc235ef36dedfe042bbc2f5836af28",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      222
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grinst.OBJ",
+    "before_sha256": "d87b12a854b9d39612414b81fd73393a7f3936f598127bf8663a41a4e53ea1f4",
+    "old_tree": "opennt-src-2",
+    "old_blob": "51257cedfa4a57f533c53858d7133fe14eb2f7cf",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/30-grinst.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grinst.asm",
+    "before_sha256": "ed3f2550a1c23bff67e618cd189a4f40e55a61e82041dced9a680ef156681d5e",
+    "old_tree": "OpenNT",
+    "old_blob": "12ca466b4048fdc33dd630b488466661b35a5b1d",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/31-grinst.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grinst.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grinst.asm",
+    "xp_blob": "a755c317fa51359892580d246cc9acea0757a03e",
+    "xp_sha256": "cb18500023bd85659e5266e04c864c26c16e79f0e2869fb5356ce67b73d846be",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2108
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grinst.ext",
+    "before_sha256": "52dc74341f6ba702c97ef6433df8a30a5300ebf09d10ed05871e37c1a8b68586",
+    "old_tree": "OpenNT",
+    "old_blob": "7d7340fde0580d8237ffcd6f9f16e3ace9dffd34",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/32-grinst.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grinst.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grinst.ext",
+    "xp_blob": "4fd1ddf1bbf7e8ae3d302cf7d591869bbd2dbd5b",
+    "xp_sha256": "0a666f82067ac513027fb60f457cde1a88f8fb9bd0622c4b7a000bd0bf4bfa1d",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      96
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grint2fh.OBJ",
+    "before_sha256": "f95b09b535444ed1b86ccbc860049afba3f226d470eca1b30933a03eccd113d0",
+    "old_tree": "opennt-src-2",
+    "old_blob": "a918a0c1adc800873961f142da62977ffad07350",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/33-grint2fh.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grint2fh.asm",
+    "before_sha256": "fccf6ab5e721d07e1723e2b6b2a7c03fd42de45e919b819137d6da42cf403212",
+    "old_tree": "OpenNT",
+    "old_blob": "88575325929925f9a0829393ac0aef1dd5a0f15c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/34-grint2fh.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grint2fh.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grint2fh.asm",
+    "xp_blob": "0340ba347e85e6326ca020da6f4dfc2c5f52e8cf",
+    "xp_sha256": "8ca46e9fed15f874301e9f8944150385bb880b38f901839b24493fab7ea6a136",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      452
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grint2fh.ext",
+    "before_sha256": "5a0a91820967b42b8e00cd58ac42c9511c7dd758d66f332cce67388d73be44a7",
+    "old_tree": "OpenNT",
+    "old_blob": "ff0cb636e4de31b30e5ace1f4cbb818950f3028a",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/35-grint2fh.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grint2fh.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grint2fh.ext",
+    "xp_blob": "7c23534c8aa5421855e80a0bbaaaf316abb36613",
+    "xp_sha256": "2370ffdc5136a2ec35ac4fe396215117966235ffce351b15844e0c9891c35772",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      68
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grload.OBJ",
+    "before_sha256": "780a122a2e968de212051ee6b4caa145c718df19c9b58b77c8db566ed72c32f4",
+    "old_tree": "opennt-src-2",
+    "old_blob": "e46b0598cb99be907853ca27262b3a8fe0cd0da2",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/36-grload.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grload.asm",
+    "before_sha256": "68a5fd8d2abf680612901a48687db9493f2d946781416c0de335243cd31e77f3",
+    "old_tree": "OpenNT",
+    "old_blob": "0ae8c65f8702c1cab2c9ef237d57a2c49e3124ac",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/37-grload.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grload.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grload.asm",
+    "xp_blob": "0a73ed64f25b86f993575ba04351c5a0001cdbd1",
+    "xp_sha256": "e17348fe4d68ef82ca7908234a72e401bb215129c37863fbb087f3b54b154230",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1750
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grload.ext",
+    "before_sha256": "36e92e8e45a6aa6fc09fa4e2593638a3606aa2c1230a4f0d87fb80e550b02423",
+    "old_tree": "OpenNT",
+    "old_blob": "fed3b72f8d07bb80c9768de9e8f3f77309e0c251",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/38-grload.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grload.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grload.ext",
+    "xp_blob": "16ffb2081bc8e6ac5e71b1d618b5e98940b5bb3c",
+    "xp_sha256": "33b0923634ccdf918d8f3e67c33328b008619c27405f57e4263bd66262a52dd5",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      130
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grload2.OBJ",
+    "before_sha256": "9f541c1fe74622c3c74810729ef288dccc20f77dccd82623b84c8097d728bae9",
+    "old_tree": "opennt-src-2",
+    "old_blob": "37af1c1371f2121006d84ea5dad85379927a252c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/39-grload2.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grload2.asm",
+    "before_sha256": "278cc654c9fa0e8e14bab599532d7af7a8c379357a59004329832b8ecf6b7ee1",
+    "old_tree": "OpenNT",
+    "old_blob": "06935e17bf0fbe4b38b849bd8e50a5f3afd15a50",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/40-grload2.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grload2.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grload2.asm",
+    "xp_blob": "1cfbcdd9c5d71382db3f9c7c93839f38b05f10c8",
+    "xp_sha256": "534453f38761b2bdaea2a2ecb61a8c0017e37a928257225643181097b55825f6",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2434
+    ],
+    "normalized_diff": [
+      1,
+      2
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grload2.ext",
+    "before_sha256": "f44c712c0d79adbd48edbf1a15910752c0166925766de475e1ef12fee8668a2d",
+    "old_tree": "OpenNT",
+    "old_blob": "2c4e3c73e536193b4d488125313d672b5cd4d28b",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/41-grload2.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grload2.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grload2.ext",
+    "xp_blob": "5cdbccd2af511c3927da85cd699bfd8bea2835f1",
+    "xp_sha256": "01b935053dc2d48685cda6e9311d7adbe79f8b5b6348b698df3c388b0fb3863c",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      88
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grload3.OBJ",
+    "before_sha256": "89e0a1abc06d4f50e5303477190dbb4ce65822570703ce0d99c3f96fff7bd0de",
+    "old_tree": "opennt-src-2",
+    "old_blob": "817b30a793f67772cbdf991ca3a6f153ffd66269",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/42-grload3.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grload3.asm",
+    "before_sha256": "b9a03e9eaf277a76bf37226b8ba10fe8c94c583ae94c31c77959651568937539",
+    "old_tree": "OpenNT",
+    "old_blob": "3c9ef690b775bc6e93cc128eeac39bbff6a5463f",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/43-grload3.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grload3.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grload3.asm",
+    "xp_blob": "42b05c5708185becc1b128a390fbf7ab89b0b249",
+    "xp_sha256": "7f7dbba2baf9fc034674e1364d829ecb68fdc2c5a71322449849cc4560affad0",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1842
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grload3.ext",
+    "before_sha256": "04d4b6a82a18cc9220937f641c92e7a591068222d297b68bdf23984017c610ec",
+    "old_tree": "OpenNT",
+    "old_blob": "49f6d48d8592abc738a752d526528fbbddd80350",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/44-grload3.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grload3.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grload3.ext",
+    "xp_blob": "7f9b7de68a268e4a5574f7364d49e427b15717ae",
+    "xp_sha256": "8f28cf2e20a967bd428b72f6b517449a61d7f94c083d13ccd696f5ad2dc1f73a",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      66
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grmsg.equ",
+    "before_sha256": "94875ae62444611c34edce91c45d14d416072fe428fe2f9ca2828943d8be6860",
+    "old_tree": "OpenNT",
+    "old_blob": "4f620c17514a226d3fce9f1bdeaee20291ccf0b2",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/45-grmsg.equ",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grmsg.equ",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grmsg.equ",
+    "xp_blob": "bf14a3f6f5d96896098d4ff2937661c59635fc1a",
+    "xp_sha256": "8f956d383a45c2dee1737c62f7df2660f0e8dbed048d832c26a1d3b82e475ceb",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      184
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grparms.OBJ",
+    "before_sha256": "e46aafe759199c6204ae0887c2e96e1471741603a682add7ae7390fa6e7a23b7",
+    "old_tree": "opennt-src-2",
+    "old_blob": "8bea7adc2a3487f746db9b59f7a20bf2f5b6888c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/46-grparms.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grparms.asm",
+    "before_sha256": "4e6feb18e189ace181cc5ab8c4d1633f672f0cbc4efc3d9aadff40648f425657",
+    "old_tree": "OpenNT",
+    "old_blob": "a5db0ccbc37091560419da2784e16c5c18429b84",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/47-grparms.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grparms.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grparms.asm",
+    "xp_blob": "188ff902710fd849fb0aafb157cd0ea23984f58c",
+    "xp_sha256": "516e04995129b730c8d0ed00de8cb95057fb137c942371c24ebf6b3d497514ed",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1530
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grparms.ext",
+    "before_sha256": "05ac9c7d41c87b33cb5b0c369c76962db4a540a96348affe22e3146ec75f098d",
+    "old_tree": "OpenNT",
+    "old_blob": "02857505c8a94847196c818aac880dc62a683682",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/48-grparms.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grparms.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grparms.ext",
+    "xp_blob": "5ea1ce7988e074762ed1b2469c1236719ec1a7de",
+    "xp_sha256": "f1b1720ec55d54300247a71de8ef08a84fe3b7dd8abcd69502278c78e15eaf55",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      58
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grparse.OBJ",
+    "before_sha256": "c3da8317b7fcf5610575d550bc98101944dddebf632a029a7c14206c3528e549",
+    "old_tree": "opennt-src-2",
+    "old_blob": "d377e49bc586679e8c9f0a21ebf7ae9f1ae0db26",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/49-grparse.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grparse.asm",
+    "before_sha256": "8261066e872cee244bd08e57b78407117202a0c6be949f74c3899255c70e03ea",
+    "old_tree": "OpenNT",
+    "old_blob": "d44c940b42a76ffa2731f691523417d0ce7f89ce",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/50-grparse.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grparse.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grparse.asm",
+    "xp_blob": "e56a2b7d8cd217a43ace0bf85515f8bb39bd808f",
+    "xp_sha256": "fe67c8c5dfeeffcc2ccf13c02fec7e91d7f514f7d923909151397fd59ffd3f29",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      186
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grparse.ext",
+    "before_sha256": "7f3d648f8bbfe1d08173bf645351c2ccbb74349afb435f6138ba77c3b40e9f19",
+    "old_tree": "OpenNT",
+    "old_blob": "e81c789b3f8d51ecf1bb92dbf4938e3ec6185790",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/51-grparse.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grparse.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grparse.ext",
+    "xp_blob": "ce721004afb148cbd3303992e98aebb843887013",
+    "xp_sha256": "32d13a7f1f2040d6725ea7c8c3c108944af6c3042eab72ecf054e49266be210d",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      58
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grpattrn.OBJ",
+    "before_sha256": "4a4a6cf35a000a0ea9596682da6c017e734702c66c602a0712f33f8016947272",
+    "old_tree": "opennt-src-2",
+    "old_blob": "d9ea6b4f8027c783da4b66520de9790a42b2a50c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/52-grpattrn.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated artifact; original source/build and archive runtime retained"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grpattrn.asm",
+    "before_sha256": "c056177b34f8c9f184ef212da2af0bb3c396c5760af72eef1ff5aa0771ac4102",
+    "old_tree": "OpenNT",
+    "old_blob": "872360251284df17fbe2204d6bb61f69b7bcc0d8",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/53-grpattrn.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grpattrn.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grpattrn.asm",
+    "xp_blob": "c468d11a543edecbff2fd3e0268f585f3e2d973c",
+    "xp_sha256": "7effeed6d56be4f45b1b45ab5ae9a669f3081bd5f80d1450e43d2d00b0dfb9d5",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      444
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grpattrn.ext",
+    "before_sha256": "940ccd9ca1c706814151f3cc5ccdce3c3642934d34366d5d75dc6b490de8acf8",
+    "old_tree": "OpenNT",
+    "old_blob": "28ba0b7917f790a92bc95d74b35fb9e143f647af",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/54-grpattrn.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grpattrn.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grpattrn.ext",
+    "xp_blob": "74a2ac5f84c4cc07d904d4760e9957c5e2a3836f",
+    "xp_sha256": "1bdf56e959b6b188db0b09d3abf032a9a5eb973366cba2542ca9a04d0ca2d382",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      72
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grpattrn.str",
+    "before_sha256": "9bc3b23e07e20518b8ccfd9d3b5f1f213f36835314578344ff1d891548e69ae1",
+    "old_tree": "OpenNT",
+    "old_blob": "28c4894214b2a260e2724c49eeb8451519df74aa",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/55-grpattrn.str",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grpattrn.str",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grpattrn.str",
+    "xp_blob": "ccde7ee7b8e687e0fea4a76d9d689b0e89510924",
+    "xp_sha256": "fb40cba70fd5ee8910aa08c9d177b5943f57730a9eb69ca48ae575cf1834757f",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      250
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grprint.ext",
+    "before_sha256": "255ef6ab52e38c7fbdb833a92ee6ac16c5978b1f10c68146ae5cb7c9fc55ad89",
+    "old_tree": "OpenNT",
+    "old_blob": "b83b3b0bfceb96bd25b8d3b8f9abec17811cf060",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/56-grprint.ext",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grprint.ext",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grprint.ext",
+    "xp_blob": "9ae28014e9235bdbbe8b42cd1d27c10e82eec7c8",
+    "xp_sha256": "bfe862165421b25d6d36d9ae78da827c30e7b8a0e928e09f16686584c136f62b",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      68
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/grshar.str",
+    "before_sha256": "37394c24132158f7c970483a5277032de195e9247913ae0ba0930f7b1548d5f1",
+    "old_tree": "OpenNT",
+    "old_blob": "6b7a4b191c3f35fa4dd901bc37c51cce1dba47c8",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g009/57-grshar.str",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/grshar.str",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/grshar.str",
+    "xp_blob": "722fb1f7d6fbeb93012531b8f1637caee09d4f2a",
+    "xp_sha256": "0b170e1e1656e71d417b01ea80c6485025e5d6427fe69333306d5c40d9b03038",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      378
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/graphics/makefile",
+    "before_sha256": "100b5334a762451551344507c57bdd8a57cabfc9b1d417593e469827fb79ec4a",
+    "old_tree": "OpenNT",
+    "old_blob": "e3d94990a6754cceb389178f4f1c939462624e4f",
+    "before_equals_old": false,
+    "evidence_dir": "build/t485-s16/g009/58-makefile",
+    "target": "src/mvdm-guest/dos/v86/cmd/graphics/makefile.sub",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/graphics/makefile.sub",
+    "xp_blob": "7c2681d1f5a8bac4fd30f4381295d6455ca07f2b",
+    "xp_sha256": "c649ae68b080e7c68db7b506fb9572840a14e7f5b94838d8dc1b3ec21ba346d6",
+    "before_vs_old": [
+      1,
+      156
+    ],
+    "before_vs_xp": [
+      1,
+      164
+    ],
+    "normalized_diff": [
+      20,
+      106
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  }
+]

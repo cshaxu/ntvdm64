@@ -5,8 +5,8 @@
 **Active: M0 T485 S16** (Ordinary Mode), G001-G033.
 [S15 closure](../etc/evidence/t485-s1/s15-closure.md): N013-N026 delivered;
 S15 delivered62/159 directories, H001-H036 and N001-N026. S16 P1/G001 brings
-the total to63/159; P2/G002 to64/159; P3/G003 to65/159; P4/G004 to66/159; P5/G005 to67/159; P6/G006 to68/159; P7/G007 to69/159; P8/G008 to70/159.
-S16 runtime8 is published with archive-derived XP SP3 FASTOPEN verification;
+the total to63/159; P2/G002 to64/159; P3/G003 to65/159; P4/G004 to66/159; P5/G005 to67/159; P6/G006 to68/159; P7/G007 to69/159; P8/G008 to70/159; P9/G009 to71/159.
+S16 runtime9 is published with verified archive GRAPHICS program/profile;
 runtime2 retains the latest Full24/24 checkpoint.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S17-S20 and all remaining migration/capability obligations.
@@ -35,7 +35,7 @@ retains S17-S20 and all remaining migration/capability obligations.
 
 ## S16 Progress
 
-8/33 directories complete through P8. [G001](../etc/evidence/t485-s1/g001.md):
+9/33 directories complete through P9. [G001](../etc/evidence/t485-s1/g001.md):
 18 exact XP files and1 retired makefile. Four existing archive members advance
 to identical XP SP1/SP3 originals, without adding archive members. Cached
 build, dual publication (26 host and8 guest hashes), WINHELP document/topic
@@ -65,7 +65,9 @@ converted an authored aligned MZ into the exact5-byte payload,exit0,after
 cached build/dual publication. Initial unaligned fixture corrected,not product.
 [P7 receipt](../etc/evidence/t485-s1/g007-result.json). G008 delivered3 raw XP originals and3 retired paths. Existing archive FASTOPEN
 is SP3-identical and passed actual exit0 after cached build/dual publication.
-[P8 receipt](../etc/evidence/t485-s1/g008-result.json). Next is G009.
+[P8 receipt](../etc/evidence/t485-s1/g008-result.json). G009 delivered36 raw XP originals and22 retired paths. GRAPHICS archive bytes
+remain SP3-identical;cached build,dual publication and targeted identities pass.
+[P9 receipt](../etc/evidence/t485-s1/g009-result.json). Next is G010.
 For guest-source-only batches the affected targeted check is original identity,
 paths and consumers; replacing runtime guest binaries adds their direct runtime
 tests. Tests must consume the XP originals from winnt.zip; old runtime or
