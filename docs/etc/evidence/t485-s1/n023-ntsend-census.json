@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1330,
+    "byte_identical": 789,
+    "nonerror_identical": 800,
+    "nonerror_different": 530,
+    "nonerror_points": 7971,
+    "nonerror_lines": 66379
+  },
+  "after": {
+    "files": 1330,
+    "byte_identical": 790,
+    "nonerror_identical": 801,
+    "nonerror_different": 529,
+    "nonerror_points": 7970,
+    "nonerror_lines": 65807
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -572
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "before_points": 1,
+      "before_lines": 572,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1308,
+    "OpenNT": 22
+  }
+}

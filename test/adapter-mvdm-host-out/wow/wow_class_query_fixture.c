@@ -32,7 +32,7 @@ int __cdecl main(void)
     WNDCLASSA original = {0}, output, unchanged, native_view;
     WNDCLASSA external = {0};
     wow_class_words_binding *binding;
-    const DWORD tagged = 0x92340056;
+    const DWORD tagged = WOW_WINDOW_PROC_TAG | 0x12340056u;
     DWORD words[2] = {0x12340056,0x789a}, old;
     BOOL previous_guest;
     HINSTANCE module = (HINSTANCE)0x23451234;

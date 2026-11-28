@@ -18,6 +18,13 @@ BOOL WINAPI RtlCaptureLargeAnsiString(struct _LARGE_IN_STRING *, LPCSTR, BOOL);
 #endif
 /* XP w32wow64.h: x86 host, not BUILD_WOW6432. */
 #define KPWSTR_TO_PWSTR(p) (p)
+#ifndef KPVOID_TO_PVOID
+#define KPVOID_TO_PVOID(p) (p)
+#endif
+/* XP user.h:467, pointer versus integer resource in the selected host ABI. */
+#ifndef IS_PTR
+#define IS_PTR(p) ((((ULONG_PTR)(p)) & ~MAXUSHORT) != 0)
+#endif
 #define RtlAllocateHeap HeapAlloc
 #define RtlFreeHeap HeapFree
 #define RIPMSG0(level, text) ((void)0)

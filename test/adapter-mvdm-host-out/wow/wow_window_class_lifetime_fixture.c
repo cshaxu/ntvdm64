@@ -3,11 +3,13 @@
 #include "wow_class_client_fixture_provider.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_private_access.h"
+#include "wow32_provider_private.h"
 #include "wow_user_client_view_layout.h"
 #include "wow_window_client_state_bindings.h"
 #include "non-mvdm/windows/core/ntuser/rtl/userrtl.h"
 #include <stdio.h>
 
+#define FIXTURE_GUEST_PROC (WOW_WINDOW_PROC_TAG | 0x12340012u)
 static unsigned errors, callbacks;
 static wow_class_lookup_context context;
 static ATOM atom;
@@ -30,7 +32,7 @@ static DWORD WINAPI callback(HWND window, UINT message, UINT wp, LONG lp,
     wow_window_words_binding *borrow = wow_window_words_acquire(window);
     (void)wp; (void)lp;
     ++callbacks;
-    CHECK(message == WM_USER && procedure == 0x92340012);
+    CHECK(message == WM_USER && procedure == FIXTURE_GUEST_PROC);
     CHECK(borrow != NULL);
     CHECK(words == wow_window_words_value(borrow)->adwWOW);
     CHECK(wow_window_class_words_value(borrow) == shared_words);
@@ -297,9 +299,9 @@ int __cdecl main(void)
         CHECK((DWORD)wow_user_get_window_longA(window, -30 - (int)i) == 0x12340000 + i);
     }
     CHECK((DWORD *)wow_user_get_class_longA(window, -27) == scoped_class);
-    CHECK(wow_user_set_class_longA(window, -28, 0x11223344) == 0x12345678);
+    CHECK(wow_user_set_class_longA(window, GCL_WOWMENUNAME, 0x11223344) == 0x12345678);
     CHECK(((DWORD *)wow_user_get_class_longA(sibling, -27))[0] == 0x11223344);
-    CHECK(wow_user_set_class_longA(sibling, -28, 0x12345678) == 0x11223344);
+    CHECK(wow_user_set_class_longA(sibling, GCL_WOWMENUNAME, 0x12345678) == 0x11223344);
     CHECK(wow_user_set_window_longA(window, GWL_USERDATA, 77) == 0);
     CHECK(GetWindowLongA(window, GWL_USERDATA) == 77);
     CHECK(wow_user_get_window_longA(window, GWL_USERDATA) == 77);
@@ -332,7 +334,7 @@ int __cdecl main(void)
     CHECK(wow_window_class_words_value(second)[1] == 0x33445566);
     wow_window_words_release(second);
     CHECK(wow_window_dispatch_bound(window, WM_USER, 0, 0,
-        0x92340012, callback, &result));
+        FIXTURE_GUEST_PROC, callback, &result));
     CHECK(result == 0x2468 && callbacks == 1);
     CHECK(!IsWindow(window) && !IsWindow(sibling));
     CHECK(wow_user_borrow_enter(&inner));

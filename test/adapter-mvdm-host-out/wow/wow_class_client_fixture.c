@@ -4,9 +4,11 @@
 #include <stdio.h>
 
 wow_class_client_context *WINAPI wow_class_client_current(void);
+/* Match XP WNDPROC_WOW: both tag bits identify an encoded guest procedure. */
+#define FIXTURE_GUEST_PROC (WOW_WINDOW_PROC_TAG | 0x12340020u)
 static BOOL cpd_available;
 static unsigned cpd_calls;
-static wow_class_callproc cpd={0x92340020};
+static wow_class_callproc cpd={FIXTURE_GUEST_PROC};
 static wow_class_callproc *WINAPI resolve_cpd(HANDLE handle)
 {
     ++cpd_calls;
@@ -39,7 +41,7 @@ static void version_domains(void)
     DWORD words[2]={0};
     unsigned task_version,module_version,calls;
     ATOM atom;
-    wc.lpfnWndProc=(WNDPROC)0x92340020;wc.hInstance=module;
+    wc.lpfnWndProc=(WNDPROC)FIXTURE_GUEST_PROC;wc.hInstance=module;
     wc.lpszClassName="S40_VERSION_DOMAINS";
     for(task_version=0;task_version<2;++task_version) {
         context.dwExpWinVer=task_version ? 0x0400 : 0x030a;
@@ -123,7 +125,7 @@ int __cdecl main(void)
     ATOM atom;
     wow_class_words_binding *binding;
     wow_window_dispatch_target target;
-    wc.lpfnWndProc=(WNDPROC)0x92340020; wc.hInstance=module;
+    wc.lpfnWndProc=(WNDPROC)FIXTURE_GUEST_PROC; wc.hInstance=module;
     wc.lpszClassName="S40_REAL_CLASS_CLIENT"; wc.lpszMenuName="MENU";
     CHECK(!wow_class_client_register_guest(NULL,&wc,words));
     context.thread=NULL;
@@ -137,7 +139,7 @@ int __cdecl main(void)
     CHECK(binding != NULL);
     if (binding) {
         CHECK(wow_class_words_value(binding)[0]==words[0]);
-        CHECK(wow_class_words_target(binding,&target) && target.procedure==0x92340020);
+        CHECK(wow_class_words_target(binding,&target) && target.procedure==FIXTURE_GUEST_PROC);
         wow_class_words_release(binding);
     }
     native_class.cbSize=sizeof(native_class);

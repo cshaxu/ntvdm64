@@ -1,7 +1,7 @@
 /**************************************************************************\
 * Module Name: ntsend.h
 *
-* Copyright (c) Microsoft Corp.  1995 All Rights Reserved
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * client-side macros for kernel-mode
 *
@@ -13,12 +13,12 @@
  */
 #define BEGINCALLCONNECT()                              \
     {                                                   \
-    DWORD retval;                                       \
+    ULONG_PTR retval;                                    \
     {                                                   \
         if (NtCurrentTeb()->Win32ThreadInfo == NULL) {  \
-            if (NtUserGetThreadState(-1) ==             \
-                    STATUS_INVALID_SYSTEM_SERVICE)      \
+            if (!USERTHREADCONNECT()) { \
                 MSGERROR();                             \
+            }                                           \
         }
 
 /*
@@ -26,8 +26,21 @@
  */
 #define BEGINCALL()       \
     {                     \
-    DWORD retval;         \
+    ULONG_PTR retval;      \
     {
+
+#define BEGINCALL_CLASSV()                                                              \
+    {                                                                                   \
+    ULONG_PTR retval;                                                                   \
+    TCHAR ClassNameVer[MAX_ATOM_LEN];                                                   \
+    LPTSTR lpClassNameVer;                                                              \
+    {                                                                                   \
+        lpClassNameVer = (LPTSTR)ClassNameToVersion((LPCWSTR)pszClassName,              \
+                                          (LPWSTR)ClassNameVer, NULL, IS_ANSI);         \
+        if (lpClassNameVer == NULL) {                                                   \
+            RIPMSG0(RIP_WARNING, "Couldn't resolve class name");                        \
+            MSGERROR();                                                                 \
+        }
 
 #define BEGINCALLVOID()   \
     {
@@ -37,7 +50,7 @@
     }                       \
     goto errorexit;         \
 errorexit:                  \
-    retval = (DWORD)error;  \
+    retval = (ULONG_PTR)error; \
 cleanup:
 
 #define ERRORTRAPVOID()     \
@@ -53,6 +66,7 @@ errorexit:
     }
 
 #define MSGERROR() goto errorexit
+
 #define MSGERRORCODE(code) { \
     RIPERR0(code, RIP_WARNING, "Unspecified error"); \
     goto errorexit; }
@@ -62,12 +76,12 @@ errorexit:
     goto errorexit; }
 
 #define MESSAGECALL(api) \
-LONG api(                \
+LRESULT api(             \
     HWND hwnd,           \
     UINT msg,            \
-    DWORD wParam,        \
-    LONG lParam,         \
-    DWORD xParam,        \
+    WPARAM wParam,       \
+    LPARAM lParam,       \
+    ULONG_PTR xParam,     \
     DWORD xpfnProc,      \
     BOOL bAnsi)
 
@@ -89,7 +103,7 @@ LONG api(                \
         MSGERROR();
 
 #define COPYLPSTRIDW(pinstr, psz) \
-    if (HIWORD(psz)) {                                      \
+    if (IS_PTR(psz)) {                                      \
         if (!RtlCaptureAnsiString((pinstr), (LPCSTR)(psz), TRUE))   \
             MSGERROR();                                     \
     }                                                       \
@@ -105,21 +119,17 @@ LONG api(                \
 #define COPYLPSTROPTW       COPYLPSTRW
 
 #define LARGECOPYLPSTRW(pinstr, psz) \
-    if(!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), (UINT)-1, TRUE)) \
+    if(!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), TRUE)) \
         MSGERROR();
 
 #define LARGECOPYLPSTROPTW  LARGECOPYLPSTRW
-
-#define LARGECOPYLPSTRLIMITW(pinstr, psz, cchLimit) \
-    if (!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), cchLimit, TRUE))  \
-        MSGERROR();
 
 #define LARGECOPYLPSTRORDINALOPTW(pinstr, psz) \
     (pinstr)->pstr = &(pinstr)->strCapture;                                         \
     (pinstr)->fAllocated = FALSE;                                                   \
     if (psz) {                                                                      \
         if (*(LPBYTE)(psz) != 0xff) {                                               \
-            if (!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), (UINT)-1, TRUE))\
+            if (!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), TRUE))          \
                 MSGERROR();                                                         \
         } else {                                                                    \
             (pinstr)->strCapture.Length =                                           \
@@ -138,7 +148,7 @@ LONG api(                \
         MSGERROR();
 
 #define FIRSTCOPYLPSTRIDW(pinstr, psz) \
-    if (HIWORD(psz)) {                                      \
+    if (IS_PTR(psz)) {                                      \
         if (!RtlCaptureAnsiString((pinstr), (LPCSTR)(psz), FALSE))  \
             MSGERROR();                                     \
     } else {                                                \
@@ -153,21 +163,17 @@ LONG api(                \
 #define FIRSTCOPYLPSTROPTW       FIRSTCOPYLPSTRW
 
 #define FIRSTLARGECOPYLPSTRW(pinstr, psz) \
-    if (!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), (UINT)-1, FALSE))   \
+    if (!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), FALSE))   \
         MSGERROR();
 
 #define FIRSTLARGECOPYLPSTROPTW  FIRSTLARGECOPYLPSTRW
-
-#define FIRSTLARGECOPYLPSTRLIMITW(pinstr, psz, cchLimit) \
-    if (!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), cchLimit, FALSE)) \
-        MSGERROR();
 
 #define FIRSTLARGECOPYLPSTRORDINALOPTW(pinstr, psz) \
     (pinstr)->pstr = &(pinstr)->strCapture;                                             \
     (pinstr)->fAllocated = FALSE;                                                       \
     if (psz) {                                                                          \
         if (*(LPBYTE)(psz) != 0xff) {                                                   \
-            if (!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), (UINT)-1, FALSE))   \
+            if (!RtlCaptureLargeAnsiString((pinstr), (LPCSTR)(psz), FALSE))             \
                 MSGERROR();                                                             \
         } else {                                                                        \
             (pinstr)->strCapture.Length =                                               \
@@ -183,7 +189,7 @@ LONG api(                \
 
 #define CLEANUPLPSTRW(instr) \
     if (instr.fAllocated)                     \
-        RtlFreeHeap(RtlProcessHeap(), 0, instr.strCapture.Buffer);
+        RtlFreeHeap(pUserHeap, 0, KPVOID_TO_PVOID(instr.strCapture.Buffer));
 
 /*
  * Unicode->Unicode macros
@@ -196,7 +202,7 @@ LONG api(                \
 #define COPYLPWSTRID(pinstr, psz) \
     (pinstr)->fAllocated = FALSE;                           \
     (pinstr)->pstr = &(pinstr)->strCapture;                 \
-    if (HIWORD(psz))                                        \
+    if (IS_PTR(psz))                                        \
         RtlInitUnicodeString(&(pinstr)->strCapture, (psz)); \
     else {                                                  \
         (pinstr)->strCapture.Length =                       \
@@ -211,11 +217,6 @@ LONG api(                \
     (pinstr)->fAllocated = FALSE;                           \
     (pinstr)->pstr = &(pinstr)->strCapture;                         \
     RtlInitLargeUnicodeString(&(pinstr)->strCapture, (psz), (UINT)-1);
-
-#define LARGECOPYLPWSTRLIMIT(pinstr, psz, cchLimit) \
-    (pinstr)->fAllocated = FALSE;                           \
-    (pinstr)->pstr = &(pinstr)->strCapture;                             \
-    RtlInitLargeUnicodeString(&(pinstr)->strCapture, (psz), cchLimit);
 
 #define LARGECOPYLPWSTROPT  LARGECOPYLPWSTR
 
@@ -242,7 +243,6 @@ LONG api(                \
 #define FIRSTCOPYLPWSTRIDOPT            COPYLPWSTRIDOPT
 #define FIRSTCOPYLPWSTROPT              COPYLPWSTROPT
 #define FIRSTLARGECOPYLPWSTR            LARGECOPYLPWSTR
-#define FIRSTLARGECOPYLPWSTRLIMIT       LARGECOPYLPWSTRLIMIT
 #define FIRSTLARGECOPYLPWSTROPT         LARGECOPYLPWSTROPT
 #define FIRSTLARGECOPYLPWSTRORDINALOPT  LARGECOPYLPWSTRORDINALOPT
 
@@ -261,9 +261,7 @@ LONG api(                \
 #define FIRSTCOPYLPTSTRID           COPYLPWSTRID
 #define FIRSTCOPYLPTSTRIDOPT        COPYLPWSTRIDOPT
 #define LARGECOPYLPTSTR             LARGECOPYLPWSTR
-#define LARGECOPYLPTSTRLIMIT        LARGECOPYLPWSTRLIMIT
 #define LARGECOPYLPTSTROPT          LARGECOPYLPWSTROPT
-#define FIRSTLARGECOPYLPTSTRLIMIT   LARGECOPYLPWSTRLIMIT
 #define FIRSTLARGECOPYLPTSTROPT     LARGECOPYLPWSTROPT
 #define CLEANUPLPTSTR               CLEANUPLPWSTR
 
@@ -277,9 +275,7 @@ LONG api(                \
 #define FIRSTCOPYLPTSTRID           COPYLPSTRIDW
 #define FIRSTCOPYLPTSTRIDOPT        COPYLPSTRIDOPTW
 #define LARGECOPYLPTSTR             LARGECOPYLPSTRW
-#define LARGECOPYLPTSTRLIMIT        LARGECOPYLPSTRLIMITW
 #define LARGECOPYLPTSTROPT          LARGECOPYLPSTROPTW
-#define FIRSTLARGECOPYLPTSTRLIMIT   LARGECOPYLPSTRLIMITW
 #define FIRSTLARGECOPYLPTSTROPT     LARGECOPYLPSTROPTW
 #define CLEANUPLPTSTR               CLEANUPLPSTRW
 
