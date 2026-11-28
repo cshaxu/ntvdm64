@@ -19,6 +19,34 @@ USHORT WINAPI OpenNtUserThreadCodePage(VOID);
 void WINAPI wow_original_text_capture(wow_native_text_descriptor *, const LARGE_STRING *);
 static int failures;
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d: %s\n", __LINE__, #x); ++failures; } } while (0)
+DWORD RtlGetExpWinVer(HANDLE);
+static void expected_version_contract(void)
+{
+    BYTE *image = VirtualAlloc(NULL, 65536, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+    PIMAGE_DOS_HEADER dos;
+    PIMAGE_NT_HEADERS nt;
+    DWORD previous;
+    CHECK(RtlGetExpWinVer(NULL) == 0x030a);
+    CHECK(RtlGetExpWinVer((HANDLE)(ULONG_PTR)0x1234) == 0x030a);
+    CHECK(image != NULL);
+    if (!image) return;
+    /* An aligned allocation with no PE header exercises XP's NULL-header path. */
+    CHECK(RtlGetExpWinVer(image) == 0x030a);
+    dos = (PIMAGE_DOS_HEADER)image;
+    dos->e_magic = IMAGE_DOS_SIGNATURE;
+    dos->e_lfanew = 0x80;
+    nt = (PIMAGE_NT_HEADERS)(image + dos->e_lfanew);
+    nt->Signature = IMAGE_NT_SIGNATURE;
+    nt->OptionalHeader.Magic = IMAGE_NT_OPTIONAL_HDR_MAGIC;
+    nt->OptionalHeader.MajorSubsystemVersion = 4;
+    nt->OptionalHeader.MinorSubsystemVersion = 10;
+    CHECK(RtlGetExpWinVer(image) == 0x040a);
+    nt->OptionalHeader.MajorSubsystemVersion = 1;
+    CHECK(RtlGetExpWinVer(image) == 0x030a);
+    CHECK(VirtualProtect(image, 65536, PAGE_NOACCESS, &previous));
+    CHECK(RtlGetExpWinVer(image) == 0x030a);
+    CHECK(VirtualFree(image, 0, MEM_RELEASE));
+}
 static void descriptor_contract(void)
 {
     LARGE_STRING original = {0};
@@ -196,6 +224,7 @@ int main(void)
     CHECK(ansi.Buffer && !ansi.Length && ansi.MaximumLength == 1 && ansi.bAnsi);
     RtlInitLargeAnsiString(&ansi, NULL, (UINT)-1);
     CHECK(!ansi.Buffer && !ansi.Length && !ansi.MaximumLength && ansi.bAnsi);
+    expected_version_contract();
     password_transform_boundary();
     descriptor_contract();
     counted_conversion_contract();

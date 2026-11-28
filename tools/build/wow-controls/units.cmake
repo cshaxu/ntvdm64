@@ -30,7 +30,7 @@ control_unit(dialog_initialization_adapter "${NTVDM_REPO}/src/compat/wow_dialog_
 control_unit(style_notification_probe "${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_style_notification_probe.c" "")
 control_unit(button_focus_probe "${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_button_focus_service_probe.c" "")
 control_unit(string_fixture "${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_control_string_fixture.c" "")
-control_unit(string_owner "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/random.c" "/FI \"${NTVDM_REPO}/src/compat/include/opennt_user_multipass.h\"")
+control_unit(string_owner "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/random.c" "/FI \"${NTVDM_REPO}/src/compat/include/opennt_user_multipass.h\" /FI \"${NTVDM_REPO}/src/compat/include/wow_user_exception_filter.h\"")
 control_unit(string_conversion "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/chartran.c" "/DWOW_ORIGINAL_LARGE_STRING_LAYOUT /FI \"${NTVDM_REPO}/src/compat/include/opennt_user_multipass.h\"")
 control_unit(string_services "${NTVDM_REPO}/src/compat/ntuser_rtl_compat.c" "")
 control_unit(dialog_fixture "${NTVDM_REPO}/test/adapter-mvdm-host-out/wow/wow_dialog_call_fixture.c" "")

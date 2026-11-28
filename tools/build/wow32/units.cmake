@@ -137,7 +137,7 @@ wow_unit(obj_compat_wow_ole_descriptor_binding_obj "${NTVDM_REPO}/src/compat/wow
 wow_unit(obj_compat_wow_standard_class_bindings_obj "${NTVDM_REPO}/src/compat/wow_standard_class_bindings.c" "${compat_wow_cflags}")
 wow_unit(obj_compat_wow_user_registration_bridge_obj "${NTVDM_REPO}/src/compat/wow_user_registration_bridge.c" "${compat_wow_cflags}")
 wow_unit(obj_adapter-win32_chartran_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/chartran.c" "${cflags} /DWOW_ORIGINAL_LARGE_STRING_LAYOUT /FI \"${NTVDM_REPO}/src/compat/include/opennt_user_multipass.h\"")
-wow_unit(obj_adapter-win32_random_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/random.c" "${cflags} /FI \"${NTVDM_REPO}/src/compat/include/opennt_user_multipass.h\"")
+wow_unit(obj_adapter-win32_random_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/random.c" "${cflags} /FI \"${NTVDM_REPO}/src/compat/include/opennt_user_multipass.h\" /FI \"${NTVDM_REPO}/src/compat/include/wow_user_exception_filter.h\"")
 wow_unit(obj_adapter-win32_help_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/help.c" "${cflags}")
 wow_unit(obj_adapter-win32_crt_compat_obj "${NTVDM_REPO}/src/lib-win32/crt-compat/crt_compat.c" "/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT")
 wow_unit(obj_compat_wow_start_glass_obj "${NTVDM_REPO}/src/compat/wow_start_glass.c" "/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT")

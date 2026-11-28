@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall60/159 directories, H001-H036 and N001-N024. S15 runtime102 is the current published and verified package.
+overall60/159 directories, H001-H036 and N001-N024. S15 runtime103 is the current published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -200,12 +200,12 @@ Census1338/798/809/529/8148/51728; delta+6/+6/+6/0/+104/-9917;1328XP/10OpenNT.
 N0249/9, S15 12/14, overall60/159; Full counter reset. Next N025.
 P82 delivery records are complete; next N025. No S/T closure.
 
-[P86 N025](../etc/evidence/t485-s1/n025.md): runtime102 cached full build,
-dual26hash, native controls40/40 and genuine Win16 controls pass. XP help
-restores class-atom group-box identity; captured-help lifetime stays unchanged.
-Census1339/799/810/529/8175/48590; delta0/0/0/0/+1/-136;1333XP/6OpenNT.
-N0255/10, overall60/159, S15 12/14. Five files since P82 Full including the
-paired client owner. Next random.c in DIR order. No S/T closure.
+[P87 N025](../etc/evidence/t485-s1/n025.md): runtime103 cached full build,
+dual26hash, native controls40/40 and genuine Win16 controls pass. random.c
+is byte-identical XP; version-header boundaries use the original implementation.
+Census1339/800/811/528/8174/48194; delta0/+1/+1/-1/-1/-396;1334XP/5OpenNT.
+N0256/10, overall60/159, S15 12/14. Six files since P82 Full including the
+paired client owner. Next text.c in DIR order. No S/T closure.
 ## S14 Closure Record
 
 S14 completed N004-N012; final runtime12 Full24/24 and clean delivery admitted

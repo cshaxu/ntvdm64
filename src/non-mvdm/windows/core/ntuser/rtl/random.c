@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: random.c
 *
-* Copyright (c) 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains a random collection of support routines for the User
 * API functions.  Many of these functions will be moved to more appropriate
@@ -11,8 +11,6 @@
 * 10-17-90 DarrinM      Created.
 * 02-06-91 IanJa        HWND revalidation added (none required)
 \***************************************************************************/
-#include "user.h"
-#line 14
 
 
 /***************************************************************************\
@@ -38,9 +36,14 @@ DWORD RtlGetExpWinVer(
      * If it doesn't look like a valid 32bit hmod, use the default
      *  (i.e., assuming all 16bit hmods are 0x30a)
      */
-    if ((hmod != NULL) && (LOWORD(hmod) == 0)) {
+    if ((hmod != NULL) && (LOWORD(HandleToUlong(hmod)) == 0)) {
         try {
             pnthdr = RtlImageNtHeader((PVOID)hmod);
+            // If for some reason we can't get the header information,
+            // just return the default
+            if(pnthdr == NULL) {
+                goto NO_HEADER;
+            }
             dwMajor = pnthdr->OptionalHeader.MajorSubsystemVersion;
             /*
              * Still need this hack 'cuz the linker still puts
@@ -51,7 +54,7 @@ DWORD RtlGetExpWinVer(
             } else {
                 dwMinor = pnthdr->OptionalHeader.MinorSubsystemVersion;
             }
-        } except (EXCEPTION_EXECUTE_HANDLER) {
+        } except (W32ExceptionHandler(FALSE, RIP_WARNING)) {
             dwMajor = 3;        // just to be safe
             dwMinor = 0xA;
         }
@@ -66,6 +69,8 @@ DWORD RtlGetExpWinVer(
      * 0x0200 == win2.0, etc.
      */
 
+    // dwMajor and dwMinor are initialized where they're declared
+    NO_HEADER:
     return (DWORD)MAKELONG(MAKEWORD((BYTE)dwMinor, (BYTE)dwMajor), 0);
 }
 
@@ -114,7 +119,7 @@ UINT TextCopy(
 {
     if (cchMax != 0) {
         cchMax = min(pstr->Length / sizeof(WCHAR), cchMax - 1);
-        RtlCopyMemory(pszDst, pstr->Buffer, cchMax * sizeof(WCHAR));
+        RtlCopyMemory(pszDst, KPVOID_TO_PVOID(pstr->Buffer), cchMax * sizeof(WCHAR));
         pszDst[cchMax] = 0;
     }
 
@@ -156,7 +161,7 @@ DWORD wcsncpycch (
         while (count && (*dest++ = *source++))    /* copy string */
                 count--;
 
-        return dest - start;
+        return (DWORD)(dest - start);
 }
 
 /***************************************************************************\
@@ -194,6 +199,5 @@ DWORD strncpycch (
         while (count && (*dest++ = *source++))    /* copy string */
                 count--;
 
-        return dest - start;
+        return (DWORD)(dest - start);
 }
-
