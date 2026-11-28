@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: help.c
 *
-* Copyright (c) 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains the various rectangle manipulation APIs.
 *
@@ -16,8 +16,8 @@
 BOOL FIsParentDude(PWND pwnd)
 {
     return(TestWF(pwnd, WEFCONTROLPARENT) || TestWF(pwnd, WFDIALOGWINDOW) ||
-        ((GETFNID(pwnd) == FNID_BUTTON) &&
-         (TestWF(pwnd, BFTYPEMASK) == BS_GROUPBOX)));
+        ((TestWF(pwnd, BFTYPEMASK) == BS_GROUPBOX) &&
+         IS_BUTTON(pwnd)));
 }
 
 
@@ -60,7 +60,7 @@ BOOL CALLBACK EnumPwndDlgChildProc(PWND pwnd, LPARAM lParam)
     PDLGENUMDATA pDlgEnumData = (PDLGENUMDATA)lParam;
 
     if (pwnd != pDlgEnumData->pwndDialog && IsVisible(pwnd) &&
-            PtInRect(&pwnd->rcWindow, pDlgEnumData->ptCurHelp)) {
+            PtInRect(KPRECT_TO_PRECT(&pwnd->rcWindow), pDlgEnumData->ptCurHelp)) {
         /*
          * If it's a group box, keep enumerating. This takes care of
          * the case where we have a disabled control in a group box.

@@ -18,6 +18,10 @@ DWORD WINAPI GetAppCompatFlags(PWOW_CLIENT_THREADINFO);
 static wow_task_client_info client;
 const wow_task_client_info *WINAPI wow_edit_client_info(void) { return &client; }
 static WND desktop, root, first, container, nested, disabled, last, outside;
+static SERVERINFO help_shared;
+PSERVERINFO gpsi = &help_shared;
+BOOL FIsParentDude(PWND);
+static CLS help_class;
 __declspec(thread) wow_edit_context *wow_edit_current;
 PWND WINAPI wow_window_client_desktop(void) { return &desktop; }
 static int failures;
@@ -180,6 +184,23 @@ static void verify_dialog_geometry(void)
 }
 int __cdecl main(void)
 {
+    /* XP help.c identifies group boxes by the non-versioned class atom,
+     * not by FNID alone. Keep the actual original macro and class layout. */
+    WND group = {0};
+    group.head.pSelf = (PBYTE)&group;
+    group.pcls = &help_class;
+    group.style = BS_GROUPBOX;
+    help_shared.atomSysClass[ICLS_BUTTON] = 0x4321;
+    help_class.atomNVClassName = 0x4321;
+    CHECK(FIsParentDude(&group));
+    group.fnid = FNID_BUTTON;
+    help_class.atomNVClassName = 0x4322;
+    CHECK(!FIsParentDude(&group));
+    group.ExStyle = WS_EX_CONTROLPARENT;
+    CHECK(FIsParentDude(&group));
+    group.ExStyle = 0;
+    SetWF(&group, WFDIALOGWINDOW);
+    CHECK(FIsParentDude(&group));
     /* Actual original traversal over a retained, consistent synthetic graph.
      * No HWND validator double or host navigation API decides the result.
      * This does not prove production graph publication/lifetime. */
