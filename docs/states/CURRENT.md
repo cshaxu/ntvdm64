@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime70 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime71 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -199,12 +199,15 @@ runtime67; its receipt retains the approved RIT boundary, ABI, all tests and cen
 runtime68; its receipt retains byte identity, real multi-column scrolling and census.
 [P60 ListBox auxiliary operations](../etc/evidence/t485-s1/n022-lboxrare.md)
 delivered runtime69; its receipt retains source identity, tests and census.
-[P61 directory ListBox](../etc/evidence/t485-s1/n022-lboxctl3.md) delivers
-runtime70: XP algorithms, four original unselected branches and shared SEH
-filter. Cached build, dual13-image26hash, targeted and Full24/24 pass.
-N02232/39; S15 9/14, overall57/159. Census1329/787/798/531/8072/68258;
-delta0/0/0/0/+5/-2369;1299XP/30OpenNT. P61 is the current ten-file Full checkpoint.
-No original guest change or S/T closure. Directory omission corrected; next lboxvar.c.
+[P61 directory ListBox](../etc/evidence/t485-s1/n022-lboxctl3.md) delivered
+runtime70 and Full24/24, the current ten-file checkpoint. Its receipt retains
+original exclusions, directory-order correction, census and final tests.
+[P62 variable-height ListBox](../etc/evidence/t485-s1/n022-lboxvar.md) delivers
+runtime71: byte-identical XP; no algorithm or ABI change. Cached full build,
+dual13-image26hash publication and all targeted gates pass. N02233/39;
+S15 9/14, overall57/159. Census1329/788/799/530/8071/67792;
+delta0/+1/+1/-1/-1/-466;1300XP/29OpenNT. One file since P61 Full24/24.
+No original guest change or S/T closure. Next mngrayc.c.
 
 ## S14 Closure Record
 

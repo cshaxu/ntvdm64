@@ -1,7 +1,7 @@
 /**************************** Module Header ********************************\
 * Module Name: lboxvar.c
 *
-* Copyright 1985-90, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * List Box variable height owner draw routines
 *
@@ -165,7 +165,7 @@ INT LBPage(
 
     if (plb->cMac == 1)
         return(0);
-    
+
     _GetClientRect(plb->spwnd, &rc);
     height = rc.bottom;
     i = startItem;
@@ -223,7 +223,7 @@ INT LBCalcVarITopScrollAmt(
 
         /*
          * We are scrolling the current iTop down and the previous item is
-         * becomming the new iTop so return a positive number.
+         * becoming the new iTop so return a positive number.
          */
         LBGetItemRect(plb, iTopNew, (LPRECT)&rc);
         return -rc.top;

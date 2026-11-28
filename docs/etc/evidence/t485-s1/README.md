@@ -298,3 +298,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P60 ListBox auxiliary operations](n022-lboxrare.md).
 
 - [S15 P61 directory ListBox and Full checkpoint](n022-lboxctl3.md).
+
+- [S15 P62 variable-height ListBox](n022-lboxvar.md).
