@@ -6494,7 +6494,7 @@ int main(int argc, char **argv)
             !wow_control_extent_bind(wow_control_registered_extent) ||
             !wow_control_brush_bind(fixture_GetControlBrush) ||
             !wow_control_draw_bind(fixture_DrawStateW)) return 13;
-    if (!wow_profile_bind(wow_original_task_profile, FastGetProfileIntW) ||
+    if (!wow_profile_bind(wow_original_task_profile, wow_original_profile_int) ||
             !wow_class_client_bind(&wow_fixture_class_client_provider) ||
             !wow_button_resources_bind(wow_original_button_resources()) ||
             !wow_button_bind(wow_original_button_data, FreeLookasideEntry) ||

@@ -1287,7 +1287,7 @@ int __cdecl main(int argc,char **argv)
     }
     CHECK(wowexec != NULL);
     CHECK(ntvdm_dpmi_initialize());
-    CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
+    CHECK(wow_profile_bind(wow_original_task_profile, wow_original_profile_int));
     CHECK(wow_button_resources_bind(wow_original_button_resources()));
     CHECK(wow_button_bind(wow_original_button_data, FreeLookasideEntry));
     CHECK(wow_standard_class_bind(&class_provider));

@@ -125,7 +125,7 @@ int __cdecl main(void)
     CHECK(wow_window_access_bind(&wow_fixture_window_access_provider));
     CHECK(wow_task_lifecycle_bind(&wow_fixture_task_lifecycle_provider));
     CHECK(ntvdm_dpmi_initialize());
-    CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
+    CHECK(wow_profile_bind(wow_original_task_profile, wow_original_profile_int));
     CHECK(wow_button_resources_bind(wow_original_button_resources()));
     CHECK(wow_button_bind(wow_original_button_data, FreeLookasideEntry));
     CHECK(wow_cleanup_bind(&wow_original_cleanup_provider));

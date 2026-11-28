@@ -3,10 +3,17 @@
 /* ADAPTER-WOW-042: original PMAP_COMPAT is machine-wide, never impersonated
  * HKCU configuration. Select the native machine view explicitly on WOW64;
  * do not create the absent key or synthesize compatibility values. */
-HANDLE WINAPI wow_profile_open_key(UINT section, ACCESS_MASK access)
+HANDLE WINAPI wow_profile_open_key(PUNICODE_STRING user, UINT section, ACCESS_MASK access, PDWORD policy)
 {
     HKEY key=NULL;
-    if(access!=KEY_READ) return NULL;
+    /* Existing private section ABI is retained until its queue caller migrates.
+     * No impersonation, policy search or write access belongs to this provider. */
+    if (policy) {
+        DWORD requested = *policy;
+        *policy = 0;
+        if (requested) return NULL;
+    }
+    if(user || access!=KEY_READ) return NULL;
     if(section==14) {
         if(RegOpenKeyExW(HKEY_LOCAL_MACHINE,
             L"Software\\Microsoft\\Windows NT\\CurrentVersion\\Compatibility",

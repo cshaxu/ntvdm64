@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall59/159 directories, H001-H036 and N001-N023. S15 runtime93 is the current
+overall59/159 directories, H001-H036 and N001-N023. S15 runtime94 is the current
 published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
@@ -184,14 +184,8 @@ five changed mirrors plus eight files since P69; new checkpoint count0.
 N0242/9; S15 remains11/14 and overall59/159 directories. Next exitwin.c.
 No S/T closure. Win95 retains its approved exit-one boundary.
 
-[P76 XP WOW registration](../etc/evidence/t485-s1/n024-exitwin.md) verified
-runtime92: original zero-init/event/callback registration, retained harmless
-declarations, unchanged event reference ownership. Cached build, dual26hash,
-task-order, task/process lifecycle and genuine Win16 controls pass.
-Census1332/792/803/529/7961/63292; delta0/0/0/0/
-+4/-100;1316XP/16OpenNT. Original LF recovery exposes bounded spans.
-N0243/9; S15 11/14; overall59/159. One file since P75 Full24/24.
-Next getset.c; no S/T closure.
+[P76 XP WOW registration](../etc/evidence/t485-s1/n024-exitwin.md) delivered runtime92;
+its receipt retains all tests and census.
 
 [P77 XP window data](../etc/evidence/t485-s1/n024-getset.md) verified runtime93:
 original pointer-width setter and three original helpers, unchanged x86 ABI and
@@ -202,6 +196,15 @@ Census1332/792/803/529/7980/62985; delta0/0/0/0/
 +19/-307;1317XP/15OpenNT. LF recovery unfolds whole-file span.
 N0244/9; S15 11/14; overall59/159. Two files since P75 Full24/24.
 Next profile.c; no S/T closure.
+
+[P78 XP profile](../etc/evidence/t485-s1/n024-profile.md) verified runtime94:
+original five-function/query ABI and tables; native read-only boundary retained.
+Cached build, dual26hash, controls40/40, task-order, init-notification and real
+Win16 controls pass. Policy-only negative outputs/handle lifetime verified.
+Census1332/792/803/529/7990/62434; delta0/0/0/0/
++10/-551;1318XP/14OpenNT. LF recovery unfolds old whole-file diff.
+N0245/9; S15 11/14; overall59/159. Three files since P75 Full24/24.
+Next queue.c; no S/T closure.
 
 ## S14 Closure Record
 

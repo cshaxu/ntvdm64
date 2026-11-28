@@ -11,11 +11,20 @@ typedef UINT (WINAPI *wow_profile_int_provider)(UINT, LPCWSTR, UINT);
 BOOL WINAPI wow_profile_bind(wow_profile_string_provider, wow_profile_int_provider);
 UINT WINAPI wow_profile_int(UINT, LPCWSTR, UINT);
 UINT WINAPI wow_task_profile(wow_task_order_process *, UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
-DWORD WINAPI FastGetProfileStringW(UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD);
-UINT WINAPI FastGetProfileIntW(UINT, LPCWSTR, UINT);
-DWORD WINAPI FastGetProfileDwordW(UINT, LPCWSTR, DWORD);
+DWORD WINAPI FastGetProfileStringW(PUNICODE_STRING, UINT, LPCWSTR, LPCWSTR, LPWSTR, DWORD, DWORD);
+BOOL WINAPI FastGetProfileIntW(PUNICODE_STRING, UINT, LPCWSTR, UINT, PUINT, DWORD);
+UINT WINAPI wow_original_profile_int(UINT, LPCWSTR, UINT);
+BOOL WINAPI FastGetProfileDwordW(PUNICODE_STRING, UINT, LPCWSTR, DWORD, PDWORD, DWORD);
 #ifdef WOW_ORIGINAL_PROFILE
 #define OpenCacheKeyEx wow_profile_open_key
+/* XP userk.h constants; this finite native boundary has no policy owner. */
+#define PMAP_LAST 43
+#define PMAP_DESKTOP 4
+#define gdwPolicyFlags 0
+#define POLICY_ONLY 0x0010
+#define UserReAllocPoolWithQuota(p, old, bytes, tag) HeapReAlloc(GetProcessHeap(),0,p,bytes)
+#define ZwEnumerateValueKey NtEnumerateValueKey
+#define ZwSetValueKey NtSetValueKey
 #define UserAllocPoolWithQuota(bytes, tag) HeapAlloc(GetProcessHeap(),0,bytes)
 #define UserFreePool(pointer) HeapFree(GetProcessHeap(),0,pointer)
 #define ZwQueryValueKey NtQueryValueKey

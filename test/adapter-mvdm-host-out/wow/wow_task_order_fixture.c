@@ -847,7 +847,7 @@ int __cdecl main(void)
     wow_task_order_state state={0};
     wow_task_order_process process={&state};
     wow_task_order_entry *expected[4];
-    CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
+    CHECK(wow_profile_bind(wow_original_task_profile, wow_original_profile_int));
     InsertTask(&process,&a); InsertTask(&process,&b);
     InsertTask(&process,&c); InsertTask(&process,&d);
     expected[0]=&c;expected[1]=&a;expected[2]=&b;expected[3]=&d;order(&state,expected,4);

@@ -188,7 +188,7 @@ int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)
     if (reason == 1 && !wow_button_resources_bind(wow_original_button_resources())) return 0;
     if (reason == 1 && !wow_button_bind(wow_original_button_data, FreeLookasideEntry)) return 0;
     if (reason == 1 && !wow_native_text_bind(wow_original_text_capture)) return 0;
-    if (reason == 1 && !wow_profile_bind(wow_original_task_profile, FastGetProfileIntW)) return 0;
+    if (reason == 1 && !wow_profile_bind(wow_original_task_profile, wow_original_profile_int)) return 0;
     if (reason == 1 && !wow_bitmap_bind_provider(WOWLoadBitmapA)) return 0;
     if (reason == 1 && !wow_cleanup_bind(&wow_original_cleanup_provider)) return 0;
     if (reason == 1 && !wow_default_window_bind(wow_original_default_window_proc)) return 0;

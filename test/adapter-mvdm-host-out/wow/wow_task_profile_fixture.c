@@ -8,13 +8,32 @@ typedef char partial_class_is_two[(KeyValuePartialInformation==2) ? 1 : -1];
 typedef char full_data_offset[(offsetof(KEY_VALUE_FULL_INFORMATION,Name)==20) ? 1 : -1];
 typedef char partial_data_offset[(offsetof(KEY_VALUE_PARTIAL_INFORMATION,Data)==12) ? 1 : -1];
 #define CHECK(x) do { if(!(x)){++errors;printf("FAIL line=%d error=%lu\n",__LINE__,GetLastError());} } while(0)
+static DWORD profile_dword(UINT section,LPCWSTR key,DWORD fallback)
+{
+    DWORD value=0;
+    CHECK(FastGetProfileDwordW(NULL,section,key,fallback,&value,0));
+    return value;
+}
+static void policy_only(void)
+{
+    DWORD value=0x12345678;
+    UINT number=321;
+    WCHAR output[2]={L'?',0};
+    CHECK(!FastGetProfileDwordW(NULL,14,L"Missing",7,&value,0x0010));
+    CHECK(value==0x12345678);
+    CHECK(!FastGetProfileIntW(NULL,14,L"Missing",7,&number,0x0010));
+    CHECK(number==321);
+    CHECK(!FastGetProfileStringW(NULL,14,L"Missing",L"x",output,2,0x0010));
+    CHECK(output[0]==L'?');
+}
 #ifdef WOW_PROFILE_EXISTING_KEY
 /* Test-only opening boundary. Product binding still opens PMAP_COMPAT.
  * Existing OS metadata permits real successful queries without registry writes. */
-HANDLE WINAPI wow_profile_open_key(UINT section,ACCESS_MASK access)
+HANDLE WINAPI wow_profile_open_key(PUNICODE_STRING user,UINT section,ACCESS_MASK access,PDWORD policy)
 {
     HKEY key=NULL;
-    CHECK(section==14 && access==KEY_READ);
+    CHECK(!user && section==14 && access==KEY_READ);
+    if(policy){DWORD requested=*policy;*policy=0;if(requested)return NULL;}
     if(RegOpenKeyExW(HKEY_LOCAL_MACHINE,
         L"Software\\Microsoft\\Windows NT\\CurrentVersion",0,
         access|KEY_WOW64_64KEY,&key)!=ERROR_SUCCESS)return NULL;
@@ -26,7 +45,7 @@ int __cdecl main(void)
     struct { WCHAR before; WCHAR data[2]; WCHAR after; } guarded;
     DWORD bytes=sizeof(expected),type=0,before,after,result;
     DWORD expected_dword, dword_bytes=sizeof(expected_dword), dword_type;
-    HKEY key=(HKEY)wow_profile_open_key(14,KEY_READ);
+    HKEY key=(HKEY)wow_profile_open_key(NULL,14,KEY_READ,NULL);
     unsigned i;
     UNICODE_STRING native_name;
     HANDLE native_key=NULL;
@@ -65,21 +84,22 @@ int __cdecl main(void)
     CHECK(RegQueryValueExW(key,L"S40_41865857_MISSING_VALUE",NULL,NULL,(BYTE *)output,&bytes)==ERROR_FILE_NOT_FOUND);
     RegCloseKey(key);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
+    policy_only();
     for(i=0;i<32;++i) {
-        CHECK(FastGetProfileDwordW(14,L"InstallDate",0)==expected_dword);
-        CHECK(FastGetProfileDwordW(14,L"S40_41865857_MISSING_VALUE",0x12345678)==0x12345678);
-        result=FastGetProfileStringW(14,L"ProductName",L"",output,256);
+        CHECK(profile_dword(14,L"InstallDate",0)==expected_dword);
+        CHECK(profile_dword(14,L"S40_41865857_MISSING_VALUE",0x12345678)==0x12345678);
+        result=FastGetProfileStringW(NULL,14,L"ProductName",L"",output,256,0);
         CHECK(result==wcslen(expected)+1 && !memcmp(output,expected,result*sizeof(WCHAR)));
         guarded.before=0x5a5a;guarded.after=0x6b6b;guarded.data[0]=guarded.data[1]=L'?';
-        CHECK(FastGetProfileStringW(14,L"ProductName",L"",guarded.data,2)==result);
+        CHECK(FastGetProfileStringW(NULL,14,L"ProductName",L"",guarded.data,2,0)==result);
         CHECK(guarded.data[0]==expected[0] && guarded.data[1]==0 && guarded.before==0x5a5a && guarded.after==0x6b6b);
         guarded.data[0]=guarded.data[1]=L'?';
-        CHECK(FastGetProfileStringW(14,L"ProductName",L"",guarded.data,1)==result);
+        CHECK(FastGetProfileStringW(NULL,14,L"ProductName",L"",guarded.data,1,0)==result);
         CHECK(!guarded.data[0] && guarded.data[1]==L'?' && guarded.before==0x5a5a && guarded.after==0x6b6b);
-        CHECK(FastGetProfileStringW(14,L"S40_41865857_MISSING_VALUE",L"safe",output,256)==5);
+        CHECK(FastGetProfileStringW(NULL,14,L"S40_41865857_MISSING_VALUE",L"safe",output,256,0)==5);
         CHECK(!memcmp(output,L"safe",5*sizeof(WCHAR)));
         output[0]=L'?';
-        CHECK(!FastGetProfileStringW(14,L"S40_41865857_MISSING_VALUE",NULL,output,256) && output[0]==L'?');
+        CHECK(!FastGetProfileStringW(NULL,14,L"S40_41865857_MISSING_VALUE",NULL,output,256,0) && output[0]==L'?');
     }
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&after) && after==before);
     printf("WOW_PROFILE_EXISTING errors=%u repeats=32 success=1 truncation=2 missing=2 dword_success=1 dword_missing=1\n",errors);
@@ -93,10 +113,10 @@ int __cdecl main(void)
     DWORD before,after;unsigned i;
     HKEY key=NULL;
     LONG status;
-    CHECK(!wow_profile_bind(NULL, FastGetProfileIntW));
+    CHECK(!wow_profile_bind(NULL, wow_original_profile_int));
     CHECK(!wow_profile_bind(wow_original_task_profile, NULL));
-    CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
-    CHECK(wow_profile_bind(wow_original_task_profile, FastGetProfileIntW));
+    CHECK(wow_profile_bind(wow_original_task_profile, wow_original_profile_int));
+    CHECK(wow_profile_bind(wow_original_task_profile, wow_original_profile_int));
     CHECK(wow_profile_int(14, L"S40_PROFILE_MISSING", 123) == 123);
     status=RegOpenKeyExW(HKEY_LOCAL_MACHINE,
         L"Software\\Microsoft\\Windows NT\\CurrentVersion\\Compatibility",
@@ -105,8 +125,9 @@ int __cdecl main(void)
     CHECK(status==ERROR_FILE_NOT_FOUND || status==ERROR_PATH_NOT_FOUND);
     if(key)RegCloseKey(key);
     CHECK(GetProcessHandleCount(GetCurrentProcess(),&before));
+    policy_only();
     for(i=0;i<32;++i) {
-        CHECK(FastGetProfileDwordW(14,L"S40_PROFILE_MISSING",0x12345678)==0x12345678);
+        CHECK(profile_dword(14,L"S40_PROFILE_MISSING",0x12345678)==0x12345678);
         output[0]=L'?';
         CHECK(wow_task_profile(NULL,14,L"S40_PROFILE_MISSING",L"",output,80)==1 && !output[0]);
         CHECK(wow_task_profile(NULL,14,L"S40_PROFILE_MISSING",L"safe",output,80)==5 && !memcmp(output,L"safe",5*sizeof(WCHAR)));

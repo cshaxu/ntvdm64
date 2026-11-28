@@ -38,7 +38,7 @@ static BOOL wow_fixture_bind_task_environment(void)
         wow_window_access_bind(&wow_fixture_window_access_provider) &&
         wow_class_client_bind(&wow_fixture_class_client_provider) &&
         wow_standard_class_bind(&classes) &&
-        wow_profile_bind(wow_original_task_profile, FastGetProfileIntW) &&
+        wow_profile_bind(wow_original_task_profile, wow_original_profile_int) &&
         wow_cleanup_bind(&wow_original_cleanup_provider) &&
         wow_task_state_bind(&state) && wow_task_cleanup_bind(&cleanup);
 }

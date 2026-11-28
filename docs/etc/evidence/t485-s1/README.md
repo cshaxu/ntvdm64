@@ -330,3 +330,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [N024 XP hung-handler registration](n024-exitwin.md).
 
 - [N024 XP window-data migration](n024-getset.md).
+
+- [N024 XP profile migration](n024-profile.md).

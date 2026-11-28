@@ -2269,3 +2269,5 @@ post-publication targeted checks.
 - [N024 XP hung-handler registration](evidence/t485-s1/n024-exitwin.md).
 
 - [N024 XP window-data migration](evidence/t485-s1/n024-getset.md).
+
+- [N024 XP profile migration](evidence/t485-s1/n024-profile.md).

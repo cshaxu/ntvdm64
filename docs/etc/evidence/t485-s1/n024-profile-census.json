@@ -1,0 +1,44 @@
+{
+  "status": "verified-runtime94",
+  "before": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7980,
+    "nonerror_lines": 62985
+  },
+  "after": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7990,
+    "nonerror_lines": 62434
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 10,
+    "nonerror_lines": -551
+  },
+  "files": [
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\profile.c",
+      "before_points": 1,
+      "before_lines": 1332,
+      "after_points": 11,
+      "after_lines": 781,
+      "baseline": "XP",
+      "blob": "b9f10cb901fd5eed0ecb35cffd46c439c86df844",
+      "normalized": {
+        "points": 11,
+        "lines": 781,
+        "excluded": 2
+      },
+      "sha256": "b6d2f2ff7eb98a3618b642858b3f130adc7509cfc49946c251bacf91b6633fc8"
+    }
+  ]
+}
