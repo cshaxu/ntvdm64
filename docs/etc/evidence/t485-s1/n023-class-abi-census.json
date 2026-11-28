@@ -1,0 +1,49 @@
+{
+  "before": {
+    "files": 1330,
+    "byte_identical": 790,
+    "nonerror_identical": 801,
+    "nonerror_different": 529,
+    "nonerror_points": 7970,
+    "nonerror_lines": 65807
+  },
+  "after": {
+    "files": 1331,
+    "byte_identical": 790,
+    "nonerror_identical": 801,
+    "nonerror_different": 530,
+    "nonerror_points": 7984,
+    "nonerror_lines": 65473
+  },
+  "delta": {
+    "files": 1,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 1,
+    "nonerror_points": 14,
+    "nonerror_lines": -334
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntcftxt.h",
+      "before_points": 1,
+      "before_lines": 2005,
+      "after_points": 14,
+      "after_lines": 1338,
+      "exclusions": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/classc.c",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 1,
+      "after_lines": 333,
+      "exclusions": 0,
+      "addition": true
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1310,
+    "OpenNT": 21
+  }
+}

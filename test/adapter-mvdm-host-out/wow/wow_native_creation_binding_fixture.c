@@ -701,7 +701,7 @@ static void verify_class_token_identity(void)
     CHECK(resolved==(DWORD)collision_native && GetLastError()==0x2468);
     CHECK(wow_native_class_resolve_procedure(0xffff0b98u,&resolved));
     CHECK(resolved==0xffff0b98u);
-    client.classes=&context; client.dwExpWinVer=0x030a;
+    client.classes=&context;
     client.get_version=collision_version; client.callback=collision_callback;
     client.thread=&fixture_creation_thread;
     runtime->classes=&client; client_selected=TRUE;

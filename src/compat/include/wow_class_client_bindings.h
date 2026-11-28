@@ -10,7 +10,6 @@
  * nested callbacks; this is not a scheduler or a default version policy. */
 typedef struct wow_class_client_context {
     wow_class_lookup_context *classes;
-    DWORD dwExpWinVer;
     DWORD (WINAPI *get_version)(HANDLE);
     wow_window_callback callback;
     wow_task_order_thread *thread;

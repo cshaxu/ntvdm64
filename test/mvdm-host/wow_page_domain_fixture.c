@@ -1436,7 +1436,8 @@ static int verify_class_registration(ULONG teb)
     wow_class_lookup_context classes = {0};
     wow_task_order_thread thread = {0};
     wow_task_order_entry task = {0};
-    wow_class_client_context context = {&classes, 0x030a,
+    wow_task_client_info class_info = {0,0x030a};
+    wow_class_client_context context = {&classes,
         class_projection_version, class_projection_callback, &thread, NULL};
     WNDCLASSA wc = {0}, native_view;
     DWORD words[2] = {0x12345678u, 0x87654321u};
@@ -1446,6 +1447,7 @@ static int verify_class_registration(ULONG teb)
     task.hTaskWow = 0x4321u;
     wc.hInstance = (HINSTANCE)0x43211234u;
     wc.lpfnWndProc = (WNDPROC)(WOW_WINDOW_PROC_TAG | 0x01234567u);
+    thread.pClientInfo = &class_info;
     wc.lpszClassName = "S2_CCPU_CLASS_COMMIT";
     if (class_failure_signal) {
         /* Test-owned stale publication after native destruction. Do not
@@ -2089,7 +2091,7 @@ static void verify_native_class_creation(wow_class_lookup_context *classes, ULON
     task_state.CSOwningThread = &thread;
     class_client.classes = classes;
     class_client.thread = &thread;
-    class_client.dwExpWinVer = thread.dwExpWinVer;
+
     class_client.get_version = W32GetExpWinVer;
     if (!wow_user_runtime_bind(&binding, &runtime, &thread, &class_client)) {
         BORROW_CHECK(FALSE);

@@ -6,13 +6,25 @@
 #include "wow_user_capture_bindings.h"
 wow_class_client_context *WINAPI wow_class_client_current(void);
 ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *, PUNICODE_STRING,
-    PCLSMENUNAME, PROC, WORD, DWORD, DWORD *);
+    PUNICODE_STRING, PCLSMENUNAME, WORD, DWORD, DWORD *);
 BOOL WINAPI wow_class_client_remove(PUNICODE_STRING, HINSTANCE, PCLSMENUNAME);
 BOOL WINAPI wow_class_client_query_native(HINSTANCE, PUNICODE_STRING,
     WNDCLASSEXW *, LPWSTR *, BOOL);
 #include "compat/include/wow_multibyte.h"
+#include "compat/include/wow_task_init_bindings.h"
+#include "sxstypes.h"
+UINT WINAPI wow_class_client_atom_name(ATOM, PUNICODE_STRING);
+#define NtUserGetAtomName wow_class_client_atom_name
+#define MAX_ATOM_LEN 256
+#define UserAssert(value) ((void)0)
+#define FUNCLOG2(...)
+#define FUNCLOG3(...)
+#define CW_FLAGS_VERSIONCLASS 0x40000000
+#define TIF_16BIT WOW_TASK_TIF_16BIT
+#define VERMAX 0xffff
+DWORD GetAppCompatFlags2(WORD);
 #define TEXT_FN(x) x##A
-#define GetClientInfo() wow_class_client_current()
+#define GetClientInfo() (wow_class_client_current()->thread->pClientInfo)
 #define GETEXPWINVER(module) (wow_class_client_current()->get_version(module))
 #define hmodUser GetModuleHandleW(L"user32.dll")
 #define VER30 0x0300
@@ -29,6 +41,8 @@ BOOL WINAPI wow_class_client_query_native(HINSTANCE, PUNICODE_STRING,
 #define NtUserGetClassInfo wow_class_client_query_native
 #undef GetClassInfo
 #define GetClassInfo wow_original_get_class_info
+#undef GetClassInfoEx
+#define GetClassInfoEx wow_original_get_class_info_ex
 #undef UnregisterClass
 #define UnregisterClass wow_original_unregister_class
 #define RegisterClassWOWA wow_original_register_class

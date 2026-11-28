@@ -1,6 +1,7 @@
 #include "wow_control_entry_fixture_provider.h"
 #include "wow_class_client_fixture_provider.h"
 #include "wow_class_client_bindings.h"
+#include "wow_task_init_bindings.h"
 #include "wow_user_private_access.h"
 #include "wow_user_runtime.h"
 #include "wow_window_words_binding.h"
@@ -24,9 +25,10 @@ int __cdecl main(void)
             !wow_window_access_bind(&wow_fixture_window_access_provider) ||
             !wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     wow_class_lookup_context classes = {0};
+    wow_task_client_info client_info={0,0x030a};
     wow_task_order_thread thread = {0};
     wow_task_order_entry task = {0};
-    wow_class_client_context context = {&classes,0x030a,version,unexpected,&thread,NULL};
+    wow_class_client_context context = {&classes,version,unexpected,&thread,NULL};
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
     wow_user_runtime_thread runtime_thread = {0};
     WNDCLASSA original = {0}, output, unchanged, native_view;
@@ -37,6 +39,7 @@ int __cdecl main(void)
     BOOL previous_guest;
     HINSTANCE module = (HINSTANCE)0x23451234;
     ATOM atom;
+    thread.pClientInfo=&client_info;
     classes.client_module = GetModuleHandleW(L"user32.dll");
     task.hTaskWow = 0x4567;
     thread.ptdb = &task;

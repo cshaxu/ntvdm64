@@ -33,6 +33,9 @@ typedef struct wow_class_lookup_context {
 
 #define CSF_WOWCLASS 0x0010 /* XP user.h: class has Win16 registration words. */
 #define CSF_ANSIPROC 0x00000002 /* Original user.h; shared class flags. */
+/* XP class registration flags; supplied by the original client. */
+#define CSF_WIN40COMPAT 0x0080u
+#define CSF_VERSIONCLASS 0x0100u
 #define CSF_WOWDEFERDESTROY 0x00000004 /* Original user.h. */
 wow_class_lookup_entry **WINAPI _InnerGetClassPtr(ATOM,
     wow_class_lookup_entry **, HANDLE);

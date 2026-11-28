@@ -531,7 +531,6 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
      * NULL override selects the class adapter's native address owner; test
      * overrides are not required for production CPD registration. */
     task->classes.classes = &owner->classes;
-    task->classes.dwExpWinVer = version;
     task->classes.get_version = owner->callbacks.get_version;
     task->classes.callback = owner->callbacks.callback;
     task->classes.thread = &task->thread;

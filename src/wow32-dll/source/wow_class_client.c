@@ -7,7 +7,8 @@
  */
 #define WOW_ORIGINAL_CLASS_CLIENT
 #include "wow32-dll/include/wow_original_class_client_bindings.h"
-#include "non-mvdm/windows/core/ntuser/inc/ntcftxt.h"
+#include "non-mvdm/windows/core/ntuser/client/classc.c"
+#include "non-mvdm/windows/core/ntuser/client/ntcftxt.h"
 
 
 /***************************************************************************\
@@ -28,7 +29,7 @@ RegisterClassWOWA(
     wc.hIconSm = NULL;
     wc.cbSize = sizeof(WNDCLASSEXA);
 
-    return RegisterClassExWOWA(&wc, pdwWOWstuff, NULL, 0);
+    return RegisterClassExWOWA(&wc, pdwWOWstuff, 0, 0);
 }
 
 /* Scoped class-name adapter: original capture owns conversion and allocation. */

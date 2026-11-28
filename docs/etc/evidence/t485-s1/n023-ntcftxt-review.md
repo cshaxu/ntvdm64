@@ -93,3 +93,5 @@ Current census:1330files,789byte-identical,800nonerror-identical,530different,
 7971points,66379lines. All six deltas zero;1307XP/23OpenNT. Directory progress
 remains58/159, S15 10/14 and N0230/4. No original guest modification/rebuild.
 N023 dependency findings above do not count as a completed migration.
+
+The subsequent migration is delivered in [P71](n023-class-abi.md).

@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall58/159 directories, H001-H036 and N001-N022. S15 runtime81 is the current
+overall58/159 directories, H001-H036 and N001-N022. S15 runtime82 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -162,6 +162,14 @@ N0231/4; S15 10/14; overall58/159. Census1330/790/801/529/7970/65807;
 delta0/+1/+1/-1/-1/-572;1308XP/22OpenNT. Raw reduction includes restored
 original line endings, not572lines of custom behavior. One file since P69 Full.
 Next complete ntcftxt.h registration ABI; no S/T closure.
+
+[P71 class registration ABI](../etc/evidence/t485-s1/n023-class-abi.md) delivered
+runtime82: original XP class-name resolution, paired registration ABI and
+single task CLIENTINFO; cached full build, dual26hash, controls40/40, four
+class/native owner fixtures and genuine Win16 controls pass. N0232/4;
+S15 10/14; overall58/159. Census1331/790/801/530/7984/65473;
+delta+1/0/0/+1/+14/-334;1310XP/21OpenNT. Three completed files since P69
+Full24/24. Next user.h; no S/T closure.
 
 ## S14 Closure Record
 

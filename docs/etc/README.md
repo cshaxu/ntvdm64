@@ -2255,3 +2255,5 @@ post-publication targeted checks.
 - [S15 P69 diagnostic mapping and N023 dependency audit](evidence/t485-s1/n023-ntcftxt-review.md).
 
 - [S15 P70 N023 capture macros](evidence/t485-s1/n023-ntsend.md).
+
+- [S15 P71 class registration ABI](evidence/t485-s1/n023-class-abi.md).

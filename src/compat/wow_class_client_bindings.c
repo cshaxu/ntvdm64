@@ -40,7 +40,8 @@ wow_class_client_context *WINAPI wow_class_client_current(void) { return current
 
 static BOOL valid(wow_class_client_context *context)
 {
-    if (context && context->classes && context->get_version && context->callback && context->thread)
+    if (context && context->classes && context->get_version && context->callback &&
+            context->thread && context->thread->pClientInfo)
         return TRUE;
     SetLastError(ERROR_INVALID_STATE);
     return FALSE;
@@ -285,20 +286,46 @@ static BOOL publish_completed_class(class_publication *publication,
     return TRUE;
 }
 
+/* XP NtUserGetAtomName shares USER's atom namespace with clipboard format
+ * names. Integer atoms use the original RtlQueryAtomInAtomTable #decimal form;
+ * do not consult the unrelated global atom table or create a private table. */
+UINT WINAPI wow_class_client_atom_name(ATOM atom, PUNICODE_STRING name)
+{
+    WCHAR integer[8];
+    UINT length, capacity;
+    if (!name || !name->Buffer || !(capacity = name->MaximumLength / sizeof(WCHAR))) {
+        SetLastError(ERROR_INVALID_PARAMETER); return 0;
+    }
+    if (atom >= 0xc000) return GetClipboardFormatNameW(atom, name->Buffer, capacity);
+    if (!atom || capacity < 2) {
+        SetLastError(atom ? ERROR_INSUFFICIENT_BUFFER : ERROR_INVALID_PARAMETER); return 0;
+    }
+    /* Integer atoms are below 0xc000: '#' plus five digits and NUL fits. */
+    length = (UINT)wsprintfW(integer, L"#%u", (unsigned)atom);
+    if (length >= capacity) length = capacity - 1;
+    CopyMemory(name->Buffer, integer, length * sizeof(WCHAR));
+    name->Buffer[length] = 0;
+    return length;
+}
+
 ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *wc, PUNICODE_STRING name,
-    PCLSMENUNAME menu, PROC worker, WORD fnid, DWORD flags, DWORD *words)
+    PUNICODE_STRING version_name, PCLSMENUNAME menu, WORD fnid, DWORD flags, DWORD *words)
 {
     class_publication publication = {0};
     wow_class_register_context context;
     ATOM atom;
-    /* Preserve the selected ANSI entry profile. Native USER owns CPDs. */
-    if (!current || !current->thread || worker || fnid || flags != 2) {
+    /* Native USER owns registration/activation-context handling. Preserve
+     * the caller's non-versioned WNDCLASS name; retained lookup uses the XP
+     * client's resolved name and the returned native atom. */
+    if (!current || !current->thread || !wc || !name || !version_name ||
+            !HIWORD(version_name->Buffer) || fnid || !(flags & CSF_ANSIPROC) ||
+            (flags & ~(CSF_ANSIPROC | CSF_WIN40COMPAT | CSF_VERSIONCLASS))) {
         SetLastError(ERROR_INVALID_PARAMETER); return 0;
     }
-    publication.client=current; publication.name=name; publication.menu=menu;
+    publication.client=current; publication.name=version_name; publication.menu=menu;
     context.thread=current->thread; context.register_class=publish_native;
     context.resolve_callproc=resolve_callproc; context.binding=&publication;
-    atom = wow_class_client_provider_current()->register_class_ex(wc,worker,menu,fnid,flags,words,&context);
+    atom = wow_class_client_provider_current()->register_class_ex(wc,NULL,menu,fnid,flags,words,&context);
     if (atom && !publish_completed_class(&publication, wc)) return 0;
     return atom;
 }

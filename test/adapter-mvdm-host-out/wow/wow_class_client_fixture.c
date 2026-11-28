@@ -1,6 +1,7 @@
 #include "wow_control_entry_fixture_provider.h"
 #include "wow_class_client_fixture_provider.h"
 #include "wow_class_client_bindings.h"
+#include "wow_task_init_bindings.h"
 #include <stdio.h>
 
 wow_class_client_context *WINAPI wow_class_client_current(void);
@@ -31,20 +32,70 @@ static DWORD WINAPI callback(HWND hwnd,UINT msg,UINT wp,LONG lp,DWORD proc,PVOID
     (void)hwnd;(void)msg;(void)wp;(void)lp;(void)proc;(void)words;
     CHECK(FALSE); return 0; /* This fixture does not create windows. */
 }
+extern LPWSTR WINAPI ClassNameToVersion(LPCWSTR, LPWSTR, LPWSTR *, BOOL);
+extern UINT WINAPI wow_class_client_atom_name(ATOM, PUNICODE_STRING);
+static void class_version_resolution(void)
+{
+    static const char manifest[] =
+        "<assembly xmlns=\"urn:schemas-microsoft-com:asm.v1\" manifestVersion=\"1.0\">"
+        "<assemblyIdentity type=\"win32\" name=\"T485.ClassVersionFixture\" version=\"1.2.3.4\"/>"
+        "<file name=\"fixture.exe\"><windowClass versioned=\"yes\">S15_VERSIONED_CLASS</windowClass></file>"
+        "</assembly>";
+    static const WCHAR name[] = L"S15_VERSIONED_CLASS";
+    static const char ansi_name[] = "S15_VERSIONED_CLASS";
+    WCHAR output[256], temp[MAX_PATH], path[MAX_PATH];
+    ACTCTXW context = {sizeof(context)};
+    HANDLE file, activation;
+    DWORD written;
+    ULONG_PTR cookie;
+    LPWSTR resolved;
+    UNICODE_STRING atom_name={0,sizeof(output),output};
+    CHECK(wow_class_client_atom_name(1,&atom_name)==2 && !wcscmp(output,L"#1"));
+    CHECK(wow_class_client_atom_name(0xbfff,&atom_name)==6 && !wcscmp(output,L"#49151"));
+    atom_name.MaximumLength=2*sizeof(WCHAR);
+    CHECK(wow_class_client_atom_name(0xbfff,&atom_name)==1 && !wcscmp(output,L"#"));
+    CHECK(ClassNameToVersion(name,output,NULL,FALSE)==name);
+    CHECK(ClassNameToVersion(NULL,output,NULL,FALSE)==NULL);
+    if (!GetTempPathW(ARRAYSIZE(temp),temp) || !GetTempFileNameW(temp,L"cvr",0,path)) {
+        CHECK(FALSE); return;
+    }
+    file=CreateFileW(path,GENERIC_WRITE,0,NULL,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
+    if(file==INVALID_HANDLE_VALUE){CHECK(FALSE);DeleteFileW(path);return;}
+    CHECK(WriteFile(file,manifest,sizeof(manifest)-1,&written,NULL) && written==sizeof(manifest)-1);
+    CloseHandle(file);
+    context.lpSource=path;
+    activation=CreateActCtxW(&context);
+    CHECK(activation!=INVALID_HANDLE_VALUE);
+    if(activation!=INVALID_HANDLE_VALUE) {
+        if(ActivateActCtx(activation,&cookie)) {
+            resolved=ClassNameToVersion(name,output,NULL,FALSE);
+            CHECK(resolved==output && wcscmp(output,name)!=0 && wcsstr(output,name)!=NULL);
+            resolved=ClassNameToVersion((LPCWSTR)ansi_name,output,NULL,TRUE);
+            CHECK(resolved==output && strcmp((LPCSTR)output,ansi_name)!=0 &&
+                strstr((LPCSTR)output,ansi_name)!=NULL);
+            CHECK(DeactivateActCtx(0,cookie));
+        } else CHECK(FALSE);
+        ReleaseActCtx(activation);
+    }
+    CHECK(DeleteFileW(path));
+    CHECK(ClassNameToVersion(name,output,NULL,FALSE)==name);
+}
 static void version_domains(void)
 {
     wow_class_lookup_context classes={0};
+    wow_task_client_info client_info={0,0x030a};
     wow_task_order_thread thread={0};
-    wow_class_client_context context={&classes,0,get_version,callback,&thread,NULL};
+    wow_class_client_context context={&classes,get_version,callback,&thread,NULL};
     WNDCLASSA wc={0};
     WNDCLASSEXA native_class={0};
     DWORD words[2]={0};
     unsigned task_version,module_version,calls;
     ATOM atom;
+    thread.pClientInfo=&client_info;
     wc.lpfnWndProc=(WNDPROC)FIXTURE_GUEST_PROC;wc.hInstance=module;
     wc.lpszClassName="S40_VERSION_DOMAINS";
     for(task_version=0;task_version<2;++task_version) {
-        context.dwExpWinVer=task_version ? 0x0400 : 0x030a;
+        client_info.dwExpWinVer=task_version ? 0x0400 : 0x030a;
         for(module_version=0;module_version<2;++module_version) {
             version=module_version ? 0x0400 : 0x030a;
             wc.style=0x40000000;
@@ -63,7 +114,7 @@ static void version_domains(void)
     }
     /* USER module validation uses the task version before querying module
      * version. A low module version cannot override this task-level rule. */
-    version=0x030a;context.dwExpWinVer=0x0400;
+    version=0x030a;client_info.dwExpWinVer=0x0400;
     wc.style=0;wc.hInstance=GetModuleHandleA("user32.dll");
     calls=version_calls;
     CHECK(!wow_class_client_register_guest(&context,&wc,words));
@@ -81,8 +132,9 @@ static void procedure_encoding(void)
     unsigned i;
     for (i=0; i<ARRAYSIZE(guest); ++i) {
         wow_class_lookup_context classes={0};
+        wow_task_client_info client_info={0,0x030a};
         wow_task_order_thread thread={0};
-        wow_class_client_context context={&classes,0x030a,get_version,callback,&thread,NULL};
+        wow_class_client_context context={&classes,get_version,callback,&thread,NULL};
         WNDCLASSA wc={0};
         DWORD words[2]={guest[i],0};
         DWORD encoded=(guest[i] & ~0x00060000u) | ((guest[i] & WOW_WINDOW_PROC_TAG) >> 13) | WOW_WINDOW_PROC_TAG;
@@ -92,6 +144,7 @@ static void procedure_encoding(void)
         wow_window_dispatch_target target;
         /* Exactly WU32RegisterClass's producer contract, followed by the
          * original W32Win16WndProcEx decoding contract. */
+        thread.pClientInfo=&client_info;
         wc.lpfnWndProc=(WNDPROC)encoded;wc.hInstance=module;
         wc.lpszClassName="S2_WOW_PROC_ENCODING";
         atom=wow_class_client_register_guest(&context,&wc,words);
@@ -116,15 +169,17 @@ int __cdecl main(void)
             !wow_window_access_bind(&wow_fixture_window_access_provider) ||
             !wow_class_client_bind(&wow_fixture_class_client_provider)) return 3;
     wow_class_lookup_context classes = {0};
+    wow_task_client_info client_info={0,0x030a};
     wow_task_order_thread thread={0};
     wow_task_order_entry task={0};
-    wow_class_client_context context = {&classes,0x030a,get_version,callback,&thread,NULL};
+    wow_class_client_context context = {&classes,get_version,callback,&thread,NULL};
     WNDCLASSA wc = {0};
     WNDCLASSEXA native_class = {0};
     DWORD words[2] = {0x12340020,0x45670030};
     ATOM atom;
     wow_class_words_binding *binding;
     wow_window_dispatch_target target;
+    thread.pClientInfo=&client_info;
     wc.lpfnWndProc=(WNDPROC)FIXTURE_GUEST_PROC; wc.hInstance=module;
     wc.lpszClassName="S40_REAL_CLASS_CLIENT"; wc.lpszMenuName="MENU";
     CHECK(!wow_class_client_register_guest(NULL,&wc,words));
@@ -164,7 +219,8 @@ int __cdecl main(void)
     CHECK(classes.pclsPrivateList==NULL);
     raise_version=FALSE;
     version_domains();
-    version=0x030a;wc.style=0;wc.hInstance=module;wc.lpfnWndProc=(WNDPROC)0xffff1234;
+    version=0x030a;wc.style=0;wc.hInstance=module;thread.pClientInfo=&client_info;
+    wc.lpfnWndProc=(WNDPROC)0xffff1234;
     atom=wow_class_client_register(&context,&wc,words);
     CHECK(atom && cpd_calls==0);
     if(atom) CHECK(wow_class_client_unregister(&context,wc.lpszClassName,module));
@@ -183,6 +239,7 @@ int __cdecl main(void)
         CHECK(wow_class_client_unregister(&context,wc.lpszClassName,module));
     }
     procedure_encoding();
+    class_version_resolution();
     fprintf(stderr,"WOW_CLASS_CLIENT errors=%u version_calls=%u version_domains=5 server_owner=1 cpd=%u\n",errors,version_calls,cpd_calls);
     return errors != 0;
 }
