@@ -924,7 +924,7 @@ ICH MLInsertText(
     /*
      * Insert the text
      */
-    if (!ECInsertText(ped, lpText, validCch)) {
+    if (!ECInsertText(ped, lpText, &validCch)) {
 
         // Restore previous undo buffer if it was cleared
         if (!ped->fAutoVScroll)

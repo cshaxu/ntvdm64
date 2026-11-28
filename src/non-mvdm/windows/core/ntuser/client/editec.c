@@ -1,6 +1,7 @@
 /****************************************************************************\
 * editec.c - Edit controls rewrite. Version II of edit controls.
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * Created: 24-Jul-88 davidds
 \****************************************************************************/
@@ -24,6 +25,19 @@ ICH ECFindTabW(LPWSTR lpstr, ICH cch);
 #define UNICODE_CARRIAGERETURN ((WCHAR)0x0d)
 #define UNICODE_LINEFEED ((WCHAR)0x0a)
 #define UNICODE_TAB ((WCHAR)0x09)
+
+
+// IME Menu IDs
+#define ID_IMEOPENCLOSE      10001
+#define ID_SOFTKBDOPENCLOSE  10002
+#define ID_RECONVERTSTRING   10003
+
+typedef struct {
+    DWORD fDisableCut : 1;
+    DWORD fDisablePaste : 1;
+    DWORD fNeedSeparatorBeforeImeMenu : 1;
+    DWORD fIME : 1;
+} EditMenuItemState;
 
 /***************************************************************************\
 * Handlers common to both single and multi line edit controls.
@@ -114,6 +128,7 @@ UINT GetActualNegA(
     PABC  pABCwidthBuff;
     UINT  wCharIndex;
     int xStartPoint = x;
+    ABC abc;
 
     // To begin with, let us assume that there is no negative A width for
     // this strip and initialize accodingly.
@@ -154,19 +169,29 @@ UINT GetActualNegA(
                 // 1 pixel because this is the minimum possible tab length.
                 x++;
             } else {
-                x += pABCwidthBuff[wCharIndex].abcA;        // Add the 'A' width.
+                if ( wCharIndex < CHAR_WIDTH_BUFFER_LENGTH )
+                    x += pABCwidthBuff[wCharIndex].abcA;  // Add the 'A' width.
+                else {
+                    GetCharABCWidthsA(hdc, wCharIndex, wCharIndex, &abc) ;
+                    x += abc.abcA;
+                }
+
                 if (x < iLeftmostPoint)
                     iLeftmostPoint = x;             // Reset the leftmost point.
                 if (x < xStartPoint)
                     NegAInfo->nCount = i+1;   // 'i' is index; To get the count add 1.
-                x += pABCwidthBuff[wCharIndex].abcB + pABCwidthBuff[wCharIndex].abcC;
+
+                if ( wCharIndex < CHAR_WIDTH_BUFFER_LENGTH ) {
+                    x += pABCwidthBuff[wCharIndex].abcB + pABCwidthBuff[wCharIndex].abcC;
+                } else {
+                    x += abc.abcB + abc.abcC;
+                }
             }
 
             lpstring++;
         }
     } else {   // Unicode
         LPWSTR lpwstring = (LPWSTR) lpstring ;
-        ABC    abc ;
 
         for (i = 0; i < iCharCount; i++) {
             wCharIndex = *lpwstring ;
@@ -201,6 +226,7 @@ UINT GetActualNegA(
     // Let us return the negative A for the whole strip as a positive value.
     return((UINT)(xStartPoint - iLeftmostPoint));
 }
+
 
 /***************************************************************************\
 *
@@ -243,6 +269,294 @@ BOOL   ECIsAncestorActive(HWND hwnd)
 }
 
 /***************************************************************************\
+ * ECSetIMEMenu()
+ *
+ * support IME specific context menu
+ *
+ * Create: 30-Apr-97 Hiroyama : Ported from Memphis
+\***************************************************************************/
+BOOL ECSetIMEMenu(
+    HMENU hMenu,
+    HWND hwnd,
+    EditMenuItemState state)
+{
+
+    MENUITEMINFO mii;
+    HIMC hIMC;
+    HKL hKL;
+    HMENU hmenuSub;
+    WCHAR szRes[32];
+    int nPrevLastItem;
+    int nItemsAdded = 0;
+
+    UserAssert(IS_IME_ENABLED() && state.fIME);
+
+    hKL = THREAD_HKL();
+    if (!fpImmIsIME(hKL))
+        return TRUE;
+
+    hIMC = fpImmGetContext(hwnd);
+    if (hIMC == NULL) {
+        // early out
+        return FALSE;
+    }
+
+    hmenuSub = GetSubMenu(hMenu, 0);
+
+    if (hmenuSub == NULL) {
+        return FALSE;
+    }
+
+    nPrevLastItem = GetMenuItemCount(hmenuSub);
+
+    if (hIMC) {
+        if (LOWORD(HandleToUlong(hKL)) != 0x412) {
+            //
+            // If Korean, do not show open/close menus
+            //
+            if (fpImmGetOpenStatus(hIMC))
+                LoadString(hmodUser, STR_IMECLOSE, szRes, ARRAYSIZE(szRes));
+            else
+                LoadString(hmodUser, STR_IMEOPEN, szRes, ARRAYSIZE(szRes));
+
+            mii.cbSize = sizeof(MENUITEMINFO);
+            mii.fMask = MIIM_STRING | MIIM_ID;
+            mii.dwTypeData = szRes;
+            mii.cch = 0xffff;
+            mii.wID = ID_IMEOPENCLOSE;
+            InsertMenuItem(hmenuSub, 0xffff, TRUE, &mii);
+            ++nItemsAdded;
+        }
+
+        if (fpImmGetProperty(hKL, IGP_CONVERSION) & IME_CMODE_SOFTKBD) {
+            DWORD fdwConversion;
+
+            fpImmGetConversionStatus(hIMC, &fdwConversion, NULL);
+
+            if (fdwConversion & IME_CMODE_SOFTKBD)
+               LoadString(hmodUser, STR_SOFTKBDCLOSE, szRes, ARRAYSIZE(szRes));
+            else
+               LoadString(hmodUser, STR_SOFTKBDOPEN, szRes, ARRAYSIZE(szRes));
+
+            mii.cbSize = sizeof(MENUITEMINFO);
+            mii.fMask = MIIM_STRING | MIIM_ID;
+            mii.dwTypeData = szRes;
+            mii.cch = 0xffff;
+            mii.wID = ID_SOFTKBDOPENCLOSE;
+            InsertMenuItem(hmenuSub, 0xffff, TRUE, &mii);
+            ++nItemsAdded;
+        }
+
+        if (LOWORD(HandleToUlong(hKL)) != 0x412) {
+            //
+            // If Korean, do not show reconversion menus
+            //
+            DWORD dwSCS = fpImmGetProperty(hKL, IGP_SETCOMPSTR);
+
+            LoadString(hmodUser, STR_RECONVERTSTRING, szRes, ARRAYSIZE(szRes));
+
+            mii.cbSize = sizeof(MENUITEMINFO);
+            mii.fMask = MIIM_STRING | MIIM_ID | MIIM_STATE;
+            mii.dwTypeData = szRes;
+            mii.fState = 0;
+            mii.cch = 0xffff;
+            mii.wID = ID_RECONVERTSTRING;
+
+            if (state.fDisableCut ||
+                    !(dwSCS & SCS_CAP_SETRECONVERTSTRING) ||
+                    !(dwSCS & SCS_CAP_MAKEREAD)) {
+                mii.fState |= MFS_GRAYED;
+            }
+
+            InsertMenuItem(hmenuSub, 0xffff, TRUE, &mii);
+            ++nItemsAdded;
+        }
+    }
+
+    //
+    // Add or remove the menu separator
+    //
+    if (state.fNeedSeparatorBeforeImeMenu && nItemsAdded != 0) {
+        //
+        // If the menu for Middle East has left a separator,
+        // fNeedSeparatorBeforeImeMenu is FALSE.
+        // I.e. we don't need to add more.
+        //
+        mii.cbSize = sizeof(MENUITEMINFO);
+        mii.fMask = MIIM_FTYPE;
+        mii.fType = MFT_SEPARATOR;
+        InsertMenuItem(hmenuSub, nPrevLastItem, TRUE, &mii);
+    }
+    else if (!state.fNeedSeparatorBeforeImeMenu && nItemsAdded == 0) {
+        //
+        // Extra separator is left by ME menus. Remove it.
+        //
+        UserVerify(NtUserDeleteMenu(hmenuSub, nPrevLastItem - 1, MF_BYPOSITION));
+    }
+
+    fpImmReleaseContext(hwnd, hIMC);
+
+    return TRUE;
+}
+
+void ECInOutReconversionMode(PED ped, BOOL fIn)
+{
+    UserAssert(fIn == TRUE || fIn == FALSE);
+    if (fIn == ped->fInReconversion) {
+        return;
+    }
+    ped->fInReconversion = fIn;
+    if (ped->fFocus) {
+        (fIn ? NtUserHideCaret: NtUserShowCaret)(ped->hwnd);
+    }
+
+    return;
+}
+
+/***************************************************************************\
+ * ECDoIMEMenuCommand()
+ *
+ * support IME specific context menu
+ *
+ * Create: 30-Apr-97 Hiroyama : Ported from Memphis
+\***************************************************************************/
+BOOL NEAR ECDoIMEMenuCommand(PED ped, int cmd, HWND hwnd)
+{
+    HIMC hIMC;
+
+    // early out
+    switch (cmd) {
+    case ID_IMEOPENCLOSE:
+    case ID_SOFTKBDOPENCLOSE:
+    case ID_RECONVERTSTRING:
+        break;
+    default:
+        return FALSE;
+    }
+
+    // everybody needs hIMC, so get it here
+    hIMC = fpImmGetContext(hwnd);
+    if (hIMC == NULL) {
+        // indicate to caller, that no further command processing needed
+        return TRUE;
+    }
+
+    switch (cmd) {
+    case ID_IMEOPENCLOSE:
+        {
+            // switch IME Open/Close status
+            BOOL fOpen = fpImmGetOpenStatus(hIMC);
+
+            fpImmSetOpenStatus(hIMC, !fOpen);
+        }
+        break;
+
+    case ID_SOFTKBDOPENCLOSE:
+        {
+            DWORD fdwConversion;
+
+            if (fpImmGetConversionStatus(hIMC, &fdwConversion, NULL)) {
+                //
+                // Toggle soft keyboard Open/Close status
+                //
+                fpImmEnumInputContext(0, SyncSoftKbdState,
+                        (fdwConversion & IME_CMODE_SOFTKBD) != IME_CMODE_SOFTKBD);
+            }
+        }
+        break;
+
+    case ID_RECONVERTSTRING:
+        {
+            DWORD dwStrLen; // holds TCHAR count of recionversion string
+            DWORD cbLen;    // holds BYTE SIZE of reconversion string
+            DWORD dwSize;
+            LPRECONVERTSTRING lpRCS;
+
+            // pass current selection to IME for reconversion
+            dwStrLen = ped->ichMaxSel - ped->ichMinSel;
+            cbLen = dwStrLen * ped->cbChar;
+            dwSize = cbLen + sizeof(RECONVERTSTRING) + 8;
+
+            lpRCS = (LPRECONVERTSTRING)UserLocalAlloc(0, dwSize);
+
+            if (lpRCS) {
+                LPBYTE pText;
+                ICH    ichSelMinOrg;
+
+                ichSelMinOrg = ped->ichMinSel;
+
+                pText = ECLock(ped);
+                if (pText != NULL) {
+                    LPBYTE lpDest;
+                    BOOL (WINAPI* fpSetCompositionStringAW)(HIMC, DWORD, LPCVOID, DWORD, LPCVOID, DWORD);
+
+                    lpRCS->dwSize = dwSize;
+                    lpRCS->dwVersion = 0;
+
+                    lpRCS->dwStrLen =
+                    lpRCS->dwCompStrLen =
+                    lpRCS->dwTargetStrLen = dwStrLen;
+
+                    lpRCS->dwStrOffset = sizeof(RECONVERTSTRING);
+                    lpRCS->dwCompStrOffset =
+                    lpRCS->dwTargetStrOffset = 0;
+
+                    lpDest = (LPBYTE)lpRCS + sizeof(RECONVERTSTRING);
+
+                    RtlCopyMemory(lpDest, pText + ped->ichMinSel * ped->cbChar, cbLen);
+                    if (ped->fAnsi) {
+                        LPBYTE psz = (LPBYTE)lpDest;
+                        psz[cbLen] = '\0';
+                        fpSetCompositionStringAW = fpImmSetCompositionStringA;
+                    } else {
+                        LPWSTR pwsz = (LPWSTR)lpDest;
+                        pwsz[dwStrLen] = L'\0';
+                        fpSetCompositionStringAW = fpImmSetCompositionStringW;
+                    }
+
+                    ECUnlock(ped);
+
+                    UserAssert(fpSetCompositionStringAW != NULL);
+
+                    ECInOutReconversionMode(ped, TRUE);
+                    ECImmSetCompositionWindow(ped, 0, 0); // x and y will be overriden anyway
+
+                    // Query the IME for a valid Reconvert string range first.
+                    fpSetCompositionStringAW(hIMC, SCS_QUERYRECONVERTSTRING, lpRCS, dwSize, NULL, 0);
+
+                    // If current IME updates the original reconvert structure,
+                    // it is necessary to update the text selection based on the 
+                    // new reconvert text range.
+                    if ((lpRCS->dwCompStrLen != dwStrLen) || (ichSelMinOrg != ped->ichMinSel)) {
+                        ICH ichSelStart;
+                        ICH ichSelEnd;
+
+                        ichSelStart = ichSelMinOrg + (lpRCS->dwCompStrOffset  / ped->cbChar);
+                        ichSelEnd = ichSelStart + lpRCS->dwCompStrLen;
+
+                        (ped->fAnsi ? SendMessageA : SendMessageW)(ped->hwnd, EM_SETSEL, ichSelStart, ichSelEnd);
+                    }
+
+                    fpSetCompositionStringAW(hIMC, SCS_SETRECONVERTSTRING, lpRCS, dwSize, NULL, 0);
+                } // pText
+                UserLocalFree(lpRCS);
+            }
+        }
+        break;
+
+    default:
+        // should never reach here.
+        RIPMSG1(RIP_ERROR, "ECDoIMEMenuCommand: unknown command id %d; should never reach here.", cmd);
+        return FALSE;
+    }
+
+    UserAssert(hIMC != NULL);
+    fpImmReleaseContext(hwnd, hIMC);
+
+    return TRUE;
+}
+
+/***************************************************************************\
 *
 *  ECMenu()
 *
@@ -257,11 +571,16 @@ void  ECMenu(
     LPPOINT pt)
 {
     HMENU   hMenu;
-    BOOL    fDisableCut   = FALSE;
-    BOOL    fDisablePaste = TRUE;
     int     cmd = 0;
     int     x;
     int     y;
+    UINT    uFlags = TPM_NONOTIFY | TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_RIGHTBUTTON;
+    EditMenuItemState state = {
+        FALSE,              // fDisableCut
+        TRUE,               // fDisablePaste
+        TRUE,               // fNeedSeparatorBeforeImeMenu
+        IS_IME_ENABLED() && fpImmIsIME(THREAD_HKL()), // fIME
+    };
 
     // Set focus if we don't have it.
     if (!ped->fFocus)
@@ -271,30 +590,32 @@ void  ECMenu(
     if (!(hMenu = LoadMenu( hmodUser, MAKEINTRESOURCE( ID_EC_PROPERTY_MENU ))))
         return ;
 
+
     // Undo -- not allowed if we have no saved undo info
     if (ped->undoType == UNDO_NONE)
         EnableMenuItem(hMenu, WM_UNDO, MF_BYCOMMAND | MFS_GRAYED);
 
     if (ped->fReadOnly || ped->charPasswordChar) {
-        // Cut, Paste, and Delete -- not allowed if read-only or password
-        fDisableCut = fDisablePaste = TRUE;
+        // Cut and Delete -- not allowed if read-only or password
+        state.fDisableCut = TRUE;
     } else {
         // Cut, Delete -- not allowed if there's no selection
         if (ped->ichMinSel == ped->ichMaxSel)
-            fDisableCut = TRUE;
-
-        // Paste -- not allowed if there's no text on the clipboard
-        // (this works for both OEM and Unicode)
-        if (NtUserIsClipboardFormatAvailable(CF_TEXT))
-            fDisablePaste = FALSE;
+            state.fDisableCut = TRUE;
     }
+    // Paste -- not allowed if there's no text on the clipboard
+    // (this works for both OEM and Unicode)
+    // Used to be always disabled for password edits MCostea #221035
 
-    if (fDisableCut) {
+    if (NtUserIsClipboardFormatAvailable(CF_TEXT))
+        state.fDisablePaste = FALSE;
+
+    if (state.fDisableCut) {
         EnableMenuItem(hMenu, WM_CUT,   MF_BYCOMMAND | MFS_GRAYED);
         EnableMenuItem(hMenu, WM_CLEAR, MF_BYCOMMAND | MFS_GRAYED);
     }
 
-    if (fDisablePaste)
+    if (state.fDisablePaste)
         EnableMenuItem(hMenu, WM_PASTE, MF_BYCOMMAND | MFS_GRAYED);
 
     // Copy -- not allowed if there's no selection or password ec
@@ -306,13 +627,33 @@ void  ECMenu(
     if ((ped->ichMinSel == 0) && (ped->ichMaxSel == ped->cch))
         EnableMenuItem(hMenu, EM_SETSEL, MF_BYCOMMAND | MFS_GRAYED);
 
-#line 309
-#ifdef SUPPORT_LPK
-#line 310
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 312
-#endif // SUPPORT_LPK
-#line 313
+    if (ped->pLpkEditCallout) {
+        ped->pLpkEditCallout->EditSetMenu(ped, hMenu);
+    } else {
+        NtUserDeleteMenu(hMenu, ID_CNTX_DISPLAYCTRL, MF_BYCOMMAND);
+        NtUserDeleteMenu(hMenu, ID_CNTX_RTL,         MF_BYCOMMAND);
+        NtUserDeleteMenu(hMenu, ID_CNTX_INSERTCTRL,  MF_BYCOMMAND);
+
+        if (state.fIME) {
+            // One separator is left in the menu,
+            // no need to add the one before IME menus
+            state.fNeedSeparatorBeforeImeMenu = FALSE;
+        } else {
+            // Extra separator is left. Remove it.
+            HMENU hmenuSub = GetSubMenu(hMenu, 0);
+            int nItems = GetMenuItemCount(hmenuSub) - 1;
+
+            UserAssert(nItems >= 0);
+            UserAssert(GetMenuState(hmenuSub, nItems, MF_BYPOSITION) & MF_SEPARATOR);
+            // remove needless separator
+            UserVerify(NtUserDeleteMenu(hmenuSub, nItems, MF_BYPOSITION));
+        }
+    }
+
+    // IME specific menu
+    if (state.fIME) {
+        ECSetIMEMenu(hMenu, hwnd, state);
+    }
 
     // BOGUS
     // We position the menu below & to the right of the point clicked on.
@@ -342,23 +683,22 @@ void  ECMenu(
         y = pt->y;
     }
 
-    cmd = NtUserTrackPopupMenuEx(GetSubMenu(hMenu, 0), TPM_NONOTIFY |
-        TPM_LEFTALIGN | TPM_TOPALIGN | TPM_RETURNCMD | TPM_RIGHTBUTTON,
-        x, y, hwnd, NULL);
+    if (RTL_UI()) {
+        uFlags |= TPM_LAYOUTRTL;
+    }
+    cmd = NtUserTrackPopupMenuEx(GetSubMenu(hMenu, 0),  uFlags, x, y, hwnd, NULL);
 
     // Free our menu
     NtUserDestroyMenu(hMenu);
 
     if (cmd && (cmd != -1)) {
-#line 350
-#ifdef SUPPORT_LPK
-#line 351
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 355
-#endif // SUPPORT_LPK
-#line 356
-
-        SendMessage(hwnd, cmd, 0, (cmd == EM_SETSEL) ? 0xFFFFFFFF : 0L );
+        if (ped->pLpkEditCallout && cmd) {
+            ped->pLpkEditCallout->EditProcessMenu(ped, cmd);
+        }
+        if (!state.fIME || !ECDoIMEMenuCommand(ped, cmd, hwnd)) {
+            // if cmd is not IME specific menu, send it.
+            SendMessage(hwnd, cmd, 0, (cmd == EM_SETSEL) ? 0xFFFFFFFF : 0L );
+        }
     }
 }
 
@@ -443,6 +783,11 @@ int   ECGetModKeys(int keyMods) {
 *  at all.  No one uses it.  We keep a DWORD because that way we avoid
 *  overflow.
 *
+*  NOTE: If the language pack is loaded EcTabTheTextOut is not used - the
+*  language pack must take care of all tab expansion and selection
+*  highlighting with full support for bidi layout and complex script
+*  glyph reordering.
+*
 \***************************************************************************/
 UINT ECTabTheTextOut(
     HDC hdc,
@@ -487,6 +832,7 @@ UINT ECTabTheTextOut(
     int      iSavedBkMode = 0;
     WCHAR    wchar;
     SIZE     size;
+    ABC   abc ;
 
     // Algorithm: Draw the strip opaquely first. If a tab length is so
     // small that the portions of text on either side of a tab overlap with
@@ -509,13 +855,10 @@ UINT ECTabTheTextOut(
 
         fOpaque = (GetBkMode(hdc) == OPAQUE) || (fDraw == ECT_SELECTED);
     }
-#line 508
-#ifdef DEBUG
-#line 509
-#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
-#line 517
+#if DBG
+#error DIVERGENCE: unselected retail EDIT profile.
 #endif
-#line 518
+#line 868
 
     // Let us define the Clip rectangle.
     rc.left   = xClipStPos;
@@ -562,6 +905,9 @@ RedrawStrip:
 
         // Search for the first TAB in this strip; also compute the extent
         // of the the strip upto and not including the tab character.
+        //
+        // Note - If the langpack is loaded, there will be no charWidthBuffer.
+        //
         if (ped->charWidthBuffer) {     // Do we have a character width buffer?
             textextent = 0;
             cch = nCount;
@@ -583,21 +929,30 @@ RedrawStrip:
                         }
 
                         wCharIndex = (UINT)(((unsigned char  *)lpstring)[i]);
-                        textextent += (UINT)(pABCwidthBuff[wCharIndex].abcA +
-                            pABCwidthBuff[wCharIndex].abcB);
+                        if (wCharIndex < CHAR_WIDTH_BUFFER_LENGTH) {
+                            textextent += (UINT)(pABCwidthBuff[wCharIndex].abcA +
+                                pABCwidthBuff[wCharIndex].abcB);
+                        } else {    // not in cache, will ask driver
+                            GetCharABCWidthsA(hdc, wCharIndex, wCharIndex, &abc);
+                            textextent += abc.abcA + abc.abcB ;
+                        }
 
                         if (textextent > iRightmostPoint)
                             iRightmostPoint = textextent;
 
-                        textextent += pABCwidthBuff[wCharIndex].abcC;
+                        if (wCharIndex < CHAR_WIDTH_BUFFER_LENGTH) {
+                            textextent += pABCwidthBuff[wCharIndex].abcC;
+                        } else {    // not in cache
+                            textextent += abc.abcC;
+                        }
 
                         if (textextent > iRightmostPoint)
                             iRightmostPoint = textextent;
                     }
+
                 } else {   // Unicode
                     for (i = 0; i < nCount; i++) {
                         WCHAR UNALIGNED * lpwstring = (WCHAR UNALIGNED *)lpstring;
-                        ABC   abc ;
 
                         if (lpwstring[i] == VK_TAB) {
                             cch = i;
@@ -645,7 +1000,22 @@ RedrawStrip:
                             break;
                         }
 
-                        textextent += (UINT)(charWidthBuff[(UINT)(((unsigned char  *)lpstring)[i])]);
+                        //
+                        // Call GetTextExtentPoint for dbcs/hankaku characters
+                        //
+                        if (ped->fDBCS && (i+1 < nCount)
+                                && ECIsDBCSLeadByte(ped,lpstring[i])) {
+                            GetTextExtentPointA(hdc, &lpstring[i], 2, &size);
+                            textextent += size.cx;
+                            i++;
+                        } else if ((UCHAR)lpstring[i] >= CHAR_WIDTH_BUFFER_LENGTH) {
+                            // Skip this GetExtentPoint call for non hankaku code points
+                            // Or if the character is in the width cache.
+                            GetTextExtentPointA(hdc, &lpstring[i], 1, &size);
+                            textextent += size.cx;
+                        } else {
+                            textextent += (UINT)(charWidthBuff[(UINT)(((unsigned char  *)lpstring)[i])]);
+                        }
                     }
                 } else {
                     LPWSTR lpwstring = (LPWSTR) lpstring ;
@@ -707,7 +1077,10 @@ RedrawStrip:
                 GetTextExtentPointW(hdc, (LPWSTR)lpstring, cch, &size);
             }
             nCount -= cch;
-            textextent = size.cx;
+            //
+            // Subtruct Overhang for Italic fonts.
+            //
+            textextent = (size.cx - ped->charOverhang);
         }
 
         //
@@ -917,6 +1290,8 @@ RedrawStrip:
 * characters. WARNING: If we use kerning, then this loses...
 *
 * History:
+*
+* NOTE: ECCchInWidth is not called if the language pack is loaded.
 \***************************************************************************/
 
 ICH ECCchInWidth(
@@ -941,8 +1316,11 @@ ICH ECCchInWidth(
      * Optimize nonproportional fonts for single line ec since they don't have
      * tabs.
      */
-    if (ped->fNonPropFont && ped->fSingle) {
-        return (umin(width / ped->aveCharWidth, (int)cch));
+    //
+    // Change optimize condition for fixed pitch font
+    //
+    if (ped->fNonPropFont && ped->fSingle && !ped->fDBCS) {
+        return (ECAdjustIch( ped, lpText, umin(width/ped->aveCharWidth,(int)cch)));
     }
 
     /*
@@ -990,6 +1368,10 @@ ICH ECCchInWidth(
             cchlow = cchnew;
         }
     }
+    //
+    // Call ECAdjustIch ( generic case )
+    //
+    cchlow = ECAdjustIch( ped, lpText, cchlow );
     return (cchlow);
 }
 
@@ -1008,7 +1390,8 @@ ICH ECFindTabA(
 {
     LPSTR copylpstr = lpstr;
 
-    if (!cch) return (0);
+    if (!cch)
+        return 0;
 
     while (*lpstr != VK_TAB) {
         lpstr++;
@@ -1024,7 +1407,8 @@ ICH ECFindTabW(
 {
     LPWSTR copylpstr = lpstr;
 
-    if (!cch) return (0);
+    if (!cch)
+        return 0;
 
     while (*lpstr != VK_TAB) {
         lpstr++;
@@ -1046,7 +1430,7 @@ HBRUSH ECGetBrush(PED ped, HDC hdc)
     HBRUSH  hbr;
     BOOL    f40Compat;
 
-    f40Compat = (GetAppVer(NULL) >= VER40);
+    f40Compat = (GETAPPVER() >= VER40);
 
     // Get background brush
     if ((ped->fReadOnly || ped->fDisabled) && f40Compat) {
@@ -1138,6 +1522,30 @@ void NextWordCallBack(
     if (pichMax)  *pichMax = ichMaxSel;
 }
 
+/***************************************************************************\
+* NextWordLpkCallback
+*
+* Identifies next/prev word position for complex scripts
+*
+* History:
+* 04-22-97 DBrown
+\***************************************************************************/
+
+void NextWordLpkCallBack(
+    PED  ped,
+    ICH  ichStart,
+    BOOL fLeft,
+    ICH *pichMin,
+    ICH *pichMax)
+{
+    PSTR pText = ECLock(ped);
+    HDC  hdc   = ECGetEditDC(ped, TRUE);
+
+    ped->pLpkEditCallout->EditNextWord(ped, hdc, pText, ichStart, fLeft, pichMin, pichMax);
+
+    ECReleaseEditDC(ped, hdc, TRUE);
+    ECUnlock(ped);
+}
 
 /***************************************************************************\
 * ECWordAorW
@@ -1178,15 +1586,30 @@ void ECWord(
         return;
     }
 
+    /*
+     * Don't give out hints about word breaks if password chars are being used,
+     */
+    if (ped->charPasswordChar) {
+        if (pichMin) *pichMin=0;
+        if (pichMax) *pichMax=ped->cch;
+        return;
+    }
+
     if (ped->fAnsi) {
         PSTR pText;
         PSTR pWordMinSel;
         PSTR pWordMaxSel;
+        PSTR pPrevChar;
 
         UserAssert(ped->cbChar == sizeof(CHAR));
 
         if (ped->lpfnNextWord) {
             NextWordCallBack(ped, ichStart, fLeft, pichMin, pichMax);
+            return;
+        }
+
+        if (ped->pLpkEditCallout) {
+            NextWordLpkCallBack(ped, ichStart, fLeft, pichMin, pichMax);
             return;
         }
 
@@ -1222,9 +1645,22 @@ void ECWord(
              */
             while (pWordMinSel > pText && ((!ISDELIMETERA(*(pWordMinSel - 1)) &&
                     *(pWordMinSel - 1) != 0x0A) || !charLocated)) {
-                if (!fLeft && (ISDELIMETERA(*(pWordMinSel - 1)) ||
-                        *(pWordMinSel - 1) == 0x0A)) {
 
+                /*
+                 * Treat double byte character as a word  ( in ansi pWordMinSel loop )
+                 */
+                pPrevChar = ECAnsiPrev( ped, pText, pWordMinSel );
+
+                /*
+                ** we are looking right ( !fLeft ).
+                ** if current character is a double byte chararacter or
+                ** previous character is a double byte character, we
+                ** are on the beggining of a word.
+                */
+                if ( !fLeft && ( ISDELIMETERA( *pPrevChar )           ||
+                                 *pPrevChar == 0x0A                   ||
+                                 ECIsDBCSLeadByte(ped, *pWordMinSel)  ||
+                                 pWordMinSel - pPrevChar == 2 ) ) {
                     /*
                      * If we are looking for the start of the word right, then we
                      * stop when we have found it. (needed in case charLocated is
@@ -1233,7 +1669,20 @@ void ECWord(
                     break;
                 }
 
-                pWordMinSel--;
+                if ( pWordMinSel - pPrevChar == 2 ) {
+                    /*
+                    ** previous character is a double byte character.
+                    ** if we are in a word ( charLocated == TRUE )
+                    ** current position is the beginning of the word
+                    ** if we are not in a word ( charLocated == FALSE )
+                    ** the previous character is what we looking for.
+                    */
+                    if ( ! charLocated ) {
+                        pWordMinSel = pPrevChar;
+                    }
+                    break;
+                }
+                pWordMinSel = pPrevChar;
 
                 if (!ISDELIMETERA(*pWordMinSel) && *pWordMinSel != 0x0A) {
 
@@ -1251,16 +1700,24 @@ void ECWord(
                 }
             }
         } else {
-
-            /*
-             * We are moving right and we are in between words so we need to move
-             * right till we find the start of a word (either a CR or a character.
-             */
             while ((ISDELIMETERA(*pWordMinSel) || *pWordMinSel == 0x0A) && pWordMinSel < pText + ped->cch)
                 pWordMinSel++;
         }
 
-        pWordMaxSel = (PSTR)min((DWORD)pWordMinSel + 1, (DWORD)pText + ped->cch);
+        /*
+         * Adjust the initial position of pWordMaxSel ( in ansi )
+         */
+        pWordMaxSel = ECAnsiNext(ped, pWordMinSel);
+        pWordMaxSel = min(pWordMaxSel, pText + ped->cch);
+
+        /*
+        ** If pWordMinSel points a double byte character AND
+        **    pWordMaxSel points non space
+        ** then
+        **    pWordMaxSel points the beggining of next word.
+        */
+        if ( ( pWordMaxSel - pWordMinSel == 2 ) && ! ISDELIMETERA(*pWordMaxSel) )
+            goto FastReturnA;
         if (*pWordMinSel == 0x0D) {
             if (pWordMinSel > pText && *(pWordMinSel - 1) == 0x0D)
                 /* So that we can treat CRCRLF as one word also. */
@@ -1288,6 +1745,17 @@ void ECWord(
             if (*pWordMaxSel == 0x0D)
                 break;
 
+            /*
+             * Treat double byte character as a word ( in ansi pWordMaxSel loop )
+             */
+            /*
+            ** if it's a double byte character then
+            ** we are at the beginning of next word
+            ** which is a double byte character.
+            */
+            if (ECIsDBCSLeadByte( ped, *pWordMaxSel))
+                break;
+
             pWordMaxSel++;
 
             if (ISDELIMETERA(*pWordMaxSel))
@@ -1297,10 +1765,14 @@ void ECWord(
                 break;
         }
 
+        /*
+         * label for fast return ( for Ansi )
+         */
+FastReturnA:
         ECUnlock(ped);
 
-        if (pichMin)   *pichMin = pWordMinSel - pText;
-        if (pichMax)   *pichMax = pWordMaxSel - pText;
+        if (pichMin)   *pichMin = (ICH)(pWordMinSel - pText);
+        if (pichMax)   *pichMax = (ICH)(pWordMaxSel - pText);
         return;
 
     } else {  // !fAnsi
@@ -1309,11 +1781,17 @@ void ECWord(
         LPWSTR pwWordMaxSel;
         BOOL charLocated = FALSE;
         BOOL spaceLocated = FALSE;
+        PWSTR pwPrevChar;
 
         UserAssert(ped->cbChar == sizeof(WCHAR));
 
         if (ped->lpfnNextWord) {
             NextWordCallBack(ped, ichStart, fLeft, pichMin, pichMax);
+            return;
+        }
+
+        if (ped->pLpkEditCallout) {
+            NextWordLpkCallBack(ped, ichStart, fLeft, pichMin, pichMax);
             return;
         }
 
@@ -1347,15 +1825,44 @@ void ECWord(
           * continue looking left till we find a space or LF.
           */ {
             while (pwWordMinSel > pwText && ((!ISDELIMETERW(*(pwWordMinSel - 1)) && *(pwWordMinSel - 1) != 0x0A) || !charLocated)) {
-                if (!fLeft && (ISDELIMETERW(*(pwWordMinSel - 1)) || *(pwWordMinSel - 1) == 0x0A))
+                /*
+                 * Treat double byte character as a word  ( in unicode pwWordMinSel loop )
+                 */
+                pwPrevChar = pwWordMinSel - 1;
+                /*
+                ** we are looking right ( !fLeft ).
+                **
+                ** if current character is a double width chararacter
+                ** or previous character is a double width character,
+                ** we are on the beggining of a word.
+                */
+                if (!fLeft && (ISDELIMETERW( *pwPrevChar)  ||
+                               *pwPrevChar == 0x0A         ||
+                               UserIsFullWidth(CP_ACP,*pwWordMinSel) ||
+                               UserIsFullWidth(CP_ACP,*pwPrevChar)))    {
                     /*
-                         * If we are looking for the start of the word right, then we
-                         * stop when we have found it. (needed in case charLocated is
-                         * still FALSE)
-                         */
+                     * If we are looking for the start of the word right, then we
+                     * stop when we have found it. (needed in case charLocated is
+                     * still FALSE)
+                     */
                     break;
+                }
 
-                pwWordMinSel--;
+                if (UserIsFullWidth(CP_ACP,*pwPrevChar)) {
+                    /*
+                    ** Previous character is a double width character.
+                    **
+                    ** if we are in a word ( charLocated == TRUE )
+                    ** current position is the beginning of the word
+                    ** if we are not in a word ( charLocated == FALSE )
+                    ** the previous character is what we looking for.
+                    */
+                    if ( ! charLocated ) {
+                        pwWordMinSel = pwPrevChar;
+                    }
+                    break;
+                }
+                pwWordMinSel = pwPrevChar;
 
                 if (!ISDELIMETERW(*pwWordMinSel) && *pwWordMinSel != 0x0A)
                  /*
@@ -1381,7 +1888,16 @@ void ECWord(
                 pwWordMinSel++;
         }
 
-        pwWordMaxSel = (LPWSTR)min((DWORD)(pwWordMinSel + 1), (DWORD)(pwText + ped->cch));
+        pwWordMaxSel = min((pwWordMinSel + 1), (pwText + ped->cch));
+
+        /*
+        ** If pwWordMinSel points a double width character AND
+        **    pwWordMaxSel points non space
+        ** then
+        **    pwWordMaxSel points the beggining of next word.
+        */
+        if (UserIsFullWidth(CP_ACP,*pwWordMinSel) && ! ISDELIMETERW(*pwWordMaxSel))
+            goto FastReturnW;
         if (*pwWordMinSel == 0x0D) {
             if (pwWordMinSel > pwText && *(pwWordMinSel - 1) == 0x0D)
                 /* So that we can treat CRCRLF as one word also. */
@@ -1409,6 +1925,18 @@ void ECWord(
             if (*pwWordMaxSel == 0x0D)
                 break;
 
+            /*
+             * treat double byte character as a word ( in unicode pwWordMaxSel loop )
+             */
+            /*
+            ** if it's a double width character
+            ** then we are at the beginning of
+            ** the next word which is a double
+            ** width character.
+            */
+            if (UserIsFullWidth(CP_ACP,*pwWordMaxSel))
+                break;
+
             pwWordMaxSel++;
 
             if (ISDELIMETERW(*pwWordMaxSel))
@@ -1419,10 +1947,14 @@ void ECWord(
                 break;
         }
 
+        /*
+         * label for fast return ( for Unicode )
+         */
+FastReturnW:
         ECUnlock(ped);
 
-        if (pichMin)   *pichMin = pwWordMinSel - pwText;
-        if (pichMax)   *pichMax = pwWordMaxSel - pwText;
+        if (pichMin)   *pichMin = (ICH)(pwWordMinSel - pwText);
+        if (pichMax)   *pichMax = (ICH)(pwWordMaxSel - pwText);
         return;
     }
 }
@@ -1543,7 +2075,7 @@ UNDOINSERT:
 BOOL ECInsertText(
     PED ped,
     LPSTR lpText,
-    ICH cchInsert)
+    ICH* pcchInsert)
 {
     PSTR pedText;
     PSTR pTextBuff;
@@ -1551,19 +2083,25 @@ BOOL ECInsertText(
     HANDLE hTextCopy;
     DWORD allocamt;
 
-    if (!cchInsert)
+    //
+    // If the last byte (lpText[cchInsert - 1]) is a DBCS leading byte
+    // we need to adjust it.
+    //
+    *pcchInsert = ECAdjustIch(ped, lpText, *pcchInsert);
+
+    if (!*pcchInsert)
         return TRUE;
 
     /*
      * Do we already have enough memory??
      */
-    if (cchInsert >= (ped->cchAlloc - ped->cch)) {
+    if (*pcchInsert >= (ped->cchAlloc - ped->cch)) {
 
         /*
          * Allocate what we need plus a little extra. Return FALSE if we are
          * unsuccessful.
          */
-        allocamt = (ped->cch + cchInsert) * ped->cbChar;
+        allocamt = (ped->cch + *pcchInsert) * ped->cbChar;
         allocamt += CCHALLOCEXTRA;
 
 // if (!ped->fSingle) {
@@ -1587,17 +2125,32 @@ BOOL ECInsertText(
      */
     pedText = ECLock(ped);
 
+    if (ped->pLpkEditCallout) {
+        HDC     hdc;
+        INT     iResult;
+
+        hdc = ECGetEditDC (ped, TRUE);
+        iResult = ped->pLpkEditCallout->EditVerifyText (ped, hdc, pedText, ped->ichCaret, lpText, *pcchInsert);
+        ECReleaseEditDC (ped, hdc, TRUE);
+
+        if (iResult == 0) {
+            ECUnlock (ped);
+            return TRUE;
+        }
+    }
+
     /*
      * Get a pointer to the place where text is to be inserted
      */
     pTextBuff = pedText + ped->ichCaret * ped->cbChar;
+
     if (ped->ichCaret != ped->cch) {
 
         /*
          * We are inserting text into the middle. We have to shift text to the
          * right before inserting new text.
          */
-         memmove(pTextBuff + cchInsert * ped->cbChar, pTextBuff, (ped->cch-ped->ichCaret) * ped->cbChar);
+         memmove(pTextBuff + *pcchInsert * ped->cbChar, pTextBuff, (ped->cch-ped->ichCaret) * ped->cbChar);
     }
 
     /*
@@ -1605,8 +2158,8 @@ BOOL ECInsertText(
      * Use this copy for doing UPPERCASE/LOWERCASE ANSI/OEM conversions
      * Fix for Bug #3406 -- 01/29/91 -- SANKAR --
      */
-    memmove(pTextBuff, lpText, cchInsert * ped->cbChar);
-    ped->cch += cchInsert;
+    memmove(pTextBuff, lpText, *pcchInsert * ped->cbChar);
+    ped->cch += *pcchInsert;
 
     /*
      * Get the control's style
@@ -1618,15 +2171,15 @@ BOOL ECInsertText(
      */
     if (style & ES_LOWERCASE) {
         if (ped->fAnsi)
-            CharLowerBuffA((LPSTR)pTextBuff, cchInsert);
+            CharLowerBuffA((LPSTR)pTextBuff, *pcchInsert);
         else
-            CharLowerBuffW((LPWSTR)pTextBuff, cchInsert);
+            CharLowerBuffW((LPWSTR)pTextBuff, *pcchInsert);
     } else {
         if (style & ES_UPPERCASE) {
             if (ped->fAnsi) {
-                CharUpperBuffA(pTextBuff, cchInsert);
+                CharUpperBuffA(pTextBuff, *pcchInsert);
             } else {
-                CharUpperBuffW((LPWSTR)pTextBuff, cchInsert);
+                CharUpperBuffW((LPWSTR)pTextBuff, *pcchInsert);
             }
         }
     }
@@ -1634,11 +2187,34 @@ BOOL ECInsertText(
     /*
      * Do the OEM conversion
      */
-    if (style & ES_OEMCONVERT) {
+    if ((style & ES_OEMCONVERT) &&
+            // For backward compatibility with NT4, we don't perform OEM conversion
+            // for older apps if the system locale is FarEast.
+            //
+            (!IS_DBCS_ENABLED() || GETAPPVER() >= VER50 || GetOEMCP() != GetACP())) {
+
         ICH i;
+
         if (ped->fAnsi) {
-            for (i = 0; i < cchInsert; i++) {
-                if (IsCharLowerA(*(pTextBuff + i))) {
+            for (i = 0; i < *pcchInsert; i++) {
+                //
+                // We don't need to call CharToOemBuff etc. if the character
+                // is a double byte character.  And, calling ECIsDBCSLeadByte is
+                // faster and less complicated because we don't have to deal
+                // with the 2 byte dbcs cases.
+                //
+                if (IS_DBCS_ENABLED() && ECIsDBCSLeadByte(ped, *(lpText+i))) {
+                    i++;
+                    continue;
+                }
+
+                //
+                // Windows Bug (Whistler) 35289
+                // greek has funny rules for casing, so we need to check for it.
+                // for nashville we should be doing something more appropriate
+                // but for now, leave as Win95 golden
+                //
+                if (ped->charSet != GREEK_CHARSET && IsCharLowerA(*(pTextBuff + i))) {
                     CharUpperBuffA(pTextBuff + i, 1);
                     CharToOemBuffA(pTextBuff + i, pTextBuff + i, 1);
                     OemToCharBuffA(pTextBuff + i, pTextBuff + i, 1);
@@ -1649,46 +2225,70 @@ BOOL ECInsertText(
                 }
             }
         } else {
-            CHAR ch;
+            //
+            // Because 'ch' may become DBCS, and have a space for NULL.
+            //
+            UCHAR ch[4];
             LPWSTR lpTextW = (LPWSTR)pTextBuff;
 
-            for (i = 0; i < cchInsert; i++) {
+            for (i = 0; i < *pcchInsert; i++) {
                 if (*(lpTextW + i) == UNICODE_CARRIAGERETURN ||
-                        *(lpTextW + i) == UNICODE_LINEFEED ||
-                        *(lpTextW + i) == UNICODE_TAB) {
+                    *(lpTextW + i) == UNICODE_LINEFEED ||
+                    *(lpTextW + i) == UNICODE_TAB) {
                     continue;
                 }
-                if (IsCharLowerW(*(lpTextW + i))) {
+                //
+                // Windows Bug (Whistler) 35289
+                // greek has funny rules for casing, so we need to check for it.
+                // for nashville we should be doing something more appropriate
+                // but for now, leave as Win95 golden
+                //
+                if (ped->charSet != GREEK_CHARSET && IsCharLowerW(*(lpTextW + i))) {
                     CharUpperBuffW(lpTextW + i, 1);
-                    CharToOemBuffW(lpTextW + i, &ch, 1);
-                    OemToCharBuffW(&ch, lpTextW + i, 1);
+                    *(LPDWORD)ch = 0; // make sure the null-terminate.
+                    CharToOemBuffW(lpTextW + i, ch, 1);
+                    //
+                    // We assume any SBCS/DBCS character will converted
+                    // to 1 Unicode char, Otherwise, we may overwrite
+                    // next character...
+                    //
+                    OemToCharBuffW(ch, lpTextW + i, strlen(ch));
                     CharLowerBuffW(lpTextW + i, 1);
                 } else {
-                    CharToOemBuffW(lpTextW + i, &ch, 1);
-                    OemToCharBuffW(&ch, lpTextW + i, 1);
+                    *(LPDWORD)ch = 0; // make sure the null-terminate.
+                    CharToOemBuffW(lpTextW + i, ch, 1);
+                    //
+                    // We assume any SBCS/DBCS character will converted
+                    // to 1 Unicode char, Otherwise, we may overwrite
+                    // next character...
+                    //
+                    OemToCharBuffW(ch, lpTextW + i, strlen(ch));
                 }
             }
         }
     }
 
-    ECUnlock(ped);
-
     /* Adjust UNDO fields so that we can undo this insert... */
-    ECMergeUndoInsertInfo(Pundo(ped), ped->ichCaret, cchInsert);
+    ECMergeUndoInsertInfo(Pundo(ped), ped->ichCaret, *pcchInsert);
 
-    ped->ichMinSel = ped->ichMaxSel = (ped->ichCaret += cchInsert);
+    ped->ichCaret += *pcchInsert;
+
+    if (ped->pLpkEditCallout) {
+        HDC     hdc;
+
+        hdc = ECGetEditDC (ped, TRUE);
+        ped->ichCaret = ped->pLpkEditCallout->EditAdjustCaret (ped, hdc, pedText, ped->ichCaret);
+        ECReleaseEditDC (ped, hdc, TRUE);
+    }
+
+    ped->ichMinSel = ped->ichMaxSel = ped->ichCaret;
+
+    ECUnlock(ped);
 
     /*
      * Set dirty bit
      */
     ped->fDirty = TRUE;
-#line 1684
-#ifdef SUPPORT_LPK
-#line 1685
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 1688
-#endif // SUPPORT_LPK
-#line 1689
 
     return TRUE;
 }
@@ -1803,8 +2403,6 @@ UNDODELETE:
                 (ped->cch - ped->ichMaxSel)*ped->cbChar);
     }
 
-    ECUnlock(ped);
-
     if (ped->cchAlloc - ped->cch > CCHALLOCEXTRA) {
 
         /*
@@ -1815,7 +2413,18 @@ UNDODELETE:
     }
 
     ped->cch -= cchDelete;
+
+    if (ped->pLpkEditCallout) {
+        HDC     hdc;
+
+        hdc = ECGetEditDC (ped, TRUE);
+        ped->ichMinSel = ped->pLpkEditCallout->EditAdjustCaret (ped, hdc, pedText, ped->ichMinSel);
+        ECReleaseEditDC (ped, hdc, TRUE);
+    }
+
     ped->ichCaret = ped->ichMaxSel = ped->ichMinSel;
+
+    ECUnlock(ped);
 
     /*
      * Set dirty bit
@@ -1844,8 +2453,8 @@ void ECNotifyParent(
      * this is surely rare, and SendMessage NULL hwnd does nowt anyway (IanJa)
      */
     SendMessage(ped->hwndParent, WM_COMMAND,
-            (DWORD)MAKELONG(ped->pwnd->spmenu, notificationCode),
-            (LONG)ped->hwnd);
+            (DWORD)MAKELONG(PTR_TO_ID(ped->pwnd->spmenu), notificationCode),
+            (LPARAM)ped->hwnd);
 }
 
 /***************************************************************************\
@@ -1863,10 +2472,16 @@ void   ECSetEditClip(PED ped, HDC hdc, BOOL fLeftMargin)
 
     CopyRect(&rcClip, &ped->rcFmt);
 
-    if (fLeftMargin)  /* Should we consider the left margin?   */
+    if (ped->pLpkEditCallout) {
+        // Complex script handling chooses whether to write margins later
         rcClip.left  -= ped->wLeftMargin;
-    if (ped->fWrap)        /* Should we consider the right margin? */
         rcClip.right += ped->wRightMargin;
+    } else {
+        if (fLeftMargin)  /* Should we consider the left margin?   */
+            rcClip.left  -= ped->wLeftMargin;
+        if (ped->fWrap)        /* Should we consider the right margin? */
+            rcClip.right += ped->wRightMargin;
+    }
 
     /* Set clip rectangle to rectClient intersect rectClip */
     /* We must clip for single line edits also. -- B#1360 */
@@ -1957,24 +2572,14 @@ void   ECResetTextInfo(PED ped)
 
     ECEmptyUndo(Pundo(ped));
 
-#line 1957
-#ifdef SUPPORT_LPK
-#line 1958
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 1960
-#endif // SUPPORT_LPK
-#line 1961
     if (ped->fSingle) {
         if (!ped->listboxHwnd)
             ECNotifyParent(ped, EN_UPDATE);
     } else {
-#line 1965
 #ifdef BOGUS
-#line 1966
-#error DIVERGENCE OPENNT-HOST-131: BOGUS branch is not selected; see mirror register.
-#line 1970
+#error DIVERGENCE: unselected retail EDIT profile.
 #endif
-#line 1971
+#line 2591
         MLBuildchLines(ped, 0, 0, FALSE, NULL, NULL);
     }
 
@@ -1998,8 +2603,11 @@ void   ECResetTextInfo(PED ped)
             UpdateWindow(ped->hwnd);
     }
 
-    if (ped->fSingle && !ped->listboxHwnd)
+    if (ped->fSingle && !ped->listboxHwnd) {
         ECNotifyParent(ped, EN_CHANGE);
+    }
+
+    NotifyWinEvent(EVENT_OBJECT_VALUECHANGE, HW(ped->pwnd), OBJID_CLIENT, INDEXID_CONTAINER);
 }
 
 /***************************************************************************\
@@ -2036,18 +2644,15 @@ BOOL ECSetText(
     } else {
         cchLength = StringLength(lpstr, ped->fAnsi);
 
-#line 2032
 #ifdef NEVER
-#line 2033
-#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
-#line 2041
+#error DIVERGENCE: unselected retail EDIT profile.
 #endif
-#line 2042
+#line 2665
 
         /*
          * Add the text
          */
-        if (cchLength && !ECInsertText(ped, lpstr, cchLength)) {
+        if (cchLength && !ECInsertText(ped, lpstr, &cchLength)) {
 
             /*
              * Restore original state and notify parent we ran out of memory.
@@ -2119,11 +2724,13 @@ ICH ECCopy(
 
     cbData = (ped->ichMaxSel - ped->ichMinSel) * ped->cbChar;
 
-    if (!cbData) return (0);
+    if (!cbData)
+        return 0;
 
-    if (!OpenClipboard(ped->hwnd)) return (0);
+    if (!OpenClipboard(ped->hwnd))
+        return 0;
 
-    EmptyClipboard();
+    NtUserEmptyClipboard();
 
     /*
      * If we just called EmptyClipboard in the context of a 16 bit
@@ -2146,11 +2753,12 @@ ICH ECCopy(
      * +1 for the terminating NULL
      */
     if (!(hData = UserGlobalAlloc(LHND, (LONG)(cbData + ped->cbChar)))) {
-        CloseClipboard();
+        NtUserCloseClipboard();
         return (0);
     }
 
     USERGLOBALLOCK(hData, lpchClip);
+    UserAssert(lpchClip);
     pchSel = ECLock(ped);
     pchSel = pchSel + (ped->ichMinSel * ped->cbChar);
 
@@ -2166,7 +2774,7 @@ ICH ECCopy(
 
     SetClipboardData( ped->fAnsi ? CF_TEXT : CF_UNICODETEXT, hData);
 
-    CloseClipboard();
+    NtUserCloseClipboard();
 
     return (cbData);
 }
@@ -2182,11 +2790,11 @@ ICH ECCopy(
 *
 \***************************************************************************/
 
-LONG EditWndProcA(
+LRESULT EditWndProcA(
     HWND hwnd,
     UINT message,
     WPARAM wParam,
-    LONG lParam)
+    LPARAM lParam)
 {
     PWND pwnd;
 
@@ -2203,11 +2811,11 @@ LONG EditWndProcA(
     return EditWndProcWorker(pwnd, message, wParam, lParam, TRUE);
 }
 
-LONG EditWndProcW(
+LRESULT EditWndProcW(
     HWND hwnd,
     UINT message,
     WPARAM wParam,
-    LONG lParam)
+    LPARAM lParam)
 {
     PWND pwnd;
 
@@ -2226,7 +2834,7 @@ LONG EditWndProcW(
 }
 
 
-LONG EditWndProcWorker(
+LRESULT EditWndProcWorker(
     PWND pwnd,
     UINT message,
     WPARAM wParam,
@@ -2266,14 +2874,10 @@ LONG EditWndProcWorker(
         return EditWndProc(pwnd, message, wParam, lParam);
     }
 
-    if (fAnsi)
-        return CsSendMessage(HWq(pwnd), message, wParam, lParam, (DWORD)EditWndProcW,
-                    FNID_CALLWINDOWPROC, TRUE);
-    else
-        return CsSendMessage(HWq(pwnd), message, wParam, lParam, (DWORD)EditWndProcA,
-                    FNID_CALLWINDOWPROC, FALSE);
+    return CsSendMessage(hwnd, message, wParam, lParam,
+                         fAnsi ? (ULONG_PTR)EditWndProcW : (ULONG_PTR)EditWndProcA,
+                         FNID_CALLWINDOWPROC, fAnsi);
 }
-
 
 /***************************************************************************\
 * EditWndProc
@@ -2303,14 +2907,14 @@ LONG EditWndProcWorker(
 * History:
 \***************************************************************************/
 
-LONG EditWndProc(
+LRESULT EditWndProc(
     PWND pwnd,
     UINT message,
-    DWORD wParam,
-    LONG lParam)
+    WPARAM wParam,
+    LPARAM lParam)
 {
     HWND hwnd = HWq(pwnd);
-    LONG lreturn;
+    LRESULT lreturn;
     PED  ped;
 
     /*
@@ -2330,34 +2934,106 @@ LONG EditWndProc(
      * Messages which are handled the same way for both single and multi line
      * edit controls.
      */
+    case WM_KEYDOWN:
+         // LPK handling of Ctrl/LShift, Ctrl/RShift
+         if (ped && ped->pLpkEditCallout && ped->fAllowRTL) {
 
-#line 2330
-#ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
-#line 2331
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2340
-#endif // SUPPORT_LPK
-#line 2341
-            goto HandleEditMsg;
+             ped->fSwapRoOnUp = FALSE; // Any keydown cancels a ctrl/shift reading order change
 
-        break;
+             switch (wParam) {
+                 case VK_SHIFT:
+                     if ((GetKeyState(VK_CONTROL) & 0x8000) && !(GetKeyState(VK_MENU) & 0x8000)) {
+                         // Left shift or right shift pressed while control held down
+                         // Check that alt (VK_MENU) isn't down to avoid false firing on AltGr which equals Ctrl+Alt.
+                         if (MapVirtualKey((LONG)lParam>>16&0xff, 3) == VK_LSHIFT) {
+                             // User wants left to right reading order
+                             ped->fSwapRoOnUp = (ped->fRtoLReading)  || (ped->format & ES_RIGHT) ;
+                             ped->fLShift = TRUE;
+                         } else {
+                             // User wants right to left reading order
+                             ped->fSwapRoOnUp = (!ped->fRtoLReading) || (ped->format & ES_RIGHT);
+                             ped->fLShift = FALSE;
+                         }
+                     }
+                     break;
 
-#line 2345
-#ifdef SUPPORT_LPK
-#line 2346
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2355
-#endif // SUPPORT_LPK
-#line 2356
+                 case VK_LEFT:
+                     if (ped->fRtoLReading) {
+                        wParam = VK_RIGHT;
+                     }
+                     break;
+
+                 case VK_RIGHT:
+                     if (ped->fRtoLReading) {
+                         wParam = VK_LEFT;
+                     }
+                     break;
+             }
+         }
+         goto HandleEditMsg;
+
+    case WM_KEYUP:
+        if (ped && ped->pLpkEditCallout && ped->fAllowRTL && ped->fSwapRoOnUp) {
+
+            BOOL fReadingOrder;
+            // Complete reading order change detected earlier during keydown
+
+            ped->fSwapRoOnUp = FALSE;
+            fReadingOrder = ped->fRtoLReading;
+
+            // Remove any overriding ES_CENTRE or ES_RIGHT format from dwStyle
+            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~ES_FMTMASK);
+
+            if (ped->fLShift) {
+                // Set Left to Right reading order and right scrollbar in EX_STYLE
+                SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE)
+                              & ~(WS_EX_RTLREADING | WS_EX_RIGHT | WS_EX_LEFTSCROLLBAR));
+
+                // Edit control is LTR now, then notify the parent.
+                ECNotifyParent(ped, EN_ALIGN_LTR_EC);
+                // ? Select a keyboard layout appropriate to LTR operation
+            } else {
+                // Set Right to Left reading order, right alignment and left scrollbar
+                SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE)
+                              | WS_EX_RTLREADING | WS_EX_RIGHT | WS_EX_LEFTSCROLLBAR);
+
+                // Edit control is RTL now, then notify the parent.
+                ECNotifyParent(ped, EN_ALIGN_RTL_EC);
+                // ? Select a keyboard layout appropriate to RTL operation
+            }
+
+            // If reading order didn't change, so we are sure the alignment changed and the edit window didn't invalidate yet.
+            if (fReadingOrder == (BOOL) ped->fRtoLReading) {
+              ECInvalidateClient(ped, TRUE);
+            }
+        }
+        goto HandleEditMsg;
 
     case WM_INPUTLANGCHANGE:
-#line 2358
-#ifdef SUPPORT_LPK
-#line 2359
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 2362
-#endif // SUPPORT_LPK
-#line 2363
+        if (ped) {
+            // EC_INSERT_COMPOSITION_CHAR : WM_INPUTLANGCHANGE - call ECInitInsert()
+            HKL hkl = THREAD_HKL();
+
+            ECInitInsert(ped, hkl);
+
+            if (ped->fInReconversion) {
+                ECInOutReconversionMode(ped, FALSE);
+            }
+
+            //
+            // Font and caret position might be changed while
+            // another keyboard layout is active. Set those
+            // if the edit control has the focus.
+            //
+            if (ped->fFocus && fpImmIsIME(hkl)) {
+                POINT pt;
+
+                ECImmSetCompositionFont(ped);
+                NtUserGetCaretPos(&pt);
+                ECImmSetCompositionWindow(ped, pt.x, pt.y);
+            }
+        }
+
         goto HandleEditMsg;
 
     case WM_COPY:
@@ -2409,7 +3085,7 @@ LONG EditWndProc(
         if ((lParam & SYS_ALTERNATE) && ((WORD)wParam == VK_BACK))
             return TRUE;
         else {
-            return DefWindowProcWorker(ped->pwnd, message, wParam, lParam, ped->fAnsi);
+            return DefWindowProcWorker(pwnd, message, wParam, lParam, ped->fAnsi);
         }
         break;
 
@@ -2468,7 +3144,7 @@ LONG EditWndProc(
          * wParam - not used
            lParam - not used
          */
-        lreturn = (LONG)ped->hFont;
+        lreturn = (LRESULT)ped->hFont;
         break;
 
     case WM_SETFONT:
@@ -2486,7 +3162,7 @@ LONG EditWndProc(
          * wParam - max number of _bytes_ (not characters) to copy
          * lParam - buffer to copy text to. Text is 0 terminated.
          */
-        lreturn = (LONG)ECGetText(ped, wParam, (LPSTR)lParam, TRUE);
+        lreturn = (LRESULT)ECGetText(ped, (ICH)wParam, (LPSTR)lParam, TRUE);
         break;
 
     case WM_SETTEXT:
@@ -2494,7 +3170,7 @@ LONG EditWndProc(
         // wParamLo --    unused
         // lParam --    LPSTR, null-terminated, with new text.
         //
-        lreturn = (LONG) ECSetText(ped, (LPSTR) lParam);
+        lreturn = (LRESULT)ECSetText(ped, (LPSTR)lParam);
         break;
 
     case WM_GETTEXTLENGTH:
@@ -2535,16 +3211,21 @@ LONG EditWndProc(
     case WM_RBUTTONUP:
         if (ped->fSawRButtonDown) {
             ped->fSawRButtonDown = FALSE;
-            goto HandleEditMsg;
+            if (!ped->fInReconversion) {
+                goto HandleEditMsg;
+            }
         }
         // Don't pass this on to DWP so WM_CONTEXTMENU isn't generated.
         return 0;
 
     case WM_CONTEXTMENU: {
             POINT pt ;
-            pt.x = (short)LOWORD(lParam);
-            pt.y = (short)HIWORD(lParam);
-            if (!TestWF(ped->pwnd, WFOLDUI) && ECIsAncestorActive(hwnd))
+            int nHit = FindNCHit(pwnd, (LONG)lParam);
+            if ((nHit == HTVSCROLL) || (nHit == HTHSCROLL)) {
+                return DefWindowProcWorker(pwnd, message, wParam, lParam, ped->fAnsi);
+            }
+            POINTSTOPOINT(pt, lParam);
+            if (!TestWF(pwnd, WFOLDUI) && ECIsAncestorActive(hwnd))
                 ECMenu(hwnd, ped, &pt);
         }
         return 0;
@@ -2579,7 +3260,7 @@ LONG EditWndProc(
         // wParam --    EC_ margin flags
         // lParam --    LOWORD is left, HIWORD is right margin
         //
-        ECSetMargin(ped, wParam, lParam, TRUE);
+        ECSetMargin(ped, (UINT)wParam, (DWORD)lParam, TRUE);
         return 0;
 
     case EM_GETSEL:
@@ -2645,9 +3326,8 @@ LONG EditWndProc(
         RECT    rc;
         POINT   pt;
 
-        pt.x = (short)LOWORD(lParam);
-        pt.y = (short)HIWORD(lParam);
-        _GetClientRect(ped->pwnd, &rc);
+        POINTSTOPOINT(pt, lParam);
+        _GetClientRect(pwnd, &rc);
         if (!PtInRect(&rc, pt)) {
             return(-1L);
         }
@@ -2674,11 +3354,12 @@ LONG EditWndProc(
          */
         ped->fReadOnly = (wParam != 0);
         if (wParam)
-            SetWindowState(ped->pwnd, EFREADONLY);
+            SetWindowState(pwnd, EFREADONLY);
         else
-            ClearWindowState(ped->pwnd, EFREADONLY);
+            ClearWindowState(pwnd, EFREADONLY);
         lreturn = 1L;
 
+        ECEnableDisableIME( ped );
         // We need to redraw the edit field so that the background color
         // changes.  Read-only edits are drawn in CTLCOLOR_STATIC while
         // others are drawn with CTLCOLOR_EDIT.
@@ -2695,8 +3376,30 @@ LONG EditWndProc(
         break;
 
     case EM_GETWORDBREAKPROC:
-        lreturn = (LONG)ped->lpfnNextWord;
+        lreturn = (LRESULT)ped->lpfnNextWord;
         break;
+
+    // IME
+    case EM_GETIMESTATUS:
+        // wParam == sub command
+        switch (wParam) {
+        case  EMSIS_COMPOSITIONSTRING:
+            return ped->wImeStatus;
+#if 0   // memphis
+#error DIVERGENCE: unselected retail EDIT profile.
+#endif
+#line 3406
+        }
+        break;
+
+    case EM_SETIMESTATUS:
+        // wParam == sub command
+        switch (wParam) {
+        case EMSIS_COMPOSITIONSTRING:
+            ped->wImeStatus = (WORD)lParam;
+        }
+        break;
+
 
     case WM_NCCREATE:
         lreturn = ECNcCreate(ped, pwnd, (LPCREATESTRUCT)lParam);
@@ -2710,8 +3413,33 @@ LONG EditWndProc(
         // We might want to version switch this...  I haven't found
         // any problems by not, but you never know...
         //
-        if (ECIsAncestorActive(hwnd))
+        if (ECIsAncestorActive(hwnd)) {
+            /*
+             * Reconversion support: quit reconversion if left button is clicked.
+             * Otherwise, if the current KL is Korean, finailize the composition string.
+             */
+            if (ped->fInReconversion || ped->fKorea) {
+                BOOLEAN fReconversion = (BOOLEAN)ped->fInReconversion;
+                DWORD dwIndex = fReconversion ? CPS_CANCEL : CPS_COMPLETE;
+                HIMC hImc;
+
+                ped->fReplaceCompChr = FALSE;
+
+                hImc = fpImmGetContext(ped->hwnd);
+                if (hImc) {
+                    fpImmNotifyIME(hImc, NI_COMPOSITIONSTR, dwIndex, 0);
+                    fpImmReleaseContext(ped->hwnd, hImc);
+                }
+
+                if (fReconversion) {
+                    ECInOutReconversionMode(ped, FALSE);
+                }
+
+                ECSetCaretHandler(ped);
+            }
+
             goto HandleEditMsg;
+        }
         break;
 
     case WM_MOUSEMOVE:
@@ -2722,18 +3450,184 @@ LONG EditWndProc(
             goto HandleEditMsg;
         break;
 
+    case WM_IME_SETCONTEXT:
+        //
+        // If ped->fInsertCompChr is TRUE, that means we will do
+        // all the composition character drawing by ourself.
+        //
+        if ( ped->fInsertCompChr ) {
+            lParam &= ~ISC_SHOWUICOMPOSITIONWINDOW;
+        }
+
+        if ( wParam ) {
+
+#line 3479
+            HIMC hImc;
+
+            hImc = fpImmGetContext( hwnd );
+#line 3486
+            if (GetClientInfo()->CI_flags & CI_16BIT) {
+                fpImmNotifyIME(hImc, NI_COMPOSITIONSTR, CPS_CANCEL, 0L);
+            }
+            fpImmReleaseContext( hwnd, hImc );
+        }
+        return DefWindowProcWorker(pwnd, message, wParam, lParam, ped->fAnsi);
+
+    case WM_IME_ENDCOMPOSITION:
+        ECInOutReconversionMode(ped, FALSE);
+
+        if (ped->fReplaceCompChr) {
+            ICH ich;
+            HDC hdc;
+            //
+            // we have a DBCS character to be replaced.
+            // let's delete it before inserting the new one.
+            //
+            ich = (ped->fAnsi) ? 2 : 1;
+            ped->fReplaceCompChr = FALSE;
+            ped->ichMaxSel = min(ped->ichCaret + ich, ped->cch);
+            ped->ichMinSel = ped->ichCaret;
+            if (ped->fSingle) {
+                if (ECDeleteText( ped ) > 0) {
+                    //
+                    // Update the display
+                    //
+                    ECNotifyParent(ped, EN_UPDATE);
+                    hdc = ECGetEditDC(ped, FALSE);
+                    SLDrawText(ped, hdc, 0);
+                    ECReleaseEditDC(ped, hdc, FALSE);
+                    //
+                    // Tell parent our text contents changed.
+                    //
+                    ECNotifyParent(ped, EN_CHANGE);
+                }
+            }
+            else {
+                MLDeleteText(ped);
+            }
+
+            ECSetCaretHandler( ped );
+        }
+        return DefWindowProcWorker(pwnd, message, wParam, lParam, ped->fAnsi);
+
+    case WM_IME_STARTCOMPOSITION:
+        if ( ped->fInsertCompChr ) {
+            //
+            // NOTE:
+            // sending WM_IME_xxxCOMPOSITION will let
+            // IME draw composition window. IME should
+            // not do that since we cleared
+            // ISC_SHOWUICOMPOSITIONWINDOW bit when
+            // we got WM_IME_SETCONTEXT message.
+            //
+            // Korean IME should be fixed in the future.
+            //
+            break;
+
+        } else {
+            return DefWindowProcWorker(pwnd, message, wParam, lParam, ped->fAnsi);
+        }
+
+    // simple composition character support for FE IME.
+    case WM_IME_COMPOSITION:
+        return ECImeComposition(ped, wParam, lParam);
+
+    case WM_KILLFOCUS:
+        //
+        // when focus is removed from the window,
+        // composition character should be finalized
+        //
+        if (ped && fpImmIsIME(THREAD_HKL())) {
+            HIMC hImc = fpImmGetContext(hwnd);
+
+            if (hImc != NULL_HIMC) {
+                if (ped->fReplaceCompChr || (ped->wImeStatus & EIMES_COMPLETECOMPSTRKILLFOCUS)) {
+                    // If the composition string to be determined upon kill focus,
+                    // do it now.
+                    fpImmNotifyIME(hImc, NI_COMPOSITIONSTR, CPS_COMPLETE, 0);
+                } else if (ped->fInReconversion) {
+                    // If the composition string it not to be determined,
+                    // and if we're in reconversion mode, cancel reconversion now.
+                    fpImmNotifyIME(hImc, NI_COMPOSITIONSTR, CPS_CANCEL, 0);
+                }
+
+                // Get out from reconversion mode
+                if (ped->fInReconversion) {
+                    ECInOutReconversionMode(ped, FALSE);
+                }
+
+                fpImmReleaseContext(hwnd, hImc);
+            }
+        }
+        goto HandleEditMsg;
+        break;
+
+    case WM_SETFOCUS:
+        if (ped && !ped->fFocus) {
+            HKL hkl = THREAD_HKL();
+
+            if (fpImmIsIME(hkl)) {
+                HIMC hImc;
+
+                hImc = fpImmGetContext(hwnd);
+                if (hImc) {
+#line 3593
+                    if (ped->wImeStatus & EIMES_CANCELCOMPSTRINFOCUS) {
+                        // cancel when in-focus
+                        fpImmNotifyIME(hImc, NI_COMPOSITIONSTR, CPS_CANCEL, 0);
+                    }
+
+                    ECImmSetCompositionFont(ped);
+
+#line 3610
+                    fpImmReleaseContext(hwnd, hImc);
+                }
+
+                //
+                // force to set IME composition window when
+                // first getting focus.
+                //
+                ped->ptScreenBounding.x = -1;
+                ped->ptScreenBounding.y = -1;
+            }
+            /*
+             * Insert and replace flags are initialized when the edit control gets the focus.
+             *
+             * Compat hack: a bogus application tries to cheat the system by sending input messages
+             * *before* it sets the focus to the edit control. They rely on the flags not being set
+             * at WM_SETFOCUS. Raid #411686
+             */
+            if ((GetAppCompatFlags2(VER40) & GACF2_NO_INIT_ECFLAGS_ON_SETFOCUS) == 0) {
+                ECInitInsert(ped, hkl);
+            }
+        }
+        goto HandleEditMsg;
+        break;
+
+    case WM_IME_REQUEST:
+        // simple ImeRequest Handler
+        return EcImeRequestHandler(ped, wParam, lParam);
+
+    case WM_CREATE:
+        if (ped)
+            ECEnableDisableIME(ped);
+        goto HandleEditMsg;
+        break;
+
     default:
 HandleEditMsg:
-        /*
+        /* (picked up from NT40FE SP3)
          * HACK ALERT: We may receive messages before the PED has been
          * allocated (eg: WM_GETMINMAXINFO is sent before WM_NCCREATE)
          * so we must test ped before dreferencing.
          */
-        if (ped && ped->fSingle)
-            lreturn = SLEditWndProc(hwnd, ped, message, wParam, lParam);
-        else
-            lreturn = MLEditWndProc(hwnd, ped, message, wParam, lParam);
-        break;
+        if (ped != NULL) {
+            if (ped->fSingle) {
+                lreturn = SLEditWndProc(hwnd, ped, message, wParam, lParam);
+            } else {
+                lreturn = MLEditWndProc(hwnd, ped, message, wParam, lParam);
+            }
+        }
     }
 
     return lreturn;
@@ -2901,105 +3795,29 @@ HBRUSH ECGetControlBrush(
     UserAssert(pwndSend);
 
     if (PtiCurrent() != GETPTI(pwndSend)) {
-#line 2906
         return (HBRUSH)wow_edit_default_control_color(pwndSend, message,
-                (DWORD)hdc, (LONG)pwndEdit, ped->fAnsi);
+                (WPARAM)hdc, (LPARAM)pwndEdit, ped->fAnsi);
     }
 
     /*
      * By using the correct A/W call we avoid a c/s transition
      * on this SendMessage().
      */
-    return (HBRUSH)SendMessageWorker(pwndSend, message, (DWORD)hdc,
-            (LONG)ped->hwnd, ped->fAnsi);
+    return (HBRUSH)SendMessageWorker(pwndSend, message, (WPARAM)hdc,
+            (LPARAM)ped->hwnd, ped->fAnsi);
 }
 
-#include "wow_button_lifetime.h"
-BOOL WINAPI wow_original_finalize_control(HWND window)
-{
-    DWORD error = GetLastError();
-    PWND state = wow_window_client_validate_hwnd(window);
-    WORD fnid;
-    const wow_control_entry_provider *provider;
-    if (!state) return FALSE;
-    /* ADAPTER-WOW-059: original xxxFreeWindow's canonical control fallback,
-     * for the recovered EDIT/ComboBox/ListBox collaboration group. Do not
-     * allocate private control data solely to free an uninitialized control. */
-    if (!state->fnid && !((PEDITWND)state)->ped) {
-        SetLastError(error);
-        return TRUE;
-    }
-    fnid = GETFNID(state);
-    if (fnid != FNID_EDIT && fnid != FNID_COMBOBOX && fnid != FNID_LISTBOX &&
-            fnid != FNID_BUTTON) {
-        SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
-    }
-    /* Failed creation/normal cleanup may leave a freed, nonzero PED slot. */
-    if (state->fnid & FNID_CLEANEDUP_BIT) {
-        SetLastError(error);
-        return TRUE;
-    }
-    if (state->fnid & FNID_DELETED_BIT) {
-        SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
-    }
-    if (!wow_window_client_prepare_graph(window)) return FALSE;
-    SetLastError(error);
-    /* Original winuserp.h WM_FINALDESTROY. The enclosing finalize_bound
-     * already established task/borrow and early-resource permission. Enter
-     * the canonical body directly, not another application/dispatch scope. */
-    provider = wow_control_original_provider();
-    if (fnid == FNID_EDIT) (void)provider->edit_w(window, 0x0070, 0, 0);
-    else if (fnid == FNID_COMBOBOX) (void)provider->combo_w(window, 0x0070, 0, 0);
-    else if (fnid == FNID_LISTBOX) (void)provider->list_w(window, 0x0070, 0, 0);
-    else (void)wow_button_invoke(window, 0x0070, 0, 0, provider->button_w);
-    /* Original handler returns zero for success and rejection alike. The
-     * caller's borrow keeps state alive across nested combo notification. */
-    if (!(state->fnid & FNID_CLEANEDUP_BIT)) {
-        SetLastError(ERROR_INVALID_STATE);
-        return FALSE;
-    }
-    SetLastError(error);
-    return TRUE;
-}
-
-#line 4137
-WORD DbcsCombine(HWND hwnd, WORD ch)
-{
-    MSG msg;
-    int i = 10; /* loop counter to avoid the infinite loop */
-
-    while (!PeekMessageA(&msg, hwnd, WM_CHAR, WM_CHAR, PM_REMOVE)) {
-        if (--i == 0)
-            return 0;
-        Sleep(1);
-    }
-
-    return (WORD)ch | ((WORD)(msg.wParam) << 8);
-}
-
-
-#line 402
-void ECInOutReconversionMode(PED ped, BOOL fIn)
-{
-    UserAssert(fIn == TRUE || fIn == FALSE);
-    if (fIn == ped->fInReconversion) {
-        return;
-    }
-    ped->fInReconversion = fIn;
-    if (ped->fFocus) {
-        (fIn ? NtUserHideCaret: NtUserShowCaret)(ped->hwnd);
-    }
-
-    return;
-}
-
-#line 3837
 UINT WINAPI QueryFontAssocStatus(void);
 UINT fFontAssocStatus = 0xffff;
 
-#line 3848
+/***************************************************************************\
+* ECGetDBCSVector( PED ped, BYTE CharSet )
+*
+*   This function sets DBCS Vector for specified character set and sets
+*   ped->fDBCS flag if needed.
+*
+* History: 18-Jun-1996 Hideyuki Nagase
+\***************************************************************************/
 int ECGetDBCSVector(PED ped, HDC hdc, BYTE CharSet)
 {
     BOOL bDBCSCodePage = FALSE;
@@ -3098,3 +3916,355 @@ int ECGetDBCSVector(PED ped, HDC hdc, BYTE CharSet)
 
     return bDBCSCodePage;
 }
+
+/***************************************************************************\
+* LPSTR ECAnsiNext( ped, lpCurrent )
+*
+*   This function advances string pointer for Edit Control use only.
+*
+* History:
+\***************************************************************************/
+LPSTR ECAnsiNext(PED ped, LPSTR lpCurrent)
+{
+    return lpCurrent+((ECIsDBCSLeadByte(ped,*lpCurrent)==TRUE) ? 2 : 1);
+}
+
+/***************************************************************************\
+* LPSTR ECAnsiPrev( ped, lpBase, lpStr )
+*
+*   This function decrements string pointer for Edit Control use only.
+*
+* History:
+\***************************************************************************/
+LPSTR ECAnsiPrev(PED ped, LPSTR lpBase, LPSTR lpStr )
+{
+    LPSTR lpCurrent = lpStr -1;
+
+    if (!ped->fDBCS)
+        return lpCurrent;                        // just return ( lpStr - 1 )
+
+    if (lpBase >= lpCurrent)
+        return lpBase;
+
+    if (ECIsDBCSLeadByte(ped, *lpCurrent))     // this check makes things faster
+        return (lpCurrent - 1);                  // 92/04/04 takaok
+
+    do {
+        lpCurrent--;
+        if (!ECIsDBCSLeadByte(ped, *lpCurrent)) {
+            lpCurrent++;
+            break;
+        }
+    } while(lpCurrent != lpBase);
+
+    return lpStr - (((lpStr - lpCurrent) & 1) ? 1 : 2);
+}
+
+/***************************************************************************\
+* ICH ECNextIch( ped, pText, ichCurrent )
+*
+*   This function advances string pointer for Edit Control use only.
+*
+* History:
+\***************************************************************************/
+ICH ECNextIch( PED ped, LPSTR pStart, ICH ichCurrent )
+{
+    if (!ped->fDBCS || !ped->fAnsi) {
+
+        return (ichCurrent + 1);
+
+    } else {
+
+        ICH ichRet;
+        LPSTR pText;
+
+        if (pStart)
+            pText = pStart + ichCurrent;
+        else
+            pText = (LPSTR)ECLock(ped) + ichCurrent;
+
+        ichRet = ichCurrent + ( ECIsDBCSLeadByte(ped, *pText) ? 2 : 1 );
+
+        if (!pStart)
+            ECUnlock(ped);
+
+        return (ichRet);
+    }
+}
+
+/***************************************************************************\
+* ICH ECPrevIch( ped, LPSTR pStart, ICH ichCurrent )
+*
+*   This function decrements string pointer for Edit Control use only.
+*
+* History:
+\***************************************************************************/
+ICH ECPrevIch( PED ped, LPSTR pStart, ICH ichCurrent )
+{
+    LPSTR lpCurrent;
+    LPSTR lpStr;
+    LPSTR lpBase;
+
+#ifdef SURROGATE
+#error DIVERGENCE: unselected retail EDIT profile.
+#endif
+#line 4039
+        if (!ped->fDBCS || !ped->fAnsi)
+            if ( ichCurrent )
+                return (ichCurrent - 1);
+            else
+                return (ichCurrent);
+
+    if (ichCurrent <= 1)
+        return 0;
+
+    if (pStart)
+        lpBase = pStart;
+    else
+        lpBase = ECLock(ped);
+
+#ifdef SURROGATE
+#error DIVERGENCE: unselected retail EDIT profile.
+#endif
+#line 4061
+
+        lpStr = lpBase + ichCurrent;
+        lpCurrent = lpStr - 1;
+        if (ECIsDBCSLeadByte(ped,*lpCurrent)) {
+            if (!pStart)
+                ECUnlock(ped);
+            return (ichCurrent - 2);
+        }
+
+        do {
+            lpCurrent--;
+            if (!ECIsDBCSLeadByte(ped, *lpCurrent)) {
+                lpCurrent++;
+                break;
+            }
+        } while(lpCurrent != lpBase);
+
+        if (!pStart)
+            ECUnlock(ped);
+        return (ichCurrent - (((lpStr - lpCurrent) & 1) ? 1 : 2));
+
+#ifdef SURROGATE
+#error DIVERGENCE: unselected retail EDIT profile.
+#endif
+#line 4102
+}
+
+/***************************************************************************\
+* BOOL ECIsDBCSLeadByte( PED ped, BYTE cch )
+*
+*   IsDBCSLeadByte for Edit Control use only.
+*
+* History: 18-Jun-1996 Hideyuki Nagase
+\***************************************************************************/
+BOOL ECIsDBCSLeadByte(PED ped, BYTE cch)
+{
+    int i;
+
+    if (!ped->fDBCS || !ped->fAnsi)
+        return (FALSE);
+
+    for (i = 0; ped->DBCSVector[i]; i += 2) {
+        if ((ped->DBCSVector[i] <= cch) && (ped->DBCSVector[i+1] >= cch))
+            return (TRUE);
+    }
+
+    return (FALSE);
+}
+
+/***************************************************************************\
+* int DBCSCombine(HWND hwnd, int ch)
+*
+* Assemble two WM_CHAR messages to single DBCS character.
+* If program detects first byte of DBCS character in WM_CHAR message,
+* it calls this function to obtain second WM_CHAR message from queue.
+* finally this routine assembles first byte and second byte into single
+* DBCS character.
+*
+* History:
+\***************************************************************************/
+WORD DbcsCombine(HWND hwnd, WORD ch)
+{
+    MSG msg;
+    int i = 10; /* loop counter to avoid the infinite loop */
+
+    while (!PeekMessageA(&msg, hwnd, WM_CHAR, WM_CHAR, PM_REMOVE)) {
+        if (--i == 0)
+            return 0;
+        Sleep(1);
+    }
+
+    return (WORD)ch | ((WORD)(msg.wParam) << 8);
+}
+
+/***************************************************************************\
+* ICH ECAdjustIch( PED ped, LPSTR lpstr, ICH ch )
+*
+* This function adjusts a current pointer correctly. If a current
+* pointer is lying between DBCS first byte and second byte, this
+* function adjusts a current pointer to a first byte of DBCS position
+* by decrement once.
+*
+* History:
+\***************************************************************************/
+ICH ECAdjustIch( PED ped, LPSTR lpstr, ICH ch )
+{
+    ICH newch = ch;
+
+    if (!ped->fAnsi || !ped->fDBCS || newch == 0)
+        return ( ch );
+
+    if (!ECIsDBCSLeadByte(ped,lpstr[--newch]))
+        return ( ch );  // previous char is SBCS
+    while(1) {
+        if (!ECIsDBCSLeadByte(ped,lpstr[newch])) {
+            newch++;
+            break;
+        }
+        if (newch)
+            newch--;
+        else
+            break;
+    }
+    return ((ch - newch) & 1) ? ch-1 : ch;
+}
+
+/***************************************************************************\
+* ICH ECAdjustIchNext( PED ped, LPSTR lpstr, ICH ch )
+*
+* History:
+* 19.Jun.1996 Hideyuki Nagase [hideyukn] - Port from Win95-FarEast version
+\***************************************************************************/
+
+ICH FAR PASCAL ECAdjustIchNext(PED ped, LPSTR lpstr, ICH ch)
+{
+    ICH ichNew = ECAdjustIch(ped,lpstr,ch);
+    LPSTR lpnew = lpstr+ichNew;
+
+    // if ch > ichNew then ECAdjustIch adjusted ich.
+    if (ch > ichNew)
+       lpnew = ECAnsiNext(ped, lpnew);
+
+    return (ICH)(lpnew-lpstr);
+}
+
+/***************************************************************************\
+* ECUpdateFormat
+*
+* Computes ped->format and ped->fRtoLReading from dwStyle and dwExStyle.
+* Refreshes the display if either are changed.
+*
+* History:
+*    May 12, 1997   [samera]     wrote it
+*    May 12, 1997   [dbrown]     rewrote it
+\***************************************************************************/
+
+void ECUpdateFormat(
+    PED   ped,
+    DWORD dwStyle,
+    DWORD dwExStyle)
+{
+    UINT fNewRtoLReading;
+    UINT uiNewFormat;
+
+    // Extract new format and reading order from style
+
+    fNewRtoLReading = dwExStyle & WS_EX_RTLREADING ? 1 : 0;
+    uiNewFormat     = dwStyle & ES_FMTMASK;
+
+
+    // WS_EX_RIGHT is ignored unless dwStyle is ES_LEFT
+
+    if (uiNewFormat == ES_LEFT && dwExStyle & WS_EX_RIGHT) {
+        uiNewFormat = ES_RIGHT;
+    }
+
+
+    // Internally ES_LEFT and ES_RIGHT are swapped for RtoLReading order
+    // (Think of them as ES_LEADING and ES_TRAILING)
+
+    if (fNewRtoLReading) {
+        switch (uiNewFormat) {
+            case ES_LEFT:  uiNewFormat = ES_RIGHT; break;
+            case ES_RIGHT: uiNewFormat = ES_LEFT;  break;
+        }
+    }
+
+
+    // Format change does not cause redisplay by itself
+
+    ped->format = uiNewFormat;
+
+
+    // Refresh display on change of reading order
+
+    if (fNewRtoLReading != ped->fRtoLReading) {
+
+        ped->fRtoLReading = fNewRtoLReading;
+
+        if (ped->fWrap) {
+            // Redo wordwrap
+            MLBuildchLines(ped, 0, 0, FALSE, NULL, NULL);
+            MLUpdateiCaretLine(ped);
+        } else {
+            // Refresh horizontal scrollbar display
+            MLScroll(ped, FALSE, 0xffffffff, 0, TRUE);
+        }
+        ECInvalidateClient(ped, TRUE);
+    }
+}
+
+#include "wow_button_lifetime.h"
+BOOL WINAPI wow_original_finalize_control(HWND window)
+{
+    DWORD error = GetLastError();
+    PWND state = wow_window_client_validate_hwnd(window);
+    WORD fnid;
+    const wow_control_entry_provider *provider;
+    if (!state) return FALSE;
+    /* ADAPTER-WOW-059: original xxxFreeWindow's canonical control fallback,
+     * for the recovered EDIT/ComboBox/ListBox collaboration group. Do not
+     * allocate private control data solely to free an uninitialized control. */
+    if (!state->fnid && !((PEDITWND)state)->ped) {
+        SetLastError(error);
+        return TRUE;
+    }
+    fnid = GETFNID(state);
+    if (fnid != FNID_EDIT && fnid != FNID_COMBOBOX && fnid != FNID_LISTBOX &&
+            fnid != FNID_BUTTON) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    /* Failed creation/normal cleanup may leave a freed, nonzero PED slot. */
+    if (state->fnid & FNID_CLEANEDUP_BIT) {
+        SetLastError(error);
+        return TRUE;
+    }
+    if (state->fnid & FNID_DELETED_BIT) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    if (!wow_window_client_prepare_graph(window)) return FALSE;
+    SetLastError(error);
+    /* Original winuserp.h WM_FINALDESTROY. The enclosing finalize_bound
+     * already established task/borrow and early-resource permission. Enter
+     * the canonical body directly, not another application/dispatch scope. */
+    provider = wow_control_original_provider();
+    if (fnid == FNID_EDIT) (void)provider->edit_w(window, 0x0070, 0, 0);
+    else if (fnid == FNID_COMBOBOX) (void)provider->combo_w(window, 0x0070, 0, 0);
+    else if (fnid == FNID_LISTBOX) (void)provider->list_w(window, 0x0070, 0, 0);
+    else (void)wow_button_invoke(window, 0x0070, 0, 0, provider->button_w);
+    /* Original handler returns zero for success and rejection alike. The
+     * caller's borrow keeps state alive across nested combo notification. */
+    if (!(state->fnid & FNID_CLEANEDUP_BIT)) {
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    SetLastError(error);
+    return TRUE;
+}
+

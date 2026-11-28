@@ -15,18 +15,83 @@
 #include <windows.h>
 #define ID_EC_PROPERTY_MENU 1
 
+#define ID_CNTX_RTL         0x00008000L
+#define ID_CNTX_DISPLAYCTRL 0x00008001L
+#define ID_CNTX_INSERTCTRL  0x00008013L
+#define ID_CNTX_ZWJ         0x00008002L
+#define ID_CNTX_ZWNJ        0x00008003L
+#define ID_CNTX_LRM         0x00008004L
+#define ID_CNTX_RLM         0x00008005L
+#define ID_CNTX_LRE         0x00008006L
+#define ID_CNTX_RLE         0x00008007L
+#define ID_CNTX_LRO         0x00008008L
+#define ID_CNTX_RLO         0x00008009L
+#define ID_CNTX_PDF         0x0000800AL
+#define ID_CNTX_NADS        0x0000800BL
+#define ID_CNTX_NODS        0x0000800CL
+#define ID_CNTX_ASS         0x0000800DL
+#define ID_CNTX_ISS         0x0000800EL
+#define ID_CNTX_AAFS        0x0000800FL
+#define ID_CNTX_IAFS        0x00008010L
+#define ID_CNTX_RS          0x00008011L
+#define ID_CNTX_US          0x00008012L
+
+/*
+ * IME specific context menu string
+ */
+#define STR_IMEOPEN                 700
+#define STR_IMECLOSE                701
+#define STR_SOFTKBDOPEN             702
+#define STR_SOFTKBDCLOSE            703
+#define STR_RECONVERTSTRING         705
+
+
 // Edit field menu
-ID_EC_PROPERTY_MENU MENU LOADONCALL MOVEABLE DISCARDABLE
+ID_EC_PROPERTY_MENU MENUEX LOADONCALL MOVEABLE DISCARDABLE
 BEGIN
     POPUP ""
     BEGIN
         MENUITEM "&Undo",       WM_UNDO
-        MENUITEM SEPARATOR
+        MENUITEM MFT_SEPARATOR
         MENUITEM "Cu&t",        WM_CUT
         MENUITEM "&Copy",       WM_COPY
         MENUITEM "&Paste",      WM_PASTE
         MENUITEM "&Delete",     WM_CLEAR
-        MENUITEM SEPARATOR
+        MENUITEM MFT_SEPARATOR
         MENUITEM "Select &All", EM_SETSEL
+        MENUITEM MFT_SEPARATOR
+        MENUITEM "&Right to left Reading order",      ID_CNTX_RTL,,              MFS_GRAYED
+        MENUITEM "&Show Unicode control characters",  ID_CNTX_DISPLAYCTRL,,      MFS_GRAYED
+        POPUP    "&Insert Unicode control character", ID_CNTX_INSERTCTRL,,       MFS_GRAYED
+        BEGIN
+            MENUITEM "LRM \t&Left-to-right mark",                 ID_CNTX_LRM,,  MFS_GRAYED
+            MENUITEM "RLM \t&Right-to-left mark",                 ID_CNTX_RLM,,  MFS_GRAYED
+            MENUITEM "ZWJ \tZero width &joiner",                  ID_CNTX_ZWJ,,  MFS_GRAYED
+            MENUITEM "ZWNJ\tZero width &non-joiner",              ID_CNTX_ZWNJ,, MFS_GRAYED
+            MENUITEM "LRE \tStart of left-to-right &embedding",   ID_CNTX_LRE,,  MFS_GRAYED
+            MENUITEM "RLE \tStart of right-to-left e&mbedding",   ID_CNTX_RLE,,  MFS_GRAYED
+            MENUITEM "LRO \tStart of left-to-right &override",    ID_CNTX_LRO,,  MFS_GRAYED
+            MENUITEM "RLO \tStart of right-to-left o&verride",    ID_CNTX_RLO,,  MFS_GRAYED
+            MENUITEM "PDF \t&Pop directional formatting",         ID_CNTX_PDF,,  MFS_GRAYED
+            MENUITEM "NADS\tN&ational digit shapes substitution", ID_CNTX_NADS,, MFS_GRAYED
+            MENUITEM "NODS\tNominal (European) &digit shapes",    ID_CNTX_NODS,, MFS_GRAYED
+            MENUITEM "ASS \tActivate &symmetric swapping",        ID_CNTX_ASS,,  MFS_GRAYED
+            MENUITEM "ISS \tInhibit s&ymmetric swapping",         ID_CNTX_ISS,,  MFS_GRAYED
+            MENUITEM "AAFS\tActivate Arabic &form shaping",       ID_CNTX_AAFS,, MFS_GRAYED
+            MENUITEM "IAFS\tInhibit Arabic form s&haping",        ID_CNTX_IAFS,, MFS_GRAYED
+            MENUITEM "RS  \tRecord Separator (&Block separator)", ID_CNTX_RS,,   MFS_GRAYED
+            MENUITEM "US  \tUnit Separator (&Segment separator)", ID_CNTX_US,,   MFS_GRAYED
+        END
     END
 END
+
+/* IME specific context menu string */
+STRINGTABLE
+BEGIN
+    STR_IMEOPEN             "&Open IME"
+    STR_IMECLOSE            "C&lose IME"
+    STR_SOFTKBDOPEN         "Op&en Soft Keyboard"
+    STR_SOFTKBDCLOSE        "Close So&ft Keyboard"
+    STR_RECONVERTSTRING     "&Reconversion"
+END
+

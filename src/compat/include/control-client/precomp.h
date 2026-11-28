@@ -406,6 +406,7 @@ PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
 /* XP EDIT calls existing native IMM operations synchronously. */
 #define NULL_HIMC ((HIMC)0)
 #define THREAD_HKL() GetKeyboardLayout(0)
+#undef GETAPPVER
 #define GETAPPVER() wow_edit_client_info()->dwExpWinVer
 #define ES_FMTMASK 0x0003L
 #define FAREAST_CHARSET_BITS (FS_JISJAPAN | FS_CHINESESIMP | FS_WANSUNG | FS_CHINESETRAD)
@@ -423,4 +424,22 @@ UINT GetACPCharSet(void);
 #define fpImmReleaseContext ImmReleaseContext
 #define fpImmSetCompositionFontW ImmSetCompositionFontW
 #define fpImmSetCompositionWindow ImmSetCompositionWindow
+
+/* Public IMM provider operations used by the original XP EDIT body. */
+#define fpImmEnumInputContext ImmEnumInputContext
+#define fpImmGetConversionStatus ImmGetConversionStatus
+#define fpImmGetOpenStatus ImmGetOpenStatus
+#define fpImmGetProperty ImmGetProperty
+#define fpImmSetCompositionStringA ImmSetCompositionStringA
+#define fpImmSetCompositionStringW ImmSetCompositionStringW
+#define fpImmSetOpenStatus ImmSetOpenStatus
+BOOL WINAPI SyncSoftKbdState(HIMC, LPARAM);
+#define GACF2_NO_INIT_ECFLAGS_ON_SETFOCUS 0x00020000
+#define VER50 0x0500
+#define UserVerify(f) ((void)(f))
+#ifndef IS_IME_ENABLED
+#define IS_IME_ENABLED() GetSystemMetrics(SM_IMMENABLED)
+#endif
+#define RTL_UI() (GetUserDefaultUILanguage() == MAKELANGID(LANG_ARABIC, SUBLANG_DEFAULT) || \
+    GetUserDefaultUILanguage() == MAKELANGID(LANG_HEBREW, SUBLANG_DEFAULT))
 #endif

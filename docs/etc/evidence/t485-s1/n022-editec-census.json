@@ -1,0 +1,72 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 784,
+    "nonerror_identical": 795,
+    "nonerror_different": 534,
+    "nonerror_points": 7804,
+    "nonerror_lines": 113169
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 784,
+    "nonerror_identical": 795,
+    "nonerror_different": 534,
+    "nonerror_points": 7824,
+    "nonerror_lines": 107385
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 20,
+    "nonerror_lines": -5784
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "before_points": 1,
+      "before_lines": 5954,
+      "after_points": 13,
+      "after_lines": 81,
+      "exclusions": 7
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "before_points": 1,
+      "before_lines": 7554,
+      "after_points": 1,
+      "after_lines": 7554,
+      "exclusions": 16
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "before_points": 1,
+      "before_lines": 4920,
+      "after_points": 1,
+      "after_lines": 4920,
+      "exclusions": 14
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/res.rc",
+      "before_points": 2,
+      "before_lines": 149,
+      "after_points": 10,
+      "after_lines": 204,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_points": 1,
+      "before_lines": 4672,
+      "after_points": 1,
+      "after_lines": 4706,
+      "exclusions": 17
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1286,
+    "OpenNT": 43
+  }
+}

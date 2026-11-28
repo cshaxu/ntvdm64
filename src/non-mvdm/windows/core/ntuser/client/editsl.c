@@ -904,7 +904,7 @@ ICH SLInsertText(
     /*
      * Now try actually adding the text to the ped
      */
-    if (cchInsert && !ECInsertText(ped, lpText, cchInsert)) {
+    if (cchInsert && !ECInsertText(ped, lpText, &cchInsert)) {
         ECNotifyParent(ped, EN_ERRSPACE);
         return (0);
     }

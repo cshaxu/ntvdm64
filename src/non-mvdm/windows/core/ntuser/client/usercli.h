@@ -1194,7 +1194,7 @@ void ECSetPasswordChar(PED, UINT);
 ICH  ECCchInWidth(PED, HDC, LPSTR, ICH, int, BOOL);
 void ECEmptyUndo(PUNDO);
 void ECSaveUndo(PUNDO pundoFrom, PUNDO pundoTo, BOOL fClear);
-BOOL ECInsertText(PED, LPSTR, ICH);
+BOOL ECInsertText(PED, LPSTR, ICH*);
 ICH  ECDeleteText(PED);
 void ECResetTextInfo(PED ped);
 void ECNotifyParent(PED, int);
@@ -1305,7 +1305,30 @@ void SLPaint(PED, HDC);
 void SLSetFocus(PED);
 void SLKillFocus(PED, HWND);
 LONG SLEditWndProc(HWND, PED, UINT, DWORD, LONG);
-LONG EditWndProc(PWND, UINT, DWORD, LONG);
+#define ID_CNTX_RTL         0x00008000L
+#define ID_CNTX_DISPLAYCTRL 0x00008001L
+#define ID_CNTX_INSERTCTRL  0x00008013L
+#define ID_CNTX_ZWJ         0x00008002L
+#define ID_CNTX_ZWNJ        0x00008003L
+#define ID_CNTX_LRM         0x00008004L
+#define ID_CNTX_RLM         0x00008005L
+#define ID_CNTX_LRE         0x00008006L
+#define ID_CNTX_RLE         0x00008007L
+#define ID_CNTX_LRO         0x00008008L
+#define ID_CNTX_RLO         0x00008009L
+#define ID_CNTX_PDF         0x0000800AL
+#define ID_CNTX_NADS        0x0000800BL
+#define ID_CNTX_NODS        0x0000800CL
+#define ID_CNTX_ASS         0x0000800DL
+#define ID_CNTX_ISS         0x0000800EL
+#define ID_CNTX_AAFS        0x0000800FL
+#define ID_CNTX_IAFS        0x00008010L
+#define ID_CNTX_RS          0x00008011L
+#define ID_CNTX_US          0x00008012L
+
+BOOL UserIsFullWidth(DWORD, WCHAR);
+#line 1278
+LONG EditWndProc(PWND, UINT, WPARAM, LPARAM);
 
 #endif
 #if !defined(OPENNT_USERCLI_LOOKASIDE_SUBSET_H)
@@ -1341,6 +1364,17 @@ UINT HelpMenu(HWND hwnd, PPOINT ppt);
 /*
  * String IDs
  */
+/*
+ * IME specific context menu string
+ */
+#define STR_IMEOPEN                 700
+#define STR_IMECLOSE                701
+#define STR_SOFTKBDOPEN             702
+#define STR_SOFTKBDCLOSE            703
+#define STR_RECONVERTSTRING         705
+
+
+#line 1300
 #define STR_ERROR                        0x00000002L
 #define STR_MOREWINDOWS                  0x0000000DL
 #define STR_NOMEMBITMAP                  0x0000000EL

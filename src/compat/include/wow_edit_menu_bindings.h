@@ -13,6 +13,7 @@ extern HANDLE hmodWOW32;
 #undef LoadMenu
 #define LoadMenu wow_user_load_menuW
 #define NtUserTrackPopupMenuEx wow_menu_native_TrackPopupMenuEx
+#define NtUserDeleteMenu wow_menu_native_DeleteMenu
 #define NtUserDestroyMenu wow_menu_native_DestroyMenu
 #define NtUserGetSystemMenu wow_menu_native_GetSystemMenu
 #define EnableMenuItem wow_menu_native_EnableMenuItem

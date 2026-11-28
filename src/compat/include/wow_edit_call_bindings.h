@@ -77,6 +77,8 @@ DWORD WINAPI wow_edit_control_extent(WORD);
 #define NtUserSetCaretPos wow_native_SetCaretPos
 /* Read-only thread caret query; no dispatch or HWND mutation. */
 #define NtUserGetCaretPos GetCaretPos
+#define NtUserEmptyClipboard EmptyClipboard
+#define NtUserCloseClipboard CloseClipboard
 #define NtUserHideCaret wow_native_HideCaret
 #define NtUserShowCaret wow_native_ShowCaret
 #define NtUserInvalidateRect wow_native_InvalidateRect

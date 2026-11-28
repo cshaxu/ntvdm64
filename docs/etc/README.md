@@ -2209,3 +2209,5 @@ post-publication targeted checks.
 - [S15 P46 XP text drawing](evidence/t485-s1/n022-drawtext.md).
 
 - [S15 P47 XP EDIT rare operations](evidence/t485-s1/n022-edecrare.md).
+
+- [S15 P48 EDIT common operations](evidence/t485-s1/n022-editec.md).

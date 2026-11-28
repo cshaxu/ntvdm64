@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime55 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime57 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -63,13 +63,9 @@ P15-P18 N020 deliveries are retained in the
 [S15 P29 status snapshot](../etc/evidence/t485-s1/s15-p29-status.md)
 and their linked per-P receipts.
 
-[P19 N020 WOW USER](../etc/evidence/t485-s1/n020-wowuser.md) delivered XP
-registration declarations; three evidenced legacy USER ABI groups remain.
-Cached build, runtime19 dual13-image26hash publication, registration/window
-lifecycle and Full24/24 passed. N0207/7 complete; overall56/159, S15 8/14.
-Ten-file checkpoint resets to zero. Next N021. Win95 exit1 boundary retained.
-Census1318files,767exact,777nonerror same/541different,7731points/156836lines;
-delta0files,0exact,0same,0different,+4points/-518lines.1241XP/77OpenNT.
+[P19 N020 WOW USER](../etc/evidence/t485-s1/n020-wowuser.md) delivered runtime19
+and Full24/24, completing N0207/7; detailed ABI, boundaries and census remain
+in that receipt. Win95 exit1 boundary retained.
 
 [P20 N021 first-three](../etc/evidence/t485-s1/n021-first.md) delivered runtime20;
 its receipt retains targeted verification, original identities and census.
@@ -185,6 +181,13 @@ window-borrow and SOL Options pass. Initial fixture IMM link failure retained;
 only failed/unexecuted tests retried. N02218/39, S15 9/14, overall57/159.
 Census1329/784/795/534/7804/113169; delta0/0/0/0/+9/-1378.1285XP/44OpenNT.
 Six mirrors since P42 Full24/24; next editec.c. No guest change or S/T closure.
+
+[P48 EDIT common operations](../etc/evidence/t485-s1/n022-editec.md) delivers
+runtime57: XP common EDIT/DBCS/IME algorithms and paired menu resources/ABI.
+Cached full build, dual13-image26hash, controls40/40, CCPU window-borrow and
+SOL Options pass. N02219/39; S15 9/14, overall57/159. Census1329/784/795/534/
+7824/107385; delta0/0/0/0/+20/-5784.1286XP/43OpenNT. Seven mirrors since P42
+Full24/24; next editml.c. Initial failures remain in receipt. No guest change.
 
 ## S14 Closure Record
 
