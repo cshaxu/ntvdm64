@@ -283,6 +283,22 @@ mov si,buffer-data
 mov di,alpha-data
 call equal_text
 destroy list
+; Original multi-column horizontal-scroll path, independent of font row count.
+create list_name,0x40910201,list,owner ; WS_HSCROLL | LBS_MULTICOLUMN
+send list,0x415,40,0,0                ; LB_SETCOLUMNWIDTH
+%rep 32
+send list,0x401,0,ds,alpha-data
+%endrep
+send list,0x40c,0,0,0
+expect 32,0x94
+send list,0x114,1,0,0                ; WM_HSCROLL / SB_LINEDOWN
+send list,0x40f,0,0,0
+require 0x95
+send list,0x114,0,0,0                ; SB_LINEUP returns to first column
+send list,0x40f,0,0,0
+expect 0,0x96
+send list,0x114,8,0,0                ; SB_ENDSCROLL
+destroy list
 create list_name,0x40a10089,list,owner
 send list,0x413,64,ds,tabstops-data ; LB_SETTABSTOPS
 require 0x4e

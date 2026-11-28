@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 8073,
+    "nonerror_lines": 70889
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 786,
+    "nonerror_identical": 797,
+    "nonerror_different": 532,
+    "nonerror_points": 8072,
+    "nonerror_lines": 70667
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -1,
+    "nonerror_lines": -222
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxmult.c",
+      "before_points": 1,
+      "before_lines": 222,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1297,
+    "OpenNT": 32
+  }
+}

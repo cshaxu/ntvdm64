@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime67 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime68 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -203,12 +203,14 @@ results, paired-header baselines and complete mirror census.
 
 [P57 ListBox data operations](../etc/evidence/t485-s1/n022-lboxctl1.md)
 delivered runtime66; its receipt retains all tests, baseline and census.
-[P58 ListBox interaction](../etc/evidence/t485-s1/n022-lboxctl2.md)
-delivers runtime67: XP body, approved RIT omission, native caret ABI and scroll
-preference. Cached build, dual13-image26hash, controls40/40, CCPU borrow,
-SOL Options and genuine Win16 controls pass. N02229/39; S15 9/14, overall57/159.
-Census1329/785/796/533/8073/70889;delta0/0/0/0/+2/-7018;1296XP/33OpenNT.
-Seven mirrors since P51 Full24/24. No guest change or S/T closure. Next lboxmult.c.
+[P58 ListBox interaction](../etc/evidence/t485-s1/n022-lboxctl2.md) delivered
+runtime67; its receipt retains the approved RIT boundary, ABI, all tests and census.
+[P59 multi-column ListBox](../etc/evidence/t485-s1/n022-lboxmult.md) delivers
+runtime68: byte-identical XP body. Cached build, dual13-image26hash, controls40/40,
+CCPU borrow, SOL Options and real Win16 multi-column scrolling pass.
+N02230/39; S15 9/14, overall57/159. Census1329/786/797/532/8072/70667;
+delta0/+1/+1/-1/-1/-222;1297XP/32OpenNT. Eight mirrors since P51 Full24/24.
+No original guest change or S/T closure. Next lboxrare.c.
 
 ## S14 Closure Record
 
