@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime59 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime60 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -158,21 +158,13 @@ retain full source, census and runtime evidence.
 runtime50 with draw.c byte-identical to XP. Its receipt retains full census,
 source identity, dual publication and targeted runtime verification.
 
-[P46 XP text drawing](../etc/evidence/t485-s1/n022-drawtext.md) delivers
-runtime54: complete client/paired RTL text algorithms, existing native GDI
-providers and captured system-font charset. Cached build, dual13-image26hash,
-controls40/40, CCPU window-borrow and SOL Options passed. N02217/39 plus paired
-N025 RTL; S15 9/14, overall57/159. Census1329/784/795/534/7795/114547;
-delta0/+1/+1/-1/+12/-2434.1284XP/45OpenNT. Five mirrors since P42 Full24/24;
-next edecrare.c. No guest changes or S/T closure.
+[P46 XP text drawing](../etc/evidence/t485-s1/n022-drawtext.md) delivered
+runtime54; its receipt retains client/RTL source identities, native GDI
+bindings, package/tests, full census and initial failure history.
 
-[P47 EDIT rare operations](../etc/evidence/t485-s1/n022-edecrare.md) delivers
-runtime55: full XP rare EDIT algorithms, paired ED/LPK ABI and original helpers.
-Cached full build, dual13-image26hash publication, controls40/40, real CCPU
-window-borrow and SOL Options pass. Initial fixture IMM link failure retained;
-only failed/unexecuted tests retried. N02218/39, S15 9/14, overall57/159.
-Census1329/784/795/534/7804/113169; delta0/0/0/0/+9/-1378.1285XP/44OpenNT.
-Six mirrors since P42 Full24/24; next editec.c. No guest change or S/T closure.
+[P47 EDIT rare operations](../etc/evidence/t485-s1/n022-edecrare.md) delivered
+runtime55; its receipt retains original identities, paired ABI, initial fixture
+failure, final publication/targeted verification and full mirror census.
 
 [P48 EDIT common operations](../etc/evidence/t485-s1/n022-editec.md) delivers
 runtime57: XP common EDIT/DBCS/IME algorithms and paired menu resources/ABI.
@@ -194,6 +186,13 @@ full XP algorithms and paired creation/message ABI. Cached build, dual13-image
 overall57/159, S15 9/14. Census1329/784/795/534/7831/94922;
 delta0/0/0/0/+2/-4917.1288XP/41OpenNT. Nine mirrors since P42 Full24/24.
 No guest change or S/T closure.
+
+[P51 multiline creation](../etc/evidence/t485-s1/n022-edmlonce.md) delivers
+runtime60: edmlonce.c exact XP, existing host address-limit provider reused.
+Cached build, dual13-image26hash, controls40/40, CCPU window-borrow, SOL Options
+and Full24/24 pass. N02222/39; S15 9/14, overall57/159. Census1329/785/796/533/
+7830/94689; delta0/+1/+1/-1/-1/-233.1289XP/40OpenNT. P51 resets the ten-file
+Full checkpoint. No guest change or S/T closure. Next edmlrare.c.
 
 ## S14 Closure Record
 

@@ -1,6 +1,8 @@
 /****************************************************************************\
 * edmlonce.c
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 * dec 1990 mikeke from win30
 \****************************************************************************/
 
@@ -19,7 +21,6 @@
 \***************************************************************************/
 
 LONG MLCreate(
-
     PED ped,
     LPCREATESTRUCT lpCreateStruct)
 {
@@ -60,25 +61,7 @@ LONG MLCreate(
         ped->fAutoVScroll = 1;
     }
 
-    //
-    // I know the following looks ridiculously redundant.  But if you check
-    // out ECCreate(), you see that fAutoHScroll gets set to TRUE if the
-    // style has ES_AUTOHSCROLL.  So the following code actually does stuff.
-    //
-    ped->format = (LOWORD(windowStyle) & LOWORD(ES_FMTMASK));
-    if (TestWF(ped->pwnd, WEFRIGHT) && !ped->format)
-        ped->format = ES_RIGHT;
-
-#line 72
-#ifdef SUPPORT_LPK
-#line 73
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 77
-#else
-#line 78
     if (ped->format != ES_LEFT)
-#endif
-#line 80
     {
         /*
          * If user wants right or center justified text, then we turn off
@@ -109,7 +92,7 @@ LONG MLCreate(
      * Set the window text if needed and notify parent if not enough memory to
      * set the initial text.
      */
-    if ((PVOID)lpCreateStruct->lpszName > MM_HIGHEST_USER_ADDRESS)
+    if ((ULONG_PTR)lpCreateStruct->lpszName > gHighestUserAddress)
         lpszName = REBASEPTR(ped->pwnd, (PVOID)lpCreateStruct->lpszName);
     else
         lpszName = (LPWSTR)lpCreateStruct->lpszName;

@@ -124,6 +124,7 @@ DWORD WINAPI xxxSetWindowData(PWND, int, DWORD, BOOL);
 #define UserGetHFONT(dc) ((HFONT)GetCurrentObject((dc), OBJ_FONT))
 #define UserGetMapMode GetMapMode
 #define MM_HIGHEST_USER_ADDRESS wow_edit_native_highest_user_address()
+#define gHighestUserAddress ((ULONG_PTR)wow_edit_native_highest_user_address())
 #define UserPolyPatBlt wow_edit_native_PolyPatBlt
 /* Original C sources use the platform SEH spellings. Preserve their
  * exception bodies and unwind, never turn these into ordinary branches. */
