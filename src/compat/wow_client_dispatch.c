@@ -38,7 +38,7 @@ LONG DispatchClientMessage(
      * PWW so wow doesn't have to
      */
     if (WOW_WINDOW_IS_GUEST_PROC(pfn)) {
-        return (*pfnWowWndProcEx)(HW(pwnd), message, wParam, lParam, (DWORD)pfn, pwnd->adwWOW);
+        return (*pfnWowWndProcEx)(HW(pwnd), message, wParam, lParam, (DWORD)pfn, pwnd->words);
     } else {
         return ((WNDPROC)pfn)(HW(pwnd), message, wParam, lParam);
     }

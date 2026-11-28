@@ -1,0 +1,114 @@
+{
+  "before": {
+    "files": 1331,
+    "byte_identical": 790,
+    "nonerror_identical": 801,
+    "nonerror_different": 530,
+    "nonerror_points": 7984,
+    "nonerror_lines": 65473
+  },
+  "after": {
+    "files": 1333,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 530,
+    "nonerror_points": 7937,
+    "nonerror_lines": 64995
+  },
+  "delta": {
+    "files": 2,
+    "byte_identical": 2,
+    "nonerror_identical": 2,
+    "nonerror_different": 0,
+    "nonerror_points": -47,
+    "nonerror_lines": -478
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+      "before_points": 5,
+      "before_lines": 68,
+      "after_points": 3,
+      "after_lines": 9,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "before_points": 15,
+      "before_lines": 73,
+      "after_points": 15,
+      "after_lines": 73,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_points": 8,
+      "before_lines": 158,
+      "after_points": 8,
+      "after_lines": 162,
+      "exclusions": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_points": 63,
+      "before_lines": 508,
+      "after_points": 18,
+      "after_lines": 65,
+      "exclusions": 2
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "before_points": 1,
+      "before_lines": 1224,
+      "after_points": 1,
+      "after_lines": 1234,
+      "exclusions": 6
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "before_points": 1,
+      "before_lines": 10216,
+      "after_points": 1,
+      "after_lines": 10185,
+      "exclusions": 40
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "before_points": 1,
+      "before_lines": 2077,
+      "after_points": 1,
+      "after_lines": 2088,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "before_points": 1,
+      "before_lines": 1404,
+      "after_points": 1,
+      "after_lines": 1434,
+      "exclusions": 4
+    },
+    {
+      "path": "src/non-mvdm/windows/core/w32inc/w32wow64.h",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 1,
+      "addition": true
+    },
+    {
+      "path": "src/non-mvdm/public/oak/inc/kbd.h",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 2,
+      "addition": true
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1313,
+    "OpenNT": 20
+  }
+}

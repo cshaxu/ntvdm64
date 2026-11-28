@@ -21,12 +21,13 @@ PWND WINAPI view_fixture_validate(HWND);
 #undef ValidateHwnd
 #define ValidateHwnd view_fixture_validate
 BOOL WINAPI _IsWindowVisible(PWND);
-BOOL WINAPI _GetClientRect(PWND, LPRECT);
+VOID WINAPI _GetClientRect(PWND, LPRECT);
+VOID WINAPI _GetWindowRect(PWND, LPRECT);
 BOOL WINAPI _FChildVisible(PWND);
 BOOL WINAPI FChildVisible(HWND);
 BOOL WINAPI _IsChild(PWND, PWND);
-BOOL WINAPI _ClientToScreen(PWND, PPOINT);
-BOOL WINAPI _ScreenToClient(PWND, PPOINT);
+VOID WINAPI _ClientToScreen(PWND, PPOINT);
+VOID WINAPI _ScreenToClient(PWND, PPOINT);
 BOOL WINAPI IsVisible(PWND);
 PWND WINAPI GetTopLevelWindow(PWND);
 #endif

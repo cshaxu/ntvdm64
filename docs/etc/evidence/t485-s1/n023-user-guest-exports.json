@@ -1,0 +1,157 @@
+{
+  "path": "O:\\WINNT\\SYSTEM32\\USER.EXE",
+  "sha256": "f7323a28ea709ff05ea0f57268a4bc69400627a7912599fc4beb1ea3f67fcd06",
+  "evidence": "Read-only NE export entry bytes; not runtime coverage",
+  "exports": [
+    {
+      "name": "GetWindowRect",
+      "ordinal": 32,
+      "segment": 1,
+      "offset": 10645,
+      "fileOffset": 22165,
+      "hex": "558bec68ac298b46068b4e08bb0800e8840e5a5de96a26ca0600558bec68c6298b460c8b4e0ebb0800e86a0e5a5de9a5d7ca0a00558bec68e0298b46108b4e12bb0800e8500e5a5de998d7ca0e00558bec68142a8b460c8b4e0ebbffffe8ca0e8b46088b4e0abbffffe8be0e8b4606a9884c7406bb02e0e80e0e5a5de94ee1ca0c00558bec68282a8b4606e8c20d5a5de9f3e3ca0200558bec68422a8b46068b",
+      "jumpTarget": 20502,
+      "targetHex": "6a066800006820009a125000006a02680000682f009a1f50",
+      "relocations": [
+        {
+          "type": 3,
+          "flags": 1,
+          "module": "KERNEL",
+          "value": 506,
+          "locations": [
+            20511
+          ]
+        },
+        {
+          "type": 5,
+          "flags": 5,
+          "module": "KERNEL",
+          "value": 572,
+          "locations": [
+            20508
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GetParent",
+      "ordinal": 46,
+      "segment": 1,
+      "offset": 11486,
+      "fileOffset": 23006,
+      "hex": "558bec68e92c5a5de9df22ca0200558bec68f72c5a5de9e7e1ca0400558bec680e2d8b460a8b4e0ce8fa0a5a5de97ed8ca0a00558bec68312d8b460a8b4e0ce8910b8b46068b4e08bbffffe8930b5a5de928d9ca0800558bec68482d8b460a8b4e0ce8c00a5a5de978d8ca0800558bec68652d8b460ee8920a8b460a8b4e0ce8a30a5a5de94ed8ca0a00558bec68732d5a5de98922ca0200558bec68812d5a5d",
+      "jumpTarget": 20424,
+      "targetHex": "6a02680000682e009ac44f00006a04680000689f009ad14f",
+      "relocations": [
+        {
+          "type": 3,
+          "flags": 1,
+          "module": "KERNEL",
+          "value": 506,
+          "locations": [
+            20433
+          ]
+        },
+        {
+          "type": 5,
+          "flags": 5,
+          "module": "KERNEL",
+          "value": 572,
+          "locations": [
+            20430
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GetClassName",
+      "ordinal": 58,
+      "segment": 1,
+      "offset": 7701,
+      "fileOffset": 19221,
+      "hex": "558bec682c1e8b46088b4e0a8d5e06e8371a5a5de90d31558bec8b4e068b5e088b560a5de8b01aca0800558bec684a1e5a5de917eaca0400558bec68731e8b46208b4e22e8571a8b461c8b4e1ebbffffe8571a8b460ae877195a5de91ae5ca1e00558bec68b31e8b46248b4e26a900807506f7c1f8ff7406bb05f0e88a198b46208b4e22e8171a8b461c8b4e1ebbffffe8171a8b460ae83b195a5de9e7e4ca22",
+      "jumpTarget": 20281,
+      "targetHex": "6a08680000683a009a354f00006a066800006821009a424f",
+      "relocations": [
+        {
+          "type": 3,
+          "flags": 1,
+          "module": "KERNEL",
+          "value": 506,
+          "locations": [
+            20290
+          ]
+        },
+        {
+          "type": 5,
+          "flags": 5,
+          "module": "KERNEL",
+          "value": 572,
+          "locations": [
+            20287
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GetMenu",
+      "ordinal": 157,
+      "segment": 1,
+      "offset": 9263,
+      "fileOffset": 20783,
+      "hex": "558bec683a245a5de94d2bca0200558bec6848245a5de97ceaca0400558bec6864248b4606f6c4a07406bb02e0e8be135a5de918deca0c00558bec6880248b4606f6c4b07406bb02e0e8a2135a5de927e5ca0800558bec68a8248b460a8b4e0c8d5e08e8c9138b4606f6c4b07406bb02e0e87a135a5de95ee3558bec8b4e088b5e0a8b560c5de83414ca0c00558bec68d4248b4606f6c4b07406bb02e0e84e13",
+      "jumpTarget": 20359,
+      "targetHex": "6a02680000689d009a834f00006a026800006807019a904f",
+      "relocations": [
+        {
+          "type": 3,
+          "flags": 1,
+          "module": "KERNEL",
+          "value": 506,
+          "locations": [
+            20368
+          ]
+        },
+        {
+          "type": 5,
+          "flags": 5,
+          "module": "KERNEL",
+          "value": 572,
+          "locations": [
+            20365
+          ]
+        }
+      ]
+    },
+    {
+      "name": "GetMenuItemCount",
+      "ordinal": 263,
+      "segment": 1,
+      "offset": 9583,
+      "fileOffset": 21103,
+      "hex": "558bec687a255a5de91a2ab8ffffca0200558bec6899258b460cf6c4b07406bb02e0e889125a5de935e4ca0c00558bec68b5258b460cf6c4b07406bb02e0e86d125a5de92bdcca0a00558bec68d1258b460cf6c4b07406bb02e0e851125a5de99ee5ca0c00558bec68ed258b4606f6c4b07406bb02e0e835125a5de96fe6ca0600558bec6809268b4606f6c4b07406bb02e0e819125a5de917deca0600558bec",
+      "jumpTarget": 20372,
+      "targetHex": "6a026800006807019a904f00006a046800006808019a9d4f",
+      "relocations": [
+        {
+          "type": 3,
+          "flags": 1,
+          "module": "KERNEL",
+          "value": 506,
+          "locations": [
+            20381
+          ]
+        },
+        {
+          "type": 5,
+          "flags": 5,
+          "module": "KERNEL",
+          "value": 572,
+          "locations": [
+            20378
+          ]
+        }
+      ]
+    }
+  ]
+}

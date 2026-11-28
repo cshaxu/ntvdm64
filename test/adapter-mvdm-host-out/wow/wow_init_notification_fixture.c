@@ -1,8 +1,10 @@
+#define UserRegisterWowHandlers __stdcall UserRegisterWowHandlers
+#include "wow_user_client_view_layout.h"
 #include "wow_control_entry_fixture_provider.h"
 #include "wow_task_lifecycle_fixture_provider.h"
 /* The original declaration relies on the provider's /Gz. Annotate that one
  * declaration while this host fixture uses cdecl worker/session headers. */
-#define UserRegisterWowHandlers __stdcall UserRegisterWowHandlers
+
 #include "wow_shared_user_abi.h"
 #include "wow_class_client_fixture_provider.h"
 #include "wow_user_task_lifecycle.h"

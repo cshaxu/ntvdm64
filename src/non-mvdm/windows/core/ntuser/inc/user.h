@@ -1,9 +1,7 @@
-/*++ build version: 0002    // increment this if a change has global effects
-
 /****************************** Module Header ******************************\
 * Module Name: user.h
 *
-* Copyright (c) 1985-95, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This header file contains stuff shared by all the modules of the USER.DLL.
 *
@@ -15,70 +13,270 @@
 #ifndef _USER_
 #define _USER_
 #if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 17
+#line 15
 
+/******************************WOW64***NOTE********************************\
+* Note: Win32k Memory shared with User-Mode and Wow64
+*
+* For Wow64 (Win32 apps on Win64) we build a 32-bit version
+* of user32.dll & gdi32.dll which can run against the 64-bit kernel
+* with no changes to the 64-bit kernel code.
+*
+* For the 32 on 64 bit dlls all data structures which are shared with
+* win32k must be 64-bit. These data structures include the shared
+* sections, as well as members of the TEB.
+* These shared data structures are now declared so that they can be
+* built as 32 bit in a 32 bit dll, 64 bit in a 64 bit dll, and now
+* 64 bit in a 32 bit dll.
+*
+* The following rules should be followed when declaring
+* shared data structures:
+*
+*     Pointers in shared data structures use the KPTR_MODIFIER in their
+*     declaration.
+*
+*     Handles in shared data structures are declared KHxxx.
+*
+*     xxx_PTR changes to KERNEL_xxx_PTR.
+*
+*     Pointers to basic types are declared as KPxxx;
+*
+* Also on Wow64 every thread has both a 32-bit TEB and a 64-bit TEB.
+* GetCurrentTeb() returns the current 32-bit TEB while the kernel
+* will allways reference the 64-bit TEB.
+*
+* All client side references to shared data in the TEB should use
+* the new GetCurrentTebShared() macro which returns the 64-bit TEB
+* for Wow64 builds and returns GetCurrentTeb() for regular builds.
+* The exception to this rule is LastErrorValue, which should allways
+* be referenced through GetCurrentTeb().
+*
+* Ex:
+*
+* DECLARE_HANDLE(HFOO);
+*
+* typedef struct _MY_STRUCT *PMPTR;
+*
+* struct _SHARED_STRUCT
+* {
+*     struct _SHARED_STRUCT *   pNext;
+*     PMPTR                     pmptr;
+*     HFOO                      hFoo;
+*     UINT_PTR                  cb;
+*     PBYTE                     pb;
+*     PVOID                     pv;
+*
+*     DWORD                     dw;
+*     USHORT                    us;
+* } SHARED_STRUCT;
+*
+*
+* Changes to:
+*
+*
+* DECLARE_HANDLE(HFOO);
+* DECLARE_KHANDLE(HFOO);
+*
+* typedef struct _MY_STRUCT * KPTR_MODIFIER   PMPTR;
+*
+* struct _SHARED_STRUCT
+* {
+*     struct _SHARED_STRUCT * KPTR_MODIFIER   pNext;
+*     PMPTR                     pmptr;
+*     KHFOO                     hFoo;
+*     KERNEL_UINT_PTR           cb;
+*     KPBYTE                    pb;
+*     KERNEL_PVOID              pv;
+*
+*     DWORD                     dw;
+*     USHORT                    us;
+* } SHARED_STRUCT;
+*
+\***************************************************************************/
+#include "w32wow64.h"
 
-
-//
-// BUGBUG Will be moved to GDI
-//
-
-#define GDI_FIXUP_HANDLE(h) h
-
+DECLARE_KHANDLE(HIMC);
 
 /*
  * Enable warnings that are turned off default for NT but we want on
  */
 #ifndef RC_INVOKED       // RC can't handle #pragmas
-#pragma warning(error:4101)   // Unreferenced local variable
-#endif
-
+    #pragma warning(error:4100)   // Unreferenced formal parameter
+    #pragma warning(error:4101)   // Unreferenced local variable
+    // #pragma warning(error:4702)   // Unreachable code
+    #pragma warning(error:4705)   // Statement has no effect
+#endif // RC_INVOKED
 
 #if !defined(FASTCALL)
-#if defined(_X86_)
-#define FASTCALL    _fastcall
-#else
-#define FASTCALL
-#endif
-#endif
+    #if defined(_X86_)
+        #define FASTCALL    _fastcall
+    #else // defined(_X86_)
+        #define FASTCALL
+    #endif // defined(_X86_)
+#endif // !defined(FASTCALL)
 
 #ifdef UNICODE
-#define UTCHAR WCHAR
-#else
-#define UTCHAR UCHAR
+    #define UTCHAR WCHAR
+#else // UINCODE
+    #define UTCHAR UCHAR
+#endif // UINCODE
+
+
+/*
+ * These types are needed before they are fully defined.
+ */
+typedef struct tagWINDOWSTATION     * KPTR_MODIFIER PWINDOWSTATION;
+typedef struct _LOCKRECORD          * KPTR_MODIFIER PLR;
+typedef struct _TL                  * KPTR_MODIFIER PTL;
+typedef struct tagDESKTOP           * KPTR_MODIFIER PDESKTOP;
+typedef struct tagTDB               * KPTR_MODIFIER PTDB;
+typedef struct tagSVR_INSTANCE_INFO * PSVR_INSTANCE_INFO;
+typedef struct _MOVESIZEDATA        * PMOVESIZEDATA;
+typedef struct tagCURSOR            * KPTR_MODIFIER PCURSOR;
+typedef struct tagPOPUPMENU         * KPTR_MODIFIER PPOPUPMENU;
+typedef struct tagQMSG              * KPTR_MODIFIER PQMSG;
+typedef struct tagWND               * KPTR_MODIFIER PWND;
+typedef struct _ETHREAD             * PETHREAD;
+typedef struct tagDESKTOPINFO       * KPTR_MODIFIER PDESKTOPINFO;
+typedef struct tagDISPLAYINFO       * KPTR_MODIFIER PDISPLAYINFO;
+typedef struct tagCLIENTTHREADINFO  * KPTR_MODIFIER PCLIENTTHREADINFO;
+typedef struct tagDCE               * KPTR_MODIFIER PDCE;
+typedef struct tagSPB               * KPTR_MODIFIER PSPB;
+typedef struct tagQ                 * KPTR_MODIFIER PQ;
+typedef struct tagTHREADINFO        * KPTR_MODIFIER PTHREADINFO;
+typedef struct tagPROCESSINFO       * KPTR_MODIFIER PPROCESSINFO;
+typedef struct tagWOWTHREADINFO     * PWOWTHREADINFO;
+typedef struct tagPERUSERDATA       * PPERUSERDATA;
+typedef struct tagPERUSERSERVERINFO * PPERUSERSERVERINFO;
+typedef struct tagTERMINAL          * PTERMINAL;
+typedef struct _CLIENTINFO          * PCLIENTINFO;
+typedef struct tagMENU              * KPTR_MODIFIER PMENU;
+typedef struct tagHOOK              * KPTR_MODIFIER PHOOK;
+typedef struct _HANDLEENTRY         * KPTR_MODIFIER PHE;
+typedef struct tagSERVERINFO        * KPTR_MODIFIER PSERVERINFO;
+typedef struct _CALLPROCDATA        * KPTR_MODIFIER PCALLPROCDATA;
+typedef struct tagCLS               * KPTR_MODIFIER PCLS;
+typedef struct tagMONITOR           * KPTR_MODIFIER PMONITOR;
+
+/*
+ * MessageBox button strings.
+ * They should be in the same order as IDOK... and SEB_OK... are
+ */
+#define STR_OK                      800
+#define STR_CANCEL                  801
+#define STR_ABORT                   802
+#define STR_RETRY                   803
+#define STR_IGNORE                  804
+#define STR_YES                     805
+#define STR_NO                      806
+#define STR_CLOSE                   807
+#define STR_HELP                    808
+#define STR_TRYAGAIN                809
+#define STR_CONTINUE                810
+
+/*
+ * ToolTip strings.
+ */
+#define STR_TT_MIN                  900
+#define STR_TT_MAX                  901
+#define STR_TT_RESUP                902
+#define STR_TT_RESDOWN              903
+#define STR_TT_HELP                 904
+#define STR_TT_SCLOSE               905
+
+/*
+ * This name is used both in kernel\server.c and ntuser\server\exitwin.c
+ */
+#define ICON_PROP_NAME  L"SysIC"
+
+/*
+ * Define DbgPrint to be something bogus on free builds so we won't
+ * include it accidentally.
+ */
+#if !DBG
+#define DbgPrint UserDbgPrint
 #endif
 
-typedef struct _LOCKRECORD          *PLR;
-typedef struct _TL                  *PTL;
-typedef struct tagWINDOWSTATION     *PWINDOWSTATION;
-typedef struct tagDESKTOP           *PDESKTOP;
+typedef struct tagMBSTRING
+{
+    WCHAR szName[15];
+    UINT  uID;
+    UINT  uStr;
+} MBSTRING, * KPTR_MODIFIER PMBSTRING;
 
-typedef struct tagSVR_INSTANCE_INFO *PSVR_INSTANCE_INFO;
-typedef struct _MOVESIZEDATA        *PMOVESIZEDATA;
-typedef struct tagCURSOR            *PCURSOR;
-typedef struct tagPOPUPMENU         *PPOPUPMENU;
-typedef struct tagQMSG              *PQMSG;
+/*
+ * SIZERECT is a rectangle represented by a top-left coordinate, width,
+ * and height.
+ *
+ * Hungarian is "src".
+ */
+typedef struct tagSIZERECT {
+    int x;
+    int y;
+    int cx;
+    int cy;
+} SIZERECT, *PSIZERECT, *LPSIZERECT;
 
-typedef struct _ETHREAD             *PETHREAD;
-typedef struct tagDESKTOPINFO       *PDESKTOPINFO;
-typedef struct tagDISPLAYINFO       *PDISPLAYINFO;
-typedef struct tagCLIENTTHREADINFO  *PCLIENTTHREADINFO;
-typedef struct tagDCE               *PDCE;
-typedef struct tagSPB               *PSPB;
+typedef const SIZERECT * PCSIZERECT;
+typedef const SIZERECT * LPCSIZERECT;
 
-#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
 
-/***************************************************************************\
-* These cool constants can be used to specify rops
-\***************************************************************************/
+void RECTFromSIZERECT(PRECT prc, PCSIZERECT psrc);
+void SIZERECTFromRECT(PSIZERECT psrc, LPCRECT prc);
 
+/*
+ * Use these macros to unpack things packed by MAKELPARAM.
+ */
+
+#define LOSHORT(l)          ((short)LOWORD(l))
+#define HISHORT(l)          ((short)HIWORD(l))
+
+#ifndef GET_X_LPARAM
+#define GET_X_LPARAM(lp)    ((int)(short)LOWORD(lp))
+#endif
+
+#ifndef GET_Y_LPARAM
+#define GET_Y_LPARAM(lp)    ((int)(short)HIWORD(lp))
+#endif
+
+#ifdef _USERK_
+    #define GetClientInfo() (((PTHREADINFO)(W32GetCurrentThread()))->pClientInfo)
+#else
+    // We don't grab it this way in the kernel in case it is a kernel only thread
+    #define GetClientInfo() ((PCLIENTINFO)((NtCurrentTebShared())->Win32ClientInfo))
+#endif
+
+/* Used by xxxSleepTask */
+#define HEVENT_REMOVEME ((HANDLE)IntToPtr(0xFFFFFFFF))
+
+
+/*
+ * Access to system metrics, colors, and brushes.
+ */
+#define SYSMETBOOL(i)         ((gpsi->aiSysMet[SM_BOOLEANS] & (1 << (SM_##i - SM_STARTBOOLRANGE))) != 0)
+#define SYSMETBOOL2(index)    ((gpsi->aiSysMet[SM_BOOLEANS] & (1 << (index - SM_STARTBOOLRANGE))) != 0)
+#define SETSYSMETBOOL(i, val) SET_OR_CLEAR_FLAG(gpsi->aiSysMet[SM_BOOLEANS], 1 << (SM_##i - SM_STARTBOOLRANGE), val)
+#define SYSMET(i)             (gpsi->aiSysMet[SM_##i])
+#define SYSMETRTL(i)          (gpsi->aiSysMet[SM_##i])
+#define SYSRGB(i)             (gpsi->argbSystem[COLOR_##i])
+#define SYSRGBRTL(i)          (gpsi->argbSystem[COLOR_##i])
+#define SYSHBR(i)             KHBRUSH_TO_HBRUSH(gpsi->ahbrSystem[COLOR_##i])
+#define SYSHBRUSH(i)          KHBRUSH_TO_HBRUSH(gpsi->ahbrSystem[i])
+
+#ifdef _USERK_
+    #define SYSMETFROMPROCESS(i)  gpsi->aiSysMet[SM_##i]
+#endif
+
+/*
+ * These cool constants can be used to specify rops.
+ */
 #define DESTINATION (DWORD)0x00AA0000
 #define SOURCE      (DWORD)0x00CC0000
 #define PATTERN     (DWORD)0x00F00000
 
-/**************************
-*  Chicago equates
-***************************/
+/*
+ *  Chicago equates.
+ */
 #define BI_CHECKBOX       0
 #define BI_RADIOBUTTON    1
 #define BI_3STATE         2
@@ -87,20 +285,35 @@ typedef struct tagSPB               *PSPB;
 #define NUM_BUTTON_STATES 4
 
 /*
- * Total number of strings used as button strings in MessageBoxes
+ * Total number of strings used as button strings in MessageBoxes.
  */
-#define  MAX_MB_STRINGS    9
+#define  MAX_MB_STRINGS    11
 
 
 /*
- * Rectangle macros.  Inlining these is both faster and smaller
+ * Rectangle macros.  Inlining these is both faster and smaller.
  */
-#undef CopyRect
-#undef EqualRect
-#undef SetRectEmpty
-#define CopyRect(prc1, prc2)  ((*prc1) = (*prc2))
-#define EqualRect(prc1, prc2) RtlEqualMemory((prc1), (prc2), sizeof(RECT))
-#define SetRectEmpty(prc)     RtlZeroMemory((prc), sizeof(RECT))
+#define CopyRect        CopyRectInl
+#define EqualRect       EqualRectInl
+#define SetRectEmpty    SetRectEmptyInl
+
+__inline void
+CopyRectInl(LPRECT prcDest, LPCRECT prcSrc)
+{
+    *prcDest = *prcSrc;
+}
+
+__inline DWORD
+EqualRectInl(LPCRECT prc1, LPCRECT prc2)
+{
+    return RtlEqualMemory(prc1, prc2, sizeof(*prc1));
+}
+
+__inline void
+SetRectEmptyInl(LPRECT prc)
+{
+    RtlZeroMemory(prc, sizeof(*prc));
+}
 
 /***************************************************************************\
 * ANSI/Unicode function names
@@ -110,18 +323,18 @@ typedef struct tagSPB               *PSPB;
 *
 \***************************************************************************/
 #ifdef UNICODE
-#define TEXT_FN(fn) fn##W
-#else
-#define TEXT_FN(fn) fn##A
-#endif
+    #define TEXT_FN(fn) fn##W
+#else // UNICODE
+    #define TEXT_FN(fn) fn##A
+#endif // UNICODE
 
 #ifdef UNICODE
-#define BYTESTOCHARS(cb) ((cb) / sizeof(TCHAR))
-#define CHARSTOBYTES(cch) ((cch) * sizeof(TCHAR))
-#else
-#define BYTESTOCHARS(cb) (cb)
-#define CHARSTOBYTES(cch) (cch)
-#endif
+    #define BYTESTOCHARS(cb) ((cb) / sizeof(TCHAR))
+    #define CHARSTOBYTES(cch) ((cch) * sizeof(TCHAR))
+#else // UNICODE
+    #define BYTESTOCHARS(cb) (cb)
+    #define CHARSTOBYTES(cch) (cch)
+#endif // UNICODE
 
 /*
  * Internal window class names
@@ -131,20 +344,26 @@ typedef struct tagSPB               *PSPB;
 #define SWITCHWNDCLASS  MAKEINTATOM(0x8003)
 #define ICONTITLECLASS  MAKEINTATOM(0x8004)
 #define INFOCLASS       MAKEINTATOM(0x8005)
-
-/*
- * These should be made public and moved to WINUSER.H.
- */
-#define MENUCLASS           MAKEINTATOM(0x8000)     /* Public Knowledge */
+#define TOOLTIPCLASS    MAKEINTATOM(0x8006)
+#define GHOSTCLASS      MAKEINTATOM(0x8007)
+#define MENUCLASS       MAKEINTATOM(0x8000)     /* Public Knowledge */
 
 //
 // System timer IDs
 //
+#define IDSYS_LAYER         0x0000FFF5L
+#define IDSYS_FADE          0x0000FFF6L
+#define IDSYS_WNDTRACKING   0x0000FFF7L
+#define IDSYS_FLASHWND      0x0000FFF8L
+#define IDSYS_MNAUTODISMISS 0x0000FFF9L
 #define IDSYS_MOUSEHOVER    0x0000FFFAL
+#define IDSYS_MNANIMATE     0x0000FFFBL
+#define IDSYS_MNDOWN        MFMWFP_DOWNARROW /* 0xFFFFFFFC */
 #define IDSYS_LBSEARCH      0x0000FFFCL
+#define IDSYS_MNUP          MFMWFP_UPARROW   /* 0xFFFFFFFD */
 #define IDSYS_STANIMATE     0x0000FFFDL
-#define IDSYS_SCROLL        0x0000FFFEL
 #define IDSYS_MNSHOW        0x0000FFFEL
+#define IDSYS_SCROLL        0x0000FFFEL
 #define IDSYS_MNHIDE        0x0000FFFFL
 #define IDSYS_CARET         0x0000FFFFL
 
@@ -180,34 +399,37 @@ typedef struct tagSPB               *PSPB;
 #define ICLS_SCROLLBAR      4
 #define ICLS_COMBOBOX       5       // End of special dlgmgr indices
 
-#define ICLS_CTL_MAX        6       // Number of public control classes
+#define ICLS_MDICLIENT      6
+#define ICLS_COMBOLISTBOX   7
+#define ICLS_DDEMLEVENT     8
+#define ICLS_DDEMLMOTHER    9
+#define ICLS_DDEML16BIT     10
+#define ICLS_DDEMLCLIENTA   11
+#define ICLS_DDEMLCLIENTW   12
+#define ICLS_DDEMLSERVERA   13
+#define ICLS_DDEMLSERVERW   14
+#define ICLS_IME            15
 
-#define ICLS_DESKTOP        6
-#define ICLS_DIALOG         7
-#define ICLS_MENU           8
-#define ICLS_SWITCH         9
-#define ICLS_ICONTITLE      10
-#define ICLS_MDICLIENT      11
-#define ICLS_COMBOLISTBOX   12
-#define ICLS_DDEMLEVENT     13
-#define ICLS_DDEMLMOTHER    14
-#define ICLS_DDEML16BIT     15
-#define ICLS_DDEMLCLIENTA   16
-#define ICLS_DDEMLCLIENTW   17
-#define ICLS_DDEMLSERVERA   18
-#define ICLS_DDEMLSERVERW   19
+#define ICLS_CTL_MAX        16       // Number of public control classes
 
-#ifdef FE_IME
-#error
-#line 201
-#else
-#define ICLS_MAX            20      // Number of system classes
-#endif
+
+#define ICLS_DESKTOP        16
+#define ICLS_DIALOG         17
+#define ICLS_MENU           18
+#define ICLS_SWITCH         19
+#define ICLS_ICONTITLE      20
+#define ICLS_TOOLTIP        21
+#define ICLS_GHOST          22
+#define ICLS_MAX            23  // Number of system classes
 
 /*
  * Directory name for windowstations and desktops
  */
 #define WINSTA_DIR  L"\\Windows\\WindowStations"
+#define WINSTA_SESSION_DIR  L"\\Sessions\\xxxxxxxxxxx\\Windows\\WindowStations"
+#define WINSTA_NAME L"Service-0x0000-0000$"
+#define MAX_SESSION_PATH   256
+#define SESSION_ROOT L"\\Sessions"
 
 /***************************************************************************\
 * Normal Stuff
@@ -216,32 +438,15 @@ typedef struct tagSPB               *PSPB;
 *
 \***************************************************************************/
 
-
 /*
- * These constants have to be known during pass one of the compilier because
- * they are used by in-line assembly so they are defined here and check at run
- * time by the TEBOffsetCheck macro in UserServerDllInitialization
+ * Define size limit of callback data. Below or equal to this limit, put data
+ * on the client-side stack. Above this limit allocate virtual memory
+ * for the data.
  */
-
-#define TEB_Win32ThreadInfo         0x40
-#define TEB_Win32ClientInfo         0x44
-
-#ifdef DBG
-#error
-#line 230
-#else
-#define TEBOffsetCheck()
-#endif
+#define CALLBACKSTACKLIMIT  (KERNEL_PAGE_SIZE / 2)
 
 /*
- * Define size limit of callback data.  Below or equal to this limit, put data
- * on the client-side stack.  Above this limit allocate virtual memory
- * for the data
- */
-#define CALLBACKSTACKLIMIT  (PAGE_SIZE / 2)
-
-/*
- * Capture buffer definition for callbacks
+ * Capture buffer definition for callbacks.
  */
 typedef struct _CAPTUREBUF {
     DWORD cbCallback;
@@ -256,10 +461,13 @@ typedef struct _CAPTUREBUF {
  * Callback return status
  */
 typedef struct _CALLBACKSTATUS {
-    DWORD retval;
+    KERNEL_ULONG_PTR retval;
     DWORD cbOutput;
-    PVOID pOutput;
+    KERNEL_PVOID pOutput;
 } CALLBACKSTATUS, *PCALLBACKSTATUS;
+
+#define IS_PTR(p)       ((((ULONG_PTR)(p)) & ~MAXUSHORT) != 0)
+#define PTR_TO_ID(p)    ((USHORT)(((ULONG_PTR)(p)) & MAXUSHORT))
 
 //
 // Strings are counted 16-bit character strings. If they are
@@ -269,21 +477,21 @@ typedef struct _LARGE_STRING {
     ULONG Length;
     ULONG MaximumLength : 31;
     ULONG bAnsi : 1;
-    PVOID Buffer;
+    KERNEL_PVOID Buffer;
 } LARGE_STRING, *PLARGE_STRING;
 
 typedef struct _LARGE_ANSI_STRING {
     ULONG Length;
     ULONG MaximumLength : 31;
     ULONG bAnsi : 1;
-    PSTR Buffer;
+    KPSTR Buffer;
 } LARGE_ANSI_STRING, *PLARGE_ANSI_STRING;
 
 typedef struct _LARGE_UNICODE_STRING {
     ULONG Length;
     ULONG MaximumLength : 31;
     ULONG bAnsi : 1;
-    PWSTR Buffer;
+    KPWSTR Buffer;
 } LARGE_UNICODE_STRING, *PLARGE_UNICODE_STRING;
 
 /*
@@ -308,10 +516,6 @@ typedef struct _CTLCOLOR {
     int iBkMode;
 } CTLCOLOR, *PCTLCOLOR;
 
-#ifdef _NTCSRMSG_
-#error
-#line 328
-#endif  // _NTCSRMSG_
 
 /*
  * This is used by the cool client side DrawIcon code
@@ -321,84 +525,198 @@ typedef struct _DRAWICONEXDATA {
     HBITMAP hbmColor;
     int cx;
     int cy;
+    HBITMAP hbmUserAlpha;
 } DRAWICONEXDATA;
-
-/*
- * Version macros
- */
-#define VER40           0x0400
-#define VER31           0x030A
-#define VER30           0x0300
-#define VER20           0x0201
-
-#define Is400Compat(dwExpWinVer)  (LOWORD(dwExpWinVer) >= 0x0400)
-#define Is310Compat(dwExpWinVer)  (LOWORD(dwExpWinVer) >= 0x030A)
 
 /*
  * Static items stored in the TEB
  */
 typedef struct _CALLBACKWND {
-    HWND hwnd;
-    struct tagWND *pwnd;
+    KHWND               hwnd;
+    PWND                pwnd;
+    PACTIVATION_CONTEXT pActCtx;
 } CALLBACKWND, *PCALLBACKWND;
 
 #define CVKKEYCACHE                 32
 #define CBKEYCACHE                  (CVKKEYCACHE >> 2)
 
-#define CVKASYNCKEYCACHE            16
+#define CVKASYNCKEYCACHE            32
 #define CBASYNCKEYCACHE             (CVKASYNCKEYCACHE >> 2)
 
 /*
  * The offset to cSpins must match WIN32_CLIENT_INFO_SPIN_COUNT defined
  * in ntpsapi.h.  GDI uses this offset to reset the spin count.
  * WARNING! This struct cannot be made larger without changing the TEB struct:
- * It must fit in ULONG Win32ClientInfo[WIN32_CLIENT_INFO_LENGTH]; (ntpsapi.h)
+ * It must fit in ULONG_PTR Win32ClientInfo[WIN32_CLIENT_INFO_LENGTH]; (ntpsapi.h)
  * (ifdef FE_SB, sizeof(CLIENTINFO) == 0x7c == 4 * WIN32_CLIENT_INFO_LENGTH)
  */
 typedef struct _CLIENTINFO {
-    DWORD               CI_flags;               // Needs to be first because CSR
-    DWORD               cSpins;
-    HANDLE              hEventQueueClient;      //   clears it on failure
+    KERNEL_ULONG_PTR    CI_flags;           // Needs to be first because CSR sets this
+    KERNEL_ULONG_PTR    cSpins;             // GDI resets this
     DWORD               dwExpWinVer;
     DWORD               dwCompatFlags;
+    DWORD               dwCompatFlags2;
     DWORD               dwTIFlags;
     PDESKTOPINFO        pDeskInfo;
-    ULONG               ulClientDelta;
-    struct tagHOOK      *phkCurrent;
+    KERNEL_ULONG_PTR    ulClientDelta;
+    PHOOK               phkCurrent;
     DWORD               fsHooks;
     CALLBACKWND         CallbackWnd;
     DWORD               dwHookCurrent;
     int                 cInDDEMLCallback;
-    HANDLE              hDdemlCallbackInst;
     PCLIENTTHREADINFO   pClientThreadInfo;
-    DWORD               dwHookData;
+    KERNEL_ULONG_PTR    dwHookData;
     DWORD               dwKeyCache;
     BYTE                afKeyState[CBKEYCACHE];
     DWORD               dwAsyncKeyCache;
     BYTE                afAsyncKeyState[CBASYNCKEYCACHE];
     BYTE                afAsyncKeyStateRecentDown[CBASYNCKEYCACHE];
+    KHKL                hKL;
     WORD                CodePage;
-#ifdef FE_SB // _CLIENTINFO
-#error
-#line 402
-#endif // FE_SB
+
+    BYTE                achDbcsCF[2]; // Save ANSI DBCS LeadByte character code
+                                      // in this field for ANSI to Unicode.
+                                      // Uses SendMessageA/PostMessageA from CLIENT
+                                      // to SERVER (index 0)
+                                      //  And...
+                                      // Uses SendMessageA/DispatchMessageA
+                                      // for CLIENT to CLIENT (index 1)
+    KERNEL_MSG          msgDbcsCB;    // Save ANSI DBCS character message in
+                                      // this field for convert Unicode to ANSI.
+                                      // Uses GetMessageA/PeekMessageA from
+                                      // SERVER to CLIENT
+
+#ifdef LATER
+    EVENTMSG            eventCached;  // Cached Event for Journal Hook
+#endif
 } CLIENTINFO, *PCLIENTINFO;
+
 
 #define CI_IN_SYNC_TRANSACTION 0x00000001
 #define CI_PROCESSING_QUEUE    0x00000002
 #define CI_16BIT               0x00000004
 #define CI_INITIALIZED         0x00000008
 #define CI_INTERTHREAD_HOOK    0x00000010
+#define CI_REGISTERCLASSES     0x00000020
+#define CI_INPUTCONTEXT_REINIT 0x00000040
 
-// We don't grab it this way in the kernel in case it is a kernel only thread
-#ifndef _USERK_
-#define GetClientInfo() ((PCLIENTINFO)((NtCurrentTeb())->Win32ClientInfo))
-#endif  // _USERK_
+#ifdef CUAS_ENABLE
+#define CI_CUAS_COINIT_CALLED  0x00000080 /* CoInit is called for CUAS */
+#define CI_CUAS_TIM_ACTIVATED  0x00000100 /* Tim activate for CUAS */
+#define CI_CUAS_MSCTF_RUNNING  0x00000200 /* Msctf (hooks) is running in the thread */
+#define CI_CUAS_DISABLE        0x00000400 /* Disable CUAS on thread */
+#define CI_CUAS_AIMM12ACTIVATED  0x00000800
+#endif // CUAS_ENABLE
 
-#ifdef FE_SB // WMCR_IR_DBCSCHAR and DBCS Macros
-#error
-#line 440
-#endif // FE_SB
+//
+// THREAD_CODEPAGE()
+//
+// Returns the CodePage based on the current keyboard layout.
+//
+#ifdef _USERK_
+    #define THREAD_CODEPAGE() (PtiCurrent()->pClientInfo->CodePage)
+#else // _USERK_
+    #define THREAD_CODEPAGE() (GetClientInfo()->CodePage)
+#endif // _USERK_
+
+// WMCR_IR_DBCSCHAR and DBCS Macros
+/*
+ * Flags used for the WM_CHAR  HIWORD of wParam for DBCS messaging.
+ *  (LOWORD of wParam will have character codepoint)
+ */
+#define WMCR_IR_DBCSCHAR       0x80000000
+/*
+ * Macros to determine this is DBCS message or not.
+ */
+#define IS_DBCS_MESSAGE(DbcsChar) (((DWORD)(DbcsChar)) & 0x0000FF00)
+
+/*
+ * Macros for IR_DBCSCHAR format to/from regular format.
+ */
+#define MAKE_IR_DBCSCHAR(DbcsChar) \
+        (IS_DBCS_MESSAGE((DbcsChar)) ?                                     \
+            (MAKEWPARAM(MAKEWORD(HIBYTE((DbcsChar)),LOBYTE((DbcsChar))),0)) : \
+            ((WPARAM)((DbcsChar) & 0x00FF))                                   \
+        )
+
+#define MAKE_WPARAM_DBCSCHAR(DbcsChar) \
+        (IS_DBCS_MESSAGE((DbcsChar)) ?                                     \
+            (MAKEWPARAM(MAKEWORD(HIBYTE((DbcsChar)),LOBYTE((DbcsChar))),0)) : \
+            ((WPARAM)((DbcsChar) & 0x00FF))                                   \
+        )
+
+#define DBCS_CHARSIZE   (2)
+
+#define IS_DBCS_ENABLED()  (TEST_SRVIF(SRVIF_DBCS))
+#define _IS_IME_ENABLED()  (TEST_SRVIF(SRVIF_IME))
+#ifdef _IMMCLI_
+    #define IS_IME_ENABLED()   (gpsi && _IS_IME_ENABLED())
+#else   // _IMMCLI_
+    #define IS_IME_ENABLED()   _IS_IME_ENABLED()
+#endif  // _IMMCLI_
+
+#ifdef CUAS_ENABLE
+
+#define _IS_CICERO_ENABLED()   (TEST_SRVIF(SRVIF_CTFIME_ENABLED))
+#ifdef _IMMCLI_
+    #define IS_CICERO_ENABLED() (gpsi && _IS_CICERO_ENABLED())
+    #define IS_CICERO_ENABLED_AND_NOT16BIT() \
+                                (IS_CICERO_ENABLED() && !(GetClientInfo()->dwTIFlags & TIF_16BIT))
+#else  // _IMMCLI_
+    #define IS_CICERO_ENABLED() _IS_CICERO_ENABLED()
+    #define IS_CICERO_ENABLED_AND_NOT16BIT() \
+                                (IS_CICERO_ENABLED() && !(PtiCurrent()->TIF_flags & TIF_16BIT))
+#endif // _IMMCLI_
+
+#endif // CUAS_ENABLE
+
+#define IS_DBCS_HKL()       (IS_ANY_DBCS_CODEPAGE(THREAD_CODEPAGE()))
+#define IS_DBCS_INPUT()     (IS_DBCS_ENABLED() || IS_DBCS_HKL())
+
+#ifndef IS_IME_KBDLAYOUT
+#define IS_IME_KBDLAYOUT(hkl) ((HIWORD((ULONG_PTR)(hkl)) & 0xf000) == 0xe000)
+#endif
+
+
+#define CP_JAPANESE     (932)
+#define CP_KOREAN       (949)
+#define CP_CHINESE_SIMP (936)
+#define CP_CHINESE_TRAD (950)
+
+#define IS_DBCS_CODEPAGE(wCodePage) \
+            ((wCodePage) == CP_JAPANESE || \
+             (wCodePage) == CP_KOREAN || \
+             (wCodePage) == CP_CHINESE_TRAD || \
+             (wCodePage) == CP_CHINESE_SIMP)
+
+#define IS_DBCS_CHARSET(charset) \
+            ((charset) == SHIFTJIS_CHARSET || \
+             (charset) == HANGEUL_CHARSET || \
+             (charset) == CHINESEBIG5_CHARSET || \
+             (charset) == GB2312_CHARSET)
+
+#define IS_JPN_1BYTE_KATAKANA(c)   ((c) >= 0xa1 && (c) <= 0xdf)
+
+/*
+ * Dynamic layout switching
+ */
+
+typedef struct tagKBDTABLE_MULT_INTERNAL {
+    KBDTABLE_MULTI multi;
+    WCHAR wszDllName[32];   // main dll name
+    struct {
+        KHANDLE hFile;
+        WORD wTable;
+        WORD wNls;
+    } files[KBDTABLE_MULTI_MAX];
+} KBDTABLE_MULTI_INTERNAL, *PKBDTABLE_MULTI_INTERNAL;
+
+// IMM dynamic loading support
+#define IMM_MAGIC_CALLER_ID     (0x19650412)
+
+BOOL User32InitializeImmEntryTable(DWORD dwMagic);
+
+#define IS_MIDEAST_ENABLED()   (TEST_SRVIF(SRVIF_MIDEAST))
 
 /*
  * Flags used for the WM_CLIENTSHUTDOWN wParam.
@@ -407,19 +725,18 @@ typedef struct _CLIENTINFO {
 #define WMCS_QUERYEND         0x0002
 #define WMCS_SHUTDOWN         0x0004
 #define WMCS_CONTEXTLOGOFF    0x0008
+#define WMCS_ENDTASK          0x0010
+#define WMCS_CONSOLE          0x0020
+#define WMCS_NODLGIFHUNG      0x0040
+#define WMCS_NORETRY          0x0080
 #define WMCS_LOGOFF           ENDSESSION_LOGOFF  /* from winuser.w */
 
-typedef struct tagDISPLAYRESOURCE {
-    WORD cyThunb;
-    WORD cxThumb;
-    WORD xCompressIcon;
-    WORD yCompressIcon;
-    WORD xCompressCursor;
-    WORD yCompressCursor;
-    WORD yKanji;
-    WORD cxBorder;
-    WORD cyBorder;
-} DISPLAYRESOURCE, *PDISPLAYRESOURCE;
+/*
+ * WM_CLIENTSHUTDOWN return value
+ */
+#define WMCSR_ALLOWSHUTDOWN     1
+#define WMCSR_DONE              2
+#define WMCSR_CANCEL            3
 
 /*
  * We don't need 64-bit intermediate precision so we use this macro
@@ -427,36 +744,32 @@ typedef struct tagDISPLAYRESOURCE {
  */
 #define MultDiv(x, y, z)        (((INT)(x) * (INT)(y) + (INT)(z) / 2) / (INT)(z))
 
-typedef DWORD  ICH;
-typedef ICH *LPICH;
+typedef DWORD ICH, *LPICH;
 
 typedef struct _PROPSET {
-    HANDLE hData;
+    KHANDLE hData;
     ATOM atom;
 } PROPSET, *PPROPSET;
 
 /*
- * Special internal codes for menu item bitmaps. So that internally, we can
- * have menu items with bitmaps without having to store a second (or more)
- * copy of the bitmap.  Currently, these are only used for MDI hacks to place
- * restore and close bitmaps into the menu bar.
+ * Internal menu flags stored in pMenu->fFlags.
+ * High order bits are used for public MNS_ flags defined in winuser.w
  */
-#ifdef MEMPHIS_MENUS
-#error
-#endif // MEMPHIS_MENUS
-#define MENUHBM_SYSTEM      1
-#define MENUHBM_RESTORE     2
-#define MENUHBM_MINIMIZE    3
-#define MENUHBM_BULLET      4
-#define MENUHBM_CLOSE       5
-#define MENUHBM_CLOSE_D     6
-#define MENUHBM_MINIMIZE_D  7
-#define MENUHBM_MAX         8
+#define MFISPOPUP               0x00000001
+#define MFMULTIROW              0x00000002
+#define MFUNDERLINE             0x00000004
+#define MFWINDOWDC              0x00000008  /* Window DC vs Client area DC when drawing*/
+#define MFINACTIVE              0x00000010
+#define MFRTL                   0x00000020
+#define MFDESKTOP               0x00000040 /* Set on the desktop menu AND its submenus */
+#define MFSYSMENU               0x00000080 /* Set on desktop menu but NOT on its submenus */
+#define MFAPPSYSMENU            0x00000100 /* Set on (sub)menu we return to the app via GetSystemMenu */
+#define MFREADONLY              0x00000200 /* Menu cannot be modified */
+#define MFLAST                  0x00000200
 
-#ifdef MEMPHIS_MENUS
-#error
-#line 505
-#endif // MEMPHIS_MENUS
+#if (MNS_LAST <= MFLAST)
+    #error MNS_ AND MF defines conflict
+#endif // (MNS_LAST <= MFLAST)
 
 // Event stuff --------------------------------------------
 
@@ -469,16 +782,16 @@ typedef struct tagEVENT_PACKET {
 
 // Window long offsets in mother window     (szDDEMLMOTHERCLASS)
 
-#define GWL_INSTANCE_INFO   0       // PCL_INSTANCE_INFO
+#define GWLP_INSTANCE_INFO  0       // PCL_INSTANCE_INFO
 
 
 // Window long offsets in client window     (szDDEMLCLIENTCLASS)
 
-#define GWL_PCI             0
-#define GWL_CONVCONTEXT     GWL_PCI + sizeof(PVOID)
+#define GWLP_PCI            0
+#define GWL_CONVCONTEXT     GWLP_PCI + sizeof(PVOID)
 #define GWL_CONVSTATE       GWL_CONVCONTEXT + sizeof(CONVCONTEXT)   // See CLST_ flags
-#define GWL_SHINST          GWL_CONVSTATE + sizeof(LONG)
-#define GWL_CHINST          GWL_SHINST + sizeof(LONG)
+#define GWLP_SHINST         GWL_CONVSTATE + sizeof(LONG)
+#define GWLP_CHINST         GWLP_SHINST + sizeof(HANDLE)
 
 #define CLST_CONNECTED              0
 #define CLST_SINGLE_INITIALIZING    1
@@ -486,24 +799,11 @@ typedef struct tagEVENT_PACKET {
 
 // Window long offsets in server window     (szDDEMLSERVERCLASS)
 
-#define GWL_PSI             0
+#define GWLP_PSI            0
 
 // Window long offsets in event window      (szDDEMLEVENTCLASS)
 
-#define GWL_PSII            0
-
-/*
- * Reserved console space.
- *
- * This was moved from the console code so that we can localize it
- * in one place.  This was necessary for dealing with the background
- * color, which we need to have for the hungapp drawing.  These are
- * stored in the extra-window-bytes of each console.
- */
-#define GWL_CONSOLE_WNDALLOC  (3 * sizeof(DWORD))
-#define GWL_CONSOLE_PID       0
-#define GWL_CONSOLE_TID       4
-#define GWL_CONSOLE_BKCOLOR   8
+#define GWLP_PSII           0
 
 
 /*
@@ -545,9 +845,16 @@ typedef struct tagEVENT_PACKET {
 #define WS_EX_ANSICREATOR   0x80000000L         // Internal
 
 /*
- * Calculate the byte offset of a field in a structure of type type.
+ * These flags are used in the internal version of NtUserFindWindowEx
  */
-#define FIELDOFFSET(type, field)    ((UINT)&(((type *)0)->field))
+#define FW_BOTH 0
+#define FW_16BIT 1
+#define FW_32BIT 2
+
+/*
+ * Calculate the size of a field in a structure of type type.
+ */
+#define FIELD_SIZE(type, field)     (sizeof(((type *)0)->field))
 
 #define FLASTKEY 0x80
 
@@ -565,79 +872,82 @@ typedef struct {
 typedef struct {
     DWORD dwRecipients;
     DWORD dwFlags;
+    BSMINFO;
 } BROADCASTSYSTEMMSGPARAMS, *LPBROADCASTSYSTEMMSGPARAMS;
 /*
  * Server side address constants. When we want to call a server side proc,
  * we pass an index indentifying the function, rather than the server side
  * address itself. More robust.  The functions between WNDPROCSTART/END
- * have client side sutbs which map to this routines.
+ * have client side stubs which map to this routines.
  *
  * Adding a new FNID (This is just what I figured out...so fix it if wrong or incomplete)
  * -Decide what range it should be in:
- *      FIND_WNDPROCSTART to FIND_WNDPROCEND: Server side proc with client
+ *      FNID_WNDPROCSTART to FNID_WNDPROCEND: Server side proc with client
  *          stub
  *      FIND_CONTROLSTART to FNID_CONTROLEND: Client side controls with no
  *          server side proc
  *      After FNID_CONTROLEND: other, like server side only procs or client
  *          side only....
- * -Make sure to adjust FNID_*START and FNID_*END appropriately.
+ * -Make sure to adjust FNID_*START and FNID_*END appropriately here and in wowuserp.w.
  * -If the ID is to be associated with a window class, and it is for all
- *      windows of the class, make sure that the InternalRegisterClassEx call
+ *      windows of that class, make sure that the InternalRegisterClassEx call
  *      receives the id as a parameter.
  * -If in FNID_WNDPROCSTART-END range, make the proper STOCID call in InitFunctionTables.
  * -Add proper FNID call in InitFunctionTables.
  * -If the class has a client side worker function (pcls->lpfnWorker) or you expect
  *   apps to send messages to it or call its window proc directly, define
  *   a message table in kernel\server.c and initialize it in InitMessageTables.
- * -If there is a client side for this proc, you probably need to add it to
- *   PFNCLIENT.
+ * -Add a new entry to the PFNCLIENT and matching entries in clinet\clinet.c pfnClientA and
+ *   pfnClientW arrays.
  * -Add the debug-only text description of this FNID to in gapszFNID in globals.c
+ * -Modify aiClassWow in client\client.c
+ * -Modify the gaFNIDtoICLS table in kernel\ntstubs.c
  */
 #define FNID_START                  0x0000029A
 #define FNID_WNDPROCSTART           0x0000029A
 
 #define FNID_SCROLLBAR              0x0000029A      // xxxSBWndProc;
-#define FNID_ICONTITLE              0x0000029B      // xxxTitleWndProc;
+#define FNID_ICONTITLE              0x0000029B      // xxxDefWindowProc;
 #define FNID_MENU                   0x0000029C      // xxxMenuWindowProc;
 #define FNID_DESKTOP                0x0000029D      // xxxDesktopWndProc;
 #define FNID_DEFWINDOWPROC          0x0000029E      // xxxDefWindowProc;
+#define FNID_MESSAGEWND             0x0000029F      // xxxDefWindowProc;
+#define FNID_SWITCH                 0x000002A0      // xxxSwitchWndProc
 
-#define FNID_WNDPROCEND             0x0000029E      // see PatchThreadWindows
-#define FNID_CONTROLSTART           0x0000029F
+#define FNID_WNDPROCEND             0x000002A0      // see PatchThreadWindows
+#define FNID_CONTROLSTART           0x000002A1
 
-#define FNID_BUTTON                 0x0000029F      // No server side proc
-#define FNID_COMBOBOX               0x000002A0      // No server side proc
-#define FNID_COMBOLISTBOX           0x000002A1      // No server side proc
-#define FNID_DIALOG                 0x000002A2      // No server side proc
-#define FNID_EDIT                   0x000002A3      // No server side proc
-#define FNID_LISTBOX                0x000002A4      // No server side proc
-#define FNID_MDICLIENT              0x000002A5      // No server side proc
-#define FNID_STATIC                 0x000002A6      // No server side proc
+#define FNID_BUTTON                 0x000002A1      // No server side proc
+#define FNID_COMBOBOX               0x000002A2      // No server side proc
+#define FNID_COMBOLISTBOX           0x000002A3      // No server side proc
+#define FNID_DIALOG                 0x000002A4      // No server side proc
+#define FNID_EDIT                   0x000002A5      // No server side proc
+#define FNID_LISTBOX                0x000002A6      // No server side proc
+#define FNID_MDICLIENT              0x000002A7      // No server side proc
+#define FNID_STATIC                 0x000002A8      // No server side proc
 
-#ifdef FE_IME
-#error
-#line 674
-#else
-#define FNID_CONTROLEND             0x000002A6
+#define FNID_IME                    0x000002A9      // No server side proc
+#define FNID_CONTROLEND             0x000002A9
 
-#define FNID_HKINLPCWPEXSTRUCT      0x000002A7
-#define FNID_HKINLPCWPRETEXSTRUCT   0x000002A8
-#define FNID_DEFFRAMEPROC           0x000002A9      // No server side proc
-#define FNID_DEFMDICHILDPROC        0x000002AA      // No server side proc
-#define FNID_MB_DLGPROC             0x000002AB      // No server side proc
-#define FNID_MDIACTIVATEDLGPROC     0x000002AC      // No server side proc
-#define FNID_SENDMESSAGE            0x000002AD
-#define FNID_UNUSED                 0x000002AE      // !!! unused
-#endif
+#define FNID_HKINLPCWPEXSTRUCT      0x000002AA
+#define FNID_HKINLPCWPRETEXSTRUCT   0x000002AB
+#define FNID_DEFFRAMEPROC           0x000002AC      // No server side proc
+#define FNID_DEFMDICHILDPROC        0x000002AD      // No server side proc
+#define FNID_MB_DLGPROC             0x000002AE      // No server side proc
+#define FNID_MDIACTIVATEDLGPROC     0x000002AF      // No server side proc
+#define FNID_SENDMESSAGE            0x000002B0
 
-#define FNID_CALLNEXTHOOKPROC       0x000002AF
-#define FNID_SENDMESSAGEFF          0x000002B0
-#define FNID_SENDMESSAGEEX          0x000002B1
-#define FNID_CALLWINDOWPROC         0x000002B2
-#define FNID_SENDMESSAGEBSM         0x000002B3
-#define FNID_SWITCH                 0x000002B4      // Just used by GetTopMostInserAfter
+#define FNID_SENDMESSAGEFF          0x000002B1
+#define FNID_SENDMESSAGEEX          0x000002B2
+#define FNID_CALLWINDOWPROC         0x000002B3
+#define FNID_SENDMESSAGEBSM         0x000002B4
+#define FNID_TOOLTIP                0x000002B5
+#define FNID_GHOST                  0x000002B6
 
-#define FNID_END                    0x000002B4
+#define FNID_SENDNOTIFYMESSAGE      0x000002B7
+#define FNID_SENDMESSAGECALLBACK    0x000002B8
+
+#define FNID_END                    0x000002B8
 
 /*
  * The size of the server side function table is defined as a power of two
@@ -648,9 +958,10 @@ typedef struct {
  */
 
 #define FNID_ARRAY_SIZE             32
+
 #if (FNID_END - FNID_START + 1) > FNID_ARRAY_SIZE
-#error"The size of the function array is greater than the allocated storage"
-#endif
+    #error"The size of the function array is greater than the allocated storage"
+#endif // (FNID_END - FNID_START + 1) > FNID_ARRAY_SIZE
 
 #define FNID_DDE_BIT                0x00002000    // Used by RegisterClassExWOW
 #define FNID_CLEANEDUP_BIT          0x00004000
@@ -662,57 +973,90 @@ typedef struct {
 #define CBFNID(s)   (gpsi->mpFnid_serverCBWndProc[(DWORD)((s) & ~FNID_STATUS_BITS) - FNID_START])
 #define GETFNID(pwnd)       ((pwnd)->fnid & ~FNID_STATUS_BITS)
 
-#define FNID_TO_CLIENT_PFNA(s) (*(((DWORD *)&gpsi->apfnClientA) + (s - FNID_START)))
-#define FNID_TO_CLIENT_PFNW(s) (*(((DWORD *)&gpsi->apfnClientW) + (s - FNID_START)))
+#ifndef BUILD_WOW6432
+typedef LRESULT (APIENTRY * WNDPROC_PWND)(PWND, UINT, WPARAM, LPARAM);
+typedef LRESULT (APIENTRY * WNDPROC_PWNDEX)(PWND, UINT, WPARAM, LPARAM, ULONG_PTR);
+#else
+typedef KERNEL_PVOID WNDPROC_PWND;
+typedef KERNEL_PVOID WNDPROC_PWNDEX;
+#endif
+typedef BOOL (APIENTRY * WNDENUMPROC_PWND)(PWND, LPARAM);
+typedef VOID (APIENTRY * TIMERPROC_PWND)(PWND, UINT, UINT_PTR, LPARAM);
 
 /*
  * Structure passed by client during process initialization that holds some
  * client-side callback addresses.
  */
 typedef struct _PFNCLIENT {
-    PROC pfnScrollBarWndProc;       // and must be paired Unicode then ANSI
-    PROC pfnTitleWndProc;
-    PROC pfnMenuWndProc;
-    PROC pfnDesktopWndProc;
-    PROC pfnDefWindowProc;
+    KPROC pfnScrollBarWndProc;       // and must be paired Unicode then ANSI
+    KPROC pfnTitleWndProc;
+    KPROC pfnMenuWndProc;
+    KPROC pfnDesktopWndProc;
+    KPROC pfnDefWindowProc;
+    KPROC pfnMessageWindowProc;
+    KPROC pfnSwitchWindowProc;
 
 // Below not in FNID_WNDPROCSTART FNID_WNDPROCEND range
 
-    PROC pfnButtonWndProc;
-    PROC pfnComboBoxWndProc;
-    PROC pfnComboListBoxProc;
-    PROC pfnDialogWndProc;
-    PROC pfnEditWndProc;
-    PROC pfnListBoxWndProc;
-    PROC pfnMDIClientWndProc;
-    PROC pfnStaticWndProc;
-#ifdef FE_IME
-#error
-#endif
+    KPROC pfnButtonWndProc;
+    KPROC pfnComboBoxWndProc;
+    KPROC pfnComboListBoxProc;
+    KPROC pfnDialogWndProc;
+    KPROC pfnEditWndProc;
+    KPROC pfnListBoxWndProc;
+    KPROC pfnMDIClientWndProc;
+    KPROC pfnStaticWndProc;
+    KPROC pfnImeWndProc;
 
 // Below not in FNID_CONTROLSTART FNID_CONTROLEND range
 
-    PROC pfnHkINLPCWPSTRUCT;    // client-side callback for hook thunks
-    PROC pfnHkINLPCWPRETSTRUCT; // client-side callback for hook thunks
-    PROC pfnDispatchHook;
-    PROC pfnDispatchMessage;
-    PROC pfnMB_DlgProc;
-    PROC pfnMDIActivateDlgProc;
+    KPROC pfnHkINLPCWPSTRUCT;    // client-side callback for hook thunks
+    KPROC pfnHkINLPCWPRETSTRUCT; // client-side callback for hook thunks
+    KPROC pfnDispatchHook;
+    KPROC pfnDispatchDefWindowProc;
+    KPROC pfnDispatchMessage;
+    KPROC pfnMDIActivateDlgProc;
 } PFNCLIENT, *PPFNCLIENT;
 
-/*
- * These types are needed before they are fully defined.
- */
+typedef struct _PFNCLIENTWORKER {
+    KPROC pfnButtonWndProc;
+    KPROC pfnComboBoxWndProc;
+    KPROC pfnComboListBoxProc;
+    KPROC pfnDialogWndProc;
+    KPROC pfnEditWndProc;
+    KPROC pfnListBoxWndProc;
+    KPROC pfnMDIClientWndProc;
+    KPROC pfnStaticWndProc;
+    KPROC pfnImeWndProc;
+} PFNCLIENTWORKER, *PPFNCLIENTWORKER;
 
+#ifdef BUILD_WOW6432
 
+extern const PFNCLIENT   pfnClientA;
+extern const PFNCLIENT   pfnClientW;
+extern const PFNCLIENTWORKER   pfnClientWorker;
 
+#define FNID_TO_CLIENT_PFNA_CLIENT(s) ((ULONG_PTR)(*(((KERNEL_ULONG_PTR *)&pfnClientA) + (s - FNID_START))))
+#define FNID_TO_CLIENT_PFNW_CLIENT(s) ((ULONG_PTR)(*(((KERNEL_ULONG_PTR *)&pfnClientW) + (s - FNID_START))))
+#define FNID_TO_CLIENT_PFNWORKER(s)   ((ULONG_PTR)(*(((KERNEL_ULONG_PTR *)&pfnClientWorker) + (s - FNID_CONTROLSTART))))
 
+WNDPROC_PWND MapKernelClientFnToClientFn(WNDPROC_PWND lpfnWndProc);
 
-DECLARE_HANDLE(HQ);
+#else
 
+#define FNID_TO_CLIENT_PFNA_CLIENT FNID_TO_CLIENT_PFNA_KERNEL
+#define FNID_TO_CLIENT_PFNW_CLIENT FNID_TO_CLIENT_PFNW_KERNEL
+#define FNID_TO_CLIENT_PFNWORKER(s) (*(((KERNEL_ULONG_PTR *)&gpsi->apfnClientWorker) + (s - FNID_CONTROLSTART)))
 
+#define MapKernelClientFnToClientFn(lpfnWndProc) (lpfnWndProc)
 
+#endif
 
+#define FNID_TO_CLIENT_PFNA_KERNEL(s) (*(((KERNEL_ULONG_PTR * KPTR_MODIFIER)&gpsi->apfnClientA) + (s - FNID_START)))
+#define FNID_TO_CLIENT_PFNW_KERNEL(s) (*(((KERNEL_ULONG_PTR * KPTR_MODIFIER)&gpsi->apfnClientW) + (s - FNID_START)))
+
+#define FNID_TO_CLIENT_PFNA FNID_TO_CLIENT_PFNA_KERNEL
+#define FNID_TO_CLIENT_PFNW FNID_TO_CLIENT_PFNW_KERNEL
 
 /*
  * Object types
@@ -726,22 +1070,23 @@ DECLARE_HANDLE(HQ);
 #define TYPE_CURSOR         3
 #define TYPE_SETWINDOWPOS   4
 #define TYPE_HOOK           5
-#define TYPE_THREADINFO     6           // thread specific info structure
-#define TYPE_CLIPDATA       7           // clipboard data
-#define TYPE_CALLPROC       8
-#define TYPE_ACCELTABLE     9
-#define TYPE_DDEACCESS      10
-#define TYPE_DDECONV        11
-#define TYPE_DDEXACT        12          // DDE transaction tracking info.
-#define TYPE_ZOMBIE         13
-#define TYPE_KBDLAYOUT      14          // Keyboard Layout handle (HKL) object.
-#define TYPE_KBDFILE        15          // Keyboard Layout file object.
-#ifdef FE_IME
-#error
-#line 796
-#else
-#define TYPE_CTYPES         16          // Count of TYPEs; Must be LAST + 1
-#endif
+#define TYPE_CLIPDATA       6           // clipboard data
+#define TYPE_CALLPROC       7
+#define TYPE_ACCELTABLE     8
+#define TYPE_DDEACCESS      9
+#define TYPE_DDECONV        10
+#define TYPE_DDEXACT        11          // DDE transaction tracking info.
+#define TYPE_MONITOR        12
+#define TYPE_KBDLAYOUT      13          // Keyboard Layout handle (HKL) object.
+#define TYPE_KBDFILE        14          // Keyboard Layout file object.
+#define TYPE_WINEVENTHOOK   15          // WinEvent hook (EVENTHOOK)
+#define TYPE_TIMER          16
+#define TYPE_INPUTCONTEXT   17          // Input Context info structure
+#define TYPE_HIDDATA        18
+#define TYPE_DEVICEINFO     19
+
+#define TYPE_CTYPES         20          // Count of TYPEs; Must be LAST + 1
+
 #define TYPE_GENERIC        255         // used for generic handle validation
 
 /* OEM Bitmap Information Structure */
@@ -751,7 +1096,7 @@ typedef struct tagOEMBITMAPINFO
     int     y;
     int     cx;
     int     cy;
-} OEMBITMAPINFO, *POEMBITMAPINFO;
+} OEMBITMAPINFO, * KPTR_MODIFIER POEMBITMAPINFO;
 
 // For the following OBI_ defines :
 //
@@ -759,9 +1104,10 @@ typedef struct tagOEMBITMAPINFO
 // an inactive state bitmap should be at +2 from it's normal state bitmap
 // A small caption bitmap should be +2 from the normal bitmap
 
-#define DOBI_NORMAL     0
-#define DOBI_PUSHED     1
-#define DOBI_INACTIVE   2
+#define DOBI_NORMAL         0
+#define DOBI_PUSHED         1
+#define DOBI_HOT            2
+#define DOBI_INACTIVE       3
 
 #define DOBI_CHECK      1   // checkbox/radio/3state button states
 #define DOBI_DOWN       2
@@ -772,114 +1118,103 @@ typedef struct tagOEMBITMAPINFO
 
 // shared bitmap mappings
 #define DOBI_3STATE         8   // offset from checkbox to 3state
-#define DOBI_MBAR          13   // offset to menu bar equivalent
+#define DOBI_MBAR OBI_CLOSE_MBAR    // offset to menu bar equivalent
 
 #define OBI_CLOSE            0      // caption close button
 #define OBI_CLOSE_D          1
-#define OBI_CLOSE_I          2
-#define OBI_REDUCE           3      // caption minimize button
-#define OBI_REDUCE_D         4
-#define OBI_REDUCE_I         5
-#define OBI_RESTORE          6      // caption restore button
-#define OBI_RESTORE_D        7
-#define OBI_HELP             8
-#define OBI_HELP_D           9
-#define OBI_ZOOM            10      // caption maximize button
-#define OBI_ZOOM_D          11
-#define OBI_ZOOM_I          12
-#define OBI_CLOSE_MBAR      13      // menu bar close button
-#define OBI_CLOSE_MBAR_D    14
-#define OBI_CLOSE_MBAR_I    15
-#define OBI_REDUCE_MBAR     16      // menu bar minimize button
-#define OBI_REDUCE_MBAR_D   17
-#define OBI_REDUCE_MBAR_I   18
-#define OBI_RESTORE_MBAR    19      // menu bar restore button
-#define OBI_RESTORE_MBAR_D  20
-#define OBI_CAPCACHE1       21      // caption icon cache entry #1
-#define OBI_CAPCACHE1_I     22
-#define OBI_CAPCACHE2       23      // caption icon cache entry #2
-#define OBI_CAPCACHE2_I     24
-#define OBI_CAPCACHE3       25      // caption icon cache entry #3
-#define OBI_CAPCACHE3_I     26
-#define OBI_CAPCACHE4       27      // caption icon cache entry #4
-#define OBI_CAPCACHE4_I     28
-#define OBI_CAPCACHE5       29      // caption icon cache entry #5
-#define OBI_CAPCACHE5_I     30
-#define OBI_CAPBTNS         31      // caption buttons cache
-#define OBI_CAPBTNS_I       32
-#define OBI_CLOSE_PAL       33      // small caption close button
-#define OBI_CLOSE_PAL_D     34
-#define OBI_CLOSE_PAL_I     35
-#define OBI_NCGRIP          36      // bottom/right size grip
-#define OBI_UPARROW         37      // up scroll arrow
-#define OBI_UPARROW_D       38
-#define OBI_UPARROW_I       39
-#define OBI_DNARROW         40      // down scroll arrow
-#define OBI_DNARROW_D       41
-#define OBI_DNARROW_I       42
-#define OBI_RGARROW         43      // right scroll arrow
-#define OBI_RGARROW_D       44
-#define OBI_RGARROW_I       45
-#define OBI_LFARROW         46      // left scroll arrow
-#define OBI_LFARROW_D       47
-#define OBI_LFARROW_I       48
-#define OBI_MENUARROW       49      // menu hierarchy arrow
-#define OBI_MENUCHECK       50      // menu check mark
-#define OBI_MENUBULLET      51      // menu bullet mark
-#define OBI_RADIOMASK       52      // radio button mask
-#define OBI_CHECK           53      // check box
-#define OBI_CHECK_C         54
-#define OBI_CHECK_D         55
-#define OBI_CHECK_CD        56
-#define OBI_CHECK_CDI       57
-#define OBI_RADIO           58      // radio button
-#define OBI_RADIO_C         59
-#define OBI_RADIO_D         60
-#define OBI_RADIO_CD        61
-#define OBI_RADIO_CDI       62
-#define OBI_3STATE          63      // 3-state button
-#define OBI_3STATE_C        64
-#define OBI_3STATE_D        65
-#define OBI_3STATE_CD       66
-#define OBI_3STATE_CDI      67
-#define OBI_COUNT           68      // bitmap count
-
-typedef struct tagOEMINFO {
-
-    OEMBITMAPINFO bm[OBI_COUNT];
-    UINT          cyPixelsPerInch;    // logical pixels per inch in Y direction
-    WORD          DispDrvExpWinVer;   // Display driver expected win version no
-    BYTE          Planes;             // Planes
-    BYTE          BitsPixel;          // Depth
-    WORD          BitCount;           // Planes * Depth
-
-    UINT          cxPixelsPerInch;    // Remove these when finished porting.
-    int           fMouse;             //
-
-}   OEMINFO, *POEMINFO;
-
-#define RIPF_PROMPT             0x00000007
-#define RIPF_PRINT              0x00000070
-#define RIPF_VALIDUSERFLAGS     0x00000177
-
-#define RIPF_PROMPTONERROR      0x00000001
-#define RIPF_PROMPTONWARNING    0x00000002
-#define RIPF_PROMPTONVERBOSE    0x00000004
-#define RIPF_PRINTONERROR       0x00000010
-#define RIPF_PRINTONWARNING     0x00000020
-#define RIPF_PRINTONVERBOSE     0x00000040
-#define RIPF_PRINTFILELINE      0x00000100
-#define RIPF_KERNEL             0x08000000
-#define RIPF_CAIRO              0x10000000
-#define RIPF_DAYTONA            0x20000000
-#define RIPF_CHECKED            0x40000000
-#define RIPF_FREE               0x80000000
-
-#define SET_RIP_FLAG(f)         gpsi->RipFlags |= (f)
-#define CLEAR_RIP_FLAG(f)       gpsi->RipFlags &= ~(f)
-#define TEST_RIP_FLAG(f)        (gpsi->RipFlags & (f))
-#define TOGGLE_RIP_FLAG(f)      gpsi->RipFlags ^= (f)
-
+#define OBI_CLOSE_H          2
+#define OBI_CLOSE_I          3
+#define OBI_REDUCE           4      // caption minimize button
+#define OBI_REDUCE_D         5
+#define OBI_REDUCE_H         6
+#define OBI_REDUCE_I         7
+#define OBI_RESTORE          8      // caption restore button
+#define OBI_RESTORE_D        9
+#define OBI_RESTORE_H       10
+#define OBI_HELP            11
+#define OBI_HELP_D          12
+#define OBI_HELP_H          13
+#define OBI_ZOOM            14      // caption maximize button
+#define OBI_ZOOM_D          15
+#define OBI_ZOOM_H          16
+#define OBI_ZOOM_I          17
+#define OBI_CLOSE_MBAR      18      // menu bar close button
+#define OBI_CLOSE_MBAR_D    19
+#define OBI_CLOSE_MBAR_H    20
+#define OBI_CLOSE_MBAR_I    21
+#define OBI_REDUCE_MBAR     22      // menu bar minimize button
+#define OBI_REDUCE_MBAR_D   23
+#define OBI_REDUCE_MBAR_H   24
+#define OBI_REDUCE_MBAR_I   25
+#define OBI_RESTORE_MBAR    26      // menu bar restore button
+#define OBI_RESTORE_MBAR_D  27
+#define OBI_RESTORE_MBAR_H  28
+#define OBI_CAPCACHE1       29      // caption icon cache entry #1
+#define OBI_CAPCACHE1_I     30
+#define OBI_CAPCACHE2       31      // caption icon cache entry #2
+#define OBI_CAPCACHE2_I     32
+#define OBI_CAPCACHE3       33      // caption icon cache entry #3
+#define OBI_CAPCACHE3_I     34
+#define OBI_CAPCACHE4       35      // caption icon cache entry #4
+#define OBI_CAPCACHE4_I     36
+#define OBI_CAPCACHE5       37      // caption icon cache entry #5
+#define OBI_CAPCACHE5_I     38
+#define OBI_CAPBTNS         39      // caption buttons cache
+#define OBI_CAPBTNS_I       40
+#define OBI_CLOSE_PAL       41      // small caption close button
+#define OBI_CLOSE_PAL_D     42
+#define OBI_CLOSE_PAL_H     43
+#define OBI_CLOSE_PAL_I     44
+#define OBI_NCGRIP          45      // bottom/right size grip
+#define OBI_UPARROW         46      // up scroll arrow
+#define OBI_UPARROW_D       47
+#define OBI_UPARROW_H       48
+#define OBI_UPARROW_I       49
+#define OBI_DNARROW         50      // down scroll arrow
+#define OBI_DNARROW_D       51
+#define OBI_DNARROW_H       52
+#define OBI_DNARROW_I       53
+#define OBI_RGARROW         54      // right scroll arrow
+#define OBI_RGARROW_D       55
+#define OBI_RGARROW_H       56
+#define OBI_RGARROW_I       57
+#define OBI_LFARROW         58      // left scroll arrow
+#define OBI_LFARROW_D       59
+#define OBI_LFARROW_H       60
+#define OBI_LFARROW_I       61
+#define OBI_MENUARROW       62      // menu hierarchy arrow
+#define OBI_MENUCHECK       63      // menu check mark
+#define OBI_MENUBULLET      64      // menu bullet mark
+#define OBI_MENUARROWUP     65
+#define OBI_MENUARROWUP_H   66
+#define OBI_MENUARROWUP_I   67
+#define OBI_MENUARROWDOWN   68
+#define OBI_MENUARROWDOWN_H 69
+#define OBI_MENUARROWDOWN_I 70
+#define OBI_RADIOMASK       71      // radio button mask
+#define OBI_CHECK           72      // check box
+#define OBI_CHECK_C         73
+#define OBI_CHECK_D         74
+#define OBI_CHECK_CD        75
+#define OBI_CHECK_CDI       76
+#define OBI_RADIO           77      // radio button
+#define OBI_RADIO_C         78
+#define OBI_RADIO_D         79
+#define OBI_RADIO_CD        80
+#define OBI_RADIO_CDI       81
+#define OBI_3STATE          82      // 3-state button
+#define OBI_3STATE_C        83
+#define OBI_3STATE_D        84
+#define OBI_3STATE_CD       85
+#define OBI_3STATE_CDI      86
+#define OBI_POPUPFIRST      87      // System popupmenu bitmaps.
+#define OBI_CLOSE_POPUP     87
+#define OBI_RESTORE_POPUP   88
+#define OBI_ZOOM_POPUP      89
+#define OBI_REDUCE_POPUP    90
+#define OBI_NCGRIP_L        91
+#define OBI_MENUARROW_L     92
+#define OBI_COUNT           93      // bitmap count
 
 /*
  * One global instance of this structure is allocated into memory that is
@@ -887,10 +1222,149 @@ typedef struct tagOEMINFO {
  * read this data to avoid calling the server.
  */
 
-typedef struct tagSERVERINFO {      // si
-    UINT RipFlags;                  // RIPF_ flags
+#define NCHARS   256
+#define NCTRLS   0x20
 
-    DWORD cHandleEntries;           // count of handle entries in array
+#define PUSIF_PALETTEDISPLAY            0x00000001  /* Is the display palettized? */
+#define PUSIF_SNAPTO                    0x00000002  /* Is SnapTo enabled? */
+#define PUSIF_COMBOBOXANIMATION         0x00000004  /* Must match UPBOOLMask(SPI_GETCOMBOBOXANIMATION) */
+#define PUSIF_LISTBOXSMOOTHSCROLLING    0x00000008  /* Must match UPBOOLMask(SPI_GETLISTBOXSMOOTHSCROLLING) */
+#define PUSIF_KEYBOARDCUES              0x00000020  /* Must match UPBOOLMask(SPI_GETKEYBOARDCUES) */
+
+#define PUSIF_UIEFFECTS                 0x80000000  /* Must match UPBOOLMask(SPI_GETUIEFFECTS) */
+
+#define TEST_PUSIF(f)               TEST_FLAG(gpsi->PUSIFlags, f)
+#define TEST_BOOL_PUSIF(f)          TEST_BOOL_FLAG(gpsi->PUSIFlags, f)
+#define SET_PUSIF(f)                SET_FLAG(gpsi->PUSIFlags, f)
+#define CLEAR_PUSIF(f)              CLEAR_FLAG(gpsi->PUSIFlags, f)
+#define SET_OR_CLEAR_PUSIF(f, fSet) SET_OR_CLEAR_FLAG(gpsi->PUSIFlags, f, fSet)
+#define TOGGLE_PUSIF(f)             TOGGLE_FLAG(gpsi->PUSIFlags, f)
+
+#define TEST_EffectPUSIF(f)  \
+    ((gpsi->PUSIFlags & (f | PUSIF_UIEFFECTS)) == (f | PUSIF_UIEFFECTS))
+
+/*
+ * Some UI effects have an "inverted" disabled value (ie, disabled is TRUE)
+ */
+#define TEST_EffectInvertPUSIF(f) (TEST_PUSIF(f) || !TEST_PUSIF(PUSIF_UIEFFECTS))
+
+#define TEST_KbdCuesPUSIF (!gpsi->bKeyboardPref                         \
+                        && !TEST_EffectInvertPUSIF(PUSIF_KEYBOARDCUES)  \
+                        && !(GetAppCompatFlags2(VER40) & GACF2_KCOFF))
+
+
+typedef struct tagPERUSERSERVERINFO {
+    /*
+     * All of this information should be mapped to the server, but put in
+     * the desktop section so it can vary from desktop to desktop.
+     */
+
+    int         aiSysMet[SM_CMETRICS];
+    COLORREF    argbSystemUnmatched[COLOR_MAX];
+    COLORREF    argbSystem[COLOR_MAX];
+    KHBRUSH     ahbrSystem[COLOR_MAX];
+    KHBRUSH     hbrGray;
+    POINT       ptCursor;
+    DWORD       dwLastRITEventTickCount;
+    int         nEvents;
+
+    int         gclBorder;              /* # of logical units in window frame */
+
+    UINT        dtScroll;
+    UINT        dtLBSearch;
+    UINT        dtCaretBlink;
+    UINT        ucWheelScrollLines;    /* # of lines to scroll when wheel is rolled */
+
+    int         wMaxLeftOverlapChars;
+    int         wMaxRightOverlapChars;
+
+    /*
+     * these are here to lose a thunk for GetDialogBaseUnits
+     */
+    int         cxSysFontChar;
+    int         cySysFontChar;
+    int         cxMsgFontChar;
+    int         cyMsgFontChar;
+    TEXTMETRIC  tmSysFont;
+
+    /*
+     * values to allow HasCaptionIcon to be in user32
+     */
+    KHICON      hIconSmWindows;
+    KHICON      hIcoWindows;
+
+    KHFONT      hCaptionFont;
+    KHFONT      hMsgFont;
+
+    /*
+     * These are needed for various user-mode performance hacks.
+     */
+    DWORD       dwKeyCache;
+    DWORD       dwAsyncKeyCache;
+    DWORD       cCaptures;
+
+    /*
+     * Information about the current state of the display which needs to
+     * be shared with the client side. The information here corresponds
+     * to the display in gpDispInfo. Note that much of this information
+     * is only for the primary monitor.
+     */
+    OEMBITMAPINFO oembmi[OBI_COUNT];  /* OEM bitmap information */
+    RECT          rcScreen;           /* rectangle of the virtual screen */
+    WORD          BitCount;           /* Planes * Depth */
+    WORD          dmLogPixels;        /* logical pixels per inch, both X and Y */
+    BYTE          Planes;             /* Planes */
+    BYTE          BitsPixel;          /* Depth */
+
+    DWORD         PUSIFlags;          // PUSIF_ flags
+    UINT          uCaretWidth;        /* caret width in edits */
+    LANGID        UILangID;           // Default UI language
+
+    BOOL        bLastRITWasKeyboard : 1;
+    BOOL        bKeyboardPref : 1;    /* To propagate ACCF_KEYBOARDPREF to client side */
+
+    /*
+     * TickCount when our session updated LastSystemRITEventTickCount on
+     * the shared system page that stands for the last RIT event time across
+     * all terminal sessions. For MP performance, it is not updated all
+     * the time.
+     */
+    DWORD       dwLastSystemRITEventTickCountUpdate;
+
+} PERUSERSERVERINFO, *PPERUSERSERVERINFO;
+
+/*
+ * System-wide last user input info on shared system page is updated
+ * by a session only if this many tick counts have elapsed since
+ * the last time the session updated it.
+ */
+
+#define SYSTEM_RIT_EVENT_UPDATE_PERIOD  (60 * 1000)
+
+#define SRVIF_CHECKED                   0x0001
+//      SRVIF_WINEVENTHOOKS             0x0002  Obsoleted by FEVENTHOOKED
+#define SRVIF_DBCS                      0x0004
+#define SRVIF_IME                       0x0008
+#define SRVIF_MIDEAST                   0x0010
+#define SRVIF_HOOKED                    0x0020
+#ifdef CUAS_ENABLE
+#define SRVIF_CTFIME_ENABLED            0x0040
+#endif // CUAS_ENABLE
+
+#define TEST_SRVIF(f)                   TEST_FLAG(gpsi->wSRVIFlags, f)
+#define TEST_BOOL_SRVIF(f)              TEST_BOOL_FLAG(gpsi->wSRVIFlags, f)
+#define SET_SRVIF(f)                    SET_FLAG(gpsi->wSRVIFlags, f)
+#define CLEAR_SRVIF(f)                  CLEAR_FLAG(gpsi->wSRVIFlags, f)
+#define SET_OR_CLEAR_SRVIF(f, fSet)     SET_OR_CLEAR_FLAG(gpsi->wSRVIFlags, f, fSet)
+#define TOGGLE_SRVIF(f)                 TOGGLE_FLAG(gpsi->wSRVIFlags, f)
+
+typedef struct tagSERVERINFO {      // si
+    WORD    wRIPFlags;              // RIPF_ flags
+    WORD    wSRVIFlags;             // SRVIF_ flags
+    WORD    wRIPPID;                // PID of process to apply RIP flags to (zero means all)
+    WORD    wRIPError;              // Error to break on (zero means all errors are treated equal)
+
+    KERNEL_ULONG_PTR cHandleEntries;    // count of handle entries in array
 
     /*
      * Array of server-side function pointers.
@@ -899,8 +1373,8 @@ typedef struct tagSERVERINFO {      // si
      * The order of these are enforced by the FNID_ constants, and must match
      * the client-side mpFnidClientPfn[] order as well.
      */
-    LONG (APIENTRY *mpFnidPfn[FNID_ARRAY_SIZE])(struct tagWND *, UINT, DWORD, LONG, DWORD); // function mapping table
-    LONG (APIENTRY *aStoCidPfn[(FNID_WNDPROCEND - FNID_START) + 1])(struct tagWND *, UINT, DWORD, LONG);
+    WNDPROC_PWNDEX mpFnidPfn[FNID_ARRAY_SIZE]; // function mapping table
+    WNDPROC_PWND aStoCidPfn[(FNID_WNDPROCEND - FNID_START) + 1];
 
     // mapping of fnid to min bytes need by public windproc user
     WORD mpFnid_serverCBWndProc[(FNID_END - FNID_START) + 1];
@@ -910,33 +1384,9 @@ typedef struct tagSERVERINFO {      // si
      */
     struct _PFNCLIENT apfnClientA;
     struct _PFNCLIENT apfnClientW;
+    struct _PFNCLIENTWORKER apfnClientWorker;
 
-    DWORD dwDebugErrorLevel;
-
-    /*
-     * All of this information should be mapped to the server, but put in
-     * the desktop section so it can vary from desktop to desktop.
-     */
-
-    int aiSysMet[SM_CMETRICS];
-    COLORREF argbSystem[COLOR_INFOBK + 1];
-    POINT ptCursor;
     DWORD cbHandleTable;
-    int nEvents;
-
-    OEMINFO    oemInfo;
-    int gclBorder;              /* # of logical units in window frame */
-
-    UINT dtScroll;
-    UINT dtLBSearch;
-    UINT dtCaretBlink;
-    BOOL fSnapTo;
-    UINT ucWheelScrollLines;    /* # of lines to scroll when wheel is rolled */
-
-    /*
-     * Is the device palette managed ?
-     */
-    BOOL fPaletteDisplay;
 
     /*
      * Class atoms to allow fast checks on the client.
@@ -946,94 +1396,122 @@ typedef struct tagSERVERINFO {      // si
     DWORD dwDefaultHeapBase;            // so WOW can do handle validation
     DWORD dwDefaultHeapSize;
 
-
-    int  wMaxLeftOverlapChars;
-    int  wMaxRightOverlapChars;
-
-    RECT rcWork;
-
     UINT uiShellMsg;         // message for shell hooks
-    /*
-     * these are here to lose a thunk for GetDialogBaseUnits
-     */
-    int cxSysFontChar;
-    int cySysFontChar;
-    int cxMsgFontChar;
-    int cyMsgFontChar;
-    TEXTMETRIC tmSysFont;
 
-    UINT wMaxBtnSize;   /* Size of the longest button string in any MessageBox */
-    DWORD mpAllMBbtnStringsToSTR[MAX_MB_STRINGS];  /* MB button String IDs */
-    DWORD AllMBbtnStrings[MAX_MB_STRINGS]; /* MB button String buffer offsets*/
-    WCHAR szOK[10];
-    WCHAR szCANCEL[15];
-    WCHAR szYES[10];
-    WCHAR szNO[10];
-    WCHAR szABORT[15];
-    WCHAR szRETRY[15];
-    WCHAR szIGNORE[15];
-    WCHAR szCLOSE[15];
-    WCHAR szHELP[15];
+    UINT  wMaxBtnSize;   /* Size of the longest button string in any MessageBox */
+
+    MBSTRING MBStrings[MAX_MB_STRINGS];
 
     /*
      * values to allow HasCaptionIcon to be in user32
      */
     ATOM atomIconSmProp;
     ATOM atomIconProp;
-    HICON hIconSmWindows;
-    HICON hIcoWindows;
-    HFONT hCaptionFont;
-    HFONT hMsgFont;
-
-    int cntMBox;
 
     ATOM atomContextHelpIdProp;
 
-    DWORD dwKeyCache;
-    DWORD dwAsyncKeyCache;
-} SERVERINFO, *PSERVERINFO;
+    char acOemToAnsi[NCHARS];
+    char acAnsiToOem[NCHARS];
+
+#ifdef LAME_BUTTON
+    /*
+     * button size
+     */
+    int ncxLame;
+    WCHAR   gwszLame[50];
+#endif // LAME_BUTTON
+
+    /*
+     * Per user settings. We use _HYDRA_'s PERUSERSERVERINO struct
+     * to avoid defining fields in two places.
+     */
+    PERUSERSERVERINFO;
+
+#if DEBUGTAGS
+    DWORD adwDBGTAGFlags[DBGTAG_Max + 1];
+#endif // DEBUGTAGS
+
+    /*
+     * We track the WinEvent hooks that are installed for events by their
+     * event category.  This is strictly an implementation detail, and is
+     * not exposed to the user.  The user API is IsWinEventHookInstalled.
+     */
+    DWORD dwInstalledEventHooks;
+
+} SERVERINFO;
+
+
+/*
+ * IS_BUTTON checks if the button is either our system button control or
+ * a fusionized one.
+ *
+ * To check for system button controls only, then use
+ * (GETFNID(pwnd) == FNID_BUTTON).
+ *
+ * IS_EDIT works similarly for edit controls and the system edit control
+ * can also be checked by (GETFNID(pwnd) == FNID_EDIT).
+ */
+#ifdef _USERK_
+#define REBASEALWAYS(p, elem) ((p)->elem)
+#endif
+#define IS_BUTTON(pwnd)  (gpsi->atomSysClass[ICLS_BUTTON] == ((PCLS)REBASEALWAYS(pwnd, pcls))->atomNVClassName)
+#define IS_EDIT(pwnd)    (gpsi->atomSysClass[ICLS_EDIT] == ((PCLS)REBASEALWAYS(pwnd, pcls))->atomNVClassName)
+
+/*
+ * Event Categories
+ * If you make any changes here, you must update the global variable geci,
+ * and the define EVENTCATEGORY_ALL!
+ */
+#define EVENTCATEGORY_SYSTEM_MENU           0x0001
+#define EVENTCATEGORY_CONSOLE               0x0002
+#define EVENTCATEGORY_FOCUS                 0x0004
+#define EVENTCATEGORY_NAMECHANGE            0x0008
+#define EVENTCATEGORY_VALUECHANGE           0x0010
+#define EVENTCATEGORY_STATECHANGE           0x0020
+#define EVENTCATEGORY_LOCATIONCHANGE        0x0040
+#define EVENTCATEGORY_OTHER                 0x8000
+#define EVENTCATEGORY_ALL                   0x807F
+DWORD CategoryMaskFromEvent(DWORD event);
+DWORD CategoryMaskFromEventRange(DWORD eventMin, DWORD eventMax);
+
+/*
+ * Quick test for any Window Event Hooks.
+ */
+#define FEVENTCATEGORYHOOKED(CategoryMask) (TEST_FLAG(gpsi->dwInstalledEventHooks, (CategoryMask)) ? TRUE : FALSE)
+#define FEVENTHOOKED(Event) FEVENTCATEGORYHOOKED(CategoryMaskFromEvent(Event))
 
 /* MessageBox String pointers from offset in the gpsi struct */
-#define GETGPSIMBPSTR(u) (LPWSTR) ((LPBYTE)gpsi->AllMBbtnStrings + *(gpsi->AllMBbtnStrings+(u)))
+#define GETGPSIMBPSTR(u) KPWSTR_TO_PWSTR(gpsi->MBStrings[(u)].szName)
 
 typedef struct _WNDMSG {
     UINT maxMsgs;
-    BYTE *abMsgs;
+    KPBYTE abMsgs;
 } WNDMSG, *PWNDMSG;
 
 typedef struct tagSHAREDINFO {
-    struct tagSERVERINFO  *psi;
-    struct _HANDLEENTRY   *aheList;   // handle table pointer
+    PSERVERINFO     psi;
+    PHE             aheList;         /* handle table pointer                */
+    PDISPLAYINFO    pDispInfo;       /* global displayinfo                  */
+    KERNEL_UINT_PTR ulSharedDelta;   /* delta between client and kernel mapping of ...*/
+                                     /* shared memory section. Only valid/used in client.*/
 
-    /*
-     * This field is used for DLL preloading to allow custom functinality
-     * for all windows processes.
-     */
-    LPWSTR pszDllList;
+    WNDMSG          awmControl[FNID_END - FNID_START + 1];
 
-    WNDMSG awmControl[FNID_END - FNID_START + 1];
-
-    WNDMSG DefWindowMsgs;
-    WNDMSG DefWindowSpecMsgs;
+    WNDMSG          DefWindowMsgs;
+    WNDMSG          DefWindowSpecMsgs;
 } SHAREDINFO, *PSHAREDINFO;
 
 typedef struct _USERCONNECT {
     IN  ULONG ulVersion;
     OUT ULONG ulCurrentVersion;
+    IN  DWORD dwDispatchCount;
     OUT SHAREDINFO siClient;
 } USERCONNECT, *PUSERCONNECT;
 
-#define USER_MAJOR_VERSION  0x0002
-#define USER_MINOR_VERSION  0x0002
+#define USER_MAJOR_VERSION  0x0005
+#define USER_MINOR_VERSION  0x0000
 
 #define USERCURRENTVERSION   MAKELONG(USER_MINOR_VERSION, USER_MAJOR_VERSION)
-
-#define ptCursor (gpsi->ptCursor)
-#define oemInfo (gpsi->oemInfo)
-
-#define SYSRGB(index)       gpsi->argbSystem[COLOR_##index]
-#define SYSHBR(index)       ahbrSystem[COLOR_##index]
-#define SYSMET(index)       ((int)(gpsi->aiSysMet)[SM_##index])
 
 /*
  * Options used for NtUserSetSysColors
@@ -1041,6 +1519,7 @@ typedef struct _USERCONNECT {
 #define SSCF_NOTIFY             0x00000001
 #define SSCF_FORCESOLIDCOLOR    0x00000002
 #define SSCF_SETMAGICCOLORS     0x00000004
+#define SSCF_16COLORS           0x00000008
 
 /*
  * Structure used for GetClipboardData, where we can have
@@ -1050,7 +1529,10 @@ typedef struct tagGETCLIPBDATA {
 
     UINT   uFmtRet;          // Identifies returned format.
     BOOL   fGlobalHandle;    // Indicates if handle is global.
-    HANDLE hLocale;          // Locale (text-type formats only).
+    union {
+        HANDLE hLocale;      // Locale (text-type formats only).
+        HANDLE hPalette;     // Palette (bitmap-type formats only).
+    };
 
 } GETCLIPBDATA, *PGETCLIPBDATA;
 
@@ -1066,45 +1548,100 @@ typedef struct tagSETCLIPBDATA {
 } SETCLIPBDATA, *PSETCLIPBDATA;
 
 /*
+ * HM Object definition control flags
+ */
+#define OCF_THREADOWNED         0x01
+#define OCF_PROCESSOWNED        0x02
+#define OCF_MARKPROCESS         0x04
+#define OCF_USEPOOLQUOTA        0x08
+#define OCF_DESKTOPHEAP         0x10
+#define OCF_USEPOOLIFNODESKTOP  0x20
+#define OCF_SHAREDHEAP          0x40
+#if DBG
+#define OCF_VARIABLESIZE        0x80
+#else
+#define OCF_VARIABLESIZE        0
+#endif
+
+/*
+ * From HANDTABL.C
+ */
+/*
+ * Static information about each handle type.
+ */
+typedef void (*FnDestroyUserObject)(void *);
+
+typedef struct tagHANDLETYPEINFO {
+#if DBG
+    LPCSTR              szObjectType;
+    UINT                uSize;
+#endif
+    FnDestroyUserObject fnDestroy;
+    DWORD               dwAllocTag;
+    BYTE                bObjectCreateFlags;
+} HANDLETYPEINFO, *PHANDLETYPEINFO;
+
+/*
  * The following is the header of all objects managed in the handle list.
  * (allocated as part of the object for easy access).  All object
  * headers must start with the members of a HEAD structure.
  */
 typedef struct _HEAD {
-    HANDLE h;
-    DWORD cLockObj;
-} HEAD, *PHEAD;
+    KHANDLE h;
+    DWORD   cLockObj;
+} HEAD, * KPTR_MODIFIER PHEAD;
 
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 1132
-typedef struct _SHROBJHEAD {
-    HEAD;
-    PDESKTOP rpdesk;
-    PBYTE pSelf;
-} SHROBJHEAD, *PSHROBJHEAD;
-
+/*
+ * sizeof(THROBJHEAD) must be equal to sizeof(PROCOBJHEAD)
+ * This is to make sure that DESKHEAD fields are always at the same offset.
+ */
 typedef struct _THROBJHEAD {
-    SHROBJHEAD;
+    HEAD;
     PTHREADINFO pti;
-} THROBJHEAD, *PTHROBJHEAD;
+} THROBJHEAD, * KPTR_MODIFIER PTHROBJHEAD;
 
 typedef struct _PROCOBJHEAD {
-    SHROBJHEAD;
-    struct tagPROCESSINFO *ppi;
+    HEAD;
     DWORD hTaskWow;
 } PROCOBJHEAD, *PPROCOBJHEAD;
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 1148
+
+typedef struct _PROCMARKHEAD {
+    PROCOBJHEAD;
+    PPROCESSINFO ppi;
+} PROCMARKHEAD, *PPROCMARKHEAD;
+
+typedef struct _DESKHEAD {
+    PDESKTOP rpdesk;
+    KPBYTE   pSelf;
+} DESKHEAD, *PDESKHEAD;
+
+/*
+ * This type is for HM casting only. Use THRDESKHEAD or PROCDESKHEAD instead.
+ */
+typedef struct _DESKOBJHEAD {
+    HEAD;
+    KERNEL_PVOID pOwner;
+    DESKHEAD;
+} DESKOBJHEAD, *PDESKOBJHEAD;
+
+typedef struct _THRDESKHEAD {
+    THROBJHEAD;
+    DESKHEAD;
+} THRDESKHEAD, *PTHRDESKHEAD;
+
+typedef struct _PROCDESKHEAD {
+    PROCOBJHEAD;
+    DESKHEAD;
+} PROCDESKHEAD, *PPROCDESKHEAD;
+
+
 
 #define HANDLEF_DESTROY        0x01
 #define HANDLEF_INDESTROY      0x02
-#define HANDLEF_INWAITFORDEATH 0x04
-#define HANDLEF_FINALDESTROY   0x08
 #define HANDLEF_MARKED_OK      0x10
-
-#define GETPTI(p)           ((p)->head.pti)
+#define HANDLEF_GRANTED        0x20
+#define HANDLEF_POOL           0x40     // for the mother desktop window
+#define HANDLEF_VALID          0x7F
 
 /*
  * The following is a handle table entry.
@@ -1115,14 +1652,16 @@ typedef struct _PROCOBJHEAD {
  * size down.  Look at DestroyProcessesObjects() for an example.
  */
 typedef struct _HANDLEENTRY {
-    PHEAD   phead;                  /* pointer to the real object */
-    PVOID   pOwner;                 /* pointer to owning entity (pti or ppi) */
-    BYTE    bType;                  /* type of object */
-    BYTE    bFlags;                 /* flags - like destroy flag */
-    WORD    wUniq;                  /* uniqueness count */
-#ifdef DEBUG
-#error
-#endif
+    PHEAD       phead;                  /* pointer to the real object */
+    KERNEL_PVOID pOwner;                 /* pointer to owning entity (pti or ppi) */
+    BYTE        bType;                  /* type of object */
+    BYTE        bFlags;                 /* flags - like destroy flag */
+    WORD        wUniq;                  /* uniqueness count */
+
+#if DBG
+    PLR         plr;                    /* lock record pointer */
+#endif // DBG
+
 } HANDLEENTRY;
 
 /*
@@ -1136,37 +1675,104 @@ typedef struct _HANDLEENTRY {
 #define HMUNIQSHIFT             16              // bits to shift uniqueness
 #define HMUNIQBITS              0xFFFF          // valid uniqueness bits
 
-#define HMHandleFromIndex(i)    ((HANDLE)(i | (gSharedInfo.aheList[i].wUniq << HMUNIQSHIFT)))
-#define HMIndexFromHandle(h)    (((DWORD)h) & HMINDEXBITS)
-#define HMPheFromObject(p)      (&gSharedInfo.aheList[HMIndexFromHandle(((PHEAD)p)->h)])
-#define HMObjectFromHandle(h)   ((PVOID)(gSharedInfo.aheList[HMIndexFromHandle(h)].phead))
-#define HMUniqFromHandle(h)     ((WORD)((((DWORD)h) >> HMUNIQSHIFT) & HMUNIQBITS))
+#ifdef _USERK_
+#define HMHandleFromIndex(i)    LongToHandle((LONG)(i) | ((LONG)gSharedInfo.aheList[i].wUniq << HMUNIQSHIFT))
+#define HMObjectFlags(p)        (gahti[HMObjectType(p)].bObjectCreateFlags)
+#endif
+
+#define HMIndexFromHandle(h)    ((ULONG)(((ULONG_PTR)(h)) & HMINDEXBITS))
+#define _HMPheFromObject(p)      (&gSharedInfo.aheList[HMIndexFromHandle((((PHEAD)p)->h))])
+#define _HMObjectFromHandle(h)  ((KERNEL_PVOID)(gSharedInfo.aheList[HMIndexFromHandle(h)].phead))
+#define HMUniqFromHandle(h)     ((WORD)((((ULONG_PTR)h) >> HMUNIQSHIFT) & HMUNIQBITS))
 #define HMObjectType(p)         (HMPheFromObject(p)->bType)
 
 #define HMIsMarkDestroy(p)      (HMPheFromObject(p)->bFlags & HANDLEF_DESTROY)
 
-#ifdef DEBUG
-#error
-#line 1206
-#endif
-
-
 /*
  * Validation, handle mapping, etc.
  */
-#define HMRevalidateHandle(h)       HMValidateHandle(h, TYPE_GENERIC)
+#define HMRevalidateHandle(h)       HMValidateHandleNoSecure(h, TYPE_GENERIC)
+#define HMRevalidateCatHandle(h)    HMValidateCatHandleNoSecure(h, TYPE_GENERIC)
+
 #define HMRevalidateHandleNoRip(h)  HMValidateHandleNoRip(h, TYPE_GENERIC)
 #define RevalidateHmenu(hmenuX)     HMValidateHandleNoRip(hmenuX, TYPE_MENU)
-#define PtoH(p)     ((HANDLE)((p) == NULL ? NULL : ((PHEAD)(p))->h))
 
-#ifdef DEBUG
-#error
+#define _PtoHq(p)       (KHANDLE_TO_HANDLE(((PHEAD)p)->h))
+#define _PtoH(p)        ((HANDLE)((p) == NULL ? NULL : _PtoHq(p)))
+#define _HW(pwnd)       ((HWND)_PtoH(pwnd))
+#define _HWCCX(ccxPwnd) ((HWND)_PtoH(ccxPwnd))
+#define _HWq(pwnd)      ((HWND)_PtoHq(pwnd))
+
+#if DBG && defined(_USERK_)
+
+PHE DBGHMPheFromObject (PVOID p);
+PVOID DBGHMObjectFromHandle (HANDLE h);
+PVOID DBGHMCatObjectFromHandle (HANDLE h);
+HANDLE DBGPtoH (PVOID p);
+HANDLE DBGPtoHq (PVOID p);
+HWND DBGHW (PWND pwnd);
+HWND DBGHWCCX (PWND pwnd);
+HWND DBGHWq (PWND pwnd);
+
+#define HMPheFromObject(p)      DBGHMPheFromObject((p))
+#define HMObjectFromHandle(h)   DBGHMObjectFromHandle((HANDLE)(h))
+#define HMCatObjectFromHandle(h) DBGHMCatObjectFromHandle((HANDLE)(h))
+#define PtoH(p)                 DBGPtoH((PVOID)(p))
+#define PtoHq(p)                DBGPtoHq((PVOID)(p))
+#define HW(pwnd)                DBGHW((PWND)(pwnd))
+#define HWCCX(ccxPwnd)          DBGHWCCX((PWND)(ccxPwnd))
+#define HWq(pwnd)               DBGHWq((PWND)(pwnd))
+
 #else
-#define PtoHq(p)    ((HANDLE)(((PHEAD)p)->h))
-#endif
 
-#define HW(pwnd)    ((HWND)PtoH(pwnd))
-#define HWq(pwnd)   ((HWND)PtoHq(pwnd))
+#define HMPheFromObject(p)      _HMPheFromObject(p)
+#define HMObjectFromHandle(h)   _HMObjectFromHandle(h)
+#define HMCatObjectFromHandle(h) _HMObjectFromHandle(h)
+#define PtoH(p)                 _PtoH(p)
+#define PtoHq(p)                _PtoHq(p)
+#define HW(pwnd)                _HW(pwnd)
+#define HWCCX(ccxPwnd)          _HW(ccxPwnd)
+#define HWq(pwnd)               _HWq(pwnd)
+
+#endif // DBG && defined(_USERK_)
+
+/*
+ * Inline functions / macros to access HM object head fields
+ */
+#define _GETPTI(p)      (((PTHROBJHEAD)p)->pti)
+#define _GETPDESK(p)    (((PDESKOBJHEAD)p)->rpdesk)
+#define _GETPPI(p)      (((PPROCMARKHEAD)p)->ppi)
+
+#if DBG && defined(_USERK_)
+extern CONST HANDLETYPEINFO gahti[];
+extern SHAREDINFO gSharedInfo;
+__inline PTHREADINFO GETPTI (PVOID p)
+{
+    UserAssert(HMObjectFlags(p) & OCF_THREADOWNED);
+    return _GETPTI(p);
+}
+__inline PDESKTOP GETPDESK (PVOID p)
+{
+    UserAssert(HMObjectFlags(p) & OCF_DESKTOPHEAP);
+    return _GETPDESK(p);
+}
+__inline PPROCESSINFO GETPPI (PVOID p)
+{
+    UserAssert(HMObjectFlags(p) & OCF_MARKPROCESS);
+    return _GETPPI(p);
+}
+
+#else
+
+#define GETPTI(p)       _GETPTI(p)
+#define GETPDESK(p)     _GETPDESK(p)
+#define GETPPI(p)       _GETPPI(p)
+
+#endif /* #else #if DBG && defined(_USERK_) */
+
+#define GETPWNDPPI(p) (GETPTI(p)->ppi)
+#define GETPTIID(p)   (PsGetThreadId((p)->pEThread))
+
 
 /*
  * NOTE!: there is code in exitwin.c that assumes HMIsMarkDestroy is defined as
@@ -1182,25 +1788,19 @@ typedef struct _HANDLEENTRY {
 #define CPD_DIALOG              0x0040
 #define CPD_WNDTOCLS            0x0080
 
-#define CPDHANDLE_HI            0xFFFF
-#define MAKE_CPDHANDLE(h)       (MAKELONG((WORD)h,CPDHANDLE_HI))
-#define ISCPDTAG(x)             (HIWORD(x) == CPDHANDLE_HI)
+#define CPDHANDLE_HI            ((ULONG_PTR)~HMINDEXBITS)
+#define MAKE_CPDHANDLE(h)       (HMIndexFromHandle(h) | CPDHANDLE_HI)
+#define ISCPDTAG(x)             (((ULONG_PTR)(x) & CPDHANDLE_HI) == CPDHANDLE_HI)
 
 /*
  * Call Proc Handle Info
  */
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 1247
 typedef struct _CALLPROCDATA {
-    THROBJHEAD      head;
-    struct _CALLPROCDATA *pcpdNext;
-    DWORD           pfnClientPrevious;
-    WORD            wType;
-} CALLPROCDATA, *PCALLPROCDATA;
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 1253
+    PROCDESKHEAD                 head;
+    PCALLPROCDATA                spcpdNext;
+    KERNEL_ULONG_PTR             pfnClientPrevious;
+    WORD                         wType;
+} CALLPROCDATA;
 
 /*
  * Class styles
@@ -1218,114 +1818,107 @@ typedef struct _CALLPROCDATA {
 #define CFLVB             0x0104
 #define CFSAVEBITS        0x0108
 #define CFOEMCHARS        0x0140
-#ifdef FE_IME
-#error
-#endif
-#define CFCACHEDSMICON    0x0304
+#define CFIME             0x0201
+#define CFDROPSHADOW      0x0202
 
 /*
  * Offset from the beginning of the CLS structure to the WNDCLASS section.
  */
-#define CFOFFSET             (sizeof(CLS) - sizeof(COMMON_WNDCLASS))
+#define CFOFFSET             (FIELD_OFFSET(CLS, style))
 
-#define TestCF(hwnd, flag)   (*((BYTE *)((PWND)(hwnd))->pcls + CFOFFSET + HIBYTE(flag)) & LOBYTE(flag))
-#define SetCF(hwnd, flag)    (*((BYTE *)((PWND)(hwnd))->pcls + CFOFFSET + HIBYTE(flag)) |= LOBYTE(flag))
-#define ClrCF(pcls, flag)    (*((BYTE *)((PWND)(hwnd))->pcls + CFOFFSET + HIBYTE(flag)) &= ~LOBYTE(flag))
+#define TestCF(hwnd, flag)   (*((KPBYTE)((PWND)(hwnd))->pcls + CFOFFSET + HIBYTE(flag)) & LOBYTE(flag))
+#define SetCF(hwnd, flag)    (*((KPBYTE)((PWND)(hwnd))->pcls + CFOFFSET + HIBYTE(flag)) |= LOBYTE(flag))
+#define ClrCF(pcls, flag)    (*((KPBYTE)((PWND)(hwnd))->pcls + CFOFFSET + HIBYTE(flag)) &= ~LOBYTE(flag))
 
-#define TestCF2(pcls, flag)  (*((BYTE *)(pcls) + CFOFFSET + (int)HIBYTE(flag)) & LOBYTE(flag))
-#define SetCF2(pcls, flag)   (*((BYTE *)(pcls) + CFOFFSET + (int)HIBYTE(flag)) |= LOBYTE(flag))
-#define ClrCF2(pcls, flag)   (*((BYTE *)(pcls) + CFOFFSET + (int)HIBYTE(flag)) &= ~LOBYTE(flag))
+#define TestCF2(pcls, flag)  (*((KPBYTE)(pcls) + CFOFFSET + (int)HIBYTE(flag)) & LOBYTE(flag))
+#define SetCF2(pcls, flag)   (*((KPBYTE)(pcls) + CFOFFSET + (int)HIBYTE(flag)) |= LOBYTE(flag))
+#define ClrCF2(pcls, flag)   (*((KPBYTE)(pcls) + CFOFFSET + (int)HIBYTE(flag)) &= ~LOBYTE(flag))
+
+#define PWCFromPCLS(pcls)  ((PWC)KPBYTE_TO_PBYTE((KPBYTE)(pcls) + sizeof(CLS) + (pcls)->cbclsExtra))
 
 /* Window class structure */
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 1289
 typedef struct tagCOMMON_WNDCLASS
 {
-    UINT        style;
-    WNDPROC_PWND lpfnWndProc;       // HI BIT on means WOW PROC
-    int         cbclsExtra;
-    int         cbwndExtra;
-    HANDLE      hModule;
-    struct tagCURSOR *spicn;
-    struct tagCURSOR *spcur;
-    HBRUSH      hbrBackground;
-    LPWSTR      lpszMenuName;
-    LPSTR       lpszAnsiClassName;
-    struct tagCURSOR *spicnSm;
+    /*
+     * We'll add cWndReferenceCount here so COMMON_WNDCLASS and WNDCLASSEX have
+     * the same layout. Otherwise padding will mess us up on 64-bit platforms.
+     */
+    int           cWndReferenceCount; /* The number of windows registered
+                                         with this class */
+    UINT          style;
+    WNDPROC_PWND  lpfnWndProc;       // HI BIT on means WOW PROC
+    int           cbclsExtra;
+    int           cbwndExtra;
+    KHANDLE       hModule;
+    PCURSOR       spicn;
+    PCURSOR       spcur;
+    KHBRUSH       hbrBackground;
+    KLPWSTR       lpszMenuName;
+    KLPSTR        lpszAnsiClassName;
+    PCURSOR       spicnSm;
 } COMMON_WNDCLASS;
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 1303
+
 /*
- * Class Menu names structure. For performance reasons (GetClassInfo)
- *  we keep two client side copies of wndcls.lpszMenu and another kernel side copy.
- * This structure is used to pass menu names info between client and kernel.
+ * Class Menu names structure. For performance reasons (GetClassInfo) we
+ * keep two client side copies of wndcls.lpszMenu and another kernel side
+ * copy. This structure is used to pass menu names info between client and
+ * kernel.
  */
 typedef struct tagCLSMENUNAME
 {
-    LPSTR               pszClientAnsiMenuName;
-    LPWSTR              pwszClientUnicodeMenuName;
+    KLPSTR              pszClientAnsiMenuName;
+    KLPWSTR             pwszClientUnicodeMenuName;
     PUNICODE_STRING     pusMenuName;
 } CLSMENUNAME, *PCLSMENUNAME;
 
 /*
  * This is the window class structure.  All window classes are linked
- * together in a master list pointed to by pclsList.
+ * together in a master list pointed to by gpclsList.
  *
  * RED ALERT! Do not add any fields after the COMMON_WNDCLASS structure;
  *            CFOFFSET depends on this.
  */
 
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 1323
 typedef struct tagCLS {
     /* NOTE: The order of the following fields is assumed. */
-    struct tagCLS *pclsNext;
-    ATOM        atomClassName;
-    WORD        fnid;               // record window proc used by this hwnd
-                                    // access through GETFNID
-    PVOID       hheapDesktop;       /* Allocation source */
-    struct tagDESKTOP *rpdeskParent;/* Parent desktop */
-    struct tagDCE *pdce;            /* PDCE to DC associated with class */
-    int         cWndReferenceCount; /* The number of windows registered
-                                       with this class */
-    DWORD       flags;              /* internal class flags */
-    LPSTR       lpszClientAnsiMenuName;     /* string or resource ID */
-    LPWSTR      lpszClientUnicodeMenuName;  /* string or resource ID */
+    PCLS                        pclsNext;
+    ATOM                        atomClassName;      //Version aware class name.
+    ATOM                        atomNVClassName;    //None-version aware class name.
+    WORD                        fnid;               // record window proc used by this hwnd
+                                                    // access through GETFNID
+    PDESKTOP                    rpdeskParent;/* Parent desktop */
+    PDCE                        pdce;            /* PDCE to DC associated with class */
+    WORD                        hTaskWow;
+    WORD                        CSF_flags;           /* internal class flags */
+    KLPSTR                      lpszClientAnsiMenuName;     /* string or resource ID */
+    KLPWSTR                     lpszClientUnicodeMenuName;  /* string or resource ID */
 
-    /*
-     * These DWORDs are used by WOW only.  See wow32\walias.c for the WC
-     * structure definition.
-     */
-    DWORD       adwWOW[2];
-                                    /* LATER: No one uses dwExpWinVer. wow? */
-    DWORD       hTaskWow;           /* LATER: is wow using this? */
-    PCALLPROCDATA  spcpdFirst;      /* Pointer to first CallProcData element (or 0) */
-    struct tagCLS *pclsBase;        /* Pointer to base class */
-    struct tagCLS *pclsClone;       /* Pointer to clone class list */
-
-    PROC        lpfnWorker;         /* Client side worker proc */
+    PCALLPROCDATA               spcpdFirst;       /* Pointer to first CallProcData element (or 0) */
+    PCLS                        pclsBase;        /* Pointer to base class */
+    PCLS                        pclsClone;       /* Pointer to clone class list */
 
     COMMON_WNDCLASS;
     /*
      * WARNING:
      * CFOFFSET expects COMMON_WNDCLASS to be last fields in CLS
      */
-} CLS, *PCLS, *LPCLS, **PPCLS;
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 1357
+} CLS, **PPCLS;
 
 /*
  * This class flag is used to distinguish classes that were registered
  * by the server (most system classes) from those registered by the client.
+ * Note -- flags are a WORD in the class structure now.
  */
-#define CSF_SERVERSIDEPROC      0x00000001
-#define CSF_ANSIPROC            0x00000002
-#define CSF_WOWDEFERDESTROY     0x00000004
-#define CSF_SYSTEMCLASS         0x00000008
+#define CSF_SERVERSIDEPROC      0x0001
+#define CSF_ANSIPROC            0x0002
+#define CSF_WOWDEFERDESTROY     0x0004
+#define CSF_SYSTEMCLASS         0x0008
+#define CSF_WOWCLASS            0x0010  // extra words at end for wow info
+#define CSF_WOWEXTRA            0x0020
+#define CSF_CACHEDSMICON        0x0040
+#define CSF_WIN40COMPAT         0x0080
+#define CSF_VERSIONCLASS        0x0100
+#define CSF_VALID               (CSF_ANSIPROC | CSF_WIN40COMPAT | CSF_VERSIONCLASS)
 
 /*
  * SBDATA are the values for one scrollbar
@@ -1346,63 +1939,91 @@ typedef struct tagSBINFO {
     int WSBflags;
     SBDATA Horz;
     SBDATA Vert;
-} SBINFO, *PSBINFO;
+} SBINFO, * KPTR_MODIFIER PSBINFO;
+
+/*
+ * Window Property structure
+ */
+typedef struct tagPROP {
+    KHANDLE hData;
+    ATOM atomKey;
+    WORD fs;
+} PROP, * KPTR_MODIFIER PPROP;
+
+#define PROPF_INTERNAL   0x0001
+#define PROPF_STRING     0x0002
+#define PROPF_NOPOOL     0x0004
+
+
+/*
+ * Window Property List structure
+ */
+typedef struct tagPROPLIST {
+    UINT cEntries;
+    UINT iFirstFree;
+    PROP aprop[1];
+} PROPLIST, * KPTR_MODIFIER PPROPLIST;
+
+/*
+ * NOTE -- this structure has been sorted (roughly) in order of use
+ * of the fields. The x86 code set allows cheaper access to fields
+ * that are in the first 0x80 bytes of a structure. Please attempt
+ * to ensure that frequently-used fields are below this boundary.
+ */
 
 #endif
 #if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 1388
-typedef struct tagWND {          // wnd
-    THROBJHEAD    head;
-
-    struct tagWND *spwndNext;    // Handle to the next window
-    struct tagWND *spwndParent;  // Backpointer to the parent window.
-    struct tagWND *spwndChild;   // Handle to child
-    struct tagWND *spwndOwner;   // Popup window owner field
-
-    PVOID         pwo;          // WNDOBJ in gdi that is associated with window
-
-    RECT          rcWindow;     // Window outer rectangle
-    RECT          rcClient;     // Client rectangle
-
-    WNDPROC_PWND lpfnWndProc;   // HI BIT on means WOW PROC
-
-    PCLS          pcls;         // Pointer to window class
-    int           cbwndExtra;   // Extra bytes in window
-
-    HRGN          hrgnUpdate;   // Accumulated paint region
-
-    struct tagWND *spwndLastActive; // Last active in owner/ownee list
-    struct tagPROP *ppropList;  // Pointer to first property in list
-    PSBINFO        pSBInfo;   // Words used for scrolling
-
-    struct tagMENU *spmenuSys;  // Handle to system menu
-    struct tagMENU *spmenu;     // Menu handle or ID
-    LARGE_UNICODE_STRING strName;
-
-    /*
-     * Fullscreen information
-     */
-    BYTE          bFullScreen;  // record full screen state info
-    BYTE          cDC;          // count of DCs associated with window
-    WORD          fnid;         // record window proc used by this hwnd
-                                // access through GETFNID
-    DWORD         dwExpWinVer;  // matches expwinver of hModule
-
-    DWORD         dwUserData;   // Reserved for random application data
-    HDC           hdcOwn;
-    HRGN          hrgnClip;     // Clipping region for this window
-    int           iHungRedraw;  // Index into hung redraw table
-#ifdef FE_IME
-#error
-#endif
+#line 1972
+typedef struct tagWND {
+    THRDESKHEAD   head;
 
     WW;         // WOW-USER common fields. Defined in wowuserp.h
-                //  The position of this structure is assumed by
-                //  the STATEOFFSET macro. Specifically, WW must be the
-                //  last "field" of WND.
-} WND;
+                // The presence of "state" at the start of this structure is
+                // assumed by the STATEOFFSET macro.
 
-#line 2019
+    PWND                 spwndNext;    // Handle to the next window
+    PWND                 spwndPrev;    // Handle to the previous window
+    PWND                 spwndParent;  // Backpointer to the parent window.
+    PWND                 spwndChild;   // Handle to child
+    PWND                 spwndOwner;   // Popup window owner field
+
+    RECT                 rcWindow;     // Window outer rectangle
+    RECT                 rcClient;     // Client rectangle
+
+    WNDPROC_PWND         lpfnWndProc;  // Can be WOW address or standard address
+
+    PCLS                 pcls;         // Pointer to window class
+
+    KHRGN                hrgnUpdate;   // Accumulated paint region
+
+    PPROPLIST            ppropList;    // Pointer to property list
+    PSBINFO              pSBInfo;      // Words used for scrolling
+
+    PMENU                spmenuSys;    // Handle to system menu
+    PMENU                spmenu;       // Menu handle or ID
+
+    KHRGN                hrgnClip;     // Clipping region for this window
+
+    LARGE_UNICODE_STRING strName;
+    int                  cbwndExtra;   // Extra bytes in window
+    PWND                 spwndLastActive; // Last active in owner/ownee list
+    KHIMC                hImc;         // Associated input context handle
+    KERNEL_ULONG_PTR     dwUserData;   // Reserved for random application data
+    struct _ACTIVATION_CONTEXT  * KPTR_MODIFIER pActCtx;
+#ifdef LAME_BUTTON
+    KERNEL_PVOID    pStackTrace;       // Creation stack trace; used by lame
+                                       // button.
+#endif // LAME_BUTTON
+} WND;
+#endif
+#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
+#line 2013
+
+#define NEEDSPAINT(pwnd)    (pwnd->hrgnUpdate != NULL || TestWF(pwnd, WFINTERNALPAINT))
+
+/*
+ * Combo Box stuff
+ */
 typedef struct tagCBox {
     PWND    spwnd;      /* Window for the combo box */
     PWND    spwndParent;/* Parent of the combo box */
@@ -1446,9 +2067,8 @@ typedef struct tagCBox {
                                 * window.
                                 */
 #ifdef COLOR_HOTTRACKING
-#error
+    UINT    fButtonHotTracked:1; /* Is the dropdown hot-tracked? */
 #endif // COLOR_HOTTRACKING
-#line 2064
     UINT    fRightAlign:1;     /* used primarily for MidEast right align */
     UINT    fRtoLReading:1;    /* used only for MidEast, text rtol reading order */
     UINT    fInDestroy:1;      /* Is combobox destruction started already? */
@@ -1460,12 +2080,17 @@ typedef struct tagCBox {
                                 */
 } CBOX, * KPTR_MODIFIER PCBOX;
 
+#endif
+#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
+#line 2075
 typedef struct tagCOMBOWND {
     WND wnd;
     PCBOX pcbox;
 } COMBOWND, * KPTR_MODIFIER PCOMBOWND;
+#endif
+#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
+#line 2079
 
-#line 2080
 /*
  * List Box
  */
@@ -1590,59 +2215,52 @@ typedef struct tagLBIV {
     SCROLLPOS VPos;
 } LBIV, *PLBIV;
 
+#endif
+#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
+#line 2204
 typedef struct tagLBWND {
     WND wnd;
     PLBIV pLBIV;
 } LBWND, * KPTR_MODIFIER PLBWND;
-
 #endif
 #if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 1438
-
-#define NEEDSPAINT(pwnd)    (pwnd->hrgnUpdate != NULL || TestWF(pwnd, WFINTERNALPAINT))
+#line 2208
 
 /*
- * Window Property structure
+ * Kernel side input context structure.
  */
-typedef struct tagPROP {        // prop
-    struct tagPROP *ppropNext;
-    HANDLE hData;
-    ATOM atomKey;
-    UINT fs;
-} PROP, *PPROP;
-
-#define PROPF_INTERNAL   0x0001
-#define PROPF_STRING     0x0002
-
-#ifdef FE_IME
-#error
-#line 1464
-#endif
+typedef struct tagIMC {    /* hImc */
+    THRDESKHEAD                     head;
+    struct tagIMC* KPTR_MODIFIER    pImcNext;
+    KERNEL_ULONG_PTR                dwClientImcData;    // Client side data
+    KHWND                           hImeWnd;            // in use Ime Window
+} IMC, * KPTR_MODIFIER PIMC;
 
 
 /*
  * Hook structure.
  */
 #undef HOOKBATCH
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 1471
 typedef struct tagHOOK {   /* hk */
-    THROBJHEAD      head;
-    struct tagHOOK  *sphkNext;
+    THRDESKHEAD     head;
+    PHOOK           phkNext;
     int             iHook;              // WH_xxx hook type
-    DWORD           offPfn;
+    KERNEL_ULONG_PTR offPfn;
     UINT            flags;              // HF_xxx flags
     int             ihmod;
-    PTHREADINFO     ptiHooked;
+    PTHREADINFO     ptiHooked;          // Thread hooked.
+    PDESKTOP        rpdesk;             // Global hook pdesk. Only used when
+                                        //  hook is locked and owner is destroyed
+
+    BOOL            fLastHookHung : 1;  // for LL hook only
+
 #ifdef HOOKBATCH
-#error
-#line 1484
+    DWORD           cEventMessages;     // Number of events in the cache
+    DWORD           iCurrentEvent;      // Current cache event
+    DWORD           CacheTimeOut;       // Timeout between keys
+    PEVENTMSG       aEventCache;        // The array of Events
 #endif // HOOKBATCH
-} HOOK, *PHOOK;
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 1486
+} HOOK;
 
 /*
  * Hook defines.
@@ -1653,7 +2271,12 @@ typedef struct tagHOOK {   /* hk */
 #define HF_HUNG            0x0008      // Hook Proc hung don't call if system
 #define HF_HOOKFAULTED     0x0010      // Hook Proc faulted
 #define HF_NOPLAYBACKDELAY 0x0020      // Ignore requested delay
-#define HF_WX86KNOWNDLL    0x0040      // Hook Module is x86 machine type
+#define HF_DESTROYED       0x0080      // Set by FreeHook
+#if DBG
+#define HF_INCHECKWHF      0x0100      // fsHooks is being updated
+#define HF_FREED           0x0200      // Object has been freed.
+#define HF_DBGUSED         0x03FF      // Update if adding a flag
+#endif
 
 /*
  * Macro to convert the WH_* index into a bit position for
@@ -1679,7 +2302,6 @@ typedef struct tagHOOK {   /* hk */
 #define WHF_SHELL           WHF_FROM_WH(WH_SHELL)
 #define WHF_FOREGROUNDIDLE  WHF_FROM_WH(WH_FOREGROUNDIDLE)
 
-
 /*
  * Windowstation and desktop enum list structure.
  */
@@ -1689,65 +2311,127 @@ typedef struct tagNAMELIST {
     WCHAR awchNames[1];
 } NAMELIST, *PNAMELIST;
 
+#define MONF_VISIBLE         0x01   // monitor is visible on desktop
+#define MONF_PALETTEDISPLAY  0x02   // monitor has palette
+
+#ifndef _USERSRV_
+
+#ifdef SUBPIXEL_MOUSE
+typedef LONG64 FIXPOINT;
+
 /*
- * Device Information Structure.
- *
- *   Contains devmodes and 3D-DDI information
- *   for each graphics mode for each adapter.
+ * Number of points in the arrays describing the acceleration curves.
  */
+#define SM_POINT_CNT 5
 
-#define USER_DEVICE_NOTOWNED   0
-#define USER_DEVICE_SHARED     1
-#define USER_DEVICE_EXCLUSIVE  2
+#endif // SUBPIXEL_MOUSE
 
-typedef struct tagPHYSICAL_DEV_INFO {
+/*
+ * Monitor information structure.
+ *
+ *     This structure defines the attributes of a single monitor
+ *     in a virtual display.
+ */
+typedef struct tagMONITOR {
+    HEAD                        head;            // object handle stuff
 
-    WCHAR     szNtDeviceName[16]; // Log-name of device (\\Device\\Videox)
-    PVOID     pDeviceHandle;      // Handle for that device, if it exist
-    PVOID     pFileObject;        // Handle for that device, if it exist
-    UCHAR     DevOwned;           // If device is used, and if exclusive or not.
-    ULONG     cOwnCount;          // How many times the handle has been given.
-    DWORD     stateFlags;         // Flags describing the state of the device
-    PDEVMODEW pCurrentDevmode;    // Pointer to the current DEVMODE for this device.
-    ULONG     cbdevmodeInfo;      // Size of the devmode information
-    PDEVMODEW devmodeInfo;        // Pointer to list of modes for the device
+    PMONITOR                    pMonitorNext;    // next monitor in free or used list
+    DWORD                       dwMONFlags;      // flags
+    RECT                        rcMonitor;       // location of monitor in virtual screen coordinates
+    RECT                        rcWork;          // work area of monitor in virtual screen coordinates
+    KHRGN                       hrgnMonitor;     // monitor region in virtual screen coordinates
+    short                       cFullScreen;     // number of fullscreen apps on this monitor
+    short                       cWndStack;       // number of tiled top-level windows
+    KHANDLE                     hDev;            // hdev associated with this monitor
 
-} PHYSICAL_DEV_INFO, *PPHYSICAL_DEV_INFO;
+#ifdef SUBPIXEL_MOUSE
+    FIXPOINT                    xTxf[SM_POINT_CNT], yTxf[SM_POINT_CNT];
+    /*
+     * SM_POINT_CNT - 1 because you need two points for one slope/yint value.
+     */
+    FIXPOINT                    slope[SM_POINT_CNT - 1], yint[SM_POINT_CNT - 1];
+#endif // SUBPIXEL_MOUSE
+} MONITOR;
+#endif
 
 /*
  * Display Information Structure.
  *
  *   This structure defines the display attributes for the
- *   desktop.  This is usually maintained in the DESKTOPINFO
- *   structure.
+ *   desktop.  This is usually maintained in the DESKTOP
+ *   structure. The current display in use is pointed to
+ *   by gpDispInfo.
+ *
+ *   CONSIDER: How many of these fields need to be actually kept
+ *   in a DISPLAYINFO that is not in use, rather than just be put
+ *   in gpsi or a kernel-side global?
  */
+#ifndef _USERSRV_
+
 typedef struct tagDISPLAYINFO {
+    // device stuff
+    KHANDLE       hDev;
+    KERNEL_PVOID  pmdev;
+    KHANDLE       hDevInfo;
 
-    HDC                hdcScreen;        // Device-Context for screen
-    HDC                hdcGray;          // GrayString DC.
-    HDC                hdcBits;          // Holds system-bitmap resource
-    HBITMAP            hbmGray;          // GrayString Bitmap Surface.
-    RECT               rcScreen;         // Rectangle of entire desktop surface
-    RECT               rcPrimaryScreen;  // Rectangle of main screen
-    int                cxGray;           //
-    int                cyGray;           //
-    PDCE               pdceFirst;        //
-    PSPB               pspbFirst;        //
-    HANDLE             hDev;             //
-    LPVOID             pDevLock;         //
-    PPHYSICAL_DEV_INFO pDevInfo;         //
+    // useful dcs
+    KHDC          hdcScreen;        // Device-Context for screen
+    KHDC          hdcBits;          // Holds system-bitmap resource
 
-    UINT               cxPixelsPerInch;  // when the gpsi is moved to the
-    UINT               cyPixelsPerInch;  // desktop.  There's no need
-    UINT               cPlanes;          // to maintain two copies then.
-    UINT               cBitsPixel;       //
+    // Graystring resources
+    KHDC          hdcGray;          // GrayString DC.
+    KHBITMAP      hbmGray;          // GrayString Bitmap Surface.
+    int           cxGray;           // width of gray bitmap
+    int           cyGray;           // height of gray bitmap
 
-} DISPLAYINFO, *PDISPLAYINFO;
+    // random stuff
+    PDCE          pdceFirst;       // list of dcs
+    PSPB          pspbFirst;       // list of spbs
+
+    // Monitors on this device
+    ULONG         cMonitors;        // number of MONF_VISIBLE monitors attached to desktop
+    PMONITOR      pMonitorPrimary;  // the primary monitor (display)
+    PMONITOR      pMonitorFirst;    // monitor in use list
+
+    // device characteristics
+    RECT          rcScreen;         // Rectangle of entire desktop surface
+    KHRGN         hrgnScreen;       // region describing virtual screen
+    WORD          dmLogPixels;      // pixels per inch
+    WORD          BitCountMax;      // Maximum bitcount across all monitors
+
+    BOOL          fDesktopIsRect:1;   // Is the desktop a simple rectangle?
+    BOOL          fAnyPalette:1;      // Are any of the monitors paletized?
+
+    // NOTE: if you need more flags, make fDesktopIsRect a flags field instead.
+
+} DISPLAYINFO;
+
+/*
+ * Multimonitor function in rtl\mmrtl.c
+ */
+PMONITOR _MonitorFromPoint(POINT pt, DWORD dwFlags);
+PMONITOR _MonitorFromRect(LPCRECT lprc, DWORD dwFlags);
+PMONITOR _MonitorFromWindow(PWND pwnd, DWORD dwFlags);
+#endif
+
+#define HDCBITS() gpDispInfo->hdcBits
 
 #define DTF_NEEDSPALETTECHANGED      0x00000001
 #define DTF_NEEDSREDRAW              0x00000002
 
+#define CWINHOOKS       (WH_MAX - WH_MIN + 1)
 
+/*
+ * VWPL - Volatile Window Pointer List (see rare.c)
+ * VPWLs are manipulate with the functions:
+ *    VWPLAdd(), VWPLRemove() and VWPLNext()
+ */
+typedef struct {
+    DWORD       cPwnd;       // number of pwnds in apwnd[]
+    DWORD       cElem;       // number of elements in apwnd[]
+    DWORD       cThreshhold; // (re)allocation increment/decrement
+    PWND        aPwnd[0];    // array of pwnds
+} VWPL, * KPTR_MODIFIER PVWPL;
 
 /*
  * Desktop Information Structure.
@@ -1756,70 +2440,89 @@ typedef struct tagDISPLAYINFO {
  *   desktop.  This is viewable from both the client and
  *   kernel processes.
  */
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 1599
 typedef struct tagDESKTOPINFO {
 
-    PVOID                 pvDesktopBase;          // For handle validation
-    PVOID                 pvDesktopLimit;         //
-    struct tagWND         *spwnd;                 // Desktop window
-    DWORD                 fsHooks;                // Deskop global hooks
-    struct tagHOOK        *asphkStart[CWINHOOKS]; // List of hooks
-    struct tagWND         *spwndShell;            // Shell window
-    DWORD                 idShellProcess;         // Shell Process ID
-    struct tagWND         *spwndBkGnd;            // Shell background window
-    struct tagWND         *spwndTaskman;          // Task-Manager window
-    struct tagWND         *spwndProgman;          // Program-Manager window
-    int                   nShellHookPwnd;         //
-    struct tagWND         **papwndShellHook;      //
+    KERNEL_PVOID  pvDesktopBase;          // For handle validation
+    KERNEL_PVOID  pvDesktopLimit;         // ???
+    PWND          spwnd;                 // Desktop window
+    DWORD         fsHooks;                // Deskop global hooks
+    PHOOK         aphkStart[CWINHOOKS];  // List of hooks
+    PWND          spwndShell;            // Shell window
+    PPROCESSINFO  ppiShellProcess;        // Shell Process
+    PWND          spwndBkGnd;            // Shell background window
+    PWND          spwndTaskman;          // Task-Manager window
+    PWND          spwndProgman;          // Program-Manager window
+    PVWPL         pvwplShellHook;         // see (De)RegisterShellHookWindow
+    int           cntMBox;                // ???
+} DESKTOPINFO;
 
-} DESKTOPINFO, *PDESKTOPINFO;
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 1615
 
 #define CURSOR_ALWAYSDESTROY    0
 #define CURSOR_CALLFROMCLIENT   1
 #define CURSOR_THREADCLEANUP    2
 
-#define CURSORF_FROMRESOURCE    0x0001 // it was loaded from a resource
-#define CURSORF_GLOBAL          0x0002 // it never dies
-#define CURSORF_LRSHARED        0x0004 // its cached
-#define CURSORF_ACON            0x0008 // its animated
-#define CURSORF_WOWCLEANUP      0x0010 // marked for cleanup at wow task exit time
-#define CURSORF_ACONFRAME       0x0040 // its a frame of an acon
-#define CURSORF_SECRET          0x0080 // created internally - not exposed to apps
-#define CURSORF_LINKED          0x0100 // linked into a cache
-#define CURSORF_VALID           0x01DF
+typedef struct tagCURSOR_ACON {
+    PROCMARKHEAD    head;
+    PCURSOR         pcurNext;
+    UNICODE_STRING   strName;
+    ATOM             atomModName;
+    WORD             rt;
+} CURSOR_ACON;
+
+typedef struct CURSOR_COMMON {
+    CURSINFO;                          // CURSINFO includes the flags
+
+    DWORD            bpp;
+    DWORD            cx;
+    DWORD            cy;
+} CURSOR_COMMON;
+
+typedef struct ACON_COMMON {
+    int            cpcur;              // Count of image frames
+    int            cicur;              // Count of steps in animation sequence
+    PCURSOR * KPTR_MODIFIER aspcur;    // Array of image frame pointers
+    DWORD * KPTR_MODIFIER aicur;       // Array of frame indices (seq-table)
+    JIF * KPTR_MODIFIER ajifRate;      // Array of time offsets
+    int            iicur;              // Current step in animation
+} ACON_COMMON;
+
+typedef struct tagCURSOR {
+    CURSOR_ACON;                       // common cursor/acon elements -
+                                       // See SetSystemImage()
+    CURSOR_COMMON;
+} CURSOR;
+
+typedef struct tagACON {               // acon
+    CURSOR_ACON;                       // common cursor/acon elements -
+                                       // See SetSystemImage()
+    /*
+     * CURSORF_flags must be the first element to follow CURSOR_ACON. This
+     * way all members up to and including CURSORF_flags are the same in
+     * tagCURSOR and tagACON which is needed for SetSystemImage. See more
+     * comments for CI_FIRST in wingdi.w.
+     */
+    DWORD CURSORF_flags;               // same as CI_FIRST in CURSINFO
+
+    ACON_COMMON;
+} ACON, *PACON;
+
+#define PICON PCURSOR
 
 typedef struct tagCURSORDATA {
-    DWORD   CURSORF_flags;
-    LPWSTR  lpName;
-    LPWSTR  lpModName;
+    KLPWSTR  lpName;
+    KLPWSTR  lpModName;
     WORD    rt;
     WORD    dummy;
-    DWORD   bpp;                // --------------------------------------
-    DWORD   cx;                 //  SetCursorIconData() hack:
-    DWORD   cy;                 //  This part must
-    SHORT   xHotspot;           //  match the end of
-    SHORT   yHotspot;           //  the CURSOR
-    HBITMAP hbmMask;            //  structure!
-    HBITMAP hbmColor;           // ---------------------------------------
 
-    int     cpcur;              // ---------------------------------------
-    int     cicur;              //  This part must
-    struct  tagCURSOR **aspcur; //  match the end of
-    DWORD   *aicur;             //  the ACON
-    DWORD   *ajifRate;           //  Structure!
-    int     iicur;              //
-    DWORD   fl;                 // ---------------------------------------
+    CURSOR_COMMON;
+
+    ACON_COMMON;
 } CURSORDATA, *PCURSORDATA;
 
 
 typedef struct tagCURSORFIND {
 
-    HCURSOR hcur;
+    KHCURSOR hcur;
     DWORD   rt;
     DWORD   cx;
     DWORD   cy;
@@ -1827,7 +2530,11 @@ typedef struct tagCURSORFIND {
 
 } CURSORFIND, *PCURSORFIND;
 
-
+#define MSGFLAG_MASK                0xFFFE0000
+#define MSGFLAG_WOW_RESERVED        0x00010000      // Used by WOW
+#define MSGFLAG_DDE_MID_THUNK       0x80000000      // DDE tracking thunk
+#define MSGFLAG_DDE_SPECIAL_SEND    0x40000000      // WOW bad DDE app hack
+#define MSGFLAG_SPECIAL_THUNK       0x10000000      // server->client thunk needs special handling
 
 #define WIDTHBYTES(i) \
     ((((i) + 31) & ~31) >> 3)
@@ -1835,8 +2542,7 @@ typedef struct tagCURSORFIND {
 #define BITMAPWIDTHSIZE(cx, cy, planes, bpp) \
     (WIDTHBYTES((cx * bpp)) * (cy) * (planes))
 
-/*** AWESOME HACK ALERT!
- *
+/*
  * Window Style and State Masks -
  *
  * High byte of word is byte index from the start of the state field
@@ -1848,22 +2554,32 @@ typedef struct tagCURSORFIND {
  * fields in the window structure.
  *
  *   offset                 WND field
- *   0 - 3                  state
- *   4 - 7                  state2
- *   8 - B                  ExStyle
- *   C - F                  style
+ *   0 - 3                  state        - private
+ *   4 - 7                  state2       - private
+ *   8 - B                  ExStyle      - public, exposed in SetWindowLong(GWL_EXSTYLE)
+ *   C - F                  style        - public, exposed in SetWindowLong(GWL_STYLE)
+ *                                         C-D are reserved for window class designer.
+ *                                         E-F are reserved for WS_ styles.
  *
+ * NOTE: Be sure to add the flag to the wFlags array in kd\userexts.c!!!
  */
 
 /*
- * State flags
+ * State flags, from 0x0000 to 0x0780.
+ */
+
+/*
+ * DON'T MOVE ANY ONE OF THE FOLLOWING WFXPRESENT FLAGS,
+ * BECAUSE WFFRAMEPRESENTMASK DEPENDS ON THEIR VALUES
  */
 #define WFMPRESENT              0x0001
 #define WFVPRESENT              0x0002
 #define WFHPRESENT              0x0004
 #define WFCPRESENT              0x0008
+#define WFFRAMEPRESENTMASK      0x000F
+
 #define WFSENDSIZEMOVE          0x0010
-#define WFNOPAINT               0x0020
+#define WFMSGBOX                0x0020  // used to maintain count of msg boxes on screen
 #define WFFRAMEON               0x0040
 #define WFHASSPB                0x0080
 #define WFNONCPAINT             0x0101
@@ -1876,24 +2592,31 @@ typedef struct tagCURSORFIND {
 #define WFMENUDRAW              0x0180
 
 /*
- * Place to throw more internal flags: in 0x05?? thru 0x07??.
+ * NOTE -- WFDIALOGWINDOW is used in WOW.  DO NOT CHANGE without
+ *   changing WD_DIALOG_WINDOW in winuser.w
  */
 #define WFDIALOGWINDOW          0x0201
+
 #define WFTITLESET              0x0202
 #define WFSERVERSIDEPROC        0x0204
 #define WFANSIPROC              0x0208
-#define WF16BIT                 0x0210
+#define WFBEINGACTIVATED        0x0210  // prevent recursion in xxxActivateThis Window
 #define WFHASPALETTE            0x0220
 #define WFPAINTNOTPROCESSED     0x0240  // WM_PAINT message not processed
-#define WFWIN31COMPAT           0x0280  // Win 3.1 compatible window
-#define WFALWAYSSENDNCPAINT     0x0301  // Always send WM_NCPAINT to children
-#define WFPIXIEHACK             0x0302  // Send (HRGN)1 to WM_NCPAINT (see PixieHack)
+#define WFSYNCPAINTPENDING      0x0280
+#define WFGOTQUERYSUSPENDMSG    0x0301
+#define WFGOTSUSPENDMSG         0x0302
 #define WFTOGGLETOPMOST         0x0304  // Toggle the WS_EX_TOPMOST bit ChangeStates
+
+/*
+ * DON'T MOVE REDRAWIFHUNGFLAGS WITHOUT ADJUSTING WFANYHUNGREDRAW
+ */
 #define WFREDRAWIFHUNG          0x0308
 #define WFREDRAWFRAMEIFHUNG     0x0310
 #define WFANYHUNGREDRAW         0x0318
+
 #define WFANSICREATOR           0x0320
-#define WFPALETTEWINDOW         0x0340
+#define WFREALLYMAXIMIZABLE     0x0340  // The window fills the work area or monitor when maximized
 #define WFDESTROYED             0x0380
 #define WFWMPAINTSENT           0x0401
 #define WFDONTVALIDATE          0x0402
@@ -1902,69 +2625,149 @@ typedef struct tagCURSORFIND {
 #define WFCEPRESENT             0x0410  // Client edge present
 #define WFBOTTOMMOST            0x0420  // Bottommost window
 #define WFFULLSCREEN            0x0440
-#define WFWIN40COMPAT           0x0480  // Win 4.0 compatible app
-#define WFSYNCPAINTPENDING      0x0501
-#define WFBEINGACTIVATED        0x0502  // prevent recursion in xxxActivateThis Window
-#define WFINDESTROY             0x0504
+#define WFINDESTROY             0x0480
 
 /*
- * Window Extended Style
+ * DON'T MOVE ANY ONE OF THE FOLLOWING WFWINXXCOMPAT FLAGS,
+ * BECAUSE WFWINCOMPATMASK DEPENDS ON THEIR VALUES
  */
-#define WEFDLGMODALFRAME        0x0801
-#define WEFDRAGOBJECT           0x0802
-#define WEFNOPARENTNOTIFY       0x0804
-#define WEFTOPMOST              0x0808
-#define WEFACCEPTFILES          0x0810
-#define WEFTRANSPARENT          0x0820  // "Transparent" child window
-#define WEFMDICHILD             0x0840
-#define WEFTOOLWINDOW           0x0880
-#define WEFWINDOWEDGE           0x0901
-#define WEFCLIENTEDGE           0x0902
-#define WEFEDGEMASK             0x0903
-#define WEFCONTEXTHELP          0x0904
+#define WFWIN31COMPAT           0x0501  // Win 3.1 compatible window
+#define WFWIN40COMPAT           0x0502  // Win 4.0 compatible window
+#define WFWIN50COMPAT           0x0504  // Win 5.0 compatibile window
+#define WFWINCOMPATMASK         0x0507  // Compatibility flag mask
+
+#define WFMAXFAKEREGIONAL       0x0508  // Window has a fake region for maxing on 1 monitor
+
+// Active Accessibility (Window Event) state
+#define WFCLOSEBUTTONDOWN       0x0510
+#define WFZOOMBUTTONDOWN        0x0520
+#define WFREDUCEBUTTONDOWN      0x0540
+#define WFHELPBUTTONDOWN        0x0580
+#define WFLINEUPBUTTONDOWN      0x0601  // Line up/left scroll button down
+#define WFPAGEUPBUTTONDOWN      0x0602  // Page up/left scroll area down
+#define WFPAGEDNBUTTONDOWN      0x0604  // Page down/right scroll area down
+#define WFLINEDNBUTTONDOWN      0x0608  // Line down/right scroll area down
+#define WFSCROLLBUTTONDOWN      0x0610  // Any scroll button down?
+#define WFVERTSCROLLTRACK       0x0620  // Vertical or horizontal scroll track...
+
+#define WFALWAYSSENDNCPAINT     0x0640  // Always send WM_NCPAINT to children
+#define WFPIXIEHACK             0x0680  // Send (HRGN)1 to WM_NCPAINT (see PixieHack)
+
+/*
+ * WFFULLSCREENBASE MUST HAVE LOWORD OF 0. See SetFullScreen macro.
+ */
+#define WFFULLSCREENBASE        0x0700  // Fullscreen flags take up 0x0701
+#define WFFULLSCREENMASK        0x0707  // and 0x0702 and 0x0704
+#define WEFTRUNCATEDCAPTION     0x0708  // The caption text was truncated -> caption tootip
+
+#define WFNOANIMATE             0x0710  // ???
+#define WFSMQUERYDRAGICON       0x0720  // ??? Small icon comes from WM_QUERYDRAGICON
+#define WFSHELLHOOKWND          0x0740  // ???
+#define WFISINITIALIZED         0x0780  // Window is initialized -- checked by WoW32
+
+/*
+ * Add more state flags here, up to 0x0780.
+ * Look for empty slots above before adding to the end.
+ * Be sure to add the flag to the wFlags array in kd\userexts.c
+ */
+
+/*
+ * Window Extended Style, from 0x0800 to 0x0B80.
+ */
+#define WEFDLGMODALFRAME        0x0801  // WS_EX_DLGMODALFRAME
+#define WEFDRAGOBJECT           0x0802  // ???
+#define WEFNOPARENTNOTIFY       0x0804  // WS_EX_NOPARENTNOTIFY
+#define WEFTOPMOST              0x0808  // WS_EX_TOPMOST
+#define WEFACCEPTFILES          0x0810  // WS_EX_ACCEPTFILES
+#define WEFTRANSPARENT          0x0820  // WS_EX_TRANSPARENT
+#define WEFMDICHILD             0x0840  // WS_EX_MDICHILD
+#define WEFTOOLWINDOW           0x0880  // WS_EX_TOOLWINDOW
+#define WEFWINDOWEDGE           0x0901  // WS_EX_WINDOWEDGE
+#define WEFCLIENTEDGE           0x0902  // WS_EX_CLIENTEDGE
+#define WEFEDGEMASK             0x0903  // WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE
+#define WEFCONTEXTHELP          0x0904  // WS_EX_CONTEXTHELP
+#define WEFGHOSTMAKEVISIBLE     0x0908  // WS_EXP_GHOSTMAKEVISIBLE
+
 
 // intl styles
-#define WEFRIGHT                0x0910
-#define WEFRTLREADING           0x0920
-#define WEFLEFTSCROLL           0x0940
+#define WEFRIGHT                0x0910  // WS_EX_RIGHT
+#define WEFRTLREADING           0x0920  // WS_EX_RTLREADING
+#define WEFLEFTSCROLL           0x0940  // WS_EX_LEFTSCROLLBAR
 
-#define WEFCONTROLPARENT        0x0A01
-#define WEFSTATICEDGE           0x0A02
-#define WEFAPPWINDOW            0x0A04
-#define WFNOANIMATE             0x0A10
-#define WFSMQUERYDRAGICON       0x0A20  // Small icon comes from WM_QUERYDRAGICON
-#define WFSHELLHOOKWND          0x0A80
+
+#define WEFCONTROLPARENT        0x0A01  // WS_EX_CONTROLPARENT
+#define WEFSTATICEDGE           0x0A02  // WS_EX_STATICEDGE
+#define WEFAPPWINDOW            0x0A04  // WS_EX_APPWINDOW
+#define WEFLAYERED              0x0A08  // WS_EX_LAYERED
+
+#define WEFNOINHERITLAYOUT      0x0A10  // WS_EX_NOINHERITLAYOUT
+#define WEFLAYOUTVBHRESERVED    0x0A20  // WS_EX_LAYOUTVBHRESERVED
+#define WEFLAYOUTRTL            0x0A40  // WS_EX_LAYOUTRTL
+#define WEFLAYOUTBTTRESERVED    0x0A80  // WS_EX_LAYOUTBTTRESERVED
+
+/*
+ * To delay adding a new state3 DWORD in the WW structure, we're using
+ * the extended style bits for now.  If we'll need more of these, we'll
+ * add the new DWORD and move these ones around
+ */
+#define WEFPUIFOCUSHIDDEN         0x0B80  // focus indicators hidden
+#define WEFPUIACCELHIDDEN         0x0B40  // keyboard acceleraors hidden
+#define WEFPREDIRECTED            0x0B20  // redirection bit
+#define WEFPCOMPOSITING           0x0B10  // compositing
 
 
 /*
- * Window styles
+ * Add more Window Extended Style flags here, up to 0x0B80.
+ * Be sure to add the flag to the wFlags array in kd\userexts.c
  */
-#define WFMAXBOX                0x0E01
-#define WFTABSTOP               0x0E01
-#define WFMINBOX                0x0E02
-#define WFGROUP                 0x0E02
-#define WFSIZEBOX               0x0E04
-#define WFSYSMENU               0x0E08
-#define WFHSCROLL               0x0E10
-#define WFVSCROLL               0x0E20
-#define WFDLGFRAME              0x0E40
-#define WFTOPLEVEL              0x0E40
-#define WFBORDER                0x0E80
-#define WFBORDERMASK            0x0EC0
-#define WFCAPTION               0x0EC0
+#ifdef REDIRECTION
+#define WEFEXTREDIRECTED        0x0B01   // WS_EX_EXTREDIRECTED
+#endif // REDIRECTION
 
-#define WFTILED                 0x0F00
-#define WFMAXIMIZED             0x0F01
-#define WFCLIPCHILDREN          0x0F02
-#define WFCLIPSIBLINGS          0x0F04
-#define WFDISABLED              0x0F08
-#define WFVISIBLE               0x0F10
-#define WFMINIMIZED             0x0F20
-#define WFCHILD                 0x0F40
-#define WFPOPUP                 0x0F80
-#define WFTYPEMASK              0x0FC0
-#define WFICONICPOPUP           0x0FC0
+#define WEFCOMPOSITED           0x0B02   // WS_EX_COMPOSITED
+#define WEFPUIACTIVE            0x0B04   // WS_EXP_UIACTIVE
+#define WEFNOACTIVATE           0x0B08   // WS_EX_NOACTIVATE
+
+#ifdef LAME_BUTTON
+#define WEFLAMEBUTTON           0x0980   // the window should display a lame button
+#endif // LAME_BUTTON
+
+/*
+ * Window styles, from 0x0E00 to 0x0F80.
+ */
+#define WFMAXBOX                0x0E01  // WS_MAXIMIZEBOX
+#define WFTABSTOP               0x0E01  // WS_TABSTOP
+#define WFMINBOX                0x0E02  // WS_MAXIMIZEBOX
+#define WFGROUP                 0x0E02  // WS_GROUP
+#define WFSIZEBOX               0x0E04  // WS_THICKFRAME, WS_SIZEBOX
+#define WFSYSMENU               0x0E08  // WS_SYSMENU
+#define WFHSCROLL               0x0E10  // WS_HSCROLL
+#define WFVSCROLL               0x0E20  // WS_VSCROLL
+#define WFDLGFRAME              0x0E40  // WS_DLGFRAME
+#define WFTOPLEVEL              0x0E40  // ???
+#define WFBORDER                0x0E80  // WS_BORDER
+#define WFBORDERMASK            0x0EC0  // WS_BORDER | WS_DLGFRAME
+#define WFCAPTION               0x0EC0  // WS_CAPTION
+
+#define WFTILED                 0x0F00  // WS_OVERLAPPED, WS_TILED
+#define WFMAXIMIZED             0x0F01  // WS_MAXIMIZE
+#define WFCLIPCHILDREN          0x0F02  // WS_CLIPCHILDREN
+#define WFCLIPSIBLINGS          0x0F04  // WS_CLIPSIBLINGS
+#define WFDISABLED              0x0F08  // WS_DISABLED
+#define WFVISIBLE               0x0F10  // WS_VISIBLE
+#define WFMINIMIZED             0x0F20  // WS_MINIMIZE
+#define WFCHILD                 0x0F40  // WS_CHILD
+#define WFPOPUP                 0x0F80  // WS_POPUP
+#define WFTYPEMASK              0x0FC0  // WS_CHILD | WS_POPUP
+#define WFICONICPOPUP           0x0FC0  // WS_CHILD | WS_POPUP
 #define WFICONIC                WFMINIMIZED
+/*
+ * No more Window style flags are available, use Extended window styles.
+ */
+
+/*
+ * Window Styles for built-in classes, from 0x0C00 to 0x0D80.
+ */
 
 // Buttons
 #define BFTYPEMASK              0x0C0F
@@ -1990,7 +2793,6 @@ typedef struct tagCURSORFIND {
 #define BFFLAT                  0x0D80
 
 #define ISBSTEXTOROD(pwnd) (!TestWF(pwnd, BFBITMAP) && !TestWF(pwnd, BFICON))
-#line 1825
 
 // Combos
 #define CBFSIMPLE               0x0C01
@@ -2046,6 +2848,7 @@ typedef struct tagCURSORFIND {
 
 // Statics
 #define SFTYPEMASK              0x0C1F
+#define SFREALSIZECONTROL       0x0C40
 #define SFNOPREFIX              0x0C80
 #define SFNOTIFY                0x0D01
 #define SFCENTERIMAGE           0x0D02
@@ -2054,6 +2857,7 @@ typedef struct tagCURSORFIND {
 #define SFSUNKEN                0x0D10
 #define SFEDITCONTROL           0x0D20
 #define SFELLIPSISMASK          0x0DC0
+#define SFWIDELINESPACING       0x0C20
 
 
 /*
@@ -2073,23 +2877,13 @@ typedef struct tagCURSORFIND {
  *
  * STATEOFFSET is the offset into the WND structure of the state field.
  * The state field is actually part of the WW structure defined in wowuserp.h
- * which is embedded at the end of the WND structure.
+ * which is embedded in the WND structure.
  */
-#define STATEOFFSET (sizeof(WND) - sizeof(WW) + (WND_CNT_WOWDWORDS * sizeof(DWORD)))
+#define STATEOFFSET (FIELD_OFFSET(WND, state))
 
-
-/*
- * Redefine LOBYTE to get rid of compiler warning C4309:
- * 'cast' : truncation of constant value
- */
-#ifdef LOBYTE
-#undef LOBYTE
-#endif
-#define LOBYTE(w)            ((BYTE)((w) & 0x00FF))
-
-#define TestWF(hwnd, flag)   (*(((BYTE *)(hwnd)) + STATEOFFSET + (int)HIBYTE(flag)) & LOBYTE(flag))
-#define SetWF(hwnd, flag)    (*(((BYTE *)(hwnd)) + STATEOFFSET + (int)HIBYTE(flag)) |= LOBYTE(flag))
-#define ClrWF(hwnd, flag)    (*(((BYTE *)(hwnd)) + STATEOFFSET + (int)HIBYTE(flag)) &= ~LOBYTE(flag))
+#define TestWF(hwnd, flag)   (*(((KPBYTE)(hwnd)) + STATEOFFSET + (int)HIBYTE(flag)) & LOBYTE(flag))
+#define SetWF(hwnd, flag)    (*(((KPBYTE)(hwnd)) + STATEOFFSET + (int)HIBYTE(flag)) |= LOBYTE(flag))
+#define ClrWF(hwnd, flag)    (*(((KPBYTE)(hwnd)) + STATEOFFSET + (int)HIBYTE(flag)) &= ~LOBYTE(flag))
 #define MaskWF(flag)         ((WORD)( (HIBYTE(flag) & 1) ? LOBYTE(flag) << 8 : LOBYTE(flag)))
 
 
@@ -2100,14 +2894,22 @@ typedef struct tagCURSORFIND {
 #define TestwndPopup(hwnd)   (TestwndNIPopup(hwnd) || TestwndIPopup(hwnd))
 #define TestwndHI(hwnd)      (TestwndTiled(hwnd) || TestwndIPopup(hwnd))
 
-#define GetChildParent(pwnd) (TestwndChild(pwnd) ? pwnd->spwndParent : NULL)
+#define GetChildParent(pwnd) (TestwndChild(pwnd) ? pwnd->spwndParent : (PWND)NULL)
 #define GetWindowCreator(pwnd) (TestwndChild(pwnd) ? pwnd->spwndParent : pwnd->spwndOwner)
+
 #define TestwndFrameOn(pwnd) (TestWF(pwnd, WFFRAMEON) && (GETPTI(pwnd)->pq == gpqForeground))
+
+#define GetFullScreen(pwnd)        (TestWF(pwnd, WFFULLSCREENMASK))
+#define SetFullScreen(pwnd, state) (ClrWF(pwnd, WFFULLSCREENMASK), \
+                                    SetWF(pwnd, WFFULLSCREENBASE | (state & WFFULLSCREENMASK)))
+
 //#define FTrueVis(pwnd)       (pwnd->fs & WF_TRUEVIS)
 #define FTrueVis(pwnd)       (_IsWindowVisible(pwnd))
 #define _IsWindowEnabled(pwnd) (TestWF(pwnd, WFDISABLED)  == 0)
 #define _IsIconic(pwnd)        (TestWF(pwnd, WFMINIMIZED) != 0)
 #define _IsZoomed(pwnd)        (TestWF(pwnd, WFMAXIMIZED) != 0)
+
+WORD VersionFromWindowFlag(PWND pwnd);
 
 #define SV_UNSET        0x0000
 #define SV_SET          0x0001
@@ -2120,69 +2922,78 @@ typedef struct tagCURSORFIND {
 #define ID_CLOSEMENU            0x20
 #define CHILDSYSMENU            ID_CLOSEMENU
 #define ID_DIALOGSYSMENU        0x30
+#define ID_HSCROLLMENU          0x40
+#define ID_VSCROLLMENU          0x50
 
 /*
  * Menu Item Structure
  */
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 1958
 typedef struct tagITEM {
-    UINT    fType;          // Item Type  Flags
-    UINT    fState;         // Item State Flags
-    UINT    wID;
-    struct tagMENU *spSubMenu;  /* Handle to a popup */
-    HANDLE  hbmpChecked;    /* Bitmap for an on  check */
-    HANDLE  hbmpUnchecked;   /* Bitmap for an off check */
-#ifdef MEMPHIS_MENUS
-#error
-#endif // MEMPHIS_MENUS
-    HANDLE  hTypeData;     // if ownerdraw, MAKELONG(width, height)
-                            // if bitmap,    hBitmap
-                            // if separator, 0L
-                            // if string,    LPWSTR
-    DWORD   cch;                /* String: WCHAR count */
-    DWORD   dwItemData;
-    DWORD   xItem;
-    DWORD   yItem;
-    DWORD   cxItem;
+    UINT                fType;          // Item Type  Flags
+    UINT                fState;         // Item State Flags
+    UINT                wID;
+    PMENU               spSubMenu;      /* Handle to a popup */
+    KHANDLE             hbmpChecked;    /* Bitmap for an on  check */
+    KHANDLE             hbmpUnchecked;  /* Bitmap for an off check */
+    KLPWSTR             lpstr;          //item's text
+    DWORD               cch;            /* String: WCHAR count */
+    KERNEL_ULONG_PTR    dwItemData;
+    DWORD               xItem;
+    DWORD               yItem;
+    DWORD               cxItem;
+    DWORD               cyItem;
+    DWORD               dxTab;
+    DWORD               ulX;            /* String: Underline start */
+    DWORD               ulWidth;        /* String: underline width */
+    KHBITMAP            hbmp;           // item's bitmap
+    int                 cxBmp;          // bitmap width
+    int                 cyBmp;          // bitmap height
+} ITEM, * KPTR_MODIFIER PITEM, * KPTR_MODIFIER LPITEM;
 
-    DWORD   cyItem;
-    DWORD   dxTab;
-    DWORD   ulX;                /* String: Underline start */
-    DWORD   ulWidth;            /* String: underline width */
-#ifdef MEMPHIS_MENUS
-#error
-#line 1986
-#endif // MEMPHIS_MENUS
-} ITEM, *PITEM, *LPITEM;
+/*
+ * MENULIST structure, holds the PMENUs that contain a submenu
+ * We store a list of menus in MENU.pParentMenus as a menu
+ * can be submenu in more items
+ */
+typedef struct tagMENULIST {
+    struct tagMENULIST   *pNext;
+    PMENU       pMenu;
+} MENULIST, * KPTR_MODIFIER PMENULIST;
+
+/*
+ * Scroll menu arrow flags
+ */
+#define MSA_OFF         0
+#define MSA_ON          1
+#define MSA_ATTOP       2
+#define MSA_ATBOTTOM    3
 
 /*
  * Menu Structure
  */
 typedef struct tagMENU {
-    PROCOBJHEAD     head;
+    PROCDESKHEAD    head;
     DWORD           fFlags;         /* Menu Flags */
     int             iItem;          /* Contains the position of the selected
                                        item in the menu. -1 if no selection */
-    int             iPopupMenuItem; /* Contains the position of the hierarchical
-                                       item menu popup */
     UINT            cAlloced;       // Number of items that can fit in rgItems
     UINT            cItems;         /* Number of items in rgItems */
 
     DWORD           cxMenu;
     DWORD           cyMenu;
-    struct tagWND *spwndNotify;     /* The owner hwnd of this menu */
+    DWORD           cxTextAlign;    /* Text align offset for popups*/
+    PWND            spwndNotify;     /* The owner hwnd of this menu */
     PITEM           rgItems;        /* The list of items in this menu */
+    PMENULIST       pParentMenus;   // The list of parents (menus that have this as submenu)
     DWORD           dwContextHelpId;// Context help Id for the whole menu
-#ifdef MEMPHIS_MENU_WATERMARKS
-#error
-#endif // MEMPHIS_MENU_WATERMARKS
+    DWORD           cyMax;          /* max menu height after which menu scrolls */
+    KERNEL_ULONG_PTR dwMenuData;     /* app-supplied menu data */
 
-} MENU, *PMENU;
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 2012
+    KHBRUSH         hbrBack;        // background brush for menu
+    int             iTop;           // Scroll top
+    int             iMaxTop;        // Scroll MaxTop
+    DWORD           dwArrowsOn:2;   // Scroll flags
+} MENU, * KPTR_MODIFIER PMENU;
 
 
 /*
@@ -2198,9 +3009,6 @@ enum {
         TYPE_TCARD
 };
 
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 2027
 typedef struct tagDLGENUMDATA {
     PWND    pwndDialog;
     PWND    pwndControl;
@@ -2209,9 +3017,6 @@ typedef struct tagDLGENUMDATA {
 
 BOOL CALLBACK EnumPwndDlgChildProc(PWND pwnd, LPARAM lParam);
 BOOL FIsParentDude(PWND pwnd);
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 2035
 
 
 #define MNF_DONTSKIPSEPARATORS      0x0001
@@ -2225,9 +3030,6 @@ BOOL FIsParentDude(PWND pwnd);
 #define LTUPFLAG    0x0001  // Left/Up arrow disable flag.
 #define RTDNFLAG    0x0002  // Right/Down arrow disable flag.
 
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 2048
 typedef struct tagSBCALC {
     SBDATA;               /* this must be first -- we cast structure pointers */
     int    pxTop;
@@ -2253,9 +3055,9 @@ typedef struct tagSBTRACK {
     PWND   spwndSB;
     PWND   spwndSBNotify;
     RECT   rcTrack;
-    VOID   (*xxxpfnSB)(PWND, UINT, DWORD, LONG, PSBCALC);
+    VOID   (*xxxpfnSB)(PWND, UINT, WPARAM, LPARAM, PSBCALC);
     UINT   cmdSB;
-    UINT   hTimerSB;
+    UINT_PTR hTimerSB;
     int    dpxThumb;        /* Offset from mouse point to start of thumb box */
     int    pxOld;           /* Previous position of thumb */
     int    posOld;
@@ -2263,9 +3065,6 @@ typedef struct tagSBTRACK {
     int    nBar;
     PSBCALC pSBCalc;
 } SBTRACK, *PSBTRACK;
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 2083
 
 /*
  * How many times a thread can spin through get/peek message without idling
@@ -2281,8 +3080,9 @@ typedef struct tagSBTRACK {
  * This is used by CreateWindow() - the 16 bit version of CW_USEDEFAULT,
  * that we still need to support.
  */
-#define CW2_USEDEFAULT      0x8000
-#define CW_FLAGS_DIFFHMOD   0x80000000
+#define CW2_USEDEFAULT          0x8000
+#define CW_FLAGS_DIFFHMOD       0x80000000
+#define CW_FLAGS_VERSIONCLASS   0x40000000
 
 
 /*
@@ -2296,22 +3096,26 @@ typedef struct tagSBTRACK {
 //#define MENUEXECUTE         TEXT('\r')      /* Return character */
 #define MENUSYSMENU         TEXT(' ')       /* Space character */
 #define MENUCHILDSYSMENU    TEXT('-')       /* Hyphen */
+#define LAMEBUTTONHOTKEY    TEXT('/')       /* Forward slash */
 
 #define MF_ALLSTATE         0x00FF
 #define MF_MAINMENU         0xFFFF
 #define MFMWFP_OFFMENU      0
 #define MFMWFP_MAINMENU     0x0000FFFF
-#define MFMWFP_NOITEM       (UINT)(-1)
-#define MFMWFP_ALTMENU      (UINT)(-2)
+#define MFMWFP_NOITEM       0xFFFFFFFF
+#define MFMWFP_UPARROW      0xFFFFFFFD  /* Warning: Also used to define IDSYS_MNUP */
+#define MFMWFP_DOWNARROW    0xFFFFFFFC  /* Warning: Also used to define IDSYS_MNDOWN */
+#define MFMWFP_MINVALID     0xFFFFFFFC
+#define MFMWFP_ALTMENU      0xFFFFFFFB
 #define MFMWFP_FIRSTITEM    0
 
 
 /*
- * NOTE: SMF() can only be used on single bit flags (NOT MRGFDISABLED!).
+ * NOTE: SetMF() can only be used on single bit flags.
  */
-#define SetMF(pmenu, flag)    ((pmenu)->fFlags |=  flag)
-#define ClearMF(pmenu, flag)  ((pmenu)->fFlags &= ~flag)
-#define TestMF(pmenu, flag)   ((pmenu)->fFlags &   flag)
+#define SetMF(pmenu, flag)    ((pmenu)->fFlags |=  (flag))
+#define ClearMF(pmenu, flag)  ((pmenu)->fFlags &= ~(flag))
+#define TestMF(pmenu, flag)   ((pmenu)->fFlags &   (flag))
 
 #define SetMFS(pitem, flag)   ((pitem)->fState |=  (flag))
 #define TestMFS(pitem, flag)  ((pitem)->fState &   (flag))
@@ -2329,30 +3133,35 @@ typedef struct tagSBTRACK {
  * a difficult problem). So instead we peg the window-words at 30 bytes
  * exactly, and allocate storage for the other information.
  */
-#endif
-#if defined(WOW_ORIGINAL_DIALOG_LAYOUT) && !defined(OPENNT_USER_DIALOG_LAYOUT_H)
-#line 2146
 typedef struct _DLG {
-    WNDPROC lpfnDlg;
+    DLGPROC lpfnDlg;
     DWORD   flags;          /* Various useful flags -- see definitions below */
     int     cxChar;
     int     cyChar;
-    HWND    hwndFocusSave;
+    KHWND   hwndFocusSave;
     UINT    fEnd      : 1;
     UINT    fDisabled : 1;
-    int     result;         /* DialogBox result */
-    HANDLE  hData;          /* Global handle for edit ctl storage. */
-    HFONT   hUserFont;      /* Handle of the font mentioned by the user in template*/
-    HWND    hwndSysModalSave;  /* Previous sysmodal window saved here */
-} DLG, *PDLG;
+    KERNEL_INT_PTR result;         /* DialogBox result */
+    KHANDLE  hData;          /* Global handle for edit ctl storage. */
+    KHFONT   hUserFont;      /* Handle of the font mentioned by the user in template*/
+#ifdef SYSMODALWINDOWS
+    KHWND    hwndSysModalSave;  /* Previous sysmodal window saved here */
+#endif
+} DLG, * KPTR_MODIFIER PDLG;
 
+#endif
+#if defined(WOW_ORIGINAL_DIALOG_LAYOUT) && !defined(OPENNT_USER_DIALOG_LAYOUT_H)
+#line 3132
 typedef struct _DIALOG {
-    WND     wnd;
-    long    resultWP;       /* window proc result -- DWL_MSGRESULT (+0) */
-    PDLG    pdlg;
-    long    unused;         /* DWL_USER (+8) */
-    BYTE    reserved[DLGWINDOWEXTRA - sizeof(long) - sizeof(PDLG) - sizeof(long)];
-} DIALOG, *PDIALOG;
+    WND             wnd;
+    KERNEL_LRESULT  resultWP;       /* window proc result -- DWL_MSGRESULT (+0) */
+    PDLG            pdlg;
+    KERNEL_LONG_PTR unused;        /* DWL_USER (+8) */
+    BYTE            reserved[DLGWINDOWEXTRA - sizeof(KERNEL_LRESULT) - sizeof(PDLG) - sizeof(KERNEL_LONG_PTR)];
+} DIALOG, * KPTR_MODIFIER PDIALOG;
+#endif
+#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
+#line 3139
 
 #define PDLG(pwnd) (((PDIALOG)pwnd)->pdlg)
 
@@ -2360,9 +3169,40 @@ typedef struct _DIALOG {
  * Flags definitions for DLG.flags
  */
 #define DLGF_ANSI           0x01    /* lpfnDlg is an ANSI proc */
+
+/*
+ * MDI typedefs
+ */
+typedef struct tagMDI {
+    UINT    cKids;
+    HWND    hwndMaxedChild;
+    HWND    hwndActiveChild;
+    HMENU   hmenuWindow;
+    UINT    idFirstChild;
+    UINT    wScroll;
+    LPWSTR  pTitle;
+    UINT    iChildTileLevel;
+} MDI, * PMDI;
+
+#endif
+#if defined(WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT) && !defined(OPENNT_CONTROL_EXTENT_BUTTON_LAYOUT_H)
+#line 3161
+typedef struct tagMDIWND {
+    WND             wnd;
+    KERNEL_UINT_PTR dwReserved; // quattro pro 1.0 stores stuff here!!
+    PMDI            pmdi;
+} MDIWND, * KPTR_MODIFIER PMDIWND;
 #endif
 #if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 2174
+#line 3166
+
+#define CST_DESKTOP                 (UINT)0x00000001
+#define CST_RIT                     (UINT)0x00000002
+#define CST_GHOST                   (UINT)0x00000003
+#define CST_POWER                   (UINT)0x00000004
+#define CST_LAST                    (UINT)0x00000004
+
+#define GWLP_MDIDATA        (FIELD_OFFSET(MDIWND, pmdi) - sizeof(WND))
 
 #define TIF_INCLEANUP               (UINT)0x00000001
 #define TIF_16BIT                   (UINT)0x00000002
@@ -2372,7 +3212,7 @@ typedef struct _DIALOG {
 #define TIF_ALLOWFOREGROUNDACTIVATE (UINT)0x00000020
 #define TIF_DONTATTACHQUEUE         (UINT)0x00000040
 #define TIF_DONTJOURNALATTACH       (UINT)0x00000080
-#define TIF_SCREENSAVER             (UINT)0x00000100
+#define TIF_WOW64                   (UINT)0x00000100 /* Thread is in a emulated 32bit process */
 #define TIF_INACTIVATEAPPMSG        (UINT)0x00000200
 #define TIF_SPINNING                (UINT)0x00000400
 #define TIF_PALETTEAWARE            (UINT)0x00000800
@@ -2384,18 +3224,18 @@ typedef struct _DIALOG {
 #define TIF_DOSEMULATOR             (UINT)0x00020000
 #define TIF_GLOBALHOOKER            (UINT)0x00040000
 #define TIF_DELAYEDEVENT            (UINT)0x00080000
-#define TIF_ALLOWSHUTDOWN           (UINT)0x00100000
-#define TIF_SHUTDOWNCOMPLETE        (UINT)0x00200000
-#define TIF_IGNOREPLAYBACKDELAY     (UINT)0x00400000
-#define TIF_ALLOWOTHERACCOUNTHOOK   (UINT)0x00800000
-#define TIF_GUITHREADINITIALIZED    (UINT)0x02000000
-#ifdef FE_IME
-#error
-#endif
-#ifdef FE_SB // TIF_INGETTEXTLENGTH
-#error
-#endif // FE_SB
+#define TIF_MSGPOSCHANGED           (UINT)0x00100000
+#define TIF_IGNOREPLAYBACKDELAY     (UINT)0x00200000
+#define TIF_ALLOWOTHERACCOUNTHOOK   (UINT)0x00400000
+#define TIF_MEOW                    (UINT)0x00800000 /* Thread is associated with the MEOW VM */
+#define TIF_GUITHREADINITIALIZED    (UINT)0x01000000
+#define TIF_DISABLEIME              (UINT)0x02000000
+#define TIF_INGETTEXTLENGTH         (UINT)0x04000000
+#define TIF_ANSILENGTH              (UINT)0x08000000
 #define TIF_DISABLEHOOKS            (UINT)0x10000000
+#define TIF_RESTRICTED              (UINT)0x20000000
+#define TIF_QUITPOSTED              (UINT)0x40000000
+
 
 /*
  * Client Thread Information Structure.
@@ -2411,9 +3251,14 @@ typedef struct tagCLIENTTHREADINFO {
     WORD        fsWakeBitsJournal;      // Bits saved while journalling
     WORD        fsWakeMask;             // Bits looking for when asleep
     LONG        timeLastRead;           // Time of last input read
-} CLIENTTHREADINFO, *PCLIENTTHREADINFO;
+#ifdef MESSAGE_PUMP_HOOK
+    LONG        cMessagePumpHooks;      // Count of installed MPH's on this thread
+#endif
+} CLIENTTHREADINFO;
 
 #define CTIF_SYSQUEUELOCKED         (UINT)0x00000001
+#define CTIF_INSENDMESSAGE          (UINT)0x00000002
+#define CTIF_INCALLBACKMESSAGE      (UINT)0x00000004
 
 /*
  * First check for a 0, 0 filter which means we want all input.
@@ -2425,7 +3270,18 @@ typedef struct tagCLIENTTHREADINFO {
          ? (((wMsg) <  (wMsgFilterMax)) || ((wMsg) >  (wMsgFilterMin)))    \
          : (((wMsg) >= (wMsgFilterMin)) && ((wMsg) <= (wMsgFilterMax)))))
 
-UINT    CalcWakeMask(UINT wMsgFilterMin, UINT wMsgFilterMax);
+UINT    CalcWakeMask(UINT wMsgFilterMin, UINT wMsgFilterMax, UINT fsWakeMaskFilter);
+
+/*
+ * GetInputBits
+ * This function checks if the specified input (fsWakeMask) has arrived (fsChangeBits)
+ *  or it's available (fsWakeBits)
+ */
+__inline WORD GetInputBits (CLIENTTHREADINFO *pcti, WORD fsWakeMask, BOOL fAvailable)
+{
+    return (pcti->fsChangeBits  | (fAvailable ? pcti->fsWakeBits : 0)) & fsWakeMask;
+}
+
 
 typedef struct tagCARET {
     struct tagWND *spwnd;
@@ -2437,81 +3293,19 @@ typedef struct tagCARET {
     int     cy;
     int     cx;
     HBITMAP hBitmap;
-    UINT    hTimer;
+    UINT_PTR hTimer;
     DWORD   tid;
+
+    /*
+     * The following values are used to track the equivelent client coordinates
+     * for caret positions in a window with a private DC.
+     * See Also: zzzSetCaretPos, _GetGUIThreadInfo
+     */
+    int     xOwnDc;
+    int     yOwnDc;
+    int     cxOwnDc;
+    int     cyOwnDc;
 } CARET, *PCARET;
-
-/*
- * vkey table counts, macros, etc. input synchonized key state tables have
- * 2 bits per vkey: fDown, fToggled. Async key state tables have 3 bits:
- * fDown, fToggled, fDownSinceLastRead.
- *
- * Important! The array gafAsyncKeyState matches the bit positions of the
- * afKeyState array in each thread info block. The fDownSinceLastRead bit
- * for the async state is stored in a separate bit array, called
- * gafAsyncKeyStateRecentDown.
- *
- * It is important that the bit positions of gafAsyncKeyState and
- * pti->afKeyState match because we copy from one to the other to maintain
- * key state synchronization between threads.
- *
- * These macros below MUST be used when setting / querying key state.
- */
-#define CVKKEYSTATE                 256
-#define CBKEYSTATE                  (CVKKEYSTATE >> 2)
-#define CBKEYSTATERECENTDOWN        (CVKKEYSTATE >> 3)
-
-#define TestKeyDownBit(pb, vk)\
-        (pb[vk >> 2] & (1 << ((vk & 3) << 1)))
-#define SetKeyDownBit(pb, vk)\
-        (pb[vk >> 2] |= (1 << ((vk & 3) << 1)))
-#define ClearKeyDownBit(pb, vk)\
-        (pb[vk >> 2] &= ~(1 << ((vk & 3) << 1)))
-#define TestKeyToggleBit(pb, vk)\
-        (pb[vk >> 2] & (1 << (((vk & 3) << 1) + 1)))
-#define SetKeyToggleBit(pb, vk)\
-        (pb[vk >> 2] |= (1 << (((vk & 3) << 1) + 1)))
-#define ClearKeyToggleBit(pb, vk)\
-        (pb[vk >> 2] &= ~(1 << (((vk & 3) << 1) + 1)))
-#define TestKeyRecentDownBit(pb, vk)\
-        (pb[vk >> 3] & (1 << (vk & 7)))
-#define SetKeyRecentDownBit(pb, vk)\
-        (pb[vk >> 3] |= (1 << (vk & 7)))
-#define ClearKeyRecentDownBit(pb, vk)\
-        (pb[vk >> 3] &= ~(1 << (vk & 7)))
-
-#define TestKeyStateDown(pq, vk)\
-        TestKeyDownBit(pq->afKeyState, vk)
-#define SetKeyStateDown(pq, vk)\
-        SetKeyDownBit(pq->afKeyState, vk)
-#define ClearKeyStateDown(pq, vk)\
-        ClearKeyDownBit(pq->afKeyState, vk)
-#define TestKeyStateToggle(pq, vk)\
-        TestKeyToggleBit(pq->afKeyState, vk)
-#define SetKeyStateToggle(pq, vk)\
-        SetKeyToggleBit(pq->afKeyState, vk)
-#define ClearKeyStateToggle(pq, vk)\
-        ClearKeyToggleBit(pq->afKeyState, vk)
-
-#define TestAsyncKeyStateDown(vk)\
-        TestKeyDownBit(gafAsyncKeyState, vk)
-#define SetAsyncKeyStateDown(vk)\
-        SetKeyDownBit(gafAsyncKeyState, vk)
-#define ClearAsyncKeyStateDown(vk)\
-        ClearKeyDownBit(gafAsyncKeyState, vk)
-#define TestAsyncKeyStateToggle(vk)\
-        TestKeyToggleBit(gafAsyncKeyState, vk)
-#define SetAsyncKeyStateToggle(vk)\
-        SetKeyToggleBit(gafAsyncKeyState, vk)
-#define ClearAsyncKeyStateToggle(vk)\
-        ClearKeyToggleBit(gafAsyncKeyState, vk)
-
-#define TestAsyncKeyStateRecentDown(vk)\
-        TestKeyRecentDownBit(gafAsyncKeyStateRecentDown, vk)
-#define SetAsyncKeyStateRecentDown(vk)\
-        SetKeyRecentDownBit(gafAsyncKeyStateRecentDown, vk)
-#define ClearAsyncKeyStateRecentDown(vk)\
-        ClearKeyRecentDownBit(gafAsyncKeyStateRecentDown, vk)
 
 #define XPixFromXDU(x, cxChar)       MultDiv(x, cxChar, 4)
 #define YPixFromYDU(y, cyChar)       MultDiv(y, cyChar, 8)
@@ -2522,12 +3316,12 @@ typedef struct tagCARET {
 /*
  * Flags for the Q structure.
  */
-#define QF_UPDATEKEYSTATE         (UINT)0x00001
-#define QF_INALTTAB               (UINT)0x00002
-#define QF_FMENUSTATUSBREAK       (UINT)0x00004
-#define QF_FMENUSTATUS            (UINT)0x00008
-#define QF_FF10STATUS             (UINT)0x00010
-#define QF_MOUSEMOVED             (UINT)0x00020
+#define QF_UPDATEKEYSTATE         (UINT)0x00001 // Set as key events are received. See PostUpdateKeyStateEvent.
+
+#define QF_FMENUSTATUSBREAK       (UINT)0x00004 // Mouse button went up/down while ALT key was down == ignore ALT up.
+#define QF_FMENUSTATUS            (UINT)0x00008 // ALT key down - toggle menu status mode (enter or exit).
+#define QF_FF10STATUS             (UINT)0x00010 // Context menu key down. Treat us ALT if set on key up.
+#define QF_MOUSEMOVED             (UINT)0x00020 // Mouse has moved but no move posted yet. Coalescing & performance
 #define QF_ACTIVATIONCHANGE       (UINT)0x00040 // This flag is examined in the
                                                 // menu loop code so that we
                                                 // exit from menu mode if
@@ -2543,15 +3337,21 @@ typedef struct tagCARET {
                                                 // tells us when to expect
                                                 // a tab-switch in dwp.c.
 
-#define QF_KEYSTATERESET          (UINT)0x00100
-#define QF_INDESTROY              (UINT)0x00200
-#define QF_LOCKNOREMOVE           (UINT)0x00400
-#define QF_FOCUSNULLSINCEACTIVE   (UINT)0x00800
-#define QF_DIALOGACTIVE           (UINT)0x04000
-#define QF_EVENTDEACTIVATEREMOVED (UINT)0x08000
-#define QF_TRACKMOUSELEAVE        (UINT)0x20000
-#define QF_TRACKMOUSEHOVER        (UINT)0x40000
-#define QF_TRACKMOUSEFIRING       (UINT)0x80000
+#define QF_KEYSTATERESET          (UINT)0x00100 // Used by xxxSwitchDesktop to overwrite the key state upon desktop activation
+#define QF_INDESTROY              (UINT)0x00200 // Debug only. To make sure we don't use a queue to be destroyed.
+#define QF_LOCKNOREMOVE           (UINT)0x00400 // An input message has been peeked but not removed. Must be removed next.
+#define QF_FOCUSNULLSINCEACTIVE   (UINT)0x00800 // Application set focus to NULL. Don't send focus messages on activation
+#define QF_DIALOGACTIVE           (UINT)0x04000 // To pass this info in key/char messages lparam's. Undocumented.
+#define QF_EVENTDEACTIVATEREMOVED (UINT)0x08000 //
+
+#define QF_CAPTURELOCKED             0x00100000 // Set by menu mode. Prevent capture changes.
+#define QF_ACTIVEWNDTRACKING         0x00200000 // Mouse has moved over a new window while in active wnd tracking mode
+
+/*
+ * Constants for Round Frame balloons
+ */
+#define RNDFRM_CORNER 10
+#define RNDFRM_BORDER 3
 
 /*
  * Constants for GetRealClientRect
@@ -2565,18 +3365,28 @@ typedef struct tagCARET {
  */
 #endif
 #if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 2374
+#line 3334
 typedef struct tagSBWND {
     WND    wnd;
     BOOL   fVert;
+#ifdef COLOR_HOTTRACKING
+    int    ht;
+#endif // COLOR_HOTTRACKING
     UINT   wDisableFlags;       /* Indicates which arrow is disabled; */
     SBCALC SBCalc;
-} SBWND, *PSBWND, *LPSBWND;
+} SBWND, * KPTR_MODIFIER PSBWND;
 #endif
 #if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 2380
+#line 3343
 
-#define MAXREGION       (HRGN)1
+//
+// Special regions
+//
+#define HRGN_NONE           ((HRGN)-1)
+#define HRGN_EMPTY          ((HRGN)0)
+#define HRGN_FULL           ((HRGN)1)
+#define HRGN_MONITOR        ((HRGN)2)
+#define HRGN_SPECIAL_LAST   HRGN_MONITOR
 
 /*
  * SendMsgTimeout client/server transition struct
@@ -2584,60 +3394,109 @@ typedef struct tagSBWND {
 typedef struct tagSNDMSGTIMEOUT {   /* smto */
     UINT fuFlags;                       // how to send the message, SMTO_BLOCK, SMTO_ABORTIFHUNG
     UINT uTimeout;                      // time-out duration
-    UINT lSMTOReturn;                   // return value TRUE or FALSE
-    UINT lSMTOResult;                   // result value for lpdwResult
+    ULONG_PTR lSMTOReturn;              // return value TRUE or FALSE
+    ULONG_PTR lSMTOResult;              // result value for lpdwResult
 } SNDMSGTIMEOUT, *PSNDMSGTIMEOUT;
+
+typedef struct tagSNDMSGCALLBACK {
+    SENDASYNCPROC lpResultCallBack;
+    ULONG_PTR dwData;
+} SNDMSGCALLBACK, *PSNDMSGCALLBACK;
+
+
+#ifndef _USERK_
+#if DBG
+ULONG_PTR USERTHREADCONNECT();
+__inline ULONG_PTR USERTHREADCONNECT()
+{
+    ULONG_PTR ulReturn;
+
+    ulReturn = NtUserGetThreadState(UserThreadConnect);
+    UserAssert(ulReturn == 0 || ulReturn == 1);
+    return ulReturn;
+}
+#else
+#define USERTHREADCONNECT() (NtUserGetThreadState(UserThreadConnect))
+#endif // DBG
+
+#define ConnectIfNecessary(retval) \
+{ \
+    if ((NtCurrentTebShared()->Win32ThreadInfo == NULL) \
+            && !USERTHREADCONNECT()) { \
+        return retval; \
+    } \
+}
+#endif // !_USERK_
 
 /*
  *  Button data structures (use to be in usercli.h)
  */
-#endif
-#if defined(WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT) && !defined(OPENNT_CONTROL_EXTENT_BUTTON_LAYOUT_H)
-#line 2396
 typedef struct tagBUTN {
     PWND spwnd;
-    UINT buttonState;   // Leave this a word for compatibility with SetWindowWord( 0L )
-    HANDLE hFont;
-    HANDLE hImage;
+    UINT buttonState;
+    KHANDLE hFont;
+    KHANDLE hImage;
     UINT fPaintKbdCuesOnly : 1;
-#line 2401
-} BUTN, *PBUTN;
+} BUTN, * KPTR_MODIFIER PBUTN;
 
+#endif
+#if defined(WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT) && !defined(OPENNT_CONTROL_EXTENT_BUTTON_LAYOUT_H)
+#line 3404
 typedef struct tagBUTNWND {
     WND wnd;
     PBUTN pbutn;
-} BUTNWND, *PBUTNWND;
-
-typedef struct tagMDI {
-    UINT    cKids;
-    HWND    hwndMaxedChild;
-    HWND    hwndActiveChild;
-    HMENU   hmenuWindow;
-    UINT    idFirstChild;
-    UINT    wScroll;
-    LPWSTR  pTitle;
-    UINT    iChildTileLevel;
-} MDI, * PMDI;
-
-typedef struct tagMDIWND {
-    WND             wnd;
-    KERNEL_UINT_PTR dwReserved; // quattro pro 1.0 stores stuff here!!
-    PMDI            pmdi;
-} MDIWND, * KPTR_MODIFIER PMDIWND;
+} BUTNWND, * KPTR_MODIFIER PBUTNWND;
 #endif
 #if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 2407
+#line 3408
 
-#ifdef FE_IME
-#error
-#line 2432
+/*
+ * IME control data structures
+ */
+typedef struct tagIMEUI {
+    PWND  spwnd;
+    KHIMC hIMC;
+    KHWND hwndIMC;
+    KHKL  hKL;
+    KHWND hwndUI;               // To keep handle for UI window.
+    int   nCntInIMEProc;        // Non-zero if hwnd has called into ImeWndProc.
+    BOOL  fShowStatus:1;        // TRUE if don't want to show IME's window.
+    BOOL  fActivate:1;          // TRUE if hwnd has called into ImeWndProc.
+    BOOL  fDestroy:1;           // TRUE if hwnd has called into ImeWndProc.
+    BOOL  fDefault:1;           // TRUE if this is the default IME.
+    BOOL  fChildThreadDef:1;    // TRUE if this is the default IME which
+                                // thread has only child window.
+    BOOL  fCtrlShowStatus:1;    // Control status of show status bar.
+    BOOL  fFreeActiveEvent:1;   // Control status of show status bar.
+
+#ifdef CUAS_ENABLE
+    // Cicero
+    DWORD dwPrevToolbarStatus;  // Cicero for Hide or RestoreToolbar
+#endif // CUAS_ENABLE
+} IMEUI, *PIMEUI;
+
 #endif
+#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
+#line 3434
+typedef struct tagIMEWND {
+    WND wnd;
+    PIMEUI pimeui;
+} IMEWND, * KPTR_MODIFIER PIMEWND;
+#endif
+#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
+#line 3438
+
 
 /*
  * SysErrorBox is a 3.1 API that has no 32-bit equivalent.  It's
  * implemented for WOW in harderr.c.
  */
-#line 3450
+#define MAX_SEB_STYLES  11  /* number of SEB_* values */
+
+/*
+ * The next values should be in the same order
+ * with the ones in IDOK and STR_OK lists
+ */
 #define  SEB_OK         0  /* Button with "OK".     */
 #define  SEB_CANCEL     1  /* Button with "Cancel"  */
 #define  SEB_ABORT      2  /* Button with "&Abort"   */
@@ -2649,13 +3508,9 @@ typedef struct tagMDIWND {
 #define  SEB_HELP       8  /* Button with "&Help"    */
 #define  SEB_TRYAGAIN   9  /* Button with "&Try Again"  */
 #define  SEB_CONTINUE   10 /* Button with "&Continue"   */
-#line 2449
 
 #define  SEB_DEFBUTTON  0x8000  /* Mask to make this button default */
 
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 2452
 typedef struct _MSGBOXDATA {            // mbd
     MSGBOXPARAMS;                       // Must be 1st item in structure
     PWND     pwndOwner;                 // Converted hwndOwner
@@ -2665,6 +3520,7 @@ typedef struct _MSGBOXDATA {            // mbd
     UINT     cButtons;                  // Number of buttons
     UINT     DefButton;
     UINT     CancelId;
+    DWORD    dwTimeout;
 } MSGBOXDATA, *PMSGBOXDATA, *LPMSGBOXDATA;
 
 LPWSTR MB_GetString(UINT wBtn);
@@ -2673,21 +3529,49 @@ int    SoftModalMessageBox(LPMSGBOXDATA lpmb);
 DWORD GetContextHelpId(PWND pwnd);
 
 PITEM  MNLookUpItem(PMENU pMenu, UINT wCmd, BOOL fByPosition, PMENU *ppMenuItemIsOn);
-BOOL _MNCanClose(PWND pwnd);
-PMENU GetSysMenuHandle(PWND pwnd);
+BOOL xxxMNCanClose(PWND pwnd);
+PMENU xxxGetSysMenuHandle(PWND pwnd);
 PWND    GetPrevPwnd(PWND pwndList, PWND pwndFind);
 BOOL   _RegisterServicesProcess(DWORD dwProcessId);
 
-BOOL _FChildVisible(PWND pwnd);
+#ifdef _USERK_
+#define RTLMENU PMENU
+#define RtlGetSubMenu(rtlMenu, nPos) _GetSubMenu(rtlMenu, nPos)
+#define xxxRtlSetMenuInfo xxxSetMenuInfo
+#define xxxRtlInsertMenuItem(rtlMenu, wIndex, fByPos, lpmii, pstrItem) \
+            xxxInsertMenuItem(rtlMenu, wIndex, fByPos, lpmii, pstrItem)
+#define xxxRtlSetMenuItemInfo(rtlMenu, uId, pmii) \
+            xxxSetMenuItemInfo(rtlMenu, uId, FALSE, pmii, NULL)
+#else
+#define RTLMENU HMENU
+#define RtlGetSubMenu(rtlMenu, nPos) GetSubMenu(rtlMenu, nPos)
+#define xxxRtlSetMenuInfo NtUserThunkedMenuInfo
+#define xxxRtlInsertMenuItem(rtlMenu, wIndex, fByPos, lpmii, pstrItem) \
+            InternalInsertMenuItem(rtlMenu, wIndex, fByPos, lpmii)
+#define xxxRtlSetMenuItemInfo(rtlMenu, uId, pmii) \
+            NtUserThunkedMenuItemInfo(rtlMenu, uId, FALSE, FALSE, pmii, NULL)
 #endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 2475
+#ifdef LAME_BUTTON
+RTLMENU xxxLoadSysMenu(UINT uMenuId, PWND pwnd);
+#else
+RTLMENU xxxLoadSysMenu(UINT uMenuId);
+#endif // LAME_BUTTON
+
+
+BOOL _FChildVisible(PWND pwnd);
 
 #define CH_PREFIX TEXT('&')
+//
+// Japan support both Kanji and English mnemonic characters,
+// toggled from control panel.  Both mnemonics are embedded in menu
+// resource templates.  The following prefixes guide their parsing.
+//
+#define CH_ENGLISHPREFIX 0x1E
+#define CH_KANJIPREFIX   0x1F
 
 
-BOOL RtlWCSMessageWParamCharToMB(DWORD msg, PDWORD pWParam);
-BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam);
+BOOL RtlWCSMessageWParamCharToMB(DWORD msg, WPARAM *pWParam);
+BOOL RtlMBMessageWParamCharToWCS(DWORD msg, WPARAM *pWParam);
 
 VOID RtlInitLargeAnsiString(PLARGE_ANSI_STRING plstr, LPCSTR psz,
         UINT cchLimit);
@@ -2696,140 +3580,12 @@ VOID RtlInitLargeUnicodeString(PLARGE_UNICODE_STRING plstr, LPCWSTR psz,
 
 DWORD RtlGetExpWinVer(HANDLE hmod);
 
-
 /***************************************************************************\
 *
-*  Structure for client-side thread-info.
-*   dwHookCurrent HIWORD is current hook filter type (eg: WH_GETMESSAGE)
-*                 LOWORD is TRUE if current hook is ANSI, FALSE if Unicode
+* International multi-keyboard layout/font support
 *
 \***************************************************************************/
 
-
-/*
- * Hook thunks.
- */
-DWORD CALLBACK fnHkINLPRECT(DWORD nCode,
-        DWORD wParam, LPRECT lParam,
-        DWORD xParam, DWORD xpfnProc);
-DWORD CALLBACK fnHkINDWORD(DWORD nCode,
-        DWORD wParam, LONG lParam,
-        DWORD xParam, DWORD xpfnProc, LPDWORD lpFlags);
-DWORD CALLBACK fnHkINLPMSG(DWORD nCode,
-        DWORD wParam, LPMSG lParam,
-        DWORD xParam, DWORD xpfnProc, BOOL bAnsi, LPDWORD lpFlags);
-DWORD CALLBACK fnHkOPTINLPEVENTMSG(DWORD nCode,
-        DWORD wParam, LPEVENTMSGMSG lParam,
-        DWORD xParam, DWORD xpfnProc);
-DWORD CALLBACK fnHkINLPDEBUGHOOKSTRUCT(DWORD nCode,
-        DWORD wParam, LPDEBUGHOOKINFO lParam,
-        DWORD xParam, DWORD xpfnProc);
-DWORD CALLBACK fnHkINLPMOUSEHOOKSTRUCT(DWORD nCode,
-        DWORD wParam, LPMOUSEHOOKSTRUCT lParam,
-        DWORD xParam, DWORD xpfnProc, LPDWORD lpFlags);
-DWORD CALLBACK fnHkINLPCBTACTIVATESTRUCT(DWORD nCode,
-        DWORD wParam, LPCBTACTIVATESTRUCT lParam,
-        DWORD xParam, DWORD xpfnProc);
-DWORD CALLBACK fnHkINLPCBTCSTRUCT(UINT msg,
-        DWORD wParam, LPCBT_CREATEWND pcbt,
-        DWORD xpfnProc, BOOL bAnsi);
-DWORD CALLBACK fnHkINLPCBTMDICCSTRUCT(UINT msg,
-        DWORD wParam, LPCBT_CREATEWND pcbt,
-        DWORD xpfnProc, BOOL bAnsi);
-
-
-/***************************************************************************\
-*
-* Definitions for client/server-specific data referenced by rtl routines.
-*
-\***************************************************************************/
-
-extern HBRUSH ahbrSystem[];
-extern HBRUSH   ghbrWhite;
-extern HBRUSH   ghbrBlack;
-extern HBRUSH   ghbrGray;
-
-
-#endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 2543
-ULONG_PTR GetCPD(KERNEL_PVOID pWndOrCls, DWORD options, ULONG_PTR dwData);
-
-BOOL TestWindowProcess(PWND pwnd);
-DWORD GetAppCompatFlags(PTHREADINFO pti);
-PWND _GetDesktopWindow(VOID);
-
-/***************************************************************************\
-*
-* Shared function prototypes
-*
-\***************************************************************************/
-
-
-PVOID FASTCALL HMValidateHandle(HANDLE h, BYTE btype);
-PVOID FASTCALL HMValidateHandleNoRip(HANDLE h, BYTE btype);
-
-DWORD   MapClientNeuterToClientPfn(PCLS pcls, DWORD dw, BOOL bAnsi);
-DWORD   MapServerToClientPfn(DWORD dw, BOOL bAnsi);
-
-BOOL IsSysFontAndDefaultMode(HDC hdc);
-int GetCharDimensions(HDC hDC, TEXTMETRICW *lpTextMetrics, LPINT lpcy);
-int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient);
-PWND SizeBoxHwnd(PWND pwnd);
-WORD  _GetWindowWord(PWND pwnd, int index);
-DWORD _GetWindowLong(PWND pwnd, int index, BOOL bAnsi);
-BOOL _GetClientRect(PWND pwnd, LPRECT prc);
-void GetRealClientRect(PWND pwnd, LPRECT prc, UINT uFlags);
-BOOL _GetWindowRect(PWND pwnd, LPRECT prc);
-PWND _GetLastActivePopup(PWND pwnd);
-PWND GetTopLevelTiled(PWND pwnd);
-BOOL _IsChild(PWND pwndParent, PWND pwnd);
-BOOL _AdjustWindowRectEx(LPRECT lprc, LONG style, BOOL fMenu, DWORD dwExStyle);
-BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp);
-BOOL _ClientToScreen(PWND pwnd, PPOINT ppt);
-BOOL _ScreenToClient(PWND pwnd, PPOINT ppt);
-int _MapWindowPoints(PWND pwndFrom, PWND pwndTo, LPPOINT lppt, DWORD cpt);
-BOOL _IsWindowVisible(PWND pwnd);
-BOOL _IsDescendant(PWND pwndParent, PWND pwndChild);
-BOOL IsVisible(PWND pwnd);
-PWND _GetWindow(PWND pwnd, UINT cmd);
-PWND _GetParent(PWND pwnd);
-int    FindNCHit(PWND pwnd, LONG lPt);
-SHORT  _GetKeyState(int vk);
-PHOOK  _PhkNext(PHOOK phk);
-
-PPROP _FindProp(PWND pwnd, LPWSTR pszKey, BOOL fInternal);
-HANDLE _GetProp(PWND pwnd, LPWSTR pszKey, BOOL fInternal);
-BOOL _HasCaptionIcon(PWND pwnd);
-PWND GetTopLevelWindow(PWND pwnd);
-
-BOOL _SBGetParms(PWND pwnd, int code, PSBDATA pw, LPSCROLLINFO lpsi);
-BOOL PSMGetTextExtent(HDC hdc, LPWSTR lpstr, int cch, PSIZE psize);
-
-LONG   GetPrefixCount(LPCWSTR lpstr, int cb, LPWSTR lpstrCopy, int cbCopy);
-PMENU _GetSubMenu(PMENU pMenu, int nPos);
-DWORD _GetMenuDefaultItem(PMENU pMenu, BOOL fByPosition, UINT uFlags);
-UINT _GetMenuState(PMENU pMenu, UINT wID, UINT dwFlags);
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 2600
-
-BOOL APIENTRY CopyInflateRect(LPRECT prcDst, CONST RECT *prcSrc, int cx, int cy);
-BOOL APIENTRY CopyOffsetRect(LPRECT prcDst, CONST RECT *prcSrc, int cx, int cy);
-
-DWORD FindCharPosition(LPWSTR lpString, WCHAR ch);
-LPWSTR  TextAlloc(LPCWSTR lpsz);
-UINT  TextCopy(PLARGE_UNICODE_STRING pstr, LPWSTR lpstr, UINT size);
-DWORD wcsncpycch(LPWSTR pwsDest, LPCWSTR pwszSrc, DWORD cch);
-DWORD strncpycch(LPSTR pszDest, LPCSTR pszSrc, DWORD cch);
-
-#define TextPointer(h) ((LPWSTR)h)
-
-BOOL DrawFrame(HDC hdc, LPRECT prect, int clFrame, int cmd);
-void DrawPushButton(HDC hdc, LPRECT lprc, UINT state, UINT flags);
-void ClientFrame(HDC hDC, CONST RECT *pRect, HBRUSH hBrush, DWORD patOp);
-
-#line 3539
 #define DT_CHARSETDRAW  1
 #define DT_GETNEXTWORD  2
 
@@ -2872,7 +3628,23 @@ int DrawTextExWorker(HDC hdc, LPWSTR lpchText, int cchText, LPRECT lprc,
                      UINT dwDTformat, LPDRAWTEXTPARAMS lpDTparams, int iCharset);
 
 
-#line 3598
+/***************************************************************************\
+*
+* Language pack edit control callouts.
+*
+* Functions are accessed through the pLpkEditCallout pointer in the ED
+* structure. pLpkEditCallout points to a structure containing a pointer
+* to each callout routine. These are typedef'd here.
+*
+* (In Windows95 this was achieved through a single function pointer
+* - lpfnCharset - which was written in assembler and called from over 30
+* places with different parameters. Since for NT the Lpk is written in C,
+* the ED structure now points to a list of function pointers, each properly
+* typedef'd, improving performance, enabling typechecking and avoiding
+* varargs discrepancies between architectures.)
+*
+\***************************************************************************/
+
 typedef struct tagED *PED;
 
 typedef BOOL LpkEditCreate        (PED ped, HWND hWnd);
@@ -2923,38 +3695,271 @@ typedef struct tagLPKEDITCALLOUT {
 
 extern PLPKEDITCALLOUT    fpLpkEditControl;
 
-#line 2616
-void PSMTextOut( HDC hdc, int xLeft, int yTop,
-    LPWSTR lpsz, int cch, DWORD dwFlags);
+/***************************************************************************\
+*
+*  Structure for client-side thread-info.
+*   dwHookCurrent HIWORD is current hook filter type (eg: WH_GETMESSAGE)
+*                 LOWORD is TRUE if current hook is ANSI, FALSE if Unicode
+*
+\***************************************************************************/
 
-HBITMAP OwnerLoadBitmap(
-    HANDLE hInstLoad,
-    LPWSTR lpName,
-    HANDLE hOwner);
 
+/*
+ * Hook thunks.
+ */
+#ifdef REDIRECTION
+LRESULT CALLBACK fnHkINLPPOINT(DWORD nCode,
+        WPARAM wParam, LPPOINT lParam,
+        ULONG_PTR xParam, PROC xpfnProc);
+#endif // REDIRECTION
+
+LRESULT CALLBACK fnHkINLPRECT(DWORD nCode,
+        WPARAM wParam, LPRECT lParam,
+        ULONG_PTR xParam, PROC xpfnProc);
+LRESULT CALLBACK fnHkINDWORD(DWORD nCode,
+        WPARAM wParam, LPARAM lParam,
+        ULONG_PTR xParam, PROC xpfnProc, LPDWORD lpFlags);
+LRESULT CALLBACK fnHkINLPMSG(DWORD nCode,
+        WPARAM wParam, LPMSG lParam,
+        ULONG_PTR xParam, PROC xpfnProc, BOOL bAnsi, LPDWORD lpFlags);
+LRESULT CALLBACK fnHkOPTINLPEVENTMSG(DWORD nCode,
+        WPARAM wParam, LPEVENTMSGMSG lParam,
+        ULONG_PTR xParam, PROC xpfnProc);
+LRESULT CALLBACK fnHkINLPDEBUGHOOKSTRUCT(DWORD nCode,
+        WPARAM wParam, LPDEBUGHOOKINFO lParam,
+        ULONG_PTR xParam, PROC xpfnProc);
+LRESULT CALLBACK fnHkINLPMOUSEHOOKSTRUCTEX(DWORD nCode,
+        WPARAM wParam, LPMOUSEHOOKSTRUCTEX lParam,
+        ULONG_PTR xParam, PROC xpfnProc, LPDWORD lpFlags);
+LRESULT CALLBACK fnHkINLPKBDLLHOOKSTRUCT(DWORD nCode,
+        WPARAM wParam, LPKBDLLHOOKSTRUCT lParam,
+        ULONG_PTR xParam, PROC xpfnProc);
+LRESULT CALLBACK fnHkINLPMSLLHOOKSTRUCT(DWORD nCode,
+        WPARAM wParam, LPMSLLHOOKSTRUCT lParam,
+        ULONG_PTR xParam, PROC xpfnProc);
+LRESULT CALLBACK fnHkINLPCBTACTIVATESTRUCT(DWORD nCode,
+        WPARAM wParam, LPCBTACTIVATESTRUCT lParam,
+        ULONG_PTR xParam, PROC xpfnProc);
+LRESULT CALLBACK fnHkINLPCBTCSTRUCT(UINT msg,
+        WPARAM wParam, LPCBT_CREATEWND pcbt,
+        PROC xpfnProc, BOOL bAnsi);
+LRESULT CALLBACK fnHkINLPCBTMDICCSTRUCT(UINT msg,
+        WPARAM wParam, LPCBT_CREATEWND pcbt,
+        PROC xpfnProc, BOOL bAnsi);
+
+#ifdef REDIRECTION
+LRESULT CALLBACK fnHkINLPHTHOOKSTRUCT(DWORD nCode,
+        WPARAM wParam, LPHTHOOKSTRUCT lParam,
+        ULONG_PTR xParam, PROC xpfnProc);
+#endif // REDIRECTION
+
+/***************************************************************************\
+*
+* Definitions for client/server-specific data referenced by rtl routines.
+*
+\***************************************************************************/
+
+extern HBRUSH   ghbrWhite;
+extern HBRUSH   ghbrBlack;
+
+
+ULONG_PTR GetCPD(KERNEL_PVOID pWndOrCls, DWORD options, ULONG_PTR dwData);
+
+BOOL TestWindowProcess(PWND pwnd);
+DWORD GetAppCompatFlags(PTHREADINFO pti);
+DWORD GetAppCompatFlags2(WORD wVer);
+DWORD GetAppImeCompatFlags(PTHREADINFO pti);
+PWND _GetDesktopWindow(VOID);
+PWND _GetMessageWindow(VOID);
+
+/***************************************************************************\
+*
+* Shared function prototypes
+*
+\***************************************************************************/
+
+
+PVOID FASTCALL HMValidateHandle(HANDLE h, BYTE btype);
+PVOID FASTCALL HMValidateCatHandleNoRip(HANDLE h, BYTE btype);
+PVOID FASTCALL HMValidateHandleNoRip(HANDLE h, BYTE btype);
+KERNEL_PVOID FASTCALL HMValidateHandleNoDesktop(HANDLE h, BYTE btype);
+PVOID FASTCALL HMValidateSharedHandle(HANDLE h, BYTE bType);
+
+PVOID FASTCALL HMValidateCatHandleNoSecure(HANDLE h, BYTE bType);
+PVOID FASTCALL HMValidateCatHandleNoSecureCCX(HANDLE h, BYTE bType, PCLIENTINFO ccxPci);
+PVOID FASTCALL HMValidateHandleNoSecure(HANDLE h, BYTE bType);
+
+ULONG_PTR MapClientNeuterToClientPfn(PCLS pcls, KERNEL_ULONG_PTR dw, BOOL bAnsi);
+ULONG_PTR MapServerToClientPfn(KERNEL_ULONG_PTR dw, BOOL bAnsi);
+
+BOOL IsSysFontAndDefaultMode(HDC hdc);
+
+int GetCharDimensions(HDC hDC, TEXTMETRICW *lpTextMetrics, LPINT lpcy);
+
+int   GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient);
+PWND  SizeBoxHwnd(PWND pwnd);
+VOID  _GetClientRect(PWND pwnd, LPRECT prc);
+
+#ifndef _USERSRV_
+void GetRealClientRect(PWND pwnd, LPRECT prc, UINT uFlags, PMONITOR pMonitor);
 #endif
-#if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
-#line 2624
-PCURSOR ClassSetSmallIcon(
-    PCLS pcls,
-    PCURSOR pcursor,
-    BOOL fServerCreated);
-#endif
-#if !defined(OPENNT_USER_OBJECT_TYPES_SUBSET_H)
-#line 2628
+
+VOID  _GetWindowRect(PWND pwnd, LPRECT prc);
+PWND  _GetLastActivePopup(PWND pwnd);
+BOOL  _IsChild(PWND pwndParent, PWND pwnd);
+BOOL  _AdjustWindowRectEx(LPRECT lprc, DWORD style, BOOL fMenu, DWORD dwExStyle);
+BOOL  NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp);
+VOID  _ClientToScreen(PWND pwnd, PPOINT ppt);
+VOID  _ScreenToClient(PWND pwnd, PPOINT ppt);
+int   _MapWindowPoints(PWND pwndFrom, PWND pwndTo, LPPOINT lppt, DWORD cpt);
+BOOL  _IsWindowVisible(PWND pwnd);
+BOOL  _IsDescendant(PWND pwndParent, PWND pwndChild);
+BOOL  IsVisible(PWND pwnd);
+PWND  _GetWindow(PWND pwnd, UINT cmd);
+PWND  _GetParent(PWND pwnd);
+int   FindNCHit(PWND pwnd, LONG lPt);
+SHORT _GetKeyState(int vk);
+PHOOK PhkNextValid(PHOOK phk);
+
+#define GRECT_CLIENT        0x0001
+#define GRECT_WINDOW        0x0002
+#define GRECT_RECTMASK      0x0003
+
+#define GRECT_CLIENTCOORDS  0x0010
+#define GRECT_WINDOWCOORDS  0x0020
+#define GRECT_PARENTCOORDS  0x0040
+#define GRECT_COORDMASK     0x0070
+
+void GetRect(PWND pwnd, LPRECT lprc, UINT uCoords);
+
+PPROP _FindProp(PWND pwnd, PCWSTR pszKey, BOOL fInternal);
+HANDLE _GetProp(PWND pwnd, PCWSTR pszKey, BOOL fInternal);
+BOOL _HasCaptionIcon(PWND pwnd);
+PWND GetTopLevelWindow(PWND pwnd);
+
+BOOL _SBGetParms(PWND pwnd, int code, PSBDATA pw, LPSCROLLINFO lpsi);
+BOOL PSMGetTextExtent(HDC hdc, LPCWSTR lpstr, int cch, PSIZE psize);
+
+LONG   GetPrefixCount(LPCWSTR lpstr, int cb, LPWSTR lpstrCopy, int cbCopy);
+PMENU _GetSubMenu(PMENU pMenu, int nPos);
+DWORD _GetMenuDefaultItem(PMENU pMenu, BOOL fByPosition, UINT uFlags);
+UINT _GetMenuState(PMENU pMenu, UINT wID, UINT dwFlags);
+
+BOOL APIENTRY CopyInflateRect(LPRECT prcDst, CONST RECT *prcSrc, int cx, int cy);
+BOOL APIENTRY CopyOffsetRect(LPRECT prcDst, CONST RECT *prcSrc, int cx, int cy);
+
+DWORD FindCharPosition(LPWSTR lpString, WCHAR ch);
+LPWSTR  TextAlloc(LPCWSTR lpsz);
+UINT  TextCopy(PLARGE_UNICODE_STRING pstr, LPWSTR lpstr, UINT size);
+DWORD wcsncpycch(LPWSTR pwsDest, LPCWSTR pwszSrc, DWORD cch);
+DWORD strncpycch(LPSTR pszDest, LPCSTR pszSrc, DWORD cch);
+
+
+#define TextPointer(h) ((LPWSTR)h)
+
+BOOL DrawFrame(HDC hdc, LPRECT prect, int clFrame, int cmd);
+VOID DrawPushButton(HDC hdc, LPRECT lprc, UINT state, UINT flags);
+BOOL ClientFrame(HDC hDC, CONST RECT *pRect, HBRUSH hBrush, DWORD patOp, int cxBorder, int cyBorder);
+
+VOID MirrorClientRect(PWND pwnd, LPRECT lprc);
+VOID MirrorWindowRect(PWND pwnd, LPRECT lprc);
 
 #define DO_DROPFILE 0x454C4946L
+
+#define ISTS() (!!(USER_SHARED_DATA->SuiteMask & (1 << TerminalServer)))
+
+/*
+ * Structure for DoConnect system call.
+ */
+typedef struct _DOCONNECTDATA {
+    BOOL   fConsoleShadowFlag;
+    BOOL   fMouse;
+    BOOL   fINetClient;
+    BOOL   fInitialProgram;
+    BOOL   fHideTitleBar;
+    HANDLE IcaVideoChannel;
+    HANDLE IcaBeepChannel;
+    HANDLE IcaMouseChannel;
+    HANDLE IcaKeyboardChannel;
+    HANDLE IcaThinwireChannel;
+    HANDLE DisplayChangeEvent;
+    WCHAR  WinStationName[32];
+    WCHAR  ProtocolName[10];
+    WCHAR  AudioDriverName[10];
+    BOOL   fClientDoubleClickSupport;
+    BOOL   fEnableWindowsKey;
+    DWORD  drBitsPerPel;
+    DWORD  drPelsWidth;
+    DWORD  drPelsHeight;
+    DWORD  drDisplayFrequency;
+    USHORT drProtocolType;
+    CLIENTKEYBOARDTYPE  ClientKeyboardType;
+} DOCONNECTDATA, *PDOCONNECTDATA;
+
+/*
+ * Structure for DoReconnect system call.
+ */
+
+#define DR_DISPLAY_DRIVER_NAME_LENGTH 9
+#define DR_PROTOCOL_NAME_LENGTH 9
+
+typedef struct _DORECONNECTDATA {
+    BOOL   fMouse;
+    BOOL   fINetClient;
+    WCHAR  WinStationName[32];
+    WCHAR   DisplayDriverName[DR_DISPLAY_DRIVER_NAME_LENGTH];
+    WCHAR   ProtocolName[DR_PROTOCOL_NAME_LENGTH];
+    WCHAR  AudioDriverName[9];
+    BOOL   fClientDoubleClickSupport;
+    BOOL   fEnableWindowsKey;
+    DWORD  drBitsPerPel;
+    DWORD  drPelsWidth;
+    DWORD  drPelsHeight;
+    DWORD  drDisplayFrequency;
+    USHORT drProtocolType;
+    BOOL   fChangeDisplaySettings;
+    CLIENTKEYBOARDTYPE  ClientKeyboardType;
+} DORECONNECTDATA, *PDORECONNECTDATA;
+
+typedef enum _NOTIFYEVENT {
+    Notify_Disconnect,
+    Notify_Reconnect,
+    Notify_PreReconnect,
+    Notify_SyncDisconnect,
+    Notify_DisableScrnSaver,
+    Notify_EnableScrnSaver,
+    Notify_StopReadInput,
+    Notify_PreReconnectDesktopSwitch,
+    Notify_HelpAssistantShadowStart,
+    Notify_HelpAssistantShadowFinish,
+    Notify_DisconnectPipe
+} NOTIFYEVENT, *PNOTIFYEVENT;
+
+typedef struct _DONOTIFYDATA {
+    NOTIFYEVENT NotifyEvent;
+} DONOTIFYDATA, *PDONOTIFYDATA;
 
 /*
  * EndTask, ExitWindows, hung app, etc time outs
  */
 #define CMSSLEEP                250
 #define CMSHUNGAPPTIMEOUT       (5 * 1000)
-#define CMSWAITTOKILLTIMEOUT    (20 * 1000)
+#define CMSHUNGTOKILLCOUNT       4
+#define CMSWAITTOKILLTIMEOUT    (CMSHUNGTOKILLCOUNT * CMSHUNGAPPTIMEOUT)
+#define CMSAPPSTARTINGTIMEOUT   (6 * CMSHUNGAPPTIMEOUT) /* Some setup apps are pretty slow. bug 195832 */
+#define CMS_QANIMATION          165
+#define CMS_FLASHWND            500
+#define CMS_MENUFADE            175
+#define CMS_SELECTIONFADE       350
+#define CMS_TOOLTIP             135
+#ifdef MOUSE_IP
+#define CMS_SONARTIMEOUT        1000    /* if it takes more than this, sonar will just bail out */
+#endif
+#define PROCESSTERMINATETIMEOUT (90 * 1000)
 
-void KernelBP(void);
-
-#line 3913
+/*
+ * Message table definitions
+ */
 typedef struct tagMSG_TABLE_ENTRY {
     BYTE iFunction:6;
     BYTE bThunkMessage:1;
@@ -2963,7 +3968,53 @@ typedef struct tagMSG_TABLE_ENTRY {
 
 extern CONST MSG_TABLE_ENTRY MessageTable[];
 
-#line 2640
+#define TESTSYNCONLYMESSAGE(msg, wParam) (((msg) < WM_USER) ?       \
+        (   (MessageTable[msg].bSyncOnlyMessage) ||                 \
+            (((msg) == WM_DEVICECHANGE) && ((wParam) & 0x8000))) :  \
+        0)
+
+
+/*
+ * Drag and Drop menus.
+ * MNDragOver output info
+ */
+typedef struct tagMNDRAGOVERINFO
+{
+    DWORD dwFlags;
+    HMENU hmenu;
+    UINT uItemIndex;
+    HWND hwndNotify;
+} MNDRAGOVERINFO, * PMNDRAGOVERINFO;
+
+#ifdef _USERK_
+typedef struct tagMOUSECURSOR {
+    BYTE bAccelTableLen;
+    BYTE bAccelTable[128];
+    BYTE bConstantTableLen;
+    BYTE bConstantTable[128];
+} MOUSECURSOR;
+#endif
+
+typedef struct tagINTERNALSETHIGHCONTRAST {
+    UINT    cbSize;
+    DWORD   dwFlags;
+    UNICODE_STRING usDefaultScheme;
+} INTERNALSETHIGHCONTRAST, *LPINTERNALSETHIGHCONTRAST;
+
+#define InMsgRange(msg, start, end) (((msg) >= (start)) && ((msg) <= (end)))
+
+
+/*
+ * Enforce 64bit/32bit natural alignment
+ * N.b. does not work for byte aligned objects.
+ */
+
+#define NATURAL_ALIGNED_PTR(type, x)  ((type*)(((ULONG_PTR)(x) + PROBE_ALIGNMENT(type) - 1) & ~(PROBE_ALIGNMENT(type) - 1)))
+
+#define ARABIC_UI_LANGID()    (gpsi->UILangID == MAKELANGID(LANG_ARABIC, SUBLANG_DEFAULT))
+#define HEBREW_UI_LANGID()    (gpsi->UILangID == MAKELANGID(LANG_HEBREW, SUBLANG_DEFAULT))
+#define RTL_UI()              (ARABIC_UI_LANGID() || HEBREW_UI_LANGID())
+
 #endif
 #define OPENNT_USER_OBJECT_TYPES_SUBSET_H
 #if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && !defined(OPENNT_USER_CLIENT_VIEW_LAYOUT_H)
@@ -2978,5 +4029,5 @@ extern CONST MSG_TABLE_ENTRY MessageTable[];
 #if defined(WOW_ORIGINAL_CLIENT_VIEW_LAYOUT) && defined(WOW_ORIGINAL_EDIT_CLIENT) && !defined(WOW_DIALOG_LOOKUP_ONLY)
 #include "non-mvdm/windows/core/ntuser/client/globals.h"
 #endif
-#line 2640
+#line 3968
 #endif // _USER_

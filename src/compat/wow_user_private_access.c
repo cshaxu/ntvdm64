@@ -114,18 +114,15 @@ LONG WINAPI wow_user_get_window_longA(HWND window, int index)
         BOOL guest;
         return (LONG)wow_user_get_procedure(window, FALSE, &guest);
     }
-    if (index != GWL_WOWWORDS &&
-            (index > GWL_WOWDWORD1 || index < GWL_WOWDWORD3))
+    if (index != GWL_WOWWORDS)
         return wow_native_GetWindowLongA(window, index);
     words = wow_user_borrow_window(window);
     if (!words) return 0;
-    if (index == GWL_WOWWORDS) return (LONG)words;
-    return (LONG)wow_window_access_current()->words(words)[GWL_WOWDWORD1 - index];
+    return (LONG)words;
 }
 
 LONG WINAPI wow_user_set_window_longA(HWND window, int index, LONG value)
 {
-    DWORD previous_word;
     LONG client_previous;
     if (wow_window_client_try_set_long(window, index, value, TRUE, &client_previous))
         return client_previous;
@@ -135,14 +132,7 @@ LONG WINAPI wow_user_set_window_longA(HWND window, int index, LONG value)
          * source intent from the numeric tag or normalize native CPDs here. */
         return wow_native_SetWindowLongA(window, index, value);
     }
-    if (index > GWL_WOWDWORD1 || index < GWL_WOWDWORD3)
-        return wow_native_SetWindowLongA(window, index, value);
-    /* Original private branches store the word but leave dwOld uninitialized.
-     * Selected SETWL callers discard it. Return the actual previous word,
-     * never reproduce an indeterminate native return register. */
-    if (!wow_user_borrow_window_exchange(window, GWL_WOWDWORD1 - index,
-            (DWORD)value, &previous_word)) return 0;
-    return (LONG)previous_word;
+    return wow_native_SetWindowLongA(window, index, value);
 }
 
 DWORD WINAPI wow_user_get_class_longA(HWND window, int index)

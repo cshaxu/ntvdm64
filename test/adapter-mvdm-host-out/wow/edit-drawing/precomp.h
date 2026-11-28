@@ -4,7 +4,7 @@
 #include "non-mvdm/windows/core/w32inc/w32gdip.h"
 /* Original winuserp.h color range, not a modern extended palette. */
 #define COLOR_MAX (COLOR_INFOBK + 1)
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 
 /* Test-only finite GDI boundary. Compile the two original RTL units with
  * this directory first in their include path; never use in product builds. */

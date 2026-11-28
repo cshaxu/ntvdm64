@@ -28,9 +28,25 @@ BOOL WINAPI wow_standard_class_bind(const wow_standard_class_provider *value)
 
 /* Original WALIAS.H order to cleanup.c's ICLS_* order, not a new class-name
  * or dispatch table. Edit's restore target is intentionally DefWindowProc. */
-static const BYTE cleanup_indices[] = {
-    0, 0, 0, 5, 1, 3, 11, 4, 2, 6, 7, 10, 8, 9, 12
+/* Fixed ABI pair: OpenNT cleanup.c ICLS order and XP SP1 user.h:395-422.
+ * One process owns the atoms; the XP control invocation only borrows them. */
+static const struct { BYTE cleanup, client; } class_indices[] = {
+    {0,0}, {0,0}, {0,0}, {5,5}, {1,1}, {3,3}, {11,6}, {4,4},
+    {2,2}, {6,16}, {7,17}, {10,20}, {8,18}, {9,19}, {12,7}
 };
+
+BOOL WINAPI wow_standard_classes_copy_client_atoms(const wow_cleanup_shared *source,
+    ATOM *output, UINT count)
+{
+    unsigned i;
+    if (!source || !output || count != 23u) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    ZeroMemory(output, count * sizeof(*output));
+    for (i = 2; i < ARRAYSIZE(class_indices); ++i)
+        output[class_indices[i].client] = source->atomSysClass[class_indices[i].cleanup];
+    return TRUE;
+}
 
 static BOOL process_control(WORD fnid)
 {
@@ -51,7 +67,7 @@ BOOL WINAPI wow_standard_classes_bind_cleanup(wow_cleanup_context *context)
         if (!process_control(provider->fnids[i])) continue;
         if (!wow_standard_class_describe(provider->name(i), &view))
             return FALSE;
-        shared.atomSysClass[cleanup_indices[i]] = view.atom;
+        shared.atomSysClass[class_indices[i].cleanup] = view.atom;
     }
     shared.apfnClientA.pfnDefWindowProc = (PROC)DefWindowProcA;
     shared.apfnClientW.pfnDefWindowProc = (PROC)DefWindowProcW;

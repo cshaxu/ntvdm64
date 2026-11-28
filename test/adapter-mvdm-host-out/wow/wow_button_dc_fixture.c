@@ -136,8 +136,8 @@ LRESULT WINAPI wow_native_SendMessageW(HWND w,UINT m,WPARAM p,LPARAM l)
 {return SendMessageW(w,m,p,l);}
 LONG WINAPI wow_window_client_send_message(PWND w,UINT m,WPARAM p,LPARAM l,BOOL a)
 {(void)a;return w?(LONG)SendMessageW(w->head.h,m,p,l):0;}
-BOOL WINAPI _GetClientRect(PWND w,LPRECT r)
-{*r=w->rcClient;OffsetRect(r,-r->left,-r->top);return TRUE;}
+VOID WINAPI _GetClientRect(PWND w,LPRECT r)
+{*r=w->rcClient;OffsetRect(r,-r->left,-r->top);}
 LONG WINAPI wow_default_window_proc(PWND w,UINT m,WPARAM p,LPARAM l,DWORD a)
 {(void)a;if(mode==11 && m==WM_UPDATEUISTATE)retire();
  return (LONG)DefWindowProcW(w->head.h,m,p,l);}

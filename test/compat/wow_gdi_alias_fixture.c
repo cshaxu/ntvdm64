@@ -31,7 +31,7 @@ int main(void)
     }
 
     alias = mvdm_wow_gdi_handle_from_native(first);
-    if (alias <= COLOR_INFOBK || (alias & 3) != 0 ||
+    if (alias <= WOW_GDI_SYSTEM_COLOR_END || (alias & 3) != 0 ||
         mvdm_wow_gdi_handle_from_native(first) != alias ||
         mvdm_wow_gdi_handle_to_native(alias) != first) {
         return fail("stable-alias");
@@ -53,12 +53,12 @@ int main(void)
         BOOL valid;
         if (!brush) return fail("native-brush-create");
         alias = mvdm_wow_gdi_handle_from_native(brush);
-        valid = alias > COLOR_INFOBK && mvdm_wow_gdi_handle_to_native(alias) == brush;
+        valid = alias > WOW_GDI_SYSTEM_COLOR_END && mvdm_wow_gdi_handle_to_native(alias) == brush;
         mvdm_wow_gdi_handle_retire(alias);
         if (!DeleteObject(brush) || !valid) return fail("native-brush-alias");
     }
 
-    for (i = (COLOR_INFOBK >> 2) + 1; i < 0x4000; ++i) {
+    for (i = (WOW_GDI_SYSTEM_COLOR_END >> 2) + 1; i < 0x4000; ++i) {
         HANDLE value = (HANDLE)(ULONG_PTR)(0x30000000u + i);
         if (mvdm_wow_gdi_handle_from_native(value) != (WORD)(i << 2)) {
             return fail("table-fill");

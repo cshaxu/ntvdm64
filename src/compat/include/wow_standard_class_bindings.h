@@ -25,4 +25,6 @@ BOOL WINAPI wow_standard_classes_publish(wow_class_lookup_context *);
  * This covers the same nine controls, not desktop/menu/switch/icon-title.
  * No native registration or window mutation. Failure leaves output intact. */
 BOOL WINAPI wow_standard_classes_bind_cleanup(wow_cleanup_context *);
+/* Convert the retained OpenNT cleanup ABI to the XP invocation view. */
+BOOL WINAPI wow_standard_classes_copy_client_atoms(const wow_cleanup_shared *, ATOM *, UINT);
 #endif

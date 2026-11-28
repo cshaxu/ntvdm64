@@ -88,7 +88,7 @@ static HWND create(unsigned identity)
     CREATESTRUCTA request = {0};
     WW words = {0};
     wow_window_dispatch_target target = {(WOW_WINDOW_PROC_TAG | 0x01234567u), callback, TRUE};
-    words.adwWOW[0] = identity;
+    words.hMod16 = (WORD)identity;
     request.hInstance = instance; request.lpszClass = name; request.lpszName = "";
     request.cx = request.cy = 32; request.style = WS_OVERLAPPEDWINDOW;
     request.lpCreateParams = (LPVOID)0x12345678;
@@ -108,17 +108,17 @@ static DWORD WINAPI callback(HWND window, UINT message, UINT wp, LONG lp,
     CHECK(wow_window_words_cleanup_value(borrow)->thread==wow_fixture_creation_owner(&context));
     CHECK(fixture_creation_objects.entries[LOWORD(window)].phead==wow_window_words_cleanup_value(borrow));
     CHECK(fixture_creation_objects.entries[LOWORD(window)].wUniq==HIWORD(window));
-    CHECK(words->hInstance == instance);
+    CHECK(words->hModule == instance);
     if (message == WM_NCCREATE) {
         CREATESTRUCTA *cs = (CREATESTRUCTA *)lp;
-        if (words->adwWOW[0] == 7) {
+        if (cs->lpCreateParams == (LPVOID)0x12345677) {
             PWND state = wow_window_client_validate_hwnd(window);
             /* The counted original creator must expose WND before the
              * application procedure, even for a nonstandard dialog class. */
             CHECK(state != NULL);
             if (state) {
                 CHECK(state->head.h == window);
-                CHECK(state->dwExpWinVer == 0x030a);
+                CHECK(TestWF(state, WFWIN31COMPAT) && !TestWF(state, WFWIN40COMPAT));
                 CHECK(state->hModule == instance);
             }
         }
@@ -126,23 +126,23 @@ static DWORD WINAPI callback(HWND window, UINT message, UINT wp, LONG lp,
             MDICREATESTRUCTA *mdi = cs->lpCreateParams;
             CHECK(mdi && mdi->lParam == 0x12345678);
             ++mdi_created;
-        } else CHECK(cs->lpCreateParams == (LPVOID)0x12345678);
+        } else CHECK(cs->lpCreateParams == (LPVOID)0x12345678 || cs->lpCreateParams == (LPVOID)0x12345677);
         CHECK(GetWindowLongA(window, GWL_USERDATA) == 0);
-        SetWindowLongA(window, GWL_USERDATA, words->adwWOW[0]);
-        if (words->adwWOW[0] == 1) {
+        SetWindowLongA(window, GWL_USERDATA, words->hMod16);
+        if (words->hMod16 == 1) {
             HWND child = create(2);
             CHECK(child != NULL);
             if (child) { ++nested; CHECK(DestroyWindow(child)); }
             CHECK(GetWindowLongA(window, GWL_USERDATA) == 1);
         }
-        if (words->adwWOW[0] == 3) {
+        if (words->hMod16 == 3) {
             ++rejected;
             rejected_borrow=wow_window_words_acquire(window);
             wow_window_words_release(borrow);
             return FALSE;
         }
     }
-    if (words->dwExStyle & WS_EX_MDICHILD)
+    if (words->ExStyle & WS_EX_MDICHILD)
         result = DefMDIChildProcA(window, message, wp, lp);
     else result = DefWindowProcA(window, message, wp, lp);
     if (message == WM_NCDESTROY) {
@@ -233,7 +233,7 @@ static void verify_mdi_creation(void)
     request.lpszClass = name; request.lpszName = "";
     request.cx = request.cy = 24;
     request.lpCreateParams = (PVOID)0x12345678;
-    words.adwWOW[0] = 6;
+    words.hMod16 = 6;
     child = wow_window_create_boundA(wow_fixture_creation_owner(&context), atom, &request, &words, &target);
     CHECK(child != NULL);
     if (child) verify_creation_encoding(child, TRUE);
@@ -276,7 +276,6 @@ static void verify_counted_dialog_creation(void)
     WCHAR title_text[] = {'A', 'B', 0, 'X', 'Y', 0};
     WCHAR actual[8];
     LARGE_STRING class_name = {0}, title = {0};
-    DWORD words[3] = {7, 0x12345678, 0x76543210};
     DWORD version = 0x1234030a;
     DWORD saved_compat = fixture_creation_thread.dwCompatFlags;
     unsigned i;
@@ -296,7 +295,7 @@ static void verify_counted_dialog_creation(void)
             (i & 1) ? WS_EX_ANSICREATOR : 0,
             (i & 2) ? (PLARGE_STRING)(ULONG_PTR)atom : &class_name,
             &title, WS_OVERLAPPEDWINDOW, 0, 0, 32, 32, NULL, NULL,
-            instance, (LPVOID)0x12345678, version, words);
+            instance, (LPVOID)0x12345677, version);
         wow_window_words_binding *borrow;
         wow_window_creation_facts facts = {0};
         CHECK(window != NULL);
@@ -321,11 +320,10 @@ static void verify_counted_dialog_creation(void)
             CHECK(wow_window_words_creation_facts(borrow, &facts));
             CHECK(facts.module_version == version);
             CHECK(facts.compatibility_flags == 0x1234);
-            CHECK(!memcmp(wow_window_words_value(borrow)->adwWOW,
-                words, sizeof(words)));
+            CHECK(wow_window_words_value(borrow)->hModule == instance);
             CHECK(state != NULL);
             if (state) {
-                CHECK(state->head.h == window && state->dwExpWinVer == LOWORD(version));
+                CHECK(state->head.h == window && TestWF(state, WFWIN31COMPAT) && !TestWF(state, WFWIN40COMPAT));
                 CHECK(!!TestWF(state, WFANSICREATOR) == ((i & 1) != 0));
             }
             CHECK(DestroyWindow(window));
@@ -388,8 +386,7 @@ static void verify_control_creation_inputs(void)
                 WW *words = wow_window_words_value(borrow);
                 CHECK(wow_window_words_creation_facts(borrow, &facts));
                 CHECK(facts.module_version == 0x030a);
-                CHECK(words->adwWOW[0] == 0 && words->adwWOW[1] == 0 &&
-                    words->adwWOW[2] == 0);
+                CHECK(words->hMod16 == 0 && words->hModule == instance);
                 CHECK(DestroyWindow(window));
                 CHECK(wow_window_words_cleanup_value(borrow)->thread == NULL);
                 wow_window_words_release(borrow);
@@ -552,26 +549,27 @@ static void verify_sampled_generation_reuse(void)
 {
     HWND window = CreateWindowExA(0, "STATIC", "generation probe", 0,
         0, 0, 8, 8, NULL, NULL, GetModuleHandleA(NULL), NULL);
-    ULONG first_words[3] = {0x11112222, 0, 0};
-    ULONG next_words[3] = {0x33334444, 0, 0};
+    mvdm_softpc_wow_window_words_view first_words = {0};
+    mvdm_softpc_wow_window_words_view next_words = {0};
     WW *first, *next;
     wow_window_words_binding *first_binding, *related;
     wow_user_borrow_scope outer, inner;
     BOOL published = FALSE, entered = FALSE;
+    first_words.module16 = 0x2222; next_words.module16 = 0x4444;
     CHECK(window != NULL);
     if (!window) return;
     /* Deterministic page-domain retirement/republication of one real HWND.
      * This models handle reuse at the cache boundary, not Windows allocator
      * reuse or guest execution. Both generations use the real CCPU owner. */
     published = mvdm_softpc_wow_page_domain_publish_handle(LOWORD(window),
-        HIWORD(window), TYPE_WINDOW, 0, (ULONG)window, 0, first_words);
+        HIWORD(window), TYPE_WINDOW, 0, (ULONG)window, 0, &first_words);
     CHECK(published);
     if (!published) goto done;
     entered = wow_user_borrow_enter(&outer);
     CHECK(entered);
     if (!entered) goto done;
     first = wow_user_borrow_window(window);
-    CHECK(first && first->adwWOW[0] == first_words[0]);
+    CHECK(first && first->hMod16 == first_words.module16);
     CHECK(wow_user_borrow_window(window) == first);
     first_binding = wow_user_borrow_observed_binding(window);
     related = first_binding;
@@ -585,21 +583,21 @@ static void verify_sampled_generation_reuse(void)
     }
     published = FALSE;
     published = mvdm_softpc_wow_page_domain_publish_handle(LOWORD(window),
-        HIWORD(window), TYPE_WINDOW, 0, (ULONG)window, 0, next_words);
+        HIWORD(window), TYPE_WINDOW, 0, (ULONG)window, 0, &next_words);
     CHECK(published);
     if (!published) goto done;
     if (wow_user_borrow_enter(&inner)) {
         next = wow_user_borrow_window(window);
-        CHECK(next && next != first && next->adwWOW[0] == next_words[0]);
+        CHECK(next && next != first && next->hMod16 == next_words.module16);
         CHECK(wow_window_words_value(wow_user_borrow_observed_binding(window)) == next);
-        CHECK(first && first->adwWOW[0] == first_words[0]);
+        CHECK(first && first->hMod16 == first_words.module16);
         CHECK(wow_user_borrow_leave(&inner));
     } else CHECK(FALSE);
     /* Leaving the inner scope does not make the older outer alias current. */
     next = wow_user_borrow_window(window);
-    CHECK(next && next != first && next->adwWOW[0] == next_words[0]);
+    CHECK(next && next != first && next->hMod16 == next_words.module16);
     CHECK(wow_window_words_value(wow_user_borrow_observed_binding(window)) == next);
-    CHECK(first && first->adwWOW[0] == first_words[0]);
+    CHECK(first && first->hMod16 == first_words.module16);
     related = first_binding;
     CHECK(wow_user_borrow_window_relation(first_binding, 2, &related) && !related);
 done:

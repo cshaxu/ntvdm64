@@ -208,18 +208,16 @@ SetData:
 #line 794
 
 #include "compat/include/wow_page_domain.h"
-DWORD *WINAPI wow_original_window_words(struct _WW *words)
-{
-    return words->adwWOW;
-}
 VOID WINAPI wow_original_restore_window_words(struct _WW *words,
     const mvdm_softpc_wow_window_words_view *view)
 {
-    C_ASSERT(sizeof(words->adwWOW) == sizeof(view->words));
-    CopyMemory(words->adwWOW, view->words, sizeof(view->words));
-    words->dwStyle = view->style;
-    words->dwExStyle = view->exstyle;
-    words->hInstance = (HANDLE)(ULONG_PTR)view->module;
+    words->state = view->state;
+    words->state2 = view->state2;
+    words->style = view->style;
+    words->ExStyle = view->exstyle;
+    words->hModule = (HANDLE)(ULONG_PTR)view->module;
+    words->hMod16 = view->module16;
+    words->fnid = view->fnid;
 }
 
 
@@ -230,7 +228,7 @@ VOID WINAPI wow_original_restore_window_words(struct _WW *words,
 const wow_window_layout *WINAPI wow_original_window_layout(void)
 {
     static const wow_window_layout layout = {
-        sizeof(WND), sizeof(WW), sizeof(CLS), WND_CNT_WOWDWORDS,
+        sizeof(WND), sizeof(WW), sizeof(CLS),
         CW_FLAGS_ANSI, WS_EX_ANSICREATOR, WNDPROC_HANDLE, FNID_DIALOG
     };
     return &layout;
@@ -239,11 +237,13 @@ const wow_window_layout *WINAPI wow_original_window_layout(void)
 VOID WINAPI wow_original_capture_window_words(const struct _WW *words,
     mvdm_softpc_wow_window_words_view *view)
 {
-    C_ASSERT(sizeof(words->adwWOW) == sizeof(view->words));
-    CopyMemory(view->words, words->adwWOW, sizeof(view->words));
-    view->style = words->dwStyle;
-    view->exstyle = words->dwExStyle;
-    view->module = (ULONG)(ULONG_PTR)words->hInstance;
+    view->state = words->state;
+    view->state2 = words->state2;
+    view->style = words->style;
+    view->exstyle = words->ExStyle;
+    view->module = (ULONG)(ULONG_PTR)words->hModule;
+    view->module16 = words->hMod16;
+    view->fnid = words->fnid;
 }
 
 SIZE_T WINAPI wow_original_window_state_extent(const struct tagWND *state)
@@ -258,12 +258,14 @@ WCHAR *WINAPI wow_original_promote_window_state(struct tagWND *destination,
     WCHAR *previous = NULL;
     source->pcls = identity;
     if (destination) {
-        PWND next = destination->spwndNext, parent = destination->spwndParent;
+        PWND next = destination->spwndNext, prev = destination->spwndPrev;
+        PWND parent = destination->spwndParent;
         PWND child = destination->spwndChild, owner = destination->spwndOwner;
         previous = destination->strName.Buffer;
         CopyMemory(destination, source, sizeof(WND) + (SIZE_T)source->cbwndExtra);
         destination->head.pSelf = (PBYTE)destination;
-        destination->spwndNext = next; destination->spwndParent = parent;
+        destination->spwndNext = next; destination->spwndPrev = prev;
+        destination->spwndParent = parent;
         destination->spwndChild = child; destination->spwndOwner = owner;
     }
     return previous;
@@ -291,11 +293,14 @@ WCHAR *WINAPI wow_original_refresh_window_state(struct tagWND *state,
 {
     WCHAR *previous = NULL;
     BOOL child = (info->dwStyle & (WS_CHILD | WS_POPUP)) == WS_CHILD;
-    words->dwStyle = info->dwStyle;
-    words->dwExStyle = info->dwExStyle;
-    words->hInstance = (HANDLE)(ULONG_PTR)module;
+    words->style = info->dwStyle;
+    words->ExStyle = info->dwExStyle;
+    words->hModule = (HANDLE)(ULONG_PTR)module;
     if (state) {
         words->state = state->state;
+        words->state2 = state->state2;
+        state->hMod16 = words->hMod16;
+        words->fnid = state->fnid;
         if (name) {
             previous = state->strName.Buffer;
             state->strName.Buffer = name;
@@ -306,7 +311,7 @@ WCHAR *WINAPI wow_original_refresh_window_state(struct tagWND *state,
         if (child || TestwndChild(state)) state->spmenu = (PMENU)(ULONG_PTR)control_id;
         state->rcWindow = info->rcWindow; state->rcClient = info->rcClient;
         state->style = info->dwStyle; state->ExStyle = info->dwExStyle;
-        state->hModule = words->hInstance;
+        state->hModule = words->hModule;
     }
     return previous;
 }
@@ -375,10 +380,13 @@ VOID WINAPI wow_original_initialize_window_state(struct tagWND *state,
     state->cbwndExtra = class_extra_bytes;
     state->rcWindow = info.rcWindow;
     state->rcClient = info.rcClient;
-    CopyMemory(state->adwWOW, words->adwWOW, sizeof(state->adwWOW));
-    state->style = words->dwStyle;
-    state->ExStyle = words->dwExStyle;
-    state->hModule = words->hInstance;
+    state->state = words->state;
+    state->state2 = words->state2;
+    state->style = words->style;
+    state->ExStyle = words->ExStyle;
+    state->hModule = words->hModule;
+    state->hMod16 = words->hMod16;
+    state->fnid = words->fnid;
     state->spmenu = (PMENU)(ULONG_PTR)(DWORD)control_id;
     /* ADAPTER-WOW-063: shared creation-state projection from original createw.c
      * (ANSI transfer and lines 354--371 compatibility branches). The full
@@ -386,11 +394,13 @@ VOID WINAPI wow_original_initialize_window_state(struct tagWND *state,
      * source inputs. Native creation/style policy is not implemented here. */
     if (ansi_creator) SetWF(state, WFANSICREATOR);
     if (compatibility_flags & GACF_RANDOM3XUI) SetWF(state, WFOLDUI);
-    state->dwExpWinVer = (DWORD)LOWORD(module_version);
-    if (Is310Compat(state->dwExpWinVer)) {
+    if (Is310Compat(module_version)) {
         SetWF(state, WFWIN31COMPAT);
-        if (Is400Compat(state->dwExpWinVer))
+        if (Is400Compat(module_version)) {
             SetWF(state, WFWIN40COMPAT);
+            if (Is500Compat(module_version))
+                SetWF(state, WFWIN50COMPAT);
+        }
     } else if (compatibility_flags & GACF_ALWAYSSENDNCPAINT)
         SetWF(state, WFALWAYSSENDNCPAINT);
 }

@@ -9,6 +9,7 @@
 #include "wow_task_order_bindings.h"
 #include "wow_window_words_binding.h"
 #include "compat/include/wow_page_domain.h"
+#include "compat/include/wow_window_access_provider.h"
 
 /* Original query reads shared publication, never the cleanup ownership table.
  * One copied metadata row suffices; no native pointer, table-sized copy or
@@ -381,6 +382,7 @@ BOOL WINAPI wow_user_window_publish(wow_user_object_table *table, HWND window,
 {
     WORD index=LOWORD(window);
     wow_cleanup_handle *entry;
+    mvdm_softpc_wow_window_words_view words;
     if (!table || !object || !thread || !index || index==0xffff) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
@@ -391,9 +393,12 @@ BOOL WINAPI wow_user_window_publish(wow_user_object_table *table, HWND window,
     entry->phead=object; entry->pOwner=thread;
     entry->wUniq=HIWORD(window); entry->bFlags=0;
     entry->bType=wow_cleanup_provider_current()->window_type;
+    if (object->words)
+        wow_window_access_current()->capture_words(object->words, &words);
     if (!mvdm_softpc_wow_page_domain_publish_handle(index, entry->wUniq,
             entry->bType, entry->bFlags, (unsigned long)(ULONG_PTR)window,
-            object->pcls ? object->pcls->guest_server : 0u, object->adwWOW)) {
+            object->pcls ? object->pcls->guest_server : 0u,
+            object->words ? &words : NULL)) {
         ZeroMemory(entry,sizeof(*entry));
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }

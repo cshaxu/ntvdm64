@@ -1,6 +1,6 @@
 #include "compat/include/wow_native_text_descriptor.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 #include "non-mvdm/public/internal/windows/inc/wingdip.h"
 void WINAPI wow_original_text_capture(wow_native_text_descriptor *, const LARGE_STRING *);

@@ -104,7 +104,7 @@ static void check_original_blit(wow_button_resources *value)
     if (screen) ReleaseDC(NULL, screen);
     if (target && bitmap) previous = SelectObject(target, bitmap);
     if (previous && previous != HGDI_ERROR) {
-        for (index = OBI_CHECK; index < OBI_COUNT; ++index) {
+        for (index = OBI_CHECK; index <= OBI_3STATE_CDI; ++index) {
             const OEMBITMAPINFO *image = &value->bm[index];
             int x, y;
             CHECK(wow_button_BitBltSysBmp(target, 2, 3, index));

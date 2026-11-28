@@ -2257,3 +2257,5 @@ post-publication targeted checks.
 - [S15 P70 N023 capture macros](evidence/t485-s1/n023-ntsend.md).
 
 - [S15 P71 class registration ABI](evidence/t485-s1/n023-class-abi.md).
+
+- [S15 N023 USER core declaration audit](evidence/t485-s1/n023-user.md).

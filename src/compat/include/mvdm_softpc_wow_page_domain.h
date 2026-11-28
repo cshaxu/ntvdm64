@@ -51,8 +51,6 @@ int __cdecl mvdm_softpc_wow_page_domain_collect_retired_windows(void);
 /* Original three WW DWORDs persist in the projected WND. Reads require an
  * outstanding borrow; setters additionally require a still-published WND.
  * Native style/module sampling and original classification remain above. */
-int __cdecl mvdm_softpc_wow_page_domain_read_window_words(unsigned long backing,
-    unsigned long words[3]);
 
 /* Sampled native view, separate from managed task/WW ownership. Only copied
  * class query fields enter the guest; native registration/procedures do not. */

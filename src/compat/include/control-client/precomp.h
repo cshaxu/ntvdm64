@@ -30,9 +30,16 @@
 #pragma warning(push)
 #define WOW_ORIGINAL_BUTTON_RESOURCES
 #include "compat/include/opennt_user_multipass.h"
+/* OpenNT user.h:67, retained caller prerequisite. */
+#ifndef ARRAY_SIZE
+#define ARRAY_SIZE(a) (sizeof(a) / sizeof((a)[0]))
+#endif
 #undef WOW_ORIGINAL_BUTTON_RESOURCES
 #pragma warning(pop)
 #include "wow_user_client_view_layout.h"
+/* Only this native control composition consumes MONITORINFO snapshots.
+ * Preserve XP's private PMONITOR declaration in the shared layout header. */
+#define PMONITOR MONITORINFO *
 #include <limits.h> /* Original client/precomp.h: ListBox signed bounds. */
 /* Original client/precomp.h includes windowsx.h. Its SelectFont/DeleteFont
  * macros call the public GDI object API; do not declare substitute functions. */
@@ -118,6 +125,8 @@ DWORD WINAPI xxxSetWindowData(PWND, int, DWORD, BOOL);
 #define ghbrGray wow_edit_gray_brush
 #define ghFontSys ((HFONT)GetStockObject(SYSTEM_FONT))
 #define SYSMET(index) GetSystemMetrics(SM_##index)
+#undef SYSMETRTL
+#define SYSMETRTL(index) SYSMET(index)
 #ifndef WOW_ORIGINAL_DIALOG_CLIENT
 #define rcScreen (wow_edit_current->screen_rect)
 #endif
@@ -171,11 +180,11 @@ WORD DbcsCombine(HWND, WORD);
 #ifndef PTR_TO_ID
 #define PTR_TO_ID(p) ((USHORT)(((ULONG_PTR)(p)) & MAXWORD))
 #endif
-#ifndef IS_PTR
-/* XP ntuser/inc/user.h:467. */
 #ifndef MAXUSHORT
 #define MAXUSHORT MAXWORD
 #endif
+#ifndef IS_PTR
+/* XP ntuser/inc/user.h:467. */
 #define IS_PTR(p) ((((ULONG_PTR)(p)) & ~MAXUSHORT) != 0)
 #endif
 #define NtUserGetComboBoxInfo wow_control_get_combo_info
@@ -367,7 +376,7 @@ PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
 #define NtUserCreateWindowEx wow_user_create_dialog_window_ex
 /* XP's versioned client creator has no WOW-word argument. Both original
  * call shapes enter the same enrollment/creation owner. */
-#define VerNtUserCreateWindowEx(...) wow_user_create_dialog_window_ex(__VA_ARGS__, NULL)
+#define VerNtUserCreateWindowEx wow_user_create_dialog_window_ex
 #define CW_FLAGS_VERSIONCLASS 0x40000000
 #ifndef CW2_USEDEFAULT
 #define CW2_USEDEFAULT 0x8000
@@ -449,9 +458,8 @@ BOOL WINAPI SyncSoftKbdState(HIMC, LPARAM);
 #define GACF2_NO_INIT_ECFLAGS_ON_SETFOCUS 0x00020000
 #define VER50 0x0500
 #define UserVerify(f) ((void)(f))
-#ifndef IS_IME_ENABLED
+#undef IS_IME_ENABLED
 #define IS_IME_ENABLED() GetSystemMetrics(SM_IMMENABLED)
-#endif
 #define RTL_UI() (GetUserDefaultUILanguage() == MAKELANGID(LANG_ARABIC, SUBLANG_DEFAULT) || \
     GetUserDefaultUILanguage() == MAKELANGID(LANG_HEBREW, SUBLANG_DEFAULT))
 #endif

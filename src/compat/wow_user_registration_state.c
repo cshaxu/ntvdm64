@@ -3,6 +3,7 @@
 #include "include/wow_user_registration_state.h"
 #include "include/wow_class_words_binding.h"
 #include "include/wow_window_words_binding.h"
+#include "include/wow_window_creation_binding.h"
 #include "include/wow_user_object_bindings.h"
 #include "include/wow_user_borrow_scope.h"
 #include "include/wow_menu_native_bindings.h"
@@ -106,8 +107,7 @@ HWND WINAPI registered_create_window_ex(DWORD ex_style,
     LPVOID param, DWORD flags)
 {
     HWND result = wow_user_create_window_ex(ex_style, class_name, window_name,
-        style, x, y, width, height, parent, menu, instance, param, flags,
-        NULL);
+        style, x, y, width, height, parent, menu, instance, param, flags);
     DWORD error=GetLastError();
     wow_user_registration_trace("CreateWindowEx", (DWORD)(ULONG_PTR)result);
     SetLastError(error);

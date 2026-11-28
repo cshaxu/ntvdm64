@@ -1,0 +1,997 @@
+{
+  "task": "M0 T485 S15 P72",
+  "runtime": "build\\t485-s15\\runtime86",
+  "package_id": "BD0E4A94-A40E-4190-B1EC-7B98CB34821E",
+  "build_exit": 0,
+  "publication": [
+    {
+      "pass": true,
+      "sha256": "03C4FAB5F131B9A45FFBD48B53C8250104C9FC3EA5535FA5954ED9585CCDA4BF",
+      "path": "assets\\release\\NTVDMD.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "03C4FAB5F131B9A45FFBD48B53C8250104C9FC3EA5535FA5954ED9585CCDA4BF",
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "BBD5945175DD07A7092821788EBE14A07B7C968EB5C7C079763DF7EE6253CE3C",
+      "path": "assets\\release\\VJOY.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "BBD5945175DD07A7092821788EBE14A07B7C968EB5C7C079763DF7EE6253CE3C",
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "CB556D9447AB8A53913FF65614EFB325BBF6F2C77EAC98B26887BF17B910E58C",
+      "path": "assets\\release\\VCDEX.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "CB556D9447AB8A53913FF65614EFB325BBF6F2C77EAC98B26887BF17B910E58C",
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "6A9776DEAB57F35F13552A56902D7A0622EDC1C1CE1F001704490467732A9839",
+      "path": "assets\\release\\run16.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "6A9776DEAB57F35F13552A56902D7A0622EDC1C1CE1F001704490467732A9839",
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "46B7B23BAA048597C43B1C23441633C9843B86E2BA93901BA554FBA12C05815E",
+      "path": "assets\\release\\ntsrv.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "46B7B23BAA048597C43B1C23441633C9843B86E2BA93901BA554FBA12C05815E",
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "43AF52A1228CEEBC356C6A46E964AFDA808EE836E1A215A95C8074145C66ADEF",
+      "path": "assets\\release\\ntcon.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "43AF52A1228CEEBC356C6A46E964AFDA808EE836E1A215A95C8074145C66ADEF",
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "39025F3BE43C3BE4666377F016711B56C7D4B301AB9CD725DE40925DD6E37E0F",
+      "path": "assets\\release\\ntvdm.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "39025F3BE43C3BE4666377F016711B56C7D4B301AB9CD725DE40925DD6E37E0F",
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "C4AB348AE0B9A2015156191219647E57C317D72D17B41BE6A2C1FD2503BE019A",
+      "path": "assets\\release\\ntvwm.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "C4AB348AE0B9A2015156191219647E57C317D72D17B41BE6A2C1FD2503BE019A",
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "D144A7F1A18E794179BF1DBFC90DAF3B82B80DA713A4070F855D8F3688624EC6",
+      "path": "assets\\release\\ntmon.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "D144A7F1A18E794179BF1DBFC90DAF3B82B80DA713A4070F855D8F3688624EC6",
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe"
+    },
+    {
+      "pass": true,
+      "sha256": "D4F2D1553FE60A903B247A1C884385D2A8B2407CE7742E3CC80FDE7293B946BB",
+      "path": "assets\\release\\WOW32.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "D4F2D1553FE60A903B247A1C884385D2A8B2407CE7742E3CC80FDE7293B946BB",
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "26E6214C6EFE9D4ADC0EB7D7470F7EFFAA3F66CEA273E6DF660DE51BF64F63B5",
+      "path": "assets\\release\\VDMREDIR.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "26E6214C6EFE9D4ADC0EB7D7470F7EFFAA3F66CEA273E6DF660DE51BF64F63B5",
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL"
+    },
+    {
+      "pass": true,
+      "sha256": "7232979556BF365958BA3E62810181A0F92F9307A4CFF7726491E53A91F0245A",
+      "path": "assets\\release\\nthook32.dll"
+    },
+    {
+      "pass": true,
+      "sha256": "7232979556BF365958BA3E62810181A0F92F9307A4CFF7726491E53A91F0245A",
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll"
+    },
+    {
+      "pass": true,
+      "sha256": "D351F719B2E6BA4ABF75322E2641AAAABFF942AE6F7236DCB4CF579934994851",
+      "path": "assets\\release\\nthook64.dll"
+    },
+    {
+      "pass": true,
+      "sha256": "D351F719B2E6BA4ABF75322E2641AAAABFF942AE6F7236DCB4CF579934994851",
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll"
+    }
+  ],
+  "controls": {
+    "exit": 0,
+    "cases": [
+      {
+        "name": "wow_dialog_getset_fixture",
+        "pid": 2464,
+        "exit": 0,
+        "started": "2026-11-28T09:17:28.0258475Z",
+        "sha256": "A1C637304638845000DCE063FC293B9C2671727A4B01EB87F1965052CD3D5BC6"
+      },
+      {
+        "name": "wow_window_client_message_fixture",
+        "pid": 20488,
+        "exit": 0,
+        "started": "2026-11-28T09:17:28.3860404Z",
+        "sha256": "DB7C4BFC0E207F3374E997B9A895E9A7294939D77EB04BDFEAF0C013381AB9B7"
+      },
+      {
+        "name": "wow_dialog_creator_lifetime_fixture",
+        "pid": 24884,
+        "exit": 0,
+        "started": "2026-11-28T09:17:28.5224176Z",
+        "sha256": "D1BAC15EC91A334819883114D884A217B8A7D584914CBC6373295D56F6E89AD6"
+      },
+      {
+        "name": "wow_dialog_lifetime_fixture",
+        "pid": 21732,
+        "exit": 0,
+        "started": "2026-11-28T09:17:28.8966737Z",
+        "sha256": "2CA69576614914B0699C82D5093E3D2528C30EBCE86F9C57FF158A9025889F8C"
+      },
+      {
+        "name": "wow_default_messages_fixture",
+        "pid": 23780,
+        "exit": 0,
+        "started": "2026-11-28T09:17:29.0777636Z",
+        "sha256": "00DDE37AD43A03EBBCD29F85926EDF7668935DCF3ED60F38A940EE72D7F8C1CC"
+      },
+      {
+        "name": "wow_default_state_fixture",
+        "pid": 27064,
+        "exit": 0,
+        "started": "2026-11-28T09:17:29.2430764Z",
+        "sha256": "DC0D6523A8030346AEF7C7984B1E2C532DACFD6D5CC50875D6A6A06FCA5837AC"
+      },
+      {
+        "name": "wow_dialog_call_fixture",
+        "pid": 28068,
+        "exit": 0,
+        "started": "2026-11-28T09:17:29.3974695Z",
+        "sha256": "27A5C4787AFF4670FFB5587CE5FDF64DF384024EC9B87574D32E78BB8E2B1EB2"
+      },
+      {
+        "name": "wow_edit_call_fixture",
+        "pid": 23224,
+        "exit": 0,
+        "started": "2026-11-28T09:17:29.5196363Z",
+        "sha256": "73F4927920FC0178BF2772C98D8910A1330E3F9C43BCF62062DF0D02A2715940"
+      },
+      {
+        "name": "wow_edit_memory_callbacks_fixture",
+        "pid": 17188,
+        "exit": 0,
+        "started": "2026-11-28T09:17:29.6695201Z",
+        "sha256": "616591712B4867B3F7E4D10CAD49D7AD4CBF0BFA7BDFA9A355531B623867EC97"
+      },
+      {
+        "name": "wow_control_brush_fixture",
+        "pid": 21700,
+        "exit": 0,
+        "started": "2026-11-28T09:17:29.8261348Z",
+        "sha256": "5E04CDB55BE03EB6A917CFFDD4DB241CC0ABDAD1CA931DE5CE40765FC6B846F1"
+      },
+      {
+        "name": "wow_default_window_binding_fixture",
+        "pid": 14392,
+        "exit": 0,
+        "started": "2026-11-28T09:17:30.1044361Z",
+        "sha256": "1E2219B9E70AC11E34D411E49E4EAD541B6C2A834E7AAC0AE6E70FF667E9C8BF"
+      },
+      {
+        "name": "wow_dialog_context_fixture",
+        "pid": 13552,
+        "exit": 0,
+        "started": "2026-11-28T09:17:30.2693036Z",
+        "sha256": "CCF36C115969CBBAA2B90779E58E7CA553ECFD7060FC308228E35E3E2A3C77AF"
+      },
+      {
+        "name": "wow_dialog_creation_entry_fixture",
+        "pid": 3616,
+        "exit": 0,
+        "started": "2026-11-28T09:17:30.5018835Z",
+        "sha256": "C1DCFE91032081FFECAC757A09AF3F06C5AD206D75A5188C36A6CC072021D803"
+      },
+      {
+        "name": "wow_dialog_finalization_fixture",
+        "pid": 13256,
+        "exit": 0,
+        "started": "2026-11-28T09:17:30.7493804Z",
+        "sha256": "19BC8E19732C5B69909B61B150316895E43D6AE91D2125A4481C751F35B03CFD"
+      },
+      {
+        "name": "wow_dialog_end_original_fixture",
+        "pid": 23884,
+        "exit": 0,
+        "started": "2026-11-28T09:17:30.9713861Z",
+        "sha256": "CA49A311C047EAB6B130D0EFCA9F756A48A451E2F320E967D2B3B7DA87D7A6DE"
+      },
+      {
+        "name": "wow_dialog_keyboard_entry_fixture",
+        "pid": 23968,
+        "exit": 0,
+        "started": "2026-11-28T09:17:32.0367444Z",
+        "sha256": "500A90284EEAE4ED9A8C0CDAF2F168E6C9E64B2D0409A8349A66C71DAC9DA64D"
+      },
+      {
+        "name": "wow_dialog_mnemonic_lifetime_fixture",
+        "pid": 21100,
+        "exit": 0,
+        "started": "2026-11-28T09:17:32.3134174Z",
+        "sha256": "8B551F92EE15DF1E2DF43A2805CBAEC704F032EDEB37CE4DA94D5E620AF400E1"
+      },
+      {
+        "name": "wow_dialog_keyboard_lifetime_fixture",
+        "pid": 8564,
+        "exit": 0,
+        "started": "2026-11-28T09:17:32.6659376Z",
+        "sha256": "79AF44E307F087C7D4D1E91D737B84CBC4DEB97719F238849E680386CF94337D"
+      },
+      {
+        "name": "wow_control_string_fixture",
+        "pid": 16584,
+        "exit": 0,
+        "started": "2026-11-28T09:17:32.9900989Z",
+        "sha256": "672421DCF8B80EF487FE695FADC59D4004CED5BBACBFCBC241639D10E82E9C43"
+      },
+      {
+        "name": "wow_text_measure_failure_fixture",
+        "pid": 22540,
+        "exit": 0,
+        "started": "2026-11-28T09:17:33.2860481Z",
+        "sha256": "533D0A7336E7CF3E39C9F1CB77A5A19BBB7B6B3E1556C9E313AE22C4BC36B675"
+      },
+      {
+        "name": "wow_mnemonic_drawing_fixture",
+        "pid": 2664,
+        "exit": 0,
+        "started": "2026-11-28T09:17:33.5239461Z",
+        "sha256": "4CDE82CA1FEE9C395215FAC6ECD4BE1D0E4C574400EEB6043064B88F9CDE066D"
+      },
+      {
+        "name": "wow_default_original_fixture",
+        "pid": 12340,
+        "exit": 0,
+        "started": "2026-11-28T09:17:33.7823745Z",
+        "sha256": "A9BF55ABCDDE12360C729EC79E651EAB915DF838746ED2C00B65C9DE693DE536"
+      },
+      {
+        "name": "wow_button_drawing_fixture",
+        "pid": 27672,
+        "exit": 0,
+        "started": "2026-11-28T09:17:34.0335662Z",
+        "sha256": "54D45B979C0E45BA78E60BB8DECC9AE01C2F547C8835F892DAECF44B7CC9E2A9"
+      },
+      {
+        "name": "wow_button_resources_fixture",
+        "pid": 16984,
+        "exit": 0,
+        "started": "2026-11-28T09:17:34.2222623Z",
+        "sha256": "B6287974956251B22B5A0206F0DFDA81C7820BA329C654C960FDBB95551A300E"
+      },
+      {
+        "name": "wow_control_draw_state_fixture",
+        "pid": 24768,
+        "exit": 0,
+        "started": "2026-11-28T09:17:34.4757203Z",
+        "sha256": "1300ED8D7DC36EDB56FCBAEA2391390F58087620F927B34D521A1A8233DDA11B"
+      },
+      {
+        "name": "wow_dialog_navigation_fixture",
+        "pid": 27444,
+        "exit": 0,
+        "started": "2026-11-28T09:17:34.7807216Z",
+        "sha256": "BE160BE9C8C6881A6CE75A59F2E64C57595F0E49CE750BCBF7F4A93346F3752E"
+      },
+      {
+        "name": "wow_edit_view_fixture",
+        "pid": 16032,
+        "exit": 0,
+        "started": "2026-11-28T09:17:35.0136626Z",
+        "sha256": "3786A4FABE73448F9227C7FAA4972DCF62C0AB3346377EBEFA4D11023979AAE5"
+      },
+      {
+        "name": "wow_button_lifetime_fixture",
+        "pid": 21476,
+        "exit": 0,
+        "started": "2026-11-28T09:17:35.2465428Z",
+        "sha256": "7313B1AD19403DBFD559FC40CE0031E9E4333D7347CFDECE08F66811AC9EEDF0"
+      },
+      {
+        "name": "wow_button_dc_fixture",
+        "pid": 6960,
+        "exit": 0,
+        "started": "2026-11-28T09:17:36.0164507Z",
+        "sha256": "E0EFEB067990668F744B684A43EA06B50C3FF4C19295BEA48723B04E8DB6C46B"
+      },
+      {
+        "name": "wow_dialog_native_owner_probe",
+        "pid": 23428,
+        "exit": 0,
+        "started": "2026-11-28T09:17:36.2913811Z",
+        "sha256": "65B7FD404FFB4507B7F4E8B7D088DF2B93F57FE8890E1D969F137F3737D56755"
+      },
+      {
+        "name": "wow_control_fnid_fixture",
+        "pid": 20508,
+        "exit": 0,
+        "started": "2026-11-28T09:17:37.1426093Z",
+        "sha256": "10B70DE94CEFE7977BB127EF55AB5BC514378392C79C647AE9D65879D4EC6A24"
+      },
+      {
+        "name": "wow_native_controls_fixture",
+        "pid": 3572,
+        "exit": 0,
+        "started": "2026-11-28T09:17:37.6542774Z",
+        "sha256": "CED158E16A5F62EE3CA0125C5E05E3BF56527C2D8BC31C4923DB182DB41F189B"
+      },
+      {
+        "name": "wow_dialog_initialization_fixture",
+        "pid": 13840,
+        "exit": 0,
+        "started": "2026-11-28T09:17:37.8367024Z",
+        "sha256": "4AFB88C7281D7D9174A6DC6557D084460F587BA14E1E71ECC4BC8A01794A14DF"
+      },
+      {
+        "name": "wow_task_profile_fixture",
+        "pid": 16912,
+        "exit": 0,
+        "started": "2026-11-28T09:17:37.9953155Z",
+        "sha256": "5759F43860F88101E1F9D0F17C15D6AA7D7B3337A30F2EFBEEB16B28EDC1F7A4"
+      },
+      {
+        "name": "wow_task_profile_existing_fixture",
+        "pid": 21428,
+        "exit": 0,
+        "started": "2026-11-28T09:17:38.1423806Z",
+        "sha256": "29B3B0470175A4128F29F01C3AD96176F970891F19172DE6F450421536B6F48F"
+      },
+      {
+        "name": "wow_edit_lookaside_fixture",
+        "pid": 4656,
+        "exit": 0,
+        "started": "2026-11-28T09:17:38.2954667Z",
+        "sha256": "4CBD765A71E5C9418C0C80D9D9C0BE7F176C399BF9A60EC4A511AB245FF74EB1"
+      },
+      {
+        "name": "wow_edit_conversion_fixture",
+        "pid": 7816,
+        "exit": 0,
+        "started": "2026-11-28T09:17:38.4345344Z",
+        "sha256": "6BA23F812E5E332F6FE0B98DAE1B7C3B01F0171A02A8D44D9F6318460A153C89"
+      },
+      {
+        "name": "wow_def_window_bits_fixture",
+        "pid": 16568,
+        "exit": 0,
+        "started": "2026-11-28T09:17:38.7488450Z",
+        "sha256": "EA9B32DE4DF92544ED4D11C2BFE67392804E032D381592E3F82BBF15015DE913"
+      },
+      {
+        "name": "wow_original_dde_free_fixture",
+        "pid": 28000,
+        "exit": 0,
+        "started": "2026-11-28T09:17:38.9004559Z",
+        "sha256": "F1614A89090FE45FBC9DCF734029E32B01C9099DFCB9911A6A5EDB94E58C97CE"
+      },
+      {
+        "name": "wow_user_capture_fixture",
+        "pid": 21560,
+        "exit": 0,
+        "started": "2026-11-28T09:17:39.0541089Z",
+        "sha256": "398A22A269CE328417D35C83E86DA6B194F0B2C6E8B339C9D93DA79E4273601C"
+      }
+    ]
+  },
+  "lifecycle": {
+    "class-client": {
+      "output": "WOW_CLASS_CLIENT errors=0 version_calls=28 version_domains=5 server_owner=1 cpd=2\n",
+      "process": {
+        "start": "2026-11-28T09:17:48.4550835Z",
+        "case": "class-client",
+        "pid": 13172,
+        "executable": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\class-client/fixture.exe",
+        "deadlineSeconds": 60
+      },
+      "exe_sha256": "a7f919e32aba051fdd754a27b0e683e4c418da90b377f3efb2d4cc6b3404ca74"
+    },
+    "class-query": {
+      "output": "WOW_CLASS_QUERY errors=0 queries=6 logical=1 native=1\nWOW_CLASS_COMMIT errors=0 publications=3 rollback=1 original_task=1\n",
+      "process": {
+        "start": "2026-11-28T09:17:56.9997057Z",
+        "case": "class-query",
+        "pid": 18352,
+        "executable": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\class-query/fixture.exe",
+        "deadlineSeconds": 60
+      },
+      "exe_sha256": "25e76f45453b478d2aa222087f5873f1a14294c05d46ba8991c8a98034cfdef5"
+    },
+    "class-lifetime": {
+      "output": "WOW_WINDOW_CLASS_SHARED_LIFETIME errors=0 callbacks=1 native_failure_retains_node=32\n",
+      "process": {
+        "start": "2026-11-28T09:18:05.7299380Z",
+        "case": "class-lifetime",
+        "pid": 7428,
+        "executable": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\class-lifetime/fixture.exe",
+        "deadlineSeconds": 60
+      },
+      "exe_sha256": "8ce135cfb8c670b33aa679f4639011cbd99f577a55b134cb2b600f7cf9004100"
+    },
+    "native-creation": {
+      "output": "WOW_DESKTOP_FNID_CCPU value=029d adjacent=0 root=1\nWOW_CLASS_NAME_CCPU copied=1 rebase=1 bytes=14\nWOW_MENU_EXTERNAL_EDGE_CCPU external_unlink=1 local_guard=1\nWOW_DESKTOP_INCOMING_EDGE_CCPU guarded=1\nWOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1\nWOW_WINDOW_VIEW_BORROWS_CCPU retained_class=1 release_orders=2 duplicate=1 words=1\nWOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1\nWOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1\nWOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1\nWOW_RESOURCE_MENU_CCPU registered=1 nested=1 rollback=1\nWOW_MENU_MESSAGE_CCPU borrowed=1 detached=1 terminal=1 invalid_passthrough=1\nWOW_SYSTEM_MENU_CCPU borrowed=1 observer_preserved=1 revert_retired=1\nWOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1\nWOW_MENU_NATIVE_RETURN_CCPU default_close=1 dispatch_close=1 retired=1 lock_restored=1\nWOW_MENU_CREATION_ROLLBACK_CCPU result=1 modes=2\nWOW_NATIVE_MENU_ENTRY_CCPU result=1\nWOW_MENU_OBSERVATION_CCPU unowned=1 cleanup_skips=1 native_survives=1 released=1\nWOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0\nWOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1\nWOW_DESKTOP_QUERY_CCPU errors=0 single_root=1 class_name=1 retained=1 idempotent=1\nWOW_CLASS_LIFETIME_VIEW phase=before-native-classes hwnd=041b05ce live=1 class=#32769 next=00000000 parent=00000000 child=00000000 owner=00000000\nWOW_MANAGED_REUSE_CASE mode=0 attempts=1 old=0341089e new=0342089e\nWOW_MANAGED_REUSE_CASE mode=1 attempts=1 old=0343089e new=0344089e\nWOW_MANAGED_SLOT_REUSE_CCPU errors=0 creation=1 null_class=1 retained=1 released=1\nWOW_TERMINAL_NATIVE_TARGET hwnd=06F60324 target=001385b0 classA=774C9720 classW=774C9730 fnid=0000 cleanup=00000000\nWOW_TERMINAL_NATIVE_PROVIDER module=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\native-creation\\fixture.exe rva=000585b0\nWOW_TERMINAL_PREPARE_CCPU errors=0 dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1\nWOW_DIALOG_CACHE_CCPU errors=0 nested_destroy=1 released=1\nWOW_NATIVE_CREATE_CCPU errors=0 forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1\nWOW_CLASS_ALLOCATION before=6172672 after=6172672\nWOW_UNOWNED_VIEW_CCPU errors=0 foreign_root=1 local_unowned=1 class_guard=1 native_untouched=1 released=1\nWOW_CLASS_MEMBERSHIP_COPY_CCPU errors=0 phases=4 owned=2 nonowned=2 page_crossing=1 invalid_name=1\nWOW_VIEW_PROMOTION_CCPU errors=0 same_backing=1 words=1 stale_rejected=1 ownership=1 released=1\nWOW_NATIVE_CLASS_WND_OWNER_CCPU errors=0 same_class=1 same_generation=1 managed_retirement=1 modes=2\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=0 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=1 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_CLASS_RELEASE_CCPU errors=0 live_rejected=1 borrowed_safe=1 no_resurrection=1 reclaimed=1\nWOW_CLASS_REFERENCE_SET_CCPU errors=0 classes=32 live=16 retired_borrowed=16 retained=1 reclaimed=1\nWOW_VIEW_RETIREMENT_CCPU errors=0 nested_borrow=1 class_guard=1 consumed_once=1 released=1\nWOW_DEAD_GRAPH_CCPU errors=0 atomic=1 live_guard=1 retained=1 released=1\nWOW_GRAPH_DUPLICATE_SLOT_CCPU errors=0 no_publication=1 released=1\nWOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 missing_desktop=1 unpublished=1 released=1\nWOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1\nWOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1 existing_state_validation=1\nWOW_NATIVE_CLASS_CCPU errors=0 projected=9 owned_handle=1 native_pointers=0 released=1\nWOW_CONTROL_NATIVE_RETURN_CCPU errors=0 paint=1 scroll=1 caret=1 lock=1\nWOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1\nWOW_RETURNED_WINDOWS_CCPU errors=0 parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1\nWOW_MESSAGE_OPERANDS_CCPU errors=0 typed=1 numeric=1 menu=1 position=1 nested=1\nWOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1\nWOW_IMMUTABLE_CARRIERS callbacks=3 full=1 zero16=1 signed16=1 live=1\nWOW_TERMINAL_RETRY_CCPU errors=0 property_removed=1 table_retained=1 native_gone=1 released=1\nWOW_TERMINAL_MULTI_ERROR errors=0 low=1168 high=5023 later_reclaimed=1\nWOW_WINDOW_BORROW_CCPU errors=0 normal=1 exception=1\nWOW_COUNTED_TITLE case=0 length=2 text=0041,0042,0000,0000 unicode=0\nWOW_COUNTED_TITLE case=1 length=2 text=0041,0042,0000,0000 unicode=0\nWOW_COUNTED_TITLE case=2 length=2 text=0041,0042,0000,0000 unicode=0\nWOW_COUNTED_TITLE case=3 length=2 text=0041,0042,0000,0000 unicode=0\nWOW_NATIVE_DIALOG_ROUNDTRIP initial=76a837a0 previous=774c9780 restored=774c9780 defdlg=774C9780 class=774C9780\nWOW_IMPLICIT_DIALOG_TARGET held=0 initial=76a837a0 before=76a837a0 target=76a837a0 previous=00000000 unicode=0\nWOW_IMPLICIT_DIALOG_ROLLBACK held=0 after=76a837a0 unicode=0\nWOW_IMPLICIT_DIALOG_TARGET held=1 initial=76a837a0 before=76a837a0 target=76a837a0 previous=00000000 unicode=0\nWOW_IMPLICIT_DIALOG_ROLLBACK held=1 after=76a837a0 unicode=0\nWOW_CLASS_TOKEN_ORIGIN errors=0 guest_native_same_word=1 native_replaced=1 guest_restored=1\nWOW_CLASS_TOKEN_IDENTITY errors=0 callbacks=20\nWOW_NATIVE_CREATION_BINDING errors=0 callbacks=97 nested=1 rejected=1 vetoed=1 destroyed=13 table_empty=1\nWOW_DOMAIN_EXIT_WITNESS hwnd=0637057c prior=0636057c\nWOW_DOMAIN_EXIT_STORAGE backing=0021f000 existing=00000000\nWOW_PAGE_DOMAIN_LIFECYCLE_OK\n",
+      "process": {
+        "pid": 10608,
+        "start": "2026-11-28T09:26:26.3701057Z",
+        "executable": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\native-creation/fixture.exe",
+        "case": "native-creation",
+        "deadlineSeconds": 60
+      },
+      "exe_sha256": "e47454f65e7f6521836d60b86e4a0398aefe2781e4dc9075cc9d5502b1c130c7"
+    },
+    "window-borrow": {
+      "output": "WOW_DESKTOP_FNID_CCPU value=029d adjacent=0 root=1\nWOW_CLASS_NAME_CCPU copied=1 rebase=1 bytes=14\nWOW_MENU_EXTERNAL_EDGE_CCPU external_unlink=1 local_guard=1\nWOW_DESKTOP_INCOMING_EDGE_CCPU guarded=1\nWOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1\nWOW_WINDOW_VIEW_BORROWS_CCPU retained_class=1 release_orders=2 duplicate=1 words=1\nWOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1\nWOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1\nWOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1\nWOW_RESOURCE_MENU_CCPU registered=1 nested=1 rollback=1\nWOW_MENU_MESSAGE_CCPU borrowed=1 detached=1 terminal=1 invalid_passthrough=1\nWOW_SYSTEM_MENU_CCPU borrowed=1 observer_preserved=1 revert_retired=1\nWOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1\nWOW_MENU_NATIVE_RETURN_CCPU default_close=1 dispatch_close=1 retired=1 lock_restored=1\nWOW_MENU_CREATION_ROLLBACK_CCPU result=1 modes=2\nWOW_NATIVE_MENU_ENTRY_CCPU result=1\nWOW_MENU_OBSERVATION_CCPU unowned=1 cleanup_skips=1 native_survives=1 released=1\nWOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0\nWOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1\nWOW_DESKTOP_QUERY_CCPU errors=0 single_root=1 class_name=1 retained=1 idempotent=1\nWOW_CLASS_LIFETIME_VIEW phase=before-native-classes hwnd=06e80324 live=1 class=#32769 next=00000000 parent=00000000 child=00000000 owner=00000000\nWOW_MANAGED_REUSE_CASE mode=0 attempts=1 old=046d0774 new=046e0774\nWOW_MANAGED_REUSE_CASE mode=1 attempts=1 old=046f0774 new=04700774\nWOW_MANAGED_SLOT_REUSE_CCPU errors=0 creation=1 null_class=1 retained=1 released=1\nWOW_TERMINAL_NATIVE_TARGET hwnd=05250322 target=00b73fa0 classA=774C9720 classW=774C9730 fnid=0000 cleanup=00000000\nWOW_TERMINAL_NATIVE_PROVIDER module=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\window-borrow\\fixture.exe rva=00053fa0\nWOW_TERMINAL_PREPARE_CCPU errors=0 dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1\nWOW_DIALOG_CACHE_CCPU errors=0 nested_destroy=1 released=1\nWOW_NATIVE_CREATE_CCPU errors=0 forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1\nWOW_CLASS_ALLOCATION before=6172672 after=6172672\nWOW_UNOWNED_VIEW_CCPU errors=0 foreign_root=1 local_unowned=1 class_guard=1 native_untouched=1 released=1\nWOW_CLASS_MEMBERSHIP_COPY_CCPU errors=0 phases=4 owned=2 nonowned=2 page_crossing=1 invalid_name=1\nWOW_VIEW_PROMOTION_CCPU errors=0 same_backing=1 words=1 stale_rejected=1 ownership=1 released=1\nWOW_NATIVE_CLASS_WND_OWNER_CCPU errors=0 same_class=1 same_generation=1 managed_retirement=1 modes=2\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=0 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=1 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_CLASS_RELEASE_CCPU errors=0 live_rejected=1 borrowed_safe=1 no_resurrection=1 reclaimed=1\nWOW_CLASS_REFERENCE_SET_CCPU errors=0 classes=32 live=16 retired_borrowed=16 retained=1 reclaimed=1\nWOW_VIEW_RETIREMENT_CCPU errors=0 nested_borrow=1 class_guard=1 consumed_once=1 released=1\nWOW_DEAD_GRAPH_CCPU errors=0 atomic=1 live_guard=1 retained=1 released=1\nWOW_GRAPH_DUPLICATE_SLOT_CCPU errors=0 no_publication=1 released=1\nWOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 missing_desktop=1 unpublished=1 released=1\nWOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1\nWOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1 existing_state_validation=1\nWOW_NATIVE_CLASS_CCPU errors=0 projected=9 owned_handle=1 native_pointers=0 released=1\nWOW_CONTROL_NATIVE_RETURN_CCPU errors=0 paint=1 scroll=1 caret=1 lock=1\nWOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1\nWOW_RETURNED_WINDOWS_CCPU errors=0 parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1\nWOW_MESSAGE_OPERANDS_CCPU errors=0 typed=1 numeric=1 menu=1 position=1 nested=1\nWOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1\nWOW_IMMUTABLE_CARRIERS callbacks=3 full=1 zero16=1 signed16=1 live=1\nWOW_TERMINAL_RETRY_CCPU errors=0 property_removed=1 table_retained=1 native_gone=1 released=1\nWOW_TERMINAL_MULTI_ERROR errors=0 low=1168 high=5023 later_reclaimed=1\nWOW_WINDOW_BORROW_CCPU errors=0 normal=1 exception=1\nWOW_DOMAIN_EXIT_WITNESS hwnd=044406b0 prior=00000000\nWOW_DOMAIN_EXIT_STORAGE backing=0021f000 existing=00000000\nWOW_PAGE_DOMAIN_LIFECYCLE_OK\n",
+      "process": {
+        "start": "2026-11-28T09:18:25.7859023Z",
+        "case": "window-borrow",
+        "pid": 17544,
+        "executable": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\window-borrow/fixture.exe",
+        "deadlineSeconds": 60
+      },
+      "exe_sha256": "87d6ef87ef53962347fea96f680b7f4e2c723cadd1f137594a6a6f583e40a27b"
+    },
+    "window-reclaim": {
+      "output": "WOW_DESKTOP_FNID_CCPU value=029d adjacent=0 root=1\nWOW_CLASS_NAME_CCPU copied=1 rebase=1 bytes=14\nWOW_MENU_EXTERNAL_EDGE_CCPU external_unlink=1 local_guard=1\nWOW_DESKTOP_INCOMING_EDGE_CCPU guarded=1\nWOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1\nWOW_WINDOW_VIEW_BORROWS_CCPU retained_class=1 release_orders=2 duplicate=1 words=1\nWOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1\nWOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1\nWOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1\nWOW_RESOURCE_MENU_CCPU registered=1 nested=1 rollback=1\nWOW_MENU_MESSAGE_CCPU borrowed=1 detached=1 terminal=1 invalid_passthrough=1\nWOW_SYSTEM_MENU_CCPU borrowed=1 observer_preserved=1 revert_retired=1\nWOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1\nWOW_MENU_NATIVE_RETURN_CCPU default_close=1 dispatch_close=1 retired=1 lock_restored=1\nWOW_MENU_CREATION_ROLLBACK_CCPU result=1 modes=2\nWOW_NATIVE_MENU_ENTRY_CCPU result=1\nWOW_MENU_OBSERVATION_CCPU unowned=1 cleanup_skips=1 native_survives=1 released=1\nWOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0\nWOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1\nWOW_DESKTOP_QUERY_CCPU errors=0 single_root=1 class_name=1 retained=1 idempotent=1\nWOW_CLASS_LIFETIME_VIEW phase=before-native-classes hwnd=06e90324 live=1 class=#32769 next=00000000 parent=00000000 child=00000000 owner=00000000\nWOW_MANAGED_REUSE_CASE mode=0 attempts=1 old=040005ce new=040105ce\nWOW_MANAGED_REUSE_CASE mode=1 attempts=1 old=040205ce new=040305ce\nWOW_MANAGED_SLOT_REUSE_CCPU errors=0 creation=1 null_class=1 retained=1 released=1\nWOW_TERMINAL_NATIVE_TARGET hwnd=05440322 target=00406190 classA=774C9720 classW=774C9730 fnid=0000 cleanup=00000000\nWOW_TERMINAL_NATIVE_PROVIDER module=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\window-reclaim\\fixture.exe rva=00056190\nWOW_TERMINAL_PREPARE_CCPU errors=0 dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1\nWOW_DIALOG_CACHE_CCPU errors=0 nested_destroy=1 released=1\nWOW_NATIVE_CREATE_CCPU errors=0 forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1\nWOW_CLASS_ALLOCATION before=6172672 after=6172672\nWOW_UNOWNED_VIEW_CCPU errors=0 foreign_root=1 local_unowned=1 class_guard=1 native_untouched=1 released=1\nWOW_CLASS_MEMBERSHIP_COPY_CCPU errors=0 phases=4 owned=2 nonowned=2 page_crossing=1 invalid_name=1\nWOW_VIEW_PROMOTION_CCPU errors=0 same_backing=1 words=1 stale_rejected=1 ownership=1 released=1\nWOW_NATIVE_CLASS_WND_OWNER_CCPU errors=0 same_class=1 same_generation=1 managed_retirement=1 modes=2\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=0 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=1 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_CLASS_RELEASE_CCPU errors=0 live_rejected=1 borrowed_safe=1 no_resurrection=1 reclaimed=1\nWOW_CLASS_REFERENCE_SET_CCPU errors=0 classes=32 live=16 retired_borrowed=16 retained=1 reclaimed=1\nWOW_VIEW_RETIREMENT_CCPU errors=0 nested_borrow=1 class_guard=1 consumed_once=1 released=1\nWOW_DEAD_GRAPH_CCPU errors=0 atomic=1 live_guard=1 retained=1 released=1\nWOW_GRAPH_DUPLICATE_SLOT_CCPU errors=0 no_publication=1 released=1\nWOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 missing_desktop=1 unpublished=1 released=1\nCLASS_INDEX_FAULT collisions=3 failure_retained=1 freed_missing=1 reused_address=1\nWINDOW_INDEX_COLLISION exact=3 middle_remove=1 address_reuse=1 empty=1\nWOW_DEFERRED_RECLAIM_CCPU errors=0 consumed_once=1 class_guard=1 retry=1 retained_owner=1 released=1\nWOW_MENU_DEFERRED_RECLAIM_CCPU errors=0 atomic_update=1 logical_retirement=1 retry=1 released=1\nWOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1\nWOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1 existing_state_validation=1\nWOW_NATIVE_CLASS_CCPU errors=0 projected=9 owned_handle=1 native_pointers=0 released=1\nWOW_CONTROL_NATIVE_RETURN_CCPU errors=0 paint=1 scroll=1 caret=1 lock=1\nWOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1\nWOW_RETURNED_WINDOWS_CCPU errors=0 parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1\nWOW_MESSAGE_OPERANDS_CCPU errors=0 typed=1 numeric=1 menu=1 position=1 nested=1\nWOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1\nWOW_IMMUTABLE_CARRIERS callbacks=3 full=1 zero16=1 signed16=1 live=1\nWOW_TERMINAL_RETRY_CCPU errors=0 property_removed=1 table_retained=1 native_gone=1 released=1\nWOW_TERMINAL_MULTI_ERROR errors=0 low=1168 high=5023 later_reclaimed=1\nWOW_WINDOW_BORROW_CCPU errors=0 normal=1 exception=1\nWOW_DOMAIN_EXIT_WITNESS hwnd=03a6075a prior=00000000\nWOW_DOMAIN_EXIT_STORAGE backing=0021f000 existing=00000000\nCLASS_STORAGE_TEARDOWN empty=1\nWOW_PAGE_DOMAIN_LIFECYCLE_OK\n",
+      "process": {
+        "start": "2026-11-28T09:18:38.5405018Z",
+        "case": "window-reclaim",
+        "pid": 23464,
+        "executable": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\window-reclaim/fixture.exe",
+        "deadlineSeconds": 60
+      },
+      "exe_sha256": "6b3db57fcb7162365e9774aa2f2395e8fa5b179d2bc48c4dc92b7d44129f4af8"
+    },
+    "graph-snapshot": {
+      "output": "WOW_EXPORTED_CALLBACK_REJECT errors=0 output_untouched=1 no_guest_entry=1\nWOW_DESKTOP_FNID_CCPU value=029d adjacent=0 root=1\nWOW_CLASS_NAME_CCPU copied=1 rebase=1 bytes=14\nWOW_MENU_EXTERNAL_EDGE_CCPU external_unlink=1 local_guard=1\nWOW_DESKTOP_INCOMING_EDGE_CCPU guarded=1\nWOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1\nWOW_WINDOW_VIEW_BORROWS_CCPU retained_class=1 release_orders=2 duplicate=1 words=1\nWOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1\nWOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1\nWOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1\nWOW_RESOURCE_MENU_CCPU registered=1 nested=1 rollback=1\nWOW_MENU_MESSAGE_CCPU borrowed=1 detached=1 terminal=1 invalid_passthrough=1\nWOW_SYSTEM_MENU_CCPU borrowed=1 observer_preserved=1 revert_retired=1\nWOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1\nWOW_MENU_NATIVE_RETURN_CCPU default_close=1 dispatch_close=1 retired=1 lock_restored=1\nWOW_MENU_CREATION_ROLLBACK_CCPU result=1 modes=2\nWOW_NATIVE_MENU_ENTRY_CCPU result=1\nWOW_MENU_OBSERVATION_CCPU unowned=1 cleanup_skips=1 native_survives=1 released=1\nWOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0\nWOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1\nWOW_DESKTOP_QUERY_CCPU errors=0 single_root=1 class_name=1 retained=1 idempotent=1\nWOW_CLASS_LIFETIME_VIEW phase=before-native-classes hwnd=06ea0324 live=1 class=#32769 next=00000000 parent=00000000 child=00000000 owner=00000000\nWOW_MANAGED_REUSE_CASE mode=0 attempts=1 old=06e607be new=06e707be\nWOW_MANAGED_REUSE_CASE mode=1 attempts=1 old=06e807be new=06e907be\nWOW_MANAGED_SLOT_REUSE_CCPU errors=0 creation=1 null_class=1 retained=1 released=1\nWOW_TERMINAL_NATIVE_TARGET hwnd=05650322 target=00bfa210 classA=774C9720 classW=774C9730 fnid=0000 cleanup=00000000\nWOW_TERMINAL_NATIVE_PROVIDER module=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\graph-snapshot\\fixture.exe rva=0005a210\nWOW_TERMINAL_PREPARE_CCPU errors=0 dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1\nWOW_DIALOG_CACHE_CCPU errors=0 nested_destroy=1 released=1\nWOW_NATIVE_CREATE_CCPU errors=0 forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1\nWOW_CLASS_ALLOCATION before=6172672 after=6172672\nWOW_UNOWNED_VIEW_CCPU errors=0 foreign_root=1 local_unowned=1 class_guard=1 native_untouched=1 released=1\nWOW_CLASS_MEMBERSHIP_COPY_CCPU errors=0 phases=4 owned=2 nonowned=2 page_crossing=1 invalid_name=1\nWOW_VIEW_PROMOTION_CCPU errors=0 same_backing=1 words=1 stale_rejected=1 ownership=1 released=1\nWOW_NATIVE_CLASS_WND_OWNER_CCPU errors=0 same_class=1 same_generation=1 managed_retirement=1 modes=2\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=0 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=1 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_CLASS_RELEASE_CCPU errors=0 live_rejected=1 borrowed_safe=1 no_resurrection=1 reclaimed=1\nWOW_CLASS_REFERENCE_SET_CCPU errors=0 classes=32 live=16 retired_borrowed=16 retained=1 reclaimed=1\nWOW_VIEW_RETIREMENT_CCPU errors=0 nested_borrow=1 class_guard=1 consumed_once=1 released=1\nWOW_DEAD_GRAPH_CCPU errors=0 atomic=1 live_guard=1 retained=1 released=1\nWOW_GRAPH_DUPLICATE_SLOT_CCPU errors=0 no_publication=1 released=1\nWOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 missing_desktop=1 unpublished=1 released=1\nWOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1\nWOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1 existing_state_validation=1\nWOW_NATIVE_CLASS_CCPU errors=0 projected=9 owned_handle=1 native_pointers=0 released=1\nWOW_CONTROL_NATIVE_RETURN_CCPU errors=0 paint=1 scroll=1 caret=1 lock=1\nWOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1\nWOW_RETURNED_WINDOWS_CCPU errors=0 parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1\nWOW_MESSAGE_OPERANDS_CCPU errors=0 typed=1 numeric=1 menu=1 position=1 nested=1\nWOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1\nWOW_IMMUTABLE_CARRIERS callbacks=3 full=1 zero16=1 signed16=1 live=1\nWOW_TERMINAL_RETRY_CCPU errors=0 property_removed=1 table_retained=1 native_gone=1 released=1\nWOW_TERMINAL_MULTI_ERROR errors=0 low=1168 high=5023 later_reclaimed=1\nWOW_WINDOW_BORROW_CCPU errors=0 normal=1 exception=1\nWOW_GRAPH_SNAPSHOT_CCPU errors=0 fresh=1 child_id=1 dead_root_rejected=1 dead_withdrawal=1 retained_reader=1\nWOW_MENU_DEAD_ENROLLMENT_CCPU errors=0 error=1400 controlled=1\nWOW_KNOWN_RECORD_ROLLBACK_CCPU errors=0 failures=32 positions=2 retained=2\nWOW_PREPARED_EDGE_RESOLUTION_CCPU errors=0 rows=4 fields=5 staged=1 full_generation=1\nWOW_LOCAL_OBSERVATION_COMMIT_CCPU errors=0 rows=2 rollback=1 commit=1\nWOW_NATIVE_SLOT_REUSE_CCPU errors=0 attempts=1 old=057d0322 new=057e0322 old_backing=0021e000 new_backing=00222000\nWOW_MENU_PROJECTION_CCPU errors=0 phases=3 fields=3 capacity=1 retired=1\nWOW_EXTERNAL_OBSERVATION_CCPU errors=0 separate_process=1 local_updates=32\nWOW_EXTERNAL_REFRESH_BOUNDARY_CCPU errors=0 retained=1 explicit_refresh=1 native_mutation=1 local_fresh=1\nWOW_EXTERNAL_CAPTURE_CCPU errors=0 dead_native=1 committed_observation=1\nWOW_TERMINAL_CHILD option=--post-native-failure reached=1 exit=c0000420 log=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\graph-snapshot\\fixture.exe.post-native-failure.stderr.txt\nWOW_POST_NATIVE_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420\nWOW_TERMINAL_CHILD option=--native-entry-failure reached=1 exit=c0000420 log=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\graph-snapshot\\fixture.exe.native-entry-failure.stderr.txt\nWOW_NATIVE_ENTRY_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420\nWOW_TERMINAL_CHILD option=--callback-owner-failure reached=1 exit=c0000420 log=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\graph-snapshot\\fixture.exe.callback-owner-failure.stderr.txt\nWOW_CALLBACK_OWNER_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420\nWOW_TERMINAL_CHILD option=--callback-borrow-failure reached=1 exit=c0000420 log=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\graph-snapshot\\fixture.exe.callback-borrow-failure.stderr.txt\nWOW_CALLBACK_BORROW_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420\nWOW_TERMINAL_CHILD option=--window-cache-failure reached=1 exit=c0000420 log=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\graph-snapshot\\fixture.exe.window-cache-failure.stderr.txt\nWOW_WINDOW_CACHE_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420\nWOW_TERMINAL_CHILD option=--dialog-cache-failure reached=1 exit=c0000420 log=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\graph-snapshot\\fixture.exe.dialog-cache-failure.stderr.txt\nWOW_DIALOG_CACHE_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420\nWOW_TERMINAL_CHILD option=--class-retirement-failure reached=1 exit=c0000420 log=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\graph-snapshot\\fixture.exe.class-retirement-failure.stderr.txt\nWOW_CLASS_RETIREMENT_TERMINAL_CCPU errors=0 consumed_once=1 worker_exit=c0000420\nWOW_CLASS_RETIREMENT_FAILURE_CCPU errors=0 native_removed=1 stale_projection_rejected=1 terminal=1\nWOW_PROPERTY_DISCOVERY_CCPU errors=0 held=0 atom=1 string=1 signed=1 stop=1 exception=1 removal=1 invalid=1\nWOW_WINDOW_THREAD_QUERY_CCPU errors=0 held=0 dead=0 full=1 unsigned16=1 signed16=1 native_output=1\nWOW_WINDOW_THREAD_QUERY_CCPU errors=0 held=0 dead=1 full=1 unsigned16=1 signed16=1 native_output=1\nWOW_DISCOVERY_CCPU errors=0 held=0 fresh=1 nested=1 stop=1 exception=1 failure=1 recovery=1\nWOW_PROPERTY_DISCOVERY_CCPU errors=0 held=1 atom=1 string=1 signed=1 stop=1 exception=1 removal=1 invalid=1\nWOW_WINDOW_THREAD_QUERY_CCPU errors=0 held=1 dead=0 full=1 unsigned16=1 signed16=1 native_output=1\nWOW_WINDOW_THREAD_QUERY_CCPU errors=0 held=1 dead=1 full=1 unsigned16=1 signed16=1 native_output=1\nWOW_DISCOVERY_CCPU errors=0 held=1 fresh=1 nested=1 stop=1 exception=1 failure=1 recovery=1\nWOW_DOMAIN_EXIT_WITNESS hwnd=05620576 prior=00000000\nWOW_DOMAIN_EXIT_STORAGE backing=0021f000 existing=00000000\nWOW_PAGE_DOMAIN_LIFECYCLE_OK\n",
+      "process": {
+        "start": "2026-11-28T09:18:49.6252085Z",
+        "case": "graph-snapshot",
+        "pid": 28332,
+        "executable": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\graph-snapshot/fixture.exe",
+        "deadlineSeconds": 60
+      },
+      "exe_sha256": "b8dd1a2d886fc804eb0979ddad92dac8daea28a0a805e39afccff42a2511b15e"
+    },
+    "menu-resource": {
+      "output": "WOW_DESKTOP_FNID_CCPU value=029d adjacent=0 root=1\nWOW_CLASS_NAME_CCPU copied=1 rebase=1 bytes=14\nWOW_MENU_EXTERNAL_EDGE_CCPU external_unlink=1 local_guard=1\nWOW_DESKTOP_INCOMING_EDGE_CCPU guarded=1\nWOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1\nWOW_WINDOW_VIEW_BORROWS_CCPU retained_class=1 release_orders=2 duplicate=1 words=1\nWOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1\nWOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1\nWOW_ORIGINAL_MENU_RESOURCE errors=0 resource_cases=16 parser_cases=8 invalid_repeats=64\nOWNER_DRAW expected=12345678 actual=12345678 type=00000100 id=23\nWOW_OWNER_DRAW_RESOURCE errors=0\nWOW_ORIGINAL_MENU_THUNKS errors=0 cases=6 allocations=0\nWOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1\nWOW_RESOURCE_MENU_CCPU registered=1 nested=1 rollback=1\nWOW_MENU_MESSAGE_CCPU borrowed=1 detached=1 terminal=1 invalid_passthrough=1\nWOW_SYSTEM_MENU_CCPU borrowed=1 observer_preserved=1 revert_retired=1\nWOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1\nWOW_MENU_NATIVE_RETURN_CCPU default_close=1 dispatch_close=1 retired=1 lock_restored=1\nWOW_MENU_CREATION_ROLLBACK_CCPU result=1 modes=2\nWOW_NATIVE_MENU_ENTRY_CCPU result=1\nWOW_MENU_OBSERVATION_CCPU unowned=1 cleanup_skips=1 native_survives=1 released=1\nWOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0\nWOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1\nWOW_DESKTOP_QUERY_CCPU errors=0 single_root=1 class_name=1 retained=1 idempotent=1\nWOW_CLASS_LIFETIME_VIEW phase=before-native-classes hwnd=06eb0324 live=1 class=#32769 next=00000000 parent=00000000 child=00000000 owner=00000000\nWOW_MANAGED_REUSE_CASE mode=0 attempts=1 old=067c05e6 new=067d05e6\nWOW_MANAGED_REUSE_CASE mode=1 attempts=1 old=067e05e6 new=067f05e6\nWOW_MANAGED_SLOT_REUSE_CCPU errors=0 creation=1 null_class=1 retained=1 released=1\nWOW_TERMINAL_NATIVE_TARGET hwnd=04D3013E target=00c66820 classA=774C9720 classW=774C9730 fnid=0000 cleanup=00000000\nWOW_TERMINAL_NATIVE_PROVIDER module=O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\menu-resource\\fixture.exe rva=00056820\nWOW_TERMINAL_PREPARE_CCPU errors=0 dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1\nWOW_DIALOG_CACHE_CCPU errors=0 nested_destroy=1 released=1\nWOW_NATIVE_CREATE_CCPU errors=0 forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1\nWOW_CLASS_ALLOCATION before=6172672 after=6172672\nWOW_UNOWNED_VIEW_CCPU errors=0 foreign_root=1 local_unowned=1 class_guard=1 native_untouched=1 released=1\nWOW_CLASS_MEMBERSHIP_COPY_CCPU errors=0 phases=4 owned=2 nonowned=2 page_crossing=1 invalid_name=1\nWOW_VIEW_PROMOTION_CCPU errors=0 same_backing=1 words=1 stale_rejected=1 ownership=1 released=1\nWOW_NATIVE_CLASS_WND_OWNER_CCPU errors=0 same_class=1 same_generation=1 managed_retirement=1 modes=2\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=0 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=1 callback_double=1 rollback_retry=1 identity_retained=1\nWOW_CLASS_RELEASE_CCPU errors=0 live_rejected=1 borrowed_safe=1 no_resurrection=1 reclaimed=1\nWOW_CLASS_REFERENCE_SET_CCPU errors=0 classes=32 live=16 retired_borrowed=16 retained=1 reclaimed=1\nWOW_VIEW_RETIREMENT_CCPU errors=0 nested_borrow=1 class_guard=1 consumed_once=1 released=1\nWOW_DEAD_GRAPH_CCPU errors=0 atomic=1 live_guard=1 retained=1 released=1\nWOW_GRAPH_DUPLICATE_SLOT_CCPU errors=0 no_publication=1 released=1\nWOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 missing_desktop=1 unpublished=1 released=1\nWOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1\nWOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1 existing_state_validation=1\nWOW_NATIVE_CLASS_CCPU errors=0 projected=9 owned_handle=1 native_pointers=0 released=1\nWOW_CONTROL_NATIVE_RETURN_CCPU errors=0 paint=1 scroll=1 caret=1 lock=1\nWOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1\nWOW_RETURNED_WINDOWS_CCPU errors=0 parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1\nWOW_MESSAGE_OPERANDS_CCPU errors=0 typed=1 numeric=1 menu=1 position=1 nested=1\nWOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1\nWOW_IMMUTABLE_CARRIERS callbacks=3 full=1 zero16=1 signed16=1 live=1\nWOW_TERMINAL_RETRY_CCPU errors=0 property_removed=1 table_retained=1 native_gone=1 released=1\nWOW_TERMINAL_MULTI_ERROR errors=0 low=1168 high=5023 later_reclaimed=1\nWOW_WINDOW_BORROW_CCPU errors=0 normal=1 exception=1\nWOW_DOMAIN_EXIT_WITNESS hwnd=04620708 prior=00000000\nWOW_DOMAIN_EXIT_STORAGE backing=0021f000 existing=00000000\nWOW_PAGE_DOMAIN_LIFECYCLE_OK\n",
+      "process": {
+        "start": "2026-11-28T09:19:05.5048546Z",
+        "case": "menu-resource",
+        "pid": 5384,
+        "executable": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\menu-resource/fixture.exe",
+        "deadlineSeconds": 60
+      },
+      "exe_sha256": "502be800147caec31012160eb600e1791c0c1da5da5afe760de734b8475c6399"
+    },
+    "init-notification": {
+      "output": "WOW_INIT_NOTIFICATION errors=0 registration/retry/exhaustion/exception/retirement checked\n",
+      "process": {
+        "pid": 27888,
+        "start": "2026-11-28T09:26:17.2657975Z",
+        "executable": "O:\\repos.hobby\\ntvdm64\\build\\t485-s15\\n023-user\\init-notification/fixture.exe",
+        "case": "init-notification",
+        "deadlineSeconds": 60
+      },
+      "exe_sha256": "ead9baea7d2a3c113f3cab7e9cdddee1fdec79313c505c76cb0a4697ffddcae0"
+    }
+  },
+  "guest_controls": {
+    "package": "95903D11330B9D234B28914417D7D2C3DD6154C73C9EF2B7A690BCFD79B98950",
+    "worker": "0CF627CFD6F59618C53678797E43E2601FC28EBA94B494B463B4DE246DCAF317",
+    "wow": "C24B1A29E484182F5106B96725F0DCB01541F5FBBED0CD1DC9B29B892FB0A34D",
+    "pass": true,
+    "records": [
+      {
+        "phase": 0,
+        "errors": 0,
+        "created": 0,
+        "button": 0,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 1,
+        "errors": 0,
+        "created": 2,
+        "button": 1,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 2,
+        "errors": 0,
+        "created": 3,
+        "button": 1,
+        "single": 1,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 3,
+        "errors": 0,
+        "created": 4,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 4,
+        "errors": 0,
+        "created": 8,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 0
+      },
+      {
+        "phase": 5,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 6,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 7,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 8,
+        "errors": 0,
+        "created": 13,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 2,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      }
+    ]
+  },
+  "census": {
+    "before": {
+      "files": 1331,
+      "byte_identical": 790,
+      "nonerror_identical": 801,
+      "nonerror_different": 530,
+      "nonerror_points": 7984,
+      "nonerror_lines": 65473
+    },
+    "after": {
+      "files": 1333,
+      "byte_identical": 792,
+      "nonerror_identical": 803,
+      "nonerror_different": 530,
+      "nonerror_points": 7937,
+      "nonerror_lines": 64995
+    },
+    "delta": {
+      "files": 2,
+      "byte_identical": 2,
+      "nonerror_identical": 2,
+      "nonerror_different": 0,
+      "nonerror_points": -47,
+      "nonerror_lines": -478
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+        "before_points": 5,
+        "before_lines": 68,
+        "after_points": 3,
+        "after_lines": 9,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+        "before_points": 15,
+        "before_lines": 73,
+        "after_points": 15,
+        "after_lines": 73,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "before_points": 8,
+        "before_lines": 158,
+        "after_points": 8,
+        "after_lines": 162,
+        "exclusions": 3
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+        "before_points": 63,
+        "before_lines": 508,
+        "after_points": 18,
+        "after_lines": 65,
+        "exclusions": 2
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+        "before_points": 1,
+        "before_lines": 1224,
+        "after_points": 1,
+        "after_lines": 1234,
+        "exclusions": 6
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+        "before_points": 1,
+        "before_lines": 10216,
+        "after_points": 1,
+        "after_lines": 10185,
+        "exclusions": 40
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+        "before_points": 1,
+        "before_lines": 2077,
+        "after_points": 1,
+        "after_lines": 2088,
+        "exclusions": 1
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+        "before_points": 1,
+        "before_lines": 1404,
+        "after_points": 1,
+        "after_lines": 1434,
+        "exclusions": 4
+      },
+      {
+        "path": "src/non-mvdm/windows/core/w32inc/w32wow64.h",
+        "before_points": 0,
+        "before_lines": 0,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 1,
+        "addition": true
+      },
+      {
+        "path": "src/non-mvdm/public/oak/inc/kbd.h",
+        "before_points": 0,
+        "before_lines": 0,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 2,
+        "addition": true
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1313,
+      "OpenNT": 20
+    }
+  },
+  "source_files": [
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+      "before_baseline": "XP",
+      "before_original_blob": "5be3126f26e295b939694fed1db0383bc106009a",
+      "after_baseline": "XP",
+      "after_original_blob": "5be3126f26e295b939694fed1db0383bc106009a",
+      "before_sha256": "fb4b954e775769869363226eb8a4f9d7eba257728456de6a06ab5fe876d5910f",
+      "after_sha256": "b978531d15db8ad99783b8f005719c7c2d9d3287aaf7ef815632343e84ad295b",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "5",
+      "points_after": "3",
+      "lines_before": "68",
+      "lines_after": "9",
+      "measurement": "S15 P72 XP USER layout ABI"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "before_baseline": "XP",
+      "before_original_blob": "8e51fc19006730db78acf2de4635ebe31eacbbd6",
+      "after_baseline": "XP",
+      "after_original_blob": "8e51fc19006730db78acf2de4635ebe31eacbbd6",
+      "before_sha256": "50b2d7ca9ffdb4c3c98c2695986c7a9baddad5558742d520a1d996d840f3a238",
+      "after_sha256": "d5db91399463ee4744a35103c29e51576df025ca348ef529d572d880fb7db491",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "15",
+      "points_after": "15",
+      "lines_before": "73",
+      "lines_after": "73",
+      "measurement": "S15 P72 XP USER layout ABI"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_baseline": "XP",
+      "before_original_blob": "6cbb445357c5944f6112900df64c8bb5a9a8c389",
+      "after_baseline": "XP",
+      "after_original_blob": "6cbb445357c5944f6112900df64c8bb5a9a8c389",
+      "before_sha256": "cf361675c7cfefe3372991284212c40a31540006ae12d0d4de51e7713532bf25",
+      "after_sha256": "7105022649d6d82dee9a296c3de6deeae7f1b0d196ae4d9246fa50df847a2a2c",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "8",
+      "points_after": "8",
+      "lines_before": "158",
+      "lines_after": "162",
+      "measurement": "S15 P72 XP USER layout ABI"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_baseline": "OpenNT",
+      "before_original_blob": "c328f4cf5b26806494dcecdf8cf572a5e585fdf1",
+      "after_baseline": "XP",
+      "after_original_blob": "842143d337dd84330b25abb2ecc71a73262fb0dc",
+      "before_sha256": "2d6e467446d163faf7bc19c5a12721225372b9a2625fb33524e00511a825c8cf",
+      "after_sha256": "38c1e0f7aa2ee7da6102df038d5234ebd09049e4a0d53dc63a26c2c756fc6ee1",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "63",
+      "points_after": "18",
+      "lines_before": "508",
+      "lines_after": "65",
+      "measurement": "S15 P72 XP USER layout ABI"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "before_baseline": "OpenNT",
+      "before_original_blob": "c88fb7853cefbf1c9830b914484262f6946faf11",
+      "after_baseline": "OpenNT",
+      "after_original_blob": "c88fb7853cefbf1c9830b914484262f6946faf11",
+      "before_sha256": "86b5a417bbef352604d3ddd6d263e10c7109f62cc3aca2cd1d849dbacbb389d0",
+      "after_sha256": "8e6ea90ba2da03f9d5d092ee0a2cad6e066a2966d5b885dc27dc1aecd9d16c1f",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "1",
+      "points_after": "1",
+      "lines_before": "1224",
+      "lines_after": "1234",
+      "measurement": "S15 P72 XP USER layout ABI"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "before_baseline": "OpenNT",
+      "before_original_blob": "0bf5dbcf391f5332cc9ba756fd2f309542129149",
+      "after_baseline": "OpenNT",
+      "after_original_blob": "0bf5dbcf391f5332cc9ba756fd2f309542129149",
+      "before_sha256": "2b041af4b59da8ed2f2cccb3b9dccb64af061283cd22e1f3e1b1f212530936d3",
+      "after_sha256": "3f1c2cb249cce3bd740654bad03514a06782cf3a260804661e4e6be6cd29ac2e",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "1",
+      "points_after": "1",
+      "lines_before": "10216",
+      "lines_after": "10185",
+      "measurement": "S15 P72 XP USER layout ABI"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "before_baseline": "OpenNT",
+      "before_original_blob": "985d1a9b66d27d28c25ca30fe0d9bb3dfef625c7",
+      "after_baseline": "OpenNT",
+      "after_original_blob": "985d1a9b66d27d28c25ca30fe0d9bb3dfef625c7",
+      "before_sha256": "c8653bdc51dcf7212d821726d3157b6c37d40bd20877dff2e1b8e3baabf80eeb",
+      "after_sha256": "b3893818215a32aa43044fa4feb946ea7a6e981c4a611b3a53592db01df99f88",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "1",
+      "points_after": "1",
+      "lines_before": "2077",
+      "lines_after": "2088",
+      "measurement": "S15 P72 XP USER layout ABI"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "before_baseline": "OpenNT",
+      "before_original_blob": "dba8e7fe2ae796daecba7815c675219604764814",
+      "after_baseline": "OpenNT",
+      "after_original_blob": "dba8e7fe2ae796daecba7815c675219604764814",
+      "before_sha256": "47c5e5544aa3b1f8c663ebcd4974b5110b94d0dd91915b8c60b2fb70e9499886",
+      "after_sha256": "f044a716de85f5bae4222064e5eb374b3d3edb71141a2d4fc517ce4e86df46e0",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "1",
+      "points_after": "1",
+      "lines_before": "1404",
+      "lines_after": "1434",
+      "measurement": "S15 P72 XP USER layout ABI"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/w32inc/w32wow64.h",
+      "before_baseline": "",
+      "before_original_blob": "",
+      "after_baseline": "XP",
+      "after_original_blob": "cefb8a94429b09456fb35dc7e653a686f41b7d4e",
+      "before_sha256": "",
+      "after_sha256": "da6e58a25e141239c1c6db1f2a0c18813659f19148d9952b3e4d86ebcd134c91",
+      "byte_equal_before": "False",
+      "byte_equal_after": "True",
+      "points_before": "0",
+      "points_after": "0",
+      "lines_before": "0",
+      "lines_after": "0",
+      "measurement": "XP required USER declaration prerequisite"
+    },
+    {
+      "path": "src/non-mvdm/public/oak/inc/kbd.h",
+      "before_baseline": "",
+      "before_original_blob": "",
+      "after_baseline": "XP",
+      "after_original_blob": "b17161c566b9aeea85e5e6d7aa89f04d4c71f8bc",
+      "before_sha256": "",
+      "after_sha256": "b17564a6f3aa109c9b2d2e1f300bdee5ecbdb62d014eebd6780d6823a548029d",
+      "byte_equal_before": "False",
+      "byte_equal_after": "True",
+      "points_before": "0",
+      "points_after": "0",
+      "lines_before": "0",
+      "lines_after": "0",
+      "measurement": "XP required USER declaration prerequisite"
+    }
+  ],
+  "full_checkpoint": "P69 runtime80 Full24/24; six completed mirror files since checkpoint including user.h and two required original headers",
+  "original_guest_unchanged": true,
+  "fnid_source": {
+    "source": "Source/XPSP1/NT/windows/core/ntuser/client/client.c",
+    "commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+    "blob": "0a965dba8e47e9ba7ec9d42a8d1d50c74988423f",
+    "lines": [
+      22,
+      54
+    ],
+    "adaptation": "existing static linkage retained; table body original"
+  },
+  "verification_reuse": "Controls40 and seven unchanged lifecycle cases retain runtime85-source evidence. Only aiClassWow changed thereafter; init-notification, native-creation and genuine guest controls ran after runtime86 publication.",
+  "limitations": [
+    "Paired kernel/RTL slices keep their registered OpenNT whole-file baseline until directory migration.",
+    "SP3 USER export decoding proves only the five recorded thunk routes, not every historical PMODE layout.",
+    "No S/T closure or new Full claimed."
+  ]
+}

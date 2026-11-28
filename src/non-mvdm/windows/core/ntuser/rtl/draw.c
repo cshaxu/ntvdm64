@@ -782,11 +782,14 @@ BOOL GetSignFromMappingMode (
 * 19-Jan-1993 MikeKe    Created
 \***************************************************************************/
 
-VOID ClientFrame(
+#line 1332
+BOOL ClientFrame(
     HDC     hDC,
     LPCRECT pRect,
     HBRUSH  hBrush,
-    DWORD   patOp)
+    DWORD   patOp,
+    int     cxBorder,
+    int     cyBorder)
 {
     int        x;
     int        y;
@@ -795,11 +798,11 @@ VOID ClientFrame(
     POLYPATBLT PolyData[4];
 
     if (!GetSignFromMappingMode (hDC, &ptSign))
-        return;
+        return FALSE;
 
     y = pRect->bottom - (point.y = pRect->top);
     if (y < 0) {
-        return;
+        return FALSE;
     }
 
     x = pRect->right -  (point.x = pRect->left);
@@ -808,7 +811,15 @@ VOID ClientFrame(
      * Check width and height signs
      */
     if (((x ^ ptSign.x) < 0) || ((y ^ ptSign.y) < 0))
-        return;
+        return FALSE;
+
+    /*
+     * Factor in the thickness of the rectangle to be drawn.  This will
+     * automatically offset the edges so that the actual rectangle gets filled
+     * "in" as it becomes thicker.
+     */
+    ptSign.x *= cxBorder;
+    ptSign.y *= cyBorder;
 
     // Top border
     PolyData[0].x         = point.x;
@@ -845,5 +856,5 @@ VOID ClientFrame(
     PolyData[3].cy        = y;
     PolyData[3].BrClr.hbr = hBrush;
 
-    UserPolyPatBlt(hDC, patOp, PolyData, sizeof (PolyData) / sizeof (*PolyData), PPB_BRUSH);
+    return UserPolyPatBlt(hDC, patOp, PolyData, sizeof (PolyData) / sizeof (*PolyData), PPB_BRUSH);
 }

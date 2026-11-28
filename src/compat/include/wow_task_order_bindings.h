@@ -185,6 +185,7 @@ BOOL WINAPI xxxRegisterUserHungAppHandlers(wow_task_end_callback, HANDLE, wow_ta
 #ifdef WOW_ORIGINAL_TASK_ORDER
 #define W32GetCurrentProcess() (wow_user_runtime_current()->thread->ppi)
 #define gptiCurrent (wow_user_runtime_current()->thread)
+typedef wow_task_order_queue *PQ;
 typedef wow_task_order_entry *PTDB;
 typedef wow_task_order_state *PWOWPROCESSINFO;
 typedef wow_task_order_state WOWPROCESSINFO;

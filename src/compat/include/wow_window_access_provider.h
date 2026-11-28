@@ -11,7 +11,6 @@ struct _LARGE_STRING;
 struct mvdm_softpc_wow_window_observation;
 typedef struct wow_window_layout {
     SIZE_T state_bytes, words_bytes, class_bytes;
-    ULONG word_count;
     DWORD ansi_creation_flag, ansi_creator_style;
     WORD procedure_handle_tag, dialog_fnid;
 } wow_window_layout;
@@ -38,8 +37,6 @@ typedef struct wow_window_access_provider {
     /* Read the existing borrowed object; never resolve a new HWND owner. */
     HWND (WINAPI *window_handle)(struct tagWND *);
     DWORD default_function;
-    /* Same retained WW allocation; no new owner or guest address. */
-    DWORD *(WINAPI *words)(struct _WW *);
     VOID (WINAPI *restore_words)(struct _WW *,
         const struct mvdm_softpc_wow_window_words_view *);
     const wow_window_layout *(WINAPI *layout)(void);

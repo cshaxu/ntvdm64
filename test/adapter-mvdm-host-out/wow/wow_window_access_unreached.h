@@ -6,8 +6,6 @@ static HMENU WINAPI unexpected_menu(HINSTANCE module, LPCWSTR name)
 { (void)module; (void)name; ++failures; return NULL; }
 static HWND WINAPI fixture_window_handle(struct tagWND *window)
 { return window->head.h; }
-static DWORD *WINAPI unexpected_words(struct _WW *words)
-{ (void)words; ++failures; return NULL; }
 static VOID WINAPI unexpected_restore_words(struct _WW *words,
     const struct mvdm_softpc_wow_window_words_view *view)
 { (void)words; (void)view; ++failures; }
@@ -49,7 +47,7 @@ static BOOL WINAPI unexpected_creation_class_name(const struct _LARGE_STRING * a
 
 static const wow_window_access_provider access_provider = {
     xxxSetWindowLong, _GetWindowLong, _SetWindowLong, unexpected_menu,
-    fixture_window_handle, FNID_DEFWINDOWPROC, unexpected_words, unexpected_restore_words,
+    fixture_window_handle, FNID_DEFWINDOWPROC, unexpected_restore_words,
     unexpected_layout, unexpected_capture_words, unexpected_initialize_state, unexpected_state_extent, unexpected_promote_state, unexpected_initialize_resource, unexpected_refresh_state, unexpected_publish_links, unexpected_state_name, unexpected_state_fnid, unexpected_mark_destroyed, unexpected_creation_class_name
 };
 #endif

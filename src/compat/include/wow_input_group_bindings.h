@@ -26,5 +26,7 @@ typedef wow_input_attachment *PATTACHINFO;
 #define PtiCurrent() ptiCurrent
 #define gpai (ptiCurrent->rpdesk->attachments)
 #define DestroyQueue(queue, thread) (thread)->rpdesk->destroy_queue(queue,thread)
+#ifndef TIF_16BIT
 #define TIF_16BIT WOW_TASK_TIF_16BIT
+#endif
 #endif

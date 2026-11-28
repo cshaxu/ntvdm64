@@ -12,6 +12,24 @@
 #define ADAPTER_MVDM_HOST_OUT_WIN32_WINUSERP_H
 
 #include <windows.h>
+#include "wow_gdi_alias.h"
+#include "non-mvdm/windows/core/w32inc/w32wow64.h"
+/* Opaque NT activation-context pointer used by original USER declarations. */
+typedef struct _ACTIVATION_CONTEXT *PACTIVATION_CONTEXT;
+
+/* XP windows/published/winuser.w:466-478. The public SDK omits these
+ * original private version predicates used by USER creation and dialogs. */
+#define VERMAX          0x9900
+#define VER51           0x0501
+#define VER50           0x0500
+#define VER40           0x0400
+#define VER31           0x030A
+#define VER30           0x0300
+#define Is510Compat(dwExpWinVer)  (LOWORD(dwExpWinVer) >= VER51)
+#define Is500Compat(dwExpWinVer)  (LOWORD(dwExpWinVer) >= VER50)
+#define Is400Compat(dwExpWinVer)  (LOWORD(dwExpWinVer) >= VER40)
+#define Is310Compat(dwExpWinVer)  (LOWORD(dwExpWinVer) >= VER31)
+#define Is300Compat(dwExpWinVer)  (LOWORD(dwExpWinVer) >= VER30)
 
 /* XP SP1 private USER flags used by WOW32 drawing and menu thunks. */
 #define WF_DIALOG_WINDOW 0x00010000
@@ -20,13 +38,26 @@
     WS_EX_LEFTSCROLLBAR | WS_EX_CONTROLPARENT | WS_EX_STATICEDGE | WS_EX_APPWINDOW)
 #define DST_TYPEMASK    0x0007
 #define MFT_NONSTRING       0x00000904L
+/* XP public/internal/windows/inc/winuserp.h:985; user.h verifies the
+ * private menu flags do not overlap the public MNS range. */
+#define MNS_LAST            0x04000000
+/* XP winuserp.h:1255-1261 and 2289, shared declaration prerequisites. */
+#define COLOR_3DALTFACE         25
+#define COLOR_ENDCOLORS         WOW_GDI_SYSTEM_COLOR_END
+#define COLOR_MAX               (COLOR_ENDCOLORS+1)
+typedef DWORD JIF, *PJIF;
+
+/* Reuse the original cursor declaration; no duplicate CURSINFO layout. */
+#include "non-mvdm/windows/core/w32inc/w32gdip.h"
+
+#endif /* ADAPTER_MVDM_HOST_OUT_WIN32_WINUSERP_H */
 
 /* Only the selected USER kernel slices need these declaration dependencies.
  * Ordinary WOW/FAX clients retain their original private header owners. */
-#if defined(WOW_ORIGINAL_TASK_ORDER) || defined(WOW_USER_OBJECT_FLAGS_ONLY)
+#if (defined(WOW_ORIGINAL_TASK_ORDER) || defined(WOW_USER_OBJECT_FLAGS_ONLY) || defined(WOW_ORIGINAL_CLEANUP)) && !defined(WOW_USER_KERNEL_DECLARATIONS)
+#define WOW_USER_KERNEL_DECLARATIONS
 /* Original winuserp.h:1521. Declaration-only dependency of userk.h
  * cursor prototypes; no private USER implementation is imported. */
-typedef DWORD JIF, *PJIF;
 
 /* Original windows/core/w32inc/winuserk.h declaration enums. */
 typedef enum _CONSOLECONTROL {
@@ -73,6 +104,13 @@ typedef struct tagACCELTABLE *LPACCELTABLE;
 typedef struct tagKbdLayer *PKBDTABLES;
 /* Original kbd.h:28-31 keyboard-event pointer. */
 typedef struct tagKE *PKE;
+/* OpenNT user.h:765,1543-1555,2268-2270; opaque legacy kernel
+ * declarations retained until that header's own XP migration. */
+DECLARE_HANDLE(HQ);
+typedef struct tagPHYSICAL_DEV_INFO *PPHYSICAL_DEV_INFO;
+#define CVKKEYSTATE                 256
+#define CBKEYSTATE                  (CVKKEYSTATE >> 2)
+#define CBKEYSTATERECENTDOWN        (CVKKEYSTATE >> 3)
 /* Original winddi.h:80 and gre.h:151 declaration dependencies. */
 DECLARE_HANDLE(HDEV);
 typedef PERESOURCE PDEVICE_LOCK;
@@ -93,7 +131,7 @@ typedef struct tagSBCALC *PSBCALC;
 typedef struct tagSBWND *PSBWND;
 typedef struct tagDESKWND *PDESKWND;
 /* Original user.h:767 callback declaration. */
-typedef LONG (APIENTRY *WNDPROC_PWND)(PWND, UINT, DWORD, LONG);
+typedef LRESULT (APIENTRY *WNDPROC_PWND)(PWND, UINT, WPARAM, LPARAM);
 /* Original user.h:769 enumeration callback. */
 typedef BOOL (APIENTRY *WNDENUMPROC_PWND)(PWND, LPARAM);
 
@@ -129,5 +167,3 @@ typedef struct tagWOWPROCESSINFO *PWOWPROCESSINFO;
 #endif
 
 #endif /* selected USER kernel declarations */
-
-#endif /* ADAPTER_MVDM_HOST_OUT_WIN32_WINUSERP_H */

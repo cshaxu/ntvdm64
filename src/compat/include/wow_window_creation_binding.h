@@ -17,12 +17,10 @@ HWND WINAPI wow_window_create_boundA(wow_task_order_thread *, ATOM,
     const CREATESTRUCTA *, const struct _WW *, const wow_window_dispatch_target *);
 HWND WINAPI wow_window_create_boundW(wow_task_order_thread *, ATOM,
     const CREATESTRUCTW *, const struct _WW *, const wow_window_dispatch_target *);
-/* Exact PFNCSCREATEWINDOWEX carrier used by the selected WOW32 `wuwind.c`
- * caller.  That caller is ANSI-only and supplies the original 12-byte WW
- * input prefix.  This adapter copies only that prefix, then delegates native
- * creation/callback ordering to the bounded gateway above. */
+/* XP PFNCSCREATEWINDOWEX has no legacy three-word input. The existing
+ * gateway owns the complete WW and native creation/callback ordering. */
 HWND WINAPI wow_user_create_window_ex(DWORD, LPCTSTR, LPCTSTR, DWORD, int,
-    int, int, int, HWND, HMENU, HANDLE, LPVOID, DWORD, LPDWORD);
+    int, int, int, HWND, HMENU, HANDLE, LPVOID, DWORD);
 /* Original dialog producer's NtUserCreateWindowEx shape. Strings are already
  * captured, class lookup uses the existing class owner, and explicit version
  * and creator flags are preserved through the existing enrollment scope.
@@ -30,7 +28,7 @@ HWND WINAPI wow_user_create_window_ex(DWORD, LPCTSTR, LPCTSTR, DWORD, int,
 struct _LARGE_STRING;
 HWND WINAPI wow_user_create_dialog_window_ex(DWORD, struct _LARGE_STRING *,
     struct _LARGE_STRING *, DWORD, int, int, int, int, HWND, HMENU, HANDLE, LPVOID,
-    DWORD, LPDWORD);
+    DWORD);
 /* Only original comboini.c's two internal _CreateWindowEx calls: atom class,
  * null title, zero or ANSI creator flags, tool/client-edge and RTL styles.
  * Original producer supplies all parameters; no child-ID/class inference. */

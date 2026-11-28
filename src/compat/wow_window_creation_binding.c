@@ -692,8 +692,7 @@ HWND WINAPI wow_window_create_boundW(wow_task_order_thread *context,
 
 HWND WINAPI wow_user_create_window_ex(DWORD ex_style, LPCTSTR class_name,
     LPCTSTR window_name, DWORD style, int x, int y, int width, int height,
-    HWND parent, HMENU menu, HANDLE instance, LPVOID parameter, DWORD flags,
-    LPDWORD input_words)
+    HWND parent, HMENU menu, HANDLE instance, LPVOID parameter, DWORD flags)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     UNICODE_STRING name;
@@ -751,11 +750,7 @@ HWND WINAPI wow_user_create_window_ex(DWORD ex_style, LPCTSTR class_name,
     if (converted) HeapFree(GetProcessHeap(), 0, converted);
     if (!atom) return NULL;
 
-    /* XP creation starts with zeroed WOW words. Legacy callers may supply
-     * the three-word prefix; native state is filled during enrollment. */
-    if (input_words)
-        CopyMemory(wow_window_access_current()->words(words), input_words,
-            wow_window_access_current()->layout()->word_count * sizeof(DWORD));
+    /* XP creation starts with a zeroed complete WW. */
     request.dwExStyle = ex_style;
     request.lpszClass = (LPCSTR)class_name;
     request.lpszName = (LPCSTR)window_name;
@@ -805,13 +800,13 @@ HWND WINAPI wow_control_create_window_ex(DWORD ex_style, LPCTSTR class_name,
     if (flags & wow_window_access_current()->layout()->ansi_creation_flag) ex_style |= wow_window_access_current()->layout()->ansi_creator_style;
     return wow_user_create_dialog_window_ex(ex_style,
         (struct _LARGE_STRING *)class_name, NULL, style, x, y, width, height,
-        parent, menu, instance, parameter, version, NULL);
+        parent, menu, instance, parameter, version);
 }
 
 HWND WINAPI wow_user_create_dialog_window_ex(DWORD ex_style,
     struct _LARGE_STRING * class_name, struct _LARGE_STRING * title, DWORD style,
     int x, int y, int width, int height, HWND parent, HMENU menu,
-    HANDLE instance, LPVOID parameter, DWORD version, LPDWORD input_words)
+    HANDLE instance, LPVOID parameter, DWORD version)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     UNICODE_STRING name = {0};
@@ -832,9 +827,6 @@ HWND WINAPI wow_user_create_dialog_window_ex(DWORD ex_style,
         return NULL;
     atom = wow_class_words_find_atom(binding->thread->ppi->classes, &name);
     if (!atom) return NULL;
-    if (input_words)
-        CopyMemory(wow_window_access_current()->words(words), input_words,
-            wow_window_access_current()->layout()->word_count * sizeof(DWORD));
 
     /* This CREATESTRUCT is enrollment metadata, not a replacement native
      * input string. Native creation consumes the retained counted title.

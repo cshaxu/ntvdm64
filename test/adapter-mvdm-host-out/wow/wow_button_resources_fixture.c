@@ -94,7 +94,10 @@ static void metadata(void)
     CHECK(wow_button_resources_initialize(&resources));
     for (i = 0; i < OBI_RADIOMASK; ++i)
         CHECK(!resources.bm[i].cx && !resources.bm[i].cy);
-    for (i = OBI_RADIOMASK; i < OBI_COUNT; ++i) {
+    /* XP adds non-button menu bitmaps after the button range. */
+    for (i = OBI_3STATE_CDI + 1; i < OBI_COUNT; ++i)
+        CHECK(!resources.bm[i].cx && !resources.bm[i].cy);
+    for (i = OBI_RADIOMASK; i <= OBI_3STATE_CDI; ++i) {
         unsigned owner = i;
         if (i == OBI_3STATE) owner = OBI_CHECK;
         if (i == OBI_3STATE_D) owner = OBI_CHECK_D;
@@ -158,7 +161,7 @@ static void native_images(void)
     CHECK(wow_button_resources_ready(&second));
     CHECK(first.dc != second.dc && first.bitmap != second.bitmap);
     CHECK(live_dc == 2 && live_bitmap == 2);
-    for (i = OBI_RADIOMASK; i < OBI_COUNT; ++i) {
+    for (i = OBI_RADIOMASK; i <= OBI_3STATE_CDI; ++i) {
         RECT rect = {0, 0, 13, 13};
         unsigned owner = i;
         if (i == OBI_3STATE) owner = OBI_CHECK;

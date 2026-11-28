@@ -12,6 +12,7 @@
 #include "wow_default_message_bindings.h"
 #include "wow_default_window_bindings.h"
 #include "wow_button_lifetime.h"
+#include "wow_standard_class_bindings.h"
 
 __declspec(thread) wow_edit_context *wow_edit_current;
 
@@ -104,8 +105,8 @@ BOOL WINAPI wow_control_entry_bind(const wow_control_entry_provider *provider)
         !provider->list_w || !provider->combo_list_a || !provider->combo_list_w ||
         !provider->button_a || !provider->button_w || !provider->caret ||
         !provider->caret_ready || !provider->combo_info || !provider->finalize ||
-        provider->edit_class_index >= 20 ||
-        provider->combo_list_class_index >= 20) {
+        provider->edit_class_index >= 23 ||
+        provider->combo_list_class_index >= 23) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     previous = InterlockedCompareExchangePointer((PVOID volatile *)&control_provider,
@@ -170,7 +171,7 @@ static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
      * existing PED depend on acquiring a fresh font DC or profile snapshot. */
     if (needs_context) {
         wow_user_task_lifecycle *lifecycle = runtime->runtime ? runtime->runtime->lifecycle : NULL;
-        C_ASSERT(sizeof(context.atomSysClass) == sizeof(lifecycle->cleanup_shared.atomSysClass));
+
         if (!lifecycle || !lifecycle->initialized ||
                 runtime->thread->ppi != &lifecycle->process) {
             SetLastError(ERROR_INVALID_STATE);
@@ -185,8 +186,8 @@ static LRESULT edit_entry(HWND window, UINT message, WPARAM wp, LPARAM lp,
         /* Original comboini.c consumes process-initialized class atoms.
          * Reuse the owner already populated before task admission, not
          * class names, HWND inference or a second registration table. */
-        CopyMemory(context.atomSysClass, lifecycle->cleanup_shared.atomSysClass,
-            sizeof(context.atomSysClass));
+        if (!wow_standard_classes_copy_client_atoms(&lifecycle->cleanup_shared,
+                context.atomSysClass, ARRAYSIZE(context.atomSysClass))) return 0;
         if (!context.atomSysClass[control_provider->edit_class_index] ||
                 !context.atomSysClass[control_provider->combo_list_class_index]) {
             SetLastError(ERROR_INVALID_STATE);

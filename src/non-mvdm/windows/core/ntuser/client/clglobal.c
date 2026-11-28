@@ -17,8 +17,8 @@
 \***************************************************************************/
 
 #include <windows.h>
-#include "wowuserp.h"
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/wow_shared_user_abi.h"
+#include "compat/include/wow_user_client_view_layout.h"
 #include "compat/include/wow_user_globals_binding.h"
 #line 20
 #pragma hdrstop
@@ -237,12 +237,14 @@ BOOL WINAPI wow_original_edit_callbacks_ready(void)
 }
 /* Indexed by this USER cohort's FNID values, not the WOW producer's version. */
 static int aiClassWow[] = {
-    WOWCLASS_SCROLLBAR,  // 29A
+    WOWCLASS_SCROLLBAR,
     WOWCLASS_ICONTITLE,
     WOWCLASS_MENU,
     WOWCLASS_DESKTOP,
     WOWCLASS_WIN16,
-    WOWCLASS_BUTTON,     // 29F
+    WOWCLASS_WIN16,
+    WOWCLASS_SWITCHWND,
+    WOWCLASS_BUTTON,
     WOWCLASS_COMBOBOX,
     WOWCLASS_COMBOLBOX,
     WOWCLASS_DIALOG,
@@ -250,7 +252,7 @@ static int aiClassWow[] = {
     WOWCLASS_LISTBOX,
     WOWCLASS_MDICLIENT,
     WOWCLASS_STATIC,
-    WOWCLASS_WIN16,      // 2A7
+    WOWCLASS_WIN16,    // 2A9
     WOWCLASS_WIN16,
     WOWCLASS_WIN16,
     WOWCLASS_WIN16,
@@ -258,13 +260,15 @@ static int aiClassWow[] = {
     WOWCLASS_WIN16,
     WOWCLASS_WIN16,
     WOWCLASS_WIN16,
+    WOWCLASS_WIN16,     // 2B1
     WOWCLASS_WIN16,
     WOWCLASS_WIN16,
     WOWCLASS_WIN16,
     WOWCLASS_WIN16,
     WOWCLASS_WIN16,
-    WOWCLASS_SWITCHWND   // 2B4
-};
+    WOWCLASS_WIN16,
+    WOWCLASS_WIN16
+    };
 
 void WINAPI wow_original_registration_exchange(struct tagAPFNWOWHANDLERSIN *input,
     struct tagAPFNWOWHANDLERSOUT *output)

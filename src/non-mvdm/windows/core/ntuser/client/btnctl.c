@@ -27,7 +27,7 @@ static OEMBITMAPINFO wow_button_images[OBI_COUNT];
 static BOOL WINAPI wow_original_button_render(HDC dc)
 {
     UINT i;
-    for (i = OBI_RADIOMASK; i < OBI_COUNT; ++i) {
+    for (i = OBI_RADIOMASK; i <= OBI_3STATE_CDI; ++i) {
         OEMBITMAPINFO *image = &wow_button_images[i];
         RECT rect = {image->x, image->y, image->x + image->cx, image->y + image->cy};
         if (i >= OBI_3STATE && !(sysBmpStyles[i - OBI_RADIOMASK][1] & DFCS_CHECKED))
@@ -41,9 +41,9 @@ const wow_button_resource_provider *WINAPI wow_original_button_resources(void)
 {
     UINT i;
     static const wow_button_resource_provider value = {
-        wow_button_images, 13, (OBI_COUNT - OBI_RADIOMASK) * 13, wow_original_button_render
+        wow_button_images, 13, (OBI_3STATE_CDI - OBI_RADIOMASK + 1) * 13, wow_original_button_render
     };
-    for (i = OBI_RADIOMASK; i < OBI_COUNT; ++i) {
+    for (i = OBI_RADIOMASK; i <= OBI_3STATE_CDI; ++i) {
         OEMBITMAPINFO *image = &wow_button_images[i];
         if (i >= OBI_3STATE && !(sysBmpStyles[i - OBI_RADIOMASK][1] & DFCS_CHECKED))
             *image = wow_button_images[i - (OBI_3STATE - OBI_CHECK)];

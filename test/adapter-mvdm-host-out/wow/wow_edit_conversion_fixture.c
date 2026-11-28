@@ -73,7 +73,7 @@ int main(void)
         DWORD original = (DWORD)(ULONG_PTR)(ansi ? EditWndProcW : EditWndProcA);
         SetLastError(456);
         CHECK(wow_edit_CsSendMessage(h, WM_SETTEXT, 17, 19,
-            original, 0x2b2, ansi) == -123);
+            original, FNID_CALLWINDOWPROC, ansi) == -123);
         CHECK(GetLastError() == 777 && error_seen == 456);
         CHECK(options_seen == (ansi ? 0x21u : 0x22u));
         CHECK(target_seen == (DWORD)(ULONG_PTR)(ansi ? wow_edit_window_procW : wow_edit_window_procA));
@@ -82,7 +82,7 @@ int main(void)
     }
     CHECK(requests == 2 && dispatches == 2);
     CHECK(!wow_edit_CsSendMessage(h, WM_SETTEXT, 0, 0,
-        (DWORD)(ULONG_PTR)EditWndProcA, 0x2b2, TRUE));
+        (DWORD)(ULONG_PTR)EditWndProcA, FNID_CALLWINDOWPROC, TRUE));
     CHECK(GetLastError() == ERROR_NOT_SUPPORTED);
     CHECK(!wow_edit_CsSendMessage(h, WM_SETTEXT, 0, 0,
         (DWORD)(ULONG_PTR)EditWndProcW, 0, TRUE));
@@ -90,7 +90,7 @@ int main(void)
     CHECK(requests == 2 && dispatches == 2);
     reject_cpd = TRUE;
     CHECK(!wow_edit_CsSendMessage(h, WM_SETTEXT, 0, 0,
-        (DWORD)(ULONG_PTR)EditWndProcW, 0x2b2, TRUE));
+        (DWORD)(ULONG_PTR)EditWndProcW, FNID_CALLWINDOWPROC, TRUE));
     CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
     CHECK(requests == 3 && dispatches == 2);
     printf("conversion_transport_failures=%d\n", failures);

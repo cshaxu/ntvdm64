@@ -499,7 +499,7 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const struct _WW *words,
         binding->cleanup.native_window = window;
         binding->cleanup.procedure_is_guest = target && target->wow_encoded;
         binding->cleanup.pcls = wow_class_words_entry(class_words);
-        binding->cleanup.adwWOW = wow_window_access_current()->words(binding->words);
+        binding->cleanup.words = binding->words;
         binding->cleanup.lpfnWndProc = target ? (WNDPROC)target->procedure : NULL;
         binding->objects = NULL;
         binding->retired_guest_backing = 0u;
@@ -802,36 +802,6 @@ done:
 wow_cleanup_window *WINAPI wow_window_words_cleanup_value(wow_window_words_binding *binding)
 {
     return binding ? &binding->cleanup : NULL;
-}
-
-BOOL WINAPI wow_window_words_exchange(HWND window, unsigned index,
-    DWORD value, DWORD *previous)
-{
-    wow_window_words_binding *binding;
-    ULONG backing = 0, ignored;
-    BOOL result = FALSE;
-    if (index >= wow_window_access_current()->layout()->word_count || !previous) {
-        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
-    }
-    binding = wow_window_words_acquire(window);
-    if (!binding) return FALSE;
-    AcquireSRWLockExclusive(&publication_lock);
-    if (GetPropW(window, property_name) != binding) goto done;
-    if (binding->objects) {
-        ULONG full = (ULONG)(ULONG_PTR)binding->objects->windows[LOWORD(window)];
-        backing = mvdm_softpc_wow_page_domain_borrow_window(full);
-        if (!backing || !mvdm_softpc_wow_page_domain_exchange_window_word(
-                backing, index, value, &ignored)) goto done;
-    }
-    *previous = (DWORD)InterlockedExchange((LONG *)&wow_window_access_current()->words(binding->words)[index], value);
-    result = TRUE;
-done:
-    /* A live published WND cannot be freed by this temporary release. */
-    if (backing) (void)mvdm_softpc_wow_page_domain_release_window(backing);
-    ReleaseSRWLockExclusive(&publication_lock);
-    wow_window_words_release(binding);
-    if (!result) SetLastError(ERROR_INVALID_STATE);
-    return result;
 }
 
 BOOL WINAPI wow_window_words_publish_owner(HWND window, wow_window_words_binding *binding,
@@ -1258,7 +1228,7 @@ static BOOL dispatch_bound(HWND window, UINT message, WPARAM wp,
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     view.window = window;
-    view.adwWOW = wow_window_access_current()->words(binding->words);
+    view.words = binding->words;
     view.callback = callback;
     /* Original client.c dispatches native procedures without entering WOW.
      * Keep the window alive, but do not make a native callback wait for the

@@ -589,31 +589,6 @@ BOOL WINAPI wow_user_borrow_client_graph(wow_window_words_binding *root, HWND de
     return result;
 }
 
-BOOL WINAPI wow_user_borrow_window_exchange(HWND window, unsigned index,
-    DWORD value, DWORD *previous)
-{
-    struct _WW *words;
-    wow_user_borrow_scope *scope;
-    wow_user_borrow *borrow;
-    if (index >= ARRAYSIZE(((mvdm_softpc_wow_window_words_view *)0)->words) || !previous) {
-        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
-    }
-    if (!(words = wow_user_borrow_window(window))) return FALSE;
-    for (scope = current_scope; scope; scope = scope->previous)
-        for (borrow = scope->borrows; borrow; borrow = borrow->next)
-            if (borrow->is_class == WOW_BORROW_SAMPLED) {
-                wow_sampled_words *sample = borrow->binding;
-                DWORD ignored;
-                if (wow_window_words_value(sample->binding) != words) continue;
-                if (!mvdm_softpc_wow_page_domain_exchange_window_word(
-                        sample->backing, index, value, &ignored)) return FALSE;
-                *previous = (DWORD)InterlockedExchange(
-                    (LONG *)&wow_window_access_current()->words(words)[index], value);
-                return TRUE;
-            }
-    return wow_window_words_exchange(window, index, value, previous);
-}
-
 DWORD *WINAPI wow_user_borrow_window_class(HWND window)
 {
     return wow_window_class_words_value(borrow_window(window));

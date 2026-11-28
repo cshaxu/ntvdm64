@@ -8,15 +8,17 @@ int drawing_fixture_CXBORDER = 2, drawing_fixture_CYBORDER = 3;
 static POLYPATBLT captured[4];
 static DWORD operation;
 static unsigned calls, failures;
+static HDC expected_dc = (HDC)(ULONG_PTR)7;
+static BOOL poly_result;
 #define CHECK(x) do { if (!(x)) { ++failures; printf("FAIL line %d\n", __LINE__); } } while (0)
 
 BOOL WINAPI drawing_fixture_poly(HDC dc, DWORD rop, PPOLYPATBLT data,
     DWORD count, DWORD mode)
 {
-    CHECK(dc == (HDC)(ULONG_PTR)7 && count == 4 && mode == PPB_BRUSH);
+    CHECK(dc == expected_dc && count == 4 && mode == PPB_BRUSH);
     if (count == 4) CopyMemory(captured, data, sizeof(captured));
     operation = rop; ++calls;
-    return FALSE; /* Original DrawFrame still returns TRUE; preserve it. */
+    return poly_result; /* DrawFrame ignores it; XP ClientFrame returns it. */
 }
 
 static void rectangle(unsigned index, int x, int y, int cx, int cy, HBRUSH brush)
@@ -96,6 +98,30 @@ static void mapping_sign_contract(void)
     CHECK(DeleteDC(dc));
     CHECK(!GetSignFromMappingMode(NULL, &sign));
 }
+static void client_frame_contract(void)
+{
+    HDC dc = CreateCompatibleDC(NULL);
+    RECT rect = {10, 20, 110, 90};
+    HBRUSH brush = (HBRUSH)(ULONG_PTR)11;
+    unsigned before = calls;
+    CHECK(dc != NULL);
+    if (!dc) return;
+    expected_dc = dc;
+    poly_result = TRUE;
+    CHECK(ClientFrame(dc, &rect, brush, PATCOPY, 2, 3));
+    CHECK(calls == before + 1);
+    rectangle(0, 10, 20, 100, 3, brush);
+    rectangle(1, 10, 87, 100, 3, brush);
+    rectangle(2, 10, 23, 2, 64, brush);
+    rectangle(3, 108, 23, 2, 64, brush);
+    poly_result = FALSE;
+    CHECK(!ClientFrame(dc, &rect, brush, PATCOPY, 2, 3));
+    CHECK(calls == before + 2);
+    CHECK(!ClientFrame(NULL, &rect, brush, PATCOPY, 2, 3));
+    CHECK(calls == before + 2);
+    CHECK(DeleteDC(dc));
+    expected_dc = (HDC)(ULONG_PTR)7;
+}
 int __cdecl main(void)
 {
     RECT input = {10, 20, 110, 90}, output = {0};
@@ -121,6 +147,7 @@ int __cdecl main(void)
     CHECK(EqualRect(&input, &output));
     push_button_contract();
     mapping_sign_contract();
+    client_frame_contract();
     printf("original_edit_drawing_failures=%u\n", failures);
     return failures != 0;
 }

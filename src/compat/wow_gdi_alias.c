@@ -2,9 +2,9 @@
 
 #define MVDM_WOW_GDI_SLOT_COUNT 0x4000u
 /* Original WOW class/CTLCOLOR consumers reserve values through
- * COLOR_ENDCOLORS (bound to COLOR_INFOBK) for system-color pseudo-brushes.
+ * the selected XP COLOR_ENDCOLORS for system-color pseudo-brushes.
  * A fresh worker-local table must not issue those values as real objects. */
-#define MVDM_WOW_GDI_FIRST_SLOT ((COLOR_INFOBK >> 2) + 1u)
+#define MVDM_WOW_GDI_FIRST_SLOT ((WOW_GDI_SYSTEM_COLOR_END >> 2) + 1u)
 
 typedef struct mvdm_wow_gdi_alias_table {
     SRWLOCK lock;

@@ -8,7 +8,7 @@
 #include "compat/include/opennt_user_multipass.h"
 #include "wow_default_message_bindings.h"
 #define gSharedInfo wow_default_message_state
-#define UserAssert(exp)
+#define UserAssert(exp) ((void)sizeof(exp))
 /**************************************************************************\
 * WowGetDefWindowProcBits - Fills in bit array for WOW
 *

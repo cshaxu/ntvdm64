@@ -1765,37 +1765,6 @@ typedef struct tagCAPTIONCACHE {
 }   CAPTIONCACHE;
 #line 1802
 
-typedef struct tagCURSOR {
-    PROCOBJHEAD      head;
-    struct tagCURSOR *pcurNext;
-    DWORD            CURSORF_flags;
-    UNICODE_STRING   strName;
-    ATOM             atomModName;
-    WORD             rt;
-    DWORD            bpp;
-    DWORD            cx;
-    DWORD            cy;
-    SHORT            xHotspot;
-    SHORT            yHotspot;
-    HBITMAP          hbmMask;
-    HBITMAP          hbmColor;
-} CURSOR, *PCURSOR;
-
-typedef struct tagACON {               // acon
-    PROCOBJHEAD    head;
-    struct tagACON *pacnNext;          // NOTE: These fields must be the same
-    DWORD          CURSORF_flags;      //       as the first fields of the
-    UNICODE_STRING strName;            //       CURSOR structure.
-    ATOM           atomModName;        //       See SetSystemImage()
-    WORD           rt;                 //
-    int            cpcur;              // Count of image frames
-    int            cicur;              // Count of steps in animation sequence
-    PCURSOR        *aspcur;            // Array of image frame pointers
-    DWORD          *aicur;             // Array of frame indices (seq-table)
-    PJIF           ajifRate;           // Array of time offsets
-    int            iicur;              // Current step in animation
-    DWORD          fl;                 // Miscellaneous flags
-} ACON, *PACON;
 #line 1834
 
 #define PICON PCURSOR

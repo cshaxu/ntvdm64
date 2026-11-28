@@ -148,7 +148,6 @@ BOOL WINAPI wow_window_words_refresh_observed(HWND, const WINDOWINFO *,
 struct mvdm_softpc_wow_window_observation;
 BOOL WINAPI wow_window_words_project_observed(ULONG,
     const struct mvdm_softpc_wow_window_observation *);
-BOOL WINAPI wow_window_words_exchange(HWND, unsigned, DWORD, DWORD *);
 /* Retained cleanup fields. Before original cleanup, the owner projects the
  * actual native selection and typed guest identity; this is not a dispatch
  * authority. Caller retains its window borrow and serialized membership. */

@@ -10,9 +10,11 @@ LONG WINAPI GetClassWOWWords(HINSTANCE, LPCSTR);
  * map that fixed expression to the existing two-word storage. */
 #ifdef WOW_ORIGINAL_CLASS_QUERY
 #include "wow_user_capture_bindings.h"
-typedef DWORD *PCLS;
+typedef DWORD *wow_class_query_view;
+#define PCLS wow_class_query_view
 typedef BYTE *KPBYTE;
 static const struct { ULONG ulClientDelta; } wow_class_query_client = {0};
+#undef GetClientInfo
 #define GetClientInfo() (&wow_class_query_client)
 #define NtUserGetWOWClass wow_user_borrow_named_class
 #define GCLP_WOWWORDS (-27)

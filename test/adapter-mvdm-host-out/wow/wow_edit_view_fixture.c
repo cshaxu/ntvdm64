@@ -42,8 +42,32 @@ int __cdecl main(void)
     CHECK(IsVisible(&parent)); /* Own minimized state is not ancestor hiding. */
     ClrWF(&parent, WFMINIMIZED);
     leaf.rcClient.left = -100; leaf.rcClient.top = 200;
-    CHECK(_ClientToScreen(&leaf, &point) && point.x == -123 && point.y == 245);
-    CHECK(_ScreenToClient(&leaf, &point) && point.x == -23 && point.y == 45);
+    _ClientToScreen(&leaf, &point);
+    CHECK(point.x == -123 && point.y == 245);
+    _ScreenToClient(&leaf, &point);
+    CHECK(point.x == -23 && point.y == 45);
+    leaf.rcClient.right = 300;
+    SetWF(&leaf, WEFLAYOUTRTL);
+    _ClientToScreen(&leaf, &point);
+    CHECK(point.x == 323 && point.y == 245);
+    _ScreenToClient(&leaf, &point);
+    CHECK(point.x == -23 && point.y == 45);
+    ClrWF(&leaf, WEFLAYOUTRTL);
+    _ClientToScreen(&desktop, &point);
+    CHECK(point.x == -23 && point.y == 45);
+    _ScreenToClient(&desktop, &point);
+    CHECK(point.x == -23 && point.y == 45);
+    _GetClientRect(&desktop, &result);
+    CHECK(result.left == 0 && result.top == 0 &&
+        result.right == GetSystemMetrics(SM_CXSCREEN) &&
+        result.bottom == GetSystemMetrics(SM_CYSCREEN));
+    _GetWindowRect(&desktop, &result);
+    CHECK(result.left == 0 && result.top == 0 &&
+        result.right == GetSystemMetrics(SM_CXSCREEN) &&
+        result.bottom == GetSystemMetrics(SM_CYSCREEN));
+    leaf.rcWindow = (RECT){-120, 180, 320, 450};
+    _GetWindowRect(&leaf, &result);
+    CHECK(EqualRect(&result, &leaf.rcWindow));
     CHECK(_IsWindowVisible(NULL));
     CHECK(_IsWindowVisible(&leaf));
     CHECK(_FChildVisible(&leaf));
@@ -61,13 +85,13 @@ int __cdecl main(void)
     CHECK(_FChildVisible(&leaf)); /* Original tolerates absent parent. */
     leaf.rcClient.left = 13; leaf.rcClient.top = 17;
     leaf.rcClient.right = 70013; leaf.rcClient.bottom = 90017;
-    CHECK(_GetClientRect(&leaf, &result));
+    _GetClientRect(&leaf, &result);
     CHECK(result.left == 0 && result.top == 0 && result.right == 70000 && result.bottom == 90000);
     SetWF(&leaf, WFMINIMIZED);
-    CHECK(_GetClientRect(&leaf, &result));
+    _GetClientRect(&leaf, &result);
     CHECK(result.right == 90 && result.bottom == 30);
     SetWF(&leaf, WFWIN40COMPAT);
-    CHECK(_GetClientRect(&leaf, &result));
+    _GetClientRect(&leaf, &result);
     CHECK(result.right == 70000 && result.bottom == 90000);
     printf("original_edit_view_failures=%u\n", failures);
     return failures != 0;

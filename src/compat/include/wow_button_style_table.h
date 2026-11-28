@@ -1,7 +1,7 @@
 /* Copyright (c) 1985-95, Microsoft Corporation.
  * OpenNT windows/core/ntuser/kernel/inctlpan.c:79-94.
  * Revision 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c.
- * Include after the button resource layout declares OBI_COUNT.
+ * Include after the button resource layout declares its button-index range.
  */
 #ifndef WOW_BUTTON_STYLE_TABLE_H
 #define WOW_BUTTON_STYLE_TABLE_H
@@ -9,7 +9,7 @@
 #include "wow_control_resource_abi.h"
 
 /* Row zero corresponds to OBI_RADIOMASK. */
-static CONST WORD sysBmpStyles[OBI_COUNT - OBI_RADIOMASK][2] = {
+static CONST WORD sysBmpStyles[OBI_3STATE_CDI - OBI_RADIOMASK + 1][2] = {
     DFC_BUTTON,    DFCS_BUTTONRADIOMASK,                            // OBI_RADIOMASK
     DFC_BUTTON,    DFCS_BUTTONCHECK,                                // OBI_CHECK
     DFC_BUTTON,    DFCS_BUTTONCHECK | DFCS_CHECKED,                 // OBI_CHECK_C

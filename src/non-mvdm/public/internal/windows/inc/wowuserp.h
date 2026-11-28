@@ -286,50 +286,23 @@ typedef WC UNALIGNED *PWC;
 #define WND_CNT_WOWDWORDS   0x3
 #line 281
 typedef struct _WW { /* ww */
-    union {
-        struct { /* WOW declaration */
-            //
-            // wow fields
-            //
-            WORD      iClass;       // WOW class index
-            WORD      flState;      // state of the alias
-            VPWNDPROC vpfnWndProc;  // associated 16-bit function address
-            VPWNDPROC vpfnDlgProc;  // 16-bit dialog function
-            //
-            //  WOW/USER fields.
-            //  note that we don't change these fields using
-            //   SETWW() and SetWL as we do the fields above.
-            //
-            DWORD     dwUserSrvState; // UserSrv calls this state.
-            DWORD     dwUserSrvState2;
-            DWORD     dwExStyle;
-            DWORD     dwStyle;        // UserSrv calls this style.
-            HANDLE    hInstance;      // UserSrv calls this hModule.
-        };
-#line 294
+    /*
+     *
+     * WOW/USER fields
+     * NOTE: The order and size of the following 4 fields is assumed
+     *       by the SetWF, ClrWF, TestWF, MaskWF macros.
+     *       Specifically, state must remain the first field in this structure.
+     *
+     */
+    DWORD         state;        // State flags
+    DWORD         state2;       //
+    DWORD         ExStyle;      // Extended Style
+    DWORD         style;        // Style flags
 
-        struct { /* USER declaration */
-            /*
-             * These DWORDs are used by WOW only.
-             */
-            DWORD         adwWOW[WND_CNT_WOWDWORDS];
-            /*
-             *
-             * WOW/USER fields
-             * NOTE: The order and size of the following 4 fields is assumed
-             *       by the SetWF, ClrWF, TestWF, MaskWF macros.
-             *
-             */
-            DWORD         state;        // State flags
-            DWORD         state2;       //
-            DWORD         ExStyle;      // Extended Style
-            DWORD         style;        // Style flags
-
-            HANDLE        hModule;      // Handle to module instance data (32-bit).
-
-        };
-    };
-#line 299
+    KHANDLE       hModule;      // Handle to module instance data (32-bit).
+    WORD          hMod16;       // WOW only -- hMod of wndproc
+    WORD          fnid;         // record window proc used by this hwnd
+                        // access through GETFNID
 
 } WW, *PWW, **PPWW;
 

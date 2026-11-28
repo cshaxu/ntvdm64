@@ -44,7 +44,8 @@ add_custom_command(
   WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
   VERBATIM)
 add_custom_target(wowit-generated DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/wowit.h" "${CMAKE_CURRENT_BINARY_DIR}/wowit.c")
-include_directories("${CMAKE_CURRENT_BINARY_DIR}" "${NTVDM_REPO}/src/non-mvdm/public/internal/termsrv/inc")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}" "${NTVDM_REPO}/src/non-mvdm/public/internal/termsrv/inc"
+  "${NTVDM_REPO}/src/non-mvdm/windows/core/w32inc")
 set(objects)
 foreach(raw IN LISTS source_names)
   string(STRIP "${raw}" source)

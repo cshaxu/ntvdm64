@@ -579,15 +579,25 @@ BOOL _IsWindowVisible(
 \***************************************************************************/
 
 #line 749
-BOOL _ClientToScreen(
+#line 893
+VOID _ClientToScreen(
     PWND pwnd,
     PPOINT ppt)
 {
-    ppt->x += pwnd->rcClient.left;
-    ppt->y += pwnd->rcClient.top;
-
-    return TRUE;
+    /*
+     * Client and screen coordinates are the same for the
+     * desktop window.
+     */
+    if (GETFNID(pwnd) != FNID_DESKTOP) {
+        if (TestWF(pwnd, WEFLAYOUTRTL)) {
+            ppt->x  = pwnd->rcClient.right - ppt->x;
+        } else {
+            ppt->x += pwnd->rcClient.left;
+        }
+        ppt->y += pwnd->rcClient.top;
+    }
 }
+#line 758
 
 
 /***************************************************************************\
@@ -600,7 +610,8 @@ BOOL _ClientToScreen(
 \***************************************************************************/
 
 #line 769
-BOOL _GetClientRect(
+#line 921
+VOID _GetClientRect(
     PWND   pwnd,
     LPRECT prc)
 {
@@ -611,39 +622,28 @@ BOOL _GetClientRect(
      * will GPF if returned a empty-rect.
      */
     if (TestWF(pwnd, WFMINIMIZED) && !TestWF(pwnd, WFWIN40COMPAT)) {
-
-#line 781
-#ifdef WOW
-#line 782
-#error DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register.
-#line 785
-#else
-#line 786
         prc->left   = 0;
         prc->top    = 0;
-        prc->right  = SYSMET(CXMINIMIZED);
-        prc->bottom = SYSMET(CYMINIMIZED);
-#endif
-#line 791
+        prc->right  = SYSMETRTL(CXMINIMIZED);
+        prc->bottom = SYSMETRTL(CYMINIMIZED);
 
     } else {
 
-#line 794
-#ifdef WOW
-#line 795
-#error DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register.
-#line 798
-#else
-#line 799
-        *prc = pwnd->rcClient;
-        OffsetRect(prc, -pwnd->rcClient.left, -pwnd->rcClient.top);
-#endif
-#line 802
-
+        if (GETFNID(pwnd) != FNID_DESKTOP) {
+            *prc = pwnd->rcClient;
+            OffsetRect(prc, -pwnd->rcClient.left, -pwnd->rcClient.top);
+        } else {
+            /*
+             * For compatibility, return the rect of the primary
+             * monitor for the desktop window.
+             */
+            prc->left = prc->top = 0;
+            prc->right = SYSMETRTL(CXSCREEN);
+            prc->bottom = SYSMETRTL(CYSCREEN);
+        }
     }
-
-    return TRUE;
 }
+#line 807
 #line 807
 
 
@@ -656,14 +656,26 @@ BOOL _GetClientRect(
 * 26-Oct-1990 DarrinM   Implemented.
 \***************************************************************************/
 
-BOOL _GetWindowRect(
+#line 964
+VOID _GetWindowRect(
     PWND   pwnd,
     LPRECT prc)
 {
-    *prc = pwnd->rcWindow;
 
-    return TRUE;
+    if (GETFNID(pwnd) != FNID_DESKTOP) {
+        *prc = pwnd->rcWindow;
+    } else {
+        /*
+         * For compatibility, return the rect of the primary
+         * monitor for the desktop window.
+         */
+        prc->left   = 0;
+        prc->top    = 0;
+        prc->right  = SYSMETRTL(CXSCREEN);
+        prc->bottom = SYSMETRTL(CYSCREEN);
+    }
 }
+#line 826
 
 /***************************************************************************\
 * _ScreenToClient (API)
@@ -675,12 +687,22 @@ BOOL _GetWindowRect(
 \***************************************************************************/
 
 #line 836
-BOOL _ScreenToClient(
+#line 992
+VOID _ScreenToClient(
     PWND pwnd,
     PPOINT ppt)
 {
-    ppt->x -= pwnd->rcClient.left;
-    ppt->y -= pwnd->rcClient.top;
-
-    return TRUE;
+    /*
+     * Client and screen coordinates are the same for the
+     * desktop window.
+     */
+    if (GETFNID(pwnd) != FNID_DESKTOP) {
+        if (TestWF(pwnd, WEFLAYOUTRTL)) {
+            ppt->x  = pwnd->rcClient.right - ppt->x;
+        } else {
+            ppt->x -= pwnd->rcClient.left;
+        }
+        ppt->y -= pwnd->rcClient.top;
+    }
 }
+#line 845

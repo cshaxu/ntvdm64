@@ -34,7 +34,7 @@ typedef struct wow_edit_context {
     DWORD PUSIFlags;
     UINT uCaretWidth;
     MONITORINFO monitor; /* Borrowed only until the next monitor query in this call. */
-    ATOM atomSysClass[20]; /* Snapshot of the existing process cleanup class table. */
+    ATOM atomSysClass[23]; /* XP ICLS view of the existing process class atoms. */
     /* Dialog-only inputs; ordinary EDIT capture leaves these unused. */
     BOOL fSnapTo;
     BOOL bKeyboardPref;

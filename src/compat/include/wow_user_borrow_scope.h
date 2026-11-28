@@ -54,7 +54,6 @@ BOOL WINAPI wow_user_borrow_window_relation(wow_window_words_binding *, ULONG,
  * NULL root refreshes all suspended original roots in one transaction;
  * without an active scope/original state that form is a successful no-op. */
 BOOL WINAPI wow_user_borrow_client_graph(wow_window_words_binding *, HWND);
-BOOL WINAPI wow_user_borrow_window_exchange(HWND, unsigned, DWORD, DWORD *);
 DWORD *WINAPI wow_user_borrow_window_class(HWND);
 DWORD *WINAPI wow_user_borrow_class(wow_class_lookup_context *, ATOM, HANDLE);
 DWORD *WINAPI wow_user_borrow_named_class(HINSTANCE, const UNICODE_STRING *);

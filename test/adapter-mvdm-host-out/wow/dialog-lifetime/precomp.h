@@ -14,10 +14,11 @@ typedef struct tagWND {
 } WND, *PWND;
 typedef struct { PWND held; } TL;
 #define WOW_ORIGINAL_DIALOG_LAYOUT
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
+#include "compat/include/opennt_user_multipass.h"
 #undef WOW_ORIGINAL_DIALOG_LAYOUT
 C_ASSERT(sizeof(void *) == 4);
-C_ASSERT(sizeof(DLG) == 40);
+/* XP x86 DLG: nine four-byte slots, SYSMODALWINDOWS not selected. */
+C_ASSERT(sizeof(DLG) == 36);
 #define WFVISIBLE WS_VISIBLE
 #define WFDISABLED WS_DISABLED
 /* Test-local storage bit; this fixture does not model WND state-byte ABI. */

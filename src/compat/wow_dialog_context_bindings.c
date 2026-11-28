@@ -3,6 +3,7 @@
 #include "wow_dialog_context_bindings.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_failure.h"
+#include "wow_standard_class_bindings.h"
 
 typedef struct wow_dialog_monitor_view {
     struct wow_dialog_monitor_view *next;
@@ -28,9 +29,8 @@ BOOL WINAPI wow_dialog_capture_context(wow_dialog_context *context, BOOL font)
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
     if (!wow_edit_capture_context(&value.server)) return FALSE;
-    C_ASSERT(sizeof(value.server.atomSysClass) == sizeof(lifecycle->cleanup_shared.atomSysClass));
-    CopyMemory(value.server.atomSysClass, lifecycle->cleanup_shared.atomSysClass,
-        sizeof(value.server.atomSysClass));
+    if (!wow_standard_classes_copy_client_atoms(&lifecycle->cleanup_shared,
+            value.server.atomSysClass, ARRAYSIZE(value.server.atomSysClass))) return FALSE;
     if (!SystemParametersInfoW(SPI_GETSNAPTODEFBUTTON, 0, &value.server.fSnapTo, 0) ||
             !SystemParametersInfoW(SPI_GETWORKAREA, 0, &value.server.rcWork, 0)) return FALSE;
     if (value.server.fSnapTo) value.server.PUSIFlags |= 0x00000002u; /* XP PUSIF_SNAPTO. */

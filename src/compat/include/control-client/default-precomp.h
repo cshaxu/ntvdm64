@@ -26,7 +26,7 @@ typedef int (WINAPI *GENERICPROC)();
 /* The public SDK already supplies the identical SHELLHOOKINFO payload. */
 #define WCSToMB(pUnicodeString, cbUnicodeChar, ppAnsiString, nAnsiChar, bAllocateMem) \
     WCSToMBEx(0, pUnicodeString, cbUnicodeChar, ppAnsiString, nAnsiChar, bAllocateMem)
-BOOL _GetClientRect(PWND, LPRECT);
+VOID _GetClientRect(PWND, LPRECT);
 extern HMODULE ghmodUserApiHook;
 LRESULT RealDefWindowProcWorker(PWND, UINT, WPARAM, LPARAM, DWORD);
 #endif

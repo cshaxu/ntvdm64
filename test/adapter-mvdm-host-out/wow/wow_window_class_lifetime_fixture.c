@@ -34,7 +34,7 @@ static DWORD WINAPI callback(HWND window, UINT message, UINT wp, LONG lp,
     ++callbacks;
     CHECK(message == WM_USER && procedure == FIXTURE_GUEST_PROC);
     CHECK(borrow != NULL);
-    CHECK(words == wow_window_words_value(borrow)->adwWOW);
+    CHECK(words == wow_window_words_value(borrow));
     CHECK(wow_window_class_words_value(borrow) == shared_words);
     CHECK(wow_user_borrow_window(window) == wow_window_words_value(borrow));
     CHECK(wow_user_borrow_window(window) == wow_window_words_value(borrow));
@@ -294,9 +294,19 @@ int __cdecl main(void)
     CHECK(scoped_class == wow_window_class_words_value(first));
     CHECK((PWW)wow_user_get_window_longA(window, -1) == wow_window_words_value(first));
     CHECK(wow_user_borrow_client_state(window, (PWND)edit_payload) == first);
-    for (i = 0; i != 3; ++i) {
-        CHECK(wow_user_set_window_longA(window, -30 - (int)i, 0x12340000 + i) == 0);
-        CHECK((DWORD)wow_user_get_window_longA(window, -30 - (int)i) == 0x12340000 + i);
+    /* XP WW has no NT4 adwWOW slots. Rejected obsolete indices must not
+     * modify the retained XP view or create alternative private storage. */
+    {
+        WW saved = *wow_window_words_value(first);
+        for (i = 0; i != 3; ++i) {
+            SetLastError(0);
+            CHECK(wow_user_set_window_longA(window, -30 - (int)i, 0x12340000 + i) == 0);
+            CHECK(GetLastError() == ERROR_INVALID_INDEX);
+            SetLastError(0);
+            CHECK(wow_user_get_window_longA(window, -30 - (int)i) == 0);
+            CHECK(GetLastError() == ERROR_INVALID_INDEX);
+        }
+        CHECK(memcmp(&saved, wow_window_words_value(first), sizeof(saved)) == 0);
     }
     CHECK((DWORD *)wow_user_get_class_longA(window, -27) == scoped_class);
     CHECK(wow_user_set_class_longA(window, GCL_WOWMENUNAME, 0x11223344) == 0x12345678);

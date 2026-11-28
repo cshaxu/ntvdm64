@@ -3,6 +3,7 @@
 
 #include <windows.h>
 #include "wow_control_message_abi.h"
+#include "wow_gdi_alias.h"
 
 
 /* The modern SDK may suppress OpenNT winuserp.h after windows.h.  These are
@@ -22,7 +23,9 @@
 #define MM_CALCSCROLL 0x003F
 #define MN_FIRST 0x01E0
 #define MN_FINDMENUWINDOWFROMPOINT (MN_FIRST + 11)
-#define COLOR_ENDCOLORS COLOR_INFOBK
+#ifndef COLOR_ENDCOLORS
+#define COLOR_ENDCOLORS WOW_GDI_SYSTEM_COLOR_END
+#endif
 #define WMNW_UPDATEFINDREPLACE 0
 #define EWX_NOTIFY 0x8000
 #define SWP_VALID (SWP_DEFERERASE | SWP_ASYNCWINDOWPOS | SWP_NOCOPYBITS | \

@@ -1,6 +1,7 @@
 #ifndef WOW_WINDOW_DISPATCH_BINDINGS_H
 #define WOW_WINDOW_DISPATCH_BINDINGS_H
 #include <windows.h>
+struct _WW;
 
 /* Exact PFNWOWWNDPROCEX call shape from original wowuserp.h. */
 typedef DWORD (WINAPI *wow_window_callback)(HWND, UINT, UINT, LONG, DWORD, PVOID);
@@ -30,7 +31,7 @@ typedef struct wow_cleanup_window {
     HWND native_window; /* Immutable native identity of this enrolled view. */
     BOOL procedure_is_guest; /* Typed call-local cleanup projection. */
     BOOL serverSideProc;
-    DWORD *adwWOW; /* Alias into the containing retained WW, never guest data. */
+    struct _WW *words; /* Borrowed from the containing window binding. */
     struct wow_window_words_binding *storage; /* Existing local storage owner. */
     WORD fnid; /* Standard procedure actually exercised, not creation class. */
     WNDPROC native_cleanup; /* Existing USER32 target, no guest resolver. */
@@ -41,7 +42,7 @@ typedef struct wow_cleanup_window {
  * caller keeps its window/WW alive across reentrant callbacks. */
 typedef struct wow_window_dispatch_view {
     HWND window;
-    DWORD *adwWOW;
+    struct _WW *words;
     wow_window_callback callback;
 } wow_window_dispatch_view;
 

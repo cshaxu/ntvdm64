@@ -132,7 +132,6 @@ int __cdecl main(void)
     CREATESTRUCTA request = {0};
     UNICODE_STRING name;
     DWORD words[2] = { 0x12350020u, 0 };
-    WW window_words = {0};
     HANDLE wowexec = CreateEventW(NULL, FALSE, FALSE, NULL);
     wow_task_order_thread *thread;
     wow_window_words_binding *borrow;
@@ -169,11 +168,10 @@ int __cdecl main(void)
     request.lpszClass = window_class.lpszClassName;
     request.lpszName = "";
     request.cx = request.cy = 32;
-    window_words.vpfnWndProc = target.procedure;
     window = wow_user_create_window_ex(0, request.lpszClass, request.lpszName,
         request.style, request.x, request.y, request.cx, request.cy,
         request.hwndParent, request.hMenu, request.hInstance,
-        request.lpCreateParams, CW_FLAGS_ANSI, window_words.adwWOW);
+        request.lpCreateParams, CW_FLAGS_ANSI);
     CHECK(window != NULL);
     borrow = window ? wow_window_words_acquire(window) : NULL;
     CHECK(borrow != NULL);

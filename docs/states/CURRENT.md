@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall58/159 directories, H001-H036 and N001-N022. S15 runtime82 is the current
+overall58/159 directories, H001-H036 and N001-N022. S15 runtime86 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -170,6 +170,15 @@ class/native owner fixtures and genuine Win16 controls pass. N0232/4;
 S15 10/14; overall58/159. Census1331/790/801/530/7984/65473;
 delta+1/0/0/+1/+14/-334;1310XP/21OpenNT. Three completed files since P69
 Full24/24. Next user.h; no S/T closure.
+
+[P72 USER core declarations](../etc/evidence/t485-s1/n023-user.md) delivered
+runtime86: complete XP user.h, two exact prerequisite headers and paired
+WW/WND/CLS/MENU consumers; old private WW exports removed. Cached full build,
+dual26hash, controls40/40, nine class/native/CCPU lifecycle cases and genuine
+Win16 controls pass. Receipt preserves initial failures and their corrections.
+Census1333/792/803/530/7937/64995; delta+2/+2/+2/0/-47/-478;
+1313XP/20OpenNT. N0233/4; S15 10/14; overall58/159. Six completed files since
+P69 Full24/24; no new Full or S/T closure. Next winerrp.h.
 
 ## S14 Closure Record
 

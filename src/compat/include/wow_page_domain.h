@@ -3,6 +3,11 @@
 
 #include "compat/include/wow_window_graph.h"
 
+/* Call-local XP WW values; no pointer or independent object ownership. */
+typedef struct mvdm_softpc_wow_window_words_view {
+    unsigned long state, state2, exstyle, style, module;
+    unsigned short module16, fnid;
+} mvdm_softpc_wow_window_words_view;
 
 
 
@@ -57,7 +62,8 @@ int __cdecl mvdm_softpc_wow_page_domain_client_desktop_ready(void);
  * managed WND even when its class remains an observed native-class view. */
 int __cdecl mvdm_softpc_wow_page_domain_publish_handle(unsigned short index,
     unsigned short uniqueness, unsigned char type, unsigned char flags,
-    unsigned long window, unsigned long class_server, const unsigned long words[3]);
+    unsigned long window, unsigned long class_server,
+    const mvdm_softpc_wow_window_words_view *words);
 /* Roll back only a managed adoption that retained its observed native CLS.
  * Caller supplies its pinned exact generation; observation/words remain live. */
 int __cdecl mvdm_softpc_wow_page_domain_cancel_native_adoption(unsigned long,
@@ -101,15 +107,10 @@ int __cdecl mvdm_softpc_wow_page_domain_retain_host_window(unsigned long, void *
  * query. Requires a live borrow; zero/unknown metadata is not synthesized. */
 int __cdecl mvdm_softpc_wow_page_domain_read_window_identity(unsigned long backing,
     unsigned long *process_id, unsigned long *thread_id);
-typedef struct mvdm_softpc_wow_window_words_view {
-    unsigned long words[3], style, exstyle, module;
-} mvdm_softpc_wow_window_words_view;
 /* All fields come from the committed retained generation, without a USER
- * query. Module remains host metadata, never a new pointer in guest WND. */
+ * query. Module is the original x86 handle value, never a host memory pointer. */
 int __cdecl mvdm_softpc_wow_page_domain_read_window_words_view(unsigned long backing,
     mvdm_softpc_wow_window_words_view *view);
-int __cdecl mvdm_softpc_wow_page_domain_exchange_window_word(unsigned long backing,
-    unsigned long index, unsigned long value, unsigned long *previous);
 
 
 int __cdecl mvdm_softpc_wow_page_domain_collect_observed_classes(void);

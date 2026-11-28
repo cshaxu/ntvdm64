@@ -106,10 +106,10 @@ LRESULT WINAPI wow_native_SendMessageW(HWND w, UINT msg, WPARAM wp, LPARAM lp)
 }
 HWND WINAPI wow_user_create_dialog_window_ex(DWORD ex, PLARGE_STRING cls,
     PLARGE_STRING title, DWORD style, int x, int y, int cx, int cy,
-    HWND parent, HMENU menu, HANDLE instance, LPVOID parameter, DWORD ver, LPDWORD words)
+    HWND parent, HMENU menu, HANDLE instance, LPVOID parameter, DWORD ver)
 {
     (void)cls; (void)title; (void)x; (void)y; (void)cx; (void)cy; (void)menu;
-    (void)instance; (void)parameter; (void)ver; (void)words;
+    (void)instance; (void)parameter; (void)ver;
     ++creates;
     if (!parent) { root.wnd.style = style; root.wnd.ExStyle = ex; return native_root; }
     CHECK(parent == native_root && !dead(&root.wnd));

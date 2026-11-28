@@ -13,7 +13,8 @@ typedef struct wow_class_remove_context {
 } wow_class_remove_context;
 BOOL WINAPI _UnregisterClass(LPWSTR,HANDLE,PCLSMENUNAME,wow_class_remove_context *);
 #ifdef WOW_ORIGINAL_CLASS_REMOVAL
-typedef wow_class_lookup_entry **PPCLS;
+typedef wow_class_lookup_entry **wow_class_remove_link;
+#define PPCLS wow_class_remove_link
 typedef wow_class_remove_context *PTHREADINFO;
 #define PtiCurrent() context
 #define CheckCritIn() ((void)0)

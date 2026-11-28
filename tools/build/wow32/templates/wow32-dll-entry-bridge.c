@@ -10,7 +10,6 @@ static const wow_task_lifecycle_provider task_lifecycle_provider = {
     xxxUserYield, DestroyTask };
 #include "wow_window_access_provider.h"
 HWND WINAPI wow_original_window_handle(struct tagWND *);
-DWORD *WINAPI wow_original_window_words(struct _WW *);
 VOID WINAPI wow_original_restore_window_words(struct _WW *, const struct mvdm_softpc_wow_window_words_view *);
 DWORD WINAPI xxxSetWindowLong(struct tagWND *, int, DWORD, BOOL);
 DWORD WINAPI _GetWindowLong(struct tagWND *, int, BOOL);
@@ -30,7 +29,7 @@ WORD WINAPI wow_original_mark_window_destroyed(struct tagWND *);
 BOOL WINAPI wow_original_creation_class_name(const struct _LARGE_STRING *, struct _UNICODE_STRING *);
 C_ASSERT(sizeof(WW) % __alignof(CLS) == 0);
 static const wow_window_access_provider window_access_provider = {
-    xxxSetWindowLong, _GetWindowLong, _SetWindowLong, wow_user_load_menuW, wow_original_window_handle, FNID_DEFWINDOWPROC, wow_original_window_words, wow_original_restore_window_words, wow_original_window_layout, wow_original_capture_window_words, wow_original_initialize_window_state, wow_original_window_state_extent, wow_original_promote_window_state, wow_original_initialize_resource_window, wow_original_refresh_window_state, wow_original_publish_window_links, wow_original_window_name, wow_original_window_fnid, wow_original_mark_window_destroyed, wow_original_creation_class_name };
+    xxxSetWindowLong, _GetWindowLong, _SetWindowLong, wow_user_load_menuW, wow_original_window_handle, FNID_DEFWINDOWPROC, wow_original_restore_window_words, wow_original_window_layout, wow_original_capture_window_words, wow_original_initialize_window_state, wow_original_window_state_extent, wow_original_promote_window_state, wow_original_initialize_resource_window, wow_original_refresh_window_state, wow_original_publish_window_links, wow_original_window_name, wow_original_window_fnid, wow_original_mark_window_destroyed, wow_original_creation_class_name };
 #include "wow_registration_provider.h"
 VOID WINAPI FreeDDEData(HANDLE, BOOL, BOOL);
 LONG WINAPI GetClassWOWWords(HINSTANCE, LPCTSTR);
