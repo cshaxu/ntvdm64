@@ -353,3 +353,7 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 [G004 COMMAND source and archive test inputs](g004.md).
 
 [G004 delivery receipt](g004-result.json).
+
+[G005 DOS DEBUG migration](g005.md).
+
+[G005 delivery receipt](g005-result.json).

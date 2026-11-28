@@ -1,7 +1,7 @@
 {
   "schema": "ntvdm64.guest-archive.v1",
   "baseline_sha256": "539a910247c5478bde19fb2a431cd4c5ab26355cdc46f8160f49b23f060b495b",
-  "archive_sha256": "b36cb0499847ae9c0a3cbf3ad3effd5f7afea675188efc279b95dd0792d06b4c",
+  "archive_sha256": "2a585860f06b27418bcb398f3ea2c68cd9c8e58136a83ca3921e7f617e0e1b28",
   "added": [
     "WINNT/EDIT.COM",
     "WINNT/EDIT.HLP",
@@ -34,7 +34,8 @@
     "WINNT/WINVER.EXE",
     "WINNT/WRITE.EXE",
     "WINNT/WRITE.HLP",
-    "WINNT/SYSTEM32/BACKUP.EXE"
+    "WINNT/SYSTEM32/BACKUP.EXE",
+    "WINNT/SYSTEM32/DEBUG.EXE"
   ],
   "missing_static_modules": [],
   "files": [
@@ -756,6 +757,15 @@
       "bytes": 36092,
       "sha256": "e9f79ffe2e982259a4296e735485453fa86d5045861eef8078b63066d652dc3c",
       "source": "src/mvdm-guest/dos/v86/cmd/backup/usa/backup.exe",
+      "format": "DOS/data",
+      "module": null,
+      "imports": []
+    },
+    {
+      "path": "WINNT/SYSTEM32/DEBUG.EXE",
+      "bytes": 20634,
+      "sha256": "9c230aa1caff2ff9d845514017b3e4bbe7b308ad26ad88740967651f7955cd60",
+      "source": "approved XP SP3 Professional GRTMPVOL_EN:I386/DEBUG.EX_",
       "format": "DOS/data",
       "module": null,
       "imports": []

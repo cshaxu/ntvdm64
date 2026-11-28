@@ -2293,3 +2293,7 @@ post-publication targeted checks.
 [G004 COMMAND source and archive test inputs](evidence/t485-s1/g004.md).
 
 [G004 delivery receipt](evidence/t485-s1/g004-result.json).
+
+[G005 DOS DEBUG migration](evidence/t485-s1/g005.md).
+
+[G005 delivery receipt](evidence/t485-s1/g005-result.json).

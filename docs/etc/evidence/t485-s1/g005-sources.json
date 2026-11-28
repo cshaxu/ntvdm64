@@ -1,0 +1,882 @@
+[
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/DEBUG.CL1",
+    "before_sha256": "17284f8980cac891554180fbedf53e295686fd268aff103eba3c2d967b0ff065",
+    "old_tree": "opennt-src-2",
+    "old_blob": "54aa27129405ec9e5f3b1a2f91e2ea1bcf3fc29c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/01-DEBUG.CL1",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/DEBUG.CL2",
+    "before_sha256": "4d7debffaff48325ed12f0657e2bc1201e9a110bc0d51d7a50275c8eb2c148c7",
+    "old_tree": "opennt-src-2",
+    "old_blob": "2e200d27a04f1191f56752162496a93fdacce076",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/02-DEBUG.CL2",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/DEBUG.CLA",
+    "before_sha256": "989fc2597c9d20f9be1089ed2333a3a3ecbb1b6f5513a4afa19060939afd751c",
+    "old_tree": "opennt-src-2",
+    "old_blob": "dbb2fa6d3136885563e913751321434d106e9611",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/03-DEBUG.CLA",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/DEBUG.CLB",
+    "before_sha256": "4c8d2db2647085d3de8bdf063e13c098202db121d48e4c6c6efd7a704e60f2bb",
+    "old_tree": "opennt-src-2",
+    "old_blob": "ae22e2235ca796c8c503e77a0ab762fe11a7f4ec",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/04-DEBUG.CLB",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/DEBUG.CLC",
+    "before_sha256": "ee71d8db58a68223a5be43456da01aa47744f7b28f859bc91ff8d11a2f7eebf4",
+    "old_tree": "opennt-src-2",
+    "old_blob": "ff9c8a2f677bc5bebc8ba170e3db8d83db59dc8c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/05-DEBUG.CLC",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/DEBUG.CLD",
+    "before_sha256": "faa87620b97bbf8742a93f22cb7271a30ffe893577d6918cf9f65229aeaaf99c",
+    "old_tree": "opennt-src-2",
+    "old_blob": "191da850ec339ddc5d936c9136476dba905bcdbf",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/06-DEBUG.CLD",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/DEBUG.CTL",
+    "before_sha256": "67fe1a0fff7cb5ddca3db624e4b469cb5b4fbe0092d73303d2b3fcc5491fa626",
+    "old_tree": "opennt-src-2",
+    "old_blob": "b34c91605b4c430f391c017661459ef96fb95ebd",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/07-DEBUG.CTL",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/DEBUG.EXE",
+    "before_sha256": "9c230aa1caff2ff9d845514017b3e4bbe7b308ad26ad88740967651f7955cd60",
+    "old_tree": "OpenNT",
+    "old_blob": "5c59861799e3d5698ee8cade9cc3db3f6cff994a",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/08-DEBUG.EXE",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debug.exe",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debug.exe",
+    "xp_blob": "53659619ba8722a0aff478b956d1e6c057fedab3",
+    "xp_sha256": "010f4b710aa937036f94bb03646fbd7741c9718184d6b8b1896b791bde87aaf8",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      11,
+      379
+    ],
+    "normalized_diff": [
+      11,
+      379
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/DEBUG.map",
+    "before_sha256": "27e53df21e69360ff2fb1b0fb2bf4ddd9ae46492b3595cc242124a347797d931",
+    "old_tree": "OpenNT",
+    "old_blob": "7e97a59eb496ef8ae8253d6bd7da3a9c7b2ecf47",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/09-DEBUG.map",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debasm.OBJ",
+    "before_sha256": "0ce5e920487cccb20fc9601061890ee3aa7e6b56ac1d4636d7ca55322c123342",
+    "old_tree": "opennt-src-2",
+    "old_blob": "bf2d7474d13b460b5bfe83eeba0ffd572cae8628",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/10-debasm.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debasm.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debasm.obj",
+    "xp_blob": "0c830d905e36d6c1fb291efff3a313f6901923e5",
+    "xp_sha256": "ed4f59128cea370ec0356a0264584a2c8222ccd74a808775ac171f341cf925d1",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      4,
+      64
+    ],
+    "normalized_diff": [
+      4,
+      64
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debasm.asm",
+    "before_sha256": "cdae87037b92fd6f4b6a95839c41233d365f096b9dc1eea808f26186c62e62d8",
+    "old_tree": "OpenNT",
+    "old_blob": "9d74d90f3fc63ff254d8f4a95622a036caed49b2",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/11-debasm.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debasm.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debasm.asm",
+    "xp_blob": "672fbdf2120ee70c3b8d2442464cfec7f990d827",
+    "xp_sha256": "eacf3708539282f81c8d49e41a27083a531da71b24cff282bf77f522cfa5d818",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2892
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debcom1.OBJ",
+    "before_sha256": "5d0104c703b635ada3e6dc5aa4790437c5f29bb98d117bfe2bdd255c99de13b9",
+    "old_tree": "opennt-src-2",
+    "old_blob": "8a27a361f5008149373a81926580406ea8b63369",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/12-debcom1.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debcom1.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debcom1.obj",
+    "xp_blob": "d464516341a67a41c20ac7055c9425e445001e94",
+    "xp_sha256": "d072fd7f9bc78f8da882a2a98ba1349431ddc9f7e92f9a3d1601ed4f4bf15527",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      4,
+      36
+    ],
+    "normalized_diff": [
+      4,
+      36
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debcom1.asm",
+    "before_sha256": "2a5c53ab19d26c9299771802b4d0db35742965524ad0f6872073772c18242649",
+    "old_tree": "OpenNT",
+    "old_blob": "d0fe12b59ce64bfc0f6746745b75c5bf1e43732a",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/13-debcom1.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debcom1.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debcom1.asm",
+    "xp_blob": "32574110a0434484768e910238d7ebe07ec60e78",
+    "xp_sha256": "c83052fac899daec9a23b44ffcd3da73f802a6832951f7f794e89ba952dc7935",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2114
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debcom2.OBJ",
+    "before_sha256": "26b2f31049d5b58fc38798a16fd7d90b99b795ec70020325fdbe126f2b0bbafc",
+    "old_tree": "opennt-src-2",
+    "old_blob": "0fece6ffb9220075a798846fc5ed776e734893ec",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/14-debcom2.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debcom2.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debcom2.obj",
+    "xp_blob": "29442ef36a4e0502bdbfeaed5ba0c770059b3a3e",
+    "xp_sha256": "57394ac8fc12ff47485f49d69db3f940cc79197124ec2427cb9bb3e14ed694cd",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      4,
+      95
+    ],
+    "normalized_diff": [
+      4,
+      95
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debcom2.asm",
+    "before_sha256": "f289151b51c3894544cc53e2ba51c5364c447656415ea809b4c93371469edce8",
+    "old_tree": "OpenNT",
+    "old_blob": "28e09b2c1d0cf82ac6b8a2369bf738853099ff3b",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/15-debcom2.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debcom2.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debcom2.asm",
+    "xp_blob": "5f2cdf83ef2cd69563fea5531140c70f8cd0e0f2",
+    "xp_sha256": "c728234d6c4aaa56f3a42cc2db0649086b645539dd0f2f4c6c3680c63ccd66ca",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2988
+    ],
+    "normalized_diff": [
+      1,
+      2
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debcom3.OBJ",
+    "before_sha256": "cc17e7c44936ae1de00a72ccd95bff8094eab1b5ef9b3d6e2299a1a552ff967d",
+    "old_tree": "opennt-src-2",
+    "old_blob": "d576b9903c310a156eb21db84e2f2e4034f527de",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/16-debcom3.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debcom3.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debcom3.obj",
+    "xp_blob": "aff4f110a8516ca1e60c6f67b9e669023127727c",
+    "xp_sha256": "f4ff97a884e4f35fca6116faeff76624412ea43cb4be62c8bfdaf89ff0642260",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      40
+    ],
+    "normalized_diff": [
+      1,
+      40
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debcom3.asm",
+    "before_sha256": "ac0f3fc199b7406e1abcd97cd8880374ac138fd17897ade07069478fa9f1a65c",
+    "old_tree": "OpenNT",
+    "old_blob": "d1de2903cd15ed22c75c259b8e2190c1fd1daa0c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/17-debcom3.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debcom3.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debcom3.asm",
+    "xp_blob": "74f7027d2de77e9292aff605930b6ea037f78d4c",
+    "xp_sha256": "cbb5b32fdaa441d29c28579c36fa866ef81bddf26c4d26576234b596de5cee5e",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1410
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debconst.OBJ",
+    "before_sha256": "e4bc75c26f36486f9c72dc02fc77bc2b668210652314c30914da2757636d0277",
+    "old_tree": "opennt-src-2",
+    "old_blob": "6eefd66749c10c3305ab1e692e117a2245a0d6ac",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/18-debconst.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debconst.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debconst.obj",
+    "xp_blob": "a530f49a0810a209519bed8f6c5c57c85b11b82a",
+    "xp_sha256": "687ad691db39ec12833bb452f172c8eb06dcd01d1df2b33ee0365a7c27861014",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      4,
+      177
+    ],
+    "normalized_diff": [
+      4,
+      177
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debconst.asm",
+    "before_sha256": "f8f18fc5bc106840b5c9bdedfdadb4f3b5402b309113307d2f1ff4c8aff93714",
+    "old_tree": "OpenNT",
+    "old_blob": "8922a22ddab577ce3df6ce7bad11aa8bce8361de",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/19-debconst.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debconst.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debconst.asm",
+    "xp_blob": "f6788dfe790ee97212af8839aa66c7e8c78635b0",
+    "xp_sha256": "99e3f98c61d155772cab69be68a97117ee772d1bae54c8aa59a66be39c005ea2",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2322
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debdata.OBJ",
+    "before_sha256": "79c164efa162db8e678bdc0677109e8d8fd387cf9fb98799e1a6aadb1dd7e586",
+    "old_tree": "opennt-src-2",
+    "old_blob": "f5eaa004d5bdb91134776bdeca1d7875e9d93a58",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/20-debdata.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debdata.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debdata.obj",
+    "xp_blob": "b3eaea4118ee84d1b53c33aa648829d0e90060fd",
+    "xp_sha256": "abbca25411aee153b60ee7e18807ca7d74c5bb5bc36822bc7191944ce0ef233c",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      48
+    ],
+    "normalized_diff": [
+      1,
+      48
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debdata.asm",
+    "before_sha256": "7828ae304d04de75982cd7598926bd73c420235298792db4ddabc547a7af1a65",
+    "old_tree": "OpenNT",
+    "old_blob": "6bf06e418599416f70c5518653a856804c90cfb1",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/21-debdata.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debdata.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debdata.asm",
+    "xp_blob": "f0d2e637391796f64b78f78b87b409e035db153a",
+    "xp_sha256": "838cc1df71ba8baa2cd3756c2cf5a8eaba578a450b33c08534ed30f48112b2ed",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      488
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debems.OBJ",
+    "before_sha256": "1349a7743523fe492b414ef7fab82976ce428248c11d1068fdd190302c3823af",
+    "old_tree": "opennt-src-2",
+    "old_blob": "f360bbd8f3b3207006c4e3aa5a0f80d371fa05c6",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/22-debems.OBJ",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debems.asm",
+    "before_sha256": "f01ac13c275488727dfc8d6e7d01a6f05d33964678d368eef100e92a0f9c1f49",
+    "old_tree": "OpenNT",
+    "old_blob": "2e082d65de648325e2e52f558c90405e31623bc3",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/23-debems.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debems.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debems.asm",
+    "xp_blob": "970d00c8442c782bb7f2600de6c2e711a32503a9",
+    "xp_sha256": "13e56bc2752efb867b406a7545e69eac6eab672d9930c547ca3d26941f8786a3",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2322
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/deberr.OBJ",
+    "before_sha256": "042a3db99533f16cd04b8b2c26af3898d6ec7bd47d3b4952c974542db0486d0a",
+    "old_tree": "opennt-src-2",
+    "old_blob": "3f6c84f1ac5e965388bea7eda981203d79a86bf6",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/24-deberr.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/deberr.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/deberr.obj",
+    "xp_blob": "6ef0be22b293975b4032b47686a0111a1757bf29",
+    "xp_sha256": "0f08e941ec6262be4a0e335345c0aa6ffc4b7638d994ec39ce8b65a8c453929b",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      21
+    ],
+    "normalized_diff": [
+      1,
+      21
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/deberr.asm",
+    "before_sha256": "805bc6b376eb281b5460ad1939817bbdb45084e2e281df9ef18d112ede1a2b38",
+    "old_tree": "OpenNT",
+    "old_blob": "52587682391dbe0711a950b3b64409a4a34bdb23",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/25-deberr.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/deberr.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/deberr.asm",
+    "xp_blob": "d5673e26ca597c827262b03cbd531deef38aed97",
+    "xp_sha256": "d083fb948fcaaf0c84a649cf9e06b8370ce62c874a01a9bcf4db8189a8c3b588",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      390
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debmes.OBJ",
+    "before_sha256": "09eeae8f18f08049f3724623a206b9fc5049274b6da2fb7c2190e9049e3abc05",
+    "old_tree": "opennt-src-2",
+    "old_blob": "b72b99a0fb3bcb1cad417d35cb93eb27dc5e5da4",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/26-debmes.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debmes.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debmes.obj",
+    "xp_blob": "72ad6615a48a11905c45d3e05d3333b334776ba7",
+    "xp_sha256": "82deac6a68e83fa2a9b33d9fa62384c9fc493b8481d29c64f7cc958a501d5a6c",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      214
+    ],
+    "normalized_diff": [
+      1,
+      214
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debmes.asm",
+    "before_sha256": "2c0272cdc4dacf7096926732f7a2b65b1ea26c0ab8d312bc39142abd7f6d0308",
+    "old_tree": "OpenNT",
+    "old_blob": "9bda4db64418f14185e0a5c01d1ec0bddd3297fa",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/27-debmes.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debmes.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debmes.asm",
+    "xp_blob": "2578213d08b8367e00823bfb66512edd90d9feda",
+    "xp_sha256": "b33dc9214f48d19d2f7447f0505bfaa0601ce758bb6007db1dbc656ee861c45d",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      3322
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debuasm.OBJ",
+    "before_sha256": "b29d0e420ac051433fda6a89d5ac2e573217f1cd8bfc459f2f141170e494d153",
+    "old_tree": "opennt-src-2",
+    "old_blob": "32c75e8cb1699d7a0a127d362c148459cd34201b",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/28-debuasm.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debuasm.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debuasm.obj",
+    "xp_blob": "538f48abf803e705e3800a4779e866ab42251b15",
+    "xp_sha256": "9801b66929f033083a1a17eb733740eaebe10cbe7f869a434a84b4df92c395e9",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      4,
+      46
+    ],
+    "normalized_diff": [
+      4,
+      46
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debuasm.asm",
+    "before_sha256": "550a49e20889f4121eb07c70f619994990fb6541f769a9488438c228dd07c1c2",
+    "old_tree": "OpenNT",
+    "old_blob": "a25d3ad408034fd44f8c152456b8c4dea6385432",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/29-debuasm.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debuasm.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debuasm.asm",
+    "xp_blob": "2386e3bb5cd2d4b6cc079542d91ab217f0396dcd",
+    "xp_sha256": "f39f0b438fb4bc27cbccec1a87f4f7be4b686587d951cd46abbe006c78412c47",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1920
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debug.OBJ",
+    "before_sha256": "381fea8c6150defadf271c447b57ce6ef775c8a887c6c8003be2c64e0e0908fa",
+    "old_tree": "opennt-src-2",
+    "old_blob": "6c6c4999b0f59ce25929d47c66afd14f33ffba5f",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/30-debug.OBJ",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debug.obj",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debug.obj",
+    "xp_blob": "457aec08b9012575b4ef3d59fa518b394df1109b",
+    "xp_sha256": "089de20d161aa965b053b3d67a664addac1f8f38a7f3cade9abe39264658afe8",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      3,
+      67
+    ],
+    "normalized_diff": [
+      3,
+      67
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debug.asm",
+    "before_sha256": "6e301b05b79de96a5f5f7f4fc6893caa7ccbf1fbe1348976d8a1da33246998af",
+    "old_tree": "OpenNT",
+    "old_blob": "c9ad0134ae3e852c598a28e0c04a5435d6bfe760",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/31-debug.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debug.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debug.asm",
+    "xp_blob": "096b6ccdaba14d5ee8d1384a9dee826d001ba868",
+    "xp_sha256": "bdc57ec5d401d8938582baddf973ea9c551895a21f3723d71cc14d4ae6215a8e",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2678
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debug.inc",
+    "before_sha256": "400d93644fc605a0afcae71ee69698ee14a79bcdbebbcb9d622ede7e97ada238",
+    "old_tree": "OpenNT",
+    "old_blob": "40aa429d6be07c7d7212308f691b6965a09e04ca",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/32-debug.inc",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debug.inc",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debug.inc",
+    "xp_blob": "427f47ae8937b9ef64a22143ba6e4cfa2b431857",
+    "xp_sha256": "fed9cee9e2e9f250a5d828b813767cd953d867f67b5b7d48e87760ff8472f73f",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      356
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debug.lnk",
+    "before_sha256": "7f1abbcc55aa6e05f7f99021568abf7f990eec01c19fd0de99eca6a9399688fb",
+    "old_tree": "OpenNT",
+    "old_blob": "a4d4cccfccf80e01aeed479c03454a17fbc28571",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/33-debug.lnk",
+    "target": null,
+    "disposition": "XP-absent old generated file; raw XP source retained; XP makefile.sub generates current intermediates"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debug.skl",
+    "before_sha256": "4c36ee0c06bc6081a6127b77dae51bac1269f4f4f119c5ee2b93b9a97b1d2e73",
+    "old_tree": "OpenNT",
+    "old_blob": "c22fbeefb1e7778a54a793532509b891db5a3b9b",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/34-debug.skl",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/usa/debug.skl",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/usa/debug.skl",
+    "xp_blob": "d923cf7a317899639ebef082641967079c85ab85",
+    "xp_sha256": "3df76b8e12c33f6b6d09de4e8963fee8464f3461396814c77222e42e56615e7a",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      266
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/debug.tag",
+    "before_sha256": "8596d58e46c5087bd2b62f89b536c0fcd3eea7e9ab6107cc197c93b8e6d32f0f",
+    "old_tree": "OpenNT",
+    "old_blob": "12b3d5f619c91735930f64f85483b63540277c70",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/35-debug.tag",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/debug.tag",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/debug.tag",
+    "xp_blob": "0bc95235fe16d76d6aeb9a9b38080016bf1442bd",
+    "xp_sha256": "1f267bc54dbee3554b206dfb180d86f4bd2d09f08eeed1e041a1368be7952d26",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/makefile",
+    "before_sha256": "996256a7614656d9fabe197ec37dda2a89c8beddc71a050614a442df2bf91d74",
+    "old_tree": "OpenNT",
+    "old_blob": "701d993f61a42bb7f7097099b9473434dedb9db7",
+    "before_equals_old": false,
+    "evidence_dir": "build/t485-s16/g005/36-makefile",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/makefile.sub",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/makefile.sub",
+    "xp_blob": "37dc104bc3181d725070e776655bda544d6002d5",
+    "xp_sha256": "ac44f35cad210e02656cee4aeb6e71fa873c6b4b63e3feeb7888203e06ee4796",
+    "before_vs_old": [
+      1,
+      450
+    ],
+    "before_vs_xp": [
+      1,
+      455
+    ],
+    "normalized_diff": [
+      28,
+      103
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/sysver.fal",
+    "before_sha256": "0ab49b5d636f7226377501c72b9b2fd70134219a17f8e6f61341175f4ffdcad4",
+    "old_tree": "OpenNT",
+    "old_blob": "452de1c066b17210b8bad115e49da6238f799ceb",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/37-sysver.fal",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/sysver.fal",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/sysver.fal",
+    "xp_blob": "18ecbd6e849f7aeca8b450df603910e8aa3252ea",
+    "xp_sha256": "c7b109c2489db90e93cbafdb1e1175ac7101a2f812a46e4cdb66c6e54b85c10d",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      20
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/sysver.inc",
+    "before_sha256": "7a6ff01783785edd683608634566a1cea88f4093a1c4930701d801c08530299b",
+    "old_tree": "OpenNT",
+    "old_blob": "38688718b794a0f63c54546137166566ea4ba626",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/38-sysver.inc",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/sysver.inc",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/sysver.inc",
+    "xp_blob": "07915dbf0534dc047948a9c19e8c7014d6c6282b",
+    "xp_sha256": "2f269402ff8de060d0bdaa9092f98be26bee7bb59a171b7cd76604d3c230b33c",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      28
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/sysver.tru",
+    "before_sha256": "7c039228859d6820299183c45b8af7b4f0cc78656f69fa3021bd866dfef33ece",
+    "old_tree": "OpenNT",
+    "old_blob": "c9d8c8fb36a54b3f9372f0d42717a7a5ed97abd2",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/39-sysver.tru",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/sysver.tru",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/sysver.tru",
+    "xp_blob": "59cc3fd9ef43c1b731832f090c0dcb9d1661d610",
+    "xp_sha256": "8a15b84bf2f146b7ab6a9e5d6490a97943ef93098687ea67afaadd0a023500bd",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      20
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debug.arf",
+    "before_sha256": "4f8eeb696b288935d3cd2e94a5b6f7fd10dc4ab231a916d0424b76ec477ab3b1",
+    "old_tree": "OpenNT",
+    "old_blob": "653d51718776ffafcf7f0690d2502e30fd517af1",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g005/40-debug.arf",
+    "target": "src/mvdm-guest/dos/v86/cmd/debug/dosdebug/debug.arf",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/debug/dosdebug/debug.arf",
+    "xp_blob": "183bcfcb8824f4cf4fe7bc4af74594c152affd7e",
+    "xp_sha256": "0d6c6f5f6649b0ade71fc9a7f280e886b8d378903d89e568d0c9acdafd18ef53",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      24
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  }
+]

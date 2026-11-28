@@ -5,8 +5,8 @@
 **Active: M0 T485 S16** (Ordinary Mode), G001-G033.
 [S15 closure](../etc/evidence/t485-s1/s15-closure.md): N013-N026 delivered;
 S15 delivered62/159 directories, H001-H036 and N001-N026. S16 P1/G001 brings
-the total to63/159; P2/G002 to64/159; P3/G003 to65/159; P4/G004 to66/159.
-S16 runtime4 is published with archive-derived COMMAND targeted verification;
+the total to63/159; P2/G002 to64/159; P3/G003 to65/159; P4/G004 to66/159; P5/G005 to67/159.
+S16 runtime5 is published with archive-derived XP SP3 DEBUG verification;
 runtime2 retains the latest Full24/24 checkpoint.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S17-S20 and all remaining migration/capability obligations.
@@ -35,7 +35,7 @@ retains S17-S20 and all remaining migration/capability obligations.
 
 ## S16 Progress
 
-4/33 directories complete through P4. [G001](../etc/evidence/t485-s1/g001.md):
+5/33 directories complete through P5. [G001](../etc/evidence/t485-s1/g001.md):
 18 exact XP files and1 retired makefile. Four existing archive members advance
 to identical XP SP1/SP3 originals, without adding archive members. Cached
 build, dual publication (26 host and8 guest hashes), WINHELP document/topic
@@ -55,7 +55,10 @@ COMMAND remains the approved XP original. Cached build,dual26hash, archive
 classifier/lifecycle and COMMAND VER exit0 passed. The latter uses the existing
 normal-logon environment helper; inherited agent environment failed with an
 illegal instruction and is not claimed supported. No product workaround.
-[P4 receipt](../etc/evidence/t485-s1/g004-result.json). Next is G005.
+[P4 receipt](../etc/evidence/t485-s1/g004-result.json). G005 delivered30 raw XP counterparts and10 retired paths. Source-tree DEBUG
+reported Incorrect DOS version; approved SP3 system DEBUG replaces that runtime
+candidate. Cached build,dual publication,prompt/arithmetic/quit exit0 passed.
+[P5 receipt](../etc/evidence/t485-s1/g005-result.json). Next is G006.
 For guest-source-only batches the affected targeted check is original identity,
 paths and consumers; replacing runtime guest binaries adds their direct runtime
 tests. Tests must consume the XP originals from winnt.zip; old runtime or
