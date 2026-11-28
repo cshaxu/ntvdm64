@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall58/159 directories, H001-H036 and N001-N022. S15 runtime86 is the current
+overall59/159 directories, H001-H036 and N001-N023. S15 runtime87 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-10/14 directories delivered. P1 N013 and P2 N014 completed; directory50
+11/14 directories delivered. P1 N013 and P2 N014 completed; directory50
 Full24/24 passed. [P3 N015](../etc/evidence/t485-s1/n015.md),
 [P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md),
 [P5 packing/SMB](../etc/evidence/t485-s1/n016-packing-smb.md) and
@@ -179,6 +179,13 @@ Win16 controls pass. Receipt preserves initial failures and their corrections.
 Census1333/792/803/530/7937/64995; delta+2/+2/+2/0/-47/-478;
 1313XP/20OpenNT. N0233/4; S15 10/14; overall58/159. Six completed files since
 P69 Full24/24; no new Full or S/T closure. Next winerrp.h.
+
+[P73 obsolete diagnostic header](../etc/evidence/t485-s1/n023-winerrp.md)
+delivered runtime87: removed XP-absent, unreferenced winerrp.h; no product
+behavior changed. Cached full build, dual26hash and real Win16 controls pass.
+Census1332/792/803/529/7936/64711; delta-1/0/0/-1/-1/-284;
+1313XP/19OpenNT. N0234/4; S15 11/14; overall59/159. Seven completed files
+since P69 Full24/24. Next N024 kernel in DIR order; no S/T closure.
 
 ## S14 Closure Record
 

@@ -235,7 +235,7 @@ BOOL _FChildVisible(PWND pwnd);
 VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 #endif
 
-/* Original winerrp.h retail semantics: diagnostics do not evaluate their
+/* XP w32err.h retail semantics: diagnostics do not evaluate their
  * formatting operands; RIPERR still sets the caller's Win32 error. */
 #ifndef TAGMSG0
 #define TAGMSG0(...) ((void)0)

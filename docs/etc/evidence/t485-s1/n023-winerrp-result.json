@@ -1,0 +1,369 @@
+{
+  "task": "M0 T485 S15 P73",
+  "start_head": "2d81ad5b2d24962af78e454cda2f6d51dd1ca245",
+  "runtime": "build\\t485-s15\\runtime87",
+  "publication": [
+    {
+      "sha256": "6D0FDF258BC476B1AFDEFA045E87A8CC65EADDFCD2E342205D674E7ECFC369D2",
+      "pass": true,
+      "path": "assets\\release\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "6D0FDF258BC476B1AFDEFA045E87A8CC65EADDFCD2E342205D674E7ECFC369D2",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "8BF39A56FE118F75024CB7FFDE5818EE40D4E974C45AC0460E182C4389F20CC7",
+      "pass": true,
+      "path": "assets\\release\\VJOY.DLL"
+    },
+    {
+      "sha256": "8BF39A56FE118F75024CB7FFDE5818EE40D4E974C45AC0460E182C4389F20CC7",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL"
+    },
+    {
+      "sha256": "800685842915383FB3B7439A84D45CACAB3287EFADAE68507A02DAFB4B506E97",
+      "pass": true,
+      "path": "assets\\release\\VCDEX.DLL"
+    },
+    {
+      "sha256": "800685842915383FB3B7439A84D45CACAB3287EFADAE68507A02DAFB4B506E97",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL"
+    },
+    {
+      "sha256": "4EEDACA3A6D0EC1A80F7E8301A13858214C7FD31AB8B83FCB35C591CFFCF51F5",
+      "pass": true,
+      "path": "assets\\release\\run16.exe"
+    },
+    {
+      "sha256": "4EEDACA3A6D0EC1A80F7E8301A13858214C7FD31AB8B83FCB35C591CFFCF51F5",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe"
+    },
+    {
+      "sha256": "6D46078D9D4D892A6D72EDE8CF9A430C34C8172F1B88174E0A109A416EB8234A",
+      "pass": true,
+      "path": "assets\\release\\ntsrv.exe"
+    },
+    {
+      "sha256": "6D46078D9D4D892A6D72EDE8CF9A430C34C8172F1B88174E0A109A416EB8234A",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe"
+    },
+    {
+      "sha256": "80FE3FD5F185A3721B37635521BE275C0CF104A5048974D0095E12C575B2F102",
+      "pass": true,
+      "path": "assets\\release\\ntcon.exe"
+    },
+    {
+      "sha256": "80FE3FD5F185A3721B37635521BE275C0CF104A5048974D0095E12C575B2F102",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe"
+    },
+    {
+      "sha256": "B371D4A9913DB6A042A8E3CECA98976C0E539C6FE894E5930878B701C4619C29",
+      "pass": true,
+      "path": "assets\\release\\ntvdm.exe"
+    },
+    {
+      "sha256": "B371D4A9913DB6A042A8E3CECA98976C0E539C6FE894E5930878B701C4619C29",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe"
+    },
+    {
+      "sha256": "4069D4C0043FF68FACD735F131B88FCC3BF7BC9D26B3E938E0C43A718D71F415",
+      "pass": true,
+      "path": "assets\\release\\ntvwm.exe"
+    },
+    {
+      "sha256": "4069D4C0043FF68FACD735F131B88FCC3BF7BC9D26B3E938E0C43A718D71F415",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe"
+    },
+    {
+      "sha256": "2D5A615AD1B4DBE62C8055DEEC9157F5164EFD2D45F3CE8E0BBA7ADCB1463511",
+      "pass": true,
+      "path": "assets\\release\\ntmon.exe"
+    },
+    {
+      "sha256": "2D5A615AD1B4DBE62C8055DEEC9157F5164EFD2D45F3CE8E0BBA7ADCB1463511",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe"
+    },
+    {
+      "sha256": "22BB764E9ED1462DEC09EA4398083A528838DD9902B4128C552D1D831D1CA60A",
+      "pass": true,
+      "path": "assets\\release\\WOW32.DLL"
+    },
+    {
+      "sha256": "22BB764E9ED1462DEC09EA4398083A528838DD9902B4128C552D1D831D1CA60A",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL"
+    },
+    {
+      "sha256": "C6761D3A477017A38FA2AD5F8656DD626DA3C14ABBA069646A50D1F6D5DDC3CC",
+      "pass": true,
+      "path": "assets\\release\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "C6761D3A477017A38FA2AD5F8656DD626DA3C14ABBA069646A50D1F6D5DDC3CC",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "7CDF7FD1D2C39EC65047E9CA67DC7B5F86B6691902CA7C03A3DD52BEA29EB3F9",
+      "pass": true,
+      "path": "assets\\release\\nthook32.dll"
+    },
+    {
+      "sha256": "7CDF7FD1D2C39EC65047E9CA67DC7B5F86B6691902CA7C03A3DD52BEA29EB3F9",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll"
+    },
+    {
+      "sha256": "BBD7CB7D7E3B6315A922BF7044DC10B8B49C2DE5258C027175F85D69BD43B74C",
+      "pass": true,
+      "path": "assets\\release\\nthook64.dll"
+    },
+    {
+      "sha256": "BBD7CB7D7E3B6315A922BF7044DC10B8B49C2DE5258C027175F85D69BD43B74C",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll"
+    }
+  ],
+  "guest_controls": {
+    "worker": "C2341AB02921E21BF9E251B3275DE668FE91269BD1ED21A50D410A757B48C4B5",
+    "pass": true,
+    "wow": "99D4D8829AFB1E9C7506AD1272BA43205A484FF635FB89E9C776A784AD0B71B7",
+    "package": "232EA55F32C679863BE01CB081FF2831580B8915C8859C1071B7FC95A904D735",
+    "records": [
+      {
+        "phase": 0,
+        "errors": 0,
+        "created": 0,
+        "button": 0,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 1,
+        "errors": 0,
+        "created": 2,
+        "button": 1,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 2,
+        "errors": 0,
+        "created": 3,
+        "button": 1,
+        "single": 1,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 3,
+        "errors": 0,
+        "created": 4,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 4,
+        "errors": 0,
+        "created": 8,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 0
+      },
+      {
+        "phase": 5,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 6,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 7,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 8,
+        "errors": 0,
+        "created": 13,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 2,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      }
+    ]
+  },
+  "census": {
+    "before": {
+      "files": 1333,
+      "byte_identical": 792,
+      "nonerror_identical": 803,
+      "nonerror_different": 530,
+      "nonerror_points": 7937,
+      "nonerror_lines": 64995
+    },
+    "after": {
+      "files": 1332,
+      "byte_identical": 792,
+      "nonerror_identical": 803,
+      "nonerror_different": 529,
+      "nonerror_points": 7936,
+      "nonerror_lines": 64711
+    },
+    "delta": {
+      "files": -1,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": -1,
+      "nonerror_points": -1,
+      "nonerror_lines": -284
+    },
+    "removed": {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/winerrp.h",
+      "before_baseline": "OpenNT",
+      "before_original_blob": "f936cd534aa6c13eef4336fb34de2f20e245103d",
+      "after_baseline": "OpenNT",
+      "after_original_blob": "f936cd534aa6c13eef4336fb34de2f20e245103d",
+      "before_sha256": "a04d4685c2a5fef4c68614161a616eac40b4fd97efbcb5c0c9b52f2169e3ceff",
+      "after_sha256": "a04d4685c2a5fef4c68614161a616eac40b4fd97efbcb5c0c9b52f2169e3ceff",
+      "byte_equal_before": "False",
+      "byte_equal_after": "False",
+      "points_before": "1",
+      "points_after": "1",
+      "lines_before": "284",
+      "lines_after": "284",
+      "measurement": "current byte-sensitive exclusion projection"
+    },
+    "baseline_counts": {
+      "XP": 1313,
+      "OpenNT": 19
+    }
+  },
+  "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+  "replacement_source": "Source/XPSP1/NT/windows/core/w32inc/w32err.h",
+  "replacement_blob": "a6910a79b13d80f2b0c6d34099a5aaec2e6809cd",
+  "replacement_imported": false,
+  "behavior_change": false,
+  "original_guest_unchanged": true,
+  "full_checkpoint": "P69 runtime80 Full24/24; seven completed files since checkpoint"
+}
