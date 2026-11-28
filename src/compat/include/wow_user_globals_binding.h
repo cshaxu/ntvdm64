@@ -2,6 +2,14 @@
 #define WOW_USER_GLOBALS_BINDING_H
 #include <windows.h>
 
+/* Original globals declarations need only tags for these opaque objects;
+ * their runtime layouts and ownership stay with the existing USER providers. */
+typedef struct tagSERVERINFO *PSERVERINFO;
+typedef struct tagUSERAPIHOOK USERAPIHOOK;
+/* XP client/usercli.h: original message-dispatch ABI, also declared there. */
+typedef LRESULT (APIENTRY *CFNSCSENDMESSAGE)(HWND, UINT, WPARAM, LPARAM,
+    ULONG_PTR, DWORD, BOOL);
+
 /* XP windows/core/w32inc/w32err.h:848-860; original zero-object ABI. */
 typedef union tagALWAYSZERO
 {

@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: globals.h
 *
-* Copyright (c) 1985-93, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains all of USER.DLL's global variables.  These are all
 * instance-specific, i.e. each client has his own copy of these.  In general,
@@ -16,53 +16,54 @@
 
 // Debug globals
 #if DBG
-#error Excluded unsupported original DBG globals
+#error DIVERGENCE: unselected retail USER profile.
 #endif
 
-int gcWheelDelta;
+extern CONST ALWAYSZERO gZero;
+
+extern int gcWheelDelta;
+
+extern WORD gDispatchTableValues;
 
 extern WCHAR awchSlashStar[];
 extern CHAR achSlashStar[];
 
-#line 28
+extern PSERVERINFO gpsi;
 extern SHAREDINFO gSharedInfo;
 
 extern HMODULE hmodUser;            // USER.DLL's hmodule
-extern HMODULE hModApp;             // The application's module
+extern ULONG_PTR gHighestUserAddress;
 
 extern BOOL gfServerProcess;        // USER is linked on the CSR server side.
 extern BOOL gfSystemInitialized;    // System has been initialized
 extern ACCESS_MASK gamWinSta;       // ACCESS_MASK for the current WindowStation
 
-#line 38
-#line 39
-
 extern PVOID pUserHeap;
 
-#line 43
-extern CONST BOOLEAN gabThunkMessage[];
+extern CONST CFNSCSENDMESSAGE gapfnScSendMessage[];
 
 extern WCHAR szUSER32[];
-extern WCHAR szNull[];
-extern WCHAR szOneChar[];
+extern CONST WCHAR szNull[];
+extern CONST WCHAR szOneChar[];
 extern WCHAR szSLASHSTARDOTSTAR[];
-extern LPWSTR pTimeTagArray[];
 
-extern RECT rcScreen;
+extern CONST BYTE mpTypeCcmd[];
+extern CONST BYTE mpTypeIich[];
+extern CONST UINT SEBbuttons[];
+extern CONST BYTE rgReturn[];
 
-extern BYTE mpTypeCcmd[];
-extern BYTE mpTypeIich[];
-extern unsigned int SEBbuttons[];
-extern BYTE rgReturn[];
-
-extern WCHAR szERROR[];
-
-extern ATOM atomBwlProp;
-extern ATOM atomMsgBoxCallback;
+extern ATOM atomMDIActivateProp;
+extern ATOM gatomReaderMode;
 
 extern CRITICAL_SECTION gcsLookaside;
 extern CRITICAL_SECTION gcsHdc;
 extern CRITICAL_SECTION gcsClipboard;
+extern CRITICAL_SECTION gcsAccelCache;
+
+#ifdef _JANUS_
+#error DIVERGENCE: unselected retail USER profile.
+#endif
+#line 69
 
 extern HDC    ghdcBits2;
 extern HDC    ghdcGray;
@@ -70,11 +71,10 @@ extern HFONT  ghFontSys;
 extern HBRUSH ghbrWindowText;
 extern int    gcxGray;
 extern int    gcyGray;
-extern PCHAR  gpOemToAnsi;
-extern PCHAR  gpAnsiToOem;
 
+extern LPWSTR pwcHighContrastScheme;
+extern LPSTR  pcHighContrastScheme;
 
-#line 78
 
 /*
  * LATER: client-side user needs to use moveable memory objects for
@@ -89,7 +89,6 @@ extern PCHAR  gpAnsiToOem;
 #undef  LMHtoP
 #define LMHtoP(handle)      // Don't use this macro
 #endif
-
 
 /*
  * WOW HACK - apps can pass a global handle as the hInstance on a call
@@ -114,6 +113,13 @@ extern PCHAR  gpAnsiToOem;
 #define LOCALFREE(hMem, hInstance)                      \
                             (*pfnLocalFree)(hMem, hInstance)
 
+extern PFNFINDA             pfnFindResourceExA;
+extern PFNFINDW             pfnFindResourceExW;
+extern PFNLOAD              pfnLoadResource;
+extern PFNLOCK              pfnLockResource;
+extern PFNUNLOCK            pfnUnlockResource;
+extern PFNFREE              pfnFreeResource;
+extern PFNSIZEOF            pfnSizeofResource;
 extern PFNLALLOC            pfnLocalAlloc;
 extern PFNLREALLOC          pfnLocalReAlloc;
 extern PFNLLOCK             pfnLocalLock;
@@ -121,21 +127,63 @@ extern PFNLUNLOCK           pfnLocalUnlock;
 extern PFNLSIZE             pfnLocalSize;
 extern PFNLFREE             pfnLocalFree;
 extern PFNGETEXPWINVER      pfnGetExpWinVer;
-extern PFNINITDLGCB         pfnInitDlgCallback;
 extern PFN16GALLOC          pfn16GlobalAlloc;
 extern PFN16GFREE           pfn16GlobalFree;
 extern PFNGETMODFNAME       pfnGetModFileName;
 extern PFNEMPTYCB           pfnWowEmptyClipBoard;
 extern PFNWOWWNDPROCEX      pfnWowWndProcEx;
+extern PFNWOWDLGPROCEX      pfnWowDlgProcEx;
 extern PFNWOWEDITNEXTWORD   pfnWowEditNextWord;
-extern PFNWOWSETFAKEDIALOGCLASS   pfnWowSetFakeDialogClass;
 extern PFNWOWCBSTOREHANDLE  pfnWowCBStoreHandle;
+extern PFNGETPROCMODULE16   pfnWowGetProcModule;
+extern PFNWOWTELLWOWTHEHDLG pfnWOWTellWOWThehDlg;
+extern PFNWOWMSGBOXINDIRECTCALLBACK pfnWowMsgBoxIndirectCallback;
+extern PFNWOWILSTRCMP       pfnWowIlstrcmp;
+extern PFNWOWTASK16SCHEDNOTIFY pfnWowTask16SchedNotify;
 
+extern UNICODE_STRING strRootDirectory;
 
-#ifdef WX86
-#error Excluded unsupported original WX86 globals
-#line 141
+/*
+ * UserApiHook
+ */
+extern BYTE                 grgbDwpLiteHookMsg[(WM_USER + 7) / 8];
+extern BYTE                 grgbWndLiteHookMsg[(WM_USER + 7) / 8];
+extern BYTE                 grgbDlgLiteHookMsg[(WM_USER + 7) / 8];
+extern HMODULE              ghmodUserApiHook;   // the module containing the UserApiHook hooks
+extern USERAPIHOOK          guah;               // Dynamic function pointers
+extern BOOL                 gfUserApiHook;      // Set TRUE if should use the UAH
+extern LONG                 gcCallUserApiHook;  // reference count of ongoing calls to UserApiHook hooks
+extern LONG                 gcLoadUserApiHook;  // reference count of UserApiHook module loads
+extern RTL_CRITICAL_SECTION gcsUserApiHook;     // CS for UAH DLL load / unload
+extern INITUSERAPIHOOK      gpfnInitUserApi;    // UserApiHook callback
+
+#ifdef MESSAGE_PUMP_HOOK
+#error DIVERGENCE: unselected retail USER profile.
 #endif
+#line 174
 
 
-#endif // ndef _GLOBALS_
+/*
+ * Menu Drag and Drop
+ */
+extern HINSTANCE ghinstOLE;
+extern FARPROC gpfnOLEOleUninitialize;
+extern FARPROC gpfnOLERegisterDD;
+extern FARPROC gpfnOLERevokeDD;
+extern FARPROC gpfnOLEDoDD;
+
+/*
+ * Accelerator table resources list.
+ */
+extern PACCELCACHE gpac;
+
+/*
+ * IME Window Handling.
+ */
+extern DWORD gfConIme;
+#define UNKNOWN_CONIME ~0
+
+extern UNICODE_STRING strRootDirectory;
+
+extern BOOL gfLogonProcess;
+#endif // ifndef _GLOBALS_

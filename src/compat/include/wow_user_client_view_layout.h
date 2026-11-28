@@ -21,6 +21,7 @@ typedef LONG (APIENTRY *WNDPROC_PWND)(PWND, UINT, DWORD, LONG);
 #pragma warning(push)
 #pragma warning(disable:4201)
 #include "wow_shared_user_abi.h"
+#include "wow_user_globals_binding.h"
 /* Original Win4 profile: winuser.h WH_MIN=-1, WH_MAX=12. The modern SDK
  * adds hook types and must not silently enlarge the immutable guest ABI. */
 #define CWINHOOKS 14

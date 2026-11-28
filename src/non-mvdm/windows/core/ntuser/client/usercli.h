@@ -72,8 +72,8 @@
  * This prototype is needed in client\globals.h which is included unintentionally
  * from usersrv.h
  */
-typedef LONG (APIENTRY *CFNSCSENDMESSAGE)(HWND, UINT, DWORD, LONG,
-        DWORD, DWORD, BOOL);
+typedef LRESULT (APIENTRY *CFNSCSENDMESSAGE)(HWND, UINT, WPARAM, LPARAM,
+        ULONG_PTR, DWORD, BOOL);
 
 #line 61
 /***************************************************************************\
@@ -2295,7 +2295,7 @@ VOID RtlInitLargeUnicodeString(PLARGE_UNICODE_STRING plstr, LPCWSTR psz,
         UINT cchLimit);
 extern WCHAR awchSlashStar[];
 extern CHAR achSlashStar[];
-extern WCHAR szOneChar[];
+
 extern WCHAR szSLASHSTARDOTSTAR[];
 #line 2170
 VOID TellWOWThehDlg(HWND hwndDlg);
