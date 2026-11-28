@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: wow.c
 *
-* Copyright (c) 1985-92, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains shared code between USER32 and USER16
 * No New CODE should be added to this file, unless its shared
@@ -11,78 +11,57 @@
 * 29-DEC-93 NanduriR      shared user32/user16 code.
 \***************************************************************************/
 
-#include "precomp.h"
+#include "../inc/wow.h"
 
-#line 15
-#ifdef WOW
-#line 16
-#error Excluded unsupported original 16-bit WOW source branch
-#line 108
+
+#ifdef _USERK_
+#error Excluded original USER kernel provider
+#line 24
 #else
-#line 109
+    #define CHECK_RESTRICTED()                                              \
+        if (pci && (pci->dwTIFlags & TIF_RESTRICTED) && pobj) {             \
+            if (!NtUserValidateHandleSecure(h))                             \
+                pobj = NULL;                                                \
+        }                                                                   \
 
-//**************************************************************************
-// Stuff used when building for USER32
-//
-//**************************************************************************
+#endif
 
-#define ClientSharedInfo()  (&gSharedInfo)
-#define ServerInfo()  (gpsi)
 
-//**************************************************************************
-// These definitions get resolved differently for USER32 and USER16
-//
-//**************************************************************************
-#define LPPOINTWOW                LPPOINT
-#define NORMALIZEDSHORTVALUE(x)   (x)
-#define WOWlstrlenA(x)            lstrlenA(x)
-#define WOWRtlCopyMemory(lpDest, lpSrc, cb) RtlCopyMemory(lpDest, lpSrc, cb)
 
-#endif  // WOW
-#line 128
+#ifdef _USERK_
+#error Excluded original USER kernel provider
+#line 49
+#else
+    #define GET_CURRENT_CLIENTINFO()                            \
+        pci = GetClientInfo();
+
+#endif // _USERK_
 
 
 /*
- * We have three type of desktop validation:
+ * We have two types of desktop validation:
  *
  */
 
-#line 135
-#ifdef WOW
-#line 136
-#error Excluded unsupported original 16-bit WOW source branch
-#line 144
-#else
-#line 145
-
-#line 146
 #ifdef _USERK_
-#line 147
-#error Excluded unsupported original _USERK_ desktop validation
-#line 150
+#error Excluded original USER kernel provider
+#line 74
 #else
-#line 151
 
-/* !!! LATER BUG 14263 remove 0xc000000 check */
+#define DESKTOPVALIDATE(pci, pobj)                              \
+        if (    pci->pDeskInfo &&                               \
+                pobj >= pci->pDeskInfo->pvDesktopBase &&        \
+                pobj < pci->pDeskInfo->pvDesktopLimit) {        \
+            pobj = (KERNEL_PVOID)((KERNEL_ULONG_PTR)pobj - pci->ulClientDelta);         \
+        } else {                                                \
+            pobj = (KERNEL_PVOID)NtUserCallOneParam((ULONG_PTR)h,                       \
+                    SFI__MAPDESKTOPOBJECT);                     \
+        }                                                       \
 
-#define DESKTOPVALIDATE(pobj) \
-                                                                \
-    PCLIENTINFO pci = GetClientInfo();                          \
-    if (pci->pDeskInfo &&                                       \
-            pobj >= pci->pDeskInfo->pvDesktopBase &&            \
-            pobj < pci->pDeskInfo->pvDesktopLimit) {            \
-        pobj = (PVOID)((PBYTE)pobj -                            \
-                pci->ulClientDelta);                            \
-    } else {                                                    \
-        pobj = (PVOID)NtUserCallOneParam((DWORD)h,              \
-                SFI__MAPDESKTOPOBJECT);                         \
-        if ((pobj == NULL) || ((DWORD)pobj > 0xC0000000))       \
-            return NULL;                                        \
-                                                                \
-    }
-#endif
-#endif
+#define SHAREDVALIDATE(pobj)                                    \
+        pobj = REBASESHAREDPTRALWAYS(pobj);
 
+#endif // _USERK_
 
 
 /*
@@ -90,90 +69,54 @@
  * means tunneling if()'s for this routine - this'll make validation fastest
  * because of instruction caching.
  *
- * If you change this macro also look at the one in the server handtabl.c.
- *
+ * In order to have the validation code in one place only, we define
+ *  the *ValidateHandleMacro macros which are to be included by the
+ *  HMValidateHanlde* routines. We don't make these into functions
+ *  because we're optimizing on time, not size.
  */
-#define ValidateHandleMacro(h, bType)                                       \
-{                                                                           \
-    PHE phe;                                                                \
-    DWORD dw;                                                               \
-    WORD uniq;                                                              \
-                                                                            \
-    /*                                                                      \
-     * This is a macro that does an AND with HMINDEXBITS,                   \
-     * so it is fast.                                                       \
-     */                                                                     \
-    dw = HMIndexFromHandle(h);                                              \
-                                                                            \
-    /*                                                                      \
-     * Make sure it is part of our handle table.                            \
-     */                                                                     \
-    if (dw < ServerInfo()->cHandleEntries) {                     \
-        /*                                                                  \
-         * Make sure it is the handle                                       \
-         * the app thought it was, by                                       \
-         * checking the uniq bits in                                        \
-         * the handle against the uniq                                      \
-         * bits in the handle entry.                                        \
-         */                                                                 \
-        phe = &ClientSharedInfo()->aheList[dw];                             \
-        uniq = HMUniqFromHandle(h);                                         \
-        if (   uniq == phe->wUniq                                           \
-            || uniq == 0                                                    \
-            || uniq == HMUNIQBITS                                           \
-            ) {                                                             \
-                                                                            \
-            /*                                                              \
-             * Now make sure the app is passing the right handle            \
-             * type for this api. If the handle is TYPE_FREE, this'll       \
-             * catch it.  Also let Generic requests through.                \
-             */                                                             \
-            if ((phe->bType == bType) || (bType == TYPE_GENERIC)) {         \
-                                                                            \
-                /*                                                          \
-                 * Instead of try/except we use the heap range check        \
-                 * mechanism to verify that the given 'pwnd' belongs to     \
-                 * the default desktop. We also have to do a Win 3.1 like   \
-                 * check to make sure the window is not deleted             \
-                 * See NT bug 12242 Kitchen app.  Also 6479                 \
-                 *                                                          \
-                 * TESTDESKOP returns the handle if the handle is valid     \
-                 * in the current desktop                                   \
-                 */                                                         \
-                PVOID pobj = phe->phead;                                    \
-                                                                            \
-                DESKTOPVALIDATE(pobj);                                      \
-                                                                            \
-                return pobj;                                                \
-            }                                                               \
-        }                                                                   \
-    }                                                                       \
-}
+#define ValidateHandleMacro(pci, pobj, h, bType) \
+    StartValidateHandleMacro(h) \
+    BeginAliveValidateHandleMacro()  \
+    BeginTypeValidateHandleMacro(pobj, bType) \
+    DESKTOPVALIDATE(pci, pobj) \
+    EndTypeValidateHandleMacro \
+    EndAliveValidateHandleMacro()  \
+    EndValidateHandleMacro
+
+#ifdef _USERK_
+#error Excluded original USER kernel provider
+#line 124
+#endif
+
+#define ValidateSharedHandleMacro(pobj, h, bType) \
+    StartValidateHandleMacro(h)  \
+    BeginAliveValidateHandleMacro()  \
+    BeginTypeValidateHandleMacro(pobj, bType) \
+    SHAREDVALIDATE(pobj)        \
+    EndTypeValidateHandleMacro \
+    EndAliveValidateHandleMacro()  \
+    EndValidateHandleMacro
 
 
 /*
  * The handle validation routines should be optimized for time, not size,
  * since they get called so often.
  */
-#ifndef WOW
 #pragma optimize("t", on)
-#endif
 
-#line 262
-#if defined(DEBUG) && !defined(_USERK_) && !defined(WOW)
-#line 263
-#error Unsupported DEBUG original branch
-#line 274
-#endif
-#line 340
+/***************************************************************************\
+* HMValidateHandle
+*
+* This routine validates a handle manager handle.
+*
+* 01-22-92 ScottLu      Created.
+\***************************************************************************/
 
+#line 471
 /*
  * Switch back to default optimization.
  */
-#ifndef WOW
 #pragma optimize("", on)
-#endif
-#line 347
 
 /***************************************************************************\
 * MNLookUpItem
@@ -297,6 +240,15 @@ UINT _GetMenuState(
         return (UINT)-1;
 
     fFlags = pItem->fState | pItem->fType;
+
+#ifndef _USERK_
+    /*
+     * Add old MFT_BITMAP flag to keep old apps happy
+     */
+    if ((pItem->hbmp != NULL) && (pItem->lpstr == NULL)) {
+        fFlags |= MFT_BITMAP;
+    }
+#endif
 
     if (pItem->spSubMenu != NULL) {
         /*
@@ -423,6 +375,13 @@ PWND _GetWindow(
         fRebase = TRUE;
         break;
 
+#if !defined(_USERK_)
+    case GW_ENABLEDPOPUP:
+       pwndT = (PWND)NtUserCallHwnd(PtoHq(pwnd), SFI_DWP_GETENABLEDPOPUP);
+       fRebase = TRUE;
+       break;
+#endif
+
     default:
         RIPERR0(ERROR_INVALID_GW_COMMAND, RIP_VERBOSE, "");
         return NULL;
@@ -496,7 +455,7 @@ PMENU _GetSubMenu(
 
     }
 
-    return (PVOID)pPopup;
+    return pPopup;
 }
 
 
@@ -509,7 +468,6 @@ PMENU _GetSubMenu(
 * 11-07-90 darrinm      Translated from Win 3.0 ASM code.
 \***************************************************************************/
 
-#line 682
 BOOL _IsChild(
     PWND pwndParent,
     PWND pwnd)
@@ -544,7 +502,6 @@ BOOL _IsChild(
 * 11-12-90 darrinm      Ported.
 \***************************************************************************/
 
-#line 716
 BOOL _IsWindowVisible(
     PWND pwnd)
 {
@@ -578,8 +535,6 @@ BOOL _IsWindowVisible(
 * 11-12-90 darrinm      Translated from Win 3.0 ASM code.
 \***************************************************************************/
 
-#line 749
-#line 893
 VOID _ClientToScreen(
     PWND pwnd,
     PPOINT ppt)
@@ -597,7 +552,6 @@ VOID _ClientToScreen(
         ppt->y += pwnd->rcClient.top;
     }
 }
-#line 758
 
 
 /***************************************************************************\
@@ -609,8 +563,6 @@ VOID _ClientToScreen(
 * 26-Oct-1990 DarrinM   Implemented.
 \***************************************************************************/
 
-#line 769
-#line 921
 VOID _GetClientRect(
     PWND   pwnd,
     LPRECT prc)
@@ -643,8 +595,6 @@ VOID _GetClientRect(
         }
     }
 }
-#line 807
-#line 807
 
 
 /***************************************************************************\
@@ -656,7 +606,6 @@ VOID _GetClientRect(
 * 26-Oct-1990 DarrinM   Implemented.
 \***************************************************************************/
 
-#line 964
 VOID _GetWindowRect(
     PWND   pwnd,
     LPRECT prc)
@@ -675,7 +624,6 @@ VOID _GetWindowRect(
         prc->bottom = SYSMETRTL(CYSCREEN);
     }
 }
-#line 826
 
 /***************************************************************************\
 * _ScreenToClient (API)
@@ -686,8 +634,6 @@ VOID _GetWindowRect(
 * 11-12-90 darrinm      Translated from Win 3.0 ASM code.
 \***************************************************************************/
 
-#line 836
-#line 992
 VOID _ScreenToClient(
     PWND pwnd,
     PPOINT ppt)
@@ -705,4 +651,19 @@ VOID _ScreenToClient(
         ppt->y -= pwnd->rcClient.top;
     }
 }
-#line 845
+/***************************************************************************\
+* PhkNextValid
+*
+* This helper routine walk the phkNext chain looking for the next valid
+*  hook (i.e., not marked as destroyed). If the end of the local (or
+*  thread specific) hook chain is reached, then it jumps to the global
+*  (or desktop) chain.
+*
+* Once a hook is destroyed, we don't want anymore activity on it; however,
+*  if the hook is locked at destroy time (= someone is calling it), then
+*  we keep it in the list so CallNextHook will work properly
+*
+* History:
+* 03/24/96  GerardoB        Moved to rtl and added *Valid stuff.
+* 01-30-91  DavidPe         Created.
+\***************************************************************************/

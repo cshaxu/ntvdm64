@@ -31,7 +31,7 @@ wow_unit(obj_opennt-user_control-body-dlgmgr2_obj "${NTVDM_REPO}/src/non-mvdm/wi
 wow_unit(obj_opennt-user_control-body-dmmnem_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/dmmnem.c" "/I \"${NTVDM_REPO}/src/compat/include/control-client\" ${cflags} ${control_user_flags} /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER")
 wow_unit(obj_opennt-user_control-body-winmgrc_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/winmgrc.c" "/I \"${NTVDM_REPO}/src/compat/include/control-client\" ${cflags} ${control_user_flags} /DWOW_ORIGINAL_EDIT_CLIENT")
 wow_unit(obj_opennt-user_control-view-winmgr_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/winmgr.c" "/I \"${NTVDM_REPO}/src/compat/include/control-client\" ${cflags} ${control_user_flags} /DWOW_ORIGINAL_EDIT_CLIENT")
-wow_unit(obj_opennt-user_control-view-wow_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/wow.c" "/I \"${NTVDM_REPO}/src/compat/include/control-client\" ${cflags} ${control_user_flags} /DWOW_ORIGINAL_EDIT_CLIENT")
+wow_unit(obj_opennt-user_control-view-wow_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/rtl/wow.c" "/I \"${NTVDM_REPO}/src/compat/include/control-client\" ${cflags} ${control_user_flags} /DWOW_ORIGINAL_EDIT_CLIENT /FIprecomp.h")
 wow_unit(obj_opennt-user_hdata_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/hdata.c" "${cflags}")
 wow_unit(obj_opennt-user_clres_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/clres.c" "${cflags}")
 wow_unit(obj_opennt-user_cldib_obj "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/cldib.c" "${cflags}")

@@ -1,0 +1,882 @@
+{
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 693534,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": true,
+    "PreparationMs": 26195,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1241,
+        "CleanupMs": 390,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-standard",
+        "ElapsedMs": 52759,
+        "CleanupMs": 294,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-enhanced",
+        "ElapsedMs": 92962,
+        "CleanupMs": 400,
+        "Passed": true
+      },
+      {
+        "Gate": "win95",
+        "ElapsedMs": 107819,
+        "CleanupMs": 294,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-sol-options",
+        "ElapsedMs": 26475,
+        "CleanupMs": 279,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 19658,
+        "CleanupMs": 388,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 19553,
+        "CleanupMs": 344,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 19764,
+        "CleanupMs": 277,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 184,
+        "CleanupMs": 275,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65403,
+        "CleanupMs": 288,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 44569,
+        "CleanupMs": 300,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 39214,
+        "CleanupMs": 290,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14994,
+        "CleanupMs": 304,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 9576,
+        "CleanupMs": 304,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 1363,
+        "CleanupMs": 388,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12452,
+        "CleanupMs": 404,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 36061,
+        "CleanupMs": 360,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 40505,
+        "CleanupMs": 346,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4537,
+        "CleanupMs": 322,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7782,
+        "CleanupMs": 348,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10110,
+        "CleanupMs": 394,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4111,
+        "CleanupMs": 349,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7700,
+        "CleanupMs": 248,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20299,
+        "CleanupMs": 251,
+        "Passed": true
+      }
+    ]
+  },
+  "full_manifest": [
+    {
+      "Name": "run16.exe",
+      "Sha256": "2EA63DB09CB303B9EA2E6659B67BA54BDCC55005BD7B6FE0513B129B97141F9F",
+      "Machine": 34404
+    },
+    {
+      "Name": "ntsrv.exe",
+      "Sha256": "11CD7F05F1BDF08AA5FF017DC1179F28C6F3F7D09C59AD69D7F50DB4AF85F4B3",
+      "Machine": 34404
+    },
+    {
+      "Name": "ntcon.exe",
+      "Sha256": "8F277157BA3A2C19DA6D090A517DC0C82BCD5BA9FD8FD299B37DA10FC94796C4",
+      "Machine": 34404
+    },
+    {
+      "Name": "ntvdm.exe",
+      "Sha256": "9C0E736D7B6F4F77D9A664605525F862D9CB6E7C68EABEF32737ADAFEA011CDD",
+      "Machine": 332
+    },
+    {
+      "Name": "ntvwm.exe",
+      "Sha256": "C63BF096D8EEFC2B348285FA5CDF1D14B75173724A7D4A29A3F3C2DA9A4B11D2",
+      "Machine": 34404
+    },
+    {
+      "Name": "ntmon.exe",
+      "Sha256": "F04AD1889BEF6140DCC278FB5F58F3A925EBB03BAE4560DD08CB9CE04827CAD1",
+      "Machine": 34404
+    },
+    {
+      "Name": "WOW32.DLL",
+      "Sha256": "BC275A1E3D0A2BA9991014BCEFDE478AE9A118FE02B28365653CA2F169831F61",
+      "Machine": 332
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "Sha256": "C30D741D8A716D413A6BD260A542BB7B878749FE778A969E7C03F88713DE32A4",
+      "Machine": 332
+    },
+    {
+      "Name": "nthook32.dll",
+      "Sha256": "49FCAD6C108AC3B253933EFE41A15708026054E666E0A4A273F63AEF78083015",
+      "Machine": 332
+    },
+    {
+      "Name": "nthook64.dll",
+      "Sha256": "429E5BA0EB929FD148A4DCD4B05A88CA28DA297E5C50C0F755E4CF6998D81A75",
+      "Machine": 34404
+    },
+    {
+      "Name": "VCDEX.DLL",
+      "Sha256": "F9B63352667F81D56866ECAB1842BB9B2F0F533C3FCA2737923AE783F2275E69",
+      "Machine": 332
+    },
+    {
+      "Name": "NTVDMD.DLL",
+      "Sha256": "96E047AC1B86EB120986FAE8738E23FF7CF6A2A761585C9F95AF1DE581C4294B",
+      "Machine": 332
+    },
+    {
+      "Name": "VJOY.DLL",
+      "Sha256": "D1CDCEF6CF661AC6C9FF25E2ED5453562D9B3BD465C5CDADCA0E62F4EABAF1E0",
+      "Machine": 332
+    }
+  ],
+  "task": "T485 S15 P91",
+  "runtime": "runtime107",
+  "start_head": "93613864226c7c6d0cd3c31a0f7d0943725b31ec",
+  "publication": [
+    {
+      "pass": true,
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "96E047AC1B86EB120986FAE8738E23FF7CF6A2A761585C9F95AF1DE581C4294B"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "96E047AC1B86EB120986FAE8738E23FF7CF6A2A761585C9F95AF1DE581C4294B"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "D1CDCEF6CF661AC6C9FF25E2ED5453562D9B3BD465C5CDADCA0E62F4EABAF1E0"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "D1CDCEF6CF661AC6C9FF25E2ED5453562D9B3BD465C5CDADCA0E62F4EABAF1E0"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "F9B63352667F81D56866ECAB1842BB9B2F0F533C3FCA2737923AE783F2275E69"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "F9B63352667F81D56866ECAB1842BB9B2F0F533C3FCA2737923AE783F2275E69"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\run16.exe",
+      "sha256": "2EA63DB09CB303B9EA2E6659B67BA54BDCC55005BD7B6FE0513B129B97141F9F"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "2EA63DB09CB303B9EA2E6659B67BA54BDCC55005BD7B6FE0513B129B97141F9F"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "11CD7F05F1BDF08AA5FF017DC1179F28C6F3F7D09C59AD69D7F50DB4AF85F4B3"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "11CD7F05F1BDF08AA5FF017DC1179F28C6F3F7D09C59AD69D7F50DB4AF85F4B3"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "8F277157BA3A2C19DA6D090A517DC0C82BCD5BA9FD8FD299B37DA10FC94796C4"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "8F277157BA3A2C19DA6D090A517DC0C82BCD5BA9FD8FD299B37DA10FC94796C4"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "9C0E736D7B6F4F77D9A664605525F862D9CB6E7C68EABEF32737ADAFEA011CDD"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "9C0E736D7B6F4F77D9A664605525F862D9CB6E7C68EABEF32737ADAFEA011CDD"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "C63BF096D8EEFC2B348285FA5CDF1D14B75173724A7D4A29A3F3C2DA9A4B11D2"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "C63BF096D8EEFC2B348285FA5CDF1D14B75173724A7D4A29A3F3C2DA9A4B11D2"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "F04AD1889BEF6140DCC278FB5F58F3A925EBB03BAE4560DD08CB9CE04827CAD1"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "F04AD1889BEF6140DCC278FB5F58F3A925EBB03BAE4560DD08CB9CE04827CAD1"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "BC275A1E3D0A2BA9991014BCEFDE478AE9A118FE02B28365653CA2F169831F61"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "BC275A1E3D0A2BA9991014BCEFDE478AE9A118FE02B28365653CA2F169831F61"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "C30D741D8A716D413A6BD260A542BB7B878749FE778A969E7C03F88713DE32A4"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "C30D741D8A716D413A6BD260A542BB7B878749FE778A969E7C03F88713DE32A4"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "49FCAD6C108AC3B253933EFE41A15708026054E666E0A4A273F63AEF78083015"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "49FCAD6C108AC3B253933EFE41A15708026054E666E0A4A273F63AEF78083015"
+    },
+    {
+      "pass": true,
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "429E5BA0EB929FD148A4DCD4B05A88CA28DA297E5C50C0F755E4CF6998D81A75"
+    },
+    {
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "429E5BA0EB929FD148A4DCD4B05A88CA28DA297E5C50C0F755E4CF6998D81A75"
+    }
+  ],
+  "controls": {
+    "exit": 0,
+    "cases": [
+      {
+        "name": "wow_dialog_getset_fixture",
+        "pid": 27016,
+        "exit": 0,
+        "started": "2026-11-28T15:24:32.7633053Z",
+        "sha256": "48E6D8AD8B5FCFF3A6977934C7A3E9FD2AB2D55C28A5794A7EEB0E218CCDAF70"
+      },
+      {
+        "name": "wow_window_client_message_fixture",
+        "pid": 23196,
+        "exit": 0,
+        "started": "2026-11-28T15:24:32.9782668Z",
+        "sha256": "60321EABC70ABF746EAF01C7E9B7758B2606553AA671B7B9689BFCD8BF4FC242"
+      },
+      {
+        "name": "wow_dialog_creator_lifetime_fixture",
+        "pid": 24508,
+        "exit": 0,
+        "started": "2026-11-28T15:24:33.1192600Z",
+        "sha256": "AD1CE95B51BA82C932F3ED06D3B34AD85F42DD6CF2061D73FEC1847BA485B3F1"
+      },
+      {
+        "name": "wow_dialog_lifetime_fixture",
+        "pid": 16220,
+        "exit": 0,
+        "started": "2026-11-28T15:24:33.4999211Z",
+        "sha256": "E11890881BECC9968C8D619EC1D3BB8DD01EBFD223264E3601C1B5FCCC36831E"
+      },
+      {
+        "name": "wow_default_messages_fixture",
+        "pid": 13344,
+        "exit": 0,
+        "started": "2026-11-28T15:24:33.6476117Z",
+        "sha256": "D08DD88E0DACC264AB91DA28045C57D2A743D73F816464798324DAC0FC827473"
+      },
+      {
+        "name": "wow_default_state_fixture",
+        "pid": 24056,
+        "exit": 0,
+        "started": "2026-11-28T15:24:33.8150469Z",
+        "sha256": "7789CA113021A9D735551375A335FD2BA5589CBC6B1180C7B7C35DA7427A705B"
+      },
+      {
+        "name": "wow_dialog_call_fixture",
+        "pid": 7428,
+        "exit": 0,
+        "started": "2026-11-28T15:24:33.9465153Z",
+        "sha256": "DB0B4D91A804F9A92B1E45B38251C6A0E79C91491649665583FA3F2FB756BD8A"
+      },
+      {
+        "name": "wow_edit_call_fixture",
+        "pid": 13840,
+        "exit": 0,
+        "started": "2026-11-28T15:24:34.0753719Z",
+        "sha256": "37CB43D40869709032CB48F265E2189360D5D15658E0E0A6065F9BD2C51825B5"
+      },
+      {
+        "name": "wow_edit_memory_callbacks_fixture",
+        "pid": 17496,
+        "exit": 0,
+        "started": "2026-11-28T15:24:34.3545990Z",
+        "sha256": "9C5273B87B87909E81D3386940B10853E4821462B9AE72D4EFFDEA5B1FF376AC"
+      },
+      {
+        "name": "wow_control_brush_fixture",
+        "pid": 11352,
+        "exit": 0,
+        "started": "2026-11-28T15:24:34.4962646Z",
+        "sha256": "2DFE8CE0A2D6B951B524778327D3AC0EC5901EE68907E98949A0495B4D630F98"
+      },
+      {
+        "name": "wow_default_window_binding_fixture",
+        "pid": 7476,
+        "exit": 0,
+        "started": "2026-11-28T15:24:34.7306973Z",
+        "sha256": "E9444CA5A2E84F4F51F759EB3FA0D89E4F3D4195661A038CBBEBBD79E6C3C4E6"
+      },
+      {
+        "name": "wow_dialog_context_fixture",
+        "pid": 26152,
+        "exit": 0,
+        "started": "2026-11-28T15:24:34.8767634Z",
+        "sha256": "090233D8405931D895DDC05B492CC7B9BF1E3F4B2703F18F96C8C415086A2FBB"
+      },
+      {
+        "name": "wow_dialog_creation_entry_fixture",
+        "pid": 2992,
+        "exit": 0,
+        "started": "2026-11-28T15:24:35.0257452Z",
+        "sha256": "8971420FD33E774E314486BD4FDC6FA76CF6FF2A53AB338F764C353464A79E24"
+      },
+      {
+        "name": "wow_dialog_finalization_fixture",
+        "pid": 26520,
+        "exit": 0,
+        "started": "2026-11-28T15:24:35.1992746Z",
+        "sha256": "E3DF254BFEAFB9686B9941BB62549471F20D0BD8CE4D1D89DF395B149CA68E0F"
+      },
+      {
+        "name": "wow_dialog_end_original_fixture",
+        "pid": 20212,
+        "exit": 0,
+        "started": "2026-11-28T15:24:35.3346771Z",
+        "sha256": "E33313867C8173C8519C78BC3DD8014258BCC00061E3EEBC039D7B7561B66546"
+      },
+      {
+        "name": "wow_dialog_keyboard_entry_fixture",
+        "pid": 27916,
+        "exit": 0,
+        "started": "2026-11-28T15:24:35.9956287Z",
+        "sha256": "668EAC1AF065A340C9663084EE9D0D473A967656D70FAC4BD74B34310443AD87"
+      },
+      {
+        "name": "wow_dialog_mnemonic_lifetime_fixture",
+        "pid": 1080,
+        "exit": 0,
+        "started": "2026-11-28T15:24:36.1222138Z",
+        "sha256": "1B5681F617EBC792A147F021B1014C700301DAFA685EE136D28F293FF6B9DA97"
+      },
+      {
+        "name": "wow_dialog_keyboard_lifetime_fixture",
+        "pid": 16116,
+        "exit": 0,
+        "started": "2026-11-28T15:24:36.4022704Z",
+        "sha256": "882B2C7D1F220E092D71CFCFCA9D04FC639B99802777B74E853A18DF2E68F0E6"
+      },
+      {
+        "name": "wow_control_string_fixture",
+        "pid": 15592,
+        "exit": 0,
+        "started": "2026-11-28T15:24:36.6776087Z",
+        "sha256": "9D6CBE6D556F68B9E789E9FEA5CB330D94E77BFFC59B7DEEFBD6EDF2B8307DFD"
+      },
+      {
+        "name": "wow_text_measure_failure_fixture",
+        "pid": 25580,
+        "exit": 0,
+        "started": "2026-11-28T15:24:36.9215062Z",
+        "sha256": "FC8270599371C958B408BABF772AC3DCF3B7D249B946D997A8FF873E67E9D1DE"
+      },
+      {
+        "name": "wow_mnemonic_drawing_fixture",
+        "pid": 25736,
+        "exit": 0,
+        "started": "2026-11-28T15:24:37.1556964Z",
+        "sha256": "1B460A398BC4F5C65B4ACBAA976B33D663C4BF7A49E1C410F47622817DD783E0"
+      },
+      {
+        "name": "wow_default_original_fixture",
+        "pid": 24424,
+        "exit": 0,
+        "started": "2026-11-28T15:24:37.3996113Z",
+        "sha256": "479914F83D44B515E868F84C9ECCA6243A923A2820D9241E9FE7CABA8EA0CF09"
+      },
+      {
+        "name": "wow_button_drawing_fixture",
+        "pid": 21292,
+        "exit": 0,
+        "started": "2026-11-28T15:24:37.6207942Z",
+        "sha256": "4EAB480A61B36C09A4891F18D545CE409B12CD0C0F0E6C7A0A879616FDC69657"
+      },
+      {
+        "name": "wow_button_resources_fixture",
+        "pid": 11452,
+        "exit": 0,
+        "started": "2026-11-28T15:24:37.7758179Z",
+        "sha256": "0C22FFCDA7C08FA85EB2DDAAF59E98FAD4E84D70C79F9CF76F2DE7AEF1283D87"
+      },
+      {
+        "name": "wow_control_draw_state_fixture",
+        "pid": 2656,
+        "exit": 0,
+        "started": "2026-11-28T15:24:38.0120840Z",
+        "sha256": "216967345B9C04C0F626712B369D206AD5F86D35AA5AE86411185B1A7730C8DB"
+      },
+      {
+        "name": "wow_dialog_navigation_fixture",
+        "pid": 21308,
+        "exit": 0,
+        "started": "2026-11-28T15:24:38.2681827Z",
+        "sha256": "582B77255828567278FC1E690E08D9775A3472FFE59543F1BEADE831F5583871"
+      },
+      {
+        "name": "wow_edit_view_fixture",
+        "pid": 28040,
+        "exit": 0,
+        "started": "2026-11-28T15:24:38.5511389Z",
+        "sha256": "8605545D7763FF04199342217E3EF77D7A1280346242703F170E83E2C7A3A86C"
+      },
+      {
+        "name": "wow_button_lifetime_fixture",
+        "pid": 17472,
+        "exit": 0,
+        "started": "2026-11-28T15:24:38.8178311Z",
+        "sha256": "507CE4AC8FDD9D3667827D501498D69BEE7E8B80AFA9ECE379F8C0BF20E51B4B"
+      },
+      {
+        "name": "wow_button_dc_fixture",
+        "pid": 26944,
+        "exit": 0,
+        "started": "2026-11-28T15:24:39.0883962Z",
+        "sha256": "C4BD8F9C04DB95942143AC3E3B8838635EECF05EEB78B61628417294FA368A61"
+      },
+      {
+        "name": "wow_dialog_native_owner_probe",
+        "pid": 19692,
+        "exit": 0,
+        "started": "2026-11-28T15:24:39.3315477Z",
+        "sha256": "3F24B1B732FDFD992C6ED3AEFF61D9BFBF95A3D84040CB199AEB1D1925595DAC"
+      },
+      {
+        "name": "wow_control_fnid_fixture",
+        "pid": 27384,
+        "exit": 0,
+        "started": "2026-11-28T15:24:39.7025711Z",
+        "sha256": "2AF3BE25CE912D446CE82DBD9383DE175573A7149BAE545D914B6A6F52402C47"
+      },
+      {
+        "name": "wow_native_controls_fixture",
+        "pid": 4948,
+        "exit": 0,
+        "started": "2026-11-28T15:24:40.2025904Z",
+        "sha256": "07C05327C92E8F70A1331F0BA2178EB890D93A9E3FF87744CD688AD823FED6DF"
+      },
+      {
+        "name": "wow_dialog_initialization_fixture",
+        "pid": 10940,
+        "exit": 0,
+        "started": "2026-11-28T15:24:40.3730004Z",
+        "sha256": "CDEEA0B5683A97079ED5AF04A797313CAC28EA8568634E47726D8211318312D1"
+      },
+      {
+        "name": "wow_task_profile_fixture",
+        "pid": 24880,
+        "exit": 0,
+        "started": "2026-11-28T15:24:40.5642578Z",
+        "sha256": "B1C03FA3E331365D71A56375DBB44C175E747EA9C0988A28063C48097A0AE79B"
+      },
+      {
+        "name": "wow_task_profile_existing_fixture",
+        "pid": 16260,
+        "exit": 0,
+        "started": "2026-11-28T15:24:40.6899186Z",
+        "sha256": "95AAFEB5586E7D3C59A3878DFEC934C7B00A0C5E57ED768197AB7F8C0B41BCF7"
+      },
+      {
+        "name": "wow_edit_lookaside_fixture",
+        "pid": 10084,
+        "exit": 0,
+        "started": "2026-11-28T15:24:40.8493038Z",
+        "sha256": "66B415CBB7B1D30376B71C956D782F86BB87A2DDFA6B4AF152CE7EFA61748141"
+      },
+      {
+        "name": "wow_edit_conversion_fixture",
+        "pid": 22684,
+        "exit": 0,
+        "started": "2026-11-28T15:24:40.9857932Z",
+        "sha256": "7E8BFE8A6632B68B828B32D31E7C231996344278628BFA46EC9E4957386F0BF2"
+      },
+      {
+        "name": "wow_def_window_bits_fixture",
+        "pid": 3032,
+        "exit": 0,
+        "started": "2026-11-28T15:24:41.1217189Z",
+        "sha256": "1E288113F38E7C60B4FF6B2D7C9A6CA7D062C9E3A09F476C5FA578C2D94CE104"
+      },
+      {
+        "name": "wow_original_dde_free_fixture",
+        "pid": 2040,
+        "exit": 0,
+        "started": "2026-11-28T15:24:41.2806844Z",
+        "sha256": "69EEEC05CF2ABEE95025EE84D37C822D869D3E06D2E10ADDA39F16DFF36E00C5"
+      },
+      {
+        "name": "wow_user_capture_fixture",
+        "pid": 5092,
+        "exit": 0,
+        "started": "2026-11-28T15:24:41.4291239Z",
+        "sha256": "A634A8829730A759714DF47D3451302DB0B00FF21A6A57E5F51400C54C2F6BE9"
+      }
+    ]
+  },
+  "guest_controls": {
+    "worker": "90C1FD55D6A8DD65F4C009182AC2FEF01D28B32CD0BA58F4C0040420043245D0",
+    "records": [
+      {
+        "phase": 0,
+        "errors": 0,
+        "created": 0,
+        "button": 0,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 1,
+        "errors": 0,
+        "created": 2,
+        "button": 1,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 2,
+        "errors": 0,
+        "created": 3,
+        "button": 1,
+        "single": 1,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 3,
+        "errors": 0,
+        "created": 4,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 4,
+        "errors": 0,
+        "created": 8,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 0
+      },
+      {
+        "phase": 5,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 6,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 7,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 8,
+        "errors": 0,
+        "created": 13,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 2,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      }
+    ],
+    "wow": "72CE2881A04AE42FD483BFE5E15C38148444AF10CED03C2959EEA01854D48BF9",
+    "package": "70E13DBADA3D4690ED3EDE4EAA04679D5C7FA3B43A53BAB13B5B0BC2E2A02895",
+    "pass": true
+  },
+  "census": {
+    "before": {
+      "files": 1339,
+      "byte_identical": 800,
+      "nonerror_identical": 811,
+      "nonerror_different": 528,
+      "nonerror_points": 8184,
+      "nonerror_lines": 46985
+    },
+    "after": {
+      "files": 1340,
+      "byte_identical": 801,
+      "nonerror_identical": 812,
+      "nonerror_different": 528,
+      "nonerror_points": 8190,
+      "nonerror_lines": 45930
+    },
+    "delta": {
+      "files": 1,
+      "byte_identical": 1,
+      "nonerror_identical": 1,
+      "nonerror_different": 0,
+      "nonerror_points": 6,
+      "nonerror_lines": -1055
+    },
+    "changes": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+        "added": false,
+        "before_points": 1,
+        "before_lines": 1434,
+        "after": {
+          "points": 7,
+          "lines": 379,
+          "excluded": 4
+        },
+        "byte_equal": false,
+        "xp_blob": "f41bc305fe60cec39e1cd7859c801ef31b859433"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/inc/wow.h",
+        "added": true,
+        "before_points": null,
+        "before_lines": null,
+        "after": {
+          "points": 0,
+          "lines": 0,
+          "excluded": 0
+        },
+        "byte_equal": true,
+        "xp_blob": "d5160a6b8154d14686eaded1719936f8fe7e0722"
+      }
+    ]
+  },
+  "original_guest_unchanged": true,
+  "initial_targeted_failures": [
+    "controls/build.log: default fixture missing popup resolver",
+    "controls-retry/build.log: navigation resolver and native test-window management macros; no fixtures executed; test-only repairs, product unchanged"
+  ],
+  "full_checkpoint": "P91 runtime107 Full; eleven completed files since P82, including two paired headers/owners; reset after delivery",
+  "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89"
+}

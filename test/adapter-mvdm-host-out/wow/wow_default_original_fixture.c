@@ -6,6 +6,8 @@
 /* Restored sibling traversal is outside this fixture; never fake success. */
 DWORD WINAPI GetAppCompatFlags(PWOW_CLIENT_THREADINFO thread)
 { (void)thread; fputs("Unexpected GetAppCompatFlags boundary\n", stderr); abort(); }
+PWND WINAPI wow_window_client_validate_window_no_rip(HWND window)
+{ (void)window; fputs("Unexpected popup resolver boundary\n", stderr); abort(); }
 #include <string.h>
 #include <wchar.h>
 LONG WINAPI wow_original_default_window_proc(PWND, UINT, WPARAM, LPARAM, DWORD);

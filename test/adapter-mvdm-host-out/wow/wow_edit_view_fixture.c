@@ -1,6 +1,9 @@
 #include "edit-view/precomp.h"
 #include <stdio.h>
 #include <stdlib.h>
+/* Test-owned native window setup/cleanup, outside the product call scope. */
+#undef EnableWindow
+#undef DestroyWindow
 
 /* Compile the three actual OPENNT-HOST-078 units with the isolated
  * edit-view precomp and /Gz. Synthetic WND relationships are supplemental;
@@ -22,6 +25,58 @@ int WINAPI GetWindowBorders(LONG style, DWORD ex, BOOL window, BOOL client)
 PWND WINAPI view_fixture_validate(HWND hwnd)
 {
     return hwnd == (HWND)(ULONG_PTR)1 ? &leaf : NULL;
+}
+
+PWND _GetWindow(PWND, UINT);
+UINT _GetMenuState(PMENU, UINT, UINT);
+static HWND popup_handle;
+static WND popup_state;
+static PWND popup_owner;
+PWND WINAPI wow_window_client_validate_window_no_rip(HWND window)
+{
+    if (window && window == popup_handle) return &popup_state;
+    return window && popup_owner && window == popup_owner->head.h ? popup_owner : NULL;
+}
+static void verify_xp_menu_and_popup(void)
+{
+    MENU menu = {0};
+    ITEM item = {0};
+    WND owner = {0};
+    HWND host_owner;
+    menu.head.pSelf = (PBYTE)&menu;
+    menu.cItems = 1;
+    menu.rgItems = &item;
+    item.wID = 42;
+    item.hbmp = (HBITMAP)(ULONG_PTR)1;
+    CHECK((_GetMenuState(&menu, 42, MF_BYCOMMAND) & MF_BITMAP) != 0);
+    item.lpstr = L"named";
+    CHECK((_GetMenuState(&menu, 42, MF_BYCOMMAND) & MF_BITMAP) == 0);
+    CHECK(_GetMenuState(&menu, 99, MF_BYCOMMAND) == (UINT)-1);
+    host_owner = CreateWindowExW(0, L"STATIC", L"XP popup owner", WS_OVERLAPPED,
+        0, 0, 20, 20, NULL, NULL, GetModuleHandleW(NULL), NULL);
+    CHECK(host_owner != NULL);
+    if (!host_owner) return;
+    popup_handle = CreateWindowExW(0, L"STATIC", L"XP owned popup", WS_POPUP,
+        0, 0, 10, 10, host_owner, NULL, GetModuleHandleW(NULL), NULL);
+    CHECK(popup_handle != NULL);
+    owner.head.pSelf = (PBYTE)&owner;
+    owner.head.h = host_owner;
+    popup_owner = &owner;
+    popup_state.head.pSelf = (PBYTE)&popup_state;
+    popup_state.head.h = popup_handle;
+    if (popup_handle) {
+        HWND selected = GetWindow(host_owner, GW_ENABLEDPOPUP);
+        CHECK(_GetWindow(&owner, GW_ENABLEDPOPUP) ==
+            wow_window_client_validate_window_no_rip(selected));
+        EnableWindow(popup_handle, FALSE);
+        selected = GetWindow(host_owner, GW_ENABLEDPOPUP);
+        CHECK(_GetWindow(&owner, GW_ENABLEDPOPUP) ==
+            wow_window_client_validate_window_no_rip(selected));
+        DestroyWindow(popup_handle);
+        popup_handle = NULL;
+    }
+    DestroyWindow(host_owner);
+    popup_owner = NULL;
 }
 
 int __cdecl main(void)
@@ -96,6 +151,7 @@ int __cdecl main(void)
     SetWF(&leaf, WFWIN40COMPAT);
     _GetClientRect(&leaf, &result);
     CHECK(result.right == 70000 && result.bottom == 90000);
+    verify_xp_menu_and_popup();
     printf("original_edit_view_failures=%u\n", failures);
     return failures != 0;
 }

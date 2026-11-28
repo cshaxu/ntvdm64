@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall60/159 directories, H001-H036 and N001-N024. S15 runtime106 is the current published and verified package.
+overall61/159 directories, H001-H036 and N001-N025. S15 runtime107 is the current published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-12/14 directories delivered. P1 N013 and P2 N014 completed; directory50
+13/14 directories delivered. P1 N013 and P2 N014 completed; directory50
 Full24/24 passed. [P3 N015](../etc/evidence/t485-s1/n015.md),
 [P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md),
 [P5 packing/SMB](../etc/evidence/t485-s1/n016-packing-smb.md) and
@@ -200,11 +200,12 @@ Census1338/798/809/529/8148/51728; delta+6/+6/+6/0/+104/-9917;1328XP/10OpenNT.
 N0249/9, S15 12/14, overall60/159; Full counter reset. Next N025.
 P82 delivery records are complete; next N025. No S/T closure.
 
-[P90 N025](../etc/evidence/t485-s1/n025.md): runtime106 cached full build,
-dual publication26hash, native40/40 and real Win16 controls pass. N0259/10;
-S15 12/14, overall60/159. Census1339/800/811/528/8184/46985;1337XP/2OpenNT.
-Nine completed files since P82 Full (including paired client owner).
-Next wow.c, then ten-file Full. No S/T closure.
+[P91 N025](../etc/evidence/t485-s1/n025.md): runtime107 cached full build,
+dual publication26hash, native40/40, real Win16 controls and Full24/24 pass.
+N02510/10; S15 13/14, overall61/159. Census1340/801/812/528/8190/45930;
+1339XP/1OpenNT. Full counter resets after eleven completed files since P82,
+including the paired getset owner and original wow.h. Next N026.
+No S/T closure.
 
 ## S14 Closure Record
 

@@ -39,6 +39,9 @@ DWORD WINAPI wow_window_client_context_help(PWND state)
     return 0;
 }
 #define CHECK(x) do { if (!(x)) { printf("FAIL navigation line %d\n", __LINE__); ++failures; } } while (0)
+/* Popup dispatch is covered by edit-view, not this synthetic graph. */
+PWND WINAPI wow_window_client_validate_window_no_rip(HWND window)
+{ (void)window; CHECK(0); return NULL; }
 PWND WINAPI wow_window_client_validate_window(HWND window)
 {
     PWND nodes[] = {&root, &first, &container, &nested, &last};

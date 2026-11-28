@@ -105,6 +105,11 @@ C_ASSERT(SHOW_OPENWINDOW == SW_SHOWNORMAL);
 /* Bind the original symbolic operation, never its NT4 dispatch number. */
 #define SFI_XXXSETDIALOGSYSTEMMENU wow_dialog_set_system_menu
 #define NtUserCallHwndLock(window, service) service(window)
+/* XP enabled-popup service: native HWND query, then the existing retained
+ * window validator. Never reinterpret a native HWND as a private PWND. */
+#define SFI_DWP_GETENABLEDPOPUP(window) \
+    wow_window_client_validate_window_no_rip(GetWindow((window), GW_ENABLEDPOPUP))
+#define NtUserCallHwnd(window, service) service(window)
 #define SFI_ZAPACTIVEANDFOCUS wow_dialog_zap_active_and_focus
 #define SFI_SETDIALOGPOINTER wow_dialog_set_pointer_word
 #define SFI__RESETDBLCLK wow_list_reset_double_click
