@@ -2245,3 +2245,5 @@ post-publication targeted checks.
 - [S15 P64 client ntstubs review](evidence/t485-s1/n022-ntstubs-review.md).
 
 - [S15 P65 USER resources](evidence/t485-s1/n022-res.md).
+
+- [S15 P66 capture and lookaside](evidence/t485-s1/n022-rtlinit.md).

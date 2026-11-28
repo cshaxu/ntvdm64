@@ -6,7 +6,7 @@
 struct _IN_STRING;
 struct _LARGE_IN_STRING;
 
-BOOL WINAPI RtlCaptureLargeAnsiString(struct _LARGE_IN_STRING *, LPCSTR, UINT, BOOL);
+BOOL WINAPI RtlCaptureLargeAnsiString(struct _LARGE_IN_STRING *, LPCSTR, BOOL);
 
 /* Original ntpsapi.h constant. Reuse existing opennt_support_current_teb's
  * scratch descriptor; never read or overwrite the modern Windows TEB. */
@@ -16,6 +16,8 @@ BOOL WINAPI RtlCaptureLargeAnsiString(struct _LARGE_IN_STRING *, LPCSTR, UINT, B
 #ifndef MAXUSHORT
 #define MAXUSHORT 0xffff
 #endif
+/* XP w32wow64.h: x86 host, not BUILD_WOW6432. */
+#define KPWSTR_TO_PWSTR(p) (p)
 #define RtlAllocateHeap HeapAlloc
 #define RtlFreeHeap HeapFree
 #define RIPMSG0(level, text) ((void)0)

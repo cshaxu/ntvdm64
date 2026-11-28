@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: rtlinit.c
 *
-* Copyright (c) 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains all the init code for the USERRTL.DLL.  When the DLL is
 * dynlinked its initialization procedure (UserRtlDllInitialize) is called by
@@ -16,15 +16,6 @@
 #include "nt.h"
 #include "wow_edit_lookaside_bindings.h"
 #include "wow_user_capture_bindings.h"
-
-/* Scoped class-name adapter: original capture owns conversion and allocation. */
-BOOL WINAPI wow_original_class_capture(LPCSTR source, PUNICODE_STRING output)
-{
-    IN_STRING captured = {0};
-    if (!RtlCaptureAnsiString(&captured, source, TRUE)) return FALSE;
-    *output = *captured.pstr;
-    return TRUE;
-}
 #line 17
 #pragma hdrstop
 #line 19
@@ -62,7 +53,7 @@ BOOL RtlCaptureAnsiString(
          */
         if (fForceAlloc ||
                 cbSrc > (STATIC_UNICODE_BUFFER_LENGTH / sizeof(WCHAR))) {
-            pstr->strCapture.Buffer = RtlAllocateHeap(RtlProcessHeap(),
+            pstr->strCapture.Buffer = RtlAllocateHeap(pUserHeap,
                     0, cbSrc * sizeof(WCHAR));
             if (pstr->strCapture.Buffer == NULL)
                 return FALSE;
@@ -81,7 +72,7 @@ BOOL RtlCaptureAnsiString(
                 (LPSTR)psz, cbSrc)) {
             RIPMSG0(RIP_WARNING, "Unicode conversion failed");
             if (pstr->fAllocated) {
-                RtlFreeHeap(RtlProcessHeap(), 0, pstr->strCapture.Buffer);
+                RtlFreeHeap(pUserHeap, 0, pstr->strCapture.Buffer);
                 pstr->fAllocated = FALSE;
             }
             return FALSE;
@@ -107,13 +98,13 @@ BOOL RtlCaptureAnsiString(
 BOOL RtlCaptureLargeAnsiString(
     PLARGE_IN_STRING plstr,
     LPCSTR psz,
-    UINT cchLimit,
     BOOL fForceAlloc)
 {
     int cchSrc;
     UINT uLength;
 
     plstr->fAllocated = FALSE;
+    plstr->strCapture.bAnsi = FALSE;
     plstr->pstr = &plstr->strCapture;
 
     if (psz) {
@@ -125,7 +116,7 @@ BOOL RtlCaptureLargeAnsiString(
          * Otherwise, store the result in the TEB.
          */
         if (fForceAlloc || cchSrc > STATIC_UNICODE_BUFFER_LENGTH) {
-            plstr->strCapture.Buffer = RtlAllocateHeap(RtlProcessHeap(),
+            plstr->strCapture.Buffer = RtlAllocateHeap(pUserHeap,
                     0, cchSrc * sizeof(WCHAR));
             if (plstr->strCapture.Buffer == NULL)
                 return FALSE;
@@ -140,12 +131,12 @@ BOOL RtlCaptureLargeAnsiString(
         /*
          * Convert the string to Unicode
          */
-        if (RtlMultiByteToUnicodeN(plstr->pstr->Buffer,
+        if (RtlMultiByteToUnicodeN(KPWSTR_TO_PWSTR(plstr->pstr->Buffer),
                 plstr->pstr->MaximumLength, &uLength,
                 (LPSTR)psz, cchSrc)) {
             RIPMSG0(RIP_WARNING, "Unicode conversion failed");
             if (plstr->fAllocated) {
-                RtlFreeHeap(RtlProcessHeap(), 0, plstr->strCapture.Buffer);
+                RtlFreeHeap(pUserHeap, 0, KPWSTR_TO_PWSTR(plstr->strCapture.Buffer));
                 plstr->fAllocated = FALSE;
             }
             return FALSE;
@@ -328,22 +319,18 @@ PVOID AllocLookasideEntry(
         /*
          * Allocate a local structure.
          */
-#line 319
 #if DBG
-#error
+#error DIVERGENCE: original configuration not selected.
 #line 321
 #endif // DBG
-#line 322
         if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)
             return NULL;
         }
     RtlZeroMemory(pEntry, pla->EntrySize);
-#line 326
 #if DBG
-#error
+#error DIVERGENCE: original configuration not selected.
 #line 332
 #endif // DBG
-#line 333
 
     return pEntry;
 }
@@ -360,12 +347,10 @@ void FreeLookasideEntry(
     PLOOKASIDE pla,
     PVOID pEntry)
 {
-#line 349
 #if DBG
-#error
+#error DIVERGENCE: original configuration not selected.
 #line 351
 #endif // DBG
-#line 352
 
     //
     // If the pEntry was from zone, then free to zone
@@ -375,12 +360,10 @@ void FreeLookasideEntry(
         FreeToZone(&pla->LookasideZone,pEntry);
         RtlLeaveCriticalSection(&gcsLookaside);
     } else {
-#line 361
 #if DBG
-#error
+#error DIVERGENCE: original configuration not selected.
 #line 363
 #endif // DBG
-#line 364
         UserLocalFree(pEntry);
     }
 }

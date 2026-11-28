@@ -30,3 +30,12 @@ RegisterClassWOWA(
 
     return RegisterClassExWOWA(&wc, pdwWOWstuff, NULL, 0);
 }
+
+/* Scoped class-name adapter: original capture owns conversion and allocation. */
+BOOL WINAPI wow_original_class_capture(LPCSTR source, PUNICODE_STRING output)
+{
+    IN_STRING captured = {0};
+    if (!RtlCaptureAnsiString(&captured, source, TRUE)) return FALSE;
+    *output = *captured.pstr;
+    return TRUE;
+}
