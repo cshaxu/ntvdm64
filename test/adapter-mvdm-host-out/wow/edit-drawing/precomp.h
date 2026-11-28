@@ -37,4 +37,18 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 #define ghbrBlack ((HBRUSH)GetStockObject(BLACK_BRUSH))
 #define UserTextOutW TextOutW
 BOOL WINAPI GetSignFromMappingMode(HDC, PPOINT);
+/* XP drawing names retain the same fixture-owned metric/color resources. */
+#undef SYSMETRTL
+#define SYSMETRTL(index) drawing_fixture_##index
+#undef SYSRGBRTL
+#define SYSRGBRTL(index) drawing_colors[COLOR_##index]
+#undef SYSHBRUSH
+#define SYSHBRUSH(index) ahbrSystem[index]
+#define UserGetLayout GetLayout
+#define UserSetGraphicsMode SetGraphicsMode
+#define UserGetTextAlign GetTextAlign
+#define UserSetTextAlign SetTextAlign
+#define UserAssert(condition) ((void)0)
+/* XP windows/published/winuser.w:2998. */
+#define DFCS_CAPTIONALL 0x000F
 #endif

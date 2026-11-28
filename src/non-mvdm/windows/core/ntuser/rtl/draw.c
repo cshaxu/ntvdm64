@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: draw.c
 *
-* Copyright (c) 1985-1996, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains common drawing functions.
 *
@@ -12,15 +12,46 @@
 #line 11
 
 
-WCHAR szRadio[] = L"nmlkji";
-WCHAR szCheck[] = L"gfedcb";
+CONST WCHAR szRadio[] = L"nmlkji";
+CONST WCHAR szCheck[] = L"gfedcb";
 
-#define DrawClose(hdc, lprc, wState)    DrawIt(hdc, lprc, wState, TEXT('r'))
-#define DrawHelp(hdc, lprc, wState)     DrawIt(hdc, lprc, wState, TEXT('s'))
+/***************************************************************************\
+* FlipUserTextOutW
+*
+* Flip the check mark if the hdc is mirrored otherwise it just calls UserTextOutW
+*
+\***************************************************************************/
+BOOL FlipUserTextOutW(HDC hdc, int x, int y, LPCWSTR ch, int nCount)
+{
+    BOOL bRet;
+    int iOldTextAlign, iGraphicsModeOld;
 
+    if ((UserGetLayout(hdc) & LAYOUT_RTL) &&
+        (nCount == 1) &&
+        ((ch[0] == TEXT('a')) ||(ch[0] == TEXT('b')))
+       )
+    {
+        bRet = FALSE;
 
-#line 75
+        //Check mark then set the hdc in GM_COMPATIBLE to unmirror it.
+        if (iGraphicsModeOld = UserSetGraphicsMode(hdc, GM_COMPATIBLE))
+        {
+            iOldTextAlign = UserGetTextAlign(hdc);
+            if ((iOldTextAlign & TA_CENTER) != TA_CENTER)
+            {
+                UserSetTextAlign(hdc, iOldTextAlign^TA_RIGHT);
+            }
+            bRet = UserTextOutW(hdc, x, y, ch, nCount);
+            UserSetGraphicsMode(hdc, iGraphicsModeOld);
+            UserSetTextAlign(hdc, iOldTextAlign);
+        }
+    } else {
+        bRet = UserTextOutW(hdc, x, y, ch, nCount);
+    }
 
+    return bRet;
+}
+#line 108
 /***************************************************************************\
 * DrawDiagonalLine
 *
@@ -56,13 +87,13 @@ DWORD DrawDiagonalLine(
     --iThickness;
 
     /*
-     * HACK HACK HACK. REMOVE THIS ONCE MARLETT IS AROUND
+     * See WinBug #139374
      */
     cy = rc.bottom - rc.top;
     cx = rc.right - rc.left;
 
     if (!flags && (cy != cx))
-        cy -= iThickness * SYSMET(CYBORDER);
+        cy -= iThickness * SYSMETRTL(CYBORDER);
 
     if (cy >= cx) {
 
@@ -72,7 +103,7 @@ DWORD DrawDiagonalLine(
         cy /= cx;
         pc = &cy;
 
-        cx = SYSMET(CXBORDER);
+        cx = SYSMETRTL(CXBORDER);
 
     } else {
 
@@ -82,13 +113,13 @@ DWORD DrawDiagonalLine(
         cx /= cy;
         pc = &cx;
 
-        cy = SYSMET(CYBORDER);
+        cy = SYSMETRTL(CYBORDER);
     }
 
     dx = cx;
     dy = iDirection * cy;
 
-    *pc = (*pc + iThickness) * SYSMET(CYBORDER);
+    *pc = (*pc + iThickness) * SYSMETRTL(CYBORDER);
 
     rc.right  -= cx;
     rc.bottom -= cy;
@@ -120,7 +151,7 @@ DWORD DrawDiagonalLine(
              * Fill interior.  We can determine vertex in interior
              * by vector define.
              */
-            if (cy > SYSMET(CYBORDER)) {
+            if (cy > SYSMETRTL(CYBORDER)) {
 
                 if (flags & BF_LEFT) {
 
@@ -215,7 +246,7 @@ DWORD DrawDiagonalLine(
 * History:
 \***************************************************************************/
 
-VOID FillTriangle(
+BOOL FillTriangle(
     HDC    hdc,
     LPRECT lprc,
     HBRUSH hbr,
@@ -235,10 +266,12 @@ VOID FillTriangle(
         nDirection = 1;
         break;
     }
-
     hbrT = UserSelectBrush(hdc, hbr);
     DrawDiagonalLine(hdc, lprc, nDirection, 1, flags);
-    UserSelectBrush(hdc, hbrT);
+    /*
+     * Don't care if the above functions failed for a bad hdc
+     */
+    return (UserSelectBrush(hdc, hbrT) != NULL);
 }
 
 /***************************************************************************\
@@ -256,7 +289,7 @@ VOID FillTriangle(
 * History:
 \***************************************************************************/
 
-VOID DrawDiagonal(
+BOOL DrawDiagonal(
     HDC    hdc,
     LPRECT lprc,
     HBRUSH hbrTL,
@@ -286,8 +319,6 @@ VOID DrawDiagonal(
 
     hbrT = UserSelectBrush(hdc, hbrT);
     dAdjust = DrawDiagonalLine(hdc, lprc, nDirection, 1, (flags & ~BF_MIDDLE));
-    UserSelectBrush(hdc, hbrT);
-
     /*
      * Adjust rectangle for next border
      */
@@ -300,6 +331,11 @@ VOID DrawDiagonal(
         lprc->top += HIWORD(dAdjust);
     else
         lprc->bottom -= HIWORD(dAdjust);
+
+    /*
+     * Moved this to the end to save a check for return value
+     */
+    return (UserSelectBrush(hdc, hbrT) != NULL);
 }
 
 /***************************************************************************\
@@ -331,12 +367,12 @@ BOOL DrawGrip(
      */
     if (wState & (DFCS_FLAT | DFCS_MONO)) {
         hbrOld = SYSHBR(WINDOW);
-        rgbHilight = SYSRGB(WINDOWFRAME);
-        rgbShadow = SYSRGB(WINDOWFRAME);
+        rgbHilight = SYSRGBRTL(WINDOWFRAME);
+        rgbShadow = SYSRGBRTL(WINDOWFRAME);
     } else {
         hbrOld = SYSHBR(3DFACE);
-        rgbHilight = SYSRGB(3DHILIGHT);
-        rgbShadow = SYSRGB(3DSHADOW);
+        rgbHilight = SYSRGBRTL(3DHILIGHT);
+        rgbShadow = SYSRGBRTL(3DSHADOW);
     }
 
     PolyData.x         = lprc->left;
@@ -347,9 +383,16 @@ BOOL DrawGrip(
     UserPolyPatBlt(hdc, PATCOPY, &PolyData, 1, PPB_BRUSH);
 
     rgbOld = UserSetTextColor(hdc, rgbHilight);
-    UserTextOutW(hdc, x, y, L"o", 1);
-    UserSetTextColor(hdc, rgbShadow);
-    UserTextOutW(hdc, x, y, L"p", 1);
+
+    if (wState & DFCS_SCROLLSIZEGRIPRIGHT) {
+        UserTextOutW(hdc, x, y, L"x", 1);
+        UserSetTextColor(hdc, rgbShadow);
+        UserTextOutW(hdc, x, y, L"y", 1);
+    } else {
+        UserTextOutW(hdc, x, y, L"o", 1);
+        UserSetTextColor(hdc, rgbShadow);
+        UserTextOutW(hdc, x, y, L"p", 1);
+    }
 
     UserSetTextColor(hdc, rgbOld);
     return TRUE;
@@ -394,20 +437,21 @@ BOOL DrawBox(
          * DFCS_BUTTONRADIOIMAGE
          */
         if (wControlState & (DFCS_MONO | DFCS_FLAT)) {
-            clr[1] = clr[2] = clr[3] = clr[4] = SYSRGB(WINDOWFRAME);
+            clr[1] = clr[2] = clr[3] = clr[4] = SYSRGBRTL(WINDOWFRAME);
         } else {
-            clr[1] = SYSRGB(3DLIGHT);
-            clr[2] = SYSRGB(3DDKSHADOW);
-            clr[3] = SYSRGB(3DHILIGHT);
-            clr[4] = SYSRGB(3DSHADOW);
+            clr[1] = SYSRGBRTL(3DLIGHT);
+            clr[2] = SYSRGBRTL(3DDKSHADOW);
+            clr[3] = SYSRGBRTL(3DHILIGHT);
+            clr[4] = SYSRGBRTL(3DSHADOW);
         }
 
+
         if (wControlState & (DFCS_PUSHED | DFCS_INACTIVE))
-            clr[0] = SYSRGB(3DFACE);
+            clr[0] = SYSRGBRTL(3DFACE);
         else if (fSkip0thItem)
-            clr[0] = SYSRGB(3DHILIGHT);
+            clr[0] = SYSRGBRTL(3DHILIGHT);
         else
-            clr[0] = SYSRGB(WINDOW);
+            clr[0] = SYSRGBRTL(WINDOW);
 
         if (wControlState & DFCS_BUTTONRADIOIMAGE)
             FillRect(hdc, lprc, ghbrBlack);
@@ -428,21 +472,21 @@ BOOL DrawBox(
         COLORREF   clrBk;
         POLYPATBLT PolyData;
 
-        /*
-         * Make the interior of a 3State checkbox which is just checked a
-         * dither, just like an indeterminate push button which is pressed.
-         */
-        clrBk  = UserSetBkColor(hdc, SYSRGB(3DHILIGHT));
-        clrOld = UserSetTextColor(hdc, SYSRGB(3DFACE));
+         /*
+          * Make the interior of a 3State checkbox which is just checked a
+          * dither, just like an indeterminate push button which is pressed.
+          */
+         clrBk  = UserSetBkColor(hdc, SYSRGB(3DHILIGHT));
+         clrOld = UserSetTextColor(hdc, SYSRGB(3DFACE));
 
-        PolyData.x         = x;
-        PolyData.y         = y;
-        PolyData.cx        = cx;
-        PolyData.cy        = cy;
-        PolyData.BrClr.hbr = ghbrGray;
-        UserPolyPatBlt(hdc, PATCOPY, &PolyData, 1, PPB_BRUSH);
+         PolyData.x         = x;
+         PolyData.y         = y;
+         PolyData.cx        = cx;
+         PolyData.cy        = cy;
+         PolyData.BrClr.hbr = ghbrGray;
+         UserPolyPatBlt(hdc, PATCOPY, &PolyData, 1, PPB_BRUSH);
 
-        UserSetBkColor(hdc, clrBk);
+         UserSetBkColor(hdc, clrBk);
 
     } else {
         clrOld = UserSetTextColor(hdc, clr[0]);
@@ -457,15 +501,47 @@ BOOL DrawBox(
     }
 
     if (wControlState & DFCS_CHECKED) {
-        UserSetTextColor(hdc, (wControlState & (DFCS_BUTTON3STATE | DFCS_INACTIVE)) ? SYSRGB(3DSHADOW) : SYSRGB(WINDOWTEXT));
-        UserTextOutW(hdc, x, y, lp, 1);
+        COLORREF clrCheck;
+
+        if (wControlState & (DFCS_BUTTON3STATE | DFCS_INACTIVE)) {
+            clrCheck = SYSRGBRTL(3DSHADOW);
+        } else if (wControlState & DFCS_HOT) {
+            clrCheck = SYSRGBRTL(HOTLIGHT);
+        } else {
+            clrCheck = SYSRGBRTL(WINDOWTEXT);
+        }
+
+        UserSetTextColor(hdc, clrCheck);
+        FlipUserTextOutW(hdc, x, y, lp, 1);
     }
 
     UserSetTextColor(hdc, clrOld);
 
     return TRUE;
 }
-
+/***************************************************************************\
+* GetCaptionChar
+*
+* History:
+* 04/02/97 GerardoB Created
+\***************************************************************************/
+WCHAR GetCaptionChar (UINT wState)
+{
+    wState &= DFCS_CAPTIONALL;
+    switch (wState) {
+    case DFCS_CAPTIONCLOSE:
+        return TEXT('r');
+    case DFCS_CAPTIONMIN:
+        return TEXT('0');
+    case DFCS_CAPTIONMAX:
+        return TEXT('1');
+    case DFCS_CAPTIONRESTORE:
+        return TEXT('2');
+    /* case DFCS_CAPTIONHELP: */
+    default:
+        return TEXT('s');
+    }
+}
 /***************************************************************************\
 * DrawMenuMark
 *
@@ -475,6 +551,7 @@ BOOL DrawBox(
 BOOL DrawMenuMark(
     HDC    hdc,
     LPRECT lprc,
+    UINT   wType,
     UINT   wState)
 {
     COLORREF rgbOld;
@@ -489,21 +566,29 @@ BOOL DrawMenuMark(
     cy = lprc->bottom - lprc->top;
 
     c = min(cx,cy);
-    x = lprc->left + ((cx - c) / 2) - 1;
+    x = lprc->left + ((cx - c) / 2) - ((cx > 0xb) ? 1 : 0);
     y = lprc->top  + ((cy - c) / 2);
 
     FillRect(hdc, lprc, ghbrWhite);
 
     rgbOld = UserSetTextColor(hdc, 0L);
 
-    if (wState & DFCS_MENUCHECK)
-        ch = TEXT('a');
-    else if (wState & DFCS_MENUBULLET)
-        ch = TEXT('h');
-    else
-        ch = TEXT('8');
+    if (wType == DFC_MENU) {
+        if (wState & DFCS_MENUCHECK) {
+            ch = TEXT('a');
+        } else if (wState & DFCS_MENUBULLET) {
+            ch = TEXT('h');
+        } else if (wState & DFCS_MENUARROWRIGHT) {
+            ch = TEXT('w');
+        } else {
+            ch = TEXT('8');
+        }
+    } else {
+        UserAssert(wType == DFC_POPUPMENU);
+        ch = GetCaptionChar(wState);
+    }
 
-    UserTextOutW(hdc, x, y, &ch, 1);
+    FlipUserTextOutW(hdc, x, y, &ch, 1);
     UserSetTextColor(hdc, rgbOld);
 
     return TRUE;
@@ -521,7 +606,7 @@ BOOL DrawIt(
     UINT   wState,
     WCHAR  ch)
 {
-    COLORREF rgbOld;
+    COLORREF rgb;
     int      x;
     int      y;
     int      c;
@@ -536,7 +621,15 @@ BOOL DrawIt(
     x = lprc->left + ((cx - c) / 2);
     y = lprc->top  + ((cy - c) / 2);
 
-    rgbOld = UserSetTextColor(hdc, fDrawDisabled ? SYSRGB(3DHILIGHT) : SYSRGB(BTNTEXT));
+    if (fDrawDisabled) {
+        rgb = SYSRGBRTL(3DHILIGHT);
+    } else if (wState & DFCS_HOT) {
+        rgb = SYSRGBRTL(HOTLIGHT);
+    } else {
+        rgb = SYSRGBRTL(BTNTEXT);
+    }
+
+    rgb = UserSetTextColor(hdc, rgb);
 
     if (wState & (DFCS_INACTIVE | DFCS_PUSHED)) {
         x++;
@@ -546,30 +639,13 @@ BOOL DrawIt(
     UserTextOutW(hdc, x, y, &ch, 1);
 
     if (fDrawDisabled) {
-        UserSetTextColor(hdc, SYSRGB(3DSHADOW));
+        UserSetTextColor(hdc, SYSRGBRTL(3DSHADOW));
         UserTextOutW(hdc, x - 1, y - 1, &ch, 1);
     }
 
-    UserSetTextColor(hdc, rgbOld);
+    UserSetTextColor(hdc, rgb);
 
     return TRUE;
-}
-
-/***************************************************************************\
-* DrawWindowSize
-*
-* History:
-\***************************************************************************/
-
-BOOL DrawWindowSize(
-    HDC    hdc,
-    LPRECT lprc,
-    UINT   wState)
-{
-    UINT  wRestore = wState & DFCS_CAPTIONRESTORE;
-    WCHAR ch = (wRestore == DFCS_CAPTIONMIN) ? TEXT('0') : ((wRestore == DFCS_CAPTIONMAX) ? TEXT('1') : TEXT('2'));
-
-    return DrawIt(hdc, lprc, wState, ch);
 }
 
 /***************************************************************************\
@@ -591,15 +667,8 @@ BOOL DrawScrollArrow(
     return DrawIt(hdc, lprc, wControlState, ch);
 }
 
-#line 680
-#ifdef WINDOWS_ME
-#error
-#line 683
-#else
-#line 685
-#endif
-#line 984
 
+#line 1149
 /***************************************************************************\
 * DrawPushButton
 *
@@ -652,10 +721,10 @@ VOID DrawPushButton(
 
     if (state & DFCS_CHECKED) {
 
-        if ((oemInfo.BitCount < 8) || (SYSRGB(3DHILIGHT) == RGB(255,255,255))) {
-            hbrMiddle = ghbrGray;
-            rgbBack = UserSetBkColor(hdc, SYSRGB(3DHILIGHT));
-            rgbFore = UserSetTextColor(hdc, SYSRGB(3DFACE));
+        if ((oemInfo.BitCount < 8) || (SYSRGBRTL(3DHILIGHT) == RGB(255,255,255))) {
+            hbrMiddle = KHBRUSH_TO_HBRUSH(ghbrGray);
+            rgbBack = UserSetBkColor(hdc, SYSRGBRTL(3DHILIGHT));
+            rgbFore = UserSetTextColor(hdc, SYSRGBRTL(3DFACE));
             fDither = TRUE;
         } else {
             hbrMiddle = SYSHBR(3DHILIGHT);
@@ -701,8 +770,8 @@ BOOL DrawFrame(
     x = prc->left;
     y = prc->top;
 
-    cxWidth = SYSMET(CXBORDER) * clFrame;
-    cyWidth = SYSMET(CYBORDER) * clFrame;
+    cxWidth = SYSMETRTL(CXBORDER) * clFrame;
+    cyWidth = SYSMETRTL(CYBORDER) * clFrame;
 
     cx = prc->right - x - cxWidth;
     cy = prc->bottom - y - cyWidth;
@@ -710,9 +779,10 @@ BOOL DrawFrame(
     rop = ((cmd & DF_ROPMASK) ? PATINVERT : PATCOPY);
 
     if ((cmd & DF_HBRMASK) == DF_GRAY) {
-        hbrSave = ghbrGray;
+        hbrSave = KHBRUSH_TO_HBRUSH(ghbrGray);
     } else {
-        hbrSave = ahbrSystem[(cmd & DF_HBRMASK) >> 3];
+        UserAssert(((cmd & DF_HBRMASK) >> 3) < COLOR_MAX);
+        hbrSave = SYSHBRUSH((cmd & DF_HBRMASK) >> 3);
     }
 
     PolyData[0].x         = x;
@@ -782,7 +852,6 @@ BOOL GetSignFromMappingMode (
 * 19-Jan-1993 MikeKe    Created
 \***************************************************************************/
 
-#line 1332
 BOOL ClientFrame(
     HDC     hDC,
     LPCRECT pRect,

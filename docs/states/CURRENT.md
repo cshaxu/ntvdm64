@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall60/159 directories, H001-H036 and N001-N024. S15 runtime99 is the current published and verified package.
+overall60/159 directories, H001-H036 and N001-N024. S15 runtime100 is the current published and verified package.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -200,11 +200,12 @@ Census1338/798/809/529/8148/51728; delta+6/+6/+6/0/+104/-9917;1328XP/10OpenNT.
 N0249/9, S15 12/14, overall60/159; Full counter reset. Next N025.
 P82 delivery records are complete; next N025. No S/T closure.
 
-[P83 N025 chartran](../etc/evidence/t485-s1/n025.md) verified runtime99:
-cached full build, dual26hash, native controls40/40 and real Win16 controls pass.
-Census1338/798/809/529/8160/50720; delta0/0/0/0/+12/-1008;1329XP/9OpenNT.
-N0252/10 includes prior drawtext prerequisite; overall60/159, S15 12/14.
-One completed file since P82 Full. Next draw.c; no S/T closure.
+[P83/P84 N025](../etc/evidence/t485-s1/n025.md) migrate chartran and draw.
+Runtime100 cached full build, dual26hash, controls40/40 and genuine Win16 controls
+pass. Native USER32 drawing imports confirmed from the final published WOW32.
+Census1338/798/809/529/8166/49127; P84delta0/0/0/0/+6/-1593;1330XP/8OpenNT.
+N0253/10 includes prior drawtext; overall60/159, S15 12/14. Two files since
+P82 Full. Next ordered drawtext review, then getset; no S/T closure.
 
 ## S14 Closure Record
 

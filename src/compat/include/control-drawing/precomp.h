@@ -90,4 +90,14 @@ VOID WINAPI DrawPushButton(HDC, LPRECT, UINT, UINT);
 int WINAPI wow_original_DrawTextExW(HDC, LPWSTR, int, LPRECT, UINT, LPDRAWTEXTPARAMS);
 #define GdiGetCodePage wow_edit_native_GdiGetCodePage
 #define GdiValidateHandle wow_edit_native_GdiValidateHandle
+/* XP rtl/draw.c retains its geometry; native USER/GDI own metrics/resources. */
+#undef SYSMETRTL
+#define SYSMETRTL(index) GetSystemMetrics(SM_##index)
+#undef SYSRGBRTL
+#define SYSRGBRTL(index) GetSysColor(COLOR_##index)
+#undef SYSHBRUSH
+#define SYSHBRUSH(index) wow_edit_system_brushes[index]
+#define UserSetGraphicsMode SetGraphicsMode
+/* XP windows/published/winuser.w:2998; private caption selector mask. */
+#define DFCS_CAPTIONALL 0x000F
 #endif
