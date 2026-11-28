@@ -1,7 +1,7 @@
 /**************************** Module Header ********************************\
 * Module Name: lboxrare.c
 *
-* Copyright 1985-95, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * Infrequently Used List Box Routines
 *
@@ -99,7 +99,11 @@ LONG xxxLBCreate(
             plb->fVertBar = plb->fHorzBar = TRUE;
     }
 
+    plb->fRtoLReading = (TestWF(pwnd, WEFRTLREADING) != 0);
+    plb->fRightAlign  = (TestWF(pwnd, WEFRIGHT) != 0);
     plb->fDisableNoScroll = ((style & LBS_DISABLENOSCROLL) != 0);
+
+    plb->fSmoothScroll = TRUE;
 
     /*
      * LBS_NOSEL gets priority over any other selection style.  Next highest
@@ -129,13 +133,6 @@ LONG xxxLBCreate(
     plb->iLastSelection = -1;
     plb->iMouseDown = -1;  /* Anchor point for multi selection */
     plb->iLastMouseMove = -1;
-
-#line 133
-#ifdef NEVER
-#line 134
-#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
-#endif
-#line 136
 
     /*
      * Get ownerdraw style bits
@@ -256,7 +253,7 @@ LONG xxxLBCreate(
          * that we don't care about an item's width for listboxes.
          */
         measureItemStruct.CtlType = ODT_LISTBOX;
-        measureItemStruct.CtlID = (UINT)pwnd->spmenu;
+        measureItemStruct.CtlID = PtrToUlong(pwnd->spmenu);
 
         /*
          * System font height is default height
@@ -272,7 +269,7 @@ LONG xxxLBCreate(
         ThreadLock(plb->spwndParent, &tlpwndParent);
         SendMessage(HW(plb->spwndParent), WM_MEASUREITEM,
                 measureItemStruct.CtlID,
-                (LONG)&measureItemStruct);
+                (LPARAM)&measureItemStruct);
         ThreadUnlock(&tlpwndParent);
 
         /*
@@ -324,7 +321,9 @@ LONG xxxLBCreate(
              lpcs->cy + SYSMET(CYEDGE),
              FALSE);
         plb->fIgnoreSizeMsg = FALSE;
-    } else if (!plb->fNoIntegralHeight) {
+    }
+
+    if (!plb->fNoIntegralHeight) {
 
         /*
          * Send a message to ourselves to resize the listbox to an integral
@@ -425,7 +424,7 @@ void xxxDestroyLBox(
     pwndParent = REBASEPWND(pwnd, spwndParent);
     if (pwndParent && GETFNID(pwndParent) == FNID_COMBOBOX) {
         ComboBoxWndProcWorker(pwndParent, WM_PARENTNOTIFY,
-                MAKELONG(WM_DESTROY, pwnd->spmenu), (LONG)HWq(pwnd), FALSE);
+                MAKELONG(WM_DESTROY, PTR_TO_ID(pwnd->spmenu)), (LPARAM)HWq(pwnd), FALSE);
     }
 }
 
@@ -524,9 +523,9 @@ void xxxLBSize(
     CheckLock(plb->spwnd);
 
     if (!plb->fNoIntegralHeight) {
-        int cBdrs = GetWindowBorders(plb->spwnd->style, plb->spwnd->dwExStyle, TRUE, TRUE);
+        int cBdrs = GetWindowBorders(plb->spwnd->style, plb->spwnd->ExStyle, TRUE, TRUE);
 
-        CopyInflateRect(&rc, &plb->spwnd->rcWindow, 0, -cBdrs * SYSMET(CYBORDER));
+        CopyInflateRect(&rc, KPRECT_TO_PRECT(&plb->spwnd->rcWindow), 0, -cBdrs * SYSMET(CYBORDER));
 
         // Size the listbox to fit an integral # of items in its client
         if ((rc.bottom - rc.top) % plb->cyChar) {
@@ -603,8 +602,7 @@ void xxxLBSize(
          * the posted WM_SIZE message when we are created which would otherwise
          * cause us to flash.
          */
-        if ((plb->fMultiColumn &&
-                !(TestWF(plb->spwnd, WFWIN31COMPAT) && cx == 0 && cy == 0)) ||
+        if ((plb->fMultiColumn && !(cx == 0 && cy == 0)) ||
                 plb->iTop != iTopOld)
             NtUserInvalidateRect(HWq(plb->spwnd), NULL, TRUE);
         else if (plb->iSelBase >= 0) {
@@ -697,9 +695,8 @@ BOOL LBSetTabStops(
          * associated with the tab stop list.
          */
         if (plb->iTabPixelPositions != NULL) {
-            if (UserLocalFree((HANDLE)plb->iTabPixelPositions))
-#line 698
-                plb->iTabPixelPositions = NULL;
+            UserLocalFree((HANDLE)plb->iTabPixelPositions);
+            plb->iTabPixelPositions = NULL;
         }
     }
 
@@ -813,7 +810,6 @@ int LBGetSetItemHeightHandler(
     return(0);
 }
 
-#line 813
 /*****************************************************************************\
 *
 * LBEvent()

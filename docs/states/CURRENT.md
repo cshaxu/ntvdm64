@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime68 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime69 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -181,21 +181,11 @@ runtime60 with exact XP source and Full24/24. Its receipt retains provider
 binding, initial failure, final package/tests and complete mirror census.
 P51 is the current ten-file Full checkpoint.
 
-[P52 multiline auxiliary operations](../etc/evidence/t485-s1/n022-edmlrare.md)
-delivered runtime61; original algorithms, paired ABI, package/tests and
-complete census are retained in its receipt.
-
-[P53 single-line auxiliary operations](../etc/evidence/t485-s1/n022-edslrare.md)
-delivered runtime62; its receipt retains original identity, ABI, targeted
-verification and complete mirror census.
-
-[P54 USER global declarations](../etc/evidence/t485-s1/n022-globals-h.md)
-delivered runtime63; original ABI, package, targeted results and census remain
-in its receipt. No original guest change.
-
-[P55 DDE data handles](../etc/evidence/t485-s1/n022-hdata.md) delivered runtime64;
-its receipt retains the original subset, ABI, package/tests and mirror census.
-Four completed mirrors since P51 Full24/24. No guest change or S/T closure.
+[P52](../etc/evidence/t485-s1/n022-edmlrare.md),
+[P53](../etc/evidence/t485-s1/n022-edslrare.md),
+[P54](../etc/evidence/t485-s1/n022-globals-h.md) and
+[P55](../etc/evidence/t485-s1/n022-hdata.md) delivered runtimes61-64;
+linked receipts retain full source, ABI, package, tests and mirror census.
 
 [P56 ListBox dispatch](../etc/evidence/t485-s1/n022-lb1.md) delivered runtime65;
 its receipt retains original layout/allocation/event dependencies, all targeted
@@ -205,12 +195,14 @@ results, paired-header baselines and complete mirror census.
 delivered runtime66; its receipt retains all tests, baseline and census.
 [P58 ListBox interaction](../etc/evidence/t485-s1/n022-lboxctl2.md) delivered
 runtime67; its receipt retains the approved RIT boundary, ABI, all tests and census.
-[P59 multi-column ListBox](../etc/evidence/t485-s1/n022-lboxmult.md) delivers
-runtime68: byte-identical XP body. Cached build, dual13-image26hash, controls40/40,
-CCPU borrow, SOL Options and real Win16 multi-column scrolling pass.
-N02230/39; S15 9/14, overall57/159. Census1329/786/797/532/8072/70667;
-delta0/+1/+1/-1/-1/-222;1297XP/32OpenNT. Eight mirrors since P51 Full24/24.
-No original guest change or S/T closure. Next lboxrare.c.
+[P59 multi-column ListBox](../etc/evidence/t485-s1/n022-lboxmult.md) delivered
+runtime68; its receipt retains byte identity, real multi-column scrolling and census.
+[P60 ListBox auxiliary operations](../etc/evidence/t485-s1/n022-lboxrare.md) delivers
+runtime69: byte-identical XP body. Cached build, dual13-image26hash, controls40/40,
+CCPU borrow, SOL Options and real Win16 tab-stop reset and scrolling pass.
+N02231/39; S15 9/14, overall57/159. Census1329/787/798/531/8067/70627;
+delta0/+1/+1/-1/-5/-40;1298XP/31OpenNT. Nine mirrors since P51 Full24/24.
+No original guest change or S/T closure. Next lboxctl3.c: correct prior next-file omission, then lboxvar.c.
 
 ## S14 Closure Record
 

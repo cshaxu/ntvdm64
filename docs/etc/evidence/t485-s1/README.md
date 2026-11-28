@@ -294,3 +294,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P58 ListBox interaction](n022-lboxctl2.md).
 
 - [S15 P59 multi-column ListBox](n022-lboxmult.md).
+
+- [S15 P60 ListBox auxiliary operations](n022-lboxrare.md).

@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 786,
+    "nonerror_identical": 797,
+    "nonerror_different": 532,
+    "nonerror_points": 8072,
+    "nonerror_lines": 70667
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 787,
+    "nonerror_identical": 798,
+    "nonerror_different": 531,
+    "nonerror_points": 8067,
+    "nonerror_lines": 70627
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": -1,
+    "nonerror_points": -5,
+    "nonerror_lines": -40
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "before_points": 5,
+      "before_lines": 40,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1298,
+    "OpenNT": 31
+  }
+}

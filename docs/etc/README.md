@@ -2233,3 +2233,5 @@ post-publication targeted checks.
 - [S15 P58 ListBox interaction](evidence/t485-s1/n022-lboxctl2.md).
 
 - [S15 P59 multi-column ListBox](evidence/t485-s1/n022-lboxmult.md).
+
+- [S15 P60 ListBox auxiliary operations](evidence/t485-s1/n022-lboxrare.md).
