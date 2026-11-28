@@ -1,0 +1,104 @@
+{
+  "status": "verified-runtime91",
+  "before": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7948,
+    "nonerror_lines": 64273
+  },
+  "after": {
+    "files": 1332,
+    "byte_identical": 792,
+    "nonerror_identical": 803,
+    "nonerror_different": 529,
+    "nonerror_points": 7957,
+    "nonerror_lines": 63392
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 9,
+    "nonerror_lines": -881
+  },
+  "files": [
+    {
+      "path": "src\\mvdm-host\\wow32\\wkman.c",
+      "before_points": 78,
+      "before_lines": 188,
+      "after_points": 77,
+      "after_lines": 186,
+      "baseline": "XP",
+      "blob": "25fed1d6614ac12094077bbae2d9d092fec389bf",
+      "normalized": {
+        "points": 77,
+        "lines": 186,
+        "excluded": 23
+      },
+      "sha256": "782255d751ab4d6982b076b2974eb3a7a5fb7b20b953641f3972d90f2f8d072b"
+    },
+    {
+      "path": "src\\mvdm-host\\wow32\\wuser.c",
+      "before_points": 7,
+      "before_lines": 23,
+      "after_points": 5,
+      "after_lines": 14,
+      "baseline": "XP",
+      "blob": "c016f1ad0d790357df269b5b240d3c67530c8851",
+      "normalized": {
+        "points": 5,
+        "lines": 14,
+        "excluded": 1
+      },
+      "sha256": "7b17fa9563d808907c8f6c577df1427a6dd62b2cb1655a69089c1d06c1064884"
+    },
+    {
+      "path": "src\\non-mvdm\\public\\internal\\windows\\inc\\wowuserp.h",
+      "before_points": 3,
+      "before_lines": 9,
+      "after_points": 2,
+      "after_lines": 7,
+      "baseline": "XP",
+      "blob": "5be3126f26e295b939694fed1db0383bc106009a",
+      "normalized": {
+        "points": 2,
+        "lines": 7,
+        "excluded": 0
+      },
+      "sha256": "71e30a04e4db07f0db4163854b188782e530dbfde7ed481c4575af960c2b399a"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\client\\clglobal.c",
+      "before_points": 8,
+      "before_lines": 162,
+      "after_points": 8,
+      "after_lines": 172,
+      "baseline": "XP",
+      "blob": "6cbb445357c5944f6112900df64c8bb5a9a8c389",
+      "normalized": {
+        "points": 8,
+        "lines": 172,
+        "excluded": 3
+      },
+      "sha256": "67f77d06dfb148b5e156a88bbe77f4de372de54a691dbfda283a4ffdddc45901"
+    },
+    {
+      "path": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\cleanup.c",
+      "before_points": 1,
+      "before_lines": 985,
+      "after_points": 14,
+      "after_lines": 107,
+      "baseline": "XP",
+      "blob": "838700d18570bea632435b911711ba91fb7633fb",
+      "normalized": {
+        "points": 14,
+        "lines": 107,
+        "excluded": 0
+      },
+      "sha256": "79764586336aa3c35c3abea15e8bce06876ff03fb08502b920ffd7f16f1c81ad"
+    }
+  ]
+}

@@ -11,7 +11,7 @@ const wow_cleanup_provider *WINAPI wow_cleanup_provider_current(void)
 
 BOOL WINAPI wow_cleanup_bind(const wow_cleanup_provider *provider)
 {
-    if (!provider || !provider->cleanup ||
+    if (!provider || !provider->cleanup || !provider->module_unload ||
             (cleanup_provider && cleanup_provider != provider)) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
@@ -115,8 +115,7 @@ static BOOL build_tree(wow_user_object_table *table, wow_cleanup_window *root)
     return TRUE;
 }
 
-BOOL WINAPI wow_user_cleanup_bound(HANDLE instance, DWORD task, struct _NE_MODULE_SEG UNALIGNED *selectors,
-    DWORD count, wow_cleanup_context *context)
+BOOL WINAPI wow_user_cleanup_bound(HANDLE instance, DWORD task, wow_cleanup_context *context)
 {
     wow_cleanup_window root={0}, *previous_root;
     wow_user_object_table *objects;
@@ -138,8 +137,9 @@ BOOL WINAPI wow_user_cleanup_bound(HANDLE instance, DWORD task, struct _NE_MODUL
     desktop->spwnd=&root;
     context->object_release_failed=FALSE;
     __try {
-        result=cleanup_provider->cleanup(instance,task,selectors,count,context);
-        if (context->object_release_failed) result=FALSE;
+        if (task) cleanup_provider->cleanup(instance,task,context);
+        else cleanup_provider->module_unload(instance,context);
+        result = !context->object_release_failed;
     } __finally {
         desktop->spwnd=previous_root;
         clear_tree(objects);

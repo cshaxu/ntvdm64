@@ -15,8 +15,8 @@ HWND WINAPI registered_create_window_ex(DWORD ex_style,
     LPVOID param, DWORD flags);
 ATOM WINAPI registered_register_class(PVOID a, LPDWORD b);
 BOOL WINAPI registered_hung_handlers(VOID (APIENTRY *callback)(VOID), HANDLE event);
-BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task,
-    PNEMODULESEG selectors, DWORD count);
+BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task);
+BOOL WINAPI registered_module_unload(HANDLE module);
 DWORD WINAPI registered_full_handle(WORD handle);
 VOID WINAPI registered_directed_yield(DWORD thread_id);
 BOOL WINAPI registered_yield_task(void);

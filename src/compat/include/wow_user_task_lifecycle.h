@@ -13,13 +13,15 @@
 
 struct wow_user_task_lifecycle_thread;
 
-/* The two callbacks are supplied verbatim by WOW32 at the original
- * UserRegisterWowHandlers boundary.  They are retained here only so a later
+/* These callbacks come from the original UserRegisterWowHandlers boundary.
+ * The module adapter removes the original WOW procedure tag before calling
+ * WOW32. They are retained here only so a later
  * InitTask can bind the recovered original class client to the current task;
  * this carrier does not choose a version rule or replace the WOW callback. */
 typedef struct wow_user_task_lifecycle_callbacks {
     DWORD (WINAPI *get_version)(HANDLE);
     wow_window_callback callback;
+    WORD (WINAPI *procedure_module)(DWORD);
 } wow_user_task_lifecycle_callbacks;
 
 /* ADAPTER-WOW-051: one provider-local carrier for the selected original
@@ -80,7 +82,7 @@ DWORD WINAPI wow_user_msg_wait(DWORD, const HANDLE *, BOOL, DWORD, DWORD);
 /* Original pfnWOWCleanup resource operation, including task==0 module calls.
  * The task carrier survives until the runtime's native-thread unbind edge. */
 BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *, HANDLE,
-    DWORD, PNEMODULESEG, DWORD);
+    DWORD);
 /* Quiesced process release, after task/object/application-class retirement.
  * Refuses live ownership instead of discarding it. Native registrations are
  * borrowed and survive release of their project metadata. */

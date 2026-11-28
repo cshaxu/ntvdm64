@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: cleanup.c
 *
-* Copyright (c) 1985-95, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains code used to clean up after a dying thread.
 *
@@ -13,11 +13,6 @@
 #define WOW_ORIGINAL_CLEANUP
 #include "wow_cleanup_bindings.h"
 #include "compat/include/wow_shared_user_abi.h"
-/* Original ClientDied raises a noncontinuable status exception. Use the
- * existing native RTL exception provider at this user-mode boundary. */
-NTSYSAPI VOID NTAPI RtlRaiseStatus(NTSTATUS);
-#define ExRaiseStatus RtlRaiseStatus
-#define STATUS_PORT_DISCONNECTED ((NTSTATUS)0xC0000037L)
 typedef wow_task_order_process *PPROCESSINFO;
 typedef wow_task_order_message *PSMS;
 typedef wow_task_order_entry *PTDB;
@@ -36,7 +31,7 @@ typedef wow_cleanup_process_object *wow_cleanup_pprocobjhead;
 #define WNDPROC_PWND WNDPROC
 #undef gptiCurrent
 #define gptiCurrent (context->thread)
-#define W32GetCurrentProcess() (context->thread->ppi)
+#define PpiCurrent() (context->thread->ppi)
 #define pclsPrivateList classes->pclsPrivateList
 #define pclsPublicList classes->pclsPublicList
 #define pclsNext next
@@ -44,48 +39,35 @@ typedef wow_cleanup_process_object *wow_cleanup_pprocobjhead;
 #define gpsi (context->shared)
 #define gSharedInfo (context->handles)
 #define giheLast (context->last_handle)
-#define xxxSBWndProc (context->scroll_proc)
-#define xxxDesktopWndProc (context->desktop_proc)
-#define xxxMenuWindowProc (context->menu_proc)
-#define xxxSwitchWndProc (context->switch_proc)
+#define gpfnwp (context->shared->restore_procs)
+#define CSF_flags flags
+#define PWCFromPCLS(pcls) ((PWC)(pcls)->adwWOW)
+#define ICLS_BUTTON 0
+#define ICLS_MAX 23
+#define UserAssert(value) ((void)0)
 #define TestWF(window, flag) ((window)->serverSideProc)
 #define HANDLEF_DESTROY 0x01
 #define DestroyClass(link) context->destroy_class(context,link)
 #define HMDestroyUnlockedObject(handle) context->destroy_object(context,handle)
-#define ExAllocatePoolWithQuota(pool, size) context->allocate(size)
-#define ExFreePool(memory) context->release(memory)
 #define RIPMSG0(level, message) ((void)0)
 #define RIPMSG1(level, message, arg) ((void)0)
-#define try __try
-#define except __except
-BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
-const wow_cleanup_provider wow_original_cleanup_provider = { _WOWCleanup, TYPE_WINDOW, TYPE_MENU, TYPE_FREE };
-/* Original handtabl.c:39-59, revision
- * 5c5b979ec08c17d3ca2eb70e8aad62d26515d01c: selected non-IME ownership table.
- * Keep the original symbol and values with its sole cleanup consumer. */
-CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
-    0,                                                  /* free */
-    OCF_THREADOWNED | OCF_MARKTHREAD | OCF_USEQUOTA,    /* window */
-    OCF_PROCESSOWNED,                                   /* menu */
-    OCF_PROCESSOWNED | OCF_USEQUOTA,                    /* cursor/icon */
-    OCF_THREADOWNED | OCF_USEQUOTA,                     /* hswpi (SetWindowPos Information) */
-    OCF_THREADOWNED | OCF_MARKTHREAD,                   /* hook */
-    OCF_THREADOWNED | OCF_USEQUOTA,                     /* thread info object (internal) */
-    0,                                                  /* clipboard data (internal) */
-    OCF_THREADOWNED,                                    /* CALLPROCDATA */
-    OCF_PROCESSOWNED | OCF_USEQUOTA,                    /* accel table */
-    OCF_THREADOWNED | OCF_USEQUOTA,                     /* dde access */
-    OCF_THREADOWNED | OCF_MARKTHREAD | OCF_USEQUOTA,    /* dde conversation */
-    OCF_THREADOWNED | OCF_MARKTHREAD | OCF_USEQUOTA,    /* ddex */
-    OCF_PROCESSOWNED,                                   /* zombie */
-    OCF_PROCESSOWNED,                                   /* keyboard layout */
-    OCF_PROCESSOWNED,                                   /* keyboard file */
+VOID WINAPI _WOWCleanup(HANDLE, DWORD, wow_cleanup_context *);
+VOID WINAPI _WOWModuleUnload(HANDLE, wow_cleanup_context *);
+const wow_cleanup_provider wow_original_cleanup_provider = {
+    _WOWCleanup, _WOWModuleUnload, TYPE_WINDOW, TYPE_MENU, TYPE_FREE
 };
-
+/* XP kernel/handtabl.c:104-229 process-ownership projection in XP TYPE order.
+ * Only this flag is consumed; native USER owns allocation and destruction.
+ * CALLPROC retains XP's explicit exclusion in the task cleanup loop. */
+static const struct { BYTE bObjectCreateFlags; } gahti[TYPE_CTYPES] = {
+    {0}, {0}, {OCF_PROCESSOWNED}, {OCF_PROCESSOWNED}, /* free/window/menu/cursor */
+    {0}, {0}, {0}, {OCF_PROCESSOWNED}, /* swp/hook/clipdata/callproc */
+    {OCF_PROCESSOWNED}, {0}, {0}, {0}, /* accel/ddeaccess/ddeconv/ddexact */
+    {0}, {0}, {0}, {0}, /* monitor/kbdlayout/kbdfile/winevent */
+    {0}, {0}, {0}, {0} /* timer/imc/hid/device */
+};
 #line 14
 #pragma hdrstop
-
-extern CONST BYTE gabObjectCreateFlags[];
 
 /***************************************************************************\
 * CheckForClientDeath
@@ -98,38 +80,6 @@ extern CONST BYTE gabObjectCreateFlags[];
 * History:
 * 05-23-91 DarrinM      Created.
 \***************************************************************************/
-
-VOID ClientDied(VOID)
-{
-
-    /*
-     * Raise an exception to force cleanup.
-     */
-    ExRaiseStatus( STATUS_PORT_DISCONNECTED );
-}
-
-
-/*
- * Determines if a Wow wndproc is in a selector list
- */
-BOOL
-WowWndProcInSelList(
-   WNDPROC_PWND lpfnWndProc,
-   PWORD SelList
-   )
-{
-   WORD wWndProcSel = HIWORD(lpfnWndProc);
-   WORD nsel = *SelList++;
-
-   while (nsel--) {
-      if (wWndProcSel == *SelList++) {
-          return TRUE;
-      }
-   }
-
-   return FALSE;
-}
-
 
 /***************************************************************************\
 * PseudoDestroyClassWindows
@@ -146,6 +96,7 @@ WowWndProcInSelList(
 \***************************************************************************/
 
 VOID PseudoDestroyClassWindows(PWND pwndParent, PCLS pcls, wow_cleanup_context *context)
+#line 43
 {
     PWND pwnd;
     PTHREADINFO pti;
@@ -175,6 +126,7 @@ VOID PseudoDestroyClassWindows(PWND pwndParent, PCLS pcls, wow_cleanup_context *
 
             if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
                 wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
+#line 72
             }
         }
 
@@ -184,26 +136,8 @@ VOID PseudoDestroyClassWindows(PWND pwndParent, PCLS pcls, wow_cleanup_context *
          */
         if (pwnd->spwndChild != NULL)
             PseudoDestroyClassWindows(pwnd, pcls, context);
+#line 81
     }
-}
-
-/*
- * Determines if a selector is in a selector list
- */
-BOOL SelectorInSelList(
-    PNEMODULESEG SelList,
-    DWORD        nSel,
-    USHORT       sel)
-{
-    int nInd;
-
-    for (nInd = 0; nInd < (int)nSel; nInd++) {
-        if (SelList->ns_handle + 1 == sel) {
-            return TRUE;
-        }
-        SelList++;
-    }
-    return FALSE;
 }
 
 /***************************************************************************\
@@ -216,25 +150,123 @@ BOOL SelectorInSelList(
 *    so that we don't execute any app code.
 *
 * Array of original window proc addresses,
-* indexed by ICLS_* value.
+* indexed by ICLS_* value is in globals.c now -- gpfnwp.
+*
+* This array is initialized in code in init.c.
 \***************************************************************************/
 
-static PROC spfnwp[] =
-{
-    0,  // ICLS_BUTTON
-    0,  // ICLS_EDIT:    SPECIAL CASE!
-    0,  // ICLS_STATIC
-    0,  // ICLS_LISTBOX
-    0,  // ICLS_SCROLLBAR
-    0,  // ICLS_COMBOBOX
-    0,  // ICLS_DESKTOP
-    0,  // ICLS_DIALOG
-    0,  // ICLS_MENU
-    0,  // ICLS_SWITCH
-    0,  // ICLS_ICONTITLE
-    0,  // ICLS_MDICLIENT
-    0   // ICLS_COMBOLISTBOX
-};
+VOID WINAPI _WOWModuleUnload(HANDLE hModule, wow_cleanup_context *context) {
+#line 100
+    PPROCESSINFO ppi = PpiCurrent();
+    PHE     pheT, pheMax;
+    PPCLS   ppcls;
+    int     i;
+
+    UserAssert(gpfnwp[0]);
+
+    /*
+     * PseudoDestroy windows with wndprocs from this hModule
+     * If its a wow16 wndproc, check if the hMod16 is this module
+     * and Nuke matches.
+     */
+    pheMax = &gSharedInfo.aheList[giheLast];
+    for (pheT = gSharedInfo.aheList; pheT <= pheMax; pheT++) {
+        PTHREADINFO ptiTest = (PTHREADINFO)pheT->pOwner;
+        PWND pwnd;
+        if ((pheT->bType == TYPE_WINDOW) &&
+            (ptiTest->TIF_flags & TIF_16BIT) &&
+            (ptiTest->ppi == ppi)) {
+
+            pwnd = (PWND) pheT->phead;
+            if (!TestWF(pwnd, WFSERVERSIDEPROC) &&
+                pwnd->procedure_is_guest && IsWOWProc(pwnd->lpfnWndProc) &&
+                (pwnd->words->hMod16 == (WORD)(ULONG_PTR)hModule)) {
+                wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
+#line 125
+            }
+        }
+    }
+
+    /*
+     * Destroy private classes identified by hInstance that are not
+     * referenced by any windows.  Mark in-use classes for later
+     * destruction.
+     */
+    ppcls = &(ppi->pclsPrivateList);
+
+    for (i = 0; i < 2; ++i) {
+        while (*ppcls != NULL) {
+
+            PWC pwc;
+            PCLS pcls;
+
+            if (HIWORD((ULONG_PTR)(*ppcls)->hModule) == (WORD)(ULONG_PTR)hModule) {
+                if ((*ppcls)->cWndReferenceCount == 0) {
+                    if (!DestroyClass(ppcls)) {
+                        context->object_release_failed = TRUE;
+                        return;
+                    }
+#line 145
+                    /*
+                     * DestroyClass does *ppcls = pcls->pclsNext;
+                     * so we just want continue here
+                     */
+                } else {
+
+                    /*
+                     * Zap all the windows around that belong to this class.
+                     */
+                    PseudoDestroyClassWindows(PtiCurrent()->rpdesk->pDeskInfo->spwnd, *ppcls, context);
+#line 155
+
+                    /*
+                     * Win 3.1 does not distinguish between Dll's and Exe's
+                     */
+                    (*ppcls)->CSF_flags |= CSF_WOWDEFERDESTROY;
+                    ppcls = &((*ppcls)->pclsNext);
+                }
+                continue;
+            }
+
+            pcls = *ppcls;
+
+            if ((pcls->CSF_flags & CSF_WOWCLASS) && ((WORD)(ULONG_PTR)hModule == (pwc = PWCFromPCLS(pcls))->hMod16)) {
+
+                ATOM atom;
+                int  iSel;
+
+                /*
+                 * See if the window's class atom matches any of
+                 * the system ones. If so, jam in the original window proc.
+                 * Otherwise, use DefWindowProc
+                 */
+                atom = (*ppcls)->atomClassName;
+                for (iSel = ICLS_BUTTON; iSel < ICLS_MAX; iSel++) {
+                    if ((gpfnwp[iSel]) && (atom == gpsi->atomSysClass[iSel])) {
+                        wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)gpfnwp[iSel]);
+#line 181
+                        break;
+                    }
+                }
+                if (iSel == ICLS_MAX)
+                    wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)gpsi->apfnClientW.pfnDefWindowProc);
+#line 186
+            }
+
+            ppcls = &((*ppcls)->pclsNext);
+        }
+
+        /*
+         * Destroy public classes identified by hInstance that are not
+         * referenced by any windows.  Mark in-use classes for later
+         * destruction.
+         */
+        ppcls = &(ppi->pclsPublicList);
+    }
+    return;
+
+}
+
 
 /***************************************************************************\
 * _WOWCleanup
@@ -251,184 +283,18 @@ static PROC spfnwp[] =
 * 09-02-92 JimA         Created.
 \***************************************************************************/
 
-BOOL _WOWCleanup(
+VOID WINAPI _WOWCleanup(
+#line 219
     HANDLE hInstance,
-    DWORD hTaskWow,
-    PNEMODULESEG SelList,
-    DWORD nSel, wow_cleanup_context *context)
+    DWORD hTaskWow, wow_cleanup_context *context)
+#line 221
 {
-    PNEMODULESEG SelListOrg = SelList;
     PPROCESSINFO ppi = PpiCurrent();
     PPCLS   ppcls;
     PHE     pheT, pheMax;
     int     i;
-    DWORD   cbSel, nSelOrg = nSel;
-    PWORD   SelListTemp;
-    PWORD   pw;
-static BOOL sbFirstCall = TRUE;
 
-    if (sbFirstCall) {
-        spfnwp[0]  = gpsi->apfnClientW.pfnButtonWndProc;
-        spfnwp[1]  = gpsi->apfnClientW.pfnDefWindowProc;
-        spfnwp[2]  = gpsi->apfnClientW.pfnStaticWndProc;
-        spfnwp[3]  = gpsi->apfnClientW.pfnListBoxWndProc;
-        spfnwp[4]  = xxxSBWndProc;
-        spfnwp[5]  = gpsi->apfnClientW.pfnComboBoxWndProc;
-        spfnwp[6]  = xxxDesktopWndProc;
-        spfnwp[7]  = gpsi->apfnClientW.pfnDialogWndProc;
-        spfnwp[8]  = xxxMenuWindowProc;
-        spfnwp[9]  = xxxSwitchWndProc;
-        spfnwp[10] = gpsi->apfnClientW.pfnTitleWndProc;
-        spfnwp[11] = gpsi->apfnClientW.pfnMDIClientWndProc;
-        spfnwp[12] = gpsi->apfnClientW.pfnComboListBoxProc;
-
-        sbFirstCall = FALSE;
-    }
-
-    /*
-     * PseudoDestroy windows with wndprocs from this hModule
-     * If its a wow16 wndproc, search the selector list by wndproc sel
-     * and Nuke matches. We assume that ONLY 16bit wndprocs have the
-     * hi-bit set. and that all other WndProcs are uninteresting.
-     */
-    SelListTemp = NULL;
-    if (nSel) {
-        cbSel = (nSel + 1) * sizeof(WORD);
-        SelListTemp = UserAllocPoolWithQuota(cbSel, TAG_WOW);
-        if (SelListTemp == NULL)
-            return FALSE;
-        try {
-#if defined(_X86_)
-            ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(BYTE));
-#else
-#error
-#endif
-            *(LPWORD)SelListTemp = (WORD)nSel;
-            pw = (LPWORD)SelListTemp + 1;
-            while (nSel--) {
-                *pw = SelList->ns_handle | 1;
-                //
-                // transform into a "Wow WndProc sel"
-                // set hi-bit, but if hibit already set clear LDT bit
-                //
-                if (*pw & HIWORD(WNDPROC_WOW)) {
-                     *pw &= ~0x0004;
-                    }
-                else {
-                     *pw |= HIWORD(WNDPROC_WOW);
-                    }
-
-                pw++;
-                SelList++;
-                }
-        } except (EXCEPTION_EXECUTE_HANDLER) {
-            RIPMSG1(RIP_ERROR, "Exception %x", GetExceptionCode());
-            UserFreePool(SelListTemp);
-            return FALSE;
-        }
-
-        if (*(LPWORD)SelListTemp) {
-            pheMax = &gSharedInfo.aheList[giheLast];
-            for (pheT = gSharedInfo.aheList; pheT <= pheMax; pheT++) {
-
-                if (pheT->bType == TYPE_WINDOW) {
-                    PWND pwnd = (PWND) pheT->phead;
-
-                    if (pwnd->procedure_is_guest && (WNDPROC_WOW & (ULONG)pwnd->lpfnWndProc) &&
-                        ((PTHREADINFO)pheT->pOwner)->ppi == ppi &&
-                        WowWndProcInSelList(pwnd->lpfnWndProc, SelListTemp))
-                    {
-                        RIPMSG1(RIP_WARNING,
-                            "USER: Wow Window not destroyed: %lX", pwnd);
-                        wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
-                    }
-                }
-            }
-        }
-        UserFreePool(SelListTemp);
-    }
-
-    /*
-     * If hInstance is specified, a DLL is being unloaded.  If any
-     * classes were registered by the DLL and there are still windows
-     * around that reference these classes, keep the classes until
-     * the WOW thread exits.
-     */
-    if (hTaskWow == 0) {
-
-        /*
-         * Module cleanup
-         */
-
-        /*
-         * Destroy private classes identified by hInstance that are not
-         * referenced by any windows.  Mark in-use classes for later
-         * destruction.
-         */
-        ppcls = &(ppi->pclsPrivateList);
-
-        for (i = 0; i < 2; ++i) {
-            while (*ppcls != NULL) {
-
-                if (HIWORD((*ppcls)->hModule) == (WORD)hInstance) {
-                    if ((*ppcls)->cWndReferenceCount == 0) {
-                        if (!DestroyClass(ppcls))
-                            return FALSE;
-#line 306
-                        /*
-                         * DestroyClass does *ppcls = pcls->pclsNext;
-                         * so we just want continue here
-                         */
-                    } else {
-
-                        /*
-                         * Zap all the windows around that belong to this class.
-                         */
-                        PseudoDestroyClassWindows(PtiCurrent()->rpdesk->pDeskInfo->spwnd, *ppcls, context);
-
-                        /*
-                         * Win 3.1 does not distinguish between Dll's and Exe's
-                         */
-                        (*ppcls)->flags |= CSF_WOWDEFERDESTROY;
-                        ppcls = &((*ppcls)->pclsNext);
-                    }
-		    continue;
-		}
-
-                if (((*ppcls)->flags & CSF_WOWCLASS) &&
-                        HIWORD((*ppcls)->adwWOW[1]) == (WORD)hInstance) {
-                    ATOM atom;
-                    int  iSel;
-
-                    /*
-                     * See if the window's class atom matches any of
-                     * the system ones. If so, jam in the original window proc.
-                     * Otherwise, use DefWindowProc
-                     */
-                    atom = (*ppcls)->atomClassName;
-                    for (iSel = 0; iSel < sizeof(spfnwp) / sizeof(spfnwp[0]); iSel++) {
-                        if (atom == gpsi->atomSysClass[iSel]) {
-                            wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)spfnwp[iSel]);
-                            break;
-                        }
-                    }
-                    if (iSel == sizeof(spfnwp) / sizeof(spfnwp[0]))
-                        wow_cleanup_set_class_procedure(*ppcls, (WNDPROC_PWND)gpsi->apfnClientW.pfnDefWindowProc);
-                }
-
-                ppcls = &((*ppcls)->pclsNext);
-            }
-
-            /*
-             * Destroy public classes identified by hInstance that are not
-             * referenced by any windows.  Mark in-use classes for later
-             * destruction.
-             */
-            ppcls = &(ppi->pclsPublicList);
-        }
-        return TRUE;
-
-    } else if (hInstance != NULL) {
+    if (hInstance != NULL) {
 
         /*
          * Task cleanup
@@ -452,10 +318,11 @@ static BOOL sbFirstCall = TRUE;
                 pwnd = (PWND) pheT->phead;
                 if (!TestWF(pwnd, WFSERVERSIDEPROC)) {
                     wow_cleanup_set_window_procedure(context, pwnd, (WNDPROC_PWND)gpsi->apfnClientA.pfnDefWindowProc);
+#line 251
                 }
             }
         }
-        return TRUE;
+        return;
     }
 
     /*
@@ -472,11 +339,13 @@ static BOOL sbFirstCall = TRUE;
     for (i = 0; i < 2; ++i) {
         while (*ppcls != NULL) {
             if ((*ppcls)->hTaskWow == hTaskWow &&
-                    ((*ppcls)->flags & CSF_WOWDEFERDESTROY)) {
+                    ((*ppcls)->CSF_flags & CSF_WOWDEFERDESTROY)) {
                 if ((*ppcls)->cWndReferenceCount == 0) {
-                    if (!DestroyClass(ppcls))
-                        return FALSE;
-#line 409
+                    if (!DestroyClass(ppcls)) {
+                        context->object_release_failed = TRUE;
+                        return;
+                    }
+#line 274
                 } else {
                     RIPMSG0(RIP_ERROR, "Windows remain for a WOW class marked for destruction");
                     ppcls = &((*ppcls)->pclsNext);
@@ -507,10 +376,18 @@ static BOOL sbFirstCall = TRUE;
         /*
          * Destroy those objects created by this task.
          */
-        if (!(gabObjectCreateFlags[pheT->bType] & OCF_PROCESSOWNED) ||
+        if (    !(gahti[pheT->bType].bObjectCreateFlags & OCF_PROCESSOWNED) ||
                 (PPROCESSINFO)pheT->pOwner != ppi ||
-                ((PPROCOBJHEAD)pheT->phead)->hTaskWow != hTaskWow)
+                (((PPROCOBJHEAD)pheT->phead)->hTaskWow != hTaskWow) ||
+                (pheT->bType == TYPE_CALLPROC)  /* Do not destroy CALLPROCDATA objects.
+                                                      * These should only get nuked when the
+                                                      * process goes away or when the class
+                                                      * is nuked.
+                                                      */
+                    ) {
+
             continue;
+        }
 
         /*
          * Make sure this object isn't already marked to be destroyed - we'll
@@ -525,6 +402,4 @@ static BOOL sbFirstCall = TRUE;
          */
         HMDestroyUnlockedObject(pheT);
     }
-    return TRUE;
-#line 457
 }

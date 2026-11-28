@@ -2,7 +2,30 @@
 #include "wow_window_words_binding.h"
 #include "wow_window_creation_binding.h"
 #include "compat/include/wow_page_domain.h"
+#include "wow_user_native_call.h"
 #include <stdio.h>
+
+WORD WINAPI wow_class_client_procedure_module(DWORD procedure, BOOL guest)
+{
+    wow_user_runtime_thread *runtime = wow_user_runtime_current();
+    WORD (WINAPI *callback)(DWORD);
+    WORD module = 0;
+    BOOL held;
+    DWORD error = GetLastError();
+    if (!guest || !runtime || !runtime->classes ||
+            !(callback = runtime->classes->procedure_module)) return 0;
+    held = runtime->exclusive_held;
+    if (held && !wow_user_runtime_leave_for_callout(runtime))
+        wow_user_native_call_failed("leave-procedure-module", GetLastError());
+    __try {
+        module = callback(procedure);
+    } __finally {
+        if (held && !wow_user_runtime_reenter_after_callout(runtime))
+            wow_user_native_call_failed("reenter-procedure-module", GetLastError());
+    }
+    SetLastError(error);
+    return module;
+}
 
 static const wow_class_client_provider *class_client_provider;
 

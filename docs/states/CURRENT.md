@@ -4,8 +4,9 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall59/159 directories, H001-H036 and N001-N023. S15 runtime88 is the current
-published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
+overall59/159 directories, H001-H036 and N001-N023. S15 runtime91 is the current
+published and verified package.
+The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
 ## Active Packet
@@ -154,38 +155,14 @@ class-publication ABI dependencies must migrate together.
 S15 10/14; overall58/159. Census1330/789/800/530/7971/66379;
 all six deltas0;1307XP/23OpenNT. No S/T closure. Next N023 in DIR order.
 
-[P70 capture macro prerequisite](../etc/evidence/t485-s1/n023-ntsend.md) delivered
-runtime81: exact XP ntsend.h, two existing capture-ABI macro bindings, cached
-build, dual26hash, controls40/40, class-client/query/lifetime and real Win16
-controls pass. First link failure and final provider proof remain in its receipt.
-N0231/4; S15 10/14; overall58/159. Census1330/790/801/529/7970/65807;
-delta0/+1/+1/-1/-1/-572;1308XP/22OpenNT. Raw reduction includes restored
-original line endings, not572lines of custom behavior. One file since P69 Full.
-Next complete ntcftxt.h registration ABI; no S/T closure.
-
-[P71 class registration ABI](../etc/evidence/t485-s1/n023-class-abi.md) delivered
-runtime82: original XP class-name resolution, paired registration ABI and
-single task CLIENTINFO; cached full build, dual26hash, controls40/40, four
-class/native owner fixtures and genuine Win16 controls pass. N0232/4;
-S15 10/14; overall58/159. Census1331/790/801/530/7984/65473;
-delta+1/0/0/+1/+14/-334;1310XP/21OpenNT. Three completed files since P69
-Full24/24. Next user.h; no S/T closure.
-
-[P72 USER core declarations](../etc/evidence/t485-s1/n023-user.md) delivered
-runtime86: complete XP user.h, two exact prerequisite headers and paired
-WW/WND/CLS/MENU consumers; old private WW exports removed. Cached full build,
-dual26hash, controls40/40, nine class/native/CCPU lifecycle cases and genuine
-Win16 controls pass. Receipt preserves initial failures and their corrections.
-Census1333/792/803/530/7937/64995; delta+2/+2/+2/0/-47/-478;
-1313XP/20OpenNT. N0233/4; S15 10/14; overall58/159. Six completed files since
-P69 Full24/24; no new Full or S/T closure. Next winerrp.h.
-
-[P73 obsolete diagnostic header](../etc/evidence/t485-s1/n023-winerrp.md)
-delivered runtime87: removed XP-absent, unreferenced winerrp.h; no product
-behavior changed. Cached full build, dual26hash and real Win16 controls pass.
-Census1332/792/803/529/7936/64711; delta-1/0/0/-1/-1/-284;
-1313XP/19OpenNT. N0234/4; S15 11/14; overall59/159. Seven completed files
-since P69 Full24/24. Next N024 kernel in DIR order; no S/T closure.
+[P70 capture macros](../etc/evidence/t485-s1/n023-ntsend.md),
+[P71 registration ABI](../etc/evidence/t485-s1/n023-class-abi.md),
+[P72 USER declarations](../etc/evidence/t485-s1/n023-user.md) and
+[P73 obsolete header retirement](../etc/evidence/t485-s1/n023-winerrp.md)
+delivered runtimes81/82/86/87 and completed N0234/4. Their receipts retain
+source identities, paired ABI changes, all initial failures and final tests,
+dual-publication hashes and complete per-commit census/deltas. S15 reached
+11/14, overall59/159; seven files completed since P69 Full24/24.
 
 [P74 class registration](../etc/evidence/t485-s1/n024-class.md) delivered
 runtime88: XP registration/lookup/removal, original class tables and paired
@@ -195,6 +172,17 @@ Census1332/792/803/529/7948/64273; delta0/0/0/0/+12/-438;
 1314XP/18OpenNT. Original LF recovery expands the former whole-file diff.
 N024 first file delivered; S15 11/14, overall59/159. Eight completed files
 since P69 Full24/24. Next cleanup.c; no S/T closure.
+
+[P75 XP module/task cleanup](../etc/evidence/t485-s1/n024-cleanup-review.md)
+verified runtime91: original module identity callback, separate XP module/task
+cleanup and paired caller ABI; selector probing removed. Cached full build,
+dual26hash, seven owner cases, real Win16 controls and Full24/24 pass.
+Receipt preserves intermediate implementation/fixture failures and corrections.
+Census1332/792/803/529/7957/63392; delta0/0/0/0/+9/-881;
+1315XP/17OpenNT. LF recovery exposes real bounded adaptations. This Full covers
+five changed mirrors plus eight files since P69; new checkpoint count0.
+N0242/9; S15 remains11/14 and overall59/159 directories. Next exitwin.c.
+No S/T closure. Win95 retains its approved exit-one boundary.
 
 ## S14 Closure Record
 

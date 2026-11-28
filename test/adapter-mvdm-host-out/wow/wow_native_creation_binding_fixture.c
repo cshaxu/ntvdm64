@@ -88,10 +88,10 @@ static HWND create(unsigned identity)
     CREATESTRUCTA request = {0};
     WW words = {0};
     wow_window_dispatch_target target = {(WOW_WINDOW_PROC_TAG | 0x01234567u), callback, TRUE};
-    words.hMod16 = (WORD)identity;
     request.hInstance = instance; request.lpszClass = name; request.lpszName = "";
     request.cx = request.cy = 32; request.style = WS_OVERLAPPEDWINDOW;
-    request.lpCreateParams = (LPVOID)0x12345678;
+    /* Test-case identity is creation data, not the procedure's module. */
+    request.lpCreateParams = (LPVOID)(ULONG_PTR)identity;
     return wow_window_create_boundA(wow_fixture_creation_owner(&context), atom, &request, &words, &target);
 }
 static DWORD WINAPI callback(HWND window, UINT message, UINT wp, LONG lp,
@@ -111,6 +111,8 @@ static DWORD WINAPI callback(HWND window, UINT message, UINT wp, LONG lp,
     CHECK(words->hModule == instance);
     if (message == WM_NCCREATE) {
         CREATESTRUCTA *cs = (CREATESTRUCTA *)lp;
+        ULONG_PTR identity = (ULONG_PTR)cs->lpCreateParams;
+        if (identity < 1 || identity > 5) identity = 0;
         if (cs->lpCreateParams == (LPVOID)0x12345677) {
             PWND state = wow_window_client_validate_hwnd(window);
             /* The counted original creator must expose WND before the
@@ -126,16 +128,16 @@ static DWORD WINAPI callback(HWND window, UINT message, UINT wp, LONG lp,
             MDICREATESTRUCTA *mdi = cs->lpCreateParams;
             CHECK(mdi && mdi->lParam == 0x12345678);
             ++mdi_created;
-        } else CHECK(cs->lpCreateParams == (LPVOID)0x12345678 || cs->lpCreateParams == (LPVOID)0x12345677);
+        } else CHECK(identity || cs->lpCreateParams == (LPVOID)0x12345678 || cs->lpCreateParams == (LPVOID)0x12345677);
         CHECK(GetWindowLongA(window, GWL_USERDATA) == 0);
-        SetWindowLongA(window, GWL_USERDATA, words->hMod16);
-        if (words->hMod16 == 1) {
+        SetWindowLongA(window, GWL_USERDATA, (LONG)identity);
+        if (identity == 1) {
             HWND child = create(2);
             CHECK(child != NULL);
             if (child) { ++nested; CHECK(DestroyWindow(child)); }
             CHECK(GetWindowLongA(window, GWL_USERDATA) == 1);
         }
-        if (words->hMod16 == 3) {
+        if (identity == 3) {
             ++rejected;
             rejected_borrow=wow_window_words_acquire(window);
             wow_window_words_release(borrow);

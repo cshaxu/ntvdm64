@@ -76,7 +76,14 @@ static VOID WINAPI end_task(void) { }
 
 /* Actual CCPU producers use the stack ABI. Incompatible table declarations
  * are a compile error, and indirect calls check arguments and return values. */
-static WORD WINAPI abi_module(DWORD value) { CHECK(value == 0x12345678); return 0x1357; }
+static unsigned module_queries;
+static WORD WINAPI abi_module(DWORD value)
+{
+    CHECK(value == 0x12375678);
+    CHECK(!wow_user_runtime_current() || !wow_user_runtime_current()->exclusive_held);
+    ++module_queries;
+    return 0x1357;
+}
 static VOID WINAPI abi_message(DWORD value, LPHELPINFO info) { CHECK(value == 0x23456789 && info == NULL); }
 static VOID WINAPI abi_dialog(HWND value) { CHECK(value == (HWND)0x3456); }
 static DWORD WINAPI abi_schedule(DWORD first, DWORD second) { CHECK(first == 0x456789ab && second == 0x56789abc); return 0x6789abcd; }
@@ -89,7 +96,7 @@ static void check_callback_abi(void)
     PFNWOWTELLWOWTHEHDLG volatile dialog = abi_dialog;
     PFNWOWTASK16SCHEDNOTIFY volatile schedule = abi_schedule;
 #pragma warning(pop)
-    CHECK(module(0x12345678) == 0x1357);
+    CHECK(module(0x12375678) == 0x1357);
     message(0x23456789, NULL);
     dialog((HWND)0x3456);
     CHECK(schedule(0x456789ab, 0x56789abc) == 0x6789abcd);
@@ -129,6 +136,7 @@ int __cdecl main(void)
     CHECK(session_activate(&owner));
     CHECK(session_thread_bind_owned(&owner, SESSION_THREAD_BINDING_ORIGINAL_WORKER));
     CHECK(wow_user_runtime_bind(&binding, &runtime, NULL, NULL));
+    input.pfnGetProcModule16 = abi_module;
     CHECK(UserRegisterWowHandlers(&input, &output) == 0x1000);
     CHECK(output.aiWowClass[FNID_SCROLLBAR-FNID_START] == WOWCLASS_SCROLLBAR);
     CHECK(output.aiWowClass[FNID_ICONTITLE-FNID_START] == WOWCLASS_ICONTITLE);
@@ -156,6 +164,24 @@ int __cdecl main(void)
     CHECK(binding.thread == committed && notifications == 3);
     CHECK(!initialize_task() && GetLastError() == ERROR_INVALID_STATE);
     CHECK(notifications == 3 && ticket_binds == 1);
+    /* Exercise the actual registered callback through the admitted task,
+     * including original tag removal and the native/absent boundaries. */
+    {
+        unsigned before = module_queries;
+        DWORD module_procedure;
+        MarkWOWProc(0x12375678u, module_procedure);
+        CHECK(wow_class_client_procedure_module(module_procedure, TRUE) == 0x1357);
+        CHECK(module_queries == before + 1);
+        CHECK(wow_class_client_procedure_module(module_procedure, FALSE) == 0);
+        CHECK(wow_class_client_procedure_module(0x12375678u, TRUE) == 0);
+        CHECK(module_queries == before + 1);
+        CHECK(wow_user_runtime_enter(&binding));
+        SetLastError(0x2468);
+        CHECK(wow_class_client_procedure_module(module_procedure, TRUE) == 0x1357);
+        CHECK(GetLastError() == 0x2468 && binding.exclusive_held);
+        CHECK(wow_user_runtime_leave(&binding));
+        CHECK(module_queries == before + 2);
+    }
     CHECK(wow_user_task_lifecycle_unbind(&binding));
 
     /* Original W32Thread owns the seven-attempt bound; verify its callback
@@ -165,7 +191,7 @@ int __cdecl main(void)
     for (i = 0; i < 7; ++i)
         CHECK(!initialize_task() && GetLastError() == ERROR_RETRY);
     CHECK(notifications == 7 && ticket_binds == 1);
-    CHECK(output.pfnWOWCleanup((HANDLE)0x1234, 0x1234, NULL, 0));
+    CHECK(output.pfnWOWCleanup((HANDLE)0x1234, 0x1234));
     CHECK(binding.thread != NULL); /* Committed case retains normal retirement. */
     CHECK(wow_user_task_lifecycle_unbind(&binding));
     CHECK(lifecycle->threads == NULL);

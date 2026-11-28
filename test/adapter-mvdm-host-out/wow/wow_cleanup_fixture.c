@@ -1,20 +1,23 @@
+#include "wow_user_client_view_layout.h"
 #include "wow_cleanup_bindings.h"
 #include "wow_shared_user_abi.h"
 #include "non-mvdm/windows/core/ntuser/inc/user.h"
 extern const wow_cleanup_provider wow_original_cleanup_provider;
-BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
+VOID WINAPI _WOWCleanup(HANDLE, DWORD, wow_cleanup_context *);
+VOID WINAPI _WOWModuleUnload(HANDLE, wow_cleanup_context *);
+static BOOL cleanup(HANDLE instance, DWORD task, wow_cleanup_context *context)
+{
+    context->object_release_failed = FALSE;
+    if (task) _WOWCleanup(instance, task, context);
+    else _WOWModuleUnload(instance, context);
+    return !context->object_release_failed;
+}
 #include "wow_class_words_binding.h"
 #include "wow_window_creation_binding.h"
 #include <stdio.h>
 
-static unsigned errors, released, destroyed;
-static BOOL fail_alloc;
-static BOOL raise_alloc;
+static unsigned errors, destroyed;
 static unsigned live_callbacks;
-static wow_cleanup_context *tree_context;
-static wow_cleanup_window *tree_parent, *tree_child;
-static BOOL expect_nested;
-static unsigned tree_checks;
 #define CHECK(x) do { if (!(x)) { ++errors; printf("FAIL line=%d error=%lu\n",__LINE__,GetLastError()); } } while (0)
 static void verify_native_identity_binding(void)
 {
@@ -40,25 +43,6 @@ static void verify_native_identity_binding(void)
     CHECK(wow_user_window_retire(&table,new_handle,&second,NULL));
     CHECK(table.entries[0x1234].bType==TYPE_FREE && table.last_handle==0x1234);
 }
-static PVOID WINAPI allocate(SIZE_T size)
-{
-    if (raise_alloc) RaiseException(0xE0420480,0,0,NULL);
-    if (tree_context) {
-        wow_cleanup_window *root=tree_context->thread->rpdesk->pDeskInfo->spwnd;
-        ++tree_checks;
-        if (expect_nested) {
-            CHECK(root->spwndChild==tree_parent && tree_parent->spwndNext==NULL);
-            CHECK(tree_parent->spwndChild==tree_child && tree_child->spwndNext==NULL);
-        } else {
-            CHECK(tree_parent->spwndChild==NULL && tree_child->spwndChild==NULL);
-            CHECK((root->spwndChild==tree_parent && tree_parent->spwndNext==tree_child) ||
-                (root->spwndChild==tree_child && tree_child->spwndNext==tree_parent));
-        }
-    }
-    return fail_alloc ? NULL : HeapAlloc(GetProcessHeap(),0,size);
-}
-static void WINAPI release(PVOID memory)
-{ ++released; CHECK(HeapFree(GetProcessHeap(),0,memory)); }
 static BOOL WINAPI destroy_class(wow_cleanup_context *ctx, wow_class_lookup_entry **link)
 {
     (void)ctx;
@@ -84,7 +68,7 @@ static LRESULT CALLBACK wndproc(HWND window, UINT message, WPARAM wp, LPARAM lp)
 static DWORD WINAPI live_callback(HWND window, UINT message, UINT wp, LONG lp,
     DWORD procedure, PVOID words)
 {
-    CHECK(procedure==0x92350020 && words!=NULL);
+    CHECK(procedure==0xd2350020 && words!=NULL);
     if (message==WM_USER+42) { ++live_callbacks; return 0x7654; }
     return (DWORD)DefWindowProcA(window,message,wp,lp);
 }
@@ -96,14 +80,13 @@ static void live_dispatch_cleanup(wow_cleanup_context *ctx, int cleanup_mode)
     UNICODE_STRING name;
     DWORD class_words[2]={0x12350020,0x99990000}, procedure;
     WW words={0};
-    wow_window_dispatch_target target={0x92350020,live_callback,TRUE};
+    wow_window_dispatch_target target={0xd2350020,live_callback,TRUE};
     wow_window_words_binding *borrow;
     wow_cleanup_window *live;
     HWND window;
     HWND later;
     HWND parent=NULL, helper=NULL, child=NULL;
     LONG helper_proc=0;
-    NEMODULESEG segment={0};
     ATOM atom;
     unsigned before;
     wc.lpfnWndProc=wow_window_class_creation_proc; wc.hInstance=(HINSTANCE)0x34561234;
@@ -127,25 +110,9 @@ static void live_dispatch_cleanup(wow_cleanup_context *ctx, int cleanup_mode)
     live=wow_window_words_cleanup_value(borrow);
     CHECK(live!=NULL && live->pcls==ctx->thread->ppi->classes->pclsPrivateList);
     CHECK(live->thread==ctx->thread);
+    wow_window_words_value(borrow)->hMod16=0x9999;
     CHECK(ctx->thread->ppi->objects->entries[LOWORD(window)].phead==live &&
         ctx->thread->ppi->objects->entries[LOWORD(window)].pOwner==ctx->thread);
-    if (cleanup_mode==0) {
-        wow_cleanup_window *saved_root=ctx->thread->rpdesk->pDeskInfo->spwnd;
-        BOOL caught=FALSE;
-        fail_alloc=TRUE;
-        CHECK(!wow_user_cleanup_bound((HANDLE)0x9999,0,&segment,1,ctx));
-        fail_alloc=FALSE;
-        CHECK(ctx->thread->rpdesk->pDeskInfo->spwnd==saved_root);
-        CHECK(live->spwndChild==NULL && live->spwndNext==NULL);
-        raise_alloc=TRUE;
-        __try { wow_user_cleanup_bound((HANDLE)0x9999,0,&segment,1,ctx); }
-        __except (GetExceptionCode()==0xE0420480 ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
-            caught=TRUE;
-        }
-        raise_alloc=FALSE;
-        CHECK(caught && ctx->thread->rpdesk->pDeskInfo->spwnd==saved_root);
-        CHECK(live->spwndChild==NULL && live->spwndNext==NULL);
-    }
     if (cleanup_mode==2) {
         helper=CreateWindowExA(0,"STATIC","",WS_CHILD,0,0,16,16,window,NULL,GetModuleHandleA(NULL),NULL);
         CHECK(helper!=NULL);
@@ -160,24 +127,16 @@ static void live_dispatch_cleanup(wow_cleanup_context *ctx, int cleanup_mode)
     if (cleanup_mode==2) {
         wow_window_words_binding *child_borrow=wow_window_words_acquire(child);
         CHECK(child_borrow!=NULL);
-        tree_context=ctx; tree_parent=live;
-        tree_child=wow_window_words_cleanup_value(child_borrow);
-        expect_nested=TRUE;
-        CHECK(wow_user_cleanup_bound((HANDLE)0x9999,0,&segment,1,ctx));
         CHECK(SetParent(child,parent)==helper);
-        expect_nested=FALSE;
-        CHECK(wow_user_cleanup_bound((HANDLE)0x9999,0,&segment,1,ctx));
         CHECK(SetParent(child,helper)==parent);
-        tree_context=NULL;
         wow_window_words_release(child_borrow);
-        CHECK(wow_user_cleanup_bound((HANDLE)0x3456,0,NULL,0,ctx));
+        CHECK(wow_user_cleanup_bound((HANDLE)0x3456,0,ctx));
         CHECK((live->pcls->flags & CSF_WOWDEFERDESTROY)!=0);
         CHECK(SendMessageA(child,WM_USER+42,0,0)==0 && live_callbacks==before);
         CHECK(GetWindowLongA(helper,GWL_WNDPROC)==helper_proc);
     } else if (cleanup_mode==1) {
         live->pcls->flags |= CSF_WOWCLASS;
-        segment.ns_handle=0x1234;
-        CHECK(wow_user_cleanup_bound((HANDLE)0x9999,0,&segment,1,ctx));
+        CHECK(wow_user_cleanup_bound((HANDLE)0x9999,0,ctx));
         CHECK(live->pcls->lpfnWndProc==DefWindowProcW && live->pcls->adwWOW[0]==class_words[0]);
         later=wow_window_create_boundA(ctx->thread,atom,&creation,&words,NULL);
         CHECK(later!=NULL);
@@ -187,7 +146,7 @@ static void live_dispatch_cleanup(wow_cleanup_context *ctx, int cleanup_mode)
             CHECK(DestroyWindow(later));
         }
     } else {
-        CHECK(wow_user_cleanup_bound((HANDLE)1,ctx->thread->ptdb->hTaskWow,NULL,0,ctx));
+        CHECK(wow_user_cleanup_bound((HANDLE)1,ctx->thread->ptdb->hTaskWow,ctx));
     }
     CHECK(live->lpfnWndProc==DefWindowProcA);
     CHECK(wow_window_procedure_read(window,&procedure) && procedure==(DWORD)DefWindowProcA);
@@ -215,21 +174,20 @@ int __cdecl main(void)
     wow_input_desktop desktop={0};
     wow_cleanup_desktop_info deskinfo={0};
     wow_cleanup_window root={0}, window_view={0}, foreign_view={0};
+    WW window_words={0}, foreign_words={0};
     wow_cleanup_shared shared={0};
     wow_cleanup_handle handles[7]={0};
     wow_cleanup_context ctx={0};
     WNDCLASSEXA wc={sizeof(wc)};
     UNICODE_STRING name;
     DWORD words[2]={0x12350020,0x99994321};
-    NEMODULESEG segment={0};
     resource_object menus[3], cursor={0}, accel={0};
     BYTE and_mask[128], xor_mask[128]={0};
     ACCEL accelerator={FVIRTKEY,'A',100};
     ATOM atom;
     HWND window;
     wow_class_lookup_entry *entry;
-    PVOID inaccessible;
-    unsigned before, i;
+    unsigned i;
     HHOOK terminal = SetWindowsHookExA(WH_CALLWNDPROCRET,
         wow_window_terminal_observer, NULL, GetCurrentThreadId());
     CHECK(terminal != NULL);
@@ -247,7 +205,6 @@ int __cdecl main(void)
     ctx.thread=&thread; ctx.shared=&shared; ctx.handles.aheList=handles;
     ctx.last_handle=6;
     ctx.destroy_class=destroy_class; ctx.destroy_object=destroy_object;
-    ctx.allocate=allocate; ctx.release=release;
     wc.lpfnWndProc=wndproc; wc.hInstance=(HINSTANCE)0x23451234;
     wc.lpszClassName="S40_CLEANUP";
     RtlInitUnicodeString(&name,L"S40_CLEANUP");
@@ -258,10 +215,10 @@ int __cdecl main(void)
     CHECK(window!=NULL); if (!window) return 3;
     /* Real native rejection, not a mock return: stop with the node retained.
      * No cleanup loop can claim to have removed the live native class. */
-    CHECK(!_WOWCleanup((HANDLE)0x2345,0,NULL,0,&ctx));
+    CHECK(!cleanup((HANDLE)0x2345,0,&ctx));
     CHECK(GetLastError()==ERROR_CLASS_HAS_WINDOWS && classes.pclsPrivateList==entry);
     CHECK(DestroyWindow(window));
-    CHECK(_WOWCleanup((HANDLE)0x2345,0,NULL,0,&ctx));
+    CHECK(cleanup((HANDLE)0x2345,0,&ctx));
     CHECK(classes.pclsPrivateList==NULL);
 
     atom=wow_class_words_register(&classes,&wc,&name,words,NULL);
@@ -273,36 +230,37 @@ int __cdecl main(void)
      * enumeration or a claim that live worker object publication exists. */
     root.spwndChild=&window_view; window_view.pcls=entry; window_view.thread=&thread;
     window_view.native_window=window;
-    window_view.lpfnWndProc=(WNDPROC)0x92350020;
+    window_words.hMod16=foreign_words.hMod16=0x9999;
+    window_view.words=&window_words; foreign_view.words=&foreign_words;
+    window_view.lpfnWndProc=(WNDPROC)0xd2350020;
     entry->cWndReferenceCount=1;
-    CHECK(_WOWCleanup((HANDLE)0x2345,0,NULL,0,&ctx));
+    CHECK(cleanup((HANDLE)0x2345,0,&ctx));
     CHECK((entry->flags & CSF_WOWDEFERDESTROY)!=0);
     CHECK(window_view.lpfnWndProc==DefWindowProcA);
 
-    segment.ns_handle=0x1234;
     entry->cWndReferenceCount=0;
-    shared.atomSysClass[19]=atom; /* Not in the 13-entry procedure table. */
+    shared.atomSysClass[19]=atom; /* Native-only XP class, no published restore target. */
     handles[0].bType=1; handles[0].phead=&window_view; handles[0].pOwner=&thread;
     handles[1].bType=1; handles[1].phead=&foreign_view; handles[1].pOwner=&foreign;
-    window_view.lpfnWndProc=(WNDPROC)0x92350020;
-    foreign_view.lpfnWndProc=(WNDPROC)0x92350020;
+    window_view.lpfnWndProc=(WNDPROC)0xd2350020;
+    foreign_view.lpfnWndProc=(WNDPROC)0xd2350020;
     window_view.procedure_is_guest=TRUE; foreign_view.procedure_is_guest=TRUE;
-    CHECK(_WOWCleanup((HANDLE)0x9998,0,&segment,1,&ctx));
+    CHECK(cleanup((HANDLE)0x9998,0,&ctx));
     CHECK(entry->adwWOW[0]==words[0] && entry->lpfnWndProc!=DefWindowProcW);
     entry->flags |= CSF_WOWCLASS;
-    CHECK(_WOWCleanup((HANDLE)0x9999,0,&segment,1,&ctx));
+    CHECK(cleanup((HANDLE)0x9999,0,&ctx));
     CHECK(window_view.lpfnWndProc==DefWindowProcA);
-    CHECK(foreign_view.lpfnWndProc==(WNDPROC)0x92350020);
+    CHECK(foreign_view.lpfnWndProc==(WNDPROC)0xd2350020);
     CHECK(entry->adwWOW[0]==words[0] && entry->lpfnWndProc==DefWindowProcW);
 
     window_view.lpfnWndProc=wndproc;
     window_view.serverSideProc=TRUE;
-    CHECK(_WOWCleanup((HANDLE)1,task.hTaskWow,NULL,0,&ctx));
+    CHECK(cleanup((HANDLE)1,task.hTaskWow,&ctx));
     CHECK(window_view.lpfnWndProc==wndproc);
     window_view.serverSideProc=FALSE;
-    CHECK(_WOWCleanup((HANDLE)1,task.hTaskWow,NULL,0,&ctx));
+    CHECK(cleanup((HANDLE)1,task.hTaskWow,&ctx));
     CHECK(window_view.lpfnWndProc==DefWindowProcA);
-    CHECK(foreign_view.lpfnWndProc==(WNDPROC)0x92350020);
+    CHECK(foreign_view.lpfnWndProc==(WNDPROC)0xd2350020);
 
     for (i=0;i<3;++i) {
         menus[i].head.hTaskWow=task.hTaskWow;
@@ -319,31 +277,21 @@ int __cdecl main(void)
     CHECK(cursor.handle && accel.handle);
     handles[5].bType=TYPE_CURSOR; handles[5].phead=&cursor; handles[5].pOwner=&process;
     handles[6].bType=TYPE_ACCELTABLE; handles[6].phead=&accel; handles[6].pOwner=&process;
-    CHECK(!_WOWCleanup(NULL,task.hTaskWow,NULL,0,&ctx));
+    CHECK(!cleanup(NULL,task.hTaskWow,&ctx));
     CHECK(GetLastError()==ERROR_CLASS_HAS_WINDOWS && classes.pclsPrivateList==entry);
     CHECK(destroyed==0 && IsMenu((HMENU)menus[0].handle));
     CHECK(DestroyWindow(window));
-    CHECK(_WOWCleanup(NULL,task.hTaskWow,NULL,0,&ctx));
+    CHECK(cleanup(NULL,task.hTaskWow,&ctx));
     CHECK(classes.pclsPrivateList==NULL && destroyed==3);
     CHECK(!IsMenu((HMENU)menus[0].handle) && IsMenu((HMENU)menus[1].handle) && IsMenu((HMENU)menus[2].handle));
     CHECK(handles[5].bType==TYPE_FREE && handles[6].bType==TYPE_FREE);
     CHECK(DestroyMenu((HMENU)menus[1].handle)); CHECK(DestroyMenu((HMENU)menus[2].handle));
     ZeroMemory(handles,sizeof(handles));
 
-    fail_alloc=TRUE;
-    CHECK(!_WOWCleanup(NULL,task.hTaskWow,&segment,1,&ctx));
-    fail_alloc=FALSE;
-    inaccessible=VirtualAlloc(NULL,4096,MEM_COMMIT|MEM_RESERVE,PAGE_NOACCESS);
-    CHECK(inaccessible!=NULL);
-    before=released;
-    CHECK(!_WOWCleanup(NULL,task.hTaskWow,inaccessible,1,&ctx));
-    CHECK(released==before+1);
-    CHECK(VirtualFree(inaccessible,0,MEM_RELEASE));
     live_dispatch_cleanup(&ctx,FALSE);
     live_dispatch_cleanup(&ctx,TRUE);
     live_dispatch_cleanup(&ctx,2);
-    CHECK(tree_checks==2);
     CHECK(UnhookWindowsHookEx(terminal));
-    printf("WOW_CLEANUP errors=%u module=1 task=1 thread=1 native_failure=2 bound=13 probe_failure=1 live_dispatch=%u resource_kinds=3 native_membership=1 stale_retire=1 native_tree=%u\n",errors,live_callbacks,tree_checks);
+    printf("WOW_CLEANUP errors=%u module=1 task=1 thread=1 native_failure=2 live_dispatch=%u resource_kinds=3 native_membership=1 stale_retire=1\n",errors,live_callbacks);
     return errors ? 3 : 0;
 }

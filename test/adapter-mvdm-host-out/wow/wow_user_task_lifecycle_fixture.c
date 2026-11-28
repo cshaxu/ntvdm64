@@ -1,3 +1,4 @@
+#include "wow_user_client_view_layout.h"
 #include "wow_control_entry_fixture_provider.h"
 #include "wow_task_lifecycle_fixture_provider.h"
 #include "wow_class_client_fixture_provider.h"
@@ -19,7 +20,6 @@ static const wow_standard_class_provider class_provider = {
 #include "wow_shared_user_abi.h"
 #include "non-mvdm/windows/core/ntuser/inc/user.h"
 extern const wow_cleanup_provider wow_original_cleanup_provider;
-BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
 #include "compat/include/wow_task_start_notification.h"
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_private_access.h"
@@ -45,7 +45,6 @@ static const wow_task_state_callbacks task_callbacks = {
 #include "wow_common_dialog_calls.h"
 #endif
 
-VOID WINAPI ClientDied(VOID);
 static unsigned errors;
 static unsigned native_direct_calls;
 #ifdef WOW_NATIVE_NESTED_FIXTURE
@@ -1254,21 +1253,6 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
 }
 #endif
 
-static void verify_client_death_exception(void)
-{
-    BOOL caught = FALSE;
-    __try {
-        ClientDied();
-        CHECK(FALSE);
-    } __except (GetExceptionCode() == (DWORD)0xc0000037 &&
-            GetExceptionInformation()->ExceptionRecord->NumberParameters == 0 &&
-            (GetExceptionInformation()->ExceptionRecord->ExceptionFlags &
-                EXCEPTION_NONCONTINUABLE) ?
-            EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
-        caught = TRUE;
-    }
-    CHECK(caught);
-}
 int __cdecl main(int argc,char **argv)
 {
     if (!wow_control_entry_bind(&fixture_control_entry_provider) ||
@@ -1285,7 +1269,6 @@ int __cdecl main(int argc,char **argv)
     MSG message;
     HANDLE wowexec = CreateEventW(NULL, FALSE, FALSE, NULL);
 
-    verify_client_death_exception();
     CHECK(!wow_task_lifecycle_bind(NULL));
     CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
     {
@@ -1603,7 +1586,7 @@ int __cdecl main(int argc,char **argv)
         CHECK(WaitForSingleObject(thread->pEventQueueServer, 0) != WAIT_FAILED);
         CHECK(DestroyWindow(native_window));
         CHECK(!wow_user_task_lifecycle_exit(&lifecycle,
-            (HANDLE)(ULONG_PTR)0x1234, 0x1234, NULL, 0));
+            (HANDLE)(ULONG_PTR)0x1234, 0x1234));
         CHECK(GetLastError() == ERROR_INVALID_WINDOW_HANDLE);
         CHECK(lifecycle.threads == task && binding.thread == thread);
         CHECK(!binding.exclusive_held && lifecycle.cleanup.thread == NULL);
@@ -1627,7 +1610,7 @@ int __cdecl main(int argc,char **argv)
         CHECK(wow_menu_client_register_created(&lifecycle.process, 0x5678, other));
         CHECK(wow_user_runtime_leave(&binding));
         CHECK(wow_user_task_lifecycle_exit(&lifecycle, (HANDLE)(ULONG_PTR)0x1234,
-            0x1234, NULL, 0));
+            0x1234));
         CHECK(IsMenu(selected) && IsMenu(other));
         wow_menu_fixture_retire_fail = 1;
         CHECK(!wow_user_task_lifecycle_unbind(&binding));
@@ -1636,7 +1619,7 @@ int __cdecl main(int argc,char **argv)
         CHECK(!IsMenu(selected) && IsMenu(other));
         CHECK(lifecycle.objects->entries[LOWORD(selected)].bType == TYPE_MENU);
         CHECK(wow_user_task_lifecycle_exit(&lifecycle, NULL,
-            0x1234, NULL, 0));
+            0x1234));
         CHECK(!lifecycle.cleanup.object_release_failed);
         CHECK(lifecycle.objects->entries[LOWORD(selected)].bType == TYPE_FREE);
         CHECK(IsMenu(other) && lifecycle.objects->entries[LOWORD(other)].bType == TYPE_MENU);
@@ -1649,10 +1632,10 @@ int __cdecl main(int argc,char **argv)
     }
 #endif
     CHECK(wow_user_task_lifecycle_exit(&lifecycle, (HANDLE)(ULONG_PTR)0x1234,
-        0x1234, NULL, 0));
+        0x1234));
     CHECK(binding.thread != NULL && lifecycle.threads != NULL);
     CHECK(wow_user_task_lifecycle_exit(&lifecycle, (HANDLE)(ULONG_PTR)0x1234,
-        0, NULL, 0));
+        0));
     CHECK(binding.thread != NULL && binding.classes != NULL);
     CHECK(!binding.exclusive_held);
     CHECK(wow_user_task_lifecycle_unbind(&binding));

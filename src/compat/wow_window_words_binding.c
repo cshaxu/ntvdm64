@@ -462,6 +462,7 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const struct _WW *words,
     BOOL attached = FALSE;
     BOOL observed;
     DWORD error, process_id = 0, thread_id;
+    WORD procedure_module;
     if (!words) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if (target && (!target->procedure ||
             (target->wow_encoded && (!target->callback || !WOW_WINDOW_IS_GUEST_PROC(target->procedure))) ||
@@ -474,6 +475,8 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const struct _WW *words,
     if (process_id != GetCurrentProcessId()) {
         SetLastError(ERROR_ACCESS_DENIED); return FALSE;
     }
+    procedure_module = target ?
+        wow_class_client_procedure_module(target->procedure, target->wow_encoded) : 0;
     binding = wow_user_borrow_observed_binding(window);
     observed = binding != NULL;
     if (!binding) binding = wow_window_words_allocate();
@@ -490,6 +493,12 @@ BOOL WINAPI wow_window_words_attach_target(HWND window, const struct _WW *words,
         binding->enrolled = TRUE;
         binding->native_thread_id = thread_id;
         CopyMemory(binding->words, words, wow_window_access_current()->layout()->words_bytes);
+        if (target) {
+            mvdm_softpc_wow_window_words_view view;
+            wow_window_access_current()->capture_words(binding->words, &view);
+            view.module16 = procedure_module;
+            wow_window_access_current()->restore_words(binding->words, &view);
+        }
         ZeroMemory(&binding->creation_menu, sizeof(binding->creation_menu));
         binding->creation_menu.checked = TRUE; /* Not necessarily a new HWND. */
         previous_class = binding->class_words;

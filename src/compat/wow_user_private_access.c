@@ -8,6 +8,7 @@
 #include "wow_window_access_provider.h"
 #include "wow_window_procedure_entry.h"
 #include "compat/include/wow32_provider_private.h"
+#include "compat/include/wow_page_domain.h"
 
 static DWORD decoded_procedure(DWORD native, BOOL *guest)
 {
@@ -49,6 +50,7 @@ DWORD WINAPI wow_user_set_procedure(HWND window, BOOL class_procedure,
     wow_user_runtime_thread *runtime;
     wow_window_words_binding *binding;
     DWORD previous, error = GetLastError();
+    WORD procedure_module;
     if (!previous_guest) { SetLastError(ERROR_INVALID_PARAMETER); return 0; }
     *previous_guest = FALSE;
     if (!guest && procedure == (DWORD)wow_window_class_creation_proc) {
@@ -89,11 +91,28 @@ DWORD WINAPI wow_user_set_procedure(HWND window, BOOL class_procedure,
         }
         wow_window_words_release(binding);
     }
+    /* Resolve only our immutable guest entrances. Native CPD remains USER's
+     * property. Query after adoption's early return so that creation queries
+     * the original module callback exactly once. */
+    if (wow_window_entry_guest_target((WNDPROC)procedure, &target))
+        procedure_module = wow_class_client_procedure_module(target.procedure, TRUE);
+    else
+        procedure_module = 0;
     /* USER consumes a native CPD and its conversion direction atomically.
      * Never retain its source-owned token as the destination's current proc,
      * resolve its private layout, or perform install/query/restore. */
     SetLastError(error);
     previous = (DWORD)wow_native_SetWindowLongA(window, GWL_WNDPROC, (LONG)procedure);
+    error = GetLastError();
+    if (previous && (binding = wow_window_words_acquire(window)) != NULL) {
+        mvdm_softpc_wow_window_words_view view;
+        struct _WW *words = wow_window_words_value(binding);
+        wow_window_access_current()->capture_words(words, &view);
+        view.module16 = procedure_module;
+        wow_window_access_current()->restore_words(words, &view);
+        wow_window_words_release(binding);
+    }
+    SetLastError(error);
     return decoded_procedure(previous, previous_guest);
 }
 

@@ -26,14 +26,14 @@ static DWORD WINAPI callback(HWND w, UINT m, UINT wp, LONG lp, DWORD proc, PVOID
     ++calls;
     if (m == WM_NCCREATE && mutate_during_create) {
         mutate_during_create = FALSE;
-        CHECK(proc == 0x94500090);
-        CHECK(set_guest_class(w, 0x956000a0) == 0x94500090);
+        CHECK(proc == 0xd4500090);
+        CHECK(set_guest_class(w, 0xd56000a0) == 0xd4500090);
         nested_window = wow_window_create_boundA(wow_fixture_creation_owner(nested_context), nested_atom,
             nested_request, nested_words, NULL);
         CHECK(nested_window != NULL);
         if (nested_window)
-            CHECK((DWORD)SendMessageA(nested_window, WM_APP, 0, 0) == 0x956000a0);
-        CHECK((DWORD)wow_user_get_window_longA(w, GWL_WNDPROC) == 0x94500090);
+            CHECK((DWORD)SendMessageA(nested_window, WM_APP, 0, 0) == 0xd56000a0);
+        CHECK((DWORD)wow_user_get_window_longA(w, GWL_WNDPROC) == 0xd4500090);
     }
     if (m == WM_APP) return proc;
     return (DWORD)DefWindowProcA(w, m, wp, lp);
@@ -46,8 +46,8 @@ int __cdecl main(void)
     DWORD wc[2] = {0x12340056, 0};
     WW ww = {0};
     CREATESTRUCTA create = {0};
-    wow_window_dispatch_target target = {0x92300056, callback, TRUE};
-    wow_window_dispatch_target override = {0x93400078, callback, TRUE}, bad = target;
+    wow_window_dispatch_target target = {0xd2300056, callback, TRUE};
+    wow_window_dispatch_target override = {0xd3400078, callback, TRUE}, bad = target;
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
     wow_user_task_lifecycle lifecycle = {0};
     wow_task_order_state task_state = {0};
@@ -95,40 +95,40 @@ int __cdecl main(void)
         extern int __cdecl wow_typed_procedure_callers(HWND);
         CHECK(!wow_typed_procedure_callers(first));
         CHECK(GetClassLongA(first, GCL_WNDPROC) == (DWORD)wow_window_class_creation_proc);
-        CHECK(wow_user_get_class_longA(first, GCL_WNDPROC) == 0x92300056);
-        CHECK((DWORD)context.pclsPrivateList->lpfnWndProc == 0x92300056);
-        CHECK(wow_user_get_class_longA(second, GCL_WNDPROC) == 0x92300056);
-        CHECK((DWORD)SendMessageA(first, WM_APP, 0, 0) == 0x92300056);
+        CHECK(wow_user_get_class_longA(first, GCL_WNDPROC) == 0xd2300056);
+        CHECK((DWORD)context.pclsPrivateList->lpfnWndProc == 0xd2300056);
+        CHECK(wow_user_get_class_longA(second, GCL_WNDPROC) == 0xd2300056);
+        CHECK((DWORD)SendMessageA(first, WM_APP, 0, 0) == 0xd2300056);
         CHECK((DWORD)SendMessageA(second, WM_APP, 0, 0) == override.procedure);
         CHECK((DWORD)wow_user_get_window_longA(second, GWL_WNDPROC) == override.procedure);
-        CHECK(set_guest_class(first, 0x94500090) == 0x92300056);
-        CHECK(wow_user_get_class_longA(second, GCL_WNDPROC) == 0x94500090);
-        CHECK((DWORD)context.pclsPrivateList->lpfnWndProc == 0x94500090);
-        CHECK((DWORD)SendMessageA(first, WM_APP, 0, 0) == 0x92300056);
+        CHECK(set_guest_class(first, 0xd4500090) == 0xd2300056);
+        CHECK(wow_user_get_class_longA(second, GCL_WNDPROC) == 0xd4500090);
+        CHECK((DWORD)context.pclsPrivateList->lpfnWndProc == 0xd4500090);
+        CHECK((DWORD)SendMessageA(first, WM_APP, 0, 0) == 0xd2300056);
         CHECK((DWORD)SendMessageA(second, WM_APP, 0, 0) == override.procedure);
         third = wow_window_create_boundA(wow_fixture_creation_owner(&context), atom, &create, &ww, NULL);
         CHECK(third != NULL);
-        if (third) CHECK((DWORD)SendMessageA(third, WM_APP, 0, 0) == 0x94500090);
-        CHECK(set_guest_class(first, 0xffff1234) == 0x94500090);
+        if (third) CHECK((DWORD)SendMessageA(third, WM_APP, 0, 0) == 0xd4500090);
+        CHECK(set_guest_class(first, 0xffff1234) == 0xd4500090);
         CHECK(wow_user_get_class_longA(first, GCL_WNDPROC) == (LONG)0xffff1234);
-        CHECK(set_guest_class(first, 0x94500090) == 0xffff1234);
+        CHECK(set_guest_class(first, 0xd4500090) == 0xffff1234);
         CHECK(!wow_user_set_class_longA(first, GCL_WNDPROC, (LONG)wow_window_class_creation_proc));
         CHECK(GetLastError() == ERROR_INVALID_PARAMETER);
-        CHECK(wow_user_get_class_longA(first, GCL_WNDPROC) == 0x94500090);
+        CHECK(wow_user_get_class_longA(first, GCL_WNDPROC) == 0xd4500090);
         {
             BOOL previous_guest;
             CHECK(wow_user_set_procedure(first, FALSE, (DWORD)DefWindowProcA,
-                FALSE, &previous_guest) == 0x92300056 && previous_guest);
+                FALSE, &previous_guest) == 0xd2300056 && previous_guest);
         }
-        CHECK(wow_user_get_class_longA(first, GCL_WNDPROC) == 0x94500090);
+        CHECK(wow_user_get_class_longA(first, GCL_WNDPROC) == 0xd4500090);
         CHECK((DWORD)wow_user_get_window_longA(first, GWL_WNDPROC) == (DWORD)DefWindowProcA);
         nested_context = &context; nested_atom = atom;
         nested_request = &create; nested_words = &ww;
         mutate_during_create = TRUE;
         pending = wow_window_create_boundA(wow_fixture_creation_owner(&context), atom, &create, &ww, NULL);
         CHECK(pending && !mutate_during_create && nested_window);
-        if (pending) CHECK((DWORD)SendMessageA(pending, WM_APP, 0, 0) == 0x94500090);
-        CHECK(wow_user_get_class_longA(second, GCL_WNDPROC) == 0x956000a0);
+        if (pending) CHECK((DWORD)SendMessageA(pending, WM_APP, 0, 0) == 0xd4500090);
+        CHECK(wow_user_get_class_longA(second, GCL_WNDPROC) == 0xd56000a0);
         CHECK((DWORD)SendMessageA(second, WM_APP, 0, 0) == override.procedure);
     }
     if (first) CHECK(DestroyWindow(first));

@@ -2263,3 +2263,5 @@ post-publication targeted checks.
 - [S15 P73 obsolete diagnostic header](evidence/t485-s1/n023-winerrp.md).
 
 - [S15 P74 class registration migration](evidence/t485-s1/n024-class.md).
+
+- [N024 cleanup producer and lifecycle review](evidence/t485-s1/n024-cleanup-review.md).

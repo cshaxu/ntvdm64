@@ -365,6 +365,7 @@ BOOL WINAPI wow_class_words_exchange_procedure(wow_class_words_binding *binding,
     DWORD procedure, BOOL guest, DWORD *previous, BOOL *previous_guest)
 {
     DWORD old, resolved;
+    WORD module;
     if (!binding || !previous || !previous_guest || !procedure ||
             procedure == (DWORD)wow_class_call_original_native ||
             procedure == (DWORD)wow_window_class_creation_proc ||
@@ -373,6 +374,7 @@ BOOL WINAPI wow_class_words_exchange_procedure(wow_class_words_binding *binding,
     }
     resolved = procedure;
     if (!guest && !wow_native_class_resolve_procedure(procedure, &resolved)) return FALSE;
+    module = wow_class_client_procedure_module(resolved, guest);
     AcquireSRWLockExclusive(&binding->procedure_lock);
     old = logical_class_procedure(binding);
     if (!old) {
@@ -385,6 +387,7 @@ BOOL WINAPI wow_class_words_exchange_procedure(wow_class_words_binding *binding,
      * and records the setter's ANSI entry, unlike GWL_WNDPROC restoration.
      * Do not preserve a source-owned CPD past its native class lifetime. */
     binding->entry.lpfnWndProc = (WNDPROC)resolved;
+    binding->entry.adwWOW[1] = MAKELONG(LOWORD(binding->entry.adwWOW[1]), module);
     binding->procedure_is_guest = guest;
     binding->entry.flags |= CSF_ANSIPROC;
     ReleaseSRWLockExclusive(&binding->procedure_lock);

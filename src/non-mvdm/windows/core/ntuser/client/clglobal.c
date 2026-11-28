@@ -213,10 +213,19 @@ void WINAPI wow_original_set_registered_callbacks(struct tagAPFNWOWHANDLERSIN *i
     wow_input_handlers = *input;
     pfnWowIlstrcmp = input->pfnWowIlstrsmp;
 }
+/* XP inc/ntcb.h:7814 ClientWOWGetProcModule, same-thread native boundary. */
+static WORD WINAPI wow_original_procedure_module(DWORD procedure)
+{
+    ULONG real;
+    if (!wow_input_handlers.pfnGetProcModule16 || !IsWOWProc(procedure)) return 0;
+    UnMarkWOWProc(procedure, real);
+    return wow_input_handlers.pfnGetProcModule16(real);
+}
 void WINAPI wow_original_registration_lifecycle(wow_user_task_lifecycle_callbacks *callbacks)
 {
     callbacks->get_version = wow_input_handlers.pfnGetExpWinVer;
     callbacks->callback = wow_input_handlers.pfnWowWndProcEx;
+    callbacks->procedure_module = wow_original_procedure_module;
 }
 wow_window_callback WINAPI wow_original_registration_window_callback(void)
 {
@@ -292,6 +301,7 @@ void WINAPI wow_original_registration_exchange(struct tagAPFNWOWHANDLERSIN *inpu
         wow_private_user_load_create_cursor_icon;
     output->pfnServerLoadCreateMenu = wow_private_user_load_create_menu;
     output->pfnWOWCleanup = registered_cleanup;
+    output->pfnWOWModuleUnload = registered_module_unload;
     output->pfnWOWFindWindow = wow_native_FindWindowA;
 
     output->pfnWOWLoadBitmapA = wow_bitmap_load;

@@ -5,7 +5,6 @@
 #include "wow_input_group_bindings.h"
 #include "compat/include/wow_user_probe_bindings.h"
 #include "wow_user_object_bindings.h"
-typedef struct _NE_MODULE_SEG UNALIGNED *PNEMODULESEG;
 
 /* ADAPTER-WOW-047: borrowed, serialized original cleanup fields. These are
  * live owner views, not native NT4 layouts or enumeration snapshots. Native
@@ -26,7 +25,8 @@ typedef struct wow_cleanup_client_procs {
 } wow_cleanup_client_procs;
 typedef struct wow_cleanup_shared {
     wow_cleanup_client_procs apfnClientA, apfnClientW;
-    ATOM atomSysClass[20];
+    ATOM atomSysClass[23];
+    PROC restore_procs[23];
 } wow_cleanup_shared;
 typedef struct wow_cleanup_context {
     wow_task_order_thread *thread;
@@ -36,14 +36,13 @@ typedef struct wow_cleanup_context {
     PROC scroll_proc, desktop_proc, menu_proc, switch_proc;
     BOOL (WINAPI *destroy_class)(struct wow_cleanup_context *, wow_class_lookup_entry **);
     void (WINAPI *destroy_object)(struct wow_cleanup_context *, wow_cleanup_handle *);
-    PVOID (WINAPI *allocate)(SIZE_T);
-    void (WINAPI *release)(PVOID);
     BOOL object_release_failed;
 } wow_cleanup_context;
-typedef BOOL (WINAPI *wow_cleanup_operation)(HANDLE, DWORD,
-    struct _NE_MODULE_SEG UNALIGNED *, DWORD, wow_cleanup_context *);
+typedef VOID (WINAPI *wow_cleanup_operation)(HANDLE, DWORD, wow_cleanup_context *);
+typedef VOID (WINAPI *wow_module_unload_operation)(HANDLE, wow_cleanup_context *);
 typedef struct wow_cleanup_provider {
     wow_cleanup_operation cleanup;
+    wow_module_unload_operation module_unload;
     BYTE window_type, menu_type, free_type;
 } wow_cleanup_provider;
 BOOL WINAPI wow_cleanup_bind(const wow_cleanup_provider *);
@@ -53,7 +52,7 @@ const wow_cleanup_provider *WINAPI wow_cleanup_provider_current(void);
  * owner holds its domain serialization and native release operations must not
  * call out or pump messages. Tree links are derived only for this invocation;
  * no native parenting, z-order or ordinary USER tree policy is implemented. */
-BOOL WINAPI wow_user_cleanup_bound(HANDLE, DWORD, struct _NE_MODULE_SEG UNALIGNED *, DWORD, wow_cleanup_context *);
+BOOL WINAPI wow_user_cleanup_bound(HANDLE, DWORD, wow_cleanup_context *);
 /* Original cleanup selects targets; these leaves own only their storage.
  * No application callbacks, pumping or new class behavior is introduced. */
 void WINAPI wow_cleanup_set_window_procedure(wow_cleanup_context *,

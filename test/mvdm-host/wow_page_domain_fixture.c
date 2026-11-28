@@ -857,6 +857,16 @@ static INT_PTR CALLBACK verify_modal_end_dialog(HWND window, UINT message,
     return TRUE;
 }
 
+static unsigned callback_module_queries;
+static WORD WINAPI callback_scope_module(DWORD procedure)
+{
+    BORROW_CHECK(procedure == (WOW_WINDOW_PROC_TAG | 0x01234567u));
+    BORROW_CHECK(wow_user_runtime_current() &&
+        !wow_user_runtime_current()->exclusive_held);
+    ++callback_module_queries;
+    return 0x5678u;
+}
+
 static int verify_callback_scope(ULONG teb)
 {
     static wow_user_object_table objects;
@@ -867,6 +877,7 @@ static int verify_callback_scope(ULONG teb)
     wow_user_runtime runtime = WOW_USER_RUNTIME_INITIALIZER;
     wow_user_task_lifecycle native_owner = {0};
     wow_user_runtime_thread runtime_binding = {0};
+    wow_class_client_context module_context = {0};
     wow_window_dispatch_target target = { (WOW_WINDOW_PROC_TAG | 0x01234567u), destroy_in_callback, TRUE };
     WNDPROC entry;
     HHOOK terminal;
@@ -878,7 +889,8 @@ static int verify_callback_scope(ULONG teb)
     thread.ptdb = &task;
     task.hTaskWow = 0x4321u;
     runtime.lifecycle = &native_owner;
-    if (!wow_user_runtime_bind(&runtime_binding, &runtime, &thread, NULL)) return 0;
+    module_context.procedure_module = callback_scope_module;
+    if (!wow_user_runtime_bind(&runtime_binding, &runtime, &thread, &module_context)) return 0;
     terminal = SetWindowsHookExA(WH_CALLWNDPROCRET,
         wow_window_terminal_observer,NULL,GetCurrentThreadId());
     entry = wow_window_entry_for_guest(&target);
@@ -1199,7 +1211,7 @@ static int verify_callback_scope(ULONG teb)
         ULONG free_before, free_after, largest;
         BOOL caught = FALSE;
         HMENU menu;
-        words.hMod16 = 0x5678u;
+        words.hMod16 = 0x1234u; /* Target publication must replace this input. */
         if (!window) {
             BORROW_CHECK(UnhookWindowsHookEx(terminal));
             (void)wow_user_runtime_unbind(&runtime_binding);
@@ -1322,6 +1334,7 @@ static int verify_callback_scope(ULONG teb)
             free_after >= free_before);
         if (IsWindow(window)) DestroyWindow(window);
     }
+    BORROW_CHECK(callback_module_queries == 2);
     {
         HWND window = CreateWindowExA(0, "STATIC", "Deferred terminal owner",
             WS_POPUP, 0, 0, 24, 24, NULL, NULL, GetModuleHandle(NULL), NULL);
@@ -1723,7 +1736,7 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
             BORROW_CHECK(mvdm_softpc_wow_page_domain_read_window_words_view(held, &actual) &&
                 memcmp(&actual, &before_view, sizeof(actual)) == 0 && c_sas_dw_at(held) == old_full);
             BORROW_CHECK(fresh && mvdm_softpc_wow_page_domain_read_window_words_view(fresh, &actual) &&
-                actual.module16 == words.hMod16 && c_sas_dw_at(fresh) == full);
+                actual.module16 == (mode ? words.hMod16 : 0) && c_sas_dw_at(fresh) == full);
             if (mode && fresh) BORROW_CHECK(c_sas_dw_at(fresh + 100u) == 0);
             /* An existing managed/null-class publication is not replaceable
              * merely because the caller presents a different generation. */
@@ -1881,7 +1894,7 @@ static void verify_original_modal_task(void)
             LOWORD(GetDesktopWindow())) == (ULONG)(ULONG_PTR)GetDesktopWindow());
         fprintf(stderr,"WOW_INITIAL_TASK_PUBLICATION_CCPU errors=%u desktop=1 task_base=1\n",
             borrow_errors-before);
-        BORROW_CHECK(outputs.pfnWOWCleanup((HANDLE)0x4323,0x4323,NULL,0));
+        BORROW_CHECK(outputs.pfnWOWCleanup((HANDLE)0x4323,0x4323));
         BORROW_CHECK(wow_user_task_lifecycle_unbind(&binding));
         BORROW_CHECK(wow_user_task_lifecycle_dispose(lifecycle));
         BORROW_CHECK(CloseHandle(wake));
@@ -2027,7 +2040,7 @@ static void verify_original_modal_task(void)
         wow_window_words_release(modal_retained);modal_retained=NULL;
     }
 #endif
-    BORROW_CHECK(outputs.pfnWOWCleanup((HANDLE)0x4323,0x4323,NULL,0));
+    BORROW_CHECK(outputs.pfnWOWCleanup((HANDLE)0x4323,0x4323));
     BORROW_CHECK(wow_user_task_lifecycle_unbind(&binding));
     BORROW_CHECK(wow_user_task_lifecycle_dispose(lifecycle));
     BORROW_CHECK(CloseHandle(wake));
@@ -6018,15 +6031,15 @@ guest_window_failure:
                 !wow_menu_client_publish_tree(&menu_process, native_submenu) ||
                 wow_menu_client_forget_borrowed(&menu_process) ||
                 GetLastError() != ERROR_BUSY ||
-                !wow_user_cleanup_bound((HANDLE)0x4321u, 0x4321u, NULL, 0, &cleanup) ||
+                !wow_user_cleanup_bound((HANDLE)0x4321u, 0x4321u, &cleanup) ||
                 !IsMenu(native_root) || !IsMenu(native_submenu) ||
-                !wow_user_cleanup_bound(NULL, 0x4321u, NULL, 0, &cleanup) ||
+                !wow_user_cleanup_bound(NULL, 0x4321u, &cleanup) ||
                 IsMenu(native_root) || !IsMenu(native_submenu) ||
                 object_table.entries[LOWORD(native_root)].bType != TYPE_FREE ||
                 object_table.entries[LOWORD(native_submenu)].bType != TYPE_MENU)
             goto done;
         native_root = NULL;
-        if (!wow_user_cleanup_bound(NULL, 0x9876u, NULL, 0, &cleanup) ||
+        if (!wow_user_cleanup_bound(NULL, 0x9876u, &cleanup) ||
                 IsMenu(native_submenu) ||
                 object_table.entries[LOWORD(native_submenu)].bType != TYPE_FREE)
             goto done;
@@ -6041,7 +6054,7 @@ guest_window_failure:
                 object_table.entries[LOWORD(native_submenu)].pOwner ||
                 wow_menu_client_register_created(&menu_process, 0x4321u, native_root) ||
                 GetLastError() != ERROR_ALREADY_EXISTS ||
-                !wow_user_cleanup_bound(NULL, 0x4321u, NULL, 0, &cleanup) ||
+                !wow_user_cleanup_bound(NULL, 0x4321u, &cleanup) ||
                 !IsMenu(native_root) || !IsMenu(native_submenu) ||
                 !wow_menu_client_forget_borrowed(&menu_process) ||
                 object_table.entries[LOWORD(native_root)].bType != TYPE_FREE ||

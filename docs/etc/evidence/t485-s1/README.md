@@ -324,3 +324,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P73 obsolete diagnostic header](n023-winerrp.md).
 
 - [S15 P74 class registration migration](n024-class.md).
+
+- [N024 cleanup producer and lifecycle review](n024-cleanup-review.md).

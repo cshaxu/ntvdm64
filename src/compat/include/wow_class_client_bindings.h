@@ -15,6 +15,7 @@ typedef struct wow_class_client_context {
     wow_task_order_thread *thread;
     /* Optional scoped provider override. NULL uses the native class owner. */
     wow_class_callproc *(WINAPI *resolve_callproc)(HANDLE);
+    WORD (WINAPI *procedure_module)(DWORD);
 } wow_class_client_context;
 /* Original-layout storage uses the existing registration allocation and
  * borrow lifetime. No private CLS layout or menu descriptor enters B. */
@@ -45,5 +46,8 @@ ATOM WINAPI wow_class_client_register_guest(wow_class_client_context *, WNDCLASS
 BOOL WINAPI wow_class_client_unregister(wow_class_client_context *, LPCSTR, HINSTANCE);
 BOOL WINAPI wow_class_client_query(wow_class_client_context *, HINSTANCE,
     LPCSTR, WNDCLASSA *);
+/* XP's registered module callback, before target publication; never called
+ * by module cleanup. Native targets and absent original callbacks return zero. */
+WORD WINAPI wow_class_client_procedure_module(DWORD, BOOL guest);
 
 #endif

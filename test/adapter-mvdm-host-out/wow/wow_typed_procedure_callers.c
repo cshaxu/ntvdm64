@@ -38,19 +38,17 @@ int __cdecl wow_typed_procedure_callers(HWND window)
 {
     unsigned errors=0,kind;
     BOOL previous_guest;
-    DWORD original,encoded,original_words;
+    DWORD original,encoded,encoded_test;
+    MarkWOWProc(0x7fff0004u, encoded_test);
     for(kind=0;kind<2;++kind) {
-        original_words=kind ? GetClassLong(window,GCL_WOWvpfnWndProc) : GetWindowLong(window,GWL_WOWvpfnWndProc);
-        original=wow_user_set_procedure(window,(BOOL)kind,0xffff0004,TRUE,&previous_guest);
+        original=wow_user_set_procedure(window,(BOOL)kind,encoded_test,TRUE,&previous_guest);
         CHECK(original && previous_guest);
         CHECK(query(window,(BOOL)kind)==0x7fff0004);
         CHECK(update(window,(BOOL)kind,0x7fff0008)==0x7fff0004);
         CHECK(query(window,(BOOL)kind)==0x7fff0008);
         CHECK(update(window,(BOOL)kind,0x7fff0004)==0x7fff0008);
         encoded=wow_user_set_procedure(window,(BOOL)kind,original,TRUE,&previous_guest);
-        CHECK(encoded==0xffff0004 && previous_guest);
-        if(kind) SETWC(window,GCL_WOWvpfnWndProc,original_words);
-        else SETWL(window,GWL_WOWvpfnWndProc,original_words);
+        CHECK(encoded==encoded_test && previous_guest);
     }
     fprintf(stderr,"WOW_TYPED_PROCEDURE_CALLERS errors=%u actual_wu32=4 guest_ffff=1 setters=4 getters=4\n",errors);
     return errors!=0;

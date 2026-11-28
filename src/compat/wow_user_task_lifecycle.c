@@ -382,11 +382,6 @@ static BOOL WINAPI cleanup_destroy_class(wow_cleanup_context *context,
     return wow_class_words_destroy_native(link, (*link)->hModule, TRUE);
 }
 
-static PVOID WINAPI cleanup_allocate(SIZE_T size)
-{
-    return HeapAlloc(GetProcessHeap(), 0, size);
-}
-
 static void WINAPI cleanup_release(PVOID memory)
 {
     if (memory) HeapFree(GetProcessHeap(), 0, memory);
@@ -432,8 +427,6 @@ BOOL WINAPI wow_user_task_lifecycle_initialize(wow_user_task_lifecycle *owner,
     owner->cleanup.shared = &owner->cleanup_shared;
     owner->cleanup.destroy_class = cleanup_destroy_class;
     owner->cleanup.destroy_object = wow_menu_client_cleanup;
-    owner->cleanup.allocate = cleanup_allocate;
-    owner->cleanup.release = cleanup_release;
     /* Original USER process initialization supplies the public control
      * classes before application lookup; original cleanup needs the matching
      * restore table. Native USER owns the actual registrations. Prepare their
@@ -533,6 +526,7 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
     task->classes.classes = &owner->classes;
     task->classes.get_version = owner->callbacks.get_version;
     task->classes.callback = owner->callbacks.callback;
+    task->classes.procedure_module = owner->callbacks.procedure_module;
     task->classes.thread = &task->thread;
     task->classes.resolve_callproc = NULL;
     list_insert_tail(&owner->desktop.PtiList, &task->thread.PtiLink);
@@ -1588,7 +1582,7 @@ WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageW, (const MSG *message), (message
 #undef WOW_NATIVE_CALL_AFTER
 
 static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
-    HANDLE instance, PNEMODULESEG selectors, DWORD count)
+    HANDLE instance)
 {
     wow_user_task_lifecycle_thread **link;
     wow_user_task_lifecycle_thread *task;
@@ -1626,7 +1620,7 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
      * carrier alive if the finite original cleanup binding rejects release. */
     __try {
         owner->cleanup.thread = &task->thread;
-        if (!wow_user_cleanup_bound(instance, task_id, selectors, count,
+        if (!wow_user_cleanup_bound(instance, task_id,
                 &owner->cleanup)) __leave;
         if (task->idle_observer && !UnhookWindowsHookEx(task->idle_observer))
             __leave;
@@ -1668,7 +1662,7 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
 }
 
 BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *owner,
-    HANDLE instance, DWORD task_id, PNEMODULESEG selectors, DWORD count)
+    HANDLE instance, DWORD task_id)
 {
     wow_user_task_lifecycle_thread *task = current_task(owner);
     wow_user_runtime_thread *binding = wow_user_runtime_current();
@@ -1688,7 +1682,7 @@ BOOL WINAPI wow_user_task_lifecycle_exit(wow_user_task_lifecycle *owner,
     if (!wow_user_runtime_enter(binding)) return FALSE;
     __try {
         owner->cleanup.thread = &task->thread;
-        result = wow_user_cleanup_bound(instance, task_id, selectors, count,
+        result = wow_user_cleanup_bound(instance, task_id,
             &owner->cleanup);
         if (!result) wow_user_retirement_trace("cleanup-original-boundary", task_id, GetLastError());
     } __finally {
@@ -1811,7 +1805,7 @@ BOOL WINAPI wow_user_task_lifecycle_unbind(wow_user_runtime_thread *binding)
         if (!task) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
         task_id = task->thread.ptdb->hTaskWow;
         wow_user_retirement_trace("enter", task_id, 0);
-        result = retire_task(owner, task_id, NULL, NULL, 0);
+        result = retire_task(owner, task_id, NULL);
         wow_user_retirement_trace(result ? "complete" : "failed", task_id,
             result ? ERROR_SUCCESS : GetLastError());
         if (!result) return FALSE;

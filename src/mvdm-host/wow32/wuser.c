@@ -2443,7 +2443,7 @@ ModuleUnload(
 
    if (fTaskExit) {
        ptd->dwFlags |= TDF_TASKCLEANUPDONE;
-       (pfnOut.pfnWOWCleanup)(HINSTRES32(ptd->hInst16), (DWORD) ptd->htask16, NULL, 0);
+       (pfnOut.pfnWOWCleanup)(HINSTRES32(ptd->hInst16), (DWORD) ptd->htask16);
    }
 
    if (pNeModule->ne_usage > 1) {
@@ -2466,12 +2466,7 @@ ModuleUnload(
      *   It cleans up any USER objects created by this hModule, most notably
      *   classes, and subclassed windows.
      */
-   (pfnOut.pfnWOWCleanup)((HANDLE)hModule16,
-                          0,
-                          (PNEMODULESEG)((ULONG)pNeModule + pNeModule->ne_segtab),
-                          pNeModule->ne_cseg
-                          );
-#line 2466
+   (pfnOut.pfnWOWModuleUnload)((HANDLE)hModule16);
 
    RemoveHmodFromCache(hModule16);
 

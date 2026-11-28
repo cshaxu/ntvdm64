@@ -2214,7 +2214,7 @@ VOID W32DestroyTask( PTD ptd)
     ptd->dwFlags &= ~TDF_IGNOREINPUT;
 
     if (!(ptd->dwFlags & TDF_TASKCLEANUPDONE)) {
-        (pfnOut.pfnWOWCleanup)(HINSTRES32(ptd->hInst16), (DWORD) ptd->htask16, NULL, 0);
+        (pfnOut.pfnWOWCleanup)(HINSTRES32(ptd->hInst16), (DWORD) ptd->htask16);
     }
 
 

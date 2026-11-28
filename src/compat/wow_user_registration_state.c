@@ -139,8 +139,7 @@ BOOL WINAPI registered_hung_handlers(VOID (APIENTRY *callback)(VOID), HANDLE eve
     return result;
 }
 
-BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task,
-    PNEMODULESEG selectors, DWORD count)
+BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task)
 {
     BOOL result = FALSE;
     if (wow_user_ensure_registration_lifecycle()) {
@@ -148,18 +147,28 @@ BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task,
          * No USER task was admitted, so there are no task-owned USER objects
          * to destroy. Module unload and committed-task failures still require
          * the full original cleanup; absence alone is never success. */
-        if (task && !selectors && !count &&
+        if (task &&
                 wow_user_task_cleanup_uninitialized(task))
             result = TRUE;
         else
             result = wow_user_task_lifecycle_exit(wow_user_registered_lifecycle(),
-                instance, task, selectors, count);
+                instance, task);
     }
     DWORD error = result ? ERROR_SUCCESS : GetLastError();
     wow_user_registration_trace("WOWCleanup", result);
     /* Original ModuleUnload does not consume this BOOL. Never let guest
      * GlobalFreeAll invalidate resources after rejected task cleanup. */
     if (!result) wow_user_native_call_failed("registered-task-cleanup", error);
+    return result;
+}
+
+BOOL WINAPI registered_module_unload(HANDLE module)
+{
+    BOOL result = wow_user_ensure_registration_lifecycle() &&
+        wow_user_task_lifecycle_exit(wow_user_registered_lifecycle(), module, 0);
+    DWORD error = result ? ERROR_SUCCESS : GetLastError();
+    wow_user_registration_trace("WOWModuleUnload", result);
+    if (!result) wow_user_native_call_failed("registered-module-unload", error);
     return result;
 }
 

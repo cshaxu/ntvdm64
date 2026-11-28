@@ -1,22 +1,18 @@
+#include "wow_user_client_view_layout.h"
 #include "wow_cleanup_bindings.h"
 #include "wow_shared_user_abi.h"
-BOOL WINAPI _WOWCleanup(HANDLE, DWORD, PNEMODULESEG, DWORD, wow_cleanup_context *);
+VOID WINAPI _WOWModuleUnload(HANDLE, wow_cleanup_context *);
 #include "wow_standard_class_bindings.h"
 #include "wow_standard_class_provider.h"
 #include "wow_window_words_binding.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_dialog_state_bindings.h"
-#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #include <stdio.h>
 #include <string.h>
 static unsigned errors;
 #define CHECK(x) do { if (!(x)) { ++errors; fprintf(stderr, "FAIL line=%d error=%lu\n", __LINE__, GetLastError()); } } while (0)
 static DWORD WINAPI unexpected_callback(HWND w, UINT m, UINT p, LONG l, DWORD f, PVOID v)
 { (void)w; (void)m; (void)p; (void)l; (void)f; (void)v; CHECK(FALSE); return 0; }
-static PVOID WINAPI allocate(SIZE_T size)
-{ return HeapAlloc(GetProcessHeap(), 0, size); }
-static void WINAPI release(PVOID memory)
-{ HeapFree(GetProcessHeap(), 0, memory); }
 static BOOL WINAPI unexpected_destroy(wow_cleanup_context *context,
     wow_class_lookup_entry **entry)
 { (void)context; (void)entry; CHECK(FALSE); return FALSE; }
@@ -76,7 +72,6 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
     wow_task_order_thread thread = {0};
     wow_cleanup_handle handles[1] = {0};
     wow_class_lookup_entry *entry;
-    NEMODULESEG selector = {0};
     wow_standard_class_view other;
     WNDCLASSEXA shadow = {sizeof(shadow)};
     UNICODE_STRING shadow_name;
@@ -91,8 +86,6 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
     context.thread = &thread;
     context.shared = &shared;
     context.handles.aheList = handles;
-    context.allocate = allocate;
-    context.release = release;
     context.destroy_class = unexpected_destroy;
     CHECK(!wow_standard_classes_bind_cleanup(NULL));
     CHECK(wow_standard_classes_bind_cleanup(&context));
@@ -110,7 +103,6 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
     shadow_atom = wow_class_words_register_target(classes, &shadow, &shadow_name,
         shadow_words, NULL, &shadow_target);
     CHECK(shadow_atom != 0);
-    selector.ns_handle = 0x1236;
     for (entry = classes->pclsPublicList; entry; entry = entry->next) {
         wow_class_words_binding *binding = wow_class_words_acquire(classes,
             entry->atomClassName, classes->client_module);
@@ -127,7 +119,7 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
         entry->adwWOW[0] = 0x12370056u;
         wow_class_words_release(binding);
     }
-    /* This row tests selector/procedure restoration, not module destruction.
+    /* This row tests module/procedure restoration, not module destruction.
      * A fixed module1 accidentally matches a native image relocated to10000h.
      * Select a genuinely unrelated WORD from the actual retained class list. */
     for (module_attempt = 0; module_attempt <= 0xffffu; ++module_attempt) {
@@ -154,7 +146,8 @@ static void verify_original_cleanup(wow_class_lookup_context *classes)
                 entry->adwWOW[1] = unrelated_module << 16;
             }
     }
-    CHECK(_WOWCleanup((HANDLE)(ULONG_PTR)unrelated_module, 0, &selector, 1, &context));
+    _WOWModuleUnload((HANDLE)(ULONG_PTR)unrelated_module, &context);
+    CHECK(!context.object_release_failed);
     fprintf(stderr, "WOW_STANDARD_CLEANUP_MODULE image=%p excluded=%lu\n",
         GetModuleHandleA(NULL), unrelated_module);
     private_class = wow_class_words_acquire(classes, shadow_atom, shadow.hInstance);

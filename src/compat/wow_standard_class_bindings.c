@@ -26,25 +26,18 @@ BOOL WINAPI wow_standard_class_bind(const wow_standard_class_provider *value)
     return TRUE;
 }
 
-/* Original WALIAS.H order to cleanup.c's ICLS_* order, not a new class-name
- * or dispatch table. Edit's restore target is intentionally DefWindowProc. */
-/* Fixed ABI pair: OpenNT cleanup.c ICLS order and XP SP1 user.h:395-422.
- * One process owns the atoms; the XP control invocation only borrows them. */
-static const struct { BYTE cleanup, client; } class_indices[] = {
-    {0,0}, {0,0}, {0,0}, {5,5}, {1,1}, {3,3}, {11,6}, {4,4},
-    {2,2}, {6,16}, {7,17}, {10,20}, {8,18}, {9,19}, {12,7}
+/* Original WALIAS.H order to XP user.h ICLS order. */
+static const BYTE class_indices[] = {
+    0, 0, 0, 5, 1, 3, 6, 4, 2, 16, 17, 20, 18, 19, 7
 };
 
 BOOL WINAPI wow_standard_classes_copy_client_atoms(const wow_cleanup_shared *source,
     ATOM *output, UINT count)
 {
-    unsigned i;
     if (!source || !output || count != 23u) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
-    ZeroMemory(output, count * sizeof(*output));
-    for (i = 2; i < ARRAYSIZE(class_indices); ++i)
-        output[class_indices[i].client] = source->atomSysClass[class_indices[i].cleanup];
+    CopyMemory(output, source->atomSysClass, sizeof(source->atomSysClass));
     return TRUE;
 }
 
@@ -67,7 +60,7 @@ BOOL WINAPI wow_standard_classes_bind_cleanup(wow_cleanup_context *context)
         if (!process_control(provider->fnids[i])) continue;
         if (!wow_standard_class_describe(provider->name(i), &view))
             return FALSE;
-        shared.atomSysClass[class_indices[i].cleanup] = view.atom;
+        shared.atomSysClass[class_indices[i]] = view.atom;
     }
     shared.apfnClientA.pfnDefWindowProc = (PROC)DefWindowProcA;
     shared.apfnClientW.pfnDefWindowProc = (PROC)DefWindowProcW;
@@ -80,6 +73,18 @@ BOOL WINAPI wow_standard_classes_bind_cleanup(wow_cleanup_context *context)
     shared.apfnClientW.pfnDialogWndProc = (PROC)wow_dialog_window_procW;
     shared.apfnClientW.pfnMDIClientWndProc = restore;
     shared.apfnClientW.pfnComboListBoxProc = (PROC)wow_control_client_procedure(provider->fnids[14], TRUE);
+    /* XP init.c:2546-2566, same original ICLS order and null DDE/IME slots.
+     * Native USER owns desktop/menu/switch/icon-title/tooltip/ghost windows;
+     * none is a published WOW process-control class in this binding. */
+    shared.restore_procs[0] = shared.apfnClientW.pfnButtonWndProc;
+    shared.restore_procs[1] = shared.apfnClientW.pfnDefWindowProc;
+    shared.restore_procs[2] = shared.apfnClientW.pfnStaticWndProc;
+    shared.restore_procs[3] = shared.apfnClientW.pfnListBoxWndProc;
+    shared.restore_procs[4] = restore;
+    shared.restore_procs[5] = shared.apfnClientW.pfnComboBoxWndProc;
+    shared.restore_procs[6] = shared.apfnClientW.pfnMDIClientWndProc;
+    shared.restore_procs[7] = shared.apfnClientW.pfnComboListBoxProc;
+    shared.restore_procs[17] = shared.apfnClientW.pfnDialogWndProc;
     *context->shared = shared;
     context->scroll_proc = restore;
     return TRUE;
