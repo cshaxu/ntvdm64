@@ -2297,3 +2297,7 @@ post-publication targeted checks.
 [G005 DOS DEBUG migration](evidence/t485-s1/g005.md).
 
 [G005 delivery receipt](evidence/t485-s1/g005-result.json).
+
+[G006 EDLIN migration](evidence/t485-s1/g006.md).
+
+[G006 delivery receipt](evidence/t485-s1/g006-result.json).

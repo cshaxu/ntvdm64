@@ -1,0 +1,376 @@
+[
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/EDLIN.CL1",
+    "before_sha256": "17284f8980cac891554180fbedf53e295686fd268aff103eba3c2d967b0ff065",
+    "old_tree": "opennt-src-2",
+    "old_blob": "54aa27129405ec9e5f3b1a2f91e2ea1bcf3fc29c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/01-EDLIN.CL1",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/EDLIN.CL2",
+    "before_sha256": "4d7debffaff48325ed12f0657e2bc1201e9a110bc0d51d7a50275c8eb2c148c7",
+    "old_tree": "opennt-src-2",
+    "old_blob": "2e200d27a04f1191f56752162496a93fdacce076",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/02-EDLIN.CL2",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/EDLIN.CLA",
+    "before_sha256": "3ef9a6a92bb73db915244e923a2d40fa5632133ee727489f21cde16a7f8be6b0",
+    "old_tree": "opennt-src-2",
+    "old_blob": "f4b809d2c3229593ebd4cd32322da292eff6a693",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/03-EDLIN.CLA",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/EDLIN.CLB",
+    "before_sha256": "c5811a1a95e825d86f06ee132132ee40e243afc90c6bbb2e882e64e7973cd1ab",
+    "old_tree": "opennt-src-2",
+    "old_blob": "238b26d54b5bdea2680c24e2124c10268a48a7bc",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/04-EDLIN.CLB",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/EDLIN.CLC",
+    "before_sha256": "43fe22f13ff087472da7966798e7ccd802d530511508579d5263eb3d30e3318e",
+    "old_tree": "opennt-src-2",
+    "old_blob": "d201f991eeec26197614fd6bb00e738efd4cbd08",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/05-EDLIN.CLC",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/EDLIN.CTL",
+    "before_sha256": "4d383bb90e7a065ea209e15e1d08e0fee41138659102436f333a5540ddd919ab",
+    "old_tree": "opennt-src-2",
+    "old_blob": "5b0019df6f7507f651ca52a083a823b68ac1c451",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/06-EDLIN.CTL",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/EDLIN.EXE",
+    "before_sha256": "9d835a8a46406fcb01f4509550cc86ea2755c3084c95c744cbec79d8d94c0477",
+    "old_tree": "OpenNT",
+    "old_blob": "fcac4760f4c438bf55cb3d5f9a4169a80076c39f",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/07-EDLIN.EXE",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/EDLIN.map",
+    "before_sha256": "9d96189db84adc514ab78f85cfffbb1ec1da6552e6156867fc710f48ed3e6dc8",
+    "old_tree": "OpenNT",
+    "old_blob": "f7ac3eb7f2eb42ac178f8e8a2f04baf0f83edcb3",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/08-EDLIN.map",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlcmd1.OBJ",
+    "before_sha256": "1f7a350c36d9c3c505fa825231a1d4e00cf6637965c8b0921f9da3fb3131d5bc",
+    "old_tree": "opennt-src-2",
+    "old_blob": "5f8eb951f0d6b9a91b1cf521c38fd34dea4d758f",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/09-edlcmd1.OBJ",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlcmd1.asm",
+    "before_sha256": "192f9f446d1a55ed311877ab3263131c0578a63af08f225e2fa45e482441f94d",
+    "old_tree": "OpenNT",
+    "old_blob": "a75422d35a9fc1aead68014e6d1c394df3e8b6f0",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/10-edlcmd1.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/edlin/edlcmd1.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/edlin/edlcmd1.asm",
+    "xp_blob": "a3ad15740a32358d21f4fd73ca5db0ba30115181",
+    "xp_sha256": "419c2ee22d3c93127abb47b9e303a22c08673ae67dba73766e5ca39b2c75497f",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1356
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlcmd2.OBJ",
+    "before_sha256": "c808277aafb516ab35ca259ec7eed75ebccb426992e96eb978a8d0db2a0b8742",
+    "old_tree": "opennt-src-2",
+    "old_blob": "849a44581ad54d0cc2aff5fd6e2eeb9ecf07c0db",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/11-edlcmd2.OBJ",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlcmd2.asm",
+    "before_sha256": "2c0d29e771f148e2a23ad29827bf2a58140e2329b554bcdb0826a879cc4e5c1d",
+    "old_tree": "OpenNT",
+    "old_blob": "569a2eee44cd9ad47597b84cd3818eb60c90c4ae",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/12-edlcmd2.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/edlin/edlcmd2.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/edlin/edlcmd2.asm",
+    "xp_blob": "6ab68fb36990207e9360501e2815adedf7baed59",
+    "xp_sha256": "76f15b4eb59ec3a2126fd1f40afc21f770ba0c5e0254a33d68f18247673fbb79",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      2404
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlequ.asm",
+    "before_sha256": "24a8f713817340ca8cb7c5e36c4cbdf6165b384dbca99db2615588a21fc96240",
+    "old_tree": "OpenNT",
+    "old_blob": "fe7dc2f8bcf605863db2e806328b64b5fe59f153",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/13-edlequ.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/edlin/edlequ.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/edlin/edlequ.asm",
+    "xp_blob": "ba00919b0f87970a3fee1643b1791d3c736012c9",
+    "xp_sha256": "6ffd4622031e733e6a9b879af9b050c26f7e5ec03648075c3cd0dc9d17c6664d",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      326
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlin.OBJ",
+    "before_sha256": "5e8051506648ea2e33bdb2aab4b0e91837e40104377c264be30085bcfebf5bf2",
+    "old_tree": "opennt-src-2",
+    "old_blob": "791b5bc9ef914e1a2121328fbe92439318034aa0",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/14-edlin.OBJ",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlin.asm",
+    "before_sha256": "4853ba3980cf2b01451e8f30e8d5749ab681119cd775c5ab29d07c52df286a91",
+    "old_tree": "OpenNT",
+    "old_blob": "8df7464942585b7add6d0297a7cc92de95298492",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/15-edlin.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/edlin/edlin.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/edlin/edlin.asm",
+    "xp_blob": "a7f2d5cf1665742a9ef9827bd2a5fea02b430c59",
+    "xp_sha256": "1bb01ddc27d8a5db3ff0f4cc46648f9447bef7d05f3f486365f2bc14868e5574",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      3768
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlin.lnk",
+    "before_sha256": "4724cf4f54cfef02875496ff360edba386abdedbbaea004a2c042ae31708a50a",
+    "old_tree": "OpenNT",
+    "old_blob": "6590fb5c9f60b08e75c6f752e88cbc8283cfc9a9",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/16-edlin.lnk",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlin.skl",
+    "before_sha256": "4bda9b5bf2c19a85f41dcefdcf53674654cc0ec90538f579ee9d6537ff84803b",
+    "old_tree": "OpenNT",
+    "old_blob": "982b1c19be45d08d0e51e0fd55f6f8529c7b4d6f",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/17-edlin.skl",
+    "target": "src/mvdm-guest/dos/v86/cmd/edlin/usa/edlin.skl",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/edlin/usa/edlin.skl",
+    "xp_blob": "2659831f206df062f016c630207c9cf5a3e7ed29",
+    "xp_sha256": "0165e28b321bafaab1d8408152c4b2d410765222a8cacf8045845e86b4221dcb",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      168
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlmes.OBJ",
+    "before_sha256": "6aa037efc6e5ba019cac0dbcf6c6f70e4ef24c6e3cbd2384345e3ba92b9a7c67",
+    "old_tree": "opennt-src-2",
+    "old_blob": "03d04f42168e1c81a5f382cd319fea7614403f43",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/18-edlmes.OBJ",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlmes.asm",
+    "before_sha256": "83b76c16e581bf41669d99fd0fb80cc763e35bd5b87d2cc3ecaf13312bfd5961",
+    "old_tree": "OpenNT",
+    "old_blob": "9d14b11767162edba7dea4753a4a08fe7d34f856",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/19-edlmes.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/edlin/edlmes.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/edlin/edlmes.asm",
+    "xp_blob": "a4cc7edf9b695e1ea23fdfcbe76d984fbb59cd32",
+    "xp_sha256": "423f878a80b5f38c9e9b19e7e936a99322d68547226702069f530e380e46cf96",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      1050
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlparse.OBJ",
+    "before_sha256": "a2adb6dff1b43f3fe587c84a74940f12ddef7d3054d1523b70398606ce0e0c61",
+    "old_tree": "opennt-src-2",
+    "old_blob": "920b1fca40fc9db996467886902a72c3d05cd528",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/20-edlparse.OBJ",
+    "target": null,
+    "disposition": "XP-absent historical generated file; XP source/build retained; runtime supplied by approved SP3 original"
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlparse.asm",
+    "before_sha256": "eb01b6ec17451bebee2e8673288f2ae1e43a391f806b7d2ba59107d90234870b",
+    "old_tree": "OpenNT",
+    "old_blob": "7b702a1eed126bd96f5b82867e1d8be8a49817bf",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/21-edlparse.asm",
+    "target": "src/mvdm-guest/dos/v86/cmd/edlin/edlparse.asm",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/edlin/edlparse.asm",
+    "xp_blob": "2624aa561cc95fa1b55a45496deafdec71991c29",
+    "xp_sha256": "1fe2e9e7b9998e047d416b82a0d4252bb7b3e1382fc4b1e1c905023f60c485bb",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      604
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/edlstdsw.inc",
+    "before_sha256": "dc579babdb72ea2e1c23f4d8f6fe214c36d3ee1eef8e49a41c5f23adcf5d62e8",
+    "old_tree": "OpenNT",
+    "old_blob": "059cd05b711381f062117e044a59cca8bd0f5d4c",
+    "before_equals_old": true,
+    "evidence_dir": "build/t485-s16/g006/22-edlstdsw.inc",
+    "target": "src/mvdm-guest/dos/v86/cmd/edlin/edlstdsw.inc",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/edlin/edlstdsw.inc",
+    "xp_blob": "89605e4de940ce4fea62ee04d09b61cbc6512173",
+    "xp_sha256": "3588bd7ed5a1f92f68f26ca91817111704f54aaa9abaafd22eaafa93926a4c21",
+    "before_vs_old": [
+      0,
+      0
+    ],
+    "before_vs_xp": [
+      1,
+      74
+    ],
+    "normalized_diff": [
+      0,
+      0
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "path": "src/mvdm-guest/dos/v86/cmd/edlin/makefile",
+    "before_sha256": "d65923831d872f4f9eece055f72573e08cc4e853b74fec20f54936045d9746b8",
+    "old_tree": "OpenNT",
+    "old_blob": "bdf3d63e236cf739a9e4f733ffdc98731b4bc1d5",
+    "before_equals_old": false,
+    "evidence_dir": "build/t485-s16/g006/23-makefile",
+    "target": "src/mvdm-guest/dos/v86/cmd/edlin/makefile.sub",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/edlin/makefile.sub",
+    "xp_blob": "f17cf80f26f8cfbc2b56ce22749dd639359c85e3",
+    "xp_sha256": "58840e7471bfe21fc13791e15f59426ef6bfdf9332b64ed4bce5c82cd801a0e7",
+    "before_vs_old": [
+      1,
+      208
+    ],
+    "before_vs_xp": [
+      1,
+      206
+    ],
+    "normalized_diff": [
+      12,
+      62
+    ],
+    "after_points": 0,
+    "after_lines": 0
+  }
+]

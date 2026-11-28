@@ -1,7 +1,7 @@
 {
   "schema": "ntvdm64.guest-archive.v1",
   "baseline_sha256": "539a910247c5478bde19fb2a431cd4c5ab26355cdc46f8160f49b23f060b495b",
-  "archive_sha256": "2a585860f06b27418bcb398f3ea2c68cd9c8e58136a83ca3921e7f617e0e1b28",
+  "archive_sha256": "133bf07fa1ea459047d43f5513e8aa5bea2ab9458516bfa56fdfedb8651b3d18",
   "added": [
     "WINNT/EDIT.COM",
     "WINNT/EDIT.HLP",
@@ -35,7 +35,8 @@
     "WINNT/WRITE.EXE",
     "WINNT/WRITE.HLP",
     "WINNT/SYSTEM32/BACKUP.EXE",
-    "WINNT/SYSTEM32/DEBUG.EXE"
+    "WINNT/SYSTEM32/DEBUG.EXE",
+    "WINNT/SYSTEM32/EDLIN.EXE"
   ],
   "missing_static_modules": [],
   "files": [
@@ -766,6 +767,15 @@
       "bytes": 20634,
       "sha256": "9c230aa1caff2ff9d845514017b3e4bbe7b308ad26ad88740967651f7955cd60",
       "source": "approved XP SP3 Professional GRTMPVOL_EN:I386/DEBUG.EX_",
+      "format": "DOS/data",
+      "module": null,
+      "imports": []
+    },
+    {
+      "path": "WINNT/SYSTEM32/EDLIN.EXE",
+      "bytes": 12642,
+      "sha256": "9d835a8a46406fcb01f4509550cc86ea2755c3084c95c744cbec79d8d94c0477",
+      "source": "approved XP SP3 Professional GRTMPVOL_EN:I386/EDLIN.EX_",
       "format": "DOS/data",
       "module": null,
       "imports": []
