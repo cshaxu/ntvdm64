@@ -278,3 +278,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [S15 P50 single-line EDIT](n022-editsl.md).
 
 - [S15 P51 multiline EDIT creation](n022-edmlonce.md).
+
+- [S15 P52 multiline EDIT auxiliary operations](n022-edmlrare.md).

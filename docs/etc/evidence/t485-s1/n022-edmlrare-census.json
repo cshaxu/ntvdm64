@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 7830,
+    "nonerror_lines": 94689
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 7834,
+    "nonerror_lines": 93545
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 4,
+    "nonerror_lines": -1144
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "before_points": 1,
+      "before_lines": 1149,
+      "after_points": 5,
+      "after_lines": 5,
+      "exclusions": 3
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1290,
+    "OpenNT": 39
+  }
+}

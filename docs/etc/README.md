@@ -2217,3 +2217,5 @@ post-publication targeted checks.
 - [S15 P50 single-line EDIT](evidence/t485-s1/n022-editsl.md).
 
 - [S15 P51 multiline EDIT creation](evidence/t485-s1/n022-edmlonce.md).
+
+- [S15 P52 multiline EDIT auxiliary operations](evidence/t485-s1/n022-edmlrare.md).

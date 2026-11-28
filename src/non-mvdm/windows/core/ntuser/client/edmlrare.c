@@ -2,6 +2,9 @@
 * edmlRare.c - Edit controls Routines Called rarely are to be
 * put in a seperate segment _EDMLRare. This file contains
 * these routines.
+*
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 * Multi-Line Support Routines called Rarely
 \****************************************************************************/
 
@@ -384,6 +387,11 @@ void MLSetSelection(
     ichMinSel = min(ped->cch, ichMinSel);
     ichMaxSel = min(ped->cch, ichMaxSel);
 
+#ifdef FE_SB // MLSetSelectionHander()
+#error DIVERGENCE: unselected FE_SB or KOREA control profile.
+#endif // FE_SB
+#line 407
+
     /*
      * Set the caret's position to be at ichMaxSel.
      */
@@ -396,17 +404,20 @@ void MLSetSelection(
     MLSetCaretPosition(ped, hdc);
     ECReleaseEditDC(ped, hdc, FALSE);
 
-#line 399
-#ifdef KOREA
-#line 400
-#error DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register.
-#line 404
+#ifdef FE_SB // MLSetSelectionHander()
+#error DIVERGENCE: unselected FE_SB or KOREA control profile.
 #else
-#line 405
+#line 427
+#ifdef KOREA
+#error DIVERGENCE: unselected FE_SB or KOREA control profile.
+#else
+#line 433
     if (!fDoNotScrollCaret)
         MLEnsureCaretVisible(ped);
 #endif
-#line 408
+#line 436
+#endif // FE_SB
+#line 437
 }
 
 /***************************************************************************\
@@ -508,7 +519,11 @@ RedrawAndReturn:
     // Fix for Bug #6042 - 3/15/94
     MLBuildchLines(ped, 0, 0, FALSE, NULL, NULL);
 
+    // Caret may have changed line by the line recalc above.
+    MLUpdateiCaretLine(ped);
+
     MLEnsureCaretVisible(ped);
+
     // Also, we need to redraw the whole window.
     NtUserInvalidateRect(ped->hwnd, NULL, TRUE);
     return TRUE;
