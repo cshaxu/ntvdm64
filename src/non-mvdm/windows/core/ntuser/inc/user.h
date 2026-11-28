@@ -2724,6 +2724,57 @@ int DrawTextExWorker(HDC hdc, LPWSTR lpchText, int cchText, LPRECT lprc,
                      UINT dwDTformat, LPDRAWTEXTPARAMS lpDTparams, int iCharset);
 
 
+#line 3598
+typedef struct tagED *PED;
+
+typedef BOOL LpkEditCreate        (PED ped, HWND hWnd);
+
+typedef int  LpkEditIchToXY       (PED ped, HDC hDC, PSTR pText, ICH cch, ICH ichPos);
+
+typedef ICH  LpkEditMouseToIch    (PED ped, HDC hDC, PSTR pText, ICH cch, INT iX);
+
+typedef ICH  LpkEditCchInWidth    (PED ped, HDC hdc, PSTR pText, ICH cch, int width);
+
+typedef INT  LpkEditGetLineWidth  (PED ped, HDC hdc, PSTR pText, ICH cch);
+
+typedef void LpkEditDrawText      (PED ped, HDC hdc, PSTR pText, INT cch, INT iMinSel, INT iMaxSel, INT iY);
+
+typedef BOOL LpkEditHScroll       (PED ped, HDC hdc, PSTR pText);
+
+typedef ICH  LpkEditMoveSelection (PED ped, HDC hdc, PSTR pText, ICH ich, BOOL fLeft);
+
+typedef int  LpkEditVerifyText    (PED ped, HDC hdc, PSTR pText, ICH ichInsert, PSTR pInsertText, ICH cchInsert);
+
+typedef void LpkEditNextWord      (PED ped, HDC hdc, PSTR pText, ICH ichStart, BOOL fLeft, ICH *pichMin, ICH *pichMax);
+
+typedef void LpkEditSetMenu       (PED ped, HMENU hMenu);
+
+typedef int  LpkEditProcessMenu   (PED ped, UINT idMenuItem);
+
+typedef int  LpkEditCreateCaret   (PED ped, HDC hdc, INT nWidth, INT nHeight, UINT hkl);
+
+typedef ICH  LpkEditAdjustCaret   (PED ped, HDC hdc, PSTR pText, ICH ich);
+
+
+typedef struct tagLPKEDITCALLOUT {
+    LpkEditCreate        *EditCreate;
+    LpkEditIchToXY       *EditIchToXY;
+    LpkEditMouseToIch    *EditMouseToIch;
+    LpkEditCchInWidth    *EditCchInWidth;
+    LpkEditGetLineWidth  *EditGetLineWidth;
+    LpkEditDrawText      *EditDrawText;
+    LpkEditHScroll       *EditHScroll;
+    LpkEditMoveSelection *EditMoveSelection;
+    LpkEditVerifyText    *EditVerifyText;
+    LpkEditNextWord      *EditNextWord;
+    LpkEditSetMenu       *EditSetMenu;
+    LpkEditProcessMenu   *EditProcessMenu;
+    LpkEditCreateCaret   *EditCreateCaret;
+    LpkEditAdjustCaret   *EditAdjustCaret;
+} LPKEDITCALLOUT, *PLPKEDITCALLOUT;
+
+extern PLPKEDITCALLOUT    fpLpkEditControl;
+
 #line 2616
 void PSMTextOut( HDC hdc, int xLeft, int yTop,
     LPWSTR lpsz, int cch, DWORD dwFlags);

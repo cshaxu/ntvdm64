@@ -32,6 +32,7 @@ typedef struct wow_edit_context {
     struct tagOEMBITMAPINFO *oembmi; /* Borrowed immutable button metadata. */
     UINT dtLBSearch, dtScroll, dtCaretBlink, ucWheelScrollLines;
     DWORD PUSIFlags;
+    UINT uCaretWidth;
     MONITORINFO monitor; /* Borrowed only until the next monitor query in this call. */
     ATOM atomSysClass[20]; /* Snapshot of the existing process cleanup class table. */
     /* Dialog-only inputs; ordinary EDIT capture leaves these unused. */

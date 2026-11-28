@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime54 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime55 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,24 +32,12 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-9/14 directories delivered. P1 N013 and P2 N014 are complete; directory50
-Full24/24 passed. [P3 N015](../etc/evidence/t485-s1/n015.md) completed the five
-DDK declarations with cached build, runtime3 dual publication, lifecycle,
-guest NetAPI and all32 Video7 modes. See its receipt for the observer retry and historical census.
-
-[P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md) delivered the
-five original declarations and paired Console ABI. Runtime4 dual publication,
-NetAPI and Full24/24 passed; its detailed record retains historical counters.
-
-[P5 N016 positions6-11](../etc/evidence/t485-s1/n016-packing-smb.md) delivered
-packing/SMB/tstr with21necessary #line differences. Runtime5 cached build,
-dual publication, RAP11/11, lifecycle and NetAPI passed. Detailed census and
-LF block-count explanation remain in that receipt.
-
-[P6 N016 VDM](../etc/evidence/t485-s1/n016-vdm.md) delivered XP VDM pointer
-ABI and relocated winbase template. Runtime6 cached build, dual publication,
-TIB/ABI, guest NetAPI and Full24/24 passed without retry. Per-file census and
-baseline transitions remain in its receipt.
+9/14 directories delivered. P1 N013 and P2 N014 completed; directory50
+Full24/24 passed. [P3 N015](../etc/evidence/t485-s1/n015.md),
+[P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md),
+[P5 packing/SMB](../etc/evidence/t485-s1/n016-packing-smb.md) and
+[P6 VDM](../etc/evidence/t485-s1/n016-vdm.md) are delivered. Their receipts retain
+source identities, package hashes, targeted/Full gates and historical census.
 
 P7 historical delivery remains indexed in this packet's evidence directory.
 
@@ -189,6 +177,14 @@ controls40/40, CCPU window-borrow and SOL Options passed. N02217/39 plus paired
 N025 RTL; S15 9/14, overall57/159. Census1329/784/795/534/7795/114547;
 delta0/+1/+1/-1/+12/-2434.1284XP/45OpenNT. Five mirrors since P42 Full24/24;
 next edecrare.c. No guest changes or S/T closure.
+
+[P47 EDIT rare operations](../etc/evidence/t485-s1/n022-edecrare.md) delivers
+runtime55: full XP rare EDIT algorithms, paired ED/LPK ABI and original helpers.
+Cached full build, dual13-image26hash publication, controls40/40, real CCPU
+window-borrow and SOL Options pass. Initial fixture IMM link failure retained;
+only failed/unexecuted tests retried. N02218/39, S15 9/14, overall57/159.
+Census1329/784/795/534/7804/113169; delta0/0/0/0/+9/-1378.1285XP/44OpenNT.
+Six mirrors since P42 Full24/24; next editec.c. No guest change or S/T closure.
 
 ## S14 Closure Record
 

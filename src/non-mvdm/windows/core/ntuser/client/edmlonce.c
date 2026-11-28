@@ -35,7 +35,7 @@ LONG MLCreate(
     /*
      * Do the standard creation stuff
      */
-    if (!ECCreate(ped->pwnd, ped, windowStyle)) {
+    if (!ECCreate(ped, windowStyle)) {
         return (-1);
     }
 

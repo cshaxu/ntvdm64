@@ -282,7 +282,7 @@ void MLSetCaretPosition(
         if ( (position.y >= rcRealFmt.top) &&
              (position.y <= rcRealFmt.bottom - ped->lineHeight)) {
             int xPos = position.x;
-            int cxCaret = ECGetCaretWidth(TRUE);
+            int cxCaret = ECGetCaretWidth();
 
             if (ped->fWrap ||
                 ((xPos > (rcRealFmt.left - cxCaret)) &&
@@ -2827,7 +2827,7 @@ void MLSetFocus(
             bDoCaret = TRUE;
 
         if (bDoCaret)
-            NtUserCreateCaret(ped->hwnd, (HBITMAP)NULL, ECGetCaretWidth(TRUE), ped->lineHeight);
+            NtUserCreateCaret(ped->hwnd, (HBITMAP)NULL, ECGetCaretWidth(), ped->lineHeight);
         NtUserShowCaret(ped->hwnd);
         MLSetCaretPosition(ped, hdc);
 

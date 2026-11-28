@@ -8,6 +8,7 @@
  *
  * The staged build selects these leaves; complete original creation/storage/
  * dispatch/retirement and grouped acceptance are still required for delivery. */
+typedef UINT (WINAPI *font_assoc_fn)(void);
 typedef DWORD (WINAPI *code_page_fn)(HDC);
 typedef BOOL (WINAPI *validate_gdi_fn)(HANDLE);
 typedef int (WINAPI *char_dimensions_fn)(HDC, TEXTMETRICW *, LPINT);
@@ -28,6 +29,7 @@ typedef BOOL (WINAPI *def_set_text_fn)(HWND, const wow_native_text_descriptor *)
 typedef struct edit_native_exports {
     char_dimensions_fn char_dimensions;
     code_page_fn code_page;
+    font_assoc_fn font_assoc;
     validate_gdi_fn validate_gdi;
     text_face_alias_fn text_face_alias;
     char_width_fn char_width;
@@ -63,6 +65,7 @@ static BOOL CALLBACK resolve_exports(PINIT_ONCE once, PVOID parameter,
     }
     candidate.char_dimensions = (char_dimensions_fn)GetProcAddress(gdi,
         "GdiGetCharDimensions");
+    candidate.font_assoc = (font_assoc_fn)GetProcAddress(gdi, "QueryFontAssocStatus");
     candidate.code_page = (code_page_fn)GetProcAddress(gdi, "GdiGetCodePage");
     candidate.validate_gdi = (validate_gdi_fn)GetProcAddress(gdi, "GdiValidateHandle");
     candidate.text_face_alias = (text_face_alias_fn)GetProcAddress(gdi,
@@ -84,7 +87,7 @@ static BOOL CALLBACK resolve_exports(PINIT_ONCE once, PVOID parameter,
     candidate.fill_window = (fill_window_fn)GetProcAddress(user, "NtUserFillWindow");
     candidate.control_color = (control_color_fn)GetProcAddress(user, "NtUserGetControlColor");
     candidate.def_set_text = (def_set_text_fn)GetProcAddress(user, "NtUserDefSetText");
-    if (!candidate.code_page || !candidate.validate_gdi || !candidate.char_dimensions || !candidate.text_face_alias || !candidate.char_width ||
+    if (!candidate.font_assoc || !candidate.code_page || !candidate.validate_gdi || !candidate.char_dimensions || !candidate.text_face_alias || !candidate.char_width ||
             !candidate.poly_pat_blt || !candidate.system_timer ||
             !candidate.kill_system_timer || !candidate.get_cpd ||
             !candidate.set_window_state || !candidate.clear_window_state ||
@@ -220,4 +223,10 @@ BOOL WINAPI wow_edit_native_GdiValidateHandle(HANDLE object)
 {
     if (!wow_edit_native_ready()) return FALSE;
     return exports.validate_gdi(object);
+}
+
+UINT WINAPI wow_edit_native_QueryFontAssocStatus(void)
+{
+    if (!wow_edit_native_ready()) return 0;
+    return exports.font_assoc();
 }

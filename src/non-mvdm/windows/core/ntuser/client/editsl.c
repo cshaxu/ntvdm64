@@ -1972,7 +1972,7 @@ void SLSetFocus(
          */
         if (bDoCaret) {
             NtUserCreateCaret(ped->hwnd, (HBITMAP)NULL,
-                    ECGetCaretWidth(ped->cxSysCharWidth <= ped->aveCharWidth),
+                    ECGetCaretWidth(),
                     ped->lineHeight );
         }
         SLSetCaretPosition(ped, hdc);

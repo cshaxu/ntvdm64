@@ -110,6 +110,7 @@ int    gcyGray;
 FPLPKTABBEDTEXTOUT fpLpkTabbedTextOut = UserLpkTabbedTextOut;
 FPLPKPSMTEXTOUT fpLpkPSMTextOut       = UserLpkPSMTextOut;
 FPLPKDRAWTEXTEX fpLpkDrawTextEx       = (FPLPKDRAWTEXTEX)NULL;
+PLPKEDITCALLOUT fpLpkEditControl      = (PLPKEDITCALLOUT)NULL;
 #line 112
 
 /*

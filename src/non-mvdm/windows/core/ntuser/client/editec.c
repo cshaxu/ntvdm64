@@ -2978,3 +2978,123 @@ WORD DbcsCombine(HWND hwnd, WORD ch)
 
     return (WORD)ch | ((WORD)(msg.wParam) << 8);
 }
+
+
+#line 402
+void ECInOutReconversionMode(PED ped, BOOL fIn)
+{
+    UserAssert(fIn == TRUE || fIn == FALSE);
+    if (fIn == ped->fInReconversion) {
+        return;
+    }
+    ped->fInReconversion = fIn;
+    if (ped->fFocus) {
+        (fIn ? NtUserHideCaret: NtUserShowCaret)(ped->hwnd);
+    }
+
+    return;
+}
+
+#line 3837
+UINT WINAPI QueryFontAssocStatus(void);
+UINT fFontAssocStatus = 0xffff;
+
+#line 3848
+int ECGetDBCSVector(PED ped, HDC hdc, BYTE CharSet)
+{
+    BOOL bDBCSCodePage = FALSE;
+    /*
+     * if DEFAUT_CHARSET was passed, we will convert that to Shell charset..
+     */
+    if (CharSet == DEFAULT_CHARSET) {
+        CharSet = (BYTE)GetTextCharset(hdc);
+
+        /*
+         * if CharSet is still DEFAULT_CHARSET, it means gdi has some problem..
+         * then just return default.. we get charset from CP_ACP..
+         */
+        if (CharSet == DEFAULT_CHARSET) {
+            CharSet = (BYTE)GetACPCharSet();
+        }
+    }
+
+    switch (CharSet) {
+    case SHIFTJIS_CHARSET:
+    case HANGEUL_CHARSET:
+    case CHINESEBIG5_CHARSET:
+    case GB2312_CHARSET:
+        bDBCSCodePage = TRUE;
+        break;
+
+    case ANSI_CHARSET:            // 0
+    case SYMBOL_CHARSET:          // 2
+    case OEM_CHARSET:             // 255
+        if (fFontAssocStatus == 0xffff)
+            fFontAssocStatus = QueryFontAssocStatus();
+
+        if ((((CharSet + 2) & 0xf) & fFontAssocStatus)) {
+            bDBCSCodePage = TRUE;
+            /*
+             * Bug 117558, etc.
+             * Try to get a meaningful character set for associated font.
+             */
+            CharSet = (BYTE)GetACPCharSet();
+        } else {
+            bDBCSCodePage = FALSE;
+        }
+        break;
+
+    default:
+        bDBCSCodePage = FALSE;
+    }
+
+    if (bDBCSCodePage) {
+        CHARSETINFO CharsetInfo;
+        DWORD CodePage;
+        CPINFO CPInfo;
+        int lbIX;
+
+        if (TranslateCharsetInfo((DWORD *)CharSet, &CharsetInfo, TCI_SRCCHARSET)) {
+            CodePage = CharsetInfo.ciACP;
+        } else {
+            CodePage = CP_ACP;
+        }
+
+        GetCPInfo(CodePage, &CPInfo);
+        for (lbIX=0 ; CPInfo.LeadByte[lbIX] != 0 ; lbIX+=2) {
+            ped->DBCSVector[lbIX  ] = CPInfo.LeadByte[lbIX];
+            ped->DBCSVector[lbIX+1] = CPInfo.LeadByte[lbIX+1];
+        }
+        ped->DBCSVector[lbIX  ] = 0x0;
+        ped->DBCSVector[lbIX+1] = 0x0;
+    } else {
+        ped->DBCSVector[0] = 0x0;
+        ped->DBCSVector[1] = 0x0;
+    }
+
+    //
+    // Final check: if the font supports DBCS glyphs
+    //
+    // If we've got a font with DBCS glyphs, let's mark PED so.
+    // But since the font's primary charset is the one other than FE,
+    // we can only support UNICODE Edit control.
+    //
+    //  a) GDI performs A/W conversion for ANSI apps based on the primary
+    //     character set in hDC, so it will break anyway.
+    //  b) ANSI applications are only supported on their native system locales:
+    //     GetACPCharSet() is expected to return a FE code page.
+    //  c) ANSI Edit control requires DBCSVector, which cannot be
+    //     initialized without a FE code page.
+    //
+    if (!ped->fAnsi) {
+        FONTSIGNATURE fontSig;
+
+        GetTextCharsetInfo(hdc, &fontSig, 0);
+        if (fontSig.fsCsb[0] & FAREAST_CHARSET_BITS) {
+            bDBCSCodePage = TRUE;
+            // Since this is UNICODE, we're not
+        }
+    }
+
+    return bDBCSCodePage;
+}

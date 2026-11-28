@@ -601,6 +601,7 @@ typedef struct tagUNDO {
  */
 #define CHAR_WIDTH_BUFFER_LENGTH 256
 
+#line 566
 typedef struct tagED {
     HANDLE  hText;             /* Block of text we are editing */
     ICH     cchAlloc;          /* Number of chars we have allocated for hText
@@ -656,11 +657,12 @@ typedef struct tagED {
     UINT     fDirty        : 1; /* Modify flag for the edit control */
     UINT     fDisabled     : 1; /* Window disabled? */
     UINT     fNonPropFont  : 1; /* Fixed width font? */
+    UINT     fNonPropDBCS  : 1; /* Non-Propotional DBCS font */
     UINT     fBorder       : 1; /* Draw a border? */
     UINT     fAutoVScroll  : 1; /* Automatically scroll vertically */
     UINT     fAutoHScroll  : 1; /* Automatically scroll horizontally */
     UINT     fNoHideSel    : 1; /* Hide sel when we lose focus? */
-    UINT     fKanji        : 1;
+    UINT     fDBCS         : 1; /* Are we using DBCS font set for editing? */
     UINT     fFmtLines     : 1; /* For multiline only. Do we insert CR CR LF at
                                 * word wrap breaks?
                                 */
@@ -695,12 +697,20 @@ typedef struct tagED {
     UINT     fFlatBorder   : 1; /* Do we have to draw this baby ourself? */
     UINT     fSawRButtonDown : 1;
     UINT     fInitialized  : 1; /* If any more bits are needed, then   */
+    UINT     fSwapRoOnUp   : 1; /* Swap reading order on next keyup    */
+    UINT     fAllowRTL     : 1; /* Allow RTL processing                */
+    UINT     fDisplayCtrl  : 1; /* Display unicode control characters  */
+    UINT     fRtoLReading  : 1; /* Right to left reading order         */
 
-    UINT     fUnused5      : 1; /* remove from 5 DOWNWARD, leaving the */
-    UINT     fUnused4      : 1; /* low flags (ie fUnused1) for LPK use */
-    UINT     fUnused3      : 1;
-    UINT     fUnused2      : 1;
-    UINT     fUnused1      : 1;
+    BOOL    fInsertCompChr  :1; /* means WM_IME_COMPOSITION:CS_INSERTCHAR will come */
+    BOOL    fReplaceCompChr :1; /* means need to replace current composition str. */
+    BOOL    fNoMoveCaret    :1; /* means stick to current caret pos. */
+    BOOL    fResultProcess  :1; /* means now processing result. */
+    BOOL    fKorea          :1; /* for Korea */
+    BOOL    fInReconversion :1; /* In reconversion mode */
+    BOOL    fLShift         :1; /* L-Shift pressed with Ctrl */
+
+    WORD    wImeStatus;        /* current IME status */
 
     WORD    cbChar;            /* count of bytes in the char size (1 or 2 if unicode) */
     LPICH   chLines;           /* index of the start of each line */
@@ -730,12 +740,9 @@ typedef struct tagED {
                                 * the array
                                 */
     LPINT   charWidthBuffer;
-
     BYTE    charSet;           /* Character set for currently selected font
                                 * needed for all versions
                                 */
-    HKL     hkl;               /* HKL (kbd layout and Locale) */
-
     UINT    wMaxNegA;          /* The biggest negative A width, */
     UINT    wMaxNegAcharPos;   /* and how many characters it can span accross */
     UINT    wMaxNegC;          /* The biggest negative C width, */
@@ -746,16 +753,20 @@ typedef struct tagED {
     ICH     ichStartMinSel;
     ICH     ichStartMaxSel;
 
-    EDITCHARSETPROC lpfnCharset; /* if non-NULL, points to lpk function */
-    DWORD   dwForeign;           /* A dword for lpk's to use privately
-                                  * but leave associcated with the ped
-                                  */
+    PLPKEDITCALLOUT pLpkEditCallout;
+    HBITMAP hCaretBitmap;      /* Current caret bitmap handle */
+    INT     iCaretOffset;      /* Offset in pixels (for LPK use) */
 
     HANDLE  hInstance;         /* for WOW */
     UCHAR   seed;              /* used to encode and decode password text */
-    BOOL    fEncoded;          /* is the text currently encoded */
+    BOOLEAN fEncoded;          /* is the text currently encoded */
     int     iLockLevel;        /* number of times the text has been locked */
+
+    BYTE    DBCSVector[8];     /* DBCS vector table */
+    HIMC    hImcPrev;          /* place to save hImc if we disable IME */
+    POINT   ptScreenBounding;   /* top left corner of edit window in screen */
 } ED, *PED, **PPED;
+#line 796
 
 typedef struct tagEDITWND {
     WND wnd;
@@ -1174,7 +1185,7 @@ PSTR ECLock(PED ped);
 void ECUnlock(PED ped);
 BOOL ECNcCreate(PED, PWND, LPCREATESTRUCT);
 void ECInvalidateClient(PED ped, BOOL fErase);
-BOOL ECCreate(PWND, PED, LONG);
+BOOL ECCreate(PED, LONG);
 void ECWord(PED, ICH, BOOL, ICH*, ICH*);
 ICH  ECFindTab(LPSTR, ICH);
 void ECNcDestroyHandler(PWND, PED);
@@ -1198,6 +1209,29 @@ BOOL ECCalcChangeSelection(PED, ICH, ICH, LPBLOCK, LPBLOCK);
 void ECFindXORblks(LPBLOCK, LPBLOCK, LPBLOCK, LPBLOCK);
 BOOL ECIsCharNumeric(PED ped, DWORD keyPress);
 
+#line 1042
+ICH  ECAdjustIch(PED, LPSTR, ICH);
+ICH  ECAdjustIchNext(PED, LPSTR, ICH);
+int  ECGetDBCSVector(PED, HDC, BYTE);
+BOOL ECIsDBCSLeadByte(PED, BYTE);
+LPSTR ECAnsiNext(PED, LPSTR);
+LPSTR ECAnsiPrev(PED, LPSTR, LPSTR);
+ICH  ECPrevIch(PED, LPSTR, ICH);
+ICH  ECNextIch(PED, LPSTR, ICH);
+
+void ECEnableDisableIME( PED ped );
+void ECImmSetCompositionFont( PED ped );
+void ECImmSetCompositionWindow( PED ped, LONG, LONG );
+void  ECSetCaretHandler(PED ped);
+void  ECInitInsert(PED ped, HKL hkl);
+LRESULT ECImeComposition(PED ped, WPARAM wParam, LPARAM lParam);
+LRESULT EcImeRequestHandler(PED, WPARAM, LPARAM);  // NT 5.0
+BOOL HanjaKeyHandler(PED ped);  // Korean Support
+
+void ECInOutReconversionMode(PED ped, BOOL fIn);
+
+
+#line 1205
 // ECTabTheTextOut draw codes
 #define ECT_CALC        0
 #define ECT_NORMAL      1
@@ -1207,7 +1241,7 @@ UINT ECTabTheTextOut(HDC, int, int, int, int,
                      LPSTR, int, ICH, PED, int, BOOL, LPSTRIPINFO);
 HBRUSH ECGetControlBrush(PED, HDC, LONG);
 HBRUSH ECGetBrush(PED ped, HDC hdc);
-int  ECGetCaretWidth(BOOL);
+#define ECGetCaretWidth() (gpsi->uCaretWidth)
 int  ECGetModKeys(int);
 void ECSize( PED, LPRECT, BOOL);
 

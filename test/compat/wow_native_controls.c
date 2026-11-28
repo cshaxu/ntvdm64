@@ -7,6 +7,8 @@ static unsigned failures;
 
 int main(void)
 {
+    typedef UINT (WINAPI *font_assoc_fn)(void);
+    font_assoc_fn font_assoc = (font_assoc_fn)GetProcAddress(GetModuleHandleW(L"gdi32.dll"), "QueryFontAssocStatus");
     HDC dc = CreateCompatibleDC(NULL);
     HBITMAP bitmap = CreateBitmap(8, 8, 1, 1, NULL);
     HGDIOBJ previous;
@@ -23,6 +25,8 @@ int main(void)
     SetLastError(0x1234);
     CHECK(wow_edit_native_ready() && GetLastError() == 0x1234);
     CHECK(wow_edit_native_ready() && GetLastError() == 0x1234);
+    CHECK(font_assoc != NULL);
+    if (font_assoc) CHECK(wow_edit_native_QueryFontAssocStatus() == font_assoc());
     if (dc && bitmap) {
         previous = SelectObject(dc, bitmap);
         width = wow_edit_native_GdiGetCharDimensions(dc, &metrics, &height);

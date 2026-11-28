@@ -118,7 +118,7 @@ add_dependencies(wow32 wow-imports obj_tests_wow-boundary-adapter_obj obj_tests_
 target_link_options(wow32 PRIVATE "/alternatename:_setAX@4=setAX" "/alternatename:_setES@4=setES" "/map:${CMAKE_BINARY_DIR}/wow32.dll.map" "/def:${CMAKE_BINARY_DIR}/wow32-x86.def")
 set_property(TARGET wow32 APPEND PROPERTY LINK_DEPENDS "${CMAKE_BINARY_DIR}/wow32-x86.def")
 target_link_libraries(wow32 PRIVATE ${imports} "${NTVDM_PARENT_IMPORT_LIBRARY}"
-  ntdll userenv kernel32 user32 gdi32 advapi32 shell32 comdlg32 version winmm wsock32 oldnames)
+  ntdll userenv kernel32 user32 gdi32 imm32 advapi32 shell32 comdlg32 version winmm wsock32 oldnames)
 if(NOT NTVDM_VSDEVCMD)
   set(NTVDM_VSDEVCMD "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/Common7/Tools/VsDevCmd.bat")
 endif()

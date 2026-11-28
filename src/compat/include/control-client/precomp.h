@@ -24,6 +24,7 @@
 #endif
 
 #include <windows.h>
+#include <imm.h>
 #include <winternl.h>
 #pragma warning(push)
 #define WOW_ORIGINAL_BUTTON_RESOURCES
@@ -401,4 +402,25 @@ PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
 #define SetWindowState wow_control_set_window_state
 #define ClearWindowState wow_control_clear_window_state
 #endif /* !WOW_ORIGINAL_DEFAULT_WINDOW */
+
+/* XP EDIT calls existing native IMM operations synchronously. */
+#define NULL_HIMC ((HIMC)0)
+#define THREAD_HKL() GetKeyboardLayout(0)
+#define GETAPPVER() wow_edit_client_info()->dwExpWinVer
+#define ES_FMTMASK 0x0003L
+#define FAREAST_CHARSET_BITS (FS_JISJAPAN | FS_CHINESESIMP | FS_WANSUNG | FS_CHINESETRAD)
+UINT GetACPCharSet(void);
+#define QueryFontAssocStatus wow_edit_native_QueryFontAssocStatus
+#define fpImmAssociateContext ImmAssociateContext
+#define fpImmEscapeA ImmEscapeA
+#define fpImmEscapeW ImmEscapeW
+#define fpImmGetCompositionStringA ImmGetCompositionStringA
+#define fpImmGetCompositionStringW ImmGetCompositionStringW
+#define fpImmGetCompositionWindow ImmGetCompositionWindow
+#define fpImmGetContext ImmGetContext
+#define fpImmIsIME ImmIsIME
+#define fpImmNotifyIME ImmNotifyIME
+#define fpImmReleaseContext ImmReleaseContext
+#define fpImmSetCompositionFontW ImmSetCompositionFontW
+#define fpImmSetCompositionWindow ImmSetCompositionWindow
 #endif

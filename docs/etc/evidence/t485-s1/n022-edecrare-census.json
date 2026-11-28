@@ -1,0 +1,104 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 784,
+    "nonerror_identical": 795,
+    "nonerror_different": 534,
+    "nonerror_points": 7795,
+    "nonerror_lines": 114547
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 784,
+    "nonerror_identical": 795,
+    "nonerror_different": 534,
+    "nonerror_points": 7804,
+    "nonerror_lines": 113169
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 9,
+    "nonerror_lines": -1378
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "before_points": 8,
+      "before_lines": 158,
+      "after_points": 8,
+      "after_lines": 157,
+      "exclusions": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "before_points": 1,
+      "before_lines": 1592,
+      "after_points": 10,
+      "after_lines": 10,
+      "exclusions": 10
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "before_points": 1,
+      "before_lines": 5834,
+      "after_points": 1,
+      "after_lines": 5954,
+      "exclusions": 10
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "before_points": 1,
+      "before_lines": 7554,
+      "after_points": 1,
+      "after_lines": 7554,
+      "exclusions": 16
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "before_points": 1,
+      "before_lines": 4920,
+      "after_points": 1,
+      "after_lines": 4920,
+      "exclusions": 14
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "before_points": 1,
+      "before_lines": 233,
+      "after_points": 1,
+      "after_lines": 233,
+      "exclusions": 1
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "before_points": 1,
+      "before_lines": 383,
+      "after_points": 1,
+      "after_lines": 383,
+      "exclusions": 3
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "before_points": 1,
+      "before_lines": 4638,
+      "after_points": 1,
+      "after_lines": 4672,
+      "exclusions": 17
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "before_points": 1,
+      "before_lines": 5267,
+      "after_points": 1,
+      "after_lines": 5318,
+      "exclusions": 25
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1285,
+    "OpenNT": 44
+  }
+}

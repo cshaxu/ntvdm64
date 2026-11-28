@@ -54,6 +54,7 @@ BOOL WINAPI wow_edit_capture_context(wow_edit_context *context)
     /* XP user.h PUSIF_COMBOBOXANIMATION / PUSIF_UIEFFECTS. */
     value.PUSIFlags = (combo_animation ? 0x00000004u : 0) |
         (ui_effects ? 0x80000000u : 0);
+    if (!SystemParametersInfoW(SPI_GETCARETWIDTH, 0, &value.uCaretWidth, 0)) return FALSE;
     value.dtCaretBlink = GetCaretBlinkTime();
     if (!value.dtCaretBlink) return FALSE;
     value.wMaxLeftOverlapChars = (int)wow_profile_int(5, L"LeftOverlapChars", 3);

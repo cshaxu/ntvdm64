@@ -393,7 +393,7 @@ if(EXISTS "${lifecycle_worker}/lifecycle-inputs.txt")
   set(lifecycle_link_inputs ${lifecycle_direct} "$<TARGET_FILE:${provider}>" ${worker_inputs}
     "${CMAKE_BINARY_DIR}/legacy-wow-user32.lib" "${CMAKE_BINARY_DIR}/legacy-wow-kernel32.lib"
     "${CMAKE_BINARY_DIR}/legacy-wow-ntdll.lib" "${CMAKE_BINARY_DIR}/legacy-wow-apphelp.lib" "${CMAKE_BINARY_DIR}/legacy-wow-comdlg32.lib"
-    userenv.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib shell32.lib
+    userenv.lib version.lib comdlg32.lib rpcrt4.lib kernel32.lib user32.lib gdi32.lib imm32.lib shell32.lib
     advapi32.lib ntdll.lib oldnames.lib libcmt.lib libvcruntime.lib libucrt.lib)
   file(GENERATE OUTPUT "${output}.rsp" CONTENT "\"$<JOIN:${lifecycle_link_inputs},\"\n\">\"\n")
   add_custom_command(OUTPUT "${output}"
