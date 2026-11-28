@@ -65,6 +65,60 @@ LRESULT WINAPI wow_native_SendMessageW(HWND window, UINT message, WPARAM wp, LPA
     }
     return 0;
 }
+/* The original XP geometry routines run against retained WND inputs.
+ * Only the host monitor query is doubled; no geometry algorithm is mocked. */
+int _MapWindowPoints(PWND, PWND, LPPOINT, DWORD);
+void GetRect(PWND, LPRECT, UINT);
+void GetRealClientRect(PWND, LPRECT, UINT, MONITORINFO *);
+static MONITORINFO geometry_monitor = {sizeof(MONITORINFO)};
+MONITORINFO *WINAPI wow_control_monitor(HWND window, DWORD flags)
+{
+    CHECK(window == NULL && flags == MONITOR_DEFAULTTOPRIMARY);
+    return &geometry_monitor;
+}
+static void verify_xp_mapping(void)
+{
+    WND from = {0}, to = {0}, desk = {0};
+    POINT point;
+    RECT rect;
+    MONITORINFO explicit_monitor = {sizeof(MONITORINFO)};
+    from.head.pSelf = (PBYTE)&from;
+    to.head.pSelf = (PBYTE)&to;
+    desk.head.pSelf = (PBYTE)&desk;
+    desk.fnid = FNID_DESKTOP;
+    SetRect(&desk.rcClient, -1000, -800, 1000, 800);
+    SetRect(&from.rcClient, 100, 50, 300, 150);
+    SetRect(&to.rcClient, 20, 10, 80, 60);
+    point.x = 3; point.y = 4;
+    CHECK(_MapWindowPoints(&from, &to, &point, 1) == MAKELONG(80, 40));
+    CHECK(point.x == 83 && point.y == 44);
+    point.x = 3; point.y = 4;
+    _MapWindowPoints(&desk, NULL, &point, 1);
+    CHECK(point.x == 3 && point.y == 4); /* Desktop origin is not an offset. */
+    from.ExStyle = WS_EX_LAYOUTRTL;
+    SetRect(&rect, 10, 2, 30, 8);
+    _MapWindowPoints(&from, NULL, (LPPOINT)&rect, 2);
+    CHECK(rect.left == 270 && rect.right == 290 && rect.top == 52 && rect.bottom == 58);
+    to.ExStyle = WS_EX_LAYOUTRTL;
+    point.x = 10; point.y = 2;
+    _MapWindowPoints(&from, &to, &point, 1);
+    CHECK(point.x == -210 && point.y == 42);
+    to.style = WS_CHILD;
+    to.spwndParent = &from;
+    SetRect(&to.rcWindow, 120, 60, 180, 90);
+    GetRect(&to, &rect, 0x0042); /* GRECT_WINDOW | GRECT_PARENTCOORDS */
+    CHECK(rect.left == 120 && rect.right == 180 && rect.top == 10 && rect.bottom == 40);
+    GetRect(&from, &rect, 0x0011); /* GRECT_CLIENT | GRECT_CLIENTCOORDS */
+    CHECK(rect.left == 0 && rect.top == 0 && rect.right == 200 && rect.bottom == 100);
+    SetRect(&geometry_monitor.rcWork, -900, -700, 900, 700);
+    SetRect(&geometry_monitor.rcMonitor, -1000, -800, 1000, 800);
+    GetRealClientRect(&desk, &rect, 0, NULL);
+    CHECK(EqualRect(&rect, &geometry_monitor.rcWork));
+    explicit_monitor.rcWork = to.rcClient;
+    GetRealClientRect(&desk, &rect, 0, &explicit_monitor);
+    CHECK(EqualRect(&rect, &explicit_monitor.rcWork));
+}
+
 static void child(PWND node, PWND parent)
 {
     node->head.pSelf = (PBYTE)node;
@@ -263,6 +317,7 @@ int __cdecl main(void)
     verify_dialog_controls();
     verify_dialog_groups();
     verify_dialog_geometry();
+    verify_xp_mapping();
     client.dwCompatFlags = 0;
     SetLastError(0x483);
     CHECK(GetAppCompatFlags(NULL) == 0);

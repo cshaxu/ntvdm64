@@ -201,6 +201,17 @@ WORD DbcsCombine(HWND, WORD);
 #define PUSIF_UIEFFECTS 0x80000000
 #define TEST_EffectPUSIF(f) ((gpsi->PUSIFlags & ((f) | PUSIF_UIEFFECTS)) == ((f) | PUSIF_UIEFFECTS))
 #define _MonitorFromWindow(window, flags) wow_control_monitor(HWq(window), flags)
+/* XP winmgr.c uses the ordinary control entry snapshot, not dialog state. */
+#define GetPrimaryMonitor() wow_control_monitor(NULL, MONITOR_DEFAULTTOPRIMARY)
+/* XP user.h:3824-3833, coordinate selectors and retained original owner. */
+#define GRECT_CLIENT        0x0001
+#define GRECT_WINDOW        0x0002
+#define GRECT_RECTMASK      0x0003
+#define GRECT_CLIENTCOORDS  0x0010
+#define GRECT_WINDOWCOORDS  0x0020
+#define GRECT_PARENTCOORDS  0x0040
+#define GRECT_COORDMASK     0x0070
+void GetRect(PWND pwnd, LPRECT lprc, UINT uCoords);
 DWORD GetAppCompatFlags2(WORD);
 /* Original userrtl.h declaration, with the unchanged rtl/winmgr.c owner. */
 BOOL NeedsWindowEdge(DWORD, DWORD, BOOL);
@@ -395,6 +406,7 @@ PWND xxxGotoNextMnem(PWND, PWND, WCHAR);
 #define _MonitorFromWindow(window, flags) wow_dialog_monitor(MonitorFromWindow(HWq(window), flags))
 #define _MonitorFromPoint(point, flags) wow_dialog_monitor(MonitorFromPoint(point, flags))
 #define _MonitorFromRect(rect, flags) wow_dialog_monitor(MonitorFromRect(rect, flags))
+#undef GetPrimaryMonitor
 #define GetPrimaryMonitor wow_dialog_primary_monitor
 #undef ptCursor
 /* XP user.h keyboard-cue policy, supplied by the dialog's native snapshot. */

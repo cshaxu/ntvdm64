@@ -1,7 +1,7 @@
 /****************************** Module Header ******************************\
 * Module Name: winmgr.c
 *
-* Copyright (c) 1985-92, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * This module contains routines common to client and kernel.
 *
@@ -10,18 +10,25 @@
 * 11-11-94 JimA         Separated from client.
 \***************************************************************************/
 
+/***************************************************************************\
+* FindNCHit
+*
+* History:
+* 11-09-90 DavidPe      Ported.
+\***************************************************************************/
 #include "precomp.h"
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
-#line 258
+#line 315
 BOOL _FChildVisible(
     PWND pwnd)
 {
     while (TestwndChild(pwnd)) {
         pwnd = REBASEPWND(pwnd, spwndParent);
-        if (pwnd == NULL)
+        if (pwnd == NULL) {
             break;
-        if (!TestWF(pwnd, WFVISIBLE))
+        } else if (!TestWF(pwnd, WFVISIBLE)) {
             return FALSE;
+        }
     }
 
     return TRUE;
@@ -34,77 +41,113 @@ BOOL _FChildVisible(
 * History:
 * 03-03-92 JimA             Ported from Win 3.1 sources.
 \***************************************************************************/
-
 int _MapWindowPoints(
     PWND pwndFrom,
     PWND pwndTo,
     LPPOINT lppt,
     DWORD cpt)
 {
-    int dx, dy;
+    int     dx = 0, dy = 0;
+    int     SaveLeft, Sign = 1;
+    RECT    *pR      = (RECT *)lppt;
+    BOOL    bMirrored = FALSE;
 
     /*
-     * If a window is NULL, use the desktop window
+     * If a window is NULL, use the desktop window.
+     * If the window is the desktop, don't offset by
+     * the client rect, since it won't work if the screen
+     * origin is not (0,0) - use zero instead.
      */
-    if (pwndFrom == NULL)
-        pwndFrom = _GetDesktopWindow();
-    if (pwndTo == NULL)
-        pwndTo = _GetDesktopWindow();
 
     /*
      * Compute deltas
      */
-    dx = pwndFrom->rcClient.left - pwndTo->rcClient.left;
-    dy = pwndFrom->rcClient.top - pwndTo->rcClient.top;
+    if (pwndFrom && GETFNID(pwndFrom) != FNID_DESKTOP) {
+        if (TestWF(pwndFrom, WEFLAYOUTRTL)) {
+            Sign      = -Sign;
+            dx        = -pwndFrom->rcClient.right;
+            bMirrored = (cpt == 2);
+        } else {
+            dx = pwndFrom->rcClient.left;
+        }
+        dy = pwndFrom->rcClient.top;
+    }
+
+    if (pwndTo && GETFNID(pwndTo) != FNID_DESKTOP) {
+        if (TestWF(pwndTo, WEFLAYOUTRTL)) {
+            Sign      = -Sign;
+            dx        = dx + Sign * pwndTo->rcClient.right;
+            bMirrored = (cpt == 2);
+        } else {
+            dx = dx - Sign * pwndTo->rcClient.left;
+        }
+        dy = dy - pwndTo->rcClient.top;
+    }
 
     /*
      * Map the points
      */
     while (cpt--) {
         lppt->x += dx;
+        lppt->x *= Sign;
         lppt->y += dy;
         ++lppt;
     }
+
+    if (bMirrored) {     //Special case for Rect
+        SaveLeft  = min (pR->left, pR->right);
+        pR->right = max (pR->left, pR->right);
+        pR->left  = SaveLeft;
+    }
+
     return MAKELONG(dx, dy);
 }
 
 
 /***************************************************************************\
 *
-*  GetRealClientRect()
+* GetRealClientRect()
 *
-*  Gets real client rectangle, inc. scrolls and excl. one row or column
-*  of minimized windows.
+* Gets real client rectangle, inc. scrolls and excl. one row or column
+* of minimized windows.
+*
+* If hwndParent is the desktop, then
+*     * If pMonitor is NULL, use the primary monitor
+*     * Otherwise use the appropriate monitor's rectangles
 *
 \***************************************************************************/
-
-void GetRealClientRect(
-    PWND   pwnd,
-    LPRECT prc,
-    UINT   uFlags)
+VOID GetRealClientRect(
+    PWND        pwnd,
+    LPRECT      prc,
+    UINT        uFlags,
+    PMONITOR    pMonitor)
 {
     if (GETFNID(pwnd) == FNID_DESKTOP) {
-
-        *prc = (uFlags & GRC_FULLSCREEN) ? pwnd->rcWindow : gpsi->rcWork;
-
+        if (!pMonitor) {
+            pMonitor = GetPrimaryMonitor();
+        }
+        *prc = (uFlags & GRC_FULLSCREEN) ? pMonitor->rcMonitor : pMonitor->rcWork;
     } else {
-        _GetClientRect(pwnd, prc);
+        GetRect(pwnd, prc, GRECT_CLIENT | GRECT_CLIENTCOORDS);
         if (uFlags & GRC_SCROLLS) {
-            if (TestWF(pwnd, WFHPRESENT))
-                prc->bottom += SYSMET(CYHSCROLL);
-            if (TestWF(pwnd, WFVPRESENT))
-                prc->right += SYSMET(CXVSCROLL);
+            if (TestWF(pwnd, WFHPRESENT)){
+                prc->bottom += SYSMETRTL(CYHSCROLL);
+            }
+
+            if (TestWF(pwnd, WFVPRESENT)) {
+                prc->right += SYSMETRTL(CXVSCROLL);
+            }
         }
     }
 
     if (uFlags & GRC_MINWNDS) {
-        switch (SYSMET(ARRANGE) & ~ARW_HIDE) {
+        switch (SYSMETRTL(ARRANGE) & ~ARW_HIDE) {
             case ARW_TOPLEFT | ARW_RIGHT:
             case ARW_TOPRIGHT | ARW_LEFT:
                 //
                 // Leave space on top for one row of min windows
                 //
-                prc->top += SYSMET(CYMINSPACING);
+                prc->top += SYSMETRTL(CYMINSPACING);
                 break;
 
             case ARW_TOPLEFT | ARW_DOWN:
@@ -112,7 +155,7 @@ void GetRealClientRect(
                 //
                 // Leave space on left for one column of min windows
                 //
-                prc->left += SYSMET(CXMINSPACING);
+                prc->left += SYSMETRTL(CXMINSPACING);
                 break;
 
             case ARW_TOPRIGHT | ARW_DOWN:
@@ -120,7 +163,7 @@ void GetRealClientRect(
                 //
                 // Leave space on right for one column of min windows
                 //
-                prc->right -= SYSMET(CXMINSPACING);
+                prc->right -= SYSMETRTL(CXMINSPACING);
                 break;
 
             case ARW_BOTTOMLEFT | ARW_RIGHT:
@@ -128,7 +171,7 @@ void GetRealClientRect(
                 //
                 // Leave space on bottom for one row of min windows
                 //
-                prc->bottom -= SYSMET(CYMINSPACING);
+                prc->bottom -= SYSMETRTL(CYMINSPACING);
                 break;
         }
     }
@@ -144,7 +187,6 @@ void GetRealClientRect(
 * 11-27-90 darrinm      Ported from Win 3.0 sources.
 * 02-19-91 JimA         Added enum access check
 \***************************************************************************/
-
 PWND _GetLastActivePopup(
     PWND pwnd)
 {
@@ -152,25 +194,6 @@ PWND _GetLastActivePopup(
         return pwnd;
 
     return REBASEPWND(pwnd, spwndLastActive);
-}
-
-
-/****************************************************************************\
-* GetTopLevelTiled
-*
-* This function returns the window handle of the top level "tiled"
-* parent/owner of the window specified.
-*
-* 10-23-90 MikeHar      Ported from Windows.
-\****************************************************************************/
-
-PWND GetTopLevelTiled(
-    PWND pwnd)
-{
-    while (TestWF(pwnd, WFCHILD) || pwnd->spwndOwner != NULL)
-        pwnd = GetWindowCreator(pwnd);
-
-    return pwnd;
 }
 
 
@@ -244,9 +267,6 @@ BOOL IsVisible(
 }
 
 
-#else
-#define gpsi (&wow_default_current->server)
-#line 489
 /***************************************************************************\
 *
 *  Function:       GetWindowBorders
@@ -259,6 +279,9 @@ BOOL IsVisible(
 *
 \***************************************************************************/
 
+#else
+#define gpsi (&wow_default_current->server)
+#line 575
 int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)
 {
     int cBorders = 0;
@@ -294,12 +317,13 @@ int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)
             cBorders += 2;
     }
 
-    return(cBorders);
+    return cBorders;
 }
-
 #endif
 #if !defined(WOW_ORIGINAL_DEFAULT_GEOMETRY)
-#line 539
+#line 611
+
+
 
 
 /***************************************************************************\
@@ -319,8 +343,16 @@ int GetWindowBorders(LONG lStyle, DWORD dwExStyle, BOOL fWindow, BOOL fClient)
 PWND SizeBoxHwnd(
     PWND pwnd)
 {
-    int xbrChild = pwnd->rcWindow.right;
+    BOOL bMirroredSizeBox = (BOOL) TestWF(pwnd, WEFLAYOUTRTL);
+
+    int xbrChild;
     int ybrChild = pwnd->rcWindow.bottom;
+
+    if (bMirroredSizeBox) {
+        xbrChild = pwnd->rcWindow.left;
+    } else {
+        xbrChild = pwnd->rcWindow.right;
+    }
 
     while (GETFNID(pwnd) != FNID_DESKTOP) {
         if (TestWF(pwnd, WFSIZEBOX)) {
@@ -329,24 +361,38 @@ PWND SizeBoxHwnd(
             int ybrParent;
 
             if (TestWF(pwnd, WFMAXIMIZED))
-                return(NULL);
+                return NULL;
 
-            xbrParent = pwnd->rcClient.right;
+            if (bMirroredSizeBox) {
+                xbrParent = pwnd->rcClient.left;
+            } else {
+                xbrParent = pwnd->rcClient.right;
+            }
             ybrParent = pwnd->rcClient.bottom;
 
             /*  If the sizebox dude is within an EDGE of the client's bottom
-             *  right corner, let this succeed.  That way people who draw
-             *  their own sunken clients will be happy.
+             *  right corner (left corner for mirrored windows), let this succeed.
+             *  That way people who draw their own sunken clients will be happy.
              */
-            if ((xbrChild + SYSMET(CXEDGE) < xbrParent) || (ybrChild + SYSMET(CYEDGE) < ybrParent)) {
-                //
-                // Child's bottom, right corner of SIZEBOX isn't close enough
-                // to bottom right of parent's client.
-                //
-                return(NULL);
+            if (bMirroredSizeBox) {
+                if ((xbrChild - SYSMETRTL(CXEDGE) > xbrParent) || (ybrChild + SYSMETRTL(CYEDGE) < ybrParent)) {
+                    //
+                    // Child's bottom, left corner of SIZEBOX isn't close enough
+                    // to bottom left of parent's client.
+                    //
+                    return NULL;
+                }
+            } else {
+                if ((xbrChild + SYSMETRTL(CXEDGE) < xbrParent) || (ybrChild + SYSMETRTL(CYEDGE) < ybrParent)) {
+                    //
+                    // Child's bottom, right corner of SIZEBOX isn't close enough
+                    // to bottom right of parent's client.
+                    //
+                    return NULL;
+                }
             }
 
-            return(pwnd);
+            return pwnd;
         }
 
         if (!TestWF(pwnd, WFCHILD) || TestWF(pwnd, WFCPRESENT))
@@ -354,7 +400,7 @@ PWND SizeBoxHwnd(
 
         pwnd = REBASEPWND(pwnd, spwndParent);
     }
-    return(NULL);
+    return NULL;
 }
 
 
@@ -374,20 +420,21 @@ PWND SizeBoxHwnd(
 //      (3) If the window has WS_THICKFRAME
 //
 // --------------------------------------------------------------------------
-BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
+BOOL NeedsWindowEdge(
+    DWORD dwStyle,
+    DWORD dwExStyle,
+    BOOL fNewApp)
 {
-    BOOL    fGetsWindowEdge;
+    BOOL fGetsWindowEdge = FALSE;
 
-    fGetsWindowEdge = FALSE;
-
-    if (dwExStyle & WS_EX_DLGMODALFRAME)
+    if (dwExStyle & WS_EX_DLGMODALFRAME) {
         fGetsWindowEdge = TRUE;
-    else if (dwExStyle & WS_EX_STATICEDGE)
+    } else if (dwExStyle & WS_EX_STATICEDGE) {
         fGetsWindowEdge = FALSE;
-    else if (dwStyle & WS_THICKFRAME)
+    } else if (dwStyle & WS_THICKFRAME) {
         fGetsWindowEdge = TRUE;
-    else switch (dwStyle & WS_CAPTION)
-    {
+    } else {
+        switch (dwStyle & WS_CAPTION) {
         case WS_DLGFRAME:
             fGetsWindowEdge = TRUE;
             break;
@@ -395,28 +442,139 @@ BOOL NeedsWindowEdge(DWORD dwStyle, DWORD dwExStyle, BOOL fNewApp)
         case WS_CAPTION:
             fGetsWindowEdge = fNewApp;
             break;
+        }
     }
 
-    return(fGetsWindowEdge);
+    return fGetsWindowEdge;
 }
 
 
-#line 696
+// --------------------------------------------------------------------------
+//
+//  HasCaptionIcon()
+//
+//  TRUE if this is a window that should have an icon drawn in its caption
+//  FALSE otherwise
+//
+// --------------------------------------------------------------------------
+#line 798
 /***************************************************************************\
 * GetTopLevelWindow
 *
 * History:
 * 10-19-90 darrinm      Ported from Win 3.0 sources.
 \***************************************************************************/
-
 PWND GetTopLevelWindow(
     PWND pwnd)
 {
     if (pwnd != NULL) {
-        while (TestwndChild(pwnd))
+        while (TestwndChild(pwnd)) {
             pwnd = REBASEPWND(pwnd, spwndParent);
+        }
     }
 
     return pwnd;
 }
+
+
+
+/***************************************************************************\
+* GetRect
+*
+* Returns a rect from pwnd (client or window) and returns it in
+* one of these coordinate schemes:
+*
+*      (a) Own Client
+*      (b) Own Window
+*      (c) Parent Client
+*
+* Moreover, it does the right thing for case (d) when pwnd is top level.
+* In that case, we never want to offset by origin of the parent, which is the
+* desktop, since that will not work when the virtual screen has a
+* negative origin.  And it does the right thing for cases (b) and (c)
+* if pwnd is the desktop.
+*
+* NOTE: The Win95 version of this function had a flag GRECT_SCREENCOORDS,
+* which would return the rectangle in screen coords. There's no reason to
+* call a function to do this, since the smallest and fastest to copy a
+* rectangle is simple assignment. Therefore, I removed GRECT_SCREENCOORDS.
+*
+* History:
+* 19-Sep-1996 adams     Created.
+\***************************************************************************/
+VOID GetRect(
+    PWND pwnd,
+    LPRECT lprc,
+    UINT uCoords)
+{
+    PWND    pwndParent;
+    LPRECT  lprcOffset;
+
+    UserAssert(lprc);
+    UserAssert((uCoords & ~(GRECT_COORDMASK | GRECT_RECTMASK)) == 0);
+    UserAssert(uCoords & GRECT_COORDMASK);
+    UserAssert(uCoords & GRECT_RECTMASK);
+
+    *lprc = (uCoords & GRECT_WINDOW) ? pwnd->rcWindow : pwnd->rcClient;
+
+    /*
+     * If this is the desktop window, we have what we want, whether we
+     * are asking for GRECT_PARENTCOORDS, WINDOWCOORD or CLIENTCOORDS
+     */
+    if (GETFNID(pwnd) == FNID_DESKTOP)
+        return;
+
+    switch (uCoords & GRECT_COORDMASK) {
+    case GRECT_PARENTCOORDS:
+        pwndParent = REBASEPWND(pwnd, spwndParent);
+        if (GETFNID(pwndParent) == FNID_DESKTOP)
+            return;
+
+        lprcOffset = KPRECT_TO_PRECT(&pwndParent->rcClient);
+
+        //
+        // Let's mirror the edges of the child's window since the parent
+        // is mirrored, so should the child window be. [samera]
+        //
+        if (TestWF(pwndParent,WEFLAYOUTRTL) &&
+                (uCoords & GRECT_WINDOW) &&
+                (TestWF(pwnd,WFCHILD))) {
+            int iLeft;
+
+            //
+            // I am using OffsetRect instead of implementing a new
+            // OffsetMirrorRect API since this is the only place I am
+            // doing it in.
+            //
+            // Since screen coordinates are not mirrored, the rect offsetting
+            // should be done relative to prcOffset->right since it is the
+            // leading edge for mirrored windows. [samera]
+            //
+
+            UserVerify(OffsetRect(lprc, -lprcOffset->right, -lprcOffset->top));
+
+            iLeft = lprc->left;
+            lprc->left  = (lprc->right * -1);
+            lprc->right = (iLeft * -1);
+
+            return;
+        }
+        break;
+
+    case GRECT_WINDOWCOORDS:
+        lprcOffset = KPRECT_TO_PRECT(&pwnd->rcWindow);
+        break;
+
+    case GRECT_CLIENTCOORDS:
+        lprcOffset = KPRECT_TO_PRECT(&pwnd->rcClient);
+        break;
+
+    default:
+        RIPMSG0(RIP_ERROR, "Logic error in _GetRect - invalid uCoords");
+        return;
+    }
+
+    UserVerify(OffsetRect(lprc, -lprcOffset->left, -lprcOffset->top));
+}
+
 #endif

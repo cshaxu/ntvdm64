@@ -11,6 +11,9 @@ static unsigned failures;
 __declspec(thread) wow_edit_context *wow_edit_current;
 PWND WINAPI wow_window_client_desktop(void) { return &desktop; }
 /* These restored sibling helpers are outside this relationship fixture. */
+/* Monitor geometry is exercised by the navigation fixture, not this one. */
+MONITORINFO *WINAPI wow_control_monitor(HWND window, DWORD flags)
+{ (void)window; (void)flags; abort(); }
 BOOL WINAPI wow_edit_native_ensure_gui_thread(void) { abort(); }
 const struct wow_task_client_info *WINAPI wow_edit_client_info(void) { abort(); }
 int WINAPI GetWindowBorders(LONG style, DWORD ex, BOOL window, BOOL client)
