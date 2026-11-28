@@ -1,0 +1,289 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-guest/dos/v86/make.inc",
+      "old_blob": "f69a69a1089f335c33836385f66cc565698c0f5c",
+      "old_tree": "OpenNT",
+      "before_sha256": "e9d2e142803b748ce09ad7c6f91ac062c1a2f02493fdc7350e63b63db7836a4f",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": "src/mvdm-guest/dos/v86/make.inc",
+      "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/make.inc",
+      "xp_blob": "d7d614e8738caef2b84850f10f17d8e50006fa58",
+      "xp_sha256": "ec0c781ca9d90a876556d7b79c89cd5823233ebbd692676b0707d0e3a4cf0ab6",
+      "before_vs_xp": [
+        1,
+        311
+      ],
+      "normalized_equal": false,
+      "evidence_dir": "build\\t485-s16\\g002\\01-make.inc",
+      "after_sha256": "ec0c781ca9d90a876556d7b79c89cd5823233ebbd692676b0707d0e3a4cf0ab6",
+      "after_nonerror_points": 0,
+      "after_nonerror_lines": 0
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/makefile",
+      "old_blob": "dbe8581e9fcf8287f9c95a671bd4215cb47e629b",
+      "old_tree": "OpenNT",
+      "before_sha256": "a684a6acc34d118ef03c0e3182811c7f0726dcfd9d4010a76d665a3440ca5194",
+      "before_vs_old": [
+        1,
+        68
+      ],
+      "target": null,
+      "xp_path": "",
+      "disposition": "Retired XP-absent unconsumed file"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/makefile",
+      "old_blob": "aa12db872c499d904c1a5d01eee2b83fc2de7dc5",
+      "old_tree": "OpenNT",
+      "before_sha256": "211dc97febace0c93af19b739d28201d17544c760c711d182f2ea02028f1d9ce",
+      "before_vs_old": [
+        1,
+        152
+      ],
+      "target": null,
+      "xp_path": "",
+      "disposition": "Retired XP-absent unconsumed file"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/APPEND.CL1",
+      "old_blob": "54aa27129405ec9e5f3b1a2f91e2ea1bcf3fc29c",
+      "old_tree": "opennt-src-2",
+      "before_sha256": "17284f8980cac891554180fbedf53e295686fd268aff103eba3c2d967b0ff065",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": null,
+      "xp_path": "",
+      "disposition": "Retired XP-absent unconsumed file"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/APPEND.CL2",
+      "old_blob": "2e200d27a04f1191f56752162496a93fdacce076",
+      "old_tree": "opennt-src-2",
+      "before_sha256": "4d7debffaff48325ed12f0657e2bc1201e9a110bc0d51d7a50275c8eb2c148c7",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": null,
+      "xp_path": "",
+      "disposition": "Retired XP-absent unconsumed file"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/APPEND.CLA",
+      "old_blob": "5fd21546a509d06b40d8d7c172326f1c3800770a",
+      "old_tree": "opennt-src-2",
+      "before_sha256": "3644227ad23abde4e58f4c7c50fd26812e7526408823ccaf756ccb24658644e4",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": null,
+      "xp_path": "",
+      "disposition": "Retired XP-absent unconsumed file"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/APPEND.CLB",
+      "old_blob": "7aada4748f7f30b4bf8771af11e4c84efc087002",
+      "old_tree": "opennt-src-2",
+      "before_sha256": "17cdb69c2e6f1358cd473f0f0cb6a273e5cff464ff81f317c64a72bc25af503e",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": null,
+      "xp_path": "",
+      "disposition": "Retired XP-absent unconsumed file"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/APPEND.CTL",
+      "old_blob": "16bd81bdba4bc4491eb09173de0741dac073f96b",
+      "old_tree": "opennt-src-2",
+      "before_sha256": "c8135c859384a180aa9e1d97a713e07661db1675529794f649115a3f6e9f7c66",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": null,
+      "xp_path": "",
+      "disposition": "Retired XP-absent unconsumed file"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/append.OBJ",
+      "old_blob": "04d43ebdaf7d50fe2d0402dd2a4a578cfe349048",
+      "old_tree": "opennt-src-2",
+      "before_sha256": "81c5499ad93df40d69f9e3b57bfb44c874b6e71f889de185ec0cfb5eaf30b46d",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": null,
+      "xp_path": "",
+      "disposition": "Retired XP-absent unconsumed file"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/append.asm",
+      "old_blob": "7721c6d5d9ca287827a26050f29b73e8dca37a30",
+      "old_tree": "OpenNT",
+      "before_sha256": "1f1538cb6307d8b67eaf46ffa5c3134c15d6fb884225d9fbf1f02046abfa078d",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": "src/mvdm-guest/dos/v86/cmd/append/append.asm",
+      "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/append/append.asm",
+      "xp_blob": "c71e5cbdbbd2acb1485c606debdc5c746512dacb",
+      "xp_sha256": "b0079ba73c8a510f1c0558b04d23d4ec869ee5b3259ca963c2c47b3daf24ca54",
+      "before_vs_xp": [
+        1,
+        7128
+      ],
+      "normalized_equal": true,
+      "evidence_dir": "build\\t485-s16\\g002\\10-append.asm",
+      "after_sha256": "b0079ba73c8a510f1c0558b04d23d4ec869ee5b3259ca963c2c47b3daf24ca54",
+      "after_nonerror_points": 0,
+      "after_nonerror_lines": 0
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/append.exe",
+      "old_blob": "682c7e50430f21c7abb38a5e086ff859df1f44cb",
+      "old_tree": "OpenNT-4.5",
+      "before_sha256": "73d6928246f369aac5de742e149196bf4dc3b5801a6effeed6d014e52841d0ac",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": null,
+      "xp_path": "",
+      "disposition": "Retired XP-absent unconsumed file"
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/append.skl",
+      "old_blob": "646752bbc974771da7fa1e15d087cab04d0564ef",
+      "old_tree": "OpenNT",
+      "before_sha256": "1aa883b5d543d89c1ea74fa323360c260efac906dee8e52f6c5a1dbc9b7334f1",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": "src/mvdm-guest/dos/v86/cmd/append/usa/append.skl",
+      "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/append/usa/append.skl",
+      "xp_blob": "61313bcbe8f9253d05eca0176fef9229f6541044",
+      "xp_sha256": "25e76f4d22866ba54f4e8ef67adb0b705469faef2b4562923942962bcc8d79f9",
+      "before_vs_xp": [
+        1,
+        84
+      ],
+      "normalized_equal": true,
+      "evidence_dir": "build\\t485-s16\\g002\\12-append.skl",
+      "after_sha256": "25e76f4d22866ba54f4e8ef67adb0b705469faef2b4562923942962bcc8d79f9",
+      "after_nonerror_points": 0,
+      "after_nonerror_lines": 0
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/appendm.asm",
+      "old_blob": "c4388c2477fabe3940d97fafd9da2379311fdc0f",
+      "old_tree": "OpenNT",
+      "before_sha256": "dfbbaa207ac1d151858d180f2d7b8967ef7ec7ef6e15aacd4f0b2fbe83709ed5",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": "src/mvdm-guest/dos/v86/cmd/append/appendm.asm",
+      "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/append/appendm.asm",
+      "xp_blob": "b6822efdff3d534d4a164b29b2c8bd9a7e423726",
+      "xp_sha256": "05e0caba93627f3f83e5c86f276fb48c0b05fddd3f42181e68ca2efbb3f2d9c0",
+      "before_vs_xp": [
+        1,
+        82
+      ],
+      "normalized_equal": true,
+      "evidence_dir": "build\\t485-s16\\g002\\13-appendm.asm",
+      "after_sha256": "05e0caba93627f3f83e5c86f276fb48c0b05fddd3f42181e68ca2efbb3f2d9c0",
+      "after_nonerror_points": 0,
+      "after_nonerror_lines": 0
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/appendp.inc",
+      "old_blob": "73a90c0935c90b66fd8b1dbf99962729abdbed8c",
+      "old_tree": "OpenNT",
+      "before_sha256": "993c0d28f71b42ce4a4278e01b66659dc332666037c0d2d3e50e5096f2b2bee5",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": "src/mvdm-guest/dos/v86/cmd/append/appendp.inc",
+      "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/append/appendp.inc",
+      "xp_blob": "3f2609ca35d2de90dca0448046ca7aaa04d142e0",
+      "xp_sha256": "f3b8393d4e2137fae266d27d858cccd16b5684b614eff911fd1819e6cdbb1386",
+      "before_vs_xp": [
+        1,
+        336
+      ],
+      "normalized_equal": true,
+      "evidence_dir": "build\\t485-s16\\g002\\14-appendp.inc",
+      "after_sha256": "f3b8393d4e2137fae266d27d858cccd16b5684b614eff911fd1819e6cdbb1386",
+      "after_nonerror_points": 0,
+      "after_nonerror_lines": 0
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/makefile",
+      "old_blob": "12362746c08e31703f6383fe23bf28fcd8e2295f",
+      "old_tree": "OpenNT",
+      "before_sha256": "2162525f2c18def70c050bc2843127881a4c4e0b7045533412b3a97d1e83d324",
+      "before_vs_old": [
+        1,
+        82
+      ],
+      "target": "src/mvdm-guest/dos/v86/cmd/append/makefile.sub",
+      "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/append/makefile.sub",
+      "xp_blob": "e41445f2e3696f2ffe68d16ae370798d8943288d",
+      "xp_sha256": "e0e70d05a4e6f50951930dc3f4d1905046b813fab33ae8d09b935bc0ededde5e",
+      "before_vs_xp": [
+        1,
+        77
+      ],
+      "normalized_equal": false,
+      "evidence_dir": "build\\t485-s16\\g002\\15-makefile",
+      "after_sha256": "e0e70d05a4e6f50951930dc3f4d1905046b813fab33ae8d09b935bc0ededde5e",
+      "after_nonerror_points": 0,
+      "after_nonerror_lines": 0
+    },
+    {
+      "path": "src/mvdm-guest/dos/v86/cmd/append/sysmac.lib",
+      "old_blob": "784a70d2fae979a791a6f580d0d8215241bdc925",
+      "old_tree": "OpenNT",
+      "before_sha256": "58c68bbc15c35273f18d5bccf3dda919bd66f0b023341be17e59804082e8a452",
+      "before_vs_old": [
+        0,
+        0
+      ],
+      "target": "src/mvdm-guest/dos/v86/cmd/append/sysmac.lib",
+      "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/append/sysmac.lib",
+      "xp_blob": "7a38a59d93dd7eda0b7354db91beeec6dd10b925",
+      "xp_sha256": "fbbab1d2f0ae30944d8e33a8c7deca0738ecc1ca853a05621d667b4bd18582a5",
+      "before_vs_xp": [
+        1,
+        720
+      ],
+      "normalized_equal": true,
+      "evidence_dir": "build\\t485-s16\\g002\\16-sysmac.lib",
+      "after_sha256": "fbbab1d2f0ae30944d8e33a8c7deca0738ecc1ca853a05621d667b4bd18582a5",
+      "after_nonerror_points": 0,
+      "after_nonerror_lines": 0
+    }
+  ],
+  "dependency": {
+    "path": "src\\mvdm-guest\\dos\\v86\\cleanup.inc",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cleanup.inc",
+    "xp_blob": "6808390a3113721fd61b6b345e49664cfec382cb",
+    "sha256": "2661c845ef931b94f9fecb8df88736ec9717465d71de1f31d65df13c8b9564db",
+    "reason": "Direct original include of migrated makefile.sub; retained original build metadata, not executed"
+  }
+}

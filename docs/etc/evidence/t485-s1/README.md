@@ -345,3 +345,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 [N026 USER server export](n026.md); [S15 closure](s15-closure.md).
 
 [G001 XP bin86 originals and package integration](g001.md).
+
+[G002 DOS APPEND migration](g002.md).

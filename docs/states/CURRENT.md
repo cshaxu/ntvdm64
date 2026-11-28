@@ -5,7 +5,8 @@
 **Active: M0 T485 S16** (Ordinary Mode), G001-G033.
 [S15 closure](../etc/evidence/t485-s1/s15-closure.md): N013-N026 delivered;
 S15 delivered62/159 directories, H001-H036 and N001-N026. S16 P1/G001 brings
-the total to63/159. S16 runtime1 is now published and Full24/24 verified.
+the total to63/159; P2/G002 brings it to64/159. S16 runtime2 is now published
+and Full24/24 verified.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S17-S20 and all remaining migration/capability obligations.
 
@@ -33,17 +34,26 @@ retains S17-S20 and all remaining migration/capability obligations.
 
 ## S16 Progress
 
-1/33 directories complete in P1. [G001](../etc/evidence/t485-s1/g001.md):
+2/33 directories complete through P2. [G001](../etc/evidence/t485-s1/g001.md):
 18 exact XP files and1 retired makefile. Four existing archive members advance
 to identical XP SP1/SP3 originals, without adding archive members. Cached
 build, dual publication (26 host and8 guest hashes), WINHELP document/topic
 observation and final-package Full24/24 passed. The initial WINHELP assertion
 used the wrong class; evidence retains that correction and exit limitations.
 [P1 receipt](../etc/evidence/t485-s1/g001-result.json) records final identities.
-Next is G002 in the frozen directory order; S16 and the complete T remain active.
+[G002](../etc/evidence/t485-s1/g002.md) is complete:5 same-path XP
+originals,2 original-path relocations,9 retirements and1 direct original
+cleanup dependency. No guest binary is rebuilt and no runtime payload changes.
+The complete16-entry cohort passed cached build, dual26 publication hashes,
+raw-original identity checks and final-package Full24/24 on runtime2.
+[P2 receipt](../etc/evidence/t485-s1/g002-result.json) records final identities.
+Next is G003, whose two old BACKUP paths have XP language/build counterparts.
+For guest-source-only batches the affected targeted check is original identity,
+paths and consumers; replacing runtime guest binaries adds their direct runtime
+tests. Do not invent an APPEND runtime test for an unshipped binary.
 S15 final census1340files/801byte-identical/812nonerror-identical/528different/
 8191points/45674lines;1340XP/0OpenNT in the non-guest population only.
-Full counter reset at S16 P1/runtime1 after19 entries. No guest-directory completion
+Full counter reset at S16 P2/runtime2 after16 entries plus1 direct dependency. No guest-directory completion
 credit is inferred from paired host dependencies or existing package tests.
 
 ## S15 Closure Record
