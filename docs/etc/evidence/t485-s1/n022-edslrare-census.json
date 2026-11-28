@@ -1,0 +1,40 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 7834,
+    "nonerror_lines": 93545
+  },
+  "after": {
+    "files": 1329,
+    "byte_identical": 785,
+    "nonerror_identical": 796,
+    "nonerror_different": 533,
+    "nonerror_points": 7835,
+    "nonerror_lines": 93164
+  },
+  "delta": {
+    "files": 0,
+    "byte_identical": 0,
+    "nonerror_identical": 0,
+    "nonerror_different": 0,
+    "nonerror_points": 1,
+    "nonerror_lines": -381
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "before_points": 1,
+      "before_lines": 383,
+      "after_points": 2,
+      "after_lines": 2,
+      "exclusions": 1
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1291,
+    "OpenNT": 38
+  }
+}

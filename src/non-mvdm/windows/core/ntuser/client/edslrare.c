@@ -3,6 +3,8 @@
 * put in a seperate segment _EDSLRare. This file contains
 * these routines.
 *
+* Copyright (c) 1985 - 1999, Microsoft Corporation
+*
 * Single-Line Support Routines called Rarely
 *
 * Created: 02-08-89 sankar
@@ -23,7 +25,6 @@
 \***************************************************************************/
 
 LONG SLCreate(
-
     PED ped,
     LPCREATESTRUCT lpCreateStruct) //!!! CREATESTRUCT AorW and in other routines
 {
@@ -49,14 +50,6 @@ LONG SLCreate(
     if (windowStyle & ES_COMBOBOX)
         ped->listboxHwnd = GetDlgItem(lpCreateStruct->hwndParent, CBLISTBOXID);
 
-#line 52
-#ifdef SUPPORT_LPK
-#line 53
-#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
-#line 55
-#endif
-#line 56
-
     /*
      * Set the default font to be the system font.
      */
@@ -66,7 +59,7 @@ LONG SLCreate(
      * Set the window text if needed. Return false if we can't set the text
      * SLSetText notifies the parent in case there is a no memory error.
      */
-    if ((PVOID)lpCreateStruct->lpszName > MM_HIGHEST_USER_ADDRESS)
+    if ((ULONG_PTR)lpCreateStruct->lpszName > gHighestUserAddress)
         lpWindowText = REBASEPTR(ped->pwnd, (PVOID)lpCreateStruct->lpszName);
     else
         lpWindowText = (LPSTR)lpCreateStruct->lpszName;
@@ -122,13 +115,10 @@ BOOL SLUndo(
         SLSetSelection(ped, ped->ichInsStart, ped->ichInsEnd);
         ped->ichInsStart = ped->ichInsEnd = (ICH)-1;
 
-#line 122
 #ifdef NEVER
-#line 123
-#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
-#line 129
+#error DIVERGENCE: original NEVER branch is not selected.
 #else
-#line 130
+#line 126
 
         /*
          * Delete the selected text and save it in undo buff.
@@ -146,7 +136,7 @@ BOOL SLUndo(
             SLSetSelection(ped, ichDeleted, ichDeleted);
         }
 #endif
-#line 147
+#line 143
     }
 
     if (fDelete) {
@@ -156,15 +146,7 @@ BOOL SLUndo(
          * Insert deleted chars. Set the selection to the inserted text.
          */
         SLSetSelection(ped, ichDeleted, ichDeleted);
-#line 156
-#ifdef KOREA
-#line 157
-#error DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register.
-#else
-#line 159
         SLInsertText(ped, hDeletedText, cchDeleted);
-#endif
-#line 161
         UserGlobalFree(hDeletedText);
         if (!IsWindow(hwndSave))
             return FALSE;
@@ -195,6 +177,8 @@ BOOL SLUndo(
         }
 
         ECNotifyParent(ped, EN_CHANGE);
+
+        NotifyWinEvent(EVENT_OBJECT_VALUECHANGE, ped->hwnd, OBJID_CLIENT, INDEXID_CONTAINER);
     }
 
     return TRUE;

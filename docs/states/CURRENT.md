@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime61 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime62 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -174,19 +174,14 @@ paired ABI/resources, package/tests and full mirror census.
 its receipt retains complete algorithms, native providers, paired ABI, package/
 targeted tests, source identities and full mirror census.
 
-[P50 single-line EDIT](../etc/evidence/t485-s1/n022-editsl.md) delivers runtime59:
-full XP algorithms and paired creation/message ABI. Cached build, dual13-image
-26hash, controls40/40, CCPU window-borrow and SOL Options pass. N02221/39;
-overall57/159, S15 9/14. Census1329/784/795/534/7831/94922;
-delta0/0/0/0/+2/-4917.1288XP/41OpenNT. Nine mirrors since P42 Full24/24.
-No guest change or S/T closure.
+[P50 single-line EDIT](../etc/evidence/t485-s1/n022-editsl.md) delivered runtime59;
+its receipt retains original algorithms, paired ABI, package/tests and full
+mirror census. No guest change or S/T closure.
 
-[P51 multiline creation](../etc/evidence/t485-s1/n022-edmlonce.md) delivers
-runtime60: edmlonce.c exact XP, existing host address-limit provider reused.
-Cached build, dual13-image26hash, controls40/40, CCPU window-borrow, SOL Options
-and Full24/24 pass. N02222/39; S15 9/14, overall57/159. Census1329/785/796/533/
-7830/94689; delta0/+1/+1/-1/-1/-233.1289XP/40OpenNT. P51 resets the ten-file
-Full checkpoint. No guest change or S/T closure. Next edmlrare.c.
+[P51 multiline creation](../etc/evidence/t485-s1/n022-edmlonce.md) delivered
+runtime60 with exact XP source and Full24/24. Its receipt retains provider
+binding, initial failure, final package/tests and complete mirror census.
+P51 is the current ten-file Full checkpoint.
 
 [P52 multiline auxiliary operations](../etc/evidence/t485-s1/n022-edmlrare.md)
 delivers runtime61: full XP auxiliary algorithms, original FE_SB/KOREA profile.
@@ -194,6 +189,13 @@ Cached build, dual13-image26hash, controls40/40, CCPU window-borrow and SOL
 Options pass. N02223/39; S15 9/14, overall57/159. Census1329/785/796/533/
 7834/93545; delta0/0/0/0/+4/-1144.1290XP/39OpenNT. One mirror since P51
 Full24/24. No guest change or S/T closure. Next edslrare.c.
+
+[P53 single-line auxiliary operations](../etc/evidence/t485-s1/n022-edslrare.md)
+delivers runtime62: full XP single-line creation/undo, original NEVER exclusion.
+Cached build, dual13-image26hash, controls40/40, CCPU window-borrow and SOL
+Options pass. N02224/39; S15 9/14, overall57/159. Census1329/785/796/533/
+7835/93164; delta0/0/0/0/+1/-381.1291XP/38OpenNT. Two mirrors since P51
+Full24/24. No guest change or S/T closure. Next globals.h.
 
 ## S14 Closure Record
 
