@@ -1,0 +1,39 @@
+[
+  {
+    "old_path": "src/mvdm-guest/dos/v86/cmd/backup/backup.exe",
+    "target": "src/mvdm-guest/dos/v86/cmd/backup/usa/backup.exe",
+    "old_tree": "OpenNT-4.5",
+    "old_blob": "02e48c6a4911e2b76bffd9f2c8863dbdf8560210",
+    "before_sha256": "b692773717380e80558c5cf20bb5c6f9830dfd2ee908058daa51095955a6f239",
+    "before_equals_old": true,
+    "before_vs_old": "binary identity",
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/backup/usa/backup.exe",
+    "xp_blob": "3d9ee3ae1a9a72548313971a34f8261999913390",
+    "xp_sha256": "e9f79ffe2e982259a4296e735485453fa86d5045861eef8078b63066d652dc3c",
+    "before_size": 22966,
+    "xp_size": 36092,
+    "same_bytes": false,
+    "after_points": 0,
+    "after_lines": 0
+  },
+  {
+    "old_path": "src/mvdm-guest/dos/v86/cmd/backup/makefile",
+    "target": "src/mvdm-guest/dos/v86/cmd/backup/makefile.sub",
+    "old_tree": "OpenNT",
+    "old_blob": "67df245e5917b724512428a616e427178336f859",
+    "before_sha256": "a913c18762bace9281d7104023f1e47cb0671978d1789fa9803d463789249c5d",
+    "before_equals_old": false,
+    "before_vs_old": [
+      1,
+      26
+    ],
+    "xp_path": "Source/XPSP1/NT/base/mvdm/dos/v86/cmd/backup/makefile.sub",
+    "xp_blob": "06304c74e5c0484c198dadc08f4d7882e3bbbf26",
+    "xp_sha256": "9717f89998c78955391496bea94c4f3852f007fd46630876bb195d70d7ea32b3",
+    "before_size": 186,
+    "xp_size": 259,
+    "same_bytes": false,
+    "after_points": 0,
+    "after_lines": 0
+  }
+]

@@ -2287,3 +2287,5 @@ post-publication targeted checks.
 [G001 XP bin86 originals and package integration](evidence/t485-s1/g001.md).
 
 [G002 DOS APPEND migration](evidence/t485-s1/g002.md).
+
+[G003 BACKUP original paths](evidence/t485-s1/g003.md).

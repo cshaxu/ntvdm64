@@ -1,7 +1,7 @@
 {
   "schema": "ntvdm64.guest-archive.v1",
   "baseline_sha256": "539a910247c5478bde19fb2a431cd4c5ab26355cdc46f8160f49b23f060b495b",
-  "archive_sha256": "cc039a325ca8ebd0be3a1219e598b21d8e706661442651b52be812eca6f10b1f",
+  "archive_sha256": "b36cb0499847ae9c0a3cbf3ad3effd5f7afea675188efc279b95dd0792d06b4c",
   "added": [
     "WINNT/EDIT.COM",
     "WINNT/EDIT.HLP",
@@ -33,7 +33,8 @@
     "WINNT/WINMINE.HLP",
     "WINNT/WINVER.EXE",
     "WINNT/WRITE.EXE",
-    "WINNT/WRITE.HLP"
+    "WINNT/WRITE.HLP",
+    "WINNT/SYSTEM32/BACKUP.EXE"
   ],
   "missing_static_modules": [],
   "files": [
@@ -747,6 +748,15 @@
       "sha256": "3679db6245b7717d3e58c19b19097c8031d6c5a94df773b5c01e5ca7ed98ebde",
       "source": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.dll",
       "format": "PE",
+      "module": null,
+      "imports": []
+    },
+    {
+      "path": "WINNT/SYSTEM32/BACKUP.EXE",
+      "bytes": 36092,
+      "sha256": "e9f79ffe2e982259a4296e735485453fa86d5045861eef8078b63066d652dc3c",
+      "source": "src/mvdm-guest/dos/v86/cmd/backup/usa/backup.exe",
+      "format": "DOS/data",
       "module": null,
       "imports": []
     }

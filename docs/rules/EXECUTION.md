@@ -18,6 +18,26 @@ point in the current file before starting the checkpoint; do not split a
 file to trigger verification. Record the completed-file count and the last
 Full checkpoint. This is additional to mandatory Full at every S closure.
 
+## XP guest migration delivery and test inputs
+
+Owner clarification 2026-11-28: migrating an XP-provided guest binary is not
+complete when only its source-mirror copy changes. Integrate the approved
+original into assets/winnt.zip, update its manifest, publish the actual runtime
+copy, and run the affected binary. Preserve original bytes; do not rebuild or
+patch guest images. Test guest inputs must come from the audited XP originals
+in winnt.zip, not an older runtime or fixture directory that silently replaces
+them. Verify extracted identities against the archive manifest. Test-specific
+probe binaries remain distinct from original guest media.
+
+For guest source/build-metadata changes without runtime payload changes,
+targeted verification is raw-original identity, path/dependency and consumer
+checks. A changed guest binary needs its directly affected runtime tests;
+host or shared loading/ABI changes justify broader regression. Do not add
+unrelated runtime tests merely because a source mirror file changed. The
+task's final audit must reconcile source baseline, archive and actual test
+inputs, exposing unresolved older-baseline files instead of claiming XP
+completion from source hashes alone.
+
 ## Full retry scope
 
 Owner update 2026-11-26: after a Full run, when code has not changed, do not

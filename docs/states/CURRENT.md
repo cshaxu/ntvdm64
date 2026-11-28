@@ -5,8 +5,9 @@
 **Active: M0 T485 S16** (Ordinary Mode), G001-G033.
 [S15 closure](../etc/evidence/t485-s1/s15-closure.md): N013-N026 delivered;
 S15 delivered62/159 directories, H001-H036 and N001-N026. S16 P1/G001 brings
-the total to63/159; P2/G002 brings it to64/159. S16 runtime2 is now published
-and Full24/24 verified.
+the total to63/159; P2/G002 brings it to64/159; P3/G003 brings it to65/159.
+S16 runtime3 is published with actual XP BACKUP targeted verification;
+runtime2 retains the latest Full24/24 checkpoint.
 The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains S17-S20 and all remaining migration/capability obligations.
 
@@ -34,7 +35,7 @@ retains S17-S20 and all remaining migration/capability obligations.
 
 ## S16 Progress
 
-2/33 directories complete through P2. [G001](../etc/evidence/t485-s1/g001.md):
+3/33 directories complete through P3. [G001](../etc/evidence/t485-s1/g001.md):
 18 exact XP files and1 retired makefile. Four existing archive members advance
 to identical XP SP1/SP3 originals, without adding archive members. Cached
 build, dual publication (26 host and8 guest hashes), WINHELP document/topic
@@ -48,9 +49,17 @@ The complete16-entry cohort passed cached build, dual26 publication hashes,
 raw-original identity checks and final-package Full24/24 on runtime2.
 [P2 receipt](../etc/evidence/t485-s1/g002-result.json) records final identities.
 Next is G003, whose two old BACKUP paths have XP language/build counterparts.
+G003 source migration and cached build completed. Owner correction requires
+the XP BACKUP binary in winnt.zip and runtime, not just in the source mirror.
+The archive/manifest now include SYSTEM32/BACKUP.EXE; archive-derived runtime
+publication,65 media identities,actual BACKUP help and normal exit0 passed.
+[P3 receipt](../etc/evidence/t485-s1/g003-result.json) records archive and runtime evidence.
+Next is G004;2 entries completed since the P2 Full checkpoint.
 For guest-source-only batches the affected targeted check is original identity,
 paths and consumers; replacing runtime guest binaries adds their direct runtime
-tests. Do not invent an APPEND runtime test for an unshipped binary.
+tests. Tests must consume the XP originals from winnt.zip; old runtime or
+fixture directories must not silently supply older guest binaries. Audit and
+close source/archive/test identity gaps before completing T485.
 S15 final census1340files/801byte-identical/812nonerror-identical/528different/
 8191points/45674lines;1340XP/0OpenNT in the non-guest population only.
 Full counter reset at S16 P2/runtime2 after16 entries plus1 direct dependency. No guest-directory completion

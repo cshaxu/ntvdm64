@@ -1,0 +1,14 @@
+{
+  "before_sha256": "cc039a325ca8ebd0be3a1219e598b21d8e706661442651b52be812eca6f10b1f",
+  "after_sha256": "b36cb0499847ae9c0a3cbf3ad3effd5f7afea675188efc279b95dd0792d06b4c",
+  "added": {
+    "path": "WINNT/SYSTEM32/BACKUP.EXE",
+    "bytes": 36092,
+    "sha256": "e9f79ffe2e982259a4296e735485453fa86d5045861eef8078b63066d652dc3c",
+    "source": "src/mvdm-guest/dos/v86/cmd/backup/usa/backup.exe",
+    "format": "DOS/data",
+    "module": null,
+    "imports": []
+  },
+  "other_members_unchanged": true
+}

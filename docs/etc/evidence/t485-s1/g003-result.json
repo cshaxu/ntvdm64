@@ -1,0 +1,145 @@
+{
+  "batch": "G003",
+  "packet": "T485 S16 P3",
+  "archive_sha256": "b36cb0499847ae9c0a3cbf3ad3effd5f7afea675188efc279b95dd0792d06b4c",
+  "runtime_backup_test": "PASS BACKUP /?;see g003-runtime.json;backup writing not covered",
+  "census": {
+    "before": {
+      "files": 1340,
+      "byte_identical": 801,
+      "nonerror_identical": 812,
+      "nonerror_different": 528,
+      "nonerror_points": 8191,
+      "nonerror_lines": 45674
+    },
+    "delta": {
+      "files": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 0,
+      "nonerror_lines": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0
+    },
+    "after": {
+      "files": 1340,
+      "byte_identical": 801,
+      "nonerror_identical": 812,
+      "nonerror_different": 528,
+      "nonerror_points": 8191,
+      "nonerror_lines": 45674
+    }
+  },
+  "build_exit": 0,
+  "runtime": "build/t485-s16/runtime3",
+  "full": "Not due:2 entries since P2;targeted BACKUP runtime required and passed",
+  "source_receipt": "g003-sources.json",
+  "targeted": "PASS original XP BACKUP extracted from winnt.zip: help text and normal exit0;65 media identities verified",
+  "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89",
+  "publication": [
+    {
+      "path": "assets\\release\\NTVDMD.DLL",
+      "sha256": "7B11EE4A01038F488B3CDAD348228257CA0F1380435F2C99580FF4719CC7E9D5"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL",
+      "sha256": "7B11EE4A01038F488B3CDAD348228257CA0F1380435F2C99580FF4719CC7E9D5"
+    },
+    {
+      "path": "assets\\release\\VJOY.DLL",
+      "sha256": "AE8DABD2758C1DA5376526812CB03D39F75825FC11E3797FDDD0CD1B0F486EC9"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL",
+      "sha256": "AE8DABD2758C1DA5376526812CB03D39F75825FC11E3797FDDD0CD1B0F486EC9"
+    },
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "sha256": "091BA5E9A7AACB8F3D339FDA6F88E4D7FA2970AF9CDCF826692FB21C120A8EFA"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL",
+      "sha256": "091BA5E9A7AACB8F3D339FDA6F88E4D7FA2970AF9CDCF826692FB21C120A8EFA"
+    },
+    {
+      "path": "assets\\release\\run16.exe",
+      "sha256": "A0FA3B33C452DADF78C3BB1F8AE216F379679CB0C01E4D36A0AE928A1A667A2A"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe",
+      "sha256": "A0FA3B33C452DADF78C3BB1F8AE216F379679CB0C01E4D36A0AE928A1A667A2A"
+    },
+    {
+      "path": "assets\\release\\ntsrv.exe",
+      "sha256": "3B8F649ED3B9C378E69E0DD679462E3C82F1DD48A4E2CDEEA9D116F15E307267"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe",
+      "sha256": "3B8F649ED3B9C378E69E0DD679462E3C82F1DD48A4E2CDEEA9D116F15E307267"
+    },
+    {
+      "path": "assets\\release\\ntcon.exe",
+      "sha256": "C0C43F6287999B84FD611F88A7AAC8C7290F06823DA5D0474E1BD2E7EDD6ECA8"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe",
+      "sha256": "C0C43F6287999B84FD611F88A7AAC8C7290F06823DA5D0474E1BD2E7EDD6ECA8"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "F45097222587A8F75B66C99F34C133E9C4065246B60F9C7224F3CC28F1A76373"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe",
+      "sha256": "F45097222587A8F75B66C99F34C133E9C4065246B60F9C7224F3CC28F1A76373"
+    },
+    {
+      "path": "assets\\release\\ntvwm.exe",
+      "sha256": "ADA7E010310EE7D5FD6D6AB6B3BF060DBCE30F79DB2510D37D8BDBA7E646AAB1"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe",
+      "sha256": "ADA7E010310EE7D5FD6D6AB6B3BF060DBCE30F79DB2510D37D8BDBA7E646AAB1"
+    },
+    {
+      "path": "assets\\release\\ntmon.exe",
+      "sha256": "8FDC09F23E519C2A8EFA085474E5F64838FE3D93A600B18495484DCB51A61895"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe",
+      "sha256": "8FDC09F23E519C2A8EFA085474E5F64838FE3D93A600B18495484DCB51A61895"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "F96E5D47148A5A6F1FFDB4C13725A205BD2000D24772968B317F6351D55E3F67"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL",
+      "sha256": "F96E5D47148A5A6F1FFDB4C13725A205BD2000D24772968B317F6351D55E3F67"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "734EB6B6AA19FED8DEC72ABEAD2F3F55DC46B42C5C3C182C01DDD05B9FFD5ED1"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL",
+      "sha256": "734EB6B6AA19FED8DEC72ABEAD2F3F55DC46B42C5C3C182C01DDD05B9FFD5ED1"
+    },
+    {
+      "path": "assets\\release\\nthook32.dll",
+      "sha256": "78CC1919EDA93597FC7DDEDFC1F739D5D20D33BDE748E0043351E99D38B6150D"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll",
+      "sha256": "78CC1919EDA93597FC7DDEDFC1F739D5D20D33BDE748E0043351E99D38B6150D"
+    },
+    {
+      "path": "assets\\release\\nthook64.dll",
+      "sha256": "A5D31E9C482DD65F4AA91D09B972ED252D6F6690EA629446061616518D42D121"
+    },
+    {
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll",
+      "sha256": "A5D31E9C482DD65F4AA91D09B972ED252D6F6690EA629446061616518D42D121"
+    }
+  ],
+  "archive_receipt": "g003-package.json"
+}

@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "coverage": "launch,help parsing,text output,normal exit;no backup/write operation tested",
+  "exit": 0,
+  "console": "backup-help.txt.console.txt",
+  "installed_sha256": "E9F79FFE2E982259A4296E735485453FA86D5045861EEF8078B63066D652DC3C",
+  "operation": "XP original BACKUP /?",
+  "source": "assets/winnt.zip:WINNT/SYSTEM32/BACKUP.EXE"
+}
