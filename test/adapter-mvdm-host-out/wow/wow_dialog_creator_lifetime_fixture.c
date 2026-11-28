@@ -69,7 +69,7 @@ BOOL ValidateDialogPwnd(PWND w)
 VOID WINAPI TellWOWThehDlg(HWND w) { CHECK(w == native_root && !dead(&root.wnd)); }
 HANDLE WINAPI GetEditDS(void) { ++allocations; retire(ALLOCATE); return (HANDLE)0x1234; }
 VOID WINAPI ReleaseEditDS(HANDLE segment) { CHECK(segment == (HANDLE)0x1234); ++releases; }
-BOOL _AdjustWindowRectEx(LPRECT r, LONG style, BOOL menu, DWORD ex)
+BOOL RealAdjustWindowRectEx(LPRECT r, DWORD style, BOOL menu, DWORD ex)
 { (void)r; (void)style; CHECK(!menu); (void)ex; return TRUE; }
 void RepositionRect(PMONITOR monitor, LPRECT r, DWORD style, DWORD ex)
 { CHECK(monitor != NULL); (void)r; (void)style; (void)ex; }

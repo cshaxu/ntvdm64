@@ -5,6 +5,10 @@
 #ifdef WOW
 #error Original host client view must use native RECT, not guest WORD rectangles
 #endif
+/* This native-view fixture has no guest dispatch owner. */
+#undef SendMessageW
+#undef SendMessage
+#define SendMessage SendMessageW
 /* Test-owned original WNDs have ordinary scoped parent pointers. */
 #define REBASEPWND(p, member) ((p)->member)
 /* Use the production declarations for restored, unreferenced helpers.

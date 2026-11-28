@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime78 is the current
+overall58/159 directories, H001-H036 and N001-N022. S15 runtime79 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -32,7 +32,7 @@ retains all S16-S20 and remaining migration/capability obligations.
 
 ## S15 Progress
 
-9/14 directories delivered. P1 N013 and P2 N014 completed; directory50
+10/14 directories delivered. P1 N013 and P2 N014 completed; directory50
 Full24/24 passed. [P3 N015](../etc/evidence/t485-s1/n015.md),
 [P4 N016 first-five](../etc/evidence/t485-s1/n016-first-five.md),
 [P5 packing/SMB](../etc/evidence/t485-s1/n016-packing-smb.md) and
@@ -201,13 +201,16 @@ runtime73; receipt preserves restored bodies, service bindings and targeted test
 [P65 USER resources](../etc/evidence/t485-s1/n022-res.md) delivered runtime75;
 its receipt retains source/dependency identities, resource and runtime verification.
 [P66 capture/lookaside](../etc/evidence/t485-s1/n022-rtlinit.md) delivered runtime77;
-its receipt retains XP bodies, coupled capture ABI correction and all verification.
+receipt retains verification.
 [P67 USER client declarations](../etc/evidence/t485-s1/n022-usercli.md) delivered
-runtime78. Cached full build, dual13-image26hash, controls40/40, real standard-class
-lifecycle, SOL Options and genuine Win16 controls pass. N02238/39; S15 9/14,
-overall57/159. Census1330/789/800/530/7965/65210;
-delta0/0/0/0/-142/-330;1306XP/24OpenNT. Eight files since P61 Full24/24.
-No original guest change or S/T closure. Next winmgrc.c.
+runtime78; see receipt.
+[P68 client window helpers](../etc/evidence/t485-s1/n022-winmgrc.md) delivered runtime79.
+Build, dual26hash, controls40/40, standard-class, SOL Options and
+real Win16 controls pass. N02239/39; S15 10/14, overall58/159.
+Census1330/789/800/530/7971/66379; delta0/0/0/0/+6/+1169;1307XP/23OpenNT.
+Nine files since P61 Full24/24. Next N023 plus recorded P66 #line correction;
+next changed mirror triggers Full. Baseline/format delta explained in receipt.
+No S/T closure.
 
 ## S14 Closure Record
 
