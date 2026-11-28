@@ -2280,3 +2280,6 @@ post-publication targeted checks.
 - [N024 XP kernel declaration migration](evidence/t485-s1/n024-userk.md).
 
 [N025 USER RTL migration](evidence/t485-s1/n025.md): ordered migration and P83 delivery evidence.
+
+[N026 USER server exports](evidence/t485-s1/n026.md);
+[S15 closure](evidence/t485-s1/s15-closure.md).

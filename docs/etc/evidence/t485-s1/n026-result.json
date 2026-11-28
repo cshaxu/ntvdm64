@@ -1,0 +1,427 @@
+{
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 688678,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": true,
+    "PreparationMs": 26192,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1217,
+        "CleanupMs": 340,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-standard",
+        "ElapsedMs": 49957,
+        "CleanupMs": 267,
+        "Passed": true
+      },
+      {
+        "Gate": "win31-enhanced",
+        "ElapsedMs": 88101,
+        "CleanupMs": 267,
+        "Passed": true
+      },
+      {
+        "Gate": "win95",
+        "ElapsedMs": 108878,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-sol-options",
+        "ElapsedMs": 25615,
+        "CleanupMs": 245,
+        "Passed": true
+      },
+      {
+        "Gate": "startup-presentation",
+        "ElapsedMs": 19608,
+        "CleanupMs": 343,
+        "Passed": true
+      },
+      {
+        "Gate": "console-font-restore",
+        "ElapsedMs": 19583,
+        "CleanupMs": 325,
+        "Passed": true
+      },
+      {
+        "Gate": "console-input-batch",
+        "ElapsedMs": 20949,
+        "CleanupMs": 313,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 160,
+        "CleanupMs": 381,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65500,
+        "CleanupMs": 336,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 45146,
+        "CleanupMs": 275,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 39997,
+        "CleanupMs": 334,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15554,
+        "CleanupMs": 312,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10445,
+        "CleanupMs": 297,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 1398,
+        "CleanupMs": 343,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12415,
+        "CleanupMs": 330,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 35355,
+        "CleanupMs": 326,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 40678,
+        "CleanupMs": 364,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 4605,
+        "CleanupMs": 341,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7684,
+        "CleanupMs": 344,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10120,
+        "CleanupMs": 327,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 3655,
+        "CleanupMs": 304,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 7560,
+        "CleanupMs": 251,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20301,
+        "CleanupMs": 284,
+        "Passed": true
+      }
+    ]
+  },
+  "full_manifest": [
+    {
+      "Name": "run16.exe",
+      "Sha256": "2F98A9808B25452CC7930EF8EB8F0503C74819752A59235AA7E3B9C3D2969A9C",
+      "Machine": 34404
+    },
+    {
+      "Name": "ntsrv.exe",
+      "Sha256": "8DE6FA2E8890DEA1748734E82DA2CC0DEBC4842081DAEA74FFD1B1552BB3C4A5",
+      "Machine": 34404
+    },
+    {
+      "Name": "ntcon.exe",
+      "Sha256": "9B0799EF6B3F5299059ED49FB1AFC8F52C90AFC232466B6F338371A2F311B40F",
+      "Machine": 34404
+    },
+    {
+      "Name": "ntvdm.exe",
+      "Sha256": "173E983E1F865EF23D1E99ABAD337D1743CBE4B5BFD1BD19E340CE099AB12CAF",
+      "Machine": 332
+    },
+    {
+      "Name": "ntvwm.exe",
+      "Sha256": "A2D8FA8921CF7DD2F5C6F5D714B993012B5FE5A1E8381EC593BD9AE45295ABD6",
+      "Machine": 34404
+    },
+    {
+      "Name": "ntmon.exe",
+      "Sha256": "8C11A72F45E3506495D96094969254F6979A80B35055C45B1A2DE7B2E22F942B",
+      "Machine": 34404
+    },
+    {
+      "Name": "WOW32.DLL",
+      "Sha256": "17476FDE6A1A8D2D304DBCF84EF977C025A89F0A42C3113915253005365ED04A",
+      "Machine": 332
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "Sha256": "474C4C2487DA784985BBE7FF45A3C9B4F784F0C7B7FB451E97DFE0AAD45EF78D",
+      "Machine": 332
+    },
+    {
+      "Name": "nthook32.dll",
+      "Sha256": "780700713BD0C1DF2DDA88A241FB3E0549367783DBDF6CF4E31BE32E7F7C97F8",
+      "Machine": 332
+    },
+    {
+      "Name": "nthook64.dll",
+      "Sha256": "E402A99E705BD863813FDBDA113C9C35BA09BB205847F2E81E0C5BABD48598D3",
+      "Machine": 34404
+    },
+    {
+      "Name": "VCDEX.DLL",
+      "Sha256": "3BF42AC6FE9A5EDB30AEFBDCD67675CADC150792CE4506C2ADBA5E3545F4BB92",
+      "Machine": 332
+    },
+    {
+      "Name": "NTVDMD.DLL",
+      "Sha256": "38BD7BCE9F75CFD0B19160630CC5DBEA77094DA0B104F93B519A71DE0779EF52",
+      "Machine": 332
+    },
+    {
+      "Name": "VJOY.DLL",
+      "Sha256": "5E5A67603CA827F704319C48DBAFA43F6266D9D56FFF921BF56299B3F2A9A1E7",
+      "Machine": 332
+    }
+  ],
+  "task": "T485 S15 P92",
+  "runtime": "runtime108",
+  "start_head": "140c0dbb28bf9b90f54f24524b03bf2f2cd44e57",
+  "publication": [
+    {
+      "sha256": "38BD7BCE9F75CFD0B19160630CC5DBEA77094DA0B104F93B519A71DE0779EF52",
+      "pass": true,
+      "path": "assets\\release\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "38BD7BCE9F75CFD0B19160630CC5DBEA77094DA0B104F93B519A71DE0779EF52",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "5E5A67603CA827F704319C48DBAFA43F6266D9D56FFF921BF56299B3F2A9A1E7",
+      "pass": true,
+      "path": "assets\\release\\VJOY.DLL"
+    },
+    {
+      "sha256": "5E5A67603CA827F704319C48DBAFA43F6266D9D56FFF921BF56299B3F2A9A1E7",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL"
+    },
+    {
+      "sha256": "3BF42AC6FE9A5EDB30AEFBDCD67675CADC150792CE4506C2ADBA5E3545F4BB92",
+      "pass": true,
+      "path": "assets\\release\\VCDEX.DLL"
+    },
+    {
+      "sha256": "3BF42AC6FE9A5EDB30AEFBDCD67675CADC150792CE4506C2ADBA5E3545F4BB92",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL"
+    },
+    {
+      "sha256": "2F98A9808B25452CC7930EF8EB8F0503C74819752A59235AA7E3B9C3D2969A9C",
+      "pass": true,
+      "path": "assets\\release\\run16.exe"
+    },
+    {
+      "sha256": "2F98A9808B25452CC7930EF8EB8F0503C74819752A59235AA7E3B9C3D2969A9C",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe"
+    },
+    {
+      "sha256": "8DE6FA2E8890DEA1748734E82DA2CC0DEBC4842081DAEA74FFD1B1552BB3C4A5",
+      "pass": true,
+      "path": "assets\\release\\ntsrv.exe"
+    },
+    {
+      "sha256": "8DE6FA2E8890DEA1748734E82DA2CC0DEBC4842081DAEA74FFD1B1552BB3C4A5",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe"
+    },
+    {
+      "sha256": "9B0799EF6B3F5299059ED49FB1AFC8F52C90AFC232466B6F338371A2F311B40F",
+      "pass": true,
+      "path": "assets\\release\\ntcon.exe"
+    },
+    {
+      "sha256": "9B0799EF6B3F5299059ED49FB1AFC8F52C90AFC232466B6F338371A2F311B40F",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe"
+    },
+    {
+      "sha256": "173E983E1F865EF23D1E99ABAD337D1743CBE4B5BFD1BD19E340CE099AB12CAF",
+      "pass": true,
+      "path": "assets\\release\\ntvdm.exe"
+    },
+    {
+      "sha256": "173E983E1F865EF23D1E99ABAD337D1743CBE4B5BFD1BD19E340CE099AB12CAF",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe"
+    },
+    {
+      "sha256": "A2D8FA8921CF7DD2F5C6F5D714B993012B5FE5A1E8381EC593BD9AE45295ABD6",
+      "pass": true,
+      "path": "assets\\release\\ntvwm.exe"
+    },
+    {
+      "sha256": "A2D8FA8921CF7DD2F5C6F5D714B993012B5FE5A1E8381EC593BD9AE45295ABD6",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe"
+    },
+    {
+      "sha256": "8C11A72F45E3506495D96094969254F6979A80B35055C45B1A2DE7B2E22F942B",
+      "pass": true,
+      "path": "assets\\release\\ntmon.exe"
+    },
+    {
+      "sha256": "8C11A72F45E3506495D96094969254F6979A80B35055C45B1A2DE7B2E22F942B",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe"
+    },
+    {
+      "sha256": "17476FDE6A1A8D2D304DBCF84EF977C025A89F0A42C3113915253005365ED04A",
+      "pass": true,
+      "path": "assets\\release\\WOW32.DLL"
+    },
+    {
+      "sha256": "17476FDE6A1A8D2D304DBCF84EF977C025A89F0A42C3113915253005365ED04A",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL"
+    },
+    {
+      "sha256": "474C4C2487DA784985BBE7FF45A3C9B4F784F0C7B7FB451E97DFE0AAD45EF78D",
+      "pass": true,
+      "path": "assets\\release\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "474C4C2487DA784985BBE7FF45A3C9B4F784F0C7B7FB451E97DFE0AAD45EF78D",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "780700713BD0C1DF2DDA88A241FB3E0549367783DBDF6CF4E31BE32E7F7C97F8",
+      "pass": true,
+      "path": "assets\\release\\nthook32.dll"
+    },
+    {
+      "sha256": "780700713BD0C1DF2DDA88A241FB3E0549367783DBDF6CF4E31BE32E7F7C97F8",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll"
+    },
+    {
+      "sha256": "E402A99E705BD863813FDBDA113C9C35BA09BB205847F2E81E0C5BABD48598D3",
+      "pass": true,
+      "path": "assets\\release\\nthook64.dll"
+    },
+    {
+      "sha256": "E402A99E705BD863813FDBDA113C9C35BA09BB205847F2E81E0C5BABD48598D3",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll"
+    }
+  ],
+  "lifecycle": {
+    "media": [
+      {
+        "target": "system32/KRNL386.exe",
+        "sha256": "BCED7650A5B5D7AC25955AB2A21BC53FF06DE1C35B25FAD0690390135B093A03",
+        "source": "wow16/kernel31/retail3/krnl386.exe"
+      },
+      {
+        "target": "system32/WRITE.EXE",
+        "sha256": "08EE1659788880FB593815FF9609BFE76743C1182D05E6702764BF3DFF68B30B",
+        "source": "wow16/write/WRITE.EXE"
+      },
+      {
+        "target": "MEM.EXE",
+        "sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB",
+        "source": "dos/v86/cmd/mem/mem.exe"
+      }
+    ],
+    "fixture": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-server-lifecycle-test.exe",
+    "sha256": "4B4AE055DB5E7DC4A8664CC2AC53917A5944703F6E95B06F6A8E36EBFBF6D0FF",
+    "pid": 7660,
+    "exit": 0
+  },
+  "census": {
+    "before": {
+      "files": 1340,
+      "byte_identical": 801,
+      "nonerror_identical": 812,
+      "nonerror_different": 528,
+      "nonerror_points": 8190,
+      "nonerror_lines": 45930
+    },
+    "after": {
+      "files": 1340,
+      "byte_identical": 801,
+      "nonerror_identical": 812,
+      "nonerror_different": 528,
+      "nonerror_points": 8191,
+      "nonerror_lines": 45674
+    },
+    "delta": {
+      "files": 0,
+      "byte_identical": 0,
+      "nonerror_identical": 0,
+      "nonerror_different": 0,
+      "nonerror_points": 1,
+      "nonerror_lines": -256
+    },
+    "changes": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+        "added": false,
+        "before_points": 1,
+        "before_lines": 280,
+        "after": {
+          "points": 2,
+          "lines": 24,
+          "excluded": 1
+        },
+        "byte_equal": false,
+        "xp_blob": "a11a1362c2b3ff8dc220761f0f23ee62fdccb52a"
+      }
+    ]
+  },
+  "original_guest_unchanged": true,
+  "initial_targeted_failures": [
+    "service-fixtures runner used with wrong original lifecycle fixture and missing guest-media working directory; assertion733 failed before token tests; corrected existing verify-original-lifecycle runner passed after final-source rebuild"
+  ],
+  "full_checkpoint": "P92 runtime108 S15 closure Full; one completed file since P91",
+  "xp_commit": "a2f6d7c93aa4f11efc51147566d5961c59a8ef89"
+}

@@ -1,0 +1,1360 @@
+{
+  "status": "S15 verified for delivery; runtime108 Full24/24",
+  "rows": [
+    {
+      "batch": "N013",
+      "old_path": "src/non-mvdm/private/inc/dlcio.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/dlcio.h",
+      "disposition": "relocated",
+      "xp_blob": "79a709ca33bc6ecbf3b862b311b57032c3d86707",
+      "sha256": "db2387c109de7ccdd31b914a3fffdebc0746e7a51a6ea4ef1d387756d94e14f2",
+      "nonerror_points": 2,
+      "nonerror_lines": 2
+    },
+    {
+      "batch": "N014",
+      "old_path": "src/non-mvdm/private/windows/inc/pmvdm.h",
+      "current_path": "src/non-mvdm/public/internal/base/inc/pmvdm.h",
+      "disposition": "relocated",
+      "xp_blob": "bf482ce52f77b17b7add78c4db68286b1240a79b",
+      "sha256": "6116e216def2a5692c54fff133a5aae727acfc4bca22fbbb235ff6e7c4350e89",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N015",
+      "old_path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "current_path": "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+      "disposition": "retained-path",
+      "xp_blob": "1423ac8ae99ff3d9bd7cd854c39be0596a34b0b0",
+      "sha256": "cf11d25081d3291fc742d36d99ca65636a70828ca761f4a5c7d38115df4476b5",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N015",
+      "old_path": "src/non-mvdm/public/ddk/inc/ntdddlc.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ntdddlc.h",
+      "disposition": "relocated",
+      "xp_blob": "ec2c32128137561c1b8f2e3c69523a3bb47f3eff",
+      "sha256": "f340dcb862476af6135882df419d847ebcbdcc55a0d70fc09f7d7033294e220f",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N015",
+      "old_path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "current_path": "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+      "disposition": "retained-path",
+      "xp_blob": "8faceebef465de909cb8e1f2a210a78d8e2a1b87",
+      "sha256": "f0b26fff6c55fe19ef672b9e4d8313c9f95b3c2363e865a2a44a3c6651036128",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N015",
+      "old_path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "current_path": "src/non-mvdm/public/ddk/inc/ntddser.h",
+      "disposition": "retained-path",
+      "xp_blob": "ddba955df5987b6e6c66878cc37de114c9b5c7c6",
+      "sha256": "50af5d35b157f91d2d9ee6ce357515e479b276a904fa3928e890ab08568a331b",
+      "nonerror_points": 1,
+      "nonerror_lines": 1
+    },
+    {
+      "batch": "N015",
+      "old_path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "current_path": "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+      "disposition": "retained-path",
+      "xp_blob": "ad1fa3cb5a2c08f37525e7ef0814e73f1636b8e7",
+      "sha256": "60b874fd59de468e51ab2ce862ef0b74fa6d2d57dd2b3d3863425574190698af",
+      "nonerror_points": 1,
+      "nonerror_lines": 1
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/align.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/align.h",
+      "disposition": "relocated",
+      "xp_blob": "fbf5e6dafd205c6977ca2883e6d98dd87ad1f499",
+      "sha256": "ffab4d76f625e5df622fe3e5f062e4a58c3cfd223c7ec15927a652a12101ca7b",
+      "nonerror_points": 1,
+      "nonerror_lines": 1
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/conroute.h",
+      "current_path": "src/non-mvdm/public/internal/windows/inc/conroute.h",
+      "disposition": "relocated",
+      "xp_blob": "b30e840c8579051c54291f6eef7b6febc974a417",
+      "sha256": "9a74ad58bc39808509399727c821340495b7fd97e08b98ac05d8f63c14fe5ea2",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/debugfmt.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/debugfmt.h",
+      "disposition": "relocated",
+      "xp_blob": "07a84a64d5fda7892307a2f713e1b3da8ee43e7d",
+      "sha256": "8f29d7d97b269232a88a4fa9ddaf3a4949e3910632576a2c61657f73b619687d",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/nettypes.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/nettypes.h",
+      "disposition": "relocated",
+      "xp_blob": "66640b5a9e76677cc5ddaf89679b3fcc6623245e",
+      "sha256": "e66a9269a574aa99f5c79602c4d707c41577f9bfa694e5a7589eeb41393df914",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/ntddvdm.h",
+      "current_path": "src/non-mvdm/public/internal/base/inc/ntddvdm.h",
+      "disposition": "retained-path",
+      "xp_blob": "ef1885b391571dc609a4d70c90a8823cb6251cfd",
+      "sha256": "80632e1f59e55d749fd7ed17f32632835364937cee329b792bb85e154e67eba3",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/packoff.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/packoff.h",
+      "disposition": "relocated",
+      "xp_blob": "0e0e2f4b22ee23f39237264b1d864bb3c26fd9c8",
+      "sha256": "dbc08b74dccbadd340074396e6e3945c0f37f6a9d9b6550e290a73d4b978327e",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/packon.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/packon.h",
+      "disposition": "relocated",
+      "xp_blob": "e422813998ce194abc9159645b15fdb89d8a3dad",
+      "sha256": "7da0a9d127623cf592a26d7e820aab131313f7a2e73183281312ac8d43690674",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "current_path": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "disposition": "retained-path",
+      "xp_blob": "b8bbd1b0674503af265a541310e54e2a7a1d14c9",
+      "sha256": "77eb087103b111350efac2120eba7eacff78c5e724cbfda2a8ea25a886d0f156",
+      "nonerror_points": 17,
+      "nonerror_lines": 17
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "current_path": "src/non-mvdm/public/internal/base/inc/smbmacro.h",
+      "disposition": "retained-path",
+      "xp_blob": "4b90aed754e2ff0d05d965978348aa659ccd3cc2",
+      "sha256": "41d653e9d58ad1990e7f5bd12358c36b3de5fbbecac796f489a0a5a0f973278a",
+      "nonerror_points": 1,
+      "nonerror_lines": 1
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "current_path": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "disposition": "retained-path",
+      "xp_blob": "556e3645575e7be9b96efd9d61d3c605873684e9",
+      "sha256": "7fdde5cc51a714fc87dff91e1bf1328d49265586276d6cb77287253187867654",
+      "nonerror_points": 3,
+      "nonerror_lines": 3
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/tstr.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/tstr.h",
+      "disposition": "relocated",
+      "xp_blob": "afd3231a7557cd3e6c4df27c598ac97d799b117c",
+      "sha256": "5ac5c0f458638409935927a57bb24c78de1718425061933991b7c43dd5bdc6ca",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "current_path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "disposition": "retained-path",
+      "xp_blob": "10880392902878fffd1335b371459799b682f564",
+      "sha256": "df37dbf68c6cc2cb564d0187a7d1a009933de71213a68149f816efdddf6f139e",
+      "nonerror_points": 5,
+      "nonerror_lines": 8
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "current_path": "src/non-mvdm/public/internal/base/inc/vdmapi.h",
+      "disposition": "retained-path",
+      "xp_blob": "36d3d91d261d3476e93292bac326acc17cead2bc",
+      "sha256": "392703523d32ef405bdf938d2f7e92b26b737284409bfa42065820b2b27645b5",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/vdmtib.inc",
+      "current_path": "src/non-mvdm/public/internal/base/inc/vdmtib.inc",
+      "disposition": "retained-path",
+      "xp_blob": "3ccbce55cd330f3323f66ca15913f8fce5da2cc3",
+      "sha256": "6c6e221e9f306fff95bf482f60c7ebe9027d44b486ee4783f8e708eaec999ae4",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/winbase.w",
+      "current_path": "src/non-mvdm/base/published/winbase.w",
+      "disposition": "relocated",
+      "xp_blob": "9315c2f6b168b5d673f44a11fe31d50b0d8fcd16",
+      "sha256": "0104af5f6b1afb6fb7111ef9ff95520160730a90ab0dcd0eccaad4334d5a7b88",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/winbase.x",
+      "disposition": "retired",
+      "evidence": "n016-tail.md"
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/winbasep.x",
+      "disposition": "retired",
+      "evidence": "n016-tail.md"
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/winnls.w",
+      "current_path": "src/non-mvdm/base/published/winnls.w",
+      "disposition": "relocated",
+      "xp_blob": "7f306c2f772f0e36bcd6063197e0cff2b106687c",
+      "sha256": "1a08875b799b6ffd208701430672adad7098602cd0eb5ad288dc6e005fe8d5bf",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/winnls.x",
+      "disposition": "retired",
+      "evidence": "n016-tail.md"
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/winss.h",
+      "disposition": "retired",
+      "evidence": "n016-tail.md"
+    },
+    {
+      "batch": "N016",
+      "old_path": "src/non-mvdm/public/internal/base/inc/winsvc.x",
+      "current_path": "src/non-mvdm/published/genxwin/winsvc.x",
+      "disposition": "relocated",
+      "xp_blob": "986d9be0f1731bd8c5407ffd0003e59857d8ab4d",
+      "sha256": "ce747c7ceb870be340debf18ae5325621825c506540d5148a6b9ceb790e904c4",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/apinums.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/apinums.h",
+      "disposition": "relocated",
+      "xp_blob": "bcafa1d2b3c1265157ae02c92e64f26e70351048",
+      "sha256": "1c8148b6b4becde82dba2604c9a34e7d09b8a3c2ac9e59981183fae270b368f7",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/apiparam.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/apiparam.h",
+      "disposition": "relocated",
+      "xp_blob": "66c4dd874f030c13dee851e2d9f03efaefbc21a5",
+      "sha256": "99540755983fedf7057b43ead34f005423b5a9b46a4c1eb56ee56e7d0d900eb9",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "current_path": "src/non-mvdm/public/internal/ds/inc/crypt.h",
+      "disposition": "retained-path",
+      "xp_blob": "16562216a4bd3ae42a5c256824e716e85774e6da",
+      "sha256": "55606d1166d1416bc1ca178cd722e26dd57d32357d13c431fb8fac55038903cc",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "current_path": "src/non-mvdm/ds/netapi/inc/debuglib.h",
+      "disposition": "relocated",
+      "xp_blob": "d761ca152529b0e834db6be049acc7b311e6973b",
+      "sha256": "6e1d821b304ac121f20d0b45a120c4458217a0f9d9dae0647a05a90bc92268ac",
+      "nonerror_points": 2,
+      "nonerror_lines": 2
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "current_path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "disposition": "retained-path",
+      "xp_blob": "51d1c493ecbb80b3924297a4f2d865c5672cab10",
+      "sha256": "85e474b4cb7ed39ff2e9f0765390d66249001e4229a7a655f576febf50b84dfa",
+      "nonerror_points": 16,
+      "nonerror_lines": 16
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "current_path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "disposition": "retained-path",
+      "xp_blob": "9ba2c75012819a9d80aee710fd453607e08d4804",
+      "sha256": "19cdbc81385a1f045c42b65eb7ae34d8c350dd6ae56378538d9828a55a72e9cc",
+      "nonerror_points": 3,
+      "nonerror_lines": 3
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "current_path": "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+      "disposition": "retained-path",
+      "xp_blob": "e4bb8ac5b64261084839439cccdf0c08e9b1d0f0",
+      "sha256": "1ea277193d335ae10bc817a94f9d17594d101c842413927dc9552f45611f11b0",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/prefix.h",
+      "current_path": "src/non-mvdm/ds/inc/prefix.h",
+      "disposition": "relocated",
+      "xp_blob": "8753124cd9ebbf5f803e4a538aa9f9e64c119195",
+      "sha256": "ae15c1fe09e6bb0d40540cfeb727ba65905c0f9b5bc0407b616f23158b837b4c",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/rap.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/rap.h",
+      "disposition": "relocated",
+      "xp_blob": "95ca4f05be643f5301ac997a4bf3675e77d5557a",
+      "sha256": "eee2adfa9da5fab4090cc6037c24798e6d52232eeacaf26cf699579c6713a18f",
+      "nonerror_points": 1,
+      "nonerror_lines": 1
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "current_path": "src/non-mvdm/ds/netapi/inc/rapdebug.h",
+      "disposition": "relocated",
+      "xp_blob": "3c612a201e743ab11cc302518300ee31a61faa10",
+      "sha256": "ca24f7bbd5ece97e60140339ac953b380d65ad6c5a108694d60bb7e221d8e419",
+      "nonerror_points": 1,
+      "nonerror_lines": 1
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/rapgtpt.h",
+      "current_path": "src/non-mvdm/ds/netapi/inc/rapgtpt.h",
+      "disposition": "relocated",
+      "xp_blob": "4738616776dd870b745f2b4971bc814bc09e280e",
+      "sha256": "229ab2614a48da0ea844b5caac869a19307bcc56e8e8374ee0052c6b8a9be114",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/remdef.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/remdef.h",
+      "disposition": "relocated",
+      "xp_blob": "c432007013918bf34f4689e0cdaf5c20589a25ad",
+      "sha256": "ca8e43d928b6e67c939db8d71281a117a80e7986ff8eabc101cb23c3d0dc6aeb",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/remtypes.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/remtypes.h",
+      "disposition": "relocated",
+      "xp_blob": "cc02d6d53fa9d73d677ff7da01ba101456129943",
+      "sha256": "adca0b697bcd143e0d118bf5f2fd8113d2d6ddc5a79beb503114950cccf52163",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/rxp.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/rxp.h",
+      "disposition": "relocated",
+      "xp_blob": "4acc8fe30c965ae3e2eac6f3ad290138e87a4917",
+      "sha256": "c310c1fb2e074414822cc19b9a96e01c43c6670a29eeafd3c1d2a792ba929907",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/rxuser.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/rxuser.h",
+      "disposition": "relocated",
+      "xp_blob": "ab78ac89a344efd0dc400e4b416efb294d1583e9",
+      "sha256": "7928a5d50bf9bda6c2c94180282dd364662089963247e6724f2b60c00abf2a05",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/strucinf.h",
+      "current_path": "src/non-mvdm/ds/netapi/inc/strucinf.h",
+      "disposition": "relocated",
+      "xp_blob": "49acb0601d3c98edc706cd98535237de0177155d",
+      "sha256": "ab99d67d2aa38178838c6d793187668f89ae9ce43e5a5f4815487a7a59bb5534",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/timelib.h",
+      "current_path": "src/non-mvdm/ds/netapi/inc/timelib.h",
+      "disposition": "relocated",
+      "xp_blob": "9fe861b1ea0b76a876c659db86a9c307e94f811b",
+      "sha256": "354fb29044c249d31c9712df3e848cdb904192e9e847806969a2ea99f6b5b295",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/xsprocs.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/xsprocs.h",
+      "disposition": "relocated",
+      "xp_blob": "60f3e7b16ad1844eba8310d2d50fd7cd9156ba4b",
+      "sha256": "c19759b3af651d6fbd174e7abae665143c799697b754055b3fb4fa781625f0c3",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N017",
+      "old_path": "src/non-mvdm/public/internal/ds/inc/xstypes.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/xstypes.h",
+      "disposition": "relocated",
+      "xp_blob": "3edf02a58fe8a513c99e796993ec7e9939f8bb0a",
+      "sha256": "2f8fe72055f0ed40045a02a94d848b98fe6a623727a5ca0820dd9884b3f87029",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N018",
+      "old_path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "current_path": "src/non-mvdm/public/internal/net/inc/tstring.h",
+      "disposition": "retained-path",
+      "xp_blob": "76771d9a036fa85c458389da63cec09020d21d66",
+      "sha256": "b174f8d4977ac2ebcd585bd1b35dd3f019f16a23ead5d7e2910d0e42d6262382",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N019",
+      "old_path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
+      "current_path": "src/non-mvdm/public/internal/base/inc/wowcmndg.h",
+      "disposition": "relocated",
+      "xp_blob": "982270d58ef4da8ab7e62db9dd75c77d01437c28",
+      "sha256": "e51b3356ef48bbee96f0c0de4849a3ec24d5839f52b228c1d333f8704814f10a",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N019",
+      "old_path": "src/non-mvdm/public/internal/shell/inc/wowshlp.h",
+      "current_path": "src/non-mvdm/public/internal/base/inc/wowshlp.h",
+      "disposition": "relocated",
+      "xp_blob": "32e918b834f6b6fa7ee1e70301920f041c65de58",
+      "sha256": "301f09d44d550f9b36315e67915a8d465c16bd820a20c77539120f601467f633",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N020",
+      "old_path": "src/non-mvdm/public/internal/windows/inc/newres.h",
+      "current_path": "src/non-mvdm/windows/core/w32inc/newres.h",
+      "disposition": "relocated",
+      "xp_blob": "492f641b5fa984a47dac5c2c1f198e61e07361bf",
+      "sha256": "2aceadb2c4e6046d969801bbed6802898441cfdf2a544fbb6a6ee082a47a92c1",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N020",
+      "old_path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "current_path": "src/non-mvdm/public/internal/shell/inc/pif.h",
+      "disposition": "relocated",
+      "xp_blob": "f700f91bd69bd6860c22e498563d9bd65d001fdc",
+      "sha256": "821f1e1eecb30eae679f6ab29df48e8b3081dacb973ae4acab83b7f5e13ddc5c",
+      "nonerror_points": 5,
+      "nonerror_lines": 5
+    },
+    {
+      "batch": "N020",
+      "old_path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "current_path": "src/non-mvdm/public/internal/windows/inc/winconp.h",
+      "disposition": "retained-path",
+      "xp_blob": "19d0402426dee7c5bb3f4e9a202222b0f6789b90",
+      "sha256": "9693e633e4828d1fa60a64e8a61478132e3ea9fa57a2c91bd6ca47c98601abe0",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N020",
+      "old_path": "src/non-mvdm/public/internal/windows/inc/winddi.h",
+      "current_path": "src/non-mvdm/public/oak/inc/winddi.h",
+      "disposition": "relocated",
+      "xp_blob": "57a6fd53a537421addbf507c98ce2940d3a61f84",
+      "sha256": "ed4c374eb0b9a5fcf7ae9c288755a3a3311abfda7b1d073d1b242967bb9e7566",
+      "nonerror_points": 2,
+      "nonerror_lines": 2
+    },
+    {
+      "batch": "N020",
+      "old_path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "current_path": "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+      "disposition": "retained-path",
+      "xp_blob": "e757151f39218cb0191a55b9ae6dbd6883e3e052",
+      "sha256": "94bf28dfc5c692b2c80a93fa1e0a7f513f43ba37dcb79da2d615cb953ae6c71a",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N020",
+      "old_path": "src/non-mvdm/public/internal/windows/inc/wowgdip.h",
+      "current_path": "src/non-mvdm/public/internal/windows/inc/wowgdip.h",
+      "disposition": "retained-path",
+      "xp_blob": "15c02b0baadaa7e327cdbf8dba1a2ad625063ac3",
+      "sha256": "ea012932a929142701b828acb95334e6cd548609a8db5a1c176ed8fdc127ba0a",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N020",
+      "old_path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+      "current_path": "src/non-mvdm/public/internal/windows/inc/wowuserp.h",
+      "disposition": "retained-path",
+      "xp_blob": "5be3126f26e295b939694fed1db0383bc106009a",
+      "sha256": "71e30a04e4db07f0db4163854b188782e530dbfde7ed481c4575af960c2b399a",
+      "nonerror_points": 2,
+      "nonerror_lines": 7
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/callconv.inc",
+      "current_path": "src/non-mvdm/public/sdk/inc/callconv.inc",
+      "disposition": "retained-path",
+      "xp_blob": "86ca9c6292bb594597c4819f2f1ff7a3498af732",
+      "sha256": "dbe89c1091a5fac0f048efb3118caffb35775be7ec2e716597f54b71b9bab43f",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/devioctl.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/devioctl.h",
+      "disposition": "retained-path",
+      "xp_blob": "d357c7c2389af1086ee890c100e14597721b3820",
+      "sha256": "2d43923c3fb84d7a188420aa88da5d8b48a0fd6e8b94d6551ca693b0cd6f3d85",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/dlcapi.h",
+      "disposition": "retained-path",
+      "xp_blob": "923a1401a3a8b8df86153636d3ffbd6d2d478ec9",
+      "sha256": "845f7cf7275a1369f140cd753b12839c5fa5e641ec795a3ded0718201007c120",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/nt.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/nt.h",
+      "disposition": "retained-path",
+      "xp_blob": "44268dc13f0d6a201611989fd0d662a685e8314c",
+      "sha256": "5012e22d0de17cb2a32613b6685272544e3a8cedd71cd16df1abc70fdc1accf7",
+      "nonerror_points": 14,
+      "nonerror_lines": 40
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
+      "disposition": "retained-path",
+      "xp_blob": "00821b561abf0edfba44701440eef70848ed8a89",
+      "sha256": "6d0ab4c8f546c7351ed74ed50f454e0b06059616c8cd6e47af373191fe7d642a",
+      "nonerror_points": 2,
+      "nonerror_lines": 4
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/ntcsrdll.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ntcsrdll.h",
+      "disposition": "retained-path",
+      "xp_blob": "963582def0cc3c79fa49134af218fca5b4a09f5a",
+      "sha256": "430918d11ac891864f8e5cfdc491a21f32b130c77c1b9781ac7b992b6887ebba",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "disposition": "retained-path",
+      "xp_blob": "9bd7d892d373020948a3f58c64004fc0ba8ace65",
+      "sha256": "0fd969e6e2b545e02e7255f97a8bbbfc8961020938298746d7af5723df980d43",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ntcsrsrv.h",
+      "disposition": "retained-path",
+      "xp_blob": "4ea8fe3479c4e64a36434249a2bdd8a324f5411d",
+      "sha256": "79a3df4c4eefd50e68ee0230c7b730f902f63250b8b837f5e49f5ca3fda88580",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+      "disposition": "retained-path",
+      "xp_blob": "b9bfabc459a343f84701fc619118f2e0a7940f95",
+      "sha256": "6c1274def9212cf1db13f0a62c316e008c69b09711c18e05fe04f61a42de0db6",
+      "nonerror_points": 20,
+      "nonerror_lines": 302
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ntlpcapi.h",
+      "disposition": "retained-path",
+      "xp_blob": "e635d79201f00fe706d78f232d15180a94791f3b",
+      "sha256": "cd6684fb8f227da233934d38c70178d1ff026a6607163fdadd3133de2b75750c",
+      "nonerror_points": 3,
+      "nonerror_lines": 3
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+      "disposition": "retained-path",
+      "xp_blob": "3bf8c5fb976bba9e331743966b9d75c68cafad3e",
+      "sha256": "f5bd64dd7899b6bea121101c0d61e0fe6ca9ab537485d03b5ad51a1adf124089",
+      "nonerror_points": 32,
+      "nonerror_lines": 280
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+      "disposition": "retained-path",
+      "xp_blob": "77f3cae0ad7cc82aaa4dc65e5f3ed11d11602a6d",
+      "sha256": "64066ac8c83eab0783f3362c29e4a53a7739ad7ee6a98b761ea1c3ea29969458",
+      "nonerror_points": 6,
+      "nonerror_lines": 20
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "disposition": "retained-path",
+      "xp_blob": "81d18c586d38412ec8351fdecd31cfe2170e2703",
+      "sha256": "a62b91e9c93285e66c60a859506974e7a7025703ff2393bc37c4dd493b7c0dce",
+      "nonerror_points": 17,
+      "nonerror_lines": 155
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "disposition": "retained-path",
+      "xp_blob": "978808f498bcfc4924079ec737192ef740c79a43",
+      "sha256": "1c094e636f3b9a65165ef6b2b4ac5cee45fdd0b60d1351b2f264dd2d799a91fd",
+      "nonerror_points": 8,
+      "nonerror_lines": 99
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/ptypes32.h",
+      "disposition": "retained-path",
+      "xp_blob": "04d14e3057f0207ef1088c924d4fe4b9c1dd9a19",
+      "sha256": "34d53183853c001e82a510a679ad2aa17fddb47e1c0f572bae579c4ea7e11a3b",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+      "disposition": "retained-path",
+      "xp_blob": "20ca93a34504dda189533846770592f583e626d2",
+      "sha256": "5caab37c35a6c075dac2524383a5450cdb797ef45b955dacd4a961f05e9b241d",
+      "nonerror_points": 13,
+      "nonerror_lines": 25
+    },
+    {
+      "batch": "N021",
+      "old_path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "current_path": "src/non-mvdm/public/sdk/inc/vdmdbg.h",
+      "disposition": "retained-path",
+      "xp_blob": "b8f578bb97e9caa4dbe11b91cdd0ae3f32ff0690",
+      "sha256": "ab2d9808b783fc8dcf6f5ac45817ac5b8787ae40648a0ba63784f399c244cde9",
+      "nonerror_points": 1,
+      "nonerror_lines": 1
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
+      "disposition": "retained-path",
+      "xp_blob": "8e51fc19006730db78acf2de4635ebe31eacbbd6",
+      "sha256": "d5db91399463ee4744a35103c29e51576df025ca348ef529d572d880fb7db491",
+      "nonerror_points": 15,
+      "nonerror_lines": 73
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "disposition": "retained-path",
+      "xp_blob": "f28888fd055d42c70c4252e10ff93f501e78b1ac",
+      "sha256": "4038cdfc91878a8c973bbcfb953b4c4bd21655910044f5a06f56997c592b3e78",
+      "nonerror_points": 1,
+      "nonerror_lines": 2
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "disposition": "retained-path",
+      "xp_blob": "6cbb445357c5944f6112900df64c8bb5a9a8c389",
+      "sha256": "67f77d06dfb148b5e156a88bbe77f4de372de54a691dbfda283a4ffdddc45901",
+      "nonerror_points": 8,
+      "nonerror_lines": 172
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "disposition": "retained-path",
+      "xp_blob": "c55123fd3f0a97de7ebeece02234b44cda614c5a",
+      "sha256": "1768e1430b9ea2c1f5e38387b2e41d79906d22255666401bd375c1097ed61697",
+      "nonerror_points": 3,
+      "nonerror_lines": 49
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "disposition": "retained-path",
+      "xp_blob": "a46279e99539cd7780f574cadfba70b4f0e05c1d",
+      "sha256": "ecfaa7e4587548225eaa40179032402444b0fe11be27e84bdd22aff892b353ea",
+      "nonerror_points": 15,
+      "nonerror_lines": 1997
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "disposition": "retained-path",
+      "xp_blob": "8085809158b0e31f60058823bb36bc71f524c85c",
+      "sha256": "927041f57e8d36b70c25d08bc7451153ce10b70436cf88c307364881de22e80d",
+      "nonerror_points": 25,
+      "nonerror_lines": 3061
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "disposition": "retained-path",
+      "xp_blob": "f79ac6886fbdfe6b6022d1004565272f9b45bef6",
+      "sha256": "73b4708b3e41092fa83cc638d5c8115b1549dbb5fe023f89439707b8a8c8d787",
+      "nonerror_points": 6,
+      "nonerror_lines": 6
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/combodir.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/combodir.c",
+      "disposition": "retained-path",
+      "xp_blob": "e759545f0ea76d3a3f7470f92f084da180cf77d0",
+      "sha256": "2ba5ddae1b9f63e4525f18a0f8a0d01a592aadf7155b2a3ce90f8ba1168bda43",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/comboini.c",
+      "disposition": "retained-path",
+      "xp_blob": "fd0f1083974c4a740973985aa9265026e5fec7f2",
+      "sha256": "3e7381ef299d9e4cf856bf29328f1d03afa072d63d60c1d4e8957a62ae602c9d",
+      "nonerror_points": 1,
+      "nonerror_lines": 29
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "disposition": "retained-path",
+      "xp_blob": "d30c3f8be4bbffbd3f8d3e34a57f4476dbac3cac",
+      "sha256": "fbe9a13c1eafaaf396dc59fe5ef5fc4f0c17eaee7c956bfefb3e7c4067d2c69c",
+      "nonerror_points": 16,
+      "nonerror_lines": 52
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
+      "disposition": "retained-path",
+      "xp_blob": "76805728f6d9bc3e1fcba8f30e155bea12efcde9",
+      "sha256": "27abdf62af6b3fd0d6e03efd39ac6770c45f60e29e986c5a424fe257864047f9",
+      "nonerror_points": 7,
+      "nonerror_lines": 9
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "disposition": "retained-path",
+      "xp_blob": "9dde726a0a75d848e89389629aaf760a7b472b89",
+      "sha256": "3baaf8d158656d9695452ca8c6561ff90f407376f1e6cf7e47b87000923da05b",
+      "nonerror_points": 10,
+      "nonerror_lines": 180
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "disposition": "retained-path",
+      "xp_blob": "4da9947dcfba77bf869f8cde8b9c35d69b125b91",
+      "sha256": "0633b7d65b86e3b378c49ca5f157a87f07373255463294237cbacaeb4d9ddbab",
+      "nonerror_points": 10,
+      "nonerror_lines": 25
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "disposition": "retained-path",
+      "xp_blob": "e3d10f0f07f5533857524819aed3326c4d6e9c46",
+      "sha256": "8510ce04202fe72b1ed3671662976a1174231a0599e132f48cf11906767c970a",
+      "nonerror_points": 6,
+      "nonerror_lines": 6
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "disposition": "retained-path",
+      "xp_blob": "96342c274a7edbce5d9c391b3c8719c61be7c3d9",
+      "sha256": "e01fb9733536a077b419eda2ccec58f48371e21633b690283047892d730cd3b0",
+      "nonerror_points": 7,
+      "nonerror_lines": 22
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
+      "disposition": "retained-path",
+      "xp_blob": "ddc66236d2ddf62fed88d3a429198389c5313396",
+      "sha256": "7c47ca36766f7ef99e402dfd242e3521d330dc70f888e0204805e596a932ce97",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/drawtext.c",
+      "disposition": "retained-path",
+      "xp_blob": "326ab0961914eef3b9a68c82ccfaaefcac367eba",
+      "sha256": "c8cdb2610f66f81e85fe0578cab307cc17a5da3a3b8bf8e2c69e619689f58b79",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "disposition": "retained-path",
+      "xp_blob": "597a00b2c5edf618a3d00c0f20575ca3757acc9b",
+      "sha256": "b14eb278b53db50d36a28aa82ce32f9dc6c8a4d21b33279556cec9707d552b4f",
+      "nonerror_points": 10,
+      "nonerror_lines": 10
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "disposition": "retained-path",
+      "xp_blob": "315c6d8b28544566cca0dd7599b51ef1b1fa80db",
+      "sha256": "3804ed5b8e812a658b82df8d8a15e8e812e72ee39cc8f7829a264759592a852b",
+      "nonerror_points": 13,
+      "nonerror_lines": 81
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "disposition": "retained-path",
+      "xp_blob": "283d14308cd14c1a7896761b6f011b6894ab7ee0",
+      "sha256": "3e09f7585ad4c073b93e373f8bb20ae7f2fccc43e3b7c632f4b5f083a5e99cec",
+      "nonerror_points": 6,
+      "nonerror_lines": 6
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "disposition": "retained-path",
+      "xp_blob": "2cbfe5583d5c8630cf4217239e53495b130bc24b",
+      "sha256": "4cd7f2c35306ca0af5576aa72c37c9b2b40ebb67fb810d1c6c66577c4a90a597",
+      "nonerror_points": 3,
+      "nonerror_lines": 3
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "disposition": "retained-path",
+      "xp_blob": "6994d2a36049e9e02f040f24c222e5a7fbe15326",
+      "sha256": "3d8f4c698ead0f755a28da5c14288f0df82d98707096e3124e93d62cf516b85e",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "disposition": "retained-path",
+      "xp_blob": "bb891ff0a83c083b66da2c3b8814ba52790a65d7",
+      "sha256": "a5db2379e473f4e25da89898c333f1b0f8a29e6a84b48e7c81a8219948196a94",
+      "nonerror_points": 5,
+      "nonerror_lines": 5
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "disposition": "retained-path",
+      "xp_blob": "46fb00a8ca54a7f43bacc8b43080275e53892116",
+      "sha256": "cd1ede59fe5c4e5d282c424395c42b695b1f271bdf9ff44c2f56c9ab61c27e50",
+      "nonerror_points": 2,
+      "nonerror_lines": 2
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+      "disposition": "retained-path",
+      "xp_blob": "3cbda520a6dea4986a07735e74361a64f33676c1",
+      "sha256": "168448480688a0695ce5702872f38cb2e25d0ea95d2b25106da7633926d95a4b",
+      "nonerror_points": 2,
+      "nonerror_lines": 2
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",
+      "disposition": "retained-path",
+      "xp_blob": "8db5b7465fb5279dd420d5fd4995b7a5da645ac5",
+      "sha256": "4417b5ec13f74ebad4d412645d009cea645512a535c57af9c0b06889af06336a",
+      "nonerror_points": 2,
+      "nonerror_lines": 465
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/lb1.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/lb1.c",
+      "disposition": "retained-path",
+      "xp_blob": "5ac3a42bb60acb57b8f65e97c41b9dc197291d7f",
+      "sha256": "6d118264e2691055bd0e39d6d25b5f7cb0b93ca14410a7e033f205bcd44c1e73",
+      "nonerror_points": 1,
+      "nonerror_lines": 15
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/lboxctl1.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/lboxctl1.c",
+      "disposition": "retained-path",
+      "xp_blob": "cd7f7d807ddc07e2c04751c774b8f6f1aa9ad1f7",
+      "sha256": "37a0c4ad45465fb0db112e94c1c08cc968a21051ad67d22e56b6cc9ee7359b66",
+      "nonerror_points": 2,
+      "nonerror_lines": 2
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "disposition": "retained-path",
+      "xp_blob": "a89e42eceed8263fac946ed2b818c42e8c388bd8",
+      "sha256": "8c61fd18399fa6ee138bf432c5e8bce9fc9f8165cc7e66dd4400524be91a7f89",
+      "nonerror_points": 1,
+      "nonerror_lines": 18
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "disposition": "retained-path",
+      "xp_blob": "43c237959cf835b1ae6e4c1cd98f133daf05e25d",
+      "sha256": "573490fc8118a3de17b0337075e10316e4ea838ba6710c1db44db9ab7c72fde8",
+      "nonerror_points": 6,
+      "nonerror_lines": 6
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/lboxmult.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/lboxmult.c",
+      "disposition": "retained-path",
+      "xp_blob": "6343456496dcfdd0d952bc3616974bea4be45ef4",
+      "sha256": "37cd058cbf1b3acc595af7a09f341826348588e886defd9c91ac09f1f4b9da90",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "disposition": "retained-path",
+      "xp_blob": "058f45387833216c7881a6c51f32a4490b5bb9fd",
+      "sha256": "6c1361e1ad475afb640bdb65c81e210c53a5bed3d91b525a970f15f5fd3006e3",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/lboxvar.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/lboxvar.c",
+      "disposition": "retained-path",
+      "xp_blob": "94b748462d0328c6d5f12b09a2dad346bf3c3209",
+      "sha256": "5cfc37ae00f9ece8c39d96075e04f9eb41b91a281d3f1f573a227aa5d85ec85a",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "disposition": "retained-path",
+      "xp_blob": "a0107f672ad707b0c02448c26e71ce8af3d7405a",
+      "sha256": "82726e790933d19644c7a5032f0f2494c021685443359fdf89ce2fbbc08a944f",
+      "nonerror_points": 9,
+      "nonerror_lines": 20
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "disposition": "retained-path",
+      "xp_blob": "1debffc3f0955d76831a892d7205451c2341e3dd",
+      "sha256": "656f5572353bc91cf166e25c1dd56d1e2a97ea4532bb1774b2a0698e0f7f92eb",
+      "nonerror_points": 30,
+      "nonerror_lines": 2236
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/res.rc",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/res.rc",
+      "disposition": "retained-path",
+      "xp_blob": "7bb09bbd3738d83a1eaad30f9701adbec57ee574",
+      "sha256": "c8ea014b70c4c9bff29449ee2d441b8491f4a23affa71fa20af02c91cfcdd2f9",
+      "nonerror_points": 4,
+      "nonerror_lines": 89
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "disposition": "retained-path",
+      "xp_blob": "6ebeb702a753755f12092737569b02ec29f5c908",
+      "sha256": "97936859b491a47c9b1894993972cb6923c337db1f930ed1c09d0f9ebce63e42",
+      "nonerror_points": 6,
+      "nonerror_lines": 11
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "disposition": "retained-path",
+      "xp_blob": "07145f7769ad44c7c0df715c8009323e4bf9230c",
+      "sha256": "baf35b470f073c1e04756441390a5700d6e678c8fc55fad4d12fa15e86e16c0f",
+      "nonerror_points": 28,
+      "nonerror_lines": 245
+    },
+    {
+      "batch": "N022",
+      "old_path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "disposition": "retained-path",
+      "xp_blob": "998e102edb1d8a72d7e8f0038e8e196f77e19e1a",
+      "sha256": "a7cc1cc9a0982b869c9a5809931822bbfa02604361f37b3152195d2adbc1095f",
+      "nonerror_points": 7,
+      "nonerror_lines": 1894
+    },
+    {
+      "batch": "N023",
+      "old_path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_path": "src/non-mvdm/windows/core/ntuser/client/ntcftxt.h",
+      "disposition": "relocated",
+      "xp_blob": "e1fad45a3432fb5b1f3dfd59e74ed9163958738b",
+      "sha256": "0d746c19c1f10bdc6e96f61247601e9d8887033db57462f2b6e9ecb29a2776f2",
+      "nonerror_points": 14,
+      "nonerror_lines": 1338
+    },
+    {
+      "batch": "N023",
+      "old_path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "current_path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "disposition": "retained-path",
+      "xp_blob": "520ed2ce9d9b2f46905dc7360e2789fa0a3e87b6",
+      "sha256": "82763b12f881a80a2bf47dc091cf94e70b5beb7b8872a2a1f54a048b3a81d770",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N023",
+      "old_path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "current_path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+      "disposition": "retained-path",
+      "xp_blob": "842143d337dd84330b25abb2ecc71a73262fb0dc",
+      "sha256": "38c1e0f7aa2ee7da6102df038d5234ebd09049e4a0d53dc63a26c2c756fc6ee1",
+      "nonerror_points": 18,
+      "nonerror_lines": 65
+    },
+    {
+      "batch": "N023",
+      "old_path": "src/non-mvdm/windows/core/ntuser/inc/winerrp.h",
+      "disposition": "retired",
+      "evidence": "n023-winerrp.md"
+    },
+    {
+      "batch": "N024",
+      "old_path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "disposition": "retained-path",
+      "xp_blob": "1eee60a947dfce9c76531988782d5cdd0dbc4082",
+      "sha256": "5b7c897720f12065e3fcba83f0fea0508e062dd8490b5d4f89d0d7a1a2988f93",
+      "nonerror_points": 13,
+      "nonerror_lines": 1488
+    },
+    {
+      "batch": "N024",
+      "old_path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "disposition": "retained-path",
+      "xp_blob": "838700d18570bea632435b911711ba91fb7633fb",
+      "sha256": "79764586336aa3c35c3abea15e8bce06876ff03fb08502b920ffd7f16f1c81ad",
+      "nonerror_points": 14,
+      "nonerror_lines": 107
+    },
+    {
+      "batch": "N024",
+      "old_path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "disposition": "retained-path",
+      "xp_blob": "675433e732790375b7d6c9bb01a55bebf86ca84f",
+      "sha256": "a9b9dc1d5ccf711d90a39d21f4c8161377a7324866142a56e5edaf7f247d633a",
+      "nonerror_points": 5,
+      "nonerror_lines": 546
+    },
+    {
+      "batch": "N024",
+      "old_path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "disposition": "retained-path",
+      "xp_blob": "7f721d604212d819d13255fc59bd402ed98370e6",
+      "sha256": "9e5df066a7e072c7d21877f4b6e208babd97ed1e77df195b578bf3d1f4055f65",
+      "nonerror_points": 20,
+      "nonerror_lines": 927
+    },
+    {
+      "batch": "N024",
+      "old_path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "disposition": "retained-path",
+      "xp_blob": "b9f10cb901fd5eed0ecb35cffd46c439c86df844",
+      "sha256": "735790e6d677c6c3b3f473fda0f0f228507791bf6f0ca63b13569cb54fc3a2e4",
+      "nonerror_points": 11,
+      "nonerror_lines": 781
+    },
+    {
+      "batch": "N024",
+      "old_path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "disposition": "retained-path",
+      "xp_blob": "acb3619e95949290c2ad8b9174f86a6ed58aa3b1",
+      "sha256": "8a904e9525ec055fe031a74bec94001014420014b9f84272c326f318ba2190c4",
+      "nonerror_points": 23,
+      "nonerror_lines": 6285
+    },
+    {
+      "batch": "N024",
+      "old_path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "disposition": "retained-path",
+      "xp_blob": "508bcc9ca7b813e1a8235d98ecf5ae09ccf37eff",
+      "sha256": "7cf5f99415a6cb7c380742b1e3b8f8c68a33ffac0ebc081e1cd8db3e058ade5b",
+      "nonerror_points": 17,
+      "nonerror_lines": 2556
+    },
+    {
+      "batch": "N024",
+      "old_path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/kernel/taskman.c",
+      "disposition": "retained-path",
+      "xp_blob": "45a98a808bbbd24bb14810bb9a023fc7caedadc2",
+      "sha256": "581b65a8474ff2ce197c1b19d226e0e4f29574562b9345444893befd9fa9cc8c",
+      "nonerror_points": 17,
+      "nonerror_lines": 63
+    },
+    {
+      "batch": "N024",
+      "old_path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "current_path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "disposition": "retained-path",
+      "xp_blob": "7ee4335799af86fa2de42c04c883cf60abd48ffa",
+      "sha256": "4d35ca808709a4c748eb85e4fd8bb7bf29afcf64e0e6334e0e91b17ea7a9e285",
+      "nonerror_points": 105,
+      "nonerror_lines": 299
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "disposition": "retained-path",
+      "xp_blob": "94f249e87adcc8d0edf60cc753eab8cac18ad173",
+      "sha256": "393b2a4390c6a2b8d5714cb8bcde902441364155db702ede6bcad7f2923cf72c",
+      "nonerror_points": 13,
+      "nonerror_lines": 28
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "disposition": "retained-path",
+      "xp_blob": "16f15ca95b18b7efd7d05dd89e75f252bde85885",
+      "sha256": "d8b0b49c274dfb1809eafc9f14307bdee7a397b6b2df77a667ab7048217fdb41",
+      "nonerror_points": 7,
+      "nonerror_lines": 495
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "disposition": "retained-path",
+      "xp_blob": "0e96779bab9c64ac44fad85d6a597ab021247659",
+      "sha256": "305a45687f7dd3c55f170db4f37dc2cb3f5e15b32a175b427c07de9bcf432d03",
+      "nonerror_points": 17,
+      "nonerror_lines": 20
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "disposition": "retained-path",
+      "xp_blob": "c3a5ab5f29e252649d317a37830584363d62d178",
+      "sha256": "cd4129aadd2b1396895d55df45b98133da5ed7c3ed33d1124a193241603503e8",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/help.c",
+      "disposition": "retained-path",
+      "xp_blob": "babea63c932a4097f8379d2d17e932d8583797a5",
+      "sha256": "26ba02853609277ffedc81166a4cdfb1f6bc8619da4feb02e953f82dbc0b1369",
+      "nonerror_points": 2,
+      "nonerror_lines": 8
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/random.c",
+      "disposition": "retained-path",
+      "xp_blob": "0e49a2437dbf2d52947370b9048231d5376ead7d",
+      "sha256": "28e10b1a9e293f073800e7b3393ebc82ba221c96d07188492ab36147d3f5cbbd",
+      "nonerror_points": 0,
+      "nonerror_lines": 0
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/text.c",
+      "disposition": "retained-path",
+      "xp_blob": "cc7e6de188e64573d6c7b37f98e562882f874891",
+      "sha256": "1caaeb500e703877e9917dfa242569c569385fd1936fbe88f1b82975b5b75e89",
+      "nonerror_points": 2,
+      "nonerror_lines": 3
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+      "disposition": "retained-path",
+      "xp_blob": "2ac1105055b9a24e7abd551e3a07bc81403576d3",
+      "sha256": "3e0237b2f6083d889060bd2f1f26cb7b6b6cc1e2ac1e7f9f6bc5a064fc72b6c3",
+      "nonerror_points": 6,
+      "nonerror_lines": 15
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "disposition": "retained-path",
+      "xp_blob": "efd422a0aea67e344381fca2a73b11bcb107b42f",
+      "sha256": "e3ce5a2e9fa2ff3f676980cb714d24bd88d679a5f1151b0a09674710a05c4b2f",
+      "nonerror_points": 5,
+      "nonerror_lines": 361
+    },
+    {
+      "batch": "N025",
+      "old_path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "disposition": "retained-path",
+      "xp_blob": "f41bc305fe60cec39e1cd7859c801ef31b859433",
+      "sha256": "92fe609cd6cc05ad599f860ff3d2962f46754614d7940101ec84c63d52405e90",
+      "nonerror_points": 7,
+      "nonerror_lines": 379
+    },
+    {
+      "batch": "N026",
+      "old_path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "current_path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "disposition": "retained-path",
+      "xp_blob": "a11a1362c2b3ff8dc220761f0f23ee62fdccb52a",
+      "sha256": "2a632d96204201cba5812469f94cf09267897b4a44fdf0b8d8199931be4e1ecb",
+      "nonerror_points": 2,
+      "nonerror_lines": 24
+    }
+  ],
+  "counts": {
+    "relocated": 34,
+    "retained-path": 98,
+    "retired": 5
+  }
+}

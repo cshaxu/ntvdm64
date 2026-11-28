@@ -341,3 +341,5 @@ The [Professional binary ledger](sp3-professional-media.csv) records an independ
 - [N024 XP kernel declaration migration](n024-userk.md).
 
 [N025 USER RTL migration](n025.md): ordered input inventory and active first-file audit.
+
+[N026 USER server export](n026.md); [S15 closure](s15-closure.md).

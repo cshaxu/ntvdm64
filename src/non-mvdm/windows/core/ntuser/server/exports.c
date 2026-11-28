@@ -1,7 +1,7 @@
 /**************************** Module Header ********************************\
 * Module Name: exports.c
 *
-* Copyright 1985-91, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * Routines exported from winsrv.dll
 *
@@ -10,8 +10,7 @@
 \***************************************************************************/
 
 #include <base_interactive.h>
-#line 89
-
+#line 32
 /***************************************************************************\
 * _UserTestTokenForInteractive
 *
@@ -24,7 +23,6 @@
 * 05-06-92 Davidc       Created
 \***************************************************************************/
 
-#line 102
 NTSTATUS
 _UserTestTokenForInteractive(
     HANDLE Token,
@@ -80,24 +78,15 @@ _UserTestTokenForInteractive(
          * with the id of the logged on user.
          */
         Status = NtUserTestForInteractiveUser(&pStats->AuthenticationId);
-#line 157
 #ifdef LATER
-#line 158
+#line 100
 #error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
-#line 162
+#line 104
 #endif
-#line 163
     }
 
     LocalFree(pStats);
 
     return Status;
-}
-
-#line 170
-BOOL _ReleaseDC(
-    HDC hdc)
-{
-    return ReleaseDC(NULL, hdc);
 }
 
