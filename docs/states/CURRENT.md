@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime65 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime66 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -204,6 +204,14 @@ real Win16 controls pass. N02227/39; S15 9/14, overall57/159. Census1329/785/
 796/533/8076/77980; delta0/0/0/0/+239/-14389.1294XP/35OpenNT.
 Five mirrors since P51 Full24/24. No guest change or S/T closure.
 Next lboxctl1.c whole-file migration; paired code retains OpenNT baseline.
+
+[P57 ListBox data operations](../etc/evidence/t485-s1/n022-lboxctl1.md)
+delivers runtime66: XP whole file, original registered Win16 comparison and
+paired pointer-width declarations. Cached build, dual13-image26hash,
+controls40/40, CCPU window-borrow, SOL Options and sorted Win16 controls pass.
+N02228/39; S15 9/14, overall57/159. Census1329/785/796/533/8071/77907;
+delta0/0/0/0/-5/-73.1295XP/34OpenNT. Six mirrors since P51 Full24/24.
+No guest change or S/T closure. Next lboxctl2.c.
 
 ## S14 Closure Record
 

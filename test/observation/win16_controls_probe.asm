@@ -270,6 +270,19 @@ inc word [scroll_ok-data]
 ; Keep the original single-selection/scrolling coverage above. A separate
 ; multi-selection, tabbed list checks the actual array input/output paths.
 destroy list
+; XP ListBox's Win16 English sorting calls the registered WOWlstrcmp16,
+; returning through immutable USER16 rather than a native sort replacement.
+create list_name,0x40a10003,list,owner ; LBS_SORT
+send list,0x401,0,ds,beta-data
+expect 0,0x91
+send list,0x401,0,ds,alpha-data
+expect 0,0x92
+send list,0x40a,0,ds,buffer-data
+expect 5,0x93
+mov si,buffer-data
+mov di,alpha-data
+call equal_text
+destroy list
 create list_name,0x40a10089,list,owner
 send list,0x413,64,ds,tabstops-data ; LB_SETTABSTOPS
 require 0x4e

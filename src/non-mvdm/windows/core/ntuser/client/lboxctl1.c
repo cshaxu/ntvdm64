@@ -1,7 +1,7 @@
 /**************************** Module Header ********************************\
 * Module Name: lboxctl1.c
 *
-* Copyright 1985-90, Microsoft Corporation
+* Copyright (c) 1985 - 1999, Microsoft Corporation
 *
 * List Box Handling Routines
 *
@@ -47,6 +47,8 @@ int xxxSetLBScrollParms(PLBIV plb, int nCtl)
             iPos   = plb->iTop / plb->itemsPerColumn;
             cItems = plb->cMac ? ((plb->cMac - 1) / plb->itemsPerColumn) + 1 : 0;
             iPage = plb->numberOfColumns;
+            if (plb->fRightAlign && cItems)
+                iPos = cItems - iPos - 1;
         } else {
             iPos = plb->xOrigin;
             cItems = plb->maxWidth;
@@ -91,9 +93,15 @@ int xxxSetLBScrollParms(PLBIV plb, int nCtl)
         si.nMin     = 0;
         si.nMax     = cItems;
         si.nPage    = iPage;
-        si.nPos     = iPos;
 
-        iReturn = NtUserSetScrollInfo(HWq(plb->spwnd), nCtl, &si, plb->fRedraw);
+        if (plb->fMultiColumn && plb->fRightAlign)
+            si.nPos =  (iPos+1) > (int)iPage ? iPos - iPage + 1 : 0;
+        else
+            si.nPos = iPos;
+
+        iReturn = SetScrollInfo(HWq(plb->spwnd), nCtl, &si, plb->fRedraw);
+        if (plb->fMultiColumn && plb->fRightAlign)
+            iReturn = cItems - (iReturn + iPage - 1);
 
         /*
          * Update the position cache
@@ -165,11 +173,11 @@ void xxxLBShowHideScrollBars(
 * 16-Apr-1992 beng      The NODATA listbox case
 \***************************************************************************/
 
-LONG LBGetItemData(
+LONG_PTR LBGetItemData(
     PLBIV plb,
     INT sItem)
 {
-    LONG buffer;
+    LONG_PTR buffer;
     LPBYTE lpItem;
 
     if (sItem < 0 || sItem >= plb->cMac) {
@@ -224,10 +232,10 @@ INT LBGetText(
          * Owner draw without strings so we must copy the app supplied DWORD
          * value.
          */
-        cchText = sizeof(DWORD);
+        cchText = sizeof(ULONG_PTR);
 
         if (!fLengthOnly) {
-            LONG UNALIGNED *p = (LONG UNALIGNED *)lpbuffer;
+            LONG_PTR UNALIGNED *p = (LONG_PTR UNALIGNED *)lpbuffer;
             *p = LBGetItemData(plb, index);
         }
     } else {
@@ -237,7 +245,7 @@ INT LBGetText(
 
         /*
          * These are strings so we are copying the text and we must include
-         * the terminating 0 when doing the memmove.
+         * the terminating 0 when doing the RtlMoveMemory.
          */
         cchText = wcslen(lpItemText);
 
@@ -246,7 +254,13 @@ INT LBGetText(
                 RtlUnicodeToMultiByteSize(&cchText, lpItemText, cchText*sizeof(WCHAR));
         } else {
             if (fAnsi) {
+#ifdef FE_SB // LBGetText()
+#error DIVERGENCE: original FE_SB control-client branch is not selected.
+#else
+#line 265
                 WCSToMB(lpItemText, cchText+1, &((LPSTR)lpbuffer), cchText+1, FALSE);
+#endif // FE_SB
+#line 267
             } else {
                 RtlCopyMemory(lpbuffer, lpItemText, (cchText+1)*sizeof(WCHAR));
             }
@@ -257,8 +271,6 @@ INT LBGetText(
     return cchText;
 }
 
-
-#line 277
 /***************************************************************************\
 * GrowMem
 *
@@ -380,7 +392,6 @@ LONG xxxLBInitStorage(PLBIV plb, BOOL fAnsi, INT cItems, INT cb)
     return plb->cMax ;
 }
 
-#line 316
 /***************************************************************************\
 * xxxInsertString
 *
@@ -402,7 +413,7 @@ INT xxxLBInsertItem(
     UINT wFlags)
 {
     MEASUREITEMSTRUCT measureItemStruct;
-    INT cbString;
+    INT cbString = 0;
     INT cbChunk;
     PBYTE lp;
     PBYTE lpT;
@@ -473,7 +484,7 @@ INT xxxLBInsertItem(
             CharLowerBuffW((LPWSTR)lpsz, cbString / sizeof(WCHAR));
 
         lp = (PBYTE)(plb->hStrings);
-        memmove(lp + plb->ichAlloc, lpsz, cbString);
+        RtlMoveMemory(lp + plb->ichAlloc, lpsz, cbString);
     }
 
     /*
@@ -519,14 +530,14 @@ INT xxxLBInsertItem(
      * supplied value.
      */
     lpT += (index * cbItem);
-    memmove(lpT + cbItem, lpT, cbChunk);
+    RtlMoveMemory(lpT + cbItem, lpT, cbChunk);
     if (!plb->fHasStrings && plb->OwnerDraw) {
         if (plb->fHasData) {
             /*
              * Ownerdraw so just save the DWORD value
              */
             lpLBODItem p = (lpLBODItem)lpT;
-            p->itemData = (DWORD)lpsz;
+            p->itemData = (ULONG_PTR)lpsz;
         }
     } else {
         lpLBItem p = ((lpLBItem)lpT);
@@ -546,7 +557,7 @@ INT xxxLBInsertItem(
      */
     if (plb->wMultiple != SINGLESEL) {
         lpT = lp + ((plb->cMac + 1) * cbItem) + index;
-        memmove(lpT + 1, lpT, plb->cMac - index +
+        RtlMoveMemory(lpT + 1, lpT, plb->cMac - index +
                 (plb->OwnerDraw == OWNERDRAWVAR ? plb->cMac : 0));
         *lpT = 0;  /* fSelected = FALSE */
     }
@@ -569,20 +580,20 @@ INT xxxLBInsertItem(
         lpHeightStart += (plb->cMac * cbItem) + index +
                 (plb->wMultiple ? plb->cMac : 0);
 
-        memmove(lpHeightStart + 1, lpHeightStart, plb->cMac - 1 - index);
+        RtlMoveMemory(lpHeightStart + 1, lpHeightStart, plb->cMac - 1 - index);
 
         /*
          * Query for item height only if we are var height owner draw.
          */
         measureItemStruct.CtlType = ODT_LISTBOX;
-        measureItemStruct.CtlID = (UINT)plb->spwnd->spmenu;
+        measureItemStruct.CtlID = PtrToUlong(plb->spwnd->spmenu);
         measureItemStruct.itemID = index;
 
         /*
          * System font height is default height
          */
         measureItemStruct.itemHeight = (UINT)gpsi->cySysFontChar;
-        measureItemStruct.itemData = (long)lpsz;
+        measureItemStruct.itemData = (ULONG_PTR)lpsz;
 
         /*
          * If "has strings" then add the special thunk bit so the client data
@@ -601,7 +612,7 @@ INT xxxLBInsertItem(
         SendMessage(HW(plb->spwndParent),
                 WM_MEASUREITEM,
                 measureItemStruct.CtlID,
-                (LONG)((LPMEASUREITEMSTRUCT)&measureItemStruct));
+                (LPARAM)&measureItemStruct);
         ThreadUnlock(&tlpwndParent);
         *lpHeightStart = (BYTE)measureItemStruct.itemHeight;
     }
@@ -622,9 +633,17 @@ INT xxxLBInsertItem(
      */
     plb->fFromInsert = TRUE;
     xxxLBShowHideScrollBars(plb);
+    if (plb->fHorzBar && plb->fRightAlign && !(plb->fMultiColumn || plb->OwnerDraw)) {
+        /*
+         * origin to right
+         */
+        xxxLBoxCtlHScroll(plb, SB_BOTTOM, 0);
+    }
     plb->fFromInsert = FALSE;
 
     xxxCheckRedraw(plb, TRUE, index);
+
+    LBEvent(plb, EVENT_OBJECT_CREATE, index);
 
     return index;
 }
@@ -658,20 +677,28 @@ INT LBlstrcmpi(
      * first and only in abosolutely necessary cases calls IsCharAlphaNumeric();
      */
     if (*lpStr1 == TEXT('[')) {
-        if (*lpStr2 == TEXT('[')) goto LBL_End;
-        if (IsCharAlphaNumeric(*lpStr2)) return 1;
+        if (*lpStr2 == TEXT('[')) {
+            goto LBL_End;
+        }
+        if (IsCharAlphaNumeric(*lpStr2)) {
+            return 1;
+        }
     }
 
-    if ((*lpStr2 == TEXT('[')) && IsCharAlphaNumeric(*lpStr1)) return -1;
+    if ((*lpStr2 == TEXT('[')) && IsCharAlphaNumeric(*lpStr1)) {
+        return -1;
+    }
+
 LBL_End:
-    return (INT)CompareStringW(
-                    (LCID)dwLocaleId,
-                    NORM_IGNORECASE,
-                    lpStr1,
-                    -1,
-                    lpStr2,
-                    -1
-                    ) - 2;
+    if ((GetClientInfo()->dwTIFlags & TIF_16BIT) &&
+        dwLocaleId == MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US)) {
+        /*
+         * This is how Windows95 does, bug #4199
+         */
+        return (*pfnWowIlstrcmp)(lpStr1, lpStr2);
+    }
+    return (INT)CompareStringW((LCID)dwLocaleId, NORM_IGNORECASE,
+            lpStr1, -1, lpStr2, -1 ) - 2;
 }
 
 
@@ -703,7 +730,8 @@ INT xxxLBBinarySearchString(
 
     CheckLock(plb->spwnd);
 
-    if (!plb->cMac) return 0;
+    if (!plb->cMac)
+        return 0;
 
     lprgpch = (BYTE *FAR *)(plb->rgpch);
     if (plb->fHasStrings) {
@@ -727,16 +755,16 @@ INT xxxLBBinarySearchString(
              * Send compare item messages to the parent for sorting
              */
             cis.CtlType = ODT_LISTBOX;
-            cis.CtlID = (UINT)plb->spwnd->spmenu;
+            cis.CtlID = PtrToUlong(plb->spwnd->spmenu);
             cis.hwndItem = HWq(plb->spwnd);
             cis.itemID1 = itemnew;
-            cis.itemData1 = ((long FAR *)lprgpch)[itemnew];
+            cis.itemData1 = ((lpLBODItem)lprgpch)[itemnew].itemData;
             cis.itemID2 = (UINT)-1;
-            cis.itemData2 = (DWORD)lpstr;
+            cis.itemData2 = (ULONG_PTR)lpstr;
             cis.dwLocaleId = plb->dwLocaleId;
             ThreadLock(plb->spwndParent, &tlpwndParent);
             sortResult = (INT)SendMessage(HW(plb->spwndParent), WM_COMPAREITEM,
-                    cis.CtlID, (LONG)(LPCOMPAREITEMSTRUCT)&cis);
+                    cis.CtlID, (LPARAM)&cis);
             ThreadUnlock(&tlpwndParent);
         }
 
@@ -829,6 +857,8 @@ INT xxxLBoxCtlDelete(
         return LB_ERR;
     }
 
+    LBEvent(plb, EVENT_OBJECT_DESTROY, sItem);
+
     if (plb->cMac == 1) {
 
         /*
@@ -904,7 +934,7 @@ INT xxxLBoxCtlDelete(
              */
             plb->ichAlloc = plb->ichAlloc - cbStringLen;
 
-            memmove(lpString, (PBYTE)lpString + cbStringLen,
+            RtlMoveMemory(lpString, (PBYTE)lpString + cbStringLen,
                     plb->ichAlloc + (pbStrings - (LPBYTE)lpString));
 
             /*
@@ -930,14 +960,14 @@ INT xxxLBoxCtlDelete(
          * Now compact the pointers to the strings (or the long app supplied values
          * if ownerdraw without strings).
          */
-        memmove(lpT, lpT + cbItem, cb);
+        RtlMoveMemory(lpT, lpT + cbItem, cb);
 
         /*
          * Compress the multiselection bytes
          */
         if (plb->wMultiple != SINGLESEL) {
             lpT = (lp + (plb->cMac * cbItem) + sItem);
-            memmove(lpT, lpT + 1, plb->cMac - sItem +
+            RtlMoveMemory(lpT, lpT + 1, plb->cMac - sItem +
                     (plb->OwnerDraw == OWNERDRAWVAR ? plb->cMac + 1 : 0));
         }
 
@@ -947,7 +977,7 @@ INT xxxLBoxCtlDelete(
              */
             lpT = (lp + (plb->cMac * cbItem) + (plb->wMultiple ? plb->cMac : 0)
                     + sItem);
-            memmove(lpT, lpT + 1, plb->cMac - sItem);
+            RtlMoveMemory(lpT, lpT + 1, plb->cMac - sItem);
         }
 
     }
@@ -968,7 +998,7 @@ INT xxxLBoxCtlDelete(
     if ((plb->iMouseDown != -1) && (sItem <= plb->iMouseDown))
         plb->iMouseDown = -1;
 
-    if (sItem == plb->iSelBase)
+    if (plb->iSelBase && sItem == plb->iSelBase)
         plb->iSelBase--;
 
     if (plb->cMac) {
@@ -1025,26 +1055,32 @@ void xxxLBoxDeleteItem(
         return;
 
     /*
+     * Bug 262122 - joejo
+     * No need to send message if no data!
+     */
+    if (!plb->fHasData) {
+        return;
+    }
+
+    /*
      * Fill the DELETEITEMSTRUCT
      */
     dis.CtlType = ODT_LISTBOX;
-    dis.CtlID = (UINT)plb->spwnd->spmenu;
+    dis.CtlID = PtrToUlong(plb->spwnd->spmenu);
     dis.itemID = sItem;
     dis.hwndItem = HWq(plb->spwnd);
 
     /*
-     * Set the app supplied data
+     * Bug 262122 - joejo
+     * Fixed in 93 so that ItemData was passed. For some reason, not
+     * merged in.
      */
-    if (plb->fHasStrings) {
-        dis.itemData = 0L;
-    } else {
-        LBGetText(plb, FALSE, FALSE, sItem, (LPWSTR)&dis.itemData);
-    }
+    dis.itemData = LBGetItemData(plb, sItem);
 
     if (plb->spwndParent != NULL) {
         ThreadLock(plb->spwndParent, &tlpwndParent);
-        SendMessage(HW(plb->spwndParent), WM_DELETEITEM, dis.CtlID,
-                (LONG)((LPDELETEITEMSTRUCT)&dis));
+        SendMessage(HWq(plb->spwndParent), WM_DELETEITEM, dis.CtlID,
+                (LPARAM)&dis);
         ThreadUnlock(&tlpwndParent);
     }
 }

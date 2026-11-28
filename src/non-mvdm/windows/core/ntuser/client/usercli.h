@@ -888,11 +888,11 @@ typedef  STRIPINFO FAR *LPSTRIPINFO;
 #line 1021
 typedef struct tagLBItem {
     LONG offsz;
-    DWORD itemData;
+    ULONG_PTR itemData;
 } LBItem, *lpLBItem;
 
 typedef struct tagLBODItem {
-    DWORD itemData;
+    ULONG_PTR itemData;
 } LBODItem, *lpLBODItem;
 
 void LBEvent(PLBIV, UINT, int);
@@ -2061,7 +2061,7 @@ VOID  xxxLBBlockHilite(PLBIV, INT, BOOL);
 
 int   LBGetSetItemHeightHandler(PLBIV plb, UINT message, int item, UINT height);
 VOID  LBDropObjectHandler(PLBIV, PDROPSTRUCT);
-LONG  LBGetItemData(PLBIV, INT);
+LONG_PTR LBGetItemData(PLBIV, INT);
 
 INT LBGetText(PLBIV, BOOL, BOOL, INT, LPWSTR);
 

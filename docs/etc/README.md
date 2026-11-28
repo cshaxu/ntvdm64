@@ -2227,3 +2227,5 @@ post-publication targeted checks.
 - [S15 P55 DDE data handles](evidence/t485-s1/n022-hdata.md).
 
 - [S15 P56 ListBox dispatch](evidence/t485-s1/n022-lb1.md).
+
+- [S15 P57 ListBox data operations](evidence/t485-s1/n022-lboxctl1.md).

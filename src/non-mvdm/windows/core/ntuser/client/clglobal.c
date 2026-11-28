@@ -211,6 +211,7 @@ const struct tagAPFNWOWHANDLERSIN *WINAPI wow_original_registered_callbacks(void
 void WINAPI wow_original_set_registered_callbacks(struct tagAPFNWOWHANDLERSIN *input)
 {
     wow_input_handlers = *input;
+    pfnWowIlstrcmp = input->pfnWowIlstrsmp;
 }
 void WINAPI wow_original_registration_lifecycle(wow_user_task_lifecycle_callbacks *callbacks)
 {
