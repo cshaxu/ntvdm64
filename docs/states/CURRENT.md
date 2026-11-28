@@ -4,7 +4,7 @@
 
 **Active: M0 T485 S15** (Ordinary Mode), N013-N026.
 [S14 closure](../etc/evidence/t485-s1/s14-closure.md): N004-N012 delivered;
-overall57/159 directories, H001-H036 and N001-N021. S15 runtime73 is the current
+overall57/159 directories, H001-H036 and N001-N021. S15 runtime75 is the current
 published package. The [working plan](../etc/operations/m0-t485-h-repair-plan.md)
 retains all S16-S20 and remaining migration/capability obligations.
 
@@ -70,13 +70,8 @@ in that receipt. Win95 exit1 boundary retained.
 [P20 N021 first-three](../etc/evidence/t485-s1/n021-first.md) delivered runtime20;
 its receipt retains targeted verification, original identities and census.
 
-[P21 N021 NT entry](../etc/evidence/t485-s1/n021-nt.md) delivered:
-nt.h XP framework plus six exact prerequisite headers; SDK and local RTL
-boundaries retained. Cached build, runtime21 dual13-image26hash publication,
-Full24/24 passed. N0214/17; next nt_vdd.h. Ten-file checkpoint resets to zero.
-Overall56/159, S15 8/14. Census1324files,774exact,785nonerror same/539different,
-7741points/154642lines; delta+6files,+6exact,+6same,0different,+12points/-108lines.
-1250XP/74OpenNT. LPC and executive entry limitations recorded for paired migration.
+[P21 N021 NT entry](../etc/evidence/t485-s1/n021-nt.md) delivered runtime21
+and Full24/24; its receipt retains paired prerequisites, census and boundaries.
 
 [P22 N021 VDD](../etc/evidence/t485-s1/n021-vdd.md) delivered runtime22;
 its receipt retains original ABI, compile exclusions, targeted runtime evidence
@@ -201,12 +196,15 @@ original exclusions, directory-order correction, census and final tests.
 runtime71; original bytes and targeted verification retained in its receipt.
 [P63 state drawing](../etc/evidence/t485-s1/n022-mngrayc.md) delivered runtime72;
 its receipt retains original semantics, provider bindings and verification.
-[P64 client stubs](../etc/evidence/t485-s1/n022-ntstubs-review.md) delivered runtime73:
-XP query/setter/text/helper bodies and direct color/brush service bindings.
-Cached full build, dual13-image26hash publication and targeted gates pass.
-N02235/39; S15 9/14, overall57/159. Census1329/788/799/530/8108/66388;
-delta0/0/0/0/+29/-239;1302XP/27OpenNT. Three files since P61 Full24/24.
-No original guest change or S/T closure. Next res.rc.
+[P64 client stubs](../etc/evidence/t485-s1/n022-ntstubs-review.md) delivered
+runtime73; receipt preserves restored bodies, service bindings and targeted tests.
+[P65 USER resources](../etc/evidence/t485-s1/n022-res.md) delivered runtime75:
+original nonconflicting strings, menus and MDI dialog restored; WOW32 identity
+and critical error strings retained. Cached full build, dual13-image26hash,
+published resource audit, SOL Options and genuine Win16 controls pass.
+N02236/39; S15 9/14, overall57/159. Census1330/789/800/530/8102/66273;
+delta+1/+1/+1/0/-6/-115;1304XP/26OpenNT. Five files since P61 Full24/24.
+No original guest change or S/T closure. Next rtlinit.c.
 
 ## S14 Closure Record
 

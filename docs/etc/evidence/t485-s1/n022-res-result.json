@@ -1,0 +1,482 @@
+{
+  "task": "M0 T485 S15 P65",
+  "runtime": "build/t485-s15/runtime75",
+  "package_id": "10F3C6CB-085F-45A9-B809-E9ABE9122159",
+  "build_exit": 0,
+  "publication": [
+    {
+      "sha256": "330DB591E23CEA7E786035D7DE1FB283FA5AEE32D3CDF45A310F8AB0AD85D5CA",
+      "pass": true,
+      "path": "assets\\release\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "330DB591E23CEA7E786035D7DE1FB283FA5AEE32D3CDF45A310F8AB0AD85D5CA",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\NTVDMD.DLL"
+    },
+    {
+      "sha256": "508C652024DE2E65CC631F94B95860D7E047853B3270243A88CD3886695565F1",
+      "pass": true,
+      "path": "assets\\release\\VJOY.DLL"
+    },
+    {
+      "sha256": "508C652024DE2E65CC631F94B95860D7E047853B3270243A88CD3886695565F1",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VJOY.DLL"
+    },
+    {
+      "sha256": "4556E7D64A3A4DC868E9F7321A4D078B88CCBCD52C650DE16C9D21483B48D7CB",
+      "pass": true,
+      "path": "assets\\release\\VCDEX.DLL"
+    },
+    {
+      "sha256": "4556E7D64A3A4DC868E9F7321A4D078B88CCBCD52C650DE16C9D21483B48D7CB",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VCDEX.DLL"
+    },
+    {
+      "sha256": "2147DA61A37841832E1EEB01FDB2E0021727EEE7CEA1D1BD1BC434FDE27BF337",
+      "pass": true,
+      "path": "assets\\release\\run16.exe"
+    },
+    {
+      "sha256": "2147DA61A37841832E1EEB01FDB2E0021727EEE7CEA1D1BD1BC434FDE27BF337",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\run16.exe"
+    },
+    {
+      "sha256": "D9B11EAA00E910B711E1F30DE8A71D21EA0F8EDCDE63F417C1061354E297EF64",
+      "pass": true,
+      "path": "assets\\release\\ntsrv.exe"
+    },
+    {
+      "sha256": "D9B11EAA00E910B711E1F30DE8A71D21EA0F8EDCDE63F417C1061354E297EF64",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntsrv.exe"
+    },
+    {
+      "sha256": "3480982B88B128B2476187E892681AF189CB7F25A977AB21CFEC04498CA69B79",
+      "pass": true,
+      "path": "assets\\release\\ntcon.exe"
+    },
+    {
+      "sha256": "3480982B88B128B2476187E892681AF189CB7F25A977AB21CFEC04498CA69B79",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntcon.exe"
+    },
+    {
+      "sha256": "3D95C8A6A3F98B3A750F5D837DB07F69FA2FE8B454071386FCA62FF67A66CEFB",
+      "pass": true,
+      "path": "assets\\release\\ntvdm.exe"
+    },
+    {
+      "sha256": "3D95C8A6A3F98B3A750F5D837DB07F69FA2FE8B454071386FCA62FF67A66CEFB",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvdm.exe"
+    },
+    {
+      "sha256": "9AFE15A7D4BB566791FD33B48756778CC6343AAACC06D295B45894C0E283D973",
+      "pass": true,
+      "path": "assets\\release\\ntvwm.exe"
+    },
+    {
+      "sha256": "9AFE15A7D4BB566791FD33B48756778CC6343AAACC06D295B45894C0E283D973",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntvwm.exe"
+    },
+    {
+      "sha256": "9B4729656A60EE6EDC55EE198C5BD8D6BA19A7CDD92015A0EAD1221623B2362C",
+      "pass": true,
+      "path": "assets\\release\\ntmon.exe"
+    },
+    {
+      "sha256": "9B4729656A60EE6EDC55EE198C5BD8D6BA19A7CDD92015A0EAD1221623B2362C",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\ntmon.exe"
+    },
+    {
+      "sha256": "0B0EE32E00B82B1C491935D016313BF228292AEA33336B4ACB98593AB1DC906B",
+      "pass": true,
+      "path": "assets\\release\\WOW32.DLL"
+    },
+    {
+      "sha256": "0B0EE32E00B82B1C491935D016313BF228292AEA33336B4ACB98593AB1DC906B",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\WOW32.DLL"
+    },
+    {
+      "sha256": "32D577C3A260D9B3332A5C77A9F0A3A1D5941B2490DB9CF0C57B3BF4CE337896",
+      "pass": true,
+      "path": "assets\\release\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "32D577C3A260D9B3332A5C77A9F0A3A1D5941B2490DB9CF0C57B3BF4CE337896",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\VDMREDIR.DLL"
+    },
+    {
+      "sha256": "D19F544C988B04F918218FB3C78BABF2A0FDA476B892FE20DAF509C660F1B7BA",
+      "pass": true,
+      "path": "assets\\release\\nthook32.dll"
+    },
+    {
+      "sha256": "D19F544C988B04F918218FB3C78BABF2A0FDA476B892FE20DAF509C660F1B7BA",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook32.dll"
+    },
+    {
+      "sha256": "B62830AE36E222133107CFF33E3FC471999E6D7F779746D89001A00D6E799FC6",
+      "pass": true,
+      "path": "assets\\release\\nthook64.dll"
+    },
+    {
+      "sha256": "B62830AE36E222133107CFF33E3FC471999E6D7F779746D89001A00D6E799FC6",
+      "pass": true,
+      "path": "O:\\WINNT\\SYSTEM32\\nthook64.dll"
+    }
+  ],
+  "resource_audit": {
+    "pass_": true,
+    "checks": [
+      {
+        "type": 4,
+        "id": 1,
+        "unchanged": true,
+        "sha256": "78040e56630c66975be6b6f9f05a7c457b6125d8fd5eecc55672bb3122c9aa4c"
+      },
+      {
+        "type": 6,
+        "id": 1,
+        "unchanged": true,
+        "sha256": "c7e1d3a9e7b8e77b48e6155ac3335b2fc94c39b23dad6de2be29577ddd055d38"
+      },
+      {
+        "type": 6,
+        "id": 17,
+        "unchanged": true,
+        "sha256": "62e037ff263a708af36e3ee3118cc734a624ab03d97fd18f18293161d3edb413"
+      },
+      {
+        "type": 4,
+        "id": 4,
+        "present": true,
+        "bytes": 40
+      },
+      {
+        "type": 4,
+        "id": 16,
+        "present": true,
+        "bytes": 150
+      },
+      {
+        "type": 4,
+        "id": 32,
+        "present": true,
+        "bytes": 190
+      },
+      {
+        "type": 4,
+        "id": 48,
+        "present": true,
+        "bytes": 58
+      },
+      {
+        "type": 4,
+        "id": 64,
+        "present": true,
+        "bytes": 212
+      },
+      {
+        "type": 4,
+        "id": 80,
+        "present": true,
+        "bytes": 180
+      },
+      {
+        "type": 5,
+        "id": 9,
+        "present": true,
+        "bytes": 178
+      },
+      {
+        "type": 6,
+        "id": 45,
+        "present": true,
+        "bytes": 1446
+      },
+      {
+        "type": 6,
+        "id": 51,
+        "present": true,
+        "bytes": 158
+      },
+      {
+        "type": 6,
+        "id": 57,
+        "present": true,
+        "bytes": 126
+      },
+      {
+        "type": 6,
+        "id": 516,
+        "present": true,
+        "bytes": 436
+      },
+      {
+        "type": 11,
+        "id": 1,
+        "present": true,
+        "bytes": 1036
+      }
+    ],
+    "message_ids": [
+      1073742896,
+      2147484721,
+      2147484722,
+      2147484723,
+      2147484724
+    ],
+    "version_owner": "WOW32",
+    "method": "LoadLibraryEx AS_DATAFILE_EXCLUSIVE; no DLL initialization"
+  },
+  "sol": "SOL options: game-thread=27568\nSOL options: command=1003\nSOL options: Game > Options visible; owner and OK/Cancel controls verified\nSOL options: dialog-visible-ms=625\nSOL options: dialog-close-recovery-ms=406\nSOL options: worker-cpu-open-ms=766 worker-cpu-close-ms=390\nSOL options: game-thread-cpu-open-ms=594 game-thread-cpu-close-ms=391\nPASS SOL Options command, modal dialog, close and parent recovery\n",
+  "guest_controls": {
+    "records": [
+      {
+        "phase": 0,
+        "errors": 0,
+        "created": 0,
+        "button": 0,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 1,
+        "errors": 0,
+        "created": 2,
+        "button": 1,
+        "single": 0,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 0,
+        "wordNested": 0,
+        "wordActions": 0,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 2,
+        "errors": 0,
+        "created": 3,
+        "button": 1,
+        "single": 1,
+        "multi": 0,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 3,
+        "errors": 0,
+        "created": 4,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 0,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 0,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 0,
+        "drop": 0
+      },
+      {
+        "phase": 4,
+        "errors": 0,
+        "created": 8,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 0,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 0
+      },
+      {
+        "phase": 5,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 0,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 6,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 3,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 7,
+        "errors": 0,
+        "created": 11,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 0,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      },
+      {
+        "phase": 8,
+        "errors": 0,
+        "created": 13,
+        "button": 1,
+        "single": 1,
+        "multi": 1,
+        "list": 1,
+        "combos": 3,
+        "menus": 1,
+        "destroyed": 11,
+        "leaving": 2,
+        "task": 6063,
+        "wordCalls": 3,
+        "wordNested": 3,
+        "wordActions": 7,
+        "scroll": 1,
+        "drop": 2
+      }
+    ],
+    "wow": "94D5254A3A8C0804F44E81A0F79F95C37FA2A6540DAC01915E4102E30EF9A5C8",
+    "package": "4337FC27E23AB3E93518AEB7BDBA29415DF3879082F5ABE5D32BA0E66375BCBA",
+    "pass": true,
+    "worker": "8750910A17DB848260B25057590E43392F4A0D1AD4FD0115177237B016061F45"
+  },
+  "census": {
+    "before": {
+      "files": 1329,
+      "byte_identical": 788,
+      "nonerror_identical": 799,
+      "nonerror_different": 530,
+      "nonerror_points": 8108,
+      "nonerror_lines": 66388
+    },
+    "after": {
+      "files": 1330,
+      "byte_identical": 789,
+      "nonerror_identical": 800,
+      "nonerror_different": 530,
+      "nonerror_points": 8102,
+      "nonerror_lines": 66273
+    },
+    "delta": {
+      "files": 1,
+      "byte_identical": 1,
+      "nonerror_identical": 1,
+      "nonerror_different": 0,
+      "nonerror_points": -6,
+      "nonerror_lines": -115
+    },
+    "files": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/res.rc",
+        "before_points": 10,
+        "before_lines": 204,
+        "after_points": 4,
+        "after_lines": 89,
+        "exclusions": 0
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/strid.mc",
+        "before_points": 0,
+        "before_lines": 0,
+        "after_points": 0,
+        "after_lines": 0,
+        "exclusions": 0,
+        "addition": true
+      }
+    ],
+    "baseline_counts": {
+      "XP": 1304,
+      "OpenNT": 26
+    }
+  },
+  "line_mapping": {
+    "mismatches": []
+  },
+  "full_checkpoint": "P61 runtime70 Full24/24; five completed files since checkpoint",
+  "original_blob": "7bb09bbd3738d83a1eaad30f9701adbec57ee574",
+  "original_guest_unchanged": true,
+  "initial_build_failures": [
+    "RC include paths lost in generic COMPILE_FLAGS; use target_include_directories",
+    "Original NOSCROLL undef/reinclude omitted in candidate; restored original lines14-16",
+    "MC -u incorrectly demanded UTF16 input; use native default ANSI input with Unicode message output"
+  ]
+}

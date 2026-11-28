@@ -157,3 +157,12 @@ wow_unit(obj_wow32-parent-import-abi-aliases_obj "${CMAKE_BINARY_DIR}/wow32-pare
 wow_unit(obj_wow32-dll-entry-bridge_obj "${CMAKE_BINARY_DIR}/wow32-dll-entry-bridge.c" "${adapter_cflags}")
 wow_unit(obj_wow32_res "${NTVDM_REPO}/src/mvdm-host/wow32/wow32.rc" "")
 wow_unit(obj_opennt-user_edit-menu_res "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/res.rc" "")
+target_include_directories(obj_opennt-user_edit-menu_res PRIVATE "${NTVDM_REPO}/src" "${NTVDM_REPO}/src/non-mvdm/public/sdk/inc")
+find_program(NTVDM_MC NAMES mc.exe REQUIRED)
+add_custom_command(OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/strid.rc" "${CMAKE_CURRENT_BINARY_DIR}/strid.h" "${CMAKE_CURRENT_BINARY_DIR}/MSG00001.bin"
+  COMMAND "${NTVDM_MC}" -h "${CMAKE_CURRENT_BINARY_DIR}" -r "${CMAKE_CURRENT_BINARY_DIR}"
+    "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/strid.mc"
+  DEPENDS "${NTVDM_REPO}/src/non-mvdm/windows/core/ntuser/client/strid.mc"
+  VERBATIM)
+add_custom_target(user-log-messages DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/strid.rc")
+add_dependencies(obj_opennt-user_edit-menu_res user-log-messages)

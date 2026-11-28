@@ -1,0 +1,49 @@
+{
+  "before": {
+    "files": 1329,
+    "byte_identical": 788,
+    "nonerror_identical": 799,
+    "nonerror_different": 530,
+    "nonerror_points": 8108,
+    "nonerror_lines": 66388
+  },
+  "after": {
+    "files": 1330,
+    "byte_identical": 789,
+    "nonerror_identical": 800,
+    "nonerror_different": 530,
+    "nonerror_points": 8102,
+    "nonerror_lines": 66273
+  },
+  "delta": {
+    "files": 1,
+    "byte_identical": 1,
+    "nonerror_identical": 1,
+    "nonerror_different": 0,
+    "nonerror_points": -6,
+    "nonerror_lines": -115
+  },
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/res.rc",
+      "before_points": 10,
+      "before_lines": 204,
+      "after_points": 4,
+      "after_lines": 89,
+      "exclusions": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/strid.mc",
+      "before_points": 0,
+      "before_lines": 0,
+      "after_points": 0,
+      "after_lines": 0,
+      "exclusions": 0,
+      "addition": true
+    }
+  ],
+  "baseline_counts": {
+    "XP": 1304,
+    "OpenNT": 26
+  }
+}

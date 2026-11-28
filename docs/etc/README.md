@@ -2243,3 +2243,5 @@ post-publication targeted checks.
 - [S15 P63 state drawing migration](evidence/t485-s1/n022-mngrayc.md).
 
 - [S15 P64 client ntstubs review](evidence/t485-s1/n022-ntstubs-review.md).
+
+- [S15 P65 USER resources](evidence/t485-s1/n022-res.md).

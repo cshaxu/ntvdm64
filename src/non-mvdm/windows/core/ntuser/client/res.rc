@@ -9,41 +9,27 @@
 * 09-18-90 DarrinM      Created.
 \***************************************************************************/
 
-/* DIVERGENCE(OPENNT-HOST-087): retain the original EDIT menu only.
- * Exclude USER version/strings/bitmap resources. Windows RC supplies the
- * message constants; ID_EC_PROPERTY_MENU is original usercli.h's value. */
 #include <windows.h>
-#define ID_EC_PROPERTY_MENU 1
+#include "compat/include/wow_control_resource_abi.h"
+#line 14
+#undef NOSCROLL
+#include <winuser.h>
 
-#define ID_CNTX_RTL         0x00008000L
-#define ID_CNTX_DISPLAYCTRL 0x00008001L
-#define ID_CNTX_INSERTCTRL  0x00008013L
-#define ID_CNTX_ZWJ         0x00008002L
-#define ID_CNTX_ZWNJ        0x00008003L
-#define ID_CNTX_LRM         0x00008004L
-#define ID_CNTX_RLM         0x00008005L
-#define ID_CNTX_LRE         0x00008006L
-#define ID_CNTX_RLE         0x00008007L
-#define ID_CNTX_LRO         0x00008008L
-#define ID_CNTX_RLO         0x00008009L
-#define ID_CNTX_PDF         0x0000800AL
-#define ID_CNTX_NADS        0x0000800BL
-#define ID_CNTX_NODS        0x0000800CL
-#define ID_CNTX_ASS         0x0000800DL
-#define ID_CNTX_ISS         0x0000800EL
-#define ID_CNTX_AAFS        0x0000800FL
-#define ID_CNTX_IAFS        0x00008010L
-#define ID_CNTX_RS          0x00008011L
-#define ID_CNTX_US          0x00008012L
+#include <ntverp.h>
 
-/*
- * IME specific context menu string
- */
-#define STR_IMEOPEN                 700
-#define STR_IMECLOSE                701
-#define STR_SOFTKBDOPEN             702
-#define STR_SOFTKBDCLOSE            703
-#define STR_RECONVERTSTRING         705
+#define VER_FILETYPE                VFT_DLL
+#define VER_FILESUBTYPE             VFT2_UNKNOWN
+#define VER_INTERNALNAME_STR        "user32\0"
+
+#ifdef _HYDRA_
+#define VER_FILEDESCRIPTION_STR     "Multi-User Windows XP USER API Client DLL"
+#else
+#define VER_FILEDESCRIPTION_STR     "Windows XP USER API Client DLL"
+#endif
+
+
+#line 30
+#include "strid.rc"
 
 
 // Edit field menu
@@ -85,6 +71,7 @@ BEGIN
     END
 END
 
+#line 79
 /* IME specific context menu string */
 STRINGTABLE
 BEGIN
@@ -95,3 +82,218 @@ BEGIN
     STR_RECONVERTSTRING     "&Reconversion"
 END
 
+/*
+ * MessageBox button strings.
+ * They should be in the same order as IDOK... and SEB_OK... are
+ */
+STRINGTABLE
+BEGIN
+    STR_OK                  "OK"
+    STR_CANCEL              "Cancel"
+    STR_ABORT               "&Abort"
+    STR_RETRY               "&Retry"
+    STR_IGNORE              "&Ignore"
+    STR_YES                 "&Yes"
+    STR_NO                  "&No"
+    STR_CLOSE               "&Close"
+    STR_HELP                "Help"
+    STR_TRYAGAIN            "&Try Again"
+    STR_CONTINUE            "&Continue"
+END
+
+/*
+ * ToolTip strings.
+ */
+STRINGTABLE
+BEGIN
+    STR_TT_MIN              "Minimize"
+    STR_TT_MAX              "Maximize"
+    STR_TT_RESUP            "Restore Up"
+    STR_TT_RESDOWN          "Restore Down"
+    STR_TT_HELP             "Help"
+    STR_TT_SCLOSE           "Close"
+END
+
+/*
+ * Strings for shutdown logging.
+ */
+STRINGTABLE
+BEGIN
+    STR_SHUTDOWN_SHUTDOWN   "shutdown"
+    STR_SHUTDOWN_POWEROFF   "power off"
+    STR_SHUTDOWN_REBOOT     "reboot"
+END
+
+/*
+ * Misc. strings.
+ */
+STRINGTABLE
+BEGIN
+    STR_UNKNOWN             "unknown"
+END
+
+
+#line 212
+/* Default System Menu */
+ID_SYSMENU MENU PRELOAD MOVEABLE DISCARDABLE
+BEGIN
+    POPUP " "
+    BEGIN
+    MENUITEM "&Restore",        SC_RESTORE
+    MENUITEM "&Move",           SC_MOVE
+    MENUITEM "&Size",           SC_SIZE
+    MENUITEM "Mi&nimize",       SC_MINIMIZE
+    MENUITEM "Ma&ximize",       SC_MAXIMIZE
+    MENUITEM SEPARATOR
+    MENUITEM "&Close\tAlt+F4",  SC_CLOSE
+
+/*  Removed for Chicago compatibility
+
+    MENUITEM SEPARATOR
+    MENUITEM "S&witch To...\tCtrl+Esc",SC_TASKLIST
+*/
+
+    END
+END
+
+// Help Menu
+ID_HELPMENU MENU LOADONCALL MOVEABLE DISCARDABLE
+BEGIN
+    POPUP ""
+        BEGIN
+            MENUITEM "&What's This?",   HELP_CONTEXTPOPUP
+    END
+END
+
+/* MDI child window system menu */
+ID_CLOSEMENU MENU PRELOAD MOVEABLE DISCARDABLE
+BEGIN
+    POPUP "-"
+    BEGIN
+    MENUITEM "&Restore",        SC_RESTORE
+    MENUITEM "&Move",           SC_MOVE
+    MENUITEM "&Size",           SC_SIZE
+    MENUITEM "Mi&nimize",       SC_MINIMIZE, GRAYED
+    MENUITEM "Ma&ximize",       SC_MAXIMIZE
+    MENUITEM SEPARATOR
+    MENUITEM "&Close\tCtrl+F4", SC_CLOSE
+    MENUITEM SEPARATOR
+    MENUITEM "Nex&t\tCtrl+F6",  SC_NEXTWINDOW
+    END
+END
+
+/* Default dialog system menu */
+ID_DIALOGSYSMENU MENU PRELOAD MOVEABLE DISCARDABLE
+BEGIN
+    POPUP " "
+    BEGIN
+    MENUITEM "&Move",           SC_MOVE
+    MENUITEM "&Close\tAlt+F4",  SC_CLOSE
+    END
+END
+
+/* Horizontal scroll menu */
+ID_HSCROLLMENU MENU DISCARDABLE
+BEGIN
+    POPUP ""
+    BEGIN
+    MENUITEM "Scroll Here",     0x1000 + SB_THUMBPOSITION
+    MENUITEM SEPARATOR
+    MENUITEM "Left Edge",       0x1000 + SB_LEFT
+    MENUITEM "Right Edge",      0x1000 + SB_RIGHT
+    MENUITEM SEPARATOR
+    MENUITEM "Page Left",       0x1000 + SB_PAGELEFT
+    MENUITEM "Page Right",      0x1000 + SB_PAGERIGHT
+    MENUITEM SEPARATOR
+    MENUITEM "Scroll Left",     0x1000 + SB_LINELEFT
+    MENUITEM "Scroll Right",    0x1000 + SB_LINERIGHT
+    END
+END
+
+/* Vertical scroll menu */
+ID_VSCROLLMENU MENU DISCARDABLE
+BEGIN
+    POPUP ""
+    BEGIN
+    MENUITEM "Scroll Here",     0x1000 + SB_THUMBPOSITION
+    MENUITEM SEPARATOR
+    MENUITEM "Top",             0x1000 + SB_TOP
+    MENUITEM "Bottom",          0x1000 + SB_BOTTOM
+    MENUITEM SEPARATOR
+    MENUITEM "Page Up",         0x1000 + SB_PAGEUP
+    MENUITEM "Page Down",       0x1000 + SB_PAGEDOWN
+    MENUITEM SEPARATOR
+    MENUITEM "Scroll Up",       0x1000 + SB_LINEUP
+    MENUITEM "Scroll Down",     0x1000 + SB_LINEDOWN
+    END
+END
+
+IDD_MDI_ACTIVATE DIALOG LOADONCALL MOVEABLE DISCARDABLE 20, 20, 220, 140
+CAPTION "Select Window"
+FONT 8, "MS Shell Dlg"
+STYLE WS_BORDER | DS_MODALFRAME | WS_CAPTION | WS_THICKFRAME | WS_POPUP | WS_SYSMENU
+
+BEGIN
+           CONTROL "", 100, "listbox", LBS_NOINTEGRALHEIGHT | LBS_NOTIFY | WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_CHILD, 5, 5, 210, 110
+           CONTROL "OK", 1, "button", BS_DEFPUSHBUTTON | WS_TABSTOP | WS_CHILD, 60, 120, 40, 15
+           CONTROL "Cancel", 2, "button", BS_PUSHBUTTON | WS_TABSTOP | WS_CHILD, 120, 120, 40, 15
+END
+
+// Shut down reasons
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_REASON_UNPLANNED_HARDWARE_MAINTENANCE_TITLE         "Hardware: Maintenance (Unplanned)"
+    IDS_REASON_PLANNED_HARDWARE_MAINTENANCE_TITLE           "Hardware: Maintenance (Planned)"
+    IDS_REASON_UNPLANNED_HARDWARE_INSTALLATION_TITLE        "Hardware: Installation (Unplanned)"
+    IDS_REASON_PLANNED_HARDWARE_INSTALLATION_TITLE          "Hardware: Installation (Planned)"
+
+    IDS_REASON_UNPLANNED_OPERATINGSYSTEM_UPGRADE_TITLE      "Operating System: Upgrade (Unplanned)"
+    IDS_REASON_PLANNED_OPERATINGSYSTEM_UPGRADE_TITLE        "Operating System: Upgrade (Planned)"
+    IDS_REASON_UNPLANNED_OPERATINGSYSTEM_RECONFIG_TITLE     "Operating System: Reconfiguration (Unplanned)"
+    IDS_REASON_PLANNED_OPERATINGSYSTEM_RECONFIG_TITLE       "Operating System: Reconfiguration (Planned)"
+
+    IDS_REASON_APPLICATION_HUNG_TITLE                       "Application: Unresponsive"
+    IDS_REASON_APPLICATION_UNSTABLE_TITLE                   "Application: Unstable"
+    IDS_REASON_APPLICATION_MAINTENANCE_TITLE                "Application: Maintenance (Unplanned)"
+    IDS_REASON_APPLICATION_PM_TITLE                         "Application: Maintenance (Planned)"
+
+    IDS_REASON_UNPLANNED_OTHER_TITLE                        "Other (Unplanned)"
+    IDS_REASON_PLANNED_OTHER_TITLE                          "Other (Planned)"
+
+    IDS_REASON_SYSTEMFAILURE_BLUESCREEN_TITLE               "System Failure: Stop error"
+    IDS_REASON_POWERFAILURE_CORDUNPLUGGED_TITLE             "Power Failure: Cord Unplugged"
+    IDS_REASON_POWERFAILURE_ENVIRONMENT_TITLE               "Power Failure: Environment"
+    IDS_REASON_OTHERFAILURE_HUNG_TITLE                      "Other Failure: System Unresponsive"
+    IDS_REASON_OTHERFAILURE_TITLE                           "Unknown"
+    IDS_REASON_DEFAULT_TITLE                                "No title for this reason could be found"
+
+// Reason Descriptions
+    IDS_REASON_HARDWARE_MAINTENANCE_DESCRIPTION             "A restart or shutdown to service hardware on the system."
+    IDS_REASON_HARDWARE_INSTALLATION_DESCRIPTION            "A restart or shutdown to begin or complete hardware installation."
+
+    IDS_REASON_OPERATINGSYSTEM_UPGRADE_DESCRIPTION          "A restart or shutdown to upgrade the operating system."
+    IDS_REASON_OPERATINGSYSTEM_RECONFIG_DESCRIPTION         "A restart or shutdown to change the operating system configuration."
+
+    IDS_REASON_APPLICATION_HUNG_DESCRIPTION                 "A restart or shutdown to troubleshoot an unresponsive application."
+    IDS_REASON_APPLICATION_UNSTABLE_DESCRIPTION             "A restart or shutdown to troubleshoot an unstable application."
+    IDS_REASON_APPLICATION_MAINTENANCE_DESCRIPTION          "A restart or shutdown to service an application."
+    IDS_REASON_APPLICATION_PM_DESCRIPTION                   "A restart or shutdown to perform planned maintenance on an application."
+
+    IDS_REASON_SYSTEMFAILURE_BLUESCREEN_DESCRIPTION         "The computer displayed a blue screen crash event."
+    IDS_REASON_POWERFAILURE_CORDUNPLUGGED_DESCRIPTION       "The computer was unplugged."
+    IDS_REASON_POWERFAILURE_ENVIRONMENT_DESCRIPTION         "There was a power outage."
+    IDS_REASON_OTHERFAILURE_HUNG_DESCRIPTION                "The system became unresponsive."
+
+    IDS_REASON_OTHER_DESCRIPTION                            "A shutdown or restart for an unknown reason"
+
+END
+
+// ExitWindowsEx warning prompts
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDS_EXITWINDOWS_TITLE           "Windows"
+    IDS_SHUTDOWN_REMOTE             "If you shut down this remote computer, no one can use it until someone at the remote location manually restarts it.\r\n\r\nDo you want to continue shutting down?"
+    IDS_SHUTDOWN_REMOTE_OTHERUSERS  "Other people are logged on to this remote computer.  Shutting down Windows might cause them to lose data. Also, someone at the remote location will have to restart the computer manually.\r\n\r\nDo you want to continue shutting down?"
+    IDS_SHUTDOWN_OTHERUSERS         "Other people are logged on to this computer. Shutting down Windows might cause them to lose data.\r\n\r\nDo you want to continue shutting down?"
+    IDS_RESTART_OTHERUSERS          "Other people are logged on to this computer. Restarting Windows might cause them to lose data.\r\n\r\nDo you want to continue restarting?"
+END

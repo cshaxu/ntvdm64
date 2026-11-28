@@ -1,0 +1,554 @@
+[
+  {
+    "name": "ID_CNTX_RTL",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 744,
+    "definition": "#define ID_CNTX_RTL         0x00008000L"
+  },
+  {
+    "name": "ID_CNTX_DISPLAYCTRL",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 745,
+    "definition": "#define ID_CNTX_DISPLAYCTRL 0x00008001L"
+  },
+  {
+    "name": "ID_CNTX_INSERTCTRL",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 746,
+    "definition": "#define ID_CNTX_INSERTCTRL  0x00008013L"
+  },
+  {
+    "name": "ID_CNTX_ZWJ",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 747,
+    "definition": "#define ID_CNTX_ZWJ         0x00008002L"
+  },
+  {
+    "name": "ID_CNTX_ZWNJ",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 748,
+    "definition": "#define ID_CNTX_ZWNJ        0x00008003L"
+  },
+  {
+    "name": "ID_CNTX_LRM",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 749,
+    "definition": "#define ID_CNTX_LRM         0x00008004L"
+  },
+  {
+    "name": "ID_CNTX_RLM",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 750,
+    "definition": "#define ID_CNTX_RLM         0x00008005L"
+  },
+  {
+    "name": "ID_CNTX_LRE",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 751,
+    "definition": "#define ID_CNTX_LRE         0x00008006L"
+  },
+  {
+    "name": "ID_CNTX_RLE",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 752,
+    "definition": "#define ID_CNTX_RLE         0x00008007L"
+  },
+  {
+    "name": "ID_CNTX_LRO",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 753,
+    "definition": "#define ID_CNTX_LRO         0x00008008L"
+  },
+  {
+    "name": "ID_CNTX_RLO",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 754,
+    "definition": "#define ID_CNTX_RLO         0x00008009L"
+  },
+  {
+    "name": "ID_CNTX_PDF",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 755,
+    "definition": "#define ID_CNTX_PDF         0x0000800AL"
+  },
+  {
+    "name": "ID_CNTX_NADS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 756,
+    "definition": "#define ID_CNTX_NADS        0x0000800BL"
+  },
+  {
+    "name": "ID_CNTX_NODS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 757,
+    "definition": "#define ID_CNTX_NODS        0x0000800CL"
+  },
+  {
+    "name": "ID_CNTX_ASS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 758,
+    "definition": "#define ID_CNTX_ASS         0x0000800DL"
+  },
+  {
+    "name": "ID_CNTX_ISS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 759,
+    "definition": "#define ID_CNTX_ISS         0x0000800EL"
+  },
+  {
+    "name": "ID_CNTX_AAFS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 760,
+    "definition": "#define ID_CNTX_AAFS        0x0000800FL"
+  },
+  {
+    "name": "ID_CNTX_IAFS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 761,
+    "definition": "#define ID_CNTX_IAFS        0x00008010L"
+  },
+  {
+    "name": "ID_CNTX_RS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 762,
+    "definition": "#define ID_CNTX_RS          0x00008011L"
+  },
+  {
+    "name": "ID_CNTX_US",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 763,
+    "definition": "#define ID_CNTX_US          0x00008012L"
+  },
+  {
+    "name": "ID_EC_PROPERTY_MENU",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1156,
+    "definition": "#define ID_EC_PROPERTY_MENU      1"
+  },
+  {
+    "name": "IDD_MDI_ACTIVATE",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1158,
+    "definition": "#define IDD_MDI_ACTIVATE         9"
+  },
+  {
+    "name": "STR_IMEOPEN",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1171,
+    "definition": "#define STR_IMEOPEN                 700"
+  },
+  {
+    "name": "STR_IMECLOSE",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1172,
+    "definition": "#define STR_IMECLOSE                701"
+  },
+  {
+    "name": "STR_SOFTKBDOPEN",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1173,
+    "definition": "#define STR_SOFTKBDOPEN             702"
+  },
+  {
+    "name": "STR_SOFTKBDCLOSE",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1174,
+    "definition": "#define STR_SOFTKBDCLOSE            703"
+  },
+  {
+    "name": "STR_RECONVERTSTRING",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1175,
+    "definition": "#define STR_RECONVERTSTRING         705"
+  },
+  {
+    "name": "STR_SHUTDOWN_SHUTDOWN",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1180,
+    "definition": "#define STR_SHUTDOWN_SHUTDOWN       706"
+  },
+  {
+    "name": "STR_SHUTDOWN_POWEROFF",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1181,
+    "definition": "#define STR_SHUTDOWN_POWEROFF       707"
+  },
+  {
+    "name": "STR_SHUTDOWN_REBOOT",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1182,
+    "definition": "#define STR_SHUTDOWN_REBOOT         708"
+  },
+  {
+    "name": "STR_UNKNOWN",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1187,
+    "definition": "#define STR_UNKNOWN                 709"
+  },
+  {
+    "name": "IDS_EXITWINDOWS_TITLE",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1192,
+    "definition": "#define IDS_EXITWINDOWS_TITLE           710"
+  },
+  {
+    "name": "IDS_SHUTDOWN_REMOTE",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1193,
+    "definition": "#define IDS_SHUTDOWN_REMOTE             711"
+  },
+  {
+    "name": "IDS_SHUTDOWN_REMOTE_OTHERUSERS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1194,
+    "definition": "#define IDS_SHUTDOWN_REMOTE_OTHERUSERS  712"
+  },
+  {
+    "name": "IDS_SHUTDOWN_OTHERUSERS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1195,
+    "definition": "#define IDS_SHUTDOWN_OTHERUSERS         713"
+  },
+  {
+    "name": "IDS_RESTART_OTHERUSERS",
+    "path": "windows/core/ntuser/client/usercli.h",
+    "line": 1196,
+    "definition": "#define IDS_RESTART_OTHERUSERS          714"
+  },
+  {
+    "name": "STR_OK",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 163,
+    "definition": "#define STR_OK                      800"
+  },
+  {
+    "name": "STR_CANCEL",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 164,
+    "definition": "#define STR_CANCEL                  801"
+  },
+  {
+    "name": "STR_ABORT",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 165,
+    "definition": "#define STR_ABORT                   802"
+  },
+  {
+    "name": "STR_RETRY",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 166,
+    "definition": "#define STR_RETRY                   803"
+  },
+  {
+    "name": "STR_IGNORE",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 167,
+    "definition": "#define STR_IGNORE                  804"
+  },
+  {
+    "name": "STR_YES",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 168,
+    "definition": "#define STR_YES                     805"
+  },
+  {
+    "name": "STR_NO",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 169,
+    "definition": "#define STR_NO                      806"
+  },
+  {
+    "name": "STR_CLOSE",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 170,
+    "definition": "#define STR_CLOSE                   807"
+  },
+  {
+    "name": "STR_HELP",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 171,
+    "definition": "#define STR_HELP                    808"
+  },
+  {
+    "name": "STR_TRYAGAIN",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 172,
+    "definition": "#define STR_TRYAGAIN                809"
+  },
+  {
+    "name": "STR_CONTINUE",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 173,
+    "definition": "#define STR_CONTINUE                810"
+  },
+  {
+    "name": "STR_TT_MIN",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 178,
+    "definition": "#define STR_TT_MIN                  900"
+  },
+  {
+    "name": "STR_TT_MAX",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 179,
+    "definition": "#define STR_TT_MAX                  901"
+  },
+  {
+    "name": "STR_TT_RESUP",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 180,
+    "definition": "#define STR_TT_RESUP                902"
+  },
+  {
+    "name": "STR_TT_RESDOWN",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 181,
+    "definition": "#define STR_TT_RESDOWN              903"
+  },
+  {
+    "name": "STR_TT_HELP",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 182,
+    "definition": "#define STR_TT_HELP                 904"
+  },
+  {
+    "name": "STR_TT_SCLOSE",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 183,
+    "definition": "#define STR_TT_SCLOSE               905"
+  },
+  {
+    "name": "ID_SYSMENU",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 2901,
+    "definition": "#define ID_SYSMENU              0x10"
+  },
+  {
+    "name": "ID_CLOSEMENU",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 2902,
+    "definition": "#define ID_CLOSEMENU            0x20"
+  },
+  {
+    "name": "ID_DIALOGSYSMENU",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 2904,
+    "definition": "#define ID_DIALOGSYSMENU        0x30"
+  },
+  {
+    "name": "ID_HSCROLLMENU",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 2905,
+    "definition": "#define ID_HSCROLLMENU          0x40"
+  },
+  {
+    "name": "ID_VSCROLLMENU",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 2906,
+    "definition": "#define ID_VSCROLLMENU          0x50"
+  },
+  {
+    "name": "ID_HELPMENU",
+    "path": "windows/core/ntuser/inc/user.h",
+    "line": 2983,
+    "definition": "#define ID_HELPMENU            4"
+  },
+  {
+    "name": "IDS_REASON_UNPLANNED_HARDWARE_MAINTENANCE_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2753,
+    "definition": "#define IDS_REASON_UNPLANNED_HARDWARE_MAINTENANCE_TITLE         8250"
+  },
+  {
+    "name": "IDS_REASON_PLANNED_HARDWARE_MAINTENANCE_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2754,
+    "definition": "#define IDS_REASON_PLANNED_HARDWARE_MAINTENANCE_TITLE           8251"
+  },
+  {
+    "name": "IDS_REASON_UNPLANNED_HARDWARE_INSTALLATION_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2755,
+    "definition": "#define IDS_REASON_UNPLANNED_HARDWARE_INSTALLATION_TITLE        8252"
+  },
+  {
+    "name": "IDS_REASON_PLANNED_HARDWARE_INSTALLATION_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2756,
+    "definition": "#define IDS_REASON_PLANNED_HARDWARE_INSTALLATION_TITLE          8253"
+  },
+  {
+    "name": "IDS_REASON_UNPLANNED_OPERATINGSYSTEM_UPGRADE_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2758,
+    "definition": "#define IDS_REASON_UNPLANNED_OPERATINGSYSTEM_UPGRADE_TITLE      8254"
+  },
+  {
+    "name": "IDS_REASON_PLANNED_OPERATINGSYSTEM_UPGRADE_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2759,
+    "definition": "#define IDS_REASON_PLANNED_OPERATINGSYSTEM_UPGRADE_TITLE        8255"
+  },
+  {
+    "name": "IDS_REASON_UNPLANNED_OPERATINGSYSTEM_RECONFIG_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2760,
+    "definition": "#define IDS_REASON_UNPLANNED_OPERATINGSYSTEM_RECONFIG_TITLE     8256"
+  },
+  {
+    "name": "IDS_REASON_PLANNED_OPERATINGSYSTEM_RECONFIG_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2761,
+    "definition": "#define IDS_REASON_PLANNED_OPERATINGSYSTEM_RECONFIG_TITLE       8257"
+  },
+  {
+    "name": "IDS_REASON_APPLICATION_HUNG_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2763,
+    "definition": "#define IDS_REASON_APPLICATION_HUNG_TITLE                       8258"
+  },
+  {
+    "name": "IDS_REASON_APPLICATION_UNSTABLE_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2764,
+    "definition": "#define IDS_REASON_APPLICATION_UNSTABLE_TITLE                   8259"
+  },
+  {
+    "name": "IDS_REASON_APPLICATION_MAINTENANCE_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2765,
+    "definition": "#define IDS_REASON_APPLICATION_MAINTENANCE_TITLE                8260"
+  },
+  {
+    "name": "IDS_REASON_UNPLANNED_OTHER_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2767,
+    "definition": "#define IDS_REASON_UNPLANNED_OTHER_TITLE                        8261"
+  },
+  {
+    "name": "IDS_REASON_PLANNED_OTHER_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2768,
+    "definition": "#define IDS_REASON_PLANNED_OTHER_TITLE                          8262"
+  },
+  {
+    "name": "IDS_REASON_SYSTEMFAILURE_BLUESCREEN_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2770,
+    "definition": "#define IDS_REASON_SYSTEMFAILURE_BLUESCREEN_TITLE               8263"
+  },
+  {
+    "name": "IDS_REASON_POWERFAILURE_CORDUNPLUGGED_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2771,
+    "definition": "#define IDS_REASON_POWERFAILURE_CORDUNPLUGGED_TITLE             8264"
+  },
+  {
+    "name": "IDS_REASON_POWERFAILURE_ENVIRONMENT_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2772,
+    "definition": "#define IDS_REASON_POWERFAILURE_ENVIRONMENT_TITLE               8265"
+  },
+  {
+    "name": "IDS_REASON_OTHERFAILURE_HUNG_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2773,
+    "definition": "#define IDS_REASON_OTHERFAILURE_HUNG_TITLE                      8266"
+  },
+  {
+    "name": "IDS_REASON_OTHERFAILURE_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2774,
+    "definition": "#define IDS_REASON_OTHERFAILURE_TITLE                           8267"
+  },
+  {
+    "name": "IDS_REASON_APPLICATION_PM_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2775,
+    "definition": "#define IDS_REASON_APPLICATION_PM_TITLE                         8268"
+  },
+  {
+    "name": "IDS_REASON_DEFAULT_TITLE",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2778,
+    "definition": "#define IDS_REASON_DEFAULT_TITLE                                8269"
+  },
+  {
+    "name": "IDS_REASON_HARDWARE_MAINTENANCE_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2781,
+    "definition": "#define IDS_REASON_HARDWARE_MAINTENANCE_DESCRIPTION             8275"
+  },
+  {
+    "name": "IDS_REASON_HARDWARE_INSTALLATION_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2782,
+    "definition": "#define IDS_REASON_HARDWARE_INSTALLATION_DESCRIPTION            8276"
+  },
+  {
+    "name": "IDS_REASON_OPERATINGSYSTEM_UPGRADE_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2784,
+    "definition": "#define IDS_REASON_OPERATINGSYSTEM_UPGRADE_DESCRIPTION          8277"
+  },
+  {
+    "name": "IDS_REASON_OPERATINGSYSTEM_RECONFIG_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2785,
+    "definition": "#define IDS_REASON_OPERATINGSYSTEM_RECONFIG_DESCRIPTION         8278"
+  },
+  {
+    "name": "IDS_REASON_APPLICATION_HUNG_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2787,
+    "definition": "#define IDS_REASON_APPLICATION_HUNG_DESCRIPTION                 8279"
+  },
+  {
+    "name": "IDS_REASON_APPLICATION_UNSTABLE_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2788,
+    "definition": "#define IDS_REASON_APPLICATION_UNSTABLE_DESCRIPTION             8280"
+  },
+  {
+    "name": "IDS_REASON_APPLICATION_MAINTENANCE_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2789,
+    "definition": "#define IDS_REASON_APPLICATION_MAINTENANCE_DESCRIPTION          8281"
+  },
+  {
+    "name": "IDS_REASON_OTHER_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2791,
+    "definition": "#define IDS_REASON_OTHER_DESCRIPTION                            8282"
+  },
+  {
+    "name": "IDS_REASON_SYSTEMFAILURE_BLUESCREEN_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2793,
+    "definition": "#define IDS_REASON_SYSTEMFAILURE_BLUESCREEN_DESCRIPTION         8283"
+  },
+  {
+    "name": "IDS_REASON_POWERFAILURE_CORDUNPLUGGED_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2794,
+    "definition": "#define IDS_REASON_POWERFAILURE_CORDUNPLUGGED_DESCRIPTION       8284"
+  },
+  {
+    "name": "IDS_REASON_POWERFAILURE_ENVIRONMENT_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2795,
+    "definition": "#define IDS_REASON_POWERFAILURE_ENVIRONMENT_DESCRIPTION         8285"
+  },
+  {
+    "name": "IDS_REASON_OTHERFAILURE_HUNG_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2796,
+    "definition": "#define IDS_REASON_OTHERFAILURE_HUNG_DESCRIPTION                8286"
+  },
+  {
+    "name": "IDS_REASON_APPLICATION_PM_DESCRIPTION",
+    "path": "public/internal/windows/inc/winuserp.h",
+    "line": 2797,
+    "definition": "#define IDS_REASON_APPLICATION_PM_DESCRIPTION                   8287"
+  }
+]
